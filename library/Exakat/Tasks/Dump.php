@@ -111,6 +111,7 @@ SQL;
             $this->collectStructures();
             $this->collectVariables();
             $this->collectLiterals();
+            $this->collectTypedLiterals();
             display('Collecting data finished');
         }
 
@@ -788,6 +789,57 @@ GREMLIN;
         display("$total constants\n");
     }
 
+    private function collectTypedLiterals() {
+        $types = array('Type/Regex', 
+                       'Type/Url', 
+                       'Type/Sql', 
+                       'Type/Email', 
+                       'Type/Md5String', 
+                       'Type/MimeType',
+                       'Type/ArrayIndex',
+                       'Type/GPCIndex',
+                       //'Type/Ports',
+                       
+                       );
+        
+        foreach($types as $typeAnalyzer) {
+            $type = strtolower(substr($typeAnalyzer, 5));
+            
+            $this->sqlite->query('DROP TABLE IF EXISTS '.$type);
+
+            $analyzer = Analyzer::getInstance($typeAnalyzer, $this->gremlin, $this->config);
+            assert($analyzer !== null, "Missing typed literal : $type\n");
+            if ($analyzer === null) { 
+                continue; 
+            }
+            $res = $analyzer->getDump();
+            if (empty($res)) {
+                continue;
+            }
+            display('collect '.$type);
+
+            $total = 0;
+            $query = array();
+            foreach($res as $value => $row) {
+                $query[] = '(\''.$this->sqlite->escapestring(trim($row['fullcode'], "'\"")).'\', \''.$row['file'].'\',  '.$row['line'].')';
+            }
+       
+           if (!empty($query)) {
+                $this->sqlite->query(<<<SQL
+CREATE TABLE $type ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+                     string STRING,
+                     file STRING,
+                     line integer
+                    )
+SQL
+);
+
+               $query = 'REPLACE INTO '.$type.' ("string", "file", "line") VALUES '.join(', ', $query);
+               $this->sqlite->query($query);
+           }
+        }
+    }
+    
     private function collectLiterals() {
         $types = array('Integer', 'Real', 'String', 'Heredoc', 'Arrayliteral');
 
