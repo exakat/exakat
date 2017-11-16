@@ -1241,7 +1241,7 @@ GREMLIN
             $out = implode('', $out);
         }
         
-        $this->addMethod('where( __'.$out.'.not(hasLabel('.$this->SorA($childrenClass).')))');
+        $this->addMethod('where( __'.$out.'.hasLabel('.$this->SorA($childrenClass).').count().is(eq(0)) )');
         
         return $this;
     }
