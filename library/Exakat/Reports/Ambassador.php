@@ -2114,7 +2114,6 @@ SQL
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
         $info = array();
         
-        print_r(array_merge(array($this->config->phpversion[0].$this->config->phpversion[2]), $this->config->other_php_versions));
         foreach(array_merge(array($this->config->phpversion[0].$this->config->phpversion[2]), $this->config->other_php_versions) as $suffix) {
             $version = $suffix[0].'.'.$suffix[1];
             $res = $this->sqlite->querySingle('SELECT name FROM sqlite_master WHERE type="table" AND name="compilation'.$suffix.'"');
