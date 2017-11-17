@@ -2172,7 +2172,7 @@ SQL
             if (isset($counts[$l])) {
                 $result = (int) $counts[$l];
             } else {
-                $result = -1;
+                $result = -2; // -2 == not run
             }
             $result = $this->Compatibility($result, $l);
             $name = $ini['name'];
