@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('function methodUseThis( ) { /**/ } ');
+$expected     = array('function methodUseThis( ) { /**/ } ',
+                     );
 
-$expected_not = array('function methodDontUseThis( ) { /**/ } ');
+$expected_not = array('function methodDontUseThis( ) { /**/ } ',
+                     );
 
 ?>

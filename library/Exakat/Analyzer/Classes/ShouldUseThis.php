@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class ShouldUseThis extends Analyzer {
     public function dependsOn() {
         return array('Classes/UseThis',
-                     'Classes/MethodIsOverwritten');
+                     'Classes/MethodIsOverwritten',
+                    );
     }
     
     public function analyze() {

@@ -38,6 +38,13 @@ class UseThis extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // self or parent are local. 
+        $this->atomIs('New')
+             ->outIs('NEW')
+             ->codeIs(array('parent', 'self'))
+             ->back('first');
+        $this->prepareQuery();
+
         // Case for normal methods
         $this->atomIs('Method')
              ->hasNoFunction()
