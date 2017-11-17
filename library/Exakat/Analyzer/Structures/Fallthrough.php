@@ -26,11 +26,17 @@ use Exakat\Analyzer\Analyzer;
 
 class Fallthrough extends Analyzer {
     public function analyze() {
+        // switch($x) { case 1 : /* no break */; case 2 }
         $this->atomIs('Switch')
              ->outIs('CASES')
              ->outIs('EXPRESSION')
+             ->savePropertyAs('fullcode', 'theCase')
              ->outIs('CODE')
              ->noAtomInside(array('Break', 'Continue', 'Return'))
+             ->back('first')
+             ->outIs('CASES')
+             ->outWithRank('EXPRESSION', 'last')
+             ->notSamePropertyAs('fullcode', 'theCase')
              ->back('first');
         $this->prepareQuery();
     }
