@@ -30,7 +30,7 @@ class LongArguments extends Analyzer {
         $this->atomIs(array('Functioncall', 'Methodcallname'))
              ->outIs('ARGUMENT')
              ->atomIs(array('String', 'Heredoc'))
-             ->fullcodeLength(' > 50')
+             ->fullcodeLength(' > 60')
              ->back('first')
              ->inIsIE('METHOD');
         $this->prepareQuery();
