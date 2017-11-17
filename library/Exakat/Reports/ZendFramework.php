@@ -2221,6 +2221,15 @@ HTML;
         $this->putBasedPage('thrown_exceptions', $html);
     }
 
+    protected function makeAuditDate(&$finalHTML) {
+        $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
+        $audit_name = $this->datastore->getHash('audit_name');
+        if (!empty($audit_name)) {
+            $audit_date .= ' - &quot;'.$audit_name.'&quot;';
+        }
+        $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
+    }
+
 }
 
 ?>
