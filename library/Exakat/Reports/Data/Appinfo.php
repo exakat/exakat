@@ -60,6 +60,7 @@ class Appinfo extends Data {
                             'strict_types'                  => 'Php/DeclareStrictType',
                             'encoding'                      => 'Php/DeclareEncoding',
                             'ticks'                         => 'Php/DeclareTicks',
+                            'Dynamically load extensions'   => 'Php/DlUsage',
                     ),
 
                     'Composer' => array(
