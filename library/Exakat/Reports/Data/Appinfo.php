@@ -460,3 +460,5 @@ class Appinfo extends Data {
         return true;
     }
 }
+
+?>
