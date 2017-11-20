@@ -153,10 +153,12 @@ Glossary
 + `C`
     + `Count()`
 
+      + :ref:`Can't Count Non-Countable <can't-count-non-countable>`
       + :ref:`Uses Default Values <uses-default-values>`
 
     + `closure`
 
+      + :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
       + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
       + :ref:`Hidden Use Expression <hidden-use-expression>`
@@ -293,6 +295,7 @@ Glossary
 
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
       + :ref:`Should Use Foreach <should-use-foreach>`
+      + :ref:`Use List With Foreach <use-list-with-foreach>`
 
     + `file()`
 
@@ -501,6 +504,7 @@ Glossary
 + `P`
     + `ParseError`
 
+      + :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
       + :ref:`eval() Without Try <eval()-without-try>`
 
     + `parse_str()`
@@ -589,6 +593,10 @@ Glossary
 
       + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
 
+    + `set_error_handler()`
+
+      + :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
+
     + `set_exception_handler()`
 
       + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
@@ -647,7 +655,7 @@ Glossary
 
       + :ref:`Simplify Regex <simplify-regex>`
       + :ref:`Slow Functions <slow-functions>`
-      + :ref:`Strpos Comparison <strpos-comparison>`
+      + :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 
     + `strstr()`
 
@@ -778,6 +786,7 @@ Glossary
       + :ref:`Assign Default To Properties <assign-default-to-properties>`
       + :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
       + :ref:`Avoid Optional Properties <avoid-optional-properties>`
+      + :ref:`Don't Send This In Constructor <don't-send-this-in-constructor>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`
