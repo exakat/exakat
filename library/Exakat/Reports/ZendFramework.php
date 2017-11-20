@@ -815,7 +815,7 @@ JAVASCRIPT;
     }
 
     public function getHashData() {
-        $php = new Phpexec($this->config->phpversion, $this->config);
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
 
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),
@@ -1438,7 +1438,7 @@ SQL;
 
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion, $this->config);
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
 
@@ -1557,7 +1557,7 @@ SQL;
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion, $this->config);
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getActualVersion().')');
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
@@ -2219,6 +2219,15 @@ HTML;
         $html = $this->getBasedPage('empty');
         $html = $this->injectBloc($html, 'CONTENT', $table);
         $this->putBasedPage('thrown_exceptions', $html);
+    }
+
+    protected function makeAuditDate(&$finalHTML) {
+        $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
+        $audit_name = $this->datastore->getHash('audit_name');
+        if (!empty($audit_name)) {
+            $audit_date .= ' - &quot;'.$audit_name.'&quot;';
+        }
+        $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
 
 }

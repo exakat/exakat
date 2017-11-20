@@ -30,8 +30,8 @@ class Php72RemovedClasses extends ClassUsage {
     protected $phpVersion = '7.2-';
     
     public function analyze() {
-        $this->classes = array('SessionHandler',
-                                  );
+        return;
+        $this->classes = array();
         parent::analyze();
     }
 }

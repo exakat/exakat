@@ -41,7 +41,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Compilation problem : "'.trim($res).'".');
         }
 
-        $Php = new Phpexec($phpversion, $config);
+        $Php = new Phpexec($phpversion, $config->{'php'.str_replace('.', '', $config->phpversion)});
         if (!$analyzerobject->checkPhpConfiguration($Php)) {
             $message = array();
             $confs = $analyzerobject->getPhpConfiguration();

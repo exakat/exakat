@@ -30,6 +30,7 @@ class UseClassOperator extends Analyzer {
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
              ->hasIn('DEFINITION')
+             ->regexIsNot('fullcode', '::')
              ->back('first');
         $this->prepareQuery();
     }

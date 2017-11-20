@@ -27,6 +27,11 @@ use Exakat\Analyzer\Analyzer;
 class ShouldUseArrayColumn extends Analyzer {
     public function analyze() {
         $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE('VALUE')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
              ->atomInside('Assignation')
@@ -35,6 +40,8 @@ class ShouldUseArrayColumn extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomIs(array('Array', 'Member'))
+             ->outIs(array('VARIABLE', 'OBJECT'))
+             ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
     }

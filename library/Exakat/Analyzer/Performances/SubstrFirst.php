@@ -26,14 +26,14 @@ use Exakat\Analyzer\Analyzer;
 
 class SubstrFirst extends Analyzer {
     public function analyze() {
-        $substrFunctions = array('\substr', '\stristr', '\strstr', '\iconv_substr', '\mb_substr');
-        $replacingFunctions = array('\\strtolower', '\\strtoupper', '\\strtr', '\\chop', '\\trim', '\\rtrim', '\\ltrim','\\htmlentities', '\\htmlspecialchars', '\\str_replace', '\\str_ireplace', '\\ucfirst', '\\ucwords', 
-                                    '\\iconv', 
-                                    '\\mb_string_convert', '\\mb_strtoupper', '\\mb_strtolower', '\\mb_ereg_replace_callback', '\\mb_ereg_replace', '\\mb_eregi_replace', '\\mb_strcut', '\\mb_strimwidth', 
+        $substrFunctions = array('\substr', '\stristr', '\strstr', '\iconv_substr', '\mb_substr', '\basename', '\dirname');
+        $replacingFunctions = array('\\strtolower', '\\strtoupper', '\\strtr', '\\chop', '\\trim', '\\rtrim', '\\ltrim','\\htmlentities', '\\htmlspecialchars', '\\str_replace', '\\str_ireplace', '\\ucfirst', '\\ucwords',
+                                    '\\iconv',
+                                    '\\mb_string_convert', '\\mb_strtoupper', '\\mb_strtolower', '\\mb_ereg_replace_callback', '\\mb_ereg_replace', '\\mb_eregi_replace', '\\mb_strcut', '\\mb_strimwidth',
                                     '\\preg_replace', '\\preg_relace_callback', '\\preg_replace_calback_array',
                                     );
 
-        // substr(strtolower('a'), 1, 100); 
+        // substr(strtolower('a'), 1, 100);
         $this->atomFunctionIs($substrFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIsNot('Concatenation')
@@ -42,7 +42,7 @@ class SubstrFirst extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // substr('a'.$b, 0, 100); 
+        // substr('a'.$b, 0, 100);
         $this->atomFunctionIs($substrFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')

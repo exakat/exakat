@@ -103,7 +103,20 @@ foreach($files as $file) {
 }
 
 $urls = array_keys(array_count_values($urls));
-uasort($urls, function($a, $b) { return strtolower($a) <=> strtolower($b); });
+
+uasort($urls, function($a, $b) { 
+    preg_match('/`(.+) </', $a, $aa);
+    preg_match('/`(.+) </', $b, $bb);
+    if (empty($aa[1])) {
+        print "Empty link : $a\n";
+    } elseif (empty($bb[1])) {
+        print "Empty link : $b\n";
+    } elseif ($aa[1] == $bb[1]) {
+        print "Double link : $a / $b\n";
+    }
+    
+    return strtolower($a) <=> strtolower($b); 
+});
 
 $url_list = "* ".implode("\n* ", $urls)."\n";
 

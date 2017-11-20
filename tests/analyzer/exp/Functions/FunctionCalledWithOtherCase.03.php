@@ -1,6 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('Fabc2( )',
+                     );
 
 $expected_not = array('abc( )',
                       'sabc( )',
@@ -8,6 +9,8 @@ $expected_not = array('abc( )',
                       'abc3( )',
                       'ABC( )',
                       'sabC( )',
-                      'Sabc( )');
+                      'Sabc( )',
+                      'fabc1( )',
+                     );
 
 ?>

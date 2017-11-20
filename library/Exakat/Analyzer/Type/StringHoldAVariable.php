@@ -40,10 +40,9 @@ class StringHoldAVariable extends Analyzer {
              ->outIs('CONCAT')
              ->regexIs('code', '\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*');
         $this->prepareQuery();
-return;
+
         // <<<NOWDOC NOWDOC (NOWDOC or HEREDOC with wrong syntax)
         $this->atomIs('Heredoc')
-             ->is('heredoc', true)
              ->savePropertyAs('code', 'd')
              ->outIs('CONCAT')
              ->regexIs('code', '" + d + "')

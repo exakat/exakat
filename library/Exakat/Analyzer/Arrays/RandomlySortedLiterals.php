@@ -29,6 +29,7 @@ class RandomlySortedLiterals extends Analyzer {
         $arrays = $this->query(<<<GREMLIN
 g.V().hasLabel("Arrayliteral")
      .has("constant", true)
+     .filter{ it.get().value("count") > 2 }
      .not( where( out("ARGUMENT").has("rank", 0).hasLabel("Void")) )
      .where( __.sideEffect{ liste = [];}
                .out("ARGUMENT")

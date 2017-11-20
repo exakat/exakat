@@ -53,11 +53,11 @@ class UseComposerLock extends Analyzer {
         }
 
         return array(
-               array('fullcode'  => 'composer.lock', 
-                     'file'      => 'composer.lock', 
-                     'line'      => 0, 
-                     'namespace' => '', 
-                     'class'     => '', 
+               array('fullcode'  => 'composer.lock',
+                     'file'      => 'composer.lock',
+                     'line'      => 0,
+                     'namespace' => '',
+                     'class'     => '',
                      'function'  => '',
                     )
                 );

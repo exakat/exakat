@@ -1,8 +1,11 @@
 <?php
 
-$expected     = array();
+$expected     = array('$k',
+                      '$k',
+                     );
 
-$expected_not = array('$i',
+$expected_not = array('$j',
+                      '$i',
                      );
 
 ?>

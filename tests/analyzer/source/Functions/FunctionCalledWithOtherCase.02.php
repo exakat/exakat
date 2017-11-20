@@ -1,5 +1,8 @@
 <?php
 
+    function fabc2() { }
+    function fabc1() { }
+
 class x {
     function abc() { }
     static function sabc() { }
@@ -17,5 +20,8 @@ $x->sabC();
 
 x::Sabc();
 x::sabc();
+
+fabc1();
+Fabc2();
 
 ?>

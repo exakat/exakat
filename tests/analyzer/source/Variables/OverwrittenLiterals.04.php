@@ -1,5 +1,6 @@
 <?php
 
+function ($x) {
 // Not a problem
 for ($i = 0; $i < 10; $i++) {}
 for ($i = 0; $i < 10; $i++) {}
@@ -27,5 +28,5 @@ $p = 1;
 $q = 0;
 $q = 1;
 $q = 1;
-
+}
 ?>

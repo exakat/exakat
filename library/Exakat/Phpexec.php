@@ -66,7 +66,7 @@ class Phpexec {
     private $actualVersion    = null;
     private $requestedVersion = null;
 
-    public function __construct($phpversion = null, $config) {
+    public function __construct($phpversion = null, $pathToBinary) {
         if ($phpversion === null) {
             $phpversion = $config->phpversion;
         }
@@ -88,47 +88,12 @@ class Phpexec {
             }
         }
 
-        switch($phpversion3) {
-            case '5.2' :
-                $this->phpexec = $config->php52;
-                break 1;
-
-            case '5.3' :
-                $this->phpexec = $config->php53;
-                break 1;
-
-            case '5.4' :
-                $this->phpexec = $config->php54;
-                break 1;
-
-            case '5.5' :
-                $this->phpexec = $config->php55;
-                break 1;
-
-            case '5.6' :
-                $this->phpexec = $config->php56;
-                break 1;
-
-            case '7.0' :
-                $this->phpexec = $config->php70;
-                break 1;
-
-            case '7.1' :
-                $this->phpexec = $config->php71;
-                break 1;
-
-            case '7.2' :
-                $this->phpexec = $config->php72;
-                break 1;
-
-            case '7.3' :
-                $this->phpexec = $config->php73;
-                break 1;
-
-            default:
-                $this->phpexec = $config->php;
-                // PHP will be always valid if we use the one that is currently executing us
-                $this->actualVersion = PHP_VERSION;
+        if (empty($pathToBinary)) {
+            $this->phpexec = $_SERVER['_'];
+            // PHP will be always valid if we use the one that is currently executing us
+            $this->actualVersion = PHP_VERSION;
+        } else {
+            $this->phpexec = $pathToBinary;
         }
 
         if (preg_match('/^php:(.+?)$/', $this->phpexec)) {
@@ -141,10 +106,6 @@ class Phpexec {
                 $this->phpexec = 'docker run -it --rm --name php4exakat -v "$PWD":'.$folder.' -w '.$folder.' '.$this->phpexec.' php ';
             }
         } else {
-            if (empty($this->phpexec)) {
-                throw new NoPhpBinary('No PHP binary for version '.$phpversion.' is available. Please, check config/exakat.ini');
-            }
-
             if (!file_exists($this->phpexec)) {
                 throw new NoPhpBinary('PHP binary for version '.$phpversion.' is not valid : "'.$this->phpexec.'". Please, check config/exakat.ini');
             }

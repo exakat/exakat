@@ -1109,7 +1109,7 @@ JAVASCRIPT;
     }
 
     public function getHashData() {
-        $php = new Phpexec($this->config->phpversion, $this->config);
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
 
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),
@@ -1812,7 +1812,7 @@ SQL;
 
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion, $this->config);
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
 
@@ -2002,7 +2002,7 @@ SQL;
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion, $this->config);
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getActualVersion().')');
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
@@ -2113,6 +2113,7 @@ SQL
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
         $info = array();
+        
         foreach(array_merge(array($this->config->phpversion[0].$this->config->phpversion[2]), $this->config->other_php_versions) as $suffix) {
             $version = $suffix[0].'.'.$suffix[1];
             $res = $this->sqlite->querySingle('SELECT name FROM sqlite_master WHERE type="table" AND name="compilation'.$suffix.'"');
@@ -2171,7 +2172,7 @@ SQL
             if (isset($counts[$l])) {
                 $result = (int) $counts[$l];
             } else {
-                $result = -1;
+                $result = -2; // -2 == not run
             }
             $result = $this->Compatibility($result, $l);
             $name = $ini['name'];

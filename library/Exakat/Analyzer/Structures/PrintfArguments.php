@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class PrintfArguments extends Analyzer {
     public function analyze() {
-        // printf(' a %s ', $a1, $a2); 
+        // printf(' a %s ', $a1, $a2);
         $this->atomFunctionIs(array('\\printf', '\\sprintf'))
              ->savePropertyAs('count', 'c')
              ->outWithRank('ARGUMENT', 0)

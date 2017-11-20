@@ -1,9 +1,10 @@
 <?php
 
-$expected     = array('SessionHandler( )',
+$expected     = array(
                      );
 
 $expected_not = array('noSessionHandler( )',
+                      'SessionHandler( )',
                      );
 
 ?>

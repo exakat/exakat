@@ -1506,7 +1506,7 @@ TEXT
 
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion, $this->config);
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
 

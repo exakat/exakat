@@ -26,32 +26,46 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class OverwrittenLiterals extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                    );
-    }
-    
     public function analyze() {
-        $assignations = $this->query(<<<GREMLIN
-g.V().hasLabel("Assignation").has("code", "=")
-     .where( __.in("EXPRESSION").in("INIT").count().is(eq(0)) )
-     .where( __.in("PPP").count().is(eq(0)) )
-     .out("RIGHT").hasLabel("Integer", "String", "Real", "Null", "Boolean").in("RIGHT")
-     .out("LEFT").hasLabel("Variable", "Array", "Member", "Staticproperty")
-     .groupCount("m").by("fullcode").cap("m").next().findAll{ it.value > 1; }.keySet()
+        $assignations = $this->queryHash(<<<GREMLIN
+g.V().hasLabel("Function", "Closure", "Method")
+     .where( __.sideEffect{ m = [:]; }
+     .out("BLOCK")
+     .emit( hasLabel("Assignation")).repeat( __.out() ).times(15).hasLabel("Assignation")
+     .has("code", "=")
+     .not( __.where( __.in("EXPRESSION").in("INIT")) )
+     .not( __.where( __.in("PPP")) )
+     .where( __.out("RIGHT").hasLabel("Integer", "String", "Real", "Null", "Boolean"))
+     .out("LEFT").hasLabel("Variable")
+     .sideEffect{ 
+            if (m[it.get().value("fullcode")] == null) {
+                m[it.get().value("fullcode")] = 1;
+            } else {
+                m[it.get().value("fullcode")]++;
+            }
+      }.fold())
+      .sideEffect{ names = m.findAll{ a,b -> b > 1}.keySet() }
+      .filter{ names.size() > 0;}
+      .map{ ["key":it.get().value("fullnspath"),"value":names]; }
 GREMLIN
-        )->toArray();
+        );
 
-        $this->atomIs('Assignation')
+        if (empty($assignations)) {
+            return;
+        }
+        
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->savePropertyAs('fullnspath', 'name')
+             ->atomInside('Assignation')
              ->codeIs('=')
-             ->raw('where( __.in("EXPRESSION").in("INIT").count().is(eq(0)) )')
-             ->raw('where( __.in("PPP").count().is(eq(0)) )')
+             ->raw('not( where( __.in("EXPRESSION").in("INIT")) )')
+             ->raw('not( where( __.in("PPP")) )')
              ->outIs('RIGHT')
              ->atomIs(array('Integer', 'String', 'Real', 'Null', 'Boolean'))
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->atomIs('Variable')
-             ->codeIs($assignations);
+             ->isHash('code', $assignations, 'name');
         $this->prepareQuery();
     }
 }

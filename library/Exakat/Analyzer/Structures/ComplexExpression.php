@@ -29,7 +29,7 @@ class ComplexExpression extends Analyzer {
     
     public function analyze() {
         
-        $complexExpression = 'where( __.repeat( __.out()).emit().times('.self::MAX_LOOPING.').count().is(gt('.self::EXPRESSION_SIZE.')) )';
+        $complexExpression = 'where( __.emit().repeat( __.not(hasLabel("Closure", "Classanonymous") ).out()).times('.self::MAX_LOOPING.').not(hasLabel("Closure", "Classanonymous") ).count().is(gt('.self::EXPRESSION_SIZE.')) )';
         
         // if (Condition);
         $this->atomIs(array('Ifthen', 'Dowhile', 'While'))

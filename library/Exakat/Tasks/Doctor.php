@@ -348,7 +348,7 @@ class Doctor extends Tasks {
             $stats['configured'] = 'No';
         } else {
             $stats['configured'] = 'Yes ('.$configVersion.')';
-            $php = new Phpexec($displayedVersion, $this->config);
+            $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
             $version = $php->getVersion();
             if (strpos($version, 'not found') !== false) {
                 $stats['installed'] = 'No';

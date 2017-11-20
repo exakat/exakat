@@ -31,7 +31,11 @@ class Php72RemovedFunctions extends FunctionUsage {
     
     public function analyze() {
         $this->functions = array('png2wbmp',
-                                 'jpeg2wbmp');
+                                 'jpeg2wbmp',
+                                 'create_function',
+                                 'gmp_random',
+                                 'each',
+                                );
         parent::analyze();
     }
 }

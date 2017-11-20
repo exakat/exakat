@@ -1,4 +1,4 @@
-Version 1.0.4 (Boxiang Demon, coming up)
+Version 1.0.5 ( King of Cold Protection, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,41 @@ Version 1.0.4 (Boxiang Demon, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.0.4 (Boxiang Demon, 2017-11-20)
++ Architecture
+    + PhpExec, get only path to binary.
+    + Cleaned docs of double links
+    + Cleaned code
++ Report
+    + Added libsodium, Argon2 to Crypto; DL() usage to PHP.
+    + Compatibility report only focuses on backward incompatibilities.
+    + New recipes will cover 'suggestions for better code'. Coming up. 
++ Analyzer
+    + New analysis : " string is better than ' (sorry...)
+    + New analysis : PHP 7.3's PCRE 2 
+    + New analysis : report missing 'new' in front of class name.
+    + New analysis : use is_object instead of is_resource for ext/hash
+    + New analysis : report non-countable calls
+    + New analysis : report DL usage in Appinfo
+    + New analysis : slice first, then map arrays. 
+    + New analysis : Avoid 5th argument in PHP 7.2 for set_error_handler
+    + New analysis : avoid null with get_class()
+    + New analysis : suggest using list() with foreach instead of arrays
+    + New analysis : avoid using $this as argument in constructor
+    + New analysis : Report usage of ext/vips
+    + New inventory : GPC variables
+    + Updated analysis : Use Class Operator doesn't report methods names anymore
+    + Updated analysis : Long argument size is raised to 60 chars
+    + Updated analysis : ignore when missing break is in last case
+    + Updated analysis : Use This ignores 'self'.
+    + Updated analysis : Randomly sorted Arrays ignores arrays of 3 or less.
+    + Updated analysis : ext/mcrypt gets its constants
+    + Updated analysis : more strange names being used in code
+    + Updated analysis : more PHP 7.2 removed functions
+    + Checked unit tests : 2563 / 2572 test pass (99% pass). 
++ Tokenizer
+    + Reduced duplicated that may lead to loading error. 
 
 Version 1.0.3 (Baize Demon, 2017-11-13)
 + Architecture

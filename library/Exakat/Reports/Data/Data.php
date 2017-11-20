@@ -40,3 +40,5 @@ abstract class Data {
     
     public abstract function prepare();
 }
+
+?>

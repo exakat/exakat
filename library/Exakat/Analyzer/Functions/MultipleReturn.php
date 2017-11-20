@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class MultipleReturn extends Analyzer {
     public function analyze() {
-        $this->atomIs(array('Function', 'Closure'))
+        $this->atomIs(array('Function', 'Closure', 'Method'))
+             ->hasNoInterface()
              ->hasName()
              ->raw('where( __.repeat( __.out('.$this->linksDown.').not( hasLabel("Closure", "Classanonymous")) ).emit( hasLabel("Return") ).times('.self::MAX_LOOPING.').count().is(gt(1)))');
         $this->prepareQuery();

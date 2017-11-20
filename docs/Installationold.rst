@@ -1,4 +1,4 @@
-.. _Installation_old:
+.. _Installationold:
 
 Installation
 ============

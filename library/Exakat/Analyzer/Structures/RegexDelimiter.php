@@ -38,9 +38,9 @@ class RegexDelimiter extends Analyzer {
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->raw('map{ delimiter; }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = $this->rawQuery()->toArray();
+        $types = $this->rawQuery()->toArray()[0];
         
-        $storage = array_combine(array_keys($types[0]), array_keys($types[0]));
+        $storage = array_combine(array_keys($types), array_keys($types));
         
         $store = array();
         $total = 0;

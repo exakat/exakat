@@ -14,6 +14,8 @@ A simple run for the report :
 
 This will init the project in the 'projects' folder, with the name 'sculpin', then clone the code with the provided repository. 
 
+More information on `command line usage <https://exakat.readthedocs.io/en/latest/Commands.html>`_.
+
 Execution
 ---------
 
