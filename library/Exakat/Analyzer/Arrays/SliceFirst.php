@@ -20,7 +20,7 @@
  *
 */
 
-namespace Exakat\Analyzer\Performances;
+namespace Exakat\Analyzer\Arrays;
 
 use Exakat\Analyzer\Analyzer;
 
@@ -34,7 +34,7 @@ class SliceFirst extends Analyzer {
                                       );
 
         // array_slice(array_values($array), 2, 5);
-        $this->atomFunctionIs($substrFunctions)
+        $this->atomFunctionIs($sliceFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->atomInside('Functioncall')
              ->fullnspathIs($manipulatingFunctions)

@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SubstrFirst extends Analyzer {
     public function analyze() {
-        $substrFunctions = array('\substr', '\stristr', '\strstr', '\iconv_substr', '\mb_substr');
+        $substrFunctions = array('\substr', '\stristr', '\strstr', '\iconv_substr', '\mb_substr', '\basename', '\dirname');
         $replacingFunctions = array('\\strtolower', '\\strtoupper', '\\strtr', '\\chop', '\\trim', '\\rtrim', '\\ltrim','\\htmlentities', '\\htmlspecialchars', '\\str_replace', '\\str_ireplace', '\\ucfirst', '\\ucwords',
                                     '\\iconv',
                                     '\\mb_string_convert', '\\mb_strtoupper', '\\mb_strtolower', '\\mb_ereg_replace_callback', '\\mb_ereg_replace', '\\mb_eregi_replace', '\\mb_strcut', '\\mb_strimwidth',
