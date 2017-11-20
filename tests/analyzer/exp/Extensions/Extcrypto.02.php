@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array();
+$expected     = array("Crypto\\Algorithm( )",
+                     );
 
-$expected_not = array('Hash()');
+$expected_not = array('Hash()',
+                      'Stdclass()',
+                     );
 
 ?>

@@ -1,12 +1,14 @@
 <?php
 
-$expected     = array();
+$expected     = array('Fabc2( )',
+                     );
 
 $expected_not = array('abc( )',
                       'sabc( )',
                       'ABC( )',
                       'sabC( )',
-                      'Sabc( )'
-);
+                      'Sabc( )',
+                      'fabc1( )',
+                      );
 
 ?>
