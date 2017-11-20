@@ -341,6 +341,7 @@ class Appinfo extends Data {
                             'ext/tidy'       => 'Extensions/Exttidy',
                             'ext/tokenizer'  => 'Extensions/Exttokenizer',
                             'ext/trader'     => 'Extensions/Exttrader',
+                            'ext/vips'       => 'Extensions/Extvips',
                             'ext/wddx'       => 'Extensions/Extwddx',
                             'ext/wikidiff2'  => 'Extensions/Extwikidiff2',
                             'ext/wincache'   => 'Extensions/Extwincache',
