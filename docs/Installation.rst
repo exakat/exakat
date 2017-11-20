@@ -164,9 +164,10 @@ Currently, Docker installation only ships with one PHP version (7.1), and with s
 
     docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat init -p <project name> -R <vcs_url>
 
-_Please note_: The init command usually makes a local clone of your repository. In case you want to analyse a private repository for which you need an SSH key, init will fail silently on the cloning process. Before running the `project` command below, run:
+**Please note**: The init command usually makes a local clone of your repository. In case you want to analyse a private repository for which you need an SSH key, init will fail silently on the cloning process. Before running the `project` command below, run:
 
 ::
+
     cd projects/<project name>
     git clone <git_url> code
 
