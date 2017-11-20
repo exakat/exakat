@@ -11,6 +11,7 @@ Summary
 * `Can I clone with my ssh keys?`_
 * `The project is too big`_
 * `How can I run a very large project?`_
+* `Does exakat runs on Java 8?`_
 * `Where can I find the report`_
 * `Can I run exakat on local code?`_
 * `Can I ignore a dir or a file?`_
@@ -85,6 +86,13 @@ Here are a few steps you can try when running exakat on a very large project.
 * Update project/<name>/config.ini, and use ignore_dirs[] and include_dirs[] to exclude as much code as possible. Notably, frameworks, data in PHP files, tests, cache, translations, etc. 
 * Set $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
 * Check that your installation is running with 'gsneo4j' and not 'tinkergraph', in config/exakat.ini.
+
+`Does exakat runs on Java 8?`_
+------------------------------
+
+Exakat itself runs with PHP 7.0+. Exakat runs with a gremlin database : gremlin-server 3.2.x is supported, which runs on Java 8. 
+
+Java 9 is experimental, and is being tested. Java 7 used to be working, but is not supported anymore : it may still work, though.
 
 
 `Where can I find the report`_
