@@ -439,9 +439,7 @@ GREMLIN;
         
         $return = array();
         foreach($result as $row) {
-            foreach($row['value'] as $value) {
-                $return[$row['key']] = $value;
-            }
+            $return[$row['key']] = $row['value'];
         }
         return $return;
     }

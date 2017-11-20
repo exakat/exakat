@@ -49,8 +49,9 @@ GREMLIN;
         // Properties with the same name, but with static or not.
         // Just like methods, they are case-insensitive, because static $X and $x are still ambiguous
         $query = <<<GREMLIN
-g.V().hasLabel("Propertydefinition").as('property').in('PPP')
+g.V().hasLabel("Propertydefinition").as('property')
      .coalesce( __.in('LEFT'), __.filter{true; } )
+     .in('PPP')
      .where( __.out("STATIC"))
      .select('property').values('code').collect{it.toLowerCase(); }.unique()
 GREMLIN;
@@ -58,8 +59,9 @@ GREMLIN;
 
         // Global are unused if used only once
         $query = <<<GREMLIN
-g.V().hasLabel("Propertydefinition").as('property').in('PPP')
+g.V().hasLabel("Propertydefinition").as('property')
      .coalesce( __.in('LEFT'), __.filter{true; } )
+     .in('PPP')
      .not(where( __.out("STATIC")))
      .select('property').values('code').collect{it.toLowerCase(); }.unique()
 GREMLIN;

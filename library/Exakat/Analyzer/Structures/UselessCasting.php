@@ -58,9 +58,9 @@ class UselessCasting extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // ( int )100
+        // (int) 100
         $this->atomIs('Cast')
-             ->tokenIs('T_BOOL_INT')
+             ->tokenIs('T_INT_CAST')
              ->outIs('CAST')
              ->outIsIE('CODE') // In case there are some parenthesis
              ->atomIs('Integer')
