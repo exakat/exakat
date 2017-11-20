@@ -227,6 +227,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/tokyotyrant
 * ext/trader
 * ext/v8js
+* Extensions/Extvips
 * ext/wddx
 * ext/wikidiff2
 * ext/wincache
@@ -317,7 +318,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Avoid set_error_handler $context Argument (Php/AvoidSetErrorHandlerContextArg ; CompatibilityPHP72)
   * Can't Count Non-Countable (Structures/CanCountNonCountable ; CompatibilityPHP72)
   * Crypto Usage (Php/CryptoUsage ; Appinfo, Appcontent)
+  * Dl() Usage (Php/DlUsage ; Appinfo)
   * Don't Send This In Constructor (Classes/DontSendThisInConstructor ; Analyze)
+  * Extensions/Extvips (Extensions/Extvips ; Unassigned)
   * Hash Will Use Objects (Php/HashUsesObjects ; CompatibilityPHP72)
   * Incoming Variable Index Inventory (Type/GPCIndex ; Appinfo, Appcontent)
   * Integer As Property (Classes/IntegerAsProperty ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
@@ -1793,6 +1796,7 @@ List of external links mentionned in this documentation.
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
 * `Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
+* `dl <http://www.php.net/dl>`_
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
 * `docker PHP container <https://hub.docker.com/_/php/>`_
@@ -1950,6 +1954,7 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_

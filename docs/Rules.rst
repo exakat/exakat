@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 20 Nov 2017 10:31:57 +0000
-.. comment: Generation hash : 834bd0d556fa23f0145640c512ff8ea0fbe63b2d
+.. comment: Generation date : Mon, 20 Nov 2017 15:59:58 +0000
+.. comment: Generation hash : b74c871e5ec49d1833030ba472499bff41b35c2d
 
 
 .. _$http\_raw\_post\_data:
@@ -4332,7 +4332,9 @@ Empty Blocks
 ############
 
 
-The listed control structures are empty, or have one of the commanded block empty. It is recommended to remove those blocks, so as to reduce confusion in the code. 
+Full empty block, part of a control structures. 
+
+It is recommended to remove those blocks, so as to reduce confusion in the code. 
 
 .. code-block:: php
 
@@ -10550,9 +10552,7 @@ PHP 72 Removed Classes
 ######################
 
 
-The following PHP native classes were removed in PHP 7.2.
-
-* SessionHandler
+No PHP native classes was removed in PHP 7.2.
 
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/Php72RemovedClasses                                                                                                                                          |
@@ -13588,6 +13588,9 @@ It looks like the following loops are static : the same code is executed each ti
        $total += $i;
    }
    
+   // The above loop may be replaced by (with some math help)
+   $total = 10 * (10  + 1) / 2;
+   
    // Non-Static loop (the loop depends on the size of the array)
    $n = count($array);
    for($i = 0; $i < $n; $i++) {
@@ -13597,7 +13600,9 @@ It looks like the following loops are static : the same code is executed each ti
    ?>
 
 
-It is possible to create loops that don't use any blind variables, though this is fairly rare.
+It is possible to create loops that don't use any blind variables, though this is fairly rare. In particular, calling a method may update an internal pointer, like `'next() <http://www.php.net/next>`_ or SimpleXMLIterator::next. 
+
+It is recommended to turn a static loop into an expression that avoid the loop. For example, replacing the sum of all integers by the function $n * ($n + 1) / 2, or using `'array_sum() <http://www.php.net/array_sum>`_.
 
 +--------------+-----------------------+
 | Command Line | Structures/StaticLoop |
@@ -17280,6 +17285,32 @@ Used Protected Method
 
 
 Marks methods being used in the current class or its children classes.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // This is reported
+       protected usedByChildren() {}
+   
+       // This is not reported
+       protected notUsedByChildren() {}
+   }
+   
+   class bar extends foo {
+       // The parent method is not overloaded, though it may be 
+       protected someMethod() {
+           // The parent method is called 
+           $this->usedByChildren();
+       }
+   
+   }
+   
+   ?>
+
+
+See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
 
 +--------------+------------------------------+
 | Command Line | Classes/UsedProtectedMethod  |

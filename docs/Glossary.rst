@@ -83,6 +83,7 @@ Glossary
 
       + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
       + :ref:`For Using Functioncall <for-using-functioncall>`
+      + :ref:`Static Loop <static-loop>`
 
     + `array_udiff()`
 
@@ -493,6 +494,7 @@ Glossary
     + `next()`
 
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
+      + :ref:`Static Loop <static-loop>`
 
 
 + `O`
