@@ -28,9 +28,9 @@ class Argon2Usage extends Analyzer {
     public function analyze() {
         $this->atomIs(array('Identifier', 'Nsname'))
              ->hasNoIn('NAME')
-             ->fullnspathis(array('\\password_argon2i', 
-                                  '\\password_argon2_default_memory_cost', 
-                                  '\\password_argon2_default_time_cost', 
+             ->fullnspathis(array('\\password_argon2i',
+                                  '\\password_argon2_default_memory_cost',
+                                  '\\password_argon2_default_time_cost',
                                   '\\password_argon2_default_threads'))
              ->back('first');
         $this->prepareQuery();

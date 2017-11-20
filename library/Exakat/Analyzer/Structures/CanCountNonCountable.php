@@ -33,7 +33,7 @@ class CanCountNonCountable extends Analyzer {
              ->back('first');
         $this->prepareQuery();
         
-        // todo : use types to do the same with variables. 
+        // todo : use types to do the same with variables.
     }
 }
 

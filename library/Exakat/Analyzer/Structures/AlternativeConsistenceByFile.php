@@ -29,7 +29,7 @@ class AlternativeConsistenceByFile extends Analyzer {
         $atoms = array('Ifthen', 'Foreach', 'For', 'Switch', 'While');
         $atomsList = "'".implode("', '", $atoms)."'";
 
-        // $this->linksDown is important here. 
+        // $this->linksDown is important here.
         $this->atomIs('File')
              ->raw('sideEffect{
             normal = 0;

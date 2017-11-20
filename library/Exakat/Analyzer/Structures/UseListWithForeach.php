@@ -47,7 +47,7 @@ class UseListWithForeach extends Analyzer {
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->outIsIE('VALUE') // Key/value
-             ->atomIs('Functioncall') 
+             ->atomIs('Functioncall')
              ->atomInside('Variable')
              ->savePropertyAs('fullcode', 'blind')
              ->back('first')

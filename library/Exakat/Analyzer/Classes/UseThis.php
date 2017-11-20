@@ -38,7 +38,7 @@ class UseThis extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // self or parent are local. 
+        // self or parent are local.
         $this->atomIs('New')
              ->outIs('NEW')
              ->codeIs(array('parent', 'self'))

@@ -516,7 +516,7 @@ class Files extends Tasks {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
                 $ignoredFiles[$file] = 'Ignored dir';
-            } 
+            }
         }
     }
 }

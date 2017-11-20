@@ -30,7 +30,7 @@ class AvoidSetErrorHandlerContextArg extends Analyzer {
         $this->atomFunctionIs('\\set_error_handler')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Closure')
-             ->hasChildWithRank('ARGUMENT', 4) // This is the fifth argument 
+             ->hasChildWithRank('ARGUMENT', 4) // This is the fifth argument
              ->back('first');
         $this->prepareQuery();
 
@@ -39,7 +39,7 @@ class AvoidSetErrorHandlerContextArg extends Analyzer {
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->inIs('DEFINITION')
-             ->hasChildWithRank('ARGUMENT', 4) // This is the fifth argument 
+             ->hasChildWithRank('ARGUMENT', 4) // This is the fifth argument
              ->back('first');
         $this->prepareQuery();
 
@@ -57,7 +57,7 @@ class AvoidSetErrorHandlerContextArg extends Analyzer {
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->inIs('NAME')
-             ->hasChildWithRank('ARGUMENT', 4) // This is the fifth argument 
+             ->hasChildWithRank('ARGUMENT', 4) // This is the fifth argument
              ->back('first');
         $this->prepareQuery();
 

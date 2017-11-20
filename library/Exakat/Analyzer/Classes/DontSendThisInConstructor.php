@@ -36,7 +36,7 @@ class DontSendThisInConstructor extends Analyzer {
              ->codeIs('$this')
              ->inIs('ARGUMENT')
              ->tokenIsNot('T_ARRAY') // array($this, 'method') is probably a callback.
-             ->codeIsNot('get_class') 
+             ->codeIsNot('get_class')
              ->back('first');
         $this->prepareQuery();
     }

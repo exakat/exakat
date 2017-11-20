@@ -790,11 +790,11 @@ GREMLIN;
     }
 
     private function collectTypedLiterals() {
-        $types = array('Type/Regex', 
-                       'Type/Url', 
-                       'Type/Sql', 
-                       'Type/Email', 
-                       'Type/Md5String', 
+        $types = array('Type/Regex',
+                       'Type/Url',
+                       'Type/Sql',
+                       'Type/Email',
+                       'Type/Md5String',
                        'Type/MimeType',
                        'Type/ArrayIndex',
                        'Type/GPCIndex',
@@ -809,8 +809,8 @@ GREMLIN;
 
             $analyzer = Analyzer::getInstance($typeAnalyzer, $this->gremlin, $this->config);
             assert($analyzer !== null, "Missing typed literal : $type\n");
-            if ($analyzer === null) { 
-                continue; 
+            if ($analyzer === null) {
+                continue;
             }
             $res = $analyzer->getDump();
             if (empty($res)) {

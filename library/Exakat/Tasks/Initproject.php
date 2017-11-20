@@ -354,7 +354,7 @@ INI;
                         display("Check out with tag ".$this->config->tag);
                         $shell .= ' -b '.$this->config->tag.' ';
 
-                    } 
+                    }
                     $shell .= ' code 2>&1 ';
                     $shellResult = shell_exec($shell);
 
