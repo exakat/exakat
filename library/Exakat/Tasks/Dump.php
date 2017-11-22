@@ -523,9 +523,21 @@ GREMLIN;
                 } else {
                     $extends = '"'.$this->sqlite->escapeString($row['extends']).'"';
                 }
+
                 $namespace = preg_replace('/\\\\[^\\\\]*?$/', '', $row['fullnspath']);
-                $query[] = "(".$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($row['name'])."', ".$namespacesId[$namespace].", ".(int) $row['abstract'].",".(int) $row['final'].", '"
-                                .$row['type']."', ".$extends.")";
+                if (isset($namespacesId[$namespace])) {
+                    $namespaceId = $namespacesId[$namespace];
+                } else {
+                    $namespaceId = 1;
+                }
+
+                $query[] = "(".$citId[$row['fullnspath']].
+                           ", '".$this->sqlite->escapeString($row['name'])."'".
+                           ", ".$namespaceId.
+                           ", ".(int) $row['abstract'].
+                           ",".(int) $row['final'].
+                           ", '".$row['type']."'".
+                           ", ".$extends.")";
             }
 
             if (!empty($query)) {
@@ -777,7 +789,16 @@ GREMLIN;
                 $visibility = '';
             }
 
-            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].", '".$visibility."', '".$this->sqlite->escapeString($row['value'])."')";
+            if (isset($namespacesId[$namespace])) {
+                $namespaceId = $namespacesId[$namespace];
+            } else {
+                $namespaceId = 1;
+            }
+
+            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."'".
+                       ", ".$citId[$row['class']].
+                       ", '".$visibility."'".
+                       ", '".$this->sqlite->escapeString($row['value'])."')";
 
             ++$total;
         }
