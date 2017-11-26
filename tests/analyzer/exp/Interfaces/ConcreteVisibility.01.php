@@ -1,7 +1,8 @@
 <?php
 
 $expected     = array('private function interfaceMethod1( ) { /**/ } ',
-                      'protected function interfaceMethod2( ) { /**/ } ',);
+                      'protected function interfaceMethod2( ) { /**/ } ',
+                      );
 
 $expected_not = array('private function interfaceMethod3( ) { /**/ } ',
                       'function interfaceMethod4( ) { /**/ } ',
