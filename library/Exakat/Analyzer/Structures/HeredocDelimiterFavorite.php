@@ -48,6 +48,9 @@ class HeredocDelimiterFavorite extends Analyzer {
         }
 
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
+        if (empty($types)) {
+            return;
+        }
 
         $this->atomIs(array('Heredoc', 'Nowdoc'))
              ->raw('filter{ it.get().value("delimiter").trim() in *** }', $types);

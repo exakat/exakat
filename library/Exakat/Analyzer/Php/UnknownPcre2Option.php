@@ -25,29 +25,29 @@ namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Structures\pregOptionE;
+use Exakat\Analyzer\Structures\UnknownPregOption;
 
 class UnknownPcre2Option extends Analyzer {
     public function analyze() {
-        // Options list : eimsuxADJSUX (we use all letters, as unknown options are ignored or yield an error)
-        $options = 'S';
+        // Options list : S and X
+//        $options = '[a-zA-Z]*[^eimsuxADJU][a-zA-Z]*';
+        $options = '[a-zA-Z]*[S][a-zA-Z]*';
         
-        // Searching for option S
-        // function list
-        $functions = array('\preg_match', '\preg_match_all', '\preg_replace', '\preg_replace_callback', '\preg_filter', '\preg_split', '\preg_grep');
-
         // preg_match with a string
-        $this->atomFunctionIs($functions)
+        $this->atomFunctionIs(UnknownPregOption::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->isNot('noDelimiter', '')
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
+             ->raw('filter{ it.get().value("noDelimiter").length() >= (delimiter + delimiterFinal).length() }')
+             ->raw('filter{ (it.get().value("noDelimiter") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
              ->regexIs('noDelimiter', '^(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.')\\$')
              ->back('first');
         $this->prepareQuery();
 
         // With an interpolated string "a $x b"
-        $this->atomFunctionIs($functions)
+        $this->atomFunctionIs(UnknownPregOption::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_QUOTE')
              ->hasOut('CONCAT')
@@ -57,12 +57,14 @@ class UnknownPcre2Option extends Analyzer {
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->inIs('CONCAT')
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
+             ->raw('filter{ it.get().value("noDelimiter").length() >= (delimiter + delimiterFinal).length() }')
+             ->raw('filter{ (it.get().value("noDelimiter") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
              ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.').\\$')
              ->back('first');
         $this->prepareQuery();
 
         // with a concatenation
-        $this->atomFunctionIs($functions)
+        $this->atomFunctionIs(UnknownPregOption::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->_as('concat')
@@ -75,6 +77,8 @@ class UnknownPcre2Option extends Analyzer {
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
              ->back('concat')
+             ->raw('filter{ it.get().value("noDelimiter").length() >= (delimiter + delimiterFinal).length() }')
+             ->raw('filter{ (it.get().value("noDelimiter") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
              ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.').\\$')
              ->back('first');
         $this->prepareQuery();
@@ -83,7 +87,7 @@ class UnknownPcre2Option extends Analyzer {
         // preg_match with a string
         // Those letters will fail. Other will be useful, or fail for good reason (\u needs a codepoint).
         $letters = 'gijkmoqyFIJMOTY';
-        $this->atomFunctionIs($functions)
+        $this->atomFunctionIs(UnknownPregOption::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->isNot('noDelimiter', '')

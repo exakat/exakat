@@ -26,26 +26,33 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UnknownPregOption extends Analyzer {
+    public static $functions = array('\preg_match', 
+                                     '\preg_match_all', 
+                                     '\preg_replace',
+                                     '\preg_replace_callback', 
+                                     '\preg_filter', 
+                                     '\preg_grep', 
+                                     '\preg_split',
+                                     );
+
     public function analyze() {
         // Options list : eimsuxADJSUX (we use all letters, as unknown options are ignored or yield an error)
         $options = '[a-zA-Z]*[^eimsuxADJSUX][a-zA-Z]*';
         
-        // function list
-        $functions = array('\preg_match', '\preg_match_all', '\preg_replace', '\preg_replace_callback', '\preg_filter', '\preg_split', '\preg_grep');
-
         // preg_match with a string
-        $this->atomFunctionIs($functions)
+        $this->atomFunctionIs(self::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->isNot('noDelimiter', '')
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
+             ->raw('filter{ it.get().value("noDelimiter") != delimiter + delimiterFinal ; }')
              ->regexIs('noDelimiter', '^(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.')\\$')
              ->back('first');
         $this->prepareQuery();
 
         // With an interpolated string "a $x b"
-        $this->atomFunctionIs($functions)
+        $this->atomFunctionIs(self::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_QUOTE')
              ->hasOut('CONCAT')
@@ -60,7 +67,7 @@ class UnknownPregOption extends Analyzer {
         $this->prepareQuery();
 
         // with a concatenation
-        $this->atomFunctionIs($functions)
+        $this->atomFunctionIs(self::$functions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->_as('concat')
