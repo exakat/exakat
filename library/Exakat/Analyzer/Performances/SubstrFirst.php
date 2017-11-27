@@ -42,12 +42,29 @@ class SubstrFirst extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // $a = strtolower('a'); substr($a, 1, 100);
+        $this->atomFunctionIs($replacingFunctions)
+             ->inIs('RIGHT')
+             ->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('LEFT')
+             ->savePropertyAs('fullcode', 'tmp')
+             ->inIs('LEFT')
+             ->nextSibling()
+             ->atomInside('Functioncall')
+             ->functioncallIs($substrFunctions)
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('fullcode', 'tmp')
+             ->back('first');
+        $this->prepareQuery();
+
         // substr('a'.$b, 0, 100);
         $this->atomFunctionIs($substrFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();
+
     }
 }
 
