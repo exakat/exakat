@@ -86,7 +86,8 @@ class GSNeo4j {
         $sqlite3 = new \Sqlite3($this->config->projects_root.'/projects/.exakat/calls.sqlite');
 
         $outE = array();
-        $res = $sqlite3->query('SELECT definitions.id AS definition, GROUP_CONCAT(DISTINCT COALESCE(calls.id, calls2.id)) AS call
+        $res = $sqlite3->query(<<<SQL
+SELECT definitions.id AS definition, GROUP_CONCAT(DISTINCT COALESCE(calls.id, calls2.id)) AS call
 FROM definitions
 LEFT JOIN calls 
     ON definitions.type       = calls.type       AND
@@ -97,25 +98,27 @@ LEFT JOIN calls calls2
        calls2.fullnspath      != calls2.globalpath 
 WHERE calls.id IS NOT NULL OR calls2.id IS NOT NULL
 GROUP BY definitions.id
-       ');
+SQL
+);
        
         while($row = $res->fetchArray(SQLITE3_NUM)) {
             $outE[$row[0]] = explode(',', $row[1]);
         }
        
         $inE = array();
-        $res = $sqlite3->query('SELECT calls.id AS call, GROUP_CONCAT(DISTINCT COALESCE(definitions.id, definitions2.id)) AS definition
+        $res = $sqlite3->query(<<<SQL
+SELECT DISTINCT calls.id AS call, GROUP_CONCAT(DISTINCT COALESCE(definitions.id, definitions2.id)) AS definition
 FROM calls
 LEFT JOIN definitions 
     ON definitions.type       = calls.type       AND
        definitions.fullnspath = calls.fullnspath
 LEFT JOIN definitions definitions2
-    ON definitions.type       = calls.type       AND
-       definitions.fullnspath = calls.globalpath  AND
-       calls.fullnspath      != calls.globalpath 
+    ON definitions2.type        = calls.type       AND
+       definitions2.fullnspath  = calls.globalpath 
 WHERE definitions.id IS NOT NULL OR definitions2.id IS NOT NULL
 GROUP BY calls.id
-       ');
+SQL
+);
        
         while($row = $res->fetchArray(SQLITE3_NUM)) {
            $inE[$row[0]] = explode(',', $row[1]);

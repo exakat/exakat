@@ -114,9 +114,8 @@ LEFT JOIN definitions
     ON definitions.type       = calls.type       AND
        definitions.fullnspath = calls.fullnspath
 LEFT JOIN definitions definitions2
-    ON definitions.type       = calls.type       AND
-       definitions.fullnspath = calls.globalpath  AND
-       calls.fullnspath      != calls.globalpath 
+    ON definitions2.type        = calls.type       AND
+       definitions2.fullnspath  = calls.globalpath 
 WHERE definitions.id IS NOT NULL OR definitions2.id IS NOT NULL
 GROUP BY calls.id
 SQL
@@ -125,7 +124,7 @@ SQL
         while($row = $res->fetchArray(SQLITE3_NUM)) {
            $inE[$row[0]] = explode(',', $row[1]);
         }
-       
+        
         $linksId = array();
         $fp = fopen($this->path, 'a');
         if (!is_resource($fp)) {
@@ -178,6 +177,7 @@ SQL
             
             fwrite($fp, json_encode($json).PHP_EOL);
         }
+
         fclose($fp);
         fclose($fpDefinitions);
         unlink($this->pathDefinition);
@@ -196,7 +196,7 @@ SQL
 
         display('loaded nodes (duration : '.number_format( ($end - $begin) * 1000, 2).' ms)');
 
-        $this->cleanCsv();
+//        $this->cleanCsv();
         display('Cleaning CSV');
 
         return true;
