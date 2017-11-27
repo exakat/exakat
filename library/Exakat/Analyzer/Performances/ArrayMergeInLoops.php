@@ -31,6 +31,15 @@ class ArrayMergeInLoops extends Analyzer {
 
         $this->atomFunctionIs($functions)
              ->hasLoop()
+             ->atomInside(self::$CONTAINERS)
+             ->savePropertyAs('fullcode', 'var')
+             ->back('first')
+             ->inIs('RIGHT')
+             ->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('LEFT')
+             ->atomIs(self::$CONTAINERS)
+             ->samePropertyAs('fullcode', 'var')
              ->goToLoop();
         $this->prepareQuery();
     }
