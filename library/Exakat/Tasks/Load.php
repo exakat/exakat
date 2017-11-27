@@ -226,7 +226,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
     
-    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES');
+    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv',);
 
     private $processing = array();
 
@@ -805,6 +805,10 @@ SQL;
             }
             $type = \Exakat\Tasks\T_START_HEREDOC;
         }
+        
+        // Set default, in case the whole loop is skipped
+        $string->noDelimiter = '';
+        $string->delimiter   = '';
 
         while ($this->tokens[$this->id + 1][0] !== $finalToken) {
             $currentVariable = $this->id + 1;
@@ -867,13 +871,13 @@ SQL;
         }
 
         ++$this->id;
-        $string->code     = $this->tokens[$current][1];
-        $string->fullcode = $string->binaryString.$openQuote.implode('', $fullcode).$closeQuote;
-        $string->line     = $this->tokens[$current][2];
-        $string->token    = $this->getToken($this->tokens[$current][0]);
-        $string->count    = $rank + 1;
-        $string->boolean  = (int) (boolean) ($rank + 1);
-        $string->constant = $constant;
+        $string->code        = $this->tokens[$current][1];
+        $string->fullcode    = $string->binaryString.$openQuote.implode('', $fullcode).$closeQuote;
+        $string->line        = $this->tokens[$current][2];
+        $string->token       = $this->getToken($this->tokens[$current][0]);
+        $string->count       = $rank + 1;
+        $string->boolean     = (int) (boolean) ($rank + 1);
+        $string->constant    = $constant;
 
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
             $string->delimiter = $closeQuote;
@@ -1752,7 +1756,8 @@ SQL;
             $arguments->constant = self::CONSTANT_EXPRESSION;
             $arguments->args_max = 0;
             $arguments->args_min = 0;
-            $argumentsId[] = $void;
+            $arguments->count    = 0;
+            $argumentsId[]       = $void;
 
             ++$this->id;
         } else {
@@ -2971,6 +2976,7 @@ SQL;
             $functioncall->fullcode   = $name->fullcode.' ';
             $functioncall->line       = $this->tokens[$this->id][2];
             $functioncall->token      = $this->getToken($this->tokens[$this->id][0]);
+            $functioncall->count      = 0;
             $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
 
             $this->addLink($functioncall, $void, 'ARGUMENT');
@@ -4358,12 +4364,13 @@ SQL;
         }
         $this->exitContext();
 
-        $concatenation->code     = $this->tokens[$current][1];
-        $concatenation->fullcode = implode(' . ', $fullcode);
-        $concatenation->line     = $this->tokens[$current][2];
-        $concatenation->token    = $this->getToken($this->tokens[$current][0]);
-        $concatenation->count    = $rank;
-        $concatenation->constant = $constant;
+        $concatenation->code        = $this->tokens[$current][1];
+        $concatenation->fullcode    = implode(' . ', $fullcode);
+        $concatenation->noDelimiter = trim($concatenation->fullcode, '"\'');
+        $concatenation->line        = $this->tokens[$current][2];
+        $concatenation->token       = $this->getToken($this->tokens[$current][0]);
+        $concatenation->count       = $rank;
+        $concatenation->constant    = $constant;
 
         $this->pushExpression($concatenation);
 
@@ -4494,6 +4501,7 @@ SQL;
         $functioncall->fullcode   = $name->code.' '.$index->fullcode;
         $functioncall->line       = $name->line;
         $functioncall->token      = $name->token;
+        $functioncall->count      = 1; // Only one argument for print
         $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
 
         $this->addLink($functioncall, $name, 'NAME');
