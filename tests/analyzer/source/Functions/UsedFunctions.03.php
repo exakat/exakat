@@ -1,5 +1,9 @@
 <?php
 
+namespace cmp {
+    function b() {}
+}
+
 namespace {
 function cmpUsed ($a, $b) { return true; }
 function cmpUsedFullnspath ($a, $b) { return true; }
@@ -12,7 +16,4 @@ array_map('\\cmp\\b', range(1, 10));
 
 }
 
-namespace cmp {
-    function b() {}
-}
 ?>

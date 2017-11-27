@@ -32,19 +32,15 @@ class UsedFunctions extends Analyzer {
     
     public function analyze() {
         // function used
-        $functions = $this->query('g.V().hasLabel("Functioncall").has("fullnspath").values("fullnspath").unique()')->toArray();
-        if (!empty($functions)) {
-            $this->atomIs('Function')
-                 ->hasName()
-                 ->fullnspathIs($functions);
-            $this->prepareQuery();
-        }
+        $this->atomIs('Function')
+             ->hasOut('DEFINITION');
+        $this->prepareQuery();
 
         // function name used in a string (via MarkCallable)
         $functionsInStrings = $this->query('g.V().hasLabel("String").has("fullnspath").values("fullnspath").unique()')->toArray();
         if (!empty($functionsInStrings)) {
             $this->atomIs('Function')
-                 ->hasName()
+                 ->hasNoOut('DEFINITION')
                  ->fullnspathIs($functionsInStrings);
             $this->prepareQuery();
         }
