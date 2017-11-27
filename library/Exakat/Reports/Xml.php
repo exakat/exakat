@@ -134,7 +134,7 @@ class Xml extends Reports {
      */
     public function generate($folder, $name = null) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';

@@ -1959,7 +1959,7 @@ SQL;
         } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_SEMICOLON)));
 
         $const->code     = $this->tokens[$current][1];
-        $const->fullcode = (empty($options) ? '' : join(' ', $options).' ').$this->tokens[$current][1].' '.implode(', ', $fullcode);
+        $const->fullcode = (empty($options) ? '' : implode(' ', $options).' ').$this->tokens[$current][1].' '.implode(', ', $fullcode);
         $const->line     = $this->tokens[$current][2];
         $const->token    = $this->getToken($this->tokens[$current][0]);
         $const->count    = $rank + 1;

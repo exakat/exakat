@@ -30,7 +30,7 @@ class Json extends Reports {
 
     public function generate($folder, $name = self::FILE_FILENAME) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';

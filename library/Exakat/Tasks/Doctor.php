@@ -445,7 +445,7 @@ class Doctor extends Tasks {
                     $v = basename($version);
                     $versions[] = $v;
                 }
-                $stats['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin : '.join(', ', $versions).'. Only one neo4j-gremlin-3.*.jar is sufficient. ';
+                $stats['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin : '.implode(', ', $versions).'. Only one neo4j-gremlin-3.*.jar is sufficient. ';
             } else {
                 $stats['gremlinJar'] = basename(trim(array_pop($gremlinPlugin)));
             }
