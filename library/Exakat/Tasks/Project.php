@@ -37,7 +37,7 @@ class Project extends Tasks {
 
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                               'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
-                              'Analyze', 'Preferences', 'Inventory', 
+                              'Analyze', 'Preferences', 'Inventory',
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               );
 

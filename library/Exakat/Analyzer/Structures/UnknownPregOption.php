@@ -26,12 +26,12 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UnknownPregOption extends Analyzer {
-    public static $functions = array('\preg_match', 
-                                     '\preg_match_all', 
+    public static $functions = array('\preg_match',
+                                     '\preg_match_all',
                                      '\preg_replace',
-                                     '\preg_replace_callback', 
-                                     '\preg_filter', 
-                                     '\preg_grep', 
+                                     '\preg_replace_callback',
+                                     '\preg_filter',
+                                     '\preg_grep',
                                      '\preg_split',
                                      );
 
