@@ -40,9 +40,9 @@ class Atom {
     public $reference    = Load::NOT_REFERENCE;
     public $heredoc      = false;
     public $delimiter    = '';
-    public $noDelimiter  = '';
+    public $noDelimiter  = null;
     public $variadic     = Load::NOT_VARIADIC;
-    public $count        = 0;
+    public $count        = null;
     public $fullnspath   = '';
     public $absolute     = Load::NOT_ABSOLUTE;
     public $alias        = '';
@@ -107,6 +107,63 @@ class Atom {
         return (array) $this;
     }
 
+    public function toNonEmptyArray() {
+        $return = array();
+
+        if (strlen($this->code) > self::STRING_MAX_SIZE) {
+            $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
+        }
+        if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
+            $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
+        }
+
+        if ($this->intval > 2147483647) {
+            $this->intval = 2147483647;
+        }
+        if ($this->intval < -2147483648) {
+            $this->intval = -2147483648;
+        }
+        $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
+
+        
+        // Those are always present
+        $return = array(
+            'id'            => $this->id,
+            'atom'          => $this->atom,
+            'label'          => $this->atom,
+            'line'          => $this->line,
+            'token'          => $this->token,
+            'code'          => addcslashes($this->code       , '\\"'),
+            'fullcode'      => addcslashes($this->fullcode   , '\\"'),
+            'fullnspath'    => addcslashes($this->fullnspath , '\\"'),
+            );
+
+        if ($this->count !== null) { $return['count'] = $this->count; }
+        if ($this->rank !== '') { $return['rank'] = $this->rank; }
+        if ($this->alternative) { $return['alternative'] = 1; }
+        if ($this->reference) { $return['reference'] = 1; }
+        if ($this->heredoc) { $return['heredoc'] = 1; }
+        if ($this->variadic) { $return['variadic'] = 1; }
+        if ($this->absolute) { $return['absolute'] = 1; }
+        if ($this->constant) { $return['constant'] = 1; }
+        if ($this->boolean) { $return['boolean'] = 1; }
+        if ($this->enclosing) { $return['enclosing'] = 1; }
+        if ($this->bracket) { $return['bracket'] = 1; }
+        if ($this->close_tag) { $return['close_tag'] = 1; }
+        if ($this->aliased) { $return['aliased'] = 1; }
+        if ($this->alias !== '') { $return['alias'] = $this->alias; }
+        if ($this->origin !== '') { $return['origin'] = $this->origin; }
+        if ($this->strval) { $return['close_tag'] = addcslashes($this->strval     , '\\"'); }
+        if ($this->noDelimiter !== null) { $return['noDelimiter'] = addcslashes($this->noDelimiter, '\\"'); }
+        if ($this->propertyname) { $return['propertyname'] = $this->propertyname; }
+        if ($this->globalvar) { $return['globalvar'] = 1; }
+        if ($this->intval !== null) { $return['intval'] = 1; }
+        if ($this->delimiter !== '') { $return['delimiter'] = $this->delimiter; }
+        if ($this->args_max !== '') { $return['args_max'] = $this->args_max; }
+        if ($this->args_min !== '') { $return['args_min'] = $this->args_min; }
+
+        return $return;
+    }
     public function toLimitedArray($headers) {
         $return = array();
 
@@ -137,13 +194,6 @@ class Atom {
 
         $this->enclosing     = !$this->enclosing  ? null : 1;
         $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
-
-        if ($this->intval > 2147483647) {
-            $this->intval = 2147483647;
-        }
-        if ($this->intval < -2147483648) {
-            $this->intval = -2147483648;
-        }
 
         $return = array( $this->id,
                          $this->atom,
