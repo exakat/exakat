@@ -37,7 +37,7 @@ class Project extends Tasks {
 
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                               'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
-                              'Analyze', 'Preferences',
+                              'Analyze', 'Preferences', 'Inventory', 
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               );
 
@@ -156,10 +156,7 @@ class Project extends Tasks {
         $this->logTime('Loading');
 
         // Dump is a child process
-        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project;
-        if (!in_array('Codacy', $this->config->project_themes)) {
-            $shell .= ' -collect ';
-        }
+        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -collect ';
         shell_exec($shell);
         $this->logTime('Dumped and inited');
 
