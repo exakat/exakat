@@ -77,8 +77,8 @@ class UnknownPcre2Option extends Analyzer {
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
              ->back('concat')
-             ->raw('filter{ it.get().value("noDelimiter").length() >= (delimiter + delimiterFinal).length() }')
-             ->raw('filter{ (it.get().value("noDelimiter") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
+             ->raw('filter{ it.get().value("fullcode").length() >= (delimiter + delimiterFinal).length() + 2 }')
+             ->raw('filter{ (it.get().value("fullcode") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
              ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.').\\$')
              ->back('first');
         $this->prepareQuery();
