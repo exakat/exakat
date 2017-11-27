@@ -123,6 +123,7 @@ class Project extends Tasks {
             $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
             $info['vcs_revision'] = trim($res);
         } else {
+            $info = array();
             $info['vcs_type'] = 'Downloaded archive';
         }
         $this->datastore->addRow('hash', $info);

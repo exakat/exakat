@@ -455,7 +455,7 @@ CREATE TABLE calls (
     globalpath STRING,
     atom STRING,
     id INTEGER
- )
+)
 SQL;
         $this->callsSqlite->query($calls);
 
@@ -463,9 +463,10 @@ SQL;
 CREATE TABLE definitions (
     type STRING,
     fullnspath STRING,
+    globalpath STRING,
     atom STRING,
     id INTEGER
- )
+)
 SQL;
         $this->callsSqlite->query($definitions);
     }
@@ -4889,10 +4890,19 @@ SQL;
             return;
         }
 
+        if ($fullnspath === 'undefined') {
+            $globalpath = '';
+        } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
+            $globalpath = $r[1];
+        } else {
+            $globalpath = '';
+        }
+
         $query = 'INSERT INTO definitions VALUES ("'.$type.'",
-                                            "'.$this->callsSqlite->escapeString($fullnspath).'",
-                                            "'.$definition->atom.'",
-                                            "'.$definition->id.'"
+                                                  "'.$this->callsSqlite->escapeString($fullnspath).'",
+                                                  "'.$this->callsSqlite->escapeString($globalpath).'",
+                                                  "'.$definition->atom.'",
+                                                  "'.$definition->id.'"
          )';
 
         $this->callsSqlite->query($query);

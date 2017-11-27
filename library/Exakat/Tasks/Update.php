@@ -36,29 +36,37 @@ class Update extends Tasks {
 
     public function run() {
         if ($this->config->project === 'default') {
-            $paths = glob($this->config->projects_root.'/projects/*');
-            $projects = array_map('basename', $paths);
-            $projects = array_diff($projects, array('test'));
-            
-            print "Updating ".count($projects)." projects".PHP_EOL;
-            shuffle($projects);
-            foreach($projects as $project) {
-                display("updating $project".PHP_EOL);
-                $this->update($project);
-            }
+            $this->runDefault();
         } else {
-            $path = $this->config->projects_root.'/projects/'.$this->config->project;
-
-            if (!file_exists($path)) {
-                throw new NoSuchProject($this->config->project);
-            }
-
-            if (!file_exists($path.'/code')) {
-                throw new NoCodeInProject($this->config->project);
-            }
-        
-            $this->update($this->config->project);
+            $this->runProjet($this->config->project);
         }
+    }
+    
+    private function runDefault() {
+        $paths = glob($this->config->projects_root.'/projects/*');
+        $projects = array_map('basename', $paths);
+        $projects = array_diff($projects, array('test'));
+        
+        print "Updating ".count($projects)." projects".PHP_EOL;
+        shuffle($projects);
+        foreach($projects as $project) {
+            display("updating $project".PHP_EOL);
+            $this->update($project);
+        }
+    }
+    
+    private function runProject($project) {
+        $path = $this->config->projects_root.'/projects/'.$project;
+    
+        if (!file_exists($path)) {
+            throw new NoSuchProject($this->config->project);
+        }
+    
+        if (!file_exists($path.'/code')) {
+            throw new NoCodeInProject($this->config->project);
+        }
+        
+        $this->update($this->config->project);
     }
     
     private function update($project) {
