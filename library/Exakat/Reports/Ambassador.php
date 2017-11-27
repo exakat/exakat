@@ -51,13 +51,18 @@ class Ambassador extends Reports {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
 
-    private $inventories = array('constants'  => 'Constants',
-                                 'classes'    => 'Classes',
-                                 'interfaces' => 'Interfaces',
-                                 'functions'  => 'Functions',
-                                 'traits'     => 'Traits',
-                                 'namespaces' => 'Namespaces',
-//                                 'exceptions' => 'Exceptions'
+    private $inventories = array('constants'      => 'Constants',
+                                 'classes'        => 'Classes',
+                                 'interfaces'     => 'Interfaces',
+                                 'functions'      => 'Functions',
+                                 'traits'         => 'Traits',
+                                 'namespaces'     => 'Namespaces',
+                                 'Type/Url'       => 'URL',
+                                 'Type/Sql'       => 'SQL',
+                                 'Type/Email'     => 'Email',
+                                 'Type/GPCIndex'  => 'Incoming variables',
+                                 'Type/Md5string' => 'MD5 string',
+                                 'Type/Mime'      => 'Mime types',
                                  );
 
     private $compatibilities = array('53' => 'Compatibility PHP 5.3',
@@ -94,6 +99,14 @@ class Ambassador extends Reports {
             $menu = file_get_contents($this->tmpName.'/datas/menu.html');
             $inventories = '';
             foreach($this->inventories as $fileName => $title) {
+                if (strpos($fileName, '/') !== false) {
+                    $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer == '$fileName' AND count > 0";
+                    $total = $this->sqlite->querySingle($query);
+                    if ($total < 1) {
+                        continue;
+                    }
+                    $fileName = strtolower(basename($fileName));
+                }
                 $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
             $compatibilities = '';
@@ -2230,12 +2243,28 @@ HTML;
                                   'analyzer'    => 'Functions/Functionnames'),
             'namespaces' => array('description' => 'List of all defined namespaces in the code.',
                                   'analyzer'    => 'Namespaces/Namespacesnames'),
+            'Type/Url'   => array('description' => 'List of all URL mentionned in the code.',
+                                  'analyzer'    => 'Type/Url'),
+            'Type/Sql'   => array('description' => 'List of all SQL queries mentionned in the code.',
+                                  'analyzer'    => 'Type/Sql'),
+            'Type/Email' => array('description' => 'List of all Email mentionned in the code.',
+                                  'analyzer'    => 'Type/Email'),
+            'Type/GPCIndex' => array('description' => 'List of all incoming variables mentionned in the code.',
+                                  'analyzer'    => 'Type/GPCIndex'),
+            'Type/Md5string' => array('description' => 'List of all incoming MD5-like strings mentionned in the code.',
+                                  'analyzer'    => 'Type/GPCIndex'),
+            'Type/Mime' => array('description' => 'List of all Mime-type mentionned in the code.',
+                                  'analyzer'    => 'Type/GPCIndex'),
 //            'exceptions' => array('description' => 'List of all defined exceptions.',
 //                                  'analyzer'    => 'Exceptions/DefinedExceptions'),
         );
         foreach($this->inventories as $fileName => $theTitle) {
             $theDescription = $definitions[$fileName]['description'];
             $theAnalyzer    = $definitions[$fileName]['analyzer'];
+            
+            if (strpos($fileName, '/') !== false) {
+                $fileName = strtolower(basename($fileName));
+            }
 
             $theTable = '';
             $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
