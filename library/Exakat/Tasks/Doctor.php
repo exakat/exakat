@@ -66,7 +66,7 @@ class Doctor extends Tasks {
         $stats['exakat']['graphdb']     = $this->config->graphdb;
         $stats['exakat']['reports']     = $this->array2list($this->config->project_reports);
         $stats['exakat']['themes']      = $this->array2list($this->config->project_themes);
-        $stats['exakat']['tokenslimit'] = number_format($this->config->token_limit + 0, 0, '', ' ');
+        $stats['exakat']['tokenslimit'] = number_format((int) $this->config->token_limit, 0, '', ' ');
 
         // check for PHP
         $stats['PHP']['binary']         = phpversion();
