@@ -109,7 +109,7 @@ abstract class Analyzer {
     
     protected $linksDown = '';
 
-    public function __construct($gremlin = null, $config = null) {
+    public function __construct($gremlin = null, $config) {
         $this->gremlin = $gremlin;
         
         $this->analyzer = get_class($this);
@@ -121,11 +121,7 @@ abstract class Analyzer {
         
         $this->_as('first');
         
-        if($config === null) {
-            print_r($this);
-            debug_print_backtrace();
-            die();
-        }
+        assert($config !== null, "Can't call Analyzer without a config");
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
