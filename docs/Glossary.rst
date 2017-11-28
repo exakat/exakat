@@ -696,6 +696,10 @@ Glossary
 
       + :ref:`@ Operator <@-operator>`
 
+    + `trim()`
+
+      + :ref:`Substring First <substring-first>`
+
 
 + `U`
     + `Usort()`
@@ -793,6 +797,7 @@ Glossary
       + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`
       + :ref:`Old Style Constructor <old-style-constructor>`
+      + :ref:`Parent First <parent-first>`
       + :ref:`Redefined Default <redefined-default>`
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Use Local Class <should-use-local-class>`
