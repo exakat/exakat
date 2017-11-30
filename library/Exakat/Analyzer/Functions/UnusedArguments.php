@@ -34,7 +34,7 @@ class UnusedArguments extends Analyzer {
     }
     
     public function analyze() {
-        $isNotRead = 'not( where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; }).times('.self::MAX_LOOPING.')
+        $isNotRead = 'not( where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable", "Variablearray", "Variableobject").filter{ it.get().value("code") == varname; }).times('.self::MAX_LOOPING.')
                                           .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") )
                                           ) )';
     
@@ -60,6 +60,7 @@ class UnusedArguments extends Analyzer {
              ->isNot('reference', true)
              ->inIs('ARGUMENT')
              ->atomIs(self::$FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->_as('results')
 
              ->hasClassTrait()
@@ -78,6 +79,7 @@ class UnusedArguments extends Analyzer {
              ->inIs('ARGUMENT')
              ->atomIs(self::$FUNCTIONS_ALL)
              ->_as('results')
+             ->analyzerIsNot('self')
              ->hasNoClassInterfaceTrait()
              ->outIs('BLOCK')
              // this argument must be read or written at least once (in fact, used)
@@ -91,6 +93,7 @@ class UnusedArguments extends Analyzer {
              ->is('reference', true)
              ->inIs('ARGUMENT')
              ->atomIs(self::$FUNCTIONS_ALL)
+             ->analyzerIsNot('self')
              ->_as('results')
 
              ->hasClassTrait()
@@ -104,6 +107,7 @@ class UnusedArguments extends Analyzer {
 
         // Arguments in a USE, not a reference
         $this->atomIs('Closure')
+             ->analyzerIsNot('self')
              ->outIs('USE')
              ->isNot('reference', true)
              ->savePropertyAs('code', 'varname')
@@ -118,6 +122,7 @@ class UnusedArguments extends Analyzer {
 
         // Arguments in a USE, reference
         $this->atomIs('Closure')
+             ->analyzerIsNot('self')
              ->outIs('USE')
              ->is('reference', true)
              ->savePropertyAs('code', 'varname')
