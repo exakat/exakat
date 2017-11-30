@@ -439,7 +439,7 @@ class Appinfo extends Data {
             $this->values['Composer Packages'] = array();
             $res = $this->sqlite->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $this->values['Composer Packages'][] = $this->PHPSyntax($row['fullcode']);
+                $this->values['Composer Packages'][] = PHPSyntax($row['fullcode']);
             }
         } else {
             unset($this->values['Composer Packages']);

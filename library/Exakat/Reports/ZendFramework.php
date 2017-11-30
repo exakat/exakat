@@ -1372,9 +1372,9 @@ SQL;
             $item['analyzer_md5'] = md5($ini['name']);
             $item['file' ] =  $row['file'];
             $item['file_md5' ] =  md5($row['file']);
-            $item['code' ] = $this->PHPSyntax($row['fullcode']);
+            $item['code' ] = PHPSyntax($row['fullcode']);
             $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus'] = $this->PHPSyntax($row['fullcode']);
+            $item['code_plus'] = PHPSyntax($row['fullcode']);
             $item['link_file'] = $row['file'];
             $item['line' ] =  $row['line'];
             $item['severity'] = "<i class=\"fa fa-warning ".$this->severities[$row['analyzer']]."\"></i>";
@@ -1731,7 +1731,7 @@ HTML;
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $dynamicCode .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $dynamicCode .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('dynamic_code');
@@ -1743,7 +1743,7 @@ HTML;
         $theGlobals = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $theGlobals .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $theGlobals .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('globals');
@@ -1775,7 +1775,7 @@ HTML;
             $theTable = '';
             $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $theTable .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+                $theTable .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
             }
 
             $html = $this->getBasedPage('inventories');
@@ -1790,7 +1790,7 @@ HTML;
         $alteredDirectives = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $alteredDirectives .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $alteredDirectives .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('altered_directives');
@@ -2060,7 +2060,7 @@ SQL;
             $data['Composer Packages'] = array();
             $res = $this->sqlite->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $data['Composer Packages'][] = $this->PHPSyntax($row['fullcode']);
+                $data['Composer Packages'][] = PHPSyntax($row['fullcode']);
             }
         } else {
             unset($data['Composer Packages']);
@@ -2142,13 +2142,6 @@ HTML;
         } else {
             return '<i class="fa fa-warning red"></i>&nbsp;'.$count.' warnings';
         }
-    }
-    
-    private function PHPSyntax($code) {
-        $php = highlight_string('<?php |'.$code.'|; ?>', true);
-        $php = substr($php, strpos($php, '|') + 1);
-        $php = substr($php, 0, strrpos($php, '|'));
-        return $php;
     }
     
     private function generateUnusedComponents() {

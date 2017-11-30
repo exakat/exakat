@@ -106,6 +106,12 @@ function rglob($pattern, $flags = 0) {
 
     $subdirs = array($files);
     foreach ($dirs as $dir) {
+        /*
+        if (substr($dir, -1) == '\\') { 
+            $dir .= '\\\\';
+            print $dir;
+        }
+        */
         $f = rglob($dir, $flags);
         if (!empty($f)) {
             $subdirs[] = $f;
@@ -317,5 +323,11 @@ function unicode_blocks($string) {
     return $return;
 }
 
+function PHPSyntax($code) {
+    $php = highlight_string('<?php |'.$code.'|; ?>', true);
+    $php = substr($php, strpos($php, '|') + 1);
+    $php = substr($php, 0, strrpos($php, '|'));
+    return $php;
+}
 
 ?>
