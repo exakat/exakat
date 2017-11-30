@@ -181,17 +181,6 @@ GREMLIN;
             }
         }
 
-        if ($this->config->thema === 'Codacy') {
-            foreach($return as $r) {
-                $s = array('filename' => $r[1],
-                           'line'     => $r[2],
-                           'patternId' => 'XXX/YYY',
-                           'message'   => 'MMMMMMMMMM' );
-                echo json_encode( (object) $s), "\n";
-            }
-            return;
-        }
-
         if ($this->config->output) {
             echo $text;
         }
