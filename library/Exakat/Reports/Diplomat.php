@@ -677,71 +677,6 @@ HTML;
 
     }
     
-    private function generateOldDashboard() {
-        $baseHTML = $this->getBasedPage('index');
-
-        $tags = array();
-        $code = array();
-
-        // Bloc top left
-        $hashData = $this->getHashData();
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOCHASHDATA', $hashData);
-
-        // bloc Issues
-        $issues = $this->getIssuesBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
-        $tags[] = 'SCRIPTISSUES';
-        $code[] = $issues['script'];
-
-        // bloc severity
-        $severity = $this->getSeverityBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOCSEVERITY', $severity['html']);
-        $tags[] = 'SCRIPTSEVERITY';
-        $code[] = $severity['script'];
-
-        // Marking the audit date
-        $this->makeAuditDate($finalHTML);
-
-        // top 10
-        $fileHTML = $this->getTopFile();
-        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers();
-        $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
-
-        
-
-        // Filename Overview
-        $fileOverview = $this->getFileOverview();
-        $tags[] = 'SCRIPTDATAFILES';
-        $code[] = $fileOverview['scriptDataFiles'];
-        $tags[] = 'SCRIPTDATAMAJOR';
-        $code[] = $fileOverview['scriptDataMajor'];
-        $tags[] = 'SCRIPTDATACRITICAL';
-        $code[] = $fileOverview['scriptDataCritical'];
-        $tags[] = 'SCRIPTDATANONE';
-        $code[] = $fileOverview['scriptDataNone'];
-        $tags[] = 'SCRIPTDATAMINOR';
-        $code[] = $fileOverview['scriptDataMinor'];
-
-        // Analyzer Overview
-        $analyzerOverview = $this->getAnalyzerOverview();
-        $tags[] = 'SCRIPTDATAANALYZERLIST';
-        $code[] = $analyzerOverview['scriptDataAnalyzer'];
-        $tags[] = 'SCRIPTDATAANALYZERMAJOR';
-        $code[] = $analyzerOverview['scriptDataAnalyzerMajor'];
-        $tags[] = 'SCRIPTDATAANALYZERCRITICAL';
-        $code[] = $analyzerOverview['scriptDataAnalyzerCritical'];
-        $tags[] = 'SCRIPTDATAANALYZERNONE';
-        $code[] = $analyzerOverview['scriptDataAnalyzerNone'];
-        $tags[] = 'SCRIPTDATAANALYZERMINOR';
-        $code[] = $analyzerOverview['scriptDataAnalyzerMinor'];
-
-        $blocjs = str_replace($tags, $code, $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' dashboard');
-        $this->putBasedPage('index', $finalHTML);
-    }
-    
     private function getDonutJS($name, $dataList) {
         return <<<JAVASCRIPT
       Morris.Donut({
@@ -2065,7 +2000,7 @@ SQL;
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $errorMessages .= '<tr><td>'.PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $errorMessages .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('error_messages');
