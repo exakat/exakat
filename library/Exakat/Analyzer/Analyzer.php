@@ -125,7 +125,7 @@ abstract class Analyzer {
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
-            $this->description = new Description($this->analyzer, $config);
+            $this->description = new Description($this->getName($this->analyzer), $config->dir_root);
         }
         
         if (!isset(self::$datastore)) {
