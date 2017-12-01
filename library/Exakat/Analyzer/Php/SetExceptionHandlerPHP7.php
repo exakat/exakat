@@ -24,10 +24,6 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class SetExceptionHandlerPHP7 extends Analyzer {
-    public function dependsOn() {
-        return array('Functions/MarkCallable');
-    }
-    
     public function analyze() {
         // With function name in a string
         $this->atomFunctionIs('\set_exception_handler')
@@ -35,7 +31,7 @@ class SetExceptionHandlerPHP7 extends Analyzer {
              ->atomIs('String')
              ->hasNoOut('CONCAT')
              ->regexIsNot('noDelimiter', '::')
-             ->analyzerIs('Functions/MarkCallable')
+             ->hasIn('DEFINITION')
              ->functionDefinition()
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
@@ -49,8 +45,8 @@ class SetExceptionHandlerPHP7 extends Analyzer {
              ->atomIs('String')
              ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '::')
-             ->raw('sideEffect{ methode = it.get().value("cbMethod") }')
-             ->analyzerIs('Functions/MarkCallable')
+             ->raw('sideEffect{ methode = it.get().value("noDelimiter").tokenize("::")[1]; }')
+             ->hasIn('DEFINITION')
              ->classDefinition()
              ->outIs('METHOD')
              ->atomIs('Method')

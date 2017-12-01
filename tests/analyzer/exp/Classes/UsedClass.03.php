@@ -1,6 +1,7 @@
 <?php
 
-$expected     = array( 'class Used { /**/ } ' );
+$expected     = array( 'class Used { /**/ } ',
+                     );
 
 $expected_not = array( 'class UsedButUndefined { /**/ } ', 
                        'class Unused { /**/ } ',
@@ -8,6 +9,6 @@ $expected_not = array( 'class UsedButUndefined { /**/ } ',
                        'UsedButUndefined::x',
                        'UsedClass::x::multipledoublecolonIsAnError',
                        'Methodname'
-);
+                       );
 
 ?>

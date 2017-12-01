@@ -26,18 +26,18 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UsedFunctions extends Analyzer {
-    public function dependsOn() {
-        return array('Functions/MarkCallable');
-    }
-    
     public function analyze() {
         // function used
         $this->atomIs('Function')
              ->hasOut('DEFINITION');
         $this->prepareQuery();
 
-        // function name used in a string (via MarkCallable)
-        $functionsInStrings = $this->query('g.V().hasLabel("String").has("fullnspath").values("fullnspath").unique()')->toArray();
+        // function name used in a string 
+        $functionsInStrings = $this->query(<<<GREMLIN
+g.V().hasLabel("String").has("fullnspath").values("fullnspath").unique()
+GREMLIN
+)->toArray();
+
         if (!empty($functionsInStrings)) {
             $this->atomIs('Function')
                  ->hasNoOut('DEFINITION')

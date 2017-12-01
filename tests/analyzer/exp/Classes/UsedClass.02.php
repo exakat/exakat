@@ -5,9 +5,10 @@ $expected     = array('class UsedInArrayWithArrayLowercase { /**/ } ',
                       'class UsedInArrayWithBracket { /**/ } ',
                       'class UsedInArrayWithBracketLowercase { /**/ } ',
                       'class UsedInString { /**/ } ',
-                      'class UsedInStringLowercase { /**/ } '
-);
+                      'class UsedInStringLowercase { /**/ } ',
+                      );
 
-$expected_not = array('class Unused { /**/ } ');
+$expected_not = array('class Unused { /**/ } ',
+                     );
 
 ?>

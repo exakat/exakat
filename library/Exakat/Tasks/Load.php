@@ -580,7 +580,7 @@ SQL;
             $dir = substr($dir, 0, -1);
         }
         $tokens = 0;
-        Files::findFiles($dir, $files, $ignoredFiles, $this->config, $tokens);
+        Files::findFiles($dir, $files, $ignoredFiles, $this->config);
 
         $this->reset();
 
@@ -1832,6 +1832,13 @@ SQL;
 
                     $this->addLink($arguments, $index, 'ARGUMENT');
                     $argumentsId[] = $index;
+                    // array($this, 'b'); for Callback syntax.
+                    if ($index->atom === 'Variable' && 
+                        $index->code === '$this'    && 
+                        $index->rank === 0 ) {
+                        $this->addCall('class', end($this->currentClassTrait)->fullnspath, $index);
+                    }
+                    
                     $fullcode[] = $index->fullcode;
                     $constant = $constant && ($index->constant === self::CONSTANT_EXPRESSION);
 
@@ -1898,7 +1905,6 @@ SQL;
         ++$this->id;
 
         $identifier = $this->addAtom($getFullnspath === self::WITH_FULLNSPATH ? 'Identifier' : 'Name');
-//        $identifier = $this->addAtom('Identifier');
         $identifier->code       = $this->tokens[$this->id][1];
         $identifier->fullcode   = $this->tokens[$this->id][1];
         $identifier->line       = $this->tokens[$this->id][2];
@@ -4399,7 +4405,7 @@ SQL;
         
         list($fullnspath, $aliased) = $this->getFullnspath($right);
         $this->addCall('class', $fullnspath, $right);
-        $this->aliased = $aliased;
+        $right->aliased = $aliased;
 
         $instanceof->code     = $this->tokens[$current][1];
         $instanceof->fullcode = $left->fullcode.' '.$this->tokens[$current][1].' '.$right->fullcode;

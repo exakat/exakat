@@ -45,7 +45,6 @@ class LoadFinal extends Tasks {
 
         $this->init();
 
-
         $this->makeClassConstantDefinition();
 
         $this->spotPHPNativeConstants();

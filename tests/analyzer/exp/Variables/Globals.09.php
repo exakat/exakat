@@ -1,13 +1,13 @@
 <?php
 
 $expected     = array('$_server',
-                      '$_cookie'
-);
+                      '$_cookie',
+                     );
 
 $expected_not = array('$_POST',
                       '$_GET', 
                       '$_ENV',
-                      '$_REQUEST'
-);
+                      '$_REQUEST',
+                     );
 
 ?>
