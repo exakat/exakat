@@ -140,6 +140,9 @@ class Load extends Tasks {
     const NOT_CONSTANT_EXPRESSION   = false;
     
     const FULLNSPATH_UNDEFINED = 'undefined';
+    
+    const WITHOUT_TYPEHINT_SUPPORT = false;
+    const WITH_TYPEHINT_SUPPORT    = true;
 
     const CONTEXT_CLASS        = 1;
     const CONTEXT_INTERFACE    = 2;
@@ -1041,7 +1044,7 @@ SQL;
         }
         
         // Process arguments
-        $function = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), true);
+        $function = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), self::WITH_TYPEHINT_SUPPORT);
         $argumentFullcode = $function->fullcode;
         $function->reference = $reference;
         if (isset($name)) {
@@ -1736,7 +1739,8 @@ SQL;
         return 0;
     }
 
-    private function processArguments($atom, $finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehintSupport = false, $allowFinalVoid = false) {
+    private function processArguments($atom, $finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehintSupport = self::WITHOUT_TYPEHINT_SUPPORT) {
+        $allowFinalVoid = true;
         $arguments = $this->addAtom($atom);
         $current = $this->id;
         $argumentsId = array();
@@ -2052,7 +2056,7 @@ SQL;
             $atom = 'Methodcallname';
         }
         
-        $functioncall = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), false, $name->token === 'T_LIST');
+        $functioncall = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), self::WITHOUT_TYPEHINT_SUPPORT);
         $argumentsFullcode = $functioncall->fullcode;
         $functioncall->code      = $name->code;
         $functioncall->fullcode  = $name->fullcode.'('.$argumentsFullcode.')';
