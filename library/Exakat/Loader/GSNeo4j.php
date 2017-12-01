@@ -272,8 +272,7 @@ SQL
             if (in_array($j->label, array('Functioncall', 'Function', 
                                           'Class', 'Classanonymous', 'Newcall', 'Interface', 'Trait', 
                                           'Identifier', 'Nsname', 'Constant', 
-                                          'String', 
-//                                          'Variable', 'Variablearray', 'Variableobject', 
+                                          'String', 'This',
                                           ))) {
                 $X = $this->json_encode($j);
                 assert(!json_last_error(), $fileName.' : error encoding for definition '.$j->label.' : '.json_last_error_msg()."\n".' '.print_r($j, true));
