@@ -32,7 +32,7 @@ class AvoidOptionalProperties extends Analyzer {
     public function analyze() {
         $this->atomIs('Member')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->back('first')
              ->hasIn('CONDITION')
              ->back('first');
@@ -41,7 +41,7 @@ class AvoidOptionalProperties extends Analyzer {
         // if (empty($this->a))
         $this->atomIs('Member')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->back('first')
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
@@ -60,7 +60,7 @@ class AvoidOptionalProperties extends Analyzer {
         // $this->a == null
         $this->atomIs('Member')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->back('first')
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')

@@ -32,7 +32,7 @@ class HasFluentInterface extends Analyzer {
              ->atomInside('Return')
              ->outIs('RETURN')
              ->atomIs('Variable')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->back('first');
         $this->prepareQuery();
     }

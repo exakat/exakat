@@ -35,8 +35,7 @@ class IsRead extends Analyzer {
         $this->atomIs(self::$VARIABLES_ALL)
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
                            'INDEX', 'VALUE', 'NAME', 'MEMBER', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
-                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL', 'PPP'))
-            ->codeIsNot('$this');
+                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL', 'PPP'));
         $this->prepareQuery();
 
         // Reading inside an assignation
@@ -52,8 +51,7 @@ class IsRead extends Analyzer {
         $this->prepareQuery();
 
         // $this is always read
-        $this->atomIs(self::$VARIABLES_ALL)
-             ->codeIs('$this');
+        $this->atomIs('This');
         $this->prepareQuery();
 
         // right or left, same

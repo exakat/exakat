@@ -39,7 +39,7 @@ class PropertyUsedInternally extends Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Member')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('MEMBER')
              ->samePropertyAs('code','propertyname')

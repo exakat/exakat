@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 class DefinedParentMP extends Analyzer {
     public function dependsOn() {
         return array('Composer/IsComposerNsname',
-                     'Classes/IsExtClass' );
+                     'Classes/IsExtClass',
+                    );
     }
     
     public function analyze() {
@@ -143,7 +144,7 @@ class DefinedParentMP extends Analyzer {
         // defined in traits (via use)
         $this->atomIs('Member')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'property')

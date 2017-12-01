@@ -50,8 +50,7 @@ class UseThis extends Analyzer {
              ->hasNoFunction()
              ->hasNoOut('STATIC')
              ->outIs('BLOCK')
-             ->atomInsideNoAnonymous(self::$VARIABLES_ALL)
-             ->codeIs('$this', true)
+             ->atomInsideNoAnonymous('This')
              ->back('first');
         $this->prepareQuery();
 

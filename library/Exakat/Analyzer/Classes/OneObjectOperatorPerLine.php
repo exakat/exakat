@@ -34,7 +34,7 @@ class OneObjectOperatorPerLine extends Analyzer {
              ->atomIs(array('Member', 'Methodcall', 'Staticproperty', 'Staticmethodcall', 'Staticconstant'))
              ->samePropertyAs('line', 'line')
              ->outIs('OBJECT')
-             ->codeIsNot('$this')
+             ->atomIsNot('This')
              ->back('first');
         $this->prepareQuery();
 
@@ -44,7 +44,7 @@ class OneObjectOperatorPerLine extends Analyzer {
              ->atomIs(array('Member', 'Methodcall', 'Staticproperty', 'Staticmethodcall', 'Staticconstant'))
              ->samePropertyAs('line', 'line')
              ->outIs('OBJECT')
-             ->codeIsNot('$this')
+             ->atomIsNot('This')
              ->back('first');
         $this->prepareQuery();
 
@@ -54,7 +54,7 @@ class OneObjectOperatorPerLine extends Analyzer {
              ->atomIs(array('Member', 'Methodcall', 'Staticproperty', 'Staticmethodcall', 'Staticconstant'))
              ->samePropertyAs('line', 'line')
              ->outIs('OBJECT')
-             ->codeIsNot('$this')
+             ->atomIsNot('This')
              ->back('first');
         $this->prepareQuery();
 
@@ -64,7 +64,7 @@ class OneObjectOperatorPerLine extends Analyzer {
              ->atomIs(array('Member', 'Methodcall', 'Staticproperty', 'Staticmethodcall', 'Staticconstant'))
              ->samePropertyAs('line', 'line')
              ->outIs('OBJECT')
-             ->codeIsNot('$this')
+             ->atomIsNot('This')
              ->back('first');
         $this->prepareQuery();
     }

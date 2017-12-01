@@ -79,7 +79,7 @@ class UsedPrivateMethod extends Analyzer {
              ->outIs('METHOD')
              ->atomInside('Methodcall')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')

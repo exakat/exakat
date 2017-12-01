@@ -274,7 +274,7 @@ SQL
             if (in_array($j->label, array('Functioncall', 'Function', 
                                           'Class', 'Classanonymous', 'Newcall', 'Interface', 'Trait', 
                                           'Identifier', 'Nsname', 'Constant', 
-                                          'String', 
+                                          'String', 'This',
 //                                          'Variable', 'Variablearray', 'Variableobject', 
                                           ))) {
                 $X = $this->json_encode($j);

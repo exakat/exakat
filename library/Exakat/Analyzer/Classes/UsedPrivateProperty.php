@@ -83,7 +83,7 @@ class UsedPrivateProperty extends Analyzer {
              ->outIs('METHOD')
              ->atomInside('Member')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('MEMBER')
              ->samePropertyAs('code', 'x')

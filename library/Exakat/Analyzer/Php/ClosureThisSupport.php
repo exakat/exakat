@@ -32,7 +32,7 @@ class ClosureThisSupport extends Analyzer {
         $this->atomIs('Closure')
              ->outIs('BLOCK')
              ->atomInside('Variable')
-             ->codeIs('$this', true)
+             ->atomIs('This')
              ->back('first');
         $this->prepareQuery();
     }

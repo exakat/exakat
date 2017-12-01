@@ -3481,7 +3481,9 @@ SQL;
     }
 
     private function processVariable() {
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
+        if ($this->tokens[$this->id][1] === '$this') {
+            $atom = 'This';
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
             $atom = 'Variableobject';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET) {
             $atom = 'Variablearray';
@@ -3489,6 +3491,10 @@ SQL;
             $atom = 'Variable';
         }
         $variable = $this->processSingle($atom);
+        
+        if ($atom == 'This' && ($class = end($this->currentClassTrait))) {
+            $this->addCall('class', $class->fullnspath, $variable);
+        }
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();

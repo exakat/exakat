@@ -1,6 +1,6 @@
 <?php
 
-class fluent {
+class fluentClass {
     public $y = 2;
     
     function __get($name) {}
@@ -10,7 +10,7 @@ class fluent {
     function nonFluent1() { return '$this'; }
 }
 
-class Notfluent {
+class NotfluentClass {
     function nonFluent2() { return $that;}
     
     function nonFluent3() { return '$this'; }
