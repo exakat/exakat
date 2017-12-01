@@ -111,6 +111,7 @@ SQL;
             $this->collectStructures();
             $this->collectVariables();
             $this->collectLiterals();
+            $this->collectReadability();
             display('Collecting data finished');
         }
 
@@ -1079,6 +1080,57 @@ GREMLIN;
             $this->sqlite->query($query);
         }
         display(count($statics)." static calls CPM");
+    }
+    
+    private function collectReadability() {
+    $loops = 20;
+    $query = <<<GREMLIN
+g.V().sideEffect{ functions = 0; name=''; expression=0;}
+    .hasLabel("Function", "Closure", "Method", "File")
+    .not(where( __.out("BLOCK").hasLabel('Void')))
+    .sideEffect{ ++functions; }
+    .where(__.coalesce( __.out('NAME').sideEffect{ name=it.get().value("code"); }.in("NAME"),
+                        __.filter{true; }.sideEffect{ name='global'; file = it.get().value('code');} )
+    .sideEffect{ total = 0; expression = 0; type=it.get().label();}
+    .coalesce( __.out("BLOCK"), __.out("FILE").out("EXPRESSION").out("EXPRESSION") )
+    .repeat( __.out().not(hasLabel("Class", "Function", "Closure", "Interface", "Trait", "Void")) ).emit().times($loops)
+    .sideEffect{ ++total; }
+    .not(hasLabel('Void'))
+    .where( __.in("EXPRESSION", "CONDITION").sideEffect{ expression++; })
+    .where( __.repeat( __.in() ).emit().times($loops).hasLabel("File").sideEffect{ file = it.get().value('code'); })
+    .fold()
+    )
+    .map{ if (expression > 0) {
+        ['name':name, 'type':type, 'total':total, 'expression':expression, 'index': 102 - expression - total / expression, 'file':file];
+    } else {
+        ['name':name, 'type':type, 'total':total, 'expression':0, 'index': 100, 'file':file];
+    }
+}    
+GREMLIN;
+        $index = $this->gremlin->query($query);
+
+        $this->sqlite->query('DROP TABLE IF EXISTS readability');
+        $query = <<<SQL
+CREATE TABLE readability (  
+    id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    name    STRING,
+    type    STRING,
+    tokens  INTEGER,
+    expressions INTEGER,
+    file        STRING
+                    )
+SQL;
+        $this->sqlite->query($query);
+
+        $values = array();
+        foreach($index as $row) {
+            $values[] = '("'.$row['name'].'","'.$row['type'].'",'.$row['total'].','.$row['expression'].',"'.$row['file'].'") ';
+        }
+
+        $query = 'INSERT INTO readability ("name", "type", "tokens", "expressions", "file") VALUES '.implode(', ', $values);
+        $this->sqlite->query($query);
+
+        display( count($values).' readability index');
     }
 }
 
