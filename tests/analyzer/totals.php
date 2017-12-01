@@ -19,13 +19,19 @@ print max($numbers)." maximum\n\n";
 $total = 0;
 $files = glob('exp/*/*.php');
 foreach($files as $file) {
+    $php = file_get_contents($file);
+    
+    if ($a = preg_match_all("/,
+                     \);/s", $php, $r) !== 2) {
+        print "Missing coding convention $file ($a)\n";
+    }
+    
     try {
         include($file);
     } catch (Throwable $e) {
         echo "Exception: {$e->getMessage()}\n";
         continue;
     }
-
     
     if (empty($expected) && empty($expected_not)) {
         ++$total;
