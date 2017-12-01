@@ -286,10 +286,10 @@ class Project extends Tasks {
             unset($dumpConfig);
 
         } catch (\Exception $e) {
-            echo "Error while running the Analyzer $theme ".PHP_EOL,
+            echo "Error while running the Analyzer {$this->config->project} ".PHP_EOL,
                  $e->getMessage(),
                  PHP_EOL."Trying next analysis".PHP_EOL;
-            file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
+            file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.final.log', $e->getMessage());
         }
     }
 

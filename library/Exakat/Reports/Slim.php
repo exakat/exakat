@@ -1778,7 +1778,7 @@ SQL;
     }
 
     protected function generatePhpConfiguration() {
-        $phpConfiguration = new PhpConfiguration();
+        $phpConfiguration = new PhpConfiguration($this->config);
         $report = $phpConfiguration->generate(null, null);
 
         $id = strpos($report, PHP_EOL.PHP_EOL.PHP_EOL);
@@ -1970,7 +1970,7 @@ HTML;
         $theGlobals = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $theGlobals .= '<tr><td>'.PHPSyntax($row['fullcode']).'</td><td>'.$row[file].'</td><td>'.$row[line].'</td></tr>'.PHP_EOL;
+            $theGlobals .= '<tr><td>'.PHPSyntax($row['fullcode']).'</td><td>'.$row['file'].'</td><td>'.$row['line'].'</td></tr>'.PHP_EOL;
         }
 
         $html = $this->getBasedPage('globals');

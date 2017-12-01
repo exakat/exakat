@@ -28,6 +28,9 @@ class SimpleHtml extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'exakat';
 
+    protected $finalName       = null;
+    protected $tmpName           = '';
+
     public function generate($folder, $name = self::FILE_FILENAME) {
         $this->finalName = $folder.'/'.$name;
         $this->tmpName = $folder.'/.'.$name;

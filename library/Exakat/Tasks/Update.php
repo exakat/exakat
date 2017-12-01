@@ -38,7 +38,7 @@ class Update extends Tasks {
         if ($this->config->project === 'default') {
             $this->runDefault();
         } else {
-            $this->runProjet($this->config->project);
+            $this->runProject($this->config->project);
         }
     }
     
