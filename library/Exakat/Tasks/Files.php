@@ -64,6 +64,8 @@ class Files extends Tasks {
         $files = array();
         $tokens = 0;
         $path = $this->config->projects_root.'/projects/'.$dir.'/code';
+
+        display( "Searching for files \n");
         self::findFiles($path, $files, $ignoredFiles, $this->config);
         $tokens = $this->countTokens($path, $files, $ignoredFiles);
         $i = array();
@@ -80,6 +82,7 @@ class Files extends Tasks {
         if (empty($files)) {
             throw new NoFileToProcess($this->config->project);
         }
+        display( "Found the files \n");
 
         $tmpFileName = $this->config->projects_root.'/projects/.exakat/files.'.getmypid().'.txt';
         $path = $this->config->projects_root.'/projects/'.$dir.'/code';
