@@ -5,7 +5,7 @@ $expected     = array( 'B::then',
                        'C::while', 
                        'A::do');
 
-$pxpected_not = array('C::$while', 
+$expected_not = array('C::$while', 
                       'A::$do', 
                       'B::$then', 
                       'D::$include', 
