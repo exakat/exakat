@@ -33,10 +33,7 @@ class Zf3Component extends Analyzer {
     protected $version    = null;
     
     public function analyze() {
-        $data = new ZendF3($this->config->dir_root.'/data', $this->config);
-        if (empty($this->component)) {
-            return;
-        }
+        $data = new ZendF3($this->config->dir_root.'/data', $this->config->is_phar);
 
         $analyzerId = null;
 

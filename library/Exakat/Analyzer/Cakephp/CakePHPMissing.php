@@ -33,9 +33,9 @@ class CakePHPMissing extends Analyzer {
     protected $version    = null;
     
     public function analyze() {
-        $data = new CakePHP($this->config->dir_root.'/data', $this->config);
+        $data = new CakePHP($this->config->dir_root.'/data', $this->config->is_phar);
 
-        $classes    = $data->getClasses($this->version);
+        $classes    = $data->getClasses($this->component, $this->version);
         if (!empty($classes)) {
             $classes    = call_user_func_array('array_merge', array_values($classes));
             $classes    = array_keys(array_count_values($classes));
@@ -44,7 +44,7 @@ class CakePHPMissing extends Analyzer {
             $classes = array();
         }
 
-        $interfaces =  $data->getInterfaces($this->version);
+        $interfaces =  $data->getInterfaces($this->component, $this->version);
         if (!empty($interfaces)) {
             $interfaces = call_user_func_array('array_merge', array_values($interfaces));
             $interfaces = array_keys(array_count_values($interfaces));
@@ -53,7 +53,7 @@ class CakePHPMissing extends Analyzer {
             $interfaces = array();
         }
 
-        $traits     =  $data->getTraits($this->version);
+        $traits     =  $data->getTraits($this->component, $this->version);
         if (!empty($traits)) {
             $traits     = call_user_func_array('array_merge', array_values($traits));
             $traits     = array_keys(array_count_values($traits));

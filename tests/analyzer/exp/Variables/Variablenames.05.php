@@ -2,11 +2,11 @@
 
 $expected     = array('$b',
                       '$x',
-                      '$this',
                      );
 
 $expected_not = array('$children',
                       'Y',
+                      '$this', // This is not considered a normal variable
                      );
 
 ?>

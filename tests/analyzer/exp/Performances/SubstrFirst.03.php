@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('trim($d)',
+$expected     = array('preg_replace(\'a\', \'b\', $d)',
                       'str_replace(array(\'+\', \'=\'), \'.\', base64_encode(sha1(uniqid(\'salt\', true), true)))',
                      );
 

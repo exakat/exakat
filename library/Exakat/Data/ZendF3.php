@@ -29,10 +29,8 @@ class ZendF3 {
     protected $sqlite = null;
     protected $phar_tmp = null;
 
-    public function __construct($path, $config) {
-        if ($config === null) {
-            $docPath = $path.'/zendf3.sqlite';
-        } elseif ($config->is_phar) {
+    public function __construct($path, $is_phar) {
+        if ($is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf3').'.sqlite';
             copy($path.'/zendf3.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;

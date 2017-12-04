@@ -29,8 +29,8 @@ class CakePHP {
     protected $sqlite = null;
     protected $phar_tmp = null;
 
-    public function __construct($path, $config) {
-        if ($config->is_phar) {
+    public function __construct($path, $is_phar) {
+        if ($is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'excakephp').'.sqlite';
             copy($path.'/cakephp.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;

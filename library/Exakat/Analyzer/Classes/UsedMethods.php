@@ -67,6 +67,7 @@ GREMLIN
 g.V().hasLabel("String")
      .where(__.in("DEFINITION"))
      .not(where(__.in("CONCAT")))
+     .filter{ (it.get().value('noDelimiter') =~ "::." ).getCount() != 0 }
 .map{
     // Strings
     if (it.get().label() == 'String') {

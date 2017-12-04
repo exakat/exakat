@@ -153,6 +153,13 @@ class UselessInstruction extends Analyzer {
              ->codeIs(array("''", '""'))
              ->back('first');
         $this->prepareQuery();
+
+        // array_unique(array_keys())
+        $this->atomFunctionIs(array('\array_unique', '\count'))
+             ->outWithRank('ARGUMENT', 0)
+             ->functioncallIs('array_keys')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

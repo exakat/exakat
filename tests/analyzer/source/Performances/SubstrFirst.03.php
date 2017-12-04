@@ -7,8 +7,8 @@ $salt = str_replace(
 );
 $b = substr($salt, 0, $length);
 
-$c = trim($d);
-$e = preg_replace('a', 'b', $c);
+$c = preg_replace('a', 'b', $d);
+$e = trim($c);
 
 
 $f = rtrim($g);
