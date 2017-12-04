@@ -29,6 +29,7 @@ class Description {
 
     private $language = 'en';
     private $analyzer = '';
+    private $configPath = '';
     private $ini = array();
 
     public function __construct($analyzerName, $configPath, $language = 'en') {

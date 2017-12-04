@@ -1837,8 +1837,8 @@ SQL;
                     $this->addLink($arguments, $index, 'ARGUMENT');
                     $argumentsId[] = $index;
                     // array($this, 'b'); for Callback syntax.
-                    if ($index->atom === 'Variable' && 
-                        $index->code === '$this'    && 
+                    if ($index->atom === 'Variable' &&
+                        $index->code === '$this'    &&
                         $index->rank === 0 ) {
                         $this->addCall('class', end($this->currentClassTrait)->fullnspath, $index);
                     }

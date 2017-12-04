@@ -116,7 +116,7 @@ g.V().hasLabel("Arrayliteral")
      .values("noDelimiter")
      .unique();
 GREMLIN
-        )->toArray(); 
+        )->toArray();
 
         $callables = array_unique(array_merge($callablesArray, $callablesThisArray, $callablesStrings));
         

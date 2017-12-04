@@ -24,9 +24,9 @@
 namespace Exakat\Exceptions;
 
 class NeedsAnalysisThema extends \RuntimeException {
-    public function __construct($message = '', $code = 0, \Exception $previous = null) {
+    public function __construct() {
 
-        parent::__construct( "Provide a -T <Thema>. Aborting\n", $code, $previous);
+        parent::__construct( "Provide a -T <Thema>. Aborting\n");
     }
 }
 

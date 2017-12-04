@@ -777,7 +777,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
 
     public function noChildWithRank($edgeName, $rank = '0') {
         if (is_int($rank)) {
-            $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').has("rank", '.abs((int) $rank).') ) )');
+            $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').has("rank", '.abs($rank).') ) )');
         } else {
             $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').filter{it.get().value("rank") == '.$rank.'; } ) )');
         }
