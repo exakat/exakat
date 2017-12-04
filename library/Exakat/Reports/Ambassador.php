@@ -156,6 +156,7 @@ class Ambassador extends Reports {
         $this->generateIssues();
         $this->generateNoIssues();
         $this->generatePerformances();
+        $this->generateSuggestions();
         $this->generateSecurity();
         
         $this->generateAnalyzersList();
@@ -348,6 +349,11 @@ class Ambassador extends Reports {
     private function generateSecurity() {
         $this->generateIssuesEngine('security_issues',
                                     $this->getIssuesFaceted('Security') );
+    }
+
+    private function generateSuggestions() {
+        $this->generateIssuesEngine('suggestions',
+                                    $this->getIssuesFaceted('Suggestions') );
     }
 
     private function generatePerformances() {
