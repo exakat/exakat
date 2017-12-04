@@ -57,7 +57,7 @@ class Atom {
     public $bracket      = Load::NOT_BRACKET;
     public $close_tag    = Load::NO_CLOSING_TAG;
     public $aliased      = Load::NOT_ALIASED;
-    public $boolean      = 0;
+    public $boolean      = null; // null, so boolean may NOT be available
     public $propertyname = '';
     public $constant     = Load::NOT_CONSTANT_EXPRESSION;
     public $root         = false;  // false is on purpose.
