@@ -215,15 +215,19 @@ function recursiveReaddir($tmpdir) {
     $dir = opendir($tmpdir);
     $return = array();
     
+    $dirs = array();
     while($file = readdir($dir)) {
         if ($file[0] == '.') { continue; }
         
         if (is_dir($tmpdir.'/'.$file)) {
-            $return = array_merge($return, recursiveReaddir($tmpdir.'/'.$file));
+            $dirs[] = recursiveReaddir($tmpdir.'/'.$file);
         } else {
             if (substr($file, -4) != '.php') { continue; }
             $return[] = $tmpdir.'/'.$file;
         }
+    }
+    if (!empty($dirs)) {
+        $return = array_merge($return, array_merge(...$dirs));
     }
     
     return $return;
