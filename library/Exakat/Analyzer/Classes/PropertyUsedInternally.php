@@ -62,7 +62,7 @@ class PropertyUsedInternally extends Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
+             ->tokenIs(self::$STATICCALL_TOKEN)
              ->samePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('MEMBER')

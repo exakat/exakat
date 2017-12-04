@@ -61,7 +61,7 @@ class UsedPrivateProperty extends Analyzer {
              ->outIs('METHOD')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
+             ->tokenIs(self::$STATICCALL_TOKEN)
              ->fullnspathIs('fnp')
              ->inIs('CLASS')
              ->outIs('MEMBER')

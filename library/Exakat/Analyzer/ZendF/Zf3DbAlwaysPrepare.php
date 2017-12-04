@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Zf3DbAlwaysPrepare extends Analyzer {
     public function analyze() {
         // methods
-        $methods = array('where', 'having');
+        $methods = array('where', 'having', 'join');
     
         // not sensitive
         // limit, offset

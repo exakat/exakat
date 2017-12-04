@@ -93,7 +93,7 @@ abstract class Analyzer {
     static public $FUNCTIONS_NAMED  = array('Function', 'Method');
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $CLASSES_NAMED    = 'Class';
-    
+    static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;

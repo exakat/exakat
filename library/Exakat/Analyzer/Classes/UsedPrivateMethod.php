@@ -41,7 +41,7 @@ class UsedPrivateMethod extends Analyzer {
              ->outIs('METHOD')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::$STATICCALL_TOKEN)
              ->codeIsNot(array('static', 'self'))
              ->samePropertyAs('fullnspath', 'classname')
              ->inIs('CLASS')
@@ -61,7 +61,7 @@ class UsedPrivateMethod extends Analyzer {
              ->outIs('METHOD')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
+             ->tokenIs(self::$STATICCALL_TOKEN)
              ->codeIs(array('static', 'self'))
              ->inIs('CLASS')
              ->outIs('METHOD')
@@ -99,7 +99,7 @@ class UsedPrivateMethod extends Analyzer {
              ->outIs('METHOD')
              ->atomInside('New')
              ->outIs('NEW')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(self::$STATICCALL_TOKEN)
              ->samePropertyAs('fullnspath', 'fnp')
              ->back('method');
         $this->prepareQuery();
