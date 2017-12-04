@@ -26,12 +26,17 @@ use Exakat\Analyzer\Analyzer;
 
 class PrintfArguments extends Analyzer {
     public function analyze() {
+        //The %2$s contains %1$04d monkeys
+        //The %02s contains %-'.3d monkeys
+    
         // printf(' a %s ', $a1, $a2);
         $this->atomFunctionIs(array('\\printf', '\\sprintf'))
              ->savePropertyAs('count', 'c')
              ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->filter('d = it.get().value("fullcode").toString().findAll("(%[%sducoxXbgGeEfF])") - ["%%"]; c - 1 != d.size();')
+             //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
+             ->filter('d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); c - 1 != d.size();')
              ->back('first');
         $this->prepareQuery();
     }
