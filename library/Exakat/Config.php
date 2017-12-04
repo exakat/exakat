@@ -244,7 +244,7 @@ class Config {
             ini_set('display_errors', 0);
         } else {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
-            $this->dir_root      = dirname(dirname(__DIR__));
+            $this->dir_root      = dirname(__DIR__, 2);
             $this->projects_root = getcwd();
 
             assert_options(ASSERT_ACTIVE, 1);

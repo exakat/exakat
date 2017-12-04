@@ -1349,10 +1349,10 @@ SQL;
         }
 
         // Should work on Abstract and Final only
-        $fullcode= array();
+        $fullcode= array_column($this->optionsTokens, 'fullcode');
+
         foreach($this->optionsTokens as $token => $option) {
             $this->addLink($class, $option, strtoupper($token));
-            $fullcode[] = $option->fullcode;
         }
         $this->optionsTokens = array();
 

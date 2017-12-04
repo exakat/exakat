@@ -95,7 +95,7 @@ class Initproject extends Tasks {
                 if (in_array($projectName, array('trunk', 'code'))) {
                     $projectName = basename(dirname($repositoryURL));
                     if (in_array($projectName, array('trunk', 'code'))) {
-                        $projectName = basename(dirname(dirname($repositoryURL)));
+                        $projectName = basename(dirname($repositoryURL, 2)));
                     }
                 }
             } elseif ($this->config->git === true) {
