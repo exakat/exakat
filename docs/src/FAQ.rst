@@ -10,6 +10,7 @@ Summary
 * `Can I checkout that branch?`_
 * `Can I clone with my ssh keys?`_
 * `The project is too big`_
+* `Java Out Of Memory Error`_
 * `How can I run a very large project?`_
 * `Does exakat runs on Java 8?`_
 * `Where can I find the report`_
@@ -78,13 +79,20 @@ If you need to run exakat on larger sources, you may change this value to make i
 
 It may be interesting to 'ignore_dir[]', from projects/<>/config.ini. 
 
+`Java Out Of Memory Error`_
+---------------------------
+
+By default, java is allowed to run with 512mb of RAM. That may be too little for the code being studied. 
+
+Set the environnement variable $JAVA_OPTIONS to give larger quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
+
 `How can I run a very large project?`_
 --------------------------------------
 
 Here are a few steps you can try when running exakat on a very large project. 
 
 * Update project/<name>/config.ini, and use ignore_dirs[] and include_dirs[] to exclude as much code as possible. Notably, frameworks, data in PHP files, tests, cache, translations, etc. 
-* Set $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
+* Set environnement variable $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
 * Check that your installation is running with 'gsneo4j' and not 'tinkergraph', in config/exakat.ini.
 
 `Does exakat runs on Java 8?`_
