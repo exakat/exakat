@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('class Void { /**/ } ',
-                      'class ReflectionClassConstant { /**/ } ');
+                      'class ReflectionClassConstant { /**/ } ',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

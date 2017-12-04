@@ -5,8 +5,9 @@ $expected     = array('php_version( )',
                       'fopen(\'php://stdin\', \'r\')',
                       'fopen("php://stdout", \'w\')',
                       'fopen(\'php://stderr\', \'w\')',
-);
+                     );
 
-$expected_not = array('fopen(\'file://etc/test.php\', \'r\');');
+$expected_not = array('fopen(\'file://etc/test.php\', \'r\');',
+                     );
 
 ?>

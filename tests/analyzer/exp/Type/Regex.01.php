@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('"/[ab$fe]+/"', 
-                      '\'/[abc]+/\'', 
-                      '\'/[ab\' . \'e]+/\'', 
+$expected     = array('"/[ab$fe]+/"',
+                      '\'/[abc]+/\'',
+                      '\'/[ab\' . \'e]+/\'',
                       '\'/[abd]+/\'',
                      );
 

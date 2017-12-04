@@ -1,11 +1,13 @@
 <?php
 
-$expected     = array('$arrayWithIndex', 
-                      '$arrayAppend', 
-                      '$callable', 
-                      '$objectForProperty', 
-                      '$objectForMethod');
+$expected     = array('$arrayWithIndex',
+                      '$arrayAppend',
+                      '$callable',
+                      '$objectForProperty',
+                      '$objectForMethod',
+                     );
 
-$expected_not = array('$nothing');
+$expected_not = array('$nothing',
+                     );
 
 ?>

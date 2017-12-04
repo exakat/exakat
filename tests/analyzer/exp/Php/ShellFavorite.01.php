@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('`backtick`');
+$expected     = array('`backtick`',
+                     );
 
-$expected_not = array('shell_exec(\'exec\')');
+$expected_not = array('shell_exec(\'exec\')',
+                     );
 
 ?>

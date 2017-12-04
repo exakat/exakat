@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Barcode\Barcode( )');
+$expected     = array('Zend\\Barcode\\Barcode( )',
+                     );
 
-$expected_not = array('Zend\Barcode\Barcode\NotZend( )');
+$expected_not = array('Zend\\Barcode\\Barcode\\NotZend( )',
+                     );
 
 ?>

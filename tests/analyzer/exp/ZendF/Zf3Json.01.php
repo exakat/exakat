@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Json\Decoder( )');
+$expected     = array('Zend\\Json\\Decoder( )',
+                     );
 
-$expected_not = array('Zend\Json\Decoder\NotZend( )');
+$expected_not = array('Zend\\Json\\Decoder\\NotZend( )',
+                     );
 
 ?>

@@ -11,13 +11,15 @@ HEREDOC
                       'print <<<HEREDOC
 should", $be, " all", "ok"
 HEREDOC
-');
+',
+                     );
 
 $expected_not = array('print "OK"',
                       'print $OK',
                       'print \'$KO\'',
                       'print <<<\'NOWDOC\'
 nowdoc even with $var is fine.
-NOWDOC');
+NOWDOC',
+                     );
 
 ?>

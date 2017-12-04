@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Dom\Css2Xpath( )');
+$expected     = array('Zend\\Dom\\Css2Xpath( )',
+                     );
 
-$expected_not = array('Zend\Dom\Css2Xpath\NotZend( )');
+$expected_not = array('Zend\\Dom\\Css2Xpath\\NotZend( )',
+                     );
 
 ?>

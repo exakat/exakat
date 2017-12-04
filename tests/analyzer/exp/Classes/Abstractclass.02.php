@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('ABSTRACT class abstractClass { /**/ } ');
+$expected     = array('ABSTRACT class abstractClass { /**/ } ',
+                     );
 
-$expected_not = array('class normalClass { /**/ } ');
+$expected_not = array('class normalClass { /**/ } ',
+                     );
 
 ?>

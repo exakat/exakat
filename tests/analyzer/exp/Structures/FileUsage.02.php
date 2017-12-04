@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('SplTempFileObject', 
-                      'SplTempFileObject( )');
+$expected     = array('SplTempFileObject',
+                      'SplTempFileObject( )',
+                     );
 
-$expected_not = array('$b::$a3[\'b3\']( )');
+$expected_not = array('$b::$a3[\'b3\']( )',
+                     );
 
 ?>

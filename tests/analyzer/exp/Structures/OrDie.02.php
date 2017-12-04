@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('@imagecreate($a, $b) or die("c")');
+$expected     = array('@imagecreate($a, $b) or die("c")',
+                     );
 
-$expected_not = array("defined('D') or die('E')");
+$expected_not = array('defined(\'D\') or die(\'E\')',
+                     );
 
 ?>

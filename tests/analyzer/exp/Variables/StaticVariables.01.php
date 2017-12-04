@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array('$staticVariable', '$staticVariable2');
+$expected     = array('$staticVariable',
+                      '$staticVariable2',
+                     );
 
-$expected_not = array('$staticProperty');
+$expected_not = array('$staticProperty',
+                     );
 
 ?>

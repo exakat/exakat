@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('GuzzleHttp\BatchResults( )');
+$expected     = array('GuzzleHttp\\BatchResults( )',
+                     );
 
-$expected_not = array('NotGuzzleHttp\BatchResults( )');
+$expected_not = array('NotGuzzleHttp\\BatchResults( )',
+                     );
 
 ?>

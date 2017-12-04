@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('function __construct( ) { /**/ } ', 
-                      'function __destruct( ) { /**/ } ');
+$expected     = array('function __construct( ) { /**/ } ',
+                      'function __destruct( ) { /**/ } ',
+                     );
 
-$expected_not = array('function usableReturn( ) { /**/ } ');
+$expected_not = array('function usableReturn( ) { /**/ } ',
+                     );
 
 ?>

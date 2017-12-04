@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('trait unusedT { /**/ } ');
+$expected     = array('trait unusedT { /**/ } ',
+                     );
 
-$expected_not = array('trait usedT { /**/ } ');
+$expected_not = array('trait usedT { /**/ } ',
+                     );
 
 ?>

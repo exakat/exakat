@@ -3,9 +3,9 @@
 $expected     = array('$a',
                       '$written',
                       '$c',
-                      );
+                     );
 
-$expected_not = array('$b', 
+$expected_not = array('$b',
                       '$read',
                      );
 

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('switch ($b) { /**/ } ');
+$expected     = array('switch ($b) { /**/ } ',
+                     );
 
-$expected_not = array('switch ($a) { /**/ } ');
+$expected_not = array('switch ($a) { /**/ } ',
+                     );
 
 ?>

@@ -9,14 +9,11 @@ $expected_not = array('$privateOnly',
                       '$privateThenPrivate',
                       '$privateThenProtected',
                       '$privateThenPublic',
-                      
                       '$protectedOnly',
                       '$protectedThenProtected',
                       '$protectedThenPublic',
-                      
                       '$publicOnly',
                       '$publicThenPublic',
-                      );
-
+                     );
 
 ?>

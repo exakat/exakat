@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$a2 <> $b2');
+$expected     = array('$a2 <> $b2',
+                     );
 
-$expected_not = array('$a != $b');
+$expected_not = array('$a != $b',
+                     );
 
 ?>

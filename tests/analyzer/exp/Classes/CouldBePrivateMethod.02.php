@@ -6,7 +6,7 @@ $expected     = array('public function apublicButSBPrivate( ) { /**/ } ',
                       'function b( ) { /**/ } ',
                      );
 
-$expected_not = array('public function apublicButReally() { /**/ } ', 
+$expected_not = array('public function apublicButReally() { /**/ } ',
                       'public function apublicButReally2() { /**/ } ',
                       'public function __construct() { /**/ } ',
                       'public function __clone() { /**/ } ',

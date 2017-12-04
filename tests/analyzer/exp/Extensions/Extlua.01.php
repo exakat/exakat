@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('LuaException( )');
+$expected     = array('LuaException( )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

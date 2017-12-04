@@ -2,9 +2,11 @@
 
 $expected     = array('BatchResults( )',
                       'BR',
-                      'BR( )');
+                      'BR( )',
+                     );
 
-$expected_not = array('\BatchResults( )',
-                      'NotBatchResults( )');
+$expected_not = array('\\BatchResults( )',
+                      'NotBatchResults( )',
+                     );
 
 ?>

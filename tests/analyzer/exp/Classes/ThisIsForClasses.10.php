@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('$this', 
-                      '$this', 
-                      '$this', 
+$expected     = array('$this',
+                      '$this',
+                      '$this',
                       '$this',
                      );
 

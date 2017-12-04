@@ -1,13 +1,13 @@
 <?php
 
-$expected     = array('\'a\'', 
+$expected     = array('\'a\'',
                      );
 
-$expected_not = array('\'b\'', 
-                      '\'c\'', 
-                      '\'ac\'', 
-                      '\'bc\'', 
-                      '\'cc\'', 
+$expected_not = array('\'b\'',
+                      '\'c\'',
+                      '\'ac\'',
+                      '\'bc\'',
+                      '\'cc\'',
                      );
 
 ?>

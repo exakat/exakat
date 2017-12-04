@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Math\BigInteger\AdapterPluginManager( )');
+$expected     = array('Zend\\Math\\BigInteger\\AdapterPluginManager( )',
+                     );
 
-$expected_not = array('Zend\Math\BigInteger\Adapter\Bcmath( )');
+$expected_not = array('Zend\\Math\\BigInteger\\Adapter\\Bcmath( )',
+                     );
 
 ?>

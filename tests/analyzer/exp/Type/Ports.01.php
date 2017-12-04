@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array(20, 
-                      110, 
-                      23, 
-                      25, 
+$expected     = array(20,
+                      110,
+                      23,
+                      25,
                       119,
                      );
 

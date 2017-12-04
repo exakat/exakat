@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('SWFMovie( )', 
-                      'SWFSprite( )', 
-                      'SWFShape( )');
+$expected     = array('SWFMovie( )',
+                      'SWFSprite( )',
+                      'SWFShape( )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

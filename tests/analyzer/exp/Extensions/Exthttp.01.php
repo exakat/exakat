@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('HttpRequest');
+$expected     = array('HttpRequest',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

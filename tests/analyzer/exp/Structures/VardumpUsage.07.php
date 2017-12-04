@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('var_export($b)');
+$expected     = array('var_export($b)',
+                     );
 
-$expected_not = array('var_export($a, 1)');
+$expected_not = array('var_export($a, 1)',
+                     );
 
 ?>

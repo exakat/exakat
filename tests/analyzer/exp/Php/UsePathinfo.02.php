@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$exploded = explode(\'.\', $filename)');
+$expected     = array('$exploded = explode(\'.\', $filename)',
+                     );
 
-$expected_not = array('$temp = split(\'a\', $config)');
+$expected_not = array('$temp = split(\'a\', $config)',
+                     );
 
 ?>

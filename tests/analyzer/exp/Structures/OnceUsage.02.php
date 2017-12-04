@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('require_once CONSTANTE', 
+$expected     = array('require_once CONSTANTE',
                       'include_once \'include.php\' or die ',
                      );
 

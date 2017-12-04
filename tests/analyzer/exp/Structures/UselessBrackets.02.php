@@ -3,7 +3,7 @@
 $expected     = array(' { /**/ } ',
                      );
 
-$expected_not = array( 'public function a($queue) { /**/ } ',
+$expected_not = array('public function a($queue) { /**/ } ',
                      );
 
 ?>

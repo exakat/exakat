@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('./tests/analyzer/source/Structures/AlternativeConsistenceByFile.02.php');
+$expected_not = array('./tests/analyzer/source/Structures/AlternativeConsistenceByFile.02.php',
+                     );
 
 ?>

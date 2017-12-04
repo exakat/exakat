@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\ServiceManager\AbstractPluginManager( )');
+$expected     = array('Zend\\ServiceManager\\AbstractPluginManager( )',
+                     );
 
-$expected_not = array('Zend\ServiceManager\AbstractPluginManager\NotZend( )');
+$expected_not = array('Zend\\ServiceManager\\AbstractPluginManager\\NotZend( )',
+                     );
 
 ?>

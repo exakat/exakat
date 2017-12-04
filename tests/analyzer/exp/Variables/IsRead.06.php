@@ -3,9 +3,11 @@
 $expected     = array('$a',
                       '$a',
                       '$e',
-                      '$c');
+                      '$c',
+                     );
 
 $expected_not = array('$b',
-                      '$d');
+                      '$d',
+                     );
 
 ?>

@@ -5,8 +5,9 @@ $expected     = array('global $$x',
                       'global ${y[2]}',
                       'global ${$foo->bar}',
                       'global $$foo->bar',
-                      );
+                     );
 
-$expected_not = array('global $x');
+$expected_not = array('global $x',
+                     );
 
 ?>

@@ -1,10 +1,12 @@
 <?php
 
-$expected     = array( 'namespace   { /**/ } ', 
-                       'namespace   { /**/ } ', 
-                       'namespace B\D { /**/ } ', 
-                       'namespace R { /**/ } ');
+$expected     = array('namespace   { /**/ } ',
+                      'namespace   { /**/ } ',
+                      'namespace B\\D { /**/ } ',
+                      'namespace R { /**/ } ',
+                     );
 
-$expected_not = array('namespace Global', );
+$expected_not = array('namespace Global',
+                     );
 
 ?>

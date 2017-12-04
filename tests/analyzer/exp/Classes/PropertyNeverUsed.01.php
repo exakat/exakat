@@ -2,8 +2,9 @@
 
 $expected     = array('$notUsedVar',
                       '$nonPrivate',
-);
+                     );
 
-$expected_not = array('$usedVar');
+$expected_not = array('$usedVar',
+                     );
 
 ?>

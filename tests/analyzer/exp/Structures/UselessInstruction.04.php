@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('-$f');
+$expected     = array('-$f',
+                     );
 
 $expected_not = array('$a instanceof B',
-                      '$d-e()');
+                      '$d-e()',
+                     );
 
 ?>

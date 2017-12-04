@@ -7,9 +7,9 @@ $expected     = array('foreach($_FILES["pictures"]["error"] as $key => $error) {
                       'move_uploaded_file($_FILES[\'name\'][\'filename\'], 1)',
                       'move_uploaded_file(0, $_FILES[\'name\'][\'filename\'])',
                       'echo $_GET[\'incoming\']',
-                      '"{$_COOKIE[\'incoming\']}"', 
-                      '"{$_ENV[\'incoming1\']}"', 
-                      '"{$_ENV[\'incoming0\']}"', 
+                      '"{$_COOKIE[\'incoming\']}"',
+                      '"{$_ENV[\'incoming1\']}"',
+                      '"{$_ENV[\'incoming0\']}"',
                       '"{$_ENV[\'incoming2\']}"',
                      );
 

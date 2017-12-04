@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('...$$e', 
-                      '...${a::$b[$c]}', );
+$expected     = array('...$$e',
+                      '...${a::$b[$c]}',
+                     );
 
-$expected_not = array('$$E');
+$expected_not = array('$$E',
+                     );
 
 ?>

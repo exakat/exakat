@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$usedPublic');
+$expected     = array('$usedPublic',
+                     );
 
-$expected_not = array('$notUsedPublic');
+$expected_not = array('$notUsedPublic',
+                     );
 
 ?>

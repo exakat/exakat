@@ -1,9 +1,11 @@
 <?php
 
 $expected     = array('$b',
-                      '$b');
+                      '$b',
+                     );
 
 $expected_not = array('$a',
-                      '$_POST');
+                      '$_POST',
+                     );
 
 ?>

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('json_encode($arr)');
+$expected     = array('json_encode($arr)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

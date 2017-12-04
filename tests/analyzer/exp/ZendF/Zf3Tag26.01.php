@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('Zend\Tag\Cloud\Decorator\AbstractCloud( )');
+$expected_not = array('Zend\\Tag\\Cloud\\Decorator\\AbstractCloud( )',
+                     );
 
 ?>

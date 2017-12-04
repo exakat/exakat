@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('opendir(\'.\')');
+$expected     = array('opendir(\'.\')',
+                     );
 
-$expected_not = array('closedir($dir)');
+$expected_not = array('closedir($dir)',
+                     );
 
 ?>

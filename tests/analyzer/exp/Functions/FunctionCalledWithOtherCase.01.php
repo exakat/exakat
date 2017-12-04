@@ -2,10 +2,11 @@
 
 $expected     = array('Abc( )',
                       'ABC( )',
-                      'abC( )');
+                      'abC( )',
+                     );
 
 $expected_not = array('abcdge( )',
                       'abc( )',
-                      );
+                     );
 
 ?>

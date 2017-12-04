@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('function foo3($a, $b = \true) { /**/ } ', 
-                      'function foo2($a = false, $b = 1) { /**/ } ', 
+$expected     = array('function foo3($a, $b = \\true) { /**/ } ',
+                      'function foo2($a = false, $b = 1) { /**/ } ',
                       'function foo1($a = true, $b = 1) { /**/ } ',
                      );
 

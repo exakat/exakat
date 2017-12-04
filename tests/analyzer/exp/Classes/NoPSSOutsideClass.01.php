@@ -21,7 +21,7 @@ $expected     = array('self::$a',
                       'new self(1)',
                       'new static(1)',
                       'new parent(1)',
-);
+                     );
 
 $expected_not = array('self::mt( )',
                       'parent::mt( )',
@@ -40,7 +40,7 @@ $expected_not = array('self::mt( )',
                       'parent::At',
                       'self::mc( )',
                       'static::mc( )',
-                      'parent::mc( )'
-                      );
+                      'parent::mc( )',
+                     );
 
 ?>

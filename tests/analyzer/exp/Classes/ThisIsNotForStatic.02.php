@@ -10,6 +10,6 @@ $expected_not = array('static function staticMethod( ) { /**/ } ',
                       'static function realFunction( ) { /**/ } ',
                       'static function nonStaticMethod( ) { /**/ } ',
                       'static function nonStaticMethodInTrait( ) { /**/ } ',
-                      );
+                     );
 
 ?>

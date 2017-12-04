@@ -1,10 +1,12 @@
 <?php
 
 $expected     = array('t',
-                      'i');
+                      'i',
+                     );
 
 $expected_not = array('',
                       'tt',
-                      'ii');
+                      'ii',
+                     );
 
 ?>

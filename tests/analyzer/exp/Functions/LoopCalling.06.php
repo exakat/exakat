@@ -1,10 +1,11 @@
 <?php
 
-$expected     = array('generator', 
-                      'generator2');
+$expected     = array('generator',
+                      'generator2',
+                     );
 
-$expected_not = array('generator3', 
-                      'foo', 
-                      );
+$expected_not = array('generator3',
+                      'foo',
+                     );
 
 ?>

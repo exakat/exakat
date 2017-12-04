@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('ZMQSocket( )');
+$expected     = array('ZMQSocket( )',
+                     );
 
-$expected_not = array('$z');
+$expected_not = array('$z',
+                     );
 
 ?>

@@ -1,8 +1,9 @@
 <?php
 
 $expected     = array('interface unusedInterface { /**/ } ',
-                      'interface d extends usedInterfaceImplements2 { /**/ } ', 
-                      'interface d2 extends \\usedInterfaceFPImplements2 { /**/ } ');
+                      'interface d extends usedInterfaceImplements2 { /**/ } ',
+                      'interface d2 extends \\usedInterfaceFPImplements2 { /**/ } ',
+                     );
 
 $expected_not = array('interface usedInterfaceFPImplements { /**/ } ',
                       'interface usedInterfaceImplements { /**/ } ',
@@ -11,6 +12,7 @@ $expected_not = array('interface usedInterfaceFPImplements { /**/ } ',
                       'interface usedInterfaceInstanceof { /**/ } ',
                       'interface usedInterfaceFPInstanceof { /**/ } ',
                       'interface usedInterfaceTypehint { /**/ } ',
-                      'interface usedInterfaceFPTypehint { /**/ } ');
+                      'interface usedInterfaceFPTypehint { /**/ } ',
+                     );
 
 ?>

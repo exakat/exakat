@@ -3,8 +3,10 @@
 $expected     = array('global $for',
                       'global $foreach',
                       'global $dowhile',
-                      'global $while');
+                      'global $while',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('public function __sleep( ) { /**/ } ', 
+$expected     = array('public function __sleep( ) { /**/ } ',
                       'public function __isset($a) { /**/ } ',
                      );
 

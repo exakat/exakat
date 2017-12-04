@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array("mssql_connect(\$server, 'sa', 'phpfi')");
+$expected     = array('mssql_connect($server, \'sa\', \'phpfi\')',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

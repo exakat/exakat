@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$class::Staticmethod( )', 
+$expected     = array('$class::Staticmethod( )',
                       '$class::$property',
                       'constant("x::constante")',
                      );

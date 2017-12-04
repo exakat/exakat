@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('trait tUserKO { /**/ } ');
+$expected     = array('trait tUserKO { /**/ } ',
+                     );
 
-$expected_not = array('trait tUserOK { /**/ } ');
+$expected_not = array('trait tUserOK { /**/ } ',
+                     );
 
 ?>

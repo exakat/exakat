@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array("explode('1', '2')");
+$expected     = array('explode(\'1\', \'2\')',
+                     );
 
-$expected_not = array("explode('1', '3')");
+$expected_not = array('explode(\'1\', \'3\')',
+                     );
 
 ?>

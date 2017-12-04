@@ -5,7 +5,7 @@ $expected     = array('$q',
                       '$q',
                       '$p',
                       '$p',
-                      );
+                     );
 
 $expected_not = array('$a',
                       '$b',
@@ -22,6 +22,6 @@ $expected_not = array('$a',
                       '$m',
                       '$n',
                       '$o',
-                      );
+                     );
 
 ?>

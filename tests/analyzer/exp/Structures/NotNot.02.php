@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('!(!$c)');
+$expected     = array('!(!$c)',
+                     );
 
-$expected_not = array('!$d');
+$expected_not = array('!$d',
+                     );
 
 ?>

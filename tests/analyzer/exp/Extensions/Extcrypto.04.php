@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('namespace Crypto { /**/ } ');
+$expected     = array('namespace Crypto { /**/ } ',
+                     );
 
-$expected_not = array('namespace Crypto2 { /**/ } ');
+$expected_not = array('namespace Crypto2 { /**/ } ',
+                     );
 
 ?>

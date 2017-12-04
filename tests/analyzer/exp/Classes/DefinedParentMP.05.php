@@ -1,11 +1,12 @@
 <?php
 
-$expected     = array('parent::$zu', // public
-                      'parent::$zo', // protected
-                      );
+$expected     = array('parent::$zu',
+                      'parent::$zo',
+                     );
 
-$expected_not = array('parent::$zi', // private
-                      'parent::$y', 
-                      'parent::y( )', 
-                      );
+$expected_not = array('parent::$zi',
+                      'parent::$y',
+                      'parent::y( )',
+                     );
+
 ?>

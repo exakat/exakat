@@ -9,6 +9,6 @@ $expected_not = array('function foo( $i ) { /**/ } ',
                       'function foo( $t ) { /**/ } ',
                       'function ( $x ) { /**/ } ',
                       'class { /**/ } ',
-                      );
+                     );
 
 ?>

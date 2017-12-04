@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('AnotherException', 
-                      'SomeException');
+$expected     = array('AnotherException',
+                      'SomeException',
+                     );
 
-$expected_not = array('NotAClass');
+$expected_not = array('NotAClass',
+                     );
 
 ?>

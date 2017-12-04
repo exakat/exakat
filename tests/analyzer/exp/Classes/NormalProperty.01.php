@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('$put', 
-                      '$prt', 
+$expected     = array('$put',
+                      '$prt',
                       '$put2',
                       '$prit',
                       '$prt2',
@@ -9,15 +9,16 @@ $expected     = array('$put',
                       '$prit2',
                       '$prx2',
                       '$pux2',
-                      '$prx', 
+                      '$prx',
                       '$prix2',
-                      '$pux');
+                      '$pux',
+                     );
 
 $expected_not = array('$stat',
                       '$stax',
                       '$stat2',
                       '$stax2',
-                      '$yfv'
-                      );
+                      '$yfv',
+                     );
 
 ?>

@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('V8Js( )', 
-                      'V8JsException');
+$expected     = array('V8Js( )',
+                      'V8JsException',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

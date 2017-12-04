@@ -1,10 +1,12 @@
 <?php
 
-$expected     = array('$x = new Exception( )', 
-                      'new Exception2( )', 
+$expected     = array('$x = new Exception( )',
+                      'new Exception2( )',
                       'new Exception( )',
-                      '$x');
+                      '$x',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

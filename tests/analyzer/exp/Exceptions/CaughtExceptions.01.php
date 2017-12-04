@@ -2,8 +2,10 @@
 
 $expected     = array('Exception',
                       'Exception2',
-                      '\MyException');
+                      '\\MyException',
+                     );
 
-$expected_not = array('ThrownException');
+$expected_not = array('ThrownException',
+                     );
 
 ?>

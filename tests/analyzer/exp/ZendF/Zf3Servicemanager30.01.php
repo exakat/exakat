@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\ServiceManager\Di\DiAbstractServiceFactory( )');
+$expected     = array('Zend\\ServiceManager\\Di\\DiAbstractServiceFactory( )',
+                     );
 
-$expected_not = array('Zend\ServiceManager\AbstractPluginManager( )');
+$expected_not = array('Zend\\ServiceManager\\AbstractPluginManager( )',
+                     );
 
 ?>

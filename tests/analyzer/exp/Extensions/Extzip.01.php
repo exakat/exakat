@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('ZipArchive( )', 
-                      'ZipArchive');
+$expected     = array('ZipArchive( )',
+                      'ZipArchive',
+                     );
 
 $expected_not = array('Zip( )',
-                      'ZipArchive(3)');
+                      'ZipArchive(3)',
+                     );
 
 ?>

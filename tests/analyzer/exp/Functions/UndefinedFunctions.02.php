@@ -1,13 +1,15 @@
 <?php
 
 $expected     = array('B( )',
-                      'I( )', 
-                      'D( )');
+                      'I( )',
+                      'D( )',
+                     );
 
 $expected_not = array('C( )',
-                      '\A\A()', 
+                      '\\A\\A()',
                       'E( )',
                       'G( )',
-                      '\strtolower(1)');
+                      '\\strtolower(1)',
+                     );
 
 ?>

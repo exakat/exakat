@@ -1,10 +1,11 @@
 <?php
 
-$expected     = array('\\ArrayAccess',);
+$expected     = array('\\ArrayAccess',
+                     );
 
 $expected_not = array('False',
                       '\\C\\ArrayAccess',
-                      'Null'
-);
+                      'Null',
+                     );
 
 ?>

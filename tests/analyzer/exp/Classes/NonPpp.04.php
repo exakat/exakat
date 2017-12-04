@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('final static function finalFS( ) { /**/ } ', 
+$expected     = array('final static function finalFS( ) { /**/ } ',
                       'static final function finalSF( ) { /**/ } ',
                      );
 

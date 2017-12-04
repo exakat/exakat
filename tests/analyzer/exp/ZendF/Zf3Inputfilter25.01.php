@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\InputFilter\ConfigProvider( )');
+$expected     = array('Zend\\InputFilter\\ConfigProvider( )',
+                     );
 
-$expected_not = array('Zend\InputFilter\ArrayInput( )');
+$expected_not = array('Zend\\InputFilter\\ArrayInput( )',
+                     );
 
 ?>

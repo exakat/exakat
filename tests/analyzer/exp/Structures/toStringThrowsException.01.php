@@ -7,4 +7,5 @@ $expected_not = array('public function __toSTRING( ) { /**/ } ',
                       'public function __TOString( ) { /**/ } ',
                       'function y( ) { /**/ } ',
                      );
+
 ?>

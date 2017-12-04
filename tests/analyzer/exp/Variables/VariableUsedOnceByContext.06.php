@@ -3,9 +3,10 @@
 $expected     = array('$d',
                       '$c',
                       '$e',
-                      '$d' // $d is in the closure and not in the closure
-);
+                      '$d',
+                     );
 
-$expected_not = array('$b');
+$expected_not = array('$b',
+                     );
 
 ?>

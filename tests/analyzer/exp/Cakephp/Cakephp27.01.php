@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('\StringTest( )');
+$expected     = array('\\StringTest( )',
+                     );
 
-$expected_not = array('\DbAclSchema( )');
+$expected_not = array('\\DbAclSchema( )',
+                     );
 
 ?>

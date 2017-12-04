@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('$global', 
-                      '$globalWithGlobal', 
-                      '$global2');
+$expected     = array('$global',
+                      '$globalWithGlobal',
+                      '$global2',
+                     );
 
-$expected_not = array('$functionVar');
+$expected_not = array('$functionVar',
+                     );
 
 ?>

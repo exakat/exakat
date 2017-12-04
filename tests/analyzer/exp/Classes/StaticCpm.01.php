@@ -3,8 +3,10 @@
 $expected     = array('staticm',
                       '$staticp',
                       '$staticpt',
-                      '$staticpr');
+                      '$staticpr',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

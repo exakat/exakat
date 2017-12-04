@@ -8,12 +8,13 @@ $expected     = array('(double) (date_sun_info( ))',
                       '(integer) (curl_errno( ))',
                       '(bool) (array_key_exists($a, $b))',
                       '(boolean) (phpinfo( ))',
-                      '(string) (trim($a))',);
+                      '(string) (trim($a))',
+                     );
 
 $expected_not = array('(integer) ($a->curl_errno())',
                       '(integer) (A::curl_errno())',
                       '(integer) ($a->$curl_errno())',
-                      '(integer) (A::$curl_errno())'
-);
+                      '(integer) (A::$curl_errno())',
+                     );
 
 ?>

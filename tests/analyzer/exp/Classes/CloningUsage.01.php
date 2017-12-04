@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('clone $x',
-                      'clone ($y)');
+                      'clone ($y)',
+                     );
 
-$expected_not = array('clone($z)');
+$expected_not = array('clone($z)',
+                     );
 
 ?>

@@ -2,7 +2,7 @@
 
 $expected     = array('$c1 instanceof parent',
                       '$c3 instanceof parent',
-                      );
+                     );
 
 $expected_not = array('$c2 instanceof parent',
                       '$a1 instanceof self',
@@ -11,6 +11,6 @@ $expected_not = array('$c2 instanceof parent',
                       '$b1 instanceof static',
                       '$b2 instanceof static',
                       '$b3 instanceof static',
-                      );
+                     );
 
 ?>

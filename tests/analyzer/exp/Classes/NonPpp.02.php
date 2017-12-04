@@ -5,7 +5,7 @@ $expected     = array('var $varp = 2',
                      );
 
 $expected_not = array('private $varPrivate, $varPrivate2',
-                      '$varPrivate', 
+                      '$varPrivate',
                       '$varPrivate2',
                      );
 

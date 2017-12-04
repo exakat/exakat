@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('mcrypt_generic_end( )',
-                      'mysql_list_dbs( )');
+                      'mysql_list_dbs( )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

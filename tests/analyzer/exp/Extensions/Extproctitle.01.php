@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('setproctitle("myscript")');
+$expected     = array('setproctitle("myscript")',
+                     );
 
-$expected_not = array('setthreadtitle("myscript")');
+$expected_not = array('setthreadtitle("myscript")',
+                     );
 
 ?>

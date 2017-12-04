@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('class xWrongOrder { /**/ } ');
+$expected     = array('class xWrongOrder { /**/ } ',
+                     );
 
-$expected_not = array('class xGoodOrder { /**/ } ');
+$expected_not = array('class xGoodOrder { /**/ } ',
+                     );
 
 ?>

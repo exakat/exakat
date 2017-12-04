@@ -1,10 +1,11 @@
 <?php
 
-$expected     = array('\Reflector',
-                      'Reflector', // should find one, not two
-                      '\Reflector');
+$expected     = array('\\Reflector',
+                      'Reflector',
+                      '\\Reflector',
+                     );
 
-$expected_not = array('Reflector' // should find one, not two
+$expected_not = array('Reflector',
                      );
 
 ?>

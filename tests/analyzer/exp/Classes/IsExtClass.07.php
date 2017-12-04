@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('\Stdclass');
+$expected     = array('\\Stdclass',
+                     );
 
-$expected_not = array('\ArrayAccess');
+$expected_not = array('\\ArrayAccess',
+                     );
 
 ?>

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('class fluent { /**/ } ');
+$expected     = array('class fluent { /**/ } ',
+                     );
 
-$expected_not = array('class Notfluent { /**/ } ');
+$expected_not = array('class Notfluent { /**/ } ',
+                     );
 
 ?>

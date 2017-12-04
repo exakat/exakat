@@ -1,9 +1,10 @@
 <?php
 
 $expected     = array('$x .= \'e\'',
-                      '$x .= \'d\'',);
+                      '$x .= \'d\'',
+                     );
 
 $expected_not = array('$x .= foo($a)',
-                      );
+                     );
 
 ?>

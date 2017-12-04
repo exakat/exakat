@@ -1,9 +1,11 @@
 <?php
 
 $expected     = array('UndefinedClass( )',
-                      'Exception( )');
+                      'Exception( )',
+                     );
 
 $expected_not = array('DefinedClass( )',
-                      '\\Exception( )');
+                      '\\Exception( )',
+                     );
 
 ?>

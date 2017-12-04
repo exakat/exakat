@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$usedVar');
+$expected     = array('$usedVar',
+                     );
 
-$expected_not = array('$notUsedVar');
+$expected_not = array('$notUsedVar',
+                     );
 
 ?>

@@ -3,9 +3,11 @@
 $expected     = array('$implicitGlobalVar',
                       '$implicitGlobalVar',
                       '$argv',
-                      '$argc');
+                      '$argc',
+                     );
 
 $expected_not = array('$explicitGlobalVar',
-                      '$explicitGlobalVar');
+                      '$explicitGlobalVar',
+                     );
 
 ?>

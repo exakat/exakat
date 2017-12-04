@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('class oldStyleConstructor { /**/ } ');
+$expected     = array('class oldStyleConstructor { /**/ } ',
+                     );
 
-$expected_not = array('class newStyleConstructor { /**/ } ');
+$expected_not = array('class newStyleConstructor { /**/ } ',
+                     );
 
 ?>

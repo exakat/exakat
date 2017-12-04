@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('Console_Getopt', 
-                      'Console_Getopt( )');
+$expected     = array('Console_Getopt',
+                      'Console_Getopt( )',
+                     );
 
-$expected_not = array('$b::$a3[\'b3\']( )');
+$expected_not = array('$b::$a3[\'b3\']( )',
+                     );
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('MY_EOL . \'C\' . CLASS_EOL', 
+$expected     = array('MY_EOL . \'C\' . CLASS_EOL',
                       'SQLITE3_NUM . \'D\'',
                      );
 

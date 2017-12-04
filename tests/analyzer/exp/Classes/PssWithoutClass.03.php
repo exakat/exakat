@@ -1,9 +1,11 @@
 <?php
 
 $expected     = array('STATIC::$c',
-                      'PARENT::$d');
+                      'PARENT::$d',
+                     );
 
 $expected_not = array('static::$c',
-                      'parent::$d');
+                      'parent::$d',
+                     );
 
 ?>

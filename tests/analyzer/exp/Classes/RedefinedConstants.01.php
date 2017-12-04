@@ -6,9 +6,10 @@ $expected     = array('C = 1',
                       'C = 1',
                       'AB = 2',
                       'AC = 3',
-);
+                     );
 
 $expected_not = array('B = 1',
-                      'A = 1');
+                      'A = 1',
+                     );
 
 ?>

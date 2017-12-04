@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('ctype_alnum($testcase)');
+$expected     = array('ctype_alnum($testcase)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

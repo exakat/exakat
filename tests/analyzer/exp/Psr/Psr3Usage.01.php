@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('\Psr\Log\LoggerInterface');
+$expected     = array('\\Psr\\Log\\LoggerInterface',
+                     );
 
-$expected_not = array('Psr\Log\LoggerInterface',
-                      '\Psr\Log\LoggerInterface2');
+$expected_not = array('Psr\\Log\\LoggerInterface',
+                      '\\Psr\\Log\\LoggerInterface2',
+                     );
 
 ?>

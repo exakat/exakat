@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('serialize');
+$expected     = array('serialize',
+                     );
 
-$expected_not = array('pack', 
+$expected_not = array('pack',
                       'unpack',
-                      'strtolower');
+                      'strtolower',
+                     );
 
 ?>

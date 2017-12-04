@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('./tests/analyzer/source/Php/DeclareTicks.02.php');
+$expected     = array('./tests/analyzer/source/Php/DeclareTicks.02.php',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

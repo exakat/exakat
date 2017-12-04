@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array("'a' . '' . 'b'",
-                      "'d' . \"\" . 'e'");
+$expected     = array('\'a\' . \'\' . \'b\'',
+                      '\'d\' . "" . \'e\'',
+                     );
 
-$expected_not = array('"$c$d"');
+$expected_not = array('"$c$d"',
+                     );
 
 ?>

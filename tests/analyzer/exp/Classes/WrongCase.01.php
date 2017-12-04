@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('X::y( )');
+$expected     = array('X::y( )',
+                     );
 
-$expected_not = array('x::y( )');
+$expected_not = array('x::y( )',
+                     );
 
 ?>

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('\\Cookie( )');
+$expected     = array('\\Cookie( )',
+                     );
 
-$expected_not = array('\\Slim_Environment( )');
+$expected_not = array('\\Slim_Environment( )',
+                     );
 
 ?>

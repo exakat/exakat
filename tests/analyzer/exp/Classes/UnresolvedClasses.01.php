@@ -1,19 +1,16 @@
 <?php
 
-$expected     = array('bax( )',  // namespace a
-
-                      'abx( )',   // namespace b
-
-                      'abx( )',   // namespace c
-                      'bax( )', 
-
-                      'f\\abx( )', // namespace d12
+$expected     = array('bax( )',
+                      'abx( )',
+                      'abx( )',
                       'bax( )',
-                      );
+                      'f\\abx( )',
+                      'bax( )',
+                     );
 
-$expected_not = array('e\abx( )',
-                      'a\abx( )',
-                      'f\abx()',
+$expected_not = array('e\\abx( )',
+                      'a\\abx( )',
+                      'f\\abx()',
                      );
 
 ?>

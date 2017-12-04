@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('newt_cls( )');
+$expected     = array('newt_cls( )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

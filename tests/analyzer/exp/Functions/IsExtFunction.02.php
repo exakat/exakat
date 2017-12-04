@@ -1,13 +1,15 @@
 <?php
 
 $expected     = array('exit($f)',
-                      'unset($b)', 
-                      'isset($a)', 
+                      'unset($b)',
+                      'isset($a)',
                       'echo $c',
                       'strtolower($e)',
                       'die($g)',
-                      'print ($d)');
+                      'print ($d)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

@@ -1,12 +1,13 @@
 <?php
 
-$expected     = array('$privatepa = array( )', 
-                      '$privatepsstatic = 1', 
+$expected     = array('$privatepa = array( )',
+                      '$privatepsstatic = 1',
                       '$privatepsself = 1',
-                      '$privatep', 
-);
+                      '$privatep',
+                     );
 
 $expected_not = array('$publicp = array( )',
-                      '$privateUnused' );
+                      '$privateUnused',
+                     );
 
 ?>

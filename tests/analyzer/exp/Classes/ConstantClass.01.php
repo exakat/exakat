@@ -1,9 +1,11 @@
 <?php
 
 $expected     = array('interface i { /**/ } ',
-                      'class x { /**/ } ');
+                      'class x { /**/ } ',
+                     );
 
 $expected_not = array('class x2 { /**/ } ',
-                      'interface i2 { /**/ } ');
+                      'interface i2 { /**/ } ',
+                     );
 
 ?>

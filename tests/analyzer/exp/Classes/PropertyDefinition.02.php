@@ -1,7 +1,13 @@
 <?php
 
-$expected     = array('$ahv', '$ahpr', '$ahpo', '$ahpu', '$ahs');
+$expected     = array('$ahv',
+                      '$ahpr',
+                      '$ahpo',
+                      '$ahpu',
+                      '$ahs',
+                     );
 
-$expected_not = array('h');
+$expected_not = array('h',
+                     );
 
 ?>

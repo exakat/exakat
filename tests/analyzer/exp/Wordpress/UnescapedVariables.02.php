@@ -1,10 +1,12 @@
 <?php
 
-$expected     = array('<?= $G', 
+$expected     = array('<?= $G',
                       'print $a . \' b \' . $c',
-                      '<?= ($e . $g)');
+                      '<?= ($e . $g)',
+                     );
 
 $expected_not = array('print(esc_html($x))',
-                      'esc_html($e) . esc_xml($g)');
+                      'esc_html($e) . esc_xml($g)',
+                     );
 
 ?>

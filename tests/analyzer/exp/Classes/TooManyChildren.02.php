@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('class a extends c { /**/ } ');
+$expected     = array('class a extends c { /**/ } ',
+                     );
 
 $expected_not = array('class b { /**/ } ',
-                      'class c { /**/ } ',);
+                      'class c { /**/ } ',
+                     );
 
 ?>

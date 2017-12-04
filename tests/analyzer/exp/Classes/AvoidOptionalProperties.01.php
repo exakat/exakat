@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('$this->optionCondition', 
+$expected     = array('$this->optionCondition',
                       'empty($this->optionalEmpty)',
-                      '$this->optionalComparison === null');
+                      '$this->optionalComparison === null',
+                     );
 
-$expected_not = array('$this->notOptional');
+$expected_not = array('$this->notOptional',
+                     );
 
 ?>

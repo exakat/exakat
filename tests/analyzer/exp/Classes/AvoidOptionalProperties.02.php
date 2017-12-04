@@ -4,7 +4,7 @@ $expected     = array('$this->optionalComparison === null',
                       'empty($this->optionalComparison2)',
                       'isset($this->optionalComparison3)',
                       'is_null($this->optionalComparison4)',
-);
+                     );
 
 $expected_not = array('$a->optionalAComparison === null',
                       'empty($a->optionalAComparison2)',
@@ -13,6 +13,7 @@ $expected_not = array('$a->optionalAComparison === null',
                       '$this->optionalComparisonArray === null',
                       'empty($this->optionalComparisonArray2)',
                       'isset($this->optionalComparisonArray3)',
-                      'is_null($this->optionalComparisonArray4)',);
+                      'is_null($this->optionalComparisonArray4)',
+                     );
 
 ?>

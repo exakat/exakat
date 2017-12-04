@@ -9,8 +9,10 @@ $expected     = array('str_replace(\'a\', \'b\', $c)',
                       'implode(\'i\', $a)',
                       'implode(\'i\', $a)',
                       'implode(\'i\', $a)',
-                      'implode(\'i\', $a)',);
+                      'implode(\'i\', $a)',
+                     );
 
-$expected_not = array('str_replace(\'i\', \'g\', $c)');
+$expected_not = array('str_replace(\'i\', \'g\', $c)',
+                     );
 
 ?>

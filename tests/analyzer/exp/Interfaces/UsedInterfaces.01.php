@@ -7,8 +7,10 @@ $expected     = array('interface usedInterfaceFPImplements { /**/ } ',
                       'interface usedInterfaceInstanceof { /**/ } ',
                       'interface usedInterfaceFPInstanceof { /**/ } ',
                       'interface usedInterfaceTypehint { /**/ } ',
-                      'interface usedInterfaceFPTypehint { /**/ } ');
+                      'interface usedInterfaceFPTypehint { /**/ } ',
+                     );
 
-$expected_not = array('interface usedInterfaceUnused { /**/ } ',);
+$expected_not = array('interface usedInterfaceUnused { /**/ } ',
+                     );
 
 ?>

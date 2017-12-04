@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('$outQuote', 
+$expected     = array('$outQuote',
                       '{$inQuoteVariable}',
                      );
 
-$expected_not = array('A', 
+$expected_not = array('A',
                       'B',
                      );
 

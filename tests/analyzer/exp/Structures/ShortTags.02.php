@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('<script language="php"> </script>');
+$expected     = array('<script language="php"> </script>',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

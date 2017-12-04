@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array("SQLiteDatabase('mysqlitedb')");
+$expected     = array('SQLiteDatabase(\'mysqlitedb\')',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

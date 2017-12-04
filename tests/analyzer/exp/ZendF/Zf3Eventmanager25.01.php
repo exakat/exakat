@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\EventManager\LazyEventListener( )');
+$expected     = array('Zend\\EventManager\\LazyEventListener( )',
+                     );
 
-$expected_not = array('Zend\EventManager\AbstractListenerAggregate( )');
+$expected_not = array('Zend\\EventManager\\AbstractListenerAggregate( )',
+                     );
 
 ?>

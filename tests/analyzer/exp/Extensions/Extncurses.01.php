@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('ncurses_noecho( )');
+$expected     = array('ncurses_noecho( )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

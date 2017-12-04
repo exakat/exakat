@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('use A\B\C { /**/ } ', 
-                      'use A { /**/ } ');
+$expected     = array('use A\\B\\C { /**/ } ',
+                      'use A { /**/ } ',
+                     );
 
-$expected_not = array('use Z\C\D\D\D');
+$expected_not = array('use Z\\C\\D\\D\\D',
+                     );
 
 ?>

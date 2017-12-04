@@ -2,11 +2,13 @@
 
 $expected     = array('$f',
                       '$g',
-                      '$usedOnce', 
-                      '$usedOnceMethod', 
-                      '$e');
+                      '$usedOnce',
+                      '$usedOnceMethod',
+                      '$e',
+                     );
 
 $expected_not = array('$usedTwice2',
-                      '$usedTwice');
+                      '$usedTwice',
+                     );
 
 ?>

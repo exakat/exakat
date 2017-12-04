@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('mailparse_determine_best_xfer_encoding($fp)');
+$expected     = array('mailparse_determine_best_xfer_encoding($fp)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

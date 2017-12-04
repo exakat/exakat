@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('Zend\Uri\UriFactory',
-                      'UriFactory', 
-                      'UriFactory');
+$expected_not = array('Zend\\Uri\\UriFactory',
+                      'UriFactory',
+                      'UriFactory',
+                     );
 
 ?>

@@ -1,12 +1,14 @@
 <?php
 
-$expected     = array('$GLOBALS', 
-                      '$_ENV', 
+$expected     = array('$GLOBALS',
+                      '$_ENV',
                       '$ENV',
-                      '$_COOKIE', 
-                      '$_REQUEST', 
-                      '$_POST');
+                      '$_COOKIE',
+                      '$_REQUEST',
+                      '$_POST',
+                     );
 
-$expected_not = array('$GLOBAL');
+$expected_not = array('$GLOBAL',
+                     );
 
 ?>

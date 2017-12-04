@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\XmlRpc\AbstractValue( )');
+$expected     = array('Zend\\XmlRpc\\AbstractValue( )',
+                     );
 
-$expected_not = array('Zend\XmlRpc\AbstractValue\NotZend( )');
+$expected_not = array('Zend\\XmlRpc\\AbstractValue\\NotZend( )',
+                     );
 
 ?>

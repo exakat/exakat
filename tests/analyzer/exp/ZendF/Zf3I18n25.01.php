@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\I18n\ConfigProvider( )');
+$expected     = array('Zend\\I18n\\ConfigProvider( )',
+                     );
 
-$expected_not = array('Zend\I18n\Exception\ExtensionNotLoadedException( )');
+$expected_not = array('Zend\\I18n\\Exception\\ExtensionNotLoadedException( )',
+                     );
 
 ?>

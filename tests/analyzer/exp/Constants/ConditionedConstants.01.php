@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array("'conditionedByY'",
+$expected     = array('\'conditionedByY\'',
                       '"conditionedByX"',
                      );
 
-$expected_not = array("'normalConstant'",
+$expected_not = array('\'normalConstant\'',
                      );
 
 ?>

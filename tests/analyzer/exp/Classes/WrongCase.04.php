@@ -1,9 +1,11 @@
 <?php
 
 $expected     = array('X::Za',
-                      'X::z');
+                      'X::z',
+                     );
 
 $expected_not = array('x::Za',
-                      'x::z');
+                      'x::z',
+                     );
 
 ?>

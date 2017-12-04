@@ -2,9 +2,11 @@
 
 $expected     = array('UndefinedClass',
                       'UndefinedAlias',
-                      'NonexistantAlias');
+                      'NonexistantAlias',
+                     );
 
-$expected_not = array('DefinedAlias', 
-                      'DefinedClass');
+$expected_not = array('DefinedAlias',
+                      'DefinedClass',
+                     );
 
 ?>

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array("PDO('mysql:host=localhost;dbname=test', \$user, \$pass)");
+$expected     = array('PDO(\'mysql:host=localhost;dbname=test\', $user, $pass)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

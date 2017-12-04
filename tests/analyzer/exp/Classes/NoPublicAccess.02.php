@@ -7,6 +7,6 @@ $expected     = array('$unused = 2',
 
 $expected_not = array('$usedByX = 1',
                       '$usedByXFQN = 1',
-                      );
+                     );
 
 ?>

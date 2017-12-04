@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('function variableArguments( ) { /**/ } ');
+$expected     = array('function variableArguments( ) { /**/ } ',
+                     );
 
-$expected_not = array('function normal($a, $b) { /**/ } ');
+$expected_not = array('function normal($a, $b) { /**/ } ',
+                     );
 
 ?>

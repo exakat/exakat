@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Mime\Decode( )');
+$expected     = array('Zend\\Mime\\Decode( )',
+                     );
 
-$expected_not = array('Zend\Mime\Decode\NotZend( )');
+$expected_not = array('Zend\\Mime\\Decode\\NotZend( )',
+                     );
 
 ?>

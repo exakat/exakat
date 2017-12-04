@@ -3,9 +3,10 @@
 $expected     = array('class Error',
                       'class ParseError',
                       'class ArithmeticError',
-                      'class DivisionByZeroError'
-);
+                      'class DivisionByZeroError',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

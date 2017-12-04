@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('./tests/analyzer/source/Php/DeclareStrictType.05.php');
+$expected_not = array('./tests/analyzer/source/Php/DeclareStrictType.05.php',
+                     );
 
 ?>

@@ -1,13 +1,15 @@
 <?php
 
 $expected     = array('$b = intval($c)',
-                      '$b = strtolower($c)');
+                      '$b = strtolower($c)',
+                     );
 
 $expected_not = array('C = 3',
-                      'A = 1', 
+                      'A = 1',
                       'B = 2',
                       '$y = null',
-                      '$property = 1', 
-                      '$property2 = 3');
+                      '$property = 1',
+                      '$property2 = 3',
+                     );
 
 ?>

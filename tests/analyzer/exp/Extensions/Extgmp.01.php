@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('gmp_mul($return, $i)',
-                      'gmp_strval(fact(1000))');
+                      'gmp_strval(fact(1000))',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

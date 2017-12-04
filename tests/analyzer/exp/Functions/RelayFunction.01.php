@@ -6,6 +6,6 @@ $expected     = array('function aRelay2($a) { /**/ } ',
 
 $expected_not = array('function notARelay($a) { /**/ } ',
                       'function notARelay2($a) { /**/ } ',
-                      );
+                     );
 
 ?>

@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array('$object', '$once');
+$expected     = array('$object',
+                      '$once',
+                     );
 
-$expected_not = array('$twice');
+$expected_not = array('$twice',
+                     );
 
 ?>

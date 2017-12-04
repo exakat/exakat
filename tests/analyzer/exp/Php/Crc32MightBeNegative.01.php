@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('crc32($d)');
+$expected     = array('crc32($d)',
+                     );
 
-$expected_not = array('crc32($b)');
+$expected_not = array('crc32($b)',
+                     );
 
 ?>

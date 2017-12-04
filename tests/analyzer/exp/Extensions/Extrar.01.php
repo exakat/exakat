@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('RarArchive');
+$expected     = array('RarArchive',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

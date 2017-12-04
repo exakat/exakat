@@ -1,26 +1,25 @@
 <?php
 
-$expected     = array('$aspublicButSBProtectedSelf',    // a
+$expected     = array('$aspublicButSBProtectedSelf',
                       '$aspublicButSBProtectedStatic',
                       '$aspublicButSBProtectedFull',
                       '$apublicButSBProtected',
-                                                    
-                      '$aspublicButSBProtectedSelf',    // ab
+                      '$aspublicButSBProtectedSelf',
                       '$aspublicButSBProtectedStatic',
                       '$aspublicButSBProtectedFull',
                       '$apublicButSBProtected',
-                      '$aspublicButReally', 
+                      '$aspublicButReally',
                       '$aspublicButReally2',
-                      );
+                     );
 
 $expected_not = array('$asprotected',
                       '$asprivate',
-                      '$aspublicButReally', 
+                      '$aspublicButReally',
                       '$aspublicButReally2',
-                      
                       '$aprotected',
                       '$aprivate',
-                      '$apublicButReally', 
-                      '$apublicButReally2'
-                      );
+                      '$apublicButReally',
+                      '$apublicButReally2',
+                     );
+
 ?>

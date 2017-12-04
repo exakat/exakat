@@ -1,10 +1,12 @@
 <?php
 
 $expected     = array('$_SERVER',
-                      '$argc');
+                      '$argc',
+                     );
 
 $expected_not = array('$_GET',
                       '$_POST',
-                      '$_REQUEST');
+                      '$_REQUEST',
+                     );
 
 ?>

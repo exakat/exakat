@@ -1,17 +1,17 @@
 <?php
 
 $expected     = array('undefinedInterfacet',
-                      '\undefinedInterfacet',
-                      '\undefinedInterfacei',
+                      '\\undefinedInterfacet',
+                      '\\undefinedInterfacei',
                       'undefinedInterfacei',
-                      );
-
+                     );
 
 $expected_not = array('definedInterfacet',
-                      '\definedInterfacet',
-                      '\definedInterfacei',
+                      '\\definedInterfacet',
+                      '\\definedInterfacei',
                       'definedInterfacei',
-                      'MyInterfacet', 
-                      '\MyInterfacet');
+                      'MyInterfacet',
+                      '\\MyInterfacet',
+                     );
 
 ?>

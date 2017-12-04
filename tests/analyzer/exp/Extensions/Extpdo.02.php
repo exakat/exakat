@@ -2,8 +2,10 @@
 
 $expected     = array('PDO(\'mysql:host=localhost;dbname=test\', $user, $pass)',
                       'PDOException',
-                      '\PDOException');
+                      '\\PDOException',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

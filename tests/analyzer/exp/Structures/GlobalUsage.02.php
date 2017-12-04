@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('$GLOBALS',
-                      '\'d\'');
+                      '\'d\'',
+                     );
 
-$expected_not = array('$globals');
+$expected_not = array('$globals',
+                     );
 
 ?>

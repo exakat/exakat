@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('A', 
-                      ' ', 
-                      'B');
+$expected     = array('A',
+                      ' ',
+                      'B',
+                     );
 
-$expected_not = array('Global');
+$expected_not = array('Global',
+                     );
 
 ?>

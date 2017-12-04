@@ -5,7 +5,7 @@ $expected     = array('$_server',
                      );
 
 $expected_not = array('$_POST',
-                      '$_GET', 
+                      '$_GET',
                       '$_ENV',
                       '$_REQUEST',
                      );

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('TokyoTyrant("localhost")');
+$expected     = array('TokyoTyrant("localhost")',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Captcha\AbstractAdapter( )');
+$expected     = array('Zend\\Captcha\\AbstractAdapter( )',
+                     );
 
-$expected_not = array('Zend\Captcha\AbstractAdapter\NotZend( )');
+$expected_not = array('Zend\\Captcha\\AbstractAdapter\\NotZend( )',
+                     );
 
 ?>

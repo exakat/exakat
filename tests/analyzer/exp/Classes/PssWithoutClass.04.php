@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('new PARENT( )');
+$expected     = array('new PARENT( )',
+                     );
 
-$expected_not = array('new parent( )');
+$expected_not = array('new parent( )',
+                     );
 
 ?>

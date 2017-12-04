@@ -4,10 +4,11 @@ $expected     = array('echo 1',
                       'print 2',
                       'print_r(3)',
                       'debug_print_backtrace( )',
-                      'A'
-);
+                      'A',
+                     );
 
 $expected_not = array('var_export($a, true)',
-                      '$x = strtolower($a)');
+                      '$x = strtolower($a)',
+                     );
 
 ?>

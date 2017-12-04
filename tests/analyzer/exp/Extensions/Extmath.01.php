@@ -2,8 +2,10 @@
 
 $expected     = array('sqrt(tanh($b) + dechex($c))',
                       'tanh($b)',
-                      'dechex($c)');
+                      'dechex($c)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

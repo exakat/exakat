@@ -5,12 +5,14 @@ $expected     = array('d::y( )',
                       'a::y( )',
                       'd::$x',
                       'c::$x',
-                      'a::$x',);
+                      'a::$x',
+                     );
 
 $expected_not = array('b::$x',
                       'b::y()',
                       'd::$xpr',
                       'c::$xpr',
-                      'a::$xpr',);
+                      'a::$xpr',
+                     );
 
 ?>

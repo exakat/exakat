@@ -1,9 +1,11 @@
 <?php
 
 $expected     = array('Phar',
-                      'domainexception');
+                      'domainexception',
+                     );
 
 $expected_not = array('X',
-                      'Y');
+                      'Y',
+                     );
 
 ?>

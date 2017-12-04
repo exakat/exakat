@@ -3,9 +3,10 @@
 $expected     = array('\\DateTime',
                       'DateTimeImmutable',
                       '\\DateTimeZone( )',
-                      'DateInterval( )'
-);
+                      'DateInterval( )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

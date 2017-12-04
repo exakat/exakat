@@ -8,10 +8,12 @@ $expected     = array('$a',
                       '$d',
                       '$c',
                       '$GLOBALS',
-                      "'G'",
-                      "'H'",
-                      "'J'");
+                      '\'G\'',
+                      '\'H\'',
+                      '\'J\'',
+                     );
 
-$expected_not = array('$z');
+$expected_not = array('$z',
+                     );
 
 ?>

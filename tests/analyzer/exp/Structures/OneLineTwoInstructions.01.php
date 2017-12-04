@@ -3,10 +3,11 @@
 $expected     = array('$a++',
                       '$b++',
                       '$d++',
-                      'h($i)');
+                      'h($i)',
+                     );
 
 $expected_not = array('$c++',
                       '$e = $f + 1',
-                      );
+                     );
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('$mixtedStatic', 
-                      '$mixtedStatic'
+$expected     = array('$mixtedStatic',
+                      '$mixtedStatic',
                      );
 
 $expected_not = array('$noneStatic',

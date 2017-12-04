@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
 $expected_not = array('$x',
-                      "'NAME_OK'", 
-                      "'__VALUE__'",
-                      '__'.'CANT_FIND'.'__'
-
-);
+                      '\'NAME_OK\'',
+                      '\'__VALUE__\'',
+                      '__CANT_FIND__',
+                     );
 
 ?>

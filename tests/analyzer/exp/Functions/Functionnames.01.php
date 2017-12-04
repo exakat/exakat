@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('reallyAFunction');
+$expected     = array('reallyAFunction',
+                     );
 
-$expected_not = array('thisIsAMethod');
+$expected_not = array('thisIsAMethod',
+                     );
 
 ?>

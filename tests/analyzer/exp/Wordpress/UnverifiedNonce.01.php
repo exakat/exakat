@@ -1,14 +1,15 @@
 <?php
 
 $expected     = array('\'unChecked\'',
-                      '\'unCheckedAtWrongPosition\'');
+                      '\'unCheckedAtWrongPosition\'',
+                     );
 
 $expected_not = array('\'forVerifyPost\'',
                       '\'forVerifyGet\'',
                       '\'forVerifyRequest\'',
                       '\'forAjax\'',
                       '\'unCheckedAtWrongPosition\'',
-                      '\'uncreated\''
-);
+                      '\'uncreated\'',
+                     );
 
 ?>

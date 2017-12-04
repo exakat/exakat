@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('float &$float = 2.0', 
-                      'int &$int = 1', 
-                      'bool &$bool = false', 
+$expected     = array('float &$float = 2.0',
+                      'int &$int = 1',
+                      'bool &$bool = false',
                       'string &$string = "3"',
                      );
 

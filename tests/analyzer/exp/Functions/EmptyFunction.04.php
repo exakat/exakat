@@ -7,8 +7,10 @@ $expected     = array('function mcEmpty( ) { /**/ } ',
                       'function mabSurcharged( ) { /**/ } ',
                       'function maEmpty( ) { /**/ } ',
                       'function ( ) { /**/ } ',
-                      'function ThisIsEmpty( ) { /**/ } ',);
+                      'function ThisIsEmpty( ) { /**/ } ',
+                     );
 
-$expected_not = array('function ThisIsNotEmpty(){ /**/ }');
+$expected_not = array('function ThisIsNotEmpty(){ /**/ }',
+                     );
 
 ?>

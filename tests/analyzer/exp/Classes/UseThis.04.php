@@ -1,13 +1,13 @@
 <?php
 
-$expected     = array('function bothpropertyandmethod( ) { /**/ } ', 
-                      'function property( ) { /**/ } ', 
+$expected     = array('function bothpropertyandmethod( ) { /**/ } ',
+                      'function property( ) { /**/ } ',
                       'function method( ) { /**/ } ',
-                      'static public function nothingButStatic( ) { /**/ } ', 
-                      'public static function nothingButStatic2( ) { /**/ } '
- );
+                      'static public function nothingButStatic( ) { /**/ } ',
+                      'public static function nothingButStatic2( ) { /**/ } ',
+                     );
 
-$expected_not = array( 'function nothing( ) { /**/ } '
-);
+$expected_not = array('function nothing( ) { /**/ } ',
+                     );
 
 ?>

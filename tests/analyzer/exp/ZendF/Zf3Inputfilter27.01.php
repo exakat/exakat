@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('Zend\InputFilter\ArrayInput( )');
+$expected_not = array('Zend\\InputFilter\\ArrayInput( )',
+                     );
 
 ?>
