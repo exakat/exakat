@@ -18,7 +18,9 @@ print max($numbers)." maximum\n\n";
 // unfinished tests
 $total = 0;
 $files = glob('exp/*/*.php');
+
 foreach($files as $file) {
+    cleanTestPresentation($file);
     $php = file_get_contents($file);
     
     if ($a = preg_match_all("/,
@@ -77,8 +79,45 @@ foreach($files as $file) {
 //    die();
 }
 print "total untested class : $total\n\n";
-die();
-print shell_exec('find source -name "*.php" -print0 | xargs -0 -n1 -P8 php -l | grep -v "No syntax error"');
-print shell_exec('find exp -name "*.php" -print0 | xargs -0 -n1 -P8 php -l | grep -v "No syntax error"');
+
+function cleanTestPresentation($file) {
+    $original = file_get_contents($file);
+    
+    try {
+        eval(substr($original, 5, -3));
+    } catch (Throwable $e){
+        print "Skipping $file : ".$e->getMessage()."\n";
+        return;
+    }
+    
+    $expected_php = array_map(function ($x) { return var_export($x, true); }, $expected);
+    $expected_not_php = array_map(function ($x) { return var_export($x, true); }, $expected_not);
+    
+    $e = implode(',
+                      ', $expected_php);
+    if (!empty($e)) { $e .= ','; }
+    
+    $n = implode(',
+                      ', $expected_not_php);
+    if (!empty($n)) { $n .= ','; }
+
+    $php = <<<PHP
+<?php
+
+\$expected     = array($e
+                     );
+
+\$expected_not = array($n
+                     );
+
+?>
+PHP;
+
+    if ($original !== $php) {
+        print "Updated $file\n";
+    }
+
+    file_put_contents($file, $php);
+}
 
 ?>
