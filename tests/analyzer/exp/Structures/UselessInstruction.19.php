@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('count(array_keys($array))', 
+$expected     = array('count(array_keys($array))',
                       'array_unique(array_keys($array))',
                      );
 
