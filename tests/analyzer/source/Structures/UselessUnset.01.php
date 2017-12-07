@@ -19,13 +19,13 @@ function foo(&$argByReference, $argByValue) {
 
 	foreach($array as $valuep->property) {
 		unset($valuep);                      // useless
-		unset($valuep->property);            // useless
+		unset($valuep->property);            // OK 
 		unset($valuep->property->property2); // OK, if this is an object 
 	}
 
 	foreach($array as $key => $valuep2->property) {
 		unset($valuep2);                      // useless
-		unset($valuep2->property);            // useless
+		unset($valuep2->property);            // OK 
 		unset($valuep2->property->property2); // OK, if this is an object 
 	}
 }

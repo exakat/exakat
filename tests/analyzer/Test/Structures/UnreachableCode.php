@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_UnreachableCode extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testStructures_UnreachableCode01()  { $this->generic_test('Structures_UnreachableCode.01'); }
     public function testStructures_UnreachableCode02()  { $this->generic_test('Structures_UnreachableCode.02'); }
@@ -18,5 +18,6 @@ class Structures_UnreachableCode extends Analyzer {
     public function testStructures_UnreachableCode06()  { $this->generic_test('Structures/UnreachableCode.06'); }
     public function testStructures_UnreachableCode07()  { $this->generic_test('Structures/UnreachableCode.07'); }
     public function testStructures_UnreachableCode08()  { $this->generic_test('Structures/UnreachableCode.08'); }
+    public function testStructures_UnreachableCode09()  { $this->generic_test('Structures/UnreachableCode.09'); }
 }
 ?>
