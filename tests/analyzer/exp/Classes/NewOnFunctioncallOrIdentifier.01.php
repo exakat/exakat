@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('new stdClass( )');
+$expected     = array('new stdClass( )',
+                     );
 
-$expected_not = array('new stdClass');
+$expected_not = array('new stdClass',
+                     );
 
 ?>

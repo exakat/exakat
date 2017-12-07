@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('a',
-                      'b');
+                      'b',
+                     );
 
-$expected_not = array('i');
+$expected_not = array('i',
+                     );
 
 ?>

@@ -1,13 +1,15 @@
 <?php
 
-$expected     = array('customConstant', 
+$expected     = array('customConstant',
                       'customConstantByDefine',
-                      '\\customConstantUsedWithNsname', 
-                      '\\customConstantByDefineUsedWithNsname');
+                      '\\customConstantUsedWithNsname',
+                      '\\customConstantByDefineUsedWithNsname',
+                     );
 
-$expected_not = array('unusedCustomConstant', 
+$expected_not = array('unusedCustomConstant',
                       'unusedCustomConstantByDefine',
                       'MYSQLI_TYPE_STRING',
-                      '\\MYSQLI_REFRESH_SLAVE;');
+                      '\\MYSQLI_REFRESH_SLAVE;',
+                     );
 
 ?>

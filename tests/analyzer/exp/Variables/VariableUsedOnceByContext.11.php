@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('$context2');
+$expected     = array('$context2',
+                     );
 
 $expected_not = array('$this',
-                      '$context');
+                      '$context',
+                     );
 
 ?>

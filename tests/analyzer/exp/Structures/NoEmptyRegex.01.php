@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('\'abc\'', 
-                      '\'\'', 
-                      '\'1\''
-);
+$expected     = array('\'abc\'',
+                      '\'\'',
+                      '\'1\'',
+                     );
 
-$expected_not = array('\'/d/\'', 
-);
+$expected_not = array('\'/d/\'',
+                     );
 
 ?>

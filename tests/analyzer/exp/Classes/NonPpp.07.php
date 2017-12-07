@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('function x( ) { /**/ } ', 
-                      'static function x2( ) { /**/ } ', 
+$expected     = array('function x( ) { /**/ } ',
+                      'static function x2( ) { /**/ } ',
                       'final function x3( ) { /**/ } ',
                      );
 

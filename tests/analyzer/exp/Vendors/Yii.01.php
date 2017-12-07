@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('yii\web\CController',
+$expected     = array('yii\\web\\CController',
                       'CController',
                       'Yii',
                      );
 
-$expected_not = array('app\controllers',
+$expected_not = array('app\\controllers',
                       'Controller2',
                      );
 

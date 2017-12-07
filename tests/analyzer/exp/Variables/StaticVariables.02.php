@@ -1,9 +1,13 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('$staticProperty', '$noStaticPrivateProperty', 
-                      '$noStaticPublicProperty', '$noStaticProtectedProperty',
-                      'x');
+$expected_not = array('$staticProperty',
+                      '$noStaticPrivateProperty',
+                      '$noStaticPublicProperty',
+                      '$noStaticProtectedProperty',
+                      'x',
+                     );
 
 ?>

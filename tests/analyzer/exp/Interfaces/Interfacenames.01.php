@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('myInterface');
+$expected     = array('myInterface',
+                     );
 
-$expected_not = array('myClass');
+$expected_not = array('myClass',
+                     );
 
 ?>

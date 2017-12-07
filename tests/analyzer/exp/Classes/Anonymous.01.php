@@ -2,8 +2,10 @@
 
 $expected     = array('class ($i) { /**/ } ',
                       'class ($i, $j) { /**/ } ',
-                      'class { /**/ } ');
+                      'class { /**/ } ',
+                     );
 
-$expected_not = array('class x { /**/ } ');
+$expected_not = array('class x { /**/ } ',
+                     );
 
 ?>

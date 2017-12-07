@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array("DirectoryIterator('../moodle')");
+$expected     = array('DirectoryIterator(\'../moodle\')',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

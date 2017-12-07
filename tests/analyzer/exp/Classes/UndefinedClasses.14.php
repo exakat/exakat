@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('$x instanceof \ThrowableUndef');
+$expected     = array('$x instanceof \\ThrowableUndef',
+                     );
 
-$expected_not = array('\Throwable',
-                      'throwable');
+$expected_not = array('\\Throwable',
+                      'throwable',
+                     );
 
 ?>

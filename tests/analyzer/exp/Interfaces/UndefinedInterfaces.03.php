@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('\CC', 
-                      'DD');
+$expected     = array('\\CC',
+                      'DD',
+                     );
 
-$expected_not = array('$class');
+$expected_not = array('$class',
+                     );
 
 ?>

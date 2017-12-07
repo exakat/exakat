@@ -8,7 +8,8 @@ $expected     = array('$unusedGlobal1y2',
                       '$unusedGlobal',
                       '$unusedGlobalglb',
                       '$unusedGlobal2glb',
-                      '$unusedGlobal1glb');
+                      '$unusedGlobal1glb',
+                     );
 
 $expected_not = array('$usedGlobal1y2',
                       '$usedGlobal2y2',
@@ -18,6 +19,7 @@ $expected_not = array('$usedGlobal1y2',
                       '$usedGlobal',
                       '$usedGlobalglb',
                       '$usedGlobal2glb',
-                      '$usedGlobal1glb');
+                      '$usedGlobal1glb',
+                     );
 
 ?>

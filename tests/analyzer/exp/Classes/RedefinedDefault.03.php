@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$redefined = \'d\'');
+$expected     = array('$redefined = \'d\'',
+                     );
 
-$expected_not = array('$unRedefined = 2');
+$expected_not = array('$unRedefined = 2',
+                     );
 
 ?>

@@ -29,11 +29,11 @@ use Exakat\Analyzer\Common\TraitUsage;
 use Exakat\Data\CakePHP;
 
 class CakePHPUsed extends Analyzer {
-    protected $component  = null;
+    protected $component  = 'cakephp';
     protected $version    = null;
     
     public function analyze() {
-        $data = new CakePHP($this->config->dir_root.'/data', $this->config);
+        $data = new CakePHP($this->config->dir_root.'/data', $this->config->is_phar);
 
         $this->init();
         

@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('GuzzleHttp\ToArrayInterface');
+$expected     = array('GuzzleHttp\\ToArrayInterface',
+                     );
 
-$expected_not = array('NotGuzzleHttp\ToArrayInterface',
-                      'NotGuzzleHttp\NotToArrayInterface');
+$expected_not = array('NotGuzzleHttp\\ToArrayInterface',
+                      'NotGuzzleHttp\\NotToArrayInterface',
+                     );
 
 ?>

@@ -9,7 +9,7 @@ $expected     = array('public static function aspublicButSBPrivateSelf( ) { /**/
                       'function b( ) { /**/ } ',
                      );
 
-$expected_not = array('public function apublicButReally() { /**/ } ', 
+$expected_not = array('public function apublicButReally() { /**/ } ',
                       'public function apublicButReally2() { /**/ } ',
                      );
 

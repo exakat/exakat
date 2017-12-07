@@ -6,6 +6,6 @@ $expected     = array('function foofoo( ) { /**/ } ',
                      );
 
 $expected_not = array('function bar( ) { /**/ } ',
-                      );
+                     );
 
 ?>

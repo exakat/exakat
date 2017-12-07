@@ -1,9 +1,11 @@
 <?php
 
 $expected     = array('T',
-                      'C');
+                      'C',
+                     );
 
 $expected_not = array('T2',
-                      'C2');
+                      'C2',
+                     );
 
 ?>

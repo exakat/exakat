@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('fastcgi_finish_request( )');
+$expected     = array('fastcgi_finish_request( )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

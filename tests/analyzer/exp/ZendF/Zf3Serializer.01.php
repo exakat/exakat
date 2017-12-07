@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Serializer\Adapter\AbstractAdapter( )');
+$expected     = array('Zend\\Serializer\\Adapter\\AbstractAdapter( )',
+                     );
 
-$expected_not = array('Zend\Serializer\Adapter\AbstractAdapter\NotZend( )');
+$expected_not = array('Zend\\Serializer\\Adapter\\AbstractAdapter\\NotZend( )',
+                     );
 
 ?>

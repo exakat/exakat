@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('public $read = [ ]');
+$expected     = array('public $read = [ ]',
+                     );
 
-$expected_not = array('public $modified = [ ]');
+$expected_not = array('public $modified = [ ]',
+                     );
 
 ?>

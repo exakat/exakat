@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('Zend\Db\Adapter\Adapter( )');
+$expected_not = array('Zend\\Db\\Adapter\\Adapter( )',
+                     );
 
 ?>

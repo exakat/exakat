@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('htmlentities($allMissing)');
+$expected     = array('htmlentities($allMissing)',
+                     );
 
 $expected_not = array('$x->htmlentities()',
-                      'Stdclass::htmlentities(1, 2)');
+                      'Stdclass::htmlentities(1, 2)',
+                     );
 
 ?>

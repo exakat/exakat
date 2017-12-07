@@ -67,9 +67,7 @@ class Phpexec {
     private $requestedVersion = null;
 
     public function __construct($phpversion = null, $pathToBinary) {
-        if ($phpversion === null) {
-            $phpversion = $config->phpversion;
-        }
+        assert ($phpversion !== null, "Can't use null for PHP version");
         $this->requestedVersion = substr($phpversion, 0, 3);
 
         $this->version = $phpversion;
@@ -97,7 +95,7 @@ class Phpexec {
         }
 
         if (preg_match('/^php:(.+?)$/', $this->phpexec)) {
-            $folder = $config->projects_root;
+            $folder = $pathToBinary;
             $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":'.$folder.' -w '.$folder.' '.$this->phpexec.' php -v 2>&1');
 
             if (substr($res, 0, 4) !== 'PHP ') {

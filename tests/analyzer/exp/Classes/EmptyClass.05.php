@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('abstract class abstractAndEmpty { /**/ } ');
+$expected     = array('abstract class abstractAndEmpty { /**/ } ',
+                     );
 
 $expected_not = array('abstract class abstractButNotEmptyTwice { /**/ } ',
-                      'abstract class abstractButNotEmpty { /**/ } ');
+                      'abstract class abstractButNotEmpty { /**/ } ',
+                     );
 
 ?>

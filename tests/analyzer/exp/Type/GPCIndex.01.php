@@ -5,7 +5,7 @@ $expected     = array('\'triple\'',
                       '\'double\'',
                      );
 
-$expected_not = array('\'arraystring\'', 
+$expected_not = array('\'arraystring\'',
                       '\'b\'',
                      );
 

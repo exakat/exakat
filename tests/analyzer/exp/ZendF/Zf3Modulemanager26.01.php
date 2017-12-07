@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('Zend\ModuleManager\Exception\InvalidArgumentException( )');
+$expected_not = array('Zend\\ModuleManager\\Exception\\InvalidArgumentException( )',
+                     );
 
 ?>

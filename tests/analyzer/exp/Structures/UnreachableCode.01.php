@@ -6,7 +6,7 @@ $expected     = array('$unreachable1++',
                       '$unreachable4++',
                       '$unreachable5++',
                       '$unreachable6++',
-                      );
+                     );
 
 $expected_not = array('$reachable1++',
                       '$reachable2++',
@@ -17,6 +17,6 @@ $expected_not = array('$reachable1++',
                       '$reachable6++',
                       '$reachable72++',
                       '$reachable821++',
-                      );
+                     );
 
 ?>

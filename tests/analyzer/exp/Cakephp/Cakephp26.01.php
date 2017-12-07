@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('\FlashComponent( )');
+$expected     = array('\\FlashComponent( )',
+                     );
 
-$expected_not = array('\DbAclSchema( )');
+$expected_not = array('\\DbAclSchema( )',
+                     );
 
 ?>

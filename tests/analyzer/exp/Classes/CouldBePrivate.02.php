@@ -7,11 +7,11 @@ $expected     = array('$asprotectedReallyFull',
                       '$aprotectedButSBPrivate',
                       '$aprotectedButSBPrivate2',
                       '$aspublic',
-);
+                     );
 
 $expected_not = array('$aprivate',
                       '$aprotectedButSBPrivate3',
                       '$aprotectedButSBPrivate4',
-                      );
+                     );
 
 ?>

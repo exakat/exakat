@@ -6,11 +6,11 @@ $expected     = array('interface IT { /**/ } ',
                       'interface CI { /**/ } ',
                       'class CI { /**/ } ',
                       'trait IT { /**/ } ',
-                      );
+                     );
 
 $expected_not = array('interface Tu { /**/ } ',
                       'class Tv { /**/ } ',
                       'trait Tx { /**/ } ',
-                      );
+                     );
 
 ?>

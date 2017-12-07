@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('static::B');
+$expected     = array('static::B',
+                     );
 
-$expected_not = array('static::A');
+$expected_not = array('static::A',
+                     );
 
 ?>

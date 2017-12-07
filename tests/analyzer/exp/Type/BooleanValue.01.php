@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('TRUE',
-                      '\false');
+                      '\\false',
+                     );
 
-$expected_not = array("'true or FALSE'");
+$expected_not = array('\'true or FALSE\'',
+                     );
 
 ?>

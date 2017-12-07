@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array("'application/xml'",
+$expected     = array('\'application/xml\'',
                       '"text/fdf+xml"',
-                      "'audio/ogg'");
+                      '\'audio/ogg\'',
+                     );
 
-$expected_not = array('"non/mime"');
+$expected_not = array('"non/mime"',
+                     );
 
 ?>

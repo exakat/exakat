@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array("'/a/'");
+$expected     = array('\'/a/\'',
+                     );
 
-$expected_not = array("'b'",
-                      "");
+$expected_not = array('\'b\'',
+                      '',
+                     );
 
 ?>

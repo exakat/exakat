@@ -1,13 +1,14 @@
 <?php
 
-$expected     = array('SingleWithoutAliasUnused', 
-                      'OriginalBothUnusedSingleAlias as SingleAliasBothUnused', 
-                      'OriginalBothUnused as AliasBothUnused', 
+$expected     = array('SingleWithoutAliasUnused',
+                      'OriginalBothUnusedSingleAlias as SingleAliasBothUnused',
+                      'OriginalBothUnused as AliasBothUnused',
                       'OriginalUnused',
-                      'OriginalUsedSingleAlias as SingleAliasUnused', 
-                      'OriginalUsed as AliasUnused'
-);
+                      'OriginalUsedSingleAlias as SingleAliasUnused',
+                      'OriginalUsed as AliasUnused',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

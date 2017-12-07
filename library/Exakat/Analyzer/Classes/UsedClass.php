@@ -26,10 +26,6 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedClass extends Analyzer {
-    public function dependsOn() {
-        return array('Functions/MarkCallable');
-    }
-    
     public function analyze() {
 
         $new = $this->query(<<<GREMLIN
@@ -114,7 +110,7 @@ GREMLIN
         $strings = $this->query(<<<GREMLIN
 g.V().hasLabel("String").not( where( __.out("CONCAT") ) )
                         .filter{ (it.get().value("noDelimiter") =~ "::" ).getCount() == 1 }
-                        .where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable") )
+                        .where( __.in("DEFINITION") )
                         .map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
 GREMLIN
 )->toArray();
@@ -130,7 +126,7 @@ GREMLIN
         $arrays = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").out("ARGUMENT")
         .hasLabel("Arrayliteral")
-        .where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable") )
+        .where( __.out("ARGUMENT").has("rank", 0).in("DEFINITION") )
         .has("count", 2).out("ARGUMENT").has("rank", 0).values("noDelimiter").unique()
 GREMLIN
 )->toArray();

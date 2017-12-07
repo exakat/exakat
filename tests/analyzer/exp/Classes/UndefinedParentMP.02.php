@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('parent::$undefinedProperty',
-                      'parent::$definedPrivateProperty');
+                      'parent::$definedPrivateProperty',
+                     );
 
-$expected_not = array('parent::$definedProtectedProperty');
+$expected_not = array('parent::$definedProtectedProperty',
+                     );
 
 ?>

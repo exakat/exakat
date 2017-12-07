@@ -1,16 +1,18 @@
 <?php
 
-$expected     = array('\\A\\B\\C', 
-                      '-(4 + 3)', 
+$expected     = array('\\A\\B\\C',
+                      '-(4 + 3)',
                       '"String"',
-                      'MY_CONSTANT', 
+                      'MY_CONSTANT',
                       '<<<HEREDOC
 
 silly string
 
 HEREDOC
-');
+',
+                     );
 
-$expected_not = array("'b'");
+$expected_not = array('\'b\'',
+                     );
 
 ?>

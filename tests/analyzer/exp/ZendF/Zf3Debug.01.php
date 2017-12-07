@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Debug\Debug( )');
+$expected     = array('Zend\\Debug\\Debug( )',
+                     );
 
-$expected_not = array('Zend\Debug\Debug\NotZend( )');
+$expected_not = array('Zend\\Debug\\Debug\\NotZend( )',
+                     );
 
 ?>

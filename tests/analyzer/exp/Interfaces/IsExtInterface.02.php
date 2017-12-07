@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('Reflector', 
-                      '\\Reflector');
+$expected     = array('Reflector',
+                      '\\Reflector',
+                     );
 
 $expected_not = array('Stdclass',
-                      '\\Stdclass');
+                      '\\Stdclass',
+                     );
 
 ?>

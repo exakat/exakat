@@ -9,6 +9,6 @@ $expected_not = array('abc( )',
                       'sabC( )',
                       'Sabc( )',
                       'fabc1( )',
-                      );
+                     );
 
 ?>

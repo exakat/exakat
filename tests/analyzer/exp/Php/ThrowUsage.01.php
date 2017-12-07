@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('throw new Exception( )');
+$expected     = array('throw new Exception( )',
+                     );
 
-$expected_not = array('throw(\'method\')');
+$expected_not = array('throw(\'method\')',
+                     );
 
 ?>

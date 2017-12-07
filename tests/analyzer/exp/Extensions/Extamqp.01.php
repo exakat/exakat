@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('AMQPConnection( )', 
-                      'AMQPChannel($cnn)', 
-                      'AMQPChannel($cnn)');
+$expected     = array('AMQPConnection( )',
+                      'AMQPChannel($cnn)',
+                      'AMQPChannel($cnn)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

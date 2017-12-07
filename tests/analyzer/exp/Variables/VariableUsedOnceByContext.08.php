@@ -1,12 +1,13 @@
 <?php
 
 $expected     = array('$usedOnceInContext',
-                      '$d');
+                      '$d',
+                     );
 
 $expected_not = array('$argument',
                       '$defaultArgument',
                       '$typehintArgument',
                       '$typehintDefaultArgument',
-);
+                     );
 
 ?>

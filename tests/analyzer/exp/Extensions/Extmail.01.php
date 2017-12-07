@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('mail(\'caffeinated@example.com\', \'My Subject\', $message)');
+$expected     = array('mail(\'caffeinated@example.com\', \'My Subject\', $message)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

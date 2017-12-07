@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('interface unusedInterface { /**/ } ');
+$expected     = array('interface unusedInterface { /**/ } ',
+                     );
 
-$expected_not = array('interface usedInterface { /**/ } ');
+$expected_not = array('interface usedInterface { /**/ } ',
+                     );
 
 ?>

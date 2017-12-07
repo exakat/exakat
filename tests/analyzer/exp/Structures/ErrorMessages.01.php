@@ -1,16 +1,17 @@
 <?php
 
-$expected     = array("'Yes'",
+$expected     = array('\'Yes\'',
                       '4',
                       'mysql_query( )',
-                      '\'Exception myException via variable\'', 
+                      '\'Exception myException via variable\'',
                       '\'Exception A myException\'',
-                       "'Exception ' . \$x . 'FullNsPath'",
-                      "'Exception myException'",
+                      '\'Exception \' . $x . \'FullNsPath\'',
+                      '\'Exception myException\'',
                       '"Exception $y Messages"',
-                      '\'Exception Messages\''
-                      );
+                      '\'Exception Messages\'',
+                     );
 
-$expected_not = array('a');
+$expected_not = array('a',
+                     );
 
 ?>

@@ -3,7 +3,7 @@
 $expected     = array('E $e',
                       'D $d',
                       'B $b',
-                      );
+                     );
 
 $expected_not = array('F $f',
                       'F $f2',
@@ -12,6 +12,6 @@ $expected_not = array('F $f',
                       'B $b2',
                       '$c',
                       '$c2',
-                      );
+                     );
 
 ?>

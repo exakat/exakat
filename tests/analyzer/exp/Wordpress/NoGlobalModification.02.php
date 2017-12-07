@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('$GLOBALS[\'post\']');
+$expected     = array('$GLOBALS[\'post\']',
+                     );
 
 $expected_not = array('$GLOBALS[\'noWPglobal\']',
                       '$GLOBALS[\'multipage\']',
-                      '$wp_version');
+                      '$wp_version',
+                     );
 
 ?>

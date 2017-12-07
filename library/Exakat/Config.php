@@ -142,6 +142,7 @@ class Config {
                                'janusgraph'  => 'Janusgraph',
                                'januscaes'   => 'JanusCaES',
                                'nogremlin'   => 'NoGremlin',
+                               'tcsv'        => 'Tcsv',
                                );
 
     private $LOADERS = array( 'neo4j'       => 'Neo4jImport', // Could be Neo4jImport, CypherG3
@@ -150,6 +151,7 @@ class Config {
                               'janusgraph'  => 'Janusgraph',
                               'januscaes'   => 'JanusCaES',
                               'nogremlin'   => 'NoLoader',
+                              'tcsv'        => 'Tcsv',
                               );
 
     private static $BOOLEAN_OPTIONS = array(
@@ -242,7 +244,7 @@ class Config {
             ini_set('display_errors', 0);
         } else {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
-            $this->dir_root      = dirname(dirname(__DIR__));
+            $this->dir_root      = dirname(__DIR__, 2);
             $this->projects_root = getcwd();
 
             assert_options(ASSERT_ACTIVE, 1);
@@ -278,7 +280,6 @@ class Config {
 
         // then read the config from the commandline (if any)
         $this->readCommandline();
-        $this->readCodacyConfig();
 
         // then read the config for the project in its folder
         if (isset($this->commandline['project'])) {
@@ -516,41 +517,6 @@ class Config {
             $this->commandline['file']      = str_replace('/code/', '/reports/', substr($this->commandline['filename'], 0, -4));
             $this->commandline['quiet']     = true;
             $this->commandline['norefresh'] = true;
-        }
-    }
-    
-    private function readCodacyConfig() {
-        if (!isset($this->commandline['project'])) {
-            return;
-        }
-        
-        $jsonFile = $this->projects_root.'/projects/'.$this->commandline['project'].'/code/.codacy.json';
-        if (!file_exists($jsonFile)) {
-            return; 
-        }
-
-        $codacyConfig = json_decode(file_get_contents($jsonFile));
-        if ($codacyConfig === null) {
-            return;
-        }
-        
-        if (empty($codacyConfig->files)) {
-            $this->codacyConfig['include_dirs'] = array();
-        } else {
-            $this->codacyConfig['include_dirs'] = array_map(function ($x) { return '/'. $x; }, $codacyConfig->files);
-            $this->codacyConfig['ignore_dirs'] = array('/');
-        
-        }
-        
-        foreach($codacyConfig->tools as $tool) {
-            if (!isset($tool->name) || $tool->name !== 'exakat') { continue; }
-            
-            $this->codacyConfig['program'] = array_column($tool->patterns, 'patternId');
-
-            $this->options['configFiles'][]        = '.codacy.json';
-            $this->codacyConfig['project_reports'] = array('Codacy');
-            $this->codacyConfig['project_themes']  = array('Codacy');
-            $this->codacyConfig['quiet']           = true;
         }
     }
     

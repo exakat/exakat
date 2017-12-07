@@ -58,8 +58,8 @@ class Results extends Tasks {
             throw new NeedsAnalyzerThema();
         }
         
-        $analyzersClassList1 = '"'.join('", "', array_slice($analyzersClass, 0, 250)).'"';
-        $analyzersClassList2 = '"'.join('", "', array_slice($analyzersClass, 250, 250)).'"';
+        $analyzersClassList1 = '"'.implode('", "', array_slice($analyzersClass, 0, 250)).'"';
+        $analyzersClassList2 = '"'.implode('", "', array_slice($analyzersClass, 250, 250)).'"';
         
         $return = array();
         if ($this->config->style == 'BOOLEAN') {
@@ -179,17 +179,6 @@ GREMLIN;
                     $text .= implode(', ', $v)."\n";
                 }
             }
-        }
-
-        if ($this->config->thema === 'Codacy') {
-            foreach($return as $r) {
-                $s = array('filename' => $r[1],
-                           'line'     => $r[2],
-                           'patternId' => 'XXX/YYY',
-                           'message'   => 'MMMMMMMMMM' );
-                echo json_encode( (object) $s), "\n";
-            }
-            return;
         }
 
         if ($this->config->output) {

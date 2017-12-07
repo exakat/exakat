@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('function definedFunction( ) { /**/ } ');
+$expected     = array('function definedFunction( ) { /**/ } ',
+                     );
 
-$expected_not = array('function undefinedFunction( ) { /**/ } ');
+$expected_not = array('function undefinedFunction( ) { /**/ } ',
+                     );
 
 ?>

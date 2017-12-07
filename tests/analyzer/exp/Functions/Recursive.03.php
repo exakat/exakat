@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('recursive', 
-                      );
+$expected     = array('recursive',
+                     );
 
-$expected_not = array('nonRecursive', 
+$expected_not = array('nonRecursive',
                       'nonRecursive2',
                      );
 

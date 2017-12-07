@@ -30,8 +30,9 @@ class VariablePhp extends Analyzer {
                                      '$_REQUEST','$_ENV', '$_SERVER',
                                      '$PHP_SELF','$HTTP_RAW_POST_DATA',
                                      '$HTTP_GET_VARS','$HTTP_POST_VARS', '$HTTP_POST_FILES', '$HTTP_ENV_VARS', '$HTTP_SERVER_VARS', '$HTTP_COOKIE_VARS',
-                                     '$GLOBALS', '$this',
+                                     '$GLOBALS',
                                      '$argv', '$argc');
+// '$this', is now a separate token
 
     public function dependsOn() {
         return array('Variables/Variablenames');

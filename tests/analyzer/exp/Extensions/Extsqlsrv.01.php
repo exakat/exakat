@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('sqlsrv_errors( )', 
-                      'sqlsrv_connect($serverName, $connectionInfo)');
+$expected     = array('sqlsrv_errors( )',
+                      'sqlsrv_connect($serverName, $connectionInfo)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

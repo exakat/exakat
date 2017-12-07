@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('\Ds\Vector( )');
+$expected     = array('\\Ds\\Vector( )',
+                     );
 
-$expected_not = array('Vector(false)');
+$expected_not = array('Vector(false)',
+                     );
 
 ?>

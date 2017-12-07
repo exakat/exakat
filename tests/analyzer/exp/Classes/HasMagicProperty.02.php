@@ -1,9 +1,10 @@
 <?php
 
-$expected     = array('class { /**/ } ', 
+$expected     = array('class { /**/ } ',
                       'class { /**/ } ',
-                      );
+                     );
 
-$expected_not = array('class { /**/ } ',  // identical. Only two should be reported
-                      );
+$expected_not = array('class { /**/ } ',
+                     );
+
 ?>

@@ -37,7 +37,7 @@ class Project extends Tasks {
 
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                               'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
-                              'Analyze', 'Preferences',
+                              'Analyze', 'Preferences', 'Inventory',
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               );
 
@@ -123,6 +123,7 @@ class Project extends Tasks {
             $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
             $info['vcs_revision'] = trim($res);
         } else {
+            $info = array();
             $info['vcs_type'] = 'Downloaded archive';
         }
         $this->datastore->addRow('hash', $info);
@@ -156,10 +157,7 @@ class Project extends Tasks {
         $this->logTime('Loading');
 
         // Dump is a child process
-        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project;
-        if (!in_array('Codacy', $this->config->project_themes)) {
-            $shell .= ' -collect ';
-        }
+        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -collect ';
         shell_exec($shell);
         $this->logTime('Dumped and inited');
 
@@ -288,10 +286,10 @@ class Project extends Tasks {
             unset($dumpConfig);
 
         } catch (\Exception $e) {
-            echo "Error while running the Analyzer $theme ".PHP_EOL,
+            echo "Error while running the Analyzer {$this->config->project} ".PHP_EOL,
                  $e->getMessage(),
                  PHP_EOL."Trying next analysis".PHP_EOL;
-            file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
+            file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.final.log', $e->getMessage());
         }
     }
 

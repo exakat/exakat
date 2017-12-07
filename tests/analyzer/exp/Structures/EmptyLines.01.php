@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array(' ', // Total of 3 empty lines
+$expected     = array(' ',
                       ' ',
-                      ' ');
+                      ' ',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

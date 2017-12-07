@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 20 Nov 2017 10:31:57 +0000
-.. comment: Generation hash : 834bd0d556fa23f0145640c512ff8ea0fbe63b2d
+.. comment: Generation date : Mon, 27 Nov 2017 14:10:19 +0000
+.. comment: Generation hash : c71c46e50699874dce862b5160684f11bd933e1a
 
 
 .. _$http\_raw\_post\_data:
@@ -403,14 +403,20 @@ Adding Zero
 ###########
 
 
-Adding 0 is useless, as 0 is the neutral element for addition. It triggers a cast to integer, though behavior changes from PHP 7.0 to PHP 7.1. 
+Adding 0 is useless, as 0 is the neutral element for addition. In PHP, it triggers a cast to integer. 
+
+It is recommended to make the cast explicit with (int) 
 
 .. code-block:: php
 
    <?php
    
-   $a = 123 + 0;
-   $a = 0 + 123;
+   // Explicit cast
+   $a = (int) foo();
+   
+   // Useless addition
+   $a = foo() + 0;
+   $a = 0 + foo();
    
    // Also works with minus
    $b = 0 - $c; // drop the 0, but keep the minus
@@ -2699,7 +2705,7 @@ Concrete Visibility
 
 Methods that implements an interface in a class must be public. 
 
-PHP doesn't lint this, but won't start a script with a Fatal error : 'Access level to c::iPrivate() must be public (as in class i) ';
+PHP doesn't lint this, unless the interface and the class are in the same file. At execution, it stops immediately with a Fatal error : 'Access level to c::iPrivate() must be public (as in class i) ';
 
 .. code-block:: php
 
@@ -3753,13 +3759,27 @@ This may also lead to dead code : when the trait is removed, the host class have
 +--------------+-----------------------+
 
 
-.. _deprecated-code:
+.. _deprecated-functions:
 
-Deprecated Code
-###############
+Deprecated Functions
+####################
 
 
-The following functions have been deprecated in PHP. Whatever the version you are using, it is recommended to stop using them and replace them with a durable equivalent.
+The following functions are deprecated. Whatever the version you are using, it is recommended to stop using them and replace them with a durable equivalent. 
+
+Functions may be still usable : they generate warning that help you track their usage. Watch your logs, and target any deprecated warning. This way, you won't be stuck when the function is actually removed.
+
+.. code-block:: php
+
+   <?php
+   
+   // This is the current function
+   list($day, $month, $year) = explode('/', '08/06/1995');
+   
+   // This is deprecated
+   list($day, $month, $year) = split('/', '08/06/1995');
+   
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------+
 | Command Line | Php/Deprecated                                                                            |
@@ -4332,7 +4352,9 @@ Empty Blocks
 ############
 
 
-The listed control structures are empty, or have one of the commanded block empty. It is recommended to remove those blocks, so as to reduce confusion in the code. 
+Full empty block, part of a control structures. 
+
+It is recommended to remove those blocks, so as to reduce confusion in the code. 
 
 .. code-block:: php
 
@@ -5416,11 +5438,11 @@ Functions Removed In PHP 5.5
 
 Those functions were removed in PHP 5.5.
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php55RemovedFunctions                                                                                                                                        |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------+
+| Command Line | Php/Php55RemovedFunctions |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP55` |
++--------------+---------------------------+
 
 
 .. _getting-last-element:
@@ -6260,7 +6282,33 @@ Instantiating Abstract Class
 ############################
 
 
-Those code will raise a PHP fatal error at execution time : 'Cannot instantiate abstract class'. The classes are actually abstract classes, and should be derived into a concrete class to be instantiated.
+PHP cannot instantiate an abstract class. 
+
+The classes are actually abstract classes, and should be derived into a concrete class to be instantiated.
+
+.. code-block:: php
+
+   <?php
+   
+   abstract class Foo {
+       protected $a;
+   }
+   
+   class Bar extends Foo {
+       protected $b;
+   }
+   
+   // instantiating a concrete class.
+   new Bar();
+   
+   // instantiating an abstract class.
+   // In real life, this is not possible also because the definition and the instantiation are in the same file
+   new Foo();
+   
+   ?>
+
+
+See also `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_.
 
 +--------------+------------------------------------+
 | Command Line | Classes/InstantiatingAbstractClass |
@@ -6383,6 +6431,40 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 +--------------+---------------------------+
 | Analyzers    | :ref:`CompatibilityPHP71` |
 +--------------+---------------------------+
+
+
+.. _invalid-regex:
+
+Invalid Regex
+#############
+
+
+The PCRE regex doesn't compile. It isn't a valid regex.
+
+Several reasons may lead to this situation : syntax error, Unknown modifier, missing parenthesis or reference.
+
+.. code-block:: php
+
+   <?php
+   
+   // valid regex
+   preg_match('/[abc]/', $string);
+   
+   // invalid regex (missing terminating ] for character class 
+   preg_match('/[abc/', $string);
+   
+   ?>
+
+
+Regex are check with the Exakat version of PHP. 
+
+Dynamic regex are only checked for simple values. Dynamic values may eventually generate a compilation error.
+
++--------------+-------------------------+
+| Command Line | Structures/InvalidRegex |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
 
 
 .. _is-actually-zero:
@@ -9508,18 +9590,11 @@ To handle arrays that may be quite big, it is recommended to avoid using `'array
 
    <?php
    
-   // Creating a large multidimensional array
+   // A large multidimensional array
    $source = ['a' => ['a', 'b', /*...*/],
               'b' => ['b', 'c', 'd', /*...*/],
               /*...*/
               ];
-   
-   // Slow way
-   $b = array();
-   foreach($source as $key => $values) {
-       $b = array_merge($b, $values);
-   }
-   
    
    // Faster way
    $b = array();
@@ -9527,6 +9602,7 @@ To handle arrays that may be quite big, it is recommended to avoid using `'array
        //Collect in an array
        $b[] = $values;
    }
+   
    // One call to array_merge
    $b = call_user_func_array('array_merge', $b);
    // or with variadic
@@ -9537,10 +9613,16 @@ To handle arrays that may be quite big, it is recommended to avoid using `'array
    // or
    $b = call_user_func('array_merge', ...array_values($source))
    
+   // Slow way to merge it all
+   $b = array();
+   foreach($source as $key => $values) {
+       $b = array_merge($b, $values);
+   }
+   
    ?>
 
 
-Note that `'array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ and `'file_put_contents() <http://www.php.net/file_put_contents>`_ are also affected and reported.
+Note that `'array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ and `'file_put_contents() <http://www.php.net/file_put_contents>`_ are affected and reported the same way.
 
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Performances/ArrayMergeInLoops                                                                              |
@@ -10366,11 +10448,11 @@ PHP 7.0 Removed Directives
 
 List of directives that are removed in PHP 7.0.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php70RemovedDirective                                                                                  |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/Php70RemovedDirective                                                       |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP73` |
++--------------+---------------------------------------------------------------------------------+
 
 
 .. _php-7.1-microseconds:
@@ -10550,9 +10632,7 @@ PHP 72 Removed Classes
 ######################
 
 
-The following PHP native classes were removed in PHP 7.2.
-
-* SessionHandler
+No PHP native classes was removed in PHP 7.2.
 
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/Php72RemovedClasses                                                                                                                                          |
@@ -10687,6 +10767,53 @@ With PHP 7, dirname has a second argument that represents the number of parent f
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
+
+
+.. _parent-first:
+
+Parent First
+############
+
+
+When calling parent constructor, always put it first in the `'__construct <http://php.net/manual/en/language.oop5.decon.php>`_ method. It ensures the parent is correctly build before the child start using values. 
+
+.. code-block:: php
+
+   <?php
+   
+   class father {
+       protected $name = null;
+       
+       function '__construct() {
+           $this->name = init();
+       }
+   }
+   
+   class goodSon {
+       function '__construct() {
+           // parent is build immediately, 
+           parent::'__construct();
+           echo my name is.$this->name;
+       }
+   }
+   
+   class badSon {
+       function '__construct() {
+           // This will fail.
+           echo my name is.$this->name;
+   
+           // parent is build later, 
+           parent::'__construct();
+       }
+   }
+   
+   ?>
+
++--------------+---------------------+
+| Command Line | Classes/ParentFirst |
++--------------+---------------------+
+| Analyzers    | :ref:`Analyze`      |
++--------------+---------------------+
 
 
 .. _parent,-static-or-self-outside-class:
@@ -11809,11 +11936,11 @@ For example, string, float, false, true, null, resource,... are not acceptable a
 
 See also `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/ReservedKeywords7                                                                                      |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------+
+| Command Line | Php/ReservedKeywords7     |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70` |
++--------------+---------------------------+
 
 
 .. _results-may-be-missing:
@@ -11971,13 +12098,13 @@ With those tests (by default), the certificate is verified, and if it isn't vali
 +--------------+----------------------+
 
 
-.. _same-conditions:
+.. _same-conditions-in-condition:
 
-Same Conditions
-###############
+Same Conditions In Condition
+############################
 
 
-Several If then else structures are chained, and some conditions are identical. The latter will be ignored.
+At least two consecutive if/then structures use identical conditions. The latter will probably  be ignored.
 
 .. code-block:: php
 
@@ -12343,6 +12470,44 @@ See also `Array <http://php.net/manual/en/language.types.array.php>`_.
 +--------------+---------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
+
+
+.. _should-always-prepare:
+
+Should Always Prepare
+#####################
+
+
+Avoid using variables in string when preparing queries. Always try use the prepare statement by naming variables.
+
+This is particularly sensitive when using where() and having() methods. 
+
+Other methods, like limit() or offset() are immune against injections. 
+
+.. code-block:: php
+
+   <?php
+       // OK : all is hardcoded, no chance of injection
+       $select->from('foo')->where('x = 5');
+   
+       // This is the recommended way to use a variable
+       $select->from('foo')->where(['x' => $v]);
+   
+       // Concatenation is unsafe
+       $select->from('foo')->where('x = '.$v);
+       $select->from('foo')->where("x = $v");
+   ?>
+
+
+This analysis reports a false-postive, even when the included variable is an internal variable : it has been defined in the application, and not acquired from external users. In such case, injection and legit usage of concatenation are undistinguishable. 
+
+See also `zend-db documentation <https://github.com/zendframework/zend-db/blob/master/docs/book/index.md>`_.
+
++--------------+--------------------------+
+| Command Line | ZendF/Zf3DbAlwaysPrepare |
++--------------+--------------------------+
+| Analyzers    | :ref:`ZendFramework`     |
++--------------+--------------------------+
 
 
 .. _should-be-single-quote:
@@ -13588,6 +13753,9 @@ It looks like the following loops are static : the same code is executed each ti
        $total += $i;
    }
    
+   // The above loop may be replaced by (with some math help)
+   $total = 10 * (10  + 1) / 2;
+   
    // Non-Static loop (the loop depends on the size of the array)
    $n = count($array);
    for($i = 0; $i < $n; $i++) {
@@ -13597,7 +13765,9 @@ It looks like the following loops are static : the same code is executed each ti
    ?>
 
 
-It is possible to create loops that don't use any blind variables, though this is fairly rare.
+It is possible to create loops that don't use any blind variables, though this is fairly rare. In particular, calling a method may update an internal pointer, like `'next() <http://www.php.net/next>`_ or SimpleXMLIterator::next. 
+
+It is recommended to turn a static loop into an expression that avoid the loop. For example, replacing the sum of all integers by the function $n * ($n + 1) / 2, or using `'array_sum() <http://www.php.net/array_sum>`_.
 
 +--------------+-----------------------+
 | Command Line | Structures/StaticLoop |
@@ -13938,6 +14108,8 @@ Always start by reducing a string before applying some transformation on it. The
 
 
 The gain produced here is greater with longer strings, or greater reductions. They may also be used in loops. This is a micro-optimisation when used on short strings and single string reductions.
+
+This works with any reduction function instead of substr(), like `'trim() <http://www.php.net/trim>`_, iconv(), etc.
 
 +--------------+--------------------------+
 | Command Line | Performances/SubstrFirst |
@@ -17280,6 +17452,32 @@ Used Protected Method
 
 
 Marks methods being used in the current class or its children classes.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // This is reported
+       protected usedByChildren() {}
+   
+       // This is not reported
+       protected notUsedByChildren() {}
+   }
+   
+   class bar extends foo {
+       // The parent method is not overloaded, though it may be 
+       protected someMethod() {
+           // The parent method is called 
+           $this->usedByChildren();
+       }
+   
+   }
+   
+   ?>
+
+
+See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
 
 +--------------+------------------------------+
 | Command Line | Classes/UsedProtectedMethod  |

@@ -1,9 +1,10 @@
 <?php
 
 $expected     = array('ZBarCodeImage("test.jpg")',
-                      'ZBarCodeScanner( )'
-);
+                      'ZBarCodeScanner( )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

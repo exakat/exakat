@@ -66,7 +66,7 @@ class Doctor extends Tasks {
         $stats['exakat']['graphdb']     = $this->config->graphdb;
         $stats['exakat']['reports']     = $this->array2list($this->config->project_reports);
         $stats['exakat']['themes']      = $this->array2list($this->config->project_themes);
-        $stats['exakat']['tokenslimit'] = number_format($this->config->token_limit + 0, 0, '', ' ');
+        $stats['exakat']['tokenslimit'] = number_format((int) $this->config->token_limit, 0, '', ' ');
 
         // check for PHP
         $stats['PHP']['binary']         = phpversion();
@@ -94,7 +94,7 @@ class Doctor extends Tasks {
             $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
         }
         $stats['java']['$JAVA_HOME'] = $_ENV['JAVA_HOME'] ?? '<none>';
-        $stats['java']['$JAVA_OPTIONS'] = $_ENV['JAVA_OPTIONS'] ?? ' (Use this to give more RAM to graph server)';
+        $stats['java']['$JAVA_OPTIONS'] = $_ENV['JAVA_OPTIONS'] ?? ' (set $JAVA_OPTIONS="-Xms32m -Xmx****m", with **** = RAM in Mb. The more the better.';
 
         $stats['tinkergraph'] = $this->getTinkerGraph();
         $stats['gsneo4j'] = $this->getTinkerGraphNeo4j();
@@ -445,7 +445,7 @@ class Doctor extends Tasks {
                     $v = basename($version);
                     $versions[] = $v;
                 }
-                $stats['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin : '.join(', ', $versions).'. Only one neo4j-gremlin-3.*.jar is sufficient. ';
+                $stats['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin : '.implode(', ', $versions).'. Only one neo4j-gremlin-3.*.jar is sufficient. ';
             } else {
                 $stats['gremlinJar'] = basename(trim(array_pop($gremlinPlugin)));
             }

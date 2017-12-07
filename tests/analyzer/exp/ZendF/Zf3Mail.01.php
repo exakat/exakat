@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Mail\Address( )');
+$expected     = array('Zend\\Mail\\Address( )',
+                     );
 
-$expected_not = array('Zend\Mail\Address\NotZend( )');
+$expected_not = array('Zend\\Mail\\Address\\NotZend( )',
+                     );
 
 ?>

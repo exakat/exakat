@@ -44,7 +44,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->samePropertyAs('code', 'name')
              ->inIs('MEMBER')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->inIs('OBJECT')
              ->inIs('OBJECT') // Good for methodcall and properties
              ->back('results');
@@ -74,7 +74,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->samePropertyAs('code', 'name')
              ->inIs('MEMBER')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->inIs('OBJECT')
              ->inIs('LEFT')
              ->atomIs('Assignation')

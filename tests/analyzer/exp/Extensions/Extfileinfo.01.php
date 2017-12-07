@@ -1,10 +1,12 @@
 <?php
 
-$expected     = array('finfo_open(FILEINFO_MIME_TYPE)', 
-                      'finfo_file($finfo, $filename)', 
+$expected     = array('finfo_open(FILEINFO_MIME_TYPE)',
+                      'finfo_file($finfo, $filename)',
                       'finfo_close($finfo)',
-                      'FILEINFO_MIME_TYPE');
+                      'FILEINFO_MIME_TYPE',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

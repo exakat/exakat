@@ -8,10 +8,11 @@ $expected     = array('$explicitGlobal',
                       '$explicitGlobalFunction',
                       '$explicitGlobalFunction',
                       '$x',
-                      );
+                     );
 
 $expected_not = array('$localVariableFunction',
                       '$GLOBALS',
-                      '$_POST');
+                      '$_POST',
+                     );
 
 ?>

@@ -27,20 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class HasNotFluentInterface extends Analyzer {
     public function analyze() {
+        // return $a;
         $this->atomIs('Method')
              ->outIs('BLOCK')
              ->atomInside('Return')
              ->outIs('RETURN')
-             ->atomIsNot('Variable')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Method')
-             ->outIs('BLOCK')
-             ->atomInside('Return')
-             ->outIs('RETURN')
-             ->atomIs('Variable')
-             ->codeIsNot('$this')
+             ->atomIsNot('This')
              ->back('first');
         $this->prepareQuery();
 

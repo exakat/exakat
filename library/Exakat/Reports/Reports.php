@@ -40,7 +40,6 @@ abstract class Reports {
                                           'ZendFramework',  'RadwellCode', 'CodeSniffer', 'Slim',
                                           'FacetedJson', 'Json', 'OnepageJson', 'Marmelab', 'Simpletable',
                                           'Codeflower', 'Dependencywheel',
-                                          'Codacy',
                                           );
 
     protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55',

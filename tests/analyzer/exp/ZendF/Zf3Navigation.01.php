@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Navigation\AbstractContainer( )');
+$expected     = array('Zend\\Navigation\\AbstractContainer( )',
+                     );
 
-$expected_not = array('Zend\Navigation\AbstractContainer\NotZend( )');
+$expected_not = array('Zend\\Navigation\\AbstractContainer\\NotZend( )',
+                     );
 
 ?>

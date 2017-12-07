@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('__INVOKE', 
-                      '__SLEEP');
+$expected     = array('__INVOKE',
+                      '__SLEEP',
+                     );
 
-$expected_not = array('__public');
+$expected_not = array('__public',
+                     );
 
 ?>

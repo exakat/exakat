@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$a instanceof NotTraversable');
+$expected     = array('$a instanceof NotTraversable',
+                     );
 
-$expected_not = array('$b instanceof Traversable');
+$expected_not = array('$b instanceof Traversable',
+                     );
 
 ?>

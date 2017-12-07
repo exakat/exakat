@@ -7,6 +7,6 @@ $expected     = array('catch (someRethrownException2 $e) { /**/ } ',
 
 $expected_not = array('catch (someRethrownException $e) { /**/ } ',
                       'catch (someFixedException $e) { /**/ } ',
-                      );
+                     );
 
 ?>

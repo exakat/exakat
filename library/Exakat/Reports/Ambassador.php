@@ -51,13 +51,18 @@ class Ambassador extends Reports {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
 
-    private $inventories = array('constants'  => 'Constants',
-                                 'classes'    => 'Classes',
-                                 'interfaces' => 'Interfaces',
-                                 'functions'  => 'Functions',
-                                 'traits'     => 'Traits',
-                                 'namespaces' => 'Namespaces',
-//                                 'exceptions' => 'Exceptions'
+    private $inventories = array('constants'      => 'Constants',
+                                 'classes'        => 'Classes',
+                                 'interfaces'     => 'Interfaces',
+                                 'functions'      => 'Functions',
+                                 'traits'         => 'Traits',
+                                 'namespaces'     => 'Namespaces',
+                                 'Type/Url'       => 'URL',
+                                 'Type/Sql'       => 'SQL',
+                                 'Type/Email'     => 'Email',
+                                 'Type/GPCIndex'  => 'Incoming variables',
+                                 'Type/Md5string' => 'MD5 string',
+                                 'Type/Mime'      => 'Mime types',
                                  );
 
     private $compatibilities = array('53' => 'Compatibility PHP 5.3',
@@ -94,6 +99,14 @@ class Ambassador extends Reports {
             $menu = file_get_contents($this->tmpName.'/datas/menu.html');
             $inventories = '';
             foreach($this->inventories as $fileName => $title) {
+                if (strpos($fileName, '/') !== false) {
+                    $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer == '$fileName' AND count > 0";
+                    $total = $this->sqlite->querySingle($query);
+                    if ($total < 1) {
+                        continue;
+                    }
+                    $fileName = strtolower(basename($fileName));
+                }
                 $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
             $compatibilities = '';
@@ -143,6 +156,7 @@ class Ambassador extends Reports {
         $this->generateIssues();
         $this->generateNoIssues();
         $this->generatePerformances();
+        $this->generateSuggestions();
         $this->generateSecurity();
         
         $this->generateAnalyzersList();
@@ -335,6 +349,11 @@ class Ambassador extends Reports {
     private function generateSecurity() {
         $this->generateIssuesEngine('security_issues',
                                     $this->getIssuesFaceted('Security') );
+    }
+
+    private function generateSuggestions() {
+        $this->generateIssuesEngine('suggestions',
+                                    $this->getIssuesFaceted('Suggestions') );
     }
 
     private function generatePerformances() {
@@ -1743,9 +1762,9 @@ SQL;
             $item['analyzer_md5'] = $this->toId($row['analyzer']);
             $item['file' ]        =  $row['file'];
             $item['file_md5' ]    =  $this->toId($row['file']);
-            $item['code' ]        = $this->PHPSyntax($row['fullcode']);
+            $item['code' ]        = PHPSyntax($row['fullcode']);
             $item['code_detail']  = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus']    = $this->PHPSyntax($row['fullcode']);
+            $item['code_plus']    = PHPSyntax($row['fullcode']);
             $item['link_file']    = $row['file'];
             $item['line' ]        =  $row['line'];
             $item['severity']     = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
@@ -2024,7 +2043,7 @@ SQL;
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $errorMessages .= '<tr><td>'.$this->PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $errorMessages .= '<tr><td>'.PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('error_messages');
@@ -2196,7 +2215,7 @@ HTML;
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $dynamicCode .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $dynamicCode .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('dynamic_code');
@@ -2208,7 +2227,7 @@ HTML;
         $theGlobals = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $theGlobals .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $theGlobals .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('globals');
@@ -2230,17 +2249,33 @@ HTML;
                                   'analyzer'    => 'Functions/Functionnames'),
             'namespaces' => array('description' => 'List of all defined namespaces in the code.',
                                   'analyzer'    => 'Namespaces/Namespacesnames'),
+            'Type/Url'   => array('description' => 'List of all URL mentionned in the code.',
+                                  'analyzer'    => 'Type/Url'),
+            'Type/Sql'   => array('description' => 'List of all SQL queries mentionned in the code.',
+                                  'analyzer'    => 'Type/Sql'),
+            'Type/Email' => array('description' => 'List of all Email mentionned in the code.',
+                                  'analyzer'    => 'Type/Email'),
+            'Type/GPCIndex' => array('description' => 'List of all incoming variables mentionned in the code.',
+                                  'analyzer'    => 'Type/GPCIndex'),
+            'Type/Md5string' => array('description' => 'List of all incoming MD5-like strings mentionned in the code.',
+                                  'analyzer'    => 'Type/GPCIndex'),
+            'Type/Mime' => array('description' => 'List of all Mime-type mentionned in the code.',
+                                  'analyzer'    => 'Type/GPCIndex'),
 //            'exceptions' => array('description' => 'List of all defined exceptions.',
 //                                  'analyzer'    => 'Exceptions/DefinedExceptions'),
         );
         foreach($this->inventories as $fileName => $theTitle) {
             $theDescription = $definitions[$fileName]['description'];
             $theAnalyzer    = $definitions[$fileName]['analyzer'];
+            
+            if (strpos($fileName, '/') !== false) {
+                $fileName = strtolower(basename($fileName));
+            }
 
             $theTable = '';
             $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $theTable .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+                $theTable .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
             }
 
             $html = $this->getBasedPage('inventories');
@@ -2802,7 +2837,7 @@ HTML;
         $alteredDirectives = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $alteredDirectives .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $alteredDirectives .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('altered_directives');
@@ -3049,13 +3084,6 @@ HTML;
         } else {
             return '<i class="fa fa-warning" style="color: red"></i>&nbsp;<a href="compatibility_issues.html#analyzer='.$analyzer.'">'.$count.' warnings</a>';
         }
-    }
-    
-    protected function PHPSyntax($code) {
-        $php = highlight_string('<?php |'.$code.'|; ?>', true);
-        $php = substr($php, strpos($php, '|') + 1);
-        $php = substr($php, 0, strrpos($php, '|'));
-        return $php;
     }
     
     private function toHtmlEncoding($text) {

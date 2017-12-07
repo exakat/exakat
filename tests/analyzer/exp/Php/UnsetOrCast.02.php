@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('(unset) $a');
+$expected     = array('(unset) $a',
+                     );
 
-$expected_not = array('unset($b)');
+$expected_not = array('unset($b)',
+                     );
 
 ?>

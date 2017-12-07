@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$x instanceof X');
+$expected     = array('$x instanceof X',
+                     );
 
-$expected_not = array('$x instanceof x');
+$expected_not = array('$x instanceof x',
+                     );
 
 ?>

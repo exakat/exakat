@@ -1,9 +1,11 @@
 <?php
 
 $expected     = array('unusedLabel :',
-                      'usedInYLabel :');
+                      'usedInYLabel :',
+                     );
 
 $expected_not = array('usedLabel :',
-                      'usedLabel2 :');
+                      'usedLabel2 :',
+                     );
 
 ?>

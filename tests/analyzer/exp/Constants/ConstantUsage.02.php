@@ -1,6 +1,7 @@
 <?php
 
-$expected     = array('E_NOTICE');
+$expected     = array('E_NOTICE',
+                     );
 
 $expected_not = array('CLASSNAME',
                       'methodName',
@@ -9,7 +10,6 @@ $expected_not = array('CLASSNAME',
                       'NS3',
                       'STRING1',
                       'STRING2',
-
-                      );
+                     );
 
 ?>

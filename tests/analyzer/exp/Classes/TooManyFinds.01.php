@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('interface UserInterface { /**/ } ');
+$expected     = array('interface UserInterface { /**/ } ',
+                     );
 
-$expected_not = array('interface UserInterfaceOK { /**/ } ');
+$expected_not = array('interface UserInterfaceOK { /**/ } ',
+                     );
 
 ?>

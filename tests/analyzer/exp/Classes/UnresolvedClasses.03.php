@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('ba( )', 
-                      'f\ab( )',
+$expected     = array('ba( )',
+                      'f\\ab( )',
                      );
 
 $expected_not = array('h( )',
@@ -11,7 +11,7 @@ $expected_not = array('h( )',
                       'a2( )',
                       'e( )',
                       'e2( )',
-                      'e\ab()',
+                      'e\\ab()',
                      );
 
 ?>

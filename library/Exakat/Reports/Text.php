@@ -31,12 +31,12 @@ class Text extends Reports {
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($this->config->thema !== null) {
             $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
-            $list = '"'.join('", "', $list).'"';
+            $list = '"'.implode('", "', $list).'"';
         } elseif ($this->config->program !== null) {
             $list = '"'.$this->config->program.'"';
         } else {
             $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-            $list = '"'.join('", "', $list).'"';
+            $list = '"'.implode('", "', $list).'"';
         }
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('\CakeObject( )');
+$expected     = array('\\CakeObject( )',
+                     );
 
-$expected_not = array('File( )');
+$expected_not = array('File( )',
+                     );
 
 ?>

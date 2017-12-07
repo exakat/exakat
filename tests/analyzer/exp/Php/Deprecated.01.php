@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array("split(':', 'asdfasdfadf')",
-                      "dl('adsf.lo')");
+$expected     = array('split(\':\', \'asdfasdfadf\')',
+                     );
 
-$expected_not = array( "explode(':', 'asdfasdfadf')");
+$expected_not = array('explode(\':\', \'asdfasdfadf\')',
+                      'dl(\'adsf.lo\')',
+                     );
 
 ?>

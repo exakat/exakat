@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('\\DateTime');
+$expected     = array('\\DateTime',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

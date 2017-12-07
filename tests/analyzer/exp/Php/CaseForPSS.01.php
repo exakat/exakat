@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array("PARENT", 
-                      "Self");
+$expected     = array('PARENT',
+                      'Self',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

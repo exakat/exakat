@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Code\Generator\InterfaceGenerator( )');
+$expected     = array('Zend\\Code\\Generator\\InterfaceGenerator( )',
+                     );
 
-$expected_not = array('Zend\Code\Annotation\AnnotationCollection( )');
+$expected_not = array('Zend\\Code\\Annotation\\AnnotationCollection( )',
+                     );
 
 ?>

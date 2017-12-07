@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class WpdbBestUsage extends Analyzer {
     public function analyze() {
         $ignoreCommands = array('SHOW TABLES', 'RENAME TABLE', 'ALTER TABLE', 'CREATE TABLE', 'DROP TABLE', 'DESC', 'TRUNCATE');
-        $ignoreCommandsRegex = join('|', $ignoreCommands);
+        $ignoreCommandsRegex = implode('|', $ignoreCommands);
 
         // $wpdb->get_var("select ".$wpdb->prefix."table")
         $this->atomIs('Variableobject')

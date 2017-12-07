@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('spl_autoload_register(function ($d) { /**/ } )');
+$expected     = array('spl_autoload_register(function ($d) { /**/ } )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

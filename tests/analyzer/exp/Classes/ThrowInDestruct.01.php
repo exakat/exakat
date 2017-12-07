@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('class Foo { /**/ } ');
+$expected     = array('class Foo { /**/ } ',
+                     );
 
 $expected_not = array('class Bar { /**/ } ',
-                      'class Bar2 { /**/ } ');
+                      'class Bar2 { /**/ } ',
+                     );
 
 ?>

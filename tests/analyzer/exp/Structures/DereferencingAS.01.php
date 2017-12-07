@@ -2,12 +2,13 @@
 
 $expected     = array('$a',
                       '$aFar',
-                      '$s');
+                      '$s',
+                     );
 
 $expected_not = array('$y',
                       '$s2',
                       '$emptyString',
-                      '$emptyArray'
-);
+                      '$emptyArray',
+                     );
 
 ?>

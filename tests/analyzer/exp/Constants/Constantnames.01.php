@@ -1,9 +1,10 @@
 <?php
 
-$expected     = array("'someDefineConstant'",
-                      "someConstConstant",
-                        );
+$expected     = array('\'someDefineConstant\'',
+                      'someConstConstant',
+                     );
 
-$expected_not = array("'notADefined'");
+$expected_not = array('\'notADefined\'',
+                     );
 
 ?>

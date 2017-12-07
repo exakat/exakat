@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 20 Nov 2017 10:31:57 +0000
-.. comment: Generation hash : 834bd0d556fa23f0145640c512ff8ea0fbe63b2d
+.. comment: Generation date : Mon, 27 Nov 2017 14:10:19 +0000
+.. comment: Generation hash : c71c46e50699874dce862b5160684f11bd933e1a
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 325 analysis
+Total : 327 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -137,7 +137,7 @@ Total : 325 analysis
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
 * :ref:`Dependant Trait <dependant-trait>`
-* :ref:`Deprecated Code <deprecated-code>`
+* :ref:`Deprecated Functions <deprecated-functions>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
 * :ref:`Don't Send This In Constructor <don't-send-this-in-constructor>`
 * :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
@@ -184,6 +184,7 @@ Total : 325 analysis
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
 * :ref:`Invalid Constant Name <invalid-constant-name>`
+* :ref:`Invalid Regex <invalid-regex>`
 * :ref:`Is Actually Zero <is-actually-zero>`
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Logical Mistakes <logical-mistakes>`
@@ -258,6 +259,7 @@ Total : 325 analysis
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`Overwritten Literals <overwritten-literals>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
+* :ref:`Parent First <parent-first>`
 * :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
 * :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
 * :ref:`Phpinfo`
@@ -280,7 +282,7 @@ Total : 325 analysis
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Results May Be Missing <results-may-be-missing>`
 * :ref:`Return True False <return-true-false>`
-* :ref:`Same Conditions <same-conditions>`
+* :ref:`Same Conditions In Condition <same-conditions-in-condition>`
 * :ref:`Scalar Or Object Property <scalar-or-object-property>`
 * :ref:`Sequences In For <sequences-in-for>`
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
@@ -657,7 +659,7 @@ Total : 51 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 40 analysis
+Total : 39 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -665,7 +667,6 @@ Total : 40 analysis
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
-* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
@@ -705,7 +706,7 @@ Total : 40 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 36 analysis
+Total : 35 analysis
 
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -713,7 +714,6 @@ Total : 36 analysis
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
-* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
@@ -749,12 +749,11 @@ Total : 36 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 26 analysis
+Total : 24 analysis
 
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Empty With Expression <empty-with-expression>`
-* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
@@ -772,7 +771,6 @@ Total : 26 analysis
 * :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 * :ref:`ext/mcrypt`
@@ -783,22 +781,19 @@ Total : 26 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 16 analysis
+Total : 13 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
-* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Hash Will Use Objects <hash-will-use-objects>`
 * :ref:`New Constants In PHP 7.2 <new-constants-in-php-7.2>`
 * :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
-* :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
 * :ref:`PHP 7.2 Object Keyword <php-7.2-object-keyword>`
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Undefined Constants <undefined-constants>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
@@ -807,12 +802,10 @@ Total : 16 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 5 analysis
+Total : 3 analysis
 
-* :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
-* :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
 .. _dead-code:
@@ -983,13 +976,14 @@ Total : 13 analysis
 ZendFramework
 +++++++++++++
 
-Total : 237 analysis
+Total : 238 analysis
 
 * :ref:`Action Should Be In Controller <action-should-be-in-controller>`
 * :ref:`Error Messages <error-messages>`
 * :ref:`Exit() Usage <exit()-usage>`
 * :ref:`Is Zend Framework 1 Controller <is-zend-framework-1-controller>`
 * :ref:`Is Zend Framework 1 Helper <is-zend-framework-1-helper>`
+* :ref:`Should Always Prepare <should-always-prepare>`
 * :ref:`Should Make Alias <should-make-alias>`
 * :ref:`Should Regenerate Session Id <should-regenerate-session-id>`
 * :ref:`Thrown Exceptions <thrown-exceptions>`

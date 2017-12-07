@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('function ad2( ) { /**/ } ', 
-                      'function ad1( ) { /**/ } ');
+$expected     = array('function ad2( ) { /**/ } ',
+                      'function ad1( ) { /**/ } ',
+                     );
 
 $expected_not = array('function ac( ) { /**/ } ',
                       'function ac( ) { /**/ } ',
@@ -12,7 +13,6 @@ $expected_not = array('function ac( ) { /**/ } ',
                       'function ax( ) { /**/ } ',
                       'function bx( ) { /**/ } ',
                       'function cx( ) { /**/ } ',
-                      );
-
+                     );
 
 ?>

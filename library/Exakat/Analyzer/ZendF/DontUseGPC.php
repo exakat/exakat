@@ -25,14 +25,14 @@ namespace Exakat\Analyzer\ZendF;
 use Exakat\Analyzer\Analyzer;
 
 class DontUseGPC extends Analyzer {
-
     public function dependsOn() {
         return array('Variables/VariablePhp');
     }
     
     public function analyze() {
+        // $_GET, $_POST...
         $this->analyzerIs('Variables/VariablePhp')
-             ->codeIsNot('$this');
+             ->back('first');
         $this->prepareQuery();
     }
 }

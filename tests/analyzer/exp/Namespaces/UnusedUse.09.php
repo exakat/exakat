@@ -1,7 +1,8 @@
 <?php
 
 $expected     = array('K',
-                      'N');
+                      'N',
+                     );
 
 $expected_not = array('A',
                       'B',
@@ -12,6 +13,7 @@ $expected_not = array('A',
                       'G',
                       'H',
                       'I',
-                      'J');
+                      'J',
+                     );
 
 ?>

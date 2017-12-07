@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array('    ', '   '); // 4 space after, 3 before
+$expected     = array('    ',
+                      '   ',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

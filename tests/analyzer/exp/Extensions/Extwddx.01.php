@@ -1,10 +1,11 @@
 <?php
 
-$expected     = array('wddx_packet_start("SOME DATA ARRAY")', 
-                      'wddx_add_vars($packet, $key)', 
-                      'wddx_packet_end($packet)'
-);
+$expected     = array('wddx_packet_start("SOME DATA ARRAY")',
+                      'wddx_add_vars($packet, $key)',
+                      'wddx_packet_end($packet)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

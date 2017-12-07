@@ -1,15 +1,17 @@
 <?php
 
-$expected     = array('class conditionnedX { /**/ } ', 
-                      'interface conditionnedInterface { /**/ } ', 
+$expected     = array('class conditionnedX { /**/ } ',
+                      'interface conditionnedInterface { /**/ } ',
                       'trait conditionnedTrait { /**/ } ',
                       'function conditionnedFunction( ) { /**/ } ',
-                      "'ConditionedConstant'");
+                      '\'ConditionedConstant\'',
+                     );
 
 $expected_not = array('class NormalX { /**/ } ',
                       'interface NormalInterface { /**/ } ',
                       'trait NormalTrait { /**/ } ',
                       'function NormalFunction( ) { /**/ } ',
-                      "'NormalConstant'");
+                      '\'NormalConstant\'',
+                     );
 
 ?>

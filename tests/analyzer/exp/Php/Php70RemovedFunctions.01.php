@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('ereg(\'a\', \'b\')');
+$expected     = array('ereg(\'a\', \'b\')',
+                     );
 
-$expected_not = array('sql_regcase($b, $c)');
+$expected_not = array('sql_regcase($b, $c)',
+                     );
 
 ?>

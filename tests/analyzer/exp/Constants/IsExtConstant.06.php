@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('E_NOTICE');
+$expected     = array('E_NOTICE',
+                     );
 
-$expected_not = array('E_ALL');
+$expected_not = array('E_ALL',
+                     );
 
 ?>

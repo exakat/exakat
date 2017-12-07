@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('NULL',
-                      '\null');
+                      '\\null',
+                     );
 
-$expected_not = array("'null'");
+$expected_not = array('\'null\'',
+                     );
 
 ?>

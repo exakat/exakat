@@ -1,10 +1,12 @@
 <?php
 
 $expected     = array('Undefined',
-                      'NotThrown');
+                      'NotThrown',
+                     );
 
 $expected_not = array('Thrown',
                       'subThrown',
-                      'subsubThrown');
+                      'subsubThrown',
+                     );
 
 ?>

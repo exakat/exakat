@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\ServiceManager\Factory\InvokableFactory( )');
+$expected     = array('Zend\\ServiceManager\\Factory\\InvokableFactory( )',
+                     );
 
-$expected_not = array('Zend\ServiceManager\AbstractPluginManager( )');
+$expected_not = array('Zend\\ServiceManager\\AbstractPluginManager( )',
+                     );
 
 ?>

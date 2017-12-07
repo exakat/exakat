@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class NoMagicWithArray extends Analyzer {
     public function dependsOn() {
-        return array('Classes/DefinedProperty');
+        return array('Classes/DefinedProperty',
+                    );
     }
     
     public function analyze() {
@@ -40,7 +41,7 @@ class NoMagicWithArray extends Analyzer {
 
              ->_as('object')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->back('object')
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')

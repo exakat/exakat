@@ -86,14 +86,17 @@ class Dependencywheel extends Reports {
         $results = array_pad(array(), $n, array_pad( array(), $n, 0));
         $dict = array_flip($packagenames);
 
-        foreach($extends as $name => $extends) {
-            foreach($extends as $extend) {
-                if ($extend === '') {
+        foreach($extends as $name => $extend) {
+            foreach($extend as $ext) {
+                if ($ext === '') {
                     continue;
-                } elseif ((int) $extend == 0) {
-                    $e = $dict[$extend];
+                } elseif ((int) $ext == 0) {
+                    $e = $dict[$ext];
+                } elseif ((int) $ext > 0) {
+                    $e = $dict[$ids[$ext]];
                 } else {
-                    $e = $dict[$ids[$extend]];
+                    var_dump($ext);
+                    assert(false, "\$ext is not a string nor an integer.");
                 }
                 
                 $results[$dict[$name]][$e] = 1;

@@ -1,11 +1,12 @@
 <?php
 
-$expected     = array("'C'",
-                      "'E'");
+$expected     = array('\'C\'',
+                      '\'E\'',
+                     );
 
-$expected_not = array("'d'",
-                      "'F'",
-                      "'G'"
-);
+$expected_not = array('\'d\'',
+                      '\'F\'',
+                      '\'G\'',
+                     );
 
 ?>

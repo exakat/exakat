@@ -1,14 +1,14 @@
 <?php
 
-$expected     = array("'g'",
-                      "'g'",
+$expected     = array('\'g\'',
+                      '\'g\'',
                       'h',
                       'h',
                       'f',
-                      "'f'",
+                      '\'f\'',
                       'f2',
-                      "'F2'",
-                      );
+                      '\'F2\'',
+                     );
 
 $expected_not = array('i',
                       'a$a',
@@ -17,7 +17,7 @@ $expected_not = array('i',
                       'c',
                       'd',
                       'f1',
-                      "'f1'",
-                      );
+                      '\'f1\'',
+                     );
 
 ?>

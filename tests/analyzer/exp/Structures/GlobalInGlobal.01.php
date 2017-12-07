@@ -2,7 +2,8 @@
 
 $expected     = array('$global',
                       '$global2',
-                      '$global');
+                      '$global',
+                     );
 
 $expected_not = array('$functionVar',
                       '$closureVar',
@@ -11,6 +12,6 @@ $expected_not = array('$functionVar',
                       '$interfaceVar',
                       '$traitVar',
                       '$traitMethodVar',
-                      );
+                     );
 
 ?>

@@ -37,7 +37,13 @@ $extension_list = array();
 $ext = glob('./human/en/Extensions/Ext*.ini');
 foreach($ext as $f) {
     $ini = parse_ini_file($f);
-    $extension_list[] = '* '.$ini['name'];
+    
+    // We take the first URL that we encounter.
+    if (preg_match('/<(http:.*?)>/', $ini['description'], $r)) {
+        $extension_list[] = '* `'.$ini['name'].' <'.$r[1].'>`_';
+    } else {
+        $extension_list[] = '* '.$ini['name'];
+    }
 }
 $extension_list = implode("\n", $extension_list);
 

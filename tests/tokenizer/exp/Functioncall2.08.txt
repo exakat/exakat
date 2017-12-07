@@ -1,0 +1,251 @@
+Label : FILE
+  ;
+  Label : EXPRESSION
+    <?php
+
+    Label : CODE
+      ;
+      Label : EXPRESSION
+        foo
+        Label : NAME
+          foo
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          Void
+      Label : EXPRESSION
+        foo
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          Void
+        Label : NAME
+          foo
+      Label : EXPRESSION
+        foo
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          Void
+        Label : NAME
+          foo
+      Label : EXPRESSION
+        foo
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          4
+        Label : NAME
+          foo
+      Label : EXPRESSION
+        foo
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          4
+        Label : ARGUMENT
+          5
+        Label : ARGUMENT
+          Void
+        Label : NAME
+          foo
+      Label : EXPRESSION
+        foo
+        Label : ARGUMENT
+          1
+        Label : ARGUMENT
+          2
+        Label : ARGUMENT
+          3
+        Label : ARGUMENT
+          4
+        Label : ARGUMENT
+          5
+        Label : NAME
+          foo
+      Label : EXPRESSION
+        ->
+        Label : METHOD
+          moo
+          Label : NAME
+            moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            Void
+        Label : OBJECT
+          $a
+      Label : EXPRESSION
+        ->
+        Label : METHOD
+          moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            Void
+          Label : NAME
+            moo
+        Label : OBJECT
+          $a
+      Label : EXPRESSION
+        ->
+        Label : METHOD
+          moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            Void
+          Label : NAME
+            moo
+        Label : OBJECT
+          $a
+      Label : EXPRESSION
+        ->
+        Label : METHOD
+          moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            4
+          Label : NAME
+            moo
+        Label : OBJECT
+          $a
+      Label : EXPRESSION
+        ->
+        Label : METHOD
+          moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            4
+          Label : ARGUMENT
+            5
+          Label : ARGUMENT
+            Void
+          Label : NAME
+            moo
+        Label : OBJECT
+          $a
+      Label : EXPRESSION
+        ->
+        Label : METHOD
+          moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            4
+          Label : ARGUMENT
+            5
+          Label : NAME
+            moo
+        Label : OBJECT
+          $a
+      Label : EXPRESSION
+        ::
+        Label : CLASS
+          a
+        Label : METHOD
+          moo
+          Label : NAME
+            moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            Void
+      Label : EXPRESSION
+        ::
+        Label : CLASS
+          a
+        Label : METHOD
+          moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            Void
+          Label : NAME
+            moo
+      Label : EXPRESSION
+        ::
+        Label : CLASS
+          a
+        Label : METHOD
+          moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            Void
+          Label : NAME
+            moo
+      Label : EXPRESSION
+        ::
+        Label : CLASS
+          a
+        Label : METHOD
+          moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            4
+          Label : NAME
+            moo
+      Label : EXPRESSION
+        ::
+        Label : CLASS
+          a
+        Label : METHOD
+          moo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            4
+          Label : ARGUMENT
+            5
+          Label : NAME
+            moo

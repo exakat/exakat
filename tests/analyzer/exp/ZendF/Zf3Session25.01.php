@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Session\Validator\ValidatorChainEM2( )');
+$expected     = array('Zend\\Session\\Validator\\ValidatorChainEM2( )',
+                     );
 
-$expected_not = array('Zend\Session\AbstractContainer( )');
+$expected_not = array('Zend\\Session\\AbstractContainer( )',
+                     );
 
 ?>

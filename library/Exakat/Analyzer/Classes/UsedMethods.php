@@ -26,16 +26,15 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedMethods extends Analyzer {
-    public function dependsOn() {
-        return array('Functions/MarkCallable',
-                    );
-    }
-
     public function analyze() {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
         // Normal Methodcall
-        $methods = $this->query('g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()')->toArray();
+        $methods = $this->query(<<<GREMLIN
+g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }
+GREMLIN
+)->toArray();
+
         if (!empty($methods)) {
             $this->atomIs('Method')
                  ->_as('used')
@@ -47,7 +46,11 @@ class UsedMethods extends Analyzer {
         }
 
         // Staticmethodcall
-        $staticmethods = $this->query('g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()')->toArray();
+        $staticmethods = $this->query(<<<GREMLIN
+g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()
+GREMLIN
+)->toArray();
+
         if (!empty($staticmethods)) {
             $this->atomIs('Method')
                  ->_as('used')
@@ -58,9 +61,13 @@ class UsedMethods extends Analyzer {
             $this->prepareQuery();
         }
 
-        $callables = $this->query(<<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", "Functions/MarkCallable").out("ANALYZED")
-.where( or( hasLabel("String"), hasLabel("Arrayliteral")) )
+        // Staticmethodcall in arrays
+        // non-staticmethodcall in arrays, with $this
+        $callablesStrings = $this->query(<<<GREMLIN
+g.V().hasLabel("String")
+     .where(__.in("DEFINITION"))
+     .not(where(__.in("CONCAT")))
+     .filter{ (it.get().value('noDelimiter') =~ "::." ).getCount() != 0 }
 .map{
     // Strings
     if (it.get().label() == 'String') {
@@ -80,11 +87,39 @@ g.V().hasLabel("Analysis").has("analyzer", "Functions/MarkCallable").out("ANALYZ
     } else {
         it.get().value("noDelimiter").toLowerCase();
     }
-}
+}.unique();
 
 GREMLIN
-                    )->toArray();
+        )->toArray();
 
+        $callablesArray = $this->query(<<<GREMLIN
+g.V().hasLabel("Arrayliteral")
+     .where(__.values("count").is(eq(2)) )
+     .where(__.out("ARGUMENT").has("rank", 0).hasLabel("String").in("DEFINITION"))
+     .out("ARGUMENT")
+     .has("rank", 1)
+     .hasLabel("String")
+     .has("noDelimiter")
+     .values("noDelimiter")
+     .unique();
+GREMLIN
+        )->toArray();
+
+        $callablesThisArray = $this->query(<<<GREMLIN
+g.V().hasLabel("Arrayliteral")
+     .where(__.values("count").is(eq(2)) )
+     .where(__.out("ARGUMENT").has("rank", 0).hasLabel("Variable").has("code", "\\\$this").in("DEFINITION"))
+     .out("ARGUMENT")
+     .has("rank", 1)
+     .hasLabel("String")
+     .has("noDelimiter")
+     .values("noDelimiter")
+     .unique();
+GREMLIN
+        )->toArray();
+
+        $callables = array_unique(array_merge($callablesArray, $callablesThisArray, $callablesStrings));
+        
         if (!empty($callables)) {
             // method used statically in a callback with an array
             $this->atomIs('Method')
@@ -132,7 +167,6 @@ GREMLIN
         // the special methods must be processed independantly
         // __destruct is always used, no need to spot
     }
-
 }
 
 ?>

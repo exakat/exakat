@@ -25,11 +25,29 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeCallable extends Analyzer {
-    public function dependsOn() {
-        return array('Functions/MarkCallable');
-    }
-    
     public function analyze() {
+        $ini = $this->loadIni('php_with_callback.ini');
+
+        foreach($ini as $position => $functions) {
+            $rank = substr($position, 9);
+        
+            // foo($arg) { array_map($arg, '') ; }
+            $this->atomIs(self::$FUNCTIONS_ALL)
+                 ->outIs('ARGUMENT')
+                 ->raw('not(where( __.out("TYPEHINT").has("token", "T_CALLABLE")))')
+                 ->_as('results')
+                 ->outIsIE('LEFT')
+                 ->savePropertyAs('code', 'argument')
+                 ->back('first')
+                 ->outIs('BLOCK')
+                 ->atomInside('Functioncall')
+                 ->functioncallIs($functions)
+                 ->outWithRank('ARGUMENT', $rank)
+                 ->samePropertyAs('code', 'argument')
+                 ->back('first');
+            $this->prepareQuery();
+        }
+
         // $arg(...)
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
@@ -39,25 +57,10 @@ class CouldBeCallable extends Analyzer {
              ->savePropertyAs('code', 'argument')
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('Variable')
+             ->atomInside('Functioncall')
+             ->outIs('NAME')
+             ->atomIs('Variable')
              ->samePropertyAs('code', 'argument')
-             ->inIs('NAME')
-             ->atomIs('Functioncall')
-             ->back('first');
-        $this->prepareQuery();
-
-        // array_map($array, $arg)
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->raw('not(where( __.out("TYPEHINT").has("token", "T_CALLABLE")))')
-             ->_as('results')
-             ->outIsIE('LEFT')
-             ->savePropertyAs('code', 'argument')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Variable')
-             ->samePropertyAs('code', 'argument')
-             ->analyzerIs('Functions/MarkCallable')
              ->back('first');
         $this->prepareQuery();
     }

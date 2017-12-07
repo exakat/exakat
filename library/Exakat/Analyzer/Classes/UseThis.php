@@ -50,8 +50,7 @@ class UseThis extends Analyzer {
              ->hasNoFunction()
              ->hasNoOut('STATIC')
              ->outIs('BLOCK')
-             ->atomInsideNoAnonymous(self::$VARIABLES_ALL)
-             ->codeIs('$this', true)
+             ->atomInsideNoAnonymous('This')
              ->back('first');
         $this->prepareQuery();
 
@@ -61,7 +60,7 @@ class UseThis extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoAnonymous(array('Staticmethodcall', 'Staticproperty'))
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
+             ->tokenIs(self::$STATICCALL_TOKEN)
              ->codeIsNot('parent')
              ->savePropertyAs('fullnspath', 'classe')
              ->goToClassTrait()

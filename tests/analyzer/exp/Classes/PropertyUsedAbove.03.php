@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$usedProtectedByAbove');
+$expected     = array('$usedProtectedByAbove',
+                     );
 
-$expected_not = array('$unusedProtected');
+$expected_not = array('$unusedProtected',
+                     );
 
 ?>

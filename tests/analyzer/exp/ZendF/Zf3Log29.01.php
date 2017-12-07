@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('Zend\Log\ConfigProvider( )');
+$expected_not = array('Zend\\Log\\ConfigProvider( )',
+                     );
 
 ?>

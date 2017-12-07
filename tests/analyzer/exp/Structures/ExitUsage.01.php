@@ -1,14 +1,14 @@
 <?php
 
-$expected     = array("die('e')", 
-                      "die( )", 
-                      "die ", 
-                      "exit('f')", 
-                      'exit( )', 
+$expected     = array('die(\'e\')',
+                      'die( )',
+                      'die ',
+                      'exit(\'f\')',
+                      'exit( )',
                       'exit ',
                      );
 
-$expected_not = array('exit(3)', 
+$expected_not = array('exit(3)',
                      );
 
 ?>

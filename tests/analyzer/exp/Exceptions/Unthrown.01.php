@@ -1,10 +1,11 @@
 <?php
 
-$expected     = array( 'class unthrownB extends \\RuntimeException { /**/ } ',
-                       'class unthrownA extends \\RuntimeException { /**/ } ',
-);
+$expected     = array('class unthrownB extends \\RuntimeException { /**/ } ',
+                      'class unthrownA extends \\RuntimeException { /**/ } ',
+                     );
 
 $expected_not = array('class b extends \\RuntimeException { /**/ } ',
-                      'class a extends \\Exception { /**/ } ');
+                      'class a extends \\Exception { /**/ } ',
+                     );
 
 ?>

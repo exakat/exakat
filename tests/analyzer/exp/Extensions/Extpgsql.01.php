@@ -7,7 +7,7 @@ $expected     = array('pg_connect("dbname=publisher")',
                       'pg_num_rows($res1)',
                       'pg_get_result($dbconn)',
                       'pg_num_rows($res2)',
-                      );
+                     );
 
 $expected_not = array('die("Could not connect")',
                      );

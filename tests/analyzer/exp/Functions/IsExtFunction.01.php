@@ -1,10 +1,12 @@
 <?php
 
 $expected     = array('curl_init(1, 2, 3)',
-                      '\FTP_LOGIN( )');
+                      '\\FTP_LOGIN( )',
+                     );
 
 $expected_not = array('misc_function()',
                       '$x( )',
-                      '$y[1]( )');
+                      '$y[1]( )',
+                     );
 
 ?>

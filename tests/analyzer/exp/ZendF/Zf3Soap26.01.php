@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('Zend\Soap\AutoDiscover\DiscoveryStrategy\ReflectionDiscovery( )');
+$expected_not = array('Zend\\Soap\\AutoDiscover\\DiscoveryStrategy\\ReflectionDiscovery( )',
+                     );
 
 ?>

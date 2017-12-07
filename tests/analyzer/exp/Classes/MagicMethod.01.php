@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('__call', 
-                      '__toString');
+$expected     = array('__call',
+                      '__toString',
+                     );
 
-$expected_not = array('__toBoolean');
+$expected_not = array('__toBoolean',
+                     );
 
 ?>

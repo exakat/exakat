@@ -60,7 +60,7 @@ class UsedProtectedMethod extends Analyzer {
              ->outIs('METHOD')
              ->atomInsideNoDefinition('Methodcall')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')

@@ -1,12 +1,14 @@
 <?php
 
-$expected     = array('PDO', 
-                      'Closure');
+$expected     = array('PDO',
+                      'Closure',
+                     );
 
-$expected_not = array('\I',
+$expected_not = array('\\I',
                       'I',
                       'UNKNOWN',
-                      '\UNKNOWN',
-                      'string');
+                      '\\UNKNOWN',
+                      'string',
+                     );
 
 ?>

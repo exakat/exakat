@@ -1,7 +1,11 @@
 <?php
 
-$expected     = array("'Europe'", '"Asia"', 'Africa');
+$expected     = array('\'Europe\'',
+                      '"Asia"',
+                      'Africa',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

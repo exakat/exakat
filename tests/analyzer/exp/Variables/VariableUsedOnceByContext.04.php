@@ -1,13 +1,15 @@
 <?php
 
-$expected     = array('array &$a', 
-                      '$e', 
-                      '$g', 
+$expected     = array('array &$a',
+                      '$e',
+                      '$g',
                       '$b',
-                      '$c');
+                      '$c',
+                     );
 
 $expected_not = array('$a',
                       '$d',
-                      '&$d');
+                      '&$d',
+                     );
 
 ?>

@@ -1,11 +1,13 @@
 <?php
 
-$expected     = array('Stdclass( )', 
-                      '\\Stdclass( )', 
-                      'A\\B\\C', 
-                      '\\D\\R');
+$expected     = array('Stdclass( )',
+                      '\\Stdclass( )',
+                      'A\\B\\C',
+                      '\\D\\R',
+                     );
 
 $expected_not = array('$a',
-                      '$a[2]');
+                      '$a[2]',
+                     );
 
 ?>

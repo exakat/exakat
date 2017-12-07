@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('./tests/analyzer/source/Files/DefinitionsOnly.09.php');
+$expected     = array('./tests/analyzer/source/Files/DefinitionsOnly.09.php',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

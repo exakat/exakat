@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('__halt_compiler');
+$expected     = array('__halt_compiler',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

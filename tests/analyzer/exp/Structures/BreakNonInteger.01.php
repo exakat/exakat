@@ -5,8 +5,9 @@ $expected     = array('1 + 1',
                       '"0"',
                       'null',
                       '$x',
-                      );
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

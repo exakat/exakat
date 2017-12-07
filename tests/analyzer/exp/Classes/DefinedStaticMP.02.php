@@ -5,10 +5,11 @@ $expected     = array('self::definedinStatic( )',
                       'self::definedInParentParent( )',
                       'self::$pdefinedinStatic',
                       'self::$pdefinedInParent',
-                      'self::$pdefinedInParentParent',);
+                      'self::$pdefinedInParentParent',
+                     );
 
 $expected_not = array('self::definedinStatic( )',
                       'self::$definedinStatic',
-                      );
+                     );
 
 ?>

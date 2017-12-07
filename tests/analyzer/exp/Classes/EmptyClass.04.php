@@ -2,7 +2,8 @@
 
 $expected     = array('class ANotException extends Exception { /**/ } ',
                       'class BH extends ANotException { /**/ } ',
-                      'class BG extends G { /**/ } ');
+                      'class BG extends G { /**/ } ',
+                     );
 
 $expected_not = array('class BD extends D { /**/ } ',
                       'class AException extends \\Exception { /**/ } ',
@@ -10,6 +11,6 @@ $expected_not = array('class BD extends D { /**/ } ',
                       'class BE extends E { /**/ } ',
                       'class BC extends C { /**/ } ',
                       'class BF extends F { /**/ } ',
-);
+                     );
 
 ?>

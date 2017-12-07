@@ -1,15 +1,16 @@
 <?php
 
 $expected     = array('$aThis',
-                      '$neverUsed', 
+                      '$neverUsed',
                       '$dNonThis',
-                      '$aNonThis', 
-                      '$dThis');
+                      '$aNonThis',
+                      '$dThis',
+                     );
 
-$expected_not = array('$bThis', 
-                      '$bNonThis', 
-                      '$cThis', 
+$expected_not = array('$bThis',
+                      '$bNonThis',
+                      '$cThis',
                       '$cNonThis',
-                      );
+                     );
 
 ?>

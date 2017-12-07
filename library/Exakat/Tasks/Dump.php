@@ -111,7 +111,7 @@ SQL;
             $this->collectStructures();
             $this->collectVariables();
             $this->collectLiterals();
-            $this->collectTypedLiterals();
+            $this->collectReadability();
             display('Collecting data finished');
         }
 
@@ -214,8 +214,11 @@ SQL;
         }
         
         if (!empty($query)) {
-            $query = 'REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
-             VALUES '.join(', ', $query);
+            $values = implode(', ', $query);
+            $query = <<<SQL
+REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
+             VALUES $values
+SQL;
             $this->sqlite->query($query);
         }
 
@@ -246,7 +249,7 @@ SQL;
             }
         }
         
-        $query = 'INSERT INTO atomsCounts ("id", "atom", "count") VALUES '.join(', ', $counts);
+        $query = 'INSERT INTO atomsCounts ("id", "atom", "count") VALUES '.implode(', ', $counts);
         $this->sqlite->query($query);
         
         display(count($atomsCount)." atoms\n");
@@ -336,7 +339,7 @@ GREMLIN;
         }
         
         if (!empty($query)) {
-            $query = 'INSERT INTO variables ("id", "variable", "type") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO variables ("id", "variable", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         
@@ -365,7 +368,7 @@ GREMLIN;
         }
         
         if (!empty($query)) {
-            $query = 'INSERT INTO namespaces ("id", "namespace") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO namespaces ("id", "namespace") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -523,13 +526,25 @@ GREMLIN;
                 } else {
                     $extends = '"'.$this->sqlite->escapeString($row['extends']).'"';
                 }
+
                 $namespace = preg_replace('/\\\\[^\\\\]*?$/', '', $row['fullnspath']);
-                $query[] = "(".$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($row['name'])."', ".$namespacesId[$namespace].", ".(int) $row['abstract'].",".(int) $row['final'].", '"
-                                .$row['type']."', ".$extends.")";
+                if (isset($namespacesId[$namespace])) {
+                    $namespaceId = $namespacesId[$namespace];
+                } else {
+                    $namespaceId = 1;
+                }
+
+                $query[] = "(".$citId[$row['fullnspath']].
+                           ", '".$this->sqlite->escapeString($row['name'])."'".
+                           ", ".$namespaceId.
+                           ", ".(int) $row['abstract'].
+                           ",".(int) $row['final'].
+                           ", '".$row['type']."'".
+                           ", ".$extends.")";
             }
 
             if (!empty($query)) {
-                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends") VALUES '.join(", \n", $query);
+                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends") VALUES '.implode(", \n", $query);
                 $this->sqlite->query($query);
             }
 
@@ -549,7 +564,7 @@ GREMLIN;
             }
 
             if (!empty($query)) {
-                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.join(', ', $query);
+                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.implode(', ', $query);
                 $this->sqlite->query($query);
             }
 
@@ -569,7 +584,7 @@ GREMLIN;
             }
 
             if (!empty($query)) {
-                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.join(', ', $query);
+                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.implode(', ', $query);
                 $this->sqlite->query($query);
             }
         }
@@ -592,7 +607,7 @@ GREMLIN;
             }
         }
         if (!empty($query)) {
-            $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total uses \n");
@@ -652,7 +667,7 @@ GREMLIN;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
 
@@ -727,7 +742,7 @@ GREMLIN;
             ++$total;
         }
         if (!empty($query)) {
-            $query = 'INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         
@@ -777,69 +792,27 @@ GREMLIN;
                 $visibility = '';
             }
 
-            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].", '".$visibility."', '".$this->sqlite->escapeString($row['value'])."')";
+            if (isset($namespacesId[$namespace])) {
+                $namespaceId = $namespacesId[$namespace];
+            } else {
+                $namespaceId = 1;
+            }
+
+            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."'".
+                       ", ".$citId[$row['class']].
+                       ", '".$visibility."'".
+                       ", '".$this->sqlite->escapeString($row['value'])."')";
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total constants\n");
     }
 
-    private function collectTypedLiterals() {
-        $types = array('Type/Regex',
-                       'Type/Url',
-                       'Type/Sql',
-                       'Type/Email',
-                       'Type/Md5String',
-                       'Type/MimeType',
-                       'Type/ArrayIndex',
-                       'Type/GPCIndex',
-                       //'Type/Ports',
-                       
-                       );
-        
-        foreach($types as $typeAnalyzer) {
-            $type = strtolower(substr($typeAnalyzer, 5));
-            
-            $this->sqlite->query('DROP TABLE IF EXISTS '.$type);
-
-            $analyzer = Analyzer::getInstance($typeAnalyzer, $this->gremlin, $this->config);
-            assert($analyzer !== null, "Missing typed literal : $type\n");
-            if ($analyzer === null) {
-                continue;
-            }
-            $res = $analyzer->getDump();
-            if (empty($res)) {
-                continue;
-            }
-            display('collect '.$type);
-
-            $total = 0;
-            $query = array();
-            foreach($res as $value => $row) {
-                $query[] = '(\''.$this->sqlite->escapestring(trim($row['fullcode'], "'\"")).'\', \''.$row['file'].'\',  '.$row['line'].')';
-            }
-       
-           if (!empty($query)) {
-                $this->sqlite->query(<<<SQL
-CREATE TABLE $type ( id INTEGER PRIMARY KEY AUTOINCREMENT,
-                     string STRING,
-                     file STRING,
-                     line integer
-                    )
-SQL
-);
-
-               $query = 'REPLACE INTO '.$type.' ("string", "file", "line") VALUES '.join(', ', $query);
-               $this->sqlite->query($query);
-           }
-        }
-    }
-    
     private function collectLiterals() {
         $types = array('Integer', 'Real', 'String', 'Heredoc', 'Arrayliteral');
 
@@ -882,14 +855,14 @@ GREMLIN;
                 $query[] = "('".$this->sqlite->escapeString($row['name'])."','".$this->sqlite->escapeString($row['file'])."',".$row['line'].')';
                 ++$total;
                 if ($total % 10000 === 0) {
-                    $query = 'INSERT INTO literal'.$type.' (name, file, line) VALUES '.join(', ', $query);
+                    $query = 'INSERT INTO literal'.$type.' (name, file, line) VALUES '.implode(', ', $query);
                     $this->sqlite->query($query);
                     $query = array();
                 }
             }
             
             if (!empty($query)) {
-                $query = 'INSERT INTO literal'.$type.' (name, file, line) VALUES '.join(', ', $query);
+                $query = 'INSERT INTO literal'.$type.' (name, file, line) VALUES '.implode(', ', $query);
                 $this->sqlite->query($query);
             }
             display( "literal$type : $total\n");
@@ -925,7 +898,7 @@ GREMLIN;
         }
        
        if (!empty($query)) {
-           $query = 'REPLACE INTO stringEncodings ("encoding", "block") VALUES '.join(', ', $query);
+           $query = 'REPLACE INTO stringEncodings ("encoding", "block") VALUES '.implode(', ', $query);
            $this->sqlite->query($query);
        }
     }
@@ -953,7 +926,7 @@ GREMLIN;
             }
 
             if (!empty($query)) {
-                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
                 $this->sqlite->query($query);
             }
             display(count($includes)." inclusions ");
@@ -976,7 +949,7 @@ GREMLIN;
         }
 
         if (!empty($query)) {
-            $sqlQuery = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $sqlQuery = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($sqlQuery);
         }
         display(count($extends)." extends for classes ");
@@ -997,7 +970,7 @@ GREMLIN;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         display(count($res)." extends for interfaces ");
@@ -1018,7 +991,7 @@ GREMLIN;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         display(count($res)." use ");
@@ -1039,7 +1012,7 @@ GREMLIN;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         display(count($functioncall)." functioncall ");
@@ -1060,7 +1033,7 @@ GREMLIN;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         display(count($constants)." constants ");
@@ -1081,7 +1054,7 @@ GREMLIN;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         display(count($res)." new ");
@@ -1103,10 +1076,61 @@ GREMLIN;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         display(count($statics)." static calls CPM");
+    }
+    
+    private function collectReadability() {
+    $loops = 20;
+    $query = <<<GREMLIN
+g.V().sideEffect{ functions = 0; name=''; expression=0;}
+    .hasLabel("Function", "Closure", "Method", "File")
+    .not(where( __.out("BLOCK").hasLabel('Void')))
+    .sideEffect{ ++functions; }
+    .where(__.coalesce( __.out('NAME').sideEffect{ name=it.get().value("code"); }.in("NAME"),
+                        __.filter{true; }.sideEffect{ name='global'; file = it.get().value('code');} )
+    .sideEffect{ total = 0; expression = 0; type=it.get().label();}
+    .coalesce( __.out("BLOCK"), __.out("FILE").out("EXPRESSION").out("EXPRESSION") )
+    .repeat( __.out().not(hasLabel("Class", "Function", "Closure", "Interface", "Trait", "Void")) ).emit().times($loops)
+    .sideEffect{ ++total; }
+    .not(hasLabel('Void'))
+    .where( __.in("EXPRESSION", "CONDITION").sideEffect{ expression++; })
+    .where( __.repeat( __.in() ).emit().times($loops).hasLabel("File").sideEffect{ file = it.get().value('code'); })
+    .fold()
+    )
+    .map{ if (expression > 0) {
+        ['name':name, 'type':type, 'total':total, 'expression':expression, 'index': 102 - expression - total / expression, 'file':file];
+    } else {
+        ['name':name, 'type':type, 'total':total, 'expression':0, 'index': 100, 'file':file];
+    }
+}    
+GREMLIN;
+        $index = $this->gremlin->query($query);
+
+        $this->sqlite->query('DROP TABLE IF EXISTS readability');
+        $query = <<<SQL
+CREATE TABLE readability (  
+    id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    name    STRING,
+    type    STRING,
+    tokens  INTEGER,
+    expressions INTEGER,
+    file        STRING
+                    )
+SQL;
+        $this->sqlite->query($query);
+
+        $values = array();
+        foreach($index as $row) {
+            $values[] = '("'.$row['name'].'","'.$row['type'].'",'.$row['total'].','.$row['expression'].',"'.$row['file'].'") ';
+        }
+
+        $query = 'INSERT INTO readability ("name", "type", "tokens", "expressions", "file") VALUES '.implode(', ', $values);
+        $this->sqlite->query($query);
+
+        display( count($values).' readability index');
     }
 }
 

@@ -1,11 +1,13 @@
 <?php
 
-$expected     = array("<<<'NOWDOC'
-\$x
-NOWDOC");
+$expected     = array('<<<\'NOWDOC\'
+$x
+NOWDOC',
+                     );
 
 $expected_not = array('<<<HEREDOC
 $x
-HEREDOC');
+HEREDOC',
+                     );
 
 ?>

@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ThrowsAndAssign extends Analyzer {
     public function analyze() {
+        // throw $e = new Exception();
         $this->atomIs('Throw')
              ->outIs('THROW')
              ->atomIs('Assignation');

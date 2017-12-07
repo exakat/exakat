@@ -8,7 +8,7 @@ $expected     = array('print (4)',
                       'include (\'file.php\')',
                       'include_once (\'file.php\')',
                       'require (\'file.php\')',
-);
+                     );
 
 $expected_not = array('print (\'4b\')',
                       'echo (\'2b\')',
@@ -18,6 +18,6 @@ $expected_not = array('print (\'4b\')',
                       'include (\'fileb.php\')',
                       'include_once (\'fileb.php\')',
                       'require (\'fileb.php\')',
-);
+                     );
 
 ?>

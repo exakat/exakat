@@ -46,7 +46,7 @@ class AccessPrivate extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('METHOD')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->tokenIs(self::$STATICCALL_TOKEN)
              ->codeIsNot(array('parent', 'static', 'self'))
              ->isNotLocalClass()
              ->classDefinition()
@@ -82,7 +82,7 @@ class AccessPrivate extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->tokenIs(self::$STATICCALL_TOKEN)
              ->codeIs(array('self', 'static'))
              ->goToClass()
              // no local method
@@ -99,7 +99,7 @@ class AccessPrivate extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('MEMBER')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->tokenIs(self::$STATICCALL_TOKEN)
              ->codeIsNot(array('parent', 'static', 'self'))
              ->isNotLocalClass()
 
@@ -115,7 +115,7 @@ class AccessPrivate extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('MEMBER')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_STATIC'))
+             ->tokenIs(self::$STATICCALL_TOKEN)
              ->codeIs('parent')
              ->isNotLocalClass()
 

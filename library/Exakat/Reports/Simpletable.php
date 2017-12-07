@@ -73,7 +73,7 @@ HTML;
             $ini = parse_ini_file($this->config->doc_root.'human/en/'.$section.'.ini');
             $title = htmlentities($ini['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
 
-            $rows = join('', $rows);
+            $rows = implode('', $rows);
             $c = count($lines);
             $table .= <<<HTML
 		<tbody class="labels">

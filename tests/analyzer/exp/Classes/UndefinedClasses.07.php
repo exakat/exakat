@@ -2,10 +2,11 @@
 
 $expected     = array('new DefinedAliasUndefinedClass( )',
                       'new NonexistantAlias( )',
-                      'new UndefinedClass( )');
+                      'new UndefinedClass( )',
+                     );
 
 $expected_not = array('new DefinedLocalClass( )',
                       'new DefinedAlias( )',
-                      );
+                     );
 
 ?>

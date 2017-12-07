@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('function bothpropertyandmethod( ) { /**/ } ', 
-                      'function method( ) { /**/ } ', 
+$expected     = array('function bothpropertyandmethod( ) { /**/ } ',
+                      'function method( ) { /**/ } ',
                       'function property( ) { /**/ } ',
                      );
 
-$expected_not = array('function nothingButStatic( ) { /**/ } ', 
-                      );
+$expected_not = array('function nothingButStatic( ) { /**/ } ',
+                     );
 
 ?>

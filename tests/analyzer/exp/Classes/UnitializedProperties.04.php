@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$notInitialized');
+$expected     = array('$notInitialized',
+                     );
 
-$expected_not = array('$initialized = 1');
+$expected_not = array('$initialized = 1',
+                     );
 
 ?>

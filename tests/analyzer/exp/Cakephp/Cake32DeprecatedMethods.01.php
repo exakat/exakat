@@ -1,9 +1,11 @@
 <?php
 
 $expected     = array('$shell->error( )',
-                      '$resultset->_calculateTypeMap( )');
+                      '$resultset->_calculateTypeMap( )',
+                     );
 
-$expected_not = array('Cake\ORM\ResultSet::_calculateTypeMap()',
-                      'Shell::error()');
+$expected_not = array('Cake\\ORM\\ResultSet::_calculateTypeMap()',
+                      'Shell::error()',
+                     );
 
 ?>

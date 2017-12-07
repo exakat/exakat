@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array("geoip_continent_code_by_name('www.example.com')");
+$expected     = array('geoip_continent_code_by_name(\'www.example.com\')',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

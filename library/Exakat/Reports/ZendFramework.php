@@ -938,7 +938,7 @@ JAVASCRIPT;
 
     public function getSeverityBreakdown() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
                 SELECT severity, count(*) AS number
@@ -1016,7 +1016,7 @@ SQL;
 
     protected function getAnalyzersResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
         SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity FROM results
@@ -1030,7 +1030,7 @@ SQL
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
-            $row['recipes' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
+            $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
             $return[] = $row;
         }
@@ -1075,7 +1075,7 @@ SQL;
 
     private function getFilesResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
@@ -1105,7 +1105,7 @@ SQL;
 
     public function getFilesCount($limit = null) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT file, count(*) AS number
                     FROM results
@@ -1163,11 +1163,11 @@ SQL;
             $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
             $dataNone[]     = empty($severities[$value['file']]['None'])     ? 0 : $severities[$value['file']]['None'];
         }
-        $xAxis        = join(', ', $xAxis);
-        $dataCritical = join(', ', $dataCritical);
-        $dataMajor    = join(', ', $dataMajor);
-        $dataMinor    = join(', ', $dataMinor);
-        $dataNone     = join(', ', $dataNone);
+        $xAxis        = implode(', ', $xAxis);
+        $dataCritical = implode(', ', $dataCritical);
+        $dataMajor    = implode(', ', $dataMajor);
+        $dataMinor    = implode(', ', $dataMinor);
+        $dataNone     = implode(', ', $dataNone);
 
         return array(
             'scriptDataFiles'    => $xAxis,
@@ -1180,7 +1180,7 @@ SQL;
 
     private function getAnalyzersCount($limit) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -1202,7 +1202,7 @@ SQL;
 
     private function getTopAnalyzers() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -1233,7 +1233,7 @@ SQL;
 
     private function getSeveritiesNumberBy($type = 'file') {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
 SELECT $type, severity, count(*) AS count
@@ -1272,11 +1272,11 @@ SQL;
             $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
             $dataNone[]     = empty($severities[$value['analyzer']]['None'])     ? 0 : $severities[$value['analyzer']]['None'];
         }
-        $xAxis = join(', ', $xAxis);
-        $dataCritical = join(', ', $dataCritical);
-        $dataMajor = join(', ', $dataMajor);
-        $dataMinor = join(', ', $dataMinor);
-        $dataNone = join(', ', $dataNone);
+        $xAxis        = implode(', ', $xAxis);
+        $dataCritical = implode(', ', $dataCritical);
+        $dataMajor    = implode(', ', $dataMajor);
+        $dataMinor    = implode(', ', $dataMinor);
+        $dataNone     = implode(', ', $dataNone);
 
         return array(
             'scriptDataAnalyzer'         => $xAxis,
@@ -1354,7 +1354,7 @@ JAVASCRIPT;
 
     public function getIssuesFaceted($theme) {
         $list = Analyzer::getThemeAnalyzers($theme);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $sqlQuery = <<<SQL
             SELECT fullcode, file, line, analyzer
@@ -1372,9 +1372,9 @@ SQL;
             $item['analyzer_md5'] = md5($ini['name']);
             $item['file' ] =  $row['file'];
             $item['file_md5' ] =  md5($row['file']);
-            $item['code' ] = $this->PHPSyntax($row['fullcode']);
+            $item['code' ] = PHPSyntax($row['fullcode']);
             $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus'] = $this->PHPSyntax($row['fullcode']);
+            $item['code_plus'] = PHPSyntax($row['fullcode']);
             $item['link_file'] = $row['file'];
             $item['line' ] =  $row['line'];
             $item['severity'] = "<i class=\"fa fa-warning ".$this->severities[$row['analyzer']]."\"></i>";
@@ -1567,7 +1567,7 @@ SQL;
         }
         unset($row);
 
-        $settings = join('', $info);
+        $settings = implode('', $info);
 
         $html = $this->getBasedPage('annex_settings');
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
@@ -1731,7 +1731,7 @@ HTML;
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $dynamicCode .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $dynamicCode .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('dynamic_code');
@@ -1743,7 +1743,7 @@ HTML;
         $theGlobals = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $theGlobals .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $theGlobals .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('globals');
@@ -1775,7 +1775,7 @@ HTML;
             $theTable = '';
             $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $theTable .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+                $theTable .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
             }
 
             $html = $this->getBasedPage('inventories');
@@ -1790,7 +1790,7 @@ HTML;
         $alteredDirectives = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $alteredDirectives .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $alteredDirectives .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('altered_directives');
@@ -2060,7 +2060,7 @@ SQL;
             $data['Composer Packages'] = array();
             $res = $this->sqlite->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $data['Composer Packages'][] = $this->PHPSyntax($row['fullcode']);
+                $data['Composer Packages'][] = PHPSyntax($row['fullcode']);
             }
         } else {
             unset($data['Composer Packages']);
@@ -2144,13 +2144,6 @@ HTML;
         }
     }
     
-    private function PHPSyntax($code) {
-        $php = highlight_string('<?php |'.$code.'|; ?>', true);
-        $php = substr($php, strpos($php, '|') + 1);
-        $php = substr($php, 0, strrpos($php, '|'));
-        return $php;
-    }
-    
     private function generateUnusedComponents() {
         $composerJson = file_get_contents( $this->config->projects_root.'/projects/'.$this->config->project.'/code/composer.json');
         $composer = json_decode($composerJson);
@@ -2195,7 +2188,7 @@ HTML;
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $errorMessages .= '<tr><td>'.$this->PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $errorMessages .= '<tr><td>'.PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('error_messages');
@@ -2208,7 +2201,7 @@ HTML;
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="ZendF/ThrownExceptions"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $exceptionInventory .= '<tr><td>'.$this->PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $exceptionInventory .= '<tr><td>'.PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $table = '<table class="table table-striped">

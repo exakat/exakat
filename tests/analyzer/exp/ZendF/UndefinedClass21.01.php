@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter');
+$expected     = array('Zend\\Authentication\\Adapter\\DbTable\\CallbackCheckAdapter',
+                     );
 
-$expected_not = array('Zend\Authentication\Adapter\DbTable');
+$expected_not = array('Zend\\Authentication\\Adapter\\DbTable',
+                     );
 
 ?>

@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('ttt',
-                      'undefined');
+$expected     = array('undefined',
+                     );
 
-$expected_not = array('T',
-                      'TT');
+$expected_not = array('ttt',
+                      'T',
+                      'TT',
+                     );
 
 ?>

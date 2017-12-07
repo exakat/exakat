@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('./tests/analyzer/source/Files/IsComponent.07.php');
+$expected     = array('./tests/analyzer/source/Files/IsComponent.07.php',
+                     );
 
-$expected_not = array('');
+$expected_not = array('',
+                     );
 
 ?>

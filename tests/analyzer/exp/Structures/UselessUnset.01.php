@@ -9,10 +9,11 @@ $expected     = array('unset($value)',
                       'unset($theStatic)',
                       'unset($theGLobal)',
                       'unset($argByReference)',
-                      'unset($argByValue)'
-);
+                      'unset($argByValue)',
+                     );
 
 $expected_not = array('unset($valuep2->property->property2)',
-                      'unset($valuep2->property->property2)',);
+                      'unset($valuep2->property->property2)',
+                     );
 
 ?>

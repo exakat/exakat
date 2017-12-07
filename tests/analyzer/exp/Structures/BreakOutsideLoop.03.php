@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('break 2',
-                      'break 1');
+                      'break 1',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

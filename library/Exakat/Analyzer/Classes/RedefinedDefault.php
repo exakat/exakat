@@ -51,7 +51,7 @@ class RedefinedDefault extends Analyzer {
              ->outIs('LEFT')
              ->atomIs('Member')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('MEMBER')
              ->samePropertyAs('code', 'name')

@@ -51,7 +51,7 @@ class DependencyInjection extends Analyzer {
              ->outIs('LEFT')
              ->atomIs('Member')
              ->outIs('OBJECT')
-             ->codeIs('$this')
+             ->atomIs('This')
              ->back('result');
         $this->prepareQuery();
 

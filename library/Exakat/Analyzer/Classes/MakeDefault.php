@@ -43,7 +43,7 @@ class MakeDefault extends Analyzer {
              ->atomIs('Member')
              ->_as('result')
              ->outIs('OBJECT')
-             ->codeIs('$this', true)
+             ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'propriete')

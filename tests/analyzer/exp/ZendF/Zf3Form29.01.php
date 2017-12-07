@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Form\FormElementManager( )');
+$expected     = array('Zend\\Form\\FormElementManager( )',
+                     );
 
-$expected_not = array('Zend\Form\Annotation\AbstractAnnotationsListener( )');
+$expected_not = array('Zend\\Form\\Annotation\\AbstractAnnotationsListener( )',
+                     );
 
 ?>

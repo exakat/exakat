@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('<?php  /**/  ?>'); // only one
+$expected     = array('<?php  /**/  ?>',
+                     );
 
-$expected_not = array('<?php  /**/  ?>');
+$expected_not = array('<?php  /**/  ?>',
+                     );
 
 ?>

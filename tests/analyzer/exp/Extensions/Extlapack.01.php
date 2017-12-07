@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Lapack');
+$expected     = array('Lapack',
+                     );
 
-$expected_not = array('lapack');
+$expected_not = array('lapack',
+                     );
 
 ?>

@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('ob_end_flush( )',
-                      'ob_start( )');
+                      'ob_start( )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

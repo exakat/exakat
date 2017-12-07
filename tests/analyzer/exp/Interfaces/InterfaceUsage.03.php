@@ -2,8 +2,10 @@
 
 $expected     = array('y',
                       'z',
-                      'z');
+                      'z',
+                     );
 
-$expected_not = array('a');
+$expected_not = array('a',
+                     );
 
 ?>

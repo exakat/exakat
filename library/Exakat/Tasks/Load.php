@@ -140,6 +140,9 @@ class Load extends Tasks {
     const NOT_CONSTANT_EXPRESSION   = false;
     
     const FULLNSPATH_UNDEFINED = 'undefined';
+    
+    const WITHOUT_TYPEHINT_SUPPORT = false;
+    const WITH_TYPEHINT_SUPPORT    = true;
 
     const CONTEXT_CLASS        = 1;
     const CONTEXT_INTERFACE    = 2;
@@ -226,7 +229,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
     
-    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES');
+    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv',);
 
     private $processing = array();
 
@@ -455,7 +458,7 @@ CREATE TABLE calls (
     globalpath STRING,
     atom STRING,
     id INTEGER
- )
+)
 SQL;
         $this->callsSqlite->query($calls);
 
@@ -463,9 +466,10 @@ SQL;
 CREATE TABLE definitions (
     type STRING,
     fullnspath STRING,
+    globalpath STRING,
     atom STRING,
     id INTEGER
- )
+)
 SQL;
         $this->callsSqlite->query($definitions);
     }
@@ -579,7 +583,7 @@ SQL;
             $dir = substr($dir, 0, -1);
         }
         $tokens = 0;
-        Files::findFiles($dir, $files, $ignoredFiles, $this->config, $tokens);
+        Files::findFiles($dir, $files, $ignoredFiles, $this->config);
 
         $this->reset();
 
@@ -805,6 +809,10 @@ SQL;
             }
             $type = \Exakat\Tasks\T_START_HEREDOC;
         }
+        
+        // Set default, in case the whole loop is skipped
+        $string->noDelimiter = '';
+        $string->delimiter   = '';
 
         while ($this->tokens[$this->id + 1][0] !== $finalToken) {
             $currentVariable = $this->id + 1;
@@ -867,13 +875,13 @@ SQL;
         }
 
         ++$this->id;
-        $string->code     = $this->tokens[$current][1];
-        $string->fullcode = $string->binaryString.$openQuote.implode('', $fullcode).$closeQuote;
-        $string->line     = $this->tokens[$current][2];
-        $string->token    = $this->getToken($this->tokens[$current][0]);
-        $string->count    = $rank + 1;
-        $string->boolean  = (int) (boolean) ($rank + 1);
-        $string->constant = $constant;
+        $string->code        = $this->tokens[$current][1];
+        $string->fullcode    = $string->binaryString.$openQuote.implode('', $fullcode).$closeQuote;
+        $string->line        = $this->tokens[$current][2];
+        $string->token       = $this->getToken($this->tokens[$current][0]);
+        $string->count       = $rank + 1;
+        $string->boolean     = (int) (boolean) ($rank + 1);
+        $string->constant    = $constant;
 
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
             $string->delimiter = $closeQuote;
@@ -1036,7 +1044,7 @@ SQL;
         }
         
         // Process arguments
-        $function = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), true);
+        $function = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), self::WITH_TYPEHINT_SUPPORT);
         $argumentFullcode = $function->fullcode;
         $function->reference = $reference;
         if (isset($name)) {
@@ -1341,10 +1349,10 @@ SQL;
         }
 
         // Should work on Abstract and Final only
-        $fullcode= array();
+        $fullcode= array_column($this->optionsTokens, 'fullcode');
+
         foreach($this->optionsTokens as $token => $option) {
             $this->addLink($class, $option, strtoupper($token));
-            $fullcode[] = $option->fullcode;
         }
         $this->optionsTokens = array();
 
@@ -1731,7 +1739,8 @@ SQL;
         return 0;
     }
 
-    private function processArguments($atom, $finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehintSupport = false, $allowFinalVoid = false) {
+    private function processArguments($atom, $finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehintSupport = self::WITHOUT_TYPEHINT_SUPPORT) {
+        $allowFinalVoid = true;
         $arguments = $this->addAtom($atom);
         $current = $this->id;
         $argumentsId = array();
@@ -1752,7 +1761,8 @@ SQL;
             $arguments->constant = self::CONSTANT_EXPRESSION;
             $arguments->args_max = 0;
             $arguments->args_min = 0;
-            $argumentsId[] = $void;
+            $arguments->count    = 0;
+            $argumentsId[]       = $void;
 
             ++$this->id;
         } else {
@@ -1826,6 +1836,13 @@ SQL;
 
                     $this->addLink($arguments, $index, 'ARGUMENT');
                     $argumentsId[] = $index;
+                    // array($this, 'b'); for Callback syntax.
+                    if ($index->atom === 'Variable' &&
+                        $index->code === '$this'    &&
+                        $index->rank === 0 ) {
+                        $this->addCall('class', end($this->currentClassTrait)->fullnspath, $index);
+                    }
+                    
                     $fullcode[] = $index->fullcode;
                     $constant = $constant && ($index->constant === self::CONSTANT_EXPRESSION);
 
@@ -1892,7 +1909,6 @@ SQL;
         ++$this->id;
 
         $identifier = $this->addAtom($getFullnspath === self::WITH_FULLNSPATH ? 'Identifier' : 'Name');
-//        $identifier = $this->addAtom('Identifier');
         $identifier->code       = $this->tokens[$this->id][1];
         $identifier->fullcode   = $this->tokens[$this->id][1];
         $identifier->line       = $this->tokens[$this->id][2];
@@ -1954,7 +1970,7 @@ SQL;
         } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_SEMICOLON)));
 
         $const->code     = $this->tokens[$current][1];
-        $const->fullcode = (empty($options) ? '' : join(' ', $options).' ').$this->tokens[$current][1].' '.implode(', ', $fullcode);
+        $const->fullcode = (empty($options) ? '' : implode(' ', $options).' ').$this->tokens[$current][1].' '.implode(', ', $fullcode);
         $const->line     = $this->tokens[$current][2];
         $const->token    = $this->getToken($this->tokens[$current][0]);
         $const->count    = $rank + 1;
@@ -2040,7 +2056,7 @@ SQL;
             $atom = 'Methodcallname';
         }
         
-        $functioncall = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), false, $name->token === 'T_LIST');
+        $functioncall = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), self::WITHOUT_TYPEHINT_SUPPORT);
         $argumentsFullcode = $functioncall->fullcode;
         $functioncall->code      = $name->code;
         $functioncall->fullcode  = $name->fullcode.'('.$argumentsFullcode.')';
@@ -2971,6 +2987,7 @@ SQL;
             $functioncall->fullcode   = $name->fullcode.' ';
             $functioncall->line       = $this->tokens[$this->id][2];
             $functioncall->token      = $this->getToken($this->tokens[$this->id][0]);
+            $functioncall->count      = 0;
             $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
 
             $this->addLink($functioncall, $void, 'ARGUMENT');
@@ -3464,7 +3481,9 @@ SQL;
     }
 
     private function processVariable() {
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
+        if ($this->tokens[$this->id][1] === '$this') {
+            $atom = 'This';
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
             $atom = 'Variableobject';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET) {
             $atom = 'Variablearray';
@@ -3472,6 +3491,10 @@ SQL;
             $atom = 'Variable';
         }
         $variable = $this->processSingle($atom);
+        
+        if ($atom == 'This' && ($class = end($this->currentClassTrait))) {
+            $this->addCall('class', $class->fullnspath, $variable);
+        }
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -4358,12 +4381,13 @@ SQL;
         }
         $this->exitContext();
 
-        $concatenation->code     = $this->tokens[$current][1];
-        $concatenation->fullcode = implode(' . ', $fullcode);
-        $concatenation->line     = $this->tokens[$current][2];
-        $concatenation->token    = $this->getToken($this->tokens[$current][0]);
-        $concatenation->count    = $rank;
-        $concatenation->constant = $constant;
+        $concatenation->code        = $this->tokens[$current][1];
+        $concatenation->fullcode    = implode(' . ', $fullcode);
+        $concatenation->noDelimiter = trim($concatenation->fullcode, '"\'');
+        $concatenation->line        = $this->tokens[$current][2];
+        $concatenation->token       = $this->getToken($this->tokens[$current][0]);
+        $concatenation->count       = $rank;
+        $concatenation->constant    = $constant;
 
         $this->pushExpression($concatenation);
 
@@ -4391,7 +4415,7 @@ SQL;
         
         list($fullnspath, $aliased) = $this->getFullnspath($right);
         $this->addCall('class', $fullnspath, $right);
-        $this->aliased = $aliased;
+        $right->aliased = $aliased;
 
         $instanceof->code     = $this->tokens[$current][1];
         $instanceof->fullcode = $left->fullcode.' '.$this->tokens[$current][1].' '.$right->fullcode;
@@ -4494,6 +4518,7 @@ SQL;
         $functioncall->fullcode   = $name->code.' '.$index->fullcode;
         $functioncall->line       = $name->line;
         $functioncall->token      = $name->token;
+        $functioncall->count      = 1; // Only one argument for print
         $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
 
         $this->addLink($functioncall, $name, 'NAME');
@@ -4881,10 +4906,19 @@ SQL;
             return;
         }
 
+        if ($fullnspath === 'undefined') {
+            $globalpath = '';
+        } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
+            $globalpath = $r[1];
+        } else {
+            $globalpath = '';
+        }
+
         $query = 'INSERT INTO definitions VALUES ("'.$type.'",
-                                            "'.$this->callsSqlite->escapeString($fullnspath).'",
-                                            "'.$definition->atom.'",
-                                            "'.$definition->id.'"
+                                                  "'.$this->callsSqlite->escapeString($fullnspath).'",
+                                                  "'.$this->callsSqlite->escapeString($globalpath).'",
+                                                  "'.$definition->atom.'",
+                                                  "'.$definition->id.'"
          )';
 
         $this->callsSqlite->query($query);

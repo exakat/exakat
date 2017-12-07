@@ -1,13 +1,13 @@
 <?php
 
-$expected     = array('$usedProtectedByAbove', 
+$expected     = array('$usedProtectedByAbove',
                       '$usedProtectedDefaultedByAbove = 3',
-                      '$usedStaticProtectedDefaultedByAbove = 1'
-);
+                      '$usedStaticProtectedDefaultedByAbove = 1',
+                     );
 
-$expected_not = array('$unusedStaticProtectedDefaulted = 2', 
-                      '$unusedProtectedDefaulted = 4', 
-                      '$unusedProtected', 
-                      );
+$expected_not = array('$unusedStaticProtectedDefaulted = 2',
+                      '$unusedProtectedDefaulted = 4',
+                      '$unusedProtected',
+                     );
 
 ?>

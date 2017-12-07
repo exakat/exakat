@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('CurlFile');
+$expected     = array('CurlFile',
+                     );
 
-$expected_not = array('$c->d[$e]');
+$expected_not = array('$c->d[$e]',
+                     );
 
 ?>

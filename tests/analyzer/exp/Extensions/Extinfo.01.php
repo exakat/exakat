@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('ini_get_all( )',
-                      'getmypid( )');
+                      'getmypid( )',
+                     );
 
-$expected_not = array('print_r(ini_get_all( ))');
+$expected_not = array('print_r(ini_get_all( ))',
+                     );
 
 ?>

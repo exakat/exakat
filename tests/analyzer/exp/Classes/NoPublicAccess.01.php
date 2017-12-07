@@ -7,6 +7,6 @@ $expected_not = array('$used',
                       '$usedInside = 3',
                       '$usedButStatic',
                       '$usedButStatic = 4',
-                      );
+                     );
 
 ?>

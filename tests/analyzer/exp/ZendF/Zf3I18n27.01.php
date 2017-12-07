@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('Zend\I18n\ConfigProvider( )');
+$expected_not = array('Zend\\I18n\\ConfigProvider( )',
+                     );
 
 ?>

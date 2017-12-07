@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array( '\'abcdef12\'', 
-                       '\'20157511\'', 
-                       '\'ABCDEF12\''
-);
+$expected     = array('\'abcdef12\'',
+                      '\'20157511\'',
+                      '\'ABCDEF12\'',
+                     );
 
 $expected_not = array('"VARIABLE"',
                       '"REQUIRED"',
@@ -12,11 +12,9 @@ $expected_not = array('"VARIABLE"',
                       '"AVOGADRO"',
                       '"ALLOCATE"',
                       '"UNHIDABLECOLUM"',
-
-                      "'20150511'",
-                      "'19150512'",
-
-                      "'20150512201502'",
-);
+                      '\'20150511\'',
+                      '\'19150512\'',
+                      '\'20150512201502\'',
+                     );
 
 ?>

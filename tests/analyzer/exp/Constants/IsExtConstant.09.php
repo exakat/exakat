@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('SQLITE3_OPEN_READONLY');
+$expected     = array('SQLITE3_OPEN_READONLY',
+                     );
 
-$expected_not = array('E_ALL');
+$expected_not = array('E_ALL',
+                     );
 
 ?>

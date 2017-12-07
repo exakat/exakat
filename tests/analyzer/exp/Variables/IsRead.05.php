@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('$classname',
-                      '$functionname');
+                      '$functionname',
+                     );
 
-$expected_not = array('$notRead');
+$expected_not = array('$notRead',
+                     );
 
 ?>

@@ -2,10 +2,12 @@
 
 $expected     = array('File($poFile, true)',
                       'CakeEventListener',
-                      'Celltrait');
+                      'Celltrait',
+                     );
 
 $expected_not = array('NotCakeFile',
                       'NotCakeCakeEventListener',
-                      'NotCakeFileConfigTrait');
+                      'NotCakeFileConfigTrait',
+                     );
 
 ?>

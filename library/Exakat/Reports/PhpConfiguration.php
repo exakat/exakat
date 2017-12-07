@@ -39,10 +39,10 @@ class PhpConfiguration extends Reports {
             $sources[$row['analyzer']] = $row['count'];
         }
 
-        $shouldDisableFunctions = json_decode(file_get_contents($this->config->dir_root.'/data/shouldDisableFunction.json'));
+        $shouldDisableFunctions = (array) json_decode(file_get_contents($this->config->dir_root.'/data/shouldDisableFunction.json'));
         $functionsArray = array();
         $classesArray = array();
-        foreach((array) $shouldDisableFunctions as $ext => $toDisable) {
+        foreach($shouldDisableFunctions as $ext => $toDisable) {
             if ($sources[$ext] == 0) {
                 if (isset($toDisable->functions)) {
                     $functionsArray[] = $toDisable->functions;

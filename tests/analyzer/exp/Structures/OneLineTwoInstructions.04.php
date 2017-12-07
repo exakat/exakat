@@ -1,9 +1,11 @@
 <?php
 
-$expected     = array('$this->x++');
+$expected     = array('$this->x++',
+                     );
 
-$expected_not = array('private $x', 
+$expected_not = array('private $x',
                       'var $a',
-                      'var $b = 3');
+                      'var $b = 3',
+                     );
 
 ?>

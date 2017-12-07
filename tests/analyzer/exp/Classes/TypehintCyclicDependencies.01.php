@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('class A { /**/ } ',
-                      'class B { /**/ } ',);
+                      'class B { /**/ } ',
+                     );
 
-$expected_not = array('class C { /**/ } ',);
+$expected_not = array('class C { /**/ } ',
+                     );
 
 ?>

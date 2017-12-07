@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array("crypt(\$user_input, \$hashed_password)", 
-                      "crypt('mypassword')");
+$expected     = array('crypt($user_input, $hashed_password)',
+                      'crypt(\'mypassword\')',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

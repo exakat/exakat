@@ -9,8 +9,9 @@ $expected     = array('$d5 ? $e5 ? $i5 : $j5 : $f5 ? $g5 : $h5',
                       '$b3 ? $c3 : $d3 ? $e3 : $f3 ? $g3 : $h3',
                       '$b2 ? $c2 : $d2 ? $e2 : $f2',
                       '$b1 ? $c1 ? $d1 : $e1 : $f1',
-                      );
+                     );
 
-$expected_not = array('$b0 ? $c0 : $d0');
+$expected_not = array('$b0 ? $c0 : $d0',
+                     );
 
 ?>

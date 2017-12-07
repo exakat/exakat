@@ -9,12 +9,13 @@ $expected     = array('$objectp4',
                       '$array1',
                       '$array2',
                       '$array3',
-                      '$array32'
-                      );
+                      '$array32',
+                     );
 
 $expected_not = array('$array4',
                       '$string32',
-                      '$objectm32', 
-                      '$objectp32');
+                      '$objectm32',
+                      '$objectp32',
+                     );
 
 ?>

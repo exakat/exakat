@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array();
+$expected     = array(
+                     );
 
-$expected_not = array('Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase( )');
+$expected_not = array('Zend\\Test\\PHPUnit\\Controller\\AbstractConsoleControllerTestCase( )',
+                     );
 
 ?>

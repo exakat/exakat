@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('Zend\Config\StandaloneReaderPluginManager( )');
+$expected     = array('Zend\\Config\\StandaloneReaderPluginManager( )',
+                     );
 
-$expected_not = array('Zend\Config\NotZendConfig($configArray)',
-                      'Zend\Config\Config($configArray)');
+$expected_not = array('Zend\\Config\\NotZendConfig($configArray)',
+                      'Zend\\Config\\Config($configArray)',
+                     );
 
 ?>

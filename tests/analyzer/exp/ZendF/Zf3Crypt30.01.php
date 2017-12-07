@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Crypt\Hybrid( )');
+$expected     = array('Zend\\Crypt\\Hybrid( )',
+                     );
 
-$expected_not = array('Zend\Crypt\BlockCipher( )');
+$expected_not = array('Zend\\Crypt\\BlockCipher( )',
+                     );
 
 ?>

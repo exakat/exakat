@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Imagick( )');
+$expected     = array('Imagick( )',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

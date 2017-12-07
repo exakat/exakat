@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('class object { /**/ } ');
+$expected     = array('class object { /**/ } ',
+                     );
 
-$expected_not = array('class abject { /**/ } ');
+$expected_not = array('class abject { /**/ } ',
+                     );
 
 ?>

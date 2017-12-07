@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array("constant('PHP_VERSION')",
-                      "constant('Stdclass::VERSION')",
+$expected     = array('constant(\'PHP_VERSION\')',
+                      'constant(\'Stdclass::VERSION\')',
                       '$$p2',
                       '$$o1',
                       '$$o4',
@@ -14,11 +14,11 @@ $expected     = array("constant('PHP_VERSION')",
                       '$c2::$$p2',
                       '${$o}::cms1( )',
                       '$o3->$cm2( )',
-                      '$c::$cms2( )', 
-                      '$$dna[1]'
-                      );
+                      '$c::$cms2( )',
+                      '$$dna[1]',
+                     );
 
-$expected_not = array('$dnc( )', // Is already in via new $dnc()
-                      );
+$expected_not = array('$dnc( )',
+                     );
 
 ?>

@@ -1,11 +1,13 @@
 <?php
 
 $expected     = array('true',
-                      'false');
+                      'false',
+                     );
 
 $expected_not = array('TRUE',
                       'FALSE',
                       'TRue',
-                      'FAlse');
+                      'FAlse',
+                     );
 
 ?>

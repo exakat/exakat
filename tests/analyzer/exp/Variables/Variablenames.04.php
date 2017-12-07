@@ -1,14 +1,14 @@
 <?php
 
-$expected     = array('$dynamicFunction', 
-                      '$dynamicMethod', 
+$expected     = array('$dynamicFunction',
+                      '$dynamicMethod',
                       '$dynamicStaticMethod',
-                      '$object', 
                       '$object',
-                      );
+                      '$object',
+                     );
 
-$expected_not = array('$staticProperty', 
+$expected_not = array('$staticProperty',
                       'aClass',
-                      );
+                     );
 
 ?>

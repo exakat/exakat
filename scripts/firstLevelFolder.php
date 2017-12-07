@@ -38,7 +38,7 @@ print_r($counts);
 
 
 print "list all first-level folders in projects for stats\n";
-$res = shell_exec('find projects/* -depth 2 -type d -path "*/code/*"');
+$res = shell_exec('find projects/[a-d]* -depth 2 -type d -path "*/code/*"');
 print_r($res);
 
 $stats = array();

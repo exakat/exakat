@@ -9,28 +9,25 @@ The Exakat Engine is an automated code reviewing engine for PHP.
 Phar is the recommended installation process.
 
 The Exakat engine is [distributed as a phar archive](http://www.exakat.io/download-exakat/), that contains all the needed PHP code. 
-The rest of the installation (Neo4j, gremlin, and dependencies) is detailled in the [documentation](https://exakat.readthedocs.io/en/latest/).
+The rest of the installation (NGremlin-server) is detailled in the [documentation](https://exakat.readthedocs.io/en/latest/).
 
-Once the installation is finished, you may check it with 'doctor'.
-
-```bash
-$ php exakat.phar doctor
-```
-
-### Installation from github
+The quick installation guide is the following (command line, MacOS. See docs for more options): 
 
 ```bash
-$ git clone https://github.com/exakat/exakat.git
+mkdir exakat
+cd exakat
+curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
+curl -o apache-tinkerpop-gremlin-server-3.2.6-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.6/apache-tinkerpop-gremlin-server-3.2.6-bin.zip
+unzip apache-tinkerpop-gremlin-server-3.2.6-bin.zip
+mv apache-tinkerpop-gremlin-server-3.2.6 tinkergraph
+rm -rf apache-tinkerpop-gremlin-server-3.2.6-bin.zip
 
-$ cd exakat 
+# Optional : install neo4j engine.
+cd tinkergraph
+bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.6
+cd ..
 
-```
-
-There, you may proceed with the rest of the installation (Neo4j, gremlin, and dependencies) is detailled in the [documentation](https://exakat.readthedocs.io/en/latest/).
-You can also immediately use the PHAR after you have downloaded it, of course:
-
-```bash
-$ php exakat doctor
+php exakat.phar doctor
 ```
 
 ### Run online

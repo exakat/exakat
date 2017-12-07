@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('UNDEFINED');
+$expected     = array('UNDEFINED',
+                     );
 
-$expected_not = array('A');
+$expected_not = array('A',
+                     );
 
 ?>

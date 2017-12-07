@@ -5,10 +5,11 @@ $expected     = array('static::definedinStatic( )',
                       'static::definedInParentParent( )',
                       'static::$pdefinedinStatic',
                       'static::$pdefinedInParent',
-                      'static::$pdefinedInParentParent',);
+                      'static::$pdefinedInParentParent',
+                     );
 
 $expected_not = array('static::$definedinStatic',
                       'static::undefined()',
-                      );
+                     );
 
 ?>

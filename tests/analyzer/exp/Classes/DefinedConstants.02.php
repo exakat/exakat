@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('X::parentInterfaceDefinedConstant', 
-                      'X::definedconstant', 
-                      'x::definedConstant', 
-                      'X::definedConstant', 
+$expected     = array('X::parentInterfaceDefinedConstant',
+                      'X::definedconstant',
+                      'x::definedConstant',
+                      'X::definedConstant',
                       'x::definedconstant',
                      );
 

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('parse_str($a)');
+$expected     = array('parse_str($a)',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

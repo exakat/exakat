@@ -7,9 +7,10 @@ $expected     = array('$read',
                       '$written',
                       '$written2',
                       '$written3',
-                      );
+                     );
 
 $expected_not = array('$read_arg',
-                      '$written_arg');
+                      '$written_arg',
+                     );
 
 ?>

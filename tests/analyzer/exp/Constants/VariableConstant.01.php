@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array("'PHP_VERSION'");
+$expected     = array('\'PHP_VERSION\'',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

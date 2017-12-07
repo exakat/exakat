@@ -25,27 +25,29 @@ namespace Exakat;
 use Exakat\Config;
 
 class Description {
+    const LANGUAGES = ['en'];
+
     private $language = 'en';
-    private $ini = array('description'    => '',
-                         'name'           => '',
-                         'clearphp'       => '');
-    private $analyzer = null;
+    private $analyzer = '';
+    private $configPath = '';
+    private $ini = array();
 
-    public function __construct($analyzer, $config) {
-        $this->analyzer = $analyzer;
+    public function __construct($analyzerName, $configPath, $language = 'en') {
+        $this->analyzer = $analyzerName;
+        $this->configPath = $configPath;
+        $this->language = in_array($language, self::LANGUAGES) ? $language : 'en';
 
-        $filename = $config->dir_root.'/human/'.$this->language.'/'.str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $analyzer)).'.ini';
+        $filename = "$this->configPath/human/$this->language/$this->analyzer.ini";
 
-        if (file_exists($filename)) {
-            $ini = parse_ini_file($filename);
-            $ini = empty($ini) ? array() : $ini;
-            $this->ini = $ini + $this->ini;
-        }
+        assert(file_exists($filename), "Documentation for '$analyzerName' doesn't exists : $filename.");
         
-        assert(isset($this->ini['description']), 'Missing description in '.$analyzer);
-        assert(isset($this->ini['name']), 'Missing name in '.$analyzer);
-        assert(isset($this->ini['exakatSince']), 'Missing exakatSince in '.$analyzer);
-        assert(isset($this->ini['clearphp']), 'Missing clearphp in '.$analyzer);
+        $this->ini = parse_ini_file($filename);
+        assert($this->ini !== null, "Documentation for '$analyzerName' doesn't exists : $filename.");
+        
+        assert(isset($this->ini['description']), 'Missing description in '.$analyzerName);
+        assert(isset($this->ini['name']), 'Missing name in '.$analyzerName);
+        assert(isset($this->ini['exakatSince']), 'Missing exakatSince in '.$analyzerName);
+        assert(isset($this->ini['clearphp']), 'Missing clearphp in '.$analyzerName);
 
         // else is the default values already defined above
     }

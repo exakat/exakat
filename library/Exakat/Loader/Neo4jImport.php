@@ -42,6 +42,8 @@ class Neo4jImport {
     private $indexList = array('Analysis');
 
     private $config = null;
+    
+    private $gremlin = null;
 
     public function __construct($gremlin, $config) {
         $this->config = $config;

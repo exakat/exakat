@@ -2,13 +2,14 @@
 
 $expected     = array('a::$inAA',
                       'a::$inAAA',
-                      'a::$inAAAA');
+                      'a::$inAAAA',
+                     );
 
 $expected_not = array('a::$inA',
                       'a::$inB',
                       'a::$inTrait',
                       'a::$nowhere',
-                      'c::$inC'
-                      );
+                      'c::$inC',
+                     );
 
 ?>

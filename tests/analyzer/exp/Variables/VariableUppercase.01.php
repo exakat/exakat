@@ -1,10 +1,12 @@
 <?php
 
-$expected     = array( '$ALL_UPPER',
-                      '$TWO');
+$expected     = array('$ALL_UPPER',
+                      '$TWO',
+                     );
 
-$expected_not = array('$x', 
+$expected_not = array('$x',
                       '$lOO',
-                      '$X');
+                      '$X',
+                     );
 
 ?>

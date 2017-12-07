@@ -1,11 +1,12 @@
 <?php
 
-$expected     = array('ArrayAccess', 
-                      'Serializable', 
-                      'RecursiveIterator', 
+$expected     = array('ArrayAccess',
+                      'Serializable',
+                      'RecursiveIterator',
                       '\\OuterIterator',
-                      );
+                     );
 
-$expected_not = array('NotPHP',);
+$expected_not = array('NotPHP',
+                     );
 
 ?>

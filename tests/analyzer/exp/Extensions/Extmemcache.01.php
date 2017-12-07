@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Memcache');
+$expected     = array('Memcache',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

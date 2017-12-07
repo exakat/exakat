@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class NonBreakableSpaceInNames extends Analyzer {
     public function analyze() {
         // class This has non breakable spaces {}
-        $this->atomIs(array('Identifier', 'Nsname'))
+        $this->atomIs(array('Identifier', 'Nsname', 'Name'))
              ->regexIs('code', ' '); // <- This is a non-breakable space in there
         $this->prepareQuery();
     }

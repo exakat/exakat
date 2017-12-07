@@ -1,4 +1,4 @@
-Version 1.0.5 ( King of Cold Protection, coming up)
+Version 1.0.6 (Fuli, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,28 @@ Version 1.0.5 ( King of Cold Protection, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.0.5  King of Cold Protection, 2017-11-27)
++ Architecture
+    + Configured Exakat for Tinkergraph 3.3. Still unfinished.
+    + Documentation now has an external link to extensions. 
++ Report
+    + Ambassador : added more inventories : URL SQL, email, GET index, MD5, Mime
++ Analyzer
+    + New analysis : parent first
+    + New analysis : Report uncommon Environnement Vars
+    + New analysis : Report invalid Regex
+    + New analysis : Report contatenation in Zend DB
+    + Fixed analysis : Deprecated Functions
+    + Fixed analysis : Unknown PCRE2 option 
+    + Upgraded analysis : hardcoded password
+    + Upgraded analysis : array_merge in loops 
+    + Upgraded analysis : substr() first. Handle following expressions
+    + Refactored analysis : Used Functions
+    + Refactored analysis : Add Zero
+    + Checked unit tests : 2573 / 2585 test pass (99% pass). 
++ Tokenizer
+    + Fixed a bug that linked functions and definitions
 
 Version 1.0.4 (Boxiang Demon, 2017-11-20)
 + Architecture

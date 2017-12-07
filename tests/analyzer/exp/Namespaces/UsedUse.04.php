@@ -1,10 +1,12 @@
 <?php
 
-$expected     = array('InNew', 
-                      'InNew2', 
-                      'InNew3', 
-                      'AlwaysUsed',);
+$expected     = array('InNew',
+                      'InNew2',
+                      'InNew3',
+                      'AlwaysUsed',
+                     );
 
-$expected_not = array('NeverUsed');
+$expected_not = array('NeverUsed',
+                     );
 
 ?>

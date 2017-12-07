@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('!(!($s . $y))',
-                      '!((!($s . $z)))');
+                      '!((!($s . $z)))',
+                     );
 
-$expected_not = array('!($s . $x)');
+$expected_not = array('!($s . $x)',
+                     );
 
 ?>

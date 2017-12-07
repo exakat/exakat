@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array('PHP_VERSION', 
-                      'TRUE');
+$expected     = array('PHP_VERSION',
+                      'TRUE',
+                     );
 
-$expected_not = array();
+$expected_not = array(
+                     );
 
 ?>

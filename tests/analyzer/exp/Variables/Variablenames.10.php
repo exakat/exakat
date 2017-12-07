@@ -2,7 +2,7 @@
 
 $expected     = array('$variableHereF',
                       '$e',
-                      '$variableHereM'
+                      '$variableHereM',
                      );
 
 $expected_not = array('$y',

@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Zend\Filter\AbstractDateDropdown( )');
+$expected     = array('Zend\\Filter\\AbstractDateDropdown( )',
+                     );
 
-$expected_not = array('Zend\Filter\AbstractDateDropdown\NotZend( )');
+$expected_not = array('Zend\\Filter\\AbstractDateDropdown\\NotZend( )',
+                     );
 
 ?>

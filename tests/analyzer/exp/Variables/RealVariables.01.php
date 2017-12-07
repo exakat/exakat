@@ -2,19 +2,20 @@
 
 $expected     = array('$o',
                       '$real',
-                      'Stdclass $yyy', 
-                      'Stdclass $yt = null', 
-                      'Stdclass $y = null', 
-                      '$yy = 2', 
-                      '$yyt = 2', 
+                      'Stdclass $yyy',
+                      'Stdclass $yt = null',
+                      'Stdclass $y = null',
+                      '$yy = 2',
+                      '$yyt = 2',
                       'Stdclass $yyyt',
-                      '$dynamicProperty');
+                      '$dynamicProperty',
+                     );
 
 $expected_not = array('$a',
-                      '$staticproperty', 
+                      '$staticproperty',
                       '$b',
                       '$at',
                       '$bt',
-                      );
+                     );
 
 ?>

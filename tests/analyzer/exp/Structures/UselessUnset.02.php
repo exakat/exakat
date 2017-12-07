@@ -5,8 +5,10 @@ $expected     = array('(unset) $argByReference',
                       '(unset) $theGLobal',
                       '(unset) $theStatic',
                       '(unset) $value2',
-                      '(unset) $value1');
+                      '(unset) $value1',
+                     );
 
-$expected_not = array('(unset) $x');
+$expected_not = array('(unset) $x',
+                     );
 
 ?>

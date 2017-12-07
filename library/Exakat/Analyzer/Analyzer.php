@@ -93,7 +93,7 @@ abstract class Analyzer {
     static public $FUNCTIONS_NAMED  = array('Function', 'Method');
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $CLASSES_NAMED    = 'Class';
-    
+    static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -109,7 +109,7 @@ abstract class Analyzer {
     
     protected $linksDown = '';
 
-    public function __construct($gremlin = null, $config = null) {
+    public function __construct($gremlin = null, $config) {
         $this->gremlin = $gremlin;
         
         $this->analyzer = get_class($this);
@@ -121,15 +121,11 @@ abstract class Analyzer {
         
         $this->_as('first');
         
-        if($config === null) {
-            print_r($this);
-            debug_print_backtrace();
-            die();
-        }
+        assert($config !== null, "Can't call Analyzer without a config");
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
-            $this->description = new Description($this->analyzer, $config);
+            $this->description = new Description($this->getName($this->analyzer), $config->dir_root);
         }
         
         if (!isset(self::$datastore)) {
@@ -781,7 +777,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
 
     public function noChildWithRank($edgeName, $rank = '0') {
         if (is_int($rank)) {
-            $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').has("rank", '.abs((int) $rank).') ) )');
+            $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').has("rank", '.abs($rank).') ) )');
         } else {
             $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').filter{it.get().value("rank") == '.$rank.'; } ) )');
         }

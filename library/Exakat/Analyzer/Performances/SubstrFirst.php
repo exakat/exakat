@@ -26,8 +26,9 @@ use Exakat\Analyzer\Analyzer;
 
 class SubstrFirst extends Analyzer {
     public function analyze() {
-        $substrFunctions = array('\substr', '\stristr', '\strstr', '\iconv_substr', '\mb_substr', '\basename', '\dirname');
-        $replacingFunctions = array('\\strtolower', '\\strtoupper', '\\strtr', '\\chop', '\\trim', '\\rtrim', '\\ltrim','\\htmlentities', '\\htmlspecialchars', '\\str_replace', '\\str_ireplace', '\\ucfirst', '\\ucwords',
+        $substrFunctions = array('\substr', '\stristr', '\strstr', '\iconv_substr', '\mb_substr', '\basename', '\dirname',
+                                 '\\chop', '\\trim', '\\rtrim', '\\ltrim',);
+        $replacingFunctions = array('\\strtolower', '\\strtoupper', '\\strtr', '\\htmlentities', '\\htmlspecialchars', '\\str_replace', '\\str_ireplace', '\\ucfirst', '\\ucwords',
                                     '\\iconv',
                                     '\\mb_string_convert', '\\mb_strtoupper', '\\mb_strtolower', '\\mb_ereg_replace_callback', '\\mb_ereg_replace', '\\mb_eregi_replace', '\\mb_strcut', '\\mb_strimwidth',
                                     '\\preg_replace', '\\preg_relace_callback', '\\preg_replace_calback_array',
@@ -42,12 +43,29 @@ class SubstrFirst extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // $a = strtolower('a'); substr($a, 1, 100);
+        $this->atomFunctionIs($replacingFunctions)
+             ->inIs('RIGHT')
+             ->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('LEFT')
+             ->savePropertyAs('fullcode', 'tmp')
+             ->inIs('LEFT')
+             ->nextSibling()
+             ->atomInside('Functioncall')
+             ->functioncallIs($substrFunctions)
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('fullcode', 'tmp')
+             ->back('first');
+        $this->prepareQuery();
+
         // substr('a'.$b, 0, 100);
         $this->atomFunctionIs($substrFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->back('first');
         $this->prepareQuery();
+
     }
 }
 
