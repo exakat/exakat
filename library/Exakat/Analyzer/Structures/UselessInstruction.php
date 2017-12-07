@@ -163,7 +163,7 @@ class UselessInstruction extends Analyzer {
 
         $this->atomFunctionIs('\count')
              ->outWithRank('ARGUMENT', 0)
-             ->functioncallIs(array('array_keys', 'array_values', 'array_flip', 'array_fill', 'array_walk'))
+             ->functioncallIs(array('array_keys', 'array_values', 'array_flip', 'array_fill', 'array_walk', 'array_map', 'array_change_key_case', 'array_combine', 'array_multisort', 'array_replace', 'array_reverse'))
              ->back('first');
         $this->prepareQuery();
     }

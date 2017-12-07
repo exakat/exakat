@@ -34,7 +34,7 @@ class Arrayindex extends Analyzer {
         $this->prepareQuery();
 
         // list( 'a' => 2) = ['b' => 2];
-        $this->atomFunctionIs('\\list')
+        $this->atomIs('List')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')

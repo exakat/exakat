@@ -27,11 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class ListOmissions extends Analyzer {
     public function dependsOn() {
-        return array('Variables/VariableUsedOnceByContext');
+        return array('Variables/VariableUsedOnceByContext',
+                    );
     }
     
     public function analyze() {
-        $this->atomFunctionIs('\\list')
+        $this->atomIs('List')
              ->outIs('ARGUMENT')
              ->analyzerIs('Variables/VariableUsedOnceByContext');
         $this->prepareQuery();

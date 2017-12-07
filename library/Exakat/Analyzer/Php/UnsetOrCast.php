@@ -36,8 +36,8 @@ GREMLIN;
         $storage = array('(unset)'  => '(unset)',
                          'unset( )' => 'unset( )');
 
-        $this->atomIs(array('Functioncall', 'Cast'))
-             ->raw('or( hasLabel("Cast").has("token", "T_UNSET_CAST") , hasLabel("Functioncall").has("fullnspath", "\\\\unset"))')
+        $this->atomIs(array('Unset', 'Cast'))
+             ->raw('or( hasLabel("Cast").has("token", "T_UNSET_CAST"), hasLabel("Unset"))')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
@@ -60,8 +60,8 @@ GREMLIN;
             return;
         }
 
-        $this->atomIs(array('Functioncall', 'Cast'))
-             ->raw('or( hasLabel("Cast").has("token", "T_UNSET_CAST") , hasLabel("Functioncall").has("fullnspath", "\\\\unset"))')
+        $this->atomIs(array('Unset', 'Cast'))
+             ->raw('or( hasLabel("Cast").has("token", "T_UNSET_CAST") , hasLabel("Unset"))')
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');

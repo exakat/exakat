@@ -44,7 +44,7 @@ class UseDebug extends Analyzer {
         $this->prepareQuery();
 
         // Using constants
-        $this->atomFunctionIs('\\define')
+        $this->atomIs('Defineconstant')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')

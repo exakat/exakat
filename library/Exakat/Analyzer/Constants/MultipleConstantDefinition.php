@@ -30,12 +30,12 @@ class MultipleConstantDefinition extends Analyzer {
         // case-insensitive constants with Define
         // Search for definitions and count them
         $csDefinitions = $this->query(<<<GREMLIN
-g.V().hasLabel("Functioncall").has("fullnspath", "\\\\define")
-                              .or( __.out("ARGUMENT").has("rank", 2).count().is(eq(0)),
-                                   __.out("ARGUMENT").has("rank", 2).has('boolean', false),
-                                  )
-                              .out("ARGUMENT").has("rank", 0).hasLabel("String").not(where(__.out("CONCAT") ) )
-                              .values("noDelimiter")
+g.V().hasLabel("Defineconstant")
+     .or( __.out("ARGUMENT").has("rank", 2).count().is(eq(0)),
+          __.out("ARGUMENT").has("rank", 2).has('boolean', false),
+         )
+     .out("ARGUMENT").has("rank", 0).hasLabel("String").not(where(__.out("CONCAT") ) )
+     .values("noDelimiter")
 GREMLIN
 );
 
@@ -47,11 +47,10 @@ GREMLIN
 );
 
         $cisDefinitions = $this->query(<<<GREMLIN
-g.V().hasLabel("Functioncall").has("fullnspath")
-                              .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
-                              .out("ARGUMENT").has("rank", 2).has("boolean", true).in("ARGUMENT")
-                              .out("ARGUMENT").has("rank", 0)
-                              .map{ it.get().value("noDelimiter").toLowerCase()}
+g.V().hasLabel("Defineconstant")
+     .out("ARGUMENT").has("rank", 2).has("boolean", true).in("ARGUMENT")
+     .out("ARGUMENT").has("rank", 0)
+     .map{ it.get().value("noDelimiter").toLowerCase()}
 GREMLIN
 );
         if ($a = $this->selfCollisions($cisDefinitions->toArray())) {
@@ -90,7 +89,7 @@ GREMLIN
         }
         $array = array_values($array);
         
-        $this->atomFunctionIs('\\define')
+        $this->atomIs('Defineconstant')
              ->outWithRank('ARGUMENT', 2)
              ->is('boolean', true)
              ->inIs('ARGUMENT')
@@ -107,7 +106,7 @@ GREMLIN
         }
         $array = array_values($array);
 
-        $this->atomFunctionIs('\\define')
+        $this->atomIs('Defineconstant')
              ->outWithRank('ARGUMENT', 2)
              ->is('boolean', false)
              ->inIs('ARGUMENT')
@@ -117,7 +116,7 @@ GREMLIN
              ->noDelimiterIs($array);
         $this->prepareQuery();
 
-        $this->atomFunctionIs('\\define')
+        $this->atomIs('Defineconstant')
              ->noChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')

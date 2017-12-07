@@ -229,7 +229,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
     
-    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv',);
+    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv', 'SplitGraphson');
 
     private $processing = array();
 
@@ -761,6 +761,8 @@ SQL;
         $label->fullcode = $tag->fullcode.' :';
         $label->line     = $this->tokens[$this->id][2];
         $label->token    = $this->getToken($this->tokens[$this->id][0]);
+
+        $this->addDefinition('goto', $tag->fullcode, $label);
 
         $this->pushExpression($label);
         $this->processSemicolon();
@@ -2047,17 +2049,24 @@ SQL;
         ++$this->id; // Skipping the name, set on (
         $current = $this->id;
 
-
         if ($this->isContext(self::CONTEXT_NEW)) {
             $atom = 'Newcall';
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) {
-            $atom = 'Functioncall';
+            if (strtolower($name->code) == 'define') { // no namespace for define...
+                $atom = 'Defineconstant';
+            } elseif ($name->fullnspath == '\\unset') {
+                $atom = 'Unset';
+            } elseif ($name->fullnspath == '\\list') {
+                $atom = 'List';
+            } else {
+                $atom = 'Functioncall';
+            }
         } else {
             $atom = 'Methodcallname';
         }
         
         $functioncall = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), self::WITHOUT_TYPEHINT_SUPPORT);
-        $argumentsFullcode = $functioncall->fullcode;
+        $argumentsFullcode       = $functioncall->fullcode;
         $functioncall->code      = $name->code;
         $functioncall->fullcode  = $name->fullcode.'('.$argumentsFullcode.')';
         $functioncall->line      = $this->tokens[$current][2];
@@ -2069,9 +2078,8 @@ SQL;
             $functioncall->aliased    = $aliased;
 
             $this->addCall('class', $fullnspath, $functioncall);
-        } elseif ($getFullnspath === self::WITHOUT_FULLNSPATH) {
-            // Nothing
-        } else {
+        } elseif ($getFullnspath === self::WITH_FULLNSPATH || 
+                  $name->fullnspath !== '\\list') {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
             $functioncall->fullnspath = $fullnspath;
             $functioncall->aliased    = $aliased;
@@ -3037,7 +3045,7 @@ SQL;
             }
 
             if ($this->tokens[$id + 1][0] === \Exakat\Tasks\T_EQUAL) {
-                $array = $this->processArguments('Functioncall', array(\Exakat\Tasks\T_CLOSE_BRACKET));
+                $array = $this->processArguments('List', array(\Exakat\Tasks\T_CLOSE_BRACKET));
                 $argumentsFullcode = $array->fullcode;
     
                 // This is a T_LIST !
@@ -3870,6 +3878,7 @@ SQL;
         $this->processSingleOperator('Goto', $this->precedence->get($this->tokens[$this->id][0]), 'GOTO');
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
+        $this->addCall('goto', $this->tokens[$this->id][1], $operatorId);
         return $operatorId;
     }
 

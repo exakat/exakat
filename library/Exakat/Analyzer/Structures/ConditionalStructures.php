@@ -41,7 +41,7 @@ class ConditionalStructures extends Analyzer {
         $this->prepareQuery();
 
        // constants
-        $this->atomFunctionIs('\\define')
+        $this->atomIs('Defineconstant')
              ->hasIfthen()
              ->back('first')
              ->outWithRank('ARGUMENT', 0);

@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class CreatedOutsideItsNamespace extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs('\\define')
+        // define('\a\b\c', 3);
+        $this->atomIs('Defineconstant')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->regexIs('noDelimiter', '\\\\\\\\')

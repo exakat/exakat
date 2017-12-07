@@ -28,16 +28,14 @@ class PathinfoReturns extends Analyzer {
     public function analyze() {
         // doesn't work on parse_str, which returns void.
         //list(,, $extension, $filename) = array_values(pathinfo($filename));
-        $this->atomIs('Functioncall')
-             ->fullnspathIs(array('\\pathinfo', '\\parse_url'))
+        $this->atomFunctionIs(array('\\pathinfo', '\\parse_url'))
              ->inIs('ARGUMENT')
              ->atomIs('Functioncall')
              ->fullnspathIs('\\array_values')
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIs('Functioncall')
-             ->fullnspathIs('\\list')
+             ->atomIs('List')
              ->back('first');
         $this->prepareQuery();
     }

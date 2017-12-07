@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class BadConstantnames extends Analyzer {
     public function analyze() {
         // with define
-        $this->atomFunctionIs('\\define')
+        $this->atomIs('Defineconstant')
              ->outWithRank('ARGUMENT', 0)
              ->is('constant', true)
              ->atomIs('String')

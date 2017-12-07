@@ -58,7 +58,7 @@ class ThisIsForClasses extends Analyzer {
         $this->atomIs('This')
              ->hasClassTrait()
              ->inIs('ARGUMENT')
-             ->functioncallIs('\\unset')
+             ->atomIs('Unset')
              ->hasNoIn('METHOD')
              ->back('first');
         $this->prepareQuery();
