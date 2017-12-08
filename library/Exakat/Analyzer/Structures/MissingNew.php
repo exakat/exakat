@@ -26,15 +26,27 @@ use Exakat\Analyzer\Analyzer;
 
 class MissingNew extends Analyzer {
     public function analyze() {
-        $classes = $this->query(<<<GREMLIN
+        $customClasses = $this->query(<<<GREMLIN
 g.V().hasLabel('Class').out('NAME').values('code').unique();
 GREMLIN
 );
 
+        $phpClasses = $this->loadIni('php_classes.ini', 'classes');
+        
+        $classes = array_unique(array_merge($phpClasses, $customClasses->toArray()));
+        $classes = array_map('strtolower', $classes);
+
         $this->atomIs('Functioncall')
+             ->raw('or( where( __.in("ARGUMENT")), where(__.in("RIGHT").hasLabel("Assignation").has("code", "=") ) )')
              ->tokenIs('T_STRING')
              ->hasNoFunctionDefinition()
-             ->codeIs($classes->toArray());
+             ->codeIs($classes);
+        $this->prepareQuery();
+
+        $this->atomIs('Identifier')
+             ->raw('or( where( __.in("ARGUMENT")), where(__.in("RIGHT").hasLabel("Assignation").has("code", "=") ) )')
+             ->hasNoConstantDefinition()
+             ->codeIs($classes);
         $this->prepareQuery();
     }
 }
