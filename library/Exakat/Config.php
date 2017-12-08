@@ -146,8 +146,10 @@ class Config {
                                );
 
     private $LOADERS = array( 'neo4j'       => 'Neo4jImport', // Could be Neo4jImport, CypherG3
-                              'tinkergraph' => 'Tinkergraph',
-                              'gsneo4j'     => 'GSNeo4j',
+//                              'tinkergraph' => 'Tinkergraph',
+                              'tinkergraph' => 'SplitGraphson',
+//                              'gsneo4j'     => 'GSNeo4j',
+                              'gsneo4j'     => 'SplitGraphson',
                               'janusgraph'  => 'Janusgraph',
                               'januscaes'   => 'JanusCaES',
                               'nogremlin'   => 'NoLoader',

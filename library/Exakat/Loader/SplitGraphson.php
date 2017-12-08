@@ -33,7 +33,7 @@ use Exakat\Tasks\Load;
 use Exakat\Tasks\Tasks;
 use Exakat\Tokenizer\Token;
 
-class GSNeo4j {
+class SplitGraphson {
     const CSV_SEPARATOR = ',';
 
     private $file_saved = 0;
@@ -51,6 +51,7 @@ class GSNeo4j {
     private $calls = array();
     private $json = array();
     private $project = null;
+    private $projectId = null;
     private $id = 1;
 
     private $gsneo4j = null;
@@ -74,15 +75,23 @@ class GSNeo4j {
     }
 
     public function finalize() {
-        $jsonText = json_encode($this->project).PHP_EOL;
-        assert(!json_last_error(), 'Error encoding '.$this->project->label.' : '.json_last_error_msg());
+
+        $begin = microtime(true);
+        $query = <<<GREMLIN
         
-        $fp = fopen($this->path, 'a');
-        $json = fwrite($fp, $jsonText);
-        fclose($fp);
+getIt = { id ->
+  def p = g.V(id);
+  p.next();
+}
 
-        self::saveTokenCounts();
+new File('/Users/famille/Desktop/analyzeG3/projects/.exakat/gsneo4j.graphson.project').eachLine {
+    (fromVertex, toVertex) = it.split(',').collect(getIt)
+    fromVertex.addEdge('PROJECT', toVertex)
+}
 
+GREMLIN;
+        $res = $this->gsneo4j->query($query);
+        
         $sqlite3 = new \Sqlite3($this->config->projects_root.'/projects/.exakat/calls.sqlite');
 
         $outE = array();
@@ -104,94 +113,32 @@ SQL
         while($row = $res->fetchArray(SQLITE3_NUM)) {
             $outE[$row[0]] = explode(',', $row[1]);
         }
-       
-        $inE = array();
-        $res = $sqlite3->query(<<<SQL
-SELECT DISTINCT calls.id AS call, GROUP_CONCAT(DISTINCT COALESCE(definitions.id, definitions2.id)) AS definition
-FROM calls
-LEFT JOIN definitions 
-    ON definitions.type       = calls.type       AND
-       definitions.fullnspath = calls.fullnspath
-LEFT JOIN definitions definitions2
-    ON definitions2.type        = calls.type       AND
-       definitions2.fullnspath  = calls.globalpath 
-WHERE definitions.id IS NOT NULL OR definitions2.id IS NOT NULL
-GROUP BY calls.id
-SQL
-);
-       
-        while($row = $res->fetchArray(SQLITE3_NUM)) {
-           $inE[$row[0]] = explode(',', $row[1]);
-        }
-       
-        $linksId = array();
-        $fp = fopen($this->path, 'a');
-        if (!is_resource($fp)) {
-            throw new NoSuchFile($this->path);
-        }
-        $fpDefinitions = fopen($this->pathDefinition, 'r');
-        if (!is_resource($fpDefinitions)) {
-            throw new NoSuchFile($this->pathDefinition);
-        }
-
-        while(!feof($fpDefinitions)) {
-            $row = fgets($fpDefinitions);
-            if (empty($row)) {continue; }
-            $json = json_decode($row);
-
-            if (isset($inE[$json->id])) {
-                $json->inE->DEFINITION = array();
-                foreach($inE[$json->id] as $d) {
-                    if (isset($linksId[$json->id.'->'.$d])) {
-                        $id = $linksId[$json->id.'->'.$d];
-                    } else {
-                        $id = $this->id++;
-                        $linksId[$json->id.'->'.$d] = $id;
-                    }
-
-                    $s = new \stdClass();
-                    $s->id = $id;
-                    $s->outV = (int) $d;
-
-                    $json->inE->DEFINITION[] = $s;
-                }
-            }
-
-            if (isset($outE[$json->id])) {
-                $json->outE->DEFINITION = array();
-                foreach($outE[$json->id] as $d) {
-                    if (isset($linksId[$d.'->'.$json->id])) {
-                        $id = $linksId[$d.'->'.$json->id];
-                    } else {
-                        $id = $this->id++;
-                        $linksId[$d.'->'.$json->id] = $id;
-                    }
-
-                    $s = new \stdClass();
-                    $s->id = $id;
-                    $s->inV = (int) $d;
-                    $json->outE->DEFINITION[] = $s;
-                }
-            }
-            
-            fwrite($fp, json_encode($json).PHP_EOL);
-        }
-
-        fclose($fp);
-        fclose($fpDefinitions);
-        unlink($this->pathDefinition);
-        unset($sqlite3);
-        unlink($this->config->projects_root.'/projects/.exakat/calls.sqlite');
-
-        $this->calls = array();
-        $this->json = array();
-        gc_collect_cycles();
         
-        display('loading nodes');
+        $fp = fopen('/Users/famille/Desktop/analyzeG3/projects/.exakat/gsneo4j.graphson.def', 'w+');
+        foreach($outE as $o => $destinations) {
+            foreach($destinations as $d) {
+                fputcsv($fp, [$o, $d]);
+            }
+        }
+        fclose($fp);
 
-        $begin = microtime(true);
-        $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().count();');
+        $query = <<<GREMLIN
+        
+getIt = { id ->
+  def p = g.V(id);
+  p.next();
+}
+
+new File('/Users/famille/Desktop/analyzeG3/projects/.exakat/gsneo4j.graphson.def').eachLine {
+    (fromVertex, toVertex) = it.split(',').collect(getIt)
+    fromVertex.addEdge('DEFINITION', toVertex)
+}
+
+GREMLIN;
+        $res = $this->gsneo4j->query($query);
         $end = microtime(true);
+
+        self::saveTokenCounts();
 
         display('loaded nodes (duration : '.number_format( ($end - $begin) * 1000, 2).' ms)');
 
@@ -204,6 +151,10 @@ SQL
     private function cleanCsv() {
         if (file_exists($this->path)) {
             unlink($this->path);
+        }
+        if (file_exists($this->path.'.project')) {
+            unlink($this->path.'.project');
+            unlink($this->path.'.def');
         }
         if (file_exists($this->pathDefinition)) {
             unlink($this->pathDefinition);
@@ -232,14 +183,39 @@ SQL
             $this->labels[$atom->atom] = 1;
             if ($atom->atom === 'File') {
                 $fileName = $atom->code;
+            } 
+            
+            if ($atom->atom === 'Project') {
+                if ($this->projectId === null) {
+                    $jsonText = json_encode($atom->toGraphsonLine($this->id)).PHP_EOL;
+                    assert(!json_last_error(), 'Error encoding '.$atom->atom.' : '.json_last_error_msg());
+                    
+                    $fp = fopen($this->path, 'a');
+                    fwrite($fp, $jsonText);
+                    fclose($fp);
+                    
+                    $begin = microtime(true);
+                    $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().hasLabel("Project");');
+                    $this->projectId = $res[0]['id'];
+                    $this->project = $atom;
+                    
+                    $end = microtime(true);
+                }
+            } else {
+                $json[$atom->id] = $atom->toGraphsonLine($this->id);
             }
-
-            $json[$atom->id] = $atom->toGraphsonLine($this->id);
         }
-
-        if ($this->project === null) {
-            $this->project = $json[1];
+        
+        
+        $fp = fopen($this->path.'.project', 'a');
+        foreach($links['PROJECT'] as $b) {
+           foreach($b as $c) {
+               foreach($c as $d) {
+                   fputcsv($fp, [$this->projectId, $d['destination']]);
+               }
+           }
         }
+        unset($links['PROJECT']);
         
         foreach($links as $type => $a) {
             $this->edges[$type] = 1;
@@ -267,29 +243,23 @@ SQL
         }
         
         $fp = fopen($this->path, 'a');
-        $fpDefinition = fopen($this->pathDefinition, 'a');
 
         foreach($json as $j) {
-            if (in_array($j->label, array('Functioncall', 'Function', 
-                                          'Class', 'Classanonymous', 'Newcall', 'Interface', 'Trait', 
-                                          'Identifier', 'Nsname', 'Constant', 
-                                          'String', 'This',
-                                          'Label', 'Goto',
-                                          ))) {
-                $X = $this->json_encode($j);
-                assert(!json_last_error(), $fileName.' : error encoding for definition '.$j->label.' : '.json_last_error_msg()."\n".' '.print_r($j, true));
-                fwrite($fpDefinition, $X.PHP_EOL);
-            } elseif ($j->label === 'Project') {
-                // Just continue;
-            } else {
-                $X = $this->json_encode($j);
-                assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
-                fwrite($fp, $X.PHP_EOL);
-            }
+            if ($j->label === 'Project') {
+                continue;
+            } 
+            
+            $X = $this->json_encode($j);
+            assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
+            fwrite($fp, $X.PHP_EOL);
         }
 
         fclose($fp);
-        fclose($fpDefinition);
+
+        $begin = microtime(true);
+        $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().count();');
+        $end = microtime(true);
+        unlink($this->path);
     }
 
     public function saveDefinitions($exakatDir, $calls) {
