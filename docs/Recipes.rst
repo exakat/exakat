@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 27 Nov 2017 14:10:19 +0000
-.. comment: Generation hash : c71c46e50699874dce862b5160684f11bd933e1a
+.. comment: Generation date : Mon, 04 Dec 2017 15:47:38 +0000
+.. comment: Generation hash : a6fbd6fff8d28443cd4783f4fff6d72f54ca2f9e
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 327 analysis
+Total : 330 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -216,6 +216,7 @@ Total : 327 analysis
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ifthen <nested-ifthen>`
 * :ref:`Nested Ternary <nested-ternary>`
+* :ref:`Never Used Parameter <never-used-parameter>`
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`Next Month Trap <next-month-trap>`
 * :ref:`No Boolean As Default <no-boolean-as-default>`
@@ -283,6 +284,7 @@ Total : 327 analysis
 * :ref:`Results May Be Missing <results-may-be-missing>`
 * :ref:`Return True False <return-true-false>`
 * :ref:`Same Conditions In Condition <same-conditions-in-condition>`
+* :ref:`Same Variables Foreach <same-variables-foreach>`
 * :ref:`Scalar Or Object Property <scalar-or-object-property>`
 * :ref:`Sequences In For <sequences-in-for>`
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
@@ -361,6 +363,7 @@ Total : 327 analysis
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 * :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
+* :ref:`Use Named Boolean In Argument Definition <use-named-boolean-in-argument-definition>`
 * :ref:`Use Object Api <use-object-api>`
 * :ref:`Use Pathinfo <use-pathinfo>`
 * :ref:`Use Positive Condition <use-positive-condition>`
@@ -976,7 +979,7 @@ Total : 13 analysis
 ZendFramework
 +++++++++++++
 
-Total : 238 analysis
+Total : 239 analysis
 
 * :ref:`Action Should Be In Controller <action-should-be-in-controller>`
 * :ref:`Error Messages <error-messages>`
@@ -1007,6 +1010,7 @@ Total : 238 analysis
 * :ref:`ZendF/DontUseGPC`
 * :ref:`ZendF/ZendTypehinting`
 * :ref:`Zend\Config`
+* :ref:``
 * :ref:`zend-authentication 2.5.0 Undefined Classes <zend-authentication-2.5.0-undefined-classes>`
 * :ref:`zend-authentication Usage <zend-authentication-usage>`
 * :ref:`zend-barcode 2.5.0 Undefined Classes <zend-barcode-2.5.0-undefined-classes>`

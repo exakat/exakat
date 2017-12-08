@@ -6,6 +6,7 @@ Glossary
     + `**`
 
       + :ref:`** For Exponent <**-for-exponent>`
+      + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
       + :ref:`Exponent Usage <exponent-usage>`
       + :ref:`Negative Power <negative-power>`
       + :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
@@ -327,6 +328,7 @@ Glossary
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
+      + :ref:`Foreach With list() <foreach-with-list()>`
       + :ref:`No Direct Usage <no-direct-usage>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Slow Functions <slow-functions>`

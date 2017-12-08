@@ -55,6 +55,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Slim
 * Suggestions
 * Unassigned
+* Under Work
 * Wordpress
 * ZendFramework
 
@@ -90,7 +91,6 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Simpletable
   * Codeflower
   * Dependencywheel
-  * Codacy
 
 
 Supported PHP Extensions
@@ -312,13 +312,19 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.0.6
+
+  * Never Used Parameter (Functions/NeverUsedParameter ; Analyze)
+  * Use Named Boolean In Argument Definition (Functions/AvoidBooleanArgument)
+
 * 1.0.5
 
   * Environnement Variables (Variables/UncommonEnvVar ; Appinfo)
   * Invalid Regex (Structures/InvalidRegex ; Analyze)
   * Parent First (Classes/ParentFirst)
+  * Same Variables Foreach (Structures/AutoUnsetForeach ; Analyze)
   * Should Always Prepare (ZendF/Zf3DbAlwaysPrepare ; ZendFramework)
-  * Structures/AssignedInOneBranch (Structures/AssignedInOneBranch ; Unassigned)
+  * Structures/AssignedInOneBranch (Structures/AssignedInOneBranch ; Under Work)
 
 * 1.0.4
 
@@ -1142,7 +1148,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Function Subscripting, Old Style (Structures/FunctionPreSubscripting ; Analyze, Codacy)
   * Functioncall Is Global (Functions/IsGlobal ; Internal)
   * Functions Glossary (Functions/Functionnames ; Appinfo)
-  * Functions In Loop Calls (Functions/LoopCalling ; Unassigned)
+  * Functions In Loop Calls (Functions/LoopCalling ; Under Work)
   * Functions Removed In PHP 5.4 (Php/Php54RemovedFunctions ; CompatibilityPHP54, Codacy)
   * Functions Removed In PHP 5.5 (Php/Php55RemovedFunctions ; CompatibilityPHP55)
   * Functions Using Reference (Functions/FunctionsUsingReference ; Appinfo, Appcontent)
@@ -1784,6 +1790,7 @@ List of external links mentionned in this documentation.
 * `command line usage <https://exakat.readthedocs.io/en/latest/Commands.html>`_
 * `Comparison Operators <http://php.net/manual/en/language.operators.comparison.php>`_
 * `composer <https://getcomposer.org/>`_
+* `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exprs>`_
 * `Constants <http://php.net/manual/en/language.constants.php>`_
 * `Constructors and Destructors <http://php.net/manual/en/language.oop5.decon.php>`_
 * `Constructors and Destructors ¶ <http://php.net/manual/en/language.oop5.decon.php>`_
@@ -1854,6 +1861,7 @@ List of external links mentionned in this documentation.
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
+* `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_

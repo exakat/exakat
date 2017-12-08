@@ -8,8 +8,23 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 27 Nov 2017 14:10:19 +0000
-.. comment: Generation hash : c71c46e50699874dce862b5160684f11bd933e1a
+.. comment: Generation date : Mon, 04 Dec 2017 15:47:38 +0000
+.. comment: Generation hash : a6fbd6fff8d28443cd4783f4fff6d72f54ca2f9e
+
+
+.. _:
+
+
+
+
+
+
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3            |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
 
 
 .. _$http\_raw\_post\_data:
@@ -2879,11 +2894,29 @@ Constant Scalar Expressions
 ###########################
 
 
-Starting with PHP 5.6, it is possible to define constant that are the result of expressions.
+Define constant with the result of static expressions. This means that constants may be defined with the const keyword, with the help of various operators but without any functioncalls. 
+
+This feature was introduced in PHP 5.6. It also supports array(), and expressions in arrays.
 
 Those expressions (using simple operators) may only manipulate other constants, and all values must be known at compile time. 
 
-This is not compatible with previous versions.
+.. code-block:: php
+
+   <?php
+   
+   // simple definition
+   const A = 1;
+   
+   // constant scalar expression
+   const B = A * 3;
+   
+   // constant scalar expression
+   const C = [A '** 3, '3' => B];
+   
+   ?>
+
+
+See also `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exprs>`_.
 
 +--------------+---------------------------------------------------------------------------------+
 | Command Line | Structures/ConstantScalarExpression                                             |
@@ -4546,7 +4579,7 @@ Empty Namespace
 ###############
 
 
-Declaring a namespace in the code and not using it for structure declarations (classes, interfaces, etc...) or global instructions is useless.
+Declaring a namespace in the code and not using it for structure declarations or global instructions is useless.
 
 Using simple style : 
 
@@ -4554,12 +4587,13 @@ Using simple style :
 
    <?php
    
-   namespace X;
-   // This is useless
-   
    namespace Y;
    
    class foo {}
+   
+   
+   namespace X;
+   // This is useless
    
    ?>
 
@@ -5118,12 +5152,21 @@ Foreach With list()
 ###################
 
 
-PHP 5.5 introduced the ability to use list in foreach loops. This was not possible in the earlier versions.
+Foreach loops have the ability to use list as blind variables. This syntax assign directly array elements to various variables. 
+
+PHP 5.5 introduced the usage of list in `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loops. Until PHP 7.1, it was not possible to use non-numerical arrays as list() wouldn't support string-indexed arrays.
 
 .. code-block:: php
 
    <?php
+       // PHP 5.5 and later, with numerically-indexed arrays
        foreach($array as list($a, $b)) { 
+           // do something 
+       }
+   
+   
+       // PHP 7.1 and later, with arrays
+       foreach($array as list('col1' => $a, 'col3' => $b)) { // 'col2 is ignored'
            // do something 
        }
    ?>
@@ -8199,6 +8242,42 @@ However, ternary operators tends to make the syntax very difficult to read when 
 +--------------+---------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
+
+
+.. _never-used-parameter:
+
+Never Used Parameter
+####################
+
+
+When a parameter is never used at calltime, it may be turned into a local variable.
+
+It seems that the parameter was set up initially, but never found its practical usage. It is never mentionned, and always fall back on its default value.  
+
+Parameter without a default value are reported by PHP, and are usually always filled. 
+
+.. code-block:: php
+
+   <?php
+   
+   // $b may be turned into a local var, it is unused
+   function foo($a, $b = 1) {
+       return $a + $b;
+   }
+   
+   // whenever foo is called, the 2nd arg is not mentionned
+   foo($a);
+   foo(3);
+   foo('a');
+   foo($c);
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Functions/NeverUsedParameter |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
 
 
 .. _never-used-properties:
@@ -12132,6 +12211,47 @@ At least two consecutive if/then structures use identical conditions. The latter
 +--------------+---------------------------+
 
 
+.. _same-variables-foreach:
+
+Same Variables Foreach
+######################
+
+
+A foreach which uses its own source as a blind variable is actually broken.
+
+Actually, PHP makes a copy of the source before it starts the loop. As such, the same variable may be used for both source and blind value. 
+
+Of course, this is very confusing, to see the same variables used in very different ways. 
+
+The source will also be destroyed immediatly after the blind variable has beend turned into a reference.
+
+.. code-block:: php
+
+   <?php
+   
+   $array = range(0, 10);
+   foreach($array as $array) {
+       print $array.PHP_EOL;
+   }
+   
+   print_r($array); // display number from 0 to 10.
+   
+   $array = range(0, 10);
+   foreach($array as &$array) {
+       print $array.PHP_EOL;
+   }
+   
+   print_r($array); // display 10
+   
+   ?>
+
++--------------+-----------------------------+
+| Command Line | Structures/AutoUnsetForeach |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Analyze`              |
++--------------+-----------------------------+
+
+
 .. _scalar-or-object-property:
 
 Scalar Or Object Property
@@ -14491,6 +14611,8 @@ Throws An Assignement
 
 It is possible to throw an exception, and, in the same time, assign this exception to a variable.
 
+However, $e will never be used, as the exception is thrown, and any following code is not executed. 
+
 .. code-block:: php
 
    <?php
@@ -14504,8 +14626,6 @@ It is possible to throw an exception, and, in the same time, assign this excepti
    
    ?>
 
-
-However, $e will never be used, as the exception is thrown, and any following code is not executed. 
 
 The assignement should be removed.
 
@@ -14857,7 +14977,7 @@ Unconditional Break In Loop
 ###########################
 
 
-An unconditional `'break <http://php.net/manual/en/control-structures.break.php>`_ was found in a loop. Since the `'break <http://php.net/manual/en/control-structures.break.php>`_ is directly in the body of the loop, it is always executed, creating a strange loop that can only run once. 
+An unconditional `'break <http://php.net/manual/en/control-structures.break.php>`_ in a loop creates dead code. Since the `'break <http://php.net/manual/en/control-structures.break.php>`_ is directly in the body of the loop, it is always executed, creating a strange loop that can only run once. 
 
 Here, `'break <http://php.net/manual/en/control-structures.break.php>`_ may also be a return, a goto or a `'continue <http://php.net/manual/en/control-structures.continue.php>`_. They all branch out of the loop. Such statement are valid, but should be moderated with a condition. 
 
@@ -16851,6 +16971,48 @@ Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP53` |
 +--------------+------------------------------------------------------+
+
+
+.. _use-named-boolean-in-argument-definition:
+
+Use Named Boolean In Argument Definition
+########################################
+
+
+Boolean in argument definitions is confusing. 
+
+It is recommended to use explicit constant names, instead. They are more readable. They also allow for easy replacement when the code evolve and has to replace those booleans by strings. This works even also with classes, and class constants.
+
+.. code-block:: php
+
+   <?php
+   
+   function flipImage($im, $horizontal = NO_HORIZONTAL_FLIP, $vertical = NO_VERTICAL_FLIP) { }
+   
+   // with constants
+   const HORIZONTAL_FLIP = true;
+   const NO_HORIZONTAL_FLIP = true;
+   const VERTICAL_FLIP = true;
+   const NO_VERTICAL_FLIP = true;
+   
+   rotateImage($im, HORIZONTAL_FLIP, NO_VERTICAL_FLIP);
+   
+   
+   // without constants 
+   function flipImage($im, $horizontal = false, $vertical = false) { }
+   
+   rotateImage($im, true, false);
+   
+   ?>
+
+
+See also `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_, to avoid boolean altogether.
+
++--------------+--------------------------------+
+| Command Line | Functions/AvoidBooleanArgument |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
 
 
 .. _use-object-api:
