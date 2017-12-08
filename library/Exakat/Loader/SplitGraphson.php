@@ -84,7 +84,7 @@ getIt = { id ->
   p.next();
 }
 
-new File('/Users/famille/Desktop/analyzeG3/projects/.exakat/gsneo4j.graphson.project').eachLine {
+new File('$this->path.project').eachLine {
     (fromVertex, toVertex) = it.split(',').collect(getIt)
     fromVertex.addEdge('PROJECT', toVertex)
 }
@@ -114,7 +114,7 @@ SQL
             $outE[$row[0]] = explode(',', $row[1]);
         }
         
-        $fp = fopen('/Users/famille/Desktop/analyzeG3/projects/.exakat/gsneo4j.graphson.def', 'w+');
+        $fp = fopen('$this->path.def', 'w+');
         foreach($outE as $o => $destinations) {
             foreach($destinations as $d) {
                 fputcsv($fp, [$o, $d]);
@@ -129,7 +129,7 @@ getIt = { id ->
   p.next();
 }
 
-new File('/Users/famille/Desktop/analyzeG3/projects/.exakat/gsneo4j.graphson.def').eachLine {
+new File('$this->path.def').eachLine {
     (fromVertex, toVertex) = it.split(',').collect(getIt)
     fromVertex.addEdge('DEFINITION', toVertex)
 }
