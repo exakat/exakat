@@ -197,6 +197,7 @@ GREMLIN;
                     $begin = microtime(true);
                     $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().hasLabel("Project");');
                     $this->projectId = $res[0]['id'];
+                    display("Project Id ".$this->projectId);
                     $this->project = $atom;
                     
                     $end = microtime(true);
@@ -257,7 +258,7 @@ GREMLIN;
         fclose($fp);
 
         $begin = microtime(true);
-        $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().count();');
+        $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'");');
         $end = microtime(true);
         unlink($this->path);
     }
