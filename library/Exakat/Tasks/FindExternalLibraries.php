@@ -223,7 +223,7 @@ class FindExternalLibraries extends Tasks {
                     if ($this->classic[$lclass] == static::WHOLE_DIR) {
                         $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
                     } elseif ($this->classic[$lclass] == static::PARENT_DIR) {
-                        $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename)), 2);
+                        $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename), 2);
                     } elseif ($this->classic[$lclass] == static::FILE_ONLY) {
                         $returnPath = preg_replace('#.*projects/.*?/code/#', '/', $filename);
                     }
@@ -246,7 +246,7 @@ class FindExternalLibraries extends Tasks {
                         if ($this->classicTests[$extends] == static::WHOLE_DIR) {
                             $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
                         } elseif ($this->classicTests[$extends] == static::PARENT_DIR) {
-                            $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename)), 2);
+                            $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename), 2);
                         } elseif ($this->classicTests[$extends] == static::FILE_ONLY) {
                             $returnPath = preg_replace('#.*projects/.*?/code/#', '/', $filename);
                         }
