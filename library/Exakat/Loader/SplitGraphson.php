@@ -114,7 +114,7 @@ SQL
             $outE[$row[0]] = explode(',', $row[1]);
         }
         
-        $fp = fopen('$this->path.def', 'w+');
+        $fp = fopen($this->path.'.def', 'w+');
         foreach($outE as $o => $destinations) {
             foreach($destinations as $d) {
                 fputcsv($fp, [$o, $d]);
@@ -123,7 +123,6 @@ SQL
         fclose($fp);
 
         $query = <<<GREMLIN
-        
 getIt = { id ->
   def p = g.V(id);
   p.next();
