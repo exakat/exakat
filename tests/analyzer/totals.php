@@ -23,8 +23,8 @@ foreach($files as $file) {
     cleanTestPresentation($file);
     $php = file_get_contents($file);
     
-    if ($a = preg_match_all("/,
-                     \);/s", $php, $r) !== 2) {
+    if (($a = preg_match_all("/[,\(]
+                     \);/s", $php, $r)) != 2) {
         print "Missing coding convention $file ($a)\n";
     }
     
