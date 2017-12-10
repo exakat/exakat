@@ -41,6 +41,16 @@ class UnusedGlobal extends Analyzer {
         $this->prepareQuery();
 
         // global in the global space
+        $max = self::MAX_LOOPING;
+        $query = <<<GREMLIN
+g.V().out("FILE").out("EXPRESSION").out("CODE").out("EXPRESSION").not(hasLabel("Global", "Function", "Trait", "Class", "Interface"))
+                                .repeat( __.out($this->linksDown) ).emit(hasLabel("Variable", "Variablearray", "Variableobject"))
+                                .times($max).not( where( __.in("GLOBAL") ) )
+                                .values("code").unique();
+GREMLIN;
+
+        $globalVariables = $this->gremlin->query($query);
+        
         $this->atomIs('Globaldefinition')
              ->_as('result')
              ->savePropertyAs('code', 'theGlobal')
@@ -49,10 +59,7 @@ class UnusedGlobal extends Analyzer {
              ->hasNoInterface()
              ->hasNoTrait()
              // Not used as a variable
-             ->raw('not( where( g.V().out("FILE").out("EXPRESSION").out("CODE").out("EXPRESSION").not(hasLabel("Global", "Function", "Trait", "Class", "Interface"))
-                                .repeat( __.out('.$this->linksDown.') ).emit(hasLabel("Variable", "Variablearray", "Variableobject"))
-                                .times('.self::MAX_LOOPING.').not( where( __.in("GLOBAL") ) )
-                                .filter{ it.get().value("code") == theGlobal} ) )')
+             ->codeIsNot($globalVariables->toArray())
              ->back('result');
         $this->prepareQuery();
     }
