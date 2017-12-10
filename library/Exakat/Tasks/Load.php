@@ -2289,7 +2289,8 @@ SQL;
         }
 
         $fullcode = array();
-        while ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON) {
+        while ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON &&
+               $this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_CLOSE_TAG) {
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
                 ++$this->id;
                 $this->processSingle($atom);
@@ -2332,6 +2333,10 @@ SQL;
         $static->count    = $rank;
 
         $this->pushExpression($static);
+
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
 
         return $static;
     }
@@ -4603,7 +4608,7 @@ SQL;
     }
 
     private function checkTokens($filename) {
-        assert(empty($this->expressions), "Warning : expression is not empty in $filename : ".count($this->expressions).PHP_EOL);
+        assert(empty($this->expressions), "Warning : expression is not empty in $filename : ".count($this->expressions).PHP_EOL.print_r($this->expressions, true).PHP_EOL);
 
         assert(empty($this->contexts[self::CONTEXT_NOSEQUENCE]), "Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE].PHP_EOL);
 

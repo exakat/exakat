@@ -1,0 +1,20 @@
+Label : PROJECT
+  ./tests/tokenizer/source/_Global.14.php
+  Label : FILE
+    ;
+    Label : EXPRESSION
+      <?
+      Label : CODE
+        ;
+        Label : EXPRESSION
+          global
+          Label : GLOBAL
+            $wgExtensionsPath
+        Label : EXPRESSION
+          A
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            $b
+          Label : NAME
+            echo
