@@ -27,11 +27,27 @@ use Exakat\Analyzer\Analyzer;
 
 class PropertyVariableConfusion extends Analyzer {
     public function dependsOn() {
-        return array('Variables/Arguments');
+        return array('Variables/Arguments',
+                    );
     }
     
     public function analyze() {
         // public $x = 3; static or not
+        $this->atomIs('Variable')
+             ->hasClass()
+             ->hasNoIn('MEMBER')
+             ->analyzerIsNot('Variables/Arguments')
+             ->savePropertyAs('code', 'name')
+             ->goToClass()
+             ->outIs('PPP')
+             ->outIs('PPP')
+             ->_as('ppp')
+             ->outIsIE('LEFT')
+             ->samePropertyAs('code', 'name')
+             ->back('ppp');
+        $this->prepareQuery();
+
+        /*
         $this->atomIs('Ppp')
              ->outIs('PPP')
              ->_as('ppp')
@@ -47,6 +63,7 @@ class PropertyVariableConfusion extends Analyzer {
              ->analyzerIsNot('Variables/Arguments')
              ->back('ppp');
         $this->prepareQuery();
+        */
     }
 }
 
