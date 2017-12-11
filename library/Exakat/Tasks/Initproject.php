@@ -171,6 +171,8 @@ ignore_dirs[] = /tests
 ignore_dirs[] = /tmp
 ignore_dirs[] = /vendor
 ignore_dirs[] = /version
+ignore_dirs[] = /var
+
 
 
 ;Included dirs or files, relative to code source root. Default to all.
