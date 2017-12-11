@@ -196,7 +196,6 @@ GREMLIN;
                     $begin = microtime(true);
                     $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().hasLabel("Project");');
                     $this->projectId = $res[0]['id'];
-                    display("Project Id ".$this->projectId);
                     $this->project = $atom;
                     
                     $end = microtime(true);
@@ -260,6 +259,7 @@ GREMLIN;
         $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'");');
         $end = microtime(true);
         unlink($this->path);
+        
     }
 
     public function saveDefinitions($exakatDir, $calls) {
@@ -267,6 +267,10 @@ GREMLIN;
     }
 
     public function json_encode($object) {
+        // in case the function name is full of non-encodable characters.
+        if (isset($object->properties['fullnspath']) && !mb_check_encoding($object->properties['fullnspath'][0]->value, 'UTF-8')) {
+            $object->properties['fullnspath'][0]->value = utf8_encode($object->properties['fullnspath'][0]->value);
+        }
         if (isset($object->properties['fullcode']) && !mb_check_encoding($object->properties['fullcode'][0]->value, 'UTF-8')) {
             $object->properties['fullcode'][0]->value = utf8_encode($object->properties['fullcode'][0]->value);
         }
