@@ -37,7 +37,7 @@ class ShouldUseArrayColumn extends Analyzer {
              ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomInside('Assignation')
-             ->hasNoInstruction('Ifthen') // Make this a filter
+             ->hasNoInstruction(array('Ifthen', 'Switch')) // Make this a filter
              ->outIs('LEFT')
              ->atomIs('Arrayappend')
              ->inIs('LEFT')
