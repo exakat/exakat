@@ -35,6 +35,7 @@ class CouldUseShortAssignation extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->codeIs(array('+', '*'))
+             ->raw('not(where( __.out("LEFT" , "RIGHT").hasLabel("Arrayliteral")))')
              ->outIs(array('LEFT', 'RIGHT'))
              ->samePropertyAs('fullcode', 'receiver')
              ->back('first');
