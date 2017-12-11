@@ -46,24 +46,6 @@ class PropertyVariableConfusion extends Analyzer {
              ->samePropertyAs('code', 'name')
              ->back('ppp');
         $this->prepareQuery();
-
-        /*
-        $this->atomIs('Ppp')
-             ->outIs('PPP')
-             ->_as('ppp')
-             ->outIsIE('LEFT')
-             ->savePropertyAs('code', 'name')
-             ->goToClass()
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->outIs('BLOCK')
-             ->atomInside('Variable')
-             ->samePropertyAs('code', 'name')
-             ->hasNoIn('MEMBER')
-             ->analyzerIsNot('Variables/Arguments')
-             ->back('ppp');
-        $this->prepareQuery();
-        */
     }
 }
 
