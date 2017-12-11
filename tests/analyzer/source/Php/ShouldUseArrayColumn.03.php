@@ -13,7 +13,7 @@
      $e[] = $c2->f;
  }
 
-    // Nope, there is someting else
+    // Yes
  foreach($a3 as $b3 => $c3) {
      $e[] = $c3->f;
  }
