@@ -280,6 +280,7 @@ class Appinfo extends Data {
                             'ext/php_http'   => 'Extensions/Exthttp',
                             'ext/ibase'      => 'Extensions/Extibase',
                             'ext/iconv'      => 'Extensions/Exticonv',
+                            'ext/igbinary'   => 'Extensions/Extigbinary',
                             'ext/iis'        => 'Extensions/Extiis',
                             'ext/imagick'    => 'Extensions/Extimagick',
                             'ext/imap'       => 'Extensions/Extimap',
