@@ -9,4 +9,5 @@ interface i {
                     $f = self::C ) ;
 }
 
+echo self::CE;
 ?>

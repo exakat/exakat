@@ -1,6 +1,6 @@
 <?php
 
-interface x {
+interface xt {
     const A = 4;
     
     function asdf ( $d, 
@@ -8,4 +8,5 @@ interface x {
                     $f = self::C ) ;
 }
 
+echo self::D;
 ?>

@@ -8,3 +8,7 @@ abstract class x {
                              $c = self::C,
                              $d = parent::D ) ;
 }
+
+echo self::C;
+
+?>
