@@ -8,8 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Php_ListWithKeys extends Analyzer {
-    /* 1 methods */
+    /* 3 methods */
 
     public function testPhp_ListWithKeys01()  { $this->generic_test('Php/ListWithKeys.01'); }
+    public function testPhp_ListWithKeys02()  { $this->generic_test('Php/ListWithKeys.02'); }
+    public function testPhp_ListWithKeys03()  { $this->generic_test('Php/ListWithKeys.03'); }
 }
 ?>
