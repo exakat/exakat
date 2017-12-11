@@ -40,7 +40,7 @@ if (!is_readable($file)) {
     print "Usage : tokenlist <file>\n '$file' is not readable.\n\n";
 }
 
-$Php = new \Exakat\Phpexec(null, $config);
+$Php = new \Exakat\Phpexec('7.0', $config->php70);
 
 $res = shell_exec($config->phpexec.' -l '.$file);
 if (strpos($res, 'No syntax errors') !== 0) {
@@ -51,7 +51,7 @@ $tokens = $Php->getTokenFromFile($file);
 $Php->getTokens();
 
 foreach($tokens as $id => $token) { 
-    if(count($token) == 3) { 
+    if(is_array($token)) { 
         echo $id." => ".$token[0]." : ".$Php->getTokenName($token[0])." ({$token[1]})\n"; 
     } else {
         print "$token\n";
