@@ -1575,7 +1575,7 @@ SQL;
         $functioncall->fullcode   = '<?= '.$argumentsFullcode;
         $functioncall->line       = $this->tokens[$current === self::NO_VALUE ? 0 : $current][2];
         $functioncall->token      = 'T_OPEN_TAG_WITH_ECHO';
-        $functioncall->fullnspath = '\\echo';
+        $functioncall->fullnspath = '\echo';
 
         $this->addLink($functioncall, $echo, 'NAME');
 
@@ -2078,7 +2078,7 @@ SQL;
             $functioncall->aliased    = $aliased;
 
             $this->addCall('class', $fullnspath, $functioncall);
-        } elseif ($getFullnspath === self::WITH_FULLNSPATH || 
+        } elseif ($getFullnspath === self::WITH_FULLNSPATH ||
                   $name->fullnspath !== '\\list') {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
             $functioncall->fullnspath = $fullnspath;
@@ -4253,7 +4253,7 @@ SQL;
             $static = $this->addAtom('Methodcall');
             $links = 'METHOD';
         } else {
-            assert(false, "Unprocessed atom in object call (right) : ".$right->atom);
+            assert(false, "Unprocessed atom in object call (right) : ".print_r($right, true));
         }
 
         $this->addLink($static, $left, 'OBJECT');
