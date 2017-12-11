@@ -700,7 +700,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         if ($value === null) {
             $this->addMethod('not(has("'.$property.'", null))');
         } elseif ($value === true) {
-            $this->addMethod('not(has("'.$property.'", true))');
+            $this->addMethod('has("'.$property.'").not(has("'.$property.'", true))');
         } elseif ($value === false) {
             $this->addMethod('not(has("'.$property.'", false))');
         } elseif (is_int($value)) {
