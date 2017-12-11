@@ -29,14 +29,15 @@ class Zf3DeprecatedUsage extends Analyzer {
     public function dependsOn() {
         return array('ZendF/ZendClasses',
                      'ZendF/ZendInterfaces',
-                     'ZendF/ZendTrait');
+                     'ZendF/ZendTrait',
+                    );
     }
     
     public function analyze() {
         $zend3 = new ZendF3($this->config->dir_root.'/data', $this->config);
 
         $list = $zend3->getDeprecated();
-        
+        print_r($list);
         // Methods
         $deprecated = call_user_func_array('array_merge', array_values($list['function']));
         $methods = array_column($deprecated, 'name');

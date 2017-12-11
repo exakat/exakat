@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class DontChangeBlindKey extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsModified');
+        return array('Variables/IsModified',
+                    );
     }
     
     public function analyze() {
@@ -40,8 +41,7 @@ class DontChangeBlindKey extends Analyzer {
              ->atomInside('Variable')
              ->samePropertyAs('fullcode', 'blind')
              ->analyzerIs('Variables/IsModified')
-             ->back('first')
-             ;
+             ->back('first');
         $this->prepareQuery();
     }
 }

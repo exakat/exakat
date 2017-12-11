@@ -35,16 +35,14 @@ class BooleanStrictComparison extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        $this->atomFunctionIs('in_array')
+             ->noChildWithRank('ARGUMENT', 2);
+        $this->prepareQuery();
+
         // in_array ($array, $value, false);
         $this->atomFunctionIs('in_array')
              ->outWithRank('ARGUMENT', 2)
-             ->isNot('boolval', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomFunctionIs('in_array')
-             ->hasNoChildren('ARGUMENT', 2)
-             ->isNot('boolval', true)
+             ->isNot('boolean', true)
              ->back('first');
         $this->prepareQuery();
     }

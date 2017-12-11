@@ -138,6 +138,8 @@ GREMLIN
                  ->back('first');
             $this->prepareQuery();
         }
+
+        // todo : add methods with callback, not just PHP natives
     }
 }
 

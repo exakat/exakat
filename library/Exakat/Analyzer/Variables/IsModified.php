@@ -28,7 +28,8 @@ use Exakat\Data\Methods;
 
 class IsModified extends Analyzer {
     public function dependsOn() {
-        return array('Classes/Constructor');
+        return array('Classes/Constructor',
+                    );
     }
     
     public function analyze() {
@@ -40,10 +41,17 @@ class IsModified extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // unset
         $this->atomIs('Variable')
              ->inIs('CAST')
              ->tokenIs('T_UNSET_CAST')
              ->back('first');
+        $this->prepareQuery();
+
+        // unset
+        $this->atomIs('Unset')
+             ->outIs('ARGUMENT')
+             ->atomIs('Variable');
         $this->prepareQuery();
 
         $this->atomIs(array('Variablearray', 'Variable'))
