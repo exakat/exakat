@@ -47,6 +47,8 @@ class LoadFinal extends Tasks {
 
         $this->makeClassConstantDefinition();
 
+        $this->fixFullnspathConstants();
+
         $this->spotPHPNativeConstants();
         $this->spotPHPNativeFunctions();
 
@@ -76,20 +78,50 @@ class LoadFinal extends Tasks {
         $begin = $end;
     }
 
+    private function fixFullnspathConstants() {
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier")
+     .has("fullnspath")
+     .as("identifier")
+     .sideEffect{ cc = it.get().value("fullnspath"); }
+     .in("DEFINITION")
+     .out("NAME")
+     .filter{ actual = it.get().values("fullnspath").next(); actual != cc;}
+     .select("identifier")
+     .sideEffect{ it.get().property("fullnspath", actual); }
+     .fold()
+GREMLIN;
+
+        $res = $this->gremlin->query($query);
+
+    }
+
     private function spotPHPNativeConstants() {
         $title = 'mark PHP native constants call';
         $constants = call_user_func_array('array_merge', $this->PHPconstants);
         $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
-        $constants = array_map('strtolower', $constants);
 
         // May be array_keys
         $constants = array_values($constants);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier")
+     .has("fullnspath")
+     .not(where( __.in("DEFINITION")))
+     .values("code")
+     .unique()
+GREMLIN;
+
+        $res = $this->gremlin->query($query);
+        
+        $constants = array_values(array_intersect($res->toArray(), $constants));
         
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
      .has("fullnspath")
      .not(where( __.in("DEFINITION")))
-     .filter{ it.get().value("code").toLowerCase() in arg1 }
+     .filter{ it.get().value("code") in arg1 }
      .sideEffect{
          fullnspath = "\\\\" + it.get().value("code").toLowerCase();
          it.get().property("fullnspath", fullnspath); 
@@ -108,7 +140,19 @@ GREMLIN;
 
         // This weird trick for janusgraph...
         $functions = array_values($functions);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall")
+     .has("fullnspath")
+     .not(where( __.in("DEFINITION")))
+     .map{ it.get().value("code").toLowerCase(); }
+     .unique()
+GREMLIN;
+
+        $res = $this->gremlin->query($query);
         
+        $functions = array_values(array_intersect($res->toArray(), $functions));
+
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
@@ -217,7 +261,7 @@ g.V().hasLabel("Identifier", "Nsname")
       ).count()
 
 GREMLIN;
-                $this->gremlin->query($query, array('arg1' => $constantsDefine));
+                $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
             }
 
             $this->logTime('constants const : '.count($constantsConst));
@@ -242,7 +286,7 @@ g.V().hasLabel("Identifier", "Nsname")
        .count()
 
 GREMLIN;
-                $this->gremlin->query($query, array('arg1' => $constantsConst));
+                $res = $this->gremlin->query($query, array('arg1' => $constantsConst));
             }
             
             // TODO : handle case-insensitive
