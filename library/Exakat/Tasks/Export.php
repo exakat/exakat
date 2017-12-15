@@ -36,8 +36,7 @@ class Export extends Tasks {
         $V = array();
         $root = 0;
         foreach($vertices as $v) {
-            $x = $v['id'];
-            $V[$x] =  $v;
+            $V[$v['id']] =  $v;
         }
 
         $queryTemplate = 'g.E()';
