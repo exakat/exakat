@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Arrays_MistakenConcatenation extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testArrays_MistakenConcatenation01()  { $this->generic_test('Arrays/MistakenConcatenation.01'); }
+    public function testArrays_MistakenConcatenation02()  { $this->generic_test('Arrays/MistakenConcatenation.02'); }
 }
 ?>

@@ -31,13 +31,14 @@ class MistakenConcatenation extends Analyzer {
              ->hasChildren('String', 'ARGUMENT')
              ->outIs('ARGUMENT')
              ->atomIs('Concatenation')
-             ->hasNoChildren(self::$CONTAINERS, 'CONCAT')
+             ->hasNoChildren(array_merge(self::$CONTAINERS, self::$FUNCTIONS_ALL, array('Identifier', 'Nsname', 'Cast', 'Parenthesis')), 'CONCAT')
              ->back('first');
         $this->prepareQuery();
 
         // $array = array(1, 2, 3, 4.5, );
         $this->atomIs('Arrayliteral')
              ->hasChildren('Integer', 'ARGUMENT')
+             ->raw('where( __.out("ARGUMENT").hasLabel("Real").count().is(eq(1)) )') // just one
              ->outIs('ARGUMENT')
              ->atomIs('Real')
              ->back('first');
