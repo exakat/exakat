@@ -1,4 +1,4 @@
-Version 1.0.7 (King of Heat Protection , coming up)
+Version 1.0.8 (King of Heat Protection , coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,18 @@ Version 1.0.7 (King of Heat Protection , coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.0.7 (King of Heat Protection , coming up)
++ Architecture
+    + Added /var to default omitted folders
++ Report
+    + 
++ Analyzer
+    + New analyzer : should use array_filter.
+    + New analyzer : ext/igbinary
+    + Checked unit tests : 2599 / 2533 test pass (97% pass). 
++ Tokenizer
+    + Fixed 
  
 Version 1.0.6 (Fuli, 2017-12-04)
 + Architecture
