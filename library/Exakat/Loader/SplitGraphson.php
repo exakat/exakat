@@ -271,6 +271,9 @@ GREMLIN;
         if (isset($object->properties['fullnspath']) && !mb_check_encoding($object->properties['fullnspath'][0]->value, 'UTF-8')) {
             $object->properties['fullnspath'][0]->value = utf8_encode($object->properties['fullnspath'][0]->value);
         }
+        if (isset($object->properties['propertyname']) && !mb_check_encoding($object->properties['propertyname'][0]->value, 'UTF-8')) {
+            $object->properties['propertyname'][0]->value = utf8_encode($object->properties['propertyname'][0]->value);
+        }
         if (isset($object->properties['fullcode']) && !mb_check_encoding($object->properties['fullcode'][0]->value, 'UTF-8')) {
             $object->properties['fullcode'][0]->value = utf8_encode($object->properties['fullcode'][0]->value);
         }
