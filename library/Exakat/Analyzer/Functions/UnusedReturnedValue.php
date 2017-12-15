@@ -29,7 +29,6 @@ class UnusedReturnedValue extends Analyzer {
         // function foo() { return 1; }
         // foo();
         $this->atomIs('Function')
-             ->hasNoClassTrait()
              ->outIs('BLOCK')
              ->atomInside('Return')
              ->outIs('RETURN')
