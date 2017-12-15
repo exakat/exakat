@@ -30,7 +30,7 @@ class IdenticalConsecutive extends Analyzer {
         // $b = $c + 1;
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIsNot(self::$LITERALS)
+             ->atomIsNot(array_merge(self::$LITERALS, self::$CONTAINERS, array('Identifier', 'Nsname')))
              ->savePropertyAs('fullcode', 'right')
              ->back('first')
              ->nextSibling()
