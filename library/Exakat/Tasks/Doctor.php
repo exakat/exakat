@@ -70,6 +70,7 @@ class Doctor extends Tasks {
 
         // check for PHP
         $stats['PHP']['binary']         = phpversion();
+        $stats['PHP']['memory_limit']   = ini_get('memory_limit');
         $stats['PHP']['ext/curl']       = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
         $stats['PHP']['ext/hash']       = extension_loaded('hash')      ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
         $stats['PHP']['ext/phar']       = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar. please install by default)';
@@ -93,8 +94,8 @@ class Doctor extends Tasks {
             $stats['java']['error'] = $res;
             $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
         }
-        $stats['java']['$JAVA_HOME'] = $_ENV['JAVA_HOME'] ?? '<none>';
-        $stats['java']['$JAVA_OPTIONS'] = $_ENV['JAVA_OPTIONS'] ?? ' (set $JAVA_OPTIONS="-Xms32m -Xmx****m", with **** = RAM in Mb. The more the better.';
+        $stats['java']['$JAVA_HOME'] = getenv('JAVA_HOME') ?? '<none>';
+        $stats['java']['$JAVA_OPTIONS'] = getenv('JAVA_OPTIONS') ?? ' (set $JAVA_OPTIONS="-Xms32m -Xmx****m", with **** = RAM in Mb. The more the better.';
 
         $stats['tinkergraph'] = $this->getTinkerGraph();
         $stats['gsneo4j'] = $this->getTinkerGraphNeo4j();
