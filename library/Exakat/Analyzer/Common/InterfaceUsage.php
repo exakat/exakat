@@ -53,14 +53,26 @@ class InterfaceUsage extends Analyzer {
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->tokenIsNot(array("T_ARRAY", "T_CALLABLE"))
+             ->codeIsNot(array('bool', 'int', 'float', 'string', 'array', 'object', 'callable', 'iterable', 'resource'))
+             ->fullnspathIs($interfaces);
+        $this->prepareQuery();
+
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->tokenIsNot(array("T_ARRAY", "T_CALLABLE"))
+             ->codeIsNot(array('bool', 'int', 'float', 'string', 'array', 'object', 'callable', 'iterable', 'resource'))
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
         
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
+             ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
     }
