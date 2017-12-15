@@ -72,11 +72,17 @@ $components = array(
                     );
 
 $dependencies = array();
+$homepage = array();
 foreach($components as $component) {
+    if (!file_exists('projects/'.$component.'/code/composer.json')) { 
+        print "No composer.json for $component.\n";
+        continue; 
+    }
     $json = json_decode(file_get_contents('projects/'.$component.'/code/composer.json'));
 
     $dependencies[$component] = array_filter(array_keys((array) $json->require), function ($x) { return substr($x, 0,13) === 'zendframework'; });
     $dependencies[$component] = array_map(function ($x) { return substr($x, 14); }, $dependencies[$component]);
+    $homepage[$component] = $json->homepage;
     
     $diff = array_diff($dependencies[$component], $components);
     if (!empty($diff)) {
@@ -93,7 +99,7 @@ $names = [];
 $i = 0;
 foreach($dependencies as $name => $d) {
     ++$i;
-    $nodes[] = "$i [label=\"$name\"];\n";
+    $nodes[] = "$i [label=\"$name\" URL=\"{$homepage[$name]}\"];\n";
     $cytoscape[] = (object) ['data' => (object) ['id' => $name]]; 
     $names[$name] = $i;
 }
@@ -116,18 +122,25 @@ $deps = join('', $deps);
         fontname = "Bitstream Vera Sans"
         fontsize = 20
         colorscheme = "bugn9"
+        splines = ortho
     
         node [
             fontname = "Bitstream Vera Sans"
-            fontsize = 8
+            fontsize = 20
+            fontcolor = white
             shape = "record"
+            color = "black"
+            fillcolor = "#68B604"
+            style = filled
         ]
     
         edge [
             fontname = "Bitstream Vera Sans"
             fontsize = 8
-            arrowhead = "empty"
+            arrowhead = "vee"
+            color = "marine"
         ]
+        
         
         $nodes
         $deps
