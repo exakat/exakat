@@ -50,9 +50,11 @@ GREMLIN
 g.V().hasLabel("Defineconstant")
      .out("ARGUMENT").has("rank", 2).has("boolean", true).in("ARGUMENT")
      .out("ARGUMENT").has("rank", 0)
+     .hasLabel("String").not(where(__.out("CONCAT") ) )
      .map{ it.get().value("noDelimiter").toLowerCase()}
 GREMLIN
 );
+
         if ($a = $this->selfCollisions($cisDefinitions->toArray())) {
             $this->applyToCisDefine($a);
         }
