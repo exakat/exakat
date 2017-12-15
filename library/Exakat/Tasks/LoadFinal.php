@@ -86,24 +86,22 @@ g.V().hasLabel("Identifier")
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath"); }
      .in("DEFINITION")
-     .out("NAME")
-     .filter{ actual = it.get().values("fullnspath").next(); actual != cc;}
+     .coalesce( __.out("ARGUMENT").has("rank", 0), __.hasLabel("Constant").out('NAME'), filter{ true; })
+     .filter{ actual = it.get().value("fullnspath"); actual != cc;}
      .select("identifier")
      .sideEffect{ it.get().property("fullnspath", actual); }
-     .fold()
+     .count()
 GREMLIN;
 
         $res = $this->gremlin->query($query);
-
     }
 
     private function spotPHPNativeConstants() {
         $title = 'mark PHP native constants call';
         $constants = call_user_func_array('array_merge', $this->PHPconstants);
         $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
-
         // May be array_keys
-        $constants = array_values($constants);
+        $constantsPHP = array_values($constants);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
@@ -114,8 +112,8 @@ g.V().hasLabel("Identifier")
 GREMLIN;
 
         $res = $this->gremlin->query($query);
-        
-        $constants = array_values(array_intersect($res->toArray(), $constants));
+
+        $constants = array_values(array_intersect($res->toArray(), $constantsPHP));
         
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
@@ -312,7 +310,7 @@ GREMLIN;
           .fold()
 )
 .map{classes[0]}.as('theClass')
-.addE('DEFINITION').to( 'first' )
+.addE('DEFINITION').to('first')
 GREMLIN;
         $this->gremlin->query($query);
         display('Create link between Class constant and definition');
