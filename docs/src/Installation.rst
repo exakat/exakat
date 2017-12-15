@@ -73,7 +73,7 @@ PHP 7.0 or more recent, curl, homebrew are required.
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.6
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.6
     cd ..
     
     php exakat.phar doctor
@@ -84,6 +84,7 @@ It has be reported that installation fails on OSX 10.11 and 10.12, with error si
 
     rm -r ~/.groovy/grapes/
     rm -r ~/.m2/
+
 
 They remove some files for grapes, that it will rebuild later. Then, try again the optional install instructions.
 
@@ -105,7 +106,7 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.6
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.6
     cd ..
 
     php exakat.phar doctor
