@@ -240,6 +240,8 @@ function processFile($file) {
                     'Interface'  => array(),
                     'Trait'      => array(),
                     'Deprecated' => array(),
+                    'Function'   => array(),
+                    'Method'     => array(),
                     );
     $namespace = 'global';
     $cit = '';
@@ -317,10 +319,20 @@ function processFile($file) {
                                                                     );
                         $deprecated = false;
                     }
+                    // skip anonymous function : 
+                    if (!is_array($tokens[$id + 2])) { break 1; }
+                    if ($tokens[$id + 2][0] != T_STRING) { break 1; }
+
+                    if (empty($cit)) {
+                        $return['Function'][$namespace][] = $tokens[$id + 2][1];
+                    } else {
+                        $return['Method'][$cit][] = $tokens[$id + 2][1];
+                    }
                     break;
 
                 case T_INTERFACE : 
                     $return['Interface'][$namespace][] = $tokens[$id + 2][1];
+                    $cit = $namespace.'/'.$tokens[$id + 2][1];
                     if ($deprecated === true) {
                         $return['Deprecated'][$namespace][] = array('name' => $tokens[$id + 2][1],
                                                                     'cit'  => '',
@@ -332,6 +344,7 @@ function processFile($file) {
 
                 case T_TRAIT : 
                     $return['Trait'][$namespace][] = $tokens[$id + 2][1];
+                    $cit = $namespace.'/'.$tokens[$id + 2][1];
                     if ($deprecated === true) {
                         $return['Deprecated'][$namespace][] = array('name' => $tokens[$id + 2][1],
                                                                     'cit'  => '',

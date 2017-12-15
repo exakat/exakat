@@ -3,21 +3,60 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$component = 'zend-permissions-acl';
-
-if (!file_exists('projects/'.$component)){
-    die("No such project as $component. Aborting\n");
+$args = $argv;
+if (($uid = array_search('-u', $args)) !== false) {
+    define('UPDATE', true);
+    unset($args[$uid]);
+    $args = array_values($args);
+} else {
+    define('UPDATE', false);
 }
 
-processComponent($component);
+$component = $args[1] ?? '';
+
+if (empty($component)) {
+    $components = glob('projects/zend-*');
+    $components = array_map('basename', $components);
+    print "Processing ".count($components)." components \n";
+} else {
+    if (!file_exists('projects/'.$component)) {
+        die("No such component as $component\n");
+    } else {
+        $components = array($component);
+    }
+}
 
 $sqlite = new \Sqlite3('data/zendf3.sqlite');
 $res = $sqlite->query('SELECT * FROM components 
     JOIN releases ON releases.component_id = components.id
-    WHERE components.component = "'.$component.'"');
+    WHERE components.component in ("'.implode('", "', $components).'")');
 
 while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-    processRelease($component, str_replace('release-', '', $row['release']));
+    if (UPDATE === true) {
+        processRelease($component, str_replace('release-', '', $row['release']));
+    } else {
+        checkRelease($component, str_replace('release-', '', $row['release']));
+    }
+}
+
+function checkRelease($component, $version) {
+    if (!empty($version)) {
+        $version3 = substr($version, 0, 3);
+        $version2 = $version[0].$version[2];
+    } else {
+        $version3 = '';
+        $version2 = '';
+    }
+    $componentShort = ucfirst(str_replace('zend-', '', str_replace('-', '-', $component)));
+    $className = 'Zf3'.$componentShort.$version2;
+    
+    if (file_exists('library/Exakat/Analyzer/ZendF/'.$className.'.php')) {
+        print $className." already exists.\n";
+        checkComponent($component);
+    } else {
+        print $className." is missing.\n";
+    }
+    
 }
 
 function processRelease($component, $version) {
@@ -86,7 +125,7 @@ PHP;
 
     // Make docs
     $exakatVersion = \Exakat\Exakat::VERSION;
-    $zend3 = new \Exakat\Data\ZendF3(__DIR__.'/../data/', false);
+    $zend3 = new \Exakat\Data\ZendF3(__DIR__.'/../data/', null);
     
     $countClasses = getCounts('Classes', $zend3, $component, substr($version, 0, 3));
     $countInterfaces = getCounts('Interfaces', $zend3, $component, substr($version, 0, 3));
@@ -241,6 +280,29 @@ PHP;
     unset($analyzersSqlite);
 }
 
+function checkComponent($component) {
+    $componentShort = ucfirst(str_replace('zend-', '', str_replace('-', '-', $component)));
+    $className = 'Zf3'.$componentShort;
+    
+    if (file_exists(__DIR__.'/../library/Exakat/Analyzer/ZendF/'.$className.'.php')) {
+        print "$component already exists\n";
+        return;
+    }
+
+    $exakatVersion = \Exakat\Exakat::VERSION;
+    $zend3 = new \Exakat\Data\ZendF3(__DIR__.'/../data/', null);
+    
+    $versions = $zend3->getVersions($component);
+    print_r($versions);die();
+    if (empty($versions)) {
+        print "No versions for $component\n";
+        return;
+    } elseif( $versions[0] !== '2.5.0') {
+        print "No version 2.5.0 for $component\n";
+        return;
+    }
+}
+
 function processComponent($component) {
     $componentShort = ucfirst(str_replace('zend-', '', str_replace('-', '-', $component)));
     $className = 'Zf3'.$componentShort;
@@ -251,15 +313,15 @@ function processComponent($component) {
     }
 
     $exakatVersion = \Exakat\Exakat::VERSION;
-    $zend3 = new \Exakat\Data\ZendF3(__DIR__.'/../data/', false);
+    $zend3 = new \Exakat\Data\ZendF3(__DIR__.'/../data/', null);
     
     $versions = $zend3->getVersions($component);
     if (empty($versions)) {
         print "No versions for $component\n";
-        die();
+        return;
     } elseif( $versions[0] !== '2.5.0') {
         print "No version 2.5.0 for $component\n";
-        die();
+        return;
     }
 
     $php = <<<PHP
@@ -362,9 +424,11 @@ PHP;
     $php = <<<PHP
 <?php
 
-\$expected     = array('$classOK( )');
+\$expected     = array('$classOK( )',
+                      );
 
-\$expected_not = array('$classKO( )');
+\$expected_not = array('$classKO( )',
+                      );
 
 ?>
 PHP;
@@ -395,7 +459,7 @@ function getCounts($type, $zend3, $component, $version = null) {
     } else {
         $r = count(array_unique(array_merge(...array_values($x))));
     }
-    return $r;
+    return (int) $r;
 }
 
 ?>
