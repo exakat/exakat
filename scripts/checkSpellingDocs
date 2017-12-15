@@ -1,0 +1,51 @@
+<?php
+
+$pspell = pspell_new('en');
+//        $this->tolerated = array_unique(array_merge($this->loadDict('extra.'.$this->language), 
+//                                                    $this->loadDict('php'), // This one is common to languages
+//                                                    $this->loadDict('personal.'.$this->language))); 
+
+$files = glob('human/en/Structures/*.ini');
+
+foreach($files as $file) {
+    processFile($file, $pspell);
+}
+
+function processFile($file, $pspell) {
+    $ini = parse_ini_file($file);
+    
+    static $myWords;
+    if (!isset($tolerated)) {   
+        $myWords = file('./data/extraWords.txt', FILE_IGNORE_NEW_LINES);
+    }
+    
+    $locale = 'en_EN';
+
+    $i = IntlBreakIterator::createWordInstance($locale);
+    $text = preg_replace('/<\?php.*?\?>/s', '', $ini['description']);
+    $text = preg_replace('/`.+?`_+/s', '', $text);
+    $text = preg_replace('/[a-zA-Z_0-9]+\(\)/s', '', $text);
+
+    $i->setText($text);
+
+    $errors = 0;
+    $total = 0;
+    $tolerated = 0;
+    foreach($i->getPartsIterator() as $word) {
+        ++$total;
+        if (!trim($word)) { continue; }
+        if (in_array($word, [',', '(', ')', '.', ])) { continue; }
+        if (preg_match('/^[0-9\.]+$/', $word)) { continue; }
+        
+        if (!pspell_check($pspell, $word)) {
+            if (!in_array($word, $myWords)) {
+                ++$errors;
+                echo $word . ' '.implode(', ', pspell_suggest($pspell, $word)).PHP_EOL;
+            } else {
+                ++$tolerated;
+            }
+        }
+    }
+    
+    print "$file : \n$total words, $tolerated tolerated, $errors errors.\n";
+}
