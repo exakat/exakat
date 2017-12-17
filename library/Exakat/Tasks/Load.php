@@ -3854,9 +3854,14 @@ SQL;
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
+            } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
+                $type = $this->tokens[$current - 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR; // static? 
+                $variable = $this->processFunctioncall($variable, $type === true ? self::WITHOUT_FULLNSPATH : self::WITH_FULLNSPATH);
+            } else {
+                $variable = $this->processFCOA($variable);
             }
 
-            return $this->processFCOA($variable);
+            return $variable;
         } else {
             $this->nestContext();
             $this->processSingleOperator('Variable', $this->precedence->get($this->tokens[$this->id][0]), 'NAME');
@@ -4935,7 +4940,8 @@ SQL;
                                                   "'.$definition->id.'"
          )';
 
-        $this->callsSqlite->query($query);
+        $res = $this->callsSqlite->query($query);
+        assert($res, "Error while saving definitions : ".$query);
     }
 
     private function logTime($step) {
