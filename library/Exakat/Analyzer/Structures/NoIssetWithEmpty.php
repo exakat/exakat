@@ -29,13 +29,13 @@ class NoIssetWithEmpty extends Analyzer {
         $this->atomIs('Logical')
              ->tokenIs('T_BOOLEAN_AND')
              ->outIs('LEFT')
-             ->functioncallIs('\\isset')
+             ->atomIs('Isset')
              ->outIs('ARGUMENT')
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
              ->outIs('RIGHT')
              ->outIsIE('NOT')            // optional !
-             ->functioncallIs('\\empty')
+             ->atomIs('Empty')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'variable')
              ->back('first');

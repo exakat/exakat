@@ -2058,6 +2058,10 @@ SQL;
                 $atom = 'Unset';
             } elseif ($name->fullnspath == '\\list') {
                 $atom = 'List';
+            } elseif ($name->fullnspath == '\\empty') {
+                $atom = 'Empty';
+            } elseif ($name->fullnspath == '\\isset') {
+                $atom = 'Isset';
             } else {
                 $atom = 'Functioncall';
             }
@@ -3496,6 +3500,22 @@ SQL;
     private function processVariable() {
         if ($this->tokens[$this->id][1] === '$this') {
             $atom = 'This';
+        } elseif (in_array($this->tokens[$this->id + 1][1], array('$GLOBALS', 
+                                                                  '$_SERVER',
+                                                                  '$_GET',
+                                                                  '$_POST',
+                                                                  '$_FILES',
+                                                                  '$_REQUEST',
+                                                                  '$_SESSION',
+                                                                  '$_ENV',
+                                                                  '$_COOKIE',
+                                                                  '$php_errormsg',
+                                                                  '$HTTP_RAW_POST_DATA',
+                                                                  '$http_response_header',
+                                                                  '$argc',
+                                                                  '$argv',
+                                                                  ))) {
+            $atom = 'Phpvariable';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
             $atom = 'Variableobject';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET) {

@@ -27,7 +27,7 @@ class CantUseReturnValueInWriteContext extends Analyzer {
     protected $phpVersion = '5.5+';
 
     public function analyze() {
-        $this->atomFunctionIs('\empty')
+        $this->atomIs('Empty')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->atomIs(array('Methodcall', 'Functioncall', 'Staticmethodcall'))

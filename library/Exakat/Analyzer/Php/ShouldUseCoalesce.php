@@ -32,7 +32,7 @@ class ShouldUseCoalesce extends Analyzer {
         //isset($a) ? $a : 'b';
         $this->atomIs('Ternary')
              ->outIs('CONDITION')
-             ->functioncallIs('\\isset')
+             ->atomIs('Isset')
              ->outWithRank('ARGUMENT', 0)
              ->savePropertyAs('fullcode', 'variable')
              ->inIs('ARGUMENT')
@@ -47,7 +47,7 @@ class ShouldUseCoalesce extends Analyzer {
              ->outIs('CONDITION')
              ->atomIs('Not')
              ->outIs('NOT')
-             ->functioncallIs('\\isset')
+             ->atomIs('Isset')
              ->outWithRank('ARGUMENT', 0)
              ->savePropertyAs('fullcode', 'variable')
              ->inIs('ARGUMENT')
