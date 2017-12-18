@@ -698,11 +698,11 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
 
     public function isNot($property, $value = true) {
         if ($value === null) {
-            $this->addMethod('not(has("'.$property.'", null))');
+            $this->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", null)))');
         } elseif ($value === true) {
-            $this->addMethod('has("'.$property.'").not(has("'.$property.'", true))');
+            $this->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
         } elseif ($value === false) {
-            $this->addMethod('not(has("'.$property.'", false))');
+            $this->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
         } elseif (is_int($value)) {
             $this->addMethod('not(has("'.$property.'", ***))', $value);
         } elseif (is_string($value)) {
