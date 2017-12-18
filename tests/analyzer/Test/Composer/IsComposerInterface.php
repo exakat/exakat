@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Composer_IsComposerInterface extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testComposer_IsComposerInterface01()  { $this->generic_test('Composer_IsComposerInterface.01'); }
     public function testComposer_IsComposerInterface02()  { $this->generic_test('Composer_IsComposerInterface.02'); }
+    public function testComposer_IsComposerInterface03()  { $this->generic_test('Composer/IsComposerInterface.03'); }
 }
 ?>
