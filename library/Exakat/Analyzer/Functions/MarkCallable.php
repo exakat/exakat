@@ -188,7 +188,7 @@ out('ARGUMENT').has('rank', 0).sideEffect{ cbObjectNode = it.get(); }
 
 GREMLIN;
 
-        $firstArgIsAVariable = 'where ( __.out("ARGUMENT").has("rank", 0).hasLabel("Variable"))';
+        $firstArgIsAVariable = 'where ( __.out("ARGUMENT").has("rank", 0).hasLabel("Variable", "This"))';
         $secondArgIsAString = 'where ( __.out("ARGUMENT").has("rank", 1).hasLabel("String").where( __.out("CONCAT").count().is(eq(0))) )';
         
         // callable is in # position

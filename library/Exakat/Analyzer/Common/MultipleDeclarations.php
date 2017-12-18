@@ -33,7 +33,7 @@ class MultipleDeclarations extends Analyzer {
         // case-insensitive constants
 
         $this->raw(<<<GREMLIN
-hasLabel("Class").groupCount("m").by("fullnspath").cap("m").next().findAll{ a,b -> b > 1}
+hasLabel("{$this->atom}").groupCount("m").by("fullcode").cap("m").next().findAll{ a,b -> b > 1}
 GREMLIN
 );
         $multiples = $this->rawQuery();
@@ -43,7 +43,7 @@ GREMLIN
         }
 
         $this->atomIs($this->atom)
-             ->fullnspathIs(call_user_func_array('array_merge', $multiples->toArray()));
+             ->fullcodeIs(call_user_func_array('array_merge', $multiples->toArray()));
         $this->prepareQuery();
     }
 }

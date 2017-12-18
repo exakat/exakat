@@ -43,7 +43,7 @@ class UseListWithForeach extends Analyzer {
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIs('Functioncall')
+             ->atomIs('List')
              ->back('first');
         $this->prepareQuery();
 
@@ -51,7 +51,7 @@ class UseListWithForeach extends Analyzer {
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->outIsIE('VALUE') // Key/value
-             ->atomIs('Functioncall')
+             ->atomIs('List')
              ->atomInside('Variable')
              ->savePropertyAs('fullcode', 'blind')
              ->back('first')
@@ -61,7 +61,7 @@ class UseListWithForeach extends Analyzer {
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIs('Functioncall')
+             ->atomIs('List')
              ->back('first');
         $this->prepareQuery();
 

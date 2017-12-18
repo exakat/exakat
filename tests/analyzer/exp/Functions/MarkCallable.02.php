@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('\'x\'',
-                      'array($this, \'x\')',
+                      'array($this, \'xy\')',
                       'array($a, \'x2\')',
                       'array(\'Z2\', \'parent::x3\')',
                       'array(\'X2\', \'parent::x3\')',

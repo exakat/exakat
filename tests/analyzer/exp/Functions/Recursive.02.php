@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('recursive',
-                      'recursiveB',
+$expected     = array('function recursive($x) { /**/ } ',
+                      'function recursiveB($x) { /**/ } ',
                      );
 
-$expected_not = array('nonRecursive',
+$expected_not = array('function nonRecursive( ) { /**/ } ',
                      );
 
 ?>

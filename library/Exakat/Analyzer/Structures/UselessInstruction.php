@@ -40,7 +40,7 @@ class UselessInstruction extends Analyzer {
                             'Magicconstant', 'Staticconstant', 'Integer', 'Real', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
-             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation'));
+             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation', 'Defineconstant'));
         $this->prepareQuery();
         
         // foreach($i = 0; $i < 10, $j < 20; $i++)

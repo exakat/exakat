@@ -66,7 +66,7 @@ class CakePHPMissing extends Analyzer {
             $traits = array();
         }
 
-        $this->atomIs('Cakephp/CakePHPUsed')
+        $this->analyzerIs('Cakephp/CakePHPUsed')
              ->fullnspathIsNot(array_merge($classes, $interfaces, $traits));
         $this->prepareQuery();
     }

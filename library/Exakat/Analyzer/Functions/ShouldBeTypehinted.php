@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldBeTypehinted extends Analyzer {
     public function dependsOn() {
-        return array('Variables/Arguments');
+        return array('Variables/Arguments',
+                    );
     }
     
     public function analyze() {
@@ -37,7 +38,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->hasNoOut('TYPEHINT')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
-             ->hasNoChildren('Void', 'NAME')
+             ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
              ->atomInside('Member')
              ->outIs('OBJECT')
@@ -51,7 +52,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
-             ->atomIsNot('Closure')
+             ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
              ->atomInside('Methodcall')
              ->outIs('OBJECT')
@@ -65,7 +66,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
-             ->hasNoChildren('Void', 'NAME')
+             ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
              ->atomInside('Array')
              ->hasNoChildren('Integer', 'INDEX') // attempt to avoid strings
@@ -80,7 +81,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
-             ->hasNoChildren('Void', 'NAME')
+             ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
              ->atomInside('Arrayappend')
              ->outIsIE('VARIABLE')
@@ -94,7 +95,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
-             ->hasNoChildren('Void', 'NAME')
+             ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->tokenIs('T_OPEN_BRACKET')
@@ -109,7 +110,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
-             ->hasNoChildren('Void', 'NAME')
+             ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->tokenIs('T_VARIABLE')

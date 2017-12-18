@@ -37,7 +37,7 @@ class NoChangeIncomingVariables extends Analyzer {
                                    '$PHP_SELF','$HTTP_RAW_POST_DATA');
         //'$_COOKIE', '$_SESSION' : those are OK
 
-        $this->atomIs('Variable')
+        $this->atomIs('Phpvariable')
              ->hasNoIn('VARIABLE') // avoid double counting Arrays
              ->codeIs($incomingVariables)
              ->analyzerIs('Variables/IsModified');

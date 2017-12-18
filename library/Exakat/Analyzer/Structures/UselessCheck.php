@@ -32,7 +32,26 @@ class UselessCheck extends Analyzer {
              ->outIs('CONDITION')
              ->atomInside('Functioncall')
              // count($a) > 0, sizeof($a) != 0, !empty($a)
-             ->functioncallIs(array('\\count', '\\sizeof', '\\empty'))
+             ->functioncallIs(array('\\count', '\\sizeof'))
+             ->outWithRank('ARGUMENT', 0)
+             ->savePropertyAs('fullcode', 'var')
+             ->back('first')
+             ->outIs('THEN')
+             ->is('count', 1)
+             ->outWithRank('EXPRESSION', 0)
+             ->atomIs('Foreach')
+             ->outIs('SOURCE')
+             ->samePropertyAs('fullcode', 'var')
+             ->back('first');
+        $this->prepareQuery();
+
+        //    if (count($anArray) > 0){    foreach ($anArray as $el){
+        $this->atomIs('Ifthen')
+             ->analyzerIsNot('self')
+             ->hasNoOut('ELSE')
+             ->outIs('CONDITION')
+             ->atomInside('Empty')
+             // count($a) > 0, sizeof($a) != 0, !empty($a)
              ->outWithRank('ARGUMENT', 0)
              ->savePropertyAs('fullcode', 'var')
              ->back('first')

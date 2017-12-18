@@ -33,7 +33,7 @@ class IsModified extends Analyzer {
     }
     
     public function analyze() {
-        $atoms = 'Variable';
+        $atoms = array('Variable', 'Phpvariable');
 
         $this->atomIs(array('Variablearray', 'Variable'))
              ->inIsIE('VARIABLE')
@@ -122,6 +122,12 @@ class IsModified extends Analyzer {
                  ->atomIs(self::$VARIABLES_ALL);
             $this->prepareQuery();
         }
+
+        $this->atomIs('Unset')
+             ->outIs('ARGUMENT')
+             ->outIsIE('VARIABLE')
+             ->atomIs(self::$VARIABLES_ALL);
+        $this->prepareQuery();
 
         // Class constructors (__construct)
         $this->atomIs('Newcall')

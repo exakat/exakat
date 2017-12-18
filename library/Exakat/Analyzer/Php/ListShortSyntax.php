@@ -31,7 +31,7 @@ class ListShortSyntax extends Analyzer {
         // [$a, $b] = [1, 2], insteead of list($a, $b);
         $this->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIs('Functioncall')
+             ->atomIs('List')
              ->tokenIs('T_OPEN_BRACKET');
         $this->prepareQuery();
     }

@@ -12,9 +12,11 @@ array_filter($a, array($a, 'x2'));
 
 class Y extends Yparent {
     static function x2() {}
+
+    function xy() { }
     
     function z() {
-        array_filter($a, array($this, 'x'));
+        array_filter($a, array($this, 'xy'));
     }
 }
 

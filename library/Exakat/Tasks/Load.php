@@ -4913,6 +4913,7 @@ SQL;
             $types = array('function', 'class');
 
             $fullnspath = mb_strtolower($call->noDelimiter);
+            $fullnspath = stripslashes($fullnspath);
             if (empty($fullnspath) || $fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
             }

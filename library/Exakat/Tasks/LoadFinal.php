@@ -79,13 +79,14 @@ class LoadFinal extends Tasks {
     }
 
     private function fixFullnspathConstants() {
+        display("fixing Fullnspath for Constants"); 
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
      .has("fullnspath")
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath"); }
-     .in("DEFINITION")
+     .in("DEFINITION").hasLabel("Class", "Trait", "Interface")
      .coalesce( __.out("ARGUMENT").has("rank", 0), __.hasLabel("Constant").out('NAME'), filter{ true; })
      .filter{ actual = it.get().value("fullnspath"); actual != cc;}
      .select("identifier")
@@ -94,6 +95,7 @@ g.V().hasLabel("Identifier")
 GREMLIN;
 
         $res = $this->gremlin->query($query);
+        display("Fixed Fullnspath for Constants"); 
     }
 
     private function spotPHPNativeConstants() {

@@ -29,14 +29,13 @@ class Recursive extends Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->hasNoClassTrait()
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('fullcode', 'name')
              ->back('first')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->samePropertyAs('code', 'name', false)
-             ->back('first')
-             ->outIs('NAME');
+             ->functionDefinition()
+             ->samePropertyAs('fullcode', 'name')
+             ->back('first');
         $this->prepareQuery();
     }
 }

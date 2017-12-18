@@ -9,7 +9,7 @@ $expected     = array('exit($f)',
                       'print ($d)',
                      );
 
-$expected_not = array(
+$expected_not = array('myfunction( )',
                      );
 
 ?>
