@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array( // can't get any value, as this works on generic
+$expected     = array(
                      );
 
 $expected_not = array('Cake\\Http\\Response',

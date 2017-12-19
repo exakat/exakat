@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a = $d->e(A::$c, 1)', 
+$expected     = array('$a = $d->e(A::$c, 1)',
                       '$a = $c + 1',
                      );
 
