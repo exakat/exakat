@@ -37,7 +37,7 @@ class ShouldUseArrayFilter extends Analyzer {
              ->has('count', 1)
              ->outIs('EXPRESSION')
              ->atomInside('Assignation')
-             ->hasInstruction('Ifthen') 
+             ->hasInstruction('Ifthen')
              ->outIs('LEFT')
              ->atomIs('Arrayappend')
              ->inIs('LEFT')

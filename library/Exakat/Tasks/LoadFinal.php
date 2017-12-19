@@ -79,7 +79,7 @@ class LoadFinal extends Tasks {
     }
 
     private function fixFullnspathConstants() {
-        display("fixing Fullnspath for Constants"); 
+        display("fixing Fullnspath for Constants");
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
@@ -95,7 +95,7 @@ g.V().hasLabel("Identifier")
 GREMLIN;
 
         $res = $this->gremlin->query($query);
-        display("Fixed Fullnspath for Constants"); 
+        display("Fixed Fullnspath for Constants");
     }
 
     private function spotPHPNativeConstants() {

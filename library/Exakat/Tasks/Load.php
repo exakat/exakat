@@ -3500,7 +3500,7 @@ SQL;
     private function processVariable() {
         if ($this->tokens[$this->id][1] === '$this') {
             $atom = 'This';
-        } elseif (in_array($this->tokens[$this->id + 1][1], array('$GLOBALS', 
+        } elseif (in_array($this->tokens[$this->id + 1][1], array('$GLOBALS',
                                                                   '$_SERVER',
                                                                   '$_GET',
                                                                   '$_POST',
@@ -3875,7 +3875,7 @@ SQL;
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
             } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
-                $type = $this->tokens[$current - 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR; // static? 
+                $type = $this->tokens[$current - 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR; // static?
                 $variable = $this->processFunctioncall($variable, $type === true ? self::WITHOUT_FULLNSPATH : self::WITH_FULLNSPATH);
             } else {
                 $variable = $this->processFCOA($variable);

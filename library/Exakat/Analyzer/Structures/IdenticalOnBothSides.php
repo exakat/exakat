@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IdenticalOnBothSides extends Analyzer {
     public function analyze() {
-        // $a && $a 
+        // $a && $a
         // $b == $b
         $this->atomIs(array('Comparison', 'Logical'))
              ->outIs('LEFT')
