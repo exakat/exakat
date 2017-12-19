@@ -60,7 +60,7 @@ GREMLIN;
              ->isNot('noDelimiter', '')
              ->raw(self::FETCH_DELIMITER)
              ->raw(self::MAKE_DELIMITER_FINAL)
-             ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")([^" + delimiterFinal + "]*?e[^" + delimiterFinal + "]*?)\\$')
+             ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?)\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -73,7 +73,7 @@ GREMLIN;
              ->raw(self::FETCH_DELIMITER)
              ->inIs('CONCAT')
              ->raw(self::MAKE_DELIMITER_FINAL)
-             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
+             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -90,8 +90,9 @@ GREMLIN;
              ->raw(self::FETCH_DELIMITER)
              ->inIsIE('CONCAT')
              ->raw(self::MAKE_DELIMITER_FINAL)
-             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
-             ->back('first');
+             ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\\$')
+//             ->back('first')
+             ;
         $this->prepareQuery();
 // Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
 
