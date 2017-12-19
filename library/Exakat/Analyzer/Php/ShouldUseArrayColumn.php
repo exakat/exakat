@@ -34,10 +34,10 @@ class ShouldUseArrayColumn extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->outIs('BLOCK')
-             ->has('count', 1)
+             ->is('count', 1)
              ->outIs('EXPRESSION')
              ->atomInside('Assignation')
-             ->hasNoInstruction('Ifthen')
+             ->hasNoInstruction(array('Ifthen', 'Switch')) // Make this a filter
              ->outIs('LEFT')
              ->atomIs('Arrayappend')
              ->inIs('LEFT')

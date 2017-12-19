@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Global extends Tokenizer {
-    /* 13 methods */
+    /* 18 methods */
 
     public function test_Global01()  { $this->generic_test('_Global.01'); }
     public function test_Global02()  { $this->generic_test('_Global.02'); }
@@ -22,5 +22,10 @@ class _Global extends Tokenizer {
     public function test_Global11()  { $this->generic_test('_Global.11'); }
     public function test_Global12()  { $this->generic_test('_Global.12'); }
     public function test_Global13()  { $this->generic_test('_Global.13'); }
+    public function test_Global14()  { $this->generic_test('_Global.14'); }
+    public function test_Global15()  { $this->generic_test('_Global.15'); }
+    public function test_Global16()  { $this->generic_test('_Global.16'); }
+    public function test_Global17()  { $this->generic_test('_Global.17'); }
+    public function test_Global18()  { $this->generic_test('_Global.18'); }
 }
 ?>

@@ -27,11 +27,13 @@ use Exakat\Analyzer\Analyzer;
 
 class ForeachReferenceIsNotModified extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsModified');
+        return array('Variables/IsModified',
+                    );
     }
     
     public function analyze() {
-        $modifiedVar = 'where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable", "Variablearray", "Variableobject") ).times('.self::MAX_LOOPING.').hasLabel("Variable", "Variablearray", "Variableobject")
+        $modifiedVar = 'where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable", "Variablearray", "Variableobject") ).times('.self::MAX_LOOPING.')
+                                 .hasLabel("Variable", "Variablearray", "Variableobject")
                                  .filter{ it.get().value("code") == name}
                                  .where( __.in("ANALYZED").has("analyzer", "Variables/IsModified").count().is(eq(1)) )
                                  .count().is(eq(0)) )';

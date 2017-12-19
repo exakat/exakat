@@ -35,15 +35,17 @@ class ClassUsage extends Analyzer {
     public function analyze() {
         $classes =  $this->makeFullNsPath($this->classes);
 
+        // New X();
         $this->atomIs('Newcall')
-             ->raw('not(where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall") ) )')
-             ->tokenIs(self::$FUNCTIONS_TOKENS)
+             ->has('fullnspath')
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
+        // New X; (until this is also converted into a Newcall)
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs(array('Identifier', 'Nsname'))
+             ->has('fullnspath')
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
@@ -76,14 +78,6 @@ class ClassUsage extends Analyzer {
         $this->atomIs('Class')
              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($classes);
-        $this->prepareQuery();
-
-// Check that... Const/function and aliases
-        // This points on the use, not the name.
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_AS'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
 

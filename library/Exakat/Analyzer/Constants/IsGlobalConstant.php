@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class IsGlobalConstant extends Analyzer {
     public function dependsOn() {
-        return array('Constants/ConstantUsage');
+        return array('Constants/ConstantUsage',
+                    );
     }
     
     public function analyze() {
@@ -56,8 +57,7 @@ class IsGlobalConstant extends Analyzer {
              ->fullnspathIsNot($constantsFullNs)
 
             // Check that the final fullnspath is actually \something (no multiple \)
-             ->raw('filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$").getCount() == 1 }')
-             ;
+             ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\\$');
         $this->prepareQuery();
     }
 }

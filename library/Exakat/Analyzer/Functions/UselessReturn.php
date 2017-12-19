@@ -44,12 +44,7 @@ class UselessReturn extends Analyzer {
         $this->prepareQuery();
 
         // function that finally returns void. (the last return is useless)
-        $this->atomIs('Function')
-
-             ->outIs('NAME')
-             ->codeIsNot(array('__construct', '__destruct', '__set', '__clone', '__unset', '__wakeup'))
-             ->inIs('NAME')
-
+        $this->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
              ->outWithRank('EXPRESSION', 'last')
              ->atomIs('Return')
@@ -57,7 +52,7 @@ class UselessReturn extends Analyzer {
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
-
+        
 // @todo : spot such functions
 //Also `__autoload`, methods used for autoloading and methods registered for shutdown, have no need to return anything.
 

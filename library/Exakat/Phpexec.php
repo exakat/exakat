@@ -67,7 +67,7 @@ class Phpexec {
     private $requestedVersion = null;
 
     public function __construct($phpversion = null, $pathToBinary) {
-        assert ($phpversion !== null, "Can't use null for PHP version");
+        assert($phpversion !== null, "Can't use null for PHP version");
         $this->requestedVersion = substr($phpversion, 0, 3);
 
         $this->version = $phpversion;
@@ -175,7 +175,8 @@ class Phpexec {
             $tokens = @token_get_all(file_get_contents($file));
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
-            shell_exec($this->phpexec.'  -d short_open_tag=1  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents(\''.$file.'\'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.$tmpFile);
+            // -d short_open_tag=1
+            shell_exec($this->phpexec.'  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents(\''.$file.'\'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.$tmpFile);
             include $tmpFile;
 
             unlink($tmpFile);

@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 27 Nov 2017 14:10:19 +0000
-.. comment: Generation hash : c71c46e50699874dce862b5160684f11bd933e1a
+.. comment: Generation date : Tue, 19 Dec 2017 07:57:51 +0000
+.. comment: Generation hash : b9901b195e9584111d04ca546a62f831416a0d6e
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 327 analysis
+Total : 334 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -174,12 +174,15 @@ Total : 327 analysis
 * :ref:`Hidden Use Expression <hidden-use-expression>`
 * :ref:`Htmlentities Calls <htmlentities-calls>`
 * :ref:`Identical Conditions <identical-conditions>`
+* :ref:`Identical Consecutive Expression <identical-consecutive-expression>`
+* :ref:`Identical On Both Sides <identical-on-both-sides>`
 * :ref:`If With Same Conditions <if-with-same-conditions>`
 * :ref:`Iffectations`
 * :ref:`Illegal Name For Method <illegal-name-for-method>`
 * :ref:`Implement Is For Interface <implement-is-for-interface>`
 * :ref:`Implemented Methods Are Public <implemented-methods-are-public>`
 * :ref:`Implicit Global <implicit-global>`
+* :ref:`Implied If <implied-if>`
 * :ref:`Incompilable Files <incompilable-files>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
@@ -201,6 +204,7 @@ Total : 327 analysis
 * :ref:`Mismatched Typehint <mismatched-typehint>`
 * :ref:`Missing Cases In Switch <missing-cases-in-switch>`
 * :ref:`Missing New ? <missing-new-?>`
+* :ref:`Mistaken Concatenation <mistaken-concatenation>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
 * :ref:`Multiple Alias Definitions <multiple-alias-definitions>`
@@ -216,6 +220,7 @@ Total : 327 analysis
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ifthen <nested-ifthen>`
 * :ref:`Nested Ternary <nested-ternary>`
+* :ref:`Never Used Parameter <never-used-parameter>`
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`Next Month Trap <next-month-trap>`
 * :ref:`No Boolean As Default <no-boolean-as-default>`
@@ -229,7 +234,6 @@ Total : 327 analysis
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Path <no-hardcoded-path>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
-* :ref:`No Implied If <no-implied-if>`
 * :ref:`No Isset With Empty <no-isset-with-empty>`
 * :ref:`No Magic With Array <no-magic-with-array>`
 * :ref:`No Need For Else <no-need-for-else>`
@@ -245,6 +249,7 @@ Total : 327 analysis
 * :ref:`Non Ascii Variables <non-ascii-variables>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
+* :ref:`Not A Scalar Type <not-a-scalar-type>`
 * :ref:`Not Definitions Only <not-definitions-only>`
 * :ref:`Not Not <not-not>`
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
@@ -283,6 +288,7 @@ Total : 327 analysis
 * :ref:`Results May Be Missing <results-may-be-missing>`
 * :ref:`Return True False <return-true-false>`
 * :ref:`Same Conditions In Condition <same-conditions-in-condition>`
+* :ref:`Same Variables Foreach <same-variables-foreach>`
 * :ref:`Scalar Or Object Property <scalar-or-object-property>`
 * :ref:`Sequences In For <sequences-in-for>`
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
@@ -361,6 +367,7 @@ Total : 327 analysis
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 * :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
+* :ref:`Use Named Boolean In Argument Definition <use-named-boolean-in-argument-definition>`
 * :ref:`Use Object Api <use-object-api>`
 * :ref:`Use Pathinfo <use-pathinfo>`
 * :ref:`Use Positive Condition <use-positive-condition>`
@@ -464,9 +471,8 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 62 analysis
+Total : 61 analysis
 
-* :ref:`** For Exponent <**-for-exponent>`
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -534,9 +540,8 @@ Total : 62 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 58 analysis
+Total : 57 analysis
 
-* :ref:`** For Exponent <**-for-exponent>`
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -600,9 +605,8 @@ Total : 58 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 51 analysis
+Total : 49 analysis
 
-* :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
@@ -611,7 +615,6 @@ Total : 51 analysis
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Ellipsis Usage <ellipsis-usage>`
-* :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Group Use Declaration <group-use-declaration>`
@@ -659,14 +662,13 @@ Total : 51 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 39 analysis
+Total : 38 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Define With Array <define-with-array>`
-* :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
@@ -706,13 +708,12 @@ Total : 39 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 35 analysis
+Total : 34 analysis
 
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Empty List <empty-list>`
-* :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
@@ -749,11 +750,10 @@ Total : 35 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 24 analysis
+Total : 23 analysis
 
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
-* :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
@@ -955,7 +955,7 @@ Total : 25 analysis
 Wordpress
 +++++++++
 
-Total : 13 analysis
+Total : 24 analysis
 
 * :ref:`Avoid Double Prepare <avoid-double-prepare>`
 * :ref:`Avoid Non Wordpress Globals <avoid-non-wordpress-globals>`
@@ -968,6 +968,17 @@ Total : 13 analysis
 * :ref:`Unverified Nonce <unverified-nonce>`
 * :ref:`Use $wpdb Api <use-$wpdb-api>`
 * :ref:`Use Wordpress Functions <use-wordpress-functions>`
+* :ref:`Wordpress 4.0 Undefined Classes <wordpress-4.0-undefined-classes>`
+* :ref:`Wordpress 4.1 Undefined Classes <wordpress-4.1-undefined-classes>`
+* :ref:`Wordpress 4.2 Undefined Classes <wordpress-4.2-undefined-classes>`
+* :ref:`Wordpress 4.3 Undefined Classes <wordpress-4.3-undefined-classes>`
+* :ref:`Wordpress 4.4 Undefined Classes <wordpress-4.4-undefined-classes>`
+* :ref:`Wordpress 4.5 Undefined Classes <wordpress-4.5-undefined-classes>`
+* :ref:`Wordpress 4.6 Undefined Classes <wordpress-4.6-undefined-classes>`
+* :ref:`Wordpress 4.7 Undefined Classes <wordpress-4.7-undefined-classes>`
+* :ref:`Wordpress 4.8 Undefined Classes <wordpress-4.8-undefined-classes>`
+* :ref:`Wordpress 4.9 Undefined Classes <wordpress-4.9-undefined-classes>`
+* :ref:`Wordpress Usage <wordpress-usage>`
 * :ref:`Wpdb Best Usage <wpdb-best-usage>`
 * :ref:`Wpdb Prepare Or Not <wpdb-prepare-or-not>`
 

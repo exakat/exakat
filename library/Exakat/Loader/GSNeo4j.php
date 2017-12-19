@@ -176,6 +176,7 @@ SQL
             
             fwrite($fp, json_encode($json).PHP_EOL);
         }
+
         fclose($fp);
         fclose($fpDefinitions);
         unlink($this->pathDefinition);
@@ -273,6 +274,7 @@ SQL
                                           'Class', 'Classanonymous', 'Newcall', 'Interface', 'Trait', 
                                           'Identifier', 'Nsname', 'Constant', 
                                           'String', 'This',
+                                          'Label', 'Goto',
                                           ))) {
                 $X = $this->json_encode($j);
                 assert(!json_last_error(), $fileName.' : error encoding for definition '.$j->label.' : '.json_last_error_msg()."\n".' '.print_r($j, true));

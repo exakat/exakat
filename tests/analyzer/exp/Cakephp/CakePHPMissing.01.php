@@ -1,9 +1,10 @@
 <?php
 
-$expected     = array('Cake\\Http\\Response',
+$expected     = array(
                      );
 
-$expected_not = array('Cake\\Http\\Answer',
+$expected_not = array('Cake\\Http\\Response',
+                      'Cake\\Http\\Answer',
                      );
 
 ?>

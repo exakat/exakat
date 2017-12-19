@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ConstantFullyQualified extends Analyzer {
     public function analyze() {
         // define('\\full\\namespace\\path', 'value');
-        $this->atomFunctionIs('\\define')
+        $this->atomIs('Defineconstant')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->regexIs('noDelimiter', '^(\\\\\\\\)')

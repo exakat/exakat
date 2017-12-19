@@ -32,6 +32,10 @@ class CakePHPMissing extends Analyzer {
     protected $component  = 'cakephp';
     protected $version    = null;
     
+    public function dependsOn() {
+        return array('Cakephp/CakePHPUsed');
+    }
+    
     public function analyze() {
         $data = new CakePHP($this->config->dir_root.'/data', $this->config->is_phar);
 
@@ -65,7 +69,6 @@ class CakePHPMissing extends Analyzer {
         $this->analyzerIs('Cakephp/CakePHPUsed')
              ->fullnspathIsNot(array_merge($classes, $interfaces, $traits));
         $this->prepareQuery();
-
     }
 }
 

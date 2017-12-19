@@ -29,16 +29,8 @@ class EmptyList extends Analyzer {
     protected $phpVersion = '7.0-';
     
     public function analyze() {
-        // list()
-        $this->atomFunctionIs('\\list')
-             ->is('count', 1)
-             ->outIs('ARGUMENT')
-             ->atomIs('Void')
-             ->back('first');
-        $this->prepareQuery();
-
         // list( , )
-        $this->atomFunctionIs('\\list')
+        $this->atomIs('List')
              ->raw('where( __.out("ARGUMENT").not(hasLabel("Void")).count().is(eq(0)) )');
         $this->prepareQuery();
     }

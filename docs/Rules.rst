@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 27 Nov 2017 14:10:19 +0000
-.. comment: Generation hash : c71c46e50699874dce862b5160684f11bd933e1a
+.. comment: Generation date : Tue, 19 Dec 2017 07:57:51 +0000
+.. comment: Generation hash : b9901b195e9584111d04ca546a62f831416a0d6e
 
 
 .. _$http\_raw\_post\_data:
@@ -177,32 +177,6 @@ $this variable represents an object (the current object) and it is not compatibl
 +--------------+---------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                              |
 +--------------+---------------------------------------------------------------------------------------------+
-
-
-.. _**-for-exponent:
-
-** For Exponent
-###############
-
-
-PHP 5.6 introduced the operator `'** <http://php.net/manual/en/language.operators.arithmetic.php>`_ to provide exponents, instead of the slower function `'pow() <http://www.php.net/pow>`_.
-
-.. code-block:: php
-
-   <?php
-       $cube = pow(2, 3); // 8
-   
-       $cubeInPHP56 = 2 '** 3; // 8
-   ?>
-
-
-If the code needs to be backward compatible to 5.5 or less, don't use the new operator.
-
-+--------------+---------------------------------------------------------------------------------+
-| Command Line | Php/NewExponent                                                                 |
-+--------------+---------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+---------------------------------------------------------------------------------+
 
 
 .. _\:\:class:
@@ -1541,7 +1515,7 @@ Bail Out Early
 ##############
 
 
-When using conditions, it is recommended to quit in the current context, and avoid else clause altoghter. 
+When using conditions, it is recommended to quit in the current context, and avoid else clause altogether. 
 
 The main benefit is to make clear the method applies a condition, and stop quickly went it is not satisfied. 
 The main sequence is then focused on the useful code. 
@@ -1633,9 +1607,9 @@ Bracketless Blocks
 ##################
 
 
-PHP allows one liners as `'for() <http://php.net/manual/en/control-structures.for.php>`_, `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_, `'while() <http://php.net/manual/en/control-structures.while.php>`_, `'do..while() <http://php.net/manual/en/control-structures.do.while.php>`_ loops, or as then/else expressions. 
+PHP allows one liners as `'for() <http://php.net/manual/en/control-structures.for.php>`_, `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_, `'while() <http://php.net/manual/en/control-structures.while.php>`_, do/`'while() <http://php.net/manual/en/control-structures.while.php>`_ loops, or as then/else expressions. 
 
-It is generally considered a bad practice, as readability is lower and there are non-négligeable risk of excluding from the loop the next instruction.
+It is generally considered a bad practice, as readability is lower and there are non-negligible risk of excluding from the loop the next instruction.
 
 .. code-block:: php
 
@@ -2501,9 +2475,14 @@ Class, Interface Or Trait With Identical Names
 
 The following names are used at the same time for classes, interfaces or traits. For example, 
 
-class a {}
-interface a {}
-trait a {}
+.. code-block:: php
+
+   <?php
+       class a { /* some definitions */ }
+       interface a { /* some definitions */ }
+       trait a { /* some definitions */ }
+   ?>
+
 
 Even if they are in different namespaces, this makes them easy to confuse. Besides, it is recommended to have markers to differentiate classes from interfaces from traits.
 
@@ -2879,11 +2858,29 @@ Constant Scalar Expressions
 ###########################
 
 
-Starting with PHP 5.6, it is possible to define constant that are the result of expressions.
+Define constant with the result of static expressions. This means that constants may be defined with the const keyword, with the help of various operators but without any functioncalls. 
+
+This feature was introduced in PHP 5.6. It also supports array(), and expressions in arrays.
 
 Those expressions (using simple operators) may only manipulate other constants, and all values must be known at compile time. 
 
-This is not compatible with previous versions.
+.. code-block:: php
+
+   <?php
+   
+   // simple definition
+   const A = 1;
+   
+   // constant scalar expression
+   const B = A * 3;
+   
+   // constant scalar expression
+   const C = [A '** 3, '3' => B];
+   
+   ?>
+
+
+See also `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exprs>`_.
 
 +--------------+---------------------------------------------------------------------------------+
 | Command Line | Structures/ConstantScalarExpression                                             |
@@ -4393,7 +4390,7 @@ Empty Classes
 #############
 
 
-List of empty classes. Classes that are directly derived from an exception are omited.
+Classes that do no define anything at all. Classes that are directly derived from an exception are omitted.
 
 .. code-block:: php
 
@@ -4546,7 +4543,7 @@ Empty Namespace
 ###############
 
 
-Declaring a namespace in the code and not using it for structure declarations (classes, interfaces, etc...) or global instructions is useless.
+Declaring a namespace in the code and not using it for structure declarations or global instructions is useless.
 
 Using simple style : 
 
@@ -4554,12 +4551,13 @@ Using simple style :
 
    <?php
    
-   namespace X;
-   // This is useless
-   
    namespace Y;
    
    class foo {}
+   
+   
+   namespace X;
+   // This is useless
    
    ?>
 
@@ -4675,38 +4673,6 @@ catch( Exception $e) (PHP 5) or catch(`'Throwable <http://php.net/manual/fr/clas
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
-
-
-.. _empty-with-expression:
-
-Empty With Expression
-#####################
-
-
-`'empty() <http://www.php.net/empty>`_ doesn't accept expressions until PHP 5.5. Until then, it is necessary to store the result of the expression in a variable and then, test it with `'empty() <http://www.php.net/empty>`_.
-
-.. code-block:: php
-
-   <?php
-   
-   // PHP 5.5+ 'empty() usage
-   if (empty(strtolower($b . $c))) {
-       doSomethingWithoutA();
-   }
-   
-   // Compatible 'empty() usage
-   $a = strtolower($b . $c);
-   if (empty($a)) {
-       doSomethingWithoutA();
-   }
-   
-   ?>
-
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/EmptyWithExpression                                                                             |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------------------------------------------------------------+
 
 
 .. _encoded-simple-letters:
@@ -5118,12 +5084,21 @@ Foreach With list()
 ###################
 
 
-PHP 5.5 introduced the ability to use list in foreach loops. This was not possible in the earlier versions.
+Foreach loops have the ability to use list as blind variables. This syntax assign directly array elements to various variables. 
+
+PHP 5.5 introduced the usage of list in `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loops. Until PHP 7.1, it was not possible to use non-numerical arrays as list() wouldn't support string-indexed arrays.
 
 .. code-block:: php
 
    <?php
+       // PHP 5.5 and later, with numerically-indexed arrays
        foreach($array as list($a, $b)) { 
+           // do something 
+       }
+   
+   
+       // PHP 7.1 and later, with arrays
+       foreach($array as list('col1' => $a, 'col3' => $b)) { // 'col2 is ignored'
            // do something 
        }
    ?>
@@ -5196,7 +5171,7 @@ An exception is instantiated, but not thrown.
 
    <?php
    
-   class MyException() extends \Exception { }
+   class MyException extends \Exception { }
    
    if ($error !== false) {
        // This looks like 'throw' was omitted
@@ -5218,9 +5193,11 @@ Forgotten Visibility
 ####################
 
 
-Some classes elements (property, method, and constant since PHP 7.1) are missing their explicit visibility.
+Some classes elements (property, method, constant) are missing their explicit visibility.
 
 By default, it is public. It should at least be mentioned as public, or may be reviewed as protected or private. 
+
+Class constants support also visibility since PHP 7.1.
 
 final, static and abstract are not counted as visibility. Only public, private and protected. The PHP 4 var keyword is counted as undefined.
 
@@ -5907,7 +5884,23 @@ The second argument of the functions is the type of protection. The protection m
 
 The third argument of the functions is the encoding of the string. In PHP 5.3, it as 'ISO-8859-1', in 5.4, was 'UTF-8', and in 5.6, it is now default_charset, a php.ini configuration that has the default value of 'UTF-8'. It is highly recommended to set this argument too, to avoid distortions from the configuration.
 
-Also, note that arguments 2 and 3 are constants and string (respectively), and should be issued from the list of values available in the manual. Other values than those will make PHP use the default values.
+.. code-block:: php
+
+   <?php
+   $str = 'A quote is <b>bold</b>';
+   
+   // Outputs, without depending on the php.ini: A &#039;quote&#039; is &lt;b&gt;bold&lt;/b&gt; 
+   echo htmlentities($str, ENT_QUOTES, 'UTF-8');
+   
+   // Outputs, while depending on the php.ini: A quote is &lt;b&gt;bold&lt;/b&gt;
+   echo htmlentities($str);
+   
+   ?>
+
+
+Also, note that arguments 2 and 3 are constants and string (respectively), and should be issued from the list of values available in the manual. Other values than those will make PHP use the default values. 
+
+See also `htmlentities <http://www.php.net/htmlentities>`_ and `htmlspecialchars <http://www.php.net/htmlspecialchars>`_.
 
 +--------------+-----------------------------+
 | Command Line | Structures/Htmlentitiescall |
@@ -5946,6 +5939,86 @@ This means those expressions may be simplified.
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
+
+
+.. _identical-consecutive-expression:
+
+Identical Consecutive Expression
+################################
+
+
+Identical consecutive expressions are worth being checked. 
+
+They may be a copy/paste with unmodified content. When the content has to be duplicated, it is recommended to avoid executing the expression again, and just access the cached result.
+
+.. code-block:: php
+
+   <?php
+   
+   $current  = $array[$i];
+   $next     = $array[$i + 1];
+   $nextnext = $array[$i + 1]; // OOps, nextnext is wrong.
+   
+   // Initialization
+   $previous = foo($array[1]); // previous is initialized with the first value on purpose
+   $next     = foo($array[1]); // the second call to foo() with the same arguments should be avoided
+   // the above can be rewritten as : 
+   $next     = $previous; // save the processing.
+   
+   for($i = 1; $i < 200; ++$i) {
+       $next = doSomething();
+   }
+   ?>
+
++--------------+---------------------------------+
+| Command Line | Structures/IdenticalConsecutive |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
+
+
+.. _identical-on-both-sides:
+
+Identical On Both Sides
+#######################
+
+
+Operands should be different when comparing or making a logical combinaison. Of course, values may be identical. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Trying to confirm consistency
+   if ($login == $login) {
+       doSomething();
+   }
+   
+   // Works with every operators
+   if ($object->login( ) !== $object->login()) {
+       doSomething();
+   }
+   
+   if ($sum >= $sum) {
+       doSomething();
+   }
+   
+   //
+   if ($mask && $mask) {
+       doSomething();
+   }
+   
+   if ($mask || $mask) {
+       doSomething();
+   }
+   
+   ?>
+
++--------------+---------------------------------+
+| Command Line | Structures/IdenticalOnBothSides |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
 
 
 .. _if-with-same-conditions:
@@ -6155,6 +6228,48 @@ Global variables, that are used in local scope with global keyword, but are not 
 +--------------+---------------------------+
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
+
+
+.. _implied-if:
+
+Implied If
+##########
+
+
+It is confusing to emulate if/then with boolean operators.
+
+It is possible to emulate a if/then structure by using the operators 'and' and 'or'. Since optimizations will be applied to them : 
+when the left operand of 'and' is false, the right one is not executed, as its result is useless; 
+when the left operand of 'or' is true, the right one is not executed, as its result is useless; 
+
+However, such structures are confusing. It is easy to misread them as conditions, and ignore an important logic step. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Either connect, or 'die
+   mysql_connect('localhost', $user, $pass) or 'die();
+   
+   // Defines a constant if not found. 
+   defined('SOME_CONSTANT') and define('SOME_CONSTANT', 1);
+   
+   // Defines a default value if provided is empty-ish 
+   // Warning : this is 
+   $user = $_GET['user'] || 'anonymous';
+   
+   ?>
+
+
+It is recommended to use a real 'if then' structures, to make the condition readable.
+
++--------------+-------------------------------------------------------------------------------------------+
+| Command Line | Structures/ImpliedIf                                                                      |
++--------------+-------------------------------------------------------------------------------------------+
+| clearPHP     | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
++--------------+-------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                            |
++--------------+-------------------------------------------------------------------------------------------+
 
 
 .. _incompilable-files:
@@ -6407,9 +6522,9 @@ Invalid Octal In String
 #######################
 
 
-Starting with PHP 7.1, any octal sequence inside a string can't be beyong 7. Those will be a fatal error at parsing time. 
+Any octal sequence inside a string can't be beyond 7. Those will be a fatal error at parsing time. 
 
-In PHP 7.0 and older, those sequences were silently adapted (divided by 0).
+This is true, starting with PHP 7.1. In PHP 7.0 and older, those sequences were silently adapted (divided by 0).
 
 .. code-block:: php
 
@@ -6473,7 +6588,7 @@ Is Actually Zero
 ################
 
 
-This addition actually may be reduced because one term is actually negated by another. 
+This addition actually may be simplified because one term is actually negated by another. 
 
 This kind of error happens when the expression is very large : the more terms are included, the more chances are that some auto-annihilation happens. 
 
@@ -6490,7 +6605,7 @@ This error may also be a simple typo : for example, calculating the difference b
    // Could have been $c = $fx[3][4] - $fx[3][3] or $c = $fx[3][5] - $fx[3][4];
    $c = $fx[3][4] - $fx[3][4];
    
-   // This is less obivous
+   // This is less obvious
    $a = $b[3] - $c + $d->foo(1,2,3) + $c + $b[3];
    
    ?>
@@ -7459,6 +7574,35 @@ Any function definition was found for that function, but a class with that name 
 +--------------+-----------------------+
 
 
+.. _mistaken-concatenation:
+
+Mistaken Concatenation
+######################
+
+
+A unexpected structure is built for initialization. It may be a typo that creates an unwanted expression.
+
+.. code-block:: php
+
+   <?php
+   
+   // This 'cd' is unexpected. Isn't it 'c', 'd' ? 
+   $array = array('a', 'b', 'c'. 'd');
+   $array = array('a', 'b', 'c', 'd');
+   
+   // This 4.5 is unexpected. Isn't it 4, 5 ? 
+   $array = array(1, 2, 3, 4.5);
+   $array = array(1, 2, 3, 4, 5);
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Arrays/MistakenConcatenation |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
 .. _mixed-concat-and-interpolation:
 
 Mixed Concat And Interpolation
@@ -8201,6 +8345,42 @@ However, ternary operators tends to make the syntax very difficult to read when 
 +--------------+---------------------------------------------------------------------------------------------------+
 
 
+.. _never-used-parameter:
+
+Never Used Parameter
+####################
+
+
+When a parameter is never used at calltime, it may be turned into a local variable.
+
+It seems that the parameter was set up initially, but never found its practical usage. It is never mentionned, and always fall back on its default value.  
+
+Parameter without a default value are reported by PHP, and are usually always filled. 
+
+.. code-block:: php
+
+   <?php
+   
+   // $b may be turned into a local var, it is unused
+   function foo($a, $b = 1) {
+       return $a + $b;
+   }
+   
+   // whenever foo is called, the 2nd arg is not mentionned
+   foo($a);
+   foo(3);
+   foo('a');
+   foo($c);
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Functions/NeverUsedParameter |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
 .. _never-used-properties:
 
 Never Used Properties
@@ -8675,7 +8855,7 @@ No Direct Input To Wpdb
 #######################
 
 
-Avoid using incoming variables when building SQL queries with $wpdb->prepare() 
+Avoid using incoming variables when building SQL queries with $wpdb->prepare().
 
 (This is quoted directly from Anthony Ferrera blog, link below).
 In general however, go through and remove all user input from the $query side of ->prepare(). NEVER pass user input to the query side. Meaning, never do this (in any form):
@@ -8953,42 +9133,6 @@ When connecting to a remove serve, port is an important information. It is recom
 +--------------+---------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Security` |
 +--------------+---------------------------------+
-
-
-.. _no-implied-if:
-
-No Implied If
-#############
-
-
-It is possible to emulate a if/then structure by using the operators 'and' and 'or'. Since optimizations will be applied to them : 
-when the left operand of 'and' is false, the right one is not executed, as its result is useless; 
-when the left operand of 'or' is true, the right one is not executed, as its result is useless; 
-
-However, such structures are confusing. It is easy to misread them as conditions, and ignore an important logic step. 
-
-.. code-block:: php
-
-   <?php
-   
-   // Either connect, or 'die
-   mysql_connect('localhost', $user, $pass) or 'die();
-   
-   // Defines a constant if not found. 
-   defined('SOME_CONSTANT') and define('SOME_CONSTANT', 1);
-   
-   ?>
-
-
-It is recommended to use a real 'if then' structures, to make the condition readable.
-
-+--------------+-------------------------------------------------------------------------------------------+
-| Command Line | Structures/ImpliedIf                                                                      |
-+--------------+-------------------------------------------------------------------------------------------+
-| clearPHP     | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                            |
-+--------------+-------------------------------------------------------------------------------------------+
 
 
 .. _no-isset-with-empty:
@@ -9482,7 +9626,7 @@ No String With Append
 #####################
 
 
-PHP 7 doesn't allow the usage of [] with strings. [] is an array-only oeprator.
+PHP 7 doesn't allow the usage of [] with strings. [] is an array-only operator.
 
 .. code-block:: php
 
@@ -9496,7 +9640,7 @@ PHP 7 doesn't allow the usage of [] with strings. [] is an array-only oeprator.
    ?>
 
 
-This was possible in PHP 5.*, but is now forbidden in PHP 7.
+This was possible in PHP 5, but is now forbidden in PHP 7.
 
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/NoStringWithAppend                                                                                     |
@@ -9866,6 +10010,40 @@ See also `Wordpress Nonce <https://codex.wordpress.org/WordPress_Nonces>`_.
 +--------------+-------------------------+
 
 
+.. _not-a-scalar-type:
+
+Not A Scalar Type
+#################
+
+
+int is the actual PHP scalar type, not integer. 
+
+PHP 7 introduced several scalar types, in particular int, bool and float. Those three types are easily mistaken with integer, boolean, real and double. 
+
+Unless you have created those classes, you may get some strange error messages.
+
+.. code-block:: php
+
+   <?php
+   
+   // This expects a scalar of type 'integer'
+   function foo(int $i) {}
+   
+   // This expects a object of class 'integer'
+   function abr(integer $i) {}
+   
+   ?>
+
+
+See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+
++--------------+-------------------+
+| Command Line | Php/NotScalarType |
++--------------+-------------------+
+| Analyzers    | :ref:`Analyze`    |
++--------------+-------------------+
+
+
 .. _not-definitions-only:
 
 Not Definitions Only
@@ -10069,7 +10247,7 @@ Old Style __autoload()
 ######################
 
 
-Avoid __autoload(). Only use spl_register_autoload().
+Avoid __autoload(), only use spl_register_autoload().
 
 __autoload() will be deprecated in PHP 7.2 and possibly removed in later version.
 
@@ -12132,6 +12310,47 @@ At least two consecutive if/then structures use identical conditions. The latter
 +--------------+---------------------------+
 
 
+.. _same-variables-foreach:
+
+Same Variables Foreach
+######################
+
+
+A foreach which uses its own source as a blind variable is actually broken.
+
+Actually, PHP makes a copy of the source before it starts the loop. As such, the same variable may be used for both source and blind value. 
+
+Of course, this is very confusing, to see the same variables used in very different ways. 
+
+The source will also be destroyed immediately after the blind variable has been turned into a reference.
+
+.. code-block:: php
+
+   <?php
+   
+   $array = range(0, 10);
+   foreach($array as $array) {
+       print $array.PHP_EOL;
+   }
+   
+   print_r($array); // display number from 0 to 10.
+   
+   $array = range(0, 10);
+   foreach($array as &$array) {
+       print $array.PHP_EOL;
+   }
+   
+   print_r($array); // display 10
+   
+   ?>
+
++--------------+-----------------------------+
+| Command Line | Structures/AutoUnsetForeach |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Analyze`              |
++--------------+-----------------------------+
+
+
 .. _scalar-or-object-property:
 
 Scalar Or Object Property
@@ -12446,7 +12665,7 @@ Short Syntax For Arrays
 #######################
 
 
-Arrays written with the new PHP 5.4 short syntax. 
+Arrays written with the new short syntax. 
 
 PHP 5.4 introduced the new short syntax, with square brackets. The previous syntax, based on the array() keyword is still available.
 
@@ -12968,7 +13187,7 @@ Should Use array_column()
 #########################
 
 
-Should use `'array_column() <http://www.php.net/array_column>`_.
+Avoid writing a whole slow loop, and use the native `'array_column() <http://www.php.net/array_column>`_.
 
 `'array_column() <http://www.php.net/array_column>`_ is a native PHP function, that extract a property or a index from a array of object, or a multidimensional array. This prevents the usage of foreach to collect those values.
 
@@ -13948,9 +14167,44 @@ Strict Comparison With Booleans
 ###############################
 
 
+Strict comparisons prevent from mistaking an error with a false. 
+
 Booleans may be easily mistaken with other values, especially when the function may return integer or boolean as a normal course of action. 
 
 It is encouraged to use strict comparison === or !== when booleans are involved in a comparison.
+
+.. code-block:: php
+
+   <?php
+   
+   // distinguish between : $b isn't in $a, and, $b is at the beginning of $a 
+   if (strpos($a, $b) === 0) {
+       doSomething();
+   }
+   
+   // DOES NOT distinguish between : $b isn't in $a, and, $b is at the beginning of $a 
+   if (strpos($a, $b)) {
+       doSomething();
+   }
+   
+   // will NOT mistake 1 and true
+   $a = array(0, 1, 2, true);
+   if (in_array($a, true, true)) {
+       doSomething();
+   }
+   
+   // will mistake 1 and true
+   $a = array(0, 1, 2, true);
+   if (in_array($a, true)) {
+       doSomething();
+   }
+   
+   ?>
+
+
+`'switch() <http://php.net/manual/en/control-structures.switch.php>`_ structures always uses == comparisons. 
+
+Function `'in_array() <http://www.php.net/in_array>`_ has a third parameter to make it use strict comparisons.
 
 +--------------+------------------------------------+
 | Command Line | Structures/BooleanStrictComparison |
@@ -14186,7 +14440,8 @@ A fallthrough may be used as a feature. It is undistinguisable from an error.
 
 This analysis cannot take into account comments abouts the fallthough. 
 
-See also `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_.
+See also `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_ and 
+         ` <https://palantir.github.io/tslint/rules/no-switch-case-fall-through/>`_.
 
 +--------------+------------------------+
 | Command Line | Structures/Fallthrough |
@@ -14491,6 +14746,8 @@ Throws An Assignement
 
 It is possible to throw an exception, and, in the same time, assign this exception to a variable.
 
+However, $e will never be used, as the exception is thrown, and any following code is not executed. 
+
 .. code-block:: php
 
    <?php
@@ -14504,8 +14761,6 @@ It is possible to throw an exception, and, in the same time, assign this excepti
    
    ?>
 
-
-However, $e will never be used, as the exception is thrown, and any following code is not executed. 
 
 The assignement should be removed.
 
@@ -14857,7 +15112,7 @@ Unconditional Break In Loop
 ###########################
 
 
-An unconditional `'break <http://php.net/manual/en/control-structures.break.php>`_ was found in a loop. Since the `'break <http://php.net/manual/en/control-structures.break.php>`_ is directly in the body of the loop, it is always executed, creating a strange loop that can only run once. 
+An unconditional `'break <http://php.net/manual/en/control-structures.break.php>`_ in a loop creates dead code. Since the `'break <http://php.net/manual/en/control-structures.break.php>`_ is directly in the body of the loop, it is always executed, creating a strange loop that can only run once. 
 
 Here, `'break <http://php.net/manual/en/control-structures.break.php>`_ may also be a return, a goto or a `'continue <http://php.net/manual/en/control-structures.continue.php>`_. They all branch out of the loop. Such statement are valid, but should be moderated with a condition. 
 
@@ -15874,7 +16129,7 @@ Unresolved Instanceof
 #####################
 
 
-`'instanceof <http://php.net/manual/en/language.operators.type.php>`_ doesn't check if compared class exists. 
+The `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator doesn't confirm if the compared class exists. 
 
 It checks if an variable is of a specific class. However, if the referenced class doesn't exist, because of a bug, a missed inclusion or a typo, the operator always fails, without a warning. 
 
@@ -16853,6 +17108,48 @@ Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
 +--------------+------------------------------------------------------+
 
 
+.. _use-named-boolean-in-argument-definition:
+
+Use Named Boolean In Argument Definition
+########################################
+
+
+Boolean in argument definitions is confusing. 
+
+It is recommended to use explicit constant names, instead. They are more readable. They also allow for easy replacement when the code evolve and has to replace those booleans by strings. This works even also with classes, and class constants.
+
+.. code-block:: php
+
+   <?php
+   
+   function flipImage($im, $horizontal = NO_HORIZONTAL_FLIP, $vertical = NO_VERTICAL_FLIP) { }
+   
+   // with constants
+   const HORIZONTAL_FLIP = true;
+   const NO_HORIZONTAL_FLIP = true;
+   const VERTICAL_FLIP = true;
+   const NO_VERTICAL_FLIP = true;
+   
+   rotateImage($im, HORIZONTAL_FLIP, NO_VERTICAL_FLIP);
+   
+   
+   // without constants 
+   function flipImage($im, $horizontal = false, $vertical = false) { }
+   
+   rotateImage($im, true, false);
+   
+   ?>
+
+
+See also `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_, to avoid boolean altogether.
+
++--------------+--------------------------------+
+| Command Line | Functions/AvoidBooleanArgument |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
+
 .. _use-object-api:
 
 Use Object Api
@@ -17075,7 +17372,7 @@ Use System Tmp
 ##############
 
 
-It is recommended to avoid hardcoding the tmp file. It is better to rely on the system's tmp folder, which is accessible with `'sys_get_temp_dir() <http://www.php.net/sys_get_temp_dir>`_.
+It is recommended to avoid hardcoding the temporary file. It is better to rely on the system's temporary folder, which is accessible with `'sys_get_temp_dir() <http://www.php.net/sys_get_temp_dir>`_.
 
 .. code-block:: php
 
@@ -17560,9 +17857,9 @@ Useless Brackets
 ################
 
 
-Those brackets have no use here. 
+Standalone brackets have no use. Brackets are used to delimit a block of code, and are used by control statements. They may also be used to protect variables in strings. 
 
-They may be a left over of an old instruction, or a misunderstanding of the alternative syntax.
+Standalone brackets may be a left over of an old instruction, or a misunderstanding of the alternative syntax.
 
 .. code-block:: php
 
@@ -17752,7 +18049,7 @@ Useless Instructions
 
 Those instructions are useless, or contains useless parts. 
 
-For example, running '&lt;?php 1 + 1; ?&gt;' does nothing : the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
+For example, an addition whose result is not stored in a variable, or immediately reused, does nothing : it is actually performed, and the result is lost. Just plain lost. 
 
 Here the useless instructions that are spotted : 
 
@@ -17764,7 +18061,7 @@ Here the useless instructions that are spotted :
    $string = 'This part '.$is.' usefull but '.$not.'';
    
    // This is a typo, that PHP turns into a constant, then a string, then nothing.
-   conitnue;
+   'continue;
    
    // Empty string in a concatenation
    $a = 'abc' . '';
@@ -18195,6 +18492,191 @@ This code structure is quite old : it should be replace by the more modern and e
 +--------------+-------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Performances` |
 +--------------+-------------------------------------+
+
+
+.. _wordpress-4.0-undefined-classes:
+
+Wordpress 4.0 Undefined Classes
+###############################
+
+
+Classes, trait and interfaces that are undefined for Wordpress 4.0.
+
+Wordpress 4.0 has 223 classes, 0 traits and 1 interfaces.
+
++--------------+--------------------------------+
+| Command Line | wordpress/Wordpress40Undefined |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+.. _wordpress-4.1-undefined-classes:
+
+Wordpress 4.1 Undefined Classes
+###############################
+
+
+Classes, trait and interfaces that are undefined for Wordpress 4.1.
+
+Wordpress 4.1 has 224 classes, 0 traits and 1 interfaces.
+
++--------------+--------------------------------+
+| Command Line | wordpress/Wordpress41Undefined |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+.. _wordpress-4.2-undefined-classes:
+
+Wordpress 4.2 Undefined Classes
+###############################
+
+
+Classes, trait and interfaces that are undefined for Wordpress 4.2.
+
+Wordpress 4.2 has 243 classes, 0 traits and 1 interfaces.
+
++--------------+--------------------------------+
+| Command Line | wordpress/Wordpress42Undefined |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+.. _wordpress-4.3-undefined-classes:
+
+Wordpress 4.3 Undefined Classes
+###############################
+
+
+Classes, trait and interfaces that are undefined for Wordpress 4.3.
+
+Wordpress 4.3 has 243 classes, 0 traits and 1 interfaces.
+
++--------------+--------------------------------+
+| Command Line | wordpress/Wordpress43Undefined |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+.. _wordpress-4.4-undefined-classes:
+
+Wordpress 4.4 Undefined Classes
+###############################
+
+
+Classes, trait and interfaces that are undefined for Wordpress 4.4.
+
+Wordpress 4.4 has 251 classes, 0 traits and 1 interfaces.
+
++--------------+--------------------------------+
+| Command Line | wordpress/Wordpress44Undefined |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+.. _wordpress-4.5-undefined-classes:
+
+Wordpress 4.5 Undefined Classes
+###############################
+
+
+Classes, trait and interfaces that are undefined for Wordpress 4.5.
+
+Wordpress 4.5 has 255 classes, 0 traits and 1 interfaces.
+
++--------------+--------------------------------+
+| Command Line | wordpress/Wordpress45Undefined |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+.. _wordpress-4.6-undefined-classes:
+
+Wordpress 4.6 Undefined Classes
+###############################
+
+
+Classes, trait and interfaces that are undefined for Wordpress 4.6.
+
+Wordpress 4.6 has 315 classes, 0 traits and 5 interfaces.
+
++--------------+--------------------------------+
+| Command Line | Wordpress/Wordpress46Undefined |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+.. _wordpress-4.7-undefined-classes:
+
+Wordpress 4.7 Undefined Classes
+###############################
+
+
+Classes, trait and interfaces that are undefined for Wordpress 4.7.
+
+Wordpress 4.7 has 338 classes, 0 traits and 5 interfaces.
+
++--------------+--------------------------------+
+| Command Line | Wordpress/Wordpress47Undefined |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+.. _wordpress-4.8-undefined-classes:
+
+Wordpress 4.8 Undefined Classes
+###############################
+
+
+Classes, trait and interfaces that are undefined for Wordpress 4.8.
+
+Wordpress 4.8 has 344 classes, 0 traits and 5 interfaces.
+
++--------------+--------------------------------+
+| Command Line | Wordpress/Wordpress48Undefined |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+.. _wordpress-4.9-undefined-classes:
+
+Wordpress 4.9 Undefined Classes
+###############################
+
+
+Classes, trait and interfaces that are undefined for Wordpress 4.9.
+
+Wordpress 4.9 has 349 classes, 0 traits and 5 interfaces.
+
++--------------+--------------------------------+
+| Command Line | Wordpress/Wordpress49Undefined |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Wordpress`               |
++--------------+--------------------------------+
+
+
+.. _wordpress-usage:
+
+Wordpress Usage
+###############
+
+
+Usage of Wordpress.
+
++--------------+--------------------------+
+| Command Line | Wordpress/WordpressUsage |
++--------------+--------------------------+
+| Analyzers    | :ref:`Wordpress`         |
++--------------+--------------------------+
 
 
 .. _wpdb-best-usage:
@@ -19390,6 +19872,8 @@ list() May Omit Variables
 #########################
 
 
+Simply omit any unused variable in a list() call. 
+
 list() is the only PHP function that accepts to have omitted arguments. If the following code makes no usage of a listed variable, just omit it. 
 
 .. code-block:: php
@@ -19413,6 +19897,8 @@ $b will be 3, and the 2 value will be omitted. This is cleaner, and save some me
 mcrypt_create_iv() With Default Values
 ######################################
 
+
+Avoid using mcrypt_create_iv() default values.
 
 mcrypt_create_iv() used to have MCRYPT_DEV_RANDOM as default values, and in PHP 5.6, it now uses MCRYPT_DEV_URANDOM.
 

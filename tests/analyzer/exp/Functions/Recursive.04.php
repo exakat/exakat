@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('generator3',
-                      'foo',
+$expected     = array('function foo( ) { /**/ } ',
+                      'function generator3( ) { /**/ } ',
                      );
 
-$expected_not = array('generator',
-                      'generator2',
+$expected_not = array('function generator( ) { /**/ } ',
+                      'function generator2( ) { /**/ } ',
                      );
 
 ?>

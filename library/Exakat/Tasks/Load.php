@@ -229,7 +229,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
     
-    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv',);
+    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv', 'SplitGraphson');
 
     private $processing = array();
 
@@ -761,6 +761,8 @@ SQL;
         $label->fullcode = $tag->fullcode.' :';
         $label->line     = $this->tokens[$this->id][2];
         $label->token    = $this->getToken($this->tokens[$this->id][0]);
+
+        $this->addDefinition('goto', $tag->fullcode, $label);
 
         $this->pushExpression($label);
         $this->processSemicolon();
@@ -1573,7 +1575,7 @@ SQL;
         $functioncall->fullcode   = '<?= '.$argumentsFullcode;
         $functioncall->line       = $this->tokens[$current === self::NO_VALUE ? 0 : $current][2];
         $functioncall->token      = 'T_OPEN_TAG_WITH_ECHO';
-        $functioncall->fullnspath = '\\echo';
+        $functioncall->fullnspath = '\echo';
 
         $this->addLink($functioncall, $echo, 'NAME');
 
@@ -2047,17 +2049,28 @@ SQL;
         ++$this->id; // Skipping the name, set on (
         $current = $this->id;
 
-
         if ($this->isContext(self::CONTEXT_NEW)) {
             $atom = 'Newcall';
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) {
-            $atom = 'Functioncall';
+            if (strtolower($name->code) == 'define') { // no namespace for define...
+                $atom = 'Defineconstant';
+            } elseif ($name->fullnspath == '\\unset') {
+                $atom = 'Unset';
+            } elseif ($name->fullnspath == '\\list') {
+                $atom = 'List';
+            } elseif ($name->fullnspath == '\\empty') {
+                $atom = 'Empty';
+            } elseif ($name->fullnspath == '\\isset') {
+                $atom = 'Isset';
+            } else {
+                $atom = 'Functioncall';
+            }
         } else {
             $atom = 'Methodcallname';
         }
         
         $functioncall = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), self::WITHOUT_TYPEHINT_SUPPORT);
-        $argumentsFullcode = $functioncall->fullcode;
+        $argumentsFullcode       = $functioncall->fullcode;
         $functioncall->code      = $name->code;
         $functioncall->fullcode  = $name->fullcode.'('.$argumentsFullcode.')';
         $functioncall->line      = $this->tokens[$current][2];
@@ -2069,9 +2082,8 @@ SQL;
             $functioncall->aliased    = $aliased;
 
             $this->addCall('class', $fullnspath, $functioncall);
-        } elseif ($getFullnspath === self::WITHOUT_FULLNSPATH) {
-            // Nothing
-        } else {
+        } elseif ($getFullnspath === self::WITH_FULLNSPATH ||
+                  $name->fullnspath !== '\\list') {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
             $functioncall->fullnspath = $fullnspath;
             $functioncall->aliased    = $aliased;
@@ -2281,7 +2293,8 @@ SQL;
         }
 
         $fullcode = array();
-        while ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON) {
+        while ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON &&
+               $this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_CLOSE_TAG) {
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
                 ++$this->id;
                 $this->processSingle($atom);
@@ -2324,6 +2337,10 @@ SQL;
         $static->count    = $rank;
 
         $this->pushExpression($static);
+
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
 
         return $static;
     }
@@ -3037,7 +3054,7 @@ SQL;
             }
 
             if ($this->tokens[$id + 1][0] === \Exakat\Tasks\T_EQUAL) {
-                $array = $this->processArguments('Functioncall', array(\Exakat\Tasks\T_CLOSE_BRACKET));
+                $array = $this->processArguments('List', array(\Exakat\Tasks\T_CLOSE_BRACKET));
                 $argumentsFullcode = $array->fullcode;
     
                 // This is a T_LIST !
@@ -3483,6 +3500,22 @@ SQL;
     private function processVariable() {
         if ($this->tokens[$this->id][1] === '$this') {
             $atom = 'This';
+        } elseif (in_array($this->tokens[$this->id + 1][1], array('$GLOBALS',
+                                                                  '$_SERVER',
+                                                                  '$_GET',
+                                                                  '$_POST',
+                                                                  '$_FILES',
+                                                                  '$_REQUEST',
+                                                                  '$_SESSION',
+                                                                  '$_ENV',
+                                                                  '$_COOKIE',
+                                                                  '$php_errormsg',
+                                                                  '$HTTP_RAW_POST_DATA',
+                                                                  '$http_response_header',
+                                                                  '$argc',
+                                                                  '$argv',
+                                                                  ))) {
+            $atom = 'Phpvariable';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
             $atom = 'Variableobject';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET) {
@@ -3841,9 +3874,14 @@ SQL;
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
+            } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
+                $type = $this->tokens[$current - 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR; // static?
+                $variable = $this->processFunctioncall($variable, $type === true ? self::WITHOUT_FULLNSPATH : self::WITH_FULLNSPATH);
+            } else {
+                $variable = $this->processFCOA($variable);
             }
 
-            return $this->processFCOA($variable);
+            return $variable;
         } else {
             $this->nestContext();
             $this->processSingleOperator('Variable', $this->precedence->get($this->tokens[$this->id][0]), 'NAME');
@@ -3870,6 +3908,7 @@ SQL;
         $this->processSingleOperator('Goto', $this->precedence->get($this->tokens[$this->id][0]), 'GOTO');
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
+        $this->addCall('goto', $this->tokens[$this->id][1], $operatorId);
         return $operatorId;
     }
 
@@ -4239,7 +4278,7 @@ SQL;
             $static = $this->addAtom('Methodcall');
             $links = 'METHOD';
         } else {
-            assert(false, "Unprocessed atom in object call (right) : ".$right->atom);
+            assert(false, "Unprocessed atom in object call (right) : ".print_r($right, true));
         }
 
         $this->addLink($static, $left, 'OBJECT');
@@ -4594,7 +4633,7 @@ SQL;
     }
 
     private function checkTokens($filename) {
-        assert(empty($this->expressions), "Warning : expression is not empty in $filename : ".count($this->expressions).PHP_EOL);
+        assert(empty($this->expressions), "Warning : expression is not empty in $filename : ".count($this->expressions).PHP_EOL.print_r($this->expressions, true).PHP_EOL);
 
         assert(empty($this->contexts[self::CONTEXT_NOSEQUENCE]), "Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE].PHP_EOL);
 
@@ -4874,6 +4913,7 @@ SQL;
             $types = array('function', 'class');
 
             $fullnspath = mb_strtolower($call->noDelimiter);
+            $fullnspath = stripslashes($fullnspath);
             if (empty($fullnspath) || $fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
             }
@@ -4921,7 +4961,8 @@ SQL;
                                                   "'.$definition->id.'"
          )';
 
-        $this->callsSqlite->query($query);
+        $res = $this->callsSqlite->query($query);
+        assert($res, "Error while saving definitions : ".$query);
     }
 
     private function logTime($step) {

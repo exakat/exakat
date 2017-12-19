@@ -11,4 +11,8 @@ class x extends y {
 
 class y {}
 
+new class { function move($d = self::D) {}};
+
+echo self::E;
+
 ?>

@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ConditionedConstants extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs('\\define')
+        // if () { define(); }
+        $this->atomIs('Defineconstant')
              ->hasIfthen()
              ->back('first')
              ->outWithRank('ARGUMENT', 0);

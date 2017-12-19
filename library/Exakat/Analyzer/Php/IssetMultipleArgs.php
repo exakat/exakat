@@ -30,10 +30,10 @@ class IssetMultipleArgs extends Analyzer {
         $this->atomIs('Logical')
              ->codeIs(array('and', '&&'))
              ->outIs('LEFT')
-             ->functioncallIs('\isset')
+             ->atomIs('Isset')
              ->back('first')
              ->outIs('RIGHT')
-             ->functioncallIs('\isset')
+             ->atomIs('Isset')
              ->back('first');
         $this->prepareQuery();
 
@@ -43,12 +43,12 @@ class IssetMultipleArgs extends Analyzer {
              ->outIs('LEFT')
              ->atomIs('Not')
              ->outIs('NOT')
-             ->functioncallIs('\isset')
+             ->atomIs('Isset')
              ->back('first')
              ->outIs('RIGHT')
              ->atomIs('Not')
              ->outIs('NOT')
-             ->functioncallIs('\isset')
+             ->atomIs('Isset')
              ->back('first');
         $this->prepareQuery();
     }

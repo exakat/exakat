@@ -464,8 +464,8 @@ GREMLIN;
     protected function hasNoInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
         $this->addMethod('not( where( 
- __.repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
- ) )');
+ __.repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit().hasLabel(within(***))
+ ) )', makeArray($atom));
         
         return $this;
     }
@@ -477,8 +477,8 @@ GREMLIN;
         }
 
         $this->addMethod('not( where( 
-__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'")
-  ) )');
+__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File")).hasLabel(within(***)).has("code", ***)
+  ) )', makeArray($atom), $name);
         
         return $this;
     }
@@ -486,8 +486,8 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLab
     protected function hasInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
         $this->addMethod('where( 
-__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit(hasLabel('.$this->SorA($atom).')).hasLabel('.$this->SorA($atom).')
-    )');
+__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit(hasLabel(within(***))).hasLabel(within(***))
+    )', makeArray($atom), makeArray($atom));
         
         return $this;
     }
@@ -698,11 +698,11 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
 
     public function isNot($property, $value = true) {
         if ($value === null) {
-            $this->addMethod('not(has("'.$property.'", null))');
+            $this->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", null)))');
         } elseif ($value === true) {
-            $this->addMethod('not(has("'.$property.'", true))');
+            $this->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
         } elseif ($value === false) {
-            $this->addMethod('not(has("'.$property.'", false))');
+            $this->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
         } elseif (is_int($value)) {
             $this->addMethod('not(has("'.$property.'", ***))', $value);
         } elseif (is_string($value)) {
@@ -1150,9 +1150,7 @@ GREMLIN
         } else {
             $in = array();
             
-            if (!is_array($ins)) {
-                $ins = array($ins);
-            }
+            $ins = makeArray($ins);
             foreach($ins as $i) {
                 $in[] = '.in('.$this->SorA($i).')';
             }
@@ -1171,9 +1169,7 @@ GREMLIN
         } else {
             $in = array();
             
-            if (!is_array($ins)) {
-                $ins = array($ins);
-            }
+            $ins = makeArray($ins);
             foreach($ins as $i) {
                 if (empty($i)) {
                     $in[] = '.in()';
@@ -1196,9 +1192,7 @@ GREMLIN
         } else {
             $out = array();
             
-            if (!is_array($outs)) {
-                $outs = array($outs);
-            }
+            $outs = makeArray($outs);
             foreach($outs as $o) {
                 if (empty($o)) {
                     $out[] = '.out()';
@@ -1221,9 +1215,7 @@ GREMLIN
         } else {
             $out = array();
             
-            if (!is_array($outs)) {
-                $outs = array($outs);
-            }
+            $outs = makeArray($outs);
             foreach($outs as $o) {
                 if (empty($o)) {
                     $out[] = '.out()';
@@ -1235,7 +1227,7 @@ GREMLIN
             $out = implode('', $out);
         }
         
-        $this->addMethod('where( __'.$out.'.hasLabel('.$this->SorA($childrenClass).').count().is(eq(0)) )');
+        $this->addMethod('not( where( __'.$out.'.hasLabel(within(***)) ) )', makeArray($childrenClass));
         
         return $this;
     }
@@ -1903,9 +1895,7 @@ GREMLIN;
     
     private function tolowercase(&$code) {
         if (is_array($code)) {
-            foreach($code as &$v) {
-                $v = mb_strtolower($v);
-            }
+            $code = array_map('mb_strtolower', $code);
             unset($v);
         } elseif (is_scalar($code)) {
             $code = mb_strtolower($code);

@@ -44,15 +44,14 @@ class ModernEmpty extends Analyzer {
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
              ->nextSibling()
-             ->atomInside('Functioncall')
-             ->functioncallIs('\\empty')
+             ->atomInside('Empty')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'variable')
              ->back('first')
              ->raw('not(__.where( __.in("EXPRESSION")
                                     .emit().repeat(__.not(hasLabel("'.implode('", "', self::$CONTAINERS).'")).out()).times('.self::MAX_LOOPING.')
                                     .hasLabel("'.implode('", "', self::$CONTAINERS).'").filter{ it.get().value("fullcode") == variable }
-                                    .not( __.where(__.in("ARGUMENT").hasLabel("Functioncall").has("token", "T_EMPTY")))
+                                    .not( __.where(__.in("ARGUMENT").hasLabel("Empty")))
                                     .where( __.in("ANALYZED").has("analyzer", within("Variables/IsRead", "Classes/IsRead", "Arrays/IsRead")))
                                 )
                   )');

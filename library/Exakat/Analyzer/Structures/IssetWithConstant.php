@@ -30,7 +30,7 @@ class IssetWithConstant extends Analyzer {
     
     public function analyze() {
         // isset(X[$a]) or isset(Y::X[$a])
-        $this->atomFunctionIs('\\isset')
+        $this->atomIs('Isset')
              ->outIs('ARGUMENT')
              ->atomIs('Array')
              ->outIs('VARIABLE')

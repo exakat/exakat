@@ -29,7 +29,7 @@ class ListWithKeys extends Analyzer {
 
     public function analyze() {
         // list( 3 => $a);
-        $this->atomFunctionIs('\\list')
+        $this->atomIs('List')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->back('first');

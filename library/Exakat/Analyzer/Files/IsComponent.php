@@ -25,11 +25,8 @@ use Exakat\Analyzer\Analyzer;
 
 class IsComponent extends Analyzer {
     public function analyze() {
-        $inert = '.not(hasLabel("Use", "Class", "Const", "Interface", "Trait", "Include", "Global", "Static", "Void"))
-                  .where( __.hasLabel("Functioncall").has("fullnspath", "\\\\define").count().is(eq(0)) )
-                  .where( __.hasLabel("Functioncall").filter{ it.get().value("token") in ["T_INCLUDE", "T_INCLUDE_ONCE", "T_REQUIRE_ONCE", "T_REQUIRE"] }.count().is(eq(0)) )
-                  .where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )
-                             ';
+        $inert = '.not(hasLabel("Use", "Class", "Const", "Interface", "Function", "Trait", "Include", "Global", "Static", "Void", "Defineconstant"))
+                  .not(where( __.hasLabel("Functioncall").filter{ it.get().value("token") in ["T_INCLUDE", "T_INCLUDE_ONCE", "T_REQUIRE_ONCE", "T_REQUIRE"] }) )';
         
         $inertWithIfthen = $inert.'
                   .where( __.hasLabel("Ifthen").where( __.out("THEN", "ELSE").out("EXPRESSION")'.$inert.'.count().is(eq(0)) ).count().is(eq(0)) )';
@@ -39,11 +36,9 @@ class IsComponent extends Analyzer {
              ->outIs('EXPRESSION')
              ->outIs('CODE')
              ->raw('coalesce(__.out("EXPRESSION").hasLabel("Namespace").out("BLOCK"),  __.filter{true} )')
-             ->raw('where( __.out("EXPRESSION")'.$inertWithIfthen.'.count().is(eq(0)) )
-             ')
+             ->raw('where( __.out("EXPRESSION")'.$inertWithIfthen.'.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
-        //
     }
 }
 

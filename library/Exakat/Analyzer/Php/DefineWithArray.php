@@ -29,7 +29,7 @@ class DefineWithArray extends Analyzer {
     protected $phpVersion = '7.0+';
 
     public function analyze() {
-        $this->atomFunctionIs('\\define')
+        $this->atomIs('Defineconstant')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Arrayliteral')
              ->back('first');

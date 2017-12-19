@@ -12,4 +12,6 @@ $c++;
 goto B;
 goto A;
 
+$c = $d ? E : F;
+
 ?>

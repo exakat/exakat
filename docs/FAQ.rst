@@ -10,6 +10,7 @@ Summary
 * `Can I checkout that branch?`_
 * `Can I clone with my ssh keys?`_
 * `The project is too big`_
+* `Java Out Of Memory Error`_
 * `How can I run a very large project?`_
 * `Does exakat runs on Java 8?`_
 * `Where can I find the report`_
@@ -72,11 +73,18 @@ The fallback solution is to init an empty project, clone the code from the Shell
 `The project is too big`_
 -------------------------
 
-There is a soft limit in config/exakat.ini, called 'token_limit' that initially prevents analysis of projects over 1 millions tokens. That's roughly 125k LOC, more than most code source.
+There is a soft limit in config/exakat.ini, called 'token_limit' that initially prevents analysis of projects over 1 million tokens. That's roughly 125k LOC, more than most code source.
 
 If you need to run exakat on larger sources, you may change this value to make it as large as possible. Then, the physical capacities of the machine, specially RAM, will be the actual limit. 
 
-It may be interesting to 'ignore_dir[]', from projects/<>/config.ini. 
+It may be interesting to 'ignore_dir[]', from projects/<name>/config.ini. 
+
+`Java Out Of Memory Error`_
+---------------------------
+
+By default, java is allowed to run with 512mb of RAM. That may be too little for the code being studied. 
+
+Set the environnement variable $JAVA_OPTIONS to give larger quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
 
 `How can I run a very large project?`_
 --------------------------------------
@@ -84,7 +92,7 @@ It may be interesting to 'ignore_dir[]', from projects/<>/config.ini.
 Here are a few steps you can try when running exakat on a very large project. 
 
 * Update project/<name>/config.ini, and use ignore_dirs[] and include_dirs[] to exclude as much code as possible. Notably, frameworks, data in PHP files, tests, cache, translations, etc. 
-* Set $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
+* Set environnement variable $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
 * Check that your installation is running with 'gsneo4j' and not 'tinkergraph', in config/exakat.ini.
 
 `Does exakat runs on Java 8?`_

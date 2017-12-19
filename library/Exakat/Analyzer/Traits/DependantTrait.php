@@ -69,6 +69,7 @@ class DependantTrait extends Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
+             ->has('fullnspath')
              ->samePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('MEMBER')

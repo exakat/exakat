@@ -32,10 +32,10 @@ class ConstDefineFavorite extends Analyzer {
 x2 = it.get().label();
 GREMLIN;
         $storage = array('const'    => 'Const',
-                         'define()' => 'Functioncall');
+                         'define()' => 'Defineconstant');
 
-        $this->atomIs(array('Const', 'Functioncall'))
-             ->raw('or( __.hasLabel("Functioncall").has("fullnspath", "\\\\define"), 
+        $this->atomIs(array('Const', 'Defineconstant'))
+             ->raw('or( __.hasLabel("Defineconstant"), 
                         __.hasLabel("Const").not( where( __.in("CONST") ) ) 
                         )')
              ->raw('map{ '.$mapping.' }')
@@ -60,8 +60,8 @@ GREMLIN;
             return;
         }
 
-        $this->atomIs(array('Const', 'Functioncall'))
-             ->raw('or( __.hasLabel("Functioncall").has("fullnspath", "\\\\define"), 
+        $this->atomIs(array('Const', 'Defineconstant'))
+             ->raw('or( __.hasLabel("Defineconstant"), 
                         __.hasLabel("Const").not( where( __.in("CONST") ) ) 
                         )')
              ->raw('map{ '.$mapping.' }')

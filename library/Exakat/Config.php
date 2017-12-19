@@ -147,7 +147,7 @@ class Config {
 
     private $LOADERS = array( 'neo4j'       => 'Neo4jImport', // Could be Neo4jImport, CypherG3
                               'tinkergraph' => 'Tinkergraph',
-                              'gsneo4j'     => 'GSNeo4j',
+                              'gsneo4j'     => 'SplitGraphson',
                               'janusgraph'  => 'Janusgraph',
                               'januscaes'   => 'JanusCaES',
                               'nogremlin'   => 'NoLoader',
@@ -367,7 +367,7 @@ class Config {
         $defaults = array( 'ignore_dirs'        => array('/test', '/tests', '/Tests', '/Test', '/example', '/examples', '/docs', '/doc', '/tmp', '/version', '/vendor', '/js', '/lang', '/data', '/css', '/cache', '/vendor', '/assets', '/spec', '/sql'),
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
-                           'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
+                           'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp', 'module'),
 //                           'loader'             => 'Neo4jImport',
                            'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
                            'project_reports'    => array('Ambassador'),

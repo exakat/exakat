@@ -5,7 +5,7 @@ Glossary
 + `*`
     + `**`
 
-      + :ref:`** For Exponent <**-for-exponent>`
+      + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
       + :ref:`Exponent Usage <exponent-usage>`
       + :ref:`Negative Power <negative-power>`
       + :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
@@ -180,6 +180,7 @@ Glossary
       + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Upload Filename Injection <upload-filename-injection>`
+      + :ref:`Useless Instructions <useless-instructions>`
 
     + `count()`
 
@@ -225,7 +226,7 @@ Glossary
       + :ref:`Dont Echo Error <dont-echo-error>`
       + :ref:`Error Messages <error-messages>`
       + :ref:`Exit() Usage <exit()-usage>`
-      + :ref:`No Implied If <no-implied-if>`
+      + :ref:`Implied If <implied-if>`
       + :ref:`Or Die <or-die>`
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
@@ -236,10 +237,6 @@ Glossary
 
       + :ref:`PHP7 Dirname <php7-dirname>`
       + :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
-
-    + `do..while()`
-
-      + :ref:`Bracketless Blocks <bracketless-blocks>`
 
 
 + `E`
@@ -255,7 +252,6 @@ Glossary
     + `empty()`
 
       + :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
-      + :ref:`Empty With Expression <empty-with-expression>`
       + :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`No Isset With Empty <no-isset-with-empty>`
@@ -327,6 +323,7 @@ Glossary
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
+      + :ref:`Foreach With list() <foreach-with-list()>`
       + :ref:`No Direct Usage <no-direct-usage>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Slow Functions <slow-functions>`
@@ -389,6 +386,7 @@ Glossary
 
       + :ref:`Logical To in_array <logical-to-in\_array>`
       + :ref:`Slow Functions <slow-functions>`
+      + :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 
     + `ini_get()`
 
@@ -542,7 +540,6 @@ Glossary
 
     + `pow()`
 
-      + :ref:`** For Exponent <**-for-exponent>`
       + :ref:`Negative Power <negative-power>`
 
     + `preg_replace()`
@@ -676,6 +673,7 @@ Glossary
       + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Missing Cases In Switch <missing-cases-in-switch>`
+      + :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
       + :ref:`Switch Without Default <switch-without-default>`

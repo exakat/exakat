@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class InvalidName extends Analyzer {
     public function analyze() {
         // Invalid characters
-        $this->atomFunctionIs('\\define')
+        $this->atomIs('Defineconstant')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
@@ -40,7 +40,7 @@ class InvalidName extends Analyzer {
         $invalidNames = "'".implode("', '", $invalidNames)."'";
         
         // reserved keywords
-        $this->atomFunctionIs('\\define')
+        $this->atomIs('Defineconstant')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')

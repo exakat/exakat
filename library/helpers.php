@@ -330,4 +330,12 @@ function PHPSyntax($code) {
     return $php;
 }
 
+function makeArray($value) {
+    if (is_array($value)) {
+        return $value;
+    } else {
+        return array($value);
+    }
+}
+
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array(
+$expected     = array('self::C',
                      );
 
 $expected_not = array('parent::D',

@@ -121,6 +121,7 @@ class Files extends Tasks {
             $stats['notCompilable'.$version] = -1;
             
             $shell = 'cd '.$this->config->projects_root.'/projects/'.$dir.'/code; cat '.$tmpFileName.' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
+
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
@@ -274,6 +275,9 @@ class Files extends Tasks {
                         $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
                     }
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
+                    continue;
+                } elseif (trim($resFile) == 'Could not open input file: {}') {
+                    display("One path is too long\n");
                     continue;
                 } else {
                     assert(false,  "'".print_r($resFile, true)."'\n");

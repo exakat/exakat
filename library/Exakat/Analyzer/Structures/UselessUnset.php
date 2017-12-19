@@ -27,12 +27,13 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessUnset extends Analyzer {
     public function dependsOn() {
-        return array('Variables/Arguments');
+        return array('Variables/Arguments',
+                    );
     }
     
     public function analyze() {
         // unset on arguments, reference or value
-        $this->atomFunctionIs('\\unset')
+        $this->atomIs('Unset')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->analyzerIs('Variables/Arguments')
@@ -40,7 +41,7 @@ class UselessUnset extends Analyzer {
         $this->prepareQuery();
 
         // unset on global
-        $this->atomFunctionIs('\\unset')
+        $this->atomIs('Unset')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'varname')
@@ -53,7 +54,7 @@ class UselessUnset extends Analyzer {
         $this->prepareQuery();
 
         // unset on static
-        $this->atomFunctionIs('\\unset')
+        $this->atomIs('Unset')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'varname')
@@ -68,13 +69,13 @@ class UselessUnset extends Analyzer {
         // unset on foreach  (variable or property)
         $this->atomIs('Foreach')
              ->outIs('VALUE')
+             ->atomIs(array('Variable', 'Member'))
              ->outIsIE('OBJECT')
              ->savePropertyAs('code', 'varname')
              ->inIsIE('OBJECT')
              ->inIs('VALUE')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->functioncallIs('\\unset')
+             ->atomInside('Unset')
              ->_as('result')
              ->outIs('ARGUMENT')
              ->outIsIE('OBJECT')
@@ -84,19 +85,19 @@ class UselessUnset extends Analyzer {
              ->back('result');
         $this->prepareQuery();
 
-        // unset on foreach (KeyVal)
+        // unset on foreach (KeyVal -> value)
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->atomIs('Keyvalue')
              ->outIs('VALUE')
+             ->atomIs(array('Variable', 'Member'))
              ->outIsIE('OBJECT')        // Case it is a property...
              ->savePropertyAs('code', 'varname')
              ->inIsIE('OBJECT')
              ->inIs('VALUE')
              ->inIs('VALUE')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->functioncallIs('\\unset')
+             ->atomInside('Unset')
              ->_as('result')
              ->outIs('ARGUMENT')
              ->outIsIE('OBJECT')
@@ -106,15 +107,15 @@ class UselessUnset extends Analyzer {
              ->back('result');
         $this->prepareQuery();
 
-        // unset on foreach (KeyVal)
+        // unset on foreach (KeyVal -> key)
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE('VALUE')
+             ->outIs('INDEX')
              ->atomIs('Member')
              ->savePropertyAs('fullcode', 'varname')
              ->inIsIE('VALUE')
              ->outIs('BLOCK')
-             ->atomFunctionIs('\\unset')
+             ->atomInside('Unset')
              ->_as('result')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'varname')

@@ -27,12 +27,17 @@ use Exakat\Analyzer\Analyzer;
 
 class UpperCaseFunction extends Analyzer {
     public function dependsOn() {
-        return array('Functions/IsExtFunction');
+        return array('Functions/IsExtFunction',
+                    );
     }
     
     public function analyze() {
         $this->atomIs('Functioncall')
              ->analyzerIs('Functions/IsExtFunction')
+             ->isNotLowerCase('code');
+        $this->prepareQuery();
+
+        $this->atomIs(array('List', 'Unset'))
              ->isNotLowerCase('code');
         $this->prepareQuery();
         

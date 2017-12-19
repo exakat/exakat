@@ -1,7 +1,7 @@
 <?php
 
 function y($c) {
-   $z = function ( $a, $b ) {
+   $z = function ( $a, $b ) use ($d) {
         $a->a > $b->b;
     };
     

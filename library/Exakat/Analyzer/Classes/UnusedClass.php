@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class UnusedClass extends Analyzer {
     public function dependsOn() {
         return array('Classes/UsedClass',
-                     'Classes/TestClass');
+                     'Classes/TestClass',
+                    );
     }
 
     public function analyze() {

@@ -95,7 +95,7 @@ class Initproject extends Tasks {
                 if (in_array($projectName, array('trunk', 'code'))) {
                     $projectName = basename(dirname($repositoryURL));
                     if (in_array($projectName, array('trunk', 'code'))) {
-                        $projectName = basename(dirname($repositoryURL, 2)));
+                        $projectName = basename(dirname($repositoryURL, 2));
                     }
                 }
             } elseif ($this->config->git === true) {
@@ -171,6 +171,8 @@ ignore_dirs[] = /tests
 ignore_dirs[] = /tmp
 ignore_dirs[] = /vendor
 ignore_dirs[] = /version
+ignore_dirs[] = /var
+
 
 
 ;Included dirs or files, relative to code source root. Default to all.

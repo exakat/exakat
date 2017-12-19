@@ -89,6 +89,11 @@ class IsModified extends Analyzer {
             $this->prepareQuery();
         }
 
+        $this->atomIs('Unset')
+             ->outIs('ARGUMENT')
+             ->atomIs($atoms);
+        $this->prepareQuery();
+
         // Class constructors (__construct)
         $this->atomIs('Newcall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
