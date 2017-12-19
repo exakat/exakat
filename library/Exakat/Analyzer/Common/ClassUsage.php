@@ -35,7 +35,16 @@ class ClassUsage extends Analyzer {
     public function analyze() {
         $classes =  $this->makeFullNsPath($this->classes);
 
+        // New X();
         $this->atomIs('Newcall')
+             ->has('fullnspath')
+             ->fullnspathIs($classes);
+        $this->prepareQuery();
+
+        // New X; (until this is also converted into a Newcall)
+        $this->atomIs('New')
+             ->outIs('NEW')
+             ->atomIs(array('Identifier', 'Nsname'))
              ->has('fullnspath')
              ->fullnspathIs($classes);
         $this->prepareQuery();
