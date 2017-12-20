@@ -27,6 +27,7 @@ use Exakat\Analyzer\Docs;
 use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;
+use Exakat\Reports\Helpers\Results;
 use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
@@ -170,6 +171,7 @@ class Ambassador extends Reports {
         $this->generateDirectiveList();
         $this->generateAlteredDirectives();
         $this->generateStats();
+        $this->generateComplexExpressions();
         $this->generateVisibilitySuggestions();
 
         // Compatibility
@@ -1920,12 +1922,11 @@ SQL;
         $data = new Methods($this->config);
         $bugfixes = $data->getBugFixes();
 
-        $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
-        $reported = array();
-        $info = array();
+        $results = new Results($this->sqlite, 'Php/MiddleVersion');
+        $results->load();
 
         $rows = array();
-        while($row = $found->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($results->toArray() as $row) {
             $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
         }
 
@@ -2042,9 +2043,11 @@ SQL;
     private function generateErrorMessages() {
         $errorMessages = '';
 
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $errorMessages .= '<tr><td>'.PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        $results = new Results($this->sqlite, 'Structures/ErrorMessages');
+        $results->load();
+        
+        foreach($results->toArray() as $row) {
+            $errorMessages .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
         $html = $this->getBasedPage('error_messages');
@@ -2214,9 +2217,11 @@ HTML;
     private function generateDynamicCode() {
         $dynamicCode = '';
 
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $dynamicCode .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        $results = new Results($this->sqlite, 'Structures/DynamicCode');
+        $results->load();
+
+        foreach($results->toArray() as $row) {
+            $dynamicCode .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
         $html = $this->getBasedPage('dynamic_code');
@@ -2226,9 +2231,12 @@ HTML;
 
     private function generateGlobals() {
         $theGlobals = '';
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $theGlobals .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+
+        $results = new Results($this->sqlite, 'Structures/GlobalInGlobal');
+        $results->load();
+
+        foreach($results->toArray() as $row) {
+            $theGlobals .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
         $html = $this->getBasedPage('globals');
@@ -2276,9 +2284,12 @@ HTML;
             }
 
             $theTable = '';
-            $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $theTable .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+
+            $results = new Results($this->sqlite, $theAnalyzer);
+            $results->load();
+
+           foreach($results->toArray() as $row) {
+                $theTable .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
             }
 
             $html = $this->getBasedPage('inventories');
@@ -2930,6 +2941,23 @@ HTML;
         $html = $this->getBasedPage('stats');
         $html = $this->injectBloc($html, 'STATS', $stats);
         $this->putBasedPage('stats', $html);
+    }
+
+    private function generateComplexExpressions() {
+        $results = new Results($this->sqlite, 'Structures/ComplexExpression');
+        $results->load();
+        
+        $expr = $results->getColumn('fullcode');
+        $counts = array_count_values($expr);
+
+        $expressions = '';
+        foreach($results->toArray() as $row) {
+            $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>{$row['fullcode']}</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage('complex_expressions');
+        $html = $this->injectBloc($html, 'BLOC-EXPRESSIONS', $expressions);
+        $this->putBasedPage('complex_expressions', $html);
     }
 
     private function generateCodes() {
