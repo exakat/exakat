@@ -35,7 +35,7 @@ class OrDie extends Analyzer {
              ->analyzerIsNot('Structures/NoDirectAccess')
              ->codeIs(array('or', '||'))
              ->outIs('RIGHT')
-             ->functioncallIs(array('\\die', '\\exit'))
+             ->atomIs('Exit')
              ->back('first');
         $this->prepareQuery();
     }

@@ -33,7 +33,7 @@ class ExitUsage extends Analyzer {
     
     public function analyze() {
         // while (list($a, $b) = each($c)) {}
-        $this->atomFunctionIs(array('exit', 'die'))
+        $this->atomIs('Exit')
              ->goToInstruction('Ifthen')
              ->analyzerIsNot('Structures/NoDirectAccess')
              ->goToFile()
@@ -41,7 +41,7 @@ class ExitUsage extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomFunctionIs(array('exit', 'die'))
+        $this->atomIs('Exit')
              ->hasNoInstruction('Ifthen')
              ->goToFile()
              ->analyzerIsNot('Files/IsCliScript')

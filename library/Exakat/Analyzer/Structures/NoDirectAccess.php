@@ -34,8 +34,7 @@ class NoDirectAccess extends Analyzer {
              ->atomInside('Functioncall')
              ->functioncallIs('\\defined')
              ->back('first')
-             ->atomInside('Functioncall')
-             ->functioncallIs(array('\\die', '\\exit'))
+             ->atomInside('Exit')
              ->back('first');
         $this->prepareQuery();
 
@@ -49,8 +48,7 @@ class NoDirectAccess extends Analyzer {
              ->functioncallIs('\\defined')
              ->back('first')
              ->outIs('THEN')
-             ->atomInside('Functioncall')
-             ->functioncallIs(array('\\die', '\\exit'))
+             ->atomInside('Exit')
              ->back('first');
         $this->prepareQuery();
 
@@ -61,9 +59,7 @@ class NoDirectAccess extends Analyzer {
              ->functioncallIs('\\defined')
              ->back('first')
              ->outIs('THEN')
-             ->atomInside('Functioncall')
-             ->atomInside('Functioncall')
-             ->functioncallIs(array('\\die', '\\exit'))
+             ->atomInside('Exit')
              ->back('first');
         $this->prepareQuery();
 

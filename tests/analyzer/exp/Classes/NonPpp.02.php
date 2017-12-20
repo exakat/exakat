@@ -7,6 +7,8 @@ $expected     = array('var $varp = 2',
 $expected_not = array('private $varPrivate, $varPrivate2',
                       '$varPrivate',
                       '$varPrivate2',
+                      'public static $staticp2 = 2',
+                      'static public $pstatic3 = 3',
                      );
 
 ?>

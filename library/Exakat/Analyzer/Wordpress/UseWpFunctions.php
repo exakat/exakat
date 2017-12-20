@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class UseWpFunctions extends Analyzer {
     public function analyze() {
         $functions = array('\\mail',
-                           '\\die', '\\exit',
                            '\\header',
                            '\\rand', '\\mt_rand'
                            );
@@ -35,6 +34,13 @@ class UseWpFunctions extends Analyzer {
         $this->atomFunctionIs($functions)
              ->back('first');
         $this->prepareQuery();
+
+//                           '\\die', '\\exit',
+        $this->atomIs('Exit')
+             ->back('first');
+        $this->prepareQuery();
+
+
     }
 }
 

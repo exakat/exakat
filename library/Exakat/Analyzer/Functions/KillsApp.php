@@ -32,7 +32,7 @@ class KillsApp extends Analyzer {
              ->outIs('BLOCK')
              // We need this straight in the main sequence, not deep in a condition
              ->outIs('EXPRESSION')
-             ->functioncallIs(array('\\die', '\\exit'))
+             ->atomIs('Exit')
              ->back('first');
         $this->prepareQuery();
 

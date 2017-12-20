@@ -5,7 +5,7 @@ abstract class x {
     public static function publicm() {}
     protected static function protectedm() {}
 
-    abstract function nonPPPabstract() {}
+    abstract function nonPPPabstract();
 }
 
 function normalFunction() {}

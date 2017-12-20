@@ -52,7 +52,7 @@ class NoParenthesisForLanguageConstruct extends Analyzer {
 
         // print, echo
         $this->atomIs('Functioncall')
-             ->tokenIs(array('T_PRINT', 'T_ECHO', 'T_DIE', 'T_EXIT'))
+             ->tokenIs(array('T_PRINT', 'T_ECHO'))
              ->outIs('ARGUMENT')
              ->atomIs('Parenthesis')
              ->back('first');

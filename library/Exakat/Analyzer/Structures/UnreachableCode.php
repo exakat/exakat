@@ -35,32 +35,7 @@ class UnreachableCode extends Analyzer {
         // code after a halt_compiler is expected to be unreachable.
         $finalTokens = array('Gotolabel', 'Class', 'Function', 'Interface', 'Trait');
 
-        $this->atomIs('Return')
-             ->nextSiblings()
-             ->atomIsNot($finalTokens);
-        $this->prepareQuery();
-
-        $this->atomIs('Throw')
-             ->nextSiblings()
-             ->atomIsNot($finalTokens);
-        $this->prepareQuery();
-
-        $this->atomIs('Break')
-             ->nextSiblings()
-             ->atomIsNot($finalTokens);
-        $this->prepareQuery();
-
-        $this->atomIs('Continue')
-             ->nextSiblings()
-             ->atomIsNot($finalTokens);
-        $this->prepareQuery();
-
-        $this->atomIs('Goto')
-             ->nextSiblings()
-             ->atomIsNot($finalTokens);
-        $this->prepareQuery();
-
-        $this->atomFunctionIs(array('\\exit', '\\die'))
+        $this->atomIs(array('Return', 'Throw', 'Break', 'Continue', 'Goto', 'Exit'))
              ->nextSiblings()
              ->atomIsNot($finalTokens);
         $this->prepareQuery();
@@ -86,11 +61,11 @@ class UnreachableCode extends Analyzer {
         $this->atomIs('Ifthen')
              ->outIs('THEN')
              ->outIs('EXPRESSION')
-             ->atomIs(array('Return', 'Continue', 'Break'))
+             ->atomIs(array('Return', 'Continue', 'Break', 'Exit'))
              ->back('first')
              ->outIs('ELSE')
              ->outIs('EXPRESSION')
-             ->atomIs(array('Return', 'Continue', 'Break'))
+             ->atomIs(array('Return', 'Continue', 'Break', 'Exit'))
              ->back('first')
              ->nextSibling()
              ->atomIsNot($finalTokens)

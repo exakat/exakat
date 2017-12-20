@@ -167,7 +167,7 @@ class Load extends Tasks {
     static public $PROP_NODELIMITER = array('String', 'Variable');
     static public $PROP_HEREDOC     = array('Heredoc');
     static public $PROP_COUNT       = array('Sequence', 'Functioncall', 'Methodcallname', 'Arrayliteral', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
-    static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Method', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String');
+    static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Method', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String', 'Self', 'Parent');
     static public $PROP_ABSOLUTE    = array('Nsname');
     static public $PROP_ALIAS       = array('Nsname', 'Identifier', 'As');
     static public $PROP_ORIGIN      = array('Nsname', 'Identifier', 'As');
@@ -2062,6 +2062,10 @@ SQL;
                 $atom = 'Empty';
             } elseif ($name->fullnspath == '\\isset') {
                 $atom = 'Isset';
+            } elseif ($name->fullnspath == '\\die') {
+                $atom = 'Exit';
+            } elseif ($name->fullnspath == '\\exit') {
+                $atom = 'Exit';
             } else {
                 $atom = 'Functioncall';
             }
@@ -2142,6 +2146,12 @@ SQL;
             $string = $this->addAtom('Null');
             $string->boolean  = 0;
             $string->constant = self::CONSTANT_EXPRESSION;
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
+            $string = $this->addAtom('Self');
+            $string->constant = self::CONSTANT_EXPRESSION;
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
+            $string = $this->addAtom('Self');
+            $string->constant = self::CONSTANT_EXPRESSION;
         } else {
             $string = $this->addAtom('Identifier');
             $string->constant = self::CONSTANT_EXPRESSION;
@@ -2218,14 +2228,14 @@ SQL;
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF    ) {
 
-            $identifier = $this->processSingle('Identifier');
+            $identifier = $this->processSingle('Static');
             list($fullnspath, $aliased) = $this->getFullnspath($identifier, 'class');
             $identifier->fullnspath = $fullnspath;
             $this->addCall('class', $fullnspath, $identifier);
-            
+
             return $identifier;
-        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
-            $name = $this->addAtom('Identifier');
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS ) {
+            $name = $this->addAtom('Static');
             $name->code       = $this->tokens[$this->id][1];
             $name->fullcode   = $this->tokens[$this->id][1];
             $name->line       = $this->tokens[$this->id][2];
@@ -2234,7 +2244,7 @@ SQL;
             list($fullnspath, $aliased) = $this->getFullnspath($name);
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
-                                          
+
             $this->pushExpression($name);
 
             return $this->processFunctioncall();
@@ -2253,12 +2263,18 @@ SQL;
                 return $this->processStaticVariable();
             }
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
-            // new static; (no parenthesis, as tested above)
+            // new static; 
+            $name = $this->addAtom('Newcall');
+            $name->code       = $this->tokens[$this->id][1];
+            $name->fullcode   = $this->tokens[$this->id][1];
+            $name->line       = $this->tokens[$this->id][2];
+            $name->token      = $this->getToken($this->tokens[$this->id][0]);
 
-            --$this->id;
-            $name = $this->processNextAsIdentifier();
+            list($fullnspath, $aliased) = $this->getFullnspath($name);
+            $name->fullnspath = $fullnspath;
+            $name->aliased    = $aliased;
+
             $this->pushExpression($name);
-
             return $name;
         } else {
             return $this->processOptions('Static');
@@ -2999,7 +3015,7 @@ SQL;
             $void = $this->addAtomVoid();
             $void->rank = 0;
 
-            $functioncall = $this->addAtom('Functioncall');
+            $functioncall = $this->addAtom('Exit');
             $functioncall->code       = $name->code;
             $functioncall->fullcode   = $name->fullcode.' ';
             $functioncall->line       = $this->tokens[$this->id][2];

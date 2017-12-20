@@ -29,12 +29,12 @@ class DieExitConsistance extends Analyzer {
 
     public function analyze() {
         $mapping = <<<GREMLIN
-x2 = it.get().value("fullnspath");
+x2 = it.get().value("code");
 GREMLIN;
-        $storage = array('die'  => '\\die',
-                         'exit' => '\\exit');
+        $storage = array('die'  => 'die',
+                         'exit' => 'exit');
 
-        $this->atomFunctionIs(array('\\die', '\\exit'))
+        $this->atomIs('Exit')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
@@ -58,7 +58,7 @@ GREMLIN;
         }
         $types = array_keys($types);
 
-        $this->atomFunctionIs(array('\\die', '\\exit'))
+        $this->atomIs('Exit')
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');
