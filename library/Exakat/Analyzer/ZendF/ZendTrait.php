@@ -30,7 +30,7 @@ class ZendTrait extends Analyzer {
 
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('USE')
-             ->atomIs('Use')
+             ->atomIs('Usetrait')
              ->outIs('USE')
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();

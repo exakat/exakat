@@ -26,10 +26,9 @@ use Exakat\Analyzer\Analyzer;
 
 class GroupUseDeclaration extends Analyzer {
     public function analyze() {
-        $this->atomIs('Use')
-             ->hasNoClassTrait()
-             ->hasOut('GROUPUSE')
-             ->back('first');
+        //use A\B\C{ D, E, F}
+        $this->atomIs('Usenamespace')
+             ->hasOut('GROUPUSE');
         $this->prepareQuery();
     }
 }

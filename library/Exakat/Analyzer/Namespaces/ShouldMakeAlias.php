@@ -30,12 +30,17 @@ class ShouldMakeAlias extends Analyzer {
         $this->atomIs('Nsname')
              ->tokenIs('T_NS_SEPARATOR')
              ->hasNoIn('USE')
-             ->hasNoParent('Use', array('NAME', 'USE'))  // use expression
+             ->hasNoParent('Usenamespace', array('NAME', 'USE'))  // use expression
              ->hasNoParent('Namespace', 'NAME')  // use expression
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'possibleAlias')
              ->goToNamespace()
-             ->raw('where( __.out("BLOCK", "CODE").out("EXPRESSION").hasLabel("Use").out("USE").filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )')
+             ->raw(<<<GREMLIN
+where( __.out("BLOCK", "CODE").out("EXPRESSION")
+         .hasLabel("Usenamespace").out("USE")
+         .filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 

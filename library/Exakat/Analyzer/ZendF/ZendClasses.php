@@ -25,7 +25,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ZendClasses extends Analyzer {
     public function dependsOn() {
-        return array('Classes/ClassUsage');
+        return array('Classes/ClassUsage',
+                    );
     }
     
     public function analyze() {

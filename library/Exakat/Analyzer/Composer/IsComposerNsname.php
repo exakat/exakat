@@ -48,7 +48,7 @@ class IsComposerNsname extends Analyzer {
         $list = array_merge($packagistNamespacesFullNS, $packagistClassesFullNS, $packagistInterfacesFullNs, $packagistTraitsFullNs);
         $n = floor(count($list) / 10000);
         for($i = 0; $i < $n; ++$i) {
-            $this->atomIs('Use')
+            $this->atomIs('Usenamespace')
                  ->outIs('USE')
                  ->is('originpath', array_slice($list, $i * 10000, ($i + 1) * 10000));
             $this->prepareQuery();

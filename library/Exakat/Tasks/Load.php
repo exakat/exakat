@@ -565,7 +565,6 @@ SQL;
                 // ignoring empty files
             }
         }
-//        $this->saveDefinitions();
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
@@ -4557,11 +4556,8 @@ SQL;
     }
 
     private function processPrint() {
-        if (in_array($this->tokens[$this->id][0], array(\Exakat\Tasks\T_INCLUDE, \Exakat\Tasks\T_INCLUDE_ONCE, \Exakat\Tasks\T_REQUIRE, \Exakat\Tasks\T_REQUIRE_ONCE))) {
-            $name = $this->addAtom('Include');
-        } else {
-            $name = $this->addAtom('Identifier');
-        }
+        $current = $this->id;
+        $name = $this->addAtom('Identifier');
 
         $name->code      = $this->tokens[$this->id][1];
         $name->fullcode  = $this->tokens[$this->id][1];
@@ -4582,7 +4578,11 @@ SQL;
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
 
-        $functioncall = $this->addAtom('Print');
+        if (in_array($this->tokens[$current][0], array(\Exakat\Tasks\T_INCLUDE, \Exakat\Tasks\T_INCLUDE_ONCE, \Exakat\Tasks\T_REQUIRE, \Exakat\Tasks\T_REQUIRE_ONCE))) {
+            $functioncall = $this->addAtom('Include');
+        } else {
+            $functioncall = $this->addAtom('Print');
+        }
         $index = $this->popExpression();
         $index->rank = 0;
         $this->addLink($functioncall, $index, 'ARGUMENT');

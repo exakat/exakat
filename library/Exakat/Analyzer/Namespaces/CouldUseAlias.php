@@ -37,7 +37,7 @@ class CouldUseAlias extends Analyzer {
              ->goToNamespace()
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
-             ->atomIs('Use')
+             ->atomIs('Usenamespace')
              ->outIs('USE')
              ->isNot('absolute', true)
              ->raw('filter{ (fnp =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") + "(\\\\\\\\.*)?\\$" ).getCount() > 0 }')

@@ -26,15 +26,14 @@ use Exakat\Analyzer\Analyzer;
 
 class MultipleAliasDefinitionPerFile extends Analyzer {
     public function analyze() {
-        $this->atomIs('Use')
-             ->hasNoClassTrait()
+        $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->_as('results')
              ->savePropertyAs('origin', 'origin')
              ->savePropertyAs('fullcode', 'fullcode')
              ->inIs('USE')
              ->otherSiblings('EXPRESSION', self::INCLUDE_SELF)
-             ->atomIs('Use')
+             ->atomIs('Usenamespace')
              ->outIs('USE')
              ->samePropertyAs('origin', 'origin')
              ->notSamePropertyAs('fullcode', 'fullcode')

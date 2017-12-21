@@ -29,7 +29,8 @@ use Exakat\Data\Composer;
 class IsComposerInterface extends Analyzer {
 
     public function dependsOn() {
-        return array('Interfaces/InterfaceUsage');
+        return array('Interfaces/InterfaceUsage',
+                    );
     }
     
     public function analyze() {
@@ -61,7 +62,7 @@ class IsComposerInterface extends Analyzer {
              ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();
 
-        $this->atomIs('Use')
+        $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();

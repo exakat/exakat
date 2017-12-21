@@ -26,10 +26,9 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class Alias extends Analyzer {
-
     public function analyze() {
-        $this->atomIs('Use')
-             ->hasNoClassTrait()
+        // use A\B\C as D
+        $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->outIs('ALIAS');
         $this->prepareQuery();

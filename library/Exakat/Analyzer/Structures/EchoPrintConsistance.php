@@ -35,7 +35,7 @@ GREMLIN;
                          'echo'  => 'T_ECHO',
                          '<?='   => 'T_OPEN_TAG_WITH_ECHO');
 
-        $this->atomFunctionIs(array('\\print', '\\echo'))
+        $this->atomIs(array('Echo', 'Print'))
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
@@ -59,7 +59,7 @@ GREMLIN;
             return;
         }
 
-        $this->atomFunctionIs(array('\\print', '\\echo'))
+        $this->atomIs(array('Echo', 'Print'))
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');

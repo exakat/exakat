@@ -26,38 +26,49 @@ namespace Exakat\Analyzer\Files;
 use Exakat\Analyzer\Analyzer;
 
 class DefinitionsOnly extends Analyzer {
-    public static $definitions        = array("Trait", "Class", "Interface", "Const", "Use", "Global", "Declare", "Void", "Include");
+    public static $definitions        = array('Class', 
+                                              'Const', 
+                                              'Declare', 
+                                              'Defineconstant',
+                                              'Function',
+                                              'Global', 
+                                              'Include',
+                                              'Interface', 
+                                              'Usenamespace', 
+                                              'Void', 
+                                              'Trait', 
+                                              'Usenamespace',
+                                              );
     //'Namespace',  is excluded
-
-    public static $definitionsFunctions = array('define', 'ini_set', 'error_reporting',
-                                                'register_shutdown_function', 'set_session_handler', 'set_error_handler',
-                                                'require_once', 'require', 'include', 'include_once',
-                                                'spl_autoload_register');
+    public static $definitionsFunctions = array('\\\\ini_set', 
+                                                '\\\\error_reporting',
+                                                '\\\\register_shutdown_function', 
+                                                '\\\\set_session_handler', 
+                                                '\\\\set_error_handler',
+                                                '\\\\spl_autoload_register',
+                                                );
     
     public function dependsOn() {
         return array('Structures/NoDirectAccess');
     }
     
     public function analyze() {
-        $definitionsFunctionsList = "\"\\\\".implode("\", \"\\\\", self::$definitionsFunctions)."\"";
-        $definitionsList = "\"".implode("\", \"", self::$definitions)."\"";
+        $definitionsFunctionsList = makeList(self::$definitionsFunctions);
+        $definitionsList = makeList(self::$definitions);
 
         // one or several namespaces
         $this->atomIs('File')
              ->outIs('FILE')
              ->outIs('EXPRESSION')
-//             ->atomIs('Php')
              ->outIs('CODE')
              ->raw('coalesce( __.out("EXPRESSION").hasLabel("Namespace").out("BLOCK"), __.filter{ true; } )')
              ->raw(<<<GREMLIN
 not(__.where(
     __
       .out("EXPRESSION")
-      .where( __.hasLabel($definitionsList).count().is(eq(0)) )
-      .where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )
-      .where( __.in("ANALYZED").has("analyzer", "Structures/NoDirectAccess").count().is(eq(0)) )
-      .not(where( __.hasLabel("Functioncall").not(has("fullnspath")) ))
-      .where( __.hasLabel("Functioncall").has("fullnspath").filter{ it.get().value("fullnspath") in [$definitionsFunctionsList] }.count().is(eq(0)) )
+      .not(where( __.hasLabel($definitionsList)) )
+      .not(where( __.in("ANALYZED").has("analyzer", "Structures/NoDirectAccess")) )
+      .not(where( __.hasLabel("Functioncall").has("fullnspath").has("fullnspath", within($definitionsFunctionsList)) ))
 ))
 
 GREMLIN

@@ -27,11 +27,13 @@ use Exakat\Analyzer\Analyzer;
 
 class GlobalImport extends Analyzer {
     public function dependsOn() {
-        return array('Classes/IsExtClass');
+        return array('Classes/IsExtClass',
+                    );
     }
 
     public function analyze() {
-        $this->atomIs('Use')
+        // use phalcon\classe;
+        $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->analyzerIs('Classes/IsExtClass');
         $this->prepareQuery();

@@ -71,7 +71,7 @@ class AvoidUsing extends Analyzer {
         $this->prepareQuery();
 
         // class may be used in an use
-        $this->atomIs('Use')
+        $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->fullnspathIs($classesPath)
              ->back('first');

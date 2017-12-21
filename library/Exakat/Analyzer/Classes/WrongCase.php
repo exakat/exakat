@@ -56,8 +56,7 @@ class WrongCase extends Analyzer {
 // staticMethodcall
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->codeIsNot(array('static', 'parent', 'self'))
+             ->atomIsNot(array('Static', 'Parent', 'Self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
@@ -153,8 +152,7 @@ class WrongCase extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
-             ->tokenIs('T_STRING')
-             ->codeIsNot(array('static', 'parent', 'self'))
+             ->atomIsNot(array('Static', 'Parent', 'Self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
@@ -180,8 +178,7 @@ class WrongCase extends Analyzer {
 // instance of
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->codeIsNot(array('static', 'parent', 'self'))
+             ->atomIsNot(array('Static', 'Parent', 'Self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
@@ -202,8 +199,7 @@ class WrongCase extends Analyzer {
         $this->prepareQuery();
 
 // use
-        $this->atomIs('Use')
-             ->hasIn('EXPRESSION') // Namespace USE only
+        $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->outIsIE('NAME')
              ->raw($readFinalPart)

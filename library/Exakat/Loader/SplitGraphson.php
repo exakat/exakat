@@ -76,18 +76,11 @@ class SplitGraphson {
 
     public function finalize() {
 
+        display("Init finalize\n");
         $begin = microtime(true);
         $query = <<<GREMLIN
-        
-getIt = { id ->
-  def p = g.V(id);
-  p.next();
-}
 
-new File('$this->path.project').eachLine {
-    (fromVertex, toVertex) = it.split(',').collect(getIt)
-    fromVertex.addEdge('PROJECT', toVertex)
-}
+g.V().hasLabel('File').addE('PROJECT').from(g.V($this->projectId));
 
 GREMLIN;
         $res = $this->gsneo4j->query($query);
@@ -96,7 +89,7 @@ GREMLIN;
 
         $outE = array();
         $res = $sqlite3->query(<<<SQL
-SELECT definitions.id AS definition, GROUP_CONCAT(DISTINCT COALESCE(calls.id, calls2.id)) AS call
+SELECT definitions.id - 1 AS definition, GROUP_CONCAT(DISTINCT COALESCE(calls.id - 1, calls2.id - 1)) AS call
 FROM definitions
 LEFT JOIN calls 
     ON definitions.type       = calls.type       AND
@@ -186,6 +179,7 @@ GREMLIN;
             
             if ($atom->atom === 'Project') {
                 if ($this->projectId === null) {
+
                     $jsonText = json_encode($atom->toGraphsonLine($this->id)).PHP_EOL;
                     assert(!json_last_error(), 'Error encoding '.$atom->atom.' : '.json_last_error_msg());
                     
@@ -193,29 +187,17 @@ GREMLIN;
                     fwrite($fp, $jsonText);
                     fclose($fp);
                     
-                    $begin = microtime(true);
                     $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().hasLabel("Project");');
                     $this->projectId = $res[0]['id'];
                     $this->project = $atom;
-                    
-                    $end = microtime(true);
                 }
             } else {
                 $json[$atom->id] = $atom->toGraphsonLine($this->id);
             }
         }
         
-        
-        $fp = fopen($this->path.'.project', 'a');
-        foreach($links['PROJECT'] as $b) {
-           foreach($b as $c) {
-               foreach($c as $d) {
-                   fputcsv($fp, [$this->projectId, $d['destination']]);
-               }
-           }
-        }
         unset($links['PROJECT']);
-        
+
         foreach($links as $type => $a) {
             $this->edges[$type] = 1;
             foreach($a as $b) {
@@ -241,13 +223,14 @@ GREMLIN;
             }
         }
         
-        $fp = fopen($this->path, 'a');
+        $fp = fopen($this->path, 'w+');
 
         foreach($json as $j) {
             if ($j->label === 'Project') {
                 continue;
             } 
             
+            $j->id;
             $X = $this->json_encode($j);
             assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
             fwrite($fp, $X.PHP_EOL);

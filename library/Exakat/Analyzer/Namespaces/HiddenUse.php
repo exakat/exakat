@@ -29,12 +29,12 @@ class HiddenUse extends Analyzer {
         $previous = <<<GREMLIN
 where( __.out("EXPRESSION")
          .filter{ it.get().value("rank") < rank}
-         .not(hasLabel("Use"))
+         .not(hasLabel("Usenamespace", "Usetrait"))
          .not(has("token", within("T_INCLUDE", "T_INCLUDE_ONCE", "T_REQUIRE", "T_REQUIRE_ONCE")) )
       )
 GREMLIN;
         // only for uses with rank of 1 or later
-        $this->atomIs('Use')
+        $this->atomIs(array('Usenamespace', 'Usetrait'))
              ->savePropertyAs('rank', 'rank')
              ->inIs('EXPRESSION')
              ->raw($previous)
@@ -43,7 +43,7 @@ GREMLIN;
         
         // rank = 0 use are OK
         // inside a class/trait
-        $this->atomIs('Use')
+        $this->atomIs(array('Usenamespace', 'Usetrait'))
              ->savePropertyAs('rank', 'rank')
              ->inIs('USE')
              ->raw('where( __.out("CONST", "METHOD", "PPP").filter{ it.get().value("rank") < rank} )')
