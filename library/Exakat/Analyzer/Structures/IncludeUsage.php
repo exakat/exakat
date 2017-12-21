@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class IncludeUsage extends Analyzer {
     public function analyze() {
-        $this->atomIs('Include')
-             ->inIs('NAME');
+        // Include 'file.php';
+        $this->atomIs('Include');
         $this->prepareQuery();
     }
 }

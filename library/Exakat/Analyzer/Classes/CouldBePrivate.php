@@ -38,7 +38,7 @@ class CouldBePrivate extends Analyzer {
         // Case of object->property (that's another public access)
 $query = <<<GREMLIN
 g.V().hasLabel("Member")
-     .not( where( __.out("OBJECT").has("code", "\\\$this")) )
+     .not( where( __.out("OBJECT").hasLabel("This")) )
      .out("MEMBER")
      .hasLabel("Name")
      .values("code")
@@ -62,7 +62,6 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Staticproperty")
      .out("CLASS")
-     .hasLabel("Identifier", "Nsname")
      .as("classe")
      .sideEffect{ fns = it.get().value("fullnspath"); }
      .in("CLASS")

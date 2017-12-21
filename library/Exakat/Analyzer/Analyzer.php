@@ -1494,7 +1494,7 @@ GREMLIN
     }
 
     public function goToTraits() {
-        $this->addMethod('repeat( __.out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.') ');
+        $this->addMethod('repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.') ');
         
         return $this;
     }

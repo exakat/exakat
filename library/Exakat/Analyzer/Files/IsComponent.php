@@ -25,7 +25,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IsComponent extends Analyzer {
     public function analyze() {
-        $inert = '.not(hasLabel("Use", "Class", "Const", "Interface", "Function", "Trait", "Include", "Global", "Static", "Void", "Defineconstant"))
+        $inert = '.not(hasLabel("Usenamespace", "Class", "Const", "Interface", "Function", "Trait", "Include", "Global", "Static", "Void", "Defineconstant"))
                   .not(where( __.hasLabel("Functioncall").filter{ it.get().value("token") in ["T_INCLUDE", "T_INCLUDE_ONCE", "T_REQUIRE_ONCE", "T_REQUIRE"] }) )';
         
         $inertWithIfthen = $inert.'
