@@ -219,6 +219,7 @@ class Atom {
         $properties = array();
         foreach($this as $l => $value) {
             if ($l === 'id') { continue; }
+            if ($l === 'atom') { continue; }
             if ($value === null) { continue; }
             
             if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) &&
