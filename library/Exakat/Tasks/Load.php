@@ -1559,7 +1559,7 @@ SQL;
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
-        $functioncall = $this->processArguments('Functioncall', array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
+        $functioncall = $this->processArguments('Echo', array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
         $argumentsFullcode = $functioncall->fullcode;
 
         if ($noSequence === false) {
@@ -2150,7 +2150,7 @@ SQL;
             $string = $this->addAtom('Self');
             $string->constant = self::CONSTANT_EXPRESSION;
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
-            $string = $this->addAtom('Self');
+            $string = $this->addAtom('Parent');
             $string->constant = self::CONSTANT_EXPRESSION;
         } else {
             $string = $this->addAtom('Identifier');
@@ -2165,7 +2165,15 @@ SQL;
 
         $this->pushExpression($string);
         
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
+        if ($string->atom == 'Parent' ||
+            $string->atom == 'Self'
+            ) {
+            list($fullnspath, $aliased) = $this->getFullnspath($string, 'class');
+            $string->fullnspath = $fullnspath;
+            $string->aliased    = $aliased;
+
+            $this->addCall('class', $fullnspath, $string);
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF   ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NEW
             ) {
@@ -4495,7 +4503,7 @@ SQL;
         --$this->id;
         $name = $this->processNextAsIdentifier();
         
-        $functioncall = $this->processArguments('Functioncall', array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
+        $functioncall = $this->processArguments('Echo', array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
         $argumentsFullcode = $functioncall->fullcode;
         
         list($fullnspath, $aliased) = $this->getFullnspath($name);
@@ -4563,7 +4571,7 @@ SQL;
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
 
-        $functioncall = $this->addAtom('Functioncall');
+        $functioncall = $this->addAtom('Print');
         $index = $this->popExpression();
         $index->rank = 0;
         $this->addLink($functioncall, $index, 'ARGUMENT');
@@ -4751,7 +4759,7 @@ SQL;
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
             return array(mb_strtolower($name->fullcode), self::NOT_ALIASED);
-        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean'))) {
+        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self'))) {
             // No fullnamespace for non literal namespaces
             return array('', self::NOT_ALIASED);
         } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
@@ -4760,7 +4768,7 @@ SQL;
         } elseif (mb_strtolower(substr($name->fullcode, 0, 10)) === 'namespace\\') {
             // namespace\A\B
             return array(substr($this->namespace, 0, -1).mb_strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
-        } elseif (in_array($name->atom, array('Identifier', 'Name', 'Boolean', 'Null'))) {
+        } elseif (in_array($name->atom, array('Identifier', 'Name', 'Boolean', 'Null', 'Static', 'Parent', 'Self'))) {
 
             // This is an identifier, self or parent
             if (mb_strtolower($name->code) === 'self' ||
