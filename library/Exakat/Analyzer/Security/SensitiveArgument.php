@@ -38,6 +38,10 @@ class SensitiveArgument extends Analyzer {
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $position);
             $this->prepareQuery();
+
+            $this->atomIs(array('Echo', 'Print', 'Exit'))
+                 ->outWithRank('ARGUMENT', $position);
+            $this->prepareQuery();
         }
     }
 }

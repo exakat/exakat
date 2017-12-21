@@ -1316,7 +1316,14 @@ SQL;
             $this->popExpression();
 
             $cpm->rank = ++$rank;
-            $this->addLink($class, $cpm, strtoupper($cpm->atom));
+            if ($cpm->atom == 'Usenamespace' ||
+                $cpm->atom == 'Usetrait') {
+                $link = 'USE';
+            } else {
+                $link = strtoupper($cpm->atom);
+            }
+                
+            $this->addLink($class, $cpm, $link);
         }
         
         ++$this->id;
@@ -3309,7 +3316,11 @@ SQL;
     }
 
     private function processUse() {
-        $use = $this->addAtom('Use');
+        if (empty($this->currentClassTrait)) {
+            $use = $this->addAtom('Usenamespace');
+        } else {
+            $use = $this->addAtom('Usetrait');
+        }
         $current = $this->id;
         $useType = 'class';
 
@@ -4621,10 +4632,6 @@ SQL;
 
     private function addLink($origin, $destination, $label) {
         assert(in_array($label, array_merge(Token::$LINKS, Token::$LINKS_EXAKAT)), 'Undefined link '.$label);
-        if (!($destination instanceof Atom)) {
-            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-            die();
-        }
         assert($origin instanceof Atom);
         assert($destination instanceof Atom);
         $o = $origin->atom;
