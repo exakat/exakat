@@ -7,9 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class wordpress_wordpress41Undefined extends Analyzer {
+class Wordpress_Wordpress41Undefined extends Analyzer {
     /* 1 methods */
 
-    public function testwordpress_wordpress41Undefined01()  { $this->generic_test('wordpress/wordpress41Undefined.01'); }
+    public function testWordpress_Wordpress41Undefined01()  { $this->generic_test('Wordpress/Wordpress41Undefined.01'); }
 }
 ?>

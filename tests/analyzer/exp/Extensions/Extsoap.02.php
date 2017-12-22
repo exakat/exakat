@@ -5,7 +5,7 @@ $expected     = array('SoapParam($a, "a")',
                       'SoapParam($c, "c")',
                      );
 
-$expected_not = array(
+$expected_not = array('RestParam($d, "d")',
                      );
 
 ?>
