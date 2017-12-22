@@ -1911,9 +1911,9 @@ GREMLIN;
         }
         
         if (is_array($code)) {
-            $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', array($code));
+            $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', $code);
         } else {
-            $this->addMethod('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', array($code));
+            $this->addMethod('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', $code);
         }
         
         return $this;
