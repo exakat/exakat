@@ -63,6 +63,7 @@ GREMLIN;
 g.V().hasLabel("Staticproperty")
      .out("CLASS")
      .as("classe")
+     .has("fullnspath")
      .sideEffect{ fns = it.get().value("fullnspath"); }
      .in("CLASS")
      .out("MEMBER")
@@ -79,7 +80,7 @@ g.V().hasLabel("Staticproperty")
      .unique()
 GREMLIN;
         $publicStaticProperties = $this->query($query)->toArray();
-        
+
         if (!empty($publicStaticProperties)) {
             $calls = array();
             foreach($publicStaticProperties as $value) {

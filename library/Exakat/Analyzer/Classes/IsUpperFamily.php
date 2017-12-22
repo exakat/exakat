@@ -29,7 +29,7 @@ class IsUpperFamily extends Analyzer {
         // Staticmethodcall
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(array('Identifier', 'Nsname', 'Static', 'Self', 'Parent'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('METHOD')
@@ -49,7 +49,7 @@ class IsUpperFamily extends Analyzer {
         // Staticproperty
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(array('Identifier', 'Nsname', 'Static', 'Self', 'Parent'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('MEMBER')
@@ -69,7 +69,7 @@ class IsUpperFamily extends Analyzer {
         // Staticconstant
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(array('Identifier', 'Nsname', 'Static', 'Self', 'Parent'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('CONSTANT')

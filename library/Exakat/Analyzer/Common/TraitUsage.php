@@ -37,23 +37,22 @@ class TraitUsage extends Analyzer {
 
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
+             ->atomIs(array('Identifier', 'Nsname', 'Self', 'Parent', 'Static'))
              ->fullnspathIs($traits);
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
+             ->atomIs(array('Identifier', 'Nsname', 'Self', 'Parent', 'Static'))
              ->fullnspathIs($traits);
         $this->prepareQuery();
+
+        // Staticconstant are not defined in traits
         
         // Instanceof doesn't use traits
 
 // Check that... Const/function and aliases
-        $this->atomIs('Use')
-             ->hasClassTrait()
+        $this->atomIs('Usetrait')
              ->outIs('USE')
              ->outIsIE('NAME')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
