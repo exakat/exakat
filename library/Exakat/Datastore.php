@@ -121,7 +121,7 @@ class Datastore {
                 $d = array($key, \Sqlite3::escapeString($row));
             }
 
-            $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ('".implode("', '", $d)."')";
+            $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES (".makeList($d).")";
             $this->sqliteWrite->querySingle($query);
         }
 
@@ -157,10 +157,10 @@ class Datastore {
                 }
                 unset($e);
             } else {
-                $d = array($row);
+                $d = array(\Sqlite3::escapeString($row));
             }
 
-            $query = 'DELETE FROM '.$table.' WHERE '.$col." IN ('".implode("', '", $d)."')";
+            $query = 'DELETE FROM '.$table.' WHERE '.$col." IN (".makeList($d).")";
             $this->sqliteWrite->querySingle($query);
         }
 
