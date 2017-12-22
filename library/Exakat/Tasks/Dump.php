@@ -39,6 +39,8 @@ class Dump extends Tasks {
     private $rounds            = 0;
     private $sqliteFile        = null;
     private $sqliteFileFinal   = null;
+    
+    private $files = array();
 
     const WAITING_LOOP = 1000;
 
@@ -99,19 +101,24 @@ CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
             $this->sqlite->query($query);
 
+            $this->collectDatastore();
+
             display('Inited tables');
         }
         
         if ($this->config->collect === true) {
             display('Collecting data');
+            $this->collectFiles();
 
             $this->collectFilesDependencies();
             $this->getAtomCounts();
 
             $this->collectStructures();
+            $this->collectFunctions();
             $this->collectVariables();
             $this->collectLiterals();
             $this->collectReadability();
+
             display('Collecting data finished');
         }
 
@@ -259,8 +266,6 @@ SQL;
     private function finish() {
         $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, \'Project/Dump\', '.$this->rounds.')');
 
-        $this->collectDatastore();
-
         // Redo each time so we update the final counts
         $totalNodes = $this->gremlin->query('g.V().count()')->toString();
         $this->sqlite->query('REPLACE INTO hash VALUES(null, "total nodes", '.$totalNodes.')');
@@ -389,6 +394,9 @@ GREMLIN;
                                                    final INTEGER,
                                                    type TEXT,
                                                    extends TEXT DEFAULT "",
+                                                   begin INTEGER,
+                                                   end INTEGER,
+                                                   file INTEGER,
                                                    namespaceId INTEGER DEFAULT 1
                                                  )');
 
@@ -404,6 +412,8 @@ g.V().hasLabel("Class")
 .sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
 .sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP", "CONST").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold())
+.sideEffect{ file = [];}.where( __.in().emit().repeat( __.in()).times(7).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
@@ -412,7 +422,10 @@ g.V().hasLabel("Class")
          'extends':extendList,
          'implements':implementList,
          'uses':useList,
-         'type':'class'
+         'type':'class',
+         'begin':lines.min(),
+         'end':lines.max(),
+         'file':file
          ];
 }
 
@@ -449,13 +462,18 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Interface")
 .sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
+.sideEffect{ lines = [];}.where( __.out("METHOD", "CONST").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold())
+.sideEffect{ file = [];}.where( __.in().emit().repeat( __.in()).times(7).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
          'extends':extendList,
          'type':'interface',
          'abstract':0,
-         'final':0
+         'final':0,
+         'begin':lines.min(),
+         'end':lines.max(),
+         'file':file
          ];
 }
 GREMLIN;
@@ -483,13 +501,18 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Trait")
 .sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold())
+.sideEffect{ file = [];}.where( __.in().emit().repeat( __.in()).times(7).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
          'uses':useList,
          'type':'trait',
          'abstract':0,
-         'final':0
+         'final':0,
+         'begin':lines.min(),
+         'end':lines.max(),
+         'file':file
          ];
 }
 
@@ -540,11 +563,15 @@ GREMLIN;
                            ", ".(int) $row['abstract'].
                            ",".(int) $row['final'].
                            ", '".$row['type']."'".
-                           ", ".$extends.")";
+                           ", ".$extends.
+                           ", ".(int) $row['begin'].
+                           ", ".(int) $row['end'].
+                           ", '".$this->files[$row['file']]."'".
+                           " )";
             }
 
             if (!empty($query)) {
-                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends") VALUES '.implode(", \n", $query);
+                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends", "begin", "end", "file") VALUES '.implode(", \n", $query);
                 $this->sqlite->query($query);
             }
 
@@ -620,7 +647,9 @@ GREMLIN;
                                                 static INTEGER,
                                                 final INTEGER,
                                                 abstract INTEGER,
-                                                visibility STRING
+                                                visibility STRING,
+                                                begin INTEGER,
+                                                end INTEGER
                                                  )');
 
         
@@ -628,6 +657,12 @@ GREMLIN;
 g.V().hasLabel("Method").as('method')
      .in("METHOD").hasLabel("Class", "Interface", "Trait").sideEffect{classe = it.get().value('fullnspath'); }
      .select('method')
+.where( __.sideEffect{ lines = [];}
+               .out("BLOCK").out("EXPRESSION")
+               .emit().repeat( __.out()).times(15)
+               .sideEffect{ lines.add(it.get().value("line")); }
+               .fold()
+      )
 .map{ 
     x = ['name': it.get().value("fullcode"),
          'abstract':it.get().vertices(OUT, "ABSTRACT").any(),
@@ -637,7 +672,9 @@ g.V().hasLabel("Method").as('method')
          'public':it.get().vertices(OUT, "PUBLIC").any(),
          'protected':it.get().vertices(OUT, "PROTECTED").any(),
          'private':it.get().vertices(OUT, "PRIVATE").any(),         
-         'class': classe
+         'class': classe,
+         'begin': lines.min(),
+         'end': lines.max()
          ];
 }
 
@@ -811,6 +848,58 @@ GREMLIN;
             $this->sqlite->query($query);
         }
         display("$total constants\n");
+    }
+
+    private function collectFiles() {
+        $res = $this->sqlite->query('SELECT * FROM files');
+        $this->files = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $this->files[$row['file']] = $row['id'];
+        }
+    }
+    
+    private function collectFunctions() {
+        // Functions
+        $this->sqlite->query('DROP TABLE IF EXISTS functions');
+        $this->sqlite->query(<<<SQL
+CREATE TABLE functions (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                          function TEXT,
+                          file TEXT,
+                          begin INTEGER,
+                          end INTEGER
+)
+SQL
+);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Function")
+.sideEffect{ lines = [];}.where( __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold() )
+.sideEffect{ file = [];}.where( __.in().emit().repeat( __.in()).times(7).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.map{ 
+    x = ['name': it.get().vertices(OUT, "NAME").next().value("code"),
+         'file': file,
+         'begin': lines.min(),
+         'end': lines.max()
+         ];
+}
+
+GREMLIN;
+        $res = $this->gremlin->query($query);
+
+        $total = 0;
+        $query = array();
+        foreach($res as $row) {
+            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', '".$this->files[$row['file']]."', ".(int) $row['begin'].", ".(int) $row['end'].")";
+
+            ++$total;
+        }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO functions ("id", "function", "file", "begin", "end") VALUES '.implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+
+        display("$total functions\n");
     }
 
     private function collectLiterals() {
@@ -1081,10 +1170,10 @@ GREMLIN;
         }
         display(count($statics)." static calls CPM");
     }
-    
+
     private function collectReadability() {
-    $loops = 20;
-    $query = <<<GREMLIN
+        $loops = 20;
+        $query = <<<GREMLIN
 g.V().sideEffect{ functions = 0; name=''; expression=0;}
     .hasLabel("Function", "Closure", "Method", "File")
     .not(where( __.out("BLOCK").hasLabel('Void')))
