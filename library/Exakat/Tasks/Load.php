@@ -86,6 +86,7 @@ class Load extends Tasks {
     private $namespace = '\\';
     private $uses   = array('function' => array(),
                             'const'    => array(),
+                            'define'   => array(),
                             'class'    => array());
     private $filename   = null;
     private $line       = 0;
@@ -624,6 +625,7 @@ SQL;
 
         $this->uses  = array('function' => array(),
                              'const'    => array(),
+                             'define'   => array(),
                              'class'    => array());
         $this->contexts = array(self::CONTEXT_CLASS      => 0,
                                 self::CONTEXT_INTERFACE  => false,
@@ -702,6 +704,7 @@ SQL;
 
         $this->uses   = array('function' => array(),
                               'const'    => array(),
+                              'define'   => array(),
                               'class'    => array());
 
         $id1 = $this->addAtom('File');
@@ -1716,6 +1719,7 @@ SQL;
 
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'const');
+
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
 
@@ -1939,7 +1943,7 @@ SQL;
         $identifier->token      = $this->getToken($this->tokens[$this->id][0]);
 
         if ($getFullnspath === self::WITH_FULLNSPATH) {
-            list($fullnspath, $aliased) = $this->getFullnspath($identifier, 'class');
+            list($fullnspath, $aliased) = $this->getFullnspath($identifier, 'const');
             $identifier->fullnspath = $fullnspath;
             $identifier->aliased    = $aliased;
         }
@@ -2174,6 +2178,8 @@ SQL;
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
             $string = $this->addAtom('Parent');
             $string->constant = self::CONSTANT_EXPRESSION;
+        } elseif ($this->isContext(self::CONTEXT_NEW)) {
+            $string = $this->addAtom('Newcall');
         } else {
             $string = $this->addAtom('Identifier');
             $string->constant = self::CONSTANT_EXPRESSION;
@@ -2188,7 +2194,8 @@ SQL;
         $this->pushExpression($string);
         
         if ($string->atom == 'Parent' ||
-            $string->atom == 'Self'
+            $string->atom == 'Self'   ||
+            $string->atom == 'Newcall'
             ) {
             list($fullnspath, $aliased) = $this->getFullnspath($string, 'class');
             $string->fullnspath = $fullnspath;
@@ -4711,10 +4718,13 @@ SQL;
             return;
         }
         
-        $fullnspath = '\\'.mb_strtolower($this->argumentsId[0]->noDelimiter);
-        
+        $fullnspath = '\\'.$this->argumentsId[0]->noDelimiter;
         $this->addDefinition('const', $fullnspath, $argumentsId);
         $this->argumentsId[0]->fullnspath = $fullnspath;
+
+        if ($argumentsId->count == 3) {
+            $this->uses['define'][mb_strtolower($fullnspath)] = $argumentsId;
+        } 
     }
 
     private function saveFiles() {
@@ -4769,8 +4779,17 @@ SQL;
 
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
-            return array(mb_strtolower($name->fullcode), self::NOT_ALIASED);
-        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self'))) {
+            if ($type === 'const') {
+                if (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
+                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
+                    return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
+                } else {
+                    return array($name->fullcode, self::NOT_ALIASED);
+                }
+            } else {
+                return array(mb_strtolower($name->fullcode), self::NOT_ALIASED);
+            }
+        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall'))) {
             // No fullnamespace for non literal namespaces
             return array('', self::NOT_ALIASED);
         } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
@@ -4779,7 +4798,7 @@ SQL;
         } elseif (mb_strtolower(substr($name->fullcode, 0, 10)) === 'namespace\\') {
             // namespace\A\B
             return array(substr($this->namespace, 0, -1).mb_strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
-        } elseif (in_array($name->atom, array('Identifier', 'Name', 'Boolean', 'Null', 'Static', 'Parent', 'Self'))) {
+        } elseif (in_array($name->atom, array('Identifier', 'Name', 'Boolean', 'Null', 'Static', 'Parent', 'Self', 'Newcall'))) {
 
             // This is an identifier, self or parent
             if (mb_strtolower($name->code) === 'self' ||
@@ -4803,10 +4822,16 @@ SQL;
                 $this->addLink($name, $this->uses['class'][mb_strtolower($name->code)], 'DEFINITION');
                 return array($this->uses['class'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
 
-            } elseif ($type === 'const' && isset($this->uses['const'][mb_strtolower($name->code)])) {
-            
-                $this->addLink($this->uses['const'][mb_strtolower($name->code)], $name, 'DEFINITION');
-                return array($this->uses['const'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
+            } elseif ($type === 'const') {
+                if (isset($this->uses['const'][$name->code])) {
+                    $this->addLink($this->uses['const'][$name->code], $name, 'DEFINITION');
+                    return array($this->uses['const'][$name->code]->fullnspath, self::ALIASED);
+                } elseif (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
+                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
+                    return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
+                } else {
+                    return array($this->namespace.$name->fullcode, self::NOT_ALIASED);
+                }
 
             } elseif ($type === 'function' && isset($this->uses['function'][mb_strtolower($name->code)])) {
 
@@ -4878,21 +4903,21 @@ SQL;
         if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' ');
-            $alias = mb_strtolower($alias->code);
+            $alias = $alias->code;
         } elseif (($offset = strrpos($alias->fullnspath, '\\')) === false) {
             // namespace without \
-            $alias = mb_strtolower($alias->fullnspath);
+            $alias = $alias->fullnspath;
         } else {
             // namespace with \
             $alias = substr($alias->fullnspath, $offset + 1);
         }
-
-        if (!($use instanceof Atom)) {
-            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-            die();
+        
+        if ($useType !== 'const') {
+            $alias = mb_strtolower($alias);
         }
+
         assert($use instanceof Atom);
-        $this->uses[$useType][mb_strtolower($alias)] = $use;
+        $this->uses[$useType][$alias] = $use;
 
         return $alias;
     }
@@ -4947,8 +4972,7 @@ SQL;
         } else {
             $types = array('function', 'class');
 
-            $fullnspath = mb_strtolower($call->noDelimiter);
-            $fullnspath = stripslashes($fullnspath);
+            $fullnspath = stripslashes($call->noDelimiter);
             if (empty($fullnspath) || $fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
             }
@@ -4956,7 +4980,7 @@ SQL;
 
         $atom = 'String';
 
-        foreach($types  as $type) {
+        foreach($types as $type) {
             if ($fullnspath === 'undefined') {
                 $globalpath = '';
             } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {

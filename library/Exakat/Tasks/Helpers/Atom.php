@@ -51,13 +51,13 @@ class Atom {
     public $block        = '';
     public $intval       = null;
     public $strval       = '';
+    public $boolean      = null; // null, so boolean may NOT be available
     public $enclosing    = Load::NO_ENCLOSING;
     public $args_max     = '';
     public $args_min     = '';
     public $bracket      = Load::NOT_BRACKET;
     public $close_tag    = Load::NO_CLOSING_TAG;
     public $aliased      = Load::NOT_ALIASED;
-    public $boolean      = null; // null, so boolean may NOT be available
     public $propertyname = '';
     public $constant     = Load::NOT_CONSTANT_EXPRESSION;
     public $root         = false;  // false is on purpose.

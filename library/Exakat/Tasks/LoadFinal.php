@@ -53,6 +53,8 @@ class LoadFinal extends Tasks {
         $this->spotPHPNativeFunctions();
 
         $this->spotFallbackConstants();
+        
+        $this->setConstantDefinition();
 
         display('End load final');
         $this->logTime('Final');
@@ -82,12 +84,14 @@ class LoadFinal extends Tasks {
         display("fixing Fullnspath for Constants");
         // fix path for constants with Const
         $query = <<<GREMLIN
-g.V().hasLabel("Identifier")
+g.V().hasLabel("Identifier", "Nsname")
      .has("fullnspath")
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath"); }
      .in("DEFINITION").hasLabel("Class", "Trait", "Interface")
-     .coalesce( __.out("ARGUMENT").has("rank", 0), __.hasLabel("Constant").out('NAME'), filter{ true; })
+     .coalesce( __.out("ARGUMENT").has("rank", 0), 
+                __.hasLabel("Constant").out('NAME'), 
+                filter{ true; })
      .filter{ actual = it.get().value("fullnspath"); actual != cc;}
      .select("identifier")
      .sideEffect{ it.get().property("fullnspath", actual); }
@@ -295,6 +299,29 @@ GREMLIN;
         } else {
             display('Link constant definitions : skipping.');
         }
+    }
+
+    private function setConstantDefinition() {
+        display('Set constant definitions');
+
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Identifier", "Nsname")
+     .where(__.sideEffect{ constante = it.get();}.in("DEFINITION").coalesce( __.hasLabel("Constant").out("VALUE"),
+                                                                             __.hasLabel("Defineconstant").out("ARGUMENT").has("rank", 1))
+     .sideEffect{ 
+        if ("intval" in it.get().keys()) {
+            constante.property("intval", it.get().value("intval")); 
+        }
+        if ("boolean" in it.get().keys()) {
+            constante.property("boolean", it.get().value("boolean")); 
+        }
+        if ("strval" in it.get().keys()) {
+            constante.property("strval", it.get().value("strval")); 
+        }
+     }
+)
+GREMLIN;
+        $this->gremlin->query($query);
     }
 
     private function makeClassConstantDefinition() {
