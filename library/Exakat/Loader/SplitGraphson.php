@@ -57,8 +57,8 @@ class SplitGraphson {
     private $gsneo4j = null;
     private $path = null;
     private $pathDefinition = null;
-
-    public function __construct($gremlin, $config) {
+    
+    public function __construct($gremlin, $config, $plugins) {
         $this->config = $config;
         
         $this->gsneo4j = $gremlin;
@@ -164,10 +164,6 @@ GREMLIN;
     }
 
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
-
-        $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant');
-        $integerValues = array('count', 'intval', 'args_max', 'args_min');
-        
         $fileName = 'unknown';
         
         $json = array();

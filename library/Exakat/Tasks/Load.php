@@ -37,6 +37,7 @@ use Exakat\Phpexec;
 use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Precedence;
 use Exakat\Tasks\Helpers\Atom;
+use Exakat\Tasks\Helpers\Intval;
 use Exakat\Tokenizer\Token;
 
 const T_BANG                         = '!';
@@ -188,7 +189,8 @@ class Load extends Tasks {
     static public $PROP_BINARYSTRING= array('String', 'Heredoc');
     static public $PROP_ROOT        = array('File');
 
-    static public $PROP_OPTIONS = array();
+// Refactoring under way 
+//    static public $PROP_OPTIONS = array();
 
     static public $TOKENS = array(
                      ';'  => \Exakat\Tasks\T_SEMICOLON,
@@ -232,6 +234,8 @@ class Load extends Tasks {
     private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv', 'SplitGraphson');
 
     private $processing = array();
+    
+    private $plugins = array();
 
     private $stats = array('loc'       => 0,
                            'totalLoc'  => 0,
@@ -245,6 +249,9 @@ class Load extends Tasks {
         if (!$this->php->isValid()) {
             throw new InvalidPHPBinary($this->php->getVersion());
         }
+        
+        // Init all plugins here
+        $this->plugins[] = new Intval();
 
         $this->precedence = new Precedence($this->config->phpversion, $this->config);
 
@@ -417,6 +424,8 @@ class Load extends Tasks {
                             \Exakat\Tasks\T_GLOBAL                   => 'processGlobalVariable',
                             );
 
+/*
+    refactoring under way
         self::$PROP_OPTIONS = array(
                           'alternative' => self::$PROP_ALTERNATIVE,
                           'reference'   => self::$PROP_REFERENCE,
@@ -446,6 +455,7 @@ class Load extends Tasks {
                           'binaryString'=> self::$PROP_BINARYSTRING,
                           'root'        => self::$PROP_ROOT,
                           );
+*/
 
         if (file_exists($this->config->projects_root.'/projects/.exakat/calls.sqlite')) {
             unlink($this->config->projects_root.'/projects/.exakat/calls.sqlite');
@@ -472,6 +482,12 @@ CREATE TABLE definitions (
 )
 SQL;
         $this->callsSqlite->query($definitions);
+    }
+
+    public function runPlugins($atom) {
+        foreach($this->plugins as $plugin) {
+            $plugin->run($atom);
+        }
     }
     
     public function run() {
@@ -504,7 +520,7 @@ SQL;
             display('Loading with '.$client.PHP_EOL);
 
             $client = '\\Exakat\\Loader\\'.$client;
-            static::$client = new $client($this->gremlin, $this->config);
+            static::$client = new $client($this->gremlin, $this->config, $this->plugins);
         }
 
         $this->datastore->cleanTable('tokenCounts');
@@ -3534,21 +3550,21 @@ SQL;
     private function processVariable() {
         if ($this->tokens[$this->id][1] === '$this') {
             $atom = 'This';
-        } elseif (in_array($this->tokens[$this->id + 1][1], array('$GLOBALS',
-                                                                  '$_SERVER',
-                                                                  '$_GET',
-                                                                  '$_POST',
-                                                                  '$_FILES',
-                                                                  '$_REQUEST',
-                                                                  '$_SESSION',
-                                                                  '$_ENV',
-                                                                  '$_COOKIE',
-                                                                  '$php_errormsg',
-                                                                  '$HTTP_RAW_POST_DATA',
-                                                                  '$http_response_header',
-                                                                  '$argc',
-                                                                  '$argv',
-                                                                  ))) {
+        } elseif (in_array($this->tokens[$this->id][1], array('$GLOBALS',
+                                                              '$_SERVER',
+                                                              '$_GET',
+                                                              '$_POST',
+                                                              '$_FILES',
+                                                              '$_REQUEST',
+                                                              '$_SESSION',
+                                                              '$_ENV',
+                                                              '$_COOKIE',
+                                                              '$php_errormsg',
+                                                              '$HTTP_RAW_POST_DATA',
+                                                              '$http_response_header',
+                                                              '$argc',
+                                                              '$argv',
+                                                              ))) {
             $atom = 'Phpvariable';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
             $atom = 'Variableobject';
@@ -3635,21 +3651,9 @@ SQL;
 
     private function processInteger() {
         $integer = $this->processSingle('Integer');
-        $value = $integer->code;
+        $this->runPlugins($integer);
 
-        if (strtolower(substr($value, 0, 2)) === '0b') {
-            $actual = bindec(substr($value, 2));
-        } elseif (strtolower(substr($value, 0, 2)) === '0x') {
-            $actual = hexdec(substr($value, 2));
-        } elseif (strtolower($value[0]) === '0') {
-            // PHP 7 will just stop.
-            // PHP 5 will work until it fails
-            $actual = octdec(substr($value, 1));
-        } else {
-            $actual = $value;
-        }
-        $integer->intval  = abs($actual) > PHP_INT_MAX ? 0 : $actual;
-        $integer->boolean = (int) (boolean) $value;
+        $integer->boolean = (int) (boolean) $integer->code;
         $integer->constant = self::CONSTANT_EXPRESSION;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -3662,8 +3666,8 @@ SQL;
     private function processReal() {
         $real = $this->processSingle('Real');
         // (int) is for loading into the database
+        $this->runPlugins($real);
         $real->boolean  = (int) (strtolower($this->tokens[$this->id][1]) != 0);
-        $real->intval   = (int) (strtolower($this->tokens[$this->id][1]) != 0);
         $real->constant = self::CONSTANT_EXPRESSION;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -3995,7 +3999,7 @@ SQL;
             $signExpression = $this->tokens[$this->id][1].$signExpression;
             $code *= $this->tokens[$this->id][1].'1';
         }
-
+        
         if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER ||
              $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DNUMBER) &&
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
@@ -4005,7 +4009,7 @@ SQL;
             $operand->fullcode = $signExpression.$operand->fullcode;
             $operand->line     = $this->tokens[$this->id][2];
             $operand->token    = $this->getToken($this->tokens[$this->id][0]);
-            $operand->intval   *= $code;
+            $this->runPlugins($operand);
 
             return $operand;
         }
