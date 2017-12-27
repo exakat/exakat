@@ -27,10 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class LoopCalling extends Analyzer {
     public function analyze() {
-        return;
         // loop of 2
         $this->atomIs('Function')
-             ->hasName()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInsideNoAnonymous('Functioncall')

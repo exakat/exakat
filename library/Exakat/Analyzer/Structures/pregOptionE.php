@@ -91,8 +91,7 @@ GREMLIN;
              ->inIsIE('CONCAT')
              ->raw(self::MAKE_DELIMITER_FINAL)
              ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\\$')
-//             ->back('first')
-             ;
+             ->back('first');
         $this->prepareQuery();
 // Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
 

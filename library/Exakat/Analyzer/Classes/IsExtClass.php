@@ -55,6 +55,11 @@ class IsExtClass extends Analyzer {
              ->atomIsNot(array('Array', 'Null', 'Boolean'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
+
+        $this->atomIs('Usenamespace')
+             ->outIs('USE')
+             ->fullnspathIs($classes);
+        $this->prepareQuery();
     }
 }
 

@@ -31,7 +31,7 @@ class OrderOfDeclaration extends Analyzer {
              ->outIs(array("USE", "METHOD", "CONST", "PPP"))
              ->savePropertyAs('rank', 'rank')
              ->raw('sideEffect{ 
-                if (it.get().label() == "Use") {
+                if (it.get().label() == "Usetrait") {
                     ok = ["Use", "Const", "Ppp", "Method"];
                 } else if (it.get().label() == "Const") {
                     ok = ["Const", "Ppp", "Method"];
