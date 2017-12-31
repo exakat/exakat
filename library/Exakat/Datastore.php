@@ -121,7 +121,7 @@ class Datastore {
                 $d = array($key, \Sqlite3::escapeString($row));
             }
 
-            $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES (".makeList($d).")";
+            $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES (".makeList($d, "'").")";
             $this->sqliteWrite->querySingle($query);
         }
 
