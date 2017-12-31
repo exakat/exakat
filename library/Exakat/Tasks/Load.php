@@ -2123,7 +2123,7 @@ SQL;
 
             // Probably weak check, since we haven't built fullnspath for functions yet...
             if (mb_strtolower($name->code) === 'define') {
-                $this->processDefineAsConstants($functioncall);
+                $this->processDefineAsConstants();
             }
 
             $this->addCall('function', $fullnspath, $functioncall);
@@ -4712,10 +4712,14 @@ SQL;
         }
     }
 
-    private function processDefineAsConstants($argumentsId) {
+    private function processDefineAsConstants() {
         if (empty($this->argumentsId[0]->noDelimiter)) {
             $this->argumentsId[0]->fullnspath = '\\';
             return;
+        }
+
+        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->argumentsId[0]->noDelimiter)) {
+            return; // Can't be a class anyway.
         }
         
         $fullnspath = '\\'.$this->argumentsId[0]->noDelimiter;
@@ -4972,7 +4976,7 @@ SQL;
         } else {
             $types = array('function', 'class');
 
-            $fullnspath = stripslashes($call->noDelimiter);
+            $fullnspath = mb_strtolower(stripslashes($call->noDelimiter));
             if (empty($fullnspath) || $fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
             }
