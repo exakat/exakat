@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('\\Slim\\Http\\Uri as b',
-                      'b( )',
+$expected     = array('b( )',
                      );
 
-$expected_not = array('\\Slam\\Http\\Uri as c',
+$expected_not = array('\\Slim\\Http\\Uri as b',
+                      '\\Slam\\Http\\Uri as c',
                       'c( )',
                      );
 
