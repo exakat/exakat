@@ -41,6 +41,7 @@ class KillsApp extends Analyzer {
              ->outIs('BLOCK')
              // We need this straight in the main sequence, not deep in a condition
              ->outIs('EXPRESSION')
+             ->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
              ->analyzerIs('self')

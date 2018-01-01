@@ -623,6 +623,9 @@ GREMLIN
 
     public function analyzerIs($analyzer) {
         $analyzer = makeArray($analyzer);
+        if (($id = array_search('self', $analyzer)) !== false) {
+            $analyzer[$id] = $this->analyzerQuoted;
+        }
         $analyzer = array_map('self::getName', $analyzer);
 
         $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)) )', $analyzer);
@@ -631,22 +634,14 @@ GREMLIN
     }
 
     public function analyzerIsNot($analyzer) {
-        if (is_array($analyzer)) {
-            foreach($analyzer as &$a) {
-                $a = self::getName($a);
-            }
-            unset($a);
-
-            $this->addMethod('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', $analyzer);
-        } else {
-            if ($analyzer === 'self') {
-                $analyzer = self::getName($this->analyzerQuoted);
-            } else {
-                $analyzer = self::getName($analyzer);
-            }
-            $this->addMethod('not( where( __.in("ANALYZED").has("analyzer", ***) ) )', $analyzer);
+        $analyzer = makeArray($analyzer);
+        if (($id = array_search('self', $analyzer)) !== false) {
+            $analyzer[$id] = $this->analyzerQuoted;
         }
-        
+        $analyzer = array_map('self::getName', $analyzer);
+
+        $this->addMethod('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', $analyzer);
+
         return $this;
     }
 

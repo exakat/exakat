@@ -41,7 +41,7 @@ GREMLIN;
         $inglobal = $this->query($query)->toArray();
 
         $query = <<<'GREMLIN'
-g.V().hasLabel("Variable", "Variablearray").has("code", "\$GLOBALS").in("VARIABLE").hasLabel("Array").values("globalvar")
+g.V().hasLabel("Phpvariable").has("code", "\$GLOBALS").in("VARIABLE").hasLabel("Array").values("globalvar")
 GREMLIN;
         $inGLobals = $this->query($query)->toArray();
 
@@ -59,7 +59,7 @@ GREMLIN;
                  ->codeIs($loneGlobal);
             $this->prepareQuery();
 
-            $this->atomIs(array("Variable", "Variablearray"))
+            $this->atomIs('Phpvariable')
                  ->codeIs('$GLOBALS')
                  ->inIs('VARIABLE')
                  ->atomIs('Array')

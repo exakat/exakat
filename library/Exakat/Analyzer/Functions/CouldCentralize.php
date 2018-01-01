@@ -26,14 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldCentralize extends Analyzer {
     public function analyze() {
-        $excluded = array('\\\\echo', '\\\\print',
-                          '\\\\define', '\\\\defined', '\\\\extension_loaded',
-                          '\\\\include', '\\\\include_once', '\\\\require', '\\\\require_once',);
+        $excluded = array('\\\\defined', '\\\\extension_loaded',);
         $excludedList = makeList($excluded);
         
         for($i = 0; $i < 3; $i++) {
             $query = <<<GREMLIN
-g.V().hasLabel('Functioncall')
+g.V().hasLabel("Functioncall", "Exit")
      .has('fullnspath', without($excludedList))
      .where( 
       __.sideEffect{x = [it.get().value('fullnspath')];}
@@ -65,6 +63,13 @@ GREMLIN;
             
             $this->atomFunctionIs($functions)
                  ->analyzerIsNot('Functions/CouldCentralize')
+                 ->savePropertyAs('fullnspath', 'name')
+                 ->outWithRank('ARGUMENT', $i)
+                 ->isHash('code', $args, 'name')
+                 ->back('first');
+            $this->prepareQuery();
+
+            $this->atomIs('Exit')
                  ->savePropertyAs('fullnspath', 'name')
                  ->outWithRank('ARGUMENT', $i)
                  ->isHash('code', $args, 'name')
