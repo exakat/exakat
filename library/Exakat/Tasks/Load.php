@@ -2123,7 +2123,7 @@ SQL;
 
             // Probably weak check, since we haven't built fullnspath for functions yet...
             if (mb_strtolower($name->code) === 'define') {
-                $this->processDefineAsConstants();
+                $this->processDefineAsConstants($functioncall);
             }
 
             $this->addCall('function', $fullnspath, $functioncall);
@@ -4712,7 +4712,7 @@ SQL;
         }
     }
 
-    private function processDefineAsConstants() {
+    private function processDefineAsConstants($argumentsId) {
         if (empty($this->argumentsId[0]->noDelimiter)) {
             $this->argumentsId[0]->fullnspath = '\\';
             return;
