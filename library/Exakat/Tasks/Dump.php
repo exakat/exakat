@@ -664,7 +664,7 @@ g.V().hasLabel("Method").as('method')
                .fold()
       )
 .map{ 
-    x = ['name': it.get().value("fullcode"),
+    x = ['name': it.get().value("code"),
          'abstract':it.get().vertices(OUT, "ABSTRACT").any(),
          'final':it.get().vertices(OUT, "FINAL").any(),
          'static':it.get().vertices(OUT, "STATIC").any(),
@@ -698,13 +698,14 @@ GREMLIN;
                 continue;
             }
             $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].
-                        ", ".(int) $row['static'].", ".(int) $row['final'].", ".(int) $row['abstract'].", '".$visibility."')";
+                        ", ".(int) $row['static'].", ".(int) $row['final'].", ".(int) $row['abstract'].", '".$visibility."'".
+                        ", ".(int) $row['begin'].", ".(int) $row['end'].")";
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility", "begin", "end") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
 
