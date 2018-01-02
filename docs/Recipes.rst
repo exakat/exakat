@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 19 Dec 2017 07:57:51 +0000
-.. comment: Generation hash : b9901b195e9584111d04ca546a62f831416a0d6e
+.. comment: Generation date : Tue, 26 Dec 2017 10:54:54 +0000
+.. comment: Generation hash : ee236dc0faaaccd4df41c1edc39222a217ad812d
 
 
 .. _analyze:
@@ -267,6 +267,7 @@ Total : 334 analysis
 * :ref:`Parent First <parent-first>`
 * :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
 * :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
+* :ref:`Php/NoReferenceForTernary`
 * :ref:`Phpinfo`
 * :ref:`Pre-increment`
 * :ref:`Preprocess Arrays <preprocess-arrays>`
@@ -322,7 +323,6 @@ Total : 334 analysis
 * :ref:`Throw In Destruct <throw-in-destruct>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
-* :ref:`Too Complex Expression <too-complex-expression>`
 * :ref:`Too Many Finds <too-many-finds>`
 * :ref:`Too Many Injections <too-many-injections>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
