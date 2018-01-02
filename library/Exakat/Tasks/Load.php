@@ -2425,11 +2425,16 @@ SQL;
         }
 
         ++$this->id;
-        $this->toggleContext(self::CONTEXT_NEW);
+        if ($this->isContext(self::CONTEXT_NEW)) {
+            $resetContext = true;
+            $this->toggleContext(self::CONTEXT_NEW);
+        }
         do {
             $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_BRACKET, \Exakat\Tasks\T_CLOSE_CURLY))) ;
-        $this->toggleContext(self::CONTEXT_NEW);
+        if (isset($resetContext)) {
+            $this->toggleContext(self::CONTEXT_NEW);
+        }
 
         // Skip closing bracket
         ++$this->id;
