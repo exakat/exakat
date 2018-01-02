@@ -28,9 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class pregOptionE extends Analyzer {
         const FETCH_DELIMITER = <<<GREMLIN
 sideEffect{ 
-    delimiter = it.get().value("noDelimiter")[0];
+    base = it.get().value("noDelimiter").replaceAll("\\\\s", "");
+    delimiter = base[0];
     if (delimiter == '\\\\') {
-        delimiter = "\\\\\\\\" + it.get().value("noDelimiter")[1];
+        delimiter = "\\\\\\\\" + base+ it.get().value("noDelimiter")[1];
     }
 
 }
@@ -43,6 +44,7 @@ sideEffect{
     else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
     else if (delimiter == "*") { delimiter = "\\\\*"; delimiterFinal = "\\\\*"; } 
     else if (delimiter == "|") { delimiter = "\\\\|"; delimiterFinal = "\\\\|"; } 
+    else if (delimiter == "?") { delimiter = "\\\\?"; delimiterFinal = "\\\\?"; } 
     else { delimiterFinal = delimiter; } 
 }
 .filter{ delimiter != "\\\\\\\\" }
