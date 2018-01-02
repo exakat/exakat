@@ -1711,7 +1711,6 @@ SQL;
 
             $this->addCall('class', $fullnspath, $nsname);
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
-
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
@@ -4813,7 +4812,15 @@ SQL;
             // namespace\A\B
             return array(substr($this->namespace, 0, -1).mb_strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
         } elseif (in_array($name->atom, array('Identifier', 'Name', 'Boolean', 'Null', 'Static', 'Parent', 'Self', 'Newcall'))) {
+            
+            $fnp = mb_strtolower($name->code);
 
+            if (($offset = strpos($fnp, '\\')) === false) {
+                $prefix = $fnp;
+            } else {
+                $prefix = substr($fnp, 0, $offset);
+            }
+            
             // This is an identifier, self or parent
             if (mb_strtolower($name->code) === 'self' ||
                 mb_strtolower($name->code) === 'static') {
@@ -4831,10 +4838,13 @@ SQL;
                 }
 
             // This is a normal identifier
-            } elseif ($type === 'class' && isset($this->uses['class'][mb_strtolower($name->code)])) {
+            } elseif ($type === 'class' && isset($this->uses['class'][$fnp])) {
+                $this->addLink($name, $this->uses['class'][$fnp], 'DEFINITION');
+                return array($this->uses['class'][$fnp]->fullnspath, self::ALIASED);
 
-                $this->addLink($name, $this->uses['class'][mb_strtolower($name->code)], 'DEFINITION');
-                return array($this->uses['class'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
+            } elseif ($type === 'class' && isset($this->uses['class'][mb_strtolower($prefix)])) {
+                $this->addLink($name, $this->uses['class'][mb_strtolower($prefix)], 'DEFINITION');
+                return array($this->uses['class'][mb_strtolower($prefix)]->fullnspath.str_replace(mb_strtolower($prefix), '', mb_strtolower($name->code)), self::ALIASED);
 
             } elseif ($type === 'const') {
                 if (isset($this->uses['const'][$name->code])) {
@@ -4847,10 +4857,10 @@ SQL;
                     return array($this->namespace.$name->fullcode, self::NOT_ALIASED);
                 }
 
-            } elseif ($type === 'function' && isset($this->uses['function'][mb_strtolower($name->code)])) {
+            } elseif ($type === 'function' && isset($this->uses['function'][$prefix])) {
 
-                $this->addLink($this->uses['function'][mb_strtolower($name->code)], $name, 'DEFINITION');
-                return array($this->uses['function'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
+                $this->addLink($this->uses['function'][$prefix], $name, 'DEFINITION');
+                return array($this->uses['function'][$prefix]->fullnspath, self::ALIASED);
 
             } else {
                 return array($this->namespace.mb_strtolower($name->fullcode), self::NOT_ALIASED);
