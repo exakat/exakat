@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SetCookieArgs extends Analyzer {
     public function analyze() {
+        // setcookie('cookie', $value);
         $this->atomFunctionIs(array('\\setcookie', '\\setrawcookie'))
              ->hasChildWithRank('ARGUMENT', 1) // so the cookie is not destroyed
              ->outWithRank('ARGUMENT', 1)
@@ -35,11 +36,12 @@ class SetCookieArgs extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // setcookie('cookie', 'value');
         $this->atomFunctionIs(array('\\setcookie', '\\setrawcookie'))
              ->hasChildWithRank('ARGUMENT', 1) // so the cookie is not destroyed
              ->outWithRank('ARGUMENT', 1)
              ->isLiteral()
-             ->isNot('boolean', false)
+             ->is('boolean', true)
              ->inIs('ARGUMENT')
              ->noChildWithRank('ARGUMENT', 6) // so httponly is omitted
              ->back('first');

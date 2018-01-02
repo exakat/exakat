@@ -33,7 +33,7 @@ class UseWeb extends Analyzer {
         $this->prepareQuery();
 
         // $_SERVER + special index
-        $this->atomIs('Variablearray')
+        $this->atomIs('Phpvariable')
              ->codeIs('$_SERVER', true)
              ->inIs('VARIABLE')
              ->outIs('INDEX')

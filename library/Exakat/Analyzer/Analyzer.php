@@ -88,7 +88,7 @@ abstract class Analyzer {
     static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
-    static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition');
+    static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable');
     static public $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method');
     static public $FUNCTIONS_NAMED  = array('Function', 'Method');
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
@@ -466,7 +466,7 @@ GREMLIN;
     protected function hasNoInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
         $this->addMethod('not( where( 
- __.repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit( ).hasLabel(within(***))
+ __.repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File", "Closure", "Function", "Method", "Class", "Trait", "Classanonymous")).emit( ).hasLabel(within(***))
  ) )', makeArray($atom));
         
         return $this;
@@ -496,12 +496,15 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
 
     protected function goToInstruction($atom = 'Namespace') {
         assert($this->assertAtom($atom));
-        $list = $this->SorA($atom);
+        $atom = makeArray($atom);
+        $atomAndFile = $atom;
+        $atomAndFile[] = "File";
+        $atomAndFile = array_unique($atomAndFile);
         $this->addMethod(<<<GREMLIN
-repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel($list, "File") )
-          .hasLabel($list)
+repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )
+          .hasLabel(within(***))
 GREMLIN
-        );
+, $atomAndFile, $atom);
         
         return $this;
     }
@@ -1136,19 +1139,21 @@ GREMLIN
 
     public function hasParent($parentClass, $ins = array()) {
         if (empty($ins)) {
-            $in = '.in';
+            $in = '.in()';
         } else {
-            $in = array();
-            
             $ins = makeArray($ins);
-            foreach($ins as $i) {
-                $in[] = '.in('.$this->SorA($i).')';
+            foreach($ins as &$i) {
+                if (empty($i)) {
+                    $i = '.in()';
+                } else {
+                    $i = ".in(\"$i\")";
+                }
             }
             
-            $in = implode('', $in);
+            $in = implode('', $ins);
         }
         
-        $this->addMethod('where( __'.$in.'.hasLabel('.$this->SorA($parentClass).'))');
+        $this->addMethod('where( __'.$in.'.hasLabel(within(***)))', makeArray($parentClass));
         
         return $this;
     }
@@ -1157,21 +1162,19 @@ GREMLIN
         if (empty($ins)) {
             $in = '.in()';
         } else {
-            $in = array();
-            
             $ins = makeArray($ins);
-            foreach($ins as $i) {
+            foreach($ins as &$i) {
                 if (empty($i)) {
-                    $in[] = '.in()';
+                    $i = '.in()';
                 } else {
-                    $in[] = ".in('$i')";
+                    $i = ".in(\"$i\")";
                 }
             }
             
-            $in = implode('', $in);
+            $in = implode('', $ins);
         }
         
-        $this->addMethod('not( where( __'.$in.'.hasLabel('.$this->SorA($parentClass).') ) )');
+        $this->addMethod('not( where( __'.$in.'.hasLabel(within(***)) ) )', makeArray($parentClass));
         
         return $this;
     }
@@ -1194,7 +1197,7 @@ GREMLIN
             $out = implode('', $out);
         }
         
-        $this->addMethod('where( __'.$out.'.hasLabel('.$this->SorA($childrenClass).'))');
+        $this->addMethod('where( __'.$out.'.hasLabel(within(***)))', makeArray($childrenClass));
         
         return $this;
     }
@@ -1265,7 +1268,7 @@ GREMLIN
     }
 
     public function goToFunction($type = array('Function', 'Method', 'Closure')) {
-        $this->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel('.$this->SorA($type).') )');
+        $this->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )', makeArray($type));
         
         return $this;
     }
@@ -1614,22 +1617,22 @@ GREMLIN
         
         $this->addMethod(<<<GREMLIN
 as("context")
-.sideEffect{ line = it.get().value('line');
-             fullcode = it.get().value('fullcode');
-             file='None'; 
-             theFunction = 'None'; 
-             theClass='None'; 
-             theNamespace='\\\\'; 
+.sideEffect{ line = it.get().value("line");
+             fullcode = it.get().value("fullcode");
+             file="None"; 
+             theFunction = "None"; 
+             theClass="None"; 
+             theNamespace="\\\\"; 
              }
-.sideEffect{ line = it.get().value('line'); }
-.until( hasLabel('File') ).repeat( 
+.sideEffect{ line = it.get().value("line"); }
+.until( hasLabel("File") ).repeat( 
     __.in($this->linksDown)
-      .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
-      .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
-      .sideEffect{ if (it.get().label() in ['Namespace']) { theNamespace = it.get().vertices(OUT, 'NAME').next().value('fullcode')} }
+      .sideEffect{ if (it.get().label() == "Function") { theFunction = it.get().value("code")} }
+      .sideEffect{ if (it.get().label() in ["Class"]) { theClass = it.get().value("fullcode")} }
+      .sideEffect{ if (it.get().label() in ["Namespace"]) { theNamespace = it.get().vertices(OUT, "NAME").next().value("fullcode")} }
        )
-.sideEffect{  file = it.get().value('fullcode');}
-.sideEffect{ context = ['line':line, 'file':file, 'fullcode':fullcode, 'function':theFunction, 'class':theClass, 'namespace':theNamespace]; }
+.sideEffect{  file = it.get().value("fullcode");}
+.sideEffect{ context = ["line":line, "file":file, "fullcode":fullcode, "function":theFunction, "class":theClass, "namespace":theNamespace]; }
 .select("context")
 
 GREMLIN

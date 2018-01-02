@@ -36,7 +36,7 @@ class DirectInjection extends Analyzer {
         
         $safe = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'REQUEST_TIME_FLOAT',
                       'SCRIPT_NAME', 'SERVER_ADMIN', '_');
-        $safeIndex = 'or( __.hasLabel("Variable"), 
+        $safeIndex = 'or( __.hasLabel("Phpvariable"), 
                           __.out("VARIABLE").not(has("code", "\\$_SERVER")), 
                           __.out("INDEX").hasLabel("String")
                             .not(where(__.out("CONCAT") ) )
@@ -62,7 +62,7 @@ class DirectInjection extends Analyzer {
              ->inIs('ARGUMENT')
 
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInside(array('Functioncall', 'Print', 'Echo', 'Exit'))
              ->outIs('ARGUMENT')
              ->analyzerIs('Security/SensitiveArgument')
              ->outIsIE('CODE')
@@ -73,7 +73,7 @@ class DirectInjection extends Analyzer {
         $this->prepareQuery();
 
         // $_GET/_POST ... directly as argument of PHP functions
-        $this->atomIs('Variablearray')
+        $this->atomIs('Phpvariable')
              ->codeIs($vars, true)
              ->inIs('VARIABLE')
              ->raw($safeIndex)
@@ -86,14 +86,13 @@ class DirectInjection extends Analyzer {
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
-        $this->atomIs('Variablearray')
+        $this->atomIs('Phpvariable')
              ->codeIs($vars, true)
              ->inIs('VARIABLE')
              ->raw($safeIndex)
              ->goToArray()
              ->inIsIE('CODE')
-             ->inIs('CONCAT')
-             ;
+             ->inIs('CONCAT');
         $this->prepareQuery();
 
         // foreach (looping on incoming variables)

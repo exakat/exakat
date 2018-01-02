@@ -41,8 +41,27 @@ class DontEchoError extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        $this->atomIs(array('Echo', 'Print', 'Exit'))
+             ->outIs('ARGUMENT')
+             ->atomIs('Functioncall')
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
+             ->tokenIs(self::$FUNCTIONS_TOKENS)
+             ->fullnspathIs($errorMessageFunctions)
+             ->back('first');
+        $this->prepareQuery();
+
         // echo 'error '.pg_error();
         $this->atomFunctionIs($displayFunctions)
+             ->outIs('ARGUMENT')
+             ->atomIs('Concatenation')
+             ->outIs('CONCAT')
+             ->atomIs('Functioncall')
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
+             ->fullnspathIs($errorMessageFunctions)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs(array('Echo', 'Print', 'Exit'))
              ->outIs('ARGUMENT')
              ->atomIs('Concatenation')
              ->outIs('CONCAT')
@@ -67,7 +86,7 @@ class DontEchoError extends Analyzer {
              ->codeIs(array('getMessage', 'getTraceAsString'))
              ->inIs('METHOD')
              ->inIs('ARGUMENT')
-             ->atomIs('Functioncall')
+             ->atomIs(array('Echo', 'Print', 'Exit', 'Functioncall'))
              ->has('fullnspath')
              ->fullnspathIs($displayFunctions);
         $this->prepareQuery();
@@ -79,9 +98,11 @@ class DontEchoError extends Analyzer {
              ->savePropertyAs('code', 'exception')
              ->inIs('VARIABLE')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInside(array('Echo', 'Print', 'Exit', 'Functioncall'))
              ->has('fullnspath')
              ->_as('results')
+             ->atomIs(array('Echo', 'Print', 'Exit', 'Functioncall'))
+             ->has('fullnspath')
              ->fullnspathIs($displayFunctions)
              ->outIs('ARGUMENT')
              ->outIsIE('CONCAT')

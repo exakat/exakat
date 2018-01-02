@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UseListWithForeach extends Analyzer {
     public function dependsOn() {
-        return array('Arrays/IsRead');
+        return array('Arrays/IsRead',
+                    );
     }
 
     public function analyze() {

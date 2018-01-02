@@ -31,9 +31,13 @@ class ThisIsForClasses extends Analyzer {
     public function analyze() {
         // General case
         $this->atomIs('This')
-             ->hasNoClass()
-             ->hasNoTrait()
+             ->hasNoClassTrait()
              ->back('first');
+        $this->prepareQuery();
+
+        // global $this
+        $this->atomIs('Globaldefinition')
+             ->codeIs('$this');
         $this->prepareQuery();
 
         // Inside Classes
