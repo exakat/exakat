@@ -10,5 +10,4 @@ $a = function () use ($THIS) {
     echo $this;
 };
 
-
 ?>

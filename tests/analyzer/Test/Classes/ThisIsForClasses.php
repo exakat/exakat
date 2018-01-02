@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_ThisIsForClasses extends Analyzer {
-    /* 11 methods */
+    /* 12 methods */
 
     public function testClasses_ThisIsForClasses01()  { $this->generic_test('Classes_ThisIsForClasses.01'); }
     public function testClasses_ThisIsForClasses02()  { $this->generic_test('Classes_ThisIsForClasses.02'); }
@@ -21,5 +21,6 @@ class Classes_ThisIsForClasses extends Analyzer {
     public function testClasses_ThisIsForClasses09()  { $this->generic_test('Classes/ThisIsForClasses.09'); }
     public function testClasses_ThisIsForClasses10()  { $this->generic_test('Classes/ThisIsForClasses.10'); }
     public function testClasses_ThisIsForClasses11()  { $this->generic_test('Classes/ThisIsForClasses.11'); }
+    public function testClasses_ThisIsForClasses12()  { $this->generic_test('Classes/ThisIsForClasses.12'); }
 }
 ?>
