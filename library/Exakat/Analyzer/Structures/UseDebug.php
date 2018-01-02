@@ -39,7 +39,9 @@ class UseDebug extends Analyzer {
              ->fullnspathIs($debug['classes']);
         $this->prepareQuery();
 
-        $this->atomIs('Newcall')
+        $this->atomIs('New')
+             ->outIs('NEW')
+             ->atomIs('Newcall')
              ->fullnspathIs($debug['classes']);
         $this->prepareQuery();
 

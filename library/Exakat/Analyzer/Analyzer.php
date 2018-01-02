@@ -465,9 +465,19 @@ GREMLIN;
 
     protected function hasNoInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
-        $this->addMethod('not( where( 
- __.repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File", "Closure", "Function", "Method", "Class", "Trait", "Classanonymous")).emit( ).hasLabel(within(***))
- ) )', makeArray($atom));
+        $stop = array("File", "Closure", "Function", "Closure", "Method", "Class", "Trait", "Classanonymous");
+
+        $atom = makeArray($atom);
+        $stop = array_unique(array_merge($stop, $atom));
+
+        $this->addMethod(<<<GREMLIN
+not( where( 
+ __.emit( ).repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() )
+           .until(hasLabel(within(***)))
+           .hasLabel(within(***))
+ ) )
+GREMLIN
+, $stop, $atom);
         
         return $this;
     }

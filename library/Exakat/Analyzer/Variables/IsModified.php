@@ -126,7 +126,9 @@ class IsModified extends Analyzer {
         }
 
         // Class constructors (__construct)
-        $this->atomIs('Newcall')
+        $this->atomIs('New')
+             ->outIs('NEW')
+             ->atomIs('Newcall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
