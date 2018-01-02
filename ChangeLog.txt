@@ -1,4 +1,4 @@
-Version 1.0.9 (King of Dust Protection, coming up)
+Version 1.0.11 (Wood Dragon of Horn, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,34 @@ Version 1.0.9 (King of Dust Protection, coming up)
     + 
 + Tokenizer
     + 
+ 
+Version 1.0.10 (Wood Wolf of Legs, 2018-01-01)
++ Architecture
+    + Fixed Sqlite3 escaping error : use ', not "
++ Report
+    + 
++ Analyzer
+    + Upgraded analysis : ? is possible as delimiter
+    + Analyzer works better with nested structures
+    + Checked unit tests : 2601 / 2649 test pass (99% pass). 
++ Tokenizer
+    + First plugin for Load Task.
+    + Upgraded support for define-d constant.
+    + Introduced Phpvariable
+    + Fixed scoping with array index.
+ 
+Version 1.0.9 (King of Dust Protection, 2017-12-25)
++ Report
+    + Ambassador : list complex expressions.
+    + Dump : added function inventory
+    + Dump : added begin and end line for structures.
++ Analyzer
+    + New analysis : report reference error with Ternary operator
+    + New analysis : report Undefined classes in Wordpress.
+    + Upgraded analysis : preg option E, tighter regex.
++ Tokenizer
+    + Better handling of long path name. TBC.
+    + Introduced Parent, Static, Self, Exit, Echo, Print.
  
 Version 1.0.8 (King of Heat Protection, 2017-12-18)
 + Architecture
