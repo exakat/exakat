@@ -413,7 +413,7 @@ g.V().hasLabel("Class")
 .sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP", "CONST").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold())
-.sideEffect{ file = [];}.where( __.in().emit().repeat( __.in()).times(7).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.sideEffect{ file = '';}.where( __.in().emit().repeat( __.in()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
@@ -463,7 +463,7 @@ GREMLIN;
 g.V().hasLabel("Interface")
 .sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "CONST").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold())
-.sideEffect{ file = [];}.where( __.in().emit().repeat( __.in()).times(7).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.sideEffect{ file = [];}.where( __.in().emit().repeat( __.in()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
@@ -502,7 +502,7 @@ GREMLIN;
 g.V().hasLabel("Trait")
 .sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold())
-.sideEffect{ file = [];}.where( __.in().emit().repeat( __.in()).times(7).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.sideEffect{ file = '';}.where( __.in().emit().repeat( __.in()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
@@ -875,7 +875,7 @@ SQL
         $query = <<<GREMLIN
 g.V().hasLabel("Function")
 .sideEffect{ lines = [];}.where( __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold() )
-.sideEffect{ file = [];}.where( __.in().emit().repeat( __.in()).times(7).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.sideEffect{ file = '';}.where( __.in().emit().repeat( __.in()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
     x = ['name': it.get().vertices(OUT, "NAME").next().value("code"),
          'file': file,
