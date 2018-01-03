@@ -29,7 +29,7 @@ class UncommonEnvVar extends Analyzer {
         $classicEnv = $this->loadIni('environnement_vars.ini', 'index');
 
         // $_ENV['USER'];
-        $this->atomIs('Variablearray')
+        $this->atomIs('Phpvariable')
              ->codeIs('$_ENV', self::CASE_INSENSITIVE)
              ->inIs('VARIABLE')
              ->_as('result')

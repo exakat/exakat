@@ -34,7 +34,7 @@ class ClassUsage extends Analyzer {
     
     public function analyze() {
         $classes =  $this->makeFullNsPath($this->classes);
-
+        
         // New X();
         $this->atomIs('Newcall')
              ->hasNoIn('NAME')

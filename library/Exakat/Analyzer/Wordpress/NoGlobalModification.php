@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class NoGlobalModification extends Analyzer {
     public function dependsOn() {
         return array('Variables/IsModified',
-                     'Arrays/IsModified');
+                     'Arrays/IsModified',
+                    );
     }
 
     public function analyze() {
@@ -58,7 +59,7 @@ class NoGlobalModification extends Analyzer {
              ->noDelimiterIs($globalNames)
              ->inIs('INDEX')
              ->outIs('VARIABLE')
-             ->atomIs('Variablearray')
+             ->atomIs('Phpvariable')
              ->codeIs('$GLOBALS')
              ->analyzerIs('Variables/IsModified')
              ->back('first');

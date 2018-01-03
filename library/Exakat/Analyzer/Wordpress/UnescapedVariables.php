@@ -30,17 +30,17 @@ class UnescapedVariables extends Analyzer {
         $escFunctions = $this->makeFullNsPath($escFunctions);
         
         // echo esc_attr($a) . $unescapedVar
-        $this->atomFunctionIs(array('\\echo', '\\print'))
+        $this->atomIs(array('Echo', 'Print'))
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
-             ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty', 'Concatenation'))
+             ->atomIs(array('Variable', 'Phpvariable', 'Array', 'Member', 'Staticproperty', 'Concatenation'))
              ->outIsIE('CONCAT')
-             ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
+             ->atomIs(array('Variable', 'Phpvariable', 'Array', 'Member', 'Staticproperty'))
              ->back('first');
         $this->prepareQuery();
 
         // echo esc_attr($a) . $unescapedVar
-        $this->atomFunctionIs(array('\\echo', '\\print'))
+        $this->atomIs(array('Echo', 'Print'))
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->outIsIE('CONCAT')

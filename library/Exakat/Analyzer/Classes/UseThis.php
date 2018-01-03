@@ -30,24 +30,23 @@ class UseThis extends Analyzer {
         // Valid for both statics and normal
         // parent::
         $this->atomIs('Method')
-             ->hasNoFunction()
              ->outIs('BLOCK')
              ->atomInsideNoAnonymous(array('Staticmethodcall', 'Staticproperty'))
              ->outIs('CLASS')
-             ->codeIs('parent')
+             ->atomIs('Parent')
              ->back('first');
         $this->prepareQuery();
 
         // self or parent are local.
         $this->atomIs('New')
              ->outIs('NEW')
-             ->codeIs(array('parent', 'self'))
+             ->outIs('NAME')
+             ->atomIs(array('Parent', 'Self'))
              ->back('first');
         $this->prepareQuery();
 
         // Case for normal methods
         $this->atomIs('Method')
-             ->hasNoFunction()
              ->hasNoOut('STATIC')
              ->outIs('BLOCK')
              ->atomInsideNoAnonymous('This')
@@ -61,7 +60,7 @@ class UseThis extends Analyzer {
              ->atomInsideNoAnonymous(array('Staticmethodcall', 'Staticproperty'))
              ->outIs('CLASS')
              ->tokenIs(self::$STATICCALL_TOKEN)
-             ->codeIsNot('parent')
+             ->atomIsNot('Parent')
              ->savePropertyAs('fullnspath', 'classe')
              ->goToClassTrait()
              ->samePropertyAs('fullnspath', 'classe')

@@ -31,7 +31,7 @@ sideEffect{
     base = it.get().value("noDelimiter").replaceAll("\\\\s", "");
     delimiter = base[0];
     if (delimiter == '\\\\') {
-        delimiter = "\\\\\\\\" + base+ it.get().value("noDelimiter")[1];
+        delimiter = "\\\\\\\\" + base[1];
     }
 
 }

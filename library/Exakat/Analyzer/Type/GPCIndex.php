@@ -29,7 +29,7 @@ class GPCIndex extends Analyzer {
         // $array['index>]
         $this->atomIs('Array')
              ->outIs('VARIABLE')
-             ->atomIs('Variablearray')
+             ->atomIs('Phpvariable')
              ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_COOKIE'))
              ->back('first')
              ->outIs('INDEX')

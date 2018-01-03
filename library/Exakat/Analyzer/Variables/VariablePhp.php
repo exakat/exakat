@@ -34,13 +34,8 @@ class VariablePhp extends Analyzer {
                                      '$argv', '$argc');
 // '$this', is now a separate token
 
-    public function dependsOn() {
-        return array('Variables/Variablenames');
-    }
-    
     public function analyze() {
-        $this->atomIs(self::$VARIABLES_ALL)
-             ->analyzerIs('Variables/Variablenames')
+        $this->atomIs('Phpvariable')
              ->codeIs(VariablePhp::$variables, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }

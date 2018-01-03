@@ -612,7 +612,7 @@ GREMLIN
 
     public function atomInsideNoDefinition($atom) {
         assert($this->assertAtom($atom));
-        $gremlin = 'emit( ).repeat( __.out( ).not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel(within(***))';
+        $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel(within(***))';
         $this->addMethod($gremlin, makeArray($atom));
         
         return $this;

@@ -6,6 +6,7 @@ $expected     = array('function bothpropertyandmethod( ) { /**/ } ',
                      );
 
 $expected_not = array('function nothingButStatic( ) { /**/ } ',
+                      'function nothing( ) { /**/ } ',
                      );
 
 ?>
