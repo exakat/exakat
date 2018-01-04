@@ -127,7 +127,7 @@ g.V().hasLabel("Identifier")
      .not(where( __.in("DEFINITION")))
      .filter{ it.get().value("code") in arg1 }
      .sideEffect{
-         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+         fullnspath = "\\\\" + it.get().value("code");
          it.get().property("fullnspath", fullnspath); 
      }.count();
 
@@ -149,7 +149,7 @@ GREMLIN;
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
      .not(where( __.in("DEFINITION")))
-     .map{ it.get().value("code").toLowerCase(); }
+     .map{ it.get().value("code"); }
      .unique()
 GREMLIN;
 
@@ -198,7 +198,7 @@ g.V().hasLabel("Functioncall")
      .out("ARGUMENT").has("rank", 0)
      .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
      .map{ 
-           s = it.get().value("noDelimiter").toString().toLowerCase();
+           s = it.get().value("noDelimiter").toString();
            if ( s.substring(0,1) != "\\\\") {
                s = "\\\\" + s;
            }
@@ -249,9 +249,9 @@ GREMLIN;
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
-     .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); name in arg1 }
+     .filter{ name = "\\\\" + it.get().value("fullcode"); name in arg1 }
      .sideEffect{
-        fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+        fullnspath = "\\\\" + it.get().value("code");
         it.get().property("fullnspath", fullnspath); 
      }
      .addE('DEFINITION')
@@ -274,7 +274,7 @@ GREMLIN;
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "DEFINITION") ) )
-     .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); 
+     .filter{ name = "\\\\" + it.get().value("fullcode"); 
               name in arg1; }
      .sideEffect{
          it.get().property("fullnspath", name); 
