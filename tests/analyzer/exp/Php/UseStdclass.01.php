@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('stdClass as Alias',
-                      'alias',
+$expected     = array('alias',
                       '\\stdClass( )',
                      );
 
-$expected_not = array('json_decode($string)',
+$expected_not = array('stdClass as Alias',
+                      'json_decode($string)',
                      );
 
 ?>

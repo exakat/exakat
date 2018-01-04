@@ -728,8 +728,8 @@ GREMLIN
         if (is_int($value)) {
             $this->addMethod('filter{ it.get().value("'.$property.'").toLong() > '.$value.'}');
         } elseif (is_string($value)) {
-            // this is a variable name
-            $this->addMethod("filter{ it.get().value('$property').toLong() > ***;}", (int) $value);
+            // this is a variable name, so it can't use *** 
+            $this->addMethod("filter{ it.get().value('$property').toLong() > $value;}");
         } else {
             assert(false, '$value must be int or string in '.__METHOD__);
         }
@@ -742,7 +742,7 @@ GREMLIN
             $this->addMethod('filter{ it.get().value("'.$property.'").toLong() < '.$value.'}');
         } elseif (is_string($value)) {
             // this is a variable name
-            $this->addMethod("filter{ it.get().value('$property').toLong() < ***;}", (int) $value);
+            $this->addMethod("filter{ it.get().value('$property').toLong() < $value;}");
         } else {
             assert(false, '$value must be int or string in '.__METHOD__);
         }

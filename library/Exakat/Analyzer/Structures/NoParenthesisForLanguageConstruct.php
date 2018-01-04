@@ -28,31 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class NoParenthesisForLanguageConstruct extends Analyzer {
     public function analyze() {
         // inclusions
-        $this->atomIs('Include')
-             ->inIs('NAME')
-             ->_as('results')
-             ->outIs('ARGUMENT')
-             ->atomIs('Parenthesis')
-             ->back('results');
-        $this->prepareQuery();
-
         // throw
-        $this->atomIs('Throw')
-             ->outIs('THROW')
-             ->atomIs('Parenthesis')
-             ->back('first');
-        $this->prepareQuery();
-
-        // Return
-        $this->atomIs('Return')
-             ->outIs('RETURN')
-             ->atomIs('Parenthesis')
-             ->back('first');
-        $this->prepareQuery();
-
+        // return
         // print, echo
-        $this->atomIs(array('Echo', 'Print'))
-             ->outIs('ARGUMENT')
+        $this->atomIs(array('Echo', 'Print', 'Include', 'Throw', 'Return'))
+             ->outIs(array('ARGUMENT', 'THROW', 'RETURN'))
              ->atomIs('Parenthesis')
              ->back('first');
         $this->prepareQuery();

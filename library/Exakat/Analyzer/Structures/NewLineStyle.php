@@ -40,7 +40,7 @@ GREMLIN;
                          'PHP_EOL' => 'PHP_EOL');
 
         $this->atomIs(array('String', 'Identifier', 'Nsname'))
-             ->raw('coalesce( __.hasLabel("Identifier", "Nsname").has("fullnspath").has("fullnspath", "\\\\php_eol"), 
+             ->raw('coalesce( __.hasLabel("Identifier", "Nsname").has("fullnspath").has("fullnspath", "\\\\PHP_EOL"), 
                               __.hasLabel("String").has("code", "\"\\\\n\"")
                              )')
              ->raw('map{ '.$mapping.' }')
@@ -67,7 +67,7 @@ GREMLIN;
         }
 
         $this->atomIs(array('String', 'Identifier', 'Nsname'))
-             ->raw('coalesce( __.hasLabel("Identifier", "Nsname").has("fullnspath").has("fullnspath", "\\\\php_eol"), 
+             ->raw('coalesce( __.hasLabel("Identifier", "Nsname").has("fullnspath").has("fullnspath", "\\\\PHP_EOL"), 
                               __.hasLabel("String").has("code", "\"\\\\n\"")
                              )')
              ->raw('sideEffect{ '.$mapping.' }')

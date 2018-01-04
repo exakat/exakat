@@ -30,7 +30,7 @@ class EmptyNamespace extends Analyzer {
         // Namespace with only use is empty
         $this->atomIs('Namespace')
              ->outIs('BLOCK')
-             ->raw('where(__.out("EXPRESSION").not( hasLabel("Use", "Void") ).count().is(eq(0)) )')
+             ->raw('where(__.out("EXPRESSION").not( hasLabel("Usenamespace", "Void") ).count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }

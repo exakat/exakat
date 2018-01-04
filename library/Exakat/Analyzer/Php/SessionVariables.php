@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class SessionVariables extends Analyzer {
     public function analyze() {
         //$_SESSION['x'];
-        $this->atomIs(array('Variable', 'Variablearray'))
+        $this->atomIs('Phpvariable')
              ->codeIs('$_SESSION')
              ->inIs('VARIABLE')
              ->atomIs('Array')

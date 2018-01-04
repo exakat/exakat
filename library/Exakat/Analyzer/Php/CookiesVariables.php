@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CookiesVariables extends Analyzer {
     public function analyze() {
         // $_COOKIE['name'];
-        $this->atomIs(array('Variable', 'Variablearray'))
+        $this->atomIs('Phpvariable')
              ->codeIs('$_COOKIE')
              ->inIs('VARIABLE')
              ->atomIs('Array')

@@ -66,7 +66,7 @@ class NoEchoInRouteCallable extends Slim {
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInside(array('Functioncall', 'Print', 'Echo'))
              ->functioncallIs(array('echo', 'print', 'var_dump', 'print_r'))
              ->back('first');
         $this->prepareQuery();

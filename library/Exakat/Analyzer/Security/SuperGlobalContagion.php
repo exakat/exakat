@@ -33,54 +33,51 @@ class SuperGlobalContagion extends Analyzer {
         // $_get = $_GET;
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs('Variable')
+             ->atomIs('Phpvariable')
              ->codeIs($vars)
              ->back('first')
              ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->codeIsNot($vars);
+             ->atomIs('Variable');
         $this->prepareQuery();
 
         // $_get = $_GET['3'];
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIsNot('Variable')
-             ->atomInside('Variablearray')
-             ->codeIs($vars)
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->atomIs('Phpvariable')
              ->back('first')
              ->outIs('LEFT')
              ->_as('result')
              ->atomIs('Variable')
-             ->codeIsNot($vars)
              ->back('result');
         $this->prepareQuery();
 
         // $_get['3'] = $_GET
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs('Variable')
-             ->codeIs($vars)
+             ->atomIs('Phpvariable')
              ->back('first')
              ->outIs('LEFT')
              ->_as('result')
-             ->atomIsNot('Variable')
-             ->atomInside('Variablearray')
-             ->codeIsNot($vars)
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->atomIs('Variablearray')
              ->back('result');
         $this->prepareQuery();
-        
+
         // $_get['3'] = $_GET[1]
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIsNot('Variable')
-             ->atomInside('Variablearray')
-             ->codeIs($vars)
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->atomIs('Phpvariable')
              ->back('first')
              ->outIs('LEFT')
              ->_as('result')
-             ->atomIsNot('Variable')
-             ->atomInside('Variablearray')
-             ->codeIsNot($vars)
+             ->atomIs('Array')
+             ->outIs('VARIABLE')
+             ->atomIs('Variablearray')
              ->back('result');
         $this->prepareQuery();
         

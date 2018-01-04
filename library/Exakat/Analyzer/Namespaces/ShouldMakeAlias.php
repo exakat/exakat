@@ -27,9 +27,9 @@ use Exakat\Analyzer\Analyzer;
 class ShouldMakeAlias extends Analyzer {
     public function analyze() {
         // No namespace ?
-        $this->atomIs('Nsname')
+        $this->atomIs(array('Nsname', 'Newcall'))
              ->tokenIs('T_NS_SEPARATOR')
-             ->hasNoIn('USE')
+             ->hasNoIn(array('USE', 'NAME'))
              ->hasNoParent('Usenamespace', array('NAME', 'USE'))  // use expression
              ->hasNoParent('Namespace', 'NAME')  // use expression
              ->has('fullnspath')
