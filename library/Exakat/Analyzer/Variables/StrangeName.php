@@ -27,10 +27,23 @@ use Exakat\Analyzer\Analyzer;
 class StrangeName extends Analyzer {
     public function analyze() {
         $names = $this->loadIni('php_strange_names.ini', 'variables');
-        
+
         $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs($names);
         $this->prepareQuery();
+
+        $this->atomIs(self::$VARIABLES_ALL)
+             ->regexIs('code', '(.)\\\\1{1,}');
+        $this->prepareQuery();
+
+/*
+    // base for letter diversity : this needs nore testing, as diversity drops with size of the name
+        $this->atomIs(self::$VARIABLES_ALL)
+             ->raw('filter{
+it.get().value("code").drop(1).split("").toUnique().size() / it.get().value("code").drop(1).length()
+             }');
+        $this->prepareQuery();
+*/
     }
 }
 
