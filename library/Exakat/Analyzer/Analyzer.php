@@ -1872,14 +1872,24 @@ GREMLIN;
         return $this->phpConfiguration;
     }
     
-    public function makeFullNsPath($functions) {
-        $cb = function ($x) {
-            $r = mb_strtolower($x);
-            if (isset($r[0]) && $r[0] != '\\') {
-                $r = '\\' . $r;
-            }
+    public function makeFullNsPath($functions, $constant = false) {
+        if ($constant === false) {
+            $cb = function ($x) {
+                $r = mb_strtolower($x);
+                if (isset($r[0]) && $r[0] != '\\') {
+                    $r = '\\' . $r;
+                }
             return $r;
-        };
+            };
+        } else {
+            $cb = function ($r) {
+                if (isset($r[0]) && $r[0] != '\\') {
+                    $r = '\\' . $r;
+                }
+            return $r;
+            };
+        }
+
         if (is_string($functions)) {
             return $cb($functions);
         } elseif (is_array($functions)) {
