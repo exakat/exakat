@@ -36,11 +36,10 @@ class NamespaceUsage extends Analyzer {
         $namespaces =  $this->makeFullNsPath($this->namespaces);
         $regex = '^('.addslashes(addslashes(implode('|', $namespaces))).')';
 
-        $this->atomIs(array('Nsname', 'Identifier', 'Newcall'))
+        $this->atomIs(array('Nsname', 'Identifier'))
              ->hasNoIn(array('NAME' , 'MEMBER', 'CONSTANT', 'ALIAS', 'CLASS'))
              ->has('fullnspath')
-             ->regexIs('fullnspath', $regex)
-             ;
+             ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
     }
 }

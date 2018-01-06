@@ -35,6 +35,7 @@ class IsModified extends Analyzer {
     public function analyze() {
         $atoms = array('Variable', 
                        'Phpvariable',
+                       'Variablearray',
                       );
 
         $this->atomIs(array('Variablearray', 'Variable'))
@@ -53,6 +54,7 @@ class IsModified extends Analyzer {
         // unset
         $this->atomIs('Unset')
              ->outIs('ARGUMENT')
+             ->outIsIE('VARIABLE')
              ->atomIs($atoms);
         $this->prepareQuery();
 
@@ -134,7 +136,7 @@ class IsModified extends Analyzer {
              ->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->_as('results')
-             ->back('first')
+             ->inIs('ARGUMENT')
              ->classDefinition()
              ->outIs('METHOD')
              ->analyzerIs('Classes/Constructor')

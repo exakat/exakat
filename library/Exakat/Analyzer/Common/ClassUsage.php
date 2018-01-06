@@ -41,7 +41,7 @@ class ClassUsage extends Analyzer {
              ->has('fullnspath')
              ->fullnspathIs($classes);
         $this->prepareQuery();
-
+return;
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
