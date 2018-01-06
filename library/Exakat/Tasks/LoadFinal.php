@@ -88,7 +88,7 @@ g.V().hasLabel("Identifier", "Nsname")
      .has("fullnspath")
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath"); }
-     .in("DEFINITION").hasLabel("Class", "Trait", "Interface")
+     .in("DEFINITION").hasLabel("Class", "Trait", "Interface", "Constant")
      .coalesce( __.out("ARGUMENT").has("rank", 0), 
                 __.hasLabel("Constant").out('NAME'), 
                 filter{ true; })
