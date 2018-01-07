@@ -2080,19 +2080,21 @@ SQL;
         if ($this->isContext(self::CONTEXT_NEW)) {
             $atom = 'Newcall';
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) {
-            if (strtolower($name->code) == 'define') { // no namespace for define...
+            if (strtolower($name->code) === '\\define') { 
                 $atom = 'Defineconstant';
-            } elseif ($name->fullnspath == '\\unset') {
+            } elseif (strtolower($name->code) === 'define') { 
+                $atom = 'Defineconstant';
+            } elseif ($name->fullnspath === '\\unset') {
                 $atom = 'Unset';
-            } elseif ($name->fullnspath == '\\list') {
+            } elseif ($name->fullnspath === '\\list') {
                 $atom = 'List';
-            } elseif ($name->fullnspath == '\\empty') {
+            } elseif ($name->fullnspath === '\\empty') {
                 $atom = 'Empty';
-            } elseif ($name->fullnspath == '\\isset') {
+            } elseif ($name->fullnspath === '\\isset') {
                 $atom = 'Isset';
-            } elseif ($name->fullnspath == '\\die') {
+            } elseif ($name->fullnspath === '\\die') {
                 $atom = 'Exit';
-            } elseif ($name->fullnspath == '\\exit') {
+            } elseif ($name->fullnspath === '\\exit') {
                 $atom = 'Exit';
             } else {
                 $atom = 'Functioncall';
