@@ -585,6 +585,14 @@ GREMLIN
         
         return $this;
     }
+
+    public function hasPropertyInside($property, $values) {
+        assert($this->assertProperty($property));
+        $gremlin = 'where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').has("'.$property.'", within(***)) )';
+        $this->addMethod($gremlin, makeArray($values));
+        
+        return $this;
+    }
     
     public function atomInside($atom) {
         assert($this->assertAtom($atom));
@@ -628,7 +636,18 @@ GREMLIN
         return $this;
     }
 
+    public function noPropertyInside($property, $values) {
+        assert($this->assertProperty($property));
+        // Check with Structures/Unpreprocessed
+        $gremlin = 'not(where( __.emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) )
+                          .times('.self::MAX_LOOPING.').has("'.$property.'", within(***)) ) )';
+        $this->addMethod($gremlin, makeArray($values));
+        
+        return $this;
+    }
+
     public function trim($property, $chars = '\'\"') {
+        assert($this->assertProperty($property));
         $this->addMethod('transform{it.'.$property.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1")}');
         
         return $this;
@@ -659,12 +678,14 @@ GREMLIN
     }
 
     public function has($property) {
+        assert($this->assertProperty($property));
         $this->addMethod('has(***)', $property);
         
         return $this;
     }
     
     public function is($property, $value = true) {
+        assert($this->assertProperty($property));
         if ($value === null) {
             $this->addMethod('has("'.$property.'", null)');
         } elseif ($value === true) {
@@ -687,18 +708,21 @@ GREMLIN
     }
 
     public function isHash($property, $hash, $index) {
+        assert($this->assertProperty($property));
         $this->addMethod('filter{ it.get().value("'.$property.'") in ***['.$index.']}', $hash);
         
         return $this;
     }
 
     public function isNotHash($property, $hash, $index) {
+        assert($this->assertProperty($property));
         $this->addMethod('filter{ !(it.get().value("'.$property.'") in ***['.$index.'])}', $hash);
         
         return $this;
     }
 
     public function isNot($property, $value = true) {
+        assert($this->assertProperty($property));
         if ($value === null) {
             $this->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", null)))');
         } elseif ($value === true) {
@@ -725,6 +749,7 @@ GREMLIN
     }
 
     public function isMore($property, $value = 0) {
+        assert($this->assertProperty($property));
         if (is_int($value)) {
             $this->addMethod('filter{ it.get().value("'.$property.'").toLong() > '.$value.'}');
         } elseif (is_string($value)) {
@@ -738,6 +763,7 @@ GREMLIN
     }
 
     public function isLess($property, $value = 0) {
+        assert($this->assertProperty($property));
         if (is_int($value)) {
             $this->addMethod('filter{ it.get().value("'.$property.'").toLong() < '.$value.'}');
         } elseif (is_string($value)) {
@@ -850,6 +876,7 @@ GREMLIN
     }
 
     public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
+        assert($this->assertProperty($property));
         if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
         } else {
@@ -866,6 +893,7 @@ GREMLIN
     }
 
     public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
+        assert($this->assertProperty($property));
         if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
         } else {
@@ -906,6 +934,7 @@ GREMLIN
     }
 
     public function savePropertyAs($property, $name) {
+        assert($this->assertProperty($property));
         if ($property === 'label') {
             $this->addMethod('sideEffect{ '.$name.' = it.get().label(); }');
         } else {
@@ -928,30 +957,35 @@ GREMLIN
     }
 
     public function isUppercase($property = 'fullcode') {
+        assert($this->assertProperty($property));
         $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
 
         return $this;
     }
 
     public function isLowercase($property = 'fullcode') {
+        assert($this->assertProperty($property));
         $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase()}');
 
         return $this;
     }
 
     public function isNotLowercase($property = 'fullcode') {
+        assert($this->assertProperty($property));
         $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toLowerCase()}');
 
         return $this;
     }
 
     public function isNotUppercase($property = 'fullcode') {
+        assert($this->assertProperty($property));
         $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toUpperCase()}');
 
         return $this;
     }
     
     public function isNotMixedcase($property = 'fullcode') {
+        assert($this->assertProperty($property));
         $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase() || it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
 
         return $this;
@@ -1917,6 +1951,8 @@ GREMLIN;
     }
 
     private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
+        assert($this->assertProperty($property));
+
         if (is_array($code) && empty($code) ) {
             return $this;
         }
@@ -1938,6 +1974,8 @@ GREMLIN;
     }
 
     private function propertyIsNot($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
+        assert($this->assertProperty($property));
+
         if ($caseSensitive === self::CASE_SENSITIVE) {
             $caseSensitive = '';
         } else {
@@ -1996,6 +2034,20 @@ GREMLIN;
             foreach($atom as $a) {
                 assert($a !== 'Property', 'Property is no more');
                 assert($a === ucfirst(mb_strtolower($a)), 'Wrong format for atom name : '.$a);
+            }
+        }
+        return true;
+    }
+
+    private function assertProperty($property) {
+        if (is_string($property)) {
+            assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
+            assert(property_exists('Exakat\Tasks\Helpers\Atom', $property), 'No such property in Atom : "'.$property.'"');
+        } else {
+            $properties = $property;
+            foreach($properties as $property) {
+                assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
+                assert(property_exists('Exakat\Tasks\Helpers\Atom', $property), 'No such property in Atom : "'.$property.'"');
             }
         }
         return true;
