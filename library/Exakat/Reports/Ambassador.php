@@ -173,6 +173,7 @@ class Ambassador extends Reports {
         $this->generateStats();
         $this->generateComplexExpressions();
         $this->generateVisibilitySuggestions();
+        $this->generateMethodSize();
 
         // Compatibility
         $this->generateCompilations();
@@ -2859,6 +2860,47 @@ HTML;
         $this->putBasedPage('altered_directives', $html);
     }
 
+    private function generateMethodSize() {
+
+        $methodsize = '';
+        $res = $this->sqlite->query(<<<SQL
+SELECT name, files.file, (end - begin) AS size 
+    FROM cit 
+    JOIN files 
+        ON files.id = cit.file
+    ORDER BY (end - begin) DESC
+
+SQL
+);
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $methodsize .= '<tr><td>'.PHPSyntax($row['name'])."</td><td>$row[file]</td><td>$row[size]</td></tr>\n";
+        }
+        
+        $methodsize = <<<HTML
+        <section id="used_settings" class="content">
+        	<div class="box">
+        		<div class="box-body">
+        			<div class="row">
+        				<div class="col-xs-12">
+        					<p class="textLead">This is an overview of the directives that are modified or read inside the application's code.</p>
+        					<table class="table table-striped">
+        						<tr></tr>
+        						<tr><th>Class</th><th>File</th><th>Size</th></tr>
+        						$methodsize
+        					</table>
+            		</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+
+HTML;
+
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'CONTENT', $methodsize);
+        $this->putBasedPage('method_size', $html);
+    }
+    
     private function generateStats() {
         $extensions = array(
                     'Summary' => array(
