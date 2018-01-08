@@ -50,7 +50,7 @@ class IsComposerNsname extends Analyzer {
         for($i = 0; $i < $n; ++$i) {
             $this->atomIs('Usenamespace')
                  ->outIs('USE')
-                 ->is('originpath', array_slice($list, $i * 10000, ($i + 1) * 10000));
+                 ->is('origin', array_slice($list, $i * 10000, ($i + 1) * 10000));
             $this->prepareQuery();
         }
 
