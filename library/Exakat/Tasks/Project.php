@@ -157,7 +157,7 @@ class Project extends Tasks {
         $this->logTime('Loading');
 
         // Dump is a child process
-        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -collect ';
+        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project;
         shell_exec($shell);
         $this->logTime('Dumped and inited');
 
@@ -256,7 +256,6 @@ class Project extends Tasks {
                             5 => $analyzers,
                             6 => '-u',
                         );
-
             $dumpConfig = new Config($args);
 
             $audit_end = time();
@@ -347,6 +346,7 @@ class Project extends Tasks {
                                 4 => '-T',
                                 5 => trim($theme, '"'), // No need to protect anymore, as this is internal
                                 6 => '-u',
+                                7 => '-collect',
                             );
 
                 $dumpConfig = new Config($args);
