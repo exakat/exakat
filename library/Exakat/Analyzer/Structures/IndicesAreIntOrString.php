@@ -47,8 +47,27 @@ class IndicesAreIntOrString extends Analyzer {
         // $x[a] and const a = 2.3
         $this->atomIs('Array')
              ->outIs('INDEX')
-             ->atomIs(array('Identifier', 'Nsname', 'Staticconstant'))
+             ->atomIs(array('Identifier', 'Nsname'))
              ->inIs('DEFINITION')
+             ->outIs('VALUE')
+             ->atomIs(array('Boolean', 'Real', 'Null', 'Arrayliteral')) // Functioncall is for array
+             ->back('first');
+        $this->prepareQuery();
+
+        // $x[a::constant] and class a { const constant = 2.3}
+        $this->atomIs('Array')
+             ->outIs('INDEX')
+             ->atomIs('Staticconstant')
+             ->outIs('CONSTANT')
+             ->savePropertyAs('code', 'constant')
+             ->inIs('CONSTANT')
+             ->outIs('CLASS')
+             ->inIs('DEFINITION')
+             ->outIs('CONST')
+             ->outIs('CONST')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'constant')
+             ->inIs('NAME')
              ->outIs('VALUE')
              ->atomIs(array('Boolean', 'Real', 'Null', 'Arrayliteral')) // Functioncall is for array
              ->back('first');
