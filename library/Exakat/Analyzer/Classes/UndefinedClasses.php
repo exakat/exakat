@@ -29,7 +29,8 @@ class UndefinedClasses extends Analyzer {
     public function dependsOn() {
         return array('Classes/IsExtClass',
                      'Composer/IsComposerNsname',
-                     'Interfaces/IsExtInterface');
+                     'Interfaces/IsExtInterface',
+                    );
     }
     
     public function analyze() {
@@ -38,7 +39,7 @@ class UndefinedClasses extends Analyzer {
              ->outIs('NEW')
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->atomIsNot(array('Self', 'Parent', 'Static'))
              ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->back('first');
@@ -49,7 +50,7 @@ class UndefinedClasses extends Analyzer {
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->atomIsNot(array('Self', 'Parent', 'Static'))
              ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->noInterfaceDefinition()
@@ -72,7 +73,7 @@ class UndefinedClasses extends Analyzer {
              ->analyzerIsNot('Composer/IsComposerNsname')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->atomIsNot(array('Self', 'Parent', 'Static'))
              ->analyzerIsNot('Classes/IsExtClass')
              ->noClassDefinition()
              ->noInterfaceDefinition()
