@@ -465,7 +465,7 @@ GREMLIN;
 
     protected function hasNoInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
-        $stop = array("File", "Closure", "Function", "Closure", "Method", "Class", "Trait", "Classanonymous");
+        $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
 
         $atom = makeArray($atom);
         $stop = array_unique(array_merge($stop, $atom));
@@ -628,7 +628,7 @@ GREMLIN
 
     public function noAtomInside($atom) {
         assert($this->assertAtom($atom));
-        // Check with Structures/Unpreprocessed
+
         $gremlin = 'not(where( __.repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) ).emit( )
                           .times('.self::MAX_LOOPING.').hasLabel(within(***)) ) )';
         $this->addMethod($gremlin, makeArray($atom));
@@ -638,10 +638,21 @@ GREMLIN
 
     public function noPropertyInside($property, $values) {
         assert($this->assertProperty($property));
-        // Check with Structures/Unpreprocessed
+
         $gremlin = 'not(where( __.emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) )
                           .times('.self::MAX_LOOPING.').has("'.$property.'", within(***)) ) )';
         $this->addMethod($gremlin, makeArray($values));
+        
+        return $this;
+    }
+
+    public function noAtomPropertyInside($atom, $property, $values) {
+        assert($this->assertAtom($atom));
+        assert($this->assertProperty($property));
+        // Check with Structures/Unpreprocessed
+        $gremlin = 'not(where( __.emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) )
+                          .times('.self::MAX_LOOPING.').hasLabel(within(***)).filter{ it.get().value("'.$property.'") == '.$values.' } ) )';
+        $this->addMethod($gremlin, makeArray($atom));
         
         return $this;
     }
@@ -1462,7 +1473,8 @@ GREMLIN
     }
 
     public function hasNoClassTrait() {
-        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Trait'));
+        // Method are a valid sub-part of class or traits. 
+        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Trait', 'Method'));
     }
 
     public function goToClassInterface() {
