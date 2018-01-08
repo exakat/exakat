@@ -2041,13 +2041,13 @@ GREMLIN;
 
     private function assertProperty($property) {
         if (is_string($property)) {
-            assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
-            assert(property_exists('Exakat\Tasks\Helpers\Atom', $property), 'No such property in Atom : "'.$property.'"');
+            assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') || ($property === 'label') , 'Wrong format for property name : "'.$property.'"');
+            assert(property_exists('Exakat\Tasks\Helpers\Atom', $property)|| ($property === 'label'), 'No such property in Atom : "'.$property.'"');
         } else {
             $properties = $property;
             foreach($properties as $property) {
-                assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
-                assert(property_exists('Exakat\Tasks\Helpers\Atom', $property), 'No such property in Atom : "'.$property.'"');
+                assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') || ($property === 'label') , 'Wrong format for property name : "'.$property.'"');
+                assert(property_exists('Exakat\Tasks\Helpers\Atom', $property)|| ($property === 'label'), 'No such property in Atom : "'.$property.'"');
             }
         }
         return true;
