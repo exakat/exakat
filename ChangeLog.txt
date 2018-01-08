@@ -8,6 +8,19 @@ Version 1.0.11 (Wood Dragon of Horn, coming up)
 + Tokenizer
     + 
  
+Version 1.0.11 (Wood Dragon of Well, 2018-01-08)
++ Architecture
+    + Added assertion for property name.
++ Report
+    + Ambassador : Added report of classes's size.
+    + Fixed missing audit end's time. 
++ Analyzer
+    + New analysis : Sqlite3 doesn't escape " 
+    + Upgraded analysis : Strange names also report qqqq sequences in variable names
+    + Checked unit tests : 2617 / 2657 test pass (99% pass). 
++ Tokenizer
+    + Fixed fullnspath handling for constants (case insensitive for the constant name)
+ 
 Version 1.0.10 (Wood Wolf of Legs, 2018-01-01)
 + Architecture
     + Fixed Sqlite3 escaping error : use ', not "
