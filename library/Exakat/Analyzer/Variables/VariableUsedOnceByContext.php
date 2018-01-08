@@ -36,7 +36,6 @@ class VariableUsedOnceByContext extends Analyzer {
     public function analyze() {
         $query = <<<GREMLIN
 g.V().hasLabel("Variable", "Variablearray", "Variableobject")
-     .not(has("code", "\\\$this"))
      .not(where( __.in("MEMBER") ) )
                .where( repeat( __.in({$this->linksDown}))
                             .until(hasLabel("File")).emit(hasLabel("Function")).hasLabel("Function")
@@ -58,7 +57,7 @@ GREMLIN;
                    .sideEffect{counts = [:]}
                              .repeat( out().not( where( __.hasLabel("Function", "Closure", "Method") ) ) )
                              .emit( ).times('.self::MAX_LOOPING.')
-                             .hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this"))
+                             .hasLabel("Variable", "Variablearray", "Variableobject")
                              .not( where( __.in("MEMBER") ) )
                              .sideEffect{ k = it.get().value("code"); 
                                          if (counts[k] == null) {
@@ -70,8 +69,9 @@ GREMLIN;
                           )
                    .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
                    .repeat( __.out().not( where( __.hasLabel("Function", "Closure") ) )  )
-                   .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) )
+                   .emit( )
                    .times('.self::MAX_LOOPING.')
+                   .hasLabel("Variable", "Variablearray", "Variableobject")
                    .filter{ it.get().value("code") in names }
                    ');
         $this->prepareQuery();
