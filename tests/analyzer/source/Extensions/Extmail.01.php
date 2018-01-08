@@ -7,4 +7,7 @@ $message = wordwrap($message, 70, "\r\n");
 
 // Send
 mail('caffeinated@example.com', 'My Subject', $message);
+
+new Mail('notCaffeinated@example.com', 'My Other Subject', $message2);
+
 ?>

@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('$abccccd', 
-                      '$abcdddd', 
-                      '$aaaabcd', 
-                      '$abbbbcd', 
+$expected     = array('$abccccd',
+                      '$abcdddd',
+                      '$aaaabcd',
+                      '$abbbbcd',
                       '$aaabcd',
                       '$aaabcd',
                       '$abcddddwwww',

@@ -3,7 +3,7 @@
 $expected     = array('mhash(\'hash\', \'data\')',
                      );
 
-$expected_not = array(
+$expected_not = array('\a\mhash(\'hasha\', \'dataa\')',
                      );
 
 ?>

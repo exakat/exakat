@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$_POST[2]', 
+$expected     = array('$_POST[2]',
                       '$_POST[3][4]',
                       '$_COOKIE[4]',
                       '$_COOKIE[4][5]',
