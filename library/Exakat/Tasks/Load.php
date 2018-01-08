@@ -4799,7 +4799,10 @@ SQL;
                     $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
                     return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
                 } else {
-                    return array($name->fullcode, self::NOT_ALIASED);
+                    $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function ($r) {
+                        return mb_strtolower($r[1]).'\\'.$r[2];
+                    }, $name->fullcode);
+                    return array($fullnspath, self::NOT_ALIASED);
                 }
             } else {
                 return array(mb_strtolower($name->fullcode), self::NOT_ALIASED);
