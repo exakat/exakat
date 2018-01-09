@@ -1542,10 +1542,13 @@ SQL;
 
     private function processClosingTag() {
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_INLINE_HTML &&
-            in_array($this->tokens[$this->id + 2][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO))) {
+            in_array($this->tokens[$this->id + 2][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO, \Exakat\Tasks\T_INLINE_HTML))) {
 
-            ++$this->id;
-            $this->processInlinehtml();
+            // it is possible to have multiple INLINE_HTML in a row : <?php//b ? >
+            do {
+                ++$this->id;
+                $this->processInlinehtml();
+            } while( $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_INLINE_HTML);
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
@@ -1557,6 +1560,7 @@ SQL;
             }
         } elseif (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO))) {
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
+
                 $this->processOpenWithEcho();
                 if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON) {
                     $this->processSemicolon();
