@@ -25,6 +25,7 @@ namespace Exakat\Analyzer;
 
 use Exakat\Description;
 use Exakat\Datastore;
+use Exakat\Data\Dictionary;
 use Exakat\Config;
 use Exakat\Tokenizer\Token;
 use Exakat\Exceptions\GremlinException;
@@ -108,6 +109,8 @@ abstract class Analyzer {
     protected $gremlin = null;
     
     protected $linksDown = '';
+    
+    private $dictCode = array();
 
     public function __construct($gremlin = null, $config) {
         $this->gremlin = $gremlin;
@@ -131,6 +134,8 @@ abstract class Analyzer {
         if (!isset(self::$datastore)) {
             self::$datastore = new Datastore($this->config);
         }
+        
+        $this->dictCode = new Dictionary(self::$datastore);
         
         $this->linksDown = Token::linksAsList();
     }
@@ -840,8 +845,18 @@ GREMLIN
         if (is_array($code) && empty($code)) {
             return $this;
         }
+        
+        $translatedCode = array();
+        $code = makeArray($code);
+        $translatedCode = $this->dictCode->translate($code);
 
-        return $this->propertyIs('code', $code, $caseSensitive);
+        if (empty($translatedCode)) {
+            return $this;
+        }
+
+        $this->addMethod('filter{ it.get().value("code") in ***; }', $translatedCode);
+
+        return $this;
     }
 
     public function codeIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
@@ -849,7 +864,17 @@ GREMLIN
             return $this;
         }
 
-        return $this->propertyIsNot('code', $code, $caseSensitive);
+        $translatedCode = array();
+        $code = makeArray($code);
+        $translatedCode = $this->dictCode->translate($code);
+
+        if (empty($translatedCode)) {
+            return $this;
+        }
+        
+        $this->addMethod('filter{ !(it.get().value("code") in ***); }', $translatedCode);
+
+        return $this;
     }
 
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
@@ -888,7 +913,7 @@ GREMLIN
 
     public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank') {
+        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -905,7 +930,7 @@ GREMLIN
 
     public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank') {
+        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -1042,7 +1067,6 @@ GREMLIN
              ->outIs('NAME')
              ->samePropertyAs('code', 'constant')
              ->inIs('NAME');
-             
         return $this;
     }
 
@@ -1053,21 +1077,45 @@ GREMLIN
     }
 
     public function regexIs($column, $regex) {
-        $this->addMethod(<<<GREMLIN
+        if ($column === 'code') {
+            $values = $this->dictCode->grep($regex);
+            
+            if (empty($values)) {
+                return $this;
+            }
+            
+            $this->addMethod('has("code", within(***) )', $values);
+
+            return $this;
+        } else {
+            $this->addMethod(<<<GREMLIN
 filter{ (it.get().value('$column') =~ "$regex" ).getCount() != 0 }
 GREMLIN
 );
 
-        return $this;
+            return $this;
+        }
     }
 
     public function regexIsNot($column, $regex) {
-        $this->addMethod(<<<GREMLIN
+        if ($column === 'code') {
+            $values = $this->dictCode->grep($regex);
+            
+            if (empty($values)) {
+                return $this;
+            }
+            
+            $this->addMethod('not( has("code", within(***) ) )', $values);
+
+            return $this;
+        } else {
+            $this->addMethod(<<<GREMLIN
 filter{ (it.get().value('$column') =~ "$regex" ).getCount() == 0 }
 GREMLIN
 );
 
-        return $this;
+            return $this;
+        }
     }
 
     protected function outIs($link) {

@@ -149,11 +149,15 @@ GREMLIN;
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
      .not(where( __.in("DEFINITION")))
-     .map{ it.get().value("code"); }
+     .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
+     .map{ parts.last().toLowerCase() }
      .unique()
 GREMLIN;
 
         $res = $this->gremlin->query($query);
+        if (empty($res->toArray())) {
+            return;
+        }
         
         $functions = array_values(array_intersect($res->toArray(), $functions));
 
@@ -161,9 +165,10 @@ GREMLIN;
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
      .not(where( __.in("DEFINITION")))
-     .filter{ it.get().value("code").toLowerCase() in arg1 }
+     .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
+     .filter{ name = parts.last().toLowerCase(); name in arg1 }
      .sideEffect{
-         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+         fullnspath = "\\\\" + name;
          it.get().property("fullnspath", fullnspath); 
      }.count();
 

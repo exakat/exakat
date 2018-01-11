@@ -21,23 +21,38 @@
 */
 
 
-namespace Exakat\Analyzer\Type;
+namespace Exakat\Data;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Datastore;
 
-class ShouldBeSingleQuote extends Analyzer {
-    public function analyze() {
-        // $a = "abc";
-        $this->atomIs('String')
-             ->hasNoOut('CONCAT')
-             ->is('delimiter', '"')
-             ->regexIsNot('code', "/'/")
-             ->regexIsNot('code', '/\\[nrtvef"$]/')
-             ->regexIsNot('code', '/\\\0[0-7]/')
-             ->regexIsNot('code', '/\\\x[0-9A-Fa-f]{1,2}/')
-             ->regexIsNot('code', '/\\\u\{[0-9A-Fa-f]+\}/');
-        $this->prepareQuery();
+class Dictionary {
+    private $dictionary = array();
+    
+    public function __construct($datastore) {
+        $this->dictionary = $datastore->getAllHash('dictionary');
     }
-}
 
-?>
+    public function translate($code) {
+        $return = array();
+
+        foreach($code as $c) {
+            if (isset($this->dictionary[$c])) {
+                $return[] = $this->dictionary[$c];
+            }
+        }
+        
+        return $return;
+    }
+    
+    public function grep($regex) {
+        $keys = preg_grep($regex, array_keys($this->dictionary));
+        
+        $return = array();
+        foreach($keys as $k) {
+            $return[] = $this->dictionary[$k];
+        }
+        
+        return $return;
+    }
+
+}

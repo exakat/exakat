@@ -525,6 +525,7 @@ SQL;
         }
 
         $this->datastore->cleanTable('tokenCounts');
+        $this->datastore->cleanTable('dictionary');
         $this->logTime('Init');
 
         if ($filename = $this->config->filename) {
@@ -904,7 +905,7 @@ SQL;
         $string->constant    = $constant;
 
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
-            $string->delimiter = $closeQuote;
+            $string->delimiter = trim($closeQuote);
             $string->heredoc   = $openQuote[3] !== "'";
         }
 

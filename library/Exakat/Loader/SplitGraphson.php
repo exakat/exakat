@@ -58,6 +58,8 @@ class SplitGraphson {
     private $path = null;
     private $pathDefinition = null;
     
+    private $dictCode = array();
+    
     public function __construct($gremlin, $config, $plugins) {
         $this->config = $config;
         
@@ -133,6 +135,9 @@ GREMLIN;
         self::saveTokenCounts();
 
         display('loaded nodes (duration : '.number_format( ($end - $begin) * 1000, 2).' ms)');
+
+        $datastore = new Datastore($this->config);
+        $datastore->addRow('dictionary', $this->dictCode);
 
         $this->cleanCsv();
         display('Cleaning CSV');
@@ -226,7 +231,10 @@ GREMLIN;
                 continue;
             } 
             
-            $j->id;
+            if (!isset($this->dictCode[$j->properties['code'][0]->value])) {
+                $this->dictCode[$j->properties['code'][0]->value] = count($this->dictCode);
+            }
+            $j->properties['code'][0]->value = $this->dictCode[$j->properties['code'][0]->value];
             $X = $this->json_encode($j);
             assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
             fwrite($fp, $X.PHP_EOL);
@@ -237,8 +245,8 @@ GREMLIN;
         $begin = microtime(true);
         $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'");');
         $end = microtime(true);
+
         unlink($this->path);
-        
     }
 
     public function saveDefinitions($exakatDir, $calls) {

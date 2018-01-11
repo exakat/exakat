@@ -31,21 +31,21 @@ class MalformedOctal extends Analyzer {
     public function analyze() {
         // malformed Octals
         $this->atomIs('Integer')
-             ->regexIs('code', '^[+-]?0[0-9]+\\$')
-             ->regexIs('code', '[89]');
+             ->regexIs('code', '/^[+-]?0[0-9]+$/')
+             ->regexIs('code', '/[89]/');
         $this->prepareQuery();
 
         // Octals beginning with too many 0
         $this->atomIs('Integer')
-             ->regexIs('code', '^[+-]?0[0-9]+\\$')
-             ->regexIs('code', '^00+')
+             ->regexIs('code', '/^[+-]?0[0-9]+$/')
+             ->regexIs('code', '/^[+-]?00+/')
              ->codeIsNot('0000');
         $this->prepareQuery();
 
         // integer that is defined but will be too big and will be turned into a float
         $maxSize = log(PHP_INT_MAX) / log(2) / 3 + 1;
         $this->atomIs('Real')
-             ->regexIs('code', '^[+-]?0[0-7]{'.$maxSize.',}\\$');
+             ->regexIs('code', '/^[+-]?0[0-7]{'.$maxSize.',}$/');
         $this->prepareQuery();
     }
 }

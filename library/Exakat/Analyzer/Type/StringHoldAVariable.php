@@ -38,14 +38,14 @@ class StringHoldAVariable extends Analyzer {
         $this->atomIs('Heredoc')
              ->isNot('heredoc', true)
              ->outIs('CONCAT')
-             ->regexIs('code', '\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*');
+             ->regexIs('code', '/\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/s');
         $this->prepareQuery();
 
         // <<<NOWDOC NOWDOC (NOWDOC or HEREDOC with wrong syntax)
         $this->atomIs('Heredoc')
-             ->savePropertyAs('code', 'd')
+             ->savePropertyAs('delimiter', 'd')
              ->outIs('CONCAT')
-             ->regexIs('code', '" + d + "')
+             ->regexIs('fullcode', '\\\\b" + d + "\\\\b')
              ->back('first');
         $this->prepareQuery();
     }
