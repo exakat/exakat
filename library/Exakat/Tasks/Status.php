@@ -82,10 +82,12 @@ class Status extends Tasks {
             if ($json->project === $project) {
                 $status['status'] = $json->step;
             } else {
-                $status['status'] = 'Not running';
+                $inited = $this->datastore->getHash('inited');
+                $status['status'] = empty($inited) ? 'Init phase' : 'Not running';
             }
         } else {
-            $status['status'] = 'Not running';
+            $inited = $this->datastore->getHash('inited');
+            $status['status'] = empty($inited) ? 'Init phase' : 'Not running';
         }
 
         switch($this->config->project_vcs) {

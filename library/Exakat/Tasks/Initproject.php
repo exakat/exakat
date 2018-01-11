@@ -378,7 +378,8 @@ INI;
         }
 
         display('Counting files');
-        $this->datastore->addRow('hash', array('status' => 'Initproject'));
+        $this->datastore->addRow('hash', array('status' => 'Initproject',
+                                               'inited' => date('r')));
 
         if (!$skipFiles) {
             display('Running files');
