@@ -29,14 +29,14 @@ class FopenMode extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\fopen')
              ->outWithRank('ARGUMENT', 1)
-             ->regexIsNot('code', 'b')
+             ->regexIsNot('code', '/b/')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\fopen')
              ->outWithRank('ARGUMENT', 1)
-             ->regexIs('code', 'b')
-             ->regexIs('code', 't')
+             ->regexIs('code', '/b/')
+             ->regexIs('code', '/t/')
              ->back('first');
         $this->prepareQuery();
     }

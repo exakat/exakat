@@ -33,6 +33,7 @@ class UselessGlobal extends Analyzer {
     }
     
     public function analyze() {
+        $globals = $this->dictCode->translate(array('$GLOBALS'));
 
         // Global are unused if used only once
         $query = <<<GREMLIN
@@ -40,33 +41,39 @@ g.V().hasLabel("Globaldefinition").values("code")
 GREMLIN;
         $inglobal = $this->query($query)->toArray();
 
-        $query = <<<'GREMLIN'
-g.V().hasLabel("Phpvariable").has("code", "\$GLOBALS").in("VARIABLE").hasLabel("Array").values("globalvar")
+        if (empty($globals)) {
+            $inGlobals = array();
+        } else {
+            $query = <<<GREMLIN
+g.V().hasLabel("Phpvariable").has("code", {$globals[0]}).in("VARIABLE").hasLabel("Array").values("globalvar")
 GREMLIN;
-        $inGLobals = $this->query($query)->toArray();
+            $inGlobals = $this->query($query)->toArray();
+        }
 
         $query = <<<'GREMLIN'
-g.V().hasLabel("Php").out('CODE').repeat(__.out().not(hasLabel("Function", "Class", "Classanonymous", "Closure", "Trait", "Interface")) ).emit(hasLabel("Variable")).times(15).values('code')
+g.V().hasLabel("Php").out('CODE')
+     .repeat(__.out().not(hasLabel("Function", "Class", "Classanonymous", "Closure", "Trait", "Interface")) ).emit().times(15)
+     .hasLabel("Variable").values('code');
 GREMLIN;
         $implicitGLobals = $this->query($query)->toArray();
 
-        $counts = array_count_values(array_merge($inGLobals, $inglobal, $implicitGLobals));
+        $counts = array_count_values(array_merge($inGlobals, $inglobal, $implicitGLobals));
         $loneGlobal = array_filter($counts, function ($x) { return $x == 1; });
         $loneGlobal = array_keys($loneGlobal);
 
         if (!empty($loneGlobal)) {
             $this->atomIs('Globaldefinition')
-                 ->codeIs($loneGlobal);
+                 ->codeIs($loneGlobal, self::NO_TRANSLATE);
             $this->prepareQuery();
-
-            $this->atomIs('Phpvariable')
-                 ->codeIs('$GLOBALS')
-                 ->inIs('VARIABLE')
-                 ->atomIs('Array')
-                 ->_as('results')
-                 ->is('globalvar', $loneGlobal)
-                 ->back('results');
-            $this->prepareQuery();
+            
+            if (!empty($globals)) {
+                $this->atomIs('Phpvariable')
+                     ->codeIs($globals, self::NO_TRANSLATE)
+                     ->inIs('VARIABLE')
+                     ->atomIs('Array')
+                     ->is('globalvar', $loneGlobal);
+                $this->prepareQuery();
+            }
         }
 
         // used only once

@@ -250,6 +250,13 @@ GREMLIN;
                 $j->properties['propertyname'][0]->value = $this->dictCode[$j->properties['propertyname'][0]->value];
             }
 
+            if (isset($j->properties['globalvar']) ) {
+                if (!isset($this->dictCode[$j->properties['globalvar'][0]->value])) {
+                    $this->dictCode[$j->properties['globalvar'][0]->value] = count($this->dictCode);
+                }
+                $j->properties['globalvar'][0]->value = $this->dictCode[$j->properties['globalvar'][0]->value];
+            }
+
             $X = $this->json_encode($j);
             assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
             fwrite($fp, $X.PHP_EOL);

@@ -30,7 +30,7 @@ class WrongName extends Analyzer {
         $this->atomIs('Method')
              ->outIs('NAME')
              ->codeIsNot(array('__construct', '__destruct', '__call',  '__callStatic',  '__get',  '__set',  '__isset',  '__unset',  '__sleep',  '__wakeup',  '__tostring',  '__invoke',  '__set_state', '__clone', '__debuginfo'))
-             ->regexIs('code', '^__.*')
+             ->regexIs('code', '/^__.*/')
              ->back('first');
         $this->prepareQuery();
     }

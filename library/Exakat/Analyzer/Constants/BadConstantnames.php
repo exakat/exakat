@@ -40,7 +40,7 @@ class BadConstantnames extends Analyzer {
         $this->atomIs('Const')
              ->outIs('CONST')
              ->outIs('NAME')
-             ->regexIs('code', '^__(.*)__\\$');
+             ->regexIs('code', '/^__(.*)__$/');
         $this->prepareQuery();
     }
 }

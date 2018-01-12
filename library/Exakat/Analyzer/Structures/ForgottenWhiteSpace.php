@@ -32,14 +32,14 @@ class ForgottenWhiteSpace extends Analyzer {
         $this->atomIs('File')
              ->outIs('FILE')
              ->outWithRank('EXPRESSION', 0)
-             ->regexIs('code', '^\\\\s+\\$');
+             ->regexIs('code', '/^\s+$/');
         $this->prepareQuery();
 
         // Spot the last element
         $this->atomIs('File')
              ->outIs('FILE')
              ->outWithRank('EXPRESSION', 'last')
-             ->regexIs('code', '^\\\\s+\\$');
+             ->regexIs('code', '/^\s+$/');
         $this->prepareQuery();
     }
 }

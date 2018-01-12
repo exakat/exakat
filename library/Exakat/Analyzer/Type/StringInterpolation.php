@@ -33,7 +33,7 @@ class StringInterpolation extends Analyzer {
              ->atomIs(array('Variable', 'Array', 'Member'))
              ->isNot('enclosing', true)
              ->nextSibling('CONCAT')
-             ->regexIs('code', '^(->|\\\\[|\\\\{|::)')
+             ->regexIs('code', '/^(->|\[|\{|::)/')
              ->back('first');
         $this->prepareQuery();
     }

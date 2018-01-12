@@ -5,7 +5,7 @@ $expected     = array('$abccccd',
                       '$aaaabcd',
                       '$abbbbcd',
                       '$aaabcd',
-                      '$aaabcd',
+                      '$aabcd',
                       '$abcddddwwww',
                       '$abcDDDDwwww',
                      );
