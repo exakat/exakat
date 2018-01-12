@@ -33,7 +33,7 @@ class DirectCallToMagicMethod extends Analyzer {
         $this->atomIs('Methodcallname')
              ->codeIs($magicMethods)
              ->inIs('METHOD')
-             ->raw('where( __.out("CLASS").has("code", within("static", "parent", "self")).count().is(eq(0)) )');
+             ->raw('not( where( __.out("CLASS").hasLabel(within("Static", "Parent", "Self"))) )');
         $this->prepareQuery();
     }
 }

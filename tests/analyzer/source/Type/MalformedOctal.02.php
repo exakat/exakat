@@ -10,4 +10,6 @@ $tooManyZeros = 0012;
 
 $tooManyZeros = 00021;
 
+$ok = 012;
+
 ?>

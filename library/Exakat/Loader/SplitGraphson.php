@@ -231,10 +231,25 @@ GREMLIN;
                 continue;
             } 
             
-            if (!isset($this->dictCode[$j->properties['code'][0]->value])) {
-                $this->dictCode[$j->properties['code'][0]->value] = count($this->dictCode);
+            $v = $j->properties['code'][0]->value;
+            if (!isset($this->dictCode[$v])) {
+                $this->dictCode[$v] = count($this->dictCode);
             }
-            $j->properties['code'][0]->value = $this->dictCode[$j->properties['code'][0]->value];
+            $j->properties['code'][0]->value = $this->dictCode[$v];
+            
+            $v = mb_strtolower($v);
+            if (!isset($this->dictCode[$v])) {
+                $this->dictCode[$v] = count($this->dictCode);
+            }
+            $j->properties['lccode'][0]->value = $this->dictCode[$v];
+
+            if (isset($j->properties['propertyname']) ) {
+                if (!isset($this->dictCode[$j->properties['propertyname'][0]->value])) {
+                    $this->dictCode[$j->properties['propertyname'][0]->value] = count($this->dictCode);
+                }
+                $j->properties['propertyname'][0]->value = $this->dictCode[$j->properties['propertyname'][0]->value];
+            }
+
             $X = $this->json_encode($j);
             assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
             fwrite($fp, $X.PHP_EOL);

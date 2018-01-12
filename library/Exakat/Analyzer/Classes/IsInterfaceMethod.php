@@ -29,22 +29,20 @@ class IsInterfaceMethod extends Analyzer {
     public function analyze() {
         // interface extended in the local class
         $this->atomIs('Method')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->saveMethodName('name')
              ->goToClass()
              ->outIs('IMPLEMENTS')
              ->interfaceDefinition()
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->saveMethodName('name2')
+             ->filter('name == name2')
              ->back('first');
         $this->prepareQuery();
 
         // interface extended in the parent interface
         $this->atomIs('Method')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->saveMethodName('name')
              ->goToClass()
              ->outIs('IMPLEMENTS')
              ->interfaceDefinition()
@@ -52,23 +50,22 @@ class IsInterfaceMethod extends Analyzer {
              ->interfaceDefinition()
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->saveMethodName('name2')
+             ->filter('name == name2')
              ->back('first');
         $this->prepareQuery();
         
         // interface defined in the parents
         $this->atomIs('Method')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->saveMethodName('name')
              ->goToClass()
              ->goToAllParents()
              ->outIs('IMPLEMENTS')
              ->interfaceDefinition()
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->saveMethodName('name2')
+             ->filter('name == name2')
              ->back('first');
         $this->prepareQuery();
 
@@ -85,7 +82,7 @@ class IsInterfaceMethod extends Analyzer {
             // interface locally implemented
             $this->atomIs('Method')
                  ->outIs('NAME')
-                 ->codeIs($methods)
+                 ->codeIs($methods, self::TRANSLATE, self::CASE_INSENSITIVE)
                  ->inIs('NAME')
                  ->inIs('METHOD')
                  ->atomIs('Class')
@@ -97,7 +94,7 @@ class IsInterfaceMethod extends Analyzer {
             // interface implemented by parents
             $this->atomIs('Method')
                  ->outIs('NAME')
-                 ->codeIs($methods)
+                 ->codeIs($methods, self::TRANSLATE, self::CASE_INSENSITIVE)
                  ->inIs('NAME')
                  ->inIs('METHOD')
                  ->atomIs('Class')

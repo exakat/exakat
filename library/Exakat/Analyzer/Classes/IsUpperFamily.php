@@ -33,15 +33,14 @@ class IsUpperFamily extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->savePropertyAs('code', 'method')
+             ->savePropertyAs('fullnspath', 'methode')
              
              ->goToClass()
-             ->raw('where( __.out("METHOD").hasLabel("Method").out("NAME").filter{it.get().value("code").toLowerCase() == method.toLowerCase() }.count().is(eq(0)) )')
+             ->raw('not( where( __.out("METHOD").hasLabel("Method").filter{ (it.get().value("fullnspath") =~ "::" + methode ).getCount() != 0 } ) )')
 
              ->goToAllParents()
              ->atomIsNot('Interface')
-             ->raw('where( __.out("METHOD").hasLabel("Method").out("NAME").filter{it.get().value("code").toLowerCase() == method.toLowerCase() }.count().is(neq(0)) )')
+             ->raw('where( __.out("METHOD").hasLabel("Method").filter{ (it.get().value("fullnspath") =~ "::" + methode ).getCount() != 0 } )')
 
              ->back('first');
         $this->prepareQuery();

@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class ExitUsage extends Analyzer {
     public function dependsOn() {
         return array('Structures/NoDirectAccess',
-                     'Files/IsCliScript');
+                     'Files/IsCliScript',
+                    );
     }
     
     public function analyze() {

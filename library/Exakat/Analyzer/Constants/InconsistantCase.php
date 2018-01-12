@@ -29,9 +29,9 @@ class InconsistantCase extends Analyzer {
 
     public function analyze() {
         $mapping = <<<GREMLIN
-if (it.get().value('code') == it.get().value('code').toLowerCase()) { 
+if (it.get().value('code') in ***) { 
     x2 = 'lower'; 
-} else if (it.get().value('code') == it.get().value('code').toUpperCase()) { 
+} else if (it.get().value('code') in ***) { 
     x2 = 'upper'; 
 } else {
     x2 = 'mixed'; 
@@ -41,8 +41,11 @@ GREMLIN;
                          'UPPERCASE' => 'upper',
                          'Mixed'     => 'mixed');
 
+        $lower = $this->dictCode->translate(array('true', 'false', 'null'));
+        $upper = $this->dictCode->translate(array('TRUE', 'FALSE', 'NULL'));
+
         $this->atomIs(array('Null', 'Boolean'))
-             ->raw('map{ '.$mapping.' }')
+             ->raw('map{ '.$mapping.' }', $lower, $upper)
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
 
@@ -64,7 +67,7 @@ GREMLIN;
         $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
 
         $this->atomIs(array('Null', 'Boolean'))
-             ->raw('sideEffect{ '.$mapping.' }')
+             ->raw('map{ '.$mapping.' }', $lower, $upper)
              ->raw('filter{ x2 in '.$types.'}')
              ->back('first');
         $this->prepareQuery();

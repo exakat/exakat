@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class CouldBeClassConstant extends Analyzer {
     public function dependsOn() {
         return array('Classes/IsModified',
-                     'Classes/LocallyUnusedProperty');
+                     'Classes/LocallyUnusedProperty',
+                    );
     }
     
     public function analyze() {
@@ -56,8 +57,8 @@ class CouldBeClassConstant extends Analyzer {
                 // usage as property with $this
              ->raw('not( __.out("METHOD")
                            .where( __.repeat( __.out() ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Member")
-                                                .where( __.out("OBJECT").has("code", "\$this") )
-                                                .where( __.out("MEMBER").filter{ it.get().value("code").toLowerCase() == name.toLowerCase() } )
+                                                .where( __.out("OBJECT").hasLabel("This") )
+                                                .where( __.out("MEMBER").filter{ it.get().value("code") == name } )
                                                 .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
                              ) )')
 
@@ -65,7 +66,7 @@ class CouldBeClassConstant extends Analyzer {
              ->raw('not( __.out("METHOD")
                            .where( __.repeat( __.out( ) ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Staticproperty")
                                                 .where( __.out("CLASS").has("fullnspath").filter{ it.get().value("fullnspath") == fnp } )
-                                                .where( __.out("MEMBER").filter{ it.get().value("code").toLowerCase() == staticName.toLowerCase() } )
+                                                .where( __.out("MEMBER").filter{ it.get().value("code") == staticName } )
                                                 .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
                              ) )')
 

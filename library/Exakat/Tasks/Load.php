@@ -1135,7 +1135,7 @@ SQL;
             $fullnspath = $this->makeAnonymous('function');
             $aliased    = self::NOT_ALIASED;
         } elseif ( $function->atom === 'Method') {
-            $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.$name->code;
+            $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($name->code);
             $aliased    = self::NOT_ALIASED;
         } else {
             assert(false, 'Wrong type of function '.$function->atom);
@@ -2121,6 +2121,9 @@ SQL;
             $functioncall->aliased    = $aliased;
 
             $this->addCall('class', $fullnspath, $functioncall);
+        } elseif ($atom === 'Methodcallname') {
+            $functioncall->fullnspath = mb_strtolower($name->code);
+            $functioncall->aliased    = self::NOT_ALIASED;
         } elseif ($getFullnspath === self::WITH_FULLNSPATH ||
                   $name->fullnspath !== '\\list') {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');

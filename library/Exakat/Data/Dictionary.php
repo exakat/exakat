@@ -26,18 +26,34 @@ namespace Exakat\Data;
 use Exakat\Datastore;
 
 class Dictionary {
+    const CASE_SENSITIVE = true;
+    const CASE_INSENSITIVE = false;
+    
     private $dictionary = array();
+    private $lcindex = array();
     
     public function __construct($datastore) {
         $this->dictionary = $datastore->getAllHash('dictionary');
+        foreach($this->dictionary as $key => $value) {
+            $this->lcindex[mb_strtolower($key)] = 1;
+        }
     }
 
-    public function translate($code) {
+    public function translate($code, $case = self::CASE_SENSITIVE) {
         $return = array();
 
-        foreach($code as $c) {
-            if (isset($this->dictionary[$c])) {
-                $return[] = $this->dictionary[$c];
+        if ($case === self::CASE_SENSITIVE) {
+            foreach($code as $c) {
+                if (isset($this->dictionary[$c])) {
+                    $return[] = $this->dictionary[$c];
+                }
+            }
+        } else {
+            $code = array_flip($code);
+            foreach($this->dictionary as $k => $v) {
+                if (isset($code[mb_strtolower($k)])) {
+                    $return[] = $v;
+                }
             }
         }
         
@@ -55,4 +71,110 @@ class Dictionary {
         return $return;
     }
 
+    public function source($code) {
+        $return = array();
+        
+        $reverse = array_flip($this->dictionary);
+
+        foreach($code as $c) {
+            if (isset($reverse[$c])) {
+                $return[] = $reverse[$c];
+            }
+        }
+        
+        return $return;
+    }
+
+    public function length($length) {
+        $return = array();
+        
+        if (preg_match('/ > (\d+)/', $length, $r)) {
+            $closure = function ($s) use ($r) { return strlen($s) > $r[1]; };
+        } elseif (preg_match('/ == (\d+)/', $length, $r)) {
+            $closure = function ($s) use ($r) { return strlen($s) == $r[1]; };
+        } elseif (preg_match('/ < (\d+)/', $length, $r)) {
+            $closure = function ($s) use ($r) { return strlen($s) < $r[1]; };
+        } else {
+            assert(false, "codeLength didn't understand $length");
+        }
+        
+        $return = array_filter($this->dictionary, $closure, ARRAY_FILTER_USE_KEY);
+        
+        return array_values($return);
+    }
+
+    public function closeVariables() {
+        $variables = array_filter($this->dictionary, function ($x) { return ($x[0] === '$') && (strlen($x) > 3);}, ARRAY_FILTER_USE_KEY );
+        
+        $return = array();
+        foreach($variables as $v1 => $k1) {
+            foreach($variables as $v2 => $k2) {
+                if ($v1 === $v2) { continue; }
+                if ($v1.'s' === $v2) { continue; }
+                if ($v1 === $v2.'s') { continue; }
+                
+                if (levenshtein($v1, $v2) === 1) {
+                    $return[$v1] = $k1;
+                    $return[$v2] = $k2;
+                }
+            }
+        }
+        
+        return array_values($return);
+    }
+
+    public function caseCloseVariables() {
+        $variables = array_filter($this->dictionary, function ($x) { return ($x[0] === '$');}, ARRAY_FILTER_USE_KEY );
+
+        $return = array();
+        foreach($variables as $v1 => $k1) {
+            foreach($variables as $v2 => $k2) {
+                if ($v1 === $v2) { continue; }
+                
+                if (mb_strtolower($v1) === mb_strtolower($v2)) {
+                    $return[$v1] = $k1;
+                    $return[$v2] = $k2;
+                }
+            }
+        }
+        
+        return array_values($return);
+    }
+
+    public function underscoreCloseVariables() {
+        $variables = array_filter($this->dictionary, function ($x) { return ($x[0] === '$');}, ARRAY_FILTER_USE_KEY );
+        
+        $return = array();
+        foreach($variables as $v1 => $k1) {
+            foreach($variables as $v2 => $k2) {
+                if ($v1 === $v2) { continue; }
+                
+                if (str_replace('_', '', $v1) === str_replace('_', '', $v2)) {
+                    $return[$v1] = $k1;
+                    $return[$v2] = $k2;
+                }
+            }
+        }
+        
+        return array_values($return);
+    }
+
+    public function numberCloseVariables() {
+        $variables = array_filter($this->dictionary, function ($x) { return ($x[0] === '$');}, ARRAY_FILTER_USE_KEY );
+        
+        $return = array();
+        $figures = range(0, 9);
+        foreach($variables as $v1 => $k1) {
+            foreach($variables as $v2 => $k2) {
+                if ($v1 === $v2) { continue; }
+                
+                if (str_replace($figures, '', $v1) === str_replace($figures, '', $v2)) {
+                    $return[$v1] = $k1;
+                    $return[$v2] = $k2;
+                }
+            }
+        }
+        
+        return array_values($return);
+    }
 }

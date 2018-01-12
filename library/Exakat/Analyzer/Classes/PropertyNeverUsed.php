@@ -29,7 +29,8 @@ class PropertyNeverUsed extends Analyzer {
     public function dependsOn() {
         return array('Classes/PropertyUsedInternally',
                      'Classes/PropertyUsedAbove',
-                     'Classes/PropertyUsedBelow');
+                     'Classes/PropertyUsedBelow',
+                    );
     }
 
     public function analyze() {

@@ -27,14 +27,21 @@ use Exakat\Analyzer\Analyzer;
 
 class OldStyleConstructor extends Analyzer {
     public function analyze() {
-        $hasNo__construct = 'not( where( __.out("METHOD").out("NAME").filter{ it.get().value("code").toLowerCase() == "__construct"} ) )';
+        $__construct = $this->dictCode->translate(array('__construct'));
+        
+        // No __construct found
+        if (empty($__construct)) {
+            return ;
+        }
+
+        $hasNo__construct = 'not( where( __.out("METHOD").out("NAME").filter{ it.get().value("code") in ***} ) )';
 
         // No mentionned namespaces
         $this->atomIs('Class')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->inIs('NAME')
-             ->raw($hasNo__construct)
+             ->raw($hasNo__construct, $__construct)
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
@@ -49,7 +56,7 @@ class OldStyleConstructor extends Analyzer {
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->inIs('NAME')
-             ->raw($hasNo__construct)
+             ->raw($hasNo__construct, $__construct)
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')

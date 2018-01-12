@@ -59,7 +59,7 @@ class HardcodedPasswords extends Analyzer {
              ->inIs('INDEX')
              ->outIs('VALUE')
              ->atomIs('String')
-             ->regexIsNot('code', 'required')
+             ->regexIsNot('code', '/required/')
              ->back('first');
         $this->prepareQuery();
     }

@@ -28,123 +28,36 @@ use Exakat\Analyzer\Analyzer;
 class WrongCase extends Analyzer {
 
     public function analyze() {
-        $readFinalPart = 'sideEffect{ classe = it.get().value("code").tokenize("\\\\\\\\").last(); } ';
         // New
         $this->atomIs('New')
              ->outIs('NEW')
-             ->tokenIs('T_STRING')
-             ->codeIsNot(array('static', 'parent', 'self'))
+             ->atomIsNot(array('Static', 'Parent', 'Self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('New')
-             ->outIs('NEW')
-             ->tokenIs('T_NS_SEPARATOR')
-             ->outIsIE('NAME')
-             ->raw($readFinalPart)
-             ->classDefinition()
-             ->outIs('NAME')
-             ->notSamePropertyAs('code', 'classe', true)
+             ->notSamePropertyAs('code', 'classe')
              ->back('first');
         $this->prepareQuery();
 
 // staticMethodcall
-        $this->atomIs('Staticmethodcall')
+        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
              ->atomIsNot(array('Static', 'Parent', 'Self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->tokenIs('T_NS_SEPARATOR')
-             ->raw($readFinalPart)
-             ->classDefinition()
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-// Staticproperty
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->codeIsNot(array('static', 'parent', 'self'))
-             ->savePropertyAs('code', 'classe')
-             ->classDefinition()
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->tokenIs('T_NS_SEPARATOR')
-             ->raw($readFinalPart)
-             ->classDefinition()
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-// Staticconstant
-        $this->atomIs('Staticconstant')
-             ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->codeIsNot(array('static', 'parent', 'self'))
-             ->savePropertyAs('code', 'classe')
-             ->classDefinition()
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Staticconstant')
-             ->outIs('CLASS')
-             ->tokenIs('T_NS_SEPARATOR')
-             ->raw($readFinalPart)
-             ->classDefinition()
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
+             ->notSamePropertyAs('code', 'classe')
              ->back('first');
         $this->prepareQuery();
 
 // Catch
         $this->atomIs('Catch')
              ->outIs('CLASS')
-             ->tokenIs('T_STRING')
-             ->codeIsNot(array('static', 'parent', 'self'))
+             ->atomIsNot(array('Static', 'Parent', 'Self'))
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Catch')
-             ->outIs('CLASS')
-             ->tokenIs('T_NS_SEPARATOR')
-             ->raw($readFinalPart)
-             ->classDefinition()
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
+             ->notSamePropertyAs('code', 'classe')
              ->back('first');
         $this->prepareQuery();
 
@@ -156,21 +69,7 @@ class WrongCase extends Analyzer {
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
-             ->back('first')
-             ->outIs('ARGUMENT');
-        $this->prepareQuery();
-
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('ARGUMENT')
-             ->outIs('TYPEHINT')
-             ->tokenIs('T_NS_SEPARATOR')
-             ->raw($readFinalPart)
-             ->classDefinition()
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
+             ->notSamePropertyAs('code', 'classe')
              ->back('first')
              ->outIs('ARGUMENT');
         $this->prepareQuery();
@@ -182,19 +81,7 @@ class WrongCase extends Analyzer {
              ->savePropertyAs('code', 'classe')
              ->classDefinition()
              ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Instanceof')
-             ->outIs('CLASS')
-             ->tokenIs('T_NS_SEPARATOR')
-             ->raw($readFinalPart)
-             ->classDefinition()
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
+             ->notSamePropertyAs('code', 'classe')
              ->back('first');
         $this->prepareQuery();
 
@@ -202,11 +89,10 @@ class WrongCase extends Analyzer {
         $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->outIsIE('NAME')
-             ->raw($readFinalPart)
+             ->savePropertyAs('code', 'classe')
              ->inIs('DEFINITION')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'classe')
-             ->notSamePropertyAs('code', 'classe', true)
+             ->notSamePropertyAs('code', 'classe')
              ->back('first');
         $this->prepareQuery();
     }

@@ -10,12 +10,12 @@ $expected     = array('xmlwriter_open_uri(\'./a.xml\')',
                       'xmlwriter_end_attribute($xw)',
                       'xmlwriter_write_comment($xw, \'this is a comment.\')',
                       'xmlwriter_start_element($xw, \'tag11\')',
-                      'xmlwriter_text($xw, utf8_encode(\'This is a sample text, Ã¤\'))',
+                      'xmlwriter_text($xw, utf8_encode(\'This is a sample text, ÃÃ¤\'))',
                       'xmlwriter_end_element($xw)',
                       'xmlwriter_end_element($xw)',
                      );
 
-$expected_not = array(
+$expected_not = array('xmlwriter_set_indent($off, 0)',
                      );
 
 ?>

@@ -40,7 +40,7 @@ class MultipleIdenticalKeys extends Analyzer {
                     k = k.toInteger();
                 }
             } 
-            else if (it.get().label() == "Real" )           { k = Float.parseFloat(it.get().value("code")).round(); } 
+            else if (it.get().label() == "Real" )           { k = it.get().value("intval"); } 
             else if (it.get().label() == "Staticconstant" ) { k = it.get().value("fullcode"); } 
             else if (it.get().label() == "Null" )           { k = 0; } 
             else if (it.get().label() == "Boolean" )        { 

@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UndefinedConstants extends Analyzer {
     public function dependsOn() {
-        return array('Classes/DefinedConstants');
+        return array('Classes/DefinedConstants',
+                    );
     }
     
     public function analyze() {

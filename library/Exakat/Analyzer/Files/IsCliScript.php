@@ -25,12 +25,13 @@ use Exakat\Analyzer\Analyzer;
 
 class IsCliScript extends Analyzer {
     public function analyze() {
+        // files that starts with #!/binary
         $this->atomIs('File')
              ->outIs('FILE')
              ->atomIs('Sequence')
              ->outWithRank('EXPRESSION', 0)
              ->tokenIs('T_INLINE_HTML')
-             ->regexIs('code', '^#')
+             ->regexIs('code', '/^#/s')
              ->back('first');
         $this->prepareQuery();
     }

@@ -1,12 +1,14 @@
 <?php
 
-$expected     = array('x',
-                      'X',
+$expected     = array('FALSE',
+                      'nULL',
                      );
 
-$expected_not = array('NUll',
+$expected_not = array('x',
+                      'X',
+                      'true',
+                      'NUll',
                       'Null',
-                      'nULL',
                      );
 
 ?>

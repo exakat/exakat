@@ -3,5 +3,5 @@
                 ->getServiceManager()
                 ->get('Zend\Session\SessionManager');
                 
-    $session->regenerateId();
+   $session->regenerateId();
 ?>

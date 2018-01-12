@@ -28,7 +28,8 @@ use Exakat\Tokenizer\Token;
 
 class CouldBePrivate extends Analyzer {
     public function dependsOn() {
-        return array('Classes/PropertyUsedBelow');
+        return array('Classes/PropertyUsedBelow',
+                    );
     }
     
     public function analyze() {

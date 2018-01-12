@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Rawstring extends Tokenizer {
-    /* 5 methods */
+    /* 6 methods */
 
     public function testRawstring01()  { $this->generic_test('Rawstring.01'); }
     public function testRawstring02()  { $this->generic_test('Rawstring.02'); }
@@ -15,5 +15,6 @@ class Rawstring extends Tokenizer {
     public function testRawstring04()  { $this->generic_test('Rawstring.04'); }
     public function testRawString01()  { $this->generic_test('RawString.01'); }
     public function testRawstring05()  { $this->generic_test('Rawstring.05'); }
+    public function testRawstring06()  { $this->generic_test('Rawstring.06'); }
 }
 ?>

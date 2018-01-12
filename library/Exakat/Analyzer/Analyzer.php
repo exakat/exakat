@@ -86,6 +86,9 @@ abstract class Analyzer {
     const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
 
+    const TRANSLATE    = true;
+    const NO_TRANSLATE = false;
+
     static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
@@ -110,7 +113,7 @@ abstract class Analyzer {
     
     protected $linksDown = '';
     
-    private $dictCode = array();
+    protected $dictCode = null;
 
     public function __construct($gremlin = null, $config) {
         $this->gremlin = $gremlin;
@@ -662,9 +665,8 @@ GREMLIN
         return $this;
     }
 
-    public function trim($property, $chars = '\'\"') {
-        assert($this->assertProperty($property));
-        $this->addMethod('transform{it.'.$property.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1")}');
+    public function trim($variable, $chars = '\'\"') {
+        $this->addMethod('sideEffect{'.$variable.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1"); }');
         
         return $this;
     }
@@ -841,20 +843,26 @@ GREMLIN
         return $this;
     }
 
-    public function codeIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
+    public function codeIs($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
         if (is_array($code) && empty($code)) {
             return $this;
         }
-        
-        $translatedCode = array();
-        $code = makeArray($code);
-        $translatedCode = $this->dictCode->translate($code);
 
-        if (empty($translatedCode)) {
-            return $this;
+        if ($translate === self::TRANSLATE) {
+            $translatedCode = array();
+            $code = makeArray($code);
+            $translatedCode = $this->dictCode->translate($code, $caseSensitive === self::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
+
+            if (empty($translatedCode)) {
+                $this->addMethod("filter{ false; }");
+    
+                return $this;
+            }
+
+            $this->addMethod('filter{ it.get().value("code") in ***; }', $translatedCode);
+        } else {
+            $this->addMethod('filter{ it.get().value("code") in ***; }', $code);
         }
-
-        $this->addMethod('filter{ it.get().value("code") in ***; }', $translatedCode);
 
         return $this;
     }
@@ -913,7 +921,7 @@ GREMLIN
 
     public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code') {
+        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code' || $property == 'propertyname') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -930,7 +938,7 @@ GREMLIN
 
     public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code') {
+        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code' || $property == 'propertyname') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -980,6 +988,10 @@ GREMLIN
         return $this;
     }
 
+    public function saveMethodNameAs($name) {
+        return $this->raw('sideEffect{ x = it.get().value("fullnspath").tokenize("::"); '.$name.' = x[1]; }');
+    }
+
     public function fullcodeIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->propertyIs('fullcode', $code, $caseSensitive);
         
@@ -1000,15 +1012,13 @@ GREMLIN
     }
 
     public function isLowercase($property = 'fullcode') {
-        assert($this->assertProperty($property));
-        $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase()}');
+        $this->addMethod('filter{it.get().value("code") == it.get().value("lccode"); }');
 
         return $this;
     }
 
-    public function isNotLowercase($property = 'fullcode') {
-        assert($this->assertProperty($property));
-        $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toLowerCase()}');
+    public function isNotLowercase() {
+        $this->addMethod('filter{it.get().value("code") != it.get().value("lccode"); }');
 
         return $this;
     }
@@ -1043,8 +1053,15 @@ GREMLIN
     }
 
     public function codeLength($length = ' == 1 ') {
-        // @todo add some tests ? Like Operator / value ?
-        $this->addMethod('filter{it.get().value("code").length() '.$length.'}');
+        $values = $this->dictCode->length($length);
+
+        if (empty($values)) {
+                $this->addMethod("filter{ false; }");
+    
+                return $this;
+        }
+
+        $this->addMethod('has("code", within(***))', $values);
 
         return $this;
     }
@@ -1081,6 +1098,8 @@ GREMLIN
             $values = $this->dictCode->grep($regex);
             
             if (empty($values)) {
+                $this->addMethod("filter{ false; }");
+
                 return $this;
             }
             
@@ -1208,11 +1227,11 @@ GREMLIN
         return $this;
     }
 
-    public function raw($query, $args = array()) {
+    public function raw($query, ...$args) {
         ++$this->rawQueryCount;
         $query = $this->cleanAnalyzerName($query);
 
-        $this->addMethod($query, $args);
+        $this->addMethod($query, ...$args);
         
         return $this;
     }
@@ -1853,7 +1872,8 @@ GREMLIN
             $init = array_shift($this->methods); // remove second
             $query = implode('.', $this->methods);
             $arg0 = $this->arguments['arg0'];
-            $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count()).'.$query;
+            $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())'
+                     .(empty($query) ? '' : '.'.$query);
             unset($this->methods[1]);
         } else {
             assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[1]);

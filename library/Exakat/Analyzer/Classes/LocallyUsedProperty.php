@@ -26,10 +26,6 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class LocallyUsedProperty extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/StaticVariables');
-    }
-    
     public function analyze() {
         // normal property
         $this->atomIs('Ppp')

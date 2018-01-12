@@ -32,6 +32,7 @@ class Atom {
     public $id           = 0;
     public $atom         = 'No Atom Set';
     public $code         = '';
+    public $lccode       = '';
     public $fullcode     = '';
     public $line         = Load::NO_LINE;
     public $token        = '';
@@ -73,11 +74,15 @@ class Atom {
         if (strlen($this->code) > self::STRING_MAX_SIZE) {
             $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
         }
+        if (strlen($this->lccode) > self::STRING_MAX_SIZE) {
+            $this->lccode = substr($this->lccode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->lccode).' chars]';
+        }
         if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
             $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
         
         $this->code          = addcslashes($this->code       , '\\"');
+        $this->lccode        = addcslashes($this->lccode     , '\\"');
         $this->fullcode      = addcslashes($this->fullcode   , '\\"');
         $this->fullnspath    = addcslashes($this->fullnspath , '\\"');
         $this->strval        = addcslashes($this->strval     , '\\"');
@@ -113,6 +118,9 @@ class Atom {
         if (strlen($this->code) > self::STRING_MAX_SIZE) {
             $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
         }
+        if (strlen($this->lccode) > self::STRING_MAX_SIZE) {
+            $this->lccode = substr($this->lccode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->lccode).' chars]';
+        }
         if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
             $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
@@ -130,10 +138,11 @@ class Atom {
         $return = array(
             'id'            => $this->id,
             'atom'          => $this->atom,
-            'label'          => $this->atom,
+            'label'         => $this->atom,
             'line'          => $this->line,
-            'token'          => $this->token,
+            'token'         => $this->token,
             'code'          => addcslashes($this->code       , '\\"'),
+            'lccode'        => addcslashes($this->lccode     , '\\"'),
             'fullcode'      => addcslashes($this->fullcode   , '\\"'),
             'fullnspath'    => addcslashes($this->fullnspath , '\\"'),
             );
@@ -170,11 +179,15 @@ class Atom {
         if (strlen($this->code) > self::STRING_MAX_SIZE) {
             $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
         }
+        if (strlen($this->lccode) > self::STRING_MAX_SIZE) {
+            $this->lccode = substr($this->lccode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->lccode).' chars]';
+        }
         if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
             $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
 
         $this->code          = addcslashes($this->code       , '\\"');
+        $this->lccode        = addcslashes($this->lccode     , '\\"');
         $this->fullcode      = addcslashes($this->fullcode   , '\\"');
         $this->fullnspath    = addcslashes($this->fullnspath , '\\"');
         $this->strval        = addcslashes($this->strval     , '\\"');
@@ -198,6 +211,7 @@ class Atom {
         $return = array( $this->id,
                          $this->atom,
                          $this->code,
+                         $this->lccode,
                          $this->fullcode,
                          $this->line,
                          $this->token,
@@ -223,7 +237,7 @@ class Atom {
             if ($value === null) { continue; }
 
 /*            
-            if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) &&
+            if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'lccode', 'line')) &&
                 !in_array($this->atom, Load::$PROP_OPTIONS[$l])) {
                 continue;
             };
@@ -234,7 +248,11 @@ class Atom {
                 continue;
             };
 
-            if (!in_array($l, array('noDelimiter')) &&
+            if ($l === 'lccode') {
+                $this->lccode = mb_strtolower($this->code);
+            };
+
+            if (!in_array($l, array('noDelimiter', 'lccode')) &&
                 $value === '') {
                 continue;
             };

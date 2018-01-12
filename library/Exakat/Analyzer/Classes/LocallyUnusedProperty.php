@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class LocallyUnusedProperty extends Analyzer {
     public function dependsOn() {
         return array('Classes/LocallyUsedProperty',
-                     'Variables/StaticVariables');
+                     'Variables/StaticVariables',
+                    );
     }
     
     public function analyze() {

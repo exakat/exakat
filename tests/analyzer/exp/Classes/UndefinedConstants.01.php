@@ -1,6 +1,8 @@
 <?php
 
-$expected     = array('X::undefinedconstant',
+$expected     = array('X::definedconstant',
+                      'x::definedconstant',
+                      'X::undefinedconstant',
                       'x::undefinedconstant',
                       'X::undefinedConstant',
                       'x::undefinedConstant',
@@ -8,9 +10,7 @@ $expected     = array('X::undefinedconstant',
                       'X::parentInterfaceUndefinedConstant',
                      );
 
-$expected_not = array('X::definedconstant',
-                      'x::definedconstant',
-                      'X::definedConstant',
+$expected_not = array('X::definedConstant',
                       'x::definedConstant',
                       'X::parentClassDefinedConstant',
                       'X::parentInterfaceDefinedConstant',
