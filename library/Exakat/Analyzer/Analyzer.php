@@ -845,6 +845,7 @@ GREMLIN
 
     public function codeIs($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
         if (is_array($code) && empty($code)) {
+            $this->addMethod("filter{ false; }");
             return $this;
         }
 
@@ -855,7 +856,6 @@ GREMLIN
 
             if (empty($translatedCode)) {
                 $this->addMethod("filter{ false; }");
-    
                 return $this;
             }
 

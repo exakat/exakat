@@ -41,6 +41,8 @@ class Dictionary {
 
     public function translate($code, $case = self::CASE_SENSITIVE) {
         $return = array();
+        
+        $code = makeArray($code);
 
         if ($case === self::CASE_SENSITIVE) {
             foreach($code as $c) {
