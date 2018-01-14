@@ -93,8 +93,8 @@ abstract class Analyzer {
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable');
-    static public $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method');
-    static public $FUNCTIONS_NAMED  = array('Function', 'Method');
+    static public $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod');
+    static public $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $CLASSES_NAMED    = 'Class';
     static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
@@ -867,20 +867,25 @@ GREMLIN
         return $this;
     }
 
-    public function codeIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
+    public function codeIsNot($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
         if (is_array($code) && empty($code)) {
             return $this;
         }
 
-        $translatedCode = array();
-        $code = makeArray($code);
-        $translatedCode = $this->dictCode->translate($code);
+        if ($translate === self::TRANSLATE) {
+            $translatedCode = array();
+            $code = makeArray($code);
+            $translatedCode = $this->dictCode->translate($code);
 
-        if (empty($translatedCode)) {
-            return $this;
-        }
+            if (empty($translatedCode)) {
+                $this->addMethod("filter{ false; }");
+                return $this;
+            }
         
-        $this->addMethod('filter{ !(it.get().value("code") in ***); }', $translatedCode);
+            $this->addMethod('filter{ !(it.get().value("code") in ***); }', $translatedCode);
+        } else {
+            $this->addMethod('filter{ !(it.get().value("code") in ***); }', $code);
+        }
 
         return $this;
     }

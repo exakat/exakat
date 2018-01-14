@@ -26,16 +26,9 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class MagicMethod extends Analyzer {
-    
     public function analyze() {
-        $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
-        $magicMethods = array_map('strtolower', $magicMethods);
-
-        $this->atomIs('Class')
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->outIs('NAME')
-             ->codeIs($magicMethods);
+        // class x { function __clone() {}}
+        $this->atomIs('Magicmethod');
         $this->prepareQuery();
     }
 }

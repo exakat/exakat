@@ -23,6 +23,7 @@
 namespace Exakat\Analyzer\Wordpress;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Data\Dictionary;
 
 class UnverifiedNonce extends Analyzer {
     public function dependsOn() {
@@ -30,6 +31,10 @@ class UnverifiedNonce extends Analyzer {
     }
     
     public function analyze() {
+        $phpVariables = array('$_GET', '$_POST', '$_REQUEST');
+        $phpVariables = $this->dictCode->translate($phpVariables);
+        $phpVariablesList = makeList($phpVariables, '');
+    
         // Search for wp_verify_nonce usage
         $list = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").as("first")
@@ -38,7 +43,7 @@ g.V().hasLabel("Functioncall").as("first")
      .out("ARGUMENT")
      .has("rank", 0)
      .hasLabel("Array")
-     .where( __.out("VARIABLE").has("code", within("\\\$_GET", "\\\$_POST", "\\\$_REQUEST")) )
+     .where( __.out("VARIABLE").has("code", within($phpVariablesList)) )
      .out("INDEX")
      .hasLabel("String")
      .values("noDelimiter")

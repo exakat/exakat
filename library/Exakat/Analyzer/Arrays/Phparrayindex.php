@@ -31,7 +31,7 @@ class Phparrayindex extends Analyzer {
     public function analyze() {
         $this->atomIs('Array')
              ->outIs('VARIABLE')
-             ->codeIs(VariablePhp::$variables)
+             ->codeIs(VariablePhp::$variables, self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

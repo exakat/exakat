@@ -346,7 +346,6 @@ class Project extends Tasks {
                                 4 => '-T',
                                 5 => trim($theme, '"'), // No need to protect anymore, as this is internal
                                 6 => '-u',
-                                7 => '-collect',
                             );
 
                 $dumpConfig = new Config($args);

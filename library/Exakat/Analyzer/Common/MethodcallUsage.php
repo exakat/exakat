@@ -30,9 +30,11 @@ class MethodcallUsage extends Analyzer {
     
     public function analyze() {
         // Currently ignoring the object :(
+        $methods = array_map('strtolower', $this->methods);
+        
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->codeIs($this->methods)
+             ->codeIs($methods, self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

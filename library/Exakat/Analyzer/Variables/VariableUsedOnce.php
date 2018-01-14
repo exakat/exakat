@@ -29,18 +29,15 @@ class VariableUsedOnce extends Analyzer {
     
     public function dependsOn() {
         return array('Variables/InterfaceArguments',
-                     'Variables/Variablenames'
+                     'Variables/Variablenames',
                      );
     }
     
     public function analyze() {
-        $usedOnce = $this->query(<<<'GREMLIN'
-g.V().as("first").groupCount("processed").by(count())
-     .hasLabel("Variable", "Variablearray", "Variableobject", "Functioncall")
-     .where( __.in("ANALYZED").has("analyzer", "Variables/Variablenames").count().is(neq(0)) )
-     .where( __.in("ANALYZED").has("analyzer", "Variables/InterfaceArguments").count().is(eq(0)) )
-     .filter{ !(it.get().value("code") in ["\$_GET", "\$_POST", "\$_COOKIE", "\$_FILES", "\$_SESSION", "\$_REQUEST", "\$_ENV", "\$_SERVER", "\$PHP_SELF", "\$HTTP_RAW_POST_DATA", "\$HTTP_GET_VARS", "\$HTTP_POST_VARS", "\$HTTP_POST_FILES", "\$HTTP_ENV_VARS", "\$HTTP_SERVER_VARS", "\$HTTP_COOKIE_VARS", "\$GLOBALS", "\$this", "\$argv", "\$argc"]); }
-     .where( __.in("GLOBAL").count().is(eq(0)) )
+        $usedOnce = $this->query(<<<GREMLIN
+g.V().hasLabel("Variable", "Variablearray", "Variableobject", "Functioncall")
+     .where( __.in("ANALYZED").has("analyzer", "Variables/Variablenames") )
+     .not( where( __.in("ANALYZED").has("analyzer", "Variables/InterfaceArguments") ) )
      .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b == 1}.keySet()
 GREMLIN
 )->toArray();
@@ -48,13 +45,12 @@ GREMLIN
         if (empty($usedOnce)) {
             return;
         }
-
+        
         $this->atomIs(self::$VARIABLES_ALL)
              ->analyzerIs('Variables/Variablenames')
              ->analyzerIsNot('Variables/InterfaceArguments')
-             ->codeIsNot(VariablePhp::$variables, true)
              ->hasNoIn('GLOBAL') // ignore global $variable; This is not a use.
-             ->codeIs($usedOnce, true);
+             ->codeIs($usedOnce, self::NO_TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
         
 //         'Functioncall'

@@ -1035,7 +1035,26 @@ SQL;
              $this->isContext(self::CONTEXT_INTERFACE)) &&
              
              !$this->isContext(self::CONTEXT_FUNCTION)) {
-            $atom = 'Method';
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), 
+                         array('__construct',
+                               '__destruct',
+                               '__call',
+                               '__callstatic',
+                               '__get',
+                               '__set',
+                               '__isset',
+                               '__unset',
+                               '__sleep',
+                               '__wakeup',
+                               '__tostring',
+                               '__invoke',
+                               '__set_state',
+                               '__clone',
+                               '__debuginfo'))) {
+                $atom = 'Magicmethod';
+            } else {
+                $atom = 'Method';
+            }
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             $atom = 'Closure';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_AND &&
@@ -1134,7 +1153,7 @@ SQL;
         } elseif ( $function->atom === 'Closure') {
             $fullnspath = $this->makeAnonymous('function');
             $aliased    = self::NOT_ALIASED;
-        } elseif ( $function->atom === 'Method') {
+        } elseif ( $function->atom === 'Method' || $function->atom === 'Magicmethod') {
             $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($name->code);
             $aliased    = self::NOT_ALIASED;
         } else {
@@ -3590,6 +3609,8 @@ SQL;
                                                               '$http_response_header',
                                                               '$argc',
                                                               '$argv',
+                                                              '$HTTP_POST_VARS',
+                                                              '$HTTP_GET_VARS',
                                                               ))) {
             $atom = 'Phpvariable';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {

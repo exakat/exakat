@@ -43,21 +43,21 @@ class CitSameName extends Analyzer {
         // Classes
         $this->atomIs('Class')
              ->outIs('NAME')
-             ->codeIs($doubles)
+             ->codeIs($doubles, self::NO_TRANSLATE)
              ->back('first');
         $this->prepareQuery();
 
         // Trait
         $this->atomIs('Trait')
              ->outIs('NAME')
-             ->codeIs($doubles)
+             ->codeIs($doubles, self::NO_TRANSLATE)
              ->back('first');
         $this->prepareQuery();
 
         // Interfaces
         $this->atomIs('Interface')
              ->outIs('NAME')
-             ->codeIs($doubles)
+             ->codeIs($doubles, self::NO_TRANSLATE)
              ->back('first');
         $this->prepareQuery();
     }

@@ -32,7 +32,7 @@ class ActionInController extends Analyzer {
     public function analyze() {
         // Methods ending with Action must be in controller
         $this->atomIs('Method')
-             ->regexIs('code', 'Action\$')
+             ->regexIs('code', '/Action$/')
              ->goToClass()
              ->analyzerIsNot('ZendF/IsController')
              ->back('first');
@@ -43,7 +43,7 @@ class ActionInController extends Analyzer {
              ->hasOut(array('PRIVATE', 'PROTECTED'))
              // Why not Action\\$?
              ->outIs('NAME')
-             ->regexIs('code', 'Action\$')
+             ->regexIs('code', '/Action$/')
              ->goToClass()
              ->analyzerIs('ZendF/IsController')
              ->back('first');
