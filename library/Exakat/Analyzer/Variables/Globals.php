@@ -29,7 +29,7 @@ class Globals extends Analyzer {
         // Global in a function
         $this->atomIs('Globaldefinition')
              ->savePropertyAs('code', 'name')
-             ->goToFunction(array('Function', 'Method', 'Closure'))
+             ->goToFunction(array('Function', 'Method', 'Closure', 'Magicmethod'))
              ->outIs('BLOCK')
              ->atomInside(self::$VARIABLES_ALL)
              ->samePropertyAs('code', 'name');
@@ -38,16 +38,16 @@ class Globals extends Analyzer {
         // Global in a function
         // Using $GLOBALS as a whole is probably a bad idea but possible
         $this->atomIs('Phpvariable')
-             ->codeIs('$GLOBALS')
+             ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('VARIABLE');
         $this->prepareQuery();
 
         // implicit global
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
         $this->atomIs(array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Phpvariable'))
-             ->codeIsNot($superglobals, true)
+             ->codeIsNot($superglobals)
              ->hasNoClassInterfaceTrait()
-             ->hasNoFunction(array('Function', 'Method', 'Closure'));
+             ->hasNoFunction(array('Function', 'Method', 'Closure', 'Magicmethod'));
         $this->prepareQuery();
     }
 }

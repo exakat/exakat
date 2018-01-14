@@ -50,7 +50,7 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Goto").out("GOTO")
       .not( where( repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File")).emit()
-                    .hasLabel("Function", "Method", "Closure") ) )
+                    .hasLabel("Function", "Method", "Closure", "Magicmethod") ) )
       .values("code")
       .unique();
 GREMLIN;
@@ -65,7 +65,7 @@ GREMLIN;
              ->outIs('GOTOLABEL')
              ->savePropertyAs('code', 'name')
              ->hasNoFunction()
-             ->codeIsNot($globalLabels)
+             ->codeIsNot($globalLabels, self::NO_TRANSLATE)
              ->back('first');
         $this->prepareQuery();
 

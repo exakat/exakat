@@ -29,20 +29,20 @@ class IsInterfaceMethod extends Analyzer {
     public function analyze() {
         // interface extended in the local class
         $this->atomIs('Method')
-             ->saveMethodName('name')
+             ->saveMethodNameAs('name')
              ->goToClass()
              ->outIs('IMPLEMENTS')
              ->interfaceDefinition()
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->saveMethodName('name2')
+             ->saveMethodNameAs('name2')
              ->filter('name == name2')
              ->back('first');
         $this->prepareQuery();
 
         // interface extended in the parent interface
         $this->atomIs('Method')
-             ->saveMethodName('name')
+             ->saveMethodNameAs('name')
              ->goToClass()
              ->outIs('IMPLEMENTS')
              ->interfaceDefinition()
@@ -50,21 +50,21 @@ class IsInterfaceMethod extends Analyzer {
              ->interfaceDefinition()
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->saveMethodName('name2')
+             ->saveMethodNameAs('name2')
              ->filter('name == name2')
              ->back('first');
         $this->prepareQuery();
         
         // interface defined in the parents
         $this->atomIs('Method')
-             ->saveMethodName('name')
+             ->saveMethodNameAs('name')
              ->goToClass()
              ->goToAllParents()
              ->outIs('IMPLEMENTS')
              ->interfaceDefinition()
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->saveMethodName('name2')
+             ->saveMethodNameAs('name2')
              ->filter('name == name2')
              ->back('first');
         $this->prepareQuery();
