@@ -138,7 +138,7 @@ class IsModified extends Analyzer {
              ->_as('results')
              ->inIs('ARGUMENT')
              ->classDefinition()
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')

@@ -31,8 +31,9 @@ class RepeatedRegex extends Analyzer {
         $functionsList = '"\\\\'.implode('", "\\\\', $functions).'"';
     
         $repeatedRegex = $this->query(<<<GREMLIN
-g.V().hasLabel("Functioncall").has("fullnspath", within('.$functionsList.'))
-     .out("ARGUMENT").hasLabel("String").not(where(__.out("CONCAT")))
+g.V().hasLabel("Functioncall").has("fullnspath", within($functionsList))
+     .out("ARGUMENT")
+     .hasLabel("String").not(where(__.out("CONCAT")))
      .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b > 1}.keySet()
 GREMLIN
 )->toArray();

@@ -473,9 +473,9 @@ GREMLIN;
 
     protected function hasNoInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
-        $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
-
         $atom = makeArray($atom);
+
+        $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
         $stop = array_unique(array_merge($stop, $atom));
 
         $this->addMethod(<<<GREMLIN
@@ -484,6 +484,29 @@ not( where(
            .until(hasLabel(within(***)))
            .hasLabel(within(***))
  ) )
+GREMLIN
+, $stop, $atom);
+        
+        return $this;
+    }
+
+    protected function hasNoCountedInstruction($atom = 'Function', $count) {
+        assert($this->assertAtom($atom));
+        $atom = makeArray($atom);
+        
+        // $count is an integer or a variable 
+        
+        $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
+        $stop = array_unique(array_diff($stop, $atom));
+
+        $this->addMethod(<<<GREMLIN
+where( 
+ __.sideEffect{ c = 0; }
+   .emit( ).repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() )
+   .until(hasLabel(within(***)))
+   .hasLabel(within(***))
+   .sideEffect{ c = c + 1; }.fold()
+).filter{ c < $count}
 GREMLIN
 , $stop, $atom);
         
@@ -852,6 +875,9 @@ GREMLIN
         if ($translate === self::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
+            if ($caseSensitive === self::CASE_INSENSITIVE) {
+                $code = array_map('strtolower', $code);
+            }
             $translatedCode = $this->dictCode->translate($code, $caseSensitive === self::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
 
             if (empty($translatedCode)) {

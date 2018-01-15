@@ -28,12 +28,12 @@ use Exakat\Analyzer\Analyzer;
 class MustReturn extends Analyzer {
     public function analyze() {
         // class foo { function __callStatic($name, $foo) { $name; } }
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->hasNoOut('ABSTRACT')
              ->hasClassTrait()
              ->outIs('NAME')
              ->codeIs(array('__call', '__callStatic', '__get', '__isset', '__sleep', '__toString', '__set_state',
-                            '__invoke', '__debugInfo'))
+                            '__invoke', '__debugInfo'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first')
              ->noAtomInside('Return');
         $this->prepareQuery();

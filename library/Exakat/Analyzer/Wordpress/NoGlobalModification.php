@@ -60,7 +60,7 @@ class NoGlobalModification extends Analyzer {
              ->inIs('INDEX')
              ->outIs('VARIABLE')
              ->atomIs('Phpvariable')
-             ->codeIs('$GLOBALS')
+             ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_SENSITIVE)
              ->analyzerIs('Variables/IsModified')
              ->back('first');
         $this->prepareQuery();
