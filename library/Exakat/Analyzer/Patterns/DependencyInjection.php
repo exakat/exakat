@@ -26,14 +26,15 @@ use Exakat\Analyzer\Analyzer;
 
 class DependencyInjection extends Analyzer {
     public function dependsOn() {
-        return array('Classes/Constructor');
+        return array('Classes/Constructor',
+                    );
     }
     
     public function analyze() {
         $scalars = $this->loadIni('php_scalar_types.ini', 'types');
         
         // Assigned to a property at constructor
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENT')
              ->_as('result')
@@ -55,8 +56,8 @@ class DependencyInjection extends Analyzer {
              ->back('result');
         $this->prepareQuery();
 
-        // Assigned to a property at constructor
-        $this->atomIs('Method')
+        // Assigned to a static property at constructor
+        $this->atomIs('Magicmethod')
              ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENT')
              ->_as('result')
@@ -66,7 +67,7 @@ class DependencyInjection extends Analyzer {
              ->outIsIE('LEFT')
              ->savePropertyAs('code', 'arg')
              ->back('first')
-             ->inIs('METHOD')
+             ->inIs('MAGICMETHOD')
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
              ->outIs('BLOCK')

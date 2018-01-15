@@ -936,13 +936,13 @@ GREMLIN
         return $this->propertyIs('fullnspath', $code, self::CASE_INSENSITIVE);
     }
 
-    public function fullnspathIsNot($code) {
+    public function fullnspathIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
         if (empty($code)) {
             $this->addMethod('sideEffect{ }');
             return $this;
         }
 
-        return $this->propertyIsNot('fullnspath', $code, self::CASE_INSENSITIVE);
+        return $this->propertyIsNot('fullnspath', $code, $caseSensitive);
     }
     
     public function codeIsPositiveInteger() {
@@ -970,7 +970,7 @@ GREMLIN
 
     public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code' || $property == 'propertyname') {
+        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code' || $property == 'propertyname'|| $property == 'boolean') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -1658,7 +1658,7 @@ GREMLIN
     }
 
     public function hasFunction() {
-        $this->hasInstruction(array('Function', 'Method', 'Closure'));
+        $this->hasInstruction(array('Function', 'Method', 'Closure', 'Magicmethod'));
         
         return $this;
     }

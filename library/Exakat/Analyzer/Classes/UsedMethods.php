@@ -36,7 +36,7 @@ GREMLIN
 )->toArray();
 
         if (!empty($methods)) {
-            $this->atomIs('Method')
+            $this->atomIs(array('Method', 'Magicmethod'))
                  ->_as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
@@ -52,7 +52,7 @@ GREMLIN
 )->toArray();
 
         if (!empty($staticmethods)) {
-            $this->atomIs('Method')
+            $this->atomIs(array('Method', 'Magicmethod'))
                  ->_as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
@@ -134,8 +134,8 @@ GREMLIN
         // Private constructors
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->hasOut('PRIVATE')
              ->_as('used')
              ->outIs('NAME')
@@ -152,8 +152,8 @@ GREMLIN
         // Normal Constructors
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->hasNoOut('PRIVATE')
              ->_as('used')
              ->outIs('NAME')

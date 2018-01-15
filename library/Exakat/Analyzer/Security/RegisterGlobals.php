@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class RegisterGlobals extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsModified');
+        return array('Variables/IsModified',
+                    );
     }
     
     public function analyze() {
@@ -36,7 +37,7 @@ class RegisterGlobals extends Analyzer {
         // With a foreach
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->codeIs($superGlobals, true)
+             ->codeIs($superGlobals, self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('SOURCE')
              ->outIs('VALUE')
              ->outIs('INDEX')
@@ -55,7 +56,7 @@ class RegisterGlobals extends Analyzer {
         // With extract and overwriting option
         $this->atomFunctionIs('\\extract')
              ->outWithRank('ARGUMENT', 0)
-             ->codeIs($superGlobals, true)
+             ->codeIs($superGlobals, self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 1)
              // Lazy way to check for EXTR_IF_EXISTS, \EXTR_IF_EXISTS and | EXTR_REFS
@@ -67,7 +68,7 @@ class RegisterGlobals extends Analyzer {
         $this->atomFunctionIs('\\extract')
              ->noChildWithRank('ARGUMENT', 1)
              ->outWithRank('ARGUMENT', 0)
-             ->codeIs($superGlobals, true)
+             ->codeIs($superGlobals, self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 

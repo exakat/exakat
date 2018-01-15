@@ -38,7 +38,7 @@ class UsedRoutes extends Slim {
         $this->atomIs('Methodcall')
              ->outIs('OBJECT')
              ->atomIs('Variableobject')
-             ->codeIs($apps)
+             ->codeIs($apps, self ::NO_TRANSLATE)
              ->back('first')
              ->outIs('METHOD')
              ->codeIs(array('get', 'put', 'any', 'patch', 'option', 'delete', 'post'))

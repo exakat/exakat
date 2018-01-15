@@ -27,21 +27,24 @@ use Exakat\Analyzer\Analyzer;
 
 class OverwrittenLiterals extends Analyzer {
     public function analyze() {
+    
+        $equal = $this->dictCode->translate(array('='));
+        
         $assignations = $this->queryHash(<<<GREMLIN
-g.V().hasLabel("Function", "Closure", "Method")
+g.V().hasLabel("Function", "Closure", "Method", "Magicmethod")
      .where( __.sideEffect{ m = [:]; }
      .out("BLOCK")
      .emit( hasLabel("Assignation")).repeat( __.out() ).times(15).hasLabel("Assignation")
-     .has("code", "=")
+     .has("code", $equal[0])
      .not( __.where( __.in("EXPRESSION").in("INIT")) )
      .not( __.where( __.in("PPP")) )
      .where( __.out("RIGHT").hasLabel("Integer", "String", "Real", "Null", "Boolean"))
      .out("LEFT").hasLabel("Variable")
      .sideEffect{ 
-            if (m[it.get().value("fullcode")] == null) {
-                m[it.get().value("fullcode")] = 1;
+            if (m[it.get().value("code")] == null) {
+                m[it.get().value("code")] = 1;
             } else {
-                m[it.get().value("fullcode")]++;
+                m[it.get().value("code")]++;
             }
       }.fold())
       .sideEffect{ names = m.findAll{ a,b -> b > 1}.keySet() }

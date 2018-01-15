@@ -51,7 +51,7 @@ class UnresolvedClasses extends Analyzer {
 
         $this->atomIs('Catch')
              ->outIs('CLASS')
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->atomIsNot(array('Self', 'Parent', 'Static'))
              ->noClassDefinition()
              ->analyzerIsNot('Classes/IsExtClass')
              ->analyzerIsNot('Composer/IsComposerNsname')

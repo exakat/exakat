@@ -33,7 +33,7 @@ abstract class Slim extends Analyzer {
         $appClassesList = makeList($appClasses);
         
         $query = <<<GREMLIN
-g.V().hasLabel("New").out("NEW")
+g.V().hasLabel("Newcall")
      .has("fullnspath").has("fullnspath", within($appClassesList))
      .in()
      .in("RIGHT").hasLabel("Assignation")

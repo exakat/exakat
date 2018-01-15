@@ -83,7 +83,7 @@ class DontEchoError extends Analyzer {
              ->samePropertyAs('code', 'exception')
              ->inIs('OBJECT')
              ->outIs('METHOD')
-             ->codeIs(array('getMessage', 'getTraceAsString'))
+             ->codeIs(array('getMessage', 'getTraceAsString'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('METHOD')
              ->inIs('ARGUMENT')
              ->atomIs(array('Echo', 'Print', 'Exit', 'Functioncall'))

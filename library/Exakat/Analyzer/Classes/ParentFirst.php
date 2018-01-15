@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ParentFirst extends Analyzer {
     public function analyze() {
         // parent::__construct is not the first
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->outIs('NAME')
              ->codeIs('__construct')
              ->inIs('NAME')
@@ -46,7 +46,7 @@ class ParentFirst extends Analyzer {
         $this->prepareQuery();
 
         // parent::__construct is not the first of the method
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->outIs('NAME')
              ->codeIs('__construct')
              ->inIs('NAME')

@@ -34,10 +34,17 @@ class DirectInjection extends Analyzer {
         $vars = $this->loadIni('php_incoming.ini');
         $vars = $vars['incoming'];
         
+        $server = $this->dictCode->translate('$_SERVER');
+        if (empty($server)) {
+            $server = -1; // This will always fail
+        } else {
+            $server = $server[0];
+        }
+        
         $safe = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'REQUEST_TIME_FLOAT',
                       'SCRIPT_NAME', 'SERVER_ADMIN', '_');
         $safeIndex = 'or( __.hasLabel("Phpvariable"), 
-                          __.out("VARIABLE").not(has("code", "\\$_SERVER")), 
+                          __.out("VARIABLE").not(has("code", '.$server.')), 
                           __.out("INDEX").hasLabel("String")
                             .not(where(__.out("CONCAT") ) )
                             .not(has("noDelimiter", within([' . makeList($safe) . '])))
@@ -51,7 +58,7 @@ class DirectInjection extends Analyzer {
              ->raw($safeIndex)
              ->outIsIE('VARIABLE')
              ->atomIs(self::$VARIABLES_ALL)
-             ->codeIs($vars, true)
+             ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first')
 
              ->functionDefinition()
@@ -74,7 +81,7 @@ class DirectInjection extends Analyzer {
 
         // $_GET/_POST ... directly as argument of PHP functions
         $this->atomIs('Phpvariable')
-             ->codeIs($vars, true)
+             ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('VARIABLE')
              ->raw($safeIndex)
              ->goToArray()
@@ -87,7 +94,7 @@ class DirectInjection extends Analyzer {
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
         $this->atomIs('Phpvariable')
-             ->codeIs($vars, true)
+             ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('VARIABLE')
              ->raw($safeIndex)
              ->goToArray()
@@ -97,7 +104,7 @@ class DirectInjection extends Analyzer {
 
         // foreach (looping on incoming variables)
         $this->atomIs(self::$VARIABLES_ALL)
-             ->codeIs($vars, true)
+             ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
              ->goToArray()
              ->inIs('SOURCE');
         $this->prepareQuery();

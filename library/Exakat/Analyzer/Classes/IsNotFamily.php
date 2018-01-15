@@ -32,16 +32,14 @@ class IsNotFamily extends Analyzer {
         $this->atomIs('Staticmethodcall')
              ->hasClass()
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->atomIsNot(array('Self', 'Parent', 'Static'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToClass()
-             ->hasName()
+             ->atomIs('Class')
              ->notSamePropertyAs('fullnspath', 'fnp')
-             ->raw('where( __.emit().repeat( __.out("EXTENDS").in("DEFINITION") ).times('.self::MAX_LOOPING.')
+             ->raw('not( where( __.emit().repeat( __.out("EXTENDS").in("DEFINITION") ).times('.self::MAX_LOOPING.')
                              .filter{ it.get().value("fullnspath") == fnp }
-                             .count().is(eq(0))
-                          )')
+                        ) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -49,20 +47,16 @@ class IsNotFamily extends Analyzer {
         $this->atomIs('Staticmethodcall')
              ->hasClass()
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->atomIsNot(array('Self', 'Parent', 'Static'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToClass()
-             ->hasNoName()
+             ->atomIs('Classanonymous')
              ->back('first');
         $this->prepareQuery();
         
         // All non-in-class calls are OK
         $this->atomIs('Staticmethodcall')
-             ->hasNoClass()
-             ->hasNoTrait()
-             ->outIs('CLASS')
-             ->back('first');
+             ->hasNoClassTrait();
         $this->prepareQuery();
     }
 }

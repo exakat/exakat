@@ -31,7 +31,7 @@ class ImplicitGlobal extends Analyzer {
         $query = <<<GREMLIN
 g.V().hasLabel("Global").out("GLOBAL")
      .has("token", "T_VARIABLE")
-     .not( where( repeat(__.in({$this->linksDown})).emit().until(hasLabel("File")).hasLabel("Function", "Method", "Closure") ) )
+     .not( where( repeat(__.in({$this->linksDown})).emit().until(hasLabel("File")).hasLabel("Function", "Method", "Closure", "Magicmethod") ) )
      .values("code").unique()
 GREMLIN;
         $globalGlobal = $this->query($query)->toArray();
@@ -40,13 +40,15 @@ GREMLIN;
         // This is still useful
 
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
-        $globalGlobal = array_merge( $superglobals, $globalGlobal);
-        
+        $superglobals = $this->dictCode->translate($superglobals);
+        $explicitGlobal = array_merge($superglobals, $globalGlobal);
+        $explicitGlobal = array_unique($explicitGlobal);
+
         $this->atomIs('Global')
              ->hasFunction()
              ->outIs('GLOBAL')
              ->tokenIs('T_VARIABLE')
-             ->codeIsNot($globalGlobal);
+             ->codeIsNot($explicitGlobal, self::NO_TRANSLATE);
         $this->prepareQuery();
     }
 }

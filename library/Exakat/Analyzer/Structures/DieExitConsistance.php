@@ -29,10 +29,10 @@ class DieExitConsistance extends Analyzer {
 
     public function analyze() {
         $mapping = <<<GREMLIN
-x2 = it.get().value("code");
+x2 = it.get().value("fullnspath");
 GREMLIN;
-        $storage = array('die'  => 'die',
-                         'exit' => 'exit');
+        $storage = array('die'  => '\die',
+                         'exit' => '\exit');
 
         $this->atomIs('Exit')
              ->raw('map{ '.$mapping.' }')
@@ -48,7 +48,7 @@ GREMLIN;
             $total += $c;
         }
         Analyzer::$datastore->addRowAnalyzer($this->analyzerQuoted, $store);
-        if ($total == 0) {
+        if ($total === 0) {
             return;
         }
 
