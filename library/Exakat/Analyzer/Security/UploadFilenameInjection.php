@@ -30,8 +30,8 @@ class UploadFilenameInjection extends Analyzer {
         //if(@move_uploaded_file($_FILES['upload']['tmp_name'], $_FILES['upload']['name']))
         $this->atomFunctionIs('\move_uploaded_file')
              ->outWithRank('ARGUMENT', 1)
-             ->atomInside(self::$VARIABLES_ALL)
-             ->codeIs('$_FILES')
+             ->atomInside('Phpvariable')
+             ->codeIs('$_FILES', self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -40,8 +40,7 @@ class UploadFilenameInjection extends Analyzer {
         $this->atomFunctionIs('\move_uploaded_file')
              ->hasFunction()
              ->outWithRank('ARGUMENT', 1)
-             ->atomInside(self::$VARIABLES_ALL)
-             ->codeIsNot('$_FILES')
+             ->atomInside(array('Variable', 'Variableobject', 'Variablearray'))
              ->savePropertyAs('code', 'relay')
              ->goToFunction()
              ->outIs('BLOCK')
@@ -50,8 +49,8 @@ class UploadFilenameInjection extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomInside(self::$VARIABLES_ALL)
-             ->codeIs('$_FILES')
+             ->atomInside('Phpvariable')
+             ->codeIs('$_FILES', self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -60,8 +59,7 @@ class UploadFilenameInjection extends Analyzer {
         $this->atomFunctionIs('\move_uploaded_file')
              ->hasNoFunction()
              ->outWithRank('ARGUMENT', 1)
-             ->atomInside(self::$VARIABLES_ALL)
-             ->codeIsNot('$_FILES')
+             ->atomInside(array('Variable', 'Variableobject', 'Variablearray'))
              ->savePropertyAs('code', 'relay')
              ->goToFile()
              ->outIs('FILE')
@@ -70,8 +68,8 @@ class UploadFilenameInjection extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomInside(self::$VARIABLES_ALL)
-             ->codeIs('$_FILES')
+             ->atomInside('Phpvariable')
+             ->codeIs('$_FILES', self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

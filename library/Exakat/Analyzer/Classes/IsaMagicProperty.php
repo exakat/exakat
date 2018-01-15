@@ -39,7 +39,7 @@ class IsaMagicProperty extends Analyzer {
              ->analyzerIs('Classes/IsRead')
              ->hasClass()
              ->goToClass()
-             ->outIs('METHOD')
+             ->outIs('MAGICMETHOD')
              ->outIs('NAME')
              ->codeIs('__get')
              ->back('first');
@@ -51,7 +51,7 @@ class IsaMagicProperty extends Analyzer {
              ->analyzerIs('Classes/IsModified')
              ->hasClass()
              ->goToClass()
-             ->outIs('METHOD')
+             ->outIs('MAGICMETHOD')
              ->outIs('NAME')
              ->codeIs('__set')
              ->back('first');

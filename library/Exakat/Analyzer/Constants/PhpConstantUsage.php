@@ -27,14 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class PhpConstantUsage extends Analyzer {
     public function dependsOn() {
-        return array('Constants/ConstantUsage');
+        return array('Constants/ConstantUsage',
+                    );
     }
     
     public function analyze() {
         $ini = $this->loadIni('php_constants.ini', 'constants');
 
         $this->analyzerIs('Constants/ConstantUsage')
-             ->codeIs($ini, true);
+             ->codeIs($ini, self::TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }

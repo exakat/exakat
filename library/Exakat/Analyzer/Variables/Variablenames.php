@@ -39,8 +39,7 @@ class Variablenames extends Analyzer {
         // $x()
         $this->atomIs('Functioncall')
              ->tokenIs('T_VARIABLE')
-             ->outIs('NAME')
-             ->codeIsNot('{}');
+             ->outIs('NAME');
         $this->prepareQuery();
 
         // $object->{$x}()

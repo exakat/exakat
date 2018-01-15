@@ -100,7 +100,7 @@ GREMLIN;
                  ->analyzerIsNot('Classes/PropertyUsedBelow')
                  ->_as('results')
                  ->outIsIE('LEFT')
-                 ->isNot('code', array_keys($calls))
+                 ->codeIsNot(array_keys($calls), self::NO_TRANSLATE)
                  ->savePropertyAs('code', 'variable')
                  ->goToClass()
                  ->isNotHash('fullnspath', $calls, 'variable')

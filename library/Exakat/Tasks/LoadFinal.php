@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Analyzer\Docs;
 use Exakat\Config;
 use Exakat\Data\Methods;
+use Exakat\Data\Dictionary;
 use Exakat\Tokenizer\Token;
 use Exakat\Exceptions\GremlinException;
 
@@ -36,9 +37,12 @@ class LoadFinal extends Tasks {
 
     private $PHPconstants = array();
     private $PHPfunctions = array();
+    private $dictCode = null;
 
     public function run() {
         $this->linksIn = Token::linksAsList();
+
+        $this->dictCode = new Dictionary($this->datastore);
 
         $this->logTime('Start');
         display('Start load final');
@@ -112,14 +116,13 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
      .has("fullnspath")
-     .not(where( __.in("DEFINITION")))
+     .not(where( __.in("DEFINITION", "NAME")))
      .values("code")
      .unique()
 GREMLIN;
-
         $res = $this->gremlin->query($query);
 
-        $constants = array_values(array_intersect($res->toArray(), $constantsPHP));
+        $constants = array_values(array_intersect($res->toArray(), $this->dictCode->translate($constantsPHP) ));
         
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
@@ -127,7 +130,8 @@ g.V().hasLabel("Identifier")
      .not(where( __.in("DEFINITION")))
      .filter{ it.get().value("code") in arg1 }
      .sideEffect{
-         fullnspath = "\\\\" + it.get().value("code");
+         tokens = it.get().value("fullnspath").tokenize('\\\\');
+         fullnspath = "\\\\" + tokens.last();
          it.get().property("fullnspath", fullnspath); 
      }.count();
 
@@ -164,6 +168,7 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
+     .not(has("token", "T_NS_SEPARATOR"))
      .not(where( __.in("DEFINITION")))
      .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
      .filter{ name = parts.last().toLowerCase(); name in arg1 }

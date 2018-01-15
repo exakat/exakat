@@ -29,7 +29,7 @@ class EchoTagUsage extends Analyzer {
     public function analyze() {
         // <?= $a;
         $this->atomIs('Echo')
-             ->is('code', '<?=');
+             ->codeIs('<?=');
         $this->prepareQuery();
     }
 }

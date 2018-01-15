@@ -31,13 +31,15 @@ class OldStyleConstructor extends Analyzer {
         
         // No __construct found
         if (empty($__construct)) {
-            return ;
+            $hasNo__construct = 'filter{ true; }';
+        } else {
+            $hasNo__construct = 'not( where( __.out("MAGICMETHOD").out("NAME").filter{ it.get().value("code") in ***} ) )';
         }
 
-        $hasNo__construct = 'not( where( __.out("METHOD").out("NAME").filter{ it.get().value("code") in ***} ) )';
 
         // No mentionned namespaces
         $this->atomIs('Class')
+             ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\$')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->inIs('NAME')
@@ -46,25 +48,6 @@ class OldStyleConstructor extends Analyzer {
              ->atomIs('Method')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
-             ->goToNamespace()
-             ->atomIs('Php') // no namespace => Global
-             ->back('first');
-        $this->prepareQuery();
-
-        // Namespace is mentionned but empty, so global
-        $this->atomIs('Class')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->inIs('NAME')
-             ->raw($hasNo__construct, $__construct)
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
-             ->goToNamespace()
-             ->atomIs('Namespace')
-             ->outIs('NAME')
-             ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
     }

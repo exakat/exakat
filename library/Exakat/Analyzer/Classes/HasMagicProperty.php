@@ -31,10 +31,10 @@ class HasMagicProperty extends Analyzer {
         
         // Nsname that is not used somewhere else
         $this->atomIs(array('Class', 'Classanonymous', 'Trait'))
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->outIs('NAME')
-             ->codeIs($methods)
+             ->codeIs($methods, self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

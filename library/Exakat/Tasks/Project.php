@@ -157,7 +157,8 @@ class Project extends Tasks {
         $this->logTime('Loading');
 
         // Dump is a child process
-        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project;
+        // initialization and first collection (action done once)
+        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -collect';
         shell_exec($shell);
         $this->logTime('Dumped and inited');
 

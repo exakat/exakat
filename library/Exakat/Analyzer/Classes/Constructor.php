@@ -35,7 +35,7 @@ class Constructor extends Analyzer {
         }
         
         // __construct is the main constructor of the class
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->hasClass()
              ->outIs('NAME')
              ->codeIs($construct, self::NO_TRANSLATE)
@@ -47,7 +47,7 @@ class Constructor extends Analyzer {
              ->outIs('NAME')
              ->savePropertyAs('code', 'code')
              ->back('first')
-             ->raw('not( where( __.out("METHOD").hasLabel("Method").out("NAME").has("fullcode", "__construct") ) )')
+             ->raw('not( where( __.out("MAGICMETHOD").hasLabel("Magicmethod").out("NAME").filter{ it.get().value("fullcode").toLowerCase() == "__construct"} ) )')
              ->outIs('METHOD')
              ->atomIs('Method')
              ->_as('constructor')

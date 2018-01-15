@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class CustomConstantUsage extends Analyzer {
     public function dependsOn() {
-        return array('Constants/ConstantUsage');
+        return array('Constants/ConstantUsage',
+                    );
     }
     
     public function analyze() {

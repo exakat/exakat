@@ -821,7 +821,7 @@ GREMLIN
         return $this;
     }
 
-    public function noChildWithRank($edgeName, $rank = '0') {
+    public function noChildWithRank($edgeName, $rank = 0) {
         if (is_int($rank)) {
             $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').has("rank", ***) ) )', abs($rank));
         } else {
@@ -878,7 +878,8 @@ GREMLIN
             $translatedCode = $this->dictCode->translate($code);
 
             if (empty($translatedCode)) {
-                $this->addMethod("filter{ false; }");
+                // Couldn't find anything in the dictionary : OK!
+                $this->addMethod("filter{ true; }");
                 return $this;
             }
         
