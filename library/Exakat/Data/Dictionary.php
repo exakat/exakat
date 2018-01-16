@@ -32,11 +32,22 @@ class Dictionary {
     private $dictionary = array();
     private $lcindex = array();
     
+    static $singleton = null;
+    
     public function __construct($datastore) {
         $this->dictionary = $datastore->getAllHash('dictionary');
         foreach($this->dictionary as $key => $value) {
             $this->lcindex[mb_strtolower($key)] = 1;
         }
+        
+        self::$singleton = $this;
+    }
+    
+    static function factory($datastore) {
+        if (self::$singleton === null) {
+            new self($datastore);
+        }
+        return self::$singleton;
     }
 
     public function translate($code, $case = self::CASE_SENSITIVE) {
