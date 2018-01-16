@@ -30,7 +30,7 @@ class NoPublicAccess extends Analyzer {
 
         $gremlin = <<<GREMLIN
 g.V().hasLabel("Member")
-     .not(where( __.out("OBJECT").has("code", "\$this")) )
+     .not(where( __.out("OBJECT").hasLabel("This")) )
      .out("MEMBER").hasLabel("Name")
      .values('code').unique();
 GREMLIN;
@@ -53,7 +53,7 @@ g.V().hasLabel("Staticproperty")
      .where( 
      __.out("CLASS")
          .has("token", within("T_STRING", "T_NS_SEPARATOR"))
-         .not(has("code", within(["self", "static"])))
+         .not(hasLabel("Self", "Static"))
          .sideEffect{fnp = it.get().value("fullnspath");}
      .in("CLASS")
      .out("MEMBER").hasLabel("Variable")

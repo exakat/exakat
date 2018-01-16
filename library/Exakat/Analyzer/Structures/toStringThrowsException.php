@@ -27,9 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class toStringThrowsException extends Analyzer {
     public function analyze() {
-        $this->atomIs('Method')
+        // class x { function __tostring() { throw new Exception(); }}
+        $this->atomIs('Magicmethod')
              ->outIs('NAME')
-             ->codeIs('__toString', true)
+             ->codeIs('__toString', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Throw')

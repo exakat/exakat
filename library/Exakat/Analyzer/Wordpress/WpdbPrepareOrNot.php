@@ -26,10 +26,16 @@ use Exakat\Analyzer\Analyzer;
 
 class WpdbPrepareOrNot extends Analyzer {
     public function analyze() {
+        $wpdb = $this->dictCode->translate(array('$wpdb'));
+        
+        if (empty($wpdb)) {
+            return;
+        }
+
         // No variable, don't use prepare
         // $wpdb->prepare("insert into table values (1,2,3)")
         $this->atomIs('Variableobject')
-             ->codeIs('$wpdb')
+             ->codeIs('$wpdb', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('OBJECT')
              ->_as('results')
              ->atomIs('Methodcall')
@@ -44,7 +50,7 @@ class WpdbPrepareOrNot extends Analyzer {
 
         // $wpdb->prepare("insert into $wpdb->prefix values (1,2,3)")
         $this->atomIs('Variableobject')
-             ->codeIs('$wpdb')
+             ->codeIs('$wpdb', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('OBJECT')
              ->_as('results')
              ->atomIs('Methodcall')
@@ -55,14 +61,14 @@ class WpdbPrepareOrNot extends Analyzer {
              ->tokenIs('T_QUOTE')
              // If it's a property, we accept $wpdb
              ->raw('not( where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
-                             .not( where( __.out("OBJECT").has("code", "\$wpdb") ) )
+                             .not( where( __.out("OBJECT").has("code", '.$wpdb[0].') ) )
                              ) )')
              ->back('results');
         $this->prepareQuery();
 
         // $wpdb->prepare(<<<SQL insert into $wpdb->prefix values (1,2,3) SQL;)
         $this->atomIs('Variableobject')
-             ->codeIs('$wpdb')
+             ->codeIs('$wpdb', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('OBJECT')
              ->_as('results')
              ->atomIs('Methodcall')
@@ -73,14 +79,14 @@ class WpdbPrepareOrNot extends Analyzer {
              ->is('heredoc', true)
              // If it's a property, we accept $wpdb
              ->raw('where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
-                             .not( where( __.out("OBJECT").has("code", "\$wpdb") ) )
+                             .not( where( __.out("OBJECT").has("code", '.$wpdb[0].') ) )
                               )')
              ->back('results');
         $this->prepareQuery();
         
         // $wpdb->prepare("insert into ".$wpdb->prefix." values (1,2,3)")
         $this->atomIs('Variableobject')
-             ->codeIs('$wpdb')
+             ->codeIs('$wpdb', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('OBJECT')
              ->_as('results')
              ->atomIs('Methodcall')
@@ -90,7 +96,7 @@ class WpdbPrepareOrNot extends Analyzer {
              ->atomIs('Concatenation')
              // If it's a property, we accept $wpdb
              ->raw('not( where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
-                             .not( where( __.out("OBJECT").has("code", "\$wpdb") ) )
+                             .not( where( __.out("OBJECT").has("code", '.$wpdb[0].') ) )
                              ) )')
              ->outIs('CONCAT')
              ->atomIs('String')
@@ -98,7 +104,7 @@ class WpdbPrepareOrNot extends Analyzer {
              // If it's a property, we accept $wpdb
              ->raw('not( where( __.out("CONCAT").hasLabel("String").has("token", "T_QUOTE")
                              .out("CONCAT").hasLabel("Variable", "Array", "Member")
-                             .not( __.where( __.out("OBJECT").has("code", "\$wpdb")))
+                             .not( __.where( __.out("OBJECT").has("code", '.$wpdb[0].')))
                              ) )')
              ->back('results');
         $this->prepareQuery();

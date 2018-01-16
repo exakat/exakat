@@ -138,7 +138,7 @@ abstract class Analyzer {
             self::$datastore = new Datastore($this->config);
         }
         
-        $this->dictCode = new Dictionary(self::$datastore);
+        $this->dictCode = Dictionary::factory(self::$datastore);
         
         $this->linksDown = Token::linksAsList();
     }

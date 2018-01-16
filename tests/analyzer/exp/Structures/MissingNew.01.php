@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('foo2( )',
-                      '\foo4( )',
+                      '\\foo4( )',
                      );
 
 $expected_not = array('foo1( )',

@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 class UnitializedProperties extends Analyzer {
     public function dependsOn() {
         return array('Classes/Constructor',
-                     'Classes/IsModified');
+                     'Classes/IsModified',
+                    );
     }
     
     public function analyze() {
@@ -41,8 +42,8 @@ class UnitializedProperties extends Analyzer {
              ->_as('results')
              ->savePropertyAs('propertyname', 'property')
              ->back('first')
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(array('Method', 'Magicmethod'))
              ->analyzerIs('Classes/Constructor')
              ->raw('not(where(
     __.out("BLOCK").repeat( out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.')
@@ -63,7 +64,7 @@ class UnitializedProperties extends Analyzer {
              ->_as('results')
              ->savePropertyAs('propertyname', 'property')
              ->back('first')
-             ->raw('not( where( __.out("METHOD").hasLabel("Method").in("ANALYZED").has("analyzer", "Classes/Constructor") ) )')
+             ->raw('not( where( __.out("MAGICMETHOD").hasLabel("Magicmethod").in("ANALYZED").has("analyzer", "Classes/Constructor") ) )')
              ->back('results');
         $this->prepareQuery();
 
@@ -78,8 +79,8 @@ class UnitializedProperties extends Analyzer {
              ->_as('results')
              ->savePropertyAs('code', 'property')
              ->back('first')
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->analyzerIs('Classes/Constructor')
              ->raw('where(
     __.out("BLOCK").repeat( out('.$this->linksDown.') ).emit().times('.self::MAX_LOOPING.')
@@ -101,7 +102,7 @@ class UnitializedProperties extends Analyzer {
              ->_as('results')
              ->savePropertyAs('code', 'property')
              ->back('first')
-             ->raw('not( where( __.out("METHOD").hasLabel("Method").in("ANALYZED").has("analyzer", "Classes/Constructor") ) )')
+             ->raw('not( where( __.out("MAGICMETHOD").hasLabel("Magicmethod").in("ANALYZED").has("analyzer", "Classes/Constructor") ) )')
              ->back('results');
         $this->prepareQuery();
     }

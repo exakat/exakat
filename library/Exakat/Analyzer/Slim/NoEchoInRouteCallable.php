@@ -28,7 +28,7 @@ class NoEchoInRouteCallable extends Slim {
     public function analyze() {
         // Collect variables that
         $apps = $this->getAppVariables();
-                                   
+
         // didn't find any application variable. Quit.
         if (empty($apps)) {
             return;
@@ -38,10 +38,10 @@ class NoEchoInRouteCallable extends Slim {
         $this->atomIs('Methodcall')
              ->outIs('OBJECT')
              ->atomIs('Variableobject')
-             ->codeIs($apps)
+             ->codeIs($apps, self::NO_TRANSLATE, self::CASE_SENSITIVE)
              ->back('first')
              ->outIs('METHOD')
-             ->codeIs(array('get', 'put', 'any', 'patch', 'option', 'delete', 'post'))
+             ->codeIs(array('get', 'put', 'any', 'patch', 'option', 'delete', 'post'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Closure')
              ->outIs('BLOCK')
@@ -54,10 +54,10 @@ class NoEchoInRouteCallable extends Slim {
         $this->atomIs('Methodcall')
              ->outIs('OBJECT')
              ->atomIs('Variableobject')
-             ->codeIs($apps)
+             ->codeIs($apps, self::NO_TRANSLATE, self::CASE_SENSITIVE)
              ->back('first')
              ->outIs('METHOD')
-             ->codeIs(array('get', 'put', 'any', 'patch', 'option', 'delete', 'post'))
+             ->codeIs(array('get', 'put', 'any', 'patch', 'option', 'delete', 'post'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Staticclass')
              

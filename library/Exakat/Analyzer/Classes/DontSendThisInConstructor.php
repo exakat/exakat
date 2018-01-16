@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class DontSendThisInConstructor extends Analyzer {
     public function analyze() {
         // function __construct() { foo($this); }
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->outIs('NAME')
              ->codeIs('__construct')
              ->back('first')

@@ -26,18 +26,20 @@ use Exakat\Analyzer\Analyzer;
 
 class GlobalsVsGlobal extends Analyzer {
     public function analyze() {
+        $globals = $this->dictCode->translate(array('$GLOBALS'));
+
         $mapping = <<<GREMLIN
-if (it.get().value('code') == '\$GLOBALS') { 
-    x2 = 'GLOBALS'; 
+if (it.get().value("code") == $globals[0]) { 
+    x2 = "GLOBALS"; 
 } else {
-    x2 = 'global'; 
+    x2 = "global"; 
 }
 GREMLIN;
         $storage = array('$GLOBALS' => 'GLOBALS',
-                         'global'  => 'global');
+                         'global'   => 'global');
 
         $this->atomIs(self::$VARIABLES_ALL)
-             ->raw('or( has("code", "\$GLOBALS"), __.in("GLOBAL")) ')
+             ->raw('or( has("code", '.$globals[0].'), __.in("GLOBAL")) ')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
@@ -62,7 +64,7 @@ GREMLIN;
         }
         
         $this->atomIs(self::$VARIABLES_ALL)
-             ->raw('or( has("code", "\$GLOBALS"), __.in("GLOBAL")) ')
+             ->raw('or( has("code", '.$globals[0].'), __.in("GLOBAL")) ')
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');
