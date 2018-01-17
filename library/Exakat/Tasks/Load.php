@@ -3460,13 +3460,13 @@ SQL;
                 $fullcode[] = $namespace->fullcode.' '.$block->fullcode;
 
                 // Several namespaces ? This has to be recalculated inside the block!!
-                $namespace->fullnspath = makeFullnspath($namespace);
+                $namespace->fullnspath = makeFullnspath($namespace->fullcode);
 
                 $this->addLink($use, $namespace, 'USE');
             } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
                 //use A\B\ {} // Prefixes, within a Class/Trait
                 $this->addLink($use, $namespace, 'GROUPUSE');
-                $prefix = makeFullnspath($namespace);
+                $prefix = makeFullnspath($namespace->fullcode);
                 if ($prefix[0] !== '\\') {
                     $prefix = '\\'.$prefix;
                 }
@@ -3546,7 +3546,7 @@ SQL;
                 if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
 
-                    $fullnspath = makeFullnspath($namespace);
+                    $fullnspath = makeFullnspath($namespace->fullcode);
                     $namespace->fullnspath = $fullnspath;
                     $namespace->origin     = $fullnspath;
 

@@ -27,6 +27,10 @@ use Exakat\Analyzer\Analyzer;
 class GlobalsVsGlobal extends Analyzer {
     public function analyze() {
         $globals = $this->dictCode->translate(array('$GLOBALS'));
+        
+        if (empty($globals)) {
+            return;
+        }
 
         $mapping = <<<GREMLIN
 if (it.get().value("code") == $globals[0]) { 
