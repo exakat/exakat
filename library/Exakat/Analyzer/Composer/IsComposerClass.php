@@ -31,7 +31,7 @@ class IsComposerClass extends Analyzer {
         $data = new Composer($this->config);
 
         $classes = $data->getComposerClasses();
-        $classesFullNP = $this->makeFullNsPath($classes);
+        $classesFullNP = makeFullNsPath($classes);
         
         $this->atomIs('Class')
              ->outIs(array('IMPLEMENTS', 'EXTENDS'))

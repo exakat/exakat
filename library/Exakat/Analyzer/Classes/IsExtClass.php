@@ -47,7 +47,7 @@ class IsExtClass extends Analyzer {
         }
 
         $classes = call_user_func_array('array_merge', $c);
-        $classes = $this->makeFullNsPath($classes);
+        $classes = makeFullNsPath($classes);
         $classes = array_keys(array_count_values($classes));
         
         $this->analyzerIs('Classes/ClassUsage')

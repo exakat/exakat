@@ -126,7 +126,7 @@ g.V().hasLabel("Functioncall").out("ARGUMENT")
         .has("count", 2).out("ARGUMENT").has("rank", 0).values("noDelimiter").unique()
 GREMLIN
 )->toArray();
-        $arrays = $this->makeFullNsPath($arrays);
+        $arrays = makeFullNsPath($arrays);
         
         if (!empty($arrays)) {
             $this->atomIs('Class')

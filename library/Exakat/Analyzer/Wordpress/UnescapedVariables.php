@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UnescapedVariables extends Analyzer {
     public function analyze() {
         $escFunctions = $this->loadIni('wordpress_functions.ini', 'esc');
-        $escFunctions = $this->makeFullNsPath($escFunctions);
+        $escFunctions = makeFullNsPath($escFunctions);
         
         // echo esc_attr($a) . $unescapedVar
         $this->atomIs(array('Echo', 'Print'))

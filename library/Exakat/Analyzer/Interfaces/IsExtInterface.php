@@ -40,7 +40,7 @@ class IsExtInterface extends Analyzer {
             }
         }
         $interfaces = call_user_func_array('array_merge', $i);
-        $interfaces = $this->makeFullNsPath($interfaces);
+        $interfaces = makeFullNsPath($interfaces);
         
         $this->atomIs('Class')
              ->outIs(array('IMPLEMENTS', 'EXTENDS'))

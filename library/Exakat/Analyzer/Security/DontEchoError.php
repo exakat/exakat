@@ -28,7 +28,7 @@ class DontEchoError extends Analyzer {
     public function analyze() {
         // echo mysql_error();
         $errorMessageFunctions = $this->loadIni('errorMessageFunctions.ini', 'functions');
-        $errorMessageFunctions = $this->makeFullNsPath($errorMessageFunctions);
+        $errorMessageFunctions = makeFullNsPath($errorMessageFunctions);
         
         $displayFunctions = $this->loadIni('displayFunctions.ini', 'functions');
         

@@ -43,7 +43,7 @@ class CaughtButNotThrown extends Analyzer {
         
         $this->atomIs('Catch')
              ->outIs('CLASS')
-             ->fullnspathIsNot($this->makeFullNsPath($phpExceptions))
+             ->fullnspathIsNot(makeFullNsPath($phpExceptions))
              ->fullnspathIsNot($thrown);
         $this->prepareQuery();
     }

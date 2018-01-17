@@ -31,16 +31,16 @@ class IsComposerNsname extends Analyzer {
         $data = new Composer($this->config);
 
         $packagistNamespaces = $data->getComposerNamespaces();
-        $packagistNamespacesFullNS = $this->makeFullNsPath($packagistNamespaces);
+        $packagistNamespacesFullNS = makeFullNsPath($packagistNamespaces);
 
         $packagistClasses = $data->getComposerClasses();
-        $packagistClassesFullNS = $this->makeFullNsPath($packagistClasses);
+        $packagistClassesFullNS = makeFullNsPath($packagistClasses);
 
         $packagistInterfaces = $data->getComposerInterfaces();
-        $packagistInterfacesFullNs = $this->makeFullNsPath($packagistInterfaces);
+        $packagistInterfacesFullNs = makeFullNsPath($packagistInterfaces);
 
         $packagistTraits = $data->getComposerTraits();
-        $packagistTraitsFullNs = $this->makeFullNsPath($packagistTraits);
+        $packagistTraitsFullNs = makeFullNsPath($packagistTraits);
 
         ////////////////////////////////////////////////
         // Use

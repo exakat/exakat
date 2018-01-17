@@ -37,7 +37,7 @@ class NullOnNew extends Analyzer {
                        'NumberFormatter',
                        'ResourceBundle',
                        'IntlRuleBasedBreakIterator');
-        $names = $this->makeFullNsPath($names);
+        $names = makeFullNsPath($names);
         
         $this->atomIs('New')
              ->outIs('NEW')

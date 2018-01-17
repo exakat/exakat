@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ThrowFunctioncall extends Analyzer {
     public function analyze() {
         $phpClasses    = $this->loadIni('php_classes.ini', 'classes');
-        $phpClassesFnp = $this->makeFullNsPath($phpClasses);
+        $phpClassesFnp = makeFullNsPath($phpClasses);
         
         // throw className(), defined class, no function
         $this->atomIs('Throw')

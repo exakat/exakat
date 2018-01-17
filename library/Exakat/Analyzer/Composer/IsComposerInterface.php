@@ -37,7 +37,7 @@ class IsComposerInterface extends Analyzer {
         $data = new Composer($this->config);
 
         $interfaces = $data->getComposerInterfaces();
-        $interfacesFullNP = $this->makeFullNsPath($interfaces);
+        $interfacesFullNP = makeFullNsPath($interfaces);
         
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS', 'EXTENDS')

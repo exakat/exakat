@@ -34,10 +34,10 @@ class UnresolvedInstanceof extends Analyzer {
 
     public function analyze() {
         $classes = $this->loadIni('php_classes.ini', 'classes');
-        $classes = $this->makeFullNsPath($classes);
+        $classes = makeFullNsPath($classes);
 
         $interfaces = $this->loadIni('php_interfaces.ini', 'interfaces');
-        $interfaces = $this->makeFullNsPath($interfaces);
+        $interfaces = makeFullNsPath($interfaces);
         
         //general case
         // traits are omitted here

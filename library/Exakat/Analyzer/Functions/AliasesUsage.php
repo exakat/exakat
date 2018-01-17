@@ -29,7 +29,7 @@ class AliasesUsage extends Analyzer {
     
     public function analyze() {
         $ini = $this->loadIni('aliases.ini', 'alias');
-        $ini = $this->makeFullNsPath(array_keys($ini));
+        $ini = makeFullNsPath(array_keys($ini));
 
         $this->atomFunctionIs($ini);
         $this->prepareQuery();

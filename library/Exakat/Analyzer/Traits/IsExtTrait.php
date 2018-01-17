@@ -51,7 +51,7 @@ class IsExtTrait extends Analyzer {
 
         // no need to process anything!
         if (empty($traits)) { return true; }
-        $traits = $this->makeFullNsPath($traits);
+        $traits = makeFullNsPath($traits);
         
         $this->analyzerIs('Traits/TraitUsage')
              ->fullnspath($traits);

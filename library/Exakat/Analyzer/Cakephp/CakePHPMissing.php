@@ -43,7 +43,7 @@ class CakePHPMissing extends Analyzer {
         if (!empty($classes)) {
             $classes    = call_user_func_array('array_merge', array_values($classes));
             $classes    = array_keys(array_count_values($classes));
-            $classes    = $this->makeFullNsPath($classes);
+            $classes    = makeFullNsPath($classes);
         } else {
             $classes = array();
         }
@@ -52,7 +52,7 @@ class CakePHPMissing extends Analyzer {
         if (!empty($interfaces)) {
             $interfaces = call_user_func_array('array_merge', array_values($interfaces));
             $interfaces = array_keys(array_count_values($interfaces));
-            $interfaces = $this->makeFullNsPath($interfaces);
+            $interfaces = makeFullNsPath($interfaces);
         } else {
             $interfaces = array();
         }
@@ -61,7 +61,7 @@ class CakePHPMissing extends Analyzer {
         if (!empty($traits)) {
             $traits     = call_user_func_array('array_merge', array_values($traits));
             $traits     = array_keys(array_count_values($traits));
-            $traits     = $this->makeFullNsPath($traits);
+            $traits     = makeFullNsPath($traits);
         } else {
             $traits = array();
         }

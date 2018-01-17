@@ -33,7 +33,7 @@ class TraitUsage extends Analyzer {
     }
     
     public function analyze() {
-        $traits =  $this->makeFullNsPath($this->traits);
+        $traits =  makeFullNsPath($this->traits);
 
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')

@@ -3460,13 +3460,13 @@ SQL;
                 $fullcode[] = $namespace->fullcode.' '.$block->fullcode;
 
                 // Several namespaces ? This has to be recalculated inside the block!!
-                $namespace->fullnspath = $this->makeFullnspath($namespace);
+                $namespace->fullnspath = makeFullnspath($namespace);
 
                 $this->addLink($use, $namespace, 'USE');
             } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
                 //use A\B\ {} // Prefixes, within a Class/Trait
                 $this->addLink($use, $namespace, 'GROUPUSE');
-                $prefix = $this->makeFullnspath($namespace);
+                $prefix = makeFullnspath($namespace);
                 if ($prefix[0] !== '\\') {
                     $prefix = '\\'.$prefix;
                 }
@@ -3546,7 +3546,7 @@ SQL;
                 if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
 
-                    $fullnspath = $this->makeFullnspath($namespace);
+                    $fullnspath = makeFullnspath($namespace);
                     $namespace->fullnspath = $fullnspath;
                     $namespace->origin     = $fullnspath;
 
@@ -4933,10 +4933,6 @@ SQL;
 
     private function isContext($context) {
         return (boolean) $this->contexts[$context];
-    }
-
-    private function makeFullnspath($namespaceAs) {
-        return mb_strtolower(isset($namespaceAs->absolute) && $namespaceAs->absolute === self::ABSOLUTE ? $namespaceAs->fullcode : '\\'.$namespaceAs->fullcode) ;
     }
 
     private function setNamespace($namespace = 0) {
