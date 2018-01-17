@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class CourrierAntiPattern extends Analyzer {
     public function dependsOn() {
-        return array('Patterns/DependencyInjection');
+        return array('Patterns/DependencyInjection',
+                    );
     }
     
     public function analyze() {
@@ -43,7 +44,7 @@ class CourrierAntiPattern extends Analyzer {
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'property')
              ->goToClass()
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('BLOCK')
              ->atomInside('New')
              ->outIs('NEW')

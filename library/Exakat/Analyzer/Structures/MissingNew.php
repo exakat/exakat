@@ -34,7 +34,7 @@ GREMLIN
         $phpClasses = $this->loadIni('php_classes.ini', 'classes');
         
         $classes = array_unique(array_merge($phpClasses, $customClasses->toArray()));
-        $classes = $this->makeFullnspath($classes);
+        $classes = makeFullnspath($classes);
         
         $equal = $this->dictCode->translate('=');
         

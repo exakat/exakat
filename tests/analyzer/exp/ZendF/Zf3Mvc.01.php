@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('Zend\\Mvc\\Controller\\AbstractActionController',
-                      'AbstractActionController',
+$expected     = array('AbstractActionController',
                      );
 
-$expected_not = array('AbstractActionController2',
+$expected_not = array('Zend\\Mvc\\Controller\\AbstractActionController',
+                      'AbstractActionController2',
                      );
 
 ?>

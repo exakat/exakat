@@ -11,7 +11,6 @@ $expected     = array('class inANew { /**/ } ',
                       'class inAStaticConstant { /**/ } ',
                       'class inAInstanceof { /**/ } ',
                       'class inAString { /**/ } ',
-                      'class inAUseWithAlias { /**/ } ',
                       'class inATypehint { /**/ } ',
                      );
 
@@ -19,6 +18,7 @@ $expected_not = array('class unusedClass { /**/ } ',
                       'class someClass extends inAExtends implements inAImplements { /**/ } ',
                       'class someClass2 implements inAImplements1, inAImplements2, inAImplements3 { /**/ } ',
                       'class inAString2 { /**/ } ',
+                      'class inAUseWithAlias { /**/ } ',
                      );
 
 ?>

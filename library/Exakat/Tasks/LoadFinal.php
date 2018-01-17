@@ -92,7 +92,7 @@ g.V().hasLabel("Identifier", "Nsname")
      .has("fullnspath")
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath"); }
-     .in("DEFINITION").hasLabel("Class", "Trait", "Interface", "Constant")
+     .in("DEFINITION").hasLabel("Class", "Trait", "Interface", "Constant", "Defineconstant")
      .coalesce( __.out("ARGUMENT").has("rank", 0), 
                 __.hasLabel("Constant").out('NAME'), 
                 filter{ true; })
@@ -201,10 +201,7 @@ GREMLIN;
         $this->logTime('spotFallbackConstants');
         // Define-style constant definitions
         $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .not( where( __.in("METHOD") ) )
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-     .has("fullnspath", "\\\\define")
+g.V().hasLabel("Defineconstant")
      .out("ARGUMENT").has("rank", 0)
      .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
      .map{ 
@@ -240,13 +237,10 @@ g.V().hasLabel("Identifier", "Nsname")
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
      .addE('DEFINITION')
      .from( 
-        g.V().hasLabel("Functioncall")
-              .not( where( __.in("METHOD") ) )
-              .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-              .has("fullnspath", "\\\\define")
-              .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
-              .filter{ it.get().value("fullnspath") == name}.select('a')
-         ).count();
+        g.V().hasLabel("Defineconstant")
+             .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
+             .filter{ it.get().value("fullnspath") == name}.select('a')
+      ).count();
 
 GREMLIN;
             $this->gremlin->query($query, array('arg1' => $constantsDefine));
@@ -266,10 +260,7 @@ g.V().hasLabel("Identifier", "Nsname")
      }
      .addE('DEFINITION')
      .from( 
-        g.V().hasLabel("Functioncall")
-             .not( where( __.in("METHOD") ) )
-             .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-             .has("fullnspath", "\\\\define")
+        g.V().hasLabel("Defineconstant")
              .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
              .filter{ it.get().value("fullnspath") == name}.select('a')
       ).count()

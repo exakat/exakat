@@ -190,4 +190,16 @@ class Dictionary {
         
         return array_values($return);
     }
+
+    public function staticMethodStrings() {
+        $doublecolon = array_filter($this->dictionary, function ($x) { return strlen($x) > 4 && strpos($x,'::') !== false && mb_strtolower($x) === $x;}, ARRAY_FILTER_USE_KEY );
+        
+        $return = array();
+        foreach($doublecolon as $key => $value) {
+            preg_match('/[\'"](.+?)::(.+?)/', $key, $r);
+            $return['\\'.$r[1]] = $value;
+        }
+        
+        return $return;
+    }
 }

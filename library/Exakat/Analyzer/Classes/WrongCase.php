@@ -32,10 +32,11 @@ class WrongCase extends Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIsNot(array('Static', 'Parent', 'Self'))
-             ->savePropertyAs('code', 'classe')
+             ->savePropertyAs('fullcode', 'classe')
+             ->getNameInFNP('classe')
              ->classDefinition()
              ->outIs('NAME')
-             ->notSamePropertyAs('code', 'classe')
+             ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -43,10 +44,11 @@ class WrongCase extends Analyzer {
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
              ->atomIsNot(array('Static', 'Parent', 'Self'))
-             ->savePropertyAs('code', 'classe')
+             ->savePropertyAs('fullcode', 'classe')
+             ->getNameInFNP('classe')
              ->classDefinition()
              ->outIs('NAME')
-             ->notSamePropertyAs('code', 'classe')
+             ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -54,10 +56,11 @@ class WrongCase extends Analyzer {
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->atomIsNot(array('Static', 'Parent', 'Self'))
-             ->savePropertyAs('code', 'classe')
+             ->savePropertyAs('fullcode', 'classe')
+             ->getNameInFNP('classe')
              ->classDefinition()
              ->outIs('NAME')
-             ->notSamePropertyAs('code', 'classe')
+             ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -66,10 +69,11 @@ class WrongCase extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->atomIsNot(array('Static', 'Parent', 'Self'))
-             ->savePropertyAs('code', 'classe')
+             ->savePropertyAs('fullcode', 'classe')
+             ->getNameInFNP('classe')
              ->classDefinition()
              ->outIs('NAME')
-             ->notSamePropertyAs('code', 'classe')
+             ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first')
              ->outIs('ARGUMENT');
         $this->prepareQuery();
@@ -78,10 +82,11 @@ class WrongCase extends Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->atomIsNot(array('Static', 'Parent', 'Self'))
-             ->savePropertyAs('code', 'classe')
+             ->savePropertyAs('fullcode', 'classe')
+             ->getNameInFNP('classe')
              ->classDefinition()
              ->outIs('NAME')
-             ->notSamePropertyAs('code', 'classe')
+             ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -89,10 +94,11 @@ class WrongCase extends Analyzer {
         $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->outIsIE('NAME')
-             ->savePropertyAs('code', 'classe')
+             ->savePropertyAs('fullcode', 'classe')
+             ->getNameInFNP('classe')
              ->inIs('DEFINITION')
              ->outIs('NAME')
-             ->notSamePropertyAs('code', 'classe')
+             ->notSamePropertyAs('fullcode', 'classe', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

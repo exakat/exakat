@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedConstants extends Analyzer {
     public function dependsOn() {
-        return array('Constants/ConstantUsage');
+        return array('Constants/ConstantUsage',
+                    );
     }
     
     public function analyze() {
@@ -35,7 +36,7 @@ class UnusedConstants extends Analyzer {
 g.V().hasLabel("Analysis")
      .has("analyzer", "Constants/ConstantUsage")
      .out("ANALYZED")
-     .values("code")
+     .values("fullcode")
      .unique()
 GREMLIN;
         $constants = $this->query($query)->toArray();

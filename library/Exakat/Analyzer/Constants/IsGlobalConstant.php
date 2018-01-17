@@ -45,7 +45,7 @@ class IsGlobalConstant extends Analyzer {
             }
         }
         $constants = call_user_func_array('array_merge', $c);
-        $constantsFullNs = $this->makeFullNsPath($constants, true);
+        $constantsFullNs = makeFullNsPath($constants, true);
         
         $this->analyzerIs('Constants/ConstantUsage')
              ->tokenIs('T_STRING')

@@ -45,7 +45,7 @@ class CustomConstantUsage extends Analyzer {
             }
         }
         $constants = call_user_func_array('array_merge', $c);
-        $constants = $this->makeFullNsPath($constants);
+        $constants = makeFullNsPath($constants);
 
         // @note NSnamed are OK by default (may be not always!)
         $this->atomIs(array('Identifier', 'Nsname'))

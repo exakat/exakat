@@ -95,29 +95,25 @@ g.V().hasLabel("String").has("token", "T_CONSTANT_ENCAPSED_STRING")
      .not(where( __.in("ARGUMENT").hasLabel("Arrayliteral") ) )
      .filter{ it.get().value("noDelimiter").length() < 100}.filter{ it.get().value("noDelimiter").length() > 0}
      .filter{ (it.get().value("noDelimiter") =~ /[^a-zA-Z0-9_\\x7f-\\xff]/).getCount() == 0}
-     .map{ it.get().value("noDelimiter").toLowerCase(); }.unique()
+     .map{ it.get().value("noDelimiter"); }.unique()
 GREMLIN
 )->toArray();
+
+
         if (!empty($strings)) {
             $this->atomIs('Class')
                  ->outIs('NAME')
-                 ->codeIs($strings)
+                 ->codeIs($strings, self::TRANSLATE, self::CASE_INSENSITIVE)
                  ->back('first');
             $this->prepareQuery();
         }
 
         // class used in a String (string with ::)
-        $strings = $this->query(<<<GREMLIN
-g.V().hasLabel("String").not( where( __.out("CONCAT") ) )
-                        .filter{ (it.get().value("noDelimiter") =~ "::" ).getCount() == 1 }
-                        .where( __.in("DEFINITION") )
-                        .map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
-GREMLIN
-)->toArray();
-        $strings = $this->makeFullNsPath($strings);
+        $strings = $this->dictCode->staticMethodStrings();
+
         if (!empty($strings)) {
             $this->atomIs('Class')
-                 ->fullnspathIs($strings)
+                 ->fullnspathIs(array_keys($strings))
                  ->back('first');
             $this->prepareQuery();
         }

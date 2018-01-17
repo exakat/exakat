@@ -42,11 +42,28 @@ class CloseNaming extends Analyzer {
         }
 
         // Identical, except for case
-        $doubles = $this->dictCode->caseCloseVariables();
-
-        if (!empty($doubles)) {
-            $this->atomIs(array("Variable", "Variablearray", "Variableobject"))
-                 ->codeIs($doubles, self::NO_TRANSLATE);
+        $query = <<<GREMLIN
+g.V().hasLabel("Variable", "Variablearray", "Variableobject")
+     .values("fullcode")
+     .unique()
+GREMLIN;
+        $doubles = $this->query($query)->toArray();
+        $uniques = array();
+        foreach($doubles as $u) {
+            $v = mb_strtolower($u);
+            if (isset($uniques[$v])) {
+                $uniques[$v][] = $u;
+            } else {
+                $uniques[$v] = [$u];
+            }
+        }
+        
+        $uniques = array_filter($uniques, function ($x) { return count($x) > 1; });
+        if (!empty($uniques)) {
+            $doubles = array_merge(...array_values($uniques));
+    
+            $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
+                 ->codeIs($doubles);
             $this->prepareQuery();
         }
 

@@ -2143,6 +2143,11 @@ SQL;
         } elseif ($atom === 'Methodcallname') {
             $functioncall->fullnspath = mb_strtolower($name->code);
             $functioncall->aliased    = self::NOT_ALIASED;
+        } elseif ($atom === 'Defineconstant') {
+            $functioncall->fullnspath = '\\define';
+            $functioncall->aliased    = self::NOT_ALIASED;
+
+            $this->processDefineAsConstants($functioncall);
         } elseif ($getFullnspath === self::WITH_FULLNSPATH ||
                   $name->fullnspath !== '\\list') {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
@@ -2151,11 +2156,6 @@ SQL;
 
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
-
-            // Probably weak check, since we haven't built fullnspath for functions yet...
-            if (mb_strtolower($name->code) === 'define') {
-                $this->processDefineAsConstants($functioncall);
-            }
 
             $this->addCall('function', $fullnspath, $functioncall);
 
@@ -4762,7 +4762,7 @@ SQL;
             return; // Can't be a class anyway.
         }
         
-        $fullnspath = '\\'.$this->argumentsId[0]->noDelimiter;
+        $fullnspath = makeFullnspath($this->argumentsId[0]->noDelimiter, true);
         $this->addDefinition('const', $fullnspath, $argumentsId);
         $this->argumentsId[0]->fullnspath = $fullnspath;
 
@@ -5030,7 +5030,7 @@ SQL;
         } else {
             $types = array('function', 'class');
 
-            $fullnspath = mb_strtolower(stripslashes($call->noDelimiter));
+            $fullnspath = mb_strtolower($call->noDelimiter);
             if (empty($fullnspath) || $fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
             }

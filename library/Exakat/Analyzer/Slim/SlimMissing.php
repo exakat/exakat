@@ -36,7 +36,7 @@ class SlimMissing extends Analyzer {
         $slim = new Slim($this->config->dir_root.'/data', $this->config);
         $classes = $slim->getClasses($this->version);
         $classes = array_pop($classes);
-        $classes = $this->makeFullnspath($classes);
+        $classes = makeFullnspath($classes);
         
         $this->analyzerIs('Slim/UseSlim')
              ->fullnspathIsNot($classes)

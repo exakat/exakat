@@ -7,6 +7,14 @@ trait t {
     }
 }
 
+trait t {
+    function foo() {
+        function a() {
+            echo $this;
+        };
+    }
+}
+
 
 trait t {
     function foo() {

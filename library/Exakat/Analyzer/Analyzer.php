@@ -594,7 +594,7 @@ GREMLIN
         assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
         $this->atomIs('Functioncall')
              ->raw('has("fullnspath")')
-             ->fullnspathIs($this->makeFullNsPath($fullnspath));
+             ->fullnspathIs(makeFullNsPath($fullnspath));
 
         return $this;
     }
@@ -604,7 +604,7 @@ GREMLIN
         $this->atomIs('Functioncall')
              ->raw('not( where( __.out("NAME").hasLabel("Array", "Variable")) )')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
-             ->fullnspathIsNot($this->makeFullNsPath($fullnspath));
+             ->fullnspathIsNot(makeFullNsPath($fullnspath));
 
         return $this;
     }
@@ -2034,31 +2034,8 @@ GREMLIN;
     }
     
     public function makeFullNsPath($functions, $constant = false) {
-        if ($constant === false) {
-            $cb = function ($x) {
-                $r = mb_strtolower($x);
-                if (isset($r[0]) && $r[0] != '\\') {
-                    $r = '\\' . $r;
-                }
-            return $r;
-            };
-        } else {
-            $cb = function ($r) {
-                if (isset($r[0]) && $r[0] != '\\') {
-                    $r = '\\' . $r;
-                }
-            return $r;
-            };
-        }
-
-        if (is_string($functions)) {
-            return $cb($functions);
-        } elseif (is_array($functions)) {
-            $r = array_map($cb, $functions);
-        } else {
-            throw new \Exception('Function is of the wrong type : '.var_export($functions));
-        }
-        return $r;
+        debug_print_backtrace();die();
+        return makeFullnspath($functions, $constant);
     }
     
     private function tolowercase(&$code) {

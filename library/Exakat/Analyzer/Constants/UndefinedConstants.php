@@ -29,7 +29,8 @@ class UndefinedConstants extends Analyzer {
     public function dependsOn() {
         return array('Constants/ConstantUsage',
                      'Constants/IsExtConstant',
-                     'Constants/CustomConstantUsage');
+                     'Constants/CustomConstantUsage',
+                    );
     }
     
     public function analyze() {

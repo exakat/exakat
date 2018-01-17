@@ -39,7 +39,7 @@ class WordpressMissing extends Analyzer {
         $data = new Wordpress($this->config->dir_root.'/data', $this->config);
         $classes = $data->getClasses('wordpress' , $this->version);
         $classes = array_pop($classes);
-        $classes = $this->makeFullnspath($classes);
+        $classes = makeFullnspath($classes);
         
         $this->analyzerIs($analyzer)
              ->fullnspathIsNot($classes);

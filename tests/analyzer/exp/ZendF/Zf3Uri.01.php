@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('Zend\\Uri\\UriFactory',
-                      'Zend\\Uri\\Mailto',
+$expected     = array('Zend\\Uri\\Mailto',
                       'UriFactory',
                      );
 
-$expected_not = array('Zend\\Uri\\UriFactoryNotZend',
+$expected_not = array('Zend\\Uri\\UriFactory',
+                      'Zend\\Uri\\UriFactoryNotZend',
                       'Http',
                      );
 
