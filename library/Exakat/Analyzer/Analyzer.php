@@ -1436,7 +1436,7 @@ GREMLIN
         return $this;
     }
 
-    public function goToFunction($type = array('Function', 'Method', 'Closure')) {
+    public function goToFunction($type = array('Function', 'Method', 'Closure', 'Magicmethod')) {
         $this->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )', makeArray($type));
         
         return $this;
@@ -1775,6 +1775,22 @@ GREMLIN
         return $this;
     }
     
+    public function getNameInFNP($variable) {
+        $this->raw(<<<GREMLIN
+sideEffect{
+    if ($variable.contains("\\\\") ) {
+        $variable = $variable.tokenize("\\\\\\\\").last(); 
+    }
+    if ($variable.contains("(") ) {
+        $variable = $variable.tokenize("(").first(); 
+    }
+}
+GREMLIN
+);
+        
+        return $this;
+    }
+    
     public function fetchContext($context = self::CONTEXT_OUTSIDE_CLOSURE) {
         $forClosure = "                    // This is make variables in USE available in the parent level
                     if (it.out('USE').out('ARGUMENT').retain([current]).any()) {
@@ -2035,7 +2051,6 @@ GREMLIN;
     
     public function makeFullNsPath($functions, $constant = false) {
         debug_print_backtrace();die();
-        return makeFullnspath($functions, $constant);
     }
     
     private function tolowercase(&$code) {
