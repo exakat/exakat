@@ -2861,44 +2861,181 @@ HTML;
     }
 
     private function generateMethodSize() {
+        $finalHTML = $this->getBasedPage('cit_size');
 
-        $methodsize = '';
+        // List of extensions used
         $res = $this->sqlite->query(<<<SQL
-SELECT name, files.file, (end - begin) AS size 
+SELECT namespaces.namespace || '\\' || name AS name, name AS shortName, files.file, (end - begin) AS size 
     FROM cit 
     JOIN files 
         ON files.id = cit.file
+    JOIN namespaces 
+        ON namespaces.id = cit.namespaceId
     ORDER BY (end - begin) DESC
-
 SQL
-);
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $methodsize .= '<tr><td>'.PHPSyntax($row['name'])."</td><td>$row[file]</td><td>$row[size]</td></tr>\n";
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (count($data) < 50) {
+                $data[$value['name']] = $value['size'];
+                $xAxis[] = "'".$value['shortName']."'";
+            }
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">'.$value['name'].'</div>
+                      <div class="block-cell-issue text-center">'.$value['size'].'</div>
+                  </div>';
         }
-        
-        $methodsize = <<<HTML
-        <section id="used_settings" class="content">
-        	<div class="box">
-        		<div class="box-body">
-        			<div class="row">
-        				<div class="col-xs-12">
-        					<p class="textLead">This is an overview of the directives that are modified or read inside the application's code.</p>
-        					<table class="table table-striped">
-        						<tr></tr>
-        						<tr><th>Class</th><th>File</th><th>Size</th></tr>
-        						$methodsize
-        					</table>
-            		</div>
-        			</div>
-        		</div>
-        	</div>
-        </section>
 
-HTML;
+        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
-        $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'CONTENT', $methodsize);
-        $this->putBasedPage('method_size', $html);
+        $blocjs = <<<JAVASCRIPT
+  <script>
+    $(document).ready(function() {
+      Highcharts.theme = {
+         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
+         chart: {
+            backgroundColor: null,
+            style: {
+               fontFamily: "Dosis, sans-serif"
+            }
+         },
+         title: {
+            style: {
+               fontSize: '16px',
+               fontWeight: 'bold',
+               textTransform: 'uppercase'
+            }
+         },
+         tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'rgba(219,219,216,0.8)',
+            shadow: false
+         },
+         legend: {
+            itemStyle: {
+               fontWeight: 'bold',
+               fontSize: '13px'
+            }
+         },
+         xAxis: {
+            gridLineWidth: 1,
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         yAxis: {
+            minorTickInterval: 'auto',
+            title: {
+               style: {
+                  textTransform: 'uppercase'
+               }
+            },
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         plotOptions: {
+            candlestick: {
+               lineColor: '#404048'
+            }
+         },
+
+
+         // General
+         background2: '#F0F0EA'
+      };
+
+      // Apply the theme
+      Highcharts.setOptions(Highcharts.theme);
+
+      $('#filename').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAFILES]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Lines',
+              data: [CALLCOUNT]
+          }]
+      });
+
+    });
+  </script>
+JAVASCRIPT;
+
+        $tags = array();
+        $code = array();
+
+        // Filename Overview
+        $tags[] = 'CALLCOUNT';
+        $code[] = implode(', ', $data);
+        $tags[] = 'SCRIPTDATAFILES';
+        $code[] = implode(', ', $xAxis);
+
+        $blocjs = str_replace($tags, $code, $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Class, Interface and Trait size');
+
+        $this->putBasedPage('cit_size', $finalHTML);
     }
     
     private function generateStats() {

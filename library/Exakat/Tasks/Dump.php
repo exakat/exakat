@@ -325,7 +325,7 @@ SQL;
                                                  )');
 
         $query = <<<GREMLIN
-g.V().hasLabel("Variable", "Variablearray", "Variableobject").map{ ['name' : it.get().value("code"), 
+g.V().hasLabel("Variable", "Variablearray", "Variableobject").map{ ['name' : it.get().value("fullcode"), 
                                                                     'type' : it.get().label()        ] }.unique();
 GREMLIN;
         $variables = $this->gremlin->query($query);
@@ -416,7 +416,7 @@ g.V().hasLabel("Class")
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.in()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
-         'name': it.get().vertices(OUT, "NAME").next().value("code"),
+         'name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
          'abstract':it.get().vertices(OUT, "ABSTRACT").any(),
          'final':it.get().vertices(OUT, "FINAL").any(),
          'extends':extendList,
@@ -466,7 +466,7 @@ g.V().hasLabel("Interface")
 .sideEffect{ file = [];}.where( __.in().emit().repeat( __.in()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
-         'name': it.get().vertices(OUT, "NAME").next().value("code"),
+         'name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
          'extends':extendList,
          'type':'interface',
          'abstract':0,
@@ -505,7 +505,7 @@ g.V().hasLabel("Trait")
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.in()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
-         'name': it.get().vertices(OUT, "NAME").next().value("code"),
+         'name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
          'uses':useList,
          'type':'trait',
          'abstract':0,
@@ -664,7 +664,7 @@ g.V().hasLabel("Method").as('method')
                .fold()
       )
 .map{ 
-    x = ['name': it.get().value("code"),
+    x = ['name': it.get().value("fullcode"),
          'abstract':it.get().vertices(OUT, "ABSTRACT").any(),
          'final':it.get().vertices(OUT, "FINAL").any(),
          'static':it.get().vertices(OUT, "STATIC").any(),
@@ -735,10 +735,10 @@ g.V().hasLabel("Class", "Interface", "Trait")
 .out('PPP') // out to the details
 .map{ 
     if (it.get().label() == 'Propertydefinition') { 
-        name = it.get().value("code");
+        name = it.get().value("fullcode");
         v = ''; 
     } else { 
-        name = it.get().vertices(OUT, "LEFT").next().value("code");
+        name = it.get().vertices(OUT, "LEFT").next().value("fullcode");
         v = it.get().vertices(OUT, "RIGHT").next().value("fullcode");
     }
 
@@ -805,7 +805,7 @@ g.V().hasLabel("Class")
 }
      .out('CONST')
      .map{ 
-    x = ['name': it.get().vertices(OUT, 'NAME').next().value("code"),
+    x = ['name': it.get().vertices(OUT, 'NAME').next().value("fullcode"),
          'value': it.get().vertices(OUT, 'VALUE').next().value("fullcode"),
          "public":x_public,
          "protected":x_protected,
@@ -877,7 +877,7 @@ g.V().hasLabel("Function")
 .sideEffect{ lines = [];}.where( __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold() )
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.in()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
-    x = ['name': it.get().vertices(OUT, "NAME").next().value("code"),
+    x = ['name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
          'file': file,
          'begin': lines.min(),
          'end': lines.max()
@@ -1179,15 +1179,15 @@ g.V().sideEffect{ functions = 0; name=''; expression=0;}
     .hasLabel("Function", "Closure", "Method", "File")
     .not(where( __.out("BLOCK").hasLabel('Void')))
     .sideEffect{ ++functions; }
-    .where(__.coalesce( __.out('NAME').sideEffect{ name=it.get().value("code"); }.in("NAME"),
-                        __.filter{true; }.sideEffect{ name='global'; file = it.get().value('code');} )
+    .where(__.coalesce( __.out('NAME').sideEffect{ name=it.get().value("fullcode"); }.in("NAME"),
+                        __.filter{true; }.sideEffect{ name='global'; file = it.get().value("fullcode");} )
     .sideEffect{ total = 0; expression = 0; type=it.get().label();}
     .coalesce( __.out("BLOCK"), __.out("FILE").out("EXPRESSION").out("EXPRESSION") )
     .repeat( __.out().not(hasLabel("Class", "Function", "Closure", "Interface", "Trait", "Void")) ).emit().times($loops)
     .sideEffect{ ++total; }
     .not(hasLabel('Void'))
     .where( __.in("EXPRESSION", "CONDITION").sideEffect{ expression++; })
-    .where( __.repeat( __.in() ).emit().times($loops).hasLabel("File").sideEffect{ file = it.get().value('code'); })
+    .where( __.repeat( __.in() ).emit().times($loops).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); })
     .fold()
     )
     .map{ if (expression > 0) {
