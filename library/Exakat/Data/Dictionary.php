@@ -117,7 +117,9 @@ class Dictionary {
     }
 
     public function closeVariables() {
-        $variables = array_filter($this->dictionary, function ($x) { return ($x[0] === '$') && (strlen($x) > 3);}, ARRAY_FILTER_USE_KEY );
+        $variables = array_filter($this->dictionary, function ($x) { return ($x[0] === '$') && 
+                                                                            (strpos($x, '.') === false) &&
+                                                                            (strlen($x) > 3);}, ARRAY_FILTER_USE_KEY );
         
         $return = array();
         foreach($variables as $v1 => $k1) {
@@ -192,12 +194,18 @@ class Dictionary {
     }
 
     public function staticMethodStrings() {
-        $doublecolon = array_filter($this->dictionary, function ($x) { return strlen($x) > 4 && strpos($x,'::') !== false && mb_strtolower($x) === $x;}, ARRAY_FILTER_USE_KEY );
+        $doublecolon = array_filter($this->dictionary, function ($x) { return strlen($x) > 6 && 
+                                                                              strpos($x,' ') === false && 
+                                                                              strpos($x,'::') !== false && 
+                                                                              mb_strtolower($x) === $x;}, 
+                                                                              ARRAY_FILTER_USE_KEY );
         
         $return = array();
         foreach($doublecolon as $key => $value) {
-            preg_match('/[\'"](.+?)::(.+?)/', $key, $r);
-            $return['\\'.$r[1]] = $value;
+            // how can this regex fail ? 
+            if (preg_match('/^[\'"](.+?)::(.+?)/', $key, $r)) {
+                $return['\\'.$r[1]] = $value;
+            }
         }
         
         return $return;
