@@ -518,7 +518,7 @@ class Doctor extends Tasks {
             $stats['host'] = $this->config->tinkergraph_host;
             $stats['port'] = $this->config->tinkergraph_port;
 
-            $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
+            $gremlinJar = glob($this->config->tinkergraph_folder.'/lib/gremlin-core-*.jar');
             $gremlinVersion = basename(array_pop($gremlinJar));
             //gremlin-core-3.2.5.jar
             $gremlinVersion = substr($gremlinVersion, 13, -4);
