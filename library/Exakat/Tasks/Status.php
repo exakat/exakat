@@ -74,9 +74,9 @@ class Status extends Tasks {
         }
 
         $status = array('project' => $project);
-        $status['files'] = $this->datastore->getHash('files');
-        $status['loc'] = $this->datastore->getHash('loc');
-        $status['tokens'] = $this->datastore->getHash('tokens');
+        $status['files']  = (int) $this->datastore->getHash('files');
+        $status['loc']    = (int) $this->datastore->getHash('loc');
+        $status['tokens'] = (int) $this->datastore->getHash('tokens');
         if (file_exists($this->config->projects_root.'/projects/.exakat/Project.json')) {
             $json = json_decode(file_get_contents($this->config->projects_root.'/projects/.exakat/Project.json'));
             if ($json->project === $project) {
