@@ -136,8 +136,12 @@ GREMLIN;
 
         display('loaded nodes (duration : '.number_format( ($end - $begin) * 1000, 2).' ms)');
 
+        $begin = microtime(true);
         $datastore = new Datastore($this->config);
         $datastore->addRow('dictionary', $this->dictCode);
+        $end = microtime(true);
+
+        display('stored dictionary (duration : '.number_format( ($end - $begin) * 1000, 2).' ms), '.count($this->dictCode));
 
         $this->cleanCsv();
         display('Cleaning CSV');
