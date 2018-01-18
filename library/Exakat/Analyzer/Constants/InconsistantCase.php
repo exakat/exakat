@@ -28,6 +28,13 @@ use Exakat\Analyzer\Analyzer;
 class InconsistantCase extends Analyzer {
 
     public function analyze() {
+        $lower = $this->dictCode->translate(array('true', 'false', 'null'));
+        $upper = $this->dictCode->translate(array('TRUE', 'FALSE', 'NULL'));
+        
+        if (empty($lower) && empty($upper)) {
+            return;
+        }
+
         $mapping = <<<GREMLIN
 if (it.get().value('code') in ***) { 
     x2 = 'lower'; 
@@ -41,12 +48,10 @@ GREMLIN;
                          'UPPERCASE' => 'upper',
                          'Mixed'     => 'mixed');
 
-        $lower = $this->dictCode->translate(array('true', 'false', 'null'));
-        $upper = $this->dictCode->translate(array('TRUE', 'FALSE', 'NULL'));
 
         $this->atomIs(array('Null', 'Boolean'))
              ->raw('map{ '.$mapping.' }', $lower, $upper)
-             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
+             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');;
         $types = $this->rawQuery()->toArray()[0];
 
         $store = array();
