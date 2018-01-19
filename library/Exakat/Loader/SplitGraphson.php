@@ -25,6 +25,7 @@ namespace Exakat\Loader;
 
 use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Data\Collector;
 use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\NoSuchFile;
 use Exakat\Graph\Tinkergraph as Graph;
@@ -58,7 +59,9 @@ class SplitGraphson {
     private $path = null;
     private $pathDefinition = null;
     
-    private $dictCode = array();
+    private $dictCode = null;
+    
+    private $datastore = null;
     
     public function __construct($gremlin, $config, $plugins) {
         $this->config = $config;
@@ -66,6 +69,9 @@ class SplitGraphson {
         $this->gsneo4j = $gremlin;
         $this->path = $this->config->projects_root.'/projects/.exakat/gsneo4j.graphson';
         $this->pathDefinition = $this->config->projects_root.'/projects/.exakat/gsneo4j.definition.graphson';
+        
+        $this->dictCode = new Collector();
+        $this->datastore = new Datastore($this->config);
         
         $this->cleanCsv();
     }
@@ -135,13 +141,6 @@ GREMLIN;
         self::saveTokenCounts();
 
         display('loaded nodes (duration : '.number_format( ($end - $begin) * 1000, 2).' ms)');
-
-        $begin = microtime(true);
-        $datastore = new Datastore($this->config);
-        $datastore->addRow('dictionary', $this->dictCode);
-        $end = microtime(true);
-
-        display('stored dictionary (duration : '.number_format( ($end - $begin) * 1000, 2).' ms), '.count($this->dictCode));
 
         $this->cleanCsv();
         display('Cleaning CSV');
@@ -235,42 +234,28 @@ GREMLIN;
                 continue;
             } 
             
-            $v = $j->properties['code'][0]->value;
-            if (!isset($this->dictCode[$v])) {
-                $this->dictCode[$v] = count($this->dictCode);
-            }
-            $j->properties['code'][0]->value = $this->dictCode[$v];
+            $V = $j->properties['code'][0]->value;
+            $j->properties['code'][0]->value = $this->dictCode->get($V);
             
-            $v = mb_strtolower($v);
-            if (!isset($this->dictCode[$v])) {
-                $this->dictCode[$v] = count($this->dictCode);
-            }
-            $j->properties['lccode'][0]->value = $this->dictCode[$v];
+            $v = mb_strtolower($V);
+            $j->properties['lccode'][0]->value = $this->dictCode->get($v);
 
             if (isset($j->properties['propertyname']) ) {
-                if (!isset($this->dictCode[$j->properties['propertyname'][0]->value])) {
-                    $this->dictCode[$j->properties['propertyname'][0]->value] = count($this->dictCode);
-                }
-                $j->properties['propertyname'][0]->value = $this->dictCode[$j->properties['propertyname'][0]->value];
+                $j->properties['propertyname'][0]->value = $this->dictCode->get($j->properties['propertyname'][0]->value);
             }
 
             if (isset($j->properties['globalvar']) ) {
-                if (!isset($this->dictCode[$j->properties['globalvar'][0]->value])) {
-                    $this->dictCode[$j->properties['globalvar'][0]->value] = count($this->dictCode);
-                }
-                $j->properties['globalvar'][0]->value = $this->dictCode[$j->properties['globalvar'][0]->value];
+                $j->properties['globalvar'][0]->value = $this->dictCode->get($j->properties['globalvar'][0]->value);
             }
 
             $X = $this->json_encode($j);
             assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
             fwrite($fp, $X.PHP_EOL);
         }
-
         fclose($fp);
-
-        $begin = microtime(true);
         $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'");');
-        $end = microtime(true);
+        
+        $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
 
         unlink($this->path);
     }

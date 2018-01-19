@@ -110,7 +110,10 @@ class Datastore {
             }
         }
 
+        $values = array();
+        $total = 0;
         foreach($data as $key => $row) {
+            ++$total;
             if (is_array($row)) {
                 $d = array_values($row);
                 foreach($d as &$e) {
@@ -121,10 +124,25 @@ class Datastore {
             } else {
                 $d = array(\Sqlite3::escapeString($key), \Sqlite3::escapeString($row));
             }
+            
+            $values[] = '('.makeList($d, "'").')';
+            
+            if (count($values) > 1000) {
+                $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ".implode(', ', $values);
+//                print $total.") ".crc32($query).PHP_EOL;
+//                print strlen($query).PHP_EOL;
+                $this->sqliteWrite->querySingle($query);
 
-            $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES (".makeList($d, "'").")";
-            $this->sqliteWrite->querySingle($query);
+                $values = array();
+            }
         }
+
+        $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ".implode(', ', $values);
+//                print $total.") ".crc32($query).PHP_EOL;
+//                print strlen($query).PHP_EOL;
+//                print PHP_EOL;
+        $this->sqliteWrite->querySingle($query);
+        $values = array();
 
         return true;
     }
