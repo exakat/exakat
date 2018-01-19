@@ -984,6 +984,12 @@ GREMLIN
 
         return $this;
     }
+    
+    public function values($property) {
+        $this->addMethod('values("'.$property.'")');
+        
+        return $this;
+    }
 
     public function saveOutAs($name, $out = "ARGUMENT", $sort = 'rank') {
         // Calculate the arglist, normalized it, then put it in a variable
