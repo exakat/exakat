@@ -16,4 +16,6 @@ $model->setVariables(array('propertyArray' => 1,
                            
 $variable = array('outside');
 
+$variable->someProperty;
+
  ?>
