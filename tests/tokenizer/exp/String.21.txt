@@ -1,0 +1,121 @@
+Whole
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          6
+          Label : BLOCK
+            7
+            Label : EXPRESSION
+              8
+              Label : DEFINITION
+                22
+              Label : DEFINITION
+                23
+              Label : DEFINITION
+                24
+              Label : DEFINITION
+                25
+              Label : DEFINITION
+                26
+              Label : DEFINITION
+                27
+              Label : DEFINITION
+                28
+              Label : DEFINITION
+                29
+              Label : DEFINITION
+                30
+              Label : DEFINITION
+                31
+              Label : MAGICMETHOD
+                10
+                Label : ARGUMENT
+                  11
+                Label : BLOCK
+                  13
+                  Label : EXPRESSION
+                    14
+                    Label : ARGUMENT
+                      17
+                      Label : CONCAT
+                        15
+                      Label : CONCAT
+                        18
+                    Label : NAME
+                      14
+                Label : NAME
+                  10
+              Label : NAME
+                9
+            Label : EXPRESSION
+              21
+              Label : LEFT
+                20
+              Label : RIGHT
+                22
+            Label : EXPRESSION
+              21
+              Label : LEFT
+                20
+              Label : RIGHT
+                23
+            Label : EXPRESSION
+              21
+              Label : LEFT
+                20
+              Label : RIGHT
+                24
+            Label : EXPRESSION
+              21
+              Label : LEFT
+                20
+              Label : RIGHT
+                25
+            Label : EXPRESSION
+              21
+              Label : LEFT
+                20
+              Label : RIGHT
+                26
+            Label : EXPRESSION
+              21
+              Label : LEFT
+                20
+              Label : RIGHT
+                27
+            Label : EXPRESSION
+              21
+              Label : LEFT
+                20
+              Label : RIGHT
+                28
+            Label : EXPRESSION
+              21
+              Label : LEFT
+                20
+              Label : RIGHT
+                29
+            Label : EXPRESSION
+              21
+              Label : LEFT
+                20
+              Label : RIGHT
+                30
+            Label : EXPRESSION
+              21
+              Label : LEFT
+                20
+              Label : RIGHT
+                31
+            Label : EXPRESSION
+              32
+              Label : NEW
+                20
+          Label : NAME
+            5
