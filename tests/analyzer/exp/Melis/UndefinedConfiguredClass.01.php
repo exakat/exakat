@@ -1,11 +1,12 @@
 <?php
 
-$expected     = array('',
-                      '',
+$expected     = array('\'Undefined\'', 
+                      '\'Undefined2\'', 
+                      '\'MvcTranslator\''
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array('\'Foo\'',
+                      '\'Foo2\'',
                      );
 
 ?>

@@ -25,12 +25,6 @@ namespace Exakat\Analyzer\Melis;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedConfiguredClass extends Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $index = $this->atomIs('File')
                       ->regexIs('fullcode', '/config/module.config.php')

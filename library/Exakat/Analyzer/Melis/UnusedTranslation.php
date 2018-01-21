@@ -41,16 +41,14 @@ class UnusedTranslation extends Analyzer {
                       ->outIs('INDEX')
                       ->values('code');
         $res = $this->rawQuery();
-        $translations = array_count_values($res->toArray());
-        print_r($translations);
+        $translations = $res->toArray();
+        $translations = array_unique($translations);
 
         $index = $this->atomIs('String')
                       ->hasNoOut('CONCAT')
-                      ->values('code');
+                      ->hasNoIn('INDEX')
+                      ->codeIs($translations, self::NO_TRANSLATE, self::CASE_SENSITIVE);
         $used = $this->rawQuery();
-        
-        print_r($used);
-
     }
 }
 

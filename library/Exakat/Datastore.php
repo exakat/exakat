@@ -127,22 +127,18 @@ class Datastore {
             
             $values[] = '('.makeList($d, "'").')';
             
-            if (count($values) > 1000) {
+            if (count($values) > 10) {
                 $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ".implode(', ', $values);
-//                print $total.") ".crc32($query).PHP_EOL;
-//                print strlen($query).PHP_EOL;
                 $this->sqliteWrite->querySingle($query);
 
                 $values = array();
             }
         }
 
-        $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ".implode(', ', $values);
-//                print $total.") ".crc32($query).PHP_EOL;
-//                print strlen($query).PHP_EOL;
-//                print PHP_EOL;
-        $this->sqliteWrite->querySingle($query);
-        $values = array();
+        if (!empty($values)) {
+            $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ".implode(', ', $values);
+            $this->sqliteWrite->querySingle($query);
+        }
 
         return true;
     }
