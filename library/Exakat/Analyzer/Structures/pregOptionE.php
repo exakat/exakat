@@ -45,6 +45,7 @@ sideEffect{
     else if (delimiter == "*") { delimiter = "\\\\*"; delimiterFinal = "\\\\*"; } 
     else if (delimiter == "|") { delimiter = "\\\\|"; delimiterFinal = "\\\\|"; } 
     else if (delimiter == "?") { delimiter = "\\\\?"; delimiterFinal = "\\\\?"; } 
+    else if (delimiter == "+") { delimiter = "\\\\+"; delimiterFinal = "\\\\+"; } 
     else { delimiterFinal = delimiter; } 
 }
 .filter{ delimiter != "\\\\\\\\" }
