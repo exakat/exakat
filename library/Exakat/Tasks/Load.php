@@ -3080,26 +3080,18 @@ SQL;
 
     private function processExit() {
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_CLOSE_BRACKET, \Exakat\Tasks\T_COLON))) {
-            $name = $this->addAtom('Identifier');
-            $name->code       = $this->tokens[$this->id][1];
-            $name->fullcode   = $this->tokens[$this->id][1];
-            $name->line       = $this->tokens[$this->id][2];
-            $name->token      = $this->getToken($this->tokens[$this->id][0]);
-            $name->fullnspath = '\\'.mb_strtolower($this->tokens[$this->id][1]);
+            $functioncall = $this->addAtom('Exit');
+            $functioncall->code       = $this->tokens[$this->id][1];
+            $functioncall->fullcode   = $this->tokens[$this->id][1].' ';
+            $functioncall->line       = $this->tokens[$this->id][2];
+            $functioncall->token      = $this->getToken($this->tokens[$this->id][0]);
+            $functioncall->count      = 0;
+            $functioncall->fullnspath = '\\'.mb_strtolower($functioncall->code);
 
             $void = $this->addAtomVoid();
             $void->rank = 0;
 
-            $functioncall = $this->addAtom('Exit');
-            $functioncall->code       = $name->code;
-            $functioncall->fullcode   = $name->fullcode.' ';
-            $functioncall->line       = $this->tokens[$this->id][2];
-            $functioncall->token      = $this->getToken($this->tokens[$this->id][0]);
-            $functioncall->count      = 0;
-            $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
-
             $this->addLink($functioncall, $void, 'ARGUMENT');
-            $this->addLink($functioncall, $name, 'NAME');
 
             $this->pushExpression($functioncall);
 
@@ -3109,17 +3101,17 @@ SQL;
 
             return $functioncall;
         } else {
-            --$this->id;
-            $name = $this->processNextAsIdentifier();
-            $this->pushExpression($name);
+            $current = $this->id;
+            ++$this->id;
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
-                $this->processSemicolon();
-            } else {
-                $name = $this->processFCOA($name);
-            }
+            $functioncall = $this->processArguments('Exit');
+            $functioncall->code       = $this->tokens[$current][1];
+            $functioncall->fullcode   = $this->tokens[$current][1].' ';
+            $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
 
-            return $name;
+            $this->pushExpression($functioncall);
+
+            return $functioncall;
         }
     }
 
@@ -4561,21 +4553,16 @@ SQL;
 
     private function processEcho() {
         $current = $this->id;
-        --$this->id;
-        $name = $this->processNextAsIdentifier();
         
         $functioncall = $this->processArguments('Echo', array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
         $argumentsFullcode = $functioncall->fullcode;
         
-        list($fullnspath, $aliased) = $this->getFullnspath($name);
         $functioncall->code       = $this->tokens[$current][1];
         $functioncall->fullcode   = $this->tokens[$current][1].' '.$argumentsFullcode;
         $functioncall->line       = $this->tokens[$current][2];
         $functioncall->token      = $this->getToken($this->tokens[$current][0]);
-        $functioncall->fullnspath = $fullnspath;
-        $functioncall->aliased    = $aliased;
-
-        $this->addLink($functioncall, $name, 'NAME');
+        $functioncall->fullnspath = '\\echo';
+        $functioncall->aliased    = self::NOT_ALIASED;
 
         $this->pushExpression($functioncall);
 
@@ -4608,12 +4595,6 @@ SQL;
 
     private function processPrint() {
         $current = $this->id;
-        $name = $this->addAtom('Identifier');
-
-        $name->code      = $this->tokens[$this->id][1];
-        $name->fullcode  = $this->tokens[$this->id][1];
-        $name->line      = $this->tokens[$this->id][2];
-        $name->token     = $this->getToken($this->tokens[$this->id][0]);
 
         $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
@@ -4639,14 +4620,12 @@ SQL;
         $this->addLink($functioncall, $index, 'ARGUMENT');
         $fullcode[] = $index->fullcode;
 
-        $functioncall->code       = $name->code;
-        $functioncall->fullcode   = $name->code.' '.$index->fullcode;
-        $functioncall->line       = $name->line;
-        $functioncall->token      = $name->token;
+        $functioncall->code       = $this->tokens[$current][1];
+        $functioncall->fullcode   = $this->tokens[$current][1].' '.$index->fullcode;
+        $functioncall->line       = $this->tokens[$current][2];
+        $functioncall->token      = $this->getToken($this->tokens[$current][0]);
         $functioncall->count      = 1; // Only one argument for print
-        $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
-
-        $this->addLink($functioncall, $name, 'NAME');
+        $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
 
         $this->pushExpression($functioncall);
 
