@@ -4763,6 +4763,9 @@ SQL;
         }
         
         $fullnspath = makeFullnspath($this->argumentsId[0]->noDelimiter, true);
+        if ($this->argumentsId[0]->noDelimiter[0] === '\\') {
+            $fullnspath = "\\$fullnspath";
+        }
         $this->addDefinition('const', $fullnspath, $argumentsId);
         $this->argumentsId[0]->fullnspath = $fullnspath;
 
@@ -5029,6 +5032,9 @@ SQL;
             $fullnspath = mb_strtolower($call->noDelimiter);
             if (empty($fullnspath) || $fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
+            }
+            if (strpos($fullnspath, '\\\\') !== false) {
+                $fullnspath = stripslashes($fullnspath);
             }
         }
 
