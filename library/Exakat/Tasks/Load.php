@@ -3754,7 +3754,16 @@ SQL;
     }
 
     private function processMagicConstant() {
-        return $this->processSingle('Magicconstant');
+        $constant = $this->processSingle('Magicconstant');
+        
+        if ($constant->fullcode === '__DIR__') {
+            $path = dirname($this->filename);
+            $constant->noDelimiter = $path === '/' ? '' : $path;
+        } elseif ($constant->fullcode === '__FILE__') {
+            $constant->noDelimiter = $this->filename;
+        }
+        
+        return $constant;
     }
 
     //////////////////////////////////////////////////////

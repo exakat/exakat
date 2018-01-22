@@ -52,6 +52,7 @@ class LoadFinal extends Tasks {
         $this->makeClassConstantDefinition();
 
         $this->fixFullnspathConstants();
+        $this->fixConstantsValue();
 
         $this->spotPHPNativeConstants();
         $this->spotPHPNativeFunctions();
@@ -104,6 +105,41 @@ GREMLIN;
 
         $res = $this->gremlin->query($query);
         display("Fixed Fullnspath for Constants");
+    }
+
+    private function fixConstantsValue() {
+        display("fixing values for Constants");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier", "Nsname")
+     .not(has("noDelimiter"))
+     .as("identifier")
+     .in("DEFINITION").hasLabel("Constant", "Defineconstant")
+     .coalesce( __.out("ARGUMENT").has("rank", 1), 
+                __.hasLabel("Constant").out('VALUE'))
+     .has('noDelimiter')
+     .sideEffect{ actual = it.get().value("noDelimiter");}
+     .select("identifier")
+     .sideEffect{ it.get().property("noDelimiter", actual); }
+     .count()
+GREMLIN;
+        $res = $this->gremlin->query($query);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Staticconstant")
+     .as("identifier")
+     .out("CONSTANT").sideEffect{ name = it.get().value("code"); }.in("CONSTANT")
+     .out("CLASS").in("DEFINITION").out("CONST")
+     .out("CONST").out("NAME").filter{it.get().value("code") == name; }.in("NAME")
+     .out("VALUE").has('noDelimiter')
+     .sideEffect{ actual = it.get().value("noDelimiter");}
+     .select("identifier")
+     .sideEffect{ it.get().property("noDelimiter", actual); }
+     .count()
+GREMLIN;
+        $res = $this->gremlin->query($query);
+
+        display("Fixed values for Constants");
     }
 
     private function spotPHPNativeConstants() {
