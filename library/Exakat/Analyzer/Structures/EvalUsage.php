@@ -27,15 +27,25 @@ use Exakat\Analyzer\Analyzer;
 
 class EvalUsage extends Analyzer {
     public function dependsOn() {
-        return array('Constants/ConstantUsage');
+        return array('Constants/ConstantUsage',
+                    );
     }
     
     public function analyze() {
         // eval($a . ' -s la');
         // OK for constants
-        $this->atomFunctionIs(array('\\eval', '\\create_function'))
+        $this->atomFunctionIs('\\create_function')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
+             ->atomIsNot(array('Identifier', 'Nsname'))
+             ->analyzerIsNot('Constants/ConstantUsage')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Eval')
+             ->outIs('ARGUMENT')
+             ->is('rank', 0)
+             ->atomIsNot(array('Identifier', 'Nsname'))
              ->analyzerIsNot('Constants/ConstantUsage')
              ->back('first');
         $this->prepareQuery();

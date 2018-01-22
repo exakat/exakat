@@ -8,6 +8,8 @@ $expected     = array('eval("some hardocded code")',
 
 $expected_not = array('CONSTANT',
                       '\\CONSTANT',
+                      'eval(\CONSTANT)',
+                      'eval(CONSTANT)',
                      );
 
 ?>

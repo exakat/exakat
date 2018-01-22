@@ -297,14 +297,14 @@ class Load extends Tasks {
 
                             \Exakat\Tasks\T_OPEN_BRACKET             => 'processArrayLiteral',
                             \Exakat\Tasks\T_ARRAY                    => 'processArrayLiteral',
-                            \Exakat\Tasks\T_EMPTY                    => 'processArray',
-                            \Exakat\Tasks\T_LIST                     => 'processArray',
-                            \Exakat\Tasks\T_EVAL                     => 'processArray',
-                            \Exakat\Tasks\T_UNSET                    => 'processArray',
-                            \Exakat\Tasks\T_ISSET                    => 'processArray',
+                            \Exakat\Tasks\T_UNSET                    => 'processIsset',
+                            \Exakat\Tasks\T_ISSET                    => 'processIsset',
+                            \Exakat\Tasks\T_EMPTY                    => 'processIsset',
+                            \Exakat\Tasks\T_LIST                     => 'processArray', // Can't move to processEcho, because of omissions
+                            \Exakat\Tasks\T_EVAL                     => 'processIsset', 
+                            \Exakat\Tasks\T_ECHO                     => 'processEcho',
                             \Exakat\Tasks\T_EXIT                     => 'processExit',
                             \Exakat\Tasks\T_DOUBLE_ARROW             => 'processKeyvalue',
-                            \Exakat\Tasks\T_ECHO                     => 'processEcho',
 
                             \Exakat\Tasks\T_HALT_COMPILER            => 'processHalt',
                             \Exakat\Tasks\T_PRINT                    => 'processPrint',
@@ -2108,18 +2108,8 @@ SQL;
                 $atom = 'Defineconstant';
             } elseif (strtolower($name->code) === 'define') { 
                 $atom = 'Defineconstant';
-            } elseif ($name->fullnspath === '\\unset') {
-                $atom = 'Unset';
             } elseif ($name->fullnspath === '\\list') {
                 $atom = 'List';
-            } elseif ($name->fullnspath === '\\empty') {
-                $atom = 'Empty';
-            } elseif ($name->fullnspath === '\\isset') {
-                $atom = 'Isset';
-            } elseif ($name->fullnspath === '\\die') {
-                $atom = 'Exit';
-            } elseif ($name->fullnspath === '\\exit') {
-                $atom = 'Exit';
             } else {
                 $atom = 'Functioncall';
             }
@@ -4551,6 +4541,31 @@ SQL;
         return $this->processOperator('Bitshift', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
+    private function processIsset() {
+        $current = $this->id;
+        
+        $atom = ucfirst(mb_strtolower($this->tokens[$current][1]));
+        ++$this->id;
+        $functioncall = $this->processArguments($atom);
+
+        $argumentsFullcode = $functioncall->fullcode;
+        
+        $functioncall->code       = $this->tokens[$current][1];
+        $functioncall->fullcode   = $this->tokens[$current][1].'('.$argumentsFullcode.')';
+        $functioncall->line       = $this->tokens[$current][2];
+        $functioncall->token      = $this->getToken($this->tokens[$current][0]);
+        $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
+        $functioncall->aliased    = self::NOT_ALIASED;
+
+        $this->pushExpression($functioncall);
+
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+
+        return $functioncall;
+    }
+    
     private function processEcho() {
         $current = $this->id;
         
@@ -4561,7 +4576,7 @@ SQL;
         $functioncall->fullcode   = $this->tokens[$current][1].' '.$argumentsFullcode;
         $functioncall->line       = $this->tokens[$current][2];
         $functioncall->token      = $this->getToken($this->tokens[$current][0]);
-        $functioncall->fullnspath = '\\echo';
+        $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
         $functioncall->aliased    = self::NOT_ALIASED;
 
         $this->pushExpression($functioncall);

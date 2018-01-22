@@ -54,6 +54,7 @@ abstract class Token {
                                  'Dowhile', 
                                  'Echo', 
                                  'Empty', 
+                                 'Eval', 
                                  'Exit', 
                                  'File', 
                                  'Final', 
