@@ -41,7 +41,7 @@ class CakePHPUsed extends Analyzer {
         if (!empty($classes)) {
             $classes    = call_user_func_array('array_merge', array_values($classes));
             $classes    = array_keys(array_count_values($classes));
-            $classes    = $this->makeFullNsPath($classes);
+            $classes    = makeFullNsPath($classes);
 
             $classesUsage = new ClassUsage($this->gremlin, $this->config);
             $classesUsage->setAnalyzer(get_class($this));
@@ -59,7 +59,7 @@ class CakePHPUsed extends Analyzer {
         if (!empty($interfaces)) {
             $interfaces = call_user_func_array('array_merge', array_values($interfaces));
             $interfaces = array_keys(array_count_values($interfaces));
-            $interfaces = $this->makeFullNsPath($interfaces);
+            $interfaces = makeFullNsPath($interfaces);
         
             $classesUsage = new InterfaceUsage($this->gremlin, $this->config);
             $classesUsage->setAnalyzer(get_class($this));
@@ -77,7 +77,7 @@ class CakePHPUsed extends Analyzer {
         if (!empty($traits)) {
             $traits     = call_user_func_array('array_merge', array_values($traits));
             $traits     = array_keys(array_count_values($traits));
-            $traits     = $this->makeFullNsPath($traits);
+            $traits     = makeFullNsPath($traits);
 
             $classesUsage = new TraitUsage($this->gremlin, $this->config);
             $classesUsage->setAnalyzer(get_class($this));

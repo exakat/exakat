@@ -25,13 +25,15 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseInterface extends Analyzer {
+    // interface i {}
+    // class x { function i() {}} 
+    // class x could use interface i
     public function analyze() {
         $query = <<<GREMLIN
-
-g.V().hasLabel("Interface").as('i').out("NAME").as('name').in("NAME")
-                           .out("METHOD").out("NAME").as("method")
-        .select('name', 'method').by('code').by('code');
-
+g.V().hasLabel("Interface")
+     .as('name')
+     .out("METHOD").out("NAME").as("method")
+     .select('name', 'method').by('fullnspath').by('code');
 GREMLIN;
 
         $res = $this->query($query)->toArray();
@@ -50,24 +52,24 @@ GREMLIN;
         }
 
         $this->atomIs('Class')
-             ->hasOut('METHOD')
+             ->hasOut(array('METHOD', 'MAGICMETHOD'))
              ->raw('sideEffect{ x = []; }')
              ->raw('sideEffect{ i = *** }', $interfaces)
-             ->raw('where( __.out("METHOD").out("NAME").sideEffect{ x.add(it.get().value("code")) ; }.barrier() )')
+             ->raw('where( __.out("METHOD", "MAGICMETHOD").out("NAME").sideEffect{ x.add(it.get().value("code")) ; }.fold() )')
              ->raw('filter{ 
                             a = false;
                             i.each{ n, e ->
                                 if (x.intersect(e) == e) {
                                     a = true;
-                                    name = n;
+                                    fnp = n;
                                 }
                             }
                             
                             a;
                         }')
                 ->raw('not( where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times(15)
-                                     .hasLabel("Interface", "Class").out("NAME")
-                                     .filter{ it.get().value("code") == name; } ) )')
+                                     .hasLabel("Interface", "Class")
+                                     .filter{ it.get().value("fullnspath") == fnp; } ) )')
                 ->back('first');
         $this->prepareQuery();
     }

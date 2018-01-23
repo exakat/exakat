@@ -26,8 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class IncomingVariables extends Analyzer {
     public function analyze() {
-        $this->atomIs(array('Variable', 'Variablearray'))
-             ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_FILE', '$_COOKIE'))
+        $this->atomIs('Phpvariable')
+             ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_FILES', '$_COOKIE'))
              ->inIs('VARIABLE')
              ->atomIs('Array')
              ->outIs('INDEX')

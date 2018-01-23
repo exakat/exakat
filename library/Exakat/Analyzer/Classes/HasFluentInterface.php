@@ -27,11 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class HasFluentInterface extends Analyzer {
     public function analyze() {
+        // $this->a()->b()->c();
         $this->atomIs('Class')
              ->outIs('METHOD')
              ->atomInside('Return')
              ->outIs('RETURN')
-             ->atomIs('Variable')
              ->atomIs('This')
              ->back('first');
         $this->prepareQuery();

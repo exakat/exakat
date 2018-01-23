@@ -224,8 +224,10 @@ function config($args) {
     if (!empty($_REQUEST['ignore_dirs']) && 
         is_array($_REQUEST['ignore_dirs'])) {
 
+        $ignore_dirs = $_REQUEST['ignore_dirs'];
+        $ignore_dirs = array_map(function($x) { return '"'.str_replace('"', '\\"', substr($x, 0, 250)).'"'; }, $ignore_dirs);
         $ini = preg_replace("/(ignore_dirs\[\] = .+?\n)+/s", 
-                            'ignore_dirs[] = '.implode(PHP_EOL.'ignore_dirs[] = ', $_REQUEST['ignore_dirs']).PHP_EOL, 
+                            'ignore_dirs[] = '.implode(PHP_EOL.'ignore_dirs[] = ', $ignore_dirs ).PHP_EOL, 
                             $ini);
         $status[] = 'ignore_dirs';
     }

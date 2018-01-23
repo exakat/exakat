@@ -41,7 +41,7 @@ class UseConstant extends Analyzer {
         $this->atomFunctionIs('\\dirname')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Magicconstant')
-             ->codeIs('__FILE__')
+             ->codeIs('__FILE__', self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

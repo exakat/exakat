@@ -27,10 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class PrintAndDie extends Analyzer {
     public function analyze() {
-        $this->atomIs('Functioncall')
-             ->tokenIs(array('T_PRINT', 'T_ECHO'))
+        // print 'ok'; die();
+        $this->atomIs(array('Echo', 'Print'))
              ->nextSibling()
-             ->tokenIs('T_EXIT')
+             ->atomIs('Exit')
              ->outIs('ARGUMENT')
              ->atomIs('Void')
              ->back('first');

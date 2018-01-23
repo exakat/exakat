@@ -59,7 +59,7 @@ GREMLIN;
              ->hasNoInterface()
              ->hasNoTrait()
              // Not used as a variable
-             ->codeIsNot($globalVariables->toArray())
+             ->codeIsNot($globalVariables->toArray(), self::NO_TRANSLATE)
              ->back('result');
         $this->prepareQuery();
     }

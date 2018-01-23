@@ -30,10 +30,13 @@ class RepeatedRegex extends Analyzer {
         $functions = $this->loadIni('pcre.ini', 'functions');
         $functionsList = '"\\\\'.implode('", "\\\\', $functions).'"';
     
-        $repeatedRegex = $this->query('g.V().hasLabel("Functioncall").has("fullnspath", within('.$functionsList.'))
-        .out("ARGUMENT").hasLabel("String").not(where(__.out("CONCAT")))
-        .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b > 1}.keySet()')
-                              ->toArray();
+        $repeatedRegex = $this->query(<<<GREMLIN
+g.V().hasLabel("Functioncall").has("fullnspath", within($functionsList))
+     .out("ARGUMENT")
+     .hasLabel("String").not(where(__.out("CONCAT")))
+     .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b > 1}.keySet()
+GREMLIN
+)->toArray();
                               
         if (empty($repeatedRegex)) {
             return;
@@ -44,7 +47,7 @@ class RepeatedRegex extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->codeIs($repeatedRegex)
+             ->codeIs($repeatedRegex, self::NO_TRANSLATE)
              ->back('first');
         $this->prepareQuery();
     }

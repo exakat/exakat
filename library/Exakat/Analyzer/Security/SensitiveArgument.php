@@ -32,10 +32,14 @@ class SensitiveArgument extends Analyzer {
         $positions = array(0, 1, 2);
         
         foreach($positions as $position) {
-            $functions = $this->makeFullNsPath($unsafe['functions'.$position]);
+            $functions = makeFullNsPath($unsafe['functions'.$position]);
 
             // $_GET/_POST ... directly as argument of PHP functions
             $this->atomFunctionIs($functions)
+                 ->outWithRank('ARGUMENT', $position);
+            $this->prepareQuery();
+
+            $this->atomIs(array('Echo', 'Print', 'Exit'))
                  ->outWithRank('ARGUMENT', $position);
             $this->prepareQuery();
         }

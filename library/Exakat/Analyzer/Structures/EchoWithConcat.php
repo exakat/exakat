@@ -29,7 +29,7 @@ class EchoWithConcat extends Analyzer {
     public function analyze() {
 
         //echo 'should'.'also'.$be.' with comma';
-        $this->atomFunctionIs(array('\\echo', '\\print'))
+        $this->atomIs(array('Echo', 'Print'))
              ->outIs('ARGUMENT')
              ->outIsIE('CODE') // Skipping parenthesis if any
              ->atomIs('Concatenation')
@@ -37,7 +37,7 @@ class EchoWithConcat extends Analyzer {
         $this->prepareQuery();
 
         //echo "should also $be with comma";
-        $this->atomFunctionIs(array('\\echo', '\\print'))
+        $this->atomIs(array('Echo', 'Print'))
              ->outIs('ARGUMENT')
              ->outIsIE('CODE') // Skipping parenthesis if any
              ->atomIs('String')
@@ -46,7 +46,7 @@ class EchoWithConcat extends Analyzer {
         $this->prepareQuery();
 
         //echo <<<NOWDOC should also $be with comma NOWDOC;
-        $this->atomFunctionIs(array('\\echo', '\\print'))
+        $this->atomIs(array('Echo', 'Print'))
              ->outIs('ARGUMENT')
              ->outIsIE('CODE') // Skipping parenthesis if any
              ->atomIs('Heredoc')

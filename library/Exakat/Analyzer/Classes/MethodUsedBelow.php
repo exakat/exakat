@@ -32,13 +32,13 @@ class MethodUsedBelow extends Analyzer {
         $this->atomIs('Method')
              ->hasNoOut('STATIC')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'methodname')
+             ->savePropertyAs('lccode', 'methodname')
              ->goToClass()
              ->raw('where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
                              .where( __.out("METHOD").out("BLOCK")
                                        .repeat( __.out()).emit().times('.self::MAX_LOOPING.').hasLabel("Methodcall")
-                                       .out("OBJECT").has("code", "\\$this").in("OBJECT")
-                                       .out("METHOD").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == methodname.toLowerCase()}
+                                       .where( __.out("OBJECT").hasLabel("This") )
+                                       .out("METHOD").has("token", "T_STRING").filter{ it.get().value("lccode") == methodname}
                               )
                          )')
              ->back('first');
@@ -50,12 +50,12 @@ class MethodUsedBelow extends Analyzer {
         $this->atomIs('Method')
              ->hasOut('STATIC')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'methodname')
+             ->savePropertyAs('lccode', 'methodname')
              ->goToClass()
              ->raw('where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
                              .where( __.out("METHOD").out("BLOCK")
                                        .repeat( __.out('.$this->linksDown.')).emit().times('.self::MAX_LOOPING.').hasLabel("Staticmethodcall")
-                                       .out("MEMBER").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == methodname.toLowerCase()}
+                                       .out("MEMBER").has("token", "T_STRING").filter{ it.get().value("lccode") == methodname}
                               )
                          )')
              ->back('ppp');

@@ -5,7 +5,7 @@ $expected     = array('SWFMovie( )',
                       'SWFShape( )',
                      );
 
-$expected_not = array(
+$expected_not = array('SWFSprate( )',
                      );
 
 ?>

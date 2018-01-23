@@ -4,6 +4,7 @@
   $s->setRightFill($f);
 
   $p = new SWFSprite();
+  $p = new SWFSprate();
   $m = new SWFMovie();
   $i = $m->add($p);
 ?>

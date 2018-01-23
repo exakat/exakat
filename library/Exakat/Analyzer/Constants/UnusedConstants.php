@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedConstants extends Analyzer {
     public function dependsOn() {
-        return array('Constants/ConstantUsage');
+        return array('Constants/ConstantUsage',
+                    );
     }
     
     public function analyze() {
@@ -35,13 +36,13 @@ class UnusedConstants extends Analyzer {
 g.V().hasLabel("Analysis")
      .has("analyzer", "Constants/ConstantUsage")
      .out("ANALYZED")
-     .values("code")
+     .values("fullcode")
      .unique()
 GREMLIN;
         $constants = $this->query($query)->toArray();
 
         // Const from a define (case insensitive)
-        $this->atomFunctionIs('\define')
+        $this->atomIs('Defineconstant')
              ->noChildWithRank('ARGUMENT', 2) // default, case sensitive
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
@@ -49,7 +50,7 @@ GREMLIN;
              ->noDelimiterIsNot($constants, true);
         $this->prepareQuery();
         
-        $this->atomFunctionIs('\define')
+        $this->atomIs('Defineconstant')
              ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
              ->is('boolean', false)
              ->inIs('ARGUMENT')
@@ -60,7 +61,6 @@ GREMLIN;
         $this->prepareQuery();
         
         // Const from a define (case sensitive)
-        $constantsLC = array_map(function ($x) { return strtolower($x); }, $constants);
         $this->atomFunctionIs('\define')
              ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
              ->is('boolean', true)
@@ -68,7 +68,7 @@ GREMLIN;
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->noDelimiterIsNot($constantsLC);
+             ->noDelimiterIsNot($constants);
         $this->prepareQuery();
 
         $query = <<<GREMLIN

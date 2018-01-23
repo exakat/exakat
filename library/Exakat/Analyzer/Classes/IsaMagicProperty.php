@@ -28,7 +28,8 @@ class IsaMagicProperty extends Analyzer {
     public function dependsOn() {
         return array('Classes/DefinedProperty',
                      'Classes/IsRead',
-                     'Classes/IsModified');
+                     'Classes/IsModified',
+                    );
     }
     
     public function analyze() {
@@ -38,7 +39,9 @@ class IsaMagicProperty extends Analyzer {
              ->analyzerIs('Classes/IsRead')
              ->hasClass()
              ->goToClass()
-             ->raw('where( __.out("METHOD").out("NAME").has("code", "__get") )')
+             ->outIs('MAGICMETHOD')
+             ->outIs('NAME')
+             ->codeIs('__get')
              ->back('first');
         $this->prepareQuery();
 
@@ -48,7 +51,9 @@ class IsaMagicProperty extends Analyzer {
              ->analyzerIs('Classes/IsModified')
              ->hasClass()
              ->goToClass()
-             ->raw('where( __.out("METHOD").out("NAME").has("code", "__set") )')
+             ->outIs('MAGICMETHOD')
+             ->outIs('NAME')
+             ->codeIs('__set')
              ->back('first');
         $this->prepareQuery();
     }

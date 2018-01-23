@@ -29,7 +29,7 @@ class SuperGlobalUsage extends Analyzer {
     public function analyze() {
         // PHP super global Usage
         $this->atomIs(self::$VARIABLES_ALL)
-             ->codeIs(array('$_GET', '$_POST', '$_REQUEST'), true);
+             ->codeIs(array('$_GET', '$_POST', '$_REQUEST'), self::TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }

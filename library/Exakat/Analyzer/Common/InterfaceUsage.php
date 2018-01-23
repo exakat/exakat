@@ -33,7 +33,7 @@ class InterfaceUsage extends Analyzer {
     }
 
     public function analyze() {
-        $interfaces =  $this->makeFullNsPath($this->interfaces);
+        $interfaces =  makeFullNsPath($this->interfaces);
 
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS')
@@ -58,7 +58,7 @@ class InterfaceUsage extends Analyzer {
              ->outIs('TYPEHINT')
              ->atomIs(array('Identifier', 'Nsname'))
              ->tokenIsNot(array("T_ARRAY", "T_CALLABLE"))
-             ->codeIsNot(array('bool', 'int', 'float', 'string', 'array', 'object', 'callable', 'iterable', 'resource'))
+             ->codeIsNot(array('bool', 'int', 'float', 'string', 'array', 'object', 'callable', 'iterable', 'resource'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
 
@@ -66,7 +66,7 @@ class InterfaceUsage extends Analyzer {
              ->outIs('RETURNTYPE')
              ->atomIs(array('Identifier', 'Nsname'))
              ->tokenIsNot(array("T_ARRAY", "T_CALLABLE"))
-             ->codeIsNot(array('bool', 'int', 'float', 'string', 'array', 'object', 'callable', 'iterable', 'resource'))
+             ->codeIsNot(array('bool', 'int', 'float', 'string', 'array', 'object', 'callable', 'iterable', 'resource'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
         

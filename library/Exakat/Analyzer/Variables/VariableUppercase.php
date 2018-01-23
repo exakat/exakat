@@ -27,15 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class VariableUppercase extends Analyzer {
     public function dependsOn() {
-        return array('Variables/Variablenames');
+        return array('Variables/Variablenames',
+                    );
     }
     
     public function analyze() {
         $this->atomIs(self::$VARIABLES_ALL)
              ->analyzerIs('Variables/Variablenames')
-             ->codeIsNot(VariablePhp::$variables, true)
-             ->codeIsNot('$_', true)
-             ->regexIs('code', '^\\\\\\$[a-zA-Z0-9_]{2,}\\$')
+             ->regexIs('code', '/^\$[a-zA-Z0-9_]{2,}$/')
              ->isUppercase('fullcode');
         $this->prepareQuery();
     }

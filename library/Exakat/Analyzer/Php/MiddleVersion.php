@@ -49,7 +49,7 @@ class MiddleVersion extends Analyzer {
                 $functions[] = $bugfix['function'];
             }
         }
-        $this->atomFunctionIs($this->makeFullNsPath($functions));
+        $this->atomFunctionIs(makeFullNsPath($functions));
         $this->prepareQuery();
 
         // bugfixes based on analyzers

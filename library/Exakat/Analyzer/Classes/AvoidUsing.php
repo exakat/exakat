@@ -33,7 +33,7 @@ class AvoidUsing extends Analyzer {
         if (empty($classes)) {
             return ;
         }
-        $classesPath = $this->makeFullNsPath($classes);
+        $classesPath = makeFullNsPath($classes);
 
         // class may be used in a class
         $this->atomIs('Class')
@@ -71,7 +71,7 @@ class AvoidUsing extends Analyzer {
         $this->prepareQuery();
 
         // class may be used in an use
-        $this->atomIs('Use')
+        $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->fullnspathIs($classesPath)
              ->back('first');

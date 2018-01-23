@@ -30,7 +30,7 @@ class EmptyTrait extends Analyzer {
     public function analyze() {
         // Trait with nothing in it
         $this->atomIs('Trait')
-             ->raw('not( where( __.out("METHOD", "PPP") ) )');
+             ->hasNoOut(array('METHOD', 'PPP'));
         $this->prepareQuery();
     }
 }

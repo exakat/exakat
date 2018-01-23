@@ -28,7 +28,8 @@ use Exakat\Data\Methods;
 
 class IsModified extends Analyzer {
     public function dependsOn() {
-        return array('Classes/Constructor');
+        return array('Classes/Constructor',
+                    );
     }
     
     public function analyze() {
@@ -103,7 +104,7 @@ class IsModified extends Analyzer {
              ->_as('results')
              ->back('first')
              ->classDefinition()
-             ->outIs('METHOD')
+             ->outIs(array('MAGICMETHOD', 'METHOD'))
              ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')

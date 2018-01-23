@@ -31,7 +31,10 @@ class SameConditions extends Analyzer {
              ->savePropertyAs('fullcode', 'condition')
              ->_as('results')
              ->inIs('CONDITION')
-             ->raw('where( __.repeat( __.out("ELSE").coalesce(hasLabel("Sequence").has("count", 1).out("EXPRESSION").hasLabel("Ifthen"),  __.filter{true} )).emit().times('.self::MAX_LOOPING.').out("CONDITION").filter{ it.get().value("fullcode") == condition; } )')
+             ->outIs(array('THEN', 'ELSE'))
+             ->atomInside('Ifthen')
+             ->outIs('CONDITION')
+             ->samePropertyAs('fullcode', 'condition')
              ->back('first');
         $this->prepareQuery();
     }

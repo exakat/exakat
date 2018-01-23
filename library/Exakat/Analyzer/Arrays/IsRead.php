@@ -28,7 +28,8 @@ use Exakat\Data\Methods;
 
 class IsRead extends Analyzer {
     public function dependsOn() {
-        return array('Classes/Constructor');
+        return array('Classes/Constructor',
+                    );
     }
     
     public function analyze() {
@@ -84,7 +85,7 @@ class IsRead extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs(array('Functioncall', 'Methodcallname', 'Newcall'))
+        $this->atomIs(array('Functioncall', 'Methodcallname', 'Newcall', 'Exit', 'Echo', 'Print'))
              ->outIs('ARGUMENT')
              ->atomIs('Array');
         $this->prepareQuery();

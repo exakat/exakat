@@ -15,7 +15,6 @@ class x {
         $this->usedInside = 3;
         $this->used_inside_various_cases = 5;
         $this->used_INSIDE_various_cases = 6;
-        
     }
 }
 

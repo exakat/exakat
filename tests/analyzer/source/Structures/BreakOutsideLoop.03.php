@@ -1,7 +1,11 @@
 <?php
     if ($x) {
-        break 1;
         break 2;
     }
-    
+
+    for(;;) {
+        if ($x) {
+        break 1;
+        }
+    }
 ?>

@@ -31,6 +31,13 @@ class NoMagicWithArray extends Analyzer {
     }
     
     public function analyze() {
+        $__get = $this->dictCode->translate(array('__get'));
+        
+        // No __get found
+        if (empty($__get)) {
+            return ;
+        }
+    
         $this->atomIs(array('Array', 'Arrayappend'))
              ->outIs(array('VARIABLE', 'APPEND'))
              ->atomIs('Member')
@@ -50,8 +57,9 @@ class NoMagicWithArray extends Analyzer {
              // __get is defined
              ->raw('where( __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).emit().times('.self::MAX_LOOPING.')
                                         .hasLabel("Class")
-                                        .out("METHOD").out("NAME")
-                                        .filter{ it.get().value("code") == "__get"; } )');
+                                        .out("MAGICMETHOD").out("NAME")
+                                        .filter{ it.get().value("code") in ***; } )', 
+                                        $__get);
         $this->prepareQuery();
     }
 }

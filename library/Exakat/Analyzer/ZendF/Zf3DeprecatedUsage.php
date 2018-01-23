@@ -77,7 +77,7 @@ class Zf3DeprecatedUsage extends Analyzer {
         foreach($deprecated as $d) {
             $classes[$d['namespace'].'\\'.$d['name']] = 1;
         }
-        $classes = $this->makeFullnspath(array_keys($classes));
+        $classes = makeFullnspath(array_keys($classes));
         if (!empty($classes)) {
             $this->analyzerIs('ZendF/ZendClasses')
                  ->fullnspathIs($classes)
@@ -91,7 +91,7 @@ class Zf3DeprecatedUsage extends Analyzer {
         foreach($deprecated as $d) {
             $interfaces[$d['namespace'].'\\'.$d['name']] = 1;
         }
-        $interfaces = $this->makeFullnspath(array_keys($interfaces));
+        $interfaces = makeFullnspath(array_keys($interfaces));
         if (!empty($interfaces)) {
             $this->analyzerIs('ZendF/ZendInterfaces')
                  ->fullnspathIs($interfaces)
@@ -105,7 +105,7 @@ class Zf3DeprecatedUsage extends Analyzer {
         foreach($deprecated as $d) {
             $traits[$d['namespace'].'\\'.$d['name']] = 1;
         }
-        $traits = $this->makeFullnspath(array_keys($traits));
+        $traits = makeFullnspath(array_keys($traits));
         if (!empty($interfaces)) {
             $this->analyzerIs('ZendF/ZendTrait')
                  ->fullnspathIs($traits)

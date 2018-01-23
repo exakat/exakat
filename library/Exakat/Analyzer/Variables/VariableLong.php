@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class VariableLong extends Analyzer {
     public function dependsOn() {
-        return array('Variables/Variablenames');
+        return array('Variables/Variablenames',
+                    );
     }
     
     public function analyze() {

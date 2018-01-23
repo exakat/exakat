@@ -28,7 +28,8 @@ use Exakat\Data\Methods;
 
 class IsModified extends Analyzer {
     public function dependsOn() {
-        return array('Classes/Constructor');
+        return array('Classes/Constructor',
+                    );
     }
     
     public function analyze() {
@@ -45,8 +46,7 @@ class IsModified extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->back('first')
-             ->raw('where( __.repeat( __.out("VARIABLE")).emit(hasLabel("Arrayappend")).times('.self::MAX_LOOPING.').count().is(eq(0)) )')
-             ;
+             ->raw('not( where( __.repeat( __.out("VARIABLE")).emit(hasLabel("Arrayappend")).times('.self::MAX_LOOPING.') ) )');
         $this->prepareQuery();
 
         // $a[1][] = 2;
@@ -97,14 +97,18 @@ class IsModified extends Analyzer {
         foreach($references as $position => $functions) {
             $this->atomFunctionIs($functions)
                  ->outIs('ARGUMENT')
-                 ->is('rank', $position);
+                 ->is('rank', $position)
+                 ->atomIs('Array');
             $this->prepareQuery();
         }
 
+        $this->atomIs('Unset')
+             ->outIs('ARGUMENT')
+             ->atomIs('Array');
+        $this->prepareQuery();
+
         // Class constructors (__construct)
-        $this->atomIs('Functioncall')
-             ->hasIn('NEW')
-             ->hasNoIn('METHOD')
+        $this->atomIs('Newcall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->outIs('ARGUMENT')
              ->atomIs('Array')

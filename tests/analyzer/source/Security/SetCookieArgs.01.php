@@ -4,7 +4,7 @@ setcookie($a1); // ignored, as unsetting cookie
 
 setcookie($a2, ''); // ignored, as unsetting cookie
 setcookie($a3, null); // ignored, as unsetting cookie
-setcookie($a3b, "a"); // ignored, as unsetting cookie
+setcookie($a3b, "a"); // reported
 
 setcookie($a4, $b4); 
 setcookie($a5, $b5, time() + 3600); 

@@ -26,11 +26,11 @@ use Exakat\Analyzer\Analyzer;
 
 class GPCIndex extends Analyzer {
     public function analyze() {
-        // $array['index>]
+        // $array['index']
         $this->atomIs('Array')
              ->outIs('VARIABLE')
-             ->atomIs('Variablearray')
-             ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_COOKIE'))
+             ->atomIs('Phpvariable')
+             ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_COOKIE'), self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first')
              ->outIs('INDEX')
              ->atomIs('String')

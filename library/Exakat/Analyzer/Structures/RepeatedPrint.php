@@ -28,23 +28,20 @@ use Exakat\Analyzer\Analyzer;
 class RepeatedPrint extends Analyzer {
     public function analyze() {
         // first one in sequence
-        $this->atomIs('Functioncall')
-            // echo and print are considered identical
-             ->tokenIs(array('T_PRINT', 'T_ECHO'))
+        $this->atomIs(array('Print', 'Echo'))
              ->is('rank', 0)
              ->nextSibling()
-             ->atomIs('Functioncall')
-             ->tokenIs(array('T_PRINT', 'T_ECHO'))
+             ->atomIs(array('Print', 'Echo'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomFunctionIs(array('\print', '\echo'))
+        $this->atomIs(array('Print', 'Echo'))
              ->isNot('rank', 0)
              ->nextSibling()
-             ->functioncallIs(array('\print', '\echo'))
+             ->atomIs(array('Print', 'Echo'))
              ->back('first')
              ->previousSibling()
-             ->functioncallIsNot(array('\print', '\echo'))
+             ->atomIsNot(array('Print', 'Echo'))
              ->back('first');
         $this->prepareQuery();
     }

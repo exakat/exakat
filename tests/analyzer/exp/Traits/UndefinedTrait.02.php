@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('undefined',
+$expected     = array('ttt',
+                      'undefined',
                      );
 
-$expected_not = array('ttt',
-                      'T',
+$expected_not = array('T',
                       'TT',
                      );
 

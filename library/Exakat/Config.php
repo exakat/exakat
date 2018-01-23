@@ -235,8 +235,8 @@ class Config {
         $this->is_phar  = !empty($pharRunning);
         if ($this->is_phar) {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
-            $this->projects_root = getcwd();
-            $this->dir_root      = 'phar://'.$this->executable;
+            $this->projects_root = substr(dirname($pharRunning), 7);
+            $this->dir_root      = $pharRunning;
 
             assert_options(ASSERT_ACTIVE, 0);
 
@@ -245,7 +245,7 @@ class Config {
         } else {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->dir_root      = dirname(__DIR__, 2);
-            $this->projects_root = getcwd();
+            $this->projects_root = dirname(__DIR__, 2);
 
             assert_options(ASSERT_ACTIVE, 1);
             assert_options(ASSERT_BAIL, 1);
@@ -253,6 +253,8 @@ class Config {
             error_reporting(E_ALL);
             ini_set('display_errors', 1);
         }
+//            print "Project root : $this->projects_root\n";
+//            print "Dir_root : $this->dir_root\n";
 
         $inis = array();
         $configFiles = array('/etc/exakat.ini',
@@ -293,11 +295,14 @@ class Config {
         $this->options = array_merge($this->options, $this->defaultConfig, $this->configFile, $this->projectConfig, $this->codacyConfig, $this->commandline);
 
         $graphdb = $this->options['graphdb'];
-        if (isset($this->options[$graphdb.'_folder']) && 
-            $this->options[$graphdb.'_folder'][0] !== '/') {
-            $this->options[$graphdb.'_folder'] = $this->projects_root.'/'.$this->options[$graphdb.'_folder'];
+        foreach($this->GREMLINS as $gdb => $foo) {
+            if (isset($this->options[$gdb.'_folder'])) {
+                if ($this->options[$gdb.'_folder'][0] !== '/') {
+                    $this->options[$gdb.'_folder'] = $this->projects_root.'/'.$this->options[$gdb.'_folder'];
+                }
+                $this->options[$gdb.'_folder'] = realpath($this->options[$gdb.'_folder']);
+            }
         }
-        $this->options[$graphdb.'_folder'] = realpath($this->options[$graphdb.'_folder']);
         
         $this->options['php'] = $_SERVER['_'];
         if ($this->options['command'] !== 'doctor') {
@@ -308,7 +313,6 @@ class Config {
             self::$singleton = $this;
             self::$stack[] = self::$singleton;
         }
-        
     }
 
     public function __isset($name) {

@@ -28,12 +28,12 @@ class FailingSubstrComparison extends Analyzer {
     
     public function analyze() {
         $this->atomIs('Comparison')
-             ->codeIs(array('==', '==='))
+             ->codeIs(array('==', '==='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs(array('LEFT', 'RIGHT'))
              ->functioncallIs('\substr')
              ->outWithRank('ARGUMENT', 2)
              ->atomIs('Integer')
-             ->savePropertyAs('code', 'length')
+             ->savePropertyAs('intval', 'length')
              ->back('first')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('String')

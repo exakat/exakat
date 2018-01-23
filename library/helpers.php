@@ -338,4 +338,42 @@ function makeArray($value) {
     }
 }
 
+function makeFullnspath($functions, $constant = false) {
+    // case for classes and functions
+    if ($constant === false) {
+        $cb = function ($x) {
+            $r = mb_strtolower($x);
+            if (strpos($r, '\\\\') !== false) {
+                $r = stripslashes($r);
+            }
+            if (isset($r[0]) && $r[0] != '\\') {
+                $r = '\\' . $r;
+            }
+            return $r;
+        };
+    } else {
+        // case for constants
+        $cb = function ($r) {
+            $r2 = str_replace('\\\\', '\\', $r);
+
+            $d = explode('\\', $r2);
+            $last = array_pop($d);
+            $r = mb_strtolower(implode('\\', $d)).'\\'.$last;
+            if (isset($r[0]) && $r[0] != '\\') {
+                $r = '\\' . $r;
+            }
+            return $r;
+        };
+    }
+    
+    if (is_string($functions)) {
+        return $cb($functions);
+    } elseif (is_array($functions)) {
+        $r = array_map($cb, $functions);
+    } else {
+        throw new \Exception('Function is of the wrong type : '.var_export($functions));
+    }
+    return $r;
+}
+
 ?>

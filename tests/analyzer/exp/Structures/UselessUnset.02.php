@@ -2,7 +2,7 @@
 
 $expected     = array('(unset) $argByReference',
                       '(unset) $argByValue',
-                      '(unset) $theGLobal',
+                      '(unset) $theGlobal',
                       '(unset) $theStatic',
                       '(unset) $value2',
                       '(unset) $value1',

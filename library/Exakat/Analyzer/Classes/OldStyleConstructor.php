@@ -27,37 +27,27 @@ use Exakat\Analyzer\Analyzer;
 
 class OldStyleConstructor extends Analyzer {
     public function analyze() {
-        $hasNo__construct = 'not( where( __.out("METHOD").out("NAME").filter{ it.get().value("code").toLowerCase() == "__construct"} ) )';
+        $__construct = $this->dictCode->translate(array('__construct'));
+        
+        // No __construct found
+        if (empty($__construct)) {
+            $hasNo__construct = 'filter{ true; }';
+        } else {
+            $hasNo__construct = 'not( where( __.out("MAGICMETHOD").out("NAME").filter{ it.get().value("code") in ***} ) )';
+        }
+
 
         // No mentionned namespaces
         $this->atomIs('Class')
+             ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\$')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->inIs('NAME')
-             ->raw($hasNo__construct)
+             ->raw($hasNo__construct, $__construct)
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
-             ->goToNamespace()
-             ->atomIs('Php') // no namespace => Global
-             ->back('first');
-        $this->prepareQuery();
-
-        // Namespace is mentionned but empty, so global
-        $this->atomIs('Class')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->inIs('NAME')
-             ->raw($hasNo__construct)
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
-             ->goToNamespace()
-             ->atomIs('Namespace')
-             ->outIs('NAME')
-             ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
     }

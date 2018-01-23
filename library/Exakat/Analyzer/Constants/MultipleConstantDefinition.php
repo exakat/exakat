@@ -42,7 +42,7 @@ GREMLIN
         $constDefinitions = $this->query(<<<GREMLIN
 g.V().hasLabel("Const").not( where( __.in("CONST").hasLabel("Class", "Trait") ) )
                        .out("CONST")
-                       .out("NAME").values("code")
+                       .out("NAME").values("fullcode")
 GREMLIN
 );
 

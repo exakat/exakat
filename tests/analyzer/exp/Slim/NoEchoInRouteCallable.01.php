@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array(
+$expected     = array('$app->get(\'/abd/\', function ($echo) { /**/ } )',
                      );
 
-$expected_not = array(
+$expected_not = array('$app->get(\'/abd/\', function ($withEcho) { /**/ } )',
                      );
 
 ?>

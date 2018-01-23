@@ -31,8 +31,7 @@ class DontUseGPC extends Analyzer {
     
     public function analyze() {
         // $_GET, $_POST...
-        $this->analyzerIs('Variables/VariablePhp')
-             ->back('first');
+        $this->atomIs('Phpvariable');
         $this->prepareQuery();
     }
 }

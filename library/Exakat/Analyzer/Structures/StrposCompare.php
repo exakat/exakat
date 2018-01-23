@@ -29,8 +29,10 @@ class StrposCompare extends Analyzer {
     public function analyze() {
         $operator = $this->loadIni('php_may_return_boolean_or_zero.ini', 'functions');
 
-        $notPregMatchWithLiteral = 'not( where( __.has("fullnspath", "\\\\preg_match").out("ARGUMENT").has("rank", 0).hasLabel("String").not( where( __.out("CONCAT")) ) ) )';
-        $fullnspaths = $this->makeFullnspath($operator);
+        $notPregMatchWithLiteral = <<<GREMLIN
+not( where( __.has("fullnspath", "\\\\preg_match").out("ARGUMENT").has("rank", 0).hasLabel("String").not( where( __.out("CONCAT")) ) ) )
+GREMLIN;
+        $fullnspaths = makeFullnspath($operator);
         
         // if (.. == strpos(..)) {}
         $this->atomFunctionIs($fullnspaths)

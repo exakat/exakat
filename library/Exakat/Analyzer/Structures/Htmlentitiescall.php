@@ -41,7 +41,7 @@ class Htmlentitiescall extends Analyzer {
         $this->prepareQuery();
 
         $constants = array('ENT_COMPAT', 'ENT_QUOTES', 'ENT_NOQUOTES', 'ENT_IGNORE', 'ENT_SUBSTITUTE', 'ENT_DISALLOWED', 'ENT_HTML401', 'ENT_XML1', 'ENT_XHTML', 'ENT_HTML5');
-        $constantsRegex = strtolower('('.implode('|', $constants).')\$');
+        $constantsRegex = '('.implode('|', $constants).')\$';
 
         // Case 2nd argument is a constant
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))

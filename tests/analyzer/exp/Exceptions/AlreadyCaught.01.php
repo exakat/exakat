@@ -7,7 +7,7 @@ $expected     = array('try { /**/ } catch (A $a1) { /**/ } catch (B $b2) { /**/ 
                       'try { /**/ } catch (C $c1) { /**/ } catch (A $a2) { /**/ } catch (B $b3) { /**/ } ',
                      );
 
-$expected_not = array('try { /**/ } catch (C $c1) { /**/ }  catch (B $b2) { /**/ }  catch (A $a3) { /**/ } ',
+$expected_not = array('try { /**/ } catch (C $c1) { /**/ } catch (B $b2) { /**/ } catch (A $a3) { /**/ } ',
                      );
 
 ?>

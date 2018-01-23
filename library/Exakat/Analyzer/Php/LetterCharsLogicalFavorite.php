@@ -28,8 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class LetterCharsLogicalFavorite extends Analyzer {
 
     public function analyze() {
+        $operators = $this->dictCode->translate(["&&", "||", "^"]);
+        $operatorsList = makeList($operators, '');
+        
         $mapping = <<<GREMLIN
-if (it.get().value("code") in ["&&", "||", "^"]) {
+if (it.get().value("code") in [$operatorsList]) {
     x2 = "chars";
 } else {
     x2 = "letters";

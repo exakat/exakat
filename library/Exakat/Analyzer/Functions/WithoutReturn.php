@@ -27,13 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class WithoutReturn extends Analyzer {
     public function analyze() {
+        // function foo() { echo 1; }
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->hasNoOut('ABSTRACT')
              ->hasNoInterface()
              ->outIs('NAME')
-             ->codeIsNot(array('__construct', '__destruct', '__wakeup', '__autoload'))
+             ->codeIsNot(array('__construct', '__destruct', '__wakeup', '__autoload'), self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first')
-             ->noAtomInside('Return');
+             ->noAtomInside('Return')
+             ;
         $this->prepareQuery();
     }
 }

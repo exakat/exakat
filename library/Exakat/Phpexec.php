@@ -193,7 +193,8 @@ class Phpexec {
         if ($this->isCurrentVersion) {
             $res = count(@token_get_all(file_get_contents(str_replace('$', '\\\$', $file))));
         } else {
-            $res = shell_exec($this->phpexec.' -r "print count(@token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); ?>" 2>&1    ');
+            $filename = str_replace(array("'", '"', "\$"), array("\\'", '\\"', "\\\$"), $file);
+            $res = shell_exec($this->phpexec.' -r "print count(@token_get_all(file_get_contents(\''.$filename.'\'))); ?>" 2>&1    ');
         }
 
         return $res;

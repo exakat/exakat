@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class Symfony28Undefined extends SymfonyMissing {
     public function dependsOn() {
-        return array('Symfony/SymfonyUsage');
+        return array('Symfony/SymfonyUsage',
+                    );
     }
 
     public function analyze() {

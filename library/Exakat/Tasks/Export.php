@@ -29,7 +29,7 @@ class Export extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        $queryTemplate = 'g.V().not(hasId(0))';
+        $queryTemplate = 'g.V()';
 
         $vertices = $this->gremlin->query($queryTemplate);
 

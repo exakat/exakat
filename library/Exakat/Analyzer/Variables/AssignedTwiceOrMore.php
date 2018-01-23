@@ -28,12 +28,13 @@ class AssignedTwiceOrMore extends Analyzer {
     public function analyze() {
         $list = makeList(self::$FUNCTIONS_ALL);
         $maxLooping = self::MAX_LOOPING;
+        $equal = $this->dictCode->translate(array('='));
 
         $query = <<<GREMLIN
 g.V().hasLabel($list).where( 
             __.sideEffect{counts = [:]; names = [];}
               .out("BLOCK").repeat( __.out({$this->linksDown})).emit().times($maxLooping)
-              .hasLabel("Assignation").has("code", "=")
+              .hasLabel("Assignation").has("code", $equal[0])
               .where( __.out("RIGHT").hasLabel("Integer", "Real", "Boolean", "Null", "Heredoc"))
               .out("LEFT").hasLabel("Variable")
               .sideEffect{ k = it.get().value("fullcode"); 
@@ -61,7 +62,7 @@ GREMLIN;
              ->atomInside('Assignation')
              ->outIs('LEFT')
              ->atomIs('Variable')
-             ->isHash('code', $variables, 'name');
+             ->isHash('fullcode', $variables, 'name');
         $this->prepareQuery();
     }
 }

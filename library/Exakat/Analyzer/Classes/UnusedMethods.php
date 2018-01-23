@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedMethods extends Analyzer {
     public function dependsOn() {
-        return array('Classes/UsedMethods');
+        return array('Classes/UsedMethods',
+                    );
     }
     
     public function analyze() {

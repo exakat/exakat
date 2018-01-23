@@ -27,12 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class FunctionCalledWithOtherCase extends Analyzer {
     public function analyze() {
+        // function FOO() {}
+        // foo();
         $this->atomIs('Functioncall')
-             ->inIsNot(array('NEW', 'METHOD'))
              ->savePropertyAs('code', 'name')
              ->functionDefinition()
-             ->samePropertyAs('code', 'name')
-             ->notSamePropertyAs('code', 'name', true)
+             ->notSamePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
     }

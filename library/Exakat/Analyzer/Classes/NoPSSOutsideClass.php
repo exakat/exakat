@@ -30,7 +30,7 @@ class NoPSSOutsideClass extends Analyzer {
         $this->atomIs(array('Staticconstant', 'Staticmethodcall', 'Staticproperty'))
              ->hasNoClassTrait()
              ->outIs('CLASS')
-             ->codeIs(array('self', 'parent', 'static'))
+             ->atomIs(array('Self', 'Parent', 'Static'))
              ->back('first');
         $this->prepareQuery();
 
@@ -38,7 +38,6 @@ class NoPSSOutsideClass extends Analyzer {
         $this->atomIs('New')
              ->hasNoClassTrait()
              ->outIs('NEW')
-             ->atomIs(array('Identifier', 'Newcall', 'Nsname'))
              ->codeIs(array('self', 'parent', 'static'))
              ->back('first');
         $this->prepareQuery();
@@ -47,8 +46,7 @@ class NoPSSOutsideClass extends Analyzer {
         $this->atomIs('Instanceof')
              ->hasNoClassTrait()
              ->outIs('CLASS')
-             ->atomIs('Identifier')
-             ->codeIs(array('self', 'parent', 'static'))
+             ->atomIs(array('Self', 'Parent', 'Static'))
              ->back('first');
         $this->prepareQuery();
 

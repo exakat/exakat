@@ -26,8 +26,18 @@ use Exakat\Analyzer\Analyzer;
 
 class DifferencePreference extends Analyzer {
     public function analyze() {
+        $different = $this->dictCode->translate(array('!='));
+
+        if (empty($different)) {
+            $different = array(-1); // always false
+        }
+
         $mapping = <<<GREMLIN
-x2 = it.get().value("code");
+if (it.get().value("code") == $different[0]) {
+    x2 = "!=";
+} else {
+    x2 = "<>";
+}
 GREMLIN;
         $storage = array('!='  => '!=',
                          '<>'  => '<>');

@@ -32,7 +32,7 @@ class GlobalUsage extends Analyzer {
         $this->prepareQuery();
 
         // $GLOBALS as a whole
-        $this->atomIs('Variable')
+        $this->atomIs('Phpvariable')
              ->hasNoIn('VARIABLE')
              ->codeIs('$GLOBALS', true);
         $this->prepareQuery();

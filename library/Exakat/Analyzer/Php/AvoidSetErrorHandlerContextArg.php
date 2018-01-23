@@ -55,7 +55,7 @@ class AvoidSetErrorHandlerContextArg extends Analyzer {
              ->inIs('DEFINITION')
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('fullcode', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->hasChildWithRank('ARGUMENT', 4) // This is the fifth argument
              ->back('first');

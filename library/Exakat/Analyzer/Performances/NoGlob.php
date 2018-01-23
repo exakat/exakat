@@ -36,7 +36,7 @@ class NoGlob extends Analyzer {
         $this->atomFunctionIs('\\glob')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs(array('Identifier', 'Nsname'))
-             ->fullnspathIsNot('\glob_nosort')
+             ->fullnspathIsNot('\GLOB_NOSORT')
              ->back('first');
         $this->prepareQuery();
 
@@ -44,7 +44,7 @@ class NoGlob extends Analyzer {
         $this->atomFunctionIs('\\glob')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Logical')
-             ->raw('where( __.out("LEFT", "RIGHT").hasLabel("Identifier").has("fullnspath", "\\\\glob_nosort").count().is(eq(0)) )')
+             ->raw('not( where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname").has("fullnspath", "\\\\GLOB_NOSORT") ) )')
              ->back('first');
         $this->prepareQuery();
 

@@ -40,7 +40,7 @@ class SymfonyMissing extends Analyzer {
         $data = new Symfony($this->config->dir_root.'/data', $this->config);
         $cit = $data->getCIT('symfony' , $this->version);
         $cit = array_pop($cit);
-        $cit = $this->makeFullnspath($cit);
+        $cit = makeFullnspath($cit);
         
         $this->analyzerIs($analyzer)
              ->fullnspathIsNot($cit);

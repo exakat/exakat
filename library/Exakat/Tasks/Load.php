@@ -37,6 +37,7 @@ use Exakat\Phpexec;
 use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Precedence;
 use Exakat\Tasks\Helpers\Atom;
+use Exakat\Tasks\Helpers\Intval;
 use Exakat\Tokenizer\Token;
 
 const T_BANG                         = '!';
@@ -85,6 +86,7 @@ class Load extends Tasks {
     private $namespace = '\\';
     private $uses   = array('function' => array(),
                             'const'    => array(),
+                            'define'   => array(),
                             'class'    => array());
     private $filename   = null;
     private $line       = 0;
@@ -167,7 +169,7 @@ class Load extends Tasks {
     static public $PROP_NODELIMITER = array('String', 'Variable');
     static public $PROP_HEREDOC     = array('Heredoc');
     static public $PROP_COUNT       = array('Sequence', 'Functioncall', 'Methodcallname', 'Arrayliteral', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
-    static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Method', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String');
+    static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Method', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String', 'Self', 'Parent');
     static public $PROP_ABSOLUTE    = array('Nsname');
     static public $PROP_ALIAS       = array('Nsname', 'Identifier', 'As');
     static public $PROP_ORIGIN      = array('Nsname', 'Identifier', 'As');
@@ -188,7 +190,8 @@ class Load extends Tasks {
     static public $PROP_BINARYSTRING= array('String', 'Heredoc');
     static public $PROP_ROOT        = array('File');
 
-    static public $PROP_OPTIONS = array();
+// Refactoring under way 
+//    static public $PROP_OPTIONS = array();
 
     static public $TOKENS = array(
                      ';'  => \Exakat\Tasks\T_SEMICOLON,
@@ -232,6 +235,8 @@ class Load extends Tasks {
     private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv', 'SplitGraphson');
 
     private $processing = array();
+    
+    private $plugins = array();
 
     private $stats = array('loc'       => 0,
                            'totalLoc'  => 0,
@@ -245,6 +250,9 @@ class Load extends Tasks {
         if (!$this->php->isValid()) {
             throw new InvalidPHPBinary($this->php->getVersion());
         }
+        
+        // Init all plugins here
+        $this->plugins[] = new Intval();
 
         $this->precedence = new Precedence($this->config->phpversion, $this->config);
 
@@ -289,14 +297,14 @@ class Load extends Tasks {
 
                             \Exakat\Tasks\T_OPEN_BRACKET             => 'processArrayLiteral',
                             \Exakat\Tasks\T_ARRAY                    => 'processArrayLiteral',
-                            \Exakat\Tasks\T_EMPTY                    => 'processArray',
-                            \Exakat\Tasks\T_LIST                     => 'processArray',
-                            \Exakat\Tasks\T_EVAL                     => 'processArray',
-                            \Exakat\Tasks\T_UNSET                    => 'processArray',
-                            \Exakat\Tasks\T_ISSET                    => 'processArray',
+                            \Exakat\Tasks\T_UNSET                    => 'processIsset',
+                            \Exakat\Tasks\T_ISSET                    => 'processIsset',
+                            \Exakat\Tasks\T_EMPTY                    => 'processIsset',
+                            \Exakat\Tasks\T_LIST                     => 'processArray', // Can't move to processEcho, because of omissions
+                            \Exakat\Tasks\T_EVAL                     => 'processIsset', 
+                            \Exakat\Tasks\T_ECHO                     => 'processEcho',
                             \Exakat\Tasks\T_EXIT                     => 'processExit',
                             \Exakat\Tasks\T_DOUBLE_ARROW             => 'processKeyvalue',
-                            \Exakat\Tasks\T_ECHO                     => 'processEcho',
 
                             \Exakat\Tasks\T_HALT_COMPILER            => 'processHalt',
                             \Exakat\Tasks\T_PRINT                    => 'processPrint',
@@ -417,6 +425,8 @@ class Load extends Tasks {
                             \Exakat\Tasks\T_GLOBAL                   => 'processGlobalVariable',
                             );
 
+/*
+    refactoring under way
         self::$PROP_OPTIONS = array(
                           'alternative' => self::$PROP_ALTERNATIVE,
                           'reference'   => self::$PROP_REFERENCE,
@@ -446,6 +456,7 @@ class Load extends Tasks {
                           'binaryString'=> self::$PROP_BINARYSTRING,
                           'root'        => self::$PROP_ROOT,
                           );
+*/
 
         if (file_exists($this->config->projects_root.'/projects/.exakat/calls.sqlite')) {
             unlink($this->config->projects_root.'/projects/.exakat/calls.sqlite');
@@ -472,6 +483,12 @@ CREATE TABLE definitions (
 )
 SQL;
         $this->callsSqlite->query($definitions);
+    }
+
+    public function runPlugins($atom) {
+        foreach($this->plugins as $plugin) {
+            $plugin->run($atom);
+        }
     }
     
     public function run() {
@@ -504,10 +521,11 @@ SQL;
             display('Loading with '.$client.PHP_EOL);
 
             $client = '\\Exakat\\Loader\\'.$client;
-            static::$client = new $client($this->gremlin, $this->config);
+            static::$client = new $client($this->gremlin, $this->config, $this->plugins);
         }
 
         $this->datastore->cleanTable('tokenCounts');
+        $this->datastore->cleanTable('dictionary');
         $this->logTime('Init');
 
         if ($filename = $this->config->filename) {
@@ -565,7 +583,6 @@ SQL;
                 // ignoring empty files
             }
         }
-//        $this->saveDefinitions();
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
@@ -609,6 +626,7 @@ SQL;
 
         $this->uses  = array('function' => array(),
                              'const'    => array(),
+                             'define'   => array(),
                              'class'    => array());
         $this->contexts = array(self::CONTEXT_CLASS      => 0,
                                 self::CONTEXT_INTERFACE  => false,
@@ -687,6 +705,7 @@ SQL;
 
         $this->uses   = array('function' => array(),
                               'const'    => array(),
+                              'define'   => array(),
                               'class'    => array());
 
         $id1 = $this->addAtom('File');
@@ -886,7 +905,7 @@ SQL;
         $string->constant    = $constant;
 
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
-            $string->delimiter = $closeQuote;
+            $string->delimiter = trim($closeQuote);
             $string->heredoc   = $openQuote[3] !== "'";
         }
 
@@ -1016,7 +1035,26 @@ SQL;
              $this->isContext(self::CONTEXT_INTERFACE)) &&
              
              !$this->isContext(self::CONTEXT_FUNCTION)) {
-            $atom = 'Method';
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), 
+                         array('__construct',
+                               '__destruct',
+                               '__call',
+                               '__callstatic',
+                               '__get',
+                               '__set',
+                               '__isset',
+                               '__unset',
+                               '__sleep',
+                               '__wakeup',
+                               '__tostring',
+                               '__invoke',
+                               '__set_state',
+                               '__clone',
+                               '__debuginfo'))) {
+                $atom = 'Magicmethod';
+            } else {
+                $atom = 'Method';
+            }
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             $atom = 'Closure';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_AND &&
@@ -1115,8 +1153,8 @@ SQL;
         } elseif ( $function->atom === 'Closure') {
             $fullnspath = $this->makeAnonymous('function');
             $aliased    = self::NOT_ALIASED;
-        } elseif ( $function->atom === 'Method') {
-            $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.$name->code;
+        } elseif ( $function->atom === 'Method' || $function->atom === 'Magicmethod') {
+            $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($name->code);
             $aliased    = self::NOT_ALIASED;
         } else {
             assert(false, 'Wrong type of function '.$function->atom);
@@ -1316,7 +1354,14 @@ SQL;
             $this->popExpression();
 
             $cpm->rank = ++$rank;
-            $this->addLink($class, $cpm, strtoupper($cpm->atom));
+            if ($cpm->atom == 'Usenamespace' ||
+                $cpm->atom == 'Usetrait') {
+                $link = 'USE';
+            } else {
+                $link = strtoupper($cpm->atom);
+            }
+                
+            $this->addLink($class, $cpm, $link);
         }
         
         ++$this->id;
@@ -1517,10 +1562,13 @@ SQL;
 
     private function processClosingTag() {
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_INLINE_HTML &&
-            in_array($this->tokens[$this->id + 2][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO))) {
+            in_array($this->tokens[$this->id + 2][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO, \Exakat\Tasks\T_INLINE_HTML))) {
 
-            ++$this->id;
-            $this->processInlinehtml();
+            // it is possible to have multiple INLINE_HTML in a row : <?php//b ? >
+            do {
+                ++$this->id;
+                $this->processInlinehtml();
+            } while( $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_INLINE_HTML);
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
@@ -1532,6 +1580,7 @@ SQL;
             }
         } elseif (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO))) {
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
+
                 $this->processOpenWithEcho();
                 if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON) {
                     $this->processSemicolon();
@@ -1559,7 +1608,7 @@ SQL;
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
-        $functioncall = $this->processArguments('Functioncall', array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
+        $functioncall = $this->processArguments('Echo', array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
         $argumentsFullcode = $functioncall->fullcode;
 
         if ($noSequence === false) {
@@ -1610,6 +1659,9 @@ SQL;
             $nsname = $this->addAtom('Nsname');
             $nsname->token      = 'T_ARRAY';
             $nsname->fullnspath = '\\array';
+        } elseif ($this->isContext(self::CONTEXT_NEW)) {
+            $nsname = $this->addAtom('Newcall');
+            $nsname->token     = 'T_STRING';
         } else {
             $nsname = $this->addAtom('Nsname');
             $nsname->token     = 'T_STRING';
@@ -1683,7 +1735,6 @@ SQL;
 
             $this->addCall('class', $fullnspath, $nsname);
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
-
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
@@ -1694,6 +1745,7 @@ SQL;
 
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'const');
+
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
 
@@ -1917,7 +1969,7 @@ SQL;
         $identifier->token      = $this->getToken($this->tokens[$this->id][0]);
 
         if ($getFullnspath === self::WITH_FULLNSPATH) {
-            list($fullnspath, $aliased) = $this->getFullnspath($identifier, 'class');
+            list($fullnspath, $aliased) = $this->getFullnspath($identifier, 'const');
             $identifier->fullnspath = $fullnspath;
             $identifier->aliased    = $aliased;
         }
@@ -2052,16 +2104,12 @@ SQL;
         if ($this->isContext(self::CONTEXT_NEW)) {
             $atom = 'Newcall';
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) {
-            if (strtolower($name->code) == 'define') { // no namespace for define...
+            if (strtolower($name->code) === '\\define') { 
                 $atom = 'Defineconstant';
-            } elseif ($name->fullnspath == '\\unset') {
-                $atom = 'Unset';
-            } elseif ($name->fullnspath == '\\list') {
+            } elseif (strtolower($name->code) === 'define') { 
+                $atom = 'Defineconstant';
+            } elseif ($name->fullnspath === '\\list') {
                 $atom = 'List';
-            } elseif ($name->fullnspath == '\\empty') {
-                $atom = 'Empty';
-            } elseif ($name->fullnspath == '\\isset') {
-                $atom = 'Isset';
             } else {
                 $atom = 'Functioncall';
             }
@@ -2082,6 +2130,14 @@ SQL;
             $functioncall->aliased    = $aliased;
 
             $this->addCall('class', $fullnspath, $functioncall);
+        } elseif ($atom === 'Methodcallname') {
+            $functioncall->fullnspath = mb_strtolower($name->code);
+            $functioncall->aliased    = self::NOT_ALIASED;
+        } elseif ($atom === 'Defineconstant') {
+            $functioncall->fullnspath = '\\define';
+            $functioncall->aliased    = self::NOT_ALIASED;
+
+            $this->processDefineAsConstants($functioncall);
         } elseif ($getFullnspath === self::WITH_FULLNSPATH ||
                   $name->fullnspath !== '\\list') {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
@@ -2090,11 +2146,6 @@ SQL;
 
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
-
-            // Probably weak check, since we haven't built fullnspath for functions yet...
-            if (mb_strtolower($name->code) === 'define') {
-                $this->processDefineAsConstants($functioncall);
-            }
 
             $this->addCall('function', $fullnspath, $functioncall);
 
@@ -2142,6 +2193,14 @@ SQL;
             $string = $this->addAtom('Null');
             $string->boolean  = 0;
             $string->constant = self::CONSTANT_EXPRESSION;
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
+            $string = $this->addAtom('Self');
+            $string->constant = self::CONSTANT_EXPRESSION;
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
+            $string = $this->addAtom('Parent');
+            $string->constant = self::CONSTANT_EXPRESSION;
+        } elseif ($this->isContext(self::CONTEXT_NEW)) {
+            $string = $this->addAtom('Newcall');
         } else {
             $string = $this->addAtom('Identifier');
             $string->constant = self::CONSTANT_EXPRESSION;
@@ -2155,7 +2214,16 @@ SQL;
 
         $this->pushExpression($string);
         
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
+        if ($string->atom == 'Parent' ||
+            $string->atom == 'Self'   ||
+            $string->atom == 'Newcall'
+            ) {
+            list($fullnspath, $aliased) = $this->getFullnspath($string, 'class');
+            $string->fullnspath = $fullnspath;
+            $string->aliased    = $aliased;
+
+            $this->addCall('class', $fullnspath, $string);
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF   ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NEW
             ) {
@@ -2218,14 +2286,14 @@ SQL;
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF    ) {
 
-            $identifier = $this->processSingle('Identifier');
+            $identifier = $this->processSingle('Static');
             list($fullnspath, $aliased) = $this->getFullnspath($identifier, 'class');
             $identifier->fullnspath = $fullnspath;
             $this->addCall('class', $fullnspath, $identifier);
-            
+
             return $identifier;
-        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
-            $name = $this->addAtom('Identifier');
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS ) {
+            $name = $this->addAtom('Static');
             $name->code       = $this->tokens[$this->id][1];
             $name->fullcode   = $this->tokens[$this->id][1];
             $name->line       = $this->tokens[$this->id][2];
@@ -2234,7 +2302,7 @@ SQL;
             list($fullnspath, $aliased) = $this->getFullnspath($name);
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
-                                          
+
             $this->pushExpression($name);
 
             return $this->processFunctioncall();
@@ -2253,12 +2321,18 @@ SQL;
                 return $this->processStaticVariable();
             }
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
-            // new static; (no parenthesis, as tested above)
+            // new static; 
+            $name = $this->addAtom('Newcall');
+            $name->code       = $this->tokens[$this->id][1];
+            $name->fullcode   = $this->tokens[$this->id][1];
+            $name->line       = $this->tokens[$this->id][2];
+            $name->token      = $this->getToken($this->tokens[$this->id][0]);
 
-            --$this->id;
-            $name = $this->processNextAsIdentifier();
+            list($fullnspath, $aliased) = $this->getFullnspath($name);
+            $name->fullnspath = $fullnspath;
+            $name->aliased    = $aliased;
+
             $this->pushExpression($name);
-
             return $name;
         } else {
             return $this->processOptions('Static');
@@ -2369,9 +2443,16 @@ SQL;
         }
 
         ++$this->id;
+        if ($this->isContext(self::CONTEXT_NEW)) {
+            $resetContext = true;
+            $this->toggleContext(self::CONTEXT_NEW);
+        }
         do {
             $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_BRACKET, \Exakat\Tasks\T_CLOSE_CURLY))) ;
+        if (isset($resetContext)) {
+            $this->toggleContext(self::CONTEXT_NEW);
+        }
 
         // Skip closing bracket
         ++$this->id;
@@ -2989,26 +3070,18 @@ SQL;
 
     private function processExit() {
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_CLOSE_BRACKET, \Exakat\Tasks\T_COLON))) {
-            $name = $this->addAtom('Identifier');
-            $name->code       = $this->tokens[$this->id][1];
-            $name->fullcode   = $this->tokens[$this->id][1];
-            $name->line       = $this->tokens[$this->id][2];
-            $name->token      = $this->getToken($this->tokens[$this->id][0]);
-            $name->fullnspath = '\\'.mb_strtolower($this->tokens[$this->id][1]);
+            $functioncall = $this->addAtom('Exit');
+            $functioncall->code       = $this->tokens[$this->id][1];
+            $functioncall->fullcode   = $this->tokens[$this->id][1].' ';
+            $functioncall->line       = $this->tokens[$this->id][2];
+            $functioncall->token      = $this->getToken($this->tokens[$this->id][0]);
+            $functioncall->count      = 0;
+            $functioncall->fullnspath = '\\'.mb_strtolower($functioncall->code);
 
             $void = $this->addAtomVoid();
             $void->rank = 0;
 
-            $functioncall = $this->addAtom('Functioncall');
-            $functioncall->code       = $name->code;
-            $functioncall->fullcode   = $name->fullcode.' ';
-            $functioncall->line       = $this->tokens[$this->id][2];
-            $functioncall->token      = $this->getToken($this->tokens[$this->id][0]);
-            $functioncall->count      = 0;
-            $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
-
             $this->addLink($functioncall, $void, 'ARGUMENT');
-            $this->addLink($functioncall, $name, 'NAME');
 
             $this->pushExpression($functioncall);
 
@@ -3018,17 +3091,17 @@ SQL;
 
             return $functioncall;
         } else {
-            --$this->id;
-            $name = $this->processNextAsIdentifier();
-            $this->pushExpression($name);
+            $current = $this->id;
+            ++$this->id;
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
-                $this->processSemicolon();
-            } else {
-                $name = $this->processFCOA($name);
-            }
+            $functioncall = $this->processArguments('Exit');
+            $functioncall->code       = $this->tokens[$current][1];
+            $functioncall->fullcode   = $this->tokens[$current][1].' ';
+            $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
 
-            return $name;
+            $this->pushExpression($functioncall);
+
+            return $functioncall;
         }
     }
 
@@ -3285,7 +3358,11 @@ SQL;
     }
 
     private function processUse() {
-        $use = $this->addAtom('Use');
+        if (empty($this->currentClassTrait)) {
+            $use = $this->addAtom('Usenamespace');
+        } else {
+            $use = $this->addAtom('Usetrait');
+        }
         $current = $this->id;
         $useType = 'class';
 
@@ -3365,13 +3442,13 @@ SQL;
                 $fullcode[] = $namespace->fullcode.' '.$block->fullcode;
 
                 // Several namespaces ? This has to be recalculated inside the block!!
-                $namespace->fullnspath = $this->makeFullnspath($namespace);
+                $namespace->fullnspath = makeFullnspath($namespace->fullcode);
 
                 $this->addLink($use, $namespace, 'USE');
             } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
                 //use A\B\ {} // Prefixes, within a Class/Trait
                 $this->addLink($use, $namespace, 'GROUPUSE');
-                $prefix = $this->makeFullnspath($namespace);
+                $prefix = makeFullnspath($namespace->fullcode);
                 if ($prefix[0] !== '\\') {
                     $prefix = '\\'.$prefix;
                 }
@@ -3451,7 +3528,7 @@ SQL;
                 if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
 
-                    $fullnspath = $this->makeFullnspath($namespace);
+                    $fullnspath = makeFullnspath($namespace->fullcode);
                     $namespace->fullnspath = $fullnspath;
                     $namespace->origin     = $fullnspath;
 
@@ -3500,21 +3577,23 @@ SQL;
     private function processVariable() {
         if ($this->tokens[$this->id][1] === '$this') {
             $atom = 'This';
-        } elseif (in_array($this->tokens[$this->id + 1][1], array('$GLOBALS',
-                                                                  '$_SERVER',
-                                                                  '$_GET',
-                                                                  '$_POST',
-                                                                  '$_FILES',
-                                                                  '$_REQUEST',
-                                                                  '$_SESSION',
-                                                                  '$_ENV',
-                                                                  '$_COOKIE',
-                                                                  '$php_errormsg',
-                                                                  '$HTTP_RAW_POST_DATA',
-                                                                  '$http_response_header',
-                                                                  '$argc',
-                                                                  '$argv',
-                                                                  ))) {
+        } elseif (in_array($this->tokens[$this->id][1], array('$GLOBALS',
+                                                              '$_SERVER',
+                                                              '$_GET',
+                                                              '$_POST',
+                                                              '$_FILES',
+                                                              '$_REQUEST',
+                                                              '$_SESSION',
+                                                              '$_ENV',
+                                                              '$_COOKIE',
+                                                              '$php_errormsg',
+                                                              '$HTTP_RAW_POST_DATA',
+                                                              '$http_response_header',
+                                                              '$argc',
+                                                              '$argv',
+                                                              '$HTTP_POST_VARS',
+                                                              '$HTTP_GET_VARS',
+                                                              ))) {
             $atom = 'Phpvariable';
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
             $atom = 'Variableobject';
@@ -3601,21 +3680,9 @@ SQL;
 
     private function processInteger() {
         $integer = $this->processSingle('Integer');
-        $value = $integer->code;
+        $this->runPlugins($integer);
 
-        if (strtolower(substr($value, 0, 2)) === '0b') {
-            $actual = bindec(substr($value, 2));
-        } elseif (strtolower(substr($value, 0, 2)) === '0x') {
-            $actual = hexdec(substr($value, 2));
-        } elseif (strtolower($value[0]) === '0') {
-            // PHP 7 will just stop.
-            // PHP 5 will work until it fails
-            $actual = octdec(substr($value, 1));
-        } else {
-            $actual = $value;
-        }
-        $integer->intval  = abs($actual) > PHP_INT_MAX ? 0 : $actual;
-        $integer->boolean = (int) (boolean) $value;
+        $integer->boolean = (int) (boolean) $integer->code;
         $integer->constant = self::CONSTANT_EXPRESSION;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -3628,8 +3695,8 @@ SQL;
     private function processReal() {
         $real = $this->processSingle('Real');
         // (int) is for loading into the database
+        $this->runPlugins($real);
         $real->boolean  = (int) (strtolower($this->tokens[$this->id][1]) != 0);
-        $real->intval   = (int) (strtolower($this->tokens[$this->id][1]) != 0);
         $real->constant = self::CONSTANT_EXPRESSION;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -3687,7 +3754,16 @@ SQL;
     }
 
     private function processMagicConstant() {
-        return $this->processSingle('Magicconstant');
+        $constant = $this->processSingle('Magicconstant');
+        
+        if ($constant->fullcode === '__DIR__') {
+            $path = dirname($this->filename);
+            $constant->noDelimiter = $path === '/' ? '' : $path;
+        } elseif ($constant->fullcode === '__FILE__') {
+            $constant->noDelimiter = $this->filename;
+        }
+        
+        return $constant;
     }
 
     //////////////////////////////////////////////////////
@@ -3961,7 +4037,7 @@ SQL;
             $signExpression = $this->tokens[$this->id][1].$signExpression;
             $code *= $this->tokens[$this->id][1].'1';
         }
-
+        
         if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER ||
              $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DNUMBER) &&
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
@@ -3971,7 +4047,7 @@ SQL;
             $operand->fullcode = $signExpression.$operand->fullcode;
             $operand->line     = $this->tokens[$this->id][2];
             $operand->token    = $this->getToken($this->tokens[$this->id][0]);
-            $operand->intval   *= $code;
+            $this->runPlugins($operand);
 
             return $operand;
         }
@@ -4474,23 +4550,43 @@ SQL;
         return $this->processOperator('Bitshift', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
-    private function processEcho() {
+    private function processIsset() {
         $current = $this->id;
-        --$this->id;
-        $name = $this->processNextAsIdentifier();
         
-        $functioncall = $this->processArguments('Functioncall', array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
+        $atom = ucfirst(mb_strtolower($this->tokens[$current][1]));
+        ++$this->id;
+        $functioncall = $this->processArguments($atom);
+
         $argumentsFullcode = $functioncall->fullcode;
         
-        list($fullnspath, $aliased) = $this->getFullnspath($name);
+        $functioncall->code       = $this->tokens[$current][1];
+        $functioncall->fullcode   = $this->tokens[$current][1].'('.$argumentsFullcode.')';
+        $functioncall->line       = $this->tokens[$current][2];
+        $functioncall->token      = $this->getToken($this->tokens[$current][0]);
+        $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
+        $functioncall->aliased    = self::NOT_ALIASED;
+
+        $this->pushExpression($functioncall);
+
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+
+        return $functioncall;
+    }
+    
+    private function processEcho() {
+        $current = $this->id;
+        
+        $functioncall = $this->processArguments('Echo', array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
+        $argumentsFullcode = $functioncall->fullcode;
+        
         $functioncall->code       = $this->tokens[$current][1];
         $functioncall->fullcode   = $this->tokens[$current][1].' '.$argumentsFullcode;
         $functioncall->line       = $this->tokens[$current][2];
         $functioncall->token      = $this->getToken($this->tokens[$current][0]);
-        $functioncall->fullnspath = $fullnspath;
-        $functioncall->aliased    = $aliased;
-
-        $this->addLink($functioncall, $name, 'NAME');
+        $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
+        $functioncall->aliased    = self::NOT_ALIASED;
 
         $this->pushExpression($functioncall);
 
@@ -4522,16 +4618,7 @@ SQL;
     }
 
     private function processPrint() {
-        if (in_array($this->tokens[$this->id][0], array(\Exakat\Tasks\T_INCLUDE, \Exakat\Tasks\T_INCLUDE_ONCE, \Exakat\Tasks\T_REQUIRE, \Exakat\Tasks\T_REQUIRE_ONCE))) {
-            $name = $this->addAtom('Include');
-        } else {
-            $name = $this->addAtom('Identifier');
-        }
-
-        $name->code      = $this->tokens[$this->id][1];
-        $name->fullcode  = $this->tokens[$this->id][1];
-        $name->line      = $this->tokens[$this->id][2];
-        $name->token     = $this->getToken($this->tokens[$this->id][0]);
+        $current = $this->id;
 
         $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
@@ -4547,20 +4634,22 @@ SQL;
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
 
-        $functioncall = $this->addAtom('Functioncall');
+        if (in_array($this->tokens[$current][0], array(\Exakat\Tasks\T_INCLUDE, \Exakat\Tasks\T_INCLUDE_ONCE, \Exakat\Tasks\T_REQUIRE, \Exakat\Tasks\T_REQUIRE_ONCE))) {
+            $functioncall = $this->addAtom('Include');
+        } else {
+            $functioncall = $this->addAtom('Print');
+        }
         $index = $this->popExpression();
         $index->rank = 0;
         $this->addLink($functioncall, $index, 'ARGUMENT');
         $fullcode[] = $index->fullcode;
 
-        $functioncall->code       = $name->code;
-        $functioncall->fullcode   = $name->code.' '.$index->fullcode;
-        $functioncall->line       = $name->line;
-        $functioncall->token      = $name->token;
+        $functioncall->code       = $this->tokens[$current][1];
+        $functioncall->fullcode   = $this->tokens[$current][1].' '.$index->fullcode;
+        $functioncall->line       = $this->tokens[$current][2];
+        $functioncall->token      = $this->getToken($this->tokens[$current][0]);
         $functioncall->count      = 1; // Only one argument for print
-        $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
-
-        $this->addLink($functioncall, $name, 'NAME');
+        $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
 
         $this->pushExpression($functioncall);
 
@@ -4597,10 +4686,6 @@ SQL;
 
     private function addLink($origin, $destination, $label) {
         assert(in_array($label, array_merge(Token::$LINKS, Token::$LINKS_EXAKAT)), 'Undefined link '.$label);
-        if (!($destination instanceof Atom)) {
-            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-            die();
-        }
         assert($origin instanceof Atom);
         assert($destination instanceof Atom);
         $o = $origin->atom;
@@ -4675,11 +4760,21 @@ SQL;
             $this->argumentsId[0]->fullnspath = '\\';
             return;
         }
+
+        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->argumentsId[0]->noDelimiter)) {
+            return; // Can't be a class anyway.
+        }
         
-        $fullnspath = '\\'.mb_strtolower($this->argumentsId[0]->noDelimiter);
-        
+        $fullnspath = makeFullnspath($this->argumentsId[0]->noDelimiter, true);
+        if ($this->argumentsId[0]->noDelimiter[0] === '\\') {
+            $fullnspath = "\\$fullnspath";
+        }
         $this->addDefinition('const', $fullnspath, $argumentsId);
         $this->argumentsId[0]->fullnspath = $fullnspath;
+
+        if ($argumentsId->count == 3) {
+            $this->uses['define'][mb_strtolower($fullnspath)] = $argumentsId;
+        } 
     }
 
     private function saveFiles() {
@@ -4734,8 +4829,20 @@ SQL;
 
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
-            return array(mb_strtolower($name->fullcode), self::NOT_ALIASED);
-        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean'))) {
+            if ($type === 'const') {
+                if (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
+                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
+                    return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
+                } else {
+                    $fullnspath = preg_replace_callback('/^(.*)\\\\([^\\\\]+)$/', function ($r) {
+                        return mb_strtolower($r[1]).'\\'.$r[2];
+                    }, $name->fullcode);
+                    return array($fullnspath, self::NOT_ALIASED);
+                }
+            } else {
+                return array(mb_strtolower($name->fullcode), self::NOT_ALIASED);
+            }
+        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean', 'Static', 'Parent', 'Self', 'Newcall'))) {
             // No fullnamespace for non literal namespaces
             return array('', self::NOT_ALIASED);
         } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
@@ -4744,8 +4851,16 @@ SQL;
         } elseif (mb_strtolower(substr($name->fullcode, 0, 10)) === 'namespace\\') {
             // namespace\A\B
             return array(substr($this->namespace, 0, -1).mb_strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
-        } elseif (in_array($name->atom, array('Identifier', 'Name', 'Boolean', 'Null'))) {
+        } elseif (in_array($name->atom, array('Identifier', 'Name', 'Boolean', 'Null', 'Static', 'Parent', 'Self', 'Newcall'))) {
+            
+            $fnp = mb_strtolower($name->code);
 
+            if (($offset = strpos($fnp, '\\')) === false) {
+                $prefix = $fnp;
+            } else {
+                $prefix = substr($fnp, 0, $offset);
+            }
+            
             // This is an identifier, self or parent
             if (mb_strtolower($name->code) === 'self' ||
                 mb_strtolower($name->code) === 'static') {
@@ -4763,20 +4878,29 @@ SQL;
                 }
 
             // This is a normal identifier
-            } elseif ($type === 'class' && isset($this->uses['class'][mb_strtolower($name->code)])) {
+            } elseif ($type === 'class' && isset($this->uses['class'][$fnp])) {
+                $this->addLink($name, $this->uses['class'][$fnp], 'DEFINITION');
+                return array($this->uses['class'][$fnp]->fullnspath, self::ALIASED);
 
-                $this->addLink($name, $this->uses['class'][mb_strtolower($name->code)], 'DEFINITION');
-                return array($this->uses['class'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
+            } elseif ($type === 'class' && isset($this->uses['class'][mb_strtolower($prefix)])) {
+                $this->addLink($name, $this->uses['class'][mb_strtolower($prefix)], 'DEFINITION');
+                return array($this->uses['class'][mb_strtolower($prefix)]->fullnspath.str_replace(mb_strtolower($prefix), '', mb_strtolower($name->code)), self::ALIASED);
 
-            } elseif ($type === 'const' && isset($this->uses['const'][mb_strtolower($name->code)])) {
-            
-                $this->addLink($this->uses['const'][mb_strtolower($name->code)], $name, 'DEFINITION');
-                return array($this->uses['const'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
+            } elseif ($type === 'const') {
+                if (isset($this->uses['const'][$name->code])) {
+                    $this->addLink($this->uses['const'][$name->code], $name, 'DEFINITION');
+                    return array($this->uses['const'][$name->code]->fullnspath, self::ALIASED);
+                } elseif (isset($this->uses['define'][mb_strtolower($name->fullnspath)])) {
+                    $this->addLink($this->uses['define'][mb_strtolower($name->fullnspath)], $name, 'DEFINITION');
+                    return array(mb_strtolower($name->fullnspath), self::NOT_ALIASED);
+                } else {
+                    return array($this->namespace.$name->fullcode, self::NOT_ALIASED);
+                }
 
-            } elseif ($type === 'function' && isset($this->uses['function'][mb_strtolower($name->code)])) {
+            } elseif ($type === 'function' && isset($this->uses['function'][$prefix])) {
 
-                $this->addLink($this->uses['function'][mb_strtolower($name->code)], $name, 'DEFINITION');
-                return array($this->uses['function'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
+                $this->addLink($this->uses['function'][$prefix], $name, 'DEFINITION');
+                return array($this->uses['function'][$prefix]->fullnspath, self::ALIASED);
 
             } else {
                 return array($this->namespace.mb_strtolower($name->fullcode), self::NOT_ALIASED);
@@ -4817,10 +4941,6 @@ SQL;
         return (boolean) $this->contexts[$context];
     }
 
-    private function makeFullnspath($namespaceAs) {
-        return mb_strtolower(isset($namespaceAs->absolute) && $namespaceAs->absolute === self::ABSOLUTE ? $namespaceAs->fullcode : '\\'.$namespaceAs->fullcode) ;
-    }
-
     private function setNamespace($namespace = 0) {
         if ($namespace === 0) {
             $this->namespace = '\\';
@@ -4843,21 +4963,21 @@ SQL;
         if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' ');
-            $alias = mb_strtolower($alias->code);
+            $alias = $alias->code;
         } elseif (($offset = strrpos($alias->fullnspath, '\\')) === false) {
             // namespace without \
-            $alias = mb_strtolower($alias->fullnspath);
+            $alias = $alias->fullnspath;
         } else {
             // namespace with \
             $alias = substr($alias->fullnspath, $offset + 1);
         }
-
-        if (!($use instanceof Atom)) {
-            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-            die();
+        
+        if ($useType !== 'const') {
+            $alias = mb_strtolower($alias);
         }
+
         assert($use instanceof Atom);
-        $this->uses[$useType][mb_strtolower($alias)] = $use;
+        $this->uses[$useType][$alias] = $use;
 
         return $alias;
     }
@@ -4913,15 +5033,17 @@ SQL;
             $types = array('function', 'class');
 
             $fullnspath = mb_strtolower($call->noDelimiter);
-            $fullnspath = stripslashes($fullnspath);
             if (empty($fullnspath) || $fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
+            }
+            if (strpos($fullnspath, '\\\\') !== false) {
+                $fullnspath = stripslashes($fullnspath);
             }
         }
 
         $atom = 'String';
 
-        foreach($types  as $type) {
+        foreach($types as $type) {
             if ($fullnspath === 'undefined') {
                 $globalpath = '';
             } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {

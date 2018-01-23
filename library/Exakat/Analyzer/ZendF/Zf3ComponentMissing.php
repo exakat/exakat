@@ -40,8 +40,11 @@ class Zf3ComponentMissing extends Analyzer {
 
         $zend3 = new ZendF3($this->config->dir_root.'/data', $this->config);
         $classes = $zend3->getClasses($this->component , $this->version);
+        if (empty($classes)) {
+            return;
+        }
         $classes = array_pop($classes);
-        $classes = $this->makeFullnspath($classes);
+        $classes = makeFullnspath($classes);
         
         $this->analyzerIs($analyzer)
              ->fullnspathIsNot($classes);

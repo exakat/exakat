@@ -1,4 +1,4 @@
-Version 1.0.8 (King of Heat Protection , coming up)
+Version 1.0.11 (Wood Dragon of Horn, coming up)
 + Architecture
     + 
 + Report
@@ -7,16 +7,78 @@ Version 1.0.8 (King of Heat Protection , coming up)
     + 
 + Tokenizer
     + 
-
-Version 1.0.7 (King of Heat Protection , coming up)
+ 
+Version 1.0.11 (Wood Dragon of Well, 2018-01-08)
 + Architecture
-    + Added /var to default omitted folders
+    + Added assertion for property name.
++ Report
+    + Ambassador : Added report of classes's size.
+    + Fixed missing audit end's time. 
++ Analyzer
+    + New analysis : Sqlite3 doesn't escape " 
+    + Upgraded analysis : Strange names also report qqqq sequences in variable names
+    + Checked unit tests : 2617 / 2657 test pass (99% pass). 
++ Tokenizer
+    + Fixed fullnspath handling for constants (case insensitive for the constant name)
+ 
+Version 1.0.10 (Wood Wolf of Legs, 2018-01-01)
++ Architecture
+    + Fixed Sqlite3 escaping error : use ', not "
 + Report
     + 
 + Analyzer
+    + Upgraded analysis : ? is possible as delimiter
+    + Analyzer works better with nested structures
+    + Checked unit tests : 2601 / 2649 test pass (99% pass). 
++ Tokenizer
+    + First plugin for Load Task.
+    + Upgraded support for define-d constant.
+    + Introduced Phpvariable
+    + Fixed scoping with array index.
+ 
+Version 1.0.9 (King of Dust Protection, 2017-12-25)
++ Report
+    + Ambassador : list complex expressions.
+    + Dump : added function inventory
+    + Dump : added begin and end line for structures.
++ Analyzer
+    + New analysis : report reference error with Ternary operator
+    + New analysis : report Undefined classes in Wordpress.
+    + Upgraded analysis : preg option E, tighter regex.
++ Tokenizer
+    + Better handling of long path name. TBC.
+    + Introduced Parent, Static, Self, Exit, Echo, Print.
+ 
+Version 1.0.8 (King of Heat Protection, 2017-12-18)
++ Architecture
+    + Doctor reports memory_limit and JAVA_OPTIONS/JAVA_HOME
+    + Made database restart more portable 
+    + Added spell checking on docs
++ Report
+    + Ambassador : Regex inventory added
+    + Ambassador : Largest expressions reported
++ Analyzer
+    + New analysis : report identical operands on both sides of operator
+    + New analysis : report potentially mistaken concatenation in array
+    + New analysis : report mistaken scalar typehint
+    + New analysis : report undefined classes by symfony version
+    + New analysis : report undefined classes by wordpress version
+    + Upgraded analysis : Interfaces are also reported from return typehint
+    + Upgraded analysis : Mistaken concatenation got rid of various false-positives
+    + Checked unit tests : 2601 / 2633 test pass (99% pass). 
++ Tokenizer
+    + Isset, Empty, Phpvariables now have their own atom.
+    + Fixed edge case with $ token
+    + Fixed Constant fqn building
+    + UTF-8 protection for propertyname
+
+Version 1.0.7 (King of Heat Protection , 2017-12-11)
++ Architecture
+    + Added /var to default omitted folders
++ Analyzer
     + New analyzer : should use array_filter.
     + New analyzer : ext/igbinary
-    + Checked unit tests : 2599 / 2533 test pass (97% pass). 
+    + Checked unit tests : 2533 / 2599 test pass (97% pass). 
 + Tokenizer
     + Fixed 
  

@@ -32,8 +32,8 @@ class RedefinedDefault extends Analyzer {
              ->_as('results')
              ->goToClass()
 
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->outIs('NAME')
              ->codeIs('__construct')
              ->inIs('NAME')

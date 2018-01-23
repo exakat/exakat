@@ -29,38 +29,39 @@ class BreakOutsideLoop extends Analyzer {
     protected $phpVersion = '7.0-';
     
     public function analyze() {
-        $loops = '"Dowhile", "For", "Foreach", "While", "Switch"';
+        $loops = array('Dowhile', 'For', 'Foreach', 'While', 'Switch');
+
         // break (null)
         $this->atomIs('Break')
-             ->outIs('LEVEL')
+             ->outIs('BREAK')
              ->atomIs('Void')
-             ->filter('it.in.loop(1){true}{it.object.atom in ['.$loops.']}.any() == false')
+             ->hasNoInstruction($loops)
              ->back('first');
         $this->prepareQuery();
 
         // break 1
         $this->atomIs('Break')
-             ->outIs('LEVEL')
+             ->outIs('BREAK')
              ->atomIs('Integer')
-             ->savePropertyAs('code', 'counter')
-             ->filter('it.in.loop(1){true}{ it.object.atom in ['.$loops.'] }.count() < counter.toInteger()') // really count temps
+             ->savePropertyAs('intval', 'counter')
+             ->hasNoCountedInstruction($loops, 'counter') // really count temps
              ->back('first');
         $this->prepareQuery();
 
         // continue (null)
         $this->atomIs('Continue')
-             ->outIs('LEVEL')
+             ->outIs('CONTINUE')
              ->atomIs('Void')
-             ->filter('it.in.loop(1){true}{it.object.atom in ['.$loops.']}.any() == false')
+             ->hasNoInstruction($loops)
              ->back('first');
         $this->prepareQuery();
 
         // continue 1
         $this->atomIs('Continue')
-             ->outIs('LEVEL')
+             ->outIs('CONTINUE')
              ->atomIs('Integer')
-             ->savePropertyAs('code', 'counter')
-             ->filter('it.in.loop(1){true}{ it.object.atom in ['.$loops.'] }.count() < counter.toInteger()') // really count temps
+             ->savePropertyAs('intval', 'counter')
+             ->hasNoCountedInstruction($loops, 'counter') // really count temps
              ->back('first');
         $this->prepareQuery();
     }

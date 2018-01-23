@@ -75,6 +75,7 @@ class Datastore {
             $this->cleanTable('shortopentag');
             $this->cleanTable('composer');
             $this->cleanTable('configFiles');
+            $this->cleanTable('dictionary');
 
             $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
                                         'exakat_build'         => Exakat::BUILD,
@@ -109,7 +110,10 @@ class Datastore {
             }
         }
 
+        $values = array();
+        $total = 0;
         foreach($data as $key => $row) {
+            ++$total;
             if (is_array($row)) {
                 $d = array_values($row);
                 foreach($d as &$e) {
@@ -118,10 +122,21 @@ class Datastore {
                 unset($e);
 
             } else {
-                $d = array($key, \Sqlite3::escapeString($row));
+                $d = array(\Sqlite3::escapeString($key), \Sqlite3::escapeString($row));
             }
+            
+            $values[] = '('.makeList($d, "'").')';
+            
+            if (count($values) > 10) {
+                $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ".implode(', ', $values);
+                $this->sqliteWrite->querySingle($query);
 
-            $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ('".implode("', '", $d)."')";
+                $values = array();
+            }
+        }
+
+        if (!empty($values)) {
+            $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ".implode(', ', $values);
             $this->sqliteWrite->querySingle($query);
         }
 
@@ -157,10 +172,10 @@ class Datastore {
                 }
                 unset($e);
             } else {
-                $d = array($row);
+                $d = array(\Sqlite3::escapeString($row));
             }
 
-            $query = 'DELETE FROM '.$table.' WHERE '.$col." IN ('".implode("', '", $d)."')";
+            $query = 'DELETE FROM '.$table.' WHERE '.$col." IN (".makeList($d).")";
             $this->sqliteWrite->querySingle($query);
         }
 
@@ -217,6 +232,22 @@ class Datastore {
         } else {
             $row = $res->fetchArray(\SQLITE3_ASSOC);
             return $row['value'];
+        }
+    }
+
+    public function getAllHash($table) {
+        $query = 'SELECT key, value FROM '.$table;
+        $stmt = $this->sqliteRead->prepare($query);
+        $res = $stmt->execute();
+
+        if (!$res) {
+            return array();
+        } else {
+            $return = array();
+            while($row = $res->fetchArray(\SQLITE3_NUM)) {
+                $return[$row[0]] = (int) $row[1];
+            }
+            return $return;
         }
     }
 
@@ -468,6 +499,16 @@ CREATE TABLE configFiles (
   file TEXT UNIQUE,
   name TEXT UNIQUE,
   homepage TEXT UNIQUE
+);
+SQLITE;
+                break;
+
+            case 'dictionary' :
+                $createTable = <<<SQLITE
+CREATE TABLE dictionary (
+  id INTEGER PRIMARY KEY,
+  key TEXT UNIQUE,
+  value TEXT
 );
 SQLITE;
                 break;

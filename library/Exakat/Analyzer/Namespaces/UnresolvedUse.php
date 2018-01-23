@@ -30,7 +30,8 @@ class UnresolvedUse extends Analyzer {
         return array('Classes/IsExtClass',
                      'Interfaces/IsExtInterface',
                      'Traits/IsExtTrait',
-                     'Composer/IsComposerNsname');
+                     'Composer/IsComposerNsname',
+                    );
     }
 
     public function analyze() {
@@ -42,8 +43,7 @@ class UnresolvedUse extends Analyzer {
             return;
         }
         
-        $this->atomIs('Use')
-             ->hasNoClassTrait()
+        $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->analyzerIsNot(array('Classes/IsExtClass',
                                    'Interfaces/IsExtInterface',

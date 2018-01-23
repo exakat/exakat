@@ -26,9 +26,16 @@ use Exakat\Analyzer\Analyzer;
 
 class MismatchedTernary extends Analyzer {
     public function analyze() {
-        $excludedAtoms = array('Variable', 'Array', 'Member', 'Staticproperty',
-                               'Functioncall', 'Methodcall', 'Staticmethodcall',
-                               'Void', 'Ternary');
+         $excludedAtoms = array('Array', 
+                                'Functioncall', 
+                                'Member', 
+                                'Methodcall', 
+                                'Staticmethodcall',
+                                'Staticproperty',
+                                'Ternary',
+                                'Void', 
+                                'Variable', 
+                              );
         
         $this->atomIs('Ternary')
              ->codeIs('?')

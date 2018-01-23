@@ -29,26 +29,26 @@ class CouldBeProtectedProperty extends Analyzer {
         // Case of property->property (that's another public access)
         $query = <<<GREMLIN
 g.V().hasLabel("Member")
-     .not( __.where( __.out("OBJECT").has("code", "\\\$this") ) )
+     .not( __.where( __.out("OBJECT").hasLabel("This") ) )
      .out("MEMBER")
      .hasLabel("Name")
-          .values("fullcode").unique()
+     .values("code").unique()
 GREMLIN;
         $publicProperties = $this->query($query)->toArray();
         
-            // Member that is not used outside this class or its children
-            $this->atomIs('Ppp')
-                 ->hasNoOut(array('PROTECTED', 'PRIVATE'))
-                 ->hasNoOut('STATIC')
-                 ->hasClass()
-                 ->outIs('PPP')
-                 ->isNot('propertyname', $publicProperties);
-            $this->prepareQuery();
-
+        // Member that is not used outside this class or its children
+        $this->atomIs('Ppp')
+             ->hasNoOut(array('PROTECTED', 'PRIVATE'))
+             ->hasNoOut('STATIC')
+             ->hasClass()
+             ->outIs('PPP')
+             ->isNot('propertyname', $publicProperties);
+        $this->prepareQuery();
+        
         // Case of property::property (that's another public access)
         $res = $this->query('g.V().hasLabel("Staticproperty").as("init")
                                   .out("CLASS").hasLabel("Identifier", "Nsname")
-                                  .not(has("code", within("self", "static"))).as("classe")
+                                  .not(hasLabel("Self", "Static")).as("classe")
                                   .sideEffect{ fnp = it.get().value("fullnspath") }
                                   .in("CLASS")
                                   .where( __.repeat( __.in('.$this->linksDown.')).until(hasLabel("Class", "File"))

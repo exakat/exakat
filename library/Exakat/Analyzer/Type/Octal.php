@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Octal extends Analyzer {
     public function analyze() {
         $this->atomIs('Integer')
-             ->regexIs('code', '^[-+]*0[0-9]+\\$');
+             ->regexIs('code', '/^[-+]*0[0-9]+$/');
         $this->prepareQuery();
     }
 }

@@ -319,6 +319,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Identical Consecutive Expression (Structures/IdenticalConsecutive ; Analyze)
   * Identical On Both Sides (Structures/IdenticalOnBothSides ; Analyze)
   * Mistaken Concatenation (Arrays/MistakenConcatenation)
+  * Php/NoReferenceForTernary (Php/NoReferenceForTernary ; Analyze)
   * Symfony 2.8 Undefined Classes (Symfony/Symfony28Undefined ; Symfony)
   * Symfony 3.0 Undefined Classes (Symfony/Symfony30Undefined ; Symfony)
   * Symfony 3.1 Undefined Classes (Symfony/Symfony31Undefined ; Symfony)
@@ -408,7 +409,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Date Formats (Php/DateFormats ; Inventory)
   * Incoming Variables (Php/IncomingVariables ; Inventory)
   * Session Variables (Php/SessionVariables ; Inventory)
-  * Too Complex Expression (Structures/ComplexExpression ; Analyze)
+  * Too Complex Expression (Structures/ComplexExpression ; Appinfo)
   * Unconditional Break In Loop (Structures/UnconditionLoopBreak ; Analyze, Level 3)
   * zend-eventmanager 3.2.0 Undefined Classes (ZendF/Zf3Eventmanager32 ; ZendFramework)
   * zend-feed 2.8.0 Undefined Classes (ZendF/Zf3Feed28 ; ZendFramework)
@@ -416,7 +417,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * zend-mail 2.8.0 Undefined Classes (ZendF/Zf3Mail28 ; ZendFramework)
   * zend-modulemanager 2.8.0 Undefined Classes (ZendF/Zf3Modulemanager28 ; ZendFramework)
   * zend-mvc 3.1.0 Undefined Classes (ZendF/Zf3Mvc31 ; ZendFramework)
-  * zend-session 2.8.0 Undefined Classes (ZendF/Zf3Session28 ; )
+  * zend-session 2.8.0 Undefined Classes (ZendF/Zf3Session28 ; ZendFramework)
   * zend-test 3.1.0 Undefined Classes (ZendF/Zf3Test31 ; ZendFramework)
   * zend-validator 2.9.0 Undefined Classes (ZendF/Zf3Validator29 ; ZendFramework)
 
@@ -1327,7 +1328,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Not Same Name As File (Classes/NotSameNameAsFile ; )
   * Not Same Name As File (Classes/SameNameAsFile ; Internal)
   * Nowdoc Delimiter Glossary (Type/Nowdoc ; Appinfo)
-  * Null Coalesce (Php/NullCoalesce ; Appinfo)
+  * Null Coalesce (Php/NullCoalesce ; Suggestions)
   * Null On New (Classes/NullOnNew ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, OneFile, Simple)
   * Objects Don't Need References (Structures/ObjectReferences ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 2)
   * Octal Glossary (Type/Octal ; Appinfo)
@@ -1951,6 +1952,7 @@ List of external links mentionned in this documentation.
 * `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_
 * `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 * `Logical Operators <http://php.net/manual/en/language.operators.logical.php>`_
+* `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
@@ -1974,6 +1976,7 @@ List of external links mentionned in this documentation.
 * `New features <http://php.net/manual/en/migration56.new-features.php>`_
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
+* `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_
 * `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_
 * `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
@@ -1983,6 +1986,7 @@ List of external links mentionned in this documentation.
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
+* `original idea <https://twitter.com/b_viguier/status/940173951908700161>`_
 * `Original MySQL API <http://www.php.net/manual/en/book.mysql.php>`_
 * `Output Buffering Control <http://php.net/manual/en/book.outcontrol.php>`_
 * `Overload <http://php.net/manual/en/language.oop5.overloading.php#object.get>`_
@@ -2009,6 +2013,7 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
+* `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
@@ -2067,6 +2072,7 @@ List of external links mentionned in this documentation.
 * `svn <https://subversion.apache.org/>`_
 * `Swoole <https://github.com/swoole/swoole-src>`_
 * `Symfony <http://www.symfony.com/>`_
+* `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
 * `the docs online <http://exakat.readthedocs.io/en/latest/Rules.html>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
@@ -2077,7 +2083,6 @@ List of external links mentionned in this documentation.
 * `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
-* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_

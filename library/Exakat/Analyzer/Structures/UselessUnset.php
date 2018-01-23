@@ -49,7 +49,7 @@ class UselessUnset extends Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Global')
              ->outIs('GLOBAL')
-             ->samePropertyAs('code', 'varname')
+             ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 

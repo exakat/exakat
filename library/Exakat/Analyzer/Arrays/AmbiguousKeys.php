@@ -42,8 +42,12 @@ class AmbiguousKeys extends Analyzer {
                     counts[k].add("string"); 
                 }
             } else { 
-                k = it.get().value("code"); 
-                if (counts[k] == null) { counts[k] = ["integer"]; } else { counts[k].add("integer"); }
+                k = it.get().value("fullcode"); 
+                if (counts[k] == null) { 
+                    counts[k] = ["integer"]; 
+                } else { 
+                    counts[k].add("integer"); 
+                }
             }
         }
         .map{ counts.findAll{a,b -> b.unique().size() > 1}; }.unfold().count().is(neq(0))

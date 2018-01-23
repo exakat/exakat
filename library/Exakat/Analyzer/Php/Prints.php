@@ -28,17 +28,21 @@ class Prints extends Analyzer {
     public function analyze() {
         $prints = $this->loadIni('php_prints.ini');
         
-        $this->atomFunctionIs($this->makeFullNsPath($prints['functions']));
+        $this->atomFunctionIs(makeFullNsPath($prints['functions']));
         $this->prepareQuery();
 
         // print_r($a);
-        $this->atomFunctionIs($this->makeFullNsPath($prints['functionsArg1']))
+        $this->atomIs(array('Print', 'Echo'));
+        $this->prepareQuery();
+
+        // print_r($a);
+        $this->atomFunctionIs(makeFullNsPath($prints['functionsArg1']))
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();
 
         // print_r($a, false);
-        $this->atomFunctionIs($this->makeFullNsPath($prints['functionsArg1']))
+        $this->atomFunctionIs(makeFullNsPath($prints['functionsArg1']))
              ->outWithRank('ARGUMENT', 1)
              ->is('boolean', false)
              ->back('first');

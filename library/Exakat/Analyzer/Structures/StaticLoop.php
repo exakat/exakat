@@ -34,7 +34,7 @@ class StaticLoop extends Analyzer {
 
         $whereNonDeterminist = 'not( where( __.repeat( __.out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").has("token", within("T_STRING", "T_NS_SEPARATOR")).filter{ it.get().value("fullnspath") in ['.$nonDeterminist.']} ) )';
         
-        $checkBlindVariable = 'not( where( __.repeat( __.out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Variable", "Variableobject", "Variablearray").filter{ it.get().value("fullcode") in blind} ) )';
+        $checkBlindVariable = 'not( where( __.repeat( __.out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Variable", "Variableobject", "Variablearray").filter{ it.get().value("code") in blind} ) )';
         
         // foreach with only one value
         $this->atomIs('Foreach')
@@ -59,7 +59,7 @@ class StaticLoop extends Analyzer {
              ->raw('sideEffect{ blind = [];}')
 
              ->outIs('INDEX')
-             ->raw('sideEffect{ blind.push(it.get().value("fullcode")); }')
+             ->raw('sideEffect{ blind.push(it.get().value("code")); }')
              ->inIs('INDEX')
 
              ->outIs('VALUE')

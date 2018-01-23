@@ -31,12 +31,12 @@ class UsedMethods extends Analyzer {
         
         // Normal Methodcall
         $methods = $this->query(<<<GREMLIN
-g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }
+g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").values("fullnspath").unique()
 GREMLIN
 )->toArray();
 
         if (!empty($methods)) {
-            $this->atomIs('Method')
+            $this->atomIs(array('Method', 'Magicmethod'))
                  ->_as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
@@ -47,12 +47,12 @@ GREMLIN
 
         // Staticmethodcall
         $staticmethods = $this->query(<<<GREMLIN
-g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()
+g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").values("fullnspath").unique()
 GREMLIN
 )->toArray();
 
         if (!empty($staticmethods)) {
-            $this->atomIs('Method')
+            $this->atomIs(array('Method', 'Magicmethod'))
                  ->_as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
@@ -108,7 +108,7 @@ GREMLIN
         $callablesThisArray = $this->query(<<<GREMLIN
 g.V().hasLabel("Arrayliteral")
      .where(__.values("count").is(eq(2)) )
-     .where(__.out("ARGUMENT").has("rank", 0).hasLabel("Variable").has("code", "\\\$this").in("DEFINITION"))
+     .where(__.out("ARGUMENT").has("rank", 0).hasLabel("This"))
      .out("ARGUMENT")
      .has("rank", 1)
      .hasLabel("String")
@@ -121,21 +121,21 @@ GREMLIN
         $callables = array_unique(array_merge($callablesArray, $callablesThisArray, $callablesStrings));
         
         if (!empty($callables)) {
+            $callables = array_map('strtolower', $callables);
             // method used statically in a callback with an array
             $this->atomIs('Method')
-                 ->_as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
-                 ->codeIs($callables)
-                 ->back('used');
+                 ->codeIs($callables, self::TRANSLATE, self::CASE_INSENSITIVE)
+                 ->back('first');
             $this->prepareQuery();
         }
         
         // Private constructors
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->hasOut('PRIVATE')
              ->_as('used')
              ->outIs('NAME')
@@ -152,8 +152,8 @@ GREMLIN
         // Normal Constructors
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->hasNoOut('PRIVATE')
              ->_as('used')
              ->outIs('NAME')

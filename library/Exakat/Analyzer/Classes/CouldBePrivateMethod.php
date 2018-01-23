@@ -38,7 +38,7 @@ class CouldBePrivateMethod extends Analyzer {
         // Case of object->property (that's another public access)
 $query = <<<GREMLIN
 g.V().hasLabel("Methodcall")
-     .not( where( __.out("OBJECT").has("code", "\\\$this")) )
+     .not( where( __.out("OBJECT").hasLabel("This")) )
      .out("METHOD")
      .hasLabel("Methodcallname")
      .values("code")
@@ -47,18 +47,14 @@ GREMLIN;
         $publicMethods = $this->query($query)
                               ->toArray();
         
-        $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
-
-        if (!empty($publicMethods)) {
-            $this->atomIs('Method')
-                 ->hasNoOut('PRIVATE')
-                 ->hasNoOut('STATIC')
-                 ->analyzerIsNot('Classes/MethodUsedBelow')
-                 ->outIs('NAME')
-                 ->isNot('code', array_merge($publicMethods, $magicMethods))
-                 ->back('first');
-            $this->prepareQuery();
-        }
+        $this->atomIs('Method')
+             ->hasNoOut('PRIVATE')
+             ->hasNoOut('STATIC')
+             ->analyzerIsNot('Classes/MethodUsedBelow')
+             ->outIs('NAME')
+             ->codeIsNot($publicMethods, self::NO_TRANSLATE)
+             ->back('first');
+        $this->prepareQuery();
 
         // Static properties
         // Case of property::property (that's another public access)
@@ -102,7 +98,7 @@ GREMLIN;
                  ->hasOut('STATIC')
                  ->analyzerIsNot('Classes/MethodUsedBelow')
                  ->_as('results')
-                 ->isNot('code', array_keys($calls))
+                 ->codeIsNot(array_keys($calls), self::NO_TRANSLATE)
                  ->savePropertyAs('code', 'variable')
                  ->goToClass()
                  ->isNotHash('fullnspath', $calls, 'variable')

@@ -29,7 +29,8 @@ class DefinedConstants extends Analyzer {
     public function dependsOn() {
         return array('Classes/IsExtClass',
                      'Composer/IsComposerNsname',
-                     'Interfaces/IsExtInterface');
+                     'Interfaces/IsExtInterface',
+                    );
     }
     
     public function analyze() {
@@ -38,9 +39,7 @@ where( __.out("CONST")
          .hasLabel("Const")
          .out("CONST")
          .out("NAME")
-         .filter{ it.get().value("code").toLowerCase() == constante.toLowerCase(); }
-         .count()
-         .is(neq(0)) 
+         .filter{ it.get().value("code") == constante; }
     )
 GREMLIN;
 

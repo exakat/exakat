@@ -29,7 +29,7 @@ class debugInfoUsage extends Analyzer {
     protected $phpVersion = '5.6+';
     
     public function analyze() {
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->outIs('NAME')
              ->codeIs('__debugInfo')
              ->back('first');

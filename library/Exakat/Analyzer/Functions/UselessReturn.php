@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UselessReturn extends Analyzer {
     public function analyze() {
         // return in special functions
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->hasClassTrait() // avoid interfaces
              ->outIs('NAME')
              ->codeIs(array('__construct', '__destruct', '__set', '__clone', '__unset', '__wakeup'))

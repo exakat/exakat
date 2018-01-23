@@ -40,15 +40,15 @@ class NoReturnUsed extends Analyzer {
         // Methods
         $this->atomIs('Method')
              ->hasOut('STATIC')
-             ->savePropertyAs('code', 'methode')
+             ->savePropertyAs('lccode', 'methode')
              ->outIs('BLOCK')
              ->atomInside('Return')
              ->outIs('RETURN')
              ->atomIsNot('Void')
              ->back('first')
              ->goToClass()
-             ->raw('where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == methode.toLowerCase(); } )')
-             ->raw('not(where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == methode.toLowerCase(); }.in("METHOD").not(where( __.in("EXPRESSION"))) ) )')
+             ->raw('where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("lccode") == methode; } )')
+             ->raw('not(where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("lccode") == methode; }.in("METHOD").not(where( __.in("EXPRESSION"))) ) )')
              ->back('first');
         $this->prepareQuery();
     }

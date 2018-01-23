@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class DefinedExceptions extends Analyzer {
     public function analyze() {
         $exceptions = $this->loadIni('php_exception.ini', 'classes');
-        $exceptions = $this->makeFullNsPath($exceptions);
+        $exceptions = makeFullNsPath($exceptions);
         
         // first level
         $this->atomIs('Class')

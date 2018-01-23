@@ -2,10 +2,10 @@
 
 $expected     = array('continue 3',
                       'continue 1',
-                      'continue void',
+                      'continue',
                      );
 
-$expected_not = array(
+$expected_not = array('continue 2',
                      );
 
 ?>

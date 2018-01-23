@@ -27,13 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class VariableNonascii extends Analyzer {
     public function dependsOn() {
-        return array('Variables/Variablenames');
+        return array('Variables/Variablenames',
+                    );
     }
     
     public function analyze() {
         $this->atomIs('Variable')
              ->analyzerIs('Variables/Variablenames')
-             ->regexIs('code', '[^a-zA-Z0-9\\$_]');
+             ->regexIs('code', '/[^a-zA-Z0-9\\$_]/');
         $this->prepareQuery();
     }
 }

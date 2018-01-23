@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Analyzer\Docs;
 use Exakat\Config;
 use Exakat\Data\Methods;
+use Exakat\Data\Dictionary;
 use Exakat\Tokenizer\Token;
 use Exakat\Exceptions\GremlinException;
 
@@ -36,9 +37,12 @@ class LoadFinal extends Tasks {
 
     private $PHPconstants = array();
     private $PHPfunctions = array();
+    private $dictCode = null;
 
     public function run() {
         $this->linksIn = Token::linksAsList();
+
+        $this->dictCode = new Dictionary($this->datastore);
 
         $this->logTime('Start');
         display('Start load final');
@@ -48,11 +52,14 @@ class LoadFinal extends Tasks {
         $this->makeClassConstantDefinition();
 
         $this->fixFullnspathConstants();
+        $this->fixConstantsValue();
 
         $this->spotPHPNativeConstants();
         $this->spotPHPNativeFunctions();
 
         $this->spotFallbackConstants();
+        
+        $this->setConstantDefinition();
 
         display('End load final');
         $this->logTime('Final');
@@ -82,12 +89,14 @@ class LoadFinal extends Tasks {
         display("fixing Fullnspath for Constants");
         // fix path for constants with Const
         $query = <<<GREMLIN
-g.V().hasLabel("Identifier")
+g.V().hasLabel("Identifier", "Nsname")
      .has("fullnspath")
      .as("identifier")
      .sideEffect{ cc = it.get().value("fullnspath"); }
-     .in("DEFINITION").hasLabel("Class", "Trait", "Interface")
-     .coalesce( __.out("ARGUMENT").has("rank", 0), __.hasLabel("Constant").out('NAME'), filter{ true; })
+     .in("DEFINITION").hasLabel("Class", "Trait", "Interface", "Constant", "Defineconstant")
+     .coalesce( __.out("ARGUMENT").has("rank", 0), 
+                __.hasLabel("Constant").out('NAME'), 
+                filter{ true; })
      .filter{ actual = it.get().value("fullnspath"); actual != cc;}
      .select("identifier")
      .sideEffect{ it.get().property("fullnspath", actual); }
@@ -96,6 +105,41 @@ GREMLIN;
 
         $res = $this->gremlin->query($query);
         display("Fixed Fullnspath for Constants");
+    }
+
+    private function fixConstantsValue() {
+        display("fixing values for Constants");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier", "Nsname")
+     .not(has("noDelimiter"))
+     .as("identifier")
+     .in("DEFINITION").hasLabel("Constant", "Defineconstant")
+     .coalesce( __.out("ARGUMENT").has("rank", 1), 
+                __.hasLabel("Constant").out('VALUE'))
+     .has('noDelimiter')
+     .sideEffect{ actual = it.get().value("noDelimiter");}
+     .select("identifier")
+     .sideEffect{ it.get().property("noDelimiter", actual); }
+     .count()
+GREMLIN;
+        $res = $this->gremlin->query($query);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Staticconstant")
+     .as("identifier")
+     .out("CONSTANT").sideEffect{ name = it.get().value("code"); }.in("CONSTANT")
+     .out("CLASS").in("DEFINITION").out("CONST")
+     .out("CONST").out("NAME").filter{it.get().value("code") == name; }.in("NAME")
+     .out("VALUE").has('noDelimiter')
+     .sideEffect{ actual = it.get().value("noDelimiter");}
+     .select("identifier")
+     .sideEffect{ it.get().property("noDelimiter", actual); }
+     .count()
+GREMLIN;
+        $res = $this->gremlin->query($query);
+
+        display("Fixed values for Constants");
     }
 
     private function spotPHPNativeConstants() {
@@ -108,14 +152,13 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
      .has("fullnspath")
-     .not(where( __.in("DEFINITION")))
+     .not(where( __.in("DEFINITION", "NAME")))
      .values("code")
      .unique()
 GREMLIN;
-
         $res = $this->gremlin->query($query);
 
-        $constants = array_values(array_intersect($res->toArray(), $constantsPHP));
+        $constants = array_values(array_intersect($res->toArray(), $this->dictCode->translate($constantsPHP) ));
         
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
@@ -123,7 +166,8 @@ g.V().hasLabel("Identifier")
      .not(where( __.in("DEFINITION")))
      .filter{ it.get().value("code") in arg1 }
      .sideEffect{
-         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+         tokens = it.get().value("fullnspath").tokenize('\\\\');
+         fullnspath = "\\\\" + tokens.last();
          it.get().property("fullnspath", fullnspath); 
      }.count();
 
@@ -145,21 +189,27 @@ GREMLIN;
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
      .not(where( __.in("DEFINITION")))
-     .map{ it.get().value("code").toLowerCase(); }
+     .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
+     .map{ parts.last().toLowerCase() }
      .unique()
 GREMLIN;
 
         $res = $this->gremlin->query($query);
+        if (empty($res->toArray())) {
+            return;
+        }
         
         $functions = array_values(array_intersect($res->toArray(), $functions));
 
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
+     .not(has("token", "T_NS_SEPARATOR"))
      .not(where( __.in("DEFINITION")))
-     .filter{ it.get().value("code").toLowerCase() in arg1 }
+     .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
+     .filter{ name = parts.last().toLowerCase(); name in arg1 }
      .sideEffect{
-         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+         fullnspath = "\\\\" + name;
          it.get().property("fullnspath", fullnspath); 
      }.count();
 
@@ -187,14 +237,11 @@ GREMLIN;
         $this->logTime('spotFallbackConstants');
         // Define-style constant definitions
         $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .not( where( __.in("METHOD") ) )
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-     .has("fullnspath", "\\\\define")
+g.V().hasLabel("Defineconstant")
      .out("ARGUMENT").has("rank", 0)
      .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
      .map{ 
-           s = it.get().value("noDelimiter").toString().toLowerCase();
+           s = it.get().value("noDelimiter").toString();
            if ( s.substring(0,1) != "\\\\") {
                s = "\\\\" + s;
            }
@@ -226,13 +273,10 @@ g.V().hasLabel("Identifier", "Nsname")
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
      .addE('DEFINITION')
      .from( 
-        g.V().hasLabel("Functioncall")
-              .not( where( __.in("METHOD") ) )
-              .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-              .has("fullnspath", "\\\\define")
-              .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
-              .filter{ it.get().value("fullnspath") == name}.select('a')
-         ).count();
+        g.V().hasLabel("Defineconstant")
+             .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
+             .filter{ it.get().value("fullnspath") == name}.select('a')
+      ).count();
 
 GREMLIN;
             $this->gremlin->query($query, array('arg1' => $constantsDefine));
@@ -245,17 +289,14 @@ GREMLIN;
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
-     .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); name in arg1 }
+     .filter{ name = "\\\\" + it.get().value("fullcode"); name in arg1 }
      .sideEffect{
-        fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+        fullnspath = "\\\\" + it.get().value("code");
         it.get().property("fullnspath", fullnspath); 
      }
      .addE('DEFINITION')
      .from( 
-        g.V().hasLabel("Functioncall")
-             .not( where( __.in("METHOD") ) )
-             .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-             .has("fullnspath", "\\\\define")
+        g.V().hasLabel("Defineconstant")
              .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
              .filter{ it.get().value("fullnspath") == name}.select('a')
       ).count()
@@ -270,7 +311,7 @@ GREMLIN;
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "DEFINITION") ) )
-     .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); 
+     .filter{ name = "\\\\" + it.get().value("fullcode"); 
               name in arg1; }
      .sideEffect{
          it.get().property("fullnspath", name); 
@@ -297,6 +338,29 @@ GREMLIN;
         }
     }
 
+    private function setConstantDefinition() {
+        display('Set constant definitions');
+
+        $query = <<<'GREMLIN'
+g.V().hasLabel("Identifier", "Nsname")
+     .where(__.sideEffect{ constante = it.get();}.in("DEFINITION").coalesce( __.hasLabel("Constant").out("VALUE"),
+                                                                             __.hasLabel("Defineconstant").out("ARGUMENT").has("rank", 1))
+     .sideEffect{ 
+        if ("intval" in it.get().keys()) {
+            constante.property("intval", it.get().value("intval")); 
+        }
+        if ("boolean" in it.get().keys()) {
+            constante.property("boolean", it.get().value("boolean")); 
+        }
+        if ("strval" in it.get().keys()) {
+            constante.property("strval", it.get().value("strval")); 
+        }
+     }
+)
+GREMLIN;
+        $this->gremlin->query($query);
+    }
+
     private function makeClassConstantDefinition() {
         // Create link between Class constant and definition
         $query = <<<'GREMLIN'
@@ -305,7 +369,7 @@ GREMLIN;
 .out('CLASS').hasLabel("Identifier", "Nsname").has('fullnspath')
 .sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
 .where( __.sideEffect{classes = [];}
-          .emit(hasLabel("Class")).repeat( out("EXTENDS").in("DEFINITION") ).times(15)
+          .emit(hasLabel("Class")).repeat( out("EXTENDS").in("DEFINITION") ).times(5)
           .out("CONST").hasLabel("Const").out("CONST").as('const')
           .out("NAME").filter{ it.get().value("code") == name; }.select('const')
           .sideEffect{classes.add(it.get()); }

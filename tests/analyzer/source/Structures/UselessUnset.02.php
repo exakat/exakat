@@ -5,7 +5,7 @@ function foo(&$argByReference, $argByValue) {
 	global $theGlobal;
 	
 	(unset) $theStatic; // useless, will be back next call
-	(unset) $theGLobal; // useless, should unset $GLOBALS['theGlobal'];
+	(unset) $theGlobal; // useless, should unset $GLOBALS['theGlobal'];
 	(unset) $argByReference; // useless, will only destroy local reference
 	(unset) $argByValue; // useless, will only destroy local copy 
 	

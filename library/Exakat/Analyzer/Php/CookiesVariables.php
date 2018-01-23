@@ -26,14 +26,18 @@ use Exakat\Analyzer\Analyzer;
 
 class CookiesVariables extends Analyzer {
     public function analyze() {
-        // $_COOKIE['name'];
-        $this->atomIs(array('Variable', 'Variablearray'))
-             ->codeIs('$_COOKIE')
-             ->inIs('VARIABLE')
-             ->atomIs('Array')
-             ->outIs('INDEX')
-             ->atomIs('String');
-        $this->prepareQuery();
+        $cookie = $this->dictCode->translate(array('$_COOKIE'));
+        
+        if (!empty($cookie)) {
+            // $_COOKIE['name'];
+            $this->atomIs('Phpvariable')
+                 ->codeIs($cookie, self::NO_TRANSLATE)
+                 ->inIs('VARIABLE')
+                 ->atomIs('Array')
+                 ->outIs('INDEX')
+                 ->atomIs('String');
+            $this->prepareQuery();
+        }
 
         // setcookie($name, ...);
         $this->atomFunctionIs('\\setcookie')

@@ -26,6 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class AssignedInOneBranch extends Analyzer {
     public function analyze() {
+        $equal = $this->dictCode->translate(array('='));
+
         // if() {$b = 1; } else { }
         $this->atomIs('Ifthen')
              ->isNot('token', 'T_ELSEIF')
@@ -40,7 +42,7 @@ class AssignedInOneBranch extends Analyzer {
              ->atomIs(self::$CONTAINERS)
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
-             ->raw('not( __.out("ELSE").not(has("token", "T_ELSEIF")).emit( hasLabel("Assignation")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel("Assignation").filter{it.get().value("code").toLowerCase() == "="}.out("LEFT").hasLabel("Variable", "Staticproperty", "Member", "Array").filter{ it.get().value("fullcode").toLowerCase() == variable.toLowerCase()})')
+             ->raw('not( where( __.out("ELSE").not(has("token", "T_ELSEIF")).emit( ).repeat( __.out() ).times('.self::MAX_LOOPING.').hasLabel("Assignation").has("token", "T_EQUAL").out("LEFT").hasLabel("Variable", "Staticproperty", "Member", "Array").filter{ it.get().value("fullcode").toLowerCase() == variable.toLowerCase()}) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -57,7 +59,7 @@ class AssignedInOneBranch extends Analyzer {
              ->atomIs(self::$CONTAINERS)
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
-             ->raw('not( __.out("THEN").not(has("token", "T_ELSEIF")).emit( hasLabel("Assignation")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel("Assignation").filter{it.get().value("code").toLowerCase() == "="}.out("LEFT").hasLabel("Variable", "Staticproperty", "Member", "Array").filter{ it.get().value("fullcode").toLowerCase() == variable.toLowerCase()})')
+             ->raw('not( where( __.out("THEN").not(has("token", "T_ELSEIF")).emit( ).repeat( __.out() ).times('.self::MAX_LOOPING.').hasLabel("Assignation").has("token", "T_EQUAL").out("LEFT").hasLabel("Variable", "Staticproperty", "Member", "Array").filter{ it.get().value("fullcode").toLowerCase() == variable.toLowerCase()}) )')
              ->back('first');
         $this->prepareQuery();
     }

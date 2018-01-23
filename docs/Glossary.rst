@@ -235,6 +235,7 @@ Glossary
 
     + `dirname()`
 
+      + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
       + :ref:`PHP7 Dirname <php7-dirname>`
       + :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 
@@ -451,7 +452,6 @@ Glossary
       + :ref:`Should Use Coalesce <should-use-coalesce>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Slow Functions <slow-functions>`
-      + :ref:`Too Complex Expression <too-complex-expression>`
       + :ref:`Use Instanceof <use-instanceof>`
 
 

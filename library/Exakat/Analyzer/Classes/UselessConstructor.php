@@ -31,13 +31,17 @@ class UselessConstructor extends Analyzer {
     }
 
     public function analyze() {
-        $checkConstructor = 'where( __.out("METHOD").hasLabel("Method").where( __.in("ANALYZED").has("analyzer", "Classes/Constructor")).count().is(eq(0)) )';
+        $checkConstructor = <<<GREMLIN
+not( __.where( __.out("METHOD", "MAGICMETHOD").hasLabel("Method", "Magicmethod")
+       .where( __.in("ANALYZED").has("analyzer", "Classes/Constructor")) )
+   )
+GREMLIN;
         
         // class a (no extends, no implements)
         $this->atomIs('Class')
              ->hasNoOut(array('EXTENDS', 'IMPLEMENTS'))
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
@@ -48,8 +52,8 @@ class UselessConstructor extends Analyzer {
         // class a with extends, one level
         $this->atomIs('Class')
              ->hasOut('EXTENDS')
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
@@ -66,8 +70,8 @@ class UselessConstructor extends Analyzer {
         // class a with extends, two level
         $this->atomIs('Class')
              ->hasOut('EXTENDS')
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')

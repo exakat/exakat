@@ -29,17 +29,23 @@ class WpdbBestUsage extends Analyzer {
         $ignoreCommands = array('SHOW TABLES', 'RENAME TABLE', 'ALTER TABLE', 'CREATE TABLE', 'DROP TABLE', 'DESC', 'TRUNCATE');
         $ignoreCommandsRegex = implode('|', $ignoreCommands);
 
+        $wpdb = $this->dictCode->translate(array('$wpdb'));
+        
+        if (empty($wpdb)) {
+            return;
+        }
+
         // $wpdb->get_var("select ".$wpdb->prefix."table")
         $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->codeIs(array('get_var', 'get_col', 'get_results', 'get_row', 'query', 'prepare', 'query'))
+             ->codeIs(array('get_var', 'get_col', 'get_results', 'get_row', 'query', 'prepare', 'query'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              // If it's a property, we accept $wpdb
-             ->raw('where( __.out("CONCAT").hasLabel("Member").out("OBJECT").has("code", "\$wpdb") )')
+             ->raw('where( __.out("CONCAT").hasLabel("Member").out("OBJECT").has("code", '.$wpdb[0].') )')
              // Some queries won't accept prepared statements
              ->raw('where( __.out("CONCAT").hasLabel("String").has("rank", 0).filter{(it.get().value("noDelimiter") =~ "^('.$ignoreCommandsRegex.') ").getCount() == 0} )');
         $this->prepareQuery();
@@ -50,13 +56,13 @@ class WpdbBestUsage extends Analyzer {
              ->inIs('OBJECT')
              ->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->codeIs(array('get_var', 'get_col', 'get_results', 'get_row', 'query', 'prepare', 'query'))
+             ->codeIs(array('get_var', 'get_col', 'get_results', 'get_row', 'query', 'prepare', 'query'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_QUOTE')
              ->hasOut('CONCAT')
              // If it's a property, we accept $wpdb
-             ->raw('not( where( __.out("CONCAT").hasLabel("Member").out("OBJECT").has("code", "\$wpdb") ) )')
+             ->raw('not( where( __.out("CONCAT").hasLabel("Member").out("OBJECT").has("code", '.$wpdb[0].') ) )')
              // Some queries won't accept prepared statements
              ->raw('where( __.out("CONCAT").hasLabel("String").has("rank", 0).filter{(it.get().value("noDelimiter") =~ "^('.$ignoreCommandsRegex.') ").getCount() == 0} )');
         $this->prepareQuery();

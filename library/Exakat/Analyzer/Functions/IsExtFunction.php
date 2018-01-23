@@ -43,12 +43,12 @@ class IsExtFunction extends Analyzer {
         $functions = call_user_func_array('array_merge', $f);
         
         $functions = array_keys(array_count_values($functions));
-        $functions = $this->makeFullNsPath($functions);
+        $functions = makeFullNsPath($functions);
         
         $this->atomFunctionIs($functions);
         $this->prepareQuery();
 
-        $this->atomIs(array('Isset', 'Empty', 'Unset'));
+        $this->atomIs(array('Isset', 'Empty', 'Unset', 'Exit', 'Empty', 'Echo', 'Print'));
         $this->prepareQuery();
     }
 }

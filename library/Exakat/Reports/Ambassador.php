@@ -27,6 +27,7 @@ use Exakat\Analyzer\Docs;
 use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;
+use Exakat\Reports\Helpers\Results;
 use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
@@ -170,7 +171,9 @@ class Ambassador extends Reports {
         $this->generateDirectiveList();
         $this->generateAlteredDirectives();
         $this->generateStats();
+        $this->generateComplexExpressions();
         $this->generateVisibilitySuggestions();
+        $this->generateMethodSize();
 
         // Compatibility
         $this->generateCompilations();
@@ -1920,12 +1923,11 @@ SQL;
         $data = new Methods($this->config);
         $bugfixes = $data->getBugFixes();
 
-        $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
-        $reported = array();
-        $info = array();
+        $results = new Results($this->sqlite, 'Php/MiddleVersion');
+        $results->load();
 
         $rows = array();
-        while($row = $found->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($results->toArray() as $row) {
             $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
         }
 
@@ -2042,9 +2044,11 @@ SQL;
     private function generateErrorMessages() {
         $errorMessages = '';
 
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $errorMessages .= '<tr><td>'.PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        $results = new Results($this->sqlite, 'Structures/ErrorMessages');
+        $results->load();
+        
+        foreach($results->toArray() as $row) {
+            $errorMessages .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
         $html = $this->getBasedPage('error_messages');
@@ -2214,9 +2218,11 @@ HTML;
     private function generateDynamicCode() {
         $dynamicCode = '';
 
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $dynamicCode .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        $results = new Results($this->sqlite, 'Structures/DynamicCode');
+        $results->load();
+
+        foreach($results->toArray() as $row) {
+            $dynamicCode .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
         $html = $this->getBasedPage('dynamic_code');
@@ -2226,9 +2232,12 @@ HTML;
 
     private function generateGlobals() {
         $theGlobals = '';
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $theGlobals .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+
+        $results = new Results($this->sqlite, 'Structures/GlobalInGlobal');
+        $results->load();
+
+        foreach($results->toArray() as $row) {
+            $theGlobals .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
         $html = $this->getBasedPage('globals');
@@ -2276,9 +2285,12 @@ HTML;
             }
 
             $theTable = '';
-            $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $theTable .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+
+            $results = new Results($this->sqlite, $theAnalyzer);
+            $results->load();
+
+           foreach($results->toArray() as $row) {
+                $theTable .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
             }
 
             $html = $this->getBasedPage('inventories');
@@ -2848,6 +2860,184 @@ HTML;
         $this->putBasedPage('altered_directives', $html);
     }
 
+    private function generateMethodSize() {
+        $finalHTML = $this->getBasedPage('cit_size');
+
+        // List of extensions used
+        $res = $this->sqlite->query(<<<SQL
+SELECT namespaces.namespace || '\\' || name AS name, name AS shortName, files.file, (end - begin) AS size 
+    FROM cit 
+    JOIN files 
+        ON files.id = cit.file
+    JOIN namespaces 
+        ON namespaces.id = cit.namespaceId
+    ORDER BY (end - begin) DESC
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (count($data) < 50) {
+                $data[$value['name']] = $value['size'];
+                $xAxis[] = "'".$value['shortName']."'";
+            }
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">'.$value['name'].'</div>
+                      <div class="block-cell-issue text-center">'.$value['size'].'</div>
+                  </div>';
+        }
+
+        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
+
+        $blocjs = <<<JAVASCRIPT
+  <script>
+    $(document).ready(function() {
+      Highcharts.theme = {
+         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
+         chart: {
+            backgroundColor: null,
+            style: {
+               fontFamily: "Dosis, sans-serif"
+            }
+         },
+         title: {
+            style: {
+               fontSize: '16px',
+               fontWeight: 'bold',
+               textTransform: 'uppercase'
+            }
+         },
+         tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'rgba(219,219,216,0.8)',
+            shadow: false
+         },
+         legend: {
+            itemStyle: {
+               fontWeight: 'bold',
+               fontSize: '13px'
+            }
+         },
+         xAxis: {
+            gridLineWidth: 1,
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         yAxis: {
+            minorTickInterval: 'auto',
+            title: {
+               style: {
+                  textTransform: 'uppercase'
+               }
+            },
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         plotOptions: {
+            candlestick: {
+               lineColor: '#404048'
+            }
+         },
+
+
+         // General
+         background2: '#F0F0EA'
+      };
+
+      // Apply the theme
+      Highcharts.setOptions(Highcharts.theme);
+
+      $('#filename').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAFILES]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Lines',
+              data: [CALLCOUNT]
+          }]
+      });
+
+    });
+  </script>
+JAVASCRIPT;
+
+        $tags = array();
+        $code = array();
+
+        // Filename Overview
+        $tags[] = 'CALLCOUNT';
+        $code[] = implode(', ', $data);
+        $tags[] = 'SCRIPTDATAFILES';
+        $code[] = implode(', ', $xAxis);
+
+        $blocjs = str_replace($tags, $code, $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Class, Interface and Trait size');
+
+        $this->putBasedPage('cit_size', $finalHTML);
+    }
+    
     private function generateStats() {
         $extensions = array(
                     'Summary' => array(
@@ -2930,6 +3120,23 @@ HTML;
         $html = $this->getBasedPage('stats');
         $html = $this->injectBloc($html, 'STATS', $stats);
         $this->putBasedPage('stats', $html);
+    }
+
+    private function generateComplexExpressions() {
+        $results = new Results($this->sqlite, 'Structures/ComplexExpression');
+        $results->load();
+        
+        $expr = $results->getColumn('fullcode');
+        $counts = array_count_values($expr);
+
+        $expressions = '';
+        foreach($results->toArray() as $row) {
+            $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>{$row['fullcode']}</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage('complex_expressions');
+        $html = $this->injectBloc($html, 'BLOC-EXPRESSIONS', $expressions);
+        $this->putBasedPage('complex_expressions', $html);
     }
 
     private function generateCodes() {

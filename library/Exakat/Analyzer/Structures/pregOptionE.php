@@ -28,9 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class pregOptionE extends Analyzer {
         const FETCH_DELIMITER = <<<GREMLIN
 sideEffect{ 
-    delimiter = it.get().value("noDelimiter")[0];
+    base = it.get().value("noDelimiter").replaceAll("\\\\s", "");
+    delimiter = base[0];
     if (delimiter == '\\\\') {
-        delimiter = "\\\\\\\\" + it.get().value("noDelimiter")[1];
+        delimiter = "\\\\\\\\" + base[1];
     }
 
 }
@@ -43,6 +44,8 @@ sideEffect{
     else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
     else if (delimiter == "*") { delimiter = "\\\\*"; delimiterFinal = "\\\\*"; } 
     else if (delimiter == "|") { delimiter = "\\\\|"; delimiterFinal = "\\\\|"; } 
+    else if (delimiter == "?") { delimiter = "\\\\?"; delimiterFinal = "\\\\?"; } 
+    else if (delimiter == "+") { delimiter = "\\\\+"; delimiterFinal = "\\\\+"; } 
     else { delimiterFinal = delimiter; } 
 }
 .filter{ delimiter != "\\\\\\\\" }
@@ -91,8 +94,7 @@ GREMLIN;
              ->inIsIE('CONCAT')
              ->raw(self::MAKE_DELIMITER_FINAL)
              ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")([a-df-zA-Z]*?e[a-df-zA-Z]*?).\\$')
-//             ->back('first')
-             ;
+             ->back('first');
         $this->prepareQuery();
 // Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
 

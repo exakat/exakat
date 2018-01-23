@@ -29,7 +29,7 @@ class ConstantDefinition extends Analyzer {
     protected $constants = array();
     
     public function analyze() {
-        $fullnspath = $this->makeFullNsPath($this->constants);
+        $fullnspath = makeFullNsPath($this->constants, true);
         
         $this->atomIs('Const')
              ->hasNoClassInterface()

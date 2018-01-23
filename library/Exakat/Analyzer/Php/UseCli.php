@@ -33,8 +33,8 @@ class UseCli extends Analyzer {
         $this->prepareQuery();
 
         // $_SERVER + special index
-        $this->atomIs('Variablearray')
-             ->codeIs('$_SERVER', true)
+        $this->atomIs('Phpvariable')
+             ->codeIs('$_SERVER')
              ->inIs('VARIABLE')
              ->outIs('INDEX')
              ->noDelimiterIs(array('argc', 'argv' ))

@@ -38,7 +38,7 @@ class DependantTrait extends Analyzer {
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'method')
              ->goToTrait()
-             ->raw('not( where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
+             ->raw('not( where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
                              .out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == method } ) )')
              ->back('first');
         $this->prepareQuery();
@@ -57,7 +57,7 @@ class DependantTrait extends Analyzer {
 
              ->savePropertyAs('code', 'property')
              ->goToTrait()
-             ->raw('not( where( __.emit().repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.').hasLabel("Trait")
+             ->raw('not( where( __.emit().repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.').hasLabel("Trait")
                              .out("PPP").hasLabel("Ppp").out("PPP").filter{ it.get().value("propertyname") == property } ) )')
              ->back('first');
         $this->prepareQuery();
@@ -76,7 +76,7 @@ class DependantTrait extends Analyzer {
              ->tokenIs('T_VARIABLE')
              ->savePropertyAs('code', 'property')
              ->goToTrait()
-             ->raw('not( where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
+             ->raw('not( where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
                              .out("PPP").hasLabel("Ppp").out("PPP").coalesce(__.out("LEFT"), __.filter{ true }).filter{ it.get().value("code") == property } ) )')
              ->back('first');
         $this->prepareQuery();
@@ -95,7 +95,7 @@ class DependantTrait extends Analyzer {
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'method')
              ->goToTrait()
-             ->raw('not( where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
+             ->raw('not( where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
                              .out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == method } ) )')
              ->back('first');
         $this->prepareQuery();

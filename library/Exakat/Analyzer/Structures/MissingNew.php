@@ -27,26 +27,34 @@ use Exakat\Analyzer\Analyzer;
 class MissingNew extends Analyzer {
     public function analyze() {
         $customClasses = $this->query(<<<GREMLIN
-g.V().hasLabel('Class').out('NAME').values('code').unique();
+g.V().hasLabel('Class').values('fullnspath').unique();
 GREMLIN
 );
 
         $phpClasses = $this->loadIni('php_classes.ini', 'classes');
         
         $classes = array_unique(array_merge($phpClasses, $customClasses->toArray()));
-        $classes = array_map('strtolower', $classes);
+        $classes = makeFullnspath($classes);
+        
+        $equal = $this->dictCode->translate('=');
+        
+        if (empty($equal)) {
+            return ;
+        }
 
         $this->atomIs('Functioncall')
-             ->raw('or( where( __.in("ARGUMENT")), where(__.in("RIGHT").hasLabel("Assignation").has("code", "=") ) )')
-             ->tokenIs('T_STRING')
+             ->raw('or( where( __.in("ARGUMENT")), 
+                        where( __.in("RIGHT").hasLabel("Assignation").has("code", '.$equal[0].') ) )')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoFunctionDefinition()
-             ->codeIs($classes);
+             ->fullnspathIs($classes);
         $this->prepareQuery();
 
-        $this->atomIs('Identifier')
-             ->raw('or( where( __.in("ARGUMENT")), where(__.in("RIGHT").hasLabel("Assignation").has("code", "=") ) )')
+        $this->atomIs(array('Identifier', 'Nsname'))
+             ->raw('or( where( __.in("ARGUMENT")), 
+                        where( __.in("RIGHT").hasLabel("Assignation").has("code", '.$equal[0].') ) )')
              ->hasNoConstantDefinition()
-             ->codeIs($classes);
+             ->fullnspathIs($classes, self::CASE_INSENSITIVE);
         $this->prepareQuery();
     }
 }

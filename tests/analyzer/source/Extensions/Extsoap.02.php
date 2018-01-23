@@ -3,5 +3,7 @@
 //                                    'uri'      => "http://test-uri/"));
 $client->SomeFunction(new SoapParam($a, "a"),
                       new SoapParam($b, "b"),
-                      new SoapParam($c, "c"));
+                      new SoapParam($c, "c"),
+                      new RestParam($d, "d"),
+                      );
 ?>

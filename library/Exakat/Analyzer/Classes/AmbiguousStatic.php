@@ -23,47 +23,55 @@
 namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Data\Dictionary;
 
 class AmbiguousStatic extends Analyzer {
     public function analyze() {
         // Methods with the same name, but with static or not.
         $query = <<<GREMLIN
-g.V().hasLabel("Method").where( __.out("STATIC")).values('code').collect{it.toLowerCase(); }.unique()
+g.V().hasLabel("Method").where( __.out("STATIC")).values('code').unique()
 GREMLIN;
         $staticMethod = $this->query($query)->toArray();
+        $staticMethod = $this->dictCode->source($staticMethod);
+        $staticMethod = array_map('mb_strtolower', $staticMethod);
+        $staticMethod = array_unique($staticMethod);
 
         // Global are unused if used only once
         $query = <<<GREMLIN
-g.V().hasLabel("Method").not(where( __.out("STATIC"))).values('code').collect{it.toLowerCase(); }.unique()
+g.V().hasLabel("Method").not(where( __.out("STATIC"))).values('code').unique()
 GREMLIN;
         $normalMethod = $this->query($query)->toArray();
+        $normalMethod = $this->dictCode->source($normalMethod);
+        $normalMethod = array_map('mb_strtolower', $normalMethod);
+        $normalMethod = array_unique($normalMethod);
 
         $mixedMethod = array_values(array_intersect($normalMethod, $staticMethod));
+        $mixedMethod = $this->dictCode->translate($mixedMethod, Dictionary::CASE_INSENSITIVE);
         
         if (!empty($mixedMethod)){
             $this->atomIs('Method')
-                 ->codeIs($mixedMethod);
+                 ->codeIs($mixedMethod, self::NO_TRANSLATE);
             $this->prepareQuery();
         }
 
         // Properties with the same name, but with static or not.
         // Just like methods, they are case-insensitive, because static $X and $x are still ambiguous
         $query = <<<GREMLIN
-g.V().hasLabel("Propertydefinition").as('property')
-     .coalesce( __.in('LEFT'), __.filter{true; } )
-     .in('PPP')
+g.V().hasLabel("Propertydefinition").as("property")
+     .coalesce( __.in("LEFT"), __.filter{true; } )
+     .in("PPP")
      .where( __.out("STATIC"))
-     .select('property').values('code').collect{it.toLowerCase(); }.unique()
+     .select("property").values("code").unique()
 GREMLIN;
         $staticProperty = $this->query($query)->toArray();
 
         // Global are unused if used only once
         $query = <<<GREMLIN
-g.V().hasLabel("Propertydefinition").as('property')
-     .coalesce( __.in('LEFT'), __.filter{true; } )
-     .in('PPP')
+g.V().hasLabel("Propertydefinition").as("property")
+     .coalesce( __.in("LEFT"), __.filter{true; } )
+     .in("PPP")
      .not(where( __.out("STATIC")))
-     .select('property').values('code').collect{it.toLowerCase(); }.unique()
+     .select("property").values("code").unique()
 GREMLIN;
         $normalProperty = $this->query($query)->toArray();
 
@@ -74,7 +82,7 @@ GREMLIN;
         }
 
         $this->atomIs('Propertydefinition')
-             ->codeIs($mixedProperty);
+             ->codeIs($mixedProperty, self::NO_TRANSLATE);
         $this->prepareQuery();
     }
 }

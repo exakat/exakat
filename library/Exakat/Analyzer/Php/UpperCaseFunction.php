@@ -37,7 +37,7 @@ class UpperCaseFunction extends Analyzer {
              ->isNotLowerCase('code');
         $this->prepareQuery();
 
-        $this->atomIs(array('List', 'Unset'))
+        $this->atomIs(array('List', 'Unset', 'Echo', 'Print', 'Exit'))
              ->isNotLowerCase('code');
         $this->prepareQuery();
         

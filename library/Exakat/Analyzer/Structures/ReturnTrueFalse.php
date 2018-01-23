@@ -34,8 +34,7 @@ class ReturnTrueFalse extends Analyzer {
              ->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Boolean')
-             ->codeIs(array('true', 'false'))
-             ->savePropertyAs('code', 'a')
+             ->savePropertyAs('boolean', 'a')
              ->inIs('RETURN')
              ->inIs('EXPRESSION')
              ->inIs('THEN')
@@ -45,8 +44,7 @@ class ReturnTrueFalse extends Analyzer {
              ->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Boolean')
-             ->codeIs(array('true', 'false'))
-             ->notSamePropertyAs('code', 'a')
+             ->notSamePropertyAs('boolean', 'a')
 
              ->back('first');
         $this->prepareQuery();
@@ -64,8 +62,7 @@ class ReturnTrueFalse extends Analyzer {
              ->outIs('RIGHT')
              ->atomIs('Boolean')
 
-             ->codeIs(array('true', 'false'))
-             ->savePropertyAs('code', 'a')
+             ->savePropertyAs('boolean', 'a')
              ->inIs('RIGHT')
              ->inIs('EXPRESSION')
              ->inIs('THEN')
@@ -78,8 +75,7 @@ class ReturnTrueFalse extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomIs('Boolean')
-             ->codeIs(array('true', 'false'))
-             ->notSamePropertyAs('code', 'a')
+             ->notSamePropertyAs('boolean', 'a')
 
              ->back('first');
         $this->prepareQuery();
@@ -92,14 +88,12 @@ class ReturnTrueFalse extends Analyzer {
 
              ->outIs('THEN')
              ->atomIs('Boolean')
-             ->codeIs(array('true', 'false'))
-             ->savePropertyAs('code', 'a')
+             ->savePropertyAs('boolean', 'a')
              ->inIs('THEN')
 
              ->outIs('ELSE')
              ->atomIs('Boolean')
-             ->codeIs(array('true', 'false'))
-             ->notSamePropertyAs('code', 'a')
+             ->notSamePropertyAs('boolean', 'a')
 
              ->back('first');
         $this->prepareQuery();

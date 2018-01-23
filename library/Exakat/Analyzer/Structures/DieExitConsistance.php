@@ -31,10 +31,10 @@ class DieExitConsistance extends Analyzer {
         $mapping = <<<GREMLIN
 x2 = it.get().value("fullnspath");
 GREMLIN;
-        $storage = array('die'  => '\\die',
-                         'exit' => '\\exit');
+        $storage = array('die'  => '\die',
+                         'exit' => '\exit');
 
-        $this->atomFunctionIs(array('\\die', '\\exit'))
+        $this->atomIs('Exit')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
@@ -48,7 +48,7 @@ GREMLIN;
             $total += $c;
         }
         Analyzer::$datastore->addRowAnalyzer($this->analyzerQuoted, $store);
-        if ($total == 0) {
+        if ($total === 0) {
             return;
         }
 
@@ -58,7 +58,7 @@ GREMLIN;
         }
         $types = array_keys($types);
 
-        $this->atomFunctionIs(array('\\die', '\\exit'))
+        $this->atomIs('Exit')
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');

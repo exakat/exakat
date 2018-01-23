@@ -28,8 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class EchoTagUsage extends Analyzer {
     public function analyze() {
         // <?= $a;
-        $this->atomIs('Functioncall')
-             ->is('code', '<?=');
+        $this->atomIs('Echo')
+             ->codeIs('<?=');
         $this->prepareQuery();
     }
 }

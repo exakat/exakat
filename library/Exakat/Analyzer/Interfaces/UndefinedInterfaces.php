@@ -30,7 +30,7 @@ class UndefinedInterfaces extends Analyzer {
         return array('Classes/IsExtClass',
                      'Interfaces/IsExtInterface',
                      'Composer/IsComposerClass',
-                     'Composer/IsComposerInterface'
+                     'Composer/IsComposerInterface',
                      );
     }
     
@@ -40,7 +40,8 @@ class UndefinedInterfaces extends Analyzer {
              ->outIs('CLASS')
              ->isNot('aliased', true)
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->codeIsNot(array('self', 'parent', 'iterable'))
+             ->atomIsNot(array('Self', 'Parent'))
+             ->fullnspathIsNot('\iterable')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->analyzerIsNot('Classes/IsExtClass')
@@ -52,7 +53,8 @@ class UndefinedInterfaces extends Analyzer {
         $this->atomIs(array('Nsname', 'Identifier'))
              ->hasIn('TYPEHINT')
              ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'))
-             ->codeIsNot(array('self', 'parent', 'static', 'iterable'))
+             ->atomIsNot(array('Self', 'Parent'))
+             ->fullnspathIsNot('\iterable')
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noUseDefinition()

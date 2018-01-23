@@ -15,7 +15,7 @@ $expected     = array('xmlwriter_open_uri(\'./a.xml\')',
                       'xmlwriter_end_element($xw)',
                      );
 
-$expected_not = array(
+$expected_not = array('xmlwriter_set_indent($off, 0)',
                      );
 
 ?>

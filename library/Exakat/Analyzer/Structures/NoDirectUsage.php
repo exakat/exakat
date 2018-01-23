@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NoDirectUsage extends Analyzer {
     public function analyze() {
         $functions = $this->loadIni('NoDirectUsage.ini', 'functions');
-        $functionsFullNsPath = $this->makeFullNsPath($functions);
+        $functionsFullNsPath = makeFullNsPath($functions);
         
         // foreach(glob() as $x) {}
         $this->atomIs('Foreach')

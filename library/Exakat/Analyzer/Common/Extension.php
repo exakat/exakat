@@ -47,7 +47,7 @@ class Extension extends Analyzer {
         }
         
         if (!empty($ini['functions'])) {
-            $functions = $this->makeFullNsPath($ini['functions']);
+            $functions = makeFullNsPath($ini['functions']);
             $this->atomFunctionIs($functions);
             $this->prepareQuery();
         }
@@ -55,12 +55,12 @@ class Extension extends Analyzer {
         if (!empty($ini['constants'])) {
             $this->atomIs('Identifier')
                  ->analyzerIs('Constants/ConstantUsage')
-                 ->fullnspathIs($this->makeFullNsPath($ini['constants']));
+                 ->fullnspathIs(makeFullNsPath($ini['constants']));
             $this->prepareQuery();
         }
 
         if (!empty($ini['classes'])) {
-            $classes = $this->makeFullNsPath($ini['classes']);
+            $classes = makeFullNsPath($ini['classes']);
 
             $this->atomIs('New')
                  ->outIs('NEW')
@@ -95,7 +95,7 @@ class Extension extends Analyzer {
         }
 
         if (!empty($ini['interfaces'])) {
-            $interfaces = $this->makeFullNsPath($ini['interfaces']);
+            $interfaces = makeFullNsPath($ini['interfaces']);
             $this->analyzerIs('Interfaces/InterfaceUsage')
                  ->fullnspathIs($interfaces);
             $this->prepareQuery();
@@ -106,7 +106,7 @@ class Extension extends Analyzer {
                  ->codeIs($ini['traits']);
             $this->prepareQuery();
 
-            $traits = $this->makeFullNsPath($ini['traits']);
+            $traits = makeFullNsPath($ini['traits']);
             $this->analyzerIs('Traits/TraitUsage')
                  ->outIs('USE')
                  ->fullnspathIs($traits);
@@ -114,7 +114,7 @@ class Extension extends Analyzer {
         }
 
         if (!empty($ini['namespaces'])) {
-            $namespaces = $this->makeFullNsPath($ini['namespaces']);
+            $namespaces = makeFullNsPath($ini['namespaces']);
             $this->analyzerIs('Namespaces/NamespaceUsage')
                  ->fullnspathIs($namespaces)
                  ->back('first');

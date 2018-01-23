@@ -27,12 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedUse extends Analyzer {
     public function dependsOn() {
-        return array('Namespaces/UsedUse');
+        return array('Namespaces/UsedUse',
+                    );
     }
     
     public function analyze() {
-        $this->atomIs('Use')
-             ->hasNoClassTrait()
+        $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->analyzerIsNot('Namespaces/UsedUse');
         $this->prepareQuery();

@@ -1,6 +1,7 @@
 <?php
 
 parse_str($a);
+\parse_str($a2);
 
 \parse_STR($b, C::$d);
 

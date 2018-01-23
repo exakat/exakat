@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class HasNotFluentInterface extends Analyzer {
     public function analyze() {
         // return $a;
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
              ->outIs('BLOCK')
              ->atomInside('Return')
              ->outIs('RETURN')
@@ -37,7 +37,7 @@ class HasNotFluentInterface extends Analyzer {
         $this->prepareQuery();
 
         // no return == return null!
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
              ->outIs('BLOCK')
              ->noAtomInside('Return')
              ->back('first');

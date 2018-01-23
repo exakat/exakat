@@ -35,7 +35,7 @@ class ErrorMessages extends Analyzer {
 
         // die('true')
         // exit ('30');
-        $this->atomFunctionIs(array('\\die', '\\exit'))
+        $this->atomIs('Exit')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);
         $this->prepareQuery();

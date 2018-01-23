@@ -35,7 +35,7 @@ class UncheckedResources extends Analyzer {
                 if (!isset($usage->{"function$pos"})) {
                     continue;
                 }
-                $functions = $this->makeFullNsPath((array) $usage->{"function$pos"});
+                $functions = makeFullNsPath((array) $usage->{"function$pos"});
                 
                 //direct usage of the resource :
                 // readdir(opendir('uncheckedDir4'));

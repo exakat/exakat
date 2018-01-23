@@ -33,7 +33,10 @@ class IsModified extends Analyzer {
     }
     
     public function analyze() {
-        $atoms = array('Variable', 'Phpvariable');
+        $atoms = array('Variable', 
+                       'Phpvariable',
+                       'Variablearray',
+                      );
 
         $this->atomIs(array('Variablearray', 'Variable'))
              ->inIsIE('VARIABLE')
@@ -41,8 +44,8 @@ class IsModified extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // unset
-        $this->atomIs('Variable')
+        // (unset)
+        $this->atomIs($atoms)
              ->inIs('CAST')
              ->tokenIs('T_UNSET_CAST')
              ->back('first');
@@ -51,10 +54,11 @@ class IsModified extends Analyzer {
         // unset
         $this->atomIs('Unset')
              ->outIs('ARGUMENT')
-             ->atomIs('Variable');
+             ->outIsIE('VARIABLE')
+             ->atomIs($atoms);
         $this->prepareQuery();
 
-        $this->atomIs(array('Variablearray', 'Variable'))
+        $this->atomIs(array('Variablearray', 'Variable', 'Phpvariable'))
              ->inIsIE(array('VARIABLE', 'APPEND'))
              ->inIs(array('LEFT', 'VARIABLE'))
              ->atomIs(array('Assignation', 'Arrayappend'))
@@ -123,22 +127,18 @@ class IsModified extends Analyzer {
             $this->prepareQuery();
         }
 
-        $this->atomIs('Unset')
-             ->outIs('ARGUMENT')
-             ->outIsIE('VARIABLE')
-             ->atomIs(self::$VARIABLES_ALL);
-        $this->prepareQuery();
-
         // Class constructors (__construct)
-        $this->atomIs('Newcall')
+        $this->atomIs('New')
+             ->outIs('NEW')
+             ->atomIs('Newcall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->_as('results')
-             ->back('first')
+             ->inIs('ARGUMENT')
              ->classDefinition()
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')

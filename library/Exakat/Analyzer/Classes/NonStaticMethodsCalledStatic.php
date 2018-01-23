@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class NonStaticMethodsCalledStatic extends Analyzer {
     public function dependsOn() {
         return array('Classes/IsNotFamily',
-                     'Classes/UndefinedClasses');
+                     'Classes/UndefinedClasses',
+                    );
     }
     
     public function analyze() {
@@ -44,13 +45,13 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->inIs('METHOD')
 
              ->outIs('CLASS')
-             ->codeIsNot(array('parent', 'self', 'static'))
+             ->atomIsNot(array('Parent', 'Self', 'Static'))
              ->analyzerIsNot('Classes/UndefinedClasses')
              ->classDefinition()
              ->goToAllParents(self::INCLUDE_SELF)
 
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(array('Method', 'Magicmethod'))
              ->hasNoOut('STATIC')
              ->outIs('NAME')
              ->samePropertyAs('code', 'methodname')

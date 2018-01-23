@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldRegenerateSessionId extends Analyzer {
     public function dependsOn() {
-        return array('ZendF/UseSession');
+        return array('ZendF/UseSession',
+                    );
     }
     
     public function analyze() {
@@ -41,8 +42,9 @@ class ShouldRegenerateSessionId extends Analyzer {
         
         $sessionsList = makeList($sessions);
         $sessionsList = str_replace('$', '\\$', $sessionsList);
-        $regenerateid = $this->query('g.V().hasLabel("Methodcall").out("METHOD").filter{it.get().value("code").toLowerCase() == "regenerateid"}.in("METHOD")
-                                           .out("OBJECT").has("fullcode", within('.$sessionsList.'))
+        $regenerateid = $this->query('g.V().hasLabel("Methodcall")
+                                           .where( __.out("METHOD").filter{it.get().value("fullnspath") == "regenerateid"} )
+                                           .where( __.out("OBJECT").has("fullcode", within('.$sessionsList.')) )
                                            .count()');
                                            
         if ($regenerateid->toString() !== "0") {

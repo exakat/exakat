@@ -33,7 +33,7 @@ class Php extends Analyzer {
     
     public function analyze() {
         $interfaces = $this->loadIni('php_interfaces.ini', 'interfaces');
-        $interfaces = $this->makeFullNsPath($interfaces);
+        $interfaces = makeFullNsPath($interfaces);
 
         $this->analyzerIs('Interfaces/InterfaceUsage')
              ->fullnspathIs($interfaces);

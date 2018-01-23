@@ -23,4 +23,8 @@ xmlwriter_end_element($xw); // tag11
 xmlwriter_end_element($xw); // tag1
 
 // partial example
+
+// A method. No ext/simplexml
+$a::xmlwriter_set_indent($off, 0);
+
 ?>

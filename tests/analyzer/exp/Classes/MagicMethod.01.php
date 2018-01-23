@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('__call',
-                      '__toString',
+$expected     = array('public function __toString( ) { /**/ } ',
+                      'public function __call($a, $b) { /**/ } ',
                      );
 
-$expected_not = array('__toBoolean',
+$expected_not = array('public function __toBoolean( ) { /**/ } ',
                      );
 
 ?>

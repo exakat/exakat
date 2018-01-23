@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class OnceUsage extends Analyzer {
     public function analyze() {
-        $this->atomIs('Functioncall')
+        $this->atomIs('Include')
              ->outIs('NAME')
              ->tokenIs(array('T_REQUIRE_ONCE', 'T_INCLUDE_ONCE'))
              ->back('first');

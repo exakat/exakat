@@ -49,8 +49,7 @@ class VardumpUsage extends Analyzer {
         $this->prepareQuery();
 
         // echo '<pre>'.print_r($a, 1);
-        $this->atomIs('Functioncall')
-             ->tokenIs(array('T_ECHO', 'T_PRINT'))
+        $this->atomIs(array('Echo', 'Print'))
              ->atomInside('Functioncall')
              ->functioncallIs($returnDebugFunctions)
              ->back('first');

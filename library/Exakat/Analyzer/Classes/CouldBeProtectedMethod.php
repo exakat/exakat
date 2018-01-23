@@ -29,7 +29,7 @@ class CouldBeProtectedMethod extends Analyzer {
         // Case of property->property (that's another public access)
         $query = <<<GREMLIN
 g.V().hasLabel("Methodcall")
-     .not( __.where( __.out("OBJECT").has("code", "\\\$this") ) )
+     .not( __.where( __.out("OBJECT").hasLabel("This") ) )
      .out("METHOD")
      .hasLabel("Methodcallname")
      .values("code")
@@ -37,15 +37,13 @@ g.V().hasLabel("Methodcall")
 GREMLIN;
         $publicMethods = $this->query($query)->toArray();
 
-        $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
-
         // Member that is not used outside this class or its children
         $this->atomIs('Method')
              ->hasNoOut(array('PROTECTED', 'PRIVATE'))
              ->hasNoOut('STATIC')
              ->hasClass()
              ->outIs('NAME')
-             ->isNot('code', array_merge($publicMethods, $magicMethods))
+             ->codeIsNot($publicMethods, self::NO_TRANSLATE)
              ->back('first');
         $this->prepareQuery();
         

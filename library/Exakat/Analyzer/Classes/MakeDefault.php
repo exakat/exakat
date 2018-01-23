@@ -28,8 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class MakeDefault extends Analyzer {
     public function analyze() {
         $this->atomIs(self::$CLASSES_ALL)
-             ->outIs('METHOD')
-             ->atomIs('Method')
+             ->outIs('MAGICMETHOD')
+             ->atomIs('Magicmethod')
              ->outIs('NAME')
              ->codeIs('__construct')
              ->inIs('NAME')
@@ -57,7 +57,6 @@ class MakeDefault extends Analyzer {
              ->samePropertyAs('propertyname', 'propriete')
              
              ->back('result');
-
         $this->prepareQuery();
     }
 }

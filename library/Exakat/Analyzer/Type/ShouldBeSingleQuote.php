@@ -27,14 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldBeSingleQuote extends Analyzer {
     public function analyze() {
+        // $a = "abc";
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
              ->is('delimiter', '"')
-             ->regexIsNot('code', "'")
-             ->regexIsNot('code', "\\\\[nrtvef\\\\\\\"\\$]")
-             ->regexIsNot('code', '\\\\\\\\[0-7]')
-             ->regexIsNot('code', '\\\\\\\\x[0-9A-Fa-f]{1,2}')
-             ->regexIsNot('code', '\\\\\\\\u\\\\{[0-9A-Fa-f]+\\\\}');
+             ->regexIsNot('code', "/'/")
+             ->regexIsNot('code', '/\\[nrtvef"$]/')
+             ->regexIsNot('code', '/\\\0[0-7]/')
+             ->regexIsNot('code', '/\\\x[0-9A-Fa-f]{1,2}/')
+             ->regexIsNot('code', '/\\\u\{[0-9A-Fa-f]+\}/');
         $this->prepareQuery();
     }
 }

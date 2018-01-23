@@ -29,21 +29,21 @@ class SameNameAsFile extends Analyzer {
     public function analyze() {
         $this->atomIs(array('Interface','Class', 'Trait'))
              ->outIs('NAME')
-             ->savePropertyAs('code', 'classname')
+             ->savePropertyAs('fullcode', 'classname')
              ->goToFile()
              // Is the clasname different from the filename (case insensitive)
-             ->regexIsNot('code', '(?i)" + classname + "\\\\.php\\$')
+             ->regexIsNot('fullcode', '(?i)" + classname + "\\\\.php\\$')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs(array('Interface','Class', 'Trait'))
              ->outIs('NAME')
-             ->savePropertyAs('code', 'classname')
+             ->savePropertyAs('fullcode', 'classname')
              ->goToFile()
              // Is the clasname also the filename (case insensitive)
-             ->regexIs('code', '(?i)" + classname + "\\\\.php\\$')
+             ->regexIs('fullcode', '(?i)" + classname + "\\\\.php\\$')
              // Is the clasname also the filename (case sensitive)
-             ->regexIsNot('code', '" + classname + "\\\\.php\\$')
+             ->regexIsNot('fullcode', '" + classname + "\\\\.php\\$')
              ->back('first');
         $this->prepareQuery();
     }

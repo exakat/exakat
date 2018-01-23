@@ -29,7 +29,7 @@ class InterfaceDefinition extends Analyzer {
     protected $interfaces = array();
     
     public function analyze() {
-        $interfaces =  $this->makeFullNsPath($this->interfaces);
+        $interfaces =  makeFullNsPath($this->interfaces);
         
         $this->atomIs('Interface')
              ->fullnspathIs($interfaces);

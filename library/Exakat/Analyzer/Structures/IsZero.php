@@ -30,31 +30,38 @@ class IsZero extends Analyzer {
         // $a = $c + $d - $c;
         // $a = $c + $d -$e - $c;
         // $a = $d + $c -$e - $c;
-        $this->atomIs('Addition')
-             ->outIs('LEFT')
-             ->atomIsNot('Sign')
-             ->savePropertyAs('fullcode', 'operand')
-             ->back('first')
+        $minus = $this->dictCode->translate(array('-'));
+        
+        if (!empty($minus)) {
+            $this->atomIs('Addition')
+                 ->outIs('LEFT')
+                 ->atomIsNot('Sign')
+                 ->savePropertyAs('fullcode', 'operand')
+                 ->back('first')
+    
+                 ->raw('emit().repeat( __.out("RIGHT")).times('.self::MAX_LOOPING.').coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").hasLabel("Addition").out("LEFT"),
+                                                                                               __.filter{ it.get().value("code") in ***}.out("RIGHT"))', $minus, $minus)
+                 ->samePropertyAs('fullcode', 'operand')
+                 ->back('first');
+            $this->prepareQuery();
+        }
 
-             ->raw('emit().repeat( __.out("RIGHT")).times('.self::MAX_LOOPING.').coalesce( __.has("code", "-").out("RIGHT").hasLabel("Addition").out("LEFT"),
-                                                                                           __.has("code", "-").out("RIGHT"))')
-             ->samePropertyAs('fullcode', 'operand')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Addition')
-             ->outIs('LEFT')
-             ->atomIs('Sign')
-             ->outIs('SIGN')
-             ->savePropertyAs('fullcode', 'operand')
-             ->back('first')
-
-             ->raw('emit().repeat( __.out("RIGHT")).times('.self::MAX_LOOPING.').coalesce( __.has("code", "+").out("RIGHT").hasLabel("Addition").out("LEFT"),
-                                                                                           __.has("code", "+").out("RIGHT"))')
-
-             ->samePropertyAs('fullcode', 'operand')
-             ->back('first');
-        $this->prepareQuery();
+        $plus = $this->dictCode->translate(array('+'));
+        if (!empty($plus)) {
+            $this->atomIs('Addition')
+                 ->outIs('LEFT')
+                 ->atomIs('Sign')
+                 ->outIs('SIGN')
+                 ->savePropertyAs('fullcode', 'operand')
+                 ->back('first')
+    
+                 ->raw('emit().repeat( __.out("RIGHT")).times('.self::MAX_LOOPING.').coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").hasLabel("Addition").out("LEFT"),
+                                                                                               __.filter{ it.get().value("code") in ***}.out("RIGHT"))', $plus, $plus)
+    
+                 ->samePropertyAs('fullcode', 'operand')
+                 ->back('first');
+            $this->prepareQuery();
+        }
     }
 }
 

@@ -24,14 +24,21 @@
 namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Data\Dictionary;
 
 class Constructor extends Analyzer {
     public function analyze() {
+        $construct = $this->dictCode->translate(array('__construct'), Dictionary::CASE_INSENSITIVE);
+        
+        if (empty($construct)) {
+            return;
+        }
+        
         // __construct is the main constructor of the class
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->hasClass()
              ->outIs('NAME')
-             ->codeIs('__construct')
+             ->codeIs($construct, self::NO_TRANSLATE)
              ->back('first');
         $this->prepareQuery();
 
@@ -40,7 +47,7 @@ class Constructor extends Analyzer {
              ->outIs('NAME')
              ->savePropertyAs('code', 'code')
              ->back('first')
-             ->raw('not( where( __.out("METHOD").hasLabel("Method").out("NAME").has("code", "__construct") ) )')
+             ->raw('not( where( __.out("MAGICMETHOD").hasLabel("Magicmethod").out("NAME").filter{ it.get().value("fullcode").toLowerCase() == "__construct"} ) )')
              ->outIs('METHOD')
              ->atomIs('Method')
              ->_as('constructor')

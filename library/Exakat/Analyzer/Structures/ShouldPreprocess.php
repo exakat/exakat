@@ -37,7 +37,7 @@ class ShouldPreprocess extends Analyzer {
 
         $methods = new Methods($this->config);
         $functionList = $methods->getDeterministFunctions();
-        $functionList = $this->makeFullNsPath($functionList);
+        $functionList = makeFullNsPath($functionList);
 
         // Operator only working on constants
         $tokenList = makeList( self::$FUNCTIONS_TOKENS );

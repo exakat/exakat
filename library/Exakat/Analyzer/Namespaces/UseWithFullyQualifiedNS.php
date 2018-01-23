@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UseWithFullyQualifiedNS extends Analyzer {
     public function analyze() {
         // Normal group
-        $this->atomIs('Use')
-             ->hasNoClassTrait()
+        $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->atomIs(array('Nsname', 'As'))
              ->outIsIE('NAME')
@@ -37,8 +36,7 @@ class UseWithFullyQualifiedNS extends Analyzer {
         $this->prepareQuery();
 
         // Group use
-        $this->atomIs('Use')
-             ->hasNoClassTrait()
+        $this->atomIs('Usenamespace')
              ->outIs('GROUPUSE')
              ->atomIs('Nsname')
              ->is('absolute', true);

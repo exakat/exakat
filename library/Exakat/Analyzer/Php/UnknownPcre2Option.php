@@ -31,7 +31,7 @@ class UnknownPcre2Option extends Analyzer {
     public function analyze() {
         // Options list : S and X
 //        $options = '[a-zA-Z]*[^eimsuxADJU][a-zA-Z]*';
-        $options = '[a-zA-Z]*[S][a-zA-Z]*';
+        $options = '[a-zA-Z\\\\s]*[S][a-zA-Z\\\\s]*';
         
         // preg_match with a string
         $this->atomFunctionIs(UnknownPregOption::$functions)
@@ -42,7 +42,7 @@ class UnknownPcre2Option extends Analyzer {
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
              ->raw('filter{ it.get().value("noDelimiter").length() >= (delimiter + delimiterFinal).length() }')
              ->raw('filter{ (it.get().value("noDelimiter") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
-             ->regexIs('noDelimiter', '^(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.')\\$')
+             ->regexIs('noDelimiter', '^\\\\s*(" + delimiter + ").*(?<!\\\\\\\\)\\\\s*(" + delimiterFinal + ")('.$options.')\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -59,7 +59,7 @@ class UnknownPcre2Option extends Analyzer {
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
              ->raw('filter{ it.get().value("noDelimiter").length() >= (delimiter + delimiterFinal).length() }')
              ->raw('filter{ (it.get().value("noDelimiter") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
-             ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.').\\$')
+             ->regexIs('fullcode', '^.\\\\s*(" + delimiter + ").*(?<!\\\\\\\\)\\\\s*(" + delimiterFinal + ")('.$options.').\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -79,7 +79,7 @@ class UnknownPcre2Option extends Analyzer {
              ->back('concat')
              ->raw('filter{ it.get().value("fullcode").length() >= (delimiter + delimiterFinal).length() + 2 }')
              ->raw('filter{ (it.get().value("fullcode") =~ delimiter + ".*" + delimiterFinal ).getCount() != 0 }')
-             ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.').\\$')
+             ->regexIs('fullcode', '^.\\\\s*(" + delimiter + ").*(?<!\\\\\\\\)\\\\s*(" + delimiterFinal + ")('.$options.').\\$')
              ->back('first');
         $this->prepareQuery();
 

@@ -26,78 +26,62 @@ use Exakat\Analyzer\Analyzer;
 class CloseNaming extends Analyzer {
     
     public function analyze() {
+        $closeVariables = $this->dictCode->closeVariables();
 
-        // Variables with a levenstein distance of 1 or less.
-        $this->queryDefinition(<<<GREMLIN
-  def distance(String str1, String str2) {
-    def str1_len = str1.length()
-    def str2_len = str2.length()
-    int[][] distance = new int[str1_len + 1][str2_len + 1]
-    (str1_len + 1).times { distance[it][0] = it }
-    (str2_len + 1).times { distance[0][it] = it }
-    (1..str1_len).each { i ->
-       (1..str2_len).each { j ->
-          distance[i][j] = [distance[i-1][j]+1, distance[i][j-1]+1, str1[i-1]==str2[j-1]?distance[i-1][j-1]:distance[i-1][j-1]+1].min()
-       }
-    }
-    distance[str1_len][str2_len]
-  }
-
-GREMLIN
-);
-
-        $this->atomIs('Function')
-             ->raw('where( __.sideEffect{ variables = []}.out("BLOCK").repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').filter{ it.get().value("code").length() > 3}.sideEffect{ variables.push(it.get().value("code")); }.fold() )')
-             ->raw('sideEffect{ 
+        if (!empty($closeVariables)) {
+            $this->atomIs(array('Function', 'Method', 'Closure'))
+                 ->raw('where( __.sideEffect{ variables = []}.out("BLOCK").repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').sideEffect{ variables.push(it.get().value("code")); }.fold() )')
+                 ->raw('sideEffect{ 
     variables = variables.unique().sort();
-    found = []; 
-    variables.each{ i -> 
-        if (variables.findAll{ it != i && ( it != i + "s" && it + "s" != i) && distance( it , i) < 2 }.size() > 0) {
-            found.add(i);
+    found = variables.intersect(***); 
+}', $closeVariables)
+                ->filter(' found.size() > 1; ')
+                ->atomInside('Variable')
+                ->raw('filter{ it.get().value("code") in found}');
+            $this->prepareQuery();
         }
-    }
-}')
-            ->atomInside('Variable')
-            ->raw('filter{ it.get().value("code") in found}');
-        $this->prepareQuery();
-
-        $variables = $this->query(<<<GREMLIN
-g.V().hasLabel("Variable", "Variablearray", "Variableobject").values("code").unique();
-GREMLIN
-                                  );
 
         // Identical, except for case
-        $lowerCaseVariable = array_map('strtolower', $variables->toArray());
-        $lowerCaseVariable = array_count_values($lowerCaseVariable);
-        $doubles = array_filter($lowerCaseVariable, function($count){ return $count > 1; });
+        $query = <<<GREMLIN
+g.V().hasLabel("Variable", "Variablearray", "Variableobject")
+     .values("fullcode")
+     .unique()
+GREMLIN;
+        $doubles = $this->query($query)->toArray();
+        $uniques = array();
+        foreach($doubles as $u) {
+            $v = mb_strtolower($u);
+            if (isset($uniques[$v])) {
+                $uniques[$v][] = $u;
+            } else {
+                $uniques[$v] = [$u];
+            }
+        }
         
-        if (!empty($doubles)) {
-            $this->atomIs(array("Variable", "Variablearray", "Variableobject"))
+        $uniques = array_filter($uniques, function ($x) { return count($x) > 1; });
+        if (!empty($uniques)) {
+            $doubles = array_merge(...array_values($uniques));
+    
+            $this->atomIs(array('Variable', 'Variablearray', 'Variableobject'))
                  ->codeIs($doubles);
             $this->prepareQuery();
         }
 
-        // Identical, except for case
-        $noUnderscoreVariables = array_map(function($x) { return str_replace('_', '', $x); }, $variables->toArray());
-        $noUnderscoreVariables = array_count_values($noUnderscoreVariables);
-        $doubles = array_filter($noUnderscoreVariables, function($count){ return $count > 1; });
+        // Identical, except for _ in the name
+        $doubles = $this->dictCode->underscoreCloseVariables();
         
         if (!empty($doubles)) {
             $this->atomIs(array("Variable", "Variablearray", "Variableobject"))
-                  ->raw('filter{it.get().value("code").toString()
-                                                      .replaceAll( "_", "") in ***}', $doubles);
+                 ->codeIs($doubles, self::NO_TRANSLATE);
             $this->prepareQuery();
         }
 
         // Identical, except for numbers
-        $noFigureVariables = array_map(function($x) { return str_replace(range('0', '9'), '', $x); }, $variables->toArray());
-        $noFigureVariables = array_count_values($noFigureVariables);
-        $doubles = array_filter($noFigureVariables, function($count){ return $count > 1; });
-        
+        $doubles = $this->dictCode->numberCloseVariables();
+
         if (!empty($doubles)) {
             $this->atomIs(array("Variable", "Variablearray", "Variableobject"))
-                  ->raw('filter{it.get().value("code").toString()
-                                                      .replaceAll( "[0-9]", "") in ***}', $doubles);
+                 ->codeIs($doubles, self::NO_TRANSLATE);
             $this->prepareQuery();
         }
     }

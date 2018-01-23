@@ -27,10 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class Php72Deprecation extends Analyzer {
     protected $phpVersion = '7.2-';
     
-    public function dependsOn() {
-        return array('Variables/Variablenames');
-    }
-    
     public function analyze() {
         // Definition of \\__autoload
         $this->atomIs('Function')
@@ -62,8 +58,7 @@ class Php72Deprecation extends Analyzer {
         $this->prepareQuery();
         
         // usage of $php_errormsg
-        $this->atomIs(self::$VARIABLES_ALL)
-             ->analyzerIs('Variables/Variablenames')
+        $this->atomIs('Phpvariable')
              ->codeIs('$php_errormsg', self::CASE_SENSITIVE);
         $this->prepareQuery();
 

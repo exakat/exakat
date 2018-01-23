@@ -47,13 +47,13 @@ class UndefinedClasses extends Analyzer {
         }
 
         $classes = $data->getClassByRelease($this->release);
-        $classes = $this->makeFullNsPath(array_pop($classes));
+        $classes = makeFullNsPath(array_pop($classes));
 
         $interfaces = $data->getInterfaceByRelease($this->release);
-        $interfaces = $this->makeFullNsPath(array_pop($interfaces));
+        $interfaces = makeFullNsPath(array_pop($interfaces));
 
         $traits = $data->getTraitByRelease($this->release);
-        $traits = $this->makeFullNsPath(array_pop($traits));
+        $traits = makeFullNsPath(array_pop($traits));
         
         if (!empty($classes)) {
             $this->analyzerIs('ZendF/ZendClasses')

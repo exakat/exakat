@@ -29,19 +29,18 @@ class IsUpperFamily extends Analyzer {
         // Staticmethodcall
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(array('Identifier', 'Nsname', 'Static', 'Self', 'Parent'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->savePropertyAs('code', 'method')
+             ->savePropertyAs('fullnspath', 'methode')
              
              ->goToClass()
-             ->raw('where( __.out("METHOD").hasLabel("Method").out("NAME").filter{it.get().value("code").toLowerCase() == method.toLowerCase() }.count().is(eq(0)) )')
+             ->raw('not( where( __.out("METHOD").hasLabel("Method").filter{ (it.get().value("fullnspath") =~ "::" + methode ).getCount() != 0 } ) )')
 
              ->goToAllParents()
              ->atomIsNot('Interface')
-             ->raw('where( __.out("METHOD").hasLabel("Method").out("NAME").filter{it.get().value("code").toLowerCase() == method.toLowerCase() }.count().is(neq(0)) )')
+             ->raw('where( __.out("METHOD").hasLabel("Method").filter{ (it.get().value("fullnspath") =~ "::" + methode ).getCount() != 0 } )')
 
              ->back('first');
         $this->prepareQuery();
@@ -49,7 +48,7 @@ class IsUpperFamily extends Analyzer {
         // Staticproperty
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(array('Identifier', 'Nsname', 'Static', 'Self', 'Parent'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('MEMBER')
@@ -69,7 +68,7 @@ class IsUpperFamily extends Analyzer {
         // Staticconstant
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs(array('Identifier', 'Nsname', 'Static', 'Self', 'Parent'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('CONSTANT')

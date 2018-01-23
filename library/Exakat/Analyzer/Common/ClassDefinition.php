@@ -29,7 +29,7 @@ class ClassDefinition extends Analyzer {
     protected $classes = array();
     
     public function analyze() {
-        $classes =  $this->makeFullNsPath($this->classes);
+        $classes =  makeFullNsPath($this->classes);
         
         $this->atomIs('Class')
              ->fullnspathIs($classes);

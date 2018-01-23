@@ -40,8 +40,8 @@ GREMLIN;
                          'PHP_EOL' => 'PHP_EOL');
 
         $this->atomIs(array('String', 'Identifier', 'Nsname'))
-             ->raw('coalesce( __.hasLabel("Identifier", "Nsname").has("fullnspath").has("fullnspath", "\\\\php_eol"), 
-                              __.hasLabel("String").has("code", "\"\\\\n\"")
+             ->raw('coalesce( __.hasLabel("Identifier", "Nsname").has("fullnspath").has("fullnspath", "\\\\PHP_EOL"), 
+                              __.hasLabel("String").has("noDelimiter", "\\\\n")
                              )')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
@@ -67,8 +67,8 @@ GREMLIN;
         }
 
         $this->atomIs(array('String', 'Identifier', 'Nsname'))
-             ->raw('coalesce( __.hasLabel("Identifier", "Nsname").has("fullnspath").has("fullnspath", "\\\\php_eol"), 
-                              __.hasLabel("String").has("code", "\"\\\\n\"")
+             ->raw('coalesce( __.hasLabel("Identifier", "Nsname").has("fullnspath").has("fullnspath", "\\\\PHP_EOL"), 
+                              __.hasLabel("String").has("noDelimiter", "\\\\n")
                              )')
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in ***}', $types)

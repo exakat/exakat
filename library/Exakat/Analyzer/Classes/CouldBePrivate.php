@@ -28,7 +28,8 @@ use Exakat\Tokenizer\Token;
 
 class CouldBePrivate extends Analyzer {
     public function dependsOn() {
-        return array('Classes/PropertyUsedBelow');
+        return array('Classes/PropertyUsedBelow',
+                    );
     }
     
     public function analyze() {
@@ -38,7 +39,7 @@ class CouldBePrivate extends Analyzer {
         // Case of object->property (that's another public access)
 $query = <<<GREMLIN
 g.V().hasLabel("Member")
-     .not( where( __.out("OBJECT").has("code", "\\\$this")) )
+     .not( where( __.out("OBJECT").hasLabel("This")) )
      .out("MEMBER")
      .hasLabel("Name")
      .values("code")
@@ -62,8 +63,8 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Staticproperty")
      .out("CLASS")
-     .hasLabel("Identifier", "Nsname")
      .as("classe")
+     .has("fullnspath")
      .sideEffect{ fns = it.get().value("fullnspath"); }
      .in("CLASS")
      .out("MEMBER")
@@ -80,7 +81,7 @@ g.V().hasLabel("Staticproperty")
      .unique()
 GREMLIN;
         $publicStaticProperties = $this->query($query)->toArray();
-        
+
         if (!empty($publicStaticProperties)) {
             $calls = array();
             foreach($publicStaticProperties as $value) {
@@ -99,7 +100,7 @@ GREMLIN;
                  ->analyzerIsNot('Classes/PropertyUsedBelow')
                  ->_as('results')
                  ->outIsIE('LEFT')
-                 ->isNot('code', array_keys($calls))
+                 ->codeIsNot(array_keys($calls), self::NO_TRANSLATE)
                  ->savePropertyAs('code', 'variable')
                  ->goToClass()
                  ->isNotHash('fullnspath', $calls, 'variable')

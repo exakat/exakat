@@ -26,11 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class TooManyInjections extends Analyzer {
     public function dependsOn() {
-        return array('Patterns/DependencyInjection');
+        return array('Patterns/DependencyInjection',
+                    );
     }
     
     public function analyze() {
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
              ->raw('where( __.out("ARGUMENT")
                              .where(__.in("ANALYZED").has("analyzer", "Patterns/DependencyInjection") )
                              .count().is(gt(4)) 

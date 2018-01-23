@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class CustomConstantUsage extends Analyzer {
     public function dependsOn() {
-        return array('Constants/ConstantUsage');
+        return array('Constants/ConstantUsage',
+                    );
     }
     
     public function analyze() {
@@ -44,7 +45,7 @@ class CustomConstantUsage extends Analyzer {
             }
         }
         $constants = call_user_func_array('array_merge', $c);
-        $constants = $this->makeFullNsPath($constants);
+        $constants = makeFullNsPath($constants);
 
         // @note NSnamed are OK by default (may be not always!)
         $this->atomIs(array('Identifier', 'Nsname'))

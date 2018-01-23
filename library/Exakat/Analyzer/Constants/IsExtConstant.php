@@ -29,7 +29,8 @@ class IsExtConstant extends Analyzer {
 
     public function dependsOn() {
         return array('Constants/ConstantUsage',
-                     'Constants/IsGlobalConstant');
+                     'Constants/IsGlobalConstant',
+                    );
     }
     
     public function analyze() {
@@ -46,7 +47,7 @@ class IsExtConstant extends Analyzer {
             }
         }
         $constants = call_user_func_array('array_merge', $c);
-        $constantsFullNs = $this->makeFullNsPath($constants);
+        $constantsFullNs = makeFullNsPath($constants);
         
         // based on full ns path
         $this->analyzerIs('Constants/ConstantUsage')
@@ -56,7 +57,7 @@ class IsExtConstant extends Analyzer {
 
         $this->analyzerIs('Constants/ConstantUsage')
              ->analyzerIs('Constants/IsGlobalConstant')
-             ->codeIs($constants);
+             ->fullnspathIs(makeFullnspath($constants));
         $this->prepareQuery();
     }
 }

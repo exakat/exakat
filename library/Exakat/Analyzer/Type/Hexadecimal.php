@@ -27,8 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class Hexadecimal extends Analyzer {
     public function analyze() {
+        // $a = 0x123ee;
         $this->atomIs('Integer')
-             ->regexIs('code', '0[xX][0-9a-fA-F]+');
+             ->regexIs('code', '/0[xX][0-9a-fA-F]+/');
         $this->prepareQuery();
     }
 }

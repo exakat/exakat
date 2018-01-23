@@ -27,15 +27,20 @@ use Exakat\Analyzer\Analyzer;
 class ShouldMakeAlias extends Analyzer {
     public function analyze() {
         // No namespace ?
-        $this->atomIs('Nsname')
+        $this->atomIs(array('Nsname', 'Newcall'))
              ->tokenIs('T_NS_SEPARATOR')
-             ->hasNoIn('USE')
-             ->hasNoParent('Use', array('NAME', 'USE'))  // use expression
+             ->hasNoIn(array('USE', 'NAME'))
+             ->hasNoParent('Usenamespace', array('NAME', 'USE'))  // use expression
              ->hasNoParent('Namespace', 'NAME')  // use expression
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'possibleAlias')
              ->goToNamespace()
-             ->raw('where( __.out("BLOCK", "CODE").out("EXPRESSION").hasLabel("Use").out("USE").filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )')
+             ->raw(<<<GREMLIN
+where( __.out("BLOCK", "CODE").out("EXPRESSION")
+         .hasLabel("Usenamespace").out("USE")
+         .filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 19 Dec 2017 07:57:51 +0000
-.. comment: Generation hash : b9901b195e9584111d04ca546a62f831416a0d6e
+.. comment: Generation date : Tue, 26 Dec 2017 10:54:54 +0000
+.. comment: Generation hash : ee236dc0faaaccd4df41c1edc39222a217ad812d
 
 
 .. _$http\_raw\_post\_data:
@@ -3459,18 +3459,29 @@ Could Use __DIR__
 #################
 
 
-Use `'__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ function to access the current file's parent directory. 
+Use `'__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ constant to access the current file's parent directory. 
+
+Avoid using `'dirname() <http://www.php.net/dirname>`_ on `'__FILE__ <http://php.net/manual/en/language.constants.predefined.php>`_.
 
 .. code-block:: php
 
    <?php
    
+   // Better way
+   $fp = fopen('__DIR__.'/myfile.txt', 'r');
+   
+   // compatible, but slow way
+   $fp = fopen(dirname('__FILE__).'/myfile.txt', 'r');
+   
+   // Since PHP 5.3
    assert(dirname('__FILE__) == '__DIR__);
    
    ?>
 
 
 `'__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ has been introduced in PHP 5.3.0.
+
+See also `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_.
 
 +--------------+------------------------+
 | Command Line | Structures/CouldUseDir |
@@ -4279,7 +4290,9 @@ Ellipsis Usage
 ##############
 
 
-Usage of the ... keyword. It may be in function definitions, either in functioncalls.
+Usage of the ellipsis keyword. The keyword is three dots : ... . It is also named variadic or splat operator.
+
+It may be in function definitions, either in functioncalls.
 
 ... allows for packing or unpacking arguments into an array.
 
@@ -4295,6 +4308,11 @@ Usage of the ... keyword. It may be in function definitions, either in functionc
        // Identical to : $a = 'func_get_args();
    }
    ?>
+
+
+See also `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_,
+         `PHP 5.6 and the Splat Operator <https://lornajane.net/posts/2014/php-5-6-and-the-splat-operator>`_, and
+         `Variable-length argument lists <http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_.
 
 +--------------+---------------------------------------------------------------------------------+
 | Command Line | Php/EllipsisUsage                                                               |
@@ -10035,6 +10053,8 @@ Unless you have created those classes, you may get some strange error messages.
    ?>
 
 
+Thanks to Benoit Viguier for the `original idea <https://twitter.com/b_viguier/status/940173951908700161>`__ for this analysis.
+
 See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
 +--------------+-------------------+
@@ -10723,7 +10743,9 @@ PHP 7.2 Object Keyword
 ######################
 
 
-Since PHP 7.2, 'object' is a keyword. It can't be used for class, interface or trait name. 
+'object' is a PHP keyword. It can't be used for class, interface or trait name. 
+
+This is the case since PHP 7.2. 
 
 .. code-block:: php
 
@@ -11239,6 +11261,47 @@ The new class is : HashContext.
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+.. _php/noreferenceforternary:
+
+Php/NoReferenceForTernary
+#########################
+
+
+The ternary operator and the null coalescing operator are both expressions that only return values, and not a variable. 
+
+This means that any provided reference will be turned into its value. While this is usually invisible, it will raise a warning when a reference is expected. This is the case with methods returning a reference. 
+
+This applies to methods, functions and closures. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This works
+   function &foo($a, $b) { 
+       if ($a === 1) {
+           return $b; 
+       } else {
+           return $a; 
+       }
+   }
+   
+   // This raises a warning, as the operator returns a value
+   function &foo($a, $b) { return $a === 1 ? $b : $a; }
+   
+   ?>
+
+
+See also `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_, 
+         `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_.
+
++--------------+---------------------------+
+| Command Line | Php/NoReferenceForTernary |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
 
 
 .. _php7-relaxed-keyword:
@@ -14804,59 +14867,6 @@ When the difference is very small, it requires a better way to mesure time diffe
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
-
-
-.. _too-complex-expression:
-
-Too Complex Expression
-######################
-
-
-Long expressions should be broken in small chunks, to limit complexity. 
-
-Really long expressions tends to be error prone : either by typo, or by missing details. They are even harder to review, once the initialy build of the expression is gone. 
-
-As a general rule, it is recommended to keep expressions short. The analysis include any expression that is more than 15 tokens large : variable and operaors counts as one, properties, arrays count as two. Parenthesis are also counted. 
-
-PHP has no specific limit to expression size, so long expression are legal and valid. It is possible that the business logic requires a complex equation. 
-
-.. code-block:: php
-
-   <?php
-   
-   // Why not calculate wordwrap size separatedly ? 
-   $a = explode(\n, wordwrap($this->message, floor($this->width / imagefontwidth($this->fontsize)), \n));
-   
-   // Longer but easier to read
-   $width = floor($this->width / imagefontwidth($this->fontsize)), \n);
-   $a = explode(\n, wordwrap($this->message, $width);
-   
-   // Here, some string building, including error management with @, is making the data quite complex.
-   fwrite($fp, 'HEAD ' . @$url['path'] . @$url['query'] . ' HTTP/1.0' . \r\n . 'Host: ' . @$url['host'] . \r\n\r\n)
-   
-   // Better validation of data. 
-   $http_header = 'HEAD ';
-   if ('isset($url['path'])) {
-       $http_header .= $url['path'];
-   }
-   if ('isset($url['query'])) {
-       $http_header .= $url['query'];
-   }
-   
-   $http_header .=  \r\n;
-   if ('isset($url['host'])) {
-       $http_header .= 'Host: ' . $url['host'] . \r\n\r\n;
-   }
-   
-   fwrite($fp, $http_header);
-   
-   ?>
-
-+--------------+------------------------------+
-| Command Line | Structures/ComplexExpression |
-+--------------+------------------------------+
-| Analyzers    | :ref:`Analyze`               |
-+--------------+------------------------------+
 
 
 .. _too-many-finds:
@@ -18505,7 +18515,7 @@ Classes, trait and interfaces that are undefined for Wordpress 4.0.
 Wordpress 4.0 has 223 classes, 0 traits and 1 interfaces.
 
 +--------------+--------------------------------+
-| Command Line | wordpress/Wordpress40Undefined |
+| Command Line | Wordpress/Wordpress40Undefined |
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
@@ -18522,7 +18532,7 @@ Classes, trait and interfaces that are undefined for Wordpress 4.1.
 Wordpress 4.1 has 224 classes, 0 traits and 1 interfaces.
 
 +--------------+--------------------------------+
-| Command Line | wordpress/Wordpress41Undefined |
+| Command Line | Wordpress/Wordpress41Undefined |
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
@@ -18539,7 +18549,7 @@ Classes, trait and interfaces that are undefined for Wordpress 4.2.
 Wordpress 4.2 has 243 classes, 0 traits and 1 interfaces.
 
 +--------------+--------------------------------+
-| Command Line | wordpress/Wordpress42Undefined |
+| Command Line | Wordpress/Wordpress42Undefined |
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
@@ -18556,7 +18566,7 @@ Classes, trait and interfaces that are undefined for Wordpress 4.3.
 Wordpress 4.3 has 243 classes, 0 traits and 1 interfaces.
 
 +--------------+--------------------------------+
-| Command Line | wordpress/Wordpress43Undefined |
+| Command Line | Wordpress/Wordpress43Undefined |
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
@@ -18573,7 +18583,7 @@ Classes, trait and interfaces that are undefined for Wordpress 4.4.
 Wordpress 4.4 has 251 classes, 0 traits and 1 interfaces.
 
 +--------------+--------------------------------+
-| Command Line | wordpress/Wordpress44Undefined |
+| Command Line | Wordpress/Wordpress44Undefined |
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
@@ -18590,7 +18600,7 @@ Classes, trait and interfaces that are undefined for Wordpress 4.5.
 Wordpress 4.5 has 255 classes, 0 traits and 1 interfaces.
 
 +--------------+--------------------------------+
-| Command Line | wordpress/Wordpress45Undefined |
+| Command Line | Wordpress/Wordpress45Undefined |
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+

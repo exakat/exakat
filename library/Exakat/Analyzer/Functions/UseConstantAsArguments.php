@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UseConstantAsArguments extends Analyzer {
     public function dependsOn() {
-        return array('Constants/IsPhpConstant');
+        return array('Constants/IsPhpConstant',
+                    );
     }
     
     public function analyze() {
@@ -60,7 +61,7 @@ class UseConstantAsArguments extends Analyzer {
 
             foreach($functions->alternative->{$position} as $function => $constants) {
                 // PHP constant but wrong one
-                $regex = strtolower('('.implode('|', $constants).')\$');
+                $regex = '('.implode('|', $constants).')\$';
                 $this->atomFunctionIs($function)
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
@@ -115,7 +116,7 @@ class UseConstantAsArguments extends Analyzer {
             foreach($functions->combinaison->{$position} as $function => $constants) {
 
                 // if it's a PHP constant, but not a good one for the function
-                $regex = strtolower('('.implode('|', $constants).')\$');
+                $regex = '('.implode('|', $constants).')\$';
                 $this->atomFunctionIs($function)
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)

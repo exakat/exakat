@@ -28,10 +28,17 @@ use Exakat\Analyzer\Analyzer;
 class InconsistantCase extends Analyzer {
 
     public function analyze() {
+        $lower = $this->dictCode->translate(array('true', 'false', 'null'));
+        $upper = $this->dictCode->translate(array('TRUE', 'FALSE', 'NULL'));
+        
+        if (empty($lower) && empty($upper)) {
+            return;
+        }
+
         $mapping = <<<GREMLIN
-if (it.get().value('code') == it.get().value('code').toLowerCase()) { 
+if (it.get().value('code') in ***) { 
     x2 = 'lower'; 
-} else if (it.get().value('code') == it.get().value('code').toUpperCase()) { 
+} else if (it.get().value('code') in ***) { 
     x2 = 'upper'; 
 } else {
     x2 = 'mixed'; 
@@ -41,9 +48,10 @@ GREMLIN;
                          'UPPERCASE' => 'upper',
                          'Mixed'     => 'mixed');
 
+
         $this->atomIs(array('Null', 'Boolean'))
-             ->raw('map{ '.$mapping.' }')
-             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
+             ->raw('map{ '.$mapping.' }', $lower, $upper)
+             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');;
         $types = $this->rawQuery()->toArray()[0];
 
         $store = array();
@@ -64,7 +72,7 @@ GREMLIN;
         $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
 
         $this->atomIs(array('Null', 'Boolean'))
-             ->raw('sideEffect{ '.$mapping.' }')
+             ->raw('map{ '.$mapping.' }', $lower, $upper)
              ->raw('filter{ x2 in '.$types.'}')
              ->back('first');
         $this->prepareQuery();

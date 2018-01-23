@@ -33,8 +33,8 @@ class StaticMethodsCalledFromObject extends Analyzer {
 
     public function analyze() {
         $query = <<<GREMLIN
-g.V().hasLabel("Method")
-     .where( __.in("METHOD").hasLabel("Class", "Trait") )
+g.V().hasLabel("Method", "Magicmethod")
+     .where( __.in("METHOD", "MAGICMETHOD").hasLabel("Class", "Trait") )
      .where( __.out("STATIC") )
      .out("NAME")
      .values("code")
@@ -66,7 +66,7 @@ GREMLIN;
              ->atomIsNot('This')
              ->back('first')
              ->outIs('METHOD')
-             ->codeIs($methods, true)
+             ->codeIs($methods, self::NO_TRANSLATE)
              ->back('first');
         $this->prepareQuery();
 
