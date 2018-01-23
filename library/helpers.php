@@ -339,17 +339,24 @@ function makeArray($value) {
 }
 
 function makeFullnspath($functions, $constant = false) {
+    // case for classes and functions
     if ($constant === false) {
         $cb = function ($x) {
             $r = mb_strtolower($x);
+            if (strpos($r, '\\\\') !== false) {
+                $r = stripslashes($r);
+            }
             if (isset($r[0]) && $r[0] != '\\') {
                 $r = '\\' . $r;
             }
             return $r;
         };
     } else {
+        // case for constants
         $cb = function ($r) {
-            $d = explode('\\', $r);
+            $r2 = str_replace('\\\\', '\\', $r);
+
+            $d = explode('\\', $r2);
             $last = array_pop($d);
             $r = mb_strtolower(implode('\\', $d)).'\\'.$last;
             if (isset($r[0]) && $r[0] != '\\') {
