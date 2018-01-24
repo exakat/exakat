@@ -942,6 +942,8 @@ GREMLIN
             return $this;
         }
 
+        $this->addMethod('has("fullnspath")');
+
         return $this->propertyIsNot('fullnspath', $code, $caseSensitive);
     }
     
