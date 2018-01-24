@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Performances_MakeOneCall extends Analyzer {
-    /* 6 methods */
+    /* 7 methods */
 
     public function testPerformances_MakeOneCall01()  { $this->generic_test('Performances/MakeOneCall.01'); }
     public function testPerformances_MakeOneCall02()  { $this->generic_test('Performances/MakeOneCall.02'); }
@@ -16,5 +16,6 @@ class Performances_MakeOneCall extends Analyzer {
     public function testPerformances_MakeOneCall04()  { $this->generic_test('Performances/MakeOneCall.04'); }
     public function testPerformances_MakeOneCall05()  { $this->generic_test('Performances/MakeOneCall.05'); }
     public function testPerformances_MakeOneCall06()  { $this->generic_test('Performances/MakeOneCall.06'); }
+    public function testPerformances_MakeOneCall07()  { $this->generic_test('Performances/MakeOneCall.07'); }
 }
 ?>

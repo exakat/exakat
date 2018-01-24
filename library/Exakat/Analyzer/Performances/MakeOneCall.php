@@ -27,8 +27,11 @@ use Exakat\Analyzer\Analyzer;
 class MakeOneCall extends Analyzer {
     public function analyze() {
         // the second argument must match between calls
-        $functionsArg2 = array('\\str_replace', '\\str_ireplace',
-                               '\\preg_replace_callback', '\\preg_replace');
+        $functionsArg2 = array('\\str_replace', 
+                               '\\str_ireplace',
+                               '\\preg_replace_callback', 
+                               '\\preg_replace',
+                              );
         
         // preg_replace( **, **, x); called several times
         // str_replace( **, **, x); called several times
@@ -58,6 +61,7 @@ class MakeOneCall extends Analyzer {
              ->savePropertyAs('fullnspath', 'function')
              ->inIs('ARGUMENT')
              ->atomIs('Functioncall')
+             ->has('fullnspath')
              ->samePropertyAs('fullnspath', 'function')
              ->hasNoIn('ARGUMENT');
         $this->prepareQuery();
@@ -69,13 +73,15 @@ class MakeOneCall extends Analyzer {
              ->savePropertyAs('fullnspath', 'function')
              ->inIs('ARGUMENT')
              ->atomIs('Functioncall')
+             ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'function')
              ->inIs('ARGUMENT')
              ->atomIs('Functioncall')
+             ->has('fullnspath')
              ->samePropertyAs('fullnspath', 'function')
              ->hasIn('ARGUMENT');
         $this->prepareQuery();
-        
+
         // same functions, in a foreach?
     }
 }
