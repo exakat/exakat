@@ -95,6 +95,8 @@ class Load extends Tasks {
 
     private $sequences = array();
 
+    private $currentMethod = array();
+    private $currentFunction = array();
     private $currentClassTrait = array();
     private $currentParentClassTrait = array();
 
@@ -166,7 +168,7 @@ class Load extends Tasks {
     static public $PROP_REFERENCE   = array('Variable', 'Variableobject', 'Variablearray', 'Member', 'Array', 'Function', 'Closure', 'Method', 'Functioncall', 'Methodcall');
     static public $PROP_VARIADIC    = array('Variable', 'Array', 'Member', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname');
     static public $PROP_DELIMITER   = array('String', 'Heredoc');
-    static public $PROP_NODELIMITER = array('String', 'Variable');
+    static public $PROP_NODELIMITER = array('String', 'Variable', 'Magicconstant', 'Identifier', 'Nsname');
     static public $PROP_HEREDOC     = array('Heredoc');
     static public $PROP_COUNT       = array('Sequence', 'Functioncall', 'Methodcallname', 'Arrayliteral', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
     static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Method', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String', 'Self', 'Parent');
@@ -1063,7 +1065,7 @@ SQL;
         } else {
             $atom = 'Function';
         }
-
+        
         $previousClassContext = $this->contexts[self::CONTEXT_CLASS];
         $previousFunctionContext = $this->contexts[self::CONTEXT_FUNCTION];
         $this->contexts[self::CONTEXT_CLASS] = 0;
@@ -1085,6 +1087,29 @@ SQL;
         
         // Process arguments
         $function = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), self::WITH_TYPEHINT_SUPPORT);
+        $function->code       = $function->atom === 'Closure' ? 'function' : $name->fullcode;
+
+        if ( $function->atom === 'Function') {
+            list($fullnspath, $aliased) = $this->getFullnspath($name);
+            $this->addDefinition('function', $fullnspath, $function);
+        } elseif ( $function->atom === 'Closure') {
+            $fullnspath = $this->makeAnonymous('function');
+            $aliased    = self::NOT_ALIASED;
+        } elseif ( $function->atom === 'Method' || $function->atom === 'Magicmethod') {
+            $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($name->code);
+            $aliased    = self::NOT_ALIASED;
+        } else {
+            assert(false, 'Wrong type of function '.$function->atom);
+        }
+
+        $function->line       = $this->tokens[$current][2];
+        $function->token      = $this->getToken($this->tokens[$current][0]);
+        $function->fullnspath = $fullnspath;
+        $function->aliased    = $aliased;
+
+        $this->currentFunction[] = $function;
+        $this->currentMethod[] = $function;
+
         $argumentFullcode = $function->fullcode;
         $function->reference = $reference;
         if (isset($name)) {
@@ -1147,29 +1172,11 @@ SQL;
             $fullcode[] = '';
         }
 
-        if ( $function->atom === 'Function') {
-            list($fullnspath, $aliased) = $this->getFullnspath($name);
-            $this->addDefinition('function', $fullnspath, $function);
-        } elseif ( $function->atom === 'Closure') {
-            $fullnspath = $this->makeAnonymous('function');
-            $aliased    = self::NOT_ALIASED;
-        } elseif ( $function->atom === 'Method' || $function->atom === 'Magicmethod') {
-            $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($name->code);
-            $aliased    = self::NOT_ALIASED;
-        } else {
-            assert(false, 'Wrong type of function '.$function->atom);
-        }
-
-        $function->code       = $function->atom === 'Closure' ? 'function' : $name->fullcode;
         $function->fullcode   = implode(' ', $fullcode).$this->tokens[$current][1].' '.($function->reference ? '&' : '').
                                 ($function->atom === 'Closure' ? '' : $name->fullcode).'('.$argumentFullcode.')'.
                                 (isset($useFullcode) ? ' use ('.implode(', ', $useFullcode).')' : '').// No space before use
                                 (isset($returnType) ? ' : '.(isset($nullable) ? '?' : '').$returnType->fullcode : '').
                                 (isset($block) ? self::FULLCODE_BLOCK : ' ;');
-        $function->line       = $this->tokens[$current][2];
-        $function->token      = $this->getToken($this->tokens[$current][0]);
-        $function->fullnspath = $fullnspath;
-        $function->aliased    = $aliased;
 
         $this->pushExpression($function);
 
@@ -1183,6 +1190,10 @@ SQL;
 
         $this->contexts[self::CONTEXT_CLASS] = $previousClassContext;
         $this->contexts[self::CONTEXT_FUNCTION] = $previousFunctionContext;
+
+        array_pop($this->currentFunction);
+        array_pop($this->currentMethod);
+
         return $function;
     }
 
@@ -3101,6 +3112,10 @@ SQL;
 
             $this->pushExpression($functioncall);
 
+            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+                $this->processSemicolon();
+            }
+
             return $functioncall;
         }
     }
@@ -3761,6 +3776,18 @@ SQL;
             $constant->noDelimiter = $path === '/' ? '' : $path;
         } elseif ($constant->fullcode === '__FILE__') {
             $constant->noDelimiter = $this->filename;
+        } elseif ($constant->fullcode === '__FUNCTION__') {
+            $constant->noDelimiter = $this->currentFunction[count($this->currentFunction) - 1]->code;
+        } elseif ($constant->fullcode === '__CLASS__') {
+            $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
+        } elseif ($constant->fullcode === '__METHOD__') {
+            if (empty($this->currentClassTrait)) {
+                $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
+            } else {
+                $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath .
+                                         '::' .
+                                         $this->currentMethod[count($this->currentMethod) - 1]->code;
+            }
         }
         
         return $constant;
