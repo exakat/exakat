@@ -871,7 +871,7 @@ GREMLIN
             $this->addMethod("filter{ false; }");
             return $this;
         }
-
+        
         if ($translate === self::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
@@ -887,7 +887,7 @@ GREMLIN
 
             $this->addMethod('filter{ it.get().value("code") in ***; }', $translatedCode);
         } else {
-            $this->addMethod('filter{ it.get().value("code") in ***; }', $code);
+            $this->addMethod('filter{ it.get().value("code") in ***; }', makeArray($code));
         }
 
         return $this;
