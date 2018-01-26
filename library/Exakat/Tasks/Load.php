@@ -736,7 +736,6 @@ SQL;
             $this->addLink($id1, $sequence, 'FILE');
             $sequence->root = true;
 
-            $this->checkTokens($filename);
         } catch (LoadError $e) {
 //            print $e->getMessage();
 //            print_r($this->expressions[0]);
@@ -744,6 +743,8 @@ SQL;
             $this->reset();
             throw new NoFileToProcess($filename, 'empty', 0, $e);
         } finally {
+            $this->checkTokens($filename);
+
             $this->stats['totalLoc'] += $line;
             $this->stats['loc'] += $line;
         }
@@ -1814,6 +1815,7 @@ SQL;
         $this->contexts[self::CONTEXT_NEW] = 0;
         $this->nestContext();
         $fullcode = array();
+
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_CLOSE_BRACKET))) {
             $void = $this->addAtomVoid();
             $void->rank = 0;
@@ -1871,7 +1873,12 @@ SQL;
                     $default  = 0;
                     $nullable = 0;
 
-                    while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, \Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_BRACKET, \Exakat\Tasks\T_CLOSE_TAG))) {
+                    while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, 
+                                                                            \Exakat\Tasks\T_CLOSE_PARENTHESIS, 
+                                                                            \Exakat\Tasks\T_SEMICOLON, 
+                                                                            \Exakat\Tasks\T_CLOSE_BRACKET, 
+                                                                            \Exakat\Tasks\T_CLOSE_TAG,
+                                                                            ))) {
                         $this->processNext();
                     };
                     $index = $this->popExpression();
@@ -3080,7 +3087,11 @@ SQL;
     }
 
     private function processExit() {
-        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_CLOSE_BRACKET, \Exakat\Tasks\T_COLON))) {
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, 
+                                                            \Exakat\Tasks\T_SEMICOLON, 
+                                                            \Exakat\Tasks\T_CLOSE_TAG, 
+                                                            \Exakat\Tasks\T_CLOSE_BRACKET, 
+                                                            \Exakat\Tasks\T_COLON))) {
             $functioncall = $this->addAtom('Exit');
             $functioncall->code       = $this->tokens[$this->id][1];
             $functioncall->fullcode   = $this->tokens[$this->id][1].' ';
@@ -3103,14 +3114,16 @@ SQL;
             return $functioncall;
         } else {
             $current = $this->id;
-            ++$this->id;
-
-            $functioncall = $this->processArguments('Exit');
+            
+            $functioncall             = $this->processArguments('Exit', array(\Exakat\Tasks\T_SEMICOLON, 
+                                                                              \Exakat\Tasks\T_CLOSE_TAG, 
+                                                                              \Exakat\Tasks\T_END,
+                                                                              ));
             $functioncall->code       = $this->tokens[$current][1];
             $functioncall->fullcode   = $this->tokens[$current][1].' ';
             $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
-
             $this->pushExpression($functioncall);
+            --$this->id;
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
@@ -3779,7 +3792,11 @@ SQL;
         } elseif ($constant->fullcode === '__FUNCTION__') {
             $constant->noDelimiter = $this->currentFunction[count($this->currentFunction) - 1]->code;
         } elseif ($constant->fullcode === '__CLASS__') {
-            $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
+            if (empty($this->currentClassTrait)) {
+                $constant->noDelimiter = '';
+            } else {
+                $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
+            }
         } elseif ($constant->fullcode === '__METHOD__') {
             if (empty($this->currentClassTrait)) {
                 $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
@@ -4117,7 +4134,9 @@ SQL;
 
     private function processAddition() {
         if (!$this->hasExpression() ||
-            $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_DOT) {
+            $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_DOT ||
+            $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_EXIT
+            ) {
             return $this->processSign();
         }
         $left = $this->popExpression();
