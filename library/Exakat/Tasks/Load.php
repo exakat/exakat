@@ -1860,7 +1860,10 @@ SQL;
 
                     if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EQUAL) {
                         ++$this->id; // Skip =
-                        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, \Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_CLOSE_BRACKET))) {
+                        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, 
+                                                                                \Exakat\Tasks\T_CLOSE_PARENTHESIS, 
+                                                                                \Exakat\Tasks\T_CLOSE_BRACKET,
+                                                                                ))) {
                             $this->processNext();
                         }
                         $default = $this->popExpression();
@@ -1879,6 +1882,7 @@ SQL;
                                                                             \Exakat\Tasks\T_SEMICOLON, 
                                                                             \Exakat\Tasks\T_CLOSE_BRACKET, 
                                                                             \Exakat\Tasks\T_CLOSE_TAG,
+                                                                            \Exakat\Tasks\T_COLON,
                                                                             ))) {
                         $this->processNext();
                     };
@@ -3084,7 +3088,9 @@ SQL;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
-        } 
+        } else {
+            $parenthese = $this->processFCOA($parenthese);
+        }
 
         return $parenthese;
     }
@@ -3125,6 +3131,7 @@ SQL;
                                                                   \Exakat\Tasks\T_CLOSE_PARENTHESIS, 
                                                                   \Exakat\Tasks\T_CLOSE_BRACKET, 
                                                                   \Exakat\Tasks\T_CLOSE_CURLY, 
+                                                                  \Exakat\Tasks\T_COLON, 
                                                                   \Exakat\Tasks\T_END,
                                                                   ));
             $argumentsFullcode = $functioncall->fullcode;
@@ -3205,9 +3212,11 @@ SQL;
         $condition = $this->popExpression();
         $ternary = $this->addAtom('Ternary');
 
+        $this->nestContext();
         while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COLON)) ) {
             $this->processNext();
         };
+        $this->exitContext();
         $then = $this->popExpression();
         ++$this->id; // Skip colon
 
@@ -3800,7 +3809,11 @@ SQL;
         } elseif ($constant->fullcode === '__FILE__') {
             $constant->noDelimiter = $this->filename;
         } elseif ($constant->fullcode === '__FUNCTION__') {
-            $constant->noDelimiter = $this->currentFunction[count($this->currentFunction) - 1]->code;
+            if (empty($this->currentFunction)) {
+                $constant->noDelimiter = '';
+            } else {
+                $constant->noDelimiter = $this->currentFunction[count($this->currentFunction) - 1]->code;
+            }
         } elseif ($constant->fullcode === '__CLASS__') {
             if (empty($this->currentClassTrait)) {
                 $constant->noDelimiter = '';

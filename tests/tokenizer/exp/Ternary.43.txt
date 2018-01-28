@@ -1,0 +1,63 @@
+Whole
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          7
+          Label : CONDITION
+            5
+            Label : NOT
+              6
+          Label : ELSE
+            11
+          Label : THEN
+            8
+            Label : ARGUMENT
+              9
+              Label : CODE
+                10
+        Label : EXPRESSION
+          7
+          Label : CONDITION
+            5
+            Label : NOT
+              6
+          Label : ELSE
+            12
+            Label : ARGUMENT
+              9
+              Label : CODE
+                13
+          Label : THEN
+            11
+        Label : EXPRESSION
+          7
+          Label : CONDITION
+            5
+            Label : NOT
+              6
+          Label : ELSE
+            12
+            Label : ARGUMENT
+              9
+              Label : CODE
+                16
+                Label : CONCAT
+                  17
+                Label : CONCAT
+                  18
+          Label : THEN
+            8
+            Label : ARGUMENT
+              9
+              Label : CODE
+                14
+                Label : ARGUMENT
+                  15
+                Label : NAME
+                  14
