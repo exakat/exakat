@@ -1875,6 +1875,7 @@ SQL;
 
                     while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, 
                                                                             \Exakat\Tasks\T_CLOSE_PARENTHESIS, 
+                                                                            \Exakat\Tasks\T_CLOSE_CURLY, 
                                                                             \Exakat\Tasks\T_SEMICOLON, 
                                                                             \Exakat\Tasks\T_CLOSE_BRACKET, 
                                                                             \Exakat\Tasks\T_CLOSE_TAG,
@@ -2467,7 +2468,9 @@ SQL;
         }
         do {
             $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_BRACKET, \Exakat\Tasks\T_CLOSE_CURLY))) ;
+        } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_BRACKET, 
+                                                                  \Exakat\Tasks\T_CLOSE_CURLY,
+                                                                  ))) ;
         if (isset($resetContext)) {
             $this->toggleContext(self::CONTEXT_NEW);
         }
@@ -3059,6 +3062,8 @@ SQL;
     }
 
     private function processParenthesis() {
+        $current = $this->id;
+
         $parenthese = $this->addAtom('Parenthesis');
 
         while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
@@ -3079,9 +3084,7 @@ SQL;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
-        } else {
-            $parenthese = $this->processFCOA($parenthese);
-        }
+        } 
 
         return $parenthese;
     }
@@ -3090,9 +3093,11 @@ SQL;
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, 
                                                             \Exakat\Tasks\T_SEMICOLON, 
                                                             \Exakat\Tasks\T_CLOSE_TAG, 
+                                                            \Exakat\Tasks\T_CLOSE_CURLY, 
                                                             \Exakat\Tasks\T_CLOSE_BRACKET, 
                                                             \Exakat\Tasks\T_COLON))) {
             $functioncall = $this->addAtom('Exit');
+
             $functioncall->code       = $this->tokens[$this->id][1];
             $functioncall->fullcode   = $this->tokens[$this->id][1].' ';
             $functioncall->line       = $this->tokens[$this->id][2];
@@ -3114,20 +3119,25 @@ SQL;
             return $functioncall;
         } else {
             $current = $this->id;
-            
-            $functioncall             = $this->processArguments('Exit', array(\Exakat\Tasks\T_SEMICOLON, 
-                                                                              \Exakat\Tasks\T_CLOSE_TAG, 
-                                                                              \Exakat\Tasks\T_END,
-                                                                              ));
+
+            $functioncall = $this->processArguments('Exit', array(\Exakat\Tasks\T_SEMICOLON, 
+                                                                  \Exakat\Tasks\T_CLOSE_TAG, 
+                                                                  \Exakat\Tasks\T_CLOSE_PARENTHESIS, 
+                                                                  \Exakat\Tasks\T_CLOSE_BRACKET, 
+                                                                  \Exakat\Tasks\T_CLOSE_CURLY, 
+                                                                  \Exakat\Tasks\T_END,
+                                                                  ));
+            $argumentsFullcode = $functioncall->fullcode;
+            --$this->id;
+
             $functioncall->code       = $this->tokens[$current][1];
-            $functioncall->fullcode   = $this->tokens[$current][1].' ';
+            $functioncall->fullcode   = $this->tokens[$current][1].' '.$argumentsFullcode;
             $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
             $this->pushExpression($functioncall);
-            --$this->id;
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
-            }
+            } 
 
             return $functioncall;
         }
@@ -4624,7 +4634,10 @@ SQL;
     private function processEcho() {
         $current = $this->id;
         
-        $functioncall = $this->processArguments('Echo', array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
+        $functioncall = $this->processArguments('Echo', array(\Exakat\Tasks\T_SEMICOLON, 
+                                                              \Exakat\Tasks\T_CLOSE_TAG, 
+                                                              \Exakat\Tasks\T_END,
+                                                             ));
         $argumentsFullcode = $functioncall->fullcode;
         
         $functioncall->code       = $this->tokens[$current][1];
@@ -4638,7 +4651,8 @@ SQL;
 
         // processArguments goes too far, up to ;
         --$this->id;
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
