@@ -40,7 +40,7 @@ class UsedViewProperty extends Analyzer {
              ->outIs('MEMBER');
         $this->prepareQuery();
         
-        // Spot variables ? 
+        // Spot variables ?
     }
 }
 

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ShouldUseFunction extends Analyzer {
     public function analyze() {
         // namespace ; function foo() {}
-        // namespace X; foo(); 
+        // namespace X; foo();
         $this->atomIs('Functioncall')
              ->outIs('NAME')
              ->hasNoIn('DEFINITION')

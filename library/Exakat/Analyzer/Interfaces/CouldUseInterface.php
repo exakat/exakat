@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldUseInterface extends Analyzer {
     // interface i {}
-    // class x { function i() {}} 
+    // class x { function i() {}}
     // class x could use interface i
     public function analyze() {
         $query = <<<GREMLIN

@@ -83,11 +83,14 @@ class FindExternalLibraries extends Tasks {
                              );
 
     // classic must be in lower case form.
-    private $classicTests = array('phpunit_framework_testcase'    => self::WHOLE_DIR, // PHPunit
-                                  'codeception\test\unit'         => self::WHOLE_DIR, // Codeception
-                                  'objectbehavior'                => self::WHOLE_DIR, // PHP spec
-                                  'unittestcase'                  => self::WHOLE_DIR, // Simpletest
-                                  'atoum'                         => self::WHOLE_DIR, // Atoum
+    private $classicTests = array('phpunit_framework_testcase'                          => self::WHOLE_DIR, // PHPunit
+                                  'codeception\test\unit'                               => self::WHOLE_DIR, // Codeception
+                                  'objectbehavior'                                      => self::WHOLE_DIR, // PHP spec
+                                  'unittestcase'                                        => self::WHOLE_DIR, // Simpletest
+                                  'atoum'                                               => self::WHOLE_DIR, // Atoum
+                                  'drupal\tests\unittestcase'                           => self::WHOLE_DIR, // Drupal
+                                  'symfony\bundle\frameworkbundle\test\webtestcase'     => self::WHOLE_DIR, // Symfony
+                                  'symfony\bundle\frameworkbundle\test\kerneltestcase'  => self::WHOLE_DIR, // Symfony
                                   // behat, peridot, kahlan, phpt?
                                    );
 

@@ -27,9 +27,9 @@ use Exakat\Analyzer\Analyzer;
 class MakeOneCall extends Analyzer {
     public function analyze() {
         // the second argument must match between calls
-        $functionsArg2 = array('\\str_replace', 
+        $functionsArg2 = array('\\str_replace',
                                '\\str_ireplace',
-                               '\\preg_replace_callback', 
+                               '\\preg_replace_callback',
                                '\\preg_replace',
                               );
         

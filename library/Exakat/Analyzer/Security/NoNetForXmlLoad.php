@@ -36,7 +36,7 @@ class NoNetForXmlLoad extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $dom->loadXml($uri, LIBXML_NOENT) 
+        // $dom->loadXml($uri, LIBXML_NOENT)
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs($methods)
@@ -52,7 +52,7 @@ class NoNetForXmlLoad extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $simplexml_load_string($string, LIBXML_NOENT) 
+        // $simplexml_load_string($string, LIBXML_NOENT)
         $this->atomFunctionIs(array('\\simplexml_load_string', '\\simplexml_load_file'))
              ->outWithRank('ARGUMENT', 2)
              ->atomIsNot(self::$CONTAINERS)
@@ -69,7 +69,7 @@ class NoNetForXmlLoad extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $simplexml_load_string($string, LIBXML_NOENT) 
+        // $simplexml_load_string($string, LIBXML_NOENT)
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs('Newcall')

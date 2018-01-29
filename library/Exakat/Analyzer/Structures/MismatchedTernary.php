@@ -26,15 +26,15 @@ use Exakat\Analyzer\Analyzer;
 
 class MismatchedTernary extends Analyzer {
     public function analyze() {
-         $excludedAtoms = array('Array', 
-                                'Functioncall', 
-                                'Member', 
-                                'Methodcall', 
+         $excludedAtoms = array('Array',
+                                'Functioncall',
+                                'Member',
+                                'Methodcall',
                                 'Staticmethodcall',
                                 'Staticproperty',
                                 'Ternary',
-                                'Void', 
-                                'Variable', 
+                                'Void',
+                                'Variable',
                               );
         
         $this->atomIs('Ternary')

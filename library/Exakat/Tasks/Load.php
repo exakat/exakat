@@ -192,7 +192,7 @@ class Load extends Tasks {
     static public $PROP_BINARYSTRING= array('String', 'Heredoc');
     static public $PROP_ROOT        = array('File');
 
-// Refactoring under way 
+// Refactoring under way
 //    static public $PROP_OPTIONS = array();
 
     static public $TOKENS = array(
@@ -303,7 +303,7 @@ class Load extends Tasks {
                             \Exakat\Tasks\T_ISSET                    => 'processIsset',
                             \Exakat\Tasks\T_EMPTY                    => 'processIsset',
                             \Exakat\Tasks\T_LIST                     => 'processArray', // Can't move to processEcho, because of omissions
-                            \Exakat\Tasks\T_EVAL                     => 'processIsset', 
+                            \Exakat\Tasks\T_EVAL                     => 'processIsset',
                             \Exakat\Tasks\T_ECHO                     => 'processEcho',
                             \Exakat\Tasks\T_EXIT                     => 'processExit',
                             \Exakat\Tasks\T_DOUBLE_ARROW             => 'processKeyvalue',
@@ -1038,7 +1038,7 @@ SQL;
              $this->isContext(self::CONTEXT_INTERFACE)) &&
              
              !$this->isContext(self::CONTEXT_FUNCTION)) {
-            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), 
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]),
                          array('__construct',
                                '__destruct',
                                '__call',
@@ -1816,7 +1816,7 @@ SQL;
         $this->nestContext();
         $fullcode = array();
 
-        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, 
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS,
                                                             \Exakat\Tasks\T_CLOSE_BRACKET,
                                                             ))) {
                                                             
@@ -1863,8 +1863,8 @@ SQL;
 
                     if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EQUAL) {
                         ++$this->id; // Skip =
-                        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, 
-                                                                                \Exakat\Tasks\T_CLOSE_PARENTHESIS, 
+                        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA,
+                                                                                \Exakat\Tasks\T_CLOSE_PARENTHESIS,
                                                                                 \Exakat\Tasks\T_CLOSE_BRACKET,
                                                                                 ))) {
                             $this->processNext();
@@ -1879,11 +1879,11 @@ SQL;
                     $default  = 0;
                     $nullable = 0;
 
-                    while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, 
-                                                                            \Exakat\Tasks\T_CLOSE_PARENTHESIS, 
-                                                                            \Exakat\Tasks\T_CLOSE_CURLY, 
-                                                                            \Exakat\Tasks\T_SEMICOLON, 
-                                                                            \Exakat\Tasks\T_CLOSE_BRACKET, 
+                    while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA,
+                                                                            \Exakat\Tasks\T_CLOSE_PARENTHESIS,
+                                                                            \Exakat\Tasks\T_CLOSE_CURLY,
+                                                                            \Exakat\Tasks\T_SEMICOLON,
+                                                                            \Exakat\Tasks\T_CLOSE_BRACKET,
                                                                             \Exakat\Tasks\T_CLOSE_TAG,
                                                                             \Exakat\Tasks\T_COLON,
                                                                             ))) {
@@ -2130,9 +2130,9 @@ SQL;
         if ($this->isContext(self::CONTEXT_NEW)) {
             $atom = 'Newcall';
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) {
-            if (strtolower($name->code) === '\\define') { 
+            if (strtolower($name->code) === '\\define') {
                 $atom = 'Defineconstant';
-            } elseif (strtolower($name->code) === 'define') { 
+            } elseif (strtolower($name->code) === 'define') {
                 $atom = 'Defineconstant';
             } elseif ($name->fullnspath === '\\list') {
                 $atom = 'List';
@@ -2347,7 +2347,7 @@ SQL;
                 return $this->processStaticVariable();
             }
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
-            // new static; 
+            // new static;
             $name = $this->addAtom('Newcall');
             $name->code       = $this->tokens[$this->id][1];
             $name->fullcode   = $this->tokens[$this->id][1];
@@ -2475,7 +2475,7 @@ SQL;
         }
         do {
             $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_BRACKET, 
+        } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_BRACKET,
                                                                   \Exakat\Tasks\T_CLOSE_CURLY,
                                                                   ))) ;
         if (isset($resetContext)) {
@@ -3099,11 +3099,11 @@ SQL;
     }
 
     private function processExit() {
-        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, 
-                                                            \Exakat\Tasks\T_SEMICOLON, 
-                                                            \Exakat\Tasks\T_CLOSE_TAG, 
-                                                            \Exakat\Tasks\T_CLOSE_CURLY, 
-                                                            \Exakat\Tasks\T_CLOSE_BRACKET, 
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS,
+                                                            \Exakat\Tasks\T_SEMICOLON,
+                                                            \Exakat\Tasks\T_CLOSE_TAG,
+                                                            \Exakat\Tasks\T_CLOSE_CURLY,
+                                                            \Exakat\Tasks\T_CLOSE_BRACKET,
                                                             \Exakat\Tasks\T_COLON))) {
             $functioncall = $this->addAtom('Exit');
 
@@ -3135,12 +3135,12 @@ SQL;
                 ++$this->id;
             }
         
-            $functioncall = $this->processArguments('Exit', array(\Exakat\Tasks\T_SEMICOLON, 
-                                                                  \Exakat\Tasks\T_CLOSE_TAG, 
-                                                                  \Exakat\Tasks\T_CLOSE_PARENTHESIS, 
-                                                                  \Exakat\Tasks\T_CLOSE_BRACKET, 
-                                                                  \Exakat\Tasks\T_CLOSE_CURLY, 
-                                                                  \Exakat\Tasks\T_COLON, 
+            $functioncall = $this->processArguments('Exit', array(\Exakat\Tasks\T_SEMICOLON,
+                                                                  \Exakat\Tasks\T_CLOSE_TAG,
+                                                                  \Exakat\Tasks\T_CLOSE_PARENTHESIS,
+                                                                  \Exakat\Tasks\T_CLOSE_BRACKET,
+                                                                  \Exakat\Tasks\T_CLOSE_CURLY,
+                                                                  \Exakat\Tasks\T_COLON,
                                                                   \Exakat\Tasks\T_END,
                                                                   ));
             $argumentsFullcode = $functioncall->fullcode;
@@ -3157,7 +3157,7 @@ SQL;
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
-            } 
+            }
 
             return $functioncall;
         }
@@ -4660,8 +4660,8 @@ SQL;
     private function processEcho() {
         $current = $this->id;
         
-        $functioncall = $this->processArguments('Echo', array(\Exakat\Tasks\T_SEMICOLON, 
-                                                              \Exakat\Tasks\T_CLOSE_TAG, 
+        $functioncall = $this->processArguments('Echo', array(\Exakat\Tasks\T_SEMICOLON,
+                                                              \Exakat\Tasks\T_CLOSE_TAG,
                                                               \Exakat\Tasks\T_END,
                                                              ));
         $argumentsFullcode = $functioncall->fullcode;
@@ -4860,7 +4860,7 @@ SQL;
 
         if ($argumentsId->count == 3) {
             $this->uses['define'][mb_strtolower($fullnspath)] = $argumentsId;
-        } 
+        }
     }
 
     private function saveFiles() {
