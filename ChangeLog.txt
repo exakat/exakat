@@ -1,4 +1,4 @@
-Version 1.0.11 (Wood Dragon of Horn, coming up)
+Version 1.1.3 (The fairy Su'e, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,51 @@ Version 1.0.11 (Wood Dragon of Horn, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.1.2 (Jade Rabbit Spirit, 2018-01-29)
++ Architecture
+    + Upgraded docs to tinkergraph 3.2.7
++ Analyzer
+    + New analyzer : Report missing included files
+    + New analyzer : ZF3 : No Echo Outside a View.
+    + New analyzer : Local Global variable : report variable that looks global but are not
+    + Upgraded analyzer : Directive names are check with case sensitive analysis
+    + Checked unit tests : 2687 / 2693 test pass (99% pass). 
++ Tokenizer
+    + Magic Constant hold their actual value
+    + Fixed Fullnspath for constants (case sensitive)
+    + Fixed edge case with exit and die
+    + Fixed edge case with exit and die and -1
+
+Version 1.1.1 (Wood Xie of Dipper, 2018-01-22)
++ Architecture
+    + Fixed path when calling exakat from outside its install folder
+    + First analysis for Melis Framework
+    + Optimized dictionary collection
++ Report
+    + Ambassador : upgraded graph for class sizes
++ Analyzer
+    + New analyzer : report case problems with includes
+    + New analyzer : Melis framework
+    + New analyzer : inventory of view properties for Zend Framework
+    + New analyzer : report view files for Zend Framework
+    + Upgraded analyzer : + is accepted as regex delimiter
+    + Upgraded analyzer : same condition searches inside blocks
+    + Checked unit tests : 2665 / 2671 test pass (99% pass). 
++ Tokenizer
+    + Magic constants __DIR__ and __FILE__ get their actual value in noDelimiter
+    + Created Eval atom
+    + Removed 'Name' token for echo, print, die, exit.
+    + Upgraded handling of constant names inside strings
+    + Removed a bug when storing dictionary.
+
+Version 1.1.0 (Wood Dragon of Horn, 2018-01-15)
++ Architecture
+    + Replaced 'code' property with a dictionary
++ Tokenizer
+    + Introduced 'Magicmethod' for Magic methods in class
+    + Fixed a bug when ' is in file path
+    + Fixed a bug when several raw HTML are in a PHP script.
  
 Version 1.0.11 (Wood Dragon of Well, 2018-01-08)
 + Architecture
