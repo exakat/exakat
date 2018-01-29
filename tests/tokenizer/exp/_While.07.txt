@@ -1,111 +1,111 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            -
+            7
             Label : LEFT
-              +
-              Label : LEFT
-                1
-              Label : RIGHT
-                +
-                Label : LEFT
-                  2
-                Label : RIGHT
-                  !
-                  Label : NOT
-                    3
+              6
             Label : RIGHT
-              [
-              Label : INDEX
-                $s
-              Label : VARIABLE
-                $r
-          Label : THEN
-            {}
-            Label : EXPRESSION
-              Void
-        Label : EXPRESSION
-          while
-          Label : BLOCK
-            {}
-            Label : EXPRESSION
-              Void
-          Label : CONDITION
-            1
-        Label : EXPRESSION
-          if
-          Label : CONDITION
-            -
-            Label : LEFT
-              +
+              7
               Label : LEFT
-                1
+                8
               Label : RIGHT
-                +
+                11
                 Label : LEFT
-                  2
-                Label : RIGHT
-                  ~
+                  9
                   Label : NOT
-                    3
-            Label : RIGHT
-              [
-              Label : INDEX
-                $s
-              Label : VARIABLE
-                $r
-          Label : THEN
-            {}
-            Label : EXPRESSION
-              Void
-        Label : EXPRESSION
-          while
-          Label : BLOCK
-            {}
-            Label : EXPRESSION
-              Void
-          Label : CONDITION
-            1
-        Label : EXPRESSION
-          if
-          Label : CONDITION
-            -
-            Label : LEFT
-              +
-              Label : LEFT
-                1
-              Label : RIGHT
-                +
-                Label : LEFT
-                  2
+                    10
                 Label : RIGHT
-                  @
+                  13
+                  Label : INDEX
+                    14
+                  Label : VARIABLE
+                    12
+          Label : THEN
+            15
+            Label : EXPRESSION
+              16
+        Label : EXPRESSION
+          18
+          Label : BLOCK
+            15
+            Label : EXPRESSION
+              16
+          Label : CONDITION
+            6
+        Label : EXPRESSION
+          5
+          Label : CONDITION
+            7
+            Label : LEFT
+              6
+            Label : RIGHT
+              7
+              Label : LEFT
+                8
+              Label : RIGHT
+                11
+                Label : LEFT
+                  19
+                  Label : NOT
+                    10
+                Label : RIGHT
+                  13
+                  Label : INDEX
+                    14
+                  Label : VARIABLE
+                    12
+          Label : THEN
+            15
+            Label : EXPRESSION
+              16
+        Label : EXPRESSION
+          18
+          Label : BLOCK
+            15
+            Label : EXPRESSION
+              16
+          Label : CONDITION
+            6
+        Label : EXPRESSION
+          5
+          Label : CONDITION
+            7
+            Label : LEFT
+              6
+            Label : RIGHT
+              7
+              Label : LEFT
+                8
+              Label : RIGHT
+                11
+                Label : LEFT
+                  20
                   Label : AT
-                    3
-            Label : RIGHT
-              [
-              Label : INDEX
-                $s
-              Label : VARIABLE
-                $r
+                    10
+                Label : RIGHT
+                  13
+                  Label : INDEX
+                    14
+                  Label : VARIABLE
+                    12
           Label : THEN
-            {}
+            15
             Label : EXPRESSION
-              Void
+              16
         Label : EXPRESSION
-          while
+          18
           Label : BLOCK
-            {}
+            15
             Label : EXPRESSION
-              Void
+              16
           Label : CONDITION
-            1
+            6

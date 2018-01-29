@@ -1,47 +1,43 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          E
+          8
         Label : EXPRESSION
-          if
+          10
           Label : CONDITION
-            isset
+            11
             Label : ARGUMENT
-              [
+              13
               Label : INDEX
-                'F'
+                14
               Label : VARIABLE
-                $this
-            Label : NAME
-              isset
+                12
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              echo
+              16
               Label : ARGUMENT
-                .
+                19
                 Label : CONCAT
-                  'G'
+                  17
                 Label : CONCAT
-                  H
+                  20
                   Label : ARGUMENT
-                    [
+                    13
                     Label : INDEX
-                      'F'
+                      14
                     Label : VARIABLE
-                      $this
+                      12
                   Label : NAME
-                    H
-              Label : NAME
-                echo
+                    20
             Label : EXPRESSION
-              use
+              5
               Label : USE
-                B\C\D
+                6

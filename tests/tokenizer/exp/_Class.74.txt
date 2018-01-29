@@ -1,663 +1,663 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            x2
+            6
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $abstract
+                8
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $and
+                12
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $array
+                14
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $as
+                16
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $break
+                18
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $case
+                20
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $catch
+                22
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $class
+                24
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $clone
+                25
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $const
+                27
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $continue
+                29
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $declare
+                31
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $default
+                33
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $die
+                35
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $do
+                37
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $echo
+                39
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $else
+                41
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $elseif
+                43
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $empty
+                45
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $enddeclare
+                47
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $endfor
+                49
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $endforeach
+                51
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $endif
+                53
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $endswitch
+                55
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $endwhile
+                57
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $eval
+                59
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $exit
+                61
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $extends
+                63
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $final
+                65
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $finally
+                67
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $for
+                69
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $foreach
+                71
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $function
+                73
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $global
+                75
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $goto
+                77
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $if
+                79
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $implements
+                81
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $include
+                83
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $include_once
+                85
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $instanceof
+                87
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $insteadof
+                89
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $interface
+                91
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $isset
+                93
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $list
+                95
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $namespace
+                97
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $new
+                99
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $or
+                101
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $print
+                103
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $private
+                105
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $protected
+                107
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $public
+                109
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $require
+                110
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $require_once
+                112
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $return
+                114
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $static
+                116
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $switch
+                118
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $throw
+                120
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $trait
+                122
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $try
+                124
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $unset
+                126
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $use
+                128
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $var
+                130
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $while
+                132
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $xor
+                134
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $yield
+                136
               Label : RIGHT
-                3
+                11
             Label : PUBLIC
-              public
+              7

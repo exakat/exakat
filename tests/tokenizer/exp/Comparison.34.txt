@@ -1,21 +1,21 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          >
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            new
+            7
             Label : NEW
-              D
+              8
               Label : ARGUMENT
-                Void
+                10
               Label : NAME
-                D
+                8

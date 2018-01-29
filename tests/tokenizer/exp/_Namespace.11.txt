@@ -1,37 +1,37 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
             Label : EXPRESSION
-              use
+              9
               Label : USE
-                F\G\H\I
+                10
             Label : EXPRESSION
-              class
+              12
               Label : EXTENDS
-                K
+                15
               Label : IMPLEMENTS
-                L
+                17
               Label : METHOD
-                M
+                19
                 Label : ARGUMENT
-                  Void
+                  21
                 Label : BLOCK
-                  {}
+                  23
                   Label : EXPRESSION
-                    Void
+                    21
                 Label : NAME
-                  M
+                  19
               Label : NAME
-                J
+                13
           Label : NAME
-            B\C\D\E
+            5

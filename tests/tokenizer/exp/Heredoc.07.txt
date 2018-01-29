@@ -1,50 +1,45 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <<<HEREDOC
-
+            6
             Label : CONCAT
-              a
+              8
             Label : CONCAT
-              [
+              10
               Label : INDEX
-                1
+                11
               Label : VARIABLE
-                $b
+                9
             Label : CONCAT
-              c
+              12
             Label : CONCAT
-              [
+              10
               Label : INDEX
-                4
+                15
               Label : VARIABLE
-                [
+                10
                 Label : INDEX
-                  2
+                  14
                 Label : VARIABLE
-                  $d
+                  13
             Label : CONCAT
-              e
+              16
             Label : CONCAT
-              ->
+              19
               Label : MEMBER
-                h
+                18
               Label : OBJECT
-                $f
+                17
             Label : CONCAT
-              g
-
-          Label : NAME
-            echo
+              20
     Label : EXPRESSION
-      
-
+      21

@@ -1,19 +1,19 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            t
+            8
           Label : IMPLEMENTS
-            s
+            7
           Label : IMPLEMENTS
-            u
+            9
           Label : NAME
-            x
+            6

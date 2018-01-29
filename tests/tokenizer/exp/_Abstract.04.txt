@@ -1,51 +1,51 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          6
           Label : ABSTRACT
-            abstract
+            5
           Label : METHOD
-            a
+            9
             Label : ABSTRACT
-              abstract
+              5
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              Void
+              10
             Label : NAME
-              a
+              9
             Label : PUBLIC
-              public
+              8
           Label : METHOD
-            b
+            13
             Label : ABSTRACT
-              abstract
+              5
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              Void
+              10
             Label : NAME
-              b
+              13
             Label : PROTECTED
-              protected
+              12
           Label : METHOD
-            d
+            15
             Label : ABSTRACT
-              abstract
+              5
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              Void
+              10
             Label : NAME
-              d
+              15
             Label : STATIC
-              static
+              14
           Label : NAME
-            x
+            7

@@ -1,61 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case 1 :  /**/  
+              8
               Label : CASE
-                1
+                9
               Label : CODE
-                ;
-                Label : EXPRESSION
-                  $i
-                Label : EXPRESSION
-                  break
-                  Label : BREAK
-                    Void
-            Label : EXPRESSION
-              case 2 :  /**/  
-              Label : CASE
-                2
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  $j
-                Label : EXPRESSION
-                  break
-                  Label : BREAK
-                    Void
-            Label : EXPRESSION
-              case 3 :  /**/  
-              Label : CASE
                 3
-              Label : CODE
-                ;
                 Label : EXPRESSION
-                  $k
+                  10
                 Label : EXPRESSION
-                  break
+                  11
                   Label : BREAK
-                    Void
+                    12
             Label : EXPRESSION
-              default
+              14
+              Label : CASE
+                15
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  $l
+                  16
                 Label : EXPRESSION
-                  break
+                  11
                   Label : BREAK
-                    Void
+                    12
+            Label : EXPRESSION
+              17
+              Label : CASE
+                18
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  19
+                Label : EXPRESSION
+                  11
+                  Label : BREAK
+                    12
+            Label : EXPRESSION
+              20
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  21
+                Label : EXPRESSION
+                  11
+                  Label : BREAK
+                    12
           Label : NAME
-            $a
+            6

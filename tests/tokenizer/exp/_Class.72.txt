@@ -1,79 +1,79 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            b
+            7
           Label : NAME
-            a
+            6
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            \b2
+            9
           Label : NAME
-            a2
+            8
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            c3
+            12
           Label : IMPLEMENTS
-            b3
+            11
           Label : NAME
-            a3
+            10
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            \c3
+            15
           Label : IMPLEMENTS
-            \b3
+            14
           Label : NAME
-            a23
+            13
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            c3\d33
+            17
           Label : IMPLEMENTS
-            \b3
+            14
           Label : NAME
-            a24
+            16
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            c4
+            20
           Label : IMPLEMENTS
-            b4
+            19
           Label : IMPLEMENTS
-            d4
+            21
           Label : NAME
-            a4
+            18
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            c4
+            20
           Label : IMPLEMENTS
-            b4
+            19
           Label : IMPLEMENTS
-            d4
+            21
           Label : IMPLEMENTS
-            e5
+            23
           Label : NAME
-            a5
+            22
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            \cc\c4
+            25
           Label : IMPLEMENTS
-            b4
+            19
           Label : IMPLEMENTS
-            \d4
+            26
           Label : IMPLEMENTS
-            e5\f5
+            27
           Label : NAME
-            a6
+            24

@@ -1,69 +1,69 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
             Label : EXPRESSION
-              use
+              9
               Label : USE
-                D\E
+                10
             Label : EXPRESSION
-              class
+              12
               Label : NAME
-                F
+                13
               Label : METHOD
-                G
+                16
                 Label : ARGUMENT
-                  Void
+                  18
                 Label : BLOCK
-                  {}
+                  20
                   Label : EXPRESSION
-                    return
+                    21
                     Label : RETURN
-                      ->
+                      25
                       Label : MEMBER
-                        H
+                        23
                       Label : OBJECT
-                        $a
+                        22
                 Label : NAME
-                  G
+                  16
                 Label : PUBLIC
-                  public
+                  15
               Label : METHOD
-                I
+                26
                 Label : ARGUMENT
-                  Void
+                  18
                 Label : BLOCK
-                  {}
+                  20
                   Label : EXPRESSION
-                    ->
+                    25
                     Label : METHOD
-                      J
+                      29
                       Label : ARGUMENT
-                        Void
+                        18
                       Label : NAME
-                        J
+                        29
                     Label : OBJECT
-                      $b
+                      28
                   Label : EXPRESSION
-                    return
+                    21
                     Label : RETURN
-                      ->
+                      25
                       Label : MEMBER
-                        K
+                        32
                       Label : OBJECT
-                        $c
+                        31
                 Label : NAME
-                  I
+                  26
                 Label : PUBLIC
-                  public
+                  15
           Label : NAME
-            B\C
+            5

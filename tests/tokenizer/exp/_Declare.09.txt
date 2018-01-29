@@ -1,31 +1,31 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          declare
+          5
           Label : ARGUMENT
-            =
+            7
             Label : LEFT
-              ticks
+              6
             Label : RIGHT
-              2
+              8
           Label : ARGUMENT
-            =
+            7
             Label : LEFT
-              encoding
+              9
             Label : RIGHT
-              'ISO-8859-1'
+              10
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              =
+              7
               Label : LEFT
-                $x
+                12
               Label : RIGHT
-                1
+                13

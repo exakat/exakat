@@ -1,159 +1,153 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          eval
+          5
           Label : ARGUMENT
-            (
+            6
             Label : CODE
-              $
+              7
               Label : NAME
-                $a
+                8
                 Label : ARGUMENT
-                  'B'
+                  9
                 Label : NAME
-                  $a
-          Label : NAME
-            eval
+                  8
         Label : EXPRESSION
-          =
+          13
           Label : LEFT
-            list
+            11
             Label : ARGUMENT
-              $
+              7
               Label : NAME
-                $a2
+                12
             Label : NAME
-              list
+              11
           Label : RIGHT
-            $d
+            14
         Label : EXPRESSION
-          die
+          15
           Label : ARGUMENT
-            (
+            6
             Label : CODE
-              $
-              Label : NAME
-                $a3
-                Label : ARGUMENT
-                  'B3'
-                Label : NAME
-                  $a3
-          Label : NAME
-            die
-        Label : EXPRESSION
-          empty
-          Label : ARGUMENT
-            (
-            Label : CODE
-              $
-              Label : NAME
-                $a4
-                Label : ARGUMENT
-                  'B4'
-                Label : NAME
-                  $a4
-          Label : NAME
-            empty
-        Label : EXPRESSION
-          C
-          Label : ARGUMENT
-            (
-            Label : CODE
-              $
-              Label : NAME
-                $a
-                Label : ARGUMENT
-                  'B'
-                Label : NAME
-                  $a
-          Label : NAME
-            C
-        Label : EXPRESSION
-          eval
-          Label : ARGUMENT
-            (
-            Label : CODE
-              $a
-          Label : NAME
-            eval
-        Label : EXPRESSION
-          $b
-          Label : ARGUMENT
-            0
-          Label : NAME
-            $b
-        Label : EXPRESSION
-          ->
-          Label : METHOD
-            eval
-            Label : ARGUMENT
-              (
+              6
               Label : CODE
-                $
+                7
                 Label : NAME
-                  $a
+                  16
                   Label : ARGUMENT
-                    'B'
+                    17
                   Label : NAME
-                    $a
-            Label : NAME
-              eval
-          Label : OBJECT
-            $e
+                    16
         Label : EXPRESSION
-          ->
-          Label : METHOD
-            C
-            Label : ARGUMENT
-              (
-              Label : CODE
-                $
+          19
+          Label : ARGUMENT
+            6
+            Label : CODE
+              7
+              Label : NAME
+                20
+                Label : ARGUMENT
+                  21
                 Label : NAME
-                  $a
-                  Label : ARGUMENT
-                    'B'
-                  Label : NAME
-                    $a
-            Label : NAME
-              C
-          Label : OBJECT
-            $f
+                  20
         Label : EXPRESSION
-          ->
+          23
+          Label : ARGUMENT
+            6
+            Label : CODE
+              7
+              Label : NAME
+                8
+                Label : ARGUMENT
+                  9
+                Label : NAME
+                  8
+          Label : NAME
+            23
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
+            Label : CODE
+              8
+        Label : EXPRESSION
+          25
+          Label : ARGUMENT
+            26
+          Label : NAME
+            25
+        Label : EXPRESSION
+          28
           Label : METHOD
-            eval
+            5
             Label : ARGUMENT
-              (
+              6
               Label : CODE
-                $a
+                7
+                Label : NAME
+                  8
+                  Label : ARGUMENT
+                    9
+                  Label : NAME
+                    8
             Label : NAME
-              eval
+              5
           Label : OBJECT
-            $g
+            27
         Label : EXPRESSION
-          ->
+          28
           Label : METHOD
-            $b
+            23
             Label : ARGUMENT
-              0
+              6
+              Label : CODE
+                7
+                Label : NAME
+                  8
+                  Label : ARGUMENT
+                    9
+                  Label : NAME
+                    8
             Label : NAME
-              $b
+              23
           Label : OBJECT
-            $h
+            29
         Label : EXPRESSION
-          ->
+          28
           Label : METHOD
-            list
+            5
             Label : ARGUMENT
-              $a
+              6
+              Label : CODE
+                8
             Label : NAME
-              list
+              5
           Label : OBJECT
-            $g
+            30
+        Label : EXPRESSION
+          28
+          Label : METHOD
+            25
+            Label : ARGUMENT
+              26
+            Label : NAME
+              25
+          Label : OBJECT
+            31
+        Label : EXPRESSION
+          28
+          Label : METHOD
+            11
+            Label : ARGUMENT
+              8
+            Label : NAME
+              11
+          Label : OBJECT
+            30

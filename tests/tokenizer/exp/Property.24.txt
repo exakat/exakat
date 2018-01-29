@@ -1,126 +1,127 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : DEFINITION
-            b
+            6
           Label : DEFINITION
-            b
+            6
           Label : DEFINITION
-            b
+            6
             Label : ARGUMENT
-              Void
+              9
             Label : NAME
-              b
+              6
           Label : DEFINITION
-            \b
+            18
           Label : DEFINITION
-            \b
+            18
             Label : ARGUMENT
-              Void
+              9
             Label : NAME
-              \b
+              18
           Label : DEFINITION
-            \b
+            18
           Label : METHOD
-            p
+            8
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                return
+                12
                 Label : RETURN
-                  3
+                  13
             Label : NAME
-              p
+              8
             Label : PUBLIC
-              public
+              7
           Label : NAME
-            b
+            6
         Label : EXPRESSION
-          ==
+          17
           Label : LEFT
-            ->
+            16
             Label : METHOD
-              p
+              8
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                p
+                8
             Label : OBJECT
-              (
+              14
               Label : CODE
-                new
+                15
                 Label : NEW
-                  b
+                  6
           Label : RIGHT
-            3
+            13
         Label : EXPRESSION
-          ==
+          17
           Label : LEFT
-            ->
+            16
             Label : METHOD
-              p
+              8
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                p
+                8
             Label : OBJECT
-              (
+              14
               Label : CODE
-                new
+                15
                 Label : NEW
-                  b
+                  6
                   Label : ARGUMENT
-                    Void
+                    9
                   Label : NAME
-                    b
+                    6
           Label : RIGHT
-            3
+            13
         Label : EXPRESSION
-          ==
+          17
           Label : LEFT
-            ->
+            16
             Label : METHOD
-              p
+              8
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                p
+                8
             Label : OBJECT
-              (
+              14
               Label : CODE
-                new
+                15
                 Label : NEW
-                  \b
+                  18
                   Label : ARGUMENT
-                    Void
+                    9
                   Label : NAME
-                    \b
+                    18
           Label : RIGHT
-            3
+            13
         Label : EXPRESSION
-          ==
+          17
           Label : LEFT
-            ->
+            16
             Label : METHOD
-              p
+              8
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                p
+                8
             Label : OBJECT
-              (
+              14
               Label : CODE
-                new
+                15
                 Label : NEW
-                  \b
+                  18
           Label : RIGHT
-            3
+            13

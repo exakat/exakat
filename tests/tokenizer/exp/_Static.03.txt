@@ -1,37 +1,37 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            a
+            6
           Label : PPP
-            public
+            8
             Label : PPP
-              $b
+              9
             Label : PUBLIC
-              public
+              8
             Label : STATIC
-              static
+              7
           Label : PPP
-            private
+            11
             Label : PPP
-              $d
+              12
             Label : PRIVATE
-              private
+              11
             Label : STATIC
-              static
+              7
           Label : PPP
-            protected
+            14
             Label : PPP
-              $c
+              15
             Label : PROTECTED
-              protected
+              14
             Label : STATIC
-              static
+              7

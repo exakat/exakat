@@ -1,45 +1,45 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            ->
+            8
             Label : MEMBER
-              x
+              7
             Label : OBJECT
-              $this
+              6
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            ::
+            11
             Label : CLASS
-              a
+              9
             Label : CONSTANT
-              y
+              10
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            ::
+            11
             Label : CLASS
-              b
+              12
             Label : MEMBER
-              $y
+              13
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            f
+            14
             Label : ARGUMENT
-              $x
+              15
             Label : ARGUMENT
-              $y
+              13
             Label : ARGUMENT
-              $z
+              16
             Label : NAME
-              f
+              14

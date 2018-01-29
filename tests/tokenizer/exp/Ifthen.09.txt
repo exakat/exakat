@@ -1,61 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            1
+            6
           Label : ELSE
-            ;
+            3
             Label : EXPRESSION
-              if
+              5
               Label : CONDITION
-                2
+                9
               Label : ELSE
-                ;
+                3
                 Label : EXPRESSION
-                  if
+                  5
                   Label : CONDITION
-                    3
+                    11
                   Label : ELSE
-                    ;
+                    3
                     Label : EXPRESSION
-                      if
+                      5
                       Label : CONDITION
-                        4
+                        13
                       Label : ELSE
-                        ;
+                        3
                         Label : EXPRESSION
-                          if
+                          5
                           Label : CONDITION
-                            5
+                            15
                           Label : ELSE
-                            {}
+                            7
                             Label : EXPRESSION
-                              $f
+                              17
                           Label : THEN
-                            {}
+                            7
                             Label : EXPRESSION
-                              $e
+                              16
                       Label : THEN
-                        {}
+                        7
                         Label : EXPRESSION
-                          $d
+                          14
                   Label : THEN
-                    {}
+                    7
                     Label : EXPRESSION
-                      $c
+                      12
               Label : THEN
-                {}
+                7
                 Label : EXPRESSION
-                  $b
+                  10
           Label : THEN
-            {}
+            7
             Label : EXPRESSION
-              $a
+              8

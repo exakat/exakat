@@ -1,73 +1,73 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            function
+            8
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : STATIC
-              static
+              7
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            function
+            8
             Label : ARGUMENT
-              $x
+              5
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : STATIC
-              static
+              7
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            function
+            8
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : ARGUMENT
-              $g
+              12
             Label : ARGUMENT
-              $f
+              13
             Label : STATIC
-              static
+              7
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            function
+            8
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : ARGUMENT
-              $g
+              12
               Label : DEFAULT
-                4
+                14
             Label : ARGUMENT
-              $f
+              13
               Label : DEFAULT
-                3
+                15
             Label : STATIC
-              static
+              7

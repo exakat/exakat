@@ -1,29 +1,33 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          :
+          7
+          Label : DEFINITION
+            8
+            Label : GOTO
+              5
           Label : GOTOLABEL
-            cleanupCookie
+            5
         Label : EXPRESSION
-          GOTO
+          8
           Label : GOTO
-            cleanupCookie
+            5
         Label : EXPRESSION
-          switch
+          10
           Label : CASES
-             /**/ 
+            12
             Label : EXPRESSION
-              case 1 :  /**/  
+              13
               Label : CASE
-                1
+                14
               Label : CODE
-                ;
+                3
           Label : NAME
-            $x
+            11

@@ -1,89 +1,89 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          try
+          5
           Label : BLOCK
-            {}
+            6
             Label : EXPRESSION
-              =
+              8
               Label : LEFT
-                $a
+                7
               Label : RIGHT
-                [
+                10
                 Label : INDEX
-                  'B'
+                  11
                 Label : VARIABLE
-                  $b
+                  9
           Label : CATCH
-            catch
+            13
             Label : BLOCK
-              {}
+              6
               Label : EXPRESSION
-                return
+                17
                 Label : RETURN
-                  Void
+                  18
             Label : CLASS
-              D
+              14
             Label : VARIABLE
-              $c
+              16
         Label : EXPRESSION
-          ->
+          34
           Label : METHOD
-            G
+            23
             Label : NAME
-              G
+              23
             Label : ARGUMENT
-              'H'
+              25
             Label : ARGUMENT
-              array
+              27
               Label : ARGUMENT
-                =>
+                30
                 Label : INDEX
-                  'J'
+                  28
                 Label : VALUE
-                  .
+                  35
                   Label : CONCAT
-                    ->
+                    34
                     Label : METHOD
-                      L
+                      32
                       Label : ARGUMENT
-                        Void
+                        18
                       Label : NAME
-                        L
+                        32
                     Label : OBJECT
-                      $e
+                      31
                   Label : CONCAT
-                    'M'
+                    36
                   Label : CONCAT
-                    ->
+                    34
                     Label : METHOD
-                      O
+                      39
                       Label : ARGUMENT
-                        'P'
+                        41
                       Label : NAME
-                        O
+                        39
                     Label : OBJECT
-                      $f
+                      38
                   Label : CONCAT
-                    ->
+                    34
                     Label : METHOD
-                      R
+                      44
                       Label : ARGUMENT
-                        'S'
+                        46
                       Label : NAME
-                        R
+                        44
                     Label : OBJECT
-                      $g
+                      43
           Label : OBJECT
-            [
+            10
             Label : INDEX
-              'E'
+              21
             Label : VARIABLE
-              $d
+              20

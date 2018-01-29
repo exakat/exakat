@@ -1,79 +1,79 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          x
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              for
+              9
               Label : BLOCK
-                {}
+                8
                 Label : EXPRESSION
-                  ++
+                  15
                   Label : POSTPLUSPLUS
-                    $j
+                    16
               Label : FINAL
-                ;
+                3
                 Label : EXPRESSION
-                  <
+                  13
                   Label : LEFT
-                    $i
+                    10
                   Label : RIGHT
-                    2
+                    14
               Label : INCREMENT
-                ;
+                3
                 Label : EXPRESSION
-                  ++
+                  15
                   Label : POSTPLUSPLUS
-                    $i
+                    10
               Label : INIT
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  11
                   Label : LEFT
-                    $i
+                    10
                   Label : RIGHT
-                    0
+                    12
             Label : EXPRESSION
-              for
+              9
               Label : BLOCK
-                {}
+                8
                 Label : EXPRESSION
-                  ++
+                  15
                   Label : POSTPLUSPLUS
-                    $j
+                    16
               Label : FINAL
-                ;
+                3
                 Label : EXPRESSION
-                  <
+                  13
                   Label : LEFT
-                    $a
+                    17
                   Label : RIGHT
-                    2
+                    14
               Label : INCREMENT
-                ;
+                3
                 Label : EXPRESSION
-                  ++
+                  15
                   Label : POSTPLUSPLUS
-                    $a
+                    17
               Label : INIT
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  11
                   Label : LEFT
-                    $a
+                    17
                   Label : RIGHT
-                    0
+                    12
           Label : NAME
-            x
+            5
         Label : EXPRESSION
-          Void
+          6

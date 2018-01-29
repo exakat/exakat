@@ -1,43 +1,43 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : METHOD
-            a
+            7
             Label : ARGUMENT
-              Void
+              8
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                new
+                11
                 Label : NEW
-                  class
+                  5
                   Label : METHOD
-                    bInAnomyous
+                    12
                     Label : ARGUMENT
-                      Void
+                      8
                     Label : BLOCK
-                      {}
+                      10
                       Label : EXPRESSION
-                        foo
+                        14
                         Label : ARGUMENT
-                          Void
+                          8
                         Label : BLOCK
-                          {}
+                          10
                           Label : EXPRESSION
-                            Void
+                            8
                         Label : NAME
-                          foo
+                          14
                     Label : NAME
-                      bInAnomyous
+                      12
             Label : NAME
-              a
+              7
           Label : NAME
-            x
+            6

@@ -1,62 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !
+            6
             Label : NOT
-              isset
+              7
               Label : ARGUMENT
-                ::
+                10
                 Label : CLASS
-                  self
+                  8
                 Label : MEMBER
-                  $a
-              Label : NAME
-                isset
+                  9
           Label : ELSE
-            ;
+            3
             Label : EXPRESSION
-              ->
+              21
               Label : METHOD
-                E
+                17
                 Label : ARGUMENT
-                  Void
+                  19
                 Label : NAME
-                  E
+                  17
               Label : OBJECT
-                ::
+                10
                 Label : CLASS
-                  self
+                  8
                 Label : MEMBER
-                  $d
+                  16
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              =
+              12
               Label : LEFT
-                ::
+                10
                 Label : CLASS
-                  self
+                  8
                 Label : MEMBER
-                  $b
+                  11
               Label : RIGHT
-                new
+                13
                 Label : NEW
-                  C
+                  14
         Label : EXPRESSION
-          Void
+          19
         Label : EXPRESSION
-          return
+          22
           Label : RETURN
-            ::
+            10
             Label : CLASS
-              self
+              8
             Label : MEMBER
-              $f
+              23

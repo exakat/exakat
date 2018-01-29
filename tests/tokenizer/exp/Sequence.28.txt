@@ -1,64 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      a
+      4
     Label : EXPRESSION
-      <?php 
+      5
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          7
           Label : LEFT
-            $x
-          Label : RIGHT
-            1
-        Label : EXPRESSION
-          b
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $x
-          Label : RIGHT
-            2
-        Label : EXPRESSION
-          c
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $x
-          Label : RIGHT
-            3
-        Label : EXPRESSION
-          d
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $x
-          Label : RIGHT
-            4
-        Label : EXPRESSION
-          e
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $x
-          Label : RIGHT
-            5
-        Label : EXPRESSION
-          f
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $x
-          Label : RIGHT
             6
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $x
           Label : RIGHT
-            7
+            8
+        Label : EXPRESSION
+          9
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            6
+          Label : RIGHT
+            10
+        Label : EXPRESSION
+          11
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            6
+          Label : RIGHT
+            12
+        Label : EXPRESSION
+          13
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            6
+          Label : RIGHT
+            14
+        Label : EXPRESSION
+          15
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            6
+          Label : RIGHT
+            16
+        Label : EXPRESSION
+          17
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            6
+          Label : RIGHT
+            18
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            6
+          Label : RIGHT
+            19
     Label : EXPRESSION
-      g
+      20

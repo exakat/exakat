@@ -1,69 +1,69 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ->
+          10
           Label : METHOD
-            B
+            6
             Label : ARGUMENT
-              'C'
+              8
             Label : NAME
-              B
+              6
           Label : OBJECT
-            $a
+            5
         Label : EXPRESSION
-          .
+          23
           Label : CONCAT
-            ->
+            10
             Label : METHOD
-              D
+              12
               Label : ARGUMENT
-                ->
+                10
                 Label : METHOD
-                  E
+                  15
                   Label : ARGUMENT
-                    Void
+                    17
                   Label : NAME
-                    E
+                    15
                 Label : OBJECT
-                  $c
+                  14
               Label : ARGUMENT
-                'F'
+                19
               Label : ARGUMENT
-                'G'
+                21
               Label : NAME
-                D
+                12
             Label : OBJECT
-              $b
+              11
           Label : CONCAT
-            ->
+            10
             Label : METHOD
-              H
+              25
               Label : ARGUMENT
-                'I'
+                27
               Label : ARGUMENT
-                'J'
+                29
               Label : ARGUMENT
-                'K'
+                31
               Label : NAME
-                H
+                25
             Label : OBJECT
-              $d
+              24
           Label : CONCAT
-            ->
+            10
             Label : METHOD
-              L
+              34
               Label : NAME
-                L
+                34
               Label : ARGUMENT
-                'M'
+                36
               Label : ARGUMENT
-                'N'
+                38
             Label : OBJECT
-              $e
+              33

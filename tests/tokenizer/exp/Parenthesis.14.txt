@@ -1,47 +1,47 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            (
+            6
             Label : CODE
-              new
+              7
               Label : NEW
-                Date
+                8
                 Label : ARGUMENT
-                  mktime
+                  10
                   Label : ARGUMENT
-                    0
+                    11
                   Label : ARGUMENT
-                    0
+                    11
                   Label : ARGUMENT
-                    0
+                    11
                   Label : ARGUMENT
-                    +
+                    15
                     Label : LEFT
-                      ->
+                      14
                       Label : MEMBER
-                        month
+                        13
                       Label : OBJECT
-                        $a
+                        12
                     Label : RIGHT
-                      1
+                      16
                   Label : ARGUMENT
-                    0
+                    11
                   Label : ARGUMENT
-                    ->
+                    14
                     Label : MEMBER
-                      year
+                      18
                     Label : OBJECT
-                      $b
+                      17
                   Label : NAME
-                    mktime
+                    10
                 Label : NAME
-                  Date
+                  8

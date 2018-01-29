@@ -1,65 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : METHOD
-            C
+            8
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                return
+                13
                 Label : RETURN
-                  (int)
+                  14
                   Label : CAST
-                    (
+                    15
                     Label : CODE
-                      ?
+                      23
                       Label : CONDITION
-                        (
+                        15
                         Label : CODE
-                          ===
+                          17
                           Label : LEFT
-                            $b
+                            16
                           Label : RIGHT
-                            ::
+                            22
                             Label : CLASS
-                              D
+                              18
                             Label : CONSTANT
-                              E
+                              20
                       Label : ELSE
-                        F
+                        24
                         Label : ARGUMENT
-                          $c
+                          26
                         Label : NAME
-                          F
+                          24
                       Label : THEN
-                        F
+                        24
                         Label : ARGUMENT
-                          *
+                          27
                           Label : LEFT
-                            $c
+                            26
                           Label : RIGHT
-                            G
+                            28
                             Label : ARGUMENT
-                              -
+                              31
                               Label : LEFT
-                                $d
+                                30
                               Label : RIGHT
-                                1
+                                32
                             Label : NAME
-                              G
+                              28
                         Label : NAME
-                          F
+                          24
             Label : NAME
-              C
+              8
           Label : NAME
-            B
+            6

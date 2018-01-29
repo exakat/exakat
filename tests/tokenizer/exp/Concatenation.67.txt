@@ -1,131 +1,131 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $b
-          Label : RIGHT
-            array
-            Label : ARGUMENT
-              =>
-              Label : INDEX
-                'c'
-              Label : VALUE
-                3
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $b2
-          Label : RIGHT
-            array
-            Label : ARGUMENT
-              =>
-              Label : INDEX
-                'c2'
-              Label : VALUE
-                4
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $b3
-          Label : RIGHT
             5
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $d
           Label : RIGHT
-            'D'
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $d2
-          Label : RIGHT
-            'D2'
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $d3
-          Label : RIGHT
-            'D3'
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $a
-          Label : RIGHT
-            array
+            7
             Label : ARGUMENT
-              =>
+              9
               Label : INDEX
-                'a'
+                8
               Label : VALUE
-                .
+                10
+        Label : EXPRESSION
+          6
+          Label : LEFT
+            11
+          Label : RIGHT
+            7
+            Label : ARGUMENT
+              9
+              Label : INDEX
+                12
+              Label : VALUE
+                13
+        Label : EXPRESSION
+          6
+          Label : LEFT
+            14
+          Label : RIGHT
+            15
+        Label : EXPRESSION
+          6
+          Label : LEFT
+            16
+          Label : RIGHT
+            17
+        Label : EXPRESSION
+          6
+          Label : LEFT
+            19
+          Label : RIGHT
+            20
+        Label : EXPRESSION
+          6
+          Label : LEFT
+            22
+          Label : RIGHT
+            23
+        Label : EXPRESSION
+          6
+          Label : LEFT
+            25
+          Label : RIGHT
+            7
+            Label : ARGUMENT
+              9
+              Label : INDEX
+                26
+              Label : VALUE
+                29
                 Label : CONCAT
-                  -
+                  28
                   Label : SIGN
-                    [
+                    27
                     Label : INDEX
-                      'c'
+                      8
                     Label : VARIABLE
-                      $b
+                      5
                 Label : CONCAT
-                  $d
+                  16
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a2
+            30
           Label : RIGHT
-            array
+            7
             Label : ARGUMENT
-              =>
+              9
               Label : INDEX
-                'a2'
+                31
               Label : VALUE
-                .
+                29
                 Label : CONCAT
-                  -
+                  28
                   Label : LEFT
-                    2
+                    32
                   Label : RIGHT
-                    [
+                    27
                     Label : INDEX
-                      'c2'
+                      12
                     Label : VARIABLE
-                      $b2
+                      11
                 Label : CONCAT
-                  $d2
+                  19
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a3
+            33
           Label : RIGHT
-            array
+            7
             Label : ARGUMENT
-              =>
+              9
               Label : INDEX
-                'a3'
+                34
               Label : VALUE
-                .
+                29
                 Label : CONCAT
-                  $d
+                  16
                 Label : CONCAT
-                  -
+                  28
                   Label : LEFT
-                    '3'
+                    35
                   Label : RIGHT
-                    $b3
+                    14
                 Label : CONCAT
-                  $d3
+                  22
         Label : EXPRESSION
-          print_r
+          36
           Label : ARGUMENT
-            $a3
+            33
           Label : NAME
-            print_r
+            36

@@ -1,93 +1,93 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            ?
+            32
             Label : CONDITION
-              &&
+              15
               Label : LEFT
-                !
+                7
                 Label : NOT
-                  in_array
+                  8
                   Label : NAME
-                    in_array
+                    8
                   Label : ARGUMENT
-                    [
+                    12
                     Label : INDEX
-                      'd'
+                      13
                     Label : VARIABLE
-                      ->
+                      11
                       Label : MEMBER
-                        c
+                        10
                       Label : OBJECT
-                        $b
+                        9
                   Label : ARGUMENT
-                    $e
+                    14
               Label : RIGHT
-                (
+                16
                 Label : CODE
-                  ||
+                  22
                   Label : LEFT
-                    !
+                    7
                     Label : NOT
-                      preg_match
+                      17
                       Label : NAME
-                        preg_match
+                        17
                       Label : ARGUMENT
-                        '/^\w+$/'
+                        18
                       Label : ARGUMENT
-                        [
+                        12
                         Label : INDEX
-                          'h'
+                          21
                         Label : VARIABLE
-                          ->
+                          11
                           Label : MEMBER
-                            g
+                            20
                           Label : OBJECT
-                            $f
+                            19
                   Label : RIGHT
-                    !
+                    7
                     Label : NOT
-                      file_exists
+                      23
                       Label : ARGUMENT
-                        .
+                        26
                         Label : CONCAT
-                          I
+                          24
                         Label : CONCAT
-                          'j'
+                          27
                         Label : CONCAT
-                          [
+                          12
                           Label : INDEX
-                            'm'
+                            30
                           Label : VARIABLE
-                            ->
+                            11
                             Label : MEMBER
-                              l
+                              29
                             Label : OBJECT
-                              $k
+                              28
                         Label : CONCAT
-                          'n'
+                          31
                       Label : NAME
-                        file_exists
+                        23
             Label : ELSE
-              [
+              12
               Label : INDEX
-                'r'
+                36
               Label : VARIABLE
-                ->
+                11
                 Label : MEMBER
-                  q
+                  35
                 Label : OBJECT
-                  $p
+                  34
             Label : THEN
-              'o'
+              33

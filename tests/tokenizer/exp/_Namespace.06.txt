@@ -1,65 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              const
+              9
               Label : CONST
-                const
+                9
                 Label : NAME
-                  CONNECT_OK
+                  10
                 Label : VALUE
-                  1
+                  12
             Label : EXPRESSION
-              class
+              13
               Label : NAME
-                Connection
+                14
             Label : EXPRESSION
-              connect
+              16
               Label : ARGUMENT
-                Void
+                17
               Label : BLOCK
-                {}
+                8
                 Label : EXPRESSION
-                  Void
+                  17
               Label : NAME
-                connect
+                16
           Label : NAME
-            MyProject
+            5
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              const
+              9
               Label : CONST
-                const
+                9
                 Label : NAME
-                  CONNECT_OK
+                  10
                 Label : VALUE
-                  1
+                  12
             Label : EXPRESSION
-              class
+              13
               Label : NAME
-                Connection
+                14
             Label : EXPRESSION
-              connect
+              16
               Label : ARGUMENT
-                Void
+                17
               Label : BLOCK
-                {}
+                8
                 Label : EXPRESSION
-                  Void
+                  17
               Label : NAME
-                connect
+                16
           Label : NAME
-            AnotherProject
+            19

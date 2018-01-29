@@ -1,91 +1,87 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : METHOD
-            C
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'D'
-                Label : NAME
-                  echo
+                  15
             Label : NAME
-              C
+              9
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            B
+            6
         Label : EXPRESSION
-          trait
+          17
           Label : METHOD
-            F
+            20
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                ::
+                26
                 Label : CLASS
-                  G
+                  22
                 Label : METHOD
-                  H
+                  24
                   Label : ARGUMENT
-                    Void
+                    11
                   Label : NAME
-                    H
+                    24
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'I'
-                Label : NAME
-                  echo
+                  27
             Label : NAME
-              F
+              20
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            E
+            18
         Label : EXPRESSION
-          class
+          5
           Label : EXTENDS
-            K
+            31
           Label : NAME
-            J
+            29
           Label : USE
-            use
+            33
             Label : USE
-              L
+              34
         Label : EXPRESSION
-          =
+          37
           Label : LEFT
-            $a
+            36
           Label : RIGHT
-            new
+            38
             Label : NEW
-              M
+              39
               Label : ARGUMENT
-                Void
+                11
               Label : NAME
-                M
+                39
         Label : EXPRESSION
-          ->
+          44
           Label : METHOD
-            N
+            42
             Label : ARGUMENT
-              Void
+              11
             Label : NAME
-              N
+              42
           Label : OBJECT
-            $b
+            41

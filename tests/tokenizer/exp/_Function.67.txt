@@ -1,88 +1,81 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            B
+            6
           Label : METHOD
-            exit
+            8
             Label : BLOCK
-              {}
+              16
               Label : EXPRESSION
-                print
+                21
                 Label : ARGUMENT
-                  E
+                  17
                   Label : NAME
-                    E
+                    17
                   Label : ARGUMENT
-                    'F'
+                    19
                   Label : ARGUMENT
-                    $c
-                Label : NAME
-                  print
+                    14
               Label : EXPRESSION
-                print
+                21
                 Label : ARGUMENT
-                  .
+                  22
                   Label : CONCAT
-                    $b
+                    11
                   Label : CONCAT
-                    'G'
-                Label : NAME
-                  print
+                    23
             Label : ARGUMENT
-              $b
+              11
               Label : TYPEHINT
-                C
+                9
             Label : ARGUMENT
-              $c
+              14
               Label : DEFAULT
-                null
+                15
               Label : TYPEHINT
-                D
+                12
             Label : NAME
-              exit
+              8
           Label : METHOD
-            die
+            25
             Label : BLOCK
-              {}
+              16
               Label : EXPRESSION
-                print
+                21
                 Label : ARGUMENT
-                  E
+                  17
                   Label : NAME
-                    E
+                    17
                   Label : ARGUMENT
-                    'F'
+                    19
                   Label : ARGUMENT
-                    $c
-                Label : NAME
-                  print
+                    14
               Label : EXPRESSION
-                print
+                21
                 Label : ARGUMENT
-                  .
+                  22
                   Label : CONCAT
-                    $b
+                    11
                   Label : CONCAT
-                    'G'
-                Label : NAME
-                  print
+                    23
             Label : ARGUMENT
-              $b
+              11
               Label : TYPEHINT
-                C
+                9
             Label : ARGUMENT
-              $c
+              14
               Label : DEFAULT
-                null
+                15
               Label : TYPEHINT
-                D
+                12
             Label : NAME
-              die
+              25

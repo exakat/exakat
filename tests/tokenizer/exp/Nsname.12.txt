@@ -1,191 +1,185 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
             Label : EXPRESSION
-              echo
+              9
               Label : ARGUMENT
-                UNQUALIFIED_CONSTANT
-              Label : NAME
-                echo
+                10
             Label : EXPRESSION
-              echo
+              9
               Label : ARGUMENT
-                SUBNAMESPACED\CONSTANTE
-              Label : NAME
-                echo
+                12
             Label : EXPRESSION
-              echo
+              9
               Label : ARGUMENT
-                \FULL\NAMESPACED\CONSTANTE
-              Label : NAME
-                echo
+                14
             Label : EXPRESSION
-              unqualified_function
+              16
               Label : ARGUMENT
-                Void
+                17
               Label : NAME
-                unqualified_function
+                16
             Label : EXPRESSION
-              subnamespaced\fonction
+              19
               Label : ARGUMENT
-                Void
+                17
               Label : NAME
-                subnamespaced\fonction
+                19
             Label : EXPRESSION
-              \full\namespaced\fonction
+              20
               Label : ARGUMENT
-                Void
+                17
               Label : NAME
-                \full\namespaced\fonction
+                20
             Label : EXPRESSION
-              ::
+              25
               Label : CLASS
-                staticallyCalling
+                21
               Label : METHOD
-                staticallyCalledMethod
+                23
                 Label : ARGUMENT
-                  Void
+                  17
                 Label : NAME
-                  staticallyCalledMethod
+                  23
             Label : EXPRESSION
-              ->
+              29
               Label : METHOD
-                objectCalledMethod
+                27
                 Label : ARGUMENT
-                  Void
+                  17
                 Label : NAME
-                  objectCalledMethod
+                  27
               Label : OBJECT
-                $object
+                26
             Label : EXPRESSION
-              new
+              30
               Label : NEW
-                FOO
+                31
                 Label : ARGUMENT
-                  Void
+                  17
                 Label : NAME
-                  FOO
+                  31
             Label : EXPRESSION
-              new
+              30
               Label : NEW
-                FOO
+                31
             Label : EXPRESSION
-              ::
+              25
               Label : CLASS
-                fooclassc
+                33
               Label : CONSTANT
-                FOOCSONTANT
+                34
             Label : EXPRESSION
-              ::
+              25
               Label : CLASS
-                subnamespacec\fooclassc
+                36
               Label : CONSTANT
-                FOOCSONTANT
+                34
             Label : EXPRESSION
-              ::
+              25
               Label : CLASS
-                \fullc\namespacec\fooclassc
+                37
               Label : CONSTANT
-                FOOCSONTANT
+                34
             Label : EXPRESSION
-              ::
+              25
               Label : CLASS
-                fooclassp
+                38
               Label : MEMBER
-                $property
+                39
             Label : EXPRESSION
-              ::
+              25
               Label : CLASS
-                subnamespacep\fooclassp
+                40
               Label : MEMBER
-                $property
+                39
             Label : EXPRESSION
-              ::
+              25
               Label : CLASS
-                \fullp\namespacep\fooclassp
+                41
               Label : MEMBER
-                $property
+                39
             Label : EXPRESSION
-              new
+              30
               Label : NEW
-                subnamespace\FOO
+                42
                 Label : ARGUMENT
-                  Void
+                  17
                 Label : NAME
-                  subnamespace\FOO
+                  42
             Label : EXPRESSION
-              new
+              30
               Label : NEW
-                subnamespace\FOO
+                42
             Label : EXPRESSION
-              ::
+              25
               Label : CLASS
-                fooclassm
+                44
               Label : METHOD
-                staticMethod
+                45
                 Label : ARGUMENT
-                  Void
+                  17
                 Label : NAME
-                  staticMethod
+                  45
             Label : EXPRESSION
-              ::
+              25
               Label : CLASS
-                subnamespacem\fooclassm
+                47
               Label : METHOD
-                staticMethod
+                45
                 Label : ARGUMENT
-                  Void
+                  17
                 Label : NAME
-                  staticMethod
+                  45
             Label : EXPRESSION
-              ::
+              25
               Label : CLASS
-                \fullm\namespacem\fooclassm
+                48
               Label : METHOD
-                staticMethod
+                45
                 Label : ARGUMENT
-                  Void
+                  17
                 Label : NAME
-                  staticMethod
+                  45
             Label : EXPRESSION
-              new
+              30
               Label : NEW
-                \Foo\Bar\FOO
+                49
                 Label : ARGUMENT
-                  Void
+                  17
                 Label : NAME
-                  \Foo\Bar\FOO
+                  49
             Label : EXPRESSION
-              new
+              30
               Label : NEW
-                \Foo\Bar\FOO
+                49
             Label : EXPRESSION
-              instanceof
+              52
               Label : CLASS
-                fooclass
+                53
               Label : VARIABLE
-                $x
+                51
             Label : EXPRESSION
-              instanceof
+              52
               Label : CLASS
-                subnamespace\fooclass
+                54
               Label : VARIABLE
-                $x
+                51
             Label : EXPRESSION
-              instanceof
+              52
               Label : CLASS
-                \full\namespacepath\fooclass
+                55
               Label : VARIABLE
-                $x
+                51
           Label : NAME
-            Foo\Bar
+            5

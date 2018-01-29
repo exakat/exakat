@@ -1,71 +1,67 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
             Label : EXPRESSION
-              use
+              9
               Label : USE
-                C
+                10
             Label : EXPRESSION
-              if
+              12
               Label : CONDITION
-                empty
+                13
                 Label : ARGUMENT
-                  ->
+                  17
                   Label : MEMBER
-                    D
+                    15
                   Label : OBJECT
-                    $a
-                Label : NAME
-                  empty
+                    14
               Label : THEN
-                {}
+                18
                 Label : EXPRESSION
-                  return
+                  19
                   Label : RETURN
-                    Void
+                    20
           Label : NAME
-            B
+            5
         Label : EXPRESSION
-          D
+          15
         Label : EXPRESSION
-          echo
-          Label : NAME
-            echo
+          22
           Label : ARGUMENT
-            =
+            24
             Label : LEFT
-              $b
+              23
             Label : RIGHT
-              F
+              25
               Label : ARGUMENT
-                ->
+                17
                 Label : MEMBER
-                  G
+                  28
                 Label : OBJECT
-                  $c
+                  27
               Label : NAME
-                F
+                25
           Label : ARGUMENT
-            ?
+            33
             Label : CONDITION
-              >
+              31
               Label : LEFT
-                $d
+                30
               Label : RIGHT
-                0
+                32
             Label : ELSE
-              'I'
+              36
             Label : THEN
-              'H'
+              34
     Label : EXPRESSION
-      I
+      38

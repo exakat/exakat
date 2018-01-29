@@ -1,39 +1,39 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ::
+          11
           Label : CLASS
-            \A
+            5
           Label : METHOD
-            B
+            7
             Label : ARGUMENT
-              Void
+              9
             Label : NAME
-              B
+              7
         Label : EXPRESSION
-          ::
+          11
           Label : CLASS
-            \A\C
+            12
           Label : METHOD
-            B
+            7
             Label : ARGUMENT
-              Void
+              9
             Label : NAME
-              B
+              7
         Label : EXPRESSION
-          ::
+          11
           Label : CLASS
-            \A\C\D
+            14
           Label : METHOD
-            B
+            7
             Label : ARGUMENT
-              Void
+              9
             Label : NAME
-              B
+              7

@@ -1,1216 +1,1071 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yieldfrom.02.php
+  1
   Label : FILE
-    ;
-    Label : ELEMENT
-      <?php
-
+    3
+    Label : EXPRESSION
+      4
       Label : CODE
-        ;
-        Label : ELEMENT
-          assert
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              &&
-              Label : LEFT
-                0
-              Label : RIGHT
-                (
-                Label : CODE
-                  =
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                     
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $a
-                        Label : TYPEHINT
-                          array
-                      Label : ARGUMENT
-                        $b
-                        Label : DEFAULT
-                          null
-                        Label : TYPEHINT
-                          X
-                    Label : BLOCK
-                      {}
-                      Label : ELEMENT
-                        class
+        3
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            7
+            Label : LEFT
+              6
+            Label : RIGHT
+              8
+              Label : CODE
+                10
+                Label : LEFT
+                  9
+                Label : RIGHT
+                  11
+                  Label : ARGUMENT
+                    9
+                    Label : TYPEHINT
+                      12
+                  Label : ARGUMENT
+                    15
+                    Label : DEFAULT
+                      16
+                    Label : TYPEHINT
+                      13
+                  Label : BLOCK
+                    19
+                    Label : EXPRESSION
+                      21
+                      Label : ABSTRACT
+                        20
+                      Label : CONST
+                        30
+                        Label : CONST
+                          30
+                          Label : NAME
+                            13
+                          Label : VALUE
+                            31
+                      Label : CONST
+                        30
+                        Label : CONST
+                          30
+                          Label : NAME
+                            32
+                          Label : VALUE
+                            35
+                            Label : CLASS
+                              34
+                            Label : CONSTANT
+                              13
+                        Label : CONST
+                          39
+                          Label : NAME
+                            36
+                          Label : VALUE
+                            38
+                      Label : DEFINITION
+                        34
+                      Label : DEFINITION
+                        22
+                      Label : DEFINITION
+                        22
+                      Label : EXTENDS
+                        24
+                      Label : IMPLEMENTS
+                        26
+                      Label : IMPLEMENTS
+                        28
+                      Label : METHOD
+                        45
                         Label : ABSTRACT
-                          abstract
+                          20
+                        Label : ARGUMENT
+                          46
                         Label : BLOCK
-                          {}
-                          Label : ELEMENT
-                            const
-                            Label : CONST
-                              const
-                              Label : DEFINITION, DEFINITION
-                                ::
-                                Label : CLASS
-                                  self
-                                Label : CONSTANT
-                                  X
-                              Label : NAME
-                                X
-                              Label : VALUE
-                                12
-                          Label : ELEMENT
-                            const
-                            Label : CONST
-                              const
-                              Label : NAME
-                                Y
-                              Label : VALUE
-                                ::
-                                Label : CLASS
-                                  self
-                                Label : CONSTANT
-                                  X
-                            Label : CONST
-                              ,
-                              Label : NAME
-                                Z
-                              Label : VALUE
-                                "aaa"
-                          Label : ELEMENT
-                            public
-                            Label : PPP
-                              =
-                              Label : LEFT
-                                $a
-                              Label : RIGHT
-                                1
-                            Label : PPP
-                              $b
-                            Label : PUBLIC
-                              public
-                          Label : ELEMENT
-                            protected
-                            Label : PPP
-                              $c
-                            Label : PROTECTED
-                              protected
-                          Label : ELEMENT
-                            private
-                            Label : PPP
-                              =
-                              Label : LEFT
-                                $d
-                              Label : RIGHT
-                                null
-                            Label : PRIVATE
-                              private
-                            Label : STATIC
-                              static
-                          Label : ELEMENT
-                            foo
-                            Label : ABSTRACT
-                              abstract
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
-                            Label : BLOCK
-                              Void
-                            Label : DEFINITION
-                              foo
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  +
-                                  Label : LEFT
-                                    $a
-                                  Label : RIGHT
-                                    1
-                                Label : ARGUMENT
-                                  4
-                                Label : ARGUMENT
-                                  [
-                                  Label : ARGUMENTS
-                                    [
-                                    Label : ARGUMENT
-                                      1
-                                    Label : ARGUMENT
-                                      2
-                                    Label : ARGUMENT
-                                      3
-                              Label : NAME
-                                foo
-                            Label : DEFINITION
-                              foo
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  Void
-                              Label : NAME
-                                foo
-                            Label : DEFINITION
-                              \foo
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  Void
-                              Label : NAME
-                                \foo
-                            Label : NAME
-                              foo
-                          Label : ELEMENT
-                            f1
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
-                            Label : BLOCK
-                              {}
-                              Label : ELEMENT
-                                for
-                                Label : BLOCK
-                                  {}
-                                  Label : ELEMENT
-                                    =
-                                    Label : LEFT
-                                      [
-                                      Label : INDEX
-                                        $i
-                                      Label : VARIABLE
-                                        $s
-                                    Label : RIGHT
-                                      [
-                                      Label : INDEX
-                                        $j
-                                      Label : VARIABLE
-                                        $a
-                                Label : FINAL
-                                  ;
-                                  Label : ELEMENT
-                                    <
-                                    Label : LEFT
-                                      $i
-                                    Label : RIGHT
-                                      $j
-                                Label : INCREMENT
-                                  ;
-                                  Label : ELEMENT
-                                    ++
-                                    Label : POSTPLUSPLUS
-                                      $i
-                                  Label : ELEMENT
-                                    --
-                                    Label : PREPLUSPLUS
-                                      $j
-                                Label : INIT
-                                  ;
-                                  Label : ELEMENT
-                                    =
-                                    Label : LEFT
-                                      $i
-                                    Label : RIGHT
-                                      0
-                                  Label : ELEMENT
-                                    =
-                                    Label : LEFT
-                                      $j
-                                    Label : RIGHT
-                                      100
-                              Label : ELEMENT
-                                foreach
-                                Label : BLOCK
-                                  {}
-                                  Label : ELEMENT
-                                    print
-                                    Label : ARGUMENTS
-                                      "
-                                      Label : ARGUMENT
-                                        "
-                                        Label : CONCAT
-                                          $key
-                                        Label : CONCAT
-                                           => 
-                                        Label : CONCAT
-                                          $val
-                                        Label : CONCAT
-                                          \n
-                                    Label : NAME
-                                      print
-                                Label : SOURCE
-                                  $a
-                                Label : VALUE
-                                  =>
-                                  Label : KEY
-                                    $key
-                                  Label : VALUE
-                                    $val
-                              Label : ELEMENT
-                                while
-                                Label : BLOCK
-                                  {}
-                                  Label : ELEMENT
-                                    ++
-                                    Label : POSTPLUSPLUS
-                                      $i
-                                Label : CONDITION
-                                  [
-                                  Label : INDEX
-                                    $i
-                                  Label : VARIABLE
-                                    $s
-                              Label : ELEMENT
-                                do
-                                Label : BLOCK
-                                  {}
-                                  Label : ELEMENT
-                                    --
-                                    Label : POSTPLUSPLUS
-                                      $i
-                                Label : CONDITION
-                                  [
-                                  Label : INDEX
-                                    $i
-                                  Label : VARIABLE
-                                    $s
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  foo
-                                  Label : ARGUMENTS
-                                    (
-                                    Label : ARGUMENT
-                                      +
-                                      Label : LEFT
-                                        $a
-                                      Label : RIGHT
-                                        1
-                                    Label : ARGUMENT
-                                      4
-                                    Label : ARGUMENT
-                                      [
-                                      Label : ARGUMENTS
-                                        [
-                                        Label : ARGUMENT
-                                          1
-                                        Label : ARGUMENT
-                                          2
-                                        Label : ARGUMENT
-                                          3
-                                  Label : NAME
-                                    foo
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  $
-                                  Label : ARGUMENTS
-                                    (
-                                    Label : ARGUMENT
-                                      Void
-                                  Label : NAME
-                                    $
-                                    Label : NAME
-                                      .
-                                      Label : CONCAT
-                                        $a
-                                      Label : CONCAT
-                                        "_1"
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  ::
-                                  Label : CLASS
-                                    A
-                                  Label : METHOD
-                                    foo
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        Void
-                                    Label : NAME
-                                      foo
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  ::
-                                  Label : CLASS
-                                    $
-                                    Label : NAME
-                                      .
-                                      Label : CONCAT
-                                        $a
-                                      Label : CONCAT
-                                        "_1"
-                                  Label : METHOD
-                                    foo
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        Void
-                                    Label : NAME
-                                      foo
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  ::
-                                  Label : CLASS
-                                    A
-                                  Label : METHOD
-                                    $
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        Void
-                                    Label : NAME
-                                      $
-                                      Label : NAME
-                                        .
-                                        Label : CONCAT
-                                          $a
-                                        Label : CONCAT
-                                          "_1"
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  ->
-                                  Label : METHOD
-                                    foo
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        Void
-                                    Label : NAME
-                                      foo
-                                  Label : OBJECT
-                                    $x
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  ->
-                                  Label : METHOD
-                                    foo
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        Void
-                                    Label : NAME
-                                      foo
-                                  Label : OBJECT
-                                    $
-                                    Label : NAME
-                                      .
-                                      Label : CONCAT
-                                        $a
-                                      Label : CONCAT
-                                        "_1"
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  ->
-                                  Label : METHOD
-                                    {}
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        Void
-                                    Label : NAME
-                                      {}
-                                      Label : CODE
-                                        .
-                                        Label : CONCAT
-                                          $a
-                                        Label : CONCAT
-                                          "_1"
-                                  Label : OBJECT
-                                    $x
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  ->
-                                  Label : OBJECT
-                                    $x
-                                  Label : PROPERTY
-                                    a
-                                Label : RIGHT
-                                  ::
-                                  Label : CLASS
-                                    C
-                                  Label : CONSTANT
-                                    C
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  ->
-                                  Label : OBJECT
-                                    $
-                                    Label : NAME
-                                      .
-                                      Label : CONCAT
-                                        $a
-                                      Label : CONCAT
-                                        "_1"
-                                  Label : PROPERTY
-                                    a
-                                Label : RIGHT
-                                  ::
-                                  Label : CLASS
-                                    $
-                                    Label : NAME
-                                      .
-                                      Label : CONCAT
-                                        $a
-                                      Label : CONCAT
-                                        "_1"
-                                  Label : CONSTANT
-                                    C
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  ->
-                                  Label : OBJECT
-                                    $x
-                                  Label : PROPERTY
-                                    {}
-                                    Label : CODE
-                                      .
-                                      Label : CONCAT
-                                        a
-                                      Label : CONCAT
-                                        "_1"
-                                Label : RIGHT
-                                  ::
-                                  Label : CLASS
-                                    C
-                                  Label : CONSTANT
-                                    C
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  ::
-                                  Label : CLASS
-                                    C
-                                  Label : PROPERTY
-                                    $z
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  ::
-                                  Label : CLASS
-                                    $
-                                    Label : NAME
-                                      .
-                                      Label : CONCAT
-                                        $a
-                                      Label : CONCAT
-                                        "_1"
-                                  Label : PROPERTY
-                                    $z
-                              Label : ELEMENT
-                                =
-                                Label : LEFT
-                                  $x
-                                Label : RIGHT
-                                  ::
-                                  Label : CLASS
-                                    C
-                                  Label : PROPERTY
-                                    $
-                                    Label : NAME
-                                      .
-                                      Label : CONCAT
-                                        $z
-                                      Label : CONCAT
-                                        "_1"
-                            Label : NAME
-                              f1
-                            Label : PRIVATE
-                              private
-                            Label : STATIC
-                              static
-                        Label : DEFINITION
-                          A
-                        Label : DEFINITION
-                          A
-                        Label : DEFINITION, DEFINITION
-                          self
-                        Label : EXTENDS
-                          B
-                        Label : IMPLEMENTS
-                          C
-                        Label : IMPLEMENTS
-                          D
+                          46
                         Label : NAME
-                          A
-                    Label : NAME
-                      Void
-                    Label : USE
-                      (
-                      Label : ARGUMENT
-                        $c
-                      Label : ARGUMENT
-                        $d
-          Label : NAME
-            assert
-        Label : ELEMENT
-          assert
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              &&
-              Label : LEFT
-                0
-              Label : RIGHT
-                (
-                Label : CODE
-                  =
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                     
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $a
-                        Label : TYPEHINT
-                          array
-                      Label : ARGUMENT
-                        $b
-                        Label : DEFAULT
-                          null
-                        Label : TYPEHINT
-                          X
-                    Label : BLOCK
-                      {}
-                      Label : ELEMENT
-                        class
+                          45
+                      Label : METHOD
+                        48
+                        Label : ARGUMENT
+                          46
                         Label : BLOCK
-                          {}
-                          Label : ELEMENT
-                            f2
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
+                          19
+                          Label : EXPRESSION
+                            49
                             Label : BLOCK
-                              {}
-                              Label : ELEMENT
-                                if
-                                Label : CONDITION
-                                  !
-                                  Label : NOT
-                                    $x
-                                Label : THEN
-                                  {}
-                                  Label : ELEMENT
-                                    return
-                                    Label : RETURN
-                                      0
-                              Label : ELEMENT
-                                if
-                                Label : CONDITION
-                                  ==
-                                  Label : LEFT
-                                    $x
-                                  Label : RIGHT
-                                    1
-                                Label : ELSE
-                                  ;
-                                  Label : ELEMENT
-                                    if
-                                    Label : CONDITION
-                                      ==
-                                      Label : LEFT
-                                        $x
-                                      Label : RIGHT
-                                        2
-                                    Label : ELSE
-                                      ;
-                                      Label : ELEMENT
-                                        if
-                                        Label : CONDITION
-                                          ==
-                                          Label : LEFT
-                                            $x
-                                          Label : RIGHT
-                                            3
-                                        Label : ELSE
-                                          {}
-                                          Label : ELEMENT
-                                            if
-                                            Label : CONDITION
-                                              ==
-                                              Label : LEFT
-                                                $x
-                                              Label : RIGHT
-                                                9
-                                            Label : THEN
-                                              {}
-                                              Label : ELEMENT
-                                                return
-                                                Label : RETURN
-                                                  9
-                                          Label : ELEMENT
-                                            :
-                                            Label : LABEL
-                                              L0
-                                          Label : ELEMENT
-                                            do
-                                            Label : BLOCK
-                                              {}
-                                              Label : ELEMENT
-                                                switch
-                                                Label : CASES
-                                                   /**/ 
-                                                  Label : ELEMENT
-                                                    case 4 :  /**/  
-                                                    Label : CASE
-                                                      4
-                                                    Label : CODE
-                                                      ;
-                                                      Label : ELEMENT
-                                                        break
-                                                        Label : BREAK
-                                                          Void
-                                                  Label : ELEMENT
-                                                    case 5 :  /**/  
-                                                    Label : CASE
-                                                      5
-                                                    Label : CODE
-                                                      ;
-                                                      Label : ELEMENT
-                                                        continue
-                                                        Label : CONTINUE
-                                                          Void
-                                                  Label : ELEMENT
-                                                    case 6 :  /**/  
-                                                    Label : CASE
-                                                      6
-                                                    Label : CODE
-                                                      ;
-                                                      Label : ELEMENT
-                                                        break
-                                                        Label : BREAK
-                                                          2
-                                                  Label : ELEMENT
-                                                    case 7 :  /**/  
-                                                    Label : CASE
-                                                      7
-                                                    Label : CODE
-                                                      ;
-                                                      Label : ELEMENT
-                                                        continue
-                                                        Label : CONTINUE
-                                                          2
-                                                  Label : ELEMENT
-                                                    case 8 :  /**/  
-                                                    Label : CASE
-                                                      8
-                                                    Label : CODE
-                                                      ;
-                                                      Label : ELEMENT
-                                                        goto
-                                                        Label : GOTO
-                                                          L0
-                                                  Label : ELEMENT
-                                                    default
-                                                    Label : CODE
-                                                      ;
-                                                      Label : ELEMENT
-                                                        return
-                                                        Label : RETURN
-                                                          Void
-                                                Label : NAME
-                                                  $x
-                                            Label : CONDITION
-                                              0
-                                        Label : THEN
-                                          {}
-                                          Label : ELEMENT
-                                            return
-                                            Label : RETURN
-                                              3
-                                    Label : THEN
-                                      {}
-                                      Label : ELEMENT
-                                        return
-                                        Label : RETURN
-                                          2
-                                Label : THEN
-                                  {}
-                                  Label : ELEMENT
-                                    return
-                                    Label : RETURN
-                                      1
+                              19
+                              Label : EXPRESSION
+                                10
+                                Label : LEFT
+                                  57
+                                  Label : INDEX
+                                    50
+                                  Label : VARIABLE
+                                    56
+                                Label : RIGHT
+                                  57
+                                  Label : INDEX
+                                    51
+                                  Label : VARIABLE
+                                    9
                             Label : FINAL
-                              final
-                            Label : NAME
-                              f2
-                            Label : PROTECTED
-                              protected
-                        Label : DEFINITION
-                          A
-                        Label : DEFINITION
-                          A
-                        Label : DEFINITION, DEFINITION
-                          self
-                        Label : FINAL
-                          final
-                        Label : NAME
-                          A
-                    Label : NAME
-                      Void
-                    Label : USE
-                      (
-                      Label : ARGUMENT
-                        $c
-                      Label : ARGUMENT
-                        $d
-          Label : NAME
-            assert
-        Label : ELEMENT
-          assert
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              &&
-              Label : LEFT
-                0
-              Label : RIGHT
-                (
-                Label : CODE
-                  =
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                     
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $a
-                        Label : TYPEHINT
-                          array
-                      Label : ARGUMENT
-                        $b
-                        Label : DEFAULT
-                          null
-                        Label : TYPEHINT
-                          X
-                    Label : BLOCK
-                      {}
-                      Label : ELEMENT
-                        class
-                        Label : BLOCK
-                          {}
-                          Label : ELEMENT
-                            use
+                              3
+                              Label : EXPRESSION
+                                53
+                                Label : LEFT
+                                  50
+                                Label : RIGHT
+                                  51
+                            Label : INCREMENT
+                              3
+                              Label : EXPRESSION
+                                54
+                                Label : POSTPLUSPLUS
+                                  50
+                              Label : EXPRESSION
+                                55
+                                Label : PREPLUSPLUS
+                                  51
+                            Label : INIT
+                              3
+                              Label : EXPRESSION
+                                10
+                                Label : LEFT
+                                  50
+                                Label : RIGHT
+                                  6
+                              Label : EXPRESSION
+                                10
+                                Label : LEFT
+                                  51
+                                Label : RIGHT
+                                  52
+                          Label : EXPRESSION
+                            58
                             Label : BLOCK
-                              {}
-                              Label : ELEMENT
-                                insteadof
-                                Label : INSTEADOF
-                                  foo
+                              19
+                              Label : EXPRESSION
+                                65
+                                Label : ARGUMENT
+                                  62
+                                  Label : CONCAT
+                                    59
+                                  Label : CONCAT
+                                    63
+                                  Label : CONCAT
+                                    61
+                                  Label : CONCAT
+                                    64
+                            Label : SOURCE
+                              9
+                            Label : VALUE
+                              60
+                              Label : INDEX
+                                59
+                              Label : VALUE
+                                61
+                          Label : EXPRESSION
+                            66
+                            Label : BLOCK
+                              19
+                              Label : EXPRESSION
+                                54
+                                Label : POSTPLUSPLUS
+                                  50
+                            Label : CONDITION
+                              57
+                              Label : INDEX
+                                50
+                              Label : VARIABLE
+                                56
+                          Label : EXPRESSION
+                            67
+                            Label : BLOCK
+                              19
+                              Label : EXPRESSION
+                                55
+                                Label : POSTPLUSPLUS
+                                  50
+                            Label : CONDITION
+                              57
+                              Label : INDEX
+                                50
+                              Label : VARIABLE
+                                56
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              45
+                              Label : ARGUMENT
+                                69
+                                Label : LEFT
+                                  9
+                                Label : RIGHT
+                                  41
+                              Label : ARGUMENT
+                                70
+                              Label : ARGUMENT
+                                57
+                                Label : ARGUMENT
+                                  41
+                                Label : ARGUMENT
+                                  71
+                                Label : ARGUMENT
+                                  72
+                              Label : NAME
+                                45
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              73
+                              Label : ARGUMENT
+                                46
+                              Label : NAME
+                                73
                                 Label : NAME
-                                  ::
-                                  Label : CLASS
-                                    T1
-                                  Label : CONSTANT
-                                    foo
-                              Label : ELEMENT
-                                as
-                                Label : AS
-                                  bar
+                                  74
+                                  Label : CONCAT
+                                    9
+                                  Label : CONCAT
+                                    75
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              35
+                              Label : CLASS
+                                22
+                              Label : METHOD
+                                45
+                                Label : ARGUMENT
+                                  46
                                 Label : NAME
-                                  ::
-                                  Label : CLASS
-                                    T2
-                                  Label : CONSTANT
-                                    foo
-                              Label : ELEMENT
-                                as
-                                Label : AS
-                                  Void
+                                  45
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              35
+                              Label : CLASS
+                                73
                                 Label : NAME
-                                  baz
-                                Label : PUBLIC
-                                  public
-                              Label : ELEMENT
-                                as
-                                Label : AS
-                                  x
+                                  74
+                                  Label : CONCAT
+                                    9
+                                  Label : CONCAT
+                                    75
+                              Label : METHOD
+                                45
+                                Label : ARGUMENT
+                                  46
                                 Label : NAME
-                                  ops
-                                Label : PROTECTED
-                                  protected
-                            Label : USE
-                              T1
-                            Label : USE
-                              T2
-                          Label : ELEMENT
-                            use
-                            Label : USE
-                              T3
-                        Label : DEFINITION
-                          A
-                        Label : DEFINITION
-                          A
-                        Label : DEFINITION, DEFINITION
-                          self
+                                  45
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              35
+                              Label : CLASS
+                                22
+                              Label : METHOD
+                                73
+                                Label : ARGUMENT
+                                  46
+                                Label : NAME
+                                  73
+                                  Label : NAME
+                                    74
+                                    Label : CONCAT
+                                      9
+                                    Label : CONCAT
+                                      75
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              76
+                              Label : METHOD
+                                45
+                                Label : ARGUMENT
+                                  46
+                                Label : NAME
+                                  45
+                              Label : OBJECT
+                                68
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              76
+                              Label : METHOD
+                                45
+                                Label : ARGUMENT
+                                  46
+                                Label : NAME
+                                  45
+                              Label : OBJECT
+                                73
+                                Label : NAME
+                                  74
+                                  Label : CONCAT
+                                    9
+                                  Label : CONCAT
+                                    75
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              76
+                              Label : METHOD
+                                19
+                                Label : ARGUMENT
+                                  46
+                                Label : NAME
+                                  19
+                                  Label : CODE
+                                    74
+                                    Label : CONCAT
+                                      9
+                                    Label : CONCAT
+                                      75
+                              Label : OBJECT
+                                68
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              76
+                              Label : MEMBER
+                                23
+                              Label : OBJECT
+                                68
+                            Label : RIGHT
+                              35
+                              Label : CLASS
+                                26
+                              Label : CONSTANT
+                                26
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              76
+                              Label : MEMBER
+                                23
+                              Label : OBJECT
+                                73
+                                Label : NAME
+                                  74
+                                  Label : CONCAT
+                                    9
+                                  Label : CONCAT
+                                    75
+                            Label : RIGHT
+                              35
+                              Label : CLASS
+                                73
+                                Label : NAME
+                                  74
+                                  Label : CONCAT
+                                    9
+                                  Label : CONCAT
+                                    75
+                              Label : CONSTANT
+                                26
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              76
+                              Label : MEMBER
+                                19
+                                Label : CODE
+                                  74
+                                  Label : CONCAT
+                                    23
+                                  Label : CONCAT
+                                    75
+                              Label : OBJECT
+                                68
+                            Label : RIGHT
+                              35
+                              Label : CLASS
+                                26
+                              Label : CONSTANT
+                                26
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              35
+                              Label : CLASS
+                                26
+                              Label : MEMBER
+                                77
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              35
+                              Label : CLASS
+                                73
+                                Label : NAME
+                                  74
+                                  Label : CONCAT
+                                    9
+                                  Label : CONCAT
+                                    75
+                              Label : MEMBER
+                                77
+                          Label : EXPRESSION
+                            10
+                            Label : LEFT
+                              68
+                            Label : RIGHT
+                              35
+                              Label : CLASS
+                                26
+                              Label : MEMBER
+                                73
+                                Label : NAME
+                                  74
+                                  Label : CONCAT
+                                    77
+                                  Label : CONCAT
+                                    75
                         Label : NAME
-                          A
-                    Label : NAME
-                      Void
-                    Label : USE
-                      (
-                      Label : ARGUMENT
-                        $c
-                      Label : ARGUMENT
-                        $d
+                          48
+                        Label : PRIVATE
+                          44
+                        Label : STATIC
+                          43
+                      Label : NAME
+                        22
+                      Label : PPP
+                        40
+                        Label : PPP
+                          15
+                        Label : PPP
+                          10
+                          Label : LEFT
+                            9
+                          Label : RIGHT
+                            41
+                        Label : PUBLIC
+                          40
+                      Label : PPP
+                        42
+                        Label : PPP
+                          17
+                        Label : PROTECTED
+                          42
+                      Label : PPP
+                        44
+                        Label : PPP
+                          10
+                          Label : LEFT
+                            18
+                          Label : RIGHT
+                            16
+                        Label : PRIVATE
+                          44
+                        Label : STATIC
+                          43
+                  Label : USE
+                    17
+                  Label : USE
+                    18
           Label : NAME
-            assert
-        Label : ELEMENT
-          assert
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              &&
-              Label : LEFT
-                0
-              Label : RIGHT
-                (
-                Label : CODE
-                  =
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                     
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $a
-                        Label : TYPEHINT
-                          array
-                    Label : BLOCK
-                      {}
-                      Label : ELEMENT
-                        declare
+            5
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            7
+            Label : LEFT
+              6
+            Label : RIGHT
+              8
+              Label : CODE
+                10
+                Label : LEFT
+                  9
+                Label : RIGHT
+                  11
+                  Label : ARGUMENT
+                    9
+                    Label : TYPEHINT
+                      12
+                  Label : ARGUMENT
+                    15
+                    Label : DEFAULT
+                      16
+                    Label : TYPEHINT
+                      13
+                  Label : BLOCK
+                    19
+                    Label : EXPRESSION
+                      21
+                      Label : DEFINITION
+                        34
+                      Label : DEFINITION
+                        22
+                      Label : DEFINITION
+                        22
+                      Label : FINAL
+                        78
+                      Label : METHOD
+                        79
+                        Label : ARGUMENT
+                          46
                         Label : BLOCK
-                          ;
-                          Label : ELEMENT
-                            Void
-                        Label : DECLARE
-                          (
-                          Label : ARGUMENT
-                            =
-                            Label : LEFT
-                              A
-                            Label : RIGHT
-                              1
-                          Label : ARGUMENT
-                            =
-                            Label : LEFT
-                              B
-                            Label : RIGHT
-                              2
-                      Label : ELEMENT
-                        try
-                        Label : BLOCK
-                          {}
-                          Label : ELEMENT
-                            ++
-                            Label : POSTPLUSPLUS
-                              $i
-                        Label : CATCH
-                          catch
-                          Label : BLOCK
-                            {}
-                            Label : ELEMENT
-                              echo
-                              Label : ARGUMENTS
-                                echo
-                                Label : ARGUMENT
-                                  1
-                              Label : NAME
-                                echo
-                          Label : CLASS
-                            MyException
-                          Label : VARIABLE
-                            $e
-                        Label : CATCH
-                          catch
-                          Label : BLOCK
-                            {}
-                            Label : ELEMENT
-                              echo
-                              Label : ARGUMENTS
-                                echo
-                                Label : ARGUMENT
-                                  2
-                              Label : NAME
-                                echo
-                          Label : CLASS
-                            Exception
-                          Label : VARIABLE
-                            $e
-                        Label : FINALLY
-                          finally
-                          Label : BLOCK
-                            {}
-                            Label : ELEMENT
-                              echo
-                              Label : ARGUMENTS
-                                echo
-                                Label : ARGUMENT
+                          19
+                          Label : EXPRESSION
+                            80
+                            Label : CONDITION
+                              81
+                              Label : NOT
+                                68
+                            Label : THEN
+                              19
+                              Label : EXPRESSION
+                                82
+                                Label : RETURN
+                                  6
+                          Label : EXPRESSION
+                            80
+                            Label : CONDITION
+                              83
+                              Label : LEFT
+                                68
+                              Label : RIGHT
+                                41
+                            Label : ELSE
+                              3
+                              Label : EXPRESSION
+                                80
+                                Label : CONDITION
+                                  83
+                                  Label : LEFT
+                                    68
+                                  Label : RIGHT
+                                    71
+                                Label : ELSE
                                   3
-                              Label : NAME
-                                echo
-                    Label : NAME
-                      Void
+                                  Label : EXPRESSION
+                                    80
+                                    Label : CONDITION
+                                      83
+                                      Label : LEFT
+                                        68
+                                      Label : RIGHT
+                                        72
+                                    Label : ELSE
+                                      19
+                                      Label : EXPRESSION
+                                        80
+                                        Label : CONDITION
+                                          83
+                                          Label : LEFT
+                                            68
+                                          Label : RIGHT
+                                            84
+                                        Label : THEN
+                                          19
+                                          Label : EXPRESSION
+                                            82
+                                            Label : RETURN
+                                              84
+                                      Label : EXPRESSION
+                                        87
+                                        Label : DEFINITION
+                                          101
+                                          Label : GOTO
+                                            85
+                                        Label : GOTOLABEL
+                                          85
+                                      Label : EXPRESSION
+                                        67
+                                        Label : BLOCK
+                                          19
+                                          Label : EXPRESSION
+                                            88
+                                            Label : CASES
+                                              89
+                                              Label : EXPRESSION
+                                                90
+                                                Label : CASE
+                                                  70
+                                                Label : CODE
+                                                  3
+                                                  Label : EXPRESSION
+                                                    91
+                                                    Label : BREAK
+                                                      46
+                                              Label : EXPRESSION
+                                                92
+                                                Label : CASE
+                                                  93
+                                                Label : CODE
+                                                  3
+                                                  Label : EXPRESSION
+                                                    94
+                                                    Label : CONTINUE
+                                                      46
+                                              Label : EXPRESSION
+                                                95
+                                                Label : CASE
+                                                  96
+                                                Label : CODE
+                                                  3
+                                                  Label : EXPRESSION
+                                                    91
+                                                    Label : BREAK
+                                                      71
+                                              Label : EXPRESSION
+                                                97
+                                                Label : CASE
+                                                  98
+                                                Label : CODE
+                                                  3
+                                                  Label : EXPRESSION
+                                                    94
+                                                    Label : CONTINUE
+                                                      71
+                                              Label : EXPRESSION
+                                                99
+                                                Label : CASE
+                                                  100
+                                                Label : CODE
+                                                  3
+                                                  Label : EXPRESSION
+                                                    101
+                                                    Label : GOTO
+                                                      85
+                                              Label : EXPRESSION
+                                                102
+                                                Label : CODE
+                                                  3
+                                                  Label : EXPRESSION
+                                                    82
+                                                    Label : RETURN
+                                                      46
+                                            Label : NAME
+                                              68
+                                        Label : CONDITION
+                                          6
+                                    Label : THEN
+                                      19
+                                      Label : EXPRESSION
+                                        82
+                                        Label : RETURN
+                                          72
+                                Label : THEN
+                                  19
+                                  Label : EXPRESSION
+                                    82
+                                    Label : RETURN
+                                      71
+                            Label : THEN
+                              19
+                              Label : EXPRESSION
+                                82
+                                Label : RETURN
+                                  41
+                        Label : FINAL
+                          78
+                        Label : NAME
+                          79
+                        Label : PROTECTED
+                          42
+                      Label : NAME
+                        22
+                  Label : USE
+                    17
+                  Label : USE
+                    18
           Label : NAME
-            assert
-        Label : ELEMENT
-          assert
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              &&
-              Label : LEFT
-                0
-              Label : RIGHT
-                (
-                Label : CODE
-                  =
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                     
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : BLOCK
-                      {}
-                      Label : ELEMENT
-                        declare
+            5
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            7
+            Label : LEFT
+              6
+            Label : RIGHT
+              8
+              Label : CODE
+                10
+                Label : LEFT
+                  9
+                Label : RIGHT
+                  11
+                  Label : ARGUMENT
+                    9
+                    Label : TYPEHINT
+                      12
+                  Label : ARGUMENT
+                    15
+                    Label : DEFAULT
+                      16
+                    Label : TYPEHINT
+                      13
+                  Label : BLOCK
+                    19
+                    Label : EXPRESSION
+                      21
+                      Label : DEFINITION
+                        34
+                      Label : DEFINITION
+                        22
+                      Label : DEFINITION
+                        22
+                      Label : NAME
+                        22
+                      Label : USE
+                        103
                         Label : BLOCK
-                          {}
-                          Label : ELEMENT
-                            echo
-                            Label : ARGUMENTS
-                              echo
-                              Label : ARGUMENT
-                                1
+                          19
+                          Label : EXPRESSION
+                            108
+                            Label : INSTEADOF
+                              45
                             Label : NAME
-                              echo
-                        Label : DECLARE
-                          (
-                          Label : ARGUMENT
-                            =
-                            Label : LEFT
-                              C
-                            Label : RIGHT
-                              1
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          '\'"`$a'
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          "
-                          Label : CONCAT
-                            '\"`
-                          Label : CONCAT
-                            $a
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          `
-                          Label : CONCAT
-                            '"\`
-                          Label : CONCAT
-                            $a
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          "
-                          Label : CONCAT
-                            $a
-                          Label : CONCAT
-                            b
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          "
-                          Label : CONCAT
-                            a
-                          Label : CONCAT
-                            b
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          "
-                          Label : CONCAT
-                             
-                          Label : CONCAT
-                            ->
-                            Label : OBJECT
-                              $foo
-                            Label : PROPERTY
-                              bar
-                          Label : CONCAT
-                             
-                          Label : CONCAT
-                            ->
-                            Label : OBJECT
-                              $foo
-                            Label : PROPERTY
-                              bar
-                          Label : CONCAT
-                             
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          "
-                          Label : CONCAT
-                             
-                          Label : CONCAT
-                            '---'
-                          Label : CONCAT
-                             
-                      Label : ELEMENT
-                        foo
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          foo
-                      Label : ELEMENT
-                        \foo
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          \foo
-                      Label : ELEMENT
-                        namespace\foo
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          namespace\foo
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          foo
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          \foo
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          namespace\foo
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          new
-                          Label : NEW
-                            foo
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
+                              35
+                              Label : CLASS
+                                104
+                              Label : CONSTANT
+                                45
+                          Label : EXPRESSION
+                            109
+                            Label : AS
+                              110
                             Label : NAME
-                              foo
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          new
-                          Label : NEW
-                            \foo
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
+                              35
+                              Label : CLASS
+                                106
+                              Label : CONSTANT
+                                45
+                          Label : EXPRESSION
+                            109
+                            Label : AS
+                              46
                             Label : NAME
-                              \foo
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          $x
-                        Label : RIGHT
-                          new
-                          Label : NEW
-                            namespace\foo
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
+                              111
+                            Label : PUBLIC
+                              40
+                          Label : EXPRESSION
+                            109
+                            Label : AS
+                              14
                             Label : NAME
-                              namespace\foo
-                      Label : ELEMENT
-                        if
-                        Label : CONDITION
-                          $a
-                        Label : ELSE
-                          elseif
-                          Label : CONDITION
-                            $b
-                          Label : THEN
-                            {}
-                            Label : ELEMENT
-                              Void
-                        Label : THEN
-                          {}
-                          Label : ELEMENT
-                            Void
-                    Label : NAME
-                      Void
+                              112
+                            Label : PROTECTED
+                              42
+                        Label : USE
+                          104
+                        Label : USE
+                          106
+                      Label : USE
+                        103
+                        Label : USE
+                          113
+                  Label : USE
+                    17
+                  Label : USE
+                    18
           Label : NAME
-            assert
+            5
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            7
+            Label : LEFT
+              6
+            Label : RIGHT
+              8
+              Label : CODE
+                10
+                Label : LEFT
+                  9
+                Label : RIGHT
+                  11
+                  Label : ARGUMENT
+                    9
+                    Label : TYPEHINT
+                      12
+                  Label : BLOCK
+                    19
+                    Label : EXPRESSION
+                      115
+                      Label : ARGUMENT
+                        10
+                        Label : LEFT
+                          22
+                        Label : RIGHT
+                          41
+                      Label : ARGUMENT
+                        10
+                        Label : LEFT
+                          24
+                        Label : RIGHT
+                          71
+                      Label : BLOCK
+                        3
+                        Label : EXPRESSION
+                          46
+                    Label : EXPRESSION
+                      116
+                      Label : BLOCK
+                        19
+                        Label : EXPRESSION
+                          54
+                          Label : POSTPLUSPLUS
+                            50
+                      Label : CATCH
+                        117
+                        Label : BLOCK
+                          19
+                          Label : EXPRESSION
+                            121
+                            Label : ARGUMENT
+                              41
+                        Label : CLASS
+                          118
+                        Label : VARIABLE
+                          120
+                      Label : CATCH
+                        117
+                        Label : BLOCK
+                          19
+                          Label : EXPRESSION
+                            121
+                            Label : ARGUMENT
+                              71
+                        Label : CLASS
+                          122
+                        Label : VARIABLE
+                          120
+                      Label : FINALLY
+                        124
+                        Label : BLOCK
+                          19
+                          Label : EXPRESSION
+                            121
+                            Label : ARGUMENT
+                              72
+          Label : NAME
+            5
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            7
+            Label : LEFT
+              6
+            Label : RIGHT
+              8
+              Label : CODE
+                10
+                Label : LEFT
+                  9
+                Label : RIGHT
+                  11
+                  Label : ARGUMENT
+                    46
+                  Label : BLOCK
+                    19
+                    Label : EXPRESSION
+                      115
+                      Label : ARGUMENT
+                        10
+                        Label : LEFT
+                          26
+                        Label : RIGHT
+                          41
+                      Label : BLOCK
+                        19
+                        Label : EXPRESSION
+                          121
+                          Label : ARGUMENT
+                            41
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        125
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        62
+                        Label : CONCAT
+                          126
+                        Label : CONCAT
+                          9
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        127
+                        Label : CONCAT
+                          128
+                        Label : CONCAT
+                          9
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        62
+                        Label : CONCAT
+                          9
+                        Label : CONCAT
+                          25
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        62
+                        Label : CONCAT
+                          23
+                        Label : CONCAT
+                          25
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        62
+                        Label : CONCAT
+                          129
+                        Label : CONCAT
+                          76
+                          Label : MEMBER
+                            110
+                          Label : OBJECT
+                            130
+                        Label : CONCAT
+                          129
+                        Label : CONCAT
+                          76
+                          Label : MEMBER
+                            110
+                          Label : OBJECT
+                            130
+                        Label : CONCAT
+                          129
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        62
+                        Label : CONCAT
+                          129
+                        Label : CONCAT
+                          131
+                        Label : CONCAT
+                          129
+                    Label : EXPRESSION
+                      45
+                      Label : ARGUMENT
+                        46
+                      Label : NAME
+                        45
+                    Label : EXPRESSION
+                      132
+                      Label : ARGUMENT
+                        46
+                      Label : NAME
+                        132
+                    Label : EXPRESSION
+                      133
+                      Label : ARGUMENT
+                        46
+                      Label : NAME
+                        133
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        45
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        132
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        133
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        134
+                        Label : NEW
+                          45
+                          Label : ARGUMENT
+                            46
+                          Label : NAME
+                            45
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        134
+                        Label : NEW
+                          132
+                          Label : ARGUMENT
+                            46
+                          Label : NAME
+                            132
+                    Label : EXPRESSION
+                      10
+                      Label : LEFT
+                        68
+                      Label : RIGHT
+                        134
+                        Label : NEW
+                          133
+                          Label : ARGUMENT
+                            46
+                          Label : NAME
+                            133
+                    Label : EXPRESSION
+                      80
+                      Label : CONDITION
+                        9
+                      Label : ELSE
+                        135
+                        Label : CONDITION
+                          15
+                        Label : THEN
+                          19
+                          Label : EXPRESSION
+                            46
+                      Label : THEN
+                        19
+                        Label : EXPRESSION
+                          46
+          Label : NAME
+            5

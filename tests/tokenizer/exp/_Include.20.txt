@@ -1,38 +1,33 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          !
+          5
           Label : NOT
-            @
+            6
             Label : AT
-              include
+              9
               Label : ARGUMENT
-                (
+                7
                 Label : CODE
-                  '../scripts/'
-              Label : NAME
-                include
+                  8
         Label : EXPRESSION
-          include
+          9
           Label : ARGUMENT
-            or
+            11
             Label : LEFT
-              'd'
+              10
             Label : RIGHT
-              die
+              12
               Label : ARGUMENT
-                Void
-              Label : NAME
-                die
-          Label : NAME
-            include
+                7
+                Label : CODE
+                  13
     Label : EXPRESSION
-      
-
+      15

@@ -1,105 +1,105 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            21
             Label : LEFT
-              (
+              6
               Label : CODE
-                ||
+                12
                 Label : LEFT
-                  ==
+                  11
                   Label : LEFT
-                    substr
+                    7
                     Label : ARGUMENT
-                      $a
+                      8
                     Label : ARGUMENT
-                      0
+                      9
                     Label : ARGUMENT
-                      1
+                      10
                     Label : NAME
-                      substr
+                      7
                   Label : RIGHT
-                    0
+                    9
                 Label : RIGHT
-                  >
+                  20
                   Label : LEFT
-                    -
+                    16
                     Label : LEFT
-                      substr
+                      7
                       Label : ARGUMENT
-                        $b
+                        13
                       Label : ARGUMENT
-                        2
+                        14
                       Label : ARGUMENT
-                        3
+                        15
                       Label : NAME
-                        substr
+                        7
                     Label : RIGHT
-                      time
+                      17
                       Label : ARGUMENT
-                        Void
+                        18
                       Label : NAME
-                        time
+                        17
                   Label : RIGHT
-                    0
+                    9
             Label : RIGHT
-              ==
+              11
               Label : LEFT
-                substr
+                7
                 Label : ARGUMENT
-                  $c
+                  22
                 Label : ARGUMENT
-                  4
+                  23
                 Label : ARGUMENT
-                  5
+                  24
                 Label : NAME
-                  substr
-              Label : RIGHT
-                substr
-                Label : ARGUMENT
-                  md5
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      substr
-                      Label : NAME
-                        substr
-                      Label : ARGUMENT
-                        $d
-                      Label : ARGUMENT
-                        6
-                    Label : CONCAT
-                      $e
-                  Label : NAME
-                    md5
-                Label : ARGUMENT
                   7
+              Label : RIGHT
+                7
                 Label : ARGUMENT
-                  8
+                  25
+                  Label : ARGUMENT
+                    28
+                    Label : CONCAT
+                      7
+                      Label : NAME
+                        7
+                      Label : ARGUMENT
+                        26
+                      Label : ARGUMENT
+                        27
+                    Label : CONCAT
+                      29
+                  Label : NAME
+                    25
+                Label : ARGUMENT
+                  30
+                Label : ARGUMENT
+                  31
                 Label : NAME
-                  substr
+                  7
           Label : ELSE
-            {}
+            32
             Label : EXPRESSION
-              =
+              34
               Label : LEFT
-                $x
+                33
               Label : RIGHT
-                3
+                15
           Label : THEN
-            {}
+            32
             Label : EXPRESSION
-              =
+              34
               Label : LEFT
-                $x
+                33
               Label : RIGHT
-                2
+                14

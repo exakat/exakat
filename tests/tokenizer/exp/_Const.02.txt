@@ -1,215 +1,215 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                A1
+                8
               Label : VALUE
-                1
+                10
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                A2
+                11
               Label : VALUE
-                1
+                10
             Label : CONST
-              ,
+              16
               Label : NAME
-                B2
+                13
               Label : VALUE
-                '2'
+                15
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                A3
+                17
               Label : VALUE
-                1
+                10
             Label : CONST
-              ,
+              16
               Label : NAME
-                B3
+                19
               Label : VALUE
-                '2'
+                15
             Label : CONST
-              ,
+              16
               Label : NAME
-                C3
+                21
               Label : VALUE
-                ::
+                27
                 Label : CLASS
-                  D
+                  23
                 Label : CONSTANT
-                  E
+                  25
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                A4
+                28
               Label : VALUE
-                1
+                10
             Label : CONST
-              ,
+              16
               Label : NAME
-                B4
+                30
               Label : VALUE
-                '2'
+                15
             Label : CONST
-              ,
+              16
               Label : NAME
-                C4
+                32
               Label : VALUE
-                ::
+                27
                 Label : CLASS
-                  D
+                  23
                 Label : CONSTANT
-                  E
+                  25
             Label : CONST
-              ,
+              16
               Label : NAME
-                F4
+                34
               Label : VALUE
-                4
+                36
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                A5
+                37
               Label : VALUE
-                1
+                10
             Label : CONST
-              ,
+              16
               Label : NAME
-                B5
+                39
               Label : VALUE
-                '2'
+                15
             Label : CONST
-              ,
+              16
               Label : NAME
-                C5
+                41
               Label : VALUE
-                ::
+                27
                 Label : CLASS
-                  D
+                  23
                 Label : CONSTANT
-                  E
+                  25
             Label : CONST
-              ,
+              16
               Label : NAME
-                F5
+                43
               Label : VALUE
-                4
+                36
             Label : CONST
-              ,
+              16
               Label : NAME
-                G5
+                45
               Label : VALUE
-                5
+                47
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                A6
+                48
               Label : VALUE
-                1
+                10
             Label : CONST
-              ,
+              16
               Label : NAME
-                B6
+                50
               Label : VALUE
-                '2'
+                15
             Label : CONST
-              ,
+              16
               Label : NAME
-                C6
+                52
               Label : VALUE
-                ::
+                27
                 Label : CLASS
-                  D
+                  23
                 Label : CONSTANT
-                  E
+                  25
             Label : CONST
-              ,
+              16
               Label : NAME
-                F6
+                54
               Label : VALUE
-                4
+                36
             Label : CONST
-              ,
+              16
               Label : NAME
-                G6
+                56
               Label : VALUE
-                5
+                47
             Label : CONST
-              ,
+              16
               Label : NAME
-                I6
+                58
               Label : VALUE
-                6
+                60
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                A7
+                61
               Label : VALUE
-                1
+                10
             Label : CONST
-              ,
+              16
               Label : NAME
-                B7
+                63
               Label : VALUE
-                '2'
+                15
             Label : CONST
-              ,
+              16
               Label : NAME
-                C7
+                65
               Label : VALUE
-                ::
+                27
                 Label : CLASS
-                  D
+                  23
                 Label : CONSTANT
-                  E
+                  25
             Label : CONST
-              ,
+              16
               Label : NAME
-                F7
+                67
               Label : VALUE
-                4
+                36
             Label : CONST
-              ,
+              16
               Label : NAME
-                G7
+                69
               Label : VALUE
-                5
+                47
             Label : CONST
-              ,
+              16
               Label : NAME
-                I7
+                71
               Label : VALUE
-                6
+                60
             Label : CONST
-              ,
+              16
               Label : NAME
-                J7
+                73
               Label : VALUE
-                true
+                75
           Label : NAME
-            x
+            6

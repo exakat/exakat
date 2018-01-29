@@ -1,45 +1,45 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case substr($b, 0, 1) == 'c' :  /**/  
+              8
               Label : CASE
-                ==
+                13
                 Label : LEFT
-                  substr
+                  9
                   Label : ARGUMENT
-                    $b
+                    10
                   Label : ARGUMENT
-                    0
+                    11
                   Label : ARGUMENT
-                    1
+                    12
                   Label : NAME
-                    substr
+                    9
                 Label : RIGHT
-                  'c'
+                  14
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  d
+                  15
                   Label : NAME
-                    d
+                    15
                   Label : ARGUMENT
-                    [
+                    17
                     Label : INDEX
-                      'f'
+                      18
                     Label : VARIABLE
-                      $e
+                      16
                   Label : ARGUMENT
-                    'g'
+                    19
           Label : NAME
-            $a
+            6

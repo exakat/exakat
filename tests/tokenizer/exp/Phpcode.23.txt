@@ -1,33 +1,29 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            [
+            7
             Label : INDEX
-              0
+              8
             Label : VARIABLE
-              $like_locale
-          Label : NAME
-            echo
+              6
         Label : EXPRESSION
-          ', '
+          9
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            [
+            7
             Label : INDEX
-              1
+              10
             Label : VARIABLE
-              $like_locale
-          Label : NAME
-            echo
+              6
     Label : EXPRESSION
-      '],
-
+      11

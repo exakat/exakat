@@ -1,57 +1,47 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $e
+            5
           Label : RIGHT
-            b<<<TEST
-
+            7
             Label : CONCAT
-              ae
-
+              9
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $e
+            5
           Label : RIGHT
-            B<<<TEST
-
+            10
             Label : CONCAT
-              ae
-
+              9
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $f
+            11
           Label : RIGHT
-            b<<<'TEST'
-
+            12
             Label : CONCAT
-              af
-
+              14
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $d
+            15
           Label : RIGHT
-            (binary)
+            16
             Label : CAST
-              <<<XXX
-
+              17
               Label : CONCAT
-                
-
+                19
               Label : CONCAT
-                $ddfdf
+                20
               Label : CONCAT
-                ';
-
-
+                21

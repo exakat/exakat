@@ -1,71 +1,67 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case 'b' :  /**/  
+              8
               Label : CASE
-                'b'
+                9
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  if
+                  10
                   Label : CONDITION
-                    !
+                    11
                     Label : NOT
-                      ->
+                      14
                       Label : MEMBER
-                        d
+                        13
                       Label : OBJECT
-                        $c
+                        12
                   Label : THEN
-                    {}
+                    15
                     Label : EXPRESSION
-                      exit
+                      16
                       Label : ARGUMENT
-                        Void
-                      Label : NAME
-                        exit
+                        17
                 Label : EXPRESSION
-                  e
+                  19
                   Label : NAME
-                    e
+                    19
                   Label : ARGUMENT
-                    'f'
+                    20
                   Label : ARGUMENT
-                    round
+                    21
                     Label : NAME
-                      round
+                      21
                     Label : ARGUMENT
-                      /
+                      25
                       Label : LEFT
-                        [
+                        23
                         Label : INDEX
-                          'h'
+                          24
                         Label : VARIABLE
-                          $g
+                          22
                       Label : RIGHT
-                        /
+                        25
                         Label : LEFT
-                          2
+                          26
                         Label : RIGHT
-                          3
+                          27
                     Label : ARGUMENT
-                      4
+                      28
                 Label : EXPRESSION
-                  exit
+                  16
                   Label : ARGUMENT
-                    Void
-                  Label : NAME
-                    exit
+                    17
           Label : NAME
-            $a
+            6

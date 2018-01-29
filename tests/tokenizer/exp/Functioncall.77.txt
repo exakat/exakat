@@ -1,84 +1,81 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            $a
+            6
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              B
+              7
             Label : EXPRESSION
-              echo
+              9
               Label : ARGUMENT
-                ->
+                16
                 Label : METHOD
-                  D
+                  14
                   Label : ARGUMENT
-                    $a
+                    6
                   Label : NAME
-                    D
+                    14
                 Label : OBJECT
-                  [
+                  11
                   Label : INDEX
-                    'C'
+                    12
                   Label : VARIABLE
-                    $b
-              Label : NAME
-                echo
+                    10
             Label : EXPRESSION
-              E
+              17
         Label : EXPRESSION
-          Void
+          19
         Label : EXPRESSION
-          F
+          21
         Label : EXPRESSION
-          echo
+          9
           Label : ARGUMENT
-            ->
+            16
             Label : METHOD
-              G
+              23
               Label : ARGUMENT
-                ->
+                16
                 Label : METHOD
-                  D
+                  14
                   Label : ARGUMENT
-                    $c
+                    25
                   Label : ARGUMENT
-                    array
+                    26
                     Label : ARGUMENT
-                      Void
+                      19
                   Label : ARGUMENT
-                    $d
+                    27
                   Label : NAME
-                    D
+                    14
                 Label : OBJECT
-                  [
+                  11
                   Label : INDEX
-                    'C'
+                    12
                   Label : VARIABLE
-                    $b
+                    10
               Label : NAME
-                G
+                23
             Label : OBJECT
-              $b
-          Label : NAME
-            echo
+              10
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            $a
+            6
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              J
+              28
         Label : EXPRESSION
-          Void
+          19
     Label : EXPRESSION
-      K
+      30

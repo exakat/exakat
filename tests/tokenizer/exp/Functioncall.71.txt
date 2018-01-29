@@ -1,105 +1,105 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ->
+          17
           Label : METHOD
-            I
+            6
             Label : ARGUMENT
-              $c
+              8
             Label : ARGUMENT
-              new
+              9
               Label : NEW
-                J
+                10
                 Label : ARGUMENT
-                  $d
+                  12
                 Label : ARGUMENT
-                  $e
+                  13
                 Label : ARGUMENT
-                  [
+                  18
                   Label : INDEX
-                    $e
+                    13
                   Label : VARIABLE
-                    ->
+                    17
                     Label : MEMBER
-                      K
+                      15
                     Label : OBJECT
-                      $f
+                      14
                 Label : NAME
-                  J
+                  10
             Label : ARGUMENT
-              ->
+              17
               Label : MEMBER
-                M
+                21
               Label : OBJECT
-                ->
+                17
                 Label : MEMBER
-                  L
+                  19
                 Label : OBJECT
-                  $f
+                  14
             Label : ARGUMENT
-              clone
+              23
               Label : CLONE
-                $g
+                24
             Label : ARGUMENT
-              (
+              25
               Label : CODE
-                ?
+                30
                 Label : CONDITION
-                  ===
+                  27
                   Label : LEFT
-                    $h
+                    26
                   Label : RIGHT
-                    N
+                    28
                 Label : ELSE
-                  $h
+                  26
                 Label : THEN
-                  $i
+                  31
             Label : ARGUMENT
-              $i
+              31
             Label : ARGUMENT
-              $j
+              32
             Label : ARGUMENT
-              $k
+              33
             Label : ARGUMENT
-              [
+              18
               Label : INDEX
-                $e
+                13
               Label : VARIABLE
-                ->
+                17
                 Label : MEMBER
-                  O
+                  34
                 Label : OBJECT
-                  $f
+                  14
             Label : ARGUMENT
-              [
+              18
               Label : INDEX
-                $e
+                13
               Label : VARIABLE
-                ->
+                17
                 Label : MEMBER
-                  L
+                  19
                 Label : OBJECT
-                  $f
+                  14
             Label : ARGUMENT
-              $l
+              36
             Label : ARGUMENT
-              ->
+              17
               Label : MEMBER
-                R
+                40
               Label : OBJECT
-                ->
+                17
                 Label : MEMBER
-                  Q
+                  38
                 Label : OBJECT
-                  $this
+                  37
             Label : NAME
-              I
+              6
           Label : OBJECT
-            $b
+            5

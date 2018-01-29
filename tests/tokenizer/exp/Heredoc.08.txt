@@ -1,91 +1,85 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          a
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              if
+              9
               Label : CONDITION
-                $c22
+                10
               Label : ELSE
-                {}
+                8
                 Label : EXPRESSION
-                  ++
+                  12
                   Label : POSTPLUSPLUS
-                    $b2
+                    13
               Label : THEN
-                {}
+                8
                 Label : EXPRESSION
-                  ++
+                  12
                   Label : POSTPLUSPLUS
-                    $a2
+                    11
           Label : NAME
-            a
+            5
         Label : EXPRESSION
-          =
+          15
           Label : LEFT
-            $room
+            14
           Label : RIGHT
-            <<<'HEREDOCE'
-
+            16
         Label : EXPRESSION
-          =
+          15
           Label : LEFT
-            $room
+            14
           Label : RIGHT
-            <<<HEREDOCF
-
+            18
             Label : CONCAT
-              D
-
+              20
         Label : EXPRESSION
-          =
+          15
           Label : LEFT
-            $room
+            14
           Label : RIGHT
-            <<<'HEREDOCF'
-
+            22
             Label : CONCAT
-              F
-
+              24
         Label : EXPRESSION
-          =
+          15
           Label : LEFT
-            $room
+            14
           Label : RIGHT
-            <<<HEREDOCE
-
+            26
         Label : EXPRESSION
-          b
+          28
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              if
+              9
               Label : CONDITION
-                $c2
+                29
               Label : ELSE
-                {}
+                8
                 Label : EXPRESSION
-                  ++
+                  12
                   Label : POSTPLUSPLUS
-                    $b
+                    31
               Label : THEN
-                {}
+                8
                 Label : EXPRESSION
-                  ++
+                  12
                   Label : POSTPLUSPLUS
-                    $a
+                    30
           Label : NAME
-            b
+            28

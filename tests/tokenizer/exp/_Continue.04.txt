@@ -1,66 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              B
+              8
             Label : EXPRESSION
-              if
+              10
               Label : CONDITION
-                ==
+                11
                 Label : LEFT
-                  $b
+                  7
                 Label : RIGHT
-                  $c
+                  12
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  continue
+                  13
                   Label : CONTINUE
-                    Void
+                    14
                 Label : EXPRESSION
-                  Void
+                  14
             Label : EXPRESSION
-              C
+              16
             Label : EXPRESSION
-              echo
+              18
               Label : ARGUMENT
-                ::
+                30
                 Label : CLASS
-                  D
+                  19
                 Label : METHOD
-                  E
+                  21
                   Label : NAME
-                    E
+                    21
                   Label : ARGUMENT
-                    ->
+                    27
                     Label : METHOD
-                      F
+                      23
                       Label : ARGUMENT
-                        'G'
+                        25
                       Label : NAME
-                        F
+                        23
                     Label : OBJECT
-                      $b
+                      7
                   Label : ARGUMENT
-                    ->
+                    27
                     Label : MEMBER
-                      H
+                      28
                     Label : OBJECT
-                      $b
-              Label : NAME
-                echo
+                      7
             Label : EXPRESSION
-              I
+              31
           Label : SOURCE
-            $a
+            6
           Label : VALUE
-            $b
+            7

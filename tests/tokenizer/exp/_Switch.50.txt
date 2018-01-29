@@ -1,61 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            13
             Label : EXPRESSION
-              case 1 :  /**/  
+              14
               Label : CASE
-                1
+                15
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  {}
+                  16
                   Label : EXPRESSION
-                    throw
+                    17
                     Label : THROW
-                      new
+                      18
                       Label : NEW
-                        \C
+                        19
                         Label : ARGUMENT
-                          'D'
+                          21
                         Label : NAME
-                          \C
+                          19
             Label : EXPRESSION
-              default
+              23
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  {}
+                  16
                   Label : EXPRESSION
-                    throw
+                    17
                     Label : THROW
-                      new
+                      18
                       Label : NEW
-                        \C
+                        19
                         Label : ARGUMENT
-                          'D'
+                          21
                         Label : NAME
-                          \C
+                          19
           Label : NAME
-            >>
+            11
             Label : LEFT
-              B
+              6
               Label : ARGUMENT
-                [
+                9
                 Label : INDEX
-                  $b
+                  10
                 Label : VARIABLE
-                  $a
+                  8
               Label : NAME
-                B
+                6
             Label : RIGHT
-              0
+              12

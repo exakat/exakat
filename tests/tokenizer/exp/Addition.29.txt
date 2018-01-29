@@ -1,37 +1,37 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          7
           Label : LEFT
-            $maxSize
+            5
           Label : RIGHT
-            +
+            15
             Label : LEFT
-              /
+              12
               Label : LEFT
-                (
+                8
                 Label : CODE
-                  /
+                  12
                   Label : LEFT
-                    log
+                    9
                     Label : ARGUMENT
-                      PHP_INT_MAX
+                      10
                     Label : NAME
-                      log
+                      9
                   Label : RIGHT
-                    log
+                    9
                     Label : ARGUMENT
-                      2
+                      13
                     Label : NAME
-                      log
+                      9
               Label : RIGHT
-                3
+                14
             Label : RIGHT
-              1
+              16

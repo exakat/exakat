@@ -1,69 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          .
+          6
           Label : CONCAT
-            "a"
+            5
           Label : CONCAT
-            require_once
+            13
             Label : ARGUMENT
-              .
+              6
               Label : CONCAT
-                (
+                7
                 Label : CODE
-                  .
+                  6
                   Label : CONCAT
-                    B
+                    8
                   Label : CONCAT
-                    'C'
+                    10
               Label : CONCAT
-                "b"
-            Label : NAME
-              require_once
+                12
         Label : EXPRESSION
-          ?
+          15
           Label : CONDITION
-            $c
+            14
           Label : ELSE
-            .
+            6
             Label : CONCAT
-              "a"
+              5
             Label : CONCAT
-              require
+              17
               Label : ARGUMENT
-                .
+                6
                 Label : CONCAT
-                  B
+                  8
                 Label : CONCAT
-                  'C'
+                  10
                 Label : CONCAT
-                  "b"
-              Label : NAME
-                require
+                  12
           Label : THEN
-            .
+            6
             Label : CONCAT
-              "a"
+              5
             Label : CONCAT
-              include
+              16
               Label : ARGUMENT
-                .
+                6
                 Label : CONCAT
-                  (
+                  7
                   Label : CODE
-                    .
+                    6
                     Label : CONCAT
-                      B
+                      8
                     Label : CONCAT
-                      'C'
+                      10
                 Label : CONCAT
-                  "b"
-              Label : NAME
-                include
+                  12

@@ -1,151 +1,145 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          for
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              Void
+              6
             Label : EXPRESSION
-              C
+              10
             Label : EXPRESSION
-              D
+              12
               Label : ARGUMENT
-                Void
+                6
               Label : NAME
-                D
+                12
             Label : EXPRESSION
-              echo
+              14
               Label : ARGUMENT
-                .
+                17
                 Label : CONCAT
-                  'E'
+                  15
                 Label : CONCAT
-                  F
+                  18
                   Label : ARGUMENT
-                    'G'
+                    20
                   Label : NAME
-                    F
+                    18
                 Label : CONCAT
-                  'H'
-              Label : NAME
-                echo
+                  22
             Label : EXPRESSION
-              I
+              24
             Label : EXPRESSION
-              J
+              26
               Label : ARGUMENT
-                Void
+                6
               Label : NAME
-                J
+                26
             Label : EXPRESSION
-              if
+              28
               Label : CONDITION
-                K
+                29
                 Label : ARGUMENT
-                  'L'
+                  31
                 Label : NAME
-                  K
+                  29
               Label : THEN
-                {}
+                33
                 Label : EXPRESSION
-                  M
+                  34
                 Label : EXPRESSION
-                  echo
+                  14
                   Label : ARGUMENT
-                    F
+                    18
                     Label : ARGUMENT
-                      'O'
+                      36
                     Label : NAME
-                      F
-                  Label : NAME
-                    echo
+                      18
                 Label : EXPRESSION
-                  Void
+                  6
                 Label : EXPRESSION
-                  P
+                  38
                 Label : EXPRESSION
-                  echo
+                  14
                   Label : ARGUMENT
-                    Q
+                    40
                     Label : ARGUMENT
-                      Void
+                      6
                     Label : NAME
-                      Q
-                  Label : NAME
-                    echo
+                      40
             Label : EXPRESSION
-              R
+              42
             Label : EXPRESSION
-              S
+              44
               Label : ARGUMENT
-                'T'
+                46
               Label : ARGUMENT
-                F
+                18
                 Label : ARGUMENT
-                  'V'
+                  48
                 Label : NAME
-                  F
+                  18
               Label : ARGUMENT
-                'W'
+                50
               Label : NAME
-                S
+                44
             Label : EXPRESSION
-              X
+              52
             Label : EXPRESSION
-              Y
+              54
               Label : ARGUMENT
-                Void
+                6
               Label : NAME
-                Y
+                54
             Label : EXPRESSION
-              Z
+              56
               Label : ARGUMENT
-                0
+                58
               Label : NAME
-                Z
+                56
             Label : EXPRESSION
-              AA
+              59
               Label : ARGUMENT
-                'AB'
+                61
               Label : ARGUMENT
-                .
+                17
                 Label : CONCAT
-                  F
+                  18
                   Label : ARGUMENT
-                    'AD'
+                    63
                   Label : NAME
-                    F
+                    18
                 Label : CONCAT
-                  'AE'
+                  65
               Label : ARGUMENT
-                'AF'
+                67
               Label : ARGUMENT
-                'AG'
+                69
               Label : NAME
-                AA
+                59
             Label : EXPRESSION
-              AH
+              71
           Label : FINAL
-            ;
+            3
             Label : EXPRESSION
-              B
+              8
               Label : ARGUMENT
-                Void
+                6
               Label : NAME
-                B
+                8
           Label : INCREMENT
-            ;
+            3
             Label : EXPRESSION
-              Void
+              6
           Label : INIT
-            ;
+            3
             Label : EXPRESSION
-              Void
+              6

@@ -1,27 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case 1 :  /**/  
+              8
               Label : CASE
-                1
+                9
               Label : CODE
-                ;
+                3
             Label : EXPRESSION
-              case 2 :  /**/  
+              10
               Label : CASE
-                2
+                11
               Label : CODE
-                ;
+                3
           Label : NAME
-            $x
+            6

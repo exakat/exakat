@@ -1,101 +1,103 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            array
+            7
             Label : ARGUMENT
-              =>
+              11
               Label : INDEX
-                ->
+                10
                 Label : MEMBER
-                  b
+                  9
                 Label : OBJECT
-                  $a
+                  8
               Label : VALUE
-                ->
+                10
                 Label : MEMBER
-                  d
+                  13
                 Label : OBJECT
-                  $c
+                  12
             Label : ARGUMENT
-              =>
+              11
               Label : INDEX
-                ->
+                10
                 Label : METHOD
-                  f
+                  15
                   Label : ARGUMENT
-                    Void
+                    16
                   Label : NAME
-                    f
+                    15
                 Label : OBJECT
-                  $e
+                  14
               Label : VALUE
-                ->
+                10
                 Label : METHOD
-                  h
+                  19
                   Label : ARGUMENT
-                    Void
+                    16
                   Label : NAME
-                    h
+                    19
                 Label : OBJECT
-                  $g
+                  18
             Label : ARGUMENT
-              =>
+              11
               Label : INDEX
-                ::
+                24
                 Label : CLASS
-                  I
+                  20
                 Label : CONSTANT
-                  J
+                  22
               Label : VALUE
-                ::
+                24
                 Label : CLASS
-                  K
+                  25
                 Label : CONSTANT
-                  L
+                  27
             Label : ARGUMENT
-              =>
+              11
               Label : INDEX
-                ::
+                24
                 Label : CLASS
-                  M
+                  29
                 Label : METHOD
-                  N
+                  31
                   Label : ARGUMENT
-                    Void
+                    16
                   Label : NAME
-                    N
+                    31
               Label : VALUE
-                ::
+                24
                 Label : CLASS
-                  O
+                  33
                 Label : METHOD
-                  P
+                  35
                   Label : ARGUMENT
-                    Void
+                    16
                   Label : NAME
-                    P
+                    35
             Label : ARGUMENT
-              =>
+              11
               Label : INDEX
-                ::
+                24
                 Label : CLASS
-                  Q
+                  37
                 Label : MEMBER
-                  $r
+                  39
               Label : VALUE
-                ::
+                24
                 Label : CLASS
-                  S
+                  40
                 Label : MEMBER
-                  $t
+                  42
+            Label : ARGUMENT
+              16

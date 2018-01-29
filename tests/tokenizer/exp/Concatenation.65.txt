@@ -1,24 +1,25 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?=
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          <?=
+          4
           Label : ARGUMENT
-            .
+            6
             Label : CONCAT
-              $line_content
+              5
             Label : CONCAT
-              PHP_EOL
+              7
           Label : NAME
-            <?=
+            4
         Label : EXPRESSION
-          A
+          9
         Label : EXPRESSION
-          ++
+          12
           Label : POSTPLUSPLUS
-            $a
+            11

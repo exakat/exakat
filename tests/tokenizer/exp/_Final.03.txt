@@ -1,151 +1,151 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          6
           Label : ABSTRACT
-            abstract
+            5
           Label : METHOD
-            a
+            9
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              a
+              9
           Label : METHOD
-            b
+            14
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              b
+              14
             Label : PUBLIC
-              public
+              13
           Label : METHOD
-            c
+            16
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              c
+              16
             Label : STATIC
-              static
+              15
           Label : METHOD
-            c1
+            18
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              c1
+              18
             Label : PRIVATE
-              private
+              17
             Label : STATIC
-              static
+              15
           Label : METHOD
-            c2
+            19
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              c2
+              19
             Label : PRIVATE
-              private
+              17
             Label : STATIC
-              static
+              15
           Label : METHOD
-            c3
+            20
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              c3
+              20
             Label : PRIVATE
-              private
+              17
             Label : STATIC
-              static
+              15
           Label : METHOD
-            c4
+            21
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              c4
+              21
             Label : PRIVATE
-              private
+              17
             Label : STATIC
-              static
+              15
           Label : METHOD
-            c5
+            22
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              c5
+              22
             Label : PRIVATE
-              private
+              17
             Label : STATIC
-              static
+              15
           Label : METHOD
-            c6
+            23
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              c6
+              23
             Label : PRIVATE
-              private
+              17
             Label : STATIC
-              static
+              15
           Label : NAME
-            x
+            7

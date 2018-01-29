@@ -1,79 +1,75 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : DEFINITION
-            Foo
+            6
           Label : DEFINITION
-            Foo
+            6
           Label : NAME
-            Foo
+            6
           Label : PPP
-            static
+            8
             Label : PPP
-              =
+              10
               Label : LEFT
-                $bar
+                9
               Label : RIGHT
-                'Nar'
+                12
             Label : STATIC
-              static
+              8
         Label : EXPRESSION
-          class
+          5
           Label : DEFINITION
-            'Nar'
+            12
           Label : NAME
-            Nar
+            14
           Label : PPP
-            static
+            8
             Label : PPP
-              =
+              10
               Label : LEFT
-                $e
+                16
               Label : RIGHT
-                'yes'
+                18
             Label : STATIC
-              static
+              8
         Label : EXPRESSION
-          echo
+          19
           Label : ARGUMENT
-            ::
+            20
             Label : CLASS
-              ::
+              20
               Label : CLASS
-                Foo
+                6
               Label : MEMBER
-                $bar
+                9
             Label : MEMBER
-              $e
-          Label : NAME
-            echo
+              16
         Label : EXPRESSION
-          echo
+          19
           Label : ARGUMENT
-            ::
+            20
             Label : CLASS
-              ::
+              20
               Label : CLASS
-                ::
+                20
                 Label : CLASS
-                  ::
+                  20
                   Label : CLASS
-                    Foo
+                    6
                   Label : MEMBER
-                    $bar
+                    9
                 Label : MEMBER
-                  $e
+                  16
               Label : MEMBER
-                $f
+                21
             Label : MEMBER
-              $g
-          Label : NAME
-            echo
+              22

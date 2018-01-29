@@ -1,59 +1,59 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          do
+          5
           Label : BLOCK
-            {}
+            6
             Label : EXPRESSION
-              if
+              7
               Label : CONDITION
-                AND
+                13
                 Label : LEFT
-                  ==
+                  11
                   Label : LEFT
-                    B
+                    8
                     Label : ARGUMENT
-                      $a
+                      10
                     Label : NAME
-                      B
+                      8
                   Label : RIGHT
-                    0
+                    12
                 Label : RIGHT
-                  !==
+                  22
                   Label : LEFT
-                    C
+                    15
                     Label : NAME
-                      C
+                      15
                     Label : ARGUMENT
-                      $b
+                      17
                     Label : ARGUMENT
-                      "
+                      18
                       Label : CONCAT
-                        $c
+                        19
                       Label : CONCAT
-                        D
+                        20
                   Label : RIGHT
-                    E
+                    23
               Label : THEN
-                {}
+                6
                 Label : EXPRESSION
-                  =
+                  26
                   Label : LEFT
-                    $d
+                    25
                   Label : RIGHT
-                    1
+                    27
           Label : CONDITION
-            <
+            30
             Label : LEFT
-              ++
+              29
               Label : POSTPLUSPLUS
-                $e
+                28
             Label : RIGHT
-              2
+              31

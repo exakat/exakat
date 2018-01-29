@@ -1,37 +1,35 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            11
             Label : LEFT
-              isset
+              6
               Label : ARGUMENT
-                [
+                9
                 Label : INDEX
-                  'opt'
+                  10
                 Label : VARIABLE
-                  $_REQUEST
-              Label : NAME
-                isset
+                  7
             Label : RIGHT
-              ==
+              12
               Label : LEFT
-                [
+                9
                 Label : INDEX
-                  'opt'
+                  10
                 Label : VARIABLE
-                  $_REQUEST
+                  7
               Label : RIGHT
-                1
+                13
           Label : THEN
-            {}
+            14
             Label : EXPRESSION
-              '1'
+              15

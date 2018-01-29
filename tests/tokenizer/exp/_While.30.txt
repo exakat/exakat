@@ -1,35 +1,35 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          while
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              =
+              7
               Label : LEFT
-                $result
+                13
                 Label : APPEND
-                  $result
+                  13
               Label : RIGHT
-                $row
+                6
           Label : CONDITION
-            =
+            7
             Label : LEFT
-              $row
+              6
             Label : RIGHT
-              ->
+              12
               Label : METHOD
-                fetch
+                9
                 Label : ARGUMENT
-                  $fetchMode
+                  10
                 Label : NAME
-                  fetch
+                  9
               Label : OBJECT
-                $this
+                8

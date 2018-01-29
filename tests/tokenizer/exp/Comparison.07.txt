@@ -1,23 +1,23 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            instanceof
+            7
             Label : CLASS
-              Exception
+              8
             Label : VARIABLE
-              $x
+              6
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              return
+              11
               Label : RETURN
-                false
+                12

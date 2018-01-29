@@ -1,81 +1,73 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !
+            6
             Label : NOT
-              B
+              7
               Label : ARGUMENT
-                ::
+                12
                 Label : CLASS
-                  C
+                  9
                 Label : MEMBER
-                  $a
+                  11
               Label : NAME
-                B
+                7
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              return
+              13
               Label : RETURN
-                Void
+                14
         Label : EXPRESSION
-          =
+          16
           Label : LEFT
-            ::
+            12
             Label : CLASS
-              C
+              9
             Label : MEMBER
-              $a
+              11
           Label : RIGHT
-            E
+            17
             Label : ARGUMENT
-              include
+              24
               Label : ARGUMENT
-                .
+                21
                 Label : CONCAT
-                  __DIR__
+                  19
                 Label : CONCAT
-                  'F'
-              Label : NAME
-                include
+                  22
             Label : ARGUMENT
-              include
+              24
               Label : ARGUMENT
-                .
+                21
                 Label : CONCAT
-                  __DIR__
+                  19
                 Label : CONCAT
-                  'G'
-              Label : NAME
-                include
+                  25
             Label : ARGUMENT
-              include
+              24
               Label : ARGUMENT
-                .
+                21
                 Label : CONCAT
-                  __DIR__
+                  19
                 Label : CONCAT
-                  'H'
-              Label : NAME
-                include
+                  27
             Label : ARGUMENT
-              include
+              24
               Label : ARGUMENT
-                .
+                21
                 Label : CONCAT
-                  __DIR__
+                  19
                 Label : CONCAT
-                  'I'
-              Label : NAME
-                include
+                  29
             Label : NAME
-              E
+              17

@@ -1,27 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          declare
+          5
           Label : ARGUMENT
-            =
+            8
             Label : LEFT
-              encODing
+              6
             Label : RIGHT
-              'ISO-8859-1'
+              9
           Label : ARGUMENT
-            =
+            8
             Label : LEFT
-              tIcks
+              11
             Label : RIGHT
-              2
+              13
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              Void
+              14

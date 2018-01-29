@@ -1,83 +1,79 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case 'b' :  /**/  
+              8
               Label : CASE
-                'b'
+                9
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  if
+                  10
                   Label : CONDITION
-                    $c
+                    11
                   Label : ELSE
-                    elseif
+                    14
                     Label : CONDITION
-                      empty
+                      15
                       Label : ARGUMENT
-                        [
+                        17
                         Label : INDEX
-                          'h'
+                          18
                         Label : VARIABLE
-                          $g
-                      Label : NAME
-                        empty
+                          16
                     Label : THEN
-                      {}
+                      12
                       Label : EXPRESSION
-                        Void
+                        19
                   Label : THEN
-                    {}
+                    12
                     Label : EXPRESSION
-                      $e
+                      13
                 Label : EXPRESSION
-                  require_once
+                  22
                   Label : ARGUMENT
-                    a
+                    21
                     Label : ARGUMENT
-                      'b'
+                      9
                     Label : NAME
-                      a
-                  Label : NAME
-                    require_once
+                      21
                 Label : EXPRESSION
-                  if
+                  10
                   Label : CONDITION
-                    $h
+                    23
                   Label : THEN
-                    {}
+                    12
                     Label : EXPRESSION
-                      Void
+                      19
                 Label : EXPRESSION
-                  if
+                  10
                   Label : CONDITION
-                    $g
+                    16
                   Label : THEN
-                    {}
+                    12
                     Label : EXPRESSION
-                      Void
+                      19
                 Label : EXPRESSION
-                  break
+                  24
                   Label : BREAK
-                    Void
+                    19
             Label : EXPRESSION
-              default
+              25
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  26
                   Label : RETURN
-                    false
+                    27
           Label : NAME
-            $a
+            6

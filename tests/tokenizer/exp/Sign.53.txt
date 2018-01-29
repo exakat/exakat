@@ -1,57 +1,55 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $d
+            5
           Label : RIGHT
-            new
+            7
             Label : NEW
-              stdclass
+              8
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                stdclass
+                8
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            ->
+            12
             Label : MEMBER
-              e
+              11
             Label : OBJECT
-              $d
+              5
           Label : RIGHT
-            '8'
+            13
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            14
           Label : RIGHT
-            .
+            16
             Label : CONCAT
-              '+'
+              15
             Label : CONCAT
-              -
+              17
               Label : LEFT
-                ->
+                12
                 Label : MEMBER
-                  e
+                  11
                 Label : OBJECT
-                  $d
+                  5
               Label : RIGHT
-                1
+                18
             Label : CONCAT
-              ' r'
+              19
         Label : EXPRESSION
-          print
+          20
           Label : ARGUMENT
-            $a
-          Label : NAME
-            print
+            14

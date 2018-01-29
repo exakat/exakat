@@ -1,21 +1,21 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              (
+              8
             Label : CONCAT
-              $derivedSelect
+              9
             Label : CONCAT
-              )
+              11

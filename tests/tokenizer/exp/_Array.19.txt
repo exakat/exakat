@@ -1,111 +1,105 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : DEFINITION
-                ::
+                15
                 Label : CLASS
-                  x
+                  6
                 Label : CONSTANT
-                  A
+                  8
               Label : DEFINITION
-                ::
+                15
                 Label : CLASS
-                  x
+                  6
                 Label : CONSTANT
-                  A
+                  8
               Label : DEFINITION
-                ::
+                15
                 Label : CLASS
-                  x
+                  6
                 Label : CONSTANT
-                  A
+                  8
               Label : NAME
-                A
+                8
               Label : VALUE
-                array
+                10
                 Label : ARGUMENT
-                  1
+                  11
                 Label : ARGUMENT
-                  =>
+                  13
                   Label : INDEX
-                    2
+                    12
                   Label : VALUE
-                    3
+                    14
           Label : DEFINITION
-            x
+            6
           Label : DEFINITION
-            x
+            6
           Label : DEFINITION
-            x
+            6
           Label : NAME
-            x
+            6
         Label : EXPRESSION
-          print
+          18
           Label : ARGUMENT
-            [
+            16
             Label : INDEX
-              0
+              17
             Label : VARIABLE
-              ::
+              15
               Label : CLASS
-                x
+                6
               Label : CONSTANT
-                A
-          Label : NAME
-            print
+                8
         Label : EXPRESSION
-          print
+          18
           Label : ARGUMENT
-            [
+            16
             Label : INDEX
-              3
+              14
             Label : VARIABLE
-              [
+              16
               Label : INDEX
-                2
+                12
               Label : VARIABLE
-                ::
+                15
                 Label : CLASS
-                  x
+                  6
                 Label : CONSTANT
-                  A
-          Label : NAME
-            print
+                  8
         Label : EXPRESSION
-          print
+          18
           Label : ARGUMENT
-            [
+            16
             Label : INDEX
-              +
+              20
               Label : LEFT
-                4
+                19
               Label : RIGHT
-                7
+                21
             Label : VARIABLE
-              [
+              16
               Label : INDEX
-                3
+                14
               Label : VARIABLE
-                [
+                16
                 Label : INDEX
-                  2
+                  12
                 Label : VARIABLE
-                  ::
+                  15
                   Label : CLASS
-                    x
+                    6
                   Label : CONSTANT
-                    A
-          Label : NAME
-            print
+                    8

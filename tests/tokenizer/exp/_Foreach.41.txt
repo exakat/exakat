@@ -1,67 +1,67 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              or
+              24
               Label : LEFT
-                ->
+                16
                 Label : METHOD
-                  B
+                  9
                   Label : ARGUMENT
-                    .
+                    13
                     Label : CONCAT
-                      'C'
+                      11
                     Label : CONCAT
-                      ->
+                      16
                       Label : MEMBER
-                        D
+                        14
                       Label : OBJECT
-                        $c
+                        8
                     Label : CONCAT
-                      'E'
+                      17
                     Label : CONCAT
-                      $d
+                      19
                     Label : CONCAT
-                      'F'
+                      20
                     Label : CONCAT
-                      $b
+                      7
                     Label : CONCAT
-                      'G'
+                      22
                   Label : NAME
-                    B
+                    9
                 Label : OBJECT
-                  $c
+                  8
               Label : RIGHT
-                H
+                25
                 Label : ARGUMENT
-                  'I'
+                  27
                 Label : ARGUMENT
-                  __FILE__
+                  29
                 Label : ARGUMENT
-                  __LINE__
+                  31
                 Label : ARGUMENT
-                  ->
+                  16
                   Label : METHOD
-                    H
+                    25
                     Label : ARGUMENT
-                      Void
+                      33
                     Label : NAME
-                      H
+                      25
                   Label : OBJECT
-                    $c
+                    8
                 Label : NAME
-                  H
+                  25
           Label : SOURCE
-            $a
+            6
           Label : VALUE
-            $b
+            7

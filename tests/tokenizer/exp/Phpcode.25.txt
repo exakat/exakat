@@ -1,38 +1,33 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !
+            6
             Label : NOT
-              isset
+              7
               Label : ARGUMENT
-                $counter
-              Label : NAME
-                isset
+                8
           Label : ELSE
-            ;
+            3
             Label : EXPRESSION
-              echo
+              9
               Label : ARGUMENT
-                $counter
-              Label : NAME
-                echo
+                8
             Label : EXPRESSION
-              Void
+              11
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              echo
+              9
               Label : ARGUMENT
-                '0'
-              Label : NAME
-                echo
+                10
     Label : EXPRESSION
-      A
+      13

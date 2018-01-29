@@ -1,82 +1,73 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      A
+      4
     Label : EXPRESSION
-      <?php 
+      6
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          7
           Label : CONDITION
-            empty
+            8
             Label : ARGUMENT
-              $a
-            Label : NAME
-              empty
+              9
           Label : ELSE
-            elseif
+            19
             Label : CONDITION
-              $b
+              20
             Label : THEN
-              ;
+              3
               Label : EXPRESSION
-                F
+                21
               Label : EXPRESSION
-                echo
+                12
                 Label : ARGUMENT
-                  H
+                  23
                   Label : NAME
-                    H
+                    23
                   Label : ARGUMENT
-                    $c
+                    25
                   Label : ARGUMENT
-                    'I'
-                Label : NAME
-                  echo
+                    26
               Label : EXPRESSION
-                I
+                28
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              B
+              10
             Label : EXPRESSION
-              echo
+              12
               Label : ARGUMENT
-                D
+                13
                 Label : ARGUMENT
-                  'E'
+                  15
                 Label : NAME
-                  D
-              Label : NAME
-                echo
+                  13
             Label : EXPRESSION
-              E
+              17
         Label : EXPRESSION
-          J
+          30
         Label : EXPRESSION
-          if
+          7
           Label : CONDITION
-            empty
+            8
             Label : ARGUMENT
-              $d
-            Label : NAME
-              empty
+              32
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              K
+              33
             Label : EXPRESSION
-              echo
+              12
               Label : ARGUMENT
-                M
+                35
                 Label : ARGUMENT
-                  'N'
+                  37
                 Label : NAME
-                  M
-              Label : NAME
-                echo
+                  35
             Label : EXPRESSION
-              N
+              39

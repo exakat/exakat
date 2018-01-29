@@ -1,79 +1,77 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            11
             Label : LEFT
-              isset
+              6
               Label : ARGUMENT
-                [
+                8
                 Label : INDEX
-                  'B'
+                  9
                 Label : VARIABLE
-                  $a
-              Label : NAME
-                isset
+                  7
             Label : RIGHT
-              ::
+              16
               Label : CLASS
-                C
+                12
               Label : METHOD
-                D
+                14
                 Label : ARGUMENT
-                  [
+                  8
                   Label : INDEX
-                    'B'
+                    9
                   Label : VARIABLE
-                    $a
+                    7
                 Label : NAME
-                  D
+                  14
           Label : ELSE
-            {}
+            17
             Label : EXPRESSION
-              =
+              19
               Label : LEFT
-                $b
+                18
               Label : RIGHT
-                'G'
+                22
           Label : THEN
-            {}
+            17
             Label : EXPRESSION
-              =
+              19
               Label : LEFT
-                $b
+                18
               Label : RIGHT
-                F
+                20
         Label : EXPRESSION
-          ?
+          30
           Label : CONDITION
-            (
+            24
             Label : CODE
-              ==
+              27
               Label : LEFT
-                [
+                8
                 Label : INDEX
-                  'H'
+                  25
                 Label : VARIABLE
-                  $a
+                  7
               Label : RIGHT
-                'I'
+                28
           Label : ELSE
-            =
+            19
             Label : LEFT
-              $c
+              31
             Label : RIGHT
-              'K'
+              34
           Label : THEN
-            =
+            19
             Label : LEFT
-              $c
+              31
             Label : RIGHT
-              'J'
+              32

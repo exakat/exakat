@@ -1,122 +1,123 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ||
+          15
           Label : LEFT
-            ==
+            9
             Label : LEFT
-              ->
+              8
               Label : MEMBER
-                B
+                6
               Label : OBJECT
-                $a1
+                5
             Label : RIGHT
-              C
+              10
               Label : ARGUMENT
-                ->
+                8
                 Label : MEMBER
-                  D
+                  13
                 Label : OBJECT
-                  $b
+                  12
               Label : NAME
-                C
+                10
           Label : RIGHT
-            ==
+            9
             Label : LEFT
-              {
+              19
               Label : INDEX
-                ->
+                8
                 Label : MEMBER
-                  F
+                  21
                 Label : OBJECT
-                  $d
+                  20
               Label : VARIABLE
-                ::
+                18
                 Label : CLASS
-                  c
+                  11
                 Label : MEMBER
-                  $E1
+                  16
             Label : RIGHT
-              'G1'
+              23
         Label : EXPRESSION
-          ||
+          15
           Label : LEFT
-            ==
+            9
             Label : LEFT
-              ->
+              8
               Label : MEMBER
-                B
+                6
               Label : OBJECT
-                $a2
+                25
             Label : RIGHT
-              C
+              10
               Label : ARGUMENT
-                ->
+                8
                 Label : MEMBER
-                  D
+                  13
                 Label : OBJECT
-                  $b
+                  12
               Label : NAME
-                C
+                10
           Label : RIGHT
-            ==
+            9
             Label : LEFT
-              [
+              28
               Label : INDEX
-                ->
+                8
                 Label : MEMBER
-                  F
+                  21
                 Label : OBJECT
-                  $d
+                  20
               Label : VARIABLE
-                ::
+                18
                 Label : CLASS
-                  c
+                  11
                 Label : MEMBER
-                  $E2
+                  26
             Label : RIGHT
-              'G2'
+              29
         Label : EXPRESSION
-          ||
+          15
           Label : LEFT
-            ==
+            9
             Label : LEFT
-              ->
+              8
               Label : MEMBER
-                B
+                6
               Label : OBJECT
-                $a3
+                31
             Label : RIGHT
-              C
+              10
               Label : ARGUMENT
-                ->
+                8
                 Label : MEMBER
-                  D
+                  13
                 Label : OBJECT
-                  $b
+                  12
               Label : NAME
-                C
+                10
           Label : RIGHT
-            ==
+            9
             Label : LEFT
-              ::
+              18
               Label : CLASS
-                c
+                11
               Label : METHOD
-                E3
+                32
                 Label : ARGUMENT
-                  ->
+                  8
                   Label : MEMBER
-                    F
+                    21
                   Label : OBJECT
-                    $d
+                    20
                 Label : NAME
-                  E3
+                  32
             Label : RIGHT
-              'G3'
+              34

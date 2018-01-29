@@ -1,113 +1,111 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : DEFINITION
-                ::
+                23
                 Label : CLASS
-                  a
+                  6
                 Label : CONSTANT
-                  B
+                  8
               Label : NAME
-                B
+                8
               Label : VALUE
-                1
+                10
           Label : DEFINITION
-            a
+            6
           Label : DEFINITION
-            a
+            6
             Label : ARGUMENT
-              Void
+              12
             Label : NAME
-              a
+              6
           Label : DEFINITION
-            a
+            6
           Label : DEFINITION
-            a
+            6
           Label : METHOD
-            d
+            11
             Label : ARGUMENT
-              Void
+              12
             Label : BLOCK
-              {}
+              14
               Label : EXPRESSION
-                return
+                15
                 Label : RETURN
-                  1
+                  10
             Label : NAME
-              d
+              11
           Label : METHOD
-            e
+            17
             Label : ARGUMENT
-              Void
+              12
             Label : BLOCK
-              {}
+              14
               Label : EXPRESSION
-                return
+                15
                 Label : RETURN
-                  1
+                  10
             Label : NAME
-              e
+              17
             Label : STATIC
-              static
+              16
           Label : NAME
-            a
+            6
         Label : EXPRESSION
-          =
+          19
           Label : LEFT
-            $c
+            18
           Label : RIGHT
-            new
+            20
             Label : NEW
-              a
+              6
               Label : ARGUMENT
-                Void
+                12
               Label : NAME
-                a
+                6
         Label : EXPRESSION
-          print
+          24
           Label : ARGUMENT
-            &
+            22
             Label : LEFT
-              ->
+              21
               Label : METHOD
-                d
+                11
                 Label : ARGUMENT
-                  Void
+                  12
                 Label : NAME
-                  d
+                  11
               Label : OBJECT
-                $c
+                18
             Label : RIGHT
-              ::
+              23
               Label : CLASS
-                a
+                6
               Label : CONSTANT
-                B
-          Label : NAME
-            print
+                8
         Label : EXPRESSION
-          =
+          19
           Label : LEFT
-            $e
+            25
           Label : RIGHT
-            ::
+            23
             Label : CLASS
-              a
+              6
             Label : METHOD
-              e
+              17
               Label : ARGUMENT
-                Void
+                12
               Label : NAME
-                e
+                17

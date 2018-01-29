@@ -1,45 +1,45 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          var_dump
+          5
           Label : ARGUMENT
-            ?
+            9
             Label : CONDITION
-              ??
+              7
               Label : LEFT
-                2
+                6
               Label : RIGHT
-                3
+                8
             Label : ELSE
-              5
+              11
             Label : THEN
-              4
+              10
           Label : NAME
-            var_dump
+            5
         Label : EXPRESSION
-          var_dump
+          5
           Label : ARGUMENT
-            ?
+            9
             Label : CONDITION
-              ??
+              7
               Label : LEFT
-                ||
+                13
                 Label : LEFT
-                  0
+                  12
                 Label : RIGHT
-                  2
+                  6
               Label : RIGHT
-                3
+                8
             Label : ELSE
-              5
+              11
             Label : THEN
-              4
+              10
           Label : NAME
-            var_dump
+            5

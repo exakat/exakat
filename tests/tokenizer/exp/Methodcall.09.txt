@@ -1,27 +1,25 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ->
+          12
           Label : METHOD
-            a
+            6
             Label : ARGUMENT
-              require
+              11
               Label : ARGUMENT
-                .
+                9
                 Label : CONCAT
-                  __DIR__
+                  7
                 Label : CONCAT
-                  '/b.php'
-              Label : NAME
-                require
+                  10
             Label : NAME
-              a
+              6
           Label : OBJECT
-            $c
+            5

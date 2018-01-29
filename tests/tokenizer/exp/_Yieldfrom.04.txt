@@ -1,171 +1,163 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          assert
+          5
           Label : ARGUMENT
-            &&
+            7
             Label : LEFT
-              0
+              6
             Label : RIGHT
-              (
+              8
               Label : CODE
-                =
+                10
                 Label : LEFT
-                  $a
+                  9
                 Label : RIGHT
-                  function
+                  11
                   Label : ARGUMENT
-                    Void
+                    12
                   Label : BLOCK
-                    {}
+                    14
                     Label : EXPRESSION
-                      global
+                      15
                       Label : GLOBAL
-                        $a
+                        9
                       Label : GLOBAL
-                        $
+                        16
                         Label : NAME
-                          $b
+                          17
                     Label : EXPRESSION
-                      static
+                      18
                       Label : STATIC
-                        $c
+                        19
                       Label : STATIC
-                        =
+                        10
                         Label : LEFT
-                          $d
+                          20
                         Label : RIGHT
-                          0
+                          6
                     Label : EXPRESSION
-                      unset
+                      21
                       Label : ARGUMENT
-                        $e
-                      Label : NAME
-                        unset
+                        22
                     Label : EXPRESSION
-                      =
+                      10
                       Label : LEFT
-                        $x
+                        23
                       Label : RIGHT
-                        ||
+                        27
                         Label : LEFT
-                          &&
+                          7
                           Label : LEFT
-                            isset
+                            24
                             Label : ARGUMENT
-                              $a
-                            Label : NAME
-                              isset
+                              9
                           Label : RIGHT
-                            !
+                            25
                             Label : NOT
-                              empty
+                              26
                               Label : ARGUMENT
-                                $b
-                              Label : NAME
-                                empty
+                                17
                         Label : RIGHT
-                          eval
+                          28
                           Label : ARGUMENT
-                            $c
-                          Label : NAME
-                            eval
+                            19
                     Label : EXPRESSION
-                      =
+                      10
                       Label : LEFT
-                        $x
+                        23
                       Label : RIGHT
-                        ?
+                        29
                         Label : CONDITION
-                          $a
+                          9
                         Label : ELSE
-                          $c
+                          19
                         Label : THEN
-                          $b
+                          17
                     Label : EXPRESSION
-                      =
+                      10
                       Label : LEFT
-                        $x
+                        23
                       Label : RIGHT
-                        ?
+                        29
                         Label : CONDITION
-                          $a
+                          9
                         Label : ELSE
-                          $c
+                          19
                         Label : THEN
-                          Void
+                          12
                     Label : EXPRESSION
-                      =
+                      10
                       Label : LEFT
-                        $x
+                        23
                       Label : RIGHT
-                        ??
+                        30
                         Label : LEFT
-                          $a
+                          9
                         Label : RIGHT
-                          $b
+                          17
                     Label : EXPRESSION
-                      =
+                      10
                       Label : LEFT
-                        list
+                        31
                         Label : ARGUMENT
-                          $a
+                          9
                         Label : ARGUMENT
-                          $b
+                          17
                         Label : ARGUMENT
-                          $c
+                          19
                         Label : NAME
-                          list
+                          31
                       Label : RIGHT
-                        [
+                        32
                         Label : ARGUMENT
-                          1
+                          33
                         Label : ARGUMENT
-                          =>
+                          35
                           Label : INDEX
-                            2
+                            34
                           Label : VALUE
-                            'x'
+                            36
                         Label : ARGUMENT
-                          =>
+                          35
                           Label : INDEX
-                            'z'
+                            37
                           Label : VALUE
-                            'c'
+                            38
                     Label : EXPRESSION
-                      @
+                      39
                       Label : AT
-                        foo
+                        40
                         Label : ARGUMENT
-                          Void
+                          12
                         Label : NAME
-                          foo
+                          40
                     Label : EXPRESSION
-                      =
+                      10
                       Label : LEFT
-                        $y
+                        41
                       Label : RIGHT
-                        clone
+                        42
                         Label : CLONE
-                          $x
+                          23
                     Label : EXPRESSION
-                      yield
+                      43
                       Label : YIELD
-                        =>
+                        35
                         Label : INDEX
-                          1
+                          33
                         Label : VALUE
-                          2
+                          34
                     Label : EXPRESSION
-                      yield from
+                      44
                       Label : YIELD
-                        $x
+                        23
           Label : NAME
-            assert
+            5

@@ -1,59 +1,59 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              if
+              10
               Label : CONDITION
-                =
+                12
                 Label : LEFT
-                  $b
+                  11
                 Label : RIGHT
-                  yield from
+                  13
                   Label : YIELD
-                    ->
+                    18
                     Label : METHOD
-                      C
+                      15
                       Label : ARGUMENT
-                        $c
+                        17
                       Label : NAME
-                        C
+                        15
                     Label : OBJECT
-                      $this
+                      14
               Label : ELSE
-                {}
+                9
                 Label : EXPRESSION
-                  return
+                  24
                   Label : RETURN
-                    $d
+                    20
               Label : THEN
-                {}
+                9
                 Label : EXPRESSION
-                  =
+                  12
                   Label : LEFT
-                    list
+                    19
                     Label : NAME
-                      list
+                      19
                     Label : ARGUMENT
-                      ->
+                      18
                       Label : MEMBER
-                        D
+                        21
                       Label : OBJECT
-                        $d
+                        20
                     Label : ARGUMENT
-                      $e
+                      23
                   Label : RIGHT
-                    $b
+                    11
           Label : NAME
-            B
+            5

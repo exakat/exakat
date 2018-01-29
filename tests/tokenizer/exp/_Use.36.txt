@@ -1,113 +1,109 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          trait
+          5
           Label : DEFINITION
-            Hello
+            6
           Label : METHOD
-            sayHello
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'Hello '
-                Label : NAME
-                  echo
+                  15
             Label : NAME
-              sayHello
+              9
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            Hello
+            6
         Label : EXPRESSION
-          trait
+          5
           Label : DEFINITION
-            World
+            17
           Label : METHOD
-            sayWorld
+            19
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'World!'
-                Label : NAME
-                  echo
+                  21
             Label : NAME
-              sayWorld
+              19
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            World
+            17
         Label : EXPRESSION
-          trait
+          5
           Label : DEFINITION
-            HelloWorld
+            23
           Label : NAME
-            HelloWorld
+            23
           Label : USE
-            use
+            25
             Label : USE
-              Hello
+              6
             Label : USE
-              World
+              17
         Label : EXPRESSION
-          class
+          26
           Label : DEFINITION
-            MyHelloWorld
+            27
           Label : DEFINITION
-            MyHelloWorld
+            27
             Label : ARGUMENT
-              Void
+              11
             Label : NAME
-              MyHelloWorld
+              27
           Label : NAME
-            MyHelloWorld
+            27
           Label : USE
-            use
+            25
             Label : USE
-              HelloWorld
+              23
         Label : EXPRESSION
-          =
+          30
           Label : LEFT
-            $o
+            29
           Label : RIGHT
-            new
+            31
             Label : NEW
-              MyHelloWorld
+              27
               Label : ARGUMENT
-                Void
+                11
               Label : NAME
-                MyHelloWorld
+                27
         Label : EXPRESSION
-          ->
+          32
           Label : METHOD
-            sayHello
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : NAME
-              sayHello
+              9
           Label : OBJECT
-            $o
+            29
         Label : EXPRESSION
-          ->
+          32
           Label : METHOD
-            sayWorld
+            19
             Label : ARGUMENT
-              Void
+              11
             Label : NAME
-              sayWorld
+              19
           Label : OBJECT
-            $o
+            29

@@ -1,223 +1,209 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          or
+          9
           Label : LEFT
-            B
+            5
             Label : ARGUMENT
-              'C'
+              7
             Label : NAME
-              B
+              5
           Label : RIGHT
-            die
+            10
             Label : ARGUMENT
-              Void
-            Label : NAME
-              die
+              11
         Label : EXPRESSION
-          ::
+          19
           Label : CLASS
-            D
+            13
           Label : METHOD
-            E
+            15
             Label : ARGUMENT
-              'F'
+              17
             Label : NAME
-              E
+              15
         Label : EXPRESSION
-          G
+          20
         Label : EXPRESSION
-          echo
+          22
           Label : ARGUMENT
-            ::
+            19
             Label : CLASS
-              H
+              23
             Label : METHOD
-              E
+              15
               Label : ARGUMENT
-                ->
+                31
                 Label : METHOD
-                  L
+                  29
                   Label : ARGUMENT
-                    Void
+                    11
                   Label : NAME
-                    L
+                    29
                 Label : OBJECT
-                  ::
+                  19
                   Label : CLASS
-                    J
+                    25
                   Label : METHOD
-                    K
+                    27
                     Label : ARGUMENT
-                      Void
+                      11
                     Label : NAME
-                      K
+                      27
               Label : ARGUMENT
-                M
+                32
               Label : ARGUMENT
-                ->
+                31
                 Label : METHOD
-                  N
+                  35
                   Label : ARGUMENT
-                    'O'
+                    37
                   Label : NAME
-                    N
+                    35
                 Label : OBJECT
-                  $b
+                  34
               Label : NAME
-                E
-          Label : NAME
-            echo
+                15
         Label : EXPRESSION
-          P
+          39
         Label : EXPRESSION
-          if
+          41
           Label : CONDITION
-            ->
+            31
             Label : METHOD
-              N
+              35
               Label : ARGUMENT
-                'R'
+                42
               Label : NAME
-                N
+                35
             Label : OBJECT
-              $b
+              34
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              S
+              44
             Label : EXPRESSION
-              if
+              41
               Label : CONDITION
-                ==
+                48
                 Label : LEFT
-                  ->
+                  31
                   Label : METHOD
-                    N
+                    35
                     Label : ARGUMENT
-                      'U'
+                      46
                     Label : NAME
-                      N
+                      35
                   Label : OBJECT
-                    $b
+                    34
                 Label : RIGHT
-                  1
+                  49
               Label : ELSE
-                ;
+                3
                 Label : EXPRESSION
-                  {}
+                  50
                   Label : EXPRESSION
-                    echo
+                    22
                     Label : ARGUMENT
-                      ::
+                      19
                       Label : CLASS
-                        V
+                        51
                       Label : METHOD
-                        W
+                        53
                         Label : NAME
-                          W
+                          53
                         Label : ARGUMENT
-                          'X'
+                          55
                         Label : ARGUMENT
-                          Y
+                          57
                           Label : ARGUMENT
-                            ->
+                            31
                             Label : METHOD
-                              N
+                              35
                               Label : ARGUMENT
-                                'AG'
+                                60
                               Label : NAME
-                                N
+                                35
                             Label : OBJECT
-                              $c
+                              59
                           Label : NAME
-                            Y
-                    Label : NAME
-                      echo
+                            57
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  {}
+                  50
                   Label : EXPRESSION
-                    echo
+                    22
                     Label : ARGUMENT
-                      ::
+                      19
                       Label : CLASS
-                        V
+                        51
                       Label : METHOD
-                        W
+                        53
                         Label : NAME
-                          W
+                          53
                         Label : ARGUMENT
-                          'X'
+                          55
                         Label : ARGUMENT
-                          Y
+                          57
                           Label : ARGUMENT
-                            ->
+                            31
                             Label : METHOD
-                              N
+                              35
                               Label : ARGUMENT
-                                'U'
+                                46
                               Label : NAME
-                                N
+                                35
                             Label : OBJECT
-                              $c
+                              59
                           Label : NAME
-                            Y
-                    Label : NAME
-                      echo
+                            57
             Label : EXPRESSION
-              Void
+              11
             Label : EXPRESSION
-              AH
+              62
         Label : EXPRESSION
-          Void
+          11
         Label : EXPRESSION
-          AI
+          64
         Label : EXPRESSION
-          echo
+          22
           Label : ARGUMENT
-            ::
+            19
             Label : CLASS
-              V
+              51
             Label : METHOD
-              E
+              15
               Label : ARGUMENT
-                'AL'
+                66
               Label : NAME
-                E
-          Label : NAME
-            echo
+                15
         Label : EXPRESSION
-          AM
+          68
         Label : EXPRESSION
-          echo
+          22
           Label : ARGUMENT
-            $d
-          Label : NAME
-            echo
+            70
         Label : EXPRESSION
-          AN
+          71
         Label : EXPRESSION
-          echo
+          22
           Label : ARGUMENT
-            ::
+            19
             Label : CLASS
-              D
+              13
             Label : METHOD
-              E
+              15
               Label : ARGUMENT
-                'AQ'
+                73
               Label : NAME
-                E
-          Label : NAME
-            echo
+                15
     Label : EXPRESSION
-      AR
+      75

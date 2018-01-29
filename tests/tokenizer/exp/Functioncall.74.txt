@@ -1,28 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !
+            6
             Label : NOT
-              defined
+              7
               Label : ARGUMENT
-                'A'
+                8
               Label : NAME
-                defined
+                7
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              exit
+              10
               Label : ARGUMENT
-                Void
-              Label : NAME
-                exit
+                11
             Label : EXPRESSION
-              Void
+              11

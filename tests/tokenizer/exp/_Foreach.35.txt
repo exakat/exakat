@@ -1,91 +1,89 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $array
+            5
           Label : RIGHT
-            [
+            7
             Label : ARGUMENT
-              [
+              7
+              Label : ARGUMENT
+                8
+              Label : ARGUMENT
+                9
+            Label : ARGUMENT
+              7
               Label : ARGUMENT
                 10
               Label : ARGUMENT
+                11
+            Label : ARGUMENT
+              12
+        Label : EXPRESSION
+          14
+          Label : BLOCK
+            18
+            Label : EXPRESSION
+              19
+              Label : ARGUMENT
                 20
-            Label : ARGUMENT
-              [
-              Label : ARGUMENT
-                30
-              Label : ARGUMENT
-                40
-        Label : EXPRESSION
-          foreach
-          Label : BLOCK
-            {}
-            Label : EXPRESSION
-              echo
-              Label : ARGUMENT
-                "
                 Label : CONCAT
-                  First: 
+                  21
                 Label : CONCAT
-                  $a1
+                  16
                 Label : CONCAT
-                  ; Second: 
+                  23
                 Label : CONCAT
-                  $b2
+                  17
                 Label : CONCAT
-                  \n
-              Label : NAME
-                echo
+                  25
           Label : SOURCE
-            $array
+            5
           Label : VALUE
-            list
+            15
             Label : NAME
-              list
+              15
             Label : ARGUMENT
-              $a1
+              16
             Label : ARGUMENT
-              $b2
+              17
         Label : EXPRESSION
-          foreach
+          14
           Label : BLOCK
-            {}
+            18
             Label : EXPRESSION
-              echo
+              19
               Label : ARGUMENT
-                "
+                20
                 Label : CONCAT
-                  First: 
+                  21
                 Label : CONCAT
-                  $a3
+                  28
                 Label : CONCAT
-                  ; Second: 
+                  23
                 Label : CONCAT
-                  $b4
+                  29
                 Label : CONCAT
-                  \n
-              Label : NAME
-                echo
+                  25
           Label : SOURCE
-            $array
+            5
           Label : VALUE
-            =>
+            27
             Label : INDEX
-              $id
+              26
             Label : VALUE
-              list
+              15
               Label : NAME
-                list
+                15
               Label : ARGUMENT
-                $a3
+                28
               Label : ARGUMENT
-                $b4
+                29

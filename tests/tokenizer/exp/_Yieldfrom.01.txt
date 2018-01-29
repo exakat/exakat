@@ -1,105 +1,101 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foo
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              yield
+              9
               Label : YIELD
-                1
+                10
             Label : EXPRESSION
-              return
+              11
               Label : RETURN
-                yield from
+                12
                 Label : YIELD
-                  bar
+                  13
                   Label : ARGUMENT
-                    Void
+                    6
                   Label : NAME
-                    bar
+                    13
           Label : DEFINITION
-            foo
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              foo
+              5
           Label : NAME
-            foo
+            5
         Label : EXPRESSION
-          bar
+          13
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              yield
+              9
               Label : YIELD
-                2
+                14
             Label : EXPRESSION
-              yield
+              9
               Label : YIELD
-                3
+                15
             Label : EXPRESSION
-              return
+              11
               Label : RETURN
-                4
+                16
           Label : DEFINITION
-            bar
+            13
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              bar
+              13
           Label : NAME
-            bar
+            13
         Label : EXPRESSION
-          =
+          18
           Label : LEFT
-            $baz
+            17
           Label : RIGHT
-            foo
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              foo
+              5
         Label : EXPRESSION
-          foreach
+          19
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              echo
-              Label : NAME
-                echo
+              21
               Label : ARGUMENT
-                $element
+                20
               Label : ARGUMENT
-                "\n"
+                22
           Label : SOURCE
-            $baz
+            17
           Label : VALUE
-            $element
+            20
         Label : EXPRESSION
-          echo
-          Label : NAME
-            echo
+          21
           Label : ARGUMENT
-            ->
+            25
             Label : METHOD
-              getReturn
+              23
               Label : ARGUMENT
-                Void
+                6
               Label : NAME
-                getReturn
+                23
             Label : OBJECT
-              $baz
+              17
           Label : ARGUMENT
-            "\n"
+            22

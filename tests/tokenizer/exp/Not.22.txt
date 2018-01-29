@@ -1,121 +1,121 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ==
+            10
             Label : LEFT
-              ->
+              9
               Label : MEMBER
-                B
+                7
               Label : OBJECT
-                $this
+                6
             Label : RIGHT
-              $b
+              11
           Label : ELSE
-            elseif
+            26
             Label : CONDITION
-              ==
+              10
               Label : LEFT
-                ->
+                9
                 Label : MEMBER
-                  H
+                  27
                 Label : OBJECT
-                  $this
+                  6
               Label : RIGHT
-                $b
+                11
             Label : ELSE
-              ;
+              3
               Label : EXPRESSION
-                throw
+                33
                 Label : THROW
-                  new
+                  34
                   Label : NEW
-                    N
+                    35
                     Label : ARGUMENT
-                      'O'
+                      37
                     Label : NAME
-                      N
+                      35
             Label : THEN
-              {}
+              12
               Label : EXPRESSION
-                =
+                15
                 Label : LEFT
-                  ->
+                  9
                   Label : MEMBER
-                    C
+                    13
                   Label : OBJECT
-                    $this
+                    6
                 Label : RIGHT
-                  &
+                  16
                   Label : LEFT
-                    ->
+                    9
                     Label : MEMBER
-                      C
+                      13
                     Label : OBJECT
-                      $this
+                      6
                   Label : RIGHT
-                    ~
+                    17
                     Label : NOT
-                      ::
+                      22
                       Label : CLASS
-                        E
+                        18
                       Label : CONSTANT
-                        L
+                        29
               Label : EXPRESSION
-                =
+                15
                 Label : LEFT
-                  ->
+                  9
                   Label : MEMBER
-                    M
+                    31
                   Label : OBJECT
-                    $this
+                    6
                 Label : RIGHT
-                  1
+                  25
           Label : THEN
-            {}
+            12
             Label : EXPRESSION
-              =
+              15
               Label : LEFT
-                ->
+                9
                 Label : MEMBER
-                  C
+                  13
                 Label : OBJECT
-                  $this
+                  6
               Label : RIGHT
-                &
+                16
                 Label : LEFT
-                  ->
+                  9
                   Label : MEMBER
-                    C
+                    13
                   Label : OBJECT
-                    $this
+                    6
                 Label : RIGHT
-                  ~
+                  17
                   Label : NOT
-                    ::
+                    22
                     Label : CLASS
-                      E
+                      18
                     Label : CONSTANT
-                      F
+                      20
             Label : EXPRESSION
-              =
+              15
               Label : LEFT
-                ->
+                9
                 Label : MEMBER
-                  G
+                  23
                 Label : OBJECT
-                  $this
+                  6
               Label : RIGHT
-                1
+                25
         Label : EXPRESSION
-          return
+          39
           Label : RETURN
-            P
+            40

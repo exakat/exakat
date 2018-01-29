@@ -1,135 +1,163 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          6
           Label : BLOCK
-            {}
+            7
             Label : EXPRESSION
-              use
+              8
               Label : USE
-                a\b
+                9
             Label : EXPRESSION
-              =
+              11
               Label : LEFT
-                $c
+                10
               Label : RIGHT
-                new
+                12
                 Label : NEW
-                  b\d
+                  13
                   Label : ARGUMENT
-                    Void
+                    14
                   Label : NAME
-                    b\d
+                    13
+                    Label : DEFINITION
+                      9
             Label : EXPRESSION
-              =
+              11
               Label : LEFT
-                $c
+                10
               Label : RIGHT
-                new
+                12
                 Label : NEW
-                  b\e
+                  16
                   Label : ARGUMENT
-                    Void
+                    14
                   Label : NAME
-                    b\e
+                    16
+                    Label : DEFINITION
+                      9
             Label : EXPRESSION
-              =
+              11
               Label : LEFT
-                $d
+                17
               Label : RIGHT
-                new
+                12
                 Label : NEW
-                  b
+                  18
                   Label : ARGUMENT
-                    Void
+                    14
                   Label : NAME
-                    b
+                    18
+                    Label : DEFINITION
+                      9
             Label : EXPRESSION
-              =
+              11
               Label : LEFT
-                $e
+                19
               Label : RIGHT
-                new
+                12
                 Label : NEW
-                  b\d
+                  13
+                  Label : DEFINITION
+                    9
             Label : EXPRESSION
-              =
+              11
               Label : LEFT
-                $e
+                19
               Label : RIGHT
-                new
+                12
                 Label : NEW
-                  b\e
+                  16
+                  Label : DEFINITION
+                    9
             Label : EXPRESSION
-              var_dump
+              20
               Label : ARGUMENT
-                instanceof
+                21
                 Label : CLASS
-                  b\d
+                  13
+                  Label : DEFINITION
+                    9
                 Label : VARIABLE
-                  $c
+                  10
               Label : NAME
-                var_dump
+                20
             Label : EXPRESSION
-              var_dump
+              20
               Label : ARGUMENT
-                instanceof
+                21
                 Label : CLASS
-                  b
+                  18
+                  Label : DEFINITION
+                    9
                 Label : VARIABLE
-                  $d
+                  17
               Label : NAME
-                var_dump
+                20
           Label : NAME
-            c
+            5
         Label : EXPRESSION
-          namespace
+          6
           Label : BLOCK
-            {}
+            7
             Label : EXPRESSION
-              class
+              22
               Label : DEFINITION
-                b\d
-              Label : DEFINITION
-                b\d
+                13
                 Label : ARGUMENT
-                  Void
+                  14
                 Label : NAME
-                  b\d
+                  13
+                  Label : DEFINITION
+                    9
               Label : DEFINITION
-                b\d
+                13
+                Label : DEFINITION
+                  9
               Label : DEFINITION
-                b\d
+                13
+                Label : DEFINITION
+                  9
+              Label : DEFINITION
+                13
+                Label : DEFINITION
+                  9
               Label : NAME
-                d
+                23
           Label : NAME
-            a\b
+            9
         Label : EXPRESSION
-          namespace
+          6
           Label : BLOCK
-            {}
+            7
             Label : EXPRESSION
-              class
+              22
               Label : DEFINITION
-                a\b
+                18
+                Label : DEFINITION
+                  9
               Label : DEFINITION
-                b
+                9
               Label : DEFINITION
-                b
+                18
                 Label : ARGUMENT
-                  Void
+                  14
                 Label : NAME
-                  b
+                  18
+                  Label : DEFINITION
+                    9
               Label : DEFINITION
-                b
+                18
+                Label : DEFINITION
+                  9
               Label : NAME
-                b
+                18
           Label : NAME
-            a
+            24

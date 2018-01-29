@@ -1,105 +1,105 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ->
+          16
           Label : METHOD
-            bootstrap
+            15
             Label : ARGUMENT
-              Void
+              12
             Label : NAME
-              bootstrap
+              15
           Label : OBJECT
-            (
+            5
             Label : CODE
-              new
+              6
               Label : NEW
-                class
+                7
                 Label : EXTENDS
-                  ConsoleProgram
+                  8
                 Label : METHOD
-                  main
+                  11
                   Label : ARGUMENT
-                    Void
+                    12
                   Label : BLOCK
-                    {}
+                    14
                     Label : EXPRESSION
-                      Void
+                      12
                   Label : NAME
-                    main
+                    11
                   Label : PUBLIC
-                    public
+                    10
         Label : EXPRESSION
-          return
+          17
           Label : RETURN
-            new
+            6
             Label : NEW
-              class
+              7
               Label : ARGUMENT
-                $controller
+                18
               Label : IMPLEMENTS
-                Page
-              Label : METHOD
-                __construct
+                19
+              Label : MAGICMETHOD
+                21
                 Label : ARGUMENT
-                  $controller
+                  18
                 Label : BLOCK
-                  {}
+                  14
                   Label : EXPRESSION
-                    Void
+                    12
                 Label : NAME
-                  __construct
+                  21
                 Label : PUBLIC
-                  public
+                  10
         Label : EXPRESSION
-          class
+          7
           Label : DEFINITION
-            MyPage
+            22
           Label : DEFINITION
-            MyPage
+            22
             Label : ARGUMENT
-              $controller
+              18
             Label : NAME
-              MyPage
+              22
           Label : IMPLEMENTS
-            Page
-          Label : METHOD
-            __construct
+            19
+          Label : MAGICMETHOD
+            21
             Label : ARGUMENT
-              $controller
+              18
             Label : BLOCK
-              {}
+              14
               Label : EXPRESSION
-                Void
+                12
             Label : NAME
-              __construct
+              21
             Label : PUBLIC
-              public
+              10
           Label : NAME
-            MyPage
+            22
         Label : EXPRESSION
-          return
+          17
           Label : RETURN
-            new
+            6
             Label : NEW
-              MyPage
+              22
               Label : ARGUMENT
-                $controller
+                18
               Label : NAME
-                MyPage
+                22
         Label : EXPRESSION
-          return
+          17
           Label : RETURN
-            new
+            6
             Label : NEW
-              class
+              7
               Label : ARGUMENT
-                $path
+                24
               Label : EXTENDS
-                DirectoryIterator
+                25

@@ -1,88 +1,85 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            B
+            6
             Label : ARGUMENT
-              ->
+              13
               Label : METHOD
-                C
+                9
                 Label : ARGUMENT
-                  Void
+                  11
                 Label : NAME
-                  C
+                  9
               Label : OBJECT
-                $a
+                8
             Label : NAME
-              B
+              6
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              echo
+              14
               Label : ARGUMENT
-                ::
+                41
                 Label : CLASS
-                  D
+                  15
                 Label : METHOD
-                  E
+                  17
                   Label : ARGUMENT
-                    ->
+                    13
                     Label : METHOD
-                      F
+                      20
                       Label : ARGUMENT
-                        Void
+                        11
                       Label : NAME
-                        F
+                        20
                     Label : OBJECT
-                      $b
+                      19
                   Label : ARGUMENT
-                    ->
+                    13
                     Label : METHOD
-                      G
+                      23
                       Label : ARGUMENT
-                        Void
+                        11
                       Label : NAME
-                        G
+                        23
                     Label : OBJECT
-                      $c
+                      22
                   Label : ARGUMENT
-                    0
+                    25
                   Label : ARGUMENT
-                    ?
+                    35
                     Label : CONDITION
-                      &&
+                      30
                       Label : LEFT
-                        instanceof
+                        27
                         Label : CLASS
-                          \H
+                          28
                         Label : VARIABLE
-                          $d
+                          26
                       Label : RIGHT
-                        isset
+                        31
                         Label : ARGUMENT
-                          ->
+                          13
                           Label : MEMBER
-                            I
+                            33
                           Label : OBJECT
-                            $e
-                        Label : NAME
-                          isset
+                            32
                     Label : ELSE
-                      NULL
+                      39
                     Label : THEN
-                      ->
+                      13
                       Label : MEMBER
-                        J
+                        37
                       Label : OBJECT
-                        $f
+                        36
                   Label : NAME
-                    E
-              Label : NAME
-                echo
+                    17

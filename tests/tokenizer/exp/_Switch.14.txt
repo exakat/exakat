@@ -1,29 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case 'b' :  /**/  
+              8
               Label : CASE
-                'b'
+                9
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  require
+                  12
                   Label : ARGUMENT
-                    (
+                    10
                     Label : CODE
-                      'c.php'
-                  Label : NAME
-                    require
+                      11
           Label : NAME
-            $a
+            6

@@ -1,69 +1,69 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          10
           Label : LEFT
-            list
-            Label : ARGUMENT
-              Void
-            Label : ARGUMENT
-              $a
-            Label : ARGUMENT
-              $b
-            Label : NAME
-              list
-          Label : RIGHT
-            range
-            Label : NAME
-              range
-            Label : ARGUMENT
-              0
-            Label : ARGUMENT
-              2
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            list
-            Label : ARGUMENT
-              $c
-            Label : ARGUMENT
-              Void
-            Label : ARGUMENT
-              $d
-            Label : NAME
-              list
-          Label : RIGHT
-            range
-            Label : NAME
-              range
-            Label : ARGUMENT
-              3
-            Label : ARGUMENT
-              5
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            list
-            Label : ARGUMENT
-              $e
-            Label : ARGUMENT
-              $f
-            Label : ARGUMENT
-              Void
-            Label : NAME
-              list
-          Label : RIGHT
-            range
-            Label : NAME
-              range
+            5
             Label : ARGUMENT
               6
             Label : ARGUMENT
+              8
+            Label : ARGUMENT
               9
+            Label : NAME
+              5
+          Label : RIGHT
+            11
+            Label : NAME
+              11
+            Label : ARGUMENT
+              12
+            Label : ARGUMENT
+              13
+        Label : EXPRESSION
+          10
+          Label : LEFT
+            5
+            Label : ARGUMENT
+              14
+            Label : ARGUMENT
+              6
+            Label : ARGUMENT
+              15
+            Label : NAME
+              5
+          Label : RIGHT
+            11
+            Label : NAME
+              11
+            Label : ARGUMENT
+              16
+            Label : ARGUMENT
+              17
+        Label : EXPRESSION
+          10
+          Label : LEFT
+            5
+            Label : ARGUMENT
+              18
+            Label : ARGUMENT
+              19
+            Label : ARGUMENT
+              6
+            Label : NAME
+              5
+          Label : RIGHT
+            11
+            Label : NAME
+              11
+            Label : ARGUMENT
+              20
+            Label : ARGUMENT
+              21

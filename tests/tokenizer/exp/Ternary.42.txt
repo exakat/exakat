@@ -1,89 +1,89 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $sum
+            5
           Label : RIGHT
-            ?
+            8
             Label : CONDITION
-              $carry
+              7
             Label : ELSE
-              $sum
+              5
             Label : THEN
-              +
+              9
               Label : LEFT
-                $sum
+                5
               Label : RIGHT
-                MATH_BIGINTEGER_MAX_DIGIT2
+                10
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $sum
+            5
           Label : RIGHT
-            ?
+            8
             Label : CONDITION
-              $carry
+              7
             Label : ELSE
-              $sum
+              5
             Label : THEN
-              *
+              12
               Label : LEFT
-                $sum
+                5
               Label : RIGHT
-                MATH_BIGINTEGER_MAX_DIGIT3
+                13
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $sum
+            5
           Label : RIGHT
-            ?
+            8
             Label : CONDITION
-              $carry
+              7
             Label : ELSE
-              $sum
+              5
             Label : THEN
-              *
+              12
               Label : LEFT
-                $sum
+                5
               Label : RIGHT
-                ->
+                18
                 Label : MEMBER
-                  MATH_BIGINTEGER_MAX_DIGIT4
+                  16
                 Label : OBJECT
-                  $a
+                  15
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $sum
+            5
           Label : RIGHT
-            ?
+            8
             Label : CONDITION
-              $carry
+              7
             Label : ELSE
-              $sum
+              5
             Label : THEN
-              MATH_BIGINTEGER_MAX_DIGIT5
+              19
         Label : EXPRESSION
-          switch
+          21
           Label : CASES
-             /**/ 
+            23
             Label : EXPRESSION
-              case MATHD :  /**/  
+              24
               Label : CASE
-                MATHD
+                26
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  break
+                  28
                   Label : BREAK
-                    1
+                    29
           Label : NAME
-            $x
+            22

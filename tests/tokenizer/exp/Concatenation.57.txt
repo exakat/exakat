@@ -1,64 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            7
             Label : LEFT
-              $type
+              6
             Label : RIGHT
-              is_array
+              8
               Label : ARGUMENT
-                $type
+                6
               Label : NAME
-                is_array
+                8
           Label : ELSE
-            elseif
+            18
             Label : CONDITION
-              $type
+              6
             Label : THEN
-              ;
+              3
               Label : EXPRESSION
-                .=
+                10
                 Label : LEFT
-                  $sql
+                  9
                 Label : RIGHT
-                  .
+                  13
                   Label : CONCAT
-                    ' AND thread.thread_type='
+                    19
                   Label : CONCAT
-                    db_input
+                    16
                     Label : ARGUMENT
-                      $type
+                      6
                     Label : NAME
-                      db_input
+                      16
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              .=
+              10
               Label : LEFT
-                $sql
+                9
               Label : RIGHT
-                .
+                13
                 Label : CONCAT
-                  ' AND thread.thread_type IN('
+                  11
                 Label : CONCAT
-                  implode
+                  14
                   Label : NAME
-                    implode
+                    14
                   Label : ARGUMENT
-                    ','
+                    15
                   Label : ARGUMENT
-                    db_input
+                    16
                     Label : ARGUMENT
-                      $type
+                      6
                     Label : NAME
-                      db_input
+                      16
                 Label : CONCAT
-                  ')'
+                  17

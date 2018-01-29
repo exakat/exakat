@@ -1,21 +1,21 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                a
+                8
               Label : VALUE
-                1
+                9
           Label : NAME
-            x
+            6

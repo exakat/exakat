@@ -1,87 +1,87 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            &&
+            8
             Label : LEFT
-              $b
+              7
             Label : RIGHT
-              ->
+              11
               Label : MEMBER
-                d
+                10
               Label : OBJECT
-                $c
+                9
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            ||
+            12
             Label : LEFT
-              $b
+              7
             Label : RIGHT
-              ->
+              11
               Label : METHOD
-                d
+                10
                 Label : ARGUMENT
-                  Void
+                  13
                 Label : NAME
-                  d
+                  10
               Label : OBJECT
-                $c
+                9
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            &
+            15
             Label : LEFT
-              $b
+              7
             Label : RIGHT
-              ::
+              19
               Label : CLASS
-                D
+                16
               Label : CONSTANT
-                E
+                17
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            ^
+            20
             Label : LEFT
-              $b
+              7
             Label : RIGHT
-              ::
+              19
               Label : CLASS
-                D
+                16
               Label : METHOD
-                E
+                17
                 Label : ARGUMENT
-                  Void
+                  13
                 Label : NAME
-                  E
+                  17
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            |
+            21
             Label : LEFT
-              $b
+              7
             Label : RIGHT
-              ::
+              19
               Label : CLASS
-                D
+                16
               Label : MEMBER
-                $E
+                22

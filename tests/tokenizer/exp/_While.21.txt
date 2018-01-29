@@ -1,17 +1,17 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          while
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              Void
+              7
           Label : CONDITION
-            $x
+            6

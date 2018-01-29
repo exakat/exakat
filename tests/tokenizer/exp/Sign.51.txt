@@ -1,81 +1,81 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a1
+            5
           Label : RIGHT
-            array
+            7
             Label : ARGUMENT
-              =>
+              9
               Label : INDEX
-                'b'
+                8
               Label : VALUE
-                -
+                12
                 Label : LEFT
-                  ++
+                  11
                   Label : POSTPLUSPLUS
-                    $i
+                    10
                 Label : RIGHT
-                  $j
+                  13
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a2
+            14
           Label : RIGHT
-            array
+            7
             Label : ARGUMENT
-              =>
+              9
               Label : INDEX
-                'c'
+                15
               Label : VALUE
-                -
+                12
                 Label : LEFT
-                  ++
+                  11
                   Label : PREPLUSPLUS
-                    $i
+                    10
                 Label : RIGHT
-                  $j
+                  13
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a3
+            16
           Label : RIGHT
-            array
+            7
             Label : ARGUMENT
-              =>
+              9
               Label : INDEX
-                'd'
+                17
               Label : VALUE
-                -
+                12
                 Label : LEFT
-                  --
+                  18
                   Label : POSTPLUSPLUS
-                    $i
+                    10
                 Label : RIGHT
-                  $j
+                  13
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a4
+            19
           Label : RIGHT
-            array
+            7
             Label : ARGUMENT
-              =>
+              9
               Label : INDEX
-                'e'
+                20
               Label : VALUE
-                -
+                12
                 Label : LEFT
-                  --
+                  18
                   Label : PREPLUSPLUS
-                    $i
+                    10
                 Label : RIGHT
-                  $j
+                  13

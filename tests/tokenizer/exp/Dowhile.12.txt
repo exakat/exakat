@@ -1,57 +1,57 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          do
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              if
+              6
               Label : CONDITION
-                1
+                7
               Label : ELSE
-                {}
+                8
                 Label : EXPRESSION
-                  break
+                  19
                   Label : BREAK
-                    Void
+                    20
               Label : THEN
-                {}
+                8
                 Label : EXPRESSION
-                  ->
+                  18
                   Label : METHOD
-                    f
+                    15
                     Label : ARGUMENT
-                      4
+                      14
                     Label : ARGUMENT
-                      5
+                      16
                     Label : ARGUMENT
-                      6
+                      17
                     Label : NAME
-                      f
+                      15
                   Label : OBJECT
-                    [
+                    10
                     Label : INDEX
-                      +
+                      11
                       Label : LEFT
-                        1
+                        7
                       Label : RIGHT
-                        *
+                        13
                         Label : LEFT
-                          2
+                          12
                         Label : RIGHT
-                          4
+                          14
                     Label : VARIABLE
-                      $x
+                      9
                 Label : EXPRESSION
-                  break
+                  19
                   Label : BREAK
-                    Void
+                    20
           Label : CONDITION
-            FALSE
+            22

@@ -1,173 +1,163 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              class
+              9
               Label : DEFINITION
-                NS1\ClassName1
+                15
               Label : DEFINITION
-                NS1\ClassName1
+                15
               Label : DEFINITION
-                X
+                17
                 Label : DEFINITION
-                  as
+                  19
                   Label : ALIAS
-                    X
+                    17
                   Label : NAME
-                    NS1\ClassName1
+                    15
               Label : DEFINITION
-                ClassName1
+                10
+                Label : DEFINITION
+                  15
               Label : DEFINITION
-                \NS1\ClassName1
+                33
               Label : NAME
-                ClassName1
+                10
           Label : NAME
-            NS1
+            5
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              use
+              14
               Label : USE
-                as
+                19
                 Label : ALIAS
-                  X
+                  17
                 Label : NAME
-                  NS1\ClassName1
+                  15
             Label : EXPRESSION
-              use
+              14
               Label : USE
-                NS1\ClassName1
+                15
             Label : EXPRESSION
-              class
+              9
               Label : DEFINITION
-                parent
+                30
               Label : DEFINITION
-                ParentClass
+                20
               Label : NAME
-                ParentClass
+                20
             Label : EXPRESSION
-              class
+              9
               Label : DEFINITION
-                self
+                28
               Label : DEFINITION
-                static
+                24
               Label : EXTENDS
-                ParentClass
+                20
               Label : METHOD
-                x
+                18
                 Label : ARGUMENT
-                  Void
+                  25
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    echo
+                    27
                     Label : ARGUMENT
-                      ::
+                      29
                       Label : CLASS
-                        self
+                        28
                       Label : CLASS
-                        class
-                    Label : NAME
-                      echo
+                        9
                   Label : EXPRESSION
-                    echo
+                    27
                     Label : ARGUMENT
-                      ::
+                      29
                       Label : CLASS
-                        static
+                        24
                       Label : CLASS
-                        class
-                    Label : NAME
-                      echo
+                        9
                   Label : EXPRESSION
-                    echo
+                    27
                     Label : ARGUMENT
-                      ::
+                      29
                       Label : CLASS
-                        parent
+                        30
                       Label : CLASS
-                        class
-                    Label : NAME
-                      echo
+                        9
                 Label : NAME
-                  x
+                  18
                 Label : STATIC
-                  static
+                  24
               Label : NAME
-                ClassName
+                22
             Label : EXPRESSION
-              echo
+              27
               Label : ARGUMENT
-                .
+                31
                 Label : CONCAT
-                  ::
+                  29
                   Label : CLASS
-                    X
+                    17
                     Label : DEFINITION
-                      as
+                      19
                       Label : ALIAS
-                        X
+                        17
                       Label : NAME
-                        NS1\ClassName1
+                        15
                   Label : CLASS
-                    class
+                    9
                 Label : CONCAT
-                  "\n"
-              Label : NAME
-                echo
+                  32
             Label : EXPRESSION
-              echo
+              27
               Label : ARGUMENT
-                .
+                31
                 Label : CONCAT
-                  ::
+                  29
                   Label : CLASS
-                    ClassName1
+                    10
+                    Label : DEFINITION
+                      15
                   Label : CLASS
-                    class
+                    9
                 Label : CONCAT
-                  "\n"
-              Label : NAME
-                echo
+                  32
             Label : EXPRESSION
-              echo
+              27
               Label : ARGUMENT
-                .
+                31
                 Label : CONCAT
-                  ::
+                  29
                   Label : CLASS
-                    NS1\ClassName1
+                    15
                   Label : CLASS
-                    class
+                    9
                 Label : CONCAT
-                  "\n"
-              Label : NAME
-                echo
+                  32
             Label : EXPRESSION
-              echo
+              27
               Label : ARGUMENT
-                .
+                31
                 Label : CONCAT
-                  ::
+                  29
                   Label : CLASS
-                    \NS1\ClassName1
+                    33
                   Label : CLASS
-                    class
+                    9
                 Label : CONCAT
-                  "\n"
-              Label : NAME
-                echo
+                  32
           Label : NAME
-            NS
+            12

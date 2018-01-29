@@ -1,61 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          while
+          5
           Label : BLOCK
-            {}
+            23
             Label : EXPRESSION
-              ++
+              24
               Label : POSTPLUSPLUS
-                ->
+                9
                 Label : MEMBER
-                  B
+                  7
                 Label : OBJECT
-                  $this
+                  6
           Label : CONDITION
-            &&
+            13
             Label : LEFT
-              <
+              10
               Label : LEFT
-                ->
+                9
                 Label : MEMBER
-                  B
+                  7
                 Label : OBJECT
-                  $this
+                  6
               Label : RIGHT
-                ->
+                9
                 Label : MEMBER
-                  C
+                  11
                 Label : OBJECT
-                  $this
+                  6
             Label : RIGHT
-              ===
+              20
               Label : LEFT
-                D
+                14
                 Label : NAME
-                  D
+                  14
                 Label : ARGUMENT
-                  $a
+                  16
                 Label : ARGUMENT
-                  {
+                  19
                   Label : INDEX
-                    ->
+                    9
                     Label : MEMBER
-                      B
+                      7
                     Label : OBJECT
-                      $this
+                      6
                   Label : VARIABLE
-                    ->
+                    9
                     Label : MEMBER
-                      E
+                      17
                     Label : OBJECT
-                      $this
+                      6
               Label : RIGHT
-                G
+                21

@@ -1,49 +1,49 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          throw
+          5
           Label : THROW
-            new
+            6
             Label : NEW
-              a
+              7
               Label : ARGUMENT
-                sprintf
+                8
                 Label : ARGUMENT
-                  'b'
+                  9
                 Label : ARGUMENT
-                  ::
+                  13
                   Label : CLASS
-                    C
+                    10
                   Label : CLASS
-                    class
+                    12
                 Label : ARGUMENT
-                  ?
+                  16
                   Label : CONDITION
-                    is_object
+                    14
                     Label : ARGUMENT
-                      $d
+                      15
                     Label : NAME
-                      is_object
+                      14
                   Label : ELSE
-                    gettype
+                    19
                     Label : ARGUMENT
-                      $f
+                      20
                     Label : NAME
-                      gettype
+                      19
                   Label : THEN
-                    get_class
+                    17
                     Label : ARGUMENT
-                      $e
+                      18
                     Label : NAME
-                      get_class
+                      17
                 Label : NAME
-                  sprintf
+                  8
               Label : NAME
-                a
+                7

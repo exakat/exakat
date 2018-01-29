@@ -1,73 +1,71 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              if
+              9
               Label : CONDITION
-                !
+                10
                 Label : NOT
-                  isset
+                  11
                   Label : ARGUMENT
-                    [
+                    13
                     Label : INDEX
-                      'w'
+                      14
                     Label : VARIABLE
-                      $v
-                  Label : NAME
-                    isset
+                      12
               Label : THEN
-                ;
-                Label : EXPRESSION
-                  continue
-                  Label : CONTINUE
-                    Void
-            Label : EXPRESSION
-              try
-              Label : BLOCK
-                {}
-                Label : EXPRESSION
-                  ++
-                  Label : POSTPLUSPLUS
-                    $d
-              Label : CATCH
-                catch
-                Label : BLOCK
-                  {}
-                  Label : EXPRESSION
-                    continue
-                    Label : CONTINUE
-                      Void
-                Label : CLASS
-                  Exception
-                Label : VARIABLE
-                  $e
-            Label : EXPRESSION
-              ++
-              Label : POSTPLUSPLUS
-                $a
-            Label : EXPRESSION
-              =
-              Label : LEFT
-                $b
-              Label : RIGHT
-                2
-            Label : EXPRESSION
-              =
-              Label : LEFT
-                $c
-              Label : RIGHT
                 3
+                Label : EXPRESSION
+                  15
+                  Label : CONTINUE
+                    16
+            Label : EXPRESSION
+              18
+              Label : BLOCK
+                8
+                Label : EXPRESSION
+                  20
+                  Label : POSTPLUSPLUS
+                    19
+              Label : CATCH
+                21
+                Label : BLOCK
+                  8
+                  Label : EXPRESSION
+                    15
+                    Label : CONTINUE
+                      16
+                Label : CLASS
+                  22
+                Label : VARIABLE
+                  24
+            Label : EXPRESSION
+              20
+              Label : POSTPLUSPLUS
+                6
+            Label : EXPRESSION
+              25
+              Label : LEFT
+                7
+              Label : RIGHT
+                26
+            Label : EXPRESSION
+              25
+              Label : LEFT
+                27
+              Label : RIGHT
+                28
           Label : SOURCE
-            $a
+            6
           Label : VALUE
-            $b
+            7

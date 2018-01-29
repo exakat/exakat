@@ -1,137 +1,133 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            {}
+            13
             Label : EXPRESSION
-              if
+              14
               Label : CONDITION
-                ===
+                18
                 Label : LEFT
-                  C
+                  15
                   Label : NAME
-                    C
+                    15
                   Label : ARGUMENT
-                    $d
+                    17
                   Label : ARGUMENT
-                    $b
+                    10
                 Label : RIGHT
-                  0
+                  19
               Label : THEN
-                {}
+                13
                 Label : EXPRESSION
-                  =
+                  21
                   Label : LEFT
-                    $e
+                    20
                   Label : RIGHT
-                    .
+                    28
                     Label : CONCAT
-                      D
+                      22
                       Label : ARGUMENT
-                        'E'
+                        24
                       Label : ARGUMENT
-                        F
+                        26
                       Label : ARGUMENT
-                        $d
+                        17
                       Label : NAME
-                        D
+                        22
                     Label : CONCAT
-                      'G'
+                      29
                 Label : EXPRESSION
-                  if
+                  14
                   Label : CONDITION
-                    ===
+                    18
                     Label : LEFT
-                      $c
+                      12
                     Label : RIGHT
-                      null
+                      31
                   Label : ELSE
-                    {}
+                    13
                     Label : EXPRESSION
-                      foreach
+                      5
                       Label : BLOCK
-                        {}
+                        13
                         Label : EXPRESSION
-                          if
+                          14
                           Label : CONDITION
-                            J
+                            41
                             Label : ARGUMENT
-                              .
+                              28
                               Label : CONCAT
-                                $g
+                                40
                               Label : CONCAT
-                                F
+                                26
                               Label : CONCAT
-                                $e
+                                20
                             Label : NAME
-                              J
+                              41
                           Label : THEN
-                            {}
+                            13
                             Label : EXPRESSION
-                              require
+                              35
                               Label : ARGUMENT
-                                .
+                                28
                                 Label : CONCAT
-                                  $g
+                                  40
                                 Label : CONCAT
-                                  F
+                                  26
                                 Label : CONCAT
-                                  $e
-                              Label : NAME
-                                require
+                                  20
                             Label : EXPRESSION
-                              return
+                              36
                               Label : RETURN
-                                I
+                                37
                       Label : SOURCE
-                        (array)
+                        39
                         Label : CAST
-                          $c
+                          12
                       Label : VALUE
-                        $g
+                        40
                   Label : THEN
-                    {}
+                    13
                     Label : EXPRESSION
-                      if
+                      14
                       Label : CONDITION
-                        =
+                        21
                         Label : LEFT
-                          $f
+                          32
                         Label : RIGHT
-                          H
+                          33
                           Label : ARGUMENT
-                            $e
+                            20
                           Label : NAME
-                            H
+                            33
                       Label : THEN
-                        {}
+                        13
                         Label : EXPRESSION
-                          require
+                          35
                           Label : ARGUMENT
-                            $f
-                          Label : NAME
-                            require
+                            32
                         Label : EXPRESSION
-                          return
+                          36
                           Label : RETURN
-                            I
+                            37
           Label : SOURCE
-            ::
+            9
             Label : CLASS
-              B
+              6
             Label : MEMBER
-              $a
+              8
           Label : VALUE
-            =>
+            11
             Label : INDEX
-              $b
+              10
             Label : VALUE
-              $c
+              12

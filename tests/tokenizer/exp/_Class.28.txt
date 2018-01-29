@@ -1,27 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                b
+                8
               Label : VALUE
-                2
+                9
           Label : NAME
-            x
+            6
           Label : PPP
-            var
+            10
             Label : PPP
-              $a
+              11
             Label : VAR
-              var
+              10

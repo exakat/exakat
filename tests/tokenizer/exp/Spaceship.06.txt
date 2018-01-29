@@ -1,99 +1,99 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !==
+            12
             Label : LEFT
-              (
+              6
               Label : CODE
-                =
+                8
                 Label : LEFT
-                  $handle
+                  7
                 Label : RIGHT
-                  fopen
+                  9
                   Label : NAME
-                    fopen
+                    9
                   Label : ARGUMENT
-                    "people.csv"
+                    10
                   Label : ARGUMENT
-                    "r"
+                    11
             Label : RIGHT
-              FALSE
+              13
           Label : THEN
-            {}
+            15
             Label : EXPRESSION
-              while
+              16
               Label : BLOCK
-                {}
+                15
                 Label : EXPRESSION
-                  =
+                  8
                   Label : LEFT
-                    $data
+                    21
                     Label : APPEND
-                      $data
+                      21
                   Label : RIGHT
-                    $row
+                    17
               Label : CONDITION
-                !==
+                12
                 Label : LEFT
-                  (
+                  6
                   Label : CODE
-                    =
+                    8
                     Label : LEFT
-                      $row
+                      17
                     Label : RIGHT
-                      fgetcsv
+                      18
                       Label : ARGUMENT
-                        $handle
+                        7
                       Label : ARGUMENT
-                        1000
+                        19
                       Label : ARGUMENT
-                        ","
+                        20
                       Label : NAME
-                        fgetcsv
+                        18
                 Label : RIGHT
-                  FALSE
+                  13
             Label : EXPRESSION
-              fclose
+              22
               Label : ARGUMENT
-                $handle
+                7
               Label : NAME
-                fclose
+                22
         Label : EXPRESSION
-          usort
+          23
           Label : NAME
-            usort
+            23
           Label : ARGUMENT
-            $data
+            21
           Label : ARGUMENT
-            function
+            24
             Label : ARGUMENT
-              $left
+              25
             Label : ARGUMENT
-              $right
+              26
             Label : BLOCK
-              {}
+              15
               Label : EXPRESSION
-                return
+                27
                 Label : RETURN
-                  <=>
+                  30
                   Label : LEFT
-                    [
+                    28
                     Label : INDEX
-                      1
+                      29
                     Label : VARIABLE
-                      $left
+                      25
                   Label : RIGHT
-                    [
+                    28
                     Label : INDEX
-                      1
+                      29
                     Label : VARIABLE
-                      $right
+                      26

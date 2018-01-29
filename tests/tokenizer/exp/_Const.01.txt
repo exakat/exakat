@@ -1,73 +1,73 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : CONST
-            const
+            12
             Label : CONST
-              const
+              12
               Label : NAME
-                C
+                13
               Label : VALUE
-                1
+                15
           Label : CONST
-            const
+            12
             Label : CONST
-              const
+              12
               Label : NAME
-                D
+                16
               Label : VALUE
-                '2'
+                18
           Label : CONST
-            const
+            12
             Label : CONST
-              const
+              12
               Label : NAME
-                E
+                19
               Label : VALUE
-                ::
+                25
                 Label : CLASS
-                  F
+                  21
                 Label : CONSTANT
-                  G
+                  23
           Label : METHOD
-            f
+            22
             Label : ARGUMENT
-              Void
+              31
             Label : BLOCK
-              {}
+              33
               Label : EXPRESSION
-                Void
+                31
             Label : NAME
-              f
+              22
             Label : PUBLIC
-              public
+              30
             Label : STATIC
-              static
+              27
           Label : NAME
-            x
+            6
           Label : PPP
-            private
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $a
+                8
               Label : RIGHT
-                'b'
+                11
             Label : PRIVATE
-              private
+              7
           Label : PPP
-            static
+            27
             Label : PPP
-              $E
+              28
             Label : PROTECTED
-              protected
+              26
             Label : STATIC
-              static
+              27

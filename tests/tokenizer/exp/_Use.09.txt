@@ -1,77 +1,77 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
             Label : EXPRESSION
-              use
+              9
               Label : USE
-                as
+                14
                 Label : ALIAS
-                  I
+                  12
                 Label : NAME
-                  G
+                  10
             Label : EXPRESSION
-              use
+              9
               Label : USE
-                as
+                14
                 Label : ALIAS
-                  F
+                  17
                 Label : NAME
-                  \E
+                  15
             Label : EXPRESSION
-              use
+              9
               Label : USE
-                A
+                19
               Label : USE
-                B
+                21
               Label : USE
-                as
+                14
                 Label : ALIAS
-                  D
+                  25
                 Label : DEFINITION
-                  A
+                  19
                 Label : NAME
-                  A\B\C
+                  23
             Label : EXPRESSION
-              use
+              9
               Label : USE
-                K
+                27
               Label : USE
-                as
+                14
                 Label : ALIAS
-                  M
+                  31
                 Label : NAME
-                  L
+                  29
               Label : USE
-                N
+                33
               Label : USE
-                as
+                14
                 Label : ALIAS
-                  P
+                  37
                 Label : NAME
-                  O
+                  35
               Label : USE
-                as
+                14
                 Label : ALIAS
-                  Q
+                  39
                 Label : NAME
-                  O
+                  35
               Label : USE
-                R
+                41
               Label : USE
-                as
+                14
                 Label : ALIAS
-                  T
+                  45
                 Label : NAME
-                  S
+                  43
           Label : NAME
-            A\B
+            5

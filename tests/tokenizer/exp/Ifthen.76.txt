@@ -1,93 +1,93 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            $a
+            7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              if
+              9
               Label : CONDITION
-                ||
+                12
                 Label : LEFT
-                  !
+                  10
                   Label : NOT
-                    $b
+                    11
                 Label : RIGHT
-                  !
+                  10
                   Label : NOT
-                    C
+                    13
                     Label : ARGUMENT
-                      $c
+                      15
                     Label : NAME
-                      C
+                      13
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  16
                   Label : RETURN
-                    D
+                    17
             Label : EXPRESSION
-              if
+              9
               Label : CONDITION
-                E
+                19
                 Label : NAME
-                  E
+                  19
                 Label : ARGUMENT
-                  ->
+                  24
                   Label : MEMBER
-                    F
+                    22
                   Label : OBJECT
-                    $d
+                    21
                 Label : ARGUMENT
-                  $e
+                  25
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  16
                   Label : RETURN
-                    G
+                    26
             Label : EXPRESSION
-              if
+              9
               Label : CONDITION
-                ->
+                24
                 Label : MEMBER
-                  H
+                  29
                 Label : OBJECT
-                  $f
+                  28
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  16
                   Label : RETURN
-                    !
+                    10
                     Label : NOT
-                      !
+                      10
                       Label : NOT
-                        I
+                        31
                         Label : NAME
-                          I
+                          31
                         Label : ARGUMENT
-                          ->
+                          24
                           Label : MEMBER
-                            J
+                            34
                           Label : OBJECT
-                            $g
+                            33
                         Label : ARGUMENT
-                          $h
+                          36
             Label : EXPRESSION
-              return
+              16
               Label : RETURN
-                K
+                37
           Label : NAME
-            B
+            5
         Label : EXPRESSION
-          Void
+          39

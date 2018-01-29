@@ -1,63 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          A
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : NAME
-            A
+            5
         Label : EXPRESSION
-          A\B
+          9
           Label : ARGUMENT
-            Void
+            7
           Label : NAME
-            A\B
+            9
         Label : EXPRESSION
-          A\B\C
+          11
           Label : ARGUMENT
-            Void
+            7
           Label : NAME
-            A\B\C
+            11
         Label : EXPRESSION
-          A\B\C\D
+          13
           Label : ARGUMENT
-            Void
+            7
           Label : NAME
-            A\B\C\D
+            13
         Label : EXPRESSION
-          A\B\C\D\E
+          15
           Label : ARGUMENT
-            Void
+            7
           Label : NAME
-            A\B\C\D\E
+            15
         Label : EXPRESSION
-          A\B\C\D\E\F
+          17
           Label : ARGUMENT
-            Void
+            7
           Label : NAME
-            A\B\C\D\E\F
+            17
         Label : EXPRESSION
-          A\B\C\D\E\F\G
+          19
           Label : ARGUMENT
-            Void
+            7
           Label : NAME
-            A\B\C\D\E\F\G
+            19
         Label : EXPRESSION
-          A\B\C\D\E\F\G\H
+          21
           Label : ARGUMENT
-            Void
+            7
           Label : NAME
-            A\B\C\D\E\F\G\H
+            21
         Label : EXPRESSION
-          A\B\C\D\E\F\G\H\I
+          23
           Label : ARGUMENT
-            Void
+            7
           Label : NAME
-            A\B\C\D\E\F\G\H\I
+            23

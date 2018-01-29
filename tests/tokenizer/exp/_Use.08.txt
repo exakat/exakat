@@ -1,33 +1,33 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          use
+          5
           Label : USE
-            as
+            10
             Label : ALIAS
-              D
+              8
             Label : NAME
-              A\B\C
+              6
         Label : EXPRESSION
-          use
+          5
           Label : USE
-            as
+            10
             Label : ALIAS
-              E
+              13
             Label : NAME
-              A
+              11
         Label : EXPRESSION
-          use
+          5
           Label : USE
-            as
+            10
             Label : ALIAS
-              F
+              17
             Label : NAME
-              \A
+              15

@@ -1,43 +1,43 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            static
+            6
             Label : ARGUMENT
-              function
+              7
               Label : ARGUMENT
-                $fulfill
+                8
               Label : BLOCK
-                {}
+                10
                 Label : EXPRESSION
-                  ++
+                  11
                   Label : POSTPLUSPLUS
-                    $self
+                    9
               Label : USE
-                $self
+                9
             Label : NAME
-              static
+              6
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            static
+            6
             Label : ARGUMENT
-              function
+              7
               Label : ARGUMENT
-                $fulfill
+                8
               Label : BLOCK
-                {}
+                10
                 Label : EXPRESSION
-                  ++
+                  11
                   Label : POSTPLUSPLUS
-                    $self
+                    9
             Label : NAME
-              static
+              6

@@ -1,53 +1,53 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          !
+          5
           Label : NOT
-            [
+            7
             Label : INDEX
-              1
+              8
             Label : VARIABLE
-              $x
+              6
         Label : EXPRESSION
-          !
+          5
           Label : NOT
-            [
+            7
             Label : INDEX
-              2
+              9
             Label : VARIABLE
-              [
+              7
               Label : INDEX
-                1
+                8
               Label : VARIABLE
-                $x
+                6
         Label : EXPRESSION
-          !
+          5
           Label : NOT
-            [
+            7
             Label : INDEX
-              3
+              10
             Label : VARIABLE
-              [
+              7
               Label : INDEX
-                2
+                9
               Label : VARIABLE
-                [
+                7
                 Label : INDEX
-                  1
+                  8
                 Label : VARIABLE
-                  $x
+                  6
         Label : EXPRESSION
-          !
+          5
           Label : NOT
-            {
+            11
             Label : INDEX
-              1
+              8
             Label : VARIABLE
-              $x
+              6

@@ -1,57 +1,57 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          static
+          5
           Label : STATIC
-            $inGlobal
+            6
         Label : EXPRESSION
-          class
+          8
           Label : METHOD
-            y
+            18
             Label : ARGUMENT
-              Void
+              19
             Label : BLOCK
-              {}
+              21
               Label : EXPRESSION
-                static
+                5
                 Label : STATIC
-                  =
+                  12
                   Label : LEFT
-                    $inFunction
+                    22
                   Label : RIGHT
-                    1
+                    14
             Label : NAME
-              y
+              18
           Label : NAME
-            a
+            9
           Label : PPP
-            static
+            5
             Label : PPP
-              =
+              12
               Label : LEFT
-                $ps
+                11
               Label : RIGHT
-                1
+                14
             Label : PUBLIC
-              public
+              10
             Label : STATIC
-              static
+              5
           Label : PPP
-            public
+            10
             Label : PPP
-              =
+              12
               Label : LEFT
-                $sp
+                15
               Label : RIGHT
-                2
+                17
             Label : PUBLIC
-              public
+              10
             Label : STATIC
-              static
+              5

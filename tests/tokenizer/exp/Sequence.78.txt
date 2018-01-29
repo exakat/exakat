@@ -1,645 +1,639 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ==
+            7
             Label : LEFT
-              $a
+              6
             Label : RIGHT
-              'B'
+              8
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              =
+              12
               Label : LEFT
-                $b
+                11
               Label : RIGHT
-                C
+                13
                 Label : ARGUMENT
-                  'D'
+                  15
                 Label : NAME
-                  C
+                  13
             Label : EXPRESSION
-              =
+              12
               Label : LEFT
-                $c
+                17
               Label : RIGHT
-                'E'
+                18
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ==
+            7
             Label : LEFT
-              $d
+              20
             Label : RIGHT
-              'F'
+              21
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              =
+              12
               Label : LEFT
-                $e
+                23
               Label : RIGHT
-                .
+                26
                 Label : CONCAT
-                  'G'
+                  24
                 Label : CONCAT
-                  H
+                  27
                   Label : ARGUMENT
-                    'I'
+                    29
                   Label : NAME
-                    H
+                    27
                 Label : CONCAT
-                  'J'
+                  31
             Label : EXPRESSION
-              =
+              12
               Label : LEFT
-                $f
+                33
               Label : RIGHT
-                'K'
+                34
         Label : EXPRESSION
-          =
+          12
           Label : LEFT
-            $g
+            36
           Label : RIGHT
-            0
+            37
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ==
+            7
             Label : LEFT
-              [
+              39
               Label : INDEX
-                'L'
+                40
               Label : VARIABLE
-                $h
+                38
             Label : RIGHT
-              [
+              39
               Label : INDEX
-                'M'
+                43
               Label : VARIABLE
-                $i
+                42
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              =
+              12
               Label : LEFT
-                $j
+                45
               Label : RIGHT
-                1
+                46
         Label : EXPRESSION
-          =
+          12
           Label : LEFT
-            $k
+            47
           Label : RIGHT
-            .
+            26
             Label : CONCAT
-              'N'
+              48
             Label : CONCAT
-              O
+              50
               Label : ARGUMENT
-                'P'
+                52
               Label : NAME
-                O
+                50
             Label : CONCAT
-              'Q'
+              54
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ==
+            7
             Label : LEFT
-              [
+              39
               Label : INDEX
-                'R'
+                57
               Label : VARIABLE
-                $l
+                56
             Label : RIGHT
-              'S'
+              59
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              =
+              12
               Label : LEFT
-                $m
+                61
               Label : RIGHT
-                .
+                26
                 Label : CONCAT
-                  'T'
+                  62
                 Label : CONCAT
-                  U
+                  64
                   Label : ARGUMENT
-                    'V'
+                    66
                   Label : NAME
-                    U
+                    64
                 Label : CONCAT
-                  'W'
+                  68
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ==
+            7
             Label : LEFT
-              [
+              39
               Label : INDEX
-                'X'
+                71
               Label : VARIABLE
-                $n
+                70
             Label : RIGHT
-              'Y'
+              73
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              =
+              12
               Label : LEFT
-                $o
+                75
               Label : RIGHT
-                .
+                26
                 Label : CONCAT
-                  'Z'
+                  76
                 Label : CONCAT
-                  AA
+                  78
                   Label : ARGUMENT
-                    'AB'
+                    80
                   Label : NAME
-                    AA
+                    78
                 Label : CONCAT
-                  'AC'
+                  82
         Label : EXPRESSION
-          AC
+          84
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            AE
+            87
             Label : ARGUMENT
-              [
+              39
               Label : INDEX
-                'AF'
+                90
               Label : VARIABLE
-                $p
+                89
             Label : NAME
-              AE
+              87
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          AF
+          92
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            [
+            39
             Label : INDEX
-              'AH'
+              95
             Label : VARIABLE
-              $q
+              94
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          AH
+          97
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            [
+            39
             Label : INDEX
-              'AJ'
+              100
             Label : VARIABLE
-              $r
+              99
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          AJ
+          102
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            isset
+            104
             Label : ARGUMENT
-              [
+              39
               Label : INDEX
-                'AL'
+                106
               Label : VARIABLE
-                $s
-            Label : NAME
-              isset
+                105
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              AL
+              108
             Label : EXPRESSION
-              <?=
+              86
               Label : ARGUMENT
-                AN
+                110
                 Label : ARGUMENT
-                  'AO'
+                  112
                 Label : NAME
-                  AN
+                  110
               Label : NAME
-                <?=
+                86
             Label : EXPRESSION
-              Void
+              114
             Label : EXPRESSION
-              AO
+              116
         Label : EXPRESSION
-          AP
+          118
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            AR
+            120
             Label : ARGUMENT
-              'AT'
+              122
             Label : NAME
-              AR
+              120
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          AT
+          124
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            [
+            39
             Label : INDEX
-              'AV'
+              127
             Label : VARIABLE
-              $t
+              126
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          AV
+          129
         Label : EXPRESSION
-          AW
+          131
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            AY
+            133
             Label : ARGUMENT
-              'AZ'
+              135
             Label : NAME
-              AY
+              133
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          AZ
+          137
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            BB
+            139
             Label : ARGUMENT
-              [
+              39
               Label : INDEX
-                'BC'
+                142
               Label : VARIABLE
-                $u
+                141
             Label : NAME
-              BB
+              139
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          BC
+          144
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            BE
+            146
             Label : ARGUMENT
-              'BF'
+              148
             Label : NAME
-              BE
+              146
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          BF
+          150
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            BH
+            152
             Label : ARGUMENT
-              [
+              39
               Label : INDEX
-                'BI'
+                155
               Label : VARIABLE
-                $v
+                154
             Label : NAME
-              BH
+              152
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          BI
+          157
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            BK
+            159
             Label : ARGUMENT
-              'BL'
+              161
             Label : NAME
-              BK
+              159
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          BL
+          163
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            $w
+            165
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          BM
+          166
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            BO
+            168
             Label : ARGUMENT
-              'BP'
+              170
             Label : NAME
-              BO
+              168
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          BP
+          172
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            [
+            39
             Label : INDEX
-              'BR'
+              175
             Label : VARIABLE
-              $x
+              174
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              echo
+              177
               Label : ARGUMENT
-                BS
+                178
                 Label : ARGUMENT
-                  [
+                  39
                   Label : INDEX
-                    'BT'
+                    181
                   Label : VARIABLE
-                    $y
+                    180
                 Label : NAME
-                  BS
-              Label : NAME
-                echo
+                  178
         Label : EXPRESSION
-          BT
+          183
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            BV
+            185
             Label : ARGUMENT
-              'BW'
+              187
             Label : NAME
-              BV
+              185
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          BW
+          189
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            BY
+            191
             Label : ARGUMENT
-              $z
+              193
             Label : NAME
-              BY
+              191
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          BY
+          191
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            CA
+            194
             Label : ARGUMENT
-              'CB'
+              196
             Label : NAME
-              CA
+              194
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          CB
+          198
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            [
+            39
             Label : INDEX
-              'CD'
+              201
             Label : VARIABLE
-              $aa
+              200
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              echo
+              177
               Label : ARGUMENT
-                CE
+                203
                 Label : ARGUMENT
-                  [
+                  39
                   Label : INDEX
-                    'CF'
+                    206
                   Label : VARIABLE
-                    $ab
+                    205
                 Label : NAME
-                  CE
-              Label : NAME
-                echo
+                  203
         Label : EXPRESSION
-          CF
+          208
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            CH
+            210
             Label : ARGUMENT
-              'CI'
+              212
             Label : NAME
-              CH
+              210
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          CI
+          214
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            $ac
+            216
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          CJ
+          217
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            CL
+            219
             Label : ARGUMENT
-              'CM'
+              221
             Label : NAME
-              CL
+              219
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          CM
+          223
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            $ad
+            225
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          CN
+          226
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            CP
+            228
             Label : ARGUMENT
-              'CQ'
+              230
             Label : NAME
-              CP
+              228
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          CQ
+          232
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            237
             Label : LEFT
-              (
+              234
               Label : CODE
-                ==
+                7
                 Label : LEFT
-                  $ae
+                  235
                 Label : RIGHT
-                  2
+                  236
             Label : RIGHT
-              (
+              234
               Label : CODE
-                ==
+                7
                 Label : LEFT
-                  $af
+                  238
                 Label : RIGHT
-                  3
+                  239
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              CR
+              240
             Label : EXPRESSION
-              <?=
+              86
               Label : ARGUMENT
-                $ag
+                242
               Label : NAME
-                <?=
+                86
             Label : EXPRESSION
-              Void
+              114
             Label : EXPRESSION
-              CS
+              243
         Label : EXPRESSION
-          CT
+          245
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            [
+            39
             Label : INDEX
-              'CV'
+              248
             Label : VARIABLE
-              $ah
+              247
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          CV
+          250
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            237
             Label : LEFT
-              (
+              234
               Label : CODE
-                ==
+                7
                 Label : LEFT
-                  $ai
+                  252
                 Label : RIGHT
-                  4
+                  253
             Label : RIGHT
-              (
+              234
               Label : CODE
-                ==
+                7
                 Label : LEFT
-                  $aj
+                  254
                 Label : RIGHT
-                  5
+                  255
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              CW
+              256
         Label : EXPRESSION
-          CX
+          258
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            237
             Label : LEFT
-              (
+              234
               Label : CODE
-                ==
+                7
                 Label : LEFT
-                  $ak
+                  260
                 Label : RIGHT
-                  6
+                  261
             Label : RIGHT
-              (
+              234
               Label : CODE
-                ==
+                7
                 Label : LEFT
-                  $al
+                  262
                 Label : RIGHT
-                  7
+                  263
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              CY
+              264
             Label : EXPRESSION
-              <?=
+              86
               Label : ARGUMENT
-                $am
+                266
               Label : NAME
-                <?=
+                86
             Label : EXPRESSION
-              Void
+              114
             Label : EXPRESSION
-              CZ
+              267
         Label : EXPRESSION
-          <?=
+          86
           Label : ARGUMENT
-            [
+            39
             Label : INDEX
-              'DB'
+              270
             Label : VARIABLE
-              $an
+              269
           Label : NAME
-            <?=
+            86
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            237
             Label : LEFT
-              (
+              234
               Label : CODE
-                ==
+                7
                 Label : LEFT
-                  $ao
+                  272
                 Label : RIGHT
-                  8
+                  273
             Label : RIGHT
-              (
+              234
               Label : CODE
-                ==
+                7
                 Label : LEFT
-                  $ap
+                  274
                 Label : RIGHT
-                  9
+                  275
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              DB
+              276
     Label : EXPRESSION
-      DC
+      278

@@ -1,113 +1,101 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          x
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              echo
+              9
               Label : ARGUMENT
-                yield
+                10
                 Label : YIELD
-                  -1
-              Label : NAME
-                echo
+                  11
             Label : EXPRESSION
-              echo
+              9
               Label : ARGUMENT
-                -
+                13
                 Label : LEFT
-                  (
+                  12
                   Label : CODE
-                    yield
+                    10
                     Label : YIELD
-                      Void
+                      6
                 Label : RIGHT
-                  1
-              Label : NAME
-                echo
+                  14
             Label : EXPRESSION
-              echo
+              9
               Label : ARGUMENT
-                yield
+                10
                 Label : YIELD
-                  (
+                  12
                   Label : CODE
-                    -1
-              Label : NAME
-                echo
+                    11
             Label : EXPRESSION
-              yield
+              10
               Label : YIELD
-                or
+                16
                 Label : LEFT
-                  $foo
+                  15
                 Label : RIGHT
-                  die
+                  17
                   Label : ARGUMENT
-                    Void
-                  Label : NAME
-                    die
+                    6
             Label : EXPRESSION
-              yield
+              10
               Label : YIELD
-                (
+                12
                 Label : CODE
-                  or
+                  16
                   Label : LEFT
-                    $foo
+                    15
                   Label : RIGHT
-                    die
+                    17
                     Label : ARGUMENT
-                      Void
-                    Label : NAME
-                      die
+                      6
             Label : EXPRESSION
-              or
+              16
               Label : LEFT
-                (
+                12
                 Label : CODE
-                  yield
+                  10
                   Label : YIELD
-                    $foo
+                    15
               Label : RIGHT
-                die
+                17
                 Label : ARGUMENT
-                  Void
-                Label : NAME
-                  die
+                  6
           Label : DEFINITION
-            x
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              x
+              5
           Label : NAME
-            x
+            5
         Label : EXPRESSION
-          foreach
+          18
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              var_dump
+              20
               Label : ARGUMENT
-                $y
+                19
               Label : NAME
-                var_dump
+                20
           Label : SOURCE
-            x
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              x
+              5
           Label : VALUE
-            $y
+            19

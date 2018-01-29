@@ -1,85 +1,81 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          trait
+          5
           Label : DEFINITION
-            HelloWorld
+            6
           Label : METHOD
-            sayHello
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'Hello World!'
-                Label : NAME
-                  echo
+                  15
             Label : NAME
-              sayHello
+              9
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            HelloWorld
+            6
         Label : EXPRESSION
-          class
+          17
           Label : DEFINITION
-            TheWorldIsNotEnough
+            18
           Label : DEFINITION
-            TheWorldIsNotEnough
+            18
             Label : ARGUMENT
-              Void
+              11
             Label : NAME
-              TheWorldIsNotEnough
+              18
           Label : METHOD
-            sayHello
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'Hello Universe!'
-                Label : NAME
-                  echo
+                  21
             Label : NAME
-              sayHello
+              9
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            TheWorldIsNotEnough
+            18
           Label : USE
-            use
+            20
             Label : USE
-              HelloWorld
+              6
         Label : EXPRESSION
-          =
+          24
           Label : LEFT
-            $o
+            23
           Label : RIGHT
-            new
+            25
             Label : NEW
-              TheWorldIsNotEnough
+              18
               Label : ARGUMENT
-                Void
+                11
               Label : NAME
-                TheWorldIsNotEnough
+                18
         Label : EXPRESSION
-          ->
+          26
           Label : METHOD
-            sayHello
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : NAME
-              sayHello
+              9
           Label : OBJECT
-            $o
+            23

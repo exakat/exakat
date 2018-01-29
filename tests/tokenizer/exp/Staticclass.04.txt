@@ -1,67 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : DEFINITION
-            self
+            16
           Label : DEFINITION
-            static
+            17
           Label : METHOD
-            y
+            7
             Label : ARGUMENT
-              Void
+              8
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                echo
+                11
                 Label : ARGUMENT
-                  .
+                  14
                   Label : CONCAT
-                    ::
+                    13
                     Label : CLASS
-                      parent
+                      12
                     Label : CLASS
-                      class
+                      5
                   Label : CONCAT
-                    "\n"
-                Label : NAME
-                  echo
+                    15
               Label : EXPRESSION
-                echo
+                11
                 Label : ARGUMENT
-                  .
+                  14
                   Label : CONCAT
-                    ::
+                    13
                     Label : CLASS
-                      self
+                      16
                     Label : CLASS
-                      class
+                      5
                   Label : CONCAT
-                    "\n"
-                Label : NAME
-                  echo
+                    15
               Label : EXPRESSION
-                echo
+                11
                 Label : ARGUMENT
-                  .
+                  14
                   Label : CONCAT
-                    ::
+                    13
                     Label : CLASS
-                      static
+                      17
                     Label : CLASS
-                      class
+                      5
                   Label : CONCAT
-                    "\n"
-                Label : NAME
-                  echo
+                    15
             Label : NAME
-              y
+              7
           Label : NAME
-            x
+            6

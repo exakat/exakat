@@ -1,65 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            {}
+            16
             Label : EXPRESSION
-              ++
+              17
               Label : POSTPLUSPLUS
-                $b
+                6
           Label : SOURCE
-            ??
+            10
             Label : LEFT
-              [
+              7
               Label : INDEX
-                'B'
+                8
               Label : VARIABLE
-                $b
+                6
             Label : RIGHT
-              [
+              7
               Label : ARGUMENT
-                Void
+                11
           Label : VALUE
-            =>
+            14
             Label : INDEX
-              $c
+              13
             Label : VALUE
-              $d
+              15
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            {}
+            16
             Label : EXPRESSION
-              ++
+              17
               Label : POSTPLUSPLUS
-                $b
+                6
           Label : SOURCE
-            ?
+            21
             Label : CONDITION
-              [
+              7
               Label : INDEX
-                'C'
+                19
               Label : VARIABLE
-                $e
+                18
             Label : ELSE
-              [
+              7
               Label : ARGUMENT
-                Void
+                11
             Label : THEN
-              [
+              7
               Label : ARGUMENT
-                1
+                22
           Label : VALUE
-            =>
+            14
             Label : INDEX
-              $c
+              13
             Label : VALUE
-              $d
+              15

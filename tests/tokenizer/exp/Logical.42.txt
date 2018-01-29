@@ -1,65 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          or
+          29
           Label : LEFT
-            =
+            9
             Label : LEFT
-              ->
+              8
               Label : MEMBER
-                B
+                6
               Label : OBJECT
-                $a
+                5
             Label : RIGHT
-              new
+              10
               Label : NEW
-                \C
+                11
                 Label : ARGUMENT
-                  [
+                  16
                   Label : INDEX
-                    'E'
+                    17
                   Label : VARIABLE
-                    ->
+                    8
                     Label : MEMBER
-                      D
+                      14
                     Label : OBJECT
-                      $b
+                      13
                 Label : ARGUMENT
-                  [
+                  16
                   Label : INDEX
-                    'G'
+                    22
                   Label : VARIABLE
-                    ->
+                    8
                     Label : MEMBER
-                      F
+                      20
                     Label : OBJECT
-                      $c
+                      19
                 Label : ARGUMENT
-                  [
+                  16
                   Label : INDEX
-                    'I'
+                    27
                   Label : VARIABLE
-                    ->
+                    8
                     Label : MEMBER
-                      H
+                      25
                     Label : OBJECT
-                      $d
+                      24
                 Label : NAME
-                  \C
+                  11
           Label : RIGHT
-            ::
+            36
             Label : CLASS
-              \J
+              30
             Label : METHOD
-              K
+              32
               Label : ARGUMENT
-                'L'
+                34
               Label : NAME
-                K
+                32

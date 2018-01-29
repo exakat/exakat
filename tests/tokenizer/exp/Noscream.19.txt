@@ -1,37 +1,37 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          &&
+          11
           Label : LEFT
-            ===
+            8
             Label : LEFT
-              {
+              6
               Label : INDEX
-                $b
+                7
               Label : VARIABLE
-                $a
+                5
             Label : RIGHT
-              'B'
+              9
           Label : RIGHT
-            ===
+            8
             Label : LEFT
-              @
+              12
               Label : AT
-                {
+                6
                 Label : INDEX
-                  +
+                  15
                   Label : LEFT
-                    $d
+                    14
                   Label : RIGHT
-                    0
+                    16
                 Label : VARIABLE
-                  $c
+                  13
             Label : RIGHT
-              'C'
+              17

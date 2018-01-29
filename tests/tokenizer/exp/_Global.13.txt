@@ -1,89 +1,89 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : METHOD
-            foo
+            36
             Label : ARGUMENT
-              Void
+              37
             Label : BLOCK
-              {}
+              39
               Label : EXPRESSION
-                global
+                40
                 Label : GLOBAL
-                  $global
+                  41
               Label : EXPRESSION
-                static
+                7
                 Label : STATIC
-                  $staticFunction
+                  42
             Label : NAME
-              foo
+              36
             Label : PUBLIC
-              public
+              11
           Label : NAME
-            x
+            6
           Label : PPP
-            static
+            7
             Label : PPP
-              $staticClass
+              8
             Label : STATIC
-              static
+              7
           Label : PPP
-            public
+            11
             Label : PPP
-              $b
+              15
             Label : PPP
-              =
+              13
               Label : LEFT
-                $x
+                12
               Label : RIGHT
-                1
+                14
             Label : PUBLIC
-              public
+              11
           Label : PPP
-            public
+            11
             Label : PPP
-              =
+              13
               Label : LEFT
-                $b2
+                19
               Label : RIGHT
-                2
+                21
             Label : PPP
-              $x2
+              17
             Label : PUBLIC
-              public
+              11
           Label : PPP
-            private
+            22
             Label : PPP
-              =
+              13
               Label : LEFT
-                $private2
+                25
               Label : RIGHT
-                2
+                21
             Label : PPP
-              $private1
+              23
             Label : PPP
-              $private3
+              27
             Label : PRIVATE
-              private
+              22
           Label : PPP
-            protected
+            29
             Label : PPP
-              =
+              13
               Label : LEFT
-                $protected2
+                32
               Label : RIGHT
-                2
+                21
             Label : PPP
-              $protected1
+              30
             Label : PPP
-              $protected3
+              34
             Label : PROTECTED
-              protected
+              29

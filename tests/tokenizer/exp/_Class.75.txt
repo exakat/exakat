@@ -1,525 +1,525 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            x3
+            6
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                abstract
+                8
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                and
+                10
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                array
+                11
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                as
+                12
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                break
+                13
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                case
+                14
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                catch
+                15
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                clone
+                16
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                const
+                7
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                continue
+                17
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                declare
+                18
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                default
+                19
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                die
+                20
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                do
+                21
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                echo
+                22
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                else
+                23
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                elseif
+                24
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                empty
+                25
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                enddeclare
+                26
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                endfor
+                27
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                endforeach
+                28
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                endif
+                29
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                endswitch
+                30
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                endwhile
+                31
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                eval
+                32
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                exit
+                33
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                extends
+                34
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                final
+                35
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                finally
+                36
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                for
+                37
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                foreach
+                38
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                function
+                39
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                global
+                40
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                goto
+                41
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                if
+                42
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                implements
+                43
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                include
+                44
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                include_once
+                45
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                instanceof
+                46
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                insteadof
+                47
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                interface
+                48
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                isset
+                49
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                list
+                50
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                namespace
+                51
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                new
+                52
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                or
+                53
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                print
+                54
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                private
+                55
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                protected
+                56
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                public
+                57
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                require
+                58
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                require_once
+                59
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                return
+                60
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                static
+                61
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                switch
+                62
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                throw
+                63
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                trait
+                64
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                try
+                65
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                unset
+                66
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                use
+                67
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                var
+                68
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                while
+                69
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                xor
+                70
               Label : VALUE
-                3
+                9
           Label : CONST
-            const
+            7
             Label : CONST
-              const
+              7
               Label : NAME
-                yield
+                71
               Label : VALUE
-                3
+                9

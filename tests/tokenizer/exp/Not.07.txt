@@ -1,33 +1,31 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            =
+            8
             Label : LEFT
-              !
+              6
               Label : NOT
-                $handle
+                7
             Label : RIGHT
-              fopen
+              9
               Label : NAME
-                fopen
+                9
               Label : ARGUMENT
-                '/tmp/test'
+                10
               Label : ARGUMENT
-                'r+b'
+                11
           Label : THEN
-            {}
+            12
             Label : EXPRESSION
-              echo
+              13
               Label : ARGUMENT
-                1
-              Label : NAME
-                echo
+                14

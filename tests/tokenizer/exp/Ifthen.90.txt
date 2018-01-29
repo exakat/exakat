@@ -1,405 +1,403 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            16
             Label : LEFT
-              (
+              6
               Label : CODE
-                ||
+                11
                 Label : LEFT
-                  ==
+                  8
                   Label : LEFT
-                    $a
+                    7
                   Label : RIGHT
-                    'B'
+                    9
                 Label : RIGHT
-                  ||
+                  11
                   Label : LEFT
-                    ==
+                    8
                     Label : LEFT
-                      $a
+                      7
                     Label : RIGHT
-                      'C'
+                      12
                   Label : RIGHT
-                    ==
+                    8
                     Label : LEFT
-                      $a
+                      7
                     Label : RIGHT
-                      'D'
+                      14
             Label : RIGHT
-              ==
+              8
               Label : LEFT
-                [
+                18
                 Label : INDEX
-                  E
+                  19
                 Label : VARIABLE
-                  $b
+                  17
               Label : RIGHT
-                'F'
+                21
           Label : ELSE
-            ;
+            3
             Label : EXPRESSION
-              if
+              5
               Label : CONDITION
-                &&
+                16
                 Label : LEFT
-                  ==
+                  8
                   Label : LEFT
-                    $a
+                    7
                   Label : RIGHT
-                    'X'
+                    66
                 Label : RIGHT
-                  !=
+                  69
                   Label : LEFT
-                    $i
+                    68
                   Label : RIGHT
-                    'Y'
+                    70
               Label : THEN
-                {}
+                23
                 Label : EXPRESSION
-                  require
+                  74
                   Label : ARGUMENT
-                    (
+                    6
                     Label : CODE
-                      'Z'
-                  Label : NAME
-                    require
+                      72
                 Label : EXPRESSION
-                  if
+                  5
                   Label : CONDITION
-                    ==
+                    8
                     Label : LEFT
-                      [
+                      18
                       Label : INDEX
-                        "
+                        37
                         Label : CONCAT
-                          $i
+                          68
                       Label : VARIABLE
-                        $j
+                        75
                     Label : RIGHT
-                      'Y'
+                      70
                   Label : THEN
-                    {}
+                    23
                     Label : EXPRESSION
-                      =
+                      25
                       Label : LEFT
-                        [
+                        18
                         Label : INDEX
-                          "
+                          37
                           Label : CONCAT
-                            $i
+                            68
                         Label : VARIABLE
-                          $j
+                          75
                       Label : RIGHT
-                        $i
+                        68
                     Label : EXPRESSION
-                      =
+                      25
                       Label : LEFT
-                        [
+                        18
                         Label : INDEX
-                          "
+                          37
                           Label : CONCAT
-                            $i
+                            68
                         Label : VARIABLE
-                          $k
+                          76
                       Label : RIGHT
-                        'AB'
+                        77
                 Label : EXPRESSION
-                  =
+                  25
                   Label : LEFT
-                    $l
+                    79
                   Label : RIGHT
-                    ?
+                    82
                     Label : CONDITION
-                      (
+                      6
                       Label : CODE
-                        ==
+                        8
                         Label : LEFT
-                          [
+                          18
                           Label : INDEX
-                            $i
+                            68
                           Label : VARIABLE
-                            $k
+                            76
                         Label : RIGHT
-                          'AC'
+                          80
                     Label : ELSE
-                      [
+                      18
                       Label : INDEX
-                        AE
+                        85
                       Label : VARIABLE
-                        $b
+                        17
                     Label : THEN
-                      [
+                      18
                       Label : INDEX
-                        AD
+                        83
                       Label : VARIABLE
-                        $b
+                        17
                 Label : EXPRESSION
-                  =
+                  25
                   Label : LEFT
-                    $m
+                    87
                   Label : RIGHT
-                    [
+                    18
                     Label : INDEX
-                      $i
+                      68
                     Label : VARIABLE
-                      $j
+                      75
                 Label : EXPRESSION
-                  =
+                  25
                   Label : LEFT
-                    $m
+                    87
                   Label : RIGHT
-                    AF
+                    88
                     Label : ARGUMENT
-                      $m
+                      87
                     Label : NAME
-                      AF
+                      88
                 Label : EXPRESSION
-                  =
+                  25
                   Label : LEFT
-                    $c
+                    24
                   Label : RIGHT
-                    @
+                    26
                     Label : AT
-                      G
+                      27
                       Label : ARGUMENT
-                        $d
+                        29
                       Label : ARGUMENT
-                        $b
+                        17
                       Label : ARGUMENT
-                        .
+                        32
                         Label : CONCAT
-                          'H'
+                          30
                         Label : CONCAT
-                          I
+                          33
                           Label : ARGUMENT
-                            $e
+                            35
                           Label : ARGUMENT
-                            0
+                            36
                           Label : ARGUMENT
-                            $b
+                            17
                           Label : NAME
-                            I
+                            33
                         Label : CONCAT
-                          "
+                          37
                           Label : CONCAT
-                            J
+                            38
                           Label : CONCAT
-                            $lAK
+                            90
                           Label : CONCAT
-                            $mAL
+                            92
                           Label : CONCAT
-                            $fN
+                            46
                         Label : CONCAT
-                          I
+                          33
                           Label : ARGUMENT
-                            $e
+                            35
                           Label : ARGUMENT
-                            1
+                            48
                           Label : ARGUMENT
-                            $b
+                            17
                           Label : NAME
-                            I
+                            33
                         Label : CONCAT
-                          'P'
+                          49
                         Label : CONCAT
-                          I
+                          33
                           Label : ARGUMENT
-                            $e
+                            35
                           Label : ARGUMENT
-                            2
+                            94
                           Label : ARGUMENT
-                            $b
+                            17
                           Label : NAME
-                            I
+                            33
                         Label : CONCAT
-                          'R'
+                          51
                       Label : NAME
-                        G
+                        27
                 Label : EXPRESSION
-                  if
+                  5
                   Label : CONDITION
-                    $c
+                    24
                   Label : ELSE
-                    ;
+                    3
                     Label : EXPRESSION
-                      .
+                      32
                       Label : CONCAT
-                        'U'
+                        60
                       Label : CONCAT
-                        V
+                        62
                         Label : NAME
-                          V
+                          62
                         Label : ARGUMENT
-                          $d
+                          29
                         Label : ARGUMENT
-                          $b
+                          17
                       Label : CONCAT
-                        'W'
+                        64
                   Label : THEN
-                    {}
+                    23
                     Label : EXPRESSION
-                      while
+                      53
                       Label : BLOCK
-                        ;
+                        3
                         Label : EXPRESSION
-                          =
+                          25
                           Label : LEFT
-                            $h
+                            57
                             Label : APPEND
-                              $h
+                              57
                           Label : RIGHT
-                            [
+                            18
                             Label : INDEX
-                              T
+                              58
                             Label : VARIABLE
-                              $g
+                              54
                       Label : CONDITION
-                        (
+                        6
                         Label : CODE
-                          =
+                          25
                           Label : LEFT
-                            $g
+                            54
                           Label : RIGHT
-                            @
+                            26
                             Label : AT
-                              S
+                              55
                               Label : NAME
-                                S
+                                55
                               Label : ARGUMENT
-                                $c
+                                24
                               Label : ARGUMENT
-                                $b
+                                17
           Label : THEN
-            {}
+            23
             Label : EXPRESSION
-              =
+              25
               Label : LEFT
-                $c
+                24
               Label : RIGHT
-                @
+                26
                 Label : AT
-                  G
+                  27
                   Label : ARGUMENT
-                    $d
+                    29
                   Label : ARGUMENT
-                    $b
+                    17
                   Label : ARGUMENT
-                    .
+                    32
                     Label : CONCAT
-                      'H'
+                      30
                     Label : CONCAT
-                      I
+                      33
                       Label : ARGUMENT
-                        $e
+                        35
                       Label : ARGUMENT
-                        0
+                        36
                       Label : ARGUMENT
-                        $b
+                        17
                       Label : NAME
-                        I
+                        33
                     Label : CONCAT
-                      "
+                      37
                       Label : CONCAT
-                        J
+                        38
                       Label : CONCAT
-                        [
+                        18
                         Label : INDEX
-                          K
+                          40
                         Label : VARIABLE
-                          $b
+                          17
                       Label : CONCAT
-                        L
+                        42
                       Label : CONCAT
-                        $aM
+                        44
                       Label : CONCAT
-                        $fN
+                        46
                     Label : CONCAT
-                      I
+                      33
                       Label : ARGUMENT
-                        $e
+                        35
                       Label : ARGUMENT
-                        1
+                        48
                       Label : ARGUMENT
-                        $b
+                        17
                       Label : NAME
-                        I
+                        33
                     Label : CONCAT
-                      'P'
+                      49
                     Label : CONCAT
-                      I
+                      33
                       Label : ARGUMENT
-                        $e
+                        35
                       Label : ARGUMENT
-                        1
+                        48
                       Label : ARGUMENT
-                        $b
+                        17
                       Label : NAME
-                        I
+                        33
                     Label : CONCAT
-                      'R'
+                      51
                   Label : NAME
-                    G
+                    27
             Label : EXPRESSION
-              if
+              5
               Label : CONDITION
-                $c
+                24
               Label : ELSE
-                ;
+                3
                 Label : EXPRESSION
-                  .
+                  32
                   Label : CONCAT
-                    'U'
+                    60
                   Label : CONCAT
-                    V
+                    62
                     Label : NAME
-                      V
+                      62
                     Label : ARGUMENT
-                      $d
+                      29
                     Label : ARGUMENT
-                      $b
+                      17
                   Label : CONCAT
-                    'W'
+                    64
               Label : THEN
-                {}
+                23
                 Label : EXPRESSION
-                  while
+                  53
                   Label : BLOCK
-                    ;
+                    3
                     Label : EXPRESSION
-                      =
+                      25
                       Label : LEFT
-                        $h
+                        57
                         Label : APPEND
-                          $h
+                          57
                       Label : RIGHT
-                        [
+                        18
                         Label : INDEX
-                          T
+                          58
                         Label : VARIABLE
-                          $g
+                          54
                   Label : CONDITION
-                    (
+                    6
                     Label : CODE
-                      =
+                      25
                       Label : LEFT
-                        $g
+                        54
                       Label : RIGHT
-                        @
+                        26
                         Label : AT
-                          S
+                          55
                           Label : NAME
-                            S
+                            55
                           Label : ARGUMENT
-                            $c
+                            24
                           Label : ARGUMENT
-                            $b
+                            17

@@ -1,71 +1,71 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            1
+            6
           Label : ELSE
-            {}
+            7
             Label : EXPRESSION
-              Void
+              19
           Label : THEN
-            {}
+            7
             Label : EXPRESSION
-              =
+              11
               Label : LEFT
-                [
+                9
                 Label : INDEX
-                  3
+                  10
                 Label : VARIABLE
-                  $x
+                  8
               Label : RIGHT
-                b
+                12
                 Label : ARGUMENT
-                  $c
+                  13
                 Label : NAME
-                  b
+                  12
             Label : EXPRESSION
-              =
+              11
               Label : LEFT
-                $c
+                13
               Label : RIGHT
-                +
+                14
                 Label : LEFT
-                  1
+                  6
                 Label : RIGHT
-                  +
+                  14
                   Label : LEFT
-                    2
+                    15
                   Label : RIGHT
-                    +
+                    14
                     Label : LEFT
-                      3
+                      10
                     Label : RIGHT
-                      +
+                      14
                       Label : LEFT
-                        4
+                        16
                       Label : RIGHT
-                        {
+                        18
                         Label : INDEX
-                          4
+                          16
                         Label : VARIABLE
-                          $y
+                          17
         Label : EXPRESSION
-          while
+          21
           Label : BLOCK
-            {}
+            7
             Label : EXPRESSION
-              Void
+              19
           Label : CONDITION
-            ==
+            22
             Label : LEFT
-              $x
+              8
             Label : RIGHT
-              2
+              15

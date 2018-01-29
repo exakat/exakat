@@ -1,81 +1,81 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          10
           Label : LEFT
-            {
+            6
             Label : INDEX
-              "d"
+              9
             Label : VARIABLE
-              {
+              6
               Label : INDEX
-                {
-                Label : INDEX
-                  "c"
-                Label : VARIABLE
-                  $b
-              Label : VARIABLE
-                $a
-          Label : RIGHT
-            1
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            {
-            Label : INDEX
-              +
-              Label : LEFT
-                "d"
-              Label : RIGHT
-                2
-            Label : VARIABLE
-              {
-              Label : INDEX
-                {
-                Label : INDEX
-                  "c"
-                Label : VARIABLE
-                  $b
-              Label : VARIABLE
-                $a
-          Label : RIGHT
-            1
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            {
-            Label : INDEX
-              ?
-              Label : CONDITION
-                +
-                Label : LEFT
-                  "d"
-                Label : RIGHT
-                  *
-                  Label : LEFT
-                    2
-                  Label : RIGHT
-                    $e
-              Label : ELSE
                 6
-              Label : THEN
-                5
-            Label : VARIABLE
-              {
-              Label : INDEX
-                {
                 Label : INDEX
-                  "c"
+                  8
                 Label : VARIABLE
-                  $b
+                  7
               Label : VARIABLE
-                $a
+                5
           Label : RIGHT
-            1
+            11
+        Label : EXPRESSION
+          10
+          Label : LEFT
+            6
+            Label : INDEX
+              12
+              Label : LEFT
+                9
+              Label : RIGHT
+                13
+            Label : VARIABLE
+              6
+              Label : INDEX
+                6
+                Label : INDEX
+                  8
+                Label : VARIABLE
+                  7
+              Label : VARIABLE
+                5
+          Label : RIGHT
+            11
+        Label : EXPRESSION
+          10
+          Label : LEFT
+            6
+            Label : INDEX
+              16
+              Label : CONDITION
+                12
+                Label : LEFT
+                  9
+                Label : RIGHT
+                  14
+                  Label : LEFT
+                    13
+                  Label : RIGHT
+                    15
+              Label : ELSE
+                18
+              Label : THEN
+                17
+            Label : VARIABLE
+              6
+              Label : INDEX
+                6
+                Label : INDEX
+                  8
+                Label : VARIABLE
+                  7
+              Label : VARIABLE
+                5
+          Label : RIGHT
+            11

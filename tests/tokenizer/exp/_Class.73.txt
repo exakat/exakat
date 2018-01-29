@@ -1,793 +1,793 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            x
+            6
           Label : METHOD
-            abstract
+            8
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              abstract
+              8
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            and
+            12
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              and
+              12
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            array
+            13
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              array
+              13
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            as
+            14
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              as
+              14
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            break
+            15
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              break
+              15
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            case
+            16
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              case
+              16
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            catch
+            17
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              catch
+              17
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            class
+            5
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              class
+              5
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            clone
+            18
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              clone
+              18
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            const
+            19
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              const
+              19
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            continue
+            20
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              continue
+              20
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            declare
+            21
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              declare
+              21
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            default
+            22
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              default
+              22
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            die
+            23
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              die
+              23
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            do
+            24
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              do
+              24
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            echo
+            25
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              echo
+              25
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            else
+            26
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              else
+              26
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            elseif
+            27
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              elseif
+              27
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            empty
+            28
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              empty
+              28
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            enddeclare
+            29
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              enddeclare
+              29
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            endfor
+            30
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              endfor
+              30
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            endforeach
+            31
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              endforeach
+              31
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            endif
+            32
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              endif
+              32
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            endswitch
+            33
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              endswitch
+              33
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            endwhile
+            34
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              endwhile
+              34
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            eval
+            35
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              eval
+              35
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            exit
+            36
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              exit
+              36
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            extends
+            37
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              extends
+              37
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            final
+            38
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              final
+              38
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            finally
+            39
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              finally
+              39
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            for
+            40
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              for
+              40
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            foreach
+            41
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              foreach
+              41
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            function
+            42
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              function
+              42
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            global
+            43
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              global
+              43
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            goto
+            44
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              goto
+              44
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            if
+            45
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              if
+              45
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            implements
+            46
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              implements
+              46
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            include
+            47
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              include
+              47
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            include_once
+            48
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              include_once
+              48
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            instanceof
+            49
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              instanceof
+              49
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            insteadof
+            50
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              insteadof
+              50
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            interface
+            51
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              interface
+              51
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            isset
+            52
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              isset
+              52
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            list
+            53
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              list
+              53
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            namespace
+            54
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              namespace
+              54
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            new
+            55
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              new
+              55
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            or
+            56
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              or
+              56
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            print
+            57
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              print
+              57
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            private
+            58
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              private
+              58
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            protected
+            59
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              protected
+              59
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            public
+            7
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              public
+              7
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            require
+            60
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              require
+              60
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            require_once
+            61
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              require_once
+              61
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            return
+            62
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              return
+              62
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            static
+            63
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              static
+              63
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            switch
+            64
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              switch
+              64
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            throw
+            65
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              throw
+              65
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            trait
+            66
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              trait
+              66
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            try
+            67
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              try
+              67
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            unset
+            68
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              unset
+              68
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            use
+            69
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              use
+              69
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            var
+            70
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              var
+              70
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            while
+            71
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              while
+              71
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            xor
+            72
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              xor
+              72
             Label : PUBLIC
-              public
+              7
           Label : METHOD
-            yield
+            73
             Label : ARGUMENT
-              Void
+              9
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                Void
+                9
             Label : NAME
-              yield
+              73
             Label : PUBLIC
-              public
+              7

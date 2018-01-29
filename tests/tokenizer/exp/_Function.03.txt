@@ -1,23 +1,23 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          x
+          5
           Label : ARGUMENT
-            $a
+            6
           Label : BLOCK
-            {}
+            7
             Label : EXPRESSION
-              return
+              8
               Label : RETURN
-                1
+                9
           Label : NAME
-            x
+            5
         Label : EXPRESSION
-          Void
+          10

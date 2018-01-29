@@ -1,65 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            $x
+            6
           Label : ELSE
-            elseif
+            8
             Label : CONDITION
-              $w
+              9
             Label : ELSE
-              elseif
+              8
               Label : CONDITION
-                $v
+                12
               Label : ELSE
-                elseif
+                8
                 Label : CONDITION
-                  $u
+                  15
                 Label : ELSE
-                  elseif
+                  8
                   Label : CONDITION
-                    $t
+                    18
                   Label : ELSE
-                    ;
+                    3
                     Label : EXPRESSION
-                      $zz
+                      21
                     Label : EXPRESSION
-                      $zz2
+                      22
                   Label : THEN
-                    ;
+                    3
                     Label : EXPRESSION
-                      $tt
+                      19
                     Label : EXPRESSION
-                      $tt2
+                      20
                 Label : THEN
-                  ;
+                  3
                   Label : EXPRESSION
-                    $uu
+                    16
                   Label : EXPRESSION
-                    $uu2
+                    17
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  $vv
+                  13
                 Label : EXPRESSION
-                  $vv2
+                  14
             Label : THEN
-              ;
+              3
               Label : EXPRESSION
-                $ww
+                10
               Label : EXPRESSION
-                $ww2
+                11
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              $y
+              7
         Label : EXPRESSION
-          Void
+          23

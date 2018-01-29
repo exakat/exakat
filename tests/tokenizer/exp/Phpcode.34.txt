@@ -1,58 +1,51 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      UV
+      4
     Label : EXPRESSION
-      <?php 
+      6
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          echo
+          7
           Label : ARGUMENT
-            S
+            8
             Label : ARGUMENT
-              'UX1'
+              10
             Label : NAME
-              S
-          Label : NAME
-            echo
+              8
         Label : EXPRESSION
-          UW
+          12
         Label : EXPRESSION
-          echo
+          7
           Label : ARGUMENT
-            S
+            8
             Label : ARGUMENT
-              'UX2'
+              14
             Label : NAME
-              S
-          Label : NAME
-            echo
+              8
         Label : EXPRESSION
-          UX
+          16
         Label : EXPRESSION
-          echo
+          7
           Label : ARGUMENT
-            S
+            8
             Label : ARGUMENT
-              'UX3'
+              18
             Label : NAME
-              S
-          Label : NAME
-            echo
+              8
         Label : EXPRESSION
-          UY
+          20
         Label : EXPRESSION
-          echo
+          7
           Label : ARGUMENT
-            S
+            8
             Label : ARGUMENT
-              'UX4'
+              22
             Label : NAME
-              S
-          Label : NAME
-            echo
+              8
     Label : EXPRESSION
-      UZ
+      24

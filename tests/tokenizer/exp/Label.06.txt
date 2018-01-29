@@ -1,73 +1,73 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          :
+          7
           Label : GOTOLABEL
-            A
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $a
-          Label : RIGHT
-            1
-        Label : EXPRESSION
-          :
-          Label : GOTOLABEL
-            B
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $b
-          Label : RIGHT
-            2
-        Label : EXPRESSION
-          :
-          Label : GOTOLABEL
-            C
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $c
-          Label : RIGHT
-            3
-        Label : EXPRESSION
-          :
-          Label : GOTOLABEL
-            D
-        Label : EXPRESSION
-          :
-          Label : GOTOLABEL
-            E
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $e
-          Label : RIGHT
-            4
-        Label : EXPRESSION
-          :
-          Label : GOTOLABEL
-            F
-        Label : EXPRESSION
-          =
-          Label : LEFT
-            $f
-          Label : RIGHT
             5
         Label : EXPRESSION
-          :
-          Label : GOTOLABEL
-            G
-        Label : EXPRESSION
-          =
+          9
           Label : LEFT
-            $g
+            8
           Label : RIGHT
-            6
+            10
+        Label : EXPRESSION
+          7
+          Label : GOTOLABEL
+            11
+        Label : EXPRESSION
+          9
+          Label : LEFT
+            13
+          Label : RIGHT
+            14
+        Label : EXPRESSION
+          7
+          Label : GOTOLABEL
+            15
+        Label : EXPRESSION
+          9
+          Label : LEFT
+            17
+          Label : RIGHT
+            18
+        Label : EXPRESSION
+          7
+          Label : GOTOLABEL
+            19
+        Label : EXPRESSION
+          7
+          Label : GOTOLABEL
+            21
+        Label : EXPRESSION
+          9
+          Label : LEFT
+            23
+          Label : RIGHT
+            24
+        Label : EXPRESSION
+          7
+          Label : GOTOLABEL
+            25
+        Label : EXPRESSION
+          9
+          Label : LEFT
+            27
+          Label : RIGHT
+            28
+        Label : EXPRESSION
+          7
+          Label : GOTOLABEL
+            29
+        Label : EXPRESSION
+          9
+          Label : LEFT
+            31
+          Label : RIGHT
+            32

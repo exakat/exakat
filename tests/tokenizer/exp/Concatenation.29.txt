@@ -1,75 +1,75 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              [
+              9
               Label : INDEX
-                'a'
+                10
               Label : VARIABLE
-                $i
+                8
             Label : CONCAT
-              .
+              11
             Label : CONCAT
-              [
+              9
               Label : INDEX
-                'b'
+                12
               Label : VARIABLE
-                $i
+                8
             Label : CONCAT
-              .
+              11
             Label : CONCAT
-              [
+              9
               Label : INDEX
-                'c'
+                13
               Label : VARIABLE
-                $i
+                8
             Label : CONCAT
-              .
+              11
             Label : CONCAT
-              [
+              9
               Label : INDEX
-                'd'
+                14
               Label : VARIABLE
-                $i
+                8
             Label : CONCAT
-              -
+              15
             Label : CONCAT
-              [
+              9
               Label : INDEX
-                'e'
+                16
               Label : VARIABLE
-                $i
+                8
             Label : CONCAT
-              [
+              9
               Label : INDEX
-                'f'
+                17
               Label : VARIABLE
-                $i
+                8
             Label : CONCAT
-              .
+              11
             Label : CONCAT
-              [
+              9
               Label : INDEX
-                'x'
+                19
               Label : VARIABLE
-                [
+                9
                 Label : INDEX
-                  'x'
+                  19
                 Label : VARIABLE
-                  [
+                  9
                   Label : INDEX
-                    'g'
+                    18
                   Label : VARIABLE
-                    $i
+                    8

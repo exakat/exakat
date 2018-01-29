@@ -1,403 +1,403 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              class
+              9
               Label : METHOD
-                D
+                13
                 Label : ARGUMENT
-                  $b
+                  17
                   Label : TYPEHINT
-                    E
+                    15
                 Label : ARGUMENT
-                  $c
+                  18
                   Label : TYPEHINT
-                    E
+                    15
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      G
+                      21
                       Label : NAME
-                        G
+                        21
                       Label : ARGUMENT
-                        $b
+                        17
                       Label : ARGUMENT
-                        $c
+                        18
                 Label : NAME
-                  D
+                  13
                 Label : RETURNTYPE
-                  array
+                  19
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                H
+                23
                 Label : ARGUMENT
-                  $b
+                  17
                   Label : TYPEHINT
-                    E
+                    15
                 Label : ARGUMENT
-                  $d
+                  25
                   Label : TYPEHINT
-                    array
+                    19
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      K
+                      26
                       Label : NAME
-                        K
+                        26
                       Label : ARGUMENT
-                        $b
+                        17
                       Label : ARGUMENT
-                        $d
+                        25
                 Label : NAME
-                  H
+                  23
                 Label : RETURNTYPE
-                  E
+                  15
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                L
+                28
                 Label : ARGUMENT
-                  $c
+                  18
                   Label : TYPEHINT
-                    E
+                    15
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    if
+                    30
                     Label : CONDITION
-                      ===
+                      33
                       Label : LEFT
-                        N
+                        31
                         Label : ARGUMENT
-                          $c
+                          18
                         Label : NAME
-                          N
+                          31
                       Label : RIGHT
-                        1
+                        34
                     Label : THEN
-                      {}
+                      8
                       Label : EXPRESSION
-                        return
+                        20
                         Label : RETURN
-                          [
+                          35
                           Label : ARGUMENT
-                            Void
+                            36
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      G
+                      21
                       Label : NAME
-                        G
+                        21
                       Label : ARGUMENT
-                        'P'
+                        38
                       Label : ARGUMENT
-                        $c
+                        18
                 Label : NAME
-                  L
+                  28
                 Label : RETURNTYPE
-                  array
+                  19
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                Q
+                40
                 Label : ARGUMENT
-                  $d
+                  25
                   Label : TYPEHINT
-                    array
+                    19
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      K
+                      26
                       Label : NAME
-                        K
+                        26
                       Label : ARGUMENT
-                        T
+                        42
                       Label : ARGUMENT
-                        $d
+                        25
                 Label : NAME
-                  Q
+                  40
                 Label : RETURNTYPE
-                  E
+                  15
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                U
+                44
                 Label : ARGUMENT
-                  $c
+                  18
                   Label : TYPEHINT
-                    E
+                    15
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    if
+                    30
                     Label : CONDITION
-                      ===
+                      33
                       Label : LEFT
-                        N
+                        31
                         Label : ARGUMENT
-                          $c
+                          18
                         Label : NAME
-                          N
+                          31
                       Label : RIGHT
-                        1
+                        34
                     Label : THEN
-                      {}
+                      8
                       Label : EXPRESSION
-                        return
+                        20
                         Label : RETURN
-                          [
+                          35
                           Label : ARGUMENT
-                            Void
+                            36
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      X
+                      46
                       Label : NAME
-                        X
+                        46
                       Label : ARGUMENT
-                        'Y'
+                        48
                       Label : ARGUMENT
-                        $c
+                        18
                 Label : NAME
-                  U
+                  44
                 Label : RETURNTYPE
-                  array
+                  19
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                Z
+                50
                 Label : ARGUMENT
-                  $d
+                  25
                   Label : TYPEHINT
-                    array
+                    19
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      K
+                      26
                       Label : NAME
-                        K
+                        26
                       Label : ARGUMENT
-                        'AC'
+                        52
                       Label : ARGUMENT
-                        $d
+                        25
                 Label : NAME
-                  Z
+                  50
                 Label : RETURNTYPE
-                  E
+                  15
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                AD
+                54
                 Label : ARGUMENT
-                  $c
+                  18
                   Label : TYPEHINT
-                    E
+                    15
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      AF
+                      56
                       Label : ARGUMENT
-                        $c
+                        18
                       Label : NAME
-                        AF
+                        56
                 Label : NAME
-                  AD
+                  54
                 Label : RETURNTYPE
-                  array
+                  19
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                AG
+                58
                 Label : ARGUMENT
-                  $d
+                  25
                   Label : TYPEHINT
-                    array
+                    19
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      K
+                      26
                       Label : NAME
-                        K
+                        26
                       Label : ARGUMENT
-                        'AJ'
+                        60
                       Label : ARGUMENT
-                        $d
+                        25
                 Label : NAME
-                  AG
+                  58
                 Label : RETURNTYPE
-                  E
+                  15
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                AK
+                62
                 Label : ARGUMENT
-                  $e
+                  66
                   Label : TYPEHINT
-                    AL
+                    64
                 Label : ARGUMENT
-                  $c
+                  18
                   Label : TYPEHINT
-                    E
+                    15
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    =
+                    68
                     Label : LEFT
-                      $f
+                      67
                     Label : RIGHT
-                      'AJ'
+                      60
                   Label : EXPRESSION
-                    for
+                    69
                     Label : BLOCK
-                      {}
+                      8
                       Label : EXPRESSION
-                        .=
+                        74
                         Label : LEFT
-                          $f
+                          67
                         Label : RIGHT
-                          $c
+                          18
                     Label : FINAL
-                      ;
+                      3
                       Label : EXPRESSION
-                        <
+                        72
                         Label : LEFT
-                          $g
+                          70
                         Label : RIGHT
-                          $e
+                          66
                     Label : INCREMENT
-                      ;
+                      3
                       Label : EXPRESSION
-                        ++
+                        73
                         Label : POSTPLUSPLUS
-                          $g
+                          70
                     Label : INIT
-                      ;
+                      3
                       Label : EXPRESSION
-                        =
+                        68
                         Label : LEFT
-                          $g
+                          70
                         Label : RIGHT
-                          1
+                          34
                       Label : EXPRESSION
-                        =
+                        68
                         Label : LEFT
-                          $h
+                          71
                         Label : RIGHT
-                          N
+                          31
                           Label : ARGUMENT
-                            $c
+                            18
                           Label : NAME
-                            N
+                            31
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      $f
+                      67
                 Label : NAME
-                  AK
+                  62
                 Label : RETURNTYPE
-                  E
+                  15
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                AQ
+                75
                 Label : ARGUMENT
-                  $c
+                  18
                   Label : TYPEHINT
-                    E
+                    15
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      AU
+                      77
                       Label : ARGUMENT
-                        $c
+                        18
                       Label : NAME
-                        AU
+                        77
                 Label : NAME
-                  AQ
+                  75
                 Label : RETURNTYPE
-                  E
+                  15
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                AV
+                79
                 Label : ARGUMENT
-                  $c
+                  18
                   Label : TYPEHINT
-                    E
+                    15
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    Void
+                    36
                 Label : NAME
-                  AV
+                  79
                 Label : RETURNTYPE
-                  E
+                  15
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                list
+                81
                 Label : ARGUMENT
-                  $c
+                  18
                   Label : TYPEHINT
-                    E
+                    15
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    Void
+                    36
                 Label : NAME
-                  list
+                  81
                 Label : RETURNTYPE
-                  E
+                  15
                 Label : STATIC
-                  static
+                  12
               Label : METHOD
-                empty
+                82
                 Label : ARGUMENT
-                  $c
+                  18
                   Label : TYPEHINT
-                    E
+                    15
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    return
+                    20
                     Label : RETURN
-                      ===
+                      33
                       Label : LEFT
-                        $c
+                        18
                       Label : RIGHT
-                        'AJ'
+                        60
                 Label : NAME
-                  empty
+                  82
                 Label : RETURNTYPE
-                  E
+                  15
                 Label : STATIC
-                  static
+                  12
               Label : NAME
-                C
+                10
           Label : NAME
-            B
+            5

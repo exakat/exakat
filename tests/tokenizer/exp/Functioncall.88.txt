@@ -1,129 +1,131 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          6
           Label : EXTENDS
-            C
+            9
           Label : FINAL
-            final
+            5
           Label : NAME
-            B
+            7
           Label : PPP
-            static
+            12
             Label : PPP
-              =
+              14
               Label : LEFT
-                $b
+                13
               Label : RIGHT
-                array
+                15
                 Label : ARGUMENT
-                  =>
+                  18
                   Label : INDEX
-                    'D'
+                    16
                   Label : VALUE
-                    E
+                    19
                 Label : ARGUMENT
-                  =>
+                  18
                   Label : INDEX
-                    'F'
+                    21
                   Label : VALUE
-                    G
+                    23
                 Label : ARGUMENT
-                  =>
+                  18
                   Label : INDEX
-                    'H'
+                    25
                   Label : VALUE
-                    'I'
+                    27
                 Label : ARGUMENT
-                  =>
+                  18
                   Label : INDEX
-                    'J'
+                    29
                   Label : VALUE
-                    'I'
+                    27
                 Label : ARGUMENT
-                  =>
+                  18
                   Label : INDEX
-                    'L'
+                    31
                   Label : VALUE
-                    1
+                    33
                 Label : ARGUMENT
-                  =>
+                  18
                   Label : INDEX
-                    'M'
+                    34
                   Label : VALUE
-                    'I'
+                    27
                 Label : ARGUMENT
-                  =>
+                  18
                   Label : INDEX
-                    'O'
+                    36
                   Label : VALUE
-                    E
+                    19
                 Label : ARGUMENT
-                  =>
+                  18
                   Label : INDEX
-                    'Q'
+                    38
                   Label : VALUE
-                    array
+                    15
                     Label : ARGUMENT
-                      2
+                      40
                     Label : ARGUMENT
-                      =>
+                      18
                       Label : INDEX
-                        'R'
+                        41
                       Label : VALUE
-                        2
+                        40
                     Label : ARGUMENT
-                      =>
+                      18
                       Label : INDEX
-                        'S'
+                        43
                       Label : VALUE
-                        'I'
+                        27
                     Label : ARGUMENT
-                      =>
+                      18
                       Label : INDEX
-                        'U'
+                        45
                       Label : VALUE
-                        E
+                        19
                     Label : ARGUMENT
-                      =>
+                      18
                       Label : INDEX
-                        'W'
+                        47
                       Label : VALUE
-                        array
+                        15
                         Label : ARGUMENT
-                          =>
+                          18
                           Label : INDEX
-                            3
+                            49
                           Label : VALUE
-                            4
+                            50
                         Label : ARGUMENT
-                          5
+                          51
                 Label : ARGUMENT
-                  =>
+                  18
                   Label : INDEX
-                    'X'
+                    52
                   Label : VALUE
-                    array
+                    15
                     Label : ARGUMENT
-                      Void
-            Label : PPP
-              $c
-            Label : PPP
-              =
-              Label : LEFT
-                $d
-              Label : RIGHT
-                array
+                      54
                 Label : ARGUMENT
-                  Void
+                  54
+            Label : PPP
+              56
+            Label : PPP
+              14
+              Label : LEFT
+                57
+              Label : RIGHT
+                15
+                Label : ARGUMENT
+                  54
             Label : PUBLIC
-              public
+              11
             Label : STATIC
-              static
+              12

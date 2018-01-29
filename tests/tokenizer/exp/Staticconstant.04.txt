@@ -1,27 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ::
+          9
           Label : CLASS
-            \A
+            5
           Label : CONSTANT
-            B
+            7
         Label : EXPRESSION
-          ::
+          9
           Label : CLASS
-            \A\C
+            10
           Label : CONSTANT
-            B
+            7
         Label : EXPRESSION
-          ::
+          9
           Label : CLASS
-            \A\C\D
+            12
           Label : CONSTANT
-            B
+            7

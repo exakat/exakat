@@ -1,151 +1,149 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          generateRange
+          5
           Label : ARGUMENT
-            $start
+            7
           Label : ARGUMENT
-            $end
+            8
           Label : ARGUMENT
-            $step
+            9
             Label : DEFAULT
-              1
+              10
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              for
+              12
               Label : BLOCK
-                {}
+                11
                 Label : EXPRESSION
-                  yield
+                  17
                   Label : YIELD
-                    $i
+                    13
               Label : FINAL
-                ;
+                3
                 Label : EXPRESSION
-                  <
+                  15
                   Label : LEFT
-                    $i
+                    13
                   Label : RIGHT
-                    $end
+                    8
               Label : INCREMENT
-                ;
+                3
                 Label : EXPRESSION
-                  +=
+                  16
                   Label : LEFT
-                    $i
+                    13
                   Label : RIGHT
-                    $step
+                    9
               Label : INIT
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  14
                   Label : LEFT
-                    $i
+                    13
                   Label : RIGHT
-                    $start
+                    7
           Label : DEFINITION
-            generateRange
+            5
             Label : NAME
-              generateRange
+              5
             Label : ARGUMENT
-              0
+              28
             Label : ARGUMENT
-              1000000
+              29
           Label : NAME
-            generateRange
+            5
         Label : EXPRESSION
-          generateRange2
+          18
           Label : ARGUMENT
-            $start
+            7
           Label : ARGUMENT
-            $end
+            8
           Label : ARGUMENT
-            $step
+            9
             Label : DEFAULT
-              1
+              10
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              for
+              12
               Label : BLOCK
-                {}
+                11
                 Label : EXPRESSION
-                  yield
+                  17
                   Label : YIELD
-                    [
+                    20
                     Label : INDEX
-                      1
+                      10
                     Label : VARIABLE
-                      $i
+                      13
                 Label : EXPRESSION
-                  yield
+                  17
                   Label : YIELD
-                    ?
+                    23
                     Label : CONDITION
-                      ->
+                      22
                       Label : MEMBER
-                        y
+                        21
                       Label : OBJECT
-                        $i
+                        13
                     Label : ELSE
-                      +
+                      26
                       Label : LEFT
-                        2
+                        25
                       Label : RIGHT
-                        2
+                        25
                     Label : THEN
-                      'd'
+                      24
               Label : FINAL
-                ;
+                3
                 Label : EXPRESSION
-                  <
+                  15
                   Label : LEFT
-                    $i
+                    13
                   Label : RIGHT
-                    $end
+                    8
               Label : INCREMENT
-                ;
+                3
                 Label : EXPRESSION
-                  +=
+                  16
                   Label : LEFT
-                    $i
+                    13
                   Label : RIGHT
-                    $step
+                    9
               Label : INIT
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  14
                   Label : LEFT
-                    $i
+                    13
                   Label : RIGHT
-                    $start
+                    7
           Label : NAME
-            generateRange2
+            18
         Label : EXPRESSION
-          foreach
+          27
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              echo
+              31
               Label : ARGUMENT
-                $number
-              Label : NAME
-                echo
+                30
           Label : SOURCE
-            generateRange
+            5
             Label : NAME
-              generateRange
+              5
             Label : ARGUMENT
-              0
+              28
             Label : ARGUMENT
-              1000000
+              29
           Label : VALUE
-            $number
+            30

@@ -1,95 +1,93 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            12
             Label : LEFT
-              !=
+              10
               Label : LEFT
-                substr
+                6
                 Label : ARGUMENT
-                  $a
-                Label : ARGUMENT
-                  0
-                Label : ARGUMENT
-                  1
-                Label : NAME
-                  substr
-              Label : RIGHT
-                2
-            Label : RIGHT
-              !=
-              Label : LEFT
-                substr
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  3
-                Label : ARGUMENT
-                  4
-                Label : NAME
-                  substr
-              Label : RIGHT
-                5
-          Label : THEN
-            {}
-            Label : EXPRESSION
-              return
-              Label : RETURN
-                false
-        Label : EXPRESSION
-          while
-          Label : BLOCK
-            {}
-            Label : EXPRESSION
-              if
-              Label : CONDITION
-                ||
-                Label : LEFT
-                  !=
-                  Label : LEFT
-                    substr
-                    Label : ARGUMENT
-                      $c
-                    Label : ARGUMENT
-                      6
-                    Label : ARGUMENT
-                      7
-                    Label : NAME
-                      substr
-                  Label : RIGHT
-                    'd'
-                Label : RIGHT
-                  empty
-                  Label : ARGUMENT
-                    $e
-                  Label : NAME
-                    empty
-              Label : THEN
-                {}
-                Label : EXPRESSION
-                  break
-                  Label : BREAK
-                    Void
-            Label : EXPRESSION
-              =
-              Label : LEFT
-                $f
-              Label : RIGHT
-                h
-                Label : NAME
-                  h
-                Label : ARGUMENT
-                  $g
+                  7
                 Label : ARGUMENT
                   8
+                Label : ARGUMENT
+                  9
+                Label : NAME
+                  6
+              Label : RIGHT
+                11
+            Label : RIGHT
+              10
+              Label : LEFT
+                6
+                Label : ARGUMENT
+                  13
+                Label : ARGUMENT
+                  14
+                Label : ARGUMENT
+                  15
+                Label : NAME
+                  6
+              Label : RIGHT
+                16
+          Label : THEN
+            17
+            Label : EXPRESSION
+              18
+              Label : RETURN
+                19
+        Label : EXPRESSION
+          20
+          Label : BLOCK
+            17
+            Label : EXPRESSION
+              5
+              Label : CONDITION
+                25
+                Label : LEFT
+                  10
+                  Label : LEFT
+                    6
+                    Label : ARGUMENT
+                      21
+                    Label : ARGUMENT
+                      22
+                    Label : ARGUMENT
+                      23
+                    Label : NAME
+                      6
+                  Label : RIGHT
+                    24
+                Label : RIGHT
+                  26
+                  Label : ARGUMENT
+                    27
+              Label : THEN
+                17
+                Label : EXPRESSION
+                  28
+                  Label : BREAK
+                    29
+            Label : EXPRESSION
+              32
+              Label : LEFT
+                31
+              Label : RIGHT
+                33
+                Label : NAME
+                  33
+                Label : ARGUMENT
+                  34
+                Label : ARGUMENT
+                  35
           Label : CONDITION
-            1
+            9

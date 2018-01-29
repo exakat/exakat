@@ -1,85 +1,83 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            x
+            6
           Label : PPP
-            private
+            7
             Label : PPP
-              $y
+              9
             Label : PPP
-              $x
+              8
             Label : PPP
-              $z
+              11
             Label : PRIVATE
-              private
+              7
         Label : EXPRESSION
-          array
+          13
           Label : ARGUMENT
-            =>
+            16
             Label : INDEX
-              'C'
+              14
             Label : VALUE
-              function
+              17
               Label : ARGUMENT
-                $c
+                18
               Label : ARGUMENT
-                $d
+                19
               Label : BLOCK
-                {}
+                20
                 Label : EXPRESSION
-                  global
+                  21
                   Label : GLOBAL
-                    $e
+                    22
                   Label : GLOBAL
-                    $f
+                    23
                 Label : EXPRESSION
-                  return
+                  24
                   Label : RETURN
-                    [
+                    25
                     Label : INDEX
-                      .
+                      28
                       Label : CONCAT
-                        'D'
+                        26
                       Label : CONCAT
-                        (
+                        29
                         Label : CODE
-                          ?
+                          33
                           Label : CONDITION
-                            empty
+                            30
                             Label : ARGUMENT
-                              [
+                              25
                               Label : INDEX
-                                'E'
+                                31
                               Label : VARIABLE
-                                $c
-                            Label : NAME
-                              empty
+                                18
                           Label : ELSE
-                            [
+                            25
                             Label : INDEX
-                              [
+                              25
                               Label : INDEX
-                                'E'
+                                31
                               Label : VARIABLE
-                                $c
+                                18
                             Label : VARIABLE
-                              [
+                              25
                               Label : INDEX
-                                'G'
+                                36
                               Label : VARIABLE
-                                $f
+                                23
                           Label : THEN
-                            'F'
+                            34
                     Label : VARIABLE
-                      $e
+                      22
           Label : ARGUMENT
-            1
+            38

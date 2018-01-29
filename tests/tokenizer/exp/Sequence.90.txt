@@ -1,70 +1,67 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      N
+      4
     Label : EXPRESSION
-      <?php 
+      6
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          echo
+          7
           Label : ARGUMENT
-            I
+            8
             Label : ARGUMENT
-              ->
+              15
               Label : METHOD
-                J
+                11
                 Label : ARGUMENT
-                  Void
+                  13
                 Label : NAME
-                  J
+                  11
               Label : OBJECT
-                $a
+                10
             Label : NAME
-              I
-          Label : NAME
-            echo
+              8
         Label : EXPRESSION
-          Q
+          16
         Label : EXPRESSION
-          R
+          18
           Label : NAME
-            R
+            18
           Label : ARGUMENT
-            ::
+            26
             Label : CLASS
-              S
+              20
             Label : METHOD
-              T
+              22
               Label : ARGUMENT
-                'U'
+                24
               Label : NAME
-                T
+                22
           Label : ARGUMENT
-            'V'
+            27
         Label : EXPRESSION
-          echo
+          7
           Label : ARGUMENT
-            W
+            29
             Label : ARGUMENT
-              'X'
+              31
             Label : ARGUMENT
-              'Y'
+              33
             Label : ARGUMENT
-              ->
+              15
               Label : METHOD
-                Z
+                36
                 Label : ARGUMENT
-                  Void
+                  13
                 Label : NAME
-                  Z
+                  36
               Label : OBJECT
-                $b
+                35
             Label : NAME
-              W
-          Label : NAME
-            echo
+              29
     Label : EXPRESSION
-      AA
+      38

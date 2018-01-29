@@ -1,21 +1,21 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          7
           Label : LEFT
-            (int)
+            5
             Label : CAST
-              $a
+              6
           Label : RIGHT
-            array_pop
+            8
             Label : ARGUMENT
-              $b
+              9
             Label : NAME
-              array_pop
+              8

@@ -1,98 +1,99 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          a
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              h
+              9
               Label : ARGUMENT
-                yield
+                10
                 Label : YIELD
-                  3
+                  11
               Label : NAME
-                h
+                9
           Label : NAME
-            a
+            5
         Label : EXPRESSION
-          a2
+          12
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              $handler
+              13
               Label : ARGUMENT
-                yield
+                10
                 Label : YIELD
-                  ->
+                  16
                   Label : METHOD
-                    b
+                    15
                     Label : ARGUMENT
-                      Void
+                      6
                     Label : NAME
-                      b
+                      15
                   Label : OBJECT
-                    $a
+                    14
               Label : NAME
-                $handler
+                13
           Label : NAME
-            a2
+            12
         Label : EXPRESSION
-          a3
+          17
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              $handler
+              13
               Label : ARGUMENT
-                yield
+                10
                 Label : YIELD
-                  ->
+                  16
                   Label : METHOD
-                    accept
+                    19
                     Label : ARGUMENT
-                      Void
+                      6
                     Label : NAME
-                      accept
+                      19
                   Label : OBJECT
-                    $server
+                    18
               Label : NAME
-                $handler
+                13
           Label : NAME
-            a3
+            17
         Label : EXPRESSION
-          a4
+          20
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              $handler
+              13
               Label : ARGUMENT
-                yield
+                10
                 Label : YIELD
-                  ::
+                  21
                   Label : CLASS
-                    $server
+                    18
                   Label : METHOD
-                    accept
+                    19
                     Label : ARGUMENT
-                      Void
+                      6
                     Label : NAME
-                      accept
+                      19
               Label : NAME
-                $handler
+                13
           Label : NAME
-            a4
+            20
         Label : EXPRESSION
-          Void
+          6

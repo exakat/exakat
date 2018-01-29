@@ -1,27 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            ?
+            10
             Label : CONDITION
-              @
+              7
               Label : AT
-                function_exists
+                8
                 Label : ARGUMENT
-                  'b'
+                  9
                 Label : NAME
-                  function_exists
+                  8
             Label : ELSE
-              'd'
+              12
             Label : THEN
-              'c'
+              11

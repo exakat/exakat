@@ -1,37 +1,37 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          DefinedWithAReference
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              return
+              10
               Label : RETURN
-                $x
+                11
           Label : NAME
-            DefinedWithAReference
+            5
         Label : EXPRESSION
-          class
+          12
           Label : METHOD
-            MethodDefinedWithAReference
+            14
             Label : ARGUMENT
-              Void
+              7
             Label : BLOCK
-              {}
+              9
               Label : EXPRESSION
-                return
+                10
                 Label : RETURN
-                  $x
+                  11
             Label : NAME
-              MethodDefinedWithAReference
+              14
           Label : NAME
-            x
+            13

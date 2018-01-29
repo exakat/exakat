@@ -1,35 +1,35 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              return
+              10
               Label : RETURN
-                new
+                11
                 Label : NEW
-                  \C\D\E
+                  12
                   Label : ARGUMENT
-                    [
+                    14
                     Label : ARGUMENT
-                      =>
+                      17
                       Label : INDEX
-                        'F'
+                        15
                       Label : VALUE
-                        'G'
+                        18
                   Label : NAME
-                    \C\D\E
+                    12
           Label : NAME
-            B
+            5
         Label : EXPRESSION
-          Void
+          7

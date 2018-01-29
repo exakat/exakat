@@ -1,79 +1,77 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !
+            6
             Label : NOT
-              empty
+              7
               Label : ARGUMENT
-                [
+                9
                 Label : INDEX
-                  'D'
+                  14
                 Label : VARIABLE
-                  [
+                  9
                   Label : INDEX
-                    'C'
+                    12
                   Label : VARIABLE
-                    [
+                    9
                     Label : INDEX
-                      'B'
+                      10
                     Label : VARIABLE
-                      $b
-              Label : NAME
-                empty
+                      8
           Label : THEN
-            {}
+            16
             Label : EXPRESSION
-              =
+              26
               Label : LEFT
-                list
+                17
                 Label : NAME
-                  list
+                  17
                 Label : ARGUMENT
-                  [
+                  9
                   Label : INDEX
-                    'F'
+                    22
                   Label : VARIABLE
-                    ->
+                    21
                     Label : MEMBER
-                      E
+                      19
                     Label : OBJECT
-                      $c
+                      18
                 Label : ARGUMENT
-                  [
+                  9
                   Label : INDEX
-                    'H'
+                    24
                   Label : VARIABLE
-                    ->
+                    21
                     Label : MEMBER
-                      E
+                      19
                     Label : OBJECT
-                      $c
+                      18
               Label : RIGHT
-                I
+                27
                 Label : NAME
-                  I
+                  27
                 Label : ARGUMENT
-                  'J'
+                  29
                 Label : ARGUMENT
-                  [
+                  9
                   Label : INDEX
-                    'D'
+                    14
                   Label : VARIABLE
-                    [
+                    9
                     Label : INDEX
-                      'C'
+                      12
                     Label : VARIABLE
-                      [
+                      9
                       Label : INDEX
-                        'B'
+                        10
                       Label : VARIABLE
-                        $b
+                        8

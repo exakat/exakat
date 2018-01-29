@@ -1,43 +1,45 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          var_dump
+          5
           Label : ARGUMENT
-            new
+            6
             Label : NEW
-              class
+              7
               Label : ARGUMENT
-                $i
-              Label : METHOD
-                __construct
+                8
+              Label : ARGUMENT
+                9
+              Label : ARGUMENT
+                10
+              Label : DEFINITION
+                14
+              Label : MAGICMETHOD
+                12
                 Label : ARGUMENT
-                  $i
+                  8
                 Label : BLOCK
-                  {}
+                  13
                   Label : EXPRESSION
-                    =
+                    17
                     Label : LEFT
-                      ->
+                      16
                       Label : MEMBER
-                        i
+                        15
                       Label : OBJECT
-                        $this
+                        14
                     Label : RIGHT
-                      $i
+                      8
                 Label : NAME
-                  __construct
+                  12
                 Label : PUBLIC
-                  public
-              Label : ARGUMENT
-                $j
-              Label : ARGUMENT
-                $k
+                  11
           Label : NAME
-            var_dump
+            5

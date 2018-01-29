@@ -1,226 +1,217 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      B
+      4
     Label : EXPRESSION
-      <?php 
+      6
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          8
           Label : LEFT
-            $a
+            7
           Label : RIGHT
-            .
+            13
             Label : CONCAT
-              C
+              9
               Label : NAME
-                C
+                9
               Label : ARGUMENT
-                0
+                11
               Label : ARGUMENT
-                1
+                12
             Label : CONCAT
-              C
+              9
               Label : NAME
-                C
+                9
               Label : ARGUMENT
-                2
+                14
               Label : ARGUMENT
-                1
+                12
         Label : EXPRESSION
-          B
+          4
         Label : EXPRESSION
-          for
+          15
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              F
+              20
             Label : EXPRESSION
-              =
+              8
               Label : LEFT
-                $c
+                22
               Label : RIGHT
-                +
+                24
                 Label : LEFT
-                  (
+                  23
                   Label : CODE
-                    +
+                    24
                     Label : LEFT
-                      $b
+                      16
                     Label : RIGHT
-                      4
+                      25
                 Label : RIGHT
-                  [
+                  27
                   Label : INDEX
-                    'G'
+                    28
                   Label : VARIABLE
-                    $d
+                    26
             Label : EXPRESSION
-              H
+              30
             Label : EXPRESSION
-              for
+              15
               Label : BLOCK
-                ;
-                Label : EXPRESSION
-                  I
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $f
-                  Label : RIGHT
-                    [
-                    Label : INDEX
-                      $b
-                    Label : VARIABLE
-                      [
-                      Label : INDEX
-                        'K'
-                      Label : VARIABLE
-                        [
-                        Label : INDEX
-                          $e
-                        Label : VARIABLE
-                          [
-                          Label : INDEX
-                            'J'
-                          Label : VARIABLE
-                            $d
-                Label : EXPRESSION
-                  I
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $g
-                  Label : RIGHT
-                    ?
-                    Label : CONDITION
-                      (
-                      Label : CODE
-                        ===
-                        Label : LEFT
-                          $a
-                        Label : RIGHT
-                          .
-                          Label : CONCAT
-                            $b
-                          Label : CONCAT
-                            $e
-                    Label : ELSE
-                      'N'
-                    Label : THEN
-                      'M'
-                Label : EXPRESSION
-                  O
-                Label : EXPRESSION
-                  echo
-                  Label : ARGUMENT
-                    $g
-                  Label : NAME
-                    echo
-                Label : EXPRESSION
-                  P
-                Label : EXPRESSION
-                  echo
-                  Label : ARGUMENT
-                    $c
-                  Label : NAME
-                    echo
-                Label : EXPRESSION
-                  Q
-                Label : EXPRESSION
-                  echo
-                  Label : ARGUMENT
-                    R
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'S'
-                      Label : VARIABLE
-                        $f
-                    Label : ARGUMENT
-                      T
-                    Label : ARGUMENT
-                      'U'
-                    Label : NAME
-                      R
-                  Label : NAME
-                    echo
-                Label : EXPRESSION
-                  V
-                Label : EXPRESSION
-                  echo
-                  Label : ARGUMENT
-                    R
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'X'
-                      Label : VARIABLE
-                        $f
-                    Label : ARGUMENT
-                      T
-                    Label : ARGUMENT
-                      'U'
-                    Label : NAME
-                      R
-                  Label : NAME
-                    echo
-                Label : EXPRESSION
-                  AA
-                Label : EXPRESSION
-                  echo
-                  Label : ARGUMENT
-                    $c
-                  Label : NAME
-                    echo
-                Label : EXPRESSION
-                  AB
-              Label : FINAL
-                ;
-                Label : EXPRESSION
-                  <
-                  Label : LEFT
-                    $e
-                  Label : RIGHT
-                    3
-              Label : INCREMENT
-                ;
-                Label : EXPRESSION
-                  ++
-                  Label : POSTPLUSPLUS
-                    $e
-              Label : INIT
-                ;
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $e
-                  Label : RIGHT
-                    2
-            Label : EXPRESSION
-              AC
-          Label : FINAL
-            ;
-            Label : EXPRESSION
-              <
-              Label : LEFT
-                $b
-              Label : RIGHT
                 3
-          Label : INCREMENT
-            ;
+                Label : EXPRESSION
+                  33
+                Label : EXPRESSION
+                  8
+                  Label : LEFT
+                    35
+                  Label : RIGHT
+                    27
+                    Label : INDEX
+                      16
+                    Label : VARIABLE
+                      27
+                      Label : INDEX
+                        38
+                      Label : VARIABLE
+                        27
+                        Label : INDEX
+                          32
+                        Label : VARIABLE
+                          27
+                          Label : INDEX
+                            36
+                          Label : VARIABLE
+                            26
+                Label : EXPRESSION
+                  33
+                Label : EXPRESSION
+                  8
+                  Label : LEFT
+                    40
+                  Label : RIGHT
+                    42
+                    Label : CONDITION
+                      23
+                      Label : CODE
+                        41
+                        Label : LEFT
+                          7
+                        Label : RIGHT
+                          13
+                          Label : CONCAT
+                            16
+                          Label : CONCAT
+                            32
+                    Label : ELSE
+                      45
+                    Label : THEN
+                      43
+                Label : EXPRESSION
+                  47
+                Label : EXPRESSION
+                  49
+                  Label : ARGUMENT
+                    40
+                Label : EXPRESSION
+                  50
+                Label : EXPRESSION
+                  49
+                  Label : ARGUMENT
+                    22
+                Label : EXPRESSION
+                  52
+                Label : EXPRESSION
+                  49
+                  Label : ARGUMENT
+                    54
+                    Label : ARGUMENT
+                      27
+                      Label : INDEX
+                        56
+                      Label : VARIABLE
+                        35
+                    Label : ARGUMENT
+                      58
+                    Label : ARGUMENT
+                      60
+                    Label : NAME
+                      54
+                Label : EXPRESSION
+                  62
+                Label : EXPRESSION
+                  49
+                  Label : ARGUMENT
+                    54
+                    Label : ARGUMENT
+                      27
+                      Label : INDEX
+                        64
+                      Label : VARIABLE
+                        35
+                    Label : ARGUMENT
+                      58
+                    Label : ARGUMENT
+                      60
+                    Label : NAME
+                      54
+                Label : EXPRESSION
+                  66
+                Label : EXPRESSION
+                  49
+                  Label : ARGUMENT
+                    22
+                Label : EXPRESSION
+                  68
+              Label : FINAL
+                3
+                Label : EXPRESSION
+                  17
+                  Label : LEFT
+                    32
+                  Label : RIGHT
+                    18
+              Label : INCREMENT
+                3
+                Label : EXPRESSION
+                  19
+                  Label : POSTPLUSPLUS
+                    32
+              Label : INIT
+                3
+                Label : EXPRESSION
+                  8
+                  Label : LEFT
+                    32
+                  Label : RIGHT
+                    14
             Label : EXPRESSION
-              ++
-              Label : POSTPLUSPLUS
-                $b
-          Label : INIT
-            ;
+              70
+          Label : FINAL
+            3
             Label : EXPRESSION
-              =
+              17
               Label : LEFT
-                $b
+                16
               Label : RIGHT
-                2
+                18
+          Label : INCREMENT
+            3
+            Label : EXPRESSION
+              19
+              Label : POSTPLUSPLUS
+                16
+          Label : INIT
+            3
+            Label : EXPRESSION
+              8
+              Label : LEFT
+                16
+              Label : RIGHT
+                14

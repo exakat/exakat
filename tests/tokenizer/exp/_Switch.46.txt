@@ -1,81 +1,81 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            9
             Label : EXPRESSION
-              case self::ALGORITHM_NONE :  /**/  
+              10
               Label : CASE
-                ::
+                15
                 Label : CLASS
-                  self
+                  12
                 Label : CONSTANT
-                  ALGORITHM_NONE
+                  13
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  Void
+                  16
                 Label : EXPRESSION
-                  break
+                  18
                   Label : BREAK
-                    Void
+                    16
             Label : EXPRESSION
-              case self::ALGORITHM_DSA :  /**/  
+              19
               Label : CASE
-                ::
+                15
                 Label : CLASS
-                  self
+                  12
                 Label : CONSTANT
-                  ALGORITHM_DSA
+                  21
               Label : CODE
-                ;
+                3
             Label : EXPRESSION
-              case self::ALGORITHM_RSA :  /**/  
+              23
               Label : CASE
-                ::
+                15
                 Label : CLASS
-                  self
+                  12
                 Label : CONSTANT
-                  ALGORITHM_RSA
+                  25
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  .=
+                  28
                   Label : LEFT
-                    $data
+                    27
                   Label : RIGHT
-                    base64_decode
+                    29
                     Label : ARGUMENT
-                      ->
+                      8
                       Label : MEMBER
-                        key
+                        30
                       Label : OBJECT
-                        $this
+                        6
                     Label : NAME
-                      base64_decode
+                      29
                 Label : EXPRESSION
-                  break
+                  18
                   Label : BREAK
-                    Void
+                    16
             Label : EXPRESSION
-              default
+              31
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  32
                   Label : RETURN
-                    null
+                    33
           Label : NAME
-            ->
+            8
             Label : MEMBER
-              algorithm
+              7
             Label : OBJECT
-              $this
+              6

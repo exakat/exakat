@@ -1,45 +1,43 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foo
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              echo
-              Label : NAME
-                echo
+              9
               Label : ARGUMENT
-                "executed!"
+                10
               Label : ARGUMENT
-                PHP_EOL
+                11
           Label : DEFINITION
-            foo
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              foo
+              5
           Label : NAME
-            foo
+            5
         Label : EXPRESSION
-          var_dump
+          13
           Label : ARGUMENT
-            ??
+            15
             Label : LEFT
-              true
+              14
             Label : RIGHT
-              foo
+              5
               Label : ARGUMENT
-                Void
+                6
               Label : NAME
-                foo
+                5
           Label : NAME
-            var_dump
+            13

@@ -1,77 +1,77 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ::
+          26
           Label : CLASS
-            $b
+            5
           Label : METHOD
-            $c
+            6
             Label : ARGUMENT
-              array
+              7
               Label : ARGUMENT
-                =>
+                14
                 Label : INDEX
-                  ->
+                  13
                   Label : METHOD
-                    B
+                    9
                     Label : ARGUMENT
-                      Void
+                      11
                     Label : NAME
-                      B
+                      9
                   Label : OBJECT
-                    $this
+                    8
                 Label : VALUE
-                  ->
+                  13
                   Label : METHOD
-                    C
+                    15
                     Label : ARGUMENT
-                      Void
+                      11
                     Label : NAME
-                      C
+                      15
                   Label : OBJECT
-                    $this
+                    8
             Label : ARGUMENT
-              array
+              7
               Label : ARGUMENT
-                D
+                17
                 Label : NAME
-                  D
+                  17
                 Label : ARGUMENT
-                  'E'
+                  19
                 Label : ARGUMENT
-                  ->
+                  13
                   Label : METHOD
-                    F
+                    21
                     Label : ARGUMENT
-                      Void
+                      11
                     Label : NAME
-                      F
+                      21
                   Label : OBJECT
-                    $this
+                    8
             Label : ARGUMENT
-              D
+              17
               Label : ARGUMENT
-                'H'
+                23
               Label : ARGUMENT
-                ->
+                13
                 Label : METHOD
-                  F
+                  21
                   Label : ARGUMENT
-                    Void
+                    11
                   Label : NAME
-                    F
+                    21
                 Label : OBJECT
-                  $this
+                  8
               Label : ARGUMENT
-                $d
+                25
               Label : NAME
-                D
+                17
             Label : NAME
-              $c
+              6

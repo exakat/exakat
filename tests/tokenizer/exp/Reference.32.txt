@@ -1,57 +1,57 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          (
+          5
           Label : CODE
-            &&
+            17
             Label : LEFT
-              ===
+              10
               Label : LEFT
-                ::
+                9
                 Label : CLASS
-                  self
+                  6
                 Label : CONSTANT
-                  A
+                  7
               Label : RIGHT
-                (
+                5
                 Label : CODE
-                  &
+                  13
                   Label : LEFT
-                    ::
+                    9
                     Label : CLASS
-                      self
+                      6
                     Label : CONSTANT
-                      B
+                      11
                   Label : RIGHT
-                    ->
+                    16
                     Label : MEMBER
-                      c
+                      15
                     Label : OBJECT
-                      $this
+                      14
             Label : RIGHT
-              preg_match
+              18
               Label : NAME
-                preg_match
+                18
               Label : ARGUMENT
-                ->
+                16
                 Label : MEMBER
-                  d
+                  19
                 Label : OBJECT
-                  $this
+                  14
               Label : ARGUMENT
-                ->
+                16
                 Label : METHOD
-                  f
+                  21
                   Label : ARGUMENT
-                    Void
+                    22
                   Label : NAME
-                    f
+                    21
                 Label : OBJECT
-                  $e
+                  20

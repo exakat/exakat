@@ -1,81 +1,81 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          null
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              return
+              9
               Label : RETURN
-                __METHOD__
+                10
           Label : DEFINITION
-            null
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              null
+              5
           Label : NAME
-            null
+            5
         Label : EXPRESSION
-          true
+          12
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              return
+              9
               Label : RETURN
-                __METHOD__
+                10
           Label : DEFINITION
-            true
+            12
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              true
+              12
           Label : NAME
-            true
+            12
         Label : EXPRESSION
-          false
+          13
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              return
+              9
               Label : RETURN
-                __METHOD__
+                10
           Label : DEFINITION
-            false
+            13
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              false
+              13
           Label : NAME
-            false
+            13
         Label : EXPRESSION
-          null
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : NAME
-            null
+            5
         Label : EXPRESSION
-          true
+          12
           Label : ARGUMENT
-            Void
+            6
           Label : NAME
-            true
+            12
         Label : EXPRESSION
-          false
+          13
           Label : ARGUMENT
-            Void
+            6
           Label : NAME
-            false
+            13

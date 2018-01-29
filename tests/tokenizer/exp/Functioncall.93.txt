@@ -1,79 +1,77 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          print
+          39
           Label : ARGUMENT
-            ?
+            13
             Label : CONDITION
-              >
+              11
               Label : LEFT
-                .
+                7
                 Label : CONCAT
-                  'B'
+                  5
                 Label : CONCAT
-                  $b
+                  8
                 Label : CONCAT
-                  'C'
+                  9
                 Label : CONCAT
-                  $b
+                  8
               Label : RIGHT
-                1
+                12
             Label : ELSE
-              ?
+              13
               Label : CONDITION
-                >
+                11
                 Label : LEFT
-                  .
+                  7
                   Label : CONCAT
-                    'E'
+                    16
                   Label : CONCAT
-                    'F'
+                    18
                   Label : CONCAT
-                    $b
+                    8
                 Label : RIGHT
-                  1
+                  12
               Label : ELSE
-                ?
+                13
                 Label : CONDITION
-                  >
+                  11
                   Label : LEFT
-                    .
+                    7
                     Label : CONCAT
-                      'H'
+                      22
                     Label : CONCAT
-                      'I'
+                      24
                     Label : CONCAT
-                      J
+                      26
                       Label : NAME
-                        J
+                        26
                       Label : ARGUMENT
-                        'K'
+                        28
                       Label : ARGUMENT
-                        $c
+                        30
                     Label : CONCAT
-                      'L'
+                      31
                     Label : CONCAT
-                      $b
+                      8
                   Label : RIGHT
-                    1
+                    12
                 Label : ELSE
-                  .
+                  7
                   Label : CONCAT
-                    'N'
+                    35
                   Label : CONCAT
-                    'O'
+                    37
                 Label : THEN
-                  'M'
+                  33
               Label : THEN
-                'G'
+                20
             Label : THEN
-              'D'
-          Label : NAME
-            print
+              14

@@ -1,141 +1,141 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          a
+          5
           Label : ARGUMENT
-            2
+            6
           Label : ARGUMENT
-            3
+            7
           Label : ARGUMENT
-            __FILE__
+            8
           Label : NAME
-            a
+            5
         Label : EXPRESSION
-          \b
+          10
           Label : ARGUMENT
-            2
+            6
           Label : ARGUMENT
-            3
+            7
           Label : ARGUMENT
-            0
+            11
           Label : NAME
-            \b
+            10
         Label : EXPRESSION
-          ::
+          16
           Label : CLASS
-            c1
+            12
           Label : METHOD
-            c
+            13
             Label : ARGUMENT
-              2
+              6
             Label : ARGUMENT
-              3
+              7
             Label : ARGUMENT
-              B
+              14
             Label : NAME
-              c
+              13
         Label : EXPRESSION
-          ->
+          20
           Label : METHOD
-            d
+            18
             Label : ARGUMENT
-              2
+              6
             Label : ARGUMENT
-              3
+              7
             Label : ARGUMENT
-              null
+              19
             Label : NAME
-              d
+              18
           Label : OBJECT
-            $d2
+            17
         Label : EXPRESSION
-          \e\ee
+          21
           Label : ARGUMENT
-            2
+            6
           Label : ARGUMENT
-            3
+            7
           Label : ARGUMENT
-            C
+            22
           Label : NAME
-            \e\ee
+            21
         Label : EXPRESSION
-          $f
+          23
           Label : ARGUMENT
-            2
+            6
           Label : ARGUMENT
-            3
+            7
           Label : ARGUMENT
-            ->
+            20
             Label : MEMBER
-              D
+              25
             Label : OBJECT
-              $g
+              24
           Label : NAME
-            $f
+            23
         Label : EXPRESSION
-          $h
+          26
           Label : ARGUMENT
-            2
+            6
           Label : ARGUMENT
-            3
+            7
           Label : ARGUMENT
-            ->
+            20
             Label : METHOD
-              E
+              28
               Label : ARGUMENT
-                Void
+                30
               Label : NAME
-                E
+                28
             Label : OBJECT
-              $i
+              27
           Label : NAME
-            $h
+            26
         Label : EXPRESSION
-          $j
+          32
           Label : ARGUMENT
-            2
+            6
           Label : ARGUMENT
-            3
+            7
           Label : ARGUMENT
-            ::
+            16
             Label : CLASS
-              F
+              33
             Label : MEMBER
-              $k
+              35
           Label : NAME
-            $j
+            32
         Label : EXPRESSION
-          $l
+          36
           Label : ARGUMENT
-            2
+            6
           Label : ARGUMENT
-            3
+            7
           Label : ARGUMENT
-            ::
+            16
             Label : CLASS
-              G
+              37
             Label : CONSTANT
-              H
+              39
           Label : NAME
-            $l
+            36
         Label : EXPRESSION
-          $m
+          41
           Label : ARGUMENT
-            2
+            6
           Label : ARGUMENT
-            3
+            7
           Label : ARGUMENT
-            ::
+            16
             Label : CLASS
-              I
+              42
             Label : CONSTANT
-              J
+              44
           Label : NAME
-            $m
+            41

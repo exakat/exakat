@@ -1,59 +1,57 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            =
+            7
             Label : LEFT
-              $a
+              6
             Label : RIGHT
-              $b
+              8
           Label : THEN
-            {}
+            9
             Label : EXPRESSION
-              ?
+              14
               Label : CONDITION
-                (
+                10
                 Label : CODE
-                  ==
+                  12
                   Label : LEFT
-                    $c
+                    11
                   Label : RIGHT
-                    'd'
+                    13
               Label : ELSE
-                =
+                7
                 Label : LEFT
-                  $g
+                  17
                 Label : RIGHT
-                  'h'
+                  18
               Label : THEN
-                =
+                7
                 Label : LEFT
-                  $e
+                  15
                 Label : RIGHT
-                  'f'
+                  16
             Label : EXPRESSION
-              =
+              7
               Label : LEFT
-                $i
+                19
               Label : RIGHT
-                1
+                20
             Label : EXPRESSION
-              echo
+              21
               Label : ARGUMENT
-                .
+                23
                 Label : CONCAT
-                  'j'
+                  22
                 Label : CONCAT
-                  $k
+                  24
                 Label : CONCAT
-                  'l'
-              Label : NAME
-                echo
+                  25

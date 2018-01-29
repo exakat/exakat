@@ -1,169 +1,169 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            function
+            7
             Label : ARGUMENT
-              $matches
+              9
               Label : TYPEHINT
-                array
+                8
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                return
+                11
                 Label : RETURN
-                  new
+                  12
                   Label : NEW
-                    Match
+                    13
                     Label : NAME
-                      Match
+                      13
                     Label : ARGUMENT
-                      [
+                      15
                       Label : INDEX
-                        1
+                        16
                       Label : VARIABLE
-                        $matches
+                        9
                     Label : ARGUMENT
-                      [
+                      15
                       Label : INDEX
-                        0
+                        17
                       Label : VARIABLE
-                        $matches
+                        9
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            function
+            7
             Label : ARGUMENT
-              $matches
+              9
               Label : TYPEHINT
-                callable
+                18
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                return
+                11
                 Label : RETURN
-                  new
+                  12
                   Label : NEW
-                    Match
+                    13
                     Label : NAME
-                      Match
+                      13
                     Label : ARGUMENT
-                      [
+                      15
                       Label : INDEX
-                        1
+                        16
                       Label : VARIABLE
-                        $matches
+                        9
                     Label : ARGUMENT
-                      [
+                      15
                       Label : INDEX
-                        0
+                        17
                       Label : VARIABLE
-                        $matches
+                        9
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            function
+            7
             Label : ARGUMENT
-              $matches
+              9
               Label : TYPEHINT
-                x
+                19
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                return
+                11
                 Label : RETURN
-                  new
+                  12
                   Label : NEW
-                    Match
+                    13
                     Label : NAME
-                      Match
+                      13
                     Label : ARGUMENT
-                      [
+                      15
                       Label : INDEX
-                        1
+                        16
                       Label : VARIABLE
-                        $matches
+                        9
                     Label : ARGUMENT
-                      [
+                      15
                       Label : INDEX
-                        0
+                        17
                       Label : VARIABLE
-                        $matches
+                        9
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            function
+            7
             Label : ARGUMENT
-              $matches
+              9
               Label : TYPEHINT
-                x\d
+                20
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                return
+                11
                 Label : RETURN
-                  new
+                  12
                   Label : NEW
-                    Match
+                    13
                     Label : NAME
-                      Match
+                      13
                     Label : ARGUMENT
-                      [
+                      15
                       Label : INDEX
-                        1
+                        16
                       Label : VARIABLE
-                        $matches
+                        9
                     Label : ARGUMENT
-                      [
+                      15
                       Label : INDEX
-                        0
+                        17
                       Label : VARIABLE
-                        $matches
+                        9
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            function
+            7
             Label : ARGUMENT
-              $matches
+              9
               Label : TYPEHINT
-                \x\d
+                21
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                return
+                11
                 Label : RETURN
-                  new
+                  12
                   Label : NEW
-                    Match
+                    13
                     Label : NAME
-                      Match
+                      13
                     Label : ARGUMENT
-                      [
+                      15
                       Label : INDEX
-                        1
+                        16
                       Label : VARIABLE
-                        $matches
+                        9
                     Label : ARGUMENT
-                      [
+                      15
                       Label : INDEX
-                        0
+                        17
                       Label : VARIABLE
-                        $matches
+                        9

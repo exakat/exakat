@@ -1,17 +1,17 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ++
+          7
           Label : POSTPLUSPLUS
-            $
+            5
             Label : NAME
-              $
+              5
               Label : NAME
-                $a
+                6

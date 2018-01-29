@@ -1,101 +1,91 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $f
+            5
           Label : RIGHT
-            'f'
+            7
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $e
+            8
           Label : RIGHT
-            'e'
+            9
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $r
+            10
           Label : RIGHT
-            'r'
+            11
         Label : EXPRESSION
-          f
+          12
           Label : ARGUMENT
-            print
+            13
             Label : ARGUMENT
-              $e
-            Label : NAME
-              print
+              8
           Label : ARGUMENT
-            $f
+            5
           Label : ARGUMENT
-            ltrim
+            14
             Label : ARGUMENT
-              $r
+              10
             Label : NAME
-              ltrim
+              14
           Label : NAME
-            f
+            12
         Label : EXPRESSION
-          f
+          12
           Label : ARGUMENT
-            $x
+            15
           Label : ARGUMENT
-            $y
+            16
           Label : ARGUMENT
-            $z
+            17
           Label : BLOCK
-            {}
+            18
             Label : EXPRESSION
-              echo
+              19
               Label : ARGUMENT
-                $x
+                15
               Label : ARGUMENT
-                $y
+                16
               Label : ARGUMENT
-                $z
-              Label : NAME
-                echo
+                17
           Label : DEFINITION
-            'f'
+            7
           Label : DEFINITION
-            f
+            12
             Label : ARGUMENT
-              print
+              13
               Label : ARGUMENT
-                $e
-              Label : NAME
-                print
+                8
             Label : ARGUMENT
-              $f
+              5
             Label : ARGUMENT
-              ltrim
+              14
               Label : ARGUMENT
-                $r
+                10
               Label : NAME
-                ltrim
+                14
             Label : NAME
-              f
+              12
           Label : NAME
-            f
+            12
         Label : EXPRESSION
-          echo
+          19
           Label : ARGUMENT
-            $a
+            20
           Label : ARGUMENT
-            print
+            13
             Label : ARGUMENT
-              $b
-            Label : NAME
-              print
+              21
           Label : ARGUMENT
-            $c
-          Label : NAME
-            echo
+            22

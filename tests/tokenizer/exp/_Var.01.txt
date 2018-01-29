@@ -1,25 +1,25 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            a
+            6
           Label : PPP
-            var
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $b
+                8
               Label : RIGHT
-                array
+                11
                 Label : ARGUMENT
-                  Void
+                  12
             Label : VAR
-              var
+              7
