@@ -33,12 +33,29 @@ class UsedDirective extends Analyzer {
         // ini_set($var ? )
 
         // ini_set('string'
-        $this->atomFunctionIs(array('\\ini_set', '\\ini_get', '\\ini_restore', '\\ini_alter', '\\iconv_set_encoding'))
+        $this->atomFunctionIs(array('\\ini_set', 
+                                    '\\ini_get', 
+                                    '\\ini_restore', 
+                                    '\\ini_alter', 
+                                    '\\iconv_set_encoding',
+                                    '\\get_cfg_var',
+                                    ))
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->noDelimiterIs($this->directives)
              ->back('first');
         $this->prepareQuery();
+
+        $this->atomFunctionIs(array('\\set_include_path', 
+                                    '\\get_include_path', 
+                                    '\\restore_include_path', 
+                                    '\\get_magic_quotes_gpc',
+                                    '\\get_magic_quotes_runtime',
+                                    '\\set_magic_quotes_runtime',
+                                    '\\set_time_limit',
+                                    ));
+        $this->prepareQuery();
+
     }
 }
 
