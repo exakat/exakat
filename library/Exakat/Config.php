@@ -213,6 +213,7 @@ class Config {
                                      'queue'         => 1,
                                      'load'          => 1,
                                      'project'       => 1,
+                                     'melis'         => 1,
                                      'codacy'        => 1,
                                      'report'        => 1,
                                      'results'       => 1,

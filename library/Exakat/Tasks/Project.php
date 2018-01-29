@@ -38,7 +38,7 @@ class Project extends Tasks {
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                               'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
                               'Analyze', 'Preferences', 'Inventory',
-                              'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
+                              'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Custom',
                               );
 
     protected $reports = array();
@@ -46,10 +46,8 @@ class Project extends Tasks {
     public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subTask);
 
-        if (is_array($config->project_reports)) {
-            $this->reports = $config->project_reports;
-        } else {
-            $this->reports = array($config->project_reports);
+        if (empty($this->reports)) {
+            $this->reports = makeArray($config->project_reports);
         }
     }
 
@@ -129,7 +127,7 @@ class Project extends Tasks {
         $this->datastore->addRow('hash', $info);
 
         display("Running project '$project'".PHP_EOL);
-        display("Running the following analysis : ".implode(', ', $this->config->project_themes));
+        display("Running the following analysis : ".implode(', ', $this->themes));
         display("Producing the following reports : ".implode(', ', $this->reports));
 
         display("Cleaning DB".PHP_EOL);
@@ -165,7 +163,7 @@ class Project extends Tasks {
         if ($this->config->program !== null) {
             $this->analyzeOne($this->config->program, $audit_start);
         } else {
-            $this->analyzeThemes($this->config->project_themes, $audit_start);
+            $this->analyzeThemes($this->themes, $audit_start);
         }
 
         display("Analyzed project".PHP_EOL);
@@ -324,7 +322,7 @@ class Project extends Tasks {
                             2 => '-p',
                             3 => $this->config->project,
                             4 => '-T',
-                            5 => trim($theme, '"'), // No need to protect anymore, as this is internal
+                            5 => $theme,
                             6 => '-norefresh',
                             7 => '-u'
                             );

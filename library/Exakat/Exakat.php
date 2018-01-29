@@ -99,6 +99,11 @@ class Exakat {
                 $task->run();
                 break;
 
+            case 'melis' :
+                $task = new Tasks\Melis($this->gremlin, $this->config);
+                $task->run();
+                break;
+
             case 'clean' :
                 $task = new Tasks\Clean($this->gremlin, $this->config);
                 $task->run();
