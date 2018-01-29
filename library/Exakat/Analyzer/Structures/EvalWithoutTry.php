@@ -29,7 +29,7 @@ class EvalWithoutTry extends WithoutTry {
     protected $phpVersion = '7.0+';
     
     public function analyze() {
-        $this->functions = array('\\eval');
+        $this->atoms = array('Eval');
         parent::analyze();
     }
 }

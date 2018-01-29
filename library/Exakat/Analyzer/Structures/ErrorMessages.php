@@ -37,6 +37,7 @@ class ErrorMessages extends Analyzer {
         // exit ('30');
         $this->atomIs('Exit')
              ->outWithRank('ARGUMENT', 0)
+             ->outIsIE('CODE') // parenthesis for exit
              ->atomIs($messages);
         $this->prepareQuery();
 

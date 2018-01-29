@@ -27,10 +27,18 @@ use Exakat\Analyzer\Analyzer;
 
 class WithoutTry extends Analyzer {
     protected $functions = array();
+    protected $atoms = array();
     
     public function analyze() {
         if (!empty($this->functions)) {
             $this->atomFunctionIs($this->functions)
+                 ->hasNoTryCatch()
+                 ->back('first');
+            $this->prepareQuery();
+        }
+
+        if (!empty($this->atoms)) {
+            $this->atomIs($this->atoms)
                  ->hasNoTryCatch()
                  ->back('first');
             $this->prepareQuery();

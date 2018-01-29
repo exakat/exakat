@@ -1816,7 +1816,10 @@ SQL;
         $this->nestContext();
         $fullcode = array();
 
-        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_CLOSE_BRACKET))) {
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, 
+                                                            \Exakat\Tasks\T_CLOSE_BRACKET,
+                                                            ))) {
+                                                            
             $void = $this->addAtomVoid();
             $void->rank = 0;
             $this->addLink($arguments, $void, 'ARGUMENT');
@@ -3126,6 +3129,12 @@ SQL;
         } else {
             $current = $this->id;
 
+            if (mb_strtolower($this->tokens[$this->id][1]) === 'die' &&
+                $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
+                // Skip the ( for die only
+                ++$this->id;
+            }
+        
             $functioncall = $this->processArguments('Exit', array(\Exakat\Tasks\T_SEMICOLON, 
                                                                   \Exakat\Tasks\T_CLOSE_TAG, 
                                                                   \Exakat\Tasks\T_CLOSE_PARENTHESIS, 
@@ -3135,10 +3144,14 @@ SQL;
                                                                   \Exakat\Tasks\T_END,
                                                                   ));
             $argumentsFullcode = $functioncall->fullcode;
-            --$this->id;
+            if (mb_strtolower($this->tokens[$current][1]) === 'die') {
+                $argumentsFullcode = '('.$argumentsFullcode.')';
+            } else {
+                --$this->id;
+            }
 
             $functioncall->code       = $this->tokens[$current][1];
-            $functioncall->fullcode   = $this->tokens[$current][1].' '.$argumentsFullcode;
+            $functioncall->fullcode   = $this->tokens[$current][1].$argumentsFullcode;
             $functioncall->fullnspath = '\\'.mb_strtolower($this->tokens[$current][1]);
             $this->pushExpression($functioncall);
 

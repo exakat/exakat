@@ -43,6 +43,7 @@ class DontEchoError extends Analyzer {
 
         $this->atomIs(array('Echo', 'Print', 'Exit'))
              ->outIs('ARGUMENT')
+             ->outIsIE('CODE')
              ->atomIs('Functioncall')
              ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
