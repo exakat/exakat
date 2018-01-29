@@ -66,14 +66,14 @@ PHP 7.0 or more recent, curl, homebrew are required.
     mkdir exakat
     cd exakat
     curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
-    curl -o apache-tinkerpop-gremlin-server-3.2.7-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.7/apache-tinkerpop-gremlin-server-3.2.7-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.2.7 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
+    curl -o apache-tinkerpop-gremlin-server-3.2.6-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.6/apache-tinkerpop-gremlin-server-3.2.6-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.2.6-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.6 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.6-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.7
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.6
     cd ..
     
     php exakat.phar doctor
@@ -99,14 +99,14 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
     mkdir exakat
     cd exakat
     wget -O exakat.phar http://dist.exakat.io/index.php?file=latest
-    wget -O apache-tinkerpop-gremlin-server-3.2.7-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.7/apache-tinkerpop-gremlin-server-3.2.7-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.2.7 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
+    wget -O apache-tinkerpop-gremlin-server-3.2.6-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.6/apache-tinkerpop-gremlin-server-3.2.6-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.2.6-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.6 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.6-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.7
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.6
     cd ..
 
     php exakat.phar doctor

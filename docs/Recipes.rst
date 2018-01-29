@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 26 Dec 2017 10:54:54 +0000
-.. comment: Generation hash : ee236dc0faaaccd4df41c1edc39222a217ad812d
+.. comment: Generation date : Mon, 29 Jan 2018 10:08:20 +0000
+.. comment: Generation hash : c91c58d60c6e27c8d75945daede1b0533a172903
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 334 analysis
+Total : 338 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -183,12 +183,14 @@ Total : 334 analysis
 * :ref:`Implemented Methods Are Public <implemented-methods-are-public>`
 * :ref:`Implicit Global <implicit-global>`
 * :ref:`Implied If <implied-if>`
+* :ref:`Inclusion Wrong Case <inclusion-wrong-case>`
 * :ref:`Incompilable Files <incompilable-files>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
 * :ref:`Invalid Constant Name <invalid-constant-name>`
 * :ref:`Invalid Regex <invalid-regex>`
 * :ref:`Is Actually Zero <is-actually-zero>`
+* :ref:`Local Globals <local-globals>`
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Logical Mistakes <logical-mistakes>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
@@ -203,6 +205,7 @@ Total : 334 analysis
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
 * :ref:`Mismatched Typehint <mismatched-typehint>`
 * :ref:`Missing Cases In Switch <missing-cases-in-switch>`
+* :ref:`Missing Include <missing-include>`
 * :ref:`Missing New ? <missing-new-?>`
 * :ref:`Mistaken Concatenation <mistaken-concatenation>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
@@ -354,6 +357,7 @@ Total : 334 analysis
 * :ref:`Unused Constants <unused-constants>`
 * :ref:`Unused Functions <unused-functions>`
 * :ref:`Unused Global <unused-global>`
+* :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
@@ -393,7 +397,7 @@ Total : 334 analysis
 * :ref:`Useless Unset <useless-unset>`
 * :ref:`Uses Default Values <uses-default-values>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
-* :ref:`Var`
+* :ref:`Var Keyword <var-keyword>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`Written Only Variables <written-only-variables>`
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
@@ -813,7 +817,7 @@ Total : 3 analysis
 Dead code
 +++++++++
 
-Total : 24 analysis
+Total : 25 analysis
 
 * :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
@@ -830,6 +834,7 @@ Total : 24 analysis
 * :ref:`Unused Classes <unused-classes>`
 * :ref:`Unused Constants <unused-constants>`
 * :ref:`Unused Functions <unused-functions>`
+* :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
@@ -883,7 +888,7 @@ Total : 30 analysis
 Security
 ++++++++
 
-Total : 31 analysis
+Total : 33 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
@@ -899,6 +904,7 @@ Total : 31 analysis
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
+* :ref:`No Net For Xml Load <no-net-for-xml-load>`
 * :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
 * :ref:`Phpinfo`
 * :ref:`Random Without Try <random-without-try>`
@@ -908,6 +914,7 @@ Total : 31 analysis
 * :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`
+* :ref:`Sqlite3 Requires Single Quotes <sqlite3-requires-single-quotes>`
 * :ref:`Switch Fallthrough <switch-fallthrough>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Upload Filename Injection <upload-filename-injection>`
@@ -987,13 +994,16 @@ Total : 24 analysis
 ZendFramework
 +++++++++++++
 
-Total : 238 analysis
+Total : 241 analysis
 
 * :ref:`Action Should Be In Controller <action-should-be-in-controller>`
+* :ref:`Defined View Property <defined-view-property>`
 * :ref:`Error Messages <error-messages>`
 * :ref:`Exit() Usage <exit()-usage>`
 * :ref:`Is Zend Framework 1 Controller <is-zend-framework-1-controller>`
 * :ref:`Is Zend Framework 1 Helper <is-zend-framework-1-helper>`
+* :ref:`Is Zend View File <is-zend-view-file>`
+* :ref:`No Echo Outside View <no-echo-outside-view>`
 * :ref:`Should Always Prepare <should-always-prepare>`
 * :ref:`Should Make Alias <should-make-alias>`
 * :ref:`Should Regenerate Session Id <should-regenerate-session-id>`
