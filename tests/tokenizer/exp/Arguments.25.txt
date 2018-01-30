@@ -1,68 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            [
+            7
             Label : INDEX
-              'B'
+              8
             Label : VARIABLE
-              $a
+              6
           Label : ELSE
-            ;
+            3
             Label : EXPRESSION
-              echo
+              12
               Label : ARGUMENT
-                'I'
+                25
               Label : ARGUMENT
-                J
+                27
                 Label : ARGUMENT
-                  [
+                  7
                   Label : INDEX
-                    'K'
+                    30
                   Label : VARIABLE
-                    $d
+                    29
                 Label : NAME
-                  J
+                  27
               Label : ARGUMENT
-                'L'
-              Label : NAME
-                echo
+                32
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              B
+              10
             Label : EXPRESSION
-              echo
+              12
               Label : ARGUMENT
-                [
+                7
                 Label : INDEX
-                  'D'
+                  14
                 Label : VARIABLE
-                  $b
-              Label : NAME
-                echo
+                  13
             Label : EXPRESSION
-              D
+              16
             Label : EXPRESSION
-              echo
+              12
               Label : ARGUMENT
-                F
+                18
                 Label : ARGUMENT
-                  [
+                  7
                   Label : INDEX
-                    'G'
+                    21
                   Label : VARIABLE
-                    $c
+                    20
                 Label : NAME
-                  F
-              Label : NAME
-                echo
+                  18
             Label : EXPRESSION
-              G
+              23

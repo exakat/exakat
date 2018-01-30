@@ -1,187 +1,187 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          doSomething
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              =
+              11
               Label : LEFT
-                $resource
+                10
               Label : RIGHT
-                createResource
+                12
                 Label : ARGUMENT
-                  Void
+                  7
                 Label : NAME
-                  createResource
+                  12
             Label : EXPRESSION
-              try
+              14
               Label : BLOCK
-                {}
+                9
                 Label : EXPRESSION
-                  =
+                  11
                   Label : LEFT
-                    $result
+                    15
                   Label : RIGHT
-                    useResource
+                    16
                     Label : ARGUMENT
-                      $resource
+                      10
                     Label : NAME
-                      useResource
+                      16
                 Label : EXPRESSION
-                  return
+                  18
                   Label : RETURN
-                    $result
+                    15
               Label : CATCH
-                catch
+                19
                 Label : BLOCK
-                  {}
+                  9
                   Label : EXPRESSION
-                    log
+                    23
                     Label : ARGUMENT
-                      ->
+                      26
                       Label : METHOD
-                        getMessage
+                        24
                         Label : ARGUMENT
-                          Void
+                          7
                         Label : NAME
-                          getMessage
+                          24
                       Label : OBJECT
-                        $e
+                        22
                     Label : NAME
-                      log
+                      23
                   Label : EXPRESSION
-                    throw
+                    27
                     Label : THROW
-                      $e
+                      22
                 Label : CLASS
-                  Exception
+                  20
                 Label : VARIABLE
-                  $e
+                  22
               Label : CATCH
-                catch
+                19
                 Label : BLOCK
-                  {}
+                  9
                   Label : EXPRESSION
-                    log
+                    23
                     Label : ARGUMENT
-                      ->
+                      26
                       Label : METHOD
-                        getMessage
+                        24
                         Label : ARGUMENT
-                          Void
+                          7
                         Label : NAME
-                          getMessage
+                          24
                       Label : OBJECT
-                        $e
+                        22
                     Label : NAME
-                      log
+                      23
                   Label : EXPRESSION
-                    throw
+                    27
                     Label : THROW
-                      $e
+                      22
                 Label : CLASS
-                  Exception2
+                  28
                 Label : VARIABLE
-                  $e
+                  22
               Label : CATCH
-                catch
+                19
                 Label : BLOCK
-                  {}
+                  9
                   Label : EXPRESSION
-                    log
+                    23
                     Label : ARGUMENT
-                      ->
+                      26
                       Label : METHOD
-                        getMessage
+                        24
                         Label : ARGUMENT
-                          Void
+                          7
                         Label : NAME
-                          getMessage
+                          24
                       Label : OBJECT
-                        $e
+                        22
                     Label : NAME
-                      log
+                      23
                   Label : EXPRESSION
-                    throw
+                    27
                     Label : THROW
-                      $e
+                      22
                 Label : CLASS
-                  Exception3
+                  30
                 Label : VARIABLE
-                  $e
+                  22
               Label : CATCH
-                catch
+                19
                 Label : BLOCK
-                  {}
+                  9
                   Label : EXPRESSION
-                    log
+                    23
                     Label : ARGUMENT
-                      ->
+                      26
                       Label : METHOD
-                        getMessage
+                        24
                         Label : ARGUMENT
-                          Void
+                          7
                         Label : NAME
-                          getMessage
+                          24
                       Label : OBJECT
-                        $e
+                        22
                     Label : NAME
-                      log
+                      23
                   Label : EXPRESSION
-                    throw
+                    27
                     Label : THROW
-                      $e
+                      22
                 Label : CLASS
-                  Exception4
+                  32
                 Label : VARIABLE
-                  $e
+                  22
               Label : CATCH
-                catch
+                19
                 Label : BLOCK
-                  {}
+                  9
                   Label : EXPRESSION
-                    log
+                    23
                     Label : ARGUMENT
-                      ->
+                      26
                       Label : METHOD
-                        getMessage
+                        24
                         Label : ARGUMENT
-                          Void
+                          7
                         Label : NAME
-                          getMessage
+                          24
                       Label : OBJECT
-                        $e
+                        22
                     Label : NAME
-                      log
+                      23
                   Label : EXPRESSION
-                    throw
+                    27
                     Label : THROW
-                      $e
+                      22
                 Label : CLASS
-                  Exception5
+                  34
                 Label : VARIABLE
-                  $e
+                  22
               Label : FINALLY
-                finally
+                36
                 Label : BLOCK
-                  {}
+                  9
                   Label : EXPRESSION
-                    releaseResource
+                    37
                     Label : ARGUMENT
-                      $resource
+                      10
                     Label : NAME
-                      releaseResource
+                      37
           Label : NAME
-            doSomething
+            5
         Label : EXPRESSION
-          Void
+          7

@@ -1,49 +1,49 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !
+            6
             Label : NOT
-              defined
+              7
               Label : ARGUMENT
-                'A'
+                8
               Label : NAME
-                defined
+                7
           Label : THEN
-            {}
+            10
             Label : EXPRESSION
-              exit
+              11
               Label : ARGUMENT
-                'B'
-              Label : NAME
-                exit
+                12
+                Label : CODE
+                  13
         Label : EXPRESSION
-          ::
+          19
           Label : CLASS
-            C
+            15
           Label : METHOD
-            d
+            17
             Label : ARGUMENT
-              'e'
+              18
             Label : NAME
-              d
+              17
         Label : EXPRESSION
-          class
+          20
           Label : NAME
-            f
+            21
           Label : PPP
-            static
+            23
             Label : PPP
-              $g
+              24
             Label : PROTECTED
-              protected
+              22
             Label : STATIC
-              static
+              23

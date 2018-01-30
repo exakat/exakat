@@ -1,63 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : CONST
-            const
+            16
             Label : CONST
-              const
+              16
               Label : NAME
-                b
+                10
               Label : VALUE
-                3
+                17
           Label : NAME
-            x
+            6
           Label : PPP
-            private
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $b
+                8
               Label : RIGHT
-                1
+                11
             Label : PRIVATE
-              private
+              7
           Label : PPP
-            private
+            7
             Label : PPP
-              $d
+              14
             Label : PPP
-              $c
+              12
             Label : PRIVATE
-              private
+              7
           Label : PPP
-            private
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $f
+                20
               Label : RIGHT
-                2
+                22
             Label : PPP
-              $e
+              18
             Label : PRIVATE
-              private
+              7
           Label : PPP
-            private
+            7
             Label : PPP
-              $h
+              25
             Label : PPP
-              =
+              9
               Label : LEFT
-                $g
+                23
               Label : RIGHT
-                3
+                17
             Label : PRIVATE
-              private
+              7

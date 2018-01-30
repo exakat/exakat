@@ -152,6 +152,10 @@ Glossary
 
 
 + `C`
+    + `Closure`
+
+      + :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
+
     + `Count()`
 
       + :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -165,6 +169,7 @@ Glossary
       + :ref:`Hidden Use Expression <hidden-use-expression>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
       + :ref:`Should Use Local Class <should-use-local-class>`
+      + :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `constant()`
@@ -241,6 +246,10 @@ Glossary
 
 
 + `E`
+    + `Each()`
+
+      + :ref:`While(List() = Each()) <while(list()-=-each())>`
+
     + `Empty()`
 
       + :ref:`No Count With 0 <no-count-with-0>`
@@ -442,6 +451,7 @@ Glossary
 
     + `is_string()`
 
+      + :ref:`Check All Types <check-all-types>`
       + :ref:`Use Instanceof <use-instanceof>`
 
     + `isset`

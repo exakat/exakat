@@ -1,29 +1,21 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          print
+          6
           Label : ARGUMENT
-            print
+            6
             Label : ARGUMENT
-              '1'
-            Label : NAME
-              print
-          Label : NAME
-            print
+              5
         Label : EXPRESSION
-          echo
+          7
           Label : ARGUMENT
-            print
+            6
             Label : ARGUMENT
-              2
-            Label : NAME
-              print
-          Label : NAME
-            echo
+              8

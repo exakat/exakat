@@ -1,27 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
             Label : EXPRESSION
-              trait
+              9
               Label : NAME
-                t2
+                10
             Label : EXPRESSION
-              trait
+              9
               Label : NAME
-                t
+                11
               Label : USE
-                use
+                12
                 Label : USE
-                  namespace\t2
+                  13
           Label : NAME
-            A
+            5

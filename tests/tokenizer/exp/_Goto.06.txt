@@ -1,17 +1,21 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          :
+          7
+          Label : DEFINITION
+            8
+            Label : GOTO
+              5
           Label : GOTOLABEL
-            cleanupCookie
+            5
         Label : EXPRESSION
-          GOTO
+          8
           Label : GOTO
-            cleanupCookie
+            5

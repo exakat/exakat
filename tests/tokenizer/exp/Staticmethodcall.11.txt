@@ -1,133 +1,131 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          9
           Label : LEFT
-            [
+            6
             Label : INDEX
-              'B'
+              7
             Label : VARIABLE
-              $a
+              5
           Label : RIGHT
-            ::
+            16
             Label : CLASS
-              C
+              10
             Label : METHOD
-              D
+              12
               Label : ARGUMENT
-                'E'
+                14
               Label : NAME
-                D
+                12
         Label : EXPRESSION
-          =
+          9
           Label : LEFT
-            [
+            6
             Label : INDEX
-              'F'
+              18
             Label : VARIABLE
-              $b
+              17
           Label : RIGHT
-            ::
+            16
             Label : CLASS
-              G
+              20
             Label : METHOD
-              H
+              22
               Label : ARGUMENT
-                'I'
+                24
               Label : NAME
-                H
+                22
         Label : EXPRESSION
-          if
+          26
           Label : CONDITION
-            ::
+            16
             Label : CLASS
-              J
+              27
             Label : METHOD
-              K
+              29
               Label : ARGUMENT
-                'L'
+                31
               Label : NAME
-                K
+                29
           Label : THEN
-            {}
+            33
             Label : EXPRESSION
-              =
+              9
               Label : LEFT
-                [
+                6
                 Label : INDEX
-                  'M'
+                  35
                 Label : VARIABLE
-                  $c
+                  34
               Label : RIGHT
-                ::
+                16
                 Label : CLASS
-                  N
+                  37
                 Label : METHOD
-                  O
+                  39
                   Label : ARGUMENT
-                    'P'
+                    41
                   Label : NAME
-                    O
+                    39
         Label : EXPRESSION
-          if
+          26
           Label : CONDITION
-            !
+            43
             Label : NOT
-              empty
+              44
               Label : ARGUMENT
-                ->
+                48
                 Label : MEMBER
-                  Q
+                  46
                 Label : OBJECT
-                  $d
-              Label : NAME
-                empty
+                  45
           Label : THEN
-            {}
+            33
             Label : EXPRESSION
-              =
+              9
               Label : LEFT
-                [
+                6
                 Label : INDEX
-                  'R'
+                  50
                 Label : VARIABLE
-                  $e
+                  49
               Label : RIGHT
-                ->
+                48
                 Label : MEMBER
-                  S
+                  53
                 Label : OBJECT
-                  $f
+                  52
         Label : EXPRESSION
-          ::
+          16
           Label : CLASS
-            T
+            55
           Label : METHOD
-            U
+            57
             Label : ARGUMENT
-              ->
+              48
               Label : METHOD
-                W
+                64
                 Label : ARGUMENT
-                  $h
+                  66
                 Label : NAME
-                  W
+                  64
               Label : OBJECT
-                ->
+                48
                 Label : METHOD
-                  V
+                  60
                   Label : ARGUMENT
-                    Void
+                    62
                   Label : NAME
-                    V
+                    60
                 Label : OBJECT
-                  $g
+                  59
             Label : NAME
-              U
+              57

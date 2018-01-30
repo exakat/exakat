@@ -1,75 +1,75 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case 'a' :  /**/  
+              8
               Label : CASE
-                'a'
+                9
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  11
                   Label : LEFT
-                    $count
+                    10
                   Label : RIGHT
-                    0
+                    12
                 Label : EXPRESSION
-                  =
+                  11
                   Label : LEFT
-                    $indexed
+                    13
                   Label : RIGHT
-                    array
+                    14
                     Label : ARGUMENT
-                      Void
+                      15
                 Label : EXPRESSION
-                  =
+                  11
                   Label : LEFT
-                    $associative
+                    17
                   Label : RIGHT
-                    array
+                    14
                     Label : ARGUMENT
-                      Void
+                      15
                 Label : EXPRESSION
-                  foreach
+                  18
                   Label : BLOCK
-                    {}
+                    23
                     Label : EXPRESSION
-                      Void
+                      15
                   Label : SOURCE
-                    $data
+                    19
                   Label : VALUE
-                    =>
+                    21
                     Label : INDEX
-                      $key
+                      20
                     Label : VALUE
-                      $value
+                      22
                 Label : EXPRESSION
-                  if
+                  24
                   Label : CONDITION
-                    $c
+                    25
                   Label : THEN
-                    {}
+                    23
                     Label : EXPRESSION
-                      ++
+                      27
                       Label : POSTPLUSPLUS
-                        $d
+                        26
             Label : EXPRESSION
-              default
+              28
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  29
                   Label : RETURN
-                    'e'
+                    30
           Label : NAME
-            $b
+            6

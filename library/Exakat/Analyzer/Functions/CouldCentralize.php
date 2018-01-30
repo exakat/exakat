@@ -73,6 +73,7 @@ GREMLIN;
             $this->atomIs('Exit')
                  ->savePropertyAs('fullnspath', 'name')
                  ->outWithRank('ARGUMENT', $i)
+                 ->outIsIE('CODE')
                  ->isHash('fullcode', $args, 'name')
                  ->back('first');
             $this->prepareQuery();

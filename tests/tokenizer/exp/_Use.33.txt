@@ -1,49 +1,49 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
             Label : EXPRESSION
-              use
+              9
               Label : GROUPUSE
-                a
+                10
               Label : USE
-                A
+                11
               Label : USE
-                fa
+                13
                 Label : FUNCTION
-                  function
+                  12
               Label : USE
-                B\D
+                14
               Label : USE
-                fb
+                16
                 Label : FUNCTION
-                  function
+                  12
               Label : USE
-                ca
+                18
                 Label : CONST
-                  const
+                  17
               Label : USE
-                fc
+                19
                 Label : FUNCTION
-                  function
+                  12
               Label : USE
-                cd
+                20
                 Label : CONST
-                  const
+                  17
             Label : EXPRESSION
-              foo
+              21
               Label : ARGUMENT
-                $a
+                22
               Label : NAME
-                foo
+                21
           Label : NAME
-            X
+            5

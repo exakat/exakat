@@ -1,253 +1,253 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            'B'
+            7
         Label : EXPRESSION
-          if
+          9
           Label : CONDITION
-            !
+            10
             Label : NOT
-              C
+              11
               Label : NAME
-                C
+                11
               Label : ARGUMENT
-                $b
+                13
               Label : ARGUMENT
-                $c
+                14
           Label : THEN
-            {}
+            15
             Label : EXPRESSION
-              throw
+              16
               Label : THROW
-                new
+                17
                 Label : NEW
-                  D
+                  18
                   Label : ARGUMENT
-                    'E'
+                    20
                   Label : NAME
-                    D
+                    18
         Label : EXPRESSION
-          try
+          22
           Label : BLOCK
-            {}
+            15
             Label : EXPRESSION
-              =
+              6
               Label : LEFT
-                $d
+                23
               Label : RIGHT
-                new
+                17
                 Label : NEW
-                  F
+                  24
                   Label : ARGUMENT
-                    $e
+                    26
                   Label : NAME
-                    F
+                    24
             Label : EXPRESSION
-              =
+              6
               Label : LEFT
-                $f
+                27
               Label : RIGHT
-                array
+                28
                 Label : ARGUMENT
-                  =>
+                  31
                   Label : INDEX
-                    'G'
+                    29
                   Label : VALUE
-                    $g
+                    32
                 Label : ARGUMENT
-                  =>
+                  31
                   Label : INDEX
-                    'H'
+                    33
                   Label : VALUE
-                    $h
+                    35
                 Label : ARGUMENT
-                  =>
+                  31
                   Label : INDEX
-                    'I'
+                    36
                   Label : VALUE
-                    $i
+                    38
             Label : EXPRESSION
-              =
+              6
               Label : LEFT
-                $j
+                39
               Label : RIGHT
-                new
+                17
                 Label : NEW
-                  J
+                  40
                   Label : ARGUMENT
-                    ::
+                    45
                     Label : CLASS
-                      K
+                      42
                     Label : MEMBER
-                      $k
+                      44
                   Label : NAME
-                    J
+                    40
             Label : EXPRESSION
-              ->
+              54
               Label : METHOD
-                L
+                47
                 Label : NAME
-                  L
+                  47
                 Label : ARGUMENT
-                  ::
+                  45
                   Label : CLASS
-                    M
+                    49
                   Label : MEMBER
-                    $m
+                    51
                 Label : ARGUMENT
-                  'N'
+                  52
               Label : OBJECT
-                $l
+                46
             Label : EXPRESSION
-              =
+              6
               Label : LEFT
-                $n
+                55
               Label : RIGHT
-                ->
+                54
                 Label : METHOD
-                  O
+                  57
                   Label : NAME
-                    O
+                    57
                   Label : ARGUMENT
-                    'P'
+                    59
                   Label : ARGUMENT
-                    $p
+                    61
                 Label : OBJECT
-                  $o
+                  56
             Label : EXPRESSION
-              return
+              62
               Label : RETURN
-                [
+                64
                 Label : INDEX
-                  'Q'
+                  65
                 Label : VARIABLE
-                  $q
+                  63
           Label : CATCH
-            catch
+            67
             Label : BLOCK
-              {}
+              15
               Label : EXPRESSION
-                throw
+                16
                 Label : THROW
-                  new
+                  17
                   Label : NEW
-                    S
+                    71
                     Label : ARGUMENT
-                      'T'
+                      73
                     Label : NAME
-                      S
+                      71
             Label : CLASS
-              R
+              68
             Label : VARIABLE
-              $r
+              70
           Label : CATCH
-            catch
+            67
             Label : BLOCK
-              {}
+              15
               Label : EXPRESSION
-                throw
+                16
                 Label : THROW
-                  new
+                  17
                   Label : NEW
-                    V
+                    78
                     Label : ARGUMENT
-                      .
+                      82
                       Label : CONCAT
-                        'W'
+                        80
                       Label : CONCAT
-                        [
+                        64
                         Label : INDEX
-                          'Y'
+                          86
                         Label : VARIABLE
-                          ->
+                          54
                           Label : MEMBER
-                            X
+                            84
                           Label : OBJECT
-                            $t
+                            83
                     Label : NAME
-                      V
+                      78
             Label : CLASS
-              U
+              75
             Label : VARIABLE
-              $s
+              77
           Label : CATCH
-            catch
+            67
             Label : BLOCK
-              {}
+              15
               Label : EXPRESSION
-                throw
+                16
                 Label : THROW
-                  new
+                  17
                   Label : NEW
-                    AA
+                    91
                     Label : ARGUMENT
-                      ->
+                      54
                       Label : METHOD
-                        AB
+                        94
                         Label : ARGUMENT
-                          Void
+                          96
                         Label : NAME
-                          AB
+                          94
                       Label : OBJECT
-                        $v
+                        93
                     Label : NAME
-                      AA
+                      91
             Label : CLASS
-              Z
+              88
             Label : VARIABLE
-              $u
+              90
           Label : CATCH
-            catch
+            67
             Label : BLOCK
-              {}
+              15
               Label : EXPRESSION
-                throw
+                16
                 Label : THROW
-                  new
+                  17
                   Label : NEW
-                    AD
+                    101
                     Label : ARGUMENT
-                      ->
+                      54
                       Label : METHOD
-                        AE
+                        104
                         Label : ARGUMENT
-                          Void
+                          96
                         Label : NAME
-                          AE
+                          104
                       Label : OBJECT
-                        $x
+                        103
                     Label : NAME
-                      AD
+                      101
             Label : CLASS
-              AC
+              98
             Label : VARIABLE
-              $w
+              100
           Label : CATCH
-            catch
+            67
             Label : BLOCK
-              {}
+              15
               Label : EXPRESSION
-                throw
+                16
                 Label : THROW
-                  new
+                  17
                   Label : NEW
-                    AG
+                    109
                     Label : ARGUMENT
-                      'AH'
+                      111
                     Label : NAME
-                      AG
+                      109
             Label : CLASS
-              AF
+              106
             Label : VARIABLE
-              $y
+              108

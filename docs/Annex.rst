@@ -43,6 +43,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Level 2
 * Level 3
 * Level 4
+* Melis
 * Newfeatures
 * OneFile
 * PHP recommendations
@@ -82,9 +83,10 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * FileDependencies
   * FileDependenciesHtml
   * ZendFramework
-  * RadwellCode
   * CodeSniffer
   * Slim
+  * RadwellCode
+  * Melis
   * FacetedJson
   * Json
   * OnepageJson
@@ -313,6 +315,35 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.1.2
+
+  * Local Globals (Variables/LocalGlobals ; Analyze)
+  * Melis Translation String (Melis/TranslationString ; Internal)
+  * Melis/MakeTypeAString (Melis/MakeTypeAString ; Melis)
+  * Melis/UndefinedConfType (Melis/UndefinedConfType ; Melis)
+  * Missing Include (Files/MissingInclude)
+  * Missing Translation String (Melis/MissingTranslation ; Melis)
+  * No Echo Outside View (ZendF/NoEchoOutsideView ; ZendFramework, Melis)
+
+* 1.1.1
+
+  * Defined View Property (ZendF/DefinedViewProperty ; ZendFramework)
+  * Inclusion Wrong Case (Files/InclusionWrongCase)
+  * Is Zend View File (ZendF/IsView ; ZendFramework)
+  * Melis/UnusedTranslation (Melis/UnusedTranslation ; Melis)
+  * Missing Language (Melis/MissingLanguage ; Melis)
+  * Undefined Configured Class (Melis/UndefinedConfiguredClass ; Melis)
+  * Used View Property (ZendF/UsedViewProperty ; Internal)
+
+* 1.0.11
+
+  * No Net For Xml Load (Security/NoNetForXmlLoad ; Security)
+  * Unused Inherited Variable In Closure (Functions/UnusedInheritedVariable)
+
+* 1.0.10
+
+  * Sqlite3 Requires Single Quotes (Security/Sqlite3RequiresSingleQuotes)
 
 * 1.0.8
 
@@ -1552,7 +1583,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Using $this Outside A Class (Classes/UsingThisOutsideAClass ; Analyze, CompatibilityPHP71, Codacy, Simple)
   * Using Short Tags (Structures/ShortTags ; Appinfo)
   * Usort Sorting In PHP 7.0 (Php/UsortSorting ; CompatibilityPHP70)
-  * Var (Classes/OldStyleVar ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
+  * Var Keyword (Classes/OldStyleVar ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
   * Variable Constants (Constants/VariableConstant ; Appinfo)
   * Variable Is Modified (Variables/IsModified ; Internal)
   * Variable Is Read (Variables/IsRead ; Internal)
@@ -1780,9 +1811,11 @@ External links
 
 List of external links mentionned in this documentation.
 
+* `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_
 * `$_ENV <http://php.net/reserved.variables.environment.php>`_
 * `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
+* `2.4 Translations <https://www.melistechnology.com/MelisTechnology/resources/documentation/back-office/create-a-custom-tool/Translations>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_
 * `[HttpFoundation] Make sessions secure and lazy #24523 <https://github.com/symfony/symfony/pull/24523>`_
@@ -1791,6 +1824,7 @@ List of external links mentionned in this documentation.
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
+* `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `Anonymus Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `Apache <http://php.net/manual/en/book.apache.php>`_
@@ -1803,6 +1837,7 @@ List of external links mentionned in this documentation.
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
+* `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 * `Basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
@@ -1832,6 +1867,7 @@ List of external links mentionned in this documentation.
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
 * `Courrier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
 * `crc32() <http://php.net/crc32>`_
+* `crypt <http://www.php.net/crypt>`_
 * `Cryptography Extensions <http://php.net/manual/en/refs.crypto.php>`_
 * `Ctype funtions <http://php.net/manual/en/ref.ctype.php>`_
 * `curl <http://www.php.net/curl>`_
@@ -2012,6 +2048,7 @@ List of external links mentionned in this documentation.
 * `PHP Options/Info Functions <http://php.net/manual/en/ref.info.php>`_
 * `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
+* `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
@@ -2062,6 +2099,7 @@ List of external links mentionned in this documentation.
 * `Specification pattern <https://en.wikipedia.org/wiki/Specification_pattern>`_
 * `Sphinx Client <http://php.net/manual/en/book.sphinx.php>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_
+* `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
@@ -2095,6 +2133,7 @@ List of external links mentionned in this documentation.
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
+* `Visibility <http://www.php.net/manual/en/language.oop5.visibility.php>`_
 * `Warn when counting non-countable types <http://php.net/manual/en/migration72.incompatible.php#migration72.incompatible.warn-on-non-countable-types>`_
 * `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
@@ -2110,6 +2149,7 @@ List of external links mentionned in this documentation.
 * `xcache <https://xcache.lighttpd.net/>`_
 * `Xdebug <https://xdebug.org/>`_
 * `xdiff <http://php.net/manual/en/book.xdiff.php>`_
+* `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injections>`_
 * `XML Parser <http://www.php.net/manual/en/book.xml.php>`_
 * `XML-RPC <http://www.php.net/manual/en/book.xmlrpc.php>`_
 * `xmlreader <http://www.php.net/manual/en/book.xmlreader.php>`_
@@ -2130,6 +2170,7 @@ List of external links mentionned in this documentation.
 * `Zend Framework <http://framework.zend.com/>`_
 * `Zend Framework Components <https://framework.zend.com/learn>`_
 * `Zend Session <https://docs.zendframework.com/zend-session/manager/>`_
+* `Zend View <https://github.com/zendframework/zend-view>`_
 * `zend-authentication <https://github.com/zendframework/zend-authentication>`_
 * `zend-barcode <https://github.com/zendframework/zend-barcode>`_
 * `zend-captcha <https://github.com/zendframework/zend-captcha>`_

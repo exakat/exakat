@@ -1,25 +1,25 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          use
+          5
           Label : USE
-            \A\B\C
+            6
           Label : USE
-            \D\E
+            8
           Label : USE
-            \Z\X
+            10
           Label : USE
-            \K
+            12
           Label : USE
-            \L
+            14
           Label : USE
-            \M
+            16
           Label : USE
-            \N
+            18

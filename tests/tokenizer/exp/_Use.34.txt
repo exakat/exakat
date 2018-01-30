@@ -1,201 +1,193 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              use
+              9
               Label : USE
-                N\A
+                10
               Label : USE
-                N\B
+                12
             Label : EXPRESSION
-              use
+              9
               Label : FUNCTION
-                function
+                14
               Label : USE
-                A\F
+                15
                 Label : DEFINITION
-                  N\A
+                  10
               Label : USE
-                N\F2
+                17
             Label : EXPRESSION
-              use
+              9
               Label : CONST
-                const
+                19
               Label : USE
-                N\C
-                Label : DEFINITION
-                  C
+                20
               Label : USE
-                N\C2
+                22
             Label : EXPRESSION
-              use
+              9
               Label : GROUPUSE
-                N\D
+                24
               Label : USE
-                D
+                26
               Label : USE
-                DF
+                28
                 Label : FUNCTION
-                  function
+                  14
               Label : USE
-                DC
+                30
                 Label : CONST
-                  const
+                  19
             Label : EXPRESSION
-              use
+              9
               Label : GROUPUSE
-                N2\D2
+                32
               Label : USE
-                D3
+                34
               Label : USE
-                D2
+                36
               Label : USE
-                DF3
+                38
                 Label : DEFINITION
-                  DF3
+                  38
                 Label : FUNCTION
-                  function
+                  14
               Label : USE
-                DF2
+                40
               Label : USE
-                DC3
+                42
                 Label : CONST
-                  const
+                  19
               Label : USE
-                DC2
+                44
             Label : EXPRESSION
-              use
+              9
               Label : GROUPUSE
-                some\namespaces
+                46
               Label : USE
-                ClassA
+                47
               Label : USE
-                ClassB
+                49
               Label : USE
-                as
+                53
                 Label : AS
-                  C
+                  54
                 Label : NAME
-                  ClassC
+                  51
             Label : EXPRESSION
-              use
+              9
               Label : FUNCTION
-                function
+                14
               Label : GROUPUSE
-                some\namespaces
+                46
               Label : USE
-                fn_a
+                56
               Label : USE
-                fn_b
+                57
               Label : USE
-                fn_c
+                58
             Label : EXPRESSION
-              use
+              9
               Label : CONST
-                const
+                19
               Label : GROUPUSE
-                some\namespaces
+                46
               Label : USE
-                ConstA
+                59
               Label : USE
-                ConstB
+                61
               Label : USE
-                ConstC
+                63
             Label : EXPRESSION
-              DF3
+              38
               Label : ARGUMENT
-                Void
+                5
               Label : NAME
-                DF3
+                38
             Label : EXPRESSION
-              new
+              65
               Label : NEW
-                DF2
+                40
                 Label : ARGUMENT
-                  Void
+                  5
                 Label : NAME
-                  DF2
+                  40
                   Label : DEFINITION
-                    DF2
+                    40
           Label : NAME
-            Void
+            5
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              DF2
+              40
               Label : ARGUMENT
-                Void
+                5
               Label : BLOCK
-                {}
+                8
                 Label : EXPRESSION
-                  print
+                  68
                   Label : ARGUMENT
-                    __FUNCTION__
-                  Label : NAME
-                    print
+                    66
               Label : NAME
-                DF2
+                40
             Label : EXPRESSION
-              DF3
+              38
               Label : ARGUMENT
-                Void
+                5
               Label : BLOCK
-                {}
+                8
                 Label : EXPRESSION
-                  print
+                  68
                   Label : ARGUMENT
-                    __FUNCTION__
-                  Label : NAME
-                    print
+                    66
               Label : DEFINITION
-                DF3
+                38
                 Label : ARGUMENT
-                  Void
+                  5
                 Label : NAME
-                  DF3
+                  38
               Label : NAME
-                DF3
+                38
             Label : EXPRESSION
-              class
+              69
               Label : DEFINITION
-                DF2
+                40
                 Label : DEFINITION
-                  DF2
+                  40
               Label : DEFINITION
-                DF2
+                40
                 Label : ARGUMENT
-                  Void
+                  5
                 Label : NAME
-                  DF2
+                  40
                   Label : DEFINITION
-                    DF2
-              Label : METHOD
-                __construct
+                    40
+              Label : MAGICMETHOD
+                70
                 Label : ARGUMENT
-                  Void
+                  5
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    print
+                    68
                     Label : ARGUMENT
-                      __METHOD__
-                    Label : NAME
-                      print
+                      71
                 Label : NAME
-                  __construct
+                  70
               Label : NAME
-                DF2
+                40
           Label : NAME
-            N2\D2
+            32

@@ -1,155 +1,159 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            MyClass1
+            6
           Label : USE
-            use
+            8
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                as
+                14
                 Label : AS
-                  Void
+                  16
                 Label : NAME
-                  sayHello
+                  12
                 Label : PROTECTED
-                  protected
+                  15
               Label : EXPRESSION
-                insteadof
+                23
                 Label : INSTEADOF
-                  A
+                  24
                 Label : NAME
-                  ::
+                  22
                   Label : CLASS
-                    B
+                    18
                   Label : CONSTANT
-                    smallTalk
+                    20
             Label : USE
-              HelloWorld
+              9
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            MyClass2
+            26
           Label : USE
-            use
+            8
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                as
+                14
                 Label : AS
-                  myPrivateHello
+                  29
                 Label : NAME
-                  sayHello
+                  12
                 Label : PRIVATE
-                  private
+                  28
             Label : USE
-              HelloWorld
+              9
         Label : EXPRESSION
-          trait
+          31
           Label : DEFINITION
-            'Hello'
+            38
           Label : DEFINITION
-            Hello
+            41
+          Label : DEFINITION
+            32
           Label : METHOD
-            sayHelloWorld
+            35
             Label : ARGUMENT
-              Void
+              16
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                echo
+                37
                 Label : ARGUMENT
-                  .
+                  40
                   Label : CONCAT
-                    'Hello'
+                    38
                   Label : CONCAT
-                    ->
+                    44
                     Label : METHOD
-                      getWorld
+                      42
                       Label : ARGUMENT
-                        Void
+                        16
                       Label : NAME
-                        getWorld
+                        42
                     Label : OBJECT
-                      $this
-                Label : NAME
-                  echo
+                      41
             Label : NAME
-              sayHelloWorld
+              35
             Label : PUBLIC
-              public
+              34
           Label : METHOD
-            getWorld
+            42
             Label : ABSTRACT
-              abstract
+              45
             Label : ARGUMENT
-              Void
+              16
             Label : BLOCK
-              Void
+              16
             Label : NAME
-              getWorld
+              42
             Label : PUBLIC
-              public
+              34
           Label : NAME
-            Hello
+            32
         Label : EXPRESSION
-          class
+          5
+          Label : DEFINITION
+            41
+          Label : DEFINITION
+            41
           Label : METHOD
-            getWorld
+            42
             Label : ARGUMENT
-              Void
+              16
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                return
+                50
                 Label : RETURN
-                  ->
+                  44
                   Label : MEMBER
-                    world
+                    49
                   Label : OBJECT
-                    $this
+                    41
             Label : NAME
-              getWorld
+              42
             Label : PUBLIC
-              public
+              34
           Label : METHOD
-            setWorld
+            51
             Label : ARGUMENT
-              $val
+              53
             Label : BLOCK
-              {}
+              11
               Label : EXPRESSION
-                =
+                54
                 Label : LEFT
-                  ->
+                  44
                   Label : MEMBER
-                    world
+                    49
                   Label : OBJECT
-                    $this
+                    41
                 Label : RIGHT
-                  $val
+                  53
             Label : NAME
-              setWorld
+              51
             Label : PUBLIC
-              public
+              34
           Label : NAME
-            MyHelloWorld
+            46
           Label : PPP
-            private
+            28
             Label : PPP
-              $world
+              48
             Label : PRIVATE
-              private
+              28
           Label : USE
-            use
+            8
             Label : USE
-              Hello
+              32

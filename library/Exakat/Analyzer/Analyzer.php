@@ -494,7 +494,7 @@ GREMLIN
         assert($this->assertAtom($atom));
         $atom = makeArray($atom);
         
-        // $count is an integer or a variable 
+        // $count is an integer or a variable
         
         $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
         $stop = array_unique(array_diff($stop, $atom));
@@ -794,7 +794,7 @@ GREMLIN
         if (is_int($value)) {
             $this->addMethod('filter{ it.get().value("'.$property.'").toLong() > '.$value.'}');
         } elseif (is_string($value)) {
-            // this is a variable name, so it can't use *** 
+            // this is a variable name, so it can't use ***
             $this->addMethod("filter{ it.get().value('$property').toLong() > $value;}");
         } else {
             assert(false, '$value must be int or string in '.__METHOD__);
@@ -871,7 +871,7 @@ GREMLIN
             $this->addMethod("filter{ false; }");
             return $this;
         }
-
+        
         if ($translate === self::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
@@ -887,7 +887,7 @@ GREMLIN
 
             $this->addMethod('filter{ it.get().value("code") in ***; }', $translatedCode);
         } else {
-            $this->addMethod('filter{ it.get().value("code") in ***; }', $code);
+            $this->addMethod('filter{ it.get().value("code") in ***; }', makeArray($code));
         }
 
         return $this;
@@ -941,6 +941,8 @@ GREMLIN
             $this->addMethod('sideEffect{ }');
             return $this;
         }
+
+        $this->addMethod('has("fullnspath")');
 
         return $this->propertyIsNot('fullnspath', $code, $caseSensitive);
     }
@@ -1578,7 +1580,7 @@ GREMLIN
     }
 
     public function hasNoClassTrait() {
-        // Method are a valid sub-part of class or traits. 
+        // Method are a valid sub-part of class or traits.
         return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Trait', 'Method'));
     }
 

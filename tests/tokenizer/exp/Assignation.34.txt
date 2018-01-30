@@ -1,221 +1,211 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              while
+              10
               Label : BLOCK
-                {}
+                9
                 Label : EXPRESSION
-                  =
+                  14
                   Label : LEFT
-                    $a
+                    13
                   Label : RIGHT
-                    yield
+                    15
                     Label : YIELD
-                      Void
+                      7
                 Label : EXPRESSION
-                  if
+                  16
                   Label : CONDITION
-                    ===
+                    17
                     Label : LEFT
-                      $a
+                      13
                     Label : RIGHT
-                      null
+                      18
                   Label : THEN
-                    {}
+                    9
                     Label : EXPRESSION
-                      break
+                      19
                       Label : BREAK
-                        Void
+                        7
                 Label : EXPRESSION
-                  if
+                  16
                   Label : CONDITION
-                    isset
+                    20
                     Label : ARGUMENT
-                      [
+                      25
                       Label : INDEX
-                        $b
+                        26
                       Label : VARIABLE
-                        ->
+                        24
                         Label : MEMBER
-                          D
+                          22
                         Label : OBJECT
-                          $this
-                    Label : NAME
-                      isset
+                          21
                   Label : ELSE
-                    {}
+                    9
                     Label : EXPRESSION
-                      if
+                      16
                       Label : CONDITION
-                        isset
+                        20
                         Label : ARGUMENT
-                          [
+                          25
                           Label : INDEX
-                            $b
+                            26
                           Label : VARIABLE
-                            ->
+                            24
                             Label : MEMBER
-                              J
+                              36
                             Label : OBJECT
-                              $this
-                        Label : NAME
-                          isset
+                              21
                       Label : ELSE
-                        {}
+                        9
                         Label : EXPRESSION
-                          =
+                          14
                           Label : LEFT
-                            [
+                            25
                             Label : INDEX
-                              $b
+                              26
                             Label : VARIABLE
-                              ->
+                              24
                               Label : MEMBER
-                                J
+                                36
                               Label : OBJECT
-                                $this
+                                21
                           Label : RIGHT
-                            $a
+                            13
                       Label : THEN
-                        {}
+                        9
                         Label : EXPRESSION
-                          .=
+                          43
                           Label : LEFT
-                            [
+                            25
                             Label : INDEX
-                              $b
+                              26
                             Label : VARIABLE
-                              ->
+                              24
                               Label : MEMBER
-                                J
+                                36
                               Label : OBJECT
-                                $this
+                                21
                           Label : RIGHT
-                            $a
+                            13
                   Label : THEN
-                    {}
+                    9
                     Label : EXPRESSION
-                      =
+                      14
                       Label : LEFT
-                        $c
+                        27
                       Label : RIGHT
-                        [
+                        25
                         Label : INDEX
-                          $b
+                          26
                         Label : VARIABLE
-                          ->
+                          24
                           Label : MEMBER
-                            D
+                            22
                           Label : OBJECT
-                            $this
+                            21
                     Label : EXPRESSION
-                      unset
+                      28
                       Label : ARGUMENT
-                        [
+                        25
                         Label : INDEX
-                          $b
+                          26
                         Label : VARIABLE
-                          ->
+                          24
                           Label : MEMBER
-                            D
+                            22
                           Label : OBJECT
-                            $this
-                      Label : NAME
-                        unset
+                            21
                     Label : EXPRESSION
-                      G
+                      29
                       Label : ARGUMENT
-                        ->
+                        24
                         Label : MEMBER
-                          H
+                          31
                         Label : OBJECT
-                          $c
+                          27
                       Label : NAME
-                        G
+                        29
                     Label : EXPRESSION
-                      =
+                      14
                       Label : LEFT
-                        $d
+                        33
                       Label : RIGHT
-                        'I'
+                        34
                     Label : EXPRESSION
-                      if
+                      16
                       Label : CONDITION
-                        isset
+                        20
                         Label : ARGUMENT
-                          [
+                          25
                           Label : INDEX
-                            $b
+                            26
                           Label : VARIABLE
-                            ->
+                            24
                             Label : MEMBER
-                              J
+                              36
                             Label : OBJECT
-                              $this
-                        Label : NAME
-                          isset
+                              21
                       Label : THEN
-                        {}
+                        9
                         Label : EXPRESSION
-                          =
+                          14
                           Label : LEFT
-                            $d
+                            33
                           Label : RIGHT
-                            [
+                            25
                             Label : INDEX
-                              $b
+                              26
                             Label : VARIABLE
-                              ->
+                              24
                               Label : MEMBER
-                                J
+                                36
                               Label : OBJECT
-                                $this
+                                21
                         Label : EXPRESSION
-                          unset
+                          28
                           Label : ARGUMENT
-                            [
+                            25
                             Label : INDEX
-                              $b
+                              26
                             Label : VARIABLE
-                              ->
+                              24
                               Label : MEMBER
-                                J
+                                36
                               Label : OBJECT
-                                $this
-                          Label : NAME
-                            unset
+                                21
                     Label : EXPRESSION
-                      ->
+                      24
                       Label : METHOD
-                        N
+                        40
                         Label : ARGUMENT
-                          .
+                          42
                           Label : CONCAT
-                            $d
+                            33
                           Label : CONCAT
-                            $a
+                            13
                         Label : NAME
-                          N
+                          40
                       Label : OBJECT
-                        ->
+                        24
                         Label : MEMBER
-                          M
+                          38
                         Label : OBJECT
-                          $c
+                          27
               Label : CONDITION
-                C
+                11
           Label : NAME
-            B
+            5

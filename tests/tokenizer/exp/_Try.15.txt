@@ -1,143 +1,143 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          try
+          5
           Label : BLOCK
-            {}
+            6
             Label : EXPRESSION
-              =
+              8
               Label : LEFT
-                $a
+                7
               Label : RIGHT
-                new
+                9
                 Label : NEW
-                  \B
+                  10
                   Label : NAME
-                    \B
+                    10
                   Label : ARGUMENT
-                    new
+                    9
                     Label : NEW
-                      \C
+                      12
                       Label : NAME
-                        \C
+                        12
                       Label : ARGUMENT
-                        $b
+                        14
                       Label : ARGUMENT
-                        ::
+                        19
                         Label : CLASS
-                          \D
+                          15
                         Label : CONSTANT
-                          E
+                          17
                   Label : ARGUMENT
-                    ::
+                    19
                     Label : CLASS
-                      \B
+                      10
                     Label : CONSTANT
-                      G
+                      20
             Label : EXPRESSION
-              foreach
+              22
               Label : BLOCK
-                {}
+                6
                 Label : EXPRESSION
-                  if
+                  24
                   Label : CONDITION
-                    ==
+                    30
                     Label : LEFT
-                      ->
+                      29
                       Label : METHOD
-                        H
+                        25
                         Label : ARGUMENT
-                          Void
+                          27
                         Label : NAME
-                          H
+                          25
                       Label : OBJECT
-                        $c
+                        23
                     Label : RIGHT
-                      'I'
+                      31
                   Label : THEN
-                    {}
+                    6
                     Label : EXPRESSION
-                      continue
+                      33
                       Label : CONTINUE
-                        Void
+                        27
                 Label : EXPRESSION
-                  ?
+                  36
                   Label : CONDITION
-                    ->
+                    29
                     Label : METHOD
-                      J
+                      34
                       Label : ARGUMENT
-                        Void
+                        27
                       Label : NAME
-                        J
+                        34
                     Label : OBJECT
-                      $c
+                      23
                   Label : ELSE
-                    @
+                    37
                     Label : AT
-                      M
+                      42
                       Label : ARGUMENT
-                        ->
+                        29
                         Label : METHOD
-                          L
+                          40
                           Label : ARGUMENT
-                            Void
+                            27
                           Label : NAME
-                            L
+                            40
                         Label : OBJECT
-                          $c
+                          23
                       Label : NAME
-                        M
+                        42
                   Label : THEN
-                    @
+                    37
                     Label : AT
-                      K
+                      38
                       Label : ARGUMENT
-                        ->
+                        29
                         Label : METHOD
-                          L
+                          40
                           Label : ARGUMENT
-                            Void
+                            27
                           Label : NAME
-                            L
+                            40
                         Label : OBJECT
-                          $c
+                          23
                       Label : NAME
-                        K
+                        38
               Label : SOURCE
-                $a
+                7
               Label : VALUE
-                $c
+                23
           Label : CATCH
-            catch
+            44
             Label : BLOCK
-              {}
+              6
               Label : EXPRESSION
-                Void
+                27
             Label : CLASS
-              \O
+              45
             Label : VARIABLE
-              $d
+              47
         Label : EXPRESSION
-          Void
+          27
         Label : EXPRESSION
-          if
+          24
           Label : CONDITION
-            $e
+            48
           Label : THEN
-            {}
+            6
             Label : EXPRESSION
-              @
+              37
               Label : AT
-                M
+                42
                 Label : ARGUMENT
-                  $b
+                  14
                 Label : NAME
-                  M
+                  42

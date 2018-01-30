@@ -1,69 +1,67 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          -
+          7
           Label : SIGN
-            **
+            6
             Label : LEFT
-              3
+              5
             Label : RIGHT
-              3
+              5
         Label : EXPRESSION
-          **
+          6
           Label : LEFT
-            4
+            8
           Label : RIGHT
-            2
+            9
         Label : EXPRESSION
-          **
+          6
           Label : LEFT
-            0.2e10
-          Label : RIGHT
             10
-        Label : EXPRESSION
-          **
-          Label : LEFT
-            $x
           Label : RIGHT
-            $y
+            11
         Label : EXPRESSION
-          -
-          Label : SIGN
-            **
-            Label : LEFT
-              0.3e10
-            Label : RIGHT
-              3
-        Label : EXPRESSION
-          +
-          Label : SIGN
-            **
-            Label : LEFT
-              0.2e10
-            Label : RIGHT
-              3
-        Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $s
+            12
           Label : RIGHT
-            3
+            13
         Label : EXPRESSION
-          echo
+          7
+          Label : SIGN
+            6
+            Label : LEFT
+              14
+            Label : RIGHT
+              5
+        Label : EXPRESSION
+          15
+          Label : SIGN
+            6
+            Label : LEFT
+              10
+            Label : RIGHT
+              5
+        Label : EXPRESSION
+          17
+          Label : LEFT
+            16
+          Label : RIGHT
+            5
+        Label : EXPRESSION
+          18
           Label : ARGUMENT
-            -
+            7
             Label : SIGN
-              **
+              6
               Label : LEFT
-                $s
+                16
               Label : RIGHT
-                2
-          Label : NAME
-            echo
+                9

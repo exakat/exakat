@@ -1,115 +1,115 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ::
+          9
           Label : CLASS
-            A
-          Label : METHOD
-            $y
-            Label : ARGUMENT
-              1
-            Label : NAME
-              $y
-        Label : EXPRESSION
-          ::
-          Label : CLASS
-            A
-          Label : METHOD
-            $y
-            Label : NAME
-              $y
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              2
-        Label : EXPRESSION
-          ::
-          Label : CLASS
-            A
-          Label : METHOD
-            x1
-            Label : NAME
-              x1
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              2
-        Label : EXPRESSION
-          ::
-          Label : NAME
-            ::
-            Label : CLASS
-              A
-            Label : METHOD
-              x2
-              Label : NAME
-                x2
-              Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                2
-          Label : ARGUMENT
-            3
-          Label : ARGUMENT
-            4
-        Label : EXPRESSION
-          ::
-          Label : NAME
-            ::
-            Label : NAME
-              ::
-              Label : CLASS
-                A
-              Label : METHOD
-                x3
-                Label : NAME
-                  x3
-                Label : ARGUMENT
-                  1
-                Label : ARGUMENT
-                  2
-            Label : ARGUMENT
-              3
-            Label : ARGUMENT
-              4
-          Label : ARGUMENT
             5
-          Label : ARGUMENT
-            6
-        Label : EXPRESSION
-          ::
-          Label : NAME
-            ::
-            Label : NAME
-              ::
-              Label : NAME
-                ::
-                Label : CLASS
-                  A
-                Label : METHOD
-                  x4
-                  Label : NAME
-                    x4
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-              Label : ARGUMENT
-                3
-              Label : ARGUMENT
-                4
-            Label : ARGUMENT
-              5
-            Label : ARGUMENT
-              6
-          Label : ARGUMENT
+          Label : METHOD
             7
+            Label : ARGUMENT
+              8
+            Label : NAME
+              7
+        Label : EXPRESSION
+          9
+          Label : CLASS
+            5
+          Label : METHOD
+            7
+            Label : NAME
+              7
+            Label : ARGUMENT
+              8
+            Label : ARGUMENT
+              10
+        Label : EXPRESSION
+          9
+          Label : CLASS
+            5
+          Label : METHOD
+            11
+            Label : NAME
+              11
+            Label : ARGUMENT
+              8
+            Label : ARGUMENT
+              10
+        Label : EXPRESSION
+          9
+          Label : NAME
+            9
+            Label : CLASS
+              5
+            Label : METHOD
+              12
+              Label : NAME
+                12
+              Label : ARGUMENT
+                8
+              Label : ARGUMENT
+                10
           Label : ARGUMENT
-            8
+            13
+          Label : ARGUMENT
+            14
+        Label : EXPRESSION
+          9
+          Label : NAME
+            9
+            Label : NAME
+              9
+              Label : CLASS
+                5
+              Label : METHOD
+                15
+                Label : NAME
+                  15
+                Label : ARGUMENT
+                  8
+                Label : ARGUMENT
+                  10
+            Label : ARGUMENT
+              13
+            Label : ARGUMENT
+              14
+          Label : ARGUMENT
+            16
+          Label : ARGUMENT
+            17
+        Label : EXPRESSION
+          9
+          Label : NAME
+            9
+            Label : NAME
+              9
+              Label : NAME
+                9
+                Label : CLASS
+                  5
+                Label : METHOD
+                  18
+                  Label : NAME
+                    18
+                  Label : ARGUMENT
+                    8
+                  Label : ARGUMENT
+                    10
+              Label : ARGUMENT
+                13
+              Label : ARGUMENT
+                14
+            Label : ARGUMENT
+              16
+            Label : ARGUMENT
+              17
+          Label : ARGUMENT
+            19
+          Label : ARGUMENT
+            20

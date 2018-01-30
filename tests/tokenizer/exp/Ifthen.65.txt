@@ -1,69 +1,69 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          global
+          5
           Label : GLOBAL
-            $a
+            6
         Label : EXPRESSION
-          global
+          5
           Label : GLOBAL
-            $b
+            7
         Label : EXPRESSION
-          if
+          8
           Label : CONDITION
-            !
+            9
             Label : NOT
-              B
+              10
               Label : ARGUMENT
-                [
+                13
                 Label : INDEX
-                  'E'
+                  16
                 Label : VARIABLE
-                  [
+                  13
                   Label : INDEX
-                    'C'
+                    14
                   Label : VARIABLE
-                    $c
+                    12
               Label : NAME
-                B
+                10
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              return
+              18
               Label : RETURN
-                array
+                19
                 Label : ARGUMENT
-                  Void
+                  20
         Label : EXPRESSION
-          =
+          23
           Label : LEFT
-            $d
+            22
           Label : RIGHT
-            G
+            24
             Label : ARGUMENT
-              [
+              13
               Label : INDEX
-                'J'
+                29
               Label : VARIABLE
-                [
+                13
                 Label : INDEX
-                  'H'
+                  27
                 Label : VARIABLE
-                  $e
+                  26
             Label : NAME
-              G
+              24
         Label : EXPRESSION
-          =
+          23
           Label : LEFT
-            $f
+            31
           Label : RIGHT
-            array
+            19
             Label : ARGUMENT
-              Void
+              20

@@ -1,33 +1,29 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          \A\B\C
+          5
         Label : EXPRESSION
-          -
+          11
           Label : SIGN
-            (
+            7
             Label : CODE
-              +
+              9
               Label : LEFT
-                4
+                8
               Label : RIGHT
-                3
+                10
         Label : EXPRESSION
-          MY_CONSTANT
+          12
         Label : EXPRESSION
-          "String"
+          14
         Label : EXPRESSION
-          <<<HEREDOC
-
+          16
           Label : CONCAT
-            
-silly string
-
-
+            18

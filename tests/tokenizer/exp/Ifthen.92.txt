@@ -1,127 +1,127 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            $a
+            7
             Label : DEFAULT
-              null
+              8
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              if
+              10
               Label : CONDITION
-                C
+                11
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  D
+                  13
                   Label : NAME
-                    D
+                    13
                   Label : ARGUMENT
-                    'E'
+                    15
                   Label : ARGUMENT
-                    __METHOD__
+                    17
             Label : EXPRESSION
-              if
+              10
               Label : CONDITION
-                F
+                19
                 Label : ARGUMENT
-                  $a
+                  7
                 Label : NAME
-                  F
+                  19
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  switch
+                  21
                   Label : CASES
-                     /**/ 
+                    28
                     Label : EXPRESSION
-                      case 'H' :  /**/  
+                      29
                       Label : CASE
-                        'H'
+                        31
                       Label : CODE
-                        ;
+                        3
                         Label : EXPRESSION
-                          =
+                          33
                           Label : LEFT
-                            $a
+                            7
                           Label : RIGHT
-                            I
+                            34
                             Label : ARGUMENT
-                              'J'
+                              36
                             Label : NAME
-                              I
+                              34
                         Label : EXPRESSION
-                          break
+                          38
                           Label : BREAK
-                            Void
+                            25
                     Label : EXPRESSION
-                      case 'K' :  /**/  
+                      39
                       Label : CASE
-                        'K'
+                        41
                       Label : CODE
-                        ;
+                        3
                         Label : EXPRESSION
-                          =
+                          33
                           Label : LEFT
-                            $a
+                            7
                           Label : RIGHT
-                            L
+                            43
                             Label : ARGUMENT
-                              M
+                              45
                               Label : ARGUMENT
-                                ->
+                                27
                                 Label : MEMBER
-                                  N
+                                  47
                                 Label : OBJECT
-                                  $this
+                                  22
                               Label : NAME
-                                M
+                                45
                             Label : NAME
-                              L
+                              43
                         Label : EXPRESSION
-                          break
+                          38
                           Label : BREAK
-                            Void
+                            25
                     Label : EXPRESSION
-                      default
+                      49
                       Label : CODE
-                        ;
+                        3
                         Label : EXPRESSION
-                          =
+                          33
                           Label : LEFT
-                            $a
+                            7
                           Label : RIGHT
-                            'O'
+                            50
                   Label : NAME
-                    ->
+                    27
                     Label : METHOD
-                      G
+                      23
                       Label : ARGUMENT
-                        Void
+                        25
                       Label : NAME
-                        G
+                        23
                     Label : OBJECT
-                      $this
+                      22
             Label : EXPRESSION
-              ::
+              54
               Label : CLASS
-                P
+                52
               Label : METHOD
-                B
+                5
                 Label : ARGUMENT
-                  $a
+                  7
                 Label : NAME
-                  B
+                  5
           Label : NAME
-            B
+            5
         Label : EXPRESSION
-          Void
+          25

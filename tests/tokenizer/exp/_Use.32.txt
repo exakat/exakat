@@ -1,30 +1,31 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          use
+          5
           Label : CONST
-            const
+            6
           Label : GROUPUSE
-            FooLibrary\Bar\Baz
+            7
           Label : USE
-            B
+            9
         Label : EXPRESSION
-          use
+          5
           Label : FUNCTION
-            function
+            11
           Label : GROUPUSE
-            FooLibrary\Bar\Baz
+            7
           Label : USE
-            B
+            9
         Label : EXPRESSION
-          use
+          5
           Label : GROUPUSE
-            FooLibrary\Bar\Baz
+            7
           Label : USE
-            B
+            9

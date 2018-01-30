@@ -1,21 +1,21 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            $e
+            6
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              a
+              7
             Label : EXPRESSION
-              C
+              8
         Label : EXPRESSION
-          Void
+          10

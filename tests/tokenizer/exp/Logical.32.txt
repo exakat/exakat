@@ -1,67 +1,67 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            11
             Label : LEFT
-              !
+              6
               Label : NOT
-                [
+                8
                 Label : INDEX
-                  'c'
+                  10
                 Label : VARIABLE
-                  [
+                  8
                   Label : INDEX
-                    'b'
+                    9
                   Label : VARIABLE
-                    $a
+                    7
             Label : RIGHT
-              &&
+              11
               Label : LEFT
-                [
+                8
                 Label : INDEX
-                  'f'
+                  14
                 Label : VARIABLE
-                  [
+                  8
                   Label : INDEX
-                    'e'
+                    13
                   Label : VARIABLE
-                    $d
+                    12
               Label : RIGHT
-                >
+                20
                 Label : LEFT
-                  -
+                  17
                   Label : LEFT
-                    G
+                    15
                   Label : RIGHT
-                    [
+                    8
                     Label : INDEX
-                      'i'
+                      19
                     Label : VARIABLE
-                      $h
+                      18
                 Label : RIGHT
-                  *
+                  24
                   Label : LEFT
-                    [
+                    8
                     Label : INDEX
-                      'l'
+                      23
                     Label : VARIABLE
-                      [
+                      8
                       Label : INDEX
-                        'k'
+                        22
                       Label : VARIABLE
-                        $j
+                        21
                   Label : RIGHT
-                    1
+                    25
           Label : THEN
-            {}
+            26
             Label : EXPRESSION
-              Void
+              27

@@ -1,63 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : METHOD
-            b
+            8
             Label : ARGUMENT
-              $c
+              9
             Label : ARGUMENT
-              $d
+              10
             Label : ARGUMENT
-              $e
+              11
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                =
+                16
                 Label : LEFT
-                  ->
+                  15
                   Label : MEMBER
-                    g
+                    14
                   Label : OBJECT
-                    $f
+                    13
                 Label : RIGHT
-                  ?
+                  22
                   Label : CONDITION
-                    (
+                    17
                     Label : CODE
-                      ==
+                      20
                       Label : LEFT
-                        ->
+                        15
                         Label : MEMBER
-                          i
+                          19
                         Label : OBJECT
-                          $h
+                          18
                       Label : RIGHT
-                        0.0
+                        21
                   Label : ELSE
-                    (
+                    17
                     Label : CODE
-                      /
+                      27
                       Label : LEFT
-                        $K
+                        25
                       Label : RIGHT
-                        ->
+                        15
                         Label : MEMBER
-                          f
+                          28
                         Label : OBJECT
-                          $d
+                          10
                   Label : THEN
-                    NAN
+                    23
             Label : NAME
-              b
+              8
             Label : PUBLIC
-              public
+              7
           Label : NAME
-            a
+            6

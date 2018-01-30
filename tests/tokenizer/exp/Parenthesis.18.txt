@@ -1,43 +1,41 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          require
+          19
           Label : ARGUMENT
-            .
+            14
             Label : CONCAT
-              (
+              5
               Label : CODE
-                ?
+                11
                 Label : CONDITION
-                  !==
+                  9
                   Label : LEFT
-                    ->
+                    8
                     Label : MEMBER
-                      b
+                      7
                     Label : OBJECT
-                      $a
+                      6
                   Label : RIGHT
-                    'c'
+                    10
                 Label : ELSE
-                  'g'
+                  17
                 Label : THEN
-                  .
+                  14
                   Label : CONCAT
-                    ->
+                    8
                     Label : MEMBER
-                      e
+                      13
                     Label : OBJECT
-                      $d
+                      12
                   Label : CONCAT
-                    F
+                    15
             Label : CONCAT
-              $h
-          Label : NAME
-            require
+              18

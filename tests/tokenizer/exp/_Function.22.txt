@@ -1,27 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          a
+          5
           Label : BLOCK
-            {}
+            10
             Label : EXPRESSION
-              Void
+              11
           Label : ARGUMENT
-            $x
+            6
             Label : DEFAULT
-              null
+              7
           Label : ARGUMENT
-            $y
+            8
             Label : DEFAULT
-              true
+              9
           Label : NAME
-            a
+            5
         Label : EXPRESSION
-          Void
+          11

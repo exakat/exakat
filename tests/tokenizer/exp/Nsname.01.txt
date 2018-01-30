@@ -1,17 +1,17 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            a\b
+            6
             Label : ARGUMENT
-              Void
+              7
             Label : NAME
-              a\b
+              6

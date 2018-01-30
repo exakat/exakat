@@ -1,109 +1,109 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            8
             Label : EXPRESSION
-              case $a instanceof \C :  /**/  
+              9
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  \C
+                  13
                 Label : VARIABLE
-                  $a
+                  11
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  15
                   Label : RETURN
-                    'D'
+                    16
             Label : EXPRESSION
-              case $b instanceof \E :  /**/  
+              18
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  \E
+                  21
                 Label : VARIABLE
-                  $b
+                  20
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  15
                   Label : RETURN
-                    'F'
+                    23
             Label : EXPRESSION
-              case $c instanceof \G :  /**/  
+              25
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  \G
+                  28
                 Label : VARIABLE
-                  $c
+                  27
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  15
                   Label : RETURN
-                    'H'
+                    30
             Label : EXPRESSION
-              case $d instanceof \I :  /**/  
+              32
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  \I
+                  35
                 Label : VARIABLE
-                  $d
+                  34
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  15
                   Label : RETURN
-                    'J'
+                    37
             Label : EXPRESSION
-              case $e instanceof \K :  /**/  
+              39
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  \K
+                  42
                 Label : VARIABLE
-                  $e
+                  41
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  15
                   Label : RETURN
-                    'L'
+                    44
             Label : EXPRESSION
-              default
+              46
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  throw
+                  47
                   Label : THROW
-                    new
+                    48
                     Label : NEW
-                      \M
+                      49
                       Label : ARGUMENT
-                        N
+                        51
                         Label : NAME
-                          N
+                          51
                         Label : ARGUMENT
-                          'O'
+                          53
                         Label : ARGUMENT
-                          P
+                          55
                           Label : ARGUMENT
-                            $f
+                            57
                           Label : NAME
-                            P
+                            55
                       Label : NAME
-                        \M
+                        49
           Label : NAME
-            B
+            6

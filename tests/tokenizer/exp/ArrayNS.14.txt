@@ -1,35 +1,35 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          14
           Label : LEFT
-            [
+            9
             Label : INDEX
-              [
+              9
               Label : INDEX
-                'h'
+                13
               Label : VARIABLE
-                $g
+                12
             Label : VARIABLE
-              [
+              9
               Label : INDEX
-                $f
+                11
               Label : VARIABLE
-                [
+                9
                 Label : INDEX
-                  $e
+                  10
                 Label : VARIABLE
-                  ::
+                  8
                   Label : CLASS
-                    C
+                    5
                   Label : MEMBER
-                    $d
+                    7
           Label : RIGHT
-            $i
+            15

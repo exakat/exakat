@@ -1,73 +1,73 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          f
+          5
           Label : ARGUMENT
-            2
+            7
           Label : NAME
-            f
-            Label : ARGUMENT
-              1
-            Label : NAME
-              f
-        Label : EXPRESSION
-          ::
-          Label : ARGUMENT
-            1
-          Label : NAME
-            ::
-            Label : CLASS
-              D
-            Label : METHOD
-              c
-              Label : ARGUMENT
-                Void
-              Label : NAME
-                c
-        Label : EXPRESSION
-          ::
-          Label : ARGUMENT
-            14
-          Label : NAME
-            ::
-            Label : ARGUMENT
-              13
-            Label : NAME
-              ::
-              Label : CLASS
-                D
-              Label : METHOD
-                c
-                Label : ARGUMENT
-                  12
-                Label : NAME
-                  c
-        Label : EXPRESSION
-          ::
-          Label : ARGUMENT
             5
-          Label : NAME
-            ::
             Label : ARGUMENT
-              4
+              6
             Label : NAME
-              ::
+              5
+        Label : EXPRESSION
+          13
+          Label : ARGUMENT
+            6
+          Label : NAME
+            13
+            Label : CLASS
+              8
+            Label : METHOD
+              10
               Label : ARGUMENT
-                3
+                11
               Label : NAME
-                ::
+                10
+        Label : EXPRESSION
+          13
+          Label : ARGUMENT
+            16
+          Label : NAME
+            13
+            Label : ARGUMENT
+              15
+            Label : NAME
+              13
+              Label : CLASS
+                8
+              Label : METHOD
+                10
+                Label : ARGUMENT
+                  14
+                Label : NAME
+                  10
+        Label : EXPRESSION
+          13
+          Label : ARGUMENT
+            19
+          Label : NAME
+            13
+            Label : ARGUMENT
+              18
+            Label : NAME
+              13
+              Label : ARGUMENT
+                17
+              Label : NAME
+                13
                 Label : CLASS
-                  D
+                  8
                 Label : METHOD
-                  c
+                  10
                   Label : ARGUMENT
-                    2
+                    7
                   Label : NAME
-                    c
+                    10

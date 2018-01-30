@@ -1,329 +1,325 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              class
+              9
               Label : DEFINITION
-                one_identifier
+                10
               Label : DEFINITION
-                one_identifier
-              Label : NAME
-                one_identifier
-              Label : PPP
-                public
-                Label : PPP
-                  =
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                    33
-                Label : PUBLIC
-                  public
-                Label : STATIC
-                  static
-            Label : EXPRESSION
-              class
-              Label : DEFINITION
-                \absolute_path
-              Label : DEFINITION
-                absolute_path
-              Label : NAME
-                absolute_path
-              Label : PPP
-                public
-                Label : PPP
-                  =
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                    34
-                Label : PUBLIC
-                  public
-                Label : STATIC
-                  static
-            Label : EXPRESSION
-              class
-              Label : DEFINITION
-                one_identifier3
-              Label : DEFINITION
-                a1
+                10
                 Label : DEFINITION
-                  as
+                  10
+              Label : NAME
+                10
+              Label : PPP
+                12
+                Label : PPP
+                  14
+                  Label : LEFT
+                    13
+                  Label : RIGHT
+                    16
+                Label : PUBLIC
+                  12
+                Label : STATIC
+                  11
+            Label : EXPRESSION
+              9
+              Label : DEFINITION
+                31
+              Label : DEFINITION
+                17
+                Label : DEFINITION
+                  31
+              Label : NAME
+                17
+              Label : PPP
+                12
+                Label : PPP
+                  14
+                  Label : LEFT
+                    13
+                  Label : RIGHT
+                    18
+                Label : PUBLIC
+                  12
+                Label : STATIC
+                  11
+            Label : EXPRESSION
+              9
+              Label : DEFINITION
+                19
+              Label : DEFINITION
+                21
+                Label : DEFINITION
+                  34
                   Label : ALIAS
-                    a1
+                    21
                   Label : NAME
-                    one_identifier3
+                    19
               Label : NAME
-                one_identifier3
+                19
               Label : PPP
-                public
+                12
                 Label : PPP
-                  =
+                  14
                   Label : LEFT
-                    $a
+                    13
                   Label : RIGHT
-                    37
+                    20
                 Label : PUBLIC
-                  public
+                  12
                 Label : STATIC
-                  static
+                  11
             Label : EXPRESSION
-              class
+              9
               Label : DEFINITION
-                \a1
+                43
               Label : NAME
-                a1
+                21
               Label : PPP
-                public
+                12
                 Label : PPP
-                  =
+                  14
                   Label : LEFT
-                    $a
+                    13
                   Label : RIGHT
-                    38
+                    22
                 Label : PUBLIC
-                  public
+                  12
                 Label : STATIC
-                  static
+                  11
           Label : NAME
-            Void
+            5
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              class
+              9
               Label : DEFINITION
-                complex\path
+                32
               Label : DEFINITION
-                path
+                24
+                Label : DEFINITION
+                  32
               Label : NAME
-                path
+                24
               Label : PPP
-                public
+                12
                 Label : PPP
-                  =
+                  14
                   Label : LEFT
-                    $a
+                    13
                   Label : RIGHT
-                    35
+                    25
                 Label : PUBLIC
-                  public
+                  12
                 Label : STATIC
-                  static
+                  11
           Label : NAME
-            complex
+            23
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              class
+              9
               Label : DEFINITION
-                \absolute\complex\path2
+                33
               Label : DEFINITION
-                path2
+                27
+                Label : DEFINITION
+                  33
               Label : NAME
-                path2
+                27
               Label : PPP
-                public
+                12
                 Label : PPP
-                  =
+                  14
                   Label : LEFT
-                    $a
+                    13
                   Label : RIGHT
-                    36
+                    28
                 Label : PUBLIC
-                  public
+                  12
                 Label : STATIC
-                  static
+                  11
           Label : NAME
-            absolute\complex
+            26
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              use
+              30
               Label : USE
-                one_identifier
+                10
             Label : EXPRESSION
-              use
+              30
               Label : USE
-                \absolute_path
+                31
             Label : EXPRESSION
-              use
+              30
               Label : USE
-                complex\path
+                32
             Label : EXPRESSION
-              use
+              30
               Label : USE
-                \absolute\complex\path2
+                33
             Label : EXPRESSION
-              use
+              30
               Label : USE
-                as
+                34
                 Label : ALIAS
-                  a1
+                  21
                 Label : NAME
-                  one_identifier3
+                  19
             Label : EXPRESSION
-              use
+              30
               Label : USE
-                as
+                34
                 Label : ALIAS
-                  a2
+                  36
                 Label : NAME
-                  \absolute_path3
+                  35
             Label : EXPRESSION
-              use
+              30
               Label : USE
-                as
+                34
                 Label : ALIAS
-                  a3
+                  38
                 Label : NAME
-                  complex\path3
+                  37
             Label : EXPRESSION
-              use
+              30
               Label : USE
-                as
+                34
                 Label : ALIAS
-                  a4
+                  40
                 Label : NAME
-                  \absolute\complex\path32
+                  39
             Label : EXPRESSION
-              print
+              42
               Label : ARGUMENT
-                ::
+                41
                 Label : CLASS
-                  one_identifier
-                Label : MEMBER
-                  $a
-              Label : NAME
-                print
-            Label : EXPRESSION
-              print
-              Label : ARGUMENT
-                ::
-                Label : CLASS
-                  absolute_path
-                Label : MEMBER
-                  $a
-              Label : NAME
-                print
-            Label : EXPRESSION
-              print
-              Label : ARGUMENT
-                ::
-                Label : CLASS
-                  path
-                Label : MEMBER
-                  $a
-              Label : NAME
-                print
-            Label : EXPRESSION
-              print
-              Label : ARGUMENT
-                ::
-                Label : CLASS
-                  path2
-                Label : MEMBER
-                  $a
-              Label : NAME
-                print
-            Label : EXPRESSION
-              print
-              Label : ARGUMENT
-                ::
-                Label : CLASS
-                  a1
+                  10
                   Label : DEFINITION
-                    as
-                    Label : ALIAS
-                      a1
-                    Label : NAME
-                      one_identifier3
+                    10
                 Label : MEMBER
-                  $a
-              Label : NAME
-                print
+                  13
             Label : EXPRESSION
-              print
+              42
               Label : ARGUMENT
-                ::
+                41
                 Label : CLASS
-                  \a1
-                Label : MEMBER
-                  $a
-              Label : NAME
-                print
-            Label : EXPRESSION
-              print
-              Label : ARGUMENT
-                ::
-                Label : CLASS
-                  one_identifier3
-                Label : MEMBER
-                  $a
-              Label : NAME
-                print
-            Label : EXPRESSION
-              print
-              Label : ARGUMENT
-                ::
-                Label : CLASS
-                  a2
+                  17
                   Label : DEFINITION
-                    as
-                    Label : ALIAS
-                      a2
-                    Label : NAME
-                      \absolute_path3
+                    31
                 Label : MEMBER
-                  $a
-              Label : NAME
-                print
+                  13
             Label : EXPRESSION
-              print
+              42
               Label : ARGUMENT
-                ::
+                41
                 Label : CLASS
-                  a3
+                  24
                   Label : DEFINITION
-                    as
-                    Label : ALIAS
-                      a3
-                    Label : NAME
-                      complex\path3
+                    32
                 Label : MEMBER
-                  $a
-              Label : NAME
-                print
+                  13
             Label : EXPRESSION
-              print
+              42
               Label : ARGUMENT
-                ::
+                41
                 Label : CLASS
-                  a4
+                  27
                   Label : DEFINITION
-                    as
-                    Label : ALIAS
-                      a4
-                    Label : NAME
-                      \absolute\complex\path32
+                    33
                 Label : MEMBER
-                  $a
-              Label : NAME
-                print
+                  13
+            Label : EXPRESSION
+              42
+              Label : ARGUMENT
+                41
+                Label : CLASS
+                  21
+                  Label : DEFINITION
+                    34
+                    Label : ALIAS
+                      21
+                    Label : NAME
+                      19
+                Label : MEMBER
+                  13
+            Label : EXPRESSION
+              42
+              Label : ARGUMENT
+                41
+                Label : CLASS
+                  43
+                Label : MEMBER
+                  13
+            Label : EXPRESSION
+              42
+              Label : ARGUMENT
+                41
+                Label : CLASS
+                  19
+                Label : MEMBER
+                  13
+            Label : EXPRESSION
+              42
+              Label : ARGUMENT
+                41
+                Label : CLASS
+                  36
+                  Label : DEFINITION
+                    34
+                    Label : ALIAS
+                      36
+                    Label : NAME
+                      35
+                Label : MEMBER
+                  13
+            Label : EXPRESSION
+              42
+              Label : ARGUMENT
+                41
+                Label : CLASS
+                  38
+                  Label : DEFINITION
+                    34
+                    Label : ALIAS
+                      38
+                    Label : NAME
+                      37
+                Label : MEMBER
+                  13
+            Label : EXPRESSION
+              42
+              Label : ARGUMENT
+                41
+                Label : CLASS
+                  40
+                  Label : DEFINITION
+                    34
+                    Label : ALIAS
+                      40
+                    Label : NAME
+                      39
+                Label : MEMBER
+                  13
           Label : NAME
-            x
+            29

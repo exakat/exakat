@@ -1,77 +1,77 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          +
+          11
           Label : LEFT
-            function
+            5
             Label : ARGUMENT
-              $f
+              6
             Label : ARGUMENT
-              $g
+              7
             Label : BLOCK
-              {}
+              8
               Label : EXPRESSION
-                ++
+                10
                 Label : POSTPLUSPLUS
-                  $a
+                  9
           Label : RIGHT
-            ->
+            20
             Label : METHOD
-              d
+              18
               Label : ARGUMENT
-                'e'
+                19
               Label : NAME
-                d
+                18
             Label : OBJECT
-              (
+              12
               Label : CODE
-                new
+                13
                 Label : NEW
-                  A
+                  14
                   Label : NAME
-                    A
+                    14
                   Label : ARGUMENT
-                    $b
+                    16
                   Label : ARGUMENT
-                    $c
+                    17
         Label : EXPRESSION
-          -
+          21
           Label : LEFT
-            function
+            5
             Label : ARGUMENT
-              $f
+              6
             Label : ARGUMENT
-              $g
+              7
             Label : BLOCK
-              {}
+              8
               Label : EXPRESSION
-                ++
+                10
                 Label : POSTPLUSPLUS
-                  $a
+                  9
           Label : RIGHT
-            ->
+            20
             Label : METHOD
-              d
+              18
               Label : ARGUMENT
-                'e'
+                19
               Label : NAME
-                d
+                18
             Label : OBJECT
-              (
+              12
               Label : CODE
-                new
+                13
                 Label : NEW
-                  A
+                  14
                   Label : NAME
-                    A
+                    14
                   Label : ARGUMENT
-                    $b
+                    16
                   Label : ARGUMENT
-                    $c
+                    17

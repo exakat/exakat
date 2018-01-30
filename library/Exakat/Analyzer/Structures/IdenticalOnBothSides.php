@@ -33,7 +33,7 @@ class IdenticalOnBothSides extends Analyzer {
              ->savePropertyAs('fullcode', 'left')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->samePropertyAs('fullcode', 'left')
+             ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
         

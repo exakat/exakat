@@ -1,53 +1,53 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            static
+            6
             Label : ARGUMENT
-              Void
+              7
             Label : NAME
-              static
+              6
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            static
+            6
             Label : NAME
-              static
+              6
             Label : ARGUMENT
-              1
+              9
             Label : ARGUMENT
-              2
+              10
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            static
+            6
             Label : ARGUMENT
-              1
+              9
             Label : ARGUMENT
-              2
+              10
             Label : ARGUMENT
-              3
+              11
             Label : NAME
-              static
+              6
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            static
+            6
             Label : ARGUMENT
-              1
+              9
             Label : ARGUMENT
-              2
+              10
             Label : ARGUMENT
-              3
+              11
             Label : ARGUMENT
-              4
+              12
             Label : NAME
-              static
+              6

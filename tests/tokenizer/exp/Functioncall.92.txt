@@ -1,29 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ?
+          11
           Label : CONDITION
-            ->
+            10
             Label : METHOD
-              B
+              6
               Label : ARGUMENT
-                Void
+                8
               Label : NAME
-                B
+                6
             Label : OBJECT
-              $this
+              5
           Label : ELSE
-            null
+            13
           Label : THEN
-            die
+            12
             Label : ARGUMENT
-              Void
-            Label : NAME
-              die
+              8

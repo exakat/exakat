@@ -1,61 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $y
+            5
           Label : RIGHT
-            'a'
+            7
         Label : EXPRESSION
-          class
+          8
           Label : DEFINITION
-            C
+            9
           Label : METHOD
-            a
+            15
             Label : ARGUMENT
-              Void
+              16
             Label : BLOCK
-              {}
+              18
               Label : EXPRESSION
-                return
+                19
                 Label : RETURN
-                  'b'
+                  20
             Label : NAME
-              a
+              15
           Label : NAME
-            C
+            9
           Label : PPP
-            static
+            12
             Label : PPP
-              =
+              6
               Label : LEFT
-                $y
+                5
               Label : RIGHT
-                'f'
+                14
             Label : PUBLIC
-              public
+              11
             Label : STATIC
-              static
+              12
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            21
           Label : RIGHT
-            new
+            22
             Label : NEW
-              ::
+              23
               Label : CLASS
-                C
+                9
               Label : METHOD
-                $y
+                5
                 Label : ARGUMENT
-                  Void
+                  16
                 Label : NAME
-                  $y
+                  5

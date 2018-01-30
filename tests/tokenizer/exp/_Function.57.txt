@@ -1,75 +1,71 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              C
+              10
               Label : ARGUMENT
-                array
+                12
                 Label : ARGUMENT
-                  __CLASS__
+                  13
                 Label : ARGUMENT
-                  'D'
+                  15
               Label : NAME
-                C
+                10
           Label : NAME
-            B
+            5
         Label : EXPRESSION
-          B1
+          17
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              print
+              20
               Label : ARGUMENT
-                (
+                19
                 Label : CODE
-                  array
+                  12
                   Label : ARGUMENT
-                    __CLASS__
+                    13
                   Label : ARGUMENT
-                    'D'
-              Label : NAME
-                print
+                    15
           Label : NAME
-            B1
+            17
         Label : EXPRESSION
-          B2
+          21
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              C
+              10
               Label : ARGUMENT
-                array
+                12
                 Label : ARGUMENT
-                  __CLASS__
+                  13
                 Label : ARGUMENT
-                  'D'
+                  15
               Label : NAME
-                C
+                10
             Label : EXPRESSION
-              print
+              20
               Label : ARGUMENT
-                array
+                12
                 Label : ARGUMENT
-                  __CLASS__
+                  13
                 Label : ARGUMENT
-                  'D'
-              Label : NAME
-                print
+                  15
           Label : NAME
-            B2
+            21

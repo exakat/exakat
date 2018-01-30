@@ -1,43 +1,43 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
             Label : EXPRESSION
-              use
+              9
               Label : USE
-                B\C\D\H
+                10
             Label : EXPRESSION
-              trait
+              12
               Label : NAME
-                I
+                13
               Label : USE
-                use
+                9
                 Label : BLOCK
-                  {}
+                  17
                   Label : EXPRESSION
-                    as
+                    20
                     Label : AS
-                      L
+                      22
                     Label : NAME
-                      K
+                      18
                     Label : PRIVATE
-                      private
+                      21
                 Label : USE
-                  H
+                  15
               Label : PPP
-                protected
+                24
                 Label : PPP
-                  $a
+                  25
                 Label : PROTECTED
-                  protected
+                  24
           Label : NAME
-            B\C\D
+            5

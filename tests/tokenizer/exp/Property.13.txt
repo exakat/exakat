@@ -1,111 +1,111 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          13
           Label : LEFT
-            ->
+            12
             Label : MEMBER
-              c
+              11
             Label : OBJECT
-              ::
+              10
               Label : CLASS
-                A
+                5
               Label : METHOD
-                b
+                7
                 Label : ARGUMENT
-                  Void
+                  8
                 Label : NAME
-                  b
+                  7
           Label : RIGHT
-            1
+            14
         Label : EXPRESSION
-          =
+          13
           Label : LEFT
-            ->
+            12
             Label : MEMBER
-              c
+              11
             Label : OBJECT
-              ::
+              10
               Label : CLASS
-                A
+                5
               Label : METHOD
-                b
+                7
                 Label : ARGUMENT
-                  Void
+                  8
                 Label : NAME
-                  b
+                  7
           Label : RIGHT
-            1
+            14
         Label : EXPRESSION
-          =
+          13
           Label : LEFT
-            ->
+            12
             Label : MEMBER
-              e
+              16
             Label : OBJECT
-              ->
+              12
               Label : MEMBER
-                d
+                15
               Label : OBJECT
-                ->
+                12
                 Label : MEMBER
-                  c
+                  11
                 Label : OBJECT
-                  ::
+                  10
                   Label : CLASS
-                    A
+                    5
                   Label : METHOD
-                    b
+                    7
                     Label : ARGUMENT
-                      Void
+                      8
                     Label : NAME
-                      b
+                      7
           Label : RIGHT
-            1
+            14
         Label : EXPRESSION
-          =
+          13
           Label : LEFT
-            ->
+            12
             Label : MEMBER
-              d
+              15
             Label : OBJECT
-              ->
+              12
               Label : MEMBER
-                c
+                11
               Label : OBJECT
-                ->
+                12
                 Label : METHOD
-                  b
+                  7
                   Label : ARGUMENT
-                    Void
+                    8
                   Label : NAME
-                    b
+                    7
                 Label : OBJECT
-                  $A
+                  17
           Label : RIGHT
-            2
+            19
         Label : EXPRESSION
-          =
+          13
           Label : LEFT
-            ->
+            12
             Label : MEMBER
-              d
+              15
             Label : OBJECT
-              ->
+              12
               Label : MEMBER
-                c
+                11
               Label : OBJECT
-                ->
+                12
                 Label : MEMBER
-                  b
+                  7
                 Label : OBJECT
-                  $A
+                  17
           Label : RIGHT
-            3
+            20

@@ -1,71 +1,71 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              if
+              10
               Label : CONDITION
-                is_array
+                11
                 Label : ARGUMENT
-                  ->
+                  8
                   Label : MEMBER
-                    f
+                    14
                   Label : OBJECT
-                    ->
+                    8
                     Label : MEMBER
-                      e
+                      13
                     Label : OBJECT
-                      $d
+                      12
                 Label : NAME
-                  is_array
+                  11
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  16
                   Label : LEFT
-                    $g
+                    15
                   Label : RIGHT
-                    h
+                    17
                     Label : NAME
-                      h
+                      17
                     Label : ARGUMENT
-                      $i
+                      18
                     Label : ARGUMENT
-                      ->
+                      8
                       Label : MEMBER
-                        l
+                        21
                       Label : OBJECT
-                        ->
+                        8
                         Label : MEMBER
-                          k
+                          20
                         Label : OBJECT
-                          $j
+                          19
           Label : SOURCE
-            ->
+            8
             Label : MEMBER
-              b
+              7
             Label : OBJECT
-              $a
+              6
           Label : VALUE
-            $c
+            9
         Label : EXPRESSION
-          =
+          16
           Label : LEFT
-            $m
+            22
           Label : RIGHT
-            new
+            23
             Label : NEW
-              m
+              24
               Label : ARGUMENT
-                $o
+                25
               Label : NAME
-                m
+                24

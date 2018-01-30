@@ -1,45 +1,45 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
             Label : EXPRESSION
-              instanceof
+              10
               Label : CLASS
-                B
+                11
               Label : VARIABLE
-                $a
+                9
             Label : EXPRESSION
-              instanceof
+              10
               Label : CLASS
-                \D
+                14
               Label : VARIABLE
-                $c
+                13
             Label : EXPRESSION
-              instanceof
+              10
               Label : CLASS
-                F\G\H
+                17
               Label : VARIABLE
-                $e
+                16
             Label : EXPRESSION
-              instanceof
+              10
               Label : CLASS
-                \F1\G1\H1
+                20
               Label : VARIABLE
-                $e1
+                19
             Label : EXPRESSION
-              instanceof
+              10
               Label : CLASS
-                namespace\J\K
+                23
               Label : VARIABLE
-                $i
+                22
           Label : NAME
-            A
+            5

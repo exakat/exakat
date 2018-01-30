@@ -1,65 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case 'b' :  /**/  
+              8
               Label : CASE
-                'b'
+                9
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  ++
+                  11
                   Label : POSTPLUSPLUS
-                    $c
+                    10
                 Label : EXPRESSION
-                  ++
+                  11
                   Label : POSTPLUSPLUS
-                    $d
+                    12
                 Label : EXPRESSION
-                  require_once
+                  15
                   Label : ARGUMENT
-                    e
+                    13
                     Label : ARGUMENT
-                      'f'
+                      14
                     Label : NAME
-                      e
-                  Label : NAME
-                    require_once
+                      13
                 Label : EXPRESSION
-                  g
+                  16
                   Label : ARGUMENT
-                    'h'
+                    17
                   Label : NAME
-                    g
+                    16
                 Label : EXPRESSION
-                  break
+                  18
                   Label : BREAK
-                    Void
+                    19
             Label : EXPRESSION
-              case 'i' :  /**/  
+              21
               Label : CASE
-                'i'
+                22
               Label : CODE
-                ;
+                3
             Label : EXPRESSION
-              case 'j' :  /**/  
+              23
               Label : CASE
-                'j'
+                24
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  break
+                  18
                   Label : BREAK
-                    1
+                    25
           Label : NAME
-            $a
+            6

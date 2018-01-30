@@ -1,26 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            ?
+            7
             Label : CONDITION
-              $a
+              6
             Label : ELSE
-              true
+              13
             Label : THEN
-              (int)
+              8
               Label : CAST
-                (
+                9
                 Label : CODE
-                  [
+                  11
                   Label : INDEX
-                    'c'
+                    12
                   Label : VARIABLE
-                    $b
+                    10

@@ -1,49 +1,45 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          9
           Label : LEFT
-            ::
+            8
             Label : CLASS
-              B
+              5
             Label : MEMBER
-              $a
+              7
           Label : RIGHT
-            ::
+            8
             Label : CLASS
-              C
+              10
             Label : METHOD
-              D
+              12
               Label : NAME
-                D
+                12
               Label : ARGUMENT
-                include
+                19
                 Label : ARGUMENT
-                  .
+                  16
                   Label : CONCAT
-                    E
+                    14
                   Label : CONCAT
-                    'F'
-                Label : NAME
-                  include
+                    17
               Label : ARGUMENT
-                include
+                19
                 Label : ARGUMENT
-                  .
+                  16
                   Label : CONCAT
-                    G
+                    20
                   Label : CONCAT
-                    'H'
+                    22
                   Label : CONCAT
-                    $b
+                    24
                   Label : CONCAT
-                    'I'
-                Label : NAME
-                  include
+                    25

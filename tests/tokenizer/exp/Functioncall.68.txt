@@ -1,109 +1,99 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            isset
+            6
             Label : ARGUMENT
-              [
+              8
               Label : INDEX
-                'B'
+                9
               Label : VARIABLE
-                $a
-            Label : NAME
-              isset
+                7
           Label : ELSE
-            elseif
+            14
             Label : CONDITION
-              !
+              15
               Label : NOT
-                [
+                8
                 Label : INDEX
-                  'D'
+                  16
                 Label : VARIABLE
-                  $a
+                  7
             Label : ELSE
-              elseif
+              14
               Label : CONDITION
-                ==
+                27
                 Label : LEFT
-                  [
+                  8
                   Label : INDEX
-                    'D'
+                    16
                   Label : VARIABLE
-                    $a
+                    7
                 Label : RIGHT
-                  'J'
+                  28
               Label : ELSE
-                ;
+                3
                 Label : EXPRESSION
-                  echo
+                  11
                   Label : ARGUMENT
-                    [
+                    8
                     Label : INDEX
-                      'D'
+                      16
                     Label : VARIABLE
-                      $a
-                  Label : NAME
-                    echo
+                      7
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  echo
+                  11
                   Label : ARGUMENT
-                    .
+                    24
                     Label : CONCAT
-                      [
+                      8
                       Label : INDEX
-                        'K'
+                        30
                       Label : VARIABLE
-                        $a
+                        7
                     Label : CONCAT
-                      'L'
+                      32
                     Label : CONCAT
-                      [
+                      8
                       Label : INDEX
-                        'M'
+                        34
                       Label : VARIABLE
-                        $a
-                  Label : NAME
-                    echo
+                        7
             Label : THEN
-              ;
+              3
               Label : EXPRESSION
-                echo
+                11
                 Label : ARGUMENT
-                  .
+                  24
                   Label : CONCAT
-                    E
+                    18
                     Label : ARGUMENT
-                      F
+                      20
                       Label : ARGUMENT
-                        [
+                        8
                         Label : INDEX
-                          'G'
+                          22
                         Label : VARIABLE
-                          $a
+                          7
                       Label : NAME
-                        F
+                        20
                     Label : NAME
-                      E
+                      18
                   Label : CONCAT
-                    'H'
-                Label : NAME
-                  echo
+                    25
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              echo
+              11
               Label : ARGUMENT
-                'C'
-              Label : NAME
-                echo
+                12

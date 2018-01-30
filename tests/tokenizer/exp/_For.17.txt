@@ -1,90 +1,91 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          for
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              if
+              12
               Label : CONDITION
-                $c
+                13
               Label : ELSE
-                ;
+                3
                 Label : EXPRESSION
-                  ++
+                  11
                   Label : POSTPLUSPLUS
-                    $e
+                    15
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  ++
+                  11
                   Label : POSTPLUSPLUS
-                    $d
+                    14
           Label : FINAL
-            ;
+            3
             Label : EXPRESSION
-              <
+              9
               Label : LEFT
-                $i
+                6
               Label : RIGHT
-                $b
+                10
           Label : INCREMENT
-            ;
+            3
             Label : EXPRESSION
-              ++
+              11
               Label : PREPLUSPLUS
-                $i
+                6
           Label : INIT
-            ;
+            3
             Label : EXPRESSION
-              =
+              7
               Label : LEFT
-                $i
+                6
               Label : RIGHT
-                0
+                8
         Label : EXPRESSION
-          =
+          7
           Label : LEFT
-            $f
+            16
           Label : RIGHT
-            array
+            17
             Label : ARGUMENT
-              Void
+              18
         Label : EXPRESSION
-          foreach
+          20
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              =
+              7
               Label : LEFT
-                $k
+                24
               Label : RIGHT
-                /
+                27
                 Label : LEFT
-                  (
+                  25
                   Label : CODE
-                    $l
+                    26
                 Label : RIGHT
-                  (int)
+                  28
                   Label : CAST
-                    (
+                    25
                     Label : CODE
-                      $m
+                      29
           Label : SOURCE
-            $g
+            21
           Label : VALUE
-            =>
+            23
             Label : INDEX
-              $h
+              22
             Label : VALUE
-              $i
+              6
         Label : EXPRESSION
-          return
+          30
           Label : RETURN
-            $n
+            31

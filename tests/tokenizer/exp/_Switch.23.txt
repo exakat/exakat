@@ -1,60 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              default
+              8
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  {}
+                  9
                   Label : EXPRESSION
-                    ++
+                    11
                     Label : POSTPLUSPLUS
-                      $d
+                      10
                 Label : EXPRESSION
-                  ++
+                  11
                   Label : POSTPLUSPLUS
-                    $b
+                    12
             Label : EXPRESSION
-              case 'a' :  /**/  
+              13
               Label : CASE
-                'a'
+                14
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  {}
+                  9
                   Label : EXPRESSION
-                    ++
+                    11
                     Label : POSTPLUSPLUS
-                      $a
+                      15
                 Label : EXPRESSION
-                  break
+                  16
                   Label : BREAK
-                    Void
+                    17
             Label : EXPRESSION
-              case 'b' :  /**/  
+              19
               Label : CASE
-                'b'
+                20
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  {}
+                  9
                   Label : EXPRESSION
-                    ++
+                    11
                     Label : POSTPLUSPLUS
-                      $b
+                      12
                 Label : EXPRESSION
-                  break
+                  16
                   Label : BREAK
-                    Void
+                    17
           Label : NAME
-            $c
+            6

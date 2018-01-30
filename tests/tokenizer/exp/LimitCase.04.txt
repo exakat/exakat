@@ -1,15 +1,15 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            "1 2 en latin-1 Ã©Ã§"
+            7

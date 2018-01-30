@@ -1,78 +1,79 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            .
+            9
             Label : CONCAT
-              __FILE__
+              7
             Label : CONCAT
-              (string)
+              10
               Label : CAST
-                $b
+                11
         Label : EXPRESSION
-          for
+          12
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              Void
+              15
           Label : FINAL
-            ;
+            3
             Label : EXPRESSION
-              <
+              20
               Label : LEFT
-                B
+                17
                 Label : ARGUMENT
-                  $d
+                  19
                 Label : NAME
-                  B
+                  17
               Label : RIGHT
-                C
+                21
                 Label : ARGUMENT
-                  $e
+                  23
                 Label : NAME
-                  C
+                  21
           Label : INCREMENT
-            ;
+            3
             Label : EXPRESSION
-              =
+              6
               Label : LEFT
-                $f
+                24
                 Label : APPEND
-                  $f
+                  24
               Label : RIGHT
-                D
+                25
                 Label : ARGUMENT
-                  E
+                  27
                   Label : ARGUMENT
-                    $g
+                    29
                   Label : ARGUMENT
-                    F
+                    30
                     Label : ARGUMENT
-                      $h
+                      32
                     Label : NAME
-                      F
+                      30
                   Label : ARGUMENT
-                    0
+                    33
                   Label : NAME
-                    E
+                    27
                 Label : NAME
-                  D
+                  25
           Label : INIT
-            ;
+            3
             Label : EXPRESSION
-              =
+              6
               Label : LEFT
-                $c
+                13
               Label : RIGHT
-                array
+                14
                 Label : ARGUMENT
-                  Void
+                  15

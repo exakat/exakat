@@ -1,96 +1,97 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : DEFINITION
-            a
+            6
           Label : NAME
-            a
+            6
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $p
+                8
               Label : RIGHT
-                1
+                11
             Label : PUBLIC
-              public
+              7
         Label : EXPRESSION
-          class
+          5
           Label : DEFINITION
-            b
+            12
           Label : METHOD
-            p
+            10
             Label : ARGUMENT
-              Void
+              13
             Label : BLOCK
-              {}
+              15
               Label : EXPRESSION
-                return
+                16
                 Label : RETURN
-                  3
+                  17
             Label : NAME
-              p
+              10
             Label : PUBLIC
-              public
+              7
           Label : NAME
-            b
+            12
         Label : EXPRESSION
-          class
+          5
           Label : DEFINITION
-            c
+            18
           Label : NAME
-            c
+            18
         Label : EXPRESSION
-          var_dump
+          19
           Label : ARGUMENT
-            ==
+            23
             Label : LEFT
-              ->
+              22
               Label : MEMBER
-                p
+                10
               Label : OBJECT
-                (
+                20
                 Label : CODE
-                  new
+                  21
                   Label : NEW
-                    a
+                    6
             Label : RIGHT
-              2
+              24
           Label : NAME
-            var_dump
+            19
         Label : EXPRESSION
-          ==
+          23
           Label : LEFT
-            ->
+            22
             Label : METHOD
-              p
+              10
               Label : ARGUMENT
-                Void
+                13
               Label : NAME
-                p
+                10
             Label : OBJECT
-              (
+              20
               Label : CODE
-                new
+                21
                 Label : NEW
-                  b
+                  12
           Label : RIGHT
-            3
+            17
         Label : EXPRESSION
-          =
+          9
           Label : LEFT
-            $c
+            25
           Label : RIGHT
-            (
+            20
             Label : CODE
-              new
+              21
               Label : NEW
-                c
+                18

@@ -1,25 +1,25 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $query
+            5
           Label : RIGHT
-            .
+            8
             Label : CONCAT
-              "a"
+              7
             Label : CONCAT
-              "b"
+              9
             Label : CONCAT
-              [
+              11
               Label : INDEX
-                'e'
+                12
               Label : VARIABLE
-                $d
+                10

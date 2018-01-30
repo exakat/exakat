@@ -1,71 +1,71 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            ->
+            11
             Label : METHOD
-              C
+              12
               Label : ARGUMENT
-                'D'
+                14
               Label : NAME
-                C
+                12
             Label : OBJECT
-              ->
+              11
               Label : METHOD
-                B
+                8
                 Label : ARGUMENT
-                  0
+                  10
                 Label : NAME
-                  B
+                  8
               Label : OBJECT
-                $b
+                7
         Label : EXPRESSION
-          if
+          16
           Label : CONDITION
-            ->
+            11
             Label : METHOD
-              F
+              18
               Label : ARGUMENT
-                'G'
+                20
               Label : NAME
-                F
+                18
             Label : OBJECT
-              $c
+              17
           Label : ELSE
-            ;
+            3
             Label : EXPRESSION
-              return
+              22
               Label : RETURN
-                ->
+                11
                 Label : METHOD
-                  L
+                  29
                   Label : ARGUMENT
-                    Void
+                    31
                   Label : NAME
-                    L
+                    29
                 Label : OBJECT
-                  $e
+                  28
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              return
+              22
               Label : RETURN
-                ->
+                11
                 Label : METHOD
-                  I
+                  24
                   Label : ARGUMENT
-                    'J'
+                    26
                   Label : NAME
-                    I
+                    24
                 Label : OBJECT
-                  $d
+                  23

@@ -1,355 +1,355 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            self
+            6
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            parent
+            7
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            static
+            8
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            SELF
+            9
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            PARENT
+            10
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            STATIC
+            11
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            self
+            6
             Label : ARGUMENT
-              Void
+              12
             Label : NAME
-              self
+              6
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            parent
+            7
             Label : ARGUMENT
-              Void
+              12
             Label : NAME
-              parent
+              7
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            static
+            8
             Label : ARGUMENT
-              Void
+              12
             Label : NAME
-              static
+              8
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            self
+            6
             Label : ARGUMENT
-              1
+              14
             Label : NAME
-              self
+              6
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            parent
+            7
             Label : ARGUMENT
-              1
+              14
             Label : NAME
-              parent
+              7
         Label : EXPRESSION
-          new
+          5
           Label : NEW
-            static
+            8
             Label : ARGUMENT
-              1
+              14
             Label : NAME
-              static
+              8
         Label : EXPRESSION
-          ::
+          17
           Label : CLASS
-            self
+            6
           Label : CONSTANT
-            A
+            15
         Label : EXPRESSION
-          ::
+          17
           Label : CLASS
-            parent
+            7
           Label : CONSTANT
-            A
+            15
         Label : EXPRESSION
-          ::
+          17
           Label : CLASS
-            static
+            8
           Label : CONSTANT
-            A
+            15
         Label : EXPRESSION
-          ::
+          17
           Label : CLASS
-            self
+            6
           Label : METHOD
-            m
+            18
             Label : ARGUMENT
-              Void
+              12
             Label : NAME
-              m
+              18
         Label : EXPRESSION
-          ::
+          17
           Label : CLASS
-            parent
+            7
           Label : METHOD
-            m
+            18
             Label : ARGUMENT
-              Void
+              12
             Label : NAME
-              m
+              18
         Label : EXPRESSION
-          ::
+          17
           Label : CLASS
-            static
+            8
           Label : METHOD
-            m
+            18
             Label : ARGUMENT
-              Void
+              12
             Label : NAME
-              m
+              18
         Label : EXPRESSION
-          ::
+          17
           Label : CLASS
-            self
+            6
           Label : MEMBER
-            $a
+            19
         Label : EXPRESSION
-          ::
+          17
           Label : CLASS
-            parent
+            7
           Label : MEMBER
-            $a
+            19
         Label : EXPRESSION
-          ::
+          17
           Label : CLASS
-            static
+            8
           Label : MEMBER
-            $a
+            19
         Label : EXPRESSION
-          class
+          20
           Label : DEFINITION
-            self
+            6
           Label : DEFINITION
-            self
+            6
           Label : DEFINITION
-            static
+            8
           Label : DEFINITION
-            self
+            6
           Label : DEFINITION
-            static
+            8
           Label : DEFINITION
-            self
+            6
           Label : DEFINITION
-            static
+            8
           Label : METHOD
-            foo
+            22
             Label : ARGUMENT
-              Void
+              12
             Label : BLOCK
-              {}
+              23
               Label : EXPRESSION
-                new
+                5
                 Label : NEW
-                  self
+                  6
               Label : EXPRESSION
-                new
+                5
                 Label : NEW
-                  parent
+                  7
               Label : EXPRESSION
-                new
+                5
                 Label : NEW
-                  static
+                  8
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  self
+                  6
                 Label : CONSTANT
-                  Ac
+                  24
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  parent
+                  7
                 Label : CONSTANT
-                  Ac
+                  24
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  static
+                  8
                 Label : CONSTANT
-                  Ac
+                  24
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  self
+                  6
                 Label : METHOD
-                  mc
+                  26
                   Label : ARGUMENT
-                    Void
+                    12
                   Label : NAME
-                    mc
+                    26
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  parent
+                  7
                 Label : METHOD
-                  mc
+                  26
                   Label : ARGUMENT
-                    Void
+                    12
                   Label : NAME
-                    mc
+                    26
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  static
+                  8
                 Label : METHOD
-                  mc
+                  26
                   Label : ARGUMENT
-                    Void
+                    12
                   Label : NAME
-                    mc
+                    26
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  self
+                  6
                 Label : MEMBER
-                  $ac
+                  27
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  parent
+                  7
                 Label : MEMBER
-                  $ac
+                  27
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  static
+                  8
                 Label : MEMBER
-                  $ac
+                  27
             Label : NAME
-              foo
+              22
           Label : NAME
-            x
+            21
         Label : EXPRESSION
-          trait
+          28
           Label : DEFINITION
-            self
+            6
           Label : DEFINITION
-            self
+            6
           Label : DEFINITION
-            static
+            8
           Label : DEFINITION
-            self
+            6
           Label : DEFINITION
-            static
+            8
           Label : DEFINITION
-            self
+            6
           Label : DEFINITION
-            static
+            8
           Label : METHOD
-            foo
+            22
             Label : ARGUMENT
-              Void
+              12
             Label : BLOCK
-              {}
+              23
               Label : EXPRESSION
-                new
+                5
                 Label : NEW
-                  self
+                  6
               Label : EXPRESSION
-                new
+                5
                 Label : NEW
-                  parent
+                  7
               Label : EXPRESSION
-                new
+                5
                 Label : NEW
-                  static
+                  8
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  self
+                  6
                 Label : CONSTANT
-                  At
+                  30
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  parent
+                  7
                 Label : CONSTANT
-                  At
+                  30
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  static
+                  8
                 Label : CONSTANT
-                  At
+                  30
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  self
+                  6
                 Label : METHOD
-                  mt
+                  32
                   Label : ARGUMENT
-                    Void
+                    12
                   Label : NAME
-                    mt
+                    32
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  parent
+                  7
                 Label : METHOD
-                  mt
+                  32
                   Label : ARGUMENT
-                    Void
+                    12
                   Label : NAME
-                    mt
+                    32
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  static
+                  8
                 Label : METHOD
-                  mt
+                  32
                   Label : ARGUMENT
-                    Void
+                    12
                   Label : NAME
-                    mt
+                    32
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  self
+                  6
                 Label : MEMBER
-                  $at
+                  33
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  parent
+                  7
                 Label : MEMBER
-                  $at
+                  33
               Label : EXPRESSION
-                ::
+                17
                 Label : CLASS
-                  static
+                  8
                 Label : MEMBER
-                  $at
+                  33
             Label : NAME
-              foo
+              22
           Label : NAME
-            t
+            29

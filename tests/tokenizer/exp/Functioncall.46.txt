@@ -1,37 +1,35 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            (
+            6
             Label : CODE
-              ?
+              8
               Label : CONDITION
-                $j
+                7
               Label : ELSE
-                'H'
+                11
               Label : THEN
-                'A'
+                9
           Label : ARGUMENT
-            'I'
+            13
           Label : ARGUMENT
-            (
+            6
             Label : CODE
-              ?
+              8
               Label : CONDITION
-                $j
+                7
               Label : ELSE
-                "K"
+                17
               Label : THEN
-                "J"
+                15
           Label : ARGUMENT
-            'K'
-          Label : NAME
-            echo
+            19

@@ -1,121 +1,121 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $b
+            5
           Label : RIGHT
-            'b'
+            7
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $o
+            8
           Label : RIGHT
-            new
+            9
             Label : NEW
-              stdclass
+              10
         Label : EXPRESSION
-          const
+          11
           Label : CONST
-            const
+            11
             Label : DEFINITION
-              D
+              12
             Label : DEFINITION
-              D
+              12
             Label : NAME
-              D
+              12
             Label : VALUE
-              1
+              14
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            ->
+            17
             Label : MEMBER
-              C
+              15
             Label : OBJECT
-              $o
+              8
           Label : RIGHT
-            D
+            12
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            18
           Label : RIGHT
-            array
+            19
             Label : ARGUMENT
-              =>
+              20
               Label : INDEX
-                'b'
+                7
               Label : VALUE
-                array
+                19
                 Label : ARGUMENT
-                  =>
+                  20
                   Label : INDEX
-                    'B'
+                    21
                   Label : VALUE
-                    'o'
+                    22
         Label : EXPRESSION
-          var_dump
+          23
           Label : ARGUMENT
-            ->
+            17
             Label : MEMBER
-              C
+              15
             Label : OBJECT
-              $
+              24
               Label : NAME
-                [
+                25
                 Label : INDEX
-                  'B'
+                  21
                 Label : VARIABLE
-                  [
+                  25
                   Label : INDEX
-                    $b
+                    5
                   Label : VARIABLE
-                    $a
+                    18
           Label : NAME
-            var_dump
+            23
         Label : EXPRESSION
-          if
+          26
           Label : CONDITION
-            ==
+            27
             Label : LEFT
-              ->
+              17
               Label : MEMBER
-                C
+                15
               Label : OBJECT
-                $
+                24
                 Label : NAME
-                  [
+                  25
                   Label : INDEX
-                    'B'
+                    21
                   Label : VARIABLE
-                    [
+                    25
                     Label : INDEX
-                      $b
+                      5
                     Label : VARIABLE
-                      $a
+                      18
             Label : RIGHT
-              D
+              12
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              =
+              6
               Label : LEFT
-                $c
+                28
               Label : RIGHT
-                [
+                25
                 Label : INDEX
-                  'E'
+                  29
                 Label : VARIABLE
-                  [
+                  25
                   Label : INDEX
-                    $b
+                    5
                   Label : VARIABLE
-                    $a
+                    18

@@ -1,125 +1,125 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          {
+          6
           Label : INDEX
-            -
+            9
             Label : LEFT
-              strlen
+              7
               Label : ARGUMENT
-                $aa
+                8
               Label : NAME
-                strlen
+                7
             Label : RIGHT
-              1
+              10
           Label : VARIABLE
-            $a
+            5
         Label : EXPRESSION
-          {
+          6
           Label : INDEX
-            -
+            9
             Label : LEFT
-              strlen
+              7
               Label : ARGUMENT
-                $bb
+                14
               Label : NAME
-                strlen
+                7
             Label : RIGHT
-              1
+              10
           Label : VARIABLE
-            [
+            12
             Label : INDEX
-              2
+              13
             Label : VARIABLE
-              $b
+              11
         Label : EXPRESSION
-          {
+          6
           Label : INDEX
-            -
+            9
             Label : LEFT
-              strlen
+              7
               Label : ARGUMENT
-                $cc
+                18
               Label : NAME
-                strlen
+                7
             Label : RIGHT
-              1
+              10
           Label : VARIABLE
-            [
+            12
             Label : INDEX
-              4
+              17
             Label : VARIABLE
-              [
+              12
               Label : INDEX
-                3
+                16
               Label : VARIABLE
-                $c
+                15
         Label : EXPRESSION
-          {
+          6
           Label : INDEX
-            -
+            9
             Label : LEFT
-              strlen
+              7
               Label : ARGUMENT
-                $dd
+                20
               Label : NAME
-                strlen
+                7
             Label : RIGHT
-              1
+              10
           Label : VARIABLE
-            {
+            6
             Label : INDEX
-              4
+              17
             Label : VARIABLE
-              [
+              12
               Label : INDEX
-                3
+                16
               Label : VARIABLE
-                $d
+                19
         Label : EXPRESSION
-          {
+          6
           Label : INDEX
-            -
+            9
             Label : LEFT
-              strlen
+              7
               Label : ARGUMENT
-                $ee
+                23
               Label : NAME
-                strlen
+                7
             Label : RIGHT
-              1
+              10
           Label : VARIABLE
-            {
+            6
             Label : INDEX
+              22
+            Label : VARIABLE
+              21
+        Label : EXPRESSION
+          6
+          Label : INDEX
+            9
+            Label : LEFT
+              7
+              Label : ARGUMENT
+                20
+              Label : NAME
+                7
+            Label : RIGHT
+              10
+          Label : VARIABLE
+            12
+            Label : INDEX
+              17
+            Label : VARIABLE
               6
-            Label : VARIABLE
-              $e
-        Label : EXPRESSION
-          {
-          Label : INDEX
-            -
-            Label : LEFT
-              strlen
-              Label : ARGUMENT
-                $dd
-              Label : NAME
-                strlen
-            Label : RIGHT
-              1
-          Label : VARIABLE
-            [
-            Label : INDEX
-              4
-            Label : VARIABLE
-              {
               Label : INDEX
-                3
+                16
               Label : VARIABLE
-                $f
+                24

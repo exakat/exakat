@@ -1,67 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      A
+      4
     Label : EXPRESSION
-      <?php 
+      6
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          7
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              B
+              12
             Label : EXPRESSION
-              echo
+              14
               Label : ARGUMENT
-                ->
+                18
                 Label : METHOD
-                  escape
+                  16
                   Label : ARGUMENT
-                    ->
+                    18
                     Label : METHOD
-                      slug
+                      17
                       Label : ARGUMENT
-                        $label
+                        9
                       Label : NAME
-                        slug
+                        17
                     Label : OBJECT
-                      $tpl
+                      15
                   Label : NAME
-                    escape
+                    16
                 Label : OBJECT
-                  $tpl
-              Label : NAME
-                echo
+                  15
             Label : EXPRESSION
-              C
+              19
             Label : EXPRESSION
-              echo
+              14
               Label : ARGUMENT
-                ->
+                18
                 Label : METHOD
-                  escape
+                  16
                   Label : ARGUMENT
-                    $label
+                    9
                   Label : NAME
-                    escape
+                    16
                 Label : OBJECT
-                  $tpl
-              Label : NAME
-                echo
+                  15
             Label : EXPRESSION
-              D
+              21
           Label : SOURCE
-            $tables
+            8
           Label : VALUE
-            =>
+            10
             Label : INDEX
-              $label
+              9
             Label : VALUE
-              $data
+              11
     Label : EXPRESSION
-      E
-
+      23

@@ -1,27 +1,27 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          or
+          8
           Label : LEFT
-            and
+            6
             Label : LEFT
-              1
+              5
             Label : RIGHT
-              2
+              7
           Label : RIGHT
-            xor
+            10
             Label : LEFT
-              3
+              9
             Label : RIGHT
-              and
+              6
               Label : LEFT
-                4
+                11
               Label : RIGHT
-                5
+                12

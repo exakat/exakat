@@ -1,59 +1,59 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case T_LNUMBER :  /**/  
+              8
               Label : CASE
-                T_LNUMBER
+                10
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  ++
+                  13
                   Label : POSTPLUSPLUS
-                    $a
+                    12
                 Label : EXPRESSION
-                  goto
+                  14
                   Label : GOTO
-                    T_C
+                    15
             Label : EXPRESSION
-              case T_B :  /**/  
+              17
               Label : CASE
-                T_B
+                19
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  ++
+                  13
                   Label : POSTPLUSPLUS
-                    $a
+                    12
             Label : EXPRESSION
-              default
+              21
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  echo
+                  22
                   Label : ARGUMENT
-                    'a'
-                  Label : NAME
-                    echo
+                    23
           Label : NAME
-            $t
+            6
         Label : EXPRESSION
-          :
+          24
+          Label : DEFINITION
+            14
+            Label : GOTO
+              15
           Label : GOTOLABEL
-            T_C
+            15
         Label : EXPRESSION
-          echo
+          22
           Label : ARGUMENT
-            'fin'
-          Label : NAME
-            echo
+            25

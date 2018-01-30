@@ -1,117 +1,117 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          .
+          6
           Label : CONCAT
-            'a'
+            5
           Label : CONCAT
-            +
+            11
             Label : LEFT
-              ->
+              10
               Label : METHOD
-                c
+                8
                 Label : ARGUMENT
-                  $d
+                  9
                 Label : NAME
-                  c
+                  8
               Label : OBJECT
-                $b
+                7
             Label : RIGHT
-              'e'
+              12
         Label : EXPRESSION
-          .
+          6
           Label : CONCAT
-            'a2'
+            13
           Label : CONCAT
-            +
+            11
             Label : LEFT
-              ::
+              15
               Label : CLASS
-                b
+                14
               Label : METHOD
-                c
+                8
                 Label : ARGUMENT
-                  $d
+                  9
                 Label : NAME
-                  c
+                  8
             Label : RIGHT
-              'e2'
+              16
         Label : EXPRESSION
-          .
+          6
           Label : CONCAT
-            'a'
+            5
           Label : CONCAT
-            +
+            11
             Label : LEFT
-              ->
+              10
               Label : METHOD
-                c
+                8
                 Label : ARGUMENT
-                  $d
+                  9
                 Label : NAME
-                  c
+                  8
               Label : OBJECT
-                $b
+                7
             Label : RIGHT
-              1
+              17
         Label : EXPRESSION
-          .
+          6
           Label : CONCAT
-            'a2'
+            13
           Label : CONCAT
-            +
+            11
             Label : LEFT
-              ::
+              15
               Label : CLASS
-                b
+                14
               Label : METHOD
-                c
+                8
                 Label : ARGUMENT
-                  $d
+                  9
                 Label : NAME
-                  c
+                  8
             Label : RIGHT
-              2
+              18
         Label : EXPRESSION
-          .
+          6
           Label : CONCAT
-            'a'
+            5
           Label : CONCAT
-            *
+            19
             Label : LEFT
-              ->
+              10
               Label : METHOD
-                c
+                8
                 Label : ARGUMENT
-                  $d
+                  9
                 Label : NAME
-                  c
+                  8
               Label : OBJECT
-                $b
+                7
             Label : RIGHT
-              1
+              17
         Label : EXPRESSION
-          .
+          6
           Label : CONCAT
-            'a2'
+            13
           Label : CONCAT
-            *
+            19
             Label : LEFT
-              ::
+              15
               Label : CLASS
-                b
+                14
               Label : METHOD
-                c
+                8
                 Label : ARGUMENT
-                  $d
+                  9
                 Label : NAME
-                  c
+                  8
             Label : RIGHT
-              2
+              18

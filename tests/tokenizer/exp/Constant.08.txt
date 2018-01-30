@@ -1,17 +1,17 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          chdir
+          5
           Label : NAME
-            chdir
+            5
           Label : ARGUMENT
-            __DIR__
+            6
           Label : ARGUMENT
-            __FILE__
+            8

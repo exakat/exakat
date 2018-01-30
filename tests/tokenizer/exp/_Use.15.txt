@@ -1,311 +1,327 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              class
+              9
               Label : CONST
-                const
+                11
                 Label : CONST
-                  const
+                  11
                   Label : NAME
-                    a
+                    12
                   Label : VALUE
-                    2
+                    13
               Label : DEFINITION
-                one_identifier
+                10
               Label : DEFINITION
-                one_identifier
-              Label : NAME
-                one_identifier
-            Label : EXPRESSION
-              class
-              Label : CONST
-                const
-                Label : CONST
-                  const
-                  Label : NAME
-                    a
-                  Label : VALUE
-                    2
-              Label : DEFINITION
-                \absolute_path
-              Label : DEFINITION
-                absolute_path
-              Label : NAME
-                absolute_path
-            Label : EXPRESSION
-              class
-              Label : CONST
-                const
-                Label : CONST
-                  const
-                  Label : NAME
-                    a
-                  Label : VALUE
-                    2
-              Label : DEFINITION
-                one_identifier3
-              Label : DEFINITION
-                a1
+                10
                 Label : DEFINITION
-                  as
+                  10
+              Label : NAME
+                10
+            Label : EXPRESSION
+              9
+              Label : CONST
+                11
+                Label : CONST
+                  11
+                  Label : NAME
+                    12
+                  Label : VALUE
+                    13
+              Label : DEFINITION
+                23
+              Label : DEFINITION
+                14
+                Label : DEFINITION
+                  23
+              Label : NAME
+                14
+            Label : EXPRESSION
+              9
+              Label : CONST
+                11
+                Label : CONST
+                  11
+                  Label : NAME
+                    12
+                  Label : VALUE
+                    13
+              Label : DEFINITION
+                15
+              Label : DEFINITION
+                16
+                Label : DEFINITION
+                  26
                   Label : ALIAS
-                    a1
+                    16
                   Label : NAME
-                    one_identifier3
+                    15
               Label : NAME
-                one_identifier3
+                15
             Label : EXPRESSION
-              class
+              9
               Label : CONST
-                const
+                11
                 Label : CONST
-                  const
+                  11
                   Label : NAME
-                    a
+                    12
                   Label : VALUE
-                    2
+                    13
               Label : DEFINITION
-                \a1
+                36
               Label : NAME
-                a1
+                16
           Label : NAME
-            Void
+            5
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              class
+              9
               Label : CONST
-                const
+                11
                 Label : CONST
-                  const
+                  11
                   Label : NAME
-                    a
+                    12
                   Label : VALUE
-                    2
+                    13
               Label : DEFINITION
-                complex\path
+                24
               Label : DEFINITION
-                path
+                18
+                Label : DEFINITION
+                  24
               Label : NAME
-                path
+                18
           Label : NAME
-            complex
+            17
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              class
+              9
               Label : CONST
-                const
+                11
                 Label : CONST
-                  const
+                  11
                   Label : NAME
-                    a
+                    12
                   Label : VALUE
-                    2
+                    13
               Label : DEFINITION
-                \absolute\complex\path2
+                25
               Label : DEFINITION
-                path2
+                20
+                Label : DEFINITION
+                  25
               Label : NAME
-                path2
+                20
           Label : NAME
-            absolute\complex
+            19
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              use
+              22
               Label : USE
-                one_identifier
+                10
             Label : EXPRESSION
-              use
+              22
               Label : USE
-                \absolute_path
+                23
             Label : EXPRESSION
-              use
+              22
               Label : USE
-                complex\path
+                24
             Label : EXPRESSION
-              use
+              22
               Label : USE
-                \absolute\complex\path2
+                25
             Label : EXPRESSION
-              use
+              22
               Label : USE
-                as
+                26
                 Label : ALIAS
-                  a1
+                  16
                 Label : NAME
-                  one_identifier3
+                  15
             Label : EXPRESSION
-              use
+              22
               Label : USE
-                as
+                26
                 Label : ALIAS
-                  a2
+                  28
                 Label : NAME
-                  \absolute_path3
+                  27
             Label : EXPRESSION
-              use
+              22
               Label : USE
-                as
+                26
                 Label : ALIAS
-                  a3
+                  30
                 Label : NAME
-                  complex\path3
+                  29
             Label : EXPRESSION
-              use
+              22
               Label : USE
-                as
+                26
                 Label : ALIAS
-                  a4
+                  32
                 Label : NAME
-                  \absolute\complex\path32
+                  31
             Label : EXPRESSION
-              try
+              33
               Label : BLOCK
-                {}
+                8
                 Label : EXPRESSION
-                  Void
+                  5
               Label : CATCH
-                catch
+                34
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    Void
+                    5
                 Label : CLASS
-                  one_identifier
-                Label : VARIABLE
-                  $e
-              Label : CATCH
-                catch
-                Label : BLOCK
-                  {}
-                  Label : EXPRESSION
-                    Void
-                Label : CLASS
-                  absolute_path
-                Label : VARIABLE
-                  $e
-              Label : CATCH
-                catch
-                Label : BLOCK
-                  {}
-                  Label : EXPRESSION
-                    Void
-                Label : CLASS
-                  path
-                Label : VARIABLE
-                  $e
-              Label : CATCH
-                catch
-                Label : BLOCK
-                  {}
-                  Label : EXPRESSION
-                    Void
-                Label : CLASS
-                  path2
-                Label : VARIABLE
-                  $e
-              Label : CATCH
-                catch
-                Label : BLOCK
-                  {}
-                  Label : EXPRESSION
-                    Void
-                Label : CLASS
-                  a1
+                  10
                   Label : DEFINITION
-                    as
-                    Label : ALIAS
-                      a1
-                    Label : NAME
-                      one_identifier3
+                    10
                 Label : VARIABLE
-                  $e
+                  35
               Label : CATCH
-                catch
+                34
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    Void
+                    5
                 Label : CLASS
-                  \a1
-                Label : VARIABLE
-                  $e
-              Label : CATCH
-                catch
-                Label : BLOCK
-                  {}
-                  Label : EXPRESSION
-                    Void
-                Label : CLASS
-                  one_identifier3
-                Label : VARIABLE
-                  $e
-              Label : CATCH
-                catch
-                Label : BLOCK
-                  {}
-                  Label : EXPRESSION
-                    Void
-                Label : CLASS
-                  a2
+                  14
                   Label : DEFINITION
-                    as
-                    Label : ALIAS
-                      a2
-                    Label : NAME
-                      \absolute_path3
+                    23
                 Label : VARIABLE
-                  $e
+                  35
               Label : CATCH
-                catch
+                34
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    Void
+                    5
                 Label : CLASS
-                  a3
+                  18
                   Label : DEFINITION
-                    as
-                    Label : ALIAS
-                      a3
-                    Label : NAME
-                      complex\path3
+                    24
                 Label : VARIABLE
-                  $e
+                  35
               Label : CATCH
-                catch
+                34
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    Void
+                    5
                 Label : CLASS
-                  a4
+                  20
                   Label : DEFINITION
-                    as
-                    Label : ALIAS
-                      a4
-                    Label : NAME
-                      \absolute\complex\path32
+                    25
                 Label : VARIABLE
-                  $e
+                  35
+              Label : CATCH
+                34
+                Label : BLOCK
+                  8
+                  Label : EXPRESSION
+                    5
+                Label : CLASS
+                  16
+                  Label : DEFINITION
+                    26
+                    Label : ALIAS
+                      16
+                    Label : NAME
+                      15
+                Label : VARIABLE
+                  35
+              Label : CATCH
+                34
+                Label : BLOCK
+                  8
+                  Label : EXPRESSION
+                    5
+                Label : CLASS
+                  36
+                Label : VARIABLE
+                  35
+              Label : CATCH
+                34
+                Label : BLOCK
+                  8
+                  Label : EXPRESSION
+                    5
+                Label : CLASS
+                  15
+                Label : VARIABLE
+                  35
+              Label : CATCH
+                34
+                Label : BLOCK
+                  8
+                  Label : EXPRESSION
+                    5
+                Label : CLASS
+                  28
+                  Label : DEFINITION
+                    26
+                    Label : ALIAS
+                      28
+                    Label : NAME
+                      27
+                Label : VARIABLE
+                  35
+              Label : CATCH
+                34
+                Label : BLOCK
+                  8
+                  Label : EXPRESSION
+                    5
+                Label : CLASS
+                  30
+                  Label : DEFINITION
+                    26
+                    Label : ALIAS
+                      30
+                    Label : NAME
+                      29
+                Label : VARIABLE
+                  35
+              Label : CATCH
+                34
+                Label : BLOCK
+                  8
+                  Label : EXPRESSION
+                    5
+                Label : CLASS
+                  32
+                  Label : DEFINITION
+                    26
+                    Label : ALIAS
+                      32
+                    Label : NAME
+                      31
+                Label : VARIABLE
+                  35
           Label : NAME
-            x
+            21

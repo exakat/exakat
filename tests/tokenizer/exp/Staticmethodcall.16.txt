@@ -1,83 +1,79 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          const
+          5
           Label : CONST
-            const
+            5
             Label : DEFINITION
-              C
+              6
             Label : NAME
-              C
+              6
             Label : VALUE
-              1
+              8
         Label : EXPRESSION
-          class
+          9
           Label : DEFINITION
-            C
+            6
           Label : DEFINITION
-            \C
+            25
           Label : METHOD
-            method
+            11
             Label : ARGUMENT
-              Void
+              12
             Label : BLOCK
-              {}
+              14
               Label : EXPRESSION
-                echo
+                15
                 Label : ARGUMENT
-                  .
+                  18
                   Label : CONCAT
-                    __METHOD__
+                    16
                   Label : CONCAT
-                    "\n"
-                Label : NAME
-                  echo
+                    19
             Label : NAME
-              method
+              11
             Label : STATIC
-              static
+              10
           Label : NAME
-            C
+            6
         Label : EXPRESSION
-          echo
+          15
           Label : ARGUMENT
-            C
-          Label : NAME
-            echo
+            6
         Label : EXPRESSION
-          =
+          21
           Label : LEFT
-            $method
+            20
           Label : RIGHT
-            'method'
+            22
         Label : EXPRESSION
-          new
+          23
           Label : NEW
-            ::
+            24
             Label : CLASS
-              C
+              6
             Label : METHOD
-              $method
+              20
               Label : ARGUMENT
-                Void
+                12
               Label : NAME
-                $method
+                20
         Label : EXPRESSION
-          new
+          23
           Label : NEW
-            ::
+            24
             Label : CLASS
-              \C
+              25
             Label : METHOD
-              $method
+              20
               Label : ARGUMENT
-                Void
+                12
               Label : NAME
-                $method
+                20

@@ -1,49 +1,49 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          for
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              >>
+              16
               Label : LEFT
-                ::
+                15
                 Label : CLASS
-                  $d
+                  12
                 Label : METHOD
-                  e
+                  13
                   Label : ARGUMENT
-                    $f
+                    14
                   Label : NAME
-                    e
+                    13
               Label : RIGHT
-                $g
+                17
           Label : FINAL
-            ;
+            3
             Label : EXPRESSION
-              <
+              9
               Label : LEFT
-                $i
+                6
               Label : RIGHT
                 10
           Label : INCREMENT
-            ;
+            3
             Label : EXPRESSION
-              ++
+              11
               Label : POSTPLUSPLUS
-                $i
+                6
           Label : INIT
-            ;
+            3
             Label : EXPRESSION
-              =
+              7
               Label : LEFT
-                $i
+                6
               Label : RIGHT
-                0
+                8

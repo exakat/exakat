@@ -1,53 +1,51 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          call_user_func
+          5
           Label : ARGUMENT
-            function
+            6
             Label : ARGUMENT
-              Void
+              7
             Label : BLOCK
-              {}
+              9
               Label : EXPRESSION
-                ob_start
+                10
                 Label : ARGUMENT
-                  Void
+                  7
                 Label : NAME
-                  ob_start
+                  10
               Label : EXPRESSION
-                A
+                11
               Label : EXPRESSION
-                <?=
+                13
                 Label : ARGUMENT
-                  $c
+                  14
                 Label : NAME
-                  <?=
+                  13
               Label : EXPRESSION
-                Void
+                7
               Label : EXPRESSION
-                B
+                15
               Label : EXPRESSION
-                <?=
+                13
                 Label : ARGUMENT
-                  $d
+                  17
                 Label : NAME
-                  <?=
+                  13
               Label : EXPRESSION
-                Void
+                7
               Label : EXPRESSION
-                 {
-			}
-		}
-	
+                18
               Label : EXPRESSION
-                ++
+                20
                 Label : POSTPLUSPLUS
-                  $a
+                  19
           Label : NAME
-            call_user_func
+            5

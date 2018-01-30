@@ -1,21 +1,21 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          f
+          5
           Label : ARGUMENT
-            new
+            6
             Label : NEW
-              Stdclass
+              7
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                Stdclass
+                7
           Label : NAME
-            f
+            5

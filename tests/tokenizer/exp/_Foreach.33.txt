@@ -1,62 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              if
+              10
               Label : CONDITION
-                !
+                11
                 Label : NOT
-                  isset
+                  12
                   Label : ARGUMENT
-                    [
+                    14
                     Label : INDEX
-                      $e
+                      15
                     Label : VARIABLE
-                      $d
-                  Label : NAME
-                    isset
+                      13
               Label : THEN
-                {}
+                16
                 Label : EXPRESSION
-                  continue
+                  17
                   Label : CONTINUE
-                    Void
+                    18
             Label : EXPRESSION
-              if
+              10
               Label : CONDITION
-                ||
+                24
                 Label : LEFT
-                  ==
+                  21
                   Label : LEFT
-                    $f
+                    20
                   Label : RIGHT
-                    'B'
+                    22
                 Label : RIGHT
-                  ==
+                  21
                   Label : LEFT
-                    $g
+                    25
                   Label : RIGHT
-                    'C'
+                    26
               Label : THEN
-                {}
+                16
                 Label : EXPRESSION
-                  continue
+                  17
                   Label : CONTINUE
-                    Void
+                    18
           Label : SOURCE
-            $a
+            6
           Label : VALUE
-            =>
+            8
             Label : INDEX
-              $b
+              7
             Label : VALUE
-              $c
+              9

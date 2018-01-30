@@ -1,137 +1,133 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ?
+          10
           Label : CONDITION
-            !
+            5
             Label : NOT
-              empty
+              6
               Label : ARGUMENT
-                [
+                8
                 Label : INDEX
-                  1
+                  9
                 Label : VARIABLE
-                  $b
-              Label : NAME
-                empty
+                  7
           Label : ELSE
-            'G'
+            24
           Label : THEN
-            ?
+            10
             Label : CONDITION
-              !==
+              13
               Label : LEFT
-                'B'
+                11
               Label : RIGHT
-                [
+                8
                 Label : INDEX
-                  2
+                  14
                 Label : VARIABLE
-                  $b
+                  7
             Label : ELSE
-              .
+              17
               Label : CONCAT
-                @
+                15
                 Label : AT
-                  [
+                  8
                   Label : INDEX
-                    3
+                    16
                   Label : VARIABLE
-                    $b
+                    7
               Label : CONCAT
-                'F'
+                22
             Label : THEN
-              .
+              17
               Label : CONCAT
-                @
+                15
                 Label : AT
-                  [
+                  8
                   Label : INDEX
-                    3
+                    16
                   Label : VARIABLE
-                    $b
+                    7
               Label : CONCAT
-                C
+                18
                 Label : ARGUMENT
-                  'D'
+                  20
                 Label : ARGUMENT
-                  'B'
+                  11
                 Label : ARGUMENT
-                  [
+                  8
                   Label : INDEX
-                    2
+                    14
                   Label : VARIABLE
-                    $b
+                    7
                 Label : NAME
-                  C
+                  18
         Label : EXPRESSION
-          ?
+          10
           Label : CONDITION
-            !
+            5
             Label : NOT
-              empty
+              6
               Label : ARGUMENT
-                [
+                8
                 Label : INDEX
-                  1
+                  9
                 Label : VARIABLE
-                  $b
-              Label : NAME
-                empty
+                  7
           Label : ELSE
-            ?
+            10
             Label : CONDITION
-              !==
+              13
               Label : LEFT
-                'B'
+                11
               Label : RIGHT
-                [
+                8
                 Label : INDEX
-                  2
+                  14
                 Label : VARIABLE
-                  $b
+                  7
             Label : ELSE
-              .
+              17
               Label : CONCAT
-                @
+                15
                 Label : AT
-                  [
+                  8
                   Label : INDEX
-                    3
+                    16
                   Label : VARIABLE
-                    $b
+                    7
               Label : CONCAT
-                'F'
+                22
             Label : THEN
-              .
+              17
               Label : CONCAT
-                @
+                15
                 Label : AT
-                  [
+                  8
                   Label : INDEX
-                    3
+                    16
                   Label : VARIABLE
-                    $b
+                    7
               Label : CONCAT
-                C
+                18
                 Label : ARGUMENT
-                  'D'
+                  20
                 Label : ARGUMENT
-                  'B'
+                  11
                 Label : ARGUMENT
-                  [
+                  8
                   Label : INDEX
-                    2
+                    14
                   Label : VARIABLE
-                    $b
+                    7
                 Label : NAME
-                  C
+                  18
           Label : THEN
-            'F'
+            22

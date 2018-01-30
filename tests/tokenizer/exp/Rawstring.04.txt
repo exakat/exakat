@@ -1,136 +1,131 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      A
+      4
     Label : EXPRESSION
-      <?php 
+      6
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          7
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              =
+              13
               Label : LEFT
-                $d
+                12
               Label : RIGHT
-                ->
+                21
                 Label : METHOD
-                  C
+                  15
                   Label : ARGUMENT
-                    array
+                    17
                     Label : ARGUMENT
-                      =>
+                      10
                       Label : INDEX
-                        'D'
+                        18
                       Label : VALUE
-                        $f
+                        20
                   Label : NAME
-                    C
+                    15
                 Label : OBJECT
-                  $e
+                  14
             Label : EXPRESSION
-              D
+              22
             Label : EXPRESSION
-              echo
+              24
               Label : ARGUMENT
-                ::
+                33
                 Label : CLASS
-                  F
+                  25
                 Label : METHOD
-                  G
+                  27
                   Label : NAME
-                    G
+                    27
                   Label : ARGUMENT
-                    'H'
+                    29
                   Label : ARGUMENT
-                    'I'
-              Label : NAME
-                echo
+                    31
             Label : EXPRESSION
-              I
+              34
             Label : EXPRESSION
-              echo
+              24
               Label : ARGUMENT
-                ::
+                33
                 Label : CLASS
-                  K
+                  36
                 Label : METHOD
-                  L
+                  38
                   Label : ARGUMENT
-                    $g
+                    40
                   Label : ARGUMENT
-                    $h
+                    41
                   Label : ARGUMENT
-                    NULL
+                    42
                   Label : ARGUMENT
-                    NULL
+                    42
                   Label : ARGUMENT
-                    M
+                    44
                   Label : NAME
-                    L
-              Label : NAME
-                echo
+                    38
             Label : EXPRESSION
-              M
+              44
             Label : EXPRESSION
-              foreach
+              7
               Label : BLOCK
-                ;
+                3
                 Label : EXPRESSION
-                  N
+                  48
                 Label : EXPRESSION
-                  echo
+                  24
                   Label : ARGUMENT
-                    ::
+                    33
                     Label : CLASS
-                      P
+                      50
                     Label : METHOD
-                      Q
+                      52
                       Label : ARGUMENT
-                        "
+                        54
                         Label : CONCAT
-                          $k
+                          55
                         Label : CONCAT
-                          R
+                          56
                         Label : CONCAT
-                          $l
+                          58
                       Label : ARGUMENT
-                        "
+                        54
                         Label : CONCAT
-                          $m
+                          59
                         Label : CONCAT
-                          S
+                          60
                         Label : CONCAT
-                          $n
+                          62
                       Label : ARGUMENT
-                        NULL
+                        42
                       Label : ARGUMENT
-                        NULL
+                        42
                       Label : ARGUMENT
-                        T
+                        63
                       Label : NAME
-                        Q
-                  Label : NAME
-                    echo
+                        52
                 Label : EXPRESSION
-                  T
+                  63
               Label : SOURCE
-                $i
+                46
               Label : VALUE
-                $j
+                47
             Label : EXPRESSION
-              U
+              65
           Label : SOURCE
-            $a
+            8
           Label : VALUE
-            =>
+            10
             Label : INDEX
-              $b
+              9
             Label : VALUE
-              $c
+              11
     Label : EXPRESSION
-      V
+      67

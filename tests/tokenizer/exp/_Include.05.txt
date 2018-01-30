@@ -1,15 +1,13 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          require_once
+          6
           Label : ARGUMENT
-            "literal"
-          Label : NAME
-            require_once
+            5

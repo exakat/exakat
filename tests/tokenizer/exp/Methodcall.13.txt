@@ -1,327 +1,327 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ->
+          10
           Label : METHOD
-            B
+            6
             Label : ARGUMENT
-              Void
+              8
             Label : NAME
-              B
+              6
           Label : OBJECT
-            $a
+            5
         Label : EXPRESSION
-          ->
+          10
           Label : METHOD
-            D
+            14
             Label : ARGUMENT
-              Void
+              8
             Label : NAME
-              D
+              14
           Label : OBJECT
-            ->
+            10
             Label : METHOD
-              C
+              12
               Label : ARGUMENT
-                Void
+                8
               Label : NAME
-                C
+                12
             Label : OBJECT
-              $b
+              11
         Label : EXPRESSION
-          ->
+          10
           Label : METHOD
-            H
+            21
             Label : ARGUMENT
-              Void
+              8
             Label : NAME
-              H
+              21
           Label : OBJECT
-            ->
+            10
             Label : METHOD
-              G
+              19
               Label : ARGUMENT
-                Void
+                8
               Label : NAME
-                G
+                19
             Label : OBJECT
-              ->
+              10
               Label : METHOD
-                F
+                17
                 Label : ARGUMENT
-                  Void
+                  8
                 Label : NAME
-                  F
+                  17
               Label : OBJECT
-                $e
+                16
         Label : EXPRESSION
-          ->
+          10
           Label : METHOD
-            H1
+            31
             Label : ARGUMENT
-              Void
+              8
             Label : NAME
-              H1
+              31
           Label : OBJECT
-            ->
+            10
             Label : METHOD
-              G1
+              26
               Label : ARGUMENT
-                ->
+                10
                 Label : METHOD
-                  B1
+                  29
                   Label : ARGUMENT
-                    Void
+                    8
                   Label : NAME
-                    B1
+                    29
                 Label : OBJECT
-                  $a1
+                  28
               Label : NAME
-                G1
+                26
             Label : OBJECT
-              ->
+              10
               Label : METHOD
-                F1
+                24
                 Label : ARGUMENT
-                  Void
+                  8
                 Label : NAME
-                  F1
+                  24
               Label : OBJECT
-                $e1
+                23
         Label : EXPRESSION
-          ->
+          10
           Label : METHOD
-            H2
+            38
             Label : ARGUMENT
-              ->
+              10
               Label : METHOD
-                B2
+                41
                 Label : ARGUMENT
-                  Void
+                  8
                 Label : NAME
-                  B2
+                  41
               Label : OBJECT
-                $a2
+                40
             Label : NAME
-              H2
+              38
           Label : OBJECT
-            ->
+            10
             Label : METHOD
-              G2
+              36
               Label : ARGUMENT
-                Void
+                8
               Label : NAME
-                G2
+                36
             Label : OBJECT
-              ->
+              10
               Label : METHOD
-                F2
+                34
                 Label : ARGUMENT
-                  Void
+                  8
                 Label : NAME
-                  F2
+                  34
               Label : OBJECT
-                $e2
+                33
         Label : EXPRESSION
-          ->
+          10
           Label : METHOD
-            H3
+            51
             Label : ARGUMENT
-              Void
+              8
             Label : NAME
-              H3
+              51
           Label : OBJECT
-            ->
+            10
             Label : METHOD
-              G3
+              49
               Label : ARGUMENT
-                Void
+                8
               Label : NAME
-                G3
+                49
             Label : OBJECT
-              ->
+              10
               Label : METHOD
-                F3
+                44
                 Label : ARGUMENT
-                  ->
+                  10
                   Label : METHOD
-                    B3
+                    47
                     Label : ARGUMENT
-                      Void
+                      8
                     Label : NAME
-                      B3
+                      47
                   Label : OBJECT
-                    $a3
+                    46
                 Label : NAME
-                  F3
+                  44
               Label : OBJECT
-                $e3
+                43
         Label : EXPRESSION
-          ->
+          10
           Label : METHOD
-            H4
+            63
             Label : ARGUMENT
-              Void
+              8
             Label : NAME
-              H4
+              63
           Label : OBJECT
-            ->
+            10
             Label : METHOD
-              G4
+              61
               Label : ARGUMENT
-                Void
+                8
               Label : NAME
-                G4
+                61
             Label : OBJECT
-              ->
+              10
               Label : METHOD
-                F4
+                54
                 Label : ARGUMENT
-                  ->
+                  10
                   Label : METHOD
-                    C4
+                    59
                     Label : ARGUMENT
-                      Void
+                      8
                     Label : NAME
-                      C4
+                      59
                   Label : OBJECT
-                    ->
+                    10
                     Label : METHOD
-                      B4
+                      57
                       Label : ARGUMENT
-                        Void
+                        8
                       Label : NAME
-                        B4
+                        57
                     Label : OBJECT
-                      $a4
+                      56
                 Label : NAME
-                  F4
+                  54
               Label : OBJECT
-                $e4
+                53
         Label : EXPRESSION
-          ->
+          10
           Label : METHOD
-            I5
+            77
             Label : ARGUMENT
-              ->
+              10
               Label : METHOD
-                K5
+                80
                 Label : ARGUMENT
-                  Void
+                  8
                 Label : NAME
-                  K5
+                  80
               Label : OBJECT
-                $j
+                79
             Label : NAME
-              I5
+              77
           Label : OBJECT
-            ->
+            10
             Label : METHOD
-              H5
+              75
               Label : ARGUMENT
-                Void
+                8
               Label : NAME
-                H5
+                75
             Label : OBJECT
-              ->
+              10
               Label : METHOD
-                G5
+                73
                 Label : ARGUMENT
-                  Void
+                  8
                 Label : NAME
-                  G5
+                  73
               Label : OBJECT
-                ->
+                10
                 Label : METHOD
-                  F5
+                  66
                   Label : ARGUMENT
-                    ->
+                    10
                     Label : METHOD
-                      C5
+                      71
                       Label : ARGUMENT
-                        Void
+                        8
                       Label : NAME
-                        C5
+                        71
                     Label : OBJECT
-                      ->
+                      10
                       Label : METHOD
-                        B5
+                        69
                         Label : ARGUMENT
-                          Void
+                          8
                         Label : NAME
-                          B5
+                          69
                       Label : OBJECT
-                        $a5
+                        68
                   Label : NAME
-                    F5
+                    66
                 Label : OBJECT
-                  $e5
+                  65
         Label : EXPRESSION
-          [
+          83
           Label : INDEX
-            ->
+            10
             Label : METHOD
-              I5
+              77
               Label : ARGUMENT
-                ->
+                10
                 Label : METHOD
-                  K5
+                  80
                   Label : ARGUMENT
-                    Void
+                    8
                   Label : NAME
-                    K5
+                    80
                 Label : OBJECT
-                  $j
+                  79
               Label : NAME
-                I5
+                77
             Label : OBJECT
-              ->
+              10
               Label : METHOD
-                H5
+                75
                 Label : ARGUMENT
-                  Void
+                  8
                 Label : NAME
-                  H5
+                  75
               Label : OBJECT
-                ->
+                10
                 Label : METHOD
-                  G5
+                  73
                   Label : ARGUMENT
-                    Void
+                    8
                   Label : NAME
-                    G5
+                    73
                 Label : OBJECT
-                  ->
+                  10
                   Label : METHOD
-                    F5
+                    66
                     Label : ARGUMENT
-                      ->
+                      10
                       Label : METHOD
-                        C5
+                        71
                         Label : ARGUMENT
-                          Void
+                          8
                         Label : NAME
-                          C5
+                          71
                       Label : OBJECT
-                        ->
+                        10
                         Label : METHOD
-                          B5
+                          69
                           Label : ARGUMENT
-                            Void
+                            8
                           Label : NAME
-                            B5
+                            69
                         Label : OBJECT
-                          $a5
+                          68
                     Label : NAME
-                      F5
+                      66
                   Label : OBJECT
-                    $e5
+                    65
           Label : VARIABLE
-            $l
+            82

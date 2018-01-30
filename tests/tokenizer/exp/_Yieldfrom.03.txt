@@ -1,265 +1,257 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          from
+          5
           Label : ARGUMENT
-            $off
+            6
           Label : BLOCK
-            {}
+            7
             Label : EXPRESSION
-              try
+              8
               Label : BLOCK
-                {}
+                7
                 Label : EXPRESSION
-                  yield
+                  9
                   Label : YIELD
-                    +
+                    10
                     Label : LEFT
-                      $off
+                      6
                     Label : RIGHT
-                      1
+                      11
               Label : CATCH
-                catch
+                12
                 Label : BLOCK
-                  {}
+                  7
                   Label : EXPRESSION
-                    print
+                    19
                     Label : ARGUMENT
-                      "
+                      16
                       Label : CONCAT
-                        catch in from()\n
+                        17
                       Label : CONCAT
-                        $e
+                        15
                       Label : CONCAT
-                        \n
-                    Label : NAME
-                      print
+                        18
                 Label : CLASS
-                  Exception
+                  13
                 Label : VARIABLE
-                  $e
+                  15
             Label : EXPRESSION
-              yield
+              9
               Label : YIELD
-                +
+                10
                 Label : LEFT
-                  $off
+                  6
                 Label : RIGHT
-                  2
+                  20
           Label : DEFINITION
-            from
+            5
             Label : ARGUMENT
-              0
+              26
             Label : NAME
-              from
+              5
           Label : DEFINITION
-            from
+            5
             Label : ARGUMENT
-              2
+              20
             Label : NAME
-              from
+              5
           Label : NAME
-            from
+            5
         Label : EXPRESSION
-          gen
+          21
           Label : ARGUMENT
-            Void
+            22
           Label : BLOCK
-            {}
+            7
             Label : EXPRESSION
-              try
+              8
               Label : BLOCK
-                {}
+                7
                 Label : EXPRESSION
-                  yield
+                  9
                   Label : YIELD
-                    =>
+                    25
                     Label : INDEX
-                      "gen"
+                      24
                     Label : VALUE
-                      0
+                      26
               Label : CATCH
-                catch
+                12
                 Label : BLOCK
-                  {}
+                  7
                   Label : EXPRESSION
-                    print
+                    19
                     Label : ARGUMENT
-                      "
+                      16
                       Label : CONCAT
-                        catch in gen()\n
+                        27
                       Label : CONCAT
-                        $e
+                        15
                       Label : CONCAT
-                        \n
-                    Label : NAME
-                      print
+                        18
                 Label : CLASS
-                  Exception
+                  13
                 Label : VARIABLE
-                  $e
+                  15
             Label : EXPRESSION
-              try
+              8
               Label : BLOCK
-                {}
+                7
                 Label : EXPRESSION
-                  yield from
+                  28
                   Label : YIELD
-                    from
+                    5
                     Label : ARGUMENT
-                      0
+                      26
                     Label : NAME
-                      from
+                      5
               Label : CATCH
-                catch
+                12
                 Label : BLOCK
-                  {}
+                  7
                   Label : EXPRESSION
-                    print
+                    19
                     Label : ARGUMENT
-                      "
+                      16
                       Label : CONCAT
-                        catch in gen()\n
+                        27
                       Label : CONCAT
-                        $e
+                        15
                       Label : CONCAT
-                        \n
-                    Label : NAME
-                      print
+                        18
                 Label : CLASS
-                  Exception
+                  13
                 Label : VARIABLE
-                  $e
+                  15
             Label : EXPRESSION
-              yield from
+              28
               Label : YIELD
-                from
+                5
                 Label : ARGUMENT
-                  2
+                  20
                 Label : NAME
-                  from
+                  5
           Label : DEFINITION
-            "gen"
+            24
           Label : DEFINITION
-            gen
+            21
             Label : ARGUMENT
-              Void
+              22
             Label : NAME
-              gen
+              21
           Label : NAME
-            gen
+            21
         Label : EXPRESSION
-          =
+          30
           Label : LEFT
-            $i
+            29
           Label : RIGHT
-            0
+            26
         Label : EXPRESSION
-          try
+          8
           Label : BLOCK
-            {}
+            7
             Label : EXPRESSION
-              for
+              31
               Label : BLOCK
-                {}
+                7
                 Label : EXPRESSION
-                  var_dump
+                  39
                   Label : ARGUMENT
-                    ->
+                    34
                     Label : METHOD
-                      current
+                      40
                       Label : ARGUMENT
-                        Void
+                        22
                       Label : NAME
-                        current
+                        40
                     Label : OBJECT
-                      $gen
+                      32
                   Label : NAME
-                    var_dump
+                    39
               Label : FINAL
-                ;
+                3
                 Label : EXPRESSION
-                  ->
+                  34
                   Label : METHOD
-                    valid
+                    33
                     Label : ARGUMENT
-                      Void
+                      22
                     Label : NAME
-                      valid
+                      33
                   Label : OBJECT
-                    $gen
+                    32
               Label : INCREMENT
-                ;
+                3
                 Label : EXPRESSION
-                  ->
+                  34
                   Label : METHOD
-                    throw
+                    35
                     Label : ARGUMENT
-                      new
+                      36
                       Label : NEW
-                        Exception
+                        13
                         Label : ARGUMENT
-                          ++
+                          38
                           Label : POSTPLUSPLUS
-                            (string)
+                            37
                             Label : CAST
-                              $i
+                              29
                         Label : NAME
-                          Exception
+                          13
                     Label : NAME
-                      throw
+                      35
                   Label : OBJECT
-                    $gen
+                    32
               Label : INIT
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  30
                   Label : LEFT
-                    $gen
+                    32
                   Label : RIGHT
-                    gen
+                    21
                     Label : ARGUMENT
-                      Void
+                      22
                     Label : NAME
-                      gen
+                      21
           Label : CATCH
-            catch
+            12
             Label : BLOCK
-              {}
+              7
               Label : EXPRESSION
-                print
+                19
                 Label : ARGUMENT
-                  "
+                  16
                   Label : CONCAT
-                    catch in {main}\n
+                    41
                   Label : CONCAT
-                    $e
+                    15
                   Label : CONCAT
-                    \n
-                Label : NAME
-                  print
+                    18
             Label : CLASS
-              Exception
+              13
             Label : VARIABLE
-              $e
+              15
         Label : EXPRESSION
-          var_dump
+          39
           Label : ARGUMENT
-            ->
+            34
             Label : METHOD
-              valid
+              33
               Label : ARGUMENT
-                Void
+                22
               Label : NAME
-                valid
+                33
             Label : OBJECT
-              $gen
+              32
           Label : NAME
-            var_dump
+            39

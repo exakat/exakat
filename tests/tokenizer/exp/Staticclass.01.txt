@@ -1,129 +1,115 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              class
+              9
               Label : DEFINITION
-                parent
+                21
               Label : DEFINITION
-                ParentClass
+                10
               Label : NAME
-                ParentClass
+                10
             Label : EXPRESSION
-              class
+              9
               Label : DEFINITION
-                self
+                19
               Label : DEFINITION
-                static
+                14
               Label : DEFINITION
-                ClassName
+                12
               Label : DEFINITION
-                \NS\ClassName
+                26
               Label : DEFINITION
-                ClassName
+                12
               Label : EXTENDS
-                ParentClass
+                10
               Label : METHOD
-                x
+                15
                 Label : ARGUMENT
-                  Void
+                  16
                 Label : BLOCK
-                  {}
+                  8
                   Label : EXPRESSION
-                    echo
+                    18
                     Label : ARGUMENT
-                      ::
+                      20
                       Label : CLASS
-                        self
+                        19
                       Label : CLASS
-                        class
-                    Label : NAME
-                      echo
+                        9
                   Label : EXPRESSION
-                    echo
+                    18
                     Label : ARGUMENT
-                      ::
+                      20
                       Label : CLASS
-                        static
+                        14
                       Label : CLASS
-                        class
-                    Label : NAME
-                      echo
+                        9
                   Label : EXPRESSION
-                    echo
+                    18
                     Label : ARGUMENT
-                      ::
+                      20
                       Label : CLASS
-                        parent
+                        21
                       Label : CLASS
-                        class
-                    Label : NAME
-                      echo
+                        9
                 Label : NAME
-                  x
+                  15
                 Label : STATIC
-                  static
+                  14
               Label : NAME
-                ClassName
+                12
             Label : EXPRESSION
-              echo
+              18
               Label : ARGUMENT
-                ::
+                20
                 Label : CLASS
-                  ClassName
+                  12
                 Label : CLASS
-                  class
-              Label : NAME
-                echo
+                  9
             Label : EXPRESSION
-              =
+              23
               Label : LEFT
-                $x
+                22
               Label : RIGHT
-                'ClassName'
+                24
             Label : EXPRESSION
-              echo
+              18
               Label : ARGUMENT
-                ::
+                20
                 Label : CLASS
-                  \NS\ClassName
+                  26
                 Label : CLASS
-                  class
-              Label : NAME
-                echo
+                  9
             Label : EXPRESSION
-              echo
+              18
               Label : ARGUMENT
-                ::
+                20
                 Label : CLASS
-                  \X\B\ClassName
+                  28
                 Label : CLASS
-                  class
-              Label : NAME
-                echo
+                  9
             Label : EXPRESSION
-              echo
+              18
               Label : ARGUMENT
-                ::
+                20
                 Label : CLASS
-                  ClassName
+                  12
                 Label : METHOD
-                  x
+                  15
                   Label : ARGUMENT
-                    Void
+                    16
                   Label : NAME
-                    x
-              Label : NAME
-                echo
+                    15
           Label : NAME
-            NS
+            5

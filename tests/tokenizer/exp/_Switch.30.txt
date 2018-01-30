@@ -1,105 +1,105 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case 'b' :  /**/  
+              8
               Label : CASE
-                'b'
+                9
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  10
                   Label : RETURN
-                    'c'
+                    11
             Label : EXPRESSION
-              case 'd' :  /**/  
+              12
               Label : CASE
-                'd'
+                13
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  15
                   Label : LEFT
-                    $e
+                    14
                   Label : RIGHT
-                    'f'
+                    16
                 Label : EXPRESSION
-                  if
+                  17
                   Label : CONDITION
-                    ::
+                    22
                     Label : CLASS
-                      G
+                      18
                     Label : METHOD
-                      h
+                      20
                       Label : ARGUMENT
-                        'i'
+                        21
                       Label : NAME
-                        h
+                        20
                   Label : THEN
-                    ;
+                    3
                     Label : EXPRESSION
-                      .=
+                      24
                       Label : LEFT
-                        $j
+                        23
                       Label : RIGHT
-                        "k"
+                        25
                 Label : EXPRESSION
-                  return
+                  10
                   Label : RETURN
-                    $l
+                    26
             Label : EXPRESSION
-              case 'm' :  /**/  
+              27
               Label : CASE
-                'm'
+                28
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  15
                   Label : LEFT
-                    $n
+                    29
                   Label : RIGHT
-                    'o'
+                    30
                 Label : EXPRESSION
-                  if
+                  17
                   Label : CONDITION
-                    ::
+                    22
                     Label : CLASS
-                      P
+                      31
                     Label : METHOD
-                      q
+                      33
                       Label : ARGUMENT
-                        'r'
+                        34
                       Label : NAME
-                        q
+                        33
                   Label : THEN
-                    ;
+                    3
                     Label : EXPRESSION
-                      .=
+                      24
                       Label : LEFT
-                        $s
+                        35
                       Label : RIGHT
-                        "t"
+                        36
                 Label : EXPRESSION
-                  return
+                  10
                   Label : RETURN
-                    $u
+                    37
             Label : EXPRESSION
-              default
+              38
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  10
                   Label : RETURN
-                    'v'
+                    39
           Label : NAME
-            $a
+            6

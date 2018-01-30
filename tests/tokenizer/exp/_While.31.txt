@@ -1,97 +1,95 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !
+            6
             Label : NOT
-              $index
+              7
           Label : ELSE
-            ;
+            3
             Label : EXPRESSION
-              while
+              8
               Label : BLOCK
-                {}
+                17
                 Label : EXPRESSION
-                  if
+                  5
                   Label : CONDITION
-                    !
+                    6
                     Label : NOT
-                      isset
+                      18
                       Label : ARGUMENT
-                        [
+                        19
                         Label : INDEX
-                          $index
+                          7
                         Label : VARIABLE
-                          $row
-                      Label : NAME
-                        isset
+                          9
                   Label : THEN
-                    ;
+                    3
                     Label : EXPRESSION
-                      continue
+                      20
                       Label : CONTINUE
-                        Void
+                        21
                 Label : EXPRESSION
-                  =
+                  10
                   Label : LEFT
-                    [
+                    19
                     Label : INDEX
-                      [
+                      19
                       Label : INDEX
-                        $index
+                        7
                       Label : VARIABLE
-                        $row
+                        9
                     Label : VARIABLE
-                      $result
+                      16
                   Label : RIGHT
-                    $row
+                    9
               Label : CONDITION
-                =
+                10
                 Label : LEFT
-                  $row
+                  9
                 Label : RIGHT
-                  ->
+                  15
                   Label : METHOD
-                    fetch
+                    12
                     Label : ARGUMENT
-                      $fetchMode
+                      13
                     Label : NAME
-                      fetch
+                      12
                   Label : OBJECT
-                    $this
+                    11
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              while
+              8
               Label : BLOCK
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  10
                   Label : LEFT
-                    $result
+                    16
                     Label : APPEND
-                      $result
+                      16
                   Label : RIGHT
-                    $row
+                    9
               Label : CONDITION
-                =
+                10
                 Label : LEFT
-                  $row
+                  9
                 Label : RIGHT
-                  ->
+                  15
                   Label : METHOD
-                    fetch
+                    12
                     Label : ARGUMENT
-                      $fetchMode
+                      13
                     Label : NAME
-                      fetch
+                      12
                   Label : OBJECT
-                    $this
+                    11

@@ -1,87 +1,87 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : DEFINITION
-            static
+            16
             Label : ARGUMENT
-              2
+              30
             Label : ARGUMENT
-              3
+              31
             Label : ARGUMENT
-              4
+              32
             Label : NAME
-              static
+              16
           Label : METHOD
-            x
+            23
             Label : ARGUMENT
-              Void
+              24
             Label : BLOCK
-              {}
+              26
               Label : EXPRESSION
-                return
+                27
                 Label : RETURN
-                  +
+                  29
                   Label : LEFT
-                    new
+                    28
                     Label : NEW
-                      static
+                      16
                   Label : RIGHT
-                    new
+                    28
                     Label : NEW
-                      static
+                      16
                       Label : ARGUMENT
-                        2
+                        30
                       Label : ARGUMENT
-                        3
+                        31
                       Label : ARGUMENT
-                        4
+                        32
                       Label : NAME
-                        static
+                        16
             Label : NAME
-              x
+              23
           Label : NAME
-            B
+            6
           Label : PPP
-            public
+            8
             Label : PPP
-              $b
+              9
             Label : PUBLIC
-              public
+              8
           Label : PPP
-            public
+            8
             Label : PPP
-              $c
+              10
             Label : PUBLIC
-              public
+              8
           Label : PPP
-            public
+            8
             Label : PPP
-              $d
+              12
             Label : PUBLIC
-              public
+              8
           Label : PPP
-            public
+            8
             Label : PPP
-              $e
+              14
             Label : PUBLIC
-              public
+              8
           Label : PPP
-            static
+            16
             Label : PPP
-              $f
+              17
             Label : PPP
-              $g
+              19
             Label : PPP
-              $h
+              21
             Label : PUBLIC
-              public
+              8
             Label : STATIC
-              static
+              16

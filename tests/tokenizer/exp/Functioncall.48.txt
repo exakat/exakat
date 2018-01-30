@@ -1,33 +1,33 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            ::
+            11
             Label : CLASS
-              B
+              7
             Label : CONSTANT
-              TRUE
+              9
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $c
+            12
           Label : RIGHT
-            ::
+            11
             Label : CLASS
-              D
+              13
             Label : METHOD
-              false
+              15
               Label : ARGUMENT
-                Void
+                16
               Label : NAME
-                false
+                15

@@ -30,7 +30,7 @@ class Intval extends Plugin {
     
     public function run($atom) {
         switch ($atom->atom) {
-            case 'Integer' : 
+            case 'Integer' :
                 $value = $atom->code;
 
                 if (strtolower(substr($value, 0, 2)) === '0b') {
@@ -48,7 +48,7 @@ class Intval extends Plugin {
                 $atom->intval = abs($actual) > PHP_INT_MAX ? 0 : $actual;
 
                 break;
-        case 'Real' : 
+        case 'Real' :
             $atom->intval   = (int) $atom->code;
 
             break;

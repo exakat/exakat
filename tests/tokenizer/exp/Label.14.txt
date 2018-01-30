@@ -1,55 +1,55 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case @B :  /**/  
+              8
               Label : CASE
-                @
+                10
                 Label : AT
-                  B
+                  11
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  17
                   Label : LEFT
-                    ->
+                    16
                     Label : MEMBER
-                      C
+                      14
                     Label : OBJECT
-                      $this
+                      13
                   Label : RIGHT
-                    D
+                    18
                 Label : EXPRESSION
-                  =
+                  17
                   Label : LEFT
-                    ->
+                    16
                     Label : MEMBER
-                      E
+                      20
                     Label : OBJECT
-                      $this
+                      13
                   Label : RIGHT
-                    ->
+                    16
                     Label : METHOD
-                      F
+                      22
                       Label : ARGUMENT
-                        'G'
+                        24
                       Label : NAME
-                        F
+                        22
                     Label : OBJECT
-                      $this
+                      13
                 Label : EXPRESSION
-                  break
+                  26
                   Label : BREAK
-                    Void
+                    27
           Label : NAME
-            $a
+            6

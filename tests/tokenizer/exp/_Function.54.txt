@@ -1,72 +1,55 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.54.php
+  1
   Label : FILE
-    ;
-    Label : ELEMENT
-      <?php
-
+    3
+    Label : EXPRESSION
+      4
       Label : CODE
-        ;
-        Label : ELEMENT
-          function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+        3
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
           Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
+            8
+            Label : EXPRESSION
+              9
           Label : USE
-            (
-            Label : ARGUMENT
-              $a1
-        Label : ELEMENT
-          function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+            7
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
           Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
+            8
+            Label : EXPRESSION
+              9
           Label : USE
-            (
-            Label : ARGUMENT
-              $bq
-        Label : ELEMENT
-          function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+            11
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
           Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
+            8
+            Label : EXPRESSION
+              9
           Label : USE
-            (
-            Label : ARGUMENT
-              $c
-            Label : ARGUMENT
-              $d
-        Label : ELEMENT
-          function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+            12
+          Label : USE
+            13
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
           Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
+            8
+            Label : EXPRESSION
+              9
           Label : USE
-            (
-            Label : ARGUMENT
-              $e
-            Label : ARGUMENT
-              $f
-            Label : ARGUMENT
-              $g
+            14
+          Label : USE
+            15
+          Label : USE
+            16

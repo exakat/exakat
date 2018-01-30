@@ -1,75 +1,75 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            %
+            23
             Label : LEFT
-              (
+              6
               Label : CODE
-                +
+                13
                 Label : LEFT
-                  (int)
+                  7
                   Label : CAST
-                    (
+                    6
                     Label : CODE
-                      /
+                      11
                       Label : LEFT
-                        *
+                        9
                         Label : LEFT
-                          $a
+                          8
                         Label : RIGHT
-                          $b
+                          10
                       Label : RIGHT
-                        2
+                        12
                 Label : RIGHT
-                  +
+                  13
                   Label : LEFT
-                    $c
+                    14
                   Label : RIGHT
-                    +
+                    13
                     Label : LEFT
-                      3
+                      15
                     Label : RIGHT
-                      -
+                      18
                       Label : LEFT
-                        (int)
+                        7
                         Label : CAST
-                          (
+                          6
                           Label : CODE
-                            /
+                            11
                             Label : LEFT
-                              $d
+                              16
                             Label : RIGHT
-                              4
+                              17
                       Label : RIGHT
-                        +
+                        13
                         Label : LEFT
-                          (int)
+                          7
                           Label : CAST
-                            (
+                            6
                             Label : CODE
-                              /
+                              11
                               Label : LEFT
-                                $e
+                                19
                               Label : RIGHT
-                                5
+                                20
                         Label : RIGHT
-                          (int)
+                          7
                           Label : CAST
-                            (
+                            6
                             Label : CODE
-                              /
+                              11
                               Label : LEFT
-                                $f
+                                21
                               Label : RIGHT
-                                6
+                                22
             Label : RIGHT
-              7
+              24

@@ -1,87 +1,83 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            ?
+            17
             Label : CONDITION
-              ==
+              15
               Label : LEFT
-                @
+                6
                 Label : AT
-                  [
+                  10
                   Label : INDEX
-                    'f'
+                    14
                   Label : VARIABLE
-                    [
+                    10
                     Label : INDEX
-                      [
+                      10
                       Label : INDEX
-                        'e'
+                        13
                       Label : VARIABLE
-                        $d
+                        12
                     Label : VARIABLE
-                      [
+                      10
                       Label : INDEX
-                        $c
+                        11
                       Label : VARIABLE
-                        ::
+                        9
                         Label : CLASS
-                          a
+                          7
                         Label : MEMBER
-                          $b
+                          8
               Label : RIGHT
-                'g'
+                16
             Label : ELSE
-              'i'
+              19
             Label : THEN
-              'h'
-          Label : NAME
-            echo
+              18
         Label : EXPRESSION
-          J
-
+          20
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            ?
+            17
             Label : CONDITION
-              ==
+              15
               Label : LEFT
-                @
+                6
                 Label : AT
-                  [
+                  10
                   Label : INDEX
-                    'F'
+                    27
                   Label : VARIABLE
-                    [
+                    10
                     Label : INDEX
-                      [
+                      10
                       Label : INDEX
-                        'E'
+                        26
                       Label : VARIABLE
-                        $D
+                        25
                     Label : VARIABLE
-                      [
+                      10
                       Label : INDEX
-                        $C
+                        24
                       Label : VARIABLE
-                        ::
+                        9
                         Label : CLASS
-                          A
+                          22
                         Label : MEMBER
-                          $B
+                          23
               Label : RIGHT
-                'G'
+                28
             Label : ELSE
-              'I'
+              30
             Label : THEN
-              'H'
-          Label : NAME
-            echo
+              29

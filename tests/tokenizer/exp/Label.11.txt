@@ -1,45 +1,45 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          :
+          7
           Label : GOTOLABEL
-            B
+            5
         Label : EXPRESSION
-          =
+          9
           Label : LEFT
-            $a
+            8
           Label : RIGHT
-            0
+            10
         Label : EXPRESSION
-          try
+          11
           Label : BLOCK
-            {}
+            12
             Label : EXPRESSION
-              C
+              13
               Label : ARGUMENT
-                Void
+                15
               Label : NAME
-                C
+                13
           Label : CATCH
-            catch
+            17
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                15
             Label : CLASS
-              \D
+              18
             Label : VARIABLE
-              $b
+              20
         Label : EXPRESSION
-          :
+          7
           Label : GOTOLABEL
-            E
+            21
         Label : EXPRESSION
-          $c
+          23

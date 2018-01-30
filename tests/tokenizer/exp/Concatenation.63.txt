@@ -1,114 +1,107 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !==
+            12
             Label : LEFT
-              B
+              6
               Label : NAME
-                B
+                6
               Label : ARGUMENT
-                'C'
+                8
               Label : ARGUMENT
-                D
+                10
             Label : RIGHT
-              'E'
+              13
           Label : ELSE
-            ;
+            3
             Label : EXPRESSION
-              Z
+              54
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              F
+              15
             Label : EXPRESSION
-              .
+              23
               Label : CONCAT
-                G
+                17
                 Label : NAME
-                  G
+                  17
                 Label : ARGUMENT
-                  'H'
+                  19
                 Label : ARGUMENT
-                  'I'
+                  21
               Label : CONCAT
-                'J'
+                24
               Label : CONCAT
-                K
+                26
                 Label : ARGUMENT
-                  B
+                  6
                   Label : ARGUMENT
-                    'M'
+                    28
                   Label : NAME
-                    B
+                    6
                 Label : NAME
-                  K
+                  26
               Label : CONCAT
-                'N'
+                30
             Label : EXPRESSION
-              O
+              32
             Label : EXPRESSION
-              G
+              17
               Label : NAME
-                G
+                17
               Label : ARGUMENT
-                'Q'
+                34
               Label : ARGUMENT
-                'I'
+                21
             Label : EXPRESSION
-              S
+              36
             Label : EXPRESSION
-              echo
+              38
               Label : ARGUMENT
-                $a
-              Label : NAME
-                echo
+                39
             Label : EXPRESSION
-              T
+              40
             Label : EXPRESSION
-              if
+              5
               Label : CONDITION
-                isset
+                42
                 Label : ARGUMENT
-                  $b
-                Label : NAME
-                  isset
+                  43
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  echo
+                  38
                   Label : ARGUMENT
-                    U
+                    44
                     Label : ARGUMENT
-                      $b
+                      43
                     Label : NAME
-                      U
-                  Label : NAME
-                    echo
+                      44
             Label : EXPRESSION
-              V
+              46
             Label : EXPRESSION
-              echo
+              38
               Label : ARGUMENT
-                U
+                44
                 Label : ARGUMENT
-                  [
+                  49
                   Label : INDEX
-                    'X'
+                    50
                   Label : VARIABLE
-                    $c
+                    48
                 Label : NAME
-                  U
-              Label : NAME
-                echo
+                  44
             Label : EXPRESSION
-              Y
+              52
         Label : EXPRESSION
-          Void
+          56

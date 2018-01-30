@@ -1,87 +1,87 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ||
+            13
             Label : LEFT
-              ==
+              10
               Label : LEFT
-                ->
+                9
                 Label : MEMBER
-                  B
+                  7
                 Label : OBJECT
-                  $a
+                  6
               Label : RIGHT
-                'C'
+                11
             Label : RIGHT
-              ==
+              10
               Label : LEFT
-                D
+                14
                 Label : ARGUMENT
-                  ->
+                  9
                   Label : MEMBER
-                    E
+                    16
                   Label : OBJECT
-                    $a
+                    6
                 Label : NAME
-                  D
+                  14
               Label : RIGHT
-                *
+                19
                 Label : LEFT
-                  0
+                  18
                 Label : RIGHT
-                  ->
+                  9
                   Label : METHOD
-                    F
+                    20
                     Label : ARGUMENT
-                      Void
+                      22
                     Label : NAME
-                      F
+                      20
                   Label : OBJECT
-                    $a
+                    6
           Label : ELSE
-            ;
+            3
             Label : EXPRESSION
-              ++
+              30
               Label : POSTPLUSPLUS
-                $e
+                32
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              for
+              24
               Label : BLOCK
-                ;
+                3
                 Label : EXPRESSION
-                  ++
+                  30
                   Label : POSTPLUSPLUS
-                    $d
+                    31
               Label : FINAL
-                ;
+                3
                 Label : EXPRESSION
-                  <
+                  28
                   Label : LEFT
-                    $b
+                    25
                   Label : RIGHT
-                    $c
+                    29
               Label : INCREMENT
-                ;
+                3
                 Label : EXPRESSION
-                  ++
+                  30
                   Label : POSTPLUSPLUS
-                    $b
+                    25
               Label : INIT
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  26
                   Label : LEFT
-                    $b
+                    25
                   Label : RIGHT
-                    1
+                    27

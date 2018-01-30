@@ -31,7 +31,7 @@ class Prints extends Analyzer {
         $this->atomFunctionIs(makeFullNsPath($prints['functions']));
         $this->prepareQuery();
 
-        // print_r($a);
+        // print $a;
         $this->atomIs(array('Print', 'Echo'));
         $this->prepareQuery();
 

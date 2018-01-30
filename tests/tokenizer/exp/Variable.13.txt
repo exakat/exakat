@@ -1,43 +1,37 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $result
+            5
           Label : RIGHT
-            <<<EOF
-
+            7
             Label : CONCAT
-              
-
+              9
             Label : CONCAT
-              ->
+              12
               Label : MEMBER
-                property
+                11
               Label : OBJECT
-                $object
+                10
             Label : CONCAT
-              ;
-
-
+              13
             Label : CONCAT
-              ->
+              12
               Label : METHOD
-                method
+                14
                 Label : ARGUMENT
-                  Void
+                  15
                 Label : NAME
-                  method
+                  14
               Label : OBJECT
-                $object
+                10
             Label : CONCAT
-              ;
-
-
+              13

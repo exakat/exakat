@@ -1,25 +1,25 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ?
+          6
           Label : CONDITION
-            $x
+            5
           Label : ELSE
-            ::
+            9
             Label : CLASS
-              c
+              10
             Label : CONSTANT
-              d
+              11
           Label : THEN
-            ::
+            9
             Label : CLASS
-              a
+              7
             Label : CONSTANT
-              b
+              8

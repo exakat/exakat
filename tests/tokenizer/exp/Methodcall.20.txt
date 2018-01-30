@@ -1,48 +1,49 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ->
+          10
           Label : MEMBER
-            $
+            6
             Label : NAME
-              $b
+              7
               Label : ARGUMENT
-                Void
+                8
               Label : NAME
-                $b
+                7
           Label : OBJECT
-            $a
+            5
         Label : EXPRESSION
-          =
+          11
           Label : LEFT
-            ->
+            10
             Label : MEMBER
-              $
+              6
               Label : NAME
-                $b
+                7
                 Label : APPEND
-                  $b
+                  7
             Label : OBJECT
-              $a
+              5
           Label : RIGHT
-            3
+            12
         Label : EXPRESSION
-          =
+          11
           Label : LEFT
-            ->
+            10
             Label : MEMBER
-              }
+              13
               Label : APPEND
-                $
+                6
                 Label : NAME
-                  $b
+                  7
             Label : OBJECT
-              $a
+              5
           Label : RIGHT
-            4
+            14

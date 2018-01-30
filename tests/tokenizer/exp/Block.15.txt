@@ -1,77 +1,79 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            $c
+            6
           Label : ELSE
-            elseif
+            10
             Label : CONDITION
-              $p
+              11
             Label : THEN
-              {}
+              7
               Label : EXPRESSION
-                {}
+                7
                 Label : EXPRESSION
-                  =
+                  13
                   Label : LEFT
-                    $h
+                    12
                   Label : RIGHT
-                    array
+                    14
                     Label : ARGUMENT
-                      =>
+                      16
                       Label : INDEX
-                        'a'
+                        15
                       Label : VALUE
-                        'b'
+                        17
+                    Label : ARGUMENT
+                      8
               Label : EXPRESSION
-                {}
+                7
                 Label : EXPRESSION
-                  =
+                  13
                   Label : LEFT
-                    $i
+                    18
                   Label : RIGHT
-                    ->
+                    23
                     Label : METHOD
-                      c
+                      20
                       Label : ARGUMENT
-                        ->
+                        23
                         Label : MEMBER
-                          e
+                          22
                         Label : OBJECT
-                          $d
+                          21
                       Label : NAME
-                        c
+                        20
                     Label : OBJECT
-                      $this
+                      19
               Label : EXPRESSION
-                {}
+                7
                 Label : EXPRESSION
-                  =
+                  13
                   Label : LEFT
-                    $k
+                    24
                   Label : RIGHT
-                    ->
+                    23
                     Label : METHOD
-                      m
+                      26
                       Label : ARGUMENT
-                        [
+                        28
                         Label : INDEX
-                          'o'
+                          29
                         Label : VARIABLE
-                          $n
+                          27
                       Label : NAME
-                        m
+                        26
                     Label : OBJECT
-                      $l
+                      25
           Label : THEN
-            {}
+            7
             Label : EXPRESSION
-              Void
+              8

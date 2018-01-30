@@ -33,7 +33,7 @@ class IsModified extends Analyzer {
     }
     
     public function analyze() {
-        $atoms = array('Variable', 
+        $atoms = array('Variable',
                        'Phpvariable',
                        'Variablearray',
                       );

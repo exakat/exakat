@@ -1,55 +1,55 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : EXTENDS
-            B
+            8
           Label : IMPLEMENTS
-            C
+            10
           Label : IMPLEMENTS
-            D
+            12
           Label : NAME
-            A1
+            6
         Label : EXPRESSION
-          class
+          5
           Label : EXTENDS
-            B
+            8
           Label : IMPLEMENTS
-            C
+            10
           Label : IMPLEMENTS
-            D
+            12
           Label : IMPLEMENTS
-            E
+            16
           Label : NAME
-            A2
+            14
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            D
+            12
           Label : IMPLEMENTS
-            C
+            10
           Label : IMPLEMENTS
-            E
+            16
           Label : IMPLEMENTS
-            F
+            20
           Label : NAME
-            A3
+            18
         Label : EXPRESSION
-          class
+          5
           Label : IMPLEMENTS
-            \D
+            26
           Label : IMPLEMENTS
-            \C
+            24
           Label : IMPLEMENTS
-            \E
+            28
           Label : IMPLEMENTS
-            \F
+            30
           Label : NAME
-            A4
+            22

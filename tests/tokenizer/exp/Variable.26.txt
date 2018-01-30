@@ -1,115 +1,115 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          $
+          5
           Label : NAME
-            [
+            7
             Label : INDEX
-              'baz'
+              9
             Label : VARIABLE
-              [
+              7
               Label : INDEX
-                'bar'
+                8
               Label : VARIABLE
-                $foo
+                6
         Label : EXPRESSION
-          $
+          5
           Label : NAME
-            [
+            7
             Label : INDEX
-              'baz'
+              9
             Label : VARIABLE
-              [
+              7
               Label : INDEX
-                'bar'
+                8
               Label : VARIABLE
-                $foo
+                6
         Label : EXPRESSION
-          [
+          7
           Label : INDEX
-            'baz'
+            9
           Label : VARIABLE
-            ->
+            11
             Label : MEMBER
-              $bar
+              10
             Label : OBJECT
-              $foo
+              6
         Label : EXPRESSION
-          ->
+          11
           Label : MEMBER
-            {}
+            12
             Label : CODE
-              [
+              7
               Label : INDEX
-                'baz'
+                9
               Label : VARIABLE
-                $bar
+                10
           Label : OBJECT
-            $foo
+            6
         Label : EXPRESSION
-          [
+          7
           Label : ARGUMENT
-            Void
+            13
           Label : NAME
-            [
+            7
             Label : INDEX
-              'baz'
+              9
             Label : VARIABLE
-              ->
+              11
               Label : MEMBER
-                $bar
+                10
               Label : OBJECT
-                $foo
+                6
         Label : EXPRESSION
-          ->
+          11
           Label : METHOD
-            {}
+            12
             Label : ARGUMENT
-              Void
+              13
             Label : NAME
-              {}
+              12
               Label : CODE
-                [
+                7
                 Label : INDEX
-                  'baz'
+                  9
                 Label : VARIABLE
-                  $bar
+                  10
           Label : OBJECT
-            $foo
+            6
         Label : EXPRESSION
-          [
+          7
           Label : ARGUMENT
-            Void
+            13
           Label : NAME
-            [
+            7
             Label : INDEX
-              'baz'
+              9
             Label : VARIABLE
-              ::
+              17
               Label : CLASS
-                Foo
+                15
               Label : MEMBER
-                $bar
+                10
         Label : EXPRESSION
-          ::
+          17
           Label : CLASS
-            Foo
+            15
           Label : METHOD
-            {}
+            12
             Label : ARGUMENT
-              Void
+              13
             Label : NAME
-              {}
+              12
               Label : CODE
-                [
+                7
                 Label : INDEX
-                  'baz'
+                  9
                 Label : VARIABLE
-                  $bar
+                  10

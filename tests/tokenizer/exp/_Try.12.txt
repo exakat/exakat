@@ -1,144 +1,145 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          ->
+          12
           Label : METHOD
-            a
+            6
             Label : ARGUMENT
-              ::
+              11
               Label : CLASS
-                B
+                7
               Label : CONSTANT
-                D
+                9
             Label : NAME
-              a
+              6
           Label : OBJECT
-            $this
+            5
         Label : EXPRESSION
-          if
+          13
           Label : CONDITION
-            !
+            14
             Label : NOT
-              $b
+              15
           Label : THEN
-            {}
+            16
             Label : EXPRESSION
-              throw
+              17
               Label : THROW
-                new
+                18
                 Label : NEW
-                  A
+                  19
         Label : EXPRESSION
-          try
+          20
           Label : BLOCK
-            {}
+            16
             Label : EXPRESSION
-              if
+              13
               Label : CONDITION
-                ==
+                24
                 Label : LEFT
-                  [
+                  22
                   Label : INDEX
-                    'r'
+                    23
                   Label : VARIABLE
-                    $e
+                    21
                 Label : RIGHT
-                  't'
+                  25
               Label : THEN
-                {}
+                16
                 Label : EXPRESSION
-                  ->
+                  12
                   Label : METHOD
-                    g
+                    27
                     Label : ARGUMENT
-                      t
+                      28
                       Label : ARGUMENT
-                        'h'
+                        29
                       Label : NAME
-                        t
+                        28
                     Label : NAME
-                      g
+                      27
                   Label : OBJECT
-                    ->
+                    12
                     Label : MEMBER
-                      f
+                      26
                     Label : OBJECT
-                      $this
+                      5
           Label : CATCH
-            catch
+            30
             Label : BLOCK
-              {}
+              16
               Label : EXPRESSION
-                Void
+                33
             Label : CLASS
-              Router_ArgNoExist
+              31
             Label : VARIABLE
-              $e
+              21
           Label : CATCH
-            catch
+            30
             Label : BLOCK
-              {}
+              16
               Label : EXPRESSION
-                Void
+                33
             Label : CLASS
-              Ugmanager_GroupNoExist
+              35
             Label : VARIABLE
-              $e
+              21
           Label : CATCH
-            catch
+            30
             Label : BLOCK
-              {}
+              16
               Label : EXPRESSION
-                ->
+                12
                 Label : METHOD
-                  e
+                  40
                   Label : ARGUMENT
-                    f
+                    26
                     Label : NAME
-                      f
+                      26
                     Label : ARGUMENT
-                      t
+                      28
                       Label : ARGUMENT
-                        'g'
+                        41
                       Label : NAME
-                        t
+                        28
                     Label : ARGUMENT
-                      [
+                      22
                       Label : INDEX
-                        'i'
+                        43
                       Label : VARIABLE
-                        $h
+                        42
                   Label : NAME
-                    e
+                    40
                 Label : OBJECT
-                  ->
+                  12
                   Label : MEMBER
-                    a
+                    6
                   Label : OBJECT
-                    $d
+                    39
               Label : EXPRESSION
-                if
+                13
                 Label : CONDITION
-                  $x
+                  44
                 Label : THEN
-                  {}
+                  16
                   Label : EXPRESSION
-                    ->
+                    12
                     Label : METHOD
-                      d
+                      10
                       Label : ARGUMENT
-                        Void
+                        33
                       Label : NAME
-                        d
+                        10
                     Label : OBJECT
-                      $x
+                      44
             Label : CLASS
-              ACL_RoleNoExist
+              37
             Label : VARIABLE
-              $e
+              21

@@ -1,35 +1,35 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              =
+              10
               Label : LEFT
-                $obj
+                9
               Label : RIGHT
-                new
+                11
                 Label : NEW
-                  namespace\Another
+                  12
           Label : NAME
-            A
+            5
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              +
+              17
               Label : LEFT
-                1
+                16
               Label : RIGHT
-                2
+                18
           Label : NAME
-            Void
+            14

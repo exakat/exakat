@@ -1,76 +1,77 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            .
+            9
             Label : CONCAT
-              [
+              7
               Label : INDEX
-                0
+                8
               Label : VARIABLE
-                $a
+                6
             Label : CONCAT
-              "
+              10
               Label : CONCAT
-                B
+                11
               Label : CONCAT
-                [
+                7
                 Label : INDEX
-                  C
+                  14
                 Label : VARIABLE
-                  $b
+                  13
               Label : CONCAT
-                [
+                7
                 Label : INDEX
-                  D
+                  17
                 Label : VARIABLE
-                  $c
+                  16
               Label : CONCAT
-                E
+                19
               Label : CONCAT
-                [
+                7
                 Label : INDEX
-                  F
+                  22
                 Label : VARIABLE
-                  $d
+                  21
               Label : CONCAT
-                [
+                7
                 Label : INDEX
-                  G
+                  25
                 Label : VARIABLE
-                  $e
+                  24
               Label : CONCAT
-                H
+                27
             Label : CONCAT
-              ->
+              38
               Label : METHOD
-                I
+                30
                 Label : ARGUMENT
-                  .
+                  9
                   Label : CONCAT
-                    'J'
+                    32
                   Label : CONCAT
-                    [
+                    7
                     Label : INDEX
-                      1
+                      35
                     Label : VARIABLE
-                      $g
+                      34
                   Label : CONCAT
-                    [
+                    7
                     Label : INDEX
-                      2
+                      37
                     Label : VARIABLE
-                      $h
+                      36
                 Label : NAME
-                  I
+                  30
               Label : OBJECT
-                $f
+                29
             Label : CONCAT
-              'K'
+              39

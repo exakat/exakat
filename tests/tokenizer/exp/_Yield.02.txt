@@ -1,91 +1,89 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          x
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              =
+              10
               Label : LEFT
-                $y
+                9
               Label : RIGHT
-                array
+                11
                 Label : ARGUMENT
-                  =>
+                  13
                   Label : INDEX
-                    1
+                    12
                   Label : VALUE
-                    2
+                    14
                 Label : ARGUMENT
-                  =>
+                  13
                   Label : INDEX
-                    3
+                    15
                   Label : VALUE
-                    4
+                    16
             Label : EXPRESSION
-              foreach
+              17
               Label : BLOCK
-                {}
+                8
                 Label : EXPRESSION
-                  yield
+                  20
                   Label : YIELD
-                    =>
+                    13
                     Label : INDEX
-                      $k
+                      18
                     Label : VALUE
-                      $v
+                      19
               Label : SOURCE
-                $y
+                9
               Label : VALUE
-                =>
+                13
                 Label : INDEX
-                  $k
+                  18
                 Label : VALUE
-                  $v
+                  19
           Label : DEFINITION
-            x
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              x
+              5
           Label : NAME
-            x
+            5
         Label : EXPRESSION
-          foreach
+          17
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              print
+              24
               Label : ARGUMENT
-                "
+                21
                 Label : CONCAT
-                  $k
+                  18
                 Label : CONCAT
-                   => 
+                  22
                 Label : CONCAT
-                  $v
+                  19
                 Label : CONCAT
-                  \n
-              Label : NAME
-                print
+                  23
           Label : SOURCE
-            x
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              x
+              5
           Label : VALUE
-            =>
+            13
             Label : INDEX
-              $k
+              18
             Label : VALUE
-              $v
+              19

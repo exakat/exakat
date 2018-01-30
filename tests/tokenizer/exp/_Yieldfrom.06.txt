@@ -1,71 +1,71 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              yield from
+              12
               Label : YIELD
-                yield from
+                12
                 Label : YIELD
-                  foo
+                  13
                   Label : ARGUMENT
-                    Void
+                    7
                   Label : NAME
-                    foo
+                    13
             Label : EXPRESSION
-              while
+              14
               Label : BLOCK
-                ;
+                3
                 Label : EXPRESSION
-                  Void
+                  7
               Label : CONDITION
-                yield from
+                12
                 Label : YIELD
-                  !==
+                  15
                   Label : LEFT
-                    foo
+                    13
                     Label : ARGUMENT
-                      Void
+                      7
                     Label : NAME
-                      foo
+                      13
                   Label : RIGHT
-                    null
+                    16
           Label : DEFINITION
-            B
+            5
             Label : ARGUMENT
-              Void
+              7
             Label : NAME
-              B
+              5
           Label : NAME
-            B
+            5
           Label : RETURNTYPE
-            Generator
+            9
         Label : EXPRESSION
-          foreach
+          17
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              var_dump
+              19
               Label : ARGUMENT
-                $c
+                18
               Label : NAME
-                var_dump
+                19
           Label : SOURCE
-            B
+            5
             Label : ARGUMENT
-              Void
+              7
             Label : NAME
-              B
+              5
           Label : VALUE
-            $c
+            18

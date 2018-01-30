@@ -265,10 +265,9 @@ GREMLIN;
         $this->logTime('constants : '.count($constants));
 
         if (!empty($constantsConst)) {
-            // First round, with full ns path
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
+     .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .has("token", without("T_CONST", "T_FUNCTION"))
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
      .addE('DEFINITION')

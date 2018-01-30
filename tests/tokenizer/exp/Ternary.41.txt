@@ -1,205 +1,205 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            =
+            9
             Label : LEFT
-              parts
+              7
               Label : APPEND
-                ->
+                8
                 Label : MEMBER
-                  parts
+                  7
                 Label : OBJECT
-                  $this
+                  6
             Label : RIGHT
-              ?
+              13
               Label : CONDITION
-                ===
+                11
                 Label : LEFT
-                  $part
+                  10
                 Label : RIGHT
-                  1
+                  12
               Label : ELSE
-                $part
+                10
               Label : THEN
-                new
+                14
                 Label : NEW
-                  self
+                  15
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            =
+            9
             Label : LEFT
-              parts
+              7
               Label : APPEND
-                ->
+                8
                 Label : MEMBER
-                  parts
+                  7
                 Label : OBJECT
-                  $this
+                  6
             Label : RIGHT
-              ?
+              13
               Label : CONDITION
-                ===
+                11
                 Label : LEFT
-                  $part
+                  10
                 Label : RIGHT
-                  NULL
+                  16
               Label : ELSE
-                $part
+                10
               Label : THEN
-                new
+                14
                 Label : NEW
-                  static
+                  18
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            =
+            9
             Label : LEFT
-              parts
+              7
               Label : APPEND
-                ->
+                8
                 Label : MEMBER
-                  parts
+                  7
                 Label : OBJECT
-                  $this
+                  6
             Label : RIGHT
-              ?
+              13
               Label : CONDITION
-                ===
+                11
                 Label : LEFT
-                  $part
+                  10
                 Label : RIGHT
-                  NULL
+                  16
               Label : ELSE
-                $part
+                10
               Label : THEN
-                new
+                14
                 Label : NEW
-                  parent
+                  19
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            =
+            9
             Label : LEFT
-              parts
+              7
               Label : APPEND
-                ->
+                8
                 Label : MEMBER
-                  parts
+                  7
                 Label : OBJECT
-                  $this
+                  6
             Label : RIGHT
-              ?
+              13
               Label : CONDITION
-                ===
+                11
                 Label : LEFT
-                  $part
+                  10
                 Label : RIGHT
-                  NULL
+                  16
               Label : ELSE
-                $part
+                10
               Label : THEN
-                new
+                14
                 Label : NEW
-                  X
+                  20
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            =
+            9
             Label : LEFT
-              parts
+              7
               Label : APPEND
-                ->
+                8
                 Label : MEMBER
-                  parts
+                  7
                 Label : OBJECT
-                  $this
+                  6
             Label : RIGHT
-              ?
+              13
               Label : CONDITION
-                ===
+                11
                 Label : LEFT
-                  $part
+                  10
                 Label : RIGHT
-                  1
+                  12
               Label : ELSE
-                $part
+                10
               Label : THEN
-                new
+                14
                 Label : NEW
-                  self
+                  15
                   Label : ARGUMENT
-                    Void
+                    22
                   Label : NAME
-                    self
+                    15
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            =
+            9
             Label : LEFT
-              parts
+              7
               Label : APPEND
-                ->
+                8
                 Label : MEMBER
-                  parts
+                  7
                 Label : OBJECT
-                  $this
+                  6
             Label : RIGHT
-              ?
+              13
               Label : CONDITION
-                ===
+                11
                 Label : LEFT
-                  $part
+                  10
                 Label : RIGHT
-                  1
+                  12
               Label : ELSE
-                $part
+                10
               Label : THEN
-                new
+                14
                 Label : NEW
-                  self
+                  15
                   Label : ARGUMENT
-                    1
+                    12
                   Label : NAME
-                    self
+                    15
         Label : EXPRESSION
-          return
+          5
           Label : RETURN
-            =
+            9
             Label : LEFT
-              parts
+              7
               Label : APPEND
-                ->
+                8
                 Label : MEMBER
-                  parts
+                  7
                 Label : OBJECT
-                  $this
+                  6
             Label : RIGHT
-              ?
+              13
               Label : CONDITION
-                ===
+                11
                 Label : LEFT
-                  $part
+                  10
                 Label : RIGHT
-                  1
+                  12
               Label : ELSE
-                $part
+                10
               Label : THEN
-                new
+                14
                 Label : NEW
-                  self
+                  15
                   Label : NAME
-                    self
+                    15
                   Label : ARGUMENT
-                    1
+                    12
                   Label : ARGUMENT
-                    2
+                    24

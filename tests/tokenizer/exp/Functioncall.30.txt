@@ -1,41 +1,39 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            '1'
+            6
           Label : ARGUMENT
-            $x
+            7
           Label : ARGUMENT
-            .
+            12
             Label : CONCAT
-              [
+              9
               Label : INDEX
-                2
+                11
               Label : VARIABLE
-                [
+                9
                 Label : INDEX
-                  1
+                  10
                 Label : VARIABLE
-                  $y
+                  8
             Label : CONCAT
-              '2'
+              13
             Label : CONCAT
-              ::
+              17
               Label : CLASS
-                a
+                14
               Label : METHOD
-                b
+                15
                 Label : ARGUMENT
-                  3
+                  16
                 Label : NAME
-                  b
-          Label : NAME
-            echo
+                  15

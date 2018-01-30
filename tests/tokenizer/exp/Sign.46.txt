@@ -1,485 +1,535 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          9
           Label : LEFT
-            ->
+            8
             Label : MEMBER
-              B
+              6
             Label : OBJECT
-              $a
+              5
           Label : RIGHT
-            +
+            146
             Label : LEFT
-              array
+              10
               Label : ARGUMENT
-                =>
+                13
                 Label : INDEX
-                  'C'
+                  11
                 Label : VALUE
-                  array
+                  10
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'D'
+                      14
                     Label : VALUE
-                      'E'
+                      16
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'F'
+                      18
                     Label : VALUE
-                      array
+                      10
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'G'
+                          20
                         Label : VALUE
-                          array
+                          10
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'H'
+                              22
                             Label : VALUE
-                              I
+                              24
                               Label : ARGUMENT
-                                'J'
+                                26
                               Label : NAME
-                                I
+                                24
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'K'
+                              28
                             Label : VALUE
-                              L
+                              30
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'M'
+                              32
                             Label : VALUE
-                              N
+                              34
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'O'
+                              36
                             Label : VALUE
-                              P
+                              38
+                          Label : ARGUMENT
+                            40
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'Q'
+                          42
                         Label : VALUE
-                          array
+                          10
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'R'
+                              44
                             Label : VALUE
-                              S
+                              46
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'T'
+                              48
                             Label : VALUE
-                              U
+                              50
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'V'
+                              52
                             Label : VALUE
-                              W
+                              54
+                          Label : ARGUMENT
+                            40
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'X'
+                          56
                         Label : VALUE
-                          array
+                          10
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'Y'
+                              58
                             Label : VALUE
-                              Z
+                              60
                               Label : ARGUMENT
-                                'AA'
+                                62
                               Label : NAME
-                                Z
-                      Label : ARGUMENT
-                        =>
-                        Label : INDEX
-                          'AB'
-                        Label : VALUE
-                          array
+                                60
                           Label : ARGUMENT
-                            =>
+                            40
+                      Label : ARGUMENT
+                        13
+                        Label : INDEX
+                          64
+                        Label : VALUE
+                          10
+                          Label : ARGUMENT
+                            13
                             Label : INDEX
-                              'AC'
+                              66
                             Label : VALUE
-                              AD
+                              68
                               Label : ARGUMENT
-                                'AE'
+                                70
                               Label : NAME
-                                AD
+                                68
+                          Label : ARGUMENT
+                            40
+                      Label : ARGUMENT
+                        40
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'AF'
+                      72
                     Label : VALUE
-                      'AG'
+                      74
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'AH'
+                      76
                     Label : VALUE
-                      array
+                      10
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'AI'
+                          78
                         Label : VALUE
-                          array
+                          10
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'AJ'
+                              80
                             Label : VALUE
-                              AK
+                              82
                               Label : ARGUMENT
-                                'AL'
+                                84
                               Label : NAME
-                                AK
+                                82
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'AM'
+                          86
                         Label : VALUE
-                          array
+                          10
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'AN'
+                              88
                             Label : VALUE
-                              AO
+                              90
                               Label : ARGUMENT
-                                'AP'
+                                92
                               Label : NAME
-                                AO
+                                90
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'AQ'
+                              94
                             Label : VALUE
-                              AR
+                              96
+                          Label : ARGUMENT
+                            40
+                      Label : ARGUMENT
+                        40
+                  Label : ARGUMENT
+                    40
               Label : ARGUMENT
-                =>
+                13
                 Label : INDEX
-                  'AT'
+                  98
                 Label : VALUE
-                  array
+                  10
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'AU'
+                      100
                     Label : VALUE
-                      'AV'
+                      102
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'AW'
+                      104
                     Label : VALUE
-                      array
+                      10
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'AX'
+                          106
                         Label : VALUE
-                          array
+                          10
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'AY'
+                              108
                             Label : VALUE
-                              AZ
+                              110
                               Label : ARGUMENT
-                                'BA'
+                                112
                               Label : NAME
-                                AZ
+                                110
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'BB'
+                              114
                             Label : VALUE
-                              BC
+                              116
+                          Label : ARGUMENT
+                            40
+                      Label : ARGUMENT
+                        40
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'BD'
+                      118
                     Label : VALUE
-                      'BE'
+                      120
+                  Label : ARGUMENT
+                    40
               Label : ARGUMENT
-                =>
+                13
                 Label : INDEX
-                  'BF'
+                  122
                 Label : VALUE
-                  array
+                  10
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'BG'
+                      124
                     Label : VALUE
-                      'BH'
+                      126
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'BI'
+                      128
                     Label : VALUE
-                      array
+                      10
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'BJ'
+                          130
                         Label : VALUE
-                          array
+                          10
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'BK'
+                              132
                             Label : VALUE
-                              BL
+                              134
                               Label : ARGUMENT
-                                'BM'
+                                136
                               Label : NAME
-                                BL
+                                134
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'BN'
+                              138
                             Label : VALUE
-                              BO
+                              140
+                          Label : ARGUMENT
+                            40
+                      Label : ARGUMENT
+                        40
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'BP'
+                      142
                     Label : VALUE
-                      'BQ'
+                      144
+                  Label : ARGUMENT
+                    40
+              Label : ARGUMENT
+                40
             Label : RIGHT
-              +
+              146
               Label : LEFT
-                ->
+                8
                 Label : METHOD
-                  BR
+                  148
                   Label : ARGUMENT
-                    BS
+                    150
                   Label : ARGUMENT
-                    BT
+                    152
                   Label : ARGUMENT
-                    BU
+                    154
                   Label : ARGUMENT
-                    array
+                    10
                     Label : ARGUMENT
-                      Void
+                      40
                   Label : NAME
-                    BR
+                    148
                 Label : OBJECT
-                  $b
+                  147
               Label : RIGHT
-                +
+                146
                 Label : LEFT
-                  array
+                  10
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'BV'
+                      156
                     Label : VALUE
-                      array
+                      10
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'BW'
+                          158
                         Label : VALUE
-                          'BX'
+                          160
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'BY'
+                          162
                         Label : VALUE
-                          array
+                          10
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'BZ'
+                              164
                             Label : VALUE
-                              array
+                              10
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'CA'
+                                  166
                                 Label : VALUE
-                                  CB
+                                  168
                                   Label : ARGUMENT
-                                    'CC'
+                                    170
                                   Label : NAME
-                                    CB
+                                    168
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'CD'
+                                  172
                                 Label : VALUE
-                                  CE
+                                  174
+                              Label : ARGUMENT
+                                40
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'CF'
+                              176
                             Label : VALUE
-                              array
+                              10
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'CG'
+                                  178
                                 Label : VALUE
-                                  CH
+                                  180
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'CI'
+                              182
                             Label : VALUE
-                              array
+                              10
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'CJ'
+                                  184
                                 Label : VALUE
-                                  CK
+                                  186
+                          Label : ARGUMENT
+                            40
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'CL'
+                          188
                         Label : VALUE
-                          array
+                          10
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'CM'
+                              190
                             Label : VALUE
-                              array
+                              10
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'CN'
+                                  192
                                 Label : VALUE
-                                  CO
+                                  194
                                   Label : ARGUMENT
-                                    'CP'
+                                    196
                                   Label : NAME
-                                    CO
+                                    194
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'CQ'
+                                  198
                                 Label : VALUE
-                                  ::
+                                  204
                                   Label : CLASS
-                                    CR
+                                    200
                                   Label : CONSTANT
-                                    CS
+                                    202
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'CT'
+                                  205
                                 Label : VALUE
-                                  $c
+                                  207
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'CU'
+                                  208
                                 Label : VALUE
-                                  ::
+                                  204
                                   Label : CLASS
-                                    CV
+                                    210
                                   Label : CONSTANT
-                                    CW
+                                    212
+                              Label : ARGUMENT
+                                40
+                          Label : ARGUMENT
+                            40
+                      Label : ARGUMENT
+                        40
+                  Label : ARGUMENT
+                    40
                 Label : RIGHT
-                  array
+                  10
                   Label : ARGUMENT
-                    =>
+                    13
                     Label : INDEX
-                      'CX'
+                      214
                     Label : VALUE
-                      array
+                      10
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'CY'
+                          216
                         Label : VALUE
-                          'CZ'
+                          218
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'DA'
+                          220
                         Label : VALUE
-                          'DB'
+                          222
                       Label : ARGUMENT
-                        =>
+                        13
                         Label : INDEX
-                          'DC'
+                          224
                         Label : VALUE
-                          array
+                          10
                           Label : ARGUMENT
-                            =>
+                            13
                             Label : INDEX
-                              'DD'
+                              226
                             Label : VALUE
-                              array
+                              10
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'DE'
+                                  228
                                 Label : VALUE
-                                  'DF'
+                                  230
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'DG'
+                                  232
                                 Label : VALUE
-                                  DH
+                                  234
                                   Label : ARGUMENT
-                                    'DI'
+                                    236
                                   Label : NAME
-                                    DH
+                                    234
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'DJ'
+                                  238
                                 Label : VALUE
-                                  ::
+                                  204
                                   Label : CLASS
-                                    DK
+                                    240
                                   Label : CONSTANT
-                                    DL
+                                    242
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'DM'
+                                  244
                                 Label : VALUE
-                                  DN
+                                  246
                               Label : ARGUMENT
-                                =>
+                                13
                                 Label : INDEX
-                                  'DP'
+                                  248
                                 Label : VALUE
-                                  ::
+                                  204
                                   Label : CLASS
-                                    DQ
+                                    250
                                   Label : METHOD
-                                    DR
+                                    252
                                     Label : ARGUMENT
-                                      Void
+                                      40
                                     Label : NAME
-                                      DR
+                                      252
+                              Label : ARGUMENT
+                                40
+                          Label : ARGUMENT
+                            40
+                      Label : ARGUMENT
+                        40
+                  Label : ARGUMENT
+                    40

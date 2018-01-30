@@ -1,139 +1,135 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              const
+              9
               Label : CONST
-                const
+                9
                 Label : NAME
-                  FOO
+                  10
                 Label : VALUE
-                  42
+                  12
             Label : EXPRESSION
-              f
+              13
               Label : ARGUMENT
-                Void
+                14
               Label : BLOCK
-                {}
+                8
                 Label : EXPRESSION
-                  echo
+                  16
                   Label : ARGUMENT
-                    .
+                    19
                     Label : CONCAT
-                      __FUNCTION__
+                      17
                     Label : CONCAT
-                      "\n"
-                  Label : NAME
-                    echo
+                      20
               Label : NAME
-                f
+                13
           Label : NAME
-            Name\Space
+            5
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              use
+              21
               Label : CONST
-                const
+                9
               Label : USE
-                Name\Space\c
+                22
             Label : EXPRESSION
-              use
+              21
               Label : FUNCTION
-                function
+                24
               Label : USE
-                Name\Space\f
+                25
             Label : EXPRESSION
-              use
+              21
               Label : CONST
-                const
+                9
               Label : USE
-                Name\Space\FOO2
+                27
               Label : USE
-                Name\Space\FOO3
+                29
             Label : EXPRESSION
-              use
+              21
               Label : FUNCTION
-                function
+                24
               Label : USE
-                Name\Space\FOO2
+                27
               Label : USE
-                Name\Space\FOO3
+                29
             Label : EXPRESSION
-              use
+              21
               Label : CONST
-                const
+                9
               Label : USE
-                as
+                34
                 Label : ALIAS
-                  a1
+                  33
                 Label : NAME
-                  Name\Space\FOO
+                  31
             Label : EXPRESSION
-              use
+              21
               Label : CONST
-                const
+                9
               Label : USE
-                as
+                34
                 Label : ALIAS
-                  a2
+                  35
                 Label : NAME
-                  Name\Space\FOO2
+                  27
               Label : USE
-                as
+                34
                 Label : ALIAS
-                  a3
+                  36
                 Label : NAME
-                  Name\Space\FOO3
+                  29
             Label : EXPRESSION
-              use
+              21
               Label : CONST
-                const
+                9
               Label : USE
-                as
+                34
                 Label : ALIAS
-                  a4
+                  37
                 Label : NAME
-                  Name\Space\FOO2
+                  27
               Label : USE
-                as
+                34
                 Label : ALIAS
-                  a5
+                  40
                 Label : NAME
-                  Name
+                  38
               Label : USE
-                as
+                34
                 Label : ALIAS
-                  a6
+                  41
                 Label : NAME
-                  Name\Space\FOO3
+                  29
             Label : EXPRESSION
-              echo
+              16
               Label : ARGUMENT
-                .
+                19
                 Label : CONCAT
-                  FOO
+                  10
                 Label : CONCAT
-                  "\n"
-              Label : NAME
-                echo
+                  20
             Label : EXPRESSION
-              f2
+              42
               Label : ARGUMENT
-                Void
+                14
               Label : NAME
-                f2
+                42
           Label : NAME
-            Void
+            14

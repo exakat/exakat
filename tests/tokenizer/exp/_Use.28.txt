@@ -1,44 +1,45 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          use
+          5
           Label : USE
-            Baz\ClassNonAbsNonGroupedNonAs
+            6
         Label : EXPRESSION
-          use
+          5
           Label : USE
-            Baz\ClassAbsNonGroupedNonAs
+            8
         Label : EXPRESSION
-          use
+          5
           Label : USE
-            as
+            14
             Label : ALIAS
-              A1
+              12
             Label : NAME
-              Baz\ClassNonAbsNonGroupedAs
+              10
         Label : EXPRESSION
-          use
+          5
           Label : USE
-            as
+            14
             Label : ALIAS
-              A2
+              17
             Label : NAME
-              Baz\ClassAbsNonGroupedAs
+              15
         Label : EXPRESSION
-          use
+          5
           Label : GROUPUSE
-            Baz
+            19
           Label : USE
-            ClassNonAbsGroupedNonAs
+            21
           Label : USE
-            as
+            14
             Label : AS
-              A3
+              25
             Label : NAME
-              ClassNonAbsGroupedAs
+              23

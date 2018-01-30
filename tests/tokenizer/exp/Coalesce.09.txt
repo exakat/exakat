@@ -1,153 +1,153 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foo
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              return
+              9
               Label : RETURN
-                ??
+                13
                 Label : LEFT
-                  ->
+                  12
                   Label : MEMBER
-                    names
+                    11
                   Label : OBJECT
-                    $this
+                    10
                 Label : RIGHT
-                  =
+                  14
                   Label : LEFT
-                    ->
+                    12
                     Label : MEMBER
-                      names
+                      11
                     Label : OBJECT
-                      $this
+                      10
                   Label : RIGHT
-                    array_keys
+                    15
                     Label : ARGUMENT
-                      ->
+                      12
                       Label : MEMBER
-                        fields
+                        16
                       Label : OBJECT
-                        $this
+                        10
                     Label : NAME
-                      array_keys
+                      15
             Label : EXPRESSION
-              static
+              17
               Label : STATIC
-                $a
+                18
             Label : EXPRESSION
-              print_r
+              19
               Label : ARGUMENT
-                $a
+                18
               Label : NAME
-                print_r
+                19
             Label : EXPRESSION
-              =
+              14
               Label : LEFT
-                $a
+                18
               Label : RIGHT
-                new
+                20
                 Label : NEW
-                  stdclass
+                  21
                   Label : ARGUMENT
-                    Void
+                    6
                   Label : NAME
-                    stdclass
+                    21
             Label : EXPRESSION
-              =
+              14
               Label : LEFT
-                ->
+                12
                 Label : MEMBER
-                  fields
+                  16
                 Label : OBJECT
-                  $a
+                  18
               Label : RIGHT
-                [
+                22
                 Label : ARGUMENT
-                  1
+                  23
                 Label : ARGUMENT
-                  2
+                  24
                 Label : ARGUMENT
-                  3
+                  25
             Label : EXPRESSION
-              =
+              14
               Label : LEFT
-                ->
+                12
                 Label : MEMBER
-                  names
+                  11
                 Label : OBJECT
-                  $a
+                  18
               Label : RIGHT
-                null
+                26
             Label : EXPRESSION
-              return
+              9
               Label : RETURN
-                ??
+                13
                 Label : LEFT
-                  ->
+                  12
                   Label : MEMBER
-                    names
+                    11
                   Label : OBJECT
-                    $a
+                    18
                 Label : RIGHT
-                  =
+                  14
                   Label : LEFT
-                    ->
+                    12
                     Label : MEMBER
-                      names
+                      11
                     Label : OBJECT
-                      $a
+                      18
                   Label : RIGHT
-                    count
+                    27
                     Label : ARGUMENT
-                      ->
+                      12
                       Label : MEMBER
-                        fields
+                        16
                       Label : OBJECT
-                        $a
+                        18
                     Label : NAME
-                      count
+                      27
           Label : DEFINITION
-            foo
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              foo
+              5
           Label : DEFINITION
-            foo
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              foo
+              5
           Label : NAME
-            foo
+            5
         Label : EXPRESSION
-          var_dump
+          28
           Label : ARGUMENT
-            foo
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              foo
+              5
           Label : NAME
-            var_dump
+            28
         Label : EXPRESSION
-          var_dump
+          28
           Label : ARGUMENT
-            foo
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              foo
+              5
           Label : NAME
-            var_dump
+            28

@@ -1,125 +1,125 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          x
+          5
           Label : ARGUMENT
-            $a
+            8
             Label : TYPEHINT
-              Stdclass
+              6
           Label : ARGUMENT
-            $b
+            9
           Label : ARGUMENT
-            $c
+            10
             Label : TYPEHINT
-              Stdclass
+              6
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              return
+              12
               Label : RETURN
-                1
+                13
           Label : NAME
-            x
+            5
         Label : EXPRESSION
-          x1
+          14
           Label : ARGUMENT
-            $a
+            8
             Label : TYPEHINT
-              namespace\Stdclass
+              15
           Label : ARGUMENT
-            $b
+            9
             Label : TYPEHINT
-              namespace\Stdclass
+              15
           Label : ARGUMENT
-            $c
+            10
             Label : DEFAULT
-              null
+              17
             Label : TYPEHINT
-              namespace\Stdclass
+              15
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              Void
+              18
           Label : NAME
-            x1
+            14
         Label : EXPRESSION
-          x2
+          20
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              return
+              12
               Label : RETURN
-                1
+                13
           Label : ARGUMENT
-            $b
+            9
             Label : TYPEHINT
-              string
+              21
           Label : ARGUMENT
-            $a
+            8
             Label : TYPEHINT
-              namespace\b\Stdclass
+              22
           Label : NAME
-            x2
+            20
         Label : EXPRESSION
-          x3
+          24
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              return
+              12
               Label : RETURN
-                1
+                13
           Label : ARGUMENT
-            $b
+            9
             Label : TYPEHINT
-              string
+              21
           Label : ARGUMENT
-            $a
+            8
             Label : TYPEHINT
-              d\b\Stdclass
+              25
           Label : NAME
-            x3
+            24
         Label : EXPRESSION
-          x4
+          27
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              return
+              12
               Label : RETURN
-                1
+                13
           Label : ARGUMENT
-            $b
+            9
             Label : TYPEHINT
-              string
+              21
           Label : ARGUMENT
-            $a
+            8
             Label : TYPEHINT
-              Stdclass
+              6
           Label : NAME
-            x4
+            27
         Label : EXPRESSION
-          x5
+          28
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              return
+              12
               Label : RETURN
-                1
+                13
           Label : ARGUMENT
-            $b
+            9
             Label : TYPEHINT
-              string
+              21
           Label : ARGUMENT
-            $a
+            8
             Label : TYPEHINT
-              \Stdclass
+              29
           Label : NAME
-            x5
+            28
         Label : EXPRESSION
-          Void
+          18

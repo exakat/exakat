@@ -1,73 +1,73 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          f
+          5
           Label : ARGUMENT
-            2
+            7
           Label : NAME
-            f
-            Label : ARGUMENT
-              1
-            Label : NAME
-              f
-        Label : EXPRESSION
-          ->
-          Label : ARGUMENT
-            1
-          Label : NAME
-            ->
-            Label : METHOD
-              c
-              Label : ARGUMENT
-                Void
-              Label : NAME
-                c
-            Label : OBJECT
-              $c
-        Label : EXPRESSION
-          ->
-          Label : ARGUMENT
-            4
-          Label : NAME
-            ->
-            Label : ARGUMENT
-              3
-            Label : NAME
-              ->
-              Label : METHOD
-                c
-                Label : ARGUMENT
-                  2
-                Label : NAME
-                  c
-              Label : OBJECT
-                $c
-        Label : EXPRESSION
-          ->
-          Label : ARGUMENT
             5
-          Label : NAME
-            ->
             Label : ARGUMENT
-              4
+              6
             Label : NAME
-              ->
+              5
+        Label : EXPRESSION
+          12
+          Label : ARGUMENT
+            6
+          Label : NAME
+            12
+            Label : METHOD
+              9
               Label : ARGUMENT
-                3
+                10
               Label : NAME
-                ->
+                9
+            Label : OBJECT
+              8
+        Label : EXPRESSION
+          12
+          Label : ARGUMENT
+            14
+          Label : NAME
+            12
+            Label : ARGUMENT
+              13
+            Label : NAME
+              12
+              Label : METHOD
+                9
+                Label : ARGUMENT
+                  7
+                Label : NAME
+                  9
+              Label : OBJECT
+                8
+        Label : EXPRESSION
+          12
+          Label : ARGUMENT
+            15
+          Label : NAME
+            12
+            Label : ARGUMENT
+              14
+            Label : NAME
+              12
+              Label : ARGUMENT
+                13
+              Label : NAME
+                12
                 Label : METHOD
-                  c
+                  9
                   Label : ARGUMENT
-                    2
+                    7
                   Label : NAME
-                    c
+                    9
                 Label : OBJECT
-                  $c
+                  8

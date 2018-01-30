@@ -1,93 +1,93 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            10
             Label : LEFT
-              ==
+              7
               Label : LEFT
-                $b
+                6
               Label : RIGHT
-                'B'
+                8
             Label : RIGHT
-              &&
+              10
               Label : LEFT
-                !=
+                15
                 Label : LEFT
-                  ->
+                  14
                   Label : MEMBER
-                    {}
+                    13
                     Label : CODE
-                      $d
+                      12
                   Label : OBJECT
-                    $c
+                    11
                 Label : RIGHT
-                  null
+                  16
               Label : RIGHT
-                &&
+                10
                 Label : LEFT
-                  &
+                  20
                   Label : LEFT
-                    instanceof
+                    17
                     Label : CLASS
-                      C
+                      18
                     Label : VARIABLE
-                      ->
+                      14
                       Label : MEMBER
-                        {}
+                        13
                         Label : CODE
-                          $d
+                          12
                       Label : OBJECT
-                        $c
+                        11
                   Label : RIGHT
-                    >
+                    23
                     Label : LEFT
-                      ->
+                      14
                       Label : MEMBER
-                        D
+                        21
                       Label : OBJECT
-                        ->
+                        14
                         Label : MEMBER
-                          {}
+                          13
                           Label : CODE
-                            $d
+                            12
                         Label : OBJECT
-                          $c
+                          11
                     Label : RIGHT
-                      1
+                      24
                 Label : RIGHT
-                  !
+                  25
                   Label : NOT
-                    ::
+                    33
                     Label : CLASS
-                      E
+                      26
                     Label : METHOD
-                      F
+                      28
                       Label : ARGUMENT
-                        'G'
+                        30
                       Label : ARGUMENT
-                        ->
+                        14
                         Label : MEMBER
-                          {}
+                          13
                           Label : CODE
-                            $d
+                            12
                         Label : OBJECT
-                          $c
+                          11
                       Label : ARGUMENT
-                        $e
+                        32
                       Label : NAME
-                        F
+                        28
           Label : THEN
-            {}
+            13
             Label : EXPRESSION
-              ++
+              35
               Label : POSTPLUSPLUS
-                $f
+                34

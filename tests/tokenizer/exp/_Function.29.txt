@@ -1,31 +1,31 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          a
+          5
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              Void
+              12
           Label : ARGUMENT
-            $x
+            8
             Label : DEFAULT
-              null
+              9
             Label : TYPEHINT
-              StdClass
+              6
           Label : ARGUMENT
-            $b
+            10
             Label : DEFAULT
-              null
+              9
             Label : TYPEHINT
-              StdClass
+              6
           Label : NAME
-            a
+            5
         Label : EXPRESSION
-          Void
+          12

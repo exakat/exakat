@@ -1,87 +1,87 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            $a
+            7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              Void
+              9
           Label : NAME
-            B
+            5
         Label : EXPRESSION
-          Void
+          9
         Label : EXPRESSION
-          B
+          5
         Label : EXPRESSION
-          D
+          11
           Label : NAME
-            D
+            11
           Label : ARGUMENT
-            'E'
+            13
           Label : ARGUMENT
-            array
+            15
             Label : ARGUMENT
-              =>
+              18
               Label : INDEX
-                'F'
+                16
               Label : VALUE
-                $b
+                19
             Label : ARGUMENT
-              =>
+              18
               Label : INDEX
-                'G'
+                20
               Label : VALUE
-                $c
+                22
         Label : EXPRESSION
-          H
+          23
           Label : ARGUMENT
-            'I'
+            25
           Label : NAME
-            H
+            23
         Label : EXPRESSION
-          J
+          27
           Label : NAME
-            J
+            27
           Label : ARGUMENT
-            'K'
+            29
           Label : ARGUMENT
-            'L'
+            31
         Label : EXPRESSION
-          M
+          33
           Label : ARGUMENT
-            'N'
+            35
           Label : NAME
-            M
+            33
         Label : EXPRESSION
-          if
+          37
           Label : CONDITION
-            O
+            38
             Label : ARGUMENT
-              .
+              47
               Label : CONCAT
-                ::
+                46
                 Label : CLASS
-                  P
+                  40
                 Label : METHOD
-                  Q
+                  42
                   Label : ARGUMENT
-                    'R'
+                    44
                   Label : NAME
-                    Q
+                    42
               Label : CONCAT
-                'S'
+                48
             Label : NAME
-              O
+              38
           Label : THEN
-            {}
+            8
             Label : EXPRESSION
-              Void
+              9

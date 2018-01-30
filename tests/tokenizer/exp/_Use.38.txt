@@ -1,181 +1,173 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          trait
+          5
           Label : DEFINITION
-            'a'
+            15
           Label : DEFINITION
-            'A'
+            18
           Label : DEFINITION
-            A
+            6
           Label : DEFINITION
-            A
+            6
           Label : DEFINITION
-            A
+            6
           Label : DEFINITION
-            A
+            6
           Label : METHOD
-            smallTalk
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'a'
-                Label : NAME
-                  echo
+                  15
             Label : NAME
-              smallTalk
+              9
             Label : PUBLIC
-              public
+              8
           Label : METHOD
-            bigTalk
+            16
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'A'
-                Label : NAME
-                  echo
+                  18
             Label : NAME
-              bigTalk
+              16
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            A
+            6
         Label : EXPRESSION
-          trait
+          5
           Label : DEFINITION
-            'b'
+            21
           Label : DEFINITION
-            'B'
+            22
           Label : DEFINITION
-            B
+            19
           Label : DEFINITION
-            B
+            19
           Label : DEFINITION
-            B
+            19
           Label : DEFINITION
-            B
+            19
           Label : DEFINITION
-            B
+            19
           Label : METHOD
-            smallTalk
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'b'
-                Label : NAME
-                  echo
+                  21
             Label : NAME
-              smallTalk
+              9
             Label : PUBLIC
-              public
+              8
           Label : METHOD
-            bigTalk
+            16
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'B'
-                Label : NAME
-                  echo
+                  22
             Label : NAME
-              bigTalk
+              16
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            B
+            19
         Label : EXPRESSION
-          class
+          23
           Label : NAME
-            Talker
+            24
           Label : USE
-            use
+            26
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                insteadof
+                28
                 Label : INSTEADOF
-                  A
+                  6
                 Label : NAME
-                  ::
+                  27
                   Label : CLASS
-                    B
+                    19
                   Label : CONSTANT
-                    smallTalk
+                    9
               Label : EXPRESSION
-                insteadof
+                28
                 Label : INSTEADOF
-                  B
+                  19
                 Label : NAME
-                  ::
+                  27
                   Label : CLASS
-                    A
+                    6
                   Label : CONSTANT
-                    bigTalk
+                    16
             Label : USE
-              A
+              6
             Label : USE
-              B
+              19
         Label : EXPRESSION
-          class
+          23
           Label : NAME
-            Aliased_Talker
+            29
           Label : USE
-            use
+            26
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                insteadof
+                28
                 Label : INSTEADOF
-                  A
+                  6
                 Label : NAME
-                  ::
+                  27
                   Label : CLASS
-                    B
+                    19
                   Label : CONSTANT
-                    smallTalk
+                    9
               Label : EXPRESSION
-                insteadof
+                28
                 Label : INSTEADOF
-                  B
+                  19
                 Label : NAME
-                  ::
+                  27
                   Label : CLASS
-                    A
+                    6
                   Label : CONSTANT
-                    bigTalk
+                    16
               Label : EXPRESSION
-                as
+                31
                 Label : AS
-                  talk
+                  32
                 Label : NAME
-                  ::
+                  27
                   Label : CLASS
-                    B
+                    19
                   Label : CONSTANT
-                    bigTalk
+                    16
             Label : USE
-              A
+              6
             Label : USE
-              B
+              19

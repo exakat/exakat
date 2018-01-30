@@ -1,50 +1,47 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          eval
+          5
           Label : ARGUMENT
-            (
+            6
             Label : CODE
-              $
+              7
               Label : NAME
-                $a
+                8
                 Label : ARGUMENT
-                  'B'
+                  9
                 Label : NAME
-                  $a
-          Label : NAME
-            eval
+                  8
         Label : EXPRESSION
-          C
+          11
           Label : ARGUMENT
-            (
+            6
             Label : CODE
-              $
+              7
               Label : NAME
-                $a
+                8
                 Label : ARGUMENT
-                  'B'
+                  9
                 Label : NAME
-                  $a
+                  8
           Label : NAME
-            C
+            11
         Label : EXPRESSION
-          eval
+          5
           Label : ARGUMENT
-            (
+            6
             Label : CODE
-              $a
-          Label : NAME
-            eval
+              8
         Label : EXPRESSION
-          $b
+          13
           Label : ARGUMENT
-            0
+            14
           Label : NAME
-            $b
+            13

@@ -1,43 +1,43 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          interface
+          5
           Label : NAME
-            i
+            6
         Label : EXPRESSION
-          interface
+          5
           Label : DEFINITION
-            i1
+            7
           Label : DEFINITION
-            i1
+            7
           Label : EXTENDS
-            i2
+            8
           Label : NAME
-            i1
+            7
         Label : EXPRESSION
-          interface
+          5
           Label : DEFINITION
-            i3
+            9
           Label : EXTENDS
-            i2
+            8
           Label : EXTENDS
-            i1
+            7
           Label : NAME
-            i3
+            9
         Label : EXPRESSION
-          interface
+          5
           Label : EXTENDS
-            i2
+            8
           Label : EXTENDS
-            i1
+            7
           Label : EXTENDS
-            i3
+            9
           Label : NAME
-            i4
+            10

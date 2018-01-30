@@ -1,111 +1,111 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : METHOD
-            E
+            23
             Label : ARGUMENT
-              $e
+              25
             Label : BLOCK
-              {}
+              26
               Label : EXPRESSION
-                for
+                27
                 Label : BLOCK
-                  {}
+                  26
                   Label : EXPRESSION
-                    =
+                    12
                     Label : LEFT
-                      [
+                      32
                       Label : INDEX
-                        'G'
+                        37
                       Label : VARIABLE
-                        $h
+                        36
                     Label : RIGHT
-                      H
+                      39
                       Label : ARGUMENT
-                        I
+                        41
                         Label : ARGUMENT
-                          [
+                          32
                           Label : INDEX
-                            'G'
+                            37
                           Label : VARIABLE
-                            $i
+                            43
                         Label : NAME
-                          I
+                          41
                       Label : NAME
-                        H
+                        39
                 Label : FINAL
-                  ;
+                  3
                   Label : EXPRESSION
-                    <
+                    30
                     Label : LEFT
-                      $f
+                      28
                     Label : RIGHT
-                      [
+                      32
                       Label : INDEX
-                        'F'
+                        33
                       Label : VARIABLE
-                        $g
+                        31
                 Label : INCREMENT
-                  ;
+                  3
                   Label : EXPRESSION
-                    ++
+                    35
                     Label : POSTPLUSPLUS
-                      $f
+                      28
                 Label : INIT
-                  ;
+                  3
                   Label : EXPRESSION
-                    =
+                    12
                     Label : LEFT
-                      $f
+                      28
                     Label : RIGHT
-                      0
+                      29
               Label : EXPRESSION
-                return
+                44
                 Label : RETURN
-                  $j
+                  45
             Label : NAME
-              E
+              23
           Label : NAME
-            B
+            6
           Label : PPP
-            var
+            8
             Label : PPP
-              =
+              12
               Label : LEFT
-                $b
+                11
               Label : RIGHT
-                array
+                13
                 Label : ARGUMENT
-                  Void
+                  14
             Label : PPP
-              $a
+              9
             Label : VAR
-              var
+              8
           Label : PPP
-            var
+            8
             Label : PPP
-              =
+              12
               Label : LEFT
-                $c
+                16
               Label : RIGHT
-                'C'
+                18
             Label : VAR
-              var
+              8
           Label : PPP
-            var
+            8
             Label : PPP
-              =
+              12
               Label : LEFT
-                $d
+                20
               Label : RIGHT
-                D
+                22
             Label : VAR
-              var
+              8

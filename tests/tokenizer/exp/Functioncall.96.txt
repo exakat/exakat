@@ -1,65 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : METHOD
-            foo
+            6
             Label : ARGUMENT
-              Void
+              7
             Label : BLOCK
-              {}
+              9
               Label : EXPRESSION
-                call_user_func
+                10
                 Label : ARGUMENT
-                  function
+                  11
                   Label : ARGUMENT
-                    Void
+                    7
                   Label : BLOCK
-                    {}
+                    9
                     Label : EXPRESSION
-                      ob_start
+                      12
                       Label : ARGUMENT
-                        Void
+                        7
                       Label : NAME
-                        ob_start
+                        12
                     Label : EXPRESSION
-                      A
+                      13
                     Label : EXPRESSION
-                      <?=
+                      15
                       Label : ARGUMENT
-                        $c
+                        16
                       Label : NAME
-                        <?=
+                        15
                     Label : EXPRESSION
-                      Void
+                      7
                     Label : EXPRESSION
-                      B
+                      17
                     Label : EXPRESSION
-                      <?=
+                      15
                       Label : ARGUMENT
-                        $d
+                        19
                       Label : NAME
-                        <?=
+                        15
                     Label : EXPRESSION
-                      Void
+                      7
                     Label : EXPRESSION
-                       {
-			}
-		}
-	
+                      20
                     Label : EXPRESSION
-                      ++
+                      22
                       Label : POSTPLUSPLUS
-                        $a
+                        21
                 Label : NAME
-                  call_user_func
+                  10
             Label : NAME
-              foo
+              6
           Label : NAME
-            foo
+            6

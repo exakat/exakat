@@ -1,23 +1,23 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            {}
+            10
             Label : EXPRESSION
-              Void
+              11
           Label : SOURCE
-            [
+            7
             Label : INDEX
-              'a'
+              8
             Label : VARIABLE
-              $x
+              6
           Label : VALUE
-            $y
+            9

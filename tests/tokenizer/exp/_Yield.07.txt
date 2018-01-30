@@ -1,63 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              yield
+              12
               Label : YIELD
-                yield
+                12
                 Label : YIELD
-                  Void
+                  7
             Label : EXPRESSION
-              while
+              13
               Label : BLOCK
-                ;
+                3
                 Label : EXPRESSION
-                  Void
+                  7
               Label : CONDITION
-                yield
+                12
                 Label : YIELD
-                  !==
+                  14
                   Label : LEFT
-                    Void
+                    7
                   Label : RIGHT
-                    null
+                    15
           Label : DEFINITION
-            B
+            5
             Label : ARGUMENT
-              Void
+              7
             Label : NAME
-              B
+              5
           Label : NAME
-            B
+            5
           Label : RETURNTYPE
-            Generator
+            9
         Label : EXPRESSION
-          foreach
+          16
           Label : BLOCK
-            {}
+            11
             Label : EXPRESSION
-              var_dump
+              18
               Label : ARGUMENT
-                $c
+                17
               Label : NAME
-                var_dump
+                18
           Label : SOURCE
-            B
+            5
             Label : ARGUMENT
-              Void
+              7
             Label : NAME
-              B
+              5
           Label : VALUE
-            $c
+            17

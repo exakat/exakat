@@ -1,75 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            ?
+            14
             Label : CONDITION
-              (
+              7
               Label : CODE
-                ||
+                11
                 Label : LEFT
-                  !
+                  8
                   Label : NOT
-                    isset
+                    9
                     Label : ARGUMENT
-                      $b
-                    Label : NAME
-                      isset
+                      10
                 Label : RIGHT
-                  empty
+                  12
                   Label : ARGUMENT
-                    $c
-                  Label : NAME
-                    empty
+                    13
             Label : ELSE
-              $d
+              17
             Label : THEN
-              'B'
+              15
         Label : EXPRESSION
-          C
+          18
           Label : ARGUMENT
-            .
+            22
             Label : CONCAT
-              'D'
+              20
             Label : CONCAT
-              $e
+              23
           Label : NAME
-            C
+            18
         Label : EXPRESSION
-          print
+          30
           Label : ARGUMENT
-            ?
+            14
             Label : CONDITION
-              (
+              7
               Label : CODE
-                &&
+                25
                 Label : LEFT
-                  isset
+                  9
                   Label : ARGUMENT
-                    $f
-                  Label : NAME
-                    isset
+                    24
                 Label : RIGHT
-                  !
+                  8
                   Label : NOT
-                    empty
+                    12
                     Label : ARGUMENT
-                      $g
-                    Label : NAME
-                      empty
+                      26
             Label : ELSE
-              'E'
+              28
             Label : THEN
-              $h
-          Label : NAME
-            print
+              27

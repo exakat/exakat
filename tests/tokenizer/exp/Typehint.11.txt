@@ -1,55 +1,55 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          a
+          5
           Label : ARGUMENT
-            $b
+            6
           Label : ARGUMENT
-            $c
+            9
             Label : DEFAULT
-              null
+              10
             Label : TYPEHINT
-              \A
+              7
           Label : ARGUMENT
-            $d
+            13
             Label : TYPEHINT
-              \C\D
+              11
           Label : BLOCK
-            {}
+            14
             Label : EXPRESSION
-              ++
+              16
               Label : POSTPLUSPLUS
-                $x
+                15
           Label : NAME
-            a
+            5
         Label : EXPRESSION
-          a2
+          17
           Label : ARGUMENT
-            $b
+            6
           Label : ARGUMENT
-            $c
+            9
             Label : DEFAULT
-              null
+              10
             Label : TYPEHINT
-              A
+              18
           Label : ARGUMENT
-            $d
+            13
             Label : TYPEHINT
-              \C\D
+              11
           Label : BLOCK
-            {}
+            14
             Label : EXPRESSION
-              ++
+              16
               Label : POSTPLUSPLUS
-                $x
+                15
           Label : NAME
-            a2
+            17
         Label : EXPRESSION
-          Void
+          19

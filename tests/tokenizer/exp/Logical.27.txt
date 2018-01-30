@@ -1,23 +1,23 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          &&
+          7
           Label : LEFT
-            !
+            5
             Label : NOT
-              $a
+              6
           Label : RIGHT
-            --
+            11
             Label : POSTPLUSPLUS
-              [
+              9
               Label : INDEX
-                'c'
+                10
               Label : VARIABLE
-                $b
+                8

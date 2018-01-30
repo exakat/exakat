@@ -1,107 +1,107 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            function
+            7
             Label : ARGUMENT
-              Void
+              8
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                Void
+                8
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $b
+            11
           Label : RIGHT
-            function
+            7
             Label : ARGUMENT
-              Void
+              8
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                Void
+                8
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            function
+            7
             Label : ARGUMENT
-              $a
+              5
               Label : DEFAULT
-                3
+                12
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                Void
+                8
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $b
+            11
           Label : RIGHT
-            function
+            7
             Label : ARGUMENT
-              $b
+              11
               Label : DEFAULT
-                2
+                13
             Label : BLOCK
-              {}
+              10
               Label : EXPRESSION
-                Void
+                8
         Label : EXPRESSION
-          b1
+          14
           Label : ARGUMENT
-            Void
+            8
           Label : BLOCK
-            {}
+            10
             Label : EXPRESSION
-              Void
+              8
           Label : NAME
-            b1
+            14
         Label : EXPRESSION
-          b2
+          15
           Label : ARGUMENT
-            Void
+            8
           Label : BLOCK
-            {}
+            10
             Label : EXPRESSION
-              Void
+              8
           Label : NAME
-            b2
+            15
         Label : EXPRESSION
-          b3
+          16
           Label : ARGUMENT
-            $a
+            5
             Label : DEFAULT
-              3
+              12
           Label : BLOCK
-            {}
+            10
             Label : EXPRESSION
-              Void
+              8
           Label : NAME
-            b3
+            16
         Label : EXPRESSION
-          b4
+          17
           Label : ARGUMENT
-            $b
+            11
             Label : DEFAULT
-              2
+              13
           Label : BLOCK
-            {}
+            10
             Label : EXPRESSION
-              Void
+              8
           Label : NAME
-            b4
+            17
         Label : EXPRESSION
-          Void
+          8

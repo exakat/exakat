@@ -70,12 +70,14 @@ GREMLIN
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->atomIs('Concatenation')
+             ->raw('not(where( __.out("CONCAT").not(has("noDelimiter")).not( hasLabel("Functioncall").has("fullnspath", "\\\\dirname") ) ) )')
              ->raw(<<<GREMLIN
 sideEffect{ 
     including = []; 
+    ignore = false;
     it.get().vertices(OUT, "CONCAT")
       .sort{it.value("rank")}
-      .each{ 
+      .each{
             if (it.label() == "Magicconstant") {
                 including.add(it.value("noDelimiter"));
             } else if (it.label() == "Identifier") {
@@ -84,16 +86,30 @@ sideEffect{
                 including.add(it.value("noDelimiter"));
             } else if (it.label() == "Functioncall" && 
                        it.value("fullnspath") == "\\\\dirname") {
-                dirname = it.vertices(OUT, "ARGUMENT").next().value("noDelimiter");
-                dirs = dirname.tokenize("/").dropRight(1);
+                loop = 1;
+                dirname = it.vertices(OUT, "ARGUMENT").next();
+                
+                while( dirname.label() == 'Functioncall') {
+                    dirname = dirname.vertices(OUT, "ARGUMENT").next();
+                    ++loop;
+                };
+                if ('noDelimiter' in dirname.keys()) {
+                    dirs = dirname.value("noDelimiter").split("/").dropRight(loop);
 
-                including.add(dirs.join(""));
+                    if (dirs.size() > 0) {
+                        including.add(dirs.join("/"));
+                    } 
+                } else {
+                    // This just ignore the path
+                    ignore = true;
+                }
             } else {
                 including.add(it.value("noDelimiter"));
             }
         }; 
     including = including.join(""); 
 }
+.filter{ !ignore ; }
 GREMLIN
 )
              ->goToFile()
@@ -115,8 +131,11 @@ filter{
         including = path + including;
     }
     
-    including = including.replaceAll("/\\\./", "/");
-    including = including.replaceAll("/[^/]+/\\\.\\\./", "/");
+    including2 = including.replaceAll('/\\\./', '/').replaceAll('/[^/]+/\\\.\\\./', '/');
+    while( including2 != including) {
+        including = including2;
+        including2 = including.replaceAll('/\\\./', '/').replaceAll('/[^/]+/\\\.\\\./', '/');
+    }
 
     (including.toLowerCase() in inclusions_lc) && !(including in inclusions);
 }

@@ -1,35 +1,35 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            sprintf
+            7
             Label : ARGUMENT
-              $b
+              8
             Label : ARGUMENT
-              str_replace
+              9
               Label : ARGUMENT
-                C
+                10
               Label : ARGUMENT
-                'd'
+                12
               Label : ARGUMENT
-                __FILE__
+                13
               Label : NAME
-                str_replace
+                9
             Label : ARGUMENT
-              -
+              17
               Label : LEFT
-                __LINE__
+                15
               Label : RIGHT
-                1
+                18
             Label : NAME
-              sprintf
+              7

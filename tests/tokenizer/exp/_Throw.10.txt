@@ -1,32 +1,33 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          throw
+          5
           Label : THROW
-            ->
+            14
             Label : METHOD
-              b
+              10
               Label : ARGUMENT
-                get_class
+                11
                 Label : ARGUMENT
-                  ->
+                  14
                   Label : MEMBER
-                    c
+                    13
                   Label : OBJECT
-                    $this
+                    12
                 Label : NAME
-                  get_class
+                  11
               Label : NAME
-                b
+                10
             Label : OBJECT
-              (
+              6
               Label : CODE
-                new
+                7
                 Label : NEW
-                  A
+                  8

@@ -1,63 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              if
+              10
               Label : CONDITION
-                ->
+                14
                 Label : METHOD
-                  C
+                  12
                   Label : ARGUMENT
-                    Void
+                    7
                   Label : NAME
-                    C
+                    12
                 Label : OBJECT
-                  $a
+                  11
               Label : THEN
-                {}
+                9
                 Label : EXPRESSION
-                  return
+                  15
                   Label : RETURN
-                    Void
+                    7
             Label : EXPRESSION
-              while
+              16
               Label : BLOCK
-                {}
+                9
                 Label : EXPRESSION
-                  E
+                  21
                   Label : ARGUMENT
-                    ->
+                    14
                     Label : MEMBER
-                      F
+                      24
                     Label : OBJECT
-                      $c
+                      23
                   Label : NAME
-                    E
+                    21
               Label : CONDITION
-                !
+                17
                 Label : NOT
-                  ->
+                  14
                   Label : METHOD
-                    D
+                    19
                     Label : ARGUMENT
-                      Void
+                      7
                     Label : NAME
-                      D
+                      19
                   Label : OBJECT
-                    $b
+                    18
           Label : NAME
-            B
+            5
         Label : EXPRESSION
-          Void
+          7

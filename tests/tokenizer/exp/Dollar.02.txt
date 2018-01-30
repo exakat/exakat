@@ -1,89 +1,83 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            [
+            7
             Label : INDEX
-              ::
+              12
               Label : CLASS
-                E
+                8
               Label : CONSTANT
-                BR
+                10
             Label : VARIABLE
-              $s
+              6
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              echo
+              13
               Label : ARGUMENT
-                $C
-              Label : NAME
-                echo
+                14
         Label : EXPRESSION
-          Void
+          16
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            [
+            7
             Label : INDEX
-              ::
+              12
               Label : CLASS
-                E
+                8
               Label : CONSTANT
-                BR
+                10
             Label : VARIABLE
-              $
+              18
               Label : NAME
-                ::
+                12
                 Label : CLASS
-                  C
+                  19
                 Label : CONSTANT
-                  D
+                  21
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              echo
+              13
               Label : ARGUMENT
-                $C
-              Label : NAME
-                echo
+                14
         Label : EXPRESSION
-          Void
+          16
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            [
+            7
             Label : INDEX
-              ::
+              12
               Label : CLASS
-                E
+                8
               Label : CONSTANT
-                BR
+                10
             Label : VARIABLE
-              $
+              18
               Label : NAME
-                ::
+                12
                 Label : CLASS
-                  C
+                  19
                 Label : CONSTANT
-                  D
+                  21
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              echo
+              13
               Label : ARGUMENT
-                $C
-              Label : NAME
-                echo
+                14
         Label : EXPRESSION
-          Void
+          16
     Label : EXPRESSION
-      
-
+      23

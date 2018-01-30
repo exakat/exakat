@@ -1,139 +1,139 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a
+            5
           Label : RIGHT
-            array
+            7
             Label : ARGUMENT
-              =>
+              10
               Label : INDEX
-                'B'
+                8
               Label : VALUE
-                ::
+                21
                 Label : CLASS
-                  C
+                  11
                 Label : METHOD
-                  D
+                  13
                   Label : ARGUMENT
-                    'E'
+                    15
                   Label : ARGUMENT
-                    ::
+                    21
                     Label : CLASS
-                      F
+                      17
                     Label : CONSTANT
-                      G
+                      19
                   Label : ARGUMENT
-                    H
+                    22
                   Label : NAME
-                    D
+                    13
             Label : ARGUMENT
-              =>
+              10
               Label : INDEX
-                'I'
+                24
               Label : VALUE
-                ?
+                31
                 Label : CONDITION
-                  isset
+                  26
                   Label : ARGUMENT
-                    [
+                    28
                     Label : INDEX
-                      'J'
+                      29
                     Label : VARIABLE
-                      $b
-                  Label : NAME
-                    isset
+                      27
                 Label : ELSE
-                  L
+                  34
                 Label : THEN
-                  K
+                  32
             Label : ARGUMENT
-              =>
+              10
               Label : INDEX
-                'M'
+                36
               Label : VALUE
-                ::
+                21
                 Label : CLASS
-                  N
+                  38
                 Label : METHOD
-                  O
+                  40
                   Label : NAME
-                    O
+                    40
                   Label : ARGUMENT
-                    'P'
+                    42
                   Label : ARGUMENT
-                    ::
+                    21
                     Label : CLASS
-                      Q
+                      44
                     Label : CONSTANT
-                      R
+                      46
             Label : ARGUMENT
-              =>
+              10
               Label : INDEX
-                'S'
+                48
               Label : VALUE
-                T
+                50
                 Label : ARGUMENT
-                  ::
+                  21
                   Label : CLASS
-                    U
+                    52
                   Label : METHOD
-                    V
+                    54
                     Label : NAME
-                      V
+                      54
                     Label : ARGUMENT
-                      'W'
+                      56
                     Label : ARGUMENT
-                      ::
+                      21
                       Label : CLASS
-                        X
+                        58
                       Label : CONSTANT
-                        Y
+                        60
                 Label : NAME
-                  T
+                  50
             Label : ARGUMENT
-              =>
+              10
               Label : INDEX
-                'Z'
+                62
               Label : VALUE
-                ?
+                31
                 Label : CONDITION
-                  AA
+                  64
                   Label : ARGUMENT
-                    [
+                    28
                     Label : INDEX
-                      'AB'
+                      67
                     Label : VARIABLE
-                      $c
+                      66
                   Label : NAME
-                    AA
+                    64
                 Label : ELSE
-                  [
+                  28
                   Label : INDEX
-                    'AF'
+                    78
                   Label : VARIABLE
-                    $e
+                    77
                 Label : THEN
-                  AC
+                  69
                   Label : NAME
-                    AC
+                    69
                   Label : ARGUMENT
-                    0
+                    71
                   Label : ARGUMENT
-                    AD
+                    72
                     Label : ARGUMENT
-                      [
+                      28
                       Label : INDEX
-                        'AE'
+                        75
                       Label : VARIABLE
-                        $d
+                        74
                     Label : NAME
-                      AD
+                      72
+            Label : ARGUMENT
+              80

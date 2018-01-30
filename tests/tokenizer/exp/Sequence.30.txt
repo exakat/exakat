@@ -1,61 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          a
+          5
           Label : ARGUMENT
-            $b
+            6
           Label : BLOCK
-            {}
+            7
             Label : EXPRESSION
-              if
+              8
               Label : CONDITION
-                !
+                9
                 Label : NOT
-                  $c
+                  10
               Label : THEN
-                {}
+                7
                 Label : EXPRESSION
-                  return
+                  11
                   Label : RETURN
-                    false
+                    12
             Label : EXPRESSION
-              return
+              11
               Label : RETURN
-                ->
+                15
                 Label : METHOD
-                  f
+                  16
                   Label : ARGUMENT
-                    .
+                    18
                     Label : CONCAT
-                      "a"
+                      17
                     Label : CONCAT
-                      b
+                      19
                     Label : CONCAT
-                      "
+                      20
                       Label : CONCAT
-                        c
+                        21
                       Label : CONCAT
-                        $d
+                        13
                       Label : CONCAT
-                        '
+                        22
                   Label : NAME
-                    f
+                    16
                 Label : OBJECT
-                  ->
+                  15
                   Label : MEMBER
-                    e
+                    14
                   Label : OBJECT
-                    $d
+                    13
           Label : DEFINITION
-            "a"
+            17
           Label : NAME
-            a
+            5
         Label : EXPRESSION
-          Void
+          23

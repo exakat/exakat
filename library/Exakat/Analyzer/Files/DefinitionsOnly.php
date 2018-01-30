@@ -26,24 +26,24 @@ namespace Exakat\Analyzer\Files;
 use Exakat\Analyzer\Analyzer;
 
 class DefinitionsOnly extends Analyzer {
-    public static $definitions        = array('Class', 
-                                              'Const', 
-                                              'Declare', 
+    public static $definitions        = array('Class',
+                                              'Const',
+                                              'Declare',
                                               'Defineconstant',
                                               'Function',
-                                              'Global', 
+                                              'Global',
                                               'Include',
-                                              'Interface', 
-                                              'Usenamespace', 
-                                              'Void', 
-                                              'Trait', 
+                                              'Interface',
+                                              'Usenamespace',
+                                              'Void',
+                                              'Trait',
                                               'Usenamespace',
                                               );
     //'Namespace',  is excluded
-    public static $definitionsFunctions = array('\\\\ini_set', 
+    public static $definitionsFunctions = array('\\\\ini_set',
                                                 '\\\\error_reporting',
-                                                '\\\\register_shutdown_function', 
-                                                '\\\\set_session_handler', 
+                                                '\\\\register_shutdown_function',
+                                                '\\\\set_session_handler',
                                                 '\\\\set_error_handler',
                                                 '\\\\spl_autoload_register',
                                                 );

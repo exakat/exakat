@@ -1,87 +1,87 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          x
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              for
+              9
               Label : BLOCK
-                {}
+                8
                 Label : EXPRESSION
-                  yield
+                  17
                   Label : YIELD
-                    =>
+                    22
                     Label : INDEX
-                      .
+                      19
                       Label : CONCAT
-                        "g"
+                        18
                       Label : CONCAT
-                        ->
+                        12
                         Label : METHOD
-                          i
+                          21
                           Label : ARGUMENT
-                            Void
+                            6
                           Label : NAME
-                            i
+                            21
                         Label : OBJECT
-                          $h
+                          20
                     Label : VALUE
-                      ->
+                      12
                       Label : METHOD
-                        k
+                        24
                         Label : ARGUMENT
-                          Void
+                          6
                         Label : NAME
-                          k
+                          24
                       Label : OBJECT
-                        $j
+                        23
               Label : FINAL
-                ;
+                3
                 Label : EXPRESSION
-                  ->
+                  12
                   Label : METHOD
-                    d
+                    14
                     Label : ARGUMENT
-                      Void
+                      6
                     Label : NAME
-                      d
+                      14
                   Label : OBJECT
-                    $c
+                    13
               Label : INCREMENT
-                ;
+                3
                 Label : EXPRESSION
-                  ->
+                  12
                   Label : METHOD
-                    f
+                    16
                     Label : ARGUMENT
-                      Void
+                      6
                     Label : NAME
-                      f
+                      16
                   Label : OBJECT
-                    $e
+                    15
               Label : INIT
-                ;
+                3
                 Label : EXPRESSION
-                  ->
+                  12
                   Label : METHOD
-                    b
+                    11
                     Label : ARGUMENT
-                      Void
+                      6
                     Label : NAME
-                      b
+                      11
                   Label : OBJECT
-                    $a
+                    10
           Label : NAME
-            x
+            5
         Label : EXPRESSION
-          Void
+          6

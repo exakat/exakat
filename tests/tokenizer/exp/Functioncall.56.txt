@@ -1,131 +1,119 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            *
+            11
             Label : LEFT
-              (
+              6
               Label : CODE
-                -
+                8
                 Label : LEFT
-                  $a
+                  7
                 Label : RIGHT
-                  -
+                  8
                   Label : LEFT
-                    4
+                    9
                   Label : RIGHT
-                    $b
+                    10
             Label : RIGHT
-              $c
-          Label : NAME
-            echo
+              12
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            -
+            8
             Label : LEFT
-              (
+              6
               Label : CODE
-                -
+                8
                 Label : LEFT
-                  $a
+                  7
                 Label : RIGHT
-                  -
+                  8
                   Label : LEFT
-                    4
+                    9
                   Label : RIGHT
-                    $b
+                    10
             Label : RIGHT
-              $c
-          Label : NAME
-            echo
+              12
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            **
+            13
             Label : LEFT
-              (
+              6
               Label : CODE
-                -
+                8
                 Label : LEFT
-                  $a
+                  7
                 Label : RIGHT
-                  -
+                  8
                   Label : LEFT
-                    4
+                    9
                   Label : RIGHT
-                    $b
+                    10
             Label : RIGHT
-              $c
-          Label : NAME
-            echo
+              12
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <<
+            14
             Label : LEFT
-              (
+              6
               Label : CODE
-                -
+                8
                 Label : LEFT
-                  $a
+                  7
                 Label : RIGHT
-                  -
+                  8
                   Label : LEFT
-                    4
+                    9
                   Label : RIGHT
-                    $b
+                    10
             Label : RIGHT
-              $c
-          Label : NAME
-            echo
+              12
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            &&
+            15
             Label : LEFT
-              (
+              6
               Label : CODE
-                -
+                8
                 Label : LEFT
-                  $a
+                  7
                 Label : RIGHT
-                  -
+                  8
                   Label : LEFT
-                    4
+                    9
                   Label : RIGHT
-                    $b
+                    10
             Label : RIGHT
-              $c
-          Label : NAME
-            echo
+              12
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            ?
+            16
             Label : CONDITION
-              (
+              6
               Label : CODE
-                -
+                8
                 Label : LEFT
-                  $a
+                  7
                 Label : RIGHT
-                  -
+                  8
                   Label : LEFT
-                    4
+                    9
                   Label : RIGHT
-                    $b
+                    10
             Label : ELSE
-              2
+              18
             Label : THEN
-              1
-          Label : NAME
-            echo
+              17

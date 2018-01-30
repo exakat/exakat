@@ -1,62 +1,63 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
-          Label : METHOD
-            __clone
+          5
+          Label : MAGICMETHOD
+            9
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              __clone
+              9
             Label : PRIVATE
-              private
+              7
           Label : NAME
-            x
+            6
         Label : EXPRESSION
-          class
-          Label : METHOD
-            __clone
+          5
+          Label : MAGICMETHOD
+            9
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              __clone
+              9
             Label : PUBLIC
-              public
+              14
           Label : NAME
-            x2
+            13
         Label : EXPRESSION
-          class
-          Label : METHOD
-            __clone
+          5
+          Label : MAGICMETHOD
+            9
             Label : ARGUMENT
-              Void
+              10
             Label : BLOCK
-              {}
+              12
               Label : EXPRESSION
-                Void
+                10
             Label : FINAL
-              final
+              8
             Label : NAME
-              __clone
+              9
             Label : PROTECTED
-              protected
+              16
           Label : NAME
-            x3
+            15

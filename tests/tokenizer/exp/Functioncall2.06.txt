@@ -1,121 +1,113 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          g
+          5
           Label : ARGUMENT
-            f
+            6
             Label : ARGUMENT
-              print
+              8
               Label : ARGUMENT
-                $e
-              Label : NAME
-                print
+                7
             Label : ARGUMENT
-              $f
+              9
             Label : ARGUMENT
-              ltrim
+              10
               Label : ARGUMENT
-                $r
+                11
               Label : NAME
-                ltrim
+                10
             Label : NAME
-              f
+              6
           Label : NAME
-            g
+            5
         Label : EXPRESSION
-          h
+          12
           Label : ARGUMENT
-            g
+            5
             Label : ARGUMENT
-              f
+              6
               Label : ARGUMENT
-                print
+                8
                 Label : ARGUMENT
-                  $e
-                Label : NAME
-                  print
+                  7
               Label : ARGUMENT
-                $f
+                9
               Label : ARGUMENT
-                ltrim
+                10
                 Label : ARGUMENT
-                  $r
+                  11
                 Label : NAME
-                  ltrim
+                  10
               Label : NAME
-                f
+                6
             Label : NAME
-              g
+              5
           Label : NAME
-            h
+            12
         Label : EXPRESSION
-          h
+          12
           Label : ARGUMENT
-            i
+            13
             Label : ARGUMENT
-              g
+              5
               Label : ARGUMENT
-                f
+                6
                 Label : ARGUMENT
-                  $f
+                  9
                 Label : ARGUMENT
-                  print
+                  8
                   Label : ARGUMENT
-                    $e
+                    7
+                Label : ARGUMENT
+                  10
+                  Label : ARGUMENT
+                    11
                   Label : NAME
-                    print
-                Label : ARGUMENT
-                  ltrim
-                  Label : ARGUMENT
-                    $r
-                  Label : NAME
-                    ltrim
+                    10
                 Label : NAME
-                  f
+                  6
               Label : NAME
-                g
+                5
             Label : NAME
-              i
+              13
           Label : NAME
-            h
+            12
         Label : EXPRESSION
-          h
+          12
           Label : ARGUMENT
-            i
+            13
             Label : ARGUMENT
-              j
+              14
               Label : ARGUMENT
-                g
+                5
                 Label : ARGUMENT
-                  f
+                  6
                   Label : ARGUMENT
-                    ltrim
+                    10
                     Label : ARGUMENT
-                      $r
+                      11
                     Label : NAME
-                      ltrim
+                      10
                   Label : ARGUMENT
-                    print
+                    8
                     Label : ARGUMENT
-                      $e
-                    Label : NAME
-                      print
+                      7
                   Label : ARGUMENT
-                    $f
+                    9
                   Label : NAME
-                    f
+                    6
                 Label : NAME
-                  g
+                  5
               Label : NAME
-                j
+                14
             Label : NAME
-              i
+              13
           Label : NAME
-            h
+            12

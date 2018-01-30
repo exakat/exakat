@@ -1,33 +1,33 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : METHOD
-            C
+            12
             Label : ARGUMENT
-              Void
+              14
             Label : BLOCK
-              {}
+              16
               Label : EXPRESSION
-                return
+                17
                 Label : RETURN
-                  $c
+                  18
             Label : NAME
-              C
+              12
           Label : NAME
-            B
+            6
           Label : PPP
-            protected
+            8
             Label : PPP
-              $b
+              11
             Label : PPP
-              $a
+              9
             Label : PROTECTED
-              protected
+              8

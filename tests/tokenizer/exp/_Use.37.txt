@@ -1,69 +1,67 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          trait
+          5
           Label : DEFINITION
-            HelloWorld
+            6
           Label : DEFINITION
-            HelloWorld
+            6
           Label : METHOD
-            sayHello
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'Hello World!'
-                Label : NAME
-                  echo
+                  15
             Label : NAME
-              sayHello
+              9
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            HelloWorld
+            6
         Label : EXPRESSION
-          class
+          17
           Label : NAME
-            MyClass1
+            18
           Label : USE
-            use
+            20
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                as
+                21
                 Label : AS
-                  Void
+                  11
                 Label : NAME
-                  sayHello
+                  9
                 Label : PROTECTED
-                  protected
+                  22
             Label : USE
-              HelloWorld
+              6
         Label : EXPRESSION
-          class
+          17
           Label : NAME
-            MyClass2
+            23
           Label : USE
-            use
+            20
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                as
+                21
                 Label : AS
-                  myPrivateHello
+                  26
                 Label : NAME
-                  sayHello
+                  9
                 Label : PRIVATE
-                  private
+                  25
             Label : USE
-              HelloWorld
+              6

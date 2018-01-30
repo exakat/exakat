@@ -1,61 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            $c
+            6
           Label : ELSE
-            elseif
+            22
             Label : CONDITION
-              $d
+              23
             Label : THEN
-              {}
+              7
               Label : EXPRESSION
-                =
+                9
                 Label : LEFT
-                  $f
+                  8
                 Label : RIGHT
-                  5
+                  24
           Label : THEN
-            {}
+            7
             Label : EXPRESSION
-              =
+              9
               Label : LEFT
-                $f
+                8
               Label : RIGHT
-                4
+                10
             Label : EXPRESSION
-              =
+              9
               Label : LEFT
-                $e
+                11
               Label : RIGHT
-                3
+                12
             Label : EXPRESSION
-              switch
+              13
               Label : CASES
-                 /**/ 
+                14
                 Label : EXPRESSION
-                  case 'a' :  /**/  
+                  15
                   Label : CASE
-                    'a'
+                    16
                   Label : CODE
-                    ;
+                    3
                     Label : EXPRESSION
-                      =
+                      9
                       Label : LEFT
-                        $x
+                        17
                       Label : RIGHT
-                        1
+                        18
                     Label : EXPRESSION
-                      break
+                      19
                       Label : BREAK
-                        Void
+                        20
               Label : NAME
-                $c
+                6

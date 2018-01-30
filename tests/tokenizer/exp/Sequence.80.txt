@@ -1,69 +1,69 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !
+            6
             Label : NOT
-              B
+              7
               Label : ARGUMENT
-                'C'
+                9
               Label : NAME
-                B
+                7
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              if
+              5
               Label : CONDITION
-                !
+                6
                 Label : NOT
-                  $a
+                  11
               Label : THEN
-                {}
+                12
                 Label : EXPRESSION
-                  D
+                  13
                   Label : ARGUMENT
-                    $a
+                    11
                   Label : ARGUMENT
-                    $b
+                    15
                   Label : ARGUMENT
-                    $c
+                    16
                     Label : DEFAULT
-                      0
+                      17
                   Label : ARGUMENT
-                    $d
+                    18
                     Label : DEFAULT
-                      E
+                      19
                   Label : BLOCK
-                    {}
+                    12
                     Label : EXPRESSION
-                      Void
+                      21
                   Label : NAME
-                    D
+                    13
             Label : EXPRESSION
-              F
+              23
               Label : ARGUMENT
-                $e
+                25
               Label : ARGUMENT
-                $f
+                26
               Label : ARGUMENT
-                $g
+                27
               Label : ARGUMENT
-                $h
+                28
                 Label : DEFAULT
-                  'G'
+                  29
               Label : BLOCK
-                {}
+                12
                 Label : EXPRESSION
-                  Void
+                  21
               Label : NAME
-                F
+                23
         Label : EXPRESSION
-          Void
+          21

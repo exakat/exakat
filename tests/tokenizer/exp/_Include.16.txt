@@ -1,21 +1,19 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          require
+          8
           Label : ARGUMENT
-            fct_lien_page_custom
+            5
             Label : NAME
-              fct_lien_page_custom
+              5
             Label : ARGUMENT
-              "fonctions/sysout_agent.php"
+              6
             Label : ARGUMENT
-              "abs"
-          Label : NAME
-            require
+              7

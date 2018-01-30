@@ -1,34 +1,31 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          include
+          7
           Label : ARGUMENT
-            (
+            5
             Label : CODE
-              'a.php'
-          Label : NAME
-            include
+              6
         Label : EXPRESSION
-          A
+          8
         Label : EXPRESSION
-          include
+          7
           Label : ARGUMENT
-            (
+            5
             Label : CODE
-              'b.php'
-          Label : NAME
-            include
+              10
         Label : EXPRESSION
-          B
+          11
         Label : EXPRESSION
-          b
+          12
           Label : ARGUMENT
-            'c'
+            13
           Label : NAME
-            b
+            12

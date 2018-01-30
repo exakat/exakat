@@ -1,121 +1,117 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : DEFINITION
-            static
+            6
           Label : DEFINITION
-            B
+            8
           Label : DEFINITION
-            B
+            6
           Label : METHOD
-            D
+            13
             Label : ARGUMENT
-              Void
+              15
             Label : BLOCK
-              {}
+              17
               Label : EXPRESSION
-                =
+                10
                 Label : LEFT
-                  $b
+                  9
                 Label : RIGHT
-                  'E'
+                  18
               Label : EXPRESSION
-                =
+                10
                 Label : LEFT
-                  $c
+                  20
                 Label : RIGHT
-                  'F'
+                  21
               Label : EXPRESSION
-                ::
+                23
                 Label : CLASS
-                  static
+                  8
                 Label : METHOD
-                  $b
+                  9
                   Label : ARGUMENT
-                    $c
+                    20
                   Label : NAME
-                    $b
+                    9
               Label : EXPRESSION
-                ::
+                23
                 Label : CLASS
-                  B
+                  6
                 Label : METHOD
-                  $b
+                  9
                   Label : ARGUMENT
-                    $c
+                    20
                   Label : NAME
-                    $b
+                    9
             Label : NAME
-              D
+              13
             Label : STATIC
-              static
+              8
           Label : METHOD
-            H
+            24
             Label : ARGUMENT
-              $d
+              26
             Label : BLOCK
-              {}
+              17
               Label : EXPRESSION
-                echo
+                27
                 Label : ARGUMENT
-                  .
+                  30
                   Label : CONCAT
-                    __METHOD__
+                    28
                   Label : CONCAT
-                    'I'
-                Label : NAME
-                  echo
+                    31
             Label : NAME
-              H
+              24
             Label : STATIC
-              static
+              8
           Label : METHOD
-            J
+            33
             Label : ARGUMENT
-              $d
+              26
             Label : BLOCK
-              {}
+              17
               Label : EXPRESSION
-                echo
+                27
                 Label : ARGUMENT
-                  .
+                  30
                   Label : CONCAT
-                    __METHOD__
+                    28
                   Label : CONCAT
-                    'I'
-                Label : NAME
-                  echo
+                    31
             Label : NAME
-              J
+              33
             Label : STATIC
-              static
+              8
           Label : NAME
-            B
+            6
           Label : PPP
-            static
+            8
             Label : PPP
-              =
+              10
               Label : LEFT
-                $b
+                9
               Label : RIGHT
-                'C'
+                11
             Label : STATIC
-              static
+              8
         Label : EXPRESSION
-          ::
+          23
           Label : CLASS
-            B
+            6
           Label : METHOD
-            D
+            13
             Label : ARGUMENT
-              Void
+              15
             Label : NAME
-              D
+              13

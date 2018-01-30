@@ -1,39 +1,39 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            {}
+            16
             Label : EXPRESSION
-              Void
+              17
           Label : SOURCE
-            !
+            6
             Label : NOT
-              (
+              7
               Label : CODE
-                ?
+                10
                 Label : CONDITION
-                  is_array
+                  8
                   Label : ARGUMENT
-                    $a
+                    9
                   Label : NAME
-                    is_array
+                    8
                 Label : ELSE
-                  explode
+                  12
                   Label : NAME
-                    explode
+                    12
                   Label : ARGUMENT
-                    'd'
+                    13
                   Label : ARGUMENT
-                    $d
+                    14
                 Label : THEN
-                  $b
+                  11
           Label : VALUE
-            $e
+            15

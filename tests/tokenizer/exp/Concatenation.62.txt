@@ -1,127 +1,119 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            15
             Label : LEFT
-              ==
+              12
               Label : LEFT
-                B
+                6
                 Label : NAME
-                  B
+                  6
                 Label : ARGUMENT
-                  'C'
+                  8
                 Label : ARGUMENT
-                  'D'
+                  10
               Label : RIGHT
-                'E'
+                13
             Label : RIGHT
-              (
+              16
               Label : CODE
-                ||
+                20
                 Label : LEFT
-                  ==
+                  12
                   Label : LEFT
-                    $a
+                    17
                   Label : RIGHT
-                    'F'
+                    18
                 Label : RIGHT
-                  !
+                  21
                   Label : NOT
-                    $a
+                    17
           Label : THEN
-            {}
+            22
             Label : EXPRESSION
-              =
+              23
               Label : LEFT
-                $a
+                17
               Label : RIGHT
-                new
+                24
                 Label : NEW
-                  Stdclass
+                  25
                   Label : ARGUMENT
-                    Void
+                    27
                   Label : NAME
-                    Stdclass
+                    25
             Label : EXPRESSION
-              =
+              23
               Label : LEFT
-                ->
+                31
                 Label : MEMBER
-                  I
+                  29
                 Label : OBJECT
-                  $a
+                  17
               Label : RIGHT
-                'I'
+                32
             Label : EXPRESSION
-              print
+              37
               Label : ARGUMENT
-                .
+                35
                 Label : CONCAT
-                  'a2'
+                  34
                 Label : CONCAT
-                  'b2'
-              Label : NAME
-                print
+                  36
             Label : EXPRESSION
-              print
+              37
               Label : ARGUMENT
-                .
+                35
                 Label : CONCAT
-                  'a3'
+                  38
                 Label : CONCAT
-                  'b3'
+                  39
                 Label : CONCAT
-                  'c3'
-              Label : NAME
-                print
+                  40
             Label : EXPRESSION
-              print
+              37
               Label : ARGUMENT
-                .
+                35
                 Label : CONCAT
-                  'a4'
+                  41
                 Label : CONCAT
-                  'b4'
+                  42
                 Label : CONCAT
-                  'c4'
+                  43
                 Label : CONCAT
-                  'd4'
-              Label : NAME
-                print
+                  44
             Label : EXPRESSION
-              print
+              37
               Label : ARGUMENT
-                (
+                16
                 Label : CODE
-                  .
+                  35
                   Label : CONCAT
-                    'H'
+                    45
                   Label : CONCAT
-                    ->
+                    31
                     Label : MEMBER
-                      I
+                      29
                     Label : OBJECT
-                      $a
+                      17
                   Label : CONCAT
-                    +
+                    51
                     Label : SIGN
-                      (
+                      16
                       Label : CODE
-                        ?
+                        48
                         Label : CONDITION
-                          true
+                          47
                         Label : ELSE
-                          '0'
+                          50
                         Label : THEN
-                          '1'
-              Label : NAME
-                print
+                          49

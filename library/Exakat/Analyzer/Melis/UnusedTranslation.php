@@ -25,20 +25,14 @@ namespace Exakat\Analyzer\Melis;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedTranslation extends Analyzer {
+    public function dependsOn() {
+        return array('Melis/TranslationString',
+                    );
+    }
+
     public function analyze() {
         // select the available translations
-        $index = $this->atomIs('File')
-                      ->regexIs('fullcode', '^/language/.+\\\\.php')
-                      ->outIs('FILE')
-                      ->outIs('EXPRESSION')
-                      ->atomIs('Php')
-                      ->outIs('CODE')
-                      ->outIs('EXPRESSION')
-                      ->atomIs('Return')
-                      ->outIs('RETURN')
-                      ->atomIs('Arrayliteral')
-                      ->outIs('ARGUMENT')
-                      ->outIs('INDEX')
+        $index = $this->analyzerIs('Melis/TranslationString')
                       ->values('code');
         $res = $this->rawQuery();
         $translations = $res->toArray();

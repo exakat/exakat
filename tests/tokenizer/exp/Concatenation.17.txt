@@ -1,37 +1,37 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          f
+          5
           Label : ARGUMENT
-            .
+            7
             Label : CONCAT
-              'a'
+              6
             Label : CONCAT
-              date
+              8
               Label : NAME
-                date
+                8
               Label : ARGUMENT
-                "Y"
+                9
               Label : ARGUMENT
-                strtotime
+                11
                 Label : ARGUMENT
-                  $b
+                  12
                 Label : NAME
-                  strtotime
+                  11
             Label : CONCAT
-              'c'
+              13
           Label : NAME
-            f
+            5
         Label : EXPRESSION
-          =
+          15
           Label : LEFT
-            $x
+            14
           Label : RIGHT
-            2
+            16

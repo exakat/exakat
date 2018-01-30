@@ -1,139 +1,139 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ||
+            16
             Label : LEFT
-              ===
+              10
               Label : LEFT
-                ->
+                9
                 Label : MEMBER
-                  B
+                  7
                 Label : OBJECT
-                  $a
+                  6
               Label : RIGHT
-                ::
+                15
                 Label : CLASS
-                  C
+                  11
                 Label : CONSTANT
-                  D
+                  13
             Label : RIGHT
-              ||
+              16
               Label : LEFT
-                ===
+                10
                 Label : LEFT
-                  ->
+                  9
                   Label : MEMBER
-                    E
+                    18
                   Label : OBJECT
-                    $b
+                    17
                 Label : RIGHT
-                  ::
+                  15
                   Label : CLASS
-                    F
+                    20
                   Label : CONSTANT
-                    G
+                    22
               Label : RIGHT
-                ||
+                16
                 Label : LEFT
-                  ===
+                  10
                   Label : LEFT
-                    ->
+                    9
                     Label : MEMBER
-                      H
+                      25
                     Label : OBJECT
-                      $c
+                      24
                   Label : RIGHT
-                    ::
+                    15
                     Label : CLASS
-                      I
+                      27
                     Label : CONSTANT
-                      J
+                      29
                 Label : RIGHT
-                  ||
+                  16
                   Label : LEFT
-                    ==
+                    34
                     Label : LEFT
-                      ->
+                      9
                       Label : MEMBER
-                        K
+                        32
                       Label : OBJECT
-                        $d
+                        31
                     Label : RIGHT
-                      +
+                      39
                       Label : SIGN
-                        ::
+                        15
                         Label : CLASS
-                          L
+                          35
                         Label : CONSTANT
-                          M
+                          37
                   Label : RIGHT
-                    ||
+                    16
                     Label : LEFT
-                      ===
+                      10
                       Label : LEFT
-                        ->
+                        9
                         Label : MEMBER
-                          N
+                          41
                         Label : OBJECT
-                          $e
+                          40
                       Label : RIGHT
-                        ::
+                        15
                         Label : CLASS
-                          O
+                          43
                         Label : CONSTANT
-                          P
+                          45
                     Label : RIGHT
-                      ===
+                      10
                       Label : LEFT
-                        ->
+                        9
                         Label : MEMBER
-                          Q
+                          48
                         Label : OBJECT
-                          $f
+                          47
                       Label : RIGHT
-                        ::
+                        15
                         Label : CLASS
-                          R
+                          50
                         Label : CONSTANT
-                          S
+                          52
           Label : ELSE
-            {}
+            54
             Label : EXPRESSION
-              =
+              58
               Label : LEFT
-                ->
+                9
                 Label : MEMBER
-                  W
+                  64
                 Label : OBJECT
-                  $h
+                  63
               Label : RIGHT
-                ::
+                15
                 Label : CLASS
-                  X
+                  66
                 Label : CONSTANT
-                  Y
+                  68
           Label : THEN
-            {}
+            54
             Label : EXPRESSION
-              =
+              58
               Label : LEFT
-                ->
+                9
                 Label : MEMBER
-                  T
+                  56
                 Label : OBJECT
-                  $g
+                  55
               Label : RIGHT
-                ::
+                15
                 Label : CLASS
-                  U
+                  59
                 Label : CONSTANT
-                  V
+                  61

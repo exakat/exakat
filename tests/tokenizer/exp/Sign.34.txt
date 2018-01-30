@@ -1,65 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ==
+            12
             Label : LEFT
-              (
+              6
               Label : CODE
-                %
+                10
                 Label : LEFT
-                  (
+                  6
                   Label : CODE
-                    +
+                    8
                     Label : LEFT
-                      $e
+                      7
                     Label : RIGHT
-                      1
+                      9
                 Label : RIGHT
-                  2
+                  11
             Label : RIGHT
-              3
+              13
           Label : THEN
-            {}
+            14
             Label : EXPRESSION
-              =
+              16
               Label : LEFT
-                $g
+                15
               Label : RIGHT
-                (
+                6
                 Label : CODE
-                  -
+                  20
                   Label : LEFT
-                    (
+                    6
                     Label : CODE
-                      *
+                      18
                       Label : LEFT
-                        $h
+                        17
                       Label : RIGHT
-                        $i
+                        19
                   Label : RIGHT
-                    -
+                    20
                     Label : LEFT
-                      (
+                      6
                       Label : CODE
-                        *
+                        18
                         Label : LEFT
-                          $j
+                          21
                         Label : RIGHT
-                          $k
+                          22
                     Label : RIGHT
-                      (
+                      6
                       Label : CODE
-                        *
+                        18
                         Label : LEFT
-                          $l
+                          23
                         Label : RIGHT
-                          $m
+                          24

@@ -1,143 +1,143 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            7
             Label : EXPRESSION
-              case 'a' :  /**/  
+              8
               Label : CASE
-                'a'
+                9
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  11
                   Label : LEFT
-                    $x
-                  Label : RIGHT
-                    1
-            Label : EXPRESSION
-              case 'b' :  /**/  
-              Label : CASE
-                'b'
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
-                    2
-            Label : EXPRESSION
-              case 'c' :  /**/  
-              Label : CASE
-                'c'
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
-                    3
-            Label : EXPRESSION
-              case 'd' :  /**/  
-              Label : CASE
-                'd'
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
-                    4
-            Label : EXPRESSION
-              case 'e' :  /**/  
-              Label : CASE
-                'e'
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
-                    5
-            Label : EXPRESSION
-              default
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  break
-                  Label : BREAK
-                    Void
-            Label : EXPRESSION
-              case 'f' :  /**/  
-              Label : CASE
-                'f'
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
-                    6
-            Label : EXPRESSION
-              case 'g' :  /**/  
-              Label : CASE
-                'g'
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
-                    7
-            Label : EXPRESSION
-              case 'h' :  /**/  
-              Label : CASE
-                'h'
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
-                    8
-            Label : EXPRESSION
-              case 'i' :  /**/  
-              Label : CASE
-                'i'
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
-                    9
-            Label : EXPRESSION
-              case 'j' :  /**/  
-              Label : CASE
-                'j'
-              Label : CODE
-                ;
-                Label : EXPRESSION
-                  =
-                  Label : LEFT
-                    $x
-                  Label : RIGHT
                     10
+                  Label : RIGHT
+                    12
+            Label : EXPRESSION
+              13
+              Label : CASE
+                14
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    15
+            Label : EXPRESSION
+              16
+              Label : CASE
+                17
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    18
+            Label : EXPRESSION
+              19
+              Label : CASE
+                20
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    21
+            Label : EXPRESSION
+              22
+              Label : CASE
+                23
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    24
+            Label : EXPRESSION
+              25
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  26
+                  Label : BREAK
+                    27
+            Label : EXPRESSION
+              29
+              Label : CASE
+                30
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    31
+            Label : EXPRESSION
+              32
+              Label : CASE
+                33
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    34
+            Label : EXPRESSION
+              35
+              Label : CASE
+                36
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    37
+            Label : EXPRESSION
+              38
+              Label : CASE
+                39
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    40
+            Label : EXPRESSION
+              41
+              Label : CASE
+                42
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    43
           Label : NAME
-            $a
+            6

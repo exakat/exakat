@@ -1,93 +1,93 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          $a
+          5
           Label : ARGUMENT
-            __FILE__
+            6
           Label : NAME
-            $a
+            5
         Label : EXPRESSION
-          $b
+          8
           Label : ARGUMENT
-            0
+            9
           Label : NAME
-            $b
+            8
         Label : EXPRESSION
-          $c
+          10
           Label : ARGUMENT
-            B
+            11
           Label : NAME
-            $c
+            10
         Label : EXPRESSION
-          $d
+          13
           Label : ARGUMENT
-            null
+            14
           Label : NAME
-            $d
+            13
         Label : EXPRESSION
-          $e
+          15
           Label : ARGUMENT
-            C
+            16
           Label : NAME
-            $e
+            15
         Label : EXPRESSION
-          $f
+          18
           Label : ARGUMENT
-            ->
+            22
             Label : MEMBER
-              D
+              20
             Label : OBJECT
-              $g
+              19
           Label : NAME
-            $f
+            18
         Label : EXPRESSION
-          $h
+          23
           Label : ARGUMENT
-            ->
+            22
             Label : METHOD
-              E
+              25
               Label : ARGUMENT
-                Void
+                27
               Label : NAME
-                E
+                25
             Label : OBJECT
-              $i
+              24
           Label : NAME
-            $h
+            23
         Label : EXPRESSION
-          $j
+          29
           Label : ARGUMENT
-            ::
+            33
             Label : CLASS
-              F
+              30
             Label : MEMBER
-              $k
+              32
           Label : NAME
-            $j
+            29
         Label : EXPRESSION
-          $l
+          34
           Label : ARGUMENT
-            ::
+            33
             Label : CLASS
-              G
+              35
             Label : CONSTANT
-              H
+              37
           Label : NAME
-            $l
+            34
         Label : EXPRESSION
-          $m
+          39
           Label : ARGUMENT
-            ::
+            33
             Label : CLASS
-              I
+              40
             Label : CONSTANT
-              J
+              42
           Label : NAME
-            $m
+            39

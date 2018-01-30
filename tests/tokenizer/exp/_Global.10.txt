@@ -1,23 +1,23 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          global
+          5
           Label : GLOBAL
-            $a
+            6
           Label : GLOBAL
-            $b
+            7
           Label : GLOBAL
-            $c
+            8
           Label : GLOBAL
-            $d
+            9
           Label : GLOBAL
-            $e
+            10
           Label : GLOBAL
-            $f
+            11

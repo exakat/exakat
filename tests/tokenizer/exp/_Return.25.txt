@@ -1,39 +1,39 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          __static__construct
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              if
+              9
               Label : CONDITION
-                >
+                15
                 Label : LEFT
-                  count
+                  10
                   Label : ARGUMENT
-                    ::
+                    14
                     Label : CLASS
-                      K
+                      11
                     Label : MEMBER
-                      $load_paths
+                      13
                   Label : NAME
-                    count
+                    10
                 Label : RIGHT
-                  0
+                  16
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  17
                   Label : RETURN
-                    null
+                    18
           Label : NAME
-            __static__construct
+            5

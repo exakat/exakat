@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 26 Dec 2017 10:54:54 +0000
-.. comment: Generation hash : ee236dc0faaaccd4df41c1edc39222a217ad812d
+.. comment: Generation date : Mon, 29 Jan 2018 10:08:20 +0000
+.. comment: Generation hash : c91c58d60c6e27c8d75945daede1b0533a172903
 
 
 .. _$http\_raw\_post\_data:
@@ -2273,11 +2273,11 @@ Check All Types
 ###############
 
 
-When checking for time, avoid using else. Mention explicitely all tested type, and raise an exception when reaching else.
+When checking for time, avoid using else. Mention explicitly all tested type, and raise an exception when reaching else.
 
 PHP has a short list of scalar types : null, boolean, integer, real, strings, object, resource and array. When a variable is not holding one the the type, then it may be of any other type. 
 
-Most of the time, when using a simple is_*() / else test, this is relying on the conception of the code. By construction, the arguments may be one of two types : array or string. 
+Most of the time, when using a simple `'is_string() <http://www.php.net/is_string>`_ / else test, this is relying on the conception of the code. By construction, the arguments may be one of two types : array or string. 
 
 What happens often is that in case of failure in the code (database not working, another class not checking its results), a third type is pushed to the structure, and it ends up breaking the execution. 
 
@@ -3721,6 +3721,31 @@ PHP 7.0 has the ability to define an array as a constant, using the `'define() <
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
+.. _defined-view-property:
+
+Defined View Property
+#####################
+
+
+View variables are set by calling the methods setVariable or setVariables on the View object. 
+
+.. code-block:: php
+
+   <?php
+   
+   $model    = new ViewModel();
+   // foo is set to bar
+   $model->setVariable('foo', 'bar');
+   
+   ?>
+
++--------------+---------------------------+
+| Command Line | ZendF/DefinedViewProperty |
++--------------+---------------------------+
+| Analyzers    | :ref:`ZendFramework`      |
++--------------+---------------------------+
+
+
 .. _dependant-trait:
 
 Dependant Trait
@@ -4036,7 +4061,7 @@ When using a `'foreach() <http://php.net/manual/en/control-structures.foreach.ph
 
 When actually changing the original value, use the reference in the foreach definition to make it obvious, and save the final reassignation.
 
-When the value has to be prepared before usage, then save the filtered value in a separate variable. This makes the clean value obivous, and preserve the original value for a future usage.
+When the value has to be prepared before usage, then save the filtered value in a separate variable. This makes the clean value obvious, and preserve the original value for a future usage.
 
 .. code-block:: php
 
@@ -4216,7 +4241,7 @@ Echo Or Print
 
 Echo and print have the same functional use. <?= is also considered in this analysis. 
 
-There seems to be a choice that is not enforced : one form is dominent, (> 90%) while the others are rare. 
+There seems to be a choice that is not enforced : one form is dominant, (> 90%) while the others are rare. 
 
 The analyzed code has less than 10% of one of the three : for consistency reasons, it is recommended to make them all the same. 
 
@@ -4836,7 +4861,7 @@ Exit() Usage
 ############
 
 
-Using `'exit <http://www.php.net/exit>`_ or `'die() <http://www.php.net/die>`_ in the code makes the code untestable (it will `'break <http://php.net/manual/en/control-structures.break.php>`_ unit tests). Morover, if there is no reason or string to display, it may take a long time to spot where the application is stuck. 
+Using `'exit <http://www.php.net/exit>`_ or `'die() <http://www.php.net/die>`_ in the code makes the code untestable (it will `'break <http://php.net/manual/en/control-structures.break.php>`_ unit tests). Moreover, if there is no reason or string to display, it may take a long time to spot where the application is stuck. 
 
 .. code-block:: php
 
@@ -5263,7 +5288,9 @@ Forgotten Whitespace
 ####################
 
 
-Those are white space that are at either end of a script : at the beginning or the end. 
+White spaces have been left at either end of a file : before the PHP opening tag, or after the closing tag. 
+
+Usually, such white space are forgotten, and may end up summoning the infamous 'headers already sent' error. It is better to remove them. 
 
 .. code-block:: php
 
@@ -5274,8 +5301,6 @@ Those are white space that are at either end of a script : at the beginning or t
        // This script has no forgotten whitespace, not at the end
    ?>
 
-
-Usually, such white space are forgotten, and may end up summoning the infamous 'headers already sent' error. It is better to remove them. 
 
 See also `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_.
 
@@ -5748,7 +5773,7 @@ Heredoc Delimiter
 
 Heredoc and Nowdoc expressions may use a variety of delimiters. 
 
-There seems to be a standard delimiter in the code, and some exceptions : one or severals forms are dominent (> 90%), while the others are rare. 
+There seems to be a standard delimiter in the code, and some exceptions : one or severals forms are dominant (> 90%), while the others are rare. 
 
 The analyzed code has less than 10% of the rare delimiters. For consistency reasons, it is recommended to make them all the same. 
 
@@ -5898,7 +5923,7 @@ Htmlentities Calls
 
 `'htmlentities() <http://www.php.net/htmlentities>`_ and `'htmlspecialchars() <http://www.php.net/htmlspecialchars>`_ are used to prevent injecting special characters in HTML code. As a bare minimum, they take a string and encode it for HTML.
 
-The second argument of the functions is the type of protection. The protection may apply to quotes or not, to HTML4 or 5, etc. It is highly recommended to set it explicitely.
+The second argument of the functions is the type of protection. The protection may apply to quotes or not, to HTML4 or 5, etc. It is highly recommended to set it explicitly.
 
 The third argument of the functions is the encoding of the string. In PHP 5.3, it as 'ISO-8859-1', in 5.4, was 'UTF-8', and in 5.6, it is now default_charset, a php.ini configuration that has the default value of 'UTF-8'. It is highly recommended to set this argument too, to avoid distortions from the configuration.
 
@@ -6288,6 +6313,30 @@ It is recommended to use a real 'if then' structures, to make the condition read
 +--------------+-------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                            |
 +--------------+-------------------------------------------------------------------------------------------+
+
+
+.. _inclusion-wrong-case:
+
+Inclusion Wrong Case
+####################
+
+
+Inclusion should follow exactly the case of included files and path. This prevents the infamous case-sensitive filesystem bug, where files are correctly included in a case-insensitive system, and failed to be when moved to production.
+
+.. code-block:: php
+
+   <?php
+   
+   // There must exist a path called path/to and a file library.php with this case
+   include path/to/library.php;
+   
+   ?>
+
++--------------+--------------------------+
+| Command Line | Files/InclusionWrongCase |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
 
 
 .. _incompilable-files:
@@ -6685,6 +6734,34 @@ Mark a class as being a Zend Framework Helper.
 +--------------+----------------------+
 
 
+.. _is-zend-view-file:
+
+Is Zend View File
+#################
+
+
+Mark files as View when then have the .phtml extension.
+
+Zend Views are build with call to $this, without any class or trait. Indeed, the file will be included just in time, and its properties and methods will then be provided.
+
+.. code-block:: php
+
+   <?php
+   
+   echo $this->title;
+   
+   ?>
+
+
+See also `Zend View <https://github.com/zendframework/zend-view>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/IsView         |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
 .. _isset-with-constant:
 
 Isset With Constant
@@ -6852,6 +6929,49 @@ Setting keys when using list() is a PHP 7.1 feature.
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
+.. _local-globals:
+
+Local Globals
+#############
+
+
+A global variable is used locally in a method. 
+
+Either the global keyword has been forgotten, or the local variable should be renamed in a less ambiguous manner.
+
+Having both a global and a local variable with the same name is legit. PHP keeps the contexts separated, and it processes them independantly.
+
+However, in the mind of the coder, it is easy to mistake the local variable $x and the global variable $x. May they be given different meaning, and this is an error-prone situation. 
+
+It is recommended to keep the global variables's name distinct from the local variables. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This is actualy a global variable
+   $variable = 1;
+   $globalVariable = 2;
+   
+   function foo() {
+       globl $globalVariable2;
+       
+       $variable = 4;
+       $localVariable = 3;
+       
+       // This always displays 423, instead of 123
+       echo $variable .' ' . $globalVariable . ' ' . $localVariable;
+   }
+   
+   ?>
+
++--------------+------------------------+
+| Command Line | Variables/LocalGlobals |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
 
 
 .. _locally-unused-property:
@@ -7563,6 +7683,39 @@ In the example, one may argue that the 'c' case is actually handled by the 'defa
 +--------------+-------------------------+
 
 
+.. _missing-include:
+
+Missing Include
+###############
+
+
+The included files doesn't exists in the repository. The inclusions target a files that doesn't exist.
+
+The analysis works with every type of inclusion : include, require, include_once and require_once. It also works with parenthesis when used as parameter delimiter.
+
+The analysis doesn't take into account include_path. This may yield false positives.
+
+.. code-block:: php
+
+   <?php
+   
+   include 'non_existent.php';
+   
+   // variables are not resolved. This won't be reported.
+   require ($path.'non_existent.php');
+   
+   ?>
+
+
+Missing included files may lead to a Fatal error, a warning or other error later in the execution.
+
++--------------+----------------------+
+| Command Line | Files/MissingInclude |
++--------------+----------------------+
+| Analyzers    | :ref:`Analyze`       |
++--------------+----------------------+
+
+
 .. _missing-new-?:
 
 Missing New ?
@@ -8118,6 +8271,8 @@ Exakat tries to find the value of the case as much as possible, and ignore any d
 
    <?php
    
+   const A = 1;
+   
    case ($x) {
        case 1 : 
            'break;
@@ -8126,6 +8281,8 @@ Exakat tries to find the value of the case as much as possible, and ignore any d
        case 1 + 0:   // This is a duplicate of the previous
            'break; 
        case 1.0 :    // This is a duplicate of the previous
+           'break; 
+       case A :      // The A constant is actually 1
            'break; 
        case $y  :    // This is not reported.
            'break; 
@@ -8967,6 +9124,56 @@ See `PSR7 <http://www.php-fig.org/psr/psr-7/>`_ and `PSR 7 and Value Objects <ht
 +--------------+----------------------------+
 
 
+.. _no-echo-outside-view:
+
+No Echo Outside View
+####################
+
+
+Views are the place where data is displayed to the browser. There should not be any other display of information from anywhere else in the code.
+
+In a view.phtml file : 
+.. code-block:: php
+
+   <?php
+   
+   echo $this->view;
+   
+   ?>
+
+
+In a controller.php file : 
+.. code-block:: php
+
+   <?php
+   
+   use Zend\Mvc\Controller\AbstractActionController;
+   
+   class myController extends AbstractActionController
+   {
+   
+       public function indexAction() {
+           if ($wrong) {
+               echo $errorMessage;
+           }
+           
+           $view = new ViewModel(array(
+               'message' => 'Hello world',
+           ));
+           $view->setTemplate('view.phtml');
+           return $view;    
+       }
+   }
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | ZendF/NoEchoOutsideView |
++--------------+-------------------------+
+| Analyzers    | :ref:`ZendFramework`    |
++--------------+-------------------------+
+
+
 .. _no-empty-regex:
 
 No Empty Regex
@@ -9327,6 +9534,35 @@ See also `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/obje
 | Command Line | Structures/NoNeedForElse |
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
+
+.. _no-net-for-xml-load:
+
+No Net For Xml Load
+###################
+
+
+Simplexml and ext/DOM load all external entities on the web, by default. This is dangerous, when loading unknown XML code.::
+
+   
+   
+   <!DOCTYPE replace [<!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"> ]>
+   <replace>&xxe;</replace>
+   
+   
+
+
+Here, PHP tries to load the XML file, find the entity, then solves the entity by encoding a file called 'index.php'. The source code of the file is not used as data in the xml file. 
+
+See also `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injections>`_, 
+         `XML External Entity (XXE) Processing <https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing>`_ and 
+         `Detecting and exploiting XXE in SAML Interfaces <https://web-in-security.blogspot.nl/2014/11/detecting-and-exploiting-xxe-in-saml.html>`_.
+
++--------------+--------------------------+
+| Command Line | Security/NoNetForXmlLoad |
++--------------+--------------------------+
+| Analyzers    | :ref:`Security`          |
 +--------------+--------------------------+
 
 
@@ -10314,6 +10550,11 @@ One letter functions seems to be really short for a meaningful name. This may ha
 
    <?php
    
+   // Always use a meaningful name 
+   function addition($a, $b) {
+       return $a + $b;
+   }
+   
    // One letter functions are rarely meaningful
    function f($a, $b) {
        return $a + $b;
@@ -10659,7 +10900,7 @@ PHP 7.1 Microseconds
 ####################
 
 
-PHP 7.1 supports microseconds in DateTime class and date_create() function. 
+PHP supports microseconds in DateTime class and date_create() function. This was introduced in PHP 7.1.
 
 In previous PHP versions, those dates only used seconds, leading to lazy comparisons : 
 
@@ -10690,6 +10931,8 @@ This is also true with Datetime :
 
 
 This evolution impacts mostly exact comparisons (== and ===). Non-equality (!= and !==) will probably be always true, and should be reviewed.
+
+See also `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_.
 
 +--------------+---------------------------+
 | Command Line | Php/Php71microseconds     |
@@ -12345,7 +12588,9 @@ Same Conditions In Condition
 ############################
 
 
-At least two consecutive if/then structures use identical conditions. The latter will probably  be ignored.
+At least two consecutive if/then structures use identical conditions. The latter will probably be ignored.
+
+This analysis returns false positive when there are attempt to fix the situation, or to call an alternative solution. 
 
 .. code-block:: php
 
@@ -12363,6 +12608,15 @@ At least two consecutive if/then structures use identical conditions. The latter
    else if ($c == 1) { doSomething(); }
    else if ($a == 1) { doSomething(); }
    else {}
+   
+   // This sort of situation generate false postive. 
+   $config = load_config_from_commandline();
+   if (empty($config)) {
+       $config = load_config_from_file();
+       if (empty($config)) {
+           $config = load_default_config();
+       }
+   }
    
    ?>
 
@@ -14015,6 +14269,40 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
 +--------------+---------------------------------------------------------------------------------------------------------------------+
 
 
+.. _sqlite3-requires-single-quotes:
+
+Sqlite3 Requires Single Quotes
+##############################
+
+
+The escapeString() method from Sqlite3 doesn't escape ", but only '. 
+
+.. code-block:: php
+
+   <?php
+   
+   // OK. escapeString is OK with '
+   $query = "SELECT * FROM table WHERE col = '".$sqlite->escapeString($x)."'";
+   
+   // This is vulnerable to " in $x
+   $query = 'SELECT * FROM table WHERE col = "'.$sqlite->escapeString($x).'"';
+   
+   ?>
+
+
+To properly handle quotes and NUL characters, use bindParam() instead.
+
+Quote from the PHP manual comments : The reason this function doesn't escape double quotes is because double quotes are used with names (the equivalent of backticks in MySQL), as in table or column names, while single quotes are used for values.
+
+See also `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_.
+
++--------------+--------------------------------------+
+| Command Line | Security/Sqlite3RequiresSingleQuotes |
++--------------+--------------------------------------+
+| Analyzers    | :ref:`Security`                      |
++--------------+--------------------------------------+
+
+
 .. _static-loop:
 
 Static Loop
@@ -14163,7 +14451,7 @@ Strange Name For Variables
 ##########################
 
 
-Those variables looks like a typo from other names.
+Variables with strange names. They might be a typo, or simply bear strange patterns.
 
 .. code-block:: php
 
@@ -14174,9 +14462,18 @@ Those variables looks like a typo from other names.
            // Strange name $tihs
            return $tihs;
        }
+       
+       function barbar() {
+           // variables with blocks of 3 times the same character are reported
+           // Based on Alexandre Joly's tweet
+           $aaa = $bab + $www; 
+       }
    }
    
    ?>
+
+
+See also `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_.
 
 +--------------+--------------------------------------------------+
 | Command Line | Variables/StrangeName                            |
@@ -14501,10 +14798,10 @@ A fallthrough may be used as a feature. It is undistinguisable from an error.
    ?>
 
 
-This analysis cannot take into account comments abouts the fallthough. 
+This analysis cannot take into account comments about the fallthough. 
 
 See also `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_ and 
-         ` <https://palantir.github.io/tslint/rules/no-switch-case-fall-through/>`_.
+         `Rule: no-switch-case-fall-through <https://palantir.github.io/tslint/rules/no-switch-case-fall-through/>`_.
 
 +--------------+------------------------+
 | Command Line | Structures/Fallthrough |
@@ -15506,7 +15803,7 @@ Undefined Functions
 ###################
 
 
-Those functions are not defined in the code. This means that the functions are probably defined in a missing library, or in an extension. If not, this will yield a Fatal error at execution.
+Some functions are called, but not defined in the code. This means that the functions are probably defined in a missing library, or in an extension. If not, this will yield a Fatal error at execution.
 
 .. code-block:: php
 
@@ -16384,6 +16681,19 @@ Unused Functions
 
 The functions below are unused. They look like deadcode.
 
+.. code-block:: php
+
+   <?php
+   
+   function used() {}
+   // The 'unused' function is defined but never called
+   function unused() {}
+   
+   // The 'used' function is called at least once
+   used();
+   
+   ?>
+
 +--------------+----------------------------------------------+
 | Command Line | Functions/UnusedFunctions                    |
 +--------------+----------------------------------------------+
@@ -16414,6 +16724,40 @@ List of global keyword, used in various functions but not actually used in the c
 +--------------+-------------------------+
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
+
+
+.. _unused-inherited-variable-in-closure:
+
+Unused Inherited Variable In Closure
+####################################
+
+
+Some closures forgot to make usage of inherited variables.
+
+`'Closure <http://php.net/manual/fr/class.closure.php>`_ have two separate set of incoming variables : the arguments (between parenthesis) and the inherited variables, in the 'use' clause. Inherited variables are extracted from the local environnement at creation time, and keep their value until execution. 
+
+The reported closures are requesting some local variables, but do not make any usage of them. They may be considered as dead code.  
+
+.. code-block:: php
+
+   <?php
+   
+   // In this closure, $y is forgotten, but $u is used.
+   $a = function ($y) use ($u) { return $u; };
+   
+   // In this closure, $u is forgotten
+   $a = function ($y, $z) use ($u) { return $u; };
+   
+   ?>
+
+
+See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_.
+
++--------------+----------------------------------------------+
+| Command Line | Functions/UnusedInheritedVariable            |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 .. _unused-interfaces:
@@ -18420,10 +18764,10 @@ in PHP 7, the result is :::
 +--------------+---------------------------+
 
 
-.. _var:
+.. _var-keyword:
 
-Var
-###
+Var Keyword
+###########
 
 
 Var was used in PHP 4 to mark properties as public. Nowadays, new keywords are available : public, protected, private. Var is equivalent to public. 
@@ -18441,6 +18785,9 @@ It is recommended to avoid using var, and explicitely use the new keywords.
    }
    
    ?>
+
+
+See also `Visibility <http://www.php.net/manual/en/language.oop5.visibility.php>`_.
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/OldStyleVar                                                                                     |
@@ -18489,13 +18836,23 @@ While(List() = Each())
 
 This code structure is quite old : it should be replace by the more modern and efficient foreach.
 
+This structure is deprecated since PHP 7.2. It may disappear in the future.
+
 .. code-block:: php
 
    <?php
+   
+       while(list($key, $value) = each($array)) {
+           doSomethingWith($key) and $value();
+       }
+   
        foreach($array as $key => $value) {
-           doSomethingWith($key) and $value;
+           doSomethingWith($key) and $value();
        }
    ?>
+ 
+
+See also `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_.
 
 +--------------+-------------------------------------+
 | Command Line | Structures/WhileListEach            |
@@ -19399,6 +19756,9 @@ According to the manual : The salt parameter is optional. However, `'crypt() <ht
    $hash = crypt($password);
    
    ?>
+
+
+See also `crypt <http://www.php.net/crypt>`_.
 
 +--------------+-----------------------------+
 | Command Line | Structures/CryptWithoutSalt |

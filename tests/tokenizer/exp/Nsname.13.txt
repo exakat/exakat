@@ -1,121 +1,121 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              Void
+              9
           Label : NAME
-            A\B
+            5
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              Void
+              9
           Label : NAME
-            A\B\C
+            11
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              Void
+              9
           Label : NAME
-            A\B\C\D
+            13
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              Void
+              9
           Label : NAME
-            A\B\C\D\E
+            15
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              C\D\E
+              17
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                C\D\E
+                17
             Label : EXPRESSION
-              X\A
+              19
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                X\A
+                19
             Label : EXPRESSION
-              \G
+              21
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                \G
+                21
             Label : EXPRESSION
-              Y\B\C
+              23
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                Y\B\C
+                23
             Label : EXPRESSION
-              Z\D\E\F
+              25
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                Z\D\E\F
+                25
             Label : EXPRESSION
-              ::
+              29
               Label : CLASS
-                C\D\E
+                17
               Label : CONSTANT
-                K
+                27
             Label : EXPRESSION
-              ::
+              29
               Label : CLASS
-                \C\D\E
+                30
               Label : CONSTANT
-                K
+                27
             Label : EXPRESSION
-              ::
+              29
               Label : CLASS
-                C2\D\E
+                32
               Label : MEMBER
-                $k
+                34
             Label : EXPRESSION
-              ::
+              29
               Label : CLASS
-                \C2\D\E
+                35
               Label : MEMBER
-                $k
+                34
             Label : EXPRESSION
-              ::
+              29
               Label : CLASS
-                C3\D\E
+                37
               Label : METHOD
-                l
+                39
                 Label : ARGUMENT
-                  Void
+                  9
                 Label : NAME
-                  l
+                  39
             Label : EXPRESSION
-              ::
+              29
               Label : CLASS
-                \C3\D\E
+                40
               Label : METHOD
-                l
+                39
                 Label : ARGUMENT
-                  Void
+                  9
                 Label : NAME
-                  l
+                  39
           Label : NAME
-            Void
+            9

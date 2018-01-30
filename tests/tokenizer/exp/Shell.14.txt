@@ -1,29 +1,29 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          @
+          5
           Label : AT
-            a
+            6
             Label : NAME
-              a
+              6
             Label : ARGUMENT
-              '/tmp/b.init'
+              7
             Label : ARGUMENT
-              $c
+              8
         Label : EXPRESSION
-          `
+          9
           Label : CONCAT
-            cat /tmp/d.init > 
+            10
           Label : CONCAT
-            $e
+            11
         Label : EXPRESSION
-          ++
+          13
           Label : POSTPLUSPLUS
-            $f
+            12

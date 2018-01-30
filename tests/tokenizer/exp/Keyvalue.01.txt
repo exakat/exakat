@@ -1,57 +1,59 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $x
+            5
           Label : RIGHT
-            array
+            7
             Label : ARGUMENT
-              =>
+              11
               Label : INDEX
-                .
+                9
                 Label : CONCAT
-                  'a'
-                Label : CONCAT
-                  'b'
-              Label : VALUE
-                .
-                Label : CONCAT
-                  'c'
-                Label : CONCAT
-                  'd'
-            Label : ARGUMENT
-              =>
-              Label : INDEX
-                +
-                Label : LEFT
-                  1
-                Label : RIGHT
-                  2
-              Label : VALUE
-                +
-                Label : LEFT
-                  3
-                Label : RIGHT
-                  4
-            Label : ARGUMENT
-              =>
-              Label : INDEX
-                *
-                Label : LEFT
-                  5
-                Label : RIGHT
-                  6
-              Label : VALUE
-                *
-                Label : LEFT
-                  7
-                Label : RIGHT
                   8
+                Label : CONCAT
+                  10
+              Label : VALUE
+                9
+                Label : CONCAT
+                  12
+                Label : CONCAT
+                  13
+            Label : ARGUMENT
+              11
+              Label : INDEX
+                15
+                Label : LEFT
+                  14
+                Label : RIGHT
+                  16
+              Label : VALUE
+                15
+                Label : LEFT
+                  17
+                Label : RIGHT
+                  18
+            Label : ARGUMENT
+              11
+              Label : INDEX
+                20
+                Label : LEFT
+                  19
+                Label : RIGHT
+                  21
+              Label : VALUE
+                20
+                Label : LEFT
+                  22
+                Label : RIGHT
+                  23
+            Label : ARGUMENT
+              24

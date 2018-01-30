@@ -1,101 +1,101 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          switch
+          5
           Label : CASES
-             /**/ 
+            8
             Label : EXPRESSION
-              case $a instanceof \C :  /**/  
+              9
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  \C
+                  13
                 Label : VARIABLE
-                  $a
+                  11
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  ++
+                  16
                   Label : POSTPLUSPLUS
-                    $b
+                    15
                 Label : EXPRESSION
-                  return
+                  17
                   Label : RETURN
-                    Void
+                    18
             Label : EXPRESSION
-              case $c instanceof D :  /**/  
+              20
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  D
+                  23
                 Label : VARIABLE
-                  $c
+                  22
               Label : CODE
-                ;
+                3
             Label : EXPRESSION
-              case E::F($d) :  /**/  
+              25
               Label : CASE
-                ::
+                32
                 Label : CLASS
-                  E
+                  27
                 Label : METHOD
-                  F
+                  29
                   Label : ARGUMENT
-                    $d
+                    31
                   Label : NAME
-                    F
+                    29
               Label : CODE
-                ;
+                3
             Label : EXPRESSION
-              case $e instanceof \G\H\I :  /**/  
+              33
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  \G\H\I
+                  36
                 Label : VARIABLE
-                  $e
+                  35
               Label : CODE
-                ;
+                3
             Label : EXPRESSION
-              case $f instanceof \J\K\L\M :  /**/  
+              38
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  \J\K\L\M
+                  41
                 Label : VARIABLE
-                  $f
+                  40
               Label : CODE
-                ;
+                3
             Label : EXPRESSION
-              case $g instanceof \N\O\P\Q\R :  /**/  
+              43
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  \N\O\P\Q\R
+                  46
                 Label : VARIABLE
-                  $g
+                  45
               Label : CODE
-                ;
+                3
             Label : EXPRESSION
-              case $h instanceof S\T\U\V\W :  /**/  
+              48
               Label : CASE
-                instanceof
+                12
                 Label : CLASS
-                  S\T\U\V\W
+                  51
                 Label : VARIABLE
-                  $h
+                  50
               Label : CODE
-                ;
+                3
                 Label : EXPRESSION
-                  return
+                  17
                   Label : RETURN
-                    Void
+                    18
           Label : NAME
-            B
+            6

@@ -1,162 +1,163 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a0
+            5
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              D
+              8
             Label : CONCAT
-              $b
+              10
             Label : CONCAT
-              C
+              11
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a1
+            13
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              D
+              8
             Label : CONCAT
-              $b1
+              14
             Label : CONCAT
-              c
+              12
             Label : CONCAT
-              C
+              11
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a2
+            15
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              D
+              8
             Label : CONCAT
-              $b2
+              16
             Label : CONCAT
-              C
+              11
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a3
+            17
           Label : RIGHT
-            +
+            21
             Label : LEFT
-              ->
+              20
               Label : MEMBER
-                $c3
+                19
               Label : OBJECT
-                $b3
+                18
             Label : RIGHT
-              ->
+              20
               Label : MEMBER
-                $e3
+                23
               Label : OBJECT
-                $d3
+                22
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a4
+            24
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              $b4
+              25
             Label : CONCAT
-              C
+              11
             Label : CONCAT
-              $c
+              26
             Label : CONCAT
-              $d4
+              27
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a5
+            28
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              D
+              8
             Label : CONCAT
-              $b
+              10
             Label : CONCAT
-              C
+              11
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a6
+            29
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              D
+              8
             Label : CONCAT
-              $b6
+              30
             Label : CONCAT
-              c6
+              31
             Label : CONCAT
-              C
+              11
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a7
+            32
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              D
+              8
             Label : CONCAT
-              $b7
+              33
             Label : CONCAT
-              c
+              12
             Label : CONCAT
-              C
+              11
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a8
+            34
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              D
+              8
             Label : CONCAT
-              $b8
+              35
             Label : CONCAT
-              C
+              11
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a9
+            36
           Label : RIGHT
-            "
+            7
             Label : CONCAT
-              D
+              8
             Label : CONCAT
-              $b9
+              37
             Label : CONCAT
-              c
+              12
             Label : CONCAT
-              C
+              11
         Label : EXPRESSION
-          =
+          6
           Label : LEFT
-            $a10
+            38
           Label : RIGHT
-            +
+            21
             Label : LEFT
-              ->
+              20
               Label : MEMBER
-                $c10
+                40
               Label : OBJECT
-                $b10
+                39
             Label : RIGHT
-              ->
+              20
               Label : MEMBER
-                $e10
+                42
               Label : OBJECT
-                $d10
+                41

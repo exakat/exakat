@@ -1,89 +1,89 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ==
+            7
             Label : LEFT
-              $a
+              6
             Label : RIGHT
-              B
+              8
           Label : ELSE
-            elseif
+            24
             Label : CONDITION
-              ==
+              7
               Label : LEFT
-                $a
+                6
               Label : RIGHT
-                E
+                25
             Label : ELSE
-              ;
+              3
               Label : EXPRESSION
-                =
+                11
                 Label : LEFT
-                  $b
+                  10
                 Label : RIGHT
-                  .
+                  21
                   Label : CONCAT
-                    $d
+                    19
                   Label : CONCAT
-                    $f
+                    27
             Label : THEN
-              ;
+              3
               Label : EXPRESSION
-                .
+                21
                 Label : CONCAT
-                  C
+                  12
                   Label : NAME
-                    C
+                    12
                   Label : ARGUMENT
-                    *
+                    18
                     Label : LEFT
-                      (
+                      14
                       Label : CODE
-                        /
+                        16
                         Label : LEFT
-                          0
+                          15
                         Label : RIGHT
-                          $c
+                          17
                     Label : RIGHT
-                      $d
+                      19
                   Label : ARGUMENT
-                    $e
+                    20
                 Label : CONCAT
-                  'D'
+                  22
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              =
+              11
               Label : LEFT
-                $b
+                10
               Label : RIGHT
-                .
+                21
                 Label : CONCAT
-                  C
+                  12
                   Label : NAME
-                    C
+                    12
                   Label : ARGUMENT
-                    *
+                    18
                     Label : LEFT
-                      (
+                      14
                       Label : CODE
-                        /
+                        16
                         Label : LEFT
-                          0
+                          15
                         Label : RIGHT
-                          $c
+                          17
                     Label : RIGHT
-                      $d
+                      19
                   Label : ARGUMENT
-                    $e
+                    20
                 Label : CONCAT
-                  'D'
+                  22

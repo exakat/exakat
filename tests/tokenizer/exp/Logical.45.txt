@@ -1,83 +1,83 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          a
+          5
           Label : ARGUMENT
-            $c
+            7
             Label : TYPEHINT
-              b
+              6
           Label : ARGUMENT
-            $d
+            9
             Label : TYPEHINT
-              array
+              8
           Label : ARGUMENT
-            $e
+            10
             Label : DEFAULT
-              [
+              11
               Label : ARGUMENT
-                1
+                12
               Label : ARGUMENT
-                2
+                13
               Label : ARGUMENT
-                (
+                14
                 Label : CODE
-                  &
+                  16
                   Label : LEFT
-                    3
+                    15
                   Label : RIGHT
-                    4
+                    17
             Label : TYPEHINT
-              array
+              8
           Label : BLOCK
-            {}
+            18
             Label : EXPRESSION
-              for
+              19
               Label : BLOCK
-                {}
+                18
                 Label : EXPRESSION
-                  =
+                  21
                   Label : LEFT
-                    $i
+                    20
                   Label : RIGHT
-                    &
+                    16
                     Label : LEFT
-                      f
+                      26
                     Label : RIGHT
-                      $g
+                      27
               Label : FINAL
-                ;
+                3
                 Label : EXPRESSION
-                  <
+                  22
                   Label : LEFT
-                    $i
+                    20
                   Label : RIGHT
-                    10
+                    23
               Label : INCREMENT
-                ;
+                3
                 Label : EXPRESSION
-                  <
+                  22
                   Label : LEFT
-                    $i
+                    20
                   Label : RIGHT
-                    count
+                    24
                     Label : ARGUMENT
-                      $a
+                      25
                     Label : NAME
-                      count
+                      24
               Label : INIT
-                ;
+                3
                 Label : EXPRESSION
-                  =
+                  21
                   Label : LEFT
-                    $i
+                    20
                   Label : RIGHT
-                    1
+                    12
           Label : NAME
-            a
+            5

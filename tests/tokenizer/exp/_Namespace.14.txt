@@ -1,235 +1,235 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
           Label : NAME
-            B
+            5
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
           Label : NAME
-            C
+            9
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
           Label : NAME
-            D
+            11
         Label : EXPRESSION
-          namespace
+          7
           Label : BLOCK
-             
+            8
             Label : EXPRESSION
-              class
+              15
               Label : METHOD
-                F
+                19
                 Label : ARGUMENT
-                  $a
+                  21
                 Label : BLOCK
-                  {}
+                  22
                   Label : EXPRESSION
-                    if
+                    23
                     Label : CONDITION
-                      ===
+                      32
                       Label : LEFT
-                        G
+                        24
                         Label : ARGUMENT
-                          H
+                          26
                           Label : ARGUMENT
-                            I
+                            28
                           Label : ARGUMENT
-                            0
+                            30
                           Label : ARGUMENT
-                            1
+                            31
                           Label : NAME
-                            H
+                            26
                         Label : NAME
-                          G
+                          24
                       Label : RIGHT
-                        'J'
+                        33
                     Label : ELSE
-                      {}
+                      22
                       Label : EXPRESSION
-                        if
+                        23
                         Label : CONDITION
-                          K
+                          35
                           Label : ARGUMENT
-                            'Q'
+                            45
                           Label : NAME
-                            K
+                            35
                         Label : THEN
-                          {}
+                          22
                           Label : EXPRESSION
-                            return
+                            42
                             Label : RETURN
-                              V
+                              55
                               Label : ARGUMENT
-                                $a
+                                21
                               Label : NAME
-                                V
+                                55
                       Label : EXPRESSION
-                        static
+                        18
                         Label : STATIC
-                          =
+                          58
                           Label : LEFT
-                            $b
+                            57
                           Label : RIGHT
-                            Z
+                            59
                       Label : EXPRESSION
-                        if
+                        23
                         Label : CONDITION
-                          ===
+                          32
                           Label : LEFT
-                            $b
+                            57
                           Label : RIGHT
-                            Z
+                            59
                         Label : THEN
-                          {}
+                          22
                           Label : EXPRESSION
-                            =
+                            58
                             Label : LEFT
-                              $b
+                              57
                             Label : RIGHT
-                              @
+                              61
                               Label : AT
-                                AB
+                                62
                                 Label : NAME
-                                  AB
+                                  62
                                 Label : ARGUMENT
-                                  'AC'
+                                  64
                                 Label : ARGUMENT
-                                  'AD'
+                                  66
                       Label : EXPRESSION
-                        if
+                        23
                         Label : CONDITION
-                          &&
+                          39
                           Label : LEFT
-                            !==
+                            68
                             Label : LEFT
-                              $b
+                              57
                             Label : RIGHT
-                              Z
+                              59
                           Label : RIGHT
-                            !==
+                            68
                             Label : LEFT
-                              $b
+                              57
                             Label : RIGHT
-                              AF
+                              69
                         Label : THEN
-                          {}
+                          22
                           Label : EXPRESSION
-                            return
+                            42
                             Label : RETURN
-                              AG
+                              71
                               Label : NAME
-                                AG
+                                71
                               Label : ARGUMENT
-                                $b
+                                57
                               Label : ARGUMENT
-                                $a
+                                21
                       Label : EXPRESSION
-                        if
+                        23
                         Label : CONDITION
-                          K
+                          35
                           Label : ARGUMENT
-                            'L'
+                            37
                           Label : NAME
-                            K
+                            35
                         Label : THEN
-                          {}
+                          22
                           Label : EXPRESSION
-                            return
+                            42
                             Label : RETURN
-                              O
+                              43
                               Label : NAME
-                                O
+                                43
                               Label : ARGUMENT
-                                $a
+                                21
                               Label : ARGUMENT
-                                AK
+                                73
                     Label : THEN
-                      {}
+                      22
                       Label : EXPRESSION
-                        if
+                        23
                         Label : CONDITION
-                          &&
+                          39
                           Label : LEFT
-                            K
+                            35
                             Label : ARGUMENT
-                              'L'
+                              37
                             Label : NAME
-                              K
+                              35
                           Label : RIGHT
-                            K
+                            35
                             Label : ARGUMENT
-                              'N'
+                              40
                             Label : NAME
-                              K
+                              35
                         Label : THEN
-                          {}
+                          22
                           Label : EXPRESSION
-                            return
+                            42
                             Label : RETURN
-                              O
+                              43
                               Label : ARGUMENT
-                                $a
+                                21
                               Label : NAME
-                                O
+                                43
                       Label : EXPRESSION
-                        if
+                        23
                         Label : CONDITION
-                          &&
+                          39
                           Label : LEFT
-                            K
+                            35
                             Label : ARGUMENT
-                              'Q'
+                              45
                             Label : NAME
-                              K
+                              35
                           Label : RIGHT
-                            R
+                            47
                             Label : ARGUMENT
-                              S
+                              49
                             Label : ARGUMENT
-                              'T'
+                              51
                             Label : ARGUMENT
-                              'U'
+                              53
                             Label : NAME
-                              R
+                              47
                         Label : THEN
-                          {}
+                          22
                           Label : EXPRESSION
-                            return
+                            42
                             Label : RETURN
-                              V
+                              55
                               Label : ARGUMENT
-                                $a
+                                21
                               Label : NAME
-                                V
+                                55
                   Label : EXPRESSION
-                    throw
+                    75
                     Label : THROW
-                      new
+                      76
                       Label : NEW
-                        \AL
+                        77
                         Label : ARGUMENT
-                          'AM'
+                          79
                         Label : NAME
-                          \AL
+                          77
                 Label : NAME
-                  F
+                  19
                 Label : STATIC
-                  static
+                  18
               Label : NAME
-                E
+                16
           Label : NAME
-            C\D
+            13

@@ -1,59 +1,57 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            ==
+            7
             Label : LEFT
-              $a
+              6
             Label : RIGHT
-              1
+              8
           Label : THEN
-            {}
+            9
             Label : EXPRESSION
-              =
+              12
               Label : LEFT
-                $newHash
+                10
               Label : RIGHT
-                ''
+                13
             Label : EXPRESSION
-              if
+              5
               Label : CONDITION
-                ==
+                7
                 Label : LEFT
-                  $a
+                  6
                 Label : RIGHT
-                  2
+                  14
               Label : ELSE
-                {}
+                9
                 Label : EXPRESSION
-                  return
+                  19
                   Label : RETURN
-                    false
+                    21
               Label : THEN
-                {}
+                9
                 Label : EXPRESSION
-                  if
+                  5
                   Label : CONDITION
-                    !
+                    15
                     Label : NOT
-                      empty
+                      16
                       Label : ARGUMENT
-                        $newHash
-                      Label : NAME
-                        empty
+                        10
                   Label : THEN
-                    {}
+                    9
                     Label : EXPRESSION
-                      Void
+                      17
                 Label : EXPRESSION
-                  return
+                  19
                   Label : RETURN
-                    true
+                    20

@@ -1,21 +1,21 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          10
           Label : LEFT
-            $V
+            7
             Label : APPEND
-              ::
+              9
               Label : CLASS
-                A
+                5
               Label : MEMBER
-                $V
+                7
           Label : RIGHT
-            $C
+            11

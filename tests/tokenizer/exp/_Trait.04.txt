@@ -1,131 +1,125 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          trait
-          Label : DEFINITION, DEFINITION
-            Hello
+          5
+          Label : DEFINITION
+            6
           Label : METHOD
-            sayHello
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'Hello '
-                Label : NAME
-                  echo
+                  15
             Label : NAME
-              sayHello
+              9
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            Hello
+            6
         Label : EXPRESSION
-          trait
+          5
           Label : DEFINITION
-            'World'
-          Label : DEFINITION, DEFINITION
-            World
+            21
+          Label : DEFINITION
+            17
           Label : METHOD
-            sayWorld
+            19
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  'World'
-                Label : NAME
-                  echo
+                  21
             Label : NAME
-              sayWorld
+              19
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            World
+            17
         Label : EXPRESSION
-          class
+          23
           Label : DEFINITION
-            MyHelloWorld
+            24
           Label : DEFINITION
-            MyHelloWorld
+            24
             Label : ARGUMENT
-              Void
+              11
             Label : NAME
-              MyHelloWorld
+              24
           Label : METHOD
-            sayExclamationMark
+            27
             Label : ARGUMENT
-              Void
+              11
             Label : BLOCK
-              {}
+              13
               Label : EXPRESSION
-                echo
+                14
                 Label : ARGUMENT
-                  '!'
-                Label : NAME
-                  echo
+                  29
             Label : NAME
-              sayExclamationMark
+              27
             Label : PUBLIC
-              public
+              8
           Label : NAME
-            MyHelloWorld
+            24
           Label : USE
-            use
+            26
             Label : USE
-              Hello
+              6
             Label : USE
-              World
+              17
         Label : EXPRESSION
-          =
+          31
           Label : LEFT
-            $o
+            30
           Label : RIGHT
-            new
+            32
             Label : NEW
-              MyHelloWorld
+              24
               Label : ARGUMENT
-                Void
+                11
               Label : NAME
-                MyHelloWorld
+                24
         Label : EXPRESSION
-          ->
+          33
           Label : METHOD
-            sayHello
+            9
             Label : ARGUMENT
-              Void
+              11
             Label : NAME
-              sayHello
+              9
           Label : OBJECT
-            $o
+            30
         Label : EXPRESSION
-          ->
+          33
           Label : METHOD
-            sayWorld
+            19
             Label : ARGUMENT
-              Void
+              11
             Label : NAME
-              sayWorld
+              19
           Label : OBJECT
-            $o
+            30
         Label : EXPRESSION
-          ->
+          33
           Label : METHOD
-            sayExclamationMark
+            27
             Label : ARGUMENT
-              Void
+              11
             Label : NAME
-              sayExclamationMark
+              27
           Label : OBJECT
-            $o
+            30

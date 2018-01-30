@@ -58,7 +58,7 @@ class NoMagicWithArray extends Analyzer {
              ->raw('where( __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).emit().times('.self::MAX_LOOPING.')
                                         .hasLabel("Class")
                                         .out("MAGICMETHOD").out("NAME")
-                                        .filter{ it.get().value("code") in ***; } )', 
+                                        .filter{ it.get().value("code") in ***; } )',
                                         $__get);
         $this->prepareQuery();
     }

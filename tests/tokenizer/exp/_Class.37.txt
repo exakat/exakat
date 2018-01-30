@@ -1,69 +1,69 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : CONST
-            const
+            18
             Label : CONST
-              const
+              18
               Label : NAME
-                b
+                12
               Label : VALUE
-                3
+                19
           Label : NAME
-            x
+            6
           Label : PPP
-            protected
+            7
             Label : PPP
-              $a
+              8
             Label : PROTECTED
-              protected
+              7
           Label : PPP
-            protected
+            7
             Label : PPP
-              =
+              11
               Label : LEFT
-                $b
+                10
               Label : RIGHT
-                1
+                13
             Label : PROTECTED
-              protected
+              7
           Label : PPP
-            protected
+            7
             Label : PPP
-              $d
+              16
             Label : PPP
-              $c
+              14
             Label : PROTECTED
-              protected
+              7
           Label : PPP
-            protected
+            7
             Label : PPP
-              =
+              11
               Label : LEFT
-                $f
+                22
               Label : RIGHT
-                2
+                24
             Label : PPP
-              $e
+              20
             Label : PROTECTED
-              protected
+              7
           Label : PPP
-            protected
+            7
             Label : PPP
-              $h
+              27
             Label : PPP
-              =
+              11
               Label : LEFT
-                $g
+                25
               Label : RIGHT
-                3
+                19
             Label : PROTECTED
-              protected
+              7

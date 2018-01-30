@@ -1,177 +1,177 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            x
+            6
           Label : PPP
-            var
+            7
             Label : PPP
-              =
+              9
               Label : LEFT
-                $a
-              Label : RIGHT
-                1
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $b
-              Label : RIGHT
-                2
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $c
-              Label : RIGHT
-                3
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $d
-              Label : RIGHT
-                4
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $e
-              Label : RIGHT
-                5
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $f
-              Label : RIGHT
-                6
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $g
-              Label : RIGHT
-                7
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $h
-              Label : RIGHT
-                array
-                Label : ARGUMENT
-                  1
-                Label : ARGUMENT
-                  2
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $a1
-              Label : RIGHT
-                1
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $b1
-              Label : RIGHT
-                2
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $c1
-              Label : RIGHT
-                3
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $d1
-              Label : RIGHT
-                4
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $e1
-              Label : RIGHT
-                5
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $f1
-              Label : RIGHT
-                6
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $g1
-              Label : RIGHT
-                7
-            Label : VAR
-              var
-          Label : PPP
-            var
-            Label : PPP
-              =
-              Label : LEFT
-                $h1
-              Label : RIGHT
                 8
+              Label : RIGHT
+                11
             Label : VAR
-              var
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                12
+              Label : RIGHT
+                14
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                15
+              Label : RIGHT
+                17
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                18
+              Label : RIGHT
+                20
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                21
+              Label : RIGHT
+                23
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                24
+              Label : RIGHT
+                26
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                27
+              Label : RIGHT
+                29
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                30
+              Label : RIGHT
+                32
+                Label : ARGUMENT
+                  11
+                Label : ARGUMENT
+                  14
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                33
+              Label : RIGHT
+                11
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                35
+              Label : RIGHT
+                14
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                37
+              Label : RIGHT
+                17
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                39
+              Label : RIGHT
+                20
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                41
+              Label : RIGHT
+                23
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                43
+              Label : RIGHT
+                26
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                45
+              Label : RIGHT
+                29
+            Label : VAR
+              7
+          Label : PPP
+            7
+            Label : PPP
+              9
+              Label : LEFT
+                47
+              Label : RIGHT
+                49
+            Label : VAR
+              7

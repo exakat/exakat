@@ -1,95 +1,93 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          foreach
+          5
           Label : BLOCK
-            {}
+            12
             Label : EXPRESSION
-              =
+              22
               Label : LEFT
-                [
+                14
                 Label : INDEX
-                  "
+                  15
                   Label : CONCAT
-                    d 
+                    16
                   Label : CONCAT
-                    "
+                    15
                     Label : MEMBER
-                      f
+                      18
                     Label : OBJECT
-                      $e
+                      17
                   Label : CONCAT
-                     
+                    19
                   Label : CONCAT
-                    $g
+                    20
                   Label : CONCAT
-                     
+                    19
                   Label : CONCAT
-                    $h
+                    21
                 Label : VARIABLE
-                  $items
+                  13
               Label : RIGHT
-                array
+                23
                 Label : ARGUMENT
-                  Void
+                  7
           Label : SOURCE
-            a
+            6
             Label : ARGUMENT
-              Void
+              7
             Label : NAME
-              a
+              6
           Label : VALUE
-            =>
+            10
             Label : INDEX
-              $b
+              9
             Label : VALUE
-              $c
+              11
         Label : EXPRESSION
-          if
+          24
           Label : CONDITION
-            !
+            25
             Label : NOT
-              empty
+              26
               Label : ARGUMENT
-                [
+                14
                 Label : INDEX
-                  'j'
+                  28
                 Label : VARIABLE
-                  $i
-              Label : NAME
-                empty
+                  27
           Label : THEN
-            {}
+            12
             Label : EXPRESSION
-              =
+              22
               Label : LEFT
-                [
+                14
                 Label : INDEX
-                  "
+                  15
                   Label : CONCAT
-                    k 
+                    29
                   Label : CONCAT
-                    "
+                    15
                     Label : MEMBER
-                      m
+                      31
                     Label : OBJECT
-                      $l
+                      30
                   Label : CONCAT
-                     
+                    19
                   Label : CONCAT
-                    $n
+                    32
                   Label : CONCAT
-                     o
+                    33
                 Label : VARIABLE
-                  $items
+                  13
               Label : RIGHT
-                array
+                23
                 Label : ARGUMENT
-                  Void
+                  7

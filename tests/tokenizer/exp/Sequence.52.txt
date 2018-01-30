@@ -1,95 +1,77 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !
+            6
             Label : NOT
-              empty
+              7
               Label : ARGUMENT
-                $a
-              Label : NAME
-                empty
+                8
           Label : ELSE
-            elseif
+            15
             Label : CONDITION
-              !
+              6
               Label : NOT
-                empty
+                7
                 Label : ARGUMENT
-                  $c
-                Label : NAME
-                  empty
+                  16
             Label : THEN
-              ;
+              3
               Label : EXPRESSION
-                F
-    
+                17
               Label : EXPRESSION
-                print
+                12
                 Label : ARGUMENT
-                  $d
-                Label : NAME
-                  print
+                  19
               Label : EXPRESSION
-                G
-
+                20
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              D
-    
+              9
             Label : EXPRESSION
-              print
+              12
               Label : ARGUMENT
-                $b
-              Label : NAME
-                print
+                11
             Label : EXPRESSION
-              E
-
+              13
         Label : EXPRESSION
-          Void
+          22
         Label : EXPRESSION
-          H
-
+          24
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            !
+            6
             Label : NOT
-              empty
+              7
               Label : ARGUMENT
-                $e
-              Label : NAME
-                empty
+                26
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              J
-    
+              27
             Label : EXPRESSION
-              print
+              12
               Label : ARGUMENT
-                .
+                31
                 Label : CONCAT
-                  f
+                  29
                   Label : ARGUMENT
-                    'g'
+                    30
                   Label : NAME
-                    f
+                    29
                 Label : CONCAT
-                  $h
-              Label : NAME
-                print
+                  32
             Label : EXPRESSION
-              K
-
+              33
         Label : EXPRESSION
-          Void
+          22

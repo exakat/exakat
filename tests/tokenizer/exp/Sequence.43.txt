@@ -1,77 +1,75 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            10
             Label : LEFT
-              isset
+              6
               Label : ARGUMENT
-                [
+                8
                 Label : INDEX
-                  'b'
+                  9
                 Label : VARIABLE
-                  $a
-              Label : NAME
-                isset
+                  7
             Label : RIGHT
-              is_array
+              11
               Label : ARGUMENT
-                [
+                8
                 Label : INDEX
-                  'd'
+                  13
                 Label : VARIABLE
-                  $c
+                  12
               Label : NAME
-                is_array
+                11
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              foreach
+              14
               Label : BLOCK
-                {}
+                20
                 Label : EXPRESSION
-                  =
+                  22
                   Label : LEFT
-                    $i
+                    21
                   Label : RIGHT
-                    1
+                    23
                 Label : EXPRESSION
-                  =
+                  22
                   Label : LEFT
-                    $j
+                    24
                   Label : RIGHT
-                    2
+                    25
               Label : SOURCE
-                [
+                8
                 Label : INDEX
-                  'f'
+                  16
                 Label : VARIABLE
-                  $e
+                  15
               Label : VALUE
-                =>
+                18
                 Label : INDEX
-                  $g
+                  17
                 Label : VALUE
-                  $h
+                  19
         Label : EXPRESSION
-          =
+          22
           Label : LEFT
-            [
+            8
             Label : INDEX
-              'l'
+              27
             Label : VARIABLE
-              $k
+              26
           Label : RIGHT
-            [
+            8
             Label : INDEX
-              'n'
+              29
             Label : VARIABLE
-              $m
+              28

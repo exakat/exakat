@@ -1,67 +1,67 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          B
+          5
           Label : ARGUMENT
-            Void
+            7
           Label : BLOCK
-            {}
+            9
             Label : EXPRESSION
-              foreach
+              10
               Label : BLOCK
-                ;
+                3
                 Label : EXPRESSION
-                  try
+                  13
                   Label : BLOCK
-                    {}
+                    9
                     Label : EXPRESSION
-                      ->
+                      17
                       Label : METHOD
-                        D
+                        18
                         Label : ARGUMENT
-                          Void
+                          7
                         Label : NAME
-                          D
+                          18
                       Label : OBJECT
-                        ->
+                        17
                         Label : MEMBER
-                          C
+                          15
                         Label : OBJECT
-                          $d
+                          14
                     Label : EXPRESSION
-                      ->
+                      17
                       Label : METHOD
-                        F
+                        20
                         Label : ARGUMENT
-                          Void
+                          7
                         Label : NAME
-                          F
+                          20
                       Label : OBJECT
-                        ->
+                        17
                         Label : MEMBER
-                          C
+                          15
                         Label : OBJECT
-                          $d
+                          14
                   Label : CATCH
-                    catch
+                    22
                     Label : BLOCK
-                      {}
+                      9
                       Label : EXPRESSION
-                        Void
+                        7
                     Label : CLASS
-                      G
+                      23
                     Label : VARIABLE
-                      $e
+                      25
               Label : SOURCE
-                $b
+                11
               Label : VALUE
-                $c
+                12
           Label : NAME
-            B
+            5

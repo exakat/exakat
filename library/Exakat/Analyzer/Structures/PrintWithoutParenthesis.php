@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class PrintWithoutParenthesis extends Analyzer {
     public function analyze() {
-        // print(1); 
+        // print(1);
         $this->atomIs('Print')
              ->outIs('ARGUMENT')
              ->atomIs('Parenthesis')

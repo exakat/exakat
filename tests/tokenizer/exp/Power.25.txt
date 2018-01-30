@@ -1,37 +1,37 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          8
           Label : LEFT
-            [
+            6
             Label : INDEX
-              'b'
+              7
             Label : VARIABLE
-              $a
+              5
           Label : RIGHT
-            number_format
+            9
             Label : NAME
-              number_format
+              9
             Label : ARGUMENT
-              /
+              12
               Label : LEFT
-                PHP_MAJOR_VERSION
+                10
               Label : RIGHT
-                **
+                15
                 Label : LEFT
-                  [
+                  6
                   Label : INDEX
-                    'g'
+                    14
                   Label : VARIABLE
-                    $f
+                    13
                 Label : RIGHT
-                  1
+                  16
             Label : ARGUMENT
-              2
+              17

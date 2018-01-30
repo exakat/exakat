@@ -1,109 +1,109 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          11
           Label : LEFT
-            ]
+            10
             Label : APPEND
-              [
+              6
               Label : INDEX
-                'd'
+                9
               Label : VARIABLE
-                [
+                6
                 Label : INDEX
-                  [
+                  6
                   Label : INDEX
-                    'c'
+                    8
                   Label : VARIABLE
-                    $b
+                    7
                 Label : VARIABLE
-                  $a
+                  5
           Label : RIGHT
-            [
+            6
             Label : INDEX
-              'e'
+              13
             Label : VARIABLE
-              $f
+              12
         Label : EXPRESSION
-          =
+          11
           Label : LEFT
-            [
+            6
             Label : INDEX
-              [
+              6
               Label : INDEX
-                $d
+                15
               Label : VARIABLE
-                $c
+                14
             Label : VARIABLE
-              [
+              6
               Label : INDEX
-                $b
+                7
               Label : VARIABLE
-                $a
+                5
           Label : RIGHT
-            chop
+            16
             Label : ARGUMENT
-              substr
+              17
               Label : NAME
-                substr
+                17
               Label : ARGUMENT
-                $e
+                18
               Label : ARGUMENT
-                1
+                19
             Label : NAME
-              chop
+              16
         Label : EXPRESSION
-          =
+          11
           Label : LEFT
-            [
+            6
             Label : INDEX
-              [
+              6
               Label : INDEX
-                $i
+                22
               Label : VARIABLE
-                $h
+                21
             Label : VARIABLE
-              [
+              6
               Label : INDEX
-                $g
+                20
               Label : VARIABLE
-                $f
+                12
           Label : RIGHT
-            +
+            24
             Label : LEFT
-              $j
+              23
             Label : RIGHT
-              1
+              19
         Label : EXPRESSION
-          =
+          11
           Label : LEFT
-            [
+            6
             Label : INDEX
-              [
+              6
               Label : INDEX
-                'h'
+                28
               Label : VARIABLE
-                $g
+                20
             Label : VARIABLE
-              [
+              6
               Label : INDEX
-                $f
+                12
               Label : VARIABLE
-                [
+                6
                 Label : INDEX
-                  $e
+                  18
                 Label : VARIABLE
-                  ::
+                  27
                   Label : CLASS
-                    C
+                    25
                   Label : MEMBER
-                    $d
+                    15
           Label : RIGHT
-            $i
+            22

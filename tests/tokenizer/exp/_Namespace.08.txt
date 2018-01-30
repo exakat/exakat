@@ -1,93 +1,91 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          declare
+          5
           Label : ARGUMENT
-            =
+            7
             Label : LEFT
-              ticks
+              6
             Label : RIGHT
-              1
+              8
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              Void
+              9
         Label : EXPRESSION
-          namespace
+          13
           Label : BLOCK
-            {}
+            14
             Label : EXPRESSION
-              const
+              15
               Label : CONST
-                const
+                15
                 Label : NAME
-                  CONNECT_OK
+                  16
                 Label : VALUE
-                  1
+                  8
             Label : EXPRESSION
-              class
+              18
               Label : DEFINITION
-                MyProject\Connection
+                27
               Label : NAME
-                Connection
+                19
             Label : EXPRESSION
-              connect
+              21
               Label : ARGUMENT
-                Void
+                9
               Label : BLOCK
-                {}
+                14
                 Label : EXPRESSION
-                  Void
+                  9
               Label : DEFINITION
-                MyProject\connect
+                24
                 Label : ARGUMENT
-                  Void
+                  9
                 Label : NAME
-                  MyProject\connect
+                  24
               Label : NAME
-                connect
+                21
           Label : NAME
-            MyProject
+            11
         Label : EXPRESSION
-          namespace
+          13
           Label : BLOCK
-            {}
+            14
             Label : EXPRESSION
-              session_start
+              22
               Label : ARGUMENT
-                Void
+                9
               Label : NAME
-                session_start
+                22
             Label : EXPRESSION
-              =
+              7
               Label : LEFT
-                $a
+                23
               Label : RIGHT
-                MyProject\connect
+                24
                 Label : ARGUMENT
-                  Void
+                  9
                 Label : NAME
-                  MyProject\connect
+                  24
             Label : EXPRESSION
-              echo
+              26
               Label : ARGUMENT
-                ::
+                30
                 Label : CLASS
-                  MyProject\Connection
+                  27
                 Label : METHOD
-                  start
+                  29
                   Label : ARGUMENT
-                    Void
+                    9
                   Label : NAME
-                    start
-              Label : NAME
-                echo
+                    29
           Label : NAME
-            Void
+            9

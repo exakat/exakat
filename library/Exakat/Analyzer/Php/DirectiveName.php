@@ -25,13 +25,14 @@ use Exakat\Analyzer\Analyzer;
 
 class DirectiveName extends Analyzer {
     public function analyze() {
+        // ini_set('my.own.directive');
         $directives = $this->loadIni('directives.ini', 'directives');
 
         $this->atomFunctionIs(array('\\ini_set', '\\ini_get'))
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->noDelimiterIsNot($directives)
+             ->noDelimiterIsNot($directives, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

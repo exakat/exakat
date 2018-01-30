@@ -1,65 +1,65 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            &&
+            10
             Label : LEFT
-              instanceof
+              7
               Label : CLASS
-                B\C
+                8
               Label : VARIABLE
-                $a
+                6
             Label : RIGHT
-              ->
+              16
               Label : METHOD
-                D
+                12
                 Label : ARGUMENT
-                  Void
+                  14
                 Label : NAME
-                  D
+                  12
               Label : OBJECT
-                $b
+                11
           Label : THEN
-            {}
+            17
             Label : EXPRESSION
-              =
+              19
               Label : LEFT
-                $c
+                18
               Label : RIGHT
-                clone
+                20
                 Label : CLONE
-                  (
+                  21
                   Label : CODE
-                    ?
+                    23
                     Label : CONDITION
-                      $d
+                      22
                     Label : ELSE
-                      ->
+                      16
                       Label : MEMBER
-                        E
+                        25
                       Label : OBJECT
-                        $e
+                        24
                     Label : THEN
-                      Void
+                      14
             Label : EXPRESSION
-              ->
+              16
               Label : METHOD
-                F
+                28
                 Label : ARGUMENT
-                  $g
+                  30
                 Label : NAME
-                  F
+                  28
               Label : OBJECT
-                $f
+                27
             Label : EXPRESSION
-              return
+              31
               Label : RETURN
-                $h
+                32

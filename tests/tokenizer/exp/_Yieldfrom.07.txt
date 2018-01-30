@@ -1,135 +1,133 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          count_to_ten
+          5
           Label : ARGUMENT
-            Void
+            6
           Label : BLOCK
-            {}
+            8
             Label : EXPRESSION
-              yield
-              Label : YIELD
-                1
-            Label : EXPRESSION
-              yield
-              Label : YIELD
-                2
-            Label : EXPRESSION
-              yield from
-              Label : YIELD
-                [
-                Label : ARGUMENT
-                  3
-                Label : ARGUMENT
-                  4
-            Label : EXPRESSION
-              yield from
-              Label : YIELD
-                new
-                Label : NEW
-                  ArrayIterator
-                  Label : ARGUMENT
-                    [
-                    Label : ARGUMENT
-                      5
-                    Label : ARGUMENT
-                      6
-                  Label : NAME
-                    ArrayIterator
-            Label : EXPRESSION
-              yield from
-              Label : YIELD
-                seven_eight
-                Label : ARGUMENT
-                  Void
-                Label : NAME
-                  seven_eight
-            Label : EXPRESSION
-              yield
-              Label : YIELD
-                9
-            Label : EXPRESSION
-              yield
+              9
               Label : YIELD
                 10
-          Label : DEFINITION
-            count_to_ten
-            Label : ARGUMENT
-              Void
-            Label : NAME
-              count_to_ten
-          Label : NAME
-            count_to_ten
-        Label : EXPRESSION
-          seven_eight
-          Label : ARGUMENT
-            Void
-          Label : BLOCK
-            {}
             Label : EXPRESSION
-              yield
+              9
               Label : YIELD
-                7
+                11
             Label : EXPRESSION
-              yield from
+              12
               Label : YIELD
-                eight
+                13
                 Label : ARGUMENT
-                  Void
-                Label : NAME
-                  eight
-          Label : DEFINITION
-            seven_eight
-            Label : ARGUMENT
-              Void
-            Label : NAME
-              seven_eight
-          Label : NAME
-            seven_eight
-        Label : EXPRESSION
-          eight
-          Label : ARGUMENT
-            Void
-          Label : BLOCK
-            {}
+                  14
+                Label : ARGUMENT
+                  15
             Label : EXPRESSION
-              yield
+              12
               Label : YIELD
-                8
-          Label : DEFINITION
-            eight
-            Label : ARGUMENT
-              Void
-            Label : NAME
-              eight
-          Label : NAME
-            eight
-        Label : EXPRESSION
-          foreach
-          Label : BLOCK
-            {}
+                16
+                Label : NEW
+                  17
+                  Label : ARGUMENT
+                    13
+                    Label : ARGUMENT
+                      19
+                    Label : ARGUMENT
+                      20
+                  Label : NAME
+                    17
             Label : EXPRESSION
-              echo
-              Label : ARGUMENT
-                "
-                Label : CONCAT
-                  $num
-                Label : CONCAT
-                   
-              Label : NAME
-                echo
-          Label : SOURCE
-            count_to_ten
+              12
+              Label : YIELD
+                21
+                Label : ARGUMENT
+                  6
+                Label : NAME
+                  21
+            Label : EXPRESSION
+              9
+              Label : YIELD
+                22
+            Label : EXPRESSION
+              9
+              Label : YIELD
+                23
+          Label : DEFINITION
+            5
             Label : ARGUMENT
-              Void
+              6
             Label : NAME
-              count_to_ten
+              5
+          Label : NAME
+            5
+        Label : EXPRESSION
+          21
+          Label : ARGUMENT
+            6
+          Label : BLOCK
+            8
+            Label : EXPRESSION
+              9
+              Label : YIELD
+                24
+            Label : EXPRESSION
+              12
+              Label : YIELD
+                25
+                Label : ARGUMENT
+                  6
+                Label : NAME
+                  25
+          Label : DEFINITION
+            21
+            Label : ARGUMENT
+              6
+            Label : NAME
+              21
+          Label : NAME
+            21
+        Label : EXPRESSION
+          25
+          Label : ARGUMENT
+            6
+          Label : BLOCK
+            8
+            Label : EXPRESSION
+              9
+              Label : YIELD
+                26
+          Label : DEFINITION
+            25
+            Label : ARGUMENT
+              6
+            Label : NAME
+              25
+          Label : NAME
+            25
+        Label : EXPRESSION
+          27
+          Label : BLOCK
+            8
+            Label : EXPRESSION
+              29
+              Label : ARGUMENT
+                30
+                Label : CONCAT
+                  28
+                Label : CONCAT
+                  31
+          Label : SOURCE
+            5
+            Label : ARGUMENT
+              6
+            Label : NAME
+              5
           Label : VALUE
-            $num
+            28

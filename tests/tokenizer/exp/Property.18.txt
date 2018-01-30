@@ -1,69 +1,69 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          =
+          15
           Label : LEFT
-            ->
+            8
             Label : MEMBER
-              {}
+              14
               Label : CODE
-                ->
+                8
                 Label : MEMBER
-                  k
+                  13
                 Label : OBJECT
-                  $j
+                  12
             Label : OBJECT
-              ->
+              8
               Label : METHOD
-                i
+                9
                 Label : ARGUMENT
-                  Void
+                  10
                 Label : NAME
-                  i
+                  9
               Label : OBJECT
-                ->
+                8
                 Label : METHOD
-                  g
+                  6
                   Label : ARGUMENT
-                    $h
+                    7
                   Label : NAME
-                    g
+                    6
                 Label : OBJECT
-                  $f
+                  5
           Label : RIGHT
-            $l
+            16
         Label : EXPRESSION
-          Void
+          10
         Label : EXPRESSION
-          =
+          15
           Label : LEFT
-            ->
+            8
             Label : MEMBER
-              d
+              21
             Label : OBJECT
-              ->
+              8
               Label : METHOD
-                c
+                20
                 Label : ARGUMENT
-                  Void
+                  10
                 Label : NAME
-                  c
+                  20
               Label : OBJECT
-                ->
+                8
                 Label : METHOD
-                  b
+                  18
                   Label : ARGUMENT
-                    $c
+                    19
                   Label : NAME
-                    b
+                    18
                 Label : OBJECT
-                  $a
+                  17
           Label : RIGHT
-            $e
+            22

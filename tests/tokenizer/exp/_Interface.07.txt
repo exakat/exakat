@@ -1,83 +1,83 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          interface
+          5
           Label : EXTENDS
-            B\C
+            8
           Label : METHOD
-            D
+            10
             Label : ARGUMENT
-              $f
+              14
               Label : TYPEHINT
-                E
+                12
             Label : BLOCK
-              Void
+              15
             Label : NAME
-              D
+              10
           Label : NAME
-            A
+            6
         Label : EXPRESSION
-          interface
+          5
           Label : EXTENDS
-            G
+            17
           Label : EXTENDS
-            B\C
+            8
           Label : METHOD
-            D
+            10
             Label : ARGUMENT
-              $f
+              14
               Label : TYPEHINT
-                E
+                12
             Label : BLOCK
-              Void
+              15
             Label : NAME
-              D
+              10
           Label : NAME
-            A
+            6
         Label : EXPRESSION
-          interface
+          5
           Label : EXTENDS
-            G
+            17
           Label : EXTENDS
-            B\C
+            8
           Label : EXTENDS
-            I
+            19
           Label : METHOD
-            D
+            10
             Label : ARGUMENT
-              $f
+              14
               Label : TYPEHINT
-                E
+                12
             Label : BLOCK
-              Void
+              15
             Label : NAME
-              D
+              10
           Label : NAME
-            A
+            6
         Label : EXPRESSION
-          interface
+          5
           Label : EXTENDS
-            G
+            17
           Label : EXTENDS
-            B\C
+            8
           Label : EXTENDS
-            I\H
+            21
           Label : METHOD
-            D
+            10
             Label : ARGUMENT
-              $f
+              14
               Label : TYPEHINT
-                E
+                12
             Label : BLOCK
-              Void
+              15
             Label : NAME
-              D
+              10
           Label : NAME
-            A
+            6

@@ -1,189 +1,189 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : NAME
-            x
+            6
           Label : PPP
-            static
+            8
             Label : PPP
-              $a2
+              9
             Label : PUBLIC
-              public
+              7
             Label : STATIC
-              static
+              8
           Label : PPP
-            public
+            7
             Label : PPP
-              $a1
+              11
             Label : PUBLIC
-              public
+              7
             Label : STATIC
-              static
+              8
           Label : PPP
-            public
+            7
             Label : PPP
-              $a3
+              13
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            static
+            8
             Label : PPP
-              $a4
+              15
             Label : STATIC
-              static
+              8
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              18
               Label : LEFT
-                $b1
+                17
               Label : RIGHT
-                1
+                20
             Label : PUBLIC
-              public
+              7
             Label : STATIC
-              static
+              8
           Label : PPP
-            static
+            8
             Label : PPP
-              =
+              18
               Label : LEFT
-                $b2
+                22
               Label : RIGHT
-                2
+                24
             Label : PRIVATE
-              private
+              21
             Label : STATIC
-              static
+              8
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              18
               Label : LEFT
-                $b3
+                25
               Label : RIGHT
-                3
+                27
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            static
+            8
             Label : PPP
-              =
+              18
               Label : LEFT
-                $b4
+                28
               Label : RIGHT
-                4
+                30
             Label : STATIC
-              static
+              8
           Label : PPP
-            public
+            7
             Label : PPP
-              $d1
+              31
             Label : PPP
-              $e1
+              33
             Label : PUBLIC
-              public
+              7
             Label : STATIC
-              static
+              8
           Label : PPP
-            static
+            8
             Label : PPP
-              $d2
+              35
             Label : PPP
-              $e2
+              37
             Label : PRIVATE
-              private
+              21
             Label : STATIC
-              static
+              8
           Label : PPP
-            public
+            7
             Label : PPP
-              $e3
+              41
             Label : PPP
-              $d3
+              39
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            static
+            8
             Label : PPP
-              $e4
+              45
             Label : PPP
-              $d4
+              43
             Label : STATIC
-              static
+              8
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              18
               Label : LEFT
-                $f1
+                47
               Label : RIGHT
-                1
+                20
             Label : PPP
-              =
+              18
               Label : LEFT
-                $g1
+                49
               Label : RIGHT
-                2
+                24
             Label : PUBLIC
-              public
+              7
             Label : STATIC
-              static
+              8
           Label : PPP
-            static
+            8
             Label : PPP
-              =
+              18
               Label : LEFT
-                $f2
+                52
               Label : RIGHT
-                2
+                24
             Label : PPP
-              =
+              18
               Label : LEFT
-                $g2
+                54
               Label : RIGHT
-                3
+                27
             Label : PROTECTED
-              protected
+              51
             Label : STATIC
-              static
+              8
           Label : PPP
-            public
+            7
             Label : PPP
-              =
+              18
               Label : LEFT
-                $g3
+                58
               Label : RIGHT
-                3
+                27
             Label : PPP
-              =
+              18
               Label : LEFT
-                $f3
+                56
               Label : RIGHT
-                3
+                27
             Label : PUBLIC
-              public
+              7
           Label : PPP
-            static
+            8
             Label : PPP
-              =
+              18
               Label : LEFT
-                $g4
+                62
               Label : RIGHT
-                5
+                64
             Label : PPP
-              =
+              18
               Label : LEFT
-                $f4
+                60
               Label : RIGHT
-                4
+                30
             Label : STATIC
-              static
+              8

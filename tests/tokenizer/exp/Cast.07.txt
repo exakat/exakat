@@ -1,33 +1,33 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          (real)
+          5
           Label : CAST
-            ::
+            8
             Label : CLASS
-              x
+              6
             Label : MEMBER
-              $y
+              7
         Label : EXPRESSION
-          (float)
+          9
           Label : CAST
-            ::
+            8
             Label : CLASS
-              y
+              10
             Label : CONSTANT
-              y
+              10
         Label : EXPRESSION
-          (double)
+          11
           Label : CAST
-            ->
+            14
             Label : MEMBER
-              h
+              13
             Label : OBJECT
-              $z
+              12

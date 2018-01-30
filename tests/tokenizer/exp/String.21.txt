@@ -47,8 +47,6 @@ Label : PROJECT
                         15
                       Label : CONCAT
                         18
-                    Label : NAME
-                      14
                 Label : NAME
                   10
               Label : NAME

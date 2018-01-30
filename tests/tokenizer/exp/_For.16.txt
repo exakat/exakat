@@ -1,72 +1,71 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          for
+          5
           Label : BLOCK
-            ;
+            3
             Label : EXPRESSION
-              ->
+              13
               Label : METHOD
-                f
+                17
                 Label : ARGUMENT
-                  $g
+                  18
                 Label : NAME
-                  f
+                  17
               Label : OBJECT
-                $e
+                16
             Label : EXPRESSION
-              echo
+              19
               Label : ARGUMENT
-                ->
+                13
                 Label : METHOD
-                  i
+                  21
                   Label : ARGUMENT
-                    'j'
+                    22
                   Label : NAME
-                    i
+                    21
                 Label : OBJECT
-                  $h
-              Label : NAME
-                echo
+                  20
           Label : FINAL
-            ;
+            3
             Label : EXPRESSION
-              <
+              14
               Label : LEFT
-                $i
+                6
               Label : RIGHT
-                $n
+                9
           Label : INCREMENT
-            ;
+            3
             Label : EXPRESSION
-              ++
+              15
               Label : POSTPLUSPLUS
-                $i
+                6
           Label : INIT
-            ;
+            3
             Label : EXPRESSION
-              =
+              7
               Label : LEFT
-                $i
+                6
               Label : RIGHT
-                0
+                8
             Label : EXPRESSION
-              =
+              7
               Label : LEFT
-                $n
+                9
               Label : RIGHT
-                count
+                10
                 Label : ARGUMENT
-                  ->
+                  13
                   Label : MEMBER
-                    d
+                    12
                   Label : OBJECT
-                    $c
+                    11
                 Label : NAME
-                  count
+                  10

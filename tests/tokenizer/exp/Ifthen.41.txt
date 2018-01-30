@@ -1,66 +1,61 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php 
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          if
+          5
           Label : CONDITION
-            $a
+            6
           Label : THEN
-            ;
+            3
             Label : EXPRESSION
-              A
+              7
             Label : EXPRESSION
-              if
+              5
               Label : CONDITION
-                $b
+                9
               Label : THEN
-                ;
+                3
                 Label : EXPRESSION
-                  B
+                  10
                 Label : EXPRESSION
-                  print
+                  13
                   Label : ARGUMENT
-                    $c
-                  Label : NAME
-                    print
+                    12
                 Label : EXPRESSION
-                  C
+                  14
                 Label : EXPRESSION
-                  print
+                  13
                   Label : ARGUMENT
-                    t
+                    16
                     Label : ARGUMENT
-                      'd'
+                      17
                     Label : NAME
-                      t
-                  Label : NAME
-                    print
+                      16
                 Label : EXPRESSION
-                  D
+                  18
                 Label : EXPRESSION
-                  print
+                  13
                   Label : ARGUMENT
-                    .
+                    21
                     Label : CONCAT
-                      t
+                      16
                       Label : ARGUMENT
-                        'e'
+                        20
                       Label : NAME
-                        t
+                        16
                     Label : CONCAT
-                      $f
-                  Label : NAME
-                    print
+                      22
                 Label : EXPRESSION
-                  F
+                  23
             Label : EXPRESSION
-              Void
+              25
             Label : EXPRESSION
-              G
+              27
         Label : EXPRESSION
-          Void
+          25

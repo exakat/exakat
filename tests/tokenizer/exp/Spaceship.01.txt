@@ -1,369 +1,329 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              1
+              6
             Label : RIGHT
-              1
-          Label : NAME
-            echo
+              6
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              1
+              6
             Label : RIGHT
-              2
-          Label : NAME
-            echo
+              8
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              2
+              8
             Label : RIGHT
-              1
-          Label : NAME
-            echo
+              6
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              1.5
+              9
             Label : RIGHT
-              1.5
-          Label : NAME
-            echo
+              9
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              1.5
+              9
             Label : RIGHT
-              2.5
-          Label : NAME
-            echo
+              10
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              2.5
+              10
             Label : RIGHT
-              1.5
-          Label : NAME
-            echo
+              9
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              "a"
+              11
             Label : RIGHT
-              "a"
-          Label : NAME
-            echo
+              11
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              "a"
+              11
             Label : RIGHT
-              "b"
-          Label : NAME
-            echo
+              12
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              "b"
+              12
             Label : RIGHT
-              "a"
-          Label : NAME
-            echo
+              11
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              "a"
+              11
             Label : RIGHT
-              "aa"
-          Label : NAME
-            echo
+              13
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              "zz"
+              14
             Label : RIGHT
-              "aa"
-          Label : NAME
-            echo
+              13
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              [
+              15
               Label : ARGUMENT
-                Void
+                16
             Label : RIGHT
-              [
+              15
               Label : ARGUMENT
-                Void
-          Label : NAME
-            echo
+                16
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              [
+              15
               Label : ARGUMENT
-                1
+                6
               Label : ARGUMENT
-                2
+                8
               Label : ARGUMENT
-                3
+                18
             Label : RIGHT
-              [
+              15
               Label : ARGUMENT
-                1
+                6
               Label : ARGUMENT
-                2
+                8
               Label : ARGUMENT
-                3
-          Label : NAME
-            echo
+                18
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              [
+              15
               Label : ARGUMENT
-                1
+                6
               Label : ARGUMENT
-                2
+                8
               Label : ARGUMENT
-                3
+                18
             Label : RIGHT
-              [
+              15
               Label : ARGUMENT
-                Void
-          Label : NAME
-            echo
+                16
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              [
+              15
               Label : ARGUMENT
-                1
+                6
               Label : ARGUMENT
-                2
+                8
               Label : ARGUMENT
-                3
+                18
             Label : RIGHT
-              [
+              15
               Label : ARGUMENT
-                1
+                6
               Label : ARGUMENT
-                2
+                8
               Label : ARGUMENT
-                1
-          Label : NAME
-            echo
+                6
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              [
+              15
               Label : ARGUMENT
-                1
+                6
               Label : ARGUMENT
-                2
+                8
               Label : ARGUMENT
-                3
+                18
             Label : RIGHT
-              [
+              15
               Label : ARGUMENT
-                1
+                6
               Label : ARGUMENT
-                2
+                8
               Label : ARGUMENT
-                4
-          Label : NAME
-            echo
+                19
         Label : EXPRESSION
-          =
+          21
           Label : LEFT
-            $a
+            20
           Label : RIGHT
-            (object)
+            22
             Label : CAST
-              [
+              15
               Label : ARGUMENT
-                =>
+                23
                 Label : INDEX
-                  "a"
+                  11
                 Label : VALUE
-                  "b"
+                  12
         Label : EXPRESSION
-          =
+          21
           Label : LEFT
-            $b
+            24
           Label : RIGHT
-            (object)
+            22
             Label : CAST
-              [
+              15
               Label : ARGUMENT
-                =>
+                23
                 Label : INDEX
-                  "a"
+                  11
                 Label : VALUE
-                  "b"
+                  12
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              $a
+              20
             Label : RIGHT
-              $b
-          Label : NAME
-            echo
+              24
         Label : EXPRESSION
-          =
+          21
           Label : LEFT
-            $a
+            20
           Label : RIGHT
-            (object)
+            22
             Label : CAST
-              [
+              15
               Label : ARGUMENT
-                =>
+                23
                 Label : INDEX
-                  "a"
+                  11
                 Label : VALUE
-                  "b"
+                  12
         Label : EXPRESSION
-          =
+          21
           Label : LEFT
-            $b
+            24
           Label : RIGHT
-            (object)
+            22
             Label : CAST
-              [
+              15
               Label : ARGUMENT
-                =>
+                23
                 Label : INDEX
-                  "a"
+                  11
                 Label : VALUE
-                  "c"
+                  25
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              $a
+              20
             Label : RIGHT
-              $b
-          Label : NAME
-            echo
+              24
         Label : EXPRESSION
-          =
+          21
           Label : LEFT
-            $a
+            20
           Label : RIGHT
-            (object)
+            22
             Label : CAST
-              [
+              15
               Label : ARGUMENT
-                =>
+                23
                 Label : INDEX
-                  "a"
+                  11
                 Label : VALUE
-                  "c"
+                  25
         Label : EXPRESSION
-          =
+          21
           Label : LEFT
-            $b
+            24
           Label : RIGHT
-            (object)
+            22
             Label : CAST
-              [
+              15
               Label : ARGUMENT
-                =>
+                23
                 Label : INDEX
-                  "a"
+                  11
                 Label : VALUE
-                  "b"
+                  12
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              $a
+              20
             Label : RIGHT
-              $b
-          Label : NAME
-            echo
+              24
         Label : EXPRESSION
-          =
+          21
           Label : LEFT
-            $a
+            20
           Label : RIGHT
-            (object)
+            22
             Label : CAST
-              [
+              15
               Label : ARGUMENT
-                =>
+                23
                 Label : INDEX
-                  "a"
+                  11
                 Label : VALUE
-                  "b"
+                  12
         Label : EXPRESSION
-          =
+          21
           Label : LEFT
-            $b
+            24
           Label : RIGHT
-            (object)
+            22
             Label : CAST
-              [
+              15
               Label : ARGUMENT
-                =>
+                23
                 Label : INDEX
-                  "b"
+                  12
                 Label : VALUE
-                  "b"
+                  12
         Label : EXPRESSION
-          echo
+          5
           Label : ARGUMENT
-            <=>
+            7
             Label : LEFT
-              $a
+              20
             Label : RIGHT
-              $b
-          Label : NAME
-            echo
+              24
