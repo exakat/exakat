@@ -224,10 +224,10 @@ class Phpexec {
 
     public function compile($file) {
         $shell = shell_exec($this->phpexec.' -l '.escapeshellarg($file).' 2>&1');
-        $shell = preg_replace('/(PHP Warning|Warning|Strict Standards|PHP Warning|PHP Strict Standards|PHP Deprecated|Deprecated): .*?\n/i', '', $shell);
         $shell = trim($shell);
+        $shell = preg_replace('/(PHP Warning|Warning|Strict Standards|PHP Warning|PHP Strict Standards|PHP Deprecated|Deprecated): .*?\n/i', '', $shell);
 
-        return trim($shell) == 'No syntax errors detected in '.$file;
+        return $shell == 'No syntax errors detected in '.$file;
     }
 
     public function getWhiteCode() {
