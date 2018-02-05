@@ -48,15 +48,17 @@ class SubstrFirst extends Analyzer {
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->codeIs('=')
+             ->_as('results')
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'tmp')
              ->inIs('LEFT')
              ->nextSibling()
+             ->atomIsNot(array('Ifthen')) // possibly others
              ->atomInside('Functioncall')
              ->functioncallIs($substrFunctions)
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'tmp')
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
 
         // substr('a'.$b, 0, 100);
