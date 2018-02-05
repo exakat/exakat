@@ -27,7 +27,7 @@ function f4($a, $b) {
     print($b);
 }
 
-f4($_SERVER['DOCUMENT_ROOT'], $_SERVER['QUERY_STRING']);
+f4($_SERVER['DOCUMENT_ROOT'], $_SERVER['PHP_SELF']);
 
 
 
@@ -45,7 +45,7 @@ function f6($a, $b) {
     strtolower( $b);
 }
 
-f6($_SERVER['DOCUMENT_ROOT'], $_SERVER['QUERY_STRING']);
+f6($_SERVER['DOCUMENT_ROOT'], $_SERVER['GATEWAY_INTERFACE']);
 
 // No function definition
 f7($_SERVER['HTTP_HOST'], $_SERVER['HTTP_PORT']);

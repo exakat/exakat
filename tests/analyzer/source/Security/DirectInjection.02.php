@@ -10,6 +10,8 @@ print($_SERVER['UNKNOWN_INDEX']);
 
 print($_GET['DOCUMENT_ROOT']);
 
+shell_exec($_POST['DOCUMENT_ROOT']['a5']);
+
 // Direct concatenation
 shell_exec('ls '.$_SERVER['DOCUMENT_ROOT']);
 

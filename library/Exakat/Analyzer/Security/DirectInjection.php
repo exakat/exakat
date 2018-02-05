@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class DirectInjection extends Analyzer {
     public function dependsOn() {
-        return array('Security/SensitiveArgument');
+        return array('Security/SensitiveArgument',
+                    );
     }
     
     public function analyze() {
@@ -54,8 +55,8 @@ class DirectInjection extends Analyzer {
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
-             ->_as('result')
              ->raw($safeIndex)
+             ->_as('result')
              ->outIsIE('VARIABLE')
              ->atomIs(self::$VARIABLES_ALL)
              ->codeIs($vars, self::TRANSLATE, self::CASE_SENSITIVE)
@@ -71,12 +72,11 @@ class DirectInjection extends Analyzer {
              ->outIs('BLOCK')
              ->atomInside(array('Functioncall', 'Print', 'Echo', 'Exit'))
              ->outIs('ARGUMENT')
-             ->analyzerIs('Security/SensitiveArgument')
              ->outIsIE('CODE')
-             ->atomIs('Variable')
+             ->analyzerIs('Security/SensitiveArgument')
+             ->atomIs(array('Variable', 'Variableobject'))
              ->samePropertyAs('code', 'varname')
-             ->back('result')
-             ;
+             ->back('result');
         $this->prepareQuery();
 
         // $_GET/_POST ... directly as argument of PHP functions
@@ -85,8 +85,8 @@ class DirectInjection extends Analyzer {
              ->inIs('VARIABLE')
              ->raw($safeIndex)
              ->goToArray()
-             ->inIsIE('CODE')
              ->analyzerIs('Security/SensitiveArgument')
+             ->inIsIE('CODE')
              ->inIs('ARGUMENT');
         $this->prepareQuery();
 

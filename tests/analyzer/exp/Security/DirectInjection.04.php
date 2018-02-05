@@ -2,7 +2,7 @@
 
 $expected     = array('$HTTP_RAW_POST_DATA',
                       '$_SERVER[\'QUERY_STRING\']',
-                      '$_SERVER[\'QUERY_STRING\']',
+                      '$_SERVER[\'PHP_SELF\']',
                      );
 
 $expected_not = array('$_SERVER[\'DOCUMENT_ROOT\']',

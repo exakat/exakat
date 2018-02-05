@@ -9,6 +9,7 @@ $expected     = array('print ($_GET[\'DOCUMENT_ROOT\'])',
                       '\'ls \' . $_SERVER[\'UNKNOWN_INDEX\']',
                       '\'ls \' . $_GET[\'DOCUMENT_ROOT\'][\'a3\']',
                       '"{$_SERVER[\'UNKNOWN_INDEX\']}"',
+                      'shell_exec($_POST[\'DOCUMENT_ROOT\'][\'a5\'])',
                      );
 
 $expected_not = array('"$_SERVER[\'DOCUMENT_ROOT\']"',
