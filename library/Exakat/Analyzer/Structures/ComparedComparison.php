@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ComparedComparison extends Analyzer {
     public function analyze() {
+        //if ($a === strpos($string, $needle) > 2) {}
         $this->atomIs('Comparison')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
