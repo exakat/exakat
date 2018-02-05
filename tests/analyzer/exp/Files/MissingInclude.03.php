@@ -2,14 +2,14 @@
 
 $expected     = array('include \'../../nonexistant.php\'',
                       'include \'../../../nonexistant.php\'',
-                      'include \'../nonexistant.php\'',    
-                      'include \'./nonexistant.php\'',     
-                      'include \'./nonexistant.php\'',     
-                      'include \'./nonexistant.php\'',     
-                      'include \'./nonexistant.php\'',     
-                      'include \'../nonexistant.php\'',    
-                      'include \'../nonexistant.php\'',    
-                      'include \'../../nonexistant.php\'', 
+                      'include \'../nonexistant.php\'',
+                      'include \'./nonexistant.php\'',
+                      'include \'./nonexistant.php\'',
+                      'include \'./nonexistant.php\'',
+                      'include \'./nonexistant.php\'',
+                      'include \'../nonexistant.php\'',
+                      'include \'../nonexistant.php\'',
+                      'include \'../../nonexistant.php\'',
                      );
 
 $expected_not = array('include \'./include.php\'',

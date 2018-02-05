@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array(// Intentionally left empty
+$expected     = array(
                      );
 
 $expected_not = array(

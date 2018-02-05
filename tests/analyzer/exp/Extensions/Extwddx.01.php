@@ -5,7 +5,8 @@ $expected     = array('wddx_packet_start("SOME DATA ARRAY")',
                       'wddx_packet_end($packet)',
                      );
 
-$expected_not = array(
+$expected_not = array('someClass::wddx_packet_end( )',
+                      'wddx_packet_end( )',
                      );
 
 ?>

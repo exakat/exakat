@@ -6,7 +6,7 @@ $expected     = array('include \'./INCLUDE.php\'',
                       'include \'./include_B.php\'',
                       'include \'./include_C.php\'',
                       'include \'../include_B.php\'',
-                      );
+                     );
 
 $expected_not = array('include \'./include.php\'',
                       'include \'./include_a.php\'',

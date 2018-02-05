@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('\'propertyArray\'', 
-                      '\'property\''
+$expected     = array('\'propertyArray\'',
+                      '\'property\'',
                      );
 
 $expected_not = array('\'third_and_ignored\'',
