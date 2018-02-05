@@ -44,26 +44,6 @@ class ParentFirst extends Analyzer {
              ->isNot('rank', 0)
              ->back('first');
         $this->prepareQuery();
-
-        // parent::__construct is not the first of the method
-        $this->atomIs('Magicmethod')
-             ->outIs('NAME')
-             ->codeIs('__construct')
-             ->inIs('NAME')
-
-             ->outIs('BLOCK')
-             ->atomInside('Staticmethodcall')
-             ->outIs('CLASS')
-             ->codeIs('parent')
-             ->inIs('CLASS')
-             ->outIs('METHOD')
-             ->codeIs('__construct')
-             ->inIs('METHOD')
-
-             ->is('rank', 0)
-             ->raw('not( where( __.in("EXPRESSION").in("METHOD").hasLabel("Class")) )')
-             ->back('first');
-        $this->prepareQuery();
     }
 }
 

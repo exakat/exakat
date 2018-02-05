@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_ParentFirst extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testClasses_ParentFirst01()  { $this->generic_test('Classes/ParentFirst.01'); }
+    public function testClasses_ParentFirst02()  { $this->generic_test('Classes/ParentFirst.02'); }
 }
 ?>
