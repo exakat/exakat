@@ -52,6 +52,7 @@ class LoadFinal extends Tasks {
         $this->makeClassConstantDefinition();
 
         $this->fixFullnspathConstants();
+        $this->fixFullnspathFunctions();
         $this->fixConstantsValue();
 
         $this->spotPHPNativeConstants();
@@ -85,6 +86,25 @@ class LoadFinal extends Tasks {
         $begin = $end;
     }
 
+    private function fixFullnspathFunctions() {
+        display("fixing Fullnspath for Functions");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall")
+     .has("fullnspath")
+     .as("identifier")
+     .sideEffect{ cc = it.get().value("fullnspath"); }
+     .in("DEFINITION").hasLabel("Function")
+     .filter{ actual = it.get().value("fullnspath"); actual != cc;}
+     .select("identifier")
+     .sideEffect{ it.get().property("fullnspath", actual); }
+     .count()
+GREMLIN;
+
+        $res = $this->gremlin->query($query);
+        display("Fixed Fullnspath for Functions");
+    }
+    
     private function fixFullnspathConstants() {
         display("fixing Fullnspath for Constants");
         // fix path for constants with Const

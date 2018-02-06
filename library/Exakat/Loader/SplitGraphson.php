@@ -97,29 +97,23 @@ GREMLIN;
 
         $outE = array();
         $res = $sqlite3->query(<<<SQL
-SELECT definitions.id - 1 AS definition, GROUP_CONCAT(DISTINCT CASE WHEN calls.id IS NULL THEN calls2.id ELSE calls.id END ) AS call
-FROM definitions
-LEFT JOIN calls 
+SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, calls.id - 1 AS call
+FROM calls
+LEFT JOIN definitions 
     ON definitions.type       = calls.type       AND
        definitions.fullnspath = calls.fullnspath
-LEFT JOIN calls calls2
-    ON definitions.type       = calls2.type       AND
-       definitions.fullnspath = calls2.globalpath AND
-       calls2.fullnspath      != calls2.globalpath 
-WHERE calls.id IS NOT NULL <> calls2.id IS NOT NULL
-GROUP BY definitions.id
+LEFT JOIN definitions definitions2
+    ON definitions2.type       = calls.type       AND
+       definitions2.fullnspath = calls.globalpath 
+WHERE calls.fullnspath      != calls.globalpath AND
+      (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
+GROUP BY calls.id
 SQL
 );
        
-        while($row = $res->fetchArray(SQLITE3_NUM)) {
-            $outE[$row[0]] = explode(',', $row[1]);
-        }
-        
         $fp = fopen($this->path.'.def', 'w+');
-        foreach($outE as $o => $destinations) {
-            foreach($destinations as $d) {
-                fputcsv($fp, [$o, $d]);
-            }
+        while($row = $res->fetchArray(SQLITE3_NUM)) {
+                fputcsv($fp, $row);
         }
         fclose($fp);
 
