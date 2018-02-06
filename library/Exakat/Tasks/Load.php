@@ -4972,15 +4972,15 @@ SQL;
             }
             
             // This is an identifier, self or parent
-            if (mb_strtolower($name->code) === 'self' ||
-                mb_strtolower($name->code) === 'static') {
+            if ($fnp === 'self' ||
+                $fnp === 'static') {
                 if (empty($this->currentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
                     return array($this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
                 }
 
-            } elseif (mb_strtolower($name->code) === 'parent') {
+            } elseif ($fnp === 'parent') {
                 if (empty($this->currentParentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
@@ -4992,9 +4992,9 @@ SQL;
                 $this->addLink($name, $this->uses['class'][$fnp], 'DEFINITION');
                 return array($this->uses['class'][$fnp]->fullnspath, self::ALIASED);
 
-            } elseif ($type === 'class' && isset($this->uses['class'][mb_strtolower($prefix)])) {
-                $this->addLink($name, $this->uses['class'][mb_strtolower($prefix)], 'DEFINITION');
-                return array($this->uses['class'][mb_strtolower($prefix)]->fullnspath.str_replace(mb_strtolower($prefix), '', mb_strtolower($name->code)), self::ALIASED);
+            } elseif ($type === 'class' && isset($this->uses['class'][$prefix])) {
+                $this->addLink($name, $this->uses['class'][$prefix], 'DEFINITION');
+                return array($this->uses['class'][$prefix]->fullnspath.str_replace($prefix, '', $fnp), self::ALIASED);
 
             } elseif ($type === 'const') {
                 if (isset($this->uses['const'][$name->code])) {
