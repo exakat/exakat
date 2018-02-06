@@ -369,7 +369,7 @@ class Ambassador extends Reports {
         $baseHTML = $this->getBasedPage('favorites_dashboard');
 
         $analyzers = Analyzer::getThemeAnalyzers('Preferences');
-
+        
         $donut = array();
         $html = array(' ');
 
@@ -424,8 +424,7 @@ class Ambassador extends Reports {
                 <!-- /.box-body -->
               </div>
             </div>
-HTML
-            ;
+HTML;
             if (count($html) % 5 === 0) {
                 $html[] = '          </div>
           <div class="row">';
@@ -440,7 +439,8 @@ HTML
 
 JAVASCRIPT;
         }
-        $donut = implode("\n", $donut);
+        $donut = implode(PHP_EOL, $donut);
+
         $donut = <<<JAVASCRIPT
   <script>
     $(document).ready(function() {
@@ -655,7 +655,7 @@ JAVASCRIPT;
   </script>
 
 JAVASCRIPT;
-        $html = '<div class="row">'.implode("\n", $html).'</div>';
+        $html = '<div class="row">'.implode(PHP_EOL, $html).'</div>';
 
         $baseHTML = $this->injectBloc($baseHTML, 'FAVORITES', $html);
         $baseHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $donut);

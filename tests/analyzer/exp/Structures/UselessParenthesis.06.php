@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$a * $b',
+$expected     = array('($a * $b)',
                       '$a + $b',
                       '(($a + $b) * $c)',
                       '(($a * $b) + $c)',

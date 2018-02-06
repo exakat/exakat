@@ -173,6 +173,8 @@ SQL;
                 display( $thema.' : No'.PHP_EOL);
             }
         }
+        
+        $this->collectHashAnalyzer();
 
         $this->log->log( 'Still '.count($themes)." to be processed\n");
         display('Still '.count($themes)." to be processed\n");
@@ -282,9 +284,6 @@ SQL;
     }
 
     private function collectDatastore() {
-        $datastorePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
-        $this->sqlite->query('ATTACH "'.$datastorePath.'" AS datastore');
-
         $tables = array('analyzed',
                         'compilation52',
                         'compilation53',
@@ -299,11 +298,18 @@ SQL;
                         'externallibraries',
                         'files',
                         'hash',
-                        'hashAnalyzer',
+//                        'hashAnalyzer',
                         'ignoredFiles',
                         'shortopentag',
                         'tokenCounts',
                         );
+        $this->collectTables($tables);
+    }
+
+    private function collectTables($tables) {
+        $datastorePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
+        $this->sqlite->query('ATTACH "'.$datastorePath.'" AS datastore');
+
         $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
         $existingTables = $this->sqlite->query($query);
 
@@ -314,6 +320,14 @@ SQL;
             $this->sqlite->query($createTable);
             $this->sqlite->query('REPLACE INTO '.$table['name'].' SELECT * FROM datastore.'.$table['name']);
         }
+
+        $this->sqlite->query('DETACH datastore');
+    }
+
+    private function collectHashAnalyzer() {
+        $tables = array('hashAnalyzer',
+                       );
+        $this->collectTables($tables);
     }
 
     private function collectVariables() {

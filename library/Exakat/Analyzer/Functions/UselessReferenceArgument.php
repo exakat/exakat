@@ -20,29 +20,31 @@
  *
 */
 
-namespace Exakat\Analyzer\Melis;
+namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
 
-class UnusedTranslation extends Analyzer {
+class UselessReferenceArgument extends Analyzer {
     public function dependsOn() {
-        return array('Melis/TranslationString',
-                    );
+        return array('Variables/IsModified');
     }
-
+    
     public function analyze() {
-        // select the available translations
-        $index = $this->analyzerIs('Melis/TranslationString')
-                      ->values('code');
-        $res = $this->rawQuery();
-        $translations = $res->toArray();
-        $translations = array_unique($translations);
-
-        $index = $this->atomIs('String')
-                      ->hasNoOut('CONCAT')
-                      ->hasNoIn('INDEX')
-                      ->codeIs($translations, self::NO_TRANSLATE, self::CASE_SENSITIVE);
-        $used = $this->rawQuery();
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->is('reference', true)
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->raw(<<<GREMLIN
+where( __.repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).emit( )
+             .times(15).hasLabel(within(["Variable"]))
+             .filter{ it.get().value("code") == name }
+             .not( where( __.in("ANALYZED").has("analyzer", within(["Variables/IsModified"]))) ))
+GREMLIN
+)
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

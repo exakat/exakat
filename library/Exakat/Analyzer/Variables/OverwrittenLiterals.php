@@ -30,6 +30,10 @@ class OverwrittenLiterals extends Analyzer {
     
         $equal = $this->dictCode->translate(array('='));
         
+        if (empty($equal)) {
+            return;
+        }
+
         $assignations = $this->queryHash(<<<GREMLIN
 g.V().hasLabel("Function", "Closure", "Method", "Magicmethod")
      .where( __.sideEffect{ m = [:]; }

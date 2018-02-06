@@ -1,6 +1,7 @@
 <?php
 
 print((($_GET['DOCUMENT_ROOT']['a3'])));
+print((($_GET['DOCUMENT_RATE']['a4'])));
 
 shell_exec('ls '.($_SERVER['UNKNOWN_INDEX']['a2']));
 shell_exec('ls '.($_GET['INCOMING']['a3']));

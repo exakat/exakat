@@ -7,9 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Melis_UnusedTranslation extends Analyzer {
+class Melis_UndefinedConfType extends Analyzer {
     /* 1 methods */
 
-    public function testMelis_UnusedTranslation01()  { $this->generic_test('Melis/UnusedTranslation.01'); }
+    public function testMelis_UndefinedConfType01()  { $this->generic_test('Melis/UndefinedConfType.01'); }
 }
 ?>

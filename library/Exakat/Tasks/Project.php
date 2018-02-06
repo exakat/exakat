@@ -37,7 +37,7 @@ class Project extends Tasks {
 
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                               'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
-                              'Analyze', 'Preferences', 'Inventory',
+                              'Analyze', 'Preferences', 'Inventory', 'Performances',
                               'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Custom',
                               );
 
@@ -308,7 +308,7 @@ class Project extends Tasks {
         }
         
         $themes = array_intersect($availableThemes, $themes);
-        display("Running the following themes : ".implode(', ', $diff).PHP_EOL);
+        display("Running the following themes : ".implode(', ', $themes).PHP_EOL);
 
         global $VERBOSE;
         $oldVerbose = $VERBOSE;

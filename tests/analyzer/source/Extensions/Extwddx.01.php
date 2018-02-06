@@ -22,5 +22,6 @@ foreach($data_to_serialize as $key => $data)
 }
 
 echo wddx_packet_end($packet);
+echo someClass::wddx_packet_end();
 
 ?>

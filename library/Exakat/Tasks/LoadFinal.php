@@ -287,7 +287,7 @@ GREMLIN;
             if (!empty($constantsDefine)) {
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
+     .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode"); name in arg1 }
      .sideEffect{
         fullnspath = "\\\\" + it.get().value("code");
@@ -309,7 +309,7 @@ GREMLIN;
             // Based on const definitions
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .not( where( __.in("NAME", "DEFINITION") ) )
+     .not( where( __.in("NAME", "DEFINITION", "EXTENDS", "IMPLEMENTS") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode"); 
               name in arg1; }
      .sideEffect{

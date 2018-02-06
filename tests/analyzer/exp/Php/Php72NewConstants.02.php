@@ -2,10 +2,10 @@
 
 $expected     = array('\'CURLSSLOPT_NO_REVOKE\'',
                       'b\'CURLMOPT_PUSHFUNCTION\'',
-                      );
+                     );
 
 $expected_not = array('\'\\CURLOPT_DEFAULT_PROTOCOL\'',
-                      '\'\\CURLOPT_STREAM_WEIGHT\'', 
+                      '\'\\CURLOPT_STREAM_WEIGHT\'',
                       '\'\\SQLITE3_DETERMINISTIC\'',
                       '\'CURLSSLOPT_NO_REVOKE\'',
                       '"CURLSSLOPT_NO_$b"',

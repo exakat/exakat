@@ -26,7 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class RegexDelimiter extends Analyzer {
     public function analyze() {
-        $pregFunctions = array('\\preg_match_all', '\\preg_match', '\\preg_replace', '\\preg_replace_callback', '\\preg_relace_callback_array');
+        $pregFunctions = array('\\preg_match_all', 
+                               '\\preg_match', 
+                               '\\preg_replace', 
+                               '\\preg_replace_callback', 
+                               '\\preg_relace_callback_array',
+                               );
 
         $this->atomFunctionIs($pregFunctions)
              ->outWithRank('ARGUMENT', 0)

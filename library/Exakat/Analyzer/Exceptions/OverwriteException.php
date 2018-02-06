@@ -27,13 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class OverwriteException extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsModified');
+        return array('Variables/IsModified',
+                    );
     }
 
     public function analyze() {
-        $this->atomIs('Try')
-             ->outIs('CATCH')
-             ->_as('result')
+        $this->atomIs('Catch')
              ->outIs('VARIABLE')
              ->savePropertyAs('code', 'exception')
              ->inIs('VARIABLE')
@@ -41,7 +40,9 @@ class OverwriteException extends Analyzer {
              ->atomInside('Variable')
              ->samePropertyAs('code', 'exception')
              ->analyzerIs('Variables/IsModified')
-             ->back('result');
+             // not chained and replaced.
+             ->raw('not( where( __.in("LEFT").out("RIGHT").out("NEW").out("ARGUMENT").has("rank", 2).filter{ it.get().value("code") == exception; } ) )')
+             ->back('first');
         $this->prepareQuery();
     }
 }

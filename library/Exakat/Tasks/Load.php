@@ -784,7 +784,18 @@ SQL;
         $label->line     = $this->tokens[$this->id][2];
         $label->token    = $this->getToken($this->tokens[$this->id][0]);
 
-        $this->addDefinition('goto', $tag->fullcode, $label);
+        if (empty($this->currentClassTrait)) {
+            $class = '';
+        } else {
+            $class = end($this->currentClassTrait)->fullcode;
+        }
+
+        if (empty($this->currentFunction)) {
+            $method = '';
+        } else {
+            $method = end($this->currentFunction)->fullnspath;
+        }
+        $this->addDefinition('goto', $class.'::'.$method.'..'.$tag->fullcode, $label);
 
         $this->pushExpression($label);
         $this->processSemicolon();
@@ -4064,7 +4075,20 @@ SQL;
         $this->processSingleOperator('Goto', $this->precedence->get($this->tokens[$this->id][0]), 'GOTO');
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
-        $this->addCall('goto', $this->tokens[$this->id][1], $operatorId);
+
+        if (empty($this->currentClassTrait)) {
+            $class = '';
+        } else {
+            $class = end($this->currentClassTrait)->fullcode;
+        }
+
+        if (empty($this->currentFunction)) {
+            $method = '';
+        } else {
+            $method = end($this->currentFunction)->fullnspath;
+        }
+
+        $this->addCall('goto', $class.'::'.$method.'..'.$this->tokens[$this->id][1], $operatorId);
         return $operatorId;
     }
 
