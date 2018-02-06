@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 29 Jan 2018 10:08:20 +0000
-.. comment: Generation hash : c91c58d60c6e27c8d75945daede1b0533a172903
+.. comment: Generation date : Mon, 05 Feb 2018 17:13:12 +0000
+.. comment: Generation hash : e0c96da0bea9fe7b6ad3bc8980ce8be4b703e605
 
 
 .. _$http\_raw\_post\_data:
@@ -2669,6 +2669,21 @@ Compared Comparison
 
 Usually, comparison are sufficient, and it is rare to have to compare the result of comparison. Check if this two-stage comparison is really needed.
 
+.. code-block:: php
+
+   <?php
+   
+   if ($a === strpos($string, $needle) > 2) {}
+   
+   // the expression above apply precedence : 
+   // it is equivalent to : 
+   if (($a === strpos($string, $needle)) > 2) {}
+   
+   ?>
+
+
+See also `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
 +--------------+-------------------------------+
 | Command Line | Structures/ComparedComparison |
 +--------------+-------------------------------+
@@ -4504,10 +4519,18 @@ Empty Instructions
 ##################
 
 
-Empty instructions are part of the code that have no instructions. This may be trailing semi-colon or empty blocks for if-then structures.
+Empty instructions are part of the code that have no instructions. 
 
-$condition = 3;;;;
-if ($condition) { }
+This may be trailing semi-colon or empty blocks for if-then structures.
+
+Comments that explains the reason of the situation are not taken into account.
+
+.. code-block:: php
+
+   <?php
+       $condition = 3;;;;
+       if ($condition) { } 
+   ?>
 
 +--------------+----------------------------------------------+
 | Command Line | Structures/EmptyLines                        |
@@ -5112,7 +5135,27 @@ Foreach Reference Is Not Modified
 #################################
 
 
-Foreach statement may loop using a reference, especially when the loop has to change values of the array it is looping on. In the spotted loop, reference are used but never modified. They may be removed.
+Foreach statement may loop using a reference, especially when the loop has to change values of the array it is looping on. 
+
+In the spotted loop, reference are used but never modified. They may be removed.
+
+.. code-block:: php
+
+   <?php
+   
+   $letters = range('a', 'z');
+   
+   // $letter is not used here
+   foreach($letters as &$letter) {
+       $alphabet .= $letter;
+   }
+   
+   // $letter is actually used here
+   foreach($letters as &$letter) {
+       $letter = strtoupper($letter);
+   }
+   
+   ?>
 
 +--------------+------------------------------------------+
 | Command Line | Structures/ForeachReferenceIsNotModified |
@@ -6540,9 +6583,24 @@ Interpolation
 
 The following strings contain variables that are will be replaced. However, the following characters are ambiguous, and may lead to confusion. 
 
-For example, "$x[1]->b".will be read by PHP as $x[1].\->b" and not like "{$x[1]->b}". 
+<?php
+
+class b { 
+    public $b = 'c';
+    function `'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ { return `'__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_; }
+}
+$x = array(1 => new B());
+
+// -> after the $x[1] looks like a 2nd dereferencing, but it is not. 
+print $x[1]->b;
+// displays : b->b
+
+print {$x[1]->b};
+// displays : c
 
 It is advised to add curly brackets around those structures to make them non-ambiguous.
+
+See also `Double quoted <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.double>`_.
 
 +--------------+------------------------------------------------+
 | Command Line | Type/StringInterpolation                       |
@@ -10783,6 +10841,24 @@ Overwritten Exceptions
 
 In catch blocks, it is good practice not to overwrite the incoming exception, as information about the exception will be lost.
 
+.. code-block:: php
+
+   <?php
+   
+   try {
+       doSomething();
+   } catch (SomeException $e) { 
+       // $e is overwritten 
+       $e = new anotherException($e->getMessage()); 
+       throw $e;
+   } catch (SomeOtherException $e) { 
+       // $e is chained with the next exception 
+       $e = new Exception($e->getMessage(), 0, $e); 
+       throw $e;
+   }
+   
+   ?>
+
 +--------------+-------------------------------+
 | Command Line | Exceptions/OverwriteException |
 +--------------+-------------------------------+
@@ -13305,7 +13381,17 @@ Should Use Constants
 
 The following functions have related constants that should be used as arguments, instead of scalar literals, such as integers or strings.
 
-For example, $lines = file('file.txt', 2); is less readable than $lines = file('file.txt', FILE_IGNORE_NEW_LINES)
+.. code-block:: php
+
+   <?php
+   
+   // The file is read and new lines are ignored.
+   $lines = file('file.txt', FILE_IGNORE_NEW_LINES)
+   
+   // What is this doing, with 2 ? 
+   $lines = file('file.txt', 2);
+   
+   ?>
 
 +--------------+------------------------------+
 | Command Line | Functions/ShouldUseConstants |
@@ -17303,6 +17389,27 @@ Use Const And Functions
 
 Since PHP 5.6 it is possible to import specific functions or constants from other namespaces.
 
+.. code-block:: php
+
+   <?php
+   
+   namespace A {
+       const X = 1;
+       function foo() { echo '__FUNCTION__; }
+   }
+   
+   namespace My{
+       use function A\foo;
+       use constant A\X;
+   
+       echo foo(X);
+   }
+   
+   ?>
+
+
+See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
+
 +--------------+---------------------------------------------------------------------------------+
 | Command Line | Namespaces/UseFunctionsConstants                                                |
 +--------------+---------------------------------------------------------------------------------+
@@ -18536,6 +18643,34 @@ Situations where parenthesis are not necessary, and may be removed.
 +--------------+-------------------------------+
 
 
+.. _useless-referenced-argument:
+
+Useless Referenced Argument
+###########################
+
+
+The argument has a reference, but is only used for reading. 
+
+This is probably a development artefact that was forgotten. It is better to remove it. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($a, &$b, &$c) {
+       // $c is passed by reference, but only read. This is useless.
+       $b = $c + $a;
+   }
+   
+   ?>
+
++--------------+------------------------------------+
+| Command Line | Functions/UselessReferenceArgument |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
+
+
 .. _useless-return:
 
 Useless Return
@@ -18787,7 +18922,7 @@ It is recommended to avoid using var, and explicitely use the new keywords.
    ?>
 
 
-See also `Visibility <http://www.php.net/manual/en/language.oop5.visibility.php>`_.
+See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/OldStyleVar                                                                                     |

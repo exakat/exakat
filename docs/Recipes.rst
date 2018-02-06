@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 29 Jan 2018 10:08:20 +0000
-.. comment: Generation hash : c91c58d60c6e27c8d75945daede1b0533a172903
+.. comment: Generation date : Mon, 05 Feb 2018 17:13:12 +0000
+.. comment: Generation hash : e0c96da0bea9fe7b6ad3bc8980ce8be4b703e605
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 338 analysis
+Total : 339 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -392,6 +392,7 @@ Total : 338 analysis
 * :ref:`Useless Instructions <useless-instructions>`
 * :ref:`Useless Interfaces <useless-interfaces>`
 * :ref:`Useless Parenthesis <useless-parenthesis>`
+* :ref:`Useless Referenced Argument <useless-referenced-argument>`
 * :ref:`Useless Return <useless-return>`
 * :ref:`Useless Switch <useless-switch>`
 * :ref:`Useless Unset <useless-unset>`

@@ -762,6 +762,7 @@ Glossary
 + `_`
     + `__CLASS__`
 
+      + :ref:`Interpolation <interpolation>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`
 
     + `__DIR__`
@@ -774,6 +775,10 @@ Glossary
 
       + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
+
+    + `__FUNCTION__`
+
+      + :ref:`Use Const And Functions <use-const-and-functions>`
 
     + `__METHOD__`
 
@@ -857,6 +862,7 @@ Glossary
 
     + `__toString`
 
+      + :ref:`Interpolation <interpolation>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 
