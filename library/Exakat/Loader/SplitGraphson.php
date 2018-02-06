@@ -105,7 +105,7 @@ LEFT JOIN calls
 LEFT JOIN calls calls2
     ON definitions.type       = calls2.type       AND
        definitions.fullnspath = calls2.globalpath AND
-       calls2.fullnspath      != calls2.globalpath 
+       calls2.fullnspath      != calls2.fullnspath 
 WHERE calls.id IS NOT NULL OR calls2.id IS NOT NULL
 GROUP BY definitions.id
 SQL
