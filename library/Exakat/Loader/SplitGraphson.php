@@ -97,7 +97,7 @@ GREMLIN;
 
         $outE = array();
         $res = $sqlite3->query(<<<SQL
-SELECT definitions.id - 1 AS definition, GROUP_CONCAT(DISTINCT COALESCE(calls.id - 1, calls2.id - 1)) AS call
+SELECT definitions.id - 1 AS definition, GROUP_CONCAT(DISTINCT CASE WHEN calls.id IS NULL THEN calls2.id ELSE calls.id END ) AS call
 FROM definitions
 LEFT JOIN calls 
     ON definitions.type       = calls.type       AND
@@ -105,8 +105,8 @@ LEFT JOIN calls
 LEFT JOIN calls calls2
     ON definitions.type       = calls2.type       AND
        definitions.fullnspath = calls2.globalpath AND
-       calls2.fullnspath      != calls2.fullnspath 
-WHERE calls.id IS NOT NULL OR calls2.id IS NOT NULL
+       calls2.fullnspath      != calls2.globalpath 
+WHERE calls.id IS NOT NULL <> calls2.id IS NOT NULL
 GROUP BY definitions.id
 SQL
 );
