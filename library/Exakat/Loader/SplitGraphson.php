@@ -105,15 +105,14 @@ LEFT JOIN definitions
 LEFT JOIN definitions definitions2
     ON definitions2.type       = calls.type       AND
        definitions2.fullnspath = calls.globalpath 
-WHERE calls.fullnspath      != calls.globalpath AND
-      (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
+WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
 GROUP BY calls.id
 SQL
 );
        
         $fp = fopen($this->path.'.def', 'w+');
         while($row = $res->fetchArray(SQLITE3_NUM)) {
-                fputcsv($fp, $row);
+            fputcsv($fp, $row);
         }
         fclose($fp);
 
