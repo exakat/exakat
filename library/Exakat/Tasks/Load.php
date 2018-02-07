@@ -3839,7 +3839,7 @@ SQL;
                 $constant->noDelimiter = $this->currentFunction[count($this->currentFunction) - 1]->code;
             }
         } elseif (mb_strtolower($constant->fullcode) === '__class__' ||
-                  mb_strtolower($constant->fullcode) === '__trait__' ||
+                  mb_strtolower($constant->fullcode) === '__trait__'
                   ) {
             if (empty($this->currentClassTrait)) {
                 $constant->noDelimiter = '';
