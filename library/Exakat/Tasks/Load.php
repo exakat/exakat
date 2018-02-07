@@ -3827,26 +3827,34 @@ SQL;
     private function processMagicConstant() {
         $constant = $this->processSingle('Magicconstant');
         
-        if ($constant->fullcode === '__DIR__') {
+        if (mb_strtolower($constant->fullcode) === '__dir__') {
             $path = dirname($this->filename);
             $constant->noDelimiter = $path === '/' ? '' : $path;
-        } elseif ($constant->fullcode === '__FILE__') {
+        } elseif (mb_strtolower($constant->fullcode) === '__file__') {
             $constant->noDelimiter = $this->filename;
-        } elseif ($constant->fullcode === '__FUNCTION__') {
+        } elseif (mb_strtolower($constant->fullcode) === '__function__') {
             if (empty($this->currentFunction)) {
                 $constant->noDelimiter = '';
             } else {
                 $constant->noDelimiter = $this->currentFunction[count($this->currentFunction) - 1]->code;
             }
-        } elseif ($constant->fullcode === '__CLASS__') {
+        } elseif (mb_strtolower($constant->fullcode) === '__class__' ||
+                  mb_strtolower($constant->fullcode) === '__trait__' ||
+                  ) {
             if (empty($this->currentClassTrait)) {
                 $constant->noDelimiter = '';
             } else {
                 $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
             }
-        } elseif ($constant->fullcode === '__METHOD__') {
+        } elseif (mb_strtolower($constant->fullcode) === '__line__') {
+            $constant->noDelimiter = $this->tokens[$this->id][2];
+        } elseif (mb_strtolower($constant->fullcode) === '__method__') {
             if (empty($this->currentClassTrait)) {
-                $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
+                if (empty($this->currentMethod)) {
+                    $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
+                } else {
+                    $constant->noDelimiter = '';
+                }
             } else {
                 $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath .
                                          '::' .
