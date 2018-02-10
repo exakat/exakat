@@ -1016,9 +1016,11 @@ GREMLIN;
                                                  )');
 
         // Direct inclusion
-        $query = 'g.V().hasLabel("File").as("file")
-                   .repeat( out() ).emit().times(15).hasLabel("Include").as("include")
-                   .select("file", "include").by("fullcode").by("fullcode")';
+        $query = <<<GREMLIN
+g.V().hasLabel("File").as("file")
+     .repeat( out() ).emit().times(15).hasLabel("Include").as("include")
+     .select("file", "include").by("fullcode").by("fullcode")
+GREMLIN;
         $res = $this->gremlin->query($query);
         
         $query = array();
@@ -1187,7 +1189,7 @@ GREMLIN;
 
         // New
         $query = <<<GREMLIN
-g.V().hasLabel("New").out("NEW")
+g.V().hasLabel("New").out("NEW").as("i")
      .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ calling = it.get().value("fullcode"); })
      .in("DEFINITION")
      .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value("fullcode"); })
@@ -1208,7 +1210,7 @@ GREMLIN;
 
         // static calls (property, constant, method)
         $query = <<<GREMLIN
-g.V().hasLabel("Staticconstant", "Staticmethodcall", "Staticproperty")
+g.V().hasLabel("Staticconstant", "Staticmethodcall", "Staticproperty").as("i")
      .sideEffect{ type = it.get().label().toLowerCase(); }
      .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ calling = it.get().value('fullcode'); })
      .out("CLASS").in("DEFINITION")
