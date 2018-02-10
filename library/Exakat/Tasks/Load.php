@@ -168,7 +168,7 @@ class Load extends Tasks {
     static public $PROP_REFERENCE   = array('Variable', 'Variableobject', 'Variablearray', 'Member', 'Array', 'Function', 'Closure', 'Method', 'Functioncall', 'Methodcall');
     static public $PROP_VARIADIC    = array('Variable', 'Array', 'Member', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname');
     static public $PROP_DELIMITER   = array('String', 'Heredoc');
-    static public $PROP_NODELIMITER = array('String', 'Variable', 'Magicconstant', 'Identifier', 'Nsname');
+    static public $PROP_NODELIMITER = array('String', 'Variable', 'Magicconstant', 'Identifier', 'Nsname', 'Boolean', 'Integer', 'Real', 'Null');
     static public $PROP_HEREDOC     = array('Heredoc');
     static public $PROP_COUNT       = array('Sequence', 'Functioncall', 'Methodcallname', 'Arrayliteral', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
     static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Method', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String', 'Self', 'Parent');
@@ -1666,6 +1666,7 @@ SQL;
             $nsname = $this->addAtom('Boolean');
             $nsname->boolean = (int) (mb_strtolower($this->tokens[$this->id ][1]) === 'true');
             $nsname->constant = self::CONSTANT_EXPRESSION;
+            $nsname->noDelimiter = $nsname->boolean === 1 ? 1 : '';
         } elseif ($this->tokens[$this->id][0]     === \Exakat\Tasks\T_NS_SEPARATOR &&
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING       &&
                   mb_strtolower($this->tokens[$this->id + 1][1]) === 'null'           &&
@@ -1674,6 +1675,7 @@ SQL;
             $nsname = $this->addAtom('Null');
             $nsname->boolean = 0;
             $nsname->constant = self::CONSTANT_EXPRESSION;
+            $nsname->noDelimiter = '';
         } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CALLABLE) {
             $nsname = $this->addAtom('Nsname');
             $nsname->token      = 'T_CALLABLE';
@@ -2226,10 +2228,12 @@ SQL;
             $string = $this->addAtom('Boolean');
             $string->boolean  = (int) (mb_strtolower($this->tokens[$this->id ][1]) === 'true');
             $string->constant = self::CONSTANT_EXPRESSION;
+            $string->noDelimiter = $string->boolean === 1 ? 1 : '';
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null');
             $string->boolean  = 0;
             $string->constant = self::CONSTANT_EXPRESSION;
+            $string->noDelimiter = '';
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
             $string = $this->addAtom('Self');
             $string->constant = self::CONSTANT_EXPRESSION;
@@ -3096,6 +3100,7 @@ SQL;
         $parenthese->line     = $this->tokens[$this->id][2];
         $parenthese->token    = 'T_OPEN_PARENTHESIS';
         $parenthese->constant = $code->constant;
+        $parenthese->noDelimiter = $code->noDelimiter;
 
         $this->pushExpression($parenthese);
         ++$this->id; // Skipping the )
@@ -3755,6 +3760,7 @@ SQL;
 
         $integer->boolean = (int) (boolean) $integer->code;
         $integer->constant = self::CONSTANT_EXPRESSION;
+        $integer->noDelimiter = $integer->code;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3769,6 +3775,7 @@ SQL;
         $this->runPlugins($real);
         $real->boolean  = (int) (strtolower($this->tokens[$this->id][1]) != 0);
         $real->constant = self::CONSTANT_EXPRESSION;
+        $real->noDelimiter = $real->code;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -4557,12 +4564,14 @@ SQL;
         $current = $this->id;
         $concatenation = $this->addAtom('Concatenation');
         $fullcode= array();
+        $noDelimiter = '';
         $rank = -1;
 
         $contains = $this->popExpression();
         $this->addLink($concatenation, $contains, 'CONCAT');
         $contains->rank = ++$rank;
         $fullcode[] = $contains->fullcode;
+        $noDelimiter .= $contains->noDelimiter;
 
         $this->nestContext();
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
@@ -4595,6 +4604,7 @@ SQL;
                 $this->popExpression();
                 $this->addLink($concatenation, $contains, 'CONCAT');
                 $fullcode[] = $contains->fullcode;
+                $noDelimiter .= $contains->noDelimiter;
                 $contains->rank = ++$rank;
 
                 ++$this->id;
@@ -4604,6 +4614,7 @@ SQL;
         $this->popExpression();
         $this->addLink($concatenation, $contains, 'CONCAT');
         $fullcode[] = $contains->fullcode;
+        $noDelimiter .= $contains->noDelimiter;
         $contains->rank = ++$rank;
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
@@ -4612,7 +4623,7 @@ SQL;
 
         $concatenation->code        = $this->tokens[$current][1];
         $concatenation->fullcode    = implode(' . ', $fullcode);
-        $concatenation->noDelimiter = trim($concatenation->fullcode, '"\'');
+        $concatenation->noDelimiter = $noDelimiter;
         $concatenation->line        = $this->tokens[$current][2];
         $concatenation->token       = $this->getToken($this->tokens[$current][0]);
         $concatenation->count       = $rank;
