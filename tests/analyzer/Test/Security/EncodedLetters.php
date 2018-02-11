@@ -8,11 +8,12 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Security_EncodedLetters extends Analyzer {
-    /* 4 methods */
+    /* 5 methods */
 
     public function testSecurity_EncodedLetters01()  { $this->generic_test('Security/EncodedLetters.01'); }
     public function testSecurity_EncodedLetters02()  { $this->generic_test('Security/EncodedLetters.02'); }
     public function testSecurity_EncodedLetters03()  { $this->generic_test('Security/EncodedLetters.03'); }
     public function testSecurity_EncodedLetters04()  { $this->generic_test('Security/EncodedLetters.04'); }
+    public function testSecurity_EncodedLetters05()  { $this->generic_test('Security/EncodedLetters.05'); }
 }
 ?>

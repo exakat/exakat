@@ -32,7 +32,7 @@ class EncodedLetters extends Analyzer {
         // hex : 20 to 7A
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->regexIs('noDelimiter', '\\\\\\\\u\\\\{([2-6][0-9a-fA-F]|7[0-9aA])\\\\}')
+             ->regexIs('noDelimiter', '\\\\\\\\u\\\\{0*([2-6][0-9a-fA-F]|7[0-9aA])\\\\}')
              ->back('first');
         $this->prepareQuery();
 
