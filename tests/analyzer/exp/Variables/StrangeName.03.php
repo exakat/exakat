@@ -5,12 +5,12 @@ $expected     = array('$abccccd',
                       '$aaaabcd',
                       '$abbbbcd',
                       '$aaabcd',
-                      '$aabcd',
                       '$abcddddwwww',
                       '$abcDDDDwwww',
                      );
 
 $expected_not = array('$abcd',
+                      '$aabcd',
                       '$aabcd',
                      );
 
