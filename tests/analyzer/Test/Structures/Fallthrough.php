@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_Fallthrough extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testStructures_Fallthrough01()  { $this->generic_test('Structures/Fallthrough.01'); }
     public function testStructures_Fallthrough02()  { $this->generic_test('Structures/Fallthrough.02'); }
+    public function testStructures_Fallthrough03()  { $this->generic_test('Structures/Fallthrough.03'); }
 }
 ?>
