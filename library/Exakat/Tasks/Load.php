@@ -487,9 +487,9 @@ SQL;
         $this->callsSqlite->query($definitions);
     }
 
-    public function runPlugins($atom) {
+    public function runPlugins($atom, $linked) {
         foreach($this->plugins as $plugin) {
-            $plugin->run($atom);
+            $plugin->run($atom, $linked);
         }
     }
     
@@ -3756,7 +3756,7 @@ SQL;
 
     private function processInteger() {
         $integer = $this->processSingle('Integer');
-        $this->runPlugins($integer);
+        $this->runPlugins($integer, array());
 
         $integer->boolean = (int) (boolean) $integer->code;
         $integer->constant = self::CONSTANT_EXPRESSION;
@@ -3772,7 +3772,7 @@ SQL;
     private function processReal() {
         $real = $this->processSingle('Real');
         // (int) is for loading into the database
-        $this->runPlugins($real);
+        $this->runPlugins($real, $array());
         $real->boolean  = (int) (strtolower($this->tokens[$this->id][1]) != 0);
         $real->constant = self::CONSTANT_EXPRESSION;
         $real->noDelimiter = $real->code;
@@ -4166,7 +4166,7 @@ SQL;
             $operand->fullcode = $signExpression.$operand->fullcode;
             $operand->line     = $this->tokens[$this->id][2];
             $operand->token    = $this->getToken($this->tokens[$this->id][0]);
-            $this->runPlugins($operand);
+            $this->runPlugins($operand, $array());
 
             return $operand;
         }
