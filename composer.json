@@ -24,14 +24,9 @@
         "ext-sqlite3": "*",
         "ext-curl": "*",
         "ext-mbstring": "*",
+        "ext-json": "*",
+        "ext-hash": "*",
         "guiguiboy/php-cli-progress-bar":"dev-master@dev",
-        "friendsofphp/php-cs-fixer": "*",
         "brightzone/gremlin-php": "3.0.2"
-    },
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^2.7.1",
-        "phpunit/phpunit": "^5.7.9",
-        "jakub-onderka/php-parallel-lint": "^0.9.2",
-        "phan/phan": "^0.10"
     }
 }
