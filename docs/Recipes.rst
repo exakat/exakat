@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 12 Feb 2018 14:27:01 +0000
-.. comment: Generation hash : 3ed8ed26595112df3f8eeffad171818e6cc44a33
+.. comment: Generation date : Mon, 12 Feb 2018 17:23:52 +0000
+.. comment: Generation hash : b950ca93317d3814845c0e5c9c7069e0e332b2fa
 
 
 .. _analyze:
@@ -860,6 +860,7 @@ Total : 31 analysis
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Avoid glob() Usage <avoid-glob()-usage>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
+* :ref:`Double array_flip() <double-array\_flip()>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Fetch One Row Format <fetch-one-row-format>`
@@ -871,7 +872,6 @@ Total : 31 analysis
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-* :ref:`Performances/DoubleArrayFlip`
 * :ref:`Performances/timeVsstrtotime`
 * :ref:`Pre-increment`
 * :ref:`Should Use Function <should-use-function>`

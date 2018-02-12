@@ -316,14 +316,17 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
-* 1.1.3
+* 1.1.4
 
+  * Double array_flip() (Performances/DoubleArrayFlip ; Performances)
   * Fallback Function (Functions/FallbackFunction ; Appinfo)
   * Find Key Directly (Structures/GoToKeyDirectly ; Suggestions)
-  * Performances/DoubleArrayFlip (Performances/DoubleArrayFlip ; Performances)
   * Reuse Variable (Structures/ReuseVariable ; Suggestions)
   * Useless Catch (Exceptions/UselessCatch)
-  * Useless Referenced Argument (Functions/UselessReferenceArgument ; Analyze)
+
+* 1.1.3
+
+  * Useless Referenced Argument (Functions/UselessReferenceArgument)
 
 * 1.1.2
 

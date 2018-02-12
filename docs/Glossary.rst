@@ -38,6 +38,7 @@ Glossary
     + `array_flip()`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Double array_flip() <double-array\_flip()>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `array_intersect()`

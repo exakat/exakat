@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 12 Feb 2018 14:27:01 +0000
-.. comment: Generation hash : 3ed8ed26595112df3f8eeffad171818e6cc44a33
+.. comment: Generation date : Mon, 12 Feb 2018 17:23:52 +0000
+.. comment: Generation hash : b950ca93317d3814845c0e5c9c7069e0e332b2fa
 
 
 .. _$http\_raw\_post\_data:
@@ -4200,6 +4200,46 @@ Twice the same call in a row. This is worth a check.
 | Command Line | Structures/DoubleInstruction |
 +--------------+------------------------------+
 | Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
+.. _double-array\_flip():
+
+Double array_flip()
+###################
+
+
+Avoid double `'array_flip() <http://www.php.net/array_flip>`_ to gain speed. While `'array_flip() <http://www.php.net/array_flip>`_ alone is usually useful, a double `'array_flip() <http://www.php.net/array_flip>`_ usually is made to handle values and keys. 
+
+.. code-block:: php
+
+   <?php
+   
+   // without array_flip
+   function foo($array, $value) {
+       $key = array_search($array, $value);
+       
+       if ($key !== false) {
+           unset($array[$key]);
+       }
+       
+       return $array;
+   }
+   
+   // double array_flip
+   // 'array_flip() usage means that $array's values are all unique
+   function foo($array, $value) {
+       $flipped = array_flip($value);
+       unset($flipped[$value]);
+       return array_flip($flipped);
+   }
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Performances/DoubleArrayFlip |
++--------------+------------------------------+
+| Analyzers    | :ref:`Performances`          |
 +--------------+------------------------------+
 
 
@@ -11448,21 +11488,6 @@ The same applies to `'parse_url() <http://www.php.net/parse_url>`_, which return
 +--------------+---------------------+
 | Analyzers    | :ref:`Analyze`      |
 +--------------+---------------------+
-
-
-.. _performances/doublearrayflip:
-
-Performances/DoubleArrayFlip
-############################
-
-
-
-
-+--------------+------------------------------+
-| Command Line | Performances/DoubleArrayFlip |
-+--------------+------------------------------+
-| Analyzers    | :ref:`Performances`          |
-+--------------+------------------------------+
 
 
 .. _performances/timevsstrtotime:
