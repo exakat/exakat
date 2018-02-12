@@ -38,34 +38,44 @@ class Composer extends Reports {
         }
 
         $configureDirectives = json_decode(file_get_contents($this->config->dir_root.'/data/configure.json'));
+        // List of extensions that must be avoided 
         $noExtensions = parse_ini_file($this->config->dir_root.'/data/php_no_extension.ini');
         $noExtensions = $noExtensions['ext'];
 
-        $composer = new \stdClass();
+        $composerPath = $this->config->projects_root.'/projects/'.$this->config->project.'/code/composer.json';
+        if (file_exists($composerPath)) {
+            $composer = json_decode(file_get_contents($composerPath));
+        } else {
+            $composer = new \stdClass();
         
-        $composer->name = $this->config->project_name;   //
-        $composer->description = "";                     //
-        $composer->type = "library";                     // default value
-        $composer->keywords = array();                   // where to find them ? 
-        $composer->homepage = "";                        //
-        $composer->license = "";                         //
+            $composer->name = $this->config->project_name;   //
+            $composer->description = "";                     //
+            $composer->type = "library";                     // default value
+            $composer->keywords = array();                   // where to find them ? 
+            $composer->homepage = "";                        //
+            $composer->license = "";                         //
 
-        $composer->support = new \stdClass();
-        if ($this->config->project_url !== null) {
-            $composer->support->source = $this->config->project_url;
+            $composer->support = new \stdClass();
+            if ($this->config->project_url !== null) {
+                $composer->support->source = $this->config->project_url;
+            }
+
+            $composer->require = new \stdClass();
+
+    //"php": "~5.4 || ^7.0"
+            $composer->require->php = '^7.0';
         }
-
-        $composer->require = new \stdClass();
-
-//"php": "~5.4 || ^7.0"
-        $composer->require->php = '^7.0';
         
+        $setting = array();
         foreach($configureDirectives as $ext => $details) {
             if (in_array($ext, $noExtensions)) {
                 continue;
             } elseif (isset($sources[$details->analysis]) && $sources[$details->analysis] > 1) {
                 $extName = 'ext-'.$ext;
-                $composer->require->{$extName} = '*';
+                if (!isset($composer->require->{$extName})) {
+                    $composer->require->{$extName} = '*';
+                    $setting[] = "\"$extName\": \"*\"";
+                }
             }
         }
         
