@@ -186,6 +186,17 @@ SQL;
 
         $this->finish();
     }
+    
+    public function finalMark($finalMark) {
+        $sqlite = new \Sqlite3( $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite' );
+
+        $values = array();
+        foreach($finalMark as $key => $value) {
+            $values[] = "(null, '$key', '$value')";
+        }
+
+        $sqlite->query('REPLACE INTO hash VALUES '.implode(', ', $values));
+    }
 
     private function processResults($class, $count) {
         $this->sqlite->query("DELETE FROM results WHERE analyzer = '$class'");

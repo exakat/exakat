@@ -365,13 +365,15 @@ class Project extends Tasks {
                     $links = $res[0];
                 }
 
-                $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
-                                                       'audit_length' => $audit_end - $audit_start,
-                                                       'graphNodes'   => $nodes,
-                                                       'graphLinks'   => $links));
-
+                $finalMark = array('audit_end'    => $audit_end,
+                                   'audit_length' => $audit_end - $audit_start,
+                                   'graphNodes'   => $nodes,
+                                   'graphLinks'   => $links);
+                $this->datastore->addRow('hash', $finalMark);
+                
                 $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
                 $dump->run();
+                $dump->finalMark($finalMark);
                 unset($dump);
                 unset($dumpConfig);
             } catch (\Exception $e) {
