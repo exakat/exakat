@@ -32,7 +32,7 @@ class EmptyClass extends Analyzer {
     }
     
     public function analyze() {
-        // class x { /* nothing */ } 
+        // class x { /* nothing */ }
         $this->atomIs('Class')
              ->analyzerIsNot('Exceptions/DefinedExceptions')
              ->raw('not(where( __.out("METHOD", "MAGICMETHOD") ) )');

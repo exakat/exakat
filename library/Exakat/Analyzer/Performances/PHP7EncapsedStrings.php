@@ -27,12 +27,12 @@ use Exakat\Analyzer\Analyzer;
 class PHP7EncapsedStrings extends Analyzer {
     public function analyze() {
         $ignoreAtom = array('Functioncall',    // calls
-                            'Methodcall', 
-                            'Staticproperty', 
-                            'Staticmethodcall', 
+                            'Methodcall',
+                            'Staticproperty',
+                            'Staticmethodcall',
                             'Staticconstant',  // constants
-                            'Identifier',       
-                            'Nsname', 
+                            'Identifier',
+                            'Nsname',
                             'Magicconstant',
                             );
         // "a $b c"
