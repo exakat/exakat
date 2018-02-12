@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 12 Feb 2018 17:23:52 +0000
-.. comment: Generation hash : b950ca93317d3814845c0e5c9c7069e0e332b2fa
+.. comment: Generation date : Mon, 12 Feb 2018 18:30:01 +0000
+.. comment: Generation hash : 5bf816b92ef547aaa1769efd2e35ffa21c3ddd8a
 
 
 .. _$http\_raw\_post\_data:
@@ -1157,6 +1157,49 @@ See also `Avoid optional services as much as possible <http://bestpractices.thec
 +--------------+---------------------------------+
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
+
+
+.. _avoid-php-superglobals:
+
+Avoid PHP Superglobals
+######################
+
+
+Avoid using PHP superglobal when using Zend Framework. Zend Framework provides other ways to reach the incoming values : they should be used.
+
+.. code-block:: php
+
+   <?php
+   
+   // Normal PHP code
+   $parameter = $_GET['parameter'];
+   
+   // The Zend Framework way.
+   // 
+   <?php
+   namespace <module name>\Controller;
+   
+   use Zend\Mvc\Controller\AbstractActionController;
+   use Zend\View\Model\ViewModel;
+   
+   class HelloController extends AbstractActionController
+   {
+       public function worldAction()
+       {
+           $message = $this->params()->fromQuery('message', 'foo');
+           return new ViewModel(['message' => $message]);
+       }
+   }
+   ?>
+
+
+See also `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_ of the Zend-mvc component.
+
++--------------+----------------------+
+| Command Line | ZendF/DontUseGPC     |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
 
 
 .. _avoid-parenthesis:
@@ -11490,36 +11533,6 @@ The same applies to `'parse_url() <http://www.php.net/parse_url>`_, which return
 +--------------+---------------------+
 
 
-.. _performances/timevsstrtotime:
-
-Performances/timeVsstrtotime
-############################
-
-
-time() is actually faster than strtotime('now').
-
-.. code-block:: php
-
-   <?php
-   
-   // Faster version
-   $a = time();
-   
-   // Slower version
-   $b = strtotime('now');
-   
-   ?>
-
-
-This is a micro-optimisation. Gain is real, but small unless the function is used many times.
-
-+--------------+------------------------------+
-| Command Line | Performances/timeVsstrtotime |
-+--------------+------------------------------+
-| Analyzers    | :ref:`Performances`          |
-+--------------+------------------------------+
-
-
 .. _php-7-indirect-expression:
 
 Php 7 Indirect Expression
@@ -19730,53 +19743,10 @@ Identify Zend Framework traits, based on fully qualified name.
 +--------------+----------------------+
 
 
-.. _zendf/dontusegpc:
+.. _zend-typehinting:
 
-ZendF/DontUseGPC
+Zend Typehinting
 ################
-
-
-Avoid using PHP superglobal when using Zend Framework. Zend Framework provides other ways to reach the incoming values : they should be used.
-
-.. code-block:: php
-
-   <?php
-   
-   // Normal PHP code
-   $parameter = $_GET['parameter'];
-   
-   // The Zend Framework way.
-   // 
-   <?php
-   namespace <module name>\Controller;
-   
-   use Zend\Mvc\Controller\AbstractActionController;
-   use Zend\View\Model\ViewModel;
-   
-   class HelloController extends AbstractActionController
-   {
-       public function worldAction()
-       {
-           $message = $this->params()->fromQuery('message', 'foo');
-           return new ViewModel(['message' => $message]);
-       }
-   }
-   ?>
-
-
-See also `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_ of the Zend-mvc component.
-
-+--------------+----------------------+
-| Command Line | ZendF/DontUseGPC     |
-+--------------+----------------------+
-| Analyzers    | :ref:`ZendFramework` |
-+--------------+----------------------+
-
-
-.. _zendf/zendtypehinting:
-
-ZendF/ZendTypehinting
-#####################
 
 
 Zend classes or interfaces used in `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ or typehint situations.
@@ -20728,6 +20698,36 @@ When in doubt about backward compatibility, just drop the Typehint. Otherwise, u
 +--------------+-----------------------------+
 | Analyzers    | :ref:`CompatibilityPHP70`   |
 +--------------+-----------------------------+
+
+
+.. _time()-vs-strtotime():
+
+time() Vs strtotime()
+#####################
+
+
+time() is actually faster than strtotime('now').
+
+.. code-block:: php
+
+   <?php
+   
+   // Faster version
+   $a = time();
+   
+   // Slower version
+   $b = strtotime('now');
+   
+   ?>
+
+
+This is a micro-optimisation. Relative gain is real, but small unless the function is used many times.
+
++--------------+------------------------------+
+| Command Line | Performances/timeVsstrtotime |
++--------------+------------------------------+
+| Analyzers    | :ref:`Performances`          |
++--------------+------------------------------+
 
 
 .. _var\_dump()...-usage:

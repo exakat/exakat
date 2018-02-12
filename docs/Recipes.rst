@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 12 Feb 2018 17:23:52 +0000
-.. comment: Generation hash : b950ca93317d3814845c0e5c9c7069e0e332b2fa
+.. comment: Generation date : Mon, 12 Feb 2018 18:30:01 +0000
+.. comment: Generation hash : 5bf816b92ef547aaa1769efd2e35ffa21c3ddd8a
 
 
 .. _analyze:
@@ -872,7 +872,6 @@ Total : 31 analysis
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-* :ref:`Performances/timeVsstrtotime`
 * :ref:`Pre-increment`
 * :ref:`Should Use Function <should-use-function>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
@@ -885,6 +884,7 @@ Total : 31 analysis
 * :ref:`Use PHP7 Encapsed Strings <use-php7-encapsed-strings>`
 * :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
+* :ref:`time() Vs strtotime() <time()-vs-strtotime()>`
 
 .. _security:
 
@@ -1000,6 +1000,7 @@ ZendFramework
 Total : 241 analysis
 
 * :ref:`Action Should Be In Controller <action-should-be-in-controller>`
+* :ref:`Avoid PHP Superglobals <avoid-php-superglobals>`
 * :ref:`Defined View Property <defined-view-property>`
 * :ref:`Error Messages <error-messages>`
 * :ref:`Exit() Usage <exit()-usage>`
@@ -1028,8 +1029,7 @@ Total : 241 analysis
 * :ref:`Zend Classes <zend-classes>`
 * :ref:`Zend Interface <zend-interface>`
 * :ref:`Zend Trait <zend-trait>`
-* :ref:`ZendF/DontUseGPC`
-* :ref:`ZendF/ZendTypehinting`
+* :ref:`Zend Typehinting <zend-typehinting>`
 * :ref:`Zend\Config`
 * :ref:`zend-authentication 2.5.0 Undefined Classes <zend-authentication-2.5.0-undefined-classes>`
 * :ref:`zend-authentication Usage <zend-authentication-usage>`
