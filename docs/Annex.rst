@@ -231,7 +231,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/tokyotyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
 * `ext/trader <http://www.ta-lib.org/>`_
 * `ext/v8js <http://php.net/manual/en/book.v8js.php>`_
-* Extensions/Extvips
+* ext/vips
 * `ext/wddx <http://php.net/manual/en/intro.wddx.php>`_
 * ext/wikidiff2
 * `ext/wincache <http://www.php.net/wincache>`_
@@ -411,7 +411,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Crypto Usage (Php/CryptoUsage ; Appinfo, Appcontent)
   * Dl() Usage (Php/DlUsage ; Appinfo)
   * Don't Send This In Constructor (Classes/DontSendThisInConstructor ; Analyze)
-  * Extensions/Extvips (Extensions/Extvips ; Appinfo, Appcontent)
   * Hash Will Use Objects (Php/HashUsesObjects ; CompatibilityPHP72)
   * Incoming Variable Index Inventory (Type/GPCIndex ; Inventory, Appinfo, Appcontent)
   * Integer As Property (Classes/IntegerAsProperty ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
@@ -422,6 +421,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Unknown Pcre2 Option (Php/UnknownPcre2Option ; Analyze)
   * Use List With Foreach (Structures/UseListWithForeach ; Analyze, Suggestions)
   * Use PHP7 Encapsed Strings (Performances/PHP7EncapsedStrings ; Performances)
+  * ext/vips (Extensions/Extvips ; Appinfo, Appcontent)
 
 * 1.0.3
 
@@ -443,7 +443,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.12.17
 
-  * Classes/IsaMagicProperty (Classes/IsaMagicProperty)
+  * Is A Magic Property (Classes/IsaMagicProperty)
 
 * 0.12.16
 
@@ -716,6 +716,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.10.7
 
+  * Avoid PHP Superglobals (ZendF/DontUseGPC ; ZendFramework)
   * Group Use Declaration (Php/GroupUseDeclaration)
   * Missing Cases In Switch (Structures/MissingCases ; Analyze)
   * New Constants In PHP 7.2 (Php/Php72NewConstants ; CompatibilityPHP72)
@@ -747,7 +748,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * SlimPHP 3.8.0 Undefined Classes (Slim/Slimphp38 ; Slim)
   * Use Slim (Slim/UseSlim ; Appinfo, Slim)
   * Used Routes (Slim/UsedRoutes ; Slim)
-  * ZendF/DontUseGPC (ZendF/DontUseGPC ; ZendFramework)
   * zend-authentication 2.5.0 Undefined Classes (ZendF/Zf3Authentication25 ; ZendFramework)
   * zend-authentication Usage (ZendF/Zf3Authentication ; ZendFramework)
   * zend-barcode 2.5.0 Undefined Classes (ZendF/Zf3Barcode25 ; ZendFramework)
@@ -951,7 +951,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Avoid Large Array Assignation (Structures/NoAssignationInFunction ; Performances)
   * Could Be Protected Property (Classes/CouldBeProtectedProperty)
   * Long Arguments (Structures/LongArguments ; Analyze)
-  * ZendF/ZendTypehinting (ZendF/ZendTypehinting ; ZendFramework)
+  * Zend Typehinting (ZendF/ZendTypehinting ; ZendFramework)
 
 * 0.9.6
 
@@ -1025,10 +1025,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Dont Echo Error (Security/DontEchoError ; Analyze, Security, Codacy, Simple, Level 1)
   * No Isset With Empty (Structures/NoIssetWithEmpty ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple, Level 4)
-  * Performances/timeVsstrtotime (Performances/timeVsstrtotime ; Performances, OneFile, RadwellCodes)
   * Use Class Operator (Classes/UseClassOperator)
   * Useless Casting (Structures/UselessCasting ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple, Level 4)
   * ext/rar (Extensions/Extrar ; Appinfo)
+  * time() Vs strtotime() (Performances/timeVsstrtotime ; Performances, OneFile, RadwellCodes)
 
 * 0.8.6
 
@@ -2009,6 +2009,7 @@ List of external links mentionned in this documentation.
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
