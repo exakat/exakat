@@ -316,22 +316,33 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.1.4
+
+  * Double array_flip() (Performances/DoubleArrayFlip ; Performances)
+  * Fallback Function (Functions/FallbackFunction ; Appinfo)
+  * Find Key Directly (Structures/GoToKeyDirectly ; Suggestions)
+  * Reuse Variable (Structures/ReuseVariable ; Suggestions)
+  * Useless Catch (Exceptions/UselessCatch)
+
+* 1.1.3
+
+  * Useless Referenced Argument (Functions/UselessReferenceArgument)
+
 * 1.1.2
 
   * Local Globals (Variables/LocalGlobals ; Analyze)
+  * Make Type A String (Melis/MakeTypeAString ; Melis)
   * Melis Translation String (Melis/TranslationString ; Internal)
-  * Melis/MakeTypeAString (Melis/MakeTypeAString ; Melis)
-  * Melis/UndefinedConfType (Melis/UndefinedConfType ; Melis)
   * Missing Include (Files/MissingInclude)
   * Missing Translation String (Melis/MissingTranslation ; Melis)
   * No Echo Outside View (ZendF/NoEchoOutsideView ; ZendFramework, Melis)
+  * Undefined Configuration Type (Melis/UndefinedConfType ; Melis)
 
 * 1.1.1
 
   * Defined View Property (ZendF/DefinedViewProperty ; ZendFramework)
   * Inclusion Wrong Case (Files/InclusionWrongCase)
   * Is Zend View File (ZendF/IsView ; ZendFramework)
-  * Melis/UnusedTranslation (Melis/UnusedTranslation ; Melis)
   * Missing Language (Melis/MissingLanguage ; Melis)
   * Undefined Configured Class (Melis/UndefinedConfiguredClass ; Melis)
   * Used View Property (ZendF/UsedViewProperty ; Internal)
@@ -457,7 +468,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Always Anchor Regex (Security/AnchorRegex)
   * Is Actually Zero (Structures/IsZero ; Analyze, Level 2)
   * Multiple Type Variable (Structures/MultipleTypeVariable ; Analyze, Level 4)
-  * Security/SessionLazyWrite (Security/SessionLazyWrite ; Security)
+  * Session Lazy Write (Security/SessionLazyWrite ; Security)
   * zend-code 3.2.0 Undefined Classes (ZendF/Zf3Code32 ; ZendFramework, ZendFramework)
 
 * 0.12.14
@@ -951,7 +962,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Ext/mongodb (Extensions/Extmongodb)
   * One Expression Brackets Consistency (Structures/OneExpressionBracketsConsistency ; Preferences)
-  * Should Use Function Use (Php/ShouldUseFunction ; Performances)
+  * Should Use Function (Php/ShouldUseFunction ; Performances)
   * ext/zbarcode (Extensions/Extzbarcode ; Appinfo)
 
 * 0.9.4
@@ -1428,10 +1439,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Reserved Keywords In PHP 7 (Php/ReservedKeywords7 ; CompatibilityPHP70)
   * Resources Usage (Structures/ResourcesUsage ; Appinfo)
   * Results May Be Missing (Structures/ResultMayBeMissing ; Analyze, Codacy, Simple)
-  * Return ;  (Structures/ReturnVoid ; )
   * Return True False (Structures/ReturnTrueFalse ; Analyze, Codacy, Simple, Level 1)
   * Return Typehint Usage (Php/ReturnTypehintUsage ; Appinfo, Internal)
   * Return With Parenthesis (Php/ReturnWithParenthesis ; Coding Conventions, PHP recommendations)
+  * Return void  (Structures/ReturnVoid ; )
   * Safe Curl Options (Security/CurlOptions ; Security)
   * Same Conditions In Condition (Structures/SameConditions ; Analyze, Codacy, Simple)
   * Scalar Typehint Usage (Php/ScalarTypehintUsage ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
@@ -1833,6 +1844,7 @@ List of external links mentionned in this documentation.
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array_filter <https://php.net/array_filter>`_
+* `array_search <http://php.net/array_search>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
@@ -1850,6 +1862,8 @@ List of external links mentionned in this documentation.
 * `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_
 * `CakePHP <https://www.cakephp.org/>`_
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
+* `Cant Use Return Value In Write Context <https://stackoverflow.com/questions/1075534/cant-use-method-return-value-in-write-context>`_
+* `cat: write error: Broken pipe <https://askubuntu.com/questions/421663/cat-write-error-broken-pipe>`_
 * `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
 * `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_
 * `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_
@@ -1867,6 +1881,7 @@ List of external links mentionned in this documentation.
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
 * `Courrier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
 * `crc32() <http://php.net/crc32>`_
+* `Creating the required configuration and files <https://www.melistechnology.com/MelisTechnology/resources/documentation/back-office/create-a-custom-tool/Creatingtherequiredconfiguration>`_
 * `crypt <http://www.php.net/crypt>`_
 * `Cryptography Extensions <http://php.net/manual/en/refs.crypto.php>`_
 * `Ctype funtions <http://php.net/manual/en/ref.ctype.php>`_
@@ -1892,6 +1907,7 @@ List of external links mentionned in this documentation.
 * `Document Object Model <http://php.net/manual/en/book.dom.php>`_
 * `Don't pass this out of a constructor <http://www.javapractices.com/topic/TopicAction.do?Id=252>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
+* `Double quoted <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.double>`_
 * `download <https://www.exakat.io/download-exakat/>`_
 * `Drupal <http://www.drupal.org/>`_
 * `Eaccelerator <http://eaccelerator.net/>`_
@@ -1934,6 +1950,7 @@ List of external links mentionned in this documentation.
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
+* `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
@@ -2021,6 +2038,7 @@ List of external links mentionned in this documentation.
 * `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
+* `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
 * `original idea <https://twitter.com/b_viguier/status/940173951908700161>`_
 * `Original MySQL API <http://www.php.net/manual/en/book.mysql.php>`_
@@ -2111,6 +2129,7 @@ List of external links mentionned in this documentation.
 * `Swoole <https://github.com/swoole/swoole-src>`_
 * `Symfony <http://www.symfony.com/>`_
 * `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
+* `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
 * `the docs online <http://exakat.readthedocs.io/en/latest/Rules.html>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
@@ -2126,6 +2145,7 @@ List of external links mentionned in this documentation.
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
+* `Using namespaces: fallback to global function/constant <http://php.net/manual/en/language.namespaces.fallback.php>`_
 * `Using non-breakable spaces in test method names <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
 * `V8 Javascript Engine <https://bugs.chromium.org/p/v8/issues/list>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
@@ -2133,7 +2153,7 @@ List of external links mentionned in this documentation.
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
-* `Visibility <http://www.php.net/manual/en/language.oop5.visibility.php>`_
+* `Void functions <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.void-functions>`_
 * `Warn when counting non-countable types <http://php.net/manual/en/migration72.incompatible.php#migration72.incompatible.warn-on-non-countable-types>`_
 * `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_

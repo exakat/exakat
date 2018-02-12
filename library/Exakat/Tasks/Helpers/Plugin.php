@@ -26,7 +26,7 @@ abstract class Plugin {
     public function __construct() {
     }
     
-    abstract function run($atom);
+    abstract function run($atom, $extras);
 }
 
 ?>

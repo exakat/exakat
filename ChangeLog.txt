@@ -1,4 +1,4 @@
-Version 1.1.3 (The fairy Su'e, coming up)
+Version 1.1.4 (Li Shimin, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,39 @@ Version 1.1.3 (The fairy Su'e, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.1.4 (The Great White Turle, 2018-02-12)
++ Architecture
+    + Build concatenation values in scalar constante expression.
+    + Upgraded export of file dependencies values
++ Report
+    + Ambassador : fixed duration of audit.
+    + Composer : provides a full list of depend extensions
++ Analyzer
+    + New analyzer : Report useless catch
+    + New analyzer : suggest using array_search / array_keys instead of foreach
+    + New analyzer : double array_flip is slow
+    + New analyzer : Suggest using cached values
+    + New analyzer : Functions that fallback to global namespace
+    + Upgraded analyzer : Encoded letters supports leading 0 in unicode codepoint
+    + Upgraded analyzer : Variable strange names now report 3 identical consecutive letters
+    + Upgraded analyzer : Upgraded support to __dir__
+    + Checked unit tests : 2716 / 2711 test pass (99% pass). 
++ Tokenizer
+    + Fixed definitions link for functions
+
+Version 1.1.3 (The fairy Su'e, 2018-02-05)
++ Report
+    + Fixed Ambassador : the favorites weren't displayed. 
++ Analyzer
+    + New analyzer : Report useless references
+    + New analyzer : Melis configuration : Undefined configuration array
+    + New analyzer : Melis configuration : make string.
+    + Upgraded analyzer : Parent first
+    + Checked unit tests : 2700 / 2695 test pass (99% pass). 
++ Tokenizer
+    + Better handling of Labels. 
+    + Fixed edge case where class and constants where mistaken one for the other
 
 Version 1.1.2 (Jade Rabbit Spirit, 2018-01-29)
 + Architecture

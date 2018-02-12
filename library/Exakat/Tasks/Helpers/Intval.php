@@ -28,7 +28,7 @@ class Intval extends Plugin {
 
     static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null');
     
-    public function run($atom) {
+    public function run($atom, $extras) {
         switch ($atom->atom) {
             case 'Integer' :
                 $value = $atom->code;

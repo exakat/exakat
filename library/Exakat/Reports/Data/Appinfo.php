@@ -138,16 +138,17 @@ class Appinfo extends Data {
                             'Nullable Typehint'           => 'Php/UseNullableType',
                             'Static variables'            => 'Variables/StaticVariables',
 
-                            'Function dereferencing'     => 'Structures/FunctionSubscripting',
-                            'Constant scalar expression' => 'Structures/ConstantScalarExpression',
-                            '... usage'                  => 'Php/EllipsisUsage',
-                            'func_get_args'              => 'Functions/VariableArguments',
+                            'Function dereferencing'      => 'Structures/FunctionSubscripting',
+                            'Constant scalar expression'  => 'Structures/ConstantScalarExpression',
+                            '... usage'                   => 'Php/EllipsisUsage',
+                            'func_get_args'               => 'Functions/VariableArguments',
 
-                            'Dynamic functioncall' => 'Functions/Dynamiccall',
+                            'Dynamic functioncall'        => 'Functions/Dynamiccall',
+                            'Fallback functioncall'       => 'Functions/FallbackFunction',
 
-                            'Recursive Functions'  => 'Functions/Recursive',
-                            'Generator Functions'  => 'Functions/IsGenerator',
-                            'Conditioned Function' => 'Functions/ConditionedFunctions',
+                            'Recursive Functions'         => 'Functions/Recursive',
+                            'Generator Functions'         => 'Functions/IsGenerator',
+                            'Conditioned Function'        => 'Functions/ConditionedFunctions',
                     ),
 
                     'Classes' => array(

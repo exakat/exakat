@@ -29,6 +29,10 @@ class AssignedTwiceOrMore extends Analyzer {
         $list = makeList(self::$FUNCTIONS_ALL);
         $maxLooping = self::MAX_LOOPING;
         $equal = $this->dictCode->translate(array('='));
+        
+        if (empty($equal)) {
+            return;
+        }
 
         $query = <<<GREMLIN
 g.V().hasLabel($list).where( 

@@ -168,7 +168,7 @@ class Load extends Tasks {
     static public $PROP_REFERENCE   = array('Variable', 'Variableobject', 'Variablearray', 'Member', 'Array', 'Function', 'Closure', 'Method', 'Functioncall', 'Methodcall');
     static public $PROP_VARIADIC    = array('Variable', 'Array', 'Member', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname');
     static public $PROP_DELIMITER   = array('String', 'Heredoc');
-    static public $PROP_NODELIMITER = array('String', 'Variable', 'Magicconstant', 'Identifier', 'Nsname');
+    static public $PROP_NODELIMITER = array('String', 'Variable', 'Magicconstant', 'Identifier', 'Nsname', 'Boolean', 'Integer', 'Real', 'Null');
     static public $PROP_HEREDOC     = array('Heredoc');
     static public $PROP_COUNT       = array('Sequence', 'Functioncall', 'Methodcallname', 'Arrayliteral', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
     static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Method', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String', 'Self', 'Parent');
@@ -487,9 +487,9 @@ SQL;
         $this->callsSqlite->query($definitions);
     }
 
-    public function runPlugins($atom) {
+    public function runPlugins($atom, $linked) {
         foreach($this->plugins as $plugin) {
-            $plugin->run($atom);
+            $plugin->run($atom, $linked);
         }
     }
     
@@ -1666,6 +1666,7 @@ SQL;
             $nsname = $this->addAtom('Boolean');
             $nsname->boolean = (int) (mb_strtolower($this->tokens[$this->id ][1]) === 'true');
             $nsname->constant = self::CONSTANT_EXPRESSION;
+            $nsname->noDelimiter = $nsname->boolean === 1 ? 1 : '';
         } elseif ($this->tokens[$this->id][0]     === \Exakat\Tasks\T_NS_SEPARATOR &&
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING       &&
                   mb_strtolower($this->tokens[$this->id + 1][1]) === 'null'           &&
@@ -1674,6 +1675,7 @@ SQL;
             $nsname = $this->addAtom('Null');
             $nsname->boolean = 0;
             $nsname->constant = self::CONSTANT_EXPRESSION;
+            $nsname->noDelimiter = '';
         } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CALLABLE) {
             $nsname = $this->addAtom('Nsname');
             $nsname->token      = 'T_CALLABLE';
@@ -2226,10 +2228,12 @@ SQL;
             $string = $this->addAtom('Boolean');
             $string->boolean  = (int) (mb_strtolower($this->tokens[$this->id ][1]) === 'true');
             $string->constant = self::CONSTANT_EXPRESSION;
+            $string->noDelimiter = $string->boolean === 1 ? 1 : '';
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null');
             $string->boolean  = 0;
             $string->constant = self::CONSTANT_EXPRESSION;
+            $string->noDelimiter = '';
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
             $string = $this->addAtom('Self');
             $string->constant = self::CONSTANT_EXPRESSION;
@@ -3096,6 +3100,7 @@ SQL;
         $parenthese->line     = $this->tokens[$this->id][2];
         $parenthese->token    = 'T_OPEN_PARENTHESIS';
         $parenthese->constant = $code->constant;
+        $parenthese->noDelimiter = $code->noDelimiter;
 
         $this->pushExpression($parenthese);
         ++$this->id; // Skipping the )
@@ -3751,10 +3756,11 @@ SQL;
 
     private function processInteger() {
         $integer = $this->processSingle('Integer');
-        $this->runPlugins($integer);
+        $this->runPlugins($integer, array());
 
         $integer->boolean = (int) (boolean) $integer->code;
         $integer->constant = self::CONSTANT_EXPRESSION;
+        $integer->noDelimiter = $integer->code;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3766,9 +3772,10 @@ SQL;
     private function processReal() {
         $real = $this->processSingle('Real');
         // (int) is for loading into the database
-        $this->runPlugins($real);
+        $this->runPlugins($real, $array());
         $real->boolean  = (int) (strtolower($this->tokens[$this->id][1]) != 0);
         $real->constant = self::CONSTANT_EXPRESSION;
+        $real->noDelimiter = $real->code;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3827,26 +3834,34 @@ SQL;
     private function processMagicConstant() {
         $constant = $this->processSingle('Magicconstant');
         
-        if ($constant->fullcode === '__DIR__') {
+        if (mb_strtolower($constant->fullcode) === '__dir__') {
             $path = dirname($this->filename);
             $constant->noDelimiter = $path === '/' ? '' : $path;
-        } elseif ($constant->fullcode === '__FILE__') {
+        } elseif (mb_strtolower($constant->fullcode) === '__file__') {
             $constant->noDelimiter = $this->filename;
-        } elseif ($constant->fullcode === '__FUNCTION__') {
+        } elseif (mb_strtolower($constant->fullcode) === '__function__') {
             if (empty($this->currentFunction)) {
                 $constant->noDelimiter = '';
             } else {
                 $constant->noDelimiter = $this->currentFunction[count($this->currentFunction) - 1]->code;
             }
-        } elseif ($constant->fullcode === '__CLASS__') {
+        } elseif (mb_strtolower($constant->fullcode) === '__class__' ||
+                  mb_strtolower($constant->fullcode) === '__trait__'
+                  ) {
             if (empty($this->currentClassTrait)) {
                 $constant->noDelimiter = '';
             } else {
                 $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
             }
-        } elseif ($constant->fullcode === '__METHOD__') {
+        } elseif (mb_strtolower($constant->fullcode) === '__line__') {
+            $constant->noDelimiter = $this->tokens[$this->id][2];
+        } elseif (mb_strtolower($constant->fullcode) === '__method__') {
             if (empty($this->currentClassTrait)) {
-                $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
+                if (empty($this->currentMethod)) {
+                    $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
+                } else {
+                    $constant->noDelimiter = '';
+                }
             } else {
                 $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath .
                                          '::' .
@@ -4151,7 +4166,7 @@ SQL;
             $operand->fullcode = $signExpression.$operand->fullcode;
             $operand->line     = $this->tokens[$this->id][2];
             $operand->token    = $this->getToken($this->tokens[$this->id][0]);
-            $this->runPlugins($operand);
+            $this->runPlugins($operand, $array());
 
             return $operand;
         }
@@ -4549,12 +4564,14 @@ SQL;
         $current = $this->id;
         $concatenation = $this->addAtom('Concatenation');
         $fullcode= array();
+        $noDelimiter = '';
         $rank = -1;
 
         $contains = $this->popExpression();
         $this->addLink($concatenation, $contains, 'CONCAT');
         $contains->rank = ++$rank;
         $fullcode[] = $contains->fullcode;
+        $noDelimiter .= $contains->noDelimiter;
 
         $this->nestContext();
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
@@ -4587,6 +4604,7 @@ SQL;
                 $this->popExpression();
                 $this->addLink($concatenation, $contains, 'CONCAT');
                 $fullcode[] = $contains->fullcode;
+                $noDelimiter .= $contains->noDelimiter;
                 $contains->rank = ++$rank;
 
                 ++$this->id;
@@ -4596,6 +4614,7 @@ SQL;
         $this->popExpression();
         $this->addLink($concatenation, $contains, 'CONCAT');
         $fullcode[] = $contains->fullcode;
+        $noDelimiter .= $contains->noDelimiter;
         $contains->rank = ++$rank;
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
@@ -4604,7 +4623,7 @@ SQL;
 
         $concatenation->code        = $this->tokens[$current][1];
         $concatenation->fullcode    = implode(' . ', $fullcode);
-        $concatenation->noDelimiter = trim($concatenation->fullcode, '"\'');
+        $concatenation->noDelimiter = $noDelimiter;
         $concatenation->line        = $this->tokens[$current][2];
         $concatenation->token       = $this->getToken($this->tokens[$current][0]);
         $concatenation->count       = $rank;
@@ -4972,15 +4991,15 @@ SQL;
             }
             
             // This is an identifier, self or parent
-            if (mb_strtolower($name->code) === 'self' ||
-                mb_strtolower($name->code) === 'static') {
+            if ($fnp === 'self' ||
+                $fnp === 'static') {
                 if (empty($this->currentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
                     return array($this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
                 }
 
-            } elseif (mb_strtolower($name->code) === 'parent') {
+            } elseif ($fnp === 'parent') {
                 if (empty($this->currentParentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
@@ -4992,9 +5011,9 @@ SQL;
                 $this->addLink($name, $this->uses['class'][$fnp], 'DEFINITION');
                 return array($this->uses['class'][$fnp]->fullnspath, self::ALIASED);
 
-            } elseif ($type === 'class' && isset($this->uses['class'][mb_strtolower($prefix)])) {
-                $this->addLink($name, $this->uses['class'][mb_strtolower($prefix)], 'DEFINITION');
-                return array($this->uses['class'][mb_strtolower($prefix)]->fullnspath.str_replace(mb_strtolower($prefix), '', mb_strtolower($name->code)), self::ALIASED);
+            } elseif ($type === 'class' && isset($this->uses['class'][$prefix])) {
+                $this->addLink($name, $this->uses['class'][$prefix], 'DEFINITION');
+                return array($this->uses['class'][$prefix]->fullnspath.str_replace($prefix, '', $fnp), self::ALIASED);
 
             } elseif ($type === 'const') {
                 if (isset($this->uses['const'][$name->code])) {

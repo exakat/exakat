@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 29 Jan 2018 10:08:20 +0000
-.. comment: Generation hash : c91c58d60c6e27c8d75945daede1b0533a172903
+.. comment: Generation date : Mon, 12 Feb 2018 17:23:52 +0000
+.. comment: Generation hash : b950ca93317d3814845c0e5c9c7069e0e332b2fa
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 338 analysis
+Total : 340 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -385,6 +385,7 @@ Total : 338 analysis
 * :ref:`Useless Abstract Class <useless-abstract-class>`
 * :ref:`Useless Brackets <useless-brackets>`
 * :ref:`Useless Casting <useless-casting>`
+* :ref:`Useless Catch <useless-catch>`
 * :ref:`Useless Check <useless-check>`
 * :ref:`Useless Constructor <useless-constructor>`
 * :ref:`Useless Final <useless-final>`
@@ -392,6 +393,7 @@ Total : 338 analysis
 * :ref:`Useless Instructions <useless-instructions>`
 * :ref:`Useless Interfaces <useless-interfaces>`
 * :ref:`Useless Parenthesis <useless-parenthesis>`
+* :ref:`Useless Referenced Argument <useless-referenced-argument>`
 * :ref:`Useless Return <useless-return>`
 * :ref:`Useless Switch <useless-switch>`
 * :ref:`Useless Unset <useless-unset>`
@@ -850,7 +852,7 @@ Total : 25 analysis
 Performances
 ++++++++++++
 
-Total : 30 analysis
+Total : 31 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -858,6 +860,7 @@ Total : 30 analysis
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Avoid glob() Usage <avoid-glob()-usage>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
+* :ref:`Double array_flip() <double-array\_flip()>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Fetch One Row Format <fetch-one-row-format>`
@@ -871,7 +874,7 @@ Total : 30 analysis
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Performances/timeVsstrtotime`
 * :ref:`Pre-increment`
-* :ref:`Should Use Function Use <should-use-function-use>`
+* :ref:`Should Use Function <should-use-function>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Simple Switch <simple-switch>`
 * :ref:`Simplify Regex <simplify-regex>`
@@ -910,7 +913,7 @@ Total : 33 analysis
 * :ref:`Random Without Try <random-without-try>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe Curl Options <safe-curl-options>`
-* :ref:`Security/SessionLazyWrite`
+* :ref:`Session Lazy Write <session-lazy-write>`
 * :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`

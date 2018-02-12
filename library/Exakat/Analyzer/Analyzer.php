@@ -633,6 +633,14 @@ GREMLIN
         return $this;
     }
 
+    public function fullcodeInside($fullcode) {
+        // $fullcode is a name of a variable
+        $gremlin = 'emit( ).repeat( out() ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}';
+        $this->addMethod($gremlin);
+
+        return $this;
+    }
+
     public function atomInsideNoBlock($atom) {
         assert($this->assertAtom($atom));
         $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Sequence")) ).times('.self::MAX_LOOPING.').hasLabel(within(***))';
@@ -792,10 +800,10 @@ GREMLIN
     public function isMore($property, $value = 0) {
         assert($this->assertProperty($property));
         if (is_int($value)) {
-            $this->addMethod('filter{ it.get().value("'.$property.'").toLong() > '.$value.'}');
+            $this->addMethod("filter{ it.get().value(\"{$property}\").toLong() > {$value} }");
         } elseif (is_string($value)) {
             // this is a variable name, so it can't use ***
-            $this->addMethod("filter{ it.get().value('$property').toLong() > $value;}");
+            $this->addMethod("filter{ it.get().value(\"{$property}\").toLong() > {$value};}");
         } else {
             assert(false, '$value must be int or string in '.__METHOD__);
         }
@@ -839,7 +847,7 @@ GREMLIN
     }
 
     public function hasChildWithRank($edgeName, $rank = 0) {
-        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", ***) )', abs((int) $rank));
+        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", ***).not(hasLabel("Void")) )', abs((int) $rank));
 
         return $this;
     }
@@ -962,7 +970,9 @@ GREMLIN
         }
 
         if ($property === 'label') {
-            $this->addMethod('filter{ it.get().label()'.$caseSensitive.' == '.$name.$caseSensitive.'}');
+            $this->addMethod('filter{ it.get().label() == '.$name.'}');
+        } elseif ($property === 'id') {
+            $this->addMethod('filter{ it.get().id() == '.$name.'}');
         } else {
             $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' == '.$name.$caseSensitive.'}');
         }
@@ -979,7 +989,9 @@ GREMLIN
         }
         
         if ($property === 'label') {
-            $this->addMethod('filter{ it.get().label()'.$caseSensitive.' != '.$name.$caseSensitive.'}');
+            $this->addMethod('filter{ it.get().label() != '.$name.'}');
+        } elseif ($property === 'id') {
+            $this->addMethod('filter{ it.get().id() != '.$name.'}');
         } else {
             $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' != '.$name.$caseSensitive.'}');
         }
@@ -1021,6 +1033,8 @@ GREMLIN
         assert($this->assertProperty($property));
         if ($property === 'label') {
             $this->addMethod('sideEffect{ '.$name.' = it.get().label(); }');
+        } elseif ($property === 'id') {
+            $this->addMethod('sideEffect{ '.$name.' = it.get().id(); }');
         } else {
             $this->addMethod('sideEffect{ '.$name.' = it.get().value("'.$property.'"); }');
         }

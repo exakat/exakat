@@ -30,14 +30,21 @@ class NoNetForXmlLoad extends Analyzer {
     
         // $dom->loadXml($uri); // No options, so default options
         $this->atomIs('Methodcall')
+             ->outIs('OBJECT')
+             ->atomIsNot('This')
+             ->inIs('OBJECT')
              ->outIs('METHOD')
              ->codeIs($methods)
+             ->hasChildWithRank('ARGUMENT', 0)
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();
 
         // $dom->loadXml($uri, LIBXML_NOENT)
         $this->atomIs('Methodcall')
+             ->outIs('OBJECT')
+             ->atomIsNot('This')
+             ->inIs('OBJECT')
              ->outIs('METHOD')
              ->codeIs($methods)
              ->outWithRank('ARGUMENT', 1)

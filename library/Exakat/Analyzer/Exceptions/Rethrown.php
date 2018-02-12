@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Rethrown extends Analyzer {
     public function analyze() {
+        // try {} catch (Exception $e) { throw $e; }
         $this->atomIs('Try')
              ->outIs('CATCH')
              ->outIs('VARIABLE')

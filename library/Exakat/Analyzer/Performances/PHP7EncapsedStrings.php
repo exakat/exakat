@@ -26,11 +26,19 @@ use Exakat\Analyzer\Analyzer;
 
 class PHP7EncapsedStrings extends Analyzer {
     public function analyze() {
+        $ignoreAtom = array('Functioncall',    // calls
+                            'Methodcall',
+                            'Staticproperty',
+                            'Staticmethodcall',
+                            'Staticconstant',  // constants
+                            'Identifier',
+                            'Nsname',
+                            'Magicconstant',
+                            );
         // "a $b c"
         // No calls,
         $this->atomIs('Concatenation')
-             ->hasNoChildren(array('Functioncall', 'Methodcall', 'Staticmethodcall', 'Staticconstant'), array('CONCAT'))
-             ->hasNoChildren(array('Identifier', 'Nsname'), array('CONCAT'));
+             ->hasNoChildren($ignoreAtom, array('CONCAT'));
         $this->prepareQuery();
     }
 }

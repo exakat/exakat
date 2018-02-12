@@ -29,7 +29,7 @@ class StrangeName extends Analyzer {
         $names = $this->loadIni('php_strange_names.ini', 'constants');
         
         $this->atomIs(array('Identifier', 'Name'))
-             ->codeIs($names);
+             ->codeIs($names, self::TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
 
         $regex = '\\\\\\\\('.implode('|', $names).')\\$';

@@ -26,15 +26,16 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class EmptyClass extends Analyzer {
-    
     public function dependsOn() {
-        return array('Exceptions/DefinedExceptions');
+        return array('Exceptions/DefinedExceptions',
+                    );
     }
     
     public function analyze() {
+        // class x { /* nothing */ }
         $this->atomIs('Class')
              ->analyzerIsNot('Exceptions/DefinedExceptions')
-             ->raw('not(where( __.out("METHOD") ) )');
+             ->raw('not(where( __.out("METHOD", "MAGICMETHOD") ) )');
         $this->prepareQuery();
     }
 }

@@ -9,6 +9,7 @@ Summary
 * `I need special command to get my code`_
 * `Can I checkout that branch?`_
 * `Can I clone with my ssh keys?`_
+* `After init, my project has no code!`_
 * `The project is too big`_
 * `Java Out Of Memory Error`_
 * `How can I run a very large project?`_
@@ -20,6 +21,8 @@ Summary
 * `I get the error 'The executable 'ansible-playbook' Vagrant is trying to run was not found'`_
 * `Can I run exakat on Windows?`_
 * `Does exakat send my code to a central server?`_
+* `"cat: write error: Broken pipe" : is it bad?`_
+
 
 
 `I need special command to get my code`_
@@ -68,6 +71,21 @@ The fallback solution is to init an empty project, clone the code from the Shell
     git clone url://myprivate/git/repository code 
     cd -
     php exakat.phar project -p myProject
+
+`After init, my project has no code!`_
+---------------------------------------
+
+Check in the projects/<name>/config.ini file : if values were provided, you'll find them there. 
+
+In case the code was not found during init, then do the following : 
+
+::
+    cd projects/<name>/
+    git clone ssh://project/URL code
+    cd -
+    php exakat.phar files -p <name>
+    
+If you're using some other method than git, then just collect the code in a 'code' folder in the <name> project and run the 'files' command.
 
 
 `The project is too big`_
@@ -166,6 +184,7 @@ Note that you may test your code on PHP 5.x, while running Exakat on PHP 7.0. Th
     php70 = 
     php71 = 
     php72 = 
+    php73 = 
 
 Above is an example of a exakat configuration file, where Exakat is run with PHP 7.1 and process code with PHP 5.3.
 
@@ -188,3 +207,13 @@ Until then, you may run Exakat with Vagrant, or with Docker.
 When run from the sources, Exakat has everything it needs to fulfill its mission. There is no central server that does the job, and requires the transmission of the code.
 
 When running an audit on the Saas service of Exakat, the code is processed on our servers. 
+
+`"cat: write error: Broken pipe" : is it bad?`_
+-------------------------------------------------
+
+Exakat currently runs some piped commands, with xargs so as to make some operations parallel. When the following command ends up before the reading all the data from the first command, such a warning is emitted.
+
+It has no impact on exakat's processing of the code. 
+
+See also `cat: write error: Broken pipe <https://askubuntu.com/questions/421663/cat-write-error-broken-pipe>`_.
+

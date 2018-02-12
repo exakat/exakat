@@ -165,6 +165,7 @@ class Ambassador extends Reports {
         $this->generateExternalLib();
 
         $this->generateAppinfo();
+//        $this->generateFileDependencies();
         $this->generateBugFixes();
         $this->generatePhpConfiguration();
         $this->generateExternalServices();
@@ -3198,6 +3199,41 @@ JAVASCRIPT;
         $html = $this->injectBloc($html, 'FILES', $files);
 
         $this->putBasedPage('codes', $html);
+    }
+
+    private function generateFileDependencies() {
+        $res = $this->sqlite->query('SELECT * FROM filesDependencies WHERE included != including AND type in ("IMPLEMENTS", "EXTENDS", "INCLUDE", "NEW")');
+
+        $nodes = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (isset($nodes[$row['including']][$row['included']])) {
+                $nodes[$row['including']][$row['included']] .= ', '.$row['type'];
+            } else {
+                $nodes[$row['including']][$row['included']] = $row['type'];
+            }
+        }
+        
+        $next = array();
+        foreach($nodes as $in => $out) {
+            $set = false;
+            
+            foreach($next as $file => &$inc) {
+                if ($file === $in) {
+                    $inc = $out;
+                    $set = true;
+                }
+            }
+            
+            if ($set === false) {
+                $next[$in] = $out;
+            }
+        }
+
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'File dependencies tree');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Tree');
+        $html = $this->injectBloc($html, 'CONTENT', 'content');
+        $this->putBasedPage('files_tree', $html);
     }
 
     private function generateAppinfo() {
