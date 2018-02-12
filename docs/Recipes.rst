@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 05 Feb 2018 17:13:12 +0000
-.. comment: Generation hash : e0c96da0bea9fe7b6ad3bc8980ce8be4b703e605
+.. comment: Generation date : Mon, 12 Feb 2018 14:27:01 +0000
+.. comment: Generation hash : 3ed8ed26595112df3f8eeffad171818e6cc44a33
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 339 analysis
+Total : 340 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -385,6 +385,7 @@ Total : 339 analysis
 * :ref:`Useless Abstract Class <useless-abstract-class>`
 * :ref:`Useless Brackets <useless-brackets>`
 * :ref:`Useless Casting <useless-casting>`
+* :ref:`Useless Catch <useless-catch>`
 * :ref:`Useless Check <useless-check>`
 * :ref:`Useless Constructor <useless-constructor>`
 * :ref:`Useless Final <useless-final>`
@@ -851,7 +852,7 @@ Total : 25 analysis
 Performances
 ++++++++++++
 
-Total : 30 analysis
+Total : 31 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -870,9 +871,10 @@ Total : 30 analysis
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+* :ref:`Performances/DoubleArrayFlip`
 * :ref:`Performances/timeVsstrtotime`
 * :ref:`Pre-increment`
-* :ref:`Should Use Function Use <should-use-function-use>`
+* :ref:`Should Use Function <should-use-function>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Simple Switch <simple-switch>`
 * :ref:`Simplify Regex <simplify-regex>`
@@ -911,7 +913,7 @@ Total : 33 analysis
 * :ref:`Random Without Try <random-without-try>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe Curl Options <safe-curl-options>`
-* :ref:`Security/SessionLazyWrite`
+* :ref:`Session Lazy Write <session-lazy-write>`
 * :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`

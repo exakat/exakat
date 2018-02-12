@@ -318,7 +318,12 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.1.3
 
-  * Useless Referenced Argument (Functions/UselessReferenceArgument)
+  * Fallback Function (Functions/FallbackFunction ; Appinfo)
+  * Find Key Directly (Structures/GoToKeyDirectly ; Suggestions)
+  * Performances/DoubleArrayFlip (Performances/DoubleArrayFlip ; Performances)
+  * Reuse Variable (Structures/ReuseVariable ; Suggestions)
+  * Useless Catch (Exceptions/UselessCatch)
+  * Useless Referenced Argument (Functions/UselessReferenceArgument ; Analyze)
 
 * 1.1.2
 
@@ -460,7 +465,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Always Anchor Regex (Security/AnchorRegex)
   * Is Actually Zero (Structures/IsZero ; Analyze, Level 2)
   * Multiple Type Variable (Structures/MultipleTypeVariable ; Analyze, Level 4)
-  * Security/SessionLazyWrite (Security/SessionLazyWrite ; Security)
+  * Session Lazy Write (Security/SessionLazyWrite ; Security)
   * zend-code 3.2.0 Undefined Classes (ZendF/Zf3Code32 ; ZendFramework, ZendFramework)
 
 * 0.12.14
@@ -954,7 +959,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Ext/mongodb (Extensions/Extmongodb)
   * One Expression Brackets Consistency (Structures/OneExpressionBracketsConsistency ; Preferences)
-  * Should Use Function Use (Php/ShouldUseFunction ; Performances)
+  * Should Use Function (Php/ShouldUseFunction ; Performances)
   * ext/zbarcode (Extensions/Extzbarcode ; Appinfo)
 
 * 0.9.4
@@ -1836,6 +1841,7 @@ List of external links mentionned in this documentation.
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array_filter <https://php.net/array_filter>`_
+* `array_search <http://php.net/array_search>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
@@ -1853,6 +1859,7 @@ List of external links mentionned in this documentation.
 * `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_
 * `CakePHP <https://www.cakephp.org/>`_
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
+* `Cant Use Return Value In Write Context <https://stackoverflow.com/questions/1075534/cant-use-method-return-value-in-write-context>`_
 * `cat: write error: Broken pipe <https://askubuntu.com/questions/421663/cat-write-error-broken-pipe>`_
 * `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
 * `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_
@@ -1940,6 +1947,7 @@ List of external links mentionned in this documentation.
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
+* `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
@@ -2134,6 +2142,7 @@ List of external links mentionned in this documentation.
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
+* `Using namespaces: fallback to global function/constant <http://php.net/manual/en/language.namespaces.fallback.php>`_
 * `Using non-breakable spaces in test method names <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
 * `V8 Javascript Engine <https://bugs.chromium.org/p/v8/issues/list>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_

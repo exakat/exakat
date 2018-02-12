@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 05 Feb 2018 17:13:12 +0000
-.. comment: Generation hash : e0c96da0bea9fe7b6ad3bc8980ce8be4b703e605
+.. comment: Generation date : Mon, 12 Feb 2018 14:27:01 +0000
+.. comment: Generation hash : 3ed8ed26595112df3f8eeffad171818e6cc44a33
 
 
 .. _$http\_raw\_post\_data:
@@ -2167,7 +2167,7 @@ Cant Use Return Value In Write Context
 ######################################
 
 
-Until PHP 5.5, it was not possible to use directly function calls inside an `'empty() <http://www.php.net/empty>`_ function call : they were met with a 'Can't use function return value in write context' fatal error. 
+Empty() used to work only on data containers, such as variables. Until PHP 5.5, it was not possible to use directly expressions, such as functioncalls, inside an `'empty() <http://www.php.net/empty>`_ function call : they were met with a 'Can't use function return value in write context' fatal error. 
 
 .. code-block:: php
 
@@ -2184,6 +2184,8 @@ Until PHP 5.5, it was not possible to use directly function calls inside an `'em
 
 
 This also applies to methodcalls, static or not.
+
+See also `Cant Use Return Value In Write Context <https://stackoverflow.com/questions/1075534/cant-use-method-return-value-in-write-context>`_.
 
 +--------------+------------------------------------------------------+
 | Command Line | Php/CantUseReturnValueInWriteContext                 |
@@ -4751,6 +4753,8 @@ Some simple letters are written in escape sequence.
 
 Usually, escape sequences are made to encode unusual characters. Using escape sequences for simple characters, like letters or numbers is suspicious.
 
+This analysis also detect unicode codepoint with superfluous leading zeros.
+
 .. code-block:: php
 
    <?php
@@ -4760,7 +4764,7 @@ Usually, escape sequences are made to encode unusual characters. Using escape se
    $a('php_info();');
    
    // With a PHP 7.0 unicode code point sequence
-   $a = ev\u{41}l;
+   $a = ev\u{000041}l;
    $a('php_info();');
    
    // With a PHP 5.0+ hexadecimal sequence
@@ -5067,7 +5071,7 @@ Foreach Don't Change Pointer
 ############################
 
 
-In PHP 7.0, the foreach loop won't change the internal pointer of the array, but will work on a copy. So, applying array pointer's functions such as `'current() <http://www.php.net/current>`_ or `'next() <http://www.php.net/next>`_ to the source array won't have the same behavior than in PHP 5.
+A foreach loop won't change the internal pointer of the array, as it works on a copy of the source. Hence, applying array pointer's functions such as `'current() <http://www.php.net/current>`_ or `'next() <http://www.php.net/next>`_ to the source array won't have the same behavior in PHP 5 than PHP 7.
 
 This anly applies when a `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ by reference is used.
 
@@ -5083,6 +5087,9 @@ This anly applies when a `'foreach() <http://php.net/manual/en/control-structure
    }
    
    ?>
+
+
+See also `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_.
 
 +--------------+------------------------------+
 | Command Line | Php/ForeachDontChangePointer |
@@ -11038,7 +11045,7 @@ PHP 7.2 Deprecations
 ####################
 
 
-PHP 7.2 deprecates several features of the language. 
+Several functions are deprecated in PHP 7.2. 
 
 * `'parse_str() <http://www.php.net/parse_str>`_ with no second argument
 * `'assert() <http://www.php.net/assert>`_ on strings
@@ -11441,6 +11448,21 @@ The same applies to `'parse_url() <http://www.php.net/parse_url>`_, which return
 +--------------+---------------------+
 | Analyzers    | :ref:`Analyze`      |
 +--------------+---------------------+
+
+
+.. _performances/doublearrayflip:
+
+Performances/DoubleArrayFlip
+############################
+
+
+
+
++--------------+------------------------------+
+| Command Line | Performances/DoubleArrayFlip |
++--------------+------------------------------+
+| Analyzers    | :ref:`Performances`          |
++--------------+------------------------------+
 
 
 .. _performances/timevsstrtotime:
@@ -12848,10 +12870,39 @@ See also `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
-.. _security/sessionlazywrite:
+.. _sequences-in-for:
 
-Security/SessionLazyWrite
-#########################
+Sequences In For
+################
+
+
+For() instructions allows several instructions in each of its parameters. Then, the instruction separator is comma ',', not semi-colon, which is used for separating the 3 arguments.
+
+.. code-block:: php
+
+   <?php
+      for ($a = 0, $b = 0; $a < 10, $b < 20; $a++, $b += 3) {
+       // For loop
+      }
+   ?>
+
+
+This loop will simultaneously increment $a and $b. It will stop only when the last of the central sequence reach a value of false : here, when $b reach 20 and $a will be 6. 
+
+This structure is often unknown, and makes the for instruction quite difficult to read. It is also easy to oversee the multiples instructions, and omit one of them.
+It is recommended not to use it.
+
++--------------+--------------------------+
+| Command Line | Structures/SequenceInFor |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
+
+.. _session-lazy-write:
+
+Session Lazy Write
+##################
 
 
 Classes that implements SessionHandlerInterface must also implements SessionUpdateTimestampHandlerInterface. 
@@ -12883,35 +12934,6 @@ See also ` <https://wiki.php.net/rfc/session-read_only-lazy_write>`_ and the `Se
 +--------------+---------------------------+
 | Analyzers    | :ref:`Security`           |
 +--------------+---------------------------+
-
-
-.. _sequences-in-for:
-
-Sequences In For
-################
-
-
-For() instructions allows several instructions in each of its parameters. Then, the instruction separator is comma ',', not semi-colon, which is used for separating the 3 arguments.
-
-.. code-block:: php
-
-   <?php
-      for ($a = 0, $b = 0; $a < 10, $b < 20; $a++, $b += 3) {
-       // For loop
-      }
-   ?>
-
-
-This loop will simultaneously increment $a and $b. It will stop only when the last of the central sequence reach a value of false : here, when $b reach 20 and $a will be 6. 
-
-This structure is often unknown, and makes the for instruction quite difficult to read. It is also easy to oversee the multiples instructions, and omit one of them.
-It is recommended not to use it.
-
-+--------------+--------------------------+
-| Command Line | Structures/SequenceInFor |
-+--------------+--------------------------+
-| Analyzers    | :ref:`Analyze`           |
-+--------------+--------------------------+
 
 
 .. _set-cookie-safe-arguments:
@@ -13438,10 +13460,10 @@ Foreach() is the modern loop : it maps automatically every element of the array 
 +--------------+-----------------------------+
 
 
-.. _should-use-function-use:
+.. _should-use-function:
 
-Should Use Function Use
-#######################
+Should Use Function
+###################
 
 
 Functioncalls that fall back to global scope should be using 'use function' or be fully namespaced. 
@@ -13450,8 +13472,7 @@ PHP searches for functions in the local namespaces, and in case it fails, makes 
 
 The speed bump range from 2 to 8 %, depending on the availability of functions in the local scope. The overall bump is about 1 µs per functioncall, which makes it a micro optimisation until a lot of function calls are made.
 
-
-Based on one of `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_ and this `blog post <http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/>`_
+Based on one of `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_.
 
 .. code-block:: php
 
@@ -13471,6 +13492,9 @@ Based on one of `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504
    }
    
    ?>
+
+
+See also `blog post <http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/>`_.
 
 +--------------+-----------------------+
 | Command Line | Php/ShouldUseFunction |
@@ -14539,6 +14563,12 @@ Strange Name For Variables
 
 Variables with strange names. They might be a typo, or simply bear strange patterns.
 
+Any variable with three identical letter in a row are considered as strange. 2 letters in a row is classic, and while three letters may happen, it is rare enough. 
+
+A list of classic typo is also used to find such variables.
+
+This analysis is case-sensitive.
+
 .. code-block:: php
 
    <?php
@@ -14865,14 +14895,16 @@ A switch with fallthrough is prone to errors.
 A fallthrough happens when a case or default clause in a switch statement is not finished by a `'break <http://php.net/manual/en/control-structures.break.php>`_ (or equivalent);
 CWE report this as a security concern, unless well documented.
 
-A fallthrough may be used as a feature. It is undistinguisable from an error.
+A fallthrough may be used as a feature. Then, it is undistinguisable from an error. 
+
+When the case block is empty, this analysis doesn't report it : the case is then used as an alias.
 
 .. code-block:: php
 
    <?php
    switch($variable) {
-       case 1 : 
-            
+       case 1 :   // 1 is not reported, as it actually shares the same body as 33
+       case 33 :  
            'break ;
        case 2 : 
            'break ;
@@ -17698,10 +17730,16 @@ PHP allocate memory at the end of the double-quoted string, making only one call
    $a = foo and $bar;
     
    /* This is PHP 5 code (aka, don't use it) */
-   $a = foo and . $bar;
+   $a = 'foo and ' . $bar;
+   
+   // Constants can't be used with double quotes
+   $a = 'foo and ' . '__DIR__;
+   $a = foo and '__DIR__; // '__DIR__ is not interpolated
    
    ?>
 
+
+Concatenations are still needed with constants, static constants, magic constants, functionstatic properties or static methods. 
 
 See also `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_.
 
@@ -18377,6 +18415,47 @@ See also `Type juggling <http://php.net/manual/en/language.types.type-juggling.p
 +--------------+---------------------------+
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
+
+
+.. _useless-catch:
+
+Useless Catch
+#############
+
+
+Catch clause should handle the exception with some work. 
+
+Among the task of a catch clause : log the exception, clean any mess that was introduced, fail graciously. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($a) {
+       try {
+           $b = doSomething($a);
+       } catch ('Throwable $e) {
+           // No log of the exception : no one knows it happened.
+           
+           // return immediately ? 
+           return false;
+       }
+       
+       $b->complete();
+       
+       return $b;
+   }
+   
+   ?>
+
+
+See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
+
++--------------+-------------------------+
+| Command Line | Exceptions/UselessCatch |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
 
 
 .. _useless-check:

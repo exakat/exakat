@@ -252,6 +252,7 @@ Glossary
 
     + `Empty()`
 
+      + :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`No Isset With Empty <no-isset-with-empty>`
 
@@ -698,6 +699,7 @@ Glossary
     + `Throwable`
 
       + :ref:`Empty Try Catch <empty-try-catch>`
+      + :ref:`Useless Catch <useless-catch>`
       + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
 
     + `token_get_all()`
@@ -769,6 +771,7 @@ Glossary
 
       + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
+      + :ref:`Use PHP7 Encapsed Strings <use-php7-encapsed-strings>`
       + :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 
     + `__FILE__`
