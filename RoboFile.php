@@ -110,7 +110,7 @@ LICENCE;
  *
 */
 LICENCE;
-        $licenceCRC2017 = crc32(trim($licence));
+        $licenceCRC2017 = crc32(trim($licence2017));
 
         $licence = <<<'LICENCE'
 /*
