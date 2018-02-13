@@ -88,9 +88,33 @@ LICENCE;
 LICENCE;
         $licenceCRC2016 = crc32(trim($licence2016));
 
-        $licence = <<<'LICENCE'
+        $licence2017 = <<<'LICENCE'
 /*
  * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * This file is part of Exakat.
+ *
+ * Exakat is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Exakat is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Exakat.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * The latest code can be found at <http://exakat.io/>.
+ *
+*/
+LICENCE;
+        $licenceCRC2017 = crc32(trim($licence));
+
+        $licence = <<<'LICENCE'
+/*
+ * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -132,7 +156,8 @@ LICENCE;
                     }
                     fclose($fp);
                 } elseif (crc32($tokens[$tokenId + 1][1]) === $licenceCRC2015 || 
-                          crc32($tokens[$tokenId + 1][1]) === $licenceCRC2016
+                          crc32($tokens[$tokenId + 1][1]) === $licenceCRC2016 || 
+                          crc32($tokens[$tokenId + 1][1]) === $licenceCRC2017
                           ) {
                     print "Updating licence date in file '". $file. "'\n";
                     $tokens[$tokenId + 1][1] = $licence;
@@ -390,6 +415,10 @@ JOIN categories
 
                 if (!isset($ini['name'])) {
                     print 'human/en/'.$row['name'].'.ini'. " is not set\n";
+                } 
+
+                if (strpos($ini['name'], '/') !== false) {
+                    print 'human/en/'.$row['name'].'.ini'. " still has a / in the title\n";
                 } 
 
                 if (!isset($ini['exakatSince'])) {
