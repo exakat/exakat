@@ -3772,7 +3772,7 @@ SQL;
     private function processReal() {
         $real = $this->processSingle('Real');
         // (int) is for loading into the database
-        $this->runPlugins($real, $array());
+        $this->runPlugins($real, array());
         $real->boolean  = (int) (strtolower($this->tokens[$this->id][1]) != 0);
         $real->constant = self::CONSTANT_EXPRESSION;
         $real->noDelimiter = $real->code;
@@ -4166,7 +4166,7 @@ SQL;
             $operand->fullcode = $signExpression.$operand->fullcode;
             $operand->line     = $this->tokens[$this->id][2];
             $operand->token    = $this->getToken($this->tokens[$this->id][0]);
-            $this->runPlugins($operand, $array());
+            $this->runPlugins($operand, array());
 
             return $operand;
         }
