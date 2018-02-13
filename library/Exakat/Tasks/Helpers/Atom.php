@@ -50,9 +50,9 @@ class Atom {
     public $origin       = '';
     public $encoding     = '';
     public $block        = '';
-    public $intval       = null;
+    public $intval       = '';
     public $strval       = '';
-    public $boolean      = null; // null, so boolean may NOT be available
+    public $boolean      = ''; // null, so boolean may NOT be available
     public $enclosing    = Load::NO_ENCLOSING;
     public $args_max     = '';
     public $args_min     = '';
