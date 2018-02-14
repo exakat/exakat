@@ -37,7 +37,7 @@ class Drillinstructor extends Ambassador {
     }
 
     public function generate($folder, $name = 'drill') {
-        if ($name === self::STDOUT) {
+        if ($name === '') {
             $name = 'drill';
         }
         $this->finalName = $folder.'/'.$name;

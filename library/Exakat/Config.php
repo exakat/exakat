@@ -82,7 +82,7 @@ class Config {
                                             'analyzers'      => array(), 
                                             'report'         => 'Premier',
                                             'format'         => 'Text',
-                                            'file'           =>  Reports::STDOUT,
+                                            'file'           =>  null,
                                             'style'          => 'ALL',
 
                                             'neo4j_host'     => '127.0.0.1',

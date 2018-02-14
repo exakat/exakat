@@ -74,7 +74,7 @@ class Marmelab extends Reports {
                               'analyzers' => array_values($analyzers),
                               'files'     => $files];
         
-        if ($name === Reports::STDOUT) {
+        if ($name === '') {
             return json_encode($results, JSON_PRETTY_PRINT);
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, json_encode($results, JSON_PRETTY_PRINT));

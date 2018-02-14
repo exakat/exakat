@@ -204,7 +204,7 @@ GREMLIN;
                 break 1;
         }
 
-        if ($this->config->file != Reports::STDOUT) {
+        if ($this->config->file != '') {
             $name = $this->config->file.'.'.$extension;
             if (file_exists($name)) {
                 die( "$name already exists. Aborting\n");

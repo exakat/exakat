@@ -221,7 +221,7 @@ MENU;
     }
 
     private function initFolder() {
-        if ($this->finalName === Reports::STDOUT) {
+        if ($this->finalName === '') {
             return "Can't produce this report format to stdout. It needs a file name.";
         }
 

@@ -87,7 +87,7 @@ class Text extends Reports {
             }
         }
 
-        if ($name === Reports::STDOUT) {
+        if ($name === '') {
             return $text;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $text);
