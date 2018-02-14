@@ -38,6 +38,7 @@ use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Precedence;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Tasks\Helpers\Intval;
+use Exakat\Tasks\Helpers\Strval;
 use Exakat\Tasks\Helpers\Boolval;
 use Exakat\Tokenizer\Token;
 
@@ -255,8 +256,9 @@ class Load extends Tasks {
         }
         
         // Init all plugins here
-        $this->plugins[] = new Intval();
         $this->plugins[] = new Boolval();
+        $this->plugins[] = new Intval();
+        $this->plugins[] = new Strval();
 
         $this->precedence = new Precedence($this->config->phpversion, $this->config);
 
@@ -3274,7 +3276,11 @@ SQL;
         $ternary->line     = $this->tokens[$current][2];
         $ternary->token    = 'T_QUESTION';
         $ternary->constant = $condition->constant && $then->constant && $else->constant;
-
+        $this->runPlugins($ternary, array('CONDITION' => $condition,
+                                          'THEN'      => $then,
+                                          'ELSE'      => $else,
+                                          ));
+        
         $this->pushExpression($ternary);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -4838,6 +4844,8 @@ SQL;
         $void->constant    = self::CONSTANT_EXPRESSION;
         $void->noDelimiter = '';
         $void->delimiter   = '';
+        
+        $this->runPlugins($void);
 
         return $void;
     }

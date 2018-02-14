@@ -46,6 +46,7 @@ class Boolval extends Plugin {
                 break;
 
             case 'Null' :
+            case 'Void' :
                 $atom->boolean = 0;
                 break;
                 
@@ -96,11 +97,30 @@ class Boolval extends Plugin {
                     $atom->boolean = $extras['LEFT']->boolean && $extras['RIGHT']->boolean;
                 } elseif (mb_strtolower($atom->code) === 'xor') {
                     $atom->boolean = $extras['LEFT']->boolean xor $extras['RIGHT']->boolean;
+                } elseif ($atom->code === '<=>') {
+                    $atom->boolean = $extras['LEFT']->boolean <=> $extras['RIGHT']->boolean;
                 }
                 break;
 
             case 'Concatenation' : 
-                $atom->boolean = (bool) $atom->fullcode;
+                $boolean = array_column($extras, 'boolean');
+                $atom->boolean = (bool) implode('', $boolean);
+                break;
+
+            case 'Ternary' : 
+                if ($extras['CONDITION']->boolean) {
+                    $atom->boolean = $extras['THEN']->boolean;
+                } else {
+                    $atom->boolean = $extras['ELSE']->boolean;
+                }
+                break;
+
+            case 'Bitshift' : 
+                if ($atom->code === '>>') {
+                    $atom->boolean = $extras['LEFT']->boolean >> $extras['RIGHT']->boolean;
+                } elseif ($atom->code === '<<') {
+                    $atom->boolean = $extras['LEFT']->boolean << $extras['RIGHT']->boolean;
+                }
                 break;
 
             case 'Comparison' : 
