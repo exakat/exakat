@@ -4171,7 +4171,6 @@ SQL;
     /// processing binary operators
     //////////////////////////////////////////////////////
     private function processSign() {
-
         $signExpression = $this->tokens[$this->id][1];
         $code = $signExpression.'1';
         while (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_PLUS, \Exakat\Tasks\T_MINUS))) {
@@ -4221,6 +4220,7 @@ SQL;
 
             $signed = $sign;
         }
+        $this->runPlugins($sign);
 
         $this->pushExpression($signed);
 
