@@ -47,6 +47,8 @@ class Strval extends Plugin {
                     // PHP 7 will just stop.
                     // PHP 5 will work until it fails
                     $actual = octdec(substr($value, 1));
+                } elseif ($value[0] === '+' || $value[0] === '-') {
+                    $actual = (int) pow(-1, substr_count($value, '-')) * (int) strtr($value, '+-', '  ');
                 } else {
                     $actual = (int) $value;
                 }
@@ -85,9 +87,9 @@ class Strval extends Plugin {
             case 'Multiplication' :
                 if ($atom->code === '*') {
                     $atom->noDelimiter = (string) ((int) $extras['LEFT']->noDelimiter * (int) $extras['RIGHT']->noDelimiter);
-                } elseif ($atom->code === '/') {
+                } elseif ($atom->code === '/' && $extras['RIGHT']->noDelimiter != 0) {
                     $atom->noDelimiter = (string) ((int) $extras['LEFT']->noDelimiter / (int) $extras['RIGHT']->noDelimiter);
-                } elseif ($atom->code === '%') {
+                } elseif ($atom->code === '%' && $extras['RIGHT']->noDelimiter != 0) {
                     $atom->noDelimiter = (string) ((int) $extras['LEFT']->noDelimiter % (int) $extras['RIGHT']->noDelimiter);
                 }
                 break;

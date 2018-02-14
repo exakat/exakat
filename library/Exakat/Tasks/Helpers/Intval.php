@@ -26,7 +26,7 @@ class Intval extends Plugin {
     public $name = 'intval';
     public $type = 'integer';
 
-    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition');
+    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition', 'String');
     
     public function run($atom, $extras) {
         foreach($extras as $extra) {
@@ -47,6 +47,8 @@ class Intval extends Plugin {
                     // PHP 7 will just stop.
                     // PHP 5 will work until it fails
                     $actual = octdec(substr($value, 1));
+                } elseif ($value[0] === '+' || $value[0] === '-') {
+                    $actual = (int) pow(-1, substr_count($value, '-')) * (int) strtr($value, '+-', '  ');
                 } else {
                     $actual = (int) $value;
                 }
@@ -84,9 +86,9 @@ class Intval extends Plugin {
             case 'Multiplication' :
                 if ($atom->code === '*') {
                     $atom->intval = (int) ($extras['LEFT']->intval * $extras['RIGHT']->intval);
-                } elseif ($atom->code === '/') {
+                } elseif ($atom->code === '/' && $extras['RIGHT']->intval != 0) {
                     $atom->intval = (int) ($extras['LEFT']->intval / $extras['RIGHT']->intval);
-                } elseif ($atom->code === '%') {
+                } elseif ($atom->code === '%' && $extras['RIGHT']->intval != 0) {
                     $atom->intval = (int) ($extras['LEFT']->intval % $extras['RIGHT']->intval);
                 }
                 break;

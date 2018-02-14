@@ -45,6 +45,10 @@ class Boolval extends Plugin {
                 $atom->boolean = (int) (mb_strtolower($atom->code) === 'true');
                 break;
 
+            case 'String' :
+                $atom->boolean = (int) (trimOnce($atom->code) !== '');
+                break;
+
             case 'Null' :
             case 'Void' :
                 $atom->boolean = 0;
@@ -65,9 +69,9 @@ class Boolval extends Plugin {
             case 'Multiplication' :
                 if ($atom->code === '*') {
                     $atom->boolean = (int) (bool) ($extras['LEFT']->boolean * $extras['RIGHT']->boolean);
-                } elseif ($atom->code === '/') {
+                } elseif ($atom->code === '/' && $extras['RIGHT']->boolean !== 0) {
                     $atom->boolean = (int) (bool) ($extras['LEFT']->boolean / $extras['RIGHT']->boolean);
-                } elseif ($atom->code === '%') {
+                } elseif ($atom->code === '%' && $extras['RIGHT']->boolean !== 0) {
                     $atom->boolean = (int) (bool) ($extras['LEFT']->boolean % $extras['RIGHT']->boolean);
                 }
                 break;
