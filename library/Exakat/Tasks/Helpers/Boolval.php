@@ -31,7 +31,7 @@ class Boolval extends Plugin {
     public function run($atom, $extras) {
         foreach($extras as $extra) {
             if ($extra->boolean === '')  { 
-                break; 
+                return; 
             }
         }
 

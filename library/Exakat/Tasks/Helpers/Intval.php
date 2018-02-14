@@ -29,6 +29,12 @@ class Intval extends Plugin {
     static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition');
     
     public function run($atom, $extras) {
+        foreach($extras as $extra) {
+            if ($extra->intval === '')  { 
+                return ; 
+            }
+        }
+
         switch ($atom->atom) {
             case 'Integer' :
                 $value = $atom->code;
@@ -98,8 +104,6 @@ class Intval extends Plugin {
                 if ($atom->code === '!') {
                     $atom->intval = !$extras['NOT']->intval;
                 } elseif ($atom->code === '~') {
-                    print_r($extras);
-                    var_dump($extras['NOT']->intval);
                     $atom->intval = ~$extras['NOT']->intval;
                 }
                 break;
