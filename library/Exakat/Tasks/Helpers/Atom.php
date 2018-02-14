@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -50,9 +50,9 @@ class Atom {
     public $origin       = '';
     public $encoding     = '';
     public $block        = '';
-    public $intval       = null;
+    public $intval       = '';
     public $strval       = '';
-    public $boolean      = null; // null, so boolean may NOT be available
+    public $boolean      = ''; // null, so boolean may NOT be available
     public $enclosing    = Load::NO_ENCLOSING;
     public $args_max     = '';
     public $args_min     = '';

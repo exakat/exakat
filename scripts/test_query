@@ -24,26 +24,215 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$query = <<<'QUERY'
+use \Exakat\Graph\GraphResults;
 
-/// insert a query here
-g.V().hasLabel("File").as('x').out("FILE").out("ELEMENT").hasLabel("Php").select('x').values('fullcode');
-//.values('close_tag');
-//.count();
+$begin = microtime(true);
+$graphDB = new \Exakat\Graph\Tinkergraph($config);
+//$graphDB = new \Exakat\Graph\Janusgraph($config);
+//$graphDB = new \Exakat\Graph\JanusCaES($config);
+//$graphDB = new \Exakat\Graph\Gremlin3($config);
+//$graphDB = new \Exakat\Graph\GSNeo4j($config);
+
+$end = microtime(true);
+print "Connect : ".number_format(($end - $begin) * 1000, 2)." ms\n";
+
+//graph.io(IoCore.graphml()).readGraph("/Users/famille/Desktop/janusload/tinkerpop-modern.xml"); 
+
+$res = $graphDB->query('g.V().hasLabel("Project").values("fullcode")');
+$project = $res[0];
+
+$loops = 34;
+
+$begin = microtime(true);
+$query = <<<QUERY
+
+// Variable assigned by the same function
+g.V().sideEffect{ stats = [:];}
+     .hasLabel('Assignation').has('code', '=')
+     .out('LEFT').hasLabel('Variable').sideEffect{ name = it.get().value('code'); }.as('a').in('LEFT')
+     .out('RIGHT').hasLabel('Functioncall').as('b')
+     .not( __.out('ARGUMENT').hasLabel('Variable').filter{ name == it.get().value('code'); } )
+     .select('a', 'b').by('code').by('code')
+     
+//g.V().hasLabel("Function").out('ARGUMENT').where( __.out('DEFAULT')).count();
+  
+//g.V().hasLabel('Functioncall').has('code','define').values("fullcode");
+//g.V().hasLabel('Const').values('fullcode');     
+
+/*
+// Variable used by the same function
+g.V().hasLabel('Assignation').has('code', '=')
+     .out('LEFT').hasLabel('Variable').sideEffect{ name = it.get().value('code'); }.as('a').in('LEFT')
+     .out('RIGHT').hasLabel('Functioncall').as('b')
+     .where( __.out('ARGUMENT').hasLabel('Variable').filter{ name == it.get().value('code'); } )
+     .in('RIGHT')
+     .values("fullcode");
+*/
+
+// static scalar expression 
+//g.V().hasLabel("Constant").not(where(__.out("VALUE").hasLabel("String", "Integer", "Heredoc","Boolean", "Real", "Null"))).values("fullcode");
+
+// default value
+g.V().hasLabel("Functioncall").has("code", "define").not(where(__.out("ARGUMENT").has("rank", 1).hasLabel("String", "Integer", "Heredoc","Boolean", "Real", "Null"))).values('fullcode')
+
+//g.V().values('fullcode');
+
+/*
+g.V().hasLabel("Defineconstant")
+     .not(where(__.out("ARGUMENT").has("rank", 1).hasLabel("String", "Integer", "Heredoc", "Boolean")))
+     .values("fullcode");
+*/
+
+//     .group('m').by('code').by( __.in('LEFT').out('RIGHT').label() ).cap('m')
+     //.next().findAll{ a,b -> b.size() > 10}
+
+//g.V().hasLabel("Method").out("BLOCK").not(hasLabel("Sequence")).label();
+//g.V().hasLabel("File").outE().label();
+
+//g.V().properties().count();
+//g.E().count(); 
+//g.V().groupCount('m').by(label).cap('m').next().sort{ a, b -> a.value <=> b.value}
+//g.V().hasLabel('Identifier').inE().groupCount('m').by(label).cap('m').next().sort{ a, b -> a.value <=> b.value}
+
+//g.V().hasLabel('Name').groupCount('m').by('code').cap('m').next().sort{ a, b -> a.value <=> b.value}
+
+
+g.V().has('token', 'T_STRING').groupCount('m').by(label).cap('m');
+//g.V().hasLabel('Identifier').groupCount('m').by('code').cap('m');
+//g.V().hasLabel('Sign').has('token', 'T_STRING');
+//g.V().hasLabel('Project').count();
+
+g.V().hasLabel(within(['Functioncall'])).groupCount("processed").by(count()).as("first").has("fullnspath").has("fullnspath").filter{it.get().value("fullnspath").toLowerCase() == '\\\\assert'}.out("ARGUMENT").has("rank", eq(0))
+//.values('fullcode');
+//.has('boolean', false);
+
+g.V().hasLabel("Identifier", "Nsname")
+.in("DEFINITION")
+
+//g.V().hasLabel("Defineconstant").out("ARGUMENT").has('rank', 0);
+
+
+g.V().hasLabel("Defineconstant").count();
+
+        g.V().hasLabel("Defineconstant")
+             .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath').values('fullnspath');
+
+g.V().hasLabel('Variable', 'Variableobject', 'Variablearray').values('fullcode').unique();
+
+g.V().hasLabel("Include").values('fullcode')
+
+g.V().hasLabel("Functioncall").has("fullnspath", "\\\\array_keys").values("fullcode");
 
 QUERY;
+//
+print $query;
 
-$graphDB = new \Exakat\Graph\Gremlin3($config);
+$res = $graphDB->query($query, [ ]);
 
-$res = $graphDB->query($query);
+$end = microtime(true);
+print "Time : ".number_format(($end - $begin) * 1000, 2)." ms\n";
 
 
+//$r = array_map(function($x) { return join(',', array_values((array) $x)[0] ); }, $res->results);
 
-foreach($res as $k => $v) {
-    print_r($k);
-    print " ";
-    print_r($v);
-    print "\n";
+//print count($r)." values\n";
+//print count(array_count_values($r))." distinct\n";
+//print_r($r);
+//die();
+
+$list = array();
+
+//$fp = fopen('index/'.$project.'.csv', 'w+');
+if ($res->isType(GraphResults::ARRAY)) {
+    foreach($res as $k => $v) {
+//        fputcsv($fp, $v);
+        if (is_array($v)) {
+            print "$k)\n";
+            foreach($v as $a => $b) {
+                print "  $a  =>  ".var_export($b, true)."\n";
+            }
+        } else {
+            print "$k  =>  $v\n";
+            if (preg_match('/^\$\w+$/', $v)) {
+                $list[] = $v;
+            }
+        }
+    }
+} else {
+    print "res => ".$res->toString().PHP_EOL;
+}
+/*
+print "go\n";
+
+$b = microtime(true);
+$keys = array_flip($list);
+$found = 0;
+$total = 0;
+
+foreach($list as $id => $l) {
+    if (strlen($l) < 5) { continue; }
+    $m = substr($l, 1);
+
+    $n = strlen($m);
+    for($i = 1; $i < $n; ++$i){
+        $o = '$'.substr($m, $i).substr($m, 0, $i);
+        
+        if ($o === $m) { continue; }
+        ++$total;
+        
+        if (isset($keys[$o])) {
+            print "$o => $m ($i)\n";
+            ++$found;
+        }
+    }
+    
+    if ($id % 25 === 0) {
+        print '.';
+    }
+    if ($id % 625 === 0) {
+        print PHP_EOL;
+    }
+} 
+$e = microtime(true);
+
+print count($list).' elements initial '.PHP_EOL;
+print $total.' elements tested '.PHP_EOL;
+print $found.' elements found '.PHP_EOL;
+
+print number_format(($e - $b) * 1000, 2).' ms '.PHP_EOL;
+*/
+die();
+$stats = array();
+if ($res->isType(GraphResults::ARRAY)) {
+    foreach($res as $k => $v) {
+        $stats[$v['a']][] = $v['b'];
+    }
 }
 
+$stats = array_filter($stats, function($x) { return count($x) > 2; });
+//print_r($stats);
+
+$found = array_filter($stats, function($value) {
+    $total = count($value);
+    $distinct = array_count_values($value);
+    
+    if (count($distinct) == 1) {
+        return false;
+    }
+
+    print_r($distinct);
+    print count($distinct).PHP_EOL;
+    
+    
+    return true;
+    
+    foreach($distinct as $f => $c) {
+        if ($c <= $total / 3) {
+            return true;
+        }
+    }
+    
+    return false;
+ });
+print_r($found);
 ?>

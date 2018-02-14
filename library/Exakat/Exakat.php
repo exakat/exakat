@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.1.4';
-    const BUILD = 691;
+    const VERSION = '1.1.5';
+    const BUILD = 692;
 
     private $gremlin = null;
     private $config = null;

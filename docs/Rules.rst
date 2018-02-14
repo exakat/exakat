@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 12 Feb 2018 18:30:01 +0000
-.. comment: Generation hash : 5bf816b92ef547aaa1769efd2e35ffa21c3ddd8a
+.. comment: Generation date : Wed, 14 Feb 2018 08:20:09 +0000
+.. comment: Generation hash : 4ed287c5b917c5aaa26f01be6fc7b043cb67e6d0
 
 
 .. _$http\_raw\_post\_data:
@@ -177,6 +177,32 @@ $this variable represents an object (the current object) and it is not compatibl
 +--------------+---------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                              |
 +--------------+---------------------------------------------------------------------------------------------+
+
+
+.. _**-for-exponent:
+
+** For Exponent
+###############
+
+
+PHP 5.6 introduced the operator `'** <http://php.net/manual/en/language.operators.arithmetic.php>`_ to provide exponents, instead of the slower function `'pow() <http://www.php.net/pow>`_.
+
+.. code-block:: php
+
+   <?php
+       $cube = pow(2, 3); // 8
+   
+       $cubeInPHP56 = 2 '** 3; // 8
+   ?>
+
+
+If the code needs to be backward compatible to 5.5 or less, don't use the new operator.
+
++--------------+--------------------+
+| Command Line | Php/NewExponent    |
++--------------+--------------------+
+| Analyzers    | :ref:`Suggestions` |
++--------------+--------------------+
 
 
 .. _\:\:class:
@@ -533,7 +559,7 @@ That way, the child doesn't need to implement the interface, nor define its meth
 +--------------+------------------------------------+
 | Command Line | Interfaces/AlreadyParentsInterface |
 +--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`                     |
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
 
@@ -790,6 +816,39 @@ Anonymous classes.
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
+
+
+.. _argument-should-be-typehinted:
+
+Argument Should Be Typehinted
+#############################
+
+
+When a method expects objects as argument, those arguments should be typehinted, so as to provide early warning that a wrong object is being sent to the method.
+
+The analyzer will detect situations where a class, or the keywords 'array' or 'callable'. 
+
+.. code-block:: php
+
+   <?php
+   
+   // What are the possible classes that have a 'foo' method? 
+   function foo($bar) {
+       return $bar->foo();
+   }
+   
+   ?>
+
+
+`'Closure <http://php.net/manual/fr/class.closure.php>`_ arguments are omitted.
+
++--------------+-----------------------------------------------------------------------------------------------+
+| Command Line | Functions/ShouldBeTypehinted                                                                  |
++--------------+-----------------------------------------------------------------------------------------------+
+| clearPHP     | `always-typehint <https://github.com/dseguy/clearPHP/tree/master/rules/always-typehint.md>`__ |
++--------------+-----------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Suggestions`                                                                            |
++--------------+-----------------------------------------------------------------------------------------------+
 
 
 .. _assign-default-to-properties:
@@ -3374,10 +3433,43 @@ The analysis looks for functions calls, and checks the arguments. When the calls
    
    ?>
 
++--------------+------------------------------------+
+| Command Line | Functions/CouldCentralize          |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
+
+
+.. _could-return-void:
+
+Could Return Void
+#################
+
+
+The following functions may bear the Void return typeHint. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This can be Void
+   function foo(&$a) {
+       ++$a;
+       return; 
+   }
+   
+   // This can't be Void
+   function bar($a) {
+       ++$a;
+       return $a;  
+   }
+   
+   ?>
+
 +--------------+---------------------------+
-| Command Line | Functions/CouldCentralize |
+| Command Line | Functions/CouldReturnVoid |
 +--------------+---------------------------+
-| Analyzers    | :ref:`Analyze`            |
+| Analyzers    | :ref:`Suggestions`        |
 +--------------+---------------------------+
 
 
@@ -3543,11 +3635,11 @@ Avoid using `'dirname() <http://www.php.net/dirname>`_ on `'__FILE__ <http://php
 
 See also `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_.
 
-+--------------+------------------------+
-| Command Line | Structures/CouldUseDir |
-+--------------+------------------------+
-| Analyzers    | :ref:`Analyze`         |
-+--------------+------------------------+
++--------------+------------------------------------+
+| Command Line | Structures/CouldUseDir             |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _could-use-self:
@@ -3575,11 +3667,11 @@ It is also routinely used in traits : there, 'self' represents the class in whic
    
    ?>
 
-+--------------+-----------------------+
-| Command Line | Classes/ShouldUseSelf |
-+--------------+-----------------------+
-| Analyzers    | :ref:`Analyze`        |
-+--------------+-----------------------+
++--------------+------------------------------------+
+| Command Line | Classes/ShouldUseSelf              |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _could-use-str\_repeat():
@@ -4326,11 +4418,11 @@ This is also true if else has a return, and then not : simply reverse the condit
    
    ?>
 
-+--------------+--------------------------------+
-| Command Line | Structures/DropElseAfterReturn |
-+--------------+--------------------------------+
-| Analyzers    | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++--------------+------------------------------------+
+| Command Line | Structures/DropElseAfterReturn     |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _echo-or-print:
@@ -4405,7 +4497,7 @@ instead of
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__ |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Performances`, :ref:`Analyze`                                                                                                   |
+| Analyzers    | :ref:`Performances`, :ref:`Analyze`, :ref:`Suggestions`                                                                               |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -4826,6 +4918,38 @@ catch( Exception $e) (PHP 5) or catch(`'Throwable <http://php.net/manual/fr/clas
 +--------------+--------------------------+
 
 
+.. _empty-with-expression:
+
+Empty With Expression
+#####################
+
+
+`'empty() <http://www.php.net/empty>`_ doesn't accept expressions until PHP 5.5. Until then, it is necessary to store the result of the expression in a variable and then, test it with `'empty() <http://www.php.net/empty>`_.
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 5.5+ 'empty() usage
+   if (empty(strtolower($b . $c))) {
+       doSomethingWithoutA();
+   }
+   
+   // Compatible 'empty() usage
+   $a = strtolower($b . $c);
+   if (empty($a)) {
+       doSomethingWithoutA();
+   }
+   
+   ?>
+
++--------------+--------------------------------+
+| Command Line | Structures/EmptyWithExpression |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Suggestions`             |
++--------------+--------------------------------+
+
+
 .. _encoded-simple-letters:
 
 Encoded Simple Letters
@@ -5100,6 +5224,40 @@ This is a micro-optimisation. The difference may be visible with 200k rows fetch
 +--------------+--------------------------------+
 
 
+.. _find-key-directly:
+
+Find Key Directly
+#################
+
+
+No need for a `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ to search for a key. 
+
+PHP offers two solutions : `'array_search() <http://www.php.net/array_search>`_ and `'array_keys() <http://www.php.net/array_keys>`_. Array_search() finds the first key that fits a value, and array_keys returns all the keys. 
+
+.. code-block:: php
+
+   <?php
+   
+   $array = ['a', 'b', 'c', 'd', 'e'];
+   
+   print array_search($array, 'c'); 
+   // print 2 => 'c';
+   
+   print_r(array_keys($array, 'c')); 
+   // print 2 => 'c';
+   
+   ?>
+
+
+See also `array_search <http://php.net/array_search>`_ and `array_search <http://php.net/array_keys>`_.
+
++--------------+----------------------------+
+| Command Line | Structures/GoToKeyDirectly |
++--------------+----------------------------+
+| Analyzers    | :ref:`Suggestions`         |
++--------------+----------------------------+
+
+
 .. _for-using-functioncall:
 
 For Using Functioncall
@@ -5291,11 +5449,11 @@ Previously, it was compulsory to extract the data from the blind array :
        }
    ?>
 
-+--------------+------------------------------------------------------+
-| Command Line | Structures/ForeachWithList                           |
-+--------------+------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
-+--------------+------------------------------------------------------+
++--------------+--------------------------------------------------------------------------+
+| Command Line | Structures/ForeachWithList                                               |
++--------------+--------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`Suggestions` |
++--------------+--------------------------------------------------------------------------+
 
 
 .. _forgotten-interface:
@@ -6910,6 +7068,40 @@ See also `Zend View <https://github.com/zendframework/zend-view>`_.
 +--------------+----------------------+
 
 
+.. _isset-multiple-arguments:
+
+Isset Multiple Arguments
+########################
+
+
+`'isset() <http://www.php.net/isset>`_ may be used with multiple arguments and acts as a AND.
+
+.. code-block:: php
+
+   <?php
+   
+   // 'isset without and 
+   if ('isset($a, $b, $c)) {
+       // doSomething()
+   }
+   
+   // 'isset with and 
+   if ('isset($a) && 'isset($b) && 'isset($c)) {
+       // doSomething()
+   }
+   
+   ?>
+
+
+See also `isset <http://www.php.net/`'isset <http://www.php.net/isset>`_>`_.
+
++--------------+-----------------------+
+| Command Line | Php/IssetMultipleArgs |
++--------------+-----------------------+
+| Analyzers    | :ref:`Suggestions`    |
++--------------+-----------------------+
+
+
 .. _isset-with-constant:
 
 Isset With Constant
@@ -7212,7 +7404,7 @@ It is recommended to use the symbol operators, rather than the letter ones.
 +--------------+---------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-letter-logical <https://github.com/dseguy/clearPHP/tree/master/rules/no-letter-logical.md>`__ |
 +--------------+---------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                    |
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions`                                                                |
 +--------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -7741,11 +7933,11 @@ Ternary operator applies a condition, and yield two different results. Those res
    
    ?>
 
-+--------------+------------------------------+
-| Command Line | Structures/MismatchedTernary |
-+--------------+------------------------------+
-| Analyzers    | :ref:`Analyze`               |
-+--------------+------------------------------+
++--------------+------------------------------------+
+| Command Line | Structures/MismatchedTernary       |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _mismatched-typehint:
@@ -8697,11 +8889,11 @@ Parameter without a default value are reported by PHP, and are usually always fi
    
    ?>
 
-+--------------+------------------------------+
-| Command Line | Functions/NeverUsedParameter |
-+--------------+------------------------------+
-| Analyzers    | :ref:`Analyze`               |
-+--------------+------------------------------+
++--------------+------------------------------------+
+| Command Line | Functions/NeverUsedParameter       |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _never-used-properties:
@@ -9729,7 +9921,7 @@ It it better to avoid using parenthesis with echo, print, return, throw, include
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-parenthesis-for-language-construct <https://github.com/dseguy/clearPHP/tree/master/rules/no-parenthesis-for-language-construct.md>`__ |
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                                                            |
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions`                                                                                                        |
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -9978,11 +10170,11 @@ This analysis supports functions and static methods, when a definition may be fo
    
    ?>
 
-+--------------+------------------------+
-| Command Line | Functions/NoReturnUsed |
-+--------------+------------------------+
-| Analyzers    | :ref:`Analyze`         |
-+--------------+------------------------+
++--------------+------------------------------------+
+| Command Line | Functions/NoReturnUsed             |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _no-self-referencing-constant:
@@ -10115,11 +10307,11 @@ PHP 7.1 also introduces the support of negative offsets as string index : negati
 
 Beware that substr() and $v[$pos] are similar, while `'mb_substr() <http://www.php.net/mb_substr>`_ is not. The first functions works on bytes, while the latter works on characters.
 
-+--------------+----------------------------------------------------------------+
-| Command Line | Structures/NoSubstrOne                                         |
-+--------------+----------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71` |
-+--------------+----------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------+
+| Command Line | Structures/NoSubstrOne                                                             |
++--------------+------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions` |
++--------------+------------------------------------------------------------------------------------+
 
 
 .. _no-array\_merge()-in-loops:
@@ -10511,6 +10703,41 @@ This is a wrongly done casting to boolean. PHP supports (boolean) to do the same
 +--------------+-----------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
+
+
+.. _null-coalesce:
+
+Null Coalesce
+#############
+
+
+The null coalesce operator is a short syntax to give a default value if a variable is unset.
+
+This is a new operator in PHP 7.0.
+
+.. code-block:: php
+
+   <?php
+   
+   // Null coalesce operator, since PHP 7.0
+   $a = $b ?? 'default value if $b is null';
+   
+   // Equivalent to : 
+   $a = 'isset($b) ? $b : 'default value if $b is null';
+   
+   // Do not mistake with this, where $b has to be set, but truthy
+   $a = 'isset($b) ?: 'default value if $b is null';
+   
+   ?>
+
+
+See also `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_.
+
++--------------+--------------------+
+| Command Line | Php/NullCoalesce   |
++--------------+--------------------+
+| Analyzers    | :ref:`Suggestions` |
++--------------+--------------------+
 
 
 .. _null-on-new:
@@ -10949,11 +11176,11 @@ In catch blocks, it is good practice not to overwrite the incoming exception, as
    
    ?>
 
-+--------------+-------------------------------+
-| Command Line | Exceptions/OverwriteException |
-+--------------+-------------------------------+
-| Analyzers    | :ref:`Analyze`                |
-+--------------+-------------------------------+
++--------------+------------------------------------+
+| Command Line | Exceptions/OverwriteException      |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _overwritten-literals:
@@ -11371,11 +11598,11 @@ With PHP 7, dirname has a second argument that represents the number of parent f
    
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/PHP7Dirname                                                                                     |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++--------------+--------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/PHP7Dirname                                                                                                         |
++--------------+--------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Suggestions` |
++--------------+--------------------------------------------------------------------------------------------------------------------------------+
 
 
 .. _parent-first:
@@ -11418,11 +11645,11 @@ When calling parent constructor, always put it first in the `'__construct <http:
    
    ?>
 
-+--------------+---------------------+
-| Command Line | Classes/ParentFirst |
-+--------------+---------------------+
-| Analyzers    | :ref:`Analyze`      |
-+--------------+---------------------+
++--------------+------------------------------------+
+| Command Line | Classes/ParentFirst                |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _parent,-static-or-self-outside-class:
@@ -12291,11 +12518,11 @@ Unless order is important, it is recommended to always use the same order when d
    
    ?>
 
-+--------------+-------------------------------+
-| Command Line | Arrays/RandomlySortedLiterals |
-+--------------+-------------------------------+
-| Analyzers    | :ref:`Analyze`                |
-+--------------+-------------------------------+
++--------------+------------------------------------+
+| Command Line | Arrays/RandomlySortedLiterals      |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _redeclared-php-functions:
@@ -12530,7 +12757,7 @@ It is recommended to use echo with multiple arguments, or a concatenation with p
 +--------------+---------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-repeated-print <https://github.com/dseguy/clearPHP/tree/master/rules/no-repeated-print.md>`__ |
 +--------------+---------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                    |
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions`                                                                |
 +--------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -12685,6 +12912,36 @@ PHP tolerates parenthesis for the argument of a return statement, but it is reco
 +--------------+------------------------------------------------+
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
+
+
+.. _reuse-variable:
+
+Reuse Variable
+##############
+
+
+A variable is already holding the content that is re-calculated later. Use the cached value.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($a) {
+       $b = strtolower($a);
+       
+       // strtolower($a) is already calculated in $b. Just reuse the value.
+       if (strtolower($a) === 'c') {
+           doSomething();
+       }
+   }
+   
+   ?>
+
++--------------+--------------------------+
+| Command Line | Structures/ReuseVariable |
++--------------+--------------------------+
+| Analyzers    | :ref:`Suggestions`       |
++--------------+--------------------------+
 
 
 .. _safe-curl-options:
@@ -13426,11 +13683,11 @@ PHP 7 introduced the ?? operator, that replaces longer structures to set default
 
 Sample extracted from PHP docs `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 
-+--------------+-----------------------+
-| Command Line | Php/ShouldUseCoalesce |
-+--------------+-----------------------+
-| Analyzers    | :ref:`Analyze`        |
-+--------------+-----------------------+
++--------------+------------------------------------+
+| Command Line | Php/ShouldUseCoalesce              |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _should-use-constants:
@@ -13681,11 +13938,51 @@ Avoid writing a whole slow loop, and use the native `'array_column() <http://www
 
 See also `[blog] `'array_column() <http://www.php.net/array_column>`_ <https://benramsey.com/projects/array-column/>`_.
 
-+--------------+-------------------------------------+
-| Command Line | Php/ShouldUseArrayColumn            |
-+--------------+-------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
-+--------------+-------------------------------------+
++--------------+---------------------------------------------------------+
+| Command Line | Php/ShouldUseArrayColumn                                |
++--------------+---------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
++--------------+---------------------------------------------------------+
+
+
+.. _should-use-array\_filter():
+
+Should Use array_filter()
+#########################
+
+
+Should use `'array_filter() <http://www.php.net/array_filter>`_.
+
+`'array_filter() <http://www.php.net/array_filter>`_ is a native PHP function, that extract elements from an array, based on a closure. 
+
+.. code-block:: php
+
+   <?php
+   
+   $a = range(0, 10); // integers from 0 to 10
+   
+   $odds = array_filter(function($x) { return $x % 2; });
+   
+   // Slow and cumbersome code
+   $odds = array();
+   foreach($a as $k => $v) {
+       if ($a % 2 == 1) {
+           $bColumn[] = $v;
+       }
+   }
+   
+   ?>
+
+
+`'array_column() <http://www.php.net/array_column>`_ is faster than `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ (with or without the `'isset() <http://www.php.net/isset>`_ test) with 3 elements or more, and it is significantly faster beyond 5 elements. Memory consumption is the same.
+
+See also `array_filter <https://php.net/array_filter>`_.
+
++--------------+--------------------------+
+| Command Line | Php/ShouldUseArrayFilter |
++--------------+--------------------------+
+| Analyzers    | :ref:`Suggestions`       |
++--------------+--------------------------+
 
 
 .. _should-use-session\_regenerateid():
@@ -13908,11 +14205,11 @@ Always start by reducing an array before applying some transformation on it. The
 
 The gain produced here is greater with longer arrays, or greater reductions. They may also be used in loops. This is a micro-optimisation when used on short arrays and single array slicings.
 
-+--------------+---------------------+
-| Command Line | Arrays/SliceFirst   |
-+--------------+---------------------+
-| Analyzers    | :ref:`Performances` |
-+--------------+---------------------+
++--------------+-----------------------------------------+
+| Command Line | Arrays/SliceFirst                       |
++--------------+-----------------------------------------+
+| Analyzers    | :ref:`Performances`, :ref:`Suggestions` |
++--------------+-----------------------------------------+
 
 
 .. _slimphp-1.0.0-undefined-classes:
@@ -14723,7 +15020,7 @@ Function `'in_array() <http://www.php.net/in_array>`_ has a third parameter to m
 +--------------+------------------------------------+
 | Command Line | Structures/BooleanStrictComparison |
 +--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`                     |
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
 
@@ -14879,11 +15176,11 @@ The gain produced here is greater with longer strings, or greater reductions. Th
 
 This works with any reduction function instead of substr(), like `'trim() <http://www.php.net/trim>`_, iconv(), etc.
 
-+--------------+--------------------------+
-| Command Line | Performances/SubstrFirst |
-+--------------+--------------------------+
-| Analyzers    | :ref:`Performances`      |
-+--------------+--------------------------+
++--------------+-----------------------------------------+
+| Command Line | Performances/SubstrFirst                |
++--------------+-----------------------------------------+
+| Analyzers    | :ref:`Performances`, :ref:`Suggestions` |
++--------------+-----------------------------------------+
 
 
 .. _suspicious-comparison:
@@ -16310,11 +16607,11 @@ Properties that are not initialized in the constructor, nor at definition.
 With the above class, when m() is accessed right after instantiation, there will be a missing property. 
 Using default values at property definition, or setting default values in the constructor ensures that the created object is consistent.
 
-+--------------+-------------------------------+
-| Command Line | Classes/UnitializedProperties |
-+--------------+-------------------------------+
-| Analyzers    | :ref:`Analyze`                |
-+--------------+-------------------------------+
++--------------+------------------------------------+
+| Command Line | Classes/UnitializedProperties      |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _unknown-directive-name:
@@ -16518,7 +16815,7 @@ This is dead code, that may be removed.
 +--------------+-----------------------------------------------------------------------------------------+
 | clearPHP     | `no-dead-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-dead-code.md>`__ |
 +--------------+-----------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                            |
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Suggestions`                        |
 +--------------+-----------------------------------------------------------------------------------------+
 
 
@@ -16949,11 +17246,11 @@ They should be removed, as they are probably dead code.
    
    ?>
 
-+--------------+----------------------------------------------+
-| Command Line | Interfaces/UnusedInterfaces                  |
-+--------------+----------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++--------------+------------------------------------------------------------------+
+| Command Line | Interfaces/UnusedInterfaces                                      |
++--------------+------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Suggestions` |
++--------------+------------------------------------------------------------------+
 
 
 .. _unused-label:
@@ -17594,11 +17891,11 @@ Foreach() structures accepts list() as blind key. If the loop-value is an array 
 
 See also `list <http://php.net/manual/en/function.list.php>`_ and `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
-+--------------+-------------------------------+
-| Command Line | Structures/UseListWithForeach |
-+--------------+-------------------------------+
-| Analyzers    | :ref:`Analyze`                |
-+--------------+-------------------------------+
++--------------+------------------------------------+
+| Command Line | Structures/UseListWithForeach      |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _use-lower-case-for-parent,-static-and-self:
@@ -17679,6 +17976,30 @@ See also `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_, to
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
+
+
+.. _use-nullable-type:
+
+Use Nullable Type
+#################
+
+
+The code uses nullable type, available since PHP 7.1.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo(?string $a = abc) : ?string {
+       return $a.b;
+   }
+   ?>
+
++--------------+---------------------+
+| Command Line | Php/UseNullableType |
++--------------+---------------------+
+| Analyzers    | :ref:`Suggestions`  |
++--------------+---------------------+
 
 
 .. _use-object-api:
@@ -18159,6 +18480,42 @@ when security is involved. openssl_random_pseudo_bytes() may be used when the Op
 +--------------+------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------------+
+
+
+.. _use-session\_start()-options:
+
+Use session_start() Options
+###########################
+
+
+It is possible to set the session's option at session_start() call, skipping the usage of session_option().
+
+This way, session's options are set in one call, saving several hits.
+
+This is available since PHP 7.0. It is recommended to set those values in the php.ini file, whenever possible. 
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7.0
+   session_start(['session.name' => 'mySession',
+                  'session.cookie_httponly' => 1,
+                  'session.gc_maxlifetime' => 60 * 60);
+   
+   // PHP 5.6- old way 
+   ini_set ('session.name', 'mySession');
+   ini_set(session.cookie_httponly, 1); 
+   ini_set('session.gc_maxlifetime', 60 * 60);
+   session_start();
+   
+   ?>
+
++--------------+----------------------------+
+| Command Line | Php/UseSessionStartOptions |
++--------------+----------------------------+
+| Analyzers    | :ref:`Suggestions`         |
++--------------+----------------------------+
 
 
 .. _used-once-property:
@@ -19106,11 +19463,11 @@ This structure is deprecated since PHP 7.2. It may disappear in the future.
 
 See also `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_.
 
-+--------------+-------------------------------------+
-| Command Line | Structures/WhileListEach            |
-+--------------+-------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
-+--------------+-------------------------------------+
++--------------+---------------------------------------------------------+
+| Command Line | Structures/WhileListEach                                |
++--------------+---------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
++--------------+---------------------------------------------------------+
 
 
 .. _wordpress-4.0-undefined-classes:
@@ -20464,11 +20821,11 @@ list() is the only PHP function that accepts to have omitted arguments. If the f
 
 $b will be 3, and the 2 value will be omitted. This is cleaner, and save some memory.
 
-+--------------+--------------------------+
-| Command Line | Structures/ListOmissions |
-+--------------+--------------------------+
-| Analyzers    | :ref:`Analyze`           |
-+--------------+--------------------------+
++--------------+------------------------------------+
+| Command Line | Structures/ListOmissions           |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
++--------------+------------------------------------+
 
 
 .. _mcrypt\_create\_iv()-with-default-values:

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -26,9 +26,15 @@ class Intval extends Plugin {
     public $name = 'intval';
     public $type = 'integer';
 
-    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null');
+    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition');
     
     public function run($atom, $extras) {
+        foreach($extras as $extra) {
+            if ($extra->intval === '')  { 
+                return ; 
+            }
+        }
+
         switch ($atom->atom) {
             case 'Integer' :
                 $value = $atom->code;
@@ -42,16 +48,105 @@ class Intval extends Plugin {
                     // PHP 5 will work until it fails
                     $actual = octdec(substr($value, 1));
                 } else {
-                    $actual = $value;
+                    $actual = (int) $value;
                 }
     
                 $atom->intval = abs($actual) > PHP_INT_MAX ? 0 : $actual;
-
                 break;
-        case 'Real' :
-            $atom->intval   = (int) $atom->code;
 
-            break;
+            case 'Real' :
+            case 'String' :
+                $atom->intval   = (int) trim($atom->code, '"\'');
+                break;
+    
+            case 'Boolean' :
+                $atom->intval = (int) (mb_strtolower($atom->code) === 'true');
+                break;
+    
+            case 'Null' :
+                $atom->intval = 0;
+                break;
+    
+            case 'Parenthesis' :
+                $atom->intval = $extras['CODE']->intval;
+                break;
+    
+            case 'Addition' :
+                if ($extras['LEFT']->intval === '')  { break; }
+                if ($extras['RIGHT']->intval === '')  { break; }
+    
+                if ($atom->code === '+') {
+                    $atom->intval = $extras['LEFT']->intval + 
+                                    $extras['RIGHT']->intval;
+                } elseif ($atom->code === '-') {
+                    $atom->intval = $extras['LEFT']->intval - $extras['RIGHT']->intval;
+                }
+                break;
+
+            case 'Multiplication' :
+                if ($extras['LEFT']->intval === '')  { break; }
+                if ($extras['RIGHT']->intval === '')  { break; }
+
+                if ($atom->code === '*') {
+                    $atom->intval = (int) ($extras['LEFT']->intval * $extras['RIGHT']->intval);
+                } elseif ($atom->code === '/') {
+                    $atom->intval = (int) ($extras['LEFT']->intval / $extras['RIGHT']->intval);
+                } elseif ($atom->code === '%') {
+                    $atom->intval = (int) ($extras['LEFT']->intval % $extras['RIGHT']->intval);
+                }
+                break;
+
+            case 'Arrayliteral' : 
+                $atom->intval    = (int) (bool) $atom->count;
+                break;
+
+            case 'Not' : 
+                if ($atom->code === '!') {
+                    $atom->intval = !$extras['NOT']->intval;
+                } elseif ($atom->code === '~') {
+                    $atom->intval = ~$extras['NOT']->intval;
+                }
+                break;
+
+            case 'Logical' : 
+                if ($atom->code === '|') {
+                    $atom->intval = $extras['LEFT']->intval | $extras['RIGHT']->intval;
+                } elseif ($atom->code === '&') {
+                    $atom->intval = $extras['LEFT']->intval & $extras['RIGHT']->intval;
+                } elseif ($atom->code === '^') {
+                    $atom->intval = $extras['LEFT']->intval ^ $extras['RIGHT']->intval;
+                } elseif ($atom->code === '&&' || mb_strtolower($atom->code) === 'and') {
+                    $atom->intval = $extras['LEFT']->intval && $extras['RIGHT']->intval;
+                } elseif ($atom->code === '||' || mb_strtolower($atom->code) === 'or') {
+                    $atom->intval = $extras['LEFT']->intval && $extras['RIGHT']->intval;
+                } elseif (mb_strtolower($atom->code) === 'xor') {
+                    $atom->intval = $extras['LEFT']->intval xor $extras['RIGHT']->intval;
+                }
+                break;
+
+            case 'Concatenation' : 
+                $atom->intval = (int) $atom->noDelimiter;
+                break;
+
+            case 'Comparison' : 
+                if ($atom->code === '==') {
+                    $atom->intval = $extras['LEFT']->intval == $extras['RIGHT']->intval;
+                } elseif ($atom->code === '===') {
+                    $atom->intval = $extras['LEFT']->intval === $extras['RIGHT']->intval;
+                } elseif ($atom->code === '!=' || $atom->code === '<>') {
+                    $atom->intval = $extras['LEFT']->intval != $extras['RIGHT']->intval;
+                } elseif ($atom->code === '!==') {
+                    $atom->intval = $extras['LEFT']->intval !== $extras['RIGHT']->intval;
+                } elseif ($atom->code === '>') {
+                    $atom->intval = $extras['LEFT']->intval > $extras['RIGHT']->intval;
+                } elseif ($atom->code === '<') {
+                    $atom->intval = $extras['LEFT']->intval < $extras['RIGHT']->intval;
+                } elseif ($atom->code === '>=') {
+                    $atom->intval = $extras['LEFT']->intval >= $extras['RIGHT']->intval;
+                } elseif ($atom->code === '<=') {
+                    $atom->intval = $extras['LEFT']->intval <= $extras['RIGHT']->intval;
+                }
+                break;
 
         default :
             

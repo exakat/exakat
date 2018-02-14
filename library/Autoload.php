@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -63,6 +63,8 @@ class Autoload {
 spl_autoload_register('Autoload::autoload_library');
 if (file_exists(__DIR__.'/../vendor/autoload.php')) {
     include __DIR__.'/../vendor/autoload.php';
+} elseif (file_exists(__DIR__.'/../../../../vendor/autoload.php')) {
+    include __DIR__.'/../../../../vendor/autoload.php';
 }
 
 $config = new Config($GLOBALS['argv']);

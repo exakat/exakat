@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -38,6 +38,7 @@ use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Precedence;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Tasks\Helpers\Intval;
+use Exakat\Tasks\Helpers\Boolval;
 use Exakat\Tokenizer\Token;
 
 const T_BANG                         = '!';
@@ -177,7 +178,7 @@ class Load extends Tasks {
     static public $PROP_ORIGIN      = array('Nsname', 'Identifier', 'As');
     static public $PROP_ENCODING    = array('String');
     static public $PROP_BLOCK       = array('String');
-    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null');
+    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition', );
     static public $PROP_STRVAL      = array('String');
     static public $PROP_ENCLOSING   = array('Variable', 'Array', 'Member');
     static public $PROP_ARGS_MAX    = array('Function', 'Method', 'Closure', 'Arrayliteral', );
@@ -255,6 +256,7 @@ class Load extends Tasks {
         
         // Init all plugins here
         $this->plugins[] = new Intval();
+        $this->plugins[] = new Boolval();
 
         $this->precedence = new Precedence($this->config->phpversion, $this->config);
 
@@ -487,7 +489,7 @@ SQL;
         $this->callsSqlite->query($definitions);
     }
 
-    public function runPlugins($atom, $linked) {
+    public function runPlugins($atom, $linked = array()) {
         foreach($this->plugins as $plugin) {
             $plugin->run($atom, $linked);
         }
@@ -915,7 +917,6 @@ SQL;
         $string->line        = $this->tokens[$current][2];
         $string->token       = $this->getToken($this->tokens[$current][0]);
         $string->count       = $rank + 1;
-        $string->boolean     = (int) (boolean) ($rank + 1);
         $string->constant    = $constant;
 
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
@@ -1664,16 +1665,15 @@ SQL;
             ) {
 
             $nsname = $this->addAtom('Boolean');
-            $nsname->boolean = (int) (mb_strtolower($this->tokens[$this->id ][1]) === 'true');
+
             $nsname->constant = self::CONSTANT_EXPRESSION;
-            $nsname->noDelimiter = $nsname->boolean === 1 ? 1 : '';
         } elseif ($this->tokens[$this->id][0]     === \Exakat\Tasks\T_NS_SEPARATOR &&
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING       &&
                   mb_strtolower($this->tokens[$this->id + 1][1]) === 'null'           &&
                   $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR ) {
 
             $nsname = $this->addAtom('Null');
-            $nsname->boolean = 0;
+
             $nsname->constant = self::CONSTANT_EXPRESSION;
             $nsname->noDelimiter = '';
         } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CALLABLE) {
@@ -1691,7 +1691,7 @@ SQL;
             $nsname = $this->addAtom('Nsname');
             $nsname->token     = 'T_STRING';
         }
-
+        
         $fullcode = array();
 
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_STRING) {
@@ -1732,6 +1732,7 @@ SQL;
         $nsname->code     = implode('\\', $fullcode);
         $nsname->fullcode = implode('\\', $fullcode);
         $nsname->line     = $this->tokens[$current][2];
+        $this->runPlugins($nsname);
         
         return $nsname;
     }
@@ -2226,12 +2227,12 @@ SQL;
             return $this->processNsname();
         } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $string = $this->addAtom('Boolean');
-            $string->boolean  = (int) (mb_strtolower($this->tokens[$this->id ][1]) === 'true');
+
             $string->constant = self::CONSTANT_EXPRESSION;
-            $string->noDelimiter = $string->boolean === 1 ? 1 : '';
+            $string->noDelimiter = mb_strtolower($string->code) === 'true' ? 1 : '';
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null');
-            $string->boolean  = 0;
+
             $string->constant = self::CONSTANT_EXPRESSION;
             $string->noDelimiter = '';
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
@@ -2252,6 +2253,7 @@ SQL;
         $string->line       = $this->tokens[$this->id][2];
         $string->token      = $this->getToken($this->tokens[$this->id][0]);
         $string->absolute   = self::NOT_ABSOLUTE;
+        $this->runPlugins($string);
 
         $this->pushExpression($string);
         
@@ -3101,6 +3103,7 @@ SQL;
         $parenthese->token    = 'T_OPEN_PARENTHESIS';
         $parenthese->constant = $code->constant;
         $parenthese->noDelimiter = $code->noDelimiter;
+        $this->runPlugins($parenthese, array('CODE' => $code));
 
         $this->pushExpression($parenthese);
         ++$this->id; // Skipping the )
@@ -3219,7 +3222,8 @@ SQL;
 
         $array->code      = $this->tokens[$current][1];
         $array->line      = $this->tokens[$current][2];
-        $array->boolean    = (int) (bool) $array->count;
+        $this->runPlugins($array, array());
+
         $this->pushExpression($array);
         
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -3756,9 +3760,8 @@ SQL;
 
     private function processInteger() {
         $integer = $this->processSingle('Integer');
-        $this->runPlugins($integer, array());
+        $this->runPlugins($integer);
 
-        $integer->boolean = (int) (boolean) $integer->code;
         $integer->constant = self::CONSTANT_EXPRESSION;
         $integer->noDelimiter = $integer->code;
 
@@ -3772,8 +3775,8 @@ SQL;
     private function processReal() {
         $real = $this->processSingle('Real');
         // (int) is for loading into the database
-        $this->runPlugins($real, $array());
-        $real->boolean  = (int) (strtolower($this->tokens[$this->id][1]) != 0);
+        $this->runPlugins($real);
+
         $real->constant = self::CONSTANT_EXPRESSION;
         $real->noDelimiter = $real->code;
 
@@ -3808,8 +3811,8 @@ SQL;
             $literal->delimiter   = '';
             $literal->noDelimiter = '';
         }
-
-        $literal->boolean   = (int) (bool) $literal->noDelimiter;
+        
+        $this->runPlugins($literal);
 
         if (function_exists('mb_detect_encoding')) {
             $literal->encoding = mb_detect_encoding($literal->noDelimiter);
@@ -3845,13 +3848,21 @@ SQL;
             } else {
                 $constant->noDelimiter = $this->currentFunction[count($this->currentFunction) - 1]->code;
             }
-        } elseif (mb_strtolower($constant->fullcode) === '__class__' ||
-                  mb_strtolower($constant->fullcode) === '__trait__'
-                  ) {
+        } elseif (mb_strtolower($constant->fullcode) === '__class__') {
             if (empty($this->currentClassTrait)) {
                 $constant->noDelimiter = '';
-            } else {
+            } elseif ($this->currentClassTrait[count($this->currentClassTrait) - 1]->atom === 'Class') {
                 $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
+            } else {
+                $constant->noDelimiter = '';
+            }
+        } elseif (mb_strtolower($constant->fullcode) === '__trait__') {
+            if (empty($this->currentClassTrait)) {
+                $constant->noDelimiter = '';
+            } elseif ($this->currentClassTrait[count($this->currentClassTrait) - 1]->atom === 'Trait') {
+                $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath;
+            } else {
+                $constant->noDelimiter = '';
             }
         } elseif (mb_strtolower($constant->fullcode) === '__line__') {
             $constant->noDelimiter = $this->tokens[$this->id][2];
@@ -3863,9 +3874,13 @@ SQL;
                     $constant->noDelimiter = '';
                 }
             } else {
-                $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath .
-                                         '::' .
-                                         $this->currentMethod[count($this->currentMethod) - 1]->code;
+                if (empty($this->currentMethod)) {
+                    $constant->noDelimiter = '';
+                } else {
+                    $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath .
+                                             '::' .
+                                             $this->currentMethod[count($this->currentMethod) - 1]->code;
+                }
             }
         }
         
@@ -4001,6 +4016,8 @@ SQL;
         $operator = $this->popExpression();
         $this->pushExpression($operator);
         $operator->constant = $not->constant;
+
+        $this->runPlugins($operator, array('NOT' => $not));
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -4166,7 +4183,7 @@ SQL;
             $operand->fullcode = $signExpression.$operand->fullcode;
             $operand->line     = $this->tokens[$this->id][2];
             $operand->token    = $this->getToken($this->tokens[$this->id][0]);
-            $this->runPlugins($operand, $array());
+            $this->runPlugins($operand);
 
             return $operand;
         }
@@ -4256,6 +4273,9 @@ SQL;
         $addition->line     = $this->tokens[$current][2];
         $addition->token    = $this->getToken($this->tokens[$current][0]);
         $addition->constant = $right->constant === self::CONSTANT_EXPRESSION && $left->constant === self::CONSTANT_EXPRESSION;
+        
+        $this->runPlugins($addition, array('RIGHT' => $right, 
+                                           'LEFT'  => $left));
 
         $this->pushExpression($addition);
 
@@ -4421,6 +4441,8 @@ SQL;
         $operator->line      = $this->tokens[$current][2];
         $operator->token     = $this->getToken($this->tokens[$current][0]);
         $operator->constant  = ($right->constant === self::CONSTANT_EXPRESSION) && ($left->constant === self::CONSTANT_EXPRESSION);
+        $this->runPlugins($operator, array($links[0] => $left, $links[1] => $right));
+
         $this->pushExpression($operator);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -4564,6 +4586,7 @@ SQL;
         $current = $this->id;
         $concatenation = $this->addAtom('Concatenation');
         $fullcode= array();
+        $concat = array();
         $noDelimiter = '';
         $rank = -1;
 
@@ -4571,6 +4594,7 @@ SQL;
         $this->addLink($concatenation, $contains, 'CONCAT');
         $contains->rank = ++$rank;
         $fullcode[] = $contains->fullcode;
+        $concat[] = $contains;
         $noDelimiter .= $contains->noDelimiter;
 
         $this->nestContext();
@@ -4604,6 +4628,7 @@ SQL;
                 $this->popExpression();
                 $this->addLink($concatenation, $contains, 'CONCAT');
                 $fullcode[] = $contains->fullcode;
+                $concat[] = $contains;
                 $noDelimiter .= $contains->noDelimiter;
                 $contains->rank = ++$rank;
 
@@ -4614,6 +4639,7 @@ SQL;
         $this->popExpression();
         $this->addLink($concatenation, $contains, 'CONCAT');
         $fullcode[] = $contains->fullcode;
+        $concat[] = $contains;
         $noDelimiter .= $contains->noDelimiter;
         $contains->rank = ++$rank;
         if ($noSequence === false) {
@@ -4628,6 +4654,9 @@ SQL;
         $concatenation->token       = $this->getToken($this->tokens[$current][0]);
         $concatenation->count       = $rank;
         $concatenation->constant    = $constant;
+        
+        // todo No CONCAT is send. 
+        $this->runPlugins($concatenation, $concat);
 
         $this->pushExpression($concatenation);
 
