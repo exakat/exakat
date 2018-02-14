@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 12 Feb 2018 18:30:01 +0000
-.. comment: Generation hash : 5bf816b92ef547aaa1769efd2e35ffa21c3ddd8a
+.. comment: Generation date : Wed, 14 Feb 2018 08:20:09 +0000
+.. comment: Generation hash : 4ed287c5b917c5aaa26f01be6fc7b043cb67e6d0
 
 
 .. _analyze:
@@ -959,6 +959,54 @@ Total : 25 analysis
 * :ref:`SlimPHP 3.8.0 Undefined Classes <slimphp-3.8.0-undefined-classes>`
 * :ref:`Use Slim <use-slim>`
 * :ref:`Used Routes <used-routes>`
+
+.. _suggestions:
+
+Suggestions
++++++++++++
+
+Total : 40 analysis
+
+* :ref:`** For Exponent <**-for-exponent>`
+* :ref:`Already Parents Interface <already-parents-interface>`
+* :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
+* :ref:`Could Make A Function <could-make-a-function>`
+* :ref:`Could Return Void <could-return-void>`
+* :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
+* :ref:`Could Use self <could-use-self>`
+* :ref:`Drop Else After Return <drop-else-after-return>`
+* :ref:`Echo With Concat <echo-with-concat>`
+* :ref:`Empty With Expression <empty-with-expression>`
+* :ref:`Find Key Directly <find-key-directly>`
+* :ref:`Foreach With list() <foreach-with-list()>`
+* :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
+* :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
+* :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
+* :ref:`Never Used Parameter <never-used-parameter>`
+* :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
+* :ref:`No Return Used <no-return-used>`
+* :ref:`No Substr() One <no-substr()-one>`
+* :ref:`Null Coalesce <null-coalesce>`
+* :ref:`Overwritten Exceptions <overwritten-exceptions>`
+* :ref:`PHP7 Dirname <php7-dirname>`
+* :ref:`Parent First <parent-first>`
+* :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
+* :ref:`Repeated print() <repeated-print()>`
+* :ref:`Reuse Variable <reuse-variable>`
+* :ref:`Should Use Coalesce <should-use-coalesce>`
+* :ref:`Should Use array_column() <should-use-array\_column()>`
+* :ref:`Should Use array_filter() <should-use-array\_filter()>`
+* :ref:`Slice Arrays First <slice-arrays-first>`
+* :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
+* :ref:`Substring First <substring-first>`
+* :ref:`Unitialized Properties <unitialized-properties>`
+* :ref:`Unreachable Code <unreachable-code>`
+* :ref:`Unused Interfaces <unused-interfaces>`
+* :ref:`Use List With Foreach <use-list-with-foreach>`
+* :ref:`Use Nullable Type <use-nullable-type>`
+* :ref:`Use session_start() Options <use-session\_start()-options>`
+* :ref:`While(List() = Each()) <while(list()-=-each())>`
+* :ref:`list() May Omit Variables <list()-may-omit-variables>`
 
 .. _wordpress:
 

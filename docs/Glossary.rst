@@ -5,6 +5,7 @@ Glossary
 + `*`
     + `**`
 
+      + :ref:`** For Exponent <**-for-exponent>`
       + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
       + :ref:`Exponent Usage <exponent-usage>`
       + :ref:`Negative Power <negative-power>`
@@ -17,6 +18,10 @@ Glossary
 
       + :ref:`$this Is Not An Array <$this-is-not-an-array>`
 
+    + `Array_search()`
+
+      + :ref:`Find Key Directly <find-key-directly>`
+
     + `abs()`
 
       + :ref:`Always Positive Comparison <always-positive-comparison>`
@@ -25,6 +30,7 @@ Glossary
     + `array_column()`
 
       + :ref:`Should Use array_column() <should-use-array\_column()>`
+      + :ref:`Should Use array_filter() <should-use-array\_filter()>`
 
     + `array_count_values()`
 
@@ -34,6 +40,10 @@ Glossary
     + `array_diff()`
 
       + :ref:`Slow Functions <slow-functions>`
+
+    + `array_filter()`
+
+      + :ref:`Should Use array_filter() <should-use-array\_filter()>`
 
     + `array_flip()`
 
@@ -52,6 +62,7 @@ Glossary
     + `array_keys()`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Find Key Directly <find-key-directly>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `array_map()`
@@ -78,6 +89,7 @@ Glossary
 
     + `array_search()`
 
+      + :ref:`Find Key Directly <find-key-directly>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `array_sum()`
@@ -155,6 +167,7 @@ Glossary
 + `C`
     + `Closure`
 
+      + :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
       + :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
 
     + `Count()`
@@ -170,6 +183,7 @@ Glossary
       + :ref:`Hidden Use Expression <hidden-use-expression>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
       + :ref:`Should Use Local Class <should-use-local-class>`
+      + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
@@ -264,6 +278,7 @@ Glossary
     + `empty()`
 
       + :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
+      + :ref:`Empty With Expression <empty-with-expression>`
       + :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`No Isset With Empty <no-isset-with-empty>`
@@ -334,10 +349,12 @@ Glossary
       + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
+      + :ref:`Find Key Directly <find-key-directly>`
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
       + :ref:`Foreach With list() <foreach-with-list()>`
       + :ref:`No Direct Usage <no-direct-usage>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
+      + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 
@@ -458,11 +475,14 @@ Glossary
 
     + `isset`
 
+      + :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
       + :ref:`Isset With Constant <isset-with-constant>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Isset With Empty <no-isset-with-empty>`
+      + :ref:`Null Coalesce <null-coalesce>`
       + :ref:`Should Use Coalesce <should-use-coalesce>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
+      + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Use Instanceof <use-instanceof>`
 
@@ -552,6 +572,7 @@ Glossary
 
     + `pow()`
 
+      + :ref:`** For Exponent <**-for-exponent>`
       + :ref:`Negative Power <negative-power>`
 
     + `preg_replace()`
