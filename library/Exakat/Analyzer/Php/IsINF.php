@@ -26,8 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class IsINF extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs('\\is_infinite')
-             ->back('first');
+        // is_infinite()
+        $this->atomFunctionIs('\\is_infinite');
         $this->prepareQuery();
     }
 }
