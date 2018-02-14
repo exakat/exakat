@@ -376,4 +376,16 @@ function makeFullnspath($functions, $constant = false) {
     return $r;
 }
 
+function trimOnce($string, $trim = '\'"'){
+    if (strpos($trim, $string[0]) !== false) {
+        $string = substr($string, 1);
+    }
+
+    if (strpos($trim, $string[strlen($string) - 1]) !== false) {
+        $string = substr($string, 0, -1);
+    }
+    
+    return $string;
+}
+
 ?>
