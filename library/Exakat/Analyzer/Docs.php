@@ -101,9 +101,9 @@ SQL;
         if ($list === null) {
             $where = '';
         } elseif (is_string($list)) {
-            $where = ' WHERE c.name IN ("$list") ';
+            $where = " WHERE c.name = \"$list\" ";
         } elseif (is_array($list)) {
-            $where = ' WHERE c.name IN ("'.implode('', $list).'") ';
+            $where = ' WHERE c.name IN ('.makeList($list).') ';
         } else {
             assert(false, "Wrong type for list : ".gettype($list)." in ".__METHOD__."\n");
         }
