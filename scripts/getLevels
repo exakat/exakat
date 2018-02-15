@@ -1,0 +1,89 @@
+<?php
+
+$levels = array('Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5');
+$levelsList = "'".join("', '", $levels)."'";
+
+$sqlite = new Sqlite3('./data/analyzers.sqlite');
+
+$res = $sqlite->query(<<<SQL
+SELECT categories.name AS name, count(*) AS count
+FROM analyzers
+JOIN analyzers_categories
+	ON analyzers_categories.id_analyzer = analyzers.id
+JOIN categories
+	ON categories.id = analyzers_categories.id_categories
+WHERE categories.name in ($levelsList)
+GROUP BY categories.name
+
+SQL
+);
+
+while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+    print $row['name'].' : '.$row['count'].PHP_EOL;
+}
+
+print PHP_EOL.PHP_EOL;
+
+$res = $sqlite->query(<<<SQL
+SELECT categories.name AS name, group_concat(analyzers.folder || '/' || analyzers.name) AS list, count(*) AS count
+FROM analyzers
+JOIN analyzers_categories
+	ON analyzers_categories.id_analyzer = analyzers.id
+JOIN categories
+	ON categories.id = analyzers_categories.id_categories
+WHERE categories.name in ($levelsList)
+GROUP BY categories.name
+ORDER BY analyzers.folder || '/' || analyzers.name
+
+SQL
+);
+
+while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+    print $row['name'].' ('.$row['count'].')'.PHP_EOL;
+    print '  '.str_replace(',', PHP_EOL.'  ', $row['list']).PHP_EOL;
+}
+
+print PHP_EOL.PHP_EOL;
+
+// Here, check that one is not in two categories.
+$res = $sqlite->query(<<<SQL
+select folder || '/' || analyzers.name AS name, 
+count(*) as c, group_CONCAT(categories.name) AS categories
+FROM analyzers
+JOIN analyzers_categories
+	ON analyzers_categories.id_analyzer = analyzers.id
+JOIN categories
+	ON categories.id = analyzers_categories.id_categories
+WHERE categories.name in ($levelsList)
+GROUP BY analyzers.id
+HAVING count(*) > 1;
+
+SQL
+);
+
+while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+    print $row['name'].' : '.$row['categories'].PHP_EOL;
+}
+
+
+/*
+select folder, analyzers.name, 
+count(*) as c,
+case when group_concat(categories.name) like '%Analyze%' THEN 'X' ELSE '_' END as Analyze,
+case when group_concat(categories.name) like '%Level 1%' THEN 'X' ELSE '_' END as Level1,
+case when group_concat(categories.name) like '%Level 2%' THEN 'X' ELSE '_' END as Level2,
+case when group_concat(categories.name) like '%Level 3%' THEN 'X' ELSE '_' END as Level3,
+case when group_concat(categories.name) like '%Level 4%' THEN 'X' ELSE '_' END as Level4
+
+ FROM analyzers
+JOIN analyzers_categories
+	ON analyzers_categories.id_analyzer = analyzers.id
+JOIN categories
+	ON categories.id = analyzers_categories.id_categories
+WHERE categories.name in ('Analyze', 'Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5')
+GROUP BY analyzers.id
+ORDER BY count(*) DESC;
+
+*/
+
+?>

@@ -1,0 +1,23 @@
+<?php
+
+$project = $argv[1];
+
+print "Checking $project\n";
+
+if (file_exists('projects/'.$project.'/code/composer.json')) {
+    $composer = file_get_contents('projects/'.$project.'/code/composer.json');
+    preg_match_all('#"zendframework/zend\S+":\s+\S+#is', $composer, $r);
+    print_r($r[0]);
+}
+
+if (file_exists('projects/'.$project.'/code/.git')) {
+    print shell_exec('cd projects/'.$project.'/code; git pull');
+    
+    $config = file_get_contents('projects/'.$project.'/code/.git/config');
+    preg_match("#url = (https?://.+?/\S+)\n#is", $config, $r);
+    print "URL = $r[1]\n";
+} else {
+    die( "No VCS for $project\n");
+}
+
+?>

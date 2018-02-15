@@ -1,0 +1,193 @@
+<?php
+
+include('libComposer.php');
+
+$begin = microtime(true);
+$sqlite = new \Sqlite3(dirname(__DIR__).'/data/drupal.sqlite');
+
+$tables = array('components', 'classes', 'interfaces', 'namespaces', 'releases' ,'traits', 'deprecated');
+foreach($tables as $table) {
+    $sqlite->query('DELETE FROM '.$table);
+    $sqlite->query('DELETE FROM sqlite_sequence WHERE name = "'.$table.'"');
+}
+$end = microtime(true);
+
+$drupal = 'drupal';
+$sqlite->query('INSERT INTO components VALUES (null, "'.$drupal.'")');
+$componentId = $sqlite->lastInsertRowID();
+
+$versions = readRelease($drupal, $componentId);
+
+$sqlite->query('VACUUM;');
+
+print "\n";
+print count($components)." composants, with $versions versions\n";
+print floor(filesize('data/drupal.sqlite') / 1024). " ko  \n";
+print number_format(1000 * ($end - $begin), 2). " ms\n";
+
+function readRelease($component, $componentId) {
+    global $sqlite;
+    $res = shell_exec('cd projects/'.$component.'/code/; git pull; git checkout --quiet HEAD; git tag -l | egrep \'[4-9]\.[0-9]+(\.0)?$\'');
+    $versions = explode("\n", trim($res));
+    $versions = array_filter($versions, function ($x) { return !preg_match('/^\d\.\d\.[1-9]+$/', $x); });
+    $versions = array_filter($versions, function ($x) { return version_compare('2.4.99', str_replace('release-', '', $x)) < 0; });
+    
+    print count($versions).' versions for $component : '.implode(', ', $versions).PHP_EOL;
+    foreach($versions as $version) {
+        $sqlite->query('INSERT INTO releases VALUES (null, "'.$version.'", '.$componentId.')');
+        $versionId = $sqlite->lastInsertRowID();
+        
+        print "$versionId\n";
+    
+        processVersion($component, $version, $versionId);
+        
+        /*
+        preg_match('/^release-(\d)\.(\d).(\d)$/', $version, $v);
+        preg_match('/^zend-(.+)$/', $component, $n);
+        $path = 'library/Exakat/Analyzer/ZendF/Zf3'.ucfirst($n[1]).$v[1].$v[2].'.php';
+        
+        if (!file_exists($path)) {
+            print "$component $version is missing\n";
+        } else {
+            print "$component $version is ready\n";
+        }
+        */
+    }
+    
+    shell_exec('cd projects/'.$component.'/code/; git checkout --quiet master');
+    
+    return count($versions);
+}
+
+function processVersion($component, $version, $versionId) {
+    global $sqlite;
+
+    $res = shell_exec('cd projects/'.$component.'/code/; git checkout --quiet '.$version);
+
+    $dir = recursiveReaddir('projects/'.$component.'/code');
+
+    $all = array();
+    foreach($dir as $file) {
+        $all[] = processFile($file);
+    }
+    $all = call_user_func_array('array_merge_recursive', $all);
+    $all['Class']      = array_filter($all['Class'],      function ($k) { return true; }, ARRAY_FILTER_USE_KEY);
+    $all['Interface']  = array_filter($all['Interface'],  function ($k) { return true; }, ARRAY_FILTER_USE_KEY);
+    $all['Trait']      = array_filter($all['Trait'],      function ($k) { return true; }, ARRAY_FILTER_USE_KEY);
+    $all['Deprecated'] = array_filter($all['Deprecated'], function ($k) { return true; }, ARRAY_FILTER_USE_KEY);
+    $all['Function']   = array_filter($all['Function'],   function ($k) { return true; }, ARRAY_FILTER_USE_KEY);
+    $all['Method']     = array_filter($all['Method'],     function ($k) { return true; }, ARRAY_FILTER_USE_KEY);
+
+    save_cit($versionId, $all);
+    die(__METHOD__);
+}
+
+function save_cit($releaseId, $all) {
+    global $sqlite;
+    
+    $classes = 0;
+    foreach($all['Class'] as $namespace => $list) {
+        $namespaceId = save($sqlite, 'namespaces', array('namespace'  => $namespace,
+                                                         'release_id' => $releaseId));
+        foreach($list as $className) {
+            ++$classes;
+            $classId = save($sqlite, 'classes', array('class'        => $className,
+                                                      'namespace_id' => $namespaceId));
+        }
+    }
+
+    $interfaces = 0;
+    foreach($all['Interface'] as $namespace => $list) {
+        $namespaceId = save($sqlite, 'namespaces', array('namespace'  => $namespace,
+                                                         'release_id' => $releaseId));
+        foreach($list as $interfaceName) {
+            ++$interfaces;
+            $interfaceId = save($sqlite, 'interfaces', array('interface'    => $interfaceName,
+                                                             'namespace_id' => $namespaceId));
+        }
+    }
+
+    $traits = 0;
+    foreach($all['Trait'] as $namespace => $list) {
+        $namespaceId = save($sqlite, 'namespaces', array('namespace'  => $namespace,
+                                                         'release_id' => $releaseId));
+        foreach($list as $traitName) {
+            ++$traits;
+            $traitId = save($sqlite, 'traits',     array('trait'        => $traitName,
+                                                         'namespace_id' => $namespaceId));
+        }
+    }
+
+    $functions = 0;
+    foreach($all['Function'] as $namespace => $list) {
+        $namespaceId = save($sqlite, 'namespaces', array('namespace'  => $namespace,
+                                                         'release_id' => $releaseId));
+        foreach($list as $functionName) {
+            ++$functions;
+            $functionId = save($sqlite, 'functions',     array('function'     => $functionName,
+                                                               'namespace_id' => $namespaceId));
+        }
+    }
+
+    $methods = 0;
+    foreach($all['Method'] as $namespace => $list) {
+        print_r($list);
+        print_r($namespace);
+        die();
+        $classId = save($sqlite, 'namespaces', array('namespace'  => $namespace,
+                                                         'release_id' => $releaseId));
+        foreach($list as $functionName) {
+            ++$functions;
+            $functionId = save($sqlite, 'functions',     array('function'     => $functionName,
+                                                               'namespace_id' => $namespaceId));
+        }
+    }
+    
+    $deprecated = 0;
+    foreach($all['Deprecated'] as $namespace => $list) {
+        $namespaceId = save($sqlite, 'namespaces', array('namespace'  => $namespace,
+                                                         'release_id' => $releaseId,
+                                                         ));
+        foreach($list as $deprecatedCIT) {
+            ++$deprecated;
+            $deprecatedId = save($sqlite, 'deprecated', array('type'         => $deprecatedCIT['type'],
+                                                              'name'         => $deprecatedCIT['name'],
+                                                              'cit'          => $deprecatedCIT['cit'],
+                                                              'namespace_id' => $namespaceId,
+                                                              ));
+        }
+    }
+    
+
+    print "$releaseId : $classes Classes, $interfaces Interfaces, $traits Traits, $deprecated Deprecated, $functions functions\n";
+}
+
+function save ($sqlite, $table, $data) {
+    $where = array();
+    foreach($data as $col => $value) {
+        $where[] = "$col = '".$sqlite->escapeString($value)."'";
+    }
+    $where = join(' AND ', $where);
+
+    $res = $sqlite->querySingle('SELECT * FROM '.$table.' WHERE '.$where);
+    if (empty($res)) {
+        $cols = array('id');
+        $values = array('null');
+        
+        foreach($data as $c => $v) {
+            $cols[] = $c;
+            $values[] = "'".$sqlite->escapeString($v)."'";
+        }
+        
+        $cols = join(', ', $cols);
+        $values = join(', ', $values);
+        $query = "INSERT INTO $table ($cols) VALUES ($values)";
+        $sqlite->query($query);
+        
+        $res = $sqlite->lastInsertRowID();
+    }
+    
+    return $res;
+}
+
+?>
