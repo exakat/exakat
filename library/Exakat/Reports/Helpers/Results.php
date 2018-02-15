@@ -37,7 +37,7 @@ class Results {
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$this->analyzer.'"');
         
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $row['fullcode'] = PHPSyntax($row['fullcode']);
+            $row['htmlcode'] = PHPSyntax($row['fullcode']);
             $this->values[] = $row;
             ++$this->count;
         }

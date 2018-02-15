@@ -83,9 +83,12 @@ TEXT
         }
         $final .= implode("\n", $return);
 
-        if ($name === '') {
+        if ($name === Reports::STDOUT) {
             return $final ;
         } else {
+            if ($name === '') {
+                $name == self::FILE_FILENAME;
+            }
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $final);
             return '';
         }
