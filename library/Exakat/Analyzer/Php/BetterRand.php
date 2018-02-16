@@ -26,7 +26,27 @@ use Exakat\Analyzer\Analyzer;
 class BetterRand extends Analyzer {
     public function analyze() {
         // rand => mt_rand => random_int
-        $this->atomFunctionIs(array('\rand', '\mt_rand', '\openssl_random_pseudo_bytes'));
+        $this->atomFunctionIs(array('\rand', 
+                                    '\mt_rand', 
+                                    '\openssl_random_pseudo_bytes',
+                                    '\uniqid',
+                                    ));
+        $this->prepareQuery();
+
+        // sha1(microtime())
+        $this->atomFunctionIs(array('\microtime', 
+                                    ))
+             ->inIs('ARGUMENT')
+             ->functioncallIs(array('\md5',
+                                    '\sha1',
+                                    '\sha2156',
+                                    '\hash',
+                                    '\crc32',
+                                    '\crypt',
+                                    '\str_rot13',
+                                    '\strrev',
+                                    '\base64_encode',
+                                    ));
         $this->prepareQuery();
     }
 }
