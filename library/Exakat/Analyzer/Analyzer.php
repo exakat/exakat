@@ -115,7 +115,7 @@ abstract class Analyzer {
     
     protected $dictCode = null;
 
-    public function __construct($gremlin = null, $config) {
+    public function __construct($gremlin = null, $config = null) {
         $this->gremlin = $gremlin;
         
         $this->analyzer = get_class($this);
@@ -364,9 +364,9 @@ GREMLIN;
         return $this->analyzerId;
     }
 
-    public function checkphpConfiguration($Php) {
+    public function checkPhpConfiguration($Php) {
         // this handles Any version of PHP
-        if ($this->phpConfiguration == 'Any') {
+        if ($this->phpConfiguration === 'Any') {
             return true;
         }
         
@@ -490,8 +490,9 @@ GREMLIN
         return $this;
     }
 
-    protected function hasNoCountedInstruction($atom = 'Function', $count) {
+    protected function hasNoCountedInstruction($atom = 'Function', $count = 0) {
         assert($this->assertAtom($atom));
+        assert($count >= 0);
         $atom = makeArray($atom);
         
         // $count is an integer or a variable
@@ -558,7 +559,7 @@ GREMLIN
     }
 
     public function tokenIsNot($token) {
-        assert(func_get_args() !== 1, 'Too many arguments for '.__METHOD__);
+        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($this->assertToken($token));
         $this->addMethod('not(has("token", within(***)))', makeArray($token) );
         
@@ -566,7 +567,7 @@ GREMLIN
     }
     
     public function atomIs($atom) {
-        assert(func_get_args() !== 1, 'Too many arguments for '.__METHOD__);
+        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($this->assertAtom($atom));
         $this->addMethod('hasLabel(within(***))', makeArray($atom));
         
@@ -574,7 +575,7 @@ GREMLIN
     }
 
     public function atomIsNot($atom) {
-        assert(func_get_args() !== 1, 'Too many arguments for '.__METHOD__);
+        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($this->assertAtom($atom));
         $this->addMethod('not(hasLabel(within(***)))', makeArray($atom) );
         
@@ -582,7 +583,7 @@ GREMLIN
     }
 
     public function atomFunctionIs($fullnspath) {
-        assert(func_get_args() !== 1, 'Too many arguments for '.__METHOD__);
+        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
         $this->functioncallIs($fullnspath);
 
@@ -590,7 +591,7 @@ GREMLIN
     }
     
     public function functioncallIs($fullnspath) {
-        assert(func_get_args() !== 1, 'Too many arguments for '.__METHOD__);
+        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
         $this->atomIs('Functioncall')
              ->raw('has("fullnspath")')
@@ -1192,7 +1193,7 @@ GREMLIN
     }
 
     protected function outIs($link) {
-        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
+        assert(func_num_args() === 1, "Too many arguments for ".__METHOD__);
         assert($this->assertLink($link));
         $this->addMethod('out('.$this->SorA($link).')');
 
@@ -1201,7 +1202,7 @@ GREMLIN
 
     // follows a link if it is there (and do nothing otherwise)
     protected function outIsIE($link) {
-        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
+        assert(func_num_args() === 1, "Too many arguments for ".__METHOD__);
         assert($this->assertLink($link));
         // alternative : coalesce(out('LEFT'),  __.filter{true} )
         $this->addMethod("until( __.not(outE(".$this->SorA($link).")) ).repeat(out(".$this->SorA($link)."))");
@@ -1210,7 +1211,7 @@ GREMLIN
     }
 
     public function outIsNot($link) {
-        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
+        assert(func_num_args() === 1, "Too many arguments for ".__METHOD__);
         assert($this->assertLink($link));
         $this->addMethod('not( where( __.outE('.$this->SorA($link).') ) )');
         
@@ -1260,7 +1261,7 @@ GREMLIN
 
     public function inIs($link) {
         assert($this->assertLink($link));
-        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
+        assert(func_num_args() === 1, "Too many arguments for ".__METHOD__);
         $this->addMethod('in('.$this->SorA($link).')');
         
         return $this;

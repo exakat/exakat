@@ -28,7 +28,10 @@ class Uml extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'exakat.uml';
 
-public function generate($folder, $name= 'uml') {
+    public function generate($folder, $name= 'uml') {
+        if (empty($name)) {
+            $name = self::FILE_FILENAME;
+        }
 
         $res = $this->sqlite->query(<<<SQL
 SELECT name, cit.id, extends, type, namespace, 
