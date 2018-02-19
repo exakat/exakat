@@ -104,10 +104,10 @@ class Doctor extends Tasks {
         if ($this->config->project !== 'default') {
             $stats['project']['name']             = $this->config->project_name;
             $stats['project']['url']              = $this->config->project_url;
-            $stats['project']['included dirs']    = $this->array2line($this->config->include_dirs);
-            $stats['project']['ignored dirs']     = $this->array2line($this->config->ignore_dirs);
-            $stats['project']['file extensions']  = $this->array2line($this->config->file_extensions);
-            $stats['project']['analyzers']        = $this->array2line($this->config->analyzers);
+            $stats['project']['included dirs']    = makeList($this->config->include_dirs, '');
+            $stats['project']['ignored dirs']     = makeList($this->config->ignore_dirs, '');
+            $stats['project']['file extensions']  = makeList($this->config->file_extensions, '');
+            $stats['project']['analyzers']        = makeList($this->config->analyzers, '');
         }
 
         return $stats;
@@ -342,31 +342,37 @@ class Doctor extends Tasks {
         return $stats;
     }
 
-    private function checkPHP($configVersion, $displayedVersion) {
+    private function checkPHP($pathToBinary, $displayedVersion) {
         $stats = array();
-
-        if (!$configVersion) {
+        
+        $version = 'php'.str_replace('.', '', $displayedVersion);
+        $configVersion = $this->config->{$version};
+        
+        if ($configVersion === '') {
             $stats['configured'] = 'No';
-        } else {
-            $stats['configured'] = 'Yes ('.$configVersion.')';
-            $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-            $version = $php->getVersion();
-            if (strpos($version, 'not found') !== false) {
-                $stats['installed'] = 'No';
-            } elseif (strpos($version, 'No such file') !== false) {
-                $stats['installed'] = 'No';
-            } else {
-                $stats['version'] = $version;
-                if (substr($version, 0, 3) != $displayedVersion) {
-                    $stats['version'] = $version.' (This doesn\'t seem to be version '.$displayedVersion.')';
-                }
-                $stats['short_open_tags'] = $php->getShortTag();
-                $stats['timezone']        = $php->getTimezone();
-                $stats['tokenizer']       = $php->getTokenizer();
-                $stats['memory_limit']    = $php->getMemory_limit();
-                $stats['assertions']      = $php->getAssertions();
-            }
+            return $stats;
         }
+        
+        $stats['configured'] = 'Yes ('.$configVersion.')';
+
+        $php = new Phpexec($displayedVersion, $pathToBinary);
+        $version = $php->getVersion();
+        if (strpos($version, 'not found') !== false) {
+            $stats['installed'] = 'No';
+        } elseif (strpos($version, 'No such file') !== false) {
+            $stats['installed'] = 'No';
+        } else {
+            $stats['version'] = $version;
+            if (substr($version, 0, 3) != $displayedVersion) {
+                $stats['version'] = $version.' (This doesn\'t seem to be version '.$displayedVersion.')';
+            }
+            $stats['short_open_tags'] = $php->getShortTag();
+            $stats['timezone']        = $php->getTimezone();
+            $stats['tokenizer']       = $php->getTokenizer();
+            $stats['memory_limit']    = $php->getMemory_limit();
+            $stats['assertions']      = $php->getAssertions();
+        }
+        
 
         return $stats;
     }
@@ -375,10 +381,6 @@ class Doctor extends Tasks {
         return implode(",\n                           ", $array);
     }
 
-    private function array2line($array) {
-        return implode(", ", $array);
-    }
-    
     private function getNeo4j() {
         $stats = array();
         
