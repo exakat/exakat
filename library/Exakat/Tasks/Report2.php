@@ -30,7 +30,7 @@ use Exakat\Exceptions\NoSuchFormat;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\ProjectNotInited;
 use Exakat\Exceptions\NoDump;
-use Exakat\Reports\Reports as Report;
+use Exakat\Reports\Reports as Reports;
 
 class Report2 extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -47,7 +47,7 @@ class Report2 extends Tasks {
         $reportClass = '\\Exakat\\Reports\\'.$this->config->format;
 
         if (!class_exists($reportClass)) {
-            throw new NoSuchFormat($this->config->format, Report::$FORMATS);
+            throw new NoSuchFormat($this->config->format, Reports::$FORMATS);
         }
 
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite')) {
@@ -68,21 +68,29 @@ class Report2 extends Tasks {
         $res = $dump->query($ProjectDumpSql);
         $row = $res->fetchArray(\SQLITE3_NUM);
 
-        display('Building report for project '.$this->config->project.' in file "'.$this->config->file.'", with format '.$this->config->format."\n");
         $begin = microtime(true);
-
-        // Choose format from options
 
         $report = new $reportClass($this->config);
         if (empty($this->config->file)) {
+            display('Building report for project '.$this->config->project.' in "'.$reportClass::FILE_FILENAME.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '').'", with format '.$this->config->format."\n");
             $report->generate( $this->config->projects_root.'/projects/'.$this->config->project);
+        } elseif ($this->config->file === Reports::STDOUT) {
+            display('Building report for project '.$this->config->project.' to stdout, with format '.$this->config->format."\n");
+            echo $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, Reports::STDOUT);
         } else {
-            $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, $this->config->file);
+            // to files + extension
+            $filename = basename($this->config->file);
+            if (in_array($filename, array('.', '..'))) {
+                $filename = $reportClass::FILE_FILENAME;
+            }
+            display('Building report for project '.$this->config->project.' in "'.$filename.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '').'", with format '.$this->config->format."\n");
+            $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, $filename);
         }
         display('Reported '.$report->getCount().' messages in '.$this->config->format);
-        $end = microtime(true);
 
+        $end = microtime(true);
         display('Processing time : '.number_format($end - $begin, 2).'s');
+
         $this->datastore->addRow('hash', array($this->config->format => $this->config->file));
         display('Done');
     }

@@ -29,7 +29,8 @@ use Exakat\Phpexec;
 use Exakat\Reports\Reports;
 
 class Owasp extends Reports {
-    const FILE_FILENAME  = 'report_owasp';
+    const FILE_FILENAME  = 'owasp';
+    const FILE_EXTENSION = '';
 
     const COLORS = array('A' => '#2ED600',
                          'B' => '#81D900',
@@ -200,6 +201,11 @@ MENU;
     }
 
     public function generate($folder, $name = 'report') {
+        if ($name === self::STDOUT) {
+            print "Can't produce Ambassador format to stdout\n";
+            return false;
+        }
+        
         $this->finalName = $folder.'/'.$name;
         $this->tmpName = $folder.'/.'.$name;
 
@@ -230,10 +236,6 @@ MENU;
     }
 
     private function initFolder() {
-        if ($this->finalName === '') {
-            return "Can't produce this report format to stdout. It needs a file name.";
-        }
-
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);
@@ -381,7 +383,7 @@ MENU;
             $analyzersList = makeList($analyzers);
         
             $res = $this->sqlite->query(<<<SQL
-SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) ORDER BY count
+SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) AND count >= 0 ORDER BY count
 SQL
 );
             $count = 0;
@@ -397,7 +399,7 @@ SQL
                 if ($row['count'] == 0) {
                     $row['grade'] = 'A';
                 } else {
-                    $grade = min(ceil(log($row['count']) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                    $grade = min(ceil(log($row['count'] + 1) / log(count(self::COLORS))), count(self::COLORS) - 1);
                     $row['grade'] = chr(66 + $grade - 1); // B to F
                 }
                 $row['color'] = self::COLORS[$row['grade']];
@@ -439,7 +441,7 @@ SQL
             $analyzersList = makeList($analyzers);
         
             $res = $this->sqlite->query(<<<SQL
-SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) ORDER BY count
+SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) AND count >= 0 ORDER BY count
 SQL
 );
             $count = 0;

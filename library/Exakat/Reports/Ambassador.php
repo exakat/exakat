@@ -32,6 +32,7 @@ use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
     const FILE_FILENAME  = 'report';
+    const FILE_EXTENSION = '';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
@@ -140,7 +141,12 @@ class Ambassador extends Reports {
         return str_replace("{{".$bloc."}}", $content, $html);
     }
 
-    public function generate($folder, $name = 'report') {
+    public function generate($folder, $name = self::FILE_FILENAME) {
+        if ($name === self::STDOUT) {
+            print "Can't produce Ambassador format to stdout\n";
+            return false;
+        }
+
         $this->finalName = $folder.'/'.$name;
         $this->tmpName = $folder.'/.'.$name;
 
@@ -214,10 +220,6 @@ class Ambassador extends Reports {
     }
 
     protected function initFolder() {
-        if ($this->finalName === null) {
-            return "Can't produce Ambassador format to stdout";
-        }
-
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);

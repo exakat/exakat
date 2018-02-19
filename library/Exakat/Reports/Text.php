@@ -27,7 +27,7 @@ use Exakat\Reports\Helpers\Results;
 
 class Text extends Reports {
     const FILE_EXTENSION = 'txt';
-    const FILE_FILENAME  = ''; // aka, stdout
+    const FILE_FILENAME  = self::STDOUT;
 
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($this->config->thema !== null) {
@@ -85,12 +85,11 @@ class Text extends Reports {
                 }
             }
         }
-
-        if ($name === '') {
-            return $text;
+        
+        if ($name === self::STDOUT) {
+            echo $text;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $text);
-            return true;
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Exakat\Reports;
 use XmlWriter;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Exakat;
+use Exakat\Reports\Helpers\Results;
 
 /**
  * Xml report for PHP_CodeSniffer.
@@ -102,18 +103,17 @@ class Xml extends Reports {
         $this->cachedData .= $out->flush();
     }
 
-    public function generate($folder, $name = null) {
+    public function generate($folder, $name = self::FILE_FILENAME) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
-        $res = $sqlite->query($sqlQuery);
+        $resultsAnalyzers = new Results($sqlite, $list);
+        $resultsAnalyzers->load();
 
         $results = array();
         $titleCache = array();
         $severityCache = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        foreach($resultsAnalyzers->toArray() as $row) {
             if (!isset($results[$row['file']])) {
                 $file = array('errors'   => 0,
                               'warnings' => 0,
@@ -149,11 +149,10 @@ class Xml extends Reports {
 
         $return = '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL.'<phpcs version="'.Exakat::VERSION.'">'.PHP_EOL.$this->cachedData.'</phpcs>'.PHP_EOL;
 
-        if ($name === null) {
-            return $return;
+        if ($name === self::STDOUT) {
+            echo $return;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $return);
-            return true;
         }
     }
 }

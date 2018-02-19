@@ -29,19 +29,13 @@ class Clustergrammer extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'clustergrammer';
 
-    public function generate($folder, $name= 'txt') {
-        $themes = $this->themesToShow;
-
-        $analyzers = array();
-        foreach($themes as $theme) {
-            $analyzers[] = Analyzer::getThemeAnalyzers($theme);
-        }
-        $analyzers = call_user_func_array('array_merge', $analyzers);
+    public function generate($folder, $name = self::FILE_FILENAME) {
+        $analyzers = Analyzer::getThemeAnalyzers($this->themesToShow);
         display( count($analyzers)." analyzers\n");
 
         $res = $this->sqlite->query('SELECT distinct analyzer FROM results WHERE analyzer IN ("'.implode('","', $analyzers).'") ORDER BY analyzer');
         $skeleton = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $skeleton[$row['analyzer']] = 0;
         }
         display( count($skeleton)." distinct analyzers\n");
@@ -56,7 +50,7 @@ class Clustergrammer extends Reports {
         $all = array();
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer IN ("'.implode('","', $analyzers).'") ORDER BY file');
         $total = 0;
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (!isset($all[$row['file']])) {
                 $all[$row['file']] = $skeleton;
             }
@@ -69,10 +63,15 @@ class Clustergrammer extends Reports {
         foreach($all as $file => $values) {
             $txt .= "$file\t".implode("\t", array_values($values))."\n";
         }
-        file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $txt);
+        
+        if ($name === self::STDOUT) {
+            echo $txt;
+        } else {
+            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $txt);
 
-        display( count($all)." issues reported\n");
-        print "Upload ".$name.'.'.self::FILE_EXTENSION." on http://amp.pharm.mssm.edu/clustergrammer/\n";
+            display( count($all)." issues reported\n");
+            print "Upload ".$name.'.'.self::FILE_EXTENSION." on http://amp.pharm.mssm.edu/clustergrammer/\n";
+        }
     }
 }
 

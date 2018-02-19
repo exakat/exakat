@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Reports\Helpers\Results;
 
 class SimpleHtml extends Reports {
     const FILE_EXTENSION = '';
@@ -32,6 +33,11 @@ class SimpleHtml extends Reports {
     protected $tmpName           = '';
 
     public function generate($folder, $name = self::FILE_FILENAME) {
+        if ($name === self::STDOUT) {
+            print "Can't produce Ambassador format to stdout\n";
+            return false;
+        }
+
         $this->finalName = $folder.'/'.$name;
         $this->tmpName = $folder.'/.'.$name;
         
@@ -112,23 +118,21 @@ HTML;
     private function makeList($folder) {
         if ($this->config->thema !== null) {
             $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
-            $list = '"'.implode('", "', $list).'"';
         } elseif ($this->config->program !== null) {
-            $list = '"'.$this->config->program.'"';
+            $list = array($this->config->program);
         } else {
             $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-            $list = '"'.implode('", "', $list).'"';
         }
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
-        $res = $sqlite->query($sqlQuery);
+        $analysisResults = new Results($this->sqlite, $list);
+        $analysisResults->load();
 
         $results = array();
         $titleCache = array();
         $severityCache = array();
         $timeToFixCache = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        foreach($analysisResults->toArray() as $row) {
             if (!isset($results[$row['file']])) {
                 $file = array('errors'   => 0,
                               'warnings' => 0,
@@ -184,10 +188,6 @@ HTML;
     }
 
     private function initFolder() {
-        if ($this->finalName === 'stdout') {
-            return "Can't produce SimpleHtml format to stdout";
-        }
-
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);

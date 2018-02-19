@@ -26,9 +26,9 @@ use Exakat\Analyzer\Analyzer;
 
 class PlantUml extends Reports {
     const FILE_EXTENSION = 'puml';
-    const FILE_FILENAME  = 'exakat.puml';
+    const FILE_FILENAME  = 'exakat';
 
-public function generate($folder, $name= 'puml') {
+    public function generate($folder, $name= self::FILE_FILENAME) {
 
         $res = $this->sqlite->query(<<<SQL
 SELECT name, cit.id, extends, type, namespace, 
@@ -106,7 +106,6 @@ SQL
             }
             
             $puml .= "Class{$ids[$row['implements']]} $link Class{$ids[$row['implementing']]}\n";
-//            $links[] = $ids[$row['implementing']]." -> \"".$ids[$row['implements']]."\" [label=\"$row[type]\"];";
         }
 
         $dot = <<<PUML
@@ -116,8 +115,12 @@ $puml
 
 @enduml
 PUML;
-    
-        file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
+
+        if ($name === self::STDOUT) {
+            echo $dot ;
+        } else {
+            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
+        }
     }
 
     private function str2dot($str) {

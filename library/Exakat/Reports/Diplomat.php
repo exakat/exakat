@@ -31,6 +31,7 @@ use Exakat\Reports\Reports;
 
 class Diplomat extends Reports {
     const FILE_FILENAME  = 'diplomat';
+    const FILE_EXTENSION = '';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
@@ -135,7 +136,12 @@ MENU;
         return str_replace("{{".$bloc."}}", $content, $html);
     }
 
-    public function generate($folder, $name = 'report') {
+    public function generate($folder, $name = self::FILE_FILENAME) {
+        if ($name == self::STDOUT) {
+            print "Can't produce Diplomat format to stdout\n";
+            return false;
+        }
+
         $this->finalName = $folder.'/'.$name;
         $this->tmpName = $folder.'/.'.$name;
 
@@ -159,10 +165,6 @@ MENU;
     }
 
     protected function initFolder() {
-        if ($this->finalName === null) {
-            return "Can't produce Diplomat format to stdout";
-        }
-
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);

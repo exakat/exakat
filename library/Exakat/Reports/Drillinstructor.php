@@ -31,15 +31,18 @@ use Exakat\Reports\Reports;
 
 class Drillinstructor extends Ambassador {
     const FILE_FILENAME  = 'drill';
+    const FILE_EXTENSION = '';
 
     public function __construct($config) {
         parent::__construct($config);
     }
 
-    public function generate($folder, $name = 'drill') {
-        if ($name === '') {
-            $name = 'drill';
+    public function generate($folder, $name = self::FILE_FILENAME) {
+        if ($name === self::STDOUT) {
+            print "Can't produce DrillInstructor format to stdout\n";
+            return false;
         }
+        
         $this->finalName = $folder.'/'.$name;
         $this->tmpName = $folder.'/.'.$name;
 
@@ -483,7 +486,7 @@ JAVASCRIPT;
             $analyzersList = makeList($analyzers);
         
             $res = $this->sqlite->query(<<<SQL
-SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) ORDER BY count
+SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) AND count >= 0 ORDER BY count
 SQL
 );
             $colors = array('A' => '#00FF00',

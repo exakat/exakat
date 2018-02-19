@@ -27,13 +27,15 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Exakat;
 
 class Inventories extends Reports {
-    const FILE_EXTENSION = 'csv';
+    const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'inventories';
 
-    public function generate($folder, $name = null) {
-        if ($name === null) {
-            $name = self::FILE_FILENAME;
+    public function generate($folder, $name = self::FILE_FILENAME) {
+        if ($name == self::STDOUT) {
+            print "Can't produce Inventories format to stdout\n";
+            return false;
         }
+
         $path = $folder.'/'.$name;
 
         if (file_exists($path)) {

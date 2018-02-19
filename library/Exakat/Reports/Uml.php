@@ -28,11 +28,7 @@ class Uml extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'exakat.uml';
 
-    public function generate($folder, $name= 'uml') {
-        if (empty($name)) {
-            $name = self::FILE_FILENAME;
-        }
-
+    public function generate($folder, $name= self::FILE_FILENAME) {
         $res = $this->sqlite->query(<<<SQL
 SELECT name, cit.id, extends, type, namespace, 
        (SELECT GROUP_CONCAT(method,   "||")   FROM methods    WHERE citId = cit.id) AS methods,
@@ -46,7 +42,11 @@ SQL
         $ids = array();
         $dot = array();
         $links = array();
-        $colors = array('class' => 'darkorange', 'trait' => 'gold', 'interface' => 'skyblue');
+        $colors = array('class'     => 'darkorange', 
+                        'trait'     => 'gold', 
+                        'interface' => 'skyblue',
+                        'native'    => 'brown1',
+                        );
         $subgraphs = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -100,7 +100,10 @@ SELECT implementing, implements, type FROM cit_implements
 SQL
         );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $links[] = $ids[$row['implementing']]." -> \"".$ids[$row['implements']]."\" [label=\"$row[type]\"];";
+            if (!isset($ids[$row['implements']])) {
+                $ids[$row['implements']] = $row['implements'];
+            }
+            $links[] = "{$ids[$row['implementing']]} -> \"{$ids[$row['implements']]}\" [label=\"$row[type]\"];";
         }
 
         $dot = <<<DOT
@@ -124,7 +127,11 @@ SQL
 DOT
         .$this->subgraphs($dot)."\n\n".implode("\n", $links)."\n}\n";
     
-        file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
+        if ($name === Reports::STDOUT) {
+            echo $dot;
+        } else {
+            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
+        }
     }
 
     private function str2dot($str) {
@@ -141,12 +148,14 @@ DOT
             if (is_int($key)) {
                 $r .= $a;
             } else {
+                $nextName = "$nsname$key\\";
+                $nextNameDot = addslashes($nextName);
                 $r .= "subgraph cluster_$id { 
         style=filled;
-        label=\"$nsname$key\";
+        label=\"$nextNameDot\";
         color=\"$level\";
         ";
-                $r .= $this->subgraphs($a, $level + 1, $nsname.'\\\\'.$key);
+                $r .= $this->subgraphs($a, $level + 1, $nextName);
                 $r .= "}\n";
             }
         }

@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Reports\Helpers\Results;
 
 class RadwellCode extends Reports {
     const FILE_EXTENSION = 'txt';
@@ -50,18 +51,17 @@ class RadwellCode extends Reports {
 
                              );
 
-    public function generate($folder, $name = null) {
+    public function generate($folder, $name = self::FILE_FILENAME) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = makeList($list);
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
-        $res = $sqlite->query($sqlQuery);
+        $resultsAnalyzers = new Results($sqlite, $list);
+        $resultsAnalyzers->load();
 
         $results = array();
         $titleCache = array();
         $severityCache = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($resultsAnalyzers->toArray() as $row) {
             if (!isset($results[$row['file']])) {
                 $file = array('errors'   => 0,
                               'warnings' => 0,
@@ -102,11 +102,10 @@ class RadwellCode extends Reports {
             }
         }
 
-        if ($name === null) {
-            return $text;
+        if ($name === Reports::STDOUT) {
+            echo $text;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $text);
-            return true;
         }
     }
 }

@@ -34,7 +34,7 @@ class Results {
         $this->analyzer = $analyzer;
         
         if (is_string($analyzer)) {
-            $this->analyzerList = "\"$analyzer\"";
+            $this->analyzerList = "'$analyzer'";
         } elseif (is_array($analyzer)) {
             $this->analyzerList = makeList($analyzer);
         }
