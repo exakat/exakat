@@ -35,6 +35,7 @@ class BetterRand extends Analyzer {
 
         // sha1(microtime())
         $this->atomFunctionIs(array('\microtime', 
+                                    '\time',
                                     ))
              ->inIs('ARGUMENT')
              ->functioncallIs(array('\md5',
@@ -45,6 +46,7 @@ class BetterRand extends Analyzer {
                                     '\crypt',
                                     '\str_rot13',
                                     '\strrev',
+                                    '\uniqid',
                                     '\base64_encode',
                                     ));
         $this->prepareQuery();
