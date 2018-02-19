@@ -68,7 +68,6 @@ Exakat produces various reports. Some are general, covering various aspects in a
 
   * Ambassador
   * AmbassadorNoMenu
-  * Devoops
   * Drillinstructor
   * Text
   * Xml
@@ -76,6 +75,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * PlantUml
   * None
   * SimpleHtml
+  * Owasp
   * PhpConfiguration
   * PhpCompilation
   * Inventories
@@ -149,6 +149,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/gnupgp <http://www.php.net/manual/en/book.gnupg.php>`_
 * `ext/grpc <http://www.grpc.io/>`_
 * `ext/hash <http://www.php.net/manual/en/book.hash.php>`_
+* `ext/hrtime <http://php.net/manual/en/intro.hrtime.php>`_
 * ext/pecl_http
 * `ext/ibase <http://php.net/manual/en/book.ibase.php>`_
 * `ext/iconv <http://php.net/iconv>`_
@@ -315,6 +316,12 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.1.5
+
+  * Possible Infinite Loop (Structures/PossibleInfiniteLoop ; Analyze)
+  * Should Use Math (Structures/ShouldUseMath ; Suggestions)
+  * ext/hrtime (Extensions/Exthrtime)
 
 * 1.1.4
 
@@ -1841,6 +1848,7 @@ List of external links mentionned in this documentation.
 * `Apache <http://php.net/manual/en/book.apache.php>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
+* `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array_filter <https://php.net/array_filter>`_
@@ -1884,6 +1892,7 @@ List of external links mentionned in this documentation.
 * `Creating the required configuration and files <https://www.melistechnology.com/MelisTechnology/resources/documentation/back-office/create-a-custom-tool/Creatingtherequiredconfiguration>`_
 * `crypt <http://www.php.net/crypt>`_
 * `Cryptography Extensions <http://php.net/manual/en/refs.crypto.php>`_
+* `CSPRNG <http://php.net/manual/en/book.csprng.php>`_
 * `Ctype funtions <http://php.net/manual/en/ref.ctype.php>`_
 * `curl <http://www.php.net/curl>`_
 * `Curl for PHP <http://php.net/manual/en/book.curl.php>`_
@@ -1922,12 +1931,14 @@ List of external links mentionned in this documentation.
 * `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_
 * `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_
 * `exakat/exakat <https://hub.docker.com/r/exakat/exakat/>`_
+* `Exception::__construct <http://php.net/manual/en/exception.construct.php>`_
 * `Exceptions <http://php.net/manual/en/language.exceptions.php>`_
 * `Exchangeable image information <http://php.net/manual/en/book.exif.php>`_
 * `expect <http://php.net/manual/en/book.expect.php>`_
 * `ext-http <https://github.com/m6w6/ext-http>`_
 * `ext/ast <https://pecl.php.net/package/ast>`_
 * `ext/gender <http://php.net/manual/en/book.gender.php>`_
+* `ext/hrtime <http://php.net/manual/en/intro.hrtime.php>`_
 * `ext/inotify <http://php.net/manual/en/book.inotify.php>`_
 * `ext/lua <http://php.net/manual/en/book.lua.php>`_
 * `ext/memcached <http://php.net/manual/en/book.memcached.php>`_
@@ -1945,8 +1956,8 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
@@ -2008,8 +2019,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
@@ -2079,6 +2090,7 @@ List of external links mentionned in this documentation.
 * `Process Control <http://php.net/manual/en/book.pcntl.php>`_
 * `proctitle <http://php.net/manual/en/book.proctitle.php>`_
 * `Properties <http://php.net/manual/en/language.oop5.properties.php>`_
+* `Property overloading <http://php.net/manual/en/language.oop5.overloading.php#language.oop5.overloading.members>`_
 * `Pspell <http://php.net/manual/en/book.pspell.php>`_
 * `PSR-11 : Dependency injection container <https://github.com/container-interop/fig-standards/blob/master/proposed/container.md>`_
 * `PSR-13 : Link definition interface <http://www.php-fig.org/psr/psr-13/>`_
@@ -2121,6 +2133,7 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
@@ -2178,6 +2191,7 @@ List of external links mentionned in this documentation.
 * `XSL extension <http://php.net/manual/en/intro.xsl.php>`_
 * `YAML Ain't Markup Language <http://www.yaml.org/>`_
 * `Yii <http://www.yiiframework.com/>`_
+* `Yoda Conditions <https://en.wikipedia.org/wiki/Yoda_conditions>`_
 * `Zend Framework 1.10 <https://framework.zend.com/manual/1.10/en/manual.html>`_
 * `Zend Framework 1.11 <https://framework.zend.com/manual/1.11/en/manual.html>`_
 * `Zend Framework 1.12 <https://framework.zend.com/manual/1.12/en/manual.html>`_

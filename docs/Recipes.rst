@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Wed, 14 Feb 2018 08:20:09 +0000
-.. comment: Generation hash : 4ed287c5b917c5aaa26f01be6fc7b043cb67e6d0
+.. comment: Generation date : Mon, 19 Feb 2018 21:40:49 +0000
+.. comment: Generation hash : dc1c6ebd4dc6a83d90a42d730c111a5ef991b47c
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 340 analysis
+Total : 341 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -272,6 +272,7 @@ Total : 340 analysis
 * :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
 * :ref:`Php/NoReferenceForTernary`
 * :ref:`Phpinfo`
+* :ref:`Possible Infinite Loop <possible-infinite-loop>`
 * :ref:`Pre-increment`
 * :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Preprocessable`
@@ -965,7 +966,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 40 analysis
+Total : 41 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Already Parents Interface <already-parents-interface>`
@@ -994,6 +995,7 @@ Total : 40 analysis
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Reuse Variable <reuse-variable>`
 * :ref:`Should Use Coalesce <should-use-coalesce>`
+* :ref:`Should Use Math <should-use-math>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Should Use array_filter() <should-use-array\_filter()>`
 * :ref:`Slice Arrays First <slice-arrays-first>`
