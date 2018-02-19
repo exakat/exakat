@@ -32,6 +32,8 @@ class AddZero extends Analyzer {
              ->codeIs(array('+=', '-='))
              ->outIs('RIGHT')
              ->is('intval', 0)
+             ->is('boolean', false)
+             ->atomIsNot(array('Arrayliteral'))
              ->back('first');
         $this->prepareQuery();
 
@@ -39,6 +41,8 @@ class AddZero extends Analyzer {
         $this->atomIs('Addition')
              ->outIs(array('LEFT', 'RIGHT'))
              ->is('intval', 0)
+             ->is('boolean', false)
+             ->atomIsNot(array('Arrayliteral'))
              ->back('first');
         $this->prepareQuery();
 
@@ -46,6 +50,8 @@ class AddZero extends Analyzer {
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->is('intval', 0)
+             ->is('boolean', false)
+             ->atomIsNot(array('Arrayliteral'))
              ->back('first')
              ->outIs('LEFT')
              ->atomIs('Variable')
