@@ -215,7 +215,7 @@ class Ambassador extends Reports {
 
     protected function initFolder() {
         if ($this->finalName === null) {
-            return "Can't produce Devoops format to stdout";
+            return "Can't produce Ambassador format to stdout";
         }
 
         // Clean temporary destination

@@ -160,7 +160,7 @@ MENU;
 
     protected function initFolder() {
         if ($this->finalName === null) {
-            return "Can't produce Devoops format to stdout";
+            return "Can't produce Diplomat format to stdout";
         }
 
         // Clean temporary destination

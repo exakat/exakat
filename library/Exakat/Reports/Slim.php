@@ -173,7 +173,7 @@ MENU;
 
     protected function initFolder() {
         if ($this->finalName === '') {
-            return "Can't produce Devoops format to stdout";
+            return "Can't produce Slim format to stdout";
         }
 
         // Clean temporary destination
