@@ -31,6 +31,15 @@ use Exakat\Reports\Reports;
 class Owasp extends Reports {
     const FILE_FILENAME  = 'report_owasp';
 
+    const COLORS = array('A' => '#2ED600',
+                         'B' => '#81D900',
+                         'C' => '#D5DC00',
+                         'D' => '#DF9100',
+                         'E' => '#E23E00',
+                         'F' => '#E50016',
+                         
+                         );
+
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
@@ -321,7 +330,7 @@ MENU;
         foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
             $analyzer = Analyzer::getInstance($analyzer, null, $this->config);
             $description = $analyzer->getDescription();
-            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
+            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.$description->getName().'" id="'.$description->getName().'">'.$description->getName().'</a></h2>';
 
             $badges = array();
             $v = $description->getVersionAdded();
@@ -362,10 +371,10 @@ MENU;
             $levelRows = '';
             $total = 0;
             if (empty($analyzers)) {
-                $levelRows .= "<tr><td>Nothing here</td><td>&nbsp;</td><td style=\"background-color: $row[color]\">-</td></tr>\n";
-                $levels .= '<tr><td style="background-color: #bbbbbb">'.$section.'</td>
-                            <td style="background-color: #bbbbbb">N/A</td></td>
-                            <td >N/A</td></tr>'.PHP_EOL.
+                $levelRows .= "<tr><td>-</td><td>&nbsp;</td><td>-</td></tr>\n";
+                $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">'.$section.'</td>
+                            <td style="background-color: lightgrey">-</td></td>
+                            <td style="background-color: lightgrey; font-weight: bold; font-size: 20; text-align: center"">N/A</td></tr>'.PHP_EOL.
                        $levelRows;
                 continue;
             }
@@ -375,13 +384,6 @@ MENU;
 SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) ORDER BY count
 SQL
 );
-            $colors = array('A' => '#00FF00',
-                            'B' => '#32CC00',
-                            'C' => '#669900',
-                            'D' => '#996600',
-                            'E' => '#CC3300',
-                            'F' => '#FF0000',
-                            );
             $count = 0;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini');
@@ -395,24 +397,28 @@ SQL
                 if ($row['count'] == 0) {
                     $row['grade'] = 'A';
                 } else {
-                    $grade = min(ceil(log($row['count']) / log(count($colors))), count($colors) - 1);
+                    $grade = min(ceil(log($row['count']) / log(count(self::COLORS))), count(self::COLORS) - 1);
                     $row['grade'] = chr(66 + $grade - 1); // B to F
                 }
-                $row['color'] = $colors[$row['grade']];
+                $row['color'] = self::COLORS[$row['grade']];
                 
                 $total += $row['count'];
-                $count += (int) $row['count'] === 0;
+                $count += (int) ($row['count'] === 0);
 
-                $levelRows .= "<tr><td><a href=\"issues.html#analyzer=$row[name]\" title=\"$ini[name]\">$ini[name]</a></td><td>$row[count]</td><td style=\"background-color: $row[color]\">$row[grade]</td></tr>\n";
+                $levelRows .= "<tr><td><a href=\"issues.html#analyzer=$row[name]\" title=\"$ini[name]\">$ini[name]</a></td><td>$row[count]</td><td style=\"background-color: $row[color]; color: white; font-weight: bold; font-size: 20; text-align: center; \">$row[grade]</td></tr>\n";
             }
 
-            $grade = floor($count / (count($analyzers)) * (count($colors) - 1));
-            $grade = chr(65 + $grade); // B to F
-            $color = $colors[$grade];
+            if ($total === 0) {
+                $grade = 'A';
+            } else {
+                $grade = min(ceil(log($total) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                $grade = chr(65 + $grade); // B to F
+            }
+            $color = self::COLORS[$grade];
             
-            $levels .= '<tr><td style="background-color: #bbbbbb">'.$section.'</td>
-                            <td style="background-color: #bbbbbb">'.$total.'</td></td>
-                            <td style="background-color: '.$color.'">'.$grade.'</td></tr>'.PHP_EOL.
+            $levels .= '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">'.$section.'</td>
+                            <td style="background-color: lightgrey">'.$total.'</td></td>
+                            <td style="background-color: '.$color.'; font-weight: bold; font-size: 20; text-align: center; ">'.$grade.'</td></tr>'.PHP_EOL.
                        $levelRows;
         }
 
@@ -436,13 +442,6 @@ SQL
 SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer in ($analyzersList) ORDER BY count
 SQL
 );
-            $colors = array('A' => '#00FF00',
-                            'B' => '#32CC00',
-                            'C' => '#669900',
-                            'D' => '#996600',
-                            'E' => '#CC3300',
-                            'F' => '#FF0000',
-                            );
             $count = 0;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini');
@@ -456,21 +455,25 @@ SQL
                 if ($row['count'] == 0) {
                     $row['grade'] = 'A';
                 } else {
-                    $grade = min(ceil(log($row['count']) / log(count($colors))), count($colors) - 1);
+                    $grade = min(ceil(log($row['count']) / log(count(self::COLORS))), count(self::COLORS) - 1);
                     $row['grade'] = chr(66 + $grade - 1); // B to F
                 }
-                $row['color'] = $colors[$row['grade']];
+                $row['color'] = self::COLORS[$row['grade']];
                 
                 $total += $row['count'];
                 $count += (int) $row['count'] === 0;
             }
 
-            $grade = floor($count / (count($analyzers)) * (count($colors) - 1));
-            $grade = chr(65 + $grade); // B to F
-            $color = $colors[$grade];
+            if ($total === 0) {
+                $grade = 'A';
+            } else {
+                $grade = min(ceil(log($total) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                $grade = chr(65 + $grade); // B to F
+            }
+            $color = self::COLORS[$grade];
             
-            $levels .= '<tr><td style="background-color: #bbbbbb">'.$section.'</td>
-                            <td style="background-color: #bbbbbb">&nbsp;</td></td>
+            $levels .= '<tr style="border-top: 3px solid black; border-bottom: 3px solid black;"><td style="background-color: lightgrey">'.$section.'</td>
+                            <td style="background-color: lightgrey">&nbsp;</td></td>
                             <td style="background-color: '.$color.'">'.$grade.'</td></tr>'.PHP_EOL;
         }
 
