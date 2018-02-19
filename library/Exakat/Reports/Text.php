@@ -23,30 +23,29 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Reports\Helpers\Results;
 
 class Text extends Reports {
     const FILE_EXTENSION = 'txt';
-    const FILE_FILENAME  = 'exakat';
+    const FILE_FILENAME  = ''; // aka, stdout
 
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($this->config->thema !== null) {
             $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
-            $list = '"'.implode('", "', $list).'"';
         } elseif ($this->config->program !== null) {
-            $list = '"'.$this->config->program.'"';
+            $list = $this->config->program;
         } else {
             $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-            $list = '"'.implode('", "', $list).'"';
         }
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
-        $res = $sqlite->query($sqlQuery);
+        $analysisResults = new Results($this->sqlite, $list);
+        $analysisResults->load();
 
         $results = array();
         $titleCache = array();
         $severityCache = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        foreach($analysisResults->toArray() as $row) {
             if (!isset($results[$row['file']])) {
                 $file = array('errors'   => 0,
                               'warnings' => 0,
