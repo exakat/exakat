@@ -23,18 +23,25 @@
 namespace Exakat\Reports\Helpers;
 
 class Results {
-    protected $sqlite   = null;
-    protected $analyzer = '';
-    protected $values   = array();
-    protected $count    = -1;
+    protected $sqlite       = null;
+    protected $analyzer     = '';
+    protected $analyzerList = '';
+    protected $values       = array();
+    protected $count        = -1;
     
     public function __construct(\Sqlite3 $sqlite, $analyzer) {
         $this->sqlite = $sqlite;
         $this->analyzer = $analyzer;
+        
+        if (is_string($analyzer)) {
+            $this->analyzerList = "\"$analyzer\"";
+        } elseif (is_array($analyzer)) {
+            $this->analyzerList = makeList($analyzer);
+        }
     }
     
     public function load(){
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$this->analyzer.'"');
+        $res = $this->sqlite->query('SELECT fullcode, file, line, analyzer FROM results WHERE analyzer IN ('.$this->analyzerList.')');
         
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $row['htmlcode'] = PHPSyntax($row['fullcode']);
