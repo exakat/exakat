@@ -156,6 +156,7 @@ function unparse_url($parsed_url) {
     return $scheme.$user.$pass.$host.$port.$path.$query.$fragment;
 }
 
+// Returns a list of unique values, when all values are arrays
 function array_array_unique($array) {
     $return = array();
     
