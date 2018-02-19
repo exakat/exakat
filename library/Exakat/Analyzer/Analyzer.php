@@ -1459,13 +1459,13 @@ GREMLIN
         return $this;
     }
 
-    public function goToFunction($type = array('Function', 'Method', 'Closure', 'Magicmethod')) {
+    public function goToFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
         $this->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )', makeArray($type));
         
         return $this;
     }
 
-    public function hasNoFunction($type = array('Function', 'Closure', 'Method')) {
+    public function hasNoFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
         return $this->hasNoInstruction($type);
     }
 
@@ -1681,7 +1681,7 @@ GREMLIN
     }
 
     public function hasFunction() {
-        $this->hasInstruction(array('Function', 'Method', 'Closure', 'Magicmethod'));
+        $this->hasInstruction(self::$FUNCTIONS_ALL);
         
         return $this;
     }
