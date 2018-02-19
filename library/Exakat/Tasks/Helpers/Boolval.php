@@ -36,9 +36,13 @@ class Boolval extends Plugin {
         }
 
         switch ($atom->atom) {
-            case 'Integer' :
             case 'Real' :
-                $atom->boolean = (int) $atom->code;
+                // $atom->code is a string
+                $atom->boolean = (int) (bool) (real) $atom->code;
+                break;
+
+            case 'Integer' :
+                $atom->boolean = (int) (bool) (int) $atom->code;
                 break;
 
             case 'Boolean' :
