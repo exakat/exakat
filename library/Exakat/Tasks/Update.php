@@ -28,6 +28,17 @@ use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Vcs\Bazaar;
+use Exakat\Vcs\Composer;
+use Exakat\Vcs\Copy;
+use Exakat\Vcs\EmptyCode;
+use Exakat\Vcs\Git;
+use Exakat\Vcs\Mercurial;
+use Exakat\Vcs\Svn;
+use Exakat\Vcs\Symlink;
+use Exakat\Vcs\Tarbz;
+use Exakat\Vcs\Targz;
+use Exakat\Vcs\Zip;
 
 class Update extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -74,95 +85,58 @@ class Update extends Tasks {
         
         switch(true) {
             // symlink case
+            case $this->config->project_vcs === 'zip' :
+            case $this->config->project_vcs === 'tgz' :
+            case $this->config->project_vcs === 'tbz' :
             case $this->config->project_vcs === 'symlink' :
-                // Nothing to do, the symlink is here for that
+                // Nothing to do just ignore
                 break;
 
             // copy case
-            case $this->config->project_vcs === 'copy' :
-                // Remove and copy again
-                $total = rmdirRecursive($this->config->projects_root.'/projects/'.$project.'/code/');
-                display("$total files were removed");
-
-                $total = copyDir(realpath($this->config->project_url), $this->config->projects_root.'/projects/'.$project.'/code');
-                display("$total files were copied");
+            case $this->config->copy === true :
+                $vcs = new Copy($project, $this->config->projects_root);
+                $new = $vcs->update();
+                display("Source copied again");
                 break;
 
             // Git case
             case file_exists($path.'/code/.git') :
                 display('Git pull for '.$project);
-                $res = shell_exec('cd '.$path.'/code/; git branch | grep \\*');
-                $branch = substr(trim($res), 2);
-                
-                if (strpos($branch, ' detached at ') !== false) {
-                    $resInitial = shell_exec('cd '.$path.'/code/; git checkout master --quiet; git pull');
-                    $branch = 'master';
-                    
-                } else {
-                    $resInitial = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
-                }
-
-                $date = trim(shell_exec('cd '.$path.'/code/; git pull --quiet; git log -1 --format=%cd '));
-                $resFinal = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
-                if (strpos($resFinal, ' ') !== false) {
-                    list($resFinal, ) = explode(' ', $resFinal);
-                }
-
-                if ($resFinal != $resInitial) {
-                    display( "Git updated to commit $resFinal (Last commit : $date)");
-                } else {
-                    display( "No update available (Last commit : $date)");
-                }
-
+                $vcs = new Git($project, $this->config->projects_root);
+                $new = $vcs->update();
+                display("Updated git version $new");
                 break;
 
             // svn case
             case file_exists($path.'/code/.svn') :
                 display('SVN update '.$project);
-                $res = shell_exec('cd '.$path.'/code/; svn update');
-                if (!preg_match('/Updated to revision (\d+)\./', $res, $r)) {
-                    preg_match('/At revision (\d+)/', $res, $r);
-                }
-
-                display( "SVN updated to revision $r[1]");
-
+                $vcs = new Svn($project, $this->config->projects_root);
+                $new = $vcs->update();
+                display("SVN updated to revision $r[1]");
                 break;
 
             // bazaar case
             case file_exists($path.'/code/.bzr') :
                 display('Bazaar update '.$project);
-                $res = shell_exec('cd '.$path.'/code/; bzr update 2>&1');
-                preg_match('/revision (\d+)/', $res, $r);
-
-                display( "Bazaar updated to revision $r[1]");
-
+                $vcs = new Bazaar($project, $this->config->projects_root);
+                $new = $vcs->update();
+                display( "Bazaar updated to revision $new");
                 break;
 
             // mercurial
             case file_exists($path.'/code/.hg') :
                 display('Mercurial update '.$project);
-                $res = shell_exec('cd '.$path.'/code/; hg pull 2>&1; hg update; hg log -l 1');
-                preg_match('/changeset:\s+(\S+)/', $res, $changeset);
-                preg_match("/date:\s+([^\n]+)/", $res, $date);
-
-                display( "Mercurial updated to revision $changeset[1] ($date[1])");
-
+                $vcs = new Mercurial($project, $this->config->projects_root);
+                $new = $vcs->update();
+                display("Mercurial updated to revision $new");
                 break;
 
             // composer case
             case $this->config->project_vcs === 'composer' :
-                display('Composer update '.$project);
-                $res = shell_exec('cd '.$path.'/code/; composer -q install ');
-
-                $json = file_get_contents($path.'/code/composer.lock');
-                $json = json_decode($json);
-
-                foreach($json->packages as $package) {
-                    if ($package->name == $this->config->project_url) {
-                        display( "Composer updated to revision ".$package->source->reference.' ( version : '.$package->version.' )');
-                    }
-                }
-
+                display("Composer update $project");
+                $vcs = new Composer($project, $this->config->projects_root);
+                $new = $vcs->update();
+                display("Composer updated to version $new");
                 break;
 
             default :

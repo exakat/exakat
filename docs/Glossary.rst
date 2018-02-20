@@ -204,6 +204,7 @@ Glossary
 
     + `count()`
 
+      + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`Getting Last Element <getting-last-element>`
       + :ref:`No Count With 0 <no-count-with-0>`
@@ -321,6 +322,14 @@ Glossary
       + :ref:`Should Use Foreach <should-use-foreach>`
       + :ref:`Use List With Foreach <use-list-with-foreach>`
 
+    + `feof()`
+
+      + :ref:`Possible Infinite Loop <possible-infinite-loop>`
+
+    + `fgets()`
+
+      + :ref:`Possible Infinite Loop <possible-infinite-loop>`
+
     + `file()`
 
       + :ref:`Join file() <join-file()>`
@@ -336,6 +345,7 @@ Glossary
     + `fopen()`
 
       + :ref:`@ Operator <@-operator>`
+      + :ref:`Possible Infinite Loop <possible-infinite-loop>`
       + :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 
     + `for()`
@@ -357,6 +367,10 @@ Glossary
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
+
+    + `fread()`
+
+      + :ref:`Possible Infinite Loop <possible-infinite-loop>`
 
     + `func_get_arg()`
 
@@ -505,6 +519,7 @@ Glossary
     + `microtime()`
 
       + :ref:`Timestamp Difference <timestamp-difference>`
+      + :ref:`Use random_int() <use-random\_int()>`
 
     + `mkdir()`
 
@@ -748,6 +763,10 @@ Glossary
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 
+    + `uniqid()`
+
+      + :ref:`Use random_int() <use-random\_int()>`
+
     + `unserialize()`
 
       + :ref:`Unserialize Second Arg <unserialize-second-arg>`
@@ -838,6 +857,7 @@ Glossary
       + :ref:`Parent First <parent-first>`
       + :ref:`Redefined Default <redefined-default>`
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
+      + :ref:`Should Chain Exception <should-chain-exception>`
       + :ref:`Should Use Local Class <should-use-local-class>`
       + :ref:`Strange Names For Methods <strange-names-for-methods>`
       + :ref:`Throw In Destruct <throw-in-destruct>`

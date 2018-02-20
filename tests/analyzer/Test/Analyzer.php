@@ -6,6 +6,8 @@ use Exakat\Phpexec;
 use Exakat\Analyzer\Analyzer as ExakatAnalyzer;
 
 include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
+$config = new \Exakat\Config($GLOBALS['argv']);
+\Exakat\Analyzer\Analyzer::$staticConfig = $config;
 
 class Analyzer extends \PHPUnit_Framework_TestCase {
     public function generic_test($file) {

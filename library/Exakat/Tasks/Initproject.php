@@ -29,6 +29,17 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\HelperException;
 use Exakat\Project;
+use Exakat\Vcs\Bazaar;
+use Exakat\Vcs\Composer;
+use Exakat\Vcs\Copy;
+use Exakat\Vcs\EmptyCode;
+use Exakat\Vcs\Git;
+use Exakat\Vcs\Mercurial;
+use Exakat\Vcs\Svn;
+use Exakat\Vcs\Symlink;
+use Exakat\Vcs\Tarbz;
+use Exakat\Vcs\Targz;
+use Exakat\Vcs\Zip;
 
 class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -147,6 +158,12 @@ class Initproject extends Tasks {
 
             // default initial config. Found in test project.
             $phpversion = $this->config->phpversion;
+            if ($this->config->composer === true) {
+                $vendor = '';
+            } else {
+                $vendor = "ignore_dirs[] = /vendor\n";
+            }
+
             $configIni = <<<INI
 ;Main PHP version for this code.
 phpversion = $phpversion
@@ -169,11 +186,9 @@ ignore_dirs[] = /sql
 ignore_dirs[] = /test
 ignore_dirs[] = /tests
 ignore_dirs[] = /tmp
-ignore_dirs[] = /vendor
 ignore_dirs[] = /version
 ignore_dirs[] = /var
-
-
+$vendor
 
 ;Included dirs or files, relative to code source root. Default to all.
 ;Those are added after ignoring directories
@@ -203,178 +218,94 @@ INI;
 
         $skipFiles           = false;
 
-        if (!file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
-            switch (true) {
-                // Symlink
-                case ($this->config->symlink === true) :
-                    display('Symlink initialization : '.realpath($repositoryURL));
-                    symlink(realpath($repositoryURL), $this->config->projects_root.'/projects/'.$project.'/code');
-                    break 1;
-
-                // Initialization by copy
-                case ($this->config->copy === true) :
-                    display('Copy initialization');
-                    $total = copyDir(realpath($repositoryURL), $this->config->projects_root.'/projects/'.$project.'/code');
-                    display($total.' files were copied');
-                    break 1;
-
-                // Empty initialization
-                case ($repositoryURL === '' || $repositoryURL === false) :
-                    display('Empty initialization');
-                    $skipFiles = true;
-
-                    break 1;
-
-                // composer archive (early in the list, as this won't have 'scheme'
-                case ($this->config->composer === true) :
-                    display('Initialization with composer');
-
-                    $res = shell_exec('composer --version');
-                    if (strpos($res, 'Composer') === false) {
-                        throw new HelperException('Composer');
-                    }
-
-                    // composer install
-                    $composer = new \stdClass();
-                    $composer->{'minimum-stability'} = 'dev';
-                    $composer->require = new \stdClass();
-                    $composer->require->$repositoryURL = 'dev-master';
-                    $json = json_encode($composer, JSON_PRETTY_PRINT);
-                    mkdir($this->config->projects_root.'/projects/'.$project.'/code', 0755);
-                    file_put_contents($this->config->projects_root.'/projects/'.$project.'/code/composer.json', $json);
-                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'/code; composer -q install');
-
-                    break 1;
-
-                // SVN
-                case (isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'svn' || $this->config->svn === true) :
-
-                    $res = shell_exec('svn --version');
-                    if (strpos($res, 'svn') === false) {
-                        throw new HelperException('SVN');
-                    }
-                    display('SVN initialization');
-                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repositoryURL).' code');
-                    break 1;
-
-                // Bazaar
-                case ($this->config->bzr === true) :
-                    $res = shell_exec('bzr --version');
-                    if (strpos($res, 'Bazaar') === false) {
-                        throw new HelperException('Bazar');
-                    }
-                    display('Bazaar initialization');
-                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; bzr branch '.escapeshellarg($repositoryURL).' code');
-                    break 1;
-
-                // HG
-                case ($this->config->hg === true) :
-                    $res = shell_exec('hg --version');
-                    if (strpos($res, 'Mercurial') === false) {
-                        throw new HelperException('Mercurial');
-                    }
-                    display('Mercurial initialization');
-                    shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; hg clone '.escapeshellarg($repositoryURL).' code');
-                    break 1;
-
-                // Tbz archive
-                case ($this->config->tbz === true) :
-                    display('Download the tar.bz2');
-                    $binary = file_get_contents($repositoryURL);
-                    display('Saving');
-                    $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tgz';
-                    file_put_contents($archiveFile, $binary);
-                    display('Unarchive');
-                    shell_exec('tar -jxf '.$archiveFile.' --directory '.$this->config->projects_root.'/projects/'.$project.'/code/');
-                    display('Cleanup');
-                    unlink($archiveFile);
-                    break 1;
-
-                // tgz archive
-                case ($this->config->tgz === true) :
-                    display('Download the tar.gz');
-                    $binary = file_get_contents($repositoryURL);
-                    display('Saving');
-                    $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tgz';
-                    file_put_contents($archiveFile, $binary);
-                    display('Unarchive');
-                    mkdir($this->config->projects_root.'/projects/'.$project.'/code/', 0755);
-                    shell_exec('tar -zxf '.$archiveFile.' -C '.$this->config->projects_root.'/projects/'.$project.'/code/');
-                    display('Cleanup');
-                    unlink($archiveFile);
-                    break 1;
-
-                // zip archive
-                case ($this->config->zip === true) :
-                    $res = shell_exec('zip --version');
-                    if (strpos($res, 'Zip') === false) {
-                        throw new HelperException('zip');
-                    }
-
-                    display('Download the zip');
-                    $binary = file_get_contents($repositoryURL);
-                    display('Saving');
-                    $archiveFile = tempnam(sys_get_temp_dir(), 'archiveZip').'.zip';
-                    file_put_contents($archiveFile, $binary);
-                    display('Unzip');
-                    shell_exec('unzip '.$archiveFile.' -d '.$this->config->projects_root.'/projects/'.$project.'/code/');
-                    display('Cleanup');
-                    unlink($archiveFile);
-                    break 1;
-
-                // Git
-                // Git is last, as it will act as a default
-                case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] === 'git') || $this->config->git === true) :
-                    $res = shell_exec('git --version');
-                    if (strpos($res, 'git') === false) {
-                        throw new HelperException('git');
-                    }
-                    
-                    display('Git initialization');
-                    if (isset($repositoryDetails['user'])) {
-                        $repositoryDetails['user'] = escapeshellarg($repositoryDetails['user']);
-                    } else {
-                        $repositoryDetails['user'] = 'exakat';
-                    }
-                    if (isset($repositoryDetails['pass'])) {
-                        $repositoryDetails['pass'] = escapeshellarg($repositoryDetails['pass']);
-                    } else {
-                        $repositoryDetails['pass'] = 'exakat';
-                    }
-                    
-                    unset($repositoryDetails['query']);
-                    unset($repositoryDetails['fragment']);
-                    $repositoryNormalizedURL = unparse_url($repositoryDetails);
-
-                    $shell = 'cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryNormalizedURL;
-                    if (!empty($this->config->branch) &&
-                        $this->config->branch !== 'master') {
-                        display("Check out with branch ".$this->config->branch);
-                        $shell .= ' -b '.$this->config->branch.' ';
-
-                    } elseif (!empty($this->config->tag)) {
-                        display("Check out with tag ".$this->config->tag);
-                        $shell .= ' -b '.$this->config->tag.' ';
-
-                    }
-                    $shell .= ' code 2>&1 ';
-                    $shellResult = shell_exec($shell);
-
-                    if (($offset = strpos($shellResult, 'fatal: ')) !== false) {
-                        $errorMessage = str_replace($repositoryNormalizedURL, $repositoryURL, $shellResult);
-                        $errorMessage = trim(substr($shellResult, $offset + 7));
-                        $this->datastore->addRow('hash', array('init error' => $errorMessage ));
-                        display('An error prevented code initialization : "'.$errorMessage.'"'.PHP_EOL.'No code was loaded.');
-
-                        $skipFiles = true;
-                    }
-                    break 1;
-
-                default :
-                    display('No Initialization');
-            }
-        } elseif (file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
+        if (file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
             display('Folder "code" is already existing. Leaving it intact.');
+        }
+
+        switch (true) {
+            // Symlink
+            case ($this->config->symlink === true) :
+                display('Symlink initialization : '.realpath($repositoryURL));
+                $vcs = new Copy($project, $this->config->projects_root);
+                break;
+
+            // Initialization by copy
+            case ($this->config->copy === true) :
+                display('Copy initialization');
+                $vcs = new Copy($project, $this->config->projects_root);
+                break;
+
+            // Empty initialization
+            case ($repositoryURL === '' || $repositoryURL === false) :
+                display('Empty initialization');
+                $vcs = new EmptyCode($project, $this->config->projects_root);
+                $repositoryURL = '';
+
+                $skipFiles = true;
+                break;
+
+            // composer archive (early in the list, as this won't have 'scheme'
+            case ($this->config->composer === true) :
+                display('Initialization with composer');
+                $vcs = new Composer($project, $this->config->projects_root);
+                break;
+
+            // SVN
+            case (isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'svn' || $this->config->svn === true) :
+                display('SVN initialization');
+                $vcs = new Svn($project, $this->config->projects_root);
+                break;
+
+            // Bazaar
+            case ($this->config->bzr === true) :
+                display('Bazaar initialization');
+                $vcs = new Bazaar($project, $this->config->projects_root);
+                break;
+
+            // HG
+            case ($this->config->hg === true) :
+                display('Mercurial initialization');
+                $vcs = new Mercurial($project, $this->config->projects_root);
+                break;
+
+            // Tbz archive
+            case ($this->config->tbz === true) :
+                display('Download the tar.bz2');
+                $vcs = new Tarbz($project, $this->config->projects_root);
+                break;
+
+            // tgz archive
+            case ($this->config->tgz === true) :
+                display('Download the tar.gz');
+                $vcs = new Targz($project, $this->config->projects_root);
+                break;
+
+            // zip archive
+            case ($this->config->zip === true) :
+                display('Download the zip');
+                $vcs = new Zip($project, $this->config->projects_root);
+                break;
+
+            // Git
+            // Git is last, as it will act as a default
+            case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] === 'git') || $this->config->git === true) :
+                display('Download with git');
+                $vcs = new Git($project, $this->config->projects_root);
+                break;
+
+            default :
+                display('Empty initialization');
+                $vcs = new EmptyCode($project, $this->config->projects_root);
+                $skipFiles = true;
+        }
+
+        try {
+            $vcs->clone($repositoryURL);
+        } catch (VcsError $e) {
+            $this->datastore->addRow('hash', array('init error' => $e->getMessage() ));
+            display('An error prevented code initialization : "'.$errorMessage.'"'.PHP_EOL.'No code was loaded.');
+            
+            return;
         }
 
         display('Counting files');

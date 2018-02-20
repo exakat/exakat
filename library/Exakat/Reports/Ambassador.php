@@ -32,6 +32,7 @@ use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
     const FILE_FILENAME  = 'report';
+    const FILE_EXTENSION = '';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
@@ -140,7 +141,12 @@ class Ambassador extends Reports {
         return str_replace("{{".$bloc."}}", $content, $html);
     }
 
-    public function generate($folder, $name = 'report') {
+    public function generate($folder, $name = self::FILE_FILENAME) {
+        if ($name === self::STDOUT) {
+            print "Can't produce Ambassador format to stdout\n";
+            return false;
+        }
+
         $this->finalName = $folder.'/'.$name;
         $this->tmpName = $folder.'/.'.$name;
 
@@ -175,6 +181,8 @@ class Ambassador extends Reports {
         $this->generateComplexExpressions();
         $this->generateVisibilitySuggestions();
         $this->generateMethodSize();
+        
+        $this->generateConfusingVariables();
 
         // Compatibility
         $this->generateCompilations();
@@ -212,10 +220,6 @@ class Ambassador extends Reports {
     }
 
     protected function initFolder() {
-        if ($this->finalName === null) {
-            return "Can't produce Devoops format to stdout";
-        }
-
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);
@@ -2049,7 +2053,7 @@ SQL;
         $results->load();
         
         foreach($results->toArray() as $row) {
-            $errorMessages .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
+            $errorMessages .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
         $html = $this->getBasedPage('error_messages');
@@ -2223,7 +2227,7 @@ HTML;
         $results->load();
 
         foreach($results->toArray() as $row) {
-            $dynamicCode .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
+            $dynamicCode .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
         $html = $this->getBasedPage('dynamic_code');
@@ -2238,7 +2242,7 @@ HTML;
         $results->load();
 
         foreach($results->toArray() as $row) {
-            $theGlobals .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
+            $theGlobals .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
         }
 
         $html = $this->getBasedPage('globals');
@@ -2291,7 +2295,7 @@ HTML;
             $results->load();
 
            foreach($results->toArray() as $row) {
-                $theTable .= "<tr><td>{$row['fullcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
+                $theTable .= "<tr><td>{$row['htmlcode']}</td><td>{$row['file']}</td><td>{$row['line']}</td></tr>\n";
             }
 
             $html = $this->getBasedPage('inventories');
@@ -3236,6 +3240,46 @@ JAVASCRIPT;
         $this->putBasedPage('files_tree', $html);
     }
 
+    private function generateConfusingVariables() {
+
+        $results = new Results($this->sqlite, 'Variables/CloseNaming');
+        $results->load();
+        $variables = array_unique($results->getColumn('fullcode'));
+        
+        $figures = range(0, 9);
+        $results = array();
+        foreach($variables as $id1 => $var1) {
+            foreach($variables as $id2 => $var2) {
+                if ($id1 >= $id2) { continue; }
+                if (mb_strtolower($var1) === mb_strtolower($var2)) {
+                    $results[] = [$var1, $var2, 'Different by case only'];
+                    continue;
+                }
+                if (levenshtein($var1, $var2) === 1) {
+                    $results[] = [$var1, $var2, 'Too few differences'];
+                    continue;
+                }
+                if (str_replace('_', '', $var1) === str_replace('_', '', $var2)) {
+                    $results[] = [$var1, $var2, 'Different by _ only'];
+                    continue;
+                }
+                if (str_replace($figures, '', $var1) === str_replace($figures, '', $var2)) {
+                    $results[] = [$var1, $var2, 'Different by figures only'];
+                    continue;
+                }
+            }
+        }
+        
+        $results = array_map(function($row) { 
+            return "<tr><td>$row[0]</td><td>$row[1]</td><td>$row[2]</td></tr>\n";
+        }, $results);
+        $results = join('', $results);
+
+        $html = $this->getBasedPage('variables_confusing');
+        $html = $this->injectBloc($html, 'CONTENT', $results);
+        $this->putBasedPage('variables_confusing', $html);
+    }
+    
     private function generateAppinfo() {
         $data = new Data\Appinfo($this->sqlite);
         $data->prepare();

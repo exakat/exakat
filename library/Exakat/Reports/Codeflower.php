@@ -32,7 +32,12 @@ class Codeflower extends Reports {
     private $tmpName     = '';
     private $finalName   = '';
 
-    public function generate($folder, $name= 'codeflower') {
+    public function generate($folder, $name = self::FILE_FILENAME) {
+        if ($name === self::STDOUT) {
+            print "Can't produce Codeflower format to stdout\n";
+            return false;
+        }
+
         $this->finalName = $folder.'/'.$name;
         $this->tmpName = $folder.'/.'.$name;
 
@@ -207,10 +212,6 @@ SQL
     }
 
     private function initFolder() {
-        if ($this->finalName === 'stdout') {
-            return "Can't produce Codeflower format to stdout";
-        }
-
         // Clean temporary destination
         if (file_exists($this->tmpName)) {
             rmdirRecursive($this->tmpName);

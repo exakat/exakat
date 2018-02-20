@@ -26,7 +26,7 @@ class Intval extends Plugin {
     public $name = 'intval';
     public $type = 'integer';
 
-    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition');
+    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Addition', 'String');
     
     public function run($atom, $extras) {
         foreach($extras as $extra) {
@@ -47,6 +47,8 @@ class Intval extends Plugin {
                     // PHP 7 will just stop.
                     // PHP 5 will work until it fails
                     $actual = octdec(substr($value, 1));
+                } elseif ($value[0] === '+' || $value[0] === '-') {
+                    $actual = (int) pow(-1, substr_count($value, '-')) * (int) strtr($value, '+-', '  ');
                 } else {
                     $actual = (int) $value;
                 }
@@ -56,7 +58,7 @@ class Intval extends Plugin {
 
             case 'Real' :
             case 'String' :
-                $atom->intval   = (int) trim($atom->code, '"\'');
+                $atom->intval   = (int) trimOnce($atom->code);
                 break;
     
             case 'Boolean' :
@@ -64,6 +66,7 @@ class Intval extends Plugin {
                 break;
     
             case 'Null' :
+            case 'Void' :
                 $atom->intval = 0;
                 break;
     
@@ -72,9 +75,6 @@ class Intval extends Plugin {
                 break;
     
             case 'Addition' :
-                if ($extras['LEFT']->intval === '')  { break; }
-                if ($extras['RIGHT']->intval === '')  { break; }
-    
                 if ($atom->code === '+') {
                     $atom->intval = $extras['LEFT']->intval + 
                                     $extras['RIGHT']->intval;
@@ -84,14 +84,11 @@ class Intval extends Plugin {
                 break;
 
             case 'Multiplication' :
-                if ($extras['LEFT']->intval === '')  { break; }
-                if ($extras['RIGHT']->intval === '')  { break; }
-
                 if ($atom->code === '*') {
                     $atom->intval = (int) ($extras['LEFT']->intval * $extras['RIGHT']->intval);
-                } elseif ($atom->code === '/') {
+                } elseif ($atom->code === '/' && $extras['RIGHT']->intval != 0) {
                     $atom->intval = (int) ($extras['LEFT']->intval / $extras['RIGHT']->intval);
-                } elseif ($atom->code === '%') {
+                } elseif ($atom->code === '%' && $extras['RIGHT']->intval != 0) {
                     $atom->intval = (int) ($extras['LEFT']->intval % $extras['RIGHT']->intval);
                 }
                 break;
@@ -121,11 +118,38 @@ class Intval extends Plugin {
                     $atom->intval = $extras['LEFT']->intval && $extras['RIGHT']->intval;
                 } elseif (mb_strtolower($atom->code) === 'xor') {
                     $atom->intval = $extras['LEFT']->intval xor $extras['RIGHT']->intval;
+                } elseif ($atom->code === '<=>') {
+                    $atom->intval = $extras['LEFT']->intval <=> $extras['RIGHT']->intval;
                 }
                 break;
 
             case 'Concatenation' : 
-                $atom->intval = (int) $atom->noDelimiter;
+                $intval = array_column($extras, 'intval');
+                $atom->intval = (int) implode('', $intval);
+                break;
+
+            case 'Ternary' : 
+                if ($extras['CONDITION']->intval) {
+                    $atom->intval = (int) $extras['THEN']->intval;
+                } else {
+                    $atom->intval = (int) $extras['ELSE']->intval;
+                }
+                break;
+
+            case 'Coalesce' : 
+                if ($extras['LEFT']->intval) {
+                    $atom->intval = (int) $extras['LEFT']->intval;
+                } else {
+                    $atom->intval = (int) $extras['RIGHT']->intval;
+                }
+                break;
+
+            case 'Bitshift' : 
+                if ($atom->code === '>>') {
+                    $atom->intval = $extras['LEFT']->intval >> $extras['RIGHT']->intval;
+                } elseif ($atom->code === '<<') {
+                    $atom->intval = $extras['LEFT']->intval << $extras['RIGHT']->intval;
+                }
                 break;
 
             case 'Comparison' : 

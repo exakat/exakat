@@ -36,16 +36,25 @@ class Boolval extends Plugin {
         }
 
         switch ($atom->atom) {
-            case 'Integer' :
             case 'Real' :
-                $atom->boolean = (int) $atom->code;
+                // $atom->code is a string
+                $atom->boolean = (int) (bool) (real) $atom->code;
+                break;
+
+            case 'Integer' :
+                $atom->boolean = (int) (bool) (int) $atom->code;
                 break;
 
             case 'Boolean' :
                 $atom->boolean = (int) (mb_strtolower($atom->code) === 'true');
                 break;
 
+            case 'String' :
+                $atom->boolean = (int) (trimOnce($atom->code) !== '');
+                break;
+
             case 'Null' :
+            case 'Void' :
                 $atom->boolean = 0;
                 break;
                 
@@ -64,9 +73,9 @@ class Boolval extends Plugin {
             case 'Multiplication' :
                 if ($atom->code === '*') {
                     $atom->boolean = (int) (bool) ($extras['LEFT']->boolean * $extras['RIGHT']->boolean);
-                } elseif ($atom->code === '/') {
+                } elseif ($atom->code === '/' && $extras['RIGHT']->boolean !== 0) {
                     $atom->boolean = (int) (bool) ($extras['LEFT']->boolean / $extras['RIGHT']->boolean);
-                } elseif ($atom->code === '%') {
+                } elseif ($atom->code === '%' && $extras['RIGHT']->boolean !== 0) {
                     $atom->boolean = (int) (bool) ($extras['LEFT']->boolean % $extras['RIGHT']->boolean);
                 }
                 break;
@@ -96,11 +105,30 @@ class Boolval extends Plugin {
                     $atom->boolean = $extras['LEFT']->boolean && $extras['RIGHT']->boolean;
                 } elseif (mb_strtolower($atom->code) === 'xor') {
                     $atom->boolean = $extras['LEFT']->boolean xor $extras['RIGHT']->boolean;
+                } elseif ($atom->code === '<=>') {
+                    $atom->boolean = $extras['LEFT']->boolean <=> $extras['RIGHT']->boolean;
                 }
                 break;
 
             case 'Concatenation' : 
-                $atom->boolean = (bool) $atom->fullcode;
+                $boolean = array_column($extras, 'boolean');
+                $atom->boolean = (bool) implode('', $boolean);
+                break;
+
+            case 'Ternary' : 
+                if ($extras['CONDITION']->boolean) {
+                    $atom->boolean = $extras['THEN']->boolean;
+                } else {
+                    $atom->boolean = $extras['ELSE']->boolean;
+                }
+                break;
+
+            case 'Bitshift' : 
+                if ($atom->code === '>>') {
+                    $atom->boolean = $extras['LEFT']->boolean >> $extras['RIGHT']->boolean;
+                } elseif ($atom->code === '<<') {
+                    $atom->boolean = $extras['LEFT']->boolean << $extras['RIGHT']->boolean;
+                }
                 break;
 
             case 'Comparison' : 

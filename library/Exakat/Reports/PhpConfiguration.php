@@ -29,7 +29,7 @@ class PhpConfiguration extends Reports {
     const FILE_EXTENSION = 'ini-dist';
     const FILE_FILENAME  = 'php.suggested';
 
-    public function generate($folder, $name = null) {
+    public function generate($folder, $name = self::STDOUT) {
         $final = '';
 
         $themed = Analyzer::getThemeAnalyzers('Appinfo');
@@ -153,11 +153,10 @@ disable_classes = $classesList
 
         $final .= "\n\n".$directives;
 
-        if ($name === null) {
-            return $final ;
+        if ($name === self::STDOUT) {
+            echo $final ;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $final);
-            return true;
         }
     }
 }

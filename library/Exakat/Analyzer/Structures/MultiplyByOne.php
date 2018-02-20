@@ -31,7 +31,8 @@ class MultiplyByOne extends Analyzer {
         $this->atomIs('Assignation')
              ->codeIs(array('*=', '/=', '%=', '**='))
              ->outIs('RIGHT')
-             ->codeIs('1')
+             ->is('intval', 1)
+             ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -39,34 +40,33 @@ class MultiplyByOne extends Analyzer {
         $this->atomIs('Multiplication')
              ->codeIs('*')
              ->outIs(array('LEFT', 'RIGHT'))
-             ->codeIs('1')
+             ->is('intval', 1)
+             ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Multiplication')
              ->codeIs(array('/', '%'))
              ->outIs('RIGHT')
-             ->codeIs('1')
+             ->is('intval', 1)
+             ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
              ->back('first');
         $this->prepareQuery();
 
         // $x = $y ** 1
         $this->atomIs('Power')
              ->outIs('RIGHT')
-             ->codeIs('1')
+             ->is('intval', 1)
+             ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
              ->back('first');
         $this->prepareQuery();
 
         // 1 ** $a;
         $this->atomIs('Power')
              ->outIs('LEFT')
-             ->codeIs(array('1', '0'))
+             ->is('intval', 1)
+             ->regexIs('noDelimiter', '^1\\\\.?0*\\$')
              ->back('first');
-        $this->prepareQuery();
-        
-        // -0
-        $this->atomIs('Integer')
-             ->codeIs('-0');
         $this->prepareQuery();
     }
 }

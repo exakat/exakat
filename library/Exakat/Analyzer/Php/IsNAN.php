@@ -26,8 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class IsNAN extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs('\\is_nan')
-             ->back('first');
+        // is_nan();
+        $this->atomFunctionIs('\\is_nan');
         $this->prepareQuery();
     }
 }

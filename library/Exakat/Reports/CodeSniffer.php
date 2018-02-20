@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Reports\Helpers\Results;
 
 class CodeSniffer extends Reports {
     const FILE_EXTENSION = 'txt';
@@ -31,22 +32,20 @@ class CodeSniffer extends Reports {
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($this->config->thema !== null) {
             $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
-            $list = makeList($list);
         } elseif ($this->config->program !== null) {
-            $list = '"'.$this->config->program.'"';
+            $list = array($this->config->program);
         } else {
             $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-            $list = makeList($list);
         }
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
-        $res = $sqlite->query($sqlQuery);
+        $analysisResults = new Results($this->sqlite, $list);
+        $analysisResults->load();
 
         $results = array();
         $titleCache = array();
         $severityCache = array();
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+        foreach($analysisResults->toArray() as $row) {
             if (!isset($results[$row['file']])) {
                 $file = array('errors'   => 0,
                               'warnings' => 0,
@@ -57,7 +56,7 @@ class CodeSniffer extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = Analyzer::getInstance($row['analyzer'], $this->config);
+                $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
             }
@@ -106,12 +105,11 @@ class CodeSniffer extends Reports {
             $text .= $separator;
             $text .= "\n\n\n";
         }
-
-        if ($name === Reports::STDOUT) {
-            return $text;
+        
+        if ($name === self::STDOUT) {
+            echo $text;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $text);
-            return true;
         }
     }
 }

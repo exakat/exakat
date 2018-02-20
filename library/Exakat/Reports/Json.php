@@ -70,7 +70,7 @@ class Json extends Reports {
             $this->count();
         }
 
-        if ($name === Reports::STDOUT) {
+        if ($name === '') {
             return json_encode($results);
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, json_encode($results));

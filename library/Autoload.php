@@ -67,10 +67,5 @@ if (file_exists(__DIR__.'/../vendor/autoload.php')) {
     include __DIR__.'/../../../../vendor/autoload.php';
 }
 
-$config = new Config($GLOBALS['argv']);
-global $VERBOSE;
-$VERBOSE = $config->verbose;
-\Exakat\Analyzer\Analyzer::$staticConfig = $config;
-
 
 ?>

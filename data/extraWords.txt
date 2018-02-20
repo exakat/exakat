@@ -6,6 +6,7 @@ _GET
 _POST
 _REQUEST
 _SESSION
+_SERVER
 array_replace
 eval
 foreach
@@ -48,3 +49,18 @@ hardcoded
 hardcodes
 hardcode
 hardcoding
+myString
+unsetting
+namespace
+goto
+ifthen
+PHP_VERSION
+date.timezone
+bitshift
+Bcrypt
+MD5
+SHA1
+SHA512
+display_error
+DOC_ROOT
+PHP_EOL

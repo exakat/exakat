@@ -54,8 +54,9 @@ class Tinkergraph {
     private $project = null;
     private $id = 0;
 
-    private $tinkergraph = null;
-    private $path = null;
+    private $tinkergraph    = null;
+    private $path           = null;
+    private $pathDefinition = null;
 
     public function __construct($gremlin, $config) {
         $this->config = $config;
@@ -70,7 +71,7 @@ class Tinkergraph {
 
     private function cleandDb() {
         display("Cleaning DB in tinkergraph\n");
-        $clean = new CleanDb(new Tinkergraph($this->config), $this->config, Tasks::IS_SUBTASK);
+        $clean = new CleanDb(new Tinkergraph($this->gremlin, $this->config), $this->config, Tasks::IS_SUBTASK);
         $clean->run();
     }
 

@@ -44,6 +44,7 @@ class GSNeo4j extends Graph {
     private $status     = self::UNCHECKED;
     
     private $log        = null;
+    private $db         = null;
     
     public function __construct($config) {
         parent::__construct($config);

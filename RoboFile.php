@@ -265,7 +265,6 @@ LICENCE;
         $folders = array('data', 
                          'human', 
                          'library', 
-                         'media/devoops', 
                          'media/devfaceted', 
                          'media/dependencywheel', 
                          'media/codeflower', 

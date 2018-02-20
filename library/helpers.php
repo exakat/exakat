@@ -156,6 +156,7 @@ function unparse_url($parsed_url) {
     return $scheme.$user.$pass.$host.$port.$path.$query.$fragment;
 }
 
+// Returns a list of unique values, when all values are arrays
 function array_array_unique($array) {
     $return = array();
     
@@ -374,6 +375,22 @@ function makeFullnspath($functions, $constant = false) {
         throw new \Exception('Function is of the wrong type : '.var_export($functions));
     }
     return $r;
+}
+
+function trimOnce($string, $trim = '\'"'){
+    $length = strlen($string);
+    if ($length < 2) {
+        return $string;
+    }
+
+    if (strpos($trim, $string[0]) !== false &&
+        strpos($trim, $string[$length -1]) !== false &&
+        $string[0] === $string[$length -1]
+         ) {
+        return substr($string, 1, -1);
+    }
+
+    return $string;
 }
 
 ?>

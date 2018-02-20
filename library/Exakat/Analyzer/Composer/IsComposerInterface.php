@@ -40,7 +40,7 @@ class IsComposerInterface extends Analyzer {
         $interfacesFullNP = makeFullNsPath($interfaces);
         
         $this->atomIs('Class')
-             ->outIs('IMPLEMENTS', 'EXTENDS')
+             ->outIs(array('IMPLEMENTS', 'EXTENDS'))
              ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();
 

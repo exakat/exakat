@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 14 Feb 2018 08:20:09 +0000
-.. comment: Generation hash : 4ed287c5b917c5aaa26f01be6fc7b043cb67e6d0
+.. comment: Generation date : Mon, 19 Feb 2018 21:40:49 +0000
+.. comment: Generation hash : dc1c6ebd4dc6a83d90a42d730c111a5ef991b47c
 
 
 .. _$http\_raw\_post\_data:
@@ -156,19 +156,32 @@ $this Is Not For Static Methods
 
 Static methods shouldn't use $this variable.
 
-$this variable represents an object (the current object) and it is not compatible with a static method, which may operate without any object. 
+$this variable represents an object, the current object. It is not compatible with a static method, which may operate without any object. 
+
+While executing a static method, $this is actually set to NULL.
 
 .. code-block:: php
 
    <?php
    
    class foo {
+       static $staticProperty = 1;
+   
+       // Static methods should use static properties
+       static public function 'count() {
+           return self::$staticProperty++;
+       }
+       
+       // Static methods can't use $this
        static public function bar() {
            return $this->a;   // No $this usage in a static method
        }
    }
    
    ?>
+
+
+See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_.
 
 +--------------+---------------------------------------------------------------------------------------------+
 | Command Line | Classes/ThisIsNotForStatic                                                                  |
@@ -197,6 +210,8 @@ PHP 5.6 introduced the operator `'** <http://php.net/manual/en/language.operator
 
 
 If the code needs to be backward compatible to 5.5 or less, don't use the new operator.
+
+See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_.
 
 +--------------+--------------------+
 | Command Line | Php/NewExponent    |
@@ -1065,7 +1080,7 @@ Avoid Large Array Assignation
 #############################
 
 
-Avoid setting large arrays to local variables. This is done everytime the function is called.
+Avoid setting large arrays to local variables. This is done every time the function is called.
 
 There are different ways to avoid this : inject the array, build the array once. Using an constant or even a global variable is faster.
 
@@ -5146,6 +5161,9 @@ Usage of the `'** <http://php.net/manual/en/language.operators.arithmetic.php>`_
    
    ?>
 
+
+See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_.
+
 +--------------+---------------------------------------------------------------------------------+
 | Command Line | Php/ExponentUsage                                                               |
 +--------------+---------------------------------------------------------------------------------+
@@ -5249,7 +5267,7 @@ PHP offers two solutions : `'array_search() <http://www.php.net/array_search>`_ 
    ?>
 
 
-See also `array_search <http://php.net/array_search>`_ and `array_search <http://php.net/array_keys>`_.
+See also `array_search <http://php.net/array_search>`_ and `array_keys <http://php.net/array_keys>`_.
 
 +--------------+----------------------------+
 | Command Line | Structures/GoToKeyDirectly |
@@ -11971,6 +11989,41 @@ It is advised to never leave that kind of instruction in a production code.
 +--------------+---------------------------------+
 
 
+.. _possible-infinite-loop:
+
+Possible Infinite Loop
+######################
+
+
+Loops on files that can't be open results in infinite loop.
+
+`'fgets() <http://www.php.net/fgets>`_, and functions like fgetss, fgetcsv, `'fread() <http://www.php.net/fread>`_, return false when they finish reading, or can't access the file. 
+
+In case the file is not accessible, comparing the result of the reading to something that is falsy, leads to a permanant valid condition. The will only finish when the max_execution_time is reached. 
+
+.. code-block:: php
+
+   <?php
+   
+   $file = fopen('/path/to/file.txt', 'r');
+   // when 'fopen() fails, the next loops is infinite
+   // 'fgets() will always return false, and while will always be true. 
+   while($line = fgets($file) != 'a') {
+       doSomething();
+   }
+   
+   ?>
+
+
+It is recommended to check the file resources when they are opened, and always use === or !== to compare readings. `'feof() <http://www.php.net/feof>`_ is also a reliable function here.
+
++--------------+---------------------------------+
+| Command Line | Structures/PossibleInfiniteLoop |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
+
+
 .. _pre-increment:
 
 Pre-increment
@@ -13483,7 +13536,7 @@ Should Chain Exception
 
 Chain exception to provide more context.
 
-When catching an exception and rethrowing another one, it is recommended to chain the exception : this means providing the original exception, so that the final recipiend has a chance to track the origin of the problem. This doesn't change the thrown message, but provides more information.
+When catching an exception and rethrowing another one, it is recommended to chain the exception : this means providing the original exception, so that the final recipient has a chance to track the origin of the problem. This doesn't change the thrown message, but provides more information.
 
 Note : Chaining requires PHP > 5.3.0.
 
@@ -13498,6 +13551,9 @@ Note : Chaining requires PHP > 5.3.0.
    
        }
    ?>
+
+
+See also `Exception::`'__construct <http://php.net/manual/en/language.oop5.decon.php>`_ <http://php.net/manual/en/exception.construct.php>`_.
 
 +--------------+---------------------------------+
 | Command Line | Structures/ShouldChainException |
@@ -13850,6 +13906,55 @@ Note that a method using a class constant is not considered as using the local c
 +--------------+-----------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                          |
 +--------------+-----------------------------------------------------------------------------------------+
+
+
+.. _should-use-math:
+
+Should Use Math
+###############
+
+
+Use math operators to make the operation clearer.
+
+.. code-block:: php
+
+   <?php
+   
+   // Adding one to self
+   $a *= 2;
+   // same as above
+   $a += $a;
+   
+   // Squaring oneself
+   $a \*\*\= 2;
+   // same as above
+   $a *= $a;
+   
+   // Removing oneself
+   $a = 0;
+   // same as above
+   $a -= $a;
+   
+   // Dividing oneself
+   $a = 1;
+   // same as above
+   $a /= $a;
+   
+   // Dividing oneself
+   $a = 0;
+   // same as above
+   $a %= $a;
+   
+   ?>
+
+
+See also `Mathematical Functions <http://php.net/manual/en/book.math.php>`_.
+
++--------------+--------------------------+
+| Command Line | Structures/ShouldUseMath |
++--------------+--------------------------+
+| Analyzers    | :ref:`Suggestions`       |
++--------------+--------------------------+
 
 
 .. _should-use-prepared-statement:
@@ -15592,7 +15697,7 @@ Timestamp Difference
 
 time() and `'microtime() <http://www.php.net/microtime>`_ shouldn't be used to calculate duration or with durations. 
 
-time() and `'microtime() <http://www.php.net/microtime>`_ are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announcec by IERS.
+time() and `'microtime() <http://www.php.net/microtime>`_ are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announced by IERS.
 
 .. code-block:: php
 
@@ -15610,7 +15715,8 @@ time() and `'microtime() <http://www.php.net/microtime>`_ are subject to variati
 
 When the difference may be rounded to a larger time unit (rounding the difference to days, or several hours), the variation may be ignored safely.
 
-When the difference is very small, it requires a better way to mesure time difference, such as ticks, ext/hrtime, or including a check on the actual time zone (`'ini_get() <http://www.php.net/ini_get>`_ with 'date.timezone').
+When the difference is very small, it requires a better way to measure time difference, such as `Ticks <http://php.net/manual/en/control-structures.declare.php#control-structures.declare.ticks>'_, 
+`ext/hrtime <http://php.net/manual/en/book.hrtime.php>'_, or including a check on the actual time zone (`'ini_get() <http://www.php.net/ini_get>`_ with 'date.timezone').
 
 +--------------+--------------------------------+
 | Command Line | Structures/TimestampDifference |
@@ -16341,6 +16447,26 @@ Undefined Properties
 
 
 List of properties that are not explicitely defined in the class, its parents or traits.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // property definition
+       private bar = 2;
+       
+       function foofoo() {
+           // $this->bar is defined in the class
+           // $this->barbar is NOT defined in the class
+           return $this->bar + $this->barbar;
+       }
+   }
+   
+   ?>
+
+
+See also `Properties <http://php.net/manual/en/language.oop5.properties.php>`_.
 
 +--------------+---------------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/UndefinedProperty                                                                                     |
@@ -18450,6 +18576,8 @@ At worse, `'rand() <http://www.php.net/rand>`_ should be replaced with `'mt_rand
 
 random_int() replaces `'rand() <http://www.php.net/rand>`_, and has no seeding function like `'srand() <http://www.php.net/srand>`_.
 
+Other sources of entropy that should be replaced by random_int() : `'microtime() <http://www.php.net/microtime>`_, `'uniqid() <http://www.php.net/uniqid>`_, time(). Those a often combined with hashing functions and mixed with other sources of entropy, such as a salt.
+
 .. code-block:: php
 
    <?php
@@ -18468,12 +18596,17 @@ random_int() replaces `'rand() <http://www.php.net/rand>`_, and has no seeding f
        // process case of not enoug random values
    }
    
+   // This is also a source of entropy, based on 'srand()
+   // It may simply be replaced by random_int()
+   $a = sha256('uniqid());
    
    ?>
 
 
 Since PHP 7, random_int() along with random_bytes(), provides cryptographically secure pseudo-random bytes, which are good to be used
 when security is involved. openssl_random_pseudo_bytes() may be used when the OpenSSL extension is available.
+
+See also `CSPRNG <http://php.net/manual/en/book.csprng.php>`_ and `OpenSSL <http://php.net/manual/en/book.openssl.php>`_.
 
 +--------------+------------------------------------------------------------+
 | Command Line | Php/BetterRand                                             |
@@ -19937,7 +20070,7 @@ Yoda comparison is a way to write conditions which places literal values on the 
    ?>
 
 
-The objective is to avoid mistaking a comparison to an assignation. If the comparison operateur is mistaken, but the literal is on the left, then an error will be triggered, instead of a silent bug. 
+The objective is to avoid mistaking a comparison to an assignation. If the comparison operator is mistaken, but the literal is on the left, then an error will be triggered, instead of a silent bug. 
 
 .. code-block:: php
 
@@ -19947,6 +20080,10 @@ The objective is to avoid mistaking a comparison to an assignation. If the compa
            // Then condition
        } 
    ?>
+
+
+See also `Yoda Conditions <https://en.wikipedia.org/wiki/Yoda_conditions>`_, 
+`Yoda Conditions: To Yoda or Not to Yoda <https://knowthecode.io/yoda-conditions-yoda-not-yoda>`_.
 
 +--------------+------------------------------------------------+
 | Command Line | Structures/YodaComparison                      |
