@@ -87,9 +87,9 @@ class Strval extends Plugin {
             case 'Multiplication' :
                 if ($atom->code === '*') {
                     $atom->noDelimiter = (string) ((int) $extras['LEFT']->noDelimiter * (int) $extras['RIGHT']->noDelimiter);
-                } elseif ($atom->code === '/' && $extras['RIGHT']->noDelimiter != 0) {
+                } elseif ($atom->code === '/' && (int) $extras['RIGHT']->noDelimiter != 0) {
                     $atom->noDelimiter = (string) ((int) $extras['LEFT']->noDelimiter / (int) $extras['RIGHT']->noDelimiter);
-                } elseif ($atom->code === '%' && $extras['RIGHT']->noDelimiter != 0) {
+                } elseif ($atom->code === '%' && (int) $extras['RIGHT']->noDelimiter != 0) {
                     $atom->noDelimiter = (string) ((int) $extras['LEFT']->noDelimiter % (int) $extras['RIGHT']->noDelimiter);
                 }
                 break;
