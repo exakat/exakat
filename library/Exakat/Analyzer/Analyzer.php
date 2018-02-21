@@ -1192,10 +1192,15 @@ GREMLIN
         }
     }
 
-    protected function outIs($link) {
-        assert(func_num_args() === 1, "Too many arguments for ".__METHOD__);
-        assert($this->assertLink($link));
-        $this->addMethod('out('.$this->SorA($link).')');
+    protected function outIs($link = array()) {
+        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
+        
+        if (empty($link)) {
+            $this->addMethod('out( )');
+        } else {
+            assert($this->assertLink($link));
+            $this->addMethod('out('.$this->SorA($link).')');
+        }
 
         return $this;
     }
@@ -1259,10 +1264,14 @@ GREMLIN
         return $this;
     }
 
-    public function inIs($link) {
-        assert($this->assertLink($link));
-        assert(func_num_args() === 1, "Too many arguments for ".__METHOD__);
-        $this->addMethod('in('.$this->SorA($link).')');
+    public function inIs($link = array()) {
+        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
+        if (empty($link)) {
+            $this->addMethod('in( )');
+        } else {
+            assert($this->assertLink($link));
+            $this->addMethod('in('.$this->SorA($link).')');
+        }
         
         return $this;
     }
