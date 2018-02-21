@@ -27,7 +27,7 @@ use Exakat\Config;
 
 class Exakat {
     const VERSION = '1.1.5';
-    const BUILD = 692;
+    const BUILD = 696;
 
     private $gremlin = null;
     private $config = null;

@@ -35,6 +35,11 @@ class Dependencywheel extends Reports {
     private $matrix       = '';
 
     public function generate($folder, $name= 'wheel') {
+        if ($name === self::STDOUT) {
+            print "Can't produce Dependency Wheel format to stdout\n";
+            return false;
+        }
+
         $this->finalName = $folder.'/'.$name;
         $this->tmpName = $folder.'/.'.$name;
 
@@ -95,7 +100,6 @@ class Dependencywheel extends Reports {
                 } elseif ((int) $ext > 0) {
                     $e = $dict[$ids[$ext]];
                 } else {
-                    var_dump($ext);
                     assert(false, "\$ext is not a string nor an integer.");
                 }
                 

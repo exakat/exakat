@@ -29,7 +29,7 @@ class Composer extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'composer';
 
-    public function generate($folder, $name = null) {
+    public function _generate($analyzerList) {
         $themed = Analyzer::getThemeAnalyzers('Appinfo');
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
         $sources = array();
@@ -81,12 +81,7 @@ class Composer extends Reports {
         
         $final = json_encode($composer, \JSON_PRETTY_PRINT);
 
-        if ($name === Reports::STDOUT) {
-            return $final ;
-        } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $final);
-            return true;
-        }
+        return $final;
     }
 }
 

@@ -21,7 +21,7 @@ Exakat is a PHP static analyzer. It relies on PHP to lint and tokenize the targe
 
 Exakat itself runs on PHP 7.2, with a short selection of extensions. It is tested with PHP 7.0 and more recent.
 
-.. image:: exakat.architecture.png
+.. image:: images/exakat.architecture.png
     :alt: exakat architecture
     
 Source code is imported into exakat using VCS client, like git, SVN, mercurial, tar, zip, bz2 or even symlink. Only reading access is actually required : the code is never modified in any way. 

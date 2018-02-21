@@ -29,7 +29,7 @@ class PhpCompilation extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'compilePHP';
 
-    public function generate($folder, $name = null) {
+    protected function _generate($analyzerList) {
         $themed = Analyzer::getThemeAnalyzers('Appinfo');
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'") AND count > -1');
         $sources = array();
@@ -82,12 +82,8 @@ TEXT
             $final .= implode("\n", $pecl)."\n\n";
         }
         $final .= implode("\n", $return);
-
-        if ($name === Reports::STDOUT) {
-            echo $final ;
-        } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $final);
-        }
+        
+        return $final;
     }
 }
 

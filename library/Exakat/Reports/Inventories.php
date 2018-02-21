@@ -97,23 +97,22 @@ class Inventories extends Reports {
     }
 
     private function saveTable($table, $file) {
-        $res = $this->sqlite->query('SELECT * FROM '.$table);
+        $res = $this->sqlite->query('SELECT variable, type FROM '.$table);
         if ($res === false) {
             file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
             return;
         }
         $step = 0;
-        $row = $res->fetchArray(\SQLITE3_NUM);
-        unset($row['id']);
+        $row = $res->fetchArray(\SQLITE3_ASSOC);
         $fp = fopen($file, 'w+');
 
         ++$step;
         fputcsv($fp, array_keys($row));
         fputcsv($fp, $row);
 
-        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             ++$step;
-            unset($row['id']);
+            $row['variable'] = preg_replace('/^.*?(\$\w+).*?$/', '$1', $row['variable']);
             fputcsv($fp, $row);
         }
         $this->count($step);
