@@ -112,6 +112,7 @@ SQL;
 
             $this->collectFilesDependencies();
             $this->getAtomCounts();
+            $this->collectPhpStructures();
 
             $this->collectStructures();
             $this->collectFunctions();
@@ -882,6 +883,45 @@ GREMLIN;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $this->files[$row['file']] = $row['id'];
         }
+    }
+
+    private function collectPhpStructures() {
+        $this->sqlite->query('DROP TABLE IF EXISTS phpStructures');
+        $this->sqlite->query(<<<SQL
+CREATE TABLE phpStructures (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                              name TEXT,
+                              type TEXT,
+                              count INTEGER
+)
+SQL
+);
+
+        $query = <<<GREMLIN
+g.V().hasLabel('Functioncall').where( __.in('ANALYZED').has("analyzer", "Functions/IsExtFunction"))
+.out('NAME')
+.groupCount('m').by('fullcode').cap('m').next().sort{ it.value.toInteger() };
+GREMLIN;
+        $res = $this->gremlin->query($query);
+
+        $total = 0;
+        $query = array();
+        foreach($res as $row) {
+            $count = current($row);
+            $name = key($row);
+            $query[] = "(null, '".$this->sqlite->escapeString($name)."', 'function', ".$count.")";
+
+            ++$total;
+        }
+
+        if (!empty($query)) {
+            print $query = 'INSERT INTO phpStructures ("id", "name", "type", "count") VALUES '.implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+        display("$total PHP functions\n");
+        
+        // classes, interface, trait
+        // variables
+        // constants
     }
     
     private function collectFunctions() {
