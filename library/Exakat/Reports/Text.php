@@ -29,17 +29,8 @@ class Text extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = self::STDOUT;
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
-        if ($this->config->thema !== null) {
-            $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
-        } elseif ($this->config->program !== null) {
-            $list = $this->config->program;
-        } else {
-            $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        }
-
-        $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $analysisResults = new Results($this->sqlite, $list);
+    public function _generate($analyzerList) {
+        $analysisResults = new Results($this->sqlite, $analyzerList);
         $analysisResults->load();
 
         $results = array();
@@ -86,11 +77,7 @@ class Text extends Reports {
             }
         }
         
-        if ($name === self::STDOUT) {
-            echo $text;
-        } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $text);
-        }
+        return $text;
     }
 }
 

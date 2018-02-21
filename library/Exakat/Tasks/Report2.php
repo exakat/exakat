@@ -73,10 +73,10 @@ class Report2 extends Tasks {
         $report = new $reportClass($this->config);
         if (empty($this->config->file)) {
             display('Building report for project '.$this->config->project.' in "'.$reportClass::FILE_FILENAME.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '').'", with format '.$this->config->format."\n");
-            $report->generate( $this->config->projects_root.'/projects/'.$this->config->project);
+            $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, $report::FILE_FILENAME);
         } elseif ($this->config->file === Reports::STDOUT) {
             display('Building report for project '.$this->config->project.' to stdout, with format '.$this->config->format."\n");
-            echo $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, Reports::STDOUT);
+            $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, Reports::STDOUT);
         } else {
             // to files + extension
             $filename = basename($this->config->file);

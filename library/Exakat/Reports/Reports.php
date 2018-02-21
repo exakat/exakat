@@ -28,10 +28,11 @@ use Exakat\Datastore;
 use Exakat\Dump;
 
 abstract class Reports {
-    const FILE_EXTENSION = 'undefined';
-    const FILE_NAME      = 'undefined';
+//    const FILE_EXTENSION = 'undefined';
+//    const FILE_NAME      = 'undefined';
     
     const STDOUT = 'stdout';
+    const INLINE = 'inline';
 
     static public $FORMATS        = array('Ambassador', 'AmbassadorNoMenu', 'Drillinstructor',
                                           'Text', 'Xml', 'Uml', 'PlantUml', 'None', 'SimpleHtml', 'Owasp',
@@ -67,7 +68,32 @@ abstract class Reports {
         $this->datastore = new Dump($this->config);
     }
 
-    abstract public function generate($dirName, $fileName);
+    protected function _generate($analyzerList) {}
+    
+    public function generate($folder, $name) {
+        if (empty($name)) {
+            // FILE_FILENAME is defined in the children class
+            $name = $this::FILE_FILENAME;
+        }
+
+        if ($this->config->thema !== null) {
+            $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
+        } elseif ($this->config->program !== null) {
+            $list = $this->config->program;
+        } else {
+            $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        }
+
+        $final = $this->_generate($list);
+
+        if ($name === self::STDOUT) {
+            echo $final ;
+        } elseif ($name === self::INLINE) {
+            return $final ;
+        } else {
+            file_put_contents($folder.'/'.$name.'.'.$this::FILE_EXTENSION, $final);
+        }
+    }
 
     protected function count($step = 1) {
         $this->count += $step;

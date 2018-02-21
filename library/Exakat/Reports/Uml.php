@@ -28,7 +28,7 @@ class Uml extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'exakat.uml';
 
-    public function generate($folder, $name= self::FILE_FILENAME) {
+    public function _generate($analyzerList) {
         $res = $this->sqlite->query(<<<SQL
 SELECT name, cit.id, extends, type, namespace, 
        (SELECT GROUP_CONCAT(method,   "||")   FROM methods    WHERE citId = cit.id) AS methods,
@@ -127,11 +127,7 @@ SQL
 DOT
         .$this->subgraphs($dot)."\n\n".implode("\n", $links)."\n}\n";
     
-        if ($name === Reports::STDOUT) {
-            echo $dot;
-        } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
-        }
+        return $dot;
     }
 
     private function str2dot($str) {

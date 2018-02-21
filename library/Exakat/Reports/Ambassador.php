@@ -1981,7 +1981,7 @@ SQL;
 
     protected function generatePhpConfiguration() {
         $phpConfiguration = new PhpCompilation($this->config);
-        $report = $phpConfiguration->generate(null, Reports::STDOUT);
+        $report = $phpConfiguration->generate(null, Reports::INLINE);
 
         $id = strpos($report, "\n\n\n");
         $configline = trim($report);
@@ -3161,7 +3161,11 @@ JAVASCRIPT;
                 }
             }
 
-            $source = @show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
+            $path = dirname($this->tmpName).'/code/'.$row['file'];
+            if (!file_exists($path)) {
+                continue;
+            }
+            $source = @show_source($path, true);
             $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.$this->toHtmlEncoding($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function($x) { static $i = 0; return '<br /><a name="l'.++$i.'" />'; }, $source);
