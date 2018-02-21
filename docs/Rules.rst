@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 19 Feb 2018 21:40:49 +0000
-.. comment: Generation hash : dc1c6ebd4dc6a83d90a42d730c111a5ef991b47c
+.. comment: Generation date : Wed, 21 Feb 2018 10:10:58 +0000
+.. comment: Generation hash : b471bd3aa5add983c1df9be7592cba47b014c95b
 
 
 .. _$http\_raw\_post\_data:
@@ -6849,20 +6849,25 @@ Interpolation
 
 The following strings contain variables that are will be replaced. However, the following characters are ambiguous, and may lead to confusion. 
 
-<?php
+.. code-block:: php
 
-class b { 
-    public $b = 'c';
-    function `'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ { return `'__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_; }
-}
-$x = array(1 => new B());
+   <?php
+   
+   class b { 
+       public $b = 'c';
+       function '__toString() { return '__CLASS__; }
+   }
+   $x = array(1 => new B());
+   
+   // -> after the $x[1] looks like a 2nd dereferencing, but it is not. 
+   print $x[1]->b;
+   // displays : b->b
+   
+   print {$x[1]->b};
+   // displays : c
+   
+   ?>
 
-// -> after the $x[1] looks like a 2nd dereferencing, but it is not. 
-print $x[1]->b;
-// displays : b->b
-
-print {$x[1]->b};
-// displays : c
 
 It is advised to add curly brackets around those structures to make them non-ambiguous.
 
