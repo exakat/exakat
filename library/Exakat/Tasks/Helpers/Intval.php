@@ -31,6 +31,7 @@ class Intval extends Plugin {
     public function run($atom, $extras) {
         foreach($extras as $extra) {
             if ($extra->intval === '')  { 
+                $atom->intval = '';
                 return ; 
             }
         }

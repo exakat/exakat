@@ -30,7 +30,8 @@ class Strval extends Plugin {
     
     public function run($atom, $extras) {
         foreach($extras as $extra) {
-            if ($extra->intval === '')  { 
+            if ($extra->noDelimiter === null)  { 
+                $atom->noDelimiter = null;
                 return ; 
             }
         }
@@ -123,8 +124,8 @@ class Strval extends Plugin {
                 break;
 
             case 'Concatenation' : 
-                $noDelimiter = array_column($extras, 'noDelimiter');
-                $atom->noDelimiter = (string) implode('', $noDelimiter);
+                $noDelimiters = array_column($extras, 'noDelimiter');
+                $atom->noDelimiter = (string) implode('', $noDelimiters);
                 break;
 
             case 'Ternary' : 

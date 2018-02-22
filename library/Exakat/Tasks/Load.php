@@ -4661,7 +4661,6 @@ SQL;
         $concatenation->count       = $rank;
         $concatenation->constant    = $constant;
         
-        // todo No CONCAT is send. 
         $this->runPlugins($concatenation, $concat);
 
         $this->pushExpression($concatenation);
