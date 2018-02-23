@@ -154,16 +154,20 @@ class Project extends Tasks {
         display("Project loaded".PHP_EOL);
         $this->logTime('Loading');
 
+        // Always run this one first
+        $this->analyzeThemes(['First'], $audit_start, true);
+
         // Dump is a child process
         // initialization and first collection (action done once)
         $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -collect';
         shell_exec($shell);
         $this->logTime('Dumped and inited');
 
+
         if ($this->config->program !== null) {
-            $this->analyzeOne($this->config->program, $audit_start);
+            $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);
         } else {
-            $this->analyzeThemes($this->themes, $audit_start);
+            $this->analyzeThemes($this->themes, $audit_start, $this->config->quiet);
         }
 
         display("Analyzed project".PHP_EOL);
@@ -223,7 +227,7 @@ class Project extends Tasks {
         $begin = $end;
     }
 
-    private function analyzeOne($analyzers, $audit_start) {
+    private function analyzeOne($analyzers, $audit_start, $quiet) {
         $this->addSnitch(array('step'    => 'Analyzer',
                                'project' => $this->config->project));
 
@@ -235,7 +239,7 @@ class Project extends Tasks {
                         6 => '-norefresh',
                         7 => '-u'
                         );
-        if ($this->config->quiet === true) {
+        if ($quiet === true) {
             $args[] = '-q';
         }
 
@@ -291,7 +295,7 @@ class Project extends Tasks {
         }
     }
 
-    private function analyzeThemes($themes, $audit_start) {
+    private function analyzeThemes($themes, $audit_start, $quiet) {
         if (empty($themes)) {
             $themes = $this->config->project_themes;
         }
@@ -326,7 +330,7 @@ class Project extends Tasks {
                             6 => '-norefresh',
                             7 => '-u'
                             );
-            if ($this->config->quiet === true) {
+            if ($quiet === true) {
                 $args[] = '-q';
             }
 
