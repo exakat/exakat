@@ -59,6 +59,7 @@ class Incompilable extends Analyzer {
             return array();
         }
         
+        $report = array();
         // Collect version from datastore
         $r = Analyzer::$datastore->getHash('php_version');
         $version = $r[0].$r[2];
