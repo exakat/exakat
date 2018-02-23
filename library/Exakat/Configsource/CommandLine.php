@@ -189,7 +189,9 @@ class CommandLine extends Config {
         }
 
         // Special case for onepage command. It will only work on 'onepage' project
-        if ($this->config['command'] == 'onepage') {
+        if (isset($this->config['command']) && 
+            $this->config['command'] == 'onepage') {
+
             $this->config['project']   = 'onepage';
             $this->config['thema']     = 'OneFile';
             $this->config['format']    = 'OnepageJson';
