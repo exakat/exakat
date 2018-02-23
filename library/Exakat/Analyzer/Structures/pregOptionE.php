@@ -31,7 +31,7 @@ sideEffect{
     base = it.get().value("noDelimiter").replaceAll("\\\\s", "");
     delimiter = base[0];
     if (delimiter == '\\\\') {
-        delimiter = "\\\\\\\\" + base[1];
+        delimiter = base[1];
     }
 
 }
@@ -46,6 +46,7 @@ sideEffect{
     else if (delimiter == "|") { delimiter = "\\\\|"; delimiterFinal = "\\\\|"; } 
     else if (delimiter == "?") { delimiter = "\\\\?"; delimiterFinal = "\\\\?"; } 
     else if (delimiter == "+") { delimiter = "\\\\+"; delimiterFinal = "\\\\+"; } 
+    else if (delimiter == ".") { delimiter = "\\\\."; delimiterFinal = "\\\\."; } 
     else { delimiterFinal = delimiter; } 
 }
 .filter{ delimiter != "\\\\\\\\" }
