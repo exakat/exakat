@@ -10,6 +10,7 @@ Summary
 * `Requirements`_
 * `Quick installation with OSX`_
 * `Quick installation with Debian/Ubuntu`_
+* `Installation guide with Composer`_
 * `Installation guide with Docker`_
 * `Installation guide with Vagrant and Ansible`_
 * `Optional installations`_
@@ -19,7 +20,7 @@ Presentation
 
 Exakat is a PHP static analyzer. It relies on PHP to lint and tokenize the target code; a graph database to process the AST and the tokens; a SQLITE 3 database to store the results and produce the various reports.
 
-Exakat itself runs on PHP 7.2, with a short selection of extensions. It is tested with PHP 7.0 and more recent.
+Exakat itself runs on PHP 7.2, with a short selection of extensions. It is tested with PHP 7.0 and 7.3.
 
 .. image:: images/exakat.architecture.png
     :alt: exakat architecture
@@ -111,6 +112,37 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
 
     php exakat.phar doctor
 
+Quick installation with Composer
+-------------------------------------
+
+Composer installation requires the creation of two folders : config and tinkergraph. This may interfere with your own installation. 'tinkergraph' is used as default name in the installation process, and may be updated later. The config folder is compulsory and can't be renamed.
+
+::
+
+    cd /path/to/code
+    composer require exakat/exakat:~1.1.5
+    wget -O apache-tinkerpop-gremlin-server-3.2.7-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.7/apache-tinkerpop-gremlin-server-3.2.7-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.7 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
+    
+    # Optional : install neo4j engine.
+    cd tinkergraph
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.7
+    cd ..
+
+    php vendor/bin/exakat doctor
+    
+
+When running exakat in composer mode, 
+
+::
+
+    php vendor/bin/exakat init -p sculpin -R https://github.com/sculpin/sculpin.git
+    php vendor/bin/exakat project -p sculpin
+    
+The final audit is now in the projects/sculpin/report directory.
+
 Various versions of PHP
 +++++++++++++++++++++++
 
@@ -118,7 +150,7 @@ You need one version of PHP (at least) to run exakat. This version needs the `cu
 
 Extra PHP-CLI versions allow more checks on the code. They only need to have the `tokenizer <http://www.php.net/tokenizer>`_ extension available.  
 
-Exakat recommends PHP 7.1.0 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.1 and 7.2 (aka php-src master).
+Exakat recommends PHP 7.1.0 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.1, 7.2 and 7.3 (aka php-src master).
 
 To install easily various versions of PHP, use the ondrej repository. Check `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_.
 You may also check the dotdeb repository, at `dotdeb instruction <https://www.dotdeb.org/instructions/>`_. 

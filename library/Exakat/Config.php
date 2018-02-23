@@ -62,7 +62,12 @@ class Config {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->dir_root      = dirname(__DIR__, 2);
             // Run projects in the working directory
-            $this->projects_root = getcwd();
+            if (dirname($_SERVER['SCRIPT_FILENAME']) === 'bin' &&
+                dirname($_SERVER['SCRIPT_FILENAME'], 2) === 'vendor') {
+                $this->projects_root = getcwd();
+            } else {
+                $this->dir_root      = dirname(__DIR__, 2);
+            }
 
             assert_options(ASSERT_ACTIVE, 1);
             assert_options(ASSERT_BAIL, 1);
