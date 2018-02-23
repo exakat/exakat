@@ -66,7 +66,7 @@ class Config {
                 dirname($_SERVER['SCRIPT_FILENAME'], 2) === 'vendor') {
                 $this->projects_root = getcwd();
             } else {
-                $this->dir_root      = dirname(__DIR__, 2);
+                $this->projects_root = dirname(__DIR__, 2);
             }
 
             assert_options(ASSERT_ACTIVE, 1);
