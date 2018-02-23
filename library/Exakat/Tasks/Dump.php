@@ -112,8 +112,8 @@ SQL;
 
             $this->collectFilesDependencies();
             $this->getAtomCounts();
-            $this->collectPhpStructures();
 
+            $this->collectPhpStructures();
             $this->collectStructures();
             $this->collectFunctions();
             $this->collectVariables();
@@ -158,7 +158,7 @@ SQL;
         $datastore->busyTimeout(5000);
         $res = $datastore->query('SELECT * FROM analyzed');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$row['analyzer']] = $row['counts'];
+            $counts[$row['analyzer']] = (int) $row['counts'];
         }
         $this->log->log( 'count analyzed : '.count($counts)."\n");
         $this->log->log( 'counts '.implode(', ', $counts)."\n");
@@ -245,10 +245,10 @@ SQL;
 
         $this->log->log("$class : dumped $saved");
 
-        if ($count == $saved) {
+        if ($count === $saved) {
             display("All $saved results saved for $class\n");
         } else {
-            assert($count == $saved, 'results were not correctly dumped in '.$class. ' '.$saved.'/'.$count);
+            assert($count === $saved, 'results were not correctly dumped in '.$class. ' '.$saved.'/'.$count);
             display("$saved results saved, $count expected for $class\n");
         }
     }
