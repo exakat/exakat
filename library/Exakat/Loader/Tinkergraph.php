@@ -103,7 +103,7 @@ GROUP BY definitions.id
 SQL
 );
        
-        while($row = $res->fetchArray(SQLITE3_NUM)) {
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
             $outE[$row[0]] = explode(',', $row[1]);
         }
 
@@ -122,7 +122,7 @@ GROUP BY calls.id
 SQL
 );
        
-        while($row = $res->fetchArray(SQLITE3_NUM)) {
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
            $inE[$row[0]] = explode(',', $row[1]);
         }
         
