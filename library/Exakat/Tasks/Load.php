@@ -3875,9 +3875,9 @@ SQL;
         } elseif (mb_strtolower($constant->fullcode) === '__method__') {
             if (empty($this->currentClassTrait)) {
                 if (empty($this->currentMethod)) {
-                    $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
-                } else {
                     $constant->noDelimiter = '';
+                } else {
+                    $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
                 }
             } else {
                 if (empty($this->currentMethod)) {
