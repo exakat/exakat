@@ -24,7 +24,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         // initialize Config (needed by phpexec)
         $pwd = getcwd();
         chdir('../../');
-        $config = new \Exakat\Config(array('foo', '-p', 'test'));
+        $config = new \Exakat\Config(array('foo', 'test', '-p', 'test'));
         chdir($pwd);
 
         $analyzerobject = ExakatAnalyzer::getInstance($test_config, null, $config);
