@@ -76,6 +76,7 @@ class Stats extends Reports {
  
                         '?  :'                => 'Ternary',
                         '?: '                 => 'Php/Coalesce',
+                        '?? '                 => 'Php/NullCoalesce',
  
                         'Variables constants' => 'Constants/VariableConstant',
                         'Variables variables' => 'Variables/VariableVariables',
