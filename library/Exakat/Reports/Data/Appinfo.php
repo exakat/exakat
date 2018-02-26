@@ -116,7 +116,7 @@ class Appinfo extends Data {
                             'Array'                   => 'Arrays/Arrayindex',
                             'Multidimensional arrays' => 'Arrays/Multidimensional',
                             'Array short syntax'      => 'Arrays/ArrayNSUsage',
-                            'List short syntax'       => 'Structures/ListShortSyntax',
+                            'List short syntax'       => 'Php/ListShortSyntax',
                             'Variable variables'      => 'Variables/VariableVariables',
 
                             'PHP arrays'              => 'Arrays/Phparrayindex',
