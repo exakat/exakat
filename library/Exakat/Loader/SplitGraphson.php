@@ -111,7 +111,7 @@ SQL
 );
        
         $fp = fopen($this->path.'.def', 'w+');
-        while($row = $res->fetchArray(SQLITE3_NUM)) {
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
             fputcsv($fp, $row);
         }
         fclose($fp);

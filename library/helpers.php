@@ -393,4 +393,8 @@ function trimOnce($string, $trim = '\'"'){
     return $string;
 }
 
+function makeHtml($string) {
+    return htmlentities($string, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+}
+
 ?>
