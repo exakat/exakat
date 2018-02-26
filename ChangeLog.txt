@@ -1,4 +1,4 @@
-Version 1.1.6 (Wei Zheng, coming up)
+Version 1.1.7 (Xu Maogong, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,27 @@ Version 1.1.6 (Wei Zheng, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.1.6 (Wei Zheng, 2018-2-26)
++ Architecture
+    + Created 'First', a recipe of initial analysis
+    + Prepared installation for compose
++ Report
+    + Restored 'INLINE' results 
+    + New reports : Stats
+    + Collect PHP native function cool
++ Analyzer
+    + New analysis : report suggest compact instead of array
+    + New analysis : list with references (PHP 7.3+)
+    + New analysis : report situation where check is done on non-cast value
+    + New analysis : foreach( $array as $o -> $v) as error prone
+    + Handle cases where PHP regex are not compilable anyway
+    + Checked unit tests : 2732 / 2722 test pass (99% pass). 
++ Tokenizer
+    + Propagate constant concatenation values.
+    + Fixed calculation of intval
+    + Refactored Configuration readers
+    + Fixed bug when calculating __METHOD__
 
 Version 1.1.5 (Li Shimin, 2018-02-19)
 + Architecture
