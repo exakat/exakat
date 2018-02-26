@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array('HRTime\Unit',
-                      'HRTime\Unit',
-                      'HRTime\Unit',
-                      'HRTime\StopWatch',
+$expected     = array('HRTime\\Unit',
+                      'HRTime\\Unit',
+                      'HRTime\\Unit',
+                      'HRTime\\StopWatch',
                      );
 
-$expected_not = array('HRTime\Watch',
+$expected_not = array('HRTime\\Watch',
                      );
 
 ?>

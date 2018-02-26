@@ -62,6 +62,8 @@ class LoadFinal extends Tasks {
         
         $this->setConstantDefinition();
 
+        $this->propagateConstants();
+
         display('End load final');
         $this->logTime('Final');
     }
@@ -400,6 +402,27 @@ GREMLIN;
         $this->gremlin->query($query);
         display('Create link between Class constant and definition');
         $this->logTime('Class::constant definition');
+    }
+
+
+    private function propagateConstants() {
+        display("propagating Constant value in Concatenations");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Concatenation")
+     .sideEffect{ x = []; }
+     .where( __.out("CONCAT").hasLabel("Identifier", "Nsname") )
+     .not(where( __.out("CONCAT").not(has("noDelimiter")) ) )
+     .where( __.out("CONCAT").order().by("rank").sideEffect{ x.add( it.get().value("noDelimiter") ) }.count() )
+     .sideEffect{ it.get().property("noDelimiter", x.join("")); }
+     .count();
+GREMLIN;
+
+        $res = $this->gremlin->query($query);
+        display("propagating Constant value in Concatenations");
+
+//        display("propagating Constant value in Operators such as +, *, . ....");
+
     }
 
     private function init() {

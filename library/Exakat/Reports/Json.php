@@ -28,7 +28,7 @@ class Json extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'exakat';
 
-    public function generate($folder, $name = self::FILE_FILENAME) {
+    public function _generate($analyzerList) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
@@ -70,12 +70,7 @@ class Json extends Reports {
             $this->count();
         }
 
-        if ($name === '') {
-            return json_encode($results);
-        } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, json_encode($results));
-            return true;
-        }
+        return json_encode($results);
     }
 }
 

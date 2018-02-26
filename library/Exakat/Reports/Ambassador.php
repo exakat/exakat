@@ -281,11 +281,11 @@ class Ambassador extends Reports {
 
     private function php2html($description){
         $return = str_replace('<br />', '', $description[0]);
-        $return = htmlentities($return);
+        $return = PHPSyntax($return);
         
-        return '</p><pre><code class="php">'
+        return '</p><pre>'
                 .$return
-                .'</code></pre><p>';
+                .'</pre><p>';
     }
 
     protected function setPHPBlocs($description){
@@ -390,7 +390,7 @@ class Ambassador extends Reports {
             foreach($list as $key => $value) {
                 $table .= '
                 <div class="clearfix">
-                   <div class="block-cell">'.$this->toHtmlEncoding($key).'</div>
+                   <div class="block-cell">'.makeHtml($key).'</div>
                    <div class="block-cell text-center">'.$value.'</div>
                  </div>
 ';
@@ -3044,84 +3044,19 @@ JAVASCRIPT;
     }
     
     private function generateStats() {
-        $extensions = array(
-                    'Summary' => array(
-                            'Namespaces'     => 'Namespace',
-                            'Classes'        => 'Class',
-                            'Interfaces'     => 'Interface',
-                            'Trait'          => 'Trait',
-                            'Function'       => 'Functions/RealFunctions',
-                            'Variables'      => 'Variables/RealVariables',
-                            'Constants'      => 'Constants/Constantnames',
-                     ),
-                    'Classes' => array(
-                            'Classes'           => 'Class',
-                            'Class constants'   => 'Classes/ConstantDefinition',
-                            'Properties'        => 'Classes/NormalProperties',
-                            'Static properties' => 'Classes/StaticProperties',
-                            'Methods'           => 'Classes/NormalMethods',
-                            'Static methods'    => 'Classes/StaticMethods',
-                            // Spot Abstract methods
-                            // Spot Final Methods
-                     ),
-                    'Structures' => array(
-                            'Ifthen'              => 'Ifthen',
-                            'Else'                => 'Structures/ElseUsage',
-                            'Switch'              => 'Switch',
-                            'Case'                => 'Case',
-                            'Default'             => 'Default',
-                            'Fallthrough'         => 'Structures/Fallthrough',
-                            'For'                 => 'For',
-                            'Foreach'             => 'Foreach',
-                            'While'               => 'While',
-                            'Do..while'           => 'Dowhile',
-
-                            'New'                 => 'New',
-                            'Clone'               => 'Clone',
-                            'Class constant call' => 'Staticconstant',
-                            'Method call'         => 'Methodcall',
-                            'Static method call'  => 'Staticmethodcall',
-                            'Properties usage'    => 'Property',
-                            'Static property'     => 'Staticproperty',
-
-                            'Throw'               => 'Throw',
-                            'Try'                 => 'Try',
-                            'Catch'               => 'Catch',
-                            'Finally'             => 'Finally',
-
-                            'Yield'               => 'Yield',
-                            'Yield From'          => 'Yieldfrom',
-
-                            '?  :'                => 'Ternary',
-                            '?: '                 => 'Php/Coalesce',
-                            '??'                  => 'Php/NullCoalesce',
-
-                            'Variables constants' => 'Constants/VariableConstants',
-                            'Variables variables' => 'Variables/VariableVariable',
-                            'Variables functions' => 'Functions/Dynamiccall',
-                            'Variables classes'   => 'Classes/VariableClasses',
-                    ),
-                );
-
+        $results = new Stats($this->config);
+        $report = $results->generate(null, Reports::INLINE);
+        $report = json_decode($report);
+        
         $stats = '';
-        foreach($extensions as $section => $hash) {
-            $stats .= "<tr><td colspan=2 bgcolor=#BBB>$section</td></tr>\n";
+        foreach($report as $section => $hash) {
+            $stats .= "<tr><td colspan=2 bgcolor=\"#BBB\">$section</td></tr>\n";
 
-            foreach($hash as $name => $ext) {
-                if (strpos($ext, '/') === false) {
-                    $res = $this->sqlite->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"');
-                    $d = $res->fetchArray(\SQLITE3_ASSOC);
-                    $d = (int) $d['count'];
-                } else {
-                    $res = $this->sqlite->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"');
-                    $d = $res->fetchArray(\SQLITE3_ASSOC);
-                    $d = (int) $d['count'];
-                }
-                $res = $d === -2 ? 'N/A' : $d;
-                $stats .= "<tr><td>$name</td><td>$res</td></tr>\n";
+            foreach($hash as $name => $count) {
+                $stats .= "<tr><td>$name</td><td>$count</td></tr>\n";
             }
         }
-
+        
         $html = $this->getBasedPage('stats');
         $html = $this->injectBloc($html, 'STATS', $stats);
         $this->putBasedPage('stats', $html);
@@ -3166,7 +3101,7 @@ JAVASCRIPT;
                 continue;
             }
             $source = @show_source($path, true);
-            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.$this->toHtmlEncoding($row['file'])."</a></li>\n";
+            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.makeHtml($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function($x) { static $i = 0; return '<br /><a name="l'.++$i.'" />'; }, $source);
             file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], $source);
@@ -3303,7 +3238,7 @@ JAVASCRIPT;
                 }
                 
                 $statusIcon = $this->makeIcon($status);
-                $htmlPoint = $this->toHtmlEncoding($point);
+                $htmlPoint = makeHtml($point);
                 $listPoint[] = <<<HTML
 <li><div style="width: 90%; text-align: left;display: inline-block;">$statusIcon&nbsp;$htmlPoint&nbsp;</div><div style="display: inline-block; width: 10%;"><span class="progress progress-sm"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: $percentage%; color:black;">$percentageDisplay %</div><div>&nbsp;</div></span></li>
 HTML;
@@ -3378,10 +3313,6 @@ HTML;
         } else {
             return '<i class="fa fa-warning" style="color: red"></i>&nbsp;<a href="compatibility_issues.html#analyzer='.$analyzer.'">'.$count.' warnings</a>';
         }
-    }
-    
-    private function toHtmlEncoding($text) {
-        return htmlentities($text, ENT_COMPAT | ENT_HTML401, 'UTF-8');
     }
     
     protected function toId($name) {

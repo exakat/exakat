@@ -39,7 +39,7 @@ class Marmelab extends Reports {
         $res = $this->sqlite->query($sqlQuery);
 
         $results = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
 
             if (!isset($analyzers[$row['analyzer_id']])) {
                 $analyzer = Analyzer::getInstance($row['analyzer_id'], null, $this->config);

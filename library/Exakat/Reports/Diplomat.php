@@ -320,7 +320,7 @@ MENU;
             foreach($list as $key => $value) {
                 $table .= '
                 <div class="clearfix">
-                   <div class="block-cell">'.$this->toHtmlEncoding($key).'</div>
+                   <div class="block-cell">'.makeHtml($key).'</div>
                    <div class="block-cell text-center">'.$value.'</div>
                  </div>
 ';
@@ -2890,7 +2890,7 @@ HTML;
             }
 
             $source = @show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
-            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.$this->toHtmlEncoding($row['file'])."</a></li>\n";
+            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.makeHtml($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function($x) { static $i = 0; return '<br /><a name="l'.++$i.'" />'; }, $source);
             file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], $source);
@@ -2952,7 +2952,7 @@ JAVASCRIPT;
                 }
                 
                 $statusIcon = $this->makeIcon($status);
-                $htmlPoint = $this->toHtmlEncoding($point);
+                $htmlPoint = makeHtml($point);
                 $listPoint[] = <<<HTML
 <li><div style="width: 90%; text-align: left;display: inline-block;">$statusIcon&nbsp;$htmlPoint&nbsp;</div><div style="display: inline-block; width: 10%;"><span class="progress progress-sm"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: $percentage%; color:black;">$percentageDisplay %</div><div>&nbsp;</div></span></li>
 HTML;
@@ -3027,10 +3027,6 @@ HTML;
         } else {
             return '<i class="fa fa-warning" style="color: red"></i>&nbsp;<a href="compatibility_issues.html#analyzer='.$analyzer.'">'.$count.' warnings</a>';
         }
-    }
-    
-    private function toHtmlEncoding($text) {
-        return htmlentities($text, ENT_COMPAT | ENT_HTML401, 'UTF-8');
     }
     
     protected function toId($name) {

@@ -170,6 +170,10 @@ Glossary
       + :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
       + :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
 
+    + `Compact()`
+
+      + :ref:`Could Use Compact <could-use-compact>`
+
     + `Count()`
 
       + :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -235,6 +239,7 @@ Glossary
 
     + `define()`
 
+      + :ref:`Constants <constants>`
       + :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
       + :ref:`Define With Array <define-with-array>`
       + :ref:`Fully Qualified Constants <fully-qualified-constants>`
@@ -863,6 +868,7 @@ Glossary
       + :ref:`Throw In Destruct <throw-in-destruct>`
       + :ref:`Too Many Injections <too-many-injections>`
       + :ref:`Unitialized Properties <unitialized-properties>`
+      + :ref:`Useless Constructor <useless-constructor>`
       + :ref:`Useless Return <useless-return>`
       + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 

@@ -26,15 +26,15 @@ use Exakat\Analyzer\Analyzer;
 class BetterRand extends Analyzer {
     public function analyze() {
         // rand => mt_rand => random_int
-        $this->atomFunctionIs(array('\rand', 
-                                    '\mt_rand', 
+        $this->atomFunctionIs(array('\rand',
+                                    '\mt_rand',
                                     '\openssl_random_pseudo_bytes',
                                     '\uniqid',
                                     ));
         $this->prepareQuery();
 
         // sha1(microtime())
-        $this->atomFunctionIs(array('\microtime', 
+        $this->atomFunctionIs(array('\microtime',
                                     '\time',
                                     ))
              ->inIs('ARGUMENT')

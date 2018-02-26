@@ -3875,9 +3875,9 @@ SQL;
         } elseif (mb_strtolower($constant->fullcode) === '__method__') {
             if (empty($this->currentClassTrait)) {
                 if (empty($this->currentMethod)) {
-                    $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
-                } else {
                     $constant->noDelimiter = '';
+                } else {
+                    $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
                 }
             } else {
                 if (empty($this->currentMethod)) {
@@ -4280,7 +4280,7 @@ SQL;
         $addition->token    = $this->getToken($this->tokens[$current][0]);
         $addition->constant = $right->constant === self::CONSTANT_EXPRESSION && $left->constant === self::CONSTANT_EXPRESSION;
         
-        $this->runPlugins($addition, array('RIGHT' => $right, 
+        $this->runPlugins($addition, array('RIGHT' => $right,
                                            'LEFT'  => $left));
 
         $this->pushExpression($addition);
@@ -4661,7 +4661,6 @@ SQL;
         $concatenation->count       = $rank;
         $concatenation->constant    = $constant;
         
-        // todo No CONCAT is send. 
         $this->runPlugins($concatenation, $concat);
 
         $this->pushExpression($concatenation);

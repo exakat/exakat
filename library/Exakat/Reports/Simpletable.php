@@ -71,7 +71,7 @@ HTML;
             }
             
             $ini = parse_ini_file($this->config->doc_root.'human/en/'.$section.'.ini');
-            $title = htmlentities($ini['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
+            $title = makeHtml($ini['name']);
 
             $rows = implode('', $rows);
             $c = count($lines);

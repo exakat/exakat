@@ -11,7 +11,7 @@ php exakat status -p ut2
 php exakat remove -p ut2
 
 #git project with password
-php exakat init -p ut3 -R https://brivezac@bitbucket.org/arthur_wellezcabral/fabereo.git
+php exakat init -p ut3 -R https://daseguy:Yt4IqRcXVu@github.com/daseguy/DepotConfidentiel.git -v
 php exakat remove -p ut3
 
 #tgz project
@@ -19,7 +19,7 @@ php exakat init -p ut4 -tgz -R https://files.phpmyadmin.net/phpMyAdmin/4.6.4/php
 php exakat remove -p ut4
 
 #zip project
-php exakat init -p ut5 -zip -R http://files.spip.org/spip/stable/spip-3.1.zip
+php exakat init -p ut5 -zip -R http://files.spip.org/spip/stable/spip-3.1.zip -v
 
 #copy project
 php exakat init -p ut6 -copy -R projects/ut5/code 
@@ -30,7 +30,7 @@ php exakat files -p ut7
 php exakat remove -p ut7
 
 # clen previous
-php exakat remove -p ut4
+php exakat remove -p ut5
 
 cd -
 

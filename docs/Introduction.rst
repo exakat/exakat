@@ -3,7 +3,7 @@
 Introduction
 ============
 
-This is the documentation of the Exakat engine, version 1.1.5 (Build 696), on 1.1.5.
+This is the documentation of the Exakat engine, version 1.1.6 (Build 696), on 1.1.6.
 
 What is Exakat ? 
 ================

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 21 Feb 2018 10:10:58 +0000
-.. comment: Generation hash : b471bd3aa5add983c1df9be7592cba47b014c95b
+.. comment: Generation date : Mon, 26 Feb 2018 07:33:59 +0000
+.. comment: Generation hash : 78470b804c5d9ff5f0525f75ff7d05c082a975ad
 
 
 .. _$http\_raw\_post\_data:
@@ -1299,7 +1299,7 @@ Among other distinction, those elements cannot be directly used as variable func
    ?>
 
 
-The usage of parenthesis actually give some feeling of confort, it won't prevent PHP from combining those argument with any later operators, leading to unexpected results.
+The usage of parenthesis actually give some feeling of comfort, it won't prevent PHP from combining those argument with any later operators, leading to unexpected results.
 
 Even if most of the time, usage of parenthesis is legit, it is recommended to avoid them.
 
@@ -3023,6 +3023,32 @@ See also `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exp
 +--------------+---------------------------------------------------------------------------------+
 
 
+.. _constants:
+
+Constants
+#########
+
+
+List of PHP constants being defined.
+
+.. code-block:: php
+
+   <?php
+   
+   // with const
+   const X = 1;
+   
+   // with 'define()
+   define ('Y', 2);
+   ?>
+
++--------------+-------------------------+
+| Command Line | Constants/Constantnames |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
 .. _constants-created-outside-its-namespace:
 
 Constants Created Outside Its Namespace
@@ -3554,6 +3580,43 @@ This long name may be reduced by using an available alias.
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
+
+
+.. _could-use-compact:
+
+Could Use Compact
+#################
+
+
+Compact() turns a group of variables into an array. It may be used to simplify expressions. 
+
+.. code-block:: php
+
+   <?php
+   
+   $a = 1;
+   $b = 2;
+   
+   // Compact call
+   $array = compact('a', 'b');
+   
+   $array === [1, 2];
+   
+   // Detailing all the keys and their value
+   $array = ['a' => $a, 'b' => $b];
+   
+   ?>
+
+
+Note that compact accepts any string, and any undefined variable is not set, without a warning.
+
+See also `compact <http://www.php.net/compact>`_.
+
++--------------+----------------------------+
+| Command Line | Structures/CouldUseCompact |
++--------------+----------------------------+
+| Analyzers    | :ref:`Suggestions`         |
++--------------+----------------------------+
 
 
 .. _could-use-short-assignation:
@@ -5395,6 +5458,39 @@ This will have an actual effect
 +--------------+----------------------------------------+
 
 
+.. _foreach-on-object:
+
+Foreach On Object
+#################
+
+
+Foreach on object looks like a typo. This is particularly true when both object and member are variables.
+
+Foreach on an object member is a legit PHP syntax, though it is very rare : blind variables rarely have to be securing in an object to be processed.
+
+.. code-block:: php
+
+   <?php
+   
+   // Looks suspicious
+   foreach($array as $o -> $b) { 
+       doSomething();
+   }
+   
+   // This is the real thing
+   foreach($array as $o => $b) { 
+       doSomething();
+   }
+   
+   ?>
+
++--------------+-------------------+
+| Command Line | Php/ForeachObject |
++--------------+-------------------+
+| Analyzers    | :ref:`Analyze`    |
++--------------+-------------------+
+
+
 .. _foreach-reference-is-not-modified:
 
 Foreach Reference Is Not Modified
@@ -6335,7 +6431,7 @@ Identical On Both Sides
 #######################
 
 
-Operands should be different when comparing or making a logical combinaison. Of course, values may be identical. 
+Operands should be different when comparing or making a logical combination. Of course, the value each operand holds may be identical. When the same operand appears on both sides of the expression, the result is know before execution. 
 
 .. code-block:: php
 
@@ -6499,7 +6595,22 @@ Implement Is For Interface
 ##########################
 
 
-When deriving classes, implements should be used for interfaces, and extends with classes.
+With class heritage, implements should be used for interfaces, and extends with classes.
+
+PHP defers the implements check until execution : the code in example does lint, but won,t run.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {}
+   
+   interface y {}
+   
+   // This is wrong
+   class z implements x {}
+   
+   ?>
 
 +--------------+---------------------------------+
 | Command Line | Classes/ImplementIsForInterface |
@@ -7294,6 +7405,37 @@ Setting keys when using list() is a PHP 7.1 feature.
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
+.. _list-with-reference:
+
+List With Reference
+###################
+
+
+Support for references in list calls is not backward compatible with older versions of PHP. The support was introduced in PHP 7.3.
+
+.. code-block:: php
+
+   <?php
+   
+   $a = [1,2,3];
+   
+   [$c, $d, $e] = $a;
+   
+   $d++;
+   echo $a[2]; // Displays 4
+   
+   ?>
+
+
+See also `list() Reference Assignment <https://wiki.php.net/rfc/list_reference_assignment>`_.
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/ListWithReference                                                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 .. _local-globals:
 
 Local Globals
@@ -8008,7 +8150,7 @@ Missing Cases In Switch
 
 It seems that some cases are missing in this switch structure.
 
-When comparing two differents `'switch() <http://php.net/manual/en/control-structures.switch.php>`_ structures, it appears that some cases are missing in one of them. The set of cases are almost identical, but one of the values are missing. 
+When comparing two different `'switch() <http://php.net/manual/en/control-structures.switch.php>`_ structures, it appears that some cases are missing in one of them. The set of cases are almost identical, but one of the values are missing. 
 
 Switch() structures using strings as literals are compared in this analysis. When the discrepancy between two lists is below 25%, both switches are reported.
 
@@ -8586,7 +8728,7 @@ Multiple Type Variable
 
 Avoid using the same variable with different types of data. 
 
-It is recommended to use different names for differently typed data, while processing them. This prevents errors where one believe the variable holds the former type, while it has already been casted to the later.
+It is recommended to use different names for differently typed data, while processing them. This prevents errors where one believe the variable holds the former type, while it has already been cast to the later.
 
 Incrementing variables, with math operations or concatenation, is OK : the content changes, but not the type. And casting the variable without storing it in itself is OK. 
 
@@ -10400,7 +10542,7 @@ No get_class() With Null
 ########################
 
 
-It is not possible to pass explicitely null to get_class() to get the current's class name. Since PHP 7.2, one must call get_class() without arguments to achieve that result.
+It is not possible to pass explicitly null to get_class() to get the current's class name. Since PHP 7.2, one must call get_class() without arguments to achieve that result.
 
 .. code-block:: php
 
@@ -12908,7 +13050,7 @@ Return True False
 #################
 
 
-These conditional expressions return true/false, depending on the condition. This may be simplified by dropping the control structure alltogether.
+These conditional expressions return true/false, depending on the condition. This may be simplified by dropping the control structure altogether.
 
 .. code-block:: php
 
@@ -15557,6 +15699,41 @@ To be safe, always add parenthesis when using ternary operator with concatenatio
 +--------------+----------------------------+
 
 
+.. _test-then-cast:
+
+Test Then Cast
+##############
+
+
+A test is run on the value, but the cast value is later used. 
+
+The cast may introduce a distortion to the value, and still lead to the unwanted situation. For example, comparing to 0, then later casting to an int. The comparison to 0 is done without casting, and as such, 0.1 is different from 0. Yet, (int) 0.1 is actually 0, leading to a Division by 0 error.
+
+.. code-block:: php
+
+   <?php
+   
+   // Here. $x may be different from 0, but (int) $x may be 0
+   $x = 0.1;
+   
+   if ($x != 0) {
+       $y = 4 / (int) $x;
+   }
+   
+   // Safe solution : check the cast value.
+   if ( (int) $x != 0) {
+       $y = 4 / (int) $x;
+   }
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Structures/TestThenCast |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
 .. _throw-functioncall:
 
 Throw Functioncall
@@ -17604,6 +17781,27 @@ Unused Static Methods
 
 List of all static methods that are not used. This looks like dead code.
 
+.. code-block:: php
+
+   <?php
+   
+   class Foo {
+       // Those methods are used
+       private function method() {}
+       private static function staticMethod() {}
+   
+       // Those methods are not used
+       private function unusedMethod() {}
+       private static function staticUnusedMethod() {}
+       
+       public function bar() {
+           self::staticMethod();
+           $this->method();
+       }
+   }
+   
+   ?>
+
 +--------------+----------------------------------------------+
 | Command Line | Classes/UnusedPrivateMethod                  |
 +--------------+----------------------------------------------+
@@ -17681,6 +17879,15 @@ Unusual Case For PHP Functions
 
 
 Usually, PHP functions are written all in lower case.
+
+.. code-block:: php
+
+   <?php
+   
+   // All uppercases PHP functions
+   ECHO STRTOLOWER('This String');
+   
+   ?>
 
 +--------------+------------------------------------------------+
 | Command Line | Php/UpperCaseFunction                          |
@@ -19033,6 +19240,25 @@ Useless Constructor
 
 
 Class constructor that have empty bodies are useless. They may be removed.
+
+.. code-block:: php
+
+   <?php
+   
+   class X {
+       function '__construct() {
+           // Do nothing
+       }
+   }
+   
+   class Y extends X {
+       // Useful constructor, as it prevents usage of the parent
+       function '__construct() {
+           // Do nothing
+       }
+   }
+   
+   ?>
 
 +--------------+----------------------------+
 | Command Line | Classes/UselessConstructor |
@@ -20993,7 +21219,7 @@ mcrypt_create_iv() used to have MCRYPT_DEV_RANDOM as default values, and in PHP 
    ?>
 
 
-If the code doesn't have a second argument, it relies on the default value. It is recommended to set explicitely the value, so has to avoid problems while migrating.
+If the code doesn't have a second argument, it relies on the default value. It is recommended to set explicitly the value, so has to avoid problems while migrating.
 
 See also `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`.
 

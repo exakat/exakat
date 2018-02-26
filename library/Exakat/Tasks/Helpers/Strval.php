@@ -30,8 +30,9 @@ class Strval extends Plugin {
     
     public function run($atom, $extras) {
         foreach($extras as $extra) {
-            if ($extra->intval === '')  { 
-                return ; 
+            if ($extra->noDelimiter === null)  {
+                $atom->noDelimiter = null;
+                return ;
             }
         }
 
@@ -76,10 +77,10 @@ class Strval extends Plugin {
     
             case 'Addition' :
                 if ($atom->code === '+') {
-                    $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter + 
+                    $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter +
                                          (int) $extras['RIGHT']->noDelimiter;
                 } elseif ($atom->code === '-') {
-                    $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter - 
+                    $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter -
                                          (int) $extras['RIGHT']->noDelimiter;
                 }
                 break;
@@ -94,11 +95,11 @@ class Strval extends Plugin {
                 }
                 break;
 
-            case 'Arrayliteral' : 
+            case 'Arrayliteral' :
                 $atom->noDelimiter    = "Array";
                 break;
 
-            case 'Not' : 
+            case 'Not' :
                 if ($atom->code === '!') {
                     $atom->noDelimiter = !$extras['NOT']->noDelimiter;
                 } elseif ($atom->code === '~') {
@@ -106,7 +107,7 @@ class Strval extends Plugin {
                 }
                 break;
 
-            case 'Logical' : 
+            case 'Logical' :
                 if ($atom->code === '|') {
                     $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter | (int) $extras['RIGHT']->noDelimiter;
                 } elseif ($atom->code === '&') {
@@ -122,12 +123,12 @@ class Strval extends Plugin {
                 }
                 break;
 
-            case 'Concatenation' : 
-                $noDelimiter = array_column($extras, 'noDelimiter');
-                $atom->noDelimiter = (string) implode('', $noDelimiter);
+            case 'Concatenation' :
+                $noDelimiters = array_column($extras, 'noDelimiter');
+                $atom->noDelimiter = (string) implode('', $noDelimiters);
                 break;
 
-            case 'Ternary' : 
+            case 'Ternary' :
                 if ($extras['CONDITION']->noDelimiter) {
                     $atom->noDelimiter = $extras['THEN']->noDelimiter;
                 } else {
@@ -135,7 +136,7 @@ class Strval extends Plugin {
                 }
                 break;
 
-            case 'Coalesce' : 
+            case 'Coalesce' :
                 if ($extras['LEFT']->noDelimiter) {
                     $atom->noDelimiter = $extras['LEFT']->noDelimiter;
                 } else {
@@ -143,7 +144,7 @@ class Strval extends Plugin {
                 }
                 break;
 
-            case 'Bitshift' : 
+            case 'Bitshift' :
                 if ($atom->code === '>>') {
                     $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter >> (int) $extras['RIGHT']->noDelimiter;
                 } elseif ($atom->code === '<<') {
@@ -151,7 +152,7 @@ class Strval extends Plugin {
                 }
                 break;
 
-            case 'Comparison' : 
+            case 'Comparison' :
                 if ($atom->code === '==') {
                     $atom->noDelimiter = $extras['LEFT']->noDelimiter == $extras['RIGHT']->noDelimiter;
                 } elseif ($atom->code === '===') {
