@@ -4280,7 +4280,7 @@ SQL;
         $addition->token    = $this->getToken($this->tokens[$current][0]);
         $addition->constant = $right->constant === self::CONSTANT_EXPRESSION && $left->constant === self::CONSTANT_EXPRESSION;
         
-        $this->runPlugins($addition, array('RIGHT' => $right, 
+        $this->runPlugins($addition, array('RIGHT' => $right,
                                            'LEFT'  => $left));
 
         $this->pushExpression($addition);

@@ -32,7 +32,7 @@ class Boolval extends Plugin {
         foreach($extras as $extra) {
             if ($extra->boolean === '')  {
                 $atom->boolean = '';
-                return; 
+                return;
             }
         }
 
@@ -81,11 +81,11 @@ class Boolval extends Plugin {
                 }
                 break;
 
-            case 'Arrayliteral' : 
+            case 'Arrayliteral' :
                 $atom->boolean    = (int) (bool) $atom->count;
                 break;
 
-            case 'Not' : 
+            case 'Not' :
                 if ($atom->code === '!') {
                     $atom->boolean = !$extras['NOT']->boolean;
                 } elseif ($atom->code === '~') {
@@ -93,7 +93,7 @@ class Boolval extends Plugin {
                 }
                 break;
 
-            case 'Logical' : 
+            case 'Logical' :
                 if ($atom->code === '|') {
                     $atom->boolean = $extras['LEFT']->boolean | $extras['RIGHT']->boolean;
                 } elseif ($atom->code === '&') {
@@ -111,12 +111,12 @@ class Boolval extends Plugin {
                 }
                 break;
 
-            case 'Concatenation' : 
+            case 'Concatenation' :
                 $boolean = array_column($extras, 'boolean');
                 $atom->boolean = (bool) implode('', $boolean);
                 break;
 
-            case 'Ternary' : 
+            case 'Ternary' :
                 if ($extras['CONDITION']->boolean) {
                     $atom->boolean = $extras['THEN']->boolean;
                 } else {
@@ -124,7 +124,7 @@ class Boolval extends Plugin {
                 }
                 break;
 
-            case 'Bitshift' : 
+            case 'Bitshift' :
                 if ($atom->code === '>>') {
                     $atom->boolean = $extras['LEFT']->boolean >> $extras['RIGHT']->boolean;
                 } elseif ($atom->code === '<<') {
@@ -132,7 +132,7 @@ class Boolval extends Plugin {
                 }
                 break;
 
-            case 'Comparison' : 
+            case 'Comparison' :
                 if ($atom->code === '==') {
                     $atom->boolean = $extras['LEFT']->boolean == $extras['RIGHT']->boolean;
                 } elseif ($atom->code === '===') {

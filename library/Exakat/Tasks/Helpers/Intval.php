@@ -30,9 +30,9 @@ class Intval extends Plugin {
     
     public function run($atom, $extras) {
         foreach($extras as $extra) {
-            if ($extra->intval === '')  { 
+            if ($extra->intval === '')  {
                 $atom->intval = '';
-                return ; 
+                return ;
             }
         }
 
@@ -77,7 +77,7 @@ class Intval extends Plugin {
     
             case 'Addition' :
                 if ($atom->code === '+') {
-                    $atom->intval = $extras['LEFT']->intval + 
+                    $atom->intval = $extras['LEFT']->intval +
                                     $extras['RIGHT']->intval;
                 } elseif ($atom->code === '-') {
                     $atom->intval = $extras['LEFT']->intval - $extras['RIGHT']->intval;
@@ -94,11 +94,11 @@ class Intval extends Plugin {
                 }
                 break;
 
-            case 'Arrayliteral' : 
+            case 'Arrayliteral' :
                 $atom->intval    = (int) (bool) $atom->count;
                 break;
 
-            case 'Not' : 
+            case 'Not' :
                 if ($atom->code === '!') {
                     $atom->intval = !$extras['NOT']->intval;
                 } elseif ($atom->code === '~') {
@@ -106,7 +106,7 @@ class Intval extends Plugin {
                 }
                 break;
 
-            case 'Logical' : 
+            case 'Logical' :
                 if ($atom->code === '|') {
                     $atom->intval = $extras['LEFT']->intval | $extras['RIGHT']->intval;
                 } elseif ($atom->code === '&') {
@@ -124,12 +124,12 @@ class Intval extends Plugin {
                 }
                 break;
 
-            case 'Concatenation' : 
+            case 'Concatenation' :
                 $intval = array_column($extras, 'intval');
                 $atom->intval = (int) implode('', $intval);
                 break;
 
-            case 'Ternary' : 
+            case 'Ternary' :
                 if ($extras['CONDITION']->intval) {
                     $atom->intval = (int) $extras['THEN']->intval;
                 } else {
@@ -137,7 +137,7 @@ class Intval extends Plugin {
                 }
                 break;
 
-            case 'Coalesce' : 
+            case 'Coalesce' :
                 if ($extras['LEFT']->intval) {
                     $atom->intval = (int) $extras['LEFT']->intval;
                 } else {
@@ -145,7 +145,7 @@ class Intval extends Plugin {
                 }
                 break;
 
-            case 'Bitshift' : 
+            case 'Bitshift' :
                 if ($atom->code === '>>') {
                     $atom->intval = $extras['LEFT']->intval >> $extras['RIGHT']->intval;
                 } elseif ($atom->code === '<<') {
@@ -153,7 +153,7 @@ class Intval extends Plugin {
                 }
                 break;
 
-            case 'Comparison' : 
+            case 'Comparison' :
                 if ($atom->code === '==') {
                     $atom->intval = $extras['LEFT']->intval == $extras['RIGHT']->intval;
                 } elseif ($atom->code === '===') {
