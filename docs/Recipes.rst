@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Wed, 21 Feb 2018 10:10:58 +0000
-.. comment: Generation hash : b471bd3aa5add983c1df9be7592cba47b014c95b
+.. comment: Generation date : Mon, 26 Feb 2018 07:33:59 +0000
+.. comment: Generation hash : 78470b804c5d9ff5f0525f75ff7d05c082a975ad
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 341 analysis
+Total : 344 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -118,6 +118,7 @@ Total : 341 analysis
 * :ref:`Constant Class <constant-class>`
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
+* :ref:`Constants`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Else <could-be-else>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
@@ -161,6 +162,7 @@ Total : 341 analysis
 * :ref:`Failed Substr Comparison <failed-substr-comparison>`
 * :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Foreach Needs Reference Array <foreach-needs-reference-array>`
+* :ref:`Foreach On Object <foreach-on-object>`
 * :ref:`Foreach Reference Is Not Modified <foreach-reference-is-not-modified>`
 * :ref:`Forgotten Interface <forgotten-interface>`
 * :ref:`Forgotten Thrown <forgotten-thrown>`
@@ -323,6 +325,7 @@ Total : 341 analysis
 * :ref:`Switch To Switch <switch-to-switch>`
 * :ref:`Switch Without Default <switch-without-default>`
 * :ref:`Ternary In Concat <ternary-in-concat>`
+* :ref:`Test Then Cast <test-then-cast>`
 * :ref:`Throw Functioncall <throw-functioncall>`
 * :ref:`Throw In Destruct <throw-in-destruct>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
@@ -478,7 +481,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 61 analysis
+Total : 62 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -504,6 +507,7 @@ Total : 61 analysis
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Keys <list-with-keys>`
+* :ref:`List With Reference <list-with-reference>`
 * :ref:`Malformed Octal <malformed-octal>`
 * :ref:`Methodcall On New <methodcall-on-new>`
 * :ref:`Mixed Keys Arrays <mixed-keys-arrays>`
@@ -547,7 +551,7 @@ Total : 61 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 57 analysis
+Total : 58 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -573,6 +577,7 @@ Total : 57 analysis
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Keys <list-with-keys>`
+* :ref:`List With Reference <list-with-reference>`
 * :ref:`Malformed Octal <malformed-octal>`
 * :ref:`Mixed Keys Arrays <mixed-keys-arrays>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
@@ -612,7 +617,7 @@ Total : 57 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 49 analysis
+Total : 50 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -632,6 +637,7 @@ Total : 49 analysis
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Keys <list-with-keys>`
+* :ref:`List With Reference <list-with-reference>`
 * :ref:`Malformed Octal <malformed-octal>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
@@ -669,7 +675,7 @@ Total : 49 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 38 analysis
+Total : 39 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -684,6 +690,7 @@ Total : 38 analysis
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Keys <list-with-keys>`
+* :ref:`List With Reference <list-with-reference>`
 * :ref:`Malformed Octal <malformed-octal>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
@@ -715,7 +722,7 @@ Total : 38 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 34 analysis
+Total : 35 analysis
 
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -730,6 +737,7 @@ Total : 34 analysis
 * :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
+* :ref:`List With Reference <list-with-reference>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`No Substr Minus One <no-substr-minus-one>`
@@ -757,7 +765,7 @@ Total : 34 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 23 analysis
+Total : 24 analysis
 
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
@@ -767,6 +775,7 @@ Total : 23 analysis
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Integer As Property <integer-as-property>`
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
+* :ref:`List With Reference <list-with-reference>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
@@ -788,11 +797,12 @@ Total : 23 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 13 analysis
+Total : 14 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
 * :ref:`Hash Will Use Objects <hash-will-use-objects>`
+* :ref:`List With Reference <list-with-reference>`
 * :ref:`New Constants In PHP 7.2 <new-constants-in-php-7.2>`
 * :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
@@ -966,13 +976,14 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 41 analysis
+Total : 42 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Could Make A Function <could-make-a-function>`
 * :ref:`Could Return Void <could-return-void>`
+* :ref:`Could Use Compact <could-use-compact>`
 * :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Drop Else After Return <drop-else-after-return>`

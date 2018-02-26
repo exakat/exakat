@@ -37,6 +37,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Dead code
 * DefensiveProgrammingTM
 * Dismell
+* First
 * Internal
 * Inventory
 * Level 1
@@ -142,7 +143,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/gd <http://php.net/manual/en/book.image.php>`_
 * `ext/gearman <http://php.net/manual/en/book.gearman.php>`_
 * `ext/gender <http://php.net/manual/en/book.gender.php>`_
-* `Ext/geoip <http://php.net/manual/en/book.geoip.php>`_
+* `ext/geoip <http://php.net/manual/en/book.geoip.php>`_
 * `ext/gettext <http://php.net/manual/en/book.gettext.php>`_
 * `ext/gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
 * `ext/gmp <http://php.net/manual/en/book.gmp.php>`_
@@ -179,7 +180,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/mhash <http://mhash.sourceforge.net/>`_
 * `ext/ming <http://www.libming.org/>`_
 * `ext/mongo <http://php.net/manual/en/book.mongo.php>`_
-* `Ext/mongodb <http://php.net/manual/en/set.mongodb.php>`_
+* `ext/mongodb <http://php.net/manual/en/set.mongodb.php>`_
 * `ext/mssql <http://www.php.net/manual/en/book.mssql.php>`_
 * `ext/mysql <http://www.php.net/manual/en/book.mysql.php>`_
 * `ext/mysqli <http://php.net/manual/en/book.mysqli.php>`_
@@ -316,6 +317,14 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.1.6
+
+  * Could Use Compact (Structures/CouldUseCompact ; Suggestions)
+  * Foreach On Object (Php/ForeachObject)
+  * List With Reference (Php/ListWithReference ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
+  * Structures/ConstantPreferences (Structures/ConstantPreferences ; Under Work)
+  * Test Then Cast (Structures/TestThenCast ; Analyze)
 
 * 1.1.5
 
@@ -554,7 +563,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Encoding Usage (Php/DeclareEncoding)
   * Mismatched Ternary Alternatives (Structures/MismatchedTernary ; Analyze, Suggestions, Level 4)
   * No Return Or Throw In Finally (Structures/NoReturnInFinally ; Security)
-  * Ticks Usage (Php/DeclareTicks ; Preferences)
+  * Ticks Usage (Php/DeclareTicks ; Appinfo, Preferences)
 
 * 0.12.0
 
@@ -967,9 +976,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.9.5
 
-  * Ext/mongodb (Extensions/Extmongodb)
   * One Expression Brackets Consistency (Structures/OneExpressionBracketsConsistency ; Preferences)
   * Should Use Function (Php/ShouldUseFunction ; Performances)
+  * ext/mongodb (Extensions/Extmongodb)
   * ext/zbarcode (Extensions/Extzbarcode ; Appinfo)
 
 * 0.9.4
@@ -1140,7 +1149,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Constant Definition (Classes/ConstantDefinition ; Appinfo)
   * Constant Scalar Expression (Php/ConstantScalarExpression ; )
   * Constant Scalar Expressions (Structures/ConstantScalarExpression ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
-  * Constants (Constants/Constantnames ; )
+  * Constants (Constants/Constantnames ; Analyze)
   * Constants Created Outside Its Namespace (Constants/CreatedOutsideItsNamespace ; Analyze, Codacy)
   * Constants Usage (Constants/ConstantUsage ; Appinfo)
   * Constants With Strange Names (Constants/ConstantStrangeNames ; Analyze, Codacy, Simple)
@@ -1209,7 +1218,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Exit() Usage (Structures/ExitUsage ; Analyze, Appinfo, OneFile, ClearPHP, ZendFramework, Codacy)
   * Exit-like Methods (Functions/KillsApp ; Internal)
   * Exponent Usage (Php/ExponentUsage ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
-  * Ext/geoip (Extensions/Extgeoip ; Appinfo)
   * External Config Files (Files/Services ; Internal)
   * Failed Substr Comparison (Structures/FailingSubstrComparison ; Analyze, Codacy, Simple, Level 3)
   * File Is Component (Files/IsComponent ; Internal)
@@ -1279,7 +1287,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Invalid Constant Name (Constants/InvalidName ; Analyze, Codacy, Simple)
   * Is An Extension Class (Classes/IsExtClass ; )
   * Is An Extension Constant (Constants/IsExtConstant ; Internal)
-  * Is An Extension Function (Functions/IsExtFunction ; Internal)
+  * Is An Extension Function (Functions/IsExtFunction ; Internal, First)
   * Is An Extension Interface (Interfaces/IsExtInterface ; Internal)
   * Is CLI Script (Files/IsCliScript ; Appinfo, Internal)
   * Is Composer Class (Composer/IsComposerClass ; Internal)
@@ -1377,7 +1385,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Not Same Name As File (Classes/NotSameNameAsFile ; )
   * Not Same Name As File (Classes/SameNameAsFile ; Internal)
   * Nowdoc Delimiter Glossary (Type/Nowdoc ; Appinfo)
-  * Null Coalesce (Php/NullCoalesce ; Suggestions)
+  * Null Coalesce (Php/NullCoalesce ; Appinfo, Suggestions)
   * Null On New (Classes/NullOnNew ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, OneFile, Simple)
   * Objects Don't Need References (Structures/ObjectReferences ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 2)
   * Octal Glossary (Type/Octal ; Appinfo)
@@ -1665,6 +1673,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/ftp (Extensions/Extftp ; Appinfo)
   * ext/gd (Extensions/Extgd ; Appinfo)
   * ext/gearman (Extensions/Extgearman ; Appinfo)
+  * ext/geoip (Extensions/Extgeoip ; Appinfo)
   * ext/gettext (Extensions/Extgettext ; Appinfo)
   * ext/gmagick (Extensions/Extgmagick ; Appinfo)
   * ext/gmp (Extensions/Extgmp ; Appinfo)
@@ -1880,6 +1889,7 @@ List of external links mentionned in this documentation.
 * `Codeigniter <https://codeigniter.com/>`_
 * `COM and .Net (Windows) <http://php.net/manual/en/book.com.php>`_
 * `command line usage <https://exakat.readthedocs.io/en/latest/Commands.html>`_
+* `compact <http://www.php.net/compact>`_
 * `Comparison Operators <http://php.net/manual/en/language.operators.comparison.php>`_
 * `composer <https://getcomposer.org/>`_
 * `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exprs>`_
@@ -1956,8 +1966,8 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
@@ -2014,6 +2024,7 @@ List of external links mentionned in this documentation.
 * `List of HTTP header fields <https://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`_
 * `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_
 * `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_
+* `list() Reference Assignment <https://wiki.php.net/rfc/list_reference_assignment>`_
 * `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 * `Logical Operators <http://php.net/manual/en/language.operators.logical.php>`_
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
@@ -2133,8 +2144,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_

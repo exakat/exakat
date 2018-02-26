@@ -112,8 +112,8 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
 
     php exakat.phar doctor
 
-Quick installation with Composer
--------------------------------------
+Installation guide with Composer
+--------------------------------
 
 Composer installation requires the creation of two folders : config and tinkergraph. This may interfere with your own installation. 'tinkergraph' is used as default name in the installation process, and may be updated later. The config folder is compulsory and can't be renamed.
 
