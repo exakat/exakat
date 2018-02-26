@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('try { /**/ } catch (Exception $e) { /**/ } '
+$expected     = array('try { /**/ } catch (Exception $e) { /**/ } ',
                      );
 
-$expected_not = array('try { /**/ } catch (Exception $e1) { /**/ } '
+$expected_not = array('try { /**/ } catch (Exception $e1) { /**/ } ',
                      );
 
 ?>
