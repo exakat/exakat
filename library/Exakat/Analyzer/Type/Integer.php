@@ -28,8 +28,8 @@ use Exakat\Analyzer\Common\Type;
 
 class Integer extends Type {
     public function __construct($gremlin, $config) {
-        $this->type = 'Integer';
         parent::__construct($gremlin, $config);
+        $this->type = 'Integer';
     }
 
     public function analyze() {

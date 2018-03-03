@@ -38,10 +38,11 @@ class Analyze extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
+        parent::__construct($gremlin, $config, $subtask);
+
         if (!empty($config->thema)) {
             $this->logname = strtolower(str_replace(' ', '_', $config->thema));
         }
-        parent::__construct($gremlin, $config, $subtask);
     }
 
     public function run() {

@@ -28,8 +28,8 @@ use Exakat\Analyzer\Common\Type;
 
 class NullValue extends Type {
     public function __construct($gremlin, $config) {
-        $this->type = 'Null';
         parent::__construct($gremlin, $config);
+        $this->type = 'Null';
     }
 
     public function analyze() {
