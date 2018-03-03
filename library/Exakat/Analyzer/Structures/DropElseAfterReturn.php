@@ -29,7 +29,7 @@ class DropElseAfterReturn extends Analyzer {
         //if ($a) { return $a; } else { doSomething(); }
         $this->atomIs('Ifthen')
              ->outIs('THEN')
-             ->atomInside('Return')
+             ->atomInsideNoDefinition('Return')
              ->back('first')
              ->outIs('ELSE')
              ->noAtomInside('Return')
@@ -39,7 +39,7 @@ class DropElseAfterReturn extends Analyzer {
         //if ($a) { doSomething(); } else { return $a; }
         $this->atomIs('Ifthen')
              ->outIs('ELSE')
-             ->atomInside('Return')
+             ->atomInsideNoDefinition('Return')
              ->back('first')
              ->outIs('THEN')
              ->noAtomInside('Return')
