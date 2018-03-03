@@ -31,13 +31,13 @@ use Exakat\Reports\Reports;
 
 class ZendFramework extends Reports {
     const FILE_FILENAME  = 'report_zf';
+    const FILE_EXTENSION = '';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
     private $tmpName           = '';
 
-    private $docs              = null;
     private $timesToFix        = null;
     private $themesForAnalyzer = null;
     private $severities        = null;
@@ -115,10 +115,9 @@ class ZendFramework extends Reports {
     public function __construct($config) {
         parent::__construct($config);
         $this->themesToShow      = 'ZendFramework';
-        $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
-        $this->timesToFix        = $this->docs->getTimesToFix();
-        $this->themesForAnalyzer = $this->docs->getThemesForAnalyzer($this->themesToShow);
-        $this->severities        = $this->docs->getSeverities();
+        $this->timesToFix        = $this->themes->getTimesToFix();
+        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
+        $this->severities        = $this->themes->getSeverities();
     }
 
     private function getBasedPage($file) {
@@ -313,8 +312,8 @@ MENU;
         $baseHTML = $this->getBasedPage('analyzers_doc');
         $analyzersDocHTML = "";
 
-        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = Analyzer::getInstance($analyzer, null, $this->config);
+        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
+            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
 
@@ -899,7 +898,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ("'.implode('", "', Analyzer::getThemeAnalyzers($categorie)).'")';
+            $list = 'IN ("'.implode('", "', $this->themes->getThemeAnalyzers($categorie)).'")';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -937,7 +936,7 @@ JAVASCRIPT;
     }
 
     public function getSeverityBreakdown() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
@@ -1015,7 +1014,7 @@ SQL;
     }
 
     protected function getAnalyzersResultsCounts() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
@@ -1028,7 +1027,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
@@ -1074,7 +1073,7 @@ SQL;
     }
 
     private function getFilesResultsCounts() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
@@ -1104,7 +1103,7 @@ SQL;
     }
 
     public function getFilesCount($limit = null) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT file, count(*) AS number
@@ -1179,7 +1178,7 @@ SQL;
     }
 
     private function getAnalyzersCount($limit) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
@@ -1201,7 +1200,7 @@ SQL;
     }
 
     private function getTopAnalyzers() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
@@ -1213,7 +1212,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $data[] = array('label' => $analyzer->getDescription()->getName(),
                             'value' => $row['number']);
         }
@@ -1232,7 +1231,7 @@ SQL;
     }
 
     private function getSeveritiesNumberBy($type = 'file') {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
@@ -1353,7 +1352,7 @@ JAVASCRIPT;
     }
 
     public function getIssuesFaceted($theme) {
-        $list = Analyzer::getThemeAnalyzers($theme);
+        $list = $this->themes->getThemeAnalyzers($theme);
         $list = '"'.implode('", "', $list).'"';
 
         $sqlQuery = <<<SQL
@@ -1482,8 +1481,8 @@ SQL;
     private function generateAnalyzersList() {
         $analyzers = '';
 
-        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = Analyzer::getInstance($analyzer, null, $this->config);
+        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
+            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
@@ -1694,7 +1693,7 @@ SQL
     private function generateCompatibility($version) {
         $compatibility = '';
 
-        $list = Analyzer::getThemeAnalyzers('CompatibilityPHP'.$version);
+        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);
 
         $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();
@@ -1971,7 +1970,7 @@ SQL;
                     continue;
                 }
 
-                if ($sources[$component] === 0) {
+                if (isset($sources[$component]) && $sources[$component] === 0) {
                     $rows[] = '<i class="fa fa-eye-slash" style="color: #bbbbbb"></i>';
                     continue;
                 }
@@ -2007,7 +2006,7 @@ SQL;
         $extensions = $this->components;
 
         // collecting information for Extensions
-        $themed = Analyzer::getThemeAnalyzers('ZendFramework');
+        $themed = $this->themes->getThemeAnalyzers('ZendFramework');
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {

@@ -31,6 +31,8 @@ class Dependencies extends Reports {
     const FILE_FILENAME  = 'dependencies';
 
     public function generate($folder, $name= 'dependencies') {
+        display("This report is not finished\n");
+        return;
         $graph = new GSNeo4j($this->config);
 
         $links    = array();
@@ -42,7 +44,7 @@ g.V().hasLabel("Class").map{[it.get().value("fullnspath"), it.get().value("fullc
 GREMLIN;
         $res = $graph->query($query);
         if (is_object($res)) {
-            $res = $res->result;
+//            $res = $res->result;
         }
         foreach($res as $v) {
             $v = (array) $v;
@@ -55,7 +57,7 @@ g.V().hasLabel("Trait").map{[it.get().value("fullnspath"), it.get().value("fullc
 GREMLIN;
         $res = $graph->query($query);
         if (is_object($res)) {
-            $res = $res->result;
+//            $res = $res->result;
         }
         foreach($res as $v) {
             $v = (array) $v;
@@ -67,7 +69,7 @@ g.V().hasLabel("Interface").map{[it.get().value("fullnspath"), it.get().value("f
 GREMLIN;
         $res = $graph->query($query);
         if (is_object($res)) {
-            $res = $res->result;
+//            $res = $res->result;
         }
         foreach($res as $v) {
             $v = (array) $v;
@@ -87,7 +89,7 @@ GREMLIN;
 
         $res = $graph->query($query);
         if (is_object($res)) {
-            $res = $res->result;
+//            $res = $res->result;
         }
         $total = 0;
         foreach($res as $v) {
@@ -116,7 +118,7 @@ GREMLIN;
 
         $res = $graph->query($query);
         if (is_object($res)) {
-            $res = $res->result;
+//            $res = $res->result;
         }
         $total = 0;
 
@@ -146,7 +148,7 @@ g.V().hasLabel("New").as('fullcode')
 GREMLIN;
         $res = $graph->query($query);
         if (is_object($res)) {
-            $res = $res->result;
+//            $res = $res->result;
         }
         $total = 0;
 
@@ -176,7 +178,7 @@ g.V().hasLabel("Function").as("fullcode")
 GREMLIN;
         $res = $graph->query($query);
         if (is_object($res)) {
-            $res = $res->result;
+//            $res = $res->result;
         }
         $total = 0;
         foreach($res as $v) {
@@ -206,7 +208,7 @@ g.V().hasLabel("Instanceof").as('fullcode')
 GREMLIN;
         $res = $graph->query($query);
         if (is_object($res)) {
-            $res = $res->result;
+//            $res = $res->result;
         }
         $total = 0;
         foreach($res as $v) {
@@ -235,7 +237,7 @@ g.V().hasLabel("Staticmethodcall").as('fullcode')
 GREMLIN;
         $res = $graph->query($query);
         if (is_object($res)) {
-            $res = $res->result;
+//            $res = $res->result;
         }
         $total = 0;
         foreach($res as $v) {

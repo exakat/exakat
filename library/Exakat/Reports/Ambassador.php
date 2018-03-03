@@ -39,7 +39,6 @@ class Ambassador extends Reports {
     protected $finalName       = null;
     protected $tmpName           = '';
 
-    private $docs              = array();
     private $frequences        = array();
     private $timesToFix        = array();
     private $themesForAnalyzer = array();
@@ -80,11 +79,10 @@ class Ambassador extends Reports {
 
     public function __construct($config) {
         parent::__construct($config);
-        $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
-        $this->frequences        = $this->docs->getFrequences();
-        $this->timesToFix        = $this->docs->getTimesToFix();
-        $this->themesForAnalyzer = $this->docs->getThemesForAnalyzer();
-        $this->severities        = $this->docs->getSeverities();
+        $this->frequences        = $this->themes->getFrequences();
+        $this->timesToFix        = $this->themes->getTimesToFix();
+        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
+        $this->severities        = $this->themes->getSeverities();
     }
 
     protected function getBasedPage($file) {
@@ -304,21 +302,21 @@ class Ambassador extends Reports {
         $baseHTML = $this->getBasedPage('analyzers_doc');
         $analyzersDocHTML = "";
 
-        $analyzersList = array_merge(Analyzer::getThemeAnalyzers($this->themesToShow),
-                                     Analyzer::getThemeAnalyzers('Preferences'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP71'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP72'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP73')
+        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->themesToShow),
+                                     $this->themes->getThemeAnalyzers('Preferences'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP73')
                                      );
         $analyzersList = array_keys(array_count_values($analyzersList));
                                      
         foreach($analyzersList as $analyzerName) {
-            $analyzer = Analyzer::getInstance($analyzerName, null, $this->config);
+            $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzersDocHTML.='<h2><a href="analyzers_doc.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
@@ -373,7 +371,7 @@ class Ambassador extends Reports {
     private function generateFavorites() {
         $baseHTML = $this->getBasedPage('favorites_dashboard');
 
-        $analyzers = Analyzer::getThemeAnalyzers('Preferences');
+        $analyzers = $this->themes->getThemeAnalyzers('Preferences');
         
         $donut = array();
         $html = array(' ');
@@ -383,7 +381,7 @@ class Ambassador extends Reports {
 
             $table = '';
             $values = array();
-            $object = Analyzer::getInstance($analyzer, null, $this->config);
+            $object = $this->themes->getInstance($analyzer, null, $this->config);
             $name = $object->getDescription()->getName();
 
             $total = 0;
@@ -1223,7 +1221,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ("'.implode('", "', Analyzer::getThemeAnalyzers($categorie)).'")';
+            $list = 'IN ("'.implode('", "', $this->themes->getThemeAnalyzers($categorie)).'")';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -1265,7 +1263,7 @@ JAVASCRIPT;
     }
 
     public function getSeverityBreakdown() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
@@ -1348,7 +1346,7 @@ SQL;
     }
 
     protected function getAnalyzersResultsCounts() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
@@ -1362,7 +1360,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
@@ -1386,17 +1384,17 @@ SQL;
     }
     
     private function generateNoIssues() {
-        $list = array_merge(Analyzer::getThemeAnalyzers('Analysis'),
-                            Analyzer::getThemeAnalyzers('Security'),
-                            Analyzer::getThemeAnalyzers('Performances'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP71'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP72'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP73'),
+        $list = array_merge($this->themes->getThemeAnalyzers('Analysis'),
+                            $this->themes->getThemeAnalyzers('Security'),
+                            $this->themes->getThemeAnalyzers('Performances'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP73'),
                             array('Project/Dump')
                             );
         $list = '"'.implode('", "', $list).'"';
@@ -1413,7 +1411,7 @@ SQL;
         $filesHTML = '';
 
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
 
             $filesHTML.= "<tr>";
             $filesHTML.='<td><a href="analyzers_doc.html#analyzer='.$row['analyzer'].'" id="'.$this->toId($row['analyzer']).'"><i class="fa fa-book" style="font-size: 14px"></i></a>
@@ -1451,7 +1449,7 @@ SQL;
     }
 
     private function getFilesResultsCounts() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
@@ -1481,7 +1479,7 @@ SQL;
     }
 
     public function getFilesCount($limit = null) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT file, count(*) AS number
@@ -1556,7 +1554,7 @@ SQL;
     }
 
     private function getAnalyzersCount($limit) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
@@ -1578,7 +1576,7 @@ SQL;
     }
 
     protected function getTopAnalyzers() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
@@ -1590,7 +1588,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $data[] = array('label' => $analyzer->getDescription()->getName(),
                             'value' => $row['number'],
                             'name'  => $row['analyzer']);
@@ -1610,7 +1608,7 @@ SQL;
     }
 
     private function getSeveritiesNumberBy($type = 'file') {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
@@ -1740,7 +1738,7 @@ JAVASCRIPTCODE;
     }
 
     public function getIssuesFaceted($theme) {
-        $list = Analyzer::getThemeAnalyzers($theme);
+        $list = $this->themes->getThemeAnalyzers($theme);
         $list = '"'.implode('", "', $list).'"';
 
         $sqlQuery = <<<SQL
@@ -1884,8 +1882,8 @@ SQL;
     private function generateAnalyzersList() {
         $analyzers = '';
 
-        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = Analyzer::getInstance($analyzer, null, $this->config);
+        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
+            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
@@ -2188,7 +2186,7 @@ SQL
     private function generateCompatibility($version) {
         $compatibility = '';
 
-        $list = Analyzer::getThemeAnalyzers('CompatibilityPHP'.$version);
+        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);
 
         $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();

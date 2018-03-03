@@ -23,7 +23,6 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Docs;
 use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;
@@ -142,12 +141,12 @@ MENU;
         $baseHTML = $this->getBasedPage('analyzers_doc');
         $analyzersDocHTML = "";
 
-        $analyzersList = array_merge(Analyzer::getThemeAnalyzers('Level 1')
+        $analyzersList = array_merge($this->themes->getThemeAnalyzers('Level 1')
                                      );
         $analyzersList = array_keys(array_count_values($analyzersList));
                                      
         foreach($analyzersList as $analyzerName) {
-            $analyzer = Analyzer::getInstance($analyzerName, null, $this->config);
+            $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzersDocHTML.='<h2><a href="analyzers_doc.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
@@ -479,7 +478,7 @@ JAVASCRIPT;
             
             $levelRows = '';
             $total = 0;
-            $analyzers = Analyzer::getThemeAnalyzers('Level '.$level);
+            $analyzers = $this->themes->getThemeAnalyzers('Level '.$level);
             if (empty($analyzers)) {
                 continue;
             }

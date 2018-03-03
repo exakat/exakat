@@ -23,6 +23,7 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Themes;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Graph\Graph;
@@ -43,6 +44,8 @@ abstract class Tasks {
     protected $exakatDir  = null;
     public    static $semaphore      = null;
     public    static $semaphorePort  = null;
+    
+    protected $themes = null;
 
     const  NONE    = 1;
     const  ANYTIME = 2;
@@ -107,6 +110,7 @@ abstract class Tasks {
         }
 
         $this->exakatDir = $this->config->projects_root.'/projects/.exakat/';
+        $this->themes = new Themes($this->config->dir_root.'/data/analyzers.sqlite');
     }
 
     public function __destruct() {

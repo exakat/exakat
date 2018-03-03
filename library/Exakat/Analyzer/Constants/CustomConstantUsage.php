@@ -32,7 +32,7 @@ class CustomConstantUsage extends Analyzer {
     }
     
     public function analyze() {
-        $exts = self::$docs->listAllAnalyzer('Extensions');
+        $exts = $this->themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
         
         $c = array();

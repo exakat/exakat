@@ -32,7 +32,7 @@ class IsExtTrait extends Analyzer {
     }
     
     public function analyze() {
-        $exts = self::$docs->listAllAnalyzer('Extensions');
+        $exts = $this->themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_traits';
         
         $t = array();

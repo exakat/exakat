@@ -23,8 +23,8 @@
 
 namespace Exakat\Analyzer;
 
-class Docs {
-    private $sqlite = null;
+class Themes {
+    private static $sqlite = null;
     private $phar_tmp = null;
     
     public function __construct($path) {
@@ -35,7 +35,7 @@ class Docs {
         } else {
             $docPath = $path;
         }
-        $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
+        self::$sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }
 
     public function __destruct() {
@@ -64,7 +64,7 @@ class Docs {
     $where
 SQL;
         
-        $res = $this->sqlite->query($query);
+        $res = self::$sqlite->query($query);
 
         $return = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -87,7 +87,7 @@ SELECT c.name FROM categories AS c
         a.folder = '$vendor' AND
         a.name   = '$class'
 SQL;
-        $res = $this->sqlite->query($query);
+        $res = self::$sqlite->query($query);
 
         $return = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -117,7 +117,7 @@ SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM 
     $where
 	GROUP BY analyzer
 SQL;
-        $res = $this->sqlite->query($query);
+        $res = self::$sqlite->query($query);
 
         $return = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -132,7 +132,7 @@ SQL;
 
         $query = "SELECT severity FROM analyzers WHERE folder = '$folder' AND name = '$name'";
 
-        $res = $this->sqlite->query($query);
+        $res = self::$sqlite->query($query);
         $res2 = $res->fetchArray(\SQLITE3_ASSOC);
         if (empty($res2['severity'])) {
             $return = Analyzer::S_NONE;
@@ -147,7 +147,7 @@ SQL;
         list($folder, $name) = explode('\\', substr($analyzer, 16));
         $query = "SELECT timetofix FROM analyzers WHERE folder = '$folder' AND name = '$name'";
 
-        $res = $this->sqlite->query($query);
+        $res = self::$sqlite->query($query);
         $res2 = $res->fetchArray(\SQLITE3_ASSOC);
 
         if (empty($res2['timetofix'])) {
@@ -163,7 +163,7 @@ SQL;
         $query = "SELECT folder||'/'||name AS analyzer, severity FROM analyzers";
 
         $return = array();
-        $res = $this->sqlite->query($query);
+        $res = self::$sqlite->query($query);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[$row['analyzer']] = empty($row['severity']) ? Analyzer::S_NONE : constant('Exakat\\Analyzer\\Analyzer::'.$row['severity']);
         }
@@ -175,7 +175,7 @@ SQL;
         $query = "SELECT folder||'/'||name AS analyzer, timetofix FROM analyzers";
 
         $return = array();
-        $res = $this->sqlite->query($query);
+        $res = self::$sqlite->query($query);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[$row['analyzer']] = empty($row['timetofix']) ? Analyzer::S_NONE : constant("Exakat\\Analyzer\\Analyzer::".$row['timetofix']);
         }
@@ -190,7 +190,7 @@ SQL;
                 ON analyzers_popularity.id = analyzers.id";
 
         $return = array();
-        $res = $this->sqlite->query($query);
+        $res = self::$sqlite->query($query);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[$row['analyzer']] = empty($row['frequence']) ? 0 : $row['frequence'];
         }
@@ -203,7 +203,7 @@ SQL;
 SELECT 'Analyzer\\' || folder || '\\' || name AS name FROM analyzers WHERE name=:name;
 
 SQL;
-        $stmt = $this->sqlite->prepare($query);
+        $stmt = self::$sqlite->prepare($query);
 
         $stmt->bindValue(':name', $name, \SQLITE3_TEXT);
         $res = $stmt->execute();
@@ -223,11 +223,11 @@ SELECT folder || '\\' || name AS name FROM analyzers
 SQL;
         if ($folder !== null) {
             $query .= ' WHERE folder=:folder';
-            $stmt = $this->sqlite->prepare($query);
+            $stmt = self::$sqlite->prepare($query);
             
             $stmt->bindValue(':folder', $folder, \SQLITE3_TEXT);
         } else {
-            $stmt = $this->sqlite->prepare($query);
+            $stmt = self::$sqlite->prepare($query);
         }
         $res = $stmt->execute();
 
@@ -246,11 +246,11 @@ SELECT name AS name FROM categories
 SQL;
         if ($theme !== null) {
             $query .= ' WHERE name=:name';
-            $stmt = $this->sqlite->prepare($query);
+            $stmt = self::$sqlite->prepare($query);
             
             $stmt->bindValue(':name', $theme, \SQLITE3_TEXT);
         } else {
-            $stmt = $this->sqlite->prepare($query);
+            $stmt = self::$sqlite->prepare($query);
         }
         $res = $stmt->execute();
 
@@ -261,5 +261,92 @@ SQL;
         
         return $return;
     }
+
+    public function getClass($name) {
+        // accepted names :
+        // PHP full name : Analyzer\\Type\\Class
+        // PHP short name : Type\\Class
+        // Human short name : Type/Class
+        // Human shortcut : Class (must be unique among the classes)
+
+        if (strpos($name, '\\') !== false) {
+            if (substr($name, 0, 16) === 'Exakat\\Analyzer\\') {
+                $class = $name;
+            } else {
+                $class = 'Exakat\\Analyzer\\'.$name;
+            }
+        } elseif (strpos($name, '/') !== false) {
+            $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
+        } elseif (strpos($name, '/') === false) {
+            $found = $this->guessAnalyzer($name);
+            if (count($found) == 0) {
+                return false; // no class found
+            } elseif (count($found) == 1) {
+                $class = $found[0];
+            } else {
+                // too many options here...
+                return false;
+            }
+        } else {
+            $class = $name;
+        }
+        
+        if (class_exists($class)) {
+            $actualClassName = new \ReflectionClass($class);
+            if ($class !== $actualClassName->getName()) {
+                // problems with the case
+                return false;
+            } else {
+                return $class;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function getSuggestionThema($thema) {
+        self::initDocs();
+        $list = $this->listAllThemes();
+        $r = array();
+        foreach($list as $c) {
+            $l = levenshtein($c, $thema);
+
+            if ($l < 8) {
+                $r[] = $c;
+            }
+        }
+        
+        return $r;
+    }
+    
+    public function getSuggestionClass($name) {
+        self::initDocs();
+        $list = $this->listAllAnalyzer();
+        $r = array();
+        foreach($list as $c) {
+            $l = levenshtein($c, $name);
+
+            if ($l < 8) {
+                $r[] = $c;
+            }
+        }
+        
+        return $r;
+    }
+
+    public function getInstance($name, $gremlin = null, $config = null) {
+        static $instanciated = array();
+        
+        if ($analyzer = $this->getClass($name)) {
+            if (!isset($instanciated[$analyzer])) {
+                $instanciated[$analyzer] = new $analyzer($gremlin, $config);
+            }
+            return $instanciated[$analyzer];
+        } else {
+            display( 'No such class as "' . $name . '"'.PHP_EOL);
+            return null;
+        }
+    }
+
 }
 ?>

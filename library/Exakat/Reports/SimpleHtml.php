@@ -81,12 +81,12 @@ class SimpleHtml extends Reports {
 
     private function makeSummary($folder) {
         if ($this->config->thema !== null) {
-            $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
+            $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
             $list = '"'.implode('", "', $list).'"';
         } elseif ($this->config->program !== null) {
             $list = '"'.$this->config->program.'"';
         } else {
-            $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+            $list = $this->themes->getThemeAnalyzers($this->themesToShow);
             $list = '"'.implode('", "', $list).'"';
         }
 
@@ -98,7 +98,7 @@ class SimpleHtml extends Reports {
         $titleCache = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
             }
 
@@ -117,11 +117,11 @@ HTML;
         
     private function makeList($folder) {
         if ($this->config->thema !== null) {
-            $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
+            $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
         } elseif ($this->config->program !== null) {
             $list = array($this->config->program);
         } else {
-            $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+            $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         }
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
@@ -143,7 +143,7 @@ HTML;
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
                 $timeToFixCache[$row['analyzer']] = $analyzer->getTimeToFix();

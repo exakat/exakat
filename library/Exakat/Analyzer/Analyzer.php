@@ -49,10 +49,8 @@ abstract class Analyzer {
     private $methods          = array();
     private $arguments        = array();
     
-    public static $staticConfig         = null;
     public $config         = null;
     
-    static public $analyzers  = array();
     private $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerQuoted = '';
     protected $analyzerId     = 0;
@@ -107,7 +105,7 @@ abstract class Analyzer {
     
     const MAX_LOOPING = 15;
     
-    static public $docs = null;
+    protected $themes = null;
 
     protected $gremlin = null;
     
@@ -123,11 +121,10 @@ abstract class Analyzer {
 
         $this->code = $this->analyzer;
         
-        self::initDocs();
-        
         $this->_as('first');
         
         assert($config !== null, 'Can\'t call Analyzer without a config');
+        $this->themes = new Themes($config->dir_root.'/data/analyzers.sqlite');
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
@@ -150,9 +147,9 @@ abstract class Analyzer {
     }
     
     public function setAnalyzer($analyzer) {
-        $this->analyzer = self::getClass($analyzer);
+        $this->analyzer = $this->themes->getClass($analyzer);
         if ($this->analyzer === false) {
-            throw new NoSuchAnalyzer($analyzer);
+            throw new NoSuchAnalyzer($analyzer, $this->themes);
         }
         $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
     }
@@ -161,59 +158,10 @@ abstract class Analyzer {
         return $this->analyzerQuoted;
     }
     
-    static public function initDocs() {
-        if (Analyzer::$docs === null) {
-            $pathDocs = self::$staticConfig->dir_root.'/data/analyzers.sqlite';
-            self::$docs = new Docs($pathDocs);
-        }
-    }
-    
-    public static function getName($classname) {
+    public function getName($classname) {
         return str_replace( array('Exakat\\Analyzer\\', '\\'), array('', '/'), $classname);
     }
     
-    public static function getClass($name) {
-        // accepted names :
-        // PHP full name : Analyzer\\Type\\Class
-        // PHP short name : Type\\Class
-        // Human short name : Type/Class
-        // Human shortcut : Class (must be unique among the classes)
-
-        if (strpos($name, '\\') !== false) {
-            if (substr($name, 0, 16) === 'Exakat\\Analyzer\\') {
-                $class = $name;
-            } else {
-                $class = 'Exakat\\Analyzer\\'.$name;
-            }
-        } elseif (strpos($name, '/') !== false) {
-            $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
-        } elseif (strpos($name, '/') === false) {
-            self::initDocs();
-            $found = self::$docs->guessAnalyzer($name);
-            if (count($found) == 0) {
-                return false; // no class found
-            } elseif (count($found) == 1) {
-                $class = $found[0];
-            } else {
-                // too many options here...
-                return false;
-            }
-        } else {
-            $class = $name;
-        }
-        
-        if (class_exists($class)) {
-            $actualClassName = new \ReflectionClass($class);
-            if ($class !== $actualClassName->getName()) {
-                // problems with the case
-                return false;
-            } else {
-                return $class;
-            }
-        } else {
-            return false;
-        }
-    }
     
     public function getDump() {
         $query = <<<GREMLIN
@@ -240,72 +188,13 @@ GREMLIN;
         return $this->gremlin->query($query)->toArray();
     }
 
-    public static function getSuggestionThema($thema) {
-        self::initDocs();
-        $list = self::$docs->listAllThemes();
-        $r = array();
-        foreach($list as $c) {
-            $l = levenshtein($c, $thema);
-
-            if ($l < 8) {
-                $r[] = $c;
-            }
-        }
-        
-        return $r;
-    }
-    
-    public static function getSuggestionClass($name) {
-        self::initDocs();
-        $list = self::$docs->listAllAnalyzer();
-        $r = array();
-        foreach($list as $c) {
-            $l = levenshtein($c, $name);
-
-            if ($l < 8) {
-                $r[] = $c;
-            }
-        }
-        
-        return $r;
-    }
-    
-    public static function getInstance($name, $gremlin = null, $config = null) {
-        static $instanciated = array();
-        
-        if ($analyzer = static::getClass($name)) {
-            if (!isset($instanciated[$analyzer])) {
-                $instanciated[$analyzer] = new $analyzer($gremlin, $config);
-            }
-            return $instanciated[$analyzer];
-        } else {
-            display( 'No such class as "' . $name . '"'.PHP_EOL);
-            return null;
-        }
-    }
-    
     public function getDescription() {
         return $this->description;
     }
 
-    static public function listAllThemes($theme = null) {
-        self::initDocs();
-        return Analyzer::$docs->listAllThemes($theme);
-    }
-
-    static public function getThemeAnalyzers($theme = null) {
-        self::initDocs();
-        return Analyzer::$docs->getThemeAnalyzers($theme);
-    }
-
     public function getThemes() {
-        self::initDocs();
-        $analyzer = self::getName($this->analyzerQuoted);
-        return Analyzer::$docs->getThemeForAnalyzer($analyzer);
-    }
-
-    static public function getAnalyzers($theme) {
-        return Analyzer::$analyzers[$theme];
+        $analyzer = $this->getName($this->analyzerQuoted);
+        return $this->themes->getThemeForAnalyzer($analyzer);
     }
 
     private function addMethod($method, $arguments = array()) {
@@ -1092,9 +981,9 @@ GREMLIN
         return $this;
     }
 
-    public function cleanAnalyzerName($gremlin) {
+    private function cleanAnalyzerName($gremlin) {
         $dependencies = $this->dependsOn();
-        $fullNames = array_map('Exakat\\Analyzer\\Analyzer::makeBaseName', $dependencies);
+        $fullNames = array_map(array($this, 'makeBaseName'), $dependencies);
         
         return str_replace($dependencies, $fullNames, $gremlin);
     }
@@ -2054,23 +1943,16 @@ GREMLIN;
         return $jsonFile;
     }
     
-    public static function listAnalyzers() {
-        self::initDocs();
-        return self::$docs->listAllAnalyzer();
-    }
-
     public function hasResults() {
         return $this->rowCount > 0;
     }
 
     public function getSeverity() {
-        self::initDocs();
-        return Analyzer::$docs->getSeverity($this->analyzer);
+        return $this->themes->getSeverity($this->analyzer);
     }
 
     public function getTimeToFix() {
-        self::initDocs();
-        return Analyzer::$docs->getTimeToFix($this->analyzer);
+        return $this->themes->getTimeToFix($this->analyzer);
     }
 
     public function getPhpversion() {

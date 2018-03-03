@@ -35,11 +35,11 @@ class Project extends Tasks {
 
     private $project_dir = '.';
 
-    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
-                              'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
-                              'Analyze', 'Preferences', 'Inventory', 'Performances',
-                              'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Custom',
-                              );
+    protected $themesToRun = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
+                                   'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
+                                   'Analyze', 'Preferences', 'Inventory', 'Performances',
+                                   'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Custom',
+                                   );
 
     protected $reports = array();
 
@@ -127,7 +127,7 @@ class Project extends Tasks {
         $this->datastore->addRow('hash', $info);
 
         display("Running project '$project'".PHP_EOL);
-        display("Running the following analysis : ".implode(', ', $this->themes));
+        display("Running the following analysis : ".implode(', ', $this->themesToRun));
         display("Producing the following reports : ".implode(', ', $this->reports));
 
         display("Cleaning DB".PHP_EOL);
@@ -159,15 +159,14 @@ class Project extends Tasks {
 
         // Dump is a child process
         // initialization and first collection (action done once)
-        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -collect';
+        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -collect -v';
         shell_exec($shell);
         $this->logTime('Dumped and inited');
-
 
         if ($this->config->program !== null) {
             $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);
         } else {
-            $this->analyzeThemes($this->themes, $audit_start, $this->config->quiet);
+            $this->analyzeThemes($this->themesToRun, $audit_start, $this->config->quiet);
         }
 
         display("Analyzed project".PHP_EOL);
@@ -304,7 +303,7 @@ class Project extends Tasks {
             $themes = array($themes);
         }
         
-        $availableThemes = Analyzer::listAllThemes();
+        $availableThemes = $this->themes->listAllThemes();
 
         $diff = array_diff($themes, $availableThemes);
         if (!empty($diff)) {

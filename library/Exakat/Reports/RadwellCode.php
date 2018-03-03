@@ -52,7 +52,7 @@ class RadwellCode extends Reports {
                              );
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $resultsAnalyzers = new Results($sqlite, $list);
@@ -72,7 +72,7 @@ class RadwellCode extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
             }

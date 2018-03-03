@@ -42,7 +42,7 @@ class Simpletable extends Reports {
     }
     
     private function generateData($folder, $name = 'table') {
-        $list = Analyzer::getThemeAnalyzers('Analyze');
+        $list = $this->themes->getThemeAnalyzers('Analyze');
         $list = makeList($list);
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
@@ -90,7 +90,6 @@ HTML;
 HTML;
         }
         
-        print strlen($table)."\n";
         $html = file_get_contents($this->tmpName.'/index.html');
         $html = str_replace('<sections />', $table, $html);
         file_put_contents($this->tmpName.'/index.html', $html);

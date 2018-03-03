@@ -73,15 +73,15 @@ class Analyze extends Tasks {
             }
 
             foreach($analyzers_class as $analyzer) {
-                if (!Analyzer::getClass($analyzer)) {
-                    throw new NoSuchAnalyzer($analyzer);
+                if (!$this->themes->getClass($analyzer)) {
+                    throw new NoSuchAnalyzer($analyzer, $this->themes);
                 }
             }
         } elseif (is_string($this->config->thema)) {
             $thema = $this->config->thema;
 
-            if (!$analyzers_class = Analyzer::getThemeAnalyzers($thema)) {
-                throw new NoSuchAnalyzer($thema);
+            if (!$analyzers_class = $this->themes->getThemeAnalyzers($thema)) {
+                throw new NoSuchAnalyzer($thema, $this->themes);
             }
 
             $this->datastore->addRow('hash', array($this->config->thema => count($analyzers_class) ) );
@@ -98,7 +98,7 @@ class Analyze extends Tasks {
             $dependencies = array();
             $dependencies2 = array();
             foreach($analyzers_class as $a) {
-                $d = Analyzer::getInstance($a, $this->gremlin, $this->config);
+                $d = $this->themes->getInstance($a, $this->gremlin, $this->config);
                 assert($d !== null, 'Can\'t get instance of analyzer : '.$a);
                 $d = $d->dependsOn();
                 if (!is_array($d)) {
@@ -124,7 +124,7 @@ class Analyze extends Tasks {
 
                     foreach($diff as $k => $v) {
                         if (!isset($dependencies[$v])) {
-                            $x = Analyzer::getInstance($v, $this->gremlin, $this->config);
+                            $x = $this->themes->getInstance($v, $this->gremlin, $this->config);
                             if ($x === null) {
                                 display( "No such dependency as '$v'. Ignoring\n");
                                 continue;
@@ -169,7 +169,7 @@ class Analyze extends Tasks {
                 echo $progressBar->advance();
             }
             $begin = microtime(true);
-            $analyzer = Analyzer::getInstance($analyzer_class, $this->gremlin, $this->config);
+            $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
 
             if ($this->config->noRefresh === true && isset($analyzed[$analyzer_class])) {
                 display( "$analyzer_class is already processed\n");

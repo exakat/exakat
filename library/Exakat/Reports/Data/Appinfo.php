@@ -388,7 +388,7 @@ class Appinfo extends Data {
 
         public function prepare() {
             // collecting information for Extensions
-            $themed = Analyzer::getThemeAnalyzers('Appinfo');
+            $themed = array_merge(...array_values($this->extensions));
             $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
 
             $sources = array();
