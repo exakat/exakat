@@ -3,11 +3,9 @@
 namespace Test;
 
 use Exakat\Phpexec;
-use Exakat\Analyzer\Analyzer as ExakatAnalyzer;
+use Exakat\Analyzer\Themes;
 
-include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
-$config = new \Exakat\Config($GLOBALS['argv']);
-\Exakat\Analyzer\Analyzer::$staticConfig = $config;
+include_once(dirname(__DIR__, 3).'/library/Autoload.php');
 
 class Analyzer extends \PHPUnit_Framework_TestCase {
     public function generic_test($file) {
@@ -27,7 +25,9 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $config = new \Exakat\Config(array('foo', 'test', '-p', 'test'));
         chdir($pwd);
 
-        $analyzerobject = ExakatAnalyzer::getInstance($test_config, null, $config);
+        $themes = new Themes(dirname(__DIR__, 3).'/data/analyzers.sqlite');
+
+        $analyzerobject = $themes->getInstance($test_config, null, $config);
         if ($analyzerobject === null) {
             $this->markTestSkipped('Couldn\'t get an analyzer for '.$test_config.'.');
         }

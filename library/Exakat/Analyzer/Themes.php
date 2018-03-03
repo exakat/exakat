@@ -279,33 +279,34 @@ SQL;
             $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
         } elseif (strpos($name, '/') === false) {
             $found = $this->guessAnalyzer($name);
-            if (count($found) == 0) {
+
+            if (empty($found)) {
                 return false; // no class found
-            } elseif (count($found) == 1) {
-                $class = $found[0];
-            } else {
-                // too many options here...
+            } 
+            
+            if (count($found) > 1) {
                 return false;
-            }
+            } 
+            
+            $class = $found[0];
         } else {
             $class = $name;
         }
         
-        if (class_exists($class)) {
-            $actualClassName = new \ReflectionClass($class);
-            if ($class !== $actualClassName->getName()) {
-                // problems with the case
-                return false;
-            } else {
-                return $class;
-            }
-        } else {
+        if (!class_exists($class)) {
             return false;
+        }
+        
+        $actualClassName = new \ReflectionClass($class);
+        if ($class !== $actualClassName->getName()) {
+            // problems with the case
+            return false;
+        } else {
+            return $class;
         }
     }
 
     public function getSuggestionThema($thema) {
-        self::initDocs();
         $list = $this->listAllThemes();
         $r = array();
         foreach($list as $c) {
@@ -320,7 +321,6 @@ SQL;
     }
     
     public function getSuggestionClass($name) {
-        self::initDocs();
         $list = $this->listAllAnalyzer();
         $r = array();
         foreach($list as $c) {

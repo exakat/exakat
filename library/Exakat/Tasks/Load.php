@@ -1380,8 +1380,8 @@ SQL;
             $this->popExpression();
 
             $cpm->rank = ++$rank;
-            if ($cpm->atom == 'Usenamespace' ||
-                $cpm->atom == 'Usetrait') {
+            if ($cpm->atom === 'Usenamespace' ||
+                $cpm->atom === 'Usetrait') {
                 $link = 'USE';
             } else {
                 $link = strtoupper($cpm->atom);
@@ -1539,7 +1539,7 @@ SQL;
                 $this->processOpenWithEcho();
                 /// processing the first expression as an echo
                 $this->processSemicolon();
-                if ($this->tokens[$this->id + 1][0] == \Exakat\Tasks\T_END) {
+                if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_END) {
                     --$this->id;
                 }
             } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -2175,11 +2175,13 @@ SQL;
         } elseif ($atom === 'Methodcallname') {
             $functioncall->fullnspath = mb_strtolower($name->code);
             $functioncall->aliased    = self::NOT_ALIASED;
+
         } elseif ($atom === 'Defineconstant') {
             $functioncall->fullnspath = '\\define';
             $functioncall->aliased    = self::NOT_ALIASED;
 
             $this->processDefineAsConstants($functioncall);
+
         } elseif ($getFullnspath === self::WITH_FULLNSPATH ||
                   $name->fullnspath !== '\\list') {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
@@ -2259,10 +2261,7 @@ SQL;
 
         $this->pushExpression($string);
         
-        if ($string->atom == 'Parent' ||
-            $string->atom == 'Self'   ||
-            $string->atom == 'Newcall'
-            ) {
+        if (in_array($string->atom, array('Parent', 'Self', 'Newcall'))) {
             list($fullnspath, $aliased) = $this->getFullnspath($string, 'class');
             $string->fullnspath = $fullnspath;
             $string->aliased    = $aliased;
@@ -3338,9 +3337,7 @@ SQL;
     private function processNamespace() {
         $current = $this->id;
 
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
-            $name = $this->addAtomVoid();
-        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
             $nsname = $this->processOneNsname();
 
             list($fullnspath, $aliased) = $this->getFullnspath($nsname);
@@ -3349,6 +3346,10 @@ SQL;
             $this->pushExpression($nsname);
 
             return $this->processFCOA($nsname);
+        } 
+        
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
+            $name = $this->addAtomVoid();
         } else {
             $name = $this->processOneNsname();
         }
@@ -3690,7 +3691,7 @@ SQL;
         }
         $variable = $this->processSingle($atom);
         
-        if ($atom == 'This' && ($class = end($this->currentClassTrait))) {
+        if ($atom === 'This' && ($class = end($this->currentClassTrait))) {
             $this->addCall('class', $class->fullnspath, $variable);
         }
 
@@ -4937,7 +4938,7 @@ SQL;
         $this->addDefinition('const', $fullnspath, $argumentsId);
         $this->argumentsId[0]->fullnspath = $fullnspath;
 
-        if ($argumentsId->count == 3) {
+        if ($argumentsId->count === 3) {
             $this->uses['define'][mb_strtolower($fullnspath)] = $argumentsId;
         }
     }

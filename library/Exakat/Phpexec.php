@@ -116,7 +116,7 @@ class Phpexec {
 
     public function finish() {
         // prepare the configuration for Short tags
-        if ($this->isCurrentVersion){
+        if ($this->isCurrentVersion === true){
             $shortTags = ini_get('short_open_tag') == '1';
         } else {
             $res = shell_exec($this->phpexec.' -i');
@@ -126,7 +126,7 @@ class Phpexec {
         $this->config['short_open_tag'] = $shortTags;
 
         // prepare the configuration for Asp tags
-        if ($this->isCurrentVersion){
+        if ($this->isCurrentVersion === true){
             $aspTags = ini_get('asp_tags') == '1';
         } else {
             $res = shell_exec($this->phpexec.' -i');
@@ -141,7 +141,7 @@ class Phpexec {
 
     public function getTokens() {
         // prepare the list of tokens
-        if ($this->isCurrentVersion) {
+        if ($this->isCurrentVersion === true) {
             $x = get_defined_constants(true);
             $tokens = array_flip($x['tokenizer']);
         } else {
@@ -171,7 +171,7 @@ class Phpexec {
     public function getTokenFromFile($file) {
         $file = str_replace('$', '\\$', $file);
 
-        if ($this->isCurrentVersion) {
+        if ($this->isCurrentVersion === true) {
             $tokens = @token_get_all(file_get_contents($file));
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
@@ -190,7 +190,7 @@ class Phpexec {
     }
 
     public function countTokenFromFile($file) {
-        if ($this->isCurrentVersion) {
+        if ($this->isCurrentVersion === true) {
             $res = count(@token_get_all(file_get_contents(str_replace('$', '\\\$', $file))));
         } else {
             $filename = str_replace(array("'", '"', "\$"), array("\\'", '\\"', "\\\$"), $file);
