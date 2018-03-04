@@ -69,17 +69,17 @@ abstract class Tasks {
         if (static::CONCURENCE !== self::ANYTIME && $subTask === self::IS_NOT_SUBTASK) {
             if (self::$semaphore === null) {
                 if (static::CONCURENCE === self::QUEUE) {
-                    Tasks::$semaphorePort = 7610;
+                    self::$semaphorePort = 7610;
                 } elseif (static::CONCURENCE === self::SERVER) {
-                    Tasks::$semaphorePort = 7611;
+                    self::$semaphorePort = 7611;
                 } elseif (static::CONCURENCE === self::DUMP) {
-                    Tasks::$semaphorePort = 7612;
+                    self::$semaphorePort = 7612;
                 } else {
-                    Tasks::$semaphorePort = 7613;
+                    self::$semaphorePort = 7613;
                 }
 
-                if ($socket = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND)) {
-                    Tasks::$semaphore = $socket;
+                if ($socket = @stream_socket_server("udp://0.0.0.0:".self::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND)) {
+                    self::$semaphore = $socket;
                 } else {
                     throw new AnotherProcessIsRunning();
                 }
