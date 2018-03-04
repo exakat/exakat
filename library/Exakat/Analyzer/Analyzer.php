@@ -1923,14 +1923,18 @@ GREMLIN;
         $fullpath = $this->config->dir_root.'/data/'.$file;
         
         assert(file_exists($fullpath), 'Ini file "'.$fullpath.'" doesn\'t exists.');
-
-        $iniFile = parse_ini_file($fullpath);
         
-        if ($index !== null && isset($iniFile[$index])) {
-            return $iniFile[$index];
+        static $cache;
+
+        if (!isset($cache[$fullpath])) {
+            $cache[$fullpath] = parse_ini_file($fullpath);
         }
         
-        return $iniFile;
+        if ($index !== null && isset($cache[$fullpath][$index])) {
+            return $cache[$fullpath][$index];
+        }
+        
+        return $cache[$fullpath];
     }
 
     protected function loadJson($file) {
@@ -1938,9 +1942,12 @@ GREMLIN;
 
         assert(file_exists($fullpath), 'JSON file "'.$fullpath.'" doesn\'t exists.');
 
-        $jsonFile = json_decode(file_get_contents($fullpath));
+        static $cache;
+        if (!isset($cache[$fullpath])) {
+            $cache[$fullpath] = json_decode(file_get_contents($fullpath));
+        }
         
-        return $jsonFile;
+        return $cache[$fullpath];
     }
     
     public function hasResults() {
