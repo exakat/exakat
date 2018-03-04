@@ -30,6 +30,7 @@ class TestThenCast extends Analyzer {
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->atomInside('Comparison')
+             ->codeIs(array('==', '!=', '===', '!==')) // Avoid < and > 
              ->outIs(array('LEFT', 'RIGHT'))
              ->is('intval', 0)
              ->inIs(array('LEFT', 'RIGHT'))
@@ -38,9 +39,10 @@ class TestThenCast extends Analyzer {
              ->savePropertyAs('fullcode', 'name')
              ->back('first')
              ->outIs(array('THEN', 'ELSE'))
+             ->atomIsNot('Ifthen')
              ->fullcodeInside('name')
              ->inIs('CAST')
-             ->tokenIsNot(array('T_UNSET_CAST'))
+             ->tokenIsNot(array('T_UNSET_CAST', 'T_STRING_CAST', 'T_ARRAY_CAST', 'T_OBJECT_CAST'))
              ->back('first');
         $this->prepareQuery();
     }
