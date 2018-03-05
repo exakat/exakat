@@ -3884,7 +3884,7 @@ SQL;
             $return->line     = $this->tokens[$current][2];
             $return->token    = $this->getToken($this->tokens[$current][0]);
             
-            $this->runPlugins($operator, array('RETURN' => $return) );
+            $this->runPlugins($return, array('RETURN' => $returnArg) );
 
             $this->pushExpression($return);
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -4269,7 +4269,7 @@ SQL;
         $break->line     = $this->tokens[$current][2];
         $break->token    = $this->getToken($this->tokens[$current][0]);
 
-        $this->runPlugins($break, array($link => $noscream));
+        $this->runPlugins($break, array($link => $breakLevel));
         $this->pushExpression($break);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
