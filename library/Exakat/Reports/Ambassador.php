@@ -111,7 +111,7 @@ class Ambassador extends Reports {
                 $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
             $compatibilities = '';
-            $res = $this->sqlite->query('SELECT SUBSTR(key, -2) FROM hash WHERE key LIKE "Compatibility%"');
+            $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%"');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
                 $compatibilities .= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
             }
@@ -184,12 +184,13 @@ class Ambassador extends Reports {
 
         // Compatibility
         $this->generateCompilations();
-        $res = $this->sqlite->query('SELECT SUBSTR(key, -2) FROM hash WHERE key LIKE "Compatibility%"');
+        $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%"');
         $list = array();
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             $list[] = 'CompatibilityPHP'.$row[0];
             $this->generateCompatibility($row[0]);
         }
+        $this->generateCompatibilityEstimate();
         $this->generateIssuesEngine('compatibility_issues',
                                     $this->getIssuesFaceted($list));
 
@@ -1996,6 +1997,174 @@ SQL;
         $this->putBasedPage('php_compilation', $html);
     }
 
+    protected function generateCompatibilityEstimate() {
+        $html = $this->getBasedPage('empty');
+        
+        $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3');
+        $scores = array_fill_keys(array_values($versions), 0);
+        $versions = array_reverse($versions);
+
+        $analyzers = array( 'Php/Php54NewFunctions'                 => '5.3-',
+                            'Structures/DereferencingAS'            => '5.3-',
+                            'Php/ClosureThisSupport'                => '5.4-',
+                            'Php/HashAlgos54'                       => '5.4-',
+                            'Php/Php54RemovedFunctions'             => '5.4-',
+                            'Structures/Break0'                     => '5.4-',
+                            'Structures/BreakNonInteger'            => '5.4-',
+                            'Structures/CalltimePassByReference'    => '5.4-',
+                            'Php/MethodCallOnNew'                   => '5.4+',
+                            'Type/Binary'                           => '5.4+',
+                            'Php/Php55NewFunctions'                 => '5.5-',
+                            'Php/Php55RemovedFunctions'             => '5.5-',
+                            'Php/CantUseReturnValueInWriteContext'  => '5.5+',
+                            'Php/ConstWithArray'                    => '5.5+',
+                            'Php/Password55'                        => '5.5+',
+                            'Php/StaticclassUsage'                  => '5.5+',
+                            'Structures/ForeachWithList'            => '5.5+',
+                            'Structures/ModernEmpty'                => '5.5+',
+                            'Structures/TryFinally'                 => '5.5+',
+                            'Php/Php56NewFunctions'                 => '5.6-',
+                            'Structures/CryptWithoutSalt'           => '5.6-',
+                            'Namespaces/UseFunctionsConstants'      => '5.6+',
+                            'Php/ConstantScalarExpression'          => '5.6+',
+                            'Php/debugInfoUsage'                    => '5.6+',
+                            'Php/EllipsisUsage'                     => '5.6+',
+                            'Php/ExponentUsage'                     => '5.6+',
+                            'Structures/ConstantScalarExpression'   => '5.6+',
+                            'Classes/AbstractStatic'                => '7.0-',
+                            'Classes/NullOnNew'                     => '7.0-',
+                            'Classes/UsingThisOutsideAClass'        => '7.0-',
+                            'Extensions/Extapc'                     => '7.0-',
+                            'Extensions/Extereg'                    => '7.0-',
+                            'Extensions/Extmysql'                   => '7.0-',
+                            'Functions/MultipleSameArguments'       => '7.0-',
+                            'Php/EmptyList'                         => '7.0-',
+                            'Php/ForeachDontChangePointer'          => '7.0-',
+                            'Php/GlobalWithoutSimpleVariable'       => '7.0-',
+                            'Php/NoListWithString'                  => '7.0-',
+                            'Php/Php70NewClasses'                   => '7.0-',
+                            'Php/Php70NewFunctions'                 => '7.0-',
+                            'Php/Php70NewInterfaces'                => '7.0-',
+                            'Php/Php70RemovedFunctions'             => '7.0-',
+                            'Php/ReservedKeywords7'                 => '7.0-',
+                            'Structures/BreakOutsideLoop'           => '7.0-',
+                            'Structures/SwitchWithMultipleDefault'  => '7.0-',
+                            'Type/MalformedOctal'                   => '7.0-',
+                            'Classes/Anonymous'                     => '7.0+',
+                            'Extensions/Extast'                     => '7.0+',
+                            'Extensions/Extzbarcode'                => '7.0+',
+                            'Php/Coalesce'                          => '7.0+',
+                            'Php/DeclareStrict'                     => '7.0+',
+                            'Php/DeclareStrictType'                 => '7.0+',
+                            'Php/DefineWithArray'                   => '7.0+',
+                            'Php/NoStringWithAppend'                => '7.0+',
+                            'Php/Php70RemovedDirective'             => '7.0+',
+                            'Php/Php7RelaxedKeyword'                => '7.0+',
+                            'Php/ReturnTypehintUsage'               => '7.0+',
+                            'Php/ScalarTypehintUsage'               => '7.0+',
+                            'Php/UnicodeEscapeSyntax'               => '7.0+',
+                            'Php/UseSessionStartOptions'            => '7.0+',
+                            'Php/YieldFromUsage'                    => '7.0+',
+                            'Security/UnserializeSecondArg'         => '7.0+',
+                            'Structures/IssetWithConstant'          => '7.0+',
+                            'Php/Php71NewClasses'                   => '7.1-',
+                            'Php/Php71NewFunctions'                 => '7.1-',
+                            'Type/OctalInString'                    => '7.1-',
+                            'Php/ListShortSyntax'                   => '7.1+',
+                            'Php/ListWithKeys'                      => '7.1+',
+                            'Php/Php71RemovedDirective'             => '7.1+',
+                            'Php/UseNullableType'                   => '7.1+',
+                            'Php/Php72Deprecation'                  => '7.2-',
+                            'Php/Php72NewClasses'                   => '7.2-',
+                            'Php/Php72NewConstants'                 => '7.2-',
+                            'Php/Php72NewFunctions'                 => '7.2-',
+                            'Php/Php72ObjectKeyword'                => '7.2-',
+                            'Php/Php72RemovedClasses'               => '7.2-',
+                            'Php/Php72RemovedFunctions'             => '7.2-',
+                            'Php/Php72RemovedInterfaces'            => '7.2-',
+                            'Classes/CantInheritAbstractMethod'     => '7.2+',
+                            'Classes/ChildRemoveTypehint'           => '7.2+',
+                            'Php/GroupUseTrailingComma'             => '7.2+',
+                            'Php/Php73NewFunctions'                 => '7.3-',
+                            'Php/ListWithReference'                 => '7.3+',
+                          );
+
+//        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
+//        $colors = array('7900E5', 'DD00BF', 'D50039', 'CE4400', 'C6B900', '59BF00');
+        $colors = array('7900E5', 'DE00D7', 'D80064', 'D20700', 'CB6C00', 'BEC500', '59BF00');
+
+        $list = makeList(array_keys($analyzers));
+        $query = <<<SQL
+SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ($list) AND count >= 0
+SQL;
+
+        $results = $this->sqlite->query($query);
+
+        while( $row = $results->fetchArray(\SQLITE3_ASSOC)) {
+            $counts[$row['analyzer']] = $row['count'];
+        }
+
+        $data = array();
+        $data2 = array();
+        foreach($analyzers as $analyzer => $analyzerVersion) {
+            if (substr($analyzerVersion, -1) === '+') {
+                $coeff = 1;
+            } else {
+                $coeff = -1;
+            }
+
+            foreach($versions as $version) {
+                if (!isset($counts[$analyzer])) {
+                    continue;
+                } elseif ($counts[$analyzer] === 0) {
+                    $data2[$analyzer][$version] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
+                } else {
+                    if ($coeff * version_compare($version, $analyzerVersion) >= 0) {
+                        $data[$analyzer][$version] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
+                        ++$scores[$version];
+                    } else {
+                        $data[$analyzer][$version] = '<i class="fa fa-warning" style="color: crimson"></i>';
+                    }
+                }
+            }
+        }
+
+        $table = '';
+        $titles = "<tr><th>Version</th><th>Name</th><th>".implode('</th><th>', array_keys(array_values($data)[0]) )."</th></tr>";
+        $data = array_merge($data, $data2);
+        foreach($data as $name => $row) {
+            $analyzer = $this->themes->getInstance($name, null, $this->config);
+            $description = $analyzer->getDescription();
+
+            $link = '<a href="analyzers_doc.html#'.$this->toId($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+
+            $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$description->getName()}</td><td>".implode('</td><td>', $row)."</td></tr>\n";
+        }
+
+        $theTable = <<<HTML
+        					<table class="table table-striped">
+        						<tr></tr>
+        						$titles
+        						$table
+        					</table>
+HTML;
+
+        $max = max($scores);
+        $key = array_keys($scores, $max);
+        
+        if ($max === count($data)) {
+            $suggestion = 'This code is compatible with PHP '.join(', ', $key);
+        } else {
+            $suggestion = 'Impossible to determine a suitable PHP version. The best estimation is PHP '.join(', ', $key).'. ';
+        }
+
+        $html = $this->injectBloc($html, 'TITLE', 'PHP Version Estimation');
+        $html = $this->injectBloc($html, 'DESCRIPTION', $suggestion);
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
+
+        $this->putBasedPage('compatibility_version', $html);
+    }
+
     protected function generateAnalyzerSettings() {
         $settings = '';
 
@@ -2198,10 +2367,10 @@ SQL
 
         $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);
 
-        $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($list).')');
         $counts = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$row['analyzer']] = $row['counts'];
+            $counts[$row['analyzer']] = $row['count'];
         }
 
         foreach($list as $l) {
