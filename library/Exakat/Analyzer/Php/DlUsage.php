@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\FunctionUsage;
 
 class DlUsage extends FunctionUsage {
     public function analyze() {
-        $this->functions = array('dl');
+        $this->functions = array('\dl');
 
         parent::analyze();
     }
