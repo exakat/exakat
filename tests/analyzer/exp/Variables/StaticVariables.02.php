@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array(
+$expected     = array('$staticVariable',
                      );
 
 $expected_not = array('$staticProperty',

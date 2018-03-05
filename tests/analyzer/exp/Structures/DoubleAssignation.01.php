@@ -7,7 +7,8 @@ $expected     = array('$e1->f2 = 4',
                       '$c1[\'3\'] = 3',
                      );
 
-$expected_not = array(
+$expected_not = array('$b2 = 1',
+                      '$c2 = 3',
                      );
 
 ?>

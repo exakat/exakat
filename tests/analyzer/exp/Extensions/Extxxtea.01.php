@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('xxtea_encrypt($str, $key)', 
+$expected     = array('xxtea_encrypt($str, $key)',
                       'xxtea_decrypt($encrypt_data, $key)',
                      );
 

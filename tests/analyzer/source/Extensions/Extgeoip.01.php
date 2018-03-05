@@ -3,4 +3,6 @@
     if ($continent) {
         echo 'Cet hôte est situé en : ' . $continent;
     }
+
+    $continent = new geoip('Not geoip');
 ?>
