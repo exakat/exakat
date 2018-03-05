@@ -861,8 +861,8 @@ SQL;
                     $this->addLink($property, $propertyName, 'MEMBER');
 
                     $this->pushExpression($property);
+                    $elements[] = $property;
                 }
-                $elements[] = $part;
             } else {
                 $this->processNext();
             }
@@ -877,6 +877,7 @@ SQL;
             }
             $part->rank = ++$rank;
             $fullcode[] = $part->fullcode;
+            $elements[] = $part;
 
             $this->addLink($string, $part, 'CONCAT');
         }
