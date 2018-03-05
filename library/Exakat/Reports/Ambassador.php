@@ -1221,7 +1221,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ("'.implode('", "', $this->themes->getThemeAnalyzers($categorie)).'")';
+            $list = 'IN ('.makeList($this->themes->getThemeAnalyzers($categorie)).')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -1264,7 +1264,7 @@ JAVASCRIPT;
 
     public function getSeverityBreakdown() {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $query = <<<SQL
                 SELECT severity, count(*) AS number
@@ -1347,7 +1347,7 @@ SQL;
 
     protected function getAnalyzersResultsCounts() {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $result = $this->sqlite->query(<<<SQL
         SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity 
@@ -1397,7 +1397,7 @@ SQL;
                             $this->themes->getThemeAnalyzers('CompatibilityPHP73'),
                             array('Project/Dump')
                             );
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $query = <<<SQL
 SELECT analyzer AS analyzer FROM resultsCounts
@@ -1412,11 +1412,15 @@ SQL;
 
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
+            
+            if ($analyzer === null) {
+                continue;
+            }
 
-            $filesHTML.= "<tr>";
-            $filesHTML.='<td><a href="analyzers_doc.html#analyzer='.$row['analyzer'].'" id="'.$this->toId($row['analyzer']).'"><i class="fa fa-book" style="font-size: 14px"></i></a>
-                         &nbsp; '.$analyzer->getDescription()->getName().'</td>';
-            $filesHTML.= "</tr>";
+            $filesHTML.= '<tr>';
+            $filesHTML.= "<td><a href=\"analyzers_doc.html#analyzer=$row[analyzer]\" id=\"{$this->toId($row['analyzer'])}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a>
+                         &nbsp; {$analyzer->getDescription()->getName()}</td>";
+            $filesHTML.= '</tr>';
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
@@ -1450,7 +1454,7 @@ SQL;
 
     private function getFilesResultsCounts() {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $result = $this->sqlite->query(<<<SQL
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
@@ -1480,7 +1484,7 @@ SQL;
 
     public function getFilesCount($limit = null) {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $query = "SELECT file, count(*) AS number
                     FROM results
@@ -1555,7 +1559,7 @@ SQL;
 
     private function getAnalyzersCount($limit) {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -1577,7 +1581,7 @@ SQL;
 
     protected function getTopAnalyzers() {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -1609,7 +1613,7 @@ SQL;
 
     private function getSeveritiesNumberBy($type = 'file') {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $query = <<<SQL
 SELECT $type, severity, count(*) AS count
@@ -1739,7 +1743,7 @@ JAVASCRIPTCODE;
 
     public function getIssuesFaceted($theme) {
         $list = $this->themes->getThemeAnalyzers($theme);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $sqlQuery = <<<SQL
             SELECT fullcode, file, line, analyzer

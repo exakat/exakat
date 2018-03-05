@@ -1719,83 +1719,19 @@ HTML;
     }
 
     private function generateStats() {
-        $extensions = array(
-                    'Summary' => array(
-                            'Namespaces'     => 'Namespace',
-                            'Classes'        => 'Class',
-                            'Interfaces'     => 'Interface',
-                            'Trait'          => 'Trait',
-                            'Function'       => 'Functions/RealFunctions',
-                            'Variables'      => 'Variables/RealVariables',
-                            'Constants'      => 'Constants/Constantnames',
-                     ),
-                    'Classes' => array(
-                            'Classes'           => 'Class',
-                            'Class constants'   => 'Classes/ConstantDefinition',
-                            'Properties'        => 'Classes/NormalProperties',
-                            'Static properties' => 'Classes/StaticProperties',
-                            'Methods'           => 'Classes/NormalMethods',
-                            'Static methods'    => 'Classes/StaticMethods',
-                            // Spot Abstract methods
-                            // Spot Final Methods
-                     ),
-                    'Structures' => array(
-                            'Ifthen'              => 'Ifthen',
-                            'Else'                => 'Structures/ElseUsage',
-                            'Switch'              => 'Switch',
-                            'Case'                => 'Case',
-                            'Default'             => 'Default',
-                            'For'                 => 'For',
-                            'Foreach'             => 'Foreach',
-                            'While'               => 'While',
-                            'Do..while'           => 'Dowhile',
-
-                            'New'                 => 'New',
-                            'Clone'               => 'Clone',
-                            'Class constant call' => 'Staticconstant',
-                            'Method call'         => 'Methodcall',
-                            'Static method call'  => 'Staticmethodcall',
-                            'Properties usage'    => 'Property',
-                            'Static property'     => 'Staticproperty',
-
-                            'Throw'               => 'Throw',
-                            'Try'                 => 'Try',
-                            'Catch'               => 'Catch',
-                            'Finally'             => 'Finally',
-
-                            'Yield'               => 'Yield',
-                            'Yield From'          => 'Yieldfrom',
-
-                            '?  :'                => 'Ternary',
-                            '?: '                 => 'Php/Coalesce',
-                            '??'                  => 'Php/NullCoalesce',
-
-                            'Variables constants' => 'Constants/VariableConstants',
-                            'Variables variables' => 'Variables/VariableVariable',
-                            'Variables functions' => 'Functions/Dynamiccall',
-                            'Variables classes'   => 'Classes/VariableClasses',
-                    ),
-                );
-
+        $results = new Stats($this->config);
+        $report = $results->generate(null, Reports::INLINE);
+        $report = json_decode($report);
+        
         $stats = '';
-        foreach($extensions as $section => $hash) {
-            $stats .= "<tr><td colspan=2 bgcolor=#BBB>$section</td></tr>\n";
+        foreach($report as $section => $hash) {
+            $stats .= "<tr><td colspan=2 bgcolor=\"#BBB\">$section</td></tr>\n";
 
-            foreach($hash as $name => $ext) {
-                if (strpos($ext, '/') === false) {
-                    $res = $this->sqlite->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"');
-                    $d = $res->fetchArray(\SQLITE3_ASSOC);
-                    $d = (int) $d['count'];
-                } else {
-                    $res = $this->sqlite->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"');
-                    $d = $res->fetchArray(\SQLITE3_ASSOC);
-                    $d = (int) $d['count'];
-                }
-                $res = $d === -2 ? 'N/A' : $d;
-                $stats .= "<tr><td>$name</td><td>$res</td></tr>\n";
+            foreach($hash as $name => $count) {
+                $stats .= "<tr><td>$name</td><td>$count</td></tr>\n";
             }
         }
-
+        
         $html = $this->getBasedPage('stats');
         $html = $this->injectBloc($html, 'STATS', $stats);
         $this->putBasedPage('stats', $html);

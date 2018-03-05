@@ -198,30 +198,7 @@ MENU;
         $this->generateAppinfo();
         $this->generateCompatibilities();
         $this->generateUnusedComponents();
-/*
-        $this->generateExtensionsBreakdown();
-        $this->generateFiles();
-        $this->generateAnalyzers();
-        $this->generateAnalyzersList();
-        $this->generateExternalLib();
 
-        $this->generateExternalServices();
-        $this->generateDirectiveList();
-        $this->generateAlteredDirectives();
-        $this->generateStats();
-
-        // Compatibility
-        $this->generateCompilations();
-        $res = $this->sqlite->query('SELECT SUBSTR(key, -2) FROM hash WHERE key LIKE "Compatibility%"');
-        while($row = $res->fetchArray(\SQLITE3_NUM)) {
-            $this->generateCompatibility($row[0]);
-        }
-
-        // inventories
-        $this->generateDynamicCode();
-        $this->generateGlobals();
-        $this->generateInventories();
-*/
         // Annex
         $this->generateAnalyzerSettings();
         $this->generateDocumentation();
@@ -1795,89 +1772,6 @@ HTML;
         $html = $this->getBasedPage('altered_directives');
         $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);
         $this->putBasedPage('altered_directives', $html);
-    }
-
-    private function generateStats() {
-        $extensions = array(
-                    'Summary' => array(
-                            'Namespaces'     => 'Namespace',
-                            'Classes'        => 'Class',
-                            'Interfaces'     => 'Interface',
-                            'Trait'          => 'Trait',
-                            'Function'       => 'Functions/RealFunctions',
-                            'Variables'      => 'Variables/RealVariables',
-                            'Constants'      => 'Constants/Constantnames',
-                     ),
-                    'Classes' => array(
-                            'Classes'           => 'Class',
-                            'Class constants'   => 'Classes/ConstantDefinition',
-                            'Properties'        => 'Classes/NormalProperties',
-                            'Static properties' => 'Classes/StaticProperties',
-                            'Methods'           => 'Classes/NormalMethods',
-                            'Static methods'    => 'Classes/StaticMethods',
-                            // Spot Abstract methods
-                            // Spot Final Methods
-                     ),
-                    'Structures' => array(
-                            'Ifthen'              => 'Ifthen',
-                            'Else'                => 'Structures/ElseUsage',
-                            'Switch'              => 'Switch',
-                            'Case'                => 'Case',
-                            'Default'             => 'Default',
-                            'For'                 => 'For',
-                            'Foreach'             => 'Foreach',
-                            'While'               => 'While',
-                            'Do..while'           => 'Dowhile',
-
-                            'New'                 => 'New',
-                            'Clone'               => 'Clone',
-                            'Class constant call' => 'Staticconstant',
-                            'Method call'         => 'Methodcall',
-                            'Static method call'  => 'Staticmethodcall',
-                            'Properties usage'    => 'Property',
-                            'Static property'     => 'Staticproperty',
-
-                            'Throw'               => 'Throw',
-                            'Try'                 => 'Try',
-                            'Catch'               => 'Catch',
-                            'Finally'             => 'Finally',
-
-                            'Yield'               => 'Yield',
-                            'Yield From'          => 'Yieldfrom',
-
-                            '?  :'                => 'Ternary',
-                            '?: '                 => 'Php/Coalesce',
-                            '??'                  => 'Php/NullCoalesce',
-
-                            'Variables constants' => 'Constants/VariableConstants',
-                            'Variables variables' => 'Variables/VariableVariable',
-                            'Variables functions' => 'Functions/Dynamiccall',
-                            'Variables classes'   => 'Classes/VariableClasses',
-                    ),
-                );
-
-        $stats = '';
-        foreach($extensions as $section => $hash) {
-            $stats .= "<tr><td colspan=2 bgcolor=#BBB>$section</td></tr>\n";
-
-            foreach($hash as $name => $ext) {
-                if (strpos($ext, '/') === false) {
-                    $res = $this->sqlite->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"');
-                    $d = $res->fetchArray(\SQLITE3_ASSOC);
-                    $d = (int) $d['count'];
-                } else {
-                    $res = $this->sqlite->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"');
-                    $d = $res->fetchArray(\SQLITE3_ASSOC);
-                    $d = (int) $d['count'];
-                }
-                $res = $d === -2 ? 'N/A' : $d;
-                $stats .= "<tr><td>$name</td><td>$res</td></tr>\n";
-            }
-        }
-
-        $html = $this->getBasedPage('stats');
-        $html = $this->injectBloc($html, 'STATS', $stats);
-        $this->putBasedPage('stats', $html);
     }
 
     private function generateCodes() {
