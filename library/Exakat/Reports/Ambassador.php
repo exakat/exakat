@@ -2101,36 +2101,42 @@ SQL;
 
         $directiveList = '';
         $res = $this->sqlite->query(<<<SQL
-SELECT analyzer FROM resultsCounts 
+SELECT analyzer, count FROM resultsCounts 
     WHERE ( analyzer LIKE "Extensions/Ext%" OR 
             analyzer IN ("Structures/FileUploadUsage", 
                          "Php/UsesEnv",
-                         "Php/UseBrowscap"))
-        AND count > 0
+                         "Php/UseBrowscap",
+                         "Php/DlUsage"
+                         ))
+        AND count >= 0
 SQL
         );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($row['analyzer'] == 'Structures/FileUploadUsage') {
+            $data = array();
+            if ($row['analyzer'] === 'Structures/FileUploadUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
-                $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
-            } elseif ($row['analyzer'] == 'Php/UsesEnv') {
+                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
+            } elseif ($row['analyzer'] === 'Php/UsesEnv' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
-                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
-            } elseif ($row['analyzer'] == 'Php/UseBrowscap') {
+                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+            } elseif ($row['analyzer'] === 'Php/UseBrowscap' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Browser</td></tr>\n";
-                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/browscap.json'));
-            } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
+                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/browscap.json'));
+            } elseif ($row['analyzer'] === 'Php/DlUsage' && $row['count'] === 0) {
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Enable DL</td></tr>\n";
+                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/enable_dl.json'));
+            } elseif ($row['analyzer'] === 'Php/ErrorLogUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
-                $data['Errorlog'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
-            } else {
+                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
+            } elseif ($row['count'] !== 0) {
                 $ext = substr($row['analyzer'], 14);
                 if (in_array($ext, $directives)) {
                     $data = json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
                     $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
-                    foreach($data as $row) {
-                        $directiveList .= "<tr><td>$row->name</td><td>$row->suggested</td><td>$row->documentation</td></tr>\n";
-                    }
                 }
+            } 
+            foreach($data as $directive) {
+                $directiveList .= "<tr><td>$directive->name</td><td>$directive->suggested</td><td>$directive->documentation</td></tr>\n";
             }
         }
 
@@ -2203,7 +2209,7 @@ SQL
             if (isset($counts[$l])) {
                 $result = (int) $counts[$l];
             } else {
-                $result = -2; // -2 == not run
+                $result = -2; // -2 === not run
             }
             $result = $this->Compatibility($result, $l);
             $name = $ini['name'];
@@ -2467,7 +2473,7 @@ HTML;
             $parent = '\\'.strtolower($k);
             if (is_string($v)) {
                 $return .= '<div style="font-weight: bold">'.$v.'</div>';
-            } elseif (count($v) == 1) {
+            } elseif (count($v) === 1) {
                 if (empty($v[0])) {
                     if (empty($k)) {
                         $return .= '<div style="font-weight: bold">\\</div>';
