@@ -41,6 +41,10 @@ Glossary
 
       + :ref:`Slow Functions <slow-functions>`
 
+    + `array_fill_keys()`
+
+      + :ref:`Structures/CouldUseArrayFillKeys <structures/couldusearrayfillkeys>`
+
     + `array_filter()`
 
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
@@ -384,6 +388,7 @@ Glossary
     + `func_get_args()`
 
       + :ref:`Ellipsis Usage <ellipsis-usage>`
+      + :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
       + :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
       + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 
@@ -498,7 +503,6 @@ Glossary
       + :ref:`Isset With Constant <isset-with-constant>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Isset With Empty <no-isset-with-empty>`
-      + :ref:`Null Coalesce <null-coalesce>`
       + :ref:`Should Use Coalesce <should-use-coalesce>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`

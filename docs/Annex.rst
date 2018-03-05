@@ -191,6 +191,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/oci8 <http://php.net/manual/en/book.oci8.php>`_
 * `ext/odbc <http://www.php.net/manual/en/book.uodbc.php>`_
 * `ext/opcache <http://www.php.net/manual/en/book.opcache.php>`_
+* ext/opencensus
 * `ext/openssl <http://php.net/manual/en/book.openssl.php>`_
 * `ext/parle <http://php.net/manual/en/book.parle.php>`_
 * `ext/parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
@@ -232,7 +233,9 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/tokenizer <http://www.php.net/tokenizer>`_
 * `ext/tokyotyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
 * `ext/trader <http://www.ta-lib.org/>`_
+* ext/uopz
 * `ext/v8js <http://php.net/manual/en/book.v8js.php>`_
+* `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
 * ext/vips
 * `ext/wddx <http://php.net/manual/en/intro.wddx.php>`_
 * ext/wikidiff2
@@ -247,6 +250,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/xmlrpc <http://www.php.net/manual/en/book.xmlrpc.php>`_
 * `ext/xmlwriter <http://php.net/manual/en/book.xmlwriter.php>`_
 * `ext/xsl <http://php.net/manual/en/intro.xsl.php>`_
+* ext/xxtea
 * `ext/yaml <http://www.yaml.org/>`_
 * `ext/yis <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * ext/zbarcode
@@ -318,12 +322,25 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.1.8
+
+  * Structures/ConstantPreferences (Structures/ConstantPreferences)
+
+* 1.1.7
+
+  * Dynamic Library Loading (Security/DynamicDl ; Security)
+  * PHP 7.3 Last Empty Argument (Php/PHP73LastEmptyArgument ; CompatibilityPHP73)
+  * Structures/CouldUseArrayFillKeys (Structures/CouldUseArrayFillKeys ; Suggestions)
+  * ext/opencensus (Extensions/Extopencensus)
+  * ext/uopz (Extensions/Extuopz ; Appinfo)
+  * ext/varnish (Extensions/Extvarnish ; Appinfo)
+  * ext/xxtea (Extensions/Extxxtea ; Appinfo)
+
 * 1.1.6
 
   * Could Use Compact (Structures/CouldUseCompact ; Suggestions)
   * Foreach On Object (Php/ForeachObject)
   * List With Reference (Php/ListWithReference ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
-  * Structures/ConstantPreferences (Structures/ConstantPreferences ; Under Work)
   * Test Then Cast (Structures/TestThenCast ; Analyze)
 
 * 1.1.5
@@ -737,7 +754,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Missing Cases In Switch (Structures/MissingCases ; Analyze)
   * New Constants In PHP 7.2 (Php/Php72NewConstants ; CompatibilityPHP72)
   * New Functions In PHP 7.2 (Php/Php72NewFunctions ; CompatibilityPHP72)
-  * New Functions In PHP 7.3 (Php/Php73NewFunctions ; )
+  * New Functions In PHP 7.3 (Php/Php73NewFunctions ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * No Echo In Route Callable (Slim/NoEchoInRouteCallable ; Slim)
   * Slim Missing Classes (Slim/SlimMissing ; Internal)
   * SlimPHP 1.0.0 Undefined Classes (Slim/Slimphp10 ; Slim)
@@ -1385,7 +1402,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Not Same Name As File (Classes/NotSameNameAsFile ; )
   * Not Same Name As File (Classes/SameNameAsFile ; Internal)
   * Nowdoc Delimiter Glossary (Type/Nowdoc ; Appinfo)
-  * Null Coalesce (Php/NullCoalesce ; Appinfo, Suggestions)
+  * Null Coalesce (Php/NullCoalesce ; )
   * Null On New (Classes/NullOnNew ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, OneFile, Simple)
   * Objects Don't Need References (Structures/ObjectReferences ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 2)
   * Octal Glossary (Type/Octal ; Appinfo)
@@ -1849,6 +1866,7 @@ List of external links mentionned in this documentation.
 * `__autoload <http://php.net/autoload>`_
 * `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
+* `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
 * `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
@@ -1860,6 +1878,7 @@ List of external links mentionned in this documentation.
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_search <http://php.net/array_search>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
@@ -1957,6 +1976,9 @@ List of external links mentionned in this documentation.
 * `ext/recode <http://www.php.net/manual/en/book.recode.php>`_
 * `ext/sqlite <http://php.net/manual/en/book.sqlite.php>`_
 * `ext/sqlite3 <http://php.net/manual/en/book.sqlite3.php>`_
+* `ext/uopz <https://pecl.php.net/package/uopz>`_
+* `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
+* `ext/xxtea <https://pecl.php.net/package/xxtea>`_
 * `extension FANN <http://php.net/manual/en/book.fann.php>`_
 * `extension mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_
 * `Ez <https://ez.no/>`_
@@ -2030,13 +2052,15 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
 * `Mathematical Functions <http://php.net/manual/en/book.math.php>`_
 * `Mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
+* `MD5 <http://php.net/md5>`_
+* `Media Type <https://en.wikipedia.org/wiki/Media_type>`_
 * `Memcache on PHP <http://www.php.net/manual/en/book.memcache.php>`_
 * `mhash <http://mhash.sourceforge.net/>`_
 * `Microsoft SQL Server <http://www.php.net/manual/en/book.mssql.php>`_
@@ -2052,6 +2076,7 @@ List of external links mentionned in this documentation.
 * `New features <http://php.net/manual/en/migration56.new-features.php>`_
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
+* `Nowdoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.nowdoc>`_
 * `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_
 * `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_
 * `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
@@ -2068,6 +2093,7 @@ List of external links mentionned in this documentation.
 * `Output Buffering Control <http://php.net/manual/en/book.outcontrol.php>`_
 * `Overload <http://php.net/manual/en/language.oop5.overloading.php#object.get>`_
 * `Packagist <https://packagist.org/>`_
+* `parent <http://php.net/manual/en/keyword.parent.php>`_
 * `Parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
@@ -2096,6 +2122,7 @@ List of external links mentionned in this documentation.
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
+* `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
 * `Process Control <http://php.net/manual/en/book.pcntl.php>`_
@@ -2144,8 +2171,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_
@@ -2155,6 +2182,7 @@ List of external links mentionned in this documentation.
 * `Symfony <http://www.symfony.com/>`_
 * `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
+* `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `the docs online <http://exakat.readthedocs.io/en/latest/Rules.html>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
@@ -2165,6 +2193,7 @@ List of external links mentionned in this documentation.
 * `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
+* `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
