@@ -220,9 +220,9 @@ GREMLIN;
                 display( "$analyzer_class running\n");
                 $analyzer->run($this->config);
 
-                $count = $analyzer->getRowCount();
-                $processed = $analyzer->getProcessedCount();
-                $queries = $analyzer->getQueryCount();
+                $count      = $analyzer->getRowCount();
+                $processed  = $analyzer->getProcessedCount();
+                $queries    = $analyzer->getQueryCount();
                 $rawQueries = $analyzer->getRawQueryCount();
                 $total_results += $count;
                 display( "$analyzer_class run ($count / $processed)\n");
