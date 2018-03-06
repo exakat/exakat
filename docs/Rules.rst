@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 26 Feb 2018 07:33:59 +0000
-.. comment: Generation hash : 78470b804c5d9ff5f0525f75ff7d05c082a975ad
+.. comment: Generation date : Mon, 05 Mar 2018 19:30:25 +0000
+.. comment: Generation hash : 60bccf08db981ead991f4993ea51ea42aecbe0ed
 
 
 .. _$http\_raw\_post\_data:
@@ -3109,6 +3109,9 @@ List of constants being defined with names that are incompatible with PHP standa
    
    ?>
 
+
+See also `Constants <http://php.net/manual/en/language.constants.php>`_.
+
 +--------------+--------------------------------+
 | Command Line | Constants/ConstantStrangeNames |
 +--------------+--------------------------------+
@@ -4501,6 +4504,38 @@ This is also true if else has a return, and then not : simply reverse the condit
 +--------------+------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
+
+
+.. _dynamic-library-loading:
+
+Dynamic Library Loading
+#######################
+
+
+Loading a variable dynamically requires a lot of care in the preparation of the library name. 
+
+In case of injection in the variable, the dynamic loading of a library gives a lot of power to an intruder. 
+
+.. code-block:: php
+
+   <?php
+   
+       // dynamically loading a library
+   	dl($library. PHP_SHLIB_SUFFIX);
+   
+       // dynamically loading ext/vips
+   	dl('vips.' . PHP_SHLIB_SUFFIX);
+   
+   ?>
+
+
+See also `dl <http://www.php.net/dl>`_.
+
++--------------+--------------------+
+| Command Line | Security/DynamicDl |
++--------------+--------------------+
+| Analyzers    | :ref:`Security`    |
++--------------+--------------------+
 
 
 .. _echo-or-print:
@@ -7763,7 +7798,7 @@ The class magic methods must have public visibility and cannot be static.
    ?>
 
 
-See `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
+See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 
 +--------------+---------------------------+
 | Command Line | Classes/toStringPss       |
@@ -9253,6 +9288,25 @@ The following functions are now native functions in PHP 7.2. It is advised to ch
 +--------------+---------------------------+
 
 
+.. _new-functions-in-php-7.3:
+
+New Functions In PHP 7.3
+########################
+
+
+This documentation is still empty.
+
+The following functions are now native functions in PHP 7.3. It is advised to change them before moving to this new version.
+
+* net_get_interfaces( )
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php73NewFunctions                                                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 .. _next-month-trap:
 
 Next Month Trap
@@ -10447,10 +10501,9 @@ Use array notation $string[$position] to reach a single byte in a string.
 
 There are two ways to access a byte in a string : substr() and $v[$pos];
 
-The second one is more readable. It may be up to four times faster, though it is a micro-optimization. 
-It is recommended to use it. 
+The second style is more readable. It may be up to four times faster, though it is a micro-optimization. It is recommended to use it. 
 
-PHP 7.1 also introduces the support of negative offsets as string index : negative offset are also reported here.
+PHP 7.1 also introduces the support of negative offsets as string index : negative offset are also reported.
 
 .. code-block:: php
 
@@ -10470,7 +10523,7 @@ PHP 7.1 also introduces the support of negative offsets as string index : negati
    ?>
 
 
-Beware that substr() and $v[$pos] are similar, while `'mb_substr() <http://www.php.net/mb_substr>`_ is not. The first functions works on bytes, while the latter works on characters.
+Beware that substr() and $v[$pos] are similar, while `'mb_substr() <http://www.php.net/mb_substr>`_ is not. The first function works on bytes, while the latter works on characters.
 
 +--------------+------------------------------------------------------------------------------------+
 | Command Line | Structures/NoSubstrOne                                                             |
@@ -10868,41 +10921,6 @@ This is a wrongly done casting to boolean. PHP supports (boolean) to do the same
 +--------------+-----------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
-
-
-.. _null-coalesce:
-
-Null Coalesce
-#############
-
-
-The null coalesce operator is a short syntax to give a default value if a variable is unset.
-
-This is a new operator in PHP 7.0.
-
-.. code-block:: php
-
-   <?php
-   
-   // Null coalesce operator, since PHP 7.0
-   $a = $b ?? 'default value if $b is null';
-   
-   // Equivalent to : 
-   $a = 'isset($b) ? $b : 'default value if $b is null';
-   
-   // Do not mistake with this, where $b has to be set, but truthy
-   $a = 'isset($b) ?: 'default value if $b is null';
-   
-   ?>
-
-
-See also `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_.
-
-+--------------+--------------------+
-| Command Line | Php/NullCoalesce   |
-+--------------+--------------------+
-| Analyzers    | :ref:`Suggestions` |
-+--------------+--------------------+
 
 
 .. _null-on-new:
@@ -11587,6 +11605,46 @@ The following PHP native functions were removed in PHP 7.2.
 +--------------+---------------------------+
 
 
+.. _php-7.3-last-empty-argument:
+
+PHP 7.3 Last Empty Argument
+###########################
+
+
+PHP allows the last element of any functioncall to be empty. The argument is then not send.
+
+This was introduced in PHP 7.3, and is not backward compatible.
+
+The last empty line is easier on the VCS, allowing clearer text diffs. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($a, $b) {
+       print_r('func_get_args());
+   }
+   
+   
+   foo(1, 
+       2, 
+       );
+   
+   foo(1);
+   
+   
+   ?>
+
+
+See also `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_.
+
++--------------+----------------------------+
+| Command Line | Php/PHP73LastEmptyArgument |
++--------------+----------------------------+
+| Analyzers    | :ref:`CompatibilityPHP73`  |
++--------------+----------------------------+
+
+
 .. _php-70-removed-functions:
 
 PHP 70 Removed Functions
@@ -11809,6 +11867,9 @@ When calling parent constructor, always put it first in the `'__construct <http:
    }
    
    ?>
+
+
+This analysis cannot be applied to Exceptions.
 
 +--------------+------------------------------------+
 | Command Line | Classes/ParentFirst                |
@@ -15404,6 +15465,42 @@ This analyzer list all the `'strpos() <http://www.php.net/strpos>`_-like functio
 +--------------+-----------------------------------------------------------------------------------------------------+
 
 
+.. _structures/couldusearrayfillkeys:
+
+Structures/CouldUseArrayFillKeys
+################################
+
+
+`'array_fill_keys() <http://www.php.net/array_fill_keys>`_ is a native PHP function that creates an array from keys. It gets the list of keys, and a constant value to assign to each keys.
+
+This is twice faster than doing the same with a loop.
+
+.. code-block:: php
+
+   <?php
+   
+   $array = range('a', 'z');
+   
+   // Slow way to build the array
+   $b = array_fill_key($a, 0);
+   
+   // Slow way to build the array
+   foreach($array as $a) {
+       $b[$a] = 0;
+   }
+   
+   ?>
+
+
+See also `array_fill_keys <http://php.net/array_fill_keys>`_.
+
++--------------+----------------------------------+
+| Command Line | Structures/CouldUseArrayFillKeys |
++--------------+----------------------------------+
+| Analyzers    | :ref:`Suggestions`               |
++--------------+----------------------------------+
+
+
 .. _substring-first:
 
 Substring First
@@ -16612,8 +16709,33 @@ List of properties and methods that are accessed using 'parent' keyword but are 
 
 This will be compilable but will yield a fatal error during execution.
 
+.. code-block:: php
+
+   <?php
+   
+   class theParent {
+       // No bar() method
+       // private bar() method is not accessible to theChild 
+   }
+   
+   class theChild extends theParent {
+       function foo() {
+           // bar is defined in theChild, but not theParent
+           parent::bar();
+       }
+       
+       function bar() {
+       
+       }
+   }
+   
+   ?>
+
+
 Note that if the parent is defined (extends someClass) but someClass is not available in the tested code (it may be in composer,
 another dependency, or just not there) it will not be reported.
+
+See also `parent <http://php.net/manual/en/keyword.parent.php>`_.
 
 +--------------+---------------------------+
 | Command Line | Classes/UndefinedParentMP |
@@ -20611,6 +20733,11 @@ This ends up with :::
      [reallyHidden]=>
      string(6) Secret
    }
+   
+   
+
+
+See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 
 +--------------+---------------------------------------------------------------------------------+
 | Command Line | Php/debugInfoUsage                                                              |

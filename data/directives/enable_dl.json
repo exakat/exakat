@@ -1,0 +1,1 @@
+[{"name":"enable_dl","documentation":" Whether or not to enable the dl() function.  The dl() function does NOT work properly in multithreaded servers, such as IIS or Zeus, and is automatically disabled on them.","suggested":"Off"}]

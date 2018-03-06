@@ -43,7 +43,7 @@ class Test extends Tasks {
 
         // Check for requested analyze
         $analyzerName = $this->config->program;
-        if (!Analyzer::getClass($analyzerName)) {
+        if (!$this->themes->getClass($analyzerName)) {
             throw new NoSuchAnalyzer($analyzerName);
         }
 

@@ -42,15 +42,15 @@ class Results extends Tasks {
             }
 
             foreach($analyzersClass as $analyzer) {
-                if (!Analyzer::getClass($analyzer)) {
-                    throw new NoSuchAnalyzer($analyzer);
+                if (!$this->themes->getClass($analyzer)) {
+                    throw new NoSuchAnalyzer($analyzer, $this->themes);
                 }
             }
         } elseif (is_string($this->config->thema)) {
             $thema = $this->config->thema;
 
-            if (!$analyzersClass = Analyzer::getThemeAnalyzers($thema)) {
-                throw new NoSuchAnalyzer($thema);
+            if (!$analyzersClass = $this->themes->getThemeAnalyzers($thema)) {
+                throw new NoSuchAnalyzer($thema, $this->themes);
             }
 
             $this->datastore->addRow('hash', array($this->config->thema => count($analyzersClass) ) );

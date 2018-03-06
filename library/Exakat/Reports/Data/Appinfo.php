@@ -51,7 +51,6 @@ class Appinfo extends Data {
                             'Labels'                        => 'Php/Labelnames',
    
                             'Coalesce'                      => 'Php/Coalesce',
-                            'Null Coalesce'                 => 'Php/NullCoalesce',
    
                             'File upload'                   => 'Structures/FileUploadUsage',
                             'Environnement Variables'       => 'Php/UsesEnv',
@@ -310,6 +309,7 @@ class Appinfo extends Data {
                             'ext/oci8'       => 'Extensions/Extoci8',
                             'ext/odbc'       => 'Extensions/Extodbc',
                             'ext/opcache'    => 'Extensions/Extopcache',
+                            'ext/opencensus' => 'Extensions/Extopencensus',
                             'ext/openssl'    => 'Extensions/Extopenssl',
                             'ext/parsekit'   => 'Extensions/Extparsekit',
                             'ext/pcntl'      => 'Extensions/Extpcntl',
@@ -344,6 +344,9 @@ class Appinfo extends Data {
                             'ext/tidy'       => 'Extensions/Exttidy',
                             'ext/tokenizer'  => 'Extensions/Exttokenizer',
                             'ext/trader'     => 'Extensions/Exttrader',
+                            'ext/uopz'       => 'Extensions/Extuopz',
+                            'ext/v8js'       => 'Extensions/Extv8js',
+                            'ext/varnish'    => 'Extensions/Extvarnish',
                             'ext/vips'       => 'Extensions/Extvips',
                             'ext/wddx'       => 'Extensions/Extwddx',
                             'ext/wikidiff2'  => 'Extensions/Extwikidiff2',
@@ -357,6 +360,7 @@ class Appinfo extends Data {
                             'ext/xmlrpc'     => 'Extensions/Extxmlrpc',
                             'ext/xmlwriter'  => 'Extensions/Extxmlwriter',
                             'ext/xsl'        => 'Extensions/Extxsl',
+                            'ext/xxtea'      => 'Extensions/Extxxtea',
                             'ext/yaml'       => 'Extensions/Extyaml',
                             'ext/yis'        => 'Extensions/Extyis',
                             'ext/zip'        => 'Extensions/Extzip',
@@ -388,7 +392,7 @@ class Appinfo extends Data {
 
         public function prepare() {
             // collecting information for Extensions
-            $themed = Analyzer::getThemeAnalyzers('Appinfo');
+            $themed = array_merge(...array_values($this->extensions));
             $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
 
             $sources = array();

@@ -26,11 +26,11 @@ namespace Exakat\Exceptions;
 use Exakat\Analyzer\Analyzer;
 
 class NoSuchAnalyzer extends \RuntimeException {
-    public function __construct($analyzer) {
+    public function __construct($analyzer, $themes) {
         $die = "Couldn't find '$analyzer'. Aborting\n";
 
         if (preg_match('#[a-z0-9_]+/[a-z0-9_]+$#i', $analyzer) !== 0) {
-            $r = Analyzer::getSuggestionClass($analyzer);
+            $r = $themes->getSuggestionClass($analyzer);
             if (count($r) > 0) {
                 $die .= 'Did you mean : '.str_replace('\\', '/', implode(', ', array_slice($r, 0, 5)));
                 if (count($r) > 5) {

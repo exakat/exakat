@@ -39,7 +39,6 @@ class Ambassador extends Reports {
     protected $finalName       = null;
     protected $tmpName           = '';
 
-    private $docs              = array();
     private $frequences        = array();
     private $timesToFix        = array();
     private $themesForAnalyzer = array();
@@ -80,11 +79,10 @@ class Ambassador extends Reports {
 
     public function __construct($config) {
         parent::__construct($config);
-        $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
-        $this->frequences        = $this->docs->getFrequences();
-        $this->timesToFix        = $this->docs->getTimesToFix();
-        $this->themesForAnalyzer = $this->docs->getThemesForAnalyzer();
-        $this->severities        = $this->docs->getSeverities();
+        $this->frequences        = $this->themes->getFrequences();
+        $this->timesToFix        = $this->themes->getTimesToFix();
+        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
+        $this->severities        = $this->themes->getSeverities();
     }
 
     protected function getBasedPage($file) {
@@ -113,7 +111,7 @@ class Ambassador extends Reports {
                 $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
             $compatibilities = '';
-            $res = $this->sqlite->query('SELECT SUBSTR(key, -2) FROM hash WHERE key LIKE "Compatibility%"');
+            $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%"');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
                 $compatibilities .= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
             }
@@ -186,12 +184,13 @@ class Ambassador extends Reports {
 
         // Compatibility
         $this->generateCompilations();
-        $res = $this->sqlite->query('SELECT SUBSTR(key, -2) FROM hash WHERE key LIKE "Compatibility%"');
+        $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%"');
         $list = array();
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             $list[] = 'CompatibilityPHP'.$row[0];
             $this->generateCompatibility($row[0]);
         }
+        $this->generateCompatibilityEstimate();
         $this->generateIssuesEngine('compatibility_issues',
                                     $this->getIssuesFaceted($list));
 
@@ -304,21 +303,21 @@ class Ambassador extends Reports {
         $baseHTML = $this->getBasedPage('analyzers_doc');
         $analyzersDocHTML = "";
 
-        $analyzersList = array_merge(Analyzer::getThemeAnalyzers($this->themesToShow),
-                                     Analyzer::getThemeAnalyzers('Preferences'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP71'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP72'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP73')
+        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->themesToShow),
+                                     $this->themes->getThemeAnalyzers('Preferences'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP73')
                                      );
         $analyzersList = array_keys(array_count_values($analyzersList));
                                      
         foreach($analyzersList as $analyzerName) {
-            $analyzer = Analyzer::getInstance($analyzerName, null, $this->config);
+            $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzersDocHTML.='<h2><a href="analyzers_doc.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
@@ -373,7 +372,7 @@ class Ambassador extends Reports {
     private function generateFavorites() {
         $baseHTML = $this->getBasedPage('favorites_dashboard');
 
-        $analyzers = Analyzer::getThemeAnalyzers('Preferences');
+        $analyzers = $this->themes->getThemeAnalyzers('Preferences');
         
         $donut = array();
         $html = array(' ');
@@ -383,7 +382,7 @@ class Ambassador extends Reports {
 
             $table = '';
             $values = array();
-            $object = Analyzer::getInstance($analyzer, null, $this->config);
+            $object = $this->themes->getInstance($analyzer, null, $this->config);
             $name = $object->getDescription()->getName();
 
             $total = 0;
@@ -1223,7 +1222,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ("'.implode('", "', Analyzer::getThemeAnalyzers($categorie)).'")';
+            $list = 'IN ('.makeList($this->themes->getThemeAnalyzers($categorie)).')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -1265,8 +1264,8 @@ JAVASCRIPT;
     }
 
     public function getSeverityBreakdown() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = makeList($list);
 
         $query = <<<SQL
                 SELECT severity, count(*) AS number
@@ -1348,8 +1347,8 @@ SQL;
     }
 
     protected function getAnalyzersResultsCounts() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = makeList($list);
 
         $result = $this->sqlite->query(<<<SQL
         SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity 
@@ -1362,7 +1361,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
@@ -1386,20 +1385,20 @@ SQL;
     }
     
     private function generateNoIssues() {
-        $list = array_merge(Analyzer::getThemeAnalyzers('Analysis'),
-                            Analyzer::getThemeAnalyzers('Security'),
-                            Analyzer::getThemeAnalyzers('Performances'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP71'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP72'),
-                            Analyzer::getThemeAnalyzers('CompatibilityPHP73'),
+        $list = array_merge($this->themes->getThemeAnalyzers('Analysis'),
+                            $this->themes->getThemeAnalyzers('Security'),
+                            $this->themes->getThemeAnalyzers('Performances'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP73'),
                             array('Project/Dump')
                             );
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $query = <<<SQL
 SELECT analyzer AS analyzer FROM resultsCounts
@@ -1413,12 +1412,16 @@ SQL;
         $filesHTML = '';
 
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
+            
+            if ($analyzer === null) {
+                continue;
+            }
 
-            $filesHTML.= "<tr>";
-            $filesHTML.='<td><a href="analyzers_doc.html#analyzer='.$row['analyzer'].'" id="'.$this->toId($row['analyzer']).'"><i class="fa fa-book" style="font-size: 14px"></i></a>
-                         &nbsp; '.$analyzer->getDescription()->getName().'</td>';
-            $filesHTML.= "</tr>";
+            $filesHTML.= '<tr>';
+            $filesHTML.= "<td><a href=\"analyzers_doc.html#analyzer=$row[analyzer]\" id=\"{$this->toId($row['analyzer'])}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a>
+                         &nbsp; {$analyzer->getDescription()->getName()}</td>";
+            $filesHTML.= '</tr>';
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
@@ -1451,8 +1454,8 @@ SQL;
     }
 
     private function getFilesResultsCounts() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = makeList($list);
 
         $result = $this->sqlite->query(<<<SQL
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
@@ -1481,8 +1484,8 @@ SQL;
     }
 
     public function getFilesCount($limit = null) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = makeList($list);
 
         $query = "SELECT file, count(*) AS number
                     FROM results
@@ -1556,8 +1559,8 @@ SQL;
     }
 
     private function getAnalyzersCount($limit) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = makeList($list);
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -1578,8 +1581,8 @@ SQL;
     }
 
     protected function getTopAnalyzers() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = makeList($list);
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -1590,7 +1593,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $data[] = array('label' => $analyzer->getDescription()->getName(),
                             'value' => $row['number'],
                             'name'  => $row['analyzer']);
@@ -1610,8 +1613,8 @@ SQL;
     }
 
     private function getSeveritiesNumberBy($type = 'file') {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = makeList($list);
 
         $query = <<<SQL
 SELECT $type, severity, count(*) AS count
@@ -1740,8 +1743,8 @@ JAVASCRIPTCODE;
     }
 
     public function getIssuesFaceted($theme) {
-        $list = Analyzer::getThemeAnalyzers($theme);
-        $list = '"'.implode('", "', $list).'"';
+        $list = $this->themes->getThemeAnalyzers($theme);
+        $list = makeList($list);
 
         $sqlQuery = <<<SQL
             SELECT fullcode, file, line, analyzer
@@ -1884,8 +1887,8 @@ SQL;
     private function generateAnalyzersList() {
         $analyzers = '';
 
-        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = Analyzer::getInstance($analyzer, null, $this->config);
+        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
+            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
@@ -1994,6 +1997,174 @@ SQL;
         $this->putBasedPage('php_compilation', $html);
     }
 
+    protected function generateCompatibilityEstimate() {
+        $html = $this->getBasedPage('empty');
+        
+        $versions = array('5.2', '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3');
+        $scores = array_fill_keys(array_values($versions), 0);
+        $versions = array_reverse($versions);
+
+        $analyzers = array( 'Php/Php54NewFunctions'                 => '5.3-',
+                            'Structures/DereferencingAS'            => '5.3-',
+                            'Php/ClosureThisSupport'                => '5.4-',
+                            'Php/HashAlgos54'                       => '5.4-',
+                            'Php/Php54RemovedFunctions'             => '5.4-',
+                            'Structures/Break0'                     => '5.4-',
+                            'Structures/BreakNonInteger'            => '5.4-',
+                            'Structures/CalltimePassByReference'    => '5.4-',
+                            'Php/MethodCallOnNew'                   => '5.4+',
+                            'Type/Binary'                           => '5.4+',
+                            'Php/Php55NewFunctions'                 => '5.5-',
+                            'Php/Php55RemovedFunctions'             => '5.5-',
+                            'Php/CantUseReturnValueInWriteContext'  => '5.5+',
+                            'Php/ConstWithArray'                    => '5.5+',
+                            'Php/Password55'                        => '5.5+',
+                            'Php/StaticclassUsage'                  => '5.5+',
+                            'Structures/ForeachWithList'            => '5.5+',
+                            'Structures/ModernEmpty'                => '5.5+',
+                            'Structures/TryFinally'                 => '5.5+',
+                            'Php/Php56NewFunctions'                 => '5.6-',
+                            'Structures/CryptWithoutSalt'           => '5.6-',
+                            'Namespaces/UseFunctionsConstants'      => '5.6+',
+                            'Php/ConstantScalarExpression'          => '5.6+',
+                            'Php/debugInfoUsage'                    => '5.6+',
+                            'Php/EllipsisUsage'                     => '5.6+',
+                            'Php/ExponentUsage'                     => '5.6+',
+                            'Structures/ConstantScalarExpression'   => '5.6+',
+                            'Classes/AbstractStatic'                => '7.0-',
+                            'Classes/NullOnNew'                     => '7.0-',
+                            'Classes/UsingThisOutsideAClass'        => '7.0-',
+                            'Extensions/Extapc'                     => '7.0-',
+                            'Extensions/Extereg'                    => '7.0-',
+                            'Extensions/Extmysql'                   => '7.0-',
+                            'Functions/MultipleSameArguments'       => '7.0-',
+                            'Php/EmptyList'                         => '7.0-',
+                            'Php/ForeachDontChangePointer'          => '7.0-',
+                            'Php/GlobalWithoutSimpleVariable'       => '7.0-',
+                            'Php/NoListWithString'                  => '7.0-',
+                            'Php/Php70NewClasses'                   => '7.0-',
+                            'Php/Php70NewFunctions'                 => '7.0-',
+                            'Php/Php70NewInterfaces'                => '7.0-',
+                            'Php/Php70RemovedFunctions'             => '7.0-',
+                            'Php/ReservedKeywords7'                 => '7.0-',
+                            'Structures/BreakOutsideLoop'           => '7.0-',
+                            'Structures/SwitchWithMultipleDefault'  => '7.0-',
+                            'Type/MalformedOctal'                   => '7.0-',
+                            'Classes/Anonymous'                     => '7.0+',
+                            'Extensions/Extast'                     => '7.0+',
+                            'Extensions/Extzbarcode'                => '7.0+',
+                            'Php/Coalesce'                          => '7.0+',
+                            'Php/DeclareStrict'                     => '7.0+',
+                            'Php/DeclareStrictType'                 => '7.0+',
+                            'Php/DefineWithArray'                   => '7.0+',
+                            'Php/NoStringWithAppend'                => '7.0+',
+                            'Php/Php70RemovedDirective'             => '7.0+',
+                            'Php/Php7RelaxedKeyword'                => '7.0+',
+                            'Php/ReturnTypehintUsage'               => '7.0+',
+                            'Php/ScalarTypehintUsage'               => '7.0+',
+                            'Php/UnicodeEscapeSyntax'               => '7.0+',
+                            'Php/UseSessionStartOptions'            => '7.0+',
+                            'Php/YieldFromUsage'                    => '7.0+',
+                            'Security/UnserializeSecondArg'         => '7.0+',
+                            'Structures/IssetWithConstant'          => '7.0+',
+                            'Php/Php71NewClasses'                   => '7.1-',
+                            'Php/Php71NewFunctions'                 => '7.1-',
+                            'Type/OctalInString'                    => '7.1-',
+                            'Php/ListShortSyntax'                   => '7.1+',
+                            'Php/ListWithKeys'                      => '7.1+',
+                            'Php/Php71RemovedDirective'             => '7.1+',
+                            'Php/UseNullableType'                   => '7.1+',
+                            'Php/Php72Deprecation'                  => '7.2-',
+                            'Php/Php72NewClasses'                   => '7.2-',
+                            'Php/Php72NewConstants'                 => '7.2-',
+                            'Php/Php72NewFunctions'                 => '7.2-',
+                            'Php/Php72ObjectKeyword'                => '7.2-',
+                            'Php/Php72RemovedClasses'               => '7.2-',
+                            'Php/Php72RemovedFunctions'             => '7.2-',
+                            'Php/Php72RemovedInterfaces'            => '7.2-',
+                            'Classes/CantInheritAbstractMethod'     => '7.2+',
+                            'Classes/ChildRemoveTypehint'           => '7.2+',
+                            'Php/GroupUseTrailingComma'             => '7.2+',
+                            'Php/Php73NewFunctions'                 => '7.3-',
+                            'Php/ListWithReference'                 => '7.3+',
+                          );
+
+//        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
+//        $colors = array('7900E5', 'DD00BF', 'D50039', 'CE4400', 'C6B900', '59BF00');
+        $colors = array('7900E5', 'DE00D7', 'D80064', 'D20700', 'CB6C00', 'BEC500', '59BF00');
+
+        $list = makeList(array_keys($analyzers));
+        $query = <<<SQL
+SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ($list) AND count >= 0
+SQL;
+
+        $results = $this->sqlite->query($query);
+
+        while( $row = $results->fetchArray(\SQLITE3_ASSOC)) {
+            $counts[$row['analyzer']] = $row['count'];
+        }
+
+        $data = array();
+        $data2 = array();
+        foreach($analyzers as $analyzer => $analyzerVersion) {
+            if (substr($analyzerVersion, -1) === '+') {
+                $coeff = 1;
+            } else {
+                $coeff = -1;
+            }
+
+            foreach($versions as $version) {
+                if (!isset($counts[$analyzer])) {
+                    continue;
+                } elseif ($counts[$analyzer] === 0) {
+                    $data2[$analyzer][$version] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
+                } else {
+                    if ($coeff * version_compare($version, $analyzerVersion) >= 0) {
+                        $data[$analyzer][$version] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
+                        ++$scores[$version];
+                    } else {
+                        $data[$analyzer][$version] = '<i class="fa fa-warning" style="color: crimson"></i>';
+                    }
+                }
+            }
+        }
+
+        $table = '';
+        $titles = "<tr><th>Version</th><th>Name</th><th>".implode('</th><th>', array_keys(array_values($data)[0]) )."</th></tr>";
+        $data = array_merge($data, $data2);
+        foreach($data as $name => $row) {
+            $analyzer = $this->themes->getInstance($name, null, $this->config);
+            $description = $analyzer->getDescription();
+
+            $link = '<a href="analyzers_doc.html#'.$this->toId($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+
+            $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$description->getName()}</td><td>".implode('</td><td>', $row)."</td></tr>\n";
+        }
+
+        $theTable = <<<HTML
+        					<table class="table table-striped">
+        						<tr></tr>
+        						$titles
+        						$table
+        					</table>
+HTML;
+
+        $max = max($scores);
+        $key = array_keys($scores, $max);
+        
+        if ($max === count($data)) {
+            $suggestion = 'This code is compatible with PHP '.join(', ', $key);
+        } else {
+            $suggestion = 'Impossible to determine a suitable PHP version. The best estimation is PHP '.join(', ', $key).'. ';
+        }
+
+        $html = $this->injectBloc($html, 'TITLE', 'PHP Version Estimation');
+        $html = $this->injectBloc($html, 'DESCRIPTION', $suggestion);
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
+
+        $this->putBasedPage('compatibility_version', $html);
+    }
+
     protected function generateAnalyzerSettings() {
         $settings = '';
 
@@ -2099,36 +2270,42 @@ SQL;
 
         $directiveList = '';
         $res = $this->sqlite->query(<<<SQL
-SELECT analyzer FROM resultsCounts 
+SELECT analyzer, count FROM resultsCounts 
     WHERE ( analyzer LIKE "Extensions/Ext%" OR 
             analyzer IN ("Structures/FileUploadUsage", 
                          "Php/UsesEnv",
-                         "Php/UseBrowscap"))
-        AND count > 0
+                         "Php/UseBrowscap",
+                         "Php/DlUsage"
+                         ))
+        AND count >= 0
 SQL
         );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($row['analyzer'] == 'Structures/FileUploadUsage') {
+            $data = array();
+            if ($row['analyzer'] === 'Structures/FileUploadUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
-                $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
-            } elseif ($row['analyzer'] == 'Php/UsesEnv') {
+                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
+            } elseif ($row['analyzer'] === 'Php/UsesEnv' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
-                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
-            } elseif ($row['analyzer'] == 'Php/UseBrowscap') {
+                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+            } elseif ($row['analyzer'] === 'Php/UseBrowscap' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Browser</td></tr>\n";
-                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/browscap.json'));
-            } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
+                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/browscap.json'));
+            } elseif ($row['analyzer'] === 'Php/DlUsage' && $row['count'] === 0) {
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Enable DL</td></tr>\n";
+                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/enable_dl.json'));
+            } elseif ($row['analyzer'] === 'Php/ErrorLogUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
-                $data['Errorlog'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
-            } else {
+                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
+            } elseif ($row['count'] !== 0) {
                 $ext = substr($row['analyzer'], 14);
                 if (in_array($ext, $directives)) {
                     $data = json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
                     $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
-                    foreach($data as $row) {
-                        $directiveList .= "<tr><td>$row->name</td><td>$row->suggested</td><td>$row->documentation</td></tr>\n";
-                    }
                 }
+            } 
+            foreach($data as $directive) {
+                $directiveList .= "<tr><td>$directive->name</td><td>$directive->suggested</td><td>$directive->documentation</td></tr>\n";
             }
         }
 
@@ -2188,12 +2365,12 @@ SQL
     private function generateCompatibility($version) {
         $compatibility = '';
 
-        $list = Analyzer::getThemeAnalyzers('CompatibilityPHP'.$version);
+        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);
 
-        $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($list).')');
         $counts = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$row['analyzer']] = $row['counts'];
+            $counts[$row['analyzer']] = $row['count'];
         }
 
         foreach($list as $l) {
@@ -2201,7 +2378,7 @@ SQL
             if (isset($counts[$l])) {
                 $result = (int) $counts[$l];
             } else {
-                $result = -2; // -2 == not run
+                $result = -2; // -2 === not run
             }
             $result = $this->Compatibility($result, $l);
             $name = $ini['name'];
@@ -2465,7 +2642,7 @@ HTML;
             $parent = '\\'.strtolower($k);
             if (is_string($v)) {
                 $return .= '<div style="font-weight: bold">'.$v.'</div>';
-            } elseif (count($v) == 1) {
+            } elseif (count($v) === 1) {
                 if (empty($v[0])) {
                     if (empty($k)) {
                         $return .= '<div style="font-weight: bold">\\</div>';

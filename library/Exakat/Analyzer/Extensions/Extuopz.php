@@ -21,16 +21,17 @@
 */
 
 
-namespace Exakat\Analyzer\Php;
+namespace Exakat\Analyzer\Extensions;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\Extension;
 
-class NullCoalesce extends Analyzer {
-    protected $phpVersion = '7.0+';
-    
+class Extuopz extends Extension {
+
     public function analyze() {
-        $this->atomIs('Coalesce');
-        $this->prepareQuery();
+        $this->source = 'uopz.ini';
+        
+        parent::analyze();
     }
 }
 

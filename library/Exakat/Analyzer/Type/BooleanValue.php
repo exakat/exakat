@@ -28,8 +28,8 @@ use Exakat\Analyzer\Common\Type;
 
 class BooleanValue extends Type {
     public function __construct($gremlin, $config) {
-        $this->type = 'Boolean';
         parent::__construct($gremlin, $config);
+        $this->type = 'Boolean';
     }
 
     public function analyze() {

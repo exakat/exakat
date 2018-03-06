@@ -320,13 +320,13 @@ function pushToQueue($id) {
     }
     
     $fp = fopen(PIPEFILE, 'a');
-    if ($fp !== false) {
-        fwrite($fp, "$id\n");
-        fclose($fp);
-    } else {
+    if ($fp === false) {
         echo json_encode(array('status' => 'Could not push to queue'));
         return;
     }
+
+    fwrite($fp, "$id\n");
+    fclose($fp);
 }
 
 function autoProjectName() {

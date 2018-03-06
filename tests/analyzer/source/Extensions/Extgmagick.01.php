@@ -11,4 +11,6 @@ $image->borderImage("yellow", 8, 8)->oilPaintImage(0.3);
 
 //Write the current image at the current state to a file
 $image->write('example_thumbnail.jpg');
+
+gmagick('Functioncall');
 ?>

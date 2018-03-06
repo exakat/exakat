@@ -24,14 +24,15 @@
 namespace Exakat\Analyzer\Arrays;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Variables\VariablePhp;
 
 class Phparrayindex extends Analyzer {
 
     public function analyze() {
+        $variables = $this->loadIni('php_variables.ini', 'variables');
+
         $this->atomIs('Array')
              ->outIs('VARIABLE')
-             ->codeIs(VariablePhp::$variables, self::TRANSLATE, self::CASE_SENSITIVE)
+             ->codeIs($variables, self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

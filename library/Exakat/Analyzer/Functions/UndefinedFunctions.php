@@ -27,12 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class UndefinedFunctions extends Analyzer {
     public function dependsOn() {
-        return array('Functions/IsExtFunction');
+        return array('Functions/IsExtFunction',
+                    );
     }
     
     public function analyze() {
         $this->atomIs('Functioncall')
-             ->tokenIsNot(array('T_VARIABLE','T_OPEN_BRACKET', 'T_ARRAY', 'T_INCLUDE', 'T_INCLUDE_ONCE', 'T_REQUIRE', 'T_REQUIRE_ONCE'))
+             ->outIs('NAME')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->inIs('NAME')
              ->analyzerIsNot('Functions/IsExtFunction')
              ->hasNoFunctionDefinition();
         $this->prepareQuery();

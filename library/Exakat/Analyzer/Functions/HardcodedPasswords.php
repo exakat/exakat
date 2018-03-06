@@ -48,14 +48,14 @@ class HardcodedPasswords extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
         }
-        
+
         // ['password' => 1];
         $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
-             ->atomIs('String')
-             ->noDelimiterIs('password')
+             ->has('noDelimiter')
+             ->noDelimiterIs(array('password', 'pass', 'passwd'))
              ->inIs('INDEX')
              ->outIs('VALUE')
              ->atomIs('String')

@@ -23,7 +23,6 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Docs;
 use Exakat\Data\Slim as SlimData;
 use Exakat\Exakat;
 use Exakat\Phpexec;
@@ -37,7 +36,6 @@ class Slim extends Ambassador {
     protected $finalName       = null;
     protected $tmpName         = '';
 
-    private $docs              = null;
     private $timesToFix        = null;
     private $themesForAnalyzer = null;
     private $severities        = null;
@@ -45,10 +43,10 @@ class Slim extends Ambassador {
     public function __construct($config) {
         parent::__construct($config);
         $this->themesToShow      = 'Slim';
-        $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
-        $this->timesToFix        = $this->docs->getTimesToFix();
-        $this->themesForAnalyzer = $this->docs->getThemesForAnalyzer($this->themesToShow);
-        $this->severities        = $this->docs->getSeverities();
+
+        $this->timesToFix        = $this->themes->getTimesToFix();
+        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
+        $this->severities        = $this->themes->getSeverities();
     }
 
     protected function getBasedPage($file) {
@@ -128,30 +126,6 @@ MENU;
 
         $this->generateAppinfo();
         $this->generateCompatibilities();
-/*
-        $this->generateExtensionsBreakdown();
-        $this->generateFiles();
-        $this->generateAnalyzers();
-        $this->generateAnalyzersList();
-        $this->generateExternalLib();
-
-        $this->generateBugFixes();
-        $this->generatePhpConfiguration();
-        $this->generateExternalServices();
-        $this->generateDirectiveList();
-        $this->generateAlteredDirectives();
-        $this->generateStats();
-
-        // Compatibility
-        $this->generateCompilations();
-        $res = $this->sqlite->query('SELECT SUBSTR(key, -2) FROM hash WHERE key LIKE "Compatibility%"');
-        while($row = $res->fetchArray(\SQLITE3_NUM)) {
-            $this->generateCompatibility($row[0]);
-        }
-
-        // Favorites
-        $this->generateFavorites();
-*/
 
         // inventories
         $this->generateRoutes();
@@ -246,8 +220,8 @@ MENU;
         $baseHTML = $this->getBasedPage('analyzers_doc');
         $analyzersDocHTML = "";
 
-        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzerName) {
-            $analyzer = Analyzer::getInstance($analyzerName, null, $this->config);
+        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzerName) {
+            $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
 
@@ -286,7 +260,7 @@ MENU;
     private function generateFavorites() {
         $baseHTML = $this->getBasedPage('favorites_dashboard');
 
-        $analyzers = Analyzer::getThemeAnalyzers('Preferences');
+        $analyzers = $this->themes->getThemeAnalyzers('Preferences');
 
         $donut = array();
         $html = array();
@@ -296,7 +270,7 @@ MENU;
 
             $table = '';
             $values = array();
-            $object = Analyzer::getInstance($analyzer, $this->config);
+            $object = $this->themes->getInstance($analyzer, $this->config);
             $name = $object->getDescription()->getName();
 
             $total = 0;
@@ -1193,7 +1167,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ('.makeList(Analyzer::getThemeAnalyzers($categorie)).')';
+            $list = 'IN ('.makeList($this->themes->getThemeAnalyzers($categorie)).')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -1232,7 +1206,7 @@ JAVASCRIPT;
     }
 
     public function getSeverityBreakdown() {
-        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($listArray);
 
         $query = <<<SQL
@@ -1311,7 +1285,7 @@ SQL;
     }
 
     protected function getAnalyzersResultsCounts() {
-        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($listArray);
 
         $result = $this->sqlite->query(<<<SQL
@@ -1324,7 +1298,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
             $row['recipes' ] =  makeList($this->themesForAnalyzer[$row['analyzer']], '');
 
@@ -1370,7 +1344,7 @@ SQL;
     }
 
     private function getFilesResultsCounts() {
-        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($listArray);
 
         $result = $this->sqlite->query(<<<SQL
@@ -1400,7 +1374,7 @@ SQL;
     }
 
     public function getFilesCount($limit = null) {
-        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($listArray);
 
         $query = "SELECT file, count(*) AS number
@@ -1475,7 +1449,7 @@ SQL;
     }
 
     private function getAnalyzersCount($limit) {
-        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($listArray);
 
         $query = "SELECT analyzer, count(*) AS number
@@ -1497,7 +1471,7 @@ SQL;
     }
 
     protected function getTopAnalyzers() {
-        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($listArray);
         $toplimit = self::TOPLIMIT;
 
@@ -1512,7 +1486,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $data[] = array('label' => $analyzer->getDescription()->getName(),
                             'value' => $row['number']);
         }
@@ -1531,7 +1505,7 @@ SQL;
     }
 
     private function getSeveritiesNumberBy($type = 'file') {
-        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($listArray);
 
         $query = <<<SQL
@@ -1651,7 +1625,7 @@ JAVASCRIPT;
     }
 
     public function getIssuesFaceted($theme) {
-        $list = Analyzer::getThemeAnalyzers($theme);
+        $list = $this->themes->getThemeAnalyzers($theme);
         $list = '"'.implode('", "', $list).'"';
 
         $sqlQuery = <<<SQL
@@ -1763,8 +1737,8 @@ SQL;
     private function generateAnalyzersList() {
         $analyzers = '';
 
-        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzerName) {
-            $analyzer = Analyzer::getInstance($analyzerName, $this->config);
+        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzerName) {
+            $analyzer = $this->themes->getInstance($analyzerName, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzers .= '<tr><td>'.$description->getName().'</td></tr>'.PHP_EOL;
@@ -2025,89 +1999,6 @@ HTML;
         $this->putBasedPage('altered_directives', $html);
     }
 
-    private function generateStats() {
-        $extensions = array(
-                    'Summary' => array(
-                            'Namespaces'     => 'Namespace',
-                            'Classes'        => 'Class',
-                            'Interfaces'     => 'Interface',
-                            'Trait'          => 'Trait',
-                            'Function'       => 'Functions/RealFunctions',
-                            'Variables'      => 'Variables/RealVariables',
-                            'Constants'      => 'Constants/Constantnames',
-                     ),
-                    'Classes' => array(
-                            'Classes'           => 'Class',
-                            'Class constants'   => 'Classes/ConstantDefinition',
-                            'Properties'        => 'Classes/NormalProperties',
-                            'Static properties' => 'Classes/StaticProperties',
-                            'Methods'           => 'Classes/NormalMethods',
-                            'Static methods'    => 'Classes/StaticMethods',
-                            // Spot Abstract methods
-                            // Spot Final Methods
-                     ),
-                    'Structures' => array(
-                            'Ifthen'              => 'Ifthen',
-                            'Else'                => 'Structures/ElseUsage',
-                            'Switch'              => 'Switch',
-                            'Case'                => 'Case',
-                            'Default'             => 'Default',
-                            'For'                 => 'For',
-                            'Foreach'             => 'Foreach',
-                            'While'               => 'While',
-                            'Do..while'           => 'Dowhile',
-
-                            'New'                 => 'New',
-                            'Clone'               => 'Clone',
-                            'Class constant call' => 'Staticconstant',
-                            'Method call'         => 'Methodcall',
-                            'Static method call'  => 'Staticmethodcall',
-                            'Properties usage'    => 'Property',
-                            'Static property'     => 'Staticproperty',
-
-                            'Throw'               => 'Throw',
-                            'Try'                 => 'Try',
-                            'Catch'               => 'Catch',
-                            'Finally'             => 'Finally',
-
-                            'Yield'               => 'Yield',
-                            'Yield From'          => 'Yieldfrom',
-
-                            '?  :'                => 'Ternary',
-                            '?: '                 => 'Php/Coalesce',
-                            '??'                  => 'Php/NullCoalesce',
-
-                            'Variables constants' => 'Constants/VariableConstants',
-                            'Variables variables' => 'Variables/VariableVariable',
-                            'Variables functions' => 'Functions/Dynamiccall',
-                            'Variables classes'   => 'Classes/VariableClasses',
-                    ),
-                );
-
-        $stats = '';
-        foreach($extensions as $section => $hash) {
-            $stats .= "<tr><td colspan=2 bgcolor=#BBB>$section</td></tr>\n";
-
-            foreach($hash as $name => $ext) {
-                if (strpos($ext, '/') === false) {
-                    $res = $this->sqlite->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"');
-                    $d = $res->fetchArray(\SQLITE3_ASSOC);
-                    $d = (int) $d['count'];
-                } else {
-                    $res = $this->sqlite->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"');
-                    $d = $res->fetchArray(\SQLITE3_ASSOC);
-                    $d = (int) $d['count'];
-                }
-                $res = $d === -2 ? 'N/A' : $d;
-                $stats .= "<tr><td>$name</td><td>$res</td></tr>\n";
-            }
-        }
-
-        $html = $this->getBasedPage('stats');
-        $html = $this->injectBloc($html, 'STATS', $stats);
-        $this->putBasedPage('stats', $html);
-    }
-
     private function generateCodes() {
         mkdir($this->tmpName.'/datas/sources/', 0755);
 
@@ -2204,7 +2095,7 @@ JAVASCRIPT;
                 );
 
         // collecting information for Extensions
-        $themed = Analyzer::getThemeAnalyzers('Slim');
+        $themed = $this->themes->getThemeAnalyzers('Slim');
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {

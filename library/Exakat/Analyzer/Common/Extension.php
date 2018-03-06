@@ -40,11 +40,11 @@ class Extension extends Analyzer {
     
     
     public function analyze() {
-        if (substr($this->source, -4) == '.ini') {
-            $ini = $this->loadIni($this->source);
-        } else {
+        if (substr($this->source, -4) !== '.ini') {
             return true;
         }
+
+        $ini = $this->loadIni($this->source);
         
         if (!empty($ini['functions'])) {
             $functions = makeFullNsPath($ini['functions']);

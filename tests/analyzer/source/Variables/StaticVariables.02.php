@@ -5,6 +5,10 @@ class x {
     private $noStaticPrivateProperty;
     public $noStaticPublicProperty;
     protected $noStaticProtectedProperty;
+    
+    function foo() {
+        static $staticVariable;
+    }
 }
 
 ?>

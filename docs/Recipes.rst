@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 26 Feb 2018 07:33:59 +0000
-.. comment: Generation hash : 78470b804c5d9ff5f0525f75ff7d05c082a975ad
+.. comment: Generation date : Mon, 05 Mar 2018 19:30:25 +0000
+.. comment: Generation hash : 60bccf08db981ead991f4993ea51ea42aecbe0ed
 
 
 .. _analyze:
@@ -481,7 +481,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 62 analysis
+Total : 63 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -517,6 +517,7 @@ Total : 62 analysis
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`No String With Append <no-string-with-append>`
 * :ref:`No Substr Minus One <no-substr-minus-one>`
@@ -551,7 +552,7 @@ Total : 62 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 58 analysis
+Total : 59 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -585,6 +586,7 @@ Total : 58 analysis
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`No String With Append <no-string-with-append>`
 * :ref:`No Substr Minus One <no-substr-minus-one>`
@@ -617,7 +619,7 @@ Total : 58 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 50 analysis
+Total : 51 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -643,6 +645,7 @@ Total : 50 analysis
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`No String With Append <no-string-with-append>`
 * :ref:`No Substr Minus One <no-substr-minus-one>`
@@ -675,7 +678,7 @@ Total : 50 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 39 analysis
+Total : 40 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -695,6 +698,7 @@ Total : 39 analysis
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`No String With Append <no-string-with-append>`
 * :ref:`No Substr Minus One <no-substr-minus-one>`
@@ -722,7 +726,7 @@ Total : 39 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 35 analysis
+Total : 36 analysis
 
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
@@ -740,6 +744,7 @@ Total : 35 analysis
 * :ref:`List With Reference <list-with-reference>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
+* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`No Substr Minus One <no-substr-minus-one>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
@@ -765,7 +770,7 @@ Total : 35 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 24 analysis
+Total : 25 analysis
 
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
@@ -777,6 +782,7 @@ Total : 24 analysis
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`List With Reference <list-with-reference>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
@@ -797,7 +803,7 @@ Total : 24 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 14 analysis
+Total : 15 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -805,6 +811,7 @@ Total : 14 analysis
 * :ref:`List With Reference <list-with-reference>`
 * :ref:`New Constants In PHP 7.2 <new-constants-in-php-7.2>`
 * :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
+* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`No get_class() With Null <no-get\_class()-with-null>`
 * :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
 * :ref:`PHP 7.2 Object Keyword <php-7.2-object-keyword>`
@@ -819,9 +826,10 @@ Total : 14 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 3 analysis
+Total : 4 analysis
 
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
+* :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
@@ -902,7 +910,7 @@ Total : 31 analysis
 Security
 ++++++++
 
-Total : 33 analysis
+Total : 34 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
@@ -910,6 +918,7 @@ Total : 33 analysis
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
 * :ref:`Dont Echo Error <dont-echo-error>`
+* :ref:`Dynamic Library Loading <dynamic-library-loading>`
 * :ref:`Encoded Simple Letters <encoded-simple-letters>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
@@ -998,7 +1007,6 @@ Total : 42 analysis
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
 * :ref:`No Return Used <no-return-used>`
 * :ref:`No Substr() One <no-substr()-one>`
-* :ref:`Null Coalesce <null-coalesce>`
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Parent First <parent-first>`
@@ -1011,6 +1019,7 @@ Total : 42 analysis
 * :ref:`Should Use array_filter() <should-use-array\_filter()>`
 * :ref:`Slice Arrays First <slice-arrays-first>`
 * :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
+* :ref:`Structures/CouldUseArrayFillKeys`
 * :ref:`Substring First <substring-first>`
 * :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unreachable Code <unreachable-code>`

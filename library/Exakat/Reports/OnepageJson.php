@@ -43,7 +43,7 @@ class OnepageJson extends Reports {
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = Analyzer::getInstance($row['analyzer'], $this->config);
+                $analyzer = $this->themes->getInstance($row['analyzer'], $this->config);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
                 $clearphp = $analyzer->getDescription()->getClearPHP();

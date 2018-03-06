@@ -7,10 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Php_NullCoalesce extends Analyzer {
-    /* 2 methods */
+class Extensions_Extopencensus extends Analyzer {
+    /* 1 methods */
 
-    public function testPhp_NullCoalesce01()  { $this->generic_test('Php/NullCoalesce.01'); }
-    public function testPhp_NullCoalesce02()  { $this->generic_test('Php/NullCoalesce.02'); }
+    public function testExtensions_Extopencensus01()  { $this->generic_test('Extensions/Extopencensus.01'); }
 }
 ?>

@@ -23,7 +23,7 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Analyzer\Docs;
+use Exakat\Analyzer\Themes;
 use Exakat\Config;
 use Exakat\Data\Methods;
 use Exakat\Data\Dictionary;
@@ -428,10 +428,9 @@ GREMLIN;
     private function init() {
         // fallback for PHP and ext, class, function, constant
         // update fullnspath with fallback for functions
-        $pathDocs = $this->config->dir_root.'/data/analyzers.sqlite';
-        $docs = new Docs($pathDocs);
+        $themes = new Themes($this->config->dir_root.'/data/analyzers.sqlite');
 
-        $exts = $docs->listAllAnalyzer('Extensions');
+        $exts = $themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
         $exts[] = 'php_functions';
 

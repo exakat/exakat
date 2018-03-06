@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IsExtInterface extends Analyzer {
     public function analyze() {
-        $exts = self::$docs->listAllAnalyzer('Extensions');
+        $exts = $this->themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_interfaces';
         
         $i = array();

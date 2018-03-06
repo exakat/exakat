@@ -27,13 +27,18 @@ use Exakat\Analyzer\Analyzer;
 
 class NoSubstrOne extends Analyzer {
     public function analyze() {
+        // Don't use substr($x, $y, 1) but $x[$y];
+        $this->atomFunctionIs('\\substr')
+             ->outWithRank('ARGUMENT', 2)
+             ->is('intval', 1)
+             ->back('first');
+        $this->prepareQuery();
+
         // Don't use substr($x, -1) but $x[-1];
         $this->atomFunctionIs('\\substr')
+             ->hasNoChildren('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 1)
-             ->codeIs(0)
-             ->inIs('ARGUMENT')
-             ->outWithRank('ARGUMENT', 2)
-             ->codeIs(array('1', '-1'))
+             ->is('intval', -1)
              ->back('first');
         $this->prepareQuery();
     }

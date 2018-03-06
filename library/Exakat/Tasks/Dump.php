@@ -65,7 +65,7 @@ class Dump extends Tasks {
         }
         $this->addSnitch();
 
-        if ($this->config->update === true) {
+        if ($this->config->update === true && file_exists($this->sqliteFileFinal)) {
             copy($this->sqliteFileFinal, $this->sqliteFile);
             $this->sqlite = new \Sqlite3($this->sqliteFile);
         } else {
@@ -126,9 +126,9 @@ SQL;
         $themes = array();
         if ($this->config->thema !== null) {
             $thema = $this->config->thema;
-            $themes = Analyzer::getThemeAnalyzers($thema);
+            $themes = $this->themes->getThemeAnalyzers($thema);
             if (empty($themes)) {
-                $r = Analyzer::getSuggestionThema($thema);
+                $r = $this->themes->getSuggestionThema($thema);
                 if (!empty($r)) {
                     echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
                 }
@@ -143,9 +143,9 @@ SQL;
                 $themes = $analyzer;
             }
 
-            foreach($themes as $a) {
-                if (!Analyzer::getClass($a)) {
-                    throw new NoSuchAnalyzer($a);
+            foreach($themes as $theme) {
+                if (!$this->themes->getClass($theme)) {
+                    throw new NoSuchAnalyzer($theme, $this->themes);
                 }
             }
             display('Processing '.count($themes).' analyzer'.(count($themes) > 1 ? 's' : '').' : '.implode(', ', $themes));
@@ -210,7 +210,7 @@ SQL;
             return;
         }
 
-        $analyzer = Analyzer::getInstance($class, $this->gremlin, $this->config);
+        $analyzer = $this->themes->getInstance($class, $this->gremlin, $this->config);
         $res = $analyzer->getDump();
 
         $saved = 0;
@@ -914,7 +914,7 @@ GREMLIN;
         }
 
         if (!empty($query)) {
-            print $query = 'INSERT INTO phpStructures ("id", "name", "type", "count") VALUES '.implode(', ', $query);
+            $query = 'INSERT INTO phpStructures ("id", "name", "type", "count") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total PHP functions\n");

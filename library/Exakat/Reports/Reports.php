@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Config;
+use Exakat\Analyzer\Themes;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Datastore;
 use Exakat\Dump;
@@ -50,22 +51,24 @@ abstract class Reports {
 
     private $count = 0;
 
-    protected $themes     = array(); // cache for themes list
+//    protected $themes     = array(); // cache for themes list
     protected $themesList = '';      // cache for themes list in SQLITE
     protected $config     = null;
 
     protected $sqlite = null;
     protected $datastore = null;
+    protected $themes = null;
 
     public function __construct($config) {
         $this->config = $config;
 
-        $analyzers = Analyzer::getThemeAnalyzers($this->config->thema);
-        $this->themesList = '("'.implode('", "', $analyzers).'")';
-
         $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
 
         $this->datastore = new Dump($this->config);
+        $this->themes = new Themes($this->config->dir_root.'/data/analyzers.sqlite');
+
+        $analyzers = $this->themes->getThemeAnalyzers($this->config->thema);
+        $this->themesList = '("'.implode('", "', $analyzers).'")';
     }
 
     protected function _generate($analyzerList) {}
@@ -77,11 +80,11 @@ abstract class Reports {
         }
 
         if ($this->config->thema !== null) {
-            $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
+            $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
         } elseif ($this->config->program !== null) {
             $list = $this->config->program;
         } else {
-            $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+            $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         }
 
         $final = $this->_generate($list);

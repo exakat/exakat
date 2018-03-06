@@ -25,7 +25,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Reports\Reports;
-use Exakat\Analyzer\Docs;
+use Exakat\Analyzer\Themes;
 
 class Catalog extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -34,9 +34,7 @@ class Catalog extends Tasks {
         $data = array();
 
         // List of analysis
-        $pathDocs = $this->config->dir_root.'/data/analyzers.sqlite';
-        $docs = new Docs($pathDocs);
-        $themas = $docs->listAllThemes();
+        $themas = $this->themes->listAllThemes();
         sort($themas);
         $themas = array_map( function ($x) { if (strpos($x, ' ') !== false) { $x = '"'.$x.'"'; } return $x;}, $themas);
         $data['analysis'] = $themas;

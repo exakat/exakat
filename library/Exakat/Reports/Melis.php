@@ -23,7 +23,6 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Docs;
 use Exakat\Data\ZendF3;
 use Exakat\Exakat;
 use Exakat\Phpexec;
@@ -31,13 +30,13 @@ use Exakat\Reports\Reports;
 
 class Melis extends Reports {
     const FILE_FILENAME  = 'report_melis';
+    const FILE_EXTENSION = '';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
     private $tmpName           = '';
 
-    private $docs              = null;
     private $timesToFix        = null;
     private $themesForAnalyzer = null;
     private $severities        = null;
@@ -71,10 +70,10 @@ class Melis extends Reports {
     public function __construct($config) {
         parent::__construct($config);
         $this->themesToShow      = 'Melis';
-        $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
-        $this->timesToFix        = $this->docs->getTimesToFix();
-        $this->themesForAnalyzer = $this->docs->getThemesForAnalyzer($this->themesToShow);
-        $this->severities        = $this->docs->getSeverities();
+
+        $this->timesToFix        = $this->themes->getTimesToFix();
+        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
+        $this->severities        = $this->themes->getSeverities();
     }
 
     private function getBasedPage($file) {
@@ -234,8 +233,8 @@ MENU;
         $baseHTML = $this->getBasedPage('analyzers_doc');
         $analyzersDocHTML = "";
 
-        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = Analyzer::getInstance($analyzer, null, $this->config);
+        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
+            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
 
@@ -820,7 +819,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ("'.implode('", "', Analyzer::getThemeAnalyzers($categorie)).'")';
+            $list = 'IN ("'.implode('", "', $this->themes->getThemeAnalyzers($categorie)).'")';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -858,7 +857,7 @@ JAVASCRIPT;
     }
 
     public function getSeverityBreakdown() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
@@ -936,7 +935,7 @@ SQL;
     }
 
     protected function getAnalyzersResultsCounts() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
@@ -949,7 +948,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
@@ -995,7 +994,7 @@ SQL;
     }
 
     private function getFilesResultsCounts() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
@@ -1025,7 +1024,7 @@ SQL;
     }
 
     public function getFilesCount($limit = null) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT file, count(*) AS number
@@ -1100,7 +1099,7 @@ SQL;
     }
 
     private function getAnalyzersCount($limit) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
@@ -1122,7 +1121,7 @@ SQL;
     }
 
     private function getTopAnalyzers() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
@@ -1134,7 +1133,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $data[] = array('label' => $analyzer->getDescription()->getName(),
                             'value' => $row['number']);
         }
@@ -1153,7 +1152,7 @@ SQL;
     }
 
     private function getSeveritiesNumberBy($type = 'file') {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
@@ -1274,7 +1273,7 @@ JAVASCRIPT;
     }
 
     public function getIssuesFaceted($theme) {
-        $list = Analyzer::getThemeAnalyzers($theme);
+        $list = $this->themes->getThemeAnalyzers($theme);
         $list = '"'.implode('", "', $list).'"';
 
         $sqlQuery = <<<SQL
@@ -1403,8 +1402,8 @@ SQL;
     private function generateAnalyzersList() {
         $analyzers = '';
 
-        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = Analyzer::getInstance($analyzer, null, $this->config);
+        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
+            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
@@ -1615,7 +1614,7 @@ SQL
     private function generateCompatibility($version) {
         $compatibility = '';
 
-        $list = Analyzer::getThemeAnalyzers('CompatibilityPHP'.$version);
+        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);
 
         $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();
@@ -1720,83 +1719,19 @@ HTML;
     }
 
     private function generateStats() {
-        $extensions = array(
-                    'Summary' => array(
-                            'Namespaces'     => 'Namespace',
-                            'Classes'        => 'Class',
-                            'Interfaces'     => 'Interface',
-                            'Trait'          => 'Trait',
-                            'Function'       => 'Functions/RealFunctions',
-                            'Variables'      => 'Variables/RealVariables',
-                            'Constants'      => 'Constants/Constantnames',
-                     ),
-                    'Classes' => array(
-                            'Classes'           => 'Class',
-                            'Class constants'   => 'Classes/ConstantDefinition',
-                            'Properties'        => 'Classes/NormalProperties',
-                            'Static properties' => 'Classes/StaticProperties',
-                            'Methods'           => 'Classes/NormalMethods',
-                            'Static methods'    => 'Classes/StaticMethods',
-                            // Spot Abstract methods
-                            // Spot Final Methods
-                     ),
-                    'Structures' => array(
-                            'Ifthen'              => 'Ifthen',
-                            'Else'                => 'Structures/ElseUsage',
-                            'Switch'              => 'Switch',
-                            'Case'                => 'Case',
-                            'Default'             => 'Default',
-                            'For'                 => 'For',
-                            'Foreach'             => 'Foreach',
-                            'While'               => 'While',
-                            'Do..while'           => 'Dowhile',
-
-                            'New'                 => 'New',
-                            'Clone'               => 'Clone',
-                            'Class constant call' => 'Staticconstant',
-                            'Method call'         => 'Methodcall',
-                            'Static method call'  => 'Staticmethodcall',
-                            'Properties usage'    => 'Property',
-                            'Static property'     => 'Staticproperty',
-
-                            'Throw'               => 'Throw',
-                            'Try'                 => 'Try',
-                            'Catch'               => 'Catch',
-                            'Finally'             => 'Finally',
-
-                            'Yield'               => 'Yield',
-                            'Yield From'          => 'Yieldfrom',
-
-                            '?  :'                => 'Ternary',
-                            '?: '                 => 'Php/Coalesce',
-                            '??'                  => 'Php/NullCoalesce',
-
-                            'Variables constants' => 'Constants/VariableConstants',
-                            'Variables variables' => 'Variables/VariableVariable',
-                            'Variables functions' => 'Functions/Dynamiccall',
-                            'Variables classes'   => 'Classes/VariableClasses',
-                    ),
-                );
-
+        $results = new Stats($this->config);
+        $report = $results->generate(null, Reports::INLINE);
+        $report = json_decode($report);
+        
         $stats = '';
-        foreach($extensions as $section => $hash) {
-            $stats .= "<tr><td colspan=2 bgcolor=#BBB>$section</td></tr>\n";
+        foreach($report as $section => $hash) {
+            $stats .= "<tr><td colspan=2 bgcolor=\"#BBB\">$section</td></tr>\n";
 
-            foreach($hash as $name => $ext) {
-                if (strpos($ext, '/') === false) {
-                    $res = $this->sqlite->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"');
-                    $d = $res->fetchArray(\SQLITE3_ASSOC);
-                    $d = (int) $d['count'];
-                } else {
-                    $res = $this->sqlite->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"');
-                    $d = $res->fetchArray(\SQLITE3_ASSOC);
-                    $d = (int) $d['count'];
-                }
-                $res = $d === -2 ? 'N/A' : $d;
-                $stats .= "<tr><td>$name</td><td>$res</td></tr>\n";
+            foreach($hash as $name => $count) {
+                $stats .= "<tr><td>$name</td><td>$count</td></tr>\n";
             }
         }
-
+        
         $html = $this->getBasedPage('stats');
         $html = $this->injectBloc($html, 'STATS', $stats);
         $this->putBasedPage('stats', $html);
@@ -1928,7 +1863,7 @@ SQL;
         $extensions = $this->components;
 
         // collecting information for Extensions
-        $themed = Analyzer::getThemeAnalyzers('ZendFramework');
+        $themed = $this->themes->getThemeAnalyzers('ZendFramework');
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {

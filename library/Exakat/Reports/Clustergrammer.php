@@ -30,7 +30,7 @@ class Clustergrammer extends Reports {
     const FILE_FILENAME  = 'clustergrammer';
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $analyzers = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $analyzers = $this->themes->getThemeAnalyzers($this->themesToShow);
         display( count($analyzers)." analyzers\n");
 
         $res = $this->sqlite->query('SELECT distinct analyzer FROM results WHERE analyzer IN ("'.implode('","', $analyzers).'") ORDER BY analyzer');

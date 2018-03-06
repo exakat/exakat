@@ -23,23 +23,20 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Reports\Helpers\Results;
 
 class Json extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'exakat';
 
     public function _generate($analyzerList) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
-
-        $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
-        $res = $sqlite->query($sqlQuery);
+        $analysisResults = new Results($this->sqlite, $analyzerList);
+        $analysisResults->load();
 
         $results = array();
         $titleCache = array();
         $severityCache = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        foreach($analysisResults->toArray() as $row) {
             if (!isset($results[$row['file']])) {
                 $file = array('errors'   => 0,
                               'warnings' => 0,
@@ -50,7 +47,7 @@ class Json extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
             }

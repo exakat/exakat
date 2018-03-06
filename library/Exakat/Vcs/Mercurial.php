@@ -40,8 +40,7 @@ class Mercurial extends Vcs {
     }
 
     public function update() {
-        shell_exec("cd ; hg update");
-        $res = shell_exec("cd {$this->destinationFull}; hg pull 2>&1; hg update; hg log -l 1");
+        $res = shell_exec("cd {$this->destinationFull}/code/; hg pull 2>&1; hg update; hg log -l 1");
         preg_match('/changeset:\s+(\S+)/', $res, $changeset);
         preg_match("/date:\s+([^\n]+)/", $res, $date);
 

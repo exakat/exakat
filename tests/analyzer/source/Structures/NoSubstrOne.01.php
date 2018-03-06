@@ -1,6 +1,8 @@
 <?php
 
 $a = substr($b, 0, 1);
+$a = substr($b, 0, "1");
+$a = substr($b, 0, true);
 $a = substr($b, 0, -1);
 $a = substr($b, 0, -2);
 $a = substr($b, 0, +1);

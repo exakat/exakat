@@ -1,4 +1,4 @@
-Version 1.1.7 (Xu Maogong, coming up)
+Version 1.1.8 (Yuchi Gong, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,28 @@ Version 1.1.7 (Xu Maogong, coming up)
 + Tokenizer
     + 
 
-Version 1.1.6 (Wei Zheng, 2018-2-26)
+Version 1.1.7 (Xu Maogong, 2018-03-05)
++ Architecture
+    + Removed most static in Analysis
++ Report
+    + New format : All, that produces all reports
+    + Ambassador : new report estimates fitting PHP version
+    + Ambassador : report enable_dl in configuration
++ Analyzer
+    + New analysis : report dynamic library loading
+    + New analysis : suggest array_fill_keys()
+    + New analysis : PHP 7.3 optional last argument
+    + New analysis : added support for xxtea, opencensus, varnish, uopz
+    + Upgraded BugFixes report to PHP 7.2.3
+    + Updated analysis : ext/cairo has new functions
+    + Updated analysis : PHP 7.3 new functions
+    + Removed analysis : NullCoalesce (double)
+    + Checked unit tests : 2743 / 2731 test pass (99% pass). 
++ Tokenizer
+    + Moved 'constant' to plugins
+    + Fixed bug when updating with HG
+
+Version 1.1.6 (Wei Zheng, 2018-02-26)
 + Architecture
     + Created 'First', a recipe of initial analysis
     + Prepared installation for compose

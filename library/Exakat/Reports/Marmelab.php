@@ -29,7 +29,7 @@ class Marmelab extends Reports {
     const FILE_FILENAME  = 'exakat';
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $list = Analyzer::getThemeAnalyzers(isset($this->config->thema) ? $this->config->thema : 'Analyze');
+        $list = $this->themes->getThemeAnalyzers(isset($this->config->thema) ? $this->config->thema : 'Analyze');
         $list = makeList($list);
         
         $analyzers = array();
@@ -42,7 +42,7 @@ class Marmelab extends Reports {
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
 
             if (!isset($analyzers[$row['analyzer_id']])) {
-                $analyzer = Analyzer::getInstance($row['analyzer_id'], null, $this->config);
+                $analyzer = $this->themes->getInstance($row['analyzer_id'], null, $this->config);
 
                 $a = array('id'          => $row['analyzer_id'],
                            'title'       => $analyzer->getDescription()->getName(),

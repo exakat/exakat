@@ -3,7 +3,7 @@
 $expected     = array('Gmagick(\'example.jpg\')',
                      );
 
-$expected_not = array(
+$expected_not = array('gmagick(\'Functioncall\')',
                      );
 
 ?>

@@ -31,7 +31,7 @@ class FacetedJson extends Reports {
     const FILE_FILENAME  = 'faceted';
 
     public function generate($dirName, $fileName = null) {
-        $sqlite      = new \sqlite3($dirName.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
+        $sqlite      = new \Sqlite3($dirName.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
 
         $sqlQuery = <<<SQL
 SELECT  id AS id,
@@ -52,7 +52,7 @@ SQL;
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $row['error'] = $ini['name'];
 
-            $a = Analyzer::getInstance($row['analyzer'], $this->config);
+            $a = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $row['severity'] = $a->getSeverity();
             $row['impact']   = $a->getTimeToFix();
             $row['recipes']  = $a->getThemes();

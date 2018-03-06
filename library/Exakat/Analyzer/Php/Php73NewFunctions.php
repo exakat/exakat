@@ -30,11 +30,8 @@ class Php73NewFunctions extends FunctionDefinition {
     protected $phpVersion = '7.3-';
     
     public function analyze() {
-        $this->functions = array();
-    
-        if(empty($this->functions)) {
-            return;
-        }
+        $this->functions = array('net_get_interfaces',
+                                );
         parent::analyze();
     }
 }

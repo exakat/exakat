@@ -83,12 +83,12 @@ class Initproject extends Tasks {
             display( $this->config->projects_root.'/projects/'.$project.' already exists. Reusing'."\n");
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/'.$project.'/log/')) {
-            mkdir($this->config->projects_root.'/projects/'.$project.'/log/', 0755);
-        } else {
+        if (file_exists($this->config->projects_root.'/projects/'.$project.'/log/')) {
             display( $this->config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring');
-            return null;
-        }
+            return;
+        } 
+
+        mkdir($this->config->projects_root.'/projects/'.$project.'/log/', 0755);
 
         $this->datastore = new Datastore($this->config, Datastore::CREATE);
 
