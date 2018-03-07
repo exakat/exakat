@@ -40,7 +40,7 @@ abstract class Reports {
                                           'PhpConfiguration', 'PhpCompilation',
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
                                           'ZendFramework',  'CodeSniffer', 'Slim',
-                                          'RadwellCode', 'Melis',
+                                          'RadwellCode', 'Melis', 'Grade', 
                                           'FacetedJson', 'Json', 'OnepageJson', 'Marmelab', 'Simpletable',
                                           'Codeflower', 'Dependencywheel',
                                           );
@@ -51,7 +51,6 @@ abstract class Reports {
 
     private $count = 0;
 
-//    protected $themes     = array(); // cache for themes list
     protected $themesList = '';      // cache for themes list in SQLITE
     protected $config     = null;
 
