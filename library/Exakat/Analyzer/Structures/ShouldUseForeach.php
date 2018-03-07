@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldUseForeach extends Analyzer {
     public function analyze() {
+        // for($i = 0; $i < $n; ++$i) {}
         $this->atomIs('For')
 
              ->outIs('INIT')
