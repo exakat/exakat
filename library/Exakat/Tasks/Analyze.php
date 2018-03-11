@@ -118,6 +118,7 @@ class Analyze extends Tasks {
 
     private function analyze($analyzer_class) {
         $begin = microtime(true);
+
         $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
 
         if ($this->config->noRefresh === true && 
@@ -128,11 +129,10 @@ class Analyze extends Tasks {
         }
         $analyzer->init();
         
-        if ($this->config->noDependencies === true) {
+        if ($this->config->noDependencies !== true) {
             foreach($analyzer->dependsOn() as $dependency) {
                 if (!isset($this->analyzed[$dependency])) {
                     $count = $this->analyze($dependency);
-                    print "Run secondary : $analyzer_class\n";
                 
                     $this->analyzed[$dependency] = $count;
                 }

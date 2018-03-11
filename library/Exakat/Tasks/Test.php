@@ -29,6 +29,7 @@ use Exakat\Exceptions\NoSuchFile;
 use Exakat\Exceptions\NoSuchDir;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Tasks\CleanDb;
+use Exakat\Tasks\Clean;
 
 class Test extends Tasks {
     const CONCURENCE = self::NONE;
@@ -44,11 +45,15 @@ class Test extends Tasks {
         // Check for requested analyze
         $analyzerName = $this->config->program;
         if (!$this->themes->getClass($analyzerName)) {
-            throw new NoSuchAnalyzer($analyzerName);
+            throw new NoSuchAnalyzer($analyzerName, $this->themes);
         }
 
         display("Cleaning DB\n");
         $clean = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $clean->run();
+
+        display("Cleaning project\n");
+        $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $clean->run();
 
         $load = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
