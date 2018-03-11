@@ -27,8 +27,9 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
-use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
 
 class Project extends Tasks {
     const CONCURENCE = self::NONE;
@@ -149,7 +150,13 @@ class Project extends Tasks {
         $this->checkTokenLimit();
 
         $analyze = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        $analyze->run();
+        try {
+            $analyze->run();
+        } catch (NoFileToProcess $e) {
+            $this->datastore->addRow(array('init error' => $e->getMessage(),
+                                           'status'     => 'Error',
+                                           ));
+        }
         unset($analyze);
         display("Project loaded".PHP_EOL);
         $this->logTime('Loading');
@@ -207,7 +214,7 @@ class Project extends Tasks {
 
         $this->logTime('Final');
         $this->removeSnitch();
-        display("End".PHP_EOL);
+        display("End" . PHP_EOL);
     }
 
     private function logTime($step) {
