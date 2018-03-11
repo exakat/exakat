@@ -2167,7 +2167,9 @@ SQL;
 
         $this->pushExpression($functioncall);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && 
+        if ( $functioncall->atom === 'Methodcallname') {
+            // Nothing, really. in case of A::b()()
+        } elseif ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && 
              $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG && 
              $getFullnspath === self::WITH_FULLNSPATH ) {
             $this->processSemicolon();
@@ -3066,6 +3068,7 @@ SQL;
                                                             \Exakat\Tasks\T_CLOSE_TAG,
                                                             \Exakat\Tasks\T_CLOSE_CURLY,
                                                             \Exakat\Tasks\T_CLOSE_BRACKET,
+                                                            \Exakat\Tasks\T_COMMA,
                                                             \Exakat\Tasks\T_COLON))) {
             $functioncall = $this->addAtom('Exit');
 
@@ -3083,7 +3086,11 @@ SQL;
 
             $this->pushExpression($functioncall);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && in_array($this->tokens[$this->id + 1][0], 
+                                                                         array(\Exakat\Tasks\T_CLOSE_TAG,
+                                                                               \Exakat\Tasks\T_COMMA,
+                                                                              ))
+                ) {
                 $this->processSemicolon();
             }
 
@@ -3929,17 +3936,17 @@ SQL;
             $yield->token    = $this->getToken($this->tokens[$current][0]);
 
             $this->pushExpression($yield);
-            $this->runPlugins($yield, array($yieldArg) );
+            $this->runPlugins($yield, array('YIELD' => $yieldArg) );
 
             return $yield;
         } else {
-            $yield = $this->processSingleOperator('Yield', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
-            $operator = $this->popExpression();
-            $this->pushExpression($operator);
+            $operand = $this->processSingleOperator('Yield', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
+            $yield = $this->popExpression();
+            $this->pushExpression($yield);
 
-            $this->runPlugins($yield, array('YIELD' => $operator) );
-
-            return $operator;
+            $this->runPlugins($yield, array('YIELD' => $operand) );
+            
+            return $yield;
         }
     }
 
@@ -4333,7 +4340,7 @@ SQL;
             $static = $this->addAtom('Staticmethodcall');
             $links = 'METHOD';
         } else {
-            assert(false, "Unprocessed atom in static call (right) : ".$right->atom);
+            assert(false, "Unprocessed atom in static call (right) : ".$right->atom.'. File '.$this->filename);
         }
 
         $this->addLink($static, $left, 'CLASS');
@@ -4372,7 +4379,20 @@ SQL;
         do {
             $right = $this->processNext();
 
-            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_EQUAL, \Exakat\Tasks\T_PLUS_EQUAL, \Exakat\Tasks\T_AND_EQUAL, \Exakat\Tasks\T_CONCAT_EQUAL, \Exakat\Tasks\T_DIV_EQUAL, \Exakat\Tasks\T_MINUS_EQUAL, \Exakat\Tasks\T_MOD_EQUAL, \Exakat\Tasks\T_MUL_EQUAL, \Exakat\Tasks\T_OR_EQUAL, \Exakat\Tasks\T_POW_EQUAL, \Exakat\Tasks\T_SL_EQUAL, \Exakat\Tasks\T_SR_EQUAL, \Exakat\Tasks\T_XOR_EQUAL))) {
+            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_EQUAL, 
+                                                                \Exakat\Tasks\T_PLUS_EQUAL, 
+                                                                \Exakat\Tasks\T_AND_EQUAL, 
+                                                                \Exakat\Tasks\T_CONCAT_EQUAL, 
+                                                                \Exakat\Tasks\T_DIV_EQUAL, 
+                                                                \Exakat\Tasks\T_MINUS_EQUAL, 
+                                                                \Exakat\Tasks\T_MOD_EQUAL, 
+                                                                \Exakat\Tasks\T_MUL_EQUAL, 
+                                                                \Exakat\Tasks\T_OR_EQUAL, 
+                                                                \Exakat\Tasks\T_POW_EQUAL, 
+                                                                \Exakat\Tasks\T_SL_EQUAL, 
+                                                                \Exakat\Tasks\T_SR_EQUAL, 
+                                                                \Exakat\Tasks\T_XOR_EQUAL,
+                                                                ))) {
                 $right = $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
@@ -4389,14 +4409,16 @@ SQL;
         $operator->fullcode  = $left->fullcode.' '.$this->tokens[$current][1].' '.$right->fullcode;
         $operator->line      = $this->tokens[$current][2];
         $operator->token     = $this->getToken($this->tokens[$current][0]);
-        $this->runPlugins($operator, array($links[0] => $left, $links[1] => $right));
+        
+        $extras = array($links[0] => $left, $links[1] => $right);
+        $this->runPlugins($operator, $extras);
 
         $this->pushExpression($operator);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
-
+        
         return $operator;
     }
 
