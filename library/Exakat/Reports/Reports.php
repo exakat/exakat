@@ -40,7 +40,7 @@ abstract class Reports {
                                           'PhpConfiguration', 'PhpCompilation',
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
                                           'ZendFramework',  'CodeSniffer', 'Slim',
-                                          'RadwellCode', 'Melis', 'Grade', 
+                                          'RadwellCode', 'Melis', 'Grade', 'Weekly',
                                           'FacetedJson', 'Json', 'OnepageJson', 'Marmelab', 'Simpletable',
                                           'Codeflower', 'Dependencywheel',
                                           );
