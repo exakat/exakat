@@ -64,10 +64,7 @@ class Analyze extends Tasks {
         $begin = microtime(true);
 
         // Take this before we clean it up
-        $rows = $this->datastore->getRow('analyzed');
-        foreach($rows as $row) {
-            $this->analyzed[$row['analyzer']] = $row['counts'];
-        }
+        $this->checkAnalyzed();
         
         if ($this->config->program !== null) {
             if (is_array($this->config->program)) {
@@ -97,7 +94,7 @@ class Analyze extends Tasks {
         $this->log->log("Runnable analyzers\t".count($analyzers_class));
 
         $total_results = 0;
-        $this->Php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
+        $this->Php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
 
         if (!$this->config->verbose && !$this->config->quiet) {
            $this->progressBar = new Progressbar(0, count($analyzers_class) + 1, exec('tput cols'));
@@ -109,6 +106,7 @@ class Analyze extends Tasks {
             }
 
             $this->analyze($analyzer_class);
+            $this->checkAnalyzed();
         }
 
         if (!$this->config->verbose && !$this->config->quiet) {
@@ -197,6 +195,19 @@ GREMLIN;
             $this->datastore->addRow('analyzed', array($analyzer_class => $count ) );
         }
         return $total_results;
+    }
+    
+    private function checkAnalyzed() {
+//        $begin = count($this->analyzed);
+        $rows = $this->datastore->getRow('analyzed');
+        foreach($rows as $row) {
+            if (!isset($this->analyzed[$row['analyzer']])) {
+                $this->analyzed[$row['analyzer']] = $row['counts'];
+            }
+        }
+        
+//        $end = count($this->analyzed);
+//        print ($end - $begin)." in analyzed ($end / $begin)\n";
     }
     
 }
