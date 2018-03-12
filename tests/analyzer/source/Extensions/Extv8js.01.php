@@ -12,6 +12,8 @@ try {
   var_dump($v8->executeString($JS, 'basic.js'));
 } catch (V8JsException $e) {
   var_dump($e);
-}
+} catch (V8JsBiggerException $e) {
+  var_dump($e);
+} 
 
 ?>

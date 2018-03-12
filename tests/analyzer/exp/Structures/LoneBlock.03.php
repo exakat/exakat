@@ -3,7 +3,7 @@
 $expected     = array(' { /**/ } ',
                      );
 
-$expected_not = array('if ($c) { /**/ } '
+$expected_not = array('if ($c) { /**/ } ',
                      );
 
 ?>
