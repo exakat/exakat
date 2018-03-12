@@ -81,12 +81,12 @@ class Atom {
             $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
         
-        $this->code          = addcslashes($this->code       , '\\"');
-        $this->lccode        = addcslashes($this->lccode     , '\\"');
-        $this->fullcode      = addcslashes($this->fullcode   , '\\"');
-        $this->fullnspath    = addcslashes($this->fullnspath , '\\"');
-        $this->strval        = addcslashes($this->strval     , '\\"');
-        $this->noDelimiter   = addcslashes($this->noDelimiter, '\\"');
+        $this->code          = $this->protectString($this->code       , '\\"');
+        $this->lccode        = $this->protectString($this->lccode     , '\\"');
+        $this->fullcode      = $this->protectString($this->fullcode   , '\\"');
+        $this->fullnspath    = $this->protectString($this->fullnspath , '\\"');
+        $this->strval        = $this->protectString($this->strval     , '\\"');
+        $this->noDelimiter   = $this->protectString($this->noDelimiter, '\\"');
 
         $this->alternative   = $this->alternative ? 1 : null;
         $this->reference     = $this->reference   ? 1 : null;
@@ -141,35 +141,35 @@ class Atom {
             'label'         => $this->atom,
             'line'          => $this->line,
             'token'         => $this->token,
-            'code'          => addcslashes($this->code       , '\\"'),
-            'lccode'        => addcslashes($this->lccode     , '\\"'),
-            'fullcode'      => addcslashes($this->fullcode   , '\\"'),
-            'fullnspath'    => addcslashes($this->fullnspath , '\\"'),
+            'code'          => $this->protectString($this->code       , '\\"'),
+            'lccode'        => $this->protectString($this->lccode     , '\\"'),
+            'fullcode'      => $this->protectString($this->fullcode   , '\\"'),
+            'fullnspath'    => $this->protectString($this->fullnspath , '\\"'),
             );
 
-        if ($this->count !== null) { $return['count'] = $this->count; }
-        if ($this->rank !== '') { $return['rank'] = $this->rank; }
-        if ($this->alternative) { $return['alternative'] = 1; }
-        if ($this->reference) { $return['reference'] = 1; }
-        if ($this->heredoc) { $return['heredoc'] = 1; }
-        if ($this->variadic) { $return['variadic'] = 1; }
-        if ($this->absolute) { $return['absolute'] = 1; }
-        if ($this->constant) { $return['constant'] = 1; }
-        if ($this->boolean) { $return['boolean'] = 1; }
-        if ($this->enclosing) { $return['enclosing'] = 1; }
-        if ($this->bracket) { $return['bracket'] = 1; }
-        if ($this->close_tag) { $return['close_tag'] = 1; }
-        if ($this->aliased) { $return['aliased'] = 1; }
-        if ($this->alias !== '') { $return['alias'] = $this->alias; }
-        if ($this->origin !== '') { $return['origin'] = $this->origin; }
-        if ($this->strval) { $return['close_tag'] = addcslashes($this->strval     , '\\"'); }
-        if ($this->noDelimiter !== null) { $return['noDelimiter'] = addcslashes($this->noDelimiter, '\\"'); }
-        if ($this->propertyname) { $return['propertyname'] = $this->propertyname; }
-        if ($this->globalvar) { $return['globalvar'] = 1; }
-        if ($this->intval !== null) { $return['intval'] = 1; }
-        if ($this->delimiter !== '') { $return['delimiter'] = $this->delimiter; }
-        if ($this->args_max !== '') { $return['args_max'] = $this->args_max; }
-        if ($this->args_min !== '') { $return['args_min'] = $this->args_min; }
+        if ($this->count !== null)       { $return['count']        = $this->count; }
+        if ($this->rank !== '')          { $return['rank']         = $this->rank; }
+        if ($this->alternative)          { $return['alternative']  = 1; }
+        if ($this->reference)            { $return['reference']    = 1; }
+        if ($this->heredoc)              { $return['heredoc']      = 1; }
+        if ($this->variadic)             { $return['variadic']     = 1; }
+        if ($this->absolute)             { $return['absolute']     = 1; }
+        if ($this->constant)             { $return['constant']     = 1; }
+        if ($this->boolean)              { $return['boolean']      = 1; }
+        if ($this->enclosing)            { $return['enclosing']    = 1; }
+        if ($this->bracket)              { $return['bracket']      = 1; }
+        if ($this->close_tag)            { $return['close_tag']    = 1; }
+        if ($this->aliased)              { $return['aliased']      = 1; }
+        if ($this->alias !== '')         { $return['alias']        = $this->alias; }
+        if ($this->origin !== '')        { $return['origin']       = $this->origin; }
+        if ($this->strval)               { $return['close_tag']    = $this->protectString($this->strval     , '\\"'); }
+        if ($this->noDelimiter !== null) { $return['noDelimiter']  = $this->protectString($this->noDelimiter, '\\"'); }
+        if ($this->propertyname)         { $return['propertyname'] = $this->propertyname; }
+        if ($this->globalvar)            { $return['globalvar']    = 1; }
+        if ($this->intval !== null)      { $return['intval']       = 1; }
+        if ($this->delimiter !== '')     { $return['delimiter']    = $this->delimiter; }
+        if ($this->args_max !== '')      { $return['args_max']     = $this->args_max; }
+        if ($this->args_min !== '')      { $return['args_min']     = $this->args_min; }
 
         return $return;
     }
@@ -186,12 +186,12 @@ class Atom {
             $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
 
-        $this->code          = addcslashes($this->code       , '\\"');
-        $this->lccode        = addcslashes($this->lccode     , '\\"');
-        $this->fullcode      = addcslashes($this->fullcode   , '\\"');
-        $this->fullnspath    = addcslashes($this->fullnspath , '\\"');
-        $this->strval        = addcslashes($this->strval     , '\\"');
-        $this->noDelimiter   = addcslashes($this->noDelimiter, '\\"');
+        $this->code          = $this->protectString($this->code       , '\\"');
+        $this->lccode        = $this->protectString($this->lccode     , '\\"');
+        $this->fullcode      = $this->protectString($this->fullcode   , '\\"');
+        $this->fullnspath    = $this->protectString($this->fullnspath , '\\"');
+        $this->strval        = $this->protectString($this->strval     , '\\"');
+        $this->noDelimiter   = $this->protectString($this->noDelimiter, '\\"');
 
 //'alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'
         $this->alternative   = (int) $this->alternative;
@@ -277,6 +277,10 @@ class Atom {
                         );
 
         return (object) $object;
+    }
+    
+    private function protectString($code) {
+        return addcslashes($code , '\\"');
     }
 }
 
