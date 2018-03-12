@@ -21,6 +21,7 @@ strtoupper
 var_dump
 var_export
 boolean
+booleans
 bracketless
 __DIR__
 __FILE__
@@ -71,3 +72,18 @@ fgetcsv
 fgetss
 incrementing
 dirname
+E_NOTICE
+throwable
+error_reporting
+untestable
+Foreach
+array_keys
+heredoc
+nowdoc
+default_charset
+html4
+transtyped
+rethrowing
+rethrow
+rethrown
+Unsetting
