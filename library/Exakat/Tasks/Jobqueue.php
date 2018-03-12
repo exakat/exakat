@@ -42,6 +42,9 @@ class Jobqueue extends Tasks {
     }
 
     public function run() {
+        if (!file_exists($this->config->projects_root.'/projects/log/')) {
+            mkdir($this->config->projects_root.'/projects/log/', 0700);
+        }
         $this->jobQueueLog = fopen($this->config->projects_root.'/projects/log/jobqueue.log', 'a');
         $this->log('Open Job Queue '.date('r')."\n");
 
