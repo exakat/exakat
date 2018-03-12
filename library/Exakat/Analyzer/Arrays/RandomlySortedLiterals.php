@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class RandomlySortedLiterals extends Analyzer {
     public function analyze() {
-        $arrays = $this->query(<<<GREMLIN
+        $uniqueArrays = $this->query(<<<GREMLIN
 g.V().hasLabel("Arrayliteral")
      .has("constant", true)
      .filter{ it.get().value("count") > 2 }
@@ -35,7 +35,7 @@ g.V().hasLabel("Arrayliteral")
                .out("ARGUMENT")
                .not( hasLabel("Void") )
                .sideEffect{ 
-                    if (it.get().label() == "String" || it.get().label() == "Void" ) {
+                    if (it.get().label() == "String") {
                         liste.add(it.get().value("noDelimiter"));
                      } else {
                         liste.add(it.get().value("fullcode"));
@@ -47,7 +47,40 @@ g.V().hasLabel("Arrayliteral")
      .groupCount("m").cap("m").toList()[0].findAll{ a,b -> b > 1}.keySet();
 GREMLIN
 )->toArray();
-        if (empty($arrays)) {
+        if (empty($uniqueArrays)) {
+            return;
+        }
+
+        $unsortedArrays = $this->query(<<<GREMLIN
+g.V().hasLabel("Arrayliteral")
+     .has("constant", true)
+     .filter{ it.get().value("count") > 2 }
+     .not( where( out("ARGUMENT").has("rank", 0).hasLabel("Void")) )
+     .where( __.sideEffect{ liste = [];}
+               .out("ARGUMENT").order().by('rank')
+               .not( hasLabel("Void") )
+               .sideEffect{ 
+                    if (it.get().label() == "String") {
+                        liste.add(it.get().value("noDelimiter"));
+                     } else {
+                        liste.add(it.get().value("fullcode"));
+                     }
+                }
+               .count()
+          )
+     .filter{ liste.sort(false) in arg; }
+
+     .map{ liste.sort(false); }
+     .groupCount("n")
+
+     .map{ liste; }
+     .groupCount("m").cap("m", "n")
+
+     .sideEffect{ m = it.get()['m'] }
+     .sideEffect{ n = it.get()['n'] }.map{m;}.toList()[0].findAll{ a,b -> b != n[a.sort(false)] }.keySet()
+GREMLIN
+, ['arg' => $uniqueArrays])->toArray();
+        if (empty($unsortedArrays)) {
             return;
         }
 
@@ -57,17 +90,17 @@ GREMLIN
              ->atomIsNot('Void')
              ->back('first')
              ->raw('where( __.sideEffect{ liste = [];}
-                             .out("ARGUMENT")
+                             .out("ARGUMENT").order().by("rank")
                              .not( hasLabel("Void") )
                              .sideEffect{ 
-                                  if (it.get().label() == "String"|| it.get().label() == "Void" ) {
+                                  if (it.get().label() == "String") {
                                     liste.add(it.get().value("noDelimiter"));
                                  } else {
                                     liste.add(it.get().value("fullcode"));
                                 }
                              }
                              .count())')
-             ->raw('filter{ x = ***;  liste.sort(false) in x; }', $arrays)
+             ->raw('filter{ x = ***;  liste in x; }', $unsortedArrays)
              //.values() is not needed for tinkergraph
              ->back('first');
         $this->prepareQuery();
