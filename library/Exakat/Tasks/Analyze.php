@@ -121,8 +121,9 @@ class Analyze extends Tasks {
 
         $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
 
-        if ($this->config->noRefresh !== true ||
-            isset($this->analyzed[$analyzer_class])) {
+        if (isset($this->analyzed[$analyzer_class]) && 
+            $this->config->noRefresh === true
+            ) {
             display( "$analyzer_class is already processed\n");
             
             return;
@@ -131,7 +132,9 @@ class Analyze extends Tasks {
         
         if ($this->config->noDependencies !== true) {
             foreach($analyzer->dependsOn() as $dependency) {
-                if (!isset($this->analyzed[$dependency])) {
+                if (isset($this->analyzed[$analyzer_class]) && 
+                    $this->config->noRefresh === true
+                    ) {
                     $count = $this->analyze($dependency);
                 
                     $this->analyzed[$dependency] = $count;
