@@ -65,11 +65,10 @@ class Project extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
-        // cleaning log directory (possibly logs)
-        $logs = glob($this->config->projects_root.'/projects/'.$project.'/log/*');
-        foreach($logs as $log) {
-            unlink($log);
-        }
+        display("Cleaning project\n");
+        $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $clean->run();
+        $this->datastore = new Datastore($this->config);
 
         display("Search for external libraries".PHP_EOL);
         if (file_exists($this->config->projects_root.'/projects/'.$project.'/config.cache')) {
@@ -93,9 +92,6 @@ class Project extends Tasks {
         $this->logTime('Start');
         $this->addSnitch(array('step'    => 'Start',
                                'project' => $this->config->project));
-
-        // cleaning datastore
-        $this->datastore = new Datastore($this->config, Datastore::CREATE);
 
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
@@ -127,11 +123,11 @@ class Project extends Tasks {
         }
         $this->datastore->addRow('hash', $info);
 
-        display("Running project '$project'".PHP_EOL);
+        display("Running project '$project'" . PHP_EOL);
         display("Running the following analysis : ".implode(', ', $this->themesToRun));
         display("Producing the following reports : ".implode(', ', $this->reports));
 
-        display("Cleaning DB".PHP_EOL);
+        display("Cleaning DB" . PHP_EOL);
         $analyze = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
