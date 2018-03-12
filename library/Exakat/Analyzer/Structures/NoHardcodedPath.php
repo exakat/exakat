@@ -27,8 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class NoHardcodedPath extends Analyzer {
     public function analyze() {
-        $functions = array('fopen', 'file', 'file_get_contents', 'file_put_contents', 'unlink',
-                           'opendir', 'rmdir', 'mkdir');
+        $functions = array('fopen', 
+                           'file', 
+                           'file_get_contents', 
+                           'file_put_contents', 
+                           'unlink',
+                           'opendir', 
+                           'rmdir', 
+                           'mkdir',
+                           );
                            //'glob',  is a special case, with wild chars
 
         $regexPhpProtocol = '^php://(input|output|fd|memory|filter|stdin|stdout|stderr)';
@@ -59,7 +66,7 @@ class NoHardcodedPath extends Analyzer {
         // may need some regex to exclude http...
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
+             ->atomIs(array('String', 'Concatenation'))
              ->is('constant', true)
              ->tokenIs('T_QUOTE')
              ->outWithRank('CONCAT', 0)

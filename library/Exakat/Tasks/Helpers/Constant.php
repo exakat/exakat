@@ -96,12 +96,12 @@ class Constant extends Plugin {
                 break;
 
             case 'Ternary' :
-                $atom->constant = $extras['CONDITION']->constant && 
+                $atom->constant = $extras['CONDITION']->constant &&
                                   $extras['THEN']->constant  &&
                                   $extras['ELSE']->constant;
                 break;
 
-            case 'Functioncall' : 
+            case 'Functioncall' :
                 if (empty($atom->fullnspath)) {
                     $constants = array_column($extras, 'constant');
                     $atom->constant = array_reduce($constants, function ($carry, $item) { return $carry && $item; }, true);

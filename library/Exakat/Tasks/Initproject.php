@@ -86,7 +86,7 @@ class Initproject extends Tasks {
         if (file_exists($this->config->projects_root.'/projects/'.$project.'/log/')) {
             display( $this->config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring');
             return;
-        } 
+        }
 
         mkdir($this->config->projects_root.'/projects/'.$project.'/log/', 0755);
 

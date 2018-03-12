@@ -121,7 +121,7 @@ class Analyze extends Tasks {
 
         $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
 
-        if ($this->config->noRefresh === true && 
+        if ($this->config->noRefresh === true &&
             isset($this->analyzed[$analyzer_class])) {
             display( "$analyzer_class is already processed\n");
             
