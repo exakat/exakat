@@ -330,13 +330,13 @@ function pushToQueue($id) {
 }
 
 function autoProjectName() {
-    $files = glob(__DIR__.'/*');
-    return 'a'.count($files);
+    $letters = range('a', 'z');
+    return $letters[random_int(0, 25)].random_int(0, 1000000000);
 }
 
 function autoOnagepageName() {
-    $files = glob(__DIR__.'/onepage/code/*');
-    return 'o'.count($files);
+    $letters = range('A', 'Z');
+    return $letters[random_int(0, 25)].random_int(0, 1000000000);
 }
 
 function error($message, $project) {
