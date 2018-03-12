@@ -98,7 +98,7 @@ class Config {
             $this->dotExakatConfig = new DotExakatConfig($this->projects_root);
             $this->dotExakatConfig->loadConfig(null);
 
-            $this->codacyConfig = new CodacyConfig();
+            $this->codacyConfig = new CodacyConfig($this->projects_root);
             $this->codacyConfig->loadConfig($this->commandLineConfig->get('project'));
         } else {
             $this->projectConfig   = new EmptyConfig();

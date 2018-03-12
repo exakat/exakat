@@ -63,21 +63,21 @@ class CommandLine extends Config {
                                  );
 
     private $valueOptions   = array('-f'            => 'filename',
-                                '-d'            => 'dirname',
-                                '-p'            => 'project',
-                                '-P'            => 'program',
-                                '-R'            => 'repository',
-                                '-T'            => 'thema',
-                                '-report'       => 'report',
-                                '-format'       => 'format',
-                                '-file'         => 'file',
-                                '-style'        => 'style',
-                                '-neo4j_host'   => 'neo4j_host',
-                                '-neo4j_port'   => 'neo4j_port',
-                                '-neo4j_folder' => 'neo4j_folder',
-                                '-token_limit'  => 'token_limit',
-                                '-branch'       => 'branch',
-                                '-tag'          => 'tag',
+                                    '-d'            => 'dirname',
+                                    '-p'            => 'project',
+                                    '-P'            => 'program',
+                                    '-R'            => 'repository',
+                                    '-T'            => 'thema',
+                                    '-report'       => 'report',
+                                    '-format'       => 'format',
+                                    '-file'         => 'file',
+                                    '-style'        => 'style',
+                                    '-neo4j_host'   => 'neo4j_host',
+                                    '-neo4j_port'   => 'neo4j_port',
+                                    '-neo4j_folder' => 'neo4j_folder',
+                                    '-token_limit'  => 'token_limit',
+                                    '-branch'       => 'branch',
+                                    '-tag'          => 'tag',
 //                                '-loader'       => 'Neo4jImport',
                                  );
 
@@ -113,6 +113,7 @@ class CommandLine extends Config {
                               'test'          => 1,
                               'update'        => 1,
                               'upgrade'       => 1,
+                              'codacy'        => 1,
                               );
 
     public function __construct() {
@@ -134,17 +135,6 @@ class CommandLine extends Config {
         }
 
         // git is default, so it should be unset if another is set
-        /*
-        $this->config['git'] = (boolean) (true ^ ((isset($this->config['svn'])       && $this->config['svn'])      ||
-                                                  (isset($this->config['hg'])        && $this->config['hg'])       ||
-                                                  (isset($this->config['bzr'])       && $this->config['bzr'])      ||
-                                                  (isset($this->config['composer'])  && $this->config['composer']) ||
-                                                  (isset($this->config['tgz'])       && $this->config['tgz'])      ||
-                                                  (isset($this->config['tbz'])       && $this->config['tbz'])      ||
-                                                  (isset($this->config['zip'])       && $this->config['zip'])      ||
-                                                  (isset($this->config['copy'])      && $this->config['copy'])     ||
-                                                  (isset($this->config['symlink'])   && $this->config['symlink']))    );
-                                                  */
 
         foreach($this->valueOptions as $key => $config) {
             while( ($id = array_search($key, $args)) !== false ) {
@@ -194,10 +184,22 @@ class CommandLine extends Config {
 
             $this->config['project']   = 'onepage';
             $this->config['thema']     = 'OneFile';
+            
             $this->config['format']    = 'OnepageJson';
             $this->config['file']      = str_replace('/code/', '/reports/', substr($this->config['filename'], 0, -4));
             $this->config['quiet']     = true;
             $this->config['norefresh'] = true;
+        }
+
+        // Special case for onepage command. It will only work on 'onepage' project
+        if (isset($this->config['command']) && 
+            $this->config['command'] == 'codacy') {
+            $this->config['thema']     = 'Codacy';
+            $this->config['format']    = 'Codacy';
+            $this->config['quiet']     = true;
+            $this->config['norefresh'] = true;
+
+            $this->config['project']   = 'codacy';
         }
         
         return true;
