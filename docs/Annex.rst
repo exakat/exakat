@@ -88,6 +88,9 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Slim
   * RadwellCode
   * Melis
+  * Grade
+  * Weekly
+  * Codacy
   * FacetedJson
   * Json
   * OnepageJson
@@ -120,6 +123,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/curl <http://php.net/manual/en/book.curl.php>`_
 * `ext/cyrus <http://php.net/manual/en/book.cyrus.php>`_
 * `ext/date <http://php.net/manual/en/book.datetime.php>`_
+* `ext/db2 <http://php.net/manual/en/book.ibm-db2.php>`_
 * `ext/dba <http://php.net/manual/en/book.dba.php>`_
 * `ext/dio <http://php.net/manual/en/refs.fileprocess.file.php>`_
 * `ext/dom <http://php.net/manual/en/book.dom.php>`_
@@ -166,6 +170,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/kdm5 <http://php.net/manual/en/book.kadm5.php>`_
 * `ext/lapack <http://php.net/manual/en/book.lapack.php>`_
 * `ext/ldap <http://php.net/manual/en/book.ldap.php>`_
+* ext/leveldb
 * `ext/libevent <http://www.libevent.org/>`_
 * ext/libsodium
 * `ext/libxml <http://www.php.net/manual/en/book.libxml.php>`_
@@ -324,14 +329,18 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.1.8
 
-  * Structures/ConstantPreferences (Structures/ConstantPreferences)
+  * Structures/ConstantPreferences (Structures/ConstantPreferences ; Under Work)
+  * ext/db2 (Extensions/Extdb2)
 
 * 1.1.7
 
   * Dynamic Library Loading (Security/DynamicDl ; Security)
   * PHP 7.3 Last Empty Argument (Php/PHP73LastEmptyArgument ; CompatibilityPHP73)
+  * Property Could Be Local (Classes/PropertyCouldBeLocal)
   * Structures/CouldUseArrayFillKeys (Structures/CouldUseArrayFillKeys ; Suggestions)
-  * ext/opencensus (Extensions/Extopencensus)
+  * Use Count Recursive (Structures/UseCountRecursive ; Suggestions)
+  * ext/leveldb (Extensions/Extleveldb ; Appinfo)
+  * ext/opencensus (Extensions/Extopencensus ; Appinfo)
   * ext/uopz (Extensions/Extuopz ; Appinfo)
   * ext/varnish (Extensions/Extvarnish ; Appinfo)
   * ext/xxtea (Extensions/Extxxtea ; Appinfo)
@@ -1784,7 +1793,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * list() May Omit Variables (Structures/ListOmissions ; Analyze, Codacy, Simple, Suggestions, Level 3)
   * mcrypt_create_iv() With Default Values (Structures/McryptcreateivWithoutOption ; CompatibilityPHP70, Codacy)
   * parse_str() Warning (Security/parseUrlWithoutParameters ; Security)
-  * preg_match_all() Flag (Php/PregMatchAllFlag ; Analyze, Codacy, Simple)
+  * preg_match_all() Flag (Php/PregMatchAllFlag ; Codacy, Simple, Suggestions)
   * preg_replace With Option e (Structures/pregOptionE ; Analyze, Security, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, Codacy, Simple, CompatibilityPHP73)
   * set_exception_handler() Warning (Php/SetExceptionHandlerPHP7 ; CompatibilityPHP70)
   * var_dump()... Usage (Structures/VardumpUsage ; Analyze, Security, ClearPHP, Codacy)
@@ -1855,6 +1864,7 @@ External links
 
 List of external links mentionned in this documentation.
 
+* ` <http://php.net/manual/en/book.ibm-db2.php>`_
 * `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_
 * `$_ENV <http://php.net/reserved.variables.environment.php>`_
 * `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_
@@ -1884,6 +1894,7 @@ List of external links mentionned in this documentation.
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
+* `Avoid Else, Return Early <http://blog.timoxley.com/post/47041269194/avoid-else-return-early>`_
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
@@ -1916,6 +1927,7 @@ List of external links mentionned in this documentation.
 * `Constructors and Destructors <http://php.net/manual/en/language.oop5.decon.php>`_
 * `Constructors and Destructors ¶ <http://php.net/manual/en/language.oop5.decon.php>`_
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
+* `count <http://php.net/count>`_
 * `Courrier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
 * `crc32() <http://php.net/crc32>`_
 * `Creating the required configuration and files <https://www.melistechnology.com/MelisTechnology/resources/documentation/back-office/create-a-custom-tool/Creatingtherequiredconfiguration>`_
@@ -1969,6 +1981,7 @@ List of external links mentionned in this documentation.
 * `ext/gender <http://php.net/manual/en/book.gender.php>`_
 * `ext/hrtime <http://php.net/manual/en/intro.hrtime.php>`_
 * `ext/inotify <http://php.net/manual/en/book.inotify.php>`_
+* `ext/leveldb <https://github.com/reeze/php-leveldb>`_
 * `ext/lua <http://php.net/manual/en/book.lua.php>`_
 * `ext/memcached <http://php.net/manual/en/book.memcached.php>`_
 * `ext/OpenSSL <http://php.net/manual/en/book.openssl.php>`_
@@ -2015,6 +2028,7 @@ List of external links mentionned in this documentation.
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
 * `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_
 * `htmlentities <http://www.php.net/htmlentities>`_
+* `http://php.net/manual/en/reference.pcre.pattern.modifiers.php <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
@@ -2052,8 +2066,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
@@ -2125,6 +2139,7 @@ List of external links mentionned in this documentation.
 * `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
+* `printf <http://php.net/printf>`_
 * `Process Control <http://php.net/manual/en/book.pcntl.php>`_
 * `proctitle <http://php.net/manual/en/book.proctitle.php>`_
 * `Properties <http://php.net/manual/en/language.oop5.properties.php>`_

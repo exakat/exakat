@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 05 Mar 2018 19:30:25 +0000
-.. comment: Generation hash : 60bccf08db981ead991f4993ea51ea42aecbe0ed
+.. comment: Generation date : Mon, 12 Mar 2018 17:34:58 +0000
+.. comment: Generation hash : 3253b0fb4ae7d67a3572e815cd6150f51399fb74
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 344 analysis
+Total : 343 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -280,6 +280,7 @@ Total : 344 analysis
 * :ref:`Preprocessable`
 * :ref:`Print And Die <print-and-die>`
 * :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
+* :ref:`Property Could Be Local <property-could-be-local>`
 * :ref:`Property Could Be Private Method <property-could-be-private-method>`
 * :ref:`Property Could Be Private Property <property-could-be-private-property>`
 * :ref:`Property Used In One Method Only <property-used-in-one-method-only>`
@@ -306,7 +307,6 @@ Total : 344 analysis
 * :ref:`Should Typecast <should-typecast>`
 * :ref:`Should Use Coalesce <should-use-coalesce>`
 * :ref:`Should Use Constants <should-use-constants>`
-* :ref:`Should Use Foreach <should-use-foreach>`
 * :ref:`Should Use Local Class <should-use-local-class>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use SetCookie() <should-use-setcookie()>`
@@ -417,7 +417,6 @@ Total : 344 analysis
 * :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`include_once() Usage <include\_once()-usage>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
-* :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
 * :ref:`var_dump()... Usage <var\_dump()...-usage>`
@@ -985,7 +984,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 42 analysis
+Total : 45 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Already Parents Interface <already-parents-interface>`
@@ -1014,6 +1013,7 @@ Total : 42 analysis
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Reuse Variable <reuse-variable>`
 * :ref:`Should Use Coalesce <should-use-coalesce>`
+* :ref:`Should Use Foreach <should-use-foreach>`
 * :ref:`Should Use Math <should-use-math>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Should Use array_filter() <should-use-array\_filter()>`
@@ -1024,11 +1024,13 @@ Total : 42 analysis
 * :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unused Interfaces <unused-interfaces>`
+* :ref:`Use Count Recursive <use-count-recursive>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Use session_start() Options <use-session\_start()-options>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
+* :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 
 .. _wordpress:
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 05 Mar 2018 19:30:25 +0000
-.. comment: Generation hash : 60bccf08db981ead991f4993ea51ea42aecbe0ed
+.. comment: Generation date : Mon, 12 Mar 2018 17:34:58 +0000
+.. comment: Generation hash : 3253b0fb4ae7d67a3572e815cd6150f51399fb74
 
 
 .. _$http\_raw\_post\_data:
@@ -5108,7 +5108,7 @@ Error Messages
 
 Error message when an error is reported in the code. Those messages will be read by whoever is triggering the error, and it has to be helpful. 
 
-It is a good excercice to read the messages out of context, and try to understand what is about.
+It is a good exercice to read the messages out of context, and try to understand what is about.
 
 .. code-block:: php
 
@@ -5122,7 +5122,7 @@ It is a good excercice to read the messages out of context, and try to understan
    ?>
 
 
-Error messages are spotted via `'die <http://www.php.net/die>`_, `'exit <http://www.php.net/exit>`_ or exception.
+Error messages are spotted via `'die <http://www.php.net/die>`_, `'exit <http://www.php.net/exit>`_ or throw.
 
 +--------------+--------------------------+
 | Command Line | Structures/ErrorMessages |
@@ -6213,7 +6213,7 @@ Heredoc Delimiter
 
 Heredoc and Nowdoc expressions may use a variety of delimiters. 
 
-There seems to be a standard delimiter in the code, and some exceptions : one or severals forms are dominant (> 90%), while the others are rare. 
+There seems to be a standard delimiter in the code, and some exceptions : one or several forms are dominant (> 90%), while the others are rare. 
 
 The analyzed code has less than 10% of the rare delimiters. For consistency reasons, it is recommended to make them all the same. 
 
@@ -9910,7 +9910,20 @@ No Hardcoded Port
 #################
 
 
-When connecting to a remove serve, port is an important information. It is recommended to make this configurable (with constant or configuration), to as to be able to change this value without changing the code.
+When connecting to a remove server, port is an important information. It is recommended to make this configurable (with constant or configuration), to as to be able to change this value without changing the code.
+
+.. code-block:: php
+
+   <?php
+   
+       // Both configurable IP and hostname
+       $connection = ssh2_connect($_ENV['SSH_HOST'], $_ENV['SSH_PORT'], $methods, $callbacks);
+       
+       // Both hardcoded IP and hostname
+       $connection = ssh2_connect('shell.example.com', 22, $methods, $callbacks);
+   
+       if (!$connection) 'die('Connection failed');
+   ?>
 
 +--------------+---------------------------------+
 | Command Line | Structures/NoHardcodedPort      |
@@ -12473,11 +12486,47 @@ Extra arguments are ignored, and are dead code as such. Missing arguments are re
    
    ?>
 
+
+See also `printf <http://php.net/printf>`_ and `sprintf <http://php.net/sprintf>`_.
+
 +--------------+----------------------------+
 | Command Line | Structures/PrintfArguments |
 +--------------+----------------------------+
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
+
+
+.. _property-could-be-local:
+
+Property Could Be Local
+#######################
+
+
+A property only used in one method may be turned into a local variable.
+
+Public properties are omitted here : they may be modified anywhere in the code.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       private $foo = 1;
+       
+       function bar() {
+           $this->foo++;
+           
+           return $this->foo;
+       }
+   }
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Classes/PropertyCouldBeLocal |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
 
 
 .. _property-could-be-private-method:
@@ -13498,12 +13547,9 @@ Set Cookie Safe Arguments
 #########################
 
 
-The last five arguments of `'setcookie() <http://www.php.net/setcookie>`_ and `'setrawcookie() <http://www.php.net/setrawcookie>`_ are for security. Use them anytime you can.::
+The last five arguments of `'setcookie() <http://www.php.net/setcookie>`_ and `'setrawcookie() <http://www.php.net/setrawcookie>`_ are for security. Use them anytime you can.
 
-   
-       setcookie ( string $name [, string $value =  [, int $expire = 0 [, string $path =  [, string $domain =  [, bool $secure = false [, bool $httponly = false ]]]]]] )
-   
-
+setcookie ( string $name [, string $value =  [, int $expire = 0 [, string $path =  [, string $domain =  [, bool $secure = false [, bool $httponly = false ]]]]]] )
 
 The $expire argument sets the date of expiration of the cookie. It is recommended to make it as low as possible, to reduce its chances to be captured. Sometimes, low expiration date may be several days (for preferences), and other times, low expiration date means a few minutes. 
 
@@ -14015,7 +14061,7 @@ Foreach() is the modern loop : it maps automatically every element of the array 
 +--------------+-----------------------------+
 | Command Line | Structures/ShouldUseForeach |
 +--------------+-----------------------------+
-| Analyzers    | :ref:`Analyze`              |
+| Analyzers    | :ref:`Suggestions`          |
 +--------------+-----------------------------+
 
 
@@ -14174,6 +14220,31 @@ Should Use Prepared Statement
 Modern databases provides support for prepared statement : it separates the query from the processed data and highten significantly the security. 
 
 Building queries with concatenations is not recommended, though not always avoidable. When possible, use prepared statements.
+
+.. code-block:: php
+
+   <?php
+   /* Execute a prepared statement by passing an array of values */
+   
+   $sql = 'SELECT name, colour, calories
+       FROM fruit
+       WHERE calories < :calories AND colour = :colour';
+   $sth = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+   $sth->execute(array(':calories' => 150, ':colour' => 'red'));
+   $red = $sth->fetchAll();
+   ?>
+
+
+Same code, without preparation : 
+
+.. code-block:: php
+
+   <?php
+   
+       $sql = 'SELECT name, color, calories FROM fruit WHERE calories < '.$conn-quote(150).' AND colour = '.$conn->quotes('red').' ORDER BY name';
+       $sth = $conn->query($sql) as $row);
+   }
+   ?>
 
 +--------------+-------------------------------------+
 | Command Line | Security/ShouldUsePreparedStatement |
@@ -15481,7 +15552,7 @@ This is twice faster than doing the same with a loop.
    
    $array = range('a', 'z');
    
-   // Slow way to build the array
+   // Fast way to build the array
    $b = array_fill_key($a, 0);
    
    // Slow way to build the array
@@ -15579,7 +15650,7 @@ A switch with fallthrough is prone to errors.
 A fallthrough happens when a case or default clause in a switch statement is not finished by a `'break <http://php.net/manual/en/control-structures.break.php>`_ (or equivalent);
 CWE report this as a security concern, unless well documented.
 
-A fallthrough may be used as a feature. Then, it is undistinguisable from an error. 
+A fallthrough may be used as a feature. Then, it is indistinguishable from an error. 
 
 When the case block is empty, this analysis doesn't report it : the case is then used as an alias.
 
@@ -15600,7 +15671,7 @@ When the case block is empty, this analysis doesn't report it : the case is then
    ?>
 
 
-This analysis cannot take into account comments about the fallthough. 
+This analysis cannot take into account comments about the fallthrough. 
 
 See also `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_ and 
          `Rule: no-switch-case-fall-through <https://palantir.github.io/tslint/rules/no-switch-case-fall-through/>`_.
@@ -17118,7 +17189,7 @@ Unkown Regex Options
 ####################
 
 
-PHP's regex support the following list of options : eimsuxADJSUX. They are detailled in the manual : [http://php.net/manual/en/reference.pcre.pattern.modifiers.php](http://php.net/manual/en/reference.pcre.pattern.modifiers.php). 
+PHP's regex support the following list of options : eimsuxADJSUX. They are explained in the manual : `http://php.net/manual/en/reference.pcre.pattern.modifiers.php <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_. 
 
 All other options are not supported, may be ignored or raise an error.
 
@@ -18257,6 +18328,42 @@ Some methods and functions are defined to be used with constants as arguments. T
 +--------------+----------------------------------+
 | Analyzers    | :ref:`Analyze`                   |
 +--------------+----------------------------------+
+
+
+.. _use-count-recursive:
+
+Use Count Recursive
+###################
+
+
+The code could use the recursive version of count.
+
+The second argument of count, when set to COUNT_RECURSIVE, count recursively the elements. It also counts the elements themselves. 
+
+.. code-block:: php
+
+   <?php
+   
+   $array = array( array(1,2,3), array(4,5,6));
+   
+   print (count($array, COUNT_RECURSIVE) - count($array, COUNT_NORMAL));
+   
+   $count = 0;
+   foreach($array as $a) {
+       $count += count($a);
+   }
+   print $count;
+   
+   ?>
+
+
+See also `count <http://php.net/count>`_.
+
++--------------+------------------------------+
+| Command Line | Structures/UseCountRecursive |
++--------------+------------------------------+
+| Analyzers    | :ref:`Suggestions`           |
++--------------+------------------------------+
 
 
 .. _use-instanceof:
@@ -21428,7 +21535,7 @@ The second syntax is easier to read and may be marginally faster to execute (pre
 +--------------+----------------------+
 | Command Line | Php/PregMatchAllFlag |
 +--------------+----------------------+
-| Analyzers    | :ref:`Analyze`       |
+| Analyzers    | :ref:`Suggestions`   |
 +--------------+----------------------+
 
 
