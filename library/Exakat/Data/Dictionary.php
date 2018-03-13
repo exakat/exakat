@@ -117,9 +117,9 @@ class Dictionary {
     }
 
     public function closeVariables() {
-        $variables = array_filter($this->dictionary, function ($x) { return ($x[0] === '$') && 
-                                                                            (strpos($x, '.') === false) &&
-                                                                            (strlen($x) > 3);}, ARRAY_FILTER_USE_KEY );
+        $variables = array_filter($this->dictionary, function ($x) { return (strlen($x) > 3) && 
+                                                                            ($x[0] === '$') && 
+                                                                            (strpos($x, '.') === false); }, ARRAY_FILTER_USE_KEY );
         
         $return = array();
         foreach($variables as $v1 => $k1) {
@@ -157,7 +157,8 @@ class Dictionary {
     }
 
     public function underscoreCloseVariables() {
-        $variables = array_filter($this->dictionary, function ($x) { return $x[0] === '$';}, ARRAY_FILTER_USE_KEY );
+        $variables = array_filter($this->dictionary, function ($x) { return (strlen($x) > 3) && 
+                                                                            ($x[0] === '$');}, ARRAY_FILTER_USE_KEY );
         
         $return = array();
         foreach($variables as $v1 => $k1) {
@@ -175,7 +176,8 @@ class Dictionary {
     }
 
     public function numberCloseVariables() {
-        $variables = array_filter($this->dictionary, function ($x) { return $x[0] === '$';}, ARRAY_FILTER_USE_KEY );
+        $variables = array_filter($this->dictionary, function ($x) { return (strlen($x) > 3) && 
+                                                                            ($x[0] === '$');}, ARRAY_FILTER_USE_KEY );
         
         $return = array();
         $figures = range(0, 9);
