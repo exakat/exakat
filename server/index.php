@@ -67,7 +67,7 @@ function init($args) {
             $project = autoprojectname();
         }
 
-        shell_exec('/usr/bin/php exakat.phar init -p '.$project.' -R '.$vcs);
+        shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.$vcs);
     } elseif (isset($_REQUEST['code'])) {
         $php = $_REQUEST['code'];
         if (strpos($php, '<?php') === false) {
@@ -79,7 +79,7 @@ function init($args) {
         }
         
         file_put_contents(__DIR__.'/onepage/code/'.$project.'.php', $php);
-        shell_exec('/usr/bin/php exakat.phar queue -f '.$project);
+        shell_exec('__PHP__ __EXAKAT__ queue -f '.$project);
     } else {
         error('Missing VCS/code', '');
     }
@@ -101,7 +101,7 @@ function update($args) {
         error('No such project', '');
     }
 
-    shell_exec('/usr/bin/php exakat.phar update -p '.$project);
+    shell_exec('__PHP__ __EXAKAT__ update -p '.$project);
     echo json_encode(array('project' => $project));
 }
 
@@ -119,7 +119,7 @@ function project($args) {
         error('No such project', '');
     }
     
-    echo shell_exec('/usr/bin/php exakat.phar queue -p '.$project);
+    echo shell_exec('__PHP__ __EXAKAT__ queue -p '.$project);
     echo json_encode(array('project' => $project));
 }
 
@@ -173,7 +173,7 @@ function status($args) {
         if (!file_exists(__DIR__.'/'.$args[0])) {
     	    error('No such project', $args[0]);
         } elseif (file_exists(__DIR__.'/'.$args[0].'/')) {
-            $json = shell_exec('/usr/bin/php exakat.phar status -p '.$args[0].' -json');
+            $json = shell_exec('__PHP__ __EXAKAT__ status -p '.$args[0].' -json');
             echo $json;
         } else {
             error('No such project', $args[0]);
@@ -330,13 +330,13 @@ function pushToQueue($id) {
 }
 
 function autoProjectName() {
-    $files = glob(__DIR__.'/*');
-    return 'a'.count($files);
+    $letters = range('a', 'z');
+    return $letters[random_int(0, 25)].random_int(0, 1000000000);
 }
 
 function autoOnagepageName() {
-    $files = glob(__DIR__.'/onepage/code/*');
-    return 'o'.count($files);
+    $letters = range('A', 'Z');
+    return $letters[random_int(0, 25)].random_int(0, 1000000000);
 }
 
 function error($message, $project) {

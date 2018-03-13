@@ -23,9 +23,42 @@
 namespace Exakat\Configsource;
 
 class CodacyConfig extends Config {
+    private $projects_root = '.';
+    
+    public function __construct($projects_root) {
+        $this->projects_root = $projects_root.'/projects/';
+    }
 
-    public function loadConfig($args) {
+    public function loadConfig($project) {
+        $pathToJson = "{$this->projects_root}{$project}/code/.codacy.json";
+        if (!file_exists($pathToJson)) {
+            return $this->defaultCodacyConfig();
+        }
+
+        $json = file_get_contents($pathToJson);
+        if (empty($json)) {
+            return $this->defaultCodacyConfig();
+        }
+
+        $config = json_decode($json);
+        if (empty($config)) {
+            return $this->defaultCodacyConfig();
+        }
+
+        $this->config['codacy_files'] = $config->files;
+        foreach($config->tools as $tool) {
+            if ($tool->name != 'exakat') { continue; }
+            $this->config['codacy_analyzers'] = array_column($tool->patterns, 'patternId');
+        }
         
+        // Todo : check that patterns are valid
+        // Todo : check that files are valid
+        // Todo : check that files are PHP
+    }
+    
+    private function defaultCodacyConfig() {
+        $this->config['codacy_files']     = 'all';
+        $this->config['codacy_analyzers'] = 'all';
     }
 }
 

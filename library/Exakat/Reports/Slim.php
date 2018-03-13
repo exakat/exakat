@@ -223,7 +223,7 @@ MENU;
         foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzerName) {
             $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
-            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
+            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.$this->toId($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
 
             $badges = array();
             $v = $description->getVersionAdded();
@@ -1641,9 +1641,9 @@ SQL;
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $item['analyzer'] =  $ini['name'];
-            $item['analyzer_md5'] = md5($ini['name']);
+            $item['analyzer_md5'] = $this->toId($ini['name']);
             $item['file' ] =  $row['file'];
-            $item['file_md5' ] =  md5($row['file']);
+            $item['file_md5' ] =  $this->toId($row['file']);
             $item['code' ] = PHPSyntax($row['fullcode']);
             $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
             $item['code_plus'] = PHPSyntax($row['fullcode']);

@@ -27,7 +27,7 @@ use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
 
-class Owasp extends Reports {
+class Owasp extends Ambassador {
     const FILE_FILENAME  = 'owasp';
     const FILE_EXTENSION = '';
 
@@ -43,7 +43,7 @@ class Owasp extends Reports {
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
-    private $tmpName           = '';
+    protected $tmpName           = '';
 
     private $timesToFix        = null;
     private $themesForAnalyzer = null;
@@ -141,7 +141,7 @@ class Owasp extends Reports {
         $this->severities        = $this->themes->getSeverities();
     }
 
-    private function getBasedPage($file) {
+    protected function getBasedPage($file) {
         static $baseHTML;
 
         if (empty($baseHTML)) {
@@ -184,19 +184,6 @@ MENU;
         return $combinePageHTML;
     }
 
-    private function putBasedPage($file, $html) {
-        if (strpos($html, '{{BLOC-JS}}') !== false) {
-            $html = str_replace('{{BLOC-JS}}', '', $html);
-        }
-        $html = str_replace('{{TITLE}}', 'PHP Static analysis for '.$this->config->project, $html);
-
-        file_put_contents($this->tmpName.'/datas/'.$file.'.html', $html);
-    }
-
-    private function injectBloc($html, $bloc, $content) {
-        return str_replace("{{".$bloc."}}", $content, $html);
-    }
-
     public function generate($folder, $name = 'report') {
         if ($name === self::STDOUT) {
             print "Can't produce Ambassador format to stdout\n";
@@ -219,7 +206,7 @@ MENU;
         // Annex
         $this->generateAnalyzerSettings();
         $this->generateOwaspDocumentation();
-        $this->generateDocumentation();
+        $this->generateDocumentation($this->themes->getThemeAnalyzers($this->themesToShow));
         $this->generateCodes();
 
         // Static files
@@ -232,17 +219,7 @@ MENU;
         $this->cleanFolder();
     }
 
-    private function initFolder() {
-        // Clean temporary destination
-        if (file_exists($this->tmpName)) {
-            rmdirRecursive($this->tmpName);
-        }
-
-        // Copy template
-        copyDir($this->config->dir_root.'/media/devfaceted', $this->tmpName );
-    }
-
-    private function cleanFolder() {
+    protected function cleanFolder() {
         if (file_exists($this->tmpName.'/datas/base.html')) {
             unlink($this->tmpName.'/datas/base.html');
             unlink($this->tmpName.'/datas/menu.html');
@@ -292,12 +269,6 @@ MENU;
         return $lines;
     }
 
-    private function setPHPBlocs($description){
-        $description = str_replace("<?php", '</p><pre><code class="php">&lt;?php', $description);
-        $description = str_replace("?>", '?&gt;</code></pre><p>', $description);
-        return $description;
-    }
-
     private function generateOwaspDocumentation(){
         $baseHTML = $this->getBasedPage('analyzers_doc');
         
@@ -319,48 +290,6 @@ MENU;
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'OWASP\'s documentation');
 
         $this->putBasedPage('owasp_doc', $finalHTML);
-    }
-
-    private function generateDocumentation(){
-        $datas = array();
-        $baseHTML = $this->getBasedPage('analyzers_doc');
-        $analyzersDocHTML = "";
-
-        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
-            $description = $analyzer->getDescription();
-            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.$description->getName().'" id="'.$description->getName().'">'.$description->getName().'</a></h2>';
-
-            $badges = array();
-            $v = $description->getVersionAdded();
-            if(!empty($v)){
-                $badges[] = '[Since '.$v.']';
-            }
-            $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
-
-            $versionCompatibility = $analyzer->getPhpversion();
-            if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
-                if (strpos($versionCompatibility, '+') !== false) {
-                    $versionCompatibility = substr($versionCompatibility, 0, -1).' and more recent ';
-                } elseif (strpos($versionCompatibility, '-') !== false) {
-                    $versionCompatibility = ' older than '.substr($versionCompatibility, 0, -1);
-                }
-                $badges[] = '[ PHP '.$versionCompatibility.']';
-            }
-
-            $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML.='<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
-
-            $v = $description->getClearPHP();
-            if(!empty($v)){
-                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
-            }
-        }
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyzersDocHTML);
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
-
-        $this->putBasedPage('analyzers_doc', $finalHTML);
     }
 
     protected function generateDashboard() {
@@ -404,7 +333,7 @@ SQL
                 $total += $row['count'];
                 $count += (int) ($row['count'] === 0);
 
-                $levelRows .= "<tr><td><a href=\"issues.html#analyzer=$row[name]\" title=\"$ini[name]\">$ini[name]</a></td><td>$row[count]</td><td style=\"background-color: $row[color]; color: white; font-weight: bold; font-size: 20; text-align: center; \">$row[grade]</td></tr>\n";
+                $levelRows .= "<tr><td><a href=\"issues.html#analyzer={$this->toId($row['name'])}\" title=\"$ini[name]\">$ini[name]</a></td><td>$row[count]</td><td style=\"background-color: $row[color]; color: white; font-weight: bold; font-size: 20; text-align: center; \">$row[grade]</td></tr>\n";
             }
 
             if ($total === 0) {
@@ -792,7 +721,7 @@ SQL;
         return $data;
     }
 
-    private function getTopFile() {
+    protected function getTopFile() {
         $data = $this->getFilesCount(self::TOPLIMIT);
 
         $html = '';
@@ -815,7 +744,7 @@ SQL;
         return $html;
     }
 
-    private function getFileOverview() {
+    protected function getFileOverview() {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
@@ -867,7 +796,7 @@ SQL;
         return $data;
     }
 
-    private function getTopAnalyzers() {
+    protected function getTopAnalyzers() {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
@@ -923,7 +852,7 @@ SQL;
         return $return;
     }
 
-    private function getAnalyzerOverview() {
+    protected function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
@@ -955,406 +884,9 @@ SQL;
     }
 
     private function generateIssues() {
-        $baseHTML = $this->getBasedPage('issues');
-
-        $issues = implode(', ', $this->getIssuesFaceted('Security'));
-        $blocjs = <<<JAVASCRIPT
-        
-  <script src="facetedsearch.js"></script>
-  <script>
-  "use strict";
-
-    $(document).ready(function() {
-
-      var data_items = [$issues];
-      var item_template =  
-        '<tr>' +
-          '<td width="20%"><%= obj.analyzer %></td>' +
-          '<td width="20%"><%= obj.file + ":" + obj.line %></td>' +
-          '<td width="18%"><%= obj.code %></td>' + 
-          '<td width="2%"><%= obj.code_detail %></td>' +
-          '<td width="7%" align="center"><%= obj.severity %></td>' +
-          '<td width="7%" align="center"><%= obj.complexity %></td>' +
-          '<td width="16%"><%= obj.recipe %></td>' +
-        '</tr>' +
-        '<tr class="fullcode">' +
-          '<td colspan="7" width="100%"><div class="analyzer_help"><%= obj.analyzer_help %></div><pre><code><%= obj.code_plus %></code><div class="text-right"><a target="_BLANK" href="codes.html?file=<%= obj.link_file %>" class="btn btn-info">View File</a></div></pre></td>' +
-        '</tr>';
-      var settings = { 
-        items           : data_items,
-        facets          : { 
-          'analyzer'  : 'Analyzer',
-          'file'      : 'File',
-          'severity'  : 'Severity',
-          'complexity': 'Complexity',
-          'receipt'   : 'Receipt'
-        },
-        facetContainer     : '<div class="facetsearch btn-group" id=<%= id %> ></div>',
-        facetTitleTemplate : '<button class="facettitle multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected"><span class="multiselect-selected-text"><%= title %></span><b class="caret"></b></button>',
-        facetListContainer : '<ul class="facetlist multiselect-container dropdown-menu"></ul>',
-        listItemTemplate   : '<li class=facetitem id="<%= id %>" data-analyzer="<%= data_analyzer %>" data-file="<%= data_file %>"><span class="check"></span><%= name %><span class=facetitemcount>(<%= count %>)</span></li>',
-        bottomContainer    : '<div class=bottomline></div>',  
-        resultSelector   : '#results',
-        facetSelector    : '#facets',
-        resultTemplate   : item_template,
-        paginationCount  : 50
-      }   
-      $.facetelize(settings);
-      
-      var analyzerParam = window.location.search.split('analyzer=')[1];
-      var fileParam = window.location.search.split('file=')[1];
-      if(analyzerParam !== undefined) {
-        $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam + "']").click();
-      }
-      if(fileParam !== undefined) {
-        $('#file .facetlist').find("[data-file='" + fileParam + "']").click();
-      }
-    });
-  </script>
-JAVASCRIPT;
-
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' list');
-        $this->putBasedPage('issues', $finalHTML);
-    }
-
-    public function getIssuesFaceted($theme) {
-        $list = $this->themes->getThemeAnalyzers($theme);
-        $list = '"'.implode('", "', $list).'"';
-
-        $sqlQuery = <<<SQL
-            SELECT fullcode, file, line, analyzer
-                FROM results
-                WHERE analyzer IN ($list)
-
-SQL;
-        $result = $this->sqlite->query($sqlQuery);
-
-        $items = array();
-        while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $item = array();
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
-            $item['analyzer'] =  $ini['name'];
-            $item['analyzer_md5'] = md5($ini['name']);
-            $item['file' ] =  $row['file'];
-            $item['file_md5' ] =  md5($row['file']);
-            $item['code' ] = PHPSyntax($row['fullcode']);
-            $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus'] = PHPSyntax($row['fullcode']);
-            $item['link_file'] = $row['file'];
-            $item['line' ] =  $row['line'];
-            $item['severity'] = "<i class=\"fa fa-warning ".$this->severities[$row['analyzer']]."\"></i>";
-            $item['complexity'] = "<i class=\"fa fa-cog ".$this->timesToFix[$row['analyzer']]."\"></i>";
-            $item['recipe' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
-            $lines = explode("\n", $ini['description']);
-            $item['analyzer_help' ] = $lines[0];
-
-            $items[] = json_encode($item);
-            $this->count();
-        }
-
-        return $items;
-    }
-
-    private function getClassByType($type)
-    {
-        if ($type == 'Critical' || $type == 'Long') {
-            $class = 'text-orange';
-        } elseif ($type == 'Major' || $type == 'Slow') {
-            $class = 'text-red';
-        } elseif ($type == 'Minor' || $type == 'Quick') {
-            $class = 'text-yellow';
-        }  elseif ($type == 'Note' || $type == 'Instant') {
-            $class = 'text-blue';
-        } else {
-            $class = 'text-gray';
-        }
-
-        return $class;
-    }
-
-    private function generateSettings() {
-        $info = array(array('Code name', $this->config->project_name));
-        if (!empty($this->config->project_description)) {
-            $info[] = array('Code description', $this->config->project_description);
-        }
-        if (!empty($this->config->project_packagist)) {
-            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
-        }
-        if (!empty($this->config->project_url)) {
-            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
-        }
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
-            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
-            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
-            $info[] = array('Git URL', $r[1]);
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
-            $info[] = array('Git branch', trim($res));
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
-            $info[] = array('Git commit', trim($res));
-        } else {
-            $info[] = array('Repository URL', 'Downloaded archive');
-        }
-
-        $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
-        $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
-        $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
-
-        $info[] = array('Report production date', date('r', strtotime('now')));
-
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
-        $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
-
-        $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
-
-        $settings = '';
-        foreach($info as $i) {
-            $settings .= "<tr><td>$i[0]</td><td>$i[1]</td></tr>";
-        }
-
-        $html = $this->getBasedPage('used_settings');
-        $html = $this->injectBloc($html, 'SETTINGS', $settings);
-        $html = $this->injectBloc($html, 'TITLE', 'Analyzer settings\' list');
-
-        $this->putBasedPage('used_settings', $html);
-    }
-
-    private function generateProcFiles() {
-        $files = '';
-        $fileList = $this->datastore->getCol('files', 'file');
-        foreach($fileList as $file) {
-            $files .= "<tr><td>$file</td></tr>\n";
-        }
-
-        $nonFiles = '';
-        $ignoredFiles = $this->datastore->getRow('ignoredFiles');
-        foreach($ignoredFiles as $row) {
-            if (empty($row['file'])) { continue; }
-
-            $nonFiles .= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>\n";
-        }
-
-        $html = $this->getBasedPage('proc_files');
-        $html = $this->injectBloc($html, 'FILES', $files);
-        $html = $this->injectBloc($html, 'NON-FILES', $nonFiles);
-        $html = $this->injectBloc($html, 'TITLE', 'Processed Files\' list');
-
-        $this->putBasedPage('proc_files', $html);
-    }
-
-    private function generateAnalyzersList() {
-        $analyzers = '';
-
-        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
-            $description = $analyzer->getDescription();
-
-            $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
-        }
-
-        $html = $this->getBasedPage('proc_analyzers');
-        $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
-        $html = $this->injectBloc($html, 'TITLE', 'Processed Analyzers\' list');
-
-        $this->putBasedPage('proc_analyzers', $html);
-    }
-
-    private function generateExternalLib() {
-        $externallibraries = json_decode(file_get_contents($this->config->dir_root.'/data/externallibraries.json'));
-
-        $libraries = '';
-        $externallibrariesList = $this->datastore->getRow('externallibraries');
-
-        foreach($externallibrariesList as $row) {
-            $url = $externallibraries->{strtolower($row['library'])}->homepage;
-            $name = $externallibraries->{strtolower($row['library'])}->name;
-            if (empty($url)) {
-                $homepage = '';
-            } else {
-                $homepage = "<a href=\"".$url."\">".$row['library']."</a>";
-            }
-            $libraries .= "<tr><td>$name</td><td>$row[file]</td><td>$homepage</td></tr>\n";
-        }
-
-        $html = $this->getBasedPage('ext_lib');
-        $html = $this->injectBloc($html, 'LIBRARIES', $libraries);
-        $html = $this->injectBloc($html, 'TITLE', 'External Libraries\' list');
-
-        $this->putBasedPage('ext_lib', $html);
-    }
-
-
-
-    protected function generateAnalyzerSettings() {
-        $settings = '';
-
-        $info = array(array('Code name', $this->config->project_name));
-        if (!empty($this->config->project_description)) {
-            $info[] = array('Code description', $this->config->project_description);
-        }
-        if (!empty($this->config->project_packagist)) {
-            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
-        }
-        if (!empty($this->config->project_url)) {
-            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
-        }
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
-            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
-            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
-            $info[] = array('Git URL', $r[1]);
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
-            $info[] = array('Git branch', trim($res));
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
-            $info[] = array('Git commit', trim($res));
-        } else {
-            $info[] = array('Repository URL', 'Downloaded archive');
-        }
-
-        $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
-        $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
-        $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
-
-        $info[] = array('Analysis execution date', date('r', $this->datastore->getHash('audit_end')));
-        $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
-        $info[] = array('Report production date', date('r', strtotime('now')));
-
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getActualVersion().')');
-
-        $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
-
-        foreach($info as &$row) {
-            $row = '<tr><td>'.implode('</td><td>', $row).'</td></tr>';
-        }
-        unset($row);
-
-        $settings = implode('', $info);
-
-        $html = $this->getBasedPage('annex_settings');
-        $html = $this->injectBloc($html, 'SETTINGS', $settings);
-        $this->putBasedPage('annex_settings', $html);
-    }
-
-    private function generateExternalServices() {
-        $externalServices = '';
-
-        $res = $this->datastore->getRow('configFiles');
-        foreach($res as $row) {
-            if (empty($row['homepage'])) {
-                $link = '';
-            } else {
-                $link = "<a href=\"".$row['homepage']."\">".$row['homepage']."&nbsp;<i class=\"fa fa-sign-out\"></i></a>";
-            }
-
-            $externalServices .= "<tr><td>$row[name]</td><td>$row[file]</td><td>$link</td></tr>\n";
-        }
-
-        $html = $this->getBasedPage('external_services');
-        $html = $this->injectBloc($html, 'EXTERNAL_SERVICES', $externalServices);
-        $this->putBasedPage('external_services', $html);
-    }
-
-    private function generateDirectiveList() {
-        // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
-        $directives = array('standard', 'bcmath', 'date', 'file',
-                            'fileupload', 'mail', 'ob', 'env',
-                            // standard extensions
-                            'apc', 'amqp', 'apache', 'assertion', 'curl', 'dba',
-                            'filter', 'image', 'intl', 'ldap',
-                            'mbstring',
-                            'opcache', 'openssl', 'pcre', 'pdo', 'pgsql',
-                            'session', 'sqlite', 'sqlite3',
-                            // pecl extensions
-                            'com', 'eaccelerator',
-                            'geoip', 'ibase',
-                            'imagick', 'mailparse', 'mongo',
-                            'trader', 'wincache', 'xcache'
-                             );
-
-        $directiveList = '';
-        $res = $this->sqlite->query(<<<SQL
-SELECT analyzer FROM resultsCounts 
-    WHERE ( analyzer LIKE "Extensions/Ext%" OR 
-            analyzer IN ("Structures/FileUploadUsage", "Php/UsesEnv"))
-        AND count > 0
-SQL
-        );
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($row['analyzer'] == 'Structures/FileUploadUsage') {
-                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
-                $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
-            } elseif ($row['analyzer'] == 'Php/UsesEnv') {
-                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
-                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
-            } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
-                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
-                $data['Errorlog'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
-            } else {
-                $ext = substr($row['analyzer'], 14);
-                if (in_array($ext, $directives)) {
-                    $data = json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
-                    $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
-                    foreach($data as $row) {
-                        $directiveList .= "<tr><td>$row->name</td><td>$row->suggested</td><td>$row->documentation</td></tr>\n";
-                    }
-                }
-            }
-        }
-
-        $html = $this->getBasedPage('directive_list');
-        $html = $this->injectBloc($html, 'DIRECTIVE_LIST', $directiveList);
-        $this->putBasedPage('directive_list', $html);
-    }
-
-    private function generateCompilations() {
-        $compilations = '';
-
-        $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
-        $info = array();
-        foreach($this->config->other_php_versions as $suffix) {
-            $res = $this->sqlite->querySingle('SELECT name FROM sqlite_master WHERE type="table" AND name="compilation'.$suffix.'"');
-            if (!$res) {
-                continue; // Table was not created
-            }
-
-            $res = $this->sqlite->query('SELECT file FROM compilation'.$suffix);
-            $files = array();
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $files[] = $row['file'];
-            }
-            $version = $suffix[0].'.'.substr($suffix, 1);
-            if (empty($files)) {
-                $files       = 'No compilation error found.';
-                $errors      = 'N/A';
-                $total_error = 'N/A';
-            } else {
-                $res = $this->sqlite->query('SELECT error FROM compilation'.$suffix);
-                $readErrors = array();
-                while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                    $readErrors[] = $row['error'];
-                }
-                $errors      = array_count_values($readErrors);
-                $errors      = array_keys($errors);
-                $errors      = array_keys(array_count_values($errors));
-                $errors       = '<ul><li>'.implode("</li>\n<li>", $errors).'</li></ul>';
-
-                $total_error = count($files).' ('.number_format(count($files) / $total * 100, 0).'%)';
-                $files       = array_keys(array_count_values($files));
-                $files       = '<ul><li>'.implode("</li>\n<li>", $files).'</li></ul>';
-            }
-
-            $compilations .= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>\n";
-        }
-
-        $html = $this->getBasedPage('compatibility_compilations');
-        $html = $this->injectBloc($html, 'COMPILATIONS', $compilations);
-        $html = $this->injectBloc($html, 'TITLE', 'Compilations overview');
-        $this->putBasedPage('compatibility_compilations', $html);
+        $this->generateIssuesEngine('issues',
+                                    $this->getIssuesFaceted('Security'));
+        return;
     }
 
     private function generateCompatibility($version) {
@@ -1377,7 +909,7 @@ SQL
             }
             $result = $this->Compatibility($result);
             $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#'.md5($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#'.$this->toId($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
             $compatibility .= "<tr><td>$name $link</td><td>$result</td></tr>\n";
         }
 
@@ -1481,56 +1013,6 @@ HTML;
         $html = $this->getBasedPage('stats');
         $html = $this->injectBloc($html, 'STATS', $stats);
         $this->putBasedPage('stats', $html);
-    }
-
-    private function generateCodes() {
-        mkdir($this->tmpName.'/datas/sources/', 0755);
-
-        $filesList = $this->datastore->getRow('files');
-        $files = '';
-        foreach($filesList as $row) {
-            $id = str_replace('/', '_', $row['file']);
-
-            $subdirs = explode('/', dirname($row['file']));
-            $dir = $this->tmpName.'/datas/sources';
-            foreach($subdirs as $subdir) {
-                $dir .= '/'.$subdir;
-                if (!file_exists($dir)) {
-                    mkdir($dir, 0755);
-                }
-            }
-
-            $source = show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
-            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
-            file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], substr($source, 6, -8));
-        }
-
-        $blocjs = <<<JAVASCRIPT
-  <script src="facetedsearch.js"></script>
-
-
-  <script>
-  "use strict";
-
-  $('.menuitem').click(function(event){
-    $('#results').load("sources/" + event.target.text);
-    $('#filename').html(event.target.text + '  <span class="caret"></span>');
-  });
-
-  var fileParam = window.location.search.split('file=')[1];
-  if(fileParam !== undefined) {
-    $('#results').load("sources/" + fileParam);
-    $('#filename').html(fileParam + '  <span class="caret"></span>');
-  }
-  
-
-  </script>
-JAVASCRIPT;
-        $html = $this->getBasedPage('codes');
-        $html = $this->injectBloc($html, 'BLOC-JS', $blocjs);
-        $html = $this->injectBloc($html, 'FILES', $files);
-
-        $this->putBasedPage('codes', $html);
     }
 
     private function generateAppinfo() {

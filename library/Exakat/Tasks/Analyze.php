@@ -36,6 +36,10 @@ use ProgressBar\Manager as ProgressBar;
 
 class Analyze extends Tasks {
     const CONCURENCE = self::ANYTIME;
+    
+    private $progressBar = null;
+    private $Php = null;
+    private $analyzed = array();
 
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
@@ -60,12 +64,8 @@ class Analyze extends Tasks {
         $begin = microtime(true);
 
         // Take this before we clean it up
-        $rows = $this->datastore->getRow('analyzed');
-        $analyzed = array();
-        foreach($rows as $row) {
-            $analyzed[$row['analyzer']] = $row['counts'];
-        }
-
+        $this->checkAnalyzed();
+        
         if ($this->config->program !== null) {
             if (is_array($this->config->program)) {
                 $analyzers_class = $this->config->program;
@@ -93,152 +93,126 @@ class Analyze extends Tasks {
         $this->log->log("Analyzing project $project");
         $this->log->log("Runnable analyzers\t".count($analyzers_class));
 
-        if ($this->config->noDependencies === true) {
-            $dependencies2 = $analyzers_class;
-        } else {
-            $dependencies = array();
-            $dependencies2 = array();
-            foreach($analyzers_class as $a) {
-                $d = $this->themes->getInstance($a, $this->gremlin, $this->config);
-                assert($d !== null, 'Can\'t get instance of analyzer : '.$a);
-                $d = $d->dependsOn();
-                if (!is_array($d)) {
-                    throw new DependsOnMustReturnArray(get_class($this));
-                }
-                if (empty($d)) {
-                    $dependencies2[] = $a;
-                } else {
-                    $diff = array_diff($d, $dependencies2);
-                    if (empty($diff)) {
-                        $dependencies2[] = $a;
-                    } else {
-                        $dependencies[$a] = $diff;
-                    }
-                }
-            }
-
-            $c = count($dependencies) + 1;
-            while(!empty($dependencies) && $c > count($dependencies)) {
-                $c = count($dependencies);
-                foreach($dependencies as $a => &$d) {
-                    $diff = array_diff($d, $dependencies2);
-
-                    foreach($diff as $k => $v) {
-                        if (!isset($dependencies[$v])) {
-                            $x = $this->themes->getInstance($v, $this->gremlin, $this->config);
-                            if ($x === null) {
-                                display( "No such dependency as '$v'. Ignoring\n");
-                                continue;
-                            }
-                            $dep = $x->dependsOn();
-                            if (count($dep) == 0) {
-                                $dependencies2[] = $v;
-                                ++$c;
-                            } else {
-                                $dependencies[$v] = $dep;
-                                $c += count($dep) + 1;
-                            }
-                        } elseif (count($dependencies[$v]) == 0) {
-                            $dependencies2[] = $v;
-                            unset($diff[$k]);
-                        }
-                    }
-
-                    if (empty($diff)) {
-                        $dependencies2[] = $a;
-                        unset($dependencies[$a]);
-                    } else {
-                        $d = $diff;
-                    }
-                }
-                unset($d);
-            }
-
-            assert(empty($dependencies),
-                   "Dependencies are not all satisfied : can't finalize. Aborting\n".print_r($dependencies, true));
-        }
-
         $total_results = 0;
-        $Php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
+        $this->Php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
 
         if (!$this->config->verbose && !$this->config->quiet) {
-           $progressBar = new Progressbar(0, count($dependencies2) + 1, exec('tput cols'));
+           $this->progressBar = new Progressbar(0, count($analyzers_class) + 1, exec('tput cols'));
+        }
+
+        foreach($analyzers_class as $analyzer_class) {
+            if (!$this->config->verbose && !$this->config->quiet) {
+                echo $this->progressBar->advance();
+            }
+
+            $this->analyze($analyzer_class);
+            $this->checkAnalyzed();
+        }
+
+        if (!$this->config->verbose && !$this->config->quiet) {
+            echo $this->progressBar->advance();
         }
         
-        foreach($dependencies2 as $analyzer_class) {
-            if (!$this->config->verbose && !$this->config->quiet) {
-                echo $progressBar->advance();
+        display( "Done\n");
+    }
+
+    private function analyze($analyzer_class) {
+        $begin = microtime(true);
+
+        $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
+
+        if (!(!isset($this->analyzed[$analyzer_class]) || 
+              $this->config->noRefresh !== true)
+            ) {
+            display( "$analyzer_class is already processed\n");
+            
+            return $this->analyzed[$analyzer_class];
+        }
+        $analyzer->init();
+        
+        if ($this->config->noDependencies !== true) {
+            foreach($analyzer->dependsOn() as $dependency) {
+                if (!(isset($this->analyzed[$analyzer_class]) &&
+                       $this->config->noRefresh !== true)
+                    ) {
+                    $count = $this->analyze($dependency);
+                    assert($count !== null, "count is null");
+                    $this->analyzed[$dependency] = $count;
+                }
             }
-            $begin = microtime(true);
-            $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
+        }
+        
+        if (!$analyzer->checkPhpVersion($this->config->phpversion)) {
+            $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
 
-            if ($this->config->noRefresh === true && isset($analyzed[$analyzer_class])) {
-                display( "$analyzer_class is already processed\n");
-                continue 1;
-            }
-            $analyzer->init();
+            $analyzer = str_replace('\\', '\\\\', $analyzer_class);
 
-            if (!$analyzer->checkPhpVersion($this->config->phpversion)) {
-                $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
-
-                $analyzer = str_replace('\\', '\\\\', $analyzer_class);
-
-                $query = <<<GREMLIN
+            $query = <<<GREMLIN
 result = g.addV('Noresult').property('code',                        'Not Compatible With PhpVersion')
-                           .property('fullcode',                    'Not Compatible With PhpVersion')
-                           .property('virtual',                      true)
-                           .property('atom',                         'Noresult')
-                           .property('notCompatibleWithPhpVersion', '{$this->config->phpversion}')
-                           .property('token',                       'T_INCOMPATIBLE');
+                       .property('fullcode',                    'Not Compatible With PhpVersion')
+                       .property('virtual',                      true)
+                       .property('atom',                         'Noresult')
+                       .property('notCompatibleWithPhpVersion', '{$this->config->phpversion}')
+                       .property('token',                       'T_INCOMPATIBLE');
 
 g.addV('Analysis').property('analyzer', '$analyzerQuoted').property("Atom", "Analysis").addE('ANALYZED').to(result);
 
 GREMLIN;
-                $this->gremlin->query($query);
-                $this->datastore->addRow('analyzed', array($analyzer_class => -2 ) );
+            $this->gremlin->query($query);
+            $this->datastore->addRow('analyzed', array($analyzer_class => -2 ) );
 
-                display("$analyzer is not compatible with PHP version {$this->config->phpversion}. Ignoring\n");
-            } elseif (!$analyzer->checkPhpConfiguration($Php)) {
-                $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
-                $analyzer = str_replace('\\', '\\\\', $analyzer_class);
+            display("$analyzer is not compatible with PHP version {$this->config->phpversion}. Ignoring\n");
+            $total_results = 0;
+        } elseif (!$analyzer->checkPhpConfiguration($this->Php)) {
+            $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
+            $analyzer = str_replace('\\', '\\\\', $analyzer_class);
 
-                $query = <<<GREMLIN
+            $query = <<<GREMLIN
 result = g.addV('Noresult').property('code',                              'Not Compatible With Configuration')
-                           .property('fullcode',                          'Not Compatible With Configuration')
-                           .property('virtual',                            true)
-                           .property('atom',                         'Noresult')
-                           .property('notCompatibleWithPhpConfiguration', '{$this->config->phpversion}')
-                           .property('token',                             'T_INCOMPATIBLE');
+                       .property('fullcode',                          'Not Compatible With Configuration')
+                       .property('virtual',                            true)
+                       .property('atom',                         'Noresult')
+                       .property('notCompatibleWithPhpConfiguration', '{$this->config->phpversion}')
+                       .property('token',                             'T_INCOMPATIBLE');
 
 index = g.addV('Analysis').property('analyzer', '$analyzerQuoted').property("Atom", "Analysis").addE('ANALYZED').to(result);
 GREMLIN;
-                $this->gremlin->query($query);
-                $this->datastore->addRow('analyzed', array($analyzer_class => -1 ) );
+            $this->gremlin->query($query);
+            $this->datastore->addRow('analyzed', array($analyzer_class => -1 ) );
 
-                display( "$analyzer is not compatible with PHP configuration of this version. Ignoring\n");
-            } else {
-                display( "$analyzer_class running\n");
-                $analyzer->run($this->config);
+            display( "$analyzer is not compatible with PHP configuration of this version. Ignoring\n");
+            $total_results = 0;
+        } else {
+            display( "$analyzer_class running\n");
+            $analyzer->run($this->config);
 
-                $count      = $analyzer->getRowCount();
-                $processed  = $analyzer->getProcessedCount();
-                $queries    = $analyzer->getQueryCount();
-                $rawQueries = $analyzer->getRawQueryCount();
-                $total_results += $count;
-                display( "$analyzer_class run ($count / $processed)\n");
-                $end = microtime(true);
-                $this->log->log("$analyzer_class\t".($end - $begin)."\t$count\t$processed\t$queries\t$rawQueries");
-                // storing the number of row found in Hash table (datastore)
-                $this->datastore->addRow('analyzed', array($analyzer_class => $count ) );
+            $count      = $analyzer->getRowCount();
+            $processed  = $analyzer->getProcessedCount();
+            $queries    = $analyzer->getQueryCount();
+            $rawQueries = $analyzer->getRawQueryCount();
+            $total_results = $count;
+            display( "$analyzer_class run ($count / $processed)\n");
+            $end = microtime(true);
+            $this->log->log("$analyzer_class\t".($end - $begin)."\t$count\t$processed\t$queries\t$rawQueries");
+            // storing the number of row found in Hash table (datastore)
+            $this->datastore->addRow('analyzed', array($analyzer_class => $count ) );
+        }
+        return $total_results;
+    }
+    
+    private function checkAnalyzed() {
+//        $begin = count($this->analyzed);
+        $rows = $this->datastore->getRow('analyzed');
+        foreach($rows as $row) {
+            if (!isset($this->analyzed[$row['analyzer']])) {
+                $this->analyzed[$row['analyzer']] = $row['counts'];
             }
         }
-
-        if (!$this->config->verbose && !$this->config->quiet) {
-            echo $progressBar->advance();
-        }
-
-        display( "Done\n");
+        
+//        $end = count($this->analyzed);
+//        print ($end - $begin)." in analyzed ($begin / $end)\n";
     }
+    
 }
 
 ?>

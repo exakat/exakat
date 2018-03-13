@@ -29,8 +29,9 @@ class CalltimePassByReference extends Analyzer {
     protected $phpVersion = '5.4-';
 
     public function analyze() {
+        // foo(&$d);
         $this->atomIs('Functioncall')
-             ->tokenIsNot('T_ARRAY')
+             ->atomIsNot('Arrayliteral')
              ->outIs('ARGUMENT')
              ->is('reference', true);
         $this->prepareQuery();

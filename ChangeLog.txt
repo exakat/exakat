@@ -1,4 +1,4 @@
-Version 1.1.8 (Yuchi Gong, coming up)
+Version 1.1.9 (Yuchi Gong, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,22 @@ Version 1.1.8 (Yuchi Gong, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.1.8 (Yuchi Gong, 2018-03-12)
++ Architecture
+    + Reduced cache when running analysis
+    + Fixed order of analysis 
++ Report
+    + Ambassador : fixed faceted search problems
+    + Codacy : added codacy-style report
++ Analyzer
+    + New analysis : support for IBM db2, leveldb
+    + New analysis : should use count's second argument
+    + Upgraded analysis : Randomly sorted arrays
+    + Checked unit tests : 2749 / 2731 test pass (99% pass). 
++ Tokenizer
+    + Fixed edge case where die is an argument
+    + Fixed edge case where Yield returns a array
 
 Version 1.1.7 (Xu Maogong, 2018-03-05)
 + Architecture

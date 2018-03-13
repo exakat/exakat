@@ -257,6 +257,7 @@ Glossary
       + :ref:`Error Messages <error-messages>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Implied If <implied-if>`
+      + :ref:`No Hardcoded Port <no-hardcoded-port>`
       + :ref:`Or Die <or-die>`
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`

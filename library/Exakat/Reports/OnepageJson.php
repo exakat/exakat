@@ -66,7 +66,7 @@ class OnepageJson extends Reports {
         if ($name === null) {
             return json_encode($results);
         } else {
-            file_put_contents($name.'.'.self::FILE_EXTENSION, json_encode($results));
+            file_put_contents("$folder/reports/$name.".self::FILE_EXTENSION, json_encode($results));
             return true;
         }
     }

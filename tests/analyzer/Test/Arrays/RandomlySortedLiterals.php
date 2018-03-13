@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Arrays_RandomlySortedLiterals extends Analyzer {
-    /* 6 methods */
+    /* 7 methods */
 
     public function testArrays_RandomlySortedLiterals01()  { $this->generic_test('Arrays/RandomlySortedLiterals.01'); }
     public function testArrays_RandomlySortedLiterals02()  { $this->generic_test('Arrays/RandomlySortedLiterals.02'); }
@@ -16,5 +16,6 @@ class Arrays_RandomlySortedLiterals extends Analyzer {
     public function testArrays_RandomlySortedLiterals04()  { $this->generic_test('Arrays/RandomlySortedLiterals.04'); }
     public function testArrays_RandomlySortedLiterals05()  { $this->generic_test('Arrays/RandomlySortedLiterals.05'); }
     public function testArrays_RandomlySortedLiterals06()  { $this->generic_test('Arrays/RandomlySortedLiterals.06'); }
+    public function testArrays_RandomlySortedLiterals07()  { $this->generic_test('Arrays/RandomlySortedLiterals.07'); }
 }
 ?>

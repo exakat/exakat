@@ -325,9 +325,10 @@ function unicode_blocks($string) {
 }
 
 function PHPSyntax($code) {
-    $php = highlight_string('<?php |'.$code.'|; ?>', true);
-    $php = substr($php, strpos($php, '|') + 1);
-    $php = substr($php, 0, strrpos($php, '|'));
+    $php = highlight_string("<?php \n".$code."\n ?>", true);
+    $php = substr($php, strpos($php, '<br />') + 6);
+    $php = substr($php, 0, strrpos($php, '<br />')).'</span>';
+    
     return $php;
 }
 
@@ -395,6 +396,10 @@ function trimOnce($string, $trim = '\'"'){
 
 function makeHtml($string) {
     return htmlentities($string, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+}
+
+function rst2htmlLink($txt) {
+    return preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
 }
 
 ?>

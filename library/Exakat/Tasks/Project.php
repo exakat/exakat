@@ -27,8 +27,9 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
-use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
 
 class Project extends Tasks {
     const CONCURENCE = self::NONE;
@@ -64,11 +65,10 @@ class Project extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
-        // cleaning log directory (possibly logs)
-        $logs = glob($this->config->projects_root.'/projects/'.$project.'/log/*');
-        foreach($logs as $log) {
-            unlink($log);
-        }
+        display("Cleaning project\n");
+        $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $clean->run();
+        $this->datastore = new Datastore($this->config);
 
         display("Search for external libraries".PHP_EOL);
         if (file_exists($this->config->projects_root.'/projects/'.$project.'/config.cache')) {
@@ -92,9 +92,6 @@ class Project extends Tasks {
         $this->logTime('Start');
         $this->addSnitch(array('step'    => 'Start',
                                'project' => $this->config->project));
-
-        // cleaning datastore
-        $this->datastore = new Datastore($this->config, Datastore::CREATE);
 
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
@@ -126,11 +123,11 @@ class Project extends Tasks {
         }
         $this->datastore->addRow('hash', $info);
 
-        display("Running project '$project'".PHP_EOL);
+        display("Running project '$project'" . PHP_EOL);
         display("Running the following analysis : ".implode(', ', $this->themesToRun));
         display("Producing the following reports : ".implode(', ', $this->reports));
 
-        display("Cleaning DB".PHP_EOL);
+        display("Cleaning DB" . PHP_EOL);
         $analyze = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
@@ -149,7 +146,13 @@ class Project extends Tasks {
         $this->checkTokenLimit();
 
         $analyze = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        $analyze->run();
+        try {
+            $analyze->run();
+        } catch (NoFileToProcess $e) {
+            $this->datastore->addRow(array('init error' => $e->getMessage(),
+                                           'status'     => 'Error',
+                                           ));
+        }
         unset($analyze);
         display("Project loaded".PHP_EOL);
         $this->logTime('Loading');
@@ -159,7 +162,7 @@ class Project extends Tasks {
 
         // Dump is a child process
         // initialization and first collection (action done once)
-        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -collect -v';
+        $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -T First -collect';
         shell_exec($shell);
         $this->logTime('Dumped and inited');
 
@@ -207,7 +210,7 @@ class Project extends Tasks {
 
         $this->logTime('Final');
         $this->removeSnitch();
-        display("End".PHP_EOL);
+        display("End" . PHP_EOL);
     }
 
     private function logTime($step) {

@@ -291,6 +291,7 @@ class Appinfo extends Data {
                             'ext/kdm5'       => 'Extensions/Extkdm5',
                             'ext/lapack'     => 'Extensions/Extlapack',
                             'ext/ldap'       => 'Extensions/Extldap',
+                            'ext/leveldb'    => 'Extensions/Extleveldb',
                             'ext/libevent'   => 'Extensions/Extlibevent',
                             'ext/libxml'     => 'Extensions/Extlibxml',
                             'ext/mail'       => 'Extensions/Extmail',

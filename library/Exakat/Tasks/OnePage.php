@@ -41,6 +41,13 @@ class OnePage extends Tasks {
 
         $begin = microtime(true);
         $this->project_dir = $this->config->projects_root.'/projects/onepage/';
+        
+        if (!file_exists($this->project_dir.'/code/')) {
+            $this->project_dir.'/code/';
+        }
+        if (!file_exists($this->project_dir.'/reports/')) {
+            $this->project_dir.'/reports/';
+        }
 
         // todo : check that there is indeed this project or create it.
         if (!file_exists($this->config->filename)) {
@@ -49,14 +56,11 @@ class OnePage extends Tasks {
 
         $this->cleanLogForProject('onepage');
 
-        $datastorePath = $this->config->projects_root.'/projects/onepage/datastore.sqlite';
-        if (file_exists($datastorePath)) {
-            unlink($datastorePath);
-        }
-
-        unset($this->datastore);
-        $this->datastore = new Datastore($this->config, Datastore::CREATE);
-
+        display("Cleaning project\n");
+        $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $clean->run();
+        $this->datastore = new Datastore($this->config);
+        
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
                                                'exakat_version' => Exakat::VERSION,
@@ -88,14 +92,14 @@ class OnePage extends Tasks {
         $task->run();
         display('Project dumped');
 
+        $audit_end = time();
+        $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
+                                               'audit_length' => $audit_end - $audit_start));
+
         $task = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
         display('Project reported');
         $this->logTime('Report');
-
-        $audit_end = time();
-        $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
-                                               'audit_length' => $audit_end - $audit_start));
 
         $this->logTime('Final');
         display('End 2');

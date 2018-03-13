@@ -282,11 +282,11 @@ SQL;
 
             if (empty($found)) {
                 return false; // no class found
-            } 
+            }
             
             if (count($found) > 1) {
                 return false;
-            } 
+            }
             
             $class = $found[0];
         } else {

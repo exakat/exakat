@@ -1,7 +1,7 @@
 .. Reports:
 
-Obtaining a report 
-==================
+Reports
+=======
 
 There are several reports that may be extracted from Exakat : 
 
@@ -178,6 +178,9 @@ Ambassador
 
 Ambassador is a standalone full HTML report, meant to be used from a browser. 
 
+.. image:: images/report.ambassador.png
+    :alt: Dashboard view of the Ambassador report
+
 Ambassador includes : 
 
 + Full configuration for the audit
@@ -238,7 +241,7 @@ Clustergrammer
 
 Clustergrammer is a visualisation tool that may be found online. After generation of this report, a TEXT file is available in the project directory. Upload it on [http://amp.pharm.mssm.edu/clustergrammer/](http://amp.pharm.mssm.edu/clustergrammer/) to visualize it. 
 
-.. image:: images/report.plantuml.png
+.. image:: images/report.clustergrammer.png
     :alt: General view of a UML report
 
 See it live here : [Clustergrammer](http://amp.pharm.mssm.edu/clustergrammer/viz_sim_mats/5a8d41bf3a82d32a9dacddd9/clustergrammer.txt).

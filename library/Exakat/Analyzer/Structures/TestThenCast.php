@@ -30,7 +30,7 @@ class TestThenCast extends Analyzer {
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->atomInside('Comparison')
-             ->codeIs(array('==', '!=', '===', '!==')) // Avoid < and > 
+             ->codeIs(array('==', '!=', '===', '!==')) // Avoid < and >
              ->outIs(array('LEFT', 'RIGHT'))
              ->is('intval', 0)
              ->inIs(array('LEFT', 'RIGHT'))

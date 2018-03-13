@@ -205,7 +205,19 @@ class Ambassador extends Reports {
 
         // Annex
         $this->generateAnalyzerSettings();
-        $this->generateDocumentation();
+        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->themesToShow),
+                                     $this->themes->getThemeAnalyzers('Preferences'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
+                                     $this->themes->getThemeAnalyzers('CompatibilityPHP73')
+                                     );
+        $analyzersList = array_keys(array_count_values($analyzersList));
+        $this->generateDocumentation($analyzersList);
         $this->generateCodes();
 
         // Static files
@@ -278,27 +290,57 @@ class Ambassador extends Reports {
         return $lines;
     }
 
-    private function php2html($description){
-        $return = str_replace('<br />', '', $description[0]);
-        $return = PHPSyntax($return);
-        
-        return '</p><pre>'
-                .$return
-                .'</pre><p>';
-    }
-
     protected function setPHPBlocs($description){
-        $description = nl2br($description);
-
-        $description = preg_replace("#`(.*?) <(.*?)>`_#is", '<a href="$2" title="$1">$1 <i class="fa fa-sign-out"></i></a>', $description);
+        $description = preg_replace_callback("#<\?php(.*?)\?>#is", function ($x) { return '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHPSyntax($x[1]).'?&gt;</pre>';}, $description);
         
-        $description = preg_replace_callback("#<\?php(.*?)\?>#is", array($this, 'php2html'), $description);
-        
-
         return $description;
     }
 
-    private function generateDocumentation(){
+    protected function generateDocumentation($analyzerList){
+        $datas = array();
+        $baseHTML = $this->getBasedPage('analyzers_doc');
+        $analyzersDocHTML = "";
+
+        foreach($analyzerList as $analyzer) {
+            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
+            $description = $analyzer->getDescription();
+            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.$description->getName().'" id="'.$description->getName().'">'.$description->getName().'</a></h2>';
+
+            $badges = array();
+            $v = $description->getVersionAdded();
+            if(!empty($v)){
+                $badges[] = '[Since '.$v.']';
+            }
+            $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
+
+            $versionCompatibility = $analyzer->getPhpversion();
+            if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
+                if (strpos($versionCompatibility, '+') !== false) {
+                    $versionCompatibility = substr($versionCompatibility, 0, -1).' and more recent ';
+                } elseif (strpos($versionCompatibility, '-') !== false) {
+                    $versionCompatibility = ' older than '.substr($versionCompatibility, 0, -1);
+                }
+                $badges[] = '[ PHP '.$versionCompatibility.']';
+            }
+
+            $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
+            $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description->getDescription())).'</p>';
+            $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
+            
+
+            $v = $description->getClearPHP();
+            if(!empty($v)){
+                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
+            }
+        }
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyzersDocHTML);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
+
+        $this->putBasedPage('analyzers_doc', $finalHTML);
+    }
+
+    private function generateDocumentation2(){
         $datas = array();
         $baseHTML = $this->getBasedPage('analyzers_doc');
         $analyzersDocHTML = "";
@@ -1511,7 +1553,7 @@ SQL;
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                    <a href="issues.html#file='.$value['file'].'" title="'.$value['file'].'">
+                    <a href="issues.html#file='.$this->toId($value['file']).'" title="'.$value['file'].'">
                       <div class="block-cell-name">'.$value['file'].'</div>
                     </a>
                     <div class="block-cell-issue text-center">'.$value['value'].'</div>
@@ -1602,7 +1644,7 @@ SQL;
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                    <a href="issues.html#analyzer='.$value['name'].'" title="'.$value['label'].'">
+                    <a href="issues.html#analyzer='.$this->toId($value['name']).'" title="'.$value['label'].'">
                       <div class="block-cell-name">'.$value['label'].'</div> 
                     </a>
                     <div class="block-cell-issue text-center">'.$value['value'].'</div>
@@ -1680,7 +1722,6 @@ SQL;
         $issues = implode(', '.PHP_EOL, $issues);
         $blocjs = <<<JAVASCRIPTCODE
         
-  <script src="facetedsearch.js"></script>
   <script>
   "use strict";
 
@@ -1714,7 +1755,7 @@ $issues
         },
         facetContainer     : '<div class="facetsearch btn-group" id=<%= id %> ></div>',
         facetTitleTemplate : '<button class="facettitle multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected"><span class="multiselect-selected-text"><%= title %></span><b class="caret"></b></button>',
-        facetListContainer : '<ul class="facetlist multiselect-container dropdown-menu"></ul>',
+        facetListContainer : '<ul class="facetlist multiselect-container dropdown-menu" style="max-height: 450px; overflow: auto;"></ul>',
         listItemTemplate   : '<li class=facetitem id="<%= id %>" data-analyzer="<%= data_analyzer %>" data-file="<%= data_file %>"><span class="check"></span><%= name %><span class=facetitemcount>(<%= count %>)</span></li>',
         bottomContainer    : '<div class=bottomline></div>',  
         resultSelector   : '#results',
@@ -1770,19 +1811,19 @@ SQL;
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
-            $item['analyzer']     =  $ini['name'];
-            $item['analyzer_md5'] = $this->toId($row['analyzer']);
-            $item['file' ]        =  $row['file'];
-            $item['file_md5' ]    =  $this->toId($row['file']);
-            $item['code' ]        = PHPSyntax($row['fullcode']);
-            $item['code_detail']  = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus']    = PHPSyntax($row['fullcode']);
-            $item['link_file']    = $row['file'];
-            $item['line' ]        =  $row['line'];
-            $item['severity']     = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
-            $item['complexity']   = "<i class=\"fa fa-cog\" style=\"color: ".$TTFColors[$this->timesToFix[$row['analyzer']]]."\"></i>";
-            $item['recipe' ]      =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
-            $lines                = explode("\n", $ini['description']);
+            $item['analyzer']       =  $ini['name'];
+            $item['analyzer_md5']   = $this->toId($row['analyzer']);
+            $item['file' ]          =  $row['file'];
+            $item['file_md5' ]      =  $this->toId($row['file']);
+            $item['code' ]          = PHPSyntax($row['fullcode']);
+            $item['code_detail']    = "<i class=\"fa fa-plus \"></i>";
+            $item['code_plus']      = PHPSyntax($row['fullcode']);
+            $item['link_file']      = $row['file'];
+            $item['line' ]          =  $row['line'];
+            $item['severity']       = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
+            $item['complexity']     = "<i class=\"fa fa-cog\" style=\"color: ".$TTFColors[$this->timesToFix[$row['analyzer']]]."\"></i>";
+            $item['recipe' ]        =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
+            $lines                  = explode("\n", $ini['description']);
             $item['analyzer_help' ] = $lines[0];
 
             $items[] = json_encode($item);
@@ -1809,7 +1850,7 @@ SQL;
         return $class;
     }
 
-    private function generateSettings() {
+    protected function generateSettings() {
         $info = array(array('Code name', $this->config->project_name));
         if (!empty($this->config->project_description)) {
             $info[] = array('Code description', $this->config->project_description);
@@ -1861,7 +1902,7 @@ SQL;
         $this->putBasedPage('used_settings', $html);
     }
 
-    private function generateProcFiles() {
+    protected function generateProcFiles() {
         $files = '';
         $fileList = $this->datastore->getCol('files', 'file');
         foreach($fileList as $file) {
@@ -1884,7 +1925,7 @@ SQL;
         $this->putBasedPage('proc_files', $html);
     }
 
-    private function generateAnalyzersList() {
+    protected function generateAnalyzersList() {
         $analyzers = '';
 
         foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
@@ -2130,7 +2171,7 @@ SQL;
         }
 
         $table = '';
-        $titles = "<tr><th>Version</th><th>Name</th><th>".implode('</th><th>', array_keys(array_values($data)[0]) )."</th></tr>";
+        $titles = "<tr><th>Version</th><th>Name</th><th>".implode('</th><th>', array_keys(array_values($data2)[0]) )."</th></tr>";
         $data = array_merge($data, $data2);
         foreach($data as $name => $row) {
             $analyzer = $this->themes->getInstance($name, null, $this->config);
@@ -3256,7 +3297,7 @@ JAVASCRIPT;
         $this->putBasedPage('complex_expressions', $html);
     }
 
-    private function generateCodes() {
+    protected function generateCodes() {
         mkdir($this->tmpName.'/datas/sources/', 0755);
 
         $filesList = $this->datastore->getRow('files');
@@ -3285,9 +3326,6 @@ JAVASCRIPT;
         }
 
         $blocjs = <<<JAVASCRIPT
-  <script src="facetedsearch.js"></script>
-
-
   <script>
   "use strict";
 
