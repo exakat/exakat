@@ -121,22 +121,22 @@ class Analyze extends Tasks {
 
         $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
 
-        if (isset($this->analyzed[$analyzer_class]) && 
-            $this->config->noRefresh === true
+        if (!(!isset($this->analyzed[$analyzer_class]) || 
+              $this->config->noRefresh !== true)
             ) {
             display( "$analyzer_class is already processed\n");
             
-            return;
+            return $this->analyzed[$analyzer_class];
         }
         $analyzer->init();
         
         if ($this->config->noDependencies !== true) {
             foreach($analyzer->dependsOn() as $dependency) {
-                if (isset($this->analyzed[$analyzer_class]) && 
-                    $this->config->noRefresh === true
+                if (!(isset($this->analyzed[$analyzer_class]) &&
+                       $this->config->noRefresh !== true)
                     ) {
                     $count = $this->analyze($dependency);
-                
+                    assert($count !== null, "count is null");
                     $this->analyzed[$dependency] = $count;
                 }
             }
