@@ -1,10 +1,10 @@
 <?php
 
-$string = implode( '', file($file1) );
-$string = join( '', \file($file2) );
+$string = implode( '<br />', file($file1) );
+$string = join( 'sb', \file($file2) );
 
 $string = explode( '', file($file3) );
-$string = join( '', \file_get_contents($file4) );
+$string = join( 'sb', \file_get_contents($file4) );
 
 $lines = file($file5);
 echo implode('',$lines);
