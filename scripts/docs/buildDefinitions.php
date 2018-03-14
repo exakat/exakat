@@ -170,6 +170,8 @@ foreach($files as $file) {
 
 shell_exec('cp docs/src/images/*.png docs/images/');
 
+build_reports();
+
 $recipes = array('Analyze',
                  'CompatibilityPHP73',
                  'CompatibilityPHP72',
@@ -456,11 +458,12 @@ function glossary($title,$description) {
 function generateAnalyzerList() {
     $files = glob('./human/en/*/*.ini');
     
-    $sqlite = new \sqlite3('data/analyzers.sqlite');
+    $sqlite = new \Sqlite3('data/analyzers.sqlite');
     
     $versions = array();
     foreach($files as $file) {
         $folder = basename(dirname($file));
+        if ($folder === 'Reports') { continue; }
         $analyzer = substr(basename($file), 0, -4);
         $name = $folder.'/'.$analyzer;
         
@@ -500,6 +503,60 @@ SQL
     $list .= "\n";
 
     return $list;
+}
+
+function build_reports() {
+    $file = file_get_contents('./docs/Reports.rst');
+    
+    $list = glob('./human/en/Reports/*.ini');
+    $reportList = array();
+    $reportSection = array();
+    foreach($list as $reportFile) {
+        $reportIni = parse_ini_file($reportFile);
+        
+        $reportList[] = $reportIni['name'];
+
+        $section = $reportIni['name']."\n".str_repeat('-', strlen($reportIni['name']))."\n\n";
+        $section .= $reportIni['mission']."\n\n".$reportIni['description']."\n\n";
+
+        foreach($reportIni['examples'] as $id => $example) {
+            if (preg_match('/\.png$/', $example)) {
+                $section .= ".. image:: images/report.clustergrammer.png
+    :alt: Example of a $reportIni[name] report ($id)
+
+";
+            } elseif (preg_match('/\.txt$/', $example)) {
+                $exampleTxt = file_get_contents('./docs/src/images/'.$example);
+                $exampleTxt = '    '.str_replace("\n", "\n    ", $exampleTxt);
+                $section .= "\n::
+
+$exampleTxt
+
+";
+            }
+        }
+        
+        if (!empty($reportIni['depends'][0])) {
+            if (count($reportIni['depends']) === 1) {
+                $section .= $reportIni['name']. ' includes the report from another other report : '.join(', ', $reportIni['depends']).".\n\n";
+            } else {
+                sort($reportIni['depends']);
+                $section .= $reportIni['name']. ' includes the report from '.count($reportIni['depends']).' other reports : '.join(', ', $reportIni['depends']).".\n\n";
+            }
+        }
+
+        $section .= $reportIni['name']. " is a $reportIni[type] report format.\n\n";
+
+        $reportSection[] = $section;
+    }
+    
+    $reportList = '* '.join("\n* ", $reportList).PHP_EOL;
+    $reportSection = join('', $reportSection).PHP_EOL;
+    
+    $file = str_replace('REPORT_LIST', $reportList, $file);
+    $file = str_replace('REPORT_DETAILS', $reportSection, $file);
+    
+    file_put_contents('./docs/Reports.rst', $file);
 }
 
 ?>
