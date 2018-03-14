@@ -106,7 +106,6 @@ class Analyze extends Tasks {
             }
 
             $this->analyze($analyzer_class);
-            $this->checkAnalyzed();
         }
 
         if (!$this->config->verbose && !$this->config->quiet) {
@@ -138,10 +137,19 @@ class Analyze extends Tasks {
                     $count = $this->analyze($dependency);
                     assert($count !== null, "count is null");
                     $this->analyzed[$dependency] = $count;
+                    $this->checkAnalyzed();
                 }
             }
         }
-        
+
+        if (!(!isset($this->analyzed[$analyzer_class]) || 
+              $this->config->noRefresh !== true)
+            ) {
+            display( "$analyzer_class is already processed 2\n");
+            
+            return $this->analyzed[$analyzer_class];
+        }
+
         if (!$analyzer->checkPhpVersion($this->config->phpversion)) {
             $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
 
@@ -197,6 +205,9 @@ GREMLIN;
             // storing the number of row found in Hash table (datastore)
             $this->datastore->addRow('analyzed', array($analyzer_class => $count ) );
         }
+
+        $this->checkAnalyzed();
+
         return $total_results;
     }
     

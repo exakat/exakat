@@ -43,7 +43,7 @@ class OnepageJson extends Reports {
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->themes->getInstance($row['analyzer'], $this->config);
+                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
                 $clearphp = $analyzer->getDescription()->getClearPHP();
@@ -66,7 +66,7 @@ class OnepageJson extends Reports {
         if ($name === null) {
             return json_encode($results);
         } else {
-            file_put_contents("$folder/reports/$name.".self::FILE_EXTENSION, json_encode($results));
+            file_put_contents("$folder/$name.".self::FILE_EXTENSION, json_encode($results));
             return true;
         }
     }

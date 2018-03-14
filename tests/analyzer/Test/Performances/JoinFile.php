@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Performances_JoinFile extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testPerformances_JoinFile01()  { $this->generic_test('Performances/JoinFile.01'); }
+    public function testPerformances_JoinFile02()  { $this->generic_test('Performances/JoinFile.02'); }
 }
 ?>
