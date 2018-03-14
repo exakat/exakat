@@ -1,0 +1,8 @@
+    /Phrozn/Vendor/Extra/scss.inc.php:594 Slow PHP built-in functions
+    /Phrozn/Vendor/Extra/scss.inc.php:2554 Too many nested if statements
+    /Phrozn/Vendor/Extra/scss.inc.php:1208 Long if-else blocks
+    /Phrozn/Vendor/Extra/scss.inc.php:1208 Too many nested if statements
+    /Phrozn/Vendor/Extra/scss.inc.php:3935 Wrong function / class name casing
+    /Phrozn/Vendor/Extra/scss.inc.php:3452 Too many nested if statements
+    /Phrozn/Site/View/OutputPath/Entry/Parametrized.php:58 Slow PHP built-in functions
+    /Phrozn/Runner/CommandLine/Callback/Init.php:82 Extra brackets and braces and quotes

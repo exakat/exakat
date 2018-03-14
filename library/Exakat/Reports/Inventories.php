@@ -43,21 +43,25 @@ class Inventories extends Reports {
         }
         mkdir($path, 0777);
 
-        $this->saveInventory('Constants/Constantnames', "$folder/$name/constants.csv");
-        $this->saveInventory('Functions/Functionnames', "$folder/$name/functions.csv");
-        $this->saveInventory('Classes/Classnames', "$folder/$name/classes.csv");
-        $this->saveInventory('Interfaces/Interfacenames', "$folder/$name/interfaces.csv");
-        $this->saveInventory('Traits/Traitnames', "$folder/$name/traits.csv");
-        $this->saveInventory('Namespaces/Namespacesnames', "$folder/$name/namespaces.csv");
+        $this->saveInventory('Constants/Constantnames',      "$folder/$name/constants.csv");
+        $this->saveInventory('Functions/Functionnames',      "$folder/$name/functions.csv");
+        $this->saveInventory('Classes/Classnames',           "$folder/$name/classes.csv");
+        $this->saveInventory('Interfaces/Interfacenames',    "$folder/$name/interfaces.csv");
+        $this->saveInventory('Traits/Traitnames',            "$folder/$name/traits.csv");
+        $this->saveInventory('Namespaces/Namespacesnames',   "$folder/$name/namespaces.csv");
         $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/exceptions.csv");
 
-        $this->saveTable('variables', "$folder/$name/variables.csv");
-        $this->saveInventory('Php/IncomingVariables', "$folder/$name/incomingGPC.csv");
-        $this->saveInventory('Php/SessionVariables', "$folder/$name/sesssions.csv");
+        $this->saveTable(    'variables',                 "$folder/$name/variables.csv");
+        $this->saveInventory('Php/IncomingVariables',     "$folder/$name/incomingGPC.csv");
+        $this->saveInventory('Php/SessionVariables',      "$folder/$name/sessions.csv");
         $this->saveInventory('Variables/GlobalVariables', "$folder/$name/globals.csv");
 
-        $this->saveInventory('Php/DateFormats', "$folder/$name/dateformats.csv");
-        $this->saveInventory('Type/Regex', "$folder/$name/regex.csv");
+        $this->saveInventory('Php/DateFormats',   "$folder/$name/dateformats.csv");
+        $this->saveInventory('Type/Regex',        "$folder/$name/regex.csv");
+        $this->saveInventory('Type/Sql',          "$folder/$name/sql.csv");
+        $this->saveInventory('Type/Url',          "$folder/$name/sql.csv");
+        $this->saveInventory('Type/Email',        "$folder/$name/email.csv");
+        $this->saveInventory('Type/UnicodeBlock', "$folder/$name/unicode-block.csv");
 
         $this->saveAtom('Integer',      "$path/integers.csv");
         $this->saveAtom('ArrayLiteral', "$path/arrays.csv");

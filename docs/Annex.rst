@@ -1864,7 +1864,6 @@ External links
 
 List of external links mentionned in this documentation.
 
-* ` <http://php.net/manual/en/book.ibm-db2.php>`_
 * `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_
 * `$_ENV <http://php.net/reserved.variables.environment.php>`_
 * `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_
@@ -1953,7 +1952,6 @@ List of external links mentionned in this documentation.
 * `dl <http://www.php.net/dl>`_
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
-* `docker PHP container <https://hub.docker.com/_/php/>`_
 * `Document Object Model <http://php.net/manual/en/book.dom.php>`_
 * `Don't pass this out of a constructor <http://www.javapractices.com/topic/TopicAction.do?Id=252>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
@@ -2018,7 +2016,6 @@ List of external links mentionned in this documentation.
 * `GMP <http://php.net/manual/en/book.gmp.php>`_
 * `Gnupg Function for PHP <http://www.php.net/manual/en/book.gnupg.php>`_
 * `Goto <http://php.net/manual/en/control-structures.goto.php>`_
-* `gremlin plug-in <https://github.com/thinkaurelius/neo4j-gremlin-plugin>`_
 * `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_
 * `GRPC <http://www.grpc.io/>`_
 * `hash <http://www.php.net/hash>`_
@@ -2030,6 +2027,7 @@ List of external links mentionned in this documentation.
 * `htmlentities <http://www.php.net/htmlentities>`_
 * `http://php.net/manual/en/reference.pcre.pattern.modifiers.php <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
+* `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
 * `igbinary <https://github.com/igbinary/igbinary/>`_
@@ -2066,8 +2064,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
@@ -2085,7 +2083,6 @@ List of external links mentionned in this documentation.
 * `MySQL Improved Extension <http://php.net/manual/en/book.mysqli.php>`_
 * `mysqli <http://php.net/manual/en/book.mysqli.php>`_
 * `Ncurses Terminal Screen Control <http://php.net/manual/en/book.ncurses.php>`_
-* `Neo4j <http://neo4j.com/>`_
 * `Net SNMP <http://www.net-snmp.org/>`_
 * `New features <http://php.net/manual/en/migration56.new-features.php>`_
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
@@ -2186,8 +2183,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_

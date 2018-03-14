@@ -1,0 +1,21 @@
+{  
+   "\/src\/Path\/To\/File.php":{  
+      "errors":0,
+      "warnings":105,
+      "fixable":0,
+      "filename":"\/src\/Path\/To\/File.php",
+      "messages":{  
+         "55":[  
+            [  
+               {  
+                  "type":"warning",
+                  "source":"Php/EllipsisUsage",
+                  "severity":"Major",
+                  "fixable":"fixable",
+                  "message":"... Usage"
+               }
+            ]
+         ],
+         }
+    }
+}
