@@ -132,7 +132,7 @@ MENU;
 
         // Annex
         $this->generateAnalyzerSettings();
-        $this->generateDocumentation();
+        $this->generateDocumentation($this->themes->getThemeAnalyzers($this->themesToShow));
         $this->generateCodes();
 
         // Static files
@@ -215,48 +215,6 @@ MENU;
         return $description;
     }
 
-    private function generateDocumentation(){
-        $datas = array();
-        $baseHTML = $this->getBasedPage('analyzers_doc');
-        $analyzersDocHTML = "";
-
-        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzerName) {
-            $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
-            $description = $analyzer->getDescription();
-            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.$this->toId($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
-
-            $badges = array();
-            $v = $description->getVersionAdded();
-            if(!empty($v)){
-                $badges[] = '[Since '.$v.']';
-            }
-            $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
-
-            $versionCompatibility = $analyzer->getPhpversion();
-            if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
-                if (strpos($versionCompatibility, '+') !== false) {
-                    $versionCompatibility = substr($versionCompatibility, 0, -1).' and more recent ';
-                } elseif (strpos($versionCompatibility, '-') !== false) {
-                    $versionCompatibility = ' older than '.substr($versionCompatibility, 0, -1);
-                }
-                $badges[] = '[ PHP '.$versionCompatibility.']';
-            }
-
-            $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML.='<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
-
-            $v = $description->getClearPHP();
-            if(!empty($v)){
-                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
-            }
-        }
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyzersDocHTML);
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
-
-        $this->putBasedPage('analyzers_doc', $finalHTML);
-    }
-
     private function generateFavorites() {
         $baseHTML = $this->getBasedPage('favorites_dashboard');
 
@@ -270,7 +228,7 @@ MENU;
 
             $table = '';
             $values = array();
-            $object = $this->themes->getInstance($analyzer, $this->config);
+            $object = $this->themes->getInstance($analyzer, null, $this->config);
             $name = $object->getDescription()->getName();
 
             $total = 0;
@@ -1298,7 +1256,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = $this->themes->getInstance($row['analyzer'], $this->config);
+            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
             $row['recipes' ] =  makeList($this->themesForAnalyzer[$row['analyzer']], '');
 
@@ -1662,95 +1620,6 @@ SQL;
         return $items;
     }
 
-    private function generateSettings() {
-        $info = array(array('Code name', $this->config->project_name));
-        if (!empty($this->config->project_description)) {
-            $info[] = array('Code description', $this->config->project_description);
-        }
-        if (!empty($this->config->project_packagist)) {
-            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
-        }
-        if (!empty($this->config->project_url)) {
-            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
-        }
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
-            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
-            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
-            $info[] = array('Git URL', $r[1]);
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
-            $info[] = array('Git branch', trim($res));
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
-            $info[] = array('Git commit', trim($res));
-        } else {
-            $info[] = array('Repository URL', 'Downloaded archive');
-        }
-
-        $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
-        $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
-        $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
-
-        $info[] = array('Report production date', date('r', strtotime('now')));
-
-        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
-        $info[] = array('Ignored files/folders', makeList($this->config->ignore_dirs), '');
-
-        $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
-
-        $settings = '';
-        foreach($info as $i) {
-            $settings .= "<tr><td>$i[0]</td><td>$i[1]</td></tr>";
-        }
-
-        $html = $this->getBasedPage('used_settings');
-        $html = $this->injectBloc($html, 'SETTINGS', $settings);
-        $html = $this->injectBloc($html, 'TITLE', 'Analyzer settings\' list');
-
-        $this->putBasedPage('used_settings', $html);
-    }
-
-    private function generateProcFiles() {
-        $files = '';
-        $fileList = $this->datastore->getCol('files', 'file');
-        foreach($fileList as $file) {
-            $files .= '<tr><td>'.$file.'</td></tr>'.PHP_EOL;
-        }
-
-        $nonFiles = '';
-        $ignoredFiles = $this->datastore->getRow('ignoredFiles');
-        foreach($ignoredFiles as $row) {
-            if (empty($row['file'])) { continue; }
-
-            $nonFiles .= '<tr><td>'.$row['file'].'</td><td>'.$row['reason'].'</td></tr>'.PHP_EOL;
-        }
-
-        $html = $this->getBasedPage('proc_files');
-        $html = $this->injectBloc($html, 'FILES', $files);
-        $html = $this->injectBloc($html, 'NON-FILES', $nonFiles);
-        $html = $this->injectBloc($html, 'TITLE', 'Processed Files\' list');
-
-        $this->putBasedPage('proc_files', $html);
-    }
-
-    private function generateAnalyzersList() {
-        $analyzers = '';
-
-        foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzerName) {
-            $analyzer = $this->themes->getInstance($analyzerName, $this->config);
-            $description = $analyzer->getDescription();
-
-            $analyzers .= '<tr><td>'.$description->getName().'</td></tr>'.PHP_EOL;
-        }
-
-        $html = $this->getBasedPage('proc_analyzers');
-        $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
-        $html = $this->injectBloc($html, 'TITLE', 'Processed Analyzers\' list');
-
-        $this->putBasedPage('proc_analyzers', $html);
-    }
-
     protected function generatePhpConfiguration() {
         $phpConfiguration = new PhpConfiguration($this->config);
         $report = $phpConfiguration->generate(null, null);
@@ -1997,56 +1866,6 @@ HTML;
         $html = $this->getBasedPage('altered_directives');
         $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);
         $this->putBasedPage('altered_directives', $html);
-    }
-
-    private function generateCodes() {
-        mkdir($this->tmpName.'/datas/sources/', 0755);
-
-        $filesList = $this->datastore->getRow('files');
-        $files = '';
-        foreach($filesList as $row) {
-            $id = str_replace('/', '_', $row['file']);
-
-            $subdirs = explode('/', dirname($row['file']));
-            $dir = $this->tmpName.'/datas/sources';
-            foreach($subdirs as $subdir) {
-                $dir .= '/'.$subdir;
-                if (!file_exists($dir)) {
-                    mkdir($dir, 0755);
-                }
-            }
-
-            $source = show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
-            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
-            file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], substr($source, 6, -8));
-        }
-
-        $blocjs = <<<JAVASCRIPT
-  <script src="facetedsearch.js"></script>
-
-
-  <script>
-  "use strict";
-
-  $('.menuitem').click(function(event){
-    $('#results').load("sources/" + event.target.text);
-    $('#filename').html(event.target.text + '  <span class="caret"></span>');
-  });
-
-  var fileParam = window.location.search.split('file=')[1];
-  if(fileParam !== undefined) {
-    $('#results').load("sources/" + fileParam);
-    $('#filename').html(fileParam + '  <span class="caret"></span>');
-  }
-  
-
-  </script>
-JAVASCRIPT;
-        $html = $this->getBasedPage('codes');
-        $html = $this->injectBloc($html, 'BLOC-JS', $blocjs);
-        $html = $this->injectBloc($html, 'FILES', $files);
-
-        $this->putBasedPage('codes', $html);
     }
 
     private function generateCompatibilities() {

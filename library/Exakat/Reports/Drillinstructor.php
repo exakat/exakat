@@ -58,7 +58,7 @@ class Drillinstructor extends Ambassador {
 
         // Annex
         $this->generateAnalyzerSettings();
-        $this->generateDocumentation();
+        $this->generateDocumentation($this->themes->getThemeAnalyzers($this->themesToShow));
 
         // Static files
         $files = array('credits');
@@ -134,53 +134,6 @@ MENU;
     private function generateLevel4() {
         $this->generateIssuesEngine('level4',
                                     $this->getIssuesFaceted('Level 4'));
-    }
-
-    private function generateDocumentation(){
-        $datas = array();
-        $baseHTML = $this->getBasedPage('analyzers_doc');
-        $analyzersDocHTML = "";
-
-        $analyzersList = array_merge($this->themes->getThemeAnalyzers('Level 1')
-                                     );
-        $analyzersList = array_keys(array_count_values($analyzersList));
-                                     
-        foreach($analyzersList as $analyzerName) {
-            $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
-            $description = $analyzer->getDescription();
-
-            $analyzersDocHTML.='<h2><a href="analyzers_doc.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
-
-            $badges = array();
-            $v = $description->getVersionAdded();
-            if(!empty($v)){
-                $badges[] = '[Since '.$v.']';
-            }
-            $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
-
-            $versionCompatibility = $analyzer->getPhpversion();
-            if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
-                if (strpos($versionCompatibility, '+') !== false) {
-                    $versionCompatibility = substr($versionCompatibility, 0, -1).' and more recent ';
-                } elseif (strpos($versionCompatibility, '-') !== false) {
-                    $versionCompatibility = ' older than '.substr($versionCompatibility, 0, -1);
-                }
-                $badges[] = '[ PHP '.$versionCompatibility.']';
-            }
-
-            $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML .= '<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
-
-            $v = $description->getClearPHP();
-            if(!empty($v)){
-                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
-            }
-        }
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyzersDocHTML);
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
-
-        $this->putBasedPage('analyzers_doc', $finalHTML);
     }
 
     protected function generateDashboard() {
@@ -533,8 +486,6 @@ SQL
         $html = $this->injectBloc($html, 'LEVELS', $levels);
         $this->putBasedPage('levels', $html);
     }
-
-
 }
 
 ?>
