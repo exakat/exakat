@@ -511,12 +511,6 @@ Glossary
       + :ref:`Use Instanceof <use-instanceof>`
 
 
-+ `J`
-    + `join()`
-
-      + :ref:`Join file() <join-file()>`
-
-
 + `M`
     + `mail()`
 
@@ -550,6 +544,10 @@ Glossary
 
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
       + :ref:`Static Loop <static-loop>`
+
+    + `nl2br()`
+
+      + :ref:`Join file() <join-file()>`
 
 
 + `O`
@@ -698,6 +696,7 @@ Glossary
 
     + `str_replace()`
 
+      + :ref:`Join file() <join-file()>`
       + :ref:`Make One Call With Array <make-one-call-with-array>`
 
     + `stream_socket_server()`

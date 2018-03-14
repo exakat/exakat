@@ -31,8 +31,6 @@ At least one version of PHP have to be used, and it may be the same running Exak
 
 The gremlin server is used to query the source code. Once analyzes are all finished, the results are dumped into a SQLITE database and the graph may be removed. Reports are build from the SQLITE database.
 
-The older version of the installation chapter, including some sections that are not yet upgraded, is available in the Installationold_.
-
 Requirements
 ------------
 

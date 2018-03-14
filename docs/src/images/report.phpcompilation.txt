@@ -1,0 +1,27 @@
+;;;;;;;;;;;;;;;;;;;;;;;;
+; PHP configure list   ;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+./configure
+  --disable-dom
+ --disable-fileinfo
+ --disable-filter
+ --disable-hash
+ --disable-json
+ --disable-libxml
+ --disable-pdo
+ --disable-posix
+ --disable-session
+ --without-sqlite3
+ --disable-tokenizer
+ --disable-xml
+ --disable-xmlreader
+ --with-xmlrpc[=DIR]
+ --disable-xmlwriter
+
+; For debug purposes
+;--enable-dtrace
+;--disable-phpdbg
+
+;--enable-zend-signals
+;--disable-opcacheReported 0 messages in PhpCompilation

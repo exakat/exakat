@@ -1,0 +1,5 @@
+    /helpers/translation/class.TranslationFileReader.php:99 No Need For Else
+    /helpers/translation/class.TranslationFileReader.php:99 Avoid Optional Properties
+    /test/ClientLibRegistryTest.php:83 Confusing Names
+    /helpers/form/elements/xhtml/class.Radiobox.php:53 Local Globals
+

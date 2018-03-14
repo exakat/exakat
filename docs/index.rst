@@ -26,4 +26,3 @@ Contents:
    Contribute
    Contributors
    Annex
-   Installationold
