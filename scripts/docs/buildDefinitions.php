@@ -289,50 +289,9 @@ $analyzers = array();
 while($row = $res->fetchArray(SQLITE3_ASSOC)) {
     $liste = explode(',',$row['analyzers']);
     foreach($liste as &$a) {
-        $name = $a;
-        $ini = parse_ini_file("human/en/$a.ini");
-        $commandLine = $a;
-
-        $a = rst_link($ini['name']);
-
-        $desc = glossary($ini['name'],$ini['description']);
-        $desc = trim(rst_escape($desc));
-
-        if (!empty($ini['clearphp'])) {
-            $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
-        } else {
-            $clearPHP = '';
-        }
-
-        if (isset($a2themes[$name])) {
-            $c = array_map('rst_link',$a2themes[$name]);
-            $recipes = implode(', ',$c);
-        } else {
-            $recipes = 'none';
-        }
-        
-        $lineSize    = max(strlen($commandLine),strlen($clearPHP),strlen($recipes));
-        $commandLine = str_pad($commandLine,$lineSize,' ');
-        $recipes     = str_pad($recipes,$lineSize,' ');
-        $separator   = '+--------------+-'.str_pad('',$lineSize,'-').'-+';
-        if (!empty($clearPHP)) {
-            $clearPHP    = '| clearPHP     | '.str_pad($clearPHP,$lineSize,' ').' |'.PHP_EOL.$separator.PHP_EOL;
-        }
-
-        $desc .= <<<RST
-
-
-$separator
-| Command Line | $commandLine |
-$separator
-$clearPHP| Analyzers    | $recipes |
-$separator
-
-
-RST;
-
-
-        $analyzers[$ini['name']] = $desc;
+        list($desc, $name) = build_analyzer_doc($a, $a2themes);
+        $a = rst_link($name);
+        $analyzers[$name] = $desc;
     }
     unset($a);
 
@@ -514,14 +473,14 @@ function build_reports() {
     foreach($list as $reportFile) {
         $reportIni = parse_ini_file($reportFile);
         
-        $reportList[] = $reportIni['name'];
+        $reportList[] = '`'.$reportIni['name'].'`_';
 
         $section = $reportIni['name']."\n".str_repeat('-', strlen($reportIni['name']))."\n\n";
         $section .= $reportIni['mission']."\n\n".$reportIni['description']."\n\n";
 
         foreach($reportIni['examples'] as $id => $example) {
             if (preg_match('/\.png$/', $example)) {
-                $section .= ".. image:: images/report.clustergrammer.png
+                $section .= ".. image:: images/$example
     :alt: Example of a $reportIni[name] report ($id)
 
 ";
@@ -557,6 +516,79 @@ $exampleTxt
     $file = str_replace('REPORT_DETAILS', $reportSection, $file);
     
     file_put_contents('./docs/Reports.rst', $file);
+}
+
+function build_analyzer_doc($a, $a2themes) {
+        $name = $a;
+        $ini = parse_ini_file("human/en/$a.ini", true);
+        $commandLine = $a;
+
+        $desc = glossary($ini['name'],$ini['description']);
+        $desc = trim(rst_escape($desc));
+
+        if (!empty($ini['clearphp'])) {
+            $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
+        } else {
+            $clearPHP = '';
+        }
+
+        if (isset($a2themes[$name])) {
+            $c = array_map('rst_link',$a2themes[$name]);
+            $recipes = implode(', ',$c);
+        } else {
+            $recipes = 'none';
+        }
+        
+        $lineSize    = max(strlen($commandLine), strlen($clearPHP), strlen($recipes));
+        $commandLine = str_pad($commandLine, $lineSize, ' ');
+        $recipes     = str_pad($recipes, $lineSize, ' ');
+        $separator   = '+--------------+-'.str_pad('',$lineSize,'-').'-+';
+        if (!empty($clearPHP)) {
+            $clearPHP    = '| clearPHP     | '.str_pad($clearPHP,$lineSize,' ').' |'.PHP_EOL.$separator.PHP_EOL;
+        }
+
+        $desc .= <<<RST
+
+
+$separator
+| Command Line | $commandLine |
+$separator
+$clearPHP| Analyzers    | $recipes |
+$separator
+
+------
+
+RST;
+
+        for($i = 0; $i < 10; $i++) {
+            if (isset($ini['example'.$i])) {
+                
+                print $code = "    ".str_replace("\n", "\n    ", trim($ini['example'.$i]['code']));
+                $section = $ini['example'.$i]['project']."\n".str_repeat('=', strlen($ini['example'.$i]['project']));
+                $explain = $ini['example'.$i]['explain'];
+                $file = $ini['example'.$i]['file'];
+                $line = $ini['example'.$i]['line'];
+
+                $desc .= <<<SPHINX
+
+
+$section
+
+In $file:$line.
+
+$explain
+
+.. code-block:: php
+
+$code
+
+--------
+
+SPHINX;
+            }
+        }
+
+        return array($desc, $ini['name']);
 }
 
 ?>

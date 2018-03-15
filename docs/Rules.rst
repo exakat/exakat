@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 14 Mar 2018 17:41:12 +0000
-.. comment: Generation hash : b13dd6ac82b89205234ce9bbfee3b412836d2215
+.. comment: Generation date : Thu, 15 Mar 2018 07:59:58 +0000
+.. comment: Generation hash : a92f6bd34bd1e4b44be2c815dd8984017481ab05
 
 
 .. _$http\_raw\_post\_data:
@@ -45,6 +45,7 @@ See also `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variab
 | Analyzers    | :ref:`CompatibilityPHP56` |
 +--------------+---------------------------+
 
+------
 
 .. _$this-belongs-to-classes-or-traits:
 
@@ -112,6 +113,7 @@ PHP 7.1 is stricter and check for $this at several positions. Some are found by 
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _$this-is-not-an-array:
 
@@ -147,6 +149,7 @@ $this Is Not An Array
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _$this-is-not-for-static-methods:
 
@@ -191,6 +194,7 @@ See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_.
 | Analyzers    | :ref:`Analyze`                                                                              |
 +--------------+---------------------------------------------------------------------------------------------+
 
+------
 
 .. _**-for-exponent:
 
@@ -219,6 +223,7 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 | Analyzers    | :ref:`Suggestions` |
 +--------------+--------------------+
 
+------
 
 .. _\:\:class:
 
@@ -249,6 +254,7 @@ PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It 
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +--------------+------------------------------------------------------+
 
+------
 
 .. _@-operator:
 
@@ -284,6 +290,7 @@ This is the case with `'fopen() <http://www.php.net/fopen>`_, `'stream_socket_se
 | Analyzers    | :ref:`Analyze`                                                                        |
 +--------------+---------------------------------------------------------------------------------------+
 
+------
 
 .. _abstract-static-methods:
 
@@ -317,6 +324,7 @@ See also `Why does PHP 5.2+ disallow abstract static class methods? <https://sta
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _access-protected-structures:
 
@@ -332,6 +340,7 @@ It is not allowed to access protected properties or methods from outside the cla
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _accessing-private:
 
@@ -363,6 +372,7 @@ List of calls to private properties/methods that will compile but yield some fat
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
 
+------
 
 .. _action-should-be-in-controller:
 
@@ -411,6 +421,7 @@ Action methods should be in a controller and public.
 | Analyzers    | :ref:`ZendFramework`     |
 +--------------+--------------------------+
 
+------
 
 .. _adding-zero:
 
@@ -453,6 +464,7 @@ If it is used to type cast a value to integer, then casting (integer) is clearer
 | Analyzers    | :ref:`Analyze`                                                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
 
+------
 
 .. _aliases-usage:
 
@@ -491,6 +503,7 @@ See documentation : `List of function aliases <http://php.net/manual/en/aliases.
 | Analyzers    | :ref:`Analyze`                                                                      |
 +--------------+-------------------------------------------------------------------------------------+
 
+------
 
 .. _all-uppercase-variables:
 
@@ -523,6 +536,7 @@ When using custom variables, try to use lowercase $variables, $camelCase, $sturd
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _already-parents-interface:
 
@@ -577,6 +591,7 @@ That way, the child doesn't need to implement the interface, nor define its meth
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _altering-foreach-without-reference:
 
@@ -620,6 +635,7 @@ You may also use `'array_walk() <http://www.php.net/array_walk>`_ or `'array_map
 | Analyzers    | :ref:`Analyze`                                                                                                                    |
 +--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _alternative-syntax-consistence:
 
@@ -654,6 +670,7 @@ This analysis reports files that are using both syntax at the same time. This is
 | Analyzers    | :ref:`Analyze`                          |
 +--------------+-----------------------------------------+
 
+------
 
 .. _always-anchor-regex:
 
@@ -707,6 +724,7 @@ See also `CWE-625: Permissive Regular Expression <https://cwe.mitre.org/data/def
 | Analyzers    | :ref:`Security`      |
 +--------------+----------------------+
 
+------
 
 .. _always-positive-comparison:
 
@@ -735,6 +753,7 @@ When comparing them to 0, the following expressions are always true and should b
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _ambiguous-array-index:
 
@@ -771,6 +790,7 @@ They are indeed distinct, but may lead to confusion.
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
 
+------
 
 .. _ambiguous-static:
 
@@ -808,6 +828,7 @@ Try to keep the static-ness of methods simple, and unique. Consider renaming the
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _anonymous-classes:
 
@@ -832,6 +853,7 @@ Anonymous classes.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _argument-should-be-typehinted:
 
@@ -865,6 +887,7 @@ The analyzer will detect situations where a class, or the keywords 'array' or 'c
 | Analyzers    | :ref:`Suggestions`                                                                            |
 +--------------+-----------------------------------------------------------------------------------------------+
 
+------
 
 .. _assign-default-to-properties:
 
@@ -912,6 +935,7 @@ Default values will save some instructions in the constructor, and makes the val
 | Analyzers    | :ref:`Analyze`                                                                                                            |
 +--------------+---------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _assign-with-and:
 
@@ -948,6 +972,7 @@ See also `Operator precedence <http://php.net/manual/en/language.operators.prece
 | Analyzers    | :ref:`Analyze` |
 +--------------+----------------+
 
+------
 
 .. _assigned-twice:
 
@@ -989,6 +1014,7 @@ Incremental changes to a variables are not reported here.
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
 
+------
 
 .. _avoid-concat-in-loop:
 
@@ -1027,6 +1053,7 @@ The same doesn't apply to addition and multiplication, with `'array_sum() <http:
 | Analyzers    | :ref:`Performances`         |
 +--------------+-----------------------------+
 
+------
 
 .. _avoid-double-prepare:
 
@@ -1073,6 +1100,7 @@ See also `On WordPress Security and Contributing <https://codeseekah.com/2017/09
 | Analyzers    | :ref:`Wordpress`        |
 +--------------+-------------------------+
 
+------
 
 .. _avoid-large-array-assignation:
 
@@ -1151,6 +1179,7 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
 | Analyzers    | :ref:`Performances`                |
 +--------------+------------------------------------+
 
+------
 
 .. _avoid-non-wordpress-globals:
 
@@ -1186,6 +1215,7 @@ See also `Global Variables <https://codex.wordpress.org/Global_Variables>`_
 | Analyzers    | :ref:`Wordpress`            |
 +--------------+-----------------------------+
 
+------
 
 .. _avoid-optional-properties:
 
@@ -1232,6 +1262,7 @@ See also `Avoid optional services as much as possible <http://bestpractices.thec
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _avoid-php-superglobals:
 
@@ -1275,6 +1306,7 @@ See also `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _avoid-parenthesis:
 
@@ -1309,6 +1341,7 @@ Even if most of the time, usage of parenthesis is legit, it is recommended to av
 | Analyzers    | :ref:`Analyze`                     |
 +--------------+------------------------------------+
 
+------
 
 .. _avoid-those-hash-functions:
 
@@ -1348,6 +1381,7 @@ See also `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algo
 | Analyzers    | :ref:`Security`           |
 +--------------+---------------------------+
 
+------
 
 .. _avoid-using-stdclass:
 
@@ -1392,6 +1426,7 @@ If you need a stdClass object, it is faster to build it as an array, then cast i
 | Analyzers    | :ref:`Analyze`  |
 +--------------+-----------------+
 
+------
 
 .. _avoid-array\_push():
 
@@ -1439,6 +1474,7 @@ This is a micro-optimisation.
 | Analyzers    | :ref:`Performances`         |
 +--------------+-----------------------------+
 
+------
 
 .. _avoid-array\_unique():
 
@@ -1475,6 +1511,7 @@ The native function `'array_unique() <http://www.php.net/array_unique>`_ is much
 | Analyzers    | :ref:`Performances`      |
 +--------------+--------------------------+
 
+------
 
 .. _avoid-get\_class():
 
@@ -1513,6 +1550,7 @@ get_class() will only compare the full namespace name of the object's class, whi
 | Analyzers    | none                     |
 +--------------+--------------------------+
 
+------
 
 .. _avoid-glob()-usage:
 
@@ -1557,6 +1595,7 @@ See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob
 | Analyzers    | :ref:`Performances` |
 +--------------+---------------------+
 
+------
 
 .. _avoid-set\_error\_handler-$context-argument:
 
@@ -1587,6 +1626,7 @@ See also `'set_error_handler() <http://www.php.net/set_error_handler>`_;
 | Analyzers    | :ref:`CompatibilityPHP72`          |
 +--------------+------------------------------------+
 
+------
 
 .. _avoid-sleep()/usleep():
 
@@ -1625,6 +1665,7 @@ As much as possible, avoid delaying the end of the script.
 | Analyzers    | :ref:`Security`  |
 +--------------+------------------+
 
+------
 
 .. _bail-out-early:
 
@@ -1693,6 +1734,7 @@ This works with the `'break <http://php.net/manual/en/control-structures.break.p
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _binary-glossary:
 
@@ -1717,6 +1759,7 @@ List of all the integer values using the binary format.
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
 
+------
 
 .. _bracketless-blocks:
 
@@ -1751,6 +1794,7 @@ It is generally considered a bad practice, as readability is lower and there are
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _break-outside-loop:
 
@@ -1788,6 +1832,7 @@ It is not possible anymore to include a piece of code inside a loop that will th
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
 +--------------+-------------------------------------------+
 
+------
 
 .. _break-with-0:
 
@@ -1819,6 +1864,7 @@ Cannot `'break <http://php.net/manual/en/control-structures.break.php>`_ 0, as t
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
 
+------
 
 .. _break-with-non-integer:
 
@@ -1854,6 +1900,7 @@ Other values were acceptable in PHP 5.3 and previous version, but this is now re
 | Analyzers    | :ref:`CompatibilityPHP54`  |
 +--------------+----------------------------+
 
+------
 
 .. _buried-assignation:
 
@@ -1884,6 +1931,7 @@ They are difficult to spot, and may be confusing. It is advised to place them in
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _cakephp-2.5.0-undefined-classes:
 
@@ -1899,6 +1947,7 @@ CakePHP classes, interfaces and traits that are not defined in version 2.5.0.
 | Analyzers    | :ref:`Cakephp`    |
 +--------------+-------------------+
 
+------
 
 .. _cakephp-2.6.0-undefined-classes:
 
@@ -1915,6 +1964,7 @@ CakePHP classes, interfaces and traits that are not defined in version 2.6.0.
 | Analyzers    | :ref:`Cakephp`    |
 +--------------+-------------------+
 
+------
 
 .. _cakephp-2.7.0-undefined-classes:
 
@@ -1933,6 +1983,7 @@ CakePHP classes, interfaces and traits that are not defined in version 2.7.0.
 | Analyzers    | :ref:`Cakephp`    |
 +--------------+-------------------+
 
+------
 
 .. _cakephp-2.8.0-undefined-classes:
 
@@ -1949,6 +2000,7 @@ CakePHP classes, interfaces and traits that are not defined in version 2.8.0.
 | Analyzers    | :ref:`Cakephp`    |
 +--------------+-------------------+
 
+------
 
 .. _cakephp-2.9.0-undefined-classes:
 
@@ -1967,6 +2019,7 @@ CakePHP classes, interfaces and traits that are not defined in version 2.9.0.
 | Analyzers    | :ref:`Cakephp`    |
 +--------------+-------------------+
 
+------
 
 .. _cakephp-3.0-deprecated-class:
 
@@ -1984,6 +2037,7 @@ According to the `Cake 3.0 migration guide <http://book.cakephp.org/3.0/en/appen
 | Analyzers    | :ref:`Cakephp`                |
 +--------------+-------------------------------+
 
+------
 
 .. _cakephp-3.0.0-undefined-classes:
 
@@ -2005,6 +2059,7 @@ CakePHP classes, interfaces and traits that are not defined in version 3.0.0.
 | Analyzers    | :ref:`Cakephp`    |
 +--------------+-------------------+
 
+------
 
 .. _cakephp-3.1.0-undefined-classes:
 
@@ -2025,6 +2080,7 @@ CakePHP classes, interfaces and traits that are not defined in version 3.1.0.
 | Analyzers    | :ref:`Cakephp`    |
 +--------------+-------------------+
 
+------
 
 .. _cakephp-3.2.0-undefined-classes:
 
@@ -2045,6 +2101,7 @@ CakePHP classes, interfaces and traits that are not defined in version 3.2.0.
 | Analyzers    | :ref:`Cakephp`    |
 +--------------+-------------------+
 
+------
 
 .. _cakephp-3.3-deprecated-class:
 
@@ -2062,6 +2119,7 @@ According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appen
 | Analyzers    | :ref:`Cakephp`                |
 +--------------+-------------------------------+
 
+------
 
 .. _cakephp-3.3.0-undefined-classes:
 
@@ -2083,6 +2141,7 @@ CakePHP classes, interfaces and traits that are not defined in version 3.3.0.
 | Analyzers    | :ref:`Cakephp`    |
 +--------------+-------------------+
 
+------
 
 .. _cakephp-3.4.0-undefined-classes:
 
@@ -2104,6 +2163,7 @@ CakePHP classes, interfaces and traits that are not defined in version 3.4.0.
 | Analyzers    | :ref:`Cakephp`    |
 +--------------+-------------------+
 
+------
 
 .. _cakephp-used:
 
@@ -2143,6 +2203,7 @@ See also `CakePHP <https://www.cakephp.org/>`_.
 | Analyzers    | :ref:`Cakephp`      |
 +--------------+---------------------+
 
+------
 
 .. _calltime-pass-by-reference:
 
@@ -2174,6 +2235,7 @@ Either the function use a reference in its signature, either the reference won't
 | Analyzers    | :ref:`CompatibilityPHP54`          |
 +--------------+------------------------------------+
 
+------
 
 .. _can't-count-non-countable:
 
@@ -2209,6 +2271,7 @@ See also `Warn when counting non-countable types <http://php.net/manual/en/migra
 | Analyzers    | :ref:`CompatibilityPHP72`       |
 +--------------+---------------------------------+
 
+------
 
 .. _can't-extend-final:
 
@@ -2249,6 +2312,7 @@ In a separate file :
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _cant-inherit-abstract-method:
 
@@ -2277,6 +2341,7 @@ See also `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/al
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _cant-use-return-value-in-write-context:
 
@@ -2310,6 +2375,7 @@ See also `Cant Use Return Value In Write Context <https://stackoverflow.com/ques
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +--------------+------------------------------------------------------+
 
+------
 
 .. _cast-to-boolean:
 
@@ -2343,6 +2409,7 @@ This expression may be reduced by casting to boolean type.
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _catch-overwrite-variable:
 
@@ -2385,6 +2452,7 @@ It is recommended to use another name for these catch variables.
 | Analyzers    | :ref:`Analyze`                                                                                      |
 +--------------+-----------------------------------------------------------------------------------------------------+
 
+------
 
 .. _check-all-types:
 
@@ -2436,6 +2504,7 @@ Using a type test without else is also accepted here. This is a special treatmen
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _child-class-removes-typehint:
 
@@ -2465,6 +2534,7 @@ PHP 7.2 introduced the ability to remove a typehint when overloarding a method. 
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _class-const-with-array:
 
@@ -2480,6 +2550,7 @@ Constant defined with const keyword may be arrays but only stating with PHP 5.6.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
 
+------
 
 .. _class-function-confusion:
 
@@ -2511,6 +2582,7 @@ When functions and classes bear the same name, calling them may be confusing. Th
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _class-name-case-difference:
 
@@ -2547,6 +2619,7 @@ See also `PHP class name constant case sensitivity and PSR-11 <https://gist.gith
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
 +--------------+----------------------------------------------------------------+
 
+------
 
 .. _class-should-be-final-by-ocramius:
 
@@ -2585,6 +2658,7 @@ Full article : `When to declare classes final <http://ocramius.github.io/blog/wh
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _class,-interface-or-trait-with-identical-names:
 
@@ -2611,6 +2685,7 @@ Even if they are in different namespaces, this makes them easy to confuse. Besid
 | Analyzers    | :ref:`Analyze`      |
 +--------------+---------------------+
 
+------
 
 .. _classes-mutually-extending-each-other:
 
@@ -2641,6 +2716,7 @@ Those classes are extending each other, creating an extension loop. PHP will yie
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _close-tags:
 
@@ -2658,6 +2734,7 @@ PHP manual recommends that script should be left open, without the final closing
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>`                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _closure-may-use-$this:
 
@@ -2699,6 +2776,7 @@ See also `Anonymus Functions <http://php.net/manual/en/functions.anonymous.php>`
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
 
+------
 
 .. _common-alternatives:
 
@@ -2742,6 +2820,7 @@ may be rewritten in :
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
 
+------
 
 .. _compare-hash:
 
@@ -2779,6 +2858,7 @@ See also `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_.
 | Analyzers    | :ref:`Security`                                                                                     |
 +--------------+-----------------------------------------------------------------------------------------------------+
 
+------
 
 .. _compared-comparison:
 
@@ -2809,6 +2889,7 @@ See also `Operators Precedence <http://php.net/manual/en/language.operators.prec
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
 
+------
 
 .. _concrete-visibility:
 
@@ -2848,6 +2929,7 @@ See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_.
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
 
+------
 
 .. _confusing-names:
 
@@ -2911,6 +2993,7 @@ See also `How to pick bad function and variable names <http://mojones.net/how-to
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
 
+------
 
 .. _const-with-array:
 
@@ -2926,6 +3009,7 @@ The const keyword supports array since PHP 5.6.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
 
+------
 
 .. _constant-class:
 
@@ -2943,6 +3027,7 @@ As such, they should be PHP constants (build with define or const), or included 
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
 
+------
 
 .. _constant-comparison:
 
@@ -2985,6 +3070,7 @@ Every comparison operator is used when finding the favorite.
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _constant-scalar-expressions:
 
@@ -3022,6 +3108,7 @@ See also `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exp
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
 
+------
 
 .. _constants:
 
@@ -3048,6 +3135,7 @@ List of PHP constants being defined.
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _constants-created-outside-its-namespace:
 
@@ -3084,6 +3172,7 @@ However, this makes the code confusing and difficult to debug. It is recommended
 | Analyzers    | :ref:`Analyze`                       |
 +--------------+--------------------------------------+
 
+------
 
 .. _constants-with-strange-names:
 
@@ -3118,6 +3207,7 @@ See also `Constants <http://php.net/manual/en/language.constants.php>`_.
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
 
+------
 
 .. _could-be-class-constant:
 
@@ -3157,6 +3247,7 @@ Starting with PHP 5.6, even array() may be defined as constants.
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _could-be-else:
 
@@ -3196,6 +3287,7 @@ When two if/then structures follow each other, using a condition and its opposit
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _could-be-private-class-constant:
 
@@ -3243,6 +3335,7 @@ See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _could-be-protected-class-constant:
 
@@ -3296,6 +3389,7 @@ As a general rule, it is recommended to make constant 'private' by default, and 
 | Analyzers    | :ref:`Analyze`                   |
 +--------------+----------------------------------+
 
+------
 
 .. _could-be-protected-method:
 
@@ -3335,6 +3429,7 @@ These properties may even be made private.
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
 
+------
 
 .. _could-be-protected-property:
 
@@ -3373,6 +3468,7 @@ This property may even be made private.
 | Analyzers    | :ref:`Analyze`                   |
 +--------------+----------------------------------+
 
+------
 
 .. _could-be-static:
 
@@ -3397,6 +3493,7 @@ This global is only used in one function or method. It may be called 'static', i
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _could-be-typehinted-callable:
 
@@ -3437,6 +3534,7 @@ See also `Callback / callable <http://php.net/manual/en/language.types.callable.
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _could-make-a-function:
 
@@ -3483,6 +3581,7 @@ The analysis looks for functions calls, and checks the arguments. When the calls
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _could-return-void:
 
@@ -3516,6 +3615,7 @@ The following functions may bear the Void return typeHint.
 | Analyzers    | :ref:`Suggestions`        |
 +--------------+---------------------------+
 
+------
 
 .. _could-typehint:
 
@@ -3552,6 +3652,7 @@ Arguments that are tested with `'instanceof <http://php.net/manual/en/language.o
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _could-use-alias:
 
@@ -3584,6 +3685,7 @@ This long name may be reduced by using an available alias.
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _could-use-compact:
 
@@ -3621,6 +3723,7 @@ See also `compact <http://www.php.net/compact>`_.
 | Analyzers    | :ref:`Suggestions`         |
 +--------------+----------------------------+
 
+------
 
 .. _could-use-short-assignation:
 
@@ -3685,6 +3788,7 @@ See also `Assignation Operators <http://php.net/manual/en/language.operators.ass
 | Analyzers    | :ref:`Analyze`, :ref:`Performances`                                                                         |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _could-use-\_\_dir\_\_:
 
@@ -3722,6 +3826,7 @@ See also `Magic Constants <http://php.net/manual/en/language.constants.predefine
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _could-use-self:
 
@@ -3754,6 +3859,7 @@ It is also routinely used in traits : there, 'self' represents the class in whic
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _could-use-str\_repeat():
 
@@ -3790,6 +3896,7 @@ Making a loop to repeat the same concatenation is actually much longer than usin
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _crc32()-might-be-negative:
 
@@ -3825,6 +3932,7 @@ See also `crc32() <http://php.net/crc32>`_.
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _curly-arrays:
 
@@ -3857,6 +3965,7 @@ See also `Array <http://php.net/manual/en/language.types.array.php>`_.
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _dangling-array-references:
 
@@ -3908,6 +4017,7 @@ See also : `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/maste
 | Analyzers    | :ref:`Analyze`                                                                                            |
 +--------------+-----------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _deep-definitions:
 
@@ -3929,6 +4039,7 @@ Constants definitions are tolerated inside functions : they may be used for avoi
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _define-with-array:
 
@@ -3953,6 +4064,7 @@ PHP 7.0 has the ability to define an array as a constant, using the `'define() <
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _defined-view-property:
 
@@ -3978,6 +4090,7 @@ View variables are set by calling the methods setVariable or setVariables on the
 | Analyzers    | :ref:`ZendFramework`      |
 +--------------+---------------------------+
 
+------
 
 .. _dependant-trait:
 
@@ -4024,6 +4137,7 @@ This may also lead to dead code : when the trait is removed, the host class have
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
 
+------
 
 .. _deprecated-functions:
 
@@ -4055,6 +4169,7 @@ Functions may be still usable : they generate warning that help you track their 
 | Analyzers    | :ref:`Analyze`                                                                            |
 +--------------+-------------------------------------------------------------------------------------------+
 
+------
 
 .. _deprecated-methodcalls-in-cake-3.2:
 
@@ -4077,6 +4192,7 @@ See also `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-
 | Analyzers    | :ref:`Cakephp`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _deprecated-methodcalls-in-cake-3.3:
 
@@ -4094,6 +4210,7 @@ According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appen
 | Analyzers    | :ref:`Cakephp`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _deprecated-static-calls-in-cake-3.3:
 
@@ -4112,6 +4229,7 @@ According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appen
 | Analyzers    | :ref:`Cakephp`                           |
 +--------------+------------------------------------------+
 
+------
 
 .. _deprecated-trait-in-cake-3.3:
 
@@ -4129,6 +4247,7 @@ According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appen
 | Analyzers    | :ref:`Cakephp`                 |
 +--------------+--------------------------------+
 
+------
 
 .. _dereferencing-string-and-arrays:
 
@@ -4157,6 +4276,7 @@ This was added in PHP 5.5. There is no need anymore for an intermediate variable
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +--------------+------------------------------------------------------+
 
+------
 
 .. _direct-injection:
 
@@ -4187,6 +4307,7 @@ The following code act directly upon PHP incoming variables like $_GET and $_POS
 | Analyzers    | :ref:`Security`          |
 +--------------+--------------------------+
 
+------
 
 .. _don't-change-incomings:
 
@@ -4217,6 +4338,7 @@ It is recommended to put the modified values in another variable, and keep the o
 | Analyzers    | :ref:`Analyze`                       |
 +--------------+--------------------------------------+
 
+------
 
 .. _don't-send-this-in-constructor:
 
@@ -4283,6 +4405,7 @@ See also `Don't pass this out of a constructor <http://www.javapractices.com/top
 | Analyzers    | :ref:`Analyze`                    |
 +--------------+-----------------------------------+
 
+------
 
 .. _dont-change-the-blind-var:
 
@@ -4334,6 +4457,7 @@ When the value has to be prepared before usage, then save the filtered value in 
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
 
+------
 
 .. _dont-echo-error:
 
@@ -4369,6 +4493,7 @@ Error messages should be logged, but not displayed.
 | Analyzers    | :ref:`Analyze`, :ref:`Security` |
 +--------------+---------------------------------+
 
+------
 
 .. _double-assignation:
 
@@ -4397,6 +4522,7 @@ This happens when a container (variable, property, array index) is assigned with
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _double-instructions:
 
@@ -4418,6 +4544,7 @@ Twice the same call in a row. This is worth a check.
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _double-array\_flip():
 
@@ -4458,6 +4585,7 @@ Avoid double `'array_flip() <http://www.php.net/array_flip>`_ to gain speed. Whi
 | Analyzers    | :ref:`Performances`          |
 +--------------+------------------------------+
 
+------
 
 .. _drop-else-after-return:
 
@@ -4505,6 +4633,7 @@ This is also true if else has a return, and then not : simply reverse the condit
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _dynamic-library-loading:
 
@@ -4537,6 +4666,7 @@ See also `dl <http://www.php.net/dl>`_.
 | Analyzers    | :ref:`Security`    |
 +--------------+--------------------+
 
+------
 
 .. _echo-or-print:
 
@@ -4579,6 +4709,7 @@ It happens that print, echo or <?= are used depending on coding style and files.
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _echo-with-concat:
 
@@ -4613,6 +4744,7 @@ instead of
 | Analyzers    | :ref:`Performances`, :ref:`Analyze`, :ref:`Suggestions`                                                                               |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _ellipsis-usage:
 
@@ -4650,6 +4782,7 @@ See also `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/varia
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
 
+------
 
 .. _else-if-versus-elseif:
 
@@ -4690,6 +4823,7 @@ Always use elseif instead of else and if.
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _empty-blocks:
 
@@ -4731,6 +4865,7 @@ It is recommended to remove those blocks, so as to reduce confusion in the code.
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _empty-classes:
 
@@ -4763,6 +4898,7 @@ Classes that do no define anything at all. Classes that are directly derived fro
 | Analyzers    | :ref:`Analyze`     |
 +--------------+--------------------+
 
+------
 
 .. _empty-function:
 
@@ -4802,6 +4938,7 @@ Such functions or methods are rarely useful. As a bare minimum, the function sho
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _empty-instructions:
 
@@ -4828,6 +4965,7 @@ Comments that explains the reason of the situation are not taken into account.
 | Analyzers    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _empty-interfaces:
 
@@ -4865,6 +5003,7 @@ See also `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-p
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _empty-list:
 
@@ -4892,6 +5031,7 @@ Empty list() are not allowed anymore in PHP 7. There must be at least one variab
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
 +--------------+-------------------------------------------+
 
+------
 
 .. _empty-namespace:
 
@@ -4944,6 +5084,7 @@ Using bracket-style syntax :
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                        |
 +--------------+-----------------------------------------------------------------------------------------------------+
 
+------
 
 .. _empty-slots-in-arrays:
 
@@ -4966,6 +5107,7 @@ PHP tolerates the last element of an array to be empty.
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _empty-traits:
 
@@ -4998,6 +5140,7 @@ Such traits may be reserved for future use. They may also be forgotten, and dead
 | Analyzers    | :ref:`Analyze`    |
 +--------------+-------------------+
 
+------
 
 .. _empty-try-catch:
 
@@ -5030,6 +5173,7 @@ catch( Exception $e) (PHP 5) or catch(`'Throwable <http://php.net/manual/fr/clas
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _empty-with-expression:
 
@@ -5062,6 +5206,7 @@ Empty With Expression
 | Analyzers    | :ref:`Suggestions`             |
 +--------------+--------------------------------+
 
+------
 
 .. _encoded-simple-letters:
 
@@ -5099,6 +5244,7 @@ This analysis also detect unicode codepoint with superfluous leading zeros.
 | Analyzers    | :ref:`Security`         |
 +--------------+-------------------------+
 
+------
 
 .. _error-messages:
 
@@ -5130,6 +5276,7 @@ Error messages are spotted via `'die <http://www.php.net/die>`_, `'exit <http://
 | Analyzers    | :ref:`ZendFramework`     |
 +--------------+--------------------------+
 
+------
 
 .. _eval()-usage:
 
@@ -5169,6 +5316,7 @@ For PHP 7.0 and later, it is important to put `'eval() <http://www.php.net/eval>
 | Analyzers    | :ref:`Analyze`, :ref:`Performances`, :ref:`Security`                          |
 +--------------+-------------------------------------------------------------------------------+
 
+------
 
 .. _exception-order:
 
@@ -5201,6 +5349,7 @@ When catching exception, the most specialized exceptions must be in the early ca
 | Analyzers    | :ref:`Dead code <dead-code>` |
 +--------------+------------------------------+
 
+------
 
 .. _exit()-usage:
 
@@ -5239,6 +5388,7 @@ Try exiting the function/class with return, or throw exception that may be caugh
 | Analyzers    | :ref:`Analyze`, :ref:`ZendFramework`                                          |
 +--------------+-------------------------------------------------------------------------------+
 
+------
 
 .. _exponent-usage:
 
@@ -5268,6 +5418,7 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
 
+------
 
 .. _failed-substr-comparison:
 
@@ -5302,6 +5453,7 @@ This is also true for negative lengths.
 | Analyzers    | :ref:`Analyze`                     |
 +--------------+------------------------------------+
 
+------
 
 .. _fetch-one-row-format:
 
@@ -5339,6 +5491,7 @@ This is a micro-optimisation. The difference may be visible with 200k rows fetch
 | Analyzers    | :ref:`Performances`            |
 +--------------+--------------------------------+
 
+------
 
 .. _find-key-directly:
 
@@ -5373,6 +5526,7 @@ See also `array_search <http://php.net/array_search>`_ and `array_keys <http://p
 | Analyzers    | :ref:`Suggestions`         |
 +--------------+----------------------------+
 
+------
 
 .. _for-using-functioncall:
 
@@ -5421,6 +5575,7 @@ This is true with any kind of functioncall that returns the same value throughou
 | Analyzers    | :ref:`Analyze`, :ref:`Performances`                                                                           |
 +--------------+---------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _foreach-don't-change-pointer:
 
@@ -5454,6 +5609,7 @@ See also `foreach no longer changes the internal array pointer <http://php.net/m
 | Analyzers    | :ref:`CompatibilityPHP70`    |
 +--------------+------------------------------+
 
+------
 
 .. _foreach-needs-reference-array:
 
@@ -5492,6 +5648,7 @@ This will have an actual effect
 | Analyzers    | :ref:`Analyze`                         |
 +--------------+----------------------------------------+
 
+------
 
 .. _foreach-on-object:
 
@@ -5525,6 +5682,7 @@ Foreach on an object member is a legit PHP syntax, though it is very rare : blin
 | Analyzers    | :ref:`Analyze`    |
 +--------------+-------------------+
 
+------
 
 .. _foreach-reference-is-not-modified:
 
@@ -5560,6 +5718,7 @@ In the spotted loop, reference are used but never modified. They may be removed.
 | Analyzers    | :ref:`Analyze`                           |
 +--------------+------------------------------------------+
 
+------
 
 .. _foreach-with-list():
 
@@ -5604,6 +5763,7 @@ Previously, it was compulsory to extract the data from the blind array :
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`Suggestions` |
 +--------------+--------------------------------------------------------------------------+
 
+------
 
 .. _forgotten-interface:
 
@@ -5641,6 +5801,7 @@ The following classes have been found implementing an interface's methods, thoug
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _forgotten-thrown:
 
@@ -5669,6 +5830,7 @@ An exception is instantiated, but not thrown.
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _forgotten-visibility:
 
@@ -5721,6 +5883,7 @@ See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_ a
 | Analyzers    | :ref:`Analyze`                                                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _forgotten-whitespace:
 
@@ -5750,6 +5913,7 @@ See also `How to fix Headers already sent error in PHP <http://stackoverflow.com
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
 
+------
 
 .. _fully-qualified-constants:
 
@@ -5780,6 +5944,7 @@ Also, the namespace will be absolute, and not a relative namespace of the curren
 | Analyzers    | :ref:`Analyze`                    |
 +--------------+-----------------------------------+
 
+------
 
 .. _function-subscripting:
 
@@ -5822,6 +5987,7 @@ Storing the result in a variable is still useful if the result is actually used 
 | Analyzers    | :ref:`CompatibilityPHP53`       |
 +--------------+---------------------------------+
 
+------
 
 .. _function-subscripting,-old-style:
 
@@ -5857,6 +6023,7 @@ Since PHP 5.4, it is now possible use function results as an array, and access d
 | Analyzers    | :ref:`Analyze`                     |
 +--------------+------------------------------------+
 
+------
 
 .. _functions-removed-in-php-5.4:
 
@@ -5889,6 +6056,7 @@ See also `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54
 | Analyzers    | :ref:`CompatibilityPHP54` |
 +--------------+---------------------------+
 
+------
 
 .. _functions-removed-in-php-5.5:
 
@@ -5904,6 +6072,7 @@ Those functions were removed in PHP 5.5.
 | Analyzers    | :ref:`CompatibilityPHP55` |
 +--------------+---------------------------+
 
+------
 
 .. _getting-last-element:
 
@@ -5947,6 +6116,7 @@ Getting the last element of an array is done with `'count() <http://www.php.net/
 | Analyzers    | :ref:`Performances`       |
 +--------------+---------------------------+
 
+------
 
 .. _global-inside-loop:
 
@@ -5979,6 +6149,7 @@ The global keyword must be out of loops. It is evaluated each loop, slowing the 
 | Analyzers    | :ref:`Performances`          |
 +--------------+------------------------------+
 
+------
 
 .. _global-usage:
 
@@ -5998,6 +6169,7 @@ It is recommended to avoid using global variables, at it makes it very difficult
 | Analyzers    | :ref:`Analyze`                                                                    |
 +--------------+-----------------------------------------------------------------------------------+
 
+------
 
 .. _group-use-declaration:
 
@@ -6041,6 +6213,7 @@ See also `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarat
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _group-use-trailing-comma:
 
@@ -6076,6 +6249,7 @@ See also `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-t
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _hardcoded-passwords:
 
@@ -6107,6 +6281,7 @@ Hardcoding passwords is a bad idea. Not only it make the code difficult to chang
 | Analyzers    | :ref:`Analyze`, :ref:`Security`                                                                               |
 +--------------+---------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _hash-algorithms:
 
@@ -6122,6 +6297,7 @@ There is a long but limited list of hashing algorithm available to PHP. The one 
 | Analyzers    | :ref:`Analyze` |
 +--------------+----------------+
 
+------
 
 .. _hash-algorithms-incompatible-with-php-5.3:
 
@@ -6151,6 +6327,7 @@ fnv132, fnv164 and joaat were added in PHP 5.4.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _hash-algorithms-incompatible-with-php-5.4/5:
 
@@ -6166,6 +6343,7 @@ List of hash algorithms incompatible with PHP 5.4 and 5.5. They were introduced 
 | Analyzers    | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _hash-will-use-objects:
 
@@ -6204,6 +6382,7 @@ See also `Move ext/hash from resources to objects <http://php.net/manual/en/migr
 | Analyzers    | :ref:`CompatibilityPHP72` |
 +--------------+---------------------------+
 
+------
 
 .. _heredoc-delimiter:
 
@@ -6277,6 +6456,7 @@ Generally, one or two delimiters are used, with generic value. It is recommended
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _hexadecimal-in-string:
 
@@ -6314,6 +6494,7 @@ PHP 7.1 and later, emits a 'A non-numeric value encountered' warning, and conver
 | Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------+
 
+------
 
 .. _hidden-use-expression:
 
@@ -6354,6 +6535,7 @@ It is where everyone expect them, and it is less confusing than having them at v
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
 
+------
 
 .. _htmlentities-calls:
 
@@ -6391,6 +6573,7 @@ See also `htmlentities <http://www.php.net/htmlentities>`_ and `htmlspecialchars
 | Analyzers    | :ref:`Analyze`              |
 +--------------+-----------------------------+
 
+------
 
 .. _identical-conditions:
 
@@ -6423,6 +6606,7 @@ This means those expressions may be simplified.
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
 
+------
 
 .. _identical-consecutive-expression:
 
@@ -6459,6 +6643,7 @@ They may be a copy/paste with unmodified content. When the content has to be dup
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _identical-on-both-sides:
 
@@ -6503,6 +6688,28 @@ Operands should be different when comparing or making a logical combination. Of 
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
+
+
+phpmyadmin
+==========
+
+In libraries/classes/DatabaseInterface.php:323.
+
+This code looks like ``($options & DatabaseInterface::QUERY_STORE) == DatabaseInterface::QUERY_STORE``, which would make sense. But PHP precedence is actually executing ``$options & (DatabaseInterface::QUERY_STORE == DatabaseInterface::QUERY_STORE)``, which then doesn't depends on QUERY_STORE but only on $options.
+
+.. code-block:: php
+
+    if ($options & DatabaseInterface::QUERY_STORE == DatabaseInterface::QUERY_STORE) {
+        $tmp = $this->_extension->realQuery('
+            SHOW COUNT(*) WARNINGS', $this->_links[$link], DatabaseInterface::QUERY_STORE
+        );
+        $warnings = $this->fetchRow($tmp);
+    } else {
+        $warnings = 0;
+    }
+
+--------
 
 .. _if-with-same-conditions:
 
@@ -6557,6 +6764,7 @@ Note that if the values used in the condition have been modified in the first if
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _iffectations:
 
@@ -6591,6 +6799,7 @@ They may also be typos, such as if ($x = 3) { ... }, leading to a constant condi
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _illegal-name-for-method:
 
@@ -6623,6 +6832,7 @@ PHP has reserved usage of methods starting with __ for magic methods. It is reco
 | Analyzers    | :ref:`Analyze`    |
 +--------------+-------------------+
 
+------
 
 .. _implement-is-for-interface:
 
@@ -6653,6 +6863,7 @@ PHP defers the implements check until execution : the code in example does lint,
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _implemented-methods-are-public:
 
@@ -6688,6 +6899,7 @@ This error is not reported by lint, but is reported at execution time.
 | Analyzers    | :ref:`Analyze`                      |
 +--------------+-------------------------------------+
 
+------
 
 .. _implicit-global:
 
@@ -6727,6 +6939,7 @@ Global variables, that are used in local scope with global keyword, but are not 
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _implied-if:
 
@@ -6769,6 +6982,7 @@ It is recommended to use a real 'if then' structures, to make the condition read
 | Analyzers    | :ref:`Analyze`                                                                            |
 +--------------+-------------------------------------------------------------------------------------------+
 
+------
 
 .. _inclusion-wrong-case:
 
@@ -6793,6 +7007,7 @@ Inclusion should follow exactly the case of included files and path. This preven
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _incompilable-files:
 
@@ -6826,6 +7041,7 @@ When the code is used as a template for PHP code generation, for example at inst
 | Analyzers    | :ref:`Analyze`                                                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
 
+------
 
 .. _indices-are-int-or-string:
 
@@ -6888,6 +7104,7 @@ This analyzer may find constant definitions, when available.
 | Analyzers    | :ref:`Analyze`                   |
 +--------------+----------------------------------+
 
+------
 
 .. _indirect-injection:
 
@@ -6912,6 +7129,7 @@ Look for injections through indirect usage for GPRC values ($_GET, $_POST, $_REQ
 | Analyzers    | :ref:`Security`            |
 +--------------+----------------------------+
 
+------
 
 .. _instantiating-abstract-class:
 
@@ -6953,6 +7171,7 @@ See also `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php
 | Analyzers    | :ref:`Analyze`                     |
 +--------------+------------------------------------+
 
+------
 
 .. _integer-as-property:
 
@@ -6986,6 +7205,7 @@ If the code must be compatible with previous versions, avoir casting arrays to o
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _interpolation:
 
@@ -7025,6 +7245,7 @@ See also `Double quoted <http://php.net/manual/en/language.types.string.php#lang
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _invalid-constant-name:
 
@@ -7057,6 +7278,7 @@ Constant, when defined using `'define() <http://www.php.net/define>`_ function, 
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
 
+------
 
 .. _invalid-octal-in-string:
 
@@ -7089,6 +7311,7 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 | Analyzers    | :ref:`CompatibilityPHP71` |
 +--------------+---------------------------+
 
+------
 
 .. _invalid-regex:
 
@@ -7123,6 +7346,7 @@ Dynamic regex are only checked for simple values. Dynamic values may eventually 
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _is-actually-zero:
 
@@ -7158,6 +7382,7 @@ This error may also be a simple typo : for example, calculating the difference b
 | Analyzers    | :ref:`Analyze`    |
 +--------------+-------------------+
 
+------
 
 .. _is-zend-framework-1-controller:
 
@@ -7183,6 +7408,7 @@ Mark a class as being a Zend Framework Controller.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _is-zend-framework-1-helper:
 
@@ -7208,6 +7434,7 @@ Mark a class as being a Zend Framework Helper.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _is-zend-view-file:
 
@@ -7236,6 +7463,7 @@ See also `Zend View <https://github.com/zendframework/zend-view>`_.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _isset-multiple-arguments:
 
@@ -7270,6 +7498,7 @@ See also `isset <http://www.php.net/`'isset <http://www.php.net/isset>`_>`_.
 | Analyzers    | :ref:`Suggestions`    |
 +--------------+-----------------------+
 
+------
 
 .. _isset-with-constant:
 
@@ -7300,6 +7529,7 @@ This is a backward incompatibility.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _join-file():
 
@@ -7340,6 +7570,73 @@ Always use `'file_get_contents() <http://www.php.net/file_get_contents>`_ to get
 | Analyzers    | :ref:`Performances`   |
 +--------------+-----------------------+
 
+------
+
+
+wordpress
+=========
+
+In wp-admin/includes/misc.php:74.
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
+--------
+
+
+spip
+====
+
+In ecrire/inc/install.php:109.
+
+When the file is not accessible, file() returns null, and can't be processed by join(). 
+
+.. code-block:: php
+
+    $s = @join('', file($file));
+
+--------
+
+
+expressionengine
+================
+
+In ExpressionEngine_Core2.9.2/system/expressionengine/libraries/simplepie/idn/idna_convert.class.php:100.
+
+join('', ) is used as a replacement for file_get_contents(), which was introduced in PHP 4.3.0.
+
+.. code-block:: php
+
+    if (function_exists('file_get_contents')) {
+        $this->NP = unserialize(file_get_contents(dirname(__FILE__).'/npdata.ser'));
+    } else {
+        $this->NP = unserialize(join('', file(dirname(__FILE__).'/npdata.ser')));
+    }
+
+--------
+
+
+prestashop
+==========
+
+In classes/module/Module.php:2972.
+
+implode('', ) is probably not the slowest part in these lines.
+
+.. code-block:: php
+
+    $override_file = file($override_path);
+    
+    eval(preg_replace(array('#^\s*<\?(?:php)?#', '#class\s+'.$classname.'\s+extends\s+([a-z0-9_]+)(\s+implements\s+([a-z0-9_]+))?#i'), array(' ', 'class '.$classname.'OverrideOriginal_remove'.$uniq), implode('', $override_file)));
+    $override_class = new ReflectionClass($classname.'OverrideOriginal_remove'.$uniq);
+    
+    $module_file = file($this->getLocalPath().'override/'.$path);
+    eval(preg_replace(array('#^\s*<\?(?:php)?#', '#class\s+'.$classname.'(\s+extends\s+([a-z0-9_]+)(\s+implements\s+([a-z0-9_]+))?)?#i'), array(' ', 'class '.$classname.'Override_remove'.$uniq), implode('', $module_file)));
+
+--------
 
 .. _list-short-syntax:
 
@@ -7368,6 +7665,7 @@ Usage of short syntax version of list().
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _list-with-appends:
 
@@ -7417,6 +7715,7 @@ In PHP 5.6, results are :::
 | Analyzers    | :ref:`CompatibilityPHP70` |
 +--------------+---------------------------+
 
+------
 
 .. _list-with-keys:
 
@@ -7441,6 +7740,7 @@ Setting keys when using list() is a PHP 7.1 feature.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _list-with-reference:
 
@@ -7472,6 +7772,7 @@ See also `list() Reference Assignment <https://wiki.php.net/rfc/list_reference_a
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _local-globals:
 
@@ -7515,6 +7816,7 @@ It is recommended to keep the global variables's name distinct from the local va
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _locally-unused-property:
 
@@ -7552,6 +7854,7 @@ While this is syntacticly correct, it is unusual that defined ressources are use
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _logical-mistakes:
 
@@ -7590,6 +7893,7 @@ Based on article from Andrey Karpov  `Logical Expressions in C/C++. Mistakes Mad
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _logical-should-use-symbolic-operators:
 
@@ -7609,6 +7913,7 @@ It is recommended to use the symbol operators, rather than the letter ones.
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions`                                                                |
 +--------------+---------------------------------------------------------------------------------------------------+
 
+------
 
 .. _logical-to-in\_array:
 
@@ -7656,6 +7961,7 @@ See also `in_array() <http://php.net/in_array>`_.
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
 
+------
 
 .. _lone-blocks:
 
@@ -7686,6 +7992,7 @@ Blocks are also valid syntax that group several instructions together, though th
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
 
+------
 
 .. _long-arguments:
 
@@ -7727,6 +8034,7 @@ Literal strings and heredoc strings, including variables, that are over 50 chars
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _lost-references:
 
@@ -7770,6 +8078,7 @@ Do not reassign a reference with another reference. Assign new content to the re
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _magic-visibility:
 
@@ -7808,6 +8117,7 @@ See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 | Analyzers    | :ref:`CompatibilityPHP70` |
 +--------------+---------------------------+
 
+------
 
 .. _make-global-a-property:
 
@@ -7856,6 +8166,7 @@ Setting the property in the constructor (or in a factory), makes the class easie
 | Analyzers    | :ref:`Analyze`              |
 +--------------+-----------------------------+
 
+------
 
 .. _make-one-call-with-array:
 
@@ -7946,6 +8257,7 @@ Potential replacements :
 | Analyzers    | :ref:`Performances`      |
 +--------------+--------------------------+
 
+------
 
 .. _malformed-octal:
 
@@ -7977,6 +8289,7 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _mark-callable:
 
@@ -7992,6 +8305,7 @@ Create an attribute that guess what are the called function or methods, when pos
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _method-used-below:
 
@@ -8036,6 +8350,7 @@ This doesn't mark the current class, nor the (grand-)parent ones.
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _methodcall-on-new:
 
@@ -8073,6 +8388,7 @@ This syntax is interesting when the object is not reused, and may be discarded
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
 
+------
 
 .. _mismatched-default-arguments:
 
@@ -8107,6 +8423,7 @@ Although it is possible to have different default values, it is worth checking w
 | Analyzers    | :ref:`Analyze`                       |
 +--------------+--------------------------------------+
 
+------
 
 .. _mismatched-ternary-alternatives:
 
@@ -8141,6 +8458,7 @@ Ternary operator applies a condition, and yield two different results. Those res
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _mismatched-typehint:
 
@@ -8178,6 +8496,7 @@ Note : This analysis currently doesn't check generalisation of classes : for exa
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _missing-cases-in-switch:
 
@@ -8224,6 +8543,7 @@ In the example, one may argue that the 'c' case is actually handled by the 'defa
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _missing-include:
 
@@ -8257,6 +8577,7 @@ Missing included files may lead to a Fatal error, a warning or other error later
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
 
+------
 
 .. _missing-new-?:
 
@@ -8286,6 +8607,7 @@ Any function definition was found for that function, but a class with that name 
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
 
+------
 
 .. _mistaken-concatenation:
 
@@ -8315,6 +8637,7 @@ A unexpected structure is built for initialization. It may be a typo that create
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _mixed-concat-and-interpolation:
 
@@ -8351,6 +8674,7 @@ This issue doesn't change the output. It makes code less error prone.
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
 +--------------+----------------------------------------------------------------+
 
+------
 
 .. _mixed-keys-arrays:
 
@@ -8381,6 +8705,7 @@ Either switch to a newer version of PHP (5.5 or newer), or make sure the resulti
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +--------------+------------------------------------------------------+
 
+------
 
 .. _mkdir-default:
 
@@ -8414,6 +8739,7 @@ See also `Why 777 Folder Permissions are a Security Risk <https://www.spiralscri
 | Analyzers    | :ref:`Security`       |
 +--------------+-----------------------+
 
+------
 
 .. _modernize-empty-with-expression:
 
@@ -8457,6 +8783,7 @@ See also `empty() <http://www.php.net/manual/en/function.empty.php>`_.
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _multiple-alias-definitions:
 
@@ -8490,6 +8817,7 @@ Across an application, it is recommended to use the same namespace for one alias
 | Analyzers    | :ref:`Analyze`                      |
 +--------------+-------------------------------------+
 
+------
 
 .. _multiple-alias-definitions-per-file:
 
@@ -8522,6 +8850,7 @@ See also `Multiple Alias Definitions`_.
 | Analyzers    | :ref:`Analyze`                            |
 +--------------+-------------------------------------------+
 
+------
 
 .. _multiple-class-declarations:
 
@@ -8560,6 +8889,7 @@ It is recommended to avoid declaring several times the same class in the code. T
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _multiple-classes-in-one-file:
 
@@ -8579,6 +8909,7 @@ One good reason to have multiple classes in one file is to reduce include time b
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _multiple-constant-definition:
 
@@ -8609,6 +8940,7 @@ Multiple definitions may happens at boostrap, when the application code is colle
 | Analyzers    | :ref:`Analyze`                       |
 +--------------+--------------------------------------+
 
+------
 
 .. _multiple-definition-of-the-same-argument:
 
@@ -8640,6 +8972,7 @@ See also `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepa
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _multiple-exceptions-catch():
 
@@ -8688,6 +9021,7 @@ This is a backward incompabitible feature of PHP 7.1.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _multiple-identical-trait-or-interface:
 
@@ -8719,6 +9053,7 @@ Up to PHP 7.1 (at least), this doesn't raise any warning. Traits are only import
 | Analyzers    | :ref:`Analyze`                   |
 +--------------+----------------------------------+
 
+------
 
 .. _multiple-index-definition:
 
@@ -8756,6 +9091,7 @@ They are indeed overwriting each other. This is most probably a typo.
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _multiple-type-variable:
 
@@ -8798,6 +9134,7 @@ Incrementing variables, with math operations or concatenation, is OK : the conte
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _multiples-identical-case:
 
@@ -8841,6 +9178,7 @@ Exakat tries to find the value of the case as much as possible, and ignore any d
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
 
+------
 
 .. _multiply-by-one:
 
@@ -8875,6 +9213,7 @@ If it is used to type cast a value to number, then casting (integer) or (real) i
 | Analyzers    | :ref:`Analyze`                                                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
 
+------
 
 .. _must-return-methods:
 
@@ -8917,6 +9256,7 @@ Methods that may not return, but are often expected to : `'__call() <http://php.
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
 
+------
 
 .. _negative-power:
 
@@ -8948,6 +9288,7 @@ When using negative power, it is clearer to add parenthesis or to use the `'pow(
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _nested-ifthen:
 
@@ -8990,6 +9331,7 @@ Three levels of ifthen is too much. The method should be split into smaller func
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _nested-ternary:
 
@@ -9061,6 +9403,7 @@ However, ternary operators tends to make the syntax very difficult to read when 
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
 
+------
 
 .. _never-used-parameter:
 
@@ -9097,6 +9440,7 @@ Parameter without a default value are reported by PHP, and are usually always fi
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _never-used-properties:
 
@@ -9140,6 +9484,7 @@ Properties that are never used. They are defined, but never actually used.
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _new-constants-in-php-7.2:
 
@@ -9176,6 +9521,7 @@ Note : PHP 7.2 is not out yet (2017-04-10). This list is currently temporary and
 | Analyzers    | :ref:`CompatibilityPHP72` |
 +--------------+---------------------------+
 
+------
 
 .. _new-functions-in-php-5.4:
 
@@ -9191,6 +9537,7 @@ PHP introduced new functions in PHP 5.4. If you have already defined functions w
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
 
+------
 
 .. _new-functions-in-php-5.5:
 
@@ -9206,6 +9553,7 @@ PHP introduced new functions in PHP 5.5. If you have already defined functions w
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +--------------+------------------------------------------------------+
 
+------
 
 .. _new-functions-in-php-5.6:
 
@@ -9221,6 +9569,7 @@ PHP introduced new functions in PHP 5.6. If you have already defined functions w
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
 
+------
 
 .. _new-functions-in-php-7.0:
 
@@ -9245,6 +9594,7 @@ The following functions are now native functions in PHP 7.0. It is advised to ch
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _new-functions-in-php-7.1:
 
@@ -9268,6 +9618,7 @@ The following functions are now native functions in PHP 7.1. It is advised to ch
 | Analyzers    | :ref:`CompatibilityPHP71` |
 +--------------+---------------------------+
 
+------
 
 .. _new-functions-in-php-7.2:
 
@@ -9289,6 +9640,7 @@ The following functions are now native functions in PHP 7.2. It is advised to ch
 | Analyzers    | :ref:`CompatibilityPHP72` |
 +--------------+---------------------------+
 
+------
 
 .. _new-functions-in-php-7.3:
 
@@ -9308,6 +9660,7 @@ The following functions are now native functions in PHP 7.3. It is advised to ch
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _next-month-trap:
 
@@ -9346,6 +9699,7 @@ See also `It is the 31st again <https://twitter.com/rasmus/status/92543173412819
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _no-boolean-as-default:
 
@@ -9385,6 +9739,7 @@ Class constants or constants improve readability when calling the methods.
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _no-choice:
 
@@ -9416,6 +9771,7 @@ Either the condition is useless, and may be removed, or the alternatives needs t
 | Analyzers    | :ref:`Analyze`      |
 +--------------+---------------------+
 
+------
 
 .. _no-class-as-typehint:
 
@@ -9459,6 +9815,7 @@ See also `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-
 | Analyzers    | :ref:`Analyze`              |
 +--------------+-----------------------------+
 
+------
 
 .. _no-class-in-global:
 
@@ -9490,6 +9847,7 @@ Avoid defining structures in Global namespace. Always prefer using a namespace. 
 | Analyzers    | :ref:`Analyze`      |
 +--------------+---------------------+
 
+------
 
 .. _no-count-with-0:
 
@@ -9555,6 +9913,7 @@ Note that this is a micro-optimisation : since PHP keeps track of the number of 
 | Analyzers    | :ref:`Performances`       |
 +--------------+---------------------------+
 
+------
 
 .. _no-direct-call-to-magic-method:
 
@@ -9584,6 +9943,7 @@ Accessing those methods in a static way is also discouraged.
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _no-direct-input-to-wpdb:
 
@@ -9615,6 +9975,7 @@ See also `https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injec
 | Analyzers    | :ref:`Wordpress`              |
 +--------------+-------------------------------+
 
+------
 
 .. _no-direct-usage:
 
@@ -9645,6 +10006,7 @@ For example, `'glob() <http://www.php.net/glob>`_ returns an array, unless some 
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _no-echo-in-route-callable:
 
@@ -9684,6 +10046,7 @@ See `PSR7 <http://www.php-fig.org/psr/psr-7/>`_ and `PSR 7 and Value Objects <ht
 | Analyzers    | :ref:`Slim`                |
 +--------------+----------------------------+
 
+------
 
 .. _no-echo-outside-view:
 
@@ -9734,6 +10097,7 @@ In a controller.php file :
 | Analyzers    | :ref:`ZendFramework`    |
 +--------------+-------------------------+
 
+------
 
 .. _no-empty-regex:
 
@@ -9769,6 +10133,7 @@ See also `PCRE <http://php.net/pcre>`_ and `Delimiters <http://php.net/manual/en
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _no-global-modification:
 
@@ -9800,6 +10165,7 @@ See also `Global Variables <https://codex.wordpress.org/Global_Variables>`_
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _no-hardcoded-hash:
 
@@ -9829,6 +10195,7 @@ Hashes may be MD5, SHA1, SHA512, Bcrypt or any other. Such values must be easily
 | Analyzers    | :ref:`Analyze`, :ref:`Security` |
 +--------------+---------------------------------+
 
+------
 
 .. _no-hardcoded-ip:
 
@@ -9865,6 +10232,7 @@ This may also come handy when testing.
 | Analyzers    | :ref:`Analyze`, :ref:`Security` |
 +--------------+---------------------------------+
 
+------
 
 .. _no-hardcoded-path:
 
@@ -9905,6 +10273,7 @@ Either use `'__FILE__ <http://php.net/manual/en/language.constants.predefined.ph
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
 
+------
 
 .. _no-hardcoded-port:
 
@@ -9933,6 +10302,7 @@ When connecting to a remove server, port is an important information. It is reco
 | Analyzers    | :ref:`Analyze`, :ref:`Security` |
 +--------------+---------------------------------+
 
+------
 
 .. _no-isset-with-empty:
 
@@ -9967,6 +10337,7 @@ From the manual : No warning is generated if the variable does not exist. That m
 | Analyzers    | :ref:`Analyze`              |
 +--------------+-----------------------------+
 
+------
 
 .. _no-list-with-string:
 
@@ -10000,6 +10371,7 @@ See also `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migrat
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _no-magic-with-array:
 
@@ -10054,6 +10426,7 @@ See also `Overload <http://php.net/manual/en/language.oop5.overloading.php#objec
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _no-need-for-else:
 
@@ -10110,6 +10483,7 @@ See also `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/obje
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _no-net-for-xml-load:
 
@@ -10139,6 +10513,7 @@ See also `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThin
 | Analyzers    | :ref:`Security`          |
 +--------------+--------------------------+
 
+------
 
 .. _no-parenthesis-for-language-construct:
 
@@ -10158,6 +10533,7 @@ It it better to avoid using parenthesis with echo, print, return, throw, include
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions`                                                                                                        |
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _no-plus-one:
 
@@ -10196,6 +10572,7 @@ Incrementing a variable should be done with the ++ or -- operators. Any other wa
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _no-public-access:
 
@@ -10230,6 +10607,7 @@ The properties below are declared with public access, but are never used publicl
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _no-real-comparison:
 
@@ -10273,6 +10651,7 @@ Use precision formulas with `'abs() <http://www.php.net/abs>`_ to approximate va
 | Analyzers    | :ref:`Analyze`                                                                                      |
 +--------------+-----------------------------------------------------------------------------------------------------+
 
+------
 
 .. _no-reference-on-left-side:
 
@@ -10307,6 +10686,7 @@ Note that PHP won't compile the code if the operator is a short operator (+=, .=
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _no-return-or-throw-in-finally:
 
@@ -10367,6 +10747,7 @@ See also `Return Inside Finally Block <https://www.owasp.org/index.php/Return_In
 | Analyzers    | :ref:`Security`              |
 +--------------+------------------------------+
 
+------
 
 .. _no-return-used:
 
@@ -10410,6 +10791,7 @@ This analysis supports functions and static methods, when a definition may be fo
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _no-self-referencing-constant:
 
@@ -10447,6 +10829,7 @@ The code needs to reference the full class's name to do so, without using the cu
 | Analyzers    | :ref:`Analyze`                    |
 +--------------+-----------------------------------+
 
+------
 
 .. _no-string-with-append:
 
@@ -10476,6 +10859,7 @@ This was possible in PHP 5, but is now forbidden in PHP 7.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _no-substr-minus-one:
 
@@ -10505,6 +10889,7 @@ Seel also `Generalize support of negative string offsets <https://wiki.php.net/r
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _no-substr()-one:
 
@@ -10546,6 +10931,7 @@ Beware that substr() and $v[$pos] are similar, while `'mb_substr() <http://www.p
 | Analyzers    | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions` |
 +--------------+------------------------------------------------------------------------------------+
 
+------
 
 .. _no-array\_merge()-in-loops:
 
@@ -10603,6 +10989,7 @@ Note that `'array_merge_recursive() <http://www.php.net/array_merge_recursive>`_
 | Analyzers    | :ref:`Analyze`, :ref:`Performances`                                                                         |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _no-get\_class()-with-null:
 
@@ -10637,6 +11024,7 @@ It is not possible to pass explicitly null to get_class() to get the current's c
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _non-ascii-variables:
 
@@ -10672,6 +11060,7 @@ See also `Variables <http://php.net/manual/en/language.variables.basics.php>`_.
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _non-static-methods-called-in-a-static:
 
@@ -10728,6 +11117,7 @@ See also `static keyword <http://php.net/manual/en/language.oop5.static.php>`_.
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+----------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _non-constant-index-in-array:
 
@@ -10773,6 +11163,7 @@ Note that PHP 7.2 removes the support for this feature : `PHP RFC: Deprecate and
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _non-lowercase-keywords:
 
@@ -10807,6 +11198,7 @@ PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing 
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _nonce-creation:
 
@@ -10836,6 +11228,7 @@ See also `Wordpress Nonce <https://codex.wordpress.org/WordPress_Nonces>`_.
 | Analyzers    | :ref:`Wordpress`        |
 +--------------+-------------------------+
 
+------
 
 .. _not-a-scalar-type:
 
@@ -10872,6 +11265,7 @@ See also `Type declarations <http://php.net/manual/en/functions.arguments.php#fu
 | Analyzers    | :ref:`Analyze`    |
 +--------------+-------------------+
 
+------
 
 .. _not-definitions-only:
 
@@ -10908,6 +11302,7 @@ Within this context, globals, use, and namespaces instructions are not considere
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _not-not:
 
@@ -10937,6 +11332,7 @@ This is a wrongly done casting to boolean. PHP supports (boolean) to do the same
 | Analyzers    | :ref:`Analyze`                                                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
 
+------
 
 .. _null-on-new:
 
@@ -10971,6 +11367,7 @@ See also `PHP RFC: Constructor behaviour of internal classes <https://wiki.php.n
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _objects-don't-need-references:
 
@@ -11013,6 +11410,7 @@ See also `Passing by reference <http://php.net/manual/en/language.references.pas
 | Analyzers    | :ref:`Analyze`                                                                                                  |
 +--------------+-----------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _old-style-constructor:
 
@@ -11069,6 +11467,7 @@ See also `Constructors and Destructors ¶ <http://php.net/manual/en/language.oop
 | Analyzers    | :ref:`Analyze`                                                                                          |
 +--------------+---------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _old-style-\_\_autoload():
 
@@ -11110,6 +11509,7 @@ See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.ph
 | Analyzers    | :ref:`Analyze`                                                                                      |
 +--------------+-----------------------------------------------------------------------------------------------------+
 
+------
 
 .. _one-letter-functions:
 
@@ -11141,6 +11541,7 @@ One letter functions seems to be really short for a meaningful name. This may ha
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _one-variable-string:
 
@@ -11179,6 +11580,7 @@ If the goal is to convert it to a string, use the type casting (string) operator
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _only-variable-passed-by-reference:
 
@@ -11209,6 +11611,7 @@ This analysis currently covers functioncalls and static methodcalls, but omits m
 | Analyzers    | :ref:`Analyze`                          |
 +--------------+-----------------------------------------+
 
+------
 
 .. _only-variable-returned-by-reference:
 
@@ -11245,6 +11648,7 @@ Anything else, like literals or static expressions, yield a warning at execution
 | Analyzers    | :ref:`Analyze`                             |
 +--------------+--------------------------------------------+
 
+------
 
 .. _or-die:
 
@@ -11274,6 +11678,7 @@ Interrupting a script will leave the application with a blank page, will make yo
 | Analyzers    | :ref:`Analyze`                                                                            |
 +--------------+-------------------------------------------------------------------------------------------+
 
+------
 
 .. _order-of-declaration:
 
@@ -11315,6 +11720,7 @@ Optional characteristics, like final, static... are not specified. Special metho
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _overwriting-variable:
 
@@ -11347,6 +11753,7 @@ Note that accumulators, like += .=  or [] etc., that are meant to collect lots o
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
 
+------
 
 .. _overwritten-exceptions:
 
@@ -11380,6 +11787,7 @@ In catch blocks, it is good practice not to overwrite the incoming exception, as
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _overwritten-literals:
 
@@ -11417,6 +11825,7 @@ This analysis doesn't take into account the distance between two assignations : 
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
 
+------
 
 .. _php-7.0-new-classes:
 
@@ -11454,6 +11863,7 @@ There are 8 new classes : Error, `'ParseError <http://php.net/manual/fr/class.pa
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _php-7.0-new-interfaces:
 
@@ -11469,6 +11879,7 @@ The following interfaces are introduced in PHP 7.0. They shouldn't be defined in
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _php-7.0-removed-directives:
 
@@ -11484,6 +11895,7 @@ List of directives that are removed in PHP 7.0.
 | Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP73` |
 +--------------+---------------------------------------------------------------------------------+
 
+------
 
 .. _php-7.1-microseconds:
 
@@ -11531,6 +11943,7 @@ See also `Backward incompatible changes <http://php.net/manual/en/migration71.in
 | Analyzers    | :ref:`CompatibilityPHP71` |
 +--------------+---------------------------+
 
+------
 
 .. _php-7.1-removed-directives:
 
@@ -11546,6 +11959,7 @@ List of directives that are removed in PHP 7.1.
 | Analyzers    | :ref:`CompatibilityPHP71` |
 +--------------+---------------------------+
 
+------
 
 .. _php-7.2-deprecations:
 
@@ -11570,6 +11984,7 @@ Deprecated functions and extensions are reported in a separate analysis.
 | Analyzers    | :ref:`CompatibilityPHP72` |
 +--------------+---------------------------+
 
+------
 
 .. _php-7.2-object-keyword:
 
@@ -11601,6 +12016,7 @@ See also `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_.
 | Analyzers    | :ref:`CompatibilityPHP72` |
 +--------------+---------------------------+
 
+------
 
 .. _php-7.2-removed-functions:
 
@@ -11619,6 +12035,7 @@ The following PHP native functions were removed in PHP 7.2.
 | Analyzers    | :ref:`CompatibilityPHP72` |
 +--------------+---------------------------+
 
+------
 
 .. _php-7.3-last-empty-argument:
 
@@ -11659,6 +12076,7 @@ See also `Allow a trailing comma in function calls <https://wiki.php.net/rfc/tra
 | Analyzers    | :ref:`CompatibilityPHP73`  |
 +--------------+----------------------------+
 
+------
 
 .. _php-70-removed-functions:
 
@@ -11699,6 +12117,7 @@ The following PHP native functions were removed in PHP 7.0.
 | Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------+
 
+------
 
 .. _php-72-removed-classes:
 
@@ -11714,6 +12133,7 @@ No PHP native classes was removed in PHP 7.2.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _php-72-removed-interfaces:
 
@@ -11733,6 +12153,7 @@ The following PHP native interfaces were removed in PHP 7.2.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _php-keywords-as-names:
 
@@ -11767,6 +12188,7 @@ PHP does check that a number of structures, such as classes, methods, interfaces
 | Analyzers    | :ref:`Analyze`    |
 +--------------+-------------------+
 
+------
 
 .. _php5-indirect-variable-expression:
 
@@ -11814,6 +12236,7 @@ See `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _php7-dirname:
 
@@ -11842,6 +12265,7 @@ With PHP 7, dirname has a second argument that represents the number of parent f
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Suggestions` |
 +--------------+--------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _parent-first:
 
@@ -11892,6 +12316,7 @@ This analysis cannot be applied to Exceptions.
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _parent,-static-or-self-outside-class:
 
@@ -11931,6 +12356,7 @@ Static may be used in a function or a closure, but not globally.
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _parenthesis-as-parameter:
 
@@ -11958,6 +12384,7 @@ Using parenthesis around parameters used to silent some internal check. This is 
 | Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _pathinfo()-returns-may-vary:
 
@@ -12000,6 +12427,7 @@ The same applies to `'parse_url() <http://www.php.net/parse_url>`_, which return
 | Analyzers    | :ref:`Analyze`      |
 +--------------+---------------------+
 
+------
 
 .. _php-7-indirect-expression:
 
@@ -12044,6 +12472,7 @@ See also `Changes to variable handling <http://php.net/manual/en/migration70.inc
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _php-7.1-new-class:
 
@@ -12072,6 +12501,7 @@ The new class is : ReflectionClassConstant. The other class is 'Void' : this is 
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _php-7.2-new-class:
 
@@ -12109,6 +12539,7 @@ The new class is : HashContext.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _php/noreferenceforternary:
 
@@ -12150,6 +12581,7 @@ See also `Null Coalescing Operator <http://php.net/manual/en/language.operators.
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _php7-relaxed-keyword:
 
@@ -12182,6 +12614,7 @@ This was not the case in PHP 5, and will yield parse errors.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _phpinfo:
 
@@ -12211,6 +12644,7 @@ It is advised to never leave that kind of instruction in a production code.
 | Analyzers    | :ref:`Analyze`, :ref:`Security` |
 +--------------+---------------------------------+
 
+------
 
 .. _possible-infinite-loop:
 
@@ -12246,6 +12680,7 @@ It is recommended to check the file resources when they are opened, and always u
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _pre-increment:
 
@@ -12280,6 +12715,7 @@ This is a micro-optimisation. However, its usage is so widespread, including wit
 | Analyzers    | :ref:`Analyze`, :ref:`Performances` |
 +--------------+-------------------------------------+
 
+------
 
 .. _prepare-placeholder:
 
@@ -12316,6 +12752,7 @@ See also `'vprintf() <http://www.php.net/vprintf>`_ and `Disclosure: WordPress W
 | Analyzers    | :ref:`Wordpress`             |
 +--------------+------------------------------+
 
+------
 
 .. _preprocess-arrays:
 
@@ -12386,6 +12823,7 @@ If the array has to be completed rather than created, it is also faster to use +
 | Analyzers    | none                    |
 +--------------+-------------------------+
 
+------
 
 .. _preprocessable:
 
@@ -12422,6 +12860,7 @@ By doing so, this will reduce the amount of work of PHP.
 | Analyzers    | :ref:`Analyze`, :ref:`Analyze` |
 +--------------+--------------------------------+
 
+------
 
 .. _print-and-die:
 
@@ -12457,6 +12896,7 @@ When stopping a script with `'die() <http://www.php.net/die>`_, it is possible t
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _printf-number-of-arguments:
 
@@ -12497,6 +12937,7 @@ See also `printf <http://php.net/printf>`_ and `sprintf <http://php.net/sprintf>
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _property-could-be-local:
 
@@ -12530,6 +12971,7 @@ Public properties are omitted here : they may be modified anywhere in the code.
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _property-could-be-private-method:
 
@@ -12577,6 +13019,7 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _property-could-be-private-property:
 
@@ -12624,6 +13067,7 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _property-used-in-one-method-only:
 
@@ -12681,6 +13125,7 @@ Note : properties used only once are not returned by this analysis. They are omi
 | Analyzers    | :ref:`Analyze`                      |
 +--------------+-------------------------------------+
 
+------
 
 .. _property-variable-confusion:
 
@@ -12713,6 +13158,7 @@ Sometimes, when the property is going to be replaced by the incoming argument, o
 | Analyzers    | :ref:`Analyze`                       |
 +--------------+--------------------------------------+
 
+------
 
 .. _queries-in-loops:
 
@@ -12767,6 +13213,7 @@ This optimisation is not always possible : for example, some SQL queries may not
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _random-without-try:
 
@@ -12800,6 +13247,7 @@ random_int() and random_bytes() emit Exceptions if they meet a problem. This way
 | Analyzers    | :ref:`Security`             |
 +--------------+-----------------------------+
 
+------
 
 .. _randomly-sorted-arrays:
 
@@ -12836,6 +13284,7 @@ Unless order is important, it is recommended to always use the same order when d
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _redeclared-php-functions:
 
@@ -12867,6 +13316,7 @@ This is possible when managing some backward compatibility, like emulating an ol
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _redefined-class-constants:
 
@@ -12906,6 +13356,7 @@ It is recommended to use distinct names.
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _redefined-default:
 
@@ -12935,6 +13386,7 @@ Classes allows properties to be set with a default value. When those properties 
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _register-globals:
 
@@ -12970,6 +13422,7 @@ Mimicking register_globals is achieved with variables variables, `'extract() <ht
 | Analyzers    | :ref:`Security`          |
 +--------------+--------------------------+
 
+------
 
 .. _relay-function:
 
@@ -13000,6 +13453,7 @@ Relay functions are typical of transition API, where an old API have to be prese
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _repeated-regex:
 
@@ -13039,6 +13493,7 @@ Regex that are repeated at least once (aka, used twice or more) are reported. Re
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _repeated-print():
 
@@ -13072,6 +13527,7 @@ It is recommended to use echo with multiple arguments, or a concatenation with p
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions`                                                                |
 +--------------+---------------------------------------------------------------------------------------------------+
 
+------
 
 .. _reserved-keywords-in-php-7:
 
@@ -13101,6 +13557,7 @@ See also `List of other reserved words <http://php.net/manual/en/reserved.other-
 | Analyzers    | :ref:`CompatibilityPHP70` |
 +--------------+---------------------------+
 
+------
 
 .. _results-may-be-missing:
 
@@ -13124,6 +13581,7 @@ preg_match() may return empty values, if the search fails. It is important to ch
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
 
+------
 
 .. _rethrown-exceptions:
 
@@ -13155,6 +13613,7 @@ Those issues often happen when a catch structure was positioned for debug purpos
 | Analyzers    | :ref:`Dead code <dead-code>` |
 +--------------+------------------------------+
 
+------
 
 .. _return-true-false:
 
@@ -13210,6 +13669,7 @@ This may be applied to assignations and ternary operators too.
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _return-with-parenthesis:
 
@@ -13225,6 +13685,7 @@ PHP tolerates parenthesis for the argument of a return statement, but it is reco
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _reuse-variable:
 
@@ -13255,6 +13716,7 @@ A variable is already holding the content that is re-calculated later. Use the c
 | Analyzers    | :ref:`Suggestions`       |
 +--------------+--------------------------+
 
+------
 
 .. _safe-curl-options:
 
@@ -13286,6 +13748,7 @@ With those tests (by default), the certificate is verified, and if it isn't vali
 | Analyzers    | :ref:`Security`      |
 +--------------+----------------------+
 
+------
 
 .. _same-conditions-in-condition:
 
@@ -13331,6 +13794,7 @@ This analysis returns false positive when there are attempt to fix the situation
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _same-variables-foreach:
 
@@ -13372,6 +13836,7 @@ The source will also be destroyed immediately after the blind variable has been 
 | Analyzers    | :ref:`Analyze`              |
 +--------------+-----------------------------+
 
+------
 
 .. _scalar-or-object-property:
 
@@ -13444,6 +13909,7 @@ See also `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
 
+------
 
 .. _scalar-typehint-usage:
 
@@ -13476,6 +13942,7 @@ See also `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _sequences-in-for:
 
@@ -13505,6 +13972,7 @@ It is recommended not to use it.
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _session-lazy-write:
 
@@ -13542,6 +14010,7 @@ See also ` <https://wiki.php.net/rfc/session-read_only-lazy_write>`_ and the `Se
 | Analyzers    | :ref:`Security`           |
 +--------------+---------------------------+
 
+------
 
 .. _set-cookie-safe-arguments:
 
@@ -13587,6 +14056,7 @@ See also `'setcookie() <http://www.php.net/setcookie>`_ on the manual for more i
 | Analyzers    | :ref:`Security`        |
 +--------------+------------------------+
 
+------
 
 .. _setlocale()-uses-constants:
 
@@ -13621,6 +14091,7 @@ The PHP 5 usage of strings (same name as above, enclosed in ' or ") is not legit
 | Analyzers    | :ref:`CompatibilityPHP70`          |
 +--------------+------------------------------------+
 
+------
 
 .. _several-instructions-on-the-same-line:
 
@@ -13662,6 +14133,7 @@ See also `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/obje
 | Analyzers    | :ref:`Analyze`                    |
 +--------------+-----------------------------------+
 
+------
 
 .. _short-open-tags:
 
@@ -13677,6 +14149,7 @@ Usage of short open tags is discouraged. The following files were found to be im
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _short-syntax-for-arrays:
 
@@ -13709,6 +14182,7 @@ See also `Array <http://php.net/manual/en/language.types.array.php>`_.
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
 
+------
 
 .. _should-always-prepare:
 
@@ -13747,6 +14221,7 @@ See also `zend-db documentation <https://github.com/zendframework/zend-db/blob/m
 | Analyzers    | :ref:`ZendFramework`     |
 +--------------+--------------------------+
 
+------
 
 .. _should-be-single-quote:
 
@@ -13783,6 +14258,7 @@ If you have too many of them, don't loose your time switching them all. If you h
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>`                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
 
+------
 
 .. _should-chain-exception:
 
@@ -13817,6 +14293,7 @@ See also `Exception::`'__construct <http://php.net/manual/en/language.oop5.decon
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _should-make-alias:
 
@@ -13859,6 +14336,7 @@ Finally, short names makes the rest of the code readable.
 | Analyzers    | :ref:`Analyze`, :ref:`ZendFramework` |
 +--------------+--------------------------------------+
 
+------
 
 .. _should-make-ternary:
 
@@ -13902,6 +14380,7 @@ This way, they are less verbose, compatible with assignation and easier to read.
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _should-regenerate-session-id:
 
@@ -13938,6 +14417,7 @@ See `Zend Session <https://docs.zendframework.com/zend-session/manager/>`_,
 | Analyzers    | :ref:`ZendFramework`            |
 +--------------+---------------------------------+
 
+------
 
 .. _should-typecast:
 
@@ -13969,6 +14449,7 @@ This is a micro-optimisation, although such conversion may be use multiple time,
 | Analyzers    | :ref:`Analyze`      |
 +--------------+---------------------+
 
+------
 
 .. _should-use-coalesce:
 
@@ -14001,6 +14482,7 @@ Sample extracted from PHP docs `Isset Ternary <https://wiki.php.net/rfc/isset_te
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _should-use-constants:
 
@@ -14028,6 +14510,7 @@ The following functions have related constants that should be used as arguments,
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _should-use-foreach:
 
@@ -14066,6 +14549,7 @@ Foreach() is the modern loop : it maps automatically every element of the array 
 | Analyzers    | :ref:`Suggestions`          |
 +--------------+-----------------------------+
 
+------
 
 .. _should-use-function:
 
@@ -14109,6 +14593,7 @@ See also `blog post <http://veewee.github.io/blog/optimizing-php-performance-by-
 | Analyzers    | :ref:`Performances`   |
 +--------------+-----------------------+
 
+------
 
 .. _should-use-local-class:
 
@@ -14163,6 +14648,7 @@ Note that a method using a class constant is not considered as using the local c
 | Analyzers    | :ref:`Analyze`                                                                          |
 +--------------+-----------------------------------------------------------------------------------------+
 
+------
 
 .. _should-use-math:
 
@@ -14212,6 +14698,7 @@ See also `Mathematical Functions <http://php.net/manual/en/book.math.php>`_.
 | Analyzers    | :ref:`Suggestions`       |
 +--------------+--------------------------+
 
+------
 
 .. _should-use-prepared-statement:
 
@@ -14254,6 +14741,7 @@ Same code, without preparation :
 | Analyzers    | :ref:`Analyze`, :ref:`Security`     |
 +--------------+-------------------------------------+
 
+------
 
 .. _should-use-setcookie():
 
@@ -14288,6 +14776,7 @@ See also : `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Header
 | Analyzers    | :ref:`Analyze`   |
 +--------------+------------------+
 
+------
 
 .. _should-use-array\_column():
 
@@ -14330,6 +14819,7 @@ See also `[blog] `'array_column() <http://www.php.net/array_column>`_ <https://b
 | Analyzers    | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
 +--------------+---------------------------------------------------------+
 
+------
 
 .. _should-use-array\_filter():
 
@@ -14370,6 +14860,7 @@ See also `array_filter <https://php.net/array_filter>`_.
 | Analyzers    | :ref:`Suggestions`       |
 +--------------+--------------------------+
 
+------
 
 .. _should-use-session\_regenerateid():
 
@@ -14410,6 +14901,7 @@ See `session_regenerateid() <http://php.net/session_regenerate_id>`_ and `PHP Se
 | Analyzers    | :ref:`Security`                       |
 +--------------+---------------------------------------+
 
+------
 
 .. _silently-cast-integer:
 
@@ -14454,6 +14946,7 @@ This applies to binary (0b10101...), octals (0123123...) and hexadecimals (0xfff
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _simple-global-variable:
 
@@ -14484,6 +14977,7 @@ The global keyword should only be used with simple variables. Since PHP 7, it ca
 | Analyzers    | :ref:`CompatibilityPHP70`       |
 +--------------+---------------------------------+
 
+------
 
 .. _simple-switch:
 
@@ -14539,6 +15033,7 @@ See also `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch
 | Analyzers    | :ref:`Performances`       |
 +--------------+---------------------------+
 
+------
 
 .. _simplify-regex:
 
@@ -14568,6 +15063,7 @@ PRCE regex are a powerful way to search inside strings, but they also come at th
 | Analyzers    | :ref:`Performances`   |
 +--------------+-----------------------+
 
+------
 
 .. _slice-arrays-first:
 
@@ -14597,6 +15093,7 @@ The gain produced here is greater with longer arrays, or greater reductions. The
 | Analyzers    | :ref:`Performances`, :ref:`Suggestions` |
 +--------------+-----------------------------------------+
 
+------
 
 .. _slimphp-1.0.0-undefined-classes:
 
@@ -14616,6 +15113,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-1.1.0-undefined-classes:
 
@@ -14637,6 +15135,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-1.2.0-undefined-classes:
 
@@ -14658,6 +15157,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-1.3.0-undefined-classes:
 
@@ -14679,6 +15179,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-1.5.0-undefined-classes:
 
@@ -14700,6 +15201,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-1.6.0-undefined-classes:
 
@@ -14721,6 +15223,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-2.0.0-undefined-classes:
 
@@ -14742,6 +15245,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-2.1.0-undefined-classes:
 
@@ -14761,6 +15265,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-2.2.0-undefined-classes:
 
@@ -14781,6 +15286,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-2.3.0-undefined-classes:
 
@@ -14802,6 +15308,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-2.4.0-undefined-classes:
 
@@ -14821,6 +15328,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-2.5.0-undefined-classes:
 
@@ -14842,6 +15350,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-2.6.0-undefined-classes:
 
@@ -14861,6 +15370,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-3.0.0-undefined-classes:
 
@@ -14882,6 +15392,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-3.1.0-undefined-classes:
 
@@ -14901,6 +15412,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-3.2.0-undefined-classes:
 
@@ -14922,6 +15434,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-3.3.0-undefined-classes:
 
@@ -14943,6 +15456,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-3.4.0-undefined-classes:
 
@@ -14964,6 +15478,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-3.5.0-undefined-classes:
 
@@ -14985,6 +15500,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-3.6.0-undefined-classes:
 
@@ -15004,6 +15520,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-3.7.0-undefined-classes:
 
@@ -15023,6 +15540,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slimphp-3.8.0-undefined-classes:
 
@@ -15044,6 +15562,7 @@ See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https:
 | Analyzers    | :ref:`Slim`    |
 +--------------+----------------+
 
+------
 
 .. _slow-functions:
 
@@ -15099,6 +15618,7 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
 | Analyzers    | :ref:`Performances`                                                                                                 |
 +--------------+---------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _sqlite3-requires-single-quotes:
 
@@ -15133,6 +15653,7 @@ See also `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.p
 | Analyzers    | :ref:`Security`                      |
 +--------------+--------------------------------------+
 
+------
 
 .. _static-loop:
 
@@ -15176,6 +15697,7 @@ It is recommended to turn a static loop into an expression that avoid the loop. 
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
 
+------
 
 .. _static-methods-called-from-object:
 
@@ -15208,6 +15730,7 @@ To maintain code readability, it is recommended to call static method in a stati
 | Analyzers    | :ref:`Analyze`                        |
 +--------------+---------------------------------------+
 
+------
 
 .. _static-methods-can't-contain-$this:
 
@@ -15248,6 +15771,7 @@ Either, this is not a static method (simply remove the static keyword), or repla
 | Analyzers    | :ref:`Analyze`                                                                              |
 +--------------+---------------------------------------------------------------------------------------------+
 
+------
 
 .. _strange-name-for-constants:
 
@@ -15275,6 +15799,7 @@ Those constants looks like a typo from other names.
 | Analyzers    | none                  |
 +--------------+-----------------------+
 
+------
 
 .. _strange-name-for-variables:
 
@@ -15318,6 +15843,7 @@ See also `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/9492383917
 | Analyzers    | :ref:`Wordpress`, :ref:`Analyze`, :ref:`Analyze` |
 +--------------+--------------------------------------------------+
 
+------
 
 .. _strange-names-for-methods:
 
@@ -15357,6 +15883,7 @@ Those errors most often originate from typos, or quick fixes that 'don't require
 | Analyzers    | none                |
 +--------------+---------------------+
 
+------
 
 .. _strict-comparison-with-booleans:
 
@@ -15409,6 +15936,7 @@ Function `'in_array() <http://www.php.net/in_array>`_ has a third parameter to m
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _string-may-hold-a-variable:
 
@@ -15454,6 +15982,7 @@ However, there are some potential variables in those strings, making it possible
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _strings-with-strange-space:
 
@@ -15491,6 +16020,7 @@ See also `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_, 
 | Analyzers    | :ref:`Analyze`              |
 +--------------+-----------------------------+
 
+------
 
 .. _strpos()-like-comparison:
 
@@ -15537,6 +16067,7 @@ This analyzer list all the `'strpos() <http://www.php.net/strpos>`_-like functio
 | Analyzers    | :ref:`Analyze`                                                                                      |
 +--------------+-----------------------------------------------------------------------------------------------------+
 
+------
 
 .. _structures/couldusearrayfillkeys:
 
@@ -15573,6 +16104,7 @@ See also `array_fill_keys <http://php.net/array_fill_keys>`_.
 | Analyzers    | :ref:`Suggestions`               |
 +--------------+----------------------------------+
 
+------
 
 .. _substring-first:
 
@@ -15604,6 +16136,7 @@ This works with any reduction function instead of substr(), like `'trim() <http:
 | Analyzers    | :ref:`Performances`, :ref:`Suggestions` |
 +--------------+-----------------------------------------+
 
+------
 
 .. _suspicious-comparison:
 
@@ -15640,6 +16173,7 @@ Original idea by Vladimir Reznichenko.
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _switch-fallthrough:
 
@@ -15684,6 +16218,7 @@ See also `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data
 | Analyzers    | :ref:`Security`        |
 +--------------+------------------------+
 
+------
 
 .. _switch-to-switch:
 
@@ -15744,6 +16279,7 @@ Note that if condition that uses strict typing (=== or !==) can't be converted t
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _switch-with-too-many-default:
 
@@ -15780,6 +16316,7 @@ Multiple default happens often with large `'switch() <http://php.net/manual/en/c
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _switch-without-default:
 
@@ -15842,6 +16379,7 @@ Most of the time, `'switch() <http://php.net/manual/en/control-structures.switch
 | Analyzers    | :ref:`Analyze`                                                                                                    |
 +--------------+-------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _ternary-in-concat:
 
@@ -15868,6 +16406,7 @@ To be safe, always add parenthesis when using ternary operator with concatenatio
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _test-then-cast:
 
@@ -15903,6 +16442,7 @@ The cast may introduce a distortion to the value, and still lead to the unwanted
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _throw-functioncall:
 
@@ -15937,6 +16477,7 @@ When the new keyword is forgotten, then the class construtor is used as a functi
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _throw-in-destruct:
 
@@ -15979,6 +16520,7 @@ Thus, it is recommended to avoid throwing exceptions within the `'__destruct <ht
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _thrown-exceptions:
 
@@ -16007,6 +16549,7 @@ All Zend Framework thrown exceptions.
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _throws-an-assignement:
 
@@ -16040,6 +16583,7 @@ The assignement should be removed.
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _timestamp-difference:
 
@@ -16076,6 +16620,7 @@ When the difference is very small, it requires a better way to measure time diff
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
 
+------
 
 .. _too-many-finds:
 
@@ -16115,6 +16660,7 @@ See also `On Taming Repository Classes in Doctrine <https://beberlei.de/2013/03/
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
 
+------
 
 .. _too-many-injections:
 
@@ -16156,6 +16702,7 @@ See also `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _too-many-local-variables:
 
@@ -16235,6 +16782,7 @@ Beyond 15 variables, it becomes difficult to keep track of their name and usage,
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _uncaught-exceptions:
 
@@ -16273,6 +16821,7 @@ Either they will lead to a fatal error, or they have to be caught by a larger ap
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
 
+------
 
 .. _unchecked-resources:
 
@@ -16323,6 +16872,7 @@ See also `resources <http://php.net/manual/en/language.types.resource.php>`_.
 | Analyzers    | :ref:`Analyze`                                                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _unconditional-break-in-loop:
 
@@ -16368,6 +16918,7 @@ Here, `'break <http://php.net/manual/en/control-structures.break.php>`_ may also
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _undefined-caught-exceptions:
 
@@ -16407,6 +16958,7 @@ They may be externally defined, such as in core PHP, extensions or libraries. Ma
 | Analyzers    | :ref:`Dead code <dead-code>`  |
 +--------------+-------------------------------+
 
+------
 
 .. _undefined-class-2.0:
 
@@ -16437,6 +16989,7 @@ See `Zend Framework 2.0 <https://framework.zend.com/manual/2.0/en/index.html>`_.
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _undefined-class-2.1:
 
@@ -16467,6 +17020,7 @@ See `Zend Framework 2.1 <https://framework.zend.com/manual/2.1/en/index.html>`_.
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _undefined-class-2.2:
 
@@ -16497,6 +17051,7 @@ See `Zend Framework 2.2 <https://framework.zend.com/manual/2.2/en/index.html>`_.
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _undefined-class-2.3:
 
@@ -16527,6 +17082,7 @@ See `Zend Framework 2.3 <https://framework.zend.com/manual/2.3/en/index.html>`_.
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _undefined-class-2.4:
 
@@ -16556,6 +17112,7 @@ See `Zend Framework 2.4 <https://framework.zend.com/manual/2.4/en/index.html>`_.
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _undefined-class-2.5:
 
@@ -16582,6 +17139,7 @@ Mark classes, interfaces and traits when they are not available in Zend Framewor
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _undefined-class-3.0:
 
@@ -16608,6 +17166,7 @@ Mark classes, interfaces and traits when they are not available in Zend Framewor
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _undefined-class-constants:
 
@@ -16637,6 +17196,7 @@ Class constants that are used, but never defined. This should yield a fatal erro
 | Analyzers    | none                       |
 +--------------+----------------------------+
 
+------
 
 .. _undefined-classes:
 
@@ -16675,6 +17235,7 @@ or if some external libraries, such as PEAR, are not provided during the analysi
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _undefined-constants:
 
@@ -16707,6 +17268,7 @@ It is recommended to define them all, or to avoid using them.
 | Analyzers    | :ref:`Analyze`, :ref:`Analyze`, :ref:`CompatibilityPHP72` |
 +--------------+-----------------------------------------------------------+
 
+------
 
 .. _undefined-functions:
 
@@ -16737,6 +17299,7 @@ Some functions are called, but not defined in the code. This means that the func
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _undefined-interfaces:
 
@@ -16771,6 +17334,7 @@ Typehint or `'instanceof <http://php.net/manual/en/language.operators.type.php>`
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
 
+------
 
 .. _undefined-parent:
 
@@ -16816,6 +17380,7 @@ See also `parent <http://php.net/manual/en/keyword.parent.php>`_.
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _undefined-properties:
 
@@ -16853,6 +17418,7 @@ See also `Properties <http://php.net/manual/en/language.oop5.properties.php>`_.
 | Analyzers    | :ref:`Analyze`                                                                                                |
 +--------------+---------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _undefined-trait:
 
@@ -16891,6 +17457,7 @@ When the using class or trait is instantiated, PHP emits a a fatal error.
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
 
+------
 
 .. _undefined-zend-1.10:
 
@@ -16908,6 +17475,7 @@ See `Zend Framework 1.10 <https://framework.zend.com/manual/1.10/en/manual.html>
 | Analyzers    | :ref:`ZendFramework`    |
 +--------------+-------------------------+
 
+------
 
 .. _undefined-zend-1.11:
 
@@ -16925,6 +17493,7 @@ See `Zend Framework 1.11 <https://framework.zend.com/manual/1.11/en/manual.html>
 | Analyzers    | :ref:`ZendFramework`    |
 +--------------+-------------------------+
 
+------
 
 .. _undefined-zend-1.12:
 
@@ -16942,6 +17511,7 @@ See `Zend Framework 1.12 <https://framework.zend.com/manual/1.12/en/manual.html>
 | Analyzers    | :ref:`ZendFramework`    |
 +--------------+-------------------------+
 
+------
 
 .. _undefined-zend-1.8:
 
@@ -16959,6 +17529,7 @@ See `Zend Framework 1.8 <https://framework.zend.com/manual/1.8/en/index.html>`_.
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _undefined-zend-1.9:
 
@@ -16976,6 +17547,7 @@ See `Zend Framework 1.9 <https://framework.zend.com/manual/1.9/en/index.html>`_.
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _undefined-static\:\:-or-self\:\::
 
@@ -16991,6 +17563,7 @@ List of all undefined static and self properties and methods.
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _unescaped-variables-in-templates:
 
@@ -17017,6 +17590,7 @@ While this is quite a strict rule, it is good to know when variables are not pro
 | Analyzers    | :ref:`Wordpress`             |
 +--------------+------------------------------+
 
+------
 
 .. _unicode-escape-partial:
 
@@ -17052,6 +17626,7 @@ Is is recommended to check all those strings, and make sure they will behave cor
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _unicode-escape-syntax:
 
@@ -17079,6 +17654,7 @@ Usage of the Unicode Escape syntax, with the \u{xxxxx} format, available since P
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _unitialized-properties:
 
@@ -17116,6 +17692,7 @@ Using default values at property definition, or setting default values in the co
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _unknown-directive-name:
 
@@ -17152,6 +17729,7 @@ The following list has directive mentionned in the code, that are not known from
 | Analyzers    | :ref:`Analyze`    |
 +--------------+-------------------+
 
+------
 
 .. _unknown-pcre2-option:
 
@@ -17184,6 +17762,7 @@ See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.mod
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
 
+------
 
 .. _unkown-regex-options:
 
@@ -17213,6 +17792,7 @@ All other options are not supported, may be ignored or raise an error.
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
 
+------
 
 .. _unpreprocessed-values:
 
@@ -17261,6 +17841,7 @@ Preprocessing could be done anytime the script includes all the needed values to
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
 
+------
 
 .. _unreachable-code:
 
@@ -17321,6 +17902,7 @@ This is dead code, that may be removed.
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Suggestions`                        |
 +--------------+-----------------------------------------------------------------------------------------+
 
+------
 
 .. _unresolved-catch:
 
@@ -17355,6 +17937,7 @@ Catch clauses check that the emitted expression is of the requested Class, but i
 | Analyzers    | :ref:`Dead code <dead-code>`                                                                          |
 +--------------+-------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _unresolved-classes:
 
@@ -17385,6 +17968,7 @@ Check for namespaces and aliases and make sure they are correctly configured.
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _unresolved-instanceof:
 
@@ -17430,6 +18014,7 @@ Make sure the following classes are well defined.
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                    |
 +--------------+-----------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _unresolved-use:
 
@@ -17447,6 +18032,7 @@ The following use instructions cannot be resolved to a class or a namespace. The
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
 
+------
 
 .. _unserialize-second-arg:
 
@@ -17490,6 +18076,7 @@ See also `'unserialize() <http://www.php.net/unserialize>`_;
 | Analyzers    | :ref:`Security`               |
 +--------------+-------------------------------+
 
+------
 
 .. _unset-in-foreach:
 
@@ -17533,6 +18120,7 @@ Unset applied to the variables of a foreach loop are useless, as they are copies
 | Analyzers    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _unthrown-exception:
 
@@ -17550,6 +18138,7 @@ These are exceptions that are defined in the code but never thrown.
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _unused-arguments:
 
@@ -17579,6 +18168,7 @@ Unused argument may have to stay in methods, as the signature is actually define
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _unused-classes:
 
@@ -17597,6 +18187,7 @@ Also, this analyzer may find classes that are, in fact, dynamically loaded.
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _unused-constants:
 
@@ -17628,6 +18219,7 @@ It is recommended to comment them out, and only define them when it is necessary
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _unused-functions:
 
@@ -17656,6 +18248,7 @@ The functions below are unused. They look like deadcode.
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _unused-global:
 
@@ -17681,6 +18274,7 @@ List of global keyword, used in various functions but not actually used in the c
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _unused-inherited-variable-in-closure:
 
@@ -17715,6 +18309,7 @@ See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _unused-interfaces:
 
@@ -17755,6 +18350,7 @@ They should be removed, as they are probably dead code.
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Suggestions` |
 +--------------+------------------------------------------------------------------+
 
+------
 
 .. _unused-label:
 
@@ -17792,6 +18388,7 @@ See also `Goto <http://php.net/manual/en/control-structures.goto.php>`_.
 | Analyzers    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _unused-methods:
 
@@ -17834,6 +18431,7 @@ They are probably dead code, unless they are called dynamically.
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _unused-private-properties:
 
@@ -17869,6 +18467,7 @@ List of all static properties that are not used. They look like dead code.
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _unused-protected-methods:
 
@@ -17921,6 +18520,7 @@ No usage of those methods were found. This analysis is impacted by dynamic metho
 | Analyzers    | :ref:`Dead code <dead-code>`   |
 +--------------+--------------------------------+
 
+------
 
 .. _unused-returned-value:
 
@@ -17967,6 +18567,7 @@ Note that this analysis ignores functions that return void (same meaning that PH
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _unused-static-methods:
 
@@ -18003,6 +18604,7 @@ List of all static methods that are not used. This looks like dead code.
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +--------------+----------------------------------------------+
 
+------
 
 .. _unused-traits:
 
@@ -18038,6 +18640,7 @@ Those traits are not used in a class or another trait. They may be dead code.
 | Analyzers    | :ref:`Analyze`     |
 +--------------+--------------------+
 
+------
 
 .. _unused-use:
 
@@ -18066,6 +18669,7 @@ Unused use statements. They may be removed, as they clutter the code and slows P
 | Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                |
 +--------------+---------------------------------------------------------------------------------------------+
 
+------
 
 .. _unusual-case-for-php-functions:
 
@@ -18090,6 +18694,7 @@ Usually, PHP functions are written all in lower case.
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _unverified-nonce:
 
@@ -18117,6 +18722,7 @@ Nonces were created in the code with  wp_nonce_field(), wp_nonce_url() and wp_no
 | Analyzers    | :ref:`Wordpress`          |
 +--------------+---------------------------+
 
+------
 
 .. _upload-filename-injection:
 
@@ -18171,6 +18777,7 @@ See also `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_,
 | Analyzers    | :ref:`Security`                  |
 +--------------+----------------------------------+
 
+------
 
 .. _use-$wpdb-api:
 
@@ -18202,6 +18809,7 @@ See `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 | Analyzers    | :ref:`Wordpress`     |
 +--------------+----------------------+
 
+------
 
 .. _use-===-null:
 
@@ -18236,6 +18844,7 @@ It is faster to use === null instead of `'is_null() <http://www.php.net/is_null>
 | Analyzers    | :ref:`Analyze`                                                                                                      |
 +--------------+---------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _use-class-operator:
 
@@ -18280,6 +18889,7 @@ This is a micro-optimization.
 | Analyzers    | :ref:`Analyze`, :ref:`Performances` |
 +--------------+-------------------------------------+
 
+------
 
 .. _use-const-and-functions:
 
@@ -18316,6 +18926,7 @@ See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/languag
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
 
+------
 
 .. _use-constant-as-arguments:
 
@@ -18331,6 +18942,7 @@ Some methods and functions are defined to be used with constants as arguments. T
 | Analyzers    | :ref:`Analyze`                   |
 +--------------+----------------------------------+
 
+------
 
 .. _use-count-recursive:
 
@@ -18367,6 +18979,7 @@ See also `count <http://php.net/count>`_.
 | Analyzers    | :ref:`Suggestions`           |
 +--------------+------------------------------+
 
+------
 
 .. _use-instanceof:
 
@@ -18422,6 +19035,7 @@ The `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operat
 | Analyzers    | :ref:`Analyze`, :ref:`Analyze` |
 +--------------+--------------------------------+
 
+------
 
 .. _use-list-with-foreach:
 
@@ -18466,6 +19080,7 @@ See also `list <http://php.net/manual/en/function.list.php>`_ and `foreach <http
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _use-lower-case-for-parent,-static-and-self:
 
@@ -18504,6 +19119,7 @@ Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
 | Analyzers    | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP53` |
 +--------------+------------------------------------------------------+
 
+------
 
 .. _use-named-boolean-in-argument-definition:
 
@@ -18546,6 +19162,7 @@ See also `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_, to
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
 
+------
 
 .. _use-nullable-type:
 
@@ -18570,6 +19187,7 @@ The code uses nullable type, available since PHP 7.1.
 | Analyzers    | :ref:`Suggestions`  |
 +--------------+---------------------+
 
+------
 
 .. _use-object-api:
 
@@ -18637,6 +19255,7 @@ OOP / procedural alternatives are available for `mysqli <http://php.net/manual/e
 | Analyzers    | :ref:`Analyze`                                                                              |
 +--------------+---------------------------------------------------------------------------------------------+
 
+------
 
 .. _use-php7-encapsed-strings:
 
@@ -18677,6 +19296,7 @@ See also `PHP 7 performance improvements (3/5): Encapsed strings optimization <h
 | Analyzers    | :ref:`Performances`              |
 +--------------+----------------------------------+
 
+------
 
 .. _use-pathinfo:
 
@@ -18712,6 +19332,7 @@ When the path contains UTF-8 characters, `'pathinfo() <http://www.php.net/pathin
 | Analyzers    | :ref:`Analyze`  |
 +--------------+-----------------+
 
+------
 
 .. _use-positive-condition:
 
@@ -18762,6 +19383,7 @@ Negative conditions are not reported when else is not present.
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
 
+------
 
 .. _use-slim:
 
@@ -18792,6 +19414,7 @@ See also `Slim <https://www.slimframework.com/>`_.
 | Analyzers    | :ref:`Slim`  |
 +--------------+--------------+
 
+------
 
 .. _use-system-tmp:
 
@@ -18824,6 +19447,7 @@ It is recommended to avoid hardcoding the temporary file. It is better to rely o
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _use-with-fully-qualified-name:
 
@@ -18853,6 +19477,7 @@ PHP manual recommends not to use fully qualified name (starting with \) when usi
 | Analyzers    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
 +--------------+----------------------------------------------------------------+
 
+------
 
 .. _use-wordpress-functions:
 
@@ -18901,6 +19526,7 @@ See `Wordpress Functions <https://codex.wordpress.org/Function_Reference>`_.
 | Analyzers    | :ref:`Wordpress`         |
 +--------------+--------------------------+
 
+------
 
 .. _use-const:
 
@@ -18943,6 +19569,7 @@ This way, constant will be defined at compile time, and not at execution time.
 | Analyzers    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
 +--------------+----------------------------------------------------------------+
 
+------
 
 .. _use-password\_hash():
 
@@ -18958,6 +19585,7 @@ PHP 5.5 introduced `'password_hash() <http://www.php.net/password_hash>`_ and pa
 | Analyzers    | :ref:`CompatibilityPHP55` |
 +--------------+---------------------------+
 
+------
 
 .. _use-pathinfo()-arguments:
 
@@ -19006,6 +19634,7 @@ See also `list <http://php.net/manual/en/function.list.php>`_.
 | Analyzers    | :ref:`Performances` |
 +--------------+---------------------+
 
+------
 
 .. _use-random\_int():
 
@@ -19057,6 +19686,7 @@ See also `CSPRNG <http://php.net/manual/en/book.csprng.php>`_ and `OpenSSL <http
 | Analyzers    | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------------+
 
+------
 
 .. _use-session\_start()-options:
 
@@ -19093,6 +19723,7 @@ This is available since PHP 7.0. It is recommended to set those values in the ph
 | Analyzers    | :ref:`Suggestions`         |
 +--------------+----------------------------+
 
+------
 
 .. _used-once-property:
 
@@ -19139,6 +19770,7 @@ Setting properties with default values is a good way to avoid literring the code
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _used-once-variables:
 
@@ -19177,6 +19809,7 @@ The current analyzer count variables at the application level, and not at a meth
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _used-once-variables-(in-scope):
 
@@ -19211,6 +19844,7 @@ This is the list of used once variables, scope by scope. Those variables are use
 | Analyzers    | :ref:`Analyze`                      |
 +--------------+-------------------------------------+
 
+------
 
 .. _used-protected-method:
 
@@ -19252,6 +19886,7 @@ See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
 | Analyzers    | :ref:`Dead code <dead-code>` |
 +--------------+------------------------------+
 
+------
 
 .. _used-routes:
 
@@ -19282,6 +19917,7 @@ See also `Routing <https://www.slimframework.com/docs/objects/router.html>`_.
 | Analyzers    | :ref:`Slim`     |
 +--------------+-----------------+
 
+------
 
 .. _useless-abstract-class:
 
@@ -19320,6 +19956,7 @@ Abstract classes that have only static methods are omitted here : one usage of s
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _useless-brackets:
 
@@ -19354,6 +19991,7 @@ Standalone brackets may be a left over of an old instruction, or a misunderstand
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _useless-casting:
 
@@ -19387,6 +20025,7 @@ See also `Type juggling <http://php.net/manual/en/language.types.type-juggling.p
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _useless-catch:
 
@@ -19428,6 +20067,7 @@ See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _useless-check:
 
@@ -19463,6 +20103,7 @@ Situation where the condition is useless.
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _useless-constructor:
 
@@ -19497,6 +20138,7 @@ Class constructor that have empty bodies are useless. They may be removed.
 | Analyzers    | :ref:`Analyze`             |
 +--------------+----------------------------+
 
+------
 
 .. _useless-final:
 
@@ -19535,6 +20177,7 @@ See also `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_, an
 | Analyzers    | :ref:`Analyze`                                                                                  |
 +--------------+-------------------------------------------------------------------------------------------------+
 
+------
 
 .. _useless-global:
 
@@ -19570,6 +20213,7 @@ They are : $GLOBALS, $_SERVER, $_GET, $_POST, $_FILES, $_COOKIE, $_SESSION, $_RE
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _useless-instructions:
 
@@ -19627,6 +20271,7 @@ Here the useless instructions that are spotted :
 | Analyzers    | :ref:`Analyze`                                                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _useless-interfaces:
 
@@ -19673,6 +20318,7 @@ Interfaces should be used in Typehint or with the `'instanceof <http://php.net/m
 | Analyzers    | :ref:`Analyze`                                                                                            |
 +--------------+-----------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _useless-parenthesis:
 
@@ -19711,6 +20357,7 @@ Situations where parenthesis are not necessary, and may be removed.
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
 
+------
 
 .. _useless-referenced-argument:
 
@@ -19739,6 +20386,7 @@ This is probably a development artefact that was forgotten. It is better to remo
 | Analyzers    | :ref:`Analyze`                     |
 +--------------+------------------------------------+
 
+------
 
 .. _useless-return:
 
@@ -19775,6 +20423,7 @@ When return is void, and the last element in a function, it is also useless.
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _useless-switch:
 
@@ -19806,6 +20455,7 @@ This switch has only one case. It may very well be replaced by a ifthen structur
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
 
+------
 
 .. _useless-unset:
 
@@ -19847,6 +20497,7 @@ Unsetting variables may not be applicable with a certain type of variables. This
 | Analyzers    | :ref:`Analyze`                                                                                  |
 +--------------+-------------------------------------------------------------------------------------------------+
 
+------
 
 .. _uses-default-values:
 
@@ -19883,6 +20534,7 @@ This analyzer tend to report a lot of false positives, including usage of `'coun
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
 
+------
 
 .. _using-$this-outside-a-class:
 
@@ -19912,6 +20564,7 @@ Starting with PHP 7.1, the PHP engine check thouroughly that $this is used in an
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP71` |
 +--------------+-------------------------------------------+
 
+------
 
 .. _usort-sorting-in-php-7.0:
 
@@ -19967,6 +20620,7 @@ in PHP 7, the result is :::
 | Analyzers    | :ref:`CompatibilityPHP70` |
 +--------------+---------------------------+
 
+------
 
 .. _var-keyword:
 
@@ -20001,6 +20655,7 @@ See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
 | Analyzers    | :ref:`Analyze`                                                                                          |
 +--------------+---------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _variable-global:
 
@@ -20031,6 +20686,7 @@ Variable global such are valid in PHP 5.6, but no in PHP 7.0. They should be rep
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _while(list()-=-each()):
 
@@ -20064,6 +20720,7 @@ See also `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/d
 | Analyzers    | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
 +--------------+---------------------------------------------------------+
 
+------
 
 .. _wordpress-4.0-undefined-classes:
 
@@ -20081,6 +20738,7 @@ Wordpress 4.0 has 223 classes, 0 traits and 1 interfaces.
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _wordpress-4.1-undefined-classes:
 
@@ -20098,6 +20756,7 @@ Wordpress 4.1 has 224 classes, 0 traits and 1 interfaces.
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _wordpress-4.2-undefined-classes:
 
@@ -20115,6 +20774,7 @@ Wordpress 4.2 has 243 classes, 0 traits and 1 interfaces.
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _wordpress-4.3-undefined-classes:
 
@@ -20132,6 +20792,7 @@ Wordpress 4.3 has 243 classes, 0 traits and 1 interfaces.
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _wordpress-4.4-undefined-classes:
 
@@ -20149,6 +20810,7 @@ Wordpress 4.4 has 251 classes, 0 traits and 1 interfaces.
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _wordpress-4.5-undefined-classes:
 
@@ -20166,6 +20828,7 @@ Wordpress 4.5 has 255 classes, 0 traits and 1 interfaces.
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _wordpress-4.6-undefined-classes:
 
@@ -20183,6 +20846,7 @@ Wordpress 4.6 has 315 classes, 0 traits and 5 interfaces.
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _wordpress-4.7-undefined-classes:
 
@@ -20200,6 +20864,7 @@ Wordpress 4.7 has 338 classes, 0 traits and 5 interfaces.
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _wordpress-4.8-undefined-classes:
 
@@ -20217,6 +20882,7 @@ Wordpress 4.8 has 344 classes, 0 traits and 5 interfaces.
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _wordpress-4.9-undefined-classes:
 
@@ -20234,6 +20900,7 @@ Wordpress 4.9 has 349 classes, 0 traits and 5 interfaces.
 | Analyzers    | :ref:`Wordpress`               |
 +--------------+--------------------------------+
 
+------
 
 .. _wordpress-usage:
 
@@ -20249,6 +20916,7 @@ Usage of Wordpress.
 | Analyzers    | :ref:`Wordpress`         |
 +--------------+--------------------------+
 
+------
 
 .. _wpdb-best-usage:
 
@@ -20279,6 +20947,7 @@ See `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 | Analyzers    | :ref:`Wordpress`        |
 +--------------+-------------------------+
 
+------
 
 .. _wpdb-prepare-or-not:
 
@@ -20311,6 +20980,7 @@ When using $wpdb, it is recommended to use directly the query() method when the 
 | Analyzers    | :ref:`Wordpress`           |
 +--------------+----------------------------+
 
+------
 
 .. _written-only-variables:
 
@@ -20342,6 +21012,7 @@ Those variables are being written, but never read. This way, they are useless an
 | Analyzers    | :ref:`Analyze`                                                                                      |
 +--------------+-----------------------------------------------------------------------------------------------------+
 
+------
 
 .. _wrong-class-location:
 
@@ -20363,6 +21034,7 @@ Here are the validation that are currently performed :
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _wrong-number-of-arguments:
 
@@ -20405,6 +21077,7 @@ It is recommended to check the signature of the methods, and fix the arguments.
 | Analyzers    | :ref:`Analyze`                                                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _wrong-optional-parameter:
 
@@ -20446,6 +21119,7 @@ It is better to put all the optional parameters at the end of the method's signa
 | Analyzers    | :ref:`Analyze`                   |
 +--------------+----------------------------------+
 
+------
 
 .. _wrong-parameter-type:
 
@@ -20478,6 +21152,7 @@ The expected parameter is not of the correct type. Check PHP documentation to kn
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _wrong-fopen()-mode:
 
@@ -20514,6 +21189,7 @@ Any other values are not understood by PHP.
 | Analyzers    | :ref:`Analyze` |
 +--------------+----------------+
 
+------
 
 .. _yoda-comparison:
 
@@ -20553,6 +21229,7 @@ See also `Yoda Conditions <https://en.wikipedia.org/wiki/Yoda_conditions>`_,
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
 
+------
 
 .. _zf3-usage-of-deprecated:
 
@@ -20603,6 +21280,7 @@ Currently, parameters are omitted in the analysis.
 | Analyzers    | :ref:`ZendFramework`     |
 +--------------+--------------------------+
 
+------
 
 .. _zend-classes:
 
@@ -20636,6 +21314,7 @@ Classes are detected by checking the full namespaced name with the prefix ``zend
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-interface:
 
@@ -20669,6 +21348,7 @@ Identify Zend Framework interface, based on fully qualified name.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-trait:
 
@@ -20698,6 +21378,7 @@ Identify Zend Framework traits, based on fully qualified name.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-typehinting:
 
@@ -20729,6 +21410,7 @@ Zend classes or interfaces used in `'instanceof <http://php.net/manual/en/langua
 | Analyzers    | :ref:`ZendFramework`  |
 +--------------+-----------------------+
 
+------
 
 .. _zend\config:
 
@@ -20769,6 +21451,7 @@ See also `Zend-config <https://docs.zendframework.com/zend-config/>`_.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _\_\_dir\_\_-then-slash:
 
@@ -20803,6 +21486,7 @@ The magic constant `'__DIR__ <http://php.net/manual/en/language.constants.predef
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
 
+------
 
 .. _\_\_debuginfo()-usage:
 
@@ -20854,6 +21538,7 @@ See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +--------------+---------------------------------------------------------------------------------+
 
+------
 
 .. _\_\_tostring()-throws-exception:
 
@@ -20901,6 +21586,7 @@ See also `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.
 | Analyzers    | :ref:`Analyze`                     |
 +--------------+------------------------------------+
 
+------
 
 .. _crypt()-without-salt:
 
@@ -20936,6 +21622,7 @@ See also `crypt <http://www.php.net/crypt>`_.
 | Analyzers    | :ref:`CompatibilityPHP54`   |
 +--------------+-----------------------------+
 
+------
 
 .. _error\_reporting()-with-integers:
 
@@ -20967,6 +21654,7 @@ Using named constants with error_reporting is strongly encouraged to ensure comp
 | Analyzers    | :ref:`Analyze`                       |
 +--------------+--------------------------------------+
 
+------
 
 .. _eval()-without-try:
 
@@ -21004,6 +21692,7 @@ Note that it will catch situations where `'eval() <http://www.php.net/eval>`_ is
 | Analyzers    | :ref:`Analyze`, :ref:`Security` |
 +--------------+---------------------------------+
 
+------
 
 .. _ext/apc:
 
@@ -21040,6 +21729,7 @@ See also `Alternative PHP Cache <http://php.net/apc>`_.
 | Analyzers    | :ref:`CompatibilityPHP55` |
 +--------------+---------------------------+
 
+------
 
 .. _ext/dba:
 
@@ -21081,6 +21771,7 @@ See also `Database (dbm-style) Abstraction Layer <http://php.net/manual/en/book.
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
 
+------
 
 .. _ext/ereg:
 
@@ -21109,6 +21800,7 @@ See also `Ereg <http://php.net/manual/en/function.ereg.php>`_.
 | Analyzers    | :ref:`CompatibilityPHP70` |
 +--------------+---------------------------+
 
+------
 
 .. _ext/fdf:
 
@@ -21144,6 +21836,7 @@ See also `Form Data Format <http://php.net/manual/en/book.fdf.php>`_.
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
 
+------
 
 .. _ext/mcrypt:
 
@@ -21224,6 +21917,7 @@ See also `extension mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_ and 
 | Analyzers    | :ref:`CompatibilityPHP71` |
 +--------------+---------------------------+
 
+------
 
 .. _ext/mhash:
 
@@ -21254,6 +21948,7 @@ See also `Extension mhash <http://php.net/manual/en/book.mhash.php>`_.
 | Analyzers    | :ref:`CompatibilityPHP54` |
 +--------------+---------------------------+
 
+------
 
 .. _ext/ming:
 
@@ -21315,6 +22010,7 @@ See also `Ming (flash) <http://www.libming.org/>`_ and `Ming <http://www.libming
 | Analyzers    | :ref:`CompatibilityPHP53` |
 +--------------+---------------------------+
 
+------
 
 .. _ext/mysql:
 
@@ -21345,6 +22041,7 @@ See also `Original MySQL API <http://www.php.net/manual/en/book.mysql.php>`_ and
 | Analyzers    | :ref:`CompatibilityPHP55` |
 +--------------+---------------------------+
 
+------
 
 .. _func\_get\_arg()-modified:
 
@@ -21375,6 +22072,7 @@ This code will display 1 in PHP 7, and 0 in PHP 5.
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
 +--------------+-------------------------------------------+
 
+------
 
 .. _include\_once()-usage:
 
@@ -21405,6 +22103,7 @@ Try using autoload for loading classes, or use include() or require() and make i
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
 
+------
 
 .. _list()-may-omit-variables:
 
@@ -21431,6 +22130,7 @@ $b will be 3, and the 2 value will be omitted. This is cleaner, and save some me
 | Analyzers    | :ref:`Analyze`, :ref:`Suggestions` |
 +--------------+------------------------------------+
 
+------
 
 .. _mcrypt\_create\_iv()-with-default-values:
 
@@ -21465,6 +22165,7 @@ See also `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv
 | Analyzers    | :ref:`CompatibilityPHP70`              |
 +--------------+----------------------------------------+
 
+------
 
 .. _parse\_str()-warning:
 
@@ -21499,6 +22200,7 @@ Always use an empty variable a second parameter to `'parse_str() <http://www.php
 | Analyzers    | :ref:`Security`                                                                                       |
 +--------------+-------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _preg\_match\_all()-flag:
 
@@ -21540,6 +22242,7 @@ The second syntax is easier to read and may be marginally faster to execute (pre
 | Analyzers    | :ref:`Suggestions`   |
 +--------------+----------------------+
 
+------
 
 .. _preg\_replace-with-option-e:
 
@@ -21576,6 +22279,7 @@ preg_replace With Option e
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP72` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
+------
 
 .. _self,-parent,-static-outside-class:
 
@@ -21626,6 +22330,7 @@ See also `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
 
+------
 
 .. _set\_exception\_handler()-warning:
 
@@ -21660,6 +22365,7 @@ When in doubt about backward compatibility, just drop the Typehint. Otherwise, u
 | Analyzers    | :ref:`CompatibilityPHP70`   |
 +--------------+-----------------------------+
 
+------
 
 .. _time()-vs-strtotime():
 
@@ -21690,6 +22396,7 @@ This is a micro-optimisation. Relative gain is real, but small unless the functi
 | Analyzers    | :ref:`Performances`          |
 +--------------+------------------------------+
 
+------
 
 .. _var\_dump()...-usage:
 
@@ -21725,6 +22432,7 @@ They may be tolerated during development time, but must be removed so as not to 
 | Analyzers    | :ref:`Analyze`, :ref:`Security`                                                           |
 +--------------+-------------------------------------------------------------------------------------------+
 
+------
 
 .. _zend-authentication-2.5.0-undefined-classes:
 
@@ -21744,6 +22452,7 @@ zend-authentication 2.5.0 has 27 classes, no traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework`      |
 +--------------+---------------------------+
 
+------
 
 .. _zend-authentication-usage:
 
@@ -21763,6 +22472,7 @@ See also : `zend-authentication <https://github.com/zendframework/zend-authentic
 | Analyzers    | :ref:`ZendFramework`    |
 +--------------+-------------------------+
 
+------
 
 .. _zend-barcode-2.5.0-undefined-classes:
 
@@ -21782,6 +22492,7 @@ zend-barcode 2.5.0 has 40 classes, no traits and 5 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-barcode-2.6.0-undefined-classes:
 
@@ -21801,6 +22512,7 @@ zend-barcode 2.6.0 has 40 classes, no traits and 5 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-barcode-usage:
 
@@ -21820,6 +22532,7 @@ See also : `zend-barcode <https://github.com/zendframework/zend-barcode>`_ and `
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-cache-2.5.0-undefined-classes:
 
@@ -21835,6 +22548,7 @@ zend-cache classes, interfaces and traits that are not defined in version 2.5.0.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-cache-2.6.0-undefined-classes:
 
@@ -21850,6 +22564,7 @@ zend-cache classes, interfaces and traits that are not defined in version 2.6.0.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-cache-2.7.0-undefined-classes:
 
@@ -21867,6 +22582,7 @@ zend-cache classes, interfaces and traits that are not defined in version 2.7.0.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-cache-usage:
 
@@ -21882,6 +22598,7 @@ zend-cache usage, based on classes, interfaces and traits. This covers all versi
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-captcha-2.5.0-undefined-classes:
 
@@ -21901,6 +22618,7 @@ zend-captcha 2.5.0 has 13 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-captcha-2.6.0-undefined-classes:
 
@@ -21920,6 +22638,7 @@ zend-captcha 2.6.0 has 13 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-captcha-2.7.0-undefined-classes:
 
@@ -21939,6 +22658,7 @@ zend-captcha 2.7.0 has 13 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-captcha-usage:
 
@@ -21958,6 +22678,7 @@ See also : `zend-captcha <https://github.com/zendframework/zend-captcha>`_ and `
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-code-2.5.0-undefined-classes:
 
@@ -21977,6 +22698,7 @@ zend-code 2.5.0 has 71 classes, no traits and 14 interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-code-2.6.0-undefined-classes:
 
@@ -21997,6 +22719,7 @@ zend-code 2.6.0 has 72 classes, no traits and 14 interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-code-3.0.0-undefined-classes:
 
@@ -22017,6 +22740,7 @@ zend-code 3.0.0 has 73 classes, no traits and 14 interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-code-3.1.0-undefined-classes:
 
@@ -22036,6 +22760,7 @@ zend-code 3.1.0 has 73 classes, no traits and 14 interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-code-3.2.0-undefined-classes:
 
@@ -22056,6 +22781,7 @@ See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-code-usage:
 
@@ -22075,6 +22801,7 @@ See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-config-2.5.x:
 
@@ -22090,6 +22817,7 @@ zend-config, all versions 2.5.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-config-2.6.x:
 
@@ -22105,6 +22833,7 @@ zend-config, all versions 2.6.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-config-3.0.x:
 
@@ -22120,6 +22849,7 @@ zend-config, all versions beyond 3.0.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-config-3.1.x:
 
@@ -22135,6 +22865,7 @@ zend-config, all versions beyond 3.1.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-console-2.5.0-undefined-classes:
 
@@ -22154,6 +22885,7 @@ zend-console 2.5.0 has 27 classes, no traits and 6 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-console-2.6.0-undefined-classes:
 
@@ -22173,6 +22905,7 @@ zend-console 2.6.0 has 27 classes, no traits and 6 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-console-usage:
 
@@ -22192,6 +22925,7 @@ See also : `zend-console <https://github.com/zendframework/zend-console>`_ and `
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-crypt-2.5.0-undefined-classes:
 
@@ -22211,6 +22945,7 @@ zend-crypt 2.5.0 has 32 classes, no traits and 8 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-crypt-2.6.0-undefined-classes:
 
@@ -22230,6 +22965,7 @@ zend-crypt 2.6.0 has 32 classes, no traits and 8 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-crypt-3.0.0-undefined-classes:
 
@@ -22250,6 +22986,7 @@ zend-crypt 3.0.0 has 35 classes, no traits and 8 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-crypt-3.1.0-undefined-classes:
 
@@ -22270,6 +23007,7 @@ zend-crypt 3.1.0 has 36 classes, no traits and 8 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-crypt-3.2.0-undefined-classes:
 
@@ -22289,6 +23027,7 @@ zend-crypt 3.2.0 has 36 classes, no traits and 8 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-crypt-usage:
 
@@ -22308,6 +23047,7 @@ See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-db-2.5.0-undefined-classes:
 
@@ -22327,6 +23067,7 @@ zend-db 2.5.0 has 162 classes, 1 traits and 30 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-db-2.6.0-undefined-classes:
 
@@ -22347,6 +23088,7 @@ zend-db 2.6.0 has 165 classes, 1 traits and 31 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-db-2.7.0-undefined-classes:
 
@@ -22366,6 +23108,7 @@ zend-db 2.7.0 has 165 classes, 1 traits and 31 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-db-2.8.0-undefined-classes:
 
@@ -22386,6 +23129,7 @@ zend-db 2.8.0 has 168 classes, 1 traits and 31 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-db-usage:
 
@@ -22405,6 +23149,7 @@ See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Frame
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-debug-2.5.0-undefined-classes:
 
@@ -22424,6 +23169,7 @@ zend-debug 2.5.0 has 1 classes, no traits and no interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-debug-usage:
 
@@ -22443,6 +23189,7 @@ See also : `zend-debug <https://github.com/zendframework/zend-debug>`_ and `Zend
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-di-2.5.0-undefined-classes:
 
@@ -22462,6 +23209,7 @@ zend-di 2.5.0 has 28 classes, no traits and 6 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-di-2.6.0-undefined-classes:
 
@@ -22481,6 +23229,7 @@ zend-di 2.6.0 has 28 classes, no traits and 6 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-di-usage:
 
@@ -22500,6 +23249,7 @@ See also : `zend-di <https://github.com/zendframework/zend-di>`_ and `Zend Frame
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-dom-2.5.0-undefined-classes:
 
@@ -22519,6 +23269,7 @@ zend-dom 2.5.0 has 9 classes, no traits and 1 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-dom-2.6.0-undefined-classes:
 
@@ -22538,6 +23289,7 @@ zend-dom 2.6.0 has 9 classes, no traits and 1 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-dom-usage:
 
@@ -22557,6 +23309,7 @@ See also : `zend-dom <https://github.com/zendframework/zend-dom>`_ and `Zend Fra
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-escaper-2.5.0-undefined-classes:
 
@@ -22576,6 +23329,7 @@ zend-escaper 2.5.0 has 3 classes, no traits and 1 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-escaper-usage:
 
@@ -22595,6 +23349,7 @@ See also : `zend-escaper <https://github.com/zendframework/zend-escaper>`_ and `
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-eventmanager-2.5.0-undefined-classes:
 
@@ -22614,6 +23369,7 @@ zend-eventmanager 2.5.0 has 12 classes, 3 traits and 11 interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-eventmanager-2.6.0-undefined-classes:
 
@@ -22633,6 +23389,7 @@ zend-eventmanager 2.6.0 has 12 classes, 3 traits and 12 interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-eventmanager-3.0.0-undefined-classes:
 
@@ -22656,6 +23413,7 @@ zend-eventmanager 3.0.0 has 14 classes, 3 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-eventmanager-3.1.0-undefined-classes:
 
@@ -22675,6 +23433,7 @@ zend-eventmanager 3.1.0 has 14 classes, 3 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-eventmanager-3.2.0-undefined-classes:
 
@@ -22694,6 +23453,7 @@ zend-eventmanager 3.2.0 has 14 classes, 2 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework`    |
 +--------------+-------------------------+
 
+------
 
 .. _zend-eventmanager-usage:
 
@@ -22713,6 +23473,7 @@ See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanage
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-feed-2.5.0-undefined-classes:
 
@@ -22732,6 +23493,7 @@ zend-feed 2.5.0 has 88 classes, no traits and 15 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-feed-2.6.0-undefined-classes:
 
@@ -22752,6 +23514,7 @@ zend-feed 2.6.0 has 93 classes, no traits and 17 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-feed-2.7.0-undefined-classes:
 
@@ -22771,6 +23534,7 @@ zend-feed 2.7.0 has 93 classes, no traits and 17 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-feed-2.8.0-undefined-classes:
 
@@ -22790,6 +23554,7 @@ zend-feed 2.8.0 has 93 classes, no traits and 17 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-feed-usage:
 
@@ -22809,6 +23574,7 @@ See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-file-2.5.0-undefined-classes:
 
@@ -22828,6 +23594,7 @@ zend-file 2.5.0 has 14 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-file-2.6.0-undefined-classes:
 
@@ -22847,6 +23614,7 @@ zend-file 2.6.0 has 14 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-file-2.7.0-undefined-classes:
 
@@ -22866,6 +23634,7 @@ zend-file 2.7.0 has 14 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-file-usage:
 
@@ -22885,6 +23654,7 @@ See also : `zend-file <https://github.com/zendframework/zend-file>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-filter-2.5.0-undefined-classes:
 
@@ -22904,6 +23674,7 @@ zend-filter 2.5.0 has 73 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-filter-2.6.0-undefined-classes:
 
@@ -22923,6 +23694,7 @@ zend-filter 2.6.0 has 73 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-filter-2.7.0-undefined-classes:
 
@@ -22943,6 +23715,7 @@ zend-filter 2.7.0 has 76 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-filter-usage:
 
@@ -22962,6 +23735,7 @@ See also : `zend-filter <https://github.com/zendframework/zend-filter>`_ and `Ze
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-form-2.5.0-undefined-classes:
 
@@ -22981,6 +23755,7 @@ zend-form 2.5.0 has 115 classes, 2 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-form-2.6.0-undefined-classes:
 
@@ -23000,6 +23775,7 @@ zend-form 2.6.0 has 115 classes, 2 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-form-2.7.0-undefined-classes:
 
@@ -23020,6 +23796,7 @@ zend-form 2.7.0 has 116 classes, 2 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-form-2.8.0-undefined-classes:
 
@@ -23040,6 +23817,7 @@ zend-form 2.8.0 has 120 classes, 2 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-form-2.9.0-undefined-classes:
 
@@ -23062,6 +23840,7 @@ zend-form 2.9.0 has 123 classes, 3 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-form-usage:
 
@@ -23081,6 +23860,7 @@ See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-http-2.5.0-undefined-classes:
 
@@ -23100,6 +23880,7 @@ zend-http 2.5.0 has 97 classes, no traits and 8 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-http-2.6.0-undefined-classes:
 
@@ -23119,6 +23900,7 @@ zend-http 2.6.0 has 97 classes, no traits and 8 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-http-2.7.0-undefined-classes:
 
@@ -23138,6 +23920,7 @@ zend-http 2.7.0 has 97 classes, no traits and 8 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-http-usage:
 
@@ -23157,6 +23940,7 @@ See also : `zend-http <https://github.com/zendframework/zend-http>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-i18n-2.5.0-undefined-classes:
 
@@ -23176,6 +23960,7 @@ zend-i18n 2.5.0 has 40 classes, 1 traits and 5 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-i18n-2.6.0-undefined-classes:
 
@@ -23195,6 +23980,7 @@ zend-i18n 2.6.0 has 40 classes, 1 traits and 5 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-i18n-2.7.0-undefined-classes:
 
@@ -23215,6 +24001,7 @@ zend-i18n 2.7.0 has 43 classes, 1 traits and 5 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-i18n-usage:
 
@@ -23234,6 +24021,7 @@ See also : `zend-i18n <https://github.com/zendframework/zend-i18n>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-i18n-resources-usage:
 
@@ -23253,6 +24041,7 @@ See also : `zend-i18n-resources <https://github.com/zendframework/zend-i18n-reso
 | Analyzers    | :ref:`ZendFramework`    |
 +--------------+-------------------------+
 
+------
 
 .. _zend-i18n-resources-2.5.x:
 
@@ -23268,6 +24057,7 @@ zend-i18n-resources, all versions 2.5.x.
 | Analyzers    | :ref:`ZendFramework`      |
 +--------------+---------------------------+
 
+------
 
 .. _zend-inputfilter-2.5.0-undefined-classes:
 
@@ -23287,6 +24077,7 @@ zend-inputfilter 2.5.0 has 11 classes, 1 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _zend-inputfilter-2.6.0-undefined-classes:
 
@@ -23306,6 +24097,7 @@ zend-inputfilter 2.6.0 has 11 classes, 1 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _zend-inputfilter-2.7.0-undefined-classes:
 
@@ -23326,6 +24118,7 @@ zend-inputfilter 2.7.0 has 14 classes, 1 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _zend-inputfilter-usage:
 
@@ -23345,6 +24138,7 @@ See also : `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-json-2.5.0-undefined-classes:
 
@@ -23364,6 +24158,7 @@ zend-json 2.5.0 has 22 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-json-2.6.0-undefined-classes:
 
@@ -23383,6 +24178,7 @@ zend-json 2.6.0 has 22 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-json-3.0.0-undefined-classes:
 
@@ -23404,6 +24200,7 @@ See also : `zend-json <https://github.com/zendframework/zend-json>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-json-usage:
 
@@ -23423,6 +24220,7 @@ See also : `zend-json <https://github.com/zendframework/zend-json>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-loader-2.5.0-undefined-classes:
 
@@ -23442,6 +24240,7 @@ zend-loader 2.5.0 has 13 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-loader-usage:
 
@@ -23461,6 +24260,7 @@ See also : `zend-loader <https://github.com/zendframework/zend-loader>`_ and `Ze
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-log-2.5.0-undefined-classes:
 
@@ -23480,6 +24280,7 @@ zend-log 2.5.0 has 42 classes, 1 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-log-2.6.0-undefined-classes:
 
@@ -23500,6 +24301,7 @@ zend-log 2.6.0 has 45 classes, 1 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-log-2.7.0-undefined-classes:
 
@@ -23520,6 +24322,7 @@ zend-log 2.7.0 has 47 classes, 1 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-log-2.8.0-undefined-classes:
 
@@ -23540,6 +24343,7 @@ zend-log 2.8.0 has 53 classes, 1 traits and 9 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-log-2.9.0-undefined-classes:
 
@@ -23560,6 +24364,7 @@ zend-log 2.9.0 has 56 classes, 1 traits and 11 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-log-usage:
 
@@ -23579,6 +24384,7 @@ See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Fra
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mail-2.5.0-undefined-classes:
 
@@ -23598,6 +24404,7 @@ zend-mail 2.5.0 has 74 classes, no traits and 16 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mail-2.6.0-undefined-classes:
 
@@ -23617,6 +24424,7 @@ zend-mail 2.6.0 has 74 classes, no traits and 16 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mail-2.7.0-undefined-classes:
 
@@ -23637,6 +24445,7 @@ zend-mail 2.7.0 has 77 classes, no traits and 16 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mail-2.8.0-undefined-classes:
 
@@ -23657,6 +24466,7 @@ zend-mail 2.8.0 has 77 classes, 1 traits and 16 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mail-usage:
 
@@ -23676,6 +24486,7 @@ See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-math-2.5.0-undefined-classes:
 
@@ -23695,6 +24506,7 @@ zend-math 2.5.0 has 12 classes, no traits and 3 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-math-2.6.0-undefined-classes:
 
@@ -23716,6 +24528,7 @@ See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-math-2.7.0-undefined-classes:
 
@@ -23735,6 +24548,7 @@ zend-math 2.7.0 has 11 classes, no traits and 3 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-math-3.0.0-undefined-classes:
 
@@ -23756,6 +24570,7 @@ See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-math-usage:
 
@@ -23775,6 +24590,7 @@ See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-memory-2.5.0-undefined-classes:
 
@@ -23794,6 +24610,7 @@ zend-memory 2.5.0 has 8 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-memory-usage:
 
@@ -23813,6 +24630,7 @@ See also : `zend-memory <https://github.com/zendframework/zend-memory>`_ and `Ze
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mime-2.5.0-undefined-classes:
 
@@ -23832,6 +24650,7 @@ zend-mime 2.5.0 has 6 classes, no traits and 1 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mime-2.6.0-undefined-classes:
 
@@ -23851,6 +24670,7 @@ zend-mime 2.6.0 has 6 classes, no traits and 1 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mime-usage:
 
@@ -23870,6 +24690,7 @@ See also : `zend-mime <https://github.com/zendframework/zend-mime>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-modulemanager-2.5.0-undefined-classes:
 
@@ -23889,6 +24710,7 @@ zend-modulemanager 2.5.0 has 19 classes, no traits and 27 interfaces;
 | Analyzers    | :ref:`ZendFramework`     |
 +--------------+--------------------------+
 
+------
 
 .. _zend-modulemanager-2.6.0-undefined-classes:
 
@@ -23908,6 +24730,7 @@ zend-modulemanager 2.6.0 has 19 classes, no traits and 27 interfaces;
 | Analyzers    | :ref:`ZendFramework`     |
 +--------------+--------------------------+
 
+------
 
 .. _zend-modulemanager-2.7.0-undefined-classes:
 
@@ -23927,6 +24750,7 @@ zend-modulemanager 2.7.0 has 19 classes, no traits and 27 interfaces;
 | Analyzers    | :ref:`ZendFramework`     |
 +--------------+--------------------------+
 
+------
 
 .. _zend-modulemanager-2.8.0-undefined-classes:
 
@@ -23946,6 +24770,7 @@ zend-modulemanager 2.8.0 has 19 classes, no traits and 27 interfaces;
 | Analyzers    | :ref:`ZendFramework`     |
 +--------------+--------------------------+
 
+------
 
 .. _zend-modulemanager-usage:
 
@@ -23965,6 +24790,7 @@ See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemana
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _zend-mvc-2.5.x:
 
@@ -23980,6 +24806,7 @@ zend-mvc, all versions 2.5.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mvc-2.6.x:
 
@@ -23995,6 +24822,7 @@ zend-mvc, all versions 2.6.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mvc-2.7.x:
 
@@ -24010,6 +24838,7 @@ zend-mvc, all versions 2.7.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mvc-3.0.x:
 
@@ -24025,6 +24854,7 @@ zend-mvc, all versions 3.0.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mvc-3.1.0-undefined-classes:
 
@@ -24045,6 +24875,7 @@ zend-mvc 3.1.0 has 77 classes, 1 traits and 5 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-mvc-usage:
 
@@ -24060,6 +24891,7 @@ zend-mvc usage, based on classes, interfaces and traits. This covers all version
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-navigation-2.5.0-undefined-classes:
 
@@ -24079,6 +24911,7 @@ zend-navigation 2.5.0 has 14 classes, no traits and 1 interfaces;
 | Analyzers    | :ref:`ZendFramework`  |
 +--------------+-----------------------+
 
+------
 
 .. _zend-navigation-2.6.0-undefined-classes:
 
@@ -24099,6 +24932,7 @@ zend-navigation 2.6.0 has 15 classes, no traits and 1 interfaces;
 | Analyzers    | :ref:`ZendFramework`  |
 +--------------+-----------------------+
 
+------
 
 .. _zend-navigation-2.7.0-undefined-classes:
 
@@ -24119,6 +24953,7 @@ zend-navigation 2.7.0 has 18 classes, no traits and 1 interfaces;
 | Analyzers    | :ref:`ZendFramework`  |
 +--------------+-----------------------+
 
+------
 
 .. _zend-navigation-2.8.0-undefined-classes:
 
@@ -24138,6 +24973,7 @@ zend-navigation 2.8.0 has 18 classes, no traits and 1 interfaces;
 | Analyzers    | :ref:`ZendFramework`  |
 +--------------+-----------------------+
 
+------
 
 .. _zend-navigation-usage:
 
@@ -24157,6 +24993,7 @@ See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-paginator-2.5.0-undefined-classes:
 
@@ -24176,6 +25013,7 @@ zend-paginator 2.5.0 has 26 classes, no traits and 5 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-paginator-2.6.0-undefined-classes:
 
@@ -24196,6 +25034,7 @@ zend-paginator 2.6.0 has 27 classes, no traits and 5 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-paginator-2.7.0-undefined-classes:
 
@@ -24216,6 +25055,7 @@ zend-paginator 2.7.0 has 31 classes, no traits and 5 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-paginator-usage:
 
@@ -24235,6 +25075,7 @@ See also : `zend-paginator <https://github.com/zendframework/zend-paginator>`_ a
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-progressbar-2.5.0-undefined-classes:
 
@@ -24254,6 +25095,7 @@ zend-progressbar 2.5.0 has 15 classes, no traits and 3 interfaces;
 | Analyzers    | :ref:`ZendFramework`   |
 +--------------+------------------------+
 
+------
 
 .. _zend-progressbar-usage:
 
@@ -24273,6 +25115,7 @@ See also : `zend-progressbar <https://github.com/zendframework/zend-progressbar>
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-serializer-2.5.0-undefined-classes:
 
@@ -24292,6 +25135,7 @@ zend-serializer 2.5.0 has 17 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework`  |
 +--------------+-----------------------+
 
+------
 
 .. _zend-serializer-2.6.0-undefined-classes:
 
@@ -24311,6 +25155,7 @@ zend-serializer 2.6.0 has 17 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework`  |
 +--------------+-----------------------+
 
+------
 
 .. _zend-serializer-2.7.0-undefined-classes:
 
@@ -24331,6 +25176,7 @@ zend-serializer 2.7.0 has 20 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework`  |
 +--------------+-----------------------+
 
+------
 
 .. _zend-serializer-2.8.0-undefined-classes:
 
@@ -24350,6 +25196,7 @@ zend-serializer 2.8.0 has 20 classes, no traits and 2 interfaces;
 | Analyzers    | :ref:`ZendFramework`  |
 +--------------+-----------------------+
 
+------
 
 .. _zend-serializer-usage:
 
@@ -24369,6 +25216,7 @@ See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-server-2.5.0-undefined-classes:
 
@@ -24388,6 +25236,7 @@ zend-server 2.5.0 has 22 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-server-2.6.0-undefined-classes:
 
@@ -24407,6 +25256,7 @@ zend-server 2.6.0 has 22 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-server-2.7.0-undefined-classes:
 
@@ -24426,6 +25276,7 @@ zend-server 2.7.0 has 22 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-server-usage:
 
@@ -24445,6 +25296,7 @@ See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Ze
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-servicemanager-2.5.0-undefined-classes:
 
@@ -24464,6 +25316,7 @@ zend-servicemanager 2.5.0 has 17 classes, 2 traits and 10 interfaces;
 | Analyzers    | :ref:`ZendFramework`      |
 +--------------+---------------------------+
 
+------
 
 .. _zend-servicemanager-2.6.0-undefined-classes:
 
@@ -24483,6 +25336,7 @@ zend-servicemanager 2.6.0 has 17 classes, 2 traits and 10 interfaces;
 | Analyzers    | :ref:`ZendFramework`      |
 +--------------+---------------------------+
 
+------
 
 .. _zend-servicemanager-2.7.0-undefined-classes:
 
@@ -24503,6 +25357,7 @@ zend-servicemanager 2.7.0 has 18 classes, 2 traits and 10 interfaces;
 | Analyzers    | :ref:`ZendFramework`      |
 +--------------+---------------------------+
 
+------
 
 .. _zend-servicemanager-3.0.0-undefined-classes:
 
@@ -24525,6 +25380,7 @@ zend-servicemanager 3.0.0 has 10 classes, no traits and 12 interfaces;
 | Analyzers    | :ref:`ZendFramework`      |
 +--------------+---------------------------+
 
+------
 
 .. _zend-servicemanager-3.1.0-undefined-classes:
 
@@ -24546,6 +25402,7 @@ zend-servicemanager 3.1.0 has 11 classes, 1 traits and 12 interfaces;
 | Analyzers    | :ref:`ZendFramework`      |
 +--------------+---------------------------+
 
+------
 
 .. _zend-servicemanager-3.2.0-undefined-classes:
 
@@ -24566,6 +25423,7 @@ zend-servicemanager 3.2.0 has 17 classes, 1 traits and 12 interfaces;
 | Analyzers    | :ref:`ZendFramework`      |
 +--------------+---------------------------+
 
+------
 
 .. _zend-servicemanager-3.3.0-undefined-classes:
 
@@ -24585,6 +25443,7 @@ zend-servicemanager 3.3.0 has 17 classes, 1 traits and 12 interfaces;
 | Analyzers    | :ref:`ZendFramework`      |
 +--------------+---------------------------+
 
+------
 
 .. _zend-servicemanager-usage:
 
@@ -24604,6 +25463,7 @@ See also : `zend-servicemanager <https://github.com/zendframework/zend-servicema
 | Analyzers    | :ref:`ZendFramework`    |
 +--------------+-------------------------+
 
+------
 
 .. _zend-session-2.5.0-undefined-classes:
 
@@ -24623,6 +25483,7 @@ zend-session 2.5.0 has 26 classes, no traits and 7 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-session-2.6.0-undefined-classes:
 
@@ -24645,6 +25506,7 @@ zend-session 2.6.0 has 27 classes, 1 traits and 7 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-session-2.7.0-undefined-classes:
 
@@ -24666,6 +25528,7 @@ zend-session 2.7.0 has 31 classes, 1 traits and 7 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-session-2.8.0-undefined-classes:
 
@@ -24685,6 +25548,7 @@ zend-session 2.8.0 has 31 classes, 1 traits and 7 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-session-usage:
 
@@ -24704,6 +25568,7 @@ See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-soap-2.5.0-undefined-classes:
 
@@ -24723,6 +25588,7 @@ zend-soap 2.5.0 has 20 classes, no traits and 3 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-soap-2.6.0-undefined-classes:
 
@@ -24742,6 +25608,7 @@ zend-soap 2.6.0 has 20 classes, no traits and 3 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-soap-usage:
 
@@ -24761,6 +25628,7 @@ See also : `zend-soap <https://github.com/zendframework/zend-soap>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-stdlib-2.5.0-undefined-classes:
 
@@ -24780,6 +25648,7 @@ zend-stdlib 2.5.0 has 65 classes, 5 traits and 26 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-stdlib-2.6.0-undefined-classes:
 
@@ -24800,6 +25669,7 @@ zend-stdlib 2.6.0 has 67 classes, 5 traits and 26 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-stdlib-2.7.0-undefined-classes:
 
@@ -24820,6 +25690,7 @@ zend-stdlib 2.7.0 has 68 classes, 5 traits and 26 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-stdlib-3.0.0-undefined-classes:
 
@@ -24841,6 +25712,7 @@ See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Ze
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-stdlib-3.1.0-undefined-classes:
 
@@ -24862,6 +25734,7 @@ See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Ze
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-stdlib-usage:
 
@@ -24881,6 +25754,7 @@ See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Ze
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-tag-2.5.0-undefined-classes:
 
@@ -24900,6 +25774,7 @@ zend-tag 2.5.0 has 14 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-tag-2.6.0-undefined-classes:
 
@@ -24919,6 +25794,7 @@ zend-tag 2.6.0 has 14 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-tag-usage:
 
@@ -24938,6 +25814,7 @@ See also : `zend-tag <https://github.com/zendframework/zend-tag>`_ and `Zend Fra
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-test-2.5.0-undefined-classes:
 
@@ -24957,6 +25834,7 @@ zend-test 2.5.0 has 4 classes, no traits and no interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-test-2.6.0-undefined-classes:
 
@@ -24976,6 +25854,7 @@ zend-test 2.6.0 has 4 classes, no traits and no interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-test-3.0.0-undefined-classes:
 
@@ -24995,6 +25874,7 @@ zend-test 3.0.0 has 4 classes, no traits and no interfaces;
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-test-3.1.0-undefined-classes:
 
@@ -25014,6 +25894,7 @@ zend-test 3.1.0 has 4 classes, no traits and no interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-test-usage:
 
@@ -25033,6 +25914,7 @@ See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
 +--------------+--------------------------------------------+
 
+------
 
 .. _zend-text-2.5.0-undefined-classes:
 
@@ -25052,6 +25934,7 @@ zend-text 2.5.0 has 22 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-text-2.6.0-undefined-classes:
 
@@ -25071,6 +25954,7 @@ zend-text 2.6.0 has 22 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-text-usage:
 
@@ -25090,6 +25974,7 @@ See also : `zend-text <https://github.com/zendframework/zend-text>`_ and `Zend F
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-uri:
 
@@ -25105,6 +25990,7 @@ zend-uri, all versions beyond 2.5.0.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-uri-2.5.x:
 
@@ -25120,6 +26006,7 @@ zend-uri, all versions 2.5.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-validator-2.6.x:
 
@@ -25135,6 +26022,7 @@ zend-validator, all versions 2.6.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-validator-2.7.x:
 
@@ -25150,6 +26038,7 @@ zend-validator, all versions 2.7.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-validator-2.8.x:
 
@@ -25165,6 +26054,7 @@ zend-validator, all versions 2.8.x.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-validator-2.9.0-undefined-classes:
 
@@ -25184,6 +26074,7 @@ zend-validator 2.9.0 has 104 classes, no traits and 7 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-validator-usage:
 
@@ -25199,6 +26090,7 @@ zend-validator, all versions beyond 2.5.0.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-view-2.5.0-undefined-classes:
 
@@ -25214,6 +26106,7 @@ zend-view classes, interfaces and traits that are not defined in version 2.5.0.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-view-2.6.0-undefined-classes:
 
@@ -25229,6 +26122,7 @@ zend-view classes, interfaces and traits that are not defined in version 2.6.0.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-view-2.7.0-undefined-classes:
 
@@ -25245,6 +26139,7 @@ zend-view classes, interfaces and traits that are not defined in version 2.7.0.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-view-2.8.0-undefined-classes:
 
@@ -25260,6 +26155,7 @@ zend-view classes, interfaces and traits that are not defined in version 2.8.0.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-view-2.9.0-undefined-classes:
 
@@ -25276,6 +26172,7 @@ zend-view classes, interfaces and traits that are not defined in version 2.9.0.
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-view-usage:
 
@@ -25291,6 +26188,7 @@ zend-view usage, based on classes, interfaces and traits. This covers all versio
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-xmlrpc-2.5.0-undefined-classes:
 
@@ -25310,6 +26208,7 @@ zend-xmlrpc 2.5.0 has 41 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-xmlrpc-2.6.0-undefined-classes:
 
@@ -25329,6 +26228,7 @@ zend-xmlrpc 2.6.0 has 41 classes, no traits and 4 interfaces;
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
 .. _zend-xmlrpc-usage:
 
@@ -25348,4 +26248,5 @@ See also : `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_ and `Ze
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
 
+------
 
