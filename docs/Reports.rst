@@ -5,25 +5,25 @@ Reports
 
 There are several reports that may be extracted from Exakat : 
 
-* Ambassador
-* Clustergrammer
-* Code Flower
-* Code Sniffer
-* Composer
-* Dependency Wheel
-* Inventories
-* Json
-* Marmelab
-* Owasp
-* PhpCompilation
-* PhpConfiguration
-* PlantUml
-* RadwellCode
-* SimpleTable
-* Stats
-* Text
-* PlantUml
-* Xml
+* `Ambassador`_
+* `Clustergrammer`_
+* `Code Flower`_
+* `Code Sniffer`_
+* `Composer`_
+* `Dependency Wheel`_
+* `Inventories`_
+* `Json`_
+* `Marmelab`_
+* `Owasp`_
+* `PhpCompilation`_
+* `PhpConfiguration`_
+* `PlantUml`_
+* `RadwellCode`_
+* `SimpleTable`_
+* `Stats`_
+* `Text`_
+* `PlantUml`_
+* `Xml`_
 
 
    `php exakat.phar report -p <project> -format <format> -file <filename>`
@@ -58,7 +58,7 @@ Ambassador includes :
     + Error messages list
     + List of processed files
 
-.. image:: images/report.clustergrammer.png
+.. image:: images/report.ambassador.png
     :alt: Example of a Ambassador report (0)
 
 Ambassador includes the report from 3 other reports : PhpCompilation, PhpConfiguration, Stats.
@@ -92,7 +92,7 @@ It represents :
 + Inclusion
 
 
-.. image:: images/report.clustergrammer.png
+.. image:: images/report.codeflower.png
     :alt: Example of a Code Flower report (0)
 
 Code Flower is a HTML report format.
@@ -167,7 +167,7 @@ Dependency Wheel is a javascript visualization of the classes dependencies in th
 
 It is based on Francois Zaninotto's [DependencyWheel](http://fzaninotto.github.com/DependencyWheel) and the [d3.js](https://github.com/mbostock/d3).
 
-.. image:: images/report.clustergrammer.png
+.. image:: images/report.dependencywheel.png
     :alt: Example of a Dependency Wheel report (0)
 
 Dependency Wheel is a HTML report format.
@@ -307,7 +307,7 @@ The OWASP report is a security report.
 
 The OWASP report focuses on the [OWASP top 10](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project). It reports all the security analysis, distributed across the 10 categories of vulnerabilities.
 
-.. image:: images/report.clustergrammer.png
+.. image:: images/report.owasp.png
     :alt: Example of a Owasp report (0)
 
 Owasp is a HTML report format.
@@ -474,7 +474,7 @@ This report produces a .puml file, compatible with [PlantUML](http://plantuml.co
 PlantUML is an Open Source component that dislays class diagrams. 
 
 
-.. image:: images/report.clustergrammer.png
+.. image:: images/report.plantuml.png
     :alt: Example of a PlantUml report (0)
 
 PlantUml is a puml report format.
@@ -508,7 +508,7 @@ The Simpletable is a simple table presentation.
 
 Simpletable is suitable for any list of results provided by exakat. It is inspired from the Clang report. The result is a HTML file, with Javascript and CSS. 
 
-.. image:: images/report.clustergrammer.png
+.. image:: images/report.simpletable.png
     :alt: Example of a SimpleTable report (0)
 
 SimpleTable is a HTML report format.
@@ -610,10 +610,10 @@ Classes, interfaces and traits are represented, along with their constants, meth
 
 .dot files are best seen with [graphviz](http://www.graphviz.org/) : they are easily convert into PNG or PDF.
 
-.. image:: images/report.clustergrammer.png
+.. image:: images/report.uml.general.png
     :alt: Example of a PlantUml report (0)
 
-.. image:: images/report.clustergrammer.png
+.. image:: images/report.uml.detail.png
     :alt: Example of a PlantUml report (1)
 
 PlantUml is a dot report format.
