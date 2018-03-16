@@ -20,6 +20,7 @@ Contents:
    Commands
    Recipes
    Rules
+   Cases
    Reports
    Configuration
    Glossary

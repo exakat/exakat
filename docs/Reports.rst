@@ -22,7 +22,7 @@ There are several reports that may be extracted from Exakat :
 * `SimpleTable`_
 * `Stats`_
 * `Text`_
-* `PlantUml`_
+* `Uml`_
 * `Xml`_
 
 
@@ -599,8 +599,8 @@ This format is fast, and fitted for machine communications.
 
 Text is a Text report format.
 
-PlantUml
---------
+Uml
+---
 
 The Uml exports data structure to UML format.
 
@@ -611,12 +611,12 @@ Classes, interfaces and traits are represented, along with their constants, meth
 .dot files are best seen with [graphviz](http://www.graphviz.org/) : they are easily convert into PNG or PDF.
 
 .. image:: images/report.uml.general.png
-    :alt: Example of a PlantUml report (0)
+    :alt: Example of a Uml report (0)
 
 .. image:: images/report.uml.detail.png
-    :alt: Example of a PlantUml report (1)
+    :alt: Example of a Uml report (1)
 
-PlantUml is a dot report format.
+Uml is a dot report format.
 
 Xml
 ---

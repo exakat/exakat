@@ -7,6 +7,7 @@ Annex
 * Supported Reports
 * Supported PHP Extensions
 * Supported Frameworks
+* Applications
 * Recognized Libraries
 * New analyzers
 * External services
@@ -47,6 +48,13 @@ Frameworks are supported when they is an analysis related to them. Then, a selec
 * Cakephp
 * Wordpress
 * ZendFramework
+
+Applications
+------------
+
+A number of applications were scanned in order to find real life examples of patterns. They are listed here : 
+
+{{APPLICATIONS}}
 
 Recognized Libraries
 --------------------

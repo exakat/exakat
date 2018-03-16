@@ -155,22 +155,15 @@ $attributes = array('ANALYZERS_COUNT'        => $analyzer_count,
                     );
 
 shell_exec('rm docs/*.rst');
+shell_exec('cp docs/src/*.rst docs/');
 
-$files = glob('docs/src/*.rst');
-foreach($files as $file) {
-    $rst = file_get_contents($file);
-    
-    $rst = str_replace(array_map(function ($x) { return '{{'.$x.'}}'; },array_keys($attributes)),array_values($attributes),$rst);
-    if (preg_match_all('/{{(.*?)}}/',$rst,$r)) {
-        print "There are ".count($r[1])." missed attributes in \"".basename($file)."\" : ".implode(",",$r[1])."\n\n";
-    }
-    
-    file_put_contents(str_replace('/src/','/',$file),$rst);
-}
-
-shell_exec('cp docs/src/images/*.png docs/images/');
+global $applications, $issues_examples;
+$applications = array();
+$issues_examples = array();
 
 build_reports();
+
+shell_exec('cp docs/src/images/*.png docs/images/');
 
 $recipes = array('Analyze',
                  'CompatibilityPHP73',
@@ -303,6 +296,23 @@ $rules = '';
 ksort($analyzers);
 foreach($analyzers as $title => $desc) {
     $rules .= rst_level($title,3).PHP_EOL.PHP_EOL.$desc.PHP_EOL;
+}
+
+
+$attributes['ISSUES_EXAMPLES'] = join('', $issues_examples);
+
+$attributes['APPLICATIONS'] = makeApplicationsLink(array_keys($applications));
+
+$files = glob('docs/*.rst');
+foreach($files as $file) {
+    $rst = file_get_contents($file);
+    
+    $rst = str_replace(array_map(function ($x) { return '{{'.$x.'}}'; },array_keys($attributes)),array_values($attributes),$rst);
+    if (preg_match_all('/{{(.*?)}}/',$rst,$r)) {
+        print "There are ".count($r[1])." missed attributes in \"".basename($file)."\" : ".implode(",",$r[1])."\n\n";
+    }
+    
+    file_put_contents(str_replace('/src/','/',$file),$rst);
 }
 
 $rst = file_get_contents('docs/src/Recipes.rst');
@@ -519,6 +529,8 @@ $exampleTxt
 }
 
 function build_analyzer_doc($a, $a2themes) {
+    global $applications, $issues_examples;
+    
         $name = $a;
         $ini = parse_ini_file("human/en/$a.ini", true);
         $commandLine = $a;
@@ -539,42 +551,31 @@ function build_analyzer_doc($a, $a2themes) {
             $recipes = 'none';
         }
         
-        $lineSize    = max(strlen($commandLine), strlen($clearPHP), strlen($recipes));
-        $commandLine = str_pad($commandLine, $lineSize, ' ');
-        $recipes     = str_pad($recipes, $lineSize, ' ');
-        $separator   = '+--------------+-'.str_pad('',$lineSize,'-').'-+';
-        if (!empty($clearPHP)) {
-            $clearPHP    = '| clearPHP     | '.str_pad($clearPHP,$lineSize,' ').' |'.PHP_EOL.$separator.PHP_EOL;
-        }
-
-        $desc .= <<<RST
-
-
-$separator
-| Command Line | $commandLine |
-$separator
-$clearPHP| Analyzers    | $recipes |
-$separator
-
-------
-
-RST;
-
+        $examples = array();
+        $issues_examples_section = '';
         for($i = 0; $i < 10; $i++) {
             if (isset($ini['example'.$i])) {
+                $label = rst_anchor($ini['example'.$i]['project'].'-'.str_replace('/', '-', strtolower($a)));
                 
-                print $code = "    ".str_replace("\n", "\n    ", trim($ini['example'.$i]['code']));
-                $section = $ini['example'.$i]['project']."\n".str_repeat('=', strlen($ini['example'.$i]['project']));
+                $examples[] = ':ref:`'.$label.'`';
+                $code = "    ".str_replace("\n", "\n    ", trim($ini['example'.$i]['code']));
+                $section = $ini['example'.$i]['project']."\n".str_repeat('^', strlen($ini['example'.$i]['project']));
                 $explain = $ini['example'.$i]['explain'];
                 $file = $ini['example'.$i]['file'];
                 $line = $ini['example'.$i]['line'];
+                $analyzer_anchor = rst_anchor($ini['name']);
 
-                $desc .= <<<SPHINX
+                if (empty($issues_examples_section)){
+                    $issues_examples_section = $ini['name']."\n".str_repeat('=', strlen($ini['name']))."\n";
+                }
 
+                $issues_examples_section .= <<<SPHINX
+
+.. _$label:
 
 $section
 
-In $file:$line.
+:ref:`$analyzer_anchor`, in $file:$line. 
 
 $explain
 
@@ -584,11 +585,61 @@ $code
 
 --------
 
+
+
 SPHINX;
+                $applications[$ini['example'.$i]['project']] = 1;
             }
         }
+        if (!empty($issues_examples_section)){
+            $issues_examples[] = $issues_examples_section;
+        }
+
+        $info = array( array('Command line', $commandLine),
+                       array('Themes', $recipes),
+                                );
+        if (!empty($clearPHP)) {
+            $info[] = array('ClearPHP', $clearPHP);
+        }
+        if (!empty($examples)) {
+            $info[] = array('Examples', join(', ', $examples));
+        }
+
+        $table = makeTable($info);
+                 
+        $desc .= PHP_EOL.PHP_EOL.$table.PHP_EOL.PHP_EOL;
 
         return array($desc, $ini['name']);
+}
+
+function makeTable($array) {
+    $sizes = array();
+    foreach(array_keys($array[0]) as $col) {
+        $values = array_column($array, $col);
+        $strlens = array_map('strlen', $values);
+        $sizes[] = max($strlens);
+    }
+    
+    $separator = '+'.join('+', array_map(function($x) { return str_pad('', $x + 2, '-'); }, $sizes)).'+'.PHP_EOL;
+
+    $return = $separator;
+    foreach($array as $row) {
+        $str = '|';
+        foreach($row as $col => $value) {
+            $str .= ' '.str_pad($value, $sizes[$col], ' ').' |';
+        }
+        
+        $return .= $str.PHP_EOL.$separator;
+    }
+
+    return $return;
+}
+
+function makeApplicationsLink($names) {
+    include __DIR__.'/applications.php';
+
+    $names = array_map(function($x) use ($applications) { if (isset($applications[$x])) { $x = "`$x <".$applications[$x]['url'].">`_";} else { print "Missing url for $x\n"; } return "* $x\n"; }, $names);
+    return join('', $names);
 }
 
 ?>
