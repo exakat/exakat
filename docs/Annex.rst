@@ -7,6 +7,7 @@ Annex
 * Supported Reports
 * Supported PHP Extensions
 * Supported Frameworks
+* Applications
 * Recognized Libraries
 * New analyzers
 * External services
@@ -91,6 +92,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Grade
   * Weekly
   * Codacy
+  * Scrutinizer
   * FacetedJson
   * Json
   * OnepageJson
@@ -277,6 +279,22 @@ Frameworks are supported when they is an analysis related to them. Then, a selec
 * Wordpress
 * ZendFramework
 
+Applications
+------------
+
+A number of applications were scanned in order to find real life examples of patterns. They are listed here : 
+
+* `phpMyAdmin <https://www.phpmyadmin.net/>`_
+* `WordPress <https://www.wordpress.com/>`_
+* `SPIP <https://www.spip.net/>`_
+* `ExpressionEngine <https://expressionengine.com/>`_
+* `PrestaShop <https://prestashop.com/>`_
+* `Traq <https://traq.io/>`_
+* `LiveZilla <https://www.livezilla.net/home/en/>`_
+* `TeamPass <https://teampass.net/>`_
+* `XOOPS <https://xoops.org/>`_
+
+
 Recognized Libraries
 --------------------
 
@@ -329,8 +347,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.1.8
 
+  * Mass Creation Of Arrays (Arrays/MassCreation)
+  * Php/TooManyNativeCalls (Php/TooManyNativeCalls ; Unassigned)
   * Structures/ConstantPreferences (Structures/ConstantPreferences ; Under Work)
-  * ext/db2 (Extensions/Extdb2)
+  * ext/db2 (Extensions/Extdb2 ; Appinfo)
 
 * 1.1.7
 
