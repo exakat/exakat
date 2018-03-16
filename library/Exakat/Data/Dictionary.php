@@ -118,6 +118,7 @@ class Dictionary {
 
     public function closeVariables() {
         $variables = array_filter($this->dictionary, function ($x) { return (strlen($x) > 3) && 
+                                                                            (strpos($x, ' ') === false) && 
                                                                             ($x[0] === '$') && 
                                                                             (strpos($x, '.') === false); }, ARRAY_FILTER_USE_KEY );
         
