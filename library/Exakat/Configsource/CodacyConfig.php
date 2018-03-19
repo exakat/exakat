@@ -30,25 +30,32 @@ class CodacyConfig extends Config {
     }
 
     public function loadConfig($project) {
+        $this->defaultCodacyConfig();
+        
         $pathToJson = "{$this->projects_root}{$project}/code/.codacy.json";
         if (!file_exists($pathToJson)) {
-            return $this->defaultCodacyConfig();
+            return ;
         }
 
         $json = file_get_contents($pathToJson);
         if (empty($json)) {
-            return $this->defaultCodacyConfig();
+            return ;
         }
 
         $config = json_decode($json);
         if (empty($config)) {
-            return $this->defaultCodacyConfig();
+            return ;
         }
 
-        $this->config['codacy_files'] = $config->files;
-        foreach($config->tools as $tool) {
-            if ($tool->name != 'exakat') { continue; }
-            $this->config['codacy_analyzers'] = array_column($tool->patterns, 'patternId');
+        if (isset($config->tools)) {
+            $this->config['codacy_files'] = $config->files;
+        }
+
+        if (isset($config->tools)) {
+            foreach($config->tools as $tool) {
+                if ($tool->name != 'exakat') { continue; }
+                $this->config['codacy_analyzers'] = $tool->patterns;
+            }
         }
         
         // Todo : check that patterns are valid
