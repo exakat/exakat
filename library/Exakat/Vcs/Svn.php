@@ -25,6 +25,8 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\HelperException;
 
 class Svn extends Vcs {
+    private $info = array();
+    
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
         
@@ -46,6 +48,40 @@ class Svn extends Vcs {
         }
 
         return $r[1];
+    }
+
+    private function getInfo() {
+        $res = trim(shell_exec("cd {$this->destinationFull}/code; svn info"));
+        
+        foreach(explode("\n", $res) as $info) {
+            list($name, $value) = explode(': ', trim($info));
+            $this->info[$name] = $value;
+        }
+        print_r($this->info);
+    }
+
+    public function getUrl() {
+        if (empty($this->info)) {
+            $this->getInfo();
+        }
+
+        return $this->info['Repository Root'] ?? 'No URL';
+    }
+    
+    public function getBranch() {
+        if (empty($this->info)) {
+            $this->getInfo();
+        }
+
+        return $this->info['Relative URL'] ?? 'trunk';
+    }
+
+    public function getRevision() {
+        if (empty($this->info)) {
+            $this->getInfo();
+        }
+
+        return $this->info['Revision'] ?? 'No Revision';
     }
 
 }

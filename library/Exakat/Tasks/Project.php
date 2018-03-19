@@ -30,6 +30,7 @@ use Exakat\Exakat;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Vcs\Vcs;
 
 class Project extends Tasks {
     const CONCURENCE = self::NONE;
@@ -54,7 +55,7 @@ class Project extends Tasks {
 
     public function run() {
         $project = $this->config->project;
-
+        
         $this->project_dir = $this->config->projects_root.'/projects/'.$project;
 
         if ($this->config->project === 'default') {
@@ -101,25 +102,27 @@ class Project extends Tasks {
                                                'audit_name'     => $this->generateName(),
                                          ));
 
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
-            $info = array();
-            $info['vcs_type'] = 'git';
-            
-            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
-            if (preg_match('#url = (\S+)\s#is', $gitConfig, $r)) {
-                $info['vcs_url'] = $r[1];
-            } else {
-                $info['vcs_url'] = 'No URL';
-            }
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
-            $info['vcs_branch'] = trim($res, " *\n");
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
-            $info['vcs_revision'] = trim($res);
+        // git doesn't necessarily exists yet.
+        $info = array();
+        if (($vcsClass = Vcs::getVcs($this->config)) === 'EmptyCode') {
+            print_r($this->config);
+            die('EMPTY CODE');
+            $info['vcs_type'] = 'Standalone archive';
         } else {
-            $info = array();
-            $info['vcs_type'] = 'Downloaded archive';
+            $info['vcs_type'] = strtolower($vcsClass);
+            
+           print  $vcsClass = "\\Exakat\\Vcs\\{$vcsClass}";
+            
+            $vcs = new $vcsClass($this->config->project, $this->config->projects_root);
+            if (method_exists($vcs, 'getUrl')) {
+                $info['vcs_url']      = $vcs->getUrl();
+            }
+            if (method_exists($vcs, 'getBranch')) {
+                $info['vcs_branch']      = $vcs->getBranch();
+            }
+            if (method_exists($vcs, 'getRevision')) {
+                $info['vcs_revision']      = $vcs->getRevision();
+            }
         }
         $this->datastore->addRow('hash', $info);
 

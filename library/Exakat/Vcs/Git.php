@@ -97,6 +97,26 @@ class Git extends Vcs {
         return $resFinal;
     }
 
+    public function getUrl() {
+        $gitConfig = file_get_contents($this->destinationFull.'/code/.git/config');
+        if (preg_match('#url = (\S+)\s#is', $gitConfig, $r)) {
+            $url = $r[1];
+        } else {
+            $url = 'No URL';
+        }
+
+        return $url;
+    }
+    
+    public function getBranch() {
+        $res = shell_exec('cd '.$this->destinationFull.'/code/; git branch');
+        return trim($res, " *\n");
+    }
+
+    public function getRevision() {
+        $res = shell_exec('cd '.$this->destinationFull.'/code/; git rev-parse HEAD');
+        return trim($res);
+    }
 }
 
 ?>
