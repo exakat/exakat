@@ -179,6 +179,7 @@ class Ambassador extends Reports {
         $this->generateComplexExpressions();
         $this->generateVisibilitySuggestions();
         $this->generateMethodSize();
+        $this->generateParameterCounts();
         
         $this->generateConfusingVariables();
 
@@ -442,12 +443,14 @@ class Ambassador extends Reports {
                 $total += $value;
             }
 
+            if (($repeat = 4 - count($list)) > 0) {
                 $table .= str_repeat('
                 <div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>
-', 4 - count($list));
+', $repeat );
+            }
 
             // Ignore if we have no occurrences
             if ($total === 0) { 
@@ -1002,6 +1005,179 @@ JAVASCRIPT;
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' dashboard');
         $this->putBasedPage('index', $finalHTML);
+    }
+
+    protected function generateParameterCounts() {
+        $finalHTML = $this->getBasedPage('parameter_counts');
+
+        // List of extensions used
+        $res = $this->sqlite->query(<<<SQL
+SELECT key, value FROM hashResults
+WHERE name = "ParameterCounts"
+ORDER BY key
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $xAxis[] = "'".$value['key']." param.'";
+            $data[$value['key']] = $value['value'];
+
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">'.$value['key'].' param.</div>
+                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
+                  </div>';
+        }
+
+        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
+
+        $blocjs = <<<JAVASCRIPT
+  <script>
+    $(document).ready(function() {
+      Highcharts.theme = {
+         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
+         chart: {
+            backgroundColor: null,
+            style: {
+               fontFamily: "Dosis, sans-serif"
+            }
+         },
+         title: {
+            style: {
+               fontSize: '16px',
+               fontWeight: 'bold',
+               textTransform: 'uppercase'
+            }
+         },
+         tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'rgba(219,219,216,0.8)',
+            shadow: false
+         },
+         legend: {
+            itemStyle: {
+               fontWeight: 'bold',
+               fontSize: '13px'
+            }
+         },
+         xAxis: {
+            gridLineWidth: 1,
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         yAxis: {
+            minorTickInterval: 'auto',
+            title: {
+               style: {
+                  textTransform: 'uppercase'
+               }
+            },
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         plotOptions: {
+            candlestick: {
+               lineColor: '#404048'
+            }
+         },
+
+
+         // General
+         background2: '#F0F0EA'
+      };
+
+      // Apply the theme
+      Highcharts.setOptions(Highcharts.theme);
+
+      $('#filename').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAFILES]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Parameters',
+              data: [CALLCOUNT]
+          }]
+      });
+
+    });
+  </script>
+JAVASCRIPT;
+
+        $tags = array();
+        $code = array();
+
+        // Filename Overview
+        $tags[] = 'CALLCOUNT';
+        $code[] = implode(', ', $data);
+        $tags[] = 'SCRIPTDATAFILES';
+        $code[] = implode(', ', $xAxis);
+
+        $blocjs = str_replace($tags, $code, $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Parameters counts');
+
+        $this->putBasedPage('parameters_counts', $finalHTML);
     }
 
     protected function generateExtensionsBreakdown() {
