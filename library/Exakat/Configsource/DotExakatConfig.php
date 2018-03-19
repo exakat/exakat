@@ -31,7 +31,7 @@ class DotExakatConfig extends Config {
 
     public function loadConfig($project) {
         if (!file_exists($this->dotExakat)) {
-            return true;
+            return self::NOT_LOADED;
         }
 
         $this->config = parse_ini_file($this->dotExakat);
@@ -102,6 +102,8 @@ class DotExakatConfig extends Config {
             }
             unset($ext);
         }
+        
+        return "$project/.exakat";
     }
 
 

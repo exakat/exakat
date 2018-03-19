@@ -32,7 +32,7 @@ class ProjectConfig extends Config {
     public function loadConfig($project) {
         $pathToIni = "{$this->projects_root}{$project}/config.ini";
         if (!file_exists($pathToIni)) {
-            return true;
+            return self::NOT_LOADED;
         }
 
         $this->config = parse_ini_file($pathToIni);
@@ -92,6 +92,8 @@ class ProjectConfig extends Config {
             }
             unset($ext);
         }
+
+        return "$project/config.ini";
     }
 }
 

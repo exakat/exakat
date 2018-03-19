@@ -23,8 +23,6 @@
 namespace Exakat\Configsource;
 
 class CodacyConfig extends Config {
-    private $projects_root = '.';
-    
     public function __construct($projects_root) {
         $this->projects_root = $projects_root.'/projects/';
     }
@@ -34,17 +32,17 @@ class CodacyConfig extends Config {
         
         $pathToJson = "{$this->projects_root}{$project}/code/.codacy.json";
         if (!file_exists($pathToJson)) {
-            return ;
+            return self::NOT_LOADED;
         }
 
         $json = file_get_contents($pathToJson);
         if (empty($json)) {
-            return ;
+            return self::NOT_LOADED;
         }
 
         $config = json_decode($json);
         if (empty($config)) {
-            return ;
+            return self::NOT_LOADED;
         }
 
         if (isset($config->tools)) {
@@ -57,6 +55,8 @@ class CodacyConfig extends Config {
                 $this->config['codacy_analyzers'] = $tool->patterns;
             }
         }
+
+        return '.codacy.json';
         
         // Todo : check that patterns are valid
         // Todo : check that files are valid

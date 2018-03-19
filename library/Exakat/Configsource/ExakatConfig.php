@@ -59,21 +59,26 @@ class ExakatConfig extends Config {
                         'other_php_versions' => array(),
                        );
 
-        $configFiles = array('/etc/exakat.ini',
+        $configFiles = array( $this->projects_root.'/config/exakat.ini',
                              '/etc/exakat/exakat.ini',
-                              $this->projects_root.'/config/exakat.ini',
+                             '/etc/exakat.ini',
+                              
                              );
 
-        // Parse every available init file, and overwrite with the most local.
-        $optionFiles = array();
+        // Parse every available init file, and stop at the first we find
+        $ini = null;
         foreach($configFiles as $id => $configFile) {
             if (file_exists($configFile)) {
-                $inis[] = parse_ini_file($configFile);
-                $optionFiles[] = $configFile;
+                $inis = parse_ini_file($configFile);
+                $optionFiles = $configFile;
             } 
         }
 
-        $this->config = empty($inis) ? array() : array_merge(...$inis);
+        if ( $inis === null) {
+            return self::NOT_LOADED;
+        }
+        
+        $this->config = $inis;
 
         // Validation
         if (!in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
@@ -104,6 +109,7 @@ class ExakatConfig extends Config {
             }
         }
 
+        return 'config/exakat.ini';
     }
 }
 
