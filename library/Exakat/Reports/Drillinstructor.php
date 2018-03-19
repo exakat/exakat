@@ -484,6 +484,7 @@ SQL
 
         $html = $this->getBasedPage('levels');
         $html = $this->injectBloc($html, 'LEVELS', $levels);
+        $html = $this->injectBloc($html, 'TITLE', 'Review level by level');
         $this->putBasedPage('levels', $html);
     }
 }
