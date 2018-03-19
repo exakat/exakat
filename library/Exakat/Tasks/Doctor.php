@@ -377,7 +377,7 @@ class Doctor extends Tasks {
         return $stats;
     }
 
-    private function array2list($array) {
+    private function array2list(array $array) {
         return implode(",\n                           ", $array);
     }
 
