@@ -105,13 +105,11 @@ class Project extends Tasks {
         // git doesn't necessarily exists yet.
         $info = array();
         if (($vcsClass = Vcs::getVcs($this->config)) === 'EmptyCode') {
-            print_r($this->config);
-            die('EMPTY CODE');
             $info['vcs_type'] = 'Standalone archive';
         } else {
             $info['vcs_type'] = strtolower($vcsClass);
             
-           print  $vcsClass = "\\Exakat\\Vcs\\{$vcsClass}";
+           $vcsClass = "\\Exakat\\Vcs\\{$vcsClass}";
             
             $vcs = new $vcsClass($this->config->project, $this->config->projects_root);
             if (method_exists($vcs, 'getUrl')) {

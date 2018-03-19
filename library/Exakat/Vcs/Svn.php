@@ -43,11 +43,15 @@ class Svn extends Vcs {
 
     public function update() {
         $res = shell_exec("cd $this->destinationFull; svn update");
-        if (!preg_match('/Updated to revision (\d+)\./', $res, $r)) {
-            preg_match('/At revision (\d+)/', $res, $r);
+        if (preg_match('/Updated to revision (\d+)\./', $res, $r)) {
+            return $r[1];
         }
-
-        return $r[1];
+        
+        if (preg_match('/At revision (\d+)/', $res, $r)) {
+            return $r[1];
+        }
+        
+        return 'Error : '.$res;
     }
 
     private function getInfo() {

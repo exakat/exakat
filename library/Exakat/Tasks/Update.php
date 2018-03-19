@@ -112,7 +112,7 @@ class Update extends Tasks {
                 display('SVN update '.$project);
                 $vcs = new Svn($project, $this->config->projects_root);
                 $new = $vcs->update();
-                display("SVN updated to revision $r[1]");
+                display("SVN updated to revision $new");
                 break;
 
             // bazaar case
