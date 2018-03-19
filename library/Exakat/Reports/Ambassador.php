@@ -414,12 +414,13 @@ class Ambassador extends Reports {
     private function generateFavorites() {
         $baseHTML = $this->getBasedPage('favorites_dashboard');
 
-        $analyzers = $this->themes->getThemeAnalyzers('Preferences');
+        $favorites = new Favorites($this->config);
+        $favoritesList = json_decode($favorites->generate(null, Reports::INLINE));
         
         $donut = array();
         $html = array(' ');
 
-        foreach($analyzers as $analyzer) {
+        foreach($favoritesList as $analyzer => $list) {
             $list = $this->datastore->getHashAnalyzer($analyzer);
 
             $table = '';
@@ -440,17 +441,18 @@ class Ambassador extends Reports {
                 }
                 $total += $value;
             }
-            $nb = 4 - count($list);
-            for($i = 0; $i < $nb; ++$i) {
-                $table .= '
+
+                $table .= str_repeat('
                 <div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>
-';
-            }
+', 4 - count($list));
+
             // Ignore if we have no occurrences
-            if ($total === 0) { continue; }
+            if ($total === 0) { 
+                continue; 
+            }
             $values = implode(', ', $values);
 
             $html[] = <<<HTML
