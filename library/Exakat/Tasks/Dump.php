@@ -101,6 +101,24 @@ CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
 SQL;
             $this->sqlite->query($query);
 
+            $query = <<<SQL
+CREATE TABLE hashAnalyzer ( id INTEGER PRIMARY KEY,
+                            analyzer TEXT,
+                            key TEXT UNIQUE,
+                            value TEXT
+                          );
+SQL;
+            $this->sqlite->query($query);
+
+            $query = <<<SQL
+CREATE TABLE hashResults ( id INTEGER PRIMARY KEY,
+                            name TEXT,
+                            key TEXT UNIQUE,
+                            value TEXT
+                          );
+SQL;
+            $this->sqlite->query($query);
+
             $this->collectDatastore();
 
             display('Inited tables');
@@ -119,6 +137,7 @@ SQL;
             $this->collectVariables();
             $this->collectLiterals();
             $this->collectReadability();
+            $this->collectParameterCounts();
 
             display('Collecting data finished');
         }
@@ -336,10 +355,24 @@ SQL;
         $this->sqlite->query('DETACH datastore');
     }
 
+    private function collectTablesData($tables) {
+        $datastorePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
+        $this->sqlite->query('ATTACH "'.$datastorePath.'" AS datastore');
+
+        $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
+        $existingTables = $this->sqlite->query($query);
+
+        while($table = $existingTables->fetchArray(\SQLITE3_ASSOC)) {
+            $this->sqlite->query('REPLACE INTO '.$table['name'].' SELECT * FROM datastore.'.$table['name']);
+        }
+
+        $this->sqlite->query('DETACH datastore');
+    }
+
     private function collectHashAnalyzer() {
         $tables = array('hashAnalyzer',
                        );
-        $this->collectTables($tables);
+        $this->collectTablesData($tables);
     }
 
     private function collectVariables() {
@@ -1280,6 +1313,25 @@ GREMLIN;
             $this->sqlite->query($query);
         }
         display(count($statics)." static calls CPM");
+    }
+    
+    private function collectParameterCounts() {
+        $query = <<<GREMLIN
+g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by('count').cap('m'); 
+GREMLIN;
+        $index = $this->gremlin->query($query);
+        
+        $values = array();
+        foreach($index->toArray()[0] as $number => $count) {
+            $values[] = "('ParameterCounts', $number, $count) ";
+        }
+        
+        if (!empty($values)) {
+            print $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES '.implode(', ', $values);
+            $this->sqlite->query($query);
+        }
+
+        display( count($values).' parameter counts');
     }
 
     private function collectReadability() {
