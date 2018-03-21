@@ -49,7 +49,7 @@ https://support.codacy.com/hc/en-us/articles/207994725-Tool-Developer-Guide
   "patternId":"latedef",
   "line":2
 }            */
-            $line = array('filename'  => trim($row['file'], '/'), // no initial / for the path
+            $line = array('file'      => trim($row['file'], '/'), // no initial / for the path
                           'message'   => $titleCache[$row['analyzer']],
                           'patternId' => $row['analyzer'],
                           'line'      => $row['line'],

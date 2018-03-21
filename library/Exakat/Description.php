@@ -41,7 +41,15 @@ class Description {
 
         assert(file_exists($filename), "Documentation for '$analyzerName' doesn't exists : $filename.");
         
-        $this->ini = parse_ini_file($filename);
+        $this->ini = parse_ini_file($filename, true);
+        $this->ini['parameters'] = array();
+        if (isset($this->ini['parameter1'])) {
+            for($i = 0; $i < 10; ++$i) {
+                if (isset($this->ini['parameter'.$i])) {
+                    $this->ini['parameters'][$i] = $this->ini['parameter'.$i];
+                }
+            }
+        }
         assert($this->ini !== null, "Documentation for '$analyzerName' doesn't exists : $filename.");
         
         assert(isset($this->ini['description']), 'Missing description in '.$analyzerName);
@@ -70,6 +78,10 @@ class Description {
 
     public function getVersionAdded() {
         return $this->ini['exakatSince'];
+    }
+
+    public function getParameters() {
+        return $this->ini['parameters'];
     }
 }
 
