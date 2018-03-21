@@ -302,7 +302,7 @@ foreach($analyzers as $title => $desc) {
 
 $attributes['ISSUES_EXAMPLES'] = join('', $issues_examples);
 
-$attributes['PARAMETER_LIST'] = $parameter_list;
+//$attributes['PARAMETER_LIST'] = $parameter_list;
 
 $attributes['APPLICATIONS'] = makeApplicationsLink(array_keys($applications));
 
@@ -310,7 +310,7 @@ $files = glob('docs/*.rst');
 foreach($files as $file) {
     $rst = file_get_contents($file);
     
-    $rst = str_replace(array_map(function ($x) { return '{{'.$x.'}}'; },array_keys($attributes)),array_values($attributes),$rst);
+    $rst = str_replace(array_map(function ($x) { return '{{'.$x.'}}'; }, array_keys($attributes)), array_values($attributes), $rst);
     if (preg_match_all('/{{(.*?)}}/',$rst,$r)) {
         print "There are ".count($r[1])." missed attributes in \"".basename($file)."\" : ".implode(",",$r[1])."\n\n";
     }
