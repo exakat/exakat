@@ -52,7 +52,7 @@ class CodacyConfig extends Config {
         if (isset($config->tools)) {
             foreach($config->tools as $tool) {
                 if ($tool->name != 'exakat') { continue; }
-                $this->config['codacy_analyzers'] = $tool->patterns;
+                $this->config['codacy_analyzers'] = array_column($tool->patterns, 'patternId');
             }
         }
 
