@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 16 Mar 2018 15:41:32 +0000
-.. comment: Generation hash : 3da16ea64ff465f4aea1a1fc4915c02b4fe8de2d
+.. comment: Generation date : Wed, 21 Mar 2018 21:46:28 +0000
+.. comment: Generation hash : 2d949fc59a9a92f4d7fc459a68716f2fe99d813b
 
 
 .. _$http\_raw\_post\_data:
@@ -39,11 +39,11 @@ It is possible to ready by setting always_populate_raw_post_data to -1.
 
 See also `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_.
 
-+--------------+---------------------------+
-| Command line | Php/RawPostDataUsage      |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP56` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/RawPostDataUsage      |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP56` |
++------------+---------------------------+
 
 
 
@@ -107,11 +107,11 @@ PHP 7.1 is stricter and check for $this at several positions. Some are found by 
    }
    ?>
 
-+--------------+--------------------------+
-| Command line | Classes/ThisIsForClasses |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Classes/ThisIsForClasses |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -143,11 +143,11 @@ $this Is Not An Array
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Classes/ThisIsNotAnArray |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Classes/ThisIsNotAnArray |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -186,13 +186,13 @@ While executing a static method, $this is actually set to NULL.
 
 See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_.
 
-+--------------+---------------------------------------------------------------------------------------------+
-| Command line | Classes/ThisIsNotForStatic                                                                  |
-+--------------+---------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                              |
-+--------------+---------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------+
+| Short name | Classes/ThisIsNotForStatic                                                                  |
++------------+---------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                              |
++------------+---------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__ |
++------------+---------------------------------------------------------------------------------------------+
 
 
 
@@ -217,11 +217,11 @@ If the code needs to be backward compatible to 5.5 or less, don't use the new op
 
 See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_.
 
-+--------------+--------------------+
-| Command line | Php/NewExponent    |
-+--------------+--------------------+
-| Themes       | :ref:`Suggestions` |
-+--------------+--------------------+
++------------+--------------------+
+| Short name | Php/NewExponent    |
++------------+--------------------+
+| Themes     | :ref:`Suggestions` |
++------------+--------------------+
 
 
 
@@ -248,11 +248,11 @@ PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It 
    
    ?>
 
-+--------------+------------------------------------------------------+
-| Command line | Php/StaticclassUsage                                 |
-+--------------+------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
-+--------------+------------------------------------------------------+
++------------+------------------------------------------------------+
+| Short name | Php/StaticclassUsage                                 |
++------------+------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++------------+------------------------------------------------------+
 
 
 
@@ -282,13 +282,13 @@ The only situation where @ is useful is when a native PHP function displays erro
 
 This is the case with `'fopen() <http://www.php.net/fopen>`_, `'stream_socket_server() <http://www.php.net/stream_socket_server>`_, `'token_get_all() <http://www.php.net/token_get_all>`_.
 
-+--------------+---------------------------------------------------------------------------------------+
-| Command line | Structures/Noscream                                                                   |
-+--------------+---------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                        |
-+--------------+---------------------------------------------------------------------------------------+
-| ClearPHP     | `no-noscream <https://github.com/dseguy/clearPHP/tree/master/rules/no-noscream.md>`__ |
-+--------------+---------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------+
+| Short name | Structures/Noscream                                                                   |
++------------+---------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                        |
++------------+---------------------------------------------------------------------------------------+
+| ClearPHP   | `no-noscream <https://github.com/dseguy/clearPHP/tree/master/rules/no-noscream.md>`__ |
++------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -318,11 +318,11 @@ This is not the case anymore in PHP 7.0+.
 
 See also `Why does PHP 5.2+ disallow abstract static class methods? <https://stackoverflow.com/questions/999066/why-does-php-5-2-disallow-abstract-static-class-methods>`_.
 
-+--------------+------------------------+
-| Command line | Classes/AbstractStatic |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Classes/AbstractStatic |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -334,11 +334,11 @@ Access Protected Structures
 
 It is not allowed to access protected properties or methods from outside the class or its relatives.
 
-+--------------+-------------------------+
-| Command line | Classes/AccessProtected |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Classes/AccessProtected |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -366,11 +366,11 @@ List of calls to private properties/methods that will compile but yield some fat
    
    ?>
 
-+--------------+-----------------------+
-| Command line | Classes/AccessPrivate |
-+--------------+-----------------------+
-| Themes       | :ref:`Analyze`        |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Classes/AccessPrivate |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
 
 
 
@@ -415,11 +415,11 @@ Action methods should be in a controller and public.
    
    ?>
 
-+--------------+--------------------------+
-| Command line | ZendF/ActionInController |
-+--------------+--------------------------+
-| Themes       | :ref:`ZendFramework`     |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | ZendF/ActionInController |
++------------+--------------------------+
+| Themes     | :ref:`ZendFramework`     |
++------------+--------------------------+
 
 
 
@@ -456,13 +456,13 @@ It is recommended to make the cast explicit with (int)
 
 If it is used to type cast a value to integer, then casting (integer) is clearer.
 
-+--------------+-----------------------------------------------------------------------------------------------+
-| Command line | Structures/AddZero                                                                            |
-+--------------+-----------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                |
-+--------------+-----------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------+
+| Short name | Structures/AddZero                                                                            |
++------------+-----------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                |
++------------+-----------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
++------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -495,13 +495,13 @@ Aliases are more likely to be removed later, but they have been around for a lon
 
 See documentation : `List of function aliases <http://php.net/manual/en/aliases.php>`_.
 
-+--------------+-------------------------------------------------------------------------------------+
-| Command line | Functions/AliasesUsage                                                              |
-+--------------+-------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                      |
-+--------------+-------------------------------------------------------------------------------------+
-| ClearPHP     | `no-aliases <https://github.com/dseguy/clearPHP/tree/master/rules/no-aliases.md>`__ |
-+--------------+-------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------+
+| Short name | Functions/AliasesUsage                                                              |
++------------+-------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                      |
++------------+-------------------------------------------------------------------------------------+
+| ClearPHP   | `no-aliases <https://github.com/dseguy/clearPHP/tree/master/rules/no-aliases.md>`__ |
++------------+-------------------------------------------------------------------------------------+
 
 
 
@@ -530,11 +530,11 @@ When using custom variables, try to use lowercase $variables, $camelCase, $sturd
 
 `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
 
-+--------------+------------------------------------------------+
-| Command line | Variables/VariableUppercase                    |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Variables/VariableUppercase                    |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -585,11 +585,11 @@ That way, the child doesn't need to implement the interface, nor define its meth
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Interfaces/AlreadyParentsInterface |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Interfaces/AlreadyParentsInterface |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -627,13 +627,13 @@ Using references is then must faster, and easier to read.
 
 You may also use `'array_walk() <http://www.php.net/array_walk>`_ or `'array_map() <http://www.php.net/array_map>`_ (when $key is not used) to avoid the use of foreach.
 
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/AlteringForeachWithoutReference                                                                                        |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                                                    |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `use-reference-to-alter-in-foreach <https://github.com/dseguy/clearPHP/tree/master/rules/use-reference-to-alter-in-foreach.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/AlteringForeachWithoutReference                                                                                        |
++------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                                                    |
++------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `use-reference-to-alter-in-foreach <https://github.com/dseguy/clearPHP/tree/master/rules/use-reference-to-alter-in-foreach.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -664,11 +664,11 @@ This analysis reports files that are using both syntax at the same time. This is
    
    ?>
 
-+--------------+-----------------------------------------+
-| Command line | Structures/AlternativeConsistenceByFile |
-+--------------+-----------------------------------------+
-| Themes       | :ref:`Analyze`                          |
-+--------------+-----------------------------------------+
++------------+-----------------------------------------+
+| Short name | Structures/AlternativeConsistenceByFile |
++------------+-----------------------------------------+
+| Themes     | :ref:`Analyze`                          |
++------------+-----------------------------------------+
 
 
 
@@ -718,11 +718,11 @@ This analysis reports false positive when the regex is used to search a pattern 
 
 See also `CWE-625: Permissive Regular Expression <https://cwe.mitre.org/data/definitions/625.html>`_.
 
-+--------------+----------------------+
-| Command line | Security/AnchorRegex |
-+--------------+----------------------+
-| Themes       | :ref:`Security`      |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Security/AnchorRegex |
++------------+----------------------+
+| Themes     | :ref:`Security`      |
++------------+----------------------+
 
 
 
@@ -747,11 +747,11 @@ When comparing them to 0, the following expressions are always true and should b
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Structures/NeverNegative |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/NeverNegative |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -784,11 +784,11 @@ Array indices only accept integers and strings, so any other type of literal is 
 
 They are indeed distinct, but may lead to confusion.
 
-+--------------+----------------------+
-| Command line | Arrays/AmbiguousKeys |
-+--------------+----------------------+
-| Themes       | :ref:`Analyze`       |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Arrays/AmbiguousKeys |
++------------+----------------------+
+| Themes     | :ref:`Analyze`       |
++------------+----------------------+
 
 
 
@@ -822,11 +822,11 @@ Try to keep the static-ness of methods simple, and unique. Consider renaming the
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Classes/AmbiguousStatic |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Classes/AmbiguousStatic |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -847,11 +847,11 @@ Anonymous classes.
    
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Classes/Anonymous                                                                                          |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/Anonymous                                                                                          |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -879,13 +879,13 @@ The analyzer will detect situations where a class, or the keywords 'array' or 'c
 
 `'Closure <http://php.net/manual/fr/class.closure.php>`_ arguments are omitted.
 
-+--------------+-----------------------------------------------------------------------------------------------+
-| Command line | Functions/ShouldBeTypehinted                                                                  |
-+--------------+-----------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Suggestions`                                                                            |
-+--------------+-----------------------------------------------------------------------------------------------+
-| ClearPHP     | `always-typehint <https://github.com/dseguy/clearPHP/tree/master/rules/always-typehint.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------+
+| Short name | Functions/ShouldBeTypehinted                                                                  |
++------------+-----------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Suggestions`                                                                            |
++------------+-----------------------------------------------------------------------------------------------+
+| ClearPHP   | `always-typehint <https://github.com/dseguy/clearPHP/tree/master/rules/always-typehint.md>`__ |
++------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -927,13 +927,13 @@ Properties may be assigned default values at declaration time. Such values may b
 
 Default values will save some instructions in the constructor, and makes the value obvious in the code.
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------+
-| Command line | Classes/MakeDefault                                                                                                       |
-+--------------+---------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                                            |
-+--------------+---------------------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `use-properties-default-values <https://github.com/dseguy/clearPHP/tree/master/rules/use-properties-default-values.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/MakeDefault                                                                                                       |
++------------+---------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                                            |
++------------+---------------------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `use-properties-default-values <https://github.com/dseguy/clearPHP/tree/master/rules/use-properties-default-values.md>`__ |
++------------+---------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -966,11 +966,11 @@ It is recommended to use the &&, ^ and || operators, instead of and, or and xor,
 
 See also `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
 
-+--------------+----------------+
-| Command line | Php/AssignAnd  |
-+--------------+----------------+
-| Themes       | :ref:`Analyze` |
-+--------------+----------------+
++------------+----------------+
+| Short name | Php/AssignAnd  |
++------------+----------------+
+| Themes     | :ref:`Analyze` |
++------------+----------------+
 
 
 
@@ -1008,11 +1008,11 @@ Incremental changes to a variables are not reported here.
    
    ?>
 
-+--------------+-------------------------------+
-| Command line | Variables/AssignedTwiceOrMore |
-+--------------+-------------------------------+
-| Themes       | :ref:`Analyze`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Variables/AssignedTwiceOrMore |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -1047,11 +1047,11 @@ It is recommended to store the values in an array, and then use `'implode() <htt
 
 The same doesn't apply to addition and multiplication, with `'array_sum() <http://www.php.net/array_sum>`_ and array_multiply(), as those operations work on the current memory allocation, and don't need to allocate new memory at each step.
 
-+--------------+-----------------------------+
-| Command line | Performances/NoConcatInLoop |
-+--------------+-----------------------------+
-| Themes       | :ref:`Performances`         |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Performances/NoConcatInLoop |
++------------+-----------------------------+
+| Themes     | :ref:`Performances`         |
++------------+-----------------------------+
 
 
 
@@ -1094,11 +1094,11 @@ It is recommended to build the query and to prepare it in one call, to avoid suc
 See also `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_ and 
 `Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_.
 
-+--------------+-------------------------+
-| Command line | Wordpress/DoublePrepare |
-+--------------+-------------------------+
-| Themes       | :ref:`Wordpress`        |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Wordpress/DoublePrepare |
++------------+-------------------------+
+| Themes     | :ref:`Wordpress`        |
++------------+-------------------------+
 
 
 
@@ -1173,11 +1173,11 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Structures/NoAssignationInFunction |
-+--------------+------------------------------------+
-| Themes       | :ref:`Performances`                |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/NoAssignationInFunction |
++------------+------------------------------------+
+| Themes     | :ref:`Performances`                |
++------------+------------------------------------+
 
 
 
@@ -1209,11 +1209,11 @@ It is recommended to rely on a mix of arguments passing and classes structures t
 
 See also `Global Variables <https://codex.wordpress.org/Global_Variables>`_
 
-+--------------+-----------------------------+
-| Command line | Wordpress/AvoidOtherGlobals |
-+--------------+-----------------------------+
-| Themes       | :ref:`Wordpress`            |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Wordpress/AvoidOtherGlobals |
++------------+-----------------------------+
+| Themes     | :ref:`Wordpress`            |
++------------+-----------------------------+
 
 
 
@@ -1256,11 +1256,11 @@ Either make sure the property is set with an actual object rather than with null
 See also `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_,
 `The Null Object Pattern – Polymorphism in Domain Models <https://www.sitepoint.com/the-null-object-pattern-polymorphism-in-domain-models/>`_, and `Practical PHP Refactoring: Introduce Null Object <https://dzone.com/articles/practical-php-refactoring-26>`_.
 
-+--------------+---------------------------------+
-| Command line | Classes/AvoidOptionalProperties |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Classes/AvoidOptionalProperties |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -1300,11 +1300,11 @@ Avoid using PHP superglobal when using Zend Framework. Zend Framework provides o
 
 See also `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_ of the Zend-mvc component.
 
-+--------------+----------------------+
-| Command line | ZendF/DontUseGPC     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/DontUseGPC     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -1335,11 +1335,11 @@ The usage of parenthesis actually give some feeling of comfort, it won't prevent
 
 Even if most of the time, usage of parenthesis is legit, it is recommended to avoid them.
 
-+--------------+------------------------------------+
-| Command line | Structures/PrintWithoutParenthesis |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`                     |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/PrintWithoutParenthesis |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`                     |
++------------+------------------------------------+
 
 
 
@@ -1375,11 +1375,11 @@ Weak crypto are commonly used for hashing values when caching them. In such case
 
 See also `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_.
 
-+--------------+---------------------------+
-| Command line | Security/AvoidThoseCrypto |
-+--------------+---------------------------+
-| Themes       | :ref:`Security`           |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Security/AvoidThoseCrypto |
++------------+---------------------------+
+| Themes     | :ref:`Security`           |
++------------+---------------------------+
 
 
 
@@ -1420,11 +1420,11 @@ It is recommended to avoid instantiating this class, nor use it is any way.
 
 If you need a stdClass object, it is faster to build it as an array, then cast it, than instantiate stdClass. This is a micro-optimisation.
 
-+--------------+-----------------+
-| Command line | Php/UseStdclass |
-+--------------+-----------------+
-| Themes       | :ref:`Analyze`  |
-+--------------+-----------------+
++------------+-----------------+
+| Short name | Php/UseStdclass |
++------------+-----------------+
+| Themes     | :ref:`Analyze`  |
++------------+-----------------+
 
 
 
@@ -1468,11 +1468,11 @@ And using count after the push is also faster than collecting `'array_push() <ht
 
 This is a micro-optimisation.
 
-+--------------+-----------------------------+
-| Command line | Performances/AvoidArrayPush |
-+--------------+-----------------------------+
-| Themes       | :ref:`Performances`         |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Performances/AvoidArrayPush |
++------------+-----------------------------+
+| Themes     | :ref:`Performances`         |
++------------+-----------------------------+
 
 
 
@@ -1505,11 +1505,11 @@ The native function `'array_unique() <http://www.php.net/array_unique>`_ is much
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Structures/NoArrayUnique |
-+--------------+--------------------------+
-| Themes       | :ref:`Performances`      |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/NoArrayUnique |
++------------+--------------------------+
+| Themes     | :ref:`Performances`      |
++------------+--------------------------+
 
 
 
@@ -1544,11 +1544,11 @@ get_class() will only compare the full namespace name of the object's class, whi
        }
    ?>
 
-+--------------+--------------------------+
-| Command line | Structures/UseInstanceof |
-+--------------+--------------------------+
-| Themes       | none                     |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/UseInstanceof |
++------------+--------------------------+
+| Themes     | none                     |
++------------+--------------------------+
 
 
 
@@ -1589,11 +1589,11 @@ Glob() accepts wildchar, that may not easily replaced with `'scandir() <http://w
 
 See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_.
 
-+--------------+---------------------+
-| Command line | Performances/NoGlob |
-+--------------+---------------------+
-| Themes       | :ref:`Performances` |
-+--------------+---------------------+
++------------+---------------------+
+| Short name | Performances/NoGlob |
++------------+---------------------+
+| Themes     | :ref:`Performances` |
++------------+---------------------+
 
 
 
@@ -1620,11 +1620,11 @@ Avoid configuring `'set_error_handler() <http://www.php.net/set_error_handler>`_
 
 See also `'set_error_handler() <http://www.php.net/set_error_handler>`_;
 
-+--------------+------------------------------------+
-| Command line | Php/AvoidSetErrorHandlerContextArg |
-+--------------+------------------------------------+
-| Themes       | :ref:`CompatibilityPHP72`          |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Php/AvoidSetErrorHandlerContextArg |
++------------+------------------------------------+
+| Themes     | :ref:`CompatibilityPHP72`          |
++------------+------------------------------------+
 
 
 
@@ -1659,11 +1659,11 @@ As much as possible, avoid delaying the end of the script.
 
 `'sleep() <http://www.php.net/sleep>`_ and `'usleep() <http://www.php.net/usleep>`_ have less impact in commandline (CLI).
 
-+--------------+------------------+
-| Command line | Security/NoSleep |
-+--------------+------------------+
-| Themes       | :ref:`Security`  |
-+--------------+------------------+
++------------+------------------+
+| Short name | Security/NoSleep |
++------------+------------------+
+| Themes     | :ref:`Security`  |
++------------+------------------+
 
 
 
@@ -1728,11 +1728,11 @@ This works with the `'break <http://php.net/manual/en/control-structures.break.p
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Structures/BailOutEarly |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/BailOutEarly |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -1753,11 +1753,11 @@ List of all the integer values using the binary format.
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Type/Binary               |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP53` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Type/Binary               |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP53` |
++------------+---------------------------+
 
 
 
@@ -1788,11 +1788,11 @@ It is generally considered a bad practice, as readability is lower and there are
 
 `'switch() <http://php.net/manual/en/control-structures.switch.php>`_ cannot be without bracket.
 
-+--------------+------------------------------------------------+
-| Command line | Structures/Bracketless                         |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Structures/Bracketless                         |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -1826,11 +1826,11 @@ It is not possible anymore to include a piece of code inside a loop that will th
        }
    ?>
 
-+--------------+-------------------------------------------+
-| Command line | Structures/BreakOutsideLoop               |
-+--------------+-------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
-+--------------+-------------------------------------------+
++------------+-------------------------------------------+
+| Short name | Structures/BreakOutsideLoop               |
++------------+-------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
++------------+-------------------------------------------+
 
 
 
@@ -1858,11 +1858,11 @@ Cannot `'break <http://php.net/manual/en/control-structures.break.php>`_ 0, as t
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Structures/Break0         |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP53` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Structures/Break0         |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP53` |
++------------+---------------------------+
 
 
 
@@ -1894,11 +1894,11 @@ Other values were acceptable in PHP 5.3 and previous version, but this is now re
    
    ?>
 
-+--------------+----------------------------+
-| Command line | Structures/BreakNonInteger |
-+--------------+----------------------------+
-| Themes       | :ref:`CompatibilityPHP54`  |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Structures/BreakNonInteger |
++------------+----------------------------+
+| Themes     | :ref:`CompatibilityPHP54`  |
++------------+----------------------------+
 
 
 
@@ -1925,11 +1925,11 @@ They are difficult to spot, and may be confusing. It is advised to place them in
    }
    ?>
 
-+--------------+------------------------------+
-| Command line | Structures/BuriedAssignation |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Structures/BuriedAssignation |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -1941,11 +1941,11 @@ CakePHP 2.5.0 Undefined Classes
 
 CakePHP classes, interfaces and traits that are not defined in version 2.5.0.
 
-+--------------+-------------------+
-| Command line | Cakephp/Cakephp25 |
-+--------------+-------------------+
-| Themes       | :ref:`Cakephp`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Cakephp/Cakephp25 |
++------------+-------------------+
+| Themes     | :ref:`Cakephp`    |
++------------+-------------------+
 
 
 
@@ -1958,11 +1958,11 @@ CakePHP 2.6.0 Undefined Classes
 CakePHP classes, interfaces and traits that are not defined in version 2.6.0.
 5 new classes
 
-+--------------+-------------------+
-| Command line | Cakephp/Cakephp26 |
-+--------------+-------------------+
-| Themes       | :ref:`Cakephp`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Cakephp/Cakephp26 |
++------------+-------------------+
+| Themes     | :ref:`Cakephp`    |
++------------+-------------------+
 
 
 
@@ -1977,11 +1977,11 @@ CakePHP classes, interfaces and traits that are not defined in version 2.7.0.
  
 2 removed classes
 
-+--------------+-------------------+
-| Command line | Cakephp/Cakephp27 |
-+--------------+-------------------+
-| Themes       | :ref:`Cakephp`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Cakephp/Cakephp27 |
++------------+-------------------+
+| Themes     | :ref:`Cakephp`    |
++------------+-------------------+
 
 
 
@@ -1994,11 +1994,11 @@ CakePHP 2.8.0 Undefined Classes
 CakePHP classes, interfaces and traits that are not defined in version 2.8.0.
 8 new classes
 
-+--------------+-------------------+
-| Command line | Cakephp/Cakephp28 |
-+--------------+-------------------+
-| Themes       | :ref:`Cakephp`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Cakephp/Cakephp28 |
++------------+-------------------+
+| Themes     | :ref:`Cakephp`    |
++------------+-------------------+
 
 
 
@@ -2013,11 +2013,11 @@ CakePHP classes, interfaces and traits that are not defined in version 2.9.0.
  
 2 removed classes
 
-+--------------+-------------------+
-| Command line | Cakephp/Cakephp29 |
-+--------------+-------------------+
-| Themes       | :ref:`Cakephp`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Cakephp/Cakephp29 |
++------------+-------------------+
+| Themes     | :ref:`Cakephp`    |
++------------+-------------------+
 
 
 
@@ -2031,11 +2031,11 @@ According to the `Cake 3.0 migration guide <http://book.cakephp.org/3.0/en/appen
 
 * Set (Cake\Utility\Set) : replace it with Hash (Cake\Utility\Hash)
 
-+--------------+-------------------------------+
-| Command line | Cakephp/Cake30DeprecatedClass |
-+--------------+-------------------------------+
-| Themes       | :ref:`Cakephp`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Cakephp/Cake30DeprecatedClass |
++------------+-------------------------------+
+| Themes     | :ref:`Cakephp`                |
++------------+-------------------------------+
 
 
 
@@ -2053,11 +2053,11 @@ CakePHP classes, interfaces and traits that are not defined in version 3.0.0.
 1062 removed classes 
 7 removed interfaces
 
-+--------------+-------------------+
-| Command line | Cakephp/Cakephp30 |
-+--------------+-------------------+
-| Themes       | :ref:`Cakephp`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Cakephp/Cakephp30 |
++------------+-------------------+
+| Themes     | :ref:`Cakephp`    |
++------------+-------------------+
 
 
 
@@ -2074,11 +2074,11 @@ CakePHP classes, interfaces and traits that are not defined in version 3.1.0.
  
 16 removed classes
 
-+--------------+-------------------+
-| Command line | Cakephp/Cakephp31 |
-+--------------+-------------------+
-| Themes       | :ref:`Cakephp`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Cakephp/Cakephp31 |
++------------+-------------------+
+| Themes     | :ref:`Cakephp`    |
++------------+-------------------+
 
 
 
@@ -2095,11 +2095,11 @@ CakePHP classes, interfaces and traits that are not defined in version 3.2.0.
  
 1 removed classe
 
-+--------------+-------------------+
-| Command line | Cakephp/Cakephp32 |
-+--------------+-------------------+
-| Themes       | :ref:`Cakephp`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Cakephp/Cakephp32 |
++------------+-------------------+
+| Themes     | :ref:`Cakephp`    |
++------------+-------------------+
 
 
 
@@ -2113,11 +2113,11 @@ According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appen
 
 * Mcrypt (Cake\Utility\Crypto\Mcrypt) : replace it with Cake\Utility\Crypto\Openssl or ext/openssl
 
-+--------------+-------------------------------+
-| Command line | Cakephp/Cake33DeprecatedClass |
-+--------------+-------------------------------+
-| Themes       | :ref:`Cakephp`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Cakephp/Cake33DeprecatedClass |
++------------+-------------------------------+
+| Themes     | :ref:`Cakephp`                |
++------------+-------------------------------+
 
 
 
@@ -2135,11 +2135,11 @@ CakePHP classes, interfaces and traits that are not defined in version 3.3.0.
 19 removed classes 
 1 removed interface
 
-+--------------+-------------------+
-| Command line | Cakephp/Cakephp33 |
-+--------------+-------------------+
-| Themes       | :ref:`Cakephp`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Cakephp/Cakephp33 |
++------------+-------------------+
+| Themes     | :ref:`Cakephp`    |
++------------+-------------------+
 
 
 
@@ -2157,11 +2157,11 @@ CakePHP classes, interfaces and traits that are not defined in version 3.4.0.
 16 removed classes 
 2 removed traits
 
-+--------------+-------------------+
-| Command line | Cakephp/Cakephp34 |
-+--------------+-------------------+
-| Themes       | :ref:`Cakephp`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Cakephp/Cakephp34 |
++------------+-------------------+
+| Themes     | :ref:`Cakephp`    |
++------------+-------------------+
 
 
 
@@ -2197,11 +2197,11 @@ CakePHP classes, interfaces and traits being used in the code.
 
 See also `CakePHP <https://www.cakephp.org/>`_.
 
-+--------------+---------------------+
-| Command line | Cakephp/CakePHPUsed |
-+--------------+---------------------+
-| Themes       | :ref:`Cakephp`      |
-+--------------+---------------------+
++------------+---------------------+
+| Short name | Cakephp/CakePHPUsed |
++------------+---------------------+
+| Themes     | :ref:`Cakephp`      |
++------------+---------------------+
 
 
 
@@ -2229,11 +2229,11 @@ Either the function use a reference in its signature, either the reference won't
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Structures/CalltimePassByReference |
-+--------------+------------------------------------+
-| Themes       | :ref:`CompatibilityPHP54`          |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/CalltimePassByReference |
++------------+------------------------------------+
+| Themes     | :ref:`CompatibilityPHP54`          |
++------------+------------------------------------+
 
 
 
@@ -2265,11 +2265,11 @@ Count() emits an error when it tries to count scalars or objects what don't impl
 
 See also `Warn when counting non-countable types <http://php.net/manual/en/migration72.incompatible.php#migration72.incompatible.warn-on-non-countable-types>`_.
 
-+--------------+---------------------------------+
-| Command line | Structures/CanCountNonCountable |
-+--------------+---------------------------------+
-| Themes       | :ref:`CompatibilityPHP72`       |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/CanCountNonCountable |
++------------+---------------------------------+
+| Themes     | :ref:`CompatibilityPHP72`       |
++------------+---------------------------------+
 
 
 
@@ -2306,11 +2306,11 @@ In a separate file :
        }
    ?>
 
-+--------------+----------------------------------------------+
-| Command line | Classes/CantExtendFinal                      |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Classes/CantExtendFinal                      |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
 
 
 
@@ -2335,11 +2335,11 @@ Inheriting abstract methods was made available in PHP 7.2. In previous versions,
 
 See also `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_.
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Classes/CantInheritAbstractMethod                                                                                                                                |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/CantInheritAbstractMethod                                                                                                                                |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -2369,11 +2369,11 @@ This also applies to methodcalls, static or not.
 
 See also `Cant Use Return Value In Write Context <https://stackoverflow.com/questions/1075534/cant-use-method-return-value-in-write-context>`_.
 
-+--------------+------------------------------------------------------+
-| Command line | Php/CantUseReturnValueInWriteContext                 |
-+--------------+------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
-+--------------+------------------------------------------------------+
++------------+------------------------------------------------------+
+| Short name | Php/CantUseReturnValueInWriteContext                 |
++------------+------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++------------+------------------------------------------------------+
 
 
 
@@ -2403,11 +2403,11 @@ This expression may be reduced by casting to boolean type.
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Structures/CastToBoolean |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/CastToBoolean |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -2444,13 +2444,13 @@ The try/catch structure uses some variables that also in use in this scope. In c
 
 It is recommended to use another name for these catch variables.
 
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Command line | Structures/CatchShadowsVariable                                                                     |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                      |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-catch-overwrite <https://github.com/dseguy/clearPHP/tree/master/rules/no-catch-overwrite.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------+
+| Short name | Structures/CatchShadowsVariable                                                                     |
++------------+-----------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                      |
++------------+-----------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-catch-overwrite <https://github.com/dseguy/clearPHP/tree/master/rules/no-catch-overwrite.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------+
 
 
 
@@ -2498,11 +2498,11 @@ Using `'is_callable() <http://www.php.net/is_callable>`_, is_iterable() with thi
 
 Using a type test without else is also accepted here. This is a special treatment for this test, and all others are ignored. This aspect may vary depending on situations and projects.
 
-+--------------+--------------------------+
-| Command line | Structures/CheckAllTypes |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/CheckAllTypes |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -2528,11 +2528,11 @@ PHP 7.2 introduced the ability to remove a typehint when overloarding a method. 
    
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Classes/ChildRemoveTypehint                                                                                                                                      |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/ChildRemoveTypehint                                                                                                                                      |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -2544,11 +2544,11 @@ Class Const With Array
 
 Constant defined with const keyword may be arrays but only stating with PHP 5.6. Define never accept arrays : it only accepts scalar values.
 
-+--------------+---------------------------------------------------------------------------------+
-| Command line | Php/ClassConstWithArray                                                         |
-+--------------+---------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+---------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Php/ClassConstWithArray                                                         |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -2576,11 +2576,11 @@ When functions and classes bear the same name, calling them may be confusing. Th
    
    ?>
 
-+--------------+----------------------------+
-| Command line | Php/ClassFunctionConfusion |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Php/ClassFunctionConfusion |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -2613,11 +2613,11 @@ It may also be a violation of coding conventions.
 
 See also `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_.
 
-+--------------+----------------------------------------------------------------+
-| Command line | Classes/WrongCase                                              |
-+--------------+----------------------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
-+--------------+----------------------------------------------------------------+
++------------+----------------------------------------------------------------+
+| Short name | Classes/WrongCase                                              |
++------------+----------------------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
++------------+----------------------------------------------------------------+
 
 
 
@@ -2652,11 +2652,11 @@ Full article : `When to declare classes final <http://ocramius.github.io/blog/wh
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Classes/FinalByOcramius |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Classes/FinalByOcramius |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -2679,11 +2679,11 @@ The following names are used at the same time for classes, interfaces or traits.
 
 Even if they are in different namespaces, this makes them easy to confuse. Besides, it is recommended to have markers to differentiate classes from interfaces from traits.
 
-+--------------+---------------------+
-| Command line | Classes/CitSameName |
-+--------------+---------------------+
-| Themes       | :ref:`Analyze`      |
-+--------------+---------------------+
++------------+---------------------+
+| Short name | Classes/CitSameName |
++------------+---------------------+
+| Themes     | :ref:`Analyze`      |
++------------+---------------------+
 
 
 
@@ -2710,11 +2710,11 @@ Those classes are extending each other, creating an extension loop. PHP will yie
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Classes/MutualExtension |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Classes/MutualExtension |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -2726,13 +2726,13 @@ Close Tags
 
 PHP manual recommends that script should be left open, without the final closing ?>. This way, one will avoid the infamous bug 'Header already sent', associated with left-over spaces, that are lying after this closing tag.
 
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Command line | Php/CloseTags                                                                                               |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>`                                                              |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `leave-last-closing-out <https://github.com/dseguy/clearPHP/tree/master/rules/leave-last-closing-out.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------+
+| Short name | Php/CloseTags                                                                                               |
++------------+-------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>`                                                              |
++------------+-------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `leave-last-closing-out <https://github.com/dseguy/clearPHP/tree/master/rules/leave-last-closing-out.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -2770,11 +2770,11 @@ This is not the case anymore since PHP 5.4.
 
 See also `Anonymus Functions <http://php.net/manual/en/functions.anonymous.php>`_.
 
-+--------------+---------------------------+
-| Command line | Php/ClosureThisSupport    |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP53` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/ClosureThisSupport    |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP53` |
++------------+---------------------------+
 
 
 
@@ -2814,11 +2814,11 @@ may be rewritten in :
    
    ?>
 
-+--------------+-------------------------------+
-| Command line | Structures/CommonAlternatives |
-+--------------+-------------------------------+
-| Themes       | :ref:`Analyze`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Structures/CommonAlternatives |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -2865,15 +2865,15 @@ You may also use `'password_hash() <http://www.php.net/password_hash>`_ and `'pa
 See also `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_ and 
          `md5('240610708') == md5('QNKCDZO') <https://news.ycombinator.com/item?id=9484757>`_.
 
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Command line | Security/CompareHash                                                                                |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Security`                                                                                     |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| ClearPHP     | `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Examples     | :ref:`traq-security-comparehash`, :ref:`livezilla-security-comparehash`                             |
-+--------------+-----------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------+
+| Short name | Security/CompareHash                                                                                |
++------------+-----------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Security`                                                                                     |
++------------+-----------------------------------------------------------------------------------------------------+
+| ClearPHP   | `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`traq-security-comparehash`, :ref:`livezilla-security-comparehash`                             |
++------------+-----------------------------------------------------------------------------------------------------+
 
 
 
@@ -2900,11 +2900,11 @@ Usually, comparison are sufficient, and it is rare to have to compare the result
 
 See also `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
 
-+--------------+-------------------------------+
-| Command line | Structures/ComparedComparison |
-+--------------+-------------------------------+
-| Themes       | :ref:`Analyze`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Structures/ComparedComparison |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -2940,11 +2940,11 @@ PHP doesn't lint this, unless the interface and the class are in the same file. 
 
 See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_.
 
-+--------------+-------------------------------+
-| Command line | Interfaces/ConcreteVisibility |
-+--------------+-------------------------------+
-| Themes       | :ref:`Analyze`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Interfaces/ConcreteVisibility |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -3004,11 +3004,11 @@ Variables which differ only by case, or by punctuation or by numbers are reporte
 
 See also `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_.
 
-+--------------+-----------------------+
-| Command line | Variables/CloseNaming |
-+--------------+-----------------------+
-| Themes       | :ref:`Analyze`        |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Variables/CloseNaming |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
 
 
 
@@ -3020,11 +3020,11 @@ Const With Array
 
 The const keyword supports array since PHP 5.6.
 
-+--------------+---------------------------------------------------------------------------------+
-| Command line | Php/ConstWithArray                                                              |
-+--------------+---------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+---------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Php/ConstWithArray                                                              |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -3038,11 +3038,11 @@ A class or an interface only made up of constants. Constants usually have to be 
 
 As such, they should be PHP constants (build with define or const), or included in a class with other methods and properties.
 
-+--------------+-----------------------+
-| Command line | Classes/ConstantClass |
-+--------------+-----------------------+
-| Themes       | :ref:`Analyze`        |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Classes/ConstantClass |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
 
 
 
@@ -3081,11 +3081,11 @@ Every comparison operator is used when finding the favorite.
    
    ?>
 
-+--------------+------------------------------------------------+
-| Command line | Structures/ConstantComparisonConsistance       |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Structures/ConstantComparisonConsistance       |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -3119,11 +3119,11 @@ Those expressions (using simple operators) may only manipulate other constants, 
 
 See also `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exprs>`_.
 
-+--------------+---------------------------------------------------------------------------------+
-| Command line | Structures/ConstantScalarExpression                                             |
-+--------------+---------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+---------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Structures/ConstantScalarExpression                                             |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -3146,11 +3146,11 @@ List of PHP constants being defined.
    define ('Y', 2);
    ?>
 
-+--------------+-------------------------+
-| Command line | Constants/Constantnames |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Constants/Constantnames |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -3183,11 +3183,11 @@ Using the `'define() <http://www.php.net/define>`_ function, it is possible to c
 
 However, this makes the code confusing and difficult to debug. It is recommended to move the constant definition to its namespace.
 
-+--------------+--------------------------------------+
-| Command line | Constants/CreatedOutsideItsNamespace |
-+--------------+--------------------------------------+
-| Themes       | :ref:`Analyze`                       |
-+--------------+--------------------------------------+
++------------+--------------------------------------+
+| Short name | Constants/CreatedOutsideItsNamespace |
++------------+--------------------------------------+
+| Themes     | :ref:`Analyze`                       |
++------------+--------------------------------------+
 
 
 
@@ -3218,11 +3218,11 @@ List of constants being defined with names that are incompatible with PHP standa
 
 See also `Constants <http://php.net/manual/en/language.constants.php>`_.
 
-+--------------+--------------------------------+
-| Command line | Constants/ConstantStrangeNames |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Constants/ConstantStrangeNames |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`                 |
++------------+--------------------------------+
 
 
 
@@ -3258,11 +3258,11 @@ When a property is defined and read, but never modified, it may be a constant.
 
 Starting with PHP 5.6, even array() may be defined as constants.
 
-+--------------+------------------------------+
-| Command line | Classes/CouldBeClassConstant |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Classes/CouldBeClassConstant |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -3298,11 +3298,11 @@ When two if/then structures follow each other, using a condition and its opposit
    
    ?>
 
-+--------------+------------------------+
-| Command line | Structures/CouldBeElse |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Structures/CouldBeElse |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -3346,11 +3346,11 @@ As a general rule, it is recommended to make constant 'private' by default, and 
 
 See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_.
 
-+--------------+---------------------------------+
-| Command line | Classes/CouldBePrivateConstante |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Classes/CouldBePrivateConstante |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -3400,11 +3400,11 @@ As a general rule, it is recommended to make constant 'private' by default, and 
    
    ?>
 
-+--------------+----------------------------------+
-| Command line | Classes/CouldBeProtectedConstant |
-+--------------+----------------------------------+
-| Themes       | :ref:`Analyze`                   |
-+--------------+----------------------------------+
++------------+----------------------------------+
+| Short name | Classes/CouldBeProtectedConstant |
++------------+----------------------------------+
+| Themes     | :ref:`Analyze`                   |
++------------+----------------------------------+
 
 
 
@@ -3440,11 +3440,11 @@ Those methods are declared public, but are never used publicly. They may be made
 
 These properties may even be made private.
 
-+--------------+--------------------------------+
-| Command line | Classes/CouldBeProtectedMethod |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Classes/CouldBeProtectedMethod |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`                 |
++------------+--------------------------------+
 
 
 
@@ -3479,11 +3479,11 @@ Those properties are declared public, but are never used publicly. They may be m
 
 This property may even be made private.
 
-+--------------+----------------------------------+
-| Command line | Classes/CouldBeProtectedProperty |
-+--------------+----------------------------------+
-| Themes       | :ref:`Analyze`                   |
-+--------------+----------------------------------+
++------------+----------------------------------+
+| Short name | Classes/CouldBeProtectedProperty |
++------------+----------------------------------+
+| Themes     | :ref:`Analyze`                   |
++------------+----------------------------------+
 
 
 
@@ -3504,11 +3504,11 @@ This global is only used in one function or method. It may be called 'static', i
    }
    ?>
 
-+--------------+--------------------------+
-| Command line | Structures/CouldBeStatic |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/CouldBeStatic |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -3545,11 +3545,11 @@ When arguments are used to call a function, but are not marked with 'callable', 
 
 See also `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_.
 
-+--------------+---------------------------+
-| Command line | Functions/CouldBeCallable |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Functions/CouldBeCallable |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -3592,11 +3592,11 @@ The analysis looks for functions calls, and checks the arguments. When the calls
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Functions/CouldCentralize          |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Functions/CouldCentralize          |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -3626,11 +3626,11 @@ The following functions may bear the Void return typeHint.
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Functions/CouldReturnVoid |
-+--------------+---------------------------+
-| Themes       | :ref:`Suggestions`        |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Functions/CouldReturnVoid |
++------------+---------------------------+
+| Themes     | :ref:`Suggestions`        |
++------------+---------------------------+
 
 
 
@@ -3663,11 +3663,11 @@ Arguments that are tested with `'instanceof <http://php.net/manual/en/language.o
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Functions/CouldTypehint |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Functions/CouldTypehint |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -3696,11 +3696,11 @@ This long name may be reduced by using an available alias.
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Namespaces/CouldUseAlias |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Namespaces/CouldUseAlias |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -3734,11 +3734,11 @@ Note that compact accepts any string, and any undefined variable is not set, wit
 
 See also `compact <http://www.php.net/compact>`_.
 
-+--------------+----------------------------+
-| Command line | Structures/CouldUseCompact |
-+--------------+----------------------------+
-| Themes       | :ref:`Suggestions`         |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Structures/CouldUseCompact |
++------------+----------------------------+
+| Themes     | :ref:`Suggestions`         |
++------------+----------------------------+
 
 
 
@@ -3797,13 +3797,13 @@ Short operators are faster than the extended version, though it is a micro-optim
 
 See also `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_.
 
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/CouldUseShortAssignation                                                                         |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Performances`                                                                         |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `use-short-assignations <https://github.com/dseguy/clearPHP/tree/master/rules/use-short-assignations.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/CouldUseShortAssignation                                                                         |
++------------+-------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Performances`                                                                         |
++------------+-------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `use-short-assignations <https://github.com/dseguy/clearPHP/tree/master/rules/use-short-assignations.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -3837,11 +3837,11 @@ Avoid using `'dirname() <http://www.php.net/dirname>`_ on `'__FILE__ <http://php
 
 See also `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_.
 
-+--------------+------------------------------------+
-| Command line | Structures/CouldUseDir             |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/CouldUseDir             |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -3870,11 +3870,11 @@ It is also routinely used in traits : there, 'self' represents the class in whic
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Classes/ShouldUseSelf              |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Classes/ShouldUseSelf              |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -3907,11 +3907,11 @@ Making a loop to repeat the same concatenation is actually much longer than usin
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Structures/CouldUseStrrepeat |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Structures/CouldUseStrrepeat |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -3943,11 +3943,11 @@ According to the manual : Because PHP\'s integer type is signed many crc32 check
 
 See also `crc32() <http://php.net/crc32>`_.
 
-+--------------+--------------------------+
-| Command line | Php/Crc32MightBeNegative |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Php/Crc32MightBeNegative |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -3976,11 +3976,11 @@ Curly brackets are seldom used, and will probably confuse or surprise the reader
 
 See also `Array <http://php.net/manual/en/language.types.array.php>`_.
 
-+--------------+------------------------------------------------+
-| Command line | Arrays/CurlyArrays                             |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Arrays/CurlyArrays                             |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -4026,13 +4026,13 @@ When omitting this step, the next loop that will also require this variable will
 
 See also : `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_.
 
-+--------------+-----------------------------------------------------------------------------------------------------------+
-| Command line | Structures/DanglingArrayReferences                                                                        |
-+--------------+-----------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                            |
-+--------------+-----------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-dangling-reference <https://github.com/dseguy/clearPHP/tree/master/rules/no-dangling-reference.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------------+
+| Short name | Structures/DanglingArrayReferences                                                                        |
++------------+-----------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                            |
++------------+-----------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-dangling-reference <https://github.com/dseguy/clearPHP/tree/master/rules/no-dangling-reference.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------------+
 
 
 
@@ -4050,11 +4050,11 @@ Functions are excluded from autoload, but shall be gathered in libraries, and no
 
 Constants definitions are tolerated inside functions : they may be used for avoiding repeat, or noting the usage of such function.
 
-+--------------+---------------------------+
-| Command line | Functions/DeepDefinitions |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Functions/DeepDefinitions |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -4075,11 +4075,11 @@ PHP 7.0 has the ability to define an array as a constant, using the `'define() <
    
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/DefineWithArray                                                                                        |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/DefineWithArray                                                                                        |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -4101,11 +4101,11 @@ View variables are set by calling the methods setVariable or setVariables on the
    
    ?>
 
-+--------------+---------------------------+
-| Command line | ZendF/DefinedViewProperty |
-+--------------+---------------------------+
-| Themes       | :ref:`ZendFramework`      |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | ZendF/DefinedViewProperty |
++------------+---------------------------+
+| Themes     | :ref:`ZendFramework`      |
++------------+---------------------------+
 
 
 
@@ -4148,11 +4148,11 @@ This may also lead to dead code : when the trait is removed, the host class have
    }
    ?>
 
-+--------------+-----------------------+
-| Command line | Traits/DependantTrait |
-+--------------+-----------------------+
-| Themes       | :ref:`Analyze`        |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Traits/DependantTrait |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
 
 
 
@@ -4178,13 +4178,13 @@ Functions may be still usable : they generate warning that help you track their 
    
    ?>
 
-+--------------+-------------------------------------------------------------------------------------------+
-| Command line | Php/Deprecated                                                                            |
-+--------------+-------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                            |
-+--------------+-------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-deprecated <https://github.com/dseguy/clearPHP/tree/master/rules/no-deprecated.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------+
+| Short name | Php/Deprecated                                                                            |
++------------+-------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                            |
++------------+-------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-deprecated <https://github.com/dseguy/clearPHP/tree/master/rules/no-deprecated.md>`__ |
++------------+-------------------------------------------------------------------------------------------+
 
 
 
@@ -4203,11 +4203,11 @@ According to the Cake Migration Guide, the following are deprecated and should b
 
 See also `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_.
 
-+--------------+---------------------------------+
-| Command line | Cakephp/Cake32DeprecatedMethods |
-+--------------+---------------------------------+
-| Themes       | :ref:`Cakephp`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Cakephp/Cake32DeprecatedMethods |
++------------+---------------------------------+
+| Themes     | :ref:`Cakephp`                  |
++------------+---------------------------------+
 
 
 
@@ -4221,11 +4221,11 @@ According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appen
 
 * Shell::error()
 
-+--------------+---------------------------------+
-| Command line | Cakephp/Cake33DeprecatedMethods |
-+--------------+---------------------------------+
-| Themes       | :ref:`Cakephp`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Cakephp/Cake33DeprecatedMethods |
++------------+---------------------------------+
+| Themes     | :ref:`Cakephp`                  |
++------------+---------------------------------+
 
 
 
@@ -4240,11 +4240,11 @@ According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appen
 * Router::mapResources() is deprecated. Use routing scopes and $routes->resources() instead.
 * Router::redirect() is deprecated. Use routing scopes and $routes->redirect() instead.
 
-+--------------+------------------------------------------+
-| Command line | Cakephp/Cake33DeprecatedStaticmethodcall |
-+--------------+------------------------------------------+
-| Themes       | :ref:`Cakephp`                           |
-+--------------+------------------------------------------+
++------------+------------------------------------------+
+| Short name | Cakephp/Cake33DeprecatedStaticmethodcall |
++------------+------------------------------------------+
+| Themes     | :ref:`Cakephp`                           |
++------------+------------------------------------------+
 
 
 
@@ -4258,11 +4258,11 @@ According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appen
 
 * Cake\Routing\RequestActionTrait
 
-+--------------+--------------------------------+
-| Command line | Cakephp/Cake33DeprecatedTraits |
-+--------------+--------------------------------+
-| Themes       | :ref:`Cakephp`                 |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Cakephp/Cake33DeprecatedTraits |
++------------+--------------------------------+
+| Themes     | :ref:`Cakephp`                 |
++------------+--------------------------------+
 
 
 
@@ -4287,11 +4287,11 @@ This was added in PHP 5.5. There is no need anymore for an intermediate variable
    $y = [4,5,6][2];
    ?>
 
-+--------------+------------------------------------------------------+
-| Command line | Structures/DereferencingAS                           |
-+--------------+------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
-+--------------+------------------------------------------------------+
++------------+------------------------------------------------------+
+| Short name | Structures/DereferencingAS                           |
++------------+------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++------------+------------------------------------------------------+
 
 
 
@@ -4318,11 +4318,11 @@ The following code act directly upon PHP incoming variables like $_GET and $_POS
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Security/DirectInjection |
-+--------------+--------------------------+
-| Themes       | :ref:`Security`          |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Security/DirectInjection |
++------------+--------------------------+
+| Themes     | :ref:`Security`          |
++------------+--------------------------+
 
 
 
@@ -4349,11 +4349,11 @@ PHP hands over a lot of information using special variables like $_GET, $_POST, 
 
 It is recommended to put the modified values in another variable, and keep the original one intact.
 
-+--------------+--------------------------------------+
-| Command line | Structures/NoChangeIncomingVariables |
-+--------------+--------------------------------------+
-| Themes       | :ref:`Analyze`                       |
-+--------------+--------------------------------------+
++------------+--------------------------------------+
+| Short name | Structures/NoChangeIncomingVariables |
++------------+--------------------------------------+
+| Themes     | :ref:`Analyze`                       |
++------------+--------------------------------------+
 
 
 
@@ -4416,11 +4416,11 @@ This is in particular true if the receiving structure put immediately the incomi
 
 See also `Don't pass this out of a constructor <http://www.javapractices.com/topic/TopicAction.do?Id=252>`_.
 
-+--------------+-----------------------------------+
-| Command line | Classes/DontSendThisInConstructor |
-+--------------+-----------------------------------+
-| Themes       | :ref:`Analyze`                    |
-+--------------+-----------------------------------+
++------------+-----------------------------------+
+| Short name | Classes/DontSendThisInConstructor |
++------------+-----------------------------------+
+| Themes     | :ref:`Analyze`                    |
++------------+-----------------------------------+
 
 
 
@@ -4468,11 +4468,11 @@ When the value has to be prepared before usage, then save the filtered value in 
    
    ?>
 
-+--------------+-------------------------------+
-| Command line | Structures/DontChangeBlindKey |
-+--------------+-------------------------------+
-| Themes       | :ref:`Analyze`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Structures/DontChangeBlindKey |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -4504,11 +4504,11 @@ It is recommended to avoid displaying error messages directly to the browser.
 
 Error messages should be logged, but not displayed.
 
-+--------------+---------------------------------+
-| Command line | Security/DontEchoError          |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Security` |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Security/DontEchoError          |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security` |
++------------+---------------------------------+
 
 
 
@@ -4533,11 +4533,11 @@ This happens when a container (variable, property, array index) is assigned with
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Structures/DoubleAssignation |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Structures/DoubleAssignation |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -4555,11 +4555,11 @@ Twice the same call in a row. This is worth a check.
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Structures/DoubleInstruction |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Structures/DoubleInstruction |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -4596,11 +4596,11 @@ Avoid double `'array_flip() <http://www.php.net/array_flip>`_ to gain speed. Whi
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Performances/DoubleArrayFlip |
-+--------------+------------------------------+
-| Themes       | :ref:`Performances`          |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Performances/DoubleArrayFlip |
++------------+------------------------------+
+| Themes     | :ref:`Performances`          |
++------------+------------------------------+
 
 
 
@@ -4644,11 +4644,11 @@ This is also true if else has a return, and then not : simply reverse the condit
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Structures/DropElseAfterReturn     |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/DropElseAfterReturn     |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -4677,11 +4677,11 @@ In case of injection in the variable, the dynamic loading of a library gives a l
 
 See also `dl <http://www.php.net/dl>`_.
 
-+--------------+--------------------+
-| Command line | Security/DynamicDl |
-+--------------+--------------------+
-| Themes       | :ref:`Security`    |
-+--------------+--------------------+
++------------+--------------------+
+| Short name | Security/DynamicDl |
++------------+--------------------+
+| Themes     | :ref:`Security`    |
++------------+--------------------+
 
 
 
@@ -4720,11 +4720,11 @@ It happens that print, echo or <?= are used depending on coding style and files.
    
    ?>
 
-+--------------+------------------------------------------------+
-| Command line | Structures/EchoPrintConsistance                |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Structures/EchoPrintConsistance                |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -4753,13 +4753,13 @@ instead of
      echo $a b $c;
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/EchoWithConcat                                                                                                             |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Performances`, :ref:`Analyze`, :ref:`Suggestions`                                                                               |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/EchoWithConcat                                                                                                             |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Performances`, :ref:`Analyze`, :ref:`Suggestions`                                                                               |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__ |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -4793,11 +4793,11 @@ See also `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/varia
          `PHP 5.6 and the Splat Operator <https://lornajane.net/posts/2014/php-5-6-and-the-splat-operator>`_, and
          `Variable-length argument lists <http://php.net/manual/en/functions.arguments.php#functions.variable-arg-list>`_.
 
-+--------------+---------------------------------------------------------------------------------+
-| Command line | Php/EllipsisUsage                                                               |
-+--------------+---------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+---------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Php/EllipsisUsage                                                               |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -4834,11 +4834,11 @@ Always use elseif instead of else and if.
 
 .
 
-+--------------+-------------------------+
-| Command line | Structures/ElseIfElseif |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/ElseIfElseif |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -4876,11 +4876,11 @@ It is recommended to remove those blocks, so as to reduce confusion in the code.
    
    ?>
 
-+--------------+------------------------+
-| Command line | Structures/EmptyBlocks |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Structures/EmptyBlocks |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -4909,11 +4909,11 @@ Classes that do no define anything at all. Classes that are directly derived fro
    
    ?>
 
-+--------------+--------------------+
-| Command line | Classes/EmptyClass |
-+--------------+--------------------+
-| Themes       | :ref:`Analyze`     |
-+--------------+--------------------+
++------------+--------------------+
+| Short name | Classes/EmptyClass |
++------------+--------------------+
+| Themes     | :ref:`Analyze`     |
++------------+--------------------+
 
 
 
@@ -4949,11 +4949,11 @@ Such functions or methods are rarely useful. As a bare minimum, the function sho
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Functions/EmptyFunction |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Functions/EmptyFunction |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -4976,11 +4976,11 @@ Comments that explains the reason of the situation are not taken into account.
        if ($condition) { } 
    ?>
 
-+--------------+----------------------------------------------+
-| Command line | Structures/EmptyLines                        |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Structures/EmptyLines                        |
++------------+----------------------------------------------+
+| Themes     | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++------------+----------------------------------------------+
 
 
 
@@ -5014,11 +5014,11 @@ Empty interfaces are a code smell. Interfaces should contains at least a method 
 
 See also `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_ and `Blog : Are empty interfaces code smell? <https://hackernoon.com/are-interfaces-code-smell-bd19abc266d3>`_.
 
-+--------------+---------------------------+
-| Command line | Interfaces/EmptyInterface |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Interfaces/EmptyInterface |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -5042,11 +5042,11 @@ Empty list() are not allowed anymore in PHP 7. There must be at least one variab
    
    ?>
 
-+--------------+-------------------------------------------+
-| Command line | Php/EmptyList                             |
-+--------------+-------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
-+--------------+-------------------------------------------+
++------------+-------------------------------------------+
+| Short name | Php/EmptyList                             |
++------------+-------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
++------------+-------------------------------------------+
 
 
 
@@ -5093,13 +5093,13 @@ Using bracket-style syntax :
    
    ?>
 
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Command line | Namespaces/EmptyNamespace                                                                           |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                        |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-empty-namespace <https://github.com/dseguy/clearPHP/tree/master/rules/no-empty-namespace.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------+
+| Short name | Namespaces/EmptyNamespace                                                                           |
++------------+-----------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                        |
++------------+-----------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-empty-namespace <https://github.com/dseguy/clearPHP/tree/master/rules/no-empty-namespace.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------+
 
 
 
@@ -5118,11 +5118,11 @@ PHP tolerates the last element of an array to be empty.
        $b =      [ 4, 5, ];
    ?>
 
-+--------------+------------------------------------------------+
-| Command line | Arrays/EmptySlots                              |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Arrays/EmptySlots                              |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -5151,11 +5151,11 @@ List of all empty trait defined in the code.
 
 Such traits may be reserved for future use. They may also be forgotten, and dead code.
 
-+--------------+-------------------+
-| Command line | Traits/EmptyTrait |
-+--------------+-------------------+
-| Themes       | :ref:`Analyze`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Traits/EmptyTrait |
++------------+-------------------+
+| Themes     | :ref:`Analyze`    |
++------------+-------------------+
 
 
 
@@ -5184,11 +5184,11 @@ At worst, the error should be logged, so as to measure the actual usage of the c
 
 catch( Exception $e) (PHP 5) or catch(`'Throwable <http://php.net/manual/fr/class.throwable.php>`_ $e) with empty catch block should be banned, as they will simply ignore any error.
 
-+--------------+--------------------------+
-| Command line | Structures/EmptyTryCatch |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/EmptyTryCatch |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -5217,11 +5217,11 @@ Empty With Expression
    
    ?>
 
-+--------------+--------------------------------+
-| Command line | Structures/EmptyWithExpression |
-+--------------+--------------------------------+
-| Themes       | :ref:`Suggestions`             |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Structures/EmptyWithExpression |
++------------+--------------------------------+
+| Themes     | :ref:`Suggestions`             |
++------------+--------------------------------+
 
 
 
@@ -5255,11 +5255,11 @@ This analysis also detect unicode codepoint with superfluous leading zeros.
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Security/EncodedLetters |
-+--------------+-------------------------+
-| Themes       | :ref:`Security`         |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Security/EncodedLetters |
++------------+-------------------------+
+| Themes     | :ref:`Security`         |
++------------+-------------------------+
 
 
 
@@ -5287,11 +5287,11 @@ It is a good exercice to read the messages out of context, and try to understand
 
 Error messages are spotted via `'die <http://www.php.net/die>`_, `'exit <http://www.php.net/exit>`_ or throw.
 
-+--------------+--------------------------+
-| Command line | Structures/ErrorMessages |
-+--------------+--------------------------+
-| Themes       | :ref:`ZendFramework`     |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/ErrorMessages |
++------------+--------------------------+
+| Themes     | :ref:`ZendFramework`     |
++------------+--------------------------+
 
 
 
@@ -5325,13 +5325,13 @@ At worse, including a pre-generated file will be faster.
 
 For PHP 7.0 and later, it is important to put `'eval() <http://www.php.net/eval>`_ in a try..catch expression.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command line | Structures/EvalUsage                                                          |
-+--------------+-------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Performances`, :ref:`Security`                          |
-+--------------+-------------------------------------------------------------------------------+
-| ClearPHP     | `no-eval <https://github.com/dseguy/clearPHP/tree/master/rules/no-eval.md>`__ |
-+--------------+-------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------+
+| Short name | Structures/EvalUsage                                                          |
++------------+-------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Performances`, :ref:`Security`                          |
++------------+-------------------------------------------------------------------------------+
+| ClearPHP   | `no-eval <https://github.com/dseguy/clearPHP/tree/master/rules/no-eval.md>`__ |
++------------+-------------------------------------------------------------------------------+
 
 
 
@@ -5360,11 +5360,11 @@ When catching exception, the most specialized exceptions must be in the early ca
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Exceptions/AlreadyCaught     |
-+--------------+------------------------------+
-| Themes       | :ref:`Dead code <dead-code>` |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Exceptions/AlreadyCaught     |
++------------+------------------------------+
+| Themes     | :ref:`Dead code <dead-code>` |
++------------+------------------------------+
 
 
 
@@ -5397,13 +5397,13 @@ Using `'exit <http://www.php.net/exit>`_ or `'die() <http://www.php.net/die>`_ i
 
 Try exiting the function/class with return, or throw exception that may be caught later in the code.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command line | Structures/ExitUsage                                                          |
-+--------------+-------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`ZendFramework`                                          |
-+--------------+-------------------------------------------------------------------------------+
-| ClearPHP     | `no-exit <https://github.com/dseguy/clearPHP/tree/master/rules/no-exit.md>`__ |
-+--------------+-------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------+
+| Short name | Structures/ExitUsage                                                          |
++------------+-------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`ZendFramework`                                          |
++------------+-------------------------------------------------------------------------------+
+| ClearPHP   | `no-exit <https://github.com/dseguy/clearPHP/tree/master/rules/no-exit.md>`__ |
++------------+-------------------------------------------------------------------------------+
 
 
 
@@ -5429,11 +5429,11 @@ Usage of the `'** <http://php.net/manual/en/language.operators.arithmetic.php>`_
 
 See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_.
 
-+--------------+---------------------------------------------------------------------------------+
-| Command line | Php/ExponentUsage                                                               |
-+--------------+---------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+---------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Php/ExponentUsage                                                               |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -5464,11 +5464,11 @@ This is also true for negative lengths.
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Structures/FailingSubstrComparison |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`                     |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/FailingSubstrComparison |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`                     |
++------------+------------------------------------+
 
 
 
@@ -5502,11 +5502,11 @@ When reading results with ext/Sqlite3, it is recommended to explicitely request 
 
 This is a micro-optimisation. The difference may be visible with 200k rows fetches, and measurable with 10k.
 
-+--------------+--------------------------------+
-| Command line | Performances/FetchOneRowFormat |
-+--------------+--------------------------------+
-| Themes       | :ref:`Performances`            |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Performances/FetchOneRowFormat |
++------------+--------------------------------+
+| Themes     | :ref:`Performances`            |
++------------+--------------------------------+
 
 
 
@@ -5537,11 +5537,11 @@ PHP offers two solutions : `'array_search() <http://www.php.net/array_search>`_ 
 
 See also `array_search <http://php.net/array_search>`_ and `array_keys <http://php.net/array_keys>`_.
 
-+--------------+----------------------------+
-| Command line | Structures/GoToKeyDirectly |
-+--------------+----------------------------+
-| Themes       | :ref:`Suggestions`         |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Structures/GoToKeyDirectly |
++------------+----------------------------+
+| Themes     | :ref:`Suggestions`         |
++------------+----------------------------+
 
 
 
@@ -5584,13 +5584,13 @@ It is recommended to avoid functioncall in the `'for() <http://php.net/manual/en
 
 This is true with any kind of functioncall that returns the same value throughout the loop.
 
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/ForWithFunctioncall                                                                                |
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Performances`                                                                           |
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-functioncall-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-functioncall-in-loop.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/ForWithFunctioncall                                                                                |
++------------+---------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Performances`                                                                           |
++------------+---------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-functioncall-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-functioncall-in-loop.md>`__ |
++------------+---------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5620,11 +5620,11 @@ This anly applies when a `'foreach() <http://php.net/manual/en/control-structure
 
 See also `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_.
 
-+--------------+------------------------------+
-| Command line | Php/ForeachDontChangePointer |
-+--------------+------------------------------+
-| Themes       | :ref:`CompatibilityPHP70`    |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Php/ForeachDontChangePointer |
++------------+------------------------------+
+| Themes     | :ref:`CompatibilityPHP70`    |
++------------+------------------------------+
 
 
 
@@ -5659,11 +5659,11 @@ This will have an actual effect
        }
    ?>
 
-+--------------+----------------------------------------+
-| Command line | Structures/ForeachNeedReferencedSource |
-+--------------+----------------------------------------+
-| Themes       | :ref:`Analyze`                         |
-+--------------+----------------------------------------+
++------------+----------------------------------------+
+| Short name | Structures/ForeachNeedReferencedSource |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`                         |
++------------+----------------------------------------+
 
 
 
@@ -5693,11 +5693,11 @@ Foreach on an object member is a legit PHP syntax, though it is very rare : blin
    
    ?>
 
-+--------------+-------------------+
-| Command line | Php/ForeachObject |
-+--------------+-------------------+
-| Themes       | :ref:`Analyze`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Php/ForeachObject |
++------------+-------------------+
+| Themes     | :ref:`Analyze`    |
++------------+-------------------+
 
 
 
@@ -5729,11 +5729,11 @@ In the spotted loop, reference are used but never modified. They may be removed.
    
    ?>
 
-+--------------+------------------------------------------+
-| Command line | Structures/ForeachReferenceIsNotModified |
-+--------------+------------------------------------------+
-| Themes       | :ref:`Analyze`                           |
-+--------------+------------------------------------------+
++------------+------------------------------------------+
+| Short name | Structures/ForeachReferenceIsNotModified |
++------------+------------------------------------------+
+| Themes     | :ref:`Analyze`                           |
++------------+------------------------------------------+
 
 
 
@@ -5774,11 +5774,11 @@ Previously, it was compulsory to extract the data from the blind array :
        }
    ?>
 
-+--------------+--------------------------------------------------------------------------+
-| Command line | Structures/ForeachWithList                                               |
-+--------------+--------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`Suggestions` |
-+--------------+--------------------------------------------------------------------------+
++------------+--------------------------------------------------------------------------+
+| Short name | Structures/ForeachWithList                                               |
++------------+--------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`Suggestions` |
++------------+--------------------------------------------------------------------------+
 
 
 
@@ -5812,11 +5812,11 @@ The following classes have been found implementing an interface's methods, thoug
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Interfaces/CouldUseInterface |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Interfaces/CouldUseInterface |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -5841,11 +5841,11 @@ An exception is instantiated, but not thrown.
    
    ?>
 
-+--------------+----------------------------+
-| Command line | Exceptions/ForgottenThrown |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Exceptions/ForgottenThrown |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -5892,13 +5892,13 @@ Traits, classes and interfaces are checked.
 
 See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_ and `Understanding The Concept Of Visibility In Object Oriented PHP <https://torquemag.io/2016/05/understanding-concept-visibility-object-oriented-php/>`_.
 
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Command line | Classes/NonPpp                                                                                              |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                              |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `always-have-visibility <https://github.com/dseguy/clearPHP/tree/master/rules/always-have-visibility.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/NonPpp                                                                                              |
++------------+-------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                              |
++------------+-------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `always-have-visibility <https://github.com/dseguy/clearPHP/tree/master/rules/always-have-visibility.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5924,11 +5924,11 @@ Usually, such white space are forgotten, and may end up summoning the infamous '
 
 See also `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_.
 
-+--------------+--------------------------------+
-| Command line | Structures/ForgottenWhiteSpace |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Structures/ForgottenWhiteSpace |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`                 |
++------------+--------------------------------+
 
 
 
@@ -5955,11 +5955,11 @@ However, the name should be fully qualified without the initial \. Here, \a\b\c 
 
 Also, the namespace will be absolute, and not a relative namespace of the current one.
 
-+--------------+-----------------------------------+
-| Command line | Namespaces/ConstantFullyQualified |
-+--------------+-----------------------------------+
-| Themes       | :ref:`Analyze`                    |
-+--------------+-----------------------------------+
++------------+-----------------------------------+
+| Short name | Namespaces/ConstantFullyQualified |
++------------+-----------------------------------+
+| Themes     | :ref:`Analyze`                    |
++------------+-----------------------------------+
 
 
 
@@ -5998,11 +5998,11 @@ This syntax was not possible until PHP 5.4. Until then, it was compulsory to sto
 
 Storing the result in a variable is still useful if the result is actually used more than once.
 
-+--------------+---------------------------------+
-| Command line | Structures/FunctionSubscripting |
-+--------------+---------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`       |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/FunctionSubscripting |
++------------+---------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`       |
++------------+---------------------------------+
 
 
 
@@ -6034,11 +6034,11 @@ Since PHP 5.4, it is now possible use function results as an array, and access d
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Structures/FunctionPreSubscripting |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`                     |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/FunctionPreSubscripting |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`                     |
++------------+------------------------------------+
 
 
 
@@ -6067,11 +6067,11 @@ Those functions were removed in PHP 5.4.
 
 See also `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_.
 
-+--------------+---------------------------+
-| Command line | Php/Php54RemovedFunctions |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP54` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php54RemovedFunctions |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP54` |
++------------+---------------------------+
 
 
 
@@ -6083,11 +6083,11 @@ Functions Removed In PHP 5.5
 
 Those functions were removed in PHP 5.5.
 
-+--------------+---------------------------+
-| Command line | Php/Php55RemovedFunctions |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP55` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php55RemovedFunctions |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP55` |
++------------+---------------------------+
 
 
 
@@ -6127,11 +6127,11 @@ Getting the last element of an array is done with `'count() <http://www.php.net/
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Arrays/GettingLastElement |
-+--------------+---------------------------+
-| Themes       | :ref:`Performances`       |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Arrays/GettingLastElement |
++------------+---------------------------+
+| Themes     | :ref:`Performances`       |
++------------+---------------------------+
 
 
 
@@ -6160,11 +6160,11 @@ The global keyword must be out of loops. It is evaluated each loop, slowing the 
    }
    ?>
 
-+--------------+------------------------------+
-| Command line | Structures/GlobalOutsideLoop |
-+--------------+------------------------------+
-| Themes       | :ref:`Performances`          |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Structures/GlobalOutsideLoop |
++------------+------------------------------+
+| Themes     | :ref:`Performances`          |
++------------+------------------------------+
 
 
 
@@ -6178,13 +6178,13 @@ List usage of globals variables, with global keywords or direct access to $GLOBA
 
 It is recommended to avoid using global variables, at it makes it very difficult to track changes in values across the whole application.
 
-+--------------+-----------------------------------------------------------------------------------+
-| Command line | Structures/GlobalUsage                                                            |
-+--------------+-----------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                    |
-+--------------+-----------------------------------------------------------------------------------+
-| ClearPHP     | `no-global <https://github.com/dseguy/clearPHP/tree/master/rules/no-global.md>`__ |
-+--------------+-----------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------+
+| Short name | Structures/GlobalUsage                                                            |
++------------+-----------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                    |
++------------+-----------------------------------------------------------------------------------+
+| ClearPHP   | `no-global <https://github.com/dseguy/clearPHP/tree/master/rules/no-global.md>`__ |
++------------+-----------------------------------------------------------------------------------+
 
 
 
@@ -6224,11 +6224,11 @@ The group use declaration is used in the code.
 
 See also `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_ and `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/GroupUseDeclaration                                                                                    |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/GroupUseDeclaration                                                                                    |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6260,11 +6260,11 @@ Although this empty instruction is ignored at execution, this allows for clean p
 
 See also `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_ and `Revisit trailing commas in function arguments <https://www.mail-archive.com/internals@lists.php.net/msg81138.html>`_.
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/GroupUseTrailingComma                                                                                                                                        |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/GroupUseTrailingComma                                                                                                                                        |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6290,13 +6290,13 @@ Hardcoding passwords is a bad idea. Not only it make the code difficult to chang
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| Command line | Functions/HardcodedPasswords                                                                                  |
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Security`                                                                               |
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-hardcoded-credential <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-credential.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------+
+| Short name | Functions/HardcodedPasswords                                                                                  |
++------------+---------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security`                                                                               |
++------------+---------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-hardcoded-credential <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-credential.md>`__ |
++------------+---------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6308,11 +6308,11 @@ Hash Algorithms
 
 There is a long but limited list of hashing algorithm available to PHP. The one found below doesn't seem to be existing.
 
-+--------------+----------------+
-| Command line | Php/HashAlgos  |
-+--------------+----------------+
-| Themes       | :ref:`Analyze` |
-+--------------+----------------+
++------------+----------------+
+| Short name | Php/HashAlgos  |
++------------+----------------+
+| Themes     | :ref:`Analyze` |
++------------+----------------+
 
 
 
@@ -6338,11 +6338,11 @@ fnv132, fnv164 and joaat were added in PHP 5.4.
    
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/HashAlgos53                                                                                                                                                  |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/HashAlgos53                                                                                                                                                  |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6354,11 +6354,11 @@ Hash Algorithms Incompatible With PHP 5.4/5
 
 List of hash algorithms incompatible with PHP 5.4 and 5.5. They were introduced in newer version, or removed in PHP 5.4. As such, they are not available with older versions.
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/HashAlgos54                                                                                                                       |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/HashAlgos54                                                                                                                       |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6393,11 +6393,11 @@ The `ext/hash <http://www.php.net/hash>` extension used resources, and is being 
 
 See also `Move ext/hash from resources to objects <http://php.net/manual/en/migration72.incompatible.php#migration72.incompatible.hash-ext-to-objects>`_.
 
-+--------------+---------------------------+
-| Command line | Php/HashUsesObjects       |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP72` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/HashUsesObjects       |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP72` |
++------------+---------------------------+
 
 
 
@@ -6467,11 +6467,11 @@ Generally, one or two delimiters are used, with generic value. It is recommended
    
    ?>
 
-+--------------+------------------------------------------------+
-| Command line | Structures/HeredocDelimiterFavorite            |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Structures/HeredocDelimiterFavorite            |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -6505,11 +6505,11 @@ PHP 7.1 and later, emits a 'A non-numeric value encountered' warning, and conver
        // Print 0
    ?>
 
-+--------------+------------------------------------------------------+
-| Command line | Type/HexadecimalString                               |
-+--------------+------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------+
++------------+------------------------------------------------------+
+| Short name | Type/HexadecimalString                               |
++------------+------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++------------+------------------------------------------------------+
 
 
 
@@ -6546,11 +6546,11 @@ It is where everyone expect them, and it is less confusing than having them at v
    
    ?>
 
-+--------------+----------------------+
-| Command line | Namespaces/HiddenUse |
-+--------------+----------------------+
-| Themes       | :ref:`Analyze`       |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Namespaces/HiddenUse |
++------------+----------------------+
+| Themes     | :ref:`Analyze`       |
++------------+----------------------+
 
 
 
@@ -6584,11 +6584,11 @@ Also, note that arguments 2 and 3 are constants and string (respectively), and s
 
 See also `htmlentities <http://www.php.net/htmlentities>`_ and `htmlspecialchars <http://www.php.net/htmlspecialchars>`_.
 
-+--------------+-----------------------------+
-| Command line | Structures/Htmlentitiescall |
-+--------------+-----------------------------+
-| Themes       | :ref:`Analyze`              |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Structures/Htmlentitiescall |
++------------+-----------------------------+
+| Themes     | :ref:`Analyze`              |
++------------+-----------------------------+
 
 
 
@@ -6617,11 +6617,11 @@ This means those expressions may be simplified.
    
    ?>
 
-+--------------+--------------------------------+
-| Command line | Structures/IdenticalConditions |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Structures/IdenticalConditions |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`                 |
++------------+--------------------------------+
 
 
 
@@ -6654,11 +6654,11 @@ They may be a copy/paste with unmodified content. When the content has to be dup
    }
    ?>
 
-+--------------+---------------------------------+
-| Command line | Structures/IdenticalConsecutive |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/IdenticalConsecutive |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -6699,13 +6699,13 @@ Operands should be different when comparing or making a logical combination. Of 
    
    ?>
 
-+--------------+---------------------------------------------------+
-| Command line | Structures/IdenticalOnBothSides                   |
-+--------------+---------------------------------------------------+
-| Themes       | :ref:`Analyze`                                    |
-+--------------+---------------------------------------------------+
-| Examples     | :ref:`phpmyadmin-structures-identicalonbothsides` |
-+--------------+---------------------------------------------------+
++------------+---------------------------------------------------+
+| Short name | Structures/IdenticalOnBothSides                   |
++------------+---------------------------------------------------+
+| Themes     | :ref:`Analyze`                                    |
++------------+---------------------------------------------------+
+| Examples   | :ref:`phpmyadmin-structures-identicalonbothsides` |
++------------+---------------------------------------------------+
 
 
 
@@ -6756,11 +6756,11 @@ Note that if the values used in the condition have been modified in the first if
    
    ?>
 
-+--------------+---------------------------------+
-| Command line | Structures/IfWithSameConditions |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/IfWithSameConditions |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -6791,11 +6791,11 @@ They may also be typos, such as if ($x = 3) { ... }, leading to a constant condi
    
    ?>
 
-+--------------+------------------------+
-| Command line | Structures/Iffectation |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Structures/Iffectation |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -6824,11 +6824,11 @@ PHP has reserved usage of methods starting with __ for magic methods. It is reco
    
    ?>
 
-+--------------+-------------------+
-| Command line | Classes/WrongName |
-+--------------+-------------------+
-| Themes       | :ref:`Analyze`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Classes/WrongName |
++------------+-------------------+
+| Themes     | :ref:`Analyze`    |
++------------+-------------------+
 
 
 
@@ -6855,11 +6855,11 @@ PHP defers the implements check until execution : the code in example does lint,
    
    ?>
 
-+--------------+---------------------------------+
-| Command line | Classes/ImplementIsForInterface |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Classes/ImplementIsForInterface |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -6891,11 +6891,11 @@ This error is not reported by lint, but is reported at execution time.
    
    ?>
 
-+--------------+-------------------------------------+
-| Command line | Classes/ImplementedMethodsArePublic |
-+--------------+-------------------------------------+
-| Themes       | :ref:`Analyze`                      |
-+--------------+-------------------------------------+
++------------+-------------------------------------+
+| Short name | Classes/ImplementedMethodsArePublic |
++------------+-------------------------------------+
+| Themes     | :ref:`Analyze`                      |
++------------+-------------------------------------+
 
 
 
@@ -6931,11 +6931,11 @@ Global variables, that are used in local scope with global keyword, but are not 
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Structures/ImplicitGlobal |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Structures/ImplicitGlobal |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -6972,13 +6972,13 @@ However, such structures are confusing. It is easy to misread them as conditions
 
 It is recommended to use a real 'if then' structures, to make the condition readable.
 
-+--------------+-------------------------------------------------------------------------------------------+
-| Command line | Structures/ImpliedIf                                                                      |
-+--------------+-------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                            |
-+--------------+-------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------+
+| Short name | Structures/ImpliedIf                                                                      |
++------------+-------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                            |
++------------+-------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
++------------+-------------------------------------------------------------------------------------------+
 
 
 
@@ -6999,11 +6999,11 @@ Inclusion should follow exactly the case of included files and path. This preven
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Files/InclusionWrongCase |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Files/InclusionWrongCase |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -7031,13 +7031,13 @@ Code that is incompilable with older PHP versions means that the code is breakin
 
 When the code is used as a template for PHP code generation, for example at installation time, it is recommended to use a distinct file extension, so as to distinguish them from actual PHP code.
 
-+--------------+-----------------------------------------------------------------------------------------------+
-| Command line | Php/Incompilable                                                                              |
-+--------------+-----------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                |
-+--------------+-----------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-incompilable <https://github.com/dseguy/clearPHP/tree/master/rules/no-incompilable.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------+
+| Short name | Php/Incompilable                                                                              |
++------------+-----------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                |
++------------+-----------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-incompilable <https://github.com/dseguy/clearPHP/tree/master/rules/no-incompilable.md>`__ |
++------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -7096,11 +7096,11 @@ As a general rule of thumb, only use integers or strings that don\'t look like i
 
 This analyzer may find constant definitions, when available.
 
-+--------------+----------------------------------+
-| Command line | Structures/IndicesAreIntOrString |
-+--------------+----------------------------------+
-| Themes       | :ref:`Analyze`                   |
-+--------------+----------------------------------+
++------------+----------------------------------+
+| Short name | Structures/IndicesAreIntOrString |
++------------+----------------------------------+
+| Themes     | :ref:`Analyze`                   |
++------------+----------------------------------+
 
 
 
@@ -7121,11 +7121,11 @@ Look for injections through indirect usage for GPRC values ($_GET, $_POST, $_REQ
    
    ?>
 
-+--------------+----------------------------+
-| Command line | Security/IndirectInjection |
-+--------------+----------------------------+
-| Themes       | :ref:`Security`            |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Security/IndirectInjection |
++------------+----------------------------+
+| Themes     | :ref:`Security`            |
++------------+----------------------------+
 
 
 
@@ -7163,11 +7163,11 @@ The classes are actually abstract classes, and should be derived into a concrete
 
 See also `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_.
 
-+--------------+------------------------------------+
-| Command line | Classes/InstantiatingAbstractClass |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`                     |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Classes/InstantiatingAbstractClass |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`                     |
++------------+------------------------------------+
 
 
 
@@ -7197,11 +7197,11 @@ If the code must be compatible with previous versions, avoir casting arrays to o
    );
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Classes/IntegerAsProperty                                                                                                                                        |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/IntegerAsProperty                                                                                                                                        |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7237,11 +7237,11 @@ It is advised to add curly brackets around those structures to make them non-amb
 
 See also `Double quoted <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.double>`_.
 
-+--------------+------------------------------------------------+
-| Command line | Type/StringInterpolation                       |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Type/StringInterpolation                       |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -7270,11 +7270,11 @@ Constant, when defined using `'define() <http://www.php.net/define>`_ function, 
    
    ?>
 
-+--------------+-----------------------+
-| Command line | Constants/InvalidName |
-+--------------+-----------------------+
-| Themes       | :ref:`Analyze`        |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Constants/InvalidName |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
 
 
 
@@ -7303,11 +7303,11 @@ This is true, starting with PHP 7.1. In PHP 7.0 and older, those sequences were 
 
 See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 
-+--------------+---------------------------+
-| Command line | Type/OctalInString        |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP71` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Type/OctalInString        |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP71` |
++------------+---------------------------+
 
 
 
@@ -7338,11 +7338,11 @@ Regex are check with the Exakat version of PHP.
 
 Dynamic regex are only checked for simple values. Dynamic values may eventually generate a compilation error.
 
-+--------------+-------------------------+
-| Command line | Structures/InvalidRegex |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/InvalidRegex |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -7374,11 +7374,11 @@ This error may also be a simple typo : for example, calculating the difference b
    
    ?>
 
-+--------------+-------------------+
-| Command line | Structures/IsZero |
-+--------------+-------------------+
-| Themes       | :ref:`Analyze`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Structures/IsZero |
++------------+-------------------+
+| Themes     | :ref:`Analyze`    |
++------------+-------------------+
 
 
 
@@ -7400,11 +7400,11 @@ Mark a class as being a Zend Framework Controller.
    
    ?>
 
-+--------------+----------------------+
-| Command line | ZendF/IsController   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/IsController   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -7426,11 +7426,11 @@ Mark a class as being a Zend Framework Helper.
    
    ?>
 
-+--------------+----------------------+
-| Command line | ZendF/IsHelper       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/IsHelper       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -7455,11 +7455,11 @@ Zend Views are build with call to $this, without any class or trait. Indeed, the
 
 See also `Zend View <https://github.com/zendframework/zend-view>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/IsView         |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/IsView         |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -7490,11 +7490,11 @@ Isset Multiple Arguments
 
 See also `isset <http://www.php.net/`'isset <http://www.php.net/isset>`_>`_.
 
-+--------------+-----------------------+
-| Command line | Php/IssetMultipleArgs |
-+--------------+-----------------------+
-| Themes       | :ref:`Suggestions`    |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Php/IssetMultipleArgs |
++------------+-----------------------+
+| Themes     | :ref:`Suggestions`    |
++------------+-----------------------+
 
 
 
@@ -7521,11 +7521,11 @@ Fatal error: Cannot use `'isset() <http://www.php.net/isset>`_ on the result of 
 
 This is a backward incompatibility.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/IssetWithConstant                                                                               |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/IssetWithConstant                                                                               |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7562,13 +7562,13 @@ If the delimiter is not '', then `'implode() <http://www.php.net/implode>`_ and 
 
 Always use `'file_get_contents() <http://www.php.net/file_get_contents>`_ to get the content of a file as a string.
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Performances/JoinFile                                                                                                                                             |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Performances`                                                                                                                                               |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Examples     | :ref:`wordpress-performances-joinfile`, :ref:`spip-performances-joinfile`, :ref:`expressionengine-performances-joinfile`, :ref:`prestashop-performances-joinfile` |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Performances/JoinFile                                                                                                                                             |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Performances`                                                                                                                                               |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`wordpress-performances-joinfile`, :ref:`spip-performances-joinfile`, :ref:`expressionengine-performances-joinfile`, :ref:`prestashop-performances-joinfile` |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7593,11 +7593,11 @@ Usage of short syntax version of list().
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/ListShortSyntax                                                                                                                   |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/ListShortSyntax                                                                                                                   |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7643,11 +7643,11 @@ In PHP 5.6, results are :::
        [2] => 1
    )
 
-+--------------+---------------------------+
-| Command line | Php/ListWithAppends       |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP70` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/ListWithAppends       |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP70` |
++------------+---------------------------+
 
 
 
@@ -7668,11 +7668,11 @@ Setting keys when using list() is a PHP 7.1 feature.
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/ListWithKeys                                                                                                                      |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/ListWithKeys                                                                                                                      |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7700,11 +7700,11 @@ Support for references in list calls is not backward compatible with older versi
 
 See also `list() Reference Assignment <https://wiki.php.net/rfc/list_reference_assignment>`_.
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/ListWithReference                                                                                                                                                                       |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/ListWithReference                                                                                                                                                                       |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7744,11 +7744,11 @@ It is recommended to keep the global variables's name distinct from the local va
    
    ?>
 
-+--------------+------------------------+
-| Command line | Variables/LocalGlobals |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Variables/LocalGlobals |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -7782,11 +7782,11 @@ While this is syntacticly correct, it is unusual that defined ressources are use
    
    ?>
 
-+--------------+----------------------------------------------+
-| Command line | Classes/LocallyUnusedProperty                |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Classes/LocallyUnusedProperty                |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
 
 
 
@@ -7821,11 +7821,11 @@ Sometimes, the logic is not what it seems. It is important to check the actual i
 
 Based on article from Andrey Karpov  `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 
-+--------------+----------------------------+
-| Command line | Structures/LogicalMistakes |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Structures/LogicalMistakes |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -7839,13 +7839,13 @@ Logical operators come in two flavors :  and / &&, || / or, ^ / xor. However, th
 
 It is recommended to use the symbol operators, rather than the letter ones.
 
-+--------------+---------------------------------------------------------------------------------------------------+
-| Command line | Php/LogicalInLetters                                                                              |
-+--------------+---------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions`                                                                |
-+--------------+---------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-letter-logical <https://github.com/dseguy/clearPHP/tree/master/rules/no-letter-logical.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------+
+| Short name | Php/LogicalInLetters                                                                              |
++------------+---------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions`                                                                |
++------------+---------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-letter-logical <https://github.com/dseguy/clearPHP/tree/master/rules/no-letter-logical.md>`__ |
++------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -7889,11 +7889,11 @@ Even two 'or' comparisons are slower than using a `'in_array() <http://www.php.n
 
 See also `in_array() <http://php.net/in_array>`_.
 
-+--------------+-------------------------------+
-| Command line | Performances/LogicalToInArray |
-+--------------+-------------------------------+
-| Themes       | :ref:`Analyze`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Performances/LogicalToInArray |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -7920,11 +7920,11 @@ Blocks are also valid syntax that group several instructions together, though th
        }
    ?>
 
-+--------------+----------------------+
-| Command line | Structures/LoneBlock |
-+--------------+----------------------+
-| Themes       | :ref:`Analyze`       |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Structures/LoneBlock |
++------------+----------------------+
+| Themes     | :ref:`Analyze`       |
++------------+----------------------+
 
 
 
@@ -7962,11 +7962,11 @@ When literal arguments are too long, they `'break <http://php.net/manual/en/cont
 
 Literal strings and heredoc strings, including variables, that are over 50 chars longs are reported here.
 
-+--------------+--------------------------+
-| Command line | Structures/LongArguments |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/LongArguments |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -8006,11 +8006,11 @@ When assigning a referenced variable with another reference, the initial referen
 
 Do not reassign a reference with another reference. Assign new content to the reference to change its value.
 
-+--------------+--------------------------+
-| Command line | Variables/LostReferences |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Variables/LostReferences |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -8045,11 +8045,11 @@ The class magic methods must have public visibility and cannot be static.
 
 See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 
-+--------------+---------------------------+
-| Command line | Classes/toStringPss       |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP70` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Classes/toStringPss       |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP70` |
++------------+---------------------------+
 
 
 
@@ -8094,11 +8094,11 @@ Setting the property in the constructor (or in a factory), makes the class easie
    
    ?>
 
-+--------------+-----------------------------+
-| Command line | Classes/MakeGlobalAProperty |
-+--------------+-----------------------------+
-| Themes       | :ref:`Analyze`              |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Classes/MakeGlobalAProperty |
++------------+-----------------------------+
+| Themes     | :ref:`Analyze`              |
++------------+-----------------------------+
 
 
 
@@ -8185,11 +8185,11 @@ Potential replacements :
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Performances/MakeOneCall |
-+--------------+--------------------------+
-| Themes       | :ref:`Performances`      |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Performances/MakeOneCall |
++------------+--------------------------+
+| Themes     | :ref:`Performances`      |
++------------+--------------------------+
 
 
 
@@ -8217,11 +8217,11 @@ Also, note that very large octal, usually with more than 21 figures, will be tur
 
 See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Type/MalformedOctal                                                                                        |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Type/MalformedOctal                                                                                        |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -8233,11 +8233,11 @@ Mark Callable
 
 Create an attribute that guess what are the called function or methods, when possible.
 
-+--------------+------------------------+
-| Command line | Functions/MarkCallable |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Functions/MarkCallable |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -8278,11 +8278,11 @@ Mark methods that are used in children classes.
 
 This doesn't mark the current class, nor the (grand-)parent ones.
 
-+--------------+-------------------------+
-| Command line | Classes/MethodUsedBelow |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Classes/MethodUsedBelow |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -8316,11 +8316,11 @@ This syntax was added in PHP 5.4+. Before, this was not possible : the object ha
 
 This syntax is interesting when the object is not reused, and may be discarded
 
-+--------------+---------------------------+
-| Command line | Php/MethodCallOnNew       |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP53` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/MethodCallOnNew       |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP53` |
++------------+---------------------------+
 
 
 
@@ -8351,11 +8351,11 @@ Although it is possible to have different default values, it is worth checking w
    
    ?>
 
-+--------------+--------------------------------------+
-| Command line | Functions/MismatchedDefaultArguments |
-+--------------+--------------------------------------+
-| Themes       | :ref:`Analyze`                       |
-+--------------+--------------------------------------+
++------------+--------------------------------------+
+| Short name | Functions/MismatchedDefaultArguments |
++------------+--------------------------------------+
+| Themes     | :ref:`Analyze`                       |
++------------+--------------------------------------+
 
 
 
@@ -8386,11 +8386,11 @@ Ternary operator applies a condition, and yield two different results. Those res
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Structures/MismatchedTernary       |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/MismatchedTernary       |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -8424,11 +8424,11 @@ Typehint acts as a filter method. When an object is checked with a first class, 
 
 Note : This analysis currently doesn't check generalisation of classes : for example, when B is a child of BB, it is still reported as a mismatch.
 
-+--------------+------------------------------+
-| Command line | Functions/MismatchedTypehint |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Functions/MismatchedTypehint |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -8471,11 +8471,11 @@ Switch() structures using strings as literals are compared in this analysis. Whe
 
 In the example, one may argue that the 'c' case is actually handled by the 'default' case. Otherwise, business logic may request that omission.
 
-+--------------+-------------------------+
-| Command line | Structures/MissingCases |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/MissingCases |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -8505,11 +8505,11 @@ The analysis doesn't take into account include_path. This may yield false positi
 
 Missing included files may lead to a Fatal error, a warning or other error later in the execution.
 
-+--------------+----------------------+
-| Command line | Files/MissingInclude |
-+--------------+----------------------+
-| Themes       | :ref:`Analyze`       |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Files/MissingInclude |
++------------+----------------------+
+| Themes     | :ref:`Analyze`       |
++------------+----------------------+
 
 
 
@@ -8535,11 +8535,11 @@ Any function definition was found for that function, but a class with that name 
    
    ?>
 
-+--------------+-----------------------+
-| Command line | Structures/MissingNew |
-+--------------+-----------------------+
-| Themes       | :ref:`Analyze`        |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Structures/MissingNew |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
 
 
 
@@ -8565,11 +8565,11 @@ A unexpected structure is built for initialization. It may be a typo that create
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Arrays/MistakenConcatenation |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Arrays/MistakenConcatenation |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -8602,11 +8602,11 @@ Mixed usage of concatenation and string interpolation is error prone. It is hard
 
 This issue doesn't change the output. It makes code less error prone.
 
-+--------------+----------------------------------------------------------------+
-| Command line | Structures/MixedConcatInterpolation                            |
-+--------------+----------------------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
-+--------------+----------------------------------------------------------------+
++------------+----------------------------------------------------------------+
+| Short name | Structures/MixedConcatInterpolation                            |
++------------+----------------------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
++------------+----------------------------------------------------------------+
 
 
 
@@ -8633,11 +8633,11 @@ Either switch to a newer version of PHP (5.5 or newer), or make sure the resulti
    
    ?>
 
-+--------------+------------------------------------------------------+
-| Command line | Arrays/MixedKeys                                     |
-+--------------+------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
-+--------------+------------------------------------------------------+
++------------+------------------------------------------------------+
+| Short name | Arrays/MixedKeys                                     |
++------------+------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++------------+------------------------------------------------------+
 
 
 
@@ -8667,11 +8667,11 @@ Mkdir Default
 
 See also `Why 777 Folder Permissions are a Security Risk <https://www.spiralscripts.co.uk/Blog/why-777-folder-permissions-are-a-security-risk.html>`_.
 
-+--------------+-----------------------+
-| Command line | Security/MkdirDefault |
-+--------------+-----------------------+
-| Themes       | :ref:`Security`       |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Security/MkdirDefault |
++------------+-----------------------+
+| Themes     | :ref:`Security`       |
++------------+-----------------------+
 
 
 
@@ -8711,11 +8711,11 @@ Modernize Empty With Expression
 
 See also `empty() <http://www.php.net/manual/en/function.empty.php>`_.
 
-+--------------+------------------------+
-| Command line | Structures/ModernEmpty |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Structures/ModernEmpty |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -8745,11 +8745,11 @@ Across an application, it is recommended to use the same namespace for one alias
    
    ?>
 
-+--------------+-------------------------------------+
-| Command line | Namespaces/MultipleAliasDefinitions |
-+--------------+-------------------------------------+
-| Themes       | :ref:`Analyze`                      |
-+--------------+-------------------------------------+
++------------+-------------------------------------+
+| Short name | Namespaces/MultipleAliasDefinitions |
++------------+-------------------------------------+
+| Themes     | :ref:`Analyze`                      |
++------------+-------------------------------------+
 
 
 
@@ -8778,11 +8778,11 @@ Avoid aliasing the same name with different aliases. This leads to confusion.
 
 See also `Multiple Alias Definitions`_.
 
-+--------------+-------------------------------------------+
-| Command line | Namespaces/MultipleAliasDefinitionPerFile |
-+--------------+-------------------------------------------+
-| Themes       | :ref:`Analyze`                            |
-+--------------+-------------------------------------------+
++------------+-------------------------------------------+
+| Short name | Namespaces/MultipleAliasDefinitionPerFile |
++------------+-------------------------------------------+
+| Themes     | :ref:`Analyze`                            |
++------------+-------------------------------------------+
 
 
 
@@ -8817,11 +8817,11 @@ It is possible to declare several times the same class in the code. PHP will not
 
 It is recommended to avoid declaring several times the same class in the code. The best practice is to separate them with namespaces, they are for here for that purpose. In case those two classes are to be used interchangeably, the best is to use an abstract class or an interface.
 
-+--------------+------------------------------+
-| Command line | Classes/MultipleDeclarations |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Classes/MultipleDeclarations |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -8837,11 +8837,11 @@ It is often difficult to find class foo in the bar.php file. This is also the ca
 
 One good reason to have multiple classes in one file is to reduce include time by providing everything into one nice include.
 
-+--------------+------------------------------------------------+
-| Command line | Classes/MultipleClassesInFile                  |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Classes/MultipleClassesInFile                  |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -8868,11 +8868,11 @@ Multiple definitions may happens at boostrap, when the application code is colle
    
    ?>
 
-+--------------+--------------------------------------+
-| Command line | Constants/MultipleConstantDefinition |
-+--------------+--------------------------------------+
-| Themes       | :ref:`Analyze`                       |
-+--------------+--------------------------------------+
++------------+--------------------------------------+
+| Short name | Constants/MultipleConstantDefinition |
++------------+--------------------------------------+
+| Themes     | :ref:`Analyze`                       |
++------------+--------------------------------------+
 
 
 
@@ -8898,13 +8898,13 @@ However, this is not common programming practise : all arguments should be named
 
 See also `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Functions/MultipleSameArguments                                                                            |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `all-unique-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/all-unique-arguments.md>`__    |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Functions/MultipleSameArguments                                                                            |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `all-unique-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/all-unique-arguments.md>`__    |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -8949,11 +8949,11 @@ Starting with PHP 7.1, it is possible to have several distinct exceptions class 
 
 This is a backward incompabitible feature of PHP 7.1.
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Exceptions/MultipleCatch                                                                                                              |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Exceptions/MultipleCatch                                                                                                              |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -8981,11 +8981,11 @@ Up to PHP 7.1 (at least), this doesn't raise any warning. Traits are only import
    
    ?>
 
-+--------------+----------------------------------+
-| Command line | Classes/MultipleTraitOrInterface |
-+--------------+----------------------------------+
-| Themes       | :ref:`Analyze`                   |
-+--------------+----------------------------------+
++------------+----------------------------------+
+| Short name | Classes/MultipleTraitOrInterface |
++------------+----------------------------------+
+| Themes     | :ref:`Analyze`                   |
++------------+----------------------------------+
 
 
 
@@ -9019,11 +9019,11 @@ Indexes that are defined multiple times in the same array.
 
 They are indeed overwriting each other. This is most probably a typo.
 
-+--------------+------------------------------+
-| Command line | Arrays/MultipleIdenticalKeys |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Arrays/MultipleIdenticalKeys |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -9062,11 +9062,11 @@ Incrementing variables, with math operations or concatenation, is OK : the conte
    
    ?>
 
-+--------------+---------------------------------+
-| Command line | Structures/MultipleTypeVariable |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/MultipleTypeVariable |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -9104,13 +9104,13 @@ Exakat tries to find the value of the case as much as possible, and ignore any d
    }
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------+
-| Command line | Structures/MultipleDefinedCase                                                                    |
-+--------------+---------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                    |
-+--------------+---------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-duplicate-case <https://github.com/dseguy/clearPHP/tree/master/rules/no-duplicate-case.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------+
+| Short name | Structures/MultipleDefinedCase                                                                    |
++------------+---------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                    |
++------------+---------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-duplicate-case <https://github.com/dseguy/clearPHP/tree/master/rules/no-duplicate-case.md>`__ |
++------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -9139,13 +9139,13 @@ If it is used to type cast a value to number, then casting (integer) or (real) i
    
    ?>
 
-+--------------+-----------------------------------------------------------------------------------------------+
-| Command line | Structures/MultiplyByOne                                                                      |
-+--------------+-----------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                |
-+--------------+-----------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------+
+| Short name | Structures/MultiplyByOne                                                                      |
++------------+-----------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                |
++------------+-----------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
++------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -9184,11 +9184,11 @@ Methods that may not return, but are often expected to : `'__call() <http://php.
    }
    ?>
 
-+--------------+----------------------+
-| Command line | Functions/MustReturn |
-+--------------+----------------------+
-| Themes       | :ref:`Analyze`       |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Functions/MustReturn |
++------------+----------------------+
+| Themes     | :ref:`Analyze`       |
++------------+----------------------+
 
 
 
@@ -9216,11 +9216,11 @@ When using negative power, it is clearer to add parenthesis or to use the `'pow(
    
    ?>
 
-+--------------+------------------------+
-| Command line | Structures/NegativePow |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Structures/NegativePow |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -9259,11 +9259,11 @@ Three levels of ifthen is too much. The method should be split into smaller func
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Structures/NestedIfthen |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/NestedIfthen |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -9329,13 +9329,13 @@ However, ternary operators tends to make the syntax very difficult to read when 
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------+
-| Command line | Structures/NestedTernary                                                                          |
-+--------------+---------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                    |
-+--------------+---------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-nested-ternary <https://github.com/dseguy/clearPHP/tree/master/rules/no-nested-ternary.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------+
+| Short name | Structures/NestedTernary                                                                          |
++------------+---------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                    |
++------------+---------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-nested-ternary <https://github.com/dseguy/clearPHP/tree/master/rules/no-nested-ternary.md>`__ |
++------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -9368,11 +9368,11 @@ Parameter without a default value are reported by PHP, and are usually always fi
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Functions/NeverUsedParameter       |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Functions/NeverUsedParameter       |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -9412,11 +9412,11 @@ Properties that are never used. They are defined, but never actually used.
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Classes/PropertyNeverUsed |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Classes/PropertyNeverUsed |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -9449,11 +9449,11 @@ The following constants are now native in PHP 7.2. It is advised to avoid using 
 
 Note : PHP 7.2 is not out yet (2017-04-10). This list is currently temporary and may undergo changes until the final version is out.
 
-+--------------+---------------------------+
-| Command line | Php/Php72NewConstants     |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP72` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php72NewConstants     |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP72` |
++------------+---------------------------+
 
 
 
@@ -9465,11 +9465,11 @@ New Functions In PHP 5.4
 
 PHP introduced new functions in PHP 5.4. If you have already defined functions with such names, you will get a conflict when trying to upgrade. It is advised to change those functions' name.
 
-+--------------+---------------------------+
-| Command line | Php/Php54NewFunctions     |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP53` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php54NewFunctions     |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP53` |
++------------+---------------------------+
 
 
 
@@ -9481,11 +9481,11 @@ New Functions In PHP 5.5
 
 PHP introduced new functions in PHP 5.5. If you have already defined functions with such names, you will get a conflict when trying to upgrade. It is advised to change those functions' name.
 
-+--------------+------------------------------------------------------+
-| Command line | Php/Php55NewFunctions                                |
-+--------------+------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
-+--------------+------------------------------------------------------+
++------------+------------------------------------------------------+
+| Short name | Php/Php55NewFunctions                                |
++------------+------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++------------+------------------------------------------------------+
 
 
 
@@ -9497,11 +9497,11 @@ New Functions In PHP 5.6
 
 PHP introduced new functions in PHP 5.6. If you have already defined functions with such names, you will get a conflict when trying to upgrade. It is advised to change those functions' name.
 
-+--------------+---------------------------------------------------------------------------------+
-| Command line | Php/Php56NewFunctions                                                           |
-+--------------+---------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+---------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Php/Php56NewFunctions                                                           |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -9522,11 +9522,11 @@ The following functions are now native functions in PHP 7.0. It is advised to ch
 * intdiv
 * error_clear_last
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/Php70NewFunctions                                                                                      |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/Php70NewFunctions                                                                                      |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -9546,11 +9546,11 @@ The following functions are now native functions in PHP 7.1. It is advised to ch
 * mb_scrub()
 * is_iterable()
 
-+--------------+---------------------------+
-| Command line | Php/Php71NewFunctions     |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP71` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php71NewFunctions     |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP71` |
++------------+---------------------------+
 
 
 
@@ -9568,11 +9568,11 @@ The following functions are now native functions in PHP 7.2. It is advised to ch
 * stream_isatty()
 * `'proc_nice() <http://www.php.net/proc_nice>`_ (Windows only)
 
-+--------------+---------------------------+
-| Command line | Php/Php72NewFunctions     |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP72` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php72NewFunctions     |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP72` |
++------------+---------------------------+
 
 
 
@@ -9588,11 +9588,11 @@ The following functions are now native functions in PHP 7.3. It is advised to ch
 
 * net_get_interfaces( )
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/Php73NewFunctions                                                                                                                                                                       |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/Php73NewFunctions                                                                                                                                                                       |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -9627,11 +9627,11 @@ Avoid using '+1 month', and rely on 'first day of next month' or 'last day of ne
 
 See also `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_.
 
-+--------------+--------------------------+
-| Command line | Structures/NextMonthTrap |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/NextMonthTrap |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -9667,11 +9667,11 @@ Class constants or constants improve readability when calling the methods.
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Functions/NoBooleanAsDefault |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Functions/NoBooleanAsDefault |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -9699,11 +9699,11 @@ Either the condition is useless, and may be removed, or the alternatives needs t
    
    ?>
 
-+--------------+---------------------+
-| Command line | Structures/NoChoice |
-+--------------+---------------------+
-| Themes       | :ref:`Analyze`      |
-+--------------+---------------------+
++------------+---------------------+
+| Short name | Structures/NoChoice |
++------------+---------------------+
+| Themes     | :ref:`Analyze`      |
++------------+---------------------+
 
 
 
@@ -9743,11 +9743,11 @@ Avoid using whole classes as typehint. Always use interfaces, so that you may us
 
 See also `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_.
 
-+--------------+-----------------------------+
-| Command line | Functions/NoClassAsTypehint |
-+--------------+-----------------------------+
-| Themes       | :ref:`Analyze`              |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Functions/NoClassAsTypehint |
++------------+-----------------------------+
+| Themes     | :ref:`Analyze`              |
++------------+-----------------------------+
 
 
 
@@ -9775,11 +9775,11 @@ Avoid defining structures in Global namespace. Always prefer using a namespace. 
    
    ?>
 
-+--------------+---------------------+
-| Command line | Php/NoClassInGlobal |
-+--------------+---------------------+
-| Themes       | :ref:`Analyze`      |
-+--------------+---------------------+
++------------+---------------------+
+| Short name | Php/NoClassInGlobal |
++------------+---------------------+
+| Themes     | :ref:`Analyze`      |
++------------+---------------------+
 
 
 
@@ -9841,11 +9841,11 @@ Comparing `'count() <http://www.php.net/count>`_ and strlen() with other values 
 
 Note that this is a micro-optimisation : since PHP keeps track of the number of elements in arrays (or number of chars in strings), the total computing time of both operations is often lower than a ms. However, both functions tends to be heavily used, and may even be used inside loops.
 
-+--------------+---------------------------+
-| Command line | Performances/NotCountNull |
-+--------------+---------------------------+
-| Themes       | :ref:`Performances`       |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Performances/NotCountNull |
++------------+---------------------------+
+| Themes     | :ref:`Performances`       |
++------------+---------------------------+
 
 
 
@@ -9871,11 +9871,11 @@ For example,
 
 Accessing those methods in a static way is also discouraged.
 
-+--------------+---------------------------------+
-| Command line | Classes/DirectCallToMagicMethod |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Classes/DirectCallToMagicMethod |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -9903,11 +9903,11 @@ This is known as 'double-preparing' and is not a good design.
 
 See also `https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_.
 
-+--------------+-------------------------------+
-| Command line | Wordpress/NoDirectInputToWpdb |
-+--------------+-------------------------------+
-| Themes       | :ref:`Wordpress`              |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Wordpress/NoDirectInputToWpdb |
++------------+-------------------------------+
+| Themes     | :ref:`Wordpress`              |
++------------+-------------------------------+
 
 
 
@@ -9934,11 +9934,11 @@ For example, `'glob() <http://www.php.net/glob>`_ returns an array, unless some 
        }
    ?>
 
-+--------------+--------------------------+
-| Command line | Structures/NoDirectUsage |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/NoDirectUsage |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -9974,11 +9974,11 @@ Slim 4.0 will require to only use the return method : the route callable is requ
 
 See `PSR7 <http://www.php-fig.org/psr/psr-7/>`_ and `PSR 7 and Value Objects <https://www.slimframework.com/docs/concepts/value-objects.html>`_.
 
-+--------------+----------------------------+
-| Command line | Slim/NoEchoInRouteCallable |
-+--------------+----------------------------+
-| Themes       | :ref:`Slim`                |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Slim/NoEchoInRouteCallable |
++------------+----------------------------+
+| Themes     | :ref:`Slim`                |
++------------+----------------------------+
 
 
 
@@ -10025,11 +10025,11 @@ In a controller.php file :
    
    ?>
 
-+--------------+-------------------------+
-| Command line | ZendF/NoEchoOutsideView |
-+--------------+-------------------------+
-| Themes       | :ref:`ZendFramework`    |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | ZendF/NoEchoOutsideView |
++------------+-------------------------+
+| Themes     | :ref:`ZendFramework`    |
++------------+-------------------------+
 
 
 
@@ -10061,11 +10061,11 @@ Most of those errors happen at execution time, when the regex is build dynamical
 
 See also `PCRE <http://php.net/pcre>`_ and `Delimiters <http://php.net/manual/en/regexp.reference.delimiters.php>`_.
 
-+--------------+-------------------------+
-| Command line | Structures/NoEmptyRegex |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/NoEmptyRegex |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -10093,11 +10093,11 @@ It is recommended to use the function API instead.
 
 See also `Global Variables <https://codex.wordpress.org/Global_Variables>`_
 
-+--------------+--------------------------------+
-| Command line | Wordpress/NoGlobalModification |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/NoGlobalModification |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -10123,11 +10123,11 @@ Hashes may be MD5, SHA1, SHA512, Bcrypt or any other. Such values must be easily
    
    ?>
 
-+--------------+---------------------------------+
-| Command line | Structures/NoHardcodedHash      |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Security` |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/NoHardcodedHash      |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security` |
++------------+---------------------------------+
 
 
 
@@ -10160,11 +10160,11 @@ This may also come handy when testing.
 
 127.0.0.1, ::1 and ::0 are omitted, and not considered as a violation.
 
-+--------------+---------------------------------+
-| Command line | Structures/NoHardcodedIp        |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Security` |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/NoHardcodedIp        |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security` |
++------------+---------------------------------+
 
 
 
@@ -10199,13 +10199,13 @@ Either use `'__FILE__ <http://php.net/manual/en/language.constants.predefined.ph
        
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------+
-| Command line | Structures/NoHardcodedPath                                                                        |
-+--------------+---------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                    |
-+--------------+---------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-hardcoded-path <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-path.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------+
+| Short name | Structures/NoHardcodedPath                                                                        |
++------------+---------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                    |
++------------+---------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-hardcoded-path <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-path.md>`__ |
++------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -10230,11 +10230,11 @@ When connecting to a remove server, port is an important information. It is reco
        if (!$connection) 'die('Connection failed');
    ?>
 
-+--------------+---------------------------------+
-| Command line | Structures/NoHardcodedPort      |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Security` |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/NoHardcodedPort      |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security` |
++------------+---------------------------------+
 
 
 
@@ -10265,11 +10265,11 @@ From the manual : No warning is generated if the variable does not exist. That m
    
    ?>
 
-+--------------+-----------------------------+
-| Command line | Structures/NoIssetWithEmpty |
-+--------------+-----------------------------+
-| Themes       | :ref:`Analyze`              |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Structures/NoIssetWithEmpty |
++------------+-----------------------------+
+| Themes     | :ref:`Analyze`              |
++------------+-----------------------------+
 
 
 
@@ -10299,11 +10299,11 @@ list() can't be used anymore to access particular offset in a string. This shoul
 
 See also `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_ : list() can no longer unpack string variables.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/NoListWithString                                                                                       |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/NoListWithString                                                                                       |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -10354,11 +10354,11 @@ In this analysis, only properties that are found to be magic are reported. For e
 
 See also `Overload <http://php.net/manual/en/language.oop5.overloading.php#object.get>`_.
 
-+--------------+--------------------------+
-| Command line | Classes/NoMagicWithArray |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Classes/NoMagicWithArray |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -10411,11 +10411,11 @@ Else is not needed when the Then ends with a `'break <http://php.net/manual/en/c
 
 See also `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_.
 
-+--------------+--------------------------+
-| Command line | Structures/NoNeedForElse |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/NoNeedForElse |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -10441,11 +10441,11 @@ See also `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThin
          `XML External Entity (XXE) Processing <https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing>`_ and 
          `Detecting and exploiting XXE in SAML Interfaces <https://web-in-security.blogspot.nl/2014/11/detecting-and-exploiting-xxe-in-saml.html>`_.
 
-+--------------+--------------------------+
-| Command line | Security/NoNetForXmlLoad |
-+--------------+--------------------------+
-| Themes       | :ref:`Security`          |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Security/NoNetForXmlLoad |
++------------+--------------------------+
+| Themes     | :ref:`Security`          |
++------------+--------------------------+
 
 
 
@@ -10459,13 +10459,13 @@ Some PHP language constructs, such are include, print, echo don't need parenthes
 
 It it better to avoid using parenthesis with echo, print, return, throw, include and require (and _once).
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/NoParenthesisForLanguageConstruct                                                                                              |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions`                                                                                                        |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-parenthesis-for-language-construct <https://github.com/dseguy/clearPHP/tree/master/rules/no-parenthesis-for-language-construct.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/NoParenthesisForLanguageConstruct                                                                                              |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions`                                                                                                        |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-parenthesis-for-language-construct <https://github.com/dseguy/clearPHP/tree/master/rules/no-parenthesis-for-language-construct.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -10500,11 +10500,11 @@ Incrementing a variable should be done with the ++ or -- operators. Any other wa
    
    ?>
 
-+--------------+------------------------------------------------+
-| Command line | Structures/PlusEgalOne                         |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Structures/PlusEgalOne                         |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -10535,11 +10535,11 @@ The properties below are declared with public access, but are never used publicl
    
    ?>
 
-+--------------+------------------------+
-| Command line | Classes/NoPublicAccess |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Classes/NoPublicAccess |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -10577,13 +10577,13 @@ PHP uses an internal representation in base 2 : any number difficult to represen
 
 Use precision formulas with `'abs() <http://www.php.net/abs>`_ to approximate values with a given precision, or avoid reals altogether.
 
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Command line | Type/NoRealComparison                                                                               |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                      |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-real-comparison <https://github.com/dseguy/clearPHP/tree/master/rules/no-real-comparison.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------+
+| Short name | Type/NoRealComparison                                                                               |
++------------+-----------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                      |
++------------+-----------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-real-comparison <https://github.com/dseguy/clearPHP/tree/master/rules/no-real-comparison.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------+
 
 
 
@@ -10614,11 +10614,11 @@ Do not use references as the right element in an assignation.
 This is the case for most situations : addition, multiplication, bitshift, logical, power, concatenation.
 Note that PHP won't compile the code if the operator is a short operator (+=, .=, etc.), nor if the & is on the right side of the operator.
 
-+--------------+------------------------------+
-| Command line | Structures/NoReferenceOnLeft |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Structures/NoReferenceOnLeft |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -10675,11 +10675,11 @@ Note that PHP prevents the usage of goto, `'break <http://php.net/manual/en/cont
 
 See also `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_.
 
-+--------------+------------------------------+
-| Command line | Structures/NoReturnInFinally |
-+--------------+------------------------------+
-| Themes       | :ref:`Security`              |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Structures/NoReturnInFinally |
++------------+------------------------------+
+| Themes     | :ref:`Security`              |
++------------+------------------------------+
 
 
 
@@ -10719,11 +10719,11 @@ This analysis supports functions and static methods, when a definition may be fo
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Functions/NoReturnUsed             |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Functions/NoReturnUsed             |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -10757,11 +10757,11 @@ The code needs to reference the full class's name to do so, without using the cu
        }
    ?>
 
-+--------------+-----------------------------------+
-| Command line | Classes/NoSelfReferencingConstant |
-+--------------+-----------------------------------+
-| Themes       | :ref:`Analyze`                    |
-+--------------+-----------------------------------+
++------------+-----------------------------------+
+| Short name | Classes/NoSelfReferencingConstant |
++------------+-----------------------------------+
+| Themes     | :ref:`Analyze`                    |
++------------+-----------------------------------+
 
 
 
@@ -10787,11 +10787,11 @@ PHP 7 doesn't allow the usage of [] with strings. [] is an array-only operator.
 
 This was possible in PHP 5, but is now forbidden in PHP 7.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/NoStringWithAppend                                                                                     |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/NoStringWithAppend                                                                                     |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -10817,11 +10817,11 @@ Negative index were introduced in PHP 7.1. This syntax is not compatible with PH
 
 Seel also `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_.
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/NoSubstrMinusOne                                                                                                                  |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/NoSubstrMinusOne                                                                                                                  |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -10859,11 +10859,11 @@ PHP 7.1 also introduces the support of negative offsets as string index : negati
 
 Beware that substr() and $v[$pos] are similar, while `'mb_substr() <http://www.php.net/mb_substr>`_ is not. The first function works on bytes, while the latter works on characters.
 
-+--------------+------------------------------------------------------------------------------------+
-| Command line | Structures/NoSubstrOne                                                             |
-+--------------+------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions` |
-+--------------+------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------+
+| Short name | Structures/NoSubstrOne                                                             |
++------------+------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71`, :ref:`Suggestions` |
++------------+------------------------------------------------------------------------------------+
 
 
 
@@ -10915,13 +10915,13 @@ To handle arrays that may be quite big, it is recommended to avoid using `'array
 
 Note that `'array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ and `'file_put_contents() <http://www.php.net/file_put_contents>`_ are affected and reported the same way.
 
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Command line | Performances/ArrayMergeInLoops                                                                              |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Performances`                                                                         |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-array_merge-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-array_merge-in-loop.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------+
+| Short name | Performances/ArrayMergeInLoops                                                                              |
++------------+-------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Performances`                                                                         |
++------------+-------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-array_merge-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-array_merge-in-loop.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -10952,11 +10952,11 @@ It is not possible to pass explicitly null to get_class() to get the current's c
    
    ?>
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/NoGetClassNull                                                                                                                                                                                   |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/NoGetClassNull                                                                                                                                                                                   |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -10988,11 +10988,11 @@ In practice, letters outside the scope of a-zA-Z0-9 are rare, and require more c
 
 See also `Variables <http://php.net/manual/en/language.variables.basics.php>`_.
 
-+--------------+----------------------------+
-| Command line | Variables/VariableNonascii |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Variables/VariableNonascii |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -11045,11 +11045,11 @@ in-family method.
 
 See also `static keyword <http://php.net/manual/en/language.oop5.static.php>`_.
 
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| Command line | Classes/NonStaticMethodsCalledStatic                                                                                       |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+----------------------------------------------------------------------------------------------------------------------------+
++------------+----------------------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/NonStaticMethodsCalledStatic                                                                                       |
++------------+----------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -11091,11 +11091,11 @@ It is recommended to make index a real string (with ' or "), or to define the co
 
 Note that PHP 7.2 removes the support for this feature : `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_.
 
-+--------------+-------------------------+
-| Command line | Arrays/NonConstantArray |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Arrays/NonConstantArray |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -11126,11 +11126,11 @@ Usual convention is to write PHP keywords (like as, foreach, switch, case, `'bre
 
 PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing compulsory here. Although, it will look strange to many.
 
-+--------------+------------------------------------------------+
-| Command line | Php/UpperCaseKeyword                           |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Php/UpperCaseKeyword                           |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -11156,11 +11156,11 @@ Mark the creation of nonce by Wordpress. Nonce may be created with the Wordpress
 
 See also `Wordpress Nonce <https://codex.wordpress.org/WordPress_Nonces>`_.
 
-+--------------+-------------------------+
-| Command line | Wordpress/NonceCreation |
-+--------------+-------------------------+
-| Themes       | :ref:`Wordpress`        |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Wordpress/NonceCreation |
++------------+-------------------------+
+| Themes     | :ref:`Wordpress`        |
++------------+-------------------------+
 
 
 
@@ -11193,11 +11193,11 @@ Thanks to Benoit Viguier for the `original idea <https://twitter.com/b_viguier/s
 
 See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
-+--------------+-------------------+
-| Command line | Php/NotScalarType |
-+--------------+-------------------+
-| Themes       | :ref:`Analyze`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Php/NotScalarType |
++------------+-------------------+
+| Themes     | :ref:`Analyze`    |
++------------+-------------------+
 
 
 
@@ -11230,11 +11230,11 @@ Files should only include definitions (class, functions, traits, interfaces, con
 
 Within this context, globals, use, and namespaces instructions are not considered a warning.
 
-+--------------+--------------------------+
-| Command line | Files/NotDefinitionsOnly |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Files/NotDefinitionsOnly |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -11258,13 +11258,13 @@ This is a wrongly done casting to boolean. PHP supports (boolean) to do the same
        $b = (boolean) $x; 
    ?>
 
-+--------------+-----------------------------------------------------------------------------------------------+
-| Command line | Structures/NotNot                                                                             |
-+--------------+-----------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                |
-+--------------+-----------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-implied-cast <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-cast.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------+
+| Short name | Structures/NotNot                                                                             |
++------------+-----------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                |
++------------+-----------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-implied-cast <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-cast.md>`__ |
++------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -11295,11 +11295,11 @@ This inconsistency has been cleaned in PHP 7 : see See `Internal Constructor Beh
 
 See also `PHP RFC: Constructor behaviour of internal classes <https://wiki.php.net/rfc/internal_constructor_behaviour>`_.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Classes/NullOnNew                                                                                          |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/NullOnNew                                                                                          |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -11336,13 +11336,13 @@ There is no need to create references for objects, as those are always passed by
 
 See also `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_.
 
-+--------------+-----------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/ObjectReferences                                                                                     |
-+--------------+-----------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                                  |
-+--------------+-----------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-references-on-objects <https://github.com/dseguy/clearPHP/tree/master/rules/no-references-on-objects.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/ObjectReferences                                                                                     |
++------------+-----------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                                  |
++------------+-----------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-references-on-objects <https://github.com/dseguy/clearPHP/tree/master/rules/no-references-on-objects.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -11393,13 +11393,13 @@ Note that classes with methods bearing the class name, but inside a namespace ar
 
 See also `Constructors and Destructors ¶ <http://php.net/manual/en/language.oop5.decon.php>`_.
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command line | Classes/OldStyleConstructor                                                                             |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                          |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------+
+| Short name | Classes/OldStyleConstructor                                                                             |
++------------+---------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                          |
++------------+---------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__ |
++------------+---------------------------------------------------------------------------------------------------------+
 
 
 
@@ -11435,13 +11435,13 @@ Do not use the old __autoload() function, but rather the new spl_register_autolo
 
 See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_.
 
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Command line | Php/oldAutoloadUsage                                                                                |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                      |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| ClearPHP     | `use-smart-autoload <https://github.com/dseguy/clearPHP/tree/master/rules/use-smart-autoload.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------+
+| Short name | Php/oldAutoloadUsage                                                                                |
++------------+-----------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                      |
++------------+-----------------------------------------------------------------------------------------------------+
+| ClearPHP   | `use-smart-autoload <https://github.com/dseguy/clearPHP/tree/master/rules/use-smart-autoload.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------+
 
 
 
@@ -11469,11 +11469,11 @@ One letter functions seems to be really short for a meaningful name. This may ha
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Functions/OneLetterFunctions |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Functions/OneLetterFunctions |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -11508,11 +11508,11 @@ These strings only contains one variable or property or array.
 
 If the goal is to convert it to a string, use the type casting (string) operator : it is then clearer to understand the conversion. It is also marginally faster, though very little.
 
-+--------------+-------------------------+
-| Command line | Type/OneVariableStrings |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Type/OneVariableStrings |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -11539,11 +11539,11 @@ This may be linted by PHP, when the function definition is in the same file as t
 
 This analysis currently covers functioncalls and static methodcalls, but omits methodcalls.
 
-+--------------+-----------------------------------------+
-| Command line | Functions/OnlyVariablePassedByReference |
-+--------------+-----------------------------------------+
-| Themes       | :ref:`Analyze`                          |
-+--------------+-----------------------------------------+
++------------+-----------------------------------------+
+| Short name | Functions/OnlyVariablePassedByReference |
++------------+-----------------------------------------+
+| Themes     | :ref:`Analyze`                          |
++------------+-----------------------------------------+
 
 
 
@@ -11576,11 +11576,11 @@ Anything else, like literals or static expressions, yield a warning at execution
    
    ?>
 
-+--------------+--------------------------------------------+
-| Command line | Structures/OnlyVariableReturnedByReference |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`Analyze`                             |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | Structures/OnlyVariableReturnedByReference |
++------------+--------------------------------------------+
+| Themes     | :ref:`Analyze`                             |
++------------+--------------------------------------------+
 
 
 
@@ -11604,13 +11604,13 @@ Classic old style failed error management.
 
 Interrupting a script will leave the application with a blank page, will make your life miserable for testing. Just don't do that.
 
-+--------------+-------------------------------------------------------------------------------------------+
-| Command line | Structures/OrDie                                                                          |
-+--------------+-------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                            |
-+--------------+-------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------+
+| Short name | Structures/OrDie                                                                          |
++------------+-------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                            |
++------------+-------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-implied-if <https://github.com/dseguy/clearPHP/tree/master/rules/no-implied-if.md>`__ |
++------------+-------------------------------------------------------------------------------------------+
 
 
 
@@ -11648,11 +11648,11 @@ Optional characteristics, like final, static... are not specified. Special metho
    
    ?>
 
-+--------------+------------------------------------------------+
-| Command line | Classes/OrderOfDeclaration                     |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Classes/OrderOfDeclaration                     |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -11681,11 +11681,11 @@ Besides, it is possible that the source is needed later, for extra processing.
 
 Note that accumulators, like += .=  or [] etc., that are meant to collect lots of values with consistent type are OK.
 
-+--------------+-----------------------+
-| Command line | Variables/Overwriting |
-+--------------+-----------------------+
-| Themes       | :ref:`Analyze`        |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Variables/Overwriting |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
 
 
 
@@ -11715,11 +11715,11 @@ In catch blocks, it is good practice not to overwrite the incoming exception, as
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Exceptions/OverwriteException      |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Exceptions/OverwriteException      |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -11753,11 +11753,11 @@ This analysis doesn't take into account the distance between two assignations : 
    
    ?>
 
-+--------------+-------------------------------+
-| Command line | Variables/OverwrittenLiterals |
-+--------------+-------------------------------+
-| Themes       | :ref:`Analyze`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Variables/OverwrittenLiterals |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -11791,11 +11791,11 @@ There are 8 new classes : Error, `'ParseError <http://php.net/manual/fr/class.pa
    
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/Php70NewClasses                                                                                        |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/Php70NewClasses                                                                                        |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -11807,11 +11807,11 @@ PHP 7.0 New Interfaces
 
 The following interfaces are introduced in PHP 7.0. They shouldn't be defined in custom code.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/Php70NewInterfaces                                                                                     |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/Php70NewInterfaces                                                                                     |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -11823,11 +11823,11 @@ PHP 7.0 Removed Directives
 
 List of directives that are removed in PHP 7.0.
 
-+--------------+---------------------------------------------------------------------------------+
-| Command line | Php/Php70RemovedDirective                                                       |
-+--------------+---------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP73` |
-+--------------+---------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Php/Php70RemovedDirective                                                       |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP73` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -11871,11 +11871,11 @@ This evolution impacts mostly exact comparisons (== and ===). Non-equality (!= a
 
 See also `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_.
 
-+--------------+---------------------------+
-| Command line | Php/Php71microseconds     |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP71` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php71microseconds     |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP71` |
++------------+---------------------------+
 
 
 
@@ -11887,11 +11887,11 @@ PHP 7.1 Removed Directives
 
 List of directives that are removed in PHP 7.1.
 
-+--------------+---------------------------+
-| Command line | Php/Php71RemovedDirective |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP71` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php71RemovedDirective |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP71` |
++------------+---------------------------+
 
 
 
@@ -11912,11 +11912,11 @@ Several functions are deprecated in PHP 7.2.
 
 Deprecated functions and extensions are reported in a separate analysis.
 
-+--------------+---------------------------+
-| Command line | Php/Php72Deprecation      |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP72` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php72Deprecation      |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP72` |
++------------+---------------------------+
 
 
 
@@ -11944,11 +11944,11 @@ This is the case since PHP 7.2.
 
 See also `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_.
 
-+--------------+---------------------------+
-| Command line | Php/Php72ObjectKeyword    |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP72` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php72ObjectKeyword    |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP72` |
++------------+---------------------------+
 
 
 
@@ -11963,11 +11963,11 @@ The following PHP native functions were removed in PHP 7.2.
 * png2wbmp
 * jpeg2wbmp
 
-+--------------+---------------------------+
-| Command line | Php/Php72RemovedFunctions |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP72` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Php72RemovedFunctions |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP72` |
++------------+---------------------------+
 
 
 
@@ -12004,11 +12004,11 @@ The last empty line is easier on the VCS, allowing clearer text diffs.
 
 See also `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_.
 
-+--------------+----------------------------+
-| Command line | Php/PHP73LastEmptyArgument |
-+--------------+----------------------------+
-| Themes       | :ref:`CompatibilityPHP73`  |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Php/PHP73LastEmptyArgument |
++------------+----------------------------+
+| Themes     | :ref:`CompatibilityPHP73`  |
++------------+----------------------------+
 
 
 
@@ -12045,11 +12045,11 @@ The following PHP native functions were removed in PHP 7.0.
 * imagepsslantfont
 * imagepstext
 
-+--------------+------------------------------------------------------+
-| Command line | Php/Php70RemovedFunctions                            |
-+--------------+------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------+
++------------+------------------------------------------------------+
+| Short name | Php/Php70RemovedFunctions                            |
++------------+------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++------------+------------------------------------------------------+
 
 
 
@@ -12061,11 +12061,11 @@ PHP 72 Removed Classes
 
 No PHP native classes was removed in PHP 7.2.
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/Php72RemovedClasses                                                                                                                                          |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/Php72RemovedClasses                                                                                                                                          |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12081,11 +12081,11 @@ The following PHP native interfaces were removed in PHP 7.2.
 * SessionIdInterface
 * SessionUpdateTimestampHandlerInterface
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/Php72RemovedInterfaces                                                                                                                                       |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/Php72RemovedInterfaces                                                                                                                                       |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12116,11 +12116,11 @@ PHP does check that a number of structures, such as classes, methods, interfaces
    
    ?>
 
-+--------------+-------------------+
-| Command line | Php/ReservedNames |
-+--------------+-------------------+
-| Themes       | :ref:`Analyze`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Php/ReservedNames |
++------------+-------------------+
+| Themes     | :ref:`Analyze`    |
++------------+-------------------+
 
 
 
@@ -12164,11 +12164,11 @@ See `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70
 |Foo::$bar['baz']()   |Foo::{$bar['baz']}()   |(Foo::$bar)['baz']()   |
 +---------------------+-----------------------+-----------------------+
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Variables/Php5IndirectExpression                                                                           |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Variables/Php5IndirectExpression                                                                           |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12193,11 +12193,11 @@ With PHP 7, dirname has a second argument that represents the number of parent f
    
    ?>
 
-+--------------+--------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/PHP7Dirname                                                                                                         |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Suggestions` |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------+
++------------+--------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/PHP7Dirname                                                                                                         |
++------------+--------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Suggestions` |
++------------+--------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12244,11 +12244,11 @@ When calling parent constructor, always put it first in the `'__construct <http:
 
 This analysis cannot be applied to Exceptions.
 
-+--------------+------------------------------------+
-| Command line | Classes/ParentFirst                |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Classes/ParentFirst                |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -12284,11 +12284,11 @@ PHP 7.0 and later detect their usage at compile time, and emits a fatal error.
 
 Static may be used in a function or a closure, but not globally.
 
-+--------------+-------------------------+
-| Command line | Classes/PssWithoutClass |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Classes/PssWithoutClass |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -12312,11 +12312,11 @@ Using parenthesis around parameters used to silent some internal check. This is 
    
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/ParenthesisAsParameter                                                                                 |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/ParenthesisAsParameter                                                                                 |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12355,11 +12355,11 @@ Pathinfo() Returns May Vary
 
 The same applies to `'parse_url() <http://www.php.net/parse_url>`_, which returns an array with various index.
 
-+--------------+---------------------+
-| Command line | Php/PathinfoReturns |
-+--------------+---------------------+
-| Themes       | :ref:`Analyze`      |
-+--------------+---------------------+
++------------+---------------------+
+| Short name | Php/PathinfoReturns |
++------------+---------------------+
+| Themes     | :ref:`Analyze`      |
++------------+---------------------+
 
 
 
@@ -12400,11 +12400,11 @@ You should check them so they don't behave strangely.
 
 See also `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_.
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Variables/Php7IndirectExpression                                                                                                      |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Variables/Php7IndirectExpression                                                                                                      |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12429,11 +12429,11 @@ The new class is : ReflectionClassConstant. The other class is 'Void' : this is 
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/Php71NewClasses                                                                                                                   |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/Php71NewClasses                                                                                                                   |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12467,11 +12467,11 @@ The new class is : HashContext.
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/Php72NewClasses                                                                                                                                                                         |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/Php72NewClasses                                                                                                                                                                         |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12509,11 +12509,11 @@ This applies to methods, functions and closures.
 See also `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_, 
          `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_.
 
-+--------------+---------------------------+
-| Command line | Php/NoReferenceForTernary |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/NoReferenceForTernary |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -12542,11 +12542,11 @@ Most of the traditionnal PHP keywords may be used inside classes, trait or inter
 
 This was not the case in PHP 5, and will yield parse errors.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/Php7RelaxedKeyword                                                                                     |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/Php7RelaxedKeyword                                                                                     |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12572,11 +12572,11 @@ Phpinfo
 If left in the production code, it may lead to a critical leak, as any attacker gaining access to this data will know a lot about the server configuration.
 It is advised to never leave that kind of instruction in a production code.
 
-+--------------+---------------------------------+
-| Command line | Structures/PhpinfoUsage         |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Security` |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/PhpinfoUsage         |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security` |
++------------+---------------------------------+
 
 
 
@@ -12608,11 +12608,11 @@ In case the file is not accessible, comparing the result of the reading to somet
 
 It is recommended to check the file resources when they are opened, and always use === or !== to compare readings. `'feof() <http://www.php.net/feof>`_ is also a reliable function here.
 
-+--------------+---------------------------------+
-| Command line | Structures/PossibleInfiniteLoop |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/PossibleInfiniteLoop |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -12643,11 +12643,11 @@ The latter needs an extra memory allocation that costs about 10% of performances
 
 This is a micro-optimisation. However, its usage is so widespread, including within loops, that it may eventually be visible. As such, it is recommended to adopt this rule, and only consider changing legacy code as they are refactored for other reasons.
 
-+--------------+-------------------------------------+
-| Command line | Performances/PrePostIncrement       |
-+--------------+-------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Performances` |
-+--------------+-------------------------------------+
++------------+-------------------------------------+
+| Short name | Performances/PrePostIncrement       |
++------------+-------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Performances` |
++------------+-------------------------------------+
 
 
 
@@ -12680,11 +12680,11 @@ In particular, absolute references are not allowed anymore, due to an injection 
 
 See also `'vprintf() <http://www.php.net/vprintf>`_ and `Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_.
 
-+--------------+------------------------------+
-| Command line | Wordpress/PreparePlaceholder |
-+--------------+------------------------------+
-| Themes       | :ref:`Wordpress`             |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Wordpress/PreparePlaceholder |
++------------+------------------------------+
+| Themes     | :ref:`Wordpress`             |
++------------+------------------------------+
 
 
 
@@ -12751,11 +12751,11 @@ If the array has to be completed rather than created, it is also faster to use +
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Arrays/ShouldPreprocess |
-+--------------+-------------------------+
-| Themes       | none                    |
-+--------------+-------------------------+
++------------+--------------------------------------------------------+
+| Short name | Arrays/ShouldPreprocess                                |
++------------+--------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Suggestions` |
++------------+--------------------------------------------------------+
 
 
 
@@ -12788,11 +12788,11 @@ The following expression are made of literals or already known values : they may
 
 By doing so, this will reduce the amount of work of PHP.
 
-+--------------+--------------------------------+
-| Command line | Structures/ShouldPreprocess    |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Analyze` |
-+--------------+--------------------------------+
++------------+-----------------------------+
+| Short name | Structures/ShouldPreprocess |
++------------+-----------------------------+
+| Themes     | none                        |
++------------+-----------------------------+
 
 
 
@@ -12824,11 +12824,11 @@ When stopping a script with `'die() <http://www.php.net/die>`_, it is possible t
    
    ?>
 
-+--------------+------------------------+
-| Command line | Structures/PrintAndDie |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Structures/PrintAndDie |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -12865,11 +12865,11 @@ Extra arguments are ignored, and are dead code as such. Missing arguments are re
 
 See also `printf <http://php.net/printf>`_ and `sprintf <http://php.net/sprintf>`_.
 
-+--------------+----------------------------+
-| Command line | Structures/PrintfArguments |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Structures/PrintfArguments |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -12899,11 +12899,11 @@ Public properties are omitted here : they may be modified anywhere in the code.
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Classes/PropertyCouldBeLocal |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Classes/PropertyCouldBeLocal |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -12947,11 +12947,11 @@ The following method are never used outside their class of definition. Given the
 
 Note that dynamic properties (such as $x->$y) are not taken into account.
 
-+--------------+------------------------------+
-| Command line | Classes/CouldBePrivateMethod |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Classes/CouldBePrivateMethod |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -12995,11 +12995,11 @@ The following properties are never used outside their class of definition  Given
 
 Note that dynamic properties (such as $x->$y) are not taken into account.
 
-+--------------+------------------------+
-| Command line | Classes/CouldBePrivate |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Classes/CouldBePrivate |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -13053,11 +13053,11 @@ Properties that read and written may be converted into a variable, static to the
 
 Note : properties used only once are not returned by this analysis. They are omitted, and are available in the analysis `Used Once Property`_.
 
-+--------------+-------------------------------------+
-| Command line | Classes/PropertyUsedInOneMethodOnly |
-+--------------+-------------------------------------+
-| Themes       | :ref:`Analyze`                      |
-+--------------+-------------------------------------+
++------------+-------------------------------------+
+| Short name | Classes/PropertyUsedInOneMethodOnly |
++------------+-------------------------------------+
+| Themes     | :ref:`Analyze`                      |
++------------+-------------------------------------+
 
 
 
@@ -13086,11 +13086,11 @@ The property and the variable may easily be confused one for another and lead to
 
 Sometimes, when the property is going to be replaced by the incoming argument, or data based on that argument, this naming schema is made on purpose, indicating that the current argument will eventually end up in the property. When the argument has the same name as the property, no warning is reported.
 
-+--------------+--------------------------------------+
-| Command line | Structures/PropertyVariableConfusion |
-+--------------+--------------------------------------+
-| Themes       | :ref:`Analyze`                       |
-+--------------+--------------------------------------+
++------------+--------------------------------------+
+| Short name | Structures/PropertyVariableConfusion |
++------------+--------------------------------------+
+| Themes     | :ref:`Analyze`                       |
++------------+--------------------------------------+
 
 
 
@@ -13141,11 +13141,11 @@ It is recommended to reduce the number of queries by making one query, and dispa
 
 This optimisation is not always possible : for example, some SQL queries may not be prepared, like 'DROP TABLE', or 'DESC'. 'UPDATE' commands often update one row at a time, and grouping such queries may be counter-productive or unsafe.
 
-+--------------+--------------------------+
-| Command line | Structures/QueriesInLoop |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/QueriesInLoop |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -13175,11 +13175,11 @@ random_int() and random_bytes() emit Exceptions if they meet a problem. This way
    
    ?>
 
-+--------------+-----------------------------+
-| Command line | Structures/RandomWithoutTry |
-+--------------+-----------------------------+
-| Themes       | :ref:`Security`             |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Structures/RandomWithoutTry |
++------------+-----------------------------+
+| Themes     | :ref:`Security`             |
++------------+-----------------------------+
 
 
 
@@ -13212,11 +13212,11 @@ Unless order is important, it is recommended to always use the same order when d
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Arrays/RandomlySortedLiterals      |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Arrays/RandomlySortedLiterals      |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -13244,11 +13244,11 @@ This is possible when managing some backward compatibility, like emulating an ol
    
    ?>
 
-+--------------+---------------------------------+
-| Command line | Functions/RedeclaredPhpFunction |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Functions/RedeclaredPhpFunction |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -13284,11 +13284,11 @@ Class constants may be redefined, though it is prone to errors when using them, 
 
 It is recommended to use distinct names.
 
-+--------------+----------------------------+
-| Command line | Classes/RedefinedConstants |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Classes/RedefinedConstants |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -13314,11 +13314,11 @@ Classes allows properties to be set with a default value. When those properties 
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Classes/RedefinedDefault |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Classes/RedefinedDefault |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -13350,13 +13350,13 @@ Mimicking register_globals is achieved with variables variables, `'extract() <ht
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------+
-| Command line | Security/RegisterGlobals                                                        |
-+--------------+---------------------------------------------------------------------------------+
-| Themes       | :ref:`Security`                                                                 |
-+--------------+---------------------------------------------------------------------------------+
-| Examples     | :ref:`teampass-security-registerglobals`, :ref:`xoops-security-registerglobals` |
-+--------------+---------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Security/RegisterGlobals                                                        |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`Security`                                                                 |
++------------+---------------------------------------------------------------------------------+
+| Examples   | :ref:`teampass-security-registerglobals`, :ref:`xoops-security-registerglobals` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -13383,11 +13383,11 @@ Relay functions (or methods) are delegating the actual work to another function 
 
 Relay functions are typical of transition API, where an old API have to be preserved until it is fully migrated. Then, they may be removed, so as to reduce confusion, and unclutter the API.
 
-+--------------+-------------------------+
-| Command line | Functions/RelayFunction |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Functions/RelayFunction |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -13423,11 +13423,11 @@ When a regex is repeatedly used in the code, it is getting harder to update.
 
 Regex that are repeated at least once (aka, used twice or more) are reported. Regex that are dynamically build are not reported.
 
-+--------------+--------------------------+
-| Command line | Structures/RepeatedRegex |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/RepeatedRegex |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -13455,13 +13455,13 @@ It is recommended to use echo with multiple arguments, or a concatenation with p
      print 'c';
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------+
-| Command line | Structures/RepeatedPrint                                                                          |
-+--------------+---------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions`                                                                |
-+--------------+---------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-repeated-print <https://github.com/dseguy/clearPHP/tree/master/rules/no-repeated-print.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------+
+| Short name | Structures/RepeatedPrint                                                                          |
++------------+---------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions`                                                                |
++------------+---------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-repeated-print <https://github.com/dseguy/clearPHP/tree/master/rules/no-repeated-print.md>`__ |
++------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -13487,11 +13487,11 @@ For example, string, float, false, true, null, resource,... are not acceptable a
 
 See also `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_.
 
-+--------------+---------------------------+
-| Command line | Php/ReservedKeywords7     |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP70` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/ReservedKeywords7     |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP70` |
++------------+---------------------------+
 
 
 
@@ -13511,11 +13511,11 @@ preg_match() may return empty values, if the search fails. It is important to ch
        // $s may end up null if preg_match fails.
    ?>
 
-+--------------+-------------------------------+
-| Command line | Structures/ResultMayBeMissing |
-+--------------+-------------------------------+
-| Themes       | :ref:`Analyze`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Structures/ResultMayBeMissing |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -13543,11 +13543,11 @@ Those issues often happen when a catch structure was positioned for debug purpos
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Exceptions/Rethrown          |
-+--------------+------------------------------+
-| Themes       | :ref:`Dead code <dead-code>` |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Exceptions/Rethrown          |
++------------+------------------------------+
+| Themes     | :ref:`Dead code <dead-code>` |
++------------+------------------------------+
 
 
 
@@ -13599,11 +13599,11 @@ This may be applied to assignations and ternary operators too.
    
    ?>
 
-+--------------+----------------------------+
-| Command line | Structures/ReturnTrueFalse |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Structures/ReturnTrueFalse |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -13615,11 +13615,11 @@ Return With Parenthesis
 
 PHP tolerates parenthesis for the argument of a return statement, but it is recommended not to use them.
 
-+--------------+------------------------------------------------+
-| Command line | Php/ReturnWithParenthesis                      |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Php/ReturnWithParenthesis                      |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -13646,11 +13646,11 @@ A variable is already holding the content that is re-calculated later. Use the c
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Structures/ReuseVariable |
-+--------------+--------------------------+
-| Themes       | :ref:`Suggestions`       |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/ReuseVariable |
++------------+--------------------------+
+| Themes     | :ref:`Suggestions`       |
++------------+--------------------------+
 
 
 
@@ -13678,11 +13678,11 @@ With those tests (by default), the certificate is verified, and if it isn't vali
    curl_close($ch);
    ?>
 
-+--------------+----------------------+
-| Command line | Security/CurlOptions |
-+--------------+----------------------+
-| Themes       | :ref:`Security`      |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Security/CurlOptions |
++------------+----------------------+
+| Themes     | :ref:`Security`      |
++------------+----------------------+
 
 
 
@@ -13724,11 +13724,11 @@ This analysis returns false positive when there are attempt to fix the situation
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Structures/SameConditions |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Structures/SameConditions |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -13766,11 +13766,11 @@ The source will also be destroyed immediately after the blind variable has been 
    
    ?>
 
-+--------------+-----------------------------+
-| Command line | Structures/AutoUnsetForeach |
-+--------------+-----------------------------+
-| Themes       | :ref:`Analyze`              |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Structures/AutoUnsetForeach |
++------------+-----------------------------+
+| Themes     | :ref:`Analyze`              |
++------------+-----------------------------+
 
 
 
@@ -13839,11 +13839,11 @@ Property shouldn't use both object and scalar syntaxes. When a property may be a
 
 See also `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_. and `The Null Object Pattern <https://www.sitepoint.com/the-null-object-pattern-polymorphism-in-domain-models/>`_.
 
-+--------------+--------------------------------+
-| Command line | Classes/ScalarOrObjectProperty |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Classes/ScalarOrObjectProperty |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`                 |
++------------+--------------------------------+
 
 
 
@@ -13872,11 +13872,11 @@ Scalar typehint were not supported in PHP 5 and older. Then, the typehint is tre
 
 See also `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_ and `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/ScalarTypehintUsage                                                                                    |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/ScalarTypehintUsage                                                                                    |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -13902,11 +13902,11 @@ This loop will simultaneously increment $a and $b. It will stop only when the la
 This structure is often unknown, and makes the for instruction quite difficult to read. It is also easy to oversee the multiples instructions, and omit one of them.
 It is recommended not to use it.
 
-+--------------+--------------------------+
-| Command line | Structures/SequenceInFor |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/SequenceInFor |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -13940,11 +13940,11 @@ This was spotted by Nicolas Grekas, and fixed in Symfony `[HttpFoundation] Make 
 
 See also ` <https://wiki.php.net/rfc/session-read_only-lazy_write>`_ and the `Sessions <http://php.net/manual/en/book.session.php>`_.
 
-+--------------+---------------------------+
-| Command line | Security/SessionLazyWrite |
-+--------------+---------------------------+
-| Themes       | :ref:`Security`           |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Security/SessionLazyWrite |
++------------+---------------------------+
+| Themes     | :ref:`Security`           |
++------------+---------------------------+
 
 
 
@@ -13986,11 +13986,11 @@ The $httponly argument limits the access of the cookie to Javascript. It is only
 
 See also `'setcookie() <http://www.php.net/setcookie>`_ on the manual for more information.
 
-+--------------+------------------------+
-| Command line | Security/SetCookieArgs |
-+--------------+------------------------+
-| Themes       | :ref:`Security`        |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Security/SetCookieArgs |
++------------+------------------------+
+| Themes     | :ref:`Security`        |
++------------+------------------------+
 
 
 
@@ -14021,11 +14021,11 @@ The first argument of `'setlocale() <http://www.php.net/setlocale>`_ must be one
 
 The PHP 5 usage of strings (same name as above, enclosed in ' or ") is not legit anymore in PHP 7 and later.
 
-+--------------+------------------------------------+
-| Command line | Structures/SetlocaleNeedsConstants |
-+--------------+------------------------------------+
-| Themes       | :ref:`CompatibilityPHP70`          |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/SetlocaleNeedsConstants |
++------------+------------------------------------+
+| Themes     | :ref:`CompatibilityPHP70`          |
++------------+------------------------------------+
 
 
 
@@ -14063,11 +14063,11 @@ This is good for readability, and help at understanding the code. This is especi
 
 See also `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_.
 
-+--------------+-----------------------------------+
-| Command line | Structures/OneLineTwoInstructions |
-+--------------+-----------------------------------+
-| Themes       | :ref:`Analyze`                    |
-+--------------+-----------------------------------+
++------------+-----------------------------------+
+| Short name | Structures/OneLineTwoInstructions |
++------------+-----------------------------------+
+| Themes     | :ref:`Analyze`                    |
++------------+-----------------------------------+
 
 
 
@@ -14079,11 +14079,11 @@ Short Open Tags
 
 Usage of short open tags is discouraged. The following files were found to be impacted by the short open tag directive at compilation time. They must be reviewed to ensure no &lt;? tags are found in the code.
 
-+--------------+--------------------------+
-| Command line | Php/ShortOpenTagRequired |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Php/ShortOpenTagRequired |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -14112,11 +14112,11 @@ PHP 5.4 introduced the new short syntax, with square brackets. The previous synt
 
 See also `Array <http://php.net/manual/en/language.types.array.php>`_.
 
-+--------------+---------------------------+
-| Command line | Arrays/ArrayNSUsage       |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP53` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Arrays/ArrayNSUsage       |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP53` |
++------------+---------------------------+
 
 
 
@@ -14151,11 +14151,11 @@ This analysis reports a false-postive, even when the included variable is an int
 
 See also `zend-db documentation <https://github.com/zendframework/zend-db/blob/master/docs/book/index.md>`_.
 
-+--------------+--------------------------+
-| Command line | ZendF/Zf3DbAlwaysPrepare |
-+--------------+--------------------------+
-| Themes       | :ref:`ZendFramework`     |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | ZendF/Zf3DbAlwaysPrepare |
++------------+--------------------------+
+| Themes     | :ref:`ZendFramework`     |
++------------+--------------------------+
 
 
 
@@ -14186,13 +14186,13 @@ Static content inside a string, that has no single quotes nor escape sequence (s
 
 If you have too many of them, don't loose your time switching them all. If you have a few of them, it may be good for consistence.
 
-+--------------+-----------------------------------------------------------------------------------------------+
-| Command line | Type/ShouldBeSingleQuote                                                                      |
-+--------------+-----------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>`                                                |
-+--------------+-----------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-double-quote <https://github.com/dseguy/clearPHP/tree/master/rules/no-double-quote.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------+
+| Short name | Type/ShouldBeSingleQuote                                                                      |
++------------+-----------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>`                                                |
++------------+-----------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-double-quote <https://github.com/dseguy/clearPHP/tree/master/rules/no-double-quote.md>`__ |
++------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -14223,11 +14223,11 @@ Note : Chaining requires PHP > 5.3.0.
 
 See also `Exception::`'__construct <http://php.net/manual/en/language.oop5.decon.php>`_ <http://php.net/manual/en/exception.construct.php>`_.
 
-+--------------+---------------------------------+
-| Command line | Structures/ShouldChainException |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/ShouldChainException |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -14266,11 +14266,11 @@ Finally, short names makes the rest of the code readable.
    
    ?>
 
-+--------------+--------------------------------------+
-| Command line | Namespaces/ShouldMakeAlias           |
-+--------------+--------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`ZendFramework` |
-+--------------+--------------------------------------+
++------------+--------------------------------------+
+| Short name | Namespaces/ShouldMakeAlias           |
++------------+--------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`ZendFramework` |
++------------+--------------------------------------+
 
 
 
@@ -14310,11 +14310,50 @@ This way, they are less verbose, compatible with assignation and easier to read.
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Structures/ShouldMakeTernary |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Structures/ShouldMakeTernary |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
+
+
+
+.. _should-preprocess-chr:
+
+Should Preprocess Chr
+#####################
+
+
+Replace literal `'chr() <http://www.php.net/chr>`_ calls with their escape sequence.
+
+`'chr() <http://www.php.net/chr>`_ is a functioncall, that cannot be cached. It is only resolved at execution time. 
+On the other hand, literal values are pre-processed by PHP and may be cached.
+
+.. code-block:: php
+
+   <?php
+   
+   // This is easier on PHP
+   $a = "0000 is great!";
+   
+   // This is slow
+   $a = chr(80), chr(72), chr(80), chr(32), ' is great!';
+   
+   // This would be the best with this example, but it is not always possible
+   $a = 'PHP is great!';
+   
+   ?>
+
+
+This is a micro-optimisation. 
+
+See also `Escape sequences <http://php.net/manual/en/regexp.reference.escape.php>`_.
+
++------------+----------------------+
+| Short name | Php/ShouldPreprocess |
++------------+----------------------+
+| Themes     | none                 |
++------------+----------------------+
 
 
 
@@ -14347,11 +14386,11 @@ Based on this philopsophy, a code source that uses Zend\Session but never uses Z
 See `Zend Session <https://docs.zendframework.com/zend-session/manager/>`_, 
 `\Zend\Session\SessionManager <https://framework.zend.com/apidoc/2.4/classes/Zend.Session.SessionManager.html#method_regenerateId>`_
 
-+--------------+---------------------------------+
-| Command line | ZendF/ShouldRegenerateSessionId |
-+--------------+---------------------------------+
-| Themes       | :ref:`ZendFramework`            |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | ZendF/ShouldRegenerateSessionId |
++------------+---------------------------------+
+| Themes     | :ref:`ZendFramework`            |
++------------+---------------------------------+
 
 
 
@@ -14379,11 +14418,11 @@ Functions such as `'intval() <http://www.php.net/intval>`_ or `'settype() <http:
 
 This is a micro-optimisation, although such conversion may be use multiple time, leading to a larger performance increase.
 
-+--------------+---------------------+
-| Command line | Type/ShouldTypecast |
-+--------------+---------------------+
-| Themes       | :ref:`Analyze`      |
-+--------------+---------------------+
++------------+---------------------+
+| Short name | Type/ShouldTypecast |
++------------+---------------------+
+| Themes     | :ref:`Analyze`      |
++------------+---------------------+
 
 
 
@@ -14412,11 +14451,11 @@ PHP 7 introduced the ?? operator, that replaces longer structures to set default
 
 Sample extracted from PHP docs `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 
-+--------------+------------------------------------+
-| Command line | Php/ShouldUseCoalesce              |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Php/ShouldUseCoalesce              |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -14440,11 +14479,11 @@ The following functions have related constants that should be used as arguments,
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Functions/ShouldUseConstants |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Functions/ShouldUseConstants |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -14479,11 +14518,11 @@ Foreach() is the modern loop : it maps automatically every element of the array 
    
    ?>
 
-+--------------+-----------------------------+
-| Command line | Structures/ShouldUseForeach |
-+--------------+-----------------------------+
-| Themes       | :ref:`Suggestions`          |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Structures/ShouldUseForeach |
++------------+-----------------------------+
+| Themes     | :ref:`Suggestions`          |
++------------+-----------------------------+
 
 
 
@@ -14523,11 +14562,11 @@ Based on one of `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504
 
 See also `blog post <http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/>`_.
 
-+--------------+-----------------------+
-| Command line | Php/ShouldUseFunction |
-+--------------+-----------------------+
-| Themes       | :ref:`Performances`   |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Php/ShouldUseFunction |
++------------+-----------------------+
+| Themes     | :ref:`Performances`   |
++------------+-----------------------+
 
 
 
@@ -14576,13 +14615,13 @@ Methods which are overwritten by a child class are omitted : the parent class ac
 
 Note that a method using a class constant is not considered as using the local class, for this analyzer.
 
-+--------------+-----------------------------------------------------------------------------------------+
-| Command line | Classes/ShouldUseThis                                                                   |
-+--------------+-----------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                          |
-+--------------+-----------------------------------------------------------------------------------------+
-| ClearPHP     | `not-a-method <https://github.com/dseguy/clearPHP/tree/master/rules/not-a-method.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------+
+| Short name | Classes/ShouldUseThis                                                                   |
++------------+-----------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                          |
++------------+-----------------------------------------------------------------------------------------+
+| ClearPHP   | `not-a-method <https://github.com/dseguy/clearPHP/tree/master/rules/not-a-method.md>`__ |
++------------+-----------------------------------------------------------------------------------------+
 
 
 
@@ -14628,11 +14667,11 @@ Use math operators to make the operation clearer.
 
 See also `Mathematical Functions <http://php.net/manual/en/book.math.php>`_.
 
-+--------------+--------------------------+
-| Command line | Structures/ShouldUseMath |
-+--------------+--------------------------+
-| Themes       | :ref:`Suggestions`       |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/ShouldUseMath |
++------------+--------------------------+
+| Themes     | :ref:`Suggestions`       |
++------------+--------------------------+
 
 
 
@@ -14671,11 +14710,11 @@ Same code, without preparation :
    }
    ?>
 
-+--------------+-------------------------------------+
-| Command line | Security/ShouldUsePreparedStatement |
-+--------------+-------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Security`     |
-+--------------+-------------------------------------+
++------------+-------------------------------------+
+| Short name | Security/ShouldUsePreparedStatement |
++------------+-------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security`     |
++------------+-------------------------------------+
 
 
 
@@ -14706,11 +14745,11 @@ Both functions help by giving a checklist of important attributes to be used wit
 
 See also : `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_.
 
-+--------------+------------------+
-| Command line | Php/UseSetCookie |
-+--------------+------------------+
-| Themes       | :ref:`Analyze`   |
-+--------------+------------------+
++------------+------------------+
+| Short name | Php/UseSetCookie |
++------------+------------------+
+| Themes     | :ref:`Analyze`   |
++------------+------------------+
 
 
 
@@ -14749,11 +14788,11 @@ Avoid writing a whole slow loop, and use the native `'array_column() <http://www
 
 See also `[blog] `'array_column() <http://www.php.net/array_column>`_ <https://benramsey.com/projects/array-column/>`_.
 
-+--------------+---------------------------------------------------------+
-| Command line | Php/ShouldUseArrayColumn                                |
-+--------------+---------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
-+--------------+---------------------------------------------------------+
++------------+---------------------------------------------------------+
+| Short name | Php/ShouldUseArrayColumn                                |
++------------+---------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
++------------+---------------------------------------------------------+
 
 
 
@@ -14790,11 +14829,11 @@ Should use `'array_filter() <http://www.php.net/array_filter>`_.
 
 See also `array_filter <https://php.net/array_filter>`_.
 
-+--------------+--------------------------+
-| Command line | Php/ShouldUseArrayFilter |
-+--------------+--------------------------+
-| Themes       | :ref:`Suggestions`       |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Php/ShouldUseArrayFilter |
++------------+--------------------------+
+| Themes     | :ref:`Suggestions`       |
++------------+--------------------------+
 
 
 
@@ -14831,11 +14870,11 @@ Based on this philopsophy, a code source that uses Zend\Session but never uses Z
 
 See `session_regenerateid() <http://php.net/session_regenerate_id>`_ and `PHP Security Guide: Sessions <http://phpsec.org/projects/guide/4.html>`_.
 
-+--------------+---------------------------------------+
-| Command line | Security/ShouldUseSessionRegenerateId |
-+--------------+---------------------------------------+
-| Themes       | :ref:`Security`                       |
-+--------------+---------------------------------------+
++------------+---------------------------------------+
+| Short name | Security/ShouldUseSessionRegenerateId |
++------------+---------------------------------------+
+| Themes     | :ref:`Security`                       |
++------------+---------------------------------------+
 
 
 
@@ -14876,11 +14915,11 @@ This applies to binary (0b10101...), octals (0123123...) and hexadecimals (0xfff
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Type/SilentlyCastInteger |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Type/SilentlyCastInteger |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -14907,11 +14946,11 @@ The global keyword should only be used with simple variables. Since PHP 7, it ca
    
    ?>
 
-+--------------+---------------------------------+
-| Command line | Php/GlobalWithoutSimpleVariable |
-+--------------+---------------------------------+
-| Themes       | :ref:`CompatibilityPHP70`       |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Php/GlobalWithoutSimpleVariable |
++------------+---------------------------------+
+| Themes     | :ref:`CompatibilityPHP70`       |
++------------+---------------------------------+
 
 
 
@@ -14963,11 +15002,11 @@ Since PHP 7.2, simple switches that use only strings or integers are optimized. 
 
 See also `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_.
 
-+--------------+---------------------------+
-| Command line | Performances/SimpleSwitch |
-+--------------+---------------------------+
-| Themes       | :ref:`Performances`       |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Performances/SimpleSwitch |
++------------+---------------------------+
+| Themes     | :ref:`Performances`       |
++------------+---------------------------+
 
 
 
@@ -14993,11 +15032,11 @@ PRCE regex are a powerful way to search inside strings, but they also come at th
    
    ?>
 
-+--------------+-----------------------+
-| Command line | Structures/SimplePreg |
-+--------------+-----------------------+
-| Themes       | :ref:`Performances`   |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Structures/SimplePreg |
++------------+-----------------------+
+| Themes     | :ref:`Performances`   |
++------------+-----------------------+
 
 
 
@@ -15023,11 +15062,11 @@ Always start by reducing an array before applying some transformation on it. The
 
 The gain produced here is greater with longer arrays, or greater reductions. They may also be used in loops. This is a micro-optimisation when used on short arrays and single array slicings.
 
-+--------------+-----------------------------------------+
-| Command line | Arrays/SliceFirst                       |
-+--------------+-----------------------------------------+
-| Themes       | :ref:`Performances`, :ref:`Suggestions` |
-+--------------+-----------------------------------------+
++------------+-----------------------------------------+
+| Short name | Arrays/SliceFirst                       |
++------------+-----------------------------------------+
+| Themes     | :ref:`Performances`, :ref:`Suggestions` |
++------------+-----------------------------------------+
 
 
 
@@ -15043,11 +15082,11 @@ SlimPHP 1.0.0 has 22 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp10 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp10 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15065,11 +15104,11 @@ SlimPHP 1.1.0 has 33 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp11 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp11 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15087,11 +15126,11 @@ SlimPHP 1.2.0 has 35 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp12 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp12 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15109,11 +15148,11 @@ SlimPHP 1.3.0 has 33 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp13 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp13 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15131,11 +15170,11 @@ SlimPHP 1.5.0 has 33 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp15 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp15 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15153,11 +15192,11 @@ SlimPHP 1.6.0 has 45 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp16 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp16 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15175,11 +15214,11 @@ SlimPHP 2.0.0 has 44 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp20 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp20 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15195,11 +15234,11 @@ SlimPHP 2.1.0 has 44 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp21 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp21 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15216,11 +15255,11 @@ SlimPHP 2.2.0 has 45 classes, no traits and no interfaces;
 2 new classes. 1 removed class. 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp22 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp22 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15238,11 +15277,11 @@ SlimPHP 2.3.0 has 48 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp23 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp23 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15258,11 +15297,11 @@ SlimPHP 2.4.0 has 48 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp24 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp24 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15280,11 +15319,11 @@ SlimPHP 2.5.0 has 50 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp25 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp25 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15300,11 +15339,11 @@ SlimPHP 2.6.0 has 50 classes, no traits and no interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp26 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp26 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15322,11 +15361,11 @@ SlimPHP 3.0.0 has 55 classes, 2 traits and 9 interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp30 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp30 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15342,11 +15381,11 @@ SlimPHP 3.1.0 has 55 classes, 2 traits and 9 interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp31 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp31 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15364,11 +15403,11 @@ SlimPHP 3.2.0 has 59 classes, 2 traits and 9 interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp32 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp32 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15386,11 +15425,11 @@ SlimPHP 3.3.0 has 60 classes, 2 traits and 9 interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp33 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp33 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15408,11 +15447,11 @@ SlimPHP 3.4.0 has 64 classes, 2 traits and 9 interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp34 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp34 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15430,11 +15469,11 @@ SlimPHP 3.5.0 has 67 classes, 2 traits and 9 interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp35 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp35 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15450,11 +15489,11 @@ SlimPHP 3.6.0 has 67 classes, 2 traits and 9 interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp36 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp36 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15470,11 +15509,11 @@ SlimPHP 3.7.0 has 67 classes, 2 traits and 9 interfaces;
 
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp37 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp37 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15492,11 +15531,11 @@ SlimPHP 3.8.0 has 68 classes, 2 traits and 9 interfaces;
  
 See also : `SlimPHP <https://www.slimframework.com/>`_ and `SlimPHP/slim <https://github.com/slimphp/Slim>`_.
 
-+--------------+----------------+
-| Command line | Slim/Slimphp38 |
-+--------------+----------------+
-| Themes       | :ref:`Slim`    |
-+--------------+----------------+
++------------+----------------+
+| Short name | Slim/Slimphp38 |
++------------+----------------+
+| Themes     | :ref:`Slim`    |
++------------+----------------+
 
 
 
@@ -15546,13 +15585,13 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
 
 `'array_unique() <http://www.php.net/array_unique>`_ has been accelerated in PHP 7.2 and may be used directly.
 
-+--------------+---------------------------------------------------------------------------------------------------------------------+
-| Command line | Performances/SlowFunctions                                                                                          |
-+--------------+---------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Performances`                                                                                                 |
-+--------------+---------------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------+
+| Short name | Performances/SlowFunctions                                                                                          |
++------------+---------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Performances`                                                                                                 |
++------------+---------------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
++------------+---------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -15583,11 +15622,11 @@ Quote from the PHP manual comments : The reason this function doesn't escape dou
 
 See also `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_.
 
-+--------------+--------------------------------------+
-| Command line | Security/Sqlite3RequiresSingleQuotes |
-+--------------+--------------------------------------+
-| Themes       | :ref:`Security`                      |
-+--------------+--------------------------------------+
++------------+--------------------------------------+
+| Short name | Security/Sqlite3RequiresSingleQuotes |
++------------+--------------------------------------+
+| Themes     | :ref:`Security`                      |
++------------+--------------------------------------+
 
 
 
@@ -15627,11 +15666,11 @@ It is possible to create loops that don't use any blind variables, though this i
 
 It is recommended to turn a static loop into an expression that avoid the loop. For example, replacing the sum of all integers by the function $n * ($n + 1) / 2, or using `'array_sum() <http://www.php.net/array_sum>`_.
 
-+--------------+-----------------------+
-| Command line | Structures/StaticLoop |
-+--------------+-----------------------+
-| Themes       | :ref:`Analyze`        |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Structures/StaticLoop |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
 
 
 
@@ -15660,11 +15699,11 @@ To maintain code readability, it is recommended to call static method in a stati
        x::y( );  // Readability : here we know
    ?>
 
-+--------------+---------------------------------------+
-| Command line | Classes/StaticMethodsCalledFromObject |
-+--------------+---------------------------------------+
-| Themes       | :ref:`Analyze`                        |
-+--------------+---------------------------------------+
++------------+---------------------------------------+
+| Short name | Classes/StaticMethodsCalledFromObject |
++------------+---------------------------------------+
+| Themes     | :ref:`Analyze`                        |
++------------+---------------------------------------+
 
 
 
@@ -15699,13 +15738,13 @@ Static methods are also called 'class methods' : they may be called even if the 
 
 Either, this is not a static method (simply remove the static keyword), or replace all $this mention by static properties Class::$property.
 
-+--------------+---------------------------------------------------------------------------------------------+
-| Command line | Classes/StaticContainsThis                                                                  |
-+--------------+---------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                              |
-+--------------+---------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------+
+| Short name | Classes/StaticContainsThis                                                                  |
++------------+---------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                              |
++------------+---------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-static-this <https://github.com/dseguy/clearPHP/tree/master/rules/no-static-this.md>`__ |
++------------+---------------------------------------------------------------------------------------------+
 
 
 
@@ -15729,11 +15768,11 @@ Those constants looks like a typo from other names.
    
    ?>
 
-+--------------+-----------------------+
-| Command line | Constants/StrangeName |
-+--------------+-----------------------+
-| Themes       | none                  |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Constants/StrangeName |
++------------+-----------------------+
+| Themes     | none                  |
++------------+-----------------------+
 
 
 
@@ -15773,11 +15812,11 @@ This analysis is case-sensitive.
 
 See also `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_.
 
-+--------------+--------------------------------------------------+
-| Command line | Variables/StrangeName                            |
-+--------------+--------------------------------------------------+
-| Themes       | :ref:`Wordpress`, :ref:`Analyze`, :ref:`Analyze` |
-+--------------+--------------------------------------------------+
++------------+--------------------------------------------------+
+| Short name | Variables/StrangeName                            |
++------------+--------------------------------------------------+
+| Themes     | :ref:`Wordpress`, :ref:`Analyze`, :ref:`Analyze` |
++------------+--------------------------------------------------+
 
 
 
@@ -15813,11 +15852,11 @@ Those errors most often originate from typos, or quick fixes that 'don't require
    
    ?>
 
-+--------------+---------------------+
-| Command line | Classes/StrangeName |
-+--------------+---------------------+
-| Themes       | none                |
-+--------------+---------------------+
++------------+---------------------+
+| Short name | Classes/StrangeName |
++------------+---------------------+
+| Themes     | none                |
++------------+---------------------+
 
 
 
@@ -15866,11 +15905,11 @@ It is encouraged to use strict comparison === or !== when booleans are involved 
 
 Function `'in_array() <http://www.php.net/in_array>`_ has a third parameter to make it use strict comparisons.
 
-+--------------+------------------------------------+
-| Command line | Structures/BooleanStrictComparison |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/BooleanStrictComparison |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -15912,11 +15951,11 @@ However, there are some potential variables in those strings, making it possible
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Type/StringHoldAVariable |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Type/StringHoldAVariable |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -15950,11 +15989,11 @@ This analysis doesn't report Unicode Codepoint Notation : those are clearly visi
 
 See also `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_, and `disallow irregular whitespace (no-irregular-whitespace) <http://eslint.org/docs/rules/no-irregular-whitespace>`_.
 
-+--------------+-----------------------------+
-| Command line | Type/StringWithStrangeSpace |
-+--------------+-----------------------------+
-| Themes       | :ref:`Analyze`              |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Type/StringWithStrangeSpace |
++------------+-----------------------------+
+| Themes     | :ref:`Analyze`              |
++------------+-----------------------------+
 
 
 
@@ -15995,13 +16034,13 @@ It is recommended to check the result of `'strpos() <http://www.php.net/strpos>`
 
 This analyzer list all the `'strpos() <http://www.php.net/strpos>`_-like functions that are directly compared with == or !=. preg_match(), when its first argument is a literal, is omitted : this function only returns NULL in case of regex error.
 
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Command line | Structures/StrposCompare                                                                            |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                      |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| ClearPHP     | `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------+
+| Short name | Structures/StrposCompare                                                                            |
++------------+-----------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                      |
++------------+-----------------------------------------------------------------------------------------------------+
+| ClearPHP   | `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------+
 
 
 
@@ -16034,11 +16073,11 @@ This is twice faster than doing the same with a loop.
 
 See also `array_fill_keys <http://php.net/array_fill_keys>`_.
 
-+--------------+----------------------------------+
-| Command line | Structures/CouldUseArrayFillKeys |
-+--------------+----------------------------------+
-| Themes       | :ref:`Suggestions`               |
-+--------------+----------------------------------+
++------------+----------------------------------+
+| Short name | Structures/CouldUseArrayFillKeys |
++------------+----------------------------------+
+| Themes     | :ref:`Suggestions`               |
++------------+----------------------------------+
 
 
 
@@ -16066,11 +16105,11 @@ The gain produced here is greater with longer strings, or greater reductions. Th
 
 This works with any reduction function instead of substr(), like `'trim() <http://www.php.net/trim>`_, iconv(), etc.
 
-+--------------+-----------------------------------------+
-| Command line | Performances/SubstrFirst                |
-+--------------+-----------------------------------------+
-| Themes       | :ref:`Performances`, :ref:`Suggestions` |
-+--------------+-----------------------------------------+
++------------+-----------------------------------------+
+| Short name | Performances/SubstrFirst                |
++------------+-----------------------------------------+
+| Themes     | :ref:`Performances`, :ref:`Suggestions` |
++------------+-----------------------------------------+
 
 
 
@@ -16103,11 +16142,11 @@ A comparison happens in the the last argument, while the actual function expect 
 
 Original idea by Vladimir Reznichenko.
 
-+--------------+---------------------------------+
-| Command line | Structures/SuspiciousComparison |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/SuspiciousComparison |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -16148,11 +16187,11 @@ This analysis cannot take into account comments about the fallthrough.
 See also `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_ and 
          `Rule: no-switch-case-fall-through <https://palantir.github.io/tslint/rules/no-switch-case-fall-through/>`_.
 
-+--------------+------------------------+
-| Command line | Structures/Fallthrough |
-+--------------+------------------------+
-| Themes       | :ref:`Security`        |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Structures/Fallthrough |
++------------+------------------------+
+| Themes     | :ref:`Security`        |
++------------+------------------------+
 
 
 
@@ -16209,11 +16248,11 @@ Note that if condition that uses strict typing (=== or !==) can't be converted t
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Structures/SwitchToSwitch |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Structures/SwitchToSwitch |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -16246,11 +16285,11 @@ Multiple default happens often with large `'switch() <http://php.net/manual/en/c
    
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/SwitchWithMultipleDefault                                                                       |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/SwitchWithMultipleDefault                                                                       |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -16307,13 +16346,13 @@ Switch statements hold a number of 'case' that cover all known situations, and a
 
 Most of the time, `'switch() <http://php.net/manual/en/control-structures.switch.php>`_ do need a default case, so as to catch the odd situation where the 'value is not what it was expected'. This is a good place to catch unexpected values, to set a default behavior.
 
-+--------------+-------------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/SwitchWithoutDefault                                                                                   |
-+--------------+-------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                                    |
-+--------------+-------------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-switch-without-default <https://github.com/dseguy/clearPHP/tree/master/rules/no-switch-without-default.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/SwitchWithoutDefault                                                                                   |
++------------+-------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                                    |
++------------+-------------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-switch-without-default <https://github.com/dseguy/clearPHP/tree/master/rules/no-switch-without-default.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -16336,11 +16375,11 @@ prints actually 'E', instead of the awaited 'B0CE'.
 
 To be safe, always add parenthesis when using ternary operator with concatenation.
 
-+--------------+----------------------------+
-| Command line | Structures/TernaryInConcat |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Structures/TernaryInConcat |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -16372,11 +16411,11 @@ The cast may introduce a distortion to the value, and still lead to the unwanted
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Structures/TestThenCast |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/TestThenCast |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -16407,11 +16446,11 @@ The throw keyword is excepted to use an exception. Calling a function to prepare
 
 When the new keyword is forgotten, then the class construtor is used as a functionname, and now exception is emited, but an 'Undefined function' fatal error is emited.
 
-+--------------+------------------------------+
-| Command line | Exceptions/ThrowFunctioncall |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Exceptions/ThrowFunctioncall |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -16450,11 +16489,11 @@ Thus, it is recommended to avoid throwing exceptions within the `'__destruct <ht
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Classes/ThrowInDestruct |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Classes/ThrowInDestruct |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -16479,11 +16518,11 @@ All Zend Framework thrown exceptions.
    
    ?>
 
-+--------------+------------------------+
-| Command line | ZendF/ThrownExceptions |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/ThrownExceptions |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -16513,11 +16552,11 @@ However, $e will never be used, as the exception is thrown, and any following co
 
 The assignement should be removed.
 
-+--------------+----------------------------+
-| Command line | Structures/ThrowsAndAssign |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Structures/ThrowsAndAssign |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -16550,11 +16589,11 @@ When the difference may be rounded to a larger time unit (rounding the differenc
 When the difference is very small, it requires a better way to measure time difference, such as `Ticks <http://php.net/manual/en/control-structures.declare.php#control-structures.declare.ticks>'_, 
 `ext/hrtime <http://php.net/manual/en/book.hrtime.php>'_, or including a check on the actual time zone (`'ini_get() <http://www.php.net/ini_get>`_ with 'date.timezone').
 
-+--------------+--------------------------------+
-| Command line | Structures/TimestampDifference |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Structures/TimestampDifference |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`                 |
++------------+--------------------------------+
 
 
 
@@ -16590,11 +16629,11 @@ See also `On Taming Repository Classes in Doctrine <https://beberlei.de/2013/03/
 `On Taming Repository Classes in Doctrine… Among other things. <http://blog.kevingomez.fr/2015/02/07/on-taming-repository-classes-in-doctrine-among-other-things/>`_,
 `specifications <https://slides.pixelart.at/2017-02-04/fosdem/specifications/#/>`_.
 
-+--------------+----------------------+
-| Command line | Classes/TooManyFinds |
-+--------------+----------------------+
-| Themes       | :ref:`Analyze`       |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Classes/TooManyFinds |
++------------+----------------------+
+| Themes     | :ref:`Analyze`       |
++------------+----------------------+
 
 
 
@@ -16632,11 +16671,11 @@ When a class is constructed with more than four dependencies, it should be split
 
 See also `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di-smells/>`_.
 
-+--------------+---------------------------+
-| Command line | Classes/TooManyInjections |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Classes/TooManyInjections |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -16712,11 +16751,97 @@ Beyond 15 variables, it becomes difficult to keep track of their name and usage,
    
    ?>
 
-+--------------+---------------------------------+
-| Command line | Functions/TooManyLocalVariables |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Functions/TooManyLocalVariables |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
+
+
+
+.. _too-many-native-calls:
+
+Too Many Native Calls
+#####################
+
+
+Avoid stuffing too many PHP native call inside another functioncall. 
+
+For readability reasons, or, more often, for edge case handling, it is recommended to avoid nesting too many PHP native calls. 
+
+This analysis reports any situation where more than 3 PHP native calls are nested.
+
+.. code-block:: php
+
+   <?php
+   
+   // Too many nested functions 
+   $cleanArray = array_unique(array_keys(array_count_values(array_column($source, 'x'))));
+   
+   // Avoid warning when source is empty
+   $extract = array_column($source, 'x');
+   if (empty($extract)) {
+       $cleanArray = array();
+   } else {
+       $cleanArray = array_unique(array_keys(array_count_values($extract)));
+   }
+   
+   // This is not readable, although it is short. 
+   // It may easily get out of hand.
+   echo chr(80), chr(72), chr(80), chr(32), ' is great!';
+   
+   ?>
+
++------------------+---------+---------+---------------------------------------------------+
+| Name             | Default | Type    | Description                                       |
++------------------+---------+---------+---------------------------------------------------+
+| nativeCallCounts | 3       | integer | Number of native calls found inside another call. |
++------------------+---------+---------+---------------------------------------------------+
+
+
+
++------------+------------------------+
+| Short name | Php/TooManyNativeCalls |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
+
+
+
+.. _too-many-parameters:
+
+Too Many Parameters
+###################
+
+
+Method has too many parameters : more than 8. 
+
+A method that needs more than 8 parameters is trying to do too much : it should be reviewed and split into smaller methods. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This methods has too many parameters.
+   function alertSomeone($name, $email, $title, $message, $attachements, $signature, $bcc, $cc, $extra_headers) { 
+       /* too much code here */ 
+   }
+   
+   ?>
+
++-----------------+---------+---------+-----------------------------------------+
+| Name            | Default | Type    | Description                             |
++-----------------+---------+---------+-----------------------------------------+
+| parametersCount | 8       | integer | Minimal number of parameters to report. |
++-----------------+---------+---------+-----------------------------------------+
+
+
+
++------------+-----------------------------+
+| Short name | Functions/TooManyParameters |
++------------+-----------------------------+
+| Themes     | :ref:`Suggestions`          |
++------------+-----------------------------+
 
 
 
@@ -16751,11 +16876,11 @@ The following exceptions are thrown in the code, but are never caught.
 
 Either they will lead to a fatal error, or they have to be caught by a larger application.
 
-+--------------+-------------------------------+
-| Command line | Exceptions/UncaughtExceptions |
-+--------------+-------------------------------+
-| Themes       | :ref:`Analyze`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Exceptions/UncaughtExceptions |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -16800,13 +16925,13 @@ Always check that resources are correctly created before using them.
 
 See also `resources <http://php.net/manual/en/language.types.resource.php>`_.
 
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/UncheckedResources                                                                               |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                              |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-unchecked-resources <https://github.com/dseguy/clearPHP/tree/master/rules/no-unchecked-resources.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/UncheckedResources                                                                               |
++------------+-------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                              |
++------------+-------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-unchecked-resources <https://github.com/dseguy/clearPHP/tree/master/rules/no-unchecked-resources.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -16848,11 +16973,11 @@ Here, `'break <http://php.net/manual/en/control-structures.break.php>`_ may also
    
    ?>
 
-+--------------+---------------------------------+
-| Command line | Structures/UnconditionLoopBreak |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/UnconditionLoopBreak |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -16888,11 +17013,11 @@ They may be externally defined, such as in core PHP, extensions or libraries. Ma
    
    ?>
 
-+--------------+-------------------------------+
-| Command line | Exceptions/CaughtButNotThrown |
-+--------------+-------------------------------+
-| Themes       | :ref:`Dead code <dead-code>`  |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Exceptions/CaughtButNotThrown |
++------------+-------------------------------+
+| Themes     | :ref:`Dead code <dead-code>`  |
++------------+-------------------------------+
 
 
 
@@ -16919,11 +17044,11 @@ Mark classes, interfaces and traits when they are not available in Zend Framewor
 
 See `Zend Framework 2.0 <https://framework.zend.com/manual/2.0/en/index.html>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/UndefinedClass20 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/UndefinedClass20 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -16950,11 +17075,11 @@ Mark classes, interfaces and traits when they are not available in Zend Framewor
 
 See `Zend Framework 2.1 <https://framework.zend.com/manual/2.1/en/index.html>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/UndefinedClass21 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/UndefinedClass21 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -16981,11 +17106,11 @@ Mark classes, interfaces and traits when they are not available in Zend Framewor
 
 See `Zend Framework 2.2 <https://framework.zend.com/manual/2.2/en/index.html>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/UndefinedClass22 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/UndefinedClass22 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -17012,11 +17137,11 @@ Mark classes, interfaces and traits when they are not available in Zend Framewor
 
 See `Zend Framework 2.3 <https://framework.zend.com/manual/2.3/en/index.html>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/UndefinedClass23 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/UndefinedClass23 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -17042,11 +17167,11 @@ Mark classes, interfaces and traits when they are not available in Zend Framewor
 
 See `Zend Framework 2.4 <https://framework.zend.com/manual/2.4/en/index.html>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/UndefinedClass24 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/UndefinedClass24 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -17069,11 +17194,11 @@ Mark classes, interfaces and traits when they are not available in Zend Framewor
    
    ?>
 
-+--------------+------------------------+
-| Command line | ZendF/UndefinedClass25 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/UndefinedClass25 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -17096,11 +17221,11 @@ Mark classes, interfaces and traits when they are not available in Zend Framewor
    
    ?>
 
-+--------------+------------------------+
-| Command line | ZendF/UndefinedClass30 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/UndefinedClass30 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -17126,11 +17251,11 @@ Class constants that are used, but never defined. This should yield a fatal erro
    
    ?>
 
-+--------------+----------------------------+
-| Command line | Classes/UndefinedConstants |
-+--------------+----------------------------+
-| Themes       | none                       |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Classes/UndefinedConstants |
++------------+----------------------------+
+| Themes     | none                       |
++------------+----------------------------+
 
 
 
@@ -17165,11 +17290,11 @@ or if some external libraries, such as PEAR, are not provided during the analysi
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Classes/UndefinedClasses |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Classes/UndefinedClasses |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -17198,11 +17323,11 @@ Those constants are not defined in the code, and will raise errors, or use the f
 
 It is recommended to define them all, or to avoid using them.
 
-+--------------+-----------------------------------------------------------+
-| Command line | Constants/UndefinedConstants                              |
-+--------------+-----------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Analyze`, :ref:`CompatibilityPHP72` |
-+--------------+-----------------------------------------------------------+
++------------+-----------------------------------------------------------+
+| Short name | Constants/UndefinedConstants                              |
++------------+-----------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Analyze`, :ref:`CompatibilityPHP72` |
++------------+-----------------------------------------------------------+
 
 
 
@@ -17229,11 +17354,11 @@ Some functions are called, but not defined in the code. This means that the func
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Functions/UndefinedFunctions |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Functions/UndefinedFunctions |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -17264,11 +17389,11 @@ Typehint or `'instanceof <http://php.net/manual/en/language.operators.type.php>`
    
    ?>
 
-+--------------+--------------------------------+
-| Command line | Interfaces/UndefinedInterfaces |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Interfaces/UndefinedInterfaces |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`                 |
++------------+--------------------------------+
 
 
 
@@ -17310,11 +17435,11 @@ another dependency, or just not there) it will not be reported.
 
 See also `parent <http://php.net/manual/en/keyword.parent.php>`_.
 
-+--------------+---------------------------+
-| Command line | Classes/UndefinedParentMP |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Classes/UndefinedParentMP |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -17346,13 +17471,13 @@ List of properties that are not explicitely defined in the class, its parents or
 
 See also `Properties <http://php.net/manual/en/language.oop5.properties.php>`_.
 
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| Command line | Classes/UndefinedProperty                                                                                     |
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                                |
-+--------------+---------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-undefined-properties <https://github.com/dseguy/clearPHP/tree/master/rules/no-undefined-properties.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/UndefinedProperty                                                                                     |
++------------+---------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                                |
++------------+---------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-undefined-properties <https://github.com/dseguy/clearPHP/tree/master/rules/no-undefined-properties.md>`__ |
++------------+---------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -17387,11 +17512,11 @@ When the using class or trait is instantiated, PHP emits a a fatal error.
    }
    ?>
 
-+--------------+-----------------------+
-| Command line | Traits/UndefinedTrait |
-+--------------+-----------------------+
-| Themes       | :ref:`Analyze`        |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | Traits/UndefinedTrait |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
 
 
 
@@ -17405,11 +17530,11 @@ List of undefined classes or interfaces in Zend 1.10.
 
 See `Zend Framework 1.10 <https://framework.zend.com/manual/1.10/en/manual.html>`_.
 
-+--------------+-------------------------+
-| Command line | ZendF/UndefinedClass110 |
-+--------------+-------------------------+
-| Themes       | :ref:`ZendFramework`    |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | ZendF/UndefinedClass110 |
++------------+-------------------------+
+| Themes     | :ref:`ZendFramework`    |
++------------+-------------------------+
 
 
 
@@ -17423,11 +17548,11 @@ List of undefined classes or interfaces in Zend 1.11
 
 See `Zend Framework 1.11 <https://framework.zend.com/manual/1.11/en/manual.html>`_.
 
-+--------------+-------------------------+
-| Command line | ZendF/UndefinedClass111 |
-+--------------+-------------------------+
-| Themes       | :ref:`ZendFramework`    |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | ZendF/UndefinedClass111 |
++------------+-------------------------+
+| Themes     | :ref:`ZendFramework`    |
++------------+-------------------------+
 
 
 
@@ -17441,11 +17566,11 @@ List of undefined classes or interfaces in Zend 1.12.
 
 See `Zend Framework 1.12 <https://framework.zend.com/manual/1.12/en/manual.html>`_.
 
-+--------------+-------------------------+
-| Command line | ZendF/UndefinedClass112 |
-+--------------+-------------------------+
-| Themes       | :ref:`ZendFramework`    |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | ZendF/UndefinedClass112 |
++------------+-------------------------+
+| Themes     | :ref:`ZendFramework`    |
++------------+-------------------------+
 
 
 
@@ -17459,11 +17584,11 @@ List of undefined classes or interfaces in Zend 1.8.
 
 See `Zend Framework 1.8 <https://framework.zend.com/manual/1.8/en/index.html>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/UndefinedClass18 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/UndefinedClass18 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -17477,11 +17602,11 @@ List of undefined classes or interfaces in Zend 1.9.
 
 See `Zend Framework 1.9 <https://framework.zend.com/manual/1.9/en/index.html>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/UndefinedClass19 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/UndefinedClass19 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -17493,11 +17618,11 @@ Undefined static:: Or self::
 
 List of all undefined static and self properties and methods.
 
-+--------------+---------------------------+
-| Command line | Classes/UndefinedStaticMP |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Classes/UndefinedStaticMP |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -17520,11 +17645,11 @@ While this is quite a strict rule, it is good to know when variables are not pro
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Wordpress/UnescapedVariables |
-+--------------+------------------------------+
-| Themes       | :ref:`Wordpress`             |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Wordpress/UnescapedVariables |
++------------+------------------------------+
+| Themes     | :ref:`Wordpress`             |
++------------+------------------------------+
 
 
 
@@ -17556,11 +17681,11 @@ PHP 7 will halt on partial Unicode Sequences, as it tries to understand them, bu
 
 Is is recommended to check all those strings, and make sure they will behave correctly in PHP 7.
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/UnicodeEscapePartial                                                                                   |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/UnicodeEscapePartial                                                                                   |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -17584,11 +17709,11 @@ Usage of the Unicode Escape syntax, with the \u{xxxxx} format, available since P
    
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Php/UnicodeEscapeSyntax                                                                                    |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/UnicodeEscapeSyntax                                                                                    |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -17622,11 +17747,11 @@ Properties that are not initialized in the constructor, nor at definition.
 With the above class, when m() is accessed right after instantiation, there will be a missing property. 
 Using default values at property definition, or setting default values in the constructor ensures that the created object is consistent.
 
-+--------------+------------------------------------+
-| Command line | Classes/UnitializedProperties      |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Classes/UnitializedProperties      |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -17659,11 +17784,11 @@ The following list has directive mentionned in the code, that are not known from
    
    ?>
 
-+--------------+-------------------+
-| Command line | Php/DirectiveName |
-+--------------+-------------------+
-| Themes       | :ref:`Analyze`    |
-+--------------+-------------------+
++------------+-------------------+
+| Short name | Php/DirectiveName |
++------------+-------------------+
+| Themes     | :ref:`Analyze`    |
++------------+-------------------+
 
 
 
@@ -17692,11 +17817,11 @@ The X modifier : X is still existing with PCRE2, though it is now the default fo
 
 See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_ and `PHP RFC: PCRE2 migration <https://wiki.php.net/rfc/pcre2-migration>`.
 
-+--------------+------------------------+
-| Command line | Php/UnknownPcre2Option |
-+--------------+------------------------+
-| Themes       | :ref:`Analyze`         |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | Php/UnknownPcre2Option |
++------------+------------------------+
+| Themes     | :ref:`Analyze`         |
++------------+------------------------+
 
 
 
@@ -17722,11 +17847,11 @@ All other options are not supported, may be ignored or raise an error.
    
    ?>
 
-+--------------+------------------------------+
-| Command line | Structures/UnknownPregOption |
-+--------------+------------------------------+
-| Themes       | :ref:`Analyze`               |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Structures/UnknownPregOption |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -17769,13 +17894,13 @@ and avoid preprocessing the string into an array first.
 
 Preprocessing could be done anytime the script includes all the needed values to process the expression.
 
-+--------------+---------------------------------------------------------------------------------------------------+
-| Command line | Structures/Unpreprocessed                                                                         |
-+--------------+---------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                    |
-+--------------+---------------------------------------------------------------------------------------------------+
-| ClearPHP     | `always-preprocess <https://github.com/dseguy/clearPHP/tree/master/rules/always-preprocess.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------+
+| Short name | Structures/Unpreprocessed                                                                         |
++------------+---------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                    |
++------------+---------------------------------------------------------------------------------------------------+
+| ClearPHP   | `always-preprocess <https://github.com/dseguy/clearPHP/tree/master/rules/always-preprocess.md>`__ |
++------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -17830,13 +17955,13 @@ For example, it be located after throw, return, `'exit() <http://www.php.net/exi
 
 This is dead code, that may be removed.
 
-+--------------+-----------------------------------------------------------------------------------------+
-| Command line | Structures/UnreachableCode                                                              |
-+--------------+-----------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Suggestions`                        |
-+--------------+-----------------------------------------------------------------------------------------+
-| ClearPHP     | `no-dead-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-dead-code.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------+
+| Short name | Structures/UnreachableCode                                                              |
++------------+-----------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Suggestions`                        |
++------------+-----------------------------------------------------------------------------------------+
+| ClearPHP   | `no-dead-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-dead-code.md>`__ |
++------------+-----------------------------------------------------------------------------------------+
 
 
 
@@ -17865,13 +17990,13 @@ Catch clauses check that the emitted expression is of the requested Class, but i
    }
    ?>
 
-+--------------+-------------------------------------------------------------------------------------------------------+
-| Command line | Classes/UnresolvedCatch                                                                               |
-+--------------+-------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Dead code <dead-code>`                                                                          |
-+--------------+-------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-unresolved-catch <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-catch.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------+
+| Short name | Classes/UnresolvedCatch                                                                               |
++------------+-------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Dead code <dead-code>`                                                                          |
++------------+-------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-unresolved-catch <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-catch.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------+
 
 
 
@@ -17898,11 +18023,11 @@ Check for namespaces and aliases and make sure they are correctly configured.
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Classes/UnresolvedClasses |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Classes/UnresolvedClasses |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -17942,13 +18067,13 @@ It checks if an variable is of a specific class. However, if the referenced clas
 
 Make sure the following classes are well defined.
 
-+--------------+-----------------------------------------------------------------------------------------------------------------+
-| Command line | Classes/UnresolvedInstanceof                                                                                    |
-+--------------+-----------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                    |
-+--------------+-----------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-unresolved-instanceof <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-instanceof.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/UnresolvedInstanceof                                                                                    |
++------------+-----------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                    |
++------------+-----------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-unresolved-instanceof <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-instanceof.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -17960,13 +18085,13 @@ Unresolved Use
 
 The following use instructions cannot be resolved to a class or a namespace. They should be dropped or fixed.
 
-+--------------+---------------------------------------------------------------------------------------------------+
-| Command line | Namespaces/UnresolvedUse                                                                          |
-+--------------+---------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                    |
-+--------------+---------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-unresolved-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-use.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------+
+| Short name | Namespaces/UnresolvedUse                                                                          |
++------------+---------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                    |
++------------+---------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-unresolved-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-use.md>`__ |
++------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -18006,11 +18131,11 @@ On way to exploit unserialize, is to make PHP unserialized the data to an availa
 
 See also `'unserialize() <http://www.php.net/unserialize>`_;
 
-+--------------+-------------------------------+
-| Command line | Security/UnserializeSecondArg |
-+--------------+-------------------------------+
-| Themes       | :ref:`Security`               |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Security/UnserializeSecondArg |
++------------+-------------------------------+
+| Themes     | :ref:`Security`               |
++------------+-------------------------------+
 
 
 
@@ -18050,11 +18175,11 @@ Unset applied to the variables of a foreach loop are useless, as they are copies
    
    ?>
 
-+--------------+----------------------------------------------+
-| Command line | Structures/UnsetInForeach                    |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Structures/UnsetInForeach                    |
++------------+----------------------------------------------+
+| Themes     | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++------------+----------------------------------------------+
 
 
 
@@ -18066,13 +18191,13 @@ Unthrown Exception
 
 These are exceptions that are defined in the code but never thrown.
 
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Command line | Exceptions/Unthrown                                                                                         |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-unthrown-exceptions <https://github.com/dseguy/clearPHP/tree/master/rules/no-unthrown-exceptions.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------+
+| Short name | Exceptions/Unthrown                                                                                         |
++------------+-------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                |
++------------+-------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-unthrown-exceptions <https://github.com/dseguy/clearPHP/tree/master/rules/no-unthrown-exceptions.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -18098,11 +18223,11 @@ Unused argument may have to stay in methods, as the signature is actually define
    }
    ?>
 
-+--------------+---------------------------+
-| Command line | Functions/UnusedArguments |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Functions/UnusedArguments |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -18117,11 +18242,11 @@ The following classes are never explicitely used in the code.
 Note that this may be valid in case the current code is a library or framework, since it defines classes that are used by other (unprovided) codes.
 Also, this analyzer may find classes that are, in fact, dynamically loaded.
 
-+--------------+----------------------------------------------+
-| Command line | Classes/UnusedClass                          |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Classes/UnusedClass                          |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
 
 
 
@@ -18149,11 +18274,11 @@ Those constants are defined in the code but never used. Defining unused constant
 
 It is recommended to comment them out, and only define them when it is necessary.
 
-+--------------+----------------------------------------------+
-| Command line | Constants/UnusedConstants                    |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Constants/UnusedConstants                    |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
 
 
 
@@ -18178,11 +18303,11 @@ The functions below are unused. They look like deadcode.
    
    ?>
 
-+--------------+----------------------------------------------+
-| Command line | Functions/UnusedFunctions                    |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Functions/UnusedFunctions                    |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
 
 
 
@@ -18204,11 +18329,11 @@ List of global keyword, used in various functions but not actually used in the c
        }
    ?>
 
-+--------------+-------------------------+
-| Command line | Structures/UnusedGlobal |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/UnusedGlobal |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -18239,11 +18364,11 @@ The reported closures are requesting some local variables, but do not make any u
 
 See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_.
 
-+--------------+----------------------------------------------+
-| Command line | Functions/UnusedInheritedVariable            |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Functions/UnusedInheritedVariable            |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
 
 
 
@@ -18280,11 +18405,11 @@ They should be removed, as they are probably dead code.
    
    ?>
 
-+--------------+------------------------------------------------------------------+
-| Command line | Interfaces/UnusedInterfaces                                      |
-+--------------+------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Suggestions` |
-+--------------+------------------------------------------------------------------+
++------------+------------------------------------------------------------------+
+| Short name | Interfaces/UnusedInterfaces                                      |
++------------+------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>`, :ref:`Suggestions` |
++------------+------------------------------------------------------------------+
 
 
 
@@ -18318,11 +18443,11 @@ There is no analysis for undefined goto call, as PHP checks that goto has a dest
 
 See also `Goto <http://php.net/manual/en/control-structures.goto.php>`_.
 
-+--------------+----------------------------------------------+
-| Command line | Structures/UnusedLabel                       |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Structures/UnusedLabel                       |
++------------+----------------------------------------------+
+| Themes     | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++------------+----------------------------------------------+
 
 
 
@@ -18361,11 +18486,11 @@ They are probably dead code, unless they are called dynamically.
    
    ?>
 
-+--------------+----------------------------------------------+
-| Command line | Classes/UnusedMethods                        |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Classes/UnusedMethods                        |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
 
 
 
@@ -18397,11 +18522,11 @@ List of all static properties that are not used. They look like dead code.
    
    ?>
 
-+--------------+----------------------------------------------+
-| Command line | Classes/UnusedPrivateProperty                |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Classes/UnusedPrivateProperty                |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
 
 
 
@@ -18450,11 +18575,11 @@ The following methods are protected, and may be used in the current class or any
 
 No usage of those methods were found. This analysis is impacted by dynamic method calls.
 
-+--------------+--------------------------------+
-| Command line | Classes/UnusedProtectedMethods |
-+--------------+--------------------------------+
-| Themes       | :ref:`Dead code <dead-code>`   |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Classes/UnusedProtectedMethods |
++------------+--------------------------------+
+| Themes     | :ref:`Dead code <dead-code>`   |
++------------+--------------------------------+
 
 
 
@@ -18497,11 +18622,11 @@ It is recommended to add a check on the return value, or remove the call.
 
 Note that this analysis ignores functions that return void (same meaning that PHP 7.1 : return ; or no return in the function body).
 
-+--------------+----------------------------------------------+
-| Command line | Functions/UnusedReturnedValue                |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Functions/UnusedReturnedValue                |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
 
 
 
@@ -18534,11 +18659,11 @@ List of all static methods that are not used. This looks like dead code.
    
    ?>
 
-+--------------+----------------------------------------------+
-| Command line | Classes/UnusedPrivateMethod                  |
-+--------------+----------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+--------------+----------------------------------------------+
++------------+----------------------------------------------+
+| Short name | Classes/UnusedPrivateMethod                  |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
 
 
 
@@ -18570,11 +18695,11 @@ Those traits are not used in a class or another trait. They may be dead code.
    }
    ?>
 
-+--------------+--------------------+
-| Command line | Traits/UnusedTrait |
-+--------------+--------------------+
-| Themes       | :ref:`Analyze`     |
-+--------------+--------------------+
++------------+--------------------+
+| Short name | Traits/UnusedTrait |
++------------+--------------------+
+| Themes     | :ref:`Analyze`     |
++------------+--------------------+
 
 
 
@@ -18597,13 +18722,13 @@ Unused use statements. They may be removed, as they clutter the code and slows P
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------+
-| Command line | Namespaces/UnusedUse                                                                        |
-+--------------+---------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                |
-+--------------+---------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-useless-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-use.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------+
+| Short name | Namespaces/UnusedUse                                                                        |
++------------+---------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                |
++------------+---------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-useless-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-use.md>`__ |
++------------+---------------------------------------------------------------------------------------------+
 
 
 
@@ -18624,11 +18749,11 @@ Usually, PHP functions are written all in lower case.
    
    ?>
 
-+--------------+------------------------------------------------+
-| Command line | Php/UpperCaseFunction                          |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Php/UpperCaseFunction                          |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -18652,11 +18777,11 @@ Nonces were created in the code with  wp_nonce_field(), wp_nonce_url() and wp_no
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Wordpress/UnverifiedNonce |
-+--------------+---------------------------+
-| Themes       | :ref:`Wordpress`          |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Wordpress/UnverifiedNonce |
++------------+---------------------------+
+| Themes     | :ref:`Wordpress`          |
++------------+---------------------------+
 
 
 
@@ -18707,11 +18832,11 @@ See also `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_,
 `CWE-616: Incomplete Identification of Uploaded File Variables <https://cwe.mitre.org/data/definitions/616.html>`_, 
 `Why File Upload Forms are a Major Security Threat <https://www.acunetix.com/websitesecurity/upload-forms-threat/>`_.
 
-+--------------+----------------------------------+
-| Command line | Security/UploadFilenameInjection |
-+--------------+----------------------------------+
-| Themes       | :ref:`Security`                  |
-+--------------+----------------------------------+
++------------+----------------------------------+
+| Short name | Security/UploadFilenameInjection |
++------------+----------------------------------+
+| Themes     | :ref:`Security`                  |
++------------+----------------------------------+
 
 
 
@@ -18739,11 +18864,11 @@ This is especially true for UPDATE, REPLACE, INSERT and DELETE queries.
 
 See `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 
-+--------------+----------------------+
-| Command line | Wordpress/UseWpdbApi |
-+--------------+----------------------+
-| Themes       | :ref:`Wordpress`     |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Wordpress/UseWpdbApi |
++------------+----------------------+
+| Themes     | :ref:`Wordpress`     |
++------------+----------------------+
 
 
 
@@ -18772,13 +18897,13 @@ It is faster to use === null instead of `'is_null() <http://www.php.net/is_null>
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------------------+
-| Command line | Php/IsnullVsEqualNull                                                                                               |
-+--------------+---------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                                      |
-+--------------+---------------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/IsnullVsEqualNull                                                                                               |
++------------+---------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                                      |
++------------+---------------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
++------------+---------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -18819,11 +18944,11 @@ This is not possible when building the name of the class with concatenation.
 
 This is a micro-optimization.
 
-+--------------+-------------------------------------+
-| Command line | Classes/UseClassOperator            |
-+--------------+-------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Performances` |
-+--------------+-------------------------------------+
++------------+-------------------------------------+
+| Short name | Classes/UseClassOperator            |
++------------+-------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Performances` |
++------------+-------------------------------------+
 
 
 
@@ -18856,11 +18981,11 @@ Since PHP 5.6 it is possible to import specific functions or constants from othe
 
 See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
 
-+--------------+---------------------------------------------------------------------------------+
-| Command line | Namespaces/UseFunctionsConstants                                                |
-+--------------+---------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+---------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Namespaces/UseFunctionsConstants                                                |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -18872,11 +18997,11 @@ Use Constant As Arguments
 
 Some methods and functions are defined to be used with constants as arguments. Those constants are made to be meaningful and readable, keeping the code maintenable. It is recommended to use such constants as soon as they are documented.
 
-+--------------+----------------------------------+
-| Command line | Functions/UseConstantAsArguments |
-+--------------+----------------------------------+
-| Themes       | :ref:`Analyze`                   |
-+--------------+----------------------------------+
++------------+----------------------------------+
+| Short name | Functions/UseConstantAsArguments |
++------------+----------------------------------+
+| Themes     | :ref:`Analyze`                   |
++------------+----------------------------------+
 
 
 
@@ -18909,11 +19034,11 @@ The second argument of count, when set to COUNT_RECURSIVE, count recursively the
 
 See also `count <http://php.net/count>`_.
 
-+--------------+------------------------------+
-| Command line | Structures/UseCountRecursive |
-+--------------+------------------------------+
-| Themes       | :ref:`Suggestions`           |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Structures/UseCountRecursive |
++------------+------------------------------+
+| Themes     | :ref:`Suggestions`           |
++------------+------------------------------+
 
 
 
@@ -18965,11 +19090,11 @@ Last, `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ may 
 
 The `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is also faster than the `'is_object() <http://www.php.net/is_object>`_ functioncall.
 
-+--------------+--------------------------------+
-| Command line | Classes/UseInstanceof          |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Analyze` |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Classes/UseInstanceof          |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Analyze` |
++------------+--------------------------------+
 
 
 
@@ -19010,11 +19135,11 @@ Foreach() structures accepts list() as blind key. If the loop-value is an array 
 
 See also `list <http://php.net/manual/en/function.list.php>`_ and `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
-+--------------+------------------------------------+
-| Command line | Structures/UseListWithForeach      |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/UseListWithForeach      |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -19049,11 +19174,11 @@ parent, static and self are traditionally written in lowercase only. Mixed case 
 
 Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
 
-+--------------+------------------------------------------------------+
-| Command line | Php/CaseForPSS                                       |
-+--------------+------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP53` |
-+--------------+------------------------------------------------------+
++------------+------------------------------------------------------+
+| Short name | Php/CaseForPSS                                       |
++------------+------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP53` |
++------------+------------------------------------------------------+
 
 
 
@@ -19092,11 +19217,11 @@ It is recommended to use explicit constant names, instead. They are more readabl
 
 See also `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_, to avoid boolean altogether.
 
-+--------------+--------------------------------+
-| Command line | Functions/AvoidBooleanArgument |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Functions/AvoidBooleanArgument |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`                 |
++------------+--------------------------------+
 
 
 
@@ -19117,11 +19242,11 @@ The code uses nullable type, available since PHP 7.1.
    }
    ?>
 
-+--------------+---------------------+
-| Command line | Php/UseNullableType |
-+--------------+---------------------+
-| Themes       | :ref:`Suggestions`  |
-+--------------+---------------------+
++------------+---------------------+
+| Short name | Php/UseNullableType |
++------------+---------------------+
+| Themes     | :ref:`Suggestions`  |
++------------+---------------------+
 
 
 
@@ -19183,13 +19308,13 @@ OOP / procedural alternatives are available for `mysqli <http://php.net/manual/e
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------+
-| Command line | Php/UseObjectApi                                                                            |
-+--------------+---------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                              |
-+--------------+---------------------------------------------------------------------------------------------+
-| ClearPHP     | `use-object-api <https://github.com/dseguy/clearPHP/tree/master/rules/use-object-api.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------+
+| Short name | Php/UseObjectApi                                                                            |
++------------+---------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                              |
++------------+---------------------------------------------------------------------------------------------+
+| ClearPHP   | `use-object-api <https://github.com/dseguy/clearPHP/tree/master/rules/use-object-api.md>`__ |
++------------+---------------------------------------------------------------------------------------------+
 
 
 
@@ -19226,11 +19351,11 @@ Concatenations are still needed with constants, static constants, magic constant
 
 See also `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_.
 
-+--------------+----------------------------------+
-| Command line | Performances/PHP7EncapsedStrings |
-+--------------+----------------------------------+
-| Themes       | :ref:`Performances`              |
-+--------------+----------------------------------+
++------------+----------------------------------+
+| Short name | Performances/PHP7EncapsedStrings |
++------------+----------------------------------+
+| Themes     | :ref:`Performances`              |
++------------+----------------------------------+
 
 
 
@@ -19262,11 +19387,11 @@ Use `'pathinfo() <http://www.php.net/pathinfo>`_ function instead of string mani
 
 When the path contains UTF-8 characters, `'pathinfo() <http://www.php.net/pathinfo>`_ may strip them. There, string functions are necessary.
 
-+--------------+-----------------+
-| Command line | Php/UsePathinfo |
-+--------------+-----------------+
-| Themes       | :ref:`Analyze`  |
-+--------------+-----------------+
++------------+-----------------+
+| Short name | Php/UsePathinfo |
++------------+-----------------+
+| Themes     | :ref:`Analyze`  |
++------------+-----------------+
 
 
 
@@ -19313,11 +19438,11 @@ Negative conditions are not reported when else is not present.
    
    ?>
 
-+--------------+---------------------------------+
-| Command line | Structures/UsePositiveCondition |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`                  |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/UsePositiveCondition |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`                  |
++------------+---------------------------------+
 
 
 
@@ -19344,11 +19469,11 @@ Some classes, traits or interfaces where detected in the code.
 
 See also `Slim <https://www.slimframework.com/>`_.
 
-+--------------+--------------+
-| Command line | Slim/UseSlim |
-+--------------+--------------+
-| Themes       | :ref:`Slim`  |
-+--------------+--------------+
++------------+--------------+
+| Short name | Slim/UseSlim |
++------------+--------------+
+| Themes     | :ref:`Slim`  |
++------------+--------------+
 
 
 
@@ -19377,11 +19502,11 @@ It is recommended to avoid hardcoding the temporary file. It is better to rely o
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Structures/UseSystemTmp |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/UseSystemTmp |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -19407,11 +19532,11 @@ PHP manual recommends not to use fully qualified name (starting with \) when usi
    
    ?>
 
-+--------------+----------------------------------------------------------------+
-| Command line | Namespaces/UseWithFullyQualifiedNS                             |
-+--------------+----------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
-+--------------+----------------------------------------------------------------+
++------------+----------------------------------------------------------------+
+| Short name | Namespaces/UseWithFullyQualifiedNS                             |
++------------+----------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
++------------+----------------------------------------------------------------+
 
 
 
@@ -19456,11 +19581,11 @@ Here is a table of conversion :
 
 See `Wordpress Functions <https://codex.wordpress.org/Function_Reference>`_.
 
-+--------------+--------------------------+
-| Command line | Wordpress/UseWpFunctions |
-+--------------+--------------------------+
-| Themes       | :ref:`Wordpress`         |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Wordpress/UseWpFunctions |
++------------+--------------------------+
+| Themes     | :ref:`Wordpress`         |
++------------+--------------------------+
 
 
 
@@ -19499,11 +19624,11 @@ This way, constant will be defined at compile time, and not at execution time.
      echo b;
    ?>
 
-+--------------+----------------------------------------------------------------+
-| Command line | Constants/ConstRecommended                                     |
-+--------------+----------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
-+--------------+----------------------------------------------------------------+
++------------+----------------------------------------------------------------+
+| Short name | Constants/ConstRecommended                                     |
++------------+----------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
++------------+----------------------------------------------------------------+
 
 
 
@@ -19515,11 +19640,11 @@ Use password_hash()
 
 PHP 5.5 introduced `'password_hash() <http://www.php.net/password_hash>`_ and password_check() to replace the use of `'crypt() <http://www.php.net/crypt>`_ to check password.
 
-+--------------+---------------------------+
-| Command line | Php/Password55            |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP55` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/Password55            |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP55` |
++------------+---------------------------+
 
 
 
@@ -19564,11 +19689,11 @@ Depending on the situation, the functions `'dirname() <http://www.php.net/dirnam
 
 See also `list <http://php.net/manual/en/function.list.php>`_.
 
-+--------------+---------------------+
-| Command line | Php/UsePathinfoArgs |
-+--------------+---------------------+
-| Themes       | :ref:`Performances` |
-+--------------+---------------------+
++------------+---------------------+
+| Short name | Php/UsePathinfoArgs |
++------------+---------------------+
+| Themes     | :ref:`Performances` |
++------------+---------------------+
 
 
 
@@ -19616,11 +19741,11 @@ when security is involved. openssl_random_pseudo_bytes() may be used when the Op
 
 See also `CSPRNG <http://php.net/manual/en/book.csprng.php>`_ and `OpenSSL <http://php.net/manual/en/book.openssl.php>`_.
 
-+--------------+------------------------------------------------------------+
-| Command line | Php/BetterRand                                             |
-+--------------+------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------------+
++------------+------------------------------------------------------------+
+| Short name | Php/BetterRand                                             |
++------------+------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71` |
++------------+------------------------------------------------------------+
 
 
 
@@ -19653,11 +19778,11 @@ This is available since PHP 7.0. It is recommended to set those values in the ph
    
    ?>
 
-+--------------+----------------------------+
-| Command line | Php/UseSessionStartOptions |
-+--------------+----------------------------+
-| Themes       | :ref:`Suggestions`         |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Php/UseSessionStartOptions |
++------------+----------------------------+
+| Themes     | :ref:`Suggestions`         |
++------------+----------------------------+
 
 
 
@@ -19700,11 +19825,11 @@ Setting properties with default values is a good way to avoid literring the code
    
    ?>
 
-+--------------+--------------------------+
-| Command line | Classes/UsedOnceProperty |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Classes/UsedOnceProperty |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -19739,11 +19864,11 @@ In special situations, variables may be used once :
 
 The current analyzer count variables at the application level, and not at a method scope level.
 
-+--------------+----------------------------+
-| Command line | Variables/VariableUsedOnce |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Variables/VariableUsedOnce |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -19774,11 +19899,11 @@ This is the list of used once variables, scope by scope. Those variables are use
    
    ?>
 
-+--------------+-------------------------------------+
-| Command line | Variables/VariableUsedOnceByContext |
-+--------------+-------------------------------------+
-| Themes       | :ref:`Analyze`                      |
-+--------------+-------------------------------------+
++------------+-------------------------------------+
+| Short name | Variables/VariableUsedOnceByContext |
++------------+-------------------------------------+
+| Themes     | :ref:`Analyze`                      |
++------------+-------------------------------------+
 
 
 
@@ -19816,11 +19941,11 @@ Marks methods being used in the current class or its children classes.
 
 See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
 
-+--------------+------------------------------+
-| Command line | Classes/UsedProtectedMethod  |
-+--------------+------------------------------+
-| Themes       | :ref:`Dead code <dead-code>` |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Classes/UsedProtectedMethod  |
++------------+------------------------------+
+| Themes     | :ref:`Dead code <dead-code>` |
++------------+------------------------------+
 
 
 
@@ -19847,11 +19972,11 @@ List of all routes used in the application.
 
 See also `Routing <https://www.slimframework.com/docs/objects/router.html>`_.
 
-+--------------+-----------------+
-| Command line | Slim/UsedRoutes |
-+--------------+-----------------+
-| Themes       | :ref:`Slim`     |
-+--------------+-----------------+
++------------+-----------------+
+| Short name | Slim/UsedRoutes |
++------------+-----------------+
+| Themes     | :ref:`Slim`     |
++------------+-----------------+
 
 
 
@@ -19886,11 +20011,11 @@ Abstract classes that have only static methods are omitted here : one usage of s
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Classes/UselessAbstract |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Classes/UselessAbstract |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -19921,11 +20046,11 @@ Standalone brackets may be a left over of an old instruction, or a misunderstand
    
    ?>
 
-+--------------+----------------------------+
-| Command line | Structures/UselessBrackets |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Structures/UselessBrackets |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -19955,11 +20080,11 @@ There is no need to overcast returned values.
 
 See also `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_.
 
-+--------------+---------------------------+
-| Command line | Structures/UselessCasting |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Structures/UselessCasting |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -19997,11 +20122,11 @@ Among the task of a catch clause : log the exception, clean any mess that was in
 
 See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
 
-+--------------+-------------------------+
-| Command line | Exceptions/UselessCatch |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Exceptions/UselessCatch |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -20033,11 +20158,11 @@ Situation where the condition is useless.
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Structures/UselessCheck |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/UselessCheck |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -20068,11 +20193,11 @@ Class constructor that have empty bodies are useless. They may be removed.
    
    ?>
 
-+--------------+----------------------------+
-| Command line | Classes/UselessConstructor |
-+--------------+----------------------------+
-| Themes       | :ref:`Analyze`             |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Classes/UselessConstructor |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -20105,13 +20230,13 @@ There is no need to declare them individually final.
 
 See also `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_, and `When to declare final <https://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
 
-+--------------+-------------------------------------------------------------------------------------------------+
-| Command line | Classes/UselessFinal                                                                            |
-+--------------+-------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                  |
-+--------------+-------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-useless-final <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-final.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------+
+| Short name | Classes/UselessFinal                                                                            |
++------------+-------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                  |
++------------+-------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-useless-final <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-final.md>`__ |
++------------+-------------------------------------------------------------------------------------------------+
 
 
 
@@ -20143,11 +20268,11 @@ Global are useless in two cases. First, on super-globals, which are always globa
 Also, PHP has superglobals, a special team of variables that are always available, whatever the context. 
 They are : $GLOBALS, $_SERVER, $_GET, $_POST, $_FILES, $_COOKIE, $_SESSION, $_REQUEST and $_ENV.
 
-+--------------+--------------------------+
-| Command line | Structures/UselessGlobal |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/UselessGlobal |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -20199,13 +20324,13 @@ Here the useless instructions that are spotted :
    
    ?>
 
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/UselessInstruction                                                                               |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                              |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-useless-instruction <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-instruction.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/UselessInstruction                                                                               |
++------------+-------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                              |
++------------+-------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-useless-instruction <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-instruction.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -20246,13 +20371,13 @@ Interfaces should be used in Typehint or with the `'instanceof <http://php.net/m
        }
    ?>
 
-+--------------+-----------------------------------------------------------------------------------------------------------+
-| Command line | Interfaces/UselessInterfaces                                                                              |
-+--------------+-----------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                            |
-+--------------+-----------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-useless-interfaces <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-interfaces.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------------+
+| Short name | Interfaces/UselessInterfaces                                                                              |
++------------+-----------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                            |
++------------+-----------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-useless-interfaces <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-interfaces.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------------+
 
 
 
@@ -20287,11 +20412,11 @@ Situations where parenthesis are not necessary, and may be removed.
        function foo($c = ( 1 + 2) ) {}
    ?>
 
-+--------------+-------------------------------+
-| Command line | Structures/UselessParenthesis |
-+--------------+-------------------------------+
-| Themes       | :ref:`Analyze`                |
-+--------------+-------------------------------+
++------------+-------------------------------+
+| Short name | Structures/UselessParenthesis |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -20316,11 +20441,11 @@ This is probably a development artefact that was forgotten. It is better to remo
    
    ?>
 
-+--------------+------------------------------------+
-| Command line | Functions/UselessReferenceArgument |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`                     |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Functions/UselessReferenceArgument |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`                     |
++------------+------------------------------------+
 
 
 
@@ -20353,11 +20478,11 @@ When return is void, and the last element in a function, it is also useless.
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Functions/UselessReturn |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Functions/UselessReturn |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -20385,11 +20510,11 @@ This switch has only one case. It may very well be replaced by a ifthen structur
    }
    ?>
 
-+--------------+--------------------------+
-| Command line | Structures/UselessSwitch |
-+--------------+--------------------------+
-| Themes       | :ref:`Analyze`           |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Structures/UselessSwitch |
++------------+--------------------------+
+| Themes     | :ref:`Analyze`           |
++------------+--------------------------+
 
 
 
@@ -20425,13 +20550,13 @@ Unsetting variables may not be applicable with a certain type of variables. This
    
    ?>
 
-+--------------+-------------------------------------------------------------------------------------------------+
-| Command line | Structures/UselessUnset                                                                         |
-+--------------+-------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                  |
-+--------------+-------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-useless-unset <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-unset.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------+
+| Short name | Structures/UselessUnset                                                                         |
++------------+-------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                  |
++------------+-------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-useless-unset <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-unset.md>`__ |
++------------+-------------------------------------------------------------------------------------------------+
 
 
 
@@ -20464,11 +20589,11 @@ As much as possible, it is recommended to use explicit values in those methods, 
 
 This analyzer tend to report a lot of false positives, including usage of `'count() <http://www.php.net/count>`_. Count() indeed has a second argument for recursive counts, and a default value. This may be ignored safely.
 
-+--------------+--------------------------------+
-| Command line | Functions/UsesDefaultArguments |
-+--------------+--------------------------------+
-| Themes       | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Functions/UsesDefaultArguments |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`                 |
++------------+--------------------------------+
 
 
 
@@ -20494,11 +20619,11 @@ Until PHP 7.1, `$this` may be used as an argument in a function (or a method), a
 
 Starting with PHP 7.1, the PHP engine check thouroughly that $this is used in an appropriate manner, and raise fatal errors in case it isn't.
 
-+--------------+-------------------------------------------+
-| Command line | Classes/UsingThisOutsideAClass            |
-+--------------+-------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`CompatibilityPHP71` |
-+--------------+-------------------------------------------+
++------------+-------------------------------------------+
+| Short name | Classes/UsingThisOutsideAClass            |
++------------+-------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP71` |
++------------+-------------------------------------------+
 
 
 
@@ -20550,11 +20675,11 @@ in PHP 7, the result is :::
        [3] => 6
    )
 
-+--------------+---------------------------+
-| Command line | Php/UsortSorting          |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP70` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/UsortSorting          |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP70` |
++------------+---------------------------+
 
 
 
@@ -20583,13 +20708,13 @@ It is recommended to avoid using var, and explicitely use the new keywords.
 
 See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command line | Classes/OldStyleVar                                                                                     |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                          |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------+
+| Short name | Classes/OldStyleVar                                                                                     |
++------------+---------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                          |
++------------+---------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__ |
++------------+---------------------------------------------------------------------------------------------------------+
 
 
 
@@ -20616,11 +20741,11 @@ Variable global such are valid in PHP 5.6, but no in PHP 7.0. They should be rep
    
    ?>
 
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/VariableGlobal                                                                                  |
-+--------------+------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/VariableGlobal                                                                                  |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -20650,11 +20775,11 @@ This structure is deprecated since PHP 7.2. It may disappear in the future.
 
 See also `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_.
 
-+--------------+---------------------------------------------------------+
-| Command line | Structures/WhileListEach                                |
-+--------------+---------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
-+--------------+---------------------------------------------------------+
++------------+---------------------------------------------------------+
+| Short name | Structures/WhileListEach                                |
++------------+---------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
++------------+---------------------------------------------------------+
 
 
 
@@ -20668,11 +20793,11 @@ Classes, trait and interfaces that are undefined for Wordpress 4.0.
 
 Wordpress 4.0 has 223 classes, 0 traits and 1 interfaces.
 
-+--------------+--------------------------------+
-| Command line | Wordpress/Wordpress40Undefined |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/Wordpress40Undefined |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -20686,11 +20811,11 @@ Classes, trait and interfaces that are undefined for Wordpress 4.1.
 
 Wordpress 4.1 has 224 classes, 0 traits and 1 interfaces.
 
-+--------------+--------------------------------+
-| Command line | Wordpress/Wordpress41Undefined |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/Wordpress41Undefined |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -20704,11 +20829,11 @@ Classes, trait and interfaces that are undefined for Wordpress 4.2.
 
 Wordpress 4.2 has 243 classes, 0 traits and 1 interfaces.
 
-+--------------+--------------------------------+
-| Command line | Wordpress/Wordpress42Undefined |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/Wordpress42Undefined |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -20722,11 +20847,11 @@ Classes, trait and interfaces that are undefined for Wordpress 4.3.
 
 Wordpress 4.3 has 243 classes, 0 traits and 1 interfaces.
 
-+--------------+--------------------------------+
-| Command line | Wordpress/Wordpress43Undefined |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/Wordpress43Undefined |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -20740,11 +20865,11 @@ Classes, trait and interfaces that are undefined for Wordpress 4.4.
 
 Wordpress 4.4 has 251 classes, 0 traits and 1 interfaces.
 
-+--------------+--------------------------------+
-| Command line | Wordpress/Wordpress44Undefined |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/Wordpress44Undefined |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -20758,11 +20883,11 @@ Classes, trait and interfaces that are undefined for Wordpress 4.5.
 
 Wordpress 4.5 has 255 classes, 0 traits and 1 interfaces.
 
-+--------------+--------------------------------+
-| Command line | Wordpress/Wordpress45Undefined |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/Wordpress45Undefined |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -20776,11 +20901,11 @@ Classes, trait and interfaces that are undefined for Wordpress 4.6.
 
 Wordpress 4.6 has 315 classes, 0 traits and 5 interfaces.
 
-+--------------+--------------------------------+
-| Command line | Wordpress/Wordpress46Undefined |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/Wordpress46Undefined |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -20794,11 +20919,11 @@ Classes, trait and interfaces that are undefined for Wordpress 4.7.
 
 Wordpress 4.7 has 338 classes, 0 traits and 5 interfaces.
 
-+--------------+--------------------------------+
-| Command line | Wordpress/Wordpress47Undefined |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/Wordpress47Undefined |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -20812,11 +20937,11 @@ Classes, trait and interfaces that are undefined for Wordpress 4.8.
 
 Wordpress 4.8 has 344 classes, 0 traits and 5 interfaces.
 
-+--------------+--------------------------------+
-| Command line | Wordpress/Wordpress48Undefined |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/Wordpress48Undefined |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -20830,11 +20955,11 @@ Classes, trait and interfaces that are undefined for Wordpress 4.9.
 
 Wordpress 4.9 has 349 classes, 0 traits and 5 interfaces.
 
-+--------------+--------------------------------+
-| Command line | Wordpress/Wordpress49Undefined |
-+--------------+--------------------------------+
-| Themes       | :ref:`Wordpress`               |
-+--------------+--------------------------------+
++------------+--------------------------------+
+| Short name | Wordpress/Wordpress49Undefined |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -20846,11 +20971,11 @@ Wordpress Usage
 
 Usage of Wordpress.
 
-+--------------+--------------------------+
-| Command line | Wordpress/WordpressUsage |
-+--------------+--------------------------+
-| Themes       | :ref:`Wordpress`         |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | Wordpress/WordpressUsage |
++------------+--------------------------+
+| Themes     | :ref:`Wordpress`         |
++------------+--------------------------+
 
 
 
@@ -20877,11 +21002,11 @@ It is recommended to use them, instead of writing queries with concatenations.
 
 See `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 
-+--------------+-------------------------+
-| Command line | Wordpress/WpdbBestUsage |
-+--------------+-------------------------+
-| Themes       | :ref:`Wordpress`        |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Wordpress/WpdbBestUsage |
++------------+-------------------------+
+| Themes     | :ref:`Wordpress`        |
++------------+-------------------------+
 
 
 
@@ -20910,11 +21035,11 @@ When using $wpdb, it is recommended to use directly the query() method when the 
    
    ?>
 
-+--------------+----------------------------+
-| Command line | Wordpress/WpdbPrepareOrNot |
-+--------------+----------------------------+
-| Themes       | :ref:`Wordpress`           |
-+--------------+----------------------------+
++------------+----------------------------+
+| Short name | Wordpress/WpdbPrepareOrNot |
++------------+----------------------------+
+| Themes     | :ref:`Wordpress`           |
++------------+----------------------------+
 
 
 
@@ -20940,13 +21065,13 @@ Those variables are being written, but never read. This way, they are useless an
    
    ?>
 
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Command line | Variables/WrittenOnlyVariable                                                                       |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                      |
-+--------------+-----------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-unused-variable <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-variable.md>`__ |
-+--------------+-----------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------------+
+| Short name | Variables/WrittenOnlyVariable                                                                       |
++------------+-----------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                      |
++------------+-----------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-unused-variable <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-variable.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------+
 
 
 
@@ -20964,11 +21089,11 @@ Here are the validation that are currently performed :
 * Zend_Controller_Action must be in /controllers/ folder
 * Zend_View_Helper_Abstract must be in /helpers/ folder
 
-+--------------+----------------------+
-| Command line | ZendF/NotInThatPath  |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/NotInThatPath  |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -21005,13 +21130,13 @@ When the number arguments is too hight for custom functions, PHP ignores the arg
 
 It is recommended to check the signature of the methods, and fix the arguments.
 
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Command line | Functions/WrongNumberOfArguments                                                                            |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`                                                                                              |
-+--------------+-------------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-missing-argument.md <https://github.com/dseguy/clearPHP/tree/master/rules/no-missing-argument.md.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------------+
+| Short name | Functions/WrongNumberOfArguments                                                                            |
++------------+-------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                              |
++------------+-------------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-missing-argument.md <https://github.com/dseguy/clearPHP/tree/master/rules/no-missing-argument.md.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -21049,11 +21174,11 @@ PHP will solve this problem at runtime, assign values in the same other, but wil
 
 It is better to put all the optional parameters at the end of the method's signature.
 
-+--------------+----------------------------------+
-| Command line | Functions/WrongOptionalParameter |
-+--------------+----------------------------------+
-| Themes       | :ref:`Analyze`                   |
-+--------------+----------------------------------+
++------------+----------------------------------+
+| Short name | Functions/WrongOptionalParameter |
++------------+----------------------------------+
+| Themes     | :ref:`Analyze`                   |
++------------+----------------------------------+
 
 
 
@@ -21082,11 +21207,11 @@ The expected parameter is not of the correct type. Check PHP documentation to kn
    
    ?>
 
-+--------------+---------------------------+
-| Command line | Php/InternalParameterType |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Php/InternalParameterType |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -21119,11 +21244,11 @@ An optional 'b' may be used to make the `'fopen() <http://www.php.net/fopen>`_ c
 
 Any other values are not understood by PHP.
 
-+--------------+----------------+
-| Command line | Php/FopenMode  |
-+--------------+----------------+
-| Themes       | :ref:`Analyze` |
-+--------------+----------------+
++------------+----------------+
+| Short name | Php/FopenMode  |
++------------+----------------+
+| Themes     | :ref:`Analyze` |
++------------+----------------+
 
 
 
@@ -21159,11 +21284,11 @@ The objective is to avoid mistaking a comparison to an assignation. If the compa
 See also `Yoda Conditions <https://en.wikipedia.org/wiki/Yoda_conditions>`_, 
 `Yoda Conditions: To Yoda or Not to Yoda <https://knowthecode.io/yoda-conditions-yoda-not-yoda>`_.
 
-+--------------+------------------------------------------------+
-| Command line | Structures/YodaComparison                      |
-+--------------+------------------------------------------------+
-| Themes       | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Structures/YodaComparison                      |
++------------+------------------------------------------------+
+| Themes     | :ref:`Coding Conventions <coding-conventions>` |
++------------+------------------------------------------------+
 
 
 
@@ -21210,11 +21335,11 @@ Any kind of structure may be @deprecated : classes, traits, interfaces, methods,
 
 Currently, parameters are omitted in the analysis.
 
-+--------------+--------------------------+
-| Command line | ZendF/Zf3DeprecatedUsage |
-+--------------+--------------------------+
-| Themes       | :ref:`ZendFramework`     |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | ZendF/Zf3DeprecatedUsage |
++------------+--------------------------+
+| Themes     | :ref:`ZendFramework`     |
++------------+--------------------------+
 
 
 
@@ -21244,11 +21369,11 @@ Classes are detected by checking the full namespaced name with the prefix ``zend
    
    ?>
 
-+--------------+----------------------+
-| Command line | ZendF/ZendClasses    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/ZendClasses    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -21278,11 +21403,11 @@ Identify Zend Framework interface, based on fully qualified name.
    
    ?>
 
-+--------------+----------------------+
-| Command line | ZendF/ZendInterfaces |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/ZendInterfaces |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -21308,11 +21433,11 @@ Identify Zend Framework traits, based on fully qualified name.
    
    ?>
 
-+--------------+----------------------+
-| Command line | ZendF/ZendTrait      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/ZendTrait      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -21340,11 +21465,11 @@ Zend classes or interfaces used in `'instanceof <http://php.net/manual/en/langua
    
    ?>
 
-+--------------+-----------------------+
-| Command line | ZendF/ZendTypehinting |
-+--------------+-----------------------+
-| Themes       | :ref:`ZendFramework`  |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | ZendF/ZendTypehinting |
++------------+-----------------------+
+| Themes     | :ref:`ZendFramework`  |
++------------+-----------------------+
 
 
 
@@ -21381,11 +21506,11 @@ The Zend Framework 3 component Zend-Config is used.
 
 See also `Zend-config <https://docs.zendframework.com/zend-config/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Config      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Config      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -21416,11 +21541,11 @@ The magic constant `'__DIR__ <http://php.net/manual/en/language.constants.predef
    
    ?>
 
-+--------------+-------------------------+
-| Command line | Structures/DirThenSlash |
-+--------------+-------------------------+
-| Themes       | :ref:`Analyze`          |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | Structures/DirThenSlash |
++------------+-------------------------+
+| Themes     | :ref:`Analyze`          |
++------------+-------------------------+
 
 
 
@@ -21468,11 +21593,11 @@ This ends up with :::
 
 See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 
-+--------------+---------------------------------------------------------------------------------+
-| Command line | Php/debugInfoUsage                                                              |
-+--------------+---------------------------------------------------------------------------------+
-| Themes       | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+---------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Php/debugInfoUsage                                                              |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -21516,11 +21641,11 @@ PHP Fatal error:  Method myString::`'__toString() <http://php.net/manual/en/lang
 
 See also `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_.
 
-+--------------+------------------------------------+
-| Command line | Structures/toStringThrowsException |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`                     |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/toStringThrowsException |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`                     |
++------------+------------------------------------+
 
 
 
@@ -21552,11 +21677,11 @@ According to the manual : The salt parameter is optional. However, `'crypt() <ht
 
 See also `crypt <http://www.php.net/crypt>`_.
 
-+--------------+-----------------------------+
-| Command line | Structures/CryptWithoutSalt |
-+--------------+-----------------------------+
-| Themes       | :ref:`CompatibilityPHP54`   |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Structures/CryptWithoutSalt |
++------------+-----------------------------+
+| Themes     | :ref:`CompatibilityPHP54`   |
++------------+-----------------------------+
 
 
 
@@ -21584,11 +21709,11 @@ Using named constants with error_reporting is strongly encouraged to ensure comp
    
    ?>
 
-+--------------+--------------------------------------+
-| Command line | Structures/ErrorReportingWithInteger |
-+--------------+--------------------------------------+
-| Themes       | :ref:`Analyze`                       |
-+--------------+--------------------------------------+
++------------+--------------------------------------+
+| Short name | Structures/ErrorReportingWithInteger |
++------------+--------------------------------------+
+| Themes     | :ref:`Analyze`                       |
++------------+--------------------------------------+
 
 
 
@@ -21622,11 +21747,11 @@ eval() Without Try
 
 Note that it will catch situations where `'eval() <http://www.php.net/eval>`_ is provided with code that can't be used, but it will not catch security problems. Avoid using `'eval() <http://www.php.net/eval>`_ with incoming data.
 
-+--------------+---------------------------------+
-| Command line | Structures/EvalWithoutTry       |
-+--------------+---------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Security` |
-+--------------+---------------------------------+
++------------+---------------------------------+
+| Short name | Structures/EvalWithoutTry       |
++------------+---------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security` |
++------------+---------------------------------+
 
 
 
@@ -21659,11 +21784,11 @@ This extension is considered unmaintained and dead.
 
 See also `Alternative PHP Cache <http://php.net/apc>`_.
 
-+--------------+---------------------------+
-| Command line | Extensions/Extapc         |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP55` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Extensions/Extapc         |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP55` |
++------------+---------------------------+
 
 
 
@@ -21701,11 +21826,11 @@ These functions build the foundation for accessing Berkeley DB style databases.
 
 See also `Database (dbm-style) Abstraction Layer <http://php.net/manual/en/book.dba.php>`_.
 
-+--------------+---------------------------+
-| Command line | Extensions/Extdba         |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP53` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Extensions/Extdba         |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP53` |
++------------+---------------------------+
 
 
 
@@ -21730,11 +21855,11 @@ Extension ext/ereg.
 
 See also `Ereg <http://php.net/manual/en/function.ereg.php>`_.
 
-+--------------+---------------------------+
-| Command line | Extensions/Extereg        |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP70` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Extensions/Extereg        |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP70` |
++------------+---------------------------+
 
 
 
@@ -21766,11 +21891,11 @@ Forms Data Format (`FDF <http://www.adobe.com/devnet/acrobat/fdftoolkit.html>`_)
 
 See also `Form Data Format <http://php.net/manual/en/book.fdf.php>`_.
 
-+--------------+---------------------------+
-| Command line | Extensions/Extfdf         |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP53` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Extensions/Extfdf         |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP53` |
++------------+---------------------------+
 
 
 
@@ -21847,11 +21972,11 @@ This is an interface to the mcrypt library, which supports a wide variety of blo
 
 See also `extension mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_ and `mcrypt <http://mcrypt.sourceforge.net/>`_.
 
-+--------------+---------------------------+
-| Command line | Extensions/Extmcrypt      |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP71` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Extensions/Extmcrypt      |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP71` |
++------------+---------------------------+
 
 
 
@@ -21878,11 +22003,11 @@ This extension provides functions, intended to work with `mhash <http://mhash.so
 
 See also `Extension mhash <http://php.net/manual/en/book.mhash.php>`_.
 
-+--------------+---------------------------+
-| Command line | Extensions/Extmhash       |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP54` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Extensions/Extmhash       |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP54` |
++------------+---------------------------+
 
 
 
@@ -21940,11 +22065,11 @@ Ming is an open-source (LGPL) library which allows you to create SWF ('Flash') f
 
 See also `Ming (flash) <http://www.libming.org/>`_ and `Ming <http://www.libming.org/>`_.
 
-+--------------+---------------------------+
-| Command line | Extensions/Extming        |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP53` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Extensions/Extming        |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP53` |
++------------+---------------------------+
 
 
 
@@ -21971,11 +22096,11 @@ This extension is deprecated as of PHP 5.5.0, and has been removed as of PHP 7.0
 
 See also `Original MySQL API <http://www.php.net/manual/en/book.mysql.php>`_ and `MySQL <http://www.mysql.com/>`_.
 
-+--------------+---------------------------+
-| Command line | Extensions/Extmysql       |
-+--------------+---------------------------+
-| Themes       | :ref:`CompatibilityPHP55` |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Extensions/Extmysql       |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP55` |
++------------+---------------------------+
 
 
 
@@ -22002,11 +22127,11 @@ func_get_arg() Modified
 
 This code will display 1 in PHP 7, and 0 in PHP 5.
 
-+--------------+-------------------------------------------+
-| Command line | Functions/funcGetArgModified              |
-+--------------+-------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
-+--------------+-------------------------------------------+
++------------+-------------------------------------------+
+| Short name | Functions/funcGetArgModified              |
++------------+-------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP70` |
++------------+-------------------------------------------+
 
 
 
@@ -22033,11 +22158,11 @@ include_once() and require_once() functions should be avoided for performances r
 
 Try using autoload for loading classes, or use include() or require() and make it possible to include several times the same file without errors.
 
-+--------------+----------------------+
-| Command line | Structures/OnceUsage |
-+--------------+----------------------+
-| Themes       | :ref:`Analyze`       |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Structures/OnceUsage |
++------------+----------------------+
+| Themes     | :ref:`Analyze`       |
++------------+----------------------+
 
 
 
@@ -22060,11 +22185,11 @@ list() is the only PHP function that accepts to have omitted arguments. If the f
 
 $b will be 3, and the 2 value will be omitted. This is cleaner, and save some memory.
 
-+--------------+------------------------------------+
-| Command line | Structures/ListOmissions           |
-+--------------+------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Suggestions` |
-+--------------+------------------------------------+
++------------+------------------------------------+
+| Short name | Structures/ListOmissions           |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
++------------+------------------------------------+
 
 
 
@@ -22095,11 +22220,11 @@ If the code doesn't have a second argument, it relies on the default value. It i
 
 See also `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`.
 
-+--------------+----------------------------------------+
-| Command line | Structures/McryptcreateivWithoutOption |
-+--------------+----------------------------------------+
-| Themes       | :ref:`CompatibilityPHP70`              |
-+--------------+----------------------------------------+
++------------+----------------------------------------+
+| Short name | Structures/McryptcreateivWithoutOption |
++------------+----------------------------------------+
+| Themes     | :ref:`CompatibilityPHP70`              |
++------------+----------------------------------------+
 
 
 
@@ -22128,13 +22253,13 @@ The `'parse_str() <http://www.php.net/parse_str>`_ function parses a query strin
 
 Always use an empty variable a second parameter to `'parse_str() <http://www.php.net/parse_str>`_, so as to collect the incoming values, and then, filter them in that array.
 
-+--------------+-------------------------------------------------------------------------------------------------------+
-| Command line | Security/parseUrlWithoutParameters                                                                    |
-+--------------+-------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Security`                                                                                       |
-+--------------+-------------------------------------------------------------------------------------------------------+
-| ClearPHP     | `know-your-variables <https://github.com/dseguy/clearPHP/tree/master/rules/know-your-variables.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------+
+| Short name | Security/parseUrlWithoutParameters                                                                    |
++------------+-------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Security`                                                                                       |
++------------+-------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `know-your-variables <https://github.com/dseguy/clearPHP/tree/master/rules/know-your-variables.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------+
 
 
 
@@ -22172,11 +22297,11 @@ The second option is the most interesting when the following `'foreach() <http:/
 
 The second syntax is easier to read and may be marginally faster to execute (preg_match_all and foreach).
 
-+--------------+----------------------+
-| Command line | Php/PregMatchAllFlag |
-+--------------+----------------------+
-| Themes       | :ref:`Suggestions`   |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | Php/PregMatchAllFlag |
++------------+----------------------+
+| Themes     | :ref:`Suggestions`   |
++------------+----------------------+
 
 
 
@@ -22209,11 +22334,11 @@ preg_replace With Option e
                                                  '/[a-b]/' => function ($x) { return strtolower($x[0]); }), $string);
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| Command line | Structures/pregOptionE                                                                                                                      |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP72` |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/pregOptionE                                                                                                                      |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP72` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -22260,11 +22385,11 @@ The origin of the problem is usually a method that was moved outside a class, at
 
 See also `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
 
-+--------------+---------------------------+
-| Command line | Classes/NoPSSOutsideClass |
-+--------------+---------------------------+
-| Themes       | :ref:`Analyze`            |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | Classes/NoPSSOutsideClass |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
 
 
 
@@ -22295,11 +22420,11 @@ When in doubt about backward compatibility, just drop the Typehint. Otherwise, u
    
    ?>
 
-+--------------+-----------------------------+
-| Command line | Php/SetExceptionHandlerPHP7 |
-+--------------+-----------------------------+
-| Themes       | :ref:`CompatibilityPHP70`   |
-+--------------+-----------------------------+
++------------+-----------------------------+
+| Short name | Php/SetExceptionHandlerPHP7 |
++------------+-----------------------------+
+| Themes     | :ref:`CompatibilityPHP70`   |
++------------+-----------------------------+
 
 
 
@@ -22326,11 +22451,11 @@ time() is actually faster than strtotime('now').
 
 This is a micro-optimisation. Relative gain is real, but small unless the function is used many times.
 
-+--------------+------------------------------+
-| Command line | Performances/timeVsstrtotime |
-+--------------+------------------------------+
-| Themes       | :ref:`Performances`          |
-+--------------+------------------------------+
++------------+------------------------------+
+| Short name | Performances/timeVsstrtotime |
++------------+------------------------------+
+| Themes     | :ref:`Performances`          |
++------------+------------------------------+
 
 
 
@@ -22360,13 +22485,13 @@ var_dump()... Usage
 
 They may be tolerated during development time, but must be removed so as not to have any chance to be run in production.
 
-+--------------+-------------------------------------------------------------------------------------------+
-| Command line | Structures/VardumpUsage                                                                   |
-+--------------+-------------------------------------------------------------------------------------------+
-| Themes       | :ref:`Analyze`, :ref:`Security`                                                           |
-+--------------+-------------------------------------------------------------------------------------------+
-| ClearPHP     | `no-debug-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-debug-code.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------+
+| Short name | Structures/VardumpUsage                                                                   |
++------------+-------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security`                                                           |
++------------+-------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-debug-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-debug-code.md>`__ |
++------------+-------------------------------------------------------------------------------------------+
 
 
 
@@ -22382,11 +22507,11 @@ zend-authentication 2.5.0 has 27 classes, no traits and 9 interfaces;
 
   See also : `zend-authentication <https://github.com/zendframework/zend-authentication>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+---------------------------+
-| Command line | ZendF/Zf3Authentication25 |
-+--------------+---------------------------+
-| Themes       | :ref:`ZendFramework`      |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | ZendF/Zf3Authentication25 |
++------------+---------------------------+
+| Themes     | :ref:`ZendFramework`      |
++------------+---------------------------+
 
 
 
@@ -22402,11 +22527,11 @@ zend-authentication has 27 classes, no traits and 9 interfaces;
 
 See also : `zend-authentication <https://github.com/zendframework/zend-authentication>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-------------------------+
-| Command line | ZendF/Zf3Authentication |
-+--------------+-------------------------+
-| Themes       | :ref:`ZendFramework`    |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | ZendF/Zf3Authentication |
++------------+-------------------------+
+| Themes     | :ref:`ZendFramework`    |
++------------+-------------------------+
 
 
 
@@ -22422,11 +22547,11 @@ zend-barcode 2.5.0 has 40 classes, no traits and 5 interfaces;
 
   See also : `zend-barcode <https://github.com/zendframework/zend-barcode>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Barcode25   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Barcode25   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22442,11 +22567,11 @@ zend-barcode 2.6.0 has 40 classes, no traits and 5 interfaces;
 
   See also : `zend-barcode <https://github.com/zendframework/zend-barcode>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Barcode26   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Barcode26   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22462,11 +22587,11 @@ zend-barcode has 40 classes, no traits and 5 interfaces;
 
 See also : `zend-barcode <https://github.com/zendframework/zend-barcode>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Barcode     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Barcode     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22478,11 +22603,11 @@ zend-cache 2.5.0 Undefined Classes
 
 zend-cache classes, interfaces and traits that are not defined in version 2.5.0.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Cache25     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Cache25     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22494,11 +22619,11 @@ zend-cache 2.6.0 Undefined Classes
 
 zend-cache classes, interfaces and traits that are not defined in version 2.6.0.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Cache26     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Cache26     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22512,11 +22637,11 @@ zend-cache classes, interfaces and traits that are not defined in version 2.7.0.
 8 new classes 
 1 new trait
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Cache27     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Cache27     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22528,11 +22653,11 @@ zend-cache Usage
 
 zend-cache usage, based on classes, interfaces and traits. This covers all versions, from 2.5.0.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Cache                             |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Cache                             |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -22548,11 +22673,11 @@ zend-captcha 2.5.0 has 13 classes, no traits and 2 interfaces;
 
   See also : `zend-captcha <https://github.com/zendframework/zend-captcha>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Captcha25   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Captcha25   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22568,11 +22693,11 @@ zend-captcha 2.6.0 has 13 classes, no traits and 2 interfaces;
 
   See also : `zend-captcha <https://github.com/zendframework/zend-captcha>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Captcha26   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Captcha26   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22588,11 +22713,11 @@ zend-captcha 2.7.0 has 13 classes, no traits and 2 interfaces;
 
   See also : `zend-captcha <https://github.com/zendframework/zend-captcha>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Captcha27   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Captcha27   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22608,11 +22733,11 @@ zend-captcha has 13 classes, no traits and 2 interfaces;
 
 See also : `zend-captcha <https://github.com/zendframework/zend-captcha>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Captcha     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Captcha     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22628,11 +22753,11 @@ zend-code 2.5.0 has 71 classes, no traits and 14 interfaces;
 
   See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Code25                            |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Code25                            |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -22649,11 +22774,11 @@ zend-code 2.6.0 has 72 classes, no traits and 14 interfaces;
 1 new classe 
 .  See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Code26                            |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Code26                            |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -22670,11 +22795,11 @@ zend-code 3.0.0 has 73 classes, no traits and 14 interfaces;
 1 new classe 
 .  See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Code30                            |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Code30                            |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -22690,11 +22815,11 @@ zend-code 3.1.0 has 73 classes, no traits and 14 interfaces;
 
   See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Code31                            |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Code31                            |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -22711,11 +22836,11 @@ zend-code 3.2.0 has 75 classes, no traits and 14 interfaces;
 2 new classes.  
 See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Code32                            |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Code32                            |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -22731,11 +22856,11 @@ zend-code has 73 classes, no traits and 14 interfaces;
 
 See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Code        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Code        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22747,11 +22872,11 @@ zend-config 2.5.x
 
 zend-config, all versions 2.5.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Config25    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Config25    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22763,11 +22888,11 @@ zend-config 2.6.x
 
 zend-config, all versions 2.6.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Config26    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Config26    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22779,11 +22904,11 @@ zend-config 3.0.x
 
 zend-config, all versions beyond 3.0.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Config30    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Config30    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22795,11 +22920,11 @@ zend-config 3.1.x
 
 zend-config, all versions beyond 3.1.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Config31    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Config31    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22815,11 +22940,11 @@ zend-console 2.5.0 has 27 classes, no traits and 6 interfaces;
 
   See also : `zend-console <https://github.com/zendframework/zend-console>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Console25   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Console25   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22835,11 +22960,11 @@ zend-console 2.6.0 has 27 classes, no traits and 6 interfaces;
 
   See also : `zend-console <https://github.com/zendframework/zend-console>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Console26   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Console26   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22855,11 +22980,11 @@ zend-console has 27 classes, no traits and 6 interfaces;
 
 See also : `zend-console <https://github.com/zendframework/zend-console>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Console     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Console     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22875,11 +23000,11 @@ zend-crypt 2.5.0 has 32 classes, no traits and 8 interfaces;
 
   See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Crypt25     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Crypt25     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22895,11 +23020,11 @@ zend-crypt 2.6.0 has 32 classes, no traits and 8 interfaces;
 
   See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Crypt26     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Crypt26     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22916,11 +23041,11 @@ zend-crypt 3.0.0 has 35 classes, no traits and 8 interfaces;
 3 new classes 
 .  See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Crypt30     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Crypt30     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22937,11 +23062,11 @@ zend-crypt 3.1.0 has 36 classes, no traits and 8 interfaces;
 1 new classe 
 .  See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Crypt31     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Crypt31     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22957,11 +23082,11 @@ zend-crypt 3.2.0 has 36 classes, no traits and 8 interfaces;
 
   See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Crypt32     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Crypt32     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22977,11 +23102,11 @@ zend-crypt has 36 classes, no traits and 8 interfaces;
 
 See also : `zend-crypt <https://github.com/zendframework/zend-crypt>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Crypt       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Crypt       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -22997,11 +23122,11 @@ zend-db 2.5.0 has 162 classes, 1 traits and 30 interfaces;
 
   See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Db25        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Db25        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23018,11 +23143,11 @@ zend-db 2.6.0 has 165 classes, 1 traits and 31 interfaces;
 3 new classes 
 .  See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Db26        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Db26        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23038,11 +23163,11 @@ zend-db 2.7.0 has 165 classes, 1 traits and 31 interfaces;
 
   See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Db27        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Db27        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23059,11 +23184,11 @@ zend-db 2.8.0 has 168 classes, 1 traits and 31 interfaces;
 3 new classes 
 .  See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Db28        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Db28        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23079,11 +23204,11 @@ zend-db has 168 classes, 1 traits and 31 interfaces;
 
 See also : `zend-db <https://github.com/zendframework/zend-db>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Db          |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Db          |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23099,11 +23224,11 @@ zend-debug 2.5.0 has 1 classes, no traits and no interfaces;
 
   See also : `zend-debug <https://github.com/zendframework/zend-debug>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Debug25     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Debug25     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23119,11 +23244,11 @@ zend-debug has 1 classes, no traits and no interfaces;
 
 See also : `zend-debug <https://github.com/zendframework/zend-debug>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Debug       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Debug       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23139,11 +23264,11 @@ zend-di 2.5.0 has 28 classes, no traits and 6 interfaces;
 
   See also : `zend-di <https://github.com/zendframework/zend-di>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Di25        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Di25        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23159,11 +23284,11 @@ zend-di 2.6.0 has 28 classes, no traits and 6 interfaces;
 
   See also : `zend-di <https://github.com/zendframework/zend-di>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Di26        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Di26        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23179,11 +23304,11 @@ zend-di has 28 classes, no traits and 6 interfaces;
 
 See also : `zend-di <https://github.com/zendframework/zend-di>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Di          |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Di          |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23199,11 +23324,11 @@ zend-dom 2.5.0 has 9 classes, no traits and 1 interfaces;
 
   See also : `zend-dom <https://github.com/zendframework/zend-dom>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Dom25       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Dom25       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23219,11 +23344,11 @@ zend-dom 2.6.0 has 9 classes, no traits and 1 interfaces;
 
   See also : `zend-dom <https://github.com/zendframework/zend-dom>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Dom26       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Dom26       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23239,11 +23364,11 @@ zend-dom has 9 classes, no traits and 1 interfaces;
 
 See also : `zend-dom <https://github.com/zendframework/zend-dom>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Dom         |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Dom         |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23259,11 +23384,11 @@ zend-escaper 2.5.0 has 3 classes, no traits and 1 interfaces;
 
   See also : `zend-escaper <https://github.com/zendframework/zend-escaper>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Escaper25   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Escaper25   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23279,11 +23404,11 @@ zend-escaper has 3 classes, no traits and 1 interfaces;
 
 See also : `zend-escaper <https://github.com/zendframework/zend-escaper>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Escaper     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Escaper     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23299,11 +23424,11 @@ zend-eventmanager 2.5.0 has 12 classes, 3 traits and 11 interfaces;
 
   See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Eventmanager25                    |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Eventmanager25                    |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -23319,11 +23444,11 @@ zend-eventmanager 2.6.0 has 12 classes, 3 traits and 12 interfaces;
 
   See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Eventmanager26                    |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Eventmanager26                    |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -23343,11 +23468,11 @@ zend-eventmanager 3.0.0 has 14 classes, 3 traits and 9 interfaces;
 , 1 removed trait 
 . See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Eventmanager30                    |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Eventmanager30                    |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -23363,11 +23488,11 @@ zend-eventmanager 3.1.0 has 14 classes, 3 traits and 9 interfaces;
 
   See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Eventmanager31                    |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Eventmanager31                    |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -23383,11 +23508,11 @@ zend-eventmanager 3.2.0 has 14 classes, 2 traits and 9 interfaces;
 
   See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-------------------------+
-| Command line | ZendF/Zf3Eventmanager32 |
-+--------------+-------------------------+
-| Themes       | :ref:`ZendFramework`    |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | ZendF/Zf3Eventmanager32 |
++------------+-------------------------+
+| Themes     | :ref:`ZendFramework`    |
++------------+-------------------------+
 
 
 
@@ -23403,11 +23528,11 @@ zend-eventmanager has 16 classes, 4 traits and 12 interfaces;
 
 See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Eventmanager                      |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Eventmanager                      |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -23423,11 +23548,11 @@ zend-feed 2.5.0 has 88 classes, no traits and 15 interfaces;
 
   See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Feed25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Feed25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23444,11 +23569,11 @@ zend-feed 2.6.0 has 93 classes, no traits and 17 interfaces;
 5 new classes 
 .  See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Feed26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Feed26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23464,11 +23589,11 @@ zend-feed 2.7.0 has 93 classes, no traits and 17 interfaces;
 
   See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Feed27      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Feed27      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23484,11 +23609,11 @@ zend-feed 2.8.0 has 93 classes, no traits and 17 interfaces;
 
   See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Feed28      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Feed28      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23504,11 +23629,11 @@ zend-feed has 93 classes, no traits and 17 interfaces;
 
 See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Feed        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Feed        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23524,11 +23649,11 @@ zend-file 2.5.0 has 14 classes, no traits and 2 interfaces;
 
   See also : `zend-file <https://github.com/zendframework/zend-file>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3File25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3File25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23544,11 +23669,11 @@ zend-file 2.6.0 has 14 classes, no traits and 2 interfaces;
 
   See also : `zend-file <https://github.com/zendframework/zend-file>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3File26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3File26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23564,11 +23689,11 @@ zend-file 2.7.0 has 14 classes, no traits and 2 interfaces;
 
   See also : `zend-file <https://github.com/zendframework/zend-file>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3File27      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3File27      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23584,11 +23709,11 @@ zend-file has 14 classes, no traits and 2 interfaces;
 
 See also : `zend-file <https://github.com/zendframework/zend-file>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3File        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3File        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23604,11 +23729,11 @@ zend-filter 2.5.0 has 73 classes, no traits and 4 interfaces;
 
   See also : `zend-filter <https://github.com/zendframework/zend-filter>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Filter25    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Filter25    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23624,11 +23749,11 @@ zend-filter 2.6.0 has 73 classes, no traits and 4 interfaces;
 
   See also : `zend-filter <https://github.com/zendframework/zend-filter>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Filter26    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Filter26    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23645,11 +23770,11 @@ zend-filter 2.7.0 has 76 classes, no traits and 4 interfaces;
 3 new classes 
 .  See also : `zend-filter <https://github.com/zendframework/zend-filter>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Filter27    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Filter27    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23665,11 +23790,11 @@ zend-filter has 76 classes, no traits and 4 interfaces;
 
 See also : `zend-filter <https://github.com/zendframework/zend-filter>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Filter      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Filter      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23685,11 +23810,11 @@ zend-form 2.5.0 has 115 classes, 2 traits and 9 interfaces;
 
   See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Form25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Form25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23705,11 +23830,11 @@ zend-form 2.6.0 has 115 classes, 2 traits and 9 interfaces;
 
   See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Form26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Form26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23726,11 +23851,11 @@ zend-form 2.7.0 has 116 classes, 2 traits and 9 interfaces;
 1 new classe 
 .  See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Form27      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Form27      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23747,11 +23872,11 @@ zend-form 2.8.0 has 120 classes, 2 traits and 9 interfaces;
 4 new classes 
 .  See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Form28      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Form28      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23770,11 +23895,11 @@ zend-form 2.9.0 has 123 classes, 3 traits and 9 interfaces;
 . 1 removed classe 
 . See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Form29      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Form29      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23790,11 +23915,11 @@ zend-form has 124 classes, 3 traits and 9 interfaces;
 
 See also : `zend-form <https://github.com/zendframework/zend-form>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Form        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Form        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23810,11 +23935,11 @@ zend-http 2.5.0 has 97 classes, no traits and 8 interfaces;
 
   See also : `zend-http <https://github.com/zendframework/zend-http>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Http25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Http25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23830,11 +23955,11 @@ zend-http 2.6.0 has 97 classes, no traits and 8 interfaces;
 
   See also : `zend-http <https://github.com/zendframework/zend-http>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Http26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Http26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23850,11 +23975,11 @@ zend-http 2.7.0 has 97 classes, no traits and 8 interfaces;
 
   See also : `zend-http <https://github.com/zendframework/zend-http>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Http27      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Http27      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23870,11 +23995,11 @@ zend-http has 97 classes, no traits and 8 interfaces;
 
 See also : `zend-http <https://github.com/zendframework/zend-http>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Http        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Http        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23890,11 +24015,11 @@ zend-i18n 2.5.0 has 40 classes, 1 traits and 5 interfaces;
 
   See also : `zend-i18n <https://github.com/zendframework/zend-i18n>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3I18n25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3I18n25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23910,11 +24035,11 @@ zend-i18n 2.6.0 has 40 classes, 1 traits and 5 interfaces;
 
   See also : `zend-i18n <https://github.com/zendframework/zend-i18n>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3I18n26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3I18n26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23931,11 +24056,11 @@ zend-i18n 2.7.0 has 43 classes, 1 traits and 5 interfaces;
 3 new classes 
 .  See also : `zend-i18n <https://github.com/zendframework/zend-i18n>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3I18n27      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3I18n27      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23951,11 +24076,11 @@ zend-i18n has 43 classes, 1 traits and 5 interfaces;
 
 See also : `zend-i18n <https://github.com/zendframework/zend-i18n>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3I18n        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3I18n        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -23971,11 +24096,11 @@ zend-i18n has 1 classe, no traits and no interfaces;
 
 See also : `zend-i18n-resources <https://github.com/zendframework/zend-i18n-resources>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-------------------------+
-| Command line | ZendF/Zf3I18n_resources |
-+--------------+-------------------------+
-| Themes       | :ref:`ZendFramework`    |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | ZendF/Zf3I18n_resources |
++------------+-------------------------+
+| Themes     | :ref:`ZendFramework`    |
++------------+-------------------------+
 
 
 
@@ -23987,11 +24112,11 @@ zend-i18n-resources 2.5.x
 
 zend-i18n-resources, all versions 2.5.x.
 
-+--------------+---------------------------+
-| Command line | ZendF/Zf3I18n_resources25 |
-+--------------+---------------------------+
-| Themes       | :ref:`ZendFramework`      |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | ZendF/Zf3I18n_resources25 |
++------------+---------------------------+
+| Themes     | :ref:`ZendFramework`      |
++------------+---------------------------+
 
 
 
@@ -24007,11 +24132,11 @@ zend-inputfilter 2.5.0 has 11 classes, 1 traits and 9 interfaces;
 
   See also : `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/Zf3Inputfilter25 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/Zf3Inputfilter25 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -24027,11 +24152,11 @@ zend-inputfilter 2.6.0 has 11 classes, 1 traits and 9 interfaces;
 
   See also : `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/Zf3Inputfilter26 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/Zf3Inputfilter26 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -24048,11 +24173,11 @@ zend-inputfilter 2.7.0 has 14 classes, 1 traits and 9 interfaces;
 3 new classes 
 .  See also : `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/Zf3Inputfilter27 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/Zf3Inputfilter27 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -24068,11 +24193,11 @@ zend-inputfilter has 14 classes, 1 traits and 9 interfaces;
 
 See also : `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Inputfilter |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Inputfilter |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24088,11 +24213,11 @@ zend-json 2.5.0 has 22 classes, no traits and 2 interfaces;
 
   See also : `zend-json <https://github.com/zendframework/zend-json>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Json25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Json25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24108,11 +24233,11 @@ zend-json 2.6.0 has 22 classes, no traits and 2 interfaces;
 
   See also : `zend-json <https://github.com/zendframework/zend-json>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Json26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Json26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24130,11 +24255,11 @@ zend-json 3.0.0 has 8 classes, no traits and 1 interfaces;
 
 See also : `zend-json <https://github.com/zendframework/zend-json>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Json30      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Json30      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24150,11 +24275,11 @@ zend-json has 22 classes, no traits and 2 interfaces;
 
 See also : `zend-json <https://github.com/zendframework/zend-json>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Json        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Json        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24170,11 +24295,11 @@ zend-loader 2.5.0 has 13 classes, no traits and 4 interfaces;
 
   See also : `zend-loader <https://github.com/zendframework/zend-loader>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Loader25    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Loader25    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24190,11 +24315,11 @@ zend-loader has 13 classes, no traits and 4 interfaces;
 
 See also : `zend-loader <https://github.com/zendframework/zend-loader>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Loader      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Loader      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24210,11 +24335,11 @@ zend-log 2.5.0 has 42 classes, 1 traits and 9 interfaces;
 
   See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Log25       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Log25       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24231,11 +24356,11 @@ zend-log 2.6.0 has 45 classes, 1 traits and 9 interfaces;
 3 new classes 
 .  See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Log26       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Log26       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24252,11 +24377,11 @@ zend-log 2.7.0 has 47 classes, 1 traits and 9 interfaces;
 2 new classes 
 .  See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Log27       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Log27       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24273,11 +24398,11 @@ zend-log 2.8.0 has 53 classes, 1 traits and 9 interfaces;
 6 new classes 
 .  See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Log28       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Log28       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24294,11 +24419,11 @@ zend-log 2.9.0 has 56 classes, 1 traits and 11 interfaces;
 3 new classes 
 .  See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Log29       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Log29       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24314,11 +24439,11 @@ zend-log has 56 classes, 1 traits and 11 interfaces;
 
 See also : `zend-log <https://github.com/zendframework/zend-log>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Log         |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Log         |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24334,11 +24459,11 @@ zend-mail 2.5.0 has 74 classes, no traits and 16 interfaces;
 
   See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mail25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mail25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24354,11 +24479,11 @@ zend-mail 2.6.0 has 74 classes, no traits and 16 interfaces;
 
   See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mail26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mail26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24375,11 +24500,11 @@ zend-mail 2.7.0 has 77 classes, no traits and 16 interfaces;
 3 new classes 
 .  See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mail27      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mail27      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24396,11 +24521,11 @@ zend-mail 2.8.0 has 77 classes, 1 traits and 16 interfaces;
 1 new trait 
 .  See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mail28      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mail28      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24416,11 +24541,11 @@ zend-mail has 77 classes, no traits and 16 interfaces;
 
 See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mail        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mail        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24436,11 +24561,11 @@ zend-math 2.5.0 has 12 classes, no traits and 3 interfaces;
 
   See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Math25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Math25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24458,11 +24583,11 @@ zend-math 2.6.0 has 11 classes, no traits and 3 interfaces;
 
 See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Math26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Math26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24478,11 +24603,11 @@ zend-math 2.7.0 has 11 classes, no traits and 3 interfaces;
 
   See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Math27      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Math27      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24500,11 +24625,11 @@ zend-math 3.0.0 has 10 classes, no traits and 3 interfaces;
 
 See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Math30      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Math30      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24520,11 +24645,11 @@ zend-math has 12 classes, no traits and 3 interfaces;
 
 See also : `zend-math <https://github.com/zendframework/zend-math>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Math        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Math        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24540,11 +24665,11 @@ zend-memory 2.5.0 has 8 classes, no traits and 2 interfaces;
 
   See also : `zend-memory <https://github.com/zendframework/zend-memory>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Memory25    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Memory25    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24560,11 +24685,11 @@ zend-memory has 8 classes, no traits and 2 interfaces;
 
 See also : `zend-memory <https://github.com/zendframework/zend-memory>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Memory      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Memory      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24580,11 +24705,11 @@ zend-mime 2.5.0 has 6 classes, no traits and 1 interfaces;
 
   See also : `zend-mime <https://github.com/zendframework/zend-mime>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mime25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mime25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24600,11 +24725,11 @@ zend-mime 2.6.0 has 6 classes, no traits and 1 interfaces;
 
   See also : `zend-mime <https://github.com/zendframework/zend-mime>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mime26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mime26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24620,11 +24745,11 @@ zend-mime has 6 classes, no traits and 1 interfaces;
 
 See also : `zend-mime <https://github.com/zendframework/zend-mime>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mime        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mime        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24640,11 +24765,11 @@ zend-modulemanager 2.5.0 has 19 classes, no traits and 27 interfaces;
 
   See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------+
-| Command line | ZendF/Zf3Modulemanager25 |
-+--------------+--------------------------+
-| Themes       | :ref:`ZendFramework`     |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | ZendF/Zf3Modulemanager25 |
++------------+--------------------------+
+| Themes     | :ref:`ZendFramework`     |
++------------+--------------------------+
 
 
 
@@ -24660,11 +24785,11 @@ zend-modulemanager 2.6.0 has 19 classes, no traits and 27 interfaces;
 
   See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------+
-| Command line | ZendF/Zf3Modulemanager26 |
-+--------------+--------------------------+
-| Themes       | :ref:`ZendFramework`     |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | ZendF/Zf3Modulemanager26 |
++------------+--------------------------+
+| Themes     | :ref:`ZendFramework`     |
++------------+--------------------------+
 
 
 
@@ -24680,11 +24805,11 @@ zend-modulemanager 2.7.0 has 19 classes, no traits and 27 interfaces;
 
   See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------+
-| Command line | ZendF/Zf3Modulemanager27 |
-+--------------+--------------------------+
-| Themes       | :ref:`ZendFramework`     |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | ZendF/Zf3Modulemanager27 |
++------------+--------------------------+
+| Themes     | :ref:`ZendFramework`     |
++------------+--------------------------+
 
 
 
@@ -24700,11 +24825,11 @@ zend-modulemanager 2.8.0 has 19 classes, no traits and 27 interfaces;
 
   See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------+
-| Command line | ZendF/Zf3Modulemanager28 |
-+--------------+--------------------------+
-| Themes       | :ref:`ZendFramework`     |
-+--------------+--------------------------+
++------------+--------------------------+
+| Short name | ZendF/Zf3Modulemanager28 |
++------------+--------------------------+
+| Themes     | :ref:`ZendFramework`     |
++------------+--------------------------+
 
 
 
@@ -24720,11 +24845,11 @@ zend-modulemanager has 19 classes, no traits and 27 interfaces;
 
 See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/Zf3Modulemanager |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/Zf3Modulemanager |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -24736,11 +24861,11 @@ zend-mvc 2.5.x
 
 zend-mvc, all versions 2.5.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mvc25       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mvc25       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24752,11 +24877,11 @@ zend-mvc 2.6.x
 
 zend-mvc, all versions 2.6.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mvc26       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mvc26       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24768,11 +24893,11 @@ zend-mvc 2.7.x
 
 zend-mvc, all versions 2.7.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mvc27       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mvc27       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24784,11 +24909,11 @@ zend-mvc 3.0.x
 
 zend-mvc, all versions 3.0.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mvc30       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mvc30       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24805,11 +24930,11 @@ zend-mvc 3.1.0 has 77 classes, 1 traits and 5 interfaces;
 5 new classes 
 .  See also : `zend-mvc <https://github.com/zendframework/zend-mvc>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mvc31       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mvc31       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24821,11 +24946,11 @@ zend-mvc Usage
 
 zend-mvc usage, based on classes, interfaces and traits. This covers all versions, from 2.5.0.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Mvc         |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Mvc         |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24841,11 +24966,11 @@ zend-navigation 2.5.0 has 14 classes, no traits and 1 interfaces;
 
   See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-----------------------+
-| Command line | ZendF/Zf3Navigation25 |
-+--------------+-----------------------+
-| Themes       | :ref:`ZendFramework`  |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | ZendF/Zf3Navigation25 |
++------------+-----------------------+
+| Themes     | :ref:`ZendFramework`  |
++------------+-----------------------+
 
 
 
@@ -24862,11 +24987,11 @@ zend-navigation 2.6.0 has 15 classes, no traits and 1 interfaces;
 1 new classe 
 .  See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-----------------------+
-| Command line | ZendF/Zf3Navigation26 |
-+--------------+-----------------------+
-| Themes       | :ref:`ZendFramework`  |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | ZendF/Zf3Navigation26 |
++------------+-----------------------+
+| Themes     | :ref:`ZendFramework`  |
++------------+-----------------------+
 
 
 
@@ -24883,11 +25008,11 @@ zend-navigation 2.7.0 has 18 classes, no traits and 1 interfaces;
 3 new classes 
 .  See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-----------------------+
-| Command line | ZendF/Zf3Navigation27 |
-+--------------+-----------------------+
-| Themes       | :ref:`ZendFramework`  |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | ZendF/Zf3Navigation27 |
++------------+-----------------------+
+| Themes     | :ref:`ZendFramework`  |
++------------+-----------------------+
 
 
 
@@ -24903,11 +25028,11 @@ zend-navigation 2.8.0 has 18 classes, no traits and 1 interfaces;
 
   See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-----------------------+
-| Command line | ZendF/Zf3Navigation28 |
-+--------------+-----------------------+
-| Themes       | :ref:`ZendFramework`  |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | ZendF/Zf3Navigation28 |
++------------+-----------------------+
+| Themes     | :ref:`ZendFramework`  |
++------------+-----------------------+
 
 
 
@@ -24923,11 +25048,11 @@ zend-navigation has 18 classes, no traits and 1 interfaces;
 
 See also : `zend-navigation <https://github.com/zendframework/zend-navigation>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Navigation  |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Navigation  |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24943,11 +25068,11 @@ zend-paginator 2.5.0 has 26 classes, no traits and 5 interfaces;
 
   See also : `zend-paginator <https://github.com/zendframework/zend-paginator>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Paginator25 |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Paginator25 |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24964,11 +25089,11 @@ zend-paginator 2.6.0 has 27 classes, no traits and 5 interfaces;
 1 new classe 
 .  See also : `zend-paginator <https://github.com/zendframework/zend-paginator>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Paginator26 |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Paginator26 |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -24985,11 +25110,11 @@ zend-paginator 2.7.0 has 31 classes, no traits and 5 interfaces;
 4 new classes 
 .  See also : `zend-paginator <https://github.com/zendframework/zend-paginator>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Paginator27 |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Paginator27 |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25005,11 +25130,11 @@ zend-paginator has 31 classes, no traits and 5 interfaces;
 
 See also : `zend-paginator <https://github.com/zendframework/zend-paginator>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Paginator   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Paginator   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25025,11 +25150,11 @@ zend-progressbar 2.5.0 has 15 classes, no traits and 3 interfaces;
 
   See also : `zend-progressbar <https://github.com/zendframework/zend-progressbar>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+------------------------+
-| Command line | ZendF/Zf3Progressbar25 |
-+--------------+------------------------+
-| Themes       | :ref:`ZendFramework`   |
-+--------------+------------------------+
++------------+------------------------+
+| Short name | ZendF/Zf3Progressbar25 |
++------------+------------------------+
+| Themes     | :ref:`ZendFramework`   |
++------------+------------------------+
 
 
 
@@ -25045,11 +25170,11 @@ zend-progressbar has 15 classes, no traits and 3 interfaces;
 
 See also : `zend-progressbar <https://github.com/zendframework/zend-progressbar>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Progressbar |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Progressbar |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25065,11 +25190,11 @@ zend-serializer 2.5.0 has 17 classes, no traits and 2 interfaces;
 
   See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-----------------------+
-| Command line | ZendF/Zf3Serializer25 |
-+--------------+-----------------------+
-| Themes       | :ref:`ZendFramework`  |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | ZendF/Zf3Serializer25 |
++------------+-----------------------+
+| Themes     | :ref:`ZendFramework`  |
++------------+-----------------------+
 
 
 
@@ -25085,11 +25210,11 @@ zend-serializer 2.6.0 has 17 classes, no traits and 2 interfaces;
 
   See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-----------------------+
-| Command line | ZendF/Zf3Serializer26 |
-+--------------+-----------------------+
-| Themes       | :ref:`ZendFramework`  |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | ZendF/Zf3Serializer26 |
++------------+-----------------------+
+| Themes     | :ref:`ZendFramework`  |
++------------+-----------------------+
 
 
 
@@ -25106,11 +25231,11 @@ zend-serializer 2.7.0 has 20 classes, no traits and 2 interfaces;
 3 new classes 
 .  See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-----------------------+
-| Command line | ZendF/Zf3Serializer27 |
-+--------------+-----------------------+
-| Themes       | :ref:`ZendFramework`  |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | ZendF/Zf3Serializer27 |
++------------+-----------------------+
+| Themes     | :ref:`ZendFramework`  |
++------------+-----------------------+
 
 
 
@@ -25126,11 +25251,11 @@ zend-serializer 2.8.0 has 20 classes, no traits and 2 interfaces;
 
   See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-----------------------+
-| Command line | ZendF/Zf3Serializer28 |
-+--------------+-----------------------+
-| Themes       | :ref:`ZendFramework`  |
-+--------------+-----------------------+
++------------+-----------------------+
+| Short name | ZendF/Zf3Serializer28 |
++------------+-----------------------+
+| Themes     | :ref:`ZendFramework`  |
++------------+-----------------------+
 
 
 
@@ -25146,11 +25271,11 @@ zend-serializer has 20 classes, no traits and 2 interfaces;
 
 See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Serializer  |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Serializer  |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25166,11 +25291,11 @@ zend-server 2.5.0 has 22 classes, no traits and 4 interfaces;
 
   See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Server25    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Server25    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25186,11 +25311,11 @@ zend-server 2.6.0 has 22 classes, no traits and 4 interfaces;
 
   See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Server26    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Server26    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25206,11 +25331,11 @@ zend-server 2.7.0 has 22 classes, no traits and 4 interfaces;
 
   See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Server27    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Server27    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25226,11 +25351,11 @@ zend-server has 22 classes, no traits and 4 interfaces;
 
 See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Server      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Server      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25246,11 +25371,11 @@ zend-servicemanager 2.5.0 has 17 classes, 2 traits and 10 interfaces;
 
   See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+---------------------------+
-| Command line | ZendF/Zf3Servicemanager25 |
-+--------------+---------------------------+
-| Themes       | :ref:`ZendFramework`      |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | ZendF/Zf3Servicemanager25 |
++------------+---------------------------+
+| Themes     | :ref:`ZendFramework`      |
++------------+---------------------------+
 
 
 
@@ -25266,11 +25391,11 @@ zend-servicemanager 2.6.0 has 17 classes, 2 traits and 10 interfaces;
 
   See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+---------------------------+
-| Command line | ZendF/Zf3Servicemanager26 |
-+--------------+---------------------------+
-| Themes       | :ref:`ZendFramework`      |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | ZendF/Zf3Servicemanager26 |
++------------+---------------------------+
+| Themes     | :ref:`ZendFramework`      |
++------------+---------------------------+
 
 
 
@@ -25287,11 +25412,11 @@ zend-servicemanager 2.7.0 has 18 classes, 2 traits and 10 interfaces;
 1 new classe 
 .  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+---------------------------+
-| Command line | ZendF/Zf3Servicemanager27 |
-+--------------+---------------------------+
-| Themes       | :ref:`ZendFramework`      |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | ZendF/Zf3Servicemanager27 |
++------------+---------------------------+
+| Themes     | :ref:`ZendFramework`      |
++------------+---------------------------+
 
 
 
@@ -25310,11 +25435,11 @@ zend-servicemanager 3.0.0 has 10 classes, no traits and 12 interfaces;
 , 2 removed traits 
 . See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+---------------------------+
-| Command line | ZendF/Zf3Servicemanager30 |
-+--------------+---------------------------+
-| Themes       | :ref:`ZendFramework`      |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | ZendF/Zf3Servicemanager30 |
++------------+---------------------------+
+| Themes     | :ref:`ZendFramework`      |
++------------+---------------------------+
 
 
 
@@ -25332,11 +25457,11 @@ zend-servicemanager 3.1.0 has 11 classes, 1 traits and 12 interfaces;
 , 1 new trait 
 .  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+---------------------------+
-| Command line | ZendF/Zf3Servicemanager31 |
-+--------------+---------------------------+
-| Themes       | :ref:`ZendFramework`      |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | ZendF/Zf3Servicemanager31 |
++------------+---------------------------+
+| Themes     | :ref:`ZendFramework`      |
++------------+---------------------------+
 
 
 
@@ -25353,11 +25478,11 @@ zend-servicemanager 3.2.0 has 17 classes, 1 traits and 12 interfaces;
 6 new classes 
 .  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+---------------------------+
-| Command line | ZendF/Zf3Servicemanager32 |
-+--------------+---------------------------+
-| Themes       | :ref:`ZendFramework`      |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | ZendF/Zf3Servicemanager32 |
++------------+---------------------------+
+| Themes     | :ref:`ZendFramework`      |
++------------+---------------------------+
 
 
 
@@ -25373,11 +25498,11 @@ zend-servicemanager 3.3.0 has 17 classes, 1 traits and 12 interfaces;
 
   See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+---------------------------+
-| Command line | ZendF/Zf3Servicemanager33 |
-+--------------+---------------------------+
-| Themes       | :ref:`ZendFramework`      |
-+--------------+---------------------------+
++------------+---------------------------+
+| Short name | ZendF/Zf3Servicemanager33 |
++------------+---------------------------+
+| Themes     | :ref:`ZendFramework`      |
++------------+---------------------------+
 
 
 
@@ -25393,11 +25518,11 @@ zend-servicemanager has 27 classes, 3 traits and 15 interfaces;
 
 See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+-------------------------+
-| Command line | ZendF/Zf3Servicemanager |
-+--------------+-------------------------+
-| Themes       | :ref:`ZendFramework`    |
-+--------------+-------------------------+
++------------+-------------------------+
+| Short name | ZendF/Zf3Servicemanager |
++------------+-------------------------+
+| Themes     | :ref:`ZendFramework`    |
++------------+-------------------------+
 
 
 
@@ -25413,11 +25538,11 @@ zend-session 2.5.0 has 26 classes, no traits and 7 interfaces;
 
   See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Session25   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Session25   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25436,11 +25561,11 @@ zend-session 2.6.0 has 27 classes, 1 traits and 7 interfaces;
 . 1 removed classe 
 . See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Session26   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Session26   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25458,11 +25583,11 @@ zend-session 2.7.0 has 31 classes, 1 traits and 7 interfaces;
 . 2 removed classes 
 . See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Session27   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Session27   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25478,11 +25603,11 @@ zend-session 2.8.0 has 31 classes, 1 traits and 7 interfaces;
 
   See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Session28   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Session28   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25498,11 +25623,11 @@ zend-session has 33 classes, 1 traits and 7 interfaces;
 
 See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Session     |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Session     |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25518,11 +25643,11 @@ zend-soap 2.5.0 has 20 classes, no traits and 3 interfaces;
 
   See also : `zend-soap <https://github.com/zendframework/zend-soap>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Soap25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Soap25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25538,11 +25663,11 @@ zend-soap 2.6.0 has 20 classes, no traits and 3 interfaces;
 
   See also : `zend-soap <https://github.com/zendframework/zend-soap>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Soap26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Soap26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25558,11 +25683,11 @@ zend-soap has 20 classes, no traits and 3 interfaces;
 
 See also : `zend-soap <https://github.com/zendframework/zend-soap>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Soap        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Soap        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25578,11 +25703,11 @@ zend-stdlib 2.5.0 has 65 classes, 5 traits and 26 interfaces;
 
   See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Stdlib25    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Stdlib25    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25599,11 +25724,11 @@ zend-stdlib 2.6.0 has 67 classes, 5 traits and 26 interfaces;
 2 new classes 
 .  See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Stdlib26    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Stdlib26    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25620,11 +25745,11 @@ zend-stdlib 2.7.0 has 68 classes, 5 traits and 26 interfaces;
 1 new classe 
 .  See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Stdlib27    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Stdlib27    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25642,11 +25767,11 @@ zend-stdlib 3.0.0 has 30 classes, 4 traits and 12 interfaces;
 
 See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Stdlib30    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Stdlib30    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25664,11 +25789,11 @@ zend-stdlib 3.1.0 has 31 classes, 4 traits and 12 interfaces;
 
 See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Stdlib31    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Stdlib31    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25684,11 +25809,11 @@ zend-stdlib has 69 classes, 5 traits and 27 interfaces;
 
 See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Stdlib      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Stdlib      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25704,11 +25829,11 @@ zend-tag 2.5.0 has 14 classes, no traits and 4 interfaces;
 
   See also : `zend-tag <https://github.com/zendframework/zend-tag>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Tag25       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Tag25       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25724,11 +25849,11 @@ zend-tag 2.6.0 has 14 classes, no traits and 4 interfaces;
 
   See also : `zend-tag <https://github.com/zendframework/zend-tag>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Tag26       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Tag26       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25744,11 +25869,11 @@ zend-tag has 14 classes, no traits and 4 interfaces;
 
 See also : `zend-tag <https://github.com/zendframework/zend-tag>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Tag         |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Tag         |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25764,11 +25889,11 @@ zend-test 2.5.0 has 4 classes, no traits and no interfaces;
 
   See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Test25                            |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Test25                            |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -25784,11 +25909,11 @@ zend-test 2.6.0 has 4 classes, no traits and no interfaces;
 
   See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Test26                            |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Test26                            |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -25804,11 +25929,11 @@ zend-test 3.0.0 has 4 classes, no traits and no interfaces;
 
   See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Test30                            |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Test30                            |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -25824,11 +25949,11 @@ zend-test 3.1.0 has 4 classes, no traits and no interfaces;
 
   See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Test31      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Test31      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25844,11 +25969,11 @@ zend-test has 4 classes, no traits and no interfaces;
 
 See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+--------------------------------------------+
-| Command line | ZendF/Zf3Test                              |
-+--------------+--------------------------------------------+
-| Themes       | :ref:`ZendFramework`, :ref:`ZendFramework` |
-+--------------+--------------------------------------------+
++------------+--------------------------------------------+
+| Short name | ZendF/Zf3Test                              |
++------------+--------------------------------------------+
+| Themes     | :ref:`ZendFramework`, :ref:`ZendFramework` |
++------------+--------------------------------------------+
 
 
 
@@ -25864,11 +25989,11 @@ zend-text 2.5.0 has 22 classes, no traits and 4 interfaces;
 
   See also : `zend-text <https://github.com/zendframework/zend-text>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Text25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Text25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25884,11 +26009,11 @@ zend-text 2.6.0 has 22 classes, no traits and 4 interfaces;
 
   See also : `zend-text <https://github.com/zendframework/zend-text>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Text26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Text26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25904,11 +26029,11 @@ zend-text has 22 classes, no traits and 4 interfaces;
 
 See also : `zend-text <https://github.com/zendframework/zend-text>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Text        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Text        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25920,11 +26045,11 @@ zend-uri
 
 zend-uri, all versions beyond 2.5.0.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Uri         |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Uri         |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25936,11 +26061,11 @@ zend-uri 2.5.x
 
 zend-uri, all versions 2.5.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Uri25       |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Uri25       |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25952,11 +26077,11 @@ zend-validator 2.6.x
 
 zend-validator, all versions 2.6.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Validator26 |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Validator26 |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25968,11 +26093,11 @@ zend-validator 2.7.x
 
 zend-validator, all versions 2.7.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Validator27 |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Validator27 |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -25984,11 +26109,11 @@ zend-validator 2.8.x
 
 zend-validator, all versions 2.8.x.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Validator28 |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Validator28 |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26004,11 +26129,11 @@ zend-validator 2.9.0 has 104 classes, no traits and 7 interfaces;
 
   See also : `zend-validator <https://github.com/zendframework/zend-validator>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Validator29 |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Validator29 |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26020,11 +26145,11 @@ zend-validator Usage
 
 zend-validator, all versions beyond 2.5.0.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Validator   |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Validator   |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26036,11 +26161,11 @@ zend-view 2.5.0 Undefined Classes
 
 zend-view classes, interfaces and traits that are not defined in version 2.5.0.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3View25      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3View25      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26052,11 +26177,11 @@ zend-view 2.6.0 Undefined Classes
 
 zend-view classes, interfaces and traits that are not defined in version 2.6.0.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3View26      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3View26      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26069,11 +26194,11 @@ zend-view 2.7.0 Undefined Classes
 zend-view classes, interfaces and traits that are not defined in version 2.7.0.
 1 new trait
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3View27      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3View27      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26085,11 +26210,11 @@ zend-view 2.8.0 Undefined Classes
 
 zend-view classes, interfaces and traits that are not defined in version 2.8.0.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3View28      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3View28      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26102,11 +26227,11 @@ zend-view 2.9.0 Undefined Classes
 zend-view classes, interfaces and traits that are not defined in version 2.9.0.
 2 new classes
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3View29      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3View29      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26118,11 +26243,11 @@ zend-view Usage
 
 zend-view usage, based on classes, interfaces and traits. This covers all versions, from 2.5.0.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3View        |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3View        |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26138,11 +26263,11 @@ zend-xmlrpc 2.5.0 has 41 classes, no traits and 4 interfaces;
 
   See also : `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Xmlrpc25    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Xmlrpc25    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26158,11 +26283,11 @@ zend-xmlrpc 2.6.0 has 41 classes, no traits and 4 interfaces;
 
   See also : `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Xmlrpc26    |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Xmlrpc26    |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 
@@ -26178,11 +26303,11 @@ zend-xmlrpc has 41 classes, no traits and 4 interfaces;
 
 See also : `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command line | ZendF/Zf3Xmlrpc      |
-+--------------+----------------------+
-| Themes       | :ref:`ZendFramework` |
-+--------------+----------------------+
++------------+----------------------+
+| Short name | ZendF/Zf3Xmlrpc      |
++------------+----------------------+
+| Themes     | :ref:`ZendFramework` |
++------------+----------------------+
 
 
 

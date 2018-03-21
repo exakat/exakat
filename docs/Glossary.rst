@@ -183,6 +183,10 @@ Glossary
       + :ref:`Can't Count Non-Countable <can't-count-non-countable>`
       + :ref:`Uses Default Values <uses-default-values>`
 
+    + `chr()`
+
+      + :ref:`Should Preprocess Chr <should-preprocess-chr>`
+
     + `closure`
 
       + :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`

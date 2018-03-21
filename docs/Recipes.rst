@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Wed, 14 Mar 2018 17:41:12 +0000
-.. comment: Generation hash : b13dd6ac82b89205234ce9bbfee3b412836d2215
+.. comment: Generation date : Wed, 21 Mar 2018 21:46:28 +0000
+.. comment: Generation hash : 2d949fc59a9a92f4d7fc459a68716f2fe99d813b
 
 
 .. _analyze:
@@ -276,7 +276,6 @@ Total : 343 analysis
 * :ref:`Phpinfo`
 * :ref:`Possible Infinite Loop <possible-infinite-loop>`
 * :ref:`Pre-increment`
-* :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Preprocessable`
 * :ref:`Print And Die <print-and-die>`
 * :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
@@ -333,6 +332,7 @@ Total : 343 analysis
 * :ref:`Too Many Finds <too-many-finds>`
 * :ref:`Too Many Injections <too-many-injections>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
+* :ref:`Too Many Native Calls <too-many-native-calls>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
 * :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
@@ -984,7 +984,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 45 analysis
+Total : 48 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Already Parents Interface <already-parents-interface>`
@@ -1009,9 +1009,11 @@ Total : 45 analysis
 * :ref:`Overwritten Exceptions <overwritten-exceptions>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Parent First <parent-first>`
+* :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Reuse Variable <reuse-variable>`
+* :ref:`Should Preprocess Chr <should-preprocess-chr>`
 * :ref:`Should Use Coalesce <should-use-coalesce>`
 * :ref:`Should Use Foreach <should-use-foreach>`
 * :ref:`Should Use Math <should-use-math>`
@@ -1021,6 +1023,7 @@ Total : 45 analysis
 * :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 * :ref:`Structures/CouldUseArrayFillKeys`
 * :ref:`Substring First <substring-first>`
+* :ref:`Too Many Parameters <too-many-parameters>`
 * :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unused Interfaces <unused-interfaces>`

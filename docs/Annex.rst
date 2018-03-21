@@ -80,6 +80,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Owasp
   * PhpConfiguration
   * PhpCompilation
+  * Favorites
   * Inventories
   * Clustergrammer
   * FileDependencies
@@ -345,10 +346,18 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.1.10
+
+  * nativeCallCounts (Php/TooManyNativeCalls)
+
+* 1.1.9
+
+  * Should Preprocess Chr (Php/ShouldPreprocess ; Suggestions)
+  * parametersCount (Functions/TooManyParameters)
+
 * 1.1.8
 
   * Mass Creation Of Arrays (Arrays/MassCreation)
-  * Php/TooManyNativeCalls (Php/TooManyNativeCalls ; Unassigned)
   * Structures/ConstantPreferences (Structures/ConstantPreferences ; Under Work)
   * ext/db2 (Extensions/Extdb2 ; Appinfo)
 
@@ -1471,7 +1480,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Php7 Relaxed Keyword (Php/Php7RelaxedKeyword ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Phpinfo (Structures/PhpinfoUsage ; Analyze, Security, OneFile, Codacy, Simple)
   * Pre-increment (Performances/PrePostIncrement ; Analyze, Performances, Codacy, Simple, Level 4)
-  * Preprocess Arrays (Arrays/ShouldPreprocess ; Analyze, Codacy, Simple)
+  * Preprocess Arrays (Arrays/ShouldPreprocess ; Suggestions)
   * Preprocessable (Structures/ShouldPreprocess ; Analyze, Codacy)
   * Print And Die (Structures/PrintAndDie ; Analyze, Codacy, Simple)
   * Property Could Be Private Property (Classes/CouldBePrivate ; Analyze, Codacy)
@@ -1983,6 +1992,7 @@ List of external links mentionned in this documentation.
 * `empty() <http://www.php.net/manual/en/function.empty.php>`_
 * `Enchant spelling library <http://php.net/manual/en/book.enchant.php>`_
 * `Ereg <http://php.net/manual/en/function.ereg.php>`_
+* `Escape sequences <http://php.net/manual/en/regexp.reference.escape.php>`_
 * `Ev <http://php.net/manual/en/book.ev.php>`_
 * `Event <http://php.net/event>`_
 * `Exakat <http://www.exakat.io/>`_
@@ -2084,8 +2094,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
