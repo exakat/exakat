@@ -135,7 +135,7 @@ abstract class Analyzer {
                     if (isset($this->config->{$this->analyzerQuoted}[$parameter['name']])) {
                         $this->{$parameter['name']} = $this->config->{$this->analyzerQuoted}[$parameter['name']];
                     } else {
-                        $this->{$parameter['name']} = $this->{$parameter['default']};
+                        $this->{$parameter['name']} = $parameter['default'];
                     }
                     
                     if ($parameter['type'] === 'integer') {
