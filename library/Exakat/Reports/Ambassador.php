@@ -1605,7 +1605,7 @@ SQL;
     }
     
     private function generateNoIssues() {
-        $list = array_merge($this->themes->getThemeAnalyzers('Analysis'),
+        $list = array_merge($this->themes->getThemeAnalyzers('Analyze'),
                             $this->themes->getThemeAnalyzers('Security'),
                             $this->themes->getThemeAnalyzers('Performances'),
                             $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
