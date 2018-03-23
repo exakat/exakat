@@ -45,18 +45,27 @@ class Themes {
     }
     
     public function getThemeAnalyzers($theme = null) {
+        $all = $this->listAllThemes();
+
         if (is_array($theme)) {
             $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
             $where = 'WHERE c.name in ("'.implode('", "', $theme).'")';
         } elseif ($theme === null) {
             // Default is ALL of them
             $where = '';
-        } else {
+        } elseif ($theme === 'Random') {
+            shuffle($all);
+            $theme = $all[0];
+            display("Random theme is : $theme");
             $where = 'WHERE c.name = "'.trim($theme, '"').'"';
+        } elseif (in_array($theme, $all)) {
+            $where = 'WHERE c.name = "'.trim($theme, '"').'"';
+        } else {
+            throw new NoSuchThema($theme);
         }
 
         $query = <<<SQL
-        SELECT DISTINCT a.folder, a.name FROM analyzers AS a
+SELECT DISTINCT a.folder, a.name FROM analyzers AS a
     JOIN analyzers_categories AS ac
         ON ac.id_analyzer = a.id
     JOIN categories AS c
