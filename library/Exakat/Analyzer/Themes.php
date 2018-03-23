@@ -23,6 +23,8 @@
 
 namespace Exakat\Analyzer;
 
+use Exakat\Exceptions\NoSuchThema;
+
 class Themes {
     private static $sqlite = null;
     private $phar_tmp = null;
