@@ -58,6 +58,9 @@ class Themes {
         } elseif ($theme === 'Random') {
             shuffle($all);
             $theme = $all[0];
+            if ($theme === 'Random') {
+                $theme = $all[1];
+            }
             display("Random theme is : $theme");
             $where = 'WHERE c.name = "'.trim($theme, '"').'"';
         } elseif (in_array($theme, $all)) {
