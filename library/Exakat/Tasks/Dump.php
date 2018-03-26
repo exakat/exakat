@@ -111,9 +111,9 @@ SQL;
             $this->sqlite->query($query);
 
             $query = <<<SQL
-CREATE TABLE hashResults ( id INTEGER PRIMARY KEY,
+CREATE TABLE hashResults ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                             name TEXT,
-                            key TEXT UNIQUE,
+                            key TEXT,
                             value TEXT
                           );
 SQL;
@@ -137,9 +137,11 @@ SQL;
             $this->collectVariables();
             $this->collectLiterals();
             $this->collectReadability();
-            $this->collectParameterCounts();
 
-            display('Collecting data finished');
+            $this->collectParameterCounts();
+            $this->collectMethodsCounts();
+            $this->collectPropertyCounts();
+            $this->collectConstantCounts();
         }
 
         $themes = array();
@@ -1314,16 +1316,13 @@ GREMLIN;
         }
         display(count($statics)." static calls CPM");
     }
-    
-    private function collectParameterCounts() {
-        $query = <<<GREMLIN
-g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by('count').cap('m'); 
-GREMLIN;
+
+    private function collectHashCounts($query, $name) {
         $index = $this->gremlin->query($query);
         
         $values = array();
         foreach($index->toArray()[0] as $number => $count) {
-            $values[] = "('ParameterCounts', $number, $count) ";
+            $values[] = "('$name', $number, $count) ";
         }
         
         if (!empty($values)) {
@@ -1331,7 +1330,35 @@ GREMLIN;
             $this->sqlite->query($query);
         }
 
-        display( count($values).' parameter counts');
+        display( $name." : ".count($values));
+    }
+    
+    private function collectParameterCounts() {
+        $query = <<<GREMLIN
+g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by('count').cap('m'); 
+GREMLIN;
+        $this->collectHashCounts($query, 'ParameterCounts');
+    }
+
+    private function collectMethodsCounts() {
+        $query = <<<GREMLIN
+g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount('m').by( __.out("METHOD", "MAGICMETHOD").count() ).cap('m'); 
+GREMLIN;
+        $this->collectHashCounts($query, 'ParameterCounts');
+    }
+
+    private function collectPropertyCounts() {
+        $query = <<<GREMLIN
+g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount('m').by( __.out("PPP").out("PPP").count() ).cap('m'); 
+GREMLIN;
+        $this->collectHashCounts($query, 'ClassPropertyCounts');
+    }
+
+    private function collectConstantCounts() {
+        $query = <<<GREMLIN
+g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount('m').by( __.out("CONST").out("CONST").count() ).cap('m'); 
+GREMLIN;
+        $this->collectHashCounts($query, 'ClassConstantCounts');
     }
 
     private function collectReadability() {
