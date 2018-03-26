@@ -29,6 +29,7 @@ use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Helpers\Results;
 use Exakat\Reports\Reports;
+use Exakat\Vcs\Vcs;
 
 class Ambassador extends Reports {
     const FILE_FILENAME  = 'report';
@@ -2029,32 +2030,14 @@ SQL;
     }
 
     protected function generateSettings() {
-        $info = array(array('Code name', $this->config->project_name));
+        $info = array(array('Project name', $this->config->project_name));
         if (!empty($this->config->project_description)) {
             $info[] = array('Code description', $this->config->project_description);
         }
         if (!empty($this->config->project_packagist)) {
             $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
         }
-        if (!empty($this->config->project_url)) {
-            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
-        }
-        $vcs_type = $this->datastore->gethash('vcs_type');
-        if ($vcs_type === 'git') {
-            $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
-
-            $res = $this->datastore->gethash('vcs_branch');
-            if (!empty($res)) { 
-                $info[] = array('Git branch', trim($res));
-            }
-
-            $res = $this->datastore->gethash('vcs_revision');
-            if (!empty($res)) { 
-                $info[] = array('Git commit', trim($res));
-            }
-        } else {
-            $info[] = array('Repository URL', 'Downloaded archive');
-        }
+        $info = array_merge($info, $this->getVCSInfo());
 
         $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
         $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
@@ -2347,7 +2330,7 @@ SQL;
                 }
             }
         }
-
+        
         $table = '';
         $titles = "<tr><th>Version</th><th>Name</th><th>".implode('</th><th>', array_keys(array_values($data2)[0]) )."</th></tr>";
         $data = array_merge($data, $data2);
@@ -3719,6 +3702,64 @@ HTML;
             $audit_date .= ' - &quot;'.$audit_name.'&quot;';
         }
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
+    }
+    
+    protected function getVCSInfo() {
+        $info = array();
+
+        $vcsClass = Vcs::getVCS($this->config);
+        switch($vcsClass) {
+            case 'Git': 
+                $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
+
+                $res = $this->datastore->gethash('vcs_branch');
+                if (!empty($res)) { 
+                    $info[] = array('Git branch', trim($res));
+                }
+
+                $res = $this->datastore->gethash('vcs_revision');
+                if (!empty($res)) { 
+                    $info[] = array('Git commit', trim($res));
+                }
+                break 1;
+
+            case 'Svn': 
+                $info[] = array('SVN URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Bazaar': 
+                $info[] = array('Bazaar URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Composer': 
+                $info[] = array('Package', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Mercurial': 
+                $info[] = array('Hg URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Copy': 
+                $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Symlink': 
+                $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Tarbz': 
+                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Targz': 
+                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+            
+            default : 
+                $info[] = array('Repository URL', 'Downloaded archive');
+        }
+        
+        return $info;
     }
 }
 
