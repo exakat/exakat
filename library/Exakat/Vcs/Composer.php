@@ -67,6 +67,21 @@ class Composer extends Vcs {
         return $return;
     }
 
+    public function getInstallationInfo() {
+        $stats = array();
+
+        $res = trim(shell_exec('composer -V 2>&1'));
+        // remove colors from shell syntax
+        $res = preg_replace('/\e\[[\d;]*m/', '', $res);
+        if (preg_match('/Composer version ([0-9\.a-z@_\(\)\-]+) /', $res, $r)) {//
+            $stats['installed'] = 'Yes';
+            $stats['version'] = $r[1];
+        } else {
+            $stats['installed'] = 'No';
+        }
+        
+        return $stats;
+    }
 }
 
 ?>

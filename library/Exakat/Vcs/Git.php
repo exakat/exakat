@@ -120,6 +120,19 @@ class Git extends Vcs {
         $res = shell_exec('cd '.$this->destinationFull.'/code/; git rev-parse HEAD');
         return trim($res);
     }
+    
+    public function getInstallationInfo() {
+        $res = trim(shell_exec('git --version 2>&1'));
+        if (preg_match('/git version ([0-9\.]+)/', $res, $r)) {//
+            $stats['installed'] = 'Yes';
+            $stats['version'] = $r[1];
+        } else {
+            $stats['installed'] = 'No';
+            $stats['optional'] = 'Yes';
+        }
+        
+        return $stats;
+    }
 }
 
 ?>

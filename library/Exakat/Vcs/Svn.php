@@ -88,6 +88,20 @@ class Svn extends Vcs {
         return $this->info['Revision'] ?? 'No Revision';
     }
 
+    public function getInstallationInfo() {
+        $stats = array();
+
+        $res = trim(shell_exec('svn --version 2>&1'));
+        if (preg_match('/svn, version ([0-9\.]+) /', $res, $r)) {//
+            $stats['installed'] = 'Yes';
+            $stats['version'] = $r[1];
+        } else {
+            $stats['installed'] = 'No';
+            $stats['optional'] = 'Yes';
+        }
+        
+        return $stats;
+    }
 }
 
 ?>

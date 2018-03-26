@@ -46,6 +46,20 @@ class Bazaar extends Vcs {
         return $r[1];
     }
 
+    public function getInstallationInfo() {
+        $stats = array();
+
+        $res = trim(shell_exec('bzr --version 2>&1'));
+        if (preg_match('/Bazaar \(bzr\) ([0-9\.]+) /', $res, $r)) {//
+            $stats['installed'] = 'Yes';
+            $stats['version'] = $r[1];
+        } else {
+            $stats['installed'] = 'No';
+            $stats['optional'] = 'Yes';
+        }
+        
+        return $stats;
+    }
 }
 
 ?>
