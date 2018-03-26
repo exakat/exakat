@@ -48,18 +48,16 @@ class CommandLine extends Config {
                                  '-collect'   => 'collect',
 
     // Vcs
-                                 '-git'       => 'git',
                                  '-svn'       => 'svn',
                                  '-bzr'       => 'bzr',
                                  '-hg'        => 'hg',
                                  '-composer'  => 'composer',
                                  '-copy'      => 'copy',    // Copy the local dir
                                  '-symlink'   => 'symlink', // make a symlink
-
-    // Archive formats
                                  '-tgz'       => 'tgz',
                                  '-tbz'       => 'tbz',
                                  '-zip'       => 'zip',
+                                 '-git'       => 'git',
                                  );
 
     private $valueOptions   = array('-f'            => 'filename',
@@ -72,9 +70,6 @@ class CommandLine extends Config {
                                     '-format'       => 'format',
                                     '-file'         => 'file',
                                     '-style'        => 'style',
-                                    '-neo4j_host'   => 'neo4j_host',
-                                    '-neo4j_port'   => 'neo4j_port',
-                                    '-neo4j_folder' => 'neo4j_folder',
                                     '-token_limit'  => 'token_limit',
                                     '-branch'       => 'branch',
                                     '-tag'          => 'tag',
@@ -125,16 +120,22 @@ class CommandLine extends Config {
             return false;
         }
 
+        $vcsList = array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip');
         foreach($this->booleanOptions as $key => $config) {
             $id = array_search($key, $args);
             if ($id !== false) {
+                // git is default, so it should be unset if another is set
+                if (in_array($config, $vcsList)) {
+                    foreach($vcsList as $vcs) {
+                        $this->config[$vcs] = false;
+                    }
+                }
                 $this->config[$config] = true;
 
                 unset($args[$id]);
             }
         }
 
-        // git is default, so it should be unset if another is set
 
         foreach($this->valueOptions as $key => $config) {
             while( ($id = array_search($key, $args)) !== false ) {
