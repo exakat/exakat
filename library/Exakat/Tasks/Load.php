@@ -893,7 +893,7 @@ SQL;
         
         ++$this->id;
         $string->code        = $this->tokens[$current][1];
-        print $string->fullcode    = $string->binaryString.$openQuote.implode('', $fullcode).$closeQuote;
+        $string->fullcode    = $string->binaryString.$openQuote.implode('', $fullcode).$closeQuote;
         $string->line        = $this->tokens[$current][2];
         $string->token       = $this->getToken($this->tokens[$current][0]);
         $string->count       = $rank + 1;
@@ -904,7 +904,6 @@ SQL;
         }
 
         $this->runPlugins($string, $elements);
-        print_r($string);
 
         $this->pushExpression($string);
 
