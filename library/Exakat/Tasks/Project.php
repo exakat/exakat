@@ -199,10 +199,8 @@ class Project extends Tasks {
                 $report = new Report2($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
                 $report->run();
                 unset($report);
-            } catch (\Exception $e) {
-                echo "Error while building $format in $format ".PHP_EOL,
-                     $e->getMessage(),
-                     PHP_EOL."Trying next report".PHP_EOL;
+            } catch (Throwable $e) {
+                echo "Error while building $format in $format.\nTrying next report\n";
             }
             unset($reportConfig);
         }
@@ -291,9 +289,7 @@ class Project extends Tasks {
             unset($dumpConfig);
 
         } catch (\Exception $e) {
-            echo "Error while running the Analyzer {$this->config->project} ".PHP_EOL,
-                 $e->getMessage(),
-                 PHP_EOL."Trying next analysis".PHP_EOL;
+            echo "Error while running the Analyzer {$this->config->project}.\nTrying next analysis.\n";
             file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.final.log', $e->getMessage());
         }
     }
@@ -384,9 +380,7 @@ class Project extends Tasks {
                 unset($dump);
                 unset($dumpConfig);
             } catch (\Exception $e) {
-                echo "Error while running the Analyze $theme ".PHP_EOL,
-                     $e->getMessage(),
-                     PHP_EOL."Trying next analysis".PHP_EOL;
+                echo "Error while running the Analyze $theme.\nTrying next analysis.\n";
                 file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
             }
         }

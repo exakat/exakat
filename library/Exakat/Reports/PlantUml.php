@@ -54,10 +54,9 @@ SQL
 
             $methods = $row['methods'];
             $methods = str_replace(' { /**/ } ' ,'', $methods);
-            $methods = preg_replace('/public /is' ,   '+', $methods);
-            $methods = preg_replace('/protected /is' ,'#', $methods);
-            $methods = preg_replace('/private /is' ,  '-', $methods);
-            $methods = preg_replace('/(static|abstract) /is' ,  '{\1}', $methods);
+            $methods = preg_replace(array('/public /is', '/protected /is', '/private /is', '/(static|abstract) /is', ), 
+                                    array('+',           '#',              '-',            '{\1}',                   ), 
+                                    $methods);
             
             if ($row['type'] == 'class' || $row['type'] === 'interface') {
                 $type = $row['type'];
@@ -66,10 +65,9 @@ SQL
             }
 
             $properties = $row['properties'];
-            $properties = preg_replace('/public /is' ,   '+', $properties);
-            $properties = preg_replace('/protected /is' ,'#', $properties);
-            $properties = preg_replace('/private /is' ,  '-', $properties);
-            $properties = preg_replace('/(static|abstract) /is' ,  '{\1}', $properties);
+            $properties = preg_replace(array('/public /is', '/protected /is', '/private /is', '/(static|abstract) /is', ), 
+                                       array('+',           '#',              '-',            '{\1}',                   ), 
+                                       $properties);
 
             if ((int) $row['extends']) {
                 $extends[$id] =  $row['extends'];

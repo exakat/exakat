@@ -117,7 +117,7 @@ abstract class Analyzer {
         $this->gremlin = $gremlin;
         
         $this->analyzer = get_class($this);
-        $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
+        $this->analyzerQuoted = $this->getName($this->analyzer);
 
         $this->code = $this->analyzer;
         
@@ -165,7 +165,7 @@ abstract class Analyzer {
         if ($this->analyzer === false) {
             throw new NoSuchAnalyzer($analyzer, $this->themes);
         }
-        $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
+        $this->analyzerQuoted = $this->getName($this->analyzer);
     }
     
     public function getInBaseName() {
@@ -1982,10 +1982,6 @@ GREMLIN;
 
     public function getphpConfiguration() {
         return $this->phpConfiguration;
-    }
-    
-    public function makeFullNsPath($functions, $constant = false) {
-        debug_print_backtrace();die();
     }
     
     private function tolowercase(&$code) {
