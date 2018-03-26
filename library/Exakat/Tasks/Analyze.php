@@ -120,6 +120,12 @@ class Analyze extends Tasks {
 
         $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
 
+        $lock = fopen($this->config->dir_root.'/library/Exakat/Analyzer/'.$analyzer_class.'.php', 'r');
+        if (!flock($lock, LOCK_EX | LOCK_NB)) {
+            display(" Concurency lock activated for $analyzer_class \n");
+            return false; 
+        }
+        
         if (!(!isset($this->analyzed[$analyzer_class]) || 
               $this->config->noRefresh !== true)
             ) {
