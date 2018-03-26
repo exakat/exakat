@@ -123,9 +123,11 @@ class Strval extends Plugin {
                 }
                 break;
 
+            case 'Heredoc' :
             case 'Concatenation' :
                 $noDelimiters = array_column($extras, 'noDelimiter');
                 $atom->noDelimiter = (string) implode('', $noDelimiters);
+                
                 break;
 
             case 'Ternary' :
