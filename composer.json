@@ -24,7 +24,7 @@
         "ext-sqlite3": "*",
         "ext-curl": "*",
         "ext-mbstring": "*",
-        "guiguiboy/php-cli-progress-bar":"dev-master@dev",
+        "guiguiboy/php-cli-progress-bar":"0.0.4",
         "brightzone/gremlin-php": "3.0.2"
     },
     "require-dev": {
@@ -32,6 +32,7 @@
         "phpunit/phpunit": "^5.7.9",
         "jakub-onderka/php-parallel-lint": "^0.9.2",
         "consolidation/robo": "0.7.1",
-        "friendsofphp/php-cs-fixer":"^2.10.3"
+        "friendsofphp/php-cs-fixer":"^2.10.3",
+        "vimeo/psalm":"^1.0.3"
     }
 }
