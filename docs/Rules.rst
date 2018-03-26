@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 21 Mar 2018 21:46:28 +0000
-.. comment: Generation hash : 2d949fc59a9a92f4d7fc459a68716f2fe99d813b
+.. comment: Generation date : Mon, 26 Mar 2018 08:47:25 +0000
+.. comment: Generation hash : 4840fd30330e771dba717272158653284391894b
 
 
 .. _$http\_raw\_post\_data:
@@ -202,7 +202,7 @@ See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_.
 ###############
 
 
-PHP 5.6 introduced the operator `'** <http://php.net/manual/en/language.operators.arithmetic.php>`_ to provide exponents, instead of the slower function `'pow() <http://www.php.net/pow>`_.
+PHP has the operator `'** <http://php.net/manual/en/language.operators.arithmetic.php>`_ to provide exponents, instead of the slower function `'pow() <http://www.php.net/pow>`_. This operator was introduced in PHP 5.6.
 
 .. code-block:: php
 
@@ -334,6 +334,19 @@ Access Protected Structures
 
 It is not allowed to access protected properties or methods from outside the class or its relatives.
 
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       protected $bar = 1;
+   }
+   
+   $foo = new Foo();
+   $foo->bar = 2;
+   
+   ?>
+
 +------------+-------------------------+
 | Short name | Classes/AccessProtected |
 +------------+-------------------------+
@@ -462,6 +475,8 @@ If it is used to type cast a value to integer, then casting (integer) is clearer
 | Themes     | :ref:`Analyze`                                                                                |
 +------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
++------------+-----------------------------------------------------------------------------------------------+
+| Examples   | :ref:`thelia-structures-addzero`, :ref:`openemr-structures-addzero`                           |
 +------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -3886,7 +3901,7 @@ Could Use str_repeat()
 
 Use `'str_repeat() <http://www.php.net/str_repeat>`_ or `'str_pad() <http://www.php.net/str_pad>`_ instead of making a loop.
 
-Making a loop to repeat the same concatenation is actually much longer than using `'str_repeat() <http://www.php.net/str_repeat>`_. As soon as the loop repeats more than twice, `'str_repeat() <http://www.php.net/str_repeat>`_ is much faster. With arrays of 30, the difference is significative, though the whole operation is short by itself. 
+Making a loop to repeat the same concatenation is actually much longer than using `'str_repeat() <http://www.php.net/str_repeat>`_. As soon as the loop repeats more than twice, `'str_repeat() <http://www.php.net/str_repeat>`_ is much faster. With arrays of 30, the difference is significant, though the whole operation is short by itself. 
 
 .. code-block:: php
 
@@ -5271,7 +5286,7 @@ Error Messages
 
 Error message when an error is reported in the code. Those messages will be read by whoever is triggering the error, and it has to be helpful. 
 
-It is a good exercice to read the messages out of context, and try to understand what is about.
+It is a good exercise to read the messages out of context, and try to understand what is about.
 
 .. code-block:: php
 
@@ -6176,7 +6191,23 @@ Global Usage
 
 List usage of globals variables, with global keywords or direct access to $GLOBALS.
 
-It is recommended to avoid using global variables, at it makes it very difficult to track changes in values across the whole application.
+.. code-block:: php
+
+   <?php
+   $a = 1; /* global scope */ 
+   
+   function test()
+   { 
+       echo $a; /* reference to local scope variable */ 
+   } 
+   
+   test();
+   
+   ?>
+
+It is recommended to avoid using global variables, at it makes it very difficult to track changes in values across the whole application. 
+
+See also `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_.
 
 +------------+-----------------------------------------------------------------------------------+
 | Short name | Structures/GlobalUsage                                                            |
@@ -6617,11 +6648,13 @@ This means those expressions may be simplified.
    
    ?>
 
-+------------+--------------------------------+
-| Short name | Structures/IdenticalConditions |
-+------------+--------------------------------+
-| Themes     | :ref:`Analyze`                 |
-+------------+--------------------------------+
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/IdenticalConditions                                                                                                                |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                                                                |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`wordpress-structures-identicalconditions`, :ref:`dolibarr-structures-identicalconditions`, :ref:`mautic-structures-identicalconditions` |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7047,7 +7080,7 @@ Indices Are Int Or String
 #########################
 
 
-Indices in an array notation such as $array['indice'] may only be integers or string.
+Indices in an array notation such as `$array['indice']` may only be integers or string.
 
 Boolean, Null or float will be converted to their integer or string equivalent.
 
@@ -7837,6 +7870,20 @@ Logical Should Use Symbolic Operators
 
 Logical operators come in two flavors :  and / &&, || / or, ^ / xor. However, they are not exchangeable, as && and and have different precedence. 
 
+.. code-block:: php
+
+   <?php
+   
+   // Avoid lettered operator, as they have lower priority than expected
+   $a = $b and $c;
+   // $a === 3
+   
+   $a = $b && $c;
+   // $a === 1
+   
+   ?>
+
+
 It is recommended to use the symbol operators, rather than the letter ones.
 
 +------------+---------------------------------------------------------------------------------------------------+
@@ -7845,6 +7892,8 @@ It is recommended to use the symbol operators, rather than the letter ones.
 | Themes     | :ref:`Analyze`, :ref:`Suggestions`                                                                |
 +------------+---------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-letter-logical <https://github.com/dseguy/clearPHP/tree/master/rules/no-letter-logical.md>`__ |
++------------+---------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`cleverstyle-php-logicalinletters`, :ref:`openconf-php-logicalinletters`                     |
 +------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -8835,7 +8884,21 @@ It is regarded as a bad practice to cram more than one class per file. This is u
 
 It is often difficult to find class foo in the bar.php file. This is also the case for interfaces and traits.
 
-One good reason to have multiple classes in one file is to reduce include time by providing everything into one nice include.
+.. code-block:: php
+
+   <?php
+   
+   // three classes in the same file
+   class foo {}
+   class bar {}
+   class foobar{}
+   
+   ?>
+
+
+One good reason to have multiple classes in one file is to reduce include time by providing everything into one nice include. 
+
+See also `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
 
 +------------+------------------------------------------------+
 | Short name | Classes/MultipleClassesInFile                  |
@@ -9627,11 +9690,13 @@ Avoid using '+1 month', and rely on 'first day of next month' or 'last day of ne
 
 See also `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_.
 
-+------------+--------------------------+
-| Short name | Structures/NextMonthTrap |
-+------------+--------------------------+
-| Themes     | :ref:`Analyze`           |
-+------------+--------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Structures/NextMonthTrap                                                        |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                  |
++------------+---------------------------------------------------------------------------------+
+| Examples   | :ref:`contao-structures-nextmonthtrap`, :ref:`edusoho-structures-nextmonthtrap` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -13613,7 +13678,26 @@ Return With Parenthesis
 #######################
 
 
-PHP tolerates parenthesis for the argument of a return statement, but it is recommended not to use them.
+return statement doesn't need parenthesis. PHP tolerates them with return statement, but it is recommended not to use them. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       $a = rand(0, 10);
+   
+       // No need for parenthesis
+       return $a;
+   
+       // Parenthesis are useless here
+       return ($a);
+   
+       // Parenthesis are useful here: they are needed by the multplication.
+       return ($a + 1) * 3;
+   }
+   
+   ?>
 
 +------------+------------------------------------------------+
 | Short name | Php/ReturnWithParenthesis                      |
@@ -17618,6 +17702,25 @@ Undefined static:: Or self::
 
 List of all undefined static and self properties and methods.
 
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       static public function definedStatic() {}
+       private definedStatic = 1;
+       
+       public function method() {
+           self::definedStatic();
+           self::undefinedStatic();
+   
+           static::definedStatic;
+           static::undefinedStatic;
+       }
+   }
+   
+   ?>
+
 +------------+---------------------------+
 | Short name | Classes/UndefinedStaticMP |
 +------------+---------------------------+
@@ -18240,7 +18343,18 @@ Unused Classes
 The following classes are never explicitely used in the code.
 
 Note that this may be valid in case the current code is a library or framework, since it defines classes that are used by other (unprovided) codes.
-Also, this analyzer may find classes that are, in fact, dynamically loaded.
+Also, this analyzer may find classes that are, in fact, dynamically loaded. 
+
+.. code-block:: php
+
+   <?php
+   
+   class unusedClasss {}
+   class usedClass {}
+   
+   $y = new usedClass();
+   
+   ?>
 
 +------------+----------------------------------------------+
 | Short name | Classes/UnusedClass                          |
@@ -21655,7 +21769,7 @@ crypt() Without Salt
 ####################
 
 
-PHP 5.6 and later require a salt when calling `'crypt() <http://www.php.net/crypt>`_. Previous versions didn't require it. Salt is a simple string, that is usually only known by the application.
+PHP requires a salt when calling `'crypt() <http://www.php.net/crypt>`_. 5.5 and previous versions didn't require it. Salt is a simple string, that is usually only known by the application.
 
 According to the manual : The salt parameter is optional. However, `'crypt() <http://www.php.net/crypt>`_ creates a weak hash without the salt. PHP 5.6 or later raise an E_NOTICE error without it. Make sure to specify a strong enough salt for better security.
 
