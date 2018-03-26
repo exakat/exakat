@@ -35,7 +35,7 @@ class Bazaar extends Vcs {
     }
 
     public function clone($source) {
-        $source = escapeshellarg($URL);
+        $source = escapeshellarg($source);
         shell_exec("cd {$this->destinationFull}; bzr branch $source code");
     }
 
