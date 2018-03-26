@@ -46,12 +46,12 @@ class Doctor extends Tasks {
 
     public function run() {
         $stats = array();
-
+        
         $stats = array_merge($stats, 
                              $this->checkPreRequisite(), 
                              $this->checkAutoInstall());
 
-        $phpBinaries = array('php'.str_replace('.', '', substr(PHP_VERSION, 0, 3)) => $_SERVER['_']);
+        $phpBinaries = array('php'.str_replace('.', '', substr(PHP_VERSION, 0, 3)) => PHP_BINARY);
         foreach(self::VERSIONS as $configName => $version) {
             if (!empty($this->config->$configName)) {
                 $phpBinaries[$configName] = $this->config->$configName;
@@ -159,8 +159,8 @@ class Doctor extends Tasks {
                 }
             } 
 
-            $ini = str_replace(array('{$version}', '{$version_path}', '{$graphdb}', ';'.$graphdb, '{$graphdb}_path', ),
-                               array( $version,     $_SERVER['_'],      $graphdb,    $graphdb,     $folder),
+            $ini = str_replace(array('{$version}', '{$version_path}',   '{$graphdb}', ';'.$graphdb, '{$graphdb}_path', ),
+                               array( $version,     $this->config->php,  $graphdb,    $graphdb,     $folder),
                                $ini);
             
             file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);
@@ -281,9 +281,8 @@ class Doctor extends Tasks {
         $stats = array();
         
         $version = 'php'.str_replace('.', '', $displayedVersion);
-        $configVersion = $this->config->{$version};
         
-        $stats['configured'] = 'Yes ('.$configVersion.')';
+        $stats['configured'] = 'Yes ('.$pathToBinary.')';
 
         $php = new Phpexec($displayedVersion, $pathToBinary);
         $version = $php->getVersion();

@@ -82,12 +82,12 @@ class Phpexec {
             }
 
             if (substr($this->actualVersion, 0, 3) !== $this->requestedVersion) {
-                throw new NoPhpBinary('PHP binary for version '.$this->requestedVersion.' ('.$_SERVER['_'].') doesn\'t have the right middle version : "'.$this->actualVersion.'". Please, check config/exakat.ini');
+                throw new NoPhpBinary('PHP binary for version '.$this->requestedVersion.' ('.PHP_BINARY.') doesn\'t have the right middle version : "'.$this->actualVersion.'". Please, check config/exakat.ini');
             }
         }
 
         if (empty($pathToBinary)) {
-            $this->phpexec = $_SERVER['_'];
+            $this->phpexec = PHP_BINARY;
             // PHP will be always valid if we use the one that is currently executing us
             $this->actualVersion = PHP_VERSION;
         } else {
