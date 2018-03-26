@@ -3,7 +3,7 @@
 $expected     = array('!$b->D = \'E\'',
                      );
 
-$expected_not = array(
+$expected_not = array('return G',
                      );
 
 ?>

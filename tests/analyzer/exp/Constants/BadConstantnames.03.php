@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array( '\'__\' . \'CANT_FIND\' . \'__\'',
+$expected     = array('\'__\' . \'CANT_FIND\' . \'__\'',
                      );
 
 $expected_not = array('$x',

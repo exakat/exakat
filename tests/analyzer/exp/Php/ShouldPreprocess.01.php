@@ -3,7 +3,7 @@
 $expected     = array('chr(1)',
                       'chr(\'a\')',
                       'chr(1.1)',
-                      'chr("\120")',
+                      'chr("\\120")',
                       'chr(32)',
                      );
 

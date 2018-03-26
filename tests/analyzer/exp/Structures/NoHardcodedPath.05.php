@@ -6,8 +6,8 @@ $expected     = array('fopen(\'jackalope://asd.txt\', \'rwb+\')',
                       'fopen(\'/http/host3.com\', \'rwb+\')',
                       'fopen(\'http/host2.com\', \'rwb+\')',
                       'fopen("phar://some/archive.phar", \'rwb+\')',
-                      'fopen("ssh2/$host2.com", \'rwb+\')', 
-                      'fopen("/ssh2/$host4.com", \'rwb+\')', 
+                      'fopen("ssh2/$host2.com", \'rwb+\')',
+                      'fopen("/ssh2/$host4.com", \'rwb+\')',
                       'fopen("jackalope://$asd.txt", \'rwb+\')',
                      );
 

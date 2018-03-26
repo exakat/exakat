@@ -5,7 +5,8 @@ $expected     = array('\'Europe\'',
                       'Africa',
                      );
 
-$expected_not = array(
+$expected_not = array('Atlantis',
+                      '$europe',
                      );
 
 ?>

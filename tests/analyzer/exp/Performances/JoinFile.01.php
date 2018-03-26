@@ -2,7 +2,7 @@
 
 $expected     = array('file($file5)',
                       'implode(\'\', file($file1))',
-                      'join(\'\', \file($file2))',
+                      'join(\'\', \\file($file2))',
                      );
 
 $expected_not = array('file($file6)',
