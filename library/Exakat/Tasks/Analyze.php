@@ -24,6 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Tasks\Helpers\Lock;
 use Exakat\Config;
 use Exakat\Exceptions\DependsOnMustReturnArray;
 use Exakat\Exceptions\NeedsAnalyzerThema;
@@ -120,8 +121,8 @@ class Analyze extends Tasks {
 
         $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
 
-        $lock = fopen($this->config->dir_root.'/library/Exakat/Analyzer/'.$analyzer_class.'.php', 'r');
-        if (!flock($lock, LOCK_EX | LOCK_NB)) {
+        $lock = new Lock($this->config->projects_root.'/projects/.exakat/', $analyzer_class);
+        if (!$lock->check()) {
             display(" Concurency lock activated for $analyzer_class \n");
             return false; 
         }
