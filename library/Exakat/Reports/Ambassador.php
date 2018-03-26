@@ -2377,22 +2377,7 @@ HTML;
         if (!empty($this->config->project_packagist)) {
             $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
         }
-        if (!empty($this->config->project_url)) {
-            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
-        }
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
-            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
-            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
-            $info[] = array('Git URL', $r[1]);
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
-            $info[] = array('Git branch', trim($res));
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
-            $info[] = array('Git commit', trim($res));
-        } else {
-            $info[] = array('Repository URL', 'Downloaded archive');
-        }
+        $info = array_merge($info, $this->getVCSInfo());
 
         $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
         $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
@@ -3708,6 +3693,7 @@ HTML;
         $info = array();
 
         $vcsClass = Vcs::getVCS($this->config);
+        var_dump($vcsClass);
         switch($vcsClass) {
             case 'Git': 
                 $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
