@@ -62,7 +62,6 @@ class ExakatConfig extends Config {
         $configFiles = array( $this->projects_root.'/config/exakat.ini',
                              '/etc/exakat/exakat.ini',
                              '/etc/exakat.ini',
-                              
                              );
 
         // Parse every available init file, and stop at the first we find
@@ -81,7 +80,8 @@ class ExakatConfig extends Config {
         $this->config = $inis;
 
         // Validation
-        if (!in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
+        if (!isset($this->config['graphdb']) || 
+            !in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
             $this->config['graphdb'] = 'gsneo4j';
         }
 
