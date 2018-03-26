@@ -61,17 +61,8 @@ class Svn extends Vcs {
             list($name, $value) = explode(': ', trim($info));
             $this->info[$name] = $value;
         }
-        print_r($this->info);
     }
 
-    public function getUrl() {
-        if (empty($this->info)) {
-            $this->getInfo();
-        }
-
-        return $this->info['Repository Root'] ?? 'No URL';
-    }
-    
     public function getBranch() {
         if (empty($this->info)) {
             $this->getInfo();

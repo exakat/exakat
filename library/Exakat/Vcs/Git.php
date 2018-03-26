@@ -97,20 +97,6 @@ class Git extends Vcs {
         return $resFinal;
     }
 
-    public function getUrl() {
-        if (!file_exists($this->destinationFull.'/code/.git/config')) {
-            return 'No URL';
-        }
-        $gitConfig = file_get_contents($this->destinationFull.'/code/.git/config');
-        if (preg_match('#url = (\S+)\s#is', $gitConfig, $r)) {
-            $url = $r[1];
-        } else {
-            $url = 'No URL';
-        }
-
-        return $url;
-    }
-    
     public function getBranch() {
         $res = shell_exec('cd '.$this->destinationFull.'/code/; git branch');
         return trim($res, " *\n");
