@@ -58,9 +58,6 @@ class Results extends Tasks {
             throw new NeedsAnalyzerThema();
         }
         
-        $analyzersClassList1 = '"'.implode('", "', array_slice($analyzersClass, 0, 250)).'"';
-        $analyzersClassList2 = '"'.implode('", "', array_slice($analyzersClass, 250, 250)).'"';
-        
         $return = array();
         if ($this->config->style == 'BOOLEAN') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out().count().is(gt(0))';
@@ -75,20 +72,9 @@ class Results extends Tasks {
         } elseif ($this->config->style == 'ALL') {
             $linksDown = Token::linksAsList();
 
-
-/*
-g.V().hasLabel("Analysis").or(has("analyzer", within($analyzersClassList1)),
-                              has("analyzer", within($analyzersClassList2))
-                              ).out('ANALYZED')
-
-g.V().hasLabel("Analysis").has("analyzer", within($analyzersClassList)).out('ANALYZED')
-
-*/
-
+            $analyzersClassList = makeList($analyzersClass);
             $query = <<<GREMLIN
-g.V().hasLabel("Analysis").or(has("analyzer", within($analyzersClassList1)),
-                              has("analyzer", within($analyzersClassList2))
-                              ).out('ANALYZED')
+g.V().hasLabel("Analysis").has("analyzer", within($analyzersClassList)).out('ANALYZED')
 .sideEffect{ line = it.get().value('line');
              fullcode = it.get().value('fullcode');
              file='None'; 
@@ -135,7 +121,7 @@ GREMLIN;
                 $return[] = array($values);
             }
         } elseif ($this->config->style == 'COUNTED') {
-            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").groupCount("m")by("code").cap("m")';
+            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").groupCount("m").by("code").cap("m")';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return = array();

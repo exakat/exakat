@@ -29,17 +29,7 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\HelperException;
 use Exakat\Project;
-use Exakat\Vcs\Bazaar;
-use Exakat\Vcs\Composer;
-use Exakat\Vcs\Copy;
-use Exakat\Vcs\EmptyCode;
-use Exakat\Vcs\Git;
-use Exakat\Vcs\Mercurial;
-use Exakat\Vcs\Svn;
-use Exakat\Vcs\Symlink;
-use Exakat\Vcs\Tarbz;
-use Exakat\Vcs\Targz;
-use Exakat\Vcs\Zip;
+use Exakat\Vcs\{Bazaar, Composer, Copy, EmptyCode, Git, Mercurial, Svn, Symlink, Tarbz, Targz, Zip};
 
 class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;

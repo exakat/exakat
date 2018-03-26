@@ -882,18 +882,28 @@ SQL;
             $this->addLink($string, $part, 'CONCAT');
         }
 
+        if ($type === \Exakat\Tasks\T_START_HEREDOC) {
+            // This is the last part
+            $part = array_pop($elements);
+            $part->noDelimiter = rtrim($part->noDelimiter);
+            $part->code        = rtrim($part->code);
+            $part->fullcode    = rtrim($part->fullcode);
+            $elements[] = $part;
+        }
+        
         ++$this->id;
         $string->code        = $this->tokens[$current][1];
         $string->fullcode    = $string->binaryString.$openQuote.implode('', $fullcode).$closeQuote;
         $string->line        = $this->tokens[$current][2];
         $string->token       = $this->getToken($this->tokens[$current][0]);
         $string->count       = $rank + 1;
-        $this->runPlugins($string, $elements);
 
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
             $string->delimiter = trim($closeQuote);
             $string->heredoc   = $openQuote[3] !== "'";
         }
+
+        $this->runPlugins($string, $elements);
 
         $this->pushExpression($string);
 

@@ -25,6 +25,8 @@ namespace Exakat\Vcs;
 use Exakat\Exceptions\HelperException;
 
 class Svn extends Vcs {
+    private $info = array();
+    
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
         
@@ -41,13 +43,56 @@ class Svn extends Vcs {
 
     public function update() {
         $res = shell_exec("cd $this->destinationFull; svn update");
-        if (!preg_match('/Updated to revision (\d+)\./', $res, $r)) {
-            preg_match('/At revision (\d+)/', $res, $r);
+        if (preg_match('/Updated to revision (\d+)\./', $res, $r)) {
+            return $r[1];
         }
-
-        return $r[1];
+        
+        if (preg_match('/At revision (\d+)/', $res, $r)) {
+            return $r[1];
+        }
+        
+        return 'Error : '.$res;
     }
 
+    private function getInfo() {
+        $res = trim(shell_exec("cd {$this->destinationFull}/code; svn info"));
+        
+        foreach(explode("\n", $res) as $info) {
+            list($name, $value) = explode(': ', trim($info));
+            $this->info[$name] = $value;
+        }
+    }
+
+    public function getBranch() {
+        if (empty($this->info)) {
+            $this->getInfo();
+        }
+
+        return $this->info['Relative URL'] ?? 'trunk';
+    }
+
+    public function getRevision() {
+        if (empty($this->info)) {
+            $this->getInfo();
+        }
+
+        return $this->info['Revision'] ?? 'No Revision';
+    }
+
+    public function getInstallationInfo() {
+        $stats = array();
+
+        $res = trim(shell_exec('svn --version 2>&1'));
+        if (preg_match('/svn, version ([0-9\.]+) /', $res, $r)) {//
+            $stats['installed'] = 'Yes';
+            $stats['version'] = $r[1];
+        } else {
+            $stats['installed'] = 'No';
+            $stats['optional'] = 'Yes';
+        }
+        
+        return $stats;
+    }
 }
 
 ?>

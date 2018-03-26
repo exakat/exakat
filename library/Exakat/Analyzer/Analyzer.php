@@ -117,7 +117,7 @@ abstract class Analyzer {
         $this->gremlin = $gremlin;
         
         $this->analyzer = get_class($this);
-        $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
+        $this->analyzerQuoted = $this->getName($this->analyzer);
 
         $this->code = $this->analyzer;
         
@@ -129,6 +129,20 @@ abstract class Analyzer {
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
             $this->description = new Description($this->getName($this->analyzer), $config->dir_root);
+            $parameters = $this->description->getParameters();
+            if (!empty($parameters)) {
+                foreach($parameters as $parameter) {
+                    if (isset($this->config->{$this->analyzerQuoted}[$parameter['name']])) {
+                        $this->{$parameter['name']} = $this->config->{$this->analyzerQuoted}[$parameter['name']];
+                    } else {
+                        $this->{$parameter['name']} = $parameter['default'];
+                    }
+                    
+                    if ($parameter['type'] === 'integer') {
+                        $this->{$parameter['name']} = (int) $this->{$parameter['name']};
+                    }
+                }
+            }
         }
         
         if (!isset(self::$datastore)) {
@@ -151,7 +165,7 @@ abstract class Analyzer {
         if ($this->analyzer === false) {
             throw new NoSuchAnalyzer($analyzer, $this->themes);
         }
-        $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
+        $this->analyzerQuoted = $this->getName($this->analyzer);
     }
     
     public function getInBaseName() {
@@ -1968,10 +1982,6 @@ GREMLIN;
 
     public function getphpConfiguration() {
         return $this->phpConfiguration;
-    }
-    
-    public function makeFullNsPath($functions, $constant = false) {
-        debug_print_backtrace();die();
     }
     
     private function tolowercase(&$code) {

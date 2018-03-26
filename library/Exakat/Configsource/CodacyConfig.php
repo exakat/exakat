@@ -23,33 +23,40 @@
 namespace Exakat\Configsource;
 
 class CodacyConfig extends Config {
-    private $projects_root = '.';
-    
     public function __construct($projects_root) {
         $this->projects_root = $projects_root.'/projects/';
     }
 
     public function loadConfig($project) {
+        $this->defaultCodacyConfig();
+        
         $pathToJson = "{$this->projects_root}{$project}/code/.codacy.json";
         if (!file_exists($pathToJson)) {
-            return $this->defaultCodacyConfig();
+            return self::NOT_LOADED;
         }
 
         $json = file_get_contents($pathToJson);
         if (empty($json)) {
-            return $this->defaultCodacyConfig();
+            return self::NOT_LOADED;
         }
 
         $config = json_decode($json);
         if (empty($config)) {
-            return $this->defaultCodacyConfig();
+            return self::NOT_LOADED;
         }
 
-        $this->config['codacy_files'] = $config->files;
-        foreach($config->tools as $tool) {
-            if ($tool->name != 'exakat') { continue; }
-            $this->config['codacy_analyzers'] = array_column($tool->patterns, 'patternId');
+        if (isset($config->tools)) {
+            $this->config['codacy_files'] = $config->files;
         }
+
+        if (isset($config->tools)) {
+            foreach($config->tools as $tool) {
+                if ($tool->name != 'exakat') { continue; }
+                $this->config['codacy_analyzers'] = array_column($tool->patterns, 'patternId');
+            }
+        }
+
+        return '.codacy.json';
         
         // Todo : check that patterns are valid
         // Todo : check that files are valid

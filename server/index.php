@@ -331,12 +331,24 @@ function pushToQueue($id) {
 
 function autoProjectName() {
     $letters = range('a', 'z');
-    return $letters[random_int(0, 25)].random_int(0, 1000000000);
+    try {
+        $return = $letters[random_int(0, 25)].random_int(0, 1000000000);
+    } catch(Throwable $e) {
+        $return = 'a';
+    }
+    
+    return $return;
 }
 
 function autoOnagepageName() {
     $letters = range('A', 'Z');
-    return $letters[random_int(0, 25)].random_int(0, 1000000000);
+    try {
+        $return = $letters[random_int(0, 25)].random_int(0, 1000000000);
+    } catch(Throwable $e) {
+        $return = 'a';
+    }
+    
+    return $return;
 }
 
 function error($message, $project) {

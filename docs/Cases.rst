@@ -12,6 +12,173 @@ All the examples in this section are real code, extracted from major PHP applica
 Examples
 ########
 
+Adding Zero
+===========
+
+.. _thelia-structures-addzero:
+
+Thelia
+^^^^^^
+
+:ref:`adding-zero`, in /core/lib/Thelia/Model/Map/ProfileResourceTableMap.php:250. 
+
+This return statement is doing quite a lot, including a buried '0 + $offset'. This call is probably an echo to '1 + $offset', which is a little later in the expression.
+
+.. code-block:: php
+
+    return serialize(array((string) $row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('ProfileId', TableMap::TYPE_PHPNAME, $indexType)], (string) $row[TableMap::TYPE_NUM == $indexType ? 1 + $offset : static::translateFieldName('ResourceId', TableMap::TYPE_PHPNAME, $indexType)]));
+
+--------
+
+
+
+.. _openemr-structures-addzero:
+
+OpenEMR
+^^^^^^^
+
+:ref:`adding-zero`, in /interface/forms/fee_sheet/new.php:466:534. 
+
+$main_provid is filtered as an integer. $main_supid is then filtered twice : one with the sufficent (int) and then, added with 0.
+
+.. code-block:: php
+
+    if (!$alertmsg && ($_POST['bn_save'] || $_POST['bn_save_close'] || $_POST['bn_save_stay'])) {
+        $main_provid = 0 + $_POST['ProviderID'];
+        $main_supid  = 0 + (int)$_POST['SupervisorID'];
+        //.....
+
+--------
+
+
+Logical Should Use Symbolic Operators
+=====================================
+
+.. _cleverstyle-php-logicalinletters:
+
+Cleverstyle
+^^^^^^^^^^^
+
+:ref:`logical-should-use-symbolic-operators`, in /modules/Uploader/Mime/Mime.php:171. 
+
+$extension is assigned with the results of pathinfo($reference_name, PATHINFO_EXTENSION) and ignores static::hasExtension($extension). The same expression, placed in a condition (like an if), would assign a value to $extension and use another for the condition itself. Here, this code is only an expression in the flow.
+
+.. code-block:: php
+
+    $extension = pathinfo($reference_name, PATHINFO_EXTENSION) and static::hasExtension($extension);
+
+--------
+
+
+
+.. _openconf-php-logicalinletters:
+
+OpenConf
+^^^^^^^^
+
+:ref:`logical-should-use-symbolic-operators`, in /chair/export.inc:143:143. 
+
+In this context, the priority of execution is used on purpose; $coreFile only collect the temporary name of the export file, and when this name is empty, then the second operand of OR is executed, though never collected. Since this second argument is a 'die', its return value is lost, but the initial assignation is never used anyway. 
+
+.. code-block:: php
+
+    $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
+
+--------
+
+
+Identical Conditions
+====================
+
+.. _wordpress-structures-identicalconditions:
+
+WordPress
+^^^^^^^^^
+
+:ref:`identical-conditions`, in wp-admin/theme-editor.php:247. 
+
+The condition checks first if $has_templates or $theme->parent(), and one of the two is sufficient to be valid. Then, it checks again that $theme->parent() is activated with &&. This condition may be reduced to simply calling $theme->parent(), as $has_template is unused here.
+
+.. code-block:: php
+
+    <?php if ( ( $has_templates || $theme->parent() ) && $theme->parent() ) : ?>
+
+--------
+
+
+
+.. _dolibarr-structures-identicalconditions:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`identical-conditions`, in /htdocs/core/lib/files.lib.php:2052. 
+
+Better check twice that $modulepart is really 'apercusupplier_invoice'.
+
+.. code-block:: php
+
+    $modulepart == 'apercusupplier_invoice' || $modulepart == 'apercusupplier_invoice'
+
+--------
+
+
+
+.. _mautic-structures-identicalconditions:
+
+Mautic
+^^^^^^
+
+:ref:`identical-conditions`, in /app/bundles/CoreBundle/Views/Standard/list.html.php:47. 
+
+When the line is long, it tends to be more and more difficult to review the values. Here, one of the two first is too many.
+
+.. code-block:: php
+
+    !empty($permissions[$permissionBase . ':deleteown']) || !empty($permissions[$permissionBase . ':deleteown']) || !empty($permissions[$permissionBase . ':delete'])
+
+--------
+
+
+Next Month Trap
+===============
+
+.. _contao-structures-nextmonthtrap:
+
+Contao
+^^^^^^
+
+:ref:`next-month-trap`, in /system/modules/calendar/classes/Events.php:515. 
+
+This code is wrong on August 29,th 30th and 31rst : 6 months before is caculated here as February 31rst, so march 2. Of course, this depends on the leap years.
+
+.. code-block:: php
+
+    case 'past_180':
+    				return array(strtotime('-6 months'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+
+--------
+
+
+
+.. _edusoho-structures-nextmonthtrap:
+
+Edusoho
+^^^^^^^
+
+:ref:`next-month-trap`, in /src/AppBundle/Controller/Admin/AnalysisController.php:1426. 
+
+The last month is wrong 8 times a year : on 31rst, and by the end of March. 
+
+.. code-block:: php
+
+    'lastMonthStart' => date('Y-m-d', strtotime(date('Y-m', strtotime('-1 month')))),
+                'lastMonthEnd' => date('Y-m-d', strtotime(date('Y-m', time())) - 24 * 3600),
+                'lastThreeMonthsStart' => date('Y-m-d', strtotime(date('Y-m', strtotime('-2 month')))),
+
+--------
+
+
 Identical On Both Sides
 =======================
 
@@ -213,6 +380,42 @@ This code only exports the POST variables as globals. And it does clean incoming
     
     // Get Action type
     $op = system_CleanVars($_REQUEST, 'op', 'list', 'string');
+
+--------
+
+
+Logical Should Use Symbolic Operators
+=====================================
+
+.. _cleverstyle-php-logicalinletters:
+
+Cleverstyle
+^^^^^^^^^^^
+
+:ref:`logical-should-use-symbolic-operators`, in /modules/Uploader/Mime/Mime.php:171. 
+
+$extension is assigned with the results of pathinfo($reference_name, PATHINFO_EXTENSION) and ignores static::hasExtension($extension). The same expression, placed in a condition (like an if), would assign a value to $extension and use another for the condition itself. Here, this code is only an expression in the flow.
+
+.. code-block:: php
+
+    $extension = pathinfo($reference_name, PATHINFO_EXTENSION) and static::hasExtension($extension);
+
+--------
+
+
+
+.. _openconf-php-logicalinletters:
+
+OpenConf
+^^^^^^^^
+
+:ref:`logical-should-use-symbolic-operators`, in /chair/export.inc:143:143. 
+
+In this context, the priority of execution is used on purpose; $coreFile only collect the temporary name of the export file, and when this name is empty, then the second operand of OR is executed, though never collected. Since this second argument is a 'die', its return value is lost, but the initial assignation is never used anyway. 
+
+.. code-block:: php
+
+    $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
 
 --------
 

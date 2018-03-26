@@ -52,6 +52,22 @@ class Zip extends Vcs {
         return 'No Update for .zip';
     }
 
+    public function getInstallationInfo() {
+        $stats = array();
+
+        $res = shell_exec('zip -v  2>&1');
+        if (preg_match('/not found/is', $res)) {
+            $stats['installed'] = 'No';
+        } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
+            $stats['installed'] = 'Yes';
+            $stats['version'] = $r[1];
+        } else {
+            $stats['error'] = $res;
+        }
+        
+        return $stats;
+    }
+
 }
 
 ?>

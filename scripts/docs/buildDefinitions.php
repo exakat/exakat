@@ -157,9 +157,10 @@ $attributes = array('ANALYZERS_COUNT'        => $analyzer_count,
 shell_exec('rm docs/*.rst');
 shell_exec('cp docs/src/*.rst docs/');
 
-global $applications, $issues_examples;
+global $applications, $issues_examples, $parameter_list;
 $applications = array();
 $issues_examples = array();
+$parameter_list = array();
 
 build_reports();
 
@@ -301,13 +302,15 @@ foreach($analyzers as $title => $desc) {
 
 $attributes['ISSUES_EXAMPLES'] = join('', $issues_examples);
 
+//$attributes['PARAMETER_LIST'] = $parameter_list;
+
 $attributes['APPLICATIONS'] = makeApplicationsLink(array_keys($applications));
 
 $files = glob('docs/*.rst');
 foreach($files as $file) {
     $rst = file_get_contents($file);
     
-    $rst = str_replace(array_map(function ($x) { return '{{'.$x.'}}'; },array_keys($attributes)),array_values($attributes),$rst);
+    $rst = str_replace(array_map(function ($x) { return '{{'.$x.'}}'; }, array_keys($attributes)), array_values($attributes), $rst);
     if (preg_match_all('/{{(.*?)}}/',$rst,$r)) {
         print "There are ".count($r[1])." missed attributes in \"".basename($file)."\" : ".implode(",",$r[1])."\n\n";
     }
@@ -529,7 +532,7 @@ $exampleTxt
 }
 
 function build_analyzer_doc($a, $a2themes) {
-    global $applications, $issues_examples;
+    global $applications, $issues_examples, $parameter_list;
     
         $name = $a;
         $ini = parse_ini_file("human/en/$a.ini", true);
@@ -591,11 +594,28 @@ SPHINX;
                 $applications[$ini['example'.$i]['project']] = 1;
             }
         }
+
+        $parameters = array();
+        for($i = 0; $i < 10; $i++) {
+            if (isset($ini['parameter'.$i])) {
+                $parameters[] = [$ini['parameter'.$i]['name'],
+                                 $ini['parameter'.$i]['default'],
+                                 $ini['parameter'.$i]['type'],
+                                 $ini['parameter'.$i]['description'],
+                                 ];
+            }
+        }
+        
+        if (!empty($parameters)) {
+            array_unshift($parameters, ["Name", "Default", "Type", "Description"]);
+            $desc .= PHP_EOL.PHP_EOL.makeTable($parameters).PHP_EOL;
+        }
+        
         if (!empty($issues_examples_section)){
             $issues_examples[] = $issues_examples_section;
         }
 
-        $info = array( array('Command line', $commandLine),
+        $info = array( array('Short name', $commandLine),
                        array('Themes', $recipes),
                                 );
         if (!empty($clearPHP)) {

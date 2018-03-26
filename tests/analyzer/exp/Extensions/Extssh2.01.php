@@ -5,7 +5,7 @@ $expected     = array('ssh2_connect(\'shell.example.com\', 22)',
                       'ssh2_exec($connection, \'/usr/local/bin/php -i\')',
                      );
 
-$expected_not = array(
+$expected_not = array('SSH2_SECURE_CONSTANT',
                      );
 
 ?>

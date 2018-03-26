@@ -27,8 +27,7 @@ use Exakat\Phpexec;
 class ExakatConfig extends Config {
     private $projects_root = '';
 
-    private $gremlins = array( 'neo4j'       => 'Gremlin3',
-                               'tinkergraph' => 'Tinkergraph',
+    private $gremlins = array( 'tinkergraph' => 'Tinkergraph',
                                'gsneo4j'     => 'GSNeo4j',
                                'janusgraph'  => 'Janusgraph',
                                'januscaes'   => 'JanusCaES',
@@ -36,8 +35,7 @@ class ExakatConfig extends Config {
                                'tcsv'        => 'Tcsv',
                                );
 
-    private $loaders = array( 'neo4j'       => 'Neo4jImport', // Could be Neo4jImport, CypherG3
-                              'tinkergraph' => 'Tinkergraph',
+    private $loaders = array( 'tinkergraph' => 'Tinkergraph',
                               'gsneo4j'     => 'SplitGraphson',
                               'janusgraph'  => 'Janusgraph',
                               'januscaes'   => 'JanusCaES',
@@ -59,24 +57,29 @@ class ExakatConfig extends Config {
                         'other_php_versions' => array(),
                        );
 
-        $configFiles = array('/etc/exakat.ini',
+        $configFiles = array( $this->projects_root.'/config/exakat.ini',
                              '/etc/exakat/exakat.ini',
-                              $this->projects_root.'/config/exakat.ini',
+                             '/etc/exakat.ini',
                              );
 
-        // Parse every available init file, and overwrite with the most local.
-        $optionFiles = array();
+        // Parse every available init file, and stop at the first we find
+        $ini = null;
         foreach($configFiles as $id => $configFile) {
             if (file_exists($configFile)) {
-                $inis[] = parse_ini_file($configFile);
-                $optionFiles[] = $configFile;
+                $inis = parse_ini_file($configFile);
+                $optionFiles = $configFile;
             } 
         }
 
-        $this->config = empty($inis) ? array() : array_merge(...$inis);
+        if ( $inis === null) {
+            return self::NOT_LOADED;
+        }
+        
+        $this->config = $inis;
 
         // Validation
-        if (!in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
+        if (!isset($this->config['graphdb']) || 
+            !in_array($this->config['graphdb'], array_keys($this->gremlins)) ) {
             $this->config['graphdb'] = 'gsneo4j';
         }
 
@@ -104,6 +107,7 @@ class ExakatConfig extends Config {
             }
         }
 
+        return 'config/exakat.ini';
     }
 }
 

@@ -28,12 +28,12 @@ class Tarbz extends Vcs {
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
 
-        $res = shell_exec('tar --version');
+        $res = shell_exec('tar --version 2>&1');
         if (!preg_match('#\d+\.\d+\.\d+#s', $res)) {
             throw new HelperException('Tar');
         }
 
-        $res = shell_exec('bzip2 -V');
+        $res = shell_exec('bzip2 --help 2>&1');
         if (strpos($res, 'bzip2') === false) {
             throw new HelperException('bzip2');
         }
@@ -54,7 +54,31 @@ class Tarbz extends Vcs {
     }
 
     public function update() {
-        return 'No Update for Tar.bz2';
+        return 'No Update for tbz';
+    }
+
+    public function getInstallationInfo() {
+        $stats = array();
+
+        $res = trim(shell_exec('tar --version 2>&1'));
+        if (preg_match('/^(\w+) ([0-9\.]+) /', $res, $r)) {//
+            $stats['tar'] = 'Yes';
+            $stats['tar version'] = $r[0];
+        } else {
+            $stats['tar'] = 'No';
+            $stats['tar optional'] = 'Yes';
+        }
+
+        $res = trim(shell_exec('bzip2 --help 2>&1'));
+        if (preg_match('/Version ([0-9\.]+),/', $res, $r)) {//
+            $stats['bzip2'] = 'Yes';
+            $stats['bzip2 version'] = $r[1];
+        } else {
+            $stats['bzip2'] = 'No';
+            $stats['bzip2 optional'] = 'Yes';
+        }
+        
+        return $stats;
     }
 
 }

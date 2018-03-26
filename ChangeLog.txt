@@ -1,4 +1,4 @@
-Version 1.1.9 (Yuchi Gong, coming up)
+Version 1.1.10 (Qin Qiong, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,21 @@ Version 1.1.9 (Yuchi Gong, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.1.9 (Yuchi Gong, 2018-03-19)
++ Architecture
+    + Better documentation for reports
+    + Adding Real Code examples to documentation
+    + Refactored Config reading
+    + Moved more VCS information to its own class
++ Report
+    + Upgraded report : Ambassador reports the number of parameters in methods
+    + New report : favorites (spin-off from Ambassador)
+    + Upgraded report : Inventories also covers Dateformat, Regex, Sql, Url, Email, Unicode Blocks.
++ Analyzer
+    + New analyzer : too many parameters
+    + New analyzer : report mass creation of arrays
+    + Checked unit tests : 2755 / 2738 test pass (99% pass). 
 
 Version 1.1.8 (Yuchi Gong, 2018-03-12)
 + Architecture

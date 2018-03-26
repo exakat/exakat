@@ -30,6 +30,7 @@ use Exakat\Exakat;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Vcs\Vcs;
 
 class Project extends Tasks {
     const CONCURENCE = self::NONE;
@@ -54,7 +55,7 @@ class Project extends Tasks {
 
     public function run() {
         $project = $this->config->project;
-
+        
         $this->project_dir = $this->config->projects_root.'/projects/'.$project;
 
         if ($this->config->project === 'default') {
@@ -101,25 +102,23 @@ class Project extends Tasks {
                                                'audit_name'     => $this->generateName(),
                                          ));
 
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
-            $info = array();
-            $info['vcs_type'] = 'git';
-            
-            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
-            if (preg_match('#url = (\S+)\s#is', $gitConfig, $r)) {
-                $info['vcs_url'] = $r[1];
-            } else {
-                $info['vcs_url'] = 'No URL';
-            }
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
-            $info['vcs_branch'] = trim($res, " *\n");
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
-            $info['vcs_revision'] = trim($res);
+        // git doesn't necessarily exists yet.
+        $info = array();
+        if (($vcsClass = Vcs::getVcs($this->config)) === 'EmptyCode') {
+            $info['vcs_type'] = 'Standalone archive';
         } else {
-            $info = array();
-            $info['vcs_type'] = 'Downloaded archive';
+            $info['vcs_type'] = strtolower($vcsClass);
+            $info['vcs_url']  = $this->config->project_url;
+            
+           $vcsClass = "\\Exakat\\Vcs\\{$vcsClass}";
+            
+            $vcs = new $vcsClass($this->config->project, $this->config->projects_root);
+            if (method_exists($vcs, 'getBranch')) {
+                $info['vcs_branch']      = $vcs->getBranch();
+            }
+            if (method_exists($vcs, 'getRevision')) {
+                $info['vcs_revision']      = $vcs->getRevision();
+            }
         }
         $this->datastore->addRow('hash', $info);
 
@@ -198,10 +197,8 @@ class Project extends Tasks {
                 $report = new Report2($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
                 $report->run();
                 unset($report);
-            } catch (\Exception $e) {
-                echo "Error while building $format in $format ".PHP_EOL,
-                     $e->getMessage(),
-                     PHP_EOL."Trying next report".PHP_EOL;
+            } catch (Throwable $e) {
+                echo "Error while building $format in $format.\nTrying next report\n";
             }
             unset($reportConfig);
         }
@@ -290,9 +287,7 @@ class Project extends Tasks {
             unset($dumpConfig);
 
         } catch (\Exception $e) {
-            echo "Error while running the Analyzer {$this->config->project} ".PHP_EOL,
-                 $e->getMessage(),
-                 PHP_EOL."Trying next analysis".PHP_EOL;
+            echo "Error while running the Analyzer {$this->config->project}.\nTrying next analysis.\n";
             file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.final.log', $e->getMessage());
         }
     }
@@ -383,9 +378,7 @@ class Project extends Tasks {
                 unset($dump);
                 unset($dumpConfig);
             } catch (\Exception $e) {
-                echo "Error while running the Analyze $theme ".PHP_EOL,
-                     $e->getMessage(),
-                     PHP_EOL."Trying next analysis".PHP_EOL;
+                echo "Error while running the Analyze $theme.\nTrying next analysis.\n";
                 file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
             }
         }

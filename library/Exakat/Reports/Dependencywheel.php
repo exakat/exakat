@@ -151,9 +151,9 @@ class Dependencywheel extends Reports {
     private function cleanFolder() {
         $html = file_get_contents($this->tmpName.'/index.html');
 
-        $html = str_replace('<MATRIX>',       $this->matrix,          $html);
-        $html = str_replace('<PROJECT>',      $this->config->project, $html);
-        $html = str_replace('<PACKAGENAMES>', $this->packagenames,    $html);
+        $html = str_replace(array('<MATRIX>',    '<PROJECT>',            '<PACKAGENAMES>'), 
+                            array($this->matrix, $this->config->project, $this->packagenames),
+                            $html);
 
         file_put_contents($this->tmpName.'/index.html', $html);
 

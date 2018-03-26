@@ -9,6 +9,7 @@ Summary
 * `Presentation`_
 * `Requirements`_
 * `Quick installation with OSX`_
+* `Full installation with Debian/Ubuntu`_
 * `Quick installation with Debian/Ubuntu`_
 * `Installation guide with Composer`_
 * `Installation guide with Docker`_
@@ -86,6 +87,37 @@ It has be reported that installation fails on OSX 10.11 and 10.12, with error si
 
 
 They remove some files for grapes, that it will rebuild later. Then, try again the optional install instructions.
+
+Full installation with Debian/Ubuntu
+-------------------------------------
+
+The following commands are an optional pre-requisite to the Quick installation guide, that just follows. If something is missing in the next section, check with this section that all has beed installed correctly.
+
+::
+
+    //// Installing PHP from sury.org 
+    apt update
+    apt install apt-transport-https lsb-release ca-certificates
+    
+    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+    sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
+    apt update
+    
+    apt-get install php7.2 php7.2-common php7.2-cli php7.2-curl php7.2-json php7.2-mbstring php7.2-sqlite3 
+    
+    //// Installing Java
+    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list  
+    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list  
+    apt-get update  
+    
+    echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections  
+    echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections  
+    DEBIAN_FRONTEND=noninteractive  apt-get install -y --force-yes oracle-java8-installer oracle-java8-set-default  
+    
+    //// Installing other tools 
+    apt-get update && apt-get install -y --no-install-recommends git subversion mercurial lsof unzip 
+
+
 
 Quick installation with Debian/Ubuntu
 -------------------------------------

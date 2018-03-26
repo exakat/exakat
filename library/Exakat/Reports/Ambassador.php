@@ -29,6 +29,7 @@ use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Helpers\Results;
 use Exakat\Reports\Reports;
+use Exakat\Vcs\Vcs;
 
 class Ambassador extends Reports {
     const FILE_FILENAME  = 'report';
@@ -179,6 +180,7 @@ class Ambassador extends Reports {
         $this->generateComplexExpressions();
         $this->generateVisibilitySuggestions();
         $this->generateMethodSize();
+        $this->generateParameterCounts();
         
         $this->generateConfusingVariables();
 
@@ -414,12 +416,13 @@ class Ambassador extends Reports {
     private function generateFavorites() {
         $baseHTML = $this->getBasedPage('favorites_dashboard');
 
-        $analyzers = $this->themes->getThemeAnalyzers('Preferences');
+        $favorites = new Favorites($this->config);
+        $favoritesList = json_decode($favorites->generate(null, Reports::INLINE));
         
         $donut = array();
         $html = array(' ');
 
-        foreach($analyzers as $analyzer) {
+        foreach($favoritesList as $analyzer => $list) {
             $list = $this->datastore->getHashAnalyzer($analyzer);
 
             $table = '';
@@ -440,17 +443,20 @@ class Ambassador extends Reports {
                 }
                 $total += $value;
             }
-            $nb = 4 - count($list);
-            for($i = 0; $i < $nb; ++$i) {
-                $table .= '
+
+            if (($repeat = 4 - count($list)) > 0) {
+                $table .= str_repeat('
                 <div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>
-';
+', $repeat );
             }
+
             // Ignore if we have no occurrences
-            if ($total === 0) { continue; }
+            if ($total === 0) { 
+                continue; 
+            }
             $values = implode(', ', $values);
 
             $html[] = <<<HTML
@@ -1002,6 +1008,179 @@ JAVASCRIPT;
         $this->putBasedPage('index', $finalHTML);
     }
 
+    protected function generateParameterCounts() {
+        $finalHTML = $this->getBasedPage('parameter_counts');
+
+        // List of extensions used
+        $res = $this->sqlite->query(<<<SQL
+SELECT key, value FROM hashResults
+WHERE name = "ParameterCounts"
+ORDER BY key
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $xAxis[] = "'".$value['key']." param.'";
+            $data[$value['key']] = $value['value'];
+
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">'.$value['key'].' param.</div>
+                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
+                  </div>';
+        }
+
+        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
+
+        $blocjs = <<<JAVASCRIPT
+  <script>
+    $(document).ready(function() {
+      Highcharts.theme = {
+         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
+         chart: {
+            backgroundColor: null,
+            style: {
+               fontFamily: "Dosis, sans-serif"
+            }
+         },
+         title: {
+            style: {
+               fontSize: '16px',
+               fontWeight: 'bold',
+               textTransform: 'uppercase'
+            }
+         },
+         tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'rgba(219,219,216,0.8)',
+            shadow: false
+         },
+         legend: {
+            itemStyle: {
+               fontWeight: 'bold',
+               fontSize: '13px'
+            }
+         },
+         xAxis: {
+            gridLineWidth: 1,
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         yAxis: {
+            minorTickInterval: 'auto',
+            title: {
+               style: {
+                  textTransform: 'uppercase'
+               }
+            },
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         plotOptions: {
+            candlestick: {
+               lineColor: '#404048'
+            }
+         },
+
+
+         // General
+         background2: '#F0F0EA'
+      };
+
+      // Apply the theme
+      Highcharts.setOptions(Highcharts.theme);
+
+      $('#filename').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAFILES]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Parameters',
+              data: [CALLCOUNT]
+          }]
+      });
+
+    });
+  </script>
+JAVASCRIPT;
+
+        $tags = array();
+        $code = array();
+
+        // Filename Overview
+        $tags[] = 'CALLCOUNT';
+        $code[] = implode(', ', $data);
+        $tags[] = 'SCRIPTDATAFILES';
+        $code[] = implode(', ', $xAxis);
+
+        $blocjs = str_replace($tags, $code, $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Parameters counts');
+
+        $this->putBasedPage('parameters_counts', $finalHTML);
+    }
+
     protected function generateExtensionsBreakdown() {
         $finalHTML = $this->getBasedPage('extension_list');
 
@@ -1427,7 +1606,7 @@ SQL;
     }
     
     private function generateNoIssues() {
-        $list = array_merge($this->themes->getThemeAnalyzers('Analysis'),
+        $list = array_merge($this->themes->getThemeAnalyzers('Analyze'),
                             $this->themes->getThemeAnalyzers('Security'),
                             $this->themes->getThemeAnalyzers('Performances'),
                             $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
@@ -1851,32 +2030,14 @@ SQL;
     }
 
     protected function generateSettings() {
-        $info = array(array('Code name', $this->config->project_name));
+        $info = array(array('Project name', $this->config->project_name));
         if (!empty($this->config->project_description)) {
             $info[] = array('Code description', $this->config->project_description);
         }
         if (!empty($this->config->project_packagist)) {
             $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
         }
-        if (!empty($this->config->project_url)) {
-            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
-        }
-        $vcs_type = $this->datastore->gethash('vcs_type');
-        if ($vcs_type === 'git') {
-            $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
-
-            $res = $this->datastore->gethash('vcs_branch');
-            if (!empty($res)) { 
-                $info[] = array('Git branch', trim($res));
-            }
-
-            $res = $this->datastore->gethash('vcs_revision');
-            if (!empty($res)) { 
-                $info[] = array('Git commit', trim($res));
-            }
-        } else {
-            $info[] = array('Repository URL', 'Downloaded archive');
-        }
+        $info = array_merge($info, $this->getVCSInfo());
 
         $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
         $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
@@ -2169,7 +2330,7 @@ SQL;
                 }
             }
         }
-
+        
         $table = '';
         $titles = "<tr><th>Version</th><th>Name</th><th>".implode('</th><th>', array_keys(array_values($data2)[0]) )."</th></tr>";
         $data = array_merge($data, $data2);
@@ -2216,22 +2377,7 @@ HTML;
         if (!empty($this->config->project_packagist)) {
             $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
         }
-        if (!empty($this->config->project_url)) {
-            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
-        }
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
-            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
-            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
-            $info[] = array('Git URL', $r[1]);
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
-            $info[] = array('Git branch', trim($res));
-
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
-            $info[] = array('Git commit', trim($res));
-        } else {
-            $info[] = array('Repository URL', 'Downloaded archive');
-        }
+        $info = array_merge($info, $this->getVCSInfo());
 
         $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
         $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
@@ -3541,6 +3687,64 @@ HTML;
             $audit_date .= ' - &quot;'.$audit_name.'&quot;';
         }
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
+    }
+    
+    protected function getVCSInfo() {
+        $info = array();
+
+        $vcsClass = Vcs::getVCS($this->config);
+        switch($vcsClass) {
+            case 'Git': 
+                $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
+
+                $res = $this->datastore->gethash('vcs_branch');
+                if (!empty($res)) { 
+                    $info[] = array('Git branch', trim($res));
+                }
+
+                $res = $this->datastore->gethash('vcs_revision');
+                if (!empty($res)) { 
+                    $info[] = array('Git commit', trim($res));
+                }
+                break 1;
+
+            case 'Svn': 
+                $info[] = array('SVN URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Bazaar': 
+                $info[] = array('Bazaar URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Composer': 
+                $info[] = array('Package', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Mercurial': 
+                $info[] = array('Hg URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Copy': 
+                $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Symlink': 
+                $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Tarbz': 
+                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+
+            case 'Targz': 
+                $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
+                break 1;
+            
+            default : 
+                $info[] = array('Repository URL', 'Downloaded archive');
+        }
+        
+        return $info;
     }
 }
 

@@ -80,6 +80,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Owasp
   * PhpConfiguration
   * PhpCompilation
+  * Favorites
   * Inventories
   * Clustergrammer
   * FileDependencies
@@ -284,8 +285,16 @@ Applications
 
 A number of applications were scanned in order to find real life examples of patterns. They are listed here : 
 
-* `phpMyAdmin <https://www.phpmyadmin.net/>`_
+* `Thelia <https://thelia.net/>`_
+* `OpenEMR <https://www.open-emr.org/>`_
+* `Cleverstyle <https://cleverstyle.org/en>`_
+* `OpenConf <https://www.openconf.com/>`_
 * `WordPress <https://www.wordpress.com/>`_
+* `Dolibarr <https://www.dolibarr.org/>`_
+* `Mautic <https://www.mautic.org/>`_
+* `Contao <https://contao.org/en/>`_
+* `Edusoho <https://www.edusoho.com/en>`_
+* `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `SPIP <https://www.spip.net/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `PrestaShop <https://prestashop.com/>`_
@@ -345,10 +354,18 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.1.10
+
+  * nativeCallCounts (Php/TooManyNativeCalls)
+
+* 1.1.9
+
+  * Should Preprocess Chr (Php/ShouldPreprocess ; Suggestions)
+  * parametersCount (Functions/TooManyParameters)
+
 * 1.1.8
 
   * Mass Creation Of Arrays (Arrays/MassCreation)
-  * Php/TooManyNativeCalls (Php/TooManyNativeCalls ; Unassigned)
   * Structures/ConstantPreferences (Structures/ConstantPreferences ; Under Work)
   * ext/db2 (Extensions/Extdb2 ; Appinfo)
 
@@ -1471,7 +1488,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Php7 Relaxed Keyword (Php/Php7RelaxedKeyword ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Phpinfo (Structures/PhpinfoUsage ; Analyze, Security, OneFile, Codacy, Simple)
   * Pre-increment (Performances/PrePostIncrement ; Analyze, Performances, Codacy, Simple, Level 4)
-  * Preprocess Arrays (Arrays/ShouldPreprocess ; Analyze, Codacy, Simple)
+  * Preprocess Arrays (Arrays/ShouldPreprocess ; Suggestions)
   * Preprocessable (Structures/ShouldPreprocess ; Analyze, Codacy)
   * Print And Die (Structures/PrintAndDie ; Analyze, Codacy, Simple)
   * Property Could Be Private Property (Classes/CouldBePrivate ; Analyze, Codacy)
@@ -1983,6 +2000,7 @@ List of external links mentionned in this documentation.
 * `empty() <http://www.php.net/manual/en/function.empty.php>`_
 * `Enchant spelling library <http://php.net/manual/en/book.enchant.php>`_
 * `Ereg <http://php.net/manual/en/function.ereg.php>`_
+* `Escape sequences <http://php.net/manual/en/regexp.reference.escape.php>`_
 * `Ev <http://php.net/manual/en/book.ev.php>`_
 * `Event <http://php.net/event>`_
 * `Exakat <http://www.exakat.io/>`_
@@ -2019,11 +2037,12 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
+* `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
@@ -2038,6 +2057,7 @@ List of external links mentionned in this documentation.
 * `Goto <http://php.net/manual/en/control-structures.goto.php>`_
 * `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_
 * `GRPC <http://www.grpc.io/>`_
+* `Handling file uploads <http://php.net/manual/en/features.file-upload.php>`_
 * `hash <http://www.php.net/hash>`_
 * `HASH Message Digest Framework <http://www.php.net/manual/en/book.hash.php>`_
 * `Heredoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc>`_
@@ -2060,6 +2080,7 @@ List of external links mentionned in this documentation.
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
+* `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
 * `isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
@@ -2084,8 +2105,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
@@ -2208,6 +2229,7 @@ List of external links mentionned in this documentation.
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_
+* `Superglobals <http://php.net/manual/en/language.variables.superglobals.php>`_
 * `Supported PHP Extensions <http://exakat.readthedocs.io/en/latest/Annex.html#supported-php-extensions>`_
 * `svn <https://subversion.apache.org/>`_
 * `Swoole <https://github.com/swoole/swoole-src>`_
@@ -2236,6 +2258,8 @@ List of external links mentionned in this documentation.
 * `V8 Javascript Engine <https://bugs.chromium.org/p/v8/issues/list>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
+* `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_

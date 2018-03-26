@@ -34,6 +34,32 @@ abstract class Vcs {
     abstract public function clone($source);
 
     abstract public function update();
+    
+    static public function getVcs($config) {
+        if ($config->git === true) {
+            return 'Git';
+        } elseif ($config->svn === true) {
+            return 'Svn';
+        } elseif ($config->hg === true) {
+            return 'Mercurial';
+        } elseif ($config->bzr === true) {
+            return 'Bazaar';
+        } elseif ($config->composer === true) {
+            return 'Composer';
+        } elseif ($config->symlink === true) {
+            return 'Symlink';
+        } elseif ($config->tbz === true) {
+            return 'Tarbz';
+        } elseif ($config->tgz === true) {
+            return 'Targz';
+        } elseif ($config->zip === true) {
+            return 'Zip';
+        } elseif ($config->copy === true) {
+            return 'Copy';
+        } else {
+            return 'EmptyCode';
+        }
+    }
 }
 
 ?>

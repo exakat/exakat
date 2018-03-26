@@ -47,6 +47,20 @@ class Mercurial extends Vcs {
         return "$changeset[1] ($date[1])";
     }
 
+    public function getInstallationInfo() {
+        $stats = array();
+
+        $res = trim(shell_exec('hg --version 2>&1'));
+        if (preg_match('/Mercurial Distributed SCM \(version ([0-9\.]+)\)/', $res, $r)) {//
+            $stats['installed'] = 'Yes';
+            $stats['version'] = $r[1];
+        } else {
+            $stats['installed'] = 'No';
+            $stats['optional'] = 'Yes';
+        }
+        
+        return $stats;
+    }
 }
 
 ?>

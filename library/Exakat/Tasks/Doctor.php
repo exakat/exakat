@@ -27,16 +27,40 @@ use Exakat\Exakat;
 use Exakat\Config;
 use Exakat\Task;
 use Exakat\Phpexec;
+use Exakat\Vcs\{Bazaar, Composer, Copy, EmptyCode, Git, Mercurial, Svn, Symlink, Tarbz, Targz, Zip};
 
 class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
+    const VERSIONS   = array('php52' => '5.2', 
+                             'php53' => '5.3',
+                             'php54' => '5.4',
+                             'php55' => '5.5',
+                             'php56' => '5.6', 
+                             'php70' => '7.0', 
+                             'php71' => '7.1', 
+                             'php72' => '7.2', 
+                             'php73' => '7.3',
+                             );
 
     protected $logname = self::LOG_NONE;
 
     public function run() {
         $stats = array();
+        
+        $stats = array_merge($stats, 
+                             $this->checkPreRequisite(), 
+                             $this->checkAutoInstall());
 
-        $stats = array_merge($stats, $this->checkPreRequisite(), $this->checkAutoInstall(), $this->checkPHPs());
+        $phpBinaries = array('php'.str_replace('.', '', substr(PHP_VERSION, 0, 3)) => PHP_BINARY);
+        foreach(self::VERSIONS as $configName => $version) {
+            if (!empty($this->config->$configName)) {
+                $phpBinaries[$configName] = $this->config->$configName;
+            }
+        }
+
+        $stats = array_merge($stats,
+                             $this->checkPHPs($phpBinaries));
+        
         if ($this->config->verbose === true) {
             $stats = array_merge($stats, $this->checkOptional());
         }
@@ -48,11 +72,11 @@ class Doctor extends Tasks {
 
         $doctor = '';
         foreach($stats as $section => $details) {
-            $doctor .= "$section : \n";
+            $doctor .= "$section : ".PHP_EOL;
             foreach($details as $k => $v) {
-                $doctor .= '    '.substr("$k                          ", 0, 20).' : '.$v."\n";
+                $doctor .= '    '.substr("$k                          ", 0, 20).' : '.$v.PHP_EOL;
             }
-            $doctor .= "\n";
+            $doctor .= PHP_EOL;
         }
         print $doctor;
     }
@@ -76,8 +100,9 @@ class Doctor extends Tasks {
         $stats['PHP']['ext/phar']       = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar. please install by default)';
         $stats['PHP']['ext/sqlite3']    = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
         $stats['PHP']['ext/tokenizer']  = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
-        $stats['PHP']['ext/mbstring']   = extension_loaded('mbstring')  ? 'Yes' : 'No (Optional, add --enable-mbstring to configure)';
+        $stats['PHP']['ext/mbstring']   = extension_loaded('mbstring')  ? 'Yes' : 'No (Compulsory, add --enable-mbstring to configure)';
         $stats['PHP']['ext/json']       = extension_loaded('json')      ? 'Yes' : 'No';
+        $stats['PHP']['ext/xmlwriter']  = extension_loaded('xmlwriter') ? 'Yes' : 'No (Optional, used by XML reports)';
 
         // java
         $res = shell_exec('java -version 2>&1');
@@ -85,7 +110,7 @@ class Doctor extends Tasks {
             $stats['java']['installed'] = 'No';
             $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
         } elseif (preg_match('/(java|openjdk) version "(.*)"/is', $res, $r)) {
-            $lines = explode("\n", $res);
+            $lines = explode(PHP_EOL, $res);
             $line2 = $lines[1];
             $stats['java']['installed'] = 'Yes';
             $stats['java']['type'] = trim($line2);
@@ -99,7 +124,6 @@ class Doctor extends Tasks {
 
         $stats['tinkergraph'] = $this->getTinkerGraph();
         $stats['gsneo4j'] = $this->getTinkerGraphNeo4j();
-        $stats['neo4j'] = $this->getNeo4j();
 
         if ($this->config->project !== 'default') {
             $stats['project']['name']             = $this->config->project_name;
@@ -133,23 +157,10 @@ class Doctor extends Tasks {
                 } else {
                     $graphdb = 'tinkergraph';
                 }
-            } else {
-                $graphdb = 'neo4j';
+            } 
 
-                $folder = getenv('NEO4J_HOME');
-                if (empty($neo4j_folder)) {
-                    $folder = 'neo4j'; // Local Installation
-                } elseif (!file_exists($neo4j_folder)) {
-                    $folder = 'neo4j'; // Local Installation
-                } elseif (!file_exists($neo4j_folder.'/scripts/')) {
-                    // This Neo4J has no 'scripts' folder and we use it! Not our database
-                    $folder = 'neo4j'; // Local Installation
-                }
-                $php = $this->config->php;
-            }
-
-            $ini = str_replace(array('{$version}', '{$version_path}', '{$graphdb}', ';'.$graphdb, '{$graphdb}_path', ),
-                               array( $version,     $_SERVER['_'],      $graphdb,    $graphdb,     $folder),
+            $ini = str_replace(array('{$version}', '{$version_path}',   '{$graphdb}', ';'.$graphdb, '{$graphdb}_path', ),
+                               array( $version,     $this->config->php,  $graphdb,    $graphdb,     $folder),
                                $ini);
             
             file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);
@@ -231,35 +242,16 @@ class Doctor extends Tasks {
         }
     }
 
-    private function checkPHPs() {
+    private function checkPHPs($config) {
         $stats = array();
 
-        // check PHP 5.2
-        $stats['PHP 5.2'] = $this->checkPHP($this->config->php52, '5.2');
-
-        // check PHP 5.3
-        $stats['PHP 5.3'] = $this->checkPHP($this->config->php53, '5.3');
-
-        // check PHP 5.4
-        $stats['PHP 5.4'] = $this->checkPHP($this->config->php54, '5.4');
-
-        // check PHP 5.5
-        $stats['PHP 5.5'] = $this->checkPHP($this->config->php55, '5.5');
-
-        // check PHP 5.6
-        $stats['PHP 5.6'] = $this->checkPHP($this->config->php56, '5.6');
-
-        // check PHP 7.0
-        $stats['PHP 7.0'] = $this->checkPHP($this->config->php70, '7.0');
-
-        // check PHP 7.1
-        $stats['PHP 7.1'] = $this->checkPHP($this->config->php71, '7.1');
-
-        // check PHP 7.2
-        $stats['PHP 7.2'] = $this->checkPHP($this->config->php72, '7.2');
-
-        // check PHP 7.3
-        $stats['PHP 7.3'] = $this->checkPHP($this->config->php73, '7.3');
+        foreach(self::VERSIONS as $configVersion => $version) {
+            if (isset($config[$configVersion])) {
+                $stats[$configVersion] = $this->checkPHP($config[$configVersion], $version);
+            } else {
+                $stats[$configVersion] = array('configured' => 'No');
+            }
+        }
 
         return $stats;
     }
@@ -267,76 +259,19 @@ class Doctor extends Tasks {
     private function checkOptional() {
         $stats = array();
 
-        // git
-        $res = trim(shell_exec('git --version 2>&1'));
-        if (preg_match('/git version ([0-9\.]+)/', $res, $r)) {//
-            $stats['git']['installed'] = 'Yes';
-            $stats['git']['version'] = $r[1];
-        } else {
-            $stats['git']['installed'] = 'No';
-            $stats['git']['optional'] = 'Yes';
-        }
+        $optionals = array('Git'       => 'git', 
+                           'Mercurial' => 'hg', 
+                           'Svn'       => 'svn',
+                           'Bazaar'    => 'bzr',
+                           'Composer'  => 'composer',
+                           'Zip'       => 'zip',
+                           'Tarbz'     => 'tbz',
+                          );
 
-        // hg
-        $res = trim(shell_exec('hg --version 2>&1'));
-        if (preg_match('/Mercurial Distributed SCM \(version ([0-9\.]+)\)/', $res, $r)) {//
-            $stats['hg']['installed'] = 'Yes';
-            $stats['hg']['version'] = $r[1];
-        } else {
-            $stats['hg']['installed'] = 'No';
-            $stats['hg']['optional'] = 'Yes';
-        }
-
-        // svn
-        $res = trim(shell_exec('svn --version 2>&1'));
-        if (preg_match('/svn, version ([0-9\.]+) /', $res, $r)) {//
-            $stats['svn']['installed'] = 'Yes';
-            $stats['svn']['version'] = $r[1];
-        } else {
-            $stats['svn']['installed'] = 'No';
-            $stats['svn']['optional'] = 'Yes';
-        }
-
-        // bazaar
-        $res = trim(shell_exec('bzr --version 2>&1'));
-        if (preg_match('/Bazaar \(bzr\) ([0-9\.]+) /', $res, $r)) {//
-            $stats['bzr']['installed'] = 'Yes';
-            $stats['bzr']['version'] = $r[1];
-        } else {
-            $stats['bzr']['installed'] = 'No';
-            $stats['bzr']['optional'] = 'Yes';
-        }
-
-        // composer
-        $res = trim(shell_exec('composer -V 2>&1'));
-        // remove colors from shell syntax
-        $res = preg_replace('/\e\[[\d;]*m/', '', $res);
-        if (preg_match('/Composer version ([0-9\.a-z@_\(\)\-]+) /', $res, $r)) {//
-            $stats['composer']['installed'] = 'Yes';
-            $stats['composer']['version'] = $r[1];
-        } else {
-            $stats['composer']['installed'] = 'No';
-        }
-
-        // wget
-        $res = explode("\n", shell_exec('wget -V 2>&1'));
-        $res = $res[0];
-        if ($res !== '') {//
-            $stats['wget']['installed'] = 'Yes';
-            $stats['wget']['version'] = $res;
-        } else {
-            $stats['wget']['installed'] = 'No';
-        }
-
-        // zip
-        $res = shell_exec('zip -v  2>&1');
-        if (preg_match('/not found/is', $res)) {
-            $stats['zip']['installed'] = 'No';
-        } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
-            $stats['zip']['installed'] = 'Yes';
-            $stats['zip']['version'] = $r[1];
-        } else {
-            $stats['zip']['error'] = $res;
+        foreach($optionals as $class => $section) {
+            $fullClass = "\\Exakat\\Vcs\\$class";
+            $vcs = new $fullClass($this->config->project, $this->config->projects_root);
+            $stats[$section] = $vcs->getInstallationInfo();
         }
 
         return $stats;
@@ -346,14 +281,8 @@ class Doctor extends Tasks {
         $stats = array();
         
         $version = 'php'.str_replace('.', '', $displayedVersion);
-        $configVersion = $this->config->{$version};
         
-        if ($configVersion === '') {
-            $stats['configured'] = 'No';
-            return $stats;
-        }
-        
-        $stats['configured'] = 'Yes ('.$configVersion.')';
+        $stats['configured'] = 'Yes ('.$pathToBinary.')';
 
         $php = new Phpexec($displayedVersion, $pathToBinary);
         $version = $php->getVersion();
@@ -377,135 +306,8 @@ class Doctor extends Tasks {
         return $stats;
     }
 
-    private function array2list($array) {
+    private function array2list(array $array) {
         return implode(",\n                           ", $array);
-    }
-
-    private function getNeo4j() {
-        $stats = array();
-        
-        // neo4j
-        if (empty($this->config->neo4j_folder)) {
-            $stats['installed'] = 'Couldn\'t find the path to neo4j from the config/exakat.ini. Please, check it.';
-        } elseif (!file_exists($this->config->neo4j_folder)) {
-            $stats['installed'] = 'No (folder : '.$this->config->neo4j_folder.')';
-        } else {
-            $file = file($this->config->neo4j_folder.'/README.txt');
-            $stats['version'] = trim($file[0]);
-
-            if (isset($stats['java']['version']) && version_compare($stats['java']['version'], '1.8') < 0) {
-                $file = file_get_contents($this->config->neo4j_folder.'/conf/neo4j-wrapper.conf');
-                if (!preg_match('/wrapper.java.additional=-XX:MaxPermSize=(\d+\w)/is', $file, $r)) {
-                    $stats['MaxPermSize'] = 'Unset (64M)';
-                    $stats['MaxPermSize warning'] = 'Set MaxPermSize to 512 or more in neo4j/conf/neo4j-wrapper.conf, with "wrapper.java.additional=-XX:MaxPermSize=512m" around line 20';
-                } else {
-                    $stats['MaxPermSize'] = $r[1];
-                }
-            }
-
-            $file = file_get_contents($this->config->neo4j_folder.'/conf/neo4j-server.properties');
-            if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/is', $file, $r)) {
-                $stats['port'] = $r[1];
-            } else {
-                $stats['port'] = '7474 (in fact, unset value. Using default : 7474)';
-            }
-
-            if ($stats['port'] != $this->config->neo4j_port) {
-                $stats['port_alert'] = $this->config->neo4j_port.' : configured port in config/exakat.ini is not the one in the neo4j installation. Please, sync them.';
-            }
-
-            if (preg_match('/dbms.security.auth_enabled\s*=\s*false/is', $file, $r)) {
-                $stats['authentication'] = 'Not enabled';
-            } else {
-                $stats['authentication'] = 'Enabled.';
-                if (empty($this->config->neo4j_login)) {
-                    $stats['login'] = 'Login is not set, but authentication is. Please, set login in config/exakat.ini';
-                } elseif (empty($this->config->neo4j_password)) {
-                    $stats['password'] = 'Login is set, but not password. Please, set it in config/exakat.ini';
-                }
-                $res = $this->gremlin->query('"Hello world"');
-                if ($res === null) {
-                    $stats['credentials'] = 'Server is not running.';
-                } elseif (isset($res->success) && $res->success === true) {
-                    $stats['credentials'] = 'OK.';
-                } else {
-                    $stats['credentials'] = 'Login or password are wrong (message : '.$res->errors[0]->message.')';
-                }
-            }
-
-            if (preg_match('#org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp#is', $file, $r)) {
-                $stats['gremlinPlugin'] = 'Configured.';
-            } else {
-                $stats['gremlinPlugin'] = 'Not found. Make sure that "org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp" is in the conf/neo4j-server.property.';
-            }
-
-            $gremlinPlugin = glob($this->config->neo4j_folder.'/plugins/*/neo4j-gremlin-3.2.0-incubating.jar');
-            if (empty($gremlinPlugin)) {
-                $stats['gremlinJar'] = 'neo4j-gremlin-3.2.0-incubating coudln\'t be found in the '.$this->config->neo4j_folder.'/plugins/* folders. Make sure gremlin is installed, and running gremlin version 3.* (3.2.0-incubating is recommended).';
-            } elseif (count($gremlinPlugin) > 1) {
-                $versions = array();
-                foreach($gremlinPlugin as $version) {
-                    $v = basename($version);
-                    $versions[] = $v;
-                }
-                $stats['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin : '.implode(', ', $versions).'. Only one neo4j-gremlin-3.*.jar is sufficient. ';
-            } else {
-                $stats['gremlinJar'] = basename(trim(array_pop($gremlinPlugin)));
-            }
-
-            $stats['scriptFolder'] = file_exists($this->config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
-            if ($stats['scriptFolder'] == 'No') {
-                mkdir($this->config->neo4j_folder.'/scripts/', 0755);
-                $stats['scriptFolder'] = file_exists($this->config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
-            }
-
-            $context = stream_context_create(array('http'=>
-            array(
-                'timeout' => 1,
-                )
-            ));
-
-            $pidPath = $this->config->neo4j_folder.'/conf/neo4j-service.pid';
-            if (file_exists($pidPath)) {
-                $stats['pid'] = file_get_contents($pidPath);
-            } else {
-                $res = shell_exec('ps aux | grep gremlin | grep plugin');
-                if (preg_match('/^\w+\s+(\d+)\s/is', $res, $r)) {
-                    $stats['pid'] = $r[1];
-                } else {
-                    $stats['pid'] = 'Unknown';
-                }
-            }
-
-            $json = @file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/db/data/');
-            if (empty($json)) {
-                $stats['running'] = 'No';
-            } else {
-                $stats['running'] = 'Yes';
-                $status = shell_exec('cd '.$this->config->neo4j_folder.'; ./bin/neo4j status');
-                if (strpos($status, 'Neo4j Server is running at pid') !== false) {
-                    $stats['running here'] = 'Yes';
-                } else {
-                    $stats['running here'] = 'No';
-                }
-
-                if ('{"success":true}' === @file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/tp/gremlin/execute')) {
-                    $stats['gremlin'] = 'Yes';
-                } else {
-                    $stats['gremlin'] = 'No';
-                    $stats['gremlin-installation'] = 'Install gremlin plugin for neo4j';
-                }
-
-                $json = file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/tp/gremlin/execute?script='.urlencode('1 + 1'), false, $context);
-                if ($json === '{"success":true,"results":2}') {
-                    $stats['gremlin-status'] = 'OK';
-                } else {
-                    $stats['gremlin-status'] = 'Failed';
-                }
-            }
-        }
-        
-        return $stats;
     }
 
     private function getTinkerGraph() {

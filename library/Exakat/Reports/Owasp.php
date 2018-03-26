@@ -352,6 +352,7 @@ SQL
 
         $html = $this->getBasedPage('levels');
         $html = $this->injectBloc($html, 'LEVELS', $levels);
+        $html = $this->injectBloc($html, 'TITLE', 'Overview for OWASP top 10');
         $this->putBasedPage('detailled', $html);
     }
 
@@ -407,6 +408,7 @@ SQL
 
         $html = $this->getBasedPage('levels');
         $html = $this->injectBloc($html, 'LEVELS', $levels);
+        $html = $this->injectBloc($html, 'TITLE', 'Detailled sections for OWASP top 10');
         $this->putBasedPage('index', $html);
     }
 

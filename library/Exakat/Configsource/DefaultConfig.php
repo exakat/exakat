@@ -65,12 +65,6 @@ class DefaultConfig extends Config {
                                'file'           =>  null,
                                'style'          => 'ALL',
  
-                               'neo4j_host'     => '127.0.0.1',
-                               'neo4j_port'     => '7474',
-                               'neo4j_folder'   => 'neo4j',
-                               'neo4j_login'    => 'admin',
-                               'neo4j_password' => 'admin',
- 
                                'gsneo4j_host'   => '127.0.0.1',
                                'gsneo4j_port'   => '7474',
                                'gsneo4j_folder' => 'tinkergraph',

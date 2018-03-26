@@ -49,10 +49,11 @@ https://support.codacy.com/hc/en-us/articles/207994725-Tool-Developer-Guide
   "patternId":"latedef",
   "line":2
 }            */
-            $line = array('filename'  => $row['file'],
+            $line = array('file'      => trim($row['file'], '/'), // no initial / for the path
                           'message'   => $titleCache[$row['analyzer']],
-                          'patternid' => $row['analyzer'],
-                          'line'      => $row['line']);
+                          'patternId' => $row['analyzer'],
+                          'line'      => $row['line'],
+                          );
             
             $results[] = json_encode($line);
         }

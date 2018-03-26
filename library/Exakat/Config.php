@@ -42,10 +42,11 @@ class Config {
     private $dotExakatConfig       = null;
     private $envConfig             = null;
 
-    private $options = array('configFiles' => array());
+    private $configFiles = array();
+    private $options = array();
 
     static private $stack = array();
-
+    
     public function __construct($argv) {
         $pharRunning = Phar::Running();
         $this->is_phar  = !empty($pharRunning);
@@ -81,25 +82,36 @@ class Config {
         $this->defaultConfig = new DefaultConfig();
 
         $this->exakatConfig = new ExakatConfig($this->projects_root);
-        $this->exakatConfig->loadConfig(null);
+        if ($file = $this->exakatConfig->loadConfig(null)) {
+            $this->configFiles[] = $file;
+        }
         
         // then read the config from the commandline (if any)
         $this->commandLineConfig = new CommandLine();
         $this->commandLineConfig->loadConfig($argv);
 
         $this->envConfig = new EnvConfig($this->projects_root);
-        $this->envConfig->loadConfig(null);
+        if ($file = $this->envConfig->loadConfig(null)) {
+            $this->configFiles[] = $file;
+        }
 
         // then read the config for the project in its folder
         if ($this->commandLineConfig->get('project') !== null) {
             $this->projectConfig = new ProjectConfig($this->projects_root);
-            $this->projectConfig->loadConfig($this->commandLineConfig->get('project'));
+            if ($file = $this->projectConfig->loadConfig($this->commandLineConfig->get('project'))) {
+                $this->configFiles[] = $file;
+            }
 
             $this->dotExakatConfig = new DotExakatConfig($this->projects_root);
+            if ($file = $this->dotExakatConfig->loadConfig($this->commandLineConfig->get('project'))) {
+                $this->configFiles[] = $file;
+            }
             $this->dotExakatConfig->loadConfig(null);
 
             $this->codacyConfig = new CodacyConfig($this->projects_root);
-            $this->codacyConfig->loadConfig($this->commandLineConfig->get('project'));
+            if ($file = $this->codacyConfig->loadConfig($this->commandLineConfig->get('project'))) {
+                $this->configFiles[] = $file;
+            }
         } else {
             $this->projectConfig   = new EmptyConfig();
             $this->dotExakatConfig = new EmptyConfig();
@@ -115,6 +127,7 @@ class Config {
                                      $this->codacyConfig->toArray(), 
                                      $this->commandLineConfig->toArray()
                                      );
+        $this->options['configFiles'] = $this->configFiles;
 
         if ($this->options['command'] !== 'doctor') {
             $this->checkSelf();

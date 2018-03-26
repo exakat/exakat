@@ -33,7 +33,7 @@ class Fallthrough extends Analyzer {
              ->savePropertyAs('fullcode', 'theCase')
              ->outIs('CODE')
              ->hasOut('EXPRESSION')
-             ->noAtomInside(array('Break', 'Continue', 'Return', 'Throw', 'Goto'))
+             ->noAtomInside(array('Break', 'Continue', 'Return', 'Throw', 'Goto', 'Exit',))
              ->back('first')
              ->outIs('CASES')
              ->outWithRank('EXPRESSION', 'last')

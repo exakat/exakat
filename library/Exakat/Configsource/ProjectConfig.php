@@ -32,10 +32,10 @@ class ProjectConfig extends Config {
     public function loadConfig($project) {
         $pathToIni = "{$this->projects_root}{$project}/config.ini";
         if (!file_exists($pathToIni)) {
-            return true;
+            return self::NOT_LOADED;
         }
 
-        $this->config = parse_ini_file($pathToIni);
+        $this->config = parse_ini_file($pathToIni, true);
 
         $pathToCache = "{$this->projects_root}{$project}/config.cache";
         if (file_exists($pathToCache)) {
@@ -55,6 +55,7 @@ class ProjectConfig extends Config {
             }
         }
         unset($value);
+        $this->config['project_vcs'] = $this->config['project_vcs'] ?? '';
         
         // Converting the string format to arrays when necessary
         if (isset($this->config['other_php_versions']) && 
@@ -92,6 +93,13 @@ class ProjectConfig extends Config {
             }
             unset($ext);
         }
+        
+        if (in_array($this->config['project_vcs'], array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', ))) {
+            $this->config['git'] = false; // remove Git, which is by default
+            $this->config[$this->config['project_vcs']] = true; // potentially, revert git
+        }
+
+        return "$project/config.ini";
     }
 }
 
