@@ -27,8 +27,7 @@ use Exakat\Phpexec;
 class ExakatConfig extends Config {
     private $projects_root = '';
 
-    private $gremlins = array( 'neo4j'       => 'Gremlin3',
-                               'tinkergraph' => 'Tinkergraph',
+    private $gremlins = array( 'tinkergraph' => 'Tinkergraph',
                                'gsneo4j'     => 'GSNeo4j',
                                'janusgraph'  => 'Janusgraph',
                                'januscaes'   => 'JanusCaES',
@@ -36,8 +35,7 @@ class ExakatConfig extends Config {
                                'tcsv'        => 'Tcsv',
                                );
 
-    private $loaders = array( 'neo4j'       => 'Neo4jImport', // Could be Neo4jImport, CypherG3
-                              'tinkergraph' => 'Tinkergraph',
+    private $loaders = array( 'tinkergraph' => 'Tinkergraph',
                               'gsneo4j'     => 'SplitGraphson',
                               'janusgraph'  => 'Janusgraph',
                               'januscaes'   => 'JanusCaES',
