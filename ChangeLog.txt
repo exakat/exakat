@@ -1,4 +1,4 @@
-Version 1.1.10 (Qin Qiong, coming up)
+Version 1.2.1 (Fu Yi, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,29 @@ Version 1.1.10 (Qin Qiong, coming up)
 + Tokenizer
     + 
 
-Version 1.1.9 (Yuchi Gong, 2018-03-19)
+Version 1.2.0 (Xiao Yu, 2018-03-26)
++ Architecture
+    + Upgraded concurrency with analysis
+    + Replaced $_SERVER['_'] by PHP_BINARY
+    + Removed old code (> 1.0.0)
+    + Adopted 'stable' version for progressbar
+    + Fixed loading with Bazaar
+    + Added support for Parametrized analysis
+    + Better initial configuration with doctor
++ Report
+    + Ambassador : upgraded analyzer settings table
++ Analyzer
+    + New analyzer : Report Private functions for Wordpress
+    + New analyzer : Suggest simplifying chr(123);
+    + New analyzer : Too many native calls
+    + Updated analyzer : fallthrough are not reported with die
+    + New Theme : Random
+    + Collecting more stats for classes.
+    + Checked unit tests : 2758 / 2741 test pass (99% pass). 
++ Tokenizer
+    + Upgraded support for Heredoc
+
+Version 1.1.9 (Qin Qiong, 2018-03-19)
 + Architecture
     + Better documentation for reports
     + Adding Real Code examples to documentation
