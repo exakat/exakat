@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.1.8';
-    const BUILD = 702;
+    const VERSION = '1.2.0';
+    const BUILD = 708;
 
     private $gremlin = null;
     private $config = null;
@@ -193,7 +193,7 @@ class Exakat {
 |________|[__]`\_]\'-;__/[__|  \_]\'-;__/\__/  
                                                
 
-Exakat : @ 2014-2017 Damien Seguy. 
+Exakat : @ 2014-2018 Damien Seguy. 
 Version : ", $version, ' - Build ', $build, ' - ', $date, "\n";
 
                 break;
