@@ -20,8 +20,9 @@
  *
 */
 $applications = array(
-    'Contao'                     => array('url' => 'https://contao.org/en/'),
+    'ChurchCRM'                  => array('url' => 'http://churchcrm.io/'),
     'Cleverstyle'                => array('url' => 'https://cleverstyle.org/en'),
+    'Contao'                     => array('url' => 'https://contao.org/en/'),
     'Dolibarr'                   => array('url' => 'https://www.dolibarr.org/'),
     'Edusoho'                    => array('url' => 'https://www.edusoho.com/en'),
     'ExpressionEngine'           => array('url' => 'https://expressionengine.com/'),
@@ -29,14 +30,17 @@ $applications = array(
     'Mautic'                     => array('url' => 'https://www.mautic.org/'),
     'OpenConf'                   => array('url' => 'https://www.openconf.com/'),
     'OpenEMR'                    => array('url' => 'https://www.open-emr.org/',),
+    'Phpdocumentor'              => array('url' => 'https://www.phpdoc.org/'),
     'phpMyAdmin'                 => array('url' => 'https://www.phpmyadmin.net/'),
     'PrestaShop'                 => array('url' => 'https://prestashop.com/'),
     'SPIP'                       => array('url' => 'https://www.spip.net/'),
     'TeamPass'                   => array('url' => 'https://teampass.net/'),
+    'Thelia'                     => array('url' => 'https://thelia.net/'),
+    'ThinkPHP'                   => array('url' => 'http://www.thinkphp.cn/'),
     'Traq'                       => array('url' => 'https://traq.io/'),
     'WordPress'                  => array('url' => 'https://www.wordpress.com/'),
-    'Thelia'                     => array('url' => 'https://thelia.net/'),
     'XOOPS'                      => array('url' => 'https://xoops.org/'),
+    'Zend-Config'                => array('url' => 'https://github.com/zendframework/zend-config'),
 );
 
 ?>
