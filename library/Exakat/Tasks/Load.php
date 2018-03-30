@@ -885,9 +885,9 @@ SQL;
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
             // This is the last part
             $part = array_pop($elements);
-            $part->noDelimiter = rtrim($part->noDelimiter);
-            $part->code        = rtrim($part->code);
-            $part->fullcode    = rtrim($part->fullcode);
+            $part->noDelimiter = rtrim($part->noDelimiter, "\n");
+            $part->code        = rtrim($part->code,        "\n");
+            $part->fullcode    = rtrim($part->fullcode,    "\n");
             $elements[] = $part;
         }
         
@@ -906,7 +906,7 @@ SQL;
         $this->runPlugins($string, $elements);
 
         $this->pushExpression($string);
-
+        
         return $string;
     }
 
