@@ -32,6 +32,16 @@ class Melis extends Ambassador {
     const FILE_FILENAME  = 'report_melis';
     const FILE_EXTENSION = '';
 
+    const COLORS = array('A' => '#2ED600',
+                         'B' => '#81D900',
+                         'C' => '#D5DC00',
+                         'D' => '#DF9100',
+                         'E' => '#E23E00',
+                         'F' => '#E50016',
+                         
+                         );
+
+
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
@@ -196,7 +206,7 @@ MENU;
     }
 
     public function generateDashboard() {
-        $baseHTML = $this->getBasedPage('index');
+        $baseHTML = $this->getBasedPage('index_melis');
 
         $tags = array();
         $code = array();
@@ -207,7 +217,7 @@ MENU;
 
         // bloc Issues
         $issues = $this->getIssuesBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
+        $finalHTML = $this->injectBloc($finalHTML, 'GRADED_ISSUES', $this->generateGradingTable());
         $tags[] = 'SCRIPTISSUES';
         $code[] = $issues['script'];
 
@@ -216,7 +226,7 @@ MENU;
 
         // bloc severity
         $severity = $this->getSeverityBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOCSEVERITY', $severity['html']);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOCKING_ISSUES', $this->generateBlockingTable());
         $tags[] = 'SCRIPTSEVERITY';
         $code[] = $severity['script'];
 
@@ -481,6 +491,104 @@ JAVASCRIPT;
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' dashboard');
         $this->putBasedPage('index', $finalHTML);
+    }
+
+    private function generateGradingTable() {
+        $total = 0;
+        $rows = '';
+        $res = $this->sqlite->query(<<<SQL
+SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer like "Melis/%" AND count >= 0 ORDER BY count
+SQL
+);
+         $count = 0;
+         $countRows = 0;
+         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini');
+
+#FF0000	Bad
+#FFFF00	Bad-Average
+#FFFF00	Average
+#7FFF00	Average-Good
+#00FF00	Good
+
+            if ($row['count'] == 0) {
+                $row['grade'] = 'A';
+            } else {
+                $grade = min(ceil(log($row['count'] + 1) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                $row['grade'] = chr(66 + $grade - 1); // B to F
+            }
+            $row['color'] = self::COLORS[$row['grade']];
+            
+            $total += $row['count'];
+            $count += (int) ($row['count'] === 0);
+            $countRows++;
+
+            $rows .= "<tr><td><a href=\"issues.html#analyzer={$this->toId($row['name'])}\" title=\"$ini[name]\">$ini[name]</a></td><td>$row[count]</td><td style=\"background-color: $row[color]; color: white; font-weight: bold; font-size: 20; text-align: center; \">$row[grade]</td></tr>\n";
+        }
+
+       if ($total === 0) {
+           $grade = 'A';
+       } else {
+           $grade = min(ceil(log($total) / log(count(self::COLORS))), count(self::COLORS) - 1);
+           $grade = chr(65 + $grade); // B to F
+       }
+       $color = self::COLORS[$grade];
+            
+       $levels = '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">Graded issues</td>
+                       <td style="background-color: lightgrey">'.$total.'</td></td>
+                       <td style="background-color: '.$color.'; font-weight: bold; font-size: 20; text-align: center; ">'.$grade.'</td></tr>'.PHP_EOL.
+                  $rows;
+                  
+       return '<table width="100%">'.$levels.'</table>'.str_repeat('<br />', max(0, 12 - $countRows) );
+    }
+
+    private function generateBlockingTable() {
+        $total = 0;
+        $rows = '';
+        
+        $res = $this->sqlite->query(<<<SQL
+SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer like "Melis/%" AND count >= 0 ORDER BY count
+SQL
+);
+        $count = 0;
+        $rowCounts = 0;
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+                $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini');
+
+#FF0000	Bad
+#FFFF00	Bad-Average
+#FFFF00	Average
+#7FFF00	Average-Good
+#00FF00	Good
+
+                if ($row['count'] == 0) {
+                    $row['grade'] = 'A';
+                } else {
+                    $row['grade'] = 'E';
+                }
+                $row['color'] = self::COLORS[$row['grade']];
+                
+                $total += $row['count'];
+                $count += (int) ($row['count'] === 0);
+                ++$rowCounts;
+
+                $rows .= "<tr><td><a href=\"issues.html#analyzer={$this->toId($row['name'])}\" title=\"$ini[name]\">$ini[name]</a></td><td>$row[count]</td><td style=\"background-color: $row[color]; color: white; font-weight: bold; font-size: 20; text-align: center; \">$row[grade]</td></tr>\n";
+            }
+
+            if ($total === 0) {
+                $grade = 'A';
+            } else {
+                $grade = min(ceil(log($total) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                $grade = chr(65 + $grade); // B to F
+            }
+            $color = self::COLORS[$grade];
+            
+            $levels = '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">Blocking issues</td>
+                            <td style="background-color: lightgrey">'.$total.'</td></td>
+                            <td style="background-color: '.$color.'; font-weight: bold; font-size: 20; text-align: center; ">'.$grade.'</td></tr>'.PHP_EOL.
+                       $rows;
+            
+           return '<table width="100%">'.$levels.'</table>'.str_repeat('<br />', max(0, 12 - $rowCounts) );
     }
 
     public function generateExtensionsBreakdown() {
@@ -1220,8 +1328,6 @@ SQL;
 
         $this->putBasedPage('ext_lib', $html);
     }
-
-
 
     protected function generateAnalyzerSettings() {
         $settings = '';

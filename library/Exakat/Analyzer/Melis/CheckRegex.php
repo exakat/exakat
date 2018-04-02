@@ -49,19 +49,21 @@ class CheckRegex extends Analyzer {
             }
         }
 
-        $this->atomIs('Keyvalue')   
-             ->outIs('INDEX')
-             ->atomIs('String')
-             ->noDelimiterIs('constraints')
-             ->inIs('INDEX')
-             ->outIs('VALUE')
-             ->atomIs('Arrayliteral')
-             ->outIs('ARGUMENT')
-             ->outIs('VALUE')
-             ->noDelimiterIs($errors)
-             ->back('first');
-        $this->prepareQuery();
-
+        if (!empty($errors)) {
+            $this->atomIs('Keyvalue')   
+                 ->outIs('INDEX')
+                 ->atomIs('String')
+                 ->noDelimiterIs('constraints')
+                 ->inIs('INDEX')
+                 ->outIs('VALUE')
+                 ->atomIs('Arrayliteral')
+                 ->outIs('ARGUMENT')
+                 ->outIs('VALUE')
+                 ->noDelimiterIs($errors)
+                 ->back('first');
+            $this->prepareQuery();
+        }
+        
         ////////////////////////////////////////////////////////
         // in regex/
         ////////////////////////////////////////////////////////
@@ -81,17 +83,18 @@ class CheckRegex extends Analyzer {
                 $errors[] = $regex;
             }
         }
-
-        $this->atomIs('Keyvalue')   
-             ->outIs('INDEX')
-             ->atomIs('String')
-             ->noDelimiterIs('regex')
-             ->inIs('INDEX')
-             ->outIs('VALUE')
-             ->noDelimiterIs($errors)
-             ->back('first');
-        $this->prepareQuery();
-
+        
+        if (!empty($errors)) {
+            $this->atomIs('Keyvalue')   
+                 ->outIs('INDEX')
+                 ->atomIs('String')
+                 ->noDelimiterIs('regex')
+                 ->inIs('INDEX')
+                 ->outIs('VALUE')
+                 ->noDelimiterIs($errors)
+                 ->back('first');
+            $this->prepareQuery();
+        }
     }
 }
 

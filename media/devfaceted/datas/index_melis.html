@@ -1,0 +1,69 @@
+        <!-- Main content -->
+        <section class="content" id="dashboard">
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="box">
+                  {{AUDIT_DATE}}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              {{BLOCHASHDATA}}
+            </div>
+
+            <div class="col-md-3">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Graded issues</h3>
+                </div>
+                  {{GRADED_ISSUES}}
+                <!-- /.box-body -->
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Blocking issues</h3>
+                </div>
+                  {{BLOCKING_ISSUES}}
+                <!-- /.box-body -->
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Filename Overview</h3>
+                </div>
+                <div class="box-body chart-responsive">
+                  <div class="chart" id="filename"></div>
+                  <div class="clearfix">
+                    <div class="block-cell-name bold">TOP 10 Filename</div>
+                    <div class="block-cell-issue bold text-center">Issues</div>
+                  </div>
+                  {{TOPFILE}}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Analyzers Overview</h3>
+                </div>
+                <div class="box-body chart-responsive">
+                  <div class="chart" id="container"></div>
+                  <div class="clearfix">
+                    <div class="block-cell-name bold">TOP 10 Analyser</div>
+                    <div class="block-cell-issue bold text-center">Issues</div>
+                  </div>
+                  {{TOPANALYZER}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>

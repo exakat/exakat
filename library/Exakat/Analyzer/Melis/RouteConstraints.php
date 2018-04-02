@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Melis;
 use Exakat\Analyzer\Analyzer;
 
 class RouteConstraints extends Analyzer {
+    const REGEX_MELIS_VAR = ':[a-zA-Z0-9_]+[\\\\]\\\\[]';
+    
     public function analyze() {
         // The route has a variable but no validation
         $this->atomIs('Keyvalue')   
@@ -34,12 +36,12 @@ class RouteConstraints extends Analyzer {
              ->inIs('INDEX')
              ->outIs('VALUE')
              ->atomIs('String')
-             ->regexIs('noDelimiter', ':[a-zA-Z0-9]+\\\\]')
+             ->regexIs('noDelimiter', self::REGEX_MELIS_VAR)
              ->inIs('VALUE')
              ->inIs('ARGUMENT')
              ->raw('not(where( __.out("ARGUMENT").out("INDEX").has("noDelimiter", "constraints")))');
         $this->prepareQuery();
-        
+
         $this->atomIs('Keyvalue')   
              ->outIs('INDEX')
              ->atomIs('String')
@@ -47,8 +49,8 @@ class RouteConstraints extends Analyzer {
              ->inIs('INDEX')
              ->outIs('VALUE')
              ->atomIs('String')
-             ->regexIs('noDelimiter', ':[a-zA-Z0-9]+\\\\]')
-             ->raw('sideEffect{ids = it.get().value("noDelimiter").findAll(/:([a-zA-Z0-9]+)\]/){match, group -> group }; }')
+             ->regexIs('noDelimiter', self::REGEX_MELIS_VAR)
+             ->raw('sideEffect{ids = it.get().value("noDelimiter").findAll(/:([a-zA-Z0-9_]+)[\\\\\[\\\\\]]/){match, group -> group }; }')
              ->inIs('VALUE')
              ->inIs('ARGUMENT')
              ->outIs('ARGUMENT')
