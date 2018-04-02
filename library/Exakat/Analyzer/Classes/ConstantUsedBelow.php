@@ -37,8 +37,7 @@ class ConstantUsedBelow extends Analyzer {
              ->inIs('CONST') // class
              ->savePropertyAs('fullnspath', 'classpath')
              ->raw('where( __.repeat( __.out("DEFINITION").in("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
-                             .where( __.out("METHOD").out("BLOCK")
-                                       .repeat( __.out('.$this->linksDown.')).emit().times('.self::MAX_LOOPING.').hasLabel("Staticconstant")
+                             .where( __.repeat( __.out('.$this->linksDown.')).emit().times('.self::MAX_LOOPING.').hasLabel("Staticconstant")
                                        .out("CONSTANT").hasLabel("Name").filter{ it.get().value("code") == constname}
                               )
                              .count().is(neq(0)) )')
