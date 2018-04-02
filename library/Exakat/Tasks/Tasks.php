@@ -91,12 +91,12 @@ abstract class Tasks {
             $this->logname = strtolower(substr($a, strrpos($a, '\\') + 1));
         }
 
-        if ($this->logname != self::LOG_NONE) {
+        if ($this->logname !== self::LOG_NONE) {
             $this->log = new Log($this->logname,
                                  $this->config->projects_root.'/projects/'.$this->config->project);
         }
 
-        if ($this->config->project != 'default' &&
+        if ($this->config->project !== 'default' &&
             file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
             $this->datastore = new Datastore($this->config);
         }
