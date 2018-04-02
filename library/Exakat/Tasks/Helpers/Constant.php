@@ -51,7 +51,6 @@ class Constant extends Plugin {
         switch ($atom->atom) {
             case 'Integer' :
             case 'Real' :
-            case 'String' :
             case 'Boolean' :
             case 'Null' :
             case 'Void' :
@@ -70,6 +69,7 @@ class Constant extends Plugin {
                 $atom->constant = $extras['LEFT']->constant && $extras['RIGHT']->constant;
                 break;
 
+            case 'String' :
             case 'Arrayliteral' :
             case 'Concatenation' :
             case 'Argument' :
@@ -99,6 +99,10 @@ class Constant extends Plugin {
                 $atom->constant = $extras['CONDITION']->constant &&
                                   $extras['THEN']->constant  &&
                                   $extras['ELSE']->constant;
+                break;
+
+            case 'Closure' :
+                $atom->constant = true;
                 break;
 
             case 'Functioncall' :

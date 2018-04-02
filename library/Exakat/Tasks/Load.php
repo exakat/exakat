@@ -1100,7 +1100,6 @@ SQL;
         $function->token      = $this->getToken($this->tokens[$current][0]);
         $function->fullnspath = $fullnspath;
         $function->aliased    = $aliased;
-        $function->constant   = $function->atom === 'Closure';
 
         $this->currentFunction[] = $function;
         $this->currentMethod[] = $function;
@@ -1183,6 +1182,7 @@ SQL;
 
         $this->contexts[self::CONTEXT_CLASS] = $previousClassContext;
         $this->contexts[self::CONTEXT_FUNCTION] = $previousFunctionContext;
+        $this->runPlugins($function);
 
         array_pop($this->currentFunction);
         array_pop($this->currentMethod);

@@ -4,17 +4,13 @@ $expected     = array('\'t$gfr ddde $rere}\'',
                       '\'t$fg3 \'',
                       '\'w$za \'',
                       '\'x$y\'',
-                      '$inNowdoc that may be an error
-
-',
+                      '$inNowdoc that may be an error',
                       'Nowdoc wrongfully spread over 2 statement (part a)
 
 NOWDOC;
 
 $gg = <<<\'NOWDOC2\'
-Nowdoc wrongfully spread over 2 statement (part b)
-
-',
+Nowdoc wrongfully spread over 2 statement (part b)',
                       '<<<HEREDOC2
 Heredoc wrongfully spread over 2 statement (part a)
 
