@@ -41,7 +41,7 @@ Basic requirements :
 
 * exakat.phar, the main code.
 * Gremlin server : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.2.x are supported, 3.3.x not yet.
-* Java 8.x. Java 9.x will be supported later. Java 7.x 
+* Java 8.x. Java 9.x/10.x will be supported later. Java 7.x was used, but is not actively supported.
 * PHP 7.0 or later to run. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
 
 Optional requirements : 
@@ -54,6 +54,32 @@ OS requirements :
 Exakat has beed tested on OSX, Debian and Ubuntu (up to 14.04). Exakat should work on Linux distributions, may be with little work. Exakat hasn't been tested on Windows at all. 
 
 For installation, curl or wget, and zip are needed.
+
+Download Exakat
+---------------
+
+You can download exakat directly from `http://dist.exakat.io/ <http://dist.exakat.io/>`_. 
+
+This server also provides older versions of Exakat. It is recommended to always download the last version, which is available with `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_. 
+
+For each version, MD5 and SHA256 signatures are available. The downloaded MD5 must match the one in the related .md5 file. The .md5 also has the version number, for extra check.
+
+::
+
+    curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
+    
+    curl -o exakat.phar.md5 http://dist.exakat.io/index.php?file=latest.md5
+    //22110fe2fa1b412f5d2f4b716947760d  exakat-1.2.0.phar
+    md5sum exakat.phar.md5
+    // Example : 
+    //22110fe2fa1b412f5d2f4b716947760d  exakat.phar
+    
+    curl -o exakat.phar.sha256 http://dist.exakat.io/index.php?file=latest.sha256
+    //a2a2b9c41ae94c6446d43e370c6ba4cdd970d232d817bf30207e58a61c5adfd9  exakat-1.2.0.phar
+    sha256sum exakat.phar.md5
+    // Example : 
+    //a2a2b9c41ae94c6446d43e370c6ba4cdd970d232d817bf30207e58a61c5adfd9  exakat.phar
+
 
 Quick installation with OSX
 ---------------------------

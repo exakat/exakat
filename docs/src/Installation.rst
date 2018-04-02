@@ -60,7 +60,7 @@ Download Exakat
 
 You can download exakat directly from `http://dist.exakat.io/ <http://dist.exakat.io/>`_. 
 
-This server also provides older versions of Exakat. It is recommended to always download the last version, which is available with `http://dist.exakat.io/ <http://dist.exakat.io/index.php?file=latest>`_. 
+This server also provides older versions of Exakat. It is recommended to always download the last version, which is available with `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_. 
 
 For each version, MD5 and SHA256 signatures are available. The downloaded MD5 must match the one in the related .md5 file. The .md5 also has the version number, for extra check.
 

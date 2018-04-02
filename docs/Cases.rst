@@ -76,13 +76,62 @@ $extension is assigned with the results of pathinfo($reference_name, PATHINFO_EX
 OpenConf
 ^^^^^^^^
 
-:ref:`logical-should-use-symbolic-operators`, in /chair/export.inc:143:143. 
+:ref:`logical-should-use-symbolic-operators`, in /chair/export.inc:143. 
 
 In this context, the priority of execution is used on purpose; $coreFile only collect the temporary name of the export file, and when this name is empty, then the second operand of OR is executed, though never collected. Since this second argument is a 'die', its return value is lost, but the initial assignation is never used anyway. 
 
 .. code-block:: php
 
     $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
+
+--------
+
+
+Timestamp Difference
+====================
+
+.. _zurmo-structures-timestampdifference:
+
+Zurmo
+^^^^^
+
+:ref:`timestamp-difference`, in app/protected/modules/import/jobs/ImportCleanupJob.php:73. 
+
+This is wrong twice a year, in countries that has day-ligth saving time. One of the weeks will be too short, and the other will be too long. 
+
+.. code-block:: php
+
+    /**
+             * Get all imports where the modifiedDateTime was more than 1 week ago.  Then
+             * delete the imports.
+             * (non-PHPdoc)
+             * @see BaseJob::run()
+             */
+            public function run()
+            {
+                $oneWeekAgoTimeStamp = DateTimeUtil::convertTimestampToDbFormatDateTime(time() - 60 * 60 *24 * 7);
+
+--------
+
+
+
+.. _shopware-structures-timestampdifference:
+
+shopware
+^^^^^^^^
+
+:ref:`timestamp-difference`, in engine/Shopware/Controllers/Backend/Newsletter.php:150. 
+
+When daylight saving strike, the email may suddenly be locked for 1 hour minus 30 seconds ago. The lock will be set for the rest of the hour, until the server catch up. 
+
+.. code-block:: php
+
+    // Check lock time. Add a buffer of 30 seconds to the lock time (default request time)
+                if (!empty($mailing['locked']) && strtotime($mailing['locked']) > time() - 30) {
+                    echo "Current mail: '" . $subjectCurrentMailing . "'\n";
+                    echo "Wait " . (strtotime($mailing['locked']) + 30 - time()) . " seconds ...\n";
+                    return;
+                }
 
 --------
 
@@ -136,6 +185,78 @@ When the line is long, it tends to be more and more difficult to review the valu
 .. code-block:: php
 
     !empty($permissions[$permissionBase . ':deleteown']) || !empty($permissions[$permissionBase . ':deleteown']) || !empty($permissions[$permissionBase . ':delete'])
+
+--------
+
+
+Dont Echo Error
+===============
+
+.. _churchcrm-security-dontechoerror:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`dont-echo-error`, in wp-admin/includes/misc.php:74. 
+
+This is classic debugging code that should never reach production. mysqli_error() and mysqli_errno() provide valuable information is case of an error, and may be exploited by intruders.
+
+.. code-block:: php
+
+    if (mysqli_error($cnInfoCentral) != '') {
+            echo gettext('An error occured: ').mysqli_errno($cnInfoCentral).'--'.mysqli_error($cnInfoCentral);
+        } else {
+
+--------
+
+
+
+.. _phpdocumentor-security-dontechoerror:
+
+Phpdocumentor
+^^^^^^^^^^^^^
+
+:ref:`dont-echo-error`, in src/phpDocumentor/Plugin/Graphs/Writer/Graph.php:77. 
+
+Default development behavior : display the caught exception. Production behavior should not display that message, but log it for later review. Also, the return in the catch should be moved to the main code sequence.
+
+.. code-block:: php
+
+    public function processClass(ProjectDescriptor $project, Transformation $transformation)
+        {
+            try {
+                $this->checkIfGraphVizIsInstalled();
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+    
+                return;
+            }
+
+--------
+
+
+Could Be Private Class Constant
+===============================
+
+.. _phinx-classes-couldbeprivateconstante:
+
+Phinx
+^^^^^
+
+:ref:`could-be-private-class-constant`, in /src/Phinx/Db/Adapter/MysqlAdapter.php:46. 
+
+The code includes a fair number of class constants. The one listed here are only used to define TEXT columns in MySQL, with their maximal size. Since they are only intented to be used by the MySQL driver, they may be private.
+
+.. code-block:: php
+
+    class MysqlAdapter extends PdoAdapter implements AdapterInterface
+    {
+    
+    //.....
+        const TEXT_SMALL   = 255;
+        const TEXT_REGULAR = 65535;
+        const TEXT_MEDIUM  = 16777215;
+        const TEXT_LONG    = 4294967295;
 
 --------
 
@@ -285,6 +406,55 @@ implode('', ) is probably not the slowest part in these lines.
 --------
 
 
+Use pathinfo() Arguments
+========================
+
+.. _zend-config-php-usepathinfoargs:
+
+Zend-Config
+^^^^^^^^^^^
+
+:ref:`use-pathinfo()-arguments`, in src/Factory.php:74:90. 
+
+The `$filepath` is broken into pieces, and then, only the 'extension' part is used. With the PATHINFO_EXTENSION constant used as a second argument, only this value could be returned. 
+
+.. code-block:: php
+
+    $pathinfo = pathinfo($filepath);
+    
+            if (! isset($pathinfo['extension'])) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Filename "%s" is missing an extension and cannot be auto-detected',
+                    $filename
+                ));
+            }
+    
+            $extension = strtolower($pathinfo['extension']);
+            // Only $extension is used beyond that point
+
+--------
+
+
+
+.. _thinkphp-php-usepathinfoargs:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`use-pathinfo()-arguments`, in ThinkPHP/Extend/Library/ORG/Net/UploadFile.class.php:508. 
+
+Without any other check, pathinfo() could be used with PATHINFO_EXTENSION.
+
+.. code-block:: php
+
+    private function getExt($filename) {
+            $pathinfo = pathinfo($filename);
+            return $pathinfo['extension'];
+        }
+
+--------
+
+
 Compare Hash
 ============
 
@@ -384,6 +554,52 @@ This code only exports the POST variables as globals. And it does clean incoming
 --------
 
 
+Dont Echo Error
+===============
+
+.. _churchcrm-security-dontechoerror:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`dont-echo-error`, in wp-admin/includes/misc.php:74. 
+
+This is classic debugging code that should never reach production. mysqli_error() and mysqli_errno() provide valuable information is case of an error, and may be exploited by intruders.
+
+.. code-block:: php
+
+    if (mysqli_error($cnInfoCentral) != '') {
+            echo gettext('An error occured: ').mysqli_errno($cnInfoCentral).'--'.mysqli_error($cnInfoCentral);
+        } else {
+
+--------
+
+
+
+.. _phpdocumentor-security-dontechoerror:
+
+Phpdocumentor
+^^^^^^^^^^^^^
+
+:ref:`dont-echo-error`, in src/phpDocumentor/Plugin/Graphs/Writer/Graph.php:77. 
+
+Default development behavior : display the caught exception. Production behavior should not display that message, but log it for later review. Also, the return in the catch should be moved to the main code sequence.
+
+.. code-block:: php
+
+    public function processClass(ProjectDescriptor $project, Transformation $transformation)
+        {
+            try {
+                $this->checkIfGraphVizIsInstalled();
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+    
+                return;
+            }
+
+--------
+
+
 Logical Should Use Symbolic Operators
 =====================================
 
@@ -409,7 +625,7 @@ $extension is assigned with the results of pathinfo($reference_name, PATHINFO_EX
 OpenConf
 ^^^^^^^^
 
-:ref:`logical-should-use-symbolic-operators`, in /chair/export.inc:143:143. 
+:ref:`logical-should-use-symbolic-operators`, in /chair/export.inc:143. 
 
 In this context, the priority of execution is used on purpose; $coreFile only collect the temporary name of the export file, and when this name is empty, then the second operand of OR is executed, though never collected. Since this second argument is a 'die', its return value is lost, but the initial assignation is never used anyway. 
 

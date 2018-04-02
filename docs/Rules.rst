@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 26 Mar 2018 08:47:25 +0000
-.. comment: Generation hash : 4840fd30330e771dba717272158653284391894b
+.. comment: Generation date : Mon, 02 Apr 2018 17:54:22 +0000
+.. comment: Generation hash : 0a93eefa80b4d891bd82b1fa8f40234da9ad84ac
 
 
 .. _$http\_raw\_post\_data:
@@ -3359,13 +3359,19 @@ As a general rule, it is recommended to make constant 'private' by default, and 
    ?>
 
 
+Constant shall stay 'public' when the code has to be compatible with PHP 7.0 and older. 
+
+They also have to be public in the case of component : some of those constants have to be used by external actors, in order to configure the component.
+
 See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_.
 
-+------------+---------------------------------+
-| Short name | Classes/CouldBePrivateConstante |
-+------------+---------------------------------+
-| Themes     | :ref:`Analyze`                  |
-+------------+---------------------------------+
++------------+----------------------------------------------+
+| Short name | Classes/CouldBePrivateConstante              |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`                               |
++------------+----------------------------------------------+
+| Examples   | :ref:`phinx-classes-couldbeprivateconstante` |
++------------+----------------------------------------------+
 
 
 
@@ -4519,11 +4525,13 @@ It is recommended to avoid displaying error messages directly to the browser.
 
 Error messages should be logged, but not displayed.
 
-+------------+---------------------------------+
-| Short name | Security/DontEchoError          |
-+------------+---------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Security` |
-+------------+---------------------------------+
++------------+--------------------------------------------------------------------------------------+
+| Short name | Security/DontEchoError                                                               |
++------------+--------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security`                                                      |
++------------+--------------------------------------------------------------------------------------+
+| Examples   | :ref:`churchcrm-security-dontechoerror`, :ref:`phpdocumentor-security-dontechoerror` |
++------------+--------------------------------------------------------------------------------------+
 
 
 
@@ -5343,7 +5351,7 @@ For PHP 7.0 and later, it is important to put `'eval() <http://www.php.net/eval>
 +------------+-------------------------------------------------------------------------------+
 | Short name | Structures/EvalUsage                                                          |
 +------------+-------------------------------------------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Performances`, :ref:`Security`                          |
+| Themes     | :ref:`Analyze`, :ref:`Performances`, :ref:`Security`, :ref:`Wordpress`        |
 +------------+-------------------------------------------------------------------------------+
 | ClearPHP   | `no-eval <https://github.com/dseguy/clearPHP/tree/master/rules/no-eval.md>`__ |
 +------------+-------------------------------------------------------------------------------+
@@ -12655,7 +12663,7 @@ Loops on files that can't be open results in infinite loop.
 
 `'fgets() <http://www.php.net/fgets>`_, and functions like fgetss, fgetcsv, `'fread() <http://www.php.net/fread>`_, return false when they finish reading, or can't access the file. 
 
-In case the file is not accessible, comparing the result of the reading to something that is falsy, leads to a permanant valid condition. The will only finish when the max_execution_time is reached. 
+In case the file is not accessible, comparing the result of the reading to something that is falsy, leads to a permanent valid condition. The will only finish when the max_execution_time is reached. 
 
 .. code-block:: php
 
@@ -12935,6 +12943,34 @@ See also `printf <http://php.net/printf>`_ and `sprintf <http://php.net/sprintf>
 +------------+----------------------------+
 | Themes     | :ref:`Analyze`             |
 +------------+----------------------------+
+
+
+
+.. _private-function-usage:
+
+Private Function Usage
+######################
+
+
+Wordpress has a list of 'private' function, that is reserves for itself. It is forbidden to use them.
+
+.. code-block:: php
+
+   <?php
+   
+   ///wp-includes/class-wp-theme.php, line 1139
+   $types = explode( ',', _cleanup_header_comment( $type[1] ) );
+   
+   ?>
+
+
+See also `Category:Private Functions <https://codex.wordpress.org/Category:Private_Functions>`_.
+
++------------+--------------------------------+
+| Short name | Wordpress/PrivateFunctionUsage |
++------------+--------------------------------+
+| Themes     | :ref:`Wordpress`               |
++------------+--------------------------------+
 
 
 
@@ -16650,7 +16686,7 @@ Timestamp Difference
 ####################
 
 
-time() and `'microtime() <http://www.php.net/microtime>`_ shouldn't be used to calculate duration or with durations. 
+time() and `'microtime() <http://www.php.net/microtime>`_ shouldn't be used to calculate duration. 
 
 time() and `'microtime() <http://www.php.net/microtime>`_ are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announced by IERS.
 
@@ -16673,11 +16709,13 @@ When the difference may be rounded to a larger time unit (rounding the differenc
 When the difference is very small, it requires a better way to measure time difference, such as `Ticks <http://php.net/manual/en/control-structures.declare.php#control-structures.declare.ticks>'_, 
 `ext/hrtime <http://php.net/manual/en/book.hrtime.php>'_, or including a check on the actual time zone (`'ini_get() <http://www.php.net/ini_get>`_ with 'date.timezone').
 
-+------------+--------------------------------+
-| Short name | Structures/TimestampDifference |
-+------------+--------------------------------+
-| Themes     | :ref:`Analyze`                 |
-+------------+--------------------------------+
++------------+---------------------------------------------------------------------------------------------+
+| Short name | Structures/TimestampDifference                                                              |
++------------+---------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                              |
++------------+---------------------------------------------------------------------------------------------+
+| Examples   | :ref:`zurmo-structures-timestampdifference`, :ref:`shopware-structures-timestampdifference` |
++------------+---------------------------------------------------------------------------------------------+
 
 
 
@@ -19127,7 +19165,7 @@ Use Count Recursive
 
 The code could use the recursive version of count.
 
-The second argument of count, when set to COUNT_RECURSIVE, count recursively the elements. It also counts the elements themselves. 
+The second argument of count, when set to `COUNT_RECURSIVE`, count recursively the elements. It also counts the elements themselves. 
 
 .. code-block:: php
 
@@ -19803,11 +19841,13 @@ Depending on the situation, the functions `'dirname() <http://www.php.net/dirnam
 
 See also `list <http://php.net/manual/en/function.list.php>`_.
 
-+------------+---------------------+
-| Short name | Php/UsePathinfoArgs |
-+------------+---------------------+
-| Themes     | :ref:`Performances` |
-+------------+---------------------+
++------------+-----------------------------------------------------------------------------+
+| Short name | Php/UsePathinfoArgs                                                         |
++------------+-----------------------------------------------------------------------------+
+| Themes     | :ref:`Performances`                                                         |
++------------+-----------------------------------------------------------------------------+
+| Examples   | :ref:`zend-config-php-usepathinfoargs`, :ref:`thinkphp-php-usepathinfoargs` |
++------------+-----------------------------------------------------------------------------+
 
 
 
@@ -20738,6 +20778,30 @@ Starting with PHP 7.1, the PHP engine check thouroughly that $this is used in an
 +------------+-------------------------------------------+
 | Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP71` |
 +------------+-------------------------------------------+
+
+
+
+.. _using-short-tags:
+
+Using Short Tags
+################
+
+
+The code makes use of short tags.
+
+<? /* php code */ ?>. 
+
+It is recommended to not use short tags, and use standard PHP tags : .. code-block:: php
+
+   <?php ?>
+
++------------+-------------------------------------------------------------------------------------------+
+| Short name | Structures/ShortTags                                                                      |
++------------+-------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Wordpress`                                                                          |
++------------+-------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-short-tags <https://github.com/dseguy/clearPHP/tree/master/rules/no-short-tags.md>`__ |
++------------+-------------------------------------------------------------------------------------------+
 
 
 
@@ -22313,9 +22377,9 @@ mcrypt_create_iv() With Default Values
 ######################################
 
 
-Avoid using mcrypt_create_iv() default values.
+Avoid using `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`_ default values.
 
-mcrypt_create_iv() used to have MCRYPT_DEV_RANDOM as default values, and in PHP 5.6, it now uses MCRYPT_DEV_URANDOM.
+`mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>` used to have `MCRYPT_DEV_RANDOM` as default values, and in PHP 5.6, it now uses `MCRYPT_DEV_URANDOM`.
 
 .. code-block:: php
 
@@ -22332,7 +22396,7 @@ mcrypt_create_iv() used to have MCRYPT_DEV_RANDOM as default values, and in PHP 
 
 If the code doesn't have a second argument, it relies on the default value. It is recommended to set explicitly the value, so has to avoid problems while migrating.
 
-See also `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`.
+See also `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`_.
 
 +------------+----------------------------------------+
 | Short name | Structures/McryptcreateivWithoutOption |
