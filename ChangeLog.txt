@@ -1,4 +1,4 @@
-Version 1.2.1 (Fu Yi, coming up)
+Version 1.2.2 (Yin Kaishan, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,21 @@ Version 1.2.1 (Fu Yi, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.2.1 (Fu Yi, 2018-04-02)
++ Architecture
+    + Fixed generation of analysis logs
+    + Fixed doctor, which wouldn't diagnostic the absence of needed extensions
++ Report
+    + More real-life examples in docs
++ Analyzer
+    + New favorites : property declaration unique or multiples ? 
+    + New analysis for Melis : Regex check and Route constraints
+    + Upgraded analysis : Constant used below
+    + Checked unit tests : 2760 / 2766 test pass (99% pass). 
++ Tokenizer
+    + Fixed counts in property declarations
+    + Fixed final new lines in heredoc/nowdoc
 
 Version 1.2.0 (Xiao Yu, 2018-03-26)
 + Architecture
