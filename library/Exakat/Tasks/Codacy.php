@@ -36,31 +36,25 @@ class Codacy extends Tasks {
     const CONCURENCE = self::NONE;
 
     public function run() {
-        // Check for requested file
-        if (!empty($this->config->filename) && !file_exists($this->config->filename)) {
-            throw new NoSuchFile($this->config->filename);
-        } elseif (!empty($this->config->dirname) && !file_exists($this->config->dirname)) {
-            throw new NoSuchDir($this->config->filename);
+
+        // Database is not cleaned, as the docker container is supposed to be started and clean. 
+        if (isset($this->config->codacy_error)) {
+            $error = new \Stdclass();
+            $error->filename = ".codacy.json";
+            $error->message  = $this->config->codacy_error;
+
+            print json_encode($error);
+            return;
         }
-
-        display("Cleaning DB\n");
-        $clean = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        $clean->run();
-
-        display("Cleaning project\n");
-        $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        $clean->run();
-        $this->datastore = new Datastore($this->config);
-
+        
         if ($this->config->codacy_files === 'all') {
             display("Running files".PHP_EOL);
             $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
             $analyze->run();
             unset($analyze);
         } else {
-            $this->datastore->addRow('files', array_map(function ($a) {
-                    return array('file'   => "/$a");
-            }, $this->config->codacy_files));
+            $this->datastore->addRow('files', 
+                                      array_map(function ($a) { return array('file'   => "/$a");}, $this->config->codacy_files));
         }
         
         $load = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
@@ -110,9 +104,9 @@ class Codacy extends Tasks {
         $dump->run();
         unset($dump);
 
-        $load = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        $load->run();
-        unset($load);
+        $report = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $report->run();
+        unset($report);
 
         display("Analyzed project\n");
     }
