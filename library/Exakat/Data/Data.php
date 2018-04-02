@@ -186,54 +186,6 @@ class Data {
         return $return;
     }
     
-    public function getDeprecated($component = null, $release = null) {
-        assert(false);
-        $where = array();
-        if ($component !== null) {
-            $where[] = 'components.component = "'.$component.'"';
-        }
-        if ($release !== null) {
-            $where[] = "releases.release = \"release-$release.0\"";
-        }
-        if (!empty($where)) {
-            $where = ' WHERE '.implode(' AND ', $where);
-        } else {
-            $where = '';
-        }
-        
-        
-        $query = 'SELECT type, cit, name, namespaces.namespace, release FROM deprecated 
-                    JOIN namespaces 
-                      ON deprecated.namespace_id = namespaces.id
-                    JOIN releases 
-                      ON namespaces.release_id = releases.id
-                    JOIN components 
-                      ON releases.component_id = components.id 
-                    '.$where.' 
-                    GROUP BY type, cit, name';
-
-        $res = $this->sqlite->query($query);
-        $return = array();
-
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $type = $row['type'];
-            unset($row['type']);
-
-            $release = $row['release'];
-            unset($row['release']);
-
-            if (isset($return[$type][$release])) {
-                $return[$type][$release][] = $row;
-            } elseif (isset($return[$type])) {
-                $return[$type][$release] = array($row);
-            } else {
-                $return[$type] = array($release => array($row));
-            }
-        }
-
-        return $return;
-    }
-
 }
 
 ?>

@@ -972,11 +972,12 @@ HTML;
             $theDescription = $definitions[$fileName]['description'];
             $theAnalyzer    = $definitions[$fileName]['analyzer'];
 
-            $theTable = '';
+            $theTable = array();
             $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $theTable .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+                $theTable[] = '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>";
             }
+            $theTable = array_join(PHP_EOL, $theTable);
 
             $html = $this->getBasedPage('inventories');
             $html = $this->injectBloc($html, 'TITLE', $theTitle);
@@ -987,11 +988,12 @@ HTML;
     }
 
     private function generateAlteredDirectives() {
-        $alteredDirectives = '';
+        $alteredDirectives = array();
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $alteredDirectives .= '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $alteredDirectives[] = '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>";
         }
+        $alteredDirectives = array_join(PHP_EOL, $alteredDirectives);
 
         $html = $this->getBasedPage('altered_directives');
         $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);
