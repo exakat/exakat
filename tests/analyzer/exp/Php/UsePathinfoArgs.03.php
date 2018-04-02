@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('array_pop(explode(\'.\', $path))', 
-                      'array_pop(split(\'.\', $path))', 
+$expected     = array('array_pop(explode(\'.\', $path))',
+                      'array_pop(split(\'.\', $path))',
                       'substr(strrchr($path, "."), 1)',
                      );
 
