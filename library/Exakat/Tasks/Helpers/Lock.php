@@ -27,11 +27,15 @@ class Lock {
     
     function __construct($path, $name) {
         $this->path = $path.'/'.md5($name);
-        file_put_contents($this->path, $name);
     }
 
     function check() {
-        $fp = fopen($this->path, 'r');
+        $fp = @fopen($this->path, 'x');
+        if ($fp === false) {
+            print "No file creation $this->path\n";
+            $this->path = null;
+            return false;
+        }
         if (flock($fp, LOCK_EX | LOCK_NB)) {
             return true;
         } else {
