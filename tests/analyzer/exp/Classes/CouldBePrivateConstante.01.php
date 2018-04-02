@@ -1,6 +1,7 @@
 <?php
 
 $expected     = array('APUBLICBUTSBPRIVATE = 1',
+                      'APUBLICBUTSBPRIVATE2 = 2',
                       'APROTECTESBPRIVATE = 8',
                      );
 
