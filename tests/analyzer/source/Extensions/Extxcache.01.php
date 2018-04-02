@@ -9,4 +9,6 @@ This guest book has been visited <?php echo $count = xcache_inc("count"); ?> tim
 if (($count % 100) == 0) {
   save_count_to_mysql($count);
 }
+
+echo XCACHE_NOT_A_CONSTANT;
 ?>
