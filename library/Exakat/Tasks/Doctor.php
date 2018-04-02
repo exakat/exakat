@@ -24,6 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Exakat;
+use Exakat\Graph\Graph;
 use Exakat\Config;
 use Exakat\Task;
 use Exakat\Phpexec;
@@ -44,12 +45,17 @@ class Doctor extends Tasks {
 
     protected $logname = self::LOG_NONE;
 
+    public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
+        $this->config = $config;
+        // Ignoring everything
+    }
+
     public function run() {
         $stats = array();
-        
         $stats = array_merge($stats, 
                              $this->checkPreRequisite(), 
                              $this->checkAutoInstall());
+
 
         $phpBinaries = array('php'.str_replace('.', '', substr(PHP_VERSION, 0, 3)) => PHP_BINARY);
         foreach(self::VERSIONS as $configName => $version) {
