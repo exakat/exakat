@@ -1,12 +1,12 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at, )exakat.io>
+ * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
- * (at your option, ) any later version.
+ * (at your option) any later version.
  *
  * Exakat is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,12 +29,13 @@ $applications = array(
     'LiveZilla'                  => array('url' => 'https://www.livezilla.net/home/en/', ),
     'Mautic'                     => array('url' => 'https://www.mautic.org/', ),
     'OpenConf'                   => array('url' => 'https://www.openconf.com/', ),
-    'OpenEMR'                    => array('url' => 'https://www.open-emr.org/',, ),
+    'OpenEMR'                    => array('url' => 'https://www.open-emr.org/', ),
     'Phpdocumentor'              => array('url' => 'https://www.phpdoc.org/', ),
     'Phinx'                      => array('url' => 'https://phinx.org/', ),
     'phpMyAdmin'                 => array('url' => 'https://www.phpmyadmin.net/', ),
     'PrestaShop'                 => array('url' => 'https://prestashop.com/', ),
     'SPIP'                       => array('url' => 'https://www.spip.net/', ),
+    'shopware'                   => array('url' => 'https://www.shopware.com/', ),
     'TeamPass'                   => array('url' => 'https://teampass.net/', ),
     'Thelia'                     => array('url' => 'https://thelia.net/', ),
     'ThinkPHP'                   => array('url' => 'http://www.thinkphp.cn/', ),
@@ -42,6 +43,7 @@ $applications = array(
     'WordPress'                  => array('url' => 'https://www.wordpress.com/', ),
     'XOOPS'                      => array('url' => 'https://xoops.org/', ),
     'Zend-Config'                => array('url' => 'https://github.com/zendframework/zend-config', ),
-, );
+    'Zurmo'                      => array('url' => 'http://zurmo.org/', ),
+   );
 
 ?>
