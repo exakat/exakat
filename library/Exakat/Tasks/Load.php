@@ -1100,6 +1100,7 @@ SQL;
         $function->token      = $this->getToken($this->tokens[$current][0]);
         $function->fullnspath = $fullnspath;
         $function->aliased    = $aliased;
+        $function->constant   = $function->atom === 'Closure';
 
         $this->currentFunction[] = $function;
         $this->currentMethod[] = $function;
@@ -5109,12 +5110,12 @@ SQL;
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' ');
             $alias = $alias->code;
-        } elseif (($offset = strrpos($alias->fullnspath, '\\')) === false) {
+        } elseif (($offset = strrpos($alias->code, '\\')) === false) {
             // namespace without \
-            $alias = $alias->fullnspath;
+            $alias = $alias->code;
         } else {
             // namespace with \
-            $alias = substr($alias->fullnspath, $offset + 1);
+            $alias = substr($alias->code, $offset + 1);
         }
         
         if ($useType !== 'const') {

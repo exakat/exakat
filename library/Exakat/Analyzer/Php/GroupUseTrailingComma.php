@@ -29,7 +29,7 @@ class GroupUseTrailingComma extends Analyzer {
     
     public function analyze() {
         // use a\b\{c,d,}
-        $this->atomIs('Usetrait')
+        $this->atomIs('Usenamespace')
              ->hasOut('GROUPUSE')
              ->hasOut('TRAILING');
         $this->prepareQuery();
