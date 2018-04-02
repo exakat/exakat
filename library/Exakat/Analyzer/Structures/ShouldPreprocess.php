@@ -58,9 +58,16 @@ class ShouldPreprocess extends Analyzer {
         $this->prepareQuery();
         
         $functionListNoArray = array_diff($functionList,
-                array('\\defined', '\\error_reporting', '\\extension_loaded', '\\get_defined_vars', '\\print', '\\echo', '\\set_time_limit'));
+                array('\\defined', 
+                      '\\error_reporting', 
+                      '\\extension_loaded', 
+                      '\\get_defined_vars', 
+                      '\\print', 
+                      '\\echo', 
+                      '\\set_time_limit',
+                      ));
         $functionListNoArray = array_values($functionListNoArray);
-        
+
         // Function only applied to constants
         $this->atomFunctionIs($functionListNoArray)
              ->is('constant', true)
