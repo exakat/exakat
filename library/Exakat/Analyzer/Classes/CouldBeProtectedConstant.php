@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Tokenizer\Token;
 
 class CouldBeProtectedConstant extends Analyzer {
+    // 
     public function analyze() {
         // Searching for properties that are never used outside the definition class or its children
 
@@ -42,31 +43,48 @@ GREMLIN;
         $publicUndefinedConstants = $this->query($query)
                                          ->toArray();
 
-        $notUsedOutside = <<<GREMLIN
-not( __.where( __.out("DEFINITION")
-         .in("CLASS")
-         .hasLabel("Staticconstant")
-         .out("CONSTANT")
-         .filter{ it.get().value("code") == name; }
-         .not( where( 
-            __.repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit()
-              .hasLabel("Class").filter{ it.get().value("fullnspath") == theClass }
-          ) ) )
-)
+        $LOOPS = self::MAX_LOOPING;
+        $query = <<<GREMLIN
+g.V().hasLabel("Staticconstant")
+     .out("CLASS")
+     .as("classe")
+     .has("fullnspath")
+     .sideEffect{ fns = it.get().value("fullnspath"); }
+     .in("CLASS")
+     .out("CONSTANT")
+     .hasLabel("Name")
+     .sideEffect{ name = it.get().value("code"); }
+     .as("constante")
+     .repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("Class", "Interface", "Classanonymous", "File") )
+     .hasLabel("File")
+     .select("classe", "constante").by("fullnspath").by("code")
+     .unique()
 GREMLIN;
+        $publicConstants = $this->query($query)->toArray();
 
+        $calls = array();
+        foreach($publicConstants as $value) {
+            if (isset($calls[$value['constante']])) {
+                $calls[$value['constante']][] = $value['classe'];
+            } else {
+                $calls[$value['constante']] = array($value['classe']);
+            }
+        }
+        
         // global static constants : the one with no definition class : they are all ignored.
-        $this->atomIs('Constant')
-             ->outIs('NAME')
-             ->codeIsNot($publicUndefinedConstants)
-             ->savePropertyAs('code', 'name')
-             ->inIs('NAME')
-             ->inIs('CONST')
+        $this->atomIs('Const')
              ->hasNoOut(array('PRIVATE', 'PROTECTED'))
-             ->inIs('CONST')
-             ->savePropertyAs('fullnspath', 'theClass')
-             ->raw($notUsedOutside)
-             ->back('first');
+             ->outIs('CONST')
+             ->_as('results')
+             ->outIs('NAME')
+             ->codeIsNot($publicUndefinedConstants, self::NO_TRANSLATE)
+             ->codeIsNot(array_keys($calls), self::NO_TRANSLATE)
+             ->savePropertyAs('code', 'constante')
+             ->goToClass()
+             ->isNotHash('fullnspath', $calls, 'constante')
+             ->back('results');
+        $this->prepareQuery();
+
     }
 }
 
