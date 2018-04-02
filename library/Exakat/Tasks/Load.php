@@ -2390,7 +2390,7 @@ SQL;
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
                 $element = $this->popExpression();
-                $element->rank = +$rank;
+                $element->rank = ++$rank;
                 $this->addLink($static, $element, $link);
                 
                 if ($atom === 'Propertydefinition') {
