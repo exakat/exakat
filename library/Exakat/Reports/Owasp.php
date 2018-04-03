@@ -419,7 +419,7 @@ SQL
             'Number of PHP files'                   => $this->datastore->getHash('files'),
             'Number of lines of code'               => $this->datastore->getHash('loc'),
             'Number of lines of code with comments' => $this->datastore->getHash('locTotal'),
-            'PHP used' => $php->getActualVersion() //.' (version '.$this->config->phpversion.' configured)'
+            'PHP used' => $php->getConfiguration('phpversion') //.' (version '.$this->config->phpversion.' configured)'
         );
 
         // fichier

@@ -2046,7 +2046,7 @@ SQL;
         $info[] = array('Report production date', date('r', strtotime('now')));
 
         $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
+        $info[] = array('PHP used', $php->getConfiguration('phpversion').' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
@@ -2388,7 +2388,7 @@ HTML;
         $info[] = array('Report production date', date('r', strtotime('now')));
 
         $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getActualVersion().')');
+        $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getConfiguration('phpversion').')');
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
 

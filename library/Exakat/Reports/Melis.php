@@ -774,7 +774,7 @@ JAVASCRIPT;
             'Number of PHP files'                   => $this->datastore->getHash('files'),
             'Number of lines of code'               => $this->datastore->getHash('loc'),
             'Number of lines of code with comments' => $this->datastore->getHash('locTotal'),
-            'PHP used' => $php->getActualVersion() //.' (version '.$this->config->phpversion.' configured)'
+            'PHP used' => $php->getConfiguration('phpversion') //.' (version '.$this->config->phpversion.' configured)'
         );
 
         // fichier
@@ -1353,7 +1353,7 @@ SQL;
         $info[] = array('Report production date', date('r', strtotime('now')));
 
         $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getActualVersion().')');
+        $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getConfiguration('phpversion').')');
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
 
