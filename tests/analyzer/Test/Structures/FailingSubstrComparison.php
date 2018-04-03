@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_FailingSubstrComparison extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testStructures_FailingSubstrComparison01()  { $this->generic_test('Structures/FailingSubstrComparison.01'); }
     public function testStructures_FailingSubstrComparison02()  { $this->generic_test('Structures/FailingSubstrComparison.02'); }
+    public function testStructures_FailingSubstrComparison03()  { $this->generic_test('Structures/FailingSubstrComparison.03'); }
 }
 ?>
