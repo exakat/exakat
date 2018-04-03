@@ -6,7 +6,7 @@ try {
     if(empty($isPhar)){
         include_once __DIR__.'/library/Autoload.php';
     } else {
-        require_once $isPhar.'/library/Autoload.php';
+        require_once phar::running().'/library/Autoload.php';
     }
 
     $config = new \Exakat\Config($GLOBALS['argv']);
