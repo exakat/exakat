@@ -27,26 +27,31 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedGlobal extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
         // global in a function
         $this->atomIs('Globaldefinition')
              ->_as('result')
              ->savePropertyAs('code', 'theGlobal')
              ->goToFunction()
              // Not used as a variable
-             ->raw('not( where( __.repeat( __.out('.$this->linksDown.') ).emit(hasLabel("Variable", "Variablearray", "Variableobject"))
-                             .times('.self::MAX_LOOPING.')
-                             .hasLabel("Variable", "Variablearray", "Variableobject")
-                             .not( where( __.in("GLOBAL") ) ).filter{ it.get().value("code") == theGlobal} ) )')
+             ->raw(<<<GREMLIN
+not( where( __.repeat( __.out($this->linksDown) ).emit(hasLabel("Variable", "Variablearray", "Variableobject"))
+              .times($MAX_LOOPING)
+              .hasLabel("Variable", "Variablearray", "Variableobject")
+              .not( where( __.in("GLOBAL") ) ).filter{ it.get().value("code") == theGlobal} ) )
+GREMLIN
+)
              ->back('result');
         $this->prepareQuery();
 
         // global in the global space
         $max = self::MAX_LOOPING;
         $query = <<<GREMLIN
-g.V().out("FILE").out("EXPRESSION").out("CODE").out("EXPRESSION").not(hasLabel("Global", "Function", "Trait", "Class", "Interface"))
-                                .repeat( __.out($this->linksDown) ).emit(hasLabel("Variable", "Variablearray", "Variableobject"))
-                                .times($max).not( where( __.in("GLOBAL") ) )
-                                .values("code").unique();
+g.V().out("FILE").out("EXPRESSION")
+                 .out("CODE").out("EXPRESSION").not(hasLabel("Global", "Function", "Trait", "Class", "Interface"))
+                 .repeat( __.out($this->linksDown) ).emit(hasLabel("Variable", "Variablearray", "Variableobject"))
+                 .times($max).not( where( __.in("GLOBAL") ) )
+                 .values("code").unique();
 GREMLIN;
 
         $globalVariables = $this->gremlin->query($query);

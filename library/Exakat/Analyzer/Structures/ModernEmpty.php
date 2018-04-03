@@ -35,6 +35,9 @@ class ModernEmpty extends Analyzer {
     }
     
     public function analyze() {
+        $CONTAINERS  = implode('", "', self::$CONTAINERS);
+        $MAX_LOOPING = self::MAX_LOOPING;
+
         // $a = source();
         // if (empty($a)) {}
         // No check for reuse yet
@@ -48,13 +51,16 @@ class ModernEmpty extends Analyzer {
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'variable')
              ->back('first')
-             ->raw('not(__.where( __.in("EXPRESSION")
-                                    .emit().repeat(__.not(hasLabel("'.implode('", "', self::$CONTAINERS).'")).out()).times('.self::MAX_LOOPING.')
-                                    .hasLabel("'.implode('", "', self::$CONTAINERS).'").filter{ it.get().value("fullcode") == variable }
-                                    .not( __.where(__.in("ARGUMENT").hasLabel("Empty")))
-                                    .where( __.in("ANALYZED").has("analyzer", within("Variables/IsRead", "Classes/IsRead", "Arrays/IsRead")))
-                                )
-                  )');
+             ->raw(<<<GREMLIN
+not(__.where( __.in("EXPRESSION")
+                .emit().repeat(__.not(hasLabel("$CONTAINERS")).out()).times($MAX_LOOPING)
+                .hasLabel("$CONTAINERS").filter{ it.get().value("fullcode") == variable }
+                .not( __.where(__.in("ARGUMENT").hasLabel("Empty")))
+                .where( __.in("ANALYZED").has("analyzer", within("Variables/IsRead", "Classes/IsRead", "Arrays/IsRead")))
+             )
+    )
+GREMLIN
+);
         $this->prepareQuery();
     }
 }

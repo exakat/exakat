@@ -31,9 +31,9 @@ class CouldUseInterface extends Analyzer {
     public function analyze() {
         $query = <<<GREMLIN
 g.V().hasLabel("Interface")
-     .as('name')
+     .as("name")
      .out("METHOD").out("NAME").as("method")
-     .select('name', 'method').by('fullnspath').by('code');
+     .select("name", "method").by("fullnspath").by("code");
 GREMLIN;
 
         $res = $this->query($query)->toArray();
@@ -51,6 +51,7 @@ GREMLIN;
             }
         }
 
+        $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs('Class')
              ->hasOut(array('METHOD', 'MAGICMETHOD'))
              ->raw('sideEffect{ x = []; }')
@@ -67,7 +68,7 @@ GREMLIN;
                             
                             a;
                         }')
-                ->raw('not( where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times(15)
+                ->raw('not( where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
                                      .hasLabel("Interface", "Class")
                                      .filter{ it.get().value("fullnspath") == fnp; } ) )')
                 ->back('first');
