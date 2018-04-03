@@ -80,6 +80,16 @@ For each version, MD5 and SHA256 signatures are available. The downloaded MD5 mu
     // Example : 
     //a2a2b9c41ae94c6446d43e370c6ba4cdd970d232d817bf30207e58a61c5adfd9  exakat.phar
 
+    // Check with GPG signature
+    curl -o exakat.sig http://dist.exakat.io/index.php?file=latest.sig
+    // Optional step : Download the Key
+    gpg --recv-keys 5EDF7EA4
+    // Check with GPG signature
+    gpg --verify exakat.sig exakat.phar
+    // Good result : 
+    //gpg: Signature made Tue Apr  3 08:28:52 2018 CEST using RSA key ID 5EDF7EA4
+    //gpg: Good signature from "Seguy Damien <damien.seguy@gmail.com>" [ultimate]
+
 
 Quick installation with OSX
 ---------------------------
