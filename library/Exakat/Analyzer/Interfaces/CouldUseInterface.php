@@ -57,20 +57,25 @@ GREMLIN;
              ->raw('sideEffect{ x = []; }')
              ->raw('sideEffect{ i = *** }', $interfaces)
              ->raw('where( __.out("METHOD", "MAGICMETHOD").out("NAME").sideEffect{ x.add(it.get().value("code")) ; }.fold() )')
-             ->raw('filter{ 
-                            a = false;
-                            i.each{ n, e ->
-                                if (x.intersect(e) == e) {
-                                    a = true;
-                                    fnp = n;
-                                }
-                            }
-                            
-                            a;
-                        }')
-                ->raw('not( where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
-                                     .hasLabel("Interface", "Class")
-                                     .filter{ it.get().value("fullnspath") == fnp; } ) )')
+             ->filter(<<<GREMLIN
+a = false;
+i.each{ n, e ->
+    if (x.intersect(e) == e) {
+        a = true;
+        fnp = n;
+    }
+}
+
+a;
+
+GREMLIN
+)
+                ->raw(<<<GREMLIN
+not( where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
+              .hasLabel("Interface", "Class")
+              .filter{ it.get().value("fullnspath") == fnp; } ) )
+GREMLIN
+)
                 ->back('first');
         $this->prepareQuery();
     }
