@@ -3,7 +3,7 @@
 $expected     = array('ldap_connect("localhost")',
                      );
 
-$expected_not = array(
+$expected_not = array('ldap_reconnect("remote")',
                      );
 
 ?>

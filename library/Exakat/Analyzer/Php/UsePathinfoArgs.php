@@ -38,6 +38,27 @@ class UsePathinfoArgs extends Analyzer {
                              .dedup().by("noDelimiter").count().is(lt(3)))')
              ->back('first');
         $this->prepareQuery();
+
+        //$extension = substr(strrchr($path, "."), 1);
+        $this->atomFunctionIs('\\substr')
+             ->outWithRank('ARGUMENT', 1)
+             ->is('intval', 1)
+             ->inIs('ARGUMENT')
+             ->outWithRank('ARGUMENT', 0)
+             ->functioncallIs('\\strrchr')
+             ->outWithRank('ARGUMENT', 1)
+             ->is('noDelimiter', '.')
+             ->back('first');
+        $this->prepareQuery();
+
+        //$extension = array_pop(explode('.', $path));
+        $this->atomFunctionIs('\\array_pop')
+             ->outWithRank('ARGUMENT', 0)
+             ->functioncallIs(array('\\explode', '\\split'))
+             ->outWithRank('ARGUMENT', 0)
+             ->is('noDelimiter', '.')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

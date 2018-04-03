@@ -35,13 +35,25 @@ class CodacyConfig extends Config {
             return self::NOT_LOADED;
         }
 
+        if (is_dir($pathToJson)) {
+            $this->config['codacy_error'] = '.codacy.json is a directory';
+            return self::NOT_LOADED;
+        }
+
         $json = file_get_contents($pathToJson);
         if (empty($json)) {
+            $this->config['codacy_error'] = '.codacy.json is empty';
             return self::NOT_LOADED;
         }
 
         $config = json_decode($json);
         if (empty($config)) {
+            $this->config['codacy_error'] = '.codacy.json couldn\'t be decoded';
+            return self::NOT_LOADED;
+        }
+
+        if (empty($config->files)) {
+            $this->config['codacy_error'] = '.codacy.json lists no files';
             return self::NOT_LOADED;
         }
 
@@ -51,8 +63,20 @@ class CodacyConfig extends Config {
 
         if (isset($config->tools)) {
             foreach($config->tools as $tool) {
-                if ($tool->name != 'exakat') { continue; }
+                if ($tool->name !== 'exakat') { continue; }
+
                 $this->config['codacy_analyzers'] = array_column($tool->patterns, 'patternId');
+
+                if (empty($this->config['codacy_analyzers'])) {
+                    $this->config['codacy_error'] = '.codacy.json lists no pattern for exakat';
+                    return self::NOT_LOADED;
+                }
+            }
+
+            // same as inside the loop, but this means that exakat was not found
+            if ($this->config['codacy_analyzers'] === 'all') {
+                $this->config['codacy_error'] = '.codacy.json lists no tool configuration for exakat';
+                return self::NOT_LOADED;
             }
         }
 

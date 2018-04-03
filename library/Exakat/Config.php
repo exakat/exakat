@@ -48,8 +48,7 @@ class Config {
     static private $stack = array();
     
     public function __construct($argv) {
-        $pharRunning = Phar::Running();
-        $this->is_phar  = !empty($pharRunning);
+        $this->is_phar  = class_exists('\\Phar') && !empty($pharRunning);
         if ($this->is_phar) {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->projects_root = substr(dirname($pharRunning), 7);
@@ -158,10 +157,15 @@ class Config {
         }
         $extensions = array('curl', 'mbstring', 'sqlite3', 'hash', 'json');
         
+        $missing = array();
         foreach($extensions as $extension) {
             if (!extension_loaded($extension)) {
-                throw new InaptPHPBinary('PHP needs the '.$extension.' extension');
+                $missing[] = $extension;
             }
+        }
+        
+        if (!empty($missing)) {
+           throw new InaptPHPBinary('PHP needs '.(count($missing) == 1 ? 'one' : count($missing)).' extension'.(count($missing) > 1 ? 's' : '').' with the current version : '.join(', ', $missing));
         }
     }
 }

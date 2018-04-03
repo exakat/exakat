@@ -1,15 +1,15 @@
 <?php
 
-$ab = 1;
-$a_b = 2;
+$sssab = 1;
+$sssa_b = 2;
 
-$abc_ = 1;
-$bcd_ = 2;
+$sssabc_ = 1;
+$sssbcd_ = 2;
 
-$o_p->a = 1;
-$op->a = 1;
+$ssso_p->a = 1;
+$sssop->a = 1;
 
-$v_p['a'] = 1;
-$vp['a'] = 1;
+$sssv_p['a'] = 1;
+$sssvp['a'] = 1;
 
 ?>

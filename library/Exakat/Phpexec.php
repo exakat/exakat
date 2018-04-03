@@ -60,7 +60,7 @@ class Phpexec {
                                            '`_CLOSE' => 'T_SHELL_QUOTE_CLOSE',
                                            '~'       => 'T_TILDE');
     private static $tokens    = array();
-    private $config           = array();
+    private $config           = null;
     private $isCurrentVersion = false;
     private $version          = null;
     private $actualVersion    = null;
@@ -93,6 +93,8 @@ class Phpexec {
         } else {
             $this->phpexec = $pathToBinary;
         }
+        
+        $this->readConfig();
 
         if (preg_match('/^php:(.+?)$/', $this->phpexec)) {
             $folder = $pathToBinary;
@@ -112,31 +114,6 @@ class Phpexec {
                 throw new NoPhpBinary('PHP binary for version '.$phpversion.' exists but is not executable : "'.$this->phpexec.'". Please, check config/exakat.ini');
             }
         }
-    }
-
-    public function finish() {
-        // prepare the configuration for Short tags
-        if ($this->isCurrentVersion === true){
-            $shortTags = ini_get('short_open_tag') == '1';
-        } else {
-            $res = shell_exec($this->phpexec.' -i');
-            preg_match('/short_open_tag => (\w+) => (\w+)/', $res, $r);
-            $shortTags = $r[2] == 'On';
-        }
-        $this->config['short_open_tag'] = $shortTags;
-
-        // prepare the configuration for Asp tags
-        if ($this->isCurrentVersion === true){
-            $aspTags = ini_get('asp_tags') == '1';
-        } else {
-            $res = shell_exec($this->phpexec.' -i');
-            if (preg_match('/asp_tags => (\w+) => (\w+)/', $res, $r)) {
-                $aspTags = $r[2] == 'On';
-            } else {
-                $aspTags = false;
-            }
-        }
-        $this->config['asp_tags'] = $aspTags;
     }
 
     public function getTokens() {
@@ -162,10 +139,6 @@ class Phpexec {
 
     public function getTokenName($token) {
         return self::$tokens[$token];
-    }
-
-    public function getTokenValue($token) {
-        return array_search($token, self::$tokens);
     }
 
     public function getTokenFromFile($file) {
@@ -247,36 +220,33 @@ class Phpexec {
             return $this->config;
         }
     }
-
-    public function getActualVersion() {
-        if ($this->actualVersion === null) {
-            $this->isValid();
+    
+    private function readConfig() {
+        if ($this->isCurrentVersion === true){
+            // this code is also in the ELSE, but we avoid eval here.
+            $this->config = array(
+                'zend.assertions' => ini_get('zend.assertions'),
+                'memory_limit'    => ini_get('memory_limit'),
+                'tokenizer'       => extension_loaded('tokenizer'),
+                'short_open_tags' => ini_get('short_open_tags'),
+                'timezone'        => ini_get('date.timezone'),
+                'phpversion'      => PHP_VERSION,
+            );
+        } else {
+            $php = <<<'PHP'
+\$results = array(
+    'zend.assertions' => ini_get('zend.assertions'),
+    'memory_limit'    => ini_get('memory_limit'),
+    'tokenizer'       => extension_loaded('tokenizer'),
+    'short_open_tags' => ini_get('short_open_tags'),
+    'timezone'        => ini_get('date.timezone'),
+    'phpversion'      => PHP_VERSION,
+);
+echo json_encode(\$results);
+PHP;
+            $res = shell_exec($this->phpexec.' -r "'.$php.' " 2>&1');
+            $this->config = (array) json_decode($res);
         }
-        return $this->actualVersion;
-    }
-
-    public function getVersion() {
-        return shell_exec($this->phpexec.' -r "echo phpversion();" 2>&1');
-    }
-
-    public function getShortTag() {
-        return shell_exec($this->phpexec.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
-    }
-
-    public function getTimezone() {
-        return shell_exec($this->phpexec.' -r "echo ini_get(\'date.timezone\');" 2>&1');
-    }
-
-    public function getTokenizer() {
-        return shell_exec($this->phpexec.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
-    }
-
-    public function getMemory_limit() {
-        return shell_exec($this->phpexec.' -r "echo ini_get(\'memory_limit\');" 2>&1');
-    }
-
-    public function getAssertions() {
-        return shell_exec($this->phpexec.' -r "echo ini_get(\'zend.assertions\');" 2>&1');
     }
 }
 

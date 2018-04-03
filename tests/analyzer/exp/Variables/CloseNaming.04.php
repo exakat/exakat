@@ -1,15 +1,15 @@
 <?php
 
-$expected     = array('$ab',
-                      '$a_b',
-                      '$v_p',
-                      '$vp',
-                      '$o_p',
-                      '$op',
+$expected     = array('$sssab',
+                      '$sssa_b',
+                      '$sssv_p',
+                      '$sssvp',
+                      '$ssso_p',
+                      '$sssop',
                      );
 
-$expected_not = array('$abc_',
-                      '$bcd_',
+$expected_not = array('$sssabc_',
+                      '$sssbcd_',
                      );
 
 ?>

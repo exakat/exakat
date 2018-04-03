@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 26 Mar 2018 08:47:25 +0000
-.. comment: Generation hash : 4840fd30330e771dba717272158653284391894b
+.. comment: Generation date : Mon, 02 Apr 2018 17:54:22 +0000
+.. comment: Generation hash : 0a93eefa80b4d891bd82b1fa8f40234da9ad84ac
 
 
 .. _analyze:
@@ -1040,19 +1040,22 @@ Total : 48 analysis
 Wordpress
 +++++++++
 
-Total : 24 analysis
+Total : 27 analysis
 
 * :ref:`Avoid Double Prepare <avoid-double-prepare>`
 * :ref:`Avoid Non Wordpress Globals <avoid-non-wordpress-globals>`
+* :ref:`Eval() Usage <eval()-usage>`
 * :ref:`No Direct Input To Wpdb <no-direct-input-to-wpdb>`
 * :ref:`No Global Modification <no-global-modification>`
 * :ref:`Nonce Creation <nonce-creation>`
 * :ref:`Prepare Placeholder <prepare-placeholder>`
+* :ref:`Private Function Usage <private-function-usage>`
 * :ref:`Strange Names For Methods <strange-names-for-methods>`
 * :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
 * :ref:`Unverified Nonce <unverified-nonce>`
 * :ref:`Use $wpdb Api <use-$wpdb-api>`
 * :ref:`Use Wordpress Functions <use-wordpress-functions>`
+* :ref:`Using Short Tags <using-short-tags>`
 * :ref:`Wordpress 4.0 Undefined Classes <wordpress-4.0-undefined-classes>`
 * :ref:`Wordpress 4.1 Undefined Classes <wordpress-4.1-undefined-classes>`
 * :ref:`Wordpress 4.2 Undefined Classes <wordpress-4.2-undefined-classes>`

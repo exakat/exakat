@@ -885,9 +885,9 @@ SQL;
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
             // This is the last part
             $part = array_pop($elements);
-            $part->noDelimiter = rtrim($part->noDelimiter);
-            $part->code        = rtrim($part->code);
-            $part->fullcode    = rtrim($part->fullcode);
+            $part->noDelimiter = rtrim($part->noDelimiter, "\n");
+            $part->code        = rtrim($part->code,        "\n");
+            $part->fullcode    = rtrim($part->fullcode,    "\n");
             $elements[] = $part;
         }
         
@@ -906,7 +906,7 @@ SQL;
         $this->runPlugins($string, $elements);
 
         $this->pushExpression($string);
-
+        
         return $string;
     }
 
@@ -1182,6 +1182,7 @@ SQL;
 
         $this->contexts[self::CONTEXT_CLASS] = $previousClassContext;
         $this->contexts[self::CONTEXT_FUNCTION] = $previousFunctionContext;
+        $this->runPlugins($function);
 
         array_pop($this->currentFunction);
         array_pop($this->currentMethod);
@@ -2389,7 +2390,7 @@ SQL;
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
                 $element = $this->popExpression();
-                $element->rank = +$rank;
+                $element->rank = ++$rank;
                 $this->addLink($static, $element, $link);
                 
                 if ($atom === 'Propertydefinition') {
@@ -5109,12 +5110,12 @@ SQL;
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' ');
             $alias = $alias->code;
-        } elseif (($offset = strrpos($alias->fullnspath, '\\')) === false) {
+        } elseif (($offset = strrpos($alias->code, '\\')) === false) {
             // namespace without \
-            $alias = $alias->fullnspath;
+            $alias = $alias->code;
         } else {
             // namespace with \
-            $alias = substr($alias->fullnspath, $offset + 1);
+            $alias = substr($alias->code, $offset + 1);
         }
         
         if ($useType !== 'const') {

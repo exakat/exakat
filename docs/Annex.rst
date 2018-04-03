@@ -289,15 +289,22 @@ A number of applications were scanned in order to find real life examples of pat
 * `OpenEMR <https://www.open-emr.org/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `OpenConf <https://www.openconf.com/>`_
+* `Zurmo <http://zurmo.org/>`_
+* `shopware <https://www.shopware.com/>`_
 * `WordPress <https://www.wordpress.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `Mautic <https://www.mautic.org/>`_
+* `ChurchCRM <http://churchcrm.io/>`_
+* `Phpdocumentor <https://www.phpdoc.org/>`_
+* `Phinx <https://phinx.org/>`_
 * `Contao <https://contao.org/en/>`_
 * `Edusoho <https://www.edusoho.com/en>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `SPIP <https://www.spip.net/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `PrestaShop <https://prestashop.com/>`_
+* `Zend-Config <https://github.com/zendframework/zend-config>`_
+* `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Traq <https://traq.io/>`_
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
 * `TeamPass <https://teampass.net/>`_
@@ -353,6 +360,16 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.2.1
+
+  * Check Regex (Melis/CheckRegex ; Melis)
+  * Melis/RouteConstraints (Melis/RouteConstraints ; Melis)
+  * Properties Declaration Consistence (Classes/PPPDeclarationStyle)
+
+* 1.2.0
+
+  * Private Function Usage (Wordpress/PrivateFunctionUsage)
 
 * 1.1.10
 
@@ -1276,7 +1293,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Empty Try Catch (Structures/EmptyTryCatch ; Analyze, Codacy, Level 3)
   * Empty With Expression (Structures/EmptyWithExpression ; OneFile, Suggestions)
   * Error Messages (Structures/ErrorMessages ; Appinfo, ZendFramework)
-  * Eval() Usage (Structures/EvalUsage ; Analyze, Appinfo, Security, Performances, OneFile, ClearPHP, Codacy, Simple)
+  * Eval() Usage (Structures/EvalUsage ; Analyze, Appinfo, Security, Performances, OneFile, Wordpress, ClearPHP, Codacy, Simple)
   * Exception Order (Exceptions/AlreadyCaught ; Dead code)
   * Exit() Usage (Structures/ExitUsage ; Analyze, Appinfo, OneFile, ClearPHP, ZendFramework, Codacy)
   * Exit-like Methods (Functions/KillsApp ; Internal)
@@ -1670,7 +1687,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Uses Default Values (Functions/UsesDefaultArguments ; Analyze, Codacy, Simple)
   * Uses Environnement (Php/UsesEnv ; Appinfo, Appcontent)
   * Using $this Outside A Class (Classes/UsingThisOutsideAClass ; Analyze, CompatibilityPHP71, Codacy, Simple)
-  * Using Short Tags (Structures/ShortTags ; Appinfo)
+  * Using Short Tags (Structures/ShortTags ; Appinfo, Wordpress)
   * Usort Sorting In PHP 7.0 (Php/UsortSorting ; CompatibilityPHP70)
   * Var Keyword (Classes/OldStyleVar ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
   * Variable Constants (Constants/VariableConstant ; Appinfo)
@@ -1947,6 +1964,7 @@ List of external links mentionned in this documentation.
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
 * `Cant Use Return Value In Write Context <https://stackoverflow.com/questions/1075534/cant-use-method-return-value-in-write-context>`_
 * `cat: write error: Broken pipe <https://askubuntu.com/questions/421663/cat-write-error-broken-pipe>`_
+* `Category:Private Functions <https://codex.wordpress.org/Category:Private_Functions>`_
 * `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
 * `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_
 * `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_
@@ -2065,6 +2083,8 @@ List of external links mentionned in this documentation.
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
 * `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_
 * `htmlentities <http://www.php.net/htmlentities>`_
+* `http://dist.exakat.io/ <http://dist.exakat.io/>`_
+* `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_
 * `http://php.net/manual/en/reference.pcre.pattern.modifiers.php <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
 * `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
@@ -2105,13 +2125,14 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
 * `Mathematical Functions <http://php.net/manual/en/book.math.php>`_
 * `Mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
+* `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`_
 * `MD5 <http://php.net/md5>`_
 * `Media Type <https://en.wikipedia.org/wiki/Media_type>`_
 * `Memcache on PHP <http://www.php.net/manual/en/book.memcache.php>`_
@@ -2224,8 +2245,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_

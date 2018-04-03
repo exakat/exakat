@@ -43,9 +43,6 @@ class Dependencies extends Reports {
 g.V().hasLabel("Class").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}
 GREMLIN;
         $res = $graph->query($query);
-        if (is_object($res)) {
-//            $res = $res->result;
-        }
         foreach($res as $v) {
             $v = (array) $v;
             $names[$v[0]] = $v[1];
@@ -56,9 +53,6 @@ GREMLIN;
 g.V().hasLabel("Trait").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}
 GREMLIN;
         $res = $graph->query($query);
-        if (is_object($res)) {
-//            $res = $res->result;
-        }
         foreach($res as $v) {
             $v = (array) $v;
             $names[$v[0]] = $v[1];
@@ -68,9 +62,6 @@ GREMLIN;
 g.V().hasLabel("Interface").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}
 GREMLIN;
         $res = $graph->query($query);
-        if (is_object($res)) {
-//            $res = $res->result;
-        }
         foreach($res as $v) {
             $v = (array) $v;
 
@@ -88,9 +79,6 @@ g.V().hasLabel("Staticconstant").as('fullcode')
 GREMLIN;
 
         $res = $graph->query($query);
-        if (is_object($res)) {
-//            $res = $res->result;
-        }
         $total = 0;
         foreach($res as $v) {
             $v = (array) $v;
@@ -117,9 +105,6 @@ g.V().hasLabel("Staticproperty").as('fullcode')
 GREMLIN;
 
         $res = $graph->query($query);
-        if (is_object($res)) {
-//            $res = $res->result;
-        }
         $total = 0;
 
         foreach($res as $v) {
@@ -147,9 +132,6 @@ g.V().hasLabel("New").as('fullcode')
 .select('origin', 'destination', 'fullcode').by('fullnspath').by('fullnspath').by('fullcode')
 GREMLIN;
         $res = $graph->query($query);
-        if (is_object($res)) {
-//            $res = $res->result;
-        }
         $total = 0;
 
         foreach($res as $v) {
@@ -177,9 +159,6 @@ g.V().hasLabel("Function").as("fullcode")
 
 GREMLIN;
         $res = $graph->query($query);
-        if (is_object($res)) {
-//            $res = $res->result;
-        }
         $total = 0;
         foreach($res as $v) {
             $v = (array) $v;
@@ -207,9 +186,6 @@ g.V().hasLabel("Instanceof").as('fullcode')
 
 GREMLIN;
         $res = $graph->query($query);
-        if (is_object($res)) {
-//            $res = $res->result;
-        }
         $total = 0;
         foreach($res as $v) {
             $v = (array) $v;
@@ -236,9 +212,6 @@ g.V().hasLabel("Staticmethodcall").as('fullcode')
 .select('origin', 'destination', 'fullcode').by('fullnspath').by('fullnspath').by('fullcode')
 GREMLIN;
         $res = $graph->query($query);
-        if (is_object($res)) {
-//            $res = $res->result;
-        }
         $total = 0;
         foreach($res as $v) {
             $v = (array) $v;

@@ -252,7 +252,7 @@ class Atom {
                 $this->lccode = mb_strtolower($this->code);
             };
 
-            if (!in_array($l, array('noDelimiter', 'lccode')) &&
+            if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode', )) &&
                 $value === '') {
                 continue;
             };

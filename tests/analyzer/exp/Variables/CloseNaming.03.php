@@ -1,17 +1,17 @@
 <?php
 
-$expected     = array('$o1',
-                      '$o2',
-                      '$v1',
-                      '$v2',
-                      '$a1',
-                      '$a2',
+$expected     = array('$ssso1',
+                      '$ssso2',
+                      '$sssv1',
+                      '$sssv2',
+                      '$sssa1',
+                      '$sssa2',
                      );
 
-$expected_not = array('$abc1',
-                      '$bcd1',
-                      '$X1',
-                      '$w1',
+$expected_not = array('$sssabc1',
+                      '$sssbcd1',
+                      '$sssX1',
+                      '$sssw1',
                      );
 
 ?>

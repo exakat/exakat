@@ -1,7 +1,7 @@
 <?php
 
 try {
-    $isPhar = phar::running();
+    $isPhar = class_exists('\\Phar') && phar::running();
 
     if(empty($isPhar)){
         include_once __DIR__.'/library/Autoload.php';
@@ -19,7 +19,7 @@ try {
     $exakat = new \Exakat\Exakat($graphDB, $config);
     $exakat->execute($config);
 } catch (Exception $e) {
-    if(phar::running() === ''){
+    if($isPhar === false){
         print $e->getMessage();
     } else {
         print "\nError : ".$e->getMessage()." 

@@ -10,6 +10,7 @@ $expected     = array('crypt(function ($a) { /**/ } )',
                       'crypt(array(1, 2))',
                       'crypt(array(1, 2, 3))',
                       'strtolower(array(1, 2))',
+                      'crypt([14, 24 + $s])',
                      );
 
 $expected_not = array('crypt(<<<\'BC\'

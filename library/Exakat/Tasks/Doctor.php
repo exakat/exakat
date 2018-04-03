@@ -24,6 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Exakat;
+use Exakat\Graph\Graph;
 use Exakat\Config;
 use Exakat\Task;
 use Exakat\Phpexec;
@@ -44,12 +45,17 @@ class Doctor extends Tasks {
 
     protected $logname = self::LOG_NONE;
 
+    public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
+        $this->config = $config;
+        // Ignoring everything
+    }
+
     public function run() {
         $stats = array();
-        
         $stats = array_merge($stats, 
                              $this->checkPreRequisite(), 
                              $this->checkAutoInstall());
+
 
         $phpBinaries = array('php'.str_replace('.', '', substr(PHP_VERSION, 0, 3)) => PHP_BINARY);
         foreach(self::VERSIONS as $configName => $version) {
@@ -285,21 +291,22 @@ class Doctor extends Tasks {
         $stats['configured'] = 'Yes ('.$pathToBinary.')';
 
         $php = new Phpexec($displayedVersion, $pathToBinary);
-        $version = $php->getVersion();
+        $version = $php->getConfiguration('phpversion');
         if (strpos($version, 'not found') !== false) {
             $stats['installed'] = 'No';
         } elseif (strpos($version, 'No such file') !== false) {
             $stats['installed'] = 'No';
         } else {
-            $stats['version'] = $version;
+            $stats['version']         = $php->getConfiguration('phpversion');
+            $stats['short_open_tags'] = $php->getConfiguration('short_open_tags') ? 'Yes' : 'No';
+            $stats['tokenizer']       = $php->getConfiguration('tokenizer') ? 'Yes' : 'No';
+            $stats['assertions']      = $php->getConfiguration('assertions') ? 'Yes' : 'No';
+            $stats['memory_limit']    = $php->getConfiguration('memory_limit');
+            $stats['timezone']        = $php->getConfiguration('timezone') ? 'None' : $php->getConfiguration('timezone');
+
             if (substr($version, 0, 3) != $displayedVersion) {
                 $stats['version'] = $version.' (This doesn\'t seem to be version '.$displayedVersion.')';
             }
-            $stats['short_open_tags'] = $php->getShortTag();
-            $stats['timezone']        = $php->getTimezone();
-            $stats['tokenizer']       = $php->getTokenizer();
-            $stats['memory_limit']    = $php->getMemory_limit();
-            $stats['assertions']      = $php->getAssertions();
         }
         
 

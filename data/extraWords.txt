@@ -90,3 +90,11 @@ Unsetting
 Exakat
 bracketless
 preprocessed
+preprocessing
+Reznichenko
+Incrementing
+Bracketless
+Napoli
+Heredoc
+Nowdoc
+isset

@@ -26,10 +26,14 @@ use Exakat\Analyzer\Analyzer;
 
 class PossibleInfiniteLoop extends Analyzer {
     public function analyze() {
-        $readFunctions = array('\fgets', '\fgetc', '\fgetss', '\fgetcsv');
+        $readFunctions = array('\fgets', 
+                               '\fgetc', 
+                               '\fgetss', 
+                               '\fgetcsv', 
+                              );
         
         //while($line = fgets($fp1) != 'a') {}
-        $this->atomIs(array('While', 'Dowhile'))
+        $this->atomIs('Dowhile')
              ->outIs('CONDITION')
              ->outIsIE(array('LEFT', 'RIGHT')) // outIsIE goes directly to the comparison operands
              ->functioncallIs($readFunctions)

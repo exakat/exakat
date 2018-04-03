@@ -661,6 +661,11 @@ GREMLIN
     }
 
     public function isHash($property, $hash, $index) {
+        if (is_array($hash) && empty($hash)) {
+            $this->addMethod("filter{ false; }");
+            return $this;
+        }
+
         assert($this->assertProperty($property));
         $this->addMethod('filter{ it.get().value("'.$property.'") in ***['.$index.']}', $hash);
         
@@ -668,6 +673,11 @@ GREMLIN
     }
 
     public function isNotHash($property, $hash, $index) {
+        if (is_array($hash) && empty($hash)) {
+            $this->addMethod("filter{ true; }");
+            return $this;
+        }
+
         assert($this->assertProperty($property));
         $this->addMethod('filter{ !(it.get().value("'.$property.'") in ***['.$index.'])}', $hash);
         

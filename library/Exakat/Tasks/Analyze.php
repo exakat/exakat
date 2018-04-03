@@ -43,11 +43,11 @@ class Analyze extends Tasks {
     private $analyzed = array();
 
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
-        parent::__construct($gremlin, $config, $subtask);
-
         if (!empty($config->thema)) {
-            $this->logname = strtolower(str_replace(' ', '_', $config->thema));
+            $this->logname = 'analyze.'.strtolower(str_replace(' ', '_', $config->thema));
         }
+
+        parent::__construct($gremlin, $config, $subtask);
     }
 
     public function run() {
