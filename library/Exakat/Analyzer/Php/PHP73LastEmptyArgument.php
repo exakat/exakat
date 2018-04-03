@@ -25,10 +25,13 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class PHP73LastEmptyArgument extends Analyzer {
+    protected $phpVersion = '7.3+';
+    
     public function analyze() {
         // $object->method($a, )
         // $functioncall($a, )
         $this->atomIs(array('Functioncall', 'Methodcallname'))
+             ->isMore('count', 1)
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Void')
              ->back('first');
