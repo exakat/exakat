@@ -48,8 +48,6 @@ class Themes {
     
     public function getThemeAnalyzers($theme = null) {
         $all = $this->listAllThemes();
-        $id = array_search('Random', $all);
-        unset($all[$id]);
 
         if (is_array($theme)) {
             $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
@@ -58,9 +56,11 @@ class Themes {
             // Default is ALL of them
             $where = '';
         } elseif ($theme === 'Random') {
-            shuffle($all);
-            $theme = $all[0];
+            $shorList = array_diff($all, array('All', 'Unassigned', 'First', 'Under Work'));
+            shuffle($shorList);
+            $theme = $shorList[0];
             display("Random theme is : $theme");
+
             $where = 'WHERE c.name = "'.trim($theme, '"').'"';
         } elseif (in_array($theme, $all)) {
             $where = 'WHERE c.name = "'.trim($theme, '"').'"';
