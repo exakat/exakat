@@ -48,11 +48,11 @@ class Config {
     static private $stack = array();
     
     public function __construct($argv) {
-        $this->is_phar  = class_exists('\\Phar') && !empty($pharRunning);
+        $this->is_phar  = class_exists('\\Phar') && !empty(phar::running());
         if ($this->is_phar) {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
-            $this->projects_root = substr(dirname($pharRunning), 7);
-            $this->dir_root      = $pharRunning;
+            $this->projects_root = substr(dirname(phar::running()), 7);
+            $this->dir_root      = phar::running();
 
             assert_options(ASSERT_ACTIVE, 0);
 
