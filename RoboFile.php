@@ -294,7 +294,6 @@ LICENCE;
         $this->taskExecStack()
              ->stopOnFail()
              ->exec('mv exakat.phar ../release/')
-             ->exec('cd ../release/; tar -zcvf exakat-'.Exakat::VERSION.'.tar.gz exakat.phar docs/*')
              ->run();
     }
     
