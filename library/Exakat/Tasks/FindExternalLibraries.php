@@ -38,6 +38,7 @@ class FindExternalLibraries extends Tasks {
     const PARENT_DIR  = 3; // Whole_dir and parent.
 
     private $php = null;
+    private $phpTokens = array();
 
     // classic must be in lower case form.
     private $classic = array('adoconnection'    => self::WHOLE_DIR,
@@ -70,6 +71,7 @@ class FindExternalLibraries extends Tasks {
                              'services_json'    => self::FILE_ONLY,
                              'sfyaml'           => self::WHOLE_DIR,
                              'swift'            => self::PARENT_DIR,
+                             'simplepie'        => self::FILE_ONLY,
                              'smarty'           => self::WHOLE_DIR,
                              'tcpdf'            => self::WHOLE_DIR,
                              'text_diff'        => self::WHOLE_DIR,
@@ -132,7 +134,7 @@ class FindExternalLibraries extends Tasks {
 
         $this->php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
 
-        $this->php->getTokens();
+        $this->phpTokens = array_flip($this->php->getTokens());
 
         $r = array();
         rsort($files);
@@ -203,16 +205,16 @@ class FindExternalLibraries extends Tasks {
         foreach($tokens as $id => $token) {
             if (is_string($token)) { continue; }
 
-            if ($token[0] == T_WHITESPACE)  { continue; }
-            if ($token[0] == T_DOC_COMMENT) { continue; }
-            if ($token[0] == T_COMMENT)     { continue; }
+            if ($token[0] === $this->phpTokens['T_WHITESPACE'])  { continue; }
+            if ($token[0] === $this->phpTokens['T_DOC_COMMENT']) { continue; }
+            if ($token[0] === $this->phpTokens['T_COMMENT'])     { continue; }
 
             // If we find a namespace, it is not the global space, and we may skip the rest.
-            if ($token[0] == T_NAMESPACE) {
+            if ($token[0] == $this->phpTokens['T_NAMESPACE']) {
                 return;
             }
 
-            if ($token[0] == T_CLASS) {
+            if ($token[0] == $this->phpTokens['T_CLASS']) {
                 if (!is_array($tokens[$id + 2])) { continue; }
                 $class = $tokens[$id + 2][1];
                 if (!is_string($class)) {
@@ -235,11 +237,11 @@ class FindExternalLibraries extends Tasks {
                     }
                 }
 
-                if (is_array($tokens[$id + 4]) && $tokens[$id + 4][0] == T_EXTENDS) {
+                if (is_array($tokens[$id + 4]) && $tokens[$id + 4][0] == $this->phpTokens['T_EXTENDS']) {
                     $ix = $id + 6;
                     $extends = '';
 
-                    while($tokens[$ix][0] == T_NS_SEPARATOR || $tokens[$ix][0] == T_STRING ) {
+                    while($tokens[$ix][0] == T_NS_SEPARATOR || $tokens[$ix][0] == $this->phpTokens['T_STRING'] ) {
                         $extends .= $tokens[$ix][1];
                         ++$ix;
                     }
