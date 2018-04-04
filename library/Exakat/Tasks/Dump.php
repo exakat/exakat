@@ -142,6 +142,7 @@ SQL;
             $this->collectMethodsCounts();
             $this->collectPropertyCounts();
             $this->collectConstantCounts();
+            $this->collectNativeCallsPerExpressions();
         }
 
         $themes = array();
@@ -1326,7 +1327,7 @@ GREMLIN;
         }
         
         if (!empty($values)) {
-            print $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES '.implode(', ', $values);
+            $query = 'INSERT INTO hashResults ("name", "key", "value") VALUES '.implode(', ', $values);
             $this->sqlite->query($query);
         }
 
@@ -1344,7 +1345,7 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount('m').by( __.out("METHOD", "MAGICMETHOD").count() ).cap('m'); 
 GREMLIN;
-        $this->collectHashCounts($query, 'ParameterCounts');
+        $this->collectHashCounts($query, 'MethodsCounts');
     }
 
     private function collectPropertyCounts() {
@@ -1359,6 +1360,18 @@ GREMLIN;
 g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount('m').by( __.out("CONST").out("CONST").count() ).cap('m'); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassConstantCounts');
+    }
+    
+    private function collectNativeCallsPerExpressions() {
+        $query = <<<GREMLIN
+g.V().hasLabel(within(['Sequence'])).groupCount("processed").by(count()).as("first").out("EXPRESSION").not(hasLabel(within(['Assignation', 'Case', 'Catch', 'Class', 'Classanonymous', 'Closure', 'Concatenation', 'Default', 'Dowhile', 'Finally', 'For', 'Foreach', 'Function', 'Ifthen', 'Include', 'Method', 'Namespace', 'Php', 'Return', 'Switch', 'Trait', 'Try', 'While']))).as("results")
+.groupCount('m').by( __.emit( ).repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).times(15).hasLabel('Functioncall')
+      .where( __.in("ANALYZED").has("analyzer", "Functions/IsExtFunction"))
+      .count()
+).cap('m')
+GREMLIN;
+        $this->collectHashCounts($query, 'NativeCallPerExpression');
+    
     }
 
     private function collectReadability() {
