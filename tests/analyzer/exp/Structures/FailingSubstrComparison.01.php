@@ -1,19 +1,19 @@
 <?php
 
-$expected     = array('\'aec\'',
-                      '\'adc\'',
-                      '\'afc\'',
-                      '\'acc\'',
+$expected     = array('\'acc\'',
                       '\'abc\'',
                      );
 
 $expected_not = array('\'ae\'',
+                      '\'aec\'',
                       '\'ad\'',
                       '\'ag\'',
                       '\'agc\'',
                       '\'af\'',
+                      '\'afc\'',
                       '\'ac\'',
                       '\'ab\'',
+                      '\'adc\'',
                      );
 
 ?>

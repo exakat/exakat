@@ -33,10 +33,11 @@ class FailingSubstrComparison extends Analyzer {
              ->functioncallIs('\substr')
              ->outWithRank('ARGUMENT', 2)
              ->atomIs('Integer')
+             ->isMore('intval', 0)
              ->savePropertyAs('intval', 'length')
              ->back('first')
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs('String')
+             ->atomIs(array('String', 'Identifier', 'Nsname'))
              ->hasNoOut('CONCAT')
              
              // Substring is actually as long as length
