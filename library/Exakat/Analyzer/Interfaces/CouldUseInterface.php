@@ -32,8 +32,8 @@ class CouldUseInterface extends Analyzer {
         $query = <<<GREMLIN
 g.V().hasLabel("Interface")
      .as("name")
-     .out("METHOD").out("NAME").as("method")
-     .select("name", "method").by("fullnspath").by("code");
+     .out("METHOD").as("methodCount").out("NAME").as("method")
+     .select("name", "method", "methodCount").by("fullnspath").by("code").by("count");
 GREMLIN;
 
         $res = $this->query($query)->toArray();
@@ -45,18 +45,24 @@ GREMLIN;
         $interfaces = array();
         foreach($res as $row) {
             if (isset($interfaces[$row['name']])) {
-                $interfaces[$row['name']][] = $row['method'];
+                $interfaces[$row['name']][] = $row['method'].'-'.$row['methodCount'];
             } else {
-                $interfaces[$row['name']] = array($row['method']);
+                $interfaces[$row['name']] = array($row['method'].'-'.$row['methodCount']);
             }
         }
-
+        
         $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs('Class')
              ->hasOut(array('METHOD', 'MAGICMETHOD'))
              ->raw('sideEffect{ x = []; }')
              ->raw('sideEffect{ i = *** }', $interfaces)
-             ->raw('where( __.out("METHOD", "MAGICMETHOD").out("NAME").sideEffect{ x.add(it.get().value("code")) ; }.fold() )')
+             ->raw(<<<'GREMLIN'
+where( 
+    __.out("METHOD", "MAGICMETHOD").sideEffect{ y = it.get().value("count"); }
+      .out("NAME")
+      .sideEffect{ x.add(it.get().value("code") + "-" + y ) ; }.fold() )
+GREMLIN
+)
              ->filter(<<<GREMLIN
 a = false;
 i.each{ n, e ->
