@@ -39,14 +39,14 @@ class Git extends Vcs {
         $repositoryDetails = parse_url($source);
 
         if (isset($repositoryDetails['user'])) {
-            $repositoryDetails['user'] = escapeshellarg($repositoryDetails['user']);
+            $repositoryDetails['user'] = urlencode($repositoryDetails['user']);
         } else {
-            $repositoryDetails['user'] = 'exakat';
+            $repositoryDetails['user'] = '';
         }
         if (isset($repositoryDetails['pass'])) {
-            $repositoryDetails['pass'] = escapeshellarg($repositoryDetails['pass']);
+            $repositoryDetails['pass'] = urlencode($repositoryDetails['pass']);
         } else {
-            $repositoryDetails['pass'] = 'exakat';
+            $repositoryDetails['pass'] = '';
         }
                 
         unset($repositoryDetails['query']);
