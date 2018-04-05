@@ -101,6 +101,8 @@ class DefaultConfig extends Config {
                                'project_description' => '',
                                'project_packagist'   => '',
                                'other_php_versions'  => array(),
+                               
+                               'remote'              => 'none',
  
                                'project_reports'     => array('Ambassador',
                                                              ),
