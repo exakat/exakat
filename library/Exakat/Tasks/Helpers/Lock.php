@@ -32,7 +32,6 @@ class Lock {
     function check() {
         $fp = @fopen($this->path, 'x');
         if ($fp === false) {
-            print "No file creation $this->path\n";
             $this->path = null;
             return false;
         }
