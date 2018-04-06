@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.2.1';
-    const BUILD = 717;
+    const VERSION = '1.2.2';
+    const BUILD = 718;
 
     private $gremlin = null;
     private $config = null;
@@ -38,6 +38,23 @@ class Exakat {
     }
 
     public function execute(Config $config) {
+        if ($config->remote !== 'none') {
+            $json = $config->commandLineJson();
+            
+            $class = $config->remote;
+            $remote = new Remote($config->remotes[$config->remote]);
+            
+            $res = $remote->send($json);
+            if ($config->command === 'fetch') {
+                file_put_contents($res, $config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
+                print "put ".strlen($res)." into ".$config->projects_root.'/projects/'.$config->project.'/dump.sqlite'."\n";
+            } else {
+                var_dump($res);
+            }
+            
+            return;
+        }
+
         switch ($config->command) {
             case 'doctor' :
                 $doctor = new Tasks\Doctor($this->gremlin, $this->config);
@@ -181,6 +198,11 @@ class Exakat {
 
             case 'codacy' :
                 $task = new Tasks\Codacy($this->gremlin, $this->config);
+                $task->run();
+                break;
+
+            case 'fetch' :
+                $task = new Tasks\Fetch($this->gremlin, $this->config);
                 $task->run();
                 break;
 

@@ -111,6 +111,7 @@ class CommandLine extends Config {
                               'update'        => 1,
                               'upgrade'       => 1,
                               'codacy'        => 1,
+                              'fetch'         => 1,
                               );
 
     public function __construct() {

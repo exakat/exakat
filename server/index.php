@@ -1,6 +1,6 @@
 <?php
 
-const PIPEFILE = '/tmp/onepageQueue';
+const PIPEFILE = '/tmp/queue.exakat';
 
 $initTime = microtime(true);
 
@@ -8,7 +8,7 @@ $commands = explode('/', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
 unset($commands[0]);
 $command = array_shift($commands);
 
-$orders = array('stop', 'init', 'update', 'project', 'onepage', 'report', 'status', 'list', 'stop', 'config');
+$orders = array('stop', 'init', 'update', 'project', 'onepage', 'report', 'status', 'list', 'stop', 'config', 'queue',);
 
 if (!in_array($command, $orders)) {
     serverLog("unknown command : $command");
@@ -67,6 +67,7 @@ function init($args) {
             $project = autoprojectname();
         }
 
+        print '__PHP__ __EXAKAT__ init -p '.$project.' -R '.$vcs;
         shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.$vcs);
     } elseif (isset($_REQUEST['code'])) {
         $php = $_REQUEST['code'];
@@ -81,7 +82,7 @@ function init($args) {
         file_put_contents(__DIR__.'/onepage/code/'.$project.'.php', $php);
         shell_exec('__PHP__ __EXAKAT__ queue -f '.$project);
     } else {
-        error('Missing VCS/code', '');
+        error('Missing Onepage/code', '');
     }
 
     echo json_encode(array('project' => $project));
@@ -121,6 +122,25 @@ function project($args) {
     
     echo shell_exec('__PHP__ __EXAKAT__ queue -p '.$project);
     echo json_encode(array('project' => $project));
+}
+
+function queue($args) {
+    if (!isset($_REQUEST['json'])) {
+        return;
+    }
+    
+    $json = $_REQUEST['json'];
+    $jsonArray = json_decode($json);
+    if ($jsonArray === null) {
+        echo 'Not Json valid';
+    }
+    if (!is_array($jsonArray)) {
+        echo 'Not Json array';
+    }
+    
+    array_shift($jsonArray);
+    
+    echo shell_exec('__PHP__ __EXAKAT__ '.implode(' ', $jsonArray));
 }
 
 function onepage($args) {
