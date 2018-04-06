@@ -33,7 +33,7 @@ class InclusionWrongCase extends Analyzer {
         $this->atomIs('Include')
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
-             ->atomIs('String')
+             ->atomIs(array('String', 'Identifier', 'Nsname'))
              ->hasNoOut('CONCAT')
              ->savePropertyAs('noDelimiter', 'including')
              ->goToFile()
@@ -66,12 +66,22 @@ GREMLIN
              ->back('first');
         $this->prepareQuery();
 
+        $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs('Include')
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->atomIs('Concatenation')
-             ->raw('not(where( __.out("CONCAT").not(has("noDelimiter")).not( hasLabel("Functioncall").has("fullnspath", "\\\\dirname") ) ) )')
-             ->raw('not(where( __.out("CONCAT").out("CONCAT") ) )')
+             // Ignore functioncall that are not \dirname
+             ->raw(<<<GREMLIN
+not(where( __.repeat(__.out()).emit().times($MAX_LOOPING)
+                                     .not(where(__.in("CLASS", "NAME")))
+                                     .not(hasLabel("Identifier", "Nsname", "Staticconstant").has("noDelimiter"))
+                                     .not(hasLabel("Parenthesis", "Magicconstant", "String", "Name"))
+                                     .not(hasLabel("Functioncall").has("fullnspath", "\\\\dirname") ) 
+         )
+   )
+GREMLIN
+)
              ->raw(<<<GREMLIN
 sideEffect{ 
     including = []; 
@@ -85,12 +95,17 @@ sideEffect{
                 including.add(it.value("noDelimiter"));
             } else if (it.label() == "Nsname") {
                 including.add(it.value("noDelimiter"));
+            } else if (it.label() == "Staticconstant") {
+                including.add(it.value("noDelimiter"));
+            } else if (it.label() == "Staticconstant") {
+                including.add(it.value("noDelimiter"));
             } else if (it.label() == "Functioncall" && 
                        it.value("fullnspath") == "\\\\dirname") {
                 loop = 1;
                 dirname = it.vertices(OUT, "ARGUMENT").next();
                 
-                while( dirname.label() == 'Functioncall') {
+                while( dirname.label() == 'Functioncall' && 
+                       it.value("fullnspath") == "\\\\dirname") {
                     dirname = dirname.vertices(OUT, "ARGUMENT").next();
                     ++loop;
                 };
