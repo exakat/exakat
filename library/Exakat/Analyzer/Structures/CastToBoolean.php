@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CastToBoolean extends Analyzer {
     public function analyze() {
+        // $a == 1 ? 1 : 0
         $this->atomIs('Ternary')
              ->outIs('THEN')
              ->atomIs('Integer')
@@ -33,6 +34,16 @@ class CastToBoolean extends Analyzer {
              ->inIs('THEN')
              ->outIs('ELSE')
              ->codeIs(array(0, 1))
+             ->back('first');
+        $this->prepareQuery();
+
+        // $a == 1 ? true : false
+        $this->atomIs('Ternary')
+             ->outIs('THEN')
+             ->atomIs('Boolean')
+             ->inIs('THEN')
+             ->outIs('ELSE')
+             ->atomIs('Boolean')
              ->back('first');
         $this->prepareQuery();
     }
