@@ -29,19 +29,27 @@ class UsePositiveCondition extends Analyzer {
         // if ($a != $b) {}
         $this->atomIs('Ifthen')
              ->hasOut('THEN')
-             ->hasOut('ELSE')
+             ->outIs('ELSE')
+             ->tokenIsNot('T_ELSEIF')
+             ->raw('not( where( has("count", 1).out("EXPRESSION").hasLabel("Ifthen")) )')
+             ->inIs('ELSE')
              ->outIs('CONDITION')
              ->codeIs(array('!=', '!=='))
-             ->back('first');
+             ->back('first')
+             ->hasNoIn('ELSE');
         $this->prepareQuery();
 
         // if (!empty($a)) {}
         $this->atomIs('Ifthen')
              ->hasOut('THEN')
-             ->hasOut('ELSE')
+             ->outIs('ELSE')
+             ->tokenIsNot('T_ELSEIF')
+             ->raw('not( where( has("count", 1).out("EXPRESSION").hasLabel("Ifthen")) )')
+             ->inIs('ELSE')
              ->outIs('CONDITION')
              ->atomIs('Not')
-             ->back('first');
+             ->back('first')
+             ->hasNoIn('ELSE');
         $this->prepareQuery();
     }
 }
