@@ -48,24 +48,24 @@ class FileDependenciesHtml extends Reports {
         $out = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (!isset($json->nodes[$row['including']])){
+            if (isset($json->nodes[$row['including']])){
+                $source = $json->nodes[$row['including']];
+                ++$in[$source];
+            } else {
                 $source = count($json->nodes);
                 $json->nodes[$row['including']] = $source;
                 $in[$source] = 0;
                 $out[$source] = 0;
-            } else {
-                $source = $json->nodes[$row['including']];
-                ++$in[$source];
             }
 
-            if (!isset($json->nodes[$row['included']])){
+            if (isset($json->nodes[$row['included']])){
+                $destination = $json->nodes[$row['included']];
+                ++$out[$destination];
+            } else {
                 $destination = count($json->nodes);
                 $json->nodes[$row['included']] = $destination;
                 $in[$destination] = 0;
                 $out[$destination] = 0;
-            } else {
-                $destination = $json->nodes[$row['included']];
-                ++$out[$destination];
             }
 
             $R = new Stdclass();

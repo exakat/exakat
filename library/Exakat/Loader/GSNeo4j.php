@@ -41,15 +41,9 @@ class GSNeo4j {
 
     private static $count = -1; // id must start at 0 in batch-import
 
-    private $tokenCounts   = array();
-
-    private $labels = array();
-    private $edges = array();
-    
     private $config = null;
     
     private $calls = array();
-    private $json = array();
     private $project = null;
     private $id = 1;
 
@@ -80,8 +74,6 @@ class GSNeo4j {
         $fp = fopen($this->path, 'a');
         $json = fwrite($fp, $jsonText);
         fclose($fp);
-
-        self::saveTokenCounts();
 
         $sqlite3 = new \Sqlite3($this->config->projects_root.'/projects/.exakat/calls.sqlite');
 
@@ -183,8 +175,6 @@ SQL
         unset($sqlite3);
         unlink($this->config->projects_root.'/projects/.exakat/calls.sqlite');
 
-        $this->calls = array();
-        $this->json = array();
         gc_collect_cycles();
         
         display('loading nodes');
@@ -211,9 +201,6 @@ SQL
     }
 
     private function saveTokenCounts() {
-        $datastore = new Datastore($this->config);
-
-        $datastore->addRow('tokenCounts', $this->tokenCounts);
     }
 
     private function escapeCsv($string) {
@@ -229,7 +216,6 @@ SQL
         
         $json = array();
         foreach($atoms as $atom) {
-            $this->labels[$atom->atom] = 1;
             if ($atom->atom === 'File') {
                 $fileName = $atom->code;
             }
@@ -242,7 +228,6 @@ SQL
         }
         
         foreach($links as $type => $a) {
-            $this->edges[$type] = 1;
             foreach($a as $b) {
                 foreach($b as $c) {
                     foreach($c as $d) {

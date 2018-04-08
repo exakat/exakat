@@ -153,10 +153,10 @@ class ZendF3 {
         if ($release !== null) {
             $where[] = "releases.release = \"release-$release.0\"";
         }
-        if (!empty($where)) {
-            $where = ' WHERE '.implode(' AND ', $where);
-        } else {
+        if (empty($where)) {
             $where = '';
+        } else {
+            $where = ' WHERE '.implode(' AND ', $where);
         }
         
         

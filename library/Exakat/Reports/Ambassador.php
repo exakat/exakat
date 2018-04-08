@@ -3646,19 +3646,19 @@ HTML;
     }
 
     private function Bugfixes_cve($cve) {
-        if (!empty($cve)) {
-            if (strpos($cve, ', ') !== false) {
-                $cves = explode(', ', $cve);
-                $cveHtml = array();
-                foreach($cves as $cve) {
-                    $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
-                }
-                $cveHtml = implode(',<br />', $cveHtml);
-            } else {
-                $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+        if (empty($cve)) {
+            return '-';
+        } 
+        
+        if (strpos($cve, ', ') !== false) {
+            $cves = explode(', ', $cve);
+            $cveHtml = array();
+            foreach($cves as $cve) {
+                $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
             }
+            $cveHtml = implode(',<br />', $cveHtml);
         } else {
-            $cveHtml = '-';
+            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
         }
 
         return $cveHtml;

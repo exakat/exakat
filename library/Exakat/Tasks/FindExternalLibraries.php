@@ -154,10 +154,10 @@ class FindExternalLibraries extends Tasks {
             }
         }
 
-        if (!empty($r)) {
-            $newConfigs = call_user_func_array('array_merge', $r);
-        } else {
+        if (empty($r)) {
             $newConfigs = array();
+        } else {
+            $newConfigs = call_user_func_array('array_merge', $r);
         }
 
         if (count(array_keys($newConfigs)) == 1) {

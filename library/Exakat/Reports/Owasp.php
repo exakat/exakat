@@ -831,7 +831,7 @@ SQL;
 
     private function getSeveritiesNumberBy($type = 'file') {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $query = <<<SQL
 SELECT $type, severity, count(*) AS count
@@ -1130,19 +1130,19 @@ HTML;
     }
 
     private function Bugfixes_cve($cve) {
-        if (!empty($cve)) {
-            if (strpos($cve, ', ') !== false) {
-                $cves = explode(', ', $cve);
-                $cveHtml = array();
-                foreach($cves as $cve) {
-                    $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
-                }
-                $cveHtml = implode(',<br />', $cveHtml);
-            } else {
-                $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+        if (empty($cve)) {
+            return '-';
+        }
+        
+        if (strpos($cve, ', ') !== false) {
+            $cves = explode(', ', $cve);
+            $cveHtml = array();
+            foreach($cves as $cve) {
+                $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
             }
+            $cveHtml = implode(',<br />', $cveHtml);
         } else {
-            $cveHtml = '-';
+            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
         }
 
         return $cveHtml;

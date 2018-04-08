@@ -46,7 +46,7 @@ class Exakat {
             
             $res = $remote->send($json);
             if ($config->command === 'fetch') {
-                file_put_contents($res, $config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
+                file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.sqlite', $res);
                 print "put ".strlen($res)." into ".$config->projects_root.'/projects/'.$config->project.'/dump.sqlite'."\n";
             } else {
                 var_dump($res);

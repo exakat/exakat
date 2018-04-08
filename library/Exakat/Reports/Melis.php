@@ -1132,7 +1132,7 @@ SQL;
 
     private function getSeveritiesNumberBy($type = 'file') {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $query = <<<SQL
 SELECT $type, severity, count(*) AS count

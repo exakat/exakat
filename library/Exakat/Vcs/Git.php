@@ -81,11 +81,11 @@ class Git extends Vcs {
         $res = shell_exec("cd {$this->destinationFull}/code/; git branch | grep \\*");
         $branch = substr(trim($res), 2);
         
-        if (strpos($branch, ' detached at ') !== false) {
+        if (strpos($branch, ' detached at ') === false) {
+            $resInitial = shell_exec("cd {$this->destinationFull}/code/; git show-ref --heads $branch");
+        } else {
             $resInitial = shell_exec("cd {$this->destinationFull}/code/; git checkout master --quiet; git pull");
             $branch = 'master';
-        } else {
-            $resInitial = shell_exec("cd {$this->destinationFull}/code/; git show-ref --heads $branch");
         }
     
         $date = trim(shell_exec("cd {$this->destinationFull}/code/; git pull --quiet; git log -1 --format=%cd "));
