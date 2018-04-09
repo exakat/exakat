@@ -56,10 +56,10 @@ class Themes {
             // Default is ALL of them
             $where = '';
         } elseif ($theme === 'Random') {
-            $shorList = array_diff($all, array('All', 'Unassigned', 'First', 'Under Work'));
+            $shorList = array_diff($all, array('All', 'Unassigned', 'First', 'Under Work', 'Newfeatures', 'Onepage',));
             shuffle($shorList);
             $theme = $shorList[0];
-            display("Random theme is : $theme");
+            display( "Random theme is : $theme\n");
 
             $where = 'WHERE c.name = "'.trim($theme, '"').'"';
         } elseif (in_array($theme, $all)) {
