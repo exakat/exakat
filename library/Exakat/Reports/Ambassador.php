@@ -179,6 +179,7 @@ class Ambassador extends Reports {
         $this->generateStats();
         $this->generateComplexExpressions();
         $this->generateVisibilitySuggestions();
+        $this->generateChangedClasses();
         $this->generateMethodSize();
         $this->generateParameterCounts();
         
@@ -3229,6 +3230,32 @@ HTML;
         $this->putBasedPage('altered_directives', $html);
     }
 
+    private function generateChangedClasses() {
+        $changedClasses = '';
+        $res = $this->sqlite->query('SELECT * FROM classChanges');
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if ($row['changeType'] === 'Member Visibility') {
+                $row['parentValue'] = $row['parentValue'].' $'.$row['name'];
+                $row['childValue'] = $row['childValue'].' $'.$row['name'];
+            } elseif ($row['changeType'] === 'Member Default') {
+                $row['parentValue'] = '$'.$row['name'].' = '.$row['parentValue'];
+                $row['childValue'] = '$'.$row['name'].' = '.$row['childValue'];
+            } 
+            
+            $changedClasses .= '<tr><td>'.PHPSyntax($row['parentClass']).'</td>'.PHP_EOL.
+                                   '<td>'.PHPSyntax($row['parentValue']).'</td>'.PHP_EOL.
+                                   '</tr><tr>'.
+                                   '<td>'.PHPSyntax($row['childClass']).'</td>'.PHP_EOL.
+                                   '<td>'.PHPSyntax($row['childValue']).'</td>'.PHP_EOL.
+                                   '</tr>'.PHP_EOL.
+                                   '<tr><td colspan="2"><hr /></td></tr>';
+        }
+
+        $html = $this->getBasedPage('changed_classes');
+        $html = $this->injectBloc($html, 'CHANGED_CLASSES', $changedClasses);
+        $this->putBasedPage('changed_classes', $html);
+    }
+
     private function generateMethodSize() {
         $finalHTML = $this->getBasedPage('cit_size');
 
@@ -3665,7 +3692,7 @@ HTML;
     }
 
     private function Compatibility($count, $analyzer) {
-        if ($count == Analyzer::VERSION_INCOMPATIBLE) {
+        if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
         } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {
             return '<i class="fa fa-cogs" style="color: orange"></i>';
