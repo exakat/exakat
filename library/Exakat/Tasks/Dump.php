@@ -126,6 +126,7 @@ SQL;
         
         if ($this->config->collect === true) {
             display('Collecting data');
+            $this->collectClassChanges();
             $this->collectFiles();
 
             $this->collectFilesDependencies();
@@ -976,7 +977,7 @@ SQL
         $query = <<<GREMLIN
 g.V().hasLabel("Function")
 .sideEffect{ lines = [];}.where( __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold() )
-.sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
+.sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).times(13).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
     x = ['name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
          'file': file,
@@ -1372,6 +1373,127 @@ g.V().hasLabel(within(['Sequence'])).groupCount("processed").by(count()).as("fir
 GREMLIN;
         $this->collectHashCounts($query, 'NativeCallPerExpression');
     
+    }
+
+    private function collectClassChanges() {
+        $this->sqlite->query('DROP TABLE IF EXISTS classChanges');
+        $query = <<<SQL
+CREATE TABLE classChanges (  
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    changeType   STRING,
+    name         STRING,
+    parentClass  TEXT,
+    parentValue  TEXT,
+    childClass   TEXT,
+    childValue   TEXT
+                    )
+SQL;
+        $this->sqlite->query($query);
+        
+        $total = 0;
+
+        // TODO : Constant visibility and value
+
+        $query = <<<GREMLIN
+g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first")
+.out("NAME").sideEffect{ name = it.get().value("fullcode"); }.in("NAME")
+
+.sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }
+
+.in("METHOD").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
+.where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
+
+.sideEffect{ signature2 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature2.add(it.value("fullcode"));} }
+.filter{ signature2 != signature1; }
+
+.out("NAME").filter{ it.get().value("fullcode") == name}.select("first")
+.map{['name':name,
+      'parent':class2,
+      'parentValue':'function ' + name + '(' + signature2.join(', ') + ')',
+      'class':class1,
+      'classValue':'function ' + name + '(' + signature1.join(', ') + ')'];}
+GREMLIN;
+        $total += $this->storeClassChanges('Method Signature', $query);
+        
+        $query = <<<GREMLIN
+g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first")
+.out("NAME").sideEffect{ name = it.get().value("fullcode"); }.in("NAME")
+
+.out("PRIVATE", "PUBLIC", "PROTECTED").sideEffect{ visibility1 = it.get().value("fullcode") }.in()
+
+.in("METHOD").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
+.where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
+
+.out("PRIVATE", "PUBLIC", "PROTECTED").filter{ visibility2 = it.get().value("fullcode"); visibility1 != it.get().value("fullcode") }.in()
+
+.out("NAME").filter{ it.get().value("fullcode") == name}.select("first")
+.map{['name':name,
+      'parent':class2,
+      'parentValue':visibility2,
+      'class':class1,
+      'classValue':visibility1];}
+GREMLIN;
+        $total += $this->storeClassChanges('Method Visibility', $query);
+        
+        $query = <<<GREMLIN
+g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
+.sideEffect{ name = it.get().value("fullcode"); }.in("LEFT")
+.out("RIGHT").sideEffect{ default1 = it.get().value("fullcode") }.in("RIGHT")
+
+.in("PPP").in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
+.where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }
+
+.out("PPP").out("PPP")
+.out("RIGHT").filter{ default2 = it.get().value("fullcode"); default1 != it.get().value("fullcode") }.in("RIGHT")
+
+.until( __.not(outE("LEFT")) ).repeat(out("LEFT"))
+.filter{ it.get().value("fullcode") == name}.select("first")
+.map{['name':name,
+      'parent':class2,
+      'parentValue':default2,
+      'class':class1,
+      'classValue':default1];}
+GREMLIN;
+        $total += $this->storeClassChanges('Member Default', $query);
+        
+        $query = <<<GREMLIN
+g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
+.sideEffect{ name = it.get().value("fullcode"); }.until(__.inE("LEFT").count().is(eq(0))).repeat(__.in("LEFT")).in("PPP")
+
+.out("PRIVATE", "PUBLIC", "PROTECTED").sideEffect{ visibility1 = it.get().value("fullcode") }.in()
+
+.in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
+.where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("PPP")
+
+.out("PRIVATE", "PUBLIC", "PROTECTED").filter{ visibility2 = it.get().value("fullcode"); visibility1 != it.get().value("fullcode") }.in()
+
+.out("PPP").until( __.not(outE("LEFT")) ).repeat(out("LEFT"))
+.filter{ it.get().value("fullcode") == name}.select("first")
+.map{['name':name,
+      'parent':class2,
+      'parentValue':visibility2,
+      'class':class1,
+      'classValue':visibility1];}
+GREMLIN;
+        $total += $this->storeClassChanges('Member Visibility', $query);
+                        
+        display("Found $total class changes\n");
+    }
+    
+    private function storeClassChanges($changeType, $query) {
+        $index = $this->gremlin->query($query);
+        
+        $values = array();
+        foreach($index->toArray() as $change) {
+            $values[] = "('$changeType', '$change[name]', '$change[parent]', '".$this->sqlite->escapeString($change['parentValue'])."', '$change[class]', '".$this->sqlite->escapeString($change['classValue'])."') ";
+        }
+        
+        if (!empty($values)) {
+            $query = 'INSERT INTO classChanges ("changeType", "name", "parentClass", "parentValue", "childClass", "childValue") VALUES '.implode(', ', $values);
+            $this->sqlite->query($query);
+        }
+        
+        return count($values);
     }
 
     private function collectReadability() {
