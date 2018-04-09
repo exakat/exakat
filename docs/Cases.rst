@@ -28,9 +28,11 @@ This return statement is doing quite a lot, including a buried '0 + $offset'. Th
 
     return serialize(array((string) $row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('ProfileId', TableMap::TYPE_PHPNAME, $indexType)], (string) $row[TableMap::TYPE_NUM == $indexType ? 1 + $offset : static::translateFieldName('ResourceId', TableMap::TYPE_PHPNAME, $indexType)]));
 
+
 --------
 
-
+Adding Zero
+===========
 
 .. _openemr-structures-addzero:
 
@@ -48,9 +50,6 @@ $main_provid is filtered as an integer. $main_supid is then filtered twice : one
         $main_supid  = 0 + (int)$_POST['SupervisorID'];
         //.....
 
---------
-
-
 Logical Should Use Symbolic Operators
 =====================================
 
@@ -67,9 +66,11 @@ $extension is assigned with the results of pathinfo($reference_name, PATHINFO_EX
 
     $extension = pathinfo($reference_name, PATHINFO_EXTENSION) and static::hasExtension($extension);
 
+
 --------
 
-
+Logical Should Use Symbolic Operators
+=====================================
 
 .. _openconf-php-logicalinletters:
 
@@ -83,9 +84,6 @@ In this context, the priority of execution is used on purpose; $coreFile only co
 .. code-block:: php
 
     $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
-
---------
-
 
 Timestamp Difference
 ====================
@@ -111,9 +109,11 @@ This is wrong twice a year, in countries that has day-ligth saving time. One of 
             {
                 $oneWeekAgoTimeStamp = DateTimeUtil::convertTimestampToDbFormatDateTime(time() - 60 * 60 *24 * 7);
 
+
 --------
 
-
+Timestamp Difference
+====================
 
 .. _shopware-structures-timestampdifference:
 
@@ -133,9 +133,6 @@ When daylight saving strike, the email may suddenly be locked for 1 hour minus 3
                     return;
                 }
 
---------
-
-
 Identical Conditions
 ====================
 
@@ -152,9 +149,11 @@ The condition checks first if $has_templates or $theme->parent(), and one of the
 
     <?php if ( ( $has_templates || $theme->parent() ) && $theme->parent() ) : ?>
 
+
 --------
 
-
+Identical Conditions
+====================
 
 .. _dolibarr-structures-identicalconditions:
 
@@ -169,9 +168,11 @@ Better check twice that $modulepart is really 'apercusupplier_invoice'.
 
     $modulepart == 'apercusupplier_invoice' || $modulepart == 'apercusupplier_invoice'
 
+
 --------
 
-
+Identical Conditions
+====================
 
 .. _mautic-structures-identicalconditions:
 
@@ -186,8 +187,91 @@ When the line is long, it tends to be more and more difficult to review the valu
 
     !empty($permissions[$permissionBase . ':deleteown']) || !empty($permissions[$permissionBase . ':deleteown']) || !empty($permissions[$permissionBase . ':delete'])
 
+Cast To Boolean
+===============
+
+.. _mediawiki-structures-casttoboolean:
+
+MediaWiki
+^^^^^^^^^
+
+:ref:`cast-to-boolean`, in includes/page/WikiPage.php:2274. 
+
+$options['changed'] and $options['created'] are documented and used as boolean. Yet, SiteStatsUpdate may require integers, for correct storage in the database, hence the type casting. (int) (bool) may be an alternative here.
+
+.. code-block:: php
+
+    $edits = $options['changed'] ? 1 : 0;
+    		$pages = $options['created'] ? 1 : 0;
+    		
+    
+    		DeferredUpdates::addUpdate( SiteStatsUpdate::factory(
+    			[ 'edits' => $edits, 'articles' => $good, 'pages' => $pages ]
+    		) );
+
+
 --------
 
+Cast To Boolean
+===============
+
+.. _dolibarr-structures-casttoboolean:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`cast-to-boolean`, in htdocs/societe/class/societe.class.php:2777. 
+
+Several cases are built on the same pattern there. Each of the expression may be simply cast to (bool).
+
+.. code-block:: php
+
+    case 3:
+    				$ret=(!$conf->global->SOCIETE_IDPROF3_UNIQUE?false:true);
+    				break;
+
+Failed Substr Comparison
+========================
+
+.. _zurmo-structures-failingsubstrcomparison:
+
+Zurmo
+^^^^^
+
+:ref:`failed-substr-comparison`, in app/protected/modules/zurmo/modules/SecurableModule.php:117. 
+
+filterAuditEvent compares a six char string with 'AUDIT_EVENT_' which contains 10 chars. This method returns only FALSE. Although it is used only once, the whole block that calls this method is now dead code. 
+
+.. code-block:: php
+
+    private static function filterAuditEvent($s)
+            {
+                return substr($s, 0, 6) == 'AUDIT_EVENT_';
+            }
+
+
+--------
+
+Failed Substr Comparison
+========================
+
+.. _mediawiki-structures-failingsubstrcomparison:
+
+MediaWiki
+^^^^^^^^^
+
+:ref:`failed-substr-comparison`, in includes/media/DjVu.php:263. 
+
+$metadata contains data that may be in different formats. When it is a pure XML file, it is 'Old style'. The comment helps understanding that this is not the modern way to go : the Old Style is actually never called, due to a failing condition.
+
+.. code-block:: php
+
+    private function getUnserializedMetadata( File $file ) {
+    		$metadata = $file->getMetadata();
+    		if ( substr( $metadata, 0, 3 ) === '<?xml' ) {
+    			// Old style. Not serialized but instead just a raw string of XML.
+    			return $metadata;
+    		}
 
 Dont Echo Error
 ===============
@@ -207,9 +291,11 @@ This is classic debugging code that should never reach production. mysqli_error(
             echo gettext('An error occured: ').mysqli_errno($cnInfoCentral).'--'.mysqli_error($cnInfoCentral);
         } else {
 
+
 --------
 
-
+Dont Echo Error
+===============
 
 .. _phpdocumentor-security-dontechoerror:
 
@@ -231,9 +317,6 @@ Default development behavior : display the caught exception. Production behavior
     
                 return;
             }
-
---------
-
 
 Could Be Private Class Constant
 ===============================
@@ -258,9 +341,6 @@ The code includes a fair number of class constants. The one listed here are only
         const TEXT_MEDIUM  = 16777215;
         const TEXT_LONG    = 4294967295;
 
---------
-
-
 Next Month Trap
 ===============
 
@@ -278,9 +358,11 @@ This code is wrong on August 29,th 30th and 31rst : 6 months before is caculated
     case 'past_180':
     				return array(strtotime('-6 months'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
+
 --------
 
-
+Next Month Trap
+===============
 
 .. _edusoho-structures-nextmonthtrap:
 
@@ -296,9 +378,6 @@ The last month is wrong 8 times a year : on 31rst, and by the end of March.
     'lastMonthStart' => date('Y-m-d', strtotime(date('Y-m', strtotime('-1 month')))),
                 'lastMonthEnd' => date('Y-m-d', strtotime(date('Y-m', time())) - 24 * 3600),
                 'lastThreeMonthsStart' => date('Y-m-d', strtotime(date('Y-m', strtotime('-2 month')))),
-
---------
-
 
 Identical On Both Sides
 =======================
@@ -323,9 +402,6 @@ This code looks like ``($options & DatabaseInterface::QUERY_STORE) == DatabaseIn
         $warnings = 0;
     }
 
---------
-
-
 Join file()
 ===========
 
@@ -342,9 +418,11 @@ This code actually loads the file, join it, then split it again. file() would be
 
     $markerdata = explode( "\n", implode( '', file( $filename ) ) );
 
+
 --------
 
-
+Join file()
+===========
 
 .. _spip-performances-joinfile:
 
@@ -359,9 +437,11 @@ When the file is not accessible, file() returns null, and can't be processed by 
 
     $s = @join('', file($file));
 
+
 --------
 
-
+Join file()
+===========
 
 .. _expressionengine-performances-joinfile:
 
@@ -380,9 +460,11 @@ join('', ) is used as a replacement for file_get_contents(), which was introduce
         $this->NP = unserialize(join('', file(dirname(__FILE__).'/npdata.ser')));
     }
 
+
 --------
 
-
+Join file()
+===========
 
 .. _prestashop-performances-joinfile:
 
@@ -402,9 +484,6 @@ implode('', ) is probably not the slowest part in these lines.
     
     $module_file = file($this->getLocalPath().'override/'.$path);
     eval(preg_replace(array('#^\s*<\?(?:php)?#', '#class\s+'.$classname.'(\s+extends\s+([a-z0-9_]+)(\s+implements\s+([a-z0-9_]+))?)?#i'), array(' ', 'class '.$classname.'Override_remove'.$uniq), implode('', $module_file)));
-
---------
-
 
 Use pathinfo() Arguments
 ========================
@@ -432,9 +511,11 @@ The `$filepath` is broken into pieces, and then, only the 'extension' part is us
             $extension = strtolower($pathinfo['extension']);
             // Only $extension is used beyond that point
 
+
 --------
 
-
+Use pathinfo() Arguments
+========================
 
 .. _thinkphp-php-usepathinfoargs:
 
@@ -452,9 +533,6 @@ Without any other check, pathinfo() could be used with PATHINFO_EXTENSION.
             return $pathinfo['extension'];
         }
 
---------
-
-
 Compare Hash
 ============
 
@@ -471,9 +549,11 @@ This code should also avoid using SHA1.
 
     sha1($password) == $this->password
 
+
 --------
 
-
+Compare Hash
+============
 
 .. _livezilla-security-comparehash:
 
@@ -493,9 +573,6 @@ This code is using the stronger SHA256 but compares it to another string. $_toke
                 return true;
         return false;
     }
-
---------
-
 
 Register Globals
 ================
@@ -517,9 +594,11 @@ The API starts with security features, such as the whitelist(). The whitelist ap
     $method = $_SERVER['REQUEST_METHOD'];
     $request = explode("/", substr(@$_SERVER['PATH_INFO'], 1));
 
+
 --------
 
-
+Register Globals
+================
 
 .. _xoops-security-registerglobals:
 
@@ -550,90 +629,5 @@ This code only exports the POST variables as globals. And it does clean incoming
     
     // Get Action type
     $op = system_CleanVars($_REQUEST, 'op', 'list', 'string');
-
---------
-
-
-Dont Echo Error
-===============
-
-.. _churchcrm-security-dontechoerror:
-
-ChurchCRM
-^^^^^^^^^
-
-:ref:`dont-echo-error`, in wp-admin/includes/misc.php:74. 
-
-This is classic debugging code that should never reach production. mysqli_error() and mysqli_errno() provide valuable information is case of an error, and may be exploited by intruders.
-
-.. code-block:: php
-
-    if (mysqli_error($cnInfoCentral) != '') {
-            echo gettext('An error occured: ').mysqli_errno($cnInfoCentral).'--'.mysqli_error($cnInfoCentral);
-        } else {
-
---------
-
-
-
-.. _phpdocumentor-security-dontechoerror:
-
-Phpdocumentor
-^^^^^^^^^^^^^
-
-:ref:`dont-echo-error`, in src/phpDocumentor/Plugin/Graphs/Writer/Graph.php:77. 
-
-Default development behavior : display the caught exception. Production behavior should not display that message, but log it for later review. Also, the return in the catch should be moved to the main code sequence.
-
-.. code-block:: php
-
-    public function processClass(ProjectDescriptor $project, Transformation $transformation)
-        {
-            try {
-                $this->checkIfGraphVizIsInstalled();
-            } catch (\Exception $e) {
-                echo $e->getMessage();
-    
-                return;
-            }
-
---------
-
-
-Logical Should Use Symbolic Operators
-=====================================
-
-.. _cleverstyle-php-logicalinletters:
-
-Cleverstyle
-^^^^^^^^^^^
-
-:ref:`logical-should-use-symbolic-operators`, in /modules/Uploader/Mime/Mime.php:171. 
-
-$extension is assigned with the results of pathinfo($reference_name, PATHINFO_EXTENSION) and ignores static::hasExtension($extension). The same expression, placed in a condition (like an if), would assign a value to $extension and use another for the condition itself. Here, this code is only an expression in the flow.
-
-.. code-block:: php
-
-    $extension = pathinfo($reference_name, PATHINFO_EXTENSION) and static::hasExtension($extension);
-
---------
-
-
-
-.. _openconf-php-logicalinletters:
-
-OpenConf
-^^^^^^^^
-
-:ref:`logical-should-use-symbolic-operators`, in /chair/export.inc:143. 
-
-In this context, the priority of execution is used on purpose; $coreFile only collect the temporary name of the export file, and when this name is empty, then the second operand of OR is executed, though never collected. Since this second argument is a 'die', its return value is lost, but the initial assignation is never used anyway. 
-
-.. code-block:: php
-
-    $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
-
---------
-
 
 

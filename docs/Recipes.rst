@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 02 Apr 2018 17:54:22 +0000
-.. comment: Generation hash : 0a93eefa80b4d891bd82b1fa8f40234da9ad84ac
+.. comment: Generation date : Mon, 09 Apr 2018 20:44:54 +0000
+.. comment: Generation hash : 25618460b96a7d01b9b04c3b0e3353d5f1a0931a
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 343 analysis
+Total : 342 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -289,6 +289,7 @@ Total : 343 analysis
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
 * :ref:`Redefined Class Constants <redefined-class-constants>`
 * :ref:`Redefined Default <redefined-default>`
+* :ref:`Redefined Private Property <redefined-private-property>`
 * :ref:`Relay Function <relay-function>`
 * :ref:`Repeated Regex <repeated-regex>`
 * :ref:`Repeated print() <repeated-print()>`
@@ -309,7 +310,6 @@ Total : 343 analysis
 * :ref:`Should Use Local Class <should-use-local-class>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use SetCookie() <should-use-setcookie()>`
-* :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Silently Cast Integer <silently-cast-integer>`
 * :ref:`Static Loop <static-loop>`
 * :ref:`Static Methods Called From Object <static-methods-called-from-object>`
@@ -374,7 +374,6 @@ Total : 343 analysis
 * :ref:`Use Class Operator <use-class-operator>`
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 * :ref:`Use Instanceof <use-instanceof>`
-* :ref:`Use List With Foreach <use-list-with-foreach>`
 * :ref:`Use Named Boolean In Argument Definition <use-named-boolean-in-argument-definition>`
 * :ref:`Use Object Api <use-object-api>`
 * :ref:`Use Pathinfo <use-pathinfo>`
@@ -455,7 +454,6 @@ Total : 21 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
-* :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Close Tags <close-tags>`
 * :ref:`Constant Comparison <constant-comparison>`
 * :ref:`Curly Arrays <curly-arrays>`
@@ -463,7 +461,6 @@ Total : 21 analysis
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
 * :ref:`Heredoc Delimiter <heredoc-delimiter>`
 * :ref:`Interpolation`
-* :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
 * :ref:`No Plus One <no-plus-one>`
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
@@ -471,16 +468,18 @@ Total : 21 analysis
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
 * :ref:`Should Be Single Quote <should-be-single-quote>`
 * :ref:`Unusual Case For PHP Functions <unusual-case-for-php-functions>`
-* :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
-* :ref:`Use const <use-const>`
 * :ref:`Yoda Comparison <yoda-comparison>`
+* Classes/WrongCase
+* Constants/ConstRecommended
+* Namespaces/UseWithFullyQualifiedNS
+* Structures/MixedConcatInterpolation
 
 .. _compatibilityphp53:
 
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 63 analysis
+Total : 62 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -520,12 +519,9 @@ Total : 63 analysis
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`No String With Append <no-string-with-append>`
 * :ref:`No Substr Minus One <no-substr-minus-one>`
-* :ref:`No get_class() With Null <no-get\_class()-with-null>`
-* :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
-* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
 * :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
@@ -545,257 +541,254 @@ Total : 63 analysis
 * :ref:`ext/dba`
 * :ref:`ext/fdf`
 * :ref:`ext/ming`
+* Classes/NonStaticMethodsCalledStatic
+* Structures/NoGetClassNull
 
 .. _compatibilityphp54:
 
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 59 analysis
+Total : 58 analysis
 
-* :ref:`::class`
-* :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
-* :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
-* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
-* :ref:`Class Const With Array <class-const-with-array>`
-* :ref:`Const With Array <const-with-array>`
-* :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
-* :ref:`Define With Array <define-with-array>`
-* :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
-* :ref:`Ellipsis Usage <ellipsis-usage>`
-* :ref:`Exponent Usage <exponent-usage>`
-* :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
-* :ref:`Group Use Declaration <group-use-declaration>`
-* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
-* :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
-* :ref:`Integer As Property <integer-as-property>`
-* :ref:`Isset With Constant <isset-with-constant>`
-* :ref:`List Short Syntax <list-short-syntax>`
-* :ref:`List With Keys <list-with-keys>`
-* :ref:`List With Reference <list-with-reference>`
-* :ref:`Malformed Octal <malformed-octal>`
-* :ref:`Mixed Keys Arrays <mixed-keys-arrays>`
-* :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
-* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
-* :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
-* :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
-* :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
-* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
-* :ref:`No List With String <no-list-with-string>`
-* :ref:`No String With Append <no-string-with-append>`
-* :ref:`No Substr Minus One <no-substr-minus-one>`
-* :ref:`No get_class() With Null <no-get\_class()-with-null>`
-* :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
-* :ref:`Null On New <null-on-new>`
-* :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
-* :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
-* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
-* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
-* :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
-* :ref:`PHP7 Dirname <php7-dirname>`
-* :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
-* :ref:`Php 7.1 New Class <php-7.1-new-class>`
-* :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
-* :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
-* :ref:`Switch With Too Many Default <switch-with-too-many-default>`
-* :ref:`Unicode Escape Partial <unicode-escape-partial>`
-* :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
-* :ref:`Use Const And Functions <use-const-and-functions>`
-* :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
-* :ref:`Variable Global <variable-global>`
-* :ref:`__debugInfo() usage <\_\_debuginfo()-usage>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`ext/mhash`
+* Arrays/MixedKeys
+* Classes/Anonymous
+* Classes/CantInheritAbstractMethod
+* Classes/ChildRemoveTypehint
+* Classes/IntegerAsProperty
+* Classes/NonStaticMethodsCalledStatic
+* Classes/NullOnNew
+* Exceptions/MultipleCatch
+* Functions/MultipleSameArguments
+* Namespaces/UseFunctionsConstants
+* Php/CantUseReturnValueInWriteContext
+* Php/CaseForPSS
+* Php/ClassConstWithArray
+* Php/ConstWithArray
+* Php/DefineWithArray
+* Php/EllipsisUsage
+* Php/ExponentUsage
+* Php/GroupUseDeclaration
+* Php/GroupUseTrailingComma
+* Php/HashAlgos53
+* Php/ListShortSyntax
+* Php/ListWithKeys
+* Php/ListWithReference
+* Php/NoListWithString
+* Php/NoStringWithAppend
+* Php/NoSubstrMinusOne
+* Php/Php55NewFunctions
+* Php/Php56NewFunctions
+* Php/Php70NewClasses
+* Php/Php70NewFunctions
+* Php/Php70NewInterfaces
+* Php/Php71NewClasses
+* Php/Php72NewClasses
+* Php/Php72RemovedInterfaces
+* Php/Php73NewFunctions
+* Php/Php7RelaxedKeyword
+* Php/ScalarTypehintUsage
+* Php/StaticclassUsage
+* Php/UnicodeEscapePartial
+* Php/UnicodeEscapeSyntax
+* Php/debugInfoUsage
+* Structures/ConstantScalarExpression
+* Structures/DereferencingAS
+* Structures/ForeachWithList
+* Structures/IssetWithConstant
+* Structures/NoGetClassNull
+* Structures/PHP7Dirname
+* Structures/SwitchWithMultipleDefault
+* Structures/VariableGlobal
+* Type/MalformedOctal
+* Variables/Php5IndirectExpression
+* Variables/Php7IndirectExpression
 
 .. _compatibilityphp55:
 
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 51 analysis
+Total : 50 analysis
 
-* :ref:`Anonymous Classes <anonymous-classes>`
-* :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
-* :ref:`Class Const With Array <class-const-with-array>`
-* :ref:`Const With Array <const-with-array>`
-* :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
-* :ref:`Define With Array <define-with-array>`
-* :ref:`Ellipsis Usage <ellipsis-usage>`
-* :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-* :ref:`Group Use Declaration <group-use-declaration>`
-* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
-* :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
-* :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
-* :ref:`Integer As Property <integer-as-property>`
-* :ref:`Isset With Constant <isset-with-constant>`
-* :ref:`List Short Syntax <list-short-syntax>`
-* :ref:`List With Keys <list-with-keys>`
-* :ref:`List With Reference <list-with-reference>`
-* :ref:`Malformed Octal <malformed-octal>`
-* :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
-* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
-* :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
-* :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
-* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
-* :ref:`No List With String <no-list-with-string>`
-* :ref:`No String With Append <no-string-with-append>`
-* :ref:`No Substr Minus One <no-substr-minus-one>`
-* :ref:`No get_class() With Null <no-get\_class()-with-null>`
-* :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
-* :ref:`Null On New <null-on-new>`
-* :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
-* :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
-* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
-* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
-* :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
-* :ref:`PHP7 Dirname <php7-dirname>`
-* :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
-* :ref:`Php 7.1 New Class <php-7.1-new-class>`
-* :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
-* :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
-* :ref:`Switch With Too Many Default <switch-with-too-many-default>`
-* :ref:`Unicode Escape Partial <unicode-escape-partial>`
-* :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
-* :ref:`Use Const And Functions <use-const-and-functions>`
 * :ref:`Use password_hash() <use-password\_hash()>`
-* :ref:`Variable Global <variable-global>`
-* :ref:`__debugInfo() usage <\_\_debuginfo()-usage>`
 * :ref:`ext/apc`
 * :ref:`ext/mysql`
+* Classes/Anonymous
+* Classes/CantInheritAbstractMethod
+* Classes/ChildRemoveTypehint
+* Classes/IntegerAsProperty
+* Classes/NonStaticMethodsCalledStatic
+* Classes/NullOnNew
+* Exceptions/MultipleCatch
+* Functions/MultipleSameArguments
+* Namespaces/UseFunctionsConstants
+* Php/ClassConstWithArray
+* Php/ConstWithArray
+* Php/DefineWithArray
+* Php/EllipsisUsage
+* Php/ExponentUsage
+* Php/GroupUseDeclaration
+* Php/GroupUseTrailingComma
+* Php/HashAlgos53
+* Php/HashAlgos54
+* Php/ListShortSyntax
+* Php/ListWithKeys
+* Php/ListWithReference
+* Php/NoListWithString
+* Php/NoStringWithAppend
+* Php/NoSubstrMinusOne
+* Php/Php56NewFunctions
+* Php/Php70NewClasses
+* Php/Php70NewFunctions
+* Php/Php70NewInterfaces
+* Php/Php71NewClasses
+* Php/Php72NewClasses
+* Php/Php72RemovedInterfaces
+* Php/Php73NewFunctions
+* Php/Php7RelaxedKeyword
+* Php/ScalarTypehintUsage
+* Php/UnicodeEscapePartial
+* Php/UnicodeEscapeSyntax
+* Php/debugInfoUsage
+* Structures/ConstantScalarExpression
+* Structures/IssetWithConstant
+* Structures/NoGetClassNull
+* Structures/PHP7Dirname
+* Structures/SwitchWithMultipleDefault
+* Structures/VariableGlobal
+* Type/MalformedOctal
+* Variables/Php5IndirectExpression
+* Variables/Php7IndirectExpression
 
 .. _compatibilityphp56:
 
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 40 analysis
+Total : 39 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
-* :ref:`Anonymous Classes <anonymous-classes>`
-* :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
-* :ref:`Define With Array <define-with-array>`
-* :ref:`Group Use Declaration <group-use-declaration>`
-* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
-* :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
-* :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
-* :ref:`Integer As Property <integer-as-property>`
-* :ref:`Isset With Constant <isset-with-constant>`
-* :ref:`List Short Syntax <list-short-syntax>`
-* :ref:`List With Keys <list-with-keys>`
-* :ref:`List With Reference <list-with-reference>`
-* :ref:`Malformed Octal <malformed-octal>`
-* :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
-* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
-* :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
-* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
-* :ref:`No List With String <no-list-with-string>`
-* :ref:`No String With Append <no-string-with-append>`
-* :ref:`No Substr Minus One <no-substr-minus-one>`
-* :ref:`No get_class() With Null <no-get\_class()-with-null>`
-* :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
-* :ref:`Null On New <null-on-new>`
-* :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
-* :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
-* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
-* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
-* :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
-* :ref:`PHP7 Dirname <php7-dirname>`
-* :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
-* :ref:`Php 7.1 New Class <php-7.1-new-class>`
-* :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
-* :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
-* :ref:`Switch With Too Many Default <switch-with-too-many-default>`
-* :ref:`Unicode Escape Partial <unicode-escape-partial>`
-* :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
-* :ref:`Variable Global <variable-global>`
+* Classes/Anonymous
+* Classes/CantInheritAbstractMethod
+* Classes/ChildRemoveTypehint
+* Classes/IntegerAsProperty
+* Classes/NonStaticMethodsCalledStatic
+* Classes/NullOnNew
+* Exceptions/MultipleCatch
+* Functions/MultipleSameArguments
+* Php/DefineWithArray
+* Php/GroupUseDeclaration
+* Php/GroupUseTrailingComma
+* Php/HashAlgos53
+* Php/HashAlgos54
+* Php/ListShortSyntax
+* Php/ListWithKeys
+* Php/ListWithReference
+* Php/NoListWithString
+* Php/NoStringWithAppend
+* Php/NoSubstrMinusOne
+* Php/Php70NewClasses
+* Php/Php70NewFunctions
+* Php/Php70NewInterfaces
+* Php/Php71NewClasses
+* Php/Php72NewClasses
+* Php/Php72RemovedInterfaces
+* Php/Php73NewFunctions
+* Php/Php7RelaxedKeyword
+* Php/ScalarTypehintUsage
+* Php/UnicodeEscapePartial
+* Php/UnicodeEscapeSyntax
+* Structures/IssetWithConstant
+* Structures/NoGetClassNull
+* Structures/PHP7Dirname
+* Structures/SwitchWithMultipleDefault
+* Structures/VariableGlobal
+* Type/MalformedOctal
+* Variables/Php5IndirectExpression
+* Variables/Php7IndirectExpression
 
 .. _compatibilityphp70:
 
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 36 analysis
+Total : 35 analysis
 
-* :ref:`Break Outside Loop <break-outside-loop>`
-* :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
-* :ref:`Empty List <empty-list>`
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
-* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
-* :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
-* :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
-* :ref:`Integer As Property <integer-as-property>`
-* :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Appends <list-with-appends>`
-* :ref:`List With Keys <list-with-keys>`
-* :ref:`List With Reference <list-with-reference>`
 * :ref:`Magic Visibility <magic-visibility>`
-* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
-* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
-* :ref:`No Substr Minus One <no-substr-minus-one>`
-* :ref:`No get_class() With Null <no-get\_class()-with-null>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
-* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
-* :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
-* :ref:`Php 7.1 New Class <php-7.1-new-class>`
-* :ref:`Php 7.2 New Class <php-7.2-new-class>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`ext/ereg`
-* :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
-* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 * :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
+* Classes/CantInheritAbstractMethod
+* Classes/ChildRemoveTypehint
+* Classes/IntegerAsProperty
+* Exceptions/MultipleCatch
+* Functions/funcGetArgModified
+* Php/EmptyList
+* Php/GroupUseTrailingComma
+* Php/HashAlgos53
+* Php/HashAlgos54
+* Php/ListShortSyntax
+* Php/ListWithKeys
+* Php/ListWithReference
+* Php/NoSubstrMinusOne
+* Php/Php71NewClasses
+* Php/Php72NewClasses
+* Php/Php72RemovedInterfaces
+* Php/Php73NewFunctions
+* Structures/BreakOutsideLoop
+* Structures/NoGetClassNull
+* Structures/pregOptionE
+* Variables/Php7IndirectExpression
 
 .. _compatibilityphp71:
 
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 25 analysis
+Total : 24 analysis
 
-* :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
-* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
-* :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
-* :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
-* :ref:`Hexadecimal In String <hexadecimal-in-string>`
-* :ref:`Integer As Property <integer-as-property>`
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
-* :ref:`List With Reference <list-with-reference>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
-* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
-* :ref:`No Substr() One <no-substr()-one>`
-* :ref:`No get_class() With Null <no-get\_class()-with-null>`
-* :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
-* :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
-* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
-* :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
-* :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Use random_int() <use-random\_int()>`
-* :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 * :ref:`ext/mcrypt`
-* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+* Classes/CantInheritAbstractMethod
+* Classes/ChildRemoveTypehint
+* Classes/IntegerAsProperty
+* Classes/UsingThisOutsideAClass
+* Php/BetterRand
+* Php/GroupUseTrailingComma
+* Php/HashAlgos53
+* Php/HashAlgos54
+* Php/ListWithReference
+* Php/ParenthesisAsParameter
+* Php/Php70RemovedDirective
+* Php/Php70RemovedFunctions
+* Php/Php72NewClasses
+* Php/Php72RemovedInterfaces
+* Php/Php73NewFunctions
+* Structures/NoGetClassNull
+* Structures/NoSubstrOne
+* Structures/pregOptionE
+* Type/HexadecimalString
 
 .. _compatibilityphp72:
 
@@ -807,18 +800,18 @@ Total : 15 analysis
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
 * :ref:`Hash Will Use Objects <hash-will-use-objects>`
-* :ref:`List With Reference <list-with-reference>`
 * :ref:`New Constants In PHP 7.2 <new-constants-in-php-7.2>`
 * :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
-* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
-* :ref:`No get_class() With Null <no-get\_class()-with-null>`
 * :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
 * :ref:`PHP 7.2 Object Keyword <php-7.2-object-keyword>`
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
-* :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
-* :ref:`Php 7.2 New Class <php-7.2-new-class>`
-* :ref:`Undefined Constants <undefined-constants>`
-* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+* Constants/UndefinedConstants
+* Php/ListWithReference
+* Php/ParenthesisAsParameter
+* Php/Php72NewClasses
+* Php/Php73NewFunctions
+* Structures/NoGetClassNull
+* Structures/pregOptionE
 
 .. _compatibilityphp73:
 
@@ -827,10 +820,10 @@ CompatibilityPHP73
 
 Total : 4 analysis
 
-* :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
-* :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
-* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+* Php/ParenthesisAsParameter
+* Php/Php70RemovedDirective
+* Structures/pregOptionE
 
 .. _dead-code:
 
@@ -839,31 +832,31 @@ Dead code
 
 Total : 25 analysis
 
-* :ref:`Can't Extend Final <can't-extend-final>`
-* :ref:`Empty Instructions <empty-instructions>`
-* :ref:`Empty Namespace <empty-namespace>`
 * :ref:`Exception Order <exception-order>`
-* :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Rethrown Exceptions <rethrown-exceptions>`
 * :ref:`Undefined Caught Exceptions <undefined-caught-exceptions>`
-* :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unresolved Catch <unresolved-catch>`
-* :ref:`Unresolved Instanceof <unresolved-instanceof>`
-* :ref:`Unset In Foreach <unset-in-foreach>`
-* :ref:`Unthrown Exception <unthrown-exception>`
-* :ref:`Unused Classes <unused-classes>`
-* :ref:`Unused Constants <unused-constants>`
-* :ref:`Unused Functions <unused-functions>`
-* :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
-* :ref:`Unused Interfaces <unused-interfaces>`
-* :ref:`Unused Label <unused-label>`
-* :ref:`Unused Methods <unused-methods>`
-* :ref:`Unused Private Properties <unused-private-properties>`
 * :ref:`Unused Protected Methods <unused-protected-methods>`
-* :ref:`Unused Returned Value <unused-returned-value>`
-* :ref:`Unused Static Methods <unused-static-methods>`
-* :ref:`Unused Use <unused-use>`
 * :ref:`Used Protected Method <used-protected-method>`
+* Classes/CantExtendFinal
+* Classes/LocallyUnusedProperty
+* Classes/UnresolvedInstanceof
+* Classes/UnusedClass
+* Classes/UnusedMethods
+* Classes/UnusedPrivateMethod
+* Classes/UnusedPrivateProperty
+* Constants/UnusedConstants
+* Exceptions/Unthrown
+* Functions/UnusedFunctions
+* Functions/UnusedInheritedVariable
+* Functions/UnusedReturnedValue
+* Interfaces/UnusedInterfaces
+* Namespaces/EmptyNamespace
+* Namespaces/UnusedUse
+* Structures/EmptyLines
+* Structures/UnreachableCode
+* Structures/UnsetInForeach
+* Structures/UnusedLabel
 
 .. _performances:
 
@@ -877,20 +870,13 @@ Total : 31 analysis
 * :ref:`Avoid array_push() <avoid-array\_push()>`
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Avoid glob() Usage <avoid-glob()-usage>`
-* :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Double array_flip() <double-array\_flip()>`
-* :ref:`Echo With Concat <echo-with-concat>`
-* :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Fetch One Row Format <fetch-one-row-format>`
-* :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Getting Last Element <getting-last-element>`
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
 * :ref:`Make One Call With Array <make-one-call-with-array>`
 * :ref:`No Count With 0 <no-count-with-0>`
-* :ref:`No Substr() One <no-substr()-one>`
-* :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-* :ref:`Pre-increment`
 * :ref:`Should Use Function <should-use-function>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Simple Switch <simple-switch>`
@@ -898,11 +884,18 @@ Total : 31 analysis
 * :ref:`Slice Arrays First <slice-arrays-first>`
 * :ref:`Slow Functions <slow-functions>`
 * :ref:`Substring First <substring-first>`
-* :ref:`Use Class Operator <use-class-operator>`
 * :ref:`Use PHP7 Encapsed Strings <use-php7-encapsed-strings>`
 * :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
-* :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`time() Vs strtotime() <time()-vs-strtotime()>`
+* Classes/UseClassOperator
+* Performances/ArrayMergeInLoops
+* Performances/PrePostIncrement
+* Structures/CouldUseShortAssignation
+* Structures/EchoWithConcat
+* Structures/EvalUsage
+* Structures/ForWithFunctioncall
+* Structures/NoSubstrOne
+* Structures/WhileListEach
 
 .. _security:
 
@@ -916,35 +909,35 @@ Total : 34 analysis
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
-* :ref:`Dont Echo Error <dont-echo-error>`
 * :ref:`Dynamic Library Loading <dynamic-library-loading>`
 * :ref:`Encoded Simple Letters <encoded-simple-letters>`
-* :ref:`Eval() Usage <eval()-usage>`
-* :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Indirect Injection <indirect-injection>`
 * :ref:`Mkdir Default <mkdir-default>`
-* :ref:`No Hardcoded Hash <no-hardcoded-hash>`
-* :ref:`No Hardcoded Ip <no-hardcoded-ip>`
-* :ref:`No Hardcoded Port <no-hardcoded-port>`
 * :ref:`No Net For Xml Load <no-net-for-xml-load>`
 * :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
-* :ref:`Phpinfo`
 * :ref:`Random Without Try <random-without-try>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe Curl Options <safe-curl-options>`
 * :ref:`Session Lazy Write <session-lazy-write>`
 * :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
-* :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`
 * :ref:`Sqlite3 Requires Single Quotes <sqlite3-requires-single-quotes>`
 * :ref:`Switch Fallthrough <switch-fallthrough>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Upload Filename Injection <upload-filename-injection>`
-* :ref:`Use random_int() <use-random\_int()>`
-* :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`parse_str() Warning <parse\_str()-warning>`
-* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
-* :ref:`var_dump()... Usage <var\_dump()...-usage>`
+* Functions/HardcodedPasswords
+* Php/BetterRand
+* Security/DontEchoError
+* Security/ShouldUsePreparedStatement
+* Structures/EvalUsage
+* Structures/EvalWithoutTry
+* Structures/NoHardcodedHash
+* Structures/NoHardcodedIp
+* Structures/NoHardcodedPort
+* Structures/PhpinfoUsage
+* Structures/VardumpUsage
+* Structures/pregOptionE
 
 .. _slim:
 
@@ -984,56 +977,57 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 48 analysis
+Total : 49 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
-* :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
-* :ref:`Could Make A Function <could-make-a-function>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Compact <could-use-compact>`
-* :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
-* :ref:`Could Use self <could-use-self>`
-* :ref:`Drop Else After Return <drop-else-after-return>`
-* :ref:`Echo With Concat <echo-with-concat>`
+* :ref:`Drop Substr Last Arg <drop-substr-last-arg>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
-* :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
-* :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
-* :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
-* :ref:`Never Used Parameter <never-used-parameter>`
-* :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
-* :ref:`No Return Used <no-return-used>`
-* :ref:`No Substr() One <no-substr()-one>`
-* :ref:`Overwritten Exceptions <overwritten-exceptions>`
-* :ref:`PHP7 Dirname <php7-dirname>`
-* :ref:`Parent First <parent-first>`
 * :ref:`Preprocess Arrays <preprocess-arrays>`
-* :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
-* :ref:`Repeated print() <repeated-print()>`
 * :ref:`Reuse Variable <reuse-variable>`
 * :ref:`Should Preprocess Chr <should-preprocess-chr>`
-* :ref:`Should Use Coalesce <should-use-coalesce>`
 * :ref:`Should Use Foreach <should-use-foreach>`
 * :ref:`Should Use Math <should-use-math>`
-* :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Should Use array_filter() <should-use-array\_filter()>`
-* :ref:`Slice Arrays First <slice-arrays-first>`
-* :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 * :ref:`Structures/CouldUseArrayFillKeys`
-* :ref:`Substring First <substring-first>`
 * :ref:`Too Many Parameters <too-many-parameters>`
-* :ref:`Unitialized Properties <unitialized-properties>`
-* :ref:`Unreachable Code <unreachable-code>`
-* :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Use Count Recursive <use-count-recursive>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Use session_start() Options <use-session\_start()-options>`
-* :ref:`While(List() = Each()) <while(list()-=-each())>`
-* :ref:`list() May Omit Variables <list()-may-omit-variables>`
 * :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
+* Arrays/RandomlySortedLiterals
+* Arrays/SliceFirst
+* Classes/ParentFirst
+* Classes/ShouldUseSelf
+* Classes/UnitializedProperties
+* Exceptions/OverwriteException
+* Functions/CouldCentralize
+* Functions/NeverUsedParameter
+* Functions/NoReturnUsed
+* Interfaces/AlreadyParentsInterface
+* Interfaces/UnusedInterfaces
+* Performances/SubstrFirst
+* Php/LogicalInLetters
+* Php/ShouldUseArrayColumn
+* Php/ShouldUseCoalesce
+* Structures/BooleanStrictComparison
+* Structures/CouldUseDir
+* Structures/DropElseAfterReturn
+* Structures/EchoWithConcat
+* Structures/ForeachWithList
+* Structures/ListOmissions
+* Structures/MismatchedTernary
+* Structures/NoParenthesisForLanguageConstruct
+* Structures/NoSubstrOne
+* Structures/PHP7Dirname
+* Structures/RepeatedPrint
+* Structures/UnreachableCode
+* Structures/WhileListEach
 
 .. _wordpress:
 
@@ -1044,7 +1038,6 @@ Total : 27 analysis
 
 * :ref:`Avoid Double Prepare <avoid-double-prepare>`
 * :ref:`Avoid Non Wordpress Globals <avoid-non-wordpress-globals>`
-* :ref:`Eval() Usage <eval()-usage>`
 * :ref:`No Direct Input To Wpdb <no-direct-input-to-wpdb>`
 * :ref:`No Global Modification <no-global-modification>`
 * :ref:`Nonce Creation <nonce-creation>`
@@ -1069,6 +1062,7 @@ Total : 27 analysis
 * :ref:`Wordpress Usage <wordpress-usage>`
 * :ref:`Wpdb Best Usage <wpdb-best-usage>`
 * :ref:`Wpdb Prepare Or Not <wpdb-prepare-or-not>`
+* Structures/EvalUsage
 
 .. _zendframework:
 
@@ -1081,13 +1075,11 @@ Total : 241 analysis
 * :ref:`Avoid PHP Superglobals <avoid-php-superglobals>`
 * :ref:`Defined View Property <defined-view-property>`
 * :ref:`Error Messages <error-messages>`
-* :ref:`Exit() Usage <exit()-usage>`
 * :ref:`Is Zend Framework 1 Controller <is-zend-framework-1-controller>`
 * :ref:`Is Zend Framework 1 Helper <is-zend-framework-1-helper>`
 * :ref:`Is Zend View File <is-zend-view-file>`
 * :ref:`No Echo Outside View <no-echo-outside-view>`
 * :ref:`Should Always Prepare <should-always-prepare>`
-* :ref:`Should Make Alias <should-make-alias>`
 * :ref:`Should Regenerate Session Id <should-regenerate-session-id>`
 * :ref:`Thrown Exceptions <thrown-exceptions>`
 * :ref:`Undefined Class 2.0 <undefined-class-2.0>`
@@ -1118,20 +1110,14 @@ Total : 241 analysis
 * :ref:`zend-cache 2.6.0 Undefined Classes <zend-cache-2.6.0-undefined-classes>`
 * :ref:`zend-cache 2.7.0 Undefined Classes <zend-cache-2.7.0-undefined-classes>`
 * :ref:`zend-cache Usage <zend-cache-usage>`
-* :ref:`zend-cache Usage <zend-cache-usage>`
 * :ref:`zend-captcha 2.5.0 Undefined Classes <zend-captcha-2.5.0-undefined-classes>`
 * :ref:`zend-captcha 2.6.0 Undefined Classes <zend-captcha-2.6.0-undefined-classes>`
 * :ref:`zend-captcha 2.7.0 Undefined Classes <zend-captcha-2.7.0-undefined-classes>`
 * :ref:`zend-captcha Usage <zend-captcha-usage>`
 * :ref:`zend-code 2.5.0 Undefined Classes <zend-code-2.5.0-undefined-classes>`
-* :ref:`zend-code 2.5.0 Undefined Classes <zend-code-2.5.0-undefined-classes>`
-* :ref:`zend-code 2.6.0 Undefined Classes <zend-code-2.6.0-undefined-classes>`
 * :ref:`zend-code 2.6.0 Undefined Classes <zend-code-2.6.0-undefined-classes>`
 * :ref:`zend-code 3.0.0 Undefined Classes <zend-code-3.0.0-undefined-classes>`
-* :ref:`zend-code 3.0.0 Undefined Classes <zend-code-3.0.0-undefined-classes>`
 * :ref:`zend-code 3.1.0 Undefined Classes <zend-code-3.1.0-undefined-classes>`
-* :ref:`zend-code 3.1.0 Undefined Classes <zend-code-3.1.0-undefined-classes>`
-* :ref:`zend-code 3.2.0 Undefined Classes <zend-code-3.2.0-undefined-classes>`
 * :ref:`zend-code 3.2.0 Undefined Classes <zend-code-3.2.0-undefined-classes>`
 * :ref:`zend-code Usage <zend-code-usage>`
 * :ref:`zend-config 2.5.x <zend-config-2.5.x>`
@@ -1163,15 +1149,10 @@ Total : 241 analysis
 * :ref:`zend-escaper 2.5.0 Undefined Classes <zend-escaper-2.5.0-undefined-classes>`
 * :ref:`zend-escaper Usage <zend-escaper-usage>`
 * :ref:`zend-eventmanager 2.5.0 Undefined Classes <zend-eventmanager-2.5.0-undefined-classes>`
-* :ref:`zend-eventmanager 2.5.0 Undefined Classes <zend-eventmanager-2.5.0-undefined-classes>`
-* :ref:`zend-eventmanager 2.6.0 Undefined Classes <zend-eventmanager-2.6.0-undefined-classes>`
 * :ref:`zend-eventmanager 2.6.0 Undefined Classes <zend-eventmanager-2.6.0-undefined-classes>`
 * :ref:`zend-eventmanager 3.0.0 Undefined Classes <zend-eventmanager-3.0.0-undefined-classes>`
-* :ref:`zend-eventmanager 3.0.0 Undefined Classes <zend-eventmanager-3.0.0-undefined-classes>`
-* :ref:`zend-eventmanager 3.1.0 Undefined Classes <zend-eventmanager-3.1.0-undefined-classes>`
 * :ref:`zend-eventmanager 3.1.0 Undefined Classes <zend-eventmanager-3.1.0-undefined-classes>`
 * :ref:`zend-eventmanager 3.2.0 Undefined Classes <zend-eventmanager-3.2.0-undefined-classes>`
-* :ref:`zend-eventmanager Usage <zend-eventmanager-usage>`
 * :ref:`zend-eventmanager Usage <zend-eventmanager-usage>`
 * :ref:`zend-feed 2.5.0 Undefined Classes <zend-feed-2.5.0-undefined-classes>`
 * :ref:`zend-feed 2.6.0 Undefined Classes <zend-feed-2.6.0-undefined-classes>`
@@ -1290,13 +1271,9 @@ Total : 241 analysis
 * :ref:`zend-tag 2.6.0 Undefined Classes <zend-tag-2.6.0-undefined-classes>`
 * :ref:`zend-tag Usage <zend-tag-usage>`
 * :ref:`zend-test 2.5.0 Undefined Classes <zend-test-2.5.0-undefined-classes>`
-* :ref:`zend-test 2.5.0 Undefined Classes <zend-test-2.5.0-undefined-classes>`
 * :ref:`zend-test 2.6.0 Undefined Classes <zend-test-2.6.0-undefined-classes>`
-* :ref:`zend-test 2.6.0 Undefined Classes <zend-test-2.6.0-undefined-classes>`
-* :ref:`zend-test 3.0.0 Undefined Classes <zend-test-3.0.0-undefined-classes>`
 * :ref:`zend-test 3.0.0 Undefined Classes <zend-test-3.0.0-undefined-classes>`
 * :ref:`zend-test 3.1.0 Undefined Classes <zend-test-3.1.0-undefined-classes>`
-* :ref:`zend-test Usage <zend-test-usage>`
 * :ref:`zend-test Usage <zend-test-usage>`
 * :ref:`zend-text 2.5.0 Undefined Classes <zend-text-2.5.0-undefined-classes>`
 * :ref:`zend-text 2.6.0 Undefined Classes <zend-text-2.6.0-undefined-classes>`
@@ -1318,4 +1295,21 @@ Total : 241 analysis
 * :ref:`zend-xmlrpc 2.5.0 Undefined Classes <zend-xmlrpc-2.5.0-undefined-classes>`
 * :ref:`zend-xmlrpc 2.6.0 Undefined Classes <zend-xmlrpc-2.6.0-undefined-classes>`
 * :ref:`zend-xmlrpc Usage <zend-xmlrpc-usage>`
+* Namespaces/ShouldMakeAlias
+* Structures/ExitUsage
+* ZendF/Zf3Cache
+* ZendF/Zf3Code25
+* ZendF/Zf3Code26
+* ZendF/Zf3Code30
+* ZendF/Zf3Code31
+* ZendF/Zf3Code32
+* ZendF/Zf3Eventmanager
+* ZendF/Zf3Eventmanager25
+* ZendF/Zf3Eventmanager26
+* ZendF/Zf3Eventmanager30
+* ZendF/Zf3Eventmanager31
+* ZendF/Zf3Test
+* ZendF/Zf3Test25
+* ZendF/Zf3Test26
+* ZendF/Zf3Test30
 

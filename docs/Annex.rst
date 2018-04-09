@@ -45,6 +45,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Level 2
 * Level 3
 * Level 4
+* Level 5
 * Melis
 * Newfeatures
 * OneFile
@@ -294,6 +295,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `WordPress <https://www.wordpress.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `Mautic <https://www.mautic.org/>`_
+* `MediaWiki <https://www.mediawiki.org/>`_
 * `ChurchCRM <http://churchcrm.io/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
 * `Phinx <https://phinx.org/>`_
@@ -361,10 +363,16 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.2.2
+
+  * Drop Substr Last Arg (Structures/SubstrLastArg ; Suggestions)
+  * Redefined Private Property (Classes/RedefinedPrivateProperty)
+
 * 1.2.1
 
   * Check Regex (Melis/CheckRegex ; Melis)
   * Melis/RouteConstraints (Melis/RouteConstraints ; Melis)
+  * Possible Increment (Structures/PossibleIncrement ; Unassigned)
   * Properties Declaration Consistence (Classes/PPPDeclarationStyle)
 
 * 1.2.0
@@ -515,7 +523,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Php 7.2 New Class (Php/Php72NewClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Slice Arrays First (Arrays/SliceFirst)
   * Unknown Pcre2 Option (Php/UnknownPcre2Option ; Analyze)
-  * Use List With Foreach (Structures/UseListWithForeach ; Analyze, Suggestions)
+  * Use List With Foreach (Structures/UseListWithForeach ; Suggestions)
   * Use PHP7 Encapsed Strings (Performances/PHP7EncapsedStrings ; Performances)
   * ext/vips (Extensions/Extvips ; Appinfo, Appcontent)
 
@@ -619,7 +627,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * No Magic With Array (Classes/NoMagicWithArray ; Analyze, Level 4)
   * Optional Parameter (Functions/OptionalParameter ; DefensiveProgrammingTM)
   * PHP 7.2 Object Keyword (Php/Php72ObjectKeyword ; CompatibilityPHP72)
-  * PHP 72 Removed Classes (Php/Php72RemovedClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
   * PHP 72 Removed Interfaces (Php/Php72RemovedInterfaces ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
   * ext/xattr (Extensions/Extxattr ; Appinfo)
 
@@ -1014,7 +1021,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Class Function Confusion (Php/ClassFunctionConfusion ; Analyze)
   * Forgotten Thrown (Exceptions/ForgottenThrown)
-  * Should Use array_column() (Php/ShouldUseArrayColumn ; Analyze, Performances, Suggestions, Level 4)
+  * Should Use array_column() (Php/ShouldUseArrayColumn ; Performances, Suggestions, Level 4)
   * ext/libsodium (Extensions/Extlibsodium ; Appinfo, Appcontent)
 
 * 0.10.1
@@ -2248,6 +2255,7 @@ List of external links mentionned in this documentation.
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
+* `substr <http://www.php.net/substr>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_
 * `Superglobals <http://php.net/manual/en/language.variables.superglobals.php>`_

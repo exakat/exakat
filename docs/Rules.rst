@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 02 Apr 2018 17:54:22 +0000
-.. comment: Generation hash : 0a93eefa80b4d891bd82b1fa8f40234da9ad84ac
+.. comment: Generation date : Mon, 09 Apr 2018 20:44:54 +0000
+.. comment: Generation hash : 25618460b96a7d01b9b04c3b0e3353d5f1a0931a
 
 
 .. _$http\_raw\_post\_data:
@@ -2398,7 +2398,7 @@ Cast To Boolean
 ###############
 
 
-This expression may be reduced by casting to boolean type.
+This expression may be reduced by casting to boolean type. 
 
 .. code-block:: php
 
@@ -2414,15 +2414,20 @@ This expression may be reduced by casting to boolean type.
    // also, with an indentical condition
    $variable = !(bool) $condition == 'met';
    
-   
+   // This also works with straight booleans expressions
+   $variable = $condition == 'met' ? true : false;
+   // Same as 
+   $variable = $condition == 'met';
    
    ?>
 
-+------------+--------------------------+
-| Short name | Structures/CastToBoolean |
-+------------+--------------------------+
-| Themes     | :ref:`Analyze`           |
-+------------+--------------------------+
++------------+-------------------------------------------------------------------------------------+
+| Short name | Structures/CastToBoolean                                                            |
++------------+-------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                      |
++------------+-------------------------------------------------------------------------------------+
+| Examples   | :ref:`mediawiki-structures-casttoboolean`, :ref:`dolibarr-structures-casttoboolean` |
++------------+-------------------------------------------------------------------------------------+
 
 
 
@@ -4675,6 +4680,40 @@ This is also true if else has a return, and then not : simply reverse the condit
 
 
 
+.. _drop-substr-last-arg:
+
+Drop Substr Last Arg
+####################
+
+
+Substr() works till the end of the string when the last argument is omitted. There is no need to calculate string size to make this work.
+
+
+.. code-block:: php
+
+   <?php
+   
+   $string = 'abcdef';
+   
+   // Extract the end of the string
+   $cde = substr($string, 2);
+   
+   // Too much work
+   $cde = substr($string, 2, strlen($string));
+   
+   ?>
+
+
+See also `substr <http://www.php.net/substr>`_.
+
++------------+--------------------------+
+| Short name | Structures/SubstrLastArg |
++------------+--------------------------+
+| Themes     | :ref:`Suggestions`       |
++------------+--------------------------+
+
+
+
 .. _dynamic-library-loading:
 
 Dynamic Library Loading
@@ -5487,11 +5526,13 @@ This is also true for negative lengths.
    
    ?>
 
-+------------+------------------------------------+
-| Short name | Structures/FailingSubstrComparison |
-+------------+------------------------------------+
-| Themes     | :ref:`Analyze`                     |
-+------------+------------------------------------+
++------------+------------------------------------------------------------------------------------------------------+
+| Short name | Structures/FailingSubstrComparison                                                                   |
++------------+------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                       |
++------------+------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`zurmo-structures-failingsubstrcomparison`, :ref:`mediawiki-structures-failingsubstrcomparison` |
++------------+------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12126,22 +12167,6 @@ The following PHP native functions were removed in PHP 7.0.
 
 
 
-.. _php-72-removed-classes:
-
-PHP 72 Removed Classes
-######################
-
-
-No PHP native classes was removed in PHP 7.2.
-
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Php/Php72RemovedClasses                                                                                                                                          |
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-
 .. _php-72-removed-interfaces:
 
 PHP 72 Removed Interfaces
@@ -13420,6 +13445,38 @@ Classes allows properties to be set with a default value. When those properties 
 +------------+--------------------------+
 | Themes     | :ref:`Analyze`           |
 +------------+--------------------------+
+
+
+
+.. _redefined-private-property:
+
+Redefined Private Property
+##########################
+
+
+Private properties are local to their defined class. PHP doesn't forbid the re-declaration of a private property in a child class.
+
+However, having two or more properties with the same name, in the class hierarchy tends to be error prone. 
+
+.. code-block:: php
+
+   <?php
+   
+   class A {
+       private $isReady = true;
+   }
+   
+   class B {
+       private $isReady = false;
+   }
+   
+   ?>
+
++------------+----------------------------------+
+| Short name | Classes/RedefinedPrivateProperty |
++------------+----------------------------------+
+| Themes     | :ref:`Analyze`                   |
++------------+----------------------------------+
 
 
 
@@ -14908,11 +14965,11 @@ Avoid writing a whole slow loop, and use the native `'array_column() <http://www
 
 See also `[blog] `'array_column() <http://www.php.net/array_column>`_ <https://benramsey.com/projects/array-column/>`_.
 
-+------------+---------------------------------------------------------+
-| Short name | Php/ShouldUseArrayColumn                                |
-+------------+---------------------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Performances`, :ref:`Suggestions` |
-+------------+---------------------------------------------------------+
++------------+-----------------------------------------+
+| Short name | Php/ShouldUseArrayColumn                |
++------------+-----------------------------------------+
+| Themes     | :ref:`Performances`, :ref:`Suggestions` |
++------------+-----------------------------------------+
 
 
 
@@ -19287,11 +19344,11 @@ Foreach() structures accepts list() as blind key. If the loop-value is an array 
 
 See also `list <http://php.net/manual/en/function.list.php>`_ and `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
-+------------+------------------------------------+
-| Short name | Structures/UseListWithForeach      |
-+------------+------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
-+------------+------------------------------------+
++------------+-------------------------------+
+| Short name | Structures/UseListWithForeach |
++------------+-------------------------------+
+| Themes     | :ref:`Suggestions`            |
++------------+-------------------------------+
 
 
 
@@ -21815,7 +21872,9 @@ In fact, `'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ may
 
 A fatal error is displayed, when an exception is not intercepted in the `'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ function. 
 
-PHP Fatal error:  Method myString::`'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ must not throw an exception, caught Exception: 'Exception message' in file.php
+::
+
+    PHP Fatal error:  Method myString::`'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ must not throw an exception, caught Exception: 'Exception message' in file.php
 
 See also `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_.
 
