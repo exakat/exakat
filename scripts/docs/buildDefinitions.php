@@ -280,9 +280,13 @@ $query = 'SELECT c.name,GROUP_CONCAT(a.folder || "/" || a.name) analyzers
 
 $res = $sqlite->query($query);
 $analyzers = array();
+$deja = array();
 while($row = $res->fetchArray(SQLITE3_ASSOC)) {
     $liste = explode(',',$row['analyzers']);
+
     foreach($liste as &$a) {
+        if (isset($deja[$a])) { continue; }
+        $deja[$a] = 1;
         list($desc, $name) = build_analyzer_doc($a, $a2themes);
         $a = rst_link($name);
         $analyzers[$name] = $desc;
@@ -555,9 +559,11 @@ function build_analyzer_doc($a, $a2themes) {
         }
         
         $examples = array();
-        $issues_examples_section = '';
+        $issues_examples_section_list = array();
         for($i = 0; $i < 10; $i++) {
+
             if (isset($ini['example'.$i])) {
+                $issues_examples_section = '';
                 $label = rst_anchor($ini['example'.$i]['project'].'-'.str_replace('/', '-', strtolower($a)));
                 
                 $examples[] = ':ref:`'.$label.'`';
@@ -586,14 +592,14 @@ $explain
 
 $code
 
---------
-
-
 
 SPHINX;
                 $applications[$ini['example'.$i]['project']] = 1;
+                $issues_examples_section_list[] = $issues_examples_section;
             }
         }
+        
+        $issues_examples_section = join(PHP_EOL.'--------'.PHP_EOL.PHP_EOL, $issues_examples_section_list);
 
         $parameters = array();
         for($i = 0; $i < 10; $i++) {

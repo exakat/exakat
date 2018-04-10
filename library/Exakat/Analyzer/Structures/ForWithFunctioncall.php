@@ -27,23 +27,31 @@ use Exakat\Analyzer\Analyzer;
 
 class ForWithFunctioncall extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+
         $this->atomIs('For')
             // This looks for variables inside the INCREMENT
-             ->raw('where( 
+             ->raw(<<<GREMLIN
+             where( 
             __.sideEffect{variables = [];}
-              .out("INCREMENT").repeat( __.out()).emit().times(15)
+              .out("INCREMENT").repeat( __.out()).emit().times($MAX_LOOPING)
               .hasLabel("Variable")
               .sideEffect{ variables.push(it.get().value("code")); }
               .fold()
-             )')
+             )
+GREMLIN
+)
              ->outIs('FINAL')
              ->atomInside('Functioncall')
             // This checks for usage of increment variables inside the FINAL
-             ->raw('not(where( 
-            __.repeat( __.out()).emit().times(15)
+             ->raw(<<<GREMLIN
+not(where( 
+            __.repeat( __.out()).emit().times($MAX_LOOPING)
               .hasLabel("Variable")
               .filter{ it.get().value("code") in variables; }
-            ))')
+            ))
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 

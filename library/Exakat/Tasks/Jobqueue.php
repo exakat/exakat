@@ -27,7 +27,9 @@ use Exakat\Config;
 
 class Jobqueue extends Tasks {
     const CONCURENCE = self::QUEUE;
-    const PATH = '/tmp/onepageQueue';
+    const PATH = '/tmp/queue.exakat';
+    
+    const COMMANDS = array('quit', 'ping', 'project', 'onepage', 'report', 'init');
 
     private $pipefile = self::PATH;
     private $jobQueueLog = null;
@@ -63,6 +65,7 @@ class Jobqueue extends Tasks {
 
         //////// setup our named pipe ////////
         // @todo put this in config
+        print "Opening $this->pipefile\n";
         if(file_exists($this->pipefile)) {
             if(!unlink($this->pipefile)) {
                 die('unable to remove existing PipeFile "'.$this->pipefile.'". Aborting.'."\n");
@@ -79,8 +82,11 @@ class Jobqueue extends Tasks {
             die('unable to open the named pipe');
         }
         stream_set_blocking($pipe, false);
+        
+        $commandRegex = '/^('.implode('|', self::COMMANDS).') /';
 
         //////// process the queue ////////
+        $round = 0;
         while(1) {
             while($input = trim(fgets($pipe))) {
                 stream_set_blocking($pipe, false);
@@ -89,41 +95,36 @@ class Jobqueue extends Tasks {
 
             $job = current($queue);
             $jobkey = key($queue);
-
-            if($job) {
-                switch($job) {
-                    case 'quit' :
-                        display( "Received quit command. Bye\n");
-                        $this->log('Quit command');
-                        $this->log->log('Quit jobQueue : '.time()."\n");
-                        die();
-
-                    case 'ping' :
-                        print 'pong'.PHP_EOL;
-                        break;
-
-                    case file_exists($this->config->projects_root.'/projects/'.$job) :
-                        display( 'processing project job '.$job.PHP_EOL);
-                        if (file_exists($this->config->projects_root.'/projects/'.$job.'/dump.sqlite')) {
-                            $this->log('omitting project ready : '.$job);
-                            break;
-                        }
-                        $this->log('start project : '.$job);
-                        $b = microtime(true);
-                        shell_exec($this->config->php.' '.$this->config->executable.' project -p '.$job);
-                        $e = microtime(true);
-                        $this->log('end project : '.$job.' ('.number_format($e -$b, 2).' s)');
-                        display( 'processing project job '.$job.' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
-                        break;
-
-                    case file_exists($this->config->projects_root.'/projects/onepage/code/'.$job.'.php') :
-                        display( 'processing onepage job '.$job.PHP_EOL);
-                        $this->process($job);
-                        break;
-
-                    default :
-                        display('Default order '.$job.'. Ignoring '.PHP_EOL);
+            
+            if(!empty($job)) {
+                print $job.PHP_EOL;
+                
+                $command = json_decode($job);
+                
+                if ($command === null) {
+                    $this->log('Unknown command : '.$job."\t".time()."\n");
+                    next($queue);
+                    unset($job, $queue[$jobkey]);
+                    continue;
                 }
+                
+                print_r($command);
+                if ($command[1] === 'init') {
+                    $this->processInit($command);
+                } elseif ($command[1] === 'project') {
+                    $this->processProject($command);
+                } elseif ($command[1] === 'report') {
+                    $this->processReport($command);
+                } elseif ($command[1] === 'remove') {
+                    $this->processRemove($command);
+                } else {
+                    print "Unknown command '".$command[1].'"'.PHP_EOL;
+                }
+//                list($job, $args) = explode(' ', $job);
+//                print "$job / $args\n";
+
+//                $method = 'process'.$job;
+//                $this->$method($job);
 
                 next($queue);
                 unset($job, $queue[$jobkey]);
@@ -133,30 +134,70 @@ class Jobqueue extends Tasks {
             }
         }
     }
+    
+    private function processQuit($job) {
+        display( "Received quit command. Bye\n");
+        $this->log('Quit command');
+        $this->log->log('Quit jobQueue : '.time()."\n");
+        die();
+    }
+    
+    private function processInit($job) {
+        $config = new Config($job);
+        $analyze = new Initproject($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-    private function process($job) {
-        $this->log->log('started onepage : '.$job."\n");
+        display( 'processing init job '.$job.PHP_EOL);
+        $this->log('start init : '.$job);
         $b = microtime(true);
-
-        // This has already been processed
-        if (file_exists($this->config->projects_root.'/projects/onepage/reports/'.$job.'.json')) {
-            display( "$job already exists\n");
-            return;
-        }
-
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(array('start' => time(), 'job' => $job, 'progress' => 0)));
-        shell_exec($this->config->php.' '.$this->config->executable.' onepage -f '.$this->config->projects_root.'/projects/onepage/code/'.$job.'.php');
-
-        // final progress
-        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
-        $progress->end = time();
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
-
+        $analyze->run();
         $e = microtime(true);
-        $this->log('end onepage : '.$job.' ('.number_format($e -$b, 2).' s)');
+        $this->log('end init : '.$job[1].' ('.number_format($e -$b, 2).' s)');
+        unset($analyze);
+        display( 'processing init job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+    }
+    
+    private function processPing($job) {
+        print 'pong'.PHP_EOL;
+    }
 
-        // Clean after self
-        shell_exec($this->config->php.' '.$this->config->executable.' cleandb');
+    private function processReport($job) {
+        $config = new Config($job);
+        $analyze = new Report2($this->gremlin, $config, Tasks::IS_SUBTASK);
+
+        display( 'processing report job '.$job.PHP_EOL);
+        $this->log('start report : '.$job[1]);
+        $b = microtime(true);
+        $analyze->run();
+        $e = microtime(true);
+        unset($analyze);
+        display( 'processing report job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+    }
+
+    private function processProject($job) {
+        $config = new Config($job);
+        $analyze = new Project($this->gremlin, $config, Tasks::IS_SUBTASK);
+
+        display( 'processing report job '.$job.PHP_EOL);
+        $this->log('start report : '.$job);
+        $b = microtime(true);
+        $analyze->run();
+        $e = microtime(true);
+        $this->log('end report : '.$job[1].' ('.number_format($e -$b, 2).' s)');
+        unset($analyze);
+        display( 'processing report job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+    }
+
+    private function processRemove($job) {
+        $config = new Config($job);
+        $analyze = new Remove($this->gremlin, $config, Tasks::IS_SUBTASK);
+
+        display( 'processing remove job '.$job.PHP_EOL);
+        $this->log('start report : '.$job[1]);
+        $b = microtime(true);
+        $analyze->run();
+        $e = microtime(true);
+        unset($analyze);
+        display( 'processing remove job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
     }
 
     private function log($message) {

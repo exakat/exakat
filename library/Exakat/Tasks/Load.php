@@ -3379,11 +3379,11 @@ SQL;
                 $this->addLink($as, $visibility, strtoupper($visibility->code));
             }
 
-            if (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, \Exakat\Tasks\T_SEMICOLON))) {
-                $alias = $this->processNextAsIdentifier();
+            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, \Exakat\Tasks\T_SEMICOLON))) {
+                $alias = $this->addAtomVoid();
                 $this->addLink($as, $alias, 'AS');
             } else {
-                $alias = $this->addAtomVoid();
+                $alias = $this->processNextAsIdentifier();
                 $this->addLink($as, $alias, 'AS');
             }
 

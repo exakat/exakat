@@ -42,13 +42,13 @@ class OnepageJson extends Reports {
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
 
-            if (!isset($titleCache[$row['analyzer']])) {
+            if (isset($titleCache[$row['analyzer']])) {
+                $clearphp = '';
+            } else {
                 $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
                 $clearphp = $analyzer->getDescription()->getClearPHP();
-            } else {
-                $clearphp = '';
             }
 
             $message = array('code'     => $row['fullcode'],

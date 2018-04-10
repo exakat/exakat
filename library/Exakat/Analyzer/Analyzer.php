@@ -1571,9 +1571,9 @@ GREMLIN
 
     public function goToAllChildren($self = self::INCLUDE_SELF) {
         if ($self === self::INCLUDE_SELF) {
-            $this->addMethod('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit( ).times('.self::MAX_LOOPING.')');
-        } else {
             $this->addMethod('filter{true}.emit( ).repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::MAX_LOOPING.')');
+        } else {
+            $this->addMethod('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit( ).times('.self::MAX_LOOPING.')');
         }
         
         return $this;

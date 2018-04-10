@@ -28,6 +28,7 @@ $applications = array(
     'ExpressionEngine'           => array('url' => 'https://expressionengine.com/', ),
     'LiveZilla'                  => array('url' => 'https://www.livezilla.net/home/en/', ),
     'Mautic'                     => array('url' => 'https://www.mautic.org/', ),
+    'MediaWiki'                  => array('url' => 'https://www.mediawiki.org/', ),
     'OpenConf'                   => array('url' => 'https://www.openconf.com/', ),
     'OpenEMR'                    => array('url' => 'https://www.open-emr.org/', ),
     'Phpdocumentor'              => array('url' => 'https://www.phpdoc.org/', ),
@@ -44,6 +45,7 @@ $applications = array(
     'XOOPS'                      => array('url' => 'https://xoops.org/', ),
     'Zend-Config'                => array('url' => 'https://github.com/zendframework/zend-config', ),
     'Zurmo'                      => array('url' => 'http://zurmo.org/', ),
+    'Zencart'                    => array('url' => 'https://www.zen-cart.com/', ),
    );
 
 ?>

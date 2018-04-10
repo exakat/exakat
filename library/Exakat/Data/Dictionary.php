@@ -32,7 +32,7 @@ class Dictionary {
     private $dictionary = array();
     private $lcindex = array();
     
-    static $singleton = null;
+    static public $singleton = null;
     
     public function __construct($datastore) {
         $this->dictionary = $datastore->getAllHash('dictionary');

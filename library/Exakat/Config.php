@@ -22,7 +22,7 @@
 
 namespace Exakat;
 
-use Exakat\Configsource\{CodacyConfig, CommandLine, DefaultConfig, DotExakatConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig };
+use Exakat\Configsource\{CodacyConfig, CommandLine, DefaultConfig, DotExakatConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Reports\Reports;
 use Exakat\Phpexec;
@@ -41,18 +41,22 @@ class Config {
     private $exakatConfig          = null;
     private $dotExakatConfig       = null;
     private $envConfig             = null;
+    private $argv                  = null;
 
     private $configFiles = array();
-    private $options = array();
+    private $options     = array();
+    private $remotes     = array();
 
     static private $stack = array();
     
     public function __construct($argv) {
-        $this->is_phar  = class_exists('\\Phar') && !empty($pharRunning);
+        $this->argv = $argv;
+
+        $this->is_phar  = class_exists('\\Phar') && !empty(phar::running());
         if ($this->is_phar) {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
-            $this->projects_root = substr(dirname($pharRunning), 7);
-            $this->dir_root      = $pharRunning;
+            $this->projects_root = substr(dirname(phar::running()), 7);
+            $this->dir_root      = phar::running();
 
             assert_options(ASSERT_ACTIVE, 0);
 
@@ -127,6 +131,12 @@ class Config {
                                      $this->commandLineConfig->toArray()
                                      );
         $this->options['configFiles'] = $this->configFiles;
+        
+        $remote = new RemoteConfig($this->projects_root);
+        if ($file = $remote->loadConfig($this->commandLineConfig->get('project'))) {
+            $this->configFiles[] = $file;
+            $this->remotes = $remote->toArray();
+        }
 
         if ($this->options['command'] !== 'doctor') {
             $this->checkSelf();
@@ -138,7 +148,11 @@ class Config {
     }
 
     public function __get($name) {
-        if (isset($this->options[$name])) {
+        if ($name === 'configFiles') {
+            $return = $this->configFiles;
+        } elseif ($name === 'remotes') {
+            $return = $this->remotes;
+        } elseif (isset($this->options[$name])) {
             $return = $this->options[$name];
         } else {
             $return = null;
@@ -167,6 +181,15 @@ class Config {
         if (!empty($missing)) {
            throw new InaptPHPBinary('PHP needs '.(count($missing) == 1 ? 'one' : count($missing)).' extension'.(count($missing) > 1 ? 's' : '').' with the current version : '.join(', ', $missing));
         }
+    }
+    
+    public function commandLineJson() {
+        $return = $this->argv;
+        
+        $id = array_search('-remote', $return);
+        unset($return[$id]);
+        unset($return[$id + 1]);
+        return json_encode(array_values($return));
     }
 }
 

@@ -20,18 +20,35 @@
  *
 */
 
+namespace Exakat\Configsource;
 
-namespace Exakat\Analyzer\Php;
-
-use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\ClassUsage;
-
-class Php72RemovedClasses extends ClassUsage {
-    protected $phpVersion = '7.2-';
+class RemoteConfig extends Config {
+    private $remoteJsonFile = 'config/remotes.json';
     
-    public function analyze() {
-        $this->classes = array();
-        parent::analyze();
+    public function __construct($projects_root) {
+        $this->remoteJsonFile = $projects_root.'/config/remotes.json';
+    }
+
+    public function loadConfig($project) {
+        if (!file_exists($this->remoteJsonFile)) {
+            return self::NOT_LOADED;
+        }
+
+        $json = file_get_contents($this->remoteJsonFile);
+        if (empty($json)) {
+            return self::NOT_LOADED;
+        }
+
+        $remotes = json_decode($json);
+        if (empty($remotes)) {
+            return self::NOT_LOADED;
+        }
+        
+        foreach($remotes as $remote) {
+            $this->config[$remote->name] = $remote->URI;
+        }
+
+        return 'config/remotes.json';
     }
 }
 

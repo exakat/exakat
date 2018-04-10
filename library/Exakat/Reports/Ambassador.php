@@ -179,6 +179,7 @@ class Ambassador extends Reports {
         $this->generateStats();
         $this->generateComplexExpressions();
         $this->generateVisibilitySuggestions();
+        $this->generateChangedClasses();
         $this->generateMethodSize();
         $this->generateParameterCounts();
         
@@ -2046,7 +2047,7 @@ SQL;
         $info[] = array('Report production date', date('r', strtotime('now')));
 
         $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
+        $info[] = array('PHP used', $php->getConfiguration('phpversion').' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
@@ -2388,7 +2389,7 @@ HTML;
         $info[] = array('Report production date', date('r', strtotime('now')));
 
         $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getActualVersion().')');
+        $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getConfiguration('phpversion').')');
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
 
@@ -3229,6 +3230,32 @@ HTML;
         $this->putBasedPage('altered_directives', $html);
     }
 
+    private function generateChangedClasses() {
+        $changedClasses = '';
+        $res = $this->sqlite->query('SELECT * FROM classChanges');
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if ($row['changeType'] === 'Member Visibility') {
+                $row['parentValue'] = $row['parentValue'].' $'.$row['name'];
+                $row['childValue'] = $row['childValue'].' $'.$row['name'];
+            } elseif ($row['changeType'] === 'Member Default') {
+                $row['parentValue'] = '$'.$row['name'].' = '.$row['parentValue'];
+                $row['childValue'] = '$'.$row['name'].' = '.$row['childValue'];
+            } 
+            
+            $changedClasses .= '<tr><td>'.PHPSyntax($row['parentClass']).'</td>'.PHP_EOL.
+                                   '<td>'.PHPSyntax($row['parentValue']).'</td>'.PHP_EOL.
+                                   '</tr><tr>'.
+                                   '<td>'.PHPSyntax($row['childClass']).'</td>'.PHP_EOL.
+                                   '<td>'.PHPSyntax($row['childValue']).'</td>'.PHP_EOL.
+                                   '</tr>'.PHP_EOL.
+                                   '<tr><td colspan="2"><hr /></td></tr>';
+        }
+
+        $html = $this->getBasedPage('changed_classes');
+        $html = $this->injectBloc($html, 'CHANGED_CLASSES', $changedClasses);
+        $this->putBasedPage('changed_classes', $html);
+    }
+
     private function generateMethodSize() {
         $finalHTML = $this->getBasedPage('cit_size');
 
@@ -3646,26 +3673,26 @@ HTML;
     }
 
     private function Bugfixes_cve($cve) {
-        if (!empty($cve)) {
-            if (strpos($cve, ', ') !== false) {
-                $cves = explode(', ', $cve);
-                $cveHtml = array();
-                foreach($cves as $cve) {
-                    $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
-                }
-                $cveHtml = implode(',<br />', $cveHtml);
-            } else {
-                $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+        if (empty($cve)) {
+            return '-';
+        } 
+        
+        if (strpos($cve, ', ') !== false) {
+            $cves = explode(', ', $cve);
+            $cveHtml = array();
+            foreach($cves as $cve) {
+                $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
             }
+            $cveHtml = implode(',<br />', $cveHtml);
         } else {
-            $cveHtml = '-';
+            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
         }
 
         return $cveHtml;
     }
 
     private function Compatibility($count, $analyzer) {
-        if ($count == Analyzer::VERSION_INCOMPATIBLE) {
+        if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
         } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {
             return '<i class="fa fa-cogs" style="color: orange"></i>';

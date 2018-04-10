@@ -34,11 +34,12 @@ class OverwrittenLiterals extends Analyzer {
             return;
         }
 
+        $MAX_LOOPING = self::MAX_LOOPING;
         $assignations = $this->queryHash(<<<GREMLIN
 g.V().hasLabel("Function", "Closure", "Method", "Magicmethod")
      .where( __.sideEffect{ m = [:]; }
      .out("BLOCK")
-     .emit( hasLabel("Assignation")).repeat( __.out() ).times(15).hasLabel("Assignation")
+     .emit( hasLabel("Assignation")).repeat( __.out() ).times($MAX_LOOPING).hasLabel("Assignation")
      .has("code", $equal[0])
      .not( __.where( __.in("EXPRESSION").in("INIT")) )
      .not( __.where( __.in("PPP")) )

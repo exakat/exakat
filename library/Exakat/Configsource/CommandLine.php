@@ -73,6 +73,7 @@ class CommandLine extends Config {
                                     '-token_limit'  => 'token_limit',
                                     '-branch'       => 'branch',
                                     '-tag'          => 'tag',
+                                    '-remote'       => 'remote',
 //                                '-loader'       => 'Neo4jImport',
                                  );
 
@@ -92,6 +93,7 @@ class CommandLine extends Config {
                               'catalog'       => 1,
                               'remove'        => 1,
                               'server'        => 1,
+                              'api'           => 1,
                               'jobqueue'      => 1,
                               'queue'         => 1,
                               'load'          => 1,
@@ -109,6 +111,7 @@ class CommandLine extends Config {
                               'update'        => 1,
                               'upgrade'       => 1,
                               'codacy'        => 1,
+                              'fetch'         => 1,
                               );
 
     public function __construct() {
@@ -166,7 +169,7 @@ class CommandLine extends Config {
                 }
             }
         }
-
+        
         if (isset($args[1], $this->commands[$args[1]])) {
             $this->config['command'] = $args[1];
             unset($args[1]);

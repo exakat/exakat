@@ -30,17 +30,13 @@ class DefinedExceptions extends Analyzer {
         $exceptions = $this->loadIni('php_exception.ini', 'classes');
         $exceptions = makeFullNsPath($exceptions);
         
-        // first level
+        // class X extends \Exception {}
+        // class Y extends X {}
         $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->fullnspathIs($exceptions)
-             ->back('first');
-        $this->prepareQuery();
-
-        // all children level of heritage
-        $this->atomIs('Class')
-             ->analyzerIs('self')
-             ->goToAllChildren();
+             ->back('first')
+             ->goToAllChildren($self = self::INCLUDE_SELF);
         $this->prepareQuery();
     }
 }

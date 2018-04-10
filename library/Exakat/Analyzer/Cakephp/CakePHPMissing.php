@@ -33,37 +33,38 @@ class CakePHPMissing extends Analyzer {
     protected $version    = null;
     
     public function dependsOn() {
-        return array('Cakephp/CakePHPUsed');
+        return array('Cakephp/CakePHPUsed',
+                    );
     }
     
     public function analyze() {
         $data = new CakePHP($this->config->dir_root.'/data', $this->config->is_phar);
 
         $classes    = $data->getClasses($this->component, $this->version);
-        if (!empty($classes)) {
+        if (empty($classes)) {
+            $classes = array();
+        } else {
             $classes    = call_user_func_array('array_merge', array_values($classes));
             $classes    = array_keys(array_count_values($classes));
             $classes    = makeFullNsPath($classes);
-        } else {
-            $classes = array();
         }
 
         $interfaces =  $data->getInterfaces($this->component, $this->version);
-        if (!empty($interfaces)) {
+        if (empty($interfaces)) {
+            $interfaces = array();
+        } else {
             $interfaces = call_user_func_array('array_merge', array_values($interfaces));
             $interfaces = array_keys(array_count_values($interfaces));
             $interfaces = makeFullNsPath($interfaces);
-        } else {
-            $interfaces = array();
         }
 
         $traits     =  $data->getTraits($this->component, $this->version);
-        if (!empty($traits)) {
+        if (empty($traits)) {
+            $traits = array();
+        } else {
             $traits     = call_user_func_array('array_merge', array_values($traits));
             $traits     = array_keys(array_count_values($traits));
             $traits     = makeFullNsPath($traits);
-        } else {
-            $traits = array();
         }
 
         $this->analyzerIs('Cakephp/CakePHPUsed')

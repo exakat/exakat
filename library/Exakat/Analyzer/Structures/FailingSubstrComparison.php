@@ -33,21 +33,29 @@ class FailingSubstrComparison extends Analyzer {
              ->functioncallIs('\substr')
              ->outWithRank('ARGUMENT', 2)
              ->atomIs('Integer')
+             ->isMore('intval', 0)
              ->savePropertyAs('intval', 'length')
              ->back('first')
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs('String')
+             ->atomIs(array('String', 'Identifier', 'Nsname'))
              ->hasNoOut('CONCAT')
              
              // Substring is actually as long as length
-             ->raw('filter{ 
-    if (it.get().value("delimiter") == \'"\') {
-        it.get().value("noDelimiter").replace("\\\\", "").length() != length.toInteger().abs();
-    } else {  // delimiter is \' or none
-        it.get().value("noDelimiter").length() != length.toInteger().abs();
-    } 
-}
-');
+             ->filter(<<<'GREMLIN'
+s = it.get().value("noDelimiter");
+
+// Replace all special chars
+s = s.replaceAll(/\\[\\aefnRrt]/, "A");
+s = s.replaceAll(/\\0\d\d/, "A");
+s = s.replaceAll(/\\u\{[^\}]+\}/, "A");
+s = s.replaceAll(/\\[pP]\{^?[A-Z][a-z]?\}/, "A");
+s = s.replaceAll(/\\[pP][A-Z]/, "A");
+s = s.replaceAll(/\\X[A-Z][a-z]/, "A");
+s = s.replaceAll(/\\x[a-fA-F0-9]{2}/, "A");
+
+s.length() != length.toInteger().abs();
+GREMLIN
+);
         $this->prepareQuery();
     }
 }

@@ -31,14 +31,17 @@ class PropertyCouldBeLocal extends Analyzer {
              ->inIs('LEFT')
              ->savePropertyAs('propertyname', 'member')
              ->inIs('PPP')
-             ->hasNoOut(array('STATIC', 'PUBLIC', 'PROTECTED'))
+             ->hasNoOut('STATIC')
+             ->hasOut('PRIVATE')
              ->inIs('PPP')
              ->raw(<<<GREMLIN
 where(
     __.out("METHOD")
       .not( where( __.out('STATIC') ) )
       .where( __.out("BLOCK")
-          .repeat( __.out()).emit().times(5).hasLabel("Member").out("MEMBER").filter{ it.get().value("code") == member}
+          .repeat( __.out()).emit().times(5).hasLabel("Member")
+                .out("OBJECT").hasLabel("This").in("OBJECT")
+                .out("MEMBER").filter{ it.get().value("code") == member}
         )
         .count().is(eq(1))
 )
@@ -53,14 +56,16 @@ GREMLIN
              ->inIs('LEFT')
              ->inIs('PPP')
              ->hasOut('STATIC')
-             ->hasNoOut(array('PUBLIC', 'PROTECTED'))
+             ->hasOut('PRIVATE') 
              ->inIs('PPP')
+             ->savePropertyAs('fullnspath', 'fnp')
              ->raw(<<<GREMLIN
 where(
     __.out("METHOD")
-      .where( __.out('STATIC') )
       .where( __.out("BLOCK")
-                .repeat( __.out()).emit().times(5).hasLabel("Staticproperty").out("MEMBER").filter{ it.get().value("code") == member}
+                .repeat( __.out()).emit().times(5).hasLabel("Staticproperty")
+                    .out("CLASS").filter{it.get().value("fullnspath") == fnp}.in("CLASS")
+                    .out("MEMBER").filter{ it.get().value("code") == member}
        )
       .count().is(eq(1))
 )

@@ -51,9 +51,7 @@ class Doctor extends Tasks {
     }
 
     public function run() {
-        $stats = array();
-        $stats = array_merge($stats, 
-                             $this->checkPreRequisite(), 
+        $stats = array_merge($this->checkPreRequisite(), 
                              $this->checkAutoInstall());
 
 
@@ -97,6 +95,7 @@ class Doctor extends Tasks {
         $stats['exakat']['reports']     = $this->array2list($this->config->project_reports);
         $stats['exakat']['themes']      = $this->array2list($this->config->project_themes);
         $stats['exakat']['tokenslimit'] = number_format((int) $this->config->token_limit, 0, '', ' ');
+        
 
         // check for PHP
         $stats['PHP']['binary']         = phpversion();

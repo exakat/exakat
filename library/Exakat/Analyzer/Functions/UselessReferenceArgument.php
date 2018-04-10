@@ -26,10 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessReferenceArgument extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsModified');
+        return array('Variables/IsModified',
+                    );
     }
     
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->is('reference', true)
@@ -38,7 +40,7 @@ class UselessReferenceArgument extends Analyzer {
              ->outIs('BLOCK')
              ->raw(<<<GREMLIN
 where( __.repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).emit( )
-             .times(15).hasLabel(within(["Variable"]))
+             .times($MAX_LOOPING).hasLabel(within(["Variable"]))
              .filter{ it.get().value("code") == name }
              .not( where( __.in("ANALYZED").has("analyzer", within(["Variables/IsModified"]))) ))
 GREMLIN

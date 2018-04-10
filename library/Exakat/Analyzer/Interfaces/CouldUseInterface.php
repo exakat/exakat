@@ -31,9 +31,9 @@ class CouldUseInterface extends Analyzer {
     public function analyze() {
         $query = <<<GREMLIN
 g.V().hasLabel("Interface")
-     .as('name')
-     .out("METHOD").out("NAME").as("method")
-     .select('name', 'method').by('fullnspath').by('code');
+     .as("name")
+     .out("METHOD").as("methodCount").out("NAME").as("method")
+     .select("name", "method", "methodCount").by("fullnspath").by("code").by("count");
 GREMLIN;
 
         $res = $this->query($query)->toArray();
@@ -45,31 +45,43 @@ GREMLIN;
         $interfaces = array();
         foreach($res as $row) {
             if (isset($interfaces[$row['name']])) {
-                $interfaces[$row['name']][] = $row['method'];
+                $interfaces[$row['name']][] = $row['method'].'-'.$row['methodCount'];
             } else {
-                $interfaces[$row['name']] = array($row['method']);
+                $interfaces[$row['name']] = array($row['method'].'-'.$row['methodCount']);
             }
         }
-
+        
+        $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs('Class')
              ->hasOut(array('METHOD', 'MAGICMETHOD'))
              ->raw('sideEffect{ x = []; }')
              ->raw('sideEffect{ i = *** }', $interfaces)
-             ->raw('where( __.out("METHOD", "MAGICMETHOD").out("NAME").sideEffect{ x.add(it.get().value("code")) ; }.fold() )')
-             ->raw('filter{ 
-                            a = false;
-                            i.each{ n, e ->
-                                if (x.intersect(e) == e) {
-                                    a = true;
-                                    fnp = n;
-                                }
-                            }
-                            
-                            a;
-                        }')
-                ->raw('not( where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times(15)
-                                     .hasLabel("Interface", "Class")
-                                     .filter{ it.get().value("fullnspath") == fnp; } ) )')
+             ->raw(<<<'GREMLIN'
+where( 
+    __.out("METHOD", "MAGICMETHOD").sideEffect{ y = it.get().value("count"); }
+      .out("NAME")
+      .sideEffect{ x.add(it.get().value("code") + "-" + y ) ; }.fold() )
+GREMLIN
+)
+             ->filter(<<<GREMLIN
+a = false;
+i.each{ n, e ->
+    if (x.intersect(e) == e) {
+        a = true;
+        fnp = n;
+    }
+}
+
+a;
+
+GREMLIN
+)
+                ->raw(<<<GREMLIN
+not( where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
+              .hasLabel("Interface", "Class")
+              .filter{ it.get().value("fullnspath") == fnp; } ) )
+GREMLIN
+)
                 ->back('first');
         $this->prepareQuery();
     }

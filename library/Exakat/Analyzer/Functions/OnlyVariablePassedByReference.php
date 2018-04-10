@@ -24,6 +24,7 @@ namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
+use Exakat\Data\GroupBy;
 
 class OnlyVariablePassedByReference extends Analyzer {
     public function analyze() {
@@ -62,14 +63,10 @@ class OnlyVariablePassedByReference extends Analyzer {
 
         $methods = new Methods($this->config);
         $functions = $methods->getFunctionsReferenceArgs();
-        $references = array();
+        $references = new GroupBy();
         
         foreach($functions as $function) {
-            if (!isset($references[$function['position']])) {
-                $references[$function['position']] = array('\\'.$function['function']);
-            } else {
-                $references[$function['position']][] = '\\'.$function['function'];
-            }
+            $references[$function['position']] = '\\'.$function['function'];
         }
 
         foreach($references as $position => $functions) {
