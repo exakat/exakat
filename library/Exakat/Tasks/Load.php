@@ -2227,11 +2227,13 @@ SQL;
         $this->pushExpression($string);
         
         if (in_array($string->atom, array('Parent', 'Self', 'Newcall'))) {
-            list($fullnspath, $aliased) = $this->getFullnspath($string, 'class');
-            $string->fullnspath = $fullnspath;
-            $string->aliased    = $aliased;
+            if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_OPEN_PARENTHESIS) {
+                list($fullnspath, $aliased) = $this->getFullnspath($string, 'class');
+                $string->fullnspath = $fullnspath;
+                $string->aliased    = $aliased;
 
-            $this->addCall('class', $fullnspath, $string);
+                $this->addCall('class', $fullnspath, $string);
+            }
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF   ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NEW
