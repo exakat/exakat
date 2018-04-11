@@ -1499,25 +1499,25 @@ GREMLIN;
     private function collectReadability() {
         $loops = 20;
         $query = <<<GREMLIN
-g.V().sideEffect{ functions = 0; name=''; expression=0;}
+g.V().sideEffect{ functions = 0; name=""; expression=0;}
     .hasLabel("Function", "Closure", "Method", "File")
-    .not(where( __.out("BLOCK").hasLabel('Void')))
+    .not(where( __.out("BLOCK").hasLabel("Void")))
     .sideEffect{ ++functions; }
-    .where(__.coalesce( __.out('NAME').sideEffect{ name=it.get().value("fullcode"); }.in("NAME"),
-                        __.filter{true; }.sideEffect{ name='global'; file = it.get().value("fullcode");} )
+    .where(__.coalesce( __.out("NAME").sideEffect{ name=it.get().value("fullcode"); }.in("NAME"),
+                        __.filter{true; }.sideEffect{ name="global"; file = it.get().value("fullcode");} )
     .sideEffect{ total = 0; expression = 0; type=it.get().label();}
     .coalesce( __.out("BLOCK"), __.out("FILE").out("EXPRESSION").out("EXPRESSION") )
     .repeat( __.out().not(hasLabel("Class", "Function", "Closure", "Interface", "Trait", "Void")) ).emit().times($loops)
     .sideEffect{ ++total; }
-    .not(hasLabel('Void'))
+    .not(hasLabel("Void"))
     .where( __.in("EXPRESSION", "CONDITION").sideEffect{ expression++; })
     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($loops).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); })
     .fold()
     )
     .map{ if (expression > 0) {
-        ['name':name, 'type':type, 'total':total, 'expression':expression, 'index': 102 - expression - total / expression, 'file':file];
+        ["name":name, "type":type, "total":total, "expression":expression, "index": 102 - expression - total / expression, "file":file];
     } else {
-        ['name':name, 'type':type, 'total':total, 'expression':0, 'index': 100, 'file':file];
+        ["name":name, "type":type, "total":total, "expression":0, "index": 100, "file":file];
     }
 }    
 GREMLIN;
