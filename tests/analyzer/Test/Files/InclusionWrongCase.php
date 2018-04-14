@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Files_InclusionWrongCase extends Analyzer {
-    /* 12 methods */
+    /* 13 methods */
 
     public function testFiles_InclusionWrongCase01()  { $this->generic_test('Files/InclusionWrongCase.01'); }
     public function testFiles_InclusionWrongCase02()  { $this->generic_test('Files/InclusionWrongCase.02'); }
@@ -22,5 +22,6 @@ class Files_InclusionWrongCase extends Analyzer {
     public function testFiles_InclusionWrongCase10()  { $this->generic_test('Files/InclusionWrongCase.10'); }
     public function testFiles_InclusionWrongCase11()  { $this->generic_test('Files/InclusionWrongCase.11'); }
     public function testFiles_InclusionWrongCase12()  { $this->generic_test('Files/InclusionWrongCase.12'); }
+    public function testFiles_InclusionWrongCase13()  { $this->generic_test('Files/InclusionWrongCase.13'); }
 }
 ?>

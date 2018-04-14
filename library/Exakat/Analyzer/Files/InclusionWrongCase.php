@@ -36,6 +36,7 @@ class InclusionWrongCase extends Analyzer {
              ->atomIs(array('String', 'Identifier', 'Nsname'))
              ->hasNoOut('CONCAT')
              ->has('noDelimiter')
+             ->noDelimiterIsNot('')
              ->savePropertyAs('noDelimiter', 'including')
              ->goToFile()
              ->raw(<<<GREMLIN
