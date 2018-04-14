@@ -849,7 +849,6 @@ GREMLIN
             return $this;
         }
         
-        $this->addMethod('hasLabel("String")');
         return $this->propertyIsNot('noDelimiter', $code, $caseSensitive);
     }
 
