@@ -33,13 +33,18 @@ class Log {
 
         if (!file_exists($dir.'/log/')) { return ; }
         if (!is_dir($dir.'/log/')) { return ; }
-        $this->log = fopen($dir.'/log/'.$this->name.'.log', 'w+');
+        if (file_exists($dir.'/log/'.$this->name.'.log')) {
+            $this->log = fopen($dir.'/log/'.$this->name.'.log', 'a');
+            $this->first = $this->name.' resuming on '.date('r');
+        } else {
+            $this->log = fopen($dir.'/log/'.$this->name.'.log', 'w+');
+            $this->first = $this->name.' created on '.date('r');
+        }
         if (!$this->log) {
             display('Couldn\'t create log in '.$dir.'/log/');
             $this->log = null;
         }
 
-        $this->first = $this->name.' created on '.date('r');
         $this->begin = microtime(true);
     }
 
