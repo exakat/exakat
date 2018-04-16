@@ -1772,6 +1772,32 @@ GREMLIN
         return $this;
     }
     
+    // Calculate The lenght of a string in a property, and report it in the named string
+    public function getStringLength($property, $variable) {
+        $query = <<<'GREMLIN'
+sideEffect{
+    s = it.get().value("PROPERTY");
+    
+    // Replace all special chars by a single char
+    s = s.replaceAll(/\\[\\aefnRrt]/, "A");
+    s = s.replaceAll(/\\0\d\d/, "A");
+    s = s.replaceAll(/\\u\{[^\}]+\}/, "A");
+    s = s.replaceAll(/\\[pP]\{^?[A-Z][a-z]?\}/, "A");
+    s = s.replaceAll(/\\[pP][A-Z]/, "A");
+    s = s.replaceAll(/\\X[A-Z][a-z]/, "A");
+    s = s.replaceAll(/\\x[a-fA-F0-9]{2}/, "A");
+
+    VARIABLE = s.length();
+}
+
+GREMLIN;
+
+        $query = str_replace(array('PROPERTY', 'VARIABLE'), array($property, $variable), $query);
+        $this->raw($query);
+
+        return $this;
+    }
+    
     public function run() {
         $this->analyze();
         $this->prepareQuery();
