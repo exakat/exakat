@@ -37,7 +37,7 @@ abstract class Reports {
 
     static public $FORMATS        = array('Ambassador', 'AmbassadorNoMenu', 'Drillinstructor',
                                           'Text', 'Xml', 'Uml', 'PlantUml', 'None', 'SimpleHtml', 'Owasp',
-                                          'PhpConfiguration', 'PhpCompilation', 'Favorites', 
+                                          'PhpConfiguration', 'PhpCompilation', 'Favorites', 'Manual',
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
                                           'ZendFramework',  'CodeSniffer', 'Slim',
                                           'RadwellCode', 'Melis', 'Grade', 'Weekly', 'Codacy', 'Scrutinizer', 
