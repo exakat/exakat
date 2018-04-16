@@ -23,10 +23,10 @@
 
 namespace Exakat\Data;
 
-use ArrayAccess;
+use ArrayAccess, Iterator;
 
-class GroupBy implements ArrayAccess {
-    private $data = array();
+class GroupBy implements ArrayAccess, Iterator {
+    private $data     = array();
     
     public function offsetSet($offset, $value) {
         if (isset($this->data[$offset])) {
@@ -50,6 +50,27 @@ class GroupBy implements ArrayAccess {
     
     public function toArray() {
         return $this->data;
+    }
+
+/* Methods for iterable */
+    public function current() {
+        return current($this->data);
+    }
+
+    public function key() {
+        return key($this->data);
+    }
+
+    public function next() {
+        next($this->data);
+    }
+
+    public function rewind() {
+        reset($this->data); 
+    }
+
+    public function valid () {
+        return key($this->data) !== null;
     }
 }
 
