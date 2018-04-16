@@ -152,6 +152,7 @@ class Ambassador extends Reports {
         $this->projectPath = $folder;
 
         $this->initFolder();
+
         $this->generateSettings();
         $this->generateProcFiles();
 
@@ -182,9 +183,8 @@ class Ambassador extends Reports {
         $this->generateChangedClasses();
         $this->generateMethodSize();
         $this->generateParameterCounts();
-        
         $this->generateConfusingVariables();
-
+        
         // Compatibility
         $this->generateCompilations();
         $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%"');
@@ -1013,12 +1013,15 @@ JAVASCRIPT;
         $finalHTML = $this->getBasedPage('parameter_counts');
 
         // List of extensions used
-        $res = $this->sqlite->query(<<<SQL
+        $res = @$this->sqlite->query(<<<SQL
 SELECT key, value FROM hashResults
 WHERE name = "ParameterCounts"
 ORDER BY key
 SQL
         );
+        
+        if (!$res) { return ; }
+        
         $html = '';
         $xAxis = array();
         $data = array();
@@ -1527,7 +1530,7 @@ SQL;
     }
 
     private function getTotalAnalysedFile() {
-        $query = "SELECT COUNT(DISTINCT file) FROM results";
+        $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' ";
         $result = $this->sqlite->query($query);
 
         $result = $result->fetchArray(\SQLITE3_NUM);
@@ -2337,6 +2340,7 @@ SQL;
         $data = array_merge($data, $data2);
         foreach($data as $name => $row) {
             $analyzer = $this->themes->getInstance($name, null, $this->config);
+            if ($analyzer === null) { continue; }
             $description = $analyzer->getDescription();
 
             $link = '<a href="analyzers_doc.html#'.$this->toId($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
@@ -3232,23 +3236,27 @@ HTML;
 
     private function generateChangedClasses() {
         $changedClasses = '';
-        $res = $this->sqlite->query('SELECT * FROM classChanges');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($row['changeType'] === 'Member Visibility') {
-                $row['parentValue'] = $row['parentValue'].' $'.$row['name'];
-                $row['childValue'] = $row['childValue'].' $'.$row['name'];
-            } elseif ($row['changeType'] === 'Member Default') {
-                $row['parentValue'] = '$'.$row['name'].' = '.$row['parentValue'];
-                $row['childValue'] = '$'.$row['name'].' = '.$row['childValue'];
-            } 
-            
-            $changedClasses .= '<tr><td>'.PHPSyntax($row['parentClass']).'</td>'.PHP_EOL.
-                                   '<td>'.PHPSyntax($row['parentValue']).'</td>'.PHP_EOL.
-                                   '</tr><tr>'.
-                                   '<td>'.PHPSyntax($row['childClass']).'</td>'.PHP_EOL.
-                                   '<td>'.PHPSyntax($row['childValue']).'</td>'.PHP_EOL.
-                                   '</tr>'.PHP_EOL.
-                                   '<tr><td colspan="2"><hr /></td></tr>';
+        $res = @$this->sqlite->query('SELECT * FROM classChanges');
+        if ($res) {
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+                if ($row['changeType'] === 'Member Visibility') {
+                    $row['parentValue'] = $row['parentValue'].' $'.$row['name'];
+                    $row['childValue'] = $row['childValue'].' $'.$row['name'];
+                } elseif ($row['changeType'] === 'Member Default') {
+                    $row['parentValue'] = '$'.$row['name'].' = '.$row['parentValue'];
+                    $row['childValue'] = '$'.$row['name'].' = '.$row['childValue'];
+                } 
+                
+                $changedClasses .= '<tr><td>'.PHPSyntax($row['parentClass']).'</td>'.PHP_EOL.
+                                       '<td>'.PHPSyntax($row['parentValue']).'</td>'.PHP_EOL.
+                                       '</tr><tr>'.
+                                       '<td>'.PHPSyntax($row['childClass']).'</td>'.PHP_EOL.
+                                       '<td>'.PHPSyntax($row['childValue']).'</td>'.PHP_EOL.
+                                       '</tr>'.PHP_EOL.
+                                       '<tr><td colspan="2"><hr /></td></tr>';
+            }
+        } else {
+            $changedClasses = 'No changes detected';
         }
 
         $html = $this->getBasedPage('changed_classes');
@@ -3568,42 +3576,26 @@ JAVASCRIPT;
     }
 
     private function generateConfusingVariables() {
+        $data = new Data\CloseNaming($this->sqlite);
+        $results = $data->prepare();
+        
+        $table = array();
+        foreach($results as $variable => $close) {
+            $confused = array();
 
-        $results = new Results($this->sqlite, 'Variables/CloseNaming');
-        $results->load();
-        $variables = array_unique($results->getColumn('fullcode'));
-        
-        $figures = range(0, 9);
-        $results = array();
-        foreach($variables as $id1 => $var1) {
-            foreach($variables as $id2 => $var2) {
-                if ($id1 >= $id2) { continue; }
-                if (mb_strtolower($var1) === mb_strtolower($var2)) {
-                    $results[] = [$var1, $var2, 'Different by case only'];
-                    continue;
-                }
-                if (levenshtein($var1, $var2) === 1) {
-                    $results[] = [$var1, $var2, 'Too few differences'];
-                    continue;
-                }
-                if (str_replace('_', '', $var1) === str_replace('_', '', $var2)) {
-                    $results[] = [$var1, $var2, 'Different by _ only'];
-                    continue;
-                }
-                if (str_replace($figures, '', $var1) === str_replace($figures, '', $var2)) {
-                    $results[] = [$var1, $var2, 'Different by figures only'];
-                    continue;
-                }
+            foreach($close as $reason => $variables) {
+                $list = "<ul><li>".implode('</li><li>', $variables)."</li></ul>\n";
+                $confused[] = "<tr><td>$reason</td><td>$list</td></tr>\n";
             }
+
+            $count = count($close);
+            $first = array_shift($confused);
+            $table[] = str_replace('<tr>', "<tr><td rowspan=\"$count\">$variable</td>", $first).PHP_EOL.join('', $confused);
         }
-        
-        $results = array_map(function($row) { 
-            return "<tr><td>$row[0]</td><td>$row[1]</td><td>$row[2]</td></tr>\n";
-        }, $results);
-        $results = join('', $results);
+        $table = implode(PHP_EOL, $table);
 
         $html = $this->getBasedPage('variables_confusing');
-        $html = $this->injectBloc($html, 'CONTENT', $results);
+        $html = $this->injectBloc($html, 'CONTENT', $table);
         $this->putBasedPage('variables_confusing', $html);
     }
     
