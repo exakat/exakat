@@ -1,4 +1,4 @@
-Version 1.2.3 (Yuan Tiangang, coming up)
+Version 1.2.4 (Yuan Tiangang, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,24 @@ Version 1.2.3 (Yuan Tiangang, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.2.3 (Yuan Tiangang, 2018-04-09)
++ Architecture
+    + New append for logs
++ Report
+    + New report : Manual.
+    + Ambassador : Rewrote the export of 'confusing variables'
++ Analyzer
+    + New analysis : report strtr bad usage
+    + New analysis : don't unset properties
+    + Upgraded analysis : Invalid Regex
+    + Upgraded analysis : Property Could Be Local 
+    + Upgraded analysis : No Hardcoded path
+    + Upgraded analysis : echo/print preferences also report printf
+    + Removed analysis : Close Naming (now done at Report level)
+    + Checked unit tests : 2770 / 2786 test pass (99% pass). 
++ Tokenizer
+    + Removed double definition for functioncalls
 
 Version 1.2.2 (Yin Kaishan, 2018-04-02)
 + Architecture
