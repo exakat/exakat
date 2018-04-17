@@ -44,11 +44,12 @@ g.V().hasLabel("Functioncall").has("fullnspath", within($functionList))
                               .has("rank", 0)
                               .hasLabel("Concatenation", "String")
                               .where( __.out("CONCAT"))
+                              .not( where( __.out("CONCAT").hasLabel("String", "Identifier", "Nsname", "Staticconstant").not(has("noDelimiter"))) )
                               .where( __.sideEffect{ liste = [];}
                                    .out("CONCAT").order().by('rank')
                                    .hasLabel("String", "Variable", "Array", "Functioncall", "Methodcall", "Staticmethodcall", "Member", "Staticproperty", "Identifier", "Nsname", "Staticconstant")
                                    .sideEffect{ 
-                                        if (it.get().label() in ["String", "Identifier", "Nsname", "Staticconstant"]) {
+                                        if (it.get().label() in ["String", "Identifier", "Nsname", "Staticconstant"] ) {
                                             liste.add(it.get().value("noDelimiter"));
                                          } else {
                                             liste.add("smi"); // smi is compatible with flags
@@ -61,11 +62,10 @@ GREMLIN;
         $regexComplex = $this->query($regexQuery);
         
         $regexList = array_merge($regexSimple->toArray(), $regexComplex->toArray());
-        
+
         $invalid = array();
         foreach($regexList as list($regex, $fullcode)) {
             // Replacing 
-//            if (false === preg_match(stripslashes($regex), '')) {
             if (false === @preg_match(str_replace('\\\\', '\\', $regex), '')) {
                 $invalid[] = $fullcode;
             }
