@@ -45,11 +45,13 @@ not( where( __.out("ARGUMENT").hasLabel("Keyvalue")
 GREMLIN
 ) // Only keep variable as value
              ->raw(<<<GREMLIN
-not( where( __.out("ARGUMENT").hasLabel("Keyvalue")
-                              .out("INDEX").hasLabel("String", "Identifier", "Nsname", "Concatenation").sideEffect{ name = '$' + it.get().value("noDelimiter"); }.in("INDEX")
-                              .out("VALUE").hasLabel("Variable").filter{ it.get().value("fullcode") != name;} 
-     )  )
-
+not(
+    __.where( __.out("ARGUMENT").hasLabel("Keyvalue")
+                .where( __.out("INDEX").hasLabel("String", "Identifier", "Nsname", "Concatenation").sideEffect{ name = '$' + it.get().value("noDelimiter"); }.in("INDEX")
+                          .out("VALUE").hasLabel("Variable").filter{it.get().value("fullcode") != name}
+                      )
+            )
+)
 GREMLIN
 ) // Only string = variable name
              ->back('first');

@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('\'\b\'', 
-                      '\'bc\'',
+$expected     = array('substr($a, 0, 1) == \'\b\'', 
+                      'substr($a, 0, 1) == \'bc\'',
                      );
 
 $expected_not = array('\'\\\'',

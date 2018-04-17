@@ -82,6 +82,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * PhpConfiguration
   * PhpCompilation
   * Favorites
+  * Manual
   * Inventories
   * Clustergrammer
   * FileDependencies
@@ -290,8 +291,10 @@ A number of applications were scanned in order to find real life examples of pat
 * `OpenEMR <https://www.open-emr.org/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `OpenConf <https://www.openconf.com/>`_
+* Tine20
 * `Zurmo <http://zurmo.org/>`_
 * `shopware <https://www.shopware.com/>`_
+* ZenCart
 * `WordPress <https://www.wordpress.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `Mautic <https://www.mautic.org/>`_
@@ -302,6 +305,10 @@ A number of applications were scanned in order to find real life examples of pat
 * `Contao <https://contao.org/en/>`_
 * `Edusoho <https://www.edusoho.com/en>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
+* `Vanilla <https://open.vanillaforums.com/>`_
+* Typo3
+* `SuiteCrm <https://suitecrm.com/>`_
+* `Woocommerce <https://woocommerce.com/>`_
 * `SPIP <https://www.spip.net/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `PrestaShop <https://prestashop.com/>`_
@@ -363,10 +370,15 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.2.3
+
+  * Don't Unset Properties (Classes/DontUnsetProperties)
+  * Redefined Private Property (Classes/RedefinedPrivateProperty ; Analyze)
+  * Strtr Arguments (Php/StrtrArguments ; Analyze)
+
 * 1.2.2
 
-  * Drop Substr Last Arg (Structures/SubstrLastArg ; Suggestions)
-  * Redefined Private Property (Classes/RedefinedPrivateProperty)
+  * Drop Substr Last Arg (Structures/SubstrLastArg)
 
 * 1.2.1
 
@@ -1228,7 +1240,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Conditional Structures (Structures/ConditionalStructures ; )
   * Conditioned Constants (Constants/ConditionedConstants ; Appinfo, Internal)
   * Conditioned Function (Functions/ConditionedFunctions ; Appinfo, Internal)
-  * Confusing Names (Variables/CloseNaming ; Analyze, Codacy, Simple)
+  * Confusing Names (Variables/CloseNaming ; Under Work)
   * Const With Array (Php/ConstWithArray ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * Constant Class (Classes/ConstantClass ; Analyze, Codacy, Simple)
   * Constant Comparison (Structures/ConstantComparisonConsistance ; Coding Conventions, Preferences)
@@ -2062,8 +2074,8 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
@@ -2255,6 +2267,7 @@ List of external links mentionned in this documentation.
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
+* `strtr <http://www.php.net/strtr>`_
 * `substr <http://www.php.net/substr>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_

@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class FailingSubstrComparison extends Analyzer {
     
     public function analyze() {
+        // substr($a, 0, 3) === 'abcdef';
         $this->atomIs('Comparison')
              ->codeIs(array('==', '==='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs(array('LEFT', 'RIGHT'))
@@ -39,23 +40,10 @@ class FailingSubstrComparison extends Analyzer {
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs(array('String', 'Identifier', 'Nsname'))
              ->hasNoOut('CONCAT')
-             
+             ->getStringLength('noDelimiter', 's')
              // Substring is actually as long as length
-             ->filter(<<<'GREMLIN'
-s = it.get().value("noDelimiter");
-
-// Replace all special chars
-s = s.replaceAll(/\\[\\aefnRrt]/, "A");
-s = s.replaceAll(/\\0\d\d/, "A");
-s = s.replaceAll(/\\u\{[^\}]+\}/, "A");
-s = s.replaceAll(/\\[pP]\{^?[A-Z][a-z]?\}/, "A");
-s = s.replaceAll(/\\[pP][A-Z]/, "A");
-s = s.replaceAll(/\\X[A-Z][a-z]/, "A");
-s = s.replaceAll(/\\x[a-fA-F0-9]{2}/, "A");
-
-s.length() != length.toInteger().abs();
-GREMLIN
-);
+             ->filter('s != length.toInteger().abs();')
+             ->back('first');
         $this->prepareQuery();
     }
 }

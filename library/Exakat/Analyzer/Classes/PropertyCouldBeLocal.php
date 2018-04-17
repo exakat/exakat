@@ -64,7 +64,7 @@ where(
     __.out("METHOD")
       .where( __.out("BLOCK")
                 .repeat( __.out()).emit().times(5).hasLabel("Staticproperty")
-                    .out("CLASS").filter{it.get().value("fullnspath") == fnp}.in("CLASS")
+                    .out("CLASS").has("fullnspath").filter{it.get().value("fullnspath") == fnp}.in("CLASS")
                     .out("MEMBER").filter{ it.get().value("code") == member}
        )
       .count().is(eq(1))

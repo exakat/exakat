@@ -24,12 +24,14 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
+use Exakat\Log;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\NotProjectInGraph;
 use Exakat\Tokenizer\Token;
+use Exakat\Graph\Graph;
 
 class Dump extends Tasks {
     const CONCURENCE = self::DUMP;
@@ -43,6 +45,14 @@ class Dump extends Tasks {
     private $files = array();
 
     const WAITING_LOOP = 1000;
+
+    public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
+        $this->logname === self::LOG_NONE;
+        parent::__construct($gremlin, $config, $subTask);
+        
+        $this->log = new Log($this->logname,
+                             $this->config->projects_root.'/projects/'.$this->config->project);
+    }
 
     public function run() {
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
@@ -126,24 +136,69 @@ SQL;
         
         if ($this->config->collect === true) {
             display('Collecting data');
+            $begin = microtime(true);
             $this->collectClassChanges();
+            $end = microtime(true);
+            $this->log->log( 'Collected Class Changes: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectFiles();
+            $end = microtime(true);
+            $this->log->log( 'Collected Files: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
 
             $this->collectFilesDependencies();
+            $end = microtime(true);
+            $this->log->log( 'Collected Files Dependencies: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->getAtomCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Atom Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
 
             $this->collectPhpStructures();
+            $end = microtime(true);
+            $this->log->log( 'Collected Php Structures: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectStructures();
+            $end = microtime(true);
+            $this->log->log( 'Collected Structures: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectFunctions();
+            $end = microtime(true);
+            $this->log->log( 'Collected Functions: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectVariables();
+            $end = microtime(true);
+            $this->log->log( 'Collected Variables: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectLiterals();
+            $end = microtime(true);
+            $this->log->log( 'Collected Literals: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectReadability();
+            $end = microtime(true);
+            $this->log->log( 'Collected Readability: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
 
             $this->collectParameterCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Parameter Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectMethodsCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Method Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectPropertyCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Property Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectConstantCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Constant Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectNativeCallsPerExpressions();
+            $end = microtime(true);
+            $this->log->log( 'Collected Native Calls Per Expression: '.number_format(1000 * ($end - $begin), 2)."ms\n");
         }
 
         $themes = array();
@@ -1499,25 +1554,25 @@ GREMLIN;
     private function collectReadability() {
         $loops = 20;
         $query = <<<GREMLIN
-g.V().sideEffect{ functions = 0; name=''; expression=0;}
+g.V().sideEffect{ functions = 0; name=""; expression=0;}
     .hasLabel("Function", "Closure", "Method", "File")
-    .not(where( __.out("BLOCK").hasLabel('Void')))
+    .not(where( __.out("BLOCK").hasLabel("Void")))
     .sideEffect{ ++functions; }
-    .where(__.coalesce( __.out('NAME').sideEffect{ name=it.get().value("fullcode"); }.in("NAME"),
-                        __.filter{true; }.sideEffect{ name='global'; file = it.get().value("fullcode");} )
+    .where(__.coalesce( __.out("NAME").sideEffect{ name=it.get().value("fullcode"); }.in("NAME"),
+                        __.filter{true; }.sideEffect{ name="global"; file = it.get().value("fullcode");} )
     .sideEffect{ total = 0; expression = 0; type=it.get().label();}
     .coalesce( __.out("BLOCK"), __.out("FILE").out("EXPRESSION").out("EXPRESSION") )
     .repeat( __.out().not(hasLabel("Class", "Function", "Closure", "Interface", "Trait", "Void")) ).emit().times($loops)
     .sideEffect{ ++total; }
-    .not(hasLabel('Void'))
+    .not(hasLabel("Void"))
     .where( __.in("EXPRESSION", "CONDITION").sideEffect{ expression++; })
     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($loops).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); })
     .fold()
     )
     .map{ if (expression > 0) {
-        ['name':name, 'type':type, 'total':total, 'expression':expression, 'index': 102 - expression - total / expression, 'file':file];
+        ["name":name, "type":type, "total":total, "expression":expression, "index": 102 - expression - total / expression, "file":file];
     } else {
-        ['name':name, 'type':type, 'total':total, 'expression':0, 'index': 100, 'file':file];
+        ["name":name, "type":type, "total":total, "expression":0, "index": 100, "file":file];
     }
 }    
 GREMLIN;

@@ -32,17 +32,42 @@ class InvalidRegex extends Analyzer {
 g.V().hasLabel("Functioncall").has("fullnspath", within($functionList))
                               .out("ARGUMENT")
                               .has("rank", 0)
-                              .hasLabel("Concatenation", "String")
-                              .values("fullcode")
-                              .unique();
+                              .hasLabel("String")
+                              .not( where( __.out("CONCAT")) )
+                              .map{[it.get().value('noDelimiter'), it.get().value('fullcode')]};
 GREMLIN;
-        $regex = $this->query($regexQuery);
+        $regexSimple = $this->query($regexQuery);
+
+        $regexQuery = <<<GREMLIN
+g.V().hasLabel("Functioncall").has("fullnspath", within($functionList))
+                              .out("ARGUMENT")
+                              .has("rank", 0)
+                              .hasLabel("Concatenation", "String")
+                              .where( __.out("CONCAT"))
+                              .where( __.sideEffect{ liste = [];}
+                                   .out("CONCAT").order().by('rank')
+                                   .hasLabel("String", "Variable", "Array", "Functioncall", "Methodcall", "Staticmethodcall", "Member", "Staticproperty", "Identifier", "Nsname", "Staticconstant")
+                                   .sideEffect{ 
+                                        if (it.get().label() in ["String", "Identifier", "Nsname", "Staticconstant"]) {
+                                            liste.add(it.get().value("noDelimiter"));
+                                         } else {
+                                            liste.add("smi"); // smi is compatible with flags
+                                         }
+                                    }
+                                   .count()
+                              )
+                              .map{[liste.join(''), it.get().value('fullcode')]};
+GREMLIN;
+        $regexComplex = $this->query($regexQuery);
+        
+        $regexList = array_merge($regexSimple->toArray(), $regexComplex->toArray());
         
         $invalid = array();
-        foreach($regex as $r) {
-            $localRegex = preg_replace('/(["\']) . \$[a-zA-Z0-9]+ . \1/', 'xxx', trim($r, '\'"'));
-            if (false === @preg_match($localRegex, '')) {
-                $invalid[] = $r;
+        foreach($regexList as list($regex, $fullcode)) {
+            // Replacing 
+//            if (false === preg_match(stripslashes($regex), '')) {
+            if (false === @preg_match(str_replace('\\\\', '\\', $regex), '')) {
+                $invalid[] = $fullcode;
             }
         }
         
