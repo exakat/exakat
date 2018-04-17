@@ -3470,7 +3470,8 @@ JAVASCRIPT;
 
         $expressions = '';
         foreach($results->toArray() as $row) {
-            $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>{$row['fullcode']}</td></tr>\n";
+            $fullcode = PHPSyntax($row['fullcode']);
+            $expressions .= "<tr><td>{$row['file']}:{$row['line']}</td><td>{$counts[$row['fullcode']]}</td><td>$fullcode</td></tr>\n";
         }
 
         $html = $this->getBasedPage('complex_expressions');
