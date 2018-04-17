@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 09 Apr 2018 20:44:54 +0000
-.. comment: Generation hash : 25618460b96a7d01b9b04c3b0e3353d5f1a0931a
+.. comment: Generation date : Tue, 17 Apr 2018 06:29:06 +0000
+.. comment: Generation hash : 89abd34d6e41b2d2b867ec1af530005a0b1d8107
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 342 analysis
+Total : 343 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -114,7 +114,6 @@ Total : 342 analysis
 * :ref:`Common Alternatives <common-alternatives>`
 * :ref:`Compared Comparison <compared-comparison>`
 * :ref:`Concrete Visibility <concrete-visibility>`
-* :ref:`Confusing Names <confusing-names>`
 * :ref:`Constant Class <constant-class>`
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
@@ -141,6 +140,7 @@ Total : 342 analysis
 * :ref:`Deprecated Functions <deprecated-functions>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
 * :ref:`Don't Send This In Constructor <don't-send-this-in-constructor>`
+* :ref:`Don't Unset Properties <don't-unset-properties>`
 * :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
 * :ref:`Dont Echo Error <dont-echo-error>`
 * :ref:`Double Assignation <double-assignation>`
@@ -320,6 +320,7 @@ Total : 342 analysis
 * :ref:`String May Hold A Variable <string-may-hold-a-variable>`
 * :ref:`Strings With Strange Space <strings-with-strange-space>`
 * :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
+* :ref:`Strtr Arguments <strtr-arguments>`
 * :ref:`Suspicious Comparison <suspicious-comparison>`
 * :ref:`Switch To Switch <switch-to-switch>`
 * :ref:`Switch Without Default <switch-without-default>`

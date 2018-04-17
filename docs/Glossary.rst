@@ -628,6 +628,7 @@ Glossary
 
     + `printf()`
 
+      + :ref:`Echo Or Print <echo-or-print>`
       + :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
 
     + `proc_nice()`
@@ -724,6 +725,10 @@ Glossary
     + `strtoupper()`
 
       + :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
+
+    + `strtr()`
+
+      + :ref:`Strtr Arguments <strtr-arguments>`
 
     + `substr_replace()`
 

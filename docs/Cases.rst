@@ -85,6 +85,28 @@ In this context, the priority of execution is used on purpose; $coreFile only co
 
     $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
 
+No array_merge() In Loops
+=========================
+
+.. _tine20-performances-arraymergeinloops:
+
+Tine20
+^^^^^^
+
+:ref:`no-array\_merge()-in-loops`, in tine20/Tinebase/User/Ldap.php:670. 
+
+Classic example of array_merge() in loop : here, the attributures should be collected in a local variable, and then merged in one operation, at the end. That includes the attributes provided before the loop, and the array provided after the loop. 
+Note that the order of merge will be the same when merging than when collecting the arrays.
+
+.. code-block:: php
+
+    $attributes = array_values($this->_rowNameMapping);
+            foreach ($this->_ldapPlugins as $plugin) {
+                $attributes = array_merge($attributes, $plugin->getSupportedAttributes());
+            }
+    
+            $attributes = array_merge($attributes, $this->_additionalLdapAttributesToFetch);
+
 Timestamp Difference
 ====================
 
@@ -132,6 +154,23 @@ When daylight saving strike, the email may suddenly be locked for 1 hour minus 3
                     echo "Wait " . (strtotime($mailing['locked']) + 30 - time()) . " seconds ...\n";
                     return;
                 }
+
+Wrong Parameter Type
+====================
+
+.. _zencart-php-internalparametertype:
+
+ZenCart
+^^^^^^^
+
+:ref:`wrong-parameter-type`, in /admin/includes/header.php:180. 
+
+setlocale() may be called with null or '' (empty string), and will set values from the environnement. When called with "0" (the string), it only reports the current setting. Using an integer is probably undocumented behavior, and falls back to the zero string. 
+
+.. code-block:: php
+
+    $loc = setlocale(LC_TIME, 0);
+            if ($loc !== FALSE) echo ' - ' . $loc; //what is the locale in use?
 
 Identical Conditions
 ====================
@@ -401,6 +440,167 @@ This code looks like ``($options & DatabaseInterface::QUERY_STORE) == DatabaseIn
     } else {
         $warnings = 0;
     }
+
+Redefined Private Property
+==========================
+
+.. _zurmo-classes-redefinedprivateproperty:
+
+Zurmo
+^^^^^
+
+:ref:`redefined-private-property`, in /app/protected/modules/zurmo/models/OwnedCustomField.php:51. 
+
+The class OwnedCustomField is part of a large class tree : OwnedCustomField extends CustomField,
+CustomField extends BaseCustomField, BaseCustomField extends RedBeanModel, RedBeanModel extends BeanModel. 
+
+Since $canHaveBean is distinct in BeanModel and in OwnedCustomField, the public method getCanHaveBean() also had to be overloaded. 
+
+.. code-block:: php
+
+    class OwnedCustomField extends CustomField
+        {
+            /**
+             * OwnedCustomField does not need to have a bean because it stores no attributes and has no relations
+             * @see RedBeanModel::canHaveBean();
+             * @var boolean
+             */
+            private static $canHaveBean = false;
+    
+    /..../
+    
+            /**
+             * @see RedBeanModel::getHasBean()
+             */
+            public static function getCanHaveBean()
+            {
+                if (get_called_class() == 'OwnedCustomField')
+                {
+                    return self::$canHaveBean;
+                }
+                return parent::getCanHaveBean();
+            }
+
+Don't Unset Properties
+======================
+
+.. _vanilla-classes-dontunsetproperties:
+
+Vanilla
+^^^^^^^
+
+:ref:`don't-unset-properties`, in /applications/dashboard/models/class.activitymodel.php:1073. 
+
+The _NotificationQueue property, in this class, is defined as an array. Here, it is destroyed, then recreated. The unset() is too much, as the assignation is sufficient to reset the array 
+
+.. code-block:: php
+
+    /**
+         * Clear notification queue.
+         *
+         * @since 2.0.17
+         * @access public
+         */
+        public function clearNotificationQueue() {
+            unset($this->_NotificationQueue);
+            $this->_NotificationQueue = [];
+        }
+
+
+--------
+
+Don't Unset Properties
+======================
+
+.. _typo3-classes-dontunsetproperties:
+
+Typo3
+^^^^^
+
+:ref:`don't-unset-properties`, in typo3/sysext/linkvalidator/Classes/Linktype/InternalLinktype.php:73. 
+
+The property errorParams is emptied by unsetting it. The property is actually defined in the above class, as an array. Until the next error is added to this list, any access to the error list has to be checked with isset(), or yield an 'Undefined' warning. 
+
+.. code-block:: php
+
+    public function checkLink($url, $softRefEntry, $reference)
+        {
+            $anchor = '';
+            $this->responseContent = true;
+            // Might already contain values - empty it
+            unset($this->errorParams);
+    //....
+    
+    abstract class AbstractLinktype implements LinktypeInterface
+    {
+        /**
+         * Contains parameters needed for the rendering of the error message
+         *
+         * @var array
+         */
+        protected $errorParams = [];
+
+Strtr Arguments
+===============
+
+.. _suitecrm-php-strtrarguments:
+
+SuiteCrm
+^^^^^^^^
+
+:ref:`strtr-arguments`, in includes/vCard.php:221. 
+
+This code prepares incoming '$values' for extraction. The keys are cleaned then split with explode(). The '=' sign would stay, as strtr() can't remove it. This means that such keys won't be recognized later in the code, and gets omitted.
+
+.. code-block:: php
+
+    $values = explode(';', $value);
+                        $key = strtoupper($keyvalue[0]);
+                        $key = strtr($key, '=', '');
+                        $key = strtr($key, ',', ';');
+                        $keys = explode(';', $key);
+
+Exception Order
+===============
+
+.. _woocommerce-exceptions-alreadycaught:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`exception-order`, in includes/api/v1/class-wc-rest-products-controller.php:787. 
+
+This try/catch expression is able to catch both WC_Data_Exception and WC_REST_Exception. 
+
+In another file, /includes/api/class-wc-rest-exception.php, we find that WC_REST_Exception extends WC_Data_Exception (class WC_REST_Exception extends WC_Data_Exception {}). So WC_Data_Exception is more general, and a WC_REST_Exception exception is caught with WC_Data_Exception Exception. The second catch should be put in first.
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    try {
+    			$product_id = $this->save_product( $request );
+    			$post       = get_post( $product_id );
+    			$this->update_additional_fields_for_object( $post, $request );
+    			$this->update_post_meta_fields( $post, $request );
+    
+    			/**
+    			 * Fires after a single item is created or updated via the REST API.
+    			 *
+    			 * @param WP_Post         $post      Post data.
+    			 * @param WP_REST_Request $request   Request object.
+    			 * @param boolean         $creating  True when creating item, false when updating.
+    			 */
+    			do_action( 'woocommerce_rest_insert_product', $post, $request, false );
+    			$request->set_param( 'context', 'edit' );
+    			$response = $this->prepare_item_for_response( $post, $request );
+    
+    			return rest_ensure_response( $response );
+    		} catch ( WC_Data_Exception $e ) {
+    			return new WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
+    		} catch ( WC_REST_Exception $e ) {
+    			return new WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
+    		}
 
 Join file()
 ===========

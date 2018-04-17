@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 09 Apr 2018 20:44:54 +0000
-.. comment: Generation hash : 25618460b96a7d01b9b04c3b0e3353d5f1a0931a
+.. comment: Generation date : Tue, 17 Apr 2018 06:29:06 +0000
+.. comment: Generation hash : 89abd34d6e41b2d2b867ec1af530005a0b1d8107
 
 
 .. _$http\_raw\_post\_data:
@@ -2968,70 +2968,6 @@ See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_.
 
 
 
-.. _confusing-names:
-
-Confusing Names
-###############
-
-
-The following variables's name are very close and may lead to confusion.
-
-Variables are 3 letters long (at least). Variables names build with an extra 's' are omitted.
-Variables may be scattered across the code, or close to each other. 
-
-Variables which differ only by case, or by punctuation or by numbers are reported here.
-
-.. code-block:: php
-
-   <?php
-   
-       // Variable names with one letter difference
-       $fWScale = 1;
-       $fHScale = 1;
-       $fScale = 2;
-       
-       $oFrame = 3;
-       $iFrame = new Foo();
-       
-       $v2_norm = array();
-       $v1_norm = 'string';
-       
-       $exept11 = 1;
-       $exept10 = 2;
-       $exept8 = 3;
-       
-       // Variables that differ by punctation
-       $locale = 'fr';
-       $_locate = 'en';
-   
-       // Variables that differ by numbers
-       $x11 = 'a';
-       $x12 = 'b';
-   
-       // Variables that differ by numbers
-       $songMP3 = 'a';
-       $Songmp3 = 'b';
-       
-       // This even looks like a typo
-       $privileges  = 1;
-       $privilieges = true;
-       
-       // This is not reported : Adding extra s is tolerated.
-       $rows[] = $row;
-       
-   ?>
-
-
-See also `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_.
-
-+------------+-----------------------+
-| Short name | Variables/CloseNaming |
-+------------+-----------------------+
-| Themes     | :ref:`Analyze`        |
-+------------+-----------------------+
-
-
-
 .. _const-with-array:
 
 Const With Array
@@ -4450,6 +4386,58 @@ See also `Don't pass this out of a constructor <http://www.javapractices.com/top
 
 
 
+.. _don't-unset-properties:
+
+Don't Unset Properties
+######################
+
+
+Avoid unsetting properties. They would go undefined, and raise more warnings. 
+
+When getting rid of a property, simply assign it to null. This keeps the property in the object, yet allows existence check without errors.
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo {
+       public $a = 1;
+   }
+   
+   $a = new Foo();
+   
+   var_dump((array) $a) ;
+   // la propriété est reportée, et null
+   // ['a' => null]
+   
+   unset($a->a);
+   
+   var_dump((array) $a) ;
+   //Empty []
+   
+   // Check if a property exists
+   var_dump($a->b === null);
+   
+   // Same result as above, but with a warning
+   var_dump($a->c === null);
+   
+   ?>
+
+
+This analysis works on properties and static properties. It also reports magic properties being unset.
+
+Thanks for [Benoit Burnichon](https://twitter.com/BenoitBurnichon) for the original idea.
+
++------------+--------------------------------------------------------------------------------------+
+| Short name | Classes/DontUnsetProperties                                                          |
++------------+--------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                       |
++------------+--------------------------------------------------------------------------------------+
+| Examples   | :ref:`vanilla-classes-dontunsetproperties`, :ref:`typo3-classes-dontunsetproperties` |
++------------+--------------------------------------------------------------------------------------+
+
+
+
 .. _dont-change-the-blind-var:
 
 Dont Change The Blind Var
@@ -4753,7 +4741,7 @@ Echo Or Print
 #############
 
 
-Echo and print have the same functional use. <?= is also considered in this analysis. 
+Echo and print have the same functional use. <?= and `'printf() <http://www.php.net/printf>`_ are also considered in this analysis. 
 
 There seems to be a choice that is not enforced : one form is dominant, (> 90%) while the others are rare. 
 
@@ -5422,11 +5410,13 @@ When catching exception, the most specialized exceptions must be in the early ca
    
    ?>
 
-+------------+------------------------------+
-| Short name | Exceptions/AlreadyCaught     |
-+------------+------------------------------+
-| Themes     | :ref:`Dead code <dead-code>` |
-+------------+------------------------------+
++------------+---------------------------------------------+
+| Short name | Exceptions/AlreadyCaught                    |
++------------+---------------------------------------------+
+| Themes     | :ref:`Dead code <dead-code>`                |
++------------+---------------------------------------------+
+| Examples   | :ref:`woocommerce-exceptions-alreadycaught` |
++------------+---------------------------------------------+
 
 
 
@@ -11036,6 +11026,8 @@ Note that `'array_merge_recursive() <http://www.php.net/array_merge_recursive>`_
 +------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-array_merge-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-array_merge-in-loop.md>`__ |
 +------------+-------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`tine20-performances-arraymergeinloops`                                                                |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -13472,11 +13464,13 @@ However, having two or more properties with the same name, in the class hierarch
    
    ?>
 
-+------------+----------------------------------+
-| Short name | Classes/RedefinedPrivateProperty |
-+------------+----------------------------------+
-| Themes     | :ref:`Analyze`                   |
-+------------+----------------------------------+
++------------+-----------------------------------------------+
+| Short name | Classes/RedefinedPrivateProperty              |
++------------+-----------------------------------------------+
+| Themes     | :ref:`Analyze`                                |
++------------+-----------------------------------------------+
+| Examples   | :ref:`zurmo-classes-redefinedprivateproperty` |
++------------+-----------------------------------------------+
 
 
 
@@ -16218,6 +16212,45 @@ This analyzer list all the `'strpos() <http://www.php.net/strpos>`_-like functio
 +------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP   | `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__ |
 +------------+-----------------------------------------------------------------------------------------------------+
+
+
+
+.. _strtr-arguments:
+
+Strtr Arguments
+###############
+
+
+Strtr replaces characters by others in a string. When using strings, `'strtr() <http://www.php.net/strtr>`_ replaces characters as long as they have a replacement. All others are ignored.
+
+In particular, `'strtr() <http://www.php.net/strtr>`_ works on strings of the same size, and cannot be used to remove chars.
+
+.. code-block:: php
+
+   <?php
+   
+   $string = 'abcde';
+   echo strtr($string, 'abc', 'AB');
+   echo strtr($string, 'ab', 'ABC');
+   // displays ABcde 
+   // c is ignored each time
+   
+   // strtr can't remove a char
+   echo strtr($string, 'a', '');
+   // displays a
+   
+   ?>
+
+
+See also `strtr <http://www.php.net/strtr>`_.
+
++------------+------------------------------------+
+| Short name | Php/StrtrArguments                 |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`                     |
++------------+------------------------------------+
+| Examples   | :ref:`suitecrm-php-strtrarguments` |
++------------+------------------------------------+
 
 
 
@@ -21442,11 +21475,13 @@ The expected parameter is not of the correct type. Check PHP documentation to kn
    
    ?>
 
-+------------+---------------------------+
-| Short name | Php/InternalParameterType |
-+------------+---------------------------+
-| Themes     | :ref:`Analyze`            |
-+------------+---------------------------+
++------------+------------------------------------------+
+| Short name | Php/InternalParameterType                |
++------------+------------------------------------------+
+| Themes     | :ref:`Analyze`                           |
++------------+------------------------------------------+
+| Examples   | :ref:`zencart-php-internalparametertype` |
++------------+------------------------------------------+
 
 
 
