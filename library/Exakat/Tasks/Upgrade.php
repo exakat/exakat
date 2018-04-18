@@ -52,12 +52,19 @@ class Upgrade extends Tasks {
 
         if (version_compare(Exakat::VERSION, $r[1]) < 0) {
             print 'This version needs to be updated (Current : '.Exakat::VERSION.', Latest: '.$r[1].')'.PHP_EOL;
+            
             if ($this->config->update === true) {
+                // Avoid downloading when it is not a phar
+                if ($this->config->isPhar !== true) {
+                    print 'This can only update a .phar version of exakat. Aborting.'.PHP_EOL;
+                    return;
+                }
+
                 print '  Updating to latest version.'.PHP_EOL;
                 preg_match('#<pre id="sha256">(.*?)</pre>#', $html, $r);
-
+                $sha256 = strip_tags($r[1]);
+                
                 $phar = @file_get_contents('http://dist.exakat.io/versions/index.php?file=latest');
-                $sha256 = $r[1];
 
                 if (hash('sha256', $phar) !== $sha256) {
                     print 'Error while checking exakat.phar\'s checksum. Aborting update. Please, try again'.PHP_EOL;
