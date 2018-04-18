@@ -24,6 +24,8 @@ use Exakat\Config;
 
 include 'helpers.php';
 
+register_shutdown_function('shutdown');
+
 class Autoload {
     public static function autoload_library($name) {
         $file = __DIR__.'/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';

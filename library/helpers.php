@@ -325,9 +325,9 @@ function unicode_blocks($string) {
 }
 
 function PHPSyntax($code) {
-    $php = highlight_string("<?php \n".$code."\n ?>", true);
+    $php = highlight_string("<?php \n{$code};\n ?>", true);
     $php = substr($php, strpos($php, '<br />') + 6);
-    $php = substr($php, 0, strrpos($php, '<br />')).'</span>';
+    $php = substr($php, 0, strrpos($php, ';<br />') - 29);
     
     return $php;
 }
@@ -400,6 +400,14 @@ function makeHtml($string) {
 
 function rst2htmlLink($txt) {
     return preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
+}
+
+function shutdown() {
+    $error = error_get_last();
+
+    if (strpos($error['message'], 'Allowed memory') !== false ) {
+        print "Not enough memory for running exakat. Set memory_limit to a higher value, or -1. \n";
+    }
 }
 
 ?>
