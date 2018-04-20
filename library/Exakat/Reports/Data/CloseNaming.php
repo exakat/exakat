@@ -76,7 +76,7 @@ SQL
         }
 
         // One char difference
-        $sizes = array_fill(4, 150, array());
+        $sizes = array_fill(4, 200, array());
         foreach($variables as $variable) {
             $sizes[strlen($variable)][] = $variable;
         }
