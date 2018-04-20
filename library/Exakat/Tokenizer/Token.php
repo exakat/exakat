@@ -96,6 +96,7 @@ abstract class Token {
                                  'Not',
                                  'Nsname',
                                  'Null',
+                                 'Parameter',
                                  'Parent',
                                  'Parenthesis',
                                  'Php',
