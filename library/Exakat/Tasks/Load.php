@@ -1809,20 +1809,17 @@ SQL;
     }
 
     private function processParameters($atom) {
-        $finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS);
-
         $arguments = $this->addAtom($atom);
         $current = $this->id;
         $argumentsId = array();
 
-        $fullcode = array();
-        $rank       = 0;
-        $args_max   = 0;
-        $args_min   = 0;
+        $fullcode       = array();
+        $rank           = 0;
+        $args_max       = 0;
+        $args_min       = 0;
         $argumentsList  = array();
 
-        if (in_array($this->tokens[$this->id + 1][0], $finals)) {
-                                                            
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
             $void = $this->addAtomVoid();
             $void->rank = 0;
             $this->addLink($arguments, $void, 'ARGUMENT');
@@ -1838,17 +1835,18 @@ SQL;
 
             $this->runPlugins($arguments, array($void));
 
+            $fullcode[] = $void->fullcode;
+
             $argumentsList[] = $void;
         } else {
             $rank       = -1;
-
             $default    = 0;
             $nullable   = 0;
             $typehint   = 0;
             $reference = self::NOT_REFERENCE;
             $ellipsis = self::NOT_ELLIPSIS;
 
-            while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+            while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
                 $initialId = $this->id;
                 ++$args_max;
 
