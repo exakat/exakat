@@ -170,8 +170,8 @@ class Load extends Tasks {
     private $optionsTokens = array();
 
     static public $PROP_ALTERNATIVE = array('Declare', 'Ifthen', 'For', 'Foreach', 'Switch', 'While');
-    static public $PROP_REFERENCE   = array('Variable', 'Variableobject', 'Variablearray', 'Member', 'Array', 'Function', 'Closure', 'Method', 'Functioncall', 'Methodcall');
-    static public $PROP_VARIADIC    = array('Variable', 'Array', 'Member', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname');
+//    static public $PROP_REFERENCE   = array('Variable', 'Variableobject', 'Variablearray', 'Member', 'Array', 'Function', 'Closure', 'Method', 'Functioncall', 'Methodcall');
+//    static public $PROP_VARIADIC    = array('Variable', 'Array', 'Member', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname');
     static public $PROP_DELIMITER   = array('String', 'Heredoc');
     static public $PROP_NODELIMITER = array('String', 'Variable', 'Magicconstant', 'Identifier', 'Nsname', 'Boolean', 'Integer', 'Real', 'Null');
     static public $PROP_HEREDOC     = array('Heredoc');
@@ -710,7 +710,6 @@ SQL;
 
             $this->addLink($id1, $sequence, 'FILE');
             $sequence->root = true;
-
         } catch (LoadError $e) {
 //            print $e->getMessage();
 //            print_r($this->expressions[0]);
@@ -826,7 +825,9 @@ SQL;
 
         while ($this->tokens[$this->id + 1][0] !== $finalToken) {
             $currentVariable = $this->id + 1;
-            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CURLY_OPEN, \Exakat\Tasks\T_DOLLAR_OPEN_CURLY_BRACES))) {
+            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CURLY_OPEN, 
+                                                                \Exakat\Tasks\T_DOLLAR_OPEN_CURLY_BRACES,
+                                                                ))) {
                 $open = $this->id + 1;
                 ++$this->id; // Skip {
                 while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_CURLY))) {
@@ -886,12 +887,14 @@ SQL;
         }
 
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
-            // This is the last part
-            $part = array_pop($elements);
-            $part->noDelimiter = rtrim($part->noDelimiter, "\n");
-            $part->code        = rtrim($part->code,        "\n");
-            $part->fullcode    = rtrim($part->fullcode,    "\n");
-            $elements[] = $part;
+            if (!empty($elements)) {
+                // This is the last part
+                $part = array_pop($elements);
+                $part->noDelimiter = rtrim($part->noDelimiter, "\n");
+                $part->code        = rtrim($part->code,        "\n");
+                $part->fullcode    = rtrim($part->fullcode,    "\n");
+                $elements[] = $part;
+            }
         }
         
         ++$this->id;
@@ -1951,8 +1954,6 @@ SQL;
         $arguments->args_min = $args_min;
         $this->runPlugins($arguments, $argumentsList);
         
-//        print_r($arguments);die();
-
         return $arguments;
     }
 
@@ -4234,7 +4235,9 @@ SQL;
     private function processSign() {
         $signExpression = $this->tokens[$this->id][1];
         $code = $signExpression.'1';
-        while (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_PLUS, \Exakat\Tasks\T_MINUS))) {
+        while (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_PLUS, 
+                                                               \Exakat\Tasks\T_MINUS,
+                                                              ))) {
             ++$this->id;
             $signExpression = $this->tokens[$this->id][1].$signExpression;
             $code *= $this->tokens[$this->id][1].'1';
@@ -4242,7 +4245,7 @@ SQL;
         
         if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER ||
              $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DNUMBER) &&
-            $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
+             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
             $operand = $this->processNext();
 
             $operand->code     = $signExpression.$operand->code;
@@ -4508,6 +4511,7 @@ SQL;
                 $right = $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
+
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
@@ -4604,10 +4608,21 @@ SQL;
 
     private function processAssignation() {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals = array_merge($finals, array(\Exakat\Tasks\T_EQUAL, \Exakat\Tasks\T_PLUS_EQUAL, \Exakat\Tasks\T_AND_EQUAL, \Exakat\Tasks\T_CONCAT_EQUAL, \Exakat\Tasks\T_DIV_EQUAL, \Exakat\Tasks\T_MINUS_EQUAL, \Exakat\Tasks\T_MOD_EQUAL, \Exakat\Tasks\T_MUL_EQUAL, \Exakat\Tasks\T_OR_EQUAL, \Exakat\Tasks\T_POW_EQUAL, \Exakat\Tasks\T_SL_EQUAL, \Exakat\Tasks\T_SR_EQUAL, \Exakat\Tasks\T_XOR_EQUAL));
-        $id = $this->processOperator('Assignation', $finals);
-        
-        return $id;
+        $finals = array_merge($finals, array(\Exakat\Tasks\T_EQUAL, 
+                                             \Exakat\Tasks\T_PLUS_EQUAL, 
+                                             \Exakat\Tasks\T_AND_EQUAL, 
+                                             \Exakat\Tasks\T_CONCAT_EQUAL, 
+                                             \Exakat\Tasks\T_DIV_EQUAL, 
+                                             \Exakat\Tasks\T_MINUS_EQUAL, 
+                                             \Exakat\Tasks\T_MOD_EQUAL, 
+                                             \Exakat\Tasks\T_MUL_EQUAL, 
+                                             \Exakat\Tasks\T_OR_EQUAL, 
+                                             \Exakat\Tasks\T_POW_EQUAL, 
+                                             \Exakat\Tasks\T_SL_EQUAL, 
+                                             \Exakat\Tasks\T_SR_EQUAL, 
+                                             \Exakat\Tasks\T_XOR_EQUAL,
+                                             ));
+        return $this->processOperator('Assignation', $finals);
     }
 
     private function processCoalesce() {
