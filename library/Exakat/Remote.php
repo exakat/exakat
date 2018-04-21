@@ -30,10 +30,12 @@ class Remote {
 
     public function send($json) {
         if ($this->bits['scheme'] === 'file') {
-            $this->sendWithPipe($json);
+            return $this->sendWithPipe($json);
         } elseif ($this->bits['scheme'] === 'http') {
-            $this->sendWithHTTP($json);
-        } 
+            return $this->sendWithHTTP($json);
+        } else {
+            // Throw error
+        }
     }
     
     private function sendWithPipe($json) {
@@ -43,15 +45,12 @@ class Remote {
     }
 
     private function sendWithHTTP($json) {
-        $jsonArray = json_decode($json);
-        $id = array_search('-p', $jsonArray);
-        $project = $jsonArray[$id + 1];
-        $id = array_search('-R', $jsonArray);
-        $vcs = $jsonArray[$id + 1];
-        $URLload = 'http://'.$this->bits['host'].':'.$this->bits['port'].'/init/?vcs='.$vcs.'&project='.$project;
+        $URLload = 'http://'.$this->bits['host'].':'.$this->bits['port'].'/queue/?json='.$json;
         $html = file_get_contents($URLload);
-        var_dump($html);
+        
+        return $html;
     }
+
 }
 
 ?>
