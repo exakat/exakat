@@ -177,14 +177,14 @@ class Jobqueue extends Tasks {
         $config = new Config($job);
         $analyze = new Project($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing report job '.$job.PHP_EOL);
-        $this->log('start report : '.$job);
+        display( 'processing project job '.$job.PHP_EOL);
+        $this->log('start project : '.$job);
         $b = microtime(true);
         $analyze->run();
         $e = microtime(true);
-        $this->log('end report : '.$job[1].' ('.number_format($e -$b, 2).' s)');
+        $this->log('end project : '.$job[1].' ('.number_format($e -$b, 2).' s)');
         unset($analyze);
-        display( 'processing report job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+        display( 'processing project job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
     }
 
     private function processRemove($job) {
