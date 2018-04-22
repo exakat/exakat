@@ -130,6 +130,9 @@ class Load extends Tasks {
     const ALTERNATIVE      = true;
     const NOT_ALTERNATIVE  = false;
 
+    const NULLABLE         = true;
+    const NOT_NULLABLE     = false;
+
     const ELLIPSIS         = true;
     const NOT_ELLIPSIS     = false;
     
@@ -1841,18 +1844,20 @@ SQL;
         } else {
             $rank       = -1;
             $default    = 0;
-            $nullable   = 0;
             $typehint   = 0;
+            $nullable   = self::NOT_NULLABLE;
             $reference = self::NOT_REFERENCE;
-            $ellipsis = self::NOT_ELLIPSIS;
+            $variadic = self::NOT_ELLIPSIS;
 
             while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
                 $initialId = $this->id;
-                ++$args_max;
 
                 do {
+                    ++$args_max;
                     if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_QUESTION) {
                         $nullable = $this->processNextAsIdentifier();
+                    } else {
+                        $nullable = self::NOT_NULLABLE;
                     }
 
                     $typehint = $this->processTypehint();
@@ -1863,11 +1868,11 @@ SQL;
                         $reference = self::REFERENCE;
                         ++$this->id;
                     } else {
-                        
+                        $reference = self::NOT_REFERENCE;
                     }
 
                     if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_ELLIPSIS) {
-                        $ellipsis = self::ELLIPSIS;
+                        $variadic = self::ELLIPSIS;
                         ++$this->id;
                     }
 
@@ -1880,9 +1885,9 @@ SQL;
                     $index->line     = $this->tokens[$current][2];
                     $index->token    = 'T_VARIABLE';
 
-                    if ($ellipsis === self::ELLIPSIS) {
+                    if ($variadic === self::ELLIPSIS) {
                         $index->fullcode  = '...'.$index->fullcode;
-                        $index->ellipsis = self::ELLIPSIS;
+                        $index->variadic = self::ELLIPSIS;
                     }
 
                     if ($reference === self::REFERENCE) {
@@ -1912,7 +1917,7 @@ SQL;
 
                     $index->rank = ++$rank;
 
-                    if ($nullable !== 0) {
+                    if ($nullable !== self::NOT_NULLABLE) {
                         $this->addLink($index, $nullable, 'NULLABLE');
                         $this->addLink($index, $typehint, 'TYPEHINT');
                         $index->fullcode = '?'.$typehint->fullcode.' '.$index->fullcode;
@@ -1938,6 +1943,7 @@ SQL;
                 
                 --$this->id;
             }
+            $arguments->count    = $rank + 1;
         }
 
         // Skip the )
@@ -1947,7 +1953,6 @@ SQL;
         $arguments->fullcode = implode(', ', $fullcode);
         $arguments->line     = $this->tokens[$current][2];
         $arguments->token    = 'T_COMMA';
-        $arguments->count    = $rank + 1;
         $arguments->args_max = $args_max;
         $arguments->args_min = $args_min;
         $this->runPlugins($arguments, $argumentsList);
@@ -4994,9 +4999,9 @@ SQL;
 
             assert(isset($D[$id])    , "Warning : forgotten atom $id in $this->filename : ".print_r($this->atoms[$id], true));
 
-            assert($D[$id] <= 1      , "Warning : too linked atom $id : ".$this->atoms[$id]->atom.PHP_EOL);
+            assert($D[$id] <= 1      , "Warning : too linked atom $id in $this->filename : ".$this->atoms[$id]->atom.PHP_EOL);
 
-            assert(isset($atom->line), "Warning : missing line atom $id : ".PHP_EOL);
+            assert(isset($atom->line), "Warning : missing line atom $id  in $this->filename : ".PHP_EOL);
 
             assert(isset($atom->code), "Warning : forgotten code for atom $id in $this->filename : ".print_r($this->atoms[$id], true));
 
