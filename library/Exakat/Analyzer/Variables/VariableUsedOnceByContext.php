@@ -34,6 +34,7 @@ class VariableUsedOnceByContext extends Analyzer {
     }
     
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Variable", "Variablearray", "Variableobject")
      .not(where( __.in("MEMBER") ) )
@@ -56,7 +57,7 @@ GREMLIN;
              ->raw(<<<GREMLIN
 where( __.sideEffect{counts = [:]}
                    .repeat( out().not( where( __.hasLabel("Function", "Closure", "Method", "Magicmethod") ) ) )
-                   .emit( ).times('.self::MAX_LOOPING.')
+                   .emit( ).times($MAX_LOOPING)
                    .hasLabel("Variable", "Variablearray", "Variableobject")
                    .not( where( __.in("MEMBER") ) )
                    .sideEffect{ k = it.get().value("code"); 
@@ -70,7 +71,7 @@ where( __.sideEffect{counts = [:]}
          .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
          .repeat( __.out().not( where( __.hasLabel("Function", "Closure") ) )  )
          .emit( )
-         .times('.self::MAX_LOOPING.')
+         .times($MAX_LOOPING)
          .hasLabel("Variable", "Variablearray", "Variableobject")
          .filter{ it.get().value("code") in names }
 GREMLIN
