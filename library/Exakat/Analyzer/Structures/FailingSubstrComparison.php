@@ -40,6 +40,7 @@ class FailingSubstrComparison extends Analyzer {
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs(array('String', 'Identifier', 'Nsname'))
              ->hasNoOut('CONCAT')
+             ->has('noDelimiter')
              ->getStringLength('noDelimiter', 's')
              // Substring is actually as long as length
              ->filter('s != length.toInteger().abs();')

@@ -26,15 +26,9 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class ShouldBeTypehinted extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/Arguments',
-                    );
-    }
-    
     public function analyze() {
         // spotting objects with property
-        $this->atomIs('Variable')
-             ->analyzerIs('Variables/Arguments')
+        $this->atomIs('Parameter')
              ->hasNoOut('TYPEHINT')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
@@ -47,9 +41,8 @@ class ShouldBeTypehinted extends Analyzer {
         $this->prepareQuery();
 
         // spotting objects with methodcall
-        $this->atomIs('Variable')
+        $this->atomIs('Parameter')
              ->hasNoOut('TYPEHINT')
-             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))
@@ -61,9 +54,8 @@ class ShouldBeTypehinted extends Analyzer {
         $this->prepareQuery();
 
         // spotting array with array[index]
-        $this->atomIs('Variable')
+        $this->atomIs('Parameter')
              ->hasNoOut('TYPEHINT')
-             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))
@@ -76,9 +68,8 @@ class ShouldBeTypehinted extends Analyzer {
         $this->prepareQuery();
 
         // spotting array with arrayappend[]
-        $this->atomIs('Variable')
+        $this->atomIs('Parameter')
              ->hasNoOut('TYPEHINT')
-             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))
@@ -90,9 +81,8 @@ class ShouldBeTypehinted extends Analyzer {
         $this->prepareQuery();
 
         // spotting array in a functioncall
-        $this->atomIs('Variable')
+        $this->atomIs('Parameter')
              ->hasNoOut('TYPEHINT')
-             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))
@@ -105,9 +95,8 @@ class ShouldBeTypehinted extends Analyzer {
         $this->prepareQuery();
 
         // spotting array with callable
-        $this->atomIs('Variable')
+        $this->atomIs('Parameter')
              ->hasNoOut('TYPEHINT')
-             ->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))

@@ -30,12 +30,14 @@ class Arguments extends Analyzer {
         // Arguments itself
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
+             ->outIs('NAME')
              ->atomIs('Variable');
         $this->prepareQuery();
         
         // Below
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
+             ->outIs('NAME')
              ->outIsIE('VARIABLE')
              ->outIsIE('LEFT')
              ->atomIs('Variable')

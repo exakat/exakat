@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UnsetOnArguments extends Analyzer {
     public function dependsOn() {
-        return array('Variables/Arguments');
+        return array('Variables/Arguments',
+                    );
     }
     
     public function analyze() {

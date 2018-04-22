@@ -28,7 +28,8 @@ use Exakat\Data\Methods;
 
 class WrongNumberOfArguments extends Analyzer {
     public function dependsOn() {
-        return array('Functions/VariableArguments');
+        return array('Functions/VariableArguments',
+                    );
     }
     
     public function analyze() {

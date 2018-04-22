@@ -27,14 +27,14 @@ use Exakat\Analyzer\Analyzer;
 class RedefinedPrivateProperty extends Analyzer {
     public function analyze() {
         // class x { private $y; }
-        // class z { private $y; }
+        // class z extends x { private $y; }
         $this->atomIs('Propertydefinition')
              ->savePropertyAs('code', 'name')
              ->inIsIE('LEFT')
              ->inIs('PPP')
              ->hasOut('PRIVATE')
              ->inIs('PPP')
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('PPP')
              ->hasOut('PRIVATE')
              ->outIs('PPP')

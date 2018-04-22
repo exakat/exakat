@@ -28,14 +28,16 @@ use Exakat\Tokenizer\Token;
 
 class CouldBePrivateMethod extends Analyzer {
     public function dependsOn() {
-        return array('Classes/MethodUsedBelow');
+        return array('Classes/MethodUsedBelow',
+                     'Classes/IsNotFamily',
+                    );
     }
     
     public function analyze() {
-        // Searching for properties that are never used outside the definition class or its children
+        // Searching for methods that are never used outside the definition class
 
-        // Non-static properties
-        // Case of object->property (that's another public access)
+        // Non-static methods
+        // Case of object->method() (that's another public access)
 $query = <<<GREMLIN
 g.V().hasLabel("Methodcall")
      .not( where( __.out("OBJECT").hasLabel("This")) )
@@ -56,11 +58,12 @@ GREMLIN;
              ->back('first');
         $this->prepareQuery();
 
-        // Static properties
-        // Case of property::property (that's another public access)
+        // Static methods
+        // Case of class::method() (that's another public access)
         $LOOPS = self::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Staticmethodcall")
+     .where( __.in("ANALYZED").has("analyzer", "Classes/IsNotFamily"))
      .out("CLASS")
      .hasLabel("Identifier", "Nsname")
      .as("classe")
@@ -71,11 +74,6 @@ g.V().hasLabel("Staticmethodcall")
      .sideEffect{ name = it.get().value("code"); }
      .as("method")
      .repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until( hasLabel("Class", "File") )
-     .or( hasLabel("File"), 
-        __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times($LOOPS)
-          .where( __.out("METHOD").out("NAME").filter{ it.get().value("code") == name; } )
-          .filter{it.get().value("fullnspath") != fns; }
-        )
      .select("classe", "method").by("fullnspath").by("code")
      .unique()
 GREMLIN;

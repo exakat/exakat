@@ -27,11 +27,13 @@ use Exakat\Analyzer\Analyzer;
 
 class InterfaceArguments extends Analyzer {
     public function analyze() {
+        // interface i { function a($b) ; }
+        // class c implements i { function a($b) ; }
         $this->atomIs('Interface')
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('ARGUMENT')
-             ->outIsIE('LEFT')
+             ->outIs('NAME')
              ->atomIs('Variable');
         $this->prepareQuery();
     }

@@ -27,15 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class ObjectReferences extends Analyzer {
     public function analyze() {
-
         $scalars = $this->loadIni('php_scalar_types.ini', 'types');
+
         // f(stdclass &$x)
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIsNot($scalars)
              ->inIs('TYPEHINT')
-             ->atomIs('Variable')
              ->is('reference', true);
         $this->prepareQuery();
 

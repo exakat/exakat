@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessInstruction extends Analyzer {
     public function dependsOn() {
-        return array('Classes/IsaMagicProperty');
+        return array('Classes/IsaMagicProperty',
+                    );
     }
 
     public function analyze() {
@@ -84,12 +85,13 @@ class UselessInstruction extends Analyzer {
              ->savePropertyAs('code', 'variable')
              ->goToFunction()
              ->outIs(array('ARGUMENT', 'USE'))
+             ->isNot('reference', true)
              ->outIsIE('NAME')
              ->samePropertyAs('code', 'variable')
-             ->isNot('reference', true)
              ->back('first');
         $this->prepareQuery();
 
+        // return an argument that is also a reference
         $this->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Postplusplus')
@@ -97,7 +99,8 @@ class UselessInstruction extends Analyzer {
              ->atomIs('Variable')
              ->savePropertyAs('code', 'variable')
              ->goToFunction()
-             ->raw('not(where( __.out("ARGUMENT", "USE").filter{ it.get().value("code") == variable; }))')
+             ->raw('not(where( __.out("ARGUMENT").out("NAME").filter{ it.get().value("code") == variable; }))')
+             ->raw('not(where( __.out("USE").filter{ it.get().value("code") == variable; }))')
              ->back('first');
         $this->prepareQuery();
 
