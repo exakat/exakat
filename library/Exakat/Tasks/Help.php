@@ -30,11 +30,12 @@ class Help extends Tasks {
 
     public function run() {
         print <<<HELP
-[Usage] :   php {$this->config->executable} init -p <Project name> -R <Repository>
-            php {$this->config->executable} project -p <Project name>
+[Usage] :   php {$this->config->executable} version (default)
             php {$this->config->executable} doctor
-            php {$this->config->executable} version (default)
+            php {$this->config->executable} init -p <Project name> -R <Repository>
+            php {$this->config->executable} project -p <Project name>
 
+Check all commands : http://exakat.readthedocs.io/en/latest/Commands.html
 
 HELP;
 
