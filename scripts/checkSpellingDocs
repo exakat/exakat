@@ -23,6 +23,7 @@ function processFile($file, $pspell) {
 
     $i = IntlBreakIterator::createWordInstance($locale);
     $text = preg_replace('/<\?php.*?\?>/s', '', $ini['description']);
+    $text = preg_replace('/``[^`]+?``/s', '', $text);
     $text = preg_replace('/`.+?`_+/s', '', $text);
     $text = preg_replace('/[a-zA-Z_0-9]+\(\)/s', '', $text);
 
