@@ -294,7 +294,10 @@ class Ambassador extends Reports {
     }
 
     protected function setPHPBlocs($description){
-        $description = preg_replace_callback("#<\?php(.*?)\?>#is", function ($x) { return '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHPSyntax($x[1]).'?&gt;</pre>';}, $description);
+        $description = preg_replace_callback("#<\?php(.*?)\?>#is", function ($x) { 
+            $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHP_EOL.PHPSyntax($x[1]).'?&gt;</pre>'; 
+            return $return;
+        }, $description);
         
         return $description;
     }
@@ -302,12 +305,12 @@ class Ambassador extends Reports {
     protected function generateDocumentation($analyzerList){
         $datas = array();
         $baseHTML = $this->getBasedPage('analyzers_doc');
-        $analyzersDocHTML = "";
+        $docHTML = [];
 
-        foreach($analyzerList as $analyzer) {
-            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
+        foreach($analyzerList as $analyzerName) {
+            $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
-            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.$description->getName().'" id="'.$description->getName().'">'.$description->getName().'</a></h2>';
+            $analyzersDocHTML = '<h2><a href="issues.html#analyzer='.$this->toId($analyzerName).'" id="'.$this->toId($analyzerName).'">'.$description->getName().'</a></h2>';
 
             $badges = array();
             $v = $description->getVersionAdded();
@@ -330,13 +333,14 @@ class Ambassador extends Reports {
             $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description->getDescription())).'</p>';
             $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
             
-
             $v = $description->getClearPHP();
             if(!empty($v)){
                 $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
             }
+            $docHTML[] = $analyzersDocHTML;
         }
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyzersDocHTML);
+
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', join(PHP_EOL, $docHTML));
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
 
@@ -1949,6 +1953,7 @@ $issues
       $.facetelize(settings);
       
       var analyzerParam = window.location.hash.split('analyzer=')[1];
+      console.log(analyzerParam);
       var fileParam = window.location.hash.split('file=')[1];
       if(analyzerParam !== undefined) {
         $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam.toLowerCase() + "']").click();
