@@ -325,11 +325,34 @@ function unicode_blocks($string) {
 }
 
 function PHPSyntax($code) {
-    $php = highlight_string("<?php \n{$code};\n ?>", true);
-    $php = substr($php, strpos($php, '<br />') + 6);
-    $php = substr($php, 0, strrpos($php, ';<br />') - 29);
+    static $cache;
     
-    return $php;
+    if (!isset($cache)) {
+        $cache = array();
+    }
+    
+    if (isset($cache[$code])) {
+        return $cache[$code];
+    }
+
+    $code = trim($code);
+    $php = highlight_string("<?php \n{$code}\n ?>", true);
+    $php = substr($php, 85, -40);
+    if (substr($php, 0, 7) === '</span>') {
+        $php = substr($php, 7, 10000);
+    } else {
+        $php = '<span style="color: #0000BB">'.$php;
+    }
+    if (substr($php, -17) === '<span style="colo') {
+    //<br /></span><span style="colo
+        $php = substr($php, 0, -30);
+        $php .= '</span>';
+    } else {
+        $php .= '</span>';
+    }
+    $cache[$code] = $php;
+    
+    return $cache[$code];
 }
 
 function makeArray($value) {
