@@ -24,6 +24,7 @@ $applications = array(
     'Cleverstyle'                => array('url' => 'https://cleverstyle.org/en', ),
     'Contao'                     => array('url' => 'https://contao.org/en/', ),
     'Dolibarr'                   => array('url' => 'https://www.dolibarr.org/', ),
+    'Dolphin'                    => array('url' => 'https://www.boonex.com/', ),
     'Edusoho'                    => array('url' => 'https://www.edusoho.com/en', ),
     'ExpressionEngine'           => array('url' => 'https://expressionengine.com/', ),
     'LiveZilla'                  => array('url' => 'https://www.livezilla.net/home/en/', ),
