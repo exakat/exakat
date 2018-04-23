@@ -37,11 +37,10 @@ SELECT variable, COUNT(*) AS nb FROM variables
 SQL
 );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[str_replace(array('&', '...'), '', $row['variable'])] = $row['nb'];
+            $counts[$row['variable']] = $row['nb'];
         }
         
         $variables = array_keys($counts);
-        $variables[] = '$RELATIONITEMS';
 
         $results = array();
         // Only _ as difference
@@ -49,8 +48,8 @@ SQL
             if (!strpos($variable, '_')) { continue; }
             $v = str_replace('_', '', $variable);
             $r = array_filter( $variables, function($x) use ($v) { return str_replace('_', '', $x) === $v; });
-            if (!empty($r)) {
-                $results[$variable]['_'] = $r;
+            if (count($r) > 1) {
+                $results[$variable]['_'] = array_diff($r, [$variable]);
             }
         }
 
@@ -60,8 +59,8 @@ SQL
         $diff = array_keys(array_filter($groupBy, function($x) { return $x > 1;}));
         foreach($diff as $variable) {
             $r = array_filter( $variables, function($x) use ($variable) { return mb_strtolower($x) === mb_strtolower($variable); });
-            if (!empty($r)) {
-                $results[$variable]['case'] = $r;
+            if (count($r) > 1) {
+                $results[$variable]['case'] = array_diff($r, [$variable]);
             }
         }
 
@@ -70,8 +69,8 @@ SQL
         foreach($numbers as $variable) {
             $v = str_replace(array(0,1,2,3,4,5,6,7,8,9), '', $variable);
             $r = array_filter( $variables, function($x) use ($v) { return str_replace(array(0,1,2,3,4,5,6,7,8,9), '', $x) === $v; });
-            if (!empty($r)) {
-                $results[$variable]['numbers'] = $r;
+            if (count($r) > 1) {
+                $results[$variable]['numbers'] = array_diff($r, [$variable]);
             }
         }
 
@@ -83,8 +82,8 @@ SQL
         
         $sizes[] = [];// Extra one for the next loop
         foreach($sizes as $size => $vars) {
-            foreach($vars as $var) {
-                $r = array_filter( $sizes[$size + 1], function($x) use ($var) { return levenshtein($x, $var) === 1; });
+            foreach($vars as $variable) {
+                $r = array_filter( $sizes[$size + 1], function($x) use ($variable) { return levenshtein($x, $variable) === 1; });
                 if (!empty($r)) {
                     $results[$variable]['one'] = $r;
                 }

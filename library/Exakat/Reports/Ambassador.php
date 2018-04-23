@@ -3584,6 +3584,12 @@ JAVASCRIPT;
     private function generateConfusingVariables() {
         $data = new Data\CloseNaming($this->sqlite);
         $results = $data->prepare();
+        $reasons = array('_'       => 'One _',
+                         'numbers' => 'One digit',
+                         'swap'    => 'Partial inversion',
+                         'one'     => 'One letter',
+                         'case'    => 'Case',
+                         );
         
         $table = array();
         foreach($results as $variable => $close) {
@@ -3591,7 +3597,7 @@ JAVASCRIPT;
 
             foreach($close as $reason => $variables) {
                 $list = "<ul><li>".implode('</li><li>', $variables)."</li></ul>\n";
-                $confused[] = "<tr><td>$reason</td><td>$list</td></tr>\n";
+                $confused[] = "<tr><td>$list</td><td>{$reasons[$reason]}</td></tr>\n";
             }
 
             $count = count($close);
