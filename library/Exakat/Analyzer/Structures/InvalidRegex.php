@@ -27,14 +27,22 @@ use Exakat\Analyzer\Structures\UnknownPregOption;
 
 class InvalidRegex extends Analyzer {
     public function analyze() {
-        $functionList = '"'.implode('", "', array_map( 'addslashes', UnknownPregOption::$functions)).'"';
+        $functionList = makeList(array_map( 'addslashes', UnknownPregOption::$functions));
+
         $regexQuery = <<<GREMLIN
 g.V().hasLabel("Functioncall").has("fullnspath", within($functionList))
                               .out("ARGUMENT")
                               .has("rank", 0)
                               .hasLabel("String")
                               .not( where( __.out("CONCAT")) )
-                              .map{[it.get().value('noDelimiter'), it.get().value('fullcode')]};
+                              .map{
+                              if (it.get().value("delimiter") == "'") {
+                                regex = it.get().value('noDelimiter').replaceAll("\\\\\\\\(['\\\\\\\\])", "\\$1");
+                              } else {
+                                regex = it.get().value('noDelimiter').replaceAll('\\\\\\\\(["\\\\\\\\])', "\\$1");
+                              }
+                              
+                              [regex, it.get().value('fullcode')]};
 GREMLIN;
         $regexSimple = $this->query($regexQuery);
 
@@ -65,7 +73,7 @@ GREMLIN;
 
         $invalid = array();
         foreach($regexList as list($regex, $fullcode)) {
-            // Replacing 
+            // @ is important here : we want preg_match to fail silently.  
             if (false === @preg_match(str_replace('\\\\', '\\', $regex), '')) {
                 $invalid[] = $fullcode;
             }
