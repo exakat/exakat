@@ -26,10 +26,13 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedProtectedMethods extends Analyzer {
     public function dependsOn() {
-        return array('Classes/UsedProtectedMethod');
+        return array('Classes/UsedProtectedMethod',
+                    );
     }
 
     public function analyze() {
+        // class x { protected function foo() {} }
+        // class y extends x {}
         $this->atomIs('Class')
              ->outIs('METHOD')
              ->atomIs('Method')

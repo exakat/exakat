@@ -41,9 +41,11 @@ class UnusedArguments extends Analyzer {
         $isNotUsed = 'not( where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times('.self::MAX_LOOPING.') ) )';
 
         // Arguments, not reference, function
-        $this->analyzerIs('Variables/Arguments')
-             ->savePropertyAs('code', 'varname')
+        $this->atomIs('Parameter')
              ->isNot('reference', true)
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'varname')
+             ->back('first')
              ->inIs('ARGUMENT')
              ->atomIs(self::$FUNCTIONS_ALL)
              ->_as('results')
@@ -55,9 +57,11 @@ class UnusedArguments extends Analyzer {
         $this->prepareQuery();
 
         // Arguments, not reference, method (class, trait)
-        $this->analyzerIs('Variables/Arguments')
-             ->savePropertyAs('code', 'varname')
+        $this->atomIs('Parameter')
              ->isNot('reference', true)
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'varname')
+             ->back('first')
              ->inIs('ARGUMENT')
              ->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('self')
@@ -73,9 +77,11 @@ class UnusedArguments extends Analyzer {
         $this->prepareQuery();
 
         // Arguments, reference, function
-        $this->analyzerIs('Variables/Arguments')
-             ->savePropertyAs('code', 'varname')
+        $this->atomIs('Parameter')
              ->is('reference', true)
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'varname')
+             ->back('first')
              ->inIs('ARGUMENT')
              ->atomIs(self::$FUNCTIONS_ALL)
              ->_as('results')
@@ -88,9 +94,11 @@ class UnusedArguments extends Analyzer {
         $this->prepareQuery();
 
         // Arguments, reference, method
-        $this->analyzerIs('Variables/Arguments')
-             ->savePropertyAs('code', 'varname')
+        $this->atomIs('Parameter')
              ->is('reference', true)
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'varname')
+             ->back('first')
              ->inIs('ARGUMENT')
              ->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('self')

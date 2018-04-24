@@ -29,29 +29,37 @@ class AmbiguousKeys extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Arrayliteral')
-             ->raw('where(
+             ->raw(<<<GREMLIN
+where(
     __.sideEffect{ counts = [:]; integers = [:]; strings = [:]; }
       .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
       .hasLabel("String", "Integer").not( where(__.out("CONCAT") ) )
-      .sideEffect{ 
+      .filter{ 
             if (it.get().label() == "String" && "noDelimiter" in it.get().keys()) { 
                 k = it.get().value("noDelimiter"); 
                 if (counts[k] == null) { 
                     counts[k] = ["string"]; 
+                    false;
+                } else if (counts[k] == ["integer"]) { 
+                    true;
                 } else { 
-                    counts[k].add("string"); 
+                    false;
                 }
             } else { 
                 k = it.get().value("fullcode"); 
                 if (counts[k] == null) { 
                     counts[k] = ["integer"]; 
+                    false;
+                } else if (counts[k] == ["string"]) { 
+                    counts[k].add("string"); 
+                    true;
                 } else { 
-                    counts[k].add("integer"); 
+                    false;
                 }
             }
         }
-        .map{ counts.findAll{a,b -> b.unique().size() > 1}; }.unfold().count().is(neq(0))
-)'
+)
+GREMLIN
 );
         $this->prepareQuery();
 

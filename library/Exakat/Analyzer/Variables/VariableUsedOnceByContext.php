@@ -34,14 +34,15 @@ class VariableUsedOnceByContext extends Analyzer {
     }
     
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Variable", "Variablearray", "Variableobject")
      .not(where( __.in("MEMBER") ) )
      .where( repeat( __.in({$this->linksDown}))
-                  .until(hasLabel("File")).emit().hasLabel("Function", "Method", "Magicmethod")
+                  .until(hasLabel("File")).emit().hasLabel("Function", "Closure", "Method", "Magicmethod")
                   .count().is(eq(0))
            ).groupCount("m").by("code").cap("m")
-            .toList().get(0).findAll{ a,b -> b == 1}.keySet()
+      .toList().get(0).findAll{ a,b -> b == 1}.keySet()
 GREMLIN;
         $variables = $this->query($query)->toArray();
 
@@ -53,27 +54,28 @@ GREMLIN;
         $this->prepareQuery();
 
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->raw('where( __
-                   .sideEffect{counts = [:]}
-                             .repeat( out().not( where( __.hasLabel("Function", "Closure", "Method", "Magicmethod") ) ) )
-                             .emit( ).times('.self::MAX_LOOPING.')
-                             .hasLabel("Variable", "Variablearray", "Variableobject")
-                             .not( where( __.in("MEMBER") ) )
-                             .sideEffect{ k = it.get().value("code"); 
-                                         if (counts[k] == null) {
-                                            counts[k] = 1;
-                                         } else {
-                                            counts[k]++;
-                                         }
-                              }.fold()
-                          )
-                   .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
-                   .repeat( __.out().not( where( __.hasLabel("Function", "Closure") ) )  )
-                   .emit( )
-                   .times('.self::MAX_LOOPING.')
+             ->raw(<<<GREMLIN
+where( __.sideEffect{counts = [:]}
+                   .repeat( out().not( where( __.hasLabel("Function", "Closure", "Method", "Magicmethod") ) ) )
+                   .emit( ).times($MAX_LOOPING)
                    .hasLabel("Variable", "Variablearray", "Variableobject")
-                   .filter{ it.get().value("code") in names }
-                   ');
+                   .not( where( __.in("MEMBER") ) )
+                   .sideEffect{ k = it.get().value("code"); 
+                               if (counts[k] == null) {
+                                  counts[k] = 1;
+                               } else {
+                                  counts[k]++;
+                               }
+                    }.fold()
+                )
+         .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
+         .repeat( __.out().not( where( __.hasLabel("Function", "Closure") ) )  )
+         .emit( )
+         .times($MAX_LOOPING)
+         .hasLabel("Variable", "Variablearray", "Variableobject")
+         .filter{ it.get().value("code") in names }
+GREMLIN
+);
         $this->prepareQuery();
     }
 }

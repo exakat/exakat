@@ -31,15 +31,16 @@ class VariableArguments extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
-             ->functioncallIs(array('\\func_get_arg', '\\func_get_args', '\\func_num_args'))
+             ->functioncallIs(array('\\func_get_arg', 
+                                    '\\func_get_args', 
+                                    '\\func_num_args',
+                                    ))
              ->back('first');
         $this->prepareQuery();
         
         // Using function_get_args
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->outIsIE('VARIABLE')
-             ->atomIs('Variable')
              ->is('variadic', true)
              ->back('first');
         $this->prepareQuery();

@@ -26,12 +26,24 @@ use Exakat\Exceptions\HelperException;
 use Exakat\Exceptions\VcsError;
 
 class Git extends Vcs {
+    private $installed = false;
+    private $optional  = true;
+    private $version   = 'unknown';
+    
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
 
-        $res = shell_exec('git --version');
+        $res = shell_exec('git --version 2>&1');
         if (strpos($res, 'git') === false) {
             throw new HelperException('git');
+        }
+
+        if (preg_match('/git version ([0-9\.]+)/', trim($res), $r)) {//
+            $this->installed = true;
+            $this->version   = $r[1];
+        } else {
+            $this->installed = false;
+            $this->optional  = true;
         }
     }
 
@@ -98,25 +110,25 @@ class Git extends Vcs {
     }
 
     public function getBranch() {
-        $res = shell_exec('cd '.$this->destinationFull.'/code/; git branch');
+        $res = shell_exec("cd {$this->destinationFull}/code/; git branch");
         return trim($res, " *\n");
     }
 
     public function getRevision() {
-        $res = shell_exec('cd '.$this->destinationFull.'/code/; git rev-parse HEAD');
+        $res = shell_exec("cd {$this->destinationFull}/code/; git rev-parse HEAD");
         return trim($res);
     }
     
     public function getInstallationInfo() {
-        $res = trim(shell_exec('git --version 2>&1'));
-        if (preg_match('/git version ([0-9\.]+)/', $res, $r)) {//
-            $stats['installed'] = 'Yes';
-            $stats['version'] = $r[1];
+        $stats = array('installed' => $this->installed === true ? 'Yes' : 'No',
+                      );
+                      
+        if ($this->installed === true) {
+            $stats['version'] = $this->version;
         } else {
-            $stats['installed'] = 'No';
             $stats['optional'] = 'Yes';
         }
-        
+
         return $stats;
     }
 }

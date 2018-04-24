@@ -93,6 +93,7 @@ class IsModified extends Analyzer {
         // simple variable
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
+             ->outIs('NAME')
              ->atomIs(self::$VARIABLES_ALL);
         $this->prepareQuery();
 

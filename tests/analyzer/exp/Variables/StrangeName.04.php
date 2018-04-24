@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('A $tyyypehint',
+$expected     = array('$tyyypehint',
                       '$aaa',
-                      '$deeefault = 90.00',
-                      '&$reeeference',
+                      '$deeefault',
+                      '$reeeference',
                      );
 
 $expected_not = array('$abc',

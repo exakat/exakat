@@ -1,9 +1,9 @@
 <?php
 
 $expected     = array('$interfaceArgument1',
-                      '$interfaceArgument2 = 2',
-                      'x $interfaceArgument21',
-                      't $interfaceArgument22 = null',
+                      '$interfaceArgument2',
+                      '$interfaceArgument21',
+                      '$interfaceArgument22',
                      );
 
 $expected_not = array('$argument_definition',

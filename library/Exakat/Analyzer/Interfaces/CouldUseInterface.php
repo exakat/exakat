@@ -60,7 +60,9 @@ GREMLIN;
 where( 
     __.out("METHOD", "MAGICMETHOD").sideEffect{ y = it.get().value("count"); }
       .out("NAME")
-      .sideEffect{ x.add(it.get().value("code") + "-" + y ) ; }.fold() )
+      .sideEffect{ x.add(it.get().value("code") + "-" + y ) ; }
+      .fold() 
+)
 GREMLIN
 )
              ->filter(<<<GREMLIN

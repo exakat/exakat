@@ -28,7 +28,8 @@ use Exakat\Data\Methods;
 
 class IsRead extends Analyzer {
     public function dependsOn() {
-        return array('Classes/Constructor');
+        return array('Classes/Constructor',
+                    );
     }
     
     public function analyze() {
@@ -105,10 +106,9 @@ class IsRead extends Analyzer {
              ->_as('results')
              ->back('first')
              ->functionDefinition()
-             ->inIs('NAME')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
-             ->isNot('reference', self::CASE_SENSITIVE)
+             ->isNot('reference', true)
              ->back('results');
         $this->prepareQuery();
 
@@ -119,6 +119,7 @@ class IsRead extends Analyzer {
 
         // Variable that are not a reference in a functioncall
         $this->atomIs('Variable')
+             ->analyzerIsNot('self')
              ->hasIn('ARGUMENT')
              ->hasNoParent(self::$FUNCTIONS_ALL,  'ARGUMENT');
         $this->prepareQuery();

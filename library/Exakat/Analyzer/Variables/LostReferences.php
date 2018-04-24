@@ -28,8 +28,9 @@ use Exakat\Analyzer\Analyzer;
 class LostReferences extends Analyzer {
     public function analyze() {
         $this->atomIs('Variable')
-             ->is('reference', true)
              ->savePropertyAs('code', 'parameter')
+             ->inIs('NAME')
+             ->is('reference', true)
              ->inIs('ARGUMENT')
              ->outIs('BLOCK')
              ->atomInside('Assignation')

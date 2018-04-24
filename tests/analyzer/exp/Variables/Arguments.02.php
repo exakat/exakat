@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('t $Argument22 = null',
-                      'x $Argument21',
-                      '$Argument2 = 2',
+$expected     = array('$Argument22',
+                      '$Argument21',
+                      '$Argument2',
                       '$Argument1',
                       '$argument_definition',
                      );

@@ -146,7 +146,10 @@ class Intval extends Plugin {
                 break;
 
             case 'Bitshift' :
-                if ($atom->code === '>>') {
+                if ($extras['RIGHT']->intval <= 0) {
+                    // This would generate an error anyway
+                    $atom->intval = 0;
+                } elseif ($atom->code === '>>') {
                     $atom->intval = $extras['LEFT']->intval >> $extras['RIGHT']->intval;
                 } elseif ($atom->code === '<<') {
                     $atom->intval = $extras['LEFT']->intval << $extras['RIGHT']->intval;

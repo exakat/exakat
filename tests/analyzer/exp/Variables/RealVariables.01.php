@@ -2,12 +2,12 @@
 
 $expected     = array('$o',
                       '$real',
-                      'Stdclass $yyy',
-                      'Stdclass $yt = null',
-                      'Stdclass $y = null',
-                      '$yy = 2',
-                      '$yyt = 2',
-                      'Stdclass $yyyt',
+                      '$yyy',
+                      '$yt',
+                      '$y',
+                      '$yy',
+                      '$yyt',
+                      '$yyyt',
                       '$dynamicProperty',
                      );
 

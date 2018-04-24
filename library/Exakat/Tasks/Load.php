@@ -129,6 +129,12 @@ class Load extends Tasks {
     
     const ALTERNATIVE      = true;
     const NOT_ALTERNATIVE  = false;
+
+    const NULLABLE         = true;
+    const NOT_NULLABLE     = false;
+
+    const ELLIPSIS         = true;
+    const NOT_ELLIPSIS     = false;
     
     const CLOSING_TAG      = true;
     const NO_CLOSING_TAG   = false;
@@ -167,8 +173,8 @@ class Load extends Tasks {
     private $optionsTokens = array();
 
     static public $PROP_ALTERNATIVE = array('Declare', 'Ifthen', 'For', 'Foreach', 'Switch', 'While');
-    static public $PROP_REFERENCE   = array('Variable', 'Variableobject', 'Variablearray', 'Member', 'Array', 'Function', 'Closure', 'Method', 'Functioncall', 'Methodcall');
-    static public $PROP_VARIADIC    = array('Variable', 'Array', 'Member', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname');
+//    static public $PROP_REFERENCE   = array('Variable', 'Variableobject', 'Variablearray', 'Member', 'Array', 'Function', 'Closure', 'Method', 'Functioncall', 'Methodcall');
+//    static public $PROP_VARIADIC    = array('Variable', 'Array', 'Member', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname');
     static public $PROP_DELIMITER   = array('String', 'Heredoc');
     static public $PROP_NODELIMITER = array('String', 'Variable', 'Magicconstant', 'Identifier', 'Nsname', 'Boolean', 'Integer', 'Real', 'Null');
     static public $PROP_HEREDOC     = array('Heredoc');
@@ -707,7 +713,6 @@ SQL;
 
             $this->addLink($id1, $sequence, 'FILE');
             $sequence->root = true;
-
         } catch (LoadError $e) {
 //            print $e->getMessage();
 //            print_r($this->expressions[0]);
@@ -823,7 +828,9 @@ SQL;
 
         while ($this->tokens[$this->id + 1][0] !== $finalToken) {
             $currentVariable = $this->id + 1;
-            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CURLY_OPEN, \Exakat\Tasks\T_DOLLAR_OPEN_CURLY_BRACES))) {
+            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CURLY_OPEN, 
+                                                                \Exakat\Tasks\T_DOLLAR_OPEN_CURLY_BRACES,
+                                                                ))) {
                 $open = $this->id + 1;
                 ++$this->id; // Skip {
                 while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_CURLY))) {
@@ -883,12 +890,14 @@ SQL;
         }
 
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
-            // This is the last part
-            $part = array_pop($elements);
-            $part->noDelimiter = rtrim($part->noDelimiter, "\n");
-            $part->code        = rtrim($part->code,        "\n");
-            $part->fullcode    = rtrim($part->fullcode,    "\n");
-            $elements[] = $part;
+            if (!empty($elements)) {
+                // This is the last part
+                $part = array_pop($elements);
+                $part->noDelimiter = rtrim($part->noDelimiter, "\n");
+                $part->code        = rtrim($part->code,        "\n");
+                $part->fullcode    = rtrim($part->fullcode,    "\n");
+                $elements[] = $part;
+            }
         }
         
         ++$this->id;
@@ -1080,7 +1089,7 @@ SQL;
         }
         
         // Process arguments
-        $function = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), self::WITH_TYPEHINT_SUPPORT);
+        $function = $this->processParameters($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS));
         $function->code       = $function->atom === 'Closure' ? 'function' : $name->fullcode;
 
         if ( $function->atom === 'Function') {
@@ -1802,8 +1811,156 @@ SQL;
         return 0;
     }
 
-    private function processArguments($atom, $finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehintSupport = self::WITHOUT_TYPEHINT_SUPPORT) {
-        $allowFinalVoid = true;
+    private function processParameters($atom) {
+        $arguments = $this->addAtom($atom);
+        $current = $this->id;
+        $argumentsId = array();
+
+        $fullcode       = array();
+        $rank           = 0;
+        $args_max       = 0;
+        $args_min       = 0;
+        $argumentsList  = array();
+
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
+            $void = $this->addAtomVoid();
+            $void->rank = 0;
+            $this->addLink($arguments, $void, 'ARGUMENT');
+
+            $arguments->code     = $this->tokens[$current][1];
+            $arguments->fullcode = self::FULLCODE_VOID;
+            $arguments->line     = $this->tokens[$current][2];
+            $arguments->token    = $this->getToken($this->tokens[$current][0]);
+            $arguments->args_max = 0;
+            $arguments->args_min = 0;
+            $arguments->count    = 0;
+            $argumentsId[]       = $void;
+
+            $this->runPlugins($arguments, array($void));
+
+            $fullcode[] = $void->fullcode;
+
+            $argumentsList[] = $void;
+        } else {
+            $rank       = -1;
+            $default    = 0;
+            $typehint   = 0;
+            $nullable   = self::NOT_NULLABLE;
+            $reference = self::NOT_REFERENCE;
+            $variadic = self::NOT_ELLIPSIS;
+
+            while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
+                $initialId = $this->id;
+
+                do {
+                    ++$args_max;
+                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_QUESTION) {
+                        $nullable = $this->processNextAsIdentifier();
+                    } else {
+                        $nullable = self::NOT_NULLABLE;
+                    }
+
+                    $typehint = $this->processTypehint();
+
+                    ++$this->id;
+
+                    if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_AND) {
+                        $reference = self::REFERENCE;
+                        ++$this->id;
+                    } else {
+                        $reference = self::NOT_REFERENCE;
+                    }
+
+                    if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_ELLIPSIS) {
+                        $variadic = self::ELLIPSIS;
+                        ++$this->id;
+                    }
+
+                    $variable = $this->processSingle('Variable');
+                    $this->popExpression();
+
+                    $index = $this->addAtom('Parameter');
+                    $index->code     = $variable->fullcode;
+                    $index->fullcode = $variable->fullcode;
+                    $index->line     = $this->tokens[$current][2];
+                    $index->token    = 'T_VARIABLE';
+
+                    if ($variadic === self::ELLIPSIS) {
+                        $index->fullcode  = '...'.$index->fullcode;
+                        $index->variadic = self::ELLIPSIS;
+                    }
+
+                    if ($reference === self::REFERENCE) {
+                        $index->fullcode  = '&'.$index->fullcode;
+                        $index->reference = self::REFERENCE;
+                    }
+
+                    $this->addLink($index, $variable, 'NAME');
+
+                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EQUAL) {
+                        ++$this->id; // Skip =
+                        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA,
+                                                                                \Exakat\Tasks\T_CLOSE_PARENTHESIS,
+                                                                                \Exakat\Tasks\T_CLOSE_CURLY,
+                                                                                \Exakat\Tasks\T_SEMICOLON,
+                                                                                \Exakat\Tasks\T_CLOSE_BRACKET,
+                                                                                \Exakat\Tasks\T_CLOSE_TAG,
+                                                                                \Exakat\Tasks\T_COLON,
+                                                                                ))) {
+                            $this->processNext();
+                        };
+                        $default = $this->popExpression();
+                    } else {
+                        ++$args_min;
+                        $default = 0;
+                    }
+
+                    $index->rank = ++$rank;
+
+                    if ($nullable !== self::NOT_NULLABLE) {
+                        $this->addLink($index, $nullable, 'NULLABLE');
+                        $this->addLink($index, $typehint, 'TYPEHINT');
+                        $index->fullcode = '?'.$typehint->fullcode.' '.$index->fullcode;
+                    } elseif ($typehint !== 0) {
+                        $this->addLink($index, $typehint, 'TYPEHINT');
+                        $index->fullcode = $typehint->fullcode.' '.$index->fullcode;
+                    }
+
+                    if ($default !== 0) {
+                        $this->addLink($index, $default, 'DEFAULT');
+                        $index->fullcode .= ' = '.$default->fullcode;
+                        $default = 0;
+                    }
+
+                    $this->addLink($arguments, $index, 'ARGUMENT');
+                    $argumentsId[] = $index;
+                    
+                    $fullcode[] = $index->fullcode;
+                    $argumentsList[] = $index;
+
+                    ++$this->id;
+                } while ($this->tokens[$this->id][0] === \Exakat\Tasks\T_COMMA);
+                
+                --$this->id;
+            }
+            $arguments->count    = $rank + 1;
+        }
+
+        // Skip the )
+        ++$this->id;
+
+        $arguments->code     = $this->tokens[$current][1];
+        $arguments->fullcode = implode(', ', $fullcode);
+        $arguments->line     = $this->tokens[$current][2];
+        $arguments->token    = 'T_COMMA';
+        $arguments->args_max = $args_max;
+        $arguments->args_min = $args_min;
+        $this->runPlugins($arguments, $argumentsList);
+        
+        return $arguments;
+    }
+
+    private function processArguments($atom, $finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS)) {
         $arguments = $this->addAtom($atom);
         $current = $this->id;
         $argumentsId = array();
@@ -1834,83 +1991,34 @@ SQL;
 
             ++$this->id;
         } else {
-            $typehint   = 0;
-            $default    = 0;
             $index      = 0;
             $args_max   = 0;
             $args_min   = 0;
             $rank       = -1;
-            $nullable   = 0;
-            $typehint   = 0;
             $argumentsList  = array();
 
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 $initialId = $this->id;
                 ++$args_max;
 
-                if ($typehintSupport === true) {
-                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_QUESTION) {
-                        $nullable = $this->processNextAsIdentifier();
-                    } else {
-                        $nullable = 0;
-                    }
-                    $typehint = $this->processTypehint();
-
+                while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA,
+                                                                        \Exakat\Tasks\T_CLOSE_PARENTHESIS,
+                                                                        \Exakat\Tasks\T_CLOSE_CURLY,
+                                                                        \Exakat\Tasks\T_SEMICOLON,
+                                                                        \Exakat\Tasks\T_CLOSE_BRACKET,
+                                                                        \Exakat\Tasks\T_CLOSE_TAG,
+                                                                        \Exakat\Tasks\T_COLON,
+                                                                        ))) {
                     $this->processNext();
-                    $index = $this->popExpression();
-
-                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EQUAL) {
-                        ++$this->id; // Skip =
-                        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA,
-                                                                                \Exakat\Tasks\T_CLOSE_PARENTHESIS,
-                                                                                \Exakat\Tasks\T_CLOSE_BRACKET,
-                                                                                ))) {
-                            $this->processNext();
-                        }
-                        $default = $this->popExpression();
-                    } else {
-                        ++$args_min;
-                        $default = 0;
-                    }
-                } else {
-                    $typehint = 0;
-                    $default  = 0;
-                    $nullable = 0;
-
-                    while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA,
-                                                                            \Exakat\Tasks\T_CLOSE_PARENTHESIS,
-                                                                            \Exakat\Tasks\T_CLOSE_CURLY,
-                                                                            \Exakat\Tasks\T_SEMICOLON,
-                                                                            \Exakat\Tasks\T_CLOSE_BRACKET,
-                                                                            \Exakat\Tasks\T_CLOSE_TAG,
-                                                                            \Exakat\Tasks\T_COLON,
-                                                                            ))) {
-                        $this->processNext();
-                    };
-                    $index = $this->popExpression();
-                }
-
+                };
+                $index = $this->popExpression();
+                
                 while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
                     if ($index === 0) {
                         $index = $this->addAtomVoid();
                     }
 
                     $index->rank = ++$rank;
-
-                    if ($nullable !== 0) {
-                        $this->addLink($index, $nullable, 'NULLABLE');
-                        $this->addLink($index, $typehint, 'TYPEHINT');
-                        $index->fullcode = '?'.$typehint->fullcode.' '.$index->fullcode;
-                    } elseif ($typehint !== 0) {
-                        $this->addLink($index, $typehint, 'TYPEHINT');
-                        $index->fullcode = $typehint->fullcode.' '.$index->fullcode;
-                    }
-
-                    if ($default !== 0) {
-                        $this->addLink($index, $default, 'DEFAULT');
-                        $index->fullcode .= ' = '.$default->fullcode;
-                        $default = 0;
-                    }
 
                     $this->addLink($arguments, $index, 'ARGUMENT');
                     $argumentsId[] = $index;
@@ -1933,7 +2041,7 @@ SQL;
                 }
             }
 
-            if ($index === 0 && $allowFinalVoid === false) {
+            if ($index === 0) {
                 $fullcode[] = ' ';
             } else {
                 
@@ -1945,19 +2053,6 @@ SQL;
                 $argumentsId[] = $index;
                 $this->argumentsId = $argumentsId; // This avoid overwriting when nesting functioncall
     
-                if ($nullable !== 0) {
-                    $this->addLink($index, $nullable, 'NULLABLE');
-                    $this->addLink($index, $typehint, 'TYPEHINT');
-                    $index->fullcode = '?'.$typehint->fullcode.' '.$index->fullcode;
-                } elseif ($typehint !== 0) {
-                    $this->addLink($index, $typehint, 'TYPEHINT');
-                    $index->fullcode = $typehint->fullcode.' '.$index->fullcode;
-                }
-    
-                if ($default !== 0) {
-                    $this->addLink($index, $default, 'DEFAULT');
-                    $index->fullcode .= ' = '.$default->fullcode;
-                }
                 $this->addLink($arguments, $index, 'ARGUMENT');
 
                 $fullcode[] = $index->fullcode;
@@ -2141,7 +2236,7 @@ SQL;
             $atom = 'Methodcallname';
         }
 
-        $functioncall = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), self::WITHOUT_TYPEHINT_SUPPORT);
+        $functioncall = $this->processArguments($atom, array(\Exakat\Tasks\T_CLOSE_PARENTHESIS));
         $argumentsFullcode       = $functioncall->fullcode;
         $arguments               = $functioncall;
 
@@ -4143,7 +4238,9 @@ SQL;
     private function processSign() {
         $signExpression = $this->tokens[$this->id][1];
         $code = $signExpression.'1';
-        while (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_PLUS, \Exakat\Tasks\T_MINUS))) {
+        while (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_PLUS, 
+                                                               \Exakat\Tasks\T_MINUS,
+                                                              ))) {
             ++$this->id;
             $signExpression = $this->tokens[$this->id][1].$signExpression;
             $code *= $this->tokens[$this->id][1].'1';
@@ -4151,7 +4248,7 @@ SQL;
         
         if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER ||
              $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DNUMBER) &&
-            $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
+             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
             $operand = $this->processNext();
 
             $operand->code     = $signExpression.$operand->code;
@@ -4417,6 +4514,7 @@ SQL;
                 $right = $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
+
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
@@ -4513,10 +4611,21 @@ SQL;
 
     private function processAssignation() {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals = array_merge($finals, array(\Exakat\Tasks\T_EQUAL, \Exakat\Tasks\T_PLUS_EQUAL, \Exakat\Tasks\T_AND_EQUAL, \Exakat\Tasks\T_CONCAT_EQUAL, \Exakat\Tasks\T_DIV_EQUAL, \Exakat\Tasks\T_MINUS_EQUAL, \Exakat\Tasks\T_MOD_EQUAL, \Exakat\Tasks\T_MUL_EQUAL, \Exakat\Tasks\T_OR_EQUAL, \Exakat\Tasks\T_POW_EQUAL, \Exakat\Tasks\T_SL_EQUAL, \Exakat\Tasks\T_SR_EQUAL, \Exakat\Tasks\T_XOR_EQUAL));
-        $id = $this->processOperator('Assignation', $finals);
-        
-        return $id;
+        $finals = array_merge($finals, array(\Exakat\Tasks\T_EQUAL, 
+                                             \Exakat\Tasks\T_PLUS_EQUAL, 
+                                             \Exakat\Tasks\T_AND_EQUAL, 
+                                             \Exakat\Tasks\T_CONCAT_EQUAL, 
+                                             \Exakat\Tasks\T_DIV_EQUAL, 
+                                             \Exakat\Tasks\T_MINUS_EQUAL, 
+                                             \Exakat\Tasks\T_MOD_EQUAL, 
+                                             \Exakat\Tasks\T_MUL_EQUAL, 
+                                             \Exakat\Tasks\T_OR_EQUAL, 
+                                             \Exakat\Tasks\T_POW_EQUAL, 
+                                             \Exakat\Tasks\T_SL_EQUAL, 
+                                             \Exakat\Tasks\T_SR_EQUAL, 
+                                             \Exakat\Tasks\T_XOR_EQUAL,
+                                             ));
+        return $this->processOperator('Assignation', $finals);
     }
 
     private function processCoalesce() {
@@ -4890,9 +4999,9 @@ SQL;
 
             assert(isset($D[$id])    , "Warning : forgotten atom $id in $this->filename : ".print_r($this->atoms[$id], true));
 
-            assert($D[$id] <= 1      , "Warning : too linked atom $id : ".$this->atoms[$id]->atom.PHP_EOL);
+            assert($D[$id] <= 1      , "Warning : too linked atom $id in $this->filename : ".$this->atoms[$id]->atom.PHP_EOL);
 
-            assert(isset($atom->line), "Warning : missing line atom $id : ".PHP_EOL);
+            assert(isset($atom->line), "Warning : missing line atom $id  in $this->filename : ".PHP_EOL);
 
             assert(isset($atom->code), "Warning : forgotten code for atom $id in $this->filename : ".print_r($this->atoms[$id], true));
 

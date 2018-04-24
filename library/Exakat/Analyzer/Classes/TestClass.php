@@ -39,7 +39,7 @@ class TestClass extends Analyzer {
         // all children level of heritage
         $this->atomIs('Class')
              ->analyzerIs('self')
-             ->goToAllChildren();
+             ->goToAllChildren(self::EXCLUDE_SELF);
         $this->prepareQuery();
     }
 }

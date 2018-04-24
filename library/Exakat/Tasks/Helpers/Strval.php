@@ -147,7 +147,10 @@ class Strval extends Plugin {
                 break;
 
             case 'Bitshift' :
-                if ($atom->code === '>>') {
+                if ((int) $extras['RIGHT']->noDelimiter <= 0) {
+                    // This would generate an error
+                    $atom->noDelimiter = '';
+                } elseif ($atom->code === '>>') {
                     $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter >> (int) $extras['RIGHT']->noDelimiter;
                 } elseif ($atom->code === '<<') {
                     $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter << (int) $extras['RIGHT']->noDelimiter;

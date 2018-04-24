@@ -46,11 +46,13 @@ GREMLIN
 g.V().hasLabel("Variable", "Globaldefinition").where( __.in("ANALYZED").has("analyzer", "Structures/GlobalInGlobal")).values('code');
 GREMLIN
 )->toArray();
-        
+
         $commons = array_intersect($uniqueGlobals, $globalvar);
         $uniqueGlobals = array_values(array_diff($uniqueGlobals, $globalvar, $implicitvar));
+        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
 
         $this->atomIs('Globaldefinition')
+             ->codeIsNot($superglobals, self::TRANSLATE)
              ->codeIs($uniqueGlobals, self::NO_TRANSLATE)
              ->codeIsNot($globalvar, self::NO_TRANSLATE)
              ->savePropertyAs('code', 'theGlobal')
