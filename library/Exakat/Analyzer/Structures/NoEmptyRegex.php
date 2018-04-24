@@ -25,9 +25,9 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoEmptyRegex extends Analyzer {
-    public function analyze() {
-        $pregFunctions = array('\\preg_match_all', '\\preg_match', '\\preg_replace', '\\preg_replace_callback', '\\preg_relace_callback_array');
+    public static $pregFunctions = array('\\preg_match_all', '\\preg_match', '\\preg_replace', '\\preg_replace_callback', '\\preg_relace_callback_array');
 
+    public function analyze() {
         // preg_match(''.$b, $d, $d); Empty delimiter
         $this->atomFunctionIs($pregFunctions)
              ->outWithRank('ARGUMENT', 0)
