@@ -27,13 +27,22 @@ use Exakat\Analyzer\Analyzer;
 
 class pregOptionE extends Analyzer {
         const FETCH_DELIMITER = <<<GREMLIN
-sideEffect{ 
+filter{ 
     base = it.get().value("noDelimiter").replaceAll("\\\\s", "");
-    delimiter = base[0];
-    if (delimiter == '\\\\') {
-        delimiter = base[1];
+    
+    if (base.length() == 0) {
+        false;
+    } else {
+        delimiter = base[0];
+        if (delimiter == '\\\\') {
+            if (base.length() == 1) {
+                false;
+            } else {
+                delimiter = base[1];
+            }
+        }
+        true;
     }
-
 }
 GREMLIN;
         
