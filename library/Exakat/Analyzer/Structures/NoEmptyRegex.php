@@ -29,7 +29,7 @@ class NoEmptyRegex extends Analyzer {
 
     public function analyze() {
         // preg_match(''.$b, $d, $d); Empty delimiter
-        $this->atomFunctionIs($pregFunctions)
+        $this->atomFunctionIs(self::$pregFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->outIsIE('CONCAT')
              ->is('rank', 0) // useful if previous is used
@@ -39,7 +39,7 @@ class NoEmptyRegex extends Analyzer {
         $this->prepareQuery();
 
         // preg_match('a'.$b, $d, $d); Non-alpha numerical delimiter
-        $this->atomFunctionIs($pregFunctions)
+        $this->atomFunctionIs(self::$pregFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->outIsIE('CONCAT')
              ->is('rank', 0) // useful if previous is used
