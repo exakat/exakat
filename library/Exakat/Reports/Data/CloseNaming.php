@@ -92,6 +92,7 @@ SQL
 
         // Group swap : aka confArray and arrayConf
         foreach($sizes as $size => $vars) {
+            if ($size < 5) { continue; }
             foreach($vars as $variable) {
                 $r = array_filter( $vars, function($x) use ($variable) { return $this->groupSwap($x, $variable); });
                 if (!empty($r)) {
@@ -104,10 +105,13 @@ SQL
     }
 
     private function groupSwap($a, $b) {
-        $n = strlen($a) - 2;
+        $n = strlen($a) - 3;
         if (strpos($b, $a[1]) === false) { return false; }
-        for($i = 1; $i < $n; $i++) {
-            $c = '$'.substr($a, $i+1).substr($a, 1, $i);
+        for($i = 2; $i < $n; $i++) {
+            $d = substr($a, $i + 1);
+            $e = substr($a, 1, $i);
+            if ($d === $e) { continue; }
+            $c = '$'.$d.$e;
             if ($c === $b) {
                 return true;
             }
