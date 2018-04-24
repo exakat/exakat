@@ -1,4 +1,4 @@
-Version 1.2.4 (Yuan Tiangang, coming up)
+Version 1.2.5 (Li Yuan, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,23 @@ Version 1.2.4 (Yuan Tiangang, coming up)
 + Tokenizer
     + 
 
-Version 1.2.3 (Yuan Tiangang, 2018-04-09)
+Version 1.2.4 (Li Chunfeng, 2018-04-23)
++ Architecture
+    + Now fail with explicit message for memory running out
++ Report
+    + Ambassador : Updated 'confusing variables' report
++ Analyzer
+    + Upgraded analysis : Could be short assignment
+    + Upgraded analysis : Could be static
+    + Upgraded analysis : Fail Substr Comparison (handles constants)
+    + Checked unit tests : 2796 / 2801 test pass (99% pass). 
++ Tokenizer
+    + Added propagation of constants when value can be processed
+    + Introduced 'Parameter' token, to differentiate with Variable
+    + Fixed syntax highlighting
+    + Fixed a bug with negative bitshift
+
+Version 1.2.3 (Yuan Tiangang, 2018-04-16)
 + Architecture
     + New append for logs
 + Report
@@ -26,7 +42,7 @@ Version 1.2.3 (Yuan Tiangang, 2018-04-09)
 + Tokenizer
     + Removed double definition for functioncalls
 
-Version 1.2.2 (Yin Kaishan, 2018-04-02)
+Version 1.2.2 (Yin Kaishan, 2018-04-09)
 + Architecture
     + Cleaned doctor so it works even without requirements
     + Fixed special chars with git URL
