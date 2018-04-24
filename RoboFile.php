@@ -271,6 +271,7 @@ LICENCE;
                          'media/dependencies', 
                          'media/faceted', 
                          'media/clang', 
+                         'media/simpletable', 
                          'server', 
                          'vendor');
         foreach($folders as $folder) {
