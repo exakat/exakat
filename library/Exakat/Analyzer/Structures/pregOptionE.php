@@ -38,7 +38,7 @@ filter{
             if (base.length() == 1) {
                 false;
             } else {
-                delimiter = base[1];
+                delimiter = "\\\\\\\\" + base[1];
             }
         }
         true;
