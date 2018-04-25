@@ -4,15 +4,20 @@ const PIPEFILE = '/tmp/api';
 
 $initTime = microtime(true);
 
+if (!isset($_REQUEST['json'])) {
+    serverLog("unknown command : empty");
+    die( 'Exakat server (missing command)');
+}
+
 if (empty($_REQUEST['json'])) {
     serverLog("unknown command : empty");
-    die( 'Exakat server (unknown command)');
+    die( 'Exakat server (empty command)');
 }
 
 $commands = json_decode($_REQUEST['json']);
 if (empty($commands)) {
     serverLog("unknown command : empty");
-    die( 'Exakat server (unknown command)');
+    die( 'Exakat server (unknown commands)');
 }
 $command = array_shift($commands);
 
