@@ -11,6 +11,8 @@ Label : PROJECT
           5
           Label : ARGUMENT
             7
+            Label : NAME
+              7
           Label : BLOCK
             8
             Label : EXPRESSION
@@ -26,9 +28,7 @@ Label : PROJECT
               Label : ELSE
                 15
                 Label : ARGUMENT
-                  9
-                  Label : CODE
-                    16
+                  16
               Label : THEN
                 12
           Label : NAME

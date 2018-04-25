@@ -41,39 +41,35 @@ Label : PROJECT
               17
               Label : ARGUMENT
                 18
-                Label : CODE
+                Label : ARGUMENT
                   19
-                  Label : ARGUMENT
-                    20
-                  Label : NAME
-                    19
+                Label : NAME
+                  18
             Label : VARIABLE
               5
         Label : EXPRESSION
           15
           Label : LEFT
-            22
+            21
             Label : NAME
-              22
+              21
             Label : ARGUMENT
               10
               Label : MEMBER
-                24
-              Label : OBJECT
                 23
+              Label : OBJECT
+                22
             Label : ARGUMENT
               13
           Label : RIGHT
-            26
+            25
             Label : INDEX
               17
               Label : ARGUMENT
                 18
-                Label : CODE
+                Label : ARGUMENT
                   19
-                  Label : ARGUMENT
-                    20
-                  Label : NAME
-                    19
+                Label : NAME
+                  18
             Label : VARIABLE
-              25
+              24

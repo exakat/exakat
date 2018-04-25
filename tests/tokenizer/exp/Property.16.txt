@@ -20,6 +20,6 @@ Label : PROJECT
               Label : RIGHT
                 11
                 Label : CONCAT
-                  13
+                  10
             Label : PUBLIC
               7

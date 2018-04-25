@@ -31,5 +31,3 @@ Label : PROJECT
                         11
                     Label : CONCAT
                       15
-            Label : ARGUMENT
-              17

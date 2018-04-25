@@ -31,8 +31,6 @@ Label : PROJECT
                         15
                       Label : VALUE
                         17
-                    Label : ARGUMENT
-                      8
               Label : EXPRESSION
                 7
                 Label : EXPRESSION

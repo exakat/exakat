@@ -11,6 +11,8 @@ Label : PROJECT
           5
           Label : ARGUMENT
             6
+            Label : NAME
+              6
           Label : BLOCK
             8
             Label : EXPRESSION
@@ -21,6 +23,8 @@ Label : PROJECT
           5
           Label : ARGUMENT
             6
+            Label : NAME
+              6
           Label : BLOCK
             8
             Label : EXPRESSION
@@ -31,6 +35,8 @@ Label : PROJECT
           5
           Label : ARGUMENT
             6
+            Label : NAME
+              6
           Label : BLOCK
             8
             Label : EXPRESSION
@@ -43,6 +49,8 @@ Label : PROJECT
           5
           Label : ARGUMENT
             6
+            Label : NAME
+              6
           Label : BLOCK
             8
             Label : EXPRESSION

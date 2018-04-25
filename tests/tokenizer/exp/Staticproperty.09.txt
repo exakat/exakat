@@ -61,6 +61,8 @@ Label : PROJECT
             24
             Label : ARGUMENT
               26
+              Label : NAME
+                26
             Label : BLOCK
               17
               Label : EXPRESSION
@@ -79,6 +81,8 @@ Label : PROJECT
             33
             Label : ARGUMENT
               26
+              Label : NAME
+                26
             Label : BLOCK
               17
               Label : EXPRESSION

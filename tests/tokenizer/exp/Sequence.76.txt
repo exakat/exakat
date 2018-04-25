@@ -135,5 +135,3 @@ Label : PROJECT
                         74
                     Label : NAME
                       72
-            Label : ARGUMENT
-              80

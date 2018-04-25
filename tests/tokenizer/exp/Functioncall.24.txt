@@ -51,14 +51,12 @@ Label : PROJECT
           10
           Label : LEFT
             5
+            Label : NAME
+              5
             Label : ARGUMENT
               18
             Label : ARGUMENT
               19
-            Label : ARGUMENT
-              6
-            Label : NAME
-              5
           Label : RIGHT
             11
             Label : NAME

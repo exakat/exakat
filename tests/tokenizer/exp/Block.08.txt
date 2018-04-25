@@ -37,8 +37,6 @@ Label : PROJECT
                       39
                     Label : VALUE
                       42
-                  Label : ARGUMENT
-                    18
               Label : EXPRESSION
                 5
                 Label : CONDITION

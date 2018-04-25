@@ -41,6 +41,8 @@ Label : PROJECT
               5
               Label : DEFAULT
                 12
+              Label : NAME
+                5
             Label : BLOCK
               10
               Label : EXPRESSION
@@ -55,6 +57,8 @@ Label : PROJECT
               11
               Label : DEFAULT
                 13
+              Label : NAME
+                11
             Label : BLOCK
               10
               Label : EXPRESSION
@@ -85,6 +89,8 @@ Label : PROJECT
             5
             Label : DEFAULT
               12
+            Label : NAME
+              5
           Label : BLOCK
             10
             Label : EXPRESSION
@@ -97,6 +103,8 @@ Label : PROJECT
             11
             Label : DEFAULT
               13
+            Label : NAME
+              11
           Label : BLOCK
             10
             Label : EXPRESSION

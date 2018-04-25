@@ -45,8 +45,6 @@ Label : PROJECT
                             19
                           Label : VALUE
                             20
-                      Label : ARGUMENT
-                        6
             Label : EXPRESSION
               14
               Label : RETURN

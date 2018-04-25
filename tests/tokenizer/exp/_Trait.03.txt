@@ -31,8 +31,6 @@ Label : PROJECT
           17
           Label : DEFINITION
             18
-          Label : DEFINITION
-            18
             Label : ARGUMENT
               11
             Label : NAME

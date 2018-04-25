@@ -15,6 +15,8 @@ Label : PROJECT
             7
             Label : ARGUMENT
               9
+              Label : NAME
+                9
               Label : TYPEHINT
                 8
             Label : BLOCK
@@ -47,6 +49,8 @@ Label : PROJECT
             7
             Label : ARGUMENT
               9
+              Label : NAME
+                9
               Label : TYPEHINT
                 18
             Label : BLOCK
@@ -79,6 +83,8 @@ Label : PROJECT
             7
             Label : ARGUMENT
               9
+              Label : NAME
+                9
               Label : TYPEHINT
                 19
             Label : BLOCK
@@ -111,6 +117,8 @@ Label : PROJECT
             7
             Label : ARGUMENT
               9
+              Label : NAME
+                9
               Label : TYPEHINT
                 20
             Label : BLOCK
@@ -143,6 +151,8 @@ Label : PROJECT
             7
             Label : ARGUMENT
               9
+              Label : NAME
+                9
               Label : TYPEHINT
                 21
             Label : BLOCK

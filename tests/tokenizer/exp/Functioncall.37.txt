@@ -11,5 +11,3 @@ Label : PROJECT
           5
           Label : ARGUMENT
             6
-            Label : CODE
-              7

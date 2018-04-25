@@ -30,9 +30,7 @@ Label : PROJECT
           Label : ELSE
             12
             Label : ARGUMENT
-              9
-              Label : CODE
-                13
+              13
           Label : THEN
             11
         Label : EXPRESSION
@@ -44,13 +42,11 @@ Label : PROJECT
           Label : ELSE
             12
             Label : ARGUMENT
-              9
-              Label : CODE
-                16
-                Label : CONCAT
-                  17
-                Label : CONCAT
-                  18
+              16
+              Label : CONCAT
+                17
+              Label : CONCAT
+                18
           Label : THEN
             8
             Label : ARGUMENT

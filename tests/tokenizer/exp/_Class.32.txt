@@ -14,7 +14,11 @@ Label : PROJECT
           Label : PPP
             7
             Label : PPP
-              12
+              9
+              Label : LEFT
+                14
+              Label : RIGHT
+                16
             Label : PPP
               9
               Label : LEFT
@@ -22,10 +26,6 @@ Label : PROJECT
               Label : RIGHT
                 11
             Label : PPP
-              9
-              Label : LEFT
-                14
-              Label : RIGHT
-                16
+              12
             Label : VAR
               7

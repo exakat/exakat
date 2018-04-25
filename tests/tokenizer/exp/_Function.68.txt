@@ -25,12 +25,16 @@ Label : PROJECT
                     14
             Label : ARGUMENT
               11
+              Label : NAME
+                11
               Label : TYPEHINT
                 9
             Label : ARGUMENT
               14
               Label : DEFAULT
                 15
+              Label : NAME
+                14
               Label : TYPEHINT
                 12
             Label : NAME
@@ -49,12 +53,16 @@ Label : PROJECT
                     24
             Label : ARGUMENT
               11
+              Label : NAME
+                11
               Label : TYPEHINT
                 9
             Label : ARGUMENT
               14
               Label : DEFAULT
                 15
+              Label : NAME
+                14
               Label : TYPEHINT
                 12
             Label : NAME
@@ -63,6 +71,8 @@ Label : PROJECT
             26
             Label : ARGUMENT
               11
+              Label : NAME
+                11
               Label : TYPEHINT
                 9
             Label : BLOCK
@@ -93,12 +103,16 @@ Label : PROJECT
                     24
             Label : ARGUMENT
               11
+              Label : NAME
+                11
               Label : TYPEHINT
                 9
             Label : ARGUMENT
               14
               Label : DEFAULT
                 15
+              Label : NAME
+                14
               Label : TYPEHINT
                 12
             Label : NAME

@@ -26,8 +26,6 @@ Label : PROJECT
             Label : RIGHT
               12
               Label : ARGUMENT
-                7
-                Label : CODE
-                  13
+                13
     Label : EXPRESSION
       15
