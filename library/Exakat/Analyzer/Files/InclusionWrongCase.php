@@ -73,6 +73,7 @@ GREMLIN
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->atomIs('Concatenation')
+             ->has('noDelimiter')
              // Ignore functioncall that are not \dirname
              ->raw(<<<GREMLIN
 not(where( __.repeat(__.out()).emit().times($MAX_LOOPING)
