@@ -27,6 +27,7 @@ $applications = array(
     'Dolphin'                    => array('url' => 'https://www.boonex.com/', ),
     'Edusoho'                    => array('url' => 'https://www.edusoho.com/en', ),
     'ExpressionEngine'           => array('url' => 'https://expressionengine.com/', ),
+    'FuelCMS'                    => array('url' => 'https://https://www.getfuelcms.com/', ),
     'LiveZilla'                  => array('url' => 'https://www.livezilla.net/home/en/', ),
     'Mautic'                     => array('url' => 'https://www.mautic.org/', ),
     'MediaWiki'                  => array('url' => 'https://www.mediawiki.org/', ),
