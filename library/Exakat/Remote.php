@@ -45,7 +45,7 @@ class Remote {
     }
 
     private function sendWithHTTP($json) {
-        $URLload = 'http://'.$this->bits['host'].':'.$this->bits['port'].'/queue/?json='.$json;
+        $URLload = 'http://'.$this->bits['host'].':'.$this->bits['port'].'/?json='.$json;
         $html = file_get_contents($URLload);
         
         return $html;

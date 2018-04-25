@@ -57,62 +57,12 @@ class Queue extends Tasks {
 
             return;
         }
-
-        if ($this->config->project !== 'default' && !empty($this->config->repository)) {
-            display('Init project '.$this->config->project.' to with '.$this->config->repository);
-            $queuePipe = fopen($this->pipefile, 'w');
-            if (is_resource($queuePipe)) {
-                fwrite($queuePipe, 'init '.$this->config->project.' '.$this->config->repository.PHP_EOL);
-                fclose($queuePipe);
-            } else {
-                print "Couldn't write to queue\n";
-            }
-        } elseif ($this->config->project !== 'default' && $this->config->format !== null) {
-            display('Report project '.$this->config->project.' to with format '.$this->config->format);
-            $queuePipe = fopen($this->pipefile, 'w');
-            if (is_resource($queuePipe)) {
-                fwrite($queuePipe, 'report '.$this->config->project.' '.$this->config->format.PHP_EOL);
-                fclose($queuePipe);
-            } else {
-                print "Couldn't write to queue\n";
-            }
-        } elseif ($this->config->project !== 'default') {
-            if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/report/')) {
-                display('Cleaning the project first');
-                $clean = new Clean($this->gremlin, $this->config);
-                $clean->run();
-            }
-
-            display('Adding project '.$this->config->project.' to the queue');
-            $queuePipe = fopen($this->pipefile, 'w');
-            if (is_resource($queuePipe)) {
-                fwrite($queuePipe, 'project '.$this->config->project.PHP_EOL);
-                fclose($queuePipe);
-            } else {
-                print "Couldn't write to queue\n";
-            }
-        } elseif (!empty($this->config->filename)) {
-            if (!file_exists($this->config->projects_root.'/projects/onepage/code/'.$this->config->filename.'.php')) {
-                throw new NoSuchFile('No such file "'.$this->config->filename.'" in /in/ folder');
-            }
-
-            if (file_exists($this->config->projects_root.'/projects/onepage/reports/'.$this->config->filename.'.json')) {
-                throw new ReportAlreadyDone($this->config->filename);
-            }
-
-            display('Adding file '.$this->config->project.' to the queue');
-
-            $queuePipe = fopen($this->pipefile, 'w');
-            if (is_resource($queuePipe)) {
-                fwrite($queuePipe, 'onepage '.$this->config->filename.PHP_EOL);
-                fclose($queuePipe);
-            } else {
-                print "Couldn't write to queue\n";
-            }
-            
-        }
-
-        display('Done');
+        
+        $queue = $this->config->commandlineJson();
+        display('Ping '.$queue[0]);
+        $queuePipe = fopen($this->pipefile, 'w');
+        fwrite($queuePipe, "$queue\n");
+        fclose($queuePipe);
     }
 }
 

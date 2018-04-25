@@ -4,11 +4,34 @@ const PIPEFILE = '/tmp/api';
 
 $initTime = microtime(true);
 
-$commands = explode('/', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
-unset($commands[0]);
+if (empty($_REQUEST['json'])) {
+    serverLog("unknown command : empty");
+    die( 'Exakat server (unknown command)');
+}
+
+$commands = json_decode($_REQUEST['json']);
+if (empty($commands)) {
+    serverLog("unknown command : empty");
+    die( 'Exakat server (unknown command)');
+}
 $command = array_shift($commands);
 
-$orders = array('stop', 'init', 'status', 'report', 'stats', 'dashboard');
+$orders = array('stop', 
+
+                'ping',
+
+                'init', 
+                'project', 
+                'fetch', 
+
+                'remove', 
+                'report', 
+                'doctor', 
+
+                'status', 
+                'stats', 
+                'dashboard',
+                );
 
 if (!in_array($command, $orders)) {
     serverLog("unknown command : $command");
@@ -29,25 +52,31 @@ function stop($args) {
     echo "<p>Shutting down server (pid : $pid)</p>";
     ob_flush();
 
-    unlink(__FILE__);
+    if (file_exists(__FILE__)) {
+        unlink(__FILE__);
+    }
 
     exec('kill '.getmypid());
     // This is killed.
 }
 
 function init($args) {
-    if (isset($_REQUEST['vcs'])) {
-        $url = parse_url($_REQUEST['vcs']);
+    if ($id = array_search('-R', $args)) {
+        print_r($args);
+        
+        $url = parse_url($args[$id + 1]);
         if (!isset($url['scheme'], $url['host'], $url['path'])) {
             error('Malformed VCS', '');
         }
         
         $vcs = unparse_url($url);
 
-        $project = autoprojectname();
+        if (($id = array_search('-p', $args)) === false || 
+            !($project = $args[$id + 1])) {
+            $project = autoprojectname();
+        }
 
-        shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.$vcs);
-        shell_exec('__PHP__ __EXAKAT__ queue -p '.$project);
+        shell_exec('__PHP__ __EXAKAT__ queue init -p '.$project.' -R '.$vcs);
         serverLog("init : $project $vcs ".date('r'));
 
         echo json_encode(array('project' => $project, 
@@ -57,67 +86,102 @@ function init($args) {
     }
 }
 
-function status($args) {
-    $uuid = checksUUID($args[0]);
-    
-    if ($uuid === false) {
-        error('Unknown UUID');
-    }
-    
-    if (!file_exists(__DIR__.'/'.$args[0])) {
-	    error('No such UUID');
-    } elseif (file_exists(__DIR__.'/'.$args[0].'/report.zip')) {
-        $status = array(
-            'Status'       => 'finished'
-        );
-        echo json_encode($status);
+function ping($args) {
+    echo 'pong';
+}
+
+function project($args) {
+    if (($id = array_search('-p', $args)) !== false) {
+        $project = $args[$id + 1];
+
+        print shell_exec('__PHP__ __EXAKAT__ queue project -p '.$project);
+        serverLog("project : $project ".date('r'));
+
+        echo json_encode(array('project' => $project, 
+                               'start' => date('r')));
     } else {
-        $status = array(
-            'Status'       => 'queued'
-        );
-        echo json_encode($status);
+        error('missing Project '.$id, '');
+    }
+}
+
+function remove($args) {
+    if (($id = array_search('-p', $args)) !== false) {
+        $project = $args[$id + 1];
+
+        print shell_exec('__PHP__ __EXAKAT__ queue remove -p '.$project);
+        serverLog("remove : $project ".date('r'));
+
+        echo json_encode(array('project' => $project, 
+                               'start' => date('r')));
+    } else {
+        error('missing Project '.$id, '');
     }
 }
 
 function report($args) {
-    $uuid = checksUUID($args[0]);
-    
-    if ($uuid === false) {
-        error('Unknown UUID');
-    }
-    
-    $reportPath = __DIR__.'/'.$uuid.'/report.zip';
-    if (!file_exists($reportPath)) {
-	    error('No such UUID');
+    if (($id = array_search('-p', $args)) !== false) {
+        $project = $args[$id + 1];
+
+        $id = array_search('-format', $args);
+        $format = $args[$id + 1];
+
+        shell_exec('__PHP__ __EXAKAT__ queue report -p '.$project.' -format '.$format);
+        serverLog("remove : $project ".date('r'));
+
+        echo json_encode(array('project' => $project, 
+                               'start' => date('r')));
     } else {
-        header("Pragma: public");
-        header("Expires: 0");
-        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-        header("Cache-Control: public");
-        header("Content-Description: File Transfer");
-        header("Content-type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=\"report.zip\"");
-        header("Content-Transfer-Encoding: binary");
-        header("Content-Length: ".filesize($reportPath));
-        ob_end_flush();
-        readfile($reportPath);
-        die();
+        error('missing Project '.$id, '');
+    }
+}
+
+function doctor($args) {
+    if (($id = array_search('-p', $args)) !== false) {
+        $project = $args[$id + 1];
+
+        shell_exec('__PHP__ __EXAKAT__ queue doctor -p '.$project);
+        serverLog("doctor : $project ".date('r'));
+
+        echo json_encode(array('doctor' => $project, 
+                               'start'  => date('r'),
+                               ));
+    } else {
+        shell_exec('__PHP__ __EXAKAT__ queue doctor');
+        serverLog('doctor');
+
+        echo json_encode(array('doctor' => $project, 
+                               'start' => date('r')));
+    }
+}
+
+function status($args) {
+    print "Status\n";
+}
+
+function fetch($args) {
+    if (($id = array_search('-p', $args)) !== false) {
+        $project = $args[$id + 1];
+
+        $id = array_search('-format', $args);
+        $format = $args[$id + 1];
+        
+        if (!file_exists("projects/$project/dump.sqlite")) {
+            echo json_encode(array('error' => 'No dump.sqlite available', 
+                                   'start' => date('r')));
+        }
+
+        shell_exec("cd projects/$project/; zip -r dump.zip dump.sqlite; ");
+        serverLog("fetch : $project ".date('r'));
+        $fp = fopen("projects/$project/dump.zip", 'r');
+        fpassthru($fp);
+        unlink("projects/$project/dump.zip");
+    } else {
+        error('missing Project '.$id, '');
     }
 }
 
 function stats($args) {
-    $uuid = checksUUID($args[0]);
-    
-    if ($uuid === false) {
-        error('Unknown UUID');
-    }
-    
-    $reportPath = __DIR__.'/'.$uuid.'/stats.json';
-    if (!file_exists($reportPath)) {
-	    error('No such UUID');
-    } else {
-        readfile($reportPath);
-    }
+    print "Stats";
 }
 
 function dashboard($args) {

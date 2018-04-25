@@ -24,6 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Themes;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
@@ -52,7 +53,7 @@ class Project extends Tasks {
             $this->reports = makeArray($config->project_reports);
         }
     }
-
+    
     public function run() {
         $project = $this->config->project;
         
@@ -70,6 +71,8 @@ class Project extends Tasks {
         $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $clean->run();
         $this->datastore = new Datastore($this->config);
+        // Reset datastore for the others
+        Analyzer::$datastore = $this->datastore;
 
         display("Search for external libraries".PHP_EOL);
         if (file_exists($this->config->projects_root.'/projects/'.$project.'/config.cache')) {
@@ -133,7 +136,8 @@ class Project extends Tasks {
         $this->logTime('CleanDb');
         $this->addSnitch(array('step'    => 'Clean DB',
                                'project' => $this->config->project));
-
+        $this->gremlin->resetConnection();
+        
         display("Running files".PHP_EOL);
         $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
@@ -204,7 +208,9 @@ class Project extends Tasks {
         }
 
         display("Reported project".PHP_EOL);
-
+        
+        // Reset cache from Themes
+        Themes::resetCache();
         $this->logTime('Final');
         $this->removeSnitch();
         display("End" . PHP_EOL);

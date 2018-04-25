@@ -94,6 +94,8 @@ class Load extends Tasks {
     private $line       = 0;
 
     private $links = array();
+    
+    private $logTimeFile   = null;
 
     private $sequences = array();
 
@@ -199,9 +201,6 @@ class Load extends Tasks {
     static public $PROP_GLOBALVAR   = array('Array');
     static public $PROP_BINARYSTRING= array('String', 'Heredoc');
     static public $PROP_ROOT        = array('File');
-
-// Refactoring under way
-//    static public $PROP_OPTIONS = array();
 
     static public $TOKENS = array(
                      ';'  => \Exakat\Tasks\T_SEMICOLON,
@@ -484,26 +483,25 @@ SQL;
         }
 
         $this->checkTokenLimit();
-
+        
+        // Reset Atom. 
+        Atom::resetAtomCount();
         $this->id0 = $this->addAtom('Project');
         $this->id0->code      = 'Whole';
         $this->id0->atom      = 'Project';
         $this->id0->fullcode  = $this->config->project;
         $this->id0->token     = 'T_WHOLE';
 
-        if (static::$client === null) {
-            $client = $this->config->loader;
-
-            if (!in_array($client, $this->loaderList)) {
-                throw new NoSuchLoader($client, $this->loaderList);
-            }
-
-            display('Loading with '.$client.PHP_EOL);
-
-            $client = '\\Exakat\\Loader\\'.$client;
-            static::$client = new $client($this->gremlin, $this->config, $this->plugins);
+        // Restart the connexion each time
+        $client = $this->config->loader;
+        if (!in_array($client, $this->loaderList)) {
+            throw new NoSuchLoader($client, $this->loaderList);
         }
+        display('Loading with '.$client.PHP_EOL);
+        $client = '\\Exakat\\Loader\\'.$client;
+        static::$client = new $client($this->gremlin, $this->config, $this->plugins);
 
+        // Cleaning the databases
         $this->datastore->cleanTable('tokenCounts');
         $this->datastore->cleanTable('dictionary');
         $this->logTime('Init');
@@ -956,7 +954,7 @@ SQL;
         $this->addLink($try, $block, 'BLOCK');
 
         $rank = 0;
-        $fullcodeCatch = array();
+        $fullcode = array();
         while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CATCH) {
             $catchId = $this->id + 1;
             ++$this->id; // Skip catch
@@ -1001,7 +999,7 @@ SQL;
             $catch->rank     = ++$rank;
 
             $this->addLink($try, $catch, 'CATCH');
-            $fullcodeCatch[] = $catch->fullcode;
+            $fullcode[] = $catch->fullcode;
         }
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_FINALLY) {
@@ -1021,7 +1019,7 @@ SQL;
         }
 
         $try->code     = $this->tokens[$current][1];
-        $try->fullcode = $this->tokens[$current][1].static::FULLCODE_BLOCK.implode('', $fullcodeCatch).( isset($finallyId) ? $finally->fullcode : '');
+        $try->fullcode = $this->tokens[$current][1].static::FULLCODE_BLOCK.implode('', $fullcode).( isset($finallyId) ? $finally->fullcode : '');
         $try->line     = $this->tokens[$current][2];
         $try->token    = $this->getToken($this->tokens[$current][0]);
         $try->count    = $rank;
@@ -5345,10 +5343,10 @@ SQL;
     }
 
     private function logTime($step) {
-        static $log, $begin, $end, $start;
+        static $begin, $end, $start;
 
-        if ($log === null) {
-            $log = fopen($this->config->projects_root.'/projects/'.$this->config->project.'/log/load.timing.csv', 'w+');
+        if ($this->logTimeFile === null) {
+            $this->logTimeFile = fopen($this->config->projects_root.'/projects/'.$this->config->project.'/log/load.timing.csv', 'w+');
         }
 
         $end = microtime(true);
@@ -5357,7 +5355,7 @@ SQL;
             $start = $end;
         }
 
-        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start).PHP_EOL);
+        fwrite($this->logTimeFile, $step."\t".($end - $begin)."\t".($end - $start).PHP_EOL);
         $begin = $end;
     }
     
@@ -5365,6 +5363,7 @@ SQL;
         static $anonymous = 'a';
         
         assert(in_array($type, array('class', 'function')), 'Classes and Functions are the only anonymous');
+
         return $type.'@'.++$anonymous;
     }
 }

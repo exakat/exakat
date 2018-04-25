@@ -64,6 +64,8 @@ class SplitGraphson {
     private $datastore = null;
     
     public function __construct($gremlin, $config, $plugins) {
+        self::$count = -1;
+        
         $this->config = $config;
         
         $this->gsneo4j = $gremlin;

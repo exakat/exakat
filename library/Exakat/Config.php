@@ -189,6 +189,7 @@ class Config {
         $id = array_search('-remote', $return);
         unset($return[$id]);
         unset($return[$id + 1]);
+        unset($return[0]);
         return json_encode(array_values($return));
     }
 }

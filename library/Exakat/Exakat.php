@@ -40,14 +40,17 @@ class Exakat {
     public function execute(Config $config) {
         if ($config->remote !== 'none') {
             $json = $config->commandLineJson();
-            
+
             $class = $config->remote;
             $remote = new Remote($config->remotes[$config->remote]);
             
             $res = $remote->send($json);
             if ($config->command === 'fetch') {
-                file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.sqlite', $res);
-                print "put ".strlen($res)." into ".$config->projects_root.'/projects/'.$config->project.'/dump.sqlite'."\n";
+                file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.zip', $res);
+                unlink($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
+                shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; unzip dump.zip');
+                unlink($config->projects_root.'/projects/'.$config->project.'/dump.zip');
+                print "Fetched\n";
             } else {
                 var_dump($res);
             }

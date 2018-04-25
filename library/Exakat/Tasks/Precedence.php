@@ -152,11 +152,14 @@ class Precedence {
         $php = new Phpexec($version, $config->{'php'.str_replace('.', '', $config->phpversion)});
         $tokens = array_flip($php->getTokens());
 
-        foreach($this->allTokens as $name) {
-            if (!isset($tokens[$name])) {
-                $tokens[$name] = -1;
+        if (!defined('exakat\tasks\T_REQUIRE_ONCE')) {
+            foreach($this->allTokens as $name) {
+                if (!isset($tokens[$name])) {
+                    $tokens[$name] = -1;
+                }
+            
+                define('Exakat\\Tasks\\'.$name, $tokens[$name]);
             }
-            define('Exakat\\Tasks\\'.$name, $tokens[$name]);
         }
 
         foreach($this->definitions as $name => $priority) {

@@ -97,9 +97,8 @@ class Jobqueue extends Tasks {
             $jobkey = key($queue);
             
             if(!empty($job)) {
-                print $job.PHP_EOL;
                 
-                $command = json_decode($job);
+                $command = json_decode(trim($job));
                 
                 if ($command === null) {
                     $this->log('Unknown command : '.$job."\t".time()."\n");
@@ -108,7 +107,7 @@ class Jobqueue extends Tasks {
                     continue;
                 }
                 
-                print_r($command);
+                $command = array_merge(['exakat'], $command);
                 if ($command[1] === 'init') {
                     $this->processInit($command);
                 } elseif ($command[1] === 'project') {

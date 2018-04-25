@@ -28,6 +28,8 @@ use Exakat\Exceptions\NoSuchThema;
 class Themes {
     private static $sqlite = null;
     private $phar_tmp = null;
+
+    static private $instanciated = array();
     
     public function __construct($path) {
         if (substr($path, 0, 4) == 'phar') {
@@ -347,14 +349,16 @@ SQL;
         return $r;
     }
 
+    public static function resetCache() {
+        self::$instanciated = array();
+    }
+    
     public function getInstance($name, $gremlin = null, $config = null) {
-        static $instanciated = array();
-        
         if ($analyzer = $this->getClass($name)) {
-            if (!isset($instanciated[$analyzer])) {
-                $instanciated[$analyzer] = new $analyzer($gremlin, $config);
+            if (!isset(self::$instanciated[$analyzer])) {
+                self::$instanciated[$analyzer] = new $analyzer($gremlin, $config);
             }
-            return $instanciated[$analyzer];
+            return self::$instanciated[$analyzer];
         } else {
             display( 'No such class as "' . $name . '"'.PHP_EOL);
             return null;
