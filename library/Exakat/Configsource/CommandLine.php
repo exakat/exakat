@@ -112,6 +112,7 @@ class CommandLine extends Config {
                               'upgrade'       => 1,
                               'codacy'        => 1,
                               'fetch'         => 1,
+                              'proxy'         => 1,
                               );
 
     public function __construct() {

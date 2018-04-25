@@ -78,30 +78,35 @@ function init($args) {
             !($project = $args[$id + 1])) {
             $project = autoprojectname();
         }
+        
+        $host = getHost($project);
+        
+        print "Sending $project to $host\n";
+        
+        print $URLload = $host.'/?json='.json_encode(array_merge(['init'], $args));
+        $html = file_get_contents($URLload);
 
-        shell_exec('__PHP__ __EXAKAT__ queue init -p '.$project.' -R '.$vcs);
-        serverLog("init : $project $vcs ".date('r'));
-
-        echo json_encode(array('project' => $project, 
-                               'start' => date('r')));
+        print $html;
     } else {
         error('Missing VCS/code', '');
     }
 }
 
 function ping($args) {
-    echo 'pong';
+    echo 'pong - proxy';
 }
 
 function project($args) {
     if (($id = array_search('-p', $args)) !== false) {
         $project = $args[$id + 1];
+        $host = getHost($project);
+        
+        print "project $project to $host\n";
+        
+        print $URLload = $host.'/?json='.json_encode(array_merge(['project'], $args));
+        $html = file_get_contents($URLload);
 
-        print shell_exec('__PHP__ __EXAKAT__ queue project -p '.$project);
-        serverLog("project : $project ".date('r'));
-
-        echo json_encode(array('project' => $project, 
-                               'start' => date('r')));
+        print $html;
     } else {
         error('missing Project '.$id, '');
     }
@@ -110,12 +115,14 @@ function project($args) {
 function remove($args) {
     if (($id = array_search('-p', $args)) !== false) {
         $project = $args[$id + 1];
+        $host = getHost($project);
+        
+        print "remove $project to $host\n";
+        
+        print $URLload = $host.'/?json='.json_encode(array_merge(['remove'], $args));
+        $html = file_get_contents($URLload);
 
-        print shell_exec('__PHP__ __EXAKAT__ queue remove -p '.$project);
-        serverLog("remove : $project ".date('r'));
-
-        echo json_encode(array('project' => $project, 
-                               'start' => date('r')));
+        print $html;
     } else {
         error('missing Project '.$id, '');
     }
@@ -164,19 +171,12 @@ function status($args) {
 function fetch($args) {
     if (($id = array_search('-p', $args)) !== false) {
         $project = $args[$id + 1];
-
-        $id = array_search('-format', $args);
-        $format = $args[$id + 1];
+        $host = getHost($project);
         
-        if (!file_exists("projects/$project/dump.sqlite")) {
-            error('No dump.sqlite available', '');
-        }
+        $URLload = $host.'/?json='.json_encode(array_merge(['fetch'], $args));
+        $zip = file_get_contents($URLload);
 
-        shell_exec("cd projects/$project/; zip -r dump.zip dump.sqlite; ");
-        serverLog("fetch : $project ".date('r'));
-        $fp = fopen("projects/$project/dump.zip", 'r');
-        fpassthru($fp);
-        unlink("projects/$project/dump.zip");
+        print $zip;
     } else {
         error('missing Project '.$id, '');
     }
@@ -227,7 +227,7 @@ function error($message, $project) {
 }
 
 function serverLog($message) {
-    $fp = fopen(__DIR__.'/api.log', 'a');
+    $fp = fopen(__DIR__.'/proxy.log', 'a');
     if ($fp !== false) {
         fwrite($fp, date('r')."\t$message\n");
         fclose($fp);
@@ -245,6 +245,28 @@ function unparse_url($parsed_url) {
     $query    = isset($parsed_url['query'])    ? '?'.$parsed_url['query']    : '';
     $fragment = isset($parsed_url['fragment']) ? '#'.$parsed_url['fragment'] : '';
     return $scheme.$user.$pass.$host.$port.$path.$query.$fragment;
+}
+
+function getHost($project) {
+    $slaves = __SLAVES__;
+    
+    if (file_exists(__DIR__.'/proxy.json')) {
+        $json = file_get_contents(__DIR__.'/proxy.json');
+        $list = json_decode($json, true);
+    } else {
+        $list = [];
+    }
+    
+    if (empty($list) || !isset($list[$project])){
+        shuffle($slaves);
+        $list[$project] = array_pop($slaves);
+    }
+    
+    $host = $list[$project];
+    
+    file_put_contents(__DIR__.'/proxy.json', json_encode($list));
+    
+    return $host;
 }
 
 ?>

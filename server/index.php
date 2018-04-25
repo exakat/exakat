@@ -8,7 +8,21 @@ $commands = explode('/', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
 unset($commands[0]);
 $command = array_shift($commands);
 
-$orders = array('stop', 'init', 'update', 'project', 'onepage', 'report', 'status', 'list', 'stop', 'config', 'queue',);
+$orders = array('stop', 
+
+                'init', 
+                'project', 
+                'update', 
+                'report', 
+                'fetch', 
+
+                'onepage', 
+                'status', 
+                'list', 
+                'stop', 
+                'config', 
+                'queue',
+                );
 
 if (!in_array($command, $orders)) {
     serverLog("unknown command : $command");

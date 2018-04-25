@@ -26,7 +26,7 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.2.4';
+    const VERSION = '1.2.5';
     const BUILD = 721;
 
     private $gremlin = null;
@@ -45,11 +45,16 @@ class Exakat {
             $remote = new Remote($config->remotes[$config->remote]);
             
             $res = $remote->send($json);
-            if ($config->command === 'fetch') {
-                file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.zip', $res);
-                unlink($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
-                shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; unzip dump.zip');
-                unlink($config->projects_root.'/projects/'.$config->project.'/dump.zip');
+            if ($config->command === 'init') {
+                // replicate init, because we'll need later
+                $task = new Tasks\Initproject($this->gremlin, $this->config);
+                $task->run();
+            } elseif ($config->command === 'fetch') {
+                $size = file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.zip', $res);
+                if (file_exists($config->projects_root.'/projects/'.$config->project.'/dump.sqlite')) {
+                    unlink($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
+                }
+                shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; unzip dump.zip && rm dump.zip');
                 print "Fetched\n";
             } else {
                 var_dump($res);
@@ -206,6 +211,11 @@ class Exakat {
 
             case 'fetch' :
                 $task = new Tasks\Fetch($this->gremlin, $this->config);
+                $task->run();
+                break;
+
+            case 'proxy' :
+                $task = new Tasks\Proxy($this->gremlin, $this->config);
                 $task->run();
                 break;
 
