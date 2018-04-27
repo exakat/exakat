@@ -158,7 +158,17 @@ function doctor($args) {
 }
 
 function status($args) {
-    print "Status\n";
+    if (($id = array_search('-p', $args)) !== false) {
+        $project = $args[$id + 1];
+
+        if (!file_exists("projects/$project")) {
+            error('No project available', '');
+        }
+
+        echo shell_exec('__PHP__ __EXAKAT__ status -p '.$project.' -json');
+    } else {
+        error('missing Project '.$id, '');
+    }
 }
 
 function fetch($args) {
