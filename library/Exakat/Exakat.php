@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.2.5';
-    const BUILD = 721;
+    const VERSION = '1.2.4';
+    const BUILD = 722;
 
     private $gremlin = null;
     private $config = null;
@@ -50,6 +50,23 @@ class Exakat {
                 $task = new Tasks\Initproject($this->gremlin, $this->config);
                 $task->run();
             } elseif ($config->command === 'fetch') {
+                if (strlen($res) < 1024) {
+                    // This is an error
+                    $json = json_decode($res);
+                    if (empty($json)) {
+                        print "Couldn't read an answer from remote.\n";
+                        return;
+                    }
+                    
+                    if (empty($json->error)) {
+                        print "Couldn't read an error from remote.\n";
+                        return;
+                    }
+                    
+                    print "Error: $json->error\n";
+                    return;
+                }
+                
                 $size = file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.zip', $res);
                 if (file_exists($config->projects_root.'/projects/'.$config->project.'/dump.sqlite')) {
                     unlink($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
