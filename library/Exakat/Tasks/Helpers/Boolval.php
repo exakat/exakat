@@ -81,6 +81,10 @@ class Boolval extends Plugin {
                 }
                 break;
 
+            case 'Power' :
+                $atom->noDelimiter = (int) (bool) ($extras['LEFT']->boolean ** (bool) $extras['RIGHT']->boolean);
+                break;
+
             case 'Arrayliteral' :
                 $atom->boolean    = (int) (bool) $atom->count;
                 break;

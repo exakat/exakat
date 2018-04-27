@@ -94,6 +94,10 @@ class Intval extends Plugin {
                 }
                 break;
 
+            case 'Power' :
+                    $atom->intval = $extras['LEFT']->intval ** $extras['RIGHT']->intval;
+                break;
+
             case 'Arrayliteral' :
                 $atom->intval    = (int) (bool) $atom->count;
                 break;
