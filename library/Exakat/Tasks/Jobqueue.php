@@ -24,6 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
+use Exakat\Datastore;
 
 class Jobqueue extends Tasks {
     const CONCURENCE = self::QUEUE;
@@ -119,11 +120,6 @@ class Jobqueue extends Tasks {
                 } else {
                     print "Unknown command '".$command[1].'"'.PHP_EOL;
                 }
-//                list($job, $args) = explode(' ', $job);
-//                print "$job / $args\n";
-
-//                $method = 'process'.$job;
-//                $this->$method($job);
 
                 next($queue);
                 unset($job, $queue[$jobkey]);
@@ -145,10 +141,15 @@ class Jobqueue extends Tasks {
         $config = new Config($job);
         $analyze = new Initproject($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing init job '.$job.PHP_EOL);
-        $this->log('start init : '.$job);
+        display( 'processing init job '.$job['project'].PHP_EOL);
+        $this->log('start init : '.$job['project']);
         $b = microtime(true);
-        $analyze->run();
+        try {
+            $analyze->run();
+        } catch (\Exception $e) {
+            $datastore = new Datastore($config);
+            $datastore->addRow('hash', array('init error' => $e->getMessage() ));
+        }
         $e = microtime(true);
         $this->log('end init : '.$job[1].' ('.number_format($e -$b, 2).' s)');
         unset($analyze);
@@ -179,7 +180,12 @@ class Jobqueue extends Tasks {
         display( 'processing project job '.$job.PHP_EOL);
         $this->log('start project : '.$job);
         $b = microtime(true);
-        $analyze->run();
+        try {
+            $analyze->run();
+        } catch (\Exception $e) {
+            $datastore = new Datastore($config);
+            $datastore->addRow('hash', array('init error' => $e->getMessage() ));
+        } 
         $e = microtime(true);
         $this->log('end project : '.$job[1].' ('.number_format($e -$b, 2).' s)');
         unset($analyze);
@@ -193,7 +199,12 @@ class Jobqueue extends Tasks {
         display( 'processing remove job '.$job.PHP_EOL);
         $this->log('start report : '.$job[1]);
         $b = microtime(true);
-        $analyze->run();
+        try {
+            $analyze->run();
+        } catch (\Exception $e) {
+            $datastore = new Datastore($config);
+            $datastore->addRow('hash', array('init error' => $e->getMessage() ));
+        } 
         $e = microtime(true);
         unset($analyze);
         display( 'processing remove job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
