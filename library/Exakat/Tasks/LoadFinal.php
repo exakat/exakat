@@ -337,8 +337,8 @@ g.V().hasLabel("Identifier", "Nsname")
         if ("boolean" in it.get().keys()) {
             constante.property("boolean", it.get().value("boolean")); 
         }
-        if ("strval" in it.get().keys()) {
-            constante.property("strval", it.get().value("strval")); 
+        if ("noDelimiter" in it.get().keys()) {
+            constante.property("noDelimiter", it.get().value("noDelimiter")); 
         }
      }
 )
@@ -376,7 +376,6 @@ GREMLIN;
         //Currently handles intval, boolean, noDelimiter (String)
         
         //Needs realval, nullval, arrayval
-
 
         display("propagating Constant value in Const");
         // fix path for constants with Const
@@ -556,9 +555,11 @@ g.V().hasLabel("Parenthesis").not(has("intval"))
      .where( __.out("CODE").has("intval"))
      .where( __.out("CODE").sideEffect{ x = it.get(); }.count())
      .sideEffect{ 
-        it.get().property("intval", x.property("intval").value()); 
-        it.get().property("boolean", x.property("boolean").value());
-        it.get().property("noDelimiter", x.property("noDelimiter").value()); 
+        it.get().property("intval", x.value("intval")); 
+        it.get().property("boolean", x.value("boolean"));
+        it.get().property("noDelimiter", x.value("noDelimiter")); 
+        
+        x = null;
      }
      .count();
 GREMLIN;
