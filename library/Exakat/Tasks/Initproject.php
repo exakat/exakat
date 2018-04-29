@@ -24,6 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
+use Exakat\Configsource\ProjectConfig;
 use Exakat\Datastore;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
@@ -85,7 +86,7 @@ class Initproject extends Tasks {
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/config.ini')) {
             $repositoryBranch    = '';
             $repositoryTag       = '';
-            $include_dirs        = '';
+            $include_dirs        = $this->config->include_dirs;
 
             if ($this->config->symlink === true) {
                 $vcs = 'symlink';
@@ -138,67 +139,33 @@ class Initproject extends Tasks {
                 $projectName = str_replace('/', '_', $repositoryURL);
 
                 // Updating config.ini to include the vendor directory
-                $include_dirs = "include_dirs[] = /vendor/$repositoryURL";
+                $include_dirs[] = "/vendor/$repositoryURL";
             } else {
                 $vcs = '';
                 $projectName = basename($repositoryURL);
                 $projectName = preg_replace('.git', '', $projectName);
             }
 
-
             // default initial config. Found in test project.
             $phpversion = $this->config->phpversion;
             if ($this->config->composer === true) {
-                $vendor = '';
+                $ignore_dirs = $this->config->ignore_dirs;
             } else {
-                $vendor = "ignore_dirs[] = /vendor\n";
+                $ignore_dirs = array_merge($this->config->ignore_dirs, array('/vendor'));
             }
 
-            $configIni = <<<INI
-;Main PHP version for this code.
-phpversion = $phpversion
+            $projectConfig = new ProjectConfig($this->config->projects_root);
+            $projectConfig->setProject($project);
+            $projectConfig->setConfig('phpversion',     $phpversion);
+            $projectConfig->setConfig('project_name',   $projectName);
+            $projectConfig->setConfig('project_url',    $repositoryURL);
+            $projectConfig->setConfig('project_vcs',    $vcs);
+            $projectConfig->setConfig('project_tag',    $repositoryBranch);
+            $projectConfig->setConfig('project_branch', $repositoryTag);
 
-;Ignored dirs and files, relative to code source root.
-ignore_dirs[] = /assets
-ignore_dirs[] = /cache
-ignore_dirs[] = /css
-ignore_dirs[] = /data
-ignore_dirs[] = /doc
-ignore_dirs[] = /docker
-ignore_dirs[] = /docs
-ignore_dirs[] = /example
-ignore_dirs[] = /examples
-ignore_dirs[] = /images
-ignore_dirs[] = /js
-ignore_dirs[] = /lang
-ignore_dirs[] = /spec
-ignore_dirs[] = /sql
-ignore_dirs[] = /test
-ignore_dirs[] = /tests
-ignore_dirs[] = /tmp
-ignore_dirs[] = /version
-ignore_dirs[] = /var
-$vendor
-
-;Included dirs or files, relative to code source root. Default to all.
-;Those are added after ignoring directories
-include_dirs[] = /
-$include_dirs
-
-;Accepted file extensions
-file_extensions = .php,.php3,.inc,.tpl,.phtml,.tmpl,.phps,.ctp
-
-;Description of the project
-project_name        = "$projectName";
-project_url         = "$repositoryURL";
-project_vcs         = "$vcs";
-project_description = "";
-project_branch      = "$repositoryBranch";
-project_tag         = "$repositoryTag";
-
-INI;
-
-            file_put_contents($this->config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
+            $projectConfig->setConfig('ignore_dirs',    $ignore_dirs);
+            $projectConfig->setConfig('include_dirs',   $include_dirs);
+            $projectConfig->writeConfig();
         } else {
             display( $this->config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring');
         }
@@ -306,7 +273,12 @@ INI;
             display('Running files');
             // Running script as a separate process, to take into account the actual config file..
             $shell = $this->config->php.' '.$this->config->executable.' files -p '.$this->config->project;
-            print shell_exec($shell);
+            $res = shell_exec($shell);
+            
+            if (!empty($res)) {
+                $this->datastore->addRow('hash', array('init error' => $res ));
+            }
+            
         }
     }
 }
