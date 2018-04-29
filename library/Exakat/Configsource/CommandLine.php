@@ -174,7 +174,7 @@ class CommandLine extends Config {
                             if (empty($this->config['configuration'])) {
                                 $this->config['configuration'] = array();
                             } 
-                            list($name, $value) = explode('=', $args[$id + 1].' ');
+                            list($name, $value) = explode('=', trim($args[$id + 1]));
                             $this->config['configuration'][$name] = $value;
                             break;
 

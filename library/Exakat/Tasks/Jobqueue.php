@@ -23,14 +23,14 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
+use Exakat\Config as ConfigExakat;
 use Exakat\Datastore;
 
 class Jobqueue extends Tasks {
     const CONCURENCE = self::QUEUE;
     const PATH = '/tmp/queue.exakat';
     
-    const COMMANDS = array('quit', 'ping', 'project', 'onepage', 'report', 'init');
+    const COMMANDS = array('quit', 'config', 'ping', 'project', 'onepage', 'report', 'init');
 
     private $pipefile = self::PATH;
     private $jobQueueLog = null;
@@ -109,16 +109,29 @@ class Jobqueue extends Tasks {
                 }
                 
                 $command = array_merge(['exakat'], $command);
-                if ($command[1] === 'init') {
-                    $this->processInit($command);
-                } elseif ($command[1] === 'project') {
-                    $this->processProject($command);
-                } elseif ($command[1] === 'report') {
-                    $this->processReport($command);
-                } elseif ($command[1] === 'remove') {
-                    $this->processRemove($command);
-                } else {
-                    print "Unknown command '".$command[1].'"'.PHP_EOL;
+                switch($command[1]) {
+                    case 'init' : 
+                        $this->processInit($command);
+                        break;
+                    
+                    case 'project' : 
+                        $this->processProject($command);
+                        break;
+                    
+                    case 'report' : 
+                        $this->processReport($command);
+                        break;
+                    
+                    case 'remove' : 
+                        $this->processRemove($command);
+                        break;
+
+                    case 'config' : 
+                        $this->processConfig($command);
+                        break;
+                    
+                    default : 
+                        print 'Unknown command "'.$command[1].'"'.PHP_EOL;
                 }
 
                 next($queue);
@@ -138,7 +151,7 @@ class Jobqueue extends Tasks {
     }
     
     private function processInit($job) {
-        $config = new Config($job);
+        $config = new ConfigExakat($job);
         $analyze = new Initproject($this->gremlin, $config, Tasks::IS_SUBTASK);
 
         display( 'processing init job '.$job['project'].PHP_EOL);
@@ -174,7 +187,7 @@ class Jobqueue extends Tasks {
     }
 
     private function processProject($job) {
-        $config = new Config($job);
+        $config = new ConfigExakat($job);
         $analyze = new Project($this->gremlin, $config, Tasks::IS_SUBTASK);
 
         display( 'processing project job '.$job.PHP_EOL);
@@ -192,8 +205,25 @@ class Jobqueue extends Tasks {
         display( 'processing project job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
     }
 
+    private function processConfig($job) {
+        $config = new ConfigExakat($job);
+        $analyze = new Config($this->gremlin, $config, Tasks::IS_SUBTASK);
+
+        display( 'processing config job '.$job.PHP_EOL);
+        $this->log('start config : '.$job);
+        $b = microtime(true);
+        try {
+            $analyze->run();
+        } catch (\Exception $e) {
+        } 
+        $e = microtime(true);
+        $this->log('end config : '.$job[1].' ('.number_format($e -$b, 2).' s)');
+        unset($analyze);
+        display( 'processing config job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+    }
+
     private function processRemove($job) {
-        $config = new Config($job);
+        $config = new ConfigExakat($job);
         $analyze = new Remove($this->gremlin, $config, Tasks::IS_SUBTASK);
 
         display( 'processing remove job '.$job.PHP_EOL);

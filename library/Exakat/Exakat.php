@@ -54,41 +54,41 @@ class Exakat {
         $res = $remote->send($json);
         switch ($config->command) {
             case 'init' :
-            // replicate init, because we'll need later
-            $task = new Tasks\Initproject($this->gremlin, $this->config);
-            $task->run();
+                // replicate init, because we'll need later
+                $task = new Tasks\Initproject($this->gremlin, $this->config);
+                $task->run();
             break;
-            
-        case 'status' : 
-            print $res;
-            break;
-        
-        case 'fetch' : 
-            if (strlen($res) < 1024) {
-                // This is an error
-                $json = json_decode($res);
-                if (empty($json)) {
-                    print "Couldn't read an answer from remote.\n";
+
+            case 'fetch' : 
+                if (strlen($res) < 1024) {
+                    // This is an error
+                    $json = json_decode($res);
+                    if (empty($json)) {
+                        print "Couldn't read an answer from remote.\n";
+                        return;
+                    }
+                    
+                    if (empty($json->error)) {
+                        print "Couldn't read an error from remote.\n";
+                        return;
+                    }
+                    
+                    print "Error: $json->error\n";
                     return;
                 }
                 
-                if (empty($json->error)) {
-                    print "Couldn't read an error from remote.\n";
-                    return;
+                $size = file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.zip', $res);
+                if (file_exists($config->projects_root.'/projects/'.$config->project.'/dump.sqlite')) {
+                    unlink($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
                 }
-                
-                print "Error: $json->error\n";
-                return;
-            }
-            
-            $size = file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.zip', $res);
-            if (file_exists($config->projects_root.'/projects/'.$config->project.'/dump.sqlite')) {
-                unlink($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
-            }
-            shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; unzip dump.zip && rm dump.zip');
-            display("Fetched\n");
-            
-        default : 
+                shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; unzip dump.zip && rm dump.zip');
+                display("Fetched\n");
+
+            case 'status' : 
+                print $res;
+                break;
+
+            default : 
             
         }
     }
