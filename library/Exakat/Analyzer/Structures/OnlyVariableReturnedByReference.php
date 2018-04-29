@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class OnlyVariableReturnedByReference extends Analyzer {
     public function analyze() {
+        // function &returnRef() { return $a;}
         $this->atomIs('Function')
              ->is('reference', true)
              ->outIs('BLOCK')

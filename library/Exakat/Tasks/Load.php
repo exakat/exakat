@@ -2114,7 +2114,9 @@ SQL;
             $name = $this->processNextAsIdentifier();
 
             ++$this->id; // Skip =
-            while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_COMMA))) {
+            while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_SEMICOLON, 
+                                                                    \Exakat\Tasks\T_COMMA,
+                                                                    ))) {
                 $this->processNext();
             }
             $value = $this->popExpression();
