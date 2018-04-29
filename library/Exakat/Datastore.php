@@ -228,7 +228,7 @@ class Datastore {
         $res = $stmt->execute();
 
         if (!$res) {
-            return array();
+            return null;
         } else {
             $row = $res->fetchArray(\SQLITE3_ASSOC);
             return $row['value'];
