@@ -27,7 +27,7 @@ use Exakat\Config;
 
 class Exakat {
     const VERSION = '1.2.4';
-    const BUILD = 722;
+    const BUILD = 728;
 
     private $gremlin = null;
     private $config = null;
@@ -39,47 +39,61 @@ class Exakat {
 
     public function execute(Config $config) {
         if ($config->remote !== 'none') {
-            $json = $config->commandLineJson();
+            $this->remote($config);
+        } else {
+            $this->local($config);
+        }
+    }
+    
+    private function remote(Config $config) {
+        $json = $config->commandLineJson();
 
-            $class = $config->remote;
-            $remote = new Remote($config->remotes[$config->remote]);
+        $class = $config->remote;
+        $remote = new Remote($config->remotes[$config->remote]);
+        
+        $res = $remote->send($json);
+        switch ($config->command) {
+            case 'init' :
+            // replicate init, because we'll need later
+            $task = new Tasks\Initproject($this->gremlin, $this->config);
+            $task->run();
+            break;
             
-            $res = $remote->send($json);
-            if ($config->command === 'init') {
-                // replicate init, because we'll need later
-                $task = new Tasks\Initproject($this->gremlin, $this->config);
-                $task->run();
-            } elseif ($config->command === 'fetch') {
-                if (strlen($res) < 1024) {
-                    // This is an error
-                    $json = json_decode($res);
-                    if (empty($json)) {
-                        print "Couldn't read an answer from remote.\n";
-                        return;
-                    }
-                    
-                    if (empty($json->error)) {
-                        print "Couldn't read an error from remote.\n";
-                        return;
-                    }
-                    
-                    print "Error: $json->error\n";
+        case 'status' : 
+            print $res;
+            break;
+        
+        case 'fetch' : 
+            if (strlen($res) < 1024) {
+                // This is an error
+                $json = json_decode($res);
+                if (empty($json)) {
+                    print "Couldn't read an answer from remote.\n";
                     return;
                 }
                 
-                $size = file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.zip', $res);
-                if (file_exists($config->projects_root.'/projects/'.$config->project.'/dump.sqlite')) {
-                    unlink($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
+                if (empty($json->error)) {
+                    print "Couldn't read an error from remote.\n";
+                    return;
                 }
-                shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; unzip dump.zip && rm dump.zip');
-                print "Fetched\n";
-            } else {
-                var_dump($res);
+                
+                print "Error: $json->error\n";
+                return;
             }
             
-            return;
+            $size = file_put_contents($config->projects_root.'/projects/'.$config->project.'/dump.zip', $res);
+            if (file_exists($config->projects_root.'/projects/'.$config->project.'/dump.sqlite')) {
+                unlink($config->projects_root.'/projects/'.$config->project.'/dump.sqlite');
+            }
+            shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; unzip dump.zip && rm dump.zip');
+            display("Fetched\n");
+            
+        default : 
+            
         }
-
+    }
+        
+    private function local(Config $config) {
         switch ($config->command) {
             case 'doctor' :
                 $doctor = new Tasks\Doctor($this->gremlin, $this->config);
@@ -233,6 +247,11 @@ class Exakat {
 
             case 'proxy' :
                 $task = new Tasks\Proxy($this->gremlin, $this->config);
+                $task->run();
+                break;
+
+            case 'config' :
+                $task = new Tasks\Config($this->gremlin, $this->config);
                 $task->run();
                 break;
 
