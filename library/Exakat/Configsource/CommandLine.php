@@ -74,6 +74,10 @@ class CommandLine extends Config {
                                     '-branch'       => 'branch',
                                     '-tag'          => 'tag',
                                     '-remote'       => 'remote',
+
+                                    // This one is finally an array
+                                    '-c'            => 'configuration',
+
 //                                '-loader'       => 'Neo4jImport',
                                  );
 
@@ -113,6 +117,7 @@ class CommandLine extends Config {
                               'codacy'        => 1,
                               'fetch'         => 1,
                               'proxy'         => 1,
+                              'config'        => 1,
                               );
 
     public function __construct() {
@@ -148,9 +153,12 @@ class CommandLine extends Config {
                         // in case this option value is actually the next option (exakat -p -T)
                         // We just ignore it
                         unset($args[$id]);
-                    } else {
-                        // Normal case is here
-                        if ($config === 'program') {
+                        continue;
+                    } 
+                    
+                    // Normal case is here
+                    switch ($config) {
+                        case 'program' :
                             if (!isset($this->config['program'])) {
                                 $this->config['program'] = $args[$id + 1];
                             } elseif (is_string($this->config['program'])) {
@@ -160,13 +168,22 @@ class CommandLine extends Config {
                             } else {
                                 $this->config['program'][] = $args[$id + 1];
                             }
-                        } else {
-                            $this->config[$config] = $args[$id + 1];
-                        }
+                            break;
 
-                        unset($args[$id]);
-                        unset($args[$id + 1]);
+                        case 'configuration' :
+                            if (empty($this->config['configuration'])) {
+                                $this->config['configuration'] = array();
+                            } 
+                            list($name, $value) = explode('=', $args[$id + 1].' ');
+                            $this->config['configuration'][$name] = $value;
+                            break;
+
+                        default : 
+                             $this->config[$config] = $args[$id + 1];
                     }
+
+                    unset($args[$id]);
+                    unset($args[$id + 1]);
                 }
             }
         }

@@ -24,12 +24,60 @@ namespace Exakat\Configsource;
 
 class ProjectConfig extends Config {
     private $projects_root = '.';
+    private $project = '';
+
+    protected $config = array('phpversion'          => PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION,
+                              'project_name'        => '',
+                              'project_url'         => '',
+                              'project_vcs'         => 'git',
+                              'project_description' => '',
+                              'project_branch'      => '',
+                              'project_tag'         => '',
+                              'file_extensions'     => array('php', 
+                                                             'php3', 
+                                                             'inc', 
+                                                             'tpl', 
+                                                             'phtml', 
+                                                             'tmpl', 
+                                                             'phps', 
+                                                             'ctp', 
+                                                             'module',
+                                                             ),
+                              'include_dirs'        => array('/',
+                                                            ),
+                              'ignore_dirs'         => array('/assets',
+                                                             '/cache',
+                                                             '/css',
+                                                             '/data',
+                                                             '/doc',
+                                                             '/docker',
+                                                             '/docs',
+                                                             '/example',
+                                                             '/examples',
+                                                             '/images',
+                                                             '/js',
+                                                             '/lang',
+                                                             '/spec',
+                                                             '/sql',
+                                                             '/test',
+                                                             '/tests',
+                                                             '/tmp',
+                                                             '/version',
+                                                             '/var',
+                                                            ),
+                              );
     
     public function __construct($projects_root) {
         $this->projects_root = $projects_root.'/projects/';
     }
+    
+    public function setProject($project) {
+        $this->project = $project;
+    }
 
     public function loadConfig($project) {
+        $this->project = $project;
+
         $pathToIni = "{$this->projects_root}{$project}/config.ini";
         if (!file_exists($pathToIni)) {
             return self::NOT_LOADED;
@@ -47,6 +95,7 @@ class ProjectConfig extends Config {
         }
 
         // removing empty values in the INI file
+        /*
         foreach($this->config as $id => &$value) {
             if (is_array($value) && empty($value[0])) {
                 unset($value[0]);
@@ -55,6 +104,7 @@ class ProjectConfig extends Config {
             }
         }
         unset($value);
+        */
         $this->config['project_vcs'] = $this->config['project_vcs'] ?? '';
         
         // Converting the string format to arrays when necessary
@@ -100,6 +150,65 @@ class ProjectConfig extends Config {
         }
 
         return "$project/config.ini";
+    }
+
+    public function setConfig($name, $value) {
+        $this->config[$name] = $value;
+    }
+    
+    public function writeConfig() {
+        // $vendor
+        $include_dirs = 'include_dirs[] = '.implode(";\ninclude_dirs[] = ", $this->config['include_dirs']).";\n";
+        $ignore_dirs  = 'ignore_dirs[] = '.implode(";\nignore_dirs[] = ", $this->config['ignore_dirs']).";\n";
+
+        $file_extensions  = '.'.implode('.', $this->config['file_extensions']);
+        
+        $custom_configs = array();
+        
+        foreach($this->config as $key => $value) {
+            if (strpos($key, '/') === false) {
+                continue;
+            }
+            
+            $cc = "[$key]\n";
+            foreach($value as $name => $values) {
+                $cc .= "{$name}[] = ".implode(";\n{$name}[] = ", $values).";\n\n";
+            }
+            
+            $cc .= PHP_EOL;
+            
+            $custom_configs[] = $cc;
+        }
+        
+        $custom_configs = implode('', $custom_configs);
+
+        $configIni = <<<INI
+;Main PHP version for this code.
+phpversion = {$this->config['phpversion']}
+
+;Ignored dirs and files, relative to code source root.
+$ignore_dirs
+
+;Included dirs or files, relative to code source root. Default to all.
+;Those are added after ignoring directories
+$include_dirs
+
+;Accepted file extensions
+file_extensions = $file_extensions
+
+;Description of the project
+project_name        = "{$this->config['project_name']}";
+project_url         = "{$this->config['project_url']}";
+project_vcs         = "{$this->config['project_vcs']}";
+project_description = "{$this->config['project_description']}";
+project_branch      = "{$this->config['project_branch']}";
+project_tag         = "{$this->config['project_tag']}";
+
+$custom_configs
+
+INI;
+
+        file_put_contents($this->projects_root.$this->project.'/config.ini', $configIni);    
     }
 }
 
