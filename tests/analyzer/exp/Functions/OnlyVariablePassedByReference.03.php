@@ -1,7 +1,6 @@
 <?php
 
-$expected     = array('reset(foo( ))',
-                      'getmxrr($a, foo( ))',
+$expected     = array('getmxrr($a, foo( ))',
                       'foo::bar($a->boo( ), $a->boo( ))',
                       'foo::bar(foo( ), foo( ))',
                       'foo::bar(null, null)',
@@ -14,7 +13,8 @@ $expected     = array('reset(foo( ))',
                       'bar(foo( ), $b)',
                      );
 
-$expected_not = array('getmxrr($a, foo( ))',
+$expected_not = array('reset(foo( ))',
+                      'getmxrr($a, foo( ))',
                      );
 
 ?>
