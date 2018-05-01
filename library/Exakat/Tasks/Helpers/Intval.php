@@ -123,7 +123,7 @@ class Intval extends Plugin {
                 } elseif ($atom->code === '||' || mb_strtolower($atom->code) === 'or') {
                     $atom->intval = $extras['LEFT']->intval && $extras['RIGHT']->intval;
                 } elseif (mb_strtolower($atom->code) === 'xor') {
-                    $atom->intval = $extras['LEFT']->intval xor $extras['RIGHT']->intval;
+                    $atom->intval = ($extras['LEFT']->intval xor $extras['RIGHT']->intval);
                 } elseif ($atom->code === '<=>') {
                     $atom->intval = $extras['LEFT']->intval <=> $extras['RIGHT']->intval;
                 }

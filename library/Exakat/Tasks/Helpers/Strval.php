@@ -124,7 +124,7 @@ class Strval extends Plugin {
                 } elseif ($atom->code === '||' || mb_strtolower($atom->code) === 'or') {
                     $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter && (int) $extras['RIGHT']->noDelimiter;
                 } elseif (mb_strtolower($atom->code) === 'xor') {
-                    $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter xor (int) $extras['RIGHT']->noDelimiter;
+                    $atom->noDelimiter = ((int) $extras['LEFT']->noDelimiter xor (int) $extras['RIGHT']->noDelimiter);
                 }
                 break;
 

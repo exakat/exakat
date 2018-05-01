@@ -110,7 +110,7 @@ class Boolval extends Plugin {
                 } elseif ($atom->code === '||' || mb_strtolower($atom->code) === 'or') {
                     $atom->boolean = $extras['LEFT']->boolean && $extras['RIGHT']->boolean;
                 } elseif (mb_strtolower($atom->code) === 'xor') {
-                    $atom->boolean = $extras['LEFT']->boolean xor $extras['RIGHT']->boolean;
+                    $atom->boolean = ($extras['LEFT']->boolean xor $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '<=>') {
                     $atom->boolean = $extras['LEFT']->boolean <=> $extras['RIGHT']->boolean;
                 }
