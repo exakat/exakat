@@ -343,7 +343,7 @@ ksort($glossary);
 
 $found = 0;
 foreach($glossary as $items) {
-    $found += count(array_keys($items));
+    $found += count($items);
 }
 print "$found found\n";
 print count($entries)." defined\n";
