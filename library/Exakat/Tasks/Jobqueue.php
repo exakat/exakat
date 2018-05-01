@@ -177,7 +177,7 @@ class Jobqueue extends Tasks {
         $config = new Config($job);
         $analyze = new Report2($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing report job '.$job.PHP_EOL);
+        display( 'processing report job '.$job[1].PHP_EOL);
         $this->log('start report : '.$job[1]);
         $b = microtime(true);
         $analyze->run();
@@ -190,7 +190,7 @@ class Jobqueue extends Tasks {
         $config = new ConfigExakat($job);
         $analyze = new Project($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing project job '.$job.PHP_EOL);
+        display( 'processing project job '.$job[1].PHP_EOL);
         $this->log('start project : '.$job);
         $b = microtime(true);
         try {
@@ -209,8 +209,8 @@ class Jobqueue extends Tasks {
         $config = new ConfigExakat($job);
         $analyze = new Config($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing config job '.$job.PHP_EOL);
-        $this->log('start config : '.$job);
+        display( 'processing config job '.$job[1].PHP_EOL);
+        $this->log('start config : '.$job[1]);
         $b = microtime(true);
         try {
             $analyze->run();
@@ -226,7 +226,7 @@ class Jobqueue extends Tasks {
         $config = new ConfigExakat($job);
         $analyze = new Remove($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing remove job '.$job.PHP_EOL);
+        display( 'processing remove job '.$job[1].PHP_EOL);
         $this->log('start report : '.$job[1]);
         $b = microtime(true);
         try {
