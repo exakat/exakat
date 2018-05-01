@@ -36,6 +36,7 @@ use Exakat\Phpexec;
 use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Precedence;
 use Exakat\Tasks\Helpers\Atom;
+use Exakat\Tasks\Helpers\AtomGroup;
 use Exakat\Tasks\Helpers\Intval;
 use Exakat\Tasks\Helpers\Strval;
 use Exakat\Tasks\Helpers\Boolval;
@@ -84,6 +85,8 @@ class Load extends Tasks {
     private $precedence;
 
     private $callsSqlite = null;
+    
+    private $atomGroup = null;
 
     private $namespace = '\\';
     private $uses   = array('function' => array(),
@@ -254,6 +257,8 @@ class Load extends Tasks {
 
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
+        
+        $this->atomGroup = new AtomGroup();
 
         $this->php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         if (!$this->php->isValid()) {
@@ -485,7 +490,6 @@ SQL;
         $this->checkTokenLimit();
         
         // Reset Atom. 
-        Atom::resetAtomCount();
         $this->id0 = $this->addAtom('Project');
         $this->id0->code      = 'Whole';
         $this->id0->atom      = 'Project';
@@ -4918,7 +4922,7 @@ SQL;
     //////////////////////////////////////////////////////
     private function addAtom($atom) {
         assert(in_array($atom, Token::$ATOMS), 'Undefined atom '.$atom);
-        $a = new Atom($atom);
+        $a = $this->atomGroup->factory($atom);
         $this->atoms[$a->id] = $a;
         
         return $a;

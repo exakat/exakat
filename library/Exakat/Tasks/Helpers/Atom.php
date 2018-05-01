@@ -65,7 +65,7 @@ class Atom {
     public $globalvar    = false;
     public $binaryString = Load::NOT_BINARY;
 
-    public function __construct($atom) {
+    public function __construct($id, $atom) {
         $this->id = ++self::$atomCount;
         $this->atom = $atom;
     }
