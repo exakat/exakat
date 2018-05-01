@@ -80,7 +80,7 @@ function init($args) {
             $project = autoprojectname();
         }
 
-        shell_exec('__PHP__ __EXAKAT__ queue init -p '.$project.' -R '.$vcs);
+        shell_exec("__PHP__ __EXAKAT__ queue init -p $project -R $vcs");
         serverLog("init : $project $vcs ".date('r'));
 
         echo json_encode(array('project' => $project, 
@@ -96,118 +96,150 @@ function ping($args) {
 
 function project($args) {
     if (($id = array_search('-p', $args)) !== false) {
-        $project = $args[$id + 1];
-
-        print shell_exec('__PHP__ __EXAKAT__ queue project -p '.$project);
-        serverLog("project : $project ".date('r'));
-
-        echo json_encode(array('project' => $project, 
-                               'start' => date('r')));
-    } else {
-        error('missing Project '.$id, '');
+        error("missing Project $id", '');
     }
+
+    $project = $args[$id + 1];
+    if (!file_exists("projects/$project")) {
+        error('No project available', '');
+    }
+
+    shell_exec("__PHP__ __EXAKAT__ queue project -p $project");
+    serverLog("project : $project ".date('r'));
+
+    echo json_encode(array('project' => $project, 
+                           'start' => date('r')));
 }
 
 function remove($args) {
     if (($id = array_search('-p', $args)) !== false) {
-        $project = $args[$id + 1];
-
-        print shell_exec('__PHP__ __EXAKAT__ queue remove -p '.$project);
-        serverLog("remove : $project ".date('r'));
-
-        echo json_encode(array('project' => $project, 
-                               'start' => date('r')));
-    } else {
-        error('missing Project '.$id, '');
+        error("missing Project $id", '');
     }
+
+    $project = $args[$id + 1];
+    if (!file_exists("projects/$project")) {
+        error('No project available', '');
+    }
+
+    shell_exec("__PHP__ __EXAKAT__ queue remove -p $project");
+    serverLog("remove : $project ".date('r'));
+
+    echo json_encode(array('project' => $project, 
+                           'start' => date('r')));
 }
 
 function report($args) {
     if (($id = array_search('-p', $args)) !== false) {
-        $project = $args[$id + 1];
-
-        $id = array_search('-format', $args);
-        $format = $args[$id + 1];
-
-        shell_exec('__PHP__ __EXAKAT__ queue report -p '.$project.' -format '.$format);
-        serverLog("remove : $project ".date('r'));
-
-        echo json_encode(array('project' => $project, 
-                               'start' => date('r')));
-    } else {
-        error('missing Project '.$id, '');
+        error("missing Project $id", '');
     }
+
+    $project = $args[$id + 1];
+    if (!file_exists("projects/$project")) {
+        error('No project available', '');
+    }
+
+    $id = array_search('-format', $args);
+    $format = $args[$id + 1];
+
+    shell_exec("__PHP__ __EXAKAT__ queue report -p $project -format $format");
+    serverLog("remove : $project ".date('r'));
+
+    echo json_encode(array('project' => $project, 
+                           'start' => date('r')));
 }
 
 function doctor($args) {
-    if (($id = array_search('-p', $args)) !== false) {
-        $project = $args[$id + 1];
-
-        shell_exec('__PHP__ __EXAKAT__ queue doctor -p '.$project);
-        serverLog("doctor : $project ".date('r'));
-
-        echo json_encode(array('doctor' => $project, 
-                               'start'  => date('r'),
-                               ));
-    } else {
+    if (($id = array_search('-p', $args)) === false) {
         shell_exec('__PHP__ __EXAKAT__ queue doctor');
         serverLog('doctor');
 
         echo json_encode(array('doctor' => $project, 
                                'start' => date('r')));
-    }
-}
-
-function status($args) {
-    if (($id = array_search('-p', $args)) !== false) {
+    } else {
         $project = $args[$id + 1];
 
         if (!file_exists("projects/$project")) {
             error('No project available', '');
         }
 
-        echo shell_exec('__PHP__ __EXAKAT__ status -p '.$project.' -json');
-    } else {
-        error('missing Project '.$id, '');
+        shell_exec("__PHP__ __EXAKAT__ queue doctor -p $project");
+        serverLog("doctor : $project ".date('r'));
+
+        echo json_encode(array('doctor' => $project, 
+                               'start'  => date('r'),
+                               ));
     }
+}
+
+function status($args) {
+    if (($id = array_search('-p', $args)) !== false) {
+        error("missing Project $id", '');
+    }
+
+    $project = $args[$id + 1];
+
+    if (!file_exists("projects/$project")) {
+        error('No project available', '');
+    }
+
+    echo shell_exec("__PHP__ __EXAKAT__ status -p $project -json");
 }
 
 function fetch($args) {
     if (($id = array_search('-p', $args)) !== false) {
-        $project = $args[$id + 1];
-
-        $id = array_search('-format', $args);
-        $format = $args[$id + 1];
-
-        $json = @file_get_contents('projects/.exakat/Project.json');
-        $json = json_decode($json);
-        if (isset($json->project) && $project === $json->project) {
-            // Too early
-            error('No dump.sqlite available', '');
-        }
-
-        if (!file_exists("projects/$project/dump.sqlite")) {
-            error('No dump.sqlite available', '');
-        }
-
-        shell_exec("cd projects/$project/; zip -r dump.zip dump.sqlite; ");
-        serverLog("fetch : $project ".date('r'));
-        $fp = fopen("projects/$project/dump.zip", 'r');
-        fpassthru($fp);
-        unlink("projects/$project/dump.zip");
-    } else {
-        error('missing Project '.$id, '');
+        error("missing Project $id", '');
     }
+
+    $project = $args[$id + 1];
+
+    if (!file_exists("projects/$project")) {
+        error('No project available', '');
+    }
+
+    $id = array_search('-format', $args);
+    $format = $args[$id + 1];
+
+    $json = @file_get_contents('projects/.exakat/Project.json');
+    $json = json_decode($json);
+    if (isset($json->project) && $project === $json->project) {
+        // Too early
+        error('No dump.sqlite available', '');
+    }
+
+    if (!file_exists("projects/$project/dump.sqlite")) {
+        error('No dump.sqlite available', '');
+    }
+
+    shell_exec("cd projects/$project/; zip -r dump.zip dump.sqlite; ");
+    serverLog("fetch : $project ".date('r'));
+    $fp = fopen("projects/$project/dump.zip", 'r');
+    fpassthru($fp);
+    unlink("projects/$project/dump.zip");
 }
 
 function config($args) {
     if (($id = array_search('-p', $args)) !== false) {
-        $project = $args[$id + 1];
-        
-        echo shell_exec('__PHP__ __EXAKAT__ config -p '.$project.' -json');
-    } else {
-        error('missing Project '.$id, '');
+        error("missing Project $id", '');
     }
+
+    $project = $args[$id + 1];
+
+    if (!file_exists("projects/$project")) {
+        error('No project available', '');
+    }
+
+    $directives = array_keys($args, '-c');
+    
+    if (empty($directives)) {
+        error('no directives provided', '');
+    }
+
+    $relay = '';
+    foreach($directives as $c) {
+        $relay .= ' -c '.$args[$c + 1];
+    }
+
+    echo shell_exec("__PHP__ __EXAKAT__ config -p $project $relay -json");
 }
 
 function stats($args) {
