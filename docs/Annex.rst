@@ -289,9 +289,14 @@ A number of applications were scanned in order to find real life examples of pat
 
 * `Thelia <https://thelia.net/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
+* Shopware
+* `Vanilla <https://open.vanillaforums.com/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `OpenConf <https://www.openconf.com/>`_
 * Tine20
+* `Dolphin <https://www.boonex.com/>`_
+* `Contao <https://contao.org/en/>`_
+* `ChurchCRM <http://churchcrm.io/>`_
 * `Zurmo <http://zurmo.org/>`_
 * `shopware <https://www.shopware.com/>`_
 * ZenCart
@@ -299,13 +304,12 @@ A number of applications were scanned in order to find real life examples of pat
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `Mautic <https://www.mautic.org/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
-* `ChurchCRM <http://churchcrm.io/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
+* PhpIPAM
+* `xataface <http://xataface.com/>`_
 * `Phinx <https://phinx.org/>`_
-* `Contao <https://contao.org/en/>`_
 * `Edusoho <https://www.edusoho.com/en>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
-* `Vanilla <https://open.vanillaforums.com/>`_
 * Typo3
 * `SuiteCrm <https://suitecrm.com/>`_
 * `Woocommerce <https://woocommerce.com/>`_
@@ -370,6 +374,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.2.4
+
+  * Performances/RegexOnCollector (Performances/RegexOnCollector)
+
 * 1.2.3
 
   * Don't Unset Properties (Classes/DontUnsetProperties)
@@ -384,7 +392,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Check Regex (Melis/CheckRegex ; Melis)
   * Melis/RouteConstraints (Melis/RouteConstraints ; Melis)
-  * Possible Increment (Structures/PossibleIncrement ; Unassigned)
+  * Possible Increment (Structures/PossibleIncrement ; Suggestions)
   * Properties Declaration Consistence (Classes/PPPDeclarationStyle)
 
 * 1.2.0
@@ -567,8 +575,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Date Formats (Php/DateFormats ; Inventory)
   * Incoming Variables (Php/IncomingVariables ; Inventory)
   * Session Variables (Php/SessionVariables ; Inventory)
-  * Too Complex Expression (Structures/ComplexExpression ; Appinfo)
   * Unconditional Break In Loop (Structures/UnconditionLoopBreak ; Analyze, Level 3)
+  * complexExpressionThreshold (Structures/ComplexExpression ; Appinfo)
   * zend-eventmanager 3.2.0 Undefined Classes (ZendF/Zf3Eventmanager32 ; ZendFramework)
   * zend-feed 2.8.0 Undefined Classes (ZendF/Zf3Feed28 ; ZendFramework)
   * zend-http 2.7.0 Undefined Classes (ZendF/Zf3Http27 ; ZendFramework)
@@ -602,9 +610,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Could Be Protected Class Constant (Classes/CouldBeProtectedConstant ; Analyze)
   * Could Be Protected Method (Classes/CouldBeProtectedMethod ; Analyze)
+  * Method Could Be Private Method (Classes/CouldBePrivateMethod)
   * Method Used Below (Classes/MethodUsedBelow ; Analyze)
   * Pathinfo() Returns May Vary (Php/PathinfoReturns ; Analyze, Level 4)
-  * Property Could Be Private Method (Classes/CouldBePrivateMethod)
 
 * 0.12.10
 
@@ -1371,7 +1379,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Implied If (Structures/ImpliedIf ; Analyze, ClearPHP, Codacy, Simple)
   * Inclusions (Structures/IncludeUsage ; Appinfo)
   * Incompilable Files (Php/Incompilable ; Analyze, Appinfo, ClearPHP, Simple)
-  * Inconsistent Concatenation (Structures/InconsistentConcatenation ; )
+  * Inconsistent Concatenation (Structures/InconsistentConcatenation ; Internal)
   * Indices Are Int Or String (Structures/IndicesAreIntOrString ; Analyze, OneFile, Codacy, Simple)
   * Indirect Injection (Security/IndirectInjection ; Security)
   * Instantiating Abstract Class (Classes/InstantiatingAbstractClass ; Analyze, Codacy, Simple)
@@ -1986,6 +1994,7 @@ List of external links mentionned in this documentation.
 * `Category:Private Functions <https://codex.wordpress.org/Category:Private_Functions>`_
 * `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
 * `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_
+* `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_
 * `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `Classes abstraction <http://php.net/abstract>`_
@@ -2074,16 +2083,18 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
+* `Generator Syntax <http://php.net/manual/en/language.generators.syntax.php>`_
 * `GeoIP <http://php.net/manual/en/book.geoip.php>`_
 * `Gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
 * `git <https://git-scm.com/>`_
@@ -2115,6 +2126,7 @@ List of external links mentionned in this documentation.
 * `Imagick for PHP <http://php.net/manual/en/book.imagick.php>`_
 * `IMAP <http://www.php.net/imap>`_
 * `in_array() <http://php.net/in_array>`_
+* `include <http://php.net/manual/en/function.include.php>`_
 * `Integer Syntax <http://php.net/manual/en/language.types.integer.php#language.types.integer.syntax>`_
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
@@ -2146,6 +2158,7 @@ List of external links mentionned in this documentation.
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
@@ -2200,6 +2213,7 @@ List of external links mentionned in this documentation.
 * `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
+* `PHP Constants <http://php.net/manual/en/language.constants.php>`_
 * `PHP Data Object <http://php.net/manual/en/book.pdo.php>`_
 * `PHP extension for libsodium <https://github.com/jedisct1/libsodium-php>`_
 * `PHP gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
@@ -2252,6 +2266,7 @@ List of external links mentionned in this documentation.
 * `Sessions <http://php.net/manual/en/book.session.php>`_
 * `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_
 * `setcookie <http://www.php.net/setcookie>`_
+* `shell_exec <http://www.php.net/shell_exec>`_
 * `Simplexml <http://php.net/manual/en/book.simplexml.php>`_
 * `Single Function Exit Point <http://wiki.c2.com/?SingleFunctionExitPoint>`_
 * `Slim <https://www.slimframework.com/>`_
@@ -2264,8 +2279,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `strtr <http://www.php.net/strtr>`_
 * `substr <http://www.php.net/substr>`_
@@ -2292,6 +2307,7 @@ List of external links mentionned in this documentation.
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type operators <http://php.net/instanceof>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_

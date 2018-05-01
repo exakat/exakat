@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 17 Apr 2018 06:29:06 +0000
-.. comment: Generation hash : 89abd34d6e41b2d2b867ec1af530005a0b1d8107
+.. comment: Generation date : Tue, 01 May 2018 11:23:24 +0000
+.. comment: Generation hash : 6fa19de2024dd4bb7618345e6040c88aba386355
 
 
 .. _$http\_raw\_post\_data:
@@ -231,7 +231,11 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 #######
 
 
-PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It will solve the classname that is used in the left part of the operator.
+PHP has a special class constant to hold the name of the class : 'class' keyword. It represents the classname that is used in the left part of the operator.
+
+Using '::class' is safer than relying on a string. It is also faster, though it is a micro-optimisation. 
+
+It is introduced in PHP 5.5.
 
 .. code-block:: php
 
@@ -247,6 +251,9 @@ PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It 
    // return Namespace\ClassName
    
    ?>
+
+
+See also `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_.
 
 +------------+------------------------------------------------------+
 | Short name | Php/StaticclassUsage                                 |
@@ -642,6 +649,8 @@ Using references is then must faster, and easier to read.
 
 You may also use `'array_walk() <http://www.php.net/array_walk>`_ or `'array_map() <http://www.php.net/array_map>`_ (when $key is not used) to avoid the use of foreach.
 
+See also `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
+
 +------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Structures/AlteringForeachWithoutReference                                                                                        |
 +------------+-----------------------------------------------------------------------------------------------------------------------------------+
@@ -958,7 +967,7 @@ Assign With And
 ###############
 
 
-The lettered logical operators yield to assignation.
+The lettered logical operators yield to assignation. It may collect less information than expected.
 
 It is recommended to use the &&, ^ and || operators, instead of and, or and xor, to prevent confusion.
 
@@ -981,11 +990,13 @@ It is recommended to use the &&, ^ and || operators, instead of and, or and xor,
 
 See also `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
 
-+------------+----------------+
-| Short name | Php/AssignAnd  |
-+------------+----------------+
-| Themes     | :ref:`Analyze` |
-+------------+----------------+
++------------+-------------------------------+
+| Short name | Php/AssignAnd                 |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
+| Examples   | :ref:`xataface-php-assignand` |
++------------+-------------------------------+
 
 
 
@@ -3100,6 +3111,7 @@ List of PHP constants being defined.
    
    // with 'define()
    define ('Y', 2);
+   
    ?>
 
 +------------+-------------------------+
@@ -3172,7 +3184,7 @@ List of constants being defined with names that are incompatible with PHP standa
    ?>
 
 
-See also `Constants <http://php.net/manual/en/language.constants.php>`_.
+See also `PHP Constants <http://php.net/manual/en/language.constants.php>`_.
 
 +------------+--------------------------------+
 | Short name | Constants/ConstantStrangeNames |
@@ -3466,11 +3478,13 @@ This global is only used in one function or method. It may be called 'static', i
    }
    ?>
 
-+------------+--------------------------+
-| Short name | Structures/CouldBeStatic |
-+------------+--------------------------+
-| Themes     | :ref:`Analyze`           |
-+------------+--------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Structures/CouldBeStatic                                                        |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                  |
++------------+---------------------------------------------------------------------------------+
+| Examples   | :ref:`dolphin-structures-couldbestatic`, :ref:`contao-structures-couldbestatic` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -3710,7 +3724,7 @@ Could Use Short Assignation
 ###########################
 
 
-Use short assignement operator, to speed up code, and keep syntax clear.  
+Use short assignment operator, to speed up code, and keep syntax clear.  
 
 Some operators, like * or +, have a compact and fast 'do-and-assign' version. They looks like a compacted version for = and the operator. This syntax is good for readability, and saves some memory in the process. 
 
@@ -3765,6 +3779,8 @@ See also `Assignation Operators <http://php.net/manual/en/language.operators.ass
 | Themes     | :ref:`Analyze`, :ref:`Performances`                                                                         |
 +------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP   | `use-short-assignations <https://github.com/dseguy/clearPHP/tree/master/rules/use-short-assignations.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`churchcrm-structures-coulduseshortassignation`, :ref:`thelia-structures-coulduseshortassignation`     |
 +------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -6632,9 +6648,9 @@ Htmlentities Calls
 
 `'htmlentities() <http://www.php.net/htmlentities>`_ and `'htmlspecialchars() <http://www.php.net/htmlspecialchars>`_ are used to prevent injecting special characters in HTML code. As a bare minimum, they take a string and encode it for HTML.
 
-The second argument of the functions is the type of protection. The protection may apply to quotes or not, to HTML4 or 5, etc. It is highly recommended to set it explicitly.
+The second argument of the functions is the type of protection. The protection may apply to quotes or not, to HTML 4 or 5, etc. It is highly recommended to set it explicitly.
 
-The third argument of the functions is the encoding of the string. In PHP 5.3, it as 'ISO-8859-1', in 5.4, was 'UTF-8', and in 5.6, it is now default_charset, a php.ini configuration that has the default value of 'UTF-8'. It is highly recommended to set this argument too, to avoid distortions from the configuration.
+The third argument of the functions is the encoding of the string. In PHP 5.3, it as ``ISO-8859-1``, in 5.4, was ``UTF-8``, and in 5.6, it is now default_charset, a ``php.ini`` configuration that has the default value of ``UTF-8``. It is highly recommended to set this argument too, to avoid distortions from the configuration.
 
 .. code-block:: php
 
@@ -7805,7 +7821,7 @@ It is recommended to keep the global variables's name distinct from the local va
    $globalVariable = 2;
    
    function foo() {
-       globl $globalVariable2;
+       global $globalVariable2;
        
        $variable = 4;
        $localVariable = 3;
@@ -7977,11 +7993,13 @@ Even two 'or' comparisons are slower than using a `'in_array() <http://www.php.n
 
 See also `in_array() <http://php.net/in_array>`_.
 
-+------------+-------------------------------+
-| Short name | Performances/LogicalToInArray |
-+------------+-------------------------------+
-| Themes     | :ref:`Analyze`                |
-+------------+-------------------------------+
++------------+----------------------------------------------+
+| Short name | Performances/LogicalToInArray                |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`                               |
++------------+----------------------------------------------+
+| Examples   | :ref:`zencart-performances-logicaltoinarray` |
++------------+----------------------------------------------+
 
 
 
@@ -8326,6 +8344,54 @@ Create an attribute that guess what are the called function or methods, when pos
 +------------+------------------------+
 | Themes     | :ref:`Analyze`         |
 +------------+------------------------+
+
+
+
+.. _method-could-be-private-method:
+
+Method Could Be Private Method
+##############################
+
+
+The following methods are never used outside their class of definition. Given the analyzed code, they could be set as private. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public function couldBePrivate() {}
+       public function cantdBePrivate() {}
+       
+       function bar() {
+           // couldBePrivate is used internally. 
+           $this->couldBePrivate();
+       }
+   }
+   
+   class foo2 extends foo {
+       function bar2() {
+           // cantdBePrivate is used in a child class. 
+           $this->cantdBePrivate();
+       }
+   }
+   
+   //couldBePrivate() is not used outside 
+   $foo = new foo();
+   
+   //cantdBePrivate is used outside the class
+   $foo->cantdBePrivate();
+   
+   ?>
+
+
+Note that dynamic properties (such as $x->$y) are not taken into account.
+
++------------+------------------------------+
+| Short name | Classes/CouldBePrivateMethod |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -8685,10 +8751,15 @@ Mixed usage of concatenation and string interpolation is error prone. It is hard
    $a = $b . c$d;
    $a = $b . c{$d};
    
+   // Mixed Concatenation and Interpolation string with constant
+   $a = {$b}c . CONSTANT;
+   
    ?>
 
 
-This issue doesn't change the output. It makes code less error prone.
+Fixing this issue has no impact on the output. It makes code less error prone.
+
+There are some situations where using concatenation are compulsory : when using a constant, calling a function, running a complex expression or make use of the escape sequence. You may also consider pushing the storing of such expression in a local variable.
 
 +------------+----------------------------------------------------------------+
 | Short name | Structures/MixedConcatInterpolation                            |
@@ -9945,11 +10016,13 @@ Comparing `'count() <http://www.php.net/count>`_ and strlen() with other values 
 
 Note that this is a micro-optimisation : since PHP keeps track of the number of elements in arrays (or number of chars in strings), the total computing time of both operations is often lower than a ms. However, both functions tends to be heavily used, and may even be used inside loops.
 
-+------------+---------------------------+
-| Short name | Performances/NotCountNull |
-+------------+---------------------------+
-| Themes     | :ref:`Performances`       |
-+------------+---------------------------+
++------------+--------------------------------------------+
+| Short name | Performances/NotCountNull                  |
++------------+--------------------------------------------+
+| Themes     | :ref:`Performances`                        |
++------------+--------------------------------------------+
+| Examples   | :ref:`wordpress-performances-notcountnull` |
++------------+--------------------------------------------+
 
 
 
@@ -10105,6 +10178,7 @@ In a view.phtml file :
 
 
 In a controller.php file : 
+
 .. code-block:: php
 
    <?php
@@ -10559,9 +10633,23 @@ No Parenthesis For Language Construct
 #####################################
 
 
-Some PHP language constructs, such are include, print, echo don't need parenthesis. They will handle parenthesis, but it is may lead to strange situations. 
+Some PHP language constructs, such are ``include``, ``print``, ``echo`` don't need parenthesis. They cope with parenthesis, but it is may lead to strange situations. 
 
-It it better to avoid using parenthesis with echo, print, return, throw, include and require (and _once).
+.. code-block:: php
+
+   <?php
+   
+   // This is an attempt to load 'foo.inc', or kill the script
+   include('foo.inc') or 'die();
+   // in fact, this is read by PHP as : include 1 
+   // include  'foo.inc' or 'die();
+   
+   ?>
+
+
+It it better to avoid using parenthesis with ``echo``, ``print``, ``return``, ``throw``, ``yield``, ``yield from``, ``include``, ``require``, ``include_once``, ``require_once``.
+
+See also `include <http://php.net/manual/en/function.include.php>`_.
 
 +------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Structures/NoParenthesisForLanguageConstruct                                                                                              |
@@ -11638,18 +11726,26 @@ This may be linted by PHP, when the function definition is in the same file as t
    
    function foo(&$bar) { /'**/ }
    
+   function &bar() { /'**/ }
+   
+   // This is not possible : 'strtolower() returns a value
    foo(strtolower($string));
+   
+   // This is valid : bar() returns a reference
+   foo(bar($string));
    
    ?>
 
 
 This analysis currently covers functioncalls and static methodcalls, but omits methodcalls.
 
-+------------+-----------------------------------------+
-| Short name | Functions/OnlyVariablePassedByReference |
-+------------+-----------------------------------------+
-| Themes     | :ref:`Analyze`                          |
-+------------+-----------------------------------------+
++------------+----------------------------------------------------------------------------------------------------------------+
+| Short name | Functions/OnlyVariablePassedByReference                                                                        |
++------------+----------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                                 |
++------------+----------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`dolphin-functions-onlyvariablepassedbyreference`, :ref:`phpipam-functions-onlyvariablepassedbyreference` |
++------------+----------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12453,6 +12549,22 @@ The same applies to `'parse_url() <http://www.php.net/parse_url>`_, which return
 
 
 
+.. _performances/regexoncollector:
+
+Performances/RegexOnCollector
+#############################
+
+
+
+
++------------+-------------------------------+
+| Short name | Performances/RegexOnCollector |
++------------+-------------------------------+
+| Themes     | :ref:`Performances`           |
++------------+-------------------------------+
+
+
+
 .. _php-7-indirect-expression:
 
 Php 7 Indirect Expression
@@ -12667,6 +12779,33 @@ It is advised to never leave that kind of instruction in a production code.
 +------------+---------------------------------+
 | Themes     | :ref:`Analyze`, :ref:`Security` |
 +------------+---------------------------------+
+
+
+
+.. _possible-increment:
+
+Possible Increment
+##################
+
+
+This expression looks like a typo : a missing + would change the behavior.
+
+The same pattern is not reported with -, as it is legit expression. + sign is usually understated, rather than explicit.
+
+.. code-block:: php
+
+   <?php
+   
+   // could it be a ++$b ? 
+   $a = +$b;
+   
+   ?>
+
++------------+------------------------------+
+| Short name | Structures/PossibleIncrement |
++------------+------------------------------+
+| Themes     | :ref:`Suggestions`           |
++------------+------------------------------+
 
 
 
@@ -13019,54 +13158,6 @@ Public properties are omitted here : they may be modified anywhere in the code.
 
 +------------+------------------------------+
 | Short name | Classes/PropertyCouldBeLocal |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
-
-
-
-.. _property-could-be-private-method:
-
-Property Could Be Private Method
-################################
-
-
-The following method are never used outside their class of definition. Given the analyzed code, they could be set as private. 
-
-.. code-block:: php
-
-   <?php
-   
-   class foo {
-       public function couldBePrivate() {}
-       public function cantdBePrivate() {}
-       
-       function bar() {
-           // couldBePrivate is used internally. 
-           $this->couldBePrivate();
-       }
-   }
-   
-   class foo2 extends foo {
-       function bar2() {
-           // cantdBePrivate is used in a child class. 
-           $this->cantdBePrivate();
-       }
-   }
-   
-   //couldBePrivate() is not used outside 
-   $foo = new foo();
-   
-   //cantdBePrivate is used outside the class
-   $foo->cantdBePrivate();
-   
-   ?>
-
-
-Note that dynamic properties (such as $x->$y) are not taken into account.
-
-+------------+------------------------------+
-| Short name | Classes/CouldBePrivateMethod |
 +------------+------------------------------+
 | Themes     | :ref:`Analyze`               |
 +------------+------------------------------+
@@ -16744,7 +16835,7 @@ Throws An Assignement
 
 It is possible to throw an exception, and, in the same time, assign this exception to a variable.
 
-However, $e will never be used, as the exception is thrown, and any following code is not executed. 
+However, the variable will never be used, as the exception is thrown, and any following code is not executed. 
 
 .. code-block:: php
 
@@ -16760,7 +16851,7 @@ However, $e will never be used, as the exception is thrown, and any following co
    ?>
 
 
-The assignement should be removed.
+The assignment should be removed.
 
 +------------+----------------------------+
 | Short name | Structures/ThrowsAndAssign |
@@ -18094,7 +18185,7 @@ Unpreprocessed Values
 
 Preprocessing values is the preparation of values before PHP executes the code. 
 
-There is no macro language in PHP, that prepares the code before compilation, bringing some confort and short syntax. Most of the time, one uses PHP itself to preprocess data. 
+There is no macro language in PHP, that prepares the code before compilation, bringing some comfort and short syntax. Most of the time, one uses PHP itself to preprocess data. 
 
 For example : 
 
@@ -18298,6 +18389,8 @@ It checks if an variable is of a specific class. However, if the referenced clas
 
 Make sure the following classes are well defined.
 
+See also `Type operators <http://php.net/`'instanceof <http://php.net/manual/en/language.operators.type.php>`_>`_.
+
 +------------+-----------------------------------------------------------------------------------------------------------------+
 | Short name | Classes/UnresolvedInstanceof                                                                                    |
 +------------+-----------------------------------------------------------------------------------------------------------------+
@@ -18420,7 +18513,24 @@ Unthrown Exception
 ##################
 
 
-These are exceptions that are defined in the code but never thrown.
+These are exceptions that are defined in the code but never thrown. 
+
+.. code-block:: php
+
+   <?php
+   
+   //This exception is defined but never used in the code.
+   class myUnusedException extends \Exception {}
+   
+   //This exception is defined and used in the code.
+   class myUsedException extends \Exception {}
+   
+   throw new myUsedException('I was called');
+   
+   ?>
+
+
+See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
 
 +------------+-------------------------------------------------------------------------------------------------------------+
 | Short name | Exceptions/Unthrown                                                                                         |
@@ -20108,11 +20218,13 @@ In special situations, variables may be used once :
 
 The current analyzer count variables at the application level, and not at a method scope level.
 
-+------------+----------------------------+
-| Short name | Variables/VariableUsedOnce |
-+------------+----------------------------+
-| Themes     | :ref:`Analyze`             |
-+------------+----------------------------+
++------------+---------------------------------------------------------------------------------------+
+| Short name | Variables/VariableUsedOnce                                                            |
++------------+---------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                        |
++------------+---------------------------------------------------------------------------------------+
+| Examples   | :ref:`shopware-variables-variableusedonce`, :ref:`vanilla-variables-variableusedonce` |
++------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -20879,11 +20991,9 @@ Using Short Tags
 
 The code makes use of short tags.
 
-<? /* php code */ ?>. 
+``<? /* php code */ ?>. ``
 
-It is recommended to not use short tags, and use standard PHP tags : .. code-block:: php
-
-   <?php ?>
+It is recommended to not use short tags, and use standard PHP tags.
 
 +------------+-------------------------------------------------------------------------------------------+
 | Short name | Structures/ShortTags                                                                      |
@@ -21995,7 +22105,7 @@ eval() Without Try
 ##################
 
 
-`'eval() <http://www.php.net/eval>`_ emits a `'ParseError <http://php.net/manual/fr/class.parseerror.php>`_ exception with PHP 7 and later. Catching this exception is the recommended way to handle errors when using the `'eval() <http://www.php.net/eval>`_ function.
+``eval()`` emits a ``ParseError`` exception with PHP 7 and later. Catching this exception is the recommended way to handle errors when using the ``eval()`` function.
 
 .. code-block:: php
 
@@ -22017,7 +22127,7 @@ eval() Without Try
    ?>
 
 
-Note that it will catch situations where `'eval() <http://www.php.net/eval>`_ is provided with code that can't be used, but it will not catch security problems. Avoid using `'eval() <http://www.php.net/eval>`_ with incoming data.
+Note that it will catch situations where ``eval()`` is provided with code that can't be used, but it will not catch security problems. Avoid using ``eval()`` with incoming data.
 
 +------------+---------------------------------+
 | Short name | Structures/EvalWithoutTry       |

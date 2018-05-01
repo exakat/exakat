@@ -50,6 +50,63 @@ $main_provid is filtered as an integer. $main_supid is then filtered twice : one
         $main_supid  = 0 + (int)$_POST['SupervisorID'];
         //.....
 
+Used Once Variables
+===================
+
+.. _shopware-variables-variableusedonce:
+
+Shopware
+^^^^^^^^
+
+:ref:`used-once-variables`, in _sql/migrations/438-add-email-template-header-footer-fields.php:115. 
+
+In the updateEmailTemplate method, $generatedQueries collects all the generated SQL queries. $generatedQueries is not initialized, and never used after initialization. 
+
+.. code-block:: php
+
+    private function updateEmailTemplate($name, $content, $contentHtml = null)
+        {
+            $sql = <<<SQL
+    UPDATE `s_core_config_mails` SET `content` = "$content" WHERE `name` = "$name" AND dirty = 0
+    SQL;
+            $this->addSql($sql);
+    
+            if ($contentHtml != null) {
+                $sql = <<<SQL
+    UPDATE `s_core_config_mails` SET `content` = "$content", `contentHTML` = "$contentHtml" WHERE `name` = "$name" AND dirty = 0
+    SQL;
+                $generatedQueries[] = $sql;
+            }
+    
+            $this->addSql($sql);
+        }
+
+
+--------
+
+Used Once Variables
+===================
+
+.. _vanilla-variables-variableusedonce:
+
+Vanilla
+^^^^^^^
+
+:ref:`used-once-variables`, in library/core/class.configuration.php:1461. 
+
+In this code, $cachedConfigData is collected after storing date in the cache. Gdn::cache()->store() does actual work, so its calling is necessary. The result, collected after execution, is not reused in the rest of the method (long method, not all is shown here). Removing such variable is a needed clean up after development and debug, but also prevents pollution of the variable namespace.
+
+.. code-block:: php
+
+    // Save to cache if we're into that sort of thing
+                    $fileKey = sprintf(Gdn_Configuration::CONFIG_FILE_CACHE_KEY, $this->Source);
+                    if ($this->Configuration && $this->Configuration->caching() && Gdn::cache()->type() == Gdn_Cache::CACHE_TYPE_MEMORY && Gdn::cache()->activeEnabled()) {
+                        $cachedConfigData = Gdn::cache()->store($fileKey, $data, [
+                            Gdn_Cache::FEATURE_NOPREFIX => true,
+                            Gdn_Cache::FEATURE_EXPIRY => 3600
+                        ]);
+                    }
+
 Logical Should Use Symbolic Operators
 =====================================
 
@@ -106,6 +163,133 @@ Note that the order of merge will be the same when merging than when collecting 
             }
     
             $attributes = array_merge($attributes, $this->_additionalLdapAttributesToFetch);
+
+Could Be Static
+===============
+
+.. _dolphin-structures-couldbestatic:
+
+Dolphin
+^^^^^^^
+
+:ref:`could-be-static`, in inc/utils.inc.php:673. 
+
+Dolphin pro relies on HTMLPurifier to handle cleaning of values : it is used to prevent xss threat. In this method, oHtmlPurifier is first checked, and if needed, created. Since creation is long and costly, it is only created once. Once the object is created, it is stored as a global to be accessible at the next call of the method. In fact, oHtmlPurifier is never used outside this method, so it could be turned into a 'static' variable, and prevent other methods to modify it. This is a typical example of variable that could be static instead of global. 
+
+.. code-block:: php
+
+    function clear_xss($val)
+    {
+        // HTML Purifier plugin
+        global $oHtmlPurifier;
+        if (!isset($oHtmlPurifier) && !$GLOBALS['logged']['admin']) {
+    
+            require_once(BX_DIRECTORY_PATH_PLUGINS . 'htmlpurifier/HTMLPurifier.standalone.php');
+    
+    /..../
+    
+            $oHtmlPurifier = new HTMLPurifier($oConfig);
+        }
+    
+        if (!$GLOBALS['logged']['admin']) {
+            $val = $oHtmlPurifier->purify($val);
+        }
+    
+        $oZ = new BxDolAlerts('system', 'clear_xss', 0, 0,
+            array('oHtmlPurifier' => $oHtmlPurifier, 'return_data' => &$val));
+        $oZ->alert();
+    
+        return $val;
+    }
+
+
+--------
+
+Could Be Static
+===============
+
+.. _contao-structures-couldbestatic:
+
+Contao
+^^^^^^
+
+:ref:`could-be-static`, in system/helper/functions.php:184. 
+
+$arrScanCache is a typical cache variables. It is set as global for persistence between calls. If it contains an already stored answer, it is returned immediately. If it is not set yet, it is then filled with a value, and later reused. This global could be turned into static, and avoid pollution of global space. 
+
+.. code-block:: php
+
+    function scan($strFolder, $blnUncached=false)
+    {
+    	global $arrScanCache;
+    
+    	// Add a trailing slash
+    	if (substr($strFolder, -1, 1) != '/')
+    	{
+    		$strFolder .= '/';
+    	}
+    
+    	// Load from cache
+    	if (!$blnUncached && isset($arrScanCache[$strFolder]))
+    	{
+    		return $arrScanCache[$strFolder];
+    	}
+    	$arrReturn = array();
+    
+    	// Scan directory
+    	foreach (scandir($strFolder) as $strFile)
+    	{
+    		if ($strFile == '.' || $strFile == '..')
+    		{
+    			continue;
+    		}
+    
+    		$arrReturn[] = $strFile;
+    	}
+    
+    	// Cache the result
+    	if (!$blnUncached)
+    	{
+    		$arrScanCache[$strFolder] = $arrReturn;
+    	}
+    
+    	return $arrReturn;
+    }
+
+Could Use Short Assignation
+===========================
+
+.. _churchcrm-structures-coulduseshortassignation:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`could-use-short-assignation`, in src/ChurchCRM/utils/GeoUtils.php:74. 
+
+Sometimes, the variable is on the other side of the operator.
+
+.. code-block:: php
+
+    $distance = 0.6213712 * $distance;
+
+
+--------
+
+Could Use Short Assignation
+===========================
+
+.. _thelia-structures-coulduseshortassignation:
+
+Thelia
+^^^^^^
+
+:ref:`could-use-short-assignation`, in local/modules/Tinymce/Resources/js/tinymce/filemanager/include/utils.php:70. 
+
+/= is rare, but it definitely could be used here.
+
+.. code-block:: php
+
+    $size = $size / 1024;
 
 Timestamp Difference
 ====================
@@ -356,6 +540,85 @@ Default development behavior : display the caught exception. Production behavior
     
                 return;
             }
+
+Only Variable Passed By Reference
+=================================
+
+.. _dolphin-functions-onlyvariablepassedbyreference:
+
+Dolphin
+^^^^^^^
+
+:ref:`only-variable-passed-by-reference`, in /administration/charts.json.php:89. 
+
+This is not possible, as array_slice returns a new array, and not a reference. Minimaly, the intermediate result must be saved in a variable, to be popped. Actually, this code extracts the element at key 1 in the $aData array, although this also works with hash (non-numeric keys).
+
+.. code-block:: php
+
+    array_pop(array_slice($aData, 0, 1))
+
+
+--------
+
+Only Variable Passed By Reference
+=================================
+
+.. _phpipam-functions-onlyvariablepassedbyreference:
+
+PhpIPAM
+^^^^^^^
+
+:ref:`only-variable-passed-by-reference`, in functions/classes/class.Thread.php:243. 
+
+This is sneaky bug : the assignation $status = 0 returns a value, and not a variable. This leads PHP to mistake the initialized 0 with the variable $status and faild. It is not possible to initialize variable AND use them as argument.
+
+.. code-block:: php
+
+    pcntl_waitpid($this->pid, $status = 0)
+
+Assign With And
+===============
+
+.. _xataface-php-assignand:
+
+xataface
+^^^^^^^^
+
+:ref:`assign-with-and`, in Dataface/LanguageTool.php:265. 
+
+The usage of 'and' here is a workaround for PHP version that have no support for the coalesce. $autosubmit receives the value of $params['autosubmit'] only if the latter is set. Yet, with = having higher precedence over 'and', $autosubmit is mistaken with the existence of $params['autosubmit'] : its value is actually omitted.
+
+.. code-block:: php
+
+    $autosubmit = isset($params['autosubmit']) and $params['autosubmit'];
+
+Logical To in_array
+===================
+
+.. _zencart-performances-logicaltoinarray:
+
+ZenCart
+^^^^^^^
+
+:ref:`logical-to-in\_array`, in admin/users.php:32. 
+
+Long list of == are harder to read. Using an in_array() call gathers all the strings together, in an array. In turn, this helps readability and possibility, reusability by making that list an constant. 
+
+.. code-block:: php
+
+    // if needed, check that a valid user id has been passed
+    if (($action == 'update' || $action == 'reset') && isset($_POST['user']))
+    {
+      $user = $_POST['user'];
+    }
+    elseif (($action == 'edit' || $action == 'password' || $action == 'delete' || $action == 'delete_confirm') && $_GET['user'])
+    {
+      $user = $_GET['user'];
+    }
+    elseif(($action=='delete' || $action=='delete_confirm') && isset($_POST['user']))
+    {
+      $user = $_POST['user'];
+    }
 
 Could Be Private Class Constant
 ===============================
@@ -684,6 +947,25 @@ implode('', ) is probably not the slowest part in these lines.
     
     $module_file = file($this->getLocalPath().'override/'.$path);
     eval(preg_replace(array('#^\s*<\?(?:php)?#', '#class\s+'.$classname.'(\s+extends\s+([a-z0-9_]+)(\s+implements\s+([a-z0-9_]+))?)?#i'), array(' ', 'class '.$classname.'Override_remove'.$uniq), implode('', $module_file)));
+
+No Count With 0
+===============
+
+.. _wordpress-performances-notcountnull:
+
+WordPress
+^^^^^^^^^
+
+:ref:`no-count-with-0`, in wp-admin/includes/misc.php:74. 
+
+$build or $signature are empty at that point, no need to calculate their respective length. 
+
+.. code-block:: php
+
+    // Check for zero length, although unlikely here
+        if (strlen($built) == 0 || strlen($signature) == 0) {
+          return false;
+        }
 
 Use pathinfo() Arguments
 ========================

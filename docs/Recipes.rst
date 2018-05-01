@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 17 Apr 2018 06:29:06 +0000
-.. comment: Generation hash : 89abd34d6e41b2d2b867ec1af530005a0b1d8107
+.. comment: Generation date : Tue, 01 May 2018 11:23:24 +0000
+.. comment: Generation hash : 6fa19de2024dd4bb7618345e6040c88aba386355
 
 
 .. _analyze:
@@ -202,6 +202,7 @@ Total : 343 analysis
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Mark Callable <mark-callable>`
+* :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Method Used Below <method-used-below>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
@@ -280,7 +281,6 @@ Total : 343 analysis
 * :ref:`Print And Die <print-and-die>`
 * :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
 * :ref:`Property Could Be Local <property-could-be-local>`
-* :ref:`Property Could Be Private Method <property-could-be-private-method>`
 * :ref:`Property Could Be Private Property <property-could-be-private-property>`
 * :ref:`Property Used In One Method Only <property-used-in-one-method-only>`
 * :ref:`Property Variable Confusion <property-variable-confusion>`
@@ -864,7 +864,7 @@ Total : 25 analysis
 Performances
 ++++++++++++
 
-Total : 31 analysis
+Total : 32 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -878,6 +878,7 @@ Total : 31 analysis
 * :ref:`Join file() <join-file()>`
 * :ref:`Make One Call With Array <make-one-call-with-array>`
 * :ref:`No Count With 0 <no-count-with-0>`
+* :ref:`Performances/RegexOnCollector`
 * :ref:`Should Use Function <should-use-function>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Simple Switch <simple-switch>`
@@ -978,7 +979,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 49 analysis
+Total : 50 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
@@ -988,6 +989,7 @@ Total : 49 analysis
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
+* :ref:`Possible Increment <possible-increment>`
 * :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Reuse Variable <reuse-variable>`
 * :ref:`Should Preprocess Chr <should-preprocess-chr>`

@@ -262,6 +262,7 @@ Glossary
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Implied If <implied-if>`
       + :ref:`No Hardcoded Port <no-hardcoded-port>`
+      + :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
       + :ref:`Or Die <or-die>`
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
@@ -305,7 +306,6 @@ Glossary
     + `eval()`
 
       + :ref:`Eval() Usage <eval()-usage>`
-      + :ref:`eval() Without Try <eval()-without-try>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `exit`
@@ -721,6 +721,10 @@ Glossary
     + `strstr()`
 
       + :ref:`Slow Functions <slow-functions>`
+
+    + `strtolower()`
+
+      + :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
 
     + `strtoupper()`
 
