@@ -174,8 +174,20 @@ class CommandLine extends Config {
                             if (empty($this->config['configuration'])) {
                                 $this->config['configuration'] = array();
                             } 
-                            list($name, $value) = explode('=', trim($args[$id + 1]));
-                            $this->config['configuration'][$name] = $value;
+                            if (strpos($args[$id + 1], '=') !== false) {
+                                list($name, $value) = explode('=', trim($args[$id + 1]));
+                            } else {
+                                $name = trim($args[$id + 1]);
+                                $value = '';
+                            }
+                            if (in_array($name, array('ignore_dirs', 'include_dirs', 'file_extensions'))) {
+                                if (!isset($this->config['configuration'][$name])) {
+                                    $this->config['configuration'][$name] = array();
+                                }
+                                $this->config['configuration'][$name][] = $value;
+                            } else {
+                                $this->config['configuration'][$name] = $value;
+                            }
                             break;
 
                         default : 
