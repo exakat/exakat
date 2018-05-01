@@ -40,6 +40,7 @@ use Exakat\Tasks\Helpers\AtomGroup;
 use Exakat\Tasks\Helpers\Intval;
 use Exakat\Tasks\Helpers\Strval;
 use Exakat\Tasks\Helpers\Boolval;
+use Exakat\Tasks\Helpers\Nullval;
 use Exakat\Tasks\Helpers\Constant;
 use Exakat\Tokenizer\Token;
 
@@ -269,6 +270,7 @@ class Load extends Tasks {
         $this->plugins[] = new Boolval();
         $this->plugins[] = new Intval();
         $this->plugins[] = new Strval();
+        $this->plugins[] = new Nullval();
         $this->plugins[] = new Constant($this->config);
 
         $this->precedence = new Precedence($this->config->phpversion, $this->config);
