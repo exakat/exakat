@@ -80,7 +80,7 @@ class Upgrade extends Tasks {
                 return;
             }
         } elseif (version_compare(Exakat::VERSION, $r[1]) === 0) {
-            print 'This is the latest version ('.Exakat::VERSION.')'.PHP_EOL;;
+            print 'This is the latest version ('.Exakat::VERSION.')'.PHP_EOL;
             return;
         } else {
             print 'This version is ahead of the latest publication (Current : '.Exakat::VERSION.', Latest: '.$r[1].')'.PHP_EOL;

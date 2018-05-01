@@ -42,7 +42,7 @@ class LoadFinal extends Tasks {
     public function run() {
         $this->linksIn = Token::linksAsList();
 
-        $this->dictCode = new Dictionary($this->datastore);
+        $this->dictCode = Dictionary::factory($this->datastore);
 
         $this->logTime('Start');
         display('Start load final');

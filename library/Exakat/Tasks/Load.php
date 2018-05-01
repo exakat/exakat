@@ -5255,12 +5255,12 @@ SQL;
             }
         }
         
-        $query = 'INSERT INTO calls VALUES ("'.$type.'",
-                                            "'.$this->callsSqlite->escapeString($fullnspath).'",
-                                            "'.$this->callsSqlite->escapeString($globalpath).'",
-                                            "'.$call->atom.'",
-                                            "'.$call->id.'"
-         )';
+        $query = "INSERT INTO calls VALUES ('{$type}',
+                                            '{$this->callsSqlite->escapeString($fullnspath)}',
+                                            '{$this->callsSqlite->escapeString($globalpath)}',
+                                            '{$call->atom}',
+                                            '{$call->id}'
+         )";
 
         $this->callsSqlite->query($query);
     }
@@ -5309,12 +5309,12 @@ SQL;
                 $globalpath = '';
             }
             
-            $query = 'INSERT INTO calls VALUES ("'.$type.'",
-                                                "'.$this->callsSqlite->escapeString($fullnspath).'",
-                                                "'.$this->callsSqlite->escapeString($globalpath).'",
-                                                "'.$atom.'",
-                                                "'.$call->id.'"
-             )';
+            $query = "INSERT INTO calls VALUES ('$type',
+                                                  '{$this->callsSqlite->escapeString($fullnspath)}',
+                                                  '{$this->callsSqlite->escapeString($globalpath)}',
+                                                  '{$atom}',
+                                                  '{$call->id}'
+                                               )";
 
             $this->callsSqlite->query($query);
         }
@@ -5333,12 +5333,12 @@ SQL;
             $globalpath = '';
         }
 
-        $query = 'INSERT INTO definitions VALUES ("'.$type.'",
-                                                  "'.$this->callsSqlite->escapeString($fullnspath).'",
-                                                  "'.$this->callsSqlite->escapeString($globalpath).'",
-                                                  "'.$definition->atom.'",
-                                                  "'.$definition->id.'"
-         )';
+        $query = "INSERT INTO definitions VALUES ('{$type}',
+                                                  '{$this->callsSqlite->escapeString($fullnspath)}',
+                                                  '{$this->callsSqlite->escapeString($globalpath)}',
+                                                  '{$definition->atom}',
+                                                  '{$definition->id}'
+         )";
 
         $res = $this->callsSqlite->query($query);
         assert($res, "Error while saving definitions : ".$query);

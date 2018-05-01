@@ -96,10 +96,7 @@ GREMLIN;
             $vertices = $this->gremlin->query($query);
             if (isset($vertices->results)) {
                 $vertices = $vertices->results;
-            } else {
-                // $vertices is an array
-                $vertices = $vertices;
-            }
+            } 
 
             $return = array();
             foreach($vertices as $values) {
