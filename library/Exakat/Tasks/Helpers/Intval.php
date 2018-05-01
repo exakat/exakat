@@ -59,6 +59,7 @@ class Intval extends Plugin {
 
             case 'Real' :
             case 'String' :
+            case 'Heredoc' :
                 $atom->intval   = (int) trimOnce($atom->code);
                 break;
     

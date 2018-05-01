@@ -51,6 +51,7 @@ class Boolval extends Plugin {
                 break;
 
             case 'String' :
+            case 'Heredoc' :
                 $atom->boolean = (int) (trimOnce($atom->code) !== '');
                 break;
 
