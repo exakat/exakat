@@ -46,7 +46,6 @@ class Config extends Tasks {
 
         $projectConfig = new ProjectConfig($this->config->projects_root);
         $projectConfig->loadConfig($project);
-        print_r($this->config->configuration);
         foreach($this->config->configuration as $key => $value) {
             if (in_array($key, array('ignore_dirs', 'include_dirs', 'file_extensions'))) {
                 $projectConfig->setConfig($key,     explode(',', $value));
