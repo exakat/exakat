@@ -1,4 +1,4 @@
-Version 1.2.5 (Li Yuan, coming up)
+Version 1.2.6 (Li Jiancheng, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,22 @@ Version 1.2.5 (Li Yuan, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.2.5 (Li Yuan, 2018-04-30)
++ Architecture
+    + Added command 'config' to configure project from commandline
+    + Made Exakat reentrant
+    + Moved Configuration creation to external file
+    + Upgraded status when audit isn't run yet
++ Analyzer
+    + New analysis : Regex on Collector
+    + Upgraded analysis : Only Variable with reference argument
+    + Upgraded analysis : File Inclusion Wrong Case
+    + Upgraded analysis : Invalid Regex
+    + Added support for PHP 7.2.5, 7.1.17 and 7.0.30
+    + Checked unit tests : 2802 / 2809 test pass (99% pass). 
++ Tokenizer
+    + Fixed various bugs with constant scalar expression
 
 Version 1.2.4 (Li Chunfeng, 2018-04-23)
 + Architecture
