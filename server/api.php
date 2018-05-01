@@ -26,6 +26,7 @@ $orders = array('stop',
                 'ping',
 
                 'init', 
+                'config', 
                 'project', 
                 'fetch', 
 
@@ -177,7 +178,14 @@ function fetch($args) {
 
         $id = array_search('-format', $args);
         $format = $args[$id + 1];
-        
+
+        $json = @file_get_contents('projects/.exakat/Project.json');
+        $json = json_decode($json);
+        if (isset($json->project) && $project === $json->project) {
+            // Too early
+            error('No dump.sqlite available', '');
+        }
+
         if (!file_exists("projects/$project/dump.sqlite")) {
             error('No dump.sqlite available', '');
         }
@@ -187,6 +195,16 @@ function fetch($args) {
         $fp = fopen("projects/$project/dump.zip", 'r');
         fpassthru($fp);
         unlink("projects/$project/dump.zip");
+    } else {
+        error('missing Project '.$id, '');
+    }
+}
+
+function config($args) {
+    if (($id = array_search('-p', $args)) !== false) {
+        $project = $args[$id + 1];
+        
+        echo shell_exec('__PHP__ __EXAKAT__ config -p '.$project.' -json');
     } else {
         error('missing Project '.$id, '');
     }
