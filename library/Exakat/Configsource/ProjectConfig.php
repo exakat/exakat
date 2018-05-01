@@ -94,18 +94,10 @@ class ProjectConfig extends Config {
             }
         }
 
-        // removing empty values in the INI file
-        /*
-        foreach($this->config as $id => &$value) {
-            if (is_array($value) && empty($value[0])) {
-                unset($value[0]);
-            } elseif (empty($value)) {
-                unset($this->config[$id]);
-            }
-        }
-        unset($value);
-        */
         $this->config['project_vcs'] = $this->config['project_vcs'] ?? '';
+        
+        // Default behavior to keep exakat running until everyone has a filled file_extension option in config.ini
+        $this->config['file_extensions'] = $this->config['file_extensions'] ?: 'php,php3,inc,tpl,phtml,tmpl,phps,ctp,module';
         
         // Converting the string format to arrays when necessary
         if (isset($this->config['other_php_versions']) && 
@@ -161,7 +153,7 @@ class ProjectConfig extends Config {
         $include_dirs = 'include_dirs[] = "'.implode("\";\ninclude_dirs[] = \"", $this->config['include_dirs'])."\";\n";
         $ignore_dirs  = 'ignore_dirs[] = "'.implode("\";\nignore_dirs[] = \"", $this->config['ignore_dirs'])."\";\n";
 
-        $file_extensions  = '.'.implode('.', $this->config['file_extensions']);
+        $file_extensions  = implode(',', $this->config['file_extensions']);
         
         $custom_configs = array();
         

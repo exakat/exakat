@@ -43,11 +43,12 @@ class Dump extends Tasks {
     private $sqliteFileFinal   = null;
     
     private $files = array();
+    
+    protected $logname = self::LOG_NONE;
 
     const WAITING_LOOP = 1000;
 
     public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
-        $this->logname === self::LOG_NONE;
         parent::__construct($gremlin, $config, $subTask);
         
         $this->log = new Log($this->logname,
@@ -665,7 +666,7 @@ GREMLIN;
                 } elseif (isset($citId[$row['extends']])) {
                     $extends = $citId[$row['extends']];
                 } else {
-                    $extends = '"'.$this->sqlite->escapeString($row['extends']).'"';
+                    $extends = "'{$this->sqlite->escapeString($row['extends'])}'";
                 }
 
                 $namespace = preg_replace('/\\\\[^\\\\]*?$/', '', $row['fullnspath']);
@@ -1540,7 +1541,12 @@ GREMLIN;
         
         $values = array();
         foreach($index->toArray() as $change) {
-            $values[] = "('$changeType', '$change[name]', '$change[parent]', '".$this->sqlite->escapeString($change['parentValue'])."', '$change[class]', '".$this->sqlite->escapeString($change['classValue'])."') ";
+            $values[] = "('$changeType', 
+                          '$change[name]', 
+                          '$change[parent]', 
+                          '{$this->sqlite->escapeString($change['parentValue'])}', 
+                          '{$change['class']}', 
+                          '{$this->sqlite->escapeString($change['classValue'])}') ";
         }
         
         if (!empty($values)) {

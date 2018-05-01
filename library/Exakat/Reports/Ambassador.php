@@ -3245,11 +3245,11 @@ HTML;
         if ($res) {
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 if ($row['changeType'] === 'Member Visibility') {
-                    $row['parentValue'] = $row['parentValue'].' $'.$row['name'];
-                    $row['childValue'] = $row['childValue'].' $'.$row['name'];
+                    $row['parentValue'] .= ' $'.$row['name'];
+                    $row['childValue']   = ' $'.$row['name'];
                 } elseif ($row['changeType'] === 'Member Default') {
                     $row['parentValue'] = '$'.$row['name'].' = '.$row['parentValue'];
-                    $row['childValue'] = '$'.$row['name'].' = '.$row['childValue'];
+                    $row['childValue']  = '$'.$row['name'].' = '.$row['childValue'];
                 } 
                 
                 $changedClasses .= '<tr><td>'.PHPSyntax($row['parentClass']).'</td>'.PHP_EOL.

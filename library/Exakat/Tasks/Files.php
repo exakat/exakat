@@ -471,7 +471,7 @@ class Files extends Tasks {
         foreach($config->include_dirs as $include) {
             if ($include === '/') { continue; }
             if ($include[0] == '/') {
-                $d = $config->projects_root.'/projects/'.$dir.'/code'.$include;
+                $d = "$config->projects_root/projects/$dir/code{$include}";
                 if (!file_exists($d)) {
                     continue;
                 }
