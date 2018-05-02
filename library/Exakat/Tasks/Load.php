@@ -210,7 +210,7 @@ class Load extends Tasks {
         $this->plugins[] = new Nullval();
         $this->plugins[] = new Constant($this->config);
 
-        print $className = '\Exakat\Tasks\Helpers\Php'.$this->config->phpversion[0].$this->config->phpversion[2];
+        $className = '\Exakat\Tasks\Helpers\Php'.$this->config->phpversion[0].$this->config->phpversion[2];
         $this->phptokens     = new $className();
 
         $this->precedence = new Precedence($className);

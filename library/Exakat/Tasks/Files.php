@@ -63,7 +63,7 @@ class Files extends Tasks {
         $ignoredFiles = array();
         $files = array();
         $tokens = 0;
-        $path = $this->config->projects_root.'/projects/'.$dir.'/code';
+        $path = "{$this->config->projects_root}/projects/$dir/code";
 
         display( "Searching for files \n");
         self::findFiles($path, $files, $ignoredFiles, $this->config);
