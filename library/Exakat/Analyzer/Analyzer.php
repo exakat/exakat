@@ -27,7 +27,7 @@ use Exakat\Description;
 use Exakat\Datastore;
 use Exakat\Data\Dictionary;
 use Exakat\Config;
-use Exakat\Tokenizer\Token;
+use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Graph\GraphResults;
@@ -151,7 +151,7 @@ abstract class Analyzer {
         
         $this->dictCode = Dictionary::factory(self::$datastore);
         
-        $this->linksDown = Token::linksAsList();
+        $this->linksDown = GraphElements::linksAsList();
     }
     
     public function __destruct() {
@@ -1666,11 +1666,9 @@ GREMLIN
     }
 
     public function isLocalClass() {
-        $linksUp = Token::linksAsList();
-
         $this->addMethod(<<<GREMLIN
 sideEffect{ inside = it.get().value("fullnspath"); }
-.where(  __.repeat( __.in($linksUp) ).until( hasLabel("Class") ).filter{ it.get().value("fullnspath") == inside; }.count().is(eq(1)) )
+.where(  __.repeat( __.in({$this->linksDown}) ).until( hasLabel("Class") ).filter{ it.get().value("fullnspath") == inside; }.count().is(eq(1)) )
 
 GREMLIN
 );
@@ -1679,11 +1677,9 @@ GREMLIN
     }
     
     public function isNotLocalClass() {
-        $linksUp = Token::linksAsList();
-
         $this->addMethod(<<<GREMLIN
 sideEffect{ inside = it.get().value("fullnspath"); }
-.where(  __.repeat( __.in($linksUp) ).until( hasLabel("Class") ).filter{ it.get().value("fullnspath") == inside; }.count().is(eq(0)) )
+.where(  __.repeat( __.in({$this->linksDown}) ).until( hasLabel("Class") ).filter{ it.get().value("fullnspath") == inside; }.count().is(eq(0)) )
 
 GREMLIN
 );

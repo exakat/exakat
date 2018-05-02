@@ -31,7 +31,6 @@ use Exakat\Graph\Tinkergraph as Graph;
 use Exakat\Tasks\CleanDb;
 use Exakat\Tasks\Load;
 use Exakat\Tasks\Tasks;
-use Exakat\Tokenizer\Token;
 use Exakat\Tasks\Helpers\Atom;
 
 class Tinkergraph {

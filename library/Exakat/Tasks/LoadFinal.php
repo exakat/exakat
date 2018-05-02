@@ -27,7 +27,7 @@ use Exakat\Analyzer\Themes;
 use Exakat\Config;
 use Exakat\Data\Methods;
 use Exakat\Data\Dictionary;
-use Exakat\Tokenizer\Token;
+use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
 
 class LoadFinal extends Tasks {
@@ -40,7 +40,7 @@ class LoadFinal extends Tasks {
     private $dictCode = null;
 
     public function run() {
-        $this->linksIn = Token::linksAsList();
+        $this->linksIn = GraphElements::linksAsList();
 
         $this->dictCode = Dictionary::factory($this->datastore);
 

@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class NotCountNull extends Analyzer {
     public function analyze() {
+        // if (count($x) == 0)
         $this->atomFunctionIs(array('\\count', '\\strlen'))
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')

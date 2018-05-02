@@ -21,9 +21,9 @@
 */
 
 
-namespace Exakat\Tokenizer;
+namespace Exakat;
 
-abstract class Token {
+abstract class GraphElements {
     static public $ATOMS = array('Abstract',
                                  'Addition',
                                  'Array',

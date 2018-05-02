@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Tokenizer\Token;
 
 class ImplicitGlobal extends Analyzer {
     public function analyze() {

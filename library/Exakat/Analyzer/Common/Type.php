@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Tokenizer\Token;
 
 class Type extends Analyzer {
     

@@ -30,7 +30,6 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\NotProjectInGraph;
-use Exakat\Tokenizer\Token;
 use Exakat\Graph\Graph;
 
 class Dump extends Tasks {
