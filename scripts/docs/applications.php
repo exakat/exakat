@@ -31,6 +31,7 @@ $applications = array(
     'LiveZilla'                  => array('url' => 'https://www.livezilla.net/home/en/', ),
     'Mautic'                     => array('url' => 'https://www.mautic.org/', ),
     'MediaWiki'                  => array('url' => 'https://www.mediawiki.org/', ),
+    'Nextcloud'                  => array('url' => 'https://nextcloud.com/', ),
     'OpenConf'                   => array('url' => 'https://www.openconf.com/', ),
     'OpenEMR'                    => array('url' => 'https://www.open-emr.org/', ),
     'Phpdocumentor'              => array('url' => 'https://www.phpdoc.org/', ),
