@@ -28,7 +28,6 @@ use Exakat\Datastore;
 use Exakat\Data\Collector;
 use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\NoSuchFile;
-use Exakat\Graph\Tinkergraph as Graph;
 use Exakat\Tasks\CleanDb;
 use Exakat\Tasks\Load;
 use Exakat\Tasks\Tasks;

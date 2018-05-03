@@ -23,11 +23,8 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Docs;
 use Exakat\Data\ZendF3;
-use Exakat\Exakat;
 use Exakat\Phpexec;
-use Exakat\Reports\Reports;
 
 class ZendFramework extends Ambassador {
     const FILE_FILENAME  = 'report_zf';

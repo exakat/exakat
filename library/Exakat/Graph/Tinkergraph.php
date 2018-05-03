@@ -23,6 +23,7 @@
 namespace Exakat\Graph;
 
 use Exakat\Graph\Graph;
+use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Exceptions\UnableToReachGraphServer;
 use Exakat\Exceptions\Neo4jException;
 use Exakat\Exceptions\GremlinException;

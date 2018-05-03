@@ -30,7 +30,7 @@ use Exakat\Config;
 use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\NoSuchAnalyzer;
-use Exakat\Graph\GraphResults;
+use Exakat\Graph\Helpers\GraphResults;
 
 abstract class Analyzer {
     protected $code           = null;

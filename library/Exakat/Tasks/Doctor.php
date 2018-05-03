@@ -26,9 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Exakat;
 use Exakat\Graph\Graph;
 use Exakat\Config;
-use Exakat\Task;
 use Exakat\Phpexec;
-use Exakat\Vcs\{Bazaar, Composer, Copy, EmptyCode, Git, Mercurial, Svn, Symlink, Tarbz, Targz, Zip};
 
 class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -271,6 +269,7 @@ class Doctor extends Tasks {
                            'Composer'  => 'composer',
                            'Zip'       => 'zip',
                            'Tarbz'     => 'tbz',
+                           'Targz'     => 'tgz',
                           );
 
         foreach($optionals as $class => $section) {

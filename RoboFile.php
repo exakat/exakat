@@ -6,7 +6,7 @@ use Exakat\Exakat;
 include __DIR__.'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_library');
 
-class RoboFile extends \Robo\Tasks{
+class RoboFile extends \Robo\Tasks {
     public function versionBump($version = null) {
         if (!$version) {
             $versionParts = explode('.', \Exakat::VERSION);

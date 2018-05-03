@@ -22,10 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Graph\Gremlin3;
-use Exakat\Graph\GSNeo4j;
-use Exakat\Config;
-
 class Dependencies extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'dependencies';

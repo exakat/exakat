@@ -22,8 +22,6 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Graph\Gremlin3;
-use Exakat\Config;
 use stdClass;
 
 class FileDependenciesHtml extends Reports {
@@ -68,7 +66,7 @@ class FileDependenciesHtml extends Reports {
                 $out[$destination] = 0;
             }
 
-            $R = new Stdclass();
+            $R = new stdclass();
             $R->source = $source;
             $R->target = $destination;
             $R->caption = $row['type'];

@@ -183,7 +183,7 @@ class Initproject extends Tasks {
             // Symlink
             case ($this->config->symlink === true) :
                 display('Symlink initialization : '.realpath($repositoryURL));
-                $vcs = new Copy($project, $this->config->projects_root);
+                $vcs = new Symlink($project, $this->config->projects_root);
                 break;
 
             // Initialization by copy

@@ -20,7 +20,7 @@
  *
 */
 
-namespace Exakat\Graph;
+namespace Exakat\Graph\Helpers;
 
 class GraphResults implements \ArrayAccess, \Iterator, \Countable {
     const EMPTY   = 0;
