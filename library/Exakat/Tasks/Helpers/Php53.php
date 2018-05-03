@@ -184,6 +184,12 @@ class Php53 {
     const T_DIR                           = 379;
     const T_NS_SEPARATOR                  = 380;
     const T_DOUBLE_COLON                  = 376;
+
+    const T_SPACESHIP                     = 1000;
+    const T_YIELD_FROM                    = 1000;
+    const T_COALESCE                      = 1000;
+    const T_YIELD                         = 1000;
+
     const TOKENS = array(
                      ';'  => self::T_SEMICOLON,
                      '+'  => self::T_PLUS,

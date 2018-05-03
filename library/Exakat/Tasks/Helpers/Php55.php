@@ -190,6 +190,12 @@ class Php55 {
     const T_DIR                           = 385;
     const T_NS_SEPARATOR                  = 386;
     const T_DOUBLE_COLON                  = 382;
+
+    const T_SPACESHIP                     = 1000;
+    const T_YIELD_FROM                    = 1000;
+    const T_COALESCE                      = 1000;
+//    const T_YIELD                         = 1000;
+
     const TOKENS = array(
                      ';'  => self::T_SEMICOLON,
                      '+'  => self::T_PLUS,
