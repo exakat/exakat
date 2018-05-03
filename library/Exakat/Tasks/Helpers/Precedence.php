@@ -149,7 +149,10 @@ class Precedence {
 
     public function __construct($phpVersion) {
         foreach($this->definitions as $name => $priority) {
-            $this->precedence[constant("$phpVersion::$name")] = $priority;
+            // Skip unknown tokens from other versions
+            if (defined("$phpVersion::$name")) {
+                $this->precedence[constant("$phpVersion::$name")] = $priority;
+            } 
         }
     }
 
