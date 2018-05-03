@@ -114,7 +114,6 @@ class CommandLine extends Config {
                               'test'          => 1,
                               'update'        => 1,
                               'upgrade'       => 1,
-                              'codacy'        => 1,
                               'fetch'         => 1,
                               'proxy'         => 1,
                               'config'        => 1,
