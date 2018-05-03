@@ -43,9 +43,6 @@ class SplitGraphson {
 
     private $tokenCounts   = array();
 
-    private $labels = array();
-    private $edges = array();
-    
     private $config = null;
     
     private $calls = array();
@@ -170,7 +167,6 @@ GREMLIN;
         
         $json = array();
         foreach($atoms as $atom) {
-            $this->labels[$atom->atom] = 1;
             if ($atom->atom === 'File') {
                 $fileName = $atom->code;
             } 
@@ -197,7 +193,6 @@ GREMLIN;
         unset($links['PROJECT']);
 
         foreach($links as $type => $a) {
-            $this->edges[$type] = 1;
             foreach($a as $b) {
                 foreach($b as $c) {
                     foreach($c as $d) {
