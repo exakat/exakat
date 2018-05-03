@@ -22,7 +22,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Analyzer\Docs;
 use Exakat\Config;
 use Exakat\GraphElements;
 use Exakat\Exceptions\InvalidPHPBinary;
@@ -48,7 +47,9 @@ class Load extends Tasks {
     const CONCURENCE = self::NONE;
 
     private $php    = null;
-    private static $client = null;
+    private $loader = null;
+    private $loaderList = array('SplitGraphson');
+    //'CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv', 
 
     private $precedence   = null;
     private $phptokens    = null;
@@ -181,8 +182,6 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
     
-    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv', 'SplitGraphson');
-
     private $processing = array();
     
     private $plugins = array();
@@ -211,10 +210,9 @@ class Load extends Tasks {
         $this->plugins[] = new Constant($this->config);
 
         $className = '\Exakat\Tasks\Helpers\Php'.$this->config->phpversion[0].$this->config->phpversion[2];
-        $this->phptokens     = new $className();
+        $this->phptokens  = new $className();
 
         $this->precedence = new Precedence($className);
-        
 
         $this->processing = array(
             $this->phptokens::T_OPEN_TAG                 => 'processOpenTag',
@@ -440,13 +438,13 @@ SQL;
         $this->id0->token     = 'T_WHOLE';
 
         // Restart the connexion each time
-        $client = $this->config->loader;
-        if (!in_array($client, $this->loaderList)) {
+        $clientClass = $this->config->loader;
+        if (!in_array($clientClass, $this->loaderList)) {
             throw new NoSuchLoader($client, $this->loaderList);
         }
-        display('Loading with '.$client.PHP_EOL);
-        $client = '\\Exakat\\Loader\\'.$client;
-        static::$client = new $client($this->gremlin, $this->config, $this->plugins);
+        display('Loading with '.$clientClass.PHP_EOL);
+        $clientClass = '\\Exakat\\Loader\\'.$clientClass;
+        $this->loader = new $clientClass($this->gremlin, $this->config, $this->plugins);
 
         // Cleaning the databases
         $this->datastore->cleanTable('tokenCounts');
@@ -481,7 +479,7 @@ SQL;
                        );
         $this->datastore->addRow('hash', $this->stats);
 
-        static::$client->finalize();
+        $this->loader->finalize();
         $this->datastore->addRow('hash', array('status' => 'Load'));
 
         $loadFinal = new LoadFinal($this->gremlin, $this->config, self::IS_SUBTASK);
@@ -4984,13 +4982,13 @@ SQL;
     }
 
     private function saveFiles() {
-        self::$client->saveFiles($this->exakatDir, $this->atoms, $this->links, $this->id0);
+        $this->loader->saveFiles($this->exakatDir, $this->atoms, $this->links, $this->id0);
         $this->saveDefinitions();
         $this->reset();
     }
 
     private function saveDefinitions() {
-        static::$client->saveDefinitions($this->exakatDir, array());
+        $this->loader->saveDefinitions($this->exakatDir, array());
     }
 
     private function startSequence() {

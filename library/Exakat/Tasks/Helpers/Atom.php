@@ -27,7 +27,6 @@ use Exakat\Tasks\Helpers\Property;
 
 class Atom {
     const STRING_MAX_SIZE = 500;
-    static private $atomCount = 0;
     
     public $id           = 0;
     public $atom         = 'No Atom Set';
@@ -67,7 +66,7 @@ class Atom {
     public $isNull       = false;
 
     public function __construct($id, $atom) {
-        $this->id = ++self::$atomCount;
+        $this->id   = $id;
         $this->atom = $atom;
     }
     
@@ -282,10 +281,6 @@ class Atom {
     
     private function protectString($code) {
         return addcslashes($code , '\\"');
-    }
-    
-    static function resetAtomCount() {
-        self::$atomCount = 0;
     }
 }
 
