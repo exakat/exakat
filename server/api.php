@@ -95,8 +95,8 @@ function ping($args) {
 }
 
 function project($args) {
-    if (($id = array_search('-p', $args)) !== false) {
-        error("missing Project $id", '');
+    if (($id = array_search('-p', $args)) === false) {
+        error("missing Project", '');
     }
 
     $project = $args[$id + 1];
@@ -112,8 +112,8 @@ function project($args) {
 }
 
 function remove($args) {
-    if (($id = array_search('-p', $args)) !== false) {
-        error("missing Project $id", '');
+    if (($id = array_search('-p', $args)) === false) {
+        error("missing Project", '');
     }
 
     $project = $args[$id + 1];
@@ -129,8 +129,8 @@ function remove($args) {
 }
 
 function report($args) {
-    if (($id = array_search('-p', $args)) !== false) {
-        error("missing Project $id", '');
+    if (($id = array_search('-p', $args)) === false) {
+        error("missing Project", '');
     }
 
     $project = $args[$id + 1];
@@ -172,8 +172,8 @@ function doctor($args) {
 }
 
 function status($args) {
-    if (($id = array_search('-p', $args)) !== false) {
-        error("missing Project $id", '');
+    if (($id = array_search('-p', $args)) === false) {
+        error("missing Project", '');
     }
 
     $project = $args[$id + 1];
@@ -186,8 +186,8 @@ function status($args) {
 }
 
 function fetch($args) {
-    if (($id = array_search('-p', $args)) !== false) {
-        error("missing Project $id", '');
+    if (($id = array_search('-p', $args)) === false) {
+        error("missing Project", '');
     }
 
     $project = $args[$id + 1];
@@ -218,8 +218,8 @@ function fetch($args) {
 }
 
 function config($args) {
-    if (($id = array_search('-p', $args)) !== false) {
-        error("missing Project $id", '');
+    if (($id = array_search('-p', $args)) === false) {
+        error("missing Project", '');
     }
 
     $project = $args[$id + 1];
