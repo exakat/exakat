@@ -130,17 +130,15 @@ abstract class Analyzer {
         if (strpos($this->analyzer, '\\Common\\') === false) {
             $this->description = new Description($this->getName($this->analyzer), $config->dir_root);
             $parameters = $this->description->getParameters();
-            if (!empty($parameters)) {
-                foreach($parameters as $parameter) {
-                    if (isset($this->config->{$this->analyzerQuoted}[$parameter['name']])) {
-                        $this->{$parameter['name']} = $this->config->{$this->analyzerQuoted}[$parameter['name']];
-                    } else {
-                        $this->{$parameter['name']} = $parameter['default'];
-                    }
-                    
-                    if ($parameter['type'] === 'integer') {
-                        $this->{$parameter['name']} = (int) $this->{$parameter['name']};
-                    }
+            foreach($parameters as $parameter) {
+                if (isset($this->config->{$this->analyzerQuoted}[$parameter['name']])) {
+                    $this->{$parameter['name']} = $this->config->{$this->analyzerQuoted}[$parameter['name']];
+                } else {
+                    $this->{$parameter['name']} = $parameter['default'];
+                }
+                
+                if ($parameter['type'] === 'integer') {
+                    $this->{$parameter['name']} = (int) $this->{$parameter['name']};
                 }
             }
         }

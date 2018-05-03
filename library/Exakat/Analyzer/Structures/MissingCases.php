@@ -60,8 +60,6 @@ GREMLIN
                 $score = 100 * count($diff) / count(array_unique(array_merge($a, $s)));
                 if ($score > 25) { continue; }
 
-//                print "Diff / total ".number_format($score)."\n";
-//                print "Common / total ".number_format(100 * count(array_intersect($a, $s)) / count(array_unique(array_merge($a, $s))))."\n";
                 $commons[] = $s;
                 $commons[] = $a;
             }

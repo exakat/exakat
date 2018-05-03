@@ -188,7 +188,7 @@ class Datastore {
             $query = "SELECT * FROM $table";
             $res = $this->sqliteRead->query($query);
         } catch (\Exception $e) {
-            return array();
+            $res = false;
         }
 
         if (!$res) {

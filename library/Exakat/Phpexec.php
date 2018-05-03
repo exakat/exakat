@@ -228,7 +228,7 @@ class Phpexec {
                 'zend.assertions' => ini_get('zend.assertions'),
                 'memory_limit'    => ini_get('memory_limit'),
                 'tokenizer'       => extension_loaded('tokenizer'),
-                'short_open_tags' => ini_get('short_open_tags'),
+                'short_open_tags' => ini_get('short_open_tag'),
                 'timezone'        => ini_get('date.timezone'),
                 'phpversion'      => PHP_VERSION,
             );

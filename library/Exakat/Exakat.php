@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.2.5';
-    const BUILD = 730;
+    const VERSION = '1.2.5a';
+    const BUILD = 738;
 
     private $gremlin = null;
     private $config = null;
@@ -57,7 +57,7 @@ class Exakat {
                 // replicate init, because we'll need later
                 $task = new Tasks\Initproject($this->gremlin, $this->config);
                 $task->run();
-            break;
+                break;
 
             case 'fetch' : 
                 if (strlen($res) < 1024) {
@@ -84,12 +84,15 @@ class Exakat {
                 shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; unzip dump.zip && rm dump.zip');
                 display("Fetched\n");
 
+                break;
+
             case 'status' : 
                 print $res;
                 break;
 
             default : 
-            
+                print $res;
+                break;
         }
     }
         
