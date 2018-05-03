@@ -25,8 +25,8 @@ namespace Exakat\Configsource;
 abstract class Config {
     const PHP_VERSIONS = array('52', '53', '54', '55', '56', '70', '71', '72', '73');
 
-    protected const LOADED     = true;
-    protected const NOT_LOADED = false;
+    const LOADED     = true;
+    const NOT_LOADED = false;
 
     protected $config = array();
     
