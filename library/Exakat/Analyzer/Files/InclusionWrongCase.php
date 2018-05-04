@@ -28,8 +28,10 @@ class InclusionWrongCase extends Analyzer {
     public function analyze() {
         $this->atomIs('File')
              ->values('fullcode');
-        $files = $this->rawQuery()->toArray();
+        $files = $this->rawQuery()
+                      ->toArray();
 
+        // Include with noDelimiter
         $this->atomIs('Include')
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
@@ -68,13 +70,14 @@ GREMLIN
              ->back('first');
         $this->prepareQuery();
 
+        // include without noDelimiter : 
         $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs('Include')
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->atomIs('Concatenation')
-             ->has('noDelimiter')
              // Ignore functioncall that are not \dirname
+
              ->raw(<<<GREMLIN
 not(where( __.repeat(__.out()).emit().times($MAX_LOOPING)
                                      .not(where(__.in("CLASS", "NAME")))
@@ -85,6 +88,7 @@ not(where( __.repeat(__.out()).emit().times($MAX_LOOPING)
    )
 GREMLIN
 )
+
              ->raw(<<<GREMLIN
 sideEffect{ 
     including = []; 
@@ -108,7 +112,7 @@ sideEffect{
                 dirname = it.vertices(OUT, "ARGUMENT").next();
                 
                 while( dirname.label() == 'Functioncall' && 
-                       it.value("fullnspath") == "\\\\dirname") {
+                       dirname.value("fullnspath") == "\\\\dirname") {
                     dirname = dirname.vertices(OUT, "ARGUMENT").next();
                     ++loop;
                 };
@@ -122,8 +126,34 @@ sideEffect{
                     // This just ignore the path
                     ignore = true;
                 }
+            } else if (it.label() == "Parenthesis") {
+                code = it.vertices(OUT, "CODE").next();
+                if (code.label() == "Functioncall" && 
+                    code.value("fullnspath") == "\\\\dirname") {
+
+                    loop = 1;
+                    dirname = code.vertices(OUT, "ARGUMENT").next();
+                    
+                    while( dirname.label() == 'Functioncall' && 
+                           dirname.value("fullnspath") == "\\\\dirname") {
+                        dirname = dirname.vertices(OUT, "ARGUMENT").next();
+                        ++loop;
+                    };
+                    if ('noDelimiter' in dirname.keys()) {
+                        dirs = dirname.value("noDelimiter").split("/").dropRight(loop);
+    
+                        if (dirs.size() > 0) {
+                            including.add(dirs.join("/"));
+                        } 
+                    } else {
+                        // This just ignore the path
+                        ignore = true;
+                    }
+                } else {
+                    including.add(it.value("noDelimiter"));
+                }
             } else {
-                including.add(it.value("noDelimiter"));
+                    including.add(it.value("noDelimiter"));
             }
         }; 
     including = including.join(""); 
@@ -146,7 +176,7 @@ filter{
         path = "/";
     }
 
-    if (including.getAt(0) != "/") {
+    if (including != '' && including.getAt(0) != "/") {
         including = path + including;
     }
     
