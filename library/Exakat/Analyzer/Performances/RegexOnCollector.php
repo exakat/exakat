@@ -27,6 +27,10 @@ use Exakat\Analyzer\Structures\NoEmptyRegex;
 
 class RegexOnCollector extends Analyzer {
     public function analyze() {
+        //foreach ($a as $b) {
+        //    $c .= $b;
+        //    foo($b);
+        //}
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->outIsIE(array('INDEX', 'VALUE'))
@@ -47,8 +51,39 @@ class RegexOnCollector extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->functioncallIs(NoEmptyRegex::$pregFunctions)
-             ->outWithRank('ARGUMENT', 1)
+             ->outIs('ARGUMENT')
+             ->samePropertyAs('fullcode', 'collector')
+
+             ->back('first');
+        $this->prepareQuery();
+
+        //foreach ($a as $b) {
+        //    $c .= $b;
+        //    foo($b);
+        //}
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE(array('INDEX', 'VALUE'))
+             ->savePropertyAs('fullcode', 'increment')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Assignation')
+             ->tokenIs('T_EQUAL')
+
+             ->_as('collection')
+             ->outIs('RIGHT')
+             ->samePropertyAs('fullcode', 'increment')
+             ->back('collection')
+
+             ->outIs('LEFT')
+             ->atomIs('Arrayappend')
+             ->outIs('APPEND')
+             ->savePropertyAs('fullcode', 'collector')
+             
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Functioncall')
+             ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'collector')
 
              ->back('first');
