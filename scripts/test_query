@@ -25,35 +25,32 @@ include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
 $config = new \Exakat\Config(array());
-\Exakat\Analyzer\Analyzer::$staticConfig = $config;
 
 use \Exakat\Graph\GraphResults;
 
 $begin = microtime(true);
-$graphDB = new \Exakat\Graph\Tinkergraph($config);
-//$graphDB = new \Exakat\Graph\Janusgraph($config);
-//$graphDB = new \Exakat\Graph\JanusCaES($config);
-//$graphDB = new \Exakat\Graph\Gremlin3($config);
-//$graphDB = new \Exakat\Graph\GSNeo4j($config);
+//$graphDB = new \Exakat\Graph\Tinkergraph($config);
+$graphDB = new \Exakat\Graph\Gsneo4j($config);
 
 $end = microtime(true);
 print "Connect : ".number_format(($end - $begin) * 1000, 2)." ms\n";
 
-//graph.io(IoCore.graphml()).readGraph("/Users/famille/Desktop/janusload/tinkerpop-modern.xml"); 
-
 $res = $graphDB->query('g.V().hasLabel("Project").values("fullcode")');
 $project = $res[0];
-
-$loops = 34;
 
 $begin = microtime(true);
 $query = <<<QUERY
 
-//g.V().has("intval").map{ it.get().value("fullcode") + ' : ' + it.get().value("intval")};
-//g.V().has("boolean").map{ it.get().value("fullcode") + ' : ' + it.get().value("boolean")};
-//g.V().has("noDelimiter").map{ it.get().value("fullcode") + ' : ' + it.get().value("noDelimiter")};
+// Extrait les méthodes qui sont redéfinies dans la classe au dessus
+// Faire la même chose pour les constantes et propriétés et statiques 
+// faire la liste totale des PMC d'une classe
+g.V().hasLabel('Class').where( __.out('EXTENDS')).as('fille')
+    .out('METHOD').as('method').out('NAME').sideEffect{ name = it.get().value('code');}
+    .select('fille').out('EXTENDS').in('DEFINITION').out('METHOD').as('methodparent').out('NAME').filter{ it.get().value('code') == name}
+    .select('fille', 'method', 'methodparent').by('fullcode')
 
-g.V().hasLabel('Function')
+// Search for static expression hierarchy with constants
+g.V().hasLabel('Constant').where(__.out("VALUE").not(hasLabel("Integer", "String"))).values('fullcode')
 
 QUERY;
 //
@@ -64,17 +61,8 @@ $res = $graphDB->query($query, [ ]);
 $end = microtime(true);
 print "Time : ".number_format(($end - $begin) * 1000, 2)." ms\n";
 
-
-//$r = array_map(function($x) { return join(',', array_values((array) $x)[0] ); }, $res->results);
-
-//print count($r)." values\n";
-//print count(array_count_values($r))." distinct\n";
-//print_r($r);
-//die();
-
 $list = array();
 
-//$fp = fopen('index/'.$project.'.csv', 'w+');
 if ($res->isType(GraphResults::ARRAY)) {
     foreach($res as $k => $v) {
 //        fputcsv($fp, $v);
@@ -93,78 +81,4 @@ if ($res->isType(GraphResults::ARRAY)) {
 } else {
     print "res => ".$res->toString().PHP_EOL;
 }
-/*
-print "go\n";
-
-$b = microtime(true);
-$keys = array_flip($list);
-$found = 0;
-$total = 0;
-
-foreach($list as $id => $l) {
-    if (strlen($l) < 5) { continue; }
-    $m = substr($l, 1);
-
-    $n = strlen($m);
-    for($i = 1; $i < $n; ++$i){
-        $o = '$'.substr($m, $i).substr($m, 0, $i);
-        
-        if ($o === $m) { continue; }
-        ++$total;
-        
-        if (isset($keys[$o])) {
-            print "$o => $m ($i)\n";
-            ++$found;
-        }
-    }
-    
-    if ($id % 25 === 0) {
-        print '.';
-    }
-    if ($id % 625 === 0) {
-        print PHP_EOL;
-    }
-} 
-$e = microtime(true);
-
-print count($list).' elements initial '.PHP_EOL;
-print $total.' elements tested '.PHP_EOL;
-print $found.' elements found '.PHP_EOL;
-
-print number_format(($e - $b) * 1000, 2).' ms '.PHP_EOL;
-*/
-die();
-$stats = array();
-if ($res->isType(GraphResults::ARRAY)) {
-    foreach($res as $k => $v) {
-        $stats[$v['a']][] = $v['b'];
-    }
-}
-
-$stats = array_filter($stats, function($x) { return count($x) > 2; });
-//print_r($stats);
-
-$found = array_filter($stats, function($value) {
-    $total = count($value);
-    $distinct = array_count_values($value);
-    
-    if (count($distinct) == 1) {
-        return false;
-    }
-
-    print_r($distinct);
-    print count($distinct).PHP_EOL;
-    
-    
-    return true;
-    
-    foreach($distinct as $f => $c) {
-        if ($c <= $total / 3) {
-            return true;
-        }
-    }
-    
-    return false;
- });
-print_r($found);
 ?>

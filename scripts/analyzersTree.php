@@ -32,7 +32,10 @@ foreach($analyzers as $name) {
     $names[] = $name;
     $tree[$name] = array();
     $a = \Analyzer\Analyzer::getInstance($name);
-    if ($a === null) { print $name."\n"; continue; }
+    if ($a === null) {
+        print $name."\n"; 
+        continue; 
+    }
     $d = $a->dependsOn();
     
 //    if (empty($d)) { continue; }
