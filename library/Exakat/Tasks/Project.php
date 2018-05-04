@@ -269,14 +269,14 @@ class Project extends Tasks {
             $audit_end = time();
             $query = "g.V().count()";
             $res = $this->gremlin->query($query);
-            if (is_object($res)) {
+            if ($res instanceof \stdClass) {
                 $nodes = $res->results[0];
             } else {
                 $nodes = $res[0];
             }
             $query = "g.E().count()";
             $res = $this->gremlin->query($query);
-            if (is_object($res)) {
+            if ($res instanceof \stdClass) {
                 $links = $res->results[0];
             } else {
                 $links = $res[0];
@@ -291,7 +291,6 @@ class Project extends Tasks {
             $dump->run();
             unset($dump);
             unset($dumpConfig);
-
         } catch (\Exception $e) {
             echo "Error while running the Analyzer {$this->config->project}.\nTrying next analysis.\n";
             file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.final.log', $e->getMessage());
