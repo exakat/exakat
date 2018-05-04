@@ -22,12 +22,14 @@
 
 namespace Exakat;
 
-class Stats {
-    private $stats = array();
-    private $file_filter = '';
-    private $gremlin = '';
+use Exakat\Graph\Graph;
 
-    public function __construct($gremlin) {
+class Stats {
+    private $stats       = array();
+    private $file_filter = '';
+    private $gremlin     = null;
+
+    public function __construct(Graph $gremlin) {
         $this->gremlin = $gremlin;
     }
 
