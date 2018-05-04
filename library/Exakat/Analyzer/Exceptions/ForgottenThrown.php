@@ -27,15 +27,30 @@ use Exakat\Analyzer\Analyzer;
 class ForgottenThrown extends Analyzer {
 
     public function dependsOn() {
-        return array('Exceptions/DefinedExceptions');
+        return array('Exceptions/DefinedExceptions',
+                    );
     }
     
     public function analyze() {
+        $exceptions = $this->loadIni('php_exception.ini', 'classes');
+        $exceptions = makeFullNsPath($exceptions);
+
+        // new MyException();
         $this->atomIs('New')
-             ->hasNoIn('THROW')
+             ->inIsIE('CODE') // parenthesis
+             ->hasNoIn(array('THROW', 'RIGHT')) // RIGHT is for assignation
              ->outIs('NEW')
              ->classDefinition()
              ->analyzerIs('Exceptions/DefinedExceptions')
+             ->back('first');
+        $this->prepareQuery();
+
+        // new Exception();
+        $this->atomIs('New')
+             ->inIsIE('CODE') // parenthesis
+             ->hasNoIn(array('THROW', 'RIGHT')) // RIGHT is for assignation
+             ->outIs('NEW')
+             ->fullnspathIs($exceptions)
              ->back('first');
         $this->prepareQuery();
     }
