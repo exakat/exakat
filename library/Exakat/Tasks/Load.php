@@ -3894,6 +3894,9 @@ SQL;
                 }
             }
         }
+
+        $constant->intval  = (int) $constant->noDelimiter;
+        $constant->boolean = (boolean) $constant->intval;
         
         return $constant;
     }
