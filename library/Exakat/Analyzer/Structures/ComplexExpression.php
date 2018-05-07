@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ComplexExpression extends Analyzer {
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
-
+        
         $complexExpression = <<<GREMLIN
 not(
     __.has('constant', true))
