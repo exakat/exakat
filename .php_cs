@@ -1,7 +1,6 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->in('./library/Exakat/Tokenizer')
     ->in('./library/Exakat/Analyzer')
     ->in('./library/Exakat/Tasks')
     ->name('*.php');
