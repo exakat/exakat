@@ -35,8 +35,14 @@ class IsRead extends Analyzer {
     public function analyze() {
         $this->atomIs(self::$VARIABLES_ALL)
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
-                           'INDEX', 'VALUE', 'NAME', 'MEMBER', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
+                           'INDEX', 'VALUE', 'MEMBER', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
                            'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL', 'PPP'));
+        $this->prepareQuery();
+
+        $this->atomIs(self::$VARIABLES_ALL)
+             ->inIs('NAME')
+             ->atomIsNot('Parameter')
+             ->back('first');
         $this->prepareQuery();
 
         // Reading inside an assignation
@@ -112,7 +118,7 @@ class IsRead extends Analyzer {
              ->back('results');
         $this->prepareQuery();
 
-        $this->atomFunctionIs(array('Functioncall', 'Methodcallname', 'Newcall'))
+        $this->atomFunctionIs(array('Functioncall', 'Methodcallname', 'Newcall', 'Exit', 'Echo', 'Print'))
              ->outIs('ARGUMENT')
              ->atomIs('Variable');
         $this->prepareQuery();
