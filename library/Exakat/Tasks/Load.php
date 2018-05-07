@@ -59,10 +59,16 @@ class Load extends Tasks {
     private $atomGroup = null;
 
     private $namespace = '\\';
-    private $uses   = array('function' => array(),
-                            'const'    => array(),
-                            'define'   => array(),
-                            'class'    => array());
+    private $uses   = array('function'     => array(),
+                            'staticmethod' => array(),
+                            'method'       => array(),  // @todo : handling of parents ? of multiple definition? 
+//                            'classconst'       => array(), 
+//                            'properties'       => array(), 
+//                            'staticproperty'       => array(), 
+                            'const'        => array(),
+                            'define'       => array(),
+                            'class'        => array(),
+                            );
     private $filename   = null;
     private $line       = 0;
 
@@ -1126,6 +1132,10 @@ SQL;
 
         if ($function->atom === 'Function' ) {
             $this->processSemicolon();
+        } elseif ($function->atom === 'Method' && !empty(preg_grep('/^static$/i', $fullcode))) {
+            $this->addDefinition('staticmethod', $function->fullnspath, $function);
+        } elseif ($function->atom === 'Method') {
+            $this->addDefinition('method', $function->fullnspath, $function);
         }
 
         if (!$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -4407,7 +4417,7 @@ SQL;
         } elseif (in_array($right->atom, array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block', 'Boolean', 'Null'))) {
             $static = $this->addAtom('Staticproperty');
             $links = 'MEMBER';
-        } elseif (in_array($right->atom, array('Methodcallname'))) {
+        } elseif ($right->atom === 'Methodcallname') {
             $static = $this->addAtom('Staticmethodcall');
             $links = 'METHOD';
         } else {
@@ -4423,6 +4433,12 @@ SQL;
         $static->token    = $this->getToken($this->tokens[$current][0]);
         $this->runPlugins($static, array('CLASS' => $left,
                                          $links  => $right));
+
+        if ($static->atom === 'Staticmethodcall' && 
+            !empty($left->fullnspath)            &&
+            !empty($right->fullnspath)) {
+            $this->addCall('staticmethod',  $left->fullnspath.'::'.$right->fullnspath, $static);
+        } 
 
         $this->pushExpression($static);
 
@@ -4551,6 +4567,10 @@ SQL;
         $static->line      = $this->tokens[$current][2];
         $static->token     = $this->getToken($this->tokens[$current][0]);
 
+        if ($static->atom === 'Methodcall' &&
+            $left->atom   === 'This'      ) {
+            $this->addCall('method', end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($right->code), $static);
+        }
         $this->pushExpression($static);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
