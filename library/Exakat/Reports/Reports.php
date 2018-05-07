@@ -66,7 +66,9 @@ abstract class Reports {
         $this->datastore = new Dump($this->config);
         $this->themes = new Themes($this->config->dir_root.'/data/analyzers.sqlite');
 
-        $analyzers = $this->themes->getThemeAnalyzers($this->config->thema);
+        // Default analyzers
+        $analyzers = array_merge($this->themes->getThemeAnalyzers($this->config->thema),
+                                 array_keys($config->themas));
         $this->themesList = '("'.implode('", "', $analyzers).'")';
     }
 
@@ -79,7 +81,12 @@ abstract class Reports {
         }
 
         if ($this->config->thema !== null) {
-            $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
+            $themas = $this->config->themas;
+            if (isset($themas[$this->config->thema])){
+                $list = $themas[$this->config->thema];
+            } else {
+                $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
+            }
         } elseif ($this->config->program !== null) {
             $list = $this->config->program;
         } else {

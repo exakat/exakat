@@ -22,7 +22,7 @@
 
 namespace Exakat;
 
-use Exakat\Configsource\{CodacyConfig, CommandLine, DefaultConfig, DotExakatConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig };
+use Exakat\Configsource\{CodacyConfig, CommandLine, DefaultConfig, DotExakatConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Reports\Reports;
 use Exakat\Phpexec;
@@ -46,6 +46,7 @@ class Config {
     private $configFiles = array();
     private $options     = array();
     private $remotes     = array();
+    private $themas      = array();
 
     static private $stack = array();
     
@@ -138,6 +139,12 @@ class Config {
             $this->remotes = $remote->toArray();
         }
 
+        $themas = new ThemaConfig($this->projects_root);
+        if ($file = $themas->loadConfig($this->commandLineConfig->get('project'))) {
+            $this->configFiles[] = $file;
+            $this->themas = $themas->toArray();
+        }
+
         if ($this->options['command'] !== 'doctor') {
             $this->checkSelf();
         }
@@ -152,6 +159,8 @@ class Config {
             $return = $this->configFiles;
         } elseif ($name === 'remotes') {
             $return = $this->remotes;
+        } elseif ($name === 'themas') {
+            $return = $this->themas;
         } elseif (isset($this->options[$name])) {
             $return = $this->options[$name];
         } else {

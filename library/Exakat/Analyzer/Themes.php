@@ -67,7 +67,7 @@ class Themes {
         } elseif (in_array($theme, $all)) {
             $where = 'WHERE c.name = "'.trim($theme, '"').'"';
         } else {
-            throw new NoSuchThema($theme);
+            return array();
         }
 
         $query = <<<SQL
