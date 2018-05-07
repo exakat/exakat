@@ -7,4 +7,6 @@
 		}
 		return eaccelerator_put($this->_sanitize_id($id), $data, $lifetime);
 	}
+
+    return eaccelerator_search($this->_sanitize_id($id), $data, $lifetime);
 ?>

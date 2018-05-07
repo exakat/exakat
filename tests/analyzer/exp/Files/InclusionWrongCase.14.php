@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array( 'include \'include.PHP\'',
+$expected     = array('include \'include.PHP\'',
                      );
 
 $expected_not = array('include \'include.php\'',

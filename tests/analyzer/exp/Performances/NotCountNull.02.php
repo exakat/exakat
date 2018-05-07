@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('count($x2)', 
-                      'strlen($x3)', 
+$expected     = array('count($x2)',
+                      'strlen($x3)',
                       'count($x1)',
                      );
 

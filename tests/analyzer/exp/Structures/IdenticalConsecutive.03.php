@@ -15,4 +15,5 @@ $expected_not = array('$a = array();',
                       '$b = 2;',
                       '$B = $a + 2;',
                      );
+
 ?>

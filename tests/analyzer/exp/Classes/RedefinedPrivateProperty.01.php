@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('$AB', 
-                      '$AD', 
-                      '$AC'
+$expected     = array('$AB',
+                      '$AD',
+                      '$AC',
                      );
 
 $expected_not = array('$BB',

@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('foreach($a as $b1) { /**/ } ', 
+$expected     = array('foreach($a as $b1) { /**/ } ',
                       'foreach($a as $k => $b2) { /**/ } ',
-                      'foreach($a as $k3 => $b3) { /**/ } ', 
-                      'foreach($a as $k4 => $b4) { /**/ } ', 
+                      'foreach($a as $k3 => $b3) { /**/ } ',
+                      'foreach($a as $k4 => $b4) { /**/ } ',
                      );
 
 $expected_not = array('',

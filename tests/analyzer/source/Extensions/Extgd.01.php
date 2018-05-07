@@ -9,4 +9,6 @@ imagestring($im, 3, $px, 9, $string, $orange);
 imagepng($im);
 imagedestroy($im);
 
+A::imagedestroy($im2);
+
 ?>
