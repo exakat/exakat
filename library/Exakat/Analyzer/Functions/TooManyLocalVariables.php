@@ -26,29 +26,49 @@ use Exakat\Analyzer\Analyzer;
 
 class TooManyLocalVariables extends Analyzer {
     public function analyze() {
-        $this->atomIs('Function')
+        $MAX_LOOPING = self::MAX_LOOPING;
+
+        $this->atomIs(self::$FUNCTIONS_ALL)
              // Collect all arguments
-             ->raw('where( __.sideEffect{ arguments = [];}.out("ARGUMENT").optional( out("LEFT")).sideEffect{ arguments.add(it.get().value("code")); }.barrier().select("first") ) ')
+             ->raw(<<<GREMLIN
+where(  __.sideEffect{ arguments = [];}
+          .out("ARGUMENT").optional( out("LEFT"))
+          .sideEffect{ arguments.add(it.get().value("code")); }
+          .barrier()
+          .select("first") 
+     ) 
+GREMLIN
+)
 
              ->outIs('BLOCK')
              ->_as("block")
 
              // Collect all global keywords
-             ->raw('where( __.sideEffect{ globals = [];}
-.optional( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Global") ).times('.self::MAX_LOOPING.').hasLabel("Global").out("GLOBAL").hasLabel("Globaldefinition").sideEffect{ globals.add(it.get().value("code")); }
-.barrier().select("block") ) )')
-
-             ->raw('where( __.sideEffect{ x = [:];}
-.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').hasLabel("Variable")
-.filter{ !(it.get().value("code") in globals) }
-.filter{ !(it.get().value("code") in arguments) }
-.sideEffect{ 
-    a = it.get().value("code"); if (x[a] == null) { x[a] = 1;} else { x[a]++;}
-}.barrier()
+             ->raw(<<<GREMLIN
+where( __.sideEffect{ globals = [];}
+         .optional( __.repeat( __.out({$this->linksDown}) ).emit( hasLabel("Global") ).times($MAX_LOOPING)
+         .hasLabel("Global").out("GLOBAL")
+         .hasLabel("Globaldefinition")
+         .sideEffect{ globals.add(it.get().value("code")); }
+         .barrier()
+         .select("block") )
+     )
+GREMLIN
 )
-.filter{ x.size() >= 15;}')
-             ->back('first');
 
+             ->raw(<<<GREMLIN
+where( __.sideEffect{ x = [:];}
+         .repeat( __.out({$this->linksDown}) ).emit( hasLabel("Variable") ).times($MAX_LOOPING).hasLabel("Variable")
+         .filter{ !(it.get().value("code") in globals) }
+         .filter{ !(it.get().value("code") in arguments) }
+         .sideEffect{ 
+             a = it.get().value("code"); if (x[a] == null) { x[a] = 1;} else { x[a]++;}
+         }.barrier()
+         )
+         .filter{ x.size() >= {$this->tooManyLocalVariableThreshold};}
+GREMLIN
+)
+             ->back('first');
         $this->prepareQuery();
     }
 }
