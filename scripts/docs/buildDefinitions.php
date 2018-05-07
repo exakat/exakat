@@ -457,7 +457,7 @@ SQL
 );
         $row = $res->fetchArray(\SQLITE3_ASSOC);
         
-        $ini = parse_ini_file($file);
+        $ini = parse_ini_file($file, true);
         if (empty($ini['exakatSince'])) {
             print "No exakatSince in ".$file."\n";
             continue;
