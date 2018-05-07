@@ -97,7 +97,9 @@ class ProjectConfig extends Config {
         $this->config['project_vcs'] = $this->config['project_vcs'] ?? '';
         
         // Default behavior to keep exakat running until everyone has a filled file_extension option in config.ini
-        $this->config['file_extensions'] = $this->config['file_extensions'] ?: 'php,php3,inc,tpl,phtml,tmpl,phps,ctp,module';
+        if (empty($this->config['file_extensions'])) {
+            $this->config['file_extensions'] = 'php,php3,inc,tpl,phtml,tmpl,phps,ctp,module';
+        }
         
         // Converting the string format to arrays when necessary
         if (isset($this->config['other_php_versions']) && 
