@@ -36,7 +36,7 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIsNot($containers)
              ->raw($notReferenceReturningFunction)
-             // Case for static method call ? 
+             // Case for static method call ?
              ->savePropertyAs('rank', 'position')
              ->back('first')
              ->functionDefinition()
@@ -54,7 +54,7 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIsNot($containers)
              ->raw($notReferenceReturningFunction)
-             // Case for static method call ? 
+             // Case for static method call ?
              ->savePropertyAs('rank', 'position')
              ->back('first')
              ->outIs('CLASS')

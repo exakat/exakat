@@ -37,7 +37,7 @@ class Codacy extends Tasks {
 
     public function run() {
 
-        // Database is not cleaned, as the docker container is supposed to be started and clean. 
+        // Database is not cleaned, as the docker container is supposed to be started and clean.
         if (isset($this->config->codacy_error)) {
             $error = new \Stdclass();
             $error->filename = ".codacy.json";
@@ -53,7 +53,7 @@ class Codacy extends Tasks {
             $analyze->run();
             unset($analyze);
         } else {
-            $this->datastore->addRow('files', 
+            $this->datastore->addRow('files',
                                       array_map(function ($a) { return array('file'   => "/$a");}, $this->config->codacy_files));
         }
         

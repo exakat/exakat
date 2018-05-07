@@ -124,10 +124,10 @@ class Analyze extends Tasks {
         $lock = new Lock($this->config->projects_root.'/projects/.exakat/', $analyzer_class);
         if (!$lock->check()) {
             display(" Concurency lock activated for $analyzer_class \n");
-            return false; 
+            return false;
         }
         
-        if (!(!isset($this->analyzed[$analyzer_class]) || 
+        if (!(!isset($this->analyzed[$analyzer_class]) ||
               $this->config->noRefresh !== true)
             ) {
             display( "$analyzer_class is already processed\n");
@@ -149,7 +149,7 @@ class Analyze extends Tasks {
             }
         }
 
-        if (!(!isset($this->analyzed[$analyzer_class]) || 
+        if (!(!isset($this->analyzed[$analyzer_class]) ||
               $this->config->noRefresh !== true)
             ) {
             display( "$analyzer_class is already processed 2\n");

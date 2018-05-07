@@ -28,7 +28,7 @@ class CallbackNeedsReturn extends Analyzer {
     public function analyze() {
         $ini = $this->loadIni('php_with_callback.ini');
 
-        // array_map(function ($x) { }, $a) 
+        // array_map(function ($x) { }, $a)
         
         foreach($ini as $position => $functions) {
             $rank = (int) substr($position, 9);

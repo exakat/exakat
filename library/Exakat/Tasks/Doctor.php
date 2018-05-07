@@ -30,14 +30,14 @@ use Exakat\Phpexec;
 
 class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    const VERSIONS   = array('php52' => '5.2', 
+    const VERSIONS   = array('php52' => '5.2',
                              'php53' => '5.3',
                              'php54' => '5.4',
                              'php55' => '5.5',
-                             'php56' => '5.6', 
-                             'php70' => '7.0', 
-                             'php71' => '7.1', 
-                             'php72' => '7.2', 
+                             'php56' => '5.6',
+                             'php70' => '7.0',
+                             'php71' => '7.1',
+                             'php72' => '7.2',
                              'php73' => '7.3',
                              );
 
@@ -49,7 +49,7 @@ class Doctor extends Tasks {
     }
 
     public function run() {
-        $stats = array_merge($this->checkPreRequisite(), 
+        $stats = array_merge($this->checkPreRequisite(),
                              $this->checkAutoInstall());
 
 
@@ -160,7 +160,7 @@ class Doctor extends Tasks {
                 } else {
                     $graphdb = 'tinkergraph';
                 }
-            } 
+            }
 
             $ini = str_replace(array('{$version}', '{$version_path}',   '{$graphdb}', ';'.$graphdb, '{$graphdb}_path', ),
                                array( $version,     $this->config->php,  $graphdb,    $graphdb,     $folder),
@@ -262,8 +262,8 @@ class Doctor extends Tasks {
     private function checkOptional() {
         $stats = array();
 
-        $optionals = array('Git'       => 'git', 
-                           'Mercurial' => 'hg', 
+        $optionals = array('Git'       => 'git',
+                           'Mercurial' => 'hg',
                            'Svn'       => 'svn',
                            'Bazaar'    => 'bzr',
                            'Composer'  => 'composer',

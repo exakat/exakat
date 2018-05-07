@@ -152,7 +152,7 @@ class Precedence {
             // Skip unknown tokens from other versions
             if (defined("$phpVersion::$name")) {
                 $this->precedence[constant("$phpVersion::$name")] = $priority;
-            } 
+            }
         }
     }
 

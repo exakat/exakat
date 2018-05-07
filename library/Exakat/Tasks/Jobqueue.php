@@ -110,27 +110,27 @@ class Jobqueue extends Tasks {
                 
                 $command = array_merge(['exakat'], $command);
                 switch($command[1]) {
-                    case 'init' : 
+                    case 'init' :
                         $this->processInit($command);
                         break;
                     
-                    case 'project' : 
+                    case 'project' :
                         $this->processProject($command);
                         break;
                     
-                    case 'report' : 
+                    case 'report' :
                         $this->processReport($command);
                         break;
                     
-                    case 'remove' : 
+                    case 'remove' :
                         $this->processRemove($command);
                         break;
 
-                    case 'config' : 
+                    case 'config' :
                         $this->processConfig($command);
                         break;
                     
-                    default : 
+                    default :
                         print 'Unknown command "'.$command[1].'"'.PHP_EOL;
                 }
 
@@ -198,7 +198,7 @@ class Jobqueue extends Tasks {
         } catch (\Exception $e) {
             $datastore = new Datastore($config);
             $datastore->addRow('hash', array('init error' => $e->getMessage() ));
-        } 
+        }
         $e = microtime(true);
         $this->log('end project : '.$job[1].' ('.number_format($e -$b, 2).' s)');
         unset($analyze);
@@ -215,7 +215,7 @@ class Jobqueue extends Tasks {
         try {
             $analyze->run();
         } catch (\Exception $e) {
-        } 
+        }
         $e = microtime(true);
         $this->log('end config : '.$job[1].' ('.number_format($e -$b, 2).' s)');
         unset($analyze);
@@ -234,7 +234,7 @@ class Jobqueue extends Tasks {
         } catch (\Exception $e) {
             $datastore = new Datastore($config);
             $datastore->addRow('hash', array('init error' => $e->getMessage() ));
-        } 
+        }
         $e = microtime(true);
         unset($analyze);
         display( 'processing remove job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);

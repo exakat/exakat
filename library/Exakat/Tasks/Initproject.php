@@ -143,7 +143,7 @@ class Initproject extends Tasks {
             } else {
                 $vcs = '';
                 $projectName = basename($repositoryURL);
-                $projectName = preg_replace('.git', '', $projectName);
+                $projectName = preg_replace('/\.git/', '', $projectName);
             }
 
             // default initial config. Found in test project.

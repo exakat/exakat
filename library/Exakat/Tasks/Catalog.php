@@ -36,10 +36,10 @@ class Catalog extends Tasks {
         // List of analysis
         $themas = $this->themes->listAllThemes();
         sort($themas);
-        $themas = array_map( function ($x) { 
-            if (strpos($x, ' ') !== false) { 
-                $x = '"'.$x.'"'; 
-            } 
+        $themas = array_map( function ($x) {
+            if (strpos($x, ' ') !== false) {
+                $x = '"'.$x.'"';
+            }
             return $x;
         }, $themas);
         $data['analysis'] = $themas;

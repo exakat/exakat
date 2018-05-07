@@ -35,7 +35,7 @@ class OneLineTwoInstructions extends Analyzer {
              ->atomIsNot(array('Ppp', 'Global', 'Const', 'Inlinehtml'))
              ->savePropertyAs('line', 'line_number')
              ->nextSibling()
-             ->atomIsNot(array('Inlinehtml', 'Break', 'Continue')) 
+             ->atomIsNot(array('Inlinehtml', 'Break', 'Continue'))
              ->samePropertyAs('line', 'line_number')
              ->back('report');
         $this->prepareQuery();

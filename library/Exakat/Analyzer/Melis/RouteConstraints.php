@@ -29,7 +29,7 @@ class RouteConstraints extends Analyzer {
     
     public function analyze() {
         // The route has a variable but no validation
-        $this->atomIs('Keyvalue')   
+        $this->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->atomIs('String')
              ->noDelimiterIs('route')
@@ -42,7 +42,7 @@ class RouteConstraints extends Analyzer {
              ->raw('not(where( __.out("ARGUMENT").out("INDEX").has("noDelimiter", "constraints")))');
         $this->prepareQuery();
 
-        $this->atomIs('Keyvalue')   
+        $this->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->atomIs('String')
              ->noDelimiterIs('route')

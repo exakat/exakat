@@ -49,7 +49,7 @@ class Load extends Tasks {
     private $php    = null;
     private $loader = null;
     private $loaderList = array('SplitGraphson');
-    //'CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv', 
+    //'CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv',
 
     private $precedence   = null;
     private $phptokens    = null;
@@ -430,7 +430,7 @@ SQL;
 
         $this->checkTokenLimit();
         
-        // Reset Atom. 
+        // Reset Atom.
         $this->id0 = $this->addAtom('Project');
         $this->id0->code      = 'Whole';
         $this->id0->atom      = 'Project';
@@ -771,7 +771,7 @@ SQL;
 
         while ($this->tokens[$this->id + 1][0] !== $finalToken) {
             $currentVariable = $this->id + 1;
-            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CURLY_OPEN, 
+            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CURLY_OPEN,
                                                                 $this->phptokens::T_DOLLAR_OPEN_CURLY_BRACES,
                                                                 ))) {
                 $open = $this->id + 1;
@@ -1518,8 +1518,8 @@ SQL;
 
     private function processClosingTag() {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_INLINE_HTML &&
-            in_array($this->tokens[$this->id + 2][0], array($this->phptokens::T_OPEN_TAG, 
-                                                            $this->phptokens::T_OPEN_TAG_WITH_ECHO, 
+            in_array($this->tokens[$this->id + 2][0], array($this->phptokens::T_OPEN_TAG,
+                                                            $this->phptokens::T_OPEN_TAG_WITH_ECHO,
                                                             $this->phptokens::T_INLINE_HTML,
                                                             ))) {
 
@@ -1537,7 +1537,7 @@ SQL;
             } else {
                 ++$this->id; // set to opening tag
             }
-        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OPEN_TAG, 
+        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_OPEN_TAG,
                                                                   $this->phptokens::T_OPEN_TAG_WITH_ECHO,
                                                                   ))) {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_TAG_WITH_ECHO) {
@@ -2062,7 +2062,7 @@ SQL;
             $name = $this->processNextAsIdentifier();
 
             ++$this->id; // Skip =
-            while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON, 
+            while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
                                                                     $this->phptokens::T_COMMA,
                                                                     ))) {
                 $this->processNext();
@@ -2744,8 +2744,8 @@ SQL;
             $this->pushExpression($block);
             ++$this->id;
 
-        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG, 
-                                                                  $this->phptokens::T_CLOSE_CURLY, 
+        } elseif (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG,
+                                                                  $this->phptokens::T_CLOSE_CURLY,
                                                                   $this->phptokens::T_CLOSE_PARENTHESIS,
                                                                   ))) {
             // Completely void (not even ;)
@@ -3943,7 +3943,7 @@ SQL;
     }
 
     private function processReturn() {
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG, 
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG,
                                                             $this->phptokens::T_SEMICOLON,
                                                             ))) {
             $current = $this->id;
@@ -4191,7 +4191,7 @@ SQL;
     private function processSign() {
         $signExpression = $this->tokens[$this->id][1];
         $code = $signExpression.'1';
-        while (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PLUS, 
+        while (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PLUS,
                                                                $this->phptokens::T_MINUS,
                                                               ))) {
             ++$this->id;
@@ -4487,7 +4487,7 @@ SQL;
 
         $this->pushExpression($operator);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && 
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) &&
             $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
@@ -4564,18 +4564,18 @@ SQL;
 
     private function processAssignation() {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals = array_merge($finals, array($this->phptokens::T_EQUAL, 
-                                             $this->phptokens::T_PLUS_EQUAL, 
-                                             $this->phptokens::T_AND_EQUAL, 
-                                             $this->phptokens::T_CONCAT_EQUAL, 
-                                             $this->phptokens::T_DIV_EQUAL, 
-                                             $this->phptokens::T_MINUS_EQUAL, 
-                                             $this->phptokens::T_MOD_EQUAL, 
-                                             $this->phptokens::T_MUL_EQUAL, 
-                                             $this->phptokens::T_OR_EQUAL, 
-                                             $this->phptokens::T_POW_EQUAL, 
-                                             $this->phptokens::T_SL_EQUAL, 
-                                             $this->phptokens::T_SR_EQUAL, 
+        $finals = array_merge($finals, array($this->phptokens::T_EQUAL,
+                                             $this->phptokens::T_PLUS_EQUAL,
+                                             $this->phptokens::T_AND_EQUAL,
+                                             $this->phptokens::T_CONCAT_EQUAL,
+                                             $this->phptokens::T_DIV_EQUAL,
+                                             $this->phptokens::T_MINUS_EQUAL,
+                                             $this->phptokens::T_MOD_EQUAL,
+                                             $this->phptokens::T_MUL_EQUAL,
+                                             $this->phptokens::T_OR_EQUAL,
+                                             $this->phptokens::T_POW_EQUAL,
+                                             $this->phptokens::T_SL_EQUAL,
+                                             $this->phptokens::T_SR_EQUAL,
                                              $this->phptokens::T_XOR_EQUAL,
                                              ));
         return $this->processOperator('Assignation', $finals);

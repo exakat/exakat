@@ -70,7 +70,7 @@ GREMLIN
              ->back('first');
         $this->prepareQuery();
 
-        // include without noDelimiter : 
+        // include without noDelimiter :
         $MAX_LOOPING = self::MAX_LOOPING;
         $this->atomIs('Include')
              ->outIs('ARGUMENT')

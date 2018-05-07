@@ -51,7 +51,7 @@ class Proxy extends Tasks {
         
         $slaves = $this->config->remotes;
         unset($slaves['proxy']); // remove self
-        unset($slaves['ici']);   // remove queue, but why ? 
+        unset($slaves['ici']);   // remove queue, but why ?
 
         display('Copy router server');
         $php = file_get_contents($this->config->dir_root.'/server/proxy.php');
