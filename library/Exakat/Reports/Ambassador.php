@@ -2328,13 +2328,11 @@ SQL;
                     continue;
                 } elseif ($counts[$analyzer] === 0) {
                     $data2[$analyzer][$version] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
+                } elseif ($coeff * version_compare($version, $analyzerVersion) >= 0) {
+                    $data[$analyzer][$version] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
+                    ++$scores[$version];
                 } else {
-                    if ($coeff * version_compare($version, $analyzerVersion) >= 0) {
-                        $data[$analyzer][$version] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
-                        ++$scores[$version];
-                    } else {
-                        $data[$analyzer][$version] = '<i class="fa fa-warning" style="color: crimson"></i>';
-                    }
+                    $data[$analyzer][$version] = '<i class="fa fa-warning" style="color: crimson"></i>';
                 }
             }
         }

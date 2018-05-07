@@ -3642,19 +3642,17 @@ SQL;
                     $namespace->alias = $alias;
                     $origin->alias = $alias;
  
+                } elseif (isset($this->uses['class'][$prefix])) {
+                    $this->addLink($namespace, $this->uses['class'][$prefix], 'DEFINITION');
+                    $namespace->fullnspath = $this->uses['class'][$prefix]->fullnspath;
+    
+                    $this->addCall('class', $namespace->fullnspath, $namespace);
                 } else {
-                    if (isset($this->uses['class'][$prefix])) {
-                        $this->addLink($namespace, $this->uses['class'][$prefix], 'DEFINITION');
-                        $namespace->fullnspath = $this->uses['class'][$prefix]->fullnspath;
-
-                        $this->addCall('class', $namespace->fullnspath, $namespace);
-                    } else {
-                        list($fullnspath, $aliased) = $this->getFullnspath($namespace, 'class');
-
-                        $namespace->fullnspath = $fullnspath;
-                        $namespace->aliased    = $aliased;
-                        $this->addCall('class', $namespace->fullnspath, $namespace);
-                    }
+                    list($fullnspath, $aliased) = $this->getFullnspath($namespace, 'class');
+    
+                    $namespace->fullnspath = $fullnspath;
+                    $namespace->aliased    = $aliased;
+                    $this->addCall('class', $namespace->fullnspath, $namespace);
                 }
 
                 $fullcode[] = $namespace->fullcode;
@@ -3884,14 +3882,12 @@ SQL;
                 } else {
                     $constant->noDelimiter = $this->currentMethod[count($this->currentMethod) - 1]->code;
                 }
+            } elseif (empty($this->currentMethod)) {
+                $constant->noDelimiter = '';
             } else {
-                if (empty($this->currentMethod)) {
-                    $constant->noDelimiter = '';
-                } else {
-                    $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath .
-                                             '::' .
-                                             $this->currentMethod[count($this->currentMethod) - 1]->code;
-                }
+                $constant->noDelimiter = $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath .
+                                         '::' .
+                                         $this->currentMethod[count($this->currentMethod) - 1]->code;
             }
         }
 
@@ -5200,12 +5196,10 @@ SQL;
         assert(is_string($fullnspath));
         if ($fullnspath === 'undefined') {
             $globalpath = '';
+        } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
+            $globalpath = $r[1];
         } else {
-            if (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
-                $globalpath = $r[1];
-            } else {
-                $globalpath = '';
-            }
+            $globalpath = '';
         }
         
         $query = "INSERT INTO calls VALUES ('{$type}',
