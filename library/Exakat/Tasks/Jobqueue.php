@@ -156,17 +156,17 @@ class Jobqueue extends Tasks {
 
         display( 'processing init job '.$job['project'].PHP_EOL);
         $this->log('start init : '.$job['project']);
-        $b = microtime(true);
+        $begin = microtime(true);
         try {
             $analyze->run();
         } catch (\Exception $e) {
             $datastore = new Datastore($config);
             $datastore->addRow('hash', array('init error' => $e->getMessage() ));
         }
-        $e = microtime(true);
-        $this->log('end init : '.$job[1].' ('.number_format($e -$b, 2).' s)');
+        $end = microtime(true);
+        $this->log('end init : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
         unset($analyze);
-        display( 'processing init job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+        display( 'processing init job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
     
     private function processPing($job) {
@@ -179,11 +179,11 @@ class Jobqueue extends Tasks {
 
         display( 'processing report job '.$job[1].PHP_EOL);
         $this->log('start report : '.$job[1]);
-        $b = microtime(true);
+        $begin = microtime(true);
         $analyze->run();
-        $e = microtime(true);
+        $end = microtime(true);
         unset($analyze);
-        display( 'processing report job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+        display( 'processing report job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function processProject($job) {
@@ -192,17 +192,17 @@ class Jobqueue extends Tasks {
 
         display( 'processing project job '.$job[1].PHP_EOL);
         $this->log('start project : '.$job);
-        $b = microtime(true);
+        $begin = microtime(true);
         try {
             $analyze->run();
         } catch (\Exception $e) {
             $datastore = new Datastore($config);
             $datastore->addRow('hash', array('init error' => $e->getMessage() ));
         }
-        $e = microtime(true);
-        $this->log('end project : '.$job[1].' ('.number_format($e -$b, 2).' s)');
+        $end = microtime(true);
+        $this->log('end project : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
         unset($analyze);
-        display( 'processing project job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+        display( 'processing project job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function processConfig($job) {
@@ -211,15 +211,15 @@ class Jobqueue extends Tasks {
 
         display( 'processing config job '.$job[1].PHP_EOL);
         $this->log('start config : '.$job[1]);
-        $b = microtime(true);
+        $begin = microtime(true);
         try {
             $analyze->run();
         } catch (\Exception $e) {
         }
-        $e = microtime(true);
-        $this->log('end config : '.$job[1].' ('.number_format($e -$b, 2).' s)');
+        $end = microtime(true);
+        $this->log('end config : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
         unset($analyze);
-        display( 'processing config job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+        display( 'processing config job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function processRemove($job) {
@@ -228,16 +228,16 @@ class Jobqueue extends Tasks {
 
         display( 'processing remove job '.$job[1].PHP_EOL);
         $this->log('start report : '.$job[1]);
-        $b = microtime(true);
+        $begin = microtime(true);
         try {
             $analyze->run();
         } catch (\Exception $e) {
             $datastore = new Datastore($config);
             $datastore->addRow('hash', array('init error' => $e->getMessage() ));
         }
-        $e = microtime(true);
+        $end = microtime(true);
         unset($analyze);
-        display( 'processing remove job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+        display( 'processing remove job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function log($message) {
