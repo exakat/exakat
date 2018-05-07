@@ -39,7 +39,8 @@ class RouteConstraints extends Analyzer {
              ->regexIs('noDelimiter', self::REGEX_MELIS_VAR)
              ->inIs('VALUE')
              ->inIs('ARGUMENT')
-             ->raw('not(where( __.out("ARGUMENT").out("INDEX").has("noDelimiter", "constraints")))');
+             ->raw('not(where( __.out("ARGUMENT").out("INDEX").has("noDelimiter", "constraints")))')
+             ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Keyvalue')
