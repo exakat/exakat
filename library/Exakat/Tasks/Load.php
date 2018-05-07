@@ -1045,7 +1045,7 @@ SQL;
             $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($name->code);
             $aliased    = self::NOT_ALIASED;
         } else {
-            assert(false, 'Wrong type of function '.$function->atom);
+            throw new LoadError(__METHOD__.' : wrong type of function '.$function->atom);
         }
 
         $function->line       = $this->tokens[$current][2];
@@ -2440,7 +2440,9 @@ SQL;
                 
                 if ($atom === 'Propertydefinition') {
                     preg_match('/^\$([^ ]+)/', $element->fullcode, $r);
-                    assert(!empty($r), 'Couldn\'t find the property definition in '.__METHOD__.':'.__LINE__);
+                    if (empty($r)) {
+                        throw new LoadError('Couldn\'t find the property definition in '.__METHOD__.':'.$this->filename.':'.__LINE__);
+                    }
                     $element->propertyname = $r[1];
                 }
 
@@ -2453,7 +2455,9 @@ SQL;
 
         if ($atom === 'Propertydefinition') {
             preg_match('/^\$([^ ]+)/', $element->fullcode, $r);
-            assert(!empty($r), 'Couldn\'t find the property definition in '.__METHOD__.':'.__LINE__);
+            if (empty($r)) {
+                throw new LoadError('Couldn\'t find the property definition in '.__METHOD__.':'.$this->filename.':'.__LINE__);
+            }
             $element->propertyname = $r[1];
         }
         $fullcode[] = $element->fullcode;
@@ -4407,7 +4411,7 @@ SQL;
             $static = $this->addAtom('Staticmethodcall');
             $links = 'METHOD';
         } else {
-            assert(false, "Unprocessed atom in static call (right) : ".$right->atom.'. File '.$this->filename);
+            throw new LoadError("Unprocessed atom in static call (right) : ".$right->atom.':'.$this->filename.':'.__LINE__);
         }
 
         $this->addLink($static, $left, 'CLASS');
@@ -4536,7 +4540,7 @@ SQL;
             $static = $this->addAtom('Methodcall');
             $links = 'METHOD';
         } else {
-            assert(false, "Unprocessed atom in object call (right) : ".print_r($right, true));
+            throw new LoadError("Unprocessed atom in object call (right) : ".$right->atom.':'.$this->filename.':'.__LINE__);
         }
 
         $this->addLink($static, $left, 'OBJECT');
@@ -4866,7 +4870,9 @@ SQL;
     /// generic methods
     //////////////////////////////////////////////////////
     private function addAtom($atom) {
-        assert(in_array($atom, GraphElements::$ATOMS), 'Undefined atom '.$atom);
+        if (!in_array($atom, GraphElements::$ATOMS)) {
+            throw new LoadError('Undefined atom '.$atom.':'.$this->filename.':'.__LINE__);
+        }
         $a = $this->atomGroup->factory($atom);
         $this->atoms[$a->id] = $a;
         
@@ -4888,9 +4894,15 @@ SQL;
     }
 
     private function addLink($origin, $destination, $label) {
-        assert(in_array($label, array_merge(GraphElements::$LINKS, GraphElements::$LINKS_EXAKAT)), 'Undefined link '.$label);
-        assert($origin instanceof Atom);
-        assert($destination instanceof Atom);
+        if (!in_array($label, array_merge(GraphElements::$LINKS, GraphElements::$LINKS_EXAKAT))) {
+            throw new LoadError('Undefined link '.$label.'.'.$this->filename.':'.__LINE__);
+        }
+        if (!($origin instanceof Atom)) {
+            throw new LoadError('Origin is not an Atom :'.$this->filename.':'.__LINE__);
+        }
+        if (!($destination instanceof Atom)) {
+            throw new LoadError('Destination is not an Atom :'.$this->filename.':'.__LINE__);
+        }
         $o = $origin->atom;
         $d = $destination->atom;
 
@@ -4921,9 +4933,13 @@ SQL;
     }
 
     private function checkTokens($filename) {
-        assert(empty($this->expressions), "Warning : expression is not empty in $filename : ".count($this->expressions).PHP_EOL.print_r($this->expressions, true).PHP_EOL);
+        if (!empty($this->expressions)) {
+            throw new LoadError( "Warning : expression is not empty in $filename : ".count($this->expressions));
+        }
 
-        assert(empty($this->contexts[self::CONTEXT_NOSEQUENCE]), "Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE].PHP_EOL);
+        if (!empty($this->contexts[self::CONTEXT_NOSEQUENCE])) {
+            throw new LoadError( "Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE].PHP_EOL);
+        }
 
         // All node has one incoming or one outgoing link (outgoing or incoming).
         $O = $D= array();
@@ -4946,15 +4962,25 @@ SQL;
         foreach($this->atoms as $id => $atom) {
             if ($id === 1) { continue; }
 
-            assert(isset($D[$id])    , "Warning : forgotten atom $id in $this->filename : ".print_r($this->atoms[$id], true));
+            if (!isset($D[$id])) {
+                throw new LoadError("Warning : forgotten atom $id in $this->filename : $atom->label");
+            }
 
-            assert($D[$id] <= 1      , "Warning : too linked atom $id in $this->filename : ".$this->atoms[$id]->atom.PHP_EOL);
+            if ($D[$id] > 1) {
+                throw new LoadError("Warning : too linked atom $id in $this->filename : {$D[$id]} links for $id");
+            }
 
-            assert(isset($atom->line), "Warning : missing line atom $id  in $this->filename : ".PHP_EOL);
+            if (!isset($atom->line)) {
+                throw new LoadError("Warning : missing line atom $id  in $this->filename");
+            }
 
-            assert(isset($atom->code), "Warning : forgotten code for atom $id in $this->filename : ".print_r($this->atoms[$id], true));
+            if (!isset($atom->code)) {
+                throw new LoadError("Warning : missing code atom $id  in $this->filename");
+            }
 
-            assert(isset($atom->code), "Warning : forgotten token for atom $id in $this->filename : ".print_r($this->atoms[$id], true));
+            if (!isset($atom->token)) {
+                throw new LoadError("Warning : missing token atom $id  in $this->filename");
+            }
         }
     }
 
@@ -5182,7 +5208,9 @@ SQL;
             $alias = mb_strtolower($alias);
         }
 
-        assert($use instanceof Atom);
+        if (!($use instanceof Atom)) {
+            throw new LoadError( "Warning : namespec in use expression is not an Atom : it is ".get_class($use).PHP_EOL);
+        }
         $this->uses[$useType][$alias] = $use;
 
         return $alias;
@@ -5193,7 +5221,9 @@ SQL;
             return;
         }
         
-        assert(is_string($fullnspath));
+        if (!is_string($fullnspath)) {
+            throw new LoadError( "Warning : fullnspath is not a string : it is ".gettype($use).PHP_EOL);
+        }
         if ($fullnspath === 'undefined') {
             $globalpath = '';
         } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
@@ -5288,7 +5318,9 @@ SQL;
          )";
 
         $res = $this->callsSqlite->query($query);
-        assert($res, "Error while saving definitions : ".$query);
+        if (!is_string($fullnspath)) {
+            throw new LoadError( "Error while saving definitions\n");
+        }
     }
 
     private function logTime($step) {
@@ -5310,8 +5342,10 @@ SQL;
     
     private function makeAnonymous($type = 'class') {
         static $anonymous = 'a';
-        
-        assert(in_array($type, array('class', 'function')), 'Classes and Functions are the only anonymous');
+
+        if (!in_array($type, array('class', 'function'))) {
+            throw new LoadError('Classes and Functions are the only anonymous');
+        }
 
         return $type.'@'.++$anonymous;
     }
