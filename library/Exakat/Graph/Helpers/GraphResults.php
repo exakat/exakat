@@ -68,7 +68,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
             return; 
         }
         $data = array_values($this->data);
-        if (!$data[0] instanceof \Stdclass) {
+        if (!($data[0] instanceof \Stdclass)) {
             return;
         }
 
