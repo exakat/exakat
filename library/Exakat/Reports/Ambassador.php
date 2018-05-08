@@ -330,6 +330,7 @@ class Ambassador extends Reports {
 
             $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
             $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description->getDescription())).'</p>';
+            $analyzersDocHTML  = rst2quote($analyzersDocHTML);
             $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
             
             $v = $description->getClearPHP();

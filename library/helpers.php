@@ -421,6 +421,10 @@ function makeHtml($string) {
     return htmlentities($string, ENT_COMPAT | ENT_HTML401, 'UTF-8');
 }
 
+function rst2quote($txt) {
+    return preg_replace('/``+(.+?)``+/s', ' <span style="border: 1px solid #ddd; background-color: #f5f5f5">$1</span> ', $txt);
+}
+
 function rst2htmlLink($txt) {
     return preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
 }
