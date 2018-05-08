@@ -26,19 +26,10 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ThisIsForClasses extends Analyzer {
-    protected $phpVersion = '7.1-';
-
     public function analyze() {
         // General case
         $this->atomIs('This')
              ->hasNoInstruction(array('Class', 'Classanonymous', 'Trait', 'Method', 'Closure'))
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('This')
-             ->hasInstruction('Closure')
-             ->goToFunction('Closure')
-             ->hasNoClassTrait()
              ->back('first');
         $this->prepareQuery();
 
