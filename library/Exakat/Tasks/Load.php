@@ -4819,7 +4819,7 @@ SQL;
         // processArguments goes too far, up to ;
         --$this->id;
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -4955,7 +4955,7 @@ SQL;
 
     private function checkTokens($filename) {
         if (!empty($this->expressions)) {
-            throw new LoadError( "Warning : expression is not empty in $filename : ".count($this->expressions));
+            throw new LoadError( "Warning : expression is not empty in $filename : ".count($this->expressions).print_r($this->expressions, true));
         }
 
         if (!empty($this->contexts[self::CONTEXT_NOSEQUENCE])) {
