@@ -67,75 +67,91 @@ Available Options
 
 Here are the currently available options in Exakat's configuration file : config/config.ini
 
-+-----------------+-------------------------------------------------------------------------------------------+
-| Option          | Description                                                                               |
-+=================+===========================================================================================+
-| project_themes  | List of analysis themes to be run.                                                        |
-|                 | Specific themes may be run with exakat.phar analyze -T <Theme>                            |
-|                 | project_themes[] = 'Theme', one per lines.                                                |
-+-----------------+-------------------------------------------------------------------------------------------+
-| project_reports | Maximum size of the analyzed project, in number of PHP tokens, and excluding whitespace.  |
-|                 | Use this to avoid running a really long analyze without knowing it. Default is 1 million. |
-+-----------------+-------------------------------------------------------------------------------------------+
-| token_limit     | Maximum size of the analyzed project, in number of PHP tokens, and excluding whitespace.  |
-|                 | Use this to avoid running a really long analyze without knowing it. Default is 1 million. |
-+-----------------+-------------------------------------------------------------------------------------------+
-| neo4j_host      | The IP on which to reach Neo4j Database. It is recommended to use the default value, until|
-|                 |  exakat has loosened the link between it and the location of Neo4j. Default : 127.0.0.1.  |
-+-----------------+-------------------------------------------------------------------------------------------+
-| neo4j_port      | Port to use to reach Neo4j. Default :7474                                                 |
-+-----------------+-------------------------------------------------------------------------------------------+
-| neo4j_folder    | Folder in which neo4j reside. Default : './neo4j'                                         |
-+-----------------+-------------------------------------------------------------------------------------------+
-| neo4j_login     | Neo4j User when connecting to the neo4j server. Leave this blank (empty string) if the    |
-|                 | authentication is not set. Default : 'neo4j'                                              |
-+-----------------+-------------------------------------------------------------------------------------------+
-| neo4j_password  | Neo4j password when connecting to the neo4j server. Leave this blank (empty string) if the|
-|                 |  authentication is not set. Default : 'oui';                                              |
-+-----------------+-------------------------------------------------------------------------------------------+
-| php             | Link to the PHP binary. This binary is the one that runs Exakat. It is recommended to use |
-|                 | PHP 7.0, or 5.6. The same binary may be used with the following options.                  |
-+-----------------+-------------------------------------------------------------------------------------------+
-| php72           | Link to the PHP 7.2.x binary. This binary is needed to test the compilation with the 7.2  |
-|                 | series or if the analyze should be run with this version (see project's config.ini).      |
-|                 | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                 | version for the analyze                                                                   |
-+-----------------+-------------------------------------------------------------------------------------------+
-| php71           | Link to the PHP 7.1.x binary. This binary is needed to test the compilation with the 7.1  |
-|                 | series or if the analyze should be run with this version (see project's config.ini).      |
-|                 | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                 | version for the analyze                                                                   |
-+-----------------+-------------------------------------------------------------------------------------------+
-| php70           | Link to the PHP 7.0.x binary. This binary is needed to test the compilation with the 7.0  |
-|                 | series or if the analyze should be run with this version (see project's config.ini).      |
-|                 | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                 | version for the analyze                                                                   |
-+-----------------+-------------------------------------------------------------------------------------------+
-| php56           | Link to the PHP 5.6.x binary. This binary is needed to test the compilation with the 5.6  |
-|                 | series or if the analyze should be run with this version (see project's config.ini).      |
-|                 | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                 | version for the analyze                                                                   |
-+-----------------+-------------------------------------------------------------------------------------------+
-| php55           | Link to the PHP 5.5.x binary. This binary is needed to test the compilation with the 5.5  |
-|                 | series or if the analyze should be run with this version (see project's config.ini).      |
-|                 | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                 | version for the analyze                                                                   |
-+-----------------+-------------------------------------------------------------------------------------------+
-| php54           | Link to the PHP 5.4.x binary. This binary is needed to test the compilation with the 5.4  |
-|                 | series or if the analyze should be run with this version (see project's config.ini).      |
-|                 | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                 | version for the analyze                                                                   |
-+-----------------+-------------------------------------------------------------------------------------------+
-| php53           | Link to the PHP 5.3.x binary. This binary is needed to test the compilation with the 5.3  |
-|                 | series or if the analyze should be run with this version (see project's config.ini).      |
-|                 | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                 | version for the analyze                                                                   |
-+-----------------+-------------------------------------------------------------------------------------------+
-| php52           | Link to the PHP 5.2.x binary. This binary is needed to test the compilation with the 5.2  |
-|                 | series or if the analyze should be run with this version (see project's config.ini).      |
-|                 | Comment it out if you don't want this version tested. It is not recommended to use this   |
-|                 | version for the analyze                                                                   |
-+-----------------+-------------------------------------------------------------------------------------------+
++--------------------+-------------------------------------------------------------------------------------------+
+| Option             | Description                                                                               |
++====================+===========================================================================================+
+| graphdb            | The graph database to use.                                                                |
+|                    | Currently, it may be gsneo4j, or tinkergraph.                                             |
++--------------------+-------------------------------------------------------------------------------------------+
+| gsneo4j_host       | The host to connect to reach the graph database, when using gsneo4j driver.               |
+|                    | The default value is 'localhost'                                                          |
++--------------------+-------------------------------------------------------------------------------------------+
+| gsneo4j_host       | The port to use on the host to reach the graph database, when using gsneo4j driver..      |
+|                    | The default value is '8182'                                                               |
++--------------------+-------------------------------------------------------------------------------------------+
+| gsneo4j_folder     | The folder where the code for the graph database resides, when using gsneo4j driver.      |
+|                    | The default value is 'tinkergraph', and is located near exakat.phar                       |
++--------------------+-------------------------------------------------------------------------------------------+
+| tinkergraph_host   | The host to connect to reach the graph database, when using tinkergraph driver.           |
+|                    | The default value is 'localhost'                                                          |
++--------------------+-------------------------------------------------------------------------------------------+
+| tinkergraph_host   | The port to use on the host to reach the graph database, when using tinkergraph driver.   |
+|                    | The default value is '8182'                                                               |
++--------------------+-------------------------------------------------------------------------------------------+
+| tinkergraph_folder | The folder where the code for the graph database resides, when using tinkergraph driver.  |
+|                    | The default value is 'tinkergraph', and is located near exakat.phar                       |
++--------------------+-------------------------------------------------------------------------------------------+
+| project_themes     | List of analysis themes to be run. The list may include extra themes that are not used    |
+|                    | by the default reports : you can then summon them manually.                               |
+|                    | project_themes[] = 'Theme', one per line.                                                 |
++--------------------+-------------------------------------------------------------------------------------------+
+| project_reports    | The list of reports that can be produced when running 'project' command.                  |
+|                    | This list may automatically add extra themes if a report requires them. For example,      |
+|                    | the 'Ambassador' report requires 'Security' theme, while 'Text' has no pre-requisite.     |
+|                    | project_reports is 'Ambassador', by default.                                              |
+|                    | project_reports[] = 'Report', one per line.                                               |
++--------------------+-------------------------------------------------------------------------------------------+
+| token_limit        | Maximum size of the analyzed project, in number of PHP tokens, and excluding whitespace.  |
+|                    | Use this to avoid running a really long analyze without knowing it. Default is 1 million. |
++--------------------+-------------------------------------------------------------------------------------------+
+| php                | Link to the PHP binary. This binary is the one that runs Exakat. It is recommended to use |
+|                    | PHP 7.0, or 5.6. The same binary may be used with the following options.                  |
++--------------------+-------------------------------------------------------------------------------------------+
+| php73              | Link to the PHP 7.3.x binary. This binary is needed to test the compilation with the 7.3  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+| php72              | Link to the PHP 7.2.x binary. This binary is needed to test the compilation with the 7.2  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+| php71              | Link to the PHP 7.1.x binary. This binary is needed to test the compilation with the 7.1  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+| php70              | Link to the PHP 7.0.x binary. This binary is needed to test the compilation with the 7.0  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+| php56              | Link to the PHP 5.6.x binary. This binary is needed to test the compilation with the 5.6  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+| php55              | Link to the PHP 5.5.x binary. This binary is needed to test the compilation with the 5.5  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+| php54              | Link to the PHP 5.4.x binary. This binary is needed to test the compilation with the 5.4  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+| php53              | Link to the PHP 5.3.x binary. This binary is needed to test the compilation with the 5.3  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
+| php52              | Link to the PHP 5.2.x binary. This binary is needed to test the compilation with the 5.2  |
+|                    | series or if the analyze should be run with this version (see project's config.ini).      |
+|                    | Comment it out if you don't want this version tested. It is not recommended to use this   |
+|                    | version for the analyze                                                                   |
++--------------------+-------------------------------------------------------------------------------------------+
 
 Project Configuration
 ---------------------

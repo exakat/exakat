@@ -55,7 +55,7 @@ Used Once Variables
 
 .. _shopware-variables-variableusedonce:
 
-Shopware
+shopware
 ^^^^^^^^
 
 :ref:`used-once-variables`, in _sql/migrations/438-add-email-template-header-footer-fields.php:115. 
@@ -107,6 +107,57 @@ In this code, $cachedConfigData is collected after storing date in the cache. Gd
                         ]);
                     }
 
+Several Instructions On The Same Line
+=====================================
+
+.. _piwigo-structures-onelinetwoinstructions:
+
+Piwigo
+^^^^^^
+
+:ref:`several-instructions-on-the-same-line`, in tools/triggers_list.php:993. 
+
+There are two instructions on the line with the if(). Note that the condition is not followed by a bracketed block. With a quick review, it really seems that echo '<br>' and $f=0; are on the same block, but the second is indeed an unconditional expression. This is very difficult to spot. 
+
+.. code-block:: php
+
+    foreach ($trigger['files'] as $file)
+          {
+            if (!$f) echo '<br>'; $f=0;
+            echo preg_replace('#\((.+)\)#', '(<i>$1</i>)', $file);
+          }
+
+
+--------
+
+Several Instructions On The Same Line
+=====================================
+
+.. _tine20-structures-onelinetwoinstructions:
+
+Tine20
+^^^^^^
+
+:ref:`several-instructions-on-the-same-line`, in tine20/Calendar/Controller/Event.php:1594. 
+
+Here, $_event->attendee is saved in a local variable, then the property is destroyed. Same for $_event->notes; Strangely, a few lines above, the properties are unset on their own line. Unsetting properties leads to surprise bugs, and hidding the unset after ; makes it harder to spot.
+
+.. code-block:: php
+
+    $futurePersistentExceptionEvents->setRecurId($_event->getId());
+                    unset($_event->recurid);
+                    unset($_event->base_event_id);
+                    foreach(array('attendee', 'notes', 'alarms') as $prop) {
+                        if ($_event->{$prop} instanceof Tinebase_Record_RecordSet) {
+                            $_event->{$prop}->setId(NULL);
+                        }
+                    }
+                    $_event->exdate = $futureExdates;
+    
+                    $attendees = $_event->attendee; unset($_event->attendee);
+                    $note = $_event->notes; unset($_event->notes);
+                    $persistentExceptionEvent = $this->create($_event, $_checkBusyConflicts && $dtStartHasDiff);
+
 Logical Should Use Symbolic Operators
 =====================================
 
@@ -142,6 +193,58 @@ In this context, the priority of execution is used on purpose; $coreFile only co
 
     $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
 
+Deep Definitions
+================
+
+.. _dolphin-functions-deepdefinitions:
+
+Dolphin
+^^^^^^^
+
+:ref:`deep-definitions`, in wp-admin/includes/misc.php:74. 
+
+The ConstructHiddenValues function builds the ConstructHiddenSubValues function. Thus, ConstructHiddenValues can only be called once. 
+
+.. code-block:: php
+
+    function ConstructHiddenValues($Values)
+    {
+        /**
+         *    Recursive function, processes multidimensional arrays
+         *
+         * @param string $Name  Full name of array, including all subarrays' names
+         *
+         * @param array  $Value Array of values, can be multidimensional
+         *
+         * @return string    Properly consctructed <input type="hidden"...> tags
+         */
+        function ConstructHiddenSubValues($Name, $Value)
+        {
+            if (is_array($Value)) {
+                $Result = "";
+                foreach ($Value as $KeyName => $SubValue) {
+                    $Result .= ConstructHiddenSubValues("{$Name}[{$KeyName}]", $SubValue);
+                }
+            } else // Exit recurse
+            {
+                $Result = "<input type=\"hidden\" name=\"" . htmlspecialchars($Name) . "\" value=\"" . htmlspecialchars($Value) . "\" />\n";
+            }
+    
+            return $Result;
+        }
+    
+        /* End of ConstructHiddenSubValues function */
+    
+        $Result = '';
+        if (is_array($Values)) {
+            foreach ($Values as $KeyName => $Value) {
+                $Result .= ConstructHiddenSubValues($KeyName, $Value);
+            }
+        }
+    
+        return $Result;
+    }
+
 No array_merge() In Loops
 =========================
 
@@ -163,6 +266,27 @@ Note that the order of merge will be the same when merging than when collecting 
             }
     
             $attributes = array_merge($attributes, $this->_additionalLdapAttributesToFetch);
+
+Useless Parenthesis
+===================
+
+.. _woocommerce-structures-uselessparenthesis:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`useless-parenthesis`, in code/app/bundles/EmailBundle/Controller/AjaxController.php:85. 
+
+Parenthesis are useless for calculating $discount_percent, as it is a divisition. Moreover, it is not needed with $discount, (float) applies to the next element, but it does make the expression more readable. 
+
+.. code-block:: php
+
+    if ( wc_prices_include_tax() ) {
+    				$discount_percent = ( wc_get_price_including_tax( $cart_item['data'] ) * $cart_item_qty ) / WC()->cart->subtotal;
+    			} else {
+    				$discount_percent = ( wc_get_price_excluding_tax( $cart_item['data'] ) * $cart_item_qty ) / WC()->cart->subtotal_ex_tax;
+    			}
+    			$discount = ( (float) $this->get_amount() * $discount_percent ) / $cart_item_qty;
 
 Could Be Static
 ===============
@@ -344,7 +468,7 @@ Wrong Parameter Type
 
 .. _zencart-php-internalparametertype:
 
-ZenCart
+Zencart
 ^^^^^^^
 
 :ref:`wrong-parameter-type`, in /admin/includes/header.php:180. 
@@ -409,6 +533,75 @@ When the line is long, it tends to be more and more difficult to review the valu
 .. code-block:: php
 
     !empty($permissions[$permissionBase . ':deleteown']) || !empty($permissions[$permissionBase . ':deleteown']) || !empty($permissions[$permissionBase . ':delete'])
+
+No Choice
+=========
+
+.. _nextcloud-structures-nochoice:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`no-choice`, in build/integration/features/bootstrap/FilesDropContext.php:71. 
+
+Token is checked, but processed in the same way each time. This actual check is done twice, in the same class, in the method droppingFileWith(). 
+
+.. code-block:: php
+
+    public function creatingFolderInDrop($folder) {
+    		$client = new Client();
+    		$options = [];
+    		if (count($this->lastShareData->data->element) > 0){
+    			$token = $this->lastShareData->data[0]->token;
+    		} else {
+    			$token = $this->lastShareData->data[0]->token;
+    		}
+    		$base = substr($this->baseUrl, 0, -4);
+    		$fullUrl = $base . '/public.php/webdav/' . $folder;
+    
+    		$options['auth'] = [$token, ''];
+
+
+--------
+
+No Choice
+=========
+
+.. _zencart-structures-nochoice:
+
+Zencart
+^^^^^^^
+
+:ref:`no-choice`, in admin/includes/functions/html_output.php:179. 
+
+At least, it always choose the most secure way : use SSL.
+
+.. code-block:: php
+
+    if ($usessl) {
+            $form .= zen_href_link($action, $parameters, 'NONSSL');
+          } else {
+            $form .= zen_href_link($action, $parameters, 'NONSSL');
+          }
+
+Throw Functioncall
+==================
+
+.. _sugarcrm-exceptions-throwfunctioncall:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`throw-functioncall`, in /include/externalAPI/cmis_repository_wrapper.php:918. 
+
+SugarCRM uses exceptions to fill work in progress. Here, we recognize a forgotten 'new' that makes throw call a function named 'Exception'. This fails with a Fatal Error, and doesn't issue the right messsage. The same error had propgated in the code by copy and paste : it is available 17 times in that same file.
+
+.. code-block:: php
+
+    function getContentChanges()
+        {
+            throw Exception("Not Implemented");
+        }
 
 Cast To Boolean
 ===============
@@ -541,6 +734,41 @@ Default development behavior : display the caught exception. Production behavior
                 return;
             }
 
+Too Many Local Variables
+========================
+
+.. _humo-gen-functions-toomanylocalvariables:
+
+HuMo-Gen
+^^^^^^^^
+
+:ref:`too-many-local-variables`, in relations.php:813. 
+
+15 local variables pieces of code are hard to find in a compact form. This function shows one classic trait of such issue : a large ifthen is at the core of the function, and each time, it collects some values and build a larger string. This should probably be split between different methods in a class. 
+
+.. code-block:: php
+
+    function calculate_nephews($generX) { // handed generations x is removed from common ancestor
+    global $db_functions, $reltext, $sexe, $sexe2, $language, $spantext, $selected_language, $foundX_nr, $rel_arrayX, $rel_arrayspouseX, $spouse;
+    global $reltext_nor, $reltext_nor2; // for Norwegian and Danish
+    
+    	if($selected_language=="es"){
+    		if($sexe=="m") { $neph=__('nephew'); $span_postfix="o "; $grson='nieto'; }
+    		else { $neph=__('niece'); $span_postfix="a "; $grson='nieta'; }
+    		//$gendiff = abs($generX - $generY); // FOUT
+    		$gendiff = abs($generX - $generY) - 1;
+    		$gennr=$gendiff-1;
+    		$degree=$grson." ".$gennr.$span_postfix;
+    		if($gendiff ==1) { $reltext=$neph.__(' of ');}
+    		elseif($gendiff > 1 AND $gendiff < 27) {
+    			spanish_degrees($gendiff,$grson);
+    			$reltext=$neph." ".$spantext.__(' of ');
+    		}
+    		else { $reltext=$neph." ".$degree; }
+    	} elseif ($selected_language==he){
+    		if($sexe=='m') { $nephniece = __('nephew'); }
+    ///............
+
 Only Variable Passed By Reference
 =================================
 
@@ -597,7 +825,7 @@ Logical To in_array
 
 .. _zencart-performances-logicaltoinarray:
 
-ZenCart
+Zencart
 ^^^^^^^
 
 :ref:`logical-to-in\_array`, in admin/users.php:32. 
@@ -1111,5 +1339,77 @@ This code only exports the POST variables as globals. And it does clean incoming
     
     // Get Action type
     $op = system_CleanVars($_REQUEST, 'op', 'list', 'string');
+
+Use List With Foreach
+=====================
+
+.. _mediawiki-structures-uselistwithforeach:
+
+MediaWiki
+^^^^^^^^^
+
+:ref:`use-list-with-foreach`, in includes/parser/LinkHolderArray.php:372. 
+
+This foreach reads each element from $entries into entry. $entry, in turn, is written into $pdbk, $title and $displayText for easier reuse. 5 elements are read from $entry, and they could be set in their respective variable in the foreach() with a list call. The only on that can't be set is 'query' which has to be tested.
+
+.. code-block:: php
+
+    foreach ( $entries as $index => $entry ) {
+    				$pdbk = $entry['pdbk'];
+    				$title = $entry['title'];
+    				$query = isset( $entry['query'] ) ? $entry['query'] : [];
+    				$key = "$ns:$index";
+    				$searchkey = "<!--LINK'\" $key-->";
+    				$displayText = $entry['text'];
+    				if ( isset( $entry['selflink'] ) ) {
+    					$replacePairs[$searchkey] = Linker::makeSelfLinkObj( $title, $displayText, $query );
+    					continue;
+    				}
+    				if ( $displayText === '' ) {
+    					$displayText = null;
+    				} else {
+    					$displayText = new HtmlArmor( $displayText );
+    				}
+    				if ( !isset( $colours[$pdbk] ) ) {
+    					$colours[$pdbk] = 'new';
+    				}
+    				$attribs = [];
+    				if ( $colours[$pdbk] == 'new' ) {
+    					$linkCache->addBadLinkObj( $title );
+    					$output->addLink( $title, 0 );
+    					$link = $linkRenderer->makeBrokenLink(
+    						$title, $displayText, $attribs, $query
+    					);
+    				} else {
+    					$link = $linkRenderer->makePreloadedLink(
+    						$title, $displayText, $colours[$pdbk], $attribs, $query
+    					);
+    				}
+    
+    				$replacePairs[$searchkey] = $link;
+    			}
+
+
+--------
+
+Use List With Foreach
+=====================
+
+.. _swoole-structures-uselistwithforeach:
+
+Swoole
+^^^^^^
+
+:ref:`use-list-with-foreach`, in libs/Swoole/SelectDB.php:848. 
+
+This foreach reads 'c' in the $c variable (via the $_c). It could be simplified with foreach($c as ['c' => $d]) { $cc += $d; }. In fact, it could very well be replaced by array_sum() altogether.
+
+.. code-block:: php
+
+    $cc = 0;
+                foreach ($c as $_c)
+                {
+                    $cc += $_c['c'];
+                }
 
 

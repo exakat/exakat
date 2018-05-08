@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 01 May 2018 11:23:24 +0000
-.. comment: Generation hash : 6fa19de2024dd4bb7618345e6040c88aba386355
+.. comment: Generation date : Mon, 07 May 2018 17:08:31 +0000
+.. comment: Generation hash : 3ea55a5edd9538e0fae942636b2650438fe0d1fe
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 343 analysis
+Total : 344 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -102,6 +102,7 @@ Total : 343 analysis
 * :ref:`Bail Out Early <bail-out-early>`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Buried Assignation <buried-assignation>`
+* :ref:`Callback Needs Return <callback-needs-return>`
 * :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
@@ -117,7 +118,6 @@ Total : 343 analysis
 * :ref:`Constant Class <constant-class>`
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
-* :ref:`Constants`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Else <could-be-else>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
@@ -210,6 +210,7 @@ Total : 343 analysis
 * :ref:`Missing Cases In Switch <missing-cases-in-switch>`
 * :ref:`Missing Include <missing-include>`
 * :ref:`Missing New ? <missing-new-?>`
+* :ref:`Missing Parenthesis <missing-parenthesis>`
 * :ref:`Mistaken Concatenation <mistaken-concatenation>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
@@ -256,7 +257,6 @@ Total : 343 analysis
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
 * :ref:`Not A Scalar Type <not-a-scalar-type>`
-* :ref:`Not Definitions Only <not-definitions-only>`
 * :ref:`Not Not <not-not>`
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
 * :ref:`Old Style Constructor <old-style-constructor>`
@@ -409,6 +409,7 @@ Total : 343 analysis
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
 * :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
+* :ref:`Wrong Range Check <wrong-range-check>`
 * :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 * :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
@@ -878,7 +879,7 @@ Total : 32 analysis
 * :ref:`Join file() <join-file()>`
 * :ref:`Make One Call With Array <make-one-call-with-array>`
 * :ref:`No Count With 0 <no-count-with-0>`
-* :ref:`Performances/RegexOnCollector`
+* :ref:`Processing Collector <processing-collector>`
 * :ref:`Should Use Function <should-use-function>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Simple Switch <simple-switch>`
@@ -979,16 +980,18 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 50 analysis
+Total : 52 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Compact <could-use-compact>`
+* :ref:`Could Use array_unique <could-use-array\_unique>`
 * :ref:`Drop Substr Last Arg <drop-substr-last-arg>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
+* :ref:`One If Is Sufficient <one-if-is-sufficient>`
 * :ref:`Possible Increment <possible-increment>`
 * :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Reuse Variable <reuse-variable>`

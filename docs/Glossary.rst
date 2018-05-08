@@ -247,7 +247,6 @@ Glossary
 
     + `define()`
 
-      + :ref:`Constants <constants>`
       + :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
       + :ref:`Define With Array <define-with-array>`
       + :ref:`Fully Qualified Constants <fully-qualified-constants>`
@@ -443,6 +442,7 @@ Glossary
     + `in_array()`
 
       + :ref:`Logical To in_array <logical-to-in\_array>`
+      + :ref:`Processing Collector <processing-collector>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 
@@ -455,6 +455,7 @@ Glossary
       + :ref:`Already Parents Interface <already-parents-interface>`
       + :ref:`Avoid get_class() <avoid-get\_class()>`
       + :ref:`Could Typehint <could-typehint>`
+      + :ref:`Missing Parenthesis <missing-parenthesis>`
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Make Alias <should-make-alias>`
       + :ref:`Undefined Class 2.0 <undefined-class-2.0>`

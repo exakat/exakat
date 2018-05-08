@@ -695,9 +695,14 @@
                   "activate":"--with-zlib=DIR",
                   "deactivate":"",
                   "others":[]},
- "zmq":       {"analysis":"Extensions/Extzmq",
+ "zmq":          {"analysis":"Extensions/Extzmq",
                   "activate":"--with-zmp=DIR",
                   "deactivate":"",
                   "others":["--with-czmq[=DIR]"],
-                  "pecl":"https://pecl.php.net/package/zmp"}
+                  "pecl":"https://pecl.php.net/package/zmp"},
+ "zookeeper":    {"analysis":"Extensions/Extzookeeper",
+                  "activate":"--enable-zookeeper",
+                  "deactivate":"",
+                  "others":["--disable-zookeeper-session", "--with-libzookeeper-dir[=DIR]"],
+                  "pecl":"https://pecl.php.net/package/zookeeper"}
 }

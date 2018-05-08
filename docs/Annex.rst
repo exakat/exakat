@@ -267,6 +267,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/zip <http://php.net/manual/en/book.zip.php>`_
 * `ext/zlib <http://php.net/manual/en/book.zlib.php>`_
 * `ext/0mq <http://zeromq.org/>`_
+* Extensions/Extzookeeper
 
 Supported Frameworks
 --------------------
@@ -289,30 +290,33 @@ A number of applications were scanned in order to find real life examples of pat
 
 * `Thelia <https://thelia.net/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
-* Shopware
+* `shopware <https://www.shopware.com/>`_
 * `Vanilla <https://open.vanillaforums.com/>`_
+* `Piwigo <https://www.piwigo.org/>`_
+* `Tine20 <https://www.tine20.com/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `OpenConf <https://www.openconf.com/>`_
-* Tine20
 * `Dolphin <https://www.boonex.com/>`_
+* `Woocommerce <https://woocommerce.com/>`_
 * `Contao <https://contao.org/en/>`_
 * `ChurchCRM <http://churchcrm.io/>`_
 * `Zurmo <http://zurmo.org/>`_
-* `shopware <https://www.shopware.com/>`_
-* ZenCart
+* `Zencart <https://www.zen-cart.com/>`_
 * `WordPress <https://www.wordpress.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `Mautic <https://www.mautic.org/>`_
+* `NextCloud <https://nextcloud.com/>`_
+* `SugarCrm <https://www.sugarcrm.com/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
-* PhpIPAM
+* `HuMo-Gen <http://humogen.com/>`_
+* `PhpIPAM <https://phpipam.net/download/>`_
 * `xataface <http://xataface.com/>`_
 * `Phinx <https://phinx.org/>`_
 * `Edusoho <https://www.edusoho.com/en>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
-* Typo3
+* `Typo3 <https://typo3.org/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
-* `Woocommerce <https://woocommerce.com/>`_
 * `SPIP <https://www.spip.net/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `PrestaShop <https://prestashop.com/>`_
@@ -322,6 +326,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
 * `TeamPass <https://teampass.net/>`_
 * `XOOPS <https://xoops.org/>`_
+* `Swoole <https://www.swoole.com/>`_
 
 
 Recognized Libraries
@@ -374,9 +379,21 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.2.6
+
+  * Callback Needs Return (Functions/CallbackNeedsReturn)
+  * Could Use array_unique (Structures/CouldUseArrayUnique ; Suggestions)
+  * Missing Parenthesis (Structures/MissingParenthesis ; Analyze, Codacy, Simple, Level 5)
+  * One If Is Sufficient (Structures/OneIfIsSufficient ; Suggestions)
+
+* 1.2.5
+
+  * Extensions/Extzookeeper (Extensions/Extzookeeper)
+  * Wrong Range Check (Structures/WrongRange ; Analyze)
+
 * 1.2.4
 
-  * Performances/RegexOnCollector (Performances/RegexOnCollector)
+  * Processing Collector (Performances/RegexOnCollector)
 
 * 1.2.3
 
@@ -401,17 +418,16 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.1.10
 
-  * nativeCallCounts (Php/TooManyNativeCalls)
+  * Too Many Native Calls (Php/TooManyNativeCalls)
 
 * 1.1.9
 
   * Should Preprocess Chr (Php/ShouldPreprocess ; Suggestions)
-  * parametersCount (Functions/TooManyParameters)
+  * Too Many Parameters (Functions/TooManyParameters)
 
 * 1.1.8
 
   * Mass Creation Of Arrays (Arrays/MassCreation)
-  * Structures/ConstantPreferences (Structures/ConstantPreferences ; Under Work)
   * ext/db2 (Extensions/Extdb2 ; Appinfo)
 
 * 1.1.7
@@ -575,8 +591,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Date Formats (Php/DateFormats ; Inventory)
   * Incoming Variables (Php/IncomingVariables ; Inventory)
   * Session Variables (Php/SessionVariables ; Inventory)
+  * Too Complex Expression (Structures/ComplexExpression ; Appinfo)
   * Unconditional Break In Loop (Structures/UnconditionLoopBreak ; Analyze, Level 3)
-  * complexExpressionThreshold (Structures/ComplexExpression ; Appinfo)
   * zend-eventmanager 3.2.0 Undefined Classes (ZendF/Zf3Eventmanager32 ; ZendFramework)
   * zend-feed 2.8.0 Undefined Classes (ZendF/Zf3Feed28 ; ZendFramework)
   * zend-http 2.7.0 Undefined Classes (ZendF/Zf3Http27 ; ZendFramework)
@@ -1256,7 +1272,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Constant Definition (Classes/ConstantDefinition ; Appinfo)
   * Constant Scalar Expression (Php/ConstantScalarExpression ; )
   * Constant Scalar Expressions (Structures/ConstantScalarExpression ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
-  * Constants (Constants/Constantnames ; Analyze)
+  * Constants (Constants/Constantnames ; Inventory)
   * Constants Created Outside Its Namespace (Constants/CreatedOutsideItsNamespace ; Analyze, Codacy)
   * Constants Usage (Constants/ConstantUsage ; Appinfo)
   * Constants With Strange Names (Constants/ConstantStrangeNames ; Analyze, Codacy, Simple)
@@ -1487,7 +1503,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Nonce Creation (Wordpress/NonceCreation ; Wordpress)
   * Normal Methods (Classes/NormalMethods ; Appcontent)
   * Normal Property (Classes/NormalProperty ; Appcontent)
-  * Not Definitions Only (Files/NotDefinitionsOnly ; Analyze, Codacy)
+  * Not Definitions Only (Files/NotDefinitionsOnly ; Appinfo)
   * Not Not (Structures/NotNot ; Analyze, OneFile, Codacy, Simple)
   * Not Same Name As File (Classes/NotSameNameAsFile ; )
   * Not Same Name As File (Classes/SameNameAsFile ; Internal)
@@ -1971,6 +1987,7 @@ List of external links mentionned in this documentation.
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_search <http://php.net/array_search>`_
+* `array_unique <http://php.net/array_unique>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
@@ -2083,10 +2100,11 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
+* `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
@@ -2213,6 +2231,8 @@ List of external links mentionned in this documentation.
 * `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
+* `PHP Classes containing only constants
+ <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_
 * `PHP Constants <http://php.net/manual/en/language.constants.php>`_
 * `PHP Data Object <http://php.net/manual/en/book.pdo.php>`_
 * `PHP extension for libsodium <https://github.com/jedisct1/libsodium-php>`_

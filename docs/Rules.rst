@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 01 May 2018 11:23:24 +0000
-.. comment: Generation hash : 6fa19de2024dd4bb7618345e6040c88aba386355
+.. comment: Generation date : Mon, 07 May 2018 17:08:31 +0000
+.. comment: Generation hash : 3ea55a5edd9538e0fae942636b2650438fe0d1fe
 
 
 .. _$http\_raw\_post\_data:
@@ -233,7 +233,7 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 
 PHP has a special class constant to hold the name of the class : 'class' keyword. It represents the classname that is used in the left part of the operator.
 
-Using '::class' is safer than relying on a string. It is also faster, though it is a micro-optimisation. 
+Using '::class' is safer than relying on a string. It does adapt if the class's name or its namespace is changed'. It is also faster, though it is a micro-optimisation. 
 
 It is introduced in PHP 5.5.
 
@@ -2231,6 +2231,34 @@ See also `CakePHP <https://www.cakephp.org/>`_.
 
 
 
+.. _callback-needs-return:
+
+Callback Needs Return
+#####################
+
+
+When used with array_map functions, the callback must return something. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This filters each element
+   $filtered = array_filter($array, function ($x) {return $x == 2; });
+   
+   // This return void for every element
+   $filtered = array_filter($array, function ($x) {return ; });
+   
+   ?>
+
++------------+-------------------------------+
+| Short name | Functions/CallbackNeedsReturn |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
+
+
+
 .. _calltime-pass-by-reference:
 
 Calltime Pass By Reference
@@ -2985,7 +3013,25 @@ Const With Array
 ################
 
 
-The const keyword supports array since PHP 5.6.
+The const keyword supports array. This feature was added in PHP 5.6. 
+
+The array must be filled with other constants. It may also be build using the '+' operator. 
+
+.. code-block:: php
+
+   <?php
+   
+   const PRIMES = [2, 3, 5, 7];
+   
+   class X {
+       const MORE_PRIMES = [11, 13, 17, 19];
+   }
+   
+   ?>
+
+
+See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_ and 
+         `Constants Syntax <http://php.net/manual/en/language.constants.syntax.php>`_.
 
 +------------+---------------------------------------------------------------------------------+
 | Short name | Php/ConstWithArray                                                              |
@@ -3003,7 +3049,24 @@ Constant Class
 
 A class or an interface only made up of constants. Constants usually have to be used in conjunction of some behavior (methods, class...) and never alone. 
 
-As such, they should be PHP constants (build with define or const), or included in a class with other methods and properties.
+.. code-block:: php
+
+   <?php
+   
+   class ConstantClass {
+       const KBIT = 1000;
+       const MBIT = self::KBIT * 1000;
+       const GBIT = self::MBIT * 1000;
+       const PBIT = self::GBIT * 1000;
+   }
+   
+   ?>
+
+
+As such, they should be PHP constants (build with define or const), or included in a class with other methods and properties. 
+
+See also `PHP Classes containing only constants
+ <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_.
 
 +------------+-----------------------+
 | Short name | Classes/ConstantClass |
@@ -3091,34 +3154,6 @@ See also `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exp
 +------------+---------------------------------------------------------------------------------+
 | Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
 +------------+---------------------------------------------------------------------------------+
-
-
-
-.. _constants:
-
-Constants
-#########
-
-
-List of PHP constants being defined.
-
-.. code-block:: php
-
-   <?php
-   
-   // with const
-   const X = 1;
-   
-   // with 'define()
-   define ('Y', 2);
-   
-   ?>
-
-+------------+-------------------------+
-| Short name | Constants/Constantnames |
-+------------+-------------------------+
-| Themes     | :ref:`Analyze`          |
-+------------+-------------------------+
 
 
 
@@ -3823,6 +3858,40 @@ See also `Magic Constants <http://php.net/manual/en/language.constants.predefine
 
 
 
+.. _could-use-array\_unique:
+
+Could Use array_unique
+######################
+
+
+Use array_unique to collect unique elements from an array.
+
+Always try to use native PHP functions, instead of rebuilding them with custom PHP code.
+
+.. code-block:: php
+
+   <?php
+   
+       $unique = array();
+       foreach ($array as $b) {
+           if (!in_array($b, $unique)) {
+               /*  May be more code */
+               $unique[] = $b;
+           }
+       }
+   ?>
+
+
+See also `array_unique <http://php.net/array_unique>`_.
+
++------------+--------------------------------+
+| Short name | Structures/CouldUseArrayUnique |
++------------+--------------------------------+
+| Themes     | :ref:`Suggestions`             |
++------------+--------------------------------+
+
+
+
 .. _could-use-self:
 
 Could Use self
@@ -4024,15 +4093,37 @@ Structures, such as functions, classes, interfaces, traits, etc. may be defined 
 
 Since the availability of __autoload, there is no need for that kind of code. Structures should be defined, and accessible to the autoloading. Inclusion and deep definitions should be avoided, as they compell code to load some definitions, while autoloading will only load them if needed. 
 
+.. code-block:: php
+
+   <?php
+   
+   class X {
+       function init() {
+           // myFunction is defined when and only if X::init() is called.
+           if (!function_exists('myFunction'){
+               function myFunction($a) {
+                   return $a + 1;
+               }
+           })
+       }
+   }
+   
+   ?>
+
+
 Functions are excluded from autoload, but shall be gathered in libraries, and not hidden inside other code.
 
-Constants definitions are tolerated inside functions : they may be used for avoiding repeat, or noting the usage of such function.
+Constants definitions are tolerated inside functions : they may be used for avoiding repeat, or noting the usage of such function. 
 
-+------------+---------------------------+
-| Short name | Functions/DeepDefinitions |
-+------------+---------------------------+
-| Themes     | :ref:`Analyze`            |
-+------------+---------------------------+
+See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_.
+
++------------+------------------------------------------+
+| Short name | Functions/DeepDefinitions                |
++------------+------------------------------------------+
+| Themes     | :ref:`Analyze`                           |
++------------+------------------------------------------+
+| Examples   | :ref:`dolphin-functions-deepdefinitions` |
++------------+------------------------------------------+
 
 
 
@@ -8697,6 +8788,44 @@ Any function definition was found for that function, but a class with that name 
 
 
 
+.. _missing-parenthesis:
+
+Missing Parenthesis
+###################
+
+
+Add parenthesis to those expression to prevent bugs. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Missing some parenthesis!!
+   if (!$a 'instanceof Stdclass) {
+       print Not\n;
+   } else {
+       print Is\n;
+   }
+   
+   // Could this addition be actually
+   $c = -$a + $b;
+   
+   // This one ? 
+   $c = -($a + $b);
+   
+   ?>
+
+
+See also `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
++------------+-------------------------------+
+| Short name | Structures/MissingParenthesis |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
+
+
+
 .. _mistaken-concatenation:
 
 Mistaken Concatenation
@@ -9858,7 +9987,7 @@ No Choice
 
 A conditional structure is being used, but both alternatives are the same, leading to the illusion of choice. 
 
-Either the condition is useless, and may be removed, or the alternatives needs to be distinguished.
+Either the condition is useless, and may be removed, or the alternatives need to be distinguished.
 
 .. code-block:: php
 
@@ -9874,11 +10003,13 @@ Either the condition is useless, and may be removed, or the alternatives needs t
    
    ?>
 
-+------------+---------------------+
-| Short name | Structures/NoChoice |
-+------------+---------------------+
-| Themes     | :ref:`Analyze`      |
-+------------+---------------------+
++------------+--------------------------------------------------------------------------+
+| Short name | Structures/NoChoice                                                      |
++------------+--------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                           |
++------------+--------------------------------------------------------------------------+
+| Examples   | :ref:`nextcloud-structures-nochoice`, :ref:`zencart-structures-nochoice` |
++------------+--------------------------------------------------------------------------+
 
 
 
@@ -10767,7 +10898,9 @@ PHP uses an internal representation in base 2 : any number difficult to represen
    ?>
 
 
-Use precision formulas with `'abs() <http://www.php.net/abs>`_ to approximate values with a given precision, or avoid reals altogether.
+Use precision formulas with `'abs() <http://www.php.net/abs>`_ to approximate values with a given precision, or avoid reals altogether. 
+
+See also `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_.
 
 +------------+-----------------------------------------------------------------------------------------------------+
 | Short name | Type/NoRealComparison                                                                               |
@@ -11395,43 +11528,6 @@ See also `Type declarations <http://php.net/manual/en/functions.arguments.php#fu
 
 
 
-.. _not-definitions-only:
-
-Not Definitions Only
-####################
-
-
-Files should only include definitions (class, functions, traits, interfaces, constants), or global instructions, but not both. 
-
-.. code-block:: php
-
-   <?php
-   // This whole script is a file
-   
-   // It contains definitions and global code
-   class foo {
-       static public $foo = null;
-   }
-   //This can be a singleton creation
-   foo::$foo = new foo();
-   
-   trait t {}
-   
-   class bar {}
-   
-   ?>
-
-
-Within this context, globals, use, and namespaces instructions are not considered a warning.
-
-+------------+--------------------------+
-| Short name | Files/NotDefinitionsOnly |
-+------------+--------------------------+
-| Themes     | :ref:`Analyze`           |
-+------------+--------------------------+
-
-
-
 .. _not-not:
 
 Not Not
@@ -11636,6 +11732,49 @@ See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.ph
 +------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP   | `use-smart-autoload <https://github.com/dseguy/clearPHP/tree/master/rules/use-smart-autoload.md>`__ |
 +------------+-----------------------------------------------------------------------------------------------------+
+
+
+
+.. _one-if-is-sufficient:
+
+One If Is Sufficient
+####################
+
+
+Switch the if then structures to reduce the amount of conditions to read.
+
+.. code-block:: php
+
+   <?php
+   
+   // Less conditions are written here.
+     	if($b == 2) {
+           if($a == 1) {
+       		++$c;
+       	}
+           else {
+       		++$d;
+       	}
+       }
+   
+   // ($b == 2) is double here
+       if($a == 1) {
+       	if($b == 2) {
+       		++$c;
+       	}
+       }
+       else {
+       	if($b == 2) {
+       		++$d;
+       	}
+       }
+   ?>
+
++------------+------------------------------+
+| Short name | Structures/OneIfIsSufficient |
++------------+------------------------------+
+| Themes     | :ref:`Suggestions`           |
++------------+------------------------------+
 
 
 
@@ -12549,22 +12688,6 @@ The same applies to `'parse_url() <http://www.php.net/parse_url>`_, which return
 
 
 
-.. _performances/regexoncollector:
-
-Performances/RegexOnCollector
-#############################
-
-
-
-
-+------------+-------------------------------+
-| Short name | Performances/RegexOnCollector |
-+------------+-------------------------------+
-| Themes     | :ref:`Performances`           |
-+------------+-------------------------------+
-
-
-
 .. _php-7-indirect-expression:
 
 Php 7 Indirect Expression
@@ -13127,6 +13250,54 @@ See also `Category:Private Functions <https://codex.wordpress.org/Category:Priva
 +------------+--------------------------------+
 | Themes     | :ref:`Wordpress`               |
 +------------+--------------------------------+
+
+
+
+.. _processing-collector:
+
+Processing Collector
+####################
+
+
+When accumulating data in a variable, within a loop, it is slow to apply repeatedly a function to the variable.
+
+The example below illustrate the problem : `$collector` is build with element from `$array`. `$collector` actually gets larger and larger, slowing the `'in_array() <http://www.php.net/in_array>`_ call each time. 
+
+It is better to apply the preg_replace to $a, a short variable, and then, add $a to the collector.
+
+.. code-block:: php
+
+   <?php
+   
+   // Fast way
+   $collector = '';
+   foreach($array as $a){
+       $a = preg_replace('/__(.*?)__/', '<b>
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+
+</b>', $a);
+       $collector .= $a;
+   }
+   
+   // Slow way
+   $collector = '';
+   foreach($array as $a){
+       $collector .= $a;
+       $collector = preg_replace('/__(.*?)__/', '<b>
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+
+</b>', $collector);
+   }
+   
+   ?>
+
++------------+-------------------------------+
+| Short name | Performances/RegexOnCollector |
++------------+-------------------------------+
+| Themes     | :ref:`Performances`           |
++------------+-------------------------------+
 
 
 
@@ -14325,11 +14496,13 @@ This is good for readability, and help at understanding the code. This is especi
 
 See also `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_.
 
-+------------+-----------------------------------+
-| Short name | Structures/OneLineTwoInstructions |
-+------------+-----------------------------------+
-| Themes     | :ref:`Analyze`                    |
-+------------+-----------------------------------+
++------------+--------------------------------------------------------------------------------------------------+
+| Short name | Structures/OneLineTwoInstructions                                                                |
++------------+--------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                   |
++------------+--------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`piwigo-structures-onelinetwoinstructions`, :ref:`tine20-structures-onelinetwoinstructions` |
++------------+--------------------------------------------------------------------------------------------------+
 
 
 
@@ -16747,11 +16920,13 @@ The throw keyword is excepted to use an exception. Calling a function to prepare
 
 When the new keyword is forgotten, then the class construtor is used as a functionname, and now exception is emited, but an 'Undefined function' fatal error is emited.
 
-+------------+------------------------------+
-| Short name | Exceptions/ThrowFunctioncall |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++------------+----------------------------------------------+
+| Short name | Exceptions/ThrowFunctioncall                 |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`                               |
++------------+----------------------------------------------+
+| Examples   | :ref:`sugarcrm-exceptions-throwfunctioncall` |
++------------+----------------------------------------------+
 
 
 
@@ -17054,11 +17229,21 @@ Beyond 15 variables, it becomes difficult to keep track of their name and usage,
    
    ?>
 
-+------------+---------------------------------+
-| Short name | Functions/TooManyLocalVariables |
-+------------+---------------------------------+
-| Themes     | :ref:`Analyze`                  |
-+------------+---------------------------------+
++-------------------------------+---------+---------+------------------------------------------------------------------+
+| Name                          | Default | Type    | Description                                                      |
++-------------------------------+---------+---------+------------------------------------------------------------------+
+| tooManyLocalVariableThreshold | 15      | integer | Minimal number of variables in one function or method to report. |
++-------------------------------+---------+---------+------------------------------------------------------------------+
+
+
+
++------------+-------------------------------------------------+
+| Short name | Functions/TooManyLocalVariables                 |
++------------+-------------------------------------------------+
+| Themes     | :ref:`Analyze`                                  |
++------------+-------------------------------------------------+
+| Examples   | :ref:`humo-gen-functions-toomanylocalvariables` |
++------------+-------------------------------------------------+
 
 
 
@@ -18409,6 +18594,32 @@ Unresolved Use
 
 The following use instructions cannot be resolved to a class or a namespace. They should be dropped or fixed.
 
+.. code-block:: php
+
+   <?php
+   
+   namespace A {
+       // class B is defined
+       class B {}
+       // class C is not defined
+   }
+   
+   namespace X/Y {
+   
+       use A/B;  // This use is valid
+       use A/C;  // This use point to nothing.
+   
+       new B();
+       new C();
+   }
+   
+   ?>
+
+
+Use expression are options for the current namespace. 
+
+See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
+
 +------------+---------------------------------------------------------------------------------------------------+
 | Short name | Namespaces/UnresolvedUse                                                                          |
 +------------+---------------------------------------------------------------------------------------------------+
@@ -19487,11 +19698,13 @@ Foreach() structures accepts list() as blind key. If the loop-value is an array 
 
 See also `list <http://php.net/manual/en/function.list.php>`_ and `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
-+------------+-------------------------------+
-| Short name | Structures/UseListWithForeach |
-+------------+-------------------------------+
-| Themes     | :ref:`Suggestions`            |
-+------------+-------------------------------+
++------------+---------------------------------------------------------------------------------------------+
+| Short name | Structures/UseListWithForeach                                                               |
++------------+---------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Suggestions`                                                                          |
++------------+---------------------------------------------------------------------------------------------+
+| Examples   | :ref:`mediawiki-structures-uselistwithforeach`, :ref:`swoole-structures-uselistwithforeach` |
++------------+---------------------------------------------------------------------------------------------+
 
 
 
@@ -20745,6 +20958,10 @@ Useless Parenthesis
 
 Situations where parenthesis are not necessary, and may be removed.
 
+Parenthesis group several elements together, and allows for a more readable expression. They are used with logical and mathematical expressions. They are necessary when the precedence of the operators are not the intended execution order : for example, when an addition must be performed before the multiplication.
+
+Sometimes, the parenthesis provide the same execution order than the default order : they are deemed useless. 
+
 .. code-block:: php
 
    <?php
@@ -20768,11 +20985,16 @@ Situations where parenthesis are not necessary, and may be removed.
        function foo($c = ( 1 + 2) ) {}
    ?>
 
-+------------+-------------------------------+
-| Short name | Structures/UselessParenthesis |
-+------------+-------------------------------+
-| Themes     | :ref:`Analyze`                |
-+------------+-------------------------------+
+
+See also `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
++------------+--------------------------------------------------+
+| Short name | Structures/UselessParenthesis                    |
++------------+--------------------------------------------------+
+| Themes     | :ref:`Analyze`                                   |
++------------+--------------------------------------------------+
+| Examples   | :ref:`woocommerce-structures-uselessparenthesis` |
++------------+--------------------------------------------------+
 
 
 
@@ -21592,6 +21814,34 @@ The expected parameter is not of the correct type. Check PHP documentation to kn
 +------------+------------------------------------------+
 | Examples   | :ref:`zencart-php-internalparametertype` |
 +------------+------------------------------------------+
+
+
+
+.. _wrong-range-check:
+
+Wrong Range Check
+#################
+
+
+The interval check should use && and not ||. 
+
+.. code-block:: php
+
+   <?php
+   
+   //interval correctly checked a is between 2 and 999
+   if ($a > 1 && $a < 1000) {}
+   
+   //interval incorrectly checked : a is 2 or more ($a < 1000 is never checked)
+   if ($a > 1 || $a < 1000) {}
+   
+   ?>
+
++------------+-----------------------+
+| Short name | Structures/WrongRange |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
 
 
 
