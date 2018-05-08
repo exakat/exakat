@@ -33,17 +33,62 @@ class WrongRange extends Analyzer {
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
              ->codeIs(array('>', '>='))
-             ->outIs(array('LEFT', 'RIGHT'))
+             ->outIs('LEFT')
              ->atomIs(self::$CONTAINERS)
              ->savePropertyAs('fullcode', 'variable')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->has('intval')
+             ->savePropertyAs('intval', 'lowerbound')
+
              ->back('first')
 
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
              ->codeIs(array('<', '<='))
-             ->outIs(array('LEFT', 'RIGHT'))
+             ->outIs('LEFT')
              ->atomIs(self::$CONTAINERS)
              ->samePropertyAs('fullcode', 'variable')
+             ->inIs('LEFT')
+
+             ->outIs('RIGHT')
+             ->has('intval')
+             ->savePropertyAs('intval', 'upperbound')
+
+             ->filter('lowerbound <= upperbound;')
+
+             ->back('first');
+        $this->prepareQuery();
+
+        // if ($a < 1 && $a > 1000)
+        $this->atomIs('Logical')
+             ->codeIs(array('&&', 'and'))
+
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs('Comparison')
+             ->codeIs(array('>', '>='))
+             ->outIs('LEFT')
+             ->atomIs(self::$CONTAINERS)
+             ->savePropertyAs('fullcode', 'variable')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->has('intval')
+             ->savePropertyAs('intval', 'lowerbound')
+
+             ->back('first')
+
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs('Comparison')
+             ->codeIs(array('<', '<='))
+             ->outIs('LEFT')
+             ->atomIs(self::$CONTAINERS)
+             ->samePropertyAs('fullcode', 'variable')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->has('intval')
+             ->savePropertyAs('intval', 'upperbound')
+
+             ->filter('lowerbound >= upperbound;')
 
              ->back('first');
         $this->prepareQuery();
