@@ -663,8 +663,17 @@ function makeTable($array) {
 
 function makeApplicationsLink($names) {
     include __DIR__.'/applications.php';
+    
+    ksort($applications);
 
-    $names = array_map(function($x) use ($applications) { if (isset($applications[$x])) { $x = "`$x <".$applications[$x]['url'].">`_";} else { print "Missing url for $x\n"; } return "* $x\n"; }, $names);
+    $names = array_map(function($x) use ($applications) { 
+        if (isset($applications[$x])) { 
+            $x = "`$x <".$applications[$x]['url'].">`_";
+        } else { 
+            print "Missing url for $x\n"; 
+        } 
+        
+        return "* $x\n"; }, $names);
     return join('', $names);
 }
 

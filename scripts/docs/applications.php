@@ -45,7 +45,7 @@ $applications = array(
     'SPIP'                       => array('url' => 'https://www.spip.net/', ),
     'SugarCrm'                   => array('url' => 'https://www.sugarcrm.com/', ),
     'SuiteCrm'                   => array('url' => 'https://suitecrm.com/', ),
-    'Swole'                      => array('url' => 'https://www.swoole.com/', ),
+    'Swoole'                     => array('url' => 'https://www.swoole.com/', ),
     'TeamPass'                   => array('url' => 'https://teampass.net/', ),
     'Thelia'                     => array('url' => 'https://thelia.net/', ),
     'Tine20'                     => array('url' => 'https://www.tine20.com/', ),
