@@ -1,4 +1,4 @@
-Version 1.2.6 (Li Jiancheng, coming up)
+Version 1.2.6 (Li Yuanji, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,35 @@ Version 1.2.6 (Li Jiancheng, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.2.6 (Li Jiancheng, 2018-05-07)
++ Architecture
+    + Moved more classes to helpers
+    + Removed constants for Tokens
+    + Upgraded to Robo 1.2.3
++ Report
+    + Added support for custom themas for reports.
++ Analyzer
+    + New analysis : zookeeper
+    + New analysis : Report missing parenthesis
+    + New analysis : Report invalid interval checks
+    + New analysis : Suggest array_unique when possible
+    + New analysis : Report when callback needs a return
+    + New analysis : Reduce the number of if
+    + Updated Exception list, up to PHP 7.3
+    + Upgraded analysis : Printf Arguments
+    + Upgraded analysis : Count On Null
+    + Upgraded analysis : Regex on Collector
+    + Upgraded analysis : File Inclusion wrong case handles parenthesis
+    + Upgraded analysis : Make globals a property
+    + Upgraded analysis : Invalid regex
+    + Checked unit tests : 2814 / 2818 test pass (99% pass). 
++ Tokenizer
+    + Added definition links for staticmethodcalls.
+    + Added boolean and int values to __DIR__ and co.
+    + Removed several static properties
+    + Fixed precedence of instanceof
+    + Added support for Null val
 
 Version 1.2.5 (Li Yuan, 2018-04-30)
 + Architecture
