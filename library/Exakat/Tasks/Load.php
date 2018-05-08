@@ -446,7 +446,7 @@ SQL;
         // Restart the connexion each time
         $clientClass = $this->config->loader;
         if (!in_array($clientClass, $this->loaderList)) {
-            throw new NoSuchLoader($client, $this->loaderList);
+            throw new NoSuchLoader($clientClass, $this->loaderList);
         }
         display('Loading with '.$clientClass.PHP_EOL);
         $clientClass = '\\Exakat\\Loader\\'.$clientClass;
@@ -3906,7 +3906,7 @@ SQL;
         }
 
         $constant->intval  = (int) $constant->noDelimiter;
-        $constant->boolean = (boolean) $constant->intval;
+        $constant->boolean = (int) (bool) $constant->intval;
         
         return $constant;
     }
@@ -4568,7 +4568,8 @@ SQL;
         $static->token     = $this->getToken($this->tokens[$current][0]);
 
         if ($static->atom === 'Methodcall' &&
-            $left->atom   === 'This'      ) {
+            $left->atom   === 'This'       &&
+            isset(end($this->currentClassTrait)->fullnspath)) {
             $this->addCall('method', end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($right->code), $static);
         }
         $this->pushExpression($static);
