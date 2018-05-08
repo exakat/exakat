@@ -54,10 +54,9 @@ class Precedence {
                         'T_UNSET_CAST'                  => 4,
                         'T_AT'                          => 4,
 
+                        'T_INSTANCEOF'                  => 5,
 
-                        'T_BANG'                        => 5,
-                        'T_INSTANCEOF'                  => 6,
-
+                        'T_BANG'                        => 6,
                         'T_REFERENCE'                   => 6, // Special for reference's usage of &
 
                         'T_SLASH'                       => 7,
