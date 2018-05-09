@@ -1077,21 +1077,22 @@ GREMLIN;
             $b = microtime(true);
             $query = <<<GREMLIN
 
-g.V().$filter.has('constant', true)
-.sideEffect{ name = it.get().value("fullcode");
-             line = it.get().value('line');
-             file='None'; 
-             }
-.until( hasLabel('Project') ).repeat( 
-    __.in()
-      .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
-       )
-.map{ 
-    x = ['name': name,
-         'file': file,
-         'line': line
-         ];
-}
+g.V().$filter
+     .has('constant', true)
+     .sideEffect{ name = it.get().value("fullcode");
+                  line = it.get().value('line');
+                  file='None'; 
+      }
+     .until( hasLabel('File') )
+     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() 
+                .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
+     )
+     .map{ 
+        x = ['name': name,
+             'file': file,
+             'line': line
+             ];
+     }
 
 GREMLIN;
             $res = $this->gremlin->query($query);
