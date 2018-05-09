@@ -59,15 +59,15 @@ class Load extends Tasks {
     private $atomGroup = null;
 
     private $namespace = '\\';
-    private $uses   = array('function'     => array(),
-                            'staticmethod' => array(),
-                            'method'       => array(),  // @todo : handling of parents ? of multiple definition? 
-//                            'classconst'       => array(), 
-//                            'properties'       => array(), 
-//                            'staticproperty'       => array(), 
-                            'const'        => array(),
-                            'define'       => array(),
-                            'class'        => array(),
+    private $uses   = array('function'       => array(),
+                            'staticmethod'   => array(),
+                            'method'         => array(),  // @todo : handling of parents ? of multiple definition? 
+                            'classconst'     => array(), 
+                            'property'       => array(), 
+                            'staticproperty' => array(), 
+                            'const'          => array(),
+                            'define'         => array(),
+                            'class'          => array(),
                             );
     private $filename   = null;
     private $line       = 0;
@@ -2098,6 +2098,14 @@ SQL;
             $this->addDefinition('const', $fullnspath, $def);
 
             $this->addLink($const, $def, 'CONST');
+
+            if ($this->isContext(self::CONTEXT_CLASS) ||
+                $this->isContext(self::CONTEXT_TRAIT)   ) {
+                $this->addDefinition('classconst',   end($this->currentClassTrait)->fullnspath.'::'.$name->fullnspath, $const);
+            } else {
+                $this->addDefinition('const', $name->fullnspath, $const);
+            }
+
         } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON)));
 
         $const->code     = $this->tokens[$current][1];
@@ -2105,7 +2113,7 @@ SQL;
         $const->line     = $this->tokens[$current][2];
         $const->token    = $this->getToken($this->tokens[$current][0]);
         $const->count    = $rank + 1;
-
+        
         $this->pushExpression($const);
 
         return $this->processFCOA($const);
@@ -2302,6 +2310,10 @@ SQL;
             $string->aliased    = $aliased;
         }
 
+        if ($string->atom === 'Identifier') {
+            $this->addCall('const', $string->fullnspath, $string);
+        } 
+
         $this->runPlugins($string, array());
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -2449,8 +2461,7 @@ SQL;
                 $this->addLink($static, $element, $link);
                 
                 if ($atom === 'Propertydefinition') {
-                    preg_match('/^\$([^ ]+)/', $element->fullcode, $r);
-                    if (empty($r)) {
+                    if (preg_match('/^\$([^ ]+)/', $element->fullcode, $r)) {
                         throw new LoadError('Couldn\'t find the property definition in '.__METHOD__.':'.$this->filename.':'.__LINE__);
                     }
                     $element->propertyname = $r[1];
@@ -2464,11 +2475,16 @@ SQL;
         $this->addLink($static, $element, $link);
 
         if ($atom === 'Propertydefinition') {
-            preg_match('/^\$([^ ]+)/', $element->fullcode, $r);
-            if (empty($r)) {
+            if (!preg_match('/^\$([^ ]+)/', $element->fullcode, $r)) {
                 throw new LoadError('Couldn\'t find the property definition in '.__METHOD__.':'.$this->filename.':'.__LINE__);
             }
             $element->propertyname = $r[1];
+            
+            if (preg_match('/static/i', $fullcodePrefix)) {
+                $this->addDefinition('staticproperty', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
+            } else {
+                $this->addDefinition('property', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
+            }
         }
         $fullcode[] = $element->fullcode;
 
@@ -3716,6 +3732,7 @@ SQL;
         $variable = $this->processSingle($atom);
         
         if ($atom === 'This' && ($class = end($this->currentClassTrait))) {
+            $variable->fullnspath = $class->fullnspath;
             $this->addCall('class', $class->fullnspath, $variable);
         }
 
@@ -4434,14 +4451,13 @@ SQL;
         $this->runPlugins($static, array('CLASS' => $left,
                                          $links  => $right));
 
-        if (!empty($left->fullnspath)  &&
-            !empty($right->fullnspath)   ){
-            if ($static->atom === 'Staticmethodcall') {
+        if (!empty($left->fullnspath)){
+            if ($static->atom === 'Staticmethodcall' && !empty($right->fullnspath)) {
                 $this->addCall('staticmethod',  $left->fullnspath.'::'.$right->fullnspath, $static);
             } elseif ($static->atom === 'Staticconstant') {
-                $this->addCall('staticconstant',  $left->fullnspath.'::'.$right->fullnspath, $static);
+                $this->addCall('staticconstant',  $left->fullnspath.'::'.$right->code, $static);
             } elseif ($static->atom === 'Staticproperty') {
-                $this->addCall('staticproperty',  $left->fullnspath.'::'.$right->fullnspath, $static);
+                $this->addCall('staticproperty',  $left->fullnspath.'::'.$right->code, $static);
             }
         } 
 
@@ -4572,11 +4588,14 @@ SQL;
         $static->line      = $this->tokens[$current][2];
         $static->token     = $this->getToken($this->tokens[$current][0]);
 
-        if ($static->atom === 'Methodcall' &&
-            $left->atom   === 'This'       &&
-            isset(end($this->currentClassTrait)->fullnspath)) {
-            $this->addCall('method', end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($right->code), $static);
-        }
+        if ($left->atom   === 'This' ){
+            if ($static->atom === 'Methodcall') {
+                $this->addCall('method', $left->fullnspath.'::'.mb_strtolower($right->code), $static);
+            } elseif ($static->atom === 'Member') {
+                $this->addCall('property',  $left->fullnspath.'::$'.$right->code, $static);
+            }
+        } 
+
         $this->pushExpression($static);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
