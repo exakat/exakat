@@ -67,27 +67,27 @@ function stop($args) {
 }
 
 function init($args) {
-    if ($id = array_search('-R', $args)) {
-        $url = parse_url($args[$id + 1]);
-        if (!isset($url['scheme'], $url['host'], $url['path'])) {
-            error('Malformed VCS', '');
-        }
-        
-        $vcs = unparse_url($url);
-
-        if (($id = array_search('-p', $args)) === false || 
-            !($project = $args[$id + 1])) {
-            $project = autoprojectname();
-        }
-
-        shell_exec("__PHP__ __EXAKAT__ queue init -p $project -R $vcs");
-        serverLog("init : $project $vcs ".date('r'));
-
-        echo json_encode(array('project' => $project, 
-                               'start' => date('r')));
-    } else {
+    if (($id = array_search('-R', $args)) === false) {
         error('Missing VCS/code', '');
     }
+    
+    $url = parse_url($args[$id + 1]);
+    if (!isset($url['scheme'], $url['host'], $url['path'])) {
+        error('Malformed VCS', '');
+    }
+    
+    $vcs = unparse_url($url);
+
+    if (($id = array_search('-p', $args)) === false || 
+        !($project = $args[$id + 1])) {
+        $project = autoprojectname();
+    }
+
+    shell_exec("__PHP__ __EXAKAT__ queue init -p ".escapeshellarg($project)." -R ".escapeshellarg($vcs));
+    serverLog("init : $project $vcs ".date('r'));
+
+    echo json_encode(array('project' => $project, 
+                           'start' => date('r')));
 }
 
 function ping($args) {
@@ -104,7 +104,7 @@ function project($args) {
         error('No project available', '');
     }
 
-    shell_exec("__PHP__ __EXAKAT__ queue project -p $project");
+    shell_exec("__PHP__ __EXAKAT__ queue project -p ".escapeshellarg($project));
     serverLog("project : $project ".date('r'));
 
     echo json_encode(array('project' => $project, 
@@ -121,7 +121,7 @@ function remove($args) {
         error('No project available', '');
     }
 
-    shell_exec("__PHP__ __EXAKAT__ queue remove -p $project");
+    shell_exec("__PHP__ __EXAKAT__ queue remove -p ".escapeshellarg($project));
     serverLog("remove : $project ".date('r'));
 
     echo json_encode(array('project' => $project, 
@@ -141,7 +141,7 @@ function report($args) {
     $id = array_search('-format', $args);
     $format = $args[$id + 1];
 
-    shell_exec("__PHP__ __EXAKAT__ queue report -p $project -format $format");
+    shell_exec("__PHP__ __EXAKAT__ queue report -p ".escapeshellarg($project)." -format ".escapeshellarg($format));
     serverLog("remove : $project ".date('r'));
 
     echo json_encode(array('project' => $project, 
@@ -162,7 +162,7 @@ function doctor($args) {
             error('No project available', '');
         }
 
-        shell_exec("__PHP__ __EXAKAT__ queue doctor -p $project");
+        shell_exec("__PHP__ __EXAKAT__ queue doctor -p ".escapeshellarg($project));
         serverLog("doctor : $project ".date('r'));
 
         echo json_encode(array('doctor' => $project, 
@@ -182,7 +182,7 @@ function status($args) {
         error('No project available', '');
     }
 
-    echo shell_exec("__PHP__ __EXAKAT__ status -p $project -json");
+    echo shell_exec("__PHP__ __EXAKAT__ status -p ".escapeshellarg($project)." -json");
 }
 
 function fetch($args) {
@@ -236,10 +236,10 @@ function config($args) {
 
     $relay = '';
     foreach($directives as $c) {
-        $relay .= ' -c '.$args[$c + 1];
+        $relay .= ' -c '.escapeshellarg($args[$c + 1]);
     }
 
-    echo shell_exec("__PHP__ __EXAKAT__ config -p $project $relay -json");
+    echo shell_exec("__PHP__ __EXAKAT__ config -p ".escapeshellarg($project)." $relay -json");
 }
 
 function stats($args) {
