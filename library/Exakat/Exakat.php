@@ -27,7 +27,7 @@ use Exakat\Config;
 
 class Exakat {
     const VERSION = '1.2.6';
-    const BUILD = 739;
+    const BUILD = 740;
 
     private $gremlin = null;
     private $config = null;
@@ -149,7 +149,7 @@ class Exakat {
                 break;
 
             case 'report' :
-                $task = new Tasks\Report2($this->gremlin, $this->config);
+                $task = new Tasks\Report($this->gremlin, $this->config);
                 $task->run();
                 break;
 
