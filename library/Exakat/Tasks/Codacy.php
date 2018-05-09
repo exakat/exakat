@@ -104,7 +104,7 @@ class Codacy extends Tasks {
         $dump->run();
         unset($dump);
 
-        $report = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $report = new Report($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $report->run();
         unset($report);
 

@@ -23,7 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Tasks\Report2;
+use Exakat\Tasks\Report;
 use Exakat\Tasks\Tasks;
 use Exakat\Config;
 

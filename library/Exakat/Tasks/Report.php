@@ -32,7 +32,7 @@ use Exakat\Exceptions\ProjectNotInited;
 use Exakat\Exceptions\NoDump;
 use Exakat\Reports\Reports as Reports;
 
-class Report2 extends Tasks {
+class Report extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {

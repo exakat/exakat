@@ -4434,10 +4434,15 @@ SQL;
         $this->runPlugins($static, array('CLASS' => $left,
                                          $links  => $right));
 
-        if ($static->atom === 'Staticmethodcall' && 
-            !empty($left->fullnspath)            &&
-            !empty($right->fullnspath)) {
-            $this->addCall('staticmethod',  $left->fullnspath.'::'.$right->fullnspath, $static);
+        if (!empty($left->fullnspath)  &&
+            !empty($right->fullnspath)   ){
+            if ($static->atom === 'Staticmethodcall') {
+                $this->addCall('staticmethod',  $left->fullnspath.'::'.$right->fullnspath, $static);
+            } elseif ($static->atom === 'Staticconstant') {
+                $this->addCall('staticconstant',  $left->fullnspath.'::'.$right->fullnspath, $static);
+            } elseif ($static->atom === 'Staticproperty') {
+                $this->addCall('staticproperty',  $left->fullnspath.'::'.$right->fullnspath, $static);
+            }
         } 
 
         $this->pushExpression($static);

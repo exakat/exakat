@@ -198,7 +198,7 @@ class Project extends Tasks {
             $reportConfig = new Config($args);
 
             try {
-                $report = new Report2($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
+                $report = new Report($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
                 $report->run();
                 unset($report);
             } catch (Throwable $e) {

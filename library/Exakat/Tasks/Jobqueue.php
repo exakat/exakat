@@ -175,7 +175,7 @@ class Jobqueue extends Tasks {
 
     private function processReport($job) {
         $config = new Config($job);
-        $analyze = new Report2($this->gremlin, $config, Tasks::IS_SUBTASK);
+        $analyze = new Report($this->gremlin, $config, Tasks::IS_SUBTASK);
 
         display( 'processing report job '.$job[1].PHP_EOL);
         $this->log('start report : '.$job[1]);
