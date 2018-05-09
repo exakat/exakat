@@ -26,13 +26,6 @@ use Exakat\Analyzer\Analyzer;
 
 class MissingParenthesis extends Analyzer {
     public function analyze() {
-        // !$a instanceof someClass
-        $this->atomIs('Instanceof')
-             ->outIs('VARIABLE')
-             ->atomIs('Not')
-             ->back('first');
-        $this->prepareQuery();
-
         // -$a + $b
         $this->atomIs('Addition')
              ->codeIsNot('-')
