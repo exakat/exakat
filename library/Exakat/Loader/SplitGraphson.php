@@ -102,7 +102,8 @@ LEFT JOIN definitions
 LEFT JOIN definitions definitions2
     ON definitions2.type       = calls.type       AND
        definitions2.fullnspath = calls.globalpath 
-WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
+WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL) AND
+      calls.atom != 'This'
 GROUP BY calls.id
 SQL
 );
@@ -127,6 +128,7 @@ new File('$this->path.def').eachLine {
 GREMLIN;
         $res = $this->gsneo4j->query($query);
         $end = microtime(true);
+        display('loaded definitions');
 
         self::saveTokenCounts();
 

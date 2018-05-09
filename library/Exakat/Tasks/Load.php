@@ -5265,10 +5265,16 @@ SQL;
         if (empty($fullnspath)) {
             return;
         }
+
+        // No need for This
+        if ($call->atom === 'This') {
+            return;
+        }
         
         if (!is_string($fullnspath)) {
             throw new LoadError( "Warning : fullnspath is not a string : it is ".gettype($use).PHP_EOL);
         }
+
         if ($fullnspath === 'undefined') {
             $globalpath = '';
         } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
