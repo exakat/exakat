@@ -144,7 +144,6 @@ class CommandLine extends Config {
             }
         }
 
-
         foreach($this->valueOptions as $key => $config) {
             while( ($id = array_search($key, $args)) !== false ) {
                 if (isset($args[$id + 1])) {
@@ -199,12 +198,12 @@ class CommandLine extends Config {
             }
         }
         
-        if (isset($args[1], $this->commands[$args[1]])) {
-            $this->config['command'] = $args[1];
-            unset($args[1]);
+        $command = array_shift($args);
+        if (isset($command, $this->commands[$command])) {
+            $this->config['command'] = $command;
         }
 
-        if (!empty($args) != 0) {
+        if (!empty($args)) {
             $c = count($args);
             if (isset($this->config['verbose'])) {
                 display( 'Found '.$c.' argument'.($c > 1 ? 's' : '').' that '.($c > 1 ? 'are' : 'is')." not understood.\n\n\"".implode('", "', $args)."\"\n\nIgnoring ".($c > 1 ? 'them all' : 'it'.".\n"));
