@@ -159,8 +159,6 @@ class Docs {
         $this->replaceSpecials();
 
         $this->finishGlossary();
-
-//        print_r($this);
     }
     
     private function getAnalyzerCount() {
@@ -187,7 +185,7 @@ class Docs {
             $ini = parse_ini_file($f);
     
             // We take the first URL that we encounter.
-            if (preg_match('/<(http:.*?)>/', $ini['description'], $r)) {
+            if (preg_match('/<(https?:.*?)>/', $ini['description'], $r)) {
                 $extension_list[] = '* `'.$ini['name'].' <'.$r[1].'>`_';
             } else {
                 $extension_list[] = '* '.$ini['name'];
@@ -335,7 +333,6 @@ SQL
     
     private function getAttributesArray() {
         // More to come,and automate collection too
-        print_r($this->applications);
         $this->attributes = array(
                             'ANALYZERS_COUNT'        => $this->analyzer_count,
                             'EXTENSION_LIST'         => $this->extension_list_rst,
@@ -545,7 +542,7 @@ $exampleTxt
                     $line = $ini['example'.$i]['line'];
                     $analyzer_anchor = $this->rst_anchor($ini['name']);
     
-                    if (empty($issues_examples_section)){
+                    if (empty($issues_examples_section_list)){
                         $issues_examples_section = $ini['name']."\n".str_repeat('=', strlen($ini['name']))."\n";
                     }
     

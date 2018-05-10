@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 07 May 2018 17:08:31 +0000
-.. comment: Generation hash : 3ea55a5edd9538e0fae942636b2650438fe0d1fe
+.. comment: Generation date : Thu, 10 May 2018 05:29:39 +0000
+.. comment: Generation hash : b69bdaffa758bbe134f495f9137eb873ba3c1253
 
 
 .. _$http\_raw\_post\_data:
@@ -3065,8 +3065,7 @@ A class or an interface only made up of constants. Constants usually have to be 
 
 As such, they should be PHP constants (build with define or const), or included in a class with other methods and properties. 
 
-See also `PHP Classes containing only constants
- <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_.
+See also `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_.
 
 +------------+-----------------------+
 | Short name | Classes/ConstantClass |
@@ -3898,9 +3897,9 @@ Could Use self
 ##############
 
 
-'self' keyword refers to the current class, or any of its parents. Using it is just as fast as the full classname, it is as readable and it is will not be changed upon class or namespace change.
+``self`` keyword refers to the current class, or any of its parents. Using it is just as fast as the full classname, it is as readable and it is will not be changed upon class or namespace change.
 
-It is also routinely used in traits : there, 'self' represents the class in which the trait is used, or the trait itself. 
+It is also routinely used in traits : there, ``self`` represents the class in which the trait is used, or the trait itself. 
 
 .. code-block:: php
 
@@ -3916,6 +3915,9 @@ It is also routinely used in traits : there, 'self' represents the class in whic
    }
    
    ?>
+
+
+See also `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
 
 +------------+------------------------------------+
 | Short name | Classes/ShouldUseSelf              |
@@ -6741,7 +6743,7 @@ Htmlentities Calls
 
 The second argument of the functions is the type of protection. The protection may apply to quotes or not, to HTML 4 or 5, etc. It is highly recommended to set it explicitly.
 
-The third argument of the functions is the encoding of the string. In PHP 5.3, it as ``ISO-8859-1``, in 5.4, was ``UTF-8``, and in 5.6, it is now default_charset, a ``php.ini`` configuration that has the default value of ``UTF-8``. It is highly recommended to set this argument too, to avoid distortions from the configuration.
+The third argument of the functions is the encoding of the string. In PHP 5.3, it is ISO-8859-1, in 5.4, was ``UTF-8``, and in 5.6, it is now default_charset, a ``php.ini`` configuration that has the default value of ``UTF-8``. It is highly recommended to set this argument too, to avoid distortions from the configuration.
 
 .. code-block:: php
 
@@ -6786,7 +6788,7 @@ This means those expressions may be simplified.
    // twice $a
    if ($a || $b || $c || $a) {  }
    
-   // Hiding is parenthesis is bad
+   // Hiding in parenthesis is bad
    if (($a) ^ ($a)) {}
    
    // expressions may be large

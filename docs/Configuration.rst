@@ -85,7 +85,7 @@ Here are the currently available options in Exakat's configuration file : config
 | tinkergraph_host   | The host to connect to reach the graph database, when using tinkergraph driver.           |
 |                    | The default value is 'localhost'                                                          |
 +--------------------+-------------------------------------------------------------------------------------------+
-| tinkergraph_host   | The port to use on the host to reach the graph database, when using tinkergraph driver.   |
+| tinkergraph_port   | The port to use on the host to reach the graph database, when using tinkergraph driver.   |
 |                    | The default value is '8182'                                                               |
 +--------------------+-------------------------------------------------------------------------------------------+
 | tinkergraph_folder | The folder where the code for the graph database resides, when using tinkergraph driver.  |
@@ -101,8 +101,9 @@ Here are the currently available options in Exakat's configuration file : config
 |                    | project_reports is 'Ambassador', by default.                                              |
 |                    | project_reports[] = 'Report', one per line.                                               |
 +--------------------+-------------------------------------------------------------------------------------------+
-| token_limit        | Maximum size of the analyzed project, in number of PHP tokens, and excluding whitespace.  |
-|                    | Use this to avoid running a really long analyze without knowing it. Default is 1 million. |
+| token_limit        | Maximum size of the analyzed project, in number of PHP tokens (excluding whitespace).     |
+|                    | Use this to avoid running a really long analyze without knowing it.                       |
+|                    | Default is 1 million.                                                                     |
 +--------------------+-------------------------------------------------------------------------------------------+
 | php                | Link to the PHP binary. This binary is the one that runs Exakat. It is recommended to use |
 |                    | PHP 7.0, or 5.6. The same binary may be used with the following options.                  |
@@ -168,10 +169,17 @@ Here are the currently available options in Exakat's project configuration file 
 +-----------------------+-------------------------------------------------------------------------------------------+
 | Option                | Description                                                                               |
 +=======================+===========================================================================================+
-| phpversion            | Version with which to run the analyze. It may be one of : 7.0, 5.6, 5.5, 5.4, 5.3, 5.2.   |
-|                       | Default is 7.0. 7.0 5.6 and 5.5 have been extensively tested and used in developpement.   |
-|                       | 5.4, 5.3 and 5.2 are available, but are less tested.                                      |
-|                       | 7.1 will appear with the next PHP version                                                 |
+| phpversion            | Version with which to run the analyze.                                                    |
+|                       | It may be one of : 7.3, 7.2, 7.1, 7.0, 5.6, 5.5, 5.4, 5.3, 5.2.                           |
+|                       | Default is 7.2 or the CLI version used to init the project.                               |
+|                       | 5.* versions are available, but are less tested.                                          |
+|                       | 7.3 is actually the current dev version.                                                  |
++-----------------------+-------------------------------------------------------------------------------------------+
+| include_dirs[]        | This is the list of files and dir to include in the project's directory. It is chrooted   |
+|                       | in the project's folder. Values provided with a starting / are used as a path prefix.     |
+|                       | Values without / are used as a substring, anywhere in the path.                           |
+|                       | include_dirs are added AFTER ignore_dirs, so as to partially ignore a folder, such as     |
+|                       | the vendor folder from composer.                                                          |
 +-----------------------+-------------------------------------------------------------------------------------------+
 | ignore_dirs[]         | This is the list of files and dir to ignore in the project's directory. It is chrooted in |
 |                       | the project's folder. Values provided with a starting / are used as a path prefix. Values |
@@ -180,16 +188,25 @@ Here are the currently available options in Exakat's project configuration file 
 | file_extensions       | This is the list of file extensions that is considered as PHP scripts. All others will be |
 |                       | ignored. All files bearing those extensions are subject to check, though they will be     |
 |                       | scanned first for PHP tags before being analyzed. The extensions are comma separated,     |
-|                       | without dot. The default are : php, php3, inc, tpl, phtml, tmpl, phps, ctp                |
+|                       | without dot.                                                                              |
+|                       | The default are : php, php3, inc, tpl, phtml, tmpl, phps, ctp                             |
 +-----------------------+-------------------------------------------------------------------------------------------+
-| project_name          | This is the project name, as it appears at the top left in the report.                    |
+| project_name          | This is the project name, as it appears at the top left in the Ambassador report.         |
 +-----------------------+-------------------------------------------------------------------------------------------+
 | project_url           | This is the repository URL for the project. It is used to get the source for the project. |
 +-----------------------+-------------------------------------------------------------------------------------------+
-| FindExternalLibraries | This is a generated value, that appears after exakat's first run on the project. You may  |
-|                       | remove this line entirely if you want Exakat to check again for libraries.                |
-|                       | Otherwise, just let it there                                                              |
+| project_vcs           | This is the VCS used to fetch the project source.                                         |
 +-----------------------+-------------------------------------------------------------------------------------------+
+| project_description   | This is the description of the project.                                                   |
++-----------------------+-------------------------------------------------------------------------------------------+
+| project_packagist     | This is the packagist name for the code, when the code is fetched with composer.          |
++-----------------------+-------------------------------------------------------------------------------------------+
+
+Specific analyser configurations
+--------------------------------
+
+
+
 
 Check Install
 -------------

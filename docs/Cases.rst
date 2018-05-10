@@ -31,8 +31,6 @@ This return statement is doing quite a lot, including a buried '0 + $offset'. Th
 
 --------
 
-Adding Zero
-===========
 
 .. _openemr-structures-addzero:
 
@@ -84,8 +82,6 @@ In the updateEmailTemplate method, $generatedQueries collects all the generated 
 
 --------
 
-Used Once Variables
-===================
 
 .. _vanilla-variables-variableusedonce:
 
@@ -130,8 +126,6 @@ There are two instructions on the line with the if(). Note that the condition is
 
 --------
 
-Several Instructions On The Same Line
-=====================================
 
 .. _tine20-structures-onelinetwoinstructions:
 
@@ -177,8 +171,6 @@ $extension is assigned with the results of pathinfo($reference_name, PATHINFO_EX
 
 --------
 
-Logical Should Use Symbolic Operators
-=====================================
 
 .. _openconf-php-logicalinletters:
 
@@ -329,8 +321,6 @@ Dolphin pro relies on HTMLPurifier to handle cleaning of values : it is used to 
 
 --------
 
-Could Be Static
-===============
 
 .. _contao-structures-couldbestatic:
 
@@ -399,8 +389,6 @@ Sometimes, the variable is on the other side of the operator.
 
 --------
 
-Could Use Short Assignation
-===========================
 
 .. _thelia-structures-coulduseshortassignation:
 
@@ -442,8 +430,6 @@ This is wrong twice a year, in countries that has day-ligth saving time. One of 
 
 --------
 
-Timestamp Difference
-====================
 
 .. _shopware-structures-timestampdifference:
 
@@ -499,8 +485,6 @@ The condition checks first if $has_templates or $theme->parent(), and one of the
 
 --------
 
-Identical Conditions
-====================
 
 .. _dolibarr-structures-identicalconditions:
 
@@ -518,8 +502,6 @@ Better check twice that $modulepart is really 'apercusupplier_invoice'.
 
 --------
 
-Identical Conditions
-====================
 
 .. _mautic-structures-identicalconditions:
 
@@ -564,8 +546,6 @@ Token is checked, but processed in the same way each time. This actual check is 
 
 --------
 
-No Choice
-=========
 
 .. _zencart-structures-nochoice:
 
@@ -628,8 +608,6 @@ $options['changed'] and $options['created'] are documented and used as boolean. 
 
 --------
 
-Cast To Boolean
-===============
 
 .. _dolibarr-structures-casttoboolean:
 
@@ -668,8 +646,6 @@ filterAuditEvent compares a six char string with 'AUDIT_EVENT_' which contains 1
 
 --------
 
-Failed Substr Comparison
-========================
 
 .. _mediawiki-structures-failingsubstrcomparison:
 
@@ -710,8 +686,6 @@ This is classic debugging code that should never reach production. mysqli_error(
 
 --------
 
-Dont Echo Error
-===============
 
 .. _phpdocumentor-security-dontechoerror:
 
@@ -788,8 +762,6 @@ This is not possible, as array_slice returns a new array, and not a reference. M
 
 --------
 
-Only Variable Passed By Reference
-=================================
 
 .. _phpipam-functions-onlyvariablepassedbyreference:
 
@@ -891,8 +863,6 @@ This code is wrong on August 29,th 30th and 31rst : 6 months before is caculated
 
 --------
 
-Next Month Trap
-===============
 
 .. _edusoho-structures-nextmonthtrap:
 
@@ -1000,8 +970,6 @@ The _NotificationQueue property, in this class, is defined as an array. Here, it
 
 --------
 
-Don't Unset Properties
-======================
 
 .. _typo3-classes-dontunsetproperties:
 
@@ -1112,8 +1080,6 @@ This code actually loads the file, join it, then split it again. file() would be
 
 --------
 
-Join file()
-===========
 
 .. _spip-performances-joinfile:
 
@@ -1131,8 +1097,6 @@ When the file is not accessible, file() returns null, and can't be processed by 
 
 --------
 
-Join file()
-===========
 
 .. _expressionengine-performances-joinfile:
 
@@ -1154,8 +1118,6 @@ join('', ) is used as a replacement for file_get_contents(), which was introduce
 
 --------
 
-Join file()
-===========
 
 .. _prestashop-performances-joinfile:
 
@@ -1224,8 +1186,6 @@ The `$filepath` is broken into pieces, and then, only the 'extension' part is us
 
 --------
 
-Use pathinfo() Arguments
-========================
 
 .. _thinkphp-php-usepathinfoargs:
 
@@ -1262,8 +1222,6 @@ This code should also avoid using SHA1.
 
 --------
 
-Compare Hash
-============
 
 .. _livezilla-security-comparehash:
 
@@ -1307,8 +1265,6 @@ The API starts with security features, such as the whitelist(). The whitelist ap
 
 --------
 
-Register Globals
-================
 
 .. _xoops-security-registerglobals:
 
@@ -1392,8 +1348,6 @@ This foreach reads each element from $entries into entry. $entry, in turn, is wr
 
 --------
 
-Use List With Foreach
-=====================
 
 .. _swoole-structures-uselistwithforeach:
 

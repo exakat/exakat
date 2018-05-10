@@ -112,18 +112,18 @@ PHP extensions are used to check for defined structures (classes, interfaces, et
 
 PHP extensions should be provided with the list of structures they define (functions, class, constants, traits, variables, interfaces, namespaces), and directives. 
 
-* ext/amqp
+* `ext/amqp <https://github.com/pdezwart/php-amqp>`_
 * `ext/apache <http://php.net/manual/en/book.apache.php>`_
 * `ext/apc <http://php.net/apc>`_
 * `ext/apcu <http://www.php.net/manual/en/book.apcu.php>`_
 * `ext/array <http://php.net/manual/en/book.array.php>`_
-* ext/php-ast
+* `ext/php-ast <https://pecl.php.net/package/ast>`_
 * `ext/bcmath <http://www.php.net/bcmath>`_
 * `ext/bzip2 <http://nl1.php.net/manual/en/ref.bzip2.php>`_
-* `ext/cairo <http://php.net/cairo>`_
+* `ext/cairo <https://cairographics.org/>`_
 * `ext/calendar <http://www.php.net/manual/en/ref.calendar.php>`_
 * `ext/com <http://php.net/manual/en/book.com.php>`_
-* ext/crypto
+* `ext/crypto <https://pecl.php.net/package/crypto>`_
 * `ext/ctype <http://php.net/manual/en/ref.ctype.php>`_
 * `ext/curl <http://php.net/manual/en/book.curl.php>`_
 * `ext/cyrus <http://php.net/manual/en/book.cyrus.php>`_
@@ -153,17 +153,17 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/gearman <http://php.net/manual/en/book.gearman.php>`_
 * `ext/gender <http://php.net/manual/en/book.gender.php>`_
 * `ext/geoip <http://php.net/manual/en/book.geoip.php>`_
-* `ext/gettext <http://php.net/manual/en/book.gettext.php>`_
+* `ext/gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
 * `ext/gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
 * `ext/gmp <http://php.net/manual/en/book.gmp.php>`_
 * `ext/gnupgp <http://www.php.net/manual/en/book.gnupg.php>`_
 * `ext/grpc <http://www.grpc.io/>`_
 * `ext/hash <http://www.php.net/manual/en/book.hash.php>`_
 * `ext/hrtime <http://php.net/manual/en/intro.hrtime.php>`_
-* ext/pecl_http
+* `ext/pecl_http <https://github.com/m6w6/ext-http>`_
 * `ext/ibase <http://php.net/manual/en/book.ibase.php>`_
 * `ext/iconv <http://php.net/iconv>`_
-* ext/igbinary
+* `ext/igbinary <https://github.com/igbinary/igbinary/>`_
 * `ext/iis <http://www.php.net/manual/en/book.iisfunc.php>`_
 * `ext/imagick <http://php.net/manual/en/book.imagick.php>`_
 * `ext/imap <http://www.php.net/imap>`_
@@ -175,9 +175,9 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/kdm5 <http://php.net/manual/en/book.kadm5.php>`_
 * `ext/lapack <http://php.net/manual/en/book.lapack.php>`_
 * `ext/ldap <http://php.net/manual/en/book.ldap.php>`_
-* ext/leveldb
+* `ext/leveldb <https://github.com/reeze/php-leveldb>`_
 * `ext/libevent <http://www.libevent.org/>`_
-* ext/libsodium
+* `ext/libsodium <https://github.com/jedisct1/libsodium-php>`_
 * `ext/libxml <http://www.php.net/manual/en/book.libxml.php>`_
 * `ext/lua <http://php.net/manual/en/book.lua.php>`_
 * `ext/mail <http://www.php.net/manual/en/book.mail.php>`_
@@ -190,7 +190,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/mhash <http://mhash.sourceforge.net/>`_
 * `ext/ming <http://www.libming.org/>`_
 * `ext/mongo <http://php.net/manual/en/book.mongo.php>`_
-* `ext/mongodb <http://php.net/manual/en/set.mongodb.php>`_
+* `ext/mongodb <https://github.com/mongodb/mongo-c-driver>`_
 * `ext/mssql <http://www.php.net/manual/en/book.mssql.php>`_
 * `ext/mysql <http://www.php.net/manual/en/book.mysql.php>`_
 * `ext/mysqli <http://php.net/manual/en/book.mysqli.php>`_
@@ -201,7 +201,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/oci8 <http://php.net/manual/en/book.oci8.php>`_
 * `ext/odbc <http://www.php.net/manual/en/book.uodbc.php>`_
 * `ext/opcache <http://www.php.net/manual/en/book.opcache.php>`_
-* ext/opencensus
+* `ext/opencensus <https://github.com/census-instrumentation/opencensus-php>`_
 * `ext/openssl <http://php.net/manual/en/book.openssl.php>`_
 * `ext/parle <http://php.net/manual/en/book.parle.php>`_
 * `ext/parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
@@ -209,16 +209,16 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/pcre <http://php.net/manual/en/book.pcre.php>`_
 * `ext/pdo <http://php.net/manual/en/book.pdo.php>`_
 * `ext/pgsql <http://php.net/manual/en/book.pgsql.php>`_
-* ext/phalcon
+* `ext/phalcon <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `ext/phar <http://www.php.net/manual/en/book.phar.php>`_
-* ext/posix
+* `ext/posix <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
 * `ext/proctitle <http://php.net/manual/en/book.proctitle.php>`_
 * `ext/pspell <http://php.net/manual/en/book.pspell.php>`_
 * `ext/rar <http://php.net/manual/en/book.rar.php>`_
-* ext/rdkafka
+* `ext/rdkafka <https://github.com/arnaud-lb/php-rdkafka>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
 * `ext/recode <http://www.php.net/manual/en/book.recode.php>`_
-* ext/redis
+* `ext/redis <https://github.com/phpredis/phpredis/>`_
 * `ext/reflection <http://php.net/manual/en/book.reflection.php>`_
 * `ext/runkit <http://php.net/manual/en/book.runkit.php>`_
 * `ext/sem <http://php.net/manual/en/book.sem.php>`_
@@ -235,24 +235,24 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/sqlsrv <http://php.net/sqlsrv>`_
 * `ext/ssh2 <http://php.net/manual/en/book.ssh2.php>`_
 * `ext/standard <http://php.net/manual/en/ref.info.php>`_
-* `ext/stats <http://people.sc.fsu.edu/~jburkardt/f77_src/ranlib/ranlib.html>`_
+* `ext/stats <https://people.sc.fsu.edu/~jburkardt/c_src/cdflib/cdflib.html>`_
 * `String <http://php.net/manual/en/ref.strings.php>`_
-* ext/suhosin
-* ext/swoole
+* `ext/suhosin <https://suhosin.org/>`_
+* `ext/swoole <https://github.com/swoole/swoole-src>`_
 * `ext/tidy <http://php.net/manual/en/book.tidy.php>`_
 * `ext/tokenizer <http://www.php.net/tokenizer>`_
 * `ext/tokyotyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
-* `ext/trader <http://www.ta-lib.org/>`_
-* ext/uopz
-* `ext/v8js <http://php.net/manual/en/book.v8js.php>`_
+* `ext/trader <https://pecl.php.net/package/trader>`_
+* `ext/uopz <https://pecl.php.net/package/uopz>`_
+* `ext/v8js <https://bugs.chromium.org/p/v8/issues/list>`_
 * `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
-* ext/vips
+* `ext/vips <https://github.com/jcupitt/php-vips-ext>`_
 * `ext/wddx <http://php.net/manual/en/intro.wddx.php>`_
-* ext/wikidiff2
+* `ext/wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `ext/wincache <http://www.php.net/wincache>`_
 * `ext/xattr <http://php.net/manual/en/book.xattr.php>`_
-* ext/xcache
-* ext/xdebug
+* `ext/xcache <https://xcache.lighttpd.net/>`_
+* `ext/xdebug <https://xdebug.org/>`_
 * `ext/xdiff <http://php.net/manual/en/book.xdiff.php>`_
 * `ext/xhprof <http://web.archive.org/web/20110514095512/http://mirror.facebook.net/facebook/xhprof/doc.html>`_
 * `ext/xml <http://www.php.net/manual/en/book.xml.php>`_
@@ -260,10 +260,10 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/xmlrpc <http://www.php.net/manual/en/book.xmlrpc.php>`_
 * `ext/xmlwriter <http://php.net/manual/en/book.xmlwriter.php>`_
 * `ext/xsl <http://php.net/manual/en/intro.xsl.php>`_
-* ext/xxtea
+* `ext/xxtea <https://pecl.php.net/package/xxtea>`_
 * `ext/yaml <http://www.yaml.org/>`_
 * `ext/yis <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
-* ext/zbarcode
+* `ext/zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `ext/zip <http://php.net/manual/en/book.zip.php>`_
 * `ext/zlib <http://php.net/manual/en/book.zlib.php>`_
 * `ext/0mq <http://zeromq.org/>`_
@@ -2208,6 +2208,7 @@ List of external links mentionned in this documentation.
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
+* `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
@@ -2231,8 +2232,7 @@ List of external links mentionned in this documentation.
 * `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
-* `PHP Classes containing only constants
- <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_
+* `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_
 * `PHP Constants <http://php.net/manual/en/language.constants.php>`_
 * `PHP Data Object <http://php.net/manual/en/book.pdo.php>`_
 * `PHP extension for libsodium <https://github.com/jedisct1/libsodium-php>`_
