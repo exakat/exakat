@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 10 May 2018 05:29:39 +0000
-.. comment: Generation hash : b69bdaffa758bbe134f495f9137eb873ba3c1253
+.. comment: Generation date : Thu, 10 May 2018 05:56:01 +0000
+.. comment: Generation hash : ea03809f973ab1acfd35892d96681bae27d57f12
 
 
 .. _$http\_raw\_post\_data:
@@ -161,7 +161,7 @@ Static methods shouldn't use $this variable.
 
 $this variable represents an object, the current object. It is not compatible with a static method, which may operate without any object. 
 
-While executing a static method, $this is actually set to NULL.
+While executing a static method, ``$this`` is actually set to ``NULL``.
 
 .. code-block:: php
 
@@ -269,7 +269,7 @@ See also `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`
 ##########
 
 
-@ is the 'no scream' operator : it will suppress error output. 
+@ is the 'no scream' operator : it suppresses error output. 
 
 .. code-block:: php
 
@@ -281,13 +281,15 @@ See also `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`
    ?>
 
 
-This operator is actually very slow : it will process the error all the way up, and finally decide not to display it. It is often faster to check the conditions first, then run the method without @.
+This operator is actually very slow : it will process the error all the way up, and finally decide not to display it. It is often faster to check the conditions first, then run the method without ``@``.
 
-You may also set display_error to 0 in the php.ini : this will avoid user's error display, but will keep the error in the PHP logs, for later processing. 
+You may also set display_error to 0 in the ``php.ini`` : this will avoid user's error display, but will keep the error in the PHP logs, for later processing. 
 
-The only situation where @ is useful is when a native PHP function displays errors messages when error happens and there is no way to check it from the code. 
+The only situation where ``@`` is useful is when a native PHP function displays errors messages when error happens and there is no way to check it from the code. 
 
-This is the case with `'fopen() <http://www.php.net/fopen>`_, `'stream_socket_server() <http://www.php.net/stream_socket_server>`_, `'token_get_all() <http://www.php.net/token_get_all>`_.
+This is the case with `'fopen() <http://www.php.net/fopen>`_, `'stream_socket_server() <http://www.php.net/stream_socket_server>`_, `'token_get_all() <http://www.php.net/token_get_all>`_. 
+
+See also `Error Control Operators <http://php.net/manual/en/language.operators.errorcontrol.php>`_.
 
 +------------+---------------------------------------------------------------------------------------+
 | Short name | Structures/Noscream                                                                   |
@@ -1545,9 +1547,9 @@ Avoid get_class()
 #################
 
 
-get_class() should be replaced with the `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator to check the class of an object. 
+``get_class()`` should be replaced with the ``instanceof`` operator to check the class of an object. 
 
-get_class() will only compare the full namespace name of the object's class, while `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ actually resolve the name, using the local namespace and aliases.
+``get_class()`` only compares the full namespace name of the object's class, while ``instanceof`` actually resolves the name, using the local namespace and aliases.
 
 .. code-block:: php
 
@@ -1569,6 +1571,10 @@ get_class() will only compare the full namespace name of the object's class, whi
            }
        }
    ?>
+
+
+See also `get_class <http://php.net/get_class>`_ and 
+         `Type Operators <http://php.net/`'instanceof <http://php.net/manual/en/language.operators.type.php>`_>`_.
 
 +------------+--------------------------+
 | Short name | Structures/UseInstanceof |
@@ -3314,11 +3320,11 @@ Could Be Private Class Constant
 ###############################
 
 
-Class constant may use 'private' visibility. 
+Class constant may use ``private`` visibility. 
 
 Since PHP 7.1, constants may also have a public/protected/private visibility. This restrict their usage to anywhere, class and children or class. 
 
-As a general rule, it is recommended to make constant 'private' by default, and to relax this restriction as needed. PHP makes them public by default.
+As a general rule, it is recommended to make constant ``private`` by default, and to relax this restriction as needed. PHP makes them public by default.
 
 .. code-block:: php
 
@@ -3346,7 +3352,7 @@ As a general rule, it is recommended to make constant 'private' by default, and 
    ?>
 
 
-Constant shall stay 'public' when the code has to be compatible with PHP 7.0 and older. 
+Constant shall stay ``public`` when the code has to be compatible with PHP 7.0 and older. 
 
 They also have to be public in the case of component : some of those constants have to be used by external actors, in order to configure the component.
 
@@ -4434,7 +4440,7 @@ Don't Send This In Constructor
 ##############################
 
 
-Don't use $this as an argument while in the `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_. Until the constructor is finished, the object is not finished, and may be in an instable state. Providing it to another code may lead to error. 
+Don't use ``$this``` as an argument while in the `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_. Until the constructor is finished, the object is not finished, and may be in an instable state. Providing it to another code may lead to error. 
 
 This is in particular true if the receiving structure put immediately the incoming objet to work, and not simply store it for later use. 
 
@@ -4893,8 +4899,9 @@ Echo With Concat
 ################
 
 
-Optimize your echo's by not concatenating at echo() time, but serving all argument separated. This will save PHP a memory copy.
-If values (literals and variables) are small enough, this won't have impact. Otherwise, this is less work and less memory waste.
+Optimize your ``echo``'s by not concatenating at ``echo`` time, but serving all argument separated. This will save PHP a memory copy.
+
+If values, literals and variables, are small enough, this won't have visible impact. Otherwise, this is less work and less memory waste.
 
 .. code-block:: php
 
@@ -10624,9 +10631,9 @@ No Magic With Array
 ###################
 
 
-Magic method `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_ doesn't work for array syntax. 
+Magic method ``__get()`` doesn't work for array syntax. 
 
-When overloading properties, they can only be used for scalar values, excluding arrays. Under the hood, PHP uses `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_ to reach for the name of the property, and doesn't recognize the following index as an array. It yields an error : Indirect modification of overloaded property.
+When overloading properties, they can only be used for scalar values, excluding arrays. Under the hood, PHP uses ``__get()`` to reach for the name of the property, and doesn't recognize the following index as an array. It yields an error : Indirect modification of overloaded property.
 
 .. code-block:: php
 
@@ -16150,7 +16157,7 @@ Static Methods Can't Contain $this
 ##################################
 
 
-Static methods are also called 'class methods' : they may be called even if the class has no instantiated object. Thus, the local variable $this won't exist, PHP will set it to NULL as usual. 
+Static methods are also called ``class methods`` : they may be called even if the class has no instantiated object. Thus, the local variable ``$this`` won't exist, PHP will set it to NULL as usual. 
 
 .. code-block:: php
 
@@ -16173,7 +16180,9 @@ Static methods are also called 'class methods' : they may be called even if the 
    ?>
 
 
-Either, this is not a static method (simply remove the static keyword), or replace all $this mention by static properties Class::$property.
+Either, this is not a static method (simply remove the ``static`` keyword), or replace all $this mention by static properties ``Class::$property``.
+
+See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 
 +------------+---------------------------------------------------------------------------------------------+
 | Short name | Classes/StaticContainsThis                                                                  |
@@ -17044,7 +17053,7 @@ Timestamp Difference
 ####################
 
 
-time() and `'microtime() <http://www.php.net/microtime>`_ shouldn't be used to calculate duration. 
+``time()`` and ``microtime()`` shouldn't be used to calculate duration. 
 
 time() and `'microtime() <http://www.php.net/microtime>`_ are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announced by IERS.
 
@@ -17893,7 +17902,7 @@ Undefined Parent
 ################
 
 
-List of properties and methods that are accessed using 'parent' keyword but are not defined in the parent class. 
+List of properties and methods that are accessed using ``parent`` keyword but are not defined in the parent class. 
 
 This will be compilable but will yield a fatal error during execution.
 
@@ -17920,8 +17929,7 @@ This will be compilable but will yield a fatal error during execution.
    ?>
 
 
-Note that if the parent is defined (extends someClass) but someClass is not available in the tested code (it may be in composer,
-another dependency, or just not there) it will not be reported.
+Note that if the parent is defined using ``extends someClass`` but ``someClass`` is not available in the tested code, it will not be reported : it may be in composer, another dependency, or just missing.
 
 See also `parent <http://php.net/manual/en/keyword.parent.php>`_.
 
@@ -18682,7 +18690,7 @@ Unset In Foreach
 ################
 
 
-Unset applied to the variables of a foreach loop are useless, as they are copies and not the actual value. Even if the value is a reference, unsetting it will not have effect on the original array : the only effect may be on values inside an array, or on properties inside an object.
+Unset applied to the variables of a ``foreach`` loop are useless, as they are copies and not the actual value. Even if the value is a reference, unsetting it has no effect on the original array : the only effect may be indirect, on elements inside an array, or on properties inside an object.
 
 .. code-block:: php
 
@@ -18711,6 +18719,9 @@ Unset applied to the variables of a foreach loop are useless, as they are copies
    print_r($array); // now [ ['c' => null] ]
    
    ?>
+
+
+See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
 +------------+----------------------------------------------+
 | Short name | Structures/UnsetInForeach                    |
@@ -21183,9 +21194,9 @@ Using $this Outside A Class
 ###########################
 
 
-`$this` is a special variable, that should only be used in a class context. 
+``$this`` is a special variable, that should only be used in a class context. 
 
-Until PHP 7.1, `$this` may be used as an argument in a function (or a method), a global, a static : while this is legit, it sounds confusing enough to avoid it.
+Until PHP 7.1, ``$this`` may be used as an argument in a function or a method, a global, a static : while this is legit, it sounds confusing enough to avoid it.
 
 .. code-block:: php
 
@@ -21194,10 +21205,19 @@ Until PHP 7.1, `$this` may be used as an argument in a function (or a method), a
    function foo($this) {
        echo $this;
    }
+   
+   // A closure can be bound to an object at later time. It is valid usage.
+   $closure = function ($x) {
+       echo $this->foo($x);
+   }
+   
    ?>
 
 
-Starting with PHP 7.1, the PHP engine check thouroughly that $this is used in an appropriate manner, and raise fatal errors in case it isn't.
+Starting with PHP 7.1, the PHP engine check thouroughly that ``$this`` is used in an appropriate manner, and raise fatal errors in case it isn't. 
+
+See also `Closure::bind <http://php.net/manual/en/closure.bind.php>`_ and 
+         `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
 
 +------------+-------------------------------------------+
 | Short name | Classes/UsingThisOutsideAClass            |

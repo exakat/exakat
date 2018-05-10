@@ -197,6 +197,7 @@ Glossary
       + :ref:`Should Use Local Class <should-use-local-class>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
+      + :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `constant()`
