@@ -44,11 +44,11 @@ class SplitGraphson {
 
     private $config = null;
     
-    private $calls = array();
-    private $json = array();
-    private $project = null;
+    private $calls     = array();
+    private $json      = array();
+    private $project   = null;
     private $projectId = null;
-    private $id = 1;
+    private $id        = 1;
 
     private $gsneo4j = null;
     private $path = null;
@@ -102,8 +102,7 @@ LEFT JOIN definitions
 LEFT JOIN definitions definitions2
     ON definitions2.type       = calls.type       AND
        definitions2.fullnspath = calls.globalpath 
-WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL) AND
-      calls.atom != 'This'
+WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
 GROUP BY calls.id
 SQL
 );
@@ -243,7 +242,7 @@ GREMLIN;
             fwrite($fp, $X.PHP_EOL);
         }
         fclose($fp);
-        $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'");');
+        $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'");');
         
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
 
