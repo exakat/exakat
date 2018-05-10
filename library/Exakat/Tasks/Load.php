@@ -2461,7 +2461,7 @@ SQL;
                 $this->addLink($static, $element, $link);
                 
                 if ($atom === 'Propertydefinition') {
-                    if (preg_match('/^\$([^ ]+)/', $element->fullcode, $r)) {
+                    if (!preg_match('/^\$([^ ]+)/', $element->fullcode, $r)) {
                         throw new LoadError('Couldn\'t find the property definition in '.__METHOD__.':'.$this->filename.':'.__LINE__);
                     }
                     $element->propertyname = $r[1];
@@ -5267,7 +5267,11 @@ SQL;
         }
 
         // No need for This
-        if ($call->atom === 'This') {
+        if (in_array($call->atom, array('This', 'Self', 
+                                        'Parent',
+//                                        'Member', 'Methodcall', 'Staticmethodcall', 'Staticproperty', 'Staticconstant', 
+                                        'Isset', 'List', 'Empty',
+                                        ))) {
             return;
         }
         
@@ -5301,10 +5305,10 @@ SQL;
             return; // Can't be a class anyway.
         }
         // single : is OK
-        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $call->noDelimiter)) {
+        if (preg_match('/[$ #?;%^\*\'\"\.\\\\ <>~&,|\(\){}\[\]\/\s=\+!`@\-]/is', $call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
-        
+
         if (strpos($call->noDelimiter, '::') !== false) {
             $fullnspath = mb_strtolower(substr($call->noDelimiter, 0, strpos($call->noDelimiter, '::')) );
 
@@ -5350,6 +5354,14 @@ SQL;
 
     private function addDefinition($type, $fullnspath, $definition) {
         if (empty($fullnspath)) {
+            return;
+        }
+
+        // No need for them
+        if (in_array($definition->atom, array(//'Assignation', 'Defineconstant', 'Const', 'Constant',
+                                              //'Propertydefinition',
+                                              //'Method',
+                                              ))) {
             return;
         }
 
