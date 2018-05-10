@@ -40,10 +40,12 @@ class Bazaar extends Vcs {
     }
 
     public function update() {
-        shell_exec("cd {$this->destinationFull}; bzr update 2>&1");
-        preg_match('/revision (\d+)/', $res, $r);
-
-        return $r[1];
+        $res = shell_exec("cd {$this->destinationFull}/code; bzr update 2>&1");
+        if (preg_match('/revision (\d+)/', $res, $r)) {
+            return $r[1];
+        } else {
+            return '';
+        }
     }
 
     public function getInstallationInfo() {
