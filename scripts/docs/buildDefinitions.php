@@ -151,6 +151,7 @@ class Docs {
         $this->getExakatInfo();
         $this->build_reports();
         $this->prepareText();
+        $this->prepareParameterList();
         $this->makeApplicationsLink();
 
         $this->getAttributesArray();
@@ -348,6 +349,7 @@ SQL
                             'EXAKAT_DATE'            => $this->exakat_date,
                             'APPLICATIONS'           => $this->applications,
                             'ISSUES_EXAMPLES'        => join('', $this->issues_examples),
+                            'PARAMETER_LIST'         => join('', $this->parameter_list),
                             );
     }
 
@@ -505,48 +507,47 @@ $exampleTxt
         return $description;
     }
 
-    private function build_analyzer_doc($a, $a2themes) {
-            $name = $a;
-            $ini = parse_ini_file("human/en/$a.ini", true);
-            $commandLine = $a;
-    
-            $desc = $this->glossary($ini['name'],$ini['description']);
-            $desc = trim($this->rst_escape($desc));
-    
-            if (!empty($ini['clearphp'])) {
-                $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
-            } else {
-                $clearPHP = '';
-            }
-    
-            if (isset($a2themes[$name])) {
-                $c = array_map(array($this, 'rst_link'),$a2themes[$name]);
-                $recipes = implode(', ',$c);
-            } else {
-                $recipes = 'none';
-            }
+    private function build_analyzer_doc($analyzer, $a2themes) {
+        $name = $analyzer;
+        $ini = parse_ini_file("human/en/$analyzer.ini", true);
+        $commandLine = $analyzer;
+        
+        $desc = $this->glossary($ini['name'], $ini['description']);
+        $desc = trim($this->rst_escape($desc));
+        
+        if (!empty($ini['clearphp'])) {
+            $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
+        } else {
+            $clearPHP = '';
+        }
+        
+        if (isset($a2themes[$name])) {
+            $c = array_map(array($this, 'rst_link'),$a2themes[$name]);
+            $recipes = implode(', ',$c);
+        } else {
+            $recipes = 'none';
+        }
+        
+        $examples = array();
+        $issues_examples_section_list = array();
+        for($i = 0; $i < 10; $i++) {
+            if (isset($ini['example'.$i])) {
+                $issues_examples_section = '';
+                $label = $this->rst_anchor($ini['example'.$i]['project'].'-'.str_replace('/', '-', strtolower($analyzer)));
+                
+                $examples[] = ':ref:`'.$label.'`';
+                $code = "    ".str_replace("\n", "\n    ", trim($ini['example'.$i]['code']));
+                $section = $ini['example'.$i]['project']."\n".str_repeat('^', strlen($ini['example'.$i]['project']));
+                $explain = $ini['example'.$i]['explain'];
+                $file = $ini['example'.$i]['file'];
+                $line = $ini['example'.$i]['line'];
+                $analyzer_anchor = $this->rst_anchor($ini['name']);
             
-            $examples = array();
-            $issues_examples_section_list = array();
-            for($i = 0; $i < 10; $i++) {
-    
-                if (isset($ini['example'.$i])) {
-                    $issues_examples_section = '';
-                    $label = $this->rst_anchor($ini['example'.$i]['project'].'-'.str_replace('/', '-', strtolower($a)));
-                    
-                    $examples[] = ':ref:`'.$label.'`';
-                    $code = "    ".str_replace("\n", "\n    ", trim($ini['example'.$i]['code']));
-                    $section = $ini['example'.$i]['project']."\n".str_repeat('^', strlen($ini['example'.$i]['project']));
-                    $explain = $ini['example'.$i]['explain'];
-                    $file = $ini['example'.$i]['file'];
-                    $line = $ini['example'.$i]['line'];
-                    $analyzer_anchor = $this->rst_anchor($ini['name']);
-    
-                    if (empty($issues_examples_section_list)){
-                        $issues_examples_section = $ini['name']."\n".str_repeat('=', strlen($ini['name']))."\n";
-                    }
-    
-                    $issues_examples_section .= <<<SPHINX
+                if (empty($issues_examples_section_list)){
+                    $issues_examples_section = $ini['name']."\n".str_repeat('=', strlen($ini['name']))."\n";
+                }
+            
+                $issues_examples_section .= <<<SPHINX
 
 .. _$label:
 
@@ -562,48 +563,54 @@ $code
 
 
 SPHINX;
-                    $this->applications_names[$ini['example'.$i]['project']] = 1;
-                    $issues_examples_section_list[] = $issues_examples_section;
+                $this->applications_names[$ini['example'.$i]['project']] = 1;
+                $issues_examples_section_list[] = $issues_examples_section;
+            }
+        }
+        
+        $issues_examples_section = join(PHP_EOL.'--------'.PHP_EOL.PHP_EOL, $issues_examples_section_list);
+        
+        $parameters = array();
+        for($i = 0; $i < 10; $i++) {
+            if (isset($ini['parameter'.$i])) {
+                if (!isset($this->parameter_list[$ini['name']])) {
+                    $this->parameter_list[$ini['name']] = array($ini['parameter'.$i]['name'] => $ini['parameter'.$i]['default']);
+                } else {
+                    $this->parameter_list[$ini['name']][$ini['parameter'.$i]['name']] = $ini['parameter'.$i]['default'];
                 }
+
+                $parameters[] = [$ini['parameter'.$i]['name'],
+                                 $ini['parameter'.$i]['default'],
+                                 $ini['parameter'.$i]['type'],
+                                 $ini['parameter'.$i]['description'],
+                                 ];
             }
-            
-            $issues_examples_section = join(PHP_EOL.'--------'.PHP_EOL.PHP_EOL, $issues_examples_section_list);
-    
-            $parameters = array();
-            for($i = 0; $i < 10; $i++) {
-                if (isset($ini['parameter'.$i])) {
-                    $parameters[] = [$ini['parameter'.$i]['name'],
-                                     $ini['parameter'.$i]['default'],
-                                     $ini['parameter'.$i]['type'],
-                                     $ini['parameter'.$i]['description'],
-                                     ];
-                }
-            }
-            
-            if (!empty($parameters)) {
-                array_unshift($parameters, ["Name", "Default", "Type", "Description"]);
-                $desc .= PHP_EOL.PHP_EOL.$this->makeTable($parameters).PHP_EOL;
-            }
-            
-            if (!empty($issues_examples_section)){
-                $this->issues_examples[] = $issues_examples_section;
-            }
-    
-            $info = array( array('Short name', $commandLine),
-                           array('Themes', $recipes),
-                                    );
-            if (!empty($clearPHP)) {
-                $info[] = array('ClearPHP', $clearPHP);
-            }
-            if (!empty($examples)) {
-                $info[] = array('Examples', join(', ', $examples));
-            }
-    
-            $table = $this->makeTable($info);
-                     
-            $desc .= PHP_EOL.PHP_EOL.$table.PHP_EOL.PHP_EOL;
-    
-            return array($desc, $ini['name']);
+        }
+        
+        if (!empty($parameters)) {
+            array_unshift($parameters, ["Name", "Default", "Type", "Description"]);
+            $desc .= PHP_EOL.PHP_EOL.$this->makeTable($parameters).PHP_EOL;
+        }
+        
+        if (!empty($issues_examples_section)){
+            $this->issues_examples[] = $issues_examples_section;
+        }
+        
+        $info = array( array('Short name', $commandLine),
+                       array('Themes', $recipes),
+                                );
+        if (!empty($clearPHP)) {
+            $info[] = array('ClearPHP', $clearPHP);
+        }
+        if (!empty($examples)) {
+            $info[] = array('Examples', join(', ', $examples));
+        }
+        
+        $table = $this->makeTable($info);
+                 
+        $desc .= PHP_EOL.PHP_EOL.$table.PHP_EOL.PHP_EOL;
+        
+        return array($desc, $ini['name']);
     }
 
     private function prepareText() {
@@ -728,7 +735,24 @@ GLOSSARY;
             $glossaryRst .= "\n";
         }
         $glossaryRst .= "\n";
+
         print file_put_contents('docs/Glossary.rst',$glossaryRst)." octets written for Rules\n";
     }
+    
+    private function prepareParameterList() {
+        ksort($this->parameter_list);
+        
+        $parameterList = array();
+        foreach($this->parameter_list as $analyzer => $parameters) {
+            $label = str_replace(' ', '-', strtolower($analyzer));
+            $analyzerList = "+ :ref:`$label`\n";
+            ksort($parameters);
+            foreach($parameters as $name => $default) {
+                $analyzerList .= "   + $name : $default\n";
+            }
+            $parameterList[] = $analyzerList;
+        }
 
+        $this->parameter_list = $parameterList;
+    }
 }
