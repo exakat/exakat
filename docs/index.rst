@@ -14,9 +14,9 @@ Contents:
    Introduction
    Features
    Installation
-   Example
+   Upgrading
+   Tutorial
    FAQ
-   Project
    Commands
    Recipes
    Rules

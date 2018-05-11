@@ -1,7 +1,13 @@
-.. _Usage:
+.. _Tutorial:
 
-Exakat usage
-************
+Exakat tutorial
+***************
+
+Installation
+------------
+
+Refer to the _Installation section to install quickly Exakat.
+
 
 Initialization
 --------------

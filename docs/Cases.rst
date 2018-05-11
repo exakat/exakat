@@ -634,7 +634,7 @@ Zurmo
 
 :ref:`failed-substr-comparison`, in app/protected/modules/zurmo/modules/SecurableModule.php:117. 
 
-filterAuditEvent compares a six char string with 'AUDIT_EVENT_' which contains 10 chars. This method returns only FALSE. Although it is used only once, the whole block that calls this method is now dead code. 
+filterAuditEvent compares a six char string with 'AUDIT\_EVENT\_' which contains 10 chars. This method returns only FALSE. Although it is used only once, the whole block that calls this method is now dead code. 
 
 .. code-block:: php
 

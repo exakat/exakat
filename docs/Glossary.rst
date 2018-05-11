@@ -607,6 +607,7 @@ Glossary
     + `preg_replace()`
 
       + :ref:`Make One Call With Array <make-one-call-with-array>`
+      + :ref:`Processing Collector <processing-collector>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 

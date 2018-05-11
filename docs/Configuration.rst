@@ -9,7 +9,8 @@ Summary
 * `Common Behavior`_
 * `Engine configuration`_
 * `Project Configuration`_
-
+* `Configuring analysis to be run`_
+* `Specific analyser configurations`_
 
 Common Behavior
 ---------------
@@ -27,9 +28,12 @@ Precedence
 
 The exakat engine read directives from three places :
 
-* The command line options
-* The config.ini files
-* The default values in the code
+1. The command line options
+2. The .exakat.ini file at the root of the code
+3. The config.ini file in the project directory
+4. The exakat.ini file in the config directory
+5. The default values in the code
+
 
 The precedence of the directives is the same as the list above : command line options always have highest priority, config.ini files are in second, when command line are not available, and finally, the default values are read in the code.
 
@@ -154,6 +158,27 @@ Here are the currently available options in Exakat's configuration file : config
 |                    | version for the analyze                                                                   |
 +--------------------+-------------------------------------------------------------------------------------------+
 
+Custom themes
+#############
+
+Create custom themes by creating a 'config/themas.ini' directive files. 
+
+This file is a .INI file, build with several sections. Each section is the name of a theme : for example, 'mine' is the name for the theme below. 
+
+There may be several sections, as long as the names are distinct. 
+
+It is recommended to use all low-case names for custom themes. Exakat uses names with a first capital letter, which prevents conflicts. Behavior is undefined if a custom theme has the same name as a default theme.
+
+:: 
+    ['mine']
+    analyzer[] = 'Structures/AddZero';
+    analyzer[] = 'Performances/ArrayMergeInLoops';
+
+
+The list of analyzer in the theme is based on the 'analyzer' array. The analyzer is identified by its 'shortname'. Analyzer shortname may be found in the documentation (:ref:`Rules` or within the Ambassador report). Analyzers names have a 'A/B' structure.
+
+The list of available themes, including the custom ones, is listed with the `doctor` command.
+
 Project Configuration
 ---------------------
 
@@ -205,8 +230,73 @@ Here are the currently available options in Exakat's project configuration file 
 Specific analyser configurations
 --------------------------------
 
+Some analyzer may be configured individually. Those parameters are then specific to one analyzer, and it only affects their behavior. 
+
+Analyzers may be configured in the `project/*/config.ini`; they may also be configured globally in the `config/exakat.ini` file.
+
++ :ref:`too-many-local-variables`
+   + tooManyLocalVariableThreshold : 15
++ :ref:`too-many-native-calls`
+   + nativeCallCounts : 3
++ :ref:`too-many-parameters`
+   + parametersCount : 8
 
 
+
+Configuring analysis to be run
+------------------------------
+
+Exakat builds a list of analysis to run, based on two directives : project_reports and projects_themes. Both are list of themes. Unknown themes are omitted. 
+
+project_reports makes sure you can extract those reports, while projects_themes allow you to build reports a la carte later, and avoid running the whole audit again.
+
+Required themes
+###############
+First, analysis are very numerous, and it is very tedious to sort them by hand. Exakat only handles 'themes' which are groups of analysis. There are several list of themes available by default, and it is possible to customize those lists. 
+
+When using the projects_themes directive, you can configure which themes must be processed by exakat, each time a 'project' command is run. Those themes will always be run. 
+
+Report-needed themes
+####################
+
+Reports are build based on results found during the auditing phase. Some reports, like 'Ambassador' or 'Drillinstructor' needs the results of specific themes. Others, like 'Text' or 'Json' build reports at the last moment. 
+
+As such, exakat uses the project_reports directive to collect the list of necessary themes, and add them to the projects_themes results. 
+
+Late reports
+############
+
+It is possible de extract a report, even if the configuration has not been explicitly set for it. 
+
+For example, it is possible to build the Owasp report after telling exakat to build a 'Ambassador' report, as Ambassador includes all the analysis needed for Owasp. On the other hand, the contrary is not true : one can't get the Ambassador report after running exakat for the Owasp report, as Owasp only covers the security themes, and Ambassador requires other themes. 
+
+Recommendations
+###############
+
+* The 'Ambassador' report has all the classic themes, it's the best easy choice. 
+* To collect everything possible, use the theme 'All'. It's also the slowest theme to run. 
+* To get one report, simply configure project_report with that report. 
+* You may configure several themes, like 'Security', 'Suggestions', 'CompatibilityPHP73', and later extract independant results with the 'Text' or 'Json' format.
+* If you just want one compulsory report and two optional reports (total of three), simply configure all of them with project_report. It's better to produce extra reports, than run again a whole audit to collect missing informations. 
+* It is possible to configure customized themes, and use them in project_themes
+* Excluding one analyzer is not supported. Use custom themes to build a new one instead. 
+
+Example
+#######
+
+::
+    project_reports[] = 'Drillinstructor';
+    project_reports[] = 'Owasp';
+
+    project_themes[] = 'Security';
+    project_themes[] = 'Suggestions';
+    
+
+With that configuration, the Drillinstructor and the Owasp report are created automatically when running 'project'. Use the following command to get the specific themes ; 
+
+::
+    php exakat.phar report -p <project> -format Text -T Security -v 
+    
 
 Check Install
 -------------

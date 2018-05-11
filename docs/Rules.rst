@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 10 May 2018 05:56:01 +0000
-.. comment: Generation hash : ea03809f973ab1acfd35892d96681bae27d57f12
+.. comment: Generation date : Fri, 11 May 2018 12:45:50 +0000
+.. comment: Generation hash : 3eb56483e7a672ec15e9e962ed845fcb731275c8
 
 
 .. _$http\_raw\_post\_data:
@@ -13272,7 +13272,7 @@ When accumulating data in a variable, within a loop, it is slow to apply repeate
 
 The example below illustrate the problem : `$collector` is build with element from `$array`. `$collector` actually gets larger and larger, slowing the `'in_array() <http://www.php.net/in_array>`_ call each time. 
 
-It is better to apply the preg_replace to $a, a short variable, and then, add $a to the collector.
+It is better to apply the `'preg_replace() <http://www.php.net/preg_replace>`_ to `$a`, a short variable, and then, add `$a` to the collector.
 
 .. code-block:: php
 
@@ -13281,11 +13281,7 @@ It is better to apply the preg_replace to $a, a short variable, and then, add $a
    // Fast way
    $collector = '';
    foreach($array as $a){
-       $a = preg_replace('/__(.*?)__/', '<b>
-.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
-.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
-
-</b>', $a);
+       $a = preg_replace('/__(.*?)__/', '<b>$1</b>', $a);
        $collector .= $a;
    }
    
@@ -13293,11 +13289,7 @@ It is better to apply the preg_replace to $a, a short variable, and then, add $a
    $collector = '';
    foreach($array as $a){
        $collector .= $a;
-       $collector = preg_replace('/__(.*?)__/', '<b>
-.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
-.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
-
-</b>', $collector);
+       $collector = preg_replace('/__(.*?)__/', '<b>$1</b>', $collector);
    }
    
    ?>
@@ -21233,11 +21225,11 @@ Using Short Tags
 ################
 
 
-The code makes use of short tags.
+The code makes use of short tags. Short tags are the following : ``<?`` . A full scripts looks like that : ``<? /* php code */ ?>`` .
 
-``<? /* php code */ ?>. ``
+It is recommended to not use short tags, and use standard PHP tags. This makes PHP code compatible with XML standards. Short tags used to be popular, but have lost it.
 
-It is recommended to not use short tags, and use standard PHP tags.
+See also `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_.
 
 +------------+-------------------------------------------------------------------------------------------+
 | Short name | Structures/ShortTags                                                                      |
