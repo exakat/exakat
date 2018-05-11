@@ -33,6 +33,7 @@ class IsUpperFamily extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('METHOD')
+             ->tokenIs('T_STRING') // Avoid dynamical names
              ->savePropertyAs('fullnspath', 'methode')
              
              ->goToClass()

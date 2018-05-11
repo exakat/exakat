@@ -116,7 +116,7 @@ SQL
         foreach($classes as $id => $extends) {
             if (!is_int($id)) { continue; }
             
-            foreach($classes as $id2 => &$extends2) {
+            foreach($classes as &$extends2) {
                 if (isset($extends2[$classesId[$id]])) {
                     $extends2[$classesId[$id]] = $classes[$id];
                     unset($classes[$id]);

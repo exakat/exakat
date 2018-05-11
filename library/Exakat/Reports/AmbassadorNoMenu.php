@@ -23,7 +23,6 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Docs;
 use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;

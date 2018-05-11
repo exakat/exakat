@@ -23,12 +23,16 @@ Label : PROJECT
                   11
                   Label : ARGUMENT
                     9
+                    Label : NAME
+                      9
                     Label : TYPEHINT
                       12
                   Label : ARGUMENT
                     15
                     Label : DEFAULT
                       16
+                    Label : NAME
+                      15
                     Label : TYPEHINT
                       13
                   Label : BLOCK
@@ -63,12 +67,6 @@ Label : PROJECT
                             36
                           Label : VALUE
                             38
-                      Label : DEFINITION
-                        34
-                      Label : DEFINITION
-                        22
-                      Label : DEFINITION
-                        22
                       Label : EXTENDS
                         24
                       Label : IMPLEMENTS
@@ -503,24 +501,22 @@ Label : PROJECT
                   11
                   Label : ARGUMENT
                     9
+                    Label : NAME
+                      9
                     Label : TYPEHINT
                       12
                   Label : ARGUMENT
                     15
                     Label : DEFAULT
                       16
+                    Label : NAME
+                      15
                     Label : TYPEHINT
                       13
                   Label : BLOCK
                     19
                     Label : EXPRESSION
                       21
-                      Label : DEFINITION
-                        34
-                      Label : DEFINITION
-                        22
-                      Label : DEFINITION
-                        22
                       Label : FINAL
                         78
                       Label : METHOD
@@ -711,12 +707,16 @@ Label : PROJECT
                   11
                   Label : ARGUMENT
                     9
+                    Label : NAME
+                      9
                     Label : TYPEHINT
                       12
                   Label : ARGUMENT
                     15
                     Label : DEFAULT
                       16
+                    Label : NAME
+                      15
                     Label : TYPEHINT
                       13
                   Label : BLOCK
@@ -801,6 +801,8 @@ Label : PROJECT
                   11
                   Label : ARGUMENT
                     9
+                    Label : NAME
+                      9
                     Label : TYPEHINT
                       12
                   Label : BLOCK

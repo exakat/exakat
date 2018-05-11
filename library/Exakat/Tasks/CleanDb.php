@@ -23,9 +23,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
-use Exception;
-
 class CleanDb extends Tasks {
     const CONCURENCE = self::ANYTIME;
 

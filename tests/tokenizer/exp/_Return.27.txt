@@ -29,7 +29,5 @@ Label : PROJECT
                 13
               Label : VALUE
                 10
-            Label : ARGUMENT
-              15
         Label : EXPRESSION
           15

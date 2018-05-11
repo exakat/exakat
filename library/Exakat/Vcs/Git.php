@@ -110,12 +110,12 @@ class Git extends Vcs {
     }
 
     public function getBranch() {
-        $res = shell_exec("cd {$this->destinationFull}/code/; git branch");
+        $res = shell_exec("cd {$this->destinationFull}/code/; git branch 2>&1");
         return trim($res, " *\n");
     }
 
     public function getRevision() {
-        $res = shell_exec("cd {$this->destinationFull}/code/; git rev-parse HEAD");
+        $res = shell_exec("cd {$this->destinationFull}/code/; git rev-parse HEAD 2>&1");
         return trim($res);
     }
     

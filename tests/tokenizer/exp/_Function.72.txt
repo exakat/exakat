@@ -37,6 +37,8 @@ Label : PROJECT
                   14
                   Label : ARGUMENT
                     11
+                    Label : NAME
+                      11
                   Label : BLOCK
                     10
                     Label : EXPRESSION
@@ -55,8 +57,12 @@ Label : PROJECT
                       8
                   Label : ARGUMENT
                     15
+                    Label : NAME
+                      15
                   Label : ARGUMENT
                     16
+                    Label : NAME
+                      16
                   Label : STATIC
                     13
               Label : EXPRESSION
@@ -73,10 +79,14 @@ Label : PROJECT
                     15
                     Label : DEFAULT
                       17
+                    Label : NAME
+                      15
                   Label : ARGUMENT
                     16
                     Label : DEFAULT
                       18
+                    Label : NAME
+                      16
                   Label : STATIC
                     13
             Label : NAME

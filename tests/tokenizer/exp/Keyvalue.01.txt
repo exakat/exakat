@@ -55,5 +55,3 @@ Label : PROJECT
                   22
                 Label : RIGHT
                   23
-            Label : ARGUMENT
-              24

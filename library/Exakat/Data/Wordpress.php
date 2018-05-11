@@ -34,4 +34,3 @@ class Wordpress extends Data {
 }
 
 ?>
-

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 17 Apr 2018 06:29:06 +0000
-.. comment: Generation hash : 89abd34d6e41b2d2b867ec1af530005a0b1d8107
+.. comment: Generation date : Fri, 11 May 2018 12:45:50 +0000
+.. comment: Generation hash : 3eb56483e7a672ec15e9e962ed845fcb731275c8
 
 
 .. _$http\_raw\_post\_data:
@@ -161,7 +161,7 @@ Static methods shouldn't use $this variable.
 
 $this variable represents an object, the current object. It is not compatible with a static method, which may operate without any object. 
 
-While executing a static method, $this is actually set to NULL.
+While executing a static method, ``$this`` is actually set to ``NULL``.
 
 .. code-block:: php
 
@@ -231,7 +231,11 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 #######
 
 
-PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It will solve the classname that is used in the left part of the operator.
+PHP has a special class constant to hold the name of the class : 'class' keyword. It represents the classname that is used in the left part of the operator.
+
+Using '::class' is safer than relying on a string. It does adapt if the class's name or its namespace is changed'. It is also faster, though it is a micro-optimisation. 
+
+It is introduced in PHP 5.5.
 
 .. code-block:: php
 
@@ -248,6 +252,9 @@ PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It 
    
    ?>
 
+
+See also `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_.
+
 +------------+------------------------------------------------------+
 | Short name | Php/StaticclassUsage                                 |
 +------------+------------------------------------------------------+
@@ -262,7 +269,7 @@ PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It 
 ##########
 
 
-@ is the 'no scream' operator : it will suppress error output. 
+@ is the 'no scream' operator : it suppresses error output. 
 
 .. code-block:: php
 
@@ -274,13 +281,15 @@ PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It 
    ?>
 
 
-This operator is actually very slow : it will process the error all the way up, and finally decide not to display it. It is often faster to check the conditions first, then run the method without @.
+This operator is actually very slow : it will process the error all the way up, and finally decide not to display it. It is often faster to check the conditions first, then run the method without ``@``.
 
-You may also set display_error to 0 in the php.ini : this will avoid user's error display, but will keep the error in the PHP logs, for later processing. 
+You may also set display_error to 0 in the ``php.ini`` : this will avoid user's error display, but will keep the error in the PHP logs, for later processing. 
 
-The only situation where @ is useful is when a native PHP function displays errors messages when error happens and there is no way to check it from the code. 
+The only situation where ``@`` is useful is when a native PHP function displays errors messages when error happens and there is no way to check it from the code. 
 
-This is the case with `'fopen() <http://www.php.net/fopen>`_, `'stream_socket_server() <http://www.php.net/stream_socket_server>`_, `'token_get_all() <http://www.php.net/token_get_all>`_.
+This is the case with `'fopen() <http://www.php.net/fopen>`_, `'stream_socket_server() <http://www.php.net/stream_socket_server>`_, `'token_get_all() <http://www.php.net/token_get_all>`_. 
+
+See also `Error Control Operators <http://php.net/manual/en/language.operators.errorcontrol.php>`_.
 
 +------------+---------------------------------------------------------------------------------------+
 | Short name | Structures/Noscream                                                                   |
@@ -642,6 +651,8 @@ Using references is then must faster, and easier to read.
 
 You may also use `'array_walk() <http://www.php.net/array_walk>`_ or `'array_map() <http://www.php.net/array_map>`_ (when $key is not used) to avoid the use of foreach.
 
+See also `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
+
 +------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Structures/AlteringForeachWithoutReference                                                                                        |
 +------------+-----------------------------------------------------------------------------------------------------------------------------------+
@@ -958,7 +969,7 @@ Assign With And
 ###############
 
 
-The lettered logical operators yield to assignation.
+The lettered logical operators yield to assignation. It may collect less information than expected.
 
 It is recommended to use the &&, ^ and || operators, instead of and, or and xor, to prevent confusion.
 
@@ -981,11 +992,13 @@ It is recommended to use the &&, ^ and || operators, instead of and, or and xor,
 
 See also `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
 
-+------------+----------------+
-| Short name | Php/AssignAnd  |
-+------------+----------------+
-| Themes     | :ref:`Analyze` |
-+------------+----------------+
++------------+-------------------------------+
+| Short name | Php/AssignAnd                 |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
+| Examples   | :ref:`xataface-php-assignand` |
++------------+-------------------------------+
 
 
 
@@ -1534,9 +1547,9 @@ Avoid get_class()
 #################
 
 
-get_class() should be replaced with the `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator to check the class of an object. 
+``get_class()`` should be replaced with the ``instanceof`` operator to check the class of an object. 
 
-get_class() will only compare the full namespace name of the object's class, while `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ actually resolve the name, using the local namespace and aliases.
+``get_class()`` only compares the full namespace name of the object's class, while ``instanceof`` actually resolves the name, using the local namespace and aliases.
 
 .. code-block:: php
 
@@ -1558,6 +1571,10 @@ get_class() will only compare the full namespace name of the object's class, whi
            }
        }
    ?>
+
+
+See also `get_class <http://php.net/get_class>`_ and 
+         `Type Operators <http://php.net/`'instanceof <http://php.net/manual/en/language.operators.type.php>`_>`_.
 
 +------------+--------------------------+
 | Short name | Structures/UseInstanceof |
@@ -2217,6 +2234,34 @@ See also `CakePHP <https://www.cakephp.org/>`_.
 +------------+---------------------+
 | Themes     | :ref:`Cakephp`      |
 +------------+---------------------+
+
+
+
+.. _callback-needs-return:
+
+Callback Needs Return
+#####################
+
+
+When used with array_map functions, the callback must return something. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This filters each element
+   $filtered = array_filter($array, function ($x) {return $x == 2; });
+   
+   // This return void for every element
+   $filtered = array_filter($array, function ($x) {return ; });
+   
+   ?>
+
++------------+-------------------------------+
+| Short name | Functions/CallbackNeedsReturn |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -2974,7 +3019,25 @@ Const With Array
 ################
 
 
-The const keyword supports array since PHP 5.6.
+The const keyword supports array. This feature was added in PHP 5.6. 
+
+The array must be filled with other constants. It may also be build using the '+' operator. 
+
+.. code-block:: php
+
+   <?php
+   
+   const PRIMES = [2, 3, 5, 7];
+   
+   class X {
+       const MORE_PRIMES = [11, 13, 17, 19];
+   }
+   
+   ?>
+
+
+See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_ and 
+         `Constants Syntax <http://php.net/manual/en/language.constants.syntax.php>`_.
 
 +------------+---------------------------------------------------------------------------------+
 | Short name | Php/ConstWithArray                                                              |
@@ -2992,7 +3055,23 @@ Constant Class
 
 A class or an interface only made up of constants. Constants usually have to be used in conjunction of some behavior (methods, class...) and never alone. 
 
-As such, they should be PHP constants (build with define or const), or included in a class with other methods and properties.
+.. code-block:: php
+
+   <?php
+   
+   class ConstantClass {
+       const KBIT = 1000;
+       const MBIT = self::KBIT * 1000;
+       const GBIT = self::MBIT * 1000;
+       const PBIT = self::GBIT * 1000;
+   }
+   
+   ?>
+
+
+As such, they should be PHP constants (build with define or const), or included in a class with other methods and properties. 
+
+See also `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_.
 
 +------------+-----------------------+
 | Short name | Classes/ConstantClass |
@@ -3083,33 +3162,6 @@ See also `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exp
 
 
 
-.. _constants:
-
-Constants
-#########
-
-
-List of PHP constants being defined.
-
-.. code-block:: php
-
-   <?php
-   
-   // with const
-   const X = 1;
-   
-   // with 'define()
-   define ('Y', 2);
-   ?>
-
-+------------+-------------------------+
-| Short name | Constants/Constantnames |
-+------------+-------------------------+
-| Themes     | :ref:`Analyze`          |
-+------------+-------------------------+
-
-
-
 .. _constants-created-outside-its-namespace:
 
 Constants Created Outside Its Namespace
@@ -3172,7 +3224,7 @@ List of constants being defined with names that are incompatible with PHP standa
    ?>
 
 
-See also `Constants <http://php.net/manual/en/language.constants.php>`_.
+See also `PHP Constants <http://php.net/manual/en/language.constants.php>`_.
 
 +------------+--------------------------------+
 | Short name | Constants/ConstantStrangeNames |
@@ -3268,11 +3320,11 @@ Could Be Private Class Constant
 ###############################
 
 
-Class constant may use 'private' visibility. 
+Class constant may use ``private`` visibility. 
 
 Since PHP 7.1, constants may also have a public/protected/private visibility. This restrict their usage to anywhere, class and children or class. 
 
-As a general rule, it is recommended to make constant 'private' by default, and to relax this restriction as needed. PHP makes them public by default.
+As a general rule, it is recommended to make constant ``private`` by default, and to relax this restriction as needed. PHP makes them public by default.
 
 .. code-block:: php
 
@@ -3300,7 +3352,7 @@ As a general rule, it is recommended to make constant 'private' by default, and 
    ?>
 
 
-Constant shall stay 'public' when the code has to be compatible with PHP 7.0 and older. 
+Constant shall stay ``public`` when the code has to be compatible with PHP 7.0 and older. 
 
 They also have to be public in the case of component : some of those constants have to be used by external actors, in order to configure the component.
 
@@ -3466,11 +3518,13 @@ This global is only used in one function or method. It may be called 'static', i
    }
    ?>
 
-+------------+--------------------------+
-| Short name | Structures/CouldBeStatic |
-+------------+--------------------------+
-| Themes     | :ref:`Analyze`           |
-+------------+--------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Structures/CouldBeStatic                                                        |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                  |
++------------+---------------------------------------------------------------------------------+
+| Examples   | :ref:`dolphin-structures-couldbestatic`, :ref:`contao-structures-couldbestatic` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -3710,7 +3764,7 @@ Could Use Short Assignation
 ###########################
 
 
-Use short assignement operator, to speed up code, and keep syntax clear.  
+Use short assignment operator, to speed up code, and keep syntax clear.  
 
 Some operators, like * or +, have a compact and fast 'do-and-assign' version. They looks like a compacted version for = and the operator. This syntax is good for readability, and saves some memory in the process. 
 
@@ -3766,6 +3820,8 @@ See also `Assignation Operators <http://php.net/manual/en/language.operators.ass
 +------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP   | `use-short-assignations <https://github.com/dseguy/clearPHP/tree/master/rules/use-short-assignations.md>`__ |
 +------------+-------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`churchcrm-structures-coulduseshortassignation`, :ref:`thelia-structures-coulduseshortassignation`     |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -3807,15 +3863,49 @@ See also `Magic Constants <http://php.net/manual/en/language.constants.predefine
 
 
 
+.. _could-use-array\_unique:
+
+Could Use array_unique
+######################
+
+
+Use array_unique to collect unique elements from an array.
+
+Always try to use native PHP functions, instead of rebuilding them with custom PHP code.
+
+.. code-block:: php
+
+   <?php
+   
+       $unique = array();
+       foreach ($array as $b) {
+           if (!in_array($b, $unique)) {
+               /*  May be more code */
+               $unique[] = $b;
+           }
+       }
+   ?>
+
+
+See also `array_unique <http://php.net/array_unique>`_.
+
++------------+--------------------------------+
+| Short name | Structures/CouldUseArrayUnique |
++------------+--------------------------------+
+| Themes     | :ref:`Suggestions`             |
++------------+--------------------------------+
+
+
+
 .. _could-use-self:
 
 Could Use self
 ##############
 
 
-'self' keyword refers to the current class, or any of its parents. Using it is just as fast as the full classname, it is as readable and it is will not be changed upon class or namespace change.
+``self`` keyword refers to the current class, or any of its parents. Using it is just as fast as the full classname, it is as readable and it is will not be changed upon class or namespace change.
 
-It is also routinely used in traits : there, 'self' represents the class in which the trait is used, or the trait itself. 
+It is also routinely used in traits : there, ``self`` represents the class in which the trait is used, or the trait itself. 
 
 .. code-block:: php
 
@@ -3831,6 +3921,9 @@ It is also routinely used in traits : there, 'self' represents the class in whic
    }
    
    ?>
+
+
+See also `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
 
 +------------+------------------------------------+
 | Short name | Classes/ShouldUseSelf              |
@@ -4008,15 +4101,37 @@ Structures, such as functions, classes, interfaces, traits, etc. may be defined 
 
 Since the availability of __autoload, there is no need for that kind of code. Structures should be defined, and accessible to the autoloading. Inclusion and deep definitions should be avoided, as they compell code to load some definitions, while autoloading will only load them if needed. 
 
+.. code-block:: php
+
+   <?php
+   
+   class X {
+       function init() {
+           // myFunction is defined when and only if X::init() is called.
+           if (!function_exists('myFunction'){
+               function myFunction($a) {
+                   return $a + 1;
+               }
+           })
+       }
+   }
+   
+   ?>
+
+
 Functions are excluded from autoload, but shall be gathered in libraries, and not hidden inside other code.
 
-Constants definitions are tolerated inside functions : they may be used for avoiding repeat, or noting the usage of such function.
+Constants definitions are tolerated inside functions : they may be used for avoiding repeat, or noting the usage of such function. 
 
-+------------+---------------------------+
-| Short name | Functions/DeepDefinitions |
-+------------+---------------------------+
-| Themes     | :ref:`Analyze`            |
-+------------+---------------------------+
+See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_.
+
++------------+------------------------------------------+
+| Short name | Functions/DeepDefinitions                |
++------------+------------------------------------------+
+| Themes     | :ref:`Analyze`                           |
++------------+------------------------------------------+
+| Examples   | :ref:`dolphin-functions-deepdefinitions` |
++------------+------------------------------------------+
 
 
 
@@ -4325,7 +4440,7 @@ Don't Send This In Constructor
 ##############################
 
 
-Don't use $this as an argument while in the `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_. Until the constructor is finished, the object is not finished, and may be in an instable state. Providing it to another code may lead to error. 
+Don't use ``$this``` as an argument while in the `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_. Until the constructor is finished, the object is not finished, and may be in an instable state. Providing it to another code may lead to error. 
 
 This is in particular true if the receiving structure put immediately the incoming objet to work, and not simply store it for later use. 
 
@@ -4784,8 +4899,9 @@ Echo With Concat
 ################
 
 
-Optimize your echo's by not concatenating at echo() time, but serving all argument separated. This will save PHP a memory copy.
-If values (literals and variables) are small enough, this won't have impact. Otherwise, this is less work and less memory waste.
+Optimize your ``echo``'s by not concatenating at ``echo`` time, but serving all argument separated. This will save PHP a memory copy.
+
+If values, literals and variables, are small enough, this won't have visible impact. Otherwise, this is less work and less memory waste.
 
 .. code-block:: php
 
@@ -6632,9 +6748,9 @@ Htmlentities Calls
 
 `'htmlentities() <http://www.php.net/htmlentities>`_ and `'htmlspecialchars() <http://www.php.net/htmlspecialchars>`_ are used to prevent injecting special characters in HTML code. As a bare minimum, they take a string and encode it for HTML.
 
-The second argument of the functions is the type of protection. The protection may apply to quotes or not, to HTML4 or 5, etc. It is highly recommended to set it explicitly.
+The second argument of the functions is the type of protection. The protection may apply to quotes or not, to HTML 4 or 5, etc. It is highly recommended to set it explicitly.
 
-The third argument of the functions is the encoding of the string. In PHP 5.3, it as 'ISO-8859-1', in 5.4, was 'UTF-8', and in 5.6, it is now default_charset, a php.ini configuration that has the default value of 'UTF-8'. It is highly recommended to set this argument too, to avoid distortions from the configuration.
+The third argument of the functions is the encoding of the string. In PHP 5.3, it is ISO-8859-1, in 5.4, was ``UTF-8``, and in 5.6, it is now default_charset, a ``php.ini`` configuration that has the default value of ``UTF-8``. It is highly recommended to set this argument too, to avoid distortions from the configuration.
 
 .. code-block:: php
 
@@ -6679,7 +6795,7 @@ This means those expressions may be simplified.
    // twice $a
    if ($a || $b || $c || $a) {  }
    
-   // Hiding is parenthesis is bad
+   // Hiding in parenthesis is bad
    if (($a) ^ ($a)) {}
    
    // expressions may be large
@@ -7805,7 +7921,7 @@ It is recommended to keep the global variables's name distinct from the local va
    $globalVariable = 2;
    
    function foo() {
-       globl $globalVariable2;
+       global $globalVariable2;
        
        $variable = 4;
        $localVariable = 3;
@@ -7977,11 +8093,13 @@ Even two 'or' comparisons are slower than using a `'in_array() <http://www.php.n
 
 See also `in_array() <http://php.net/in_array>`_.
 
-+------------+-------------------------------+
-| Short name | Performances/LogicalToInArray |
-+------------+-------------------------------+
-| Themes     | :ref:`Analyze`                |
-+------------+-------------------------------+
++------------+----------------------------------------------+
+| Short name | Performances/LogicalToInArray                |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`                               |
++------------+----------------------------------------------+
+| Examples   | :ref:`zencart-performances-logicaltoinarray` |
++------------+----------------------------------------------+
 
 
 
@@ -8329,6 +8447,54 @@ Create an attribute that guess what are the called function or methods, when pos
 
 
 
+.. _method-could-be-private-method:
+
+Method Could Be Private Method
+##############################
+
+
+The following methods are never used outside their class of definition. Given the analyzed code, they could be set as private. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public function couldBePrivate() {}
+       public function cantdBePrivate() {}
+       
+       function bar() {
+           // couldBePrivate is used internally. 
+           $this->couldBePrivate();
+       }
+   }
+   
+   class foo2 extends foo {
+       function bar2() {
+           // cantdBePrivate is used in a child class. 
+           $this->cantdBePrivate();
+       }
+   }
+   
+   //couldBePrivate() is not used outside 
+   $foo = new foo();
+   
+   //cantdBePrivate is used outside the class
+   $foo->cantdBePrivate();
+   
+   ?>
+
+
+Note that dynamic properties (such as $x->$y) are not taken into account.
+
++------------+------------------------------+
+| Short name | Classes/CouldBePrivateMethod |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
+
+
+
 .. _method-used-below:
 
 Method Used Below
@@ -8631,6 +8797,44 @@ Any function definition was found for that function, but a class with that name 
 
 
 
+.. _missing-parenthesis:
+
+Missing Parenthesis
+###################
+
+
+Add parenthesis to those expression to prevent bugs. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Missing some parenthesis!!
+   if (!$a 'instanceof Stdclass) {
+       print Not\n;
+   } else {
+       print Is\n;
+   }
+   
+   // Could this addition be actually
+   $c = -$a + $b;
+   
+   // This one ? 
+   $c = -($a + $b);
+   
+   ?>
+
+
+See also `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
++------------+-------------------------------+
+| Short name | Structures/MissingParenthesis |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
+
+
+
 .. _mistaken-concatenation:
 
 Mistaken Concatenation
@@ -8685,10 +8889,15 @@ Mixed usage of concatenation and string interpolation is error prone. It is hard
    $a = $b . c$d;
    $a = $b . c{$d};
    
+   // Mixed Concatenation and Interpolation string with constant
+   $a = {$b}c . CONSTANT;
+   
    ?>
 
 
-This issue doesn't change the output. It makes code less error prone.
+Fixing this issue has no impact on the output. It makes code less error prone.
+
+There are some situations where using concatenation are compulsory : when using a constant, calling a function, running a complex expression or make use of the escape sequence. You may also consider pushing the storing of such expression in a local variable.
 
 +------------+----------------------------------------------------------------+
 | Short name | Structures/MixedConcatInterpolation                            |
@@ -9787,7 +9996,7 @@ No Choice
 
 A conditional structure is being used, but both alternatives are the same, leading to the illusion of choice. 
 
-Either the condition is useless, and may be removed, or the alternatives needs to be distinguished.
+Either the condition is useless, and may be removed, or the alternatives need to be distinguished.
 
 .. code-block:: php
 
@@ -9803,11 +10012,13 @@ Either the condition is useless, and may be removed, or the alternatives needs t
    
    ?>
 
-+------------+---------------------+
-| Short name | Structures/NoChoice |
-+------------+---------------------+
-| Themes     | :ref:`Analyze`      |
-+------------+---------------------+
++------------+--------------------------------------------------------------------------+
+| Short name | Structures/NoChoice                                                      |
++------------+--------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                           |
++------------+--------------------------------------------------------------------------+
+| Examples   | :ref:`nextcloud-structures-nochoice`, :ref:`zencart-structures-nochoice` |
++------------+--------------------------------------------------------------------------+
 
 
 
@@ -9945,11 +10156,13 @@ Comparing `'count() <http://www.php.net/count>`_ and strlen() with other values 
 
 Note that this is a micro-optimisation : since PHP keeps track of the number of elements in arrays (or number of chars in strings), the total computing time of both operations is often lower than a ms. However, both functions tends to be heavily used, and may even be used inside loops.
 
-+------------+---------------------------+
-| Short name | Performances/NotCountNull |
-+------------+---------------------------+
-| Themes     | :ref:`Performances`       |
-+------------+---------------------------+
++------------+--------------------------------------------+
+| Short name | Performances/NotCountNull                  |
++------------+--------------------------------------------+
+| Themes     | :ref:`Performances`                        |
++------------+--------------------------------------------+
+| Examples   | :ref:`wordpress-performances-notcountnull` |
++------------+--------------------------------------------+
 
 
 
@@ -10105,6 +10318,7 @@ In a view.phtml file :
 
 
 In a controller.php file : 
+
 .. code-block:: php
 
    <?php
@@ -10417,9 +10631,9 @@ No Magic With Array
 ###################
 
 
-Magic method `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_ doesn't work for array syntax. 
+Magic method ``__get()`` doesn't work for array syntax. 
 
-When overloading properties, they can only be used for scalar values, excluding arrays. Under the hood, PHP uses `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_ to reach for the name of the property, and doesn't recognize the following index as an array. It yields an error : Indirect modification of overloaded property.
+When overloading properties, they can only be used for scalar values, excluding arrays. Under the hood, PHP uses ``__get()`` to reach for the name of the property, and doesn't recognize the following index as an array. It yields an error : Indirect modification of overloaded property.
 
 .. code-block:: php
 
@@ -10559,9 +10773,23 @@ No Parenthesis For Language Construct
 #####################################
 
 
-Some PHP language constructs, such are include, print, echo don't need parenthesis. They will handle parenthesis, but it is may lead to strange situations. 
+Some PHP language constructs, such are ``include``, ``print``, ``echo`` don't need parenthesis. They cope with parenthesis, but it is may lead to strange situations. 
 
-It it better to avoid using parenthesis with echo, print, return, throw, include and require (and _once).
+.. code-block:: php
+
+   <?php
+   
+   // This is an attempt to load 'foo.inc', or kill the script
+   include('foo.inc') or 'die();
+   // in fact, this is read by PHP as : include 1 
+   // include  'foo.inc' or 'die();
+   
+   ?>
+
+
+It it better to avoid using parenthesis with ``echo``, ``print``, ``return``, ``throw``, ``yield``, ``yield from``, ``include``, ``require``, ``include_once``, ``require_once``.
+
+See also `include <http://php.net/manual/en/function.include.php>`_.
 
 +------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Structures/NoParenthesisForLanguageConstruct                                                                                              |
@@ -10679,7 +10907,9 @@ PHP uses an internal representation in base 2 : any number difficult to represen
    ?>
 
 
-Use precision formulas with `'abs() <http://www.php.net/abs>`_ to approximate values with a given precision, or avoid reals altogether.
+Use precision formulas with `'abs() <http://www.php.net/abs>`_ to approximate values with a given precision, or avoid reals altogether. 
+
+See also `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_.
 
 +------------+-----------------------------------------------------------------------------------------------------+
 | Short name | Type/NoRealComparison                                                                               |
@@ -11307,43 +11537,6 @@ See also `Type declarations <http://php.net/manual/en/functions.arguments.php#fu
 
 
 
-.. _not-definitions-only:
-
-Not Definitions Only
-####################
-
-
-Files should only include definitions (class, functions, traits, interfaces, constants), or global instructions, but not both. 
-
-.. code-block:: php
-
-   <?php
-   // This whole script is a file
-   
-   // It contains definitions and global code
-   class foo {
-       static public $foo = null;
-   }
-   //This can be a singleton creation
-   foo::$foo = new foo();
-   
-   trait t {}
-   
-   class bar {}
-   
-   ?>
-
-
-Within this context, globals, use, and namespaces instructions are not considered a warning.
-
-+------------+--------------------------+
-| Short name | Files/NotDefinitionsOnly |
-+------------+--------------------------+
-| Themes     | :ref:`Analyze`           |
-+------------+--------------------------+
-
-
-
 .. _not-not:
 
 Not Not
@@ -11551,6 +11744,49 @@ See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.ph
 
 
 
+.. _one-if-is-sufficient:
+
+One If Is Sufficient
+####################
+
+
+Switch the if then structures to reduce the amount of conditions to read.
+
+.. code-block:: php
+
+   <?php
+   
+   // Less conditions are written here.
+     	if($b == 2) {
+           if($a == 1) {
+       		++$c;
+       	}
+           else {
+       		++$d;
+       	}
+       }
+   
+   // ($b == 2) is double here
+       if($a == 1) {
+       	if($b == 2) {
+       		++$c;
+       	}
+       }
+       else {
+       	if($b == 2) {
+       		++$d;
+       	}
+       }
+   ?>
+
++------------+------------------------------+
+| Short name | Structures/OneIfIsSufficient |
++------------+------------------------------+
+| Themes     | :ref:`Suggestions`           |
++------------+------------------------------+
+
+
+
 .. _one-letter-functions:
 
 One Letter Functions
@@ -11638,18 +11874,26 @@ This may be linted by PHP, when the function definition is in the same file as t
    
    function foo(&$bar) { /'**/ }
    
+   function &bar() { /'**/ }
+   
+   // This is not possible : 'strtolower() returns a value
    foo(strtolower($string));
+   
+   // This is valid : bar() returns a reference
+   foo(bar($string));
    
    ?>
 
 
 This analysis currently covers functioncalls and static methodcalls, but omits methodcalls.
 
-+------------+-----------------------------------------+
-| Short name | Functions/OnlyVariablePassedByReference |
-+------------+-----------------------------------------+
-| Themes     | :ref:`Analyze`                          |
-+------------+-----------------------------------------+
++------------+----------------------------------------------------------------------------------------------------------------+
+| Short name | Functions/OnlyVariablePassedByReference                                                                        |
++------------+----------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                                 |
++------------+----------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`dolphin-functions-onlyvariablepassedbyreference`, :ref:`phpipam-functions-onlyvariablepassedbyreference` |
++------------+----------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12670,6 +12914,33 @@ It is advised to never leave that kind of instruction in a production code.
 
 
 
+.. _possible-increment:
+
+Possible Increment
+##################
+
+
+This expression looks like a typo : a missing + would change the behavior.
+
+The same pattern is not reported with -, as it is legit expression. + sign is usually understated, rather than explicit.
+
+.. code-block:: php
+
+   <?php
+   
+   // could it be a ++$b ? 
+   $a = +$b;
+   
+   ?>
+
++------------+------------------------------+
+| Short name | Structures/PossibleIncrement |
++------------+------------------------------+
+| Themes     | :ref:`Suggestions`           |
++------------+------------------------------+
+
+
+
 .. _possible-infinite-loop:
 
 Possible Infinite Loop
@@ -12991,6 +13262,46 @@ See also `Category:Private Functions <https://codex.wordpress.org/Category:Priva
 
 
 
+.. _processing-collector:
+
+Processing Collector
+####################
+
+
+When accumulating data in a variable, within a loop, it is slow to apply repeatedly a function to the variable.
+
+The example below illustrate the problem : `$collector` is build with element from `$array`. `$collector` actually gets larger and larger, slowing the `'in_array() <http://www.php.net/in_array>`_ call each time. 
+
+It is better to apply the `'preg_replace() <http://www.php.net/preg_replace>`_ to `$a`, a short variable, and then, add `$a` to the collector.
+
+.. code-block:: php
+
+   <?php
+   
+   // Fast way
+   $collector = '';
+   foreach($array as $a){
+       $a = preg_replace('/__(.*?)__/', '<b>$1</b>', $a);
+       $collector .= $a;
+   }
+   
+   // Slow way
+   $collector = '';
+   foreach($array as $a){
+       $collector .= $a;
+       $collector = preg_replace('/__(.*?)__/', '<b>$1</b>', $collector);
+   }
+   
+   ?>
+
++------------+-------------------------------+
+| Short name | Performances/RegexOnCollector |
++------------+-------------------------------+
+| Themes     | :ref:`Performances`           |
++------------+-------------------------------+
+
+
+
 .. _property-could-be-local:
 
 Property Could Be Local
@@ -13019,54 +13330,6 @@ Public properties are omitted here : they may be modified anywhere in the code.
 
 +------------+------------------------------+
 | Short name | Classes/PropertyCouldBeLocal |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
-
-
-
-.. _property-could-be-private-method:
-
-Property Could Be Private Method
-################################
-
-
-The following method are never used outside their class of definition. Given the analyzed code, they could be set as private. 
-
-.. code-block:: php
-
-   <?php
-   
-   class foo {
-       public function couldBePrivate() {}
-       public function cantdBePrivate() {}
-       
-       function bar() {
-           // couldBePrivate is used internally. 
-           $this->couldBePrivate();
-       }
-   }
-   
-   class foo2 extends foo {
-       function bar2() {
-           // cantdBePrivate is used in a child class. 
-           $this->cantdBePrivate();
-       }
-   }
-   
-   //couldBePrivate() is not used outside 
-   $foo = new foo();
-   
-   //cantdBePrivate is used outside the class
-   $foo->cantdBePrivate();
-   
-   ?>
-
-
-Note that dynamic properties (such as $x->$y) are not taken into account.
-
-+------------+------------------------------+
-| Short name | Classes/CouldBePrivateMethod |
 +------------+------------------------------+
 | Themes     | :ref:`Analyze`               |
 +------------+------------------------------+
@@ -14234,11 +14497,13 @@ This is good for readability, and help at understanding the code. This is especi
 
 See also `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_.
 
-+------------+-----------------------------------+
-| Short name | Structures/OneLineTwoInstructions |
-+------------+-----------------------------------+
-| Themes     | :ref:`Analyze`                    |
-+------------+-----------------------------------+
++------------+--------------------------------------------------------------------------------------------------+
+| Short name | Structures/OneLineTwoInstructions                                                                |
++------------+--------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                   |
++------------+--------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`piwigo-structures-onelinetwoinstructions`, :ref:`tine20-structures-onelinetwoinstructions` |
++------------+--------------------------------------------------------------------------------------------------+
 
 
 
@@ -15884,7 +16149,7 @@ Static Methods Can't Contain $this
 ##################################
 
 
-Static methods are also called 'class methods' : they may be called even if the class has no instantiated object. Thus, the local variable $this won't exist, PHP will set it to NULL as usual. 
+Static methods are also called ``class methods`` : they may be called even if the class has no instantiated object. Thus, the local variable ``$this`` won't exist, PHP will set it to NULL as usual. 
 
 .. code-block:: php
 
@@ -15907,7 +16172,9 @@ Static methods are also called 'class methods' : they may be called even if the 
    ?>
 
 
-Either, this is not a static method (simply remove the static keyword), or replace all $this mention by static properties Class::$property.
+Either, this is not a static method (simply remove the ``static`` keyword), or replace all $this mention by static properties ``Class::$property``.
+
+See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 
 +------------+---------------------------------------------------------------------------------------------+
 | Short name | Classes/StaticContainsThis                                                                  |
@@ -16656,11 +16923,13 @@ The throw keyword is excepted to use an exception. Calling a function to prepare
 
 When the new keyword is forgotten, then the class construtor is used as a functionname, and now exception is emited, but an 'Undefined function' fatal error is emited.
 
-+------------+------------------------------+
-| Short name | Exceptions/ThrowFunctioncall |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++------------+----------------------------------------------+
+| Short name | Exceptions/ThrowFunctioncall                 |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`                               |
++------------+----------------------------------------------+
+| Examples   | :ref:`sugarcrm-exceptions-throwfunctioncall` |
++------------+----------------------------------------------+
 
 
 
@@ -16744,7 +17013,7 @@ Throws An Assignement
 
 It is possible to throw an exception, and, in the same time, assign this exception to a variable.
 
-However, $e will never be used, as the exception is thrown, and any following code is not executed. 
+However, the variable will never be used, as the exception is thrown, and any following code is not executed. 
 
 .. code-block:: php
 
@@ -16760,7 +17029,7 @@ However, $e will never be used, as the exception is thrown, and any following co
    ?>
 
 
-The assignement should be removed.
+The assignment should be removed.
 
 +------------+----------------------------+
 | Short name | Structures/ThrowsAndAssign |
@@ -16776,7 +17045,7 @@ Timestamp Difference
 ####################
 
 
-time() and `'microtime() <http://www.php.net/microtime>`_ shouldn't be used to calculate duration. 
+``time()`` and ``microtime()`` shouldn't be used to calculate duration. 
 
 time() and `'microtime() <http://www.php.net/microtime>`_ are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announced by IERS.
 
@@ -16963,11 +17232,21 @@ Beyond 15 variables, it becomes difficult to keep track of their name and usage,
    
    ?>
 
-+------------+---------------------------------+
-| Short name | Functions/TooManyLocalVariables |
-+------------+---------------------------------+
-| Themes     | :ref:`Analyze`                  |
-+------------+---------------------------------+
++-------------------------------+---------+---------+------------------------------------------------------------------+
+| Name                          | Default | Type    | Description                                                      |
++-------------------------------+---------+---------+------------------------------------------------------------------+
+| tooManyLocalVariableThreshold | 15      | integer | Minimal number of variables in one function or method to report. |
++-------------------------------+---------+---------+------------------------------------------------------------------+
+
+
+
++------------+-------------------------------------------------+
+| Short name | Functions/TooManyLocalVariables                 |
++------------+-------------------------------------------------+
+| Themes     | :ref:`Analyze`                                  |
++------------+-------------------------------------------------+
+| Examples   | :ref:`humo-gen-functions-toomanylocalvariables` |
++------------+-------------------------------------------------+
 
 
 
@@ -17615,7 +17894,7 @@ Undefined Parent
 ################
 
 
-List of properties and methods that are accessed using 'parent' keyword but are not defined in the parent class. 
+List of properties and methods that are accessed using ``parent`` keyword but are not defined in the parent class. 
 
 This will be compilable but will yield a fatal error during execution.
 
@@ -17642,8 +17921,7 @@ This will be compilable but will yield a fatal error during execution.
    ?>
 
 
-Note that if the parent is defined (extends someClass) but someClass is not available in the tested code (it may be in composer,
-another dependency, or just not there) it will not be reported.
+Note that if the parent is defined using ``extends someClass`` but ``someClass`` is not available in the tested code, it will not be reported : it may be in composer, another dependency, or just missing.
 
 See also `parent <http://php.net/manual/en/keyword.parent.php>`_.
 
@@ -18094,7 +18372,7 @@ Unpreprocessed Values
 
 Preprocessing values is the preparation of values before PHP executes the code. 
 
-There is no macro language in PHP, that prepares the code before compilation, bringing some confort and short syntax. Most of the time, one uses PHP itself to preprocess data. 
+There is no macro language in PHP, that prepares the code before compilation, bringing some comfort and short syntax. Most of the time, one uses PHP itself to preprocess data. 
 
 For example : 
 
@@ -18298,6 +18576,8 @@ It checks if an variable is of a specific class. However, if the referenced clas
 
 Make sure the following classes are well defined.
 
+See also `Type operators <http://php.net/`'instanceof <http://php.net/manual/en/language.operators.type.php>`_>`_.
+
 +------------+-----------------------------------------------------------------------------------------------------------------+
 | Short name | Classes/UnresolvedInstanceof                                                                                    |
 +------------+-----------------------------------------------------------------------------------------------------------------+
@@ -18315,6 +18595,32 @@ Unresolved Use
 
 
 The following use instructions cannot be resolved to a class or a namespace. They should be dropped or fixed.
+
+.. code-block:: php
+
+   <?php
+   
+   namespace A {
+       // class B is defined
+       class B {}
+       // class C is not defined
+   }
+   
+   namespace X/Y {
+   
+       use A/B;  // This use is valid
+       use A/C;  // This use point to nothing.
+   
+       new B();
+       new C();
+   }
+   
+   ?>
+
+
+Use expression are options for the current namespace. 
+
+See also `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
 
 +------------+---------------------------------------------------------------------------------------------------+
 | Short name | Namespaces/UnresolvedUse                                                                          |
@@ -18376,7 +18682,7 @@ Unset In Foreach
 ################
 
 
-Unset applied to the variables of a foreach loop are useless, as they are copies and not the actual value. Even if the value is a reference, unsetting it will not have effect on the original array : the only effect may be on values inside an array, or on properties inside an object.
+Unset applied to the variables of a ``foreach`` loop are useless, as they are copies and not the actual value. Even if the value is a reference, unsetting it has no effect on the original array : the only effect may be indirect, on elements inside an array, or on properties inside an object.
 
 .. code-block:: php
 
@@ -18406,6 +18712,9 @@ Unset applied to the variables of a foreach loop are useless, as they are copies
    
    ?>
 
+
+See also `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
+
 +------------+----------------------------------------------+
 | Short name | Structures/UnsetInForeach                    |
 +------------+----------------------------------------------+
@@ -18420,7 +18729,24 @@ Unthrown Exception
 ##################
 
 
-These are exceptions that are defined in the code but never thrown.
+These are exceptions that are defined in the code but never thrown. 
+
+.. code-block:: php
+
+   <?php
+   
+   //This exception is defined but never used in the code.
+   class myUnusedException extends \Exception {}
+   
+   //This exception is defined and used in the code.
+   class myUsedException extends \Exception {}
+   
+   throw new myUsedException('I was called');
+   
+   ?>
+
+
+See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
 
 +------------+-------------------------------------------------------------------------------------------------------------+
 | Short name | Exceptions/Unthrown                                                                                         |
@@ -19377,11 +19703,13 @@ Foreach() structures accepts list() as blind key. If the loop-value is an array 
 
 See also `list <http://php.net/manual/en/function.list.php>`_ and `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
-+------------+-------------------------------+
-| Short name | Structures/UseListWithForeach |
-+------------+-------------------------------+
-| Themes     | :ref:`Suggestions`            |
-+------------+-------------------------------+
++------------+---------------------------------------------------------------------------------------------+
+| Short name | Structures/UseListWithForeach                                                               |
++------------+---------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Suggestions`                                                                          |
++------------+---------------------------------------------------------------------------------------------+
+| Examples   | :ref:`mediawiki-structures-uselistwithforeach`, :ref:`swoole-structures-uselistwithforeach` |
++------------+---------------------------------------------------------------------------------------------+
 
 
 
@@ -20108,11 +20436,13 @@ In special situations, variables may be used once :
 
 The current analyzer count variables at the application level, and not at a method scope level.
 
-+------------+----------------------------+
-| Short name | Variables/VariableUsedOnce |
-+------------+----------------------------+
-| Themes     | :ref:`Analyze`             |
-+------------+----------------------------+
++------------+---------------------------------------------------------------------------------------+
+| Short name | Variables/VariableUsedOnce                                                            |
++------------+---------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                        |
++------------+---------------------------------------------------------------------------------------+
+| Examples   | :ref:`shopware-variables-variableusedonce`, :ref:`vanilla-variables-variableusedonce` |
++------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -20633,6 +20963,10 @@ Useless Parenthesis
 
 Situations where parenthesis are not necessary, and may be removed.
 
+Parenthesis group several elements together, and allows for a more readable expression. They are used with logical and mathematical expressions. They are necessary when the precedence of the operators are not the intended execution order : for example, when an addition must be performed before the multiplication.
+
+Sometimes, the parenthesis provide the same execution order than the default order : they are deemed useless. 
+
 .. code-block:: php
 
    <?php
@@ -20656,11 +20990,16 @@ Situations where parenthesis are not necessary, and may be removed.
        function foo($c = ( 1 + 2) ) {}
    ?>
 
-+------------+-------------------------------+
-| Short name | Structures/UselessParenthesis |
-+------------+-------------------------------+
-| Themes     | :ref:`Analyze`                |
-+------------+-------------------------------+
+
+See also `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
++------------+--------------------------------------------------+
+| Short name | Structures/UselessParenthesis                    |
++------------+--------------------------------------------------+
+| Themes     | :ref:`Analyze`                                   |
++------------+--------------------------------------------------+
+| Examples   | :ref:`woocommerce-structures-uselessparenthesis` |
++------------+--------------------------------------------------+
 
 
 
@@ -20847,9 +21186,9 @@ Using $this Outside A Class
 ###########################
 
 
-`$this` is a special variable, that should only be used in a class context. 
+``$this`` is a special variable, that should only be used in a class context. 
 
-Until PHP 7.1, `$this` may be used as an argument in a function (or a method), a global, a static : while this is legit, it sounds confusing enough to avoid it.
+Until PHP 7.1, ``$this`` may be used as an argument in a function or a method, a global, a static : while this is legit, it sounds confusing enough to avoid it.
 
 .. code-block:: php
 
@@ -20858,10 +21197,19 @@ Until PHP 7.1, `$this` may be used as an argument in a function (or a method), a
    function foo($this) {
        echo $this;
    }
+   
+   // A closure can be bound to an object at later time. It is valid usage.
+   $closure = function ($x) {
+       echo $this->foo($x);
+   }
+   
    ?>
 
 
-Starting with PHP 7.1, the PHP engine check thouroughly that $this is used in an appropriate manner, and raise fatal errors in case it isn't.
+Starting with PHP 7.1, the PHP engine check thouroughly that ``$this`` is used in an appropriate manner, and raise fatal errors in case it isn't. 
+
+See also `Closure::bind <http://php.net/manual/en/closure.bind.php>`_ and 
+         `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
 
 +------------+-------------------------------------------+
 | Short name | Classes/UsingThisOutsideAClass            |
@@ -20877,13 +21225,11 @@ Using Short Tags
 ################
 
 
-The code makes use of short tags.
+The code makes use of short tags. Short tags are the following : ``<?`` . A full scripts looks like that : ``<? /* php code */ ?>`` .
 
-<? /* php code */ ?>. 
+It is recommended to not use short tags, and use standard PHP tags. This makes PHP code compatible with XML standards. Short tags used to be popular, but have lost it.
 
-It is recommended to not use short tags, and use standard PHP tags : .. code-block:: php
-
-   <?php ?>
+See also `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_.
 
 +------------+-------------------------------------------------------------------------------------------+
 | Short name | Structures/ShortTags                                                                      |
@@ -21485,6 +21831,34 @@ The expected parameter is not of the correct type. Check PHP documentation to kn
 
 
 
+.. _wrong-range-check:
+
+Wrong Range Check
+#################
+
+
+The interval check should use && and not ||. 
+
+.. code-block:: php
+
+   <?php
+   
+   //interval correctly checked a is between 2 and 999
+   if ($a > 1 && $a < 1000) {}
+   
+   //interval incorrectly checked : a is 2 or more ($a < 1000 is never checked)
+   if ($a > 1 || $a < 1000) {}
+   
+   ?>
+
++------------+-----------------------+
+| Short name | Structures/WrongRange |
++------------+-----------------------+
+| Themes     | :ref:`Analyze`        |
++------------+-----------------------+
+
+
+
 .. _wrong-fopen()-mode:
 
 Wrong fopen() Mode
@@ -21995,7 +22369,7 @@ eval() Without Try
 ##################
 
 
-`'eval() <http://www.php.net/eval>`_ emits a `'ParseError <http://php.net/manual/fr/class.parseerror.php>`_ exception with PHP 7 and later. Catching this exception is the recommended way to handle errors when using the `'eval() <http://www.php.net/eval>`_ function.
+``eval()`` emits a ``ParseError`` exception with PHP 7 and later. Catching this exception is the recommended way to handle errors when using the ``eval()`` function.
 
 .. code-block:: php
 
@@ -22017,7 +22391,7 @@ eval() Without Try
    ?>
 
 
-Note that it will catch situations where `'eval() <http://www.php.net/eval>`_ is provided with code that can't be used, but it will not catch security problems. Avoid using `'eval() <http://www.php.net/eval>`_ with incoming data.
+Note that it will catch situations where ``eval()`` is provided with code that can't be used, but it will not catch security problems. Avoid using ``eval()`` with incoming data.
 
 +------------+---------------------------------+
 | Short name | Structures/EvalWithoutTry       |

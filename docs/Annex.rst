@@ -112,18 +112,18 @@ PHP extensions are used to check for defined structures (classes, interfaces, et
 
 PHP extensions should be provided with the list of structures they define (functions, class, constants, traits, variables, interfaces, namespaces), and directives. 
 
-* ext/amqp
+* `ext/amqp <https://github.com/pdezwart/php-amqp>`_
 * `ext/apache <http://php.net/manual/en/book.apache.php>`_
 * `ext/apc <http://php.net/apc>`_
 * `ext/apcu <http://www.php.net/manual/en/book.apcu.php>`_
 * `ext/array <http://php.net/manual/en/book.array.php>`_
-* ext/php-ast
+* `ext/php-ast <https://pecl.php.net/package/ast>`_
 * `ext/bcmath <http://www.php.net/bcmath>`_
 * `ext/bzip2 <http://nl1.php.net/manual/en/ref.bzip2.php>`_
-* `ext/cairo <http://php.net/cairo>`_
+* `ext/cairo <https://cairographics.org/>`_
 * `ext/calendar <http://www.php.net/manual/en/ref.calendar.php>`_
 * `ext/com <http://php.net/manual/en/book.com.php>`_
-* ext/crypto
+* `ext/crypto <https://pecl.php.net/package/crypto>`_
 * `ext/ctype <http://php.net/manual/en/ref.ctype.php>`_
 * `ext/curl <http://php.net/manual/en/book.curl.php>`_
 * `ext/cyrus <http://php.net/manual/en/book.cyrus.php>`_
@@ -153,17 +153,17 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/gearman <http://php.net/manual/en/book.gearman.php>`_
 * `ext/gender <http://php.net/manual/en/book.gender.php>`_
 * `ext/geoip <http://php.net/manual/en/book.geoip.php>`_
-* `ext/gettext <http://php.net/manual/en/book.gettext.php>`_
+* `ext/gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
 * `ext/gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
 * `ext/gmp <http://php.net/manual/en/book.gmp.php>`_
 * `ext/gnupgp <http://www.php.net/manual/en/book.gnupg.php>`_
 * `ext/grpc <http://www.grpc.io/>`_
 * `ext/hash <http://www.php.net/manual/en/book.hash.php>`_
 * `ext/hrtime <http://php.net/manual/en/intro.hrtime.php>`_
-* ext/pecl_http
+* `ext/pecl_http <https://github.com/m6w6/ext-http>`_
 * `ext/ibase <http://php.net/manual/en/book.ibase.php>`_
 * `ext/iconv <http://php.net/iconv>`_
-* ext/igbinary
+* `ext/igbinary <https://github.com/igbinary/igbinary/>`_
 * `ext/iis <http://www.php.net/manual/en/book.iisfunc.php>`_
 * `ext/imagick <http://php.net/manual/en/book.imagick.php>`_
 * `ext/imap <http://www.php.net/imap>`_
@@ -175,9 +175,9 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/kdm5 <http://php.net/manual/en/book.kadm5.php>`_
 * `ext/lapack <http://php.net/manual/en/book.lapack.php>`_
 * `ext/ldap <http://php.net/manual/en/book.ldap.php>`_
-* ext/leveldb
+* `ext/leveldb <https://github.com/reeze/php-leveldb>`_
 * `ext/libevent <http://www.libevent.org/>`_
-* ext/libsodium
+* `ext/libsodium <https://github.com/jedisct1/libsodium-php>`_
 * `ext/libxml <http://www.php.net/manual/en/book.libxml.php>`_
 * `ext/lua <http://php.net/manual/en/book.lua.php>`_
 * `ext/mail <http://www.php.net/manual/en/book.mail.php>`_
@@ -190,7 +190,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/mhash <http://mhash.sourceforge.net/>`_
 * `ext/ming <http://www.libming.org/>`_
 * `ext/mongo <http://php.net/manual/en/book.mongo.php>`_
-* `ext/mongodb <http://php.net/manual/en/set.mongodb.php>`_
+* `ext/mongodb <https://github.com/mongodb/mongo-c-driver>`_
 * `ext/mssql <http://www.php.net/manual/en/book.mssql.php>`_
 * `ext/mysql <http://www.php.net/manual/en/book.mysql.php>`_
 * `ext/mysqli <http://php.net/manual/en/book.mysqli.php>`_
@@ -201,7 +201,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/oci8 <http://php.net/manual/en/book.oci8.php>`_
 * `ext/odbc <http://www.php.net/manual/en/book.uodbc.php>`_
 * `ext/opcache <http://www.php.net/manual/en/book.opcache.php>`_
-* ext/opencensus
+* `ext/opencensus <https://github.com/census-instrumentation/opencensus-php>`_
 * `ext/openssl <http://php.net/manual/en/book.openssl.php>`_
 * `ext/parle <http://php.net/manual/en/book.parle.php>`_
 * `ext/parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
@@ -209,16 +209,16 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/pcre <http://php.net/manual/en/book.pcre.php>`_
 * `ext/pdo <http://php.net/manual/en/book.pdo.php>`_
 * `ext/pgsql <http://php.net/manual/en/book.pgsql.php>`_
-* ext/phalcon
+* `ext/phalcon <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `ext/phar <http://www.php.net/manual/en/book.phar.php>`_
-* ext/posix
+* `ext/posix <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
 * `ext/proctitle <http://php.net/manual/en/book.proctitle.php>`_
 * `ext/pspell <http://php.net/manual/en/book.pspell.php>`_
 * `ext/rar <http://php.net/manual/en/book.rar.php>`_
-* ext/rdkafka
+* `ext/rdkafka <https://github.com/arnaud-lb/php-rdkafka>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
 * `ext/recode <http://www.php.net/manual/en/book.recode.php>`_
-* ext/redis
+* `ext/redis <https://github.com/phpredis/phpredis/>`_
 * `ext/reflection <http://php.net/manual/en/book.reflection.php>`_
 * `ext/runkit <http://php.net/manual/en/book.runkit.php>`_
 * `ext/sem <http://php.net/manual/en/book.sem.php>`_
@@ -235,24 +235,24 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/sqlsrv <http://php.net/sqlsrv>`_
 * `ext/ssh2 <http://php.net/manual/en/book.ssh2.php>`_
 * `ext/standard <http://php.net/manual/en/ref.info.php>`_
-* `ext/stats <http://people.sc.fsu.edu/~jburkardt/f77_src/ranlib/ranlib.html>`_
+* `ext/stats <https://people.sc.fsu.edu/~jburkardt/c_src/cdflib/cdflib.html>`_
 * `String <http://php.net/manual/en/ref.strings.php>`_
-* ext/suhosin
-* ext/swoole
+* `ext/suhosin <https://suhosin.org/>`_
+* `ext/swoole <https://github.com/swoole/swoole-src>`_
 * `ext/tidy <http://php.net/manual/en/book.tidy.php>`_
 * `ext/tokenizer <http://www.php.net/tokenizer>`_
 * `ext/tokyotyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
-* `ext/trader <http://www.ta-lib.org/>`_
-* ext/uopz
-* `ext/v8js <http://php.net/manual/en/book.v8js.php>`_
+* `ext/trader <https://pecl.php.net/package/trader>`_
+* `ext/uopz <https://pecl.php.net/package/uopz>`_
+* `ext/v8js <https://bugs.chromium.org/p/v8/issues/list>`_
 * `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
-* ext/vips
+* `ext/vips <https://github.com/jcupitt/php-vips-ext>`_
 * `ext/wddx <http://php.net/manual/en/intro.wddx.php>`_
-* ext/wikidiff2
+* `ext/wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `ext/wincache <http://www.php.net/wincache>`_
 * `ext/xattr <http://php.net/manual/en/book.xattr.php>`_
-* ext/xcache
-* ext/xdebug
+* `ext/xcache <https://xcache.lighttpd.net/>`_
+* `ext/xdebug <https://xdebug.org/>`_
 * `ext/xdiff <http://php.net/manual/en/book.xdiff.php>`_
 * `ext/xhprof <http://web.archive.org/web/20110514095512/http://mirror.facebook.net/facebook/xhprof/doc.html>`_
 * `ext/xml <http://www.php.net/manual/en/book.xml.php>`_
@@ -260,13 +260,14 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/xmlrpc <http://www.php.net/manual/en/book.xmlrpc.php>`_
 * `ext/xmlwriter <http://php.net/manual/en/book.xmlwriter.php>`_
 * `ext/xsl <http://php.net/manual/en/intro.xsl.php>`_
-* ext/xxtea
+* `ext/xxtea <https://pecl.php.net/package/xxtea>`_
 * `ext/yaml <http://www.yaml.org/>`_
 * `ext/yis <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
-* ext/zbarcode
+* `ext/zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `ext/zip <http://php.net/manual/en/book.zip.php>`_
 * `ext/zlib <http://php.net/manual/en/book.zlib.php>`_
 * `ext/0mq <http://zeromq.org/>`_
+* Extensions/Extzookeeper
 
 Supported Frameworks
 --------------------
@@ -289,26 +290,33 @@ A number of applications were scanned in order to find real life examples of pat
 
 * `Thelia <https://thelia.net/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
+* `shopware <https://www.shopware.com/>`_
+* `Vanilla <https://open.vanillaforums.com/>`_
+* `Piwigo <https://www.piwigo.org/>`_
+* `Tine20 <https://www.tine20.com/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `OpenConf <https://www.openconf.com/>`_
-* Tine20
+* `Dolphin <https://www.boonex.com/>`_
+* `Woocommerce <https://woocommerce.com/>`_
+* `Contao <https://contao.org/en/>`_
+* `ChurchCRM <http://churchcrm.io/>`_
 * `Zurmo <http://zurmo.org/>`_
-* `shopware <https://www.shopware.com/>`_
-* ZenCart
+* `Zencart <https://www.zen-cart.com/>`_
 * `WordPress <https://www.wordpress.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `Mautic <https://www.mautic.org/>`_
+* `NextCloud <https://nextcloud.com/>`_
+* `SugarCrm <https://www.sugarcrm.com/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
-* `ChurchCRM <http://churchcrm.io/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
+* `HuMo-Gen <http://humogen.com/>`_
+* `PhpIPAM <https://phpipam.net/download/>`_
+* `xataface <http://xataface.com/>`_
 * `Phinx <https://phinx.org/>`_
-* `Contao <https://contao.org/en/>`_
 * `Edusoho <https://www.edusoho.com/en>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
-* `Vanilla <https://open.vanillaforums.com/>`_
-* Typo3
+* `Typo3 <https://typo3.org/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
-* `Woocommerce <https://woocommerce.com/>`_
 * `SPIP <https://www.spip.net/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `PrestaShop <https://prestashop.com/>`_
@@ -318,6 +326,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
 * `TeamPass <https://teampass.net/>`_
 * `XOOPS <https://xoops.org/>`_
+* `Swoole <https://www.swoole.com/>`_
 
 
 Recognized Libraries
@@ -370,6 +379,22 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.2.6
+
+  * Callback Needs Return (Functions/CallbackNeedsReturn)
+  * Could Use array_unique (Structures/CouldUseArrayUnique ; Suggestions)
+  * Missing Parenthesis (Structures/MissingParenthesis ; Analyze, Codacy, Simple, Level 5)
+  * One If Is Sufficient (Structures/OneIfIsSufficient ; Suggestions)
+
+* 1.2.5
+
+  * Extensions/Extzookeeper (Extensions/Extzookeeper)
+  * Wrong Range Check (Structures/WrongRange ; Analyze)
+
+* 1.2.4
+
+  * Processing Collector (Performances/RegexOnCollector)
+
 * 1.2.3
 
   * Don't Unset Properties (Classes/DontUnsetProperties)
@@ -384,7 +409,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Check Regex (Melis/CheckRegex ; Melis)
   * Melis/RouteConstraints (Melis/RouteConstraints ; Melis)
-  * Possible Increment (Structures/PossibleIncrement ; Unassigned)
+  * Possible Increment (Structures/PossibleIncrement ; Suggestions)
   * Properties Declaration Consistence (Classes/PPPDeclarationStyle)
 
 * 1.2.0
@@ -393,17 +418,16 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.1.10
 
-  * nativeCallCounts (Php/TooManyNativeCalls)
+  * Too Many Native Calls (Php/TooManyNativeCalls)
 
 * 1.1.9
 
   * Should Preprocess Chr (Php/ShouldPreprocess ; Suggestions)
-  * parametersCount (Functions/TooManyParameters)
+  * Too Many Parameters (Functions/TooManyParameters)
 
 * 1.1.8
 
   * Mass Creation Of Arrays (Arrays/MassCreation)
-  * Structures/ConstantPreferences (Structures/ConstantPreferences ; Under Work)
   * ext/db2 (Extensions/Extdb2 ; Appinfo)
 
 * 1.1.7
@@ -602,9 +626,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Could Be Protected Class Constant (Classes/CouldBeProtectedConstant ; Analyze)
   * Could Be Protected Method (Classes/CouldBeProtectedMethod ; Analyze)
+  * Method Could Be Private Method (Classes/CouldBePrivateMethod)
   * Method Used Below (Classes/MethodUsedBelow ; Analyze)
   * Pathinfo() Returns May Vary (Php/PathinfoReturns ; Analyze, Level 4)
-  * Property Could Be Private Method (Classes/CouldBePrivateMethod)
 
 * 0.12.10
 
@@ -1248,7 +1272,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Constant Definition (Classes/ConstantDefinition ; Appinfo)
   * Constant Scalar Expression (Php/ConstantScalarExpression ; )
   * Constant Scalar Expressions (Structures/ConstantScalarExpression ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
-  * Constants (Constants/Constantnames ; Analyze)
+  * Constants (Constants/Constantnames ; Inventory)
   * Constants Created Outside Its Namespace (Constants/CreatedOutsideItsNamespace ; Analyze, Codacy)
   * Constants Usage (Constants/ConstantUsage ; Appinfo)
   * Constants With Strange Names (Constants/ConstantStrangeNames ; Analyze, Codacy, Simple)
@@ -1371,7 +1395,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Implied If (Structures/ImpliedIf ; Analyze, ClearPHP, Codacy, Simple)
   * Inclusions (Structures/IncludeUsage ; Appinfo)
   * Incompilable Files (Php/Incompilable ; Analyze, Appinfo, ClearPHP, Simple)
-  * Inconsistent Concatenation (Structures/InconsistentConcatenation ; )
+  * Inconsistent Concatenation (Structures/InconsistentConcatenation ; Internal)
   * Indices Are Int Or String (Structures/IndicesAreIntOrString ; Analyze, OneFile, Codacy, Simple)
   * Indirect Injection (Security/IndirectInjection ; Security)
   * Instantiating Abstract Class (Classes/InstantiatingAbstractClass ; Analyze, Codacy, Simple)
@@ -1479,7 +1503,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Nonce Creation (Wordpress/NonceCreation ; Wordpress)
   * Normal Methods (Classes/NormalMethods ; Appcontent)
   * Normal Property (Classes/NormalProperty ; Appcontent)
-  * Not Definitions Only (Files/NotDefinitionsOnly ; Analyze, Codacy)
+  * Not Definitions Only (Files/NotDefinitionsOnly ; Appinfo)
   * Not Not (Structures/NotNot ; Analyze, OneFile, Codacy, Simple)
   * Not Same Name As File (Classes/NotSameNameAsFile ; )
   * Not Same Name As File (Classes/SameNameAsFile ; Internal)
@@ -1963,6 +1987,7 @@ List of external links mentionned in this documentation.
 * `array_fill_keys <http://php.net/array_fill_keys>`_
 * `array_filter <https://php.net/array_filter>`_
 * `array_search <http://php.net/array_search>`_
+* `array_unique <http://php.net/array_unique>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
@@ -1986,9 +2011,11 @@ List of external links mentionned in this documentation.
 * `Category:Private Functions <https://codex.wordpress.org/Category:Private_Functions>`_
 * `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
 * `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_
+* `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_
 * `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `Classes abstraction <http://php.net/abstract>`_
+* `Closure::bind <http://php.net/manual/en/closure.bind.php>`_
 * `Codeigniter <https://codeigniter.com/>`_
 * `COM and .Net (Windows) <http://php.net/manual/en/book.com.php>`_
 * `command line usage <https://exakat.readthedocs.io/en/latest/Commands.html>`_
@@ -2023,6 +2050,7 @@ List of external links mentionned in this documentation.
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
 * `Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
+* `dist.exakat.io <http://dist.exakat.io/>`_
 * `dl <http://www.php.net/dl>`_
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
@@ -2037,6 +2065,7 @@ List of external links mentionned in this documentation.
 * `empty() <http://www.php.net/manual/en/function.empty.php>`_
 * `Enchant spelling library <http://php.net/manual/en/book.enchant.php>`_
 * `Ereg <http://php.net/manual/en/function.ereg.php>`_
+* `Error Control Operators <http://php.net/manual/en/language.operators.errorcontrol.php>`_
 * `Escape sequences <http://php.net/manual/en/regexp.reference.escape.php>`_
 * `Ev <http://php.net/manual/en/book.ev.php>`_
 * `Event <http://php.net/event>`_
@@ -2074,17 +2103,22 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
+* `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
+* `Generator Syntax <http://php.net/manual/en/language.generators.syntax.php>`_
 * `GeoIP <http://php.net/manual/en/book.geoip.php>`_
+* `get_class <http://php.net/get_class>`_
 * `Gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
 * `git <https://git-scm.com/>`_
 * `Github <https://github.com/exakat/exakat>`_
@@ -2115,6 +2149,7 @@ List of external links mentionned in this documentation.
 * `Imagick for PHP <http://php.net/manual/en/book.imagick.php>`_
 * `IMAP <http://www.php.net/imap>`_
 * `in_array() <http://php.net/in_array>`_
+* `include <http://php.net/manual/en/function.include.php>`_
 * `Integer Syntax <http://php.net/manual/en/language.types.integer.php#language.types.integer.syntax>`_
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
@@ -2146,6 +2181,7 @@ List of external links mentionned in this documentation.
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
@@ -2177,6 +2213,7 @@ List of external links mentionned in this documentation.
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
+* `opencensus <https://github.com/census-instrumentation/opencensus-php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
@@ -2200,6 +2237,8 @@ List of external links mentionned in this documentation.
 * `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
+* `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_
+* `PHP Constants <http://php.net/manual/en/language.constants.php>`_
 * `PHP Data Object <http://php.net/manual/en/book.pdo.php>`_
 * `PHP extension for libsodium <https://github.com/jedisct1/libsodium-php>`_
 * `PHP gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
@@ -2211,6 +2250,7 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
@@ -2252,6 +2292,7 @@ List of external links mentionned in this documentation.
 * `Sessions <http://php.net/manual/en/book.session.php>`_
 * `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_
 * `setcookie <http://www.php.net/setcookie>`_
+* `shell_exec <http://www.php.net/shell_exec>`_
 * `Simplexml <http://php.net/manual/en/book.simplexml.php>`_
 * `Single Function Exit Point <http://wiki.c2.com/?SingleFunctionExitPoint>`_
 * `Slim <https://www.slimframework.com/>`_
@@ -2292,6 +2333,7 @@ List of external links mentionned in this documentation.
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type operators <http://php.net/instanceof>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_

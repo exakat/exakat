@@ -99,16 +99,8 @@ class Update extends Tasks {
                 display("Source copied again");
                 break;
 
-            // Git case
-            case file_exists($path.'/code/.git') :
-                display('Git pull for '.$project);
-                $vcs = new Git($project, $this->config->projects_root);
-                $new = $vcs->update();
-                display("Updated git version $new");
-                break;
-
             // svn case
-            case file_exists($path.'/code/.svn') :
+            case $this->config->project_vcs === 'svn' :
                 display('SVN update '.$project);
                 $vcs = new Svn($project, $this->config->projects_root);
                 $new = $vcs->update();
@@ -116,7 +108,7 @@ class Update extends Tasks {
                 break;
 
             // bazaar case
-            case file_exists($path.'/code/.bzr') :
+            case $this->config->project_vcs === 'bzr' :
                 display('Bazaar update '.$project);
                 $vcs = new Bazaar($project, $this->config->projects_root);
                 $new = $vcs->update();
@@ -124,7 +116,7 @@ class Update extends Tasks {
                 break;
 
             // mercurial
-            case file_exists($path.'/code/.hg') :
+            case $this->config->project_vcs === 'hg' :
                 display('Mercurial update '.$project);
                 $vcs = new Mercurial($project, $this->config->projects_root);
                 $new = $vcs->update();
@@ -139,8 +131,16 @@ class Update extends Tasks {
                 display("Composer updated to version $new");
                 break;
 
+            // Git case
+            case $this->config->project_vcs === 'git' :
+                display('Git pull for '.$project);
+                $vcs = new Git($project, $this->config->projects_root);
+                $new = $vcs->update();
+                display("Updated git version $new");
+                break;
+
             default :
-                display('No VCS found to update. git, mercurial, svn and bazaar are supported.');
+                display('No VCS found to update. check project/config.ini and try again.');
                 return;
         }
         

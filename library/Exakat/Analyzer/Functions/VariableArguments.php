@@ -31,8 +31,8 @@ class VariableArguments extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
-             ->functioncallIs(array('\\func_get_arg', 
-                                    '\\func_get_args', 
+             ->functioncallIs(array('\\func_get_arg',
+                                    '\\func_get_args',
                                     '\\func_num_args',
                                     ))
              ->back('first');

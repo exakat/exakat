@@ -28,7 +28,7 @@ use Exakat\Config;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NeedsAnalyzerThema;
 use Exakat\Reports\Reports;
-use Exakat\Tokenizer\Token;
+use Exakat\GraphElements;
 
 class Results extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -70,7 +70,7 @@ class Results extends Tasks {
 
             $return[] = $vertices[0];
         } elseif ($this->config->style == 'ALL') {
-            $linksDown = Token::linksAsList();
+            $linksDown = GraphElements::linksAsList();
 
             $analyzersClassList = makeList($analyzersClass);
             $query = <<<GREMLIN
@@ -96,9 +96,6 @@ GREMLIN;
             $vertices = $this->gremlin->query($query);
             if (isset($vertices->results)) {
                 $vertices = $vertices->results;
-            } else {
-                // $vertices is an array
-                $vertices = $vertices;
             }
 
             $return = array();

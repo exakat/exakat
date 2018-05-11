@@ -59,5 +59,3 @@ Label : PROJECT
                 22
               Label : VALUE
                 23
-            Label : ARGUMENT
-              24

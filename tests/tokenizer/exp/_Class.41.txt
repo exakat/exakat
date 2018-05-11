@@ -14,23 +14,23 @@ Label : PROJECT
           Label : PPP
             7
             Label : PPP
-              10
-            Label : PPP
-              8
-            Label : PPP
               13
               Label : LEFT
                 12
               Label : RIGHT
                 15
+            Label : PPP
+              8
+            Label : PPP
+              10
             Label : VAR
               7
           Label : PPP
             7
             Label : PPP
-              18
-            Label : PPP
               16
+            Label : PPP
+              18
             Label : PPP
               20
             Label : PPP

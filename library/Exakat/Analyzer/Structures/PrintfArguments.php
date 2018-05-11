@@ -29,14 +29,56 @@ class PrintfArguments extends Analyzer {
         //The %2$s contains %1$04d monkeys
         //The %02s contains %-'.3d monkeys
     
+        // printf(' a %s %s', $a1, ...$a2);
+        $this->atomFunctionIs(array('\\printf', '\\sprintf'))
+             ->savePropertyAs('count', 'c')
+             ->raw('where( __.out("ARGUMENT").has("variadic", true))')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
+             ->hasNoOut('CONCAT')
+             // Count the number of ...variadic
+             //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
+             ->filter(<<<GREMLIN
+d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
+c - 1 > d.size();
+GREMLIN
+)
+             ->back('first');
+        $this->prepareQuery();
+
         // printf(' a %s ', $a1, $a2);
         $this->atomFunctionIs(array('\\printf', '\\sprintf'))
              ->savePropertyAs('count', 'c')
+             ->raw('not(where( __.out("ARGUMENT").has("variadic", true)))')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
+             ->hasNoOut('CONCAT')
+             // Count the number of ...variadic
+             //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
+             ->filter(<<<GREMLIN
+d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
+c - 1 != d.size();
+GREMLIN
+)
+             ->back('first');
+        $this->prepareQuery();
+
+        // vsprintf(' a %s ',array( $a1, $a2));
+        $this->atomFunctionIs('\\vsprintf')
+             ->outWithRank('ARGUMENT', 1)
+             ->atomIs('Arrayliteral')
+             ->savePropertyAs('count', 'c')
+             ->inIs('ARGUMENT')
+
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
              //(?:[ 0]|\'.{1})?-?\\\d*%(?:\\\.\\\d+)?
-             ->filter('d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); c - 1 != d.size();')
+             ->filter(<<<GREMLIN
+d = it.get().value("fullcode").toString().findAll("(?<!%)%(?:\\\d+\\\\\\$)?[+-]?(?:[ 0\']\\\.\\\d+)?(?:\\\d\\\d)?[bcdeEufFgGosxX]"); 
+c != d.size();
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
     }

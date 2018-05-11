@@ -31,15 +31,15 @@ class EllipsisUsage extends Analyzer {
     public function analyze() {
         // function foo(...$x) {}
         // foo(...$y);
-        $this->atomIs(array('Variable', 
-                            'Member', 
-                            'Array', 
-                            'Staticproperty', 
-                            'Staticconstant', 
-                            'Methodcall', 
-                            'Staticmethodcall', 
-                            'Functioncall', 
-                            'Identifier', 
+        $this->atomIs(array('Variable',
+                            'Member',
+                            'Array',
+                            'Staticproperty',
+                            'Staticconstant',
+                            'Methodcall',
+                            'Staticmethodcall',
+                            'Functioncall',
+                            'Identifier',
                             'Nsname',
                             'Parameter',
                             ))

@@ -51,6 +51,7 @@ class Boolval extends Plugin {
                 break;
 
             case 'String' :
+            case 'Heredoc' :
                 $atom->boolean = (int) (trimOnce($atom->code) !== '');
                 break;
 
@@ -81,6 +82,10 @@ class Boolval extends Plugin {
                 }
                 break;
 
+            case 'Power' :
+                $atom->noDelimiter = (int) (bool) ($extras['LEFT']->boolean ** (bool) $extras['RIGHT']->boolean);
+                break;
+
             case 'Arrayliteral' :
                 $atom->boolean    = (int) (bool) $atom->count;
                 break;
@@ -105,7 +110,7 @@ class Boolval extends Plugin {
                 } elseif ($atom->code === '||' || mb_strtolower($atom->code) === 'or') {
                     $atom->boolean = $extras['LEFT']->boolean && $extras['RIGHT']->boolean;
                 } elseif (mb_strtolower($atom->code) === 'xor') {
-                    $atom->boolean = $extras['LEFT']->boolean xor $extras['RIGHT']->boolean;
+                    $atom->boolean = ($extras['LEFT']->boolean xor $extras['RIGHT']->boolean);
                 } elseif ($atom->code === '<=>') {
                     $atom->boolean = $extras['LEFT']->boolean <=> $extras['RIGHT']->boolean;
                 }

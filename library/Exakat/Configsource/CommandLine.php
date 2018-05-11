@@ -74,6 +74,10 @@ class CommandLine extends Config {
                                     '-branch'       => 'branch',
                                     '-tag'          => 'tag',
                                     '-remote'       => 'remote',
+
+                                    // This one is finally an array
+                                    '-c'            => 'configuration',
+
 //                                '-loader'       => 'Neo4jImport',
                                  );
 
@@ -110,8 +114,9 @@ class CommandLine extends Config {
                               'test'          => 1,
                               'update'        => 1,
                               'upgrade'       => 1,
-                              'codacy'        => 1,
                               'fetch'         => 1,
+                              'proxy'         => 1,
+                              'config'        => 1,
                               );
 
     public function __construct() {
@@ -139,7 +144,6 @@ class CommandLine extends Config {
             }
         }
 
-
         foreach($this->valueOptions as $key => $config) {
             while( ($id = array_search($key, $args)) !== false ) {
                 if (isset($args[$id + 1])) {
@@ -147,9 +151,12 @@ class CommandLine extends Config {
                         // in case this option value is actually the next option (exakat -p -T)
                         // We just ignore it
                         unset($args[$id]);
-                    } else {
-                        // Normal case is here
-                        if ($config === 'program') {
+                        continue;
+                    } 
+                    
+                    // Normal case is here
+                    switch ($config) {
+                        case 'program' :
                             if (!isset($this->config['program'])) {
                                 $this->config['program'] = $args[$id + 1];
                             } elseif (is_string($this->config['program'])) {
@@ -159,23 +166,44 @@ class CommandLine extends Config {
                             } else {
                                 $this->config['program'][] = $args[$id + 1];
                             }
-                        } else {
-                            $this->config[$config] = $args[$id + 1];
-                        }
+                            break;
 
-                        unset($args[$id]);
-                        unset($args[$id + 1]);
+                        case 'configuration' :
+                            if (empty($this->config['configuration'])) {
+                                $this->config['configuration'] = array();
+                            } 
+                            if (strpos($args[$id + 1], '=') !== false) {
+                                list($name, $value) = explode('=', trim($args[$id + 1]));
+                            } else {
+                                $name = trim($args[$id + 1]);
+                                $value = '';
+                            }
+                            if (in_array($name, array('ignore_dirs', 'include_dirs', 'file_extensions'))) {
+                                if (!isset($this->config['configuration'][$name])) {
+                                    $this->config['configuration'][$name] = array();
+                                }
+                                $this->config['configuration'][$name][] = $value;
+                            } else {
+                                $this->config['configuration'][$name] = $value;
+                            }
+                            break;
+
+                        default : 
+                             $this->config[$config] = $args[$id + 1];
                     }
+
+                    unset($args[$id]);
+                    unset($args[$id + 1]);
                 }
             }
         }
         
-        if (isset($args[1], $this->commands[$args[1]])) {
-            $this->config['command'] = $args[1];
-            unset($args[1]);
+        $command = array_shift($args);
+        if (isset($command, $this->commands[$command])) {
+            $this->config['command'] = $command;
         }
 
-        if (!empty($args) != 0) {
+        if (!empty($args)) {
             $c = count($args);
             if (isset($this->config['verbose'])) {
                 display( 'Found '.$c.' argument'.($c > 1 ? 's' : '').' that '.($c > 1 ? 'are' : 'is')." not understood.\n\n\"".implode('", "', $args)."\"\n\nIgnoring ".($c > 1 ? 'them all' : 'it'.".\n"));

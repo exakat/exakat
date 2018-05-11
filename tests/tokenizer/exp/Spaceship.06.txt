@@ -77,8 +77,12 @@ Label : PROJECT
             24
             Label : ARGUMENT
               25
+              Label : NAME
+                25
             Label : ARGUMENT
               26
+              Label : NAME
+                26
             Label : BLOCK
               15
               Label : EXPRESSION

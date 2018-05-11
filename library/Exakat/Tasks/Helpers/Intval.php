@@ -59,6 +59,7 @@ class Intval extends Plugin {
 
             case 'Real' :
             case 'String' :
+            case 'Heredoc' :
                 $atom->intval   = (int) trimOnce($atom->code);
                 break;
     
@@ -94,6 +95,10 @@ class Intval extends Plugin {
                 }
                 break;
 
+            case 'Power' :
+                    $atom->intval = $extras['LEFT']->intval ** $extras['RIGHT']->intval;
+                break;
+
             case 'Arrayliteral' :
                 $atom->intval    = (int) (bool) $atom->count;
                 break;
@@ -118,7 +123,7 @@ class Intval extends Plugin {
                 } elseif ($atom->code === '||' || mb_strtolower($atom->code) === 'or') {
                     $atom->intval = $extras['LEFT']->intval && $extras['RIGHT']->intval;
                 } elseif (mb_strtolower($atom->code) === 'xor') {
-                    $atom->intval = $extras['LEFT']->intval xor $extras['RIGHT']->intval;
+                    $atom->intval = ($extras['LEFT']->intval xor $extras['RIGHT']->intval);
                 } elseif ($atom->code === '<=>') {
                     $atom->intval = $extras['LEFT']->intval <=> $extras['RIGHT']->intval;
                 }

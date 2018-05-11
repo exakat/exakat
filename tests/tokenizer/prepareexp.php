@@ -59,8 +59,8 @@ function run($test, $number) {
     $ini = parse_ini_file('../../projects/test/config.ini');
     $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
 
-    include_once('../../library/Exakat/Phpexec.php');
-    include_once('../../library/Exakat/Config.php');
+    include_once '../../library/Exakat/Phpexec.php';
+    include_once '../../library/Exakat/Config.php';
 
     $pwd = getcwd();
     chdir('../../');
@@ -69,7 +69,7 @@ function run($test, $number) {
 
     $versionPHP = 'php'.str_replace('.', '', $phpversion);
 
-    $shell = $config->$versionPHP.' -l ./source/'.$test.'.'.$number.'.php';
+    $shell = "{$config->$versionPHP} -l ./source/$test.$number.php";
     $res = shell_exec($shell);
     
     if (strpos('No syntax errors detected in', $res) !== false) {
@@ -77,7 +77,7 @@ function run($test, $number) {
         return;
     }
     
-    $shell = 'cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/'.$test.'.'.$number.'.php -p test; php exakat export -text -f ./tests/tokenizer/exp/'."$test.$number".'.txt';
+    $shell = "cd ../..; php exakat cleandb; php exakat load -f ./tests/tokenizer/source/$test.$number.php -p test; php exakat export -text -f ./tests/tokenizer/exp/$test.$number.txt";
     $res = shell_exec($shell);
     
     if (preg_match("/Warning : (.*?)\n/is", $res, $r) !== 0) {
@@ -96,7 +96,7 @@ function run($test, $number) {
         return;
     }
 
-    $exp = file_get_contents('./exp/'."$test.$number".'.txt');
+    $exp = file_get_contents("./exp/$test.$number.txt");
     if (strpos($exp, 'Parse error') !== false) {
         print "This script doesn't compile.\n";
         return;

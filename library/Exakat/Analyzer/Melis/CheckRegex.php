@@ -29,7 +29,7 @@ class CheckRegex extends Analyzer {
         ////////////////////////////////////////////////////////
         // in constraints/<ALL VALUES>
         ////////////////////////////////////////////////////////
-        $this->atomIs('Keyvalue')   
+        $this->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->atomIs('String')
              ->noDelimiterIs('constraints')
@@ -50,7 +50,7 @@ class CheckRegex extends Analyzer {
         }
 
         if (!empty($errors)) {
-            $this->atomIs('Keyvalue')   
+            $this->atomIs('Keyvalue')
                  ->outIs('INDEX')
                  ->atomIs('String')
                  ->noDelimiterIs('constraints')
@@ -67,7 +67,7 @@ class CheckRegex extends Analyzer {
         ////////////////////////////////////////////////////////
         // in regex/
         ////////////////////////////////////////////////////////
-        $this->atomIs('Keyvalue')   
+        $this->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->atomIs('String')
              ->noDelimiterIs('regex')
@@ -85,7 +85,7 @@ class CheckRegex extends Analyzer {
         }
         
         if (!empty($errors)) {
-            $this->atomIs('Keyvalue')   
+            $this->atomIs('Keyvalue')
                  ->outIs('INDEX')
                  ->atomIs('String')
                  ->noDelimiterIs('regex')

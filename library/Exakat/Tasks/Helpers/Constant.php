@@ -74,7 +74,6 @@ class Constant extends Plugin {
             case 'Concatenation' :
             case 'Argument' :
             case 'Sequence' :
-            case 'Sequence' :
                 $constants = array_column($extras, 'constant');
                 $atom->constant = array_reduce($constants, function ($carry, $item) { return $carry && $item; }, true);
                 break;
@@ -116,8 +115,8 @@ class Constant extends Plugin {
                 }
                 break;
 
-        default :
-            $atom->constant = false;
+            default :
+                $atom->constant = false;
         }
     }
 }

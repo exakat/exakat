@@ -1,7 +1,7 @@
 <?php
 
 $log = file_get_contents('alltests.txt');
-$log = file_get_contents('randomtest.txt');
+//$log = file_get_contents('randomtest.txt');
 
 preg_match_all('/\d+\) Test\\\\([^:]+)::/', $log, $r);
 

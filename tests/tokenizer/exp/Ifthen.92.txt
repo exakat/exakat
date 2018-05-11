@@ -13,6 +13,8 @@ Label : PROJECT
             7
             Label : DEFAULT
               8
+            Label : NAME
+              7
           Label : BLOCK
             9
             Label : EXPRESSION

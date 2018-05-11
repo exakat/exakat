@@ -11,18 +11,26 @@ Label : PROJECT
           5
           Label : ARGUMENT
             8
+            Label : NAME
+              8
             Label : TYPEHINT
               6
           Label : ARGUMENT
             9
+            Label : NAME
+              9
             Label : TYPEHINT
               6
           Label : ARGUMENT
             10
+            Label : NAME
+              10
             Label : TYPEHINT
               6
           Label : ARGUMENT
             11
+            Label : NAME
+              11
             Label : TYPEHINT
               6
           Label : BLOCK

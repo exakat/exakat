@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Overwriting extends Analyzer {
     public function analyze() {
+        // $dir = substr($dir, 0, -1)
         $this->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')

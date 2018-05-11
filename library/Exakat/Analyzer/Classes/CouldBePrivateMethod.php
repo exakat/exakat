@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Tokenizer\Token;
 
 class CouldBePrivateMethod extends Analyzer {
     public function dependsOn() {

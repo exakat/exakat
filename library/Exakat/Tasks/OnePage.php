@@ -27,7 +27,6 @@ use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
 use Exakat\Exceptions\NoSuchFile;
-use Exakat\Tasks\NoReadableWFile;
 
 class OnePage extends Tasks {
     const CONCURENCE = self::NONE;
@@ -96,7 +95,7 @@ class OnePage extends Tasks {
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                                'audit_length' => $audit_end - $audit_start));
 
-        $task = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $task = new Report($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
         display('Project reported');
         $this->logTime('Report');

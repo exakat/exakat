@@ -15,8 +15,12 @@ Label : PROJECT
             7
             Label : ARGUMENT
               8
+              Label : NAME
+                8
             Label : ARGUMENT
               9
+              Label : NAME
+                9
             Label : BLOCK
               10
               Label : EXPRESSION

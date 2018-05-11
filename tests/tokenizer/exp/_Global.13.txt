@@ -62,28 +62,28 @@ Label : PROJECT
           Label : PPP
             22
             Label : PPP
+              27
+            Label : PPP
+              23
+            Label : PPP
               13
               Label : LEFT
                 25
               Label : RIGHT
                 21
-            Label : PPP
-              23
-            Label : PPP
-              27
             Label : PRIVATE
               22
           Label : PPP
             29
+            Label : PPP
+              34
+            Label : PPP
+              30
             Label : PPP
               13
               Label : LEFT
                 32
               Label : RIGHT
                 21
-            Label : PPP
-              30
-            Label : PPP
-              34
             Label : PROTECTED
               29

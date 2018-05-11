@@ -18,7 +18,13 @@ Label : PROJECT
           Label : PPP
             11
             Label : PPP
-              55
+              13
+              Label : LEFT
+                56
+              Label : RIGHT
+                14
+                Label : ARGUMENT
+                  53
             Label : PPP
               13
               Label : LEFT
@@ -115,15 +121,7 @@ Label : PROJECT
                     14
                     Label : ARGUMENT
                       53
-                Label : ARGUMENT
-                  53
             Label : PPP
-              13
-              Label : LEFT
-                56
-              Label : RIGHT
-                14
-                Label : ARGUMENT
-                  53
+              55
             Label : PUBLIC
               11

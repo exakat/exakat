@@ -17,8 +17,6 @@ Label : PROJECT
               8
             Label : ARGUMENT
               9
-            Label : ARGUMENT
-              6
             Label : NAME
               5
           Label : RIGHT
@@ -39,8 +37,6 @@ Label : PROJECT
               6
             Label : ARGUMENT
               9
-            Label : ARGUMENT
-              6
             Label : NAME
               5
           Label : RIGHT
@@ -81,8 +77,6 @@ Label : PROJECT
               8
             Label : ARGUMENT
               9
-            Label : ARGUMENT
-              6
             Label : ARGUMENT
               6
             Label : NAME
@@ -129,8 +123,6 @@ Label : PROJECT
               8
             Label : ARGUMENT
               9
-            Label : ARGUMENT
-              6
             Label : ARGUMENT
               6
             Label : NAME

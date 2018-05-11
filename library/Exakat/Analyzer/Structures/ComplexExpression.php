@@ -25,16 +25,18 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ComplexExpression extends Analyzer {
-    const EXPRESSION_SIZE = 25;
-    
     public function analyze() {
-        $maxSize = self::EXPRESSION_SIZE;
-        $maxLooping = self::MAX_LOOPING;
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         $complexExpression = <<<GREMLIN
-not(has('constant', true))
-.where(  __.emit().repeat( __.not(hasLabel("Closure", "Classanonymous") ).out())
-          .times($maxLooping).not(hasLabel("Closure", "Classanonymous") )
-          .count().is(gt({$maxSize})) )
+not(
+    __.has('constant', true))
+      .where(  
+        __.emit().repeat( __.not(hasLabel("Closure", "Classanonymous") ).out())
+          .times($MAX_LOOPING).not(hasLabel("Closure", "Classanonymous") )
+          .count().is(gt({$this->complexExpressionThreshold})
+   ) 
+)
 GREMLIN;
         
         // if (Condition);

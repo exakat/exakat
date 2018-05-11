@@ -26,10 +26,10 @@ use Exakat\Analyzer\Analyzer;
 
 class PossibleInfiniteLoop extends Analyzer {
     public function analyze() {
-        $readFunctions = array('\fgets', 
-                               '\fgetc', 
-                               '\fgetss', 
-                               '\fgetcsv', 
+        $readFunctions = array('\fgets',
+                               '\fgetc',
+                               '\fgetss',
+                               '\fgetcsv',
                               );
         
         //while($line = fgets($fp1) != 'a') {}

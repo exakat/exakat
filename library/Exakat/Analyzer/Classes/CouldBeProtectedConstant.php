@@ -24,10 +24,8 @@
 namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Tokenizer\Token;
 
 class CouldBeProtectedConstant extends Analyzer {
-    // 
     public function analyze() {
         // Searching for properties that are never used outside the definition class or its children
 
@@ -84,7 +82,6 @@ GREMLIN;
              ->isNotHash('fullnspath', $calls, 'constante')
              ->back('results');
         $this->prepareQuery();
-
     }
 }
 

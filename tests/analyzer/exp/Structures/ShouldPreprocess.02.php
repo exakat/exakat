@@ -10,7 +10,7 @@ $expected     = array('explode(\'.\', 1)',
                      );
 
 $expected_not = array('join($b, array(1,2,3,4,$c))',
-                      'explode('.', "q.w.e.r.t.ty.y.u.ui" . $d)',
+                      'explode(, "q.w.e.r.t.ty.y.u.ui" . $d)',
                      );
 
 ?>

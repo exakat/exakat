@@ -197,6 +197,7 @@ Glossary
       + :ref:`Should Use Local Class <should-use-local-class>`
       + :ref:`Should Use array_filter() <should-use-array\_filter()>`
       + :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
+      + :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `constant()`
@@ -247,7 +248,6 @@ Glossary
 
     + `define()`
 
-      + :ref:`Constants <constants>`
       + :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
       + :ref:`Define With Array <define-with-array>`
       + :ref:`Fully Qualified Constants <fully-qualified-constants>`
@@ -262,6 +262,7 @@ Glossary
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Implied If <implied-if>`
       + :ref:`No Hardcoded Port <no-hardcoded-port>`
+      + :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
       + :ref:`Or Die <or-die>`
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
@@ -305,7 +306,6 @@ Glossary
     + `eval()`
 
       + :ref:`Eval() Usage <eval()-usage>`
-      + :ref:`eval() Without Try <eval()-without-try>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `exit`
@@ -443,6 +443,7 @@ Glossary
     + `in_array()`
 
       + :ref:`Logical To in_array <logical-to-in\_array>`
+      + :ref:`Processing Collector <processing-collector>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 
@@ -455,6 +456,7 @@ Glossary
       + :ref:`Already Parents Interface <already-parents-interface>`
       + :ref:`Avoid get_class() <avoid-get\_class()>`
       + :ref:`Could Typehint <could-typehint>`
+      + :ref:`Missing Parenthesis <missing-parenthesis>`
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Make Alias <should-make-alias>`
       + :ref:`Undefined Class 2.0 <undefined-class-2.0>`
@@ -605,6 +607,7 @@ Glossary
     + `preg_replace()`
 
       + :ref:`Make One Call With Array <make-one-call-with-array>`
+      + :ref:`Processing Collector <processing-collector>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
@@ -721,6 +724,10 @@ Glossary
     + `strstr()`
 
       + :ref:`Slow Functions <slow-functions>`
+
+    + `strtolower()`
+
+      + :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
 
     + `strtoupper()`
 

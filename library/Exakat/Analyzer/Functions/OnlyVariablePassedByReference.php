@@ -28,10 +28,15 @@ use Exakat\Data\GroupBy;
 
 class OnlyVariablePassedByReference extends Analyzer {
     public function analyze() {
+        $containers = array('Variable', 'Phpvariable', 'Member', 'Staticproperty', 'Array');
+        $notReferenceReturningFunction = 'not( where(__.hasLabel("Functioncall").in("DEFINITION").has("reference", true)) )';
+
         // Functioncalls
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
-             ->atomIsNot(array('Variable', 'Member', 'Staticproperty', 'Array'))
+             ->atomIsNot($containers)
+             ->raw($notReferenceReturningFunction)
+             // Case for static method call ?
              ->savePropertyAs('rank', 'position')
              ->back('first')
              ->functionDefinition()
@@ -47,7 +52,9 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'method')
              ->outIs('ARGUMENT')
-             ->atomIsNot(array('Variable', 'Member', 'Staticproperty', 'Array'))
+             ->atomIsNot($containers)
+             ->raw($notReferenceReturningFunction)
+             // Case for static method call ?
              ->savePropertyAs('rank', 'position')
              ->back('first')
              ->outIs('CLASS')
@@ -61,6 +68,7 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // Checking PHP Native functions
         $methods = new Methods($this->config);
         $functions = $methods->getFunctionsReferenceArgs();
         $references = new GroupBy();
@@ -74,7 +82,8 @@ class OnlyVariablePassedByReference extends Analyzer {
             $this->atomIs('Functioncall')
                  ->fullnspathIs($functions)
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIsNot(array('Variable', 'Member', 'Staticproperty', 'Array'))
+                 ->atomIsNot($containers)
+//                 ->raw($notReferenceReturningFunction)
                  ->back('first');
             $this->prepareQuery();
         }

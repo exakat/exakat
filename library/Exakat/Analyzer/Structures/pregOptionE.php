@@ -26,18 +26,24 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class pregOptionE extends Analyzer {
-        const FETCH_DELIMITER = <<<GREMLIN
-sideEffect{ 
+    const FETCH_DELIMITER = <<<GREMLIN
+filter{ 
     base = it.get().value("noDelimiter").replaceAll("\\\\s", "");
-    delimiter = base[0];
-    if (delimiter == '\\\\') {
-        delimiter = base[1];
+    
+    if (base.length() == 0) {
+        false;
+    } else {
+        delimiter = base[0];
+        if (delimiter == '\\\\') {
+            false;
+        } else {
+            true;
+        }
     }
-
 }
 GREMLIN;
         
-        const MAKE_DELIMITER_FINAL = <<<GREMLIN
+    const MAKE_DELIMITER_FINAL = <<<GREMLIN
 sideEffect{ 
     if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
     else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 

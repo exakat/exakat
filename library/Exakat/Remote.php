@@ -24,8 +24,15 @@
 namespace Exakat;
 
 class Remote {
+    private $bits = array();
+
     public function __construct($url) {
-        $this->bits = parse_url($url);
+        $bits = parse_url($url);
+        $this->bits = array( 'scheme' => $bits['scheme'] ?? 'http',
+                             'host'   => $bits['host']   ?? 'localhost',
+                             'port'   => $bits['port']   ?? '8447',
+                             'path'   => $bits['path']   ?? '/tmp/exakat.queue',
+                           );
     }
 
     public function send($json) {
@@ -45,8 +52,17 @@ class Remote {
     }
 
     private function sendWithHTTP($json) {
-        $URLload = 'http://'.$this->bits['host'].':'.$this->bits['port'].'/queue/?json='.$json;
-        $html = file_get_contents($URLload);
+        // use key 'http' even if you send the request to https://...
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => "json=$json",
+                           ),
+        );
+
+        $context  = stream_context_create($options);
+        $html = file_get_contents($this->bits['scheme'].'://'.$this->bits['host'].':'.$this->bits['port'], false, $context);
         
         return $html;
     }

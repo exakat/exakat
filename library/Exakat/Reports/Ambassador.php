@@ -23,7 +23,6 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Docs;
 use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;
@@ -331,6 +330,7 @@ class Ambassador extends Reports {
 
             $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
             $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description->getDescription())).'</p>';
+            $analyzersDocHTML  = rst2quote($analyzersDocHTML);
             $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
             
             $v = $description->getClearPHP();
@@ -2329,13 +2329,11 @@ SQL;
                     continue;
                 } elseif ($counts[$analyzer] === 0) {
                     $data2[$analyzer][$version] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
+                } elseif ($coeff * version_compare($version, $analyzerVersion) >= 0) {
+                    $data[$analyzer][$version] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
+                    ++$scores[$version];
                 } else {
-                    if ($coeff * version_compare($version, $analyzerVersion) >= 0) {
-                        $data[$analyzer][$version] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
-                        ++$scores[$version];
-                    } else {
-                        $data[$analyzer][$version] = '<i class="fa fa-warning" style="color: crimson"></i>';
-                    }
+                    $data[$analyzer][$version] = '<i class="fa fa-warning" style="color: crimson"></i>';
                 }
             }
         }
@@ -3245,11 +3243,11 @@ HTML;
         if ($res) {
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 if ($row['changeType'] === 'Member Visibility') {
-                    $row['parentValue'] = $row['parentValue'].' $'.$row['name'];
-                    $row['childValue'] = $row['childValue'].' $'.$row['name'];
+                    $row['parentValue'] .= ' $'.$row['name'];
+                    $row['childValue']   = ' $'.$row['name'];
                 } elseif ($row['changeType'] === 'Member Default') {
                     $row['parentValue'] = '$'.$row['name'].' = '.$row['parentValue'];
-                    $row['childValue'] = '$'.$row['name'].' = '.$row['childValue'];
+                    $row['childValue']  = '$'.$row['name'].' = '.$row['childValue'];
                 } 
                 
                 $changedClasses .= '<tr><td>'.PHPSyntax($row['parentClass']).'</td>'.PHP_EOL.

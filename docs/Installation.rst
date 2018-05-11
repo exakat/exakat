@@ -102,14 +102,14 @@ PHP 7.0 or more recent, curl, homebrew are required.
     mkdir exakat
     cd exakat
     curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
-    curl -o apache-tinkerpop-gremlin-server-3.2.7-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.7/apache-tinkerpop-gremlin-server-3.2.7-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.2.7 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
+    curl -o apache-tinkerpop-gremlin-server-3.2.8-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.8/apache-tinkerpop-gremlin-server-3.2.8-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.8 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.7
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.8
     cd ..
     
     php exakat.phar doctor
@@ -166,14 +166,14 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
     mkdir exakat
     cd exakat
     wget -O exakat.phar http://dist.exakat.io/index.php?file=latest
-    wget -O apache-tinkerpop-gremlin-server-3.2.7-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.7/apache-tinkerpop-gremlin-server-3.2.7-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.2.7 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
+    wget -O apache-tinkerpop-gremlin-server-3.2.8-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.8/apache-tinkerpop-gremlin-server-3.2.8-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.8 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.7
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.8
     cd ..
 
     php exakat.phar doctor
@@ -187,14 +187,14 @@ Composer installation requires the creation of two folders : config and tinkergr
 
     cd /path/to/code
     composer require exakat/exakat:~1.1.5
-    wget -O apache-tinkerpop-gremlin-server-3.2.7-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.7/apache-tinkerpop-gremlin-server-3.2.7-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.2.7 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.2.7-bin.zip 
+    wget -O apache-tinkerpop-gremlin-server-3.2.8-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.8/apache-tinkerpop-gremlin-server-3.2.8-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.8 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.7
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.8
     cd ..
 
     php vendor/bin/exakat doctor

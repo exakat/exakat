@@ -24,7 +24,7 @@
 namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Graph\GraphResults;
+use Exakat\Graph\Helpers\GraphResults;
 
 class MultipleDeclarations extends Analyzer {
     protected $atom = 'Class';

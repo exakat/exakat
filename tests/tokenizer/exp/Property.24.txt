@@ -13,8 +13,6 @@ Label : PROJECT
             6
           Label : DEFINITION
             6
-          Label : DEFINITION
-            6
             Label : ARGUMENT
               9
             Label : NAME

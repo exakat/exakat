@@ -27,7 +27,7 @@ use Exakat\Analyzer\Themes;
 use Exakat\Config;
 use Exakat\Data\Methods;
 use Exakat\Data\Dictionary;
-use Exakat\Tokenizer\Token;
+use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
 
 class LoadFinal extends Tasks {
@@ -40,9 +40,9 @@ class LoadFinal extends Tasks {
     private $dictCode = null;
 
     public function run() {
-        $this->linksIn = Token::linksAsList();
+        $this->linksIn = GraphElements::linksAsList();
 
-        $this->dictCode = new Dictionary($this->datastore);
+        $this->dictCode = Dictionary::factory($this->datastore);
 
         $this->logTime('Start');
         display('Start load final');
@@ -53,7 +53,6 @@ class LoadFinal extends Tasks {
 
         $this->fixFullnspathConstants();
         $this->fixFullnspathFunctions();
-        $this->fixConstantsValue();
 
         $this->spotPHPNativeConstants();
         $this->spotPHPNativeFunctions();
@@ -127,41 +126,6 @@ GREMLIN;
 
         $res = $this->gremlin->query($query);
         display("Fixed Fullnspath for Constants");
-    }
-
-    private function fixConstantsValue() {
-        display("fixing values for Constants");
-        // fix path for constants with Const
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier", "Nsname")
-     .not(has("noDelimiter"))
-     .as("identifier")
-     .in("DEFINITION").hasLabel("Constant", "Defineconstant")
-     .coalesce( __.out("ARGUMENT").has("rank", 1), 
-                __.hasLabel("Constant").out('VALUE'))
-     .has('noDelimiter')
-     .sideEffect{ actual = it.get().value("noDelimiter");}
-     .select("identifier")
-     .sideEffect{ it.get().property("noDelimiter", actual); }
-     .count()
-GREMLIN;
-        $res = $this->gremlin->query($query);
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Staticconstant")
-     .as("identifier")
-     .out("CONSTANT").sideEffect{ name = it.get().value("code"); }.in("CONSTANT")
-     .out("CLASS").in("DEFINITION").out("CONST")
-     .out("CONST").out("NAME").filter{it.get().value("code") == name; }.in("NAME")
-     .out("VALUE").has('noDelimiter')
-     .sideEffect{ actual = it.get().value("noDelimiter");}
-     .select("identifier")
-     .sideEffect{ it.get().property("noDelimiter", actual); }
-     .count()
-GREMLIN;
-        $res = $this->gremlin->query($query);
-
-        display("Fixed values for Constants");
     }
 
     private function spotPHPNativeConstants() {
@@ -270,7 +234,7 @@ g.V().hasLabel("Defineconstant")
            s;
          }.unique();
 GREMLIN;
-        $constantsDefine = $this->gremlin->query($query)->toArray();
+        $defineConstants = $this->gremlin->query($query)->toArray();
 
         $query = <<<GREMLIN
 g.V().hasLabel("Const")
@@ -281,12 +245,12 @@ g.V().hasLabel("Const")
      .values('fullnspath').unique();
 
 GREMLIN;
-        $constantsConst = $this->gremlin->query($query)->toArray();
+        $constConstants = $this->gremlin->query($query)->toArray();
 
-        $constants = array_merge($constantsConst, $constantsDefine);
+        $constants = array_merge($constConstants, $defineConstants);
         $this->logTime('constants : '.count($constants));
 
-        if (!empty($constantsConst)) {
+        if (!empty($constConstants)) {
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
@@ -300,13 +264,13 @@ g.V().hasLabel("Identifier", "Nsname")
       ).count();
 
 GREMLIN;
-            $this->gremlin->query($query, array('arg1' => $constantsDefine));
+            $this->gremlin->query($query, array('arg1' => $defineConstants));
 
             // Second round, with fallback to global constants
             // Based on define() definitions
 
-            $this->logTime('constants define : '.count($constantsDefine));
-            if (!empty($constantsDefine)) {
+            $this->logTime('constants define : '.count($defineConstants));
+            if (!empty($defineConstants)) {
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
@@ -323,11 +287,11 @@ g.V().hasLabel("Identifier", "Nsname")
       ).count()
 
 GREMLIN;
-                $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
+                $res = $this->gremlin->query($query, array('arg1' => $defineConstants));
             }
 
-            $this->logTime('constants const : '.count($constantsConst));
-            if (!empty($constantsConst)) {
+            $this->logTime('constants const : '.count($constConstants));
+            if (!empty($constConstants)) {
             // Based on const definitions
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
@@ -348,7 +312,7 @@ g.V().hasLabel("Identifier", "Nsname")
        .count()
 
 GREMLIN;
-                $res = $this->gremlin->query($query, array('arg1' => $constantsConst));
+                $res = $this->gremlin->query($query, array('arg1' => $constConstants));
             }
             
             // TODO : handle case-insensitive
@@ -373,8 +337,8 @@ g.V().hasLabel("Identifier", "Nsname")
         if ("boolean" in it.get().keys()) {
             constante.property("boolean", it.get().value("boolean")); 
         }
-        if ("strval" in it.get().keys()) {
-            constante.property("strval", it.get().value("strval")); 
+        if ("noDelimiter" in it.get().keys()) {
+            constante.property("noDelimiter", it.get().value("noDelimiter")); 
         }
      }
 )
@@ -405,24 +369,356 @@ GREMLIN;
     }
 
 
-    private function propagateConstants() {
-        display("propagating Constant value in Concatenations");
+    private function propagateConstants($level = 0) {
+        $total = 0;
+        
+        //Currently handles + - * / % . << >> ** ()
+        //Currently handles intval, boolean, noDelimiter (String)
+        
+        //Needs realval, nullval, arrayval
+
+        display("propagating Constant value in Const");
         // fix path for constants with Const
+        // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
         $query = <<<GREMLIN
-g.V().hasLabel("Concatenation")
-     .sideEffect{ x = []; }
-     .where( __.out("CONCAT").hasLabel("Identifier", "Nsname") )
-     .not(where( __.out("CONCAT").not(has("noDelimiter")) ) )
-     .where( __.out("CONCAT").order().by("rank").sideEffect{ x.add( it.get().value("noDelimiter") ) }.count() )
-     .sideEffect{ it.get().property("noDelimiter", x.join("")); }
+g.V().hasLabel("Identifier", "Nsname", "Staticconstant").not(has("noDelimiter")).as("init")
+     .in("DEFINITION").out('VALUE').has("noDelimiter").sideEffect{ x = it.get(); }
+     .select('init').sideEffect{ 
+        it.get().property("noDelimiter", x.value("noDelimiter"));
+        it.get().property("intval",      x.value("intval"));
+        it.get().property("boolean",     x.value("boolean"));
+      }
      .count();
 GREMLIN;
 
-        $res = $this->gremlin->query($query);
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res constants");
+
         display("propagating Constant value in Concatenations");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Concatenation").not(has("noDelimiter"))
+     .sideEffect{ x = []; }
+     .where( __.out("CONCAT").hasLabel("Identifier", "Nsname", "Staticconstant") )
+     .not(where( __.out("CONCAT").not(has("noDelimiter")) ) )
+     .where( __.out("CONCAT").order().by("rank").sideEffect{ x.add( it.get().value("noDelimiter") ) }.count() )
+     .sideEffect{ 
+        s = x.join("");
+        it.get().property("noDelimiter", s);
+        // Warning : PHP doesn't handle error that same way
+        if (s.isInteger()) {
+            it.get().property("intval", s.toInteger());
+        } else {
+            it.get().property("intval", 0);
+        }
+        it.get().property("boolean", it.get().property("intval") != 0);
+        
+        x = null;
+      }
+     .count();
+GREMLIN;
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Concatenations with constants");
 
-//        display("propagating Constant value in Operators such as +, *, . ....");
+        display("propagating Constant value in Addition");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Addition").not(has("intval"))
+     .sideEffect{ x = []; }
+     .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
+     .not(where( __.out("LEFT", "RIGHT").not(has("intval")) ) )
+     .where( __.out("LEFT", "RIGHT").sideEffect{ x.add( it.get().value("intval") ) }.count() )
+     .sideEffect{ 
+        if (it.get().value("token") == 'T_PLUS') {
+          i = x[0] + x[1];
+        } else if (it.get().value("token") == 'T_MINUS') {
+          i = x[0] - x[1];
+        }
+        it.get().property("intval", i); 
+        it.get().property("boolean", it.get().property("intval") != 0);
+        it.get().property("noDelimiter", i.toString()); 
 
+        i = null;
+     }
+     .count();
+GREMLIN;
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Addition with constants");
+
+        display("propagating Constant value in Power");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Power").not(has("intval"))
+     .sideEffect{ x = []; }
+     .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
+     .not(where( __.out("LEFT", "RIGHT").not(has("intval")) ) )
+     .where( __.out("LEFT").sideEffect{ x.add( it.get().value("intval") ) }.count() )
+     .where( __.out("RIGHT").sideEffect{ x.add( it.get().value("intval") ) }.count() )
+     .sideEffect{ 
+        i = x[0] ** x[1];
+        it.get().property("intval", i); 
+        it.get().property("boolean", it.get().property("intval") != 0);
+        it.get().property("noDelimiter", i.toString()); 
+        
+        i = null;
+     }
+     .count();
+GREMLIN;
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Power with constants");
+        
+        display("propagating Constant value in Comparison");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Comparison").has("constant", true).not(has("boolean"))
+     .sideEffect{ x = []; }
+     .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
+     .not(where( __.out("LEFT", "RIGHT").not(has("boolean")) ) )
+     .where( __.out("LEFT").sideEffect{ x.add( it.get().value("intval") ) }.count() )
+     .where( __.out("RIGHT").sideEffect{ x.add( it.get().value("intval") ) }.count() )
+     .sideEffect{ 
+        if (it.get().value("token") == 'T_GREATER') {
+          i = x[0] > x[1];
+        } else if (it.get().value("token") == 'T_SMALLER') {
+          i = x[0] < x[1];
+        } else if (it.get().value("token") == 'T_IS_GREATER_OR_EQUAL') {
+          i = x[0] >= x[1];
+        } else if (it.get().value("token") == 'T_IS_SMALLER_OR_EQUAL') {
+          i = x[0] <= x[1];
+        } else if (it.get().value("token") == 'T_IS_EQUAL' ||
+                   it.get().value("token") == 'T_IS_IDENTICAL') {
+          i = x[0] == x[1];
+        } else if (it.get().value("token") == 'T_IS_NOT_EQUAL'||
+                   it.get().value("token") == 'T_IS_NOT_IDENTICAL') {
+          i = x[0] != x[1];
+        } else if (it.get().value("token") == 'T_SPACESHIP') {
+          i = x[0] <=> x[1];
+        }
+        it.get().property("intval", i); 
+        it.get().property("boolean", it.get().property("intval") != 0);
+        it.get().property("noDelimiter", i.toString()); 
+        
+        i = null;
+     }
+     .count();
+GREMLIN;
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Comparison with constants");
+
+
+        display("propagating Constant value in Logical");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Logical").has("constant", true).not(has("boolean"))
+     .sideEffect{ x = []; }
+     .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
+     .not(where( __.out("LEFT", "RIGHT").not(has("boolean")) ) )
+     .where( __.out("LEFT").sideEffect{ x.add( it.get().value("intval") ) }.count() )
+     .where( __.out("RIGHT").sideEffect{ x.add( it.get().value("intval") ) }.count() )
+     .sideEffect{ 
+        if (it.get().value("token") == 'T_BOOLEAN_AND' ||
+            it.get().value("token") == 'T_LOGICAL_AND') {
+          i = x[0] && x[1];
+        } else if (it.get().value("token") == 'T_BOOLEAN_OR' ||
+                   it.get().value("token") == 'T_LOGICAL_OR') {
+          i = x[0] || x[1];
+        } else if (it.get().value("token") == 'T_LOGICAL_XOR') {
+          i = x[0] ^ x[1];
+        } else if (it.get().value("token") == 'T_AND') {
+          i = x[0] & x[1];
+        } else if (it.get().value("token") == 'T_XOR') {
+          i = x[0] ^ x[1];
+        } else if (it.get().value("token") == 'T_OR') {
+          i = x[0] | x[1];
+        } 
+        it.get().property("intval", i); 
+        it.get().property("boolean", it.get().property("intval") != 0);
+        it.get().property("noDelimiter", i.toString()); 
+        
+        i = null;
+     }
+     .count();
+GREMLIN;
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Logical with constants");
+
+        display("propagating Constant value in Parenthesis");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Parenthesis").not(has("intval"))
+     .where( __.out("CODE").has("intval"))
+     .where( __.out("CODE").sideEffect{ x = it.get(); }.count())
+     .sideEffect{ 
+        it.get().property("intval", x.value("intval")); 
+        it.get().property("boolean", x.value("boolean"));
+        it.get().property("noDelimiter", x.value("noDelimiter")); 
+        
+        x = null;
+     }
+     .count();
+GREMLIN;
+
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Parenthesis with constants");
+
+        display("propagating Constant value in Not");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Not").not(has("intval"))
+     .where( __.out("NOT").has("intval"))
+     .where( __.out("NOT").sideEffect{ x = it.get(); }.count())
+     .sideEffect{ 
+        if (it.get().value("token") == 'T_BANG') {
+          i = !x.value("intval");
+        } else if (it.get().value("token") == 'T_TILDE') { 
+          i = ~x.value("intval");
+        }
+        it.get().property("intval", i); 
+        it.get().property("boolean", i);
+        it.get().property("noDelimiter", i); 
+        
+        i = null;
+     }
+     .count();
+GREMLIN;
+
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Not with constants");
+
+        display("propagating Constant value in Coalesce");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Coalesce").not(has("intval"))
+     .sideEffect{ x = []; }
+     .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
+     .not(where( __.out("LEFT", "RIGHT").not(has("intval")) ) )
+     .where( __.out("LEFT").sideEffect{ x.add( it.get() ) }.count() )
+     .where( __.out("RIGHT").sideEffect{ x.add( it.get() ) }.count() )
+     .sideEffect{ 
+        if (x[0].value('noDelimiter') == '') {
+          i = x[1];
+        } else {
+          i = x[0];
+        }
+        it.get().property("intval", i.value("intval")); 
+        it.get().property("boolean", i.value("boolean"));
+        it.get().property("noDelimiter", i.value("noDelimiter")); 
+        
+        i = null;
+     }
+     .count();
+GREMLIN;
+
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Coalesce with constants");
+
+        display("propagating Constant value in Ternary");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Ternary").has("constant", true).not(has("intval"))
+     .sideEffect{ x = []; }
+     .where( __.out("CONDITION", "THEN", "ELSE").hasLabel("Identifier", "Nsname") )
+     .not(where( __.out("CONDITION", "THEN", "ELSE").not(has("intval")) ) )
+     .where( __.out("CONDITION").sideEffect{ x.add( it.get() ) }.count() )
+     .where( __.out("THEN").sideEffect{ x.add( it.get() ) }.count() )
+     .where( __.out("ELSE").sideEffect{ x.add( it.get() ) }.count() )
+     .sideEffect{ 
+        if (x[0].value("boolean") == true) {
+          if (x[1].label() == 'Void') {
+              i = x[0];
+          } else {
+              i = x[1];
+          }
+        } else {
+          i = x[2];
+        }
+        it.get().property("intval", i.value("intval")); 
+        it.get().property("boolean", i.value("boolean"));
+        it.get().property("noDelimiter", i.value("noDelimiter")); 
+        
+        i = null;
+     }
+     .count();
+GREMLIN;
+
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Ternary with constants");
+
+        display("propagating Constant value in Bitshift");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Bitshift").not(has("intval"))
+     .sideEffect{ x = []; }
+     .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
+     .not(where( __.out("LEFT", "RIGHT").not(has("intval")) ) )
+     .where( __.out("LEFT").sideEffect{ x.add( it.get().value("intval") ) }.count() )
+     .where( __.out("RIGHT").sideEffect{ x.add( it.get().value("intval") ) }.count() )
+     .sideEffect{ 
+        if (it.get().value("token") == 'T_SL') {
+          i = x[0] << x[1];
+        } else if (it.get().value("token") == 'T_SR') {
+          i = x[0] >> x[1];
+        }
+        it.get().property("intval", i); 
+        it.get().property("boolean", it.get().property("intval") != 0);
+        it.get().property("noDelimiter", i.toString()); 
+        
+        i = null;
+     }
+     .count();
+GREMLIN;
+
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Bitshift with constants");
+
+        display("propagating Constant value in Multiplication");
+        // fix path for constants with Const
+        $query = <<<GREMLIN
+g.V().hasLabel("Multiplication").not(has("intval"))
+     .sideEffect{ x = []; }
+     .where( __.out("LEFT", "RIGHT").hasLabel("Identifier", "Nsname") )
+     .not(where( __.out("LEFT", "RIGHT").not(has("intval")) ) )
+     .where( __.out("LEFT", "RIGHT").sideEffect{ x.add( it.get().value("intval") ) }.count() )
+     .sideEffect{ 
+        if (it.get().value("token") == 'T_STAR') {
+          i = x[0] * x[1];
+        } else if (it.get().value("token") == 'T_SLASH') {
+          if (x[1] != 0) {
+              i = x[0] / x[1];
+              i = i.setScale(0, BigDecimal.ROUND_HALF_DOWN).toInteger();
+          } else {
+              i = 0;
+          }
+        } else if (it.get().value("token") == 'T_PERCENTAGE') {
+          i = x[0] % x[1];
+        } // Final else is an error!
+        it.get().property("intval", i); 
+        it.get().property("boolean", it.get().property("intval") != 0);
+        it.get().property("noDelimiter", i.toString()); 
+        
+        i = null;
+     }
+     .count();
+GREMLIN;
+
+        $res = $this->gremlin->query($query)->toInt();
+        $total += $res;
+        display("propagating $res Multiplication with constants");
+
+        if ($total > 0 && $level < 5) {
+            $this->propagateConstants();
+        }
     }
 
     private function init() {

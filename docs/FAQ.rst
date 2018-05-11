@@ -17,6 +17,7 @@ Summary
 * `Where can I find the report`_
 * `Can I run exakat on local code?`_
 * `Can I ignore a dir or a file?`_
+* `Can I audit only one folder in vendor?`_
 * `Can I run Exakat with PHP 5?`_
 * `I get the error 'The executable 'ansible-playbook' Vagrant is trying to run was not found'`_
 * `Can I run exakat on Windows?`_
@@ -158,11 +159,24 @@ Yes. After initing a project, open the projects/<project name>/config.ini file, 
 
 ::
 
-    ignore_dir[] = '/behat/';
-    ignore_dir[] = 'license';
+    ignore_dirs[] = '/behat/';
+    ignore_dirs[] = 'license';
 
 
 You may also include files, by using the include_dir[] line. Including files is processed after ignoring them, so you may include files in folders that were previously ignored. 
+
+`Can I audit only one folder in vendor?`
+----------------------------------------
+
+You can use ignore_dirs to exclude everything in the source tree, then use include_dirs to include specific folders.
+
+::
+    # exclude everything
+    ignore_dirs[] = '/';
+
+    # include intended folder
+    include_dirs[] = '/vendor/exakat';
+
 
 `Can I run Exakat with PHP 5?`_
 -------------------------------

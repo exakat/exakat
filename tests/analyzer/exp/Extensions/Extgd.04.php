@@ -3,7 +3,7 @@
 $expected     = array('\\imagesx(null)',
                      );
 
-$expected_not = array(
+$expected_not = array('\\imagesz(null)',
                      );
 
 ?>

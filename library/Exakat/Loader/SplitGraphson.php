@@ -28,11 +28,9 @@ use Exakat\Datastore;
 use Exakat\Data\Collector;
 use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\NoSuchFile;
-use Exakat\Graph\Tinkergraph as Graph;
 use Exakat\Tasks\CleanDb;
 use Exakat\Tasks\Load;
 use Exakat\Tasks\Tasks;
-use Exakat\Tokenizer\Token;
 
 class SplitGraphson {
     const CSV_SEPARATOR = ',';
@@ -44,16 +42,13 @@ class SplitGraphson {
 
     private $tokenCounts   = array();
 
-    private $labels = array();
-    private $edges = array();
-    
     private $config = null;
     
-    private $calls = array();
-    private $json = array();
-    private $project = null;
+    private $calls     = array();
+    private $json      = array();
+    private $project   = null;
     private $projectId = null;
-    private $id = 1;
+    private $id        = 1;
 
     private $gsneo4j = null;
     private $path = null;
@@ -64,6 +59,8 @@ class SplitGraphson {
     private $datastore = null;
     
     public function __construct($gremlin, $config, $plugins) {
+        self::$count = -1;
+        
         $this->config = $config;
         
         $this->gsneo4j = $gremlin;
@@ -130,6 +127,7 @@ new File('$this->path.def').eachLine {
 GREMLIN;
         $res = $this->gsneo4j->query($query);
         $end = microtime(true);
+        display('loaded definitions');
 
         self::saveTokenCounts();
 
@@ -169,7 +167,6 @@ GREMLIN;
         
         $json = array();
         foreach($atoms as $atom) {
-            $this->labels[$atom->atom] = 1;
             if ($atom->atom === 'File') {
                 $fileName = $atom->code;
             } 
@@ -196,7 +193,6 @@ GREMLIN;
         unset($links['PROJECT']);
 
         foreach($links as $type => $a) {
-            $this->edges[$type] = 1;
             foreach($a as $b) {
                 foreach($b as $c) {
                     foreach($c as $d) {
@@ -246,7 +242,7 @@ GREMLIN;
             fwrite($fp, $X.PHP_EOL);
         }
         fclose($fp);
-        $res = $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'");');
+        $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'");');
         
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
 

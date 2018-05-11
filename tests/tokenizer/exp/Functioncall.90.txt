@@ -1,0 +1,67 @@
+Whole
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CONDITION
+            9
+            Label : MEMBER
+              7
+            Label : OBJECT
+              6
+          Label : THEN
+            10
+            Label : EXPRESSION
+              11
+              Label : ARGUMENT
+                6
+              Label : NAME
+                11
+                Label : CODE
+                  9
+                  Label : MEMBER
+                    7
+                  Label : OBJECT
+                    6
+            Label : EXPRESSION
+              11
+              Label : ARGUMENT
+                12
+              Label : NAME
+                11
+                Label : CODE
+                  9
+                  Label : MEMBER
+                    13
+                  Label : OBJECT
+                    12
+            Label : EXPRESSION
+              11
+              Label : ARGUMENT
+                15
+              Label : NAME
+                11
+                Label : CODE
+                  9
+                  Label : MEMBER
+                    16
+                  Label : OBJECT
+                    15
+            Label : EXPRESSION
+              19
+              Label : INDEX
+                11
+                Label : CODE
+                  9
+                  Label : MEMBER
+                    16
+                  Label : OBJECT
+                    15
+              Label : VARIABLE
+                18

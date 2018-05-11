@@ -13,6 +13,8 @@ Label : PROJECT
             8
             Label : ARGUMENT
               12
+              Label : NAME
+                12
               Label : TYPEHINT
                 10
             Label : BLOCK
@@ -27,6 +29,8 @@ Label : PROJECT
             8
             Label : ARGUMENT
               12
+              Label : NAME
+                12
               Label : TYPEHINT
                 10
             Label : BLOCK
@@ -43,6 +47,8 @@ Label : PROJECT
             8
             Label : ARGUMENT
               12
+              Label : NAME
+                12
               Label : TYPEHINT
                 10
             Label : BLOCK

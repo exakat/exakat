@@ -28,11 +28,25 @@ class MixedConcatInterpolation extends Analyzer {
     public function analyze() {
         // $a."b$c";
         $this->atomIs('Concatenation')
+            // constant, methodcall and functioncall are ignored as not interpolable.
+             ->raw(<<<GREMLIN
+where( __.out("CONCAT").coalesce( __.hasLabel("Variable"),
+                                  __.hasLabel("Array").where( __.out("INDEX").hasLabel("Integer", "String"))
+                                                      .where( __.out("VARIABLE").hasLabel("Variablearray")),
+                                  __.hasLabel("Member").where(__.out("MEMBER").hasLabel("Name"))
+                                                       .where(__.out("OBJECT").hasLabel("Variableobject", "Member")),
+                                  __.hasLabel("Identifier").has("fullnspath", "\\\\PHP_EOL")
+                                 )
+     )
+GREMLIN
+             )
              ->outIs('CONCAT')
              ->atomIs('String')
              ->hasOut('CONCAT')
              ->back('first');
         $this->prepareQuery();
+        
+        // This analysis is currently missing the 2nd level of evertyhing : $a->{$b . $c}->$d....
     }
 }
 

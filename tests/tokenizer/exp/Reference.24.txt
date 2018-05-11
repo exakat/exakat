@@ -15,10 +15,14 @@ Label : PROJECT
               11
           Label : ARGUMENT
             7
+            Label : NAME
+              7
             Label : TYPEHINT
               6
           Label : ARGUMENT
             9
+            Label : NAME
+              9
             Label : TYPEHINT
               8
           Label : NAME

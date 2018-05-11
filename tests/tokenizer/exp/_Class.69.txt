@@ -49,6 +49,8 @@ Label : PROJECT
                 21
                 Label : ARGUMENT
                   18
+                  Label : NAME
+                    18
                 Label : BLOCK
                   14
                   Label : EXPRESSION
@@ -61,8 +63,6 @@ Label : PROJECT
           7
           Label : DEFINITION
             22
-          Label : DEFINITION
-            22
             Label : ARGUMENT
               18
             Label : NAME
@@ -73,6 +73,8 @@ Label : PROJECT
             21
             Label : ARGUMENT
               18
+              Label : NAME
+                18
             Label : BLOCK
               14
               Label : EXPRESSION

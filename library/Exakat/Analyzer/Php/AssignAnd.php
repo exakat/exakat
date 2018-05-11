@@ -25,12 +25,21 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class AssignAnd extends Analyzer {
+    public function dependsOn() {
+        return array('Functions/KillsApp',
+                    );
+    }
+
     public function analyze() {
         // $a = $b and $c ; is actually ($a = $b) and $c; (lost and $c)
         $this->atomIs('Logical')
              ->codeIs(array('and', 'or', 'xor'))
              ->outIs('LEFT')
              ->atomIs('Assignation')
+             ->back('first')
+             ->outIs('RIGHT')
+             ->atomIsNot('Exit')
+             ->raw('not( __.hasLabel("Functioncall").in("DEFINITION").in("ANALYZED").has("analyzer", "Functions/KillsApp"))')
              ->back('first');
         $this->prepareQuery();
     }

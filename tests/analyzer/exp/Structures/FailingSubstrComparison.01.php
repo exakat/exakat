@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('substr($a, 0, 2) == \'abc\'', 
+$expected     = array('substr($a, 0, 2) == \'abc\'',
                       'substr($a, 1, 2) == \'acc\'',
                      );
 

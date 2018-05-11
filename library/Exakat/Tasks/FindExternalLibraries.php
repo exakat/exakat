@@ -160,7 +160,7 @@ class FindExternalLibraries extends Tasks {
             $newConfigs = call_user_func_array('array_merge', $r);
         }
 
-        if (count(array_keys($newConfigs)) == 1) {
+        if (count($newConfigs) == 1) {
             display('One external library is going to be omitted : '.implode(', ', array_keys($newConfigs)));
         } elseif (!empty($newConfigs)) {
             display(count(array_keys($newConfigs)).' external libraries are going to be omitted : '.implode(', ', array_keys($newConfigs)));

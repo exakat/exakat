@@ -10,4 +10,8 @@ $a = function () use ($THIS) {
     echo $this;
 };
 
+$a = function sss() {
+    echo $this;
+};
+
 ?>

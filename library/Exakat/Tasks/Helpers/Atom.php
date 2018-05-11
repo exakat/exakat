@@ -27,7 +27,6 @@ use Exakat\Tasks\Helpers\Property;
 
 class Atom {
     const STRING_MAX_SIZE = 500;
-    static public $atomCount = 0;
     
     public $id           = 0;
     public $atom         = 'No Atom Set';
@@ -64,9 +63,10 @@ class Atom {
     public $root         = false;  // false is on purpose.
     public $globalvar    = false;
     public $binaryString = Load::NOT_BINARY;
+    public $isNull       = false;
 
-    public function __construct($atom) {
-        $this->id = ++self::$atomCount;
+    public function __construct($id, $atom) {
+        $this->id   = $id;
         $this->atom = $atom;
     }
     

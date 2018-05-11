@@ -85,11 +85,12 @@ class ExakatConfig extends Config {
 
         $graphdb = $this->config['graphdb'];
         foreach($this->gremlins as $gdb => $foo) {
-            if (isset($this->config[$gdb.'_folder'])) {
-                if ($this->config[$gdb.'_folder'][0] !== '/') {
-                    $this->config[$gdb.'_folder'] = $this->projects_root.'/'.$this->config[$gdb.'_folder'];
+            $folder = "{$gdb}_folder";
+            if (isset($this->config[$folder])) {
+                if ($this->config[$folder][0] !== '/') {
+                    $this->config[$folder] = $this->projects_root.'/'.$this->config[$folder];
                 }
-                $this->config[$gdb.'_folder'] = realpath($this->config[$gdb.'_folder']);
+                $this->config[$folder] = realpath($this->config[$folder]);
             }
         }
 

@@ -19,5 +19,3 @@ Label : PROJECT
                 8
               Label : VALUE
                 11
-            Label : ARGUMENT
-              12

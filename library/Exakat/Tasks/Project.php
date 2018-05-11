@@ -24,6 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Themes;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
@@ -52,7 +53,7 @@ class Project extends Tasks {
             $this->reports = makeArray($config->project_reports);
         }
     }
-
+    
     public function run() {
         $project = $this->config->project;
         
@@ -70,6 +71,8 @@ class Project extends Tasks {
         $clean = new Clean($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $clean->run();
         $this->datastore = new Datastore($this->config);
+        // Reset datastore for the others
+        Analyzer::$datastore = $this->datastore;
 
         display("Search for external libraries".PHP_EOL);
         if (file_exists($this->config->projects_root.'/projects/'.$project.'/config.cache')) {
@@ -133,7 +136,8 @@ class Project extends Tasks {
         $this->logTime('CleanDb');
         $this->addSnitch(array('step'    => 'Clean DB',
                                'project' => $this->config->project));
-
+        $this->gremlin->resetConnection();
+        
         display("Running files".PHP_EOL);
         $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
@@ -161,6 +165,7 @@ class Project extends Tasks {
 
         // Dump is a child process
         // initialization and first collection (action done once)
+        $this->logTime('Initial dump');
         $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -T First -collect';
         shell_exec($shell);
         $this->logTime('Dumped and inited');
@@ -194,7 +199,7 @@ class Project extends Tasks {
             $reportConfig = new Config($args);
 
             try {
-                $report = new Report2($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
+                $report = new Report($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
                 $report->run();
                 unset($report);
             } catch (Throwable $e) {
@@ -204,7 +209,9 @@ class Project extends Tasks {
         }
 
         display("Reported project".PHP_EOL);
-
+        
+        // Reset cache from Themes
+        Themes::resetCache();
         $this->logTime('Final');
         $this->removeSnitch();
         display("End" . PHP_EOL);
@@ -263,14 +270,14 @@ class Project extends Tasks {
             $audit_end = time();
             $query = "g.V().count()";
             $res = $this->gremlin->query($query);
-            if (is_object($res)) {
+            if ($res instanceof \stdClass) {
                 $nodes = $res->results[0];
             } else {
                 $nodes = $res[0];
             }
             $query = "g.E().count()";
             $res = $this->gremlin->query($query);
-            if (is_object($res)) {
+            if ($res instanceof \stdClass) {
                 $links = $res->results[0];
             } else {
                 $links = $res[0];
@@ -285,7 +292,6 @@ class Project extends Tasks {
             $dump->run();
             unset($dump);
             unset($dumpConfig);
-
         } catch (\Exception $e) {
             echo "Error while running the Analyzer {$this->config->project}.\nTrying next analysis.\n";
             file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.final.log', $e->getMessage());

@@ -30,7 +30,6 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\NotProjectInGraph;
-use Exakat\Tokenizer\Token;
 use Exakat\Graph\Graph;
 
 class Dump extends Tasks {
@@ -43,11 +42,12 @@ class Dump extends Tasks {
     private $sqliteFileFinal   = null;
     
     private $files = array();
+    
+    protected $logname = self::LOG_NONE;
 
     const WAITING_LOOP = 1000;
 
     public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
-        $this->logname === self::LOG_NONE;
         parent::__construct($gremlin, $config, $subTask);
         
         $this->log = new Log($this->logname,
@@ -665,7 +665,7 @@ GREMLIN;
                 } elseif (isset($citId[$row['extends']])) {
                     $extends = $citId[$row['extends']];
                 } else {
-                    $extends = '"'.$this->sqlite->escapeString($row['extends']).'"';
+                    $extends = "'{$this->sqlite->escapeString($row['extends'])}'";
                 }
 
                 $namespace = preg_replace('/\\\\[^\\\\]*?$/', '', $row['fullnspath']);
@@ -1077,21 +1077,22 @@ GREMLIN;
             $b = microtime(true);
             $query = <<<GREMLIN
 
-g.V().$filter.has('constant', true)
-.sideEffect{ name = it.get().value("fullcode");
-             line = it.get().value('line');
-             file='None'; 
-             }
-.until( hasLabel('Project') ).repeat( 
-    __.in()
-      .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
-       )
-.map{ 
-    x = ['name': name,
-         'file': file,
-         'line': line
-         ];
-}
+g.V().$filter
+     .has('constant', true)
+     .sideEffect{ name = it.get().value("fullcode");
+                  line = it.get().value('line');
+                  file='None'; 
+      }
+     .until( hasLabel('File') )
+     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() 
+                .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
+     )
+     .map{ 
+        x = ['name': name,
+             'file': file,
+             'line': line
+             ];
+     }
 
 GREMLIN;
             $res = $this->gremlin->query($query);
@@ -1540,7 +1541,12 @@ GREMLIN;
         
         $values = array();
         foreach($index->toArray() as $change) {
-            $values[] = "('$changeType', '$change[name]', '$change[parent]', '".$this->sqlite->escapeString($change['parentValue'])."', '$change[class]', '".$this->sqlite->escapeString($change['classValue'])."') ";
+            $values[] = "('$changeType', 
+                          '$change[name]', 
+                          '$change[parent]', 
+                          '{$this->sqlite->escapeString($change['parentValue'])}', 
+                          '{$change['class']}', 
+                          '{$this->sqlite->escapeString($change['classValue'])}') ";
         }
         
         if (!empty($values)) {

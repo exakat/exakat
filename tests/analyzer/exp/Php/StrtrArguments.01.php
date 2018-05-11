@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('strtr(\'abc\', \'abcd\', \'\')', 
+$expected     = array('strtr(\'abc\', \'abcd\', \'\')',
                       'strtr(\'abc\', \'abc\', \'ABCE\')',
                       'strtr(\'abc\', \'abcd\', \'ABC\')',
                      );

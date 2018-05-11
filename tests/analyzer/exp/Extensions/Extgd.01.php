@@ -8,7 +8,7 @@ $expected     = array('imagecreatefrompng("images/button1.png")',
                       'imagedestroy($im)',
                      );
 
-$expected_not = array(
+$expected_not = array('imagedestroy($im2)',
                      );
 
 ?>

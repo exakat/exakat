@@ -56,7 +56,7 @@ GREMLIN
              ->inIs('LEFT')
              ->inIs('PPP')
              ->hasOut('STATIC')
-             ->hasOut('PRIVATE') 
+             ->hasOut('PRIVATE')
              ->inIs('PPP')
              ->savePropertyAs('fullnspath', 'fnp')
              ->raw(<<<GREMLIN

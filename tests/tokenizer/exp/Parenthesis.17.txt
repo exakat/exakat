@@ -31,12 +31,10 @@ Label : PROJECT
                     15
                 Label : NAME
                   10
-            Label : ARGUMENT
-              16
         Label : EXPRESSION
-          18
+          16
           Label : ARGUMENT
-            19
+            17
             Label : NAME
               14
               Label : CONCAT

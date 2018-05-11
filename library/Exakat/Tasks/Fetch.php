@@ -35,6 +35,17 @@ class Fetch extends Tasks {
             throw new ProjectNeeded();
         }
 
+        $json = @file_get_contents($this->config->projects_root.'projects/.exakat/Project.json');
+        $json = json_decode($json);
+        if (isset($json->project) && $project === $json->project) {
+            // Too early
+            throw new NoDump($this->config->project);
+        }
+
+        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
+            throw new NoSuchProject($this->config->project);
+        }
+
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
             throw new NoSuchProject($this->config->project);
         }

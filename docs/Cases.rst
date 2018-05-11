@@ -31,8 +31,6 @@ This return statement is doing quite a lot, including a buried '0 + $offset'. Th
 
 --------
 
-Adding Zero
-===========
 
 .. _openemr-structures-addzero:
 
@@ -49,6 +47,110 @@ $main_provid is filtered as an integer. $main_supid is then filtered twice : one
         $main_provid = 0 + $_POST['ProviderID'];
         $main_supid  = 0 + (int)$_POST['SupervisorID'];
         //.....
+
+Used Once Variables
+===================
+
+.. _shopware-variables-variableusedonce:
+
+shopware
+^^^^^^^^
+
+:ref:`used-once-variables`, in _sql/migrations/438-add-email-template-header-footer-fields.php:115. 
+
+In the updateEmailTemplate method, $generatedQueries collects all the generated SQL queries. $generatedQueries is not initialized, and never used after initialization. 
+
+.. code-block:: php
+
+    private function updateEmailTemplate($name, $content, $contentHtml = null)
+        {
+            $sql = <<<SQL
+    UPDATE `s_core_config_mails` SET `content` = "$content" WHERE `name` = "$name" AND dirty = 0
+    SQL;
+            $this->addSql($sql);
+    
+            if ($contentHtml != null) {
+                $sql = <<<SQL
+    UPDATE `s_core_config_mails` SET `content` = "$content", `contentHTML` = "$contentHtml" WHERE `name` = "$name" AND dirty = 0
+    SQL;
+                $generatedQueries[] = $sql;
+            }
+    
+            $this->addSql($sql);
+        }
+
+
+--------
+
+
+.. _vanilla-variables-variableusedonce:
+
+Vanilla
+^^^^^^^
+
+:ref:`used-once-variables`, in library/core/class.configuration.php:1461. 
+
+In this code, $cachedConfigData is collected after storing date in the cache. Gdn::cache()->store() does actual work, so its calling is necessary. The result, collected after execution, is not reused in the rest of the method (long method, not all is shown here). Removing such variable is a needed clean up after development and debug, but also prevents pollution of the variable namespace.
+
+.. code-block:: php
+
+    // Save to cache if we're into that sort of thing
+                    $fileKey = sprintf(Gdn_Configuration::CONFIG_FILE_CACHE_KEY, $this->Source);
+                    if ($this->Configuration && $this->Configuration->caching() && Gdn::cache()->type() == Gdn_Cache::CACHE_TYPE_MEMORY && Gdn::cache()->activeEnabled()) {
+                        $cachedConfigData = Gdn::cache()->store($fileKey, $data, [
+                            Gdn_Cache::FEATURE_NOPREFIX => true,
+                            Gdn_Cache::FEATURE_EXPIRY => 3600
+                        ]);
+                    }
+
+Several Instructions On The Same Line
+=====================================
+
+.. _piwigo-structures-onelinetwoinstructions:
+
+Piwigo
+^^^^^^
+
+:ref:`several-instructions-on-the-same-line`, in tools/triggers_list.php:993. 
+
+There are two instructions on the line with the if(). Note that the condition is not followed by a bracketed block. With a quick review, it really seems that echo '<br>' and $f=0; are on the same block, but the second is indeed an unconditional expression. This is very difficult to spot. 
+
+.. code-block:: php
+
+    foreach ($trigger['files'] as $file)
+          {
+            if (!$f) echo '<br>'; $f=0;
+            echo preg_replace('#\((.+)\)#', '(<i>$1</i>)', $file);
+          }
+
+
+--------
+
+
+.. _tine20-structures-onelinetwoinstructions:
+
+Tine20
+^^^^^^
+
+:ref:`several-instructions-on-the-same-line`, in tine20/Calendar/Controller/Event.php:1594. 
+
+Here, $_event->attendee is saved in a local variable, then the property is destroyed. Same for $_event->notes; Strangely, a few lines above, the properties are unset on their own line. Unsetting properties leads to surprise bugs, and hidding the unset after ; makes it harder to spot.
+
+.. code-block:: php
+
+    $futurePersistentExceptionEvents->setRecurId($_event->getId());
+                    unset($_event->recurid);
+                    unset($_event->base_event_id);
+                    foreach(array('attendee', 'notes', 'alarms') as $prop) {
+                        if ($_event->{$prop} instanceof Tinebase_Record_RecordSet) {
+                            $_event->{$prop}->setId(NULL);
+                        }
+                    }
+                    $_event->exdate = $futureExdates;
+    
+                    $attendees = $_event->attendee; unset($_event->attendee);
+                    $note = $_event->notes; unset($_event->notes);
+                    $persistentExceptionEvent = $this->create($_event, $_checkBusyConflicts && $dtStartHasDiff);
 
 Logical Should Use Symbolic Operators
 =====================================
@@ -69,8 +171,6 @@ $extension is assigned with the results of pathinfo($reference_name, PATHINFO_EX
 
 --------
 
-Logical Should Use Symbolic Operators
-=====================================
 
 .. _openconf-php-logicalinletters:
 
@@ -84,6 +184,58 @@ In this context, the priority of execution is used on purpose; $coreFile only co
 .. code-block:: php
 
     $coreFile = tempnam('/tmp/', 'ocexport') or die('could not generate Excel file (6)')
+
+Deep Definitions
+================
+
+.. _dolphin-functions-deepdefinitions:
+
+Dolphin
+^^^^^^^
+
+:ref:`deep-definitions`, in wp-admin/includes/misc.php:74. 
+
+The ConstructHiddenValues function builds the ConstructHiddenSubValues function. Thus, ConstructHiddenValues can only be called once. 
+
+.. code-block:: php
+
+    function ConstructHiddenValues($Values)
+    {
+        /**
+         *    Recursive function, processes multidimensional arrays
+         *
+         * @param string $Name  Full name of array, including all subarrays' names
+         *
+         * @param array  $Value Array of values, can be multidimensional
+         *
+         * @return string    Properly consctructed <input type="hidden"...> tags
+         */
+        function ConstructHiddenSubValues($Name, $Value)
+        {
+            if (is_array($Value)) {
+                $Result = "";
+                foreach ($Value as $KeyName => $SubValue) {
+                    $Result .= ConstructHiddenSubValues("{$Name}[{$KeyName}]", $SubValue);
+                }
+            } else // Exit recurse
+            {
+                $Result = "<input type=\"hidden\" name=\"" . htmlspecialchars($Name) . "\" value=\"" . htmlspecialchars($Value) . "\" />\n";
+            }
+    
+            return $Result;
+        }
+    
+        /* End of ConstructHiddenSubValues function */
+    
+        $Result = '';
+        if (is_array($Values)) {
+            foreach ($Values as $KeyName => $Value) {
+                $Result .= ConstructHiddenSubValues($KeyName, $Value);
+            }
+        }
+    
+        return $Result;
+    }
 
 No array_merge() In Loops
 =========================
@@ -106,6 +258,150 @@ Note that the order of merge will be the same when merging than when collecting 
             }
     
             $attributes = array_merge($attributes, $this->_additionalLdapAttributesToFetch);
+
+Useless Parenthesis
+===================
+
+.. _woocommerce-structures-uselessparenthesis:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`useless-parenthesis`, in code/app/bundles/EmailBundle/Controller/AjaxController.php:85. 
+
+Parenthesis are useless for calculating $discount_percent, as it is a divisition. Moreover, it is not needed with $discount, (float) applies to the next element, but it does make the expression more readable. 
+
+.. code-block:: php
+
+    if ( wc_prices_include_tax() ) {
+    				$discount_percent = ( wc_get_price_including_tax( $cart_item['data'] ) * $cart_item_qty ) / WC()->cart->subtotal;
+    			} else {
+    				$discount_percent = ( wc_get_price_excluding_tax( $cart_item['data'] ) * $cart_item_qty ) / WC()->cart->subtotal_ex_tax;
+    			}
+    			$discount = ( (float) $this->get_amount() * $discount_percent ) / $cart_item_qty;
+
+Could Be Static
+===============
+
+.. _dolphin-structures-couldbestatic:
+
+Dolphin
+^^^^^^^
+
+:ref:`could-be-static`, in inc/utils.inc.php:673. 
+
+Dolphin pro relies on HTMLPurifier to handle cleaning of values : it is used to prevent xss threat. In this method, oHtmlPurifier is first checked, and if needed, created. Since creation is long and costly, it is only created once. Once the object is created, it is stored as a global to be accessible at the next call of the method. In fact, oHtmlPurifier is never used outside this method, so it could be turned into a 'static' variable, and prevent other methods to modify it. This is a typical example of variable that could be static instead of global. 
+
+.. code-block:: php
+
+    function clear_xss($val)
+    {
+        // HTML Purifier plugin
+        global $oHtmlPurifier;
+        if (!isset($oHtmlPurifier) && !$GLOBALS['logged']['admin']) {
+    
+            require_once(BX_DIRECTORY_PATH_PLUGINS . 'htmlpurifier/HTMLPurifier.standalone.php');
+    
+    /..../
+    
+            $oHtmlPurifier = new HTMLPurifier($oConfig);
+        }
+    
+        if (!$GLOBALS['logged']['admin']) {
+            $val = $oHtmlPurifier->purify($val);
+        }
+    
+        $oZ = new BxDolAlerts('system', 'clear_xss', 0, 0,
+            array('oHtmlPurifier' => $oHtmlPurifier, 'return_data' => &$val));
+        $oZ->alert();
+    
+        return $val;
+    }
+
+
+--------
+
+
+.. _contao-structures-couldbestatic:
+
+Contao
+^^^^^^
+
+:ref:`could-be-static`, in system/helper/functions.php:184. 
+
+$arrScanCache is a typical cache variables. It is set as global for persistence between calls. If it contains an already stored answer, it is returned immediately. If it is not set yet, it is then filled with a value, and later reused. This global could be turned into static, and avoid pollution of global space. 
+
+.. code-block:: php
+
+    function scan($strFolder, $blnUncached=false)
+    {
+    	global $arrScanCache;
+    
+    	// Add a trailing slash
+    	if (substr($strFolder, -1, 1) != '/')
+    	{
+    		$strFolder .= '/';
+    	}
+    
+    	// Load from cache
+    	if (!$blnUncached && isset($arrScanCache[$strFolder]))
+    	{
+    		return $arrScanCache[$strFolder];
+    	}
+    	$arrReturn = array();
+    
+    	// Scan directory
+    	foreach (scandir($strFolder) as $strFile)
+    	{
+    		if ($strFile == '.' || $strFile == '..')
+    		{
+    			continue;
+    		}
+    
+    		$arrReturn[] = $strFile;
+    	}
+    
+    	// Cache the result
+    	if (!$blnUncached)
+    	{
+    		$arrScanCache[$strFolder] = $arrReturn;
+    	}
+    
+    	return $arrReturn;
+    }
+
+Could Use Short Assignation
+===========================
+
+.. _churchcrm-structures-coulduseshortassignation:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`could-use-short-assignation`, in src/ChurchCRM/utils/GeoUtils.php:74. 
+
+Sometimes, the variable is on the other side of the operator.
+
+.. code-block:: php
+
+    $distance = 0.6213712 * $distance;
+
+
+--------
+
+
+.. _thelia-structures-coulduseshortassignation:
+
+Thelia
+^^^^^^
+
+:ref:`could-use-short-assignation`, in local/modules/Tinymce/Resources/js/tinymce/filemanager/include/utils.php:70. 
+
+/= is rare, but it definitely could be used here.
+
+.. code-block:: php
+
+    $size = $size / 1024;
 
 Timestamp Difference
 ====================
@@ -134,8 +430,6 @@ This is wrong twice a year, in countries that has day-ligth saving time. One of 
 
 --------
 
-Timestamp Difference
-====================
 
 .. _shopware-structures-timestampdifference:
 
@@ -160,7 +454,7 @@ Wrong Parameter Type
 
 .. _zencart-php-internalparametertype:
 
-ZenCart
+Zencart
 ^^^^^^^
 
 :ref:`wrong-parameter-type`, in /admin/includes/header.php:180. 
@@ -191,8 +485,6 @@ The condition checks first if $has_templates or $theme->parent(), and one of the
 
 --------
 
-Identical Conditions
-====================
 
 .. _dolibarr-structures-identicalconditions:
 
@@ -210,8 +502,6 @@ Better check twice that $modulepart is really 'apercusupplier_invoice'.
 
 --------
 
-Identical Conditions
-====================
 
 .. _mautic-structures-identicalconditions:
 
@@ -225,6 +515,73 @@ When the line is long, it tends to be more and more difficult to review the valu
 .. code-block:: php
 
     !empty($permissions[$permissionBase . ':deleteown']) || !empty($permissions[$permissionBase . ':deleteown']) || !empty($permissions[$permissionBase . ':delete'])
+
+No Choice
+=========
+
+.. _nextcloud-structures-nochoice:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`no-choice`, in build/integration/features/bootstrap/FilesDropContext.php:71. 
+
+Token is checked, but processed in the same way each time. This actual check is done twice, in the same class, in the method droppingFileWith(). 
+
+.. code-block:: php
+
+    public function creatingFolderInDrop($folder) {
+    		$client = new Client();
+    		$options = [];
+    		if (count($this->lastShareData->data->element) > 0){
+    			$token = $this->lastShareData->data[0]->token;
+    		} else {
+    			$token = $this->lastShareData->data[0]->token;
+    		}
+    		$base = substr($this->baseUrl, 0, -4);
+    		$fullUrl = $base . '/public.php/webdav/' . $folder;
+    
+    		$options['auth'] = [$token, ''];
+
+
+--------
+
+
+.. _zencart-structures-nochoice:
+
+Zencart
+^^^^^^^
+
+:ref:`no-choice`, in admin/includes/functions/html_output.php:179. 
+
+At least, it always choose the most secure way : use SSL.
+
+.. code-block:: php
+
+    if ($usessl) {
+            $form .= zen_href_link($action, $parameters, 'NONSSL');
+          } else {
+            $form .= zen_href_link($action, $parameters, 'NONSSL');
+          }
+
+Throw Functioncall
+==================
+
+.. _sugarcrm-exceptions-throwfunctioncall:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`throw-functioncall`, in /include/externalAPI/cmis_repository_wrapper.php:918. 
+
+SugarCRM uses exceptions to fill work in progress. Here, we recognize a forgotten 'new' that makes throw call a function named 'Exception'. This fails with a Fatal Error, and doesn't issue the right messsage. The same error had propgated in the code by copy and paste : it is available 17 times in that same file.
+
+.. code-block:: php
+
+    function getContentChanges()
+        {
+            throw Exception("Not Implemented");
+        }
 
 Cast To Boolean
 ===============
@@ -251,8 +608,6 @@ $options['changed'] and $options['created'] are documented and used as boolean. 
 
 --------
 
-Cast To Boolean
-===============
 
 .. _dolibarr-structures-casttoboolean:
 
@@ -279,7 +634,7 @@ Zurmo
 
 :ref:`failed-substr-comparison`, in app/protected/modules/zurmo/modules/SecurableModule.php:117. 
 
-filterAuditEvent compares a six char string with 'AUDIT_EVENT_' which contains 10 chars. This method returns only FALSE. Although it is used only once, the whole block that calls this method is now dead code. 
+filterAuditEvent compares a six char string with 'AUDIT\_EVENT\_' which contains 10 chars. This method returns only FALSE. Although it is used only once, the whole block that calls this method is now dead code. 
 
 .. code-block:: php
 
@@ -291,8 +646,6 @@ filterAuditEvent compares a six char string with 'AUDIT_EVENT_' which contains 1
 
 --------
 
-Failed Substr Comparison
-========================
 
 .. _mediawiki-structures-failingsubstrcomparison:
 
@@ -333,8 +686,6 @@ This is classic debugging code that should never reach production. mysqli_error(
 
 --------
 
-Dont Echo Error
-===============
 
 .. _phpdocumentor-security-dontechoerror:
 
@@ -356,6 +707,118 @@ Default development behavior : display the caught exception. Production behavior
     
                 return;
             }
+
+Too Many Local Variables
+========================
+
+.. _humo-gen-functions-toomanylocalvariables:
+
+HuMo-Gen
+^^^^^^^^
+
+:ref:`too-many-local-variables`, in relations.php:813. 
+
+15 local variables pieces of code are hard to find in a compact form. This function shows one classic trait of such issue : a large ifthen is at the core of the function, and each time, it collects some values and build a larger string. This should probably be split between different methods in a class. 
+
+.. code-block:: php
+
+    function calculate_nephews($generX) { // handed generations x is removed from common ancestor
+    global $db_functions, $reltext, $sexe, $sexe2, $language, $spantext, $selected_language, $foundX_nr, $rel_arrayX, $rel_arrayspouseX, $spouse;
+    global $reltext_nor, $reltext_nor2; // for Norwegian and Danish
+    
+    	if($selected_language=="es"){
+    		if($sexe=="m") { $neph=__('nephew'); $span_postfix="o "; $grson='nieto'; }
+    		else { $neph=__('niece'); $span_postfix="a "; $grson='nieta'; }
+    		//$gendiff = abs($generX - $generY); // FOUT
+    		$gendiff = abs($generX - $generY) - 1;
+    		$gennr=$gendiff-1;
+    		$degree=$grson." ".$gennr.$span_postfix;
+    		if($gendiff ==1) { $reltext=$neph.__(' of ');}
+    		elseif($gendiff > 1 AND $gendiff < 27) {
+    			spanish_degrees($gendiff,$grson);
+    			$reltext=$neph." ".$spantext.__(' of ');
+    		}
+    		else { $reltext=$neph." ".$degree; }
+    	} elseif ($selected_language==he){
+    		if($sexe=='m') { $nephniece = __('nephew'); }
+    ///............
+
+Only Variable Passed By Reference
+=================================
+
+.. _dolphin-functions-onlyvariablepassedbyreference:
+
+Dolphin
+^^^^^^^
+
+:ref:`only-variable-passed-by-reference`, in /administration/charts.json.php:89. 
+
+This is not possible, as array_slice returns a new array, and not a reference. Minimaly, the intermediate result must be saved in a variable, to be popped. Actually, this code extracts the element at key 1 in the $aData array, although this also works with hash (non-numeric keys).
+
+.. code-block:: php
+
+    array_pop(array_slice($aData, 0, 1))
+
+
+--------
+
+
+.. _phpipam-functions-onlyvariablepassedbyreference:
+
+PhpIPAM
+^^^^^^^
+
+:ref:`only-variable-passed-by-reference`, in functions/classes/class.Thread.php:243. 
+
+This is sneaky bug : the assignation $status = 0 returns a value, and not a variable. This leads PHP to mistake the initialized 0 with the variable $status and faild. It is not possible to initialize variable AND use them as argument.
+
+.. code-block:: php
+
+    pcntl_waitpid($this->pid, $status = 0)
+
+Assign With And
+===============
+
+.. _xataface-php-assignand:
+
+xataface
+^^^^^^^^
+
+:ref:`assign-with-and`, in Dataface/LanguageTool.php:265. 
+
+The usage of 'and' here is a workaround for PHP version that have no support for the coalesce. $autosubmit receives the value of $params['autosubmit'] only if the latter is set. Yet, with = having higher precedence over 'and', $autosubmit is mistaken with the existence of $params['autosubmit'] : its value is actually omitted.
+
+.. code-block:: php
+
+    $autosubmit = isset($params['autosubmit']) and $params['autosubmit'];
+
+Logical To in_array
+===================
+
+.. _zencart-performances-logicaltoinarray:
+
+Zencart
+^^^^^^^
+
+:ref:`logical-to-in\_array`, in admin/users.php:32. 
+
+Long list of == are harder to read. Using an in_array() call gathers all the strings together, in an array. In turn, this helps readability and possibility, reusability by making that list an constant. 
+
+.. code-block:: php
+
+    // if needed, check that a valid user id has been passed
+    if (($action == 'update' || $action == 'reset') && isset($_POST['user']))
+    {
+      $user = $_POST['user'];
+    }
+    elseif (($action == 'edit' || $action == 'password' || $action == 'delete' || $action == 'delete_confirm') && $_GET['user'])
+    {
+      $user = $_GET['user'];
+    }
+    elseif(($action=='delete' || $action=='delete_confirm') && isset($_POST['user']))
+    {
+      $user = $_POST['user'];
+    }
 
 Could Be Private Class Constant
 ===============================
@@ -400,8 +863,6 @@ This code is wrong on August 29,th 30th and 31rst : 6 months before is caculated
 
 --------
 
-Next Month Trap
-===============
 
 .. _edusoho-structures-nextmonthtrap:
 
@@ -509,8 +970,6 @@ The _NotificationQueue property, in this class, is defined as an array. Here, it
 
 --------
 
-Don't Unset Properties
-======================
 
 .. _typo3-classes-dontunsetproperties:
 
@@ -621,8 +1080,6 @@ This code actually loads the file, join it, then split it again. file() would be
 
 --------
 
-Join file()
-===========
 
 .. _spip-performances-joinfile:
 
@@ -640,8 +1097,6 @@ When the file is not accessible, file() returns null, and can't be processed by 
 
 --------
 
-Join file()
-===========
 
 .. _expressionengine-performances-joinfile:
 
@@ -663,8 +1118,6 @@ join('', ) is used as a replacement for file_get_contents(), which was introduce
 
 --------
 
-Join file()
-===========
 
 .. _prestashop-performances-joinfile:
 
@@ -684,6 +1137,25 @@ implode('', ) is probably not the slowest part in these lines.
     
     $module_file = file($this->getLocalPath().'override/'.$path);
     eval(preg_replace(array('#^\s*<\?(?:php)?#', '#class\s+'.$classname.'(\s+extends\s+([a-z0-9_]+)(\s+implements\s+([a-z0-9_]+))?)?#i'), array(' ', 'class '.$classname.'Override_remove'.$uniq), implode('', $module_file)));
+
+No Count With 0
+===============
+
+.. _wordpress-performances-notcountnull:
+
+WordPress
+^^^^^^^^^
+
+:ref:`no-count-with-0`, in wp-admin/includes/misc.php:74. 
+
+$build or $signature are empty at that point, no need to calculate their respective length. 
+
+.. code-block:: php
+
+    // Check for zero length, although unlikely here
+        if (strlen($built) == 0 || strlen($signature) == 0) {
+          return false;
+        }
 
 Use pathinfo() Arguments
 ========================
@@ -714,8 +1186,6 @@ The `$filepath` is broken into pieces, and then, only the 'extension' part is us
 
 --------
 
-Use pathinfo() Arguments
-========================
 
 .. _thinkphp-php-usepathinfoargs:
 
@@ -752,8 +1222,6 @@ This code should also avoid using SHA1.
 
 --------
 
-Compare Hash
-============
 
 .. _livezilla-security-comparehash:
 
@@ -797,8 +1265,6 @@ The API starts with security features, such as the whitelist(). The whitelist ap
 
 --------
 
-Register Globals
-================
 
 .. _xoops-security-registerglobals:
 
@@ -829,5 +1295,75 @@ This code only exports the POST variables as globals. And it does clean incoming
     
     // Get Action type
     $op = system_CleanVars($_REQUEST, 'op', 'list', 'string');
+
+Use List With Foreach
+=====================
+
+.. _mediawiki-structures-uselistwithforeach:
+
+MediaWiki
+^^^^^^^^^
+
+:ref:`use-list-with-foreach`, in includes/parser/LinkHolderArray.php:372. 
+
+This foreach reads each element from $entries into entry. $entry, in turn, is written into $pdbk, $title and $displayText for easier reuse. 5 elements are read from $entry, and they could be set in their respective variable in the foreach() with a list call. The only on that can't be set is 'query' which has to be tested.
+
+.. code-block:: php
+
+    foreach ( $entries as $index => $entry ) {
+    				$pdbk = $entry['pdbk'];
+    				$title = $entry['title'];
+    				$query = isset( $entry['query'] ) ? $entry['query'] : [];
+    				$key = "$ns:$index";
+    				$searchkey = "<!--LINK'\" $key-->";
+    				$displayText = $entry['text'];
+    				if ( isset( $entry['selflink'] ) ) {
+    					$replacePairs[$searchkey] = Linker::makeSelfLinkObj( $title, $displayText, $query );
+    					continue;
+    				}
+    				if ( $displayText === '' ) {
+    					$displayText = null;
+    				} else {
+    					$displayText = new HtmlArmor( $displayText );
+    				}
+    				if ( !isset( $colours[$pdbk] ) ) {
+    					$colours[$pdbk] = 'new';
+    				}
+    				$attribs = [];
+    				if ( $colours[$pdbk] == 'new' ) {
+    					$linkCache->addBadLinkObj( $title );
+    					$output->addLink( $title, 0 );
+    					$link = $linkRenderer->makeBrokenLink(
+    						$title, $displayText, $attribs, $query
+    					);
+    				} else {
+    					$link = $linkRenderer->makePreloadedLink(
+    						$title, $displayText, $colours[$pdbk], $attribs, $query
+    					);
+    				}
+    
+    				$replacePairs[$searchkey] = $link;
+    			}
+
+
+--------
+
+
+.. _swoole-structures-uselistwithforeach:
+
+Swoole
+^^^^^^
+
+:ref:`use-list-with-foreach`, in libs/Swoole/SelectDB.php:848. 
+
+This foreach reads 'c' in the $c variable (via the $_c). It could be simplified with foreach($c as ['c' => $d]) { $cc += $d; }. In fact, it could very well be replaced by array_sum() altogether.
+
+.. code-block:: php
+
+    $cc = 0;
+                foreach ($c as $_c)
+                {
+                    $cc += $_c['c'];
+                }
 
 

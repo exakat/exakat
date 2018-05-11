@@ -33,6 +33,8 @@ Label : PROJECT
                 19
               Label : USE
                 20
+                Label : DEFINITION
+                  54
               Label : USE
                 22
             Label : EXPRESSION
@@ -163,10 +165,6 @@ Label : PROJECT
                 38
             Label : EXPRESSION
               69
-              Label : DEFINITION
-                40
-                Label : DEFINITION
-                  40
               Label : DEFINITION
                 40
                 Label : ARGUMENT

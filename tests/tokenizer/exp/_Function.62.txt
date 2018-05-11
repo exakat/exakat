@@ -13,8 +13,12 @@ Label : PROJECT
             5
             Label : ARGUMENT
               6
+              Label : NAME
+                6
             Label : ARGUMENT
               7
+              Label : NAME
+                7
             Label : BLOCK
               8
               Label : EXPRESSION
@@ -47,8 +51,12 @@ Label : PROJECT
             5
             Label : ARGUMENT
               6
+              Label : NAME
+                6
             Label : ARGUMENT
               7
+              Label : NAME
+                7
             Label : BLOCK
               8
               Label : EXPRESSION

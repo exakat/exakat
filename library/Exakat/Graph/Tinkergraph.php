@@ -23,6 +23,7 @@
 namespace Exakat\Graph;
 
 use Exakat\Graph\Graph;
+use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Exceptions\UnableToReachGraphServer;
 use Exakat\Exceptions\Neo4jException;
 use Exakat\Exceptions\GremlinException;
@@ -51,7 +52,17 @@ class Tinkergraph extends Graph {
                                      'emptySet' => true,
                                    ));
     }
-    
+
+    public function resetConnection() {
+        unset($this->db);
+        $this->db = new Connection(array( 'host'  => $this->config->gsneo4j_host,
+                                          'port'  => $this->config->gsneo4j_port,
+                                          'graph' => 'graph',
+                                          'emptySet' => true,
+                                   ) );
+        $this->status = self::UNCHECKED;
+    } 
+
     private function checkConfiguration() {
         $this->db->timeout = 1200;
         $this->db->open();

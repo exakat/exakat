@@ -1,14 +1,15 @@
+Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Global.16.php
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          global
+          5
           Label : GLOBAL
-            $b
+            6
           Label : GLOBAL
-            $c
+            7

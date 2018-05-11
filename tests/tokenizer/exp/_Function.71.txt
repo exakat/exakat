@@ -29,6 +29,8 @@ Label : PROJECT
             8
             Label : ARGUMENT
               5
+              Label : NAME
+                5
             Label : BLOCK
               11
               Label : EXPRESSION
@@ -47,8 +49,12 @@ Label : PROJECT
                 9
             Label : ARGUMENT
               12
+              Label : NAME
+                12
             Label : ARGUMENT
               13
+              Label : NAME
+                13
             Label : STATIC
               7
         Label : EXPRESSION
@@ -65,9 +71,13 @@ Label : PROJECT
               12
               Label : DEFAULT
                 14
+              Label : NAME
+                12
             Label : ARGUMENT
               13
               Label : DEFAULT
                 15
+              Label : NAME
+                13
             Label : STATIC
               7

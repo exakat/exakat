@@ -1,103 +1,103 @@
 Whole
 Label : PROJECT
+  1
   Label : FILE
-    ;
+    3
     Label : EXPRESSION
-      <?php
-
+      4
       Label : CODE
-        ;
+        3
         Label : EXPRESSION
-          class
+          5
           Label : CONST
-            const
+            9
             Label : CONST
-              const
+              9
               Label : NAME
-                a
+                10
               Label : VALUE
-                1
+                11
             Label : PUBLIC
-              public
+              8
           Label : CONST
-            const
+            9
             Label : CONST
-              const
+              9
               Label : NAME
-                B
+                13
               Label : VALUE
-                1
+                11
             Label : PROTECTED
-              protected
+              12
           Label : CONST
-            const
+            9
             Label : CONST
-              const
+              9
               Label : NAME
-                C
+                16
               Label : VALUE
-                1
+                11
             Label : PRIVATE
-              private
+              15
           Label : CONST
-            const
+            9
             Label : PUBLIC
-              public
+              8
             Label : CONST
-              const
+              9
               Label : NAME
-                a2
+                18
               Label : VALUE
-                1
+                11
             Label : CONST
-              ,
+              20
               Label : NAME
-                a3
+                19
               Label : VALUE
-                1
+                11
           Label : CONST
-            const
+            9
             Label : PROTECTED
-              protected
+              12
             Label : CONST
-              const
+              9
               Label : NAME
-                B1
+                21
               Label : VALUE
-                1
+                11
             Label : CONST
-              ,
+              20
               Label : NAME
-                B2
+                23
               Label : VALUE
-                3
+                25
           Label : CONST
-            const
+            9
             Label : CONST
-              const
+              9
               Label : NAME
-                C1
+                26
               Label : VALUE
-                1
+                11
             Label : CONST
-              ,
+              20
               Label : NAME
-                c2
+                28
               Label : VALUE
-                2
+                29
             Label : CONST
-              ,
+              20
               Label : NAME
-                c3
+                30
               Label : VALUE
-                4
+                31
             Label : CONST
-              ,
+              20
               Label : NAME
-                c4
+                32
               Label : VALUE
-                5
+                33
             Label : PRIVATE
-              private
+              15
           Label : NAME
-            X
+            6

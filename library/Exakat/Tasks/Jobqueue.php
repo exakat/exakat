@@ -23,13 +23,14 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Config;
+use Exakat\Config as ConfigExakat;
+use Exakat\Datastore;
 
 class Jobqueue extends Tasks {
     const CONCURENCE = self::QUEUE;
     const PATH = '/tmp/queue.exakat';
     
-    const COMMANDS = array('quit', 'ping', 'project', 'onepage', 'report', 'init');
+    const COMMANDS = array('quit', 'config', 'ping', 'project', 'onepage', 'report', 'init');
 
     private $pipefile = self::PATH;
     private $jobQueueLog = null;
@@ -97,9 +98,8 @@ class Jobqueue extends Tasks {
             $jobkey = key($queue);
             
             if(!empty($job)) {
-                print $job.PHP_EOL;
                 
-                $command = json_decode($job);
+                $command = json_decode(trim($job));
                 
                 if ($command === null) {
                     $this->log('Unknown command : '.$job."\t".time()."\n");
@@ -108,23 +108,31 @@ class Jobqueue extends Tasks {
                     continue;
                 }
                 
-                print_r($command);
-                if ($command[1] === 'init') {
-                    $this->processInit($command);
-                } elseif ($command[1] === 'project') {
-                    $this->processProject($command);
-                } elseif ($command[1] === 'report') {
-                    $this->processReport($command);
-                } elseif ($command[1] === 'remove') {
-                    $this->processRemove($command);
-                } else {
-                    print "Unknown command '".$command[1].'"'.PHP_EOL;
-                }
-//                list($job, $args) = explode(' ', $job);
-//                print "$job / $args\n";
+                $command = array_merge(['exakat'], $command);
+                switch($command[1]) {
+                    case 'init' :
+                        $this->processInit($command);
+                        break;
+                    
+                    case 'project' :
+                        $this->processProject($command);
+                        break;
+                    
+                    case 'report' :
+                        $this->processReport($command);
+                        break;
+                    
+                    case 'remove' :
+                        $this->processRemove($command);
+                        break;
 
-//                $method = 'process'.$job;
-//                $this->$method($job);
+                    case 'config' :
+                        $this->processConfig($command);
+                        break;
+                    
+                    default :
+                        print 'Unknown command "'.$command[1].'"'.PHP_EOL;
+                }
 
                 next($queue);
                 unset($job, $queue[$jobkey]);
@@ -143,17 +151,22 @@ class Jobqueue extends Tasks {
     }
     
     private function processInit($job) {
-        $config = new Config($job);
+        $config = new ConfigExakat($job);
         $analyze = new Initproject($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing init job '.$job.PHP_EOL);
-        $this->log('start init : '.$job);
-        $b = microtime(true);
-        $analyze->run();
-        $e = microtime(true);
-        $this->log('end init : '.$job[1].' ('.number_format($e -$b, 2).' s)');
+        display( 'processing init job '.$job['project'].PHP_EOL);
+        $this->log('start init : '.$job['project']);
+        $begin = microtime(true);
+        try {
+            $analyze->run();
+        } catch (\Exception $e) {
+            $datastore = new Datastore($config);
+            $datastore->addRow('hash', array('init error' => $e->getMessage() ));
+        }
+        $end = microtime(true);
+        $this->log('end init : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
         unset($analyze);
-        display( 'processing init job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+        display( 'processing init job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
     
     private function processPing($job) {
@@ -162,42 +175,69 @@ class Jobqueue extends Tasks {
 
     private function processReport($job) {
         $config = new Config($job);
-        $analyze = new Report2($this->gremlin, $config, Tasks::IS_SUBTASK);
+        $analyze = new Report($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing report job '.$job.PHP_EOL);
+        display( 'processing report job '.$job[1].PHP_EOL);
         $this->log('start report : '.$job[1]);
-        $b = microtime(true);
+        $begin = microtime(true);
         $analyze->run();
-        $e = microtime(true);
+        $end = microtime(true);
         unset($analyze);
-        display( 'processing report job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+        display( 'processing report job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function processProject($job) {
-        $config = new Config($job);
+        $config = new ConfigExakat($job);
         $analyze = new Project($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing project job '.$job.PHP_EOL);
+        display( 'processing project job '.$job[1].PHP_EOL);
         $this->log('start project : '.$job);
-        $b = microtime(true);
-        $analyze->run();
-        $e = microtime(true);
-        $this->log('end project : '.$job[1].' ('.number_format($e -$b, 2).' s)');
+        $begin = microtime(true);
+        try {
+            $analyze->run();
+        } catch (\Exception $e) {
+            $datastore = new Datastore($config);
+            $datastore->addRow('hash', array('init error' => $e->getMessage() ));
+        }
+        $end = microtime(true);
+        $this->log('end project : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
         unset($analyze);
-        display( 'processing project job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+        display( 'processing project job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
+    }
+
+    private function processConfig($job) {
+        $config = new ConfigExakat($job);
+        $analyze = new Config($this->gremlin, $config, Tasks::IS_SUBTASK);
+
+        display( 'processing config job '.$job[1].PHP_EOL);
+        $this->log('start config : '.$job[1]);
+        $begin = microtime(true);
+        try {
+            $analyze->run();
+        } catch (\Exception $e) {
+        }
+        $end = microtime(true);
+        $this->log('end config : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
+        unset($analyze);
+        display( 'processing config job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function processRemove($job) {
-        $config = new Config($job);
+        $config = new ConfigExakat($job);
         $analyze = new Remove($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing remove job '.$job.PHP_EOL);
+        display( 'processing remove job '.$job[1].PHP_EOL);
         $this->log('start report : '.$job[1]);
-        $b = microtime(true);
-        $analyze->run();
-        $e = microtime(true);
+        $begin = microtime(true);
+        try {
+            $analyze->run();
+        } catch (\Exception $e) {
+            $datastore = new Datastore($config);
+            $datastore->addRow('hash', array('init error' => $e->getMessage() ));
+        }
+        $end = microtime(true);
         unset($analyze);
-        display( 'processing remove job '.$job[1].' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
+        display( 'processing remove job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 
     private function log($message) {

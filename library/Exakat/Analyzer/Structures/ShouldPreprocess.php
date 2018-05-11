@@ -58,12 +58,12 @@ class ShouldPreprocess extends Analyzer {
         $this->prepareQuery();
         
         $functionListNoArray = array_diff($functionList,
-                array('\\defined', 
-                      '\\error_reporting', 
-                      '\\extension_loaded', 
-                      '\\get_defined_vars', 
-                      '\\print', 
-                      '\\echo', 
+                array('\\defined',
+                      '\\error_reporting',
+                      '\\extension_loaded',
+                      '\\get_defined_vars',
+                      '\\print',
+                      '\\echo',
                       '\\set_time_limit',
                       ));
         $functionListNoArray = array_values($functionListNoArray);

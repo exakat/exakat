@@ -83,8 +83,8 @@ SQL
         
         $puml = implode("\n", $puml)."\n\n";
 
-        foreach($extends as $extends => $extended) {
-            $puml .= "Class{$ids[$extended]} <|-- Class{$extends}\n";
+        foreach($extends as $extending => $extended) {
+            $puml .= "Class{$ids[$extended]} <|-- Class{$extending}\n";
         }
 
         $res = $this->sqlite->query(<<<SQL

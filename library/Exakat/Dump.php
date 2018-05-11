@@ -23,8 +23,6 @@
 namespace Exakat;
 
 use Exakat\Config;
-use Exakat\Exakat;
-use Exakat\Exceptions;
 
 class Dump extends Datastore {
 

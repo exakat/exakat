@@ -188,7 +188,7 @@ class Datastore {
             $query = "SELECT * FROM $table";
             $res = $this->sqliteRead->query($query);
         } catch (\Exception $e) {
-            return array();
+            $res = false;
         }
 
         if (!$res) {
@@ -228,7 +228,7 @@ class Datastore {
         $res = $stmt->execute();
 
         if (!$res) {
-            return array();
+            return null;
         } else {
             $row = $res->fetchArray(\SQLITE3_ASSOC);
             return $row['value'];
