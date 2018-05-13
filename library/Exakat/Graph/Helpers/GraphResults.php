@@ -34,6 +34,9 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         // Case of empty result set.
 
         if ($data === null) {
+            $this->type = self::EMPTY;
+            $this->data = $data;
+
             return;
         }
         
