@@ -41,6 +41,15 @@ class Copy extends Vcs {
         return 'New Copy Version';
     }
 
+    public function getStatus() {
+        $status = array('vcs'       => 'copy',
+                        'revision'  => 'N/A',
+                        'updatable' => true,
+                       );
+
+        return $status;
+    }
+
 }
 
 ?>

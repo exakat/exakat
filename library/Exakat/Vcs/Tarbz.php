@@ -81,6 +81,14 @@ class Tarbz extends Vcs {
         return $stats;
     }
 
+    public function getStatus() {
+        $status = array('vcs'       => 'tar.bz2',
+                        'updatable' => false
+                       );
+
+        return $status;
+    }
+
 }
 
 ?>

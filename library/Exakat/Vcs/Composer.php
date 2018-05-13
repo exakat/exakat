@@ -82,6 +82,31 @@ class Composer extends Vcs {
         
         return $stats;
     }
+
+    public function getStatus() {
+        $composerLockPath = $this->destinationFull.'/composer.lock';
+        if (!file_exists($composerLockPath)) {
+            $status['updatable'] = false;
+            $status['hash']      = 'No composer.lock';
+            
+            return $status;
+        }
+        
+        $status = array( 'vcs'       => 'composer',
+                         'updatable' => true,
+                         );
+        $composerLock = @file_get_contents($composerLockPath);
+        
+        $json = json_decode($composerLock);
+        if (isset($json->hash)) {
+            $status['hash'] = $json->hash;
+        } else {
+            $status['hash'] = 'Can\'t read hash';
+        }
+
+        return $status;
+    }
+
 }
 
 ?>

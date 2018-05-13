@@ -68,6 +68,14 @@ class Zip extends Vcs {
         return $stats;
     }
 
+    public function getStatus() {
+        $status = array('vcs'       => 'zip',
+                        'updatable' => false
+                       );
+
+        return $status;
+    }
+
 }
 
 ?>
