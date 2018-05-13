@@ -219,18 +219,13 @@ GREMLIN;
     }
     
     private function checkAnalyzed() {
-//        $begin = count($this->analyzed);
         $rows = $this->datastore->getRow('analyzed');
         foreach($rows as $row) {
             if (!isset($this->analyzed[$row['analyzer']])) {
                 $this->analyzed[$row['analyzer']] = $row['counts'];
             }
         }
-        
-//        $end = count($this->analyzed);
-//        print ($end - $begin)." in analyzed ($begin / $end)\n";
     }
-    
 }
 
 ?>
