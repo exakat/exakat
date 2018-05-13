@@ -1050,7 +1050,7 @@ GREMLIN;
 
         $total = 0;
         $query = array();
-        foreach($res as $row) { 
+        foreach($res as $row) {
             $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', '".$this->files[$row['file']]."', ".(int) $row['begin'].", ".(int) $row['end'].")";
 
             ++$total;
@@ -1627,7 +1627,7 @@ SQL;
         if (empty(array_diff($analyzers, $ran))) {
             $query = "INSERT INTO themas (\"id\", \"thema\") VALUES (null, \"$theme\")";
             $sqlite->query($query);
-        } 
+        }
     }
 
 }

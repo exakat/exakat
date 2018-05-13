@@ -61,10 +61,10 @@ class Load extends Tasks {
     private $namespace = '\\';
     private $uses   = array('function'       => array(),
                             'staticmethod'   => array(),
-                            'method'         => array(),  // @todo : handling of parents ? of multiple definition? 
-                            'classconst'     => array(), 
-                            'property'       => array(), 
-                            'staticproperty' => array(), 
+                            'method'         => array(),  // @todo : handling of parents ? of multiple definition?
+                            'classconst'     => array(),
+                            'property'       => array(),
+                            'staticproperty' => array(),
                             'const'          => array(),
                             'define'         => array(),
                             'class'          => array(),
@@ -2316,7 +2316,7 @@ SQL;
 
         if ($string->atom === 'Identifier') {
             $this->addCall('const', $string->fullnspath, $string);
-        } 
+        }
 
         $this->runPlugins($string, array());
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -4463,7 +4463,7 @@ SQL;
             } elseif ($static->atom === 'Staticproperty') {
                 $this->addCall('staticproperty',  $left->fullnspath.'::'.$right->code, $static);
             }
-        } 
+        }
 
         $this->pushExpression($static);
 
@@ -4598,7 +4598,7 @@ SQL;
             } elseif ($static->atom === 'Member') {
                 $this->addCall('property',  $left->fullnspath.'::$'.$right->code, $static);
             }
-        } 
+        }
 
         $this->pushExpression($static);
 
@@ -5271,10 +5271,10 @@ SQL;
         }
 
         // No need for This
-        if (in_array($call->atom, array('This', 'Self', 
-                                        'Parent', 'Static', 
-//                                        'Member', 'Methodcall', 'Staticmethodcall', 'Staticproperty', 'Staticconstant', 
-                                        'Isset', 'List', 'Empty', 'Eval', 'Exit', 
+        if (in_array($call->atom, array('This', 'Self',
+                                        'Parent', 'Static',
+//                                        'Member', 'Methodcall', 'Staticmethodcall', 'Staticproperty', 'Staticconstant',
+                                        'Isset', 'List', 'Empty', 'Eval', 'Exit',
                                         ))) {
             return;
         }

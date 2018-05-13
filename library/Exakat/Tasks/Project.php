@@ -38,7 +38,7 @@ class Project extends Tasks {
 
     private $project_dir = '.';
 
-    protected $themesToRun = array('Analyze', 
+    protected $themesToRun = array('Analyze',
                                    'Preferences',
                                    );
 

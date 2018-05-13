@@ -235,7 +235,7 @@ class Websocket {
       return null;
     }
     // this is the last fragment, and we are processing a huge_payload
-    else if ($this->huge_payload) {
+    elseif ($this->huge_payload) {
       // sp we need to retreive the whole payload
       $payload = $this->huge_payload .= $payload;
       $this->huge_payload = null;

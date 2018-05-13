@@ -54,8 +54,8 @@ SQL
 
             $methods = $row['methods'];
             $methods = str_replace(' { /**/ } ' ,'', $methods);
-            $methods = preg_replace(array('/public /is', '/protected /is', '/private /is', '/(static|abstract) /is', ), 
-                                    array('+',           '#',              '-',            '{\1}',                   ), 
+            $methods = preg_replace(array('/public /is', '/protected /is', '/private /is', '/(static|abstract) /is', ),
+                                    array('+',           '#',              '-',            '{\1}',                   ),
                                     $methods);
             
             if ($row['type'] == 'class' || $row['type'] === 'interface') {
@@ -65,8 +65,8 @@ SQL
             }
 
             $properties = $row['properties'];
-            $properties = preg_replace(array('/public /is', '/protected /is', '/private /is', '/(static|abstract) /is', ), 
-                                       array('+',           '#',              '-',            '{\1}',                   ), 
+            $properties = preg_replace(array('/public /is', '/protected /is', '/private /is', '/(static|abstract) /is', ),
+                                       array('+',           '#',              '-',            '{\1}',                   ),
                                        $properties);
 
             if ((int) $row['extends']) {
@@ -99,7 +99,7 @@ SQL
                 $link = '<|..';
             } elseif ($row['type'] === 'extends') {
                 $link = '<|--';
-            } else { 
+            } else {
                 $link = '--';
             }
             

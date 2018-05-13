@@ -67,61 +67,61 @@ class Grade extends Ambassador {
 
     private $components = array(
 'A1:2017-Injection' => array(
-	'Security/AnchorRegex',
-	'Security/EncodedLetters',
-	'Structures/EvalWithoutTry',
- 	'Security/parseUrlWithoutParameters',
-	'Structures/pregOptionE',
-	'Indirect Injection',
-	'Security/IndirectInjection',
-	'Structures/EvalUsage',
-	'Security/Sqlite3RequiresSingleQuotes',
+    'Security/AnchorRegex',
+    'Security/EncodedLetters',
+    'Structures/EvalWithoutTry',
+    'Security/parseUrlWithoutParameters',
+    'Structures/pregOptionE',
+    'Indirect Injection',
+    'Security/IndirectInjection',
+    'Structures/EvalUsage',
+    'Security/Sqlite3RequiresSingleQuotes',
 ),
 'A2:2017-Broken Authentication' => array(
 
 ),
 'A3:2017-Sensitive Data Exposure' => array(
-	'Security/DontEchoError',
-	'Structures/PhpinfoUsage',
-	'Structures/VardumpUsage',
+    'Security/DontEchoError',
+    'Structures/PhpinfoUsage',
+    'Structures/VardumpUsage',
 ),
 'A4:2017-XML External Entities (XXE)' => array(
-	'Security/NoNetForXmlLoad',
+    'Security/NoNetForXmlLoad',
 ),
 'A5:2017-Broken Access Control' => array(
-	'Structures/NoHardcodedHash',
-	'Structures/NoHardcodedIp',
-	'Structures/NoHardcodedPort',
-	'Functions/HardcodedPasswords',
-	'Security/CompareHash',
+    'Structures/NoHardcodedHash',
+    'Structures/NoHardcodedIp',
+    'Structures/NoHardcodedPort',
+    'Functions/HardcodedPasswords',
+    'Security/CompareHash',
 ),
 'A6:2017-Security Misconfiguration' => array(
-	'Security/AvoidThoseCrypto',
-	'Structures/RandomWithoutTry',
-	'Security/CurlOptions',
-	'Security/SetCookieArgs',
-	'Security/ShouldUsePreparedStatement',
-	'Security/ShouldUseSessionRegenerateId',
-	'Security/SessionLazyWrite',
-	'Php/BetterRand',
-	'Security/MkdirDefault',
-	'Security/RegisterGlobals',
+    'Security/AvoidThoseCrypto',
+    'Structures/RandomWithoutTry',
+    'Security/CurlOptions',
+    'Security/SetCookieArgs',
+    'Security/ShouldUsePreparedStatement',
+    'Security/ShouldUseSessionRegenerateId',
+    'Security/SessionLazyWrite',
+    'Php/BetterRand',
+    'Security/MkdirDefault',
+    'Security/RegisterGlobals',
 ),
 'A7:2017-Cross-Site Scripting (XSS)' => array(
-	'Security/UploadFilenameInjection',
+    'Security/UploadFilenameInjection',
 ),
 'A8:2017-Insecure Deserialization' => array(
-	'Security/UnserializeSecondArg',
+    'Security/UnserializeSecondArg',
 ),
 'A9:2017-Using Components with Known Vulnerabilities' => array(
 ),
 'A10:2017-Insufficient Logging&Monitoring' => array(
 ),
 'Others' => array(
-	'Structures/NoReturnInFinally',
-	'Security/NoSleep',
-	'Structures/Fallthrough',
-));        
+    'Structures/NoReturnInFinally',
+    'Security/NoSleep',
+    'Structures/Fallthrough',
+));
 
     const G_CRITICAL = 5;
     const G_ERROR    = 4;
@@ -130,9 +130,9 @@ class Grade extends Ambassador {
     const G_NONE     = 1;
 
     private $names =  array(self::G_CRITICAL  => 'Critical',
-                            self::G_ERROR     => 'Error',  
+                            self::G_ERROR     => 'Error',
                             self::G_WARNING   => 'Warning',
-                            self::G_NOTICE    => 'Notice', 
+                            self::G_NOTICE    => 'Notice',
                             self::G_NONE      => 'OK',     );
     
     private $grading = [];
@@ -147,15 +147,15 @@ class Grade extends Ambassador {
         $this->severities        = $this->themes->getSeverities();
         
         $this->grading = array(
-	'Security/AnchorRegex'                  => self::G_WARNING,
-	'Security/EncodedLetters'               => self::G_WARNING,
-	'Structures/EvalWithoutTry'             => self::G_CRITICAL,
- 	'Security/parseUrlWithoutParameters'    => self::G_CRITICAL,
-	'Structures/pregOptionE'                => self::G_NOTICE,
-	'Indirect Injection'                    => self::G_NOTICE,
-	'Security/IndirectInjection'            => self::G_NOTICE,
-	'Structures/EvalUsage'                  => self::G_ERROR,
-	'Security/Sqlite3RequiresSingleQuotes'  => self::G_ERROR,
+    'Security/AnchorRegex'                  => self::G_WARNING,
+    'Security/EncodedLetters'               => self::G_WARNING,
+    'Structures/EvalWithoutTry'             => self::G_CRITICAL,
+    'Security/parseUrlWithoutParameters'    => self::G_CRITICAL,
+    'Structures/pregOptionE'                => self::G_NOTICE,
+    'Indirect Injection'                    => self::G_NOTICE,
+    'Security/IndirectInjection'            => self::G_NOTICE,
+    'Structures/EvalUsage'                  => self::G_ERROR,
+    'Security/Sqlite3RequiresSingleQuotes'  => self::G_ERROR,
         );
         
         $this->results = new Results($this->sqlite, array_keys($this->grading));

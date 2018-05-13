@@ -252,10 +252,18 @@ GREMLIN;
                 $this->analyzerId = $res->toString();
             } else {
                 $this->analyzerId = $res->toString();
+                if ($this->analyzerId == 0) {
+                    // Creating analysis vertex
+                    $resId = $this->gremlin->getId();
 
-                // Removing all edges
-                $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").outE("ANALYZED").drop()';
-                $res = $this->gremlin->query($query);
+                    $query = 'g.addV().property(T.id, '.$resId.').property(T.label, "Analysis").property("analyzer", "'.$this->analyzerQuoted.'").property("atom", "Analysis").id()';
+                    $res = $this->gremlin->query($query);
+                    $this->analyzerId = $res->toString();
+                } else {
+                    // Removing all edges
+                    $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").outE("ANALYZED").drop()';
+                    $res = $this->gremlin->query($query);
+                }
             }
         } else {
             $this->analyzerId = $analyzerId;

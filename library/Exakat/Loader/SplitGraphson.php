@@ -169,7 +169,7 @@ GREMLIN;
         foreach($atoms as $atom) {
             if ($atom->atom === 'File') {
                 $fileName = $atom->code;
-            } 
+            }
             
             if ($atom->atom === 'Project') {
                 if ($this->projectId === null) {
@@ -221,7 +221,7 @@ GREMLIN;
         foreach($json as $j) {
             if ($j->label === 'Project') {
                 continue;
-            } 
+            }
             
             $V = $j->properties['code'][0]->value;
             $j->properties['code'][0]->value = $this->dictCode->get($V);

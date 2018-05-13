@@ -71,14 +71,14 @@ class FileDependencies extends Reports {
             }
         }
         
-        $list = array_map(function($row) { 
-            return "\"$row[including]\" -> \"$row[included]\" [label=\"$row[type] ($row[count])\" color=\"$row[color]\" ];"; 
+        $list = array_map(function($row) {
+            return "\"$row[including]\" -> \"$row[included]\" [label=\"$row[type] ($row[count])\" color=\"$row[color]\" ];";
         }, $list);
         $dot = join(PHP_EOL, $list);
         
         $nodes = array_map(function($key, $value) {
             return "$value [label=\"$key\" shape=\"tab\" style=\"filled\" fillcolor=\"chartreuse3\"];";
-        }, 
+        },
                            array_keys($nodes),
                            array_values($nodes));
         $nodes = join(PHP_EOL, $nodes);

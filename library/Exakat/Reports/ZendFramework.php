@@ -1408,7 +1408,7 @@ HTML;
             $sources[$row['analyzer']] = $row['count'];
         }
         
-        foreach($components['Components'] as $name => $component) { 
+        foreach($components['Components'] as $name => $component) {
             $rows = array($name);
             
             $componentVersion = $zend3->getVersions('zend-'.strtolower($name));
@@ -1623,11 +1623,11 @@ HTML;
         $table = '<table class="table table-striped">
         						<tr></tr>
         						<tr><th>Component</th><th>composer.json</th><th>used</th></tr>';
-        						
+                                
         foreach($sources as $s => $c) {
             $composerName = preg_replace('#zendf/zf3(.*?)#', 'zendframework/zend-$1', strtolower($s));
             
-            // if 
+            // if
             if (isset($require->{'zendframework/zendframework'})) {
                 $inComposer = $require->{'zendframework/zendframework'};
             } else {
@@ -1668,8 +1668,8 @@ HTML;
         $table = '<table class="table table-striped">
         						<tr></tr>
         						<tr><th>Exception</th><th>File</th><th>line</th></tr>'
-        						.$exceptionInventory.
-        						'        					</table>';
+                                .$exceptionInventory.
+                                '        					</table>';
         $html = $this->getBasedPage('empty');
         $html = $this->injectBloc($html, 'CONTENT', $table);
         $this->putBasedPage('thrown_exceptions', $html);

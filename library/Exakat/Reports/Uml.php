@@ -42,8 +42,8 @@ SQL
         $ids = array();
         $dot = array();
         $links = array();
-        $colors = array('class'     => 'darkorange', 
-                        'trait'     => 'gold', 
+        $colors = array('class'     => 'darkorange',
+                        'trait'     => 'gold',
                         'interface' => 'skyblue',
                         'native'    => 'brown1',
                         );

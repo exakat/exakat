@@ -76,7 +76,7 @@ class SimpleHtml extends Reports {
             $text .= "<tr><th>Exakat version :</th><td>".\Exakat\Exakat::VERSION." (".\Exakat\Exakat::BUILD.") </td></tr>\n";
         }
 
-        return $text; 
+        return $text;
     }
 
     private function makeSummary($folder) {

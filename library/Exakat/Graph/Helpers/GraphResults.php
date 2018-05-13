@@ -68,7 +68,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 
     private function checkArray() {
         if (empty($this->data)){
-            return; 
+            return;
         }
         $data = array_values($this->data);
         if (!($data[0] instanceof \Stdclass)) {
@@ -116,7 +116,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
 
     public function offsetUnset ( $offset ) {
         // Nothing. No update on that result
-        return; 
+        return;
     }
 
     public function rewind() {
@@ -154,7 +154,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
     public function count( ) {
         if ($this->type === self::ARRAY) {
             return count($this->data);
-        } 
+        }
         return 0;
     }
 }

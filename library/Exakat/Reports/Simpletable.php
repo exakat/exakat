@@ -50,7 +50,7 @@ class Simpletable extends Reports {
         $res = $sqlite->query($sqlQuery);
         
         while($row = $res->fetchArray(\SQLITE3_ASSOC)){
-            $results[$row['analyzer']][] = array('code' => $this->syntaxColoring($row['fullcode']), 
+            $results[$row['analyzer']][] = array('code' => $this->syntaxColoring($row['fullcode']),
                                                  'file' => $row['file'],
                                                  'line' => $row['line']);
         }
