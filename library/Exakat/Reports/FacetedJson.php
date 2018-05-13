@@ -41,7 +41,6 @@ SELECT  id AS id,
         analyzer AS analyzer
     FROM results 
     WHERE analyzer IN $this->themesList
-
 SQL;
         $res = $sqlite->query($sqlQuery);
 

@@ -25,6 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\ZendF3;
 use Exakat\Phpexec;
+use Exakat\Exakat;
 
 class ZendFramework extends Ambassador {
     const FILE_FILENAME  = 'report_zf';
@@ -106,10 +107,12 @@ class ZendFramework extends Ambassador {
 
     public function __construct($config) {
         parent::__construct($config);
-        $this->themesToShow      = 'ZendFramework';
-        $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
-        $this->severities        = $this->themes->getSeverities();
+        if ($this->themes != null) {
+            $this->themesToShow      = 'ZendFramework';
+            $this->timesToFix        = $this->themes->getTimesToFix();
+            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
+            $this->severities        = $this->themes->getSeverities();
+        }
     }
 
     protected function getBasedPage($file) {

@@ -54,22 +54,25 @@ abstract class Reports {
     protected $themesList = '';      // cache for themes list in SQLITE
     protected $config     = null;
 
-    protected $sqlite = null;
+    protected $sqlite    = null;
     protected $datastore = null;
-    protected $themes = null;
+    protected $themes    = null;
 
     public function __construct($config) {
         $this->config = $config;
 
-        $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
+        $path = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
+        if (file_exists($path)) {
+            $this->sqlite = new \Sqlite3($path, \SQLITE3_OPEN_READONLY);
 
-        $this->datastore = new Dump($this->config);
-        $this->themes = new Themes($this->config->dir_root.'/data/analyzers.sqlite');
+            $this->datastore = new Dump($this->config);
+            $this->themes    = new Themes($this->config->dir_root.'/data/analyzers.sqlite');
 
-        // Default analyzers
-        $analyzers = array_merge($this->themes->getThemeAnalyzers($this->config->thema),
-                                 array_keys($config->themas));
-        $this->themesList = '("'.implode('", "', $analyzers).'")';
+            // Default analyzers
+            $analyzers = array_merge($this->themes->getThemeAnalyzers($this->config->thema),
+                                     array_keys($config->themas));
+            $this->themesList = makeList($analyzers);
+        }
     }
 
     protected function _generate($analyzerList) {}
@@ -82,6 +85,12 @@ abstract class Reports {
 
         if ($this->config->thema !== null) {
             $themas = $this->config->themas;
+
+            if ($missing = $this->checkMissingThemes()) {
+                print "Can't produce ".get_called_class()." format. There are ".count($missing)." missing themes : ".implode(', ', $missing).".\n";
+                return false;
+            }
+
             if (isset($themas[$this->config->thema])){
                 $list = $themas[$this->config->thema];
             } else {
@@ -110,6 +119,35 @@ abstract class Reports {
 
     public function getCount() {
         return $this->count;
+    }
+
+    public function dependsOnAnalysis() {
+        if (empty($this->config->thema)) {
+            return array();
+        } else {
+            return array($this->config->thema);
+        }
+    }
+    
+    public function checkMissingThemes(){
+        $required = $this->dependsOnAnalysis();
+        
+        if (empty($required)) {
+            return $required;
+        }
+        
+        $available = array();
+        $res = $this->sqlite->query('SELECT * FROM themas');
+        if ($res == false) {
+            // Nothing found.
+            return $required;
+        }
+
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $available[] = $row['thema'];
+        }
+        
+        return array_diff($required, $available);
     }
 }
 

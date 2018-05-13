@@ -79,10 +79,21 @@ class Ambassador extends Reports {
 
     public function __construct($config) {
         parent::__construct($config);
-        $this->frequences        = $this->themes->getFrequences();
-        $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
-        $this->severities        = $this->themes->getSeverities();
+        if ($this->themes !== null ){
+            $this->frequences        = $this->themes->getFrequences();
+            $this->timesToFix        = $this->themes->getTimesToFix();
+            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
+            $this->severities        = $this->themes->getSeverities();
+        }
+    }
+
+    public function dependsOnAnalysis() {
+        return array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
+                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
+                     'Analyze', 'Preferences', 'Inventory', 'Performances',
+                     'Appinfo', 'Appcontent', 'Dead code', 'Security', 
+                     'Custom',
+                     );
     }
 
     protected function getBasedPage($file) {
@@ -142,6 +153,11 @@ class Ambassador extends Reports {
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($name === self::STDOUT) {
             print "Can't produce Ambassador format to stdout\n";
+            return false;
+        }
+        
+        if ($missing = $this->checkMissingThemes()) {
+            print "Can't produce Ambassador format. There are ".count($missing)." missing themes : ".implode(', ', $missing).".\n";
             return false;
         }
 
@@ -1017,7 +1033,7 @@ JAVASCRIPT;
         $finalHTML = $this->getBasedPage('parameter_counts');
 
         // List of extensions used
-        $res = @$this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<SQL
 SELECT key, value FROM hashResults
 WHERE name = "ParameterCounts"
 ORDER BY key
