@@ -2272,8 +2272,12 @@ SQL;
             $string = $this->addAtom('Self');
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
             $string = $this->addAtom('Parent');
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'list') {
+            $string = $this->addAtom('Name');
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
             $string = $this->addAtom('Newcall');
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
+            $string = $this->addAtom('Name');
         } else {
             $string = $this->addAtom('Identifier');
         }
@@ -5268,9 +5272,9 @@ SQL;
 
         // No need for This
         if (in_array($call->atom, array('This', 'Self', 
-                                        'Parent',
+                                        'Parent', 'Static', 
 //                                        'Member', 'Methodcall', 'Staticmethodcall', 'Staticproperty', 'Staticconstant', 
-                                        'Isset', 'List', 'Empty',
+                                        'Isset', 'List', 'Empty', 'Eval', 'Exit', 
                                         ))) {
             return;
         }
