@@ -3,7 +3,7 @@
 $finder = PhpCsFixer\Finder::create()
     ->in('./library/Exakat/Analyzer')
     ->in('./library/Exakat/Tasks')
-    ->in('./library/Exakat/Report')
+    ->in('./library/Exakat/Reports')
     ->in('./library/Exakat/Data')
     ->in('./library/Exakat/Vcs')
     ->in('./library/Exakat/Loader')
