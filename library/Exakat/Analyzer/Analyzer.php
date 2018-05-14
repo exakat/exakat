@@ -551,6 +551,14 @@ GREMLIN
         return $this;
     }
 
+    public function noFullcodeInside($fullcode) {
+        // $fullcode is a name of a variable
+        $gremlin = 'not( where( __.emit( ).repeat( out() ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}) )';
+        $this->addMethod($gremlin);
+
+        return $this;
+    }
+
     public function atomInsideNoBlock($atom) {
         assert($this->assertAtom($atom));
         $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Sequence")) ).times('.self::MAX_LOOPING.').hasLabel(within(***))';

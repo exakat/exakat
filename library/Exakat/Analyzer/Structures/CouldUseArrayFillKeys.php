@@ -29,7 +29,6 @@ class CouldUseArrayFillKeys extends Analyzer {
         // foreach($a as $b) { $c[$b] = 3; }
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE(array('INDEX', 'VALUE'))
              ->savePropertyAs('fullcode', 'index')
              ->back('first')
              ->outIs('BLOCK')
@@ -40,6 +39,32 @@ class CouldUseArrayFillKeys extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->codeIs('=')
+             ->outIs('RIGHT')
+             ->noFullcodeInside('index')
+             ->back('first');
+        $this->prepareQuery();
+
+        // foreach($a as $b => $c) { $c[$b] = 3; }
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIs(array('INDEX', 'VALUE'))
+             ->savePropertyAs('fullcode', 'index')
+             ->inIs(array('INDEX', 'VALUE'))
+             ->outIs(array('INDEX', 'VALUE'))
+             ->notSamePropertyAs('fullcode', 'index')
+             ->savePropertyAs('fullcode', 'secondary')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Array')
+             ->outIs('INDEX')
+             ->samePropertyAs('fullcode', 'index')
+             ->inIs('INDEX')
+             ->inIs('LEFT')
+             ->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('RIGHT')
+             ->noFullcodeInside('index')
+             ->noFullcodeInside('secondary')
              ->back('first');
         $this->prepareQuery();
     }
