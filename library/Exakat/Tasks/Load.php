@@ -5309,7 +5309,8 @@ SQL;
             return; // Can't be a class anyway.
         }
         // single : is OK
-        if (preg_match('/[$ #?;%^\*\'\"\.\\\\ <>~&,|\(\){}\[\]\/\s=\+!`@\-]/is', $call->noDelimiter)) {
+        // \ is OK (for hardcoded path)
+        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=\+!`@\-]/is', $call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
 
