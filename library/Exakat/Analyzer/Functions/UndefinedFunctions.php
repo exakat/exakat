@@ -34,7 +34,7 @@ class UndefinedFunctions extends Analyzer {
     public function analyze() {
         $this->atomIs('Functioncall')
              ->outIs('NAME')
-             ->atomIs(array('Identifier', 'Nsname'))
+             ->atomIs('Name')
              ->inIs('NAME')
              ->analyzerIsNot('Functions/IsExtFunction')
              ->hasNoFunctionDefinition();

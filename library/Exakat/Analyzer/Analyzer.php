@@ -1363,7 +1363,7 @@ GREMLIN
     }
 
     public function hasNoFunctionDefinition() {
-        $this->addMethod('not( where( __.in("DEFINITION").hasLabel("Function", "Method") ) )');
+        $this->addMethod('not( where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") ) )');
     
         return $this;
     }
