@@ -35,13 +35,15 @@ class UndefinedInterfaces extends Analyzer {
     }
     
     public function analyze() {
+        $scalartypes = $this->loadIni('php_scalar_types.ini', 'types');
+        $scalartypes[] = '\iterable';
+
         // interface used in a instanceof nor a Typehint but not defined
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->isNot('aliased', true)
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot(array('Self', 'Parent'))
-             ->fullnspathIsNot('\iterable')
+             ->fullnspathIsNot($scalartypes)
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->analyzerIsNot('Classes/IsExtClass')
@@ -51,10 +53,9 @@ class UndefinedInterfaces extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs(array('Nsname', 'Identifier'))
-             ->hasIn('TYPEHINT')
-             ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'))
+             ->hasIn(array('TYPEHINT', 'RETURNTYPE'))
              ->atomIsNot(array('Self', 'Parent'))
-             ->fullnspathIsNot('\iterable')
+             ->fullnspathIsNot($scalartypes)
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->noUseDefinition()
