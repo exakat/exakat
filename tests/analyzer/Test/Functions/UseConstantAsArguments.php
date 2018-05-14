@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Functions_UseConstantAsArguments extends Analyzer {
-    /* 7 methods */
+    /* 8 methods */
 
     public function testFunctions_UseConstantAsArguments01()  { $this->generic_test('Functions_UseConstantAsArguments.01'); }
     public function testFunctions_UseConstantAsArguments02()  { $this->generic_test('Functions_UseConstantAsArguments.02'); }
@@ -17,5 +17,6 @@ class Functions_UseConstantAsArguments extends Analyzer {
     public function testFunctions_UseConstantAsArguments05()  { $this->generic_test('Functions/UseConstantAsArguments.05'); }
     public function testFunctions_UseConstantAsArguments06()  { $this->generic_test('Functions/UseConstantAsArguments.06'); }
     public function testFunctions_UseConstantAsArguments07()  { $this->generic_test('Functions/UseConstantAsArguments.07'); }
+    public function testFunctions_UseConstantAsArguments08()  { $this->generic_test('Functions/UseConstantAsArguments.08'); }
 }
 ?>
