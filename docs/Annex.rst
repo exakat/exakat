@@ -122,6 +122,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/bzip2 <http://nl1.php.net/manual/en/ref.bzip2.php>`_
 * `ext/cairo <https://cairographics.org/>`_
 * `ext/calendar <http://www.php.net/manual/en/ref.calendar.php>`_
+* `ext/cmark <https://github.com/commonmark/cmark>`_
 * `ext/com <http://php.net/manual/en/book.com.php>`_
 * `ext/crypto <https://pecl.php.net/package/crypto>`_
 * `ext/ctype <http://php.net/manual/en/ref.ctype.php>`_
@@ -267,7 +268,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/zip <http://php.net/manual/en/book.zip.php>`_
 * `ext/zlib <http://php.net/manual/en/book.zlib.php>`_
 * `ext/0mq <http://zeromq.org/>`_
-* Extensions/Extzookeeper
+* `ext/zookeeper <http://php.net/zookeeper>`_
 
 Supported Frameworks
 --------------------
@@ -294,10 +295,13 @@ A number of applications were scanned in order to find real life examples of pat
 * `Vanilla <https://open.vanillaforums.com/>`_
 * `Piwigo <https://www.piwigo.org/>`_
 * `Tine20 <https://www.tine20.com/>`_
+* `Typo3 <https://typo3.org/>`_
+* `SugarCrm <https://www.sugarcrm.com/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `OpenConf <https://www.openconf.com/>`_
 * `Dolphin <https://www.boonex.com/>`_
 * `Woocommerce <https://woocommerce.com/>`_
+* `Tikiwiki <https://tiki.org/>`_
 * `Contao <https://contao.org/en/>`_
 * `ChurchCRM <http://churchcrm.io/>`_
 * `Zurmo <http://zurmo.org/>`_
@@ -306,7 +310,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `Mautic <https://www.mautic.org/>`_
 * `NextCloud <https://nextcloud.com/>`_
-* `SugarCrm <https://www.sugarcrm.com/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
 * `HuMo-Gen <http://humogen.com/>`_
@@ -315,7 +318,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Phinx <https://phinx.org/>`_
 * `Edusoho <https://www.edusoho.com/en>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
-* `Typo3 <https://typo3.org/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `SPIP <https://www.spip.net/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
@@ -379,6 +381,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.2.7
+
+  * ext/cmark (Extensions/Extcmark)
+
 * 1.2.6
 
   * Callback Needs Return (Functions/CallbackNeedsReturn)
@@ -388,8 +394,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.2.5
 
-  * Extensions/Extzookeeper (Extensions/Extzookeeper)
   * Wrong Range Check (Structures/WrongRange ; Analyze)
+  * ext/zookeeper (Extensions/Extzookeeper)
 
 * 1.2.4
 
@@ -432,10 +438,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.1.7
 
+  * Could Use array_fill_keys (Structures/CouldUseArrayFillKeys ; Suggestions)
   * Dynamic Library Loading (Security/DynamicDl ; Security)
   * PHP 7.3 Last Empty Argument (Php/PHP73LastEmptyArgument ; CompatibilityPHP73)
   * Property Could Be Local (Classes/PropertyCouldBeLocal)
-  * Structures/CouldUseArrayFillKeys (Structures/CouldUseArrayFillKeys ; Suggestions)
   * Use Count Recursive (Structures/UseCountRecursive ; Suggestions)
   * ext/leveldb (Extensions/Extleveldb ; Appinfo)
   * ext/opencensus (Extensions/Extopencensus ; Appinfo)
@@ -1628,7 +1634,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Thrown Exceptions (Exceptions/ThrownExceptions ; Appinfo)
   * Throws An Assignement (Structures/ThrowsAndAssign ; Analyze, Codacy, Simple)
   * Timestamp Difference (Structures/TimestampDifference ; Analyze, Codacy, Simple, Level 3)
-  * Too Many Children (Classes/TooManyChildren ; )
+  * Too Many Children (Classes/TooManyChildren ; Suggestions)
   * Trait Methods (Traits/TraitMethod ; )
   * Trait Names (Traits/Traitnames ; Appinfo)
   * Traits Usage (Traits/TraitUsage ; Appinfo)
@@ -1753,7 +1759,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Yield Usage (Php/YieldUsage ; Appinfo, Appcontent)
   * Yoda Comparison (Structures/YodaComparison ; Coding Conventions)
   * Zend Classes (ZendF/ZendClasses ; Appinfo, ZendFramework)
-  * __debugInfo() usage (Php/debugInfoUsage ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
+  * __debugInfo() Usage (Php/debugInfoUsage ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * __halt_compiler (Php/Haltcompiler ; Appinfo)
   * __toString() Throws Exception (Structures/toStringThrowsException ; Analyze, OneFile, Codacy, Simple)
   * charger_fonction() (Spip/chargerFonction ; )
@@ -2016,6 +2022,7 @@ List of external links mentionned in this documentation.
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `Classes abstraction <http://php.net/abstract>`_
 * `Closure::bind <http://php.net/manual/en/closure.bind.php>`_
+* `Cmark <https://github.com/commonmark/cmark>`_
 * `Codeigniter <https://codeigniter.com/>`_
 * `COM and .Net (Windows) <http://php.net/manual/en/book.com.php>`_
 * `command line usage <https://exakat.readthedocs.io/en/latest/Commands.html>`_
@@ -2094,6 +2101,7 @@ List of external links mentionned in this documentation.
 * `ext/uopz <https://pecl.php.net/package/uopz>`_
 * `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
 * `ext/xxtea <https://pecl.php.net/package/xxtea>`_
+* `ext/zookeeper <http://php.net/zookeeper>`_
 * `extension FANN <http://php.net/manual/en/book.fann.php>`_
 * `extension mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_
 * `Ez <https://ez.no/>`_
@@ -2110,8 +2118,8 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
@@ -2150,6 +2158,7 @@ List of external links mentionned in this documentation.
 * `IMAP <http://www.php.net/imap>`_
 * `in_array() <http://php.net/in_array>`_
 * `include <http://php.net/manual/en/function.include.php>`_
+* `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_
 * `Integer Syntax <http://php.net/manual/en/language.types.integer.php#language.types.integer.syntax>`_
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
@@ -2249,8 +2258,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
-* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
@@ -2334,6 +2343,7 @@ List of external links mentionned in this documentation.
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type operators <http://php.net/instanceof>`_
+* `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
@@ -2353,7 +2363,6 @@ List of external links mentionned in this documentation.
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
 * `Why 777 Folder Permissions are a Security Risk <https://www.spiralscripts.co.uk/Blog/why-777-folder-permissions-are-a-security-risk.html>`_
 * `Why does PHP 5.2+ disallow abstract static class methods? <https://stackoverflow.com/questions/999066/why-does-php-5-2-disallow-abstract-static-class-methods>`_
-* `Why is subclassing too much bad (and hence why should we use prototypes to do away with it)? <https://softwareengineering.stackexchange.com/questions/137687/why-is-subclassing-too-much-bad-and-hence-why-should-we-use-prototypes-to-do-aw>`_
 * `wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `Wincache extension for PHP <http://www.php.net/wincache>`_
 * `Wordpress <https://www.wordpress.org/>`_

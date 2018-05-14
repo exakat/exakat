@@ -43,7 +43,7 @@ Glossary
 
     + `array_fill_keys()`
 
-      + :ref:`Structures/CouldUseArrayFillKeys <structures/couldusearrayfillkeys>`
+      + :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`
 
     + `array_filter()`
 
@@ -895,7 +895,7 @@ Glossary
     + `__debugInfo`
 
       + :ref:`Must Return Methods <must-return-methods>`
-      + :ref:`__debugInfo() usage <\_\_debuginfo()-usage>`
+      + :ref:`__debugInfo() Usage <\_\_debuginfo()-usage>`
 
     + `__destruct`
 
