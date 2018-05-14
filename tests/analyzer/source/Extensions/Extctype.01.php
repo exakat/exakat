@@ -7,4 +7,7 @@ foreach ($strings as $testcase) {
         echo "The string $testcase does not consist of all letters or digits.\n";
     }
 }
+
+$a->ctype_alnum($method);
+
 ?>

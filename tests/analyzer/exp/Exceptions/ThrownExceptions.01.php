@@ -6,7 +6,9 @@ $expected     = array('$x = new Exception( )',
                       '$x',
                      );
 
-$expected_not = array(
+$expected_not = array('Exception3( )',
+                      '$b',
+                      'throw($b)',
                      );
 
 ?>

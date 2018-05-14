@@ -6,7 +6,9 @@ $expected     = array('staticm',
                       '$staticpr',
                      );
 
-$expected_not = array(
+$expected_not = array('$nonStaticp',
+                      '$nonStaticpt',
+                      '$nonStaticpr',
                      );
 
 ?>
