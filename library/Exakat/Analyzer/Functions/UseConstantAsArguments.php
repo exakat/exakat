@@ -77,10 +77,13 @@ class UseConstantAsArguments extends Analyzer {
         $positions = range(0, count((array) $functions->combinaison) - 1);
         // First loop federate some queries
         foreach($positions as $position) {
-            $fullnspath = array();
+            $fullnspath    = array();
+            $constantNames = array();
             foreach($functions->combinaison->{$position} as $function => $constants) {
-                $fullnspath[] = $function;
+                $fullnspath[]    = $function;
+                $constantNames[] = $constants;
             }
+            $constantNames = array_merge(...$constantNames);
             
             // if it's a constant, but not a PHP one
             $this->atomFunctionIs($fullnspath)
@@ -107,6 +110,7 @@ class UseConstantAsArguments extends Analyzer {
                 ->outIs('ARGUMENT')
                 ->is('rank', $position)
                 ->atomIs(array('Boolean', 'Null', 'Integer', 'Real'))
+                ->codeIsNot($constantNames)
                 ->back('first');
            $this->prepareQuery();
         }
