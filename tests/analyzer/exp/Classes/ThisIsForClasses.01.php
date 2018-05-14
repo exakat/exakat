@@ -4,7 +4,8 @@ $expected     = array('$this',
                       '$this',
                      );
 
-$expected_not = array(
+$expected_not = array('$this',
+                      '$this',
                      );
 
 ?>

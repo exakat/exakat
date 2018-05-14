@@ -154,18 +154,19 @@ class Jobqueue extends Tasks {
         $config = new ConfigExakat($job);
         $analyze = new Initproject($this->gremlin, $config, Tasks::IS_SUBTASK);
 
-        display( 'processing init job '.$job['project'].PHP_EOL);
-        $this->log('start init : '.$job['project']);
+        display( 'processing init job '.$job[1].PHP_EOL);
+        $this->log('start init : '.$job[1]);
         $begin = microtime(true);
         try {
             $analyze->run();
         } catch (\Exception $e) {
             $datastore = new Datastore($config);
             $datastore->addRow('hash', array('init error' => $e->getMessage() ));
+        } finally {
+            unset($analyze);
         }
         $end = microtime(true);
         $this->log('end init : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
-        unset($analyze);
         display( 'processing init job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
     
@@ -198,10 +199,11 @@ class Jobqueue extends Tasks {
         } catch (\Exception $e) {
             $datastore = new Datastore($config);
             $datastore->addRow('hash', array('init error' => $e->getMessage() ));
+        } finally {
+            unset($analyze);
         }
         $end = microtime(true);
         $this->log('end project : '.$job[1].' ('.number_format($end -$begin, 2).' s)');
-        unset($analyze);
         display( 'processing project job '.$job[1].' done ('.number_format($end -$begin, 2).' s)'.PHP_EOL);
     }
 

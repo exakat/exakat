@@ -1,4 +1,4 @@
-Version 1.2.6 (Li Yuanji, coming up)
+Version 1.2.8 (Xu Jingzong, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,27 @@ Version 1.2.6 (Li Yuanji, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.2.7 (Li Yuanji, 2018-05-14)
++ Architecture
+    + Extended status command to all VCS
+    + Added support for customized themes
+    + Added Upgrading section, List of parametrized analysis, revamped summary
+    + Simplified handling of commandline options
+    + Removed usage of JSON for 'doctor'
++ Report
+    + A lot more documentation, examples, links.
+    + Optimized type downloader
+    + Added report themes pre-requisites
++ Analyzer
+    + New analysis : ext/cmark
+    + Upgraded analysis : too many children is configurable
+    + Upgraded analysis : error_reporting 0 and -1 are not reported as issues.
+    + Checked unit tests : 2835 / 2839 test pass (99% pass). 
++ Tokenizer
+    + Fixed bug where constant self referenced.
+    + Moved Identifiers to Names
+    + Added first definitions for members. 
 
 Version 1.2.6 (Li Jiancheng, 2018-05-07)
 + Architecture

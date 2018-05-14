@@ -28,8 +28,7 @@ class SetExceptionHandlerPHP7 extends Analyzer {
         // With function name in a string
         $this->atomFunctionIs('\set_exception_handler')
              ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
-             ->hasNoOut('CONCAT')
+             ->has('noDelimiter')
              ->regexIsNot('noDelimiter', '::')
              ->hasIn('DEFINITION')
              ->functionDefinition()

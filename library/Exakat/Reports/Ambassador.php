@@ -79,10 +79,21 @@ class Ambassador extends Reports {
 
     public function __construct($config) {
         parent::__construct($config);
-        $this->frequences        = $this->themes->getFrequences();
-        $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
-        $this->severities        = $this->themes->getSeverities();
+        if ($this->themes !== null ){
+            $this->frequences        = $this->themes->getFrequences();
+            $this->timesToFix        = $this->themes->getTimesToFix();
+            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
+            $this->severities        = $this->themes->getSeverities();
+        }
+    }
+
+    public function dependsOnAnalysis() {
+        return array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
+                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
+                     'Analyze', 'Preferences', 'Inventory', 'Performances',
+                     'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Suggestions',
+                     'Custom',
+                     );
     }
 
     protected function getBasedPage($file) {
@@ -142,6 +153,11 @@ class Ambassador extends Reports {
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($name === self::STDOUT) {
             print "Can't produce Ambassador format to stdout\n";
+            return false;
+        }
+        
+        if ($missing = $this->checkMissingThemes()) {
+            print "Can't produce Ambassador format. There are ".count($missing)." missing themes : ".implode(', ', $missing).".\n";
             return false;
         }
 
@@ -207,18 +223,8 @@ class Ambassador extends Reports {
 
         // Annex
         $this->generateAnalyzerSettings();
-        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->themesToShow),
-                                     $this->themes->getThemeAnalyzers('Preferences'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP73')
-                                     );
-        $analyzersList = array_keys(array_count_values($analyzersList));
+        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->dependsOnAnalysis()));
+        $analyzersList = array_unique($analyzersList);
         $this->generateDocumentation($analyzersList);
         $this->generateCodes();
 
@@ -293,8 +299,8 @@ class Ambassador extends Reports {
     }
 
     protected function setPHPBlocs($description){
-        $description = preg_replace_callback("#<\?php(.*?)\?>#is", function ($x) { 
-            $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHP_EOL.PHPSyntax($x[1]).'?&gt;</pre>'; 
+        $description = preg_replace_callback("#<\?php(.*?)\?>#is", function ($x) {
+            $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHP_EOL.PHPSyntax($x[1]).'?&gt;</pre>';
             return $return;
         }, $description);
         
@@ -459,8 +465,8 @@ class Ambassador extends Reports {
             }
 
             // Ignore if we have no occurrences
-            if ($total === 0) { 
-                continue; 
+            if ($total === 0) {
+                continue;
             }
             $values = implode(', ', $values);
 
@@ -1017,7 +1023,7 @@ JAVASCRIPT;
         $finalHTML = $this->getBasedPage('parameter_counts');
 
         // List of extensions used
-        $res = @$this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<SQL
 SELECT key, value FROM hashResults
 WHERE name = "ParameterCounts"
 ORDER BY key
@@ -1989,7 +1995,7 @@ SQL;
                            'None'     => '#89070b'
                            );
 
-        $severityColors = array('Critical' => '#ff0000',   // red 
+        $severityColors = array('Critical' => '#ff0000',   // red
                                 'Major'    => '#FFA500',   // Orange
                                 'Minor'    => '#BDB76B',   // darkkhaki
                                 'None'     => '#D3D3D3',   // lightgrey
@@ -2498,7 +2504,7 @@ SQL
                     $data = json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
                     $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
                 }
-            } 
+            }
             foreach($data as $directive) {
                 $directiveList .= "<tr><td>$directive->name</td><td>$directive->suggested</td><td>$directive->documentation</td></tr>\n";
             }
@@ -2682,86 +2688,86 @@ HTML;
 
     private function generateExceptionTree() {
         $exceptions = array (
-  'Throwable' => 
+  'Throwable' =>
   array (
-    'Error' => 
+    'Error' =>
     array (
-      'ParseError' => 
+      'ParseError' =>
       array (
       ),
-      'TypeError' => 
+      'TypeError' =>
       array (
-        'ArgumentCountError' => 
+        'ArgumentCountError' =>
         array (
         ),
       ),
-      'ArithmeticError' => 
+      'ArithmeticError' =>
       array (
-        'DivisionByZeroError' => 
+        'DivisionByZeroError' =>
         array (
         ),
       ),
-      'AssertionError' => 
+      'AssertionError' =>
       array (
       ),
     ),
-    'Exception' => 
+    'Exception' =>
     array (
-      'ErrorException' => 
+      'ErrorException' =>
       array (
       ),
-      'ClosedGeneratorException' => 
+      'ClosedGeneratorException' =>
       array (
       ),
-      'DOMException' => 
+      'DOMException' =>
       array (
       ),
-      'LogicException' => 
+      'LogicException' =>
       array (
-        'BadFunctionCallException' => 
+        'BadFunctionCallException' =>
         array (
-          'BadMethodCallException' => 
+          'BadMethodCallException' =>
           array (
           ),
         ),
-        'DomainException' => 
+        'DomainException' =>
         array (
         ),
-        'InvalidArgumentException' => 
+        'InvalidArgumentException' =>
         array (
         ),
-        'LengthException' => 
+        'LengthException' =>
         array (
         ),
-        'OutOfRangeException' => 
+        'OutOfRangeException' =>
         array (
         ),
       ),
-      'RuntimeException' => 
+      'RuntimeException' =>
       array (
-        'OutOfBoundsException' => 
+        'OutOfBoundsException' =>
         array (
         ),
-        'OverflowException' => 
+        'OverflowException' =>
         array (
         ),
-        'RangeException' => 
+        'RangeException' =>
         array (
         ),
-        'UnderflowException' => 
+        'UnderflowException' =>
         array (
         ),
-        'UnexpectedValueException' => 
+        'UnexpectedValueException' =>
         array (
         ),
-        'PDOException' => 
+        'PDOException' =>
         array (
         ),
       ),
-      'PharException' => 
+      'PharException' =>
       array (
       ),
-      'ReflectionException' => 
+      'ReflectionException' =>
       array (
       ),
     ),
@@ -2782,7 +2788,7 @@ HTML;
 
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
-            } 
+            }
             
             $list[$parent][] = $row['fullcode'];
         }
@@ -2806,7 +2812,7 @@ HTML;
         foreach($paths as $path) {
             $folders = explode('\\', $path);
             
-            $first = empty($folders[0]) ? '\\' : $folders[0]; 
+            $first = empty($folders[0]) ? '\\' : $folders[0];
             
             if (!isset($return[$first])) {
                 $return[$first] = array();
@@ -2896,7 +2902,7 @@ HTML;
 
             if (is_array($v)) {
                 $return .= $this->tree2ul($v, $display);
-            } 
+            }
 
             $return .= '</li>';
         }
@@ -3006,13 +3012,13 @@ HTML;
             $visibilities = array('&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
-            if (isset($couldBePrivate[$row['fullnspath']]) && 
+            if (isset($couldBePrivate[$row['fullnspath']]) &&
                 in_array($row['method'], $couldBePrivate[$row['fullnspath']])) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
             }
 
-            if (isset($couldBeProtected[$row['fullnspath']]) && 
+            if (isset($couldBeProtected[$row['fullnspath']]) &&
                 in_array($row['method'], $couldBeProtected[$row['fullnspath']])) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
@@ -3098,13 +3104,13 @@ HTML;
             $visibilities = array($row['value'], '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
-            if (isset($couldBePrivate[$row['fullnspath']]) && 
+            if (isset($couldBePrivate[$row['fullnspath']]) &&
                 in_array($row['constant'], $couldBePrivate[$row['fullnspath']])) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
             }
 
-            if (isset($couldBeProtected[$row['fullnspath']]) && 
+            if (isset($couldBeProtected[$row['fullnspath']]) &&
                 in_array($row['constant'], $couldBeProtected[$row['fullnspath']])) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
@@ -3198,19 +3204,19 @@ HTML;
             $visibilities = array($row['value'], '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
-            if (isset($couldBePrivate[$row['fullnspath']]) && 
+            if (isset($couldBePrivate[$row['fullnspath']]) &&
                 in_array($row['property'], $couldBePrivate[$row['fullnspath']])) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
             }
 
-            if (isset($couldBeProtected[$row['fullnspath']]) && 
+            if (isset($couldBeProtected[$row['fullnspath']]) &&
                 in_array($row['property'], $couldBeProtected[$row['fullnspath']])) {
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
 
-            if (isset($couldBeConstant[$row['fullnspath']]) && 
+            if (isset($couldBeConstant[$row['fullnspath']]) &&
                 in_array($row['property'], $couldBeConstant[$row['fullnspath']])) {
                     $visibilities[$ranking['constant']] = '<i class="fa fa-star" style="color:black"></i>';
             }
@@ -3248,7 +3254,7 @@ HTML;
                 } elseif ($row['changeType'] === 'Member Default') {
                     $row['parentValue'] = '$'.$row['name'].' = '.$row['parentValue'];
                     $row['childValue']  = '$'.$row['name'].' = '.$row['childValue'];
-                } 
+                }
                 
                 $changedClasses .= '<tr><td>'.PHPSyntax($row['parentClass']).'</td>'.PHP_EOL.
                                        '<td>'.PHPSyntax($row['parentValue']).'</td>'.PHP_EOL.
@@ -3677,7 +3683,7 @@ HTML;
     private function Bugfixes_cve($cve) {
         if (empty($cve)) {
             return '-';
-        } 
+        }
         
         if (strpos($cve, ', ') !== false) {
             $cves = explode(', ', $cve);
@@ -3723,53 +3729,53 @@ HTML;
 
         $vcsClass = Vcs::getVCS($this->config);
         switch($vcsClass) {
-            case 'Git': 
+            case 'Git':
                 $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
 
                 $res = $this->datastore->gethash('vcs_branch');
-                if (!empty($res)) { 
+                if (!empty($res)) {
                     $info[] = array('Git branch', trim($res));
                 }
 
                 $res = $this->datastore->gethash('vcs_revision');
-                if (!empty($res)) { 
+                if (!empty($res)) {
                     $info[] = array('Git commit', trim($res));
                 }
                 break 1;
 
-            case 'Svn': 
+            case 'Svn':
                 $info[] = array('SVN URL', $this->datastore->gethash('vcs_url'));
                 break 1;
 
-            case 'Bazaar': 
+            case 'Bazaar':
                 $info[] = array('Bazaar URL', $this->datastore->gethash('vcs_url'));
                 break 1;
 
-            case 'Composer': 
+            case 'Composer':
                 $info[] = array('Package', $this->datastore->gethash('vcs_url'));
                 break 1;
 
-            case 'Mercurial': 
+            case 'Mercurial':
                 $info[] = array('Hg URL', $this->datastore->gethash('vcs_url'));
                 break 1;
 
-            case 'Copy': 
+            case 'Copy':
                 $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
                 break 1;
 
-            case 'Symlink': 
+            case 'Symlink':
                 $info[] = array('Original path', $this->datastore->gethash('vcs_url'));
                 break 1;
 
-            case 'Tarbz': 
+            case 'Tarbz':
                 $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
                 break 1;
 
-            case 'Targz': 
+            case 'Targz':
                 $info[] = array('Source URL', $this->datastore->gethash('vcs_url'));
                 break 1;
             
-            default : 
+            default :
                 $info[] = array('Repository URL', 'Downloaded archive');
         }
         

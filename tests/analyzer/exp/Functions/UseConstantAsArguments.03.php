@@ -5,7 +5,6 @@ $expected     = array('get_html_translation_table(T_COMMENT)',
                       'get_html_translation_table(null)',
                       'error_reporting(E_PARSE | E_NOTICE | T_SEMICOLON | E_WARNING)',
                       'error_reporting(T_SEMICOLON)',
-                      'error_reporting(0)',
                      );
 
 $expected_not = array('error_reporting(E_ALL)',
@@ -18,6 +17,7 @@ $expected_not = array('error_reporting(E_ALL)',
                       'get_html_translation_table($x->b)',
                       'get_html_translation_table(f())',
                       'get_html_translation_table(C::a())',
+                      'error_reporting(0)',
                      );
 
 ?>

@@ -152,6 +152,90 @@ Here, $_event->attendee is saved in a local variable, then the property is destr
                     $note = $_event->notes; unset($_event->notes);
                     $persistentExceptionEvent = $this->create($_event, $_checkBusyConflicts && $dtStartHasDiff);
 
+Dangling Array References
+=========================
+
+.. _typo3-structures-danglingarrayreferences:
+
+Typo3
+^^^^^
+
+:ref:`dangling-array-references`, in typo3/sysext/impexp/Classes/ImportExport.php:322. 
+
+foreach() reads $lines into $r, and augment those lines. By the end, the $r variable is not unset. Yet, several lines later, in the same method but with different conditions, another loop reuse the variable $r. If is_array($this->dat['header']['pagetree'] and is_array($this->remainHeader['records']) are arrays at the same moment, then both loops are called, and they share the same reference. Values of the latter array will end up in the formar. 
+
+.. code-block:: php
+
+    if (is_array($this->dat['header']['pagetree'])) {
+                reset($this->dat['header']['pagetree']);
+                $lines = [];
+                $this->traversePageTree($this->dat['header']['pagetree'], $lines);
+    
+                $viewData['dat'] = $this->dat;
+                $viewData['update'] = $this->update;
+                $viewData['showDiff'] = $this->showDiff;
+                if (!empty($lines)) {
+                    foreach ($lines as &$r) {
+                        $r['controls'] = $this->renderControls($r);
+                        $r['fileSize'] = GeneralUtility::formatSize($r['size']);
+                        $r['message'] = ($r['msg'] && !$this->doesImport ? '<span class=text-danger>' . htmlspecialchars($r['msg']) . '</span>' : '');
+                    }
+                    $viewData['pagetreeLines'] = $lines;
+                } else {
+                    $viewData['pagetreeLines'] = [];
+                }
+            }
+            // Print remaining records that were not contained inside the page tree:
+            if (is_array($this->remainHeader['records'])) {
+                $lines = [];
+                if (is_array($this->remainHeader['records']['pages'])) {
+                    $this->traversePageRecords($this->remainHeader['records']['pages'], $lines);
+                }
+                $this->traverseAllRecords($this->remainHeader['records'], $lines);
+                if (!empty($lines)) {
+                    foreach ($lines as &$r) {
+                        $r['controls'] = $this->renderControls($r);
+                        $r['fileSize'] = GeneralUtility::formatSize($r['size']);
+                        $r['message'] = ($r['msg'] && !$this->doesImport ? '<span class=text-danger>' . htmlspecialchars($r['msg']) . '</span>' : '');
+                    }
+                    $viewData['remainingRecords'] = $lines;
+                }
+            }
+
+
+--------
+
+
+.. _sugarcrm-structures-danglingarrayreferences:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`dangling-array-references`, in typo3/sysext/impexp/Classes/ImportExport.php:322. 
+
+There are two nested foreach here : they both have referenced blind variables. The second one uses $data, but never changes it. Yet, it is reused the next round in the first loop, leading to pollution from the first rows of $this->_parser->data into the lasts. This may happen even if $data is not modified explicitely : in fact, it will be modified the next call to foreach($row as ...), for each element in $row. 
+
+.. code-block:: php
+
+    foreach ($this->_parser->data as &$row) {
+                    foreach ($row as &$data) {
+                        $len = strlen($data);
+                        // check if it begins and ends with single quotes
+                        // if it does, then it double quotes may not be the enclosure
+                        if ($len>=2 && $data[0] == " && $data[$len-1] == ") {
+                            $beginEndWithSingle = true;
+                            break;
+                        }
+                    }
+                    if ($beginEndWithSingle) {
+                        break;
+                    }
+                    $depth++;
+                    if ($depth > $this->_max_depth) {
+                        break;
+                    }
+                }
+
 Logical Should Use Symbolic Operators
 =====================================
 
@@ -279,6 +363,39 @@ Parenthesis are useless for calculating $discount_percent, as it is a divisition
     				$discount_percent = ( wc_get_price_excluding_tax( $cart_item['data'] ) * $cart_item_qty ) / WC()->cart->subtotal_ex_tax;
     			}
     			$discount = ( (float) $this->get_amount() * $discount_percent ) / $cart_item_qty;
+
+Use Constant As Arguments
+=========================
+
+.. _tikiwiki-functions-useconstantasarguments:
+
+Tikiwiki
+^^^^^^^^
+
+:ref:`use-constant-as-arguments`, in /lib/language/Language.php:112. 
+
+E_WARNING is a valid constant, but PHP documentation for trigger_error() explains that E_USER constants should be used. 
+
+.. code-block:: php
+
+    trigger_error("Octal or hexadecimal string '" . $match[1] . "' not supported", E_WARNING)
+
+
+--------
+
+
+.. _shopware-functions-useconstantasarguments:
+
+shopware
+^^^^^^^^
+
+:ref:`use-constant-as-arguments`, in /engine/Shopware/Plugins/Default/Core/Debug/Components/EventCollector.php:106. 
+
+One example where code review reports errors where unit tests don't : array_multisort actually requires sort order first (SORT_ASC or SORT_DESC), then sort flags (such as SORT_NUMERIC). Here, with SORT_DESC = 3 and SORT_NUMERIC = 1, PHP understands it as the coders expects it. The same error is repeated six times in the code. 
+
+.. code-block:: php
+
+    array_multisort($order, SORT_NUMERIC, SORT_DESC, $this->results)
 
 Could Be Static
 ===============
@@ -1018,6 +1135,26 @@ This code prepares incoming '$values' for extraction. The keys are cleaned then 
                         $key = strtr($key, '=', '');
                         $key = strtr($key, ',', ';');
                         $keys = explode(';', $key);
+
+__debugInfo() Usage
+===================
+
+.. _dolibarr-php-debuginfousage:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`\_\_debuginfo()-usage`, in /htdocs/includes/stripe/lib/StripeObject.php:108. 
+
+_values is a private property from the Stripe Class. The class contains other objects, but only _values are displayed with var_dump.
+
+.. code-block:: php
+
+    // Magic method for var_dump output. Only works with PHP >= 5.6
+        public function __debugInfo()
+        {
+            return $this->_values;
+        }
 
 Exception Order
 ===============

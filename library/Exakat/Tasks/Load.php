@@ -61,10 +61,10 @@ class Load extends Tasks {
     private $namespace = '\\';
     private $uses   = array('function'       => array(),
                             'staticmethod'   => array(),
-                            'method'         => array(),  // @todo : handling of parents ? of multiple definition? 
-                            'classconst'     => array(), 
-                            'property'       => array(), 
-                            'staticproperty' => array(), 
+                            'method'         => array(),  // @todo : handling of parents ? of multiple definition?
+                            'classconst'     => array(),
+                            'property'       => array(),
+                            'staticproperty' => array(),
                             'const'          => array(),
                             'define'         => array(),
                             'class'          => array(),
@@ -2272,8 +2272,12 @@ SQL;
             $string = $this->addAtom('Self');
         } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
             $string = $this->addAtom('Parent');
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'list') {
+            $string = $this->addAtom('Name');
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
             $string = $this->addAtom('Newcall');
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
+            $string = $this->addAtom('Name');
         } else {
             $string = $this->addAtom('Identifier');
         }
@@ -2312,7 +2316,7 @@ SQL;
 
         if ($string->atom === 'Identifier') {
             $this->addCall('const', $string->fullnspath, $string);
-        } 
+        }
 
         $this->runPlugins($string, array());
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -4459,7 +4463,7 @@ SQL;
             } elseif ($static->atom === 'Staticproperty') {
                 $this->addCall('staticproperty',  $left->fullnspath.'::'.$right->code, $static);
             }
-        } 
+        }
 
         $this->pushExpression($static);
 
@@ -4594,7 +4598,7 @@ SQL;
             } elseif ($static->atom === 'Member') {
                 $this->addCall('property',  $left->fullnspath.'::$'.$right->code, $static);
             }
-        } 
+        }
 
         $this->pushExpression($static);
 
@@ -5267,10 +5271,10 @@ SQL;
         }
 
         // No need for This
-        if (in_array($call->atom, array('This', 'Self', 
-                                        'Parent',
-//                                        'Member', 'Methodcall', 'Staticmethodcall', 'Staticproperty', 'Staticconstant', 
-                                        'Isset', 'List', 'Empty',
+        if (in_array($call->atom, array(//'This', 'Self', 'Static',
+                                        'Parent', 
+//                                        'Member', 'Methodcall', 'Staticmethodcall', 'Staticproperty', 'Staticconstant',
+                                        'Isset', 'List', 'Empty', 'Eval', 'Exit',
                                         ))) {
             return;
         }
@@ -5305,7 +5309,8 @@ SQL;
             return; // Can't be a class anyway.
         }
         // single : is OK
-        if (preg_match('/[$ #?;%^\*\'\"\.\\\\ <>~&,|\(\){}\[\]\/\s=\+!`@\-]/is', $call->noDelimiter)) {
+        // \ is OK (for hardcoded path)
+        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=\+!`@\-]/is', $call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
 

@@ -28,14 +28,20 @@ class Marmelab extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'exakat';
 
+    public function dependsOnAnalysis() {
+        return array('Analyze');
+    }
+
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $list = $this->themes->getThemeAnalyzers(isset($this->config->thema) ? $this->config->thema : 'Analyze');
+        $themes = isset($this->config->thema) ? $this->config->thema : $this->dependsOnAnalysis();
+        
+        $list = $this->themes->getThemeAnalyzers($themes);
         $list = makeList($list);
         
         $analyzers = array();
         $files     = array();
 
-        $sqlQuery = 'SELECT id, fullcode, file, line, analyzer AS analyzer_id FROM results WHERE analyzer in ('.$list.')';
+        $sqlQuery = "SELECT id, fullcode, file, line, analyzer AS analyzer_id FROM results WHERE analyzer in ($list)";
         $res = $this->sqlite->query($sqlQuery);
 
         $results = array();
@@ -51,33 +57,34 @@ class Marmelab extends Reports {
                            'fixtime'     => $analyzer->getTimeToFix(),
                            'clearphp'    => $analyzer->getDescription()->getClearPHP(),
                            );
-            
+
                 $analyzers[$row['analyzer_id']] = (object) $a;
             }
 
             if (!isset($files[$row['file']])) {
                 $a = array('id'   => count($files) + 1,
                            'file' => $row['file']);
-                
+
                 $files[$row['file']] = (object) $a;
             }
             $row['files_id'] = $files[$row['file']]->id;
             unset($row['file']);
-            
+
             $x = (object) $row;
             $results[] = $x;
 
             $this->count();
         }
-        
-        $results = (object) [ 'reports'   => $results,
-                              'analyzers' => array_values($analyzers),
-                              'files'     => $files];
-        
+
+        $results = (object) array('reports'   => $results,
+                                  'analyzers' => array_values($analyzers),
+                                  'files'     => $files,
+                                 );
+
         if ($name === self::STDOUT) {
-            echo json_encode($results, JSON_PRETTY_PRINT);
+            echo json_encode($results, \JSON_PRETTY_PRINT);
         } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, json_encode($results, JSON_PRETTY_PRINT));
+            file_put_contents("$folder/$name.".self::FILE_EXTENSION, json_encode($results, \JSON_PRETTY_PRINT));
         }
     }
 }

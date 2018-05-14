@@ -48,6 +48,16 @@ class Bazaar extends Vcs {
         }
     }
 
+    public function getBranch() {
+        $res = shell_exec("cd {$this->destinationFull}/code/; bzr version-info 2>&1 | grep branch-nick");
+        return trim(substr($res, 13), " *\n");
+    }
+
+    public function getRevision() {
+        $res = shell_exec("cd {$this->destinationFull}/code/; bzr version-info 2>&1 | grep revno");
+        return trim(substr($res, 7), " *\n");
+    }
+
     public function getInstallationInfo() {
         $stats = array();
 
@@ -61,6 +71,16 @@ class Bazaar extends Vcs {
         }
         
         return $stats;
+    }
+
+    public function getStatus() {
+        $status = array('vcs'       => 'bzr',
+                        'branch'    => $this->getBranch(),
+                        'revision'  => $this->getRevision(),
+                        'updatable' => true,
+                       );
+
+        return $status;
     }
 }
 

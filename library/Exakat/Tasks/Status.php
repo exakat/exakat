@@ -27,6 +27,7 @@ use Exakat\Config;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Reports\Reports;
+use Exakat\Vcs\Vcs;
 
 class Status extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -90,54 +91,17 @@ class Status extends Tasks {
             $status['status'] = empty($inited) ? 'Init phase' : 'Not running';
         }
 
-        switch($this->config->project_vcs) {
-            case 'git' :
-                if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/')) {
-                    $urlDetails = parse_url($this->config->project_url);
-                    if (isset($urlDetails['pass'])) {
-                        $urlDetails['pass'] = '******';
-                    }
-                    $status['git url'] = unparse_url($urlDetails);
-                    $status['git status'] = trim(shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD 2&>1'));
-
-                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git remote update 2>&1; git status -uno | grep \'up-to-date\' ');
-                    $status['updatable'] = empty($res);
-                } else {
-                    $status['updatable'] = false;
-                }
-                break 1;
-
-            case 'composer' :
-                $composerLockPath = $this->config->projects_root.'/projects/'.$this->config->project.'/code/composer.lock';
-                if (!file_exists($composerLockPath)) {
-                    $status['updatable'] = false;
-                    $status['hash'] = 'No composer.lock';
-                }
-
-                $composerLock = @file_get_contents($composerLockPath);
-                
-                $json = json_decode($composerLock);
-                if (isset($json->hash)) {
-                    $status['hash'] = $json->hash;
-                } else {
-                    $status['hash'] = 'Can\'t read hash';
-                }
-
-                $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'; git remote update; git status -uno | grep \'Nothing to install or update\'');
-                $status['updatable'] = empty($res);
-                break 1;
-
-            case 'copy' :
-            case 'symlink' :
-                $status['hash'] = 'None';
-                $status['updatable'] = false;
-                break 1;
-
-            default:
-                $status['hash'] = 'None';
-                $status['updatable'] = 'N/A';
-                break 1;
+        if (($vcsClass = Vcs::getVcs($this->config)) === 'EmptyCode') {
+            $status['hash']      = 'None';
+            $status['updatable'] = 'N/A';
+        } else {
+            $vcsClass = "\\Exakat\\Vcs\\{$vcsClass}";
+            
+            $vcs = new $vcsClass($this->config->project, $this->config->projects_root);
+            $status = array_merge($status, $vcs->getStatus());
         }
+
+        $status['updatable'] = $status['updatable'] === true ? 'Yes' : 'No';
 
         // Check the logs
         $errors = $this->getErrors($path);

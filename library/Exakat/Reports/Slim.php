@@ -1509,7 +1509,7 @@ HTML;
         $table = '<table class="table table-striped">
         						<tr></tr>
         						<tr><th>Version</th><th>Status</th></tr>';
-        						
+                                
         $versions2 = array_map(function($x) { return 'Slim/Slimphp'.$x[0].$x[2]; }, $versions);
 
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $versions2).'") ORDER BY analyzer');

@@ -77,61 +77,61 @@ class Owasp extends Ambassador {
 
     private $components = array(
 'A1:2017-Injection' => array(
-	'Security/AnchorRegex',
-	'Security/EncodedLetters',
-	'Structures/EvalWithoutTry',
- 	'Security/parseUrlWithoutParameters',
-	'Structures/pregOptionE',
-	'Indirect Injection',
-	'Security/IndirectInjection',
-	'Structures/EvalUsage',
-	'Security/Sqlite3RequiresSingleQuotes',
+    'Security/AnchorRegex',
+    'Security/EncodedLetters',
+    'Structures/EvalWithoutTry',
+    'Security/parseUrlWithoutParameters',
+    'Structures/pregOptionE',
+    'Indirect Injection',
+    'Security/IndirectInjection',
+    'Structures/EvalUsage',
+    'Security/Sqlite3RequiresSingleQuotes',
 ),
 'A2:2017-Broken Authentication' => array(
 
 ),
 'A3:2017-Sensitive Data Exposure' => array(
-	'Security/DontEchoError',
-	'Structures/PhpinfoUsage',
-	'Structures/VardumpUsage',
+    'Security/DontEchoError',
+    'Structures/PhpinfoUsage',
+    'Structures/VardumpUsage',
 ),
 'A4:2017-XML External Entities (XXE)' => array(
-	'Security/NoNetForXmlLoad',
+    'Security/NoNetForXmlLoad',
 ),
 'A5:2017-Broken Access Control' => array(
-	'Structures/NoHardcodedHash',
-	'Structures/NoHardcodedIp',
-	'Structures/NoHardcodedPort',
-	'Functions/HardcodedPasswords',
-	'Security/CompareHash',
+    'Structures/NoHardcodedHash',
+    'Structures/NoHardcodedIp',
+    'Structures/NoHardcodedPort',
+    'Functions/HardcodedPasswords',
+    'Security/CompareHash',
 ),
 'A6:2017-Security Misconfiguration' => array(
-	'Security/AvoidThoseCrypto',
-	'Structures/RandomWithoutTry',
-	'Security/CurlOptions',
-	'Security/SetCookieArgs',
-	'Security/ShouldUsePreparedStatement',
-	'Security/ShouldUseSessionRegenerateId',
-	'Security/SessionLazyWrite',
-	'Php/BetterRand',
-	'Security/MkdirDefault',
-	'Security/RegisterGlobals',
+    'Security/AvoidThoseCrypto',
+    'Structures/RandomWithoutTry',
+    'Security/CurlOptions',
+    'Security/SetCookieArgs',
+    'Security/ShouldUsePreparedStatement',
+    'Security/ShouldUseSessionRegenerateId',
+    'Security/SessionLazyWrite',
+    'Php/BetterRand',
+    'Security/MkdirDefault',
+    'Security/RegisterGlobals',
 ),
 'A7:2017-Cross-Site Scripting (XSS)' => array(
-	'Security/UploadFilenameInjection',
+    'Security/UploadFilenameInjection',
 ),
 'A8:2017-Insecure Deserialization' => array(
-	'Security/UnserializeSecondArg',
+    'Security/UnserializeSecondArg',
 ),
 'A9:2017-Using Components with Known Vulnerabilities' => array(
 ),
 'A10:2017-Insufficient Logging&Monitoring' => array(
 ),
 'Others' => array(
-	'Structures/NoReturnInFinally',
-	'Security/NoSleep',
-	'Structures/Fallthrough',
-));        
+    'Structures/NoReturnInFinally',
+    'Security/NoSleep',
+    'Structures/Fallthrough',
+));
 
     public function __construct($config) {
         parent::__construct($config);
@@ -1178,11 +1178,11 @@ HTML;
         $table = '<table class="table table-striped">
         						<tr></tr>
         						<tr><th>Component</th><th>composer.json</th><th>used</th></tr>';
-        						
+                                
         foreach($sources as $s => $c) {
             $composerName = preg_replace('#zendf/zf3(.*?)#', 'zendframework/zend-$1', strtolower($s));
             
-            // if 
+            // if
             if (isset($require->{'zendframework/zendframework'})) {
                 $inComposer = $require->{'zendframework/zendframework'};
             } else {
@@ -1223,8 +1223,8 @@ HTML;
         $table = '<table class="table table-striped">
         						<tr></tr>
         						<tr><th>Exception</th><th>File</th><th>line</th></tr>'
-        						.$exceptionInventory.
-        						'        					</table>';
+                                .$exceptionInventory.
+                                '        					</table>';
         $html = $this->getBasedPage('empty');
         $html = $this->injectBloc($html, 'CONTENT', $table);
         $this->putBasedPage('thrown_exceptions', $html);

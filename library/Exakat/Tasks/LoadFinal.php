@@ -139,17 +139,19 @@ GREMLIN;
 g.V().hasLabel("Identifier")
      .has("fullnspath")
      .not(where( __.in("DEFINITION", "NAME")))
+     .not(where( __.in("ARGUMENT").hasLabel("Defineconstant")))
      .values("code")
      .unique()
 GREMLIN;
         $res = $this->gremlin->query($query);
 
         $constants = array_values(array_intersect($res->toArray(), $this->dictCode->translate($constantsPHP) ));
-        
+
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
      .has("fullnspath")
      .not(where( __.in("DEFINITION")))
+     .not(where( __.in("ARGUMENT").hasLabel("Defineconstant")))
      .filter{ it.get().value("code") in arg1 }
      .sideEffect{
          tokens = it.get().value("fullnspath").tokenize('\\\\');

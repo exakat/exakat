@@ -452,7 +452,7 @@ class Appinfo extends Data {
             unset($this->values['Composer Packages']);
         }
 
-        // Special case for the encodings : one tick each. 
+        // Special case for the encodings : one tick each.
         $res = $this->sqlite->query('SELECT encoding, block FROM stringEncodings ORDER BY encoding, block');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (empty($row['encoding'])) {

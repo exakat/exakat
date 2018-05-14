@@ -81,6 +81,14 @@ class Targz extends Vcs {
         return $stats;
     }
 
+    public function getStatus() {
+        $status = array('vcs'       => 'tar.gz',
+                        'updatable' => false
+                       );
+
+        return $status;
+    }
+
 }
 
 ?>

@@ -30,7 +30,7 @@ class CouldUseAlias extends Analyzer {
         // a\b::D(); and also a\b\d\e
         $this->atomIs(array('Nsname', 'Newcall'))
              ->hasNoIn(array('USE', 'NAME', 'METHOD', 'VARIABLE'))
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs('T_NS_SEPARATOR')
              ->codeIsNot('[')
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fnp')
@@ -39,8 +39,7 @@ class CouldUseAlias extends Analyzer {
              ->outIs('EXPRESSION')
              ->atomIs('Usenamespace')
              ->outIs('USE')
-             ->isNot('absolute', true)
-             ->raw('filter{ (fnp =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") + "(\\\\\\\\.*)?\\$" ).getCount() > 0 }')
+             ->raw('filter{ (fnp =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0 }')
              ->back('first');
         $this->prepareQuery();
     }

@@ -61,6 +61,26 @@ class Mercurial extends Vcs {
         
         return $stats;
     }
+
+    public function getBranch() {
+        $res = shell_exec("cd {$this->destinationFull}/code/; hg summary 2>&1 | grep branch");
+        return trim(substr($res, 8), " *\n");
+    }
+
+    public function getRevision() {
+        $res = shell_exec("cd {$this->destinationFull}/code/; hg summary 2>&1 | grep parent");
+        return trim(substr($res, 8), " *\n");
+    }
+
+    public function getStatus() {
+        $status = array('vcs'       => 'hg',
+                        'branch'    => $this->getBranch(),
+                        'revision'  => $this->getRevision(),
+                        'updatable' => true
+                       );
+
+        return $status;
+    }
 }
 
 ?>

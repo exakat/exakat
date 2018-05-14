@@ -91,7 +91,9 @@ class Doctor extends Tasks {
         $stats['exakat']['exakat.ini']  = $this->array2list($this->config->configFiles);
         $stats['exakat']['graphdb']     = $this->config->graphdb;
         $stats['exakat']['reports']     = $this->array2list($this->config->project_reports);
-        $stats['exakat']['themes']      = $this->array2list($this->config->project_themes);
+        
+        $stats['exakat']['themes']      = $this->array2list(array_merge($this->config->project_themes,
+                                                                        array_keys($this->config->themas)));
         $stats['exakat']['tokenslimit'] = number_format((int) $this->config->token_limit, 0, '', ' ');
         
 

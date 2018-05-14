@@ -28,9 +28,10 @@ class UseClassOperator extends Analyzer {
     public function analyze() {
         // $a = '\x'; class x {}
         $this->atomIs('String')
-             ->hasNoOut('CONCAT')
-             ->hasIn('DEFINITION')
+             ->has('noDelimiter')
              ->regexIsNot('fullcode', '::')
+             ->inIs('DEFINITION')
+             ->atomIs('Class')
              ->back('first');
         $this->prepareQuery();
     }

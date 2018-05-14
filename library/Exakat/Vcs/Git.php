@@ -131,6 +131,16 @@ class Git extends Vcs {
 
         return $stats;
     }
+
+    public function getStatus() {
+        $status = array('vcs'       => 'git',
+                        'branch'    => $this->getBranch(),
+                        'revision'  => $this->getRevision(),
+                        'updatable' => true,
+                       );
+
+        return $status;
+    }
 }
 
 ?>

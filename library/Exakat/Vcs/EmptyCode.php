@@ -30,6 +30,14 @@ class EmptyCode extends Vcs {
         return '';
     }
 
+    public function getStatus() {
+        $status = array('vcs'       => 'none',
+                        'updatable' => false
+                       );
+
+        return $status;
+    }
+
 }
 
 ?>

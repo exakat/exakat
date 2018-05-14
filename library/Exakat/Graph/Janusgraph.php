@@ -46,7 +46,7 @@ class Janusgraph extends Graph {
     public function __construct($config) {
         parent::__construct($config);
         
-        $this->client = new Client('ws://'.$this->config->janusgraph_host.':'.$this->config->janusgraph_port.'/', 
+        $this->client = new Client('ws://'.$this->config->janusgraph_host.':'.$this->config->janusgraph_port.'/',
                                     array('timeout'       => 123,
                                           'fragment_size' => 1024 * 1024));
     }
@@ -58,7 +58,7 @@ class Janusgraph extends Graph {
                 'requestId' => self::createUuid(),
                 'op'        => 'eval',
                 'processor' => '',
-                'args'      => array('gremlin' => $query) 
+                'args'      => array('gremlin' => $query)
                 );
         if (!empty($params)) {
             $message['args']['bindings'] = $params;

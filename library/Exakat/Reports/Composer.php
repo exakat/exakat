@@ -38,7 +38,7 @@ class Composer extends Reports {
         }
 
         $configureDirectives = json_decode(file_get_contents($this->config->dir_root.'/data/configure.json'));
-        // List of extensions that must be avoided 
+        // List of extensions that must be avoided
         $noExtensions = parse_ini_file($this->config->dir_root.'/data/php_no_extension.ini');
         $noExtensions = $noExtensions['ext'];
 
@@ -51,7 +51,7 @@ class Composer extends Reports {
             $composer->name = $this->config->project_name;   //
             $composer->description = "";                     //
             $composer->type = "library";                     // default value
-            $composer->keywords = array();                   // where to find them ? 
+            $composer->keywords = array();                   // where to find them ?
             $composer->homepage = "";                        //
             $composer->license = "";                         //
 

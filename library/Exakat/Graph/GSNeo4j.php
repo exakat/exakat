@@ -198,7 +198,7 @@ class GSNeo4j extends Graph {
             display('stop gremlin server 3.3.x');
             shell_exec('cd '.$this->config->gsneo4j_folder.'; ./bin/gremlin-server.sh stop');
             unlink($this->config->gsneo4j_folder.'/run/gremlin.pid');
-        } 
+        }
         
         if (file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
             display('stop gremlin server 3.2.x');
@@ -210,7 +210,7 @@ class GSNeo4j extends Graph {
         $return = array();
         
         if (!isset($result[0]['properties'])) {
-            return $result; 
+            return $result;
         }
 
         foreach($result as $r) {

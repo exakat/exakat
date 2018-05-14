@@ -108,12 +108,15 @@ SQL
 );
        
         $fp = fopen($this->path.'.def', 'w+');
+        $total = 0;
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            ++$total;
             fputcsv($fp, $row);
         }
         fclose($fp);
-
-        $query = <<<GREMLIN
+        
+        if (!empty($total)) {
+            $query = <<<GREMLIN
 getIt = { id ->
   def p = g.V(id);
   p.next();
@@ -125,9 +128,12 @@ new File('$this->path.def').eachLine {
 }
 
 GREMLIN;
-        $res = $this->gsneo4j->query($query);
+            $res = $this->gsneo4j->query($query);
+            display('loaded definitions');
+        } else {
+            display('no definitions');
+        }
         $end = microtime(true);
-        display('loaded definitions');
 
         self::saveTokenCounts();
 
@@ -169,7 +175,7 @@ GREMLIN;
         foreach($atoms as $atom) {
             if ($atom->atom === 'File') {
                 $fileName = $atom->code;
-            } 
+            }
             
             if ($atom->atom === 'Project') {
                 if ($this->projectId === null) {
@@ -221,7 +227,7 @@ GREMLIN;
         foreach($json as $j) {
             if ($j->label === 'Project') {
                 continue;
-            } 
+            }
             
             $V = $j->properties['code'][0]->value;
             $j->properties['code'][0]->value = $this->dictCode->get($V);

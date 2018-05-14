@@ -252,10 +252,18 @@ GREMLIN;
                 $this->analyzerId = $res->toString();
             } else {
                 $this->analyzerId = $res->toString();
+                if ($this->analyzerId == 0) {
+                    // Creating analysis vertex
+                    $resId = $this->gremlin->getId();
 
-                // Removing all edges
-                $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").outE("ANALYZED").drop()';
-                $res = $this->gremlin->query($query);
+                    $query = 'g.addV().property(T.id, '.$resId.').property(T.label, "Analysis").property("analyzer", "'.$this->analyzerQuoted.'").property("atom", "Analysis").id()';
+                    $res = $this->gremlin->query($query);
+                    $this->analyzerId = $res->toString();
+                } else {
+                    // Removing all edges
+                    $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").outE("ANALYZED").drop()';
+                    $res = $this->gremlin->query($query);
+                }
             }
         } else {
             $this->analyzerId = $analyzerId;
@@ -538,6 +546,14 @@ GREMLIN
     public function fullcodeInside($fullcode) {
         // $fullcode is a name of a variable
         $gremlin = 'emit( ).repeat( out() ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}';
+        $this->addMethod($gremlin);
+
+        return $this;
+    }
+
+    public function noFullcodeInside($fullcode) {
+        // $fullcode is a name of a variable
+        $gremlin = 'not( where( __.emit( ).repeat( out() ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}) )';
         $this->addMethod($gremlin);
 
         return $this;
@@ -1355,7 +1371,7 @@ GREMLIN
     }
 
     public function hasNoFunctionDefinition() {
-        $this->addMethod('not( where( __.in("DEFINITION").hasLabel("Function", "Method") ) )');
+        $this->addMethod('not( where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") ) )');
     
         return $this;
     }

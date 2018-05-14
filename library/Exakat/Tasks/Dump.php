@@ -59,7 +59,8 @@ class Dump extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
-        $projectInGraph = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")')->toArray()[0];
+        $projectInGraph = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")')
+                                        ->toArray()[0];
         
         if ($projectInGraph !== $this->config->project) {
             throw new NotProjectInGraph($this->config->project, $projectInGraph);
@@ -473,9 +474,12 @@ GREMLIN;
 
         // Name spaces
         $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
-        $this->sqlite->query('CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                         namespace STRING
-                                                 )');
+        $this->sqlite->query(<<<SQL
+CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                           namespace STRING
+                        )
+SQL
+);
         $this->sqlite->query('INSERT INTO namespaces VALUES ( 1, "")');
 
         $query = <<<GREMLIN
@@ -1607,6 +1611,25 @@ SQL;
 
         display( count($values).' readability index');
     }
+
+    public function checkThemes($theme, array $analyzers) {
+        $sqliteFile = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
+        
+        $sqlite = new \Sqlite3($sqliteFile);
+
+        $query = "SELECT analyzer FROM resultsCounts WHERE analyzer IN (".makeList($analyzers).")";
+        $ran = array();
+        $res = $sqlite->query($query);
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $ran[] = $row['analyzer'];
+        }
+        
+        if (empty(array_diff($analyzers, $ran))) {
+            $query = "INSERT INTO themas (\"id\", \"thema\") VALUES (null, \"$theme\")";
+            $sqlite->query($query);
+        }
+    }
+
 }
 
 ?>

@@ -66,7 +66,7 @@ class GroupBy implements ArrayAccess, Iterator {
     }
 
     public function rewind() {
-        reset($this->data); 
+        reset($this->data);
     }
 
     public function valid () {

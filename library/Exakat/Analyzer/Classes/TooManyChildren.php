@@ -28,9 +28,9 @@ use Exakat\Analyzer\Analyzer;
 class TooManyChildren extends Analyzer {
     public function analyze() {
         // class a with extends
+        // default value : childrenCount = 15
         $this->atomIs('Class')
-             ->raw('where( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS").count().is(gt(15)) )')
-             ->back('first');
+             ->raw('where( __.out("DEFINITION").in("EXTENDS").count().is(gte('.$this->childrenClassCount.')) )');
         $this->prepareQuery();
     }
 }

@@ -212,86 +212,86 @@ class Manual extends Reports {
 
     private function generateExceptionTree() {
         $exceptions = array (
-  'Throwable' => 
+  'Throwable' =>
   array (
-    'Error' => 
+    'Error' =>
     array (
-      'ParseError' => 
+      'ParseError' =>
       array (
       ),
-      'TypeError' => 
+      'TypeError' =>
       array (
-        'ArgumentCountError' => 
+        'ArgumentCountError' =>
         array (
         ),
       ),
-      'ArithmeticError' => 
+      'ArithmeticError' =>
       array (
-        'DivisionByZeroError' => 
+        'DivisionByZeroError' =>
         array (
         ),
       ),
-      'AssertionError' => 
+      'AssertionError' =>
       array (
       ),
     ),
-    'Exception' => 
+    'Exception' =>
     array (
-      'ErrorException' => 
+      'ErrorException' =>
       array (
       ),
-      'ClosedGeneratorException' => 
+      'ClosedGeneratorException' =>
       array (
       ),
-      'DOMException' => 
+      'DOMException' =>
       array (
       ),
-      'LogicException' => 
+      'LogicException' =>
       array (
-        'BadFunctionCallException' => 
+        'BadFunctionCallException' =>
         array (
-          'BadMethodCallException' => 
+          'BadMethodCallException' =>
           array (
           ),
         ),
-        'DomainException' => 
+        'DomainException' =>
         array (
         ),
-        'InvalidArgumentException' => 
+        'InvalidArgumentException' =>
         array (
         ),
-        'LengthException' => 
+        'LengthException' =>
         array (
         ),
-        'OutOfRangeException' => 
+        'OutOfRangeException' =>
         array (
         ),
       ),
-      'RuntimeException' => 
+      'RuntimeException' =>
       array (
-        'OutOfBoundsException' => 
+        'OutOfBoundsException' =>
         array (
         ),
-        'OverflowException' => 
+        'OverflowException' =>
         array (
         ),
-        'RangeException' => 
+        'RangeException' =>
         array (
         ),
-        'UnderflowException' => 
+        'UnderflowException' =>
         array (
         ),
-        'UnexpectedValueException' => 
+        'UnexpectedValueException' =>
         array (
         ),
-        'PDOException' => 
+        'PDOException' =>
         array (
         ),
       ),
-      'PharException' => 
+      'PharException' =>
       array (
       ),
-      'ReflectionException' => 
+      'ReflectionException' =>
       array (
       ),
     ),
@@ -314,7 +314,7 @@ class Manual extends Reports {
 
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
-            } 
+            }
             
             $list[$parent][] = $row['fullcode'];
         }

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 11 May 2018 12:45:50 +0000
-.. comment: Generation hash : 3eb56483e7a672ec15e9e962ed845fcb731275c8
+.. comment: Generation date : Mon, 14 May 2018 15:10:46 +0000
+.. comment: Generation hash : 98f45b93bb74610712dca01b3d7926f30fcfe413
 
 
 .. _$http\_raw\_post\_data:
@@ -3030,7 +3030,9 @@ The array must be filled with other constants. It may also be build using the '+
    const PRIMES = [2, 3, 5, 7];
    
    class X {
-       const MORE_PRIMES = [11, 13, 17, 19];
+       const TWENTY_THREE = 23;
+       const MORE_PRIMES = PRIMES + [11, 13, 17, 19];
+       const EVEN_MORE_PRIMES = self::MORE_PRIMES + [self::TWENTY_THREE];
    }
    
    ?>
@@ -3863,6 +3865,43 @@ See also `Magic Constants <http://php.net/manual/en/language.constants.predefine
 
 
 
+.. _could-use-array\_fill\_keys:
+
+Could Use array_fill_keys
+#########################
+
+
+`'array_fill_keys() <http://www.php.net/array_fill_keys>`_ is a native PHP function that creates an array from keys. It gets the list of keys, and a constant value to assign to each keys.
+
+This is twice faster than doing the same with a loop.
+
+.. code-block:: php
+
+   <?php
+   
+   $array = range('a', 'z');
+   
+   // Fast way to build the array
+   $b = array_fill_key($a, 0);
+   
+   // Slow way to build the array
+   foreach($array as $a) {
+       $b[$a] = 0;
+   }
+   
+   ?>
+
+
+See also `array_fill_keys <http://php.net/array_fill_keys>`_.
+
++------------+----------------------------------+
+| Short name | Structures/CouldUseArrayFillKeys |
++------------+----------------------------------+
+| Themes     | :ref:`Suggestions`               |
++------------+----------------------------------+
+
+
+
 .. _could-use-array\_unique:
 
 Could Use array_unique
@@ -4079,7 +4118,10 @@ It is highly recommended to unset blind variables when they are set up as refere
 
 When omitting this step, the next loop that will also require this variable will deal with garbage values, and produce unexpected results.
 
-See also : `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_.
+See also : `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_, 
+           `PHP foreach pass-by-reference: Do it right, or better not at all <https://coderwall.com/p/qx3fpa/php-foreach-pass-by-reference-do-it-right-or-better-not-at-all>`_,
+           `How does PHP 'foreach' actually work? <https://stackoverflow.com/questions/10057671/how-does-php-foreach-actually-work/14854568#14854568>`_,
+           `References and foreach <https://schlueters.de/blog/archives/141-references-and-foreach.html>`_.
 
 +------------+-----------------------------------------------------------------------------------------------------------+
 | Short name | Structures/DanglingArrayReferences                                                                        |
@@ -4087,6 +4129,8 @@ See also : `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/maste
 | Themes     | :ref:`Analyze`                                                                                            |
 +------------+-----------------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-dangling-reference <https://github.com/dseguy/clearPHP/tree/master/rules/no-dangling-reference.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`typo3-structures-danglingarrayreferences`, :ref:`sugarcrm-structures-danglingarrayreferences`       |
 +------------+-----------------------------------------------------------------------------------------------------------+
 
 
@@ -12933,6 +12977,10 @@ The same pattern is not reported with -, as it is legit expression. + sign is us
    
    ?>
 
+
+See also `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_ and 
+         `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_.
+
 +------------+------------------------------+
 | Short name | Structures/PossibleIncrement |
 +------------+------------------------------+
@@ -16521,43 +16569,6 @@ See also `strtr <http://www.php.net/strtr>`_.
 
 
 
-.. _structures/couldusearrayfillkeys:
-
-Structures/CouldUseArrayFillKeys
-################################
-
-
-`'array_fill_keys() <http://www.php.net/array_fill_keys>`_ is a native PHP function that creates an array from keys. It gets the list of keys, and a constant value to assign to each keys.
-
-This is twice faster than doing the same with a loop.
-
-.. code-block:: php
-
-   <?php
-   
-   $array = range('a', 'z');
-   
-   // Fast way to build the array
-   $b = array_fill_key($a, 0);
-   
-   // Slow way to build the array
-   foreach($array as $a) {
-       $b[$a] = 0;
-   }
-   
-   ?>
-
-
-See also `array_fill_keys <http://php.net/array_fill_keys>`_.
-
-+------------+----------------------------------+
-| Short name | Structures/CouldUseArrayFillKeys |
-+------------+----------------------------------+
-| Themes     | :ref:`Suggestions`               |
-+------------+----------------------------------+
-
-
-
 .. _substring-first:
 
 Substring First
@@ -16921,7 +16932,9 @@ The throw keyword is excepted to use an exception. Calling a function to prepare
    ?>
 
 
-When the new keyword is forgotten, then the class construtor is used as a functionname, and now exception is emited, but an 'Undefined function' fatal error is emited.
+When the new keyword is forgotten, then the class construtor is used as a functionname, and now exception is emited, but an 'Undefined function' fatal error is emited. 
+
+See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
 
 +------------+----------------------------------------------+
 | Short name | Exceptions/ThrowFunctioncall                 |
@@ -17075,6 +17088,67 @@ When the difference is very small, it requires a better way to measure time diff
 +------------+---------------------------------------------------------------------------------------------+
 | Examples   | :ref:`zurmo-structures-timestampdifference`, :ref:`shopware-structures-timestampdifference` |
 +------------+---------------------------------------------------------------------------------------------+
+
+
+
+.. _too-many-children:
+
+Too Many Children
+#################
+
+
+Classes that have more than 15 children. It is worth checking if they cannot be refactored in anyway.
+
+The threshold of 15 children can be configured. There is no technical limitation of the number of children and grand-children for a class. 
+
+The analysis doesn't work recursively : only direct generations are counted. Only children that can be found in the code are counted. 
+
+.. code-block:: php
+
+   <?php
+   
+   // parent class
+   // calling it grandparent to avoid confusion with 'parent'
+   class grandparent {}
+   
+   
+   class children1 extends grandparent {}
+   class children2 extends grandparent {}
+   class children3 extends grandparent {}
+   class children4 extends grandparent {}
+   class children5 extends grandparent {}
+   class children6 extends grandparent {}
+   class children7 extends grandparent {}
+   class children8 extends grandparent {}
+   class children9 extends grandparent {}
+   class children11 extends grandparent {}
+   class children12 extends grandparent {}
+   class children13 extends grandparent {}
+   class children14 extends grandparent {}
+   class children15 extends grandparent {}
+   class children16 extends grandparent {}
+   class children17 extends grandparent {}
+   class children18 extends grandparent {}
+   class children19 extends grandparent {}
+   
+   ?>
+
+
+See also `Why is subclassing too much bad (and hence why should we use prototypes to do away with it)? <https://softwareengineering.stackexchange.com/questions/137687/why-is-subclassing-too-much-bad-and-hence-why-should-we-use-prototypes-to-do-aw>`_.
+
++--------------------+---------+---------+--------------------------------------------------------+
+| Name               | Default | Type    | Description                                            |
++--------------------+---------+---------+--------------------------------------------------------+
+| childrenClassCount | 15      | integer | Threshold for too many children classes for one class. |
++--------------------+---------+---------+--------------------------------------------------------+
+
+
+
++------------+-------------------------+
+| Short name | Classes/TooManyChildren |
++------------+-------------------------+
+| Themes     | :ref:`Suggestions`      |
++------------+-------------------------+
 
 
 
@@ -17319,6 +17393,10 @@ A method that needs more than 8 parameters is trying to do too much : it should 
    }
    
    ?>
+
+
+See also `How many parameters is too many ? <https://www.exakat.io/how-many-parameters-is-too-many/>`_ and 
+         `Too Many Parameters <http://wiki.c2.com/?TooManyParameters>`_.
 
 +-----------------+---------+---------+-----------------------------------------+
 | Name            | Default | Type    | Description                             |
@@ -18324,7 +18402,8 @@ The X modifier : X is still existing with PCRE2, though it is now the default fo
    ?>
 
 
-See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_ and `PHP RFC: PCRE2 migration <https://wiki.php.net/rfc/pcre2-migration>`.
+See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_ and 
+         `PHP RFC: PCRE2 migration <https://wiki.php.net/rfc/pcre2-migration>`.
 
 +------------+------------------------+
 | Short name | Php/UnknownPcre2Option |
@@ -19565,11 +19644,33 @@ Use Constant As Arguments
 
 Some methods and functions are defined to be used with constants as arguments. Those constants are made to be meaningful and readable, keeping the code maintenable. It is recommended to use such constants as soon as they are documented.
 
-+------------+----------------------------------+
-| Short name | Functions/UseConstantAsArguments |
-+------------+----------------------------------+
-| Themes     | :ref:`Analyze`                   |
-+------------+----------------------------------+
+.. code-block:: php
+
+   <?php
+   
+   // Turn off all error reporting
+   // 0 and -1 are accepted 
+   error_reporting(0);
+   
+   // Report simple running errors
+   error_reporting(E_ERROR | E_WARNING | E_PARSE);
+   
+   // The first argument can be one of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+   $search_html = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
+   
+   // sort accepts one of SORT_REGULAR, SORT_NUMERIC, SORT_STRING, SORT_LOCALE_STRING, SORT_NATURAL
+   // SORT_FLAG_CASE may be added, and combined with SORT_STRING or SORT_NATURAL
+   sort($fruits);
+   
+   ?>
+
++------------+----------------------------------------------------------------------------------------------------+
+| Short name | Functions/UseConstantAsArguments                                                                   |
++------------+----------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                     |
++------------+----------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`tikiwiki-functions-useconstantasarguments`, :ref:`shopware-functions-useconstantasarguments` |
++------------+----------------------------------------------------------------------------------------------------+
 
 
 
@@ -19656,7 +19757,10 @@ Last, `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ may 
 
 `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ and `'is_object() <http://www.php.net/is_object>`_ may not be always interchangeable. Consider using `'isset <http://www.php.net/isset>`_ on a known property for a simple check on object. You may also consider `'is_string() <http://www.php.net/is_string>`_, `'is_integer() <http://www.php.net/is_integer>`_ or `'is_scalar() <http://www.php.net/is_scalar>`_, in particular instead of !`'is_object() <http://www.php.net/is_object>`_.
 
-The `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is also faster than the `'is_object() <http://www.php.net/is_object>`_ functioncall.
+The `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is also faster than the `'is_object() <http://www.php.net/is_object>`_ functioncall. 
+
+See also `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_ and 
+         `is_object <http://php.net/manual/en/function.is-object.php>`_.
 
 +------------+--------------------------------+
 | Short name | Classes/UseInstanceof          |
@@ -22195,11 +22299,13 @@ The magic constant `'__DIR__ <http://php.net/manual/en/language.constants.predef
 
 .. _\_\_debuginfo()-usage:
 
-__debugInfo() usage
+__debugInfo() Usage
 ###################
 
 
-The magic function `'__debugInfo() <http://php.net/manual/en/language.oop5.magic.php>`_ has been introduced in PHP 5.6. In the previous versions of PHP, this method is ignored and won't be called when debugging.
+The magic method `'__debugInfo() <http://php.net/manual/en/language.oop5.magic.php>`_ provides a custom way to dump an object. 
+
+It has been introduced in PHP 5.6. In the previous versions of PHP, this method is ignored and won't be called when debugging.
 
 .. code-block:: php
 
@@ -22241,6 +22347,8 @@ See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 | Short name | Php/debugInfoUsage                                                              |
 +------------+---------------------------------------------------------------------------------+
 | Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++------------+---------------------------------------------------------------------------------+
+| Examples   | :ref:`dolibarr-php-debuginfousage`                                              |
 +------------+---------------------------------------------------------------------------------+
 
 

@@ -60,6 +60,13 @@ abstract class Vcs {
             return 'EmptyCode';
         }
     }
+
+    public function getStatus() {
+        $status = array('updatable' => false,
+                       );
+
+        return $status;
+    }
 }
 
 ?>

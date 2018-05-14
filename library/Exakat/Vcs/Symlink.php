@@ -36,6 +36,14 @@ class Symlink extends Vcs {
     public function update() {
         return '';
     }
+
+    public function getStatus() {
+        $status = array('vcs'       => 'symlink',
+                        'updatable' => false
+                       );
+
+        return $status;
+    }
 }
 
 ?>

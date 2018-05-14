@@ -61,7 +61,7 @@ class Tinkergraph extends Graph {
                                           'emptySet' => true,
                                    ) );
         $this->status = self::UNCHECKED;
-    } 
+    }
 
     private function checkConfiguration() {
         $this->db->timeout = 1200;
@@ -98,7 +98,7 @@ class Tinkergraph extends Graph {
             return new GraphResults($result);
         } elseif ($result instanceof \stdclass) {
             return new GraphResults($result);
-        } 
+        }
         
         assert(false, "Processing unknown type ".gettype($result).PHP_EOL.var_dump($result, false));
     }
@@ -197,7 +197,7 @@ class Tinkergraph extends Graph {
             display('stop gremlin server 3.3.x');
             shell_exec('cd '.$this->config->gsneo4j_folder.'; ./bin/gremlin-server.sh stop');
             unlink($this->config->gsneo4j_folder.'/run/gremlin.pid');
-        } 
+        }
         
         if (file_exists($this->config->gsneo4j_folder.'/db/tinkergraph.pid')) {
             display('stop gremlin server 3.2.x');
@@ -216,7 +216,7 @@ class Tinkergraph extends Graph {
         $return = array();
         
         if (!isset($result[0]['properties'])) {
-            return $result; 
+            return $result;
         }
 
         foreach($result as $r) {

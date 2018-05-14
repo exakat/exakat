@@ -93,6 +93,15 @@ class Svn extends Vcs {
         
         return $stats;
     }
+
+    public function getStatus() {
+        $status = array('vcs'       => 'svn',
+                        'revision'  => $this->getRevision(),
+                        'updatable' => false
+                       );
+
+        return $status;
+    }
 }
 
 ?>

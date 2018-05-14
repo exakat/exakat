@@ -121,7 +121,7 @@ class Dependencywheel extends Reports {
             $results[$e][$i] = 1;
         }
 
-        // Default to link to main. 
+        // Default to link to main.
         // This is done before reporting implements and use
         foreach($results as &$result) {
             if (array_sum($result) === 0) {
@@ -151,7 +151,7 @@ class Dependencywheel extends Reports {
     private function cleanFolder() {
         $html = file_get_contents($this->tmpName.'/index.html');
 
-        $html = str_replace(array('<MATRIX>',    '<PROJECT>',            '<PACKAGENAMES>'), 
+        $html = str_replace(array('<MATRIX>',    '<PROJECT>',            '<PACKAGENAMES>'),
                             array($this->matrix, $this->config->project, $this->packagenames),
                             $html);
 

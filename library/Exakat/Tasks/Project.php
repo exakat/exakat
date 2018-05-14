@@ -38,10 +38,8 @@ class Project extends Tasks {
 
     private $project_dir = '.';
 
-    protected $themesToRun = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
-                                   'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
-                                   'Analyze', 'Preferences', 'Inventory', 'Performances',
-                                   'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Custom',
+    protected $themesToRun = array('Analyze',
+                                   'Preferences',
                                    );
 
     protected $reports = array();
@@ -124,9 +122,26 @@ class Project extends Tasks {
             }
         }
         $this->datastore->addRow('hash', $info);
+        
+        $themesToRun = array($this->config->project_themes);
+        $reports = array();
+        foreach($this->reports as $format) {
+            $reportClass = "\Exakat\Reports\\$format";
+            $report = new $reportClass($this->config);
+            
+            $themesToRun[] = $report->dependsOnAnalysis();
+            unset($report);
+        }
+        $themesToRun = array_merge(...$themesToRun);
+        if (empty($themesToRun)) {
+            // Default values
+            $themesToRun = $this->themesToRun;
+        } else {
+            $themesToRun = array_unique($themesToRun);
+        }
 
         display("Running project '$project'" . PHP_EOL);
-        display("Running the following analysis : ".implode(', ', $this->themesToRun));
+        display("Running the following analysis : ".implode(', ', $themesToRun));
         display("Producing the following reports : ".implode(', ', $this->reports));
 
         display("Cleaning DB" . PHP_EOL);
@@ -165,7 +180,7 @@ class Project extends Tasks {
 
         // Dump is a child process
         // initialization and first collection (action done once)
-        $this->logTime('Initial dump');
+        display('Initial dump');
         $shell = $this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project.' -T First -collect';
         shell_exec($shell);
         $this->logTime('Dumped and inited');
@@ -173,7 +188,7 @@ class Project extends Tasks {
         if ($this->config->program !== null) {
             $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);
         } else {
-            $this->analyzeThemes($this->themesToRun, $audit_start, $this->config->quiet);
+            $this->analyzeThemes($themesToRun, $audit_start, $this->config->quiet);
         }
 
         display("Analyzed project".PHP_EOL);
@@ -183,25 +198,38 @@ class Project extends Tasks {
 
         $this->logTime('Analyze');
 
+        $args = array ( 1 => 'dump',
+                        2 => '-p',
+                        3 => $this->config->project,
+                    );
+        $dumpConfig = new Config($args);
+
+        $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
+        foreach($this->config->themas as $name => $analyzers) {
+            print "Checking $name\n";
+            $dump->checkThemes($name, $analyzers);
+        }
+        
         foreach($this->reports as $format) {
             display("Reporting $format".PHP_EOL);
             $this->addSnitch(array('step'    => 'Report : '.$format,
                                    'project' => $this->config->project));
 
-            $args = array ( 1 => 'report',
-                            2 => '-p',
-                            3 => $this->config->project,
-                            4 => '-file',
-                            5 => constant('\\Exakat\\Reports\\'.$format.'::FILE_FILENAME'),
-                            6 => '-format',
-                            7 => $format,
-                            );
-            $reportConfig = new Config($args);
-
             try {
-                $report = new Report($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
-                $report->run();
-                unset($report);
+                $args = array ( 1 => 'report',
+                                2 => '-p',
+                                3 => $this->config->project,
+                                4 => '-file',
+                                5 => constant('\\Exakat\\Reports\\'.$format.'::FILE_FILENAME'),
+                                6 => '-format',
+                                7 => $format,
+                                );
+                $reportConfig = new Config($args);
+    
+                $reports[$format] = new Report($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
+
+                $reports[$format]->run();
+                unset($reports[$format]);
             } catch (Throwable $e) {
                 echo "Error while building $format in $format.\nTrying next report\n";
             }

@@ -10,4 +10,7 @@ echo get_class($ch) . "\n";
 echo $ch->isConnected() ? 'true' : 'false';
 unset($ch2);
 $ch->setPrefetchCount(10);
+
+$ch2 = new \X\AMQPChannel(null);
+
 ?>

@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Fri, 11 May 2018 12:45:50 +0000
-.. comment: Generation hash : 3eb56483e7a672ec15e9e962ed845fcb731275c8
+.. comment: Generation date : Mon, 14 May 2018 15:10:46 +0000
+.. comment: Generation hash : 98f45b93bb74610712dca01b3d7926f30fcfe413
 
 
 .. _analyze:
@@ -539,7 +539,7 @@ Total : 62 analysis
 * :ref:`Use Const And Functions <use-const-and-functions>`
 * :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
 * :ref:`Variable Global <variable-global>`
-* :ref:`__debugInfo() usage <\_\_debuginfo()-usage>`
+* :ref:`__debugInfo() Usage <\_\_debuginfo()-usage>`
 * :ref:`ext/dba`
 * :ref:`ext/fdf`
 * :ref:`ext/ming`
@@ -980,12 +980,13 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 52 analysis
+Total : 53 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Compact <could-use-compact>`
+* :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`
 * :ref:`Could Use array_unique <could-use-array\_unique>`
 * :ref:`Drop Substr Last Arg <drop-substr-last-arg>`
 * :ref:`Empty With Expression <empty-with-expression>`
@@ -999,7 +1000,7 @@ Total : 52 analysis
 * :ref:`Should Use Foreach <should-use-foreach>`
 * :ref:`Should Use Math <should-use-math>`
 * :ref:`Should Use array_filter() <should-use-array\_filter()>`
-* :ref:`Structures/CouldUseArrayFillKeys`
+* :ref:`Too Many Children <too-many-children>`
 * :ref:`Too Many Parameters <too-many-parameters>`
 * :ref:`Use Count Recursive <use-count-recursive>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`

@@ -115,9 +115,9 @@ class Dictionary {
     }
 
     public function closeVariables() {
-        $variables = array_filter($this->dictionary, function ($x) { return (strlen($x) > 3) && 
-                                                                            (strpos($x, ' ') === false) && 
-                                                                            ($x[0] === '$') && 
+        $variables = array_filter($this->dictionary, function ($x) { return (strlen($x) > 3) &&
+                                                                            (strpos($x, ' ') === false) &&
+                                                                            ($x[0] === '$') &&
                                                                             (strpos($x, '.') === false); }, ARRAY_FILTER_USE_KEY );
         
         $return = array();
@@ -156,7 +156,7 @@ class Dictionary {
     }
 
     public function underscoreCloseVariables() {
-        $variables = array_filter($this->dictionary, function ($x) { return (strlen($x) > 3) && 
+        $variables = array_filter($this->dictionary, function ($x) { return (strlen($x) > 3) &&
                                                                             ($x[0] === '$');}, ARRAY_FILTER_USE_KEY );
         
         $return = array();
@@ -175,7 +175,7 @@ class Dictionary {
     }
 
     public function numberCloseVariables() {
-        $variables = array_filter($this->dictionary, function ($x) { return (strlen($x) > 3) && 
+        $variables = array_filter($this->dictionary, function ($x) { return (strlen($x) > 3) &&
                                                                             ($x[0] === '$');}, ARRAY_FILTER_USE_KEY );
         
         $return = array();
@@ -195,15 +195,15 @@ class Dictionary {
     }
 
     public function staticMethodStrings() {
-        $doublecolon = array_filter($this->dictionary, function ($x) { return strlen($x) > 6 && 
-                                                                              strpos($x,' ') === false && 
-                                                                              strpos($x,'::') !== false && 
-                                                                              mb_strtolower($x) === $x;}, 
+        $doublecolon = array_filter($this->dictionary, function ($x) { return strlen($x) > 6 &&
+                                                                              strpos($x,' ') === false &&
+                                                                              strpos($x,'::') !== false &&
+                                                                              mb_strtolower($x) === $x;},
                                                                               ARRAY_FILTER_USE_KEY );
         
         $return = array();
         foreach($doublecolon as $key => $value) {
-            // how can this regex fail ? 
+            // how can this regex fail ?
             if (preg_match('/^[\'"](.+?)::(.+?)/', $key, $r)) {
                 $return['\\'.$r[1]] = $value;
             }
