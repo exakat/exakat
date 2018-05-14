@@ -1,14 +1,19 @@
 <?php
 
-$git = shell_exec('git status  | grep ../../library/Exakat/Analyzer/');
+$git = shell_exec('git status');
 $lines = explode("\n", trim($git));
 
-$test = '';
+$test = array();
+$total = 0;
 foreach($lines as $line) {
-    preg_match('$/([^/]*?/[^/]*?.php)$', $line, $r);
-    $test .=  "phpunit Test/$r[1]\n";
+    if (!preg_match('$modified:   (exp|source)/$', $line)) { continue ; }
+    ++$total;
+    preg_match('$/([^/]*?/[^/]*?)\.\d\d\.php$', $line, $r);
+    $test []=  "php pu Test/$r[1].php\n";
 }
 
-file_put_contents('git2test.sh', $test);
+$test = array_unique($test);
 
-print count($lines)." tests prepared\n";
+file_put_contents('git2test.sh', implode('', $test));
+
+print count($test)."/$total tests prepared\n";
