@@ -52,6 +52,7 @@ $applications = array(
     'ThinkPHP'                   => array('url' => 'http://www.thinkphp.cn/', ),
     'Traq'                       => array('url' => 'https://traq.io/', ),
     'Typo3'                      => array('url' => 'https://typo3.org/', ),
+    'Tikiwiki'                   => array('url' => 'https://tiki.org/', ),
     'Vanilla'                    => array('url' => 'https://open.vanillaforums.com/', ),
     'Woocommerce'                => array('url' => 'https://woocommerce.com/', ),
     'WordPress'                  => array('url' => 'https://www.wordpress.com/', ),
