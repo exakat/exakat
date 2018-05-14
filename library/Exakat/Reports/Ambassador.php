@@ -223,18 +223,8 @@ class Ambassador extends Reports {
 
         // Annex
         $this->generateAnalyzerSettings();
-        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->themesToShow),
-                                     $this->themes->getThemeAnalyzers('Preferences'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP73')
-                                     );
-        $analyzersList = array_keys(array_count_values($analyzersList));
+        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->dependsOnAnalysis()));
+        $analyzersList = array_unique($analyzersList);
         $this->generateDocumentation($analyzersList);
         $this->generateCodes();
 
