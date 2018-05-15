@@ -179,8 +179,10 @@ class GSNeo4j extends Graph {
             $res = $this->checkConnection();
             ++$round;
             usleep(100000 * $round);
-        } while (empty($res) && $round < 10);
+        } while (empty($res) && $round < 20);
         $e = microtime(true);
+        
+        display("Restarted in $round rounds\n");
 
         if (file_exists($this->config->gsneo4j_folder.'/run/gremlin.pid')) {
             $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/run/gremlin.pid'));
