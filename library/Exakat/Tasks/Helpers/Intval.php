@@ -88,9 +88,9 @@ class Intval extends Plugin {
             case 'Multiplication' :
                 if ($atom->code === '*') {
                     $atom->intval = (int) ($extras['LEFT']->intval * $extras['RIGHT']->intval);
-                } elseif ($atom->code === '/' && $extras['RIGHT']->intval != 0) {
+                } elseif ($atom->code === '/' && $extras['RIGHT']->intval !== 0) {
                     $atom->intval = (int) ($extras['LEFT']->intval / $extras['RIGHT']->intval);
-                } elseif ($atom->code === '%' && $extras['RIGHT']->intval != 0) {
+                } elseif ($atom->code === '%' && $extras['RIGHT']->intval !== 0) {
                     $atom->intval = (int) ($extras['LEFT']->intval % $extras['RIGHT']->intval);
                 }
                 break;

@@ -81,12 +81,12 @@ class Atom {
             $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
         
-        $this->code          = $this->protectString($this->code       , '\\"');
-        $this->lccode        = $this->protectString($this->lccode     , '\\"');
-        $this->fullcode      = $this->protectString($this->fullcode   , '\\"');
-        $this->fullnspath    = $this->protectString($this->fullnspath , '\\"');
-        $this->strval        = $this->protectString($this->strval     , '\\"');
-        $this->noDelimiter   = $this->protectString($this->noDelimiter, '\\"');
+        $this->code          = $this->protectString($this->code       );
+        $this->lccode        = $this->protectString($this->lccode     );
+        $this->fullcode      = $this->protectString($this->fullcode   );
+        $this->fullnspath    = $this->protectString($this->fullnspath );
+        $this->strval        = $this->protectString($this->strval     );
+        $this->noDelimiter   = $this->protectString($this->noDelimiter);
 
         $this->alternative   = $this->alternative ? 1 : null;
         $this->reference     = $this->reference   ? 1 : null;
@@ -141,10 +141,10 @@ class Atom {
             'label'         => $this->atom,
             'line'          => $this->line,
             'token'         => $this->token,
-            'code'          => $this->protectString($this->code       , '\\"'),
-            'lccode'        => $this->protectString($this->lccode     , '\\"'),
-            'fullcode'      => $this->protectString($this->fullcode   , '\\"'),
-            'fullnspath'    => $this->protectString($this->fullnspath , '\\"'),
+            'code'          => $this->protectString($this->code       ),
+            'lccode'        => $this->protectString($this->lccode     ),
+            'fullcode'      => $this->protectString($this->fullcode   ),
+            'fullnspath'    => $this->protectString($this->fullnspath ),
             );
 
         if ($this->count !== null)       { $return['count']        = $this->count; }
@@ -162,8 +162,8 @@ class Atom {
         if ($this->aliased)              { $return['aliased']      = 1; }
         if ($this->alias !== '')         { $return['alias']        = $this->alias; }
         if ($this->origin !== '')        { $return['origin']       = $this->origin; }
-        if ($this->strval)               { $return['close_tag']    = $this->protectString($this->strval     , '\\"'); }
-        if ($this->noDelimiter !== null) { $return['noDelimiter']  = $this->protectString($this->noDelimiter, '\\"'); }
+        if ($this->strval)               { $return['close_tag']    = $this->protectString($this->strval     ); }
+        if ($this->noDelimiter !== null) { $return['noDelimiter']  = $this->protectString($this->noDelimiter); }
         if ($this->propertyname)         { $return['propertyname'] = $this->propertyname; }
         if ($this->globalvar)            { $return['globalvar']    = 1; }
         if ($this->intval !== null)      { $return['intval']       = 1; }
@@ -186,12 +186,12 @@ class Atom {
             $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
 
-        $this->code          = $this->protectString($this->code       , '\\"');
-        $this->lccode        = $this->protectString($this->lccode     , '\\"');
-        $this->fullcode      = $this->protectString($this->fullcode   , '\\"');
-        $this->fullnspath    = $this->protectString($this->fullnspath , '\\"');
-        $this->strval        = $this->protectString($this->strval     , '\\"');
-        $this->noDelimiter   = $this->protectString($this->noDelimiter, '\\"');
+        $this->code          = $this->protectString($this->code       );
+        $this->lccode        = $this->protectString($this->lccode     );
+        $this->fullcode      = $this->protectString($this->fullcode   );
+        $this->fullnspath    = $this->protectString($this->fullnspath );
+        $this->strval        = $this->protectString($this->strval     );
+        $this->noDelimiter   = $this->protectString($this->noDelimiter);
 
 //'alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'
         $this->alternative   = (int) $this->alternative;
