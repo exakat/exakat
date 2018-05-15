@@ -199,7 +199,16 @@ GREMLIN;
             $total_results = 0;
         } else {
             display( "$analyzer_class running\n");
-            $analyzer->run($this->config);
+            try {
+                $analyzer->run($this->config);
+            } catch(\Exception $error) {
+                $end = microtime(true);
+                display( "$analyzer_class : error \n");
+                $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$error->getMessage());
+                $this->checkAnalyzed();
+
+                return 0;
+            }
 
             $count      = $analyzer->getRowCount();
             $processed  = $analyzer->getProcessedCount();
