@@ -27,8 +27,8 @@ abstract class Vcs {
     protected $destinationFull = '';
     
     public function __construct($destination, $project_root){
-        $this->destination = $destination;
-        $this->destinationFull = $project_root.'/projects/'.$destination;
+        $this->destination     = $destination;
+        $this->destinationFull = "$project_root/projects/$destination";
     }
 
     abstract public function clone($source);

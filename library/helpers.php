@@ -363,7 +363,7 @@ function makeArray($value) {
     }
 }
 
-function makeFullnspath($functions, $constant = false) {
+function makeFullNsPath($functions, $constant = false) {
     // case for classes and functions
     if ($constant === false) {
         $cb = function ($x) {
