@@ -6,7 +6,6 @@ Installation
 Summary
 -------
 
-* `Presentation`_
 * `Requirements`_
 * `Quick installation with OSX`_
 * `Full installation with Debian/Ubuntu`_
@@ -15,22 +14,6 @@ Summary
 * `Installation guide with Docker`_
 * `Installation guide with Vagrant and Ansible`_
 * `Optional installations`_
-
-Presentation
-------------
-
-Exakat is a PHP static analyzer. It relies on PHP to lint and tokenize the target code; a graph database to process the AST and the tokens; a SQLITE 3 database to store the results and produce the various reports.
-
-Exakat itself runs on PHP 7.2, with a short selection of extensions. It is tested with PHP 7.0 and 7.3.
-
-.. image:: images/exakat.architecture.png
-    :alt: exakat architecture
-    
-Source code is imported into exakat using VCS client, like git, SVN, mercurial, tar, zip, bz2 or even symlink. Only reading access is actually required : the code is never modified in any way. 
-
-At least one version of PHP have to be used, and it may be the same running Exakat. Only one version is used for analysis and it may be different from the running PHP version. For example, exakat may run with PHP 7.2 but audit code with PHP 5.6. Extra versions of PHP are used to provide compilations reports. PHP middle versions may be configured separately. Minor versions are not important, except for edge cases. 
-
-The gremlin server is used to query the source code. Once analyzes are all finished, the results are dumped into a SQLITE database and the graph may be removed. Reports are build from the SQLITE database.
 
 Requirements
 ------------

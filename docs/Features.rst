@@ -7,7 +7,7 @@ Features list
 -------------
 
 * 344 analyzers
-* Compatible with PHP 5.3 to 7.1-dev
+* Audit code with PHP 5.3 to 7.3-dev
 * Migration analyzers from 5.2 to 5.3 to 7.2 to dev
 * List bug fixes for your code
 * appinfo(): the list of PHP features
@@ -21,14 +21,15 @@ There are currently 344 different analyzers that check the PHP code to report co
 
 Some of them track rare occurrences, and some are frequent. Some track careless mistakes and some are highly complex situations. In any case, exakat has your back, and will warn you. 
 
-Compatible with PHP 5.3 to 7.2-dev
+Compatible with PHP 5.2 to 7.3-dev
 ----------------------------------
 
-The Exakat engine runs on PHP 7.1, 7.0, 5.6. It is checked against newer version by itself, and it probably runs on older versions. 
-It may examine code that range from PHP 5.2 to PHP 7.1-dev. 
+The Exakat engine audits code that with PHP versions that range from PHP 5.2 to PHP 7.3-dev. 
 
-Migration guide from 5.2 to 5.3 to 7.2 to dev
----------------------------------------------
+The Exakat engine itself runs on PHP 7.x+ and is regularly checked on those versions. It is possible to run Exakat on 7.2 and audit a code with PHP 5.6. 
+
+Migration guide from 5.2 to 7.3 and dev
+----------------------------------------
 
 Every middle version of PHP comes with its migration guide from the manual, and from community's feedback. Incompatibilities are included as analyzers in Exakat, and report everything they can find that may prevent you from moving to the newer version. 
 
@@ -50,11 +51,17 @@ Exakat collect all those features, and sum them up in one nice table, so you kno
 List PHP directives that impact your code
 -----------------------------------------
 
-exakat recommends which PHP directives to check while preparing your code for production. If 'memory_limit' is an ever green, may be 'post_max_size' (linked to file_upload), or assertions shouldn't be forgotten.
+Exakat recommends which PHP directives to check while preparing your code for production. If 'memory_limit' is an ever green, may be 'post_max_size' (linked to file_upload), or assertions shouldn't be forgotten.
 Based on feature and extension usage, it also list the most important directives, and leads you to the full manual list, in case you want to fine tune it to the max. Use it as a reminder. 
+
+Framework and application support
+----------------------------------
+
+Exakat provides support for framework and application specific rules. Supported frameworks includes Cakephp, Zend Framework, Slim, Melis. 
+
 
 Class Hierarchy Diagram
 -----------------------
 
-Exakat provides a full class diagramm, based on inheritance (classes), usage (traits) and implementations (interfaces), grouped by namespaces. 
+Exakat provides a full UML class diagramm, based on inheritance (classes), usage (traits) and implementations (interfaces), grouped by namespaces. 
 

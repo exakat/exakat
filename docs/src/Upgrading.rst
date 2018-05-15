@@ -1,10 +1,10 @@
 .. _Upgrading:
 
-Upgrading exakat
-================
+Upgrading
+=========
 
-Upgrading exakat
-----------------
+Upgrading
+---------
 
 Upgrade exakat with the `upgrade` command. 
 

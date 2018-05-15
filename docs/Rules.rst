@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 14 May 2018 15:10:46 +0000
-.. comment: Generation hash : 98f45b93bb74610712dca01b3d7926f30fcfe413
+.. comment: Generation date : Tue, 15 May 2018 09:45:30 +0000
+.. comment: Generation hash : 2c21d5bb991fc61cb9b04925b1ef5c0872159f78
 
 
 .. _$http\_raw\_post\_data:
@@ -19823,7 +19823,7 @@ Use Lower Case For Parent, Static And Self
 ##########################################
 
 
-Until PHP 5.5, the special Parent, Static and Self keywords needed to be lowercase to be useable. Otherwise, they would yield a 'PHP Fatal error:  Class 'PARENT' not found'.
+The special parent, static and self keywords needed to be lowercase to be useable. This was fixed in PHP 5.5; otherwise, they would yield a 'PHP Fatal error:  Class 'PARENT' not found'.
 
 parent, static and self are traditionally written in lowercase only. Mixed case and Upper case are both valid, though.
 
