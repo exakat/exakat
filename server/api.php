@@ -239,7 +239,7 @@ function config($args) {
         $relay .= ' -c '.escapeshellarg($args[$c + 1]);
     }
 
-    echo shell_exec("__PHP__ __EXAKAT__ config -p ".escapeshellarg($project)." $relay -json");
+    echo shell_exec("__PHP__ __EXAKAT__ queue config -p ".escapeshellarg($project)." $relay -json");
 }
 
 function stats($args) {
