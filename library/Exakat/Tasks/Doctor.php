@@ -90,7 +90,15 @@ class Doctor extends Tasks {
         $stats['exakat']['build']       = Exakat::BUILD;
         $stats['exakat']['exakat.ini']  = $this->array2list($this->config->configFiles);
         $stats['exakat']['graphdb']     = $this->config->graphdb;
-        $stats['exakat']['reports']     = $this->array2list($this->config->project_reports);
+        $reportList = array();
+        foreach($this->config->project_reports as $project_report) {
+            $className = "\\Exakat\\Reports\\$project_report";
+            if (class_exists($className)) {
+                $reportList[] = $project_report;
+            }
+        }
+        sort($reportList);
+        $stats['exakat']['reports']     = $this->array2list($reportList);
         
         $stats['exakat']['themes']      = $this->array2list(array_merge($this->config->project_themes,
                                                                         array_keys($this->config->themas)));
