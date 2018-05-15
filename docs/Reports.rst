@@ -65,6 +65,8 @@ Ambassador includes the report from 3 other reports : PhpCompilation, PhpConfigu
 
 Ambassador is a HTML report format.
 
+Ambassador depends on the following 18 themes : CompatibilityPHP53, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73, Analyze, Preferences, Inventory, Performances, Appinfo, Appcontent, Dead code, Security, Suggestions, Custom.
+
 Clustergrammer
 --------------
 
@@ -78,6 +80,8 @@ See a live report here : [Clustergrammer](http://amp.pharm.mssm.edu/clustergramm
     :alt: Example of a Clustergrammer report (0)
 
 Clustergrammer is a TEXT report format.
+
+Clustergrammer depends on the following 1 themes : .
 
 Code Flower
 -----------
@@ -96,6 +100,8 @@ It represents :
     :alt: Example of a Code Flower report (0)
 
 Code Flower is a HTML report format.
+
+Code Flower depends on the following 1 themes : .
 
 Code Sniffer
 ------------
@@ -120,6 +126,8 @@ See also [Code Sniffer Report](https://github.com/squizlabs/PHP_CodeSniffer/wiki
     
 
 Code Sniffer is a TEXT report format.
+
+Code Sniffer accepts any arbitrary list of results.
 
 Composer
 --------
@@ -158,6 +166,8 @@ It is recommended to review manually the results of the suggested composer.json 
 
 Composer is a JSON report format.
 
+Composer depends on the following 1 themes : Appinfo.
+
 Dependency Wheel
 ----------------
 
@@ -171,6 +181,8 @@ It is based on Francois Zaninotto's [DependencyWheel](http://fzaninotto.github.c
     :alt: Example of a Dependency Wheel report (0)
 
 Dependency Wheel is a HTML report format.
+
+Dependency Wheel depends on the following 1 themes : .
 
 Inventories
 -----------
@@ -230,6 +242,8 @@ Every type of values is exported to a file. If no value of such type was found d
 
 Inventories is a CSV report format.
 
+Inventories depends on the following 1 themes : Inventories.
+
 Json
 ----
 
@@ -284,6 +298,8 @@ Simple Json format. It is a structured array with all results, described as obje
 
 Json is a XML report format.
 
+Json accepts any arbitrary list of results.
+
 Marmelab
 --------
 
@@ -300,6 +316,8 @@ You may also learn more about GraphQL at [Introducing Json GraphQL Server](https
 
 Marmelab is a JSON report format.
 
+Marmelab depends on the following 1 themes : Analyze.
+
 Owasp
 -----
 
@@ -311,6 +329,8 @@ The OWASP report focuses on the [OWASP top 10](https://www.owasp.org/index.php/C
     :alt: Example of a Owasp report (0)
 
 Owasp is a HTML report format.
+
+Owasp depends on the following 1 themes : Security.
 
 PhpCompilation
 --------------
@@ -388,6 +408,8 @@ PhpCompilation bases its selection on the code and its usage of features. PhpCom
 
 PhpCompilation is a Text report format.
 
+PhpCompilation depends on the following 1 themes : Appinfo.
+
 PhpConfiguration
 ----------------
 
@@ -464,6 +486,8 @@ PhpConfiguration bases its selection on the code, and classic recommendations. F
 
 PhpConfiguration is a Text report format.
 
+PhpConfiguration depends on the following 1 themes : Appinfo.
+
 PlantUml
 --------
 
@@ -478,6 +502,8 @@ PlantUML is an Open Source component that dislays class diagrams.
     :alt: Example of a PlantUml report (0)
 
 PlantUml is a puml report format.
+
+PlantUml depends on the following 1 themes : .
 
 RadwellCode
 -----------
@@ -501,6 +527,8 @@ Note that all rules are not implemented, especially the 'coding conventions' one
 
 RadwellCode is a Text report format.
 
+RadwellCode depends on the following 1 themes : RadwellCodes.
+
 SimpleTable
 -----------
 
@@ -512,6 +540,8 @@ Simpletable is suitable for any list of results provided by exakat. It is inspir
     :alt: Example of a SimpleTable report (0)
 
 SimpleTable is a HTML report format.
+
+SimpleTable depends on the following 1 themes : .
 
 Stats
 -----
@@ -574,6 +604,8 @@ Stats reports PHP structures definition, like class, interfaces, variables, and 
 
 Stats is a JSON report format.
 
+Stats depends on the following 1 themes : Stats.
+
 Text
 ----
 
@@ -599,6 +631,8 @@ This format is fast, and fitted for machine communications.
 
 Text is a Text report format.
 
+Text accepts any arbitrary list of results.
+
 Uml
 ---
 
@@ -618,6 +652,8 @@ Classes, interfaces and traits are represented, along with their constants, meth
 
 Uml is a dot report format.
 
+Uml depends on the following 1 themes : .
+
 Xml
 ---
 
@@ -635,6 +671,8 @@ XML version of the reports. It uses the same format than PHP Code Sniffer to out
     
 
 Xml is a XML report format.
+
+Xml accepts any arbitrary list of results.
 
 
 

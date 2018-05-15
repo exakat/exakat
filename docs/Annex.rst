@@ -57,6 +57,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Security
 * Simple
 * Slim
+* Stats
 * Suggestions
 * Symfony
 * Unassigned
@@ -381,6 +382,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.2.8
+
+  * Php/FailingAnalysis (Php/FailingAnalysis)
+
 * 1.2.7
 
   * ext/cmark (Extensions/Extcmark)
@@ -620,7 +625,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.12.14
 
   * Regex Inventory (Type/Regex ; Inventory, Appinfo, Appcontent)
-  * Switch Fallthrough (Structures/Fallthrough ; Inventory, Security)
+  * Switch Fallthrough (Structures/Fallthrough ; Inventory, Security, Stats)
   * Upload Filename Injection (Security/UploadFilenameInjection)
 
 * 0.12.12
@@ -1275,10 +1280,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Constant Class (Classes/ConstantClass ; Analyze, Codacy, Simple)
   * Constant Comparison (Structures/ConstantComparisonConsistance ; Coding Conventions, Preferences)
   * Constant Conditions (Structures/ConstantConditions ; )
-  * Constant Definition (Classes/ConstantDefinition ; Appinfo)
+  * Constant Definition (Classes/ConstantDefinition ; Appinfo, Stats)
   * Constant Scalar Expression (Php/ConstantScalarExpression ; )
   * Constant Scalar Expressions (Structures/ConstantScalarExpression ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
-  * Constants (Constants/Constantnames ; Inventory)
+  * Constants (Constants/Constantnames ; Inventory, Stats)
   * Constants Created Outside Its Namespace (Constants/CreatedOutsideItsNamespace ; Analyze, Codacy)
   * Constants Usage (Constants/ConstantUsage ; Appinfo)
   * Constants With Strange Names (Constants/ConstantStrangeNames ; Analyze, Codacy, Simple)
@@ -1315,20 +1320,20 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Double Assignation (Structures/DoubleAssignation ; Analyze, Codacy)
   * Double Instructions (Structures/DoubleInstruction ; Analyze, Codacy, Simple)
   * Duplicate Calls (Structures/DuplicateCalls ; )
-  * Dynamic Calls (Structures/DynamicCalls ; Appinfo, Internal)
+  * Dynamic Calls (Structures/DynamicCalls ; Appinfo, Internal, Stats)
   * Dynamic Class Constant (Classes/DynamicConstantCall ; Appinfo)
   * Dynamic Classes (Classes/DynamicClass ; Appinfo)
   * Dynamic Code (Structures/DynamicCode ; Appinfo)
-  * Dynamic Function Call (Functions/Dynamiccall ; Appinfo, Internal)
+  * Dynamic Function Call (Functions/Dynamiccall ; Appinfo, Internal, Stats)
   * Dynamic Methodcall (Classes/DynamicMethodCall ; Appinfo)
   * Dynamic New (Classes/DynamicNew ; Appinfo)
   * Dynamic Property (Classes/DynamicPropertyCall ; Appinfo)
-  * Dynamically Called Classes (Classes/VariableClasses ; Appinfo)
+  * Dynamically Called Classes (Classes/VariableClasses ; Appinfo, Stats)
   * Echo Or Print (Structures/EchoPrintConsistance ; Coding Conventions, Preferences)
   * Echo With Concat (Structures/EchoWithConcat ; Analyze, Performances, Codacy, Simple, Suggestions)
   * Ellipsis Usage (Php/EllipsisUsage ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * Else If Versus Elseif (Structures/ElseIfElseif ; Analyze, Codacy, Simple)
-  * Else Usage (Structures/ElseUsage ; Appinfo, Appcontent, Calisthenics)
+  * Else Usage (Structures/ElseUsage ; Appinfo, Appcontent, Calisthenics, Stats)
   * Email Addresses (Type/Email ; Inventory, Appinfo)
   * Empty Blocks (Structures/EmptyBlocks ; Analyze, Codacy, Simple)
   * Empty Classes (Classes/EmptyClass ; Analyze, Codacy, Simple)
@@ -1566,9 +1571,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Property Variable Confusion (Structures/PropertyVariableConfusion ; Analyze, Codacy, Simple)
   * Queries In Loops (Structures/QueriesInLoop ; Analyze, OneFile, Codacy, Simple, Level 1)
   * Random Without Try (Structures/RandomWithoutTry ; Security)
-  * Real Functions (Functions/RealFunctions ; Appcontent)
+  * Real Functions (Functions/RealFunctions ; Appcontent, Stats)
   * Real Glossary (Type/Real ; Appinfo)
-  * Real Variables (Variables/RealVariables ; Appcontent)
+  * Real Variables (Variables/RealVariables ; Appcontent, Stats)
   * Recursive Functions (Functions/Recursive ; Appinfo)
   * Redeclared PHP Functions (Functions/RedeclaredPhpFunction ; Analyze, Appinfo, Codacy, Simple)
   * Redefined Class Constants (Classes/RedefinedConstants ; Analyze, Codacy, Simple)
@@ -1739,11 +1744,11 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Using Short Tags (Structures/ShortTags ; Appinfo, Wordpress)
   * Usort Sorting In PHP 7.0 (Php/UsortSorting ; CompatibilityPHP70)
   * Var Keyword (Classes/OldStyleVar ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
-  * Variable Constants (Constants/VariableConstant ; Appinfo)
+  * Variable Constants (Constants/VariableConstant ; Appinfo, Stats)
   * Variable Is Modified (Variables/IsModified ; Internal)
   * Variable Is Read (Variables/IsRead ; Internal)
   * Variables Names (Variables/Variablenames ; Inventory, Appinfo, Internal)
-  * Variables Variables (Variables/VariableVariables ; Appinfo)
+  * Variables Variables (Variables/VariableVariables ; Appinfo, Stats)
   * Variables With Long Names (Variables/VariableLong ; )
   * Variables With One Letter Names (Variables/VariableOneLetter ; )
   * While(List() = Each()) (Structures/WhileListEach ; Analyze, Performances, OneFile, Codacy, Simple, Suggestions, Level 2)
@@ -2111,15 +2116,15 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
@@ -2188,8 +2193,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2314,8 +2319,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `strtr <http://www.php.net/strtr>`_
 * `substr <http://www.php.net/substr>`_
@@ -2390,7 +2395,6 @@ List of external links mentionned in this documentation.
 * `Zend Framework 2.2 <https://framework.zend.com/manual/2.2/en/index.html>`_
 * `Zend Framework 2.3 <https://framework.zend.com/manual/2.3/en/index.html>`_
 * `Zend Framework 2.4 <https://framework.zend.com/manual/2.4/en/index.html>`_
-* `Zend Framework <http://framework.zend.com/>`_
 * `Zend Framework Components <https://framework.zend.com/learn>`_
 * `Zend Session <https://docs.zendframework.com/zend-session/manager/>`_
 * `Zend View <https://github.com/zendframework/zend-view>`_

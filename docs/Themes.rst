@@ -1,7 +1,7 @@
-.. _Recipes:
+.. _Themes:
 
-Recipes
-*******
+Themes
+******
 
 Presentation
 ############
@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 15 May 2018 09:45:30 +0000
-.. comment: Generation hash : 2c21d5bb991fc61cb9b04925b1ef5c0872159f78
+.. comment: Generation date : Tue, 15 May 2018 16:39:21 +0000
+.. comment: Generation hash : dc5851d4af0b1eac6e8e0b6a67435becfb5ccd1c
 
 
 .. _analyze:

@@ -161,7 +161,7 @@ Here are the currently available options in Exakat's configuration file : config
 Custom themes
 #############
 
-Create custom themes by creating a 'config/themas.ini' directive files. 
+Create custom themes by creating a 'config/themes.ini' directive files. 
 
 This file is a .INI file, build with several sections. Each section is the name of a theme : for example, 'mine' is the name for the theme below. 
 
