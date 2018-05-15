@@ -135,10 +135,12 @@ class Owasp extends Ambassador {
 
     public function __construct($config) {
         parent::__construct($config);
-        $this->themesToShow      = 'Security';
-        $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
-        $this->severities        = $this->themes->getSeverities();
+        if ($this->config !== null) {
+            $this->themesToShow      = 'Security';
+            $this->timesToFix        = $this->themes->getTimesToFix();
+            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
+            $this->severities        = $this->themes->getSeverities();
+        }
     }
 
     protected function getBasedPage($file) {
@@ -1237,6 +1239,11 @@ HTML;
             $audit_date .= ' - &quot;'.$audit_name.'&quot;';
         }
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
+    }
+
+    public function dependsOnAnalysis() {
+        return array('Security', 
+                     );
     }
 
 }

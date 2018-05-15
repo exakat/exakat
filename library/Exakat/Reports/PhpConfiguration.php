@@ -155,6 +155,12 @@ disable_classes = $classesList
         
         return $final;
     }
+
+    public function dependsOnAnalysis() {
+        return array('Appinfo', 
+                     );
+    }
+
 }
 
 ?>

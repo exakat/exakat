@@ -123,6 +123,11 @@ class Inventories extends Reports {
         fclose($fp);
     }
 
+    public function dependsOnAnalysis() {
+        return array('Inventories', 
+                     );
+    }
+
 }
 
 ?>

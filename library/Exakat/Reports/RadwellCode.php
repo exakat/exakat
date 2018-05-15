@@ -108,6 +108,11 @@ class RadwellCode extends Reports {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $text);
         }
     }
+
+    public function dependsOnAnalysis() {
+        return array('RadwellCodes', 
+                     );
+    }
 }
 
 ?>
