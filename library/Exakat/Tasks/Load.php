@@ -553,10 +553,6 @@ SQL;
         $this->atoms = array($this->id0->id => $this->id0);
         $this->links = array();
 
-        $this->uses  = array('function' => array(),
-                             'const'    => array(),
-                             'define'   => array(),
-                             'class'    => array());
         $this->contexts = array(self::CONTEXT_CLASS      => 0,
                                 self::CONTEXT_INTERFACE  => false,
                                 self::CONTEXT_TRAIT      => false,
@@ -565,6 +561,23 @@ SQL;
                                 self::CONTEXT_NOSEQUENCE => 0,
                                 );
         $this->expressions = array();
+        $this->uses   = array('function'       => array(),
+                              'staticmethod'   => array(),
+                              'method'         => array(),  // @todo : handling of parents ? of multiple definition?
+                              'classconst'     => array(),
+                              'property'       => array(),
+                              'staticproperty' => array(),
+                              'const'          => array(),
+                              'define'         => array(),
+                              'class'          => array(),
+                              );
+
+        $this->currentMethod           = array();
+        $this->currentFunction         = array();
+        $this->currentClassTrait       = array();
+        $this->currentParentClassTrait = array();
+
+        $this->tokens                  = array();
     }
 
     private function processFile($filename, $path) {
@@ -632,10 +645,16 @@ SQL;
         $this->stats['tokens'] += count($tokens);
         unset($tokens);
 
-        $this->uses   = array('function' => array(),
-                              'const'    => array(),
-                              'define'   => array(),
-                              'class'    => array());
+        $this->uses   = array('function'       => array(),
+                              'staticmethod'   => array(),
+                              'method'         => array(),  // @todo : handling of parents ? of multiple definition?
+                              'classconst'     => array(),
+                              'property'       => array(),
+                              'staticproperty' => array(),
+                              'const'          => array(),
+                              'define'         => array(),
+                              'class'          => array(),
+                              );
 
         $id1 = $this->addAtom('File');
         $id1->code     = $filename;
@@ -665,7 +684,7 @@ SQL;
         } catch (LoadError $e) {
 //            print $e->getMessage();
 //            print_r($this->expressions[0]);
-            $this->log->log('Can\'t process file \''.$this->filename.'\' during load (\''.$this->tokens[$this->id][0].'\', line \''.$this->tokens[$this->id][2].'\'). Ignoring'.PHP_EOL);
+            $this->log->log('Can\'t process file \''.$this->filename.'\' during load (\''.$this->tokens[$this->id][0].'\', line \''.$this->tokens[$this->id][2].'\'). Ignoring'.PHP_EOL.$e->getMessage().PHP_EOL);
             $this->reset();
             throw new NoFileToProcess($filename, 'empty', 0, $e);
         } finally {
