@@ -3,12 +3,12 @@
 Introduction
 ============
 
-This is the documentation of the Exakat engine, version 1.2.7 (Build 740), on Mon, 14 May 2018 15:08:29 +0000.
+This is the documentation of the Exakat engine, version 1.2.8 (Build 743), on Tue, 15 May 2018 08:49:38 +0000.
 
 What is Exakat ? 
 ----------------
 
-Exakat is a tool for analyzing, reporting and assessing PHP code source efficiently and systematically. Exakat can process PHP 5.2 to 7.2 code, as well as reporting on security, performance, code quality, migration. 
+Exakat is a tool for analyzing, reporting and assessing PHP code source efficiently and systematically. Exakat can process PHP 5.2 to 7.3 code, as well as reporting on security, performance, code quality, migration. 
 
 Exakat reads the code, builds an AST and several dependency graphs, then indexes everything in a graph database. Then, it runs analysis, collecting potential errors and descriptive informations about the code. Finally, exakat produces reports, both for human, machines or other services to read.
 
@@ -71,7 +71,7 @@ PHP code quality checks, based on type compatibility, and structure definitions.
 PHP7mar, PHP7cc
 _______________
 
-Code review for PHP 5 to migrate to PHP 7. Exakat covers every middle version from PHP 5.3 to PHP 7.2. 
+Code review for PHP 5 to migrate to PHP 7. Exakat covers every middle version from PHP 5.3 to PHP 7.3. 
 
  
 PHP-ci, Jenkins, Grumphp
@@ -90,3 +90,19 @@ Exakat ecosystem
 
 `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_ is a Service company, providing consulting and training services around automated analysis and code quality for PHP. 
 
+
+Architecture
+------------
+
+Exakat relies on PHP to lint and tokenize the target code; a graph database to process the AST and the tokens; a SQLITE 3 database to store the results and produce the various reports.
+
+Exakat itself runs on PHP 7.2, with a short selection of extensions. It is tested with PHP 7.0 and 7.3.
+
+.. image:: images/exakat.architecture.png
+    :alt: exakat architecture
+    
+Source code is imported into exakat using VCS client, like git, SVN, mercurial, tar, zip, bz2 or even symlink. Only reading access is actually required : the code is never modified in any way. 
+
+At least one version of PHP have to be used, and it may be the same running Exakat. Only one version is used for analysis and it may be different from the running PHP version. For example, exakat may run with PHP 7.2 but audit code with PHP 5.6. Extra versions of PHP are used to provide compilations reports. PHP middle versions may be configured separately. Minor versions are not important, except for edge cases. 
+
+The gremlin server is used to query the source code. Once analyzes are all finished, the results are dumped into a SQLITE database and the graph may be removed. Reports are build from the SQLITE database.
