@@ -2449,3 +2449,1316 @@ List of external links mentionned in this documentation.
 * `Zlib <http://php.net/manual/en/book.zlib.php>`_
 
 
+Themes configuration
+--------------------
+
+INI configuration for built-in themes. Copy them in config/themes.ini, and make your owns.
+
+18 themes detailled here : 
+
+* `theme_ini_analyze`_
+* `theme_ini_cakephp`_
+* `theme_ini_coding conventions`_
+* `theme_ini_compatibilityphp53`_
+* `theme_ini_compatibilityphp54`_
+* `theme_ini_compatibilityphp55`_
+* `theme_ini_compatibilityphp56`_
+* `theme_ini_compatibilityphp70`_
+* `theme_ini_compatibilityphp71`_
+* `theme_ini_compatibilityphp72`_
+* `theme_ini_compatibilityphp73`_
+* `theme_ini_dead code`_
+* `theme_ini_performances`_
+* `theme_ini_security`_
+* `theme_ini_slim`_
+* `theme_ini_suggestions`_
+* `theme_ini_wordpress`_
+* `theme_ini_zendframework`_
+
+
+
+.. _theme_ini_analyze:
+
+Analyze
+-------
+
+| [Analyze]
+|   analyzer[] = "Arrays/AmbiguousKeys";
+|   analyzer[] = "Arrays/MistakenConcatenation";
+|   analyzer[] = "Arrays/MultipleIdenticalKeys";
+|   analyzer[] = "Arrays/NonConstantArray";
+|   analyzer[] = "Arrays/RandomlySortedLiterals";
+|   analyzer[] = "Classes/AbstractStatic";
+|   analyzer[] = "Classes/AccessPrivate";
+|   analyzer[] = "Classes/AccessProtected";
+|   analyzer[] = "Classes/AmbiguousStatic";
+|   analyzer[] = "Classes/AvoidOptionalProperties";
+|   analyzer[] = "Classes/CantExtendFinal";
+|   analyzer[] = "Classes/CitSameName";
+|   analyzer[] = "Classes/ConstantClass";
+|   analyzer[] = "Classes/CouldBeClassConstant";
+|   analyzer[] = "Classes/CouldBePrivate";
+|   analyzer[] = "Classes/CouldBePrivateConstante";
+|   analyzer[] = "Classes/CouldBePrivateMethod";
+|   analyzer[] = "Classes/CouldBeProtectedConstant";
+|   analyzer[] = "Classes/CouldBeProtectedMethod";
+|   analyzer[] = "Classes/CouldBeProtectedProperty";
+|   analyzer[] = "Classes/DirectCallToMagicMethod";
+|   analyzer[] = "Classes/DontSendThisInConstructor";
+|   analyzer[] = "Classes/DontUnsetProperties";
+|   analyzer[] = "Classes/EmptyClass";
+|   analyzer[] = "Classes/FinalByOcramius";
+|   analyzer[] = "Classes/ImplementIsForInterface";
+|   analyzer[] = "Classes/ImplementedMethodsArePublic";
+|   analyzer[] = "Classes/InstantiatingAbstractClass";
+|   analyzer[] = "Classes/LocallyUnusedProperty";
+|   analyzer[] = "Classes/MakeDefault";
+|   analyzer[] = "Classes/MakeGlobalAProperty";
+|   analyzer[] = "Classes/MethodUsedBelow";
+|   analyzer[] = "Classes/MultipleDeclarations";
+|   analyzer[] = "Classes/MultipleTraitOrInterface";
+|   analyzer[] = "Classes/MutualExtension";
+|   analyzer[] = "Classes/NoMagicWithArray";
+|   analyzer[] = "Classes/NoPSSOutsideClass";
+|   analyzer[] = "Classes/NoPublicAccess";
+|   analyzer[] = "Classes/NoSelfReferencingConstant";
+|   analyzer[] = "Classes/NonPpp";
+|   analyzer[] = "Classes/NonStaticMethodsCalledStatic";
+|   analyzer[] = "Classes/OldStyleConstructor";
+|   analyzer[] = "Classes/OldStyleVar";
+|   analyzer[] = "Classes/ParentFirst";
+|   analyzer[] = "Classes/PropertyCouldBeLocal";
+|   analyzer[] = "Classes/PropertyNeverUsed";
+|   analyzer[] = "Classes/PropertyUsedInOneMethodOnly";
+|   analyzer[] = "Classes/PssWithoutClass";
+|   analyzer[] = "Classes/RedefinedConstants";
+|   analyzer[] = "Classes/RedefinedDefault";
+|   analyzer[] = "Classes/RedefinedPrivateProperty";
+|   analyzer[] = "Classes/ScalarOrObjectProperty";
+|   analyzer[] = "Classes/ShouldUseSelf";
+|   analyzer[] = "Classes/ShouldUseThis";
+|   analyzer[] = "Classes/StaticContainsThis";
+|   analyzer[] = "Classes/StaticMethodsCalledFromObject";
+|   analyzer[] = "Classes/ThisIsForClasses";
+|   analyzer[] = "Classes/ThisIsNotAnArray";
+|   analyzer[] = "Classes/ThisIsNotForStatic";
+|   analyzer[] = "Classes/ThrowInDestruct";
+|   analyzer[] = "Classes/TooManyFinds";
+|   analyzer[] = "Classes/TooManyInjections";
+|   analyzer[] = "Classes/UndefinedClasses";
+|   analyzer[] = "Classes/UndefinedConstants";
+|   analyzer[] = "Classes/UndefinedParentMP";
+|   analyzer[] = "Classes/UndefinedProperty";
+|   analyzer[] = "Classes/UndefinedStaticMP";
+|   analyzer[] = "Classes/UnitializedProperties";
+|   analyzer[] = "Classes/UnresolvedClasses";
+|   analyzer[] = "Classes/UnresolvedInstanceof";
+|   analyzer[] = "Classes/UnusedClass";
+|   analyzer[] = "Classes/UnusedMethods";
+|   analyzer[] = "Classes/UnusedPrivateMethod";
+|   analyzer[] = "Classes/UnusedPrivateProperty";
+|   analyzer[] = "Classes/UseClassOperator";
+|   analyzer[] = "Classes/UseInstanceof";
+|   analyzer[] = "Classes/UsedOnceProperty";
+|   analyzer[] = "Classes/UselessAbstract";
+|   analyzer[] = "Classes/UselessConstructor";
+|   analyzer[] = "Classes/UselessFinal";
+|   analyzer[] = "Classes/UsingThisOutsideAClass";
+|   analyzer[] = "Classes/WrongCase";
+|   analyzer[] = "Classes/WrongName";
+|   analyzer[] = "Constants/ConstRecommended";
+|   analyzer[] = "Constants/ConstantStrangeNames";
+|   analyzer[] = "Constants/CreatedOutsideItsNamespace";
+|   analyzer[] = "Constants/InvalidName";
+|   analyzer[] = "Constants/MultipleConstantDefinition";
+|   analyzer[] = "Constants/StrangeName";
+|   analyzer[] = "Constants/UndefinedConstants";
+|   analyzer[] = "Constants/UnusedConstants";
+|   analyzer[] = "Exceptions/ForgottenThrown";
+|   analyzer[] = "Exceptions/OverwriteException";
+|   analyzer[] = "Exceptions/ThrowFunctioncall";
+|   analyzer[] = "Exceptions/UncaughtExceptions";
+|   analyzer[] = "Exceptions/Unthrown";
+|   analyzer[] = "Exceptions/UselessCatch";
+|   analyzer[] = "Files/InclusionWrongCase";
+|   analyzer[] = "Files/MissingInclude";
+|   analyzer[] = "Functions/AliasesUsage";
+|   analyzer[] = "Functions/AvoidBooleanArgument";
+|   analyzer[] = "Functions/CallbackNeedsReturn";
+|   analyzer[] = "Functions/CouldBeCallable";
+|   analyzer[] = "Functions/CouldCentralize";
+|   analyzer[] = "Functions/CouldTypehint";
+|   analyzer[] = "Functions/DeepDefinitions";
+|   analyzer[] = "Functions/EmptyFunction";
+|   analyzer[] = "Functions/HardcodedPasswords";
+|   analyzer[] = "Functions/MarkCallable";
+|   analyzer[] = "Functions/MismatchedDefaultArguments";
+|   analyzer[] = "Functions/MismatchedTypehint";
+|   analyzer[] = "Functions/MustReturn";
+|   analyzer[] = "Functions/NeverUsedParameter";
+|   analyzer[] = "Functions/NoBooleanAsDefault";
+|   analyzer[] = "Functions/NoClassAsTypehint";
+|   analyzer[] = "Functions/NoReturnUsed";
+|   analyzer[] = "Functions/OneLetterFunctions";
+|   analyzer[] = "Functions/OnlyVariablePassedByReference";
+|   analyzer[] = "Functions/RedeclaredPhpFunction";
+|   analyzer[] = "Functions/RelayFunction";
+|   analyzer[] = "Functions/ShouldUseConstants";
+|   analyzer[] = "Functions/TooManyLocalVariables";
+|   analyzer[] = "Functions/UndefinedFunctions";
+|   analyzer[] = "Functions/UnusedArguments";
+|   analyzer[] = "Functions/UnusedFunctions";
+|   analyzer[] = "Functions/UnusedInheritedVariable";
+|   analyzer[] = "Functions/UnusedReturnedValue";
+|   analyzer[] = "Functions/UseConstantAsArguments";
+|   analyzer[] = "Functions/UselessReferenceArgument";
+|   analyzer[] = "Functions/UselessReturn";
+|   analyzer[] = "Functions/UsesDefaultArguments";
+|   analyzer[] = "Functions/WrongNumberOfArguments";
+|   analyzer[] = "Functions/WrongOptionalParameter";
+|   analyzer[] = "Functions/funcGetArgModified";
+|   analyzer[] = "Interfaces/AlreadyParentsInterface";
+|   analyzer[] = "Interfaces/ConcreteVisibility";
+|   analyzer[] = "Interfaces/CouldUseInterface";
+|   analyzer[] = "Interfaces/EmptyInterface";
+|   analyzer[] = "Interfaces/UndefinedInterfaces";
+|   analyzer[] = "Interfaces/UnusedInterfaces";
+|   analyzer[] = "Interfaces/UselessInterfaces";
+|   analyzer[] = "Namespaces/ConstantFullyQualified";
+|   analyzer[] = "Namespaces/CouldUseAlias";
+|   analyzer[] = "Namespaces/EmptyNamespace";
+|   analyzer[] = "Namespaces/HiddenUse";
+|   analyzer[] = "Namespaces/MultipleAliasDefinitionPerFile";
+|   analyzer[] = "Namespaces/MultipleAliasDefinitions";
+|   analyzer[] = "Namespaces/ShouldMakeAlias";
+|   analyzer[] = "Namespaces/UnresolvedUse";
+|   analyzer[] = "Namespaces/UnusedUse";
+|   analyzer[] = "Namespaces/UseWithFullyQualifiedNS";
+|   analyzer[] = "Performances/ArrayMergeInLoops";
+|   analyzer[] = "Performances/LogicalToInArray";
+|   analyzer[] = "Performances/PrePostIncrement";
+|   analyzer[] = "Php/AssignAnd";
+|   analyzer[] = "Php/BetterRand";
+|   analyzer[] = "Php/ClassFunctionConfusion";
+|   analyzer[] = "Php/Crc32MightBeNegative";
+|   analyzer[] = "Php/Deprecated";
+|   analyzer[] = "Php/DirectiveName";
+|   analyzer[] = "Php/EmptyList";
+|   analyzer[] = "Php/FopenMode";
+|   analyzer[] = "Php/ForeachObject";
+|   analyzer[] = "Php/HashAlgos";
+|   analyzer[] = "Php/Incompilable";
+|   analyzer[] = "Php/InternalParameterType";
+|   analyzer[] = "Php/IsnullVsEqualNull";
+|   analyzer[] = "Php/LogicalInLetters";
+|   analyzer[] = "Php/NoClassInGlobal";
+|   analyzer[] = "Php/NoReferenceForTernary";
+|   analyzer[] = "Php/NotScalarType";
+|   analyzer[] = "Php/PathinfoReturns";
+|   analyzer[] = "Php/ReservedNames";
+|   analyzer[] = "Php/ShortOpenTagRequired";
+|   analyzer[] = "Php/ShouldUseCoalesce";
+|   analyzer[] = "Php/StrtrArguments";
+|   analyzer[] = "Php/TooManyNativeCalls";
+|   analyzer[] = "Php/UnknownPcre2Option";
+|   analyzer[] = "Php/UseObjectApi";
+|   analyzer[] = "Php/UsePathinfo";
+|   analyzer[] = "Php/UseSetCookie";
+|   analyzer[] = "Php/UseStdclass";
+|   analyzer[] = "Php/oldAutoloadUsage";
+|   analyzer[] = "Security/DontEchoError";
+|   analyzer[] = "Security/ShouldUsePreparedStatement";
+|   analyzer[] = "Structures/AddZero";
+|   analyzer[] = "Structures/AlteringForeachWithoutReference";
+|   analyzer[] = "Structures/AlternativeConsistenceByFile";
+|   analyzer[] = "Structures/AutoUnsetForeach";
+|   analyzer[] = "Structures/BailOutEarly";
+|   analyzer[] = "Structures/BooleanStrictComparison";
+|   analyzer[] = "Structures/BreakOutsideLoop";
+|   analyzer[] = "Structures/BuriedAssignation";
+|   analyzer[] = "Structures/CastToBoolean";
+|   analyzer[] = "Structures/CatchShadowsVariable";
+|   analyzer[] = "Structures/CheckAllTypes";
+|   analyzer[] = "Structures/CommonAlternatives";
+|   analyzer[] = "Structures/ComparedComparison";
+|   analyzer[] = "Structures/CouldBeElse";
+|   analyzer[] = "Structures/CouldBeStatic";
+|   analyzer[] = "Structures/CouldUseDir";
+|   analyzer[] = "Structures/CouldUseShortAssignation";
+|   analyzer[] = "Structures/CouldUseStrrepeat";
+|   analyzer[] = "Structures/DanglingArrayReferences";
+|   analyzer[] = "Structures/DirThenSlash";
+|   analyzer[] = "Structures/DontChangeBlindKey";
+|   analyzer[] = "Structures/DoubleAssignation";
+|   analyzer[] = "Structures/DoubleInstruction";
+|   analyzer[] = "Structures/DropElseAfterReturn";
+|   analyzer[] = "Structures/EchoWithConcat";
+|   analyzer[] = "Structures/ElseIfElseif";
+|   analyzer[] = "Structures/EmptyBlocks";
+|   analyzer[] = "Structures/EmptyLines";
+|   analyzer[] = "Structures/EmptyTryCatch";
+|   analyzer[] = "Structures/ErrorReportingWithInteger";
+|   analyzer[] = "Structures/EvalUsage";
+|   analyzer[] = "Structures/EvalWithoutTry";
+|   analyzer[] = "Structures/ExitUsage";
+|   analyzer[] = "Structures/FailingSubstrComparison";
+|   analyzer[] = "Structures/ForWithFunctioncall";
+|   analyzer[] = "Structures/ForeachNeedReferencedSource";
+|   analyzer[] = "Structures/ForeachReferenceIsNotModified";
+|   analyzer[] = "Structures/ForgottenWhiteSpace";
+|   analyzer[] = "Structures/FunctionPreSubscripting";
+|   analyzer[] = "Structures/GlobalUsage";
+|   analyzer[] = "Structures/Htmlentitiescall";
+|   analyzer[] = "Structures/IdenticalConditions";
+|   analyzer[] = "Structures/IdenticalConsecutive";
+|   analyzer[] = "Structures/IdenticalOnBothSides";
+|   analyzer[] = "Structures/IfWithSameConditions";
+|   analyzer[] = "Structures/Iffectation";
+|   analyzer[] = "Structures/ImplicitGlobal";
+|   analyzer[] = "Structures/ImpliedIf";
+|   analyzer[] = "Structures/IndicesAreIntOrString";
+|   analyzer[] = "Structures/InvalidRegex";
+|   analyzer[] = "Structures/IsZero";
+|   analyzer[] = "Structures/ListOmissions";
+|   analyzer[] = "Structures/LogicalMistakes";
+|   analyzer[] = "Structures/LoneBlock";
+|   analyzer[] = "Structures/LongArguments";
+|   analyzer[] = "Structures/MismatchedTernary";
+|   analyzer[] = "Structures/MissingCases";
+|   analyzer[] = "Structures/MissingNew";
+|   analyzer[] = "Structures/MissingParenthesis";
+|   analyzer[] = "Structures/MixedConcatInterpolation";
+|   analyzer[] = "Structures/ModernEmpty";
+|   analyzer[] = "Structures/MultipleDefinedCase";
+|   analyzer[] = "Structures/MultipleTypeVariable";
+|   analyzer[] = "Structures/MultiplyByOne";
+|   analyzer[] = "Structures/NegativePow";
+|   analyzer[] = "Structures/NestedIfthen";
+|   analyzer[] = "Structures/NestedTernary";
+|   analyzer[] = "Structures/NeverNegative";
+|   analyzer[] = "Structures/NextMonthTrap";
+|   analyzer[] = "Structures/NoChangeIncomingVariables";
+|   analyzer[] = "Structures/NoChoice";
+|   analyzer[] = "Structures/NoDirectUsage";
+|   analyzer[] = "Structures/NoEmptyRegex";
+|   analyzer[] = "Structures/NoGetClassNull";
+|   analyzer[] = "Structures/NoHardcodedHash";
+|   analyzer[] = "Structures/NoHardcodedIp";
+|   analyzer[] = "Structures/NoHardcodedPath";
+|   analyzer[] = "Structures/NoHardcodedPort";
+|   analyzer[] = "Structures/NoIssetWithEmpty";
+|   analyzer[] = "Structures/NoNeedForElse";
+|   analyzer[] = "Structures/NoParenthesisForLanguageConstruct";
+|   analyzer[] = "Structures/NoReferenceOnLeft";
+|   analyzer[] = "Structures/NoSubstrOne";
+|   analyzer[] = "Structures/Noscream";
+|   analyzer[] = "Structures/NotNot";
+|   analyzer[] = "Structures/ObjectReferences";
+|   analyzer[] = "Structures/OnceUsage";
+|   analyzer[] = "Structures/OneLineTwoInstructions";
+|   analyzer[] = "Structures/OnlyVariableReturnedByReference";
+|   analyzer[] = "Structures/OrDie";
+|   analyzer[] = "Structures/PhpinfoUsage";
+|   analyzer[] = "Structures/PossibleInfiniteLoop";
+|   analyzer[] = "Structures/PrintAndDie";
+|   analyzer[] = "Structures/PrintWithoutParenthesis";
+|   analyzer[] = "Structures/PrintfArguments";
+|   analyzer[] = "Structures/PropertyVariableConfusion";
+|   analyzer[] = "Structures/QueriesInLoop";
+|   analyzer[] = "Structures/RepeatedPrint";
+|   analyzer[] = "Structures/RepeatedRegex";
+|   analyzer[] = "Structures/ResultMayBeMissing";
+|   analyzer[] = "Structures/ReturnTrueFalse";
+|   analyzer[] = "Structures/SameConditions";
+|   analyzer[] = "Structures/SequenceInFor";
+|   analyzer[] = "Structures/ShouldChainException";
+|   analyzer[] = "Structures/ShouldMakeTernary";
+|   analyzer[] = "Structures/ShouldPreprocess";
+|   analyzer[] = "Structures/StaticLoop";
+|   analyzer[] = "Structures/StrposCompare";
+|   analyzer[] = "Structures/SuspiciousComparison";
+|   analyzer[] = "Structures/SwitchToSwitch";
+|   analyzer[] = "Structures/SwitchWithoutDefault";
+|   analyzer[] = "Structures/TernaryInConcat";
+|   analyzer[] = "Structures/TestThenCast";
+|   analyzer[] = "Structures/ThrowsAndAssign";
+|   analyzer[] = "Structures/TimestampDifference";
+|   analyzer[] = "Structures/UncheckedResources";
+|   analyzer[] = "Structures/UnconditionLoopBreak";
+|   analyzer[] = "Structures/UnknownPregOption";
+|   analyzer[] = "Structures/Unpreprocessed";
+|   analyzer[] = "Structures/UnreachableCode";
+|   analyzer[] = "Structures/UnsetInForeach";
+|   analyzer[] = "Structures/UnusedGlobal";
+|   analyzer[] = "Structures/UnusedLabel";
+|   analyzer[] = "Structures/UseInstanceof";
+|   analyzer[] = "Structures/UsePositiveCondition";
+|   analyzer[] = "Structures/UseSystemTmp";
+|   analyzer[] = "Structures/UselessBrackets";
+|   analyzer[] = "Structures/UselessCasting";
+|   analyzer[] = "Structures/UselessCheck";
+|   analyzer[] = "Structures/UselessGlobal";
+|   analyzer[] = "Structures/UselessInstruction";
+|   analyzer[] = "Structures/UselessParenthesis";
+|   analyzer[] = "Structures/UselessSwitch";
+|   analyzer[] = "Structures/UselessUnset";
+|   analyzer[] = "Structures/VardumpUsage";
+|   analyzer[] = "Structures/WhileListEach";
+|   analyzer[] = "Structures/WrongRange";
+|   analyzer[] = "Structures/pregOptionE";
+|   analyzer[] = "Structures/toStringThrowsException";
+|   analyzer[] = "Traits/DependantTrait";
+|   analyzer[] = "Traits/EmptyTrait";
+|   analyzer[] = "Traits/UndefinedTrait";
+|   analyzer[] = "Traits/UnusedTrait";
+|   analyzer[] = "Type/NoRealComparison";
+|   analyzer[] = "Type/OneVariableStrings";
+|   analyzer[] = "Type/ShouldTypecast";
+|   analyzer[] = "Type/SilentlyCastInteger";
+|   analyzer[] = "Type/StringHoldAVariable";
+|   analyzer[] = "Type/StringWithStrangeSpace";
+|   analyzer[] = "Variables/AssignedTwiceOrMore";
+|   analyzer[] = "Variables/LocalGlobals";
+|   analyzer[] = "Variables/LostReferences";
+|   analyzer[] = "Variables/Overwriting";
+|   analyzer[] = "Variables/OverwrittenLiterals";
+|   analyzer[] = "Variables/StrangeName";
+|   analyzer[] = "Variables/VariableNonascii";
+|   analyzer[] = "Variables/VariableUsedOnce";
+|   analyzer[] = "Variables/VariableUsedOnceByContext";
+|   analyzer[] = "Variables/WrittenOnlyVariable";
+
+
+
+
+.. _theme_ini_cakephp:
+
+Cakephp
+-------
+
+| [Cakephp]
+|   analyzer[] = "Cakephp/Cake30DeprecatedClass";
+|   analyzer[] = "Cakephp/Cake32DeprecatedMethods";
+|   analyzer[] = "Cakephp/Cake33DeprecatedClass";
+|   analyzer[] = "Cakephp/Cake33DeprecatedMethods";
+|   analyzer[] = "Cakephp/Cake33DeprecatedStaticmethodcall";
+|   analyzer[] = "Cakephp/Cake33DeprecatedTraits";
+|   analyzer[] = "Cakephp/CakePHPUsed";
+|   analyzer[] = "Cakephp/Cakephp25";
+|   analyzer[] = "Cakephp/Cakephp26";
+|   analyzer[] = "Cakephp/Cakephp27";
+|   analyzer[] = "Cakephp/Cakephp28";
+|   analyzer[] = "Cakephp/Cakephp29";
+|   analyzer[] = "Cakephp/Cakephp30";
+|   analyzer[] = "Cakephp/Cakephp31";
+|   analyzer[] = "Cakephp/Cakephp32";
+|   analyzer[] = "Cakephp/Cakephp33";
+|   analyzer[] = "Cakephp/Cakephp34";
+
+
+
+
+.. _theme_ini_coding conventions:
+
+Coding Conventions
+------------------
+
+| [Coding Conventions]
+|   analyzer[] = "Arrays/CurlyArrays";
+|   analyzer[] = "Arrays/EmptySlots";
+|   analyzer[] = "Classes/MultipleClassesInFile";
+|   analyzer[] = "Classes/OrderOfDeclaration";
+|   analyzer[] = "Classes/WrongCase";
+|   analyzer[] = "Constants/ConstRecommended";
+|   analyzer[] = "Namespaces/UseWithFullyQualifiedNS";
+|   analyzer[] = "Php/CloseTags";
+|   analyzer[] = "Php/ReturnWithParenthesis";
+|   analyzer[] = "Php/UpperCaseFunction";
+|   analyzer[] = "Php/UpperCaseKeyword";
+|   analyzer[] = "Structures/Bracketless";
+|   analyzer[] = "Structures/ConstantComparisonConsistance";
+|   analyzer[] = "Structures/EchoPrintConsistance";
+|   analyzer[] = "Structures/HeredocDelimiterFavorite";
+|   analyzer[] = "Structures/MixedConcatInterpolation";
+|   analyzer[] = "Structures/PlusEgalOne";
+|   analyzer[] = "Structures/YodaComparison";
+|   analyzer[] = "Type/ShouldBeSingleQuote";
+|   analyzer[] = "Type/StringInterpolation";
+|   analyzer[] = "Variables/VariableUppercase";
+
+
+
+
+.. _theme_ini_compatibilityphp53:
+
+CompatibilityPHP53
+------------------
+
+| [CompatibilityPHP53]
+|   analyzer[] = "Arrays/ArrayNSUsage";
+|   analyzer[] = "Arrays/MixedKeys";
+|   analyzer[] = "Classes/Anonymous";
+|   analyzer[] = "Classes/CantInheritAbstractMethod";
+|   analyzer[] = "Classes/ChildRemoveTypehint";
+|   analyzer[] = "Classes/IntegerAsProperty";
+|   analyzer[] = "Classes/NonStaticMethodsCalledStatic";
+|   analyzer[] = "Classes/NullOnNew";
+|   analyzer[] = "Exceptions/MultipleCatch";
+|   analyzer[] = "Extensions/Extdba";
+|   analyzer[] = "Extensions/Extfdf";
+|   analyzer[] = "Extensions/Extming";
+|   analyzer[] = "Functions/MultipleSameArguments";
+|   analyzer[] = "Namespaces/UseFunctionsConstants";
+|   analyzer[] = "Php/CantUseReturnValueInWriteContext";
+|   analyzer[] = "Php/CaseForPSS";
+|   analyzer[] = "Php/ClassConstWithArray";
+|   analyzer[] = "Php/ClosureThisSupport";
+|   analyzer[] = "Php/ConstWithArray";
+|   analyzer[] = "Php/DefineWithArray";
+|   analyzer[] = "Php/EllipsisUsage";
+|   analyzer[] = "Php/ExponentUsage";
+|   analyzer[] = "Php/GroupUseDeclaration";
+|   analyzer[] = "Php/GroupUseTrailingComma";
+|   analyzer[] = "Php/HashAlgos53";
+|   analyzer[] = "Php/ListShortSyntax";
+|   analyzer[] = "Php/ListWithKeys";
+|   analyzer[] = "Php/ListWithReference";
+|   analyzer[] = "Php/MethodCallOnNew";
+|   analyzer[] = "Php/NoListWithString";
+|   analyzer[] = "Php/NoStringWithAppend";
+|   analyzer[] = "Php/NoSubstrMinusOne";
+|   analyzer[] = "Php/Php54NewFunctions";
+|   analyzer[] = "Php/Php55NewFunctions";
+|   analyzer[] = "Php/Php56NewFunctions";
+|   analyzer[] = "Php/Php70NewClasses";
+|   analyzer[] = "Php/Php70NewFunctions";
+|   analyzer[] = "Php/Php70NewInterfaces";
+|   analyzer[] = "Php/Php71NewClasses";
+|   analyzer[] = "Php/Php72NewClasses";
+|   analyzer[] = "Php/Php72RemovedInterfaces";
+|   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/Php7RelaxedKeyword";
+|   analyzer[] = "Php/ScalarTypehintUsage";
+|   analyzer[] = "Php/StaticclassUsage";
+|   analyzer[] = "Php/UnicodeEscapePartial";
+|   analyzer[] = "Php/UnicodeEscapeSyntax";
+|   analyzer[] = "Php/debugInfoUsage";
+|   analyzer[] = "Structures/Break0";
+|   analyzer[] = "Structures/ConstantScalarExpression";
+|   analyzer[] = "Structures/DereferencingAS";
+|   analyzer[] = "Structures/ForeachWithList";
+|   analyzer[] = "Structures/FunctionSubscripting";
+|   analyzer[] = "Structures/IssetWithConstant";
+|   analyzer[] = "Structures/NoGetClassNull";
+|   analyzer[] = "Structures/PHP7Dirname";
+|   analyzer[] = "Structures/SwitchWithMultipleDefault";
+|   analyzer[] = "Structures/VariableGlobal";
+|   analyzer[] = "Type/Binary";
+|   analyzer[] = "Type/MalformedOctal";
+|   analyzer[] = "Variables/Php5IndirectExpression";
+|   analyzer[] = "Variables/Php7IndirectExpression";
+
+
+
+
+.. _theme_ini_compatibilityphp54:
+
+CompatibilityPHP54
+------------------
+
+| [CompatibilityPHP54]
+|   analyzer[] = "Arrays/MixedKeys";
+|   analyzer[] = "Classes/Anonymous";
+|   analyzer[] = "Classes/CantInheritAbstractMethod";
+|   analyzer[] = "Classes/ChildRemoveTypehint";
+|   analyzer[] = "Classes/IntegerAsProperty";
+|   analyzer[] = "Classes/NonStaticMethodsCalledStatic";
+|   analyzer[] = "Classes/NullOnNew";
+|   analyzer[] = "Exceptions/MultipleCatch";
+|   analyzer[] = "Extensions/Extmhash";
+|   analyzer[] = "Functions/MultipleSameArguments";
+|   analyzer[] = "Namespaces/UseFunctionsConstants";
+|   analyzer[] = "Php/CantUseReturnValueInWriteContext";
+|   analyzer[] = "Php/CaseForPSS";
+|   analyzer[] = "Php/ClassConstWithArray";
+|   analyzer[] = "Php/ConstWithArray";
+|   analyzer[] = "Php/DefineWithArray";
+|   analyzer[] = "Php/EllipsisUsage";
+|   analyzer[] = "Php/ExponentUsage";
+|   analyzer[] = "Php/GroupUseDeclaration";
+|   analyzer[] = "Php/GroupUseTrailingComma";
+|   analyzer[] = "Php/HashAlgos53";
+|   analyzer[] = "Php/HashAlgos54";
+|   analyzer[] = "Php/ListShortSyntax";
+|   analyzer[] = "Php/ListWithKeys";
+|   analyzer[] = "Php/ListWithReference";
+|   analyzer[] = "Php/NoListWithString";
+|   analyzer[] = "Php/NoStringWithAppend";
+|   analyzer[] = "Php/NoSubstrMinusOne";
+|   analyzer[] = "Php/Php54RemovedFunctions";
+|   analyzer[] = "Php/Php55NewFunctions";
+|   analyzer[] = "Php/Php56NewFunctions";
+|   analyzer[] = "Php/Php70NewClasses";
+|   analyzer[] = "Php/Php70NewFunctions";
+|   analyzer[] = "Php/Php70NewInterfaces";
+|   analyzer[] = "Php/Php71NewClasses";
+|   analyzer[] = "Php/Php72NewClasses";
+|   analyzer[] = "Php/Php72RemovedInterfaces";
+|   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/Php7RelaxedKeyword";
+|   analyzer[] = "Php/ScalarTypehintUsage";
+|   analyzer[] = "Php/StaticclassUsage";
+|   analyzer[] = "Php/UnicodeEscapePartial";
+|   analyzer[] = "Php/UnicodeEscapeSyntax";
+|   analyzer[] = "Php/debugInfoUsage";
+|   analyzer[] = "Structures/BreakNonInteger";
+|   analyzer[] = "Structures/CalltimePassByReference";
+|   analyzer[] = "Structures/ConstantScalarExpression";
+|   analyzer[] = "Structures/CryptWithoutSalt";
+|   analyzer[] = "Structures/DereferencingAS";
+|   analyzer[] = "Structures/ForeachWithList";
+|   analyzer[] = "Structures/IssetWithConstant";
+|   analyzer[] = "Structures/NoGetClassNull";
+|   analyzer[] = "Structures/PHP7Dirname";
+|   analyzer[] = "Structures/SwitchWithMultipleDefault";
+|   analyzer[] = "Structures/VariableGlobal";
+|   analyzer[] = "Type/MalformedOctal";
+|   analyzer[] = "Variables/Php5IndirectExpression";
+|   analyzer[] = "Variables/Php7IndirectExpression";
+
+
+
+
+.. _theme_ini_compatibilityphp55:
+
+CompatibilityPHP55
+------------------
+
+| [CompatibilityPHP55]
+|   analyzer[] = "Classes/Anonymous";
+|   analyzer[] = "Classes/CantInheritAbstractMethod";
+|   analyzer[] = "Classes/ChildRemoveTypehint";
+|   analyzer[] = "Classes/IntegerAsProperty";
+|   analyzer[] = "Classes/NonStaticMethodsCalledStatic";
+|   analyzer[] = "Classes/NullOnNew";
+|   analyzer[] = "Exceptions/MultipleCatch";
+|   analyzer[] = "Extensions/Extapc";
+|   analyzer[] = "Extensions/Extmysql";
+|   analyzer[] = "Functions/MultipleSameArguments";
+|   analyzer[] = "Namespaces/UseFunctionsConstants";
+|   analyzer[] = "Php/ClassConstWithArray";
+|   analyzer[] = "Php/ConstWithArray";
+|   analyzer[] = "Php/DefineWithArray";
+|   analyzer[] = "Php/EllipsisUsage";
+|   analyzer[] = "Php/ExponentUsage";
+|   analyzer[] = "Php/GroupUseDeclaration";
+|   analyzer[] = "Php/GroupUseTrailingComma";
+|   analyzer[] = "Php/HashAlgos53";
+|   analyzer[] = "Php/HashAlgos54";
+|   analyzer[] = "Php/ListShortSyntax";
+|   analyzer[] = "Php/ListWithKeys";
+|   analyzer[] = "Php/ListWithReference";
+|   analyzer[] = "Php/NoListWithString";
+|   analyzer[] = "Php/NoStringWithAppend";
+|   analyzer[] = "Php/NoSubstrMinusOne";
+|   analyzer[] = "Php/Password55";
+|   analyzer[] = "Php/Php55RemovedFunctions";
+|   analyzer[] = "Php/Php56NewFunctions";
+|   analyzer[] = "Php/Php70NewClasses";
+|   analyzer[] = "Php/Php70NewFunctions";
+|   analyzer[] = "Php/Php70NewInterfaces";
+|   analyzer[] = "Php/Php71NewClasses";
+|   analyzer[] = "Php/Php72NewClasses";
+|   analyzer[] = "Php/Php72RemovedInterfaces";
+|   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/Php7RelaxedKeyword";
+|   analyzer[] = "Php/ScalarTypehintUsage";
+|   analyzer[] = "Php/UnicodeEscapePartial";
+|   analyzer[] = "Php/UnicodeEscapeSyntax";
+|   analyzer[] = "Php/debugInfoUsage";
+|   analyzer[] = "Structures/ConstantScalarExpression";
+|   analyzer[] = "Structures/IssetWithConstant";
+|   analyzer[] = "Structures/NoGetClassNull";
+|   analyzer[] = "Structures/PHP7Dirname";
+|   analyzer[] = "Structures/SwitchWithMultipleDefault";
+|   analyzer[] = "Structures/VariableGlobal";
+|   analyzer[] = "Type/MalformedOctal";
+|   analyzer[] = "Variables/Php5IndirectExpression";
+|   analyzer[] = "Variables/Php7IndirectExpression";
+
+
+
+
+.. _theme_ini_compatibilityphp56:
+
+CompatibilityPHP56
+------------------
+
+| [CompatibilityPHP56]
+|   analyzer[] = "Classes/Anonymous";
+|   analyzer[] = "Classes/CantInheritAbstractMethod";
+|   analyzer[] = "Classes/ChildRemoveTypehint";
+|   analyzer[] = "Classes/IntegerAsProperty";
+|   analyzer[] = "Classes/NonStaticMethodsCalledStatic";
+|   analyzer[] = "Classes/NullOnNew";
+|   analyzer[] = "Exceptions/MultipleCatch";
+|   analyzer[] = "Functions/MultipleSameArguments";
+|   analyzer[] = "Php/DefineWithArray";
+|   analyzer[] = "Php/GroupUseDeclaration";
+|   analyzer[] = "Php/GroupUseTrailingComma";
+|   analyzer[] = "Php/HashAlgos53";
+|   analyzer[] = "Php/HashAlgos54";
+|   analyzer[] = "Php/ListShortSyntax";
+|   analyzer[] = "Php/ListWithKeys";
+|   analyzer[] = "Php/ListWithReference";
+|   analyzer[] = "Php/NoListWithString";
+|   analyzer[] = "Php/NoStringWithAppend";
+|   analyzer[] = "Php/NoSubstrMinusOne";
+|   analyzer[] = "Php/Php70NewClasses";
+|   analyzer[] = "Php/Php70NewFunctions";
+|   analyzer[] = "Php/Php70NewInterfaces";
+|   analyzer[] = "Php/Php71NewClasses";
+|   analyzer[] = "Php/Php72NewClasses";
+|   analyzer[] = "Php/Php72RemovedInterfaces";
+|   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/Php7RelaxedKeyword";
+|   analyzer[] = "Php/RawPostDataUsage";
+|   analyzer[] = "Php/ScalarTypehintUsage";
+|   analyzer[] = "Php/UnicodeEscapePartial";
+|   analyzer[] = "Php/UnicodeEscapeSyntax";
+|   analyzer[] = "Structures/IssetWithConstant";
+|   analyzer[] = "Structures/NoGetClassNull";
+|   analyzer[] = "Structures/PHP7Dirname";
+|   analyzer[] = "Structures/SwitchWithMultipleDefault";
+|   analyzer[] = "Structures/VariableGlobal";
+|   analyzer[] = "Type/MalformedOctal";
+|   analyzer[] = "Variables/Php5IndirectExpression";
+|   analyzer[] = "Variables/Php7IndirectExpression";
+
+
+
+
+.. _theme_ini_compatibilityphp70:
+
+CompatibilityPHP70
+------------------
+
+| [CompatibilityPHP70]
+|   analyzer[] = "Classes/CantInheritAbstractMethod";
+|   analyzer[] = "Classes/ChildRemoveTypehint";
+|   analyzer[] = "Classes/IntegerAsProperty";
+|   analyzer[] = "Classes/toStringPss";
+|   analyzer[] = "Exceptions/MultipleCatch";
+|   analyzer[] = "Extensions/Extereg";
+|   analyzer[] = "Functions/funcGetArgModified";
+|   analyzer[] = "Php/EmptyList";
+|   analyzer[] = "Php/ForeachDontChangePointer";
+|   analyzer[] = "Php/GlobalWithoutSimpleVariable";
+|   analyzer[] = "Php/GroupUseTrailingComma";
+|   analyzer[] = "Php/HashAlgos53";
+|   analyzer[] = "Php/HashAlgos54";
+|   analyzer[] = "Php/ListShortSyntax";
+|   analyzer[] = "Php/ListWithAppends";
+|   analyzer[] = "Php/ListWithKeys";
+|   analyzer[] = "Php/ListWithReference";
+|   analyzer[] = "Php/NoSubstrMinusOne";
+|   analyzer[] = "Php/ParenthesisAsParameter";
+|   analyzer[] = "Php/Php70RemovedDirective";
+|   analyzer[] = "Php/Php70RemovedFunctions";
+|   analyzer[] = "Php/Php71NewClasses";
+|   analyzer[] = "Php/Php72NewClasses";
+|   analyzer[] = "Php/Php72RemovedInterfaces";
+|   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/ReservedKeywords7";
+|   analyzer[] = "Php/SetExceptionHandlerPHP7";
+|   analyzer[] = "Php/UsortSorting";
+|   analyzer[] = "Structures/BreakOutsideLoop";
+|   analyzer[] = "Structures/McryptcreateivWithoutOption";
+|   analyzer[] = "Structures/NoGetClassNull";
+|   analyzer[] = "Structures/SetlocaleNeedsConstants";
+|   analyzer[] = "Structures/pregOptionE";
+|   analyzer[] = "Type/HexadecimalString";
+|   analyzer[] = "Variables/Php7IndirectExpression";
+
+
+
+
+.. _theme_ini_compatibilityphp71:
+
+CompatibilityPHP71
+------------------
+
+| [CompatibilityPHP71]
+|   analyzer[] = "Classes/CantInheritAbstractMethod";
+|   analyzer[] = "Classes/ChildRemoveTypehint";
+|   analyzer[] = "Classes/IntegerAsProperty";
+|   analyzer[] = "Classes/UsingThisOutsideAClass";
+|   analyzer[] = "Extensions/Extmcrypt";
+|   analyzer[] = "Php/BetterRand";
+|   analyzer[] = "Php/GroupUseTrailingComma";
+|   analyzer[] = "Php/HashAlgos53";
+|   analyzer[] = "Php/HashAlgos54";
+|   analyzer[] = "Php/ListWithReference";
+|   analyzer[] = "Php/ParenthesisAsParameter";
+|   analyzer[] = "Php/Php70RemovedDirective";
+|   analyzer[] = "Php/Php70RemovedFunctions";
+|   analyzer[] = "Php/Php71NewFunctions";
+|   analyzer[] = "Php/Php71RemovedDirective";
+|   analyzer[] = "Php/Php71microseconds";
+|   analyzer[] = "Php/Php72NewClasses";
+|   analyzer[] = "Php/Php72RemovedInterfaces";
+|   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Structures/NoGetClassNull";
+|   analyzer[] = "Structures/NoSubstrOne";
+|   analyzer[] = "Structures/pregOptionE";
+|   analyzer[] = "Type/HexadecimalString";
+|   analyzer[] = "Type/OctalInString";
+
+
+
+
+.. _theme_ini_compatibilityphp72:
+
+CompatibilityPHP72
+------------------
+
+| [CompatibilityPHP72]
+|   analyzer[] = "Constants/UndefinedConstants";
+|   analyzer[] = "Php/AvoidSetErrorHandlerContextArg";
+|   analyzer[] = "Php/HashUsesObjects";
+|   analyzer[] = "Php/ListWithReference";
+|   analyzer[] = "Php/ParenthesisAsParameter";
+|   analyzer[] = "Php/Php72Deprecation";
+|   analyzer[] = "Php/Php72NewClasses";
+|   analyzer[] = "Php/Php72NewConstants";
+|   analyzer[] = "Php/Php72NewFunctions";
+|   analyzer[] = "Php/Php72ObjectKeyword";
+|   analyzer[] = "Php/Php72RemovedFunctions";
+|   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Structures/CanCountNonCountable";
+|   analyzer[] = "Structures/NoGetClassNull";
+|   analyzer[] = "Structures/pregOptionE";
+
+
+
+
+.. _theme_ini_compatibilityphp73:
+
+CompatibilityPHP73
+------------------
+
+| [CompatibilityPHP73]
+|   analyzer[] = "Php/PHP73LastEmptyArgument";
+|   analyzer[] = "Php/ParenthesisAsParameter";
+|   analyzer[] = "Php/Php70RemovedDirective";
+|   analyzer[] = "Structures/pregOptionE";
+
+
+
+
+.. _theme_ini_dead code:
+
+Dead code
+---------
+
+| [Dead code]
+|   analyzer[] = "Classes/CantExtendFinal";
+|   analyzer[] = "Classes/LocallyUnusedProperty";
+|   analyzer[] = "Classes/UnresolvedCatch";
+|   analyzer[] = "Classes/UnresolvedInstanceof";
+|   analyzer[] = "Classes/UnusedClass";
+|   analyzer[] = "Classes/UnusedMethods";
+|   analyzer[] = "Classes/UnusedPrivateMethod";
+|   analyzer[] = "Classes/UnusedPrivateProperty";
+|   analyzer[] = "Classes/UnusedProtectedMethods";
+|   analyzer[] = "Classes/UsedProtectedMethod";
+|   analyzer[] = "Constants/UnusedConstants";
+|   analyzer[] = "Exceptions/AlreadyCaught";
+|   analyzer[] = "Exceptions/CaughtButNotThrown";
+|   analyzer[] = "Exceptions/Rethrown";
+|   analyzer[] = "Exceptions/Unthrown";
+|   analyzer[] = "Functions/UnusedFunctions";
+|   analyzer[] = "Functions/UnusedInheritedVariable";
+|   analyzer[] = "Functions/UnusedReturnedValue";
+|   analyzer[] = "Interfaces/UnusedInterfaces";
+|   analyzer[] = "Namespaces/EmptyNamespace";
+|   analyzer[] = "Namespaces/UnusedUse";
+|   analyzer[] = "Structures/EmptyLines";
+|   analyzer[] = "Structures/UnreachableCode";
+|   analyzer[] = "Structures/UnsetInForeach";
+|   analyzer[] = "Structures/UnusedLabel";
+
+
+
+
+.. _theme_ini_performances:
+
+Performances
+------------
+
+| [Performances]
+|   analyzer[] = "Arrays/GettingLastElement";
+|   analyzer[] = "Arrays/SliceFirst";
+|   analyzer[] = "Classes/UseClassOperator";
+|   analyzer[] = "Performances/ArrayMergeInLoops";
+|   analyzer[] = "Performances/AvoidArrayPush";
+|   analyzer[] = "Performances/DoubleArrayFlip";
+|   analyzer[] = "Performances/FetchOneRowFormat";
+|   analyzer[] = "Performances/JoinFile";
+|   analyzer[] = "Performances/MakeOneCall";
+|   analyzer[] = "Performances/NoConcatInLoop";
+|   analyzer[] = "Performances/NoGlob";
+|   analyzer[] = "Performances/NotCountNull";
+|   analyzer[] = "Performances/PHP7EncapsedStrings";
+|   analyzer[] = "Performances/PrePostIncrement";
+|   analyzer[] = "Performances/RegexOnCollector";
+|   analyzer[] = "Performances/SimpleSwitch";
+|   analyzer[] = "Performances/SlowFunctions";
+|   analyzer[] = "Performances/SubstrFirst";
+|   analyzer[] = "Performances/timeVsstrtotime";
+|   analyzer[] = "Php/ShouldUseArrayColumn";
+|   analyzer[] = "Php/ShouldUseFunction";
+|   analyzer[] = "Php/UsePathinfoArgs";
+|   analyzer[] = "Structures/CouldUseShortAssignation";
+|   analyzer[] = "Structures/EchoWithConcat";
+|   analyzer[] = "Structures/EvalUsage";
+|   analyzer[] = "Structures/ForWithFunctioncall";
+|   analyzer[] = "Structures/GlobalOutsideLoop";
+|   analyzer[] = "Structures/NoArrayUnique";
+|   analyzer[] = "Structures/NoAssignationInFunction";
+|   analyzer[] = "Structures/NoSubstrOne";
+|   analyzer[] = "Structures/SimplePreg";
+|   analyzer[] = "Structures/WhileListEach";
+
+
+
+
+.. _theme_ini_security:
+
+Security
+--------
+
+| [Security]
+|   analyzer[] = "Functions/HardcodedPasswords";
+|   analyzer[] = "Php/BetterRand";
+|   analyzer[] = "Security/AnchorRegex";
+|   analyzer[] = "Security/AvoidThoseCrypto";
+|   analyzer[] = "Security/CompareHash";
+|   analyzer[] = "Security/CurlOptions";
+|   analyzer[] = "Security/DirectInjection";
+|   analyzer[] = "Security/DontEchoError";
+|   analyzer[] = "Security/DynamicDl";
+|   analyzer[] = "Security/EncodedLetters";
+|   analyzer[] = "Security/IndirectInjection";
+|   analyzer[] = "Security/MkdirDefault";
+|   analyzer[] = "Security/NoNetForXmlLoad";
+|   analyzer[] = "Security/NoSleep";
+|   analyzer[] = "Security/RegisterGlobals";
+|   analyzer[] = "Security/SessionLazyWrite";
+|   analyzer[] = "Security/SetCookieArgs";
+|   analyzer[] = "Security/ShouldUsePreparedStatement";
+|   analyzer[] = "Security/ShouldUseSessionRegenerateId";
+|   analyzer[] = "Security/Sqlite3RequiresSingleQuotes";
+|   analyzer[] = "Security/UnserializeSecondArg";
+|   analyzer[] = "Security/UploadFilenameInjection";
+|   analyzer[] = "Security/parseUrlWithoutParameters";
+|   analyzer[] = "Structures/EvalUsage";
+|   analyzer[] = "Structures/EvalWithoutTry";
+|   analyzer[] = "Structures/Fallthrough";
+|   analyzer[] = "Structures/NoHardcodedHash";
+|   analyzer[] = "Structures/NoHardcodedIp";
+|   analyzer[] = "Structures/NoHardcodedPort";
+|   analyzer[] = "Structures/NoReturnInFinally";
+|   analyzer[] = "Structures/PhpinfoUsage";
+|   analyzer[] = "Structures/RandomWithoutTry";
+|   analyzer[] = "Structures/VardumpUsage";
+|   analyzer[] = "Structures/pregOptionE";
+
+
+
+
+.. _theme_ini_slim:
+
+Slim
+----
+
+| [Slim]
+|   analyzer[] = "Slim/NoEchoInRouteCallable";
+|   analyzer[] = "Slim/Slimphp10";
+|   analyzer[] = "Slim/Slimphp11";
+|   analyzer[] = "Slim/Slimphp12";
+|   analyzer[] = "Slim/Slimphp13";
+|   analyzer[] = "Slim/Slimphp15";
+|   analyzer[] = "Slim/Slimphp16";
+|   analyzer[] = "Slim/Slimphp20";
+|   analyzer[] = "Slim/Slimphp21";
+|   analyzer[] = "Slim/Slimphp22";
+|   analyzer[] = "Slim/Slimphp23";
+|   analyzer[] = "Slim/Slimphp24";
+|   analyzer[] = "Slim/Slimphp25";
+|   analyzer[] = "Slim/Slimphp26";
+|   analyzer[] = "Slim/Slimphp30";
+|   analyzer[] = "Slim/Slimphp31";
+|   analyzer[] = "Slim/Slimphp32";
+|   analyzer[] = "Slim/Slimphp33";
+|   analyzer[] = "Slim/Slimphp34";
+|   analyzer[] = "Slim/Slimphp35";
+|   analyzer[] = "Slim/Slimphp36";
+|   analyzer[] = "Slim/Slimphp37";
+|   analyzer[] = "Slim/Slimphp38";
+|   analyzer[] = "Slim/UseSlim";
+|   analyzer[] = "Slim/UsedRoutes";
+
+
+
+
+.. _theme_ini_suggestions:
+
+Suggestions
+-----------
+
+| [Suggestions]
+|   analyzer[] = "Arrays/RandomlySortedLiterals";
+|   analyzer[] = "Arrays/ShouldPreprocess";
+|   analyzer[] = "Arrays/SliceFirst";
+|   analyzer[] = "Classes/ParentFirst";
+|   analyzer[] = "Classes/ShouldUseSelf";
+|   analyzer[] = "Classes/TooManyChildren";
+|   analyzer[] = "Classes/UnitializedProperties";
+|   analyzer[] = "Exceptions/OverwriteException";
+|   analyzer[] = "Functions/CouldCentralize";
+|   analyzer[] = "Functions/CouldReturnVoid";
+|   analyzer[] = "Functions/NeverUsedParameter";
+|   analyzer[] = "Functions/NoReturnUsed";
+|   analyzer[] = "Functions/ShouldBeTypehinted";
+|   analyzer[] = "Functions/TooManyParameters";
+|   analyzer[] = "Interfaces/AlreadyParentsInterface";
+|   analyzer[] = "Interfaces/UnusedInterfaces";
+|   analyzer[] = "Performances/SubstrFirst";
+|   analyzer[] = "Php/IssetMultipleArgs";
+|   analyzer[] = "Php/LogicalInLetters";
+|   analyzer[] = "Php/NewExponent";
+|   analyzer[] = "Php/PregMatchAllFlag";
+|   analyzer[] = "Php/ShouldPreprocess";
+|   analyzer[] = "Php/ShouldUseArrayColumn";
+|   analyzer[] = "Php/ShouldUseArrayFilter";
+|   analyzer[] = "Php/ShouldUseCoalesce";
+|   analyzer[] = "Php/UseNullableType";
+|   analyzer[] = "Php/UseSessionStartOptions";
+|   analyzer[] = "Structures/BooleanStrictComparison";
+|   analyzer[] = "Structures/CouldUseArrayFillKeys";
+|   analyzer[] = "Structures/CouldUseArrayUnique";
+|   analyzer[] = "Structures/CouldUseCompact";
+|   analyzer[] = "Structures/CouldUseDir";
+|   analyzer[] = "Structures/DropElseAfterReturn";
+|   analyzer[] = "Structures/EchoWithConcat";
+|   analyzer[] = "Structures/EmptyWithExpression";
+|   analyzer[] = "Structures/ForeachWithList";
+|   analyzer[] = "Structures/GoToKeyDirectly";
+|   analyzer[] = "Structures/ListOmissions";
+|   analyzer[] = "Structures/MismatchedTernary";
+|   analyzer[] = "Structures/NoParenthesisForLanguageConstruct";
+|   analyzer[] = "Structures/NoSubstrOne";
+|   analyzer[] = "Structures/OneIfIsSufficient";
+|   analyzer[] = "Structures/PHP7Dirname";
+|   analyzer[] = "Structures/PossibleIncrement";
+|   analyzer[] = "Structures/RepeatedPrint";
+|   analyzer[] = "Structures/ReuseVariable";
+|   analyzer[] = "Structures/ShouldUseForeach";
+|   analyzer[] = "Structures/ShouldUseMath";
+|   analyzer[] = "Structures/SubstrLastArg";
+|   analyzer[] = "Structures/UnreachableCode";
+|   analyzer[] = "Structures/UseCountRecursive";
+|   analyzer[] = "Structures/UseListWithForeach";
+|   analyzer[] = "Structures/WhileListEach";
+
+
+
+
+.. _theme_ini_wordpress:
+
+Wordpress
+---------
+
+| [Wordpress]
+|   analyzer[] = "Classes/StrangeName";
+|   analyzer[] = "Structures/EvalUsage";
+|   analyzer[] = "Structures/ShortTags";
+|   analyzer[] = "Wordpress/AvoidOtherGlobals";
+|   analyzer[] = "Wordpress/DoublePrepare";
+|   analyzer[] = "Wordpress/NoDirectInputToWpdb";
+|   analyzer[] = "Wordpress/NoGlobalModification";
+|   analyzer[] = "Wordpress/NonceCreation";
+|   analyzer[] = "Wordpress/PreparePlaceholder";
+|   analyzer[] = "Wordpress/PrivateFunctionUsage";
+|   analyzer[] = "Wordpress/UnescapedVariables";
+|   analyzer[] = "Wordpress/UnverifiedNonce";
+|   analyzer[] = "Wordpress/UseWpFunctions";
+|   analyzer[] = "Wordpress/UseWpdbApi";
+|   analyzer[] = "Wordpress/Wordpress40Undefined";
+|   analyzer[] = "Wordpress/Wordpress41Undefined";
+|   analyzer[] = "Wordpress/Wordpress42Undefined";
+|   analyzer[] = "Wordpress/Wordpress43Undefined";
+|   analyzer[] = "Wordpress/Wordpress44Undefined";
+|   analyzer[] = "Wordpress/Wordpress45Undefined";
+|   analyzer[] = "Wordpress/Wordpress46Undefined";
+|   analyzer[] = "Wordpress/Wordpress47Undefined";
+|   analyzer[] = "Wordpress/Wordpress48Undefined";
+|   analyzer[] = "Wordpress/Wordpress49Undefined";
+|   analyzer[] = "Wordpress/WordpressUsage";
+|   analyzer[] = "Wordpress/WpdbBestUsage";
+|   analyzer[] = "Wordpress/WpdbPrepareOrNot";
+
+
+
+
+.. _theme_ini_zendframework:
+
+ZendFramework
+-------------
+
+| [ZendFramework]
+|   analyzer[] = "Namespaces/ShouldMakeAlias";
+|   analyzer[] = "Structures/ErrorMessages";
+|   analyzer[] = "Structures/ExitUsage";
+|   analyzer[] = "ZendF/ActionInController";
+|   analyzer[] = "ZendF/DefinedViewProperty";
+|   analyzer[] = "ZendF/DontUseGPC";
+|   analyzer[] = "ZendF/IsController";
+|   analyzer[] = "ZendF/IsHelper";
+|   analyzer[] = "ZendF/IsView";
+|   analyzer[] = "ZendF/NoEchoOutsideView";
+|   analyzer[] = "ZendF/NotInThatPath";
+|   analyzer[] = "ZendF/ShouldRegenerateSessionId";
+|   analyzer[] = "ZendF/ThrownExceptions";
+|   analyzer[] = "ZendF/UndefinedClass110";
+|   analyzer[] = "ZendF/UndefinedClass111";
+|   analyzer[] = "ZendF/UndefinedClass112";
+|   analyzer[] = "ZendF/UndefinedClass18";
+|   analyzer[] = "ZendF/UndefinedClass19";
+|   analyzer[] = "ZendF/UndefinedClass20";
+|   analyzer[] = "ZendF/UndefinedClass21";
+|   analyzer[] = "ZendF/UndefinedClass22";
+|   analyzer[] = "ZendF/UndefinedClass23";
+|   analyzer[] = "ZendF/UndefinedClass24";
+|   analyzer[] = "ZendF/UndefinedClass25";
+|   analyzer[] = "ZendF/UndefinedClass30";
+|   analyzer[] = "ZendF/ZendClasses";
+|   analyzer[] = "ZendF/ZendInterfaces";
+|   analyzer[] = "ZendF/ZendTrait";
+|   analyzer[] = "ZendF/ZendTypehinting";
+|   analyzer[] = "ZendF/Zf3Authentication";
+|   analyzer[] = "ZendF/Zf3Authentication25";
+|   analyzer[] = "ZendF/Zf3Barcode";
+|   analyzer[] = "ZendF/Zf3Barcode25";
+|   analyzer[] = "ZendF/Zf3Barcode26";
+|   analyzer[] = "ZendF/Zf3Cache";
+|   analyzer[] = "ZendF/Zf3Cache";
+|   analyzer[] = "ZendF/Zf3Cache25";
+|   analyzer[] = "ZendF/Zf3Cache26";
+|   analyzer[] = "ZendF/Zf3Cache27";
+|   analyzer[] = "ZendF/Zf3Captcha";
+|   analyzer[] = "ZendF/Zf3Captcha25";
+|   analyzer[] = "ZendF/Zf3Captcha26";
+|   analyzer[] = "ZendF/Zf3Captcha27";
+|   analyzer[] = "ZendF/Zf3Code";
+|   analyzer[] = "ZendF/Zf3Code25";
+|   analyzer[] = "ZendF/Zf3Code25";
+|   analyzer[] = "ZendF/Zf3Code26";
+|   analyzer[] = "ZendF/Zf3Code26";
+|   analyzer[] = "ZendF/Zf3Code30";
+|   analyzer[] = "ZendF/Zf3Code30";
+|   analyzer[] = "ZendF/Zf3Code31";
+|   analyzer[] = "ZendF/Zf3Code31";
+|   analyzer[] = "ZendF/Zf3Code32";
+|   analyzer[] = "ZendF/Zf3Code32";
+|   analyzer[] = "ZendF/Zf3Config";
+|   analyzer[] = "ZendF/Zf3Config25";
+|   analyzer[] = "ZendF/Zf3Config26";
+|   analyzer[] = "ZendF/Zf3Config30";
+|   analyzer[] = "ZendF/Zf3Config31";
+|   analyzer[] = "ZendF/Zf3Console";
+|   analyzer[] = "ZendF/Zf3Console25";
+|   analyzer[] = "ZendF/Zf3Console26";
+|   analyzer[] = "ZendF/Zf3Crypt";
+|   analyzer[] = "ZendF/Zf3Crypt25";
+|   analyzer[] = "ZendF/Zf3Crypt26";
+|   analyzer[] = "ZendF/Zf3Crypt30";
+|   analyzer[] = "ZendF/Zf3Crypt31";
+|   analyzer[] = "ZendF/Zf3Crypt32";
+|   analyzer[] = "ZendF/Zf3Db";
+|   analyzer[] = "ZendF/Zf3Db25";
+|   analyzer[] = "ZendF/Zf3Db26";
+|   analyzer[] = "ZendF/Zf3Db27";
+|   analyzer[] = "ZendF/Zf3Db28";
+|   analyzer[] = "ZendF/Zf3DbAlwaysPrepare";
+|   analyzer[] = "ZendF/Zf3Debug";
+|   analyzer[] = "ZendF/Zf3Debug25";
+|   analyzer[] = "ZendF/Zf3DeprecatedUsage";
+|   analyzer[] = "ZendF/Zf3Di";
+|   analyzer[] = "ZendF/Zf3Di25";
+|   analyzer[] = "ZendF/Zf3Di26";
+|   analyzer[] = "ZendF/Zf3Dom";
+|   analyzer[] = "ZendF/Zf3Dom25";
+|   analyzer[] = "ZendF/Zf3Dom26";
+|   analyzer[] = "ZendF/Zf3Escaper";
+|   analyzer[] = "ZendF/Zf3Escaper25";
+|   analyzer[] = "ZendF/Zf3Eventmanager";
+|   analyzer[] = "ZendF/Zf3Eventmanager";
+|   analyzer[] = "ZendF/Zf3Eventmanager25";
+|   analyzer[] = "ZendF/Zf3Eventmanager25";
+|   analyzer[] = "ZendF/Zf3Eventmanager26";
+|   analyzer[] = "ZendF/Zf3Eventmanager26";
+|   analyzer[] = "ZendF/Zf3Eventmanager30";
+|   analyzer[] = "ZendF/Zf3Eventmanager30";
+|   analyzer[] = "ZendF/Zf3Eventmanager31";
+|   analyzer[] = "ZendF/Zf3Eventmanager31";
+|   analyzer[] = "ZendF/Zf3Eventmanager32";
+|   analyzer[] = "ZendF/Zf3Feed";
+|   analyzer[] = "ZendF/Zf3Feed25";
+|   analyzer[] = "ZendF/Zf3Feed26";
+|   analyzer[] = "ZendF/Zf3Feed27";
+|   analyzer[] = "ZendF/Zf3Feed28";
+|   analyzer[] = "ZendF/Zf3File";
+|   analyzer[] = "ZendF/Zf3File25";
+|   analyzer[] = "ZendF/Zf3File26";
+|   analyzer[] = "ZendF/Zf3File27";
+|   analyzer[] = "ZendF/Zf3Filter";
+|   analyzer[] = "ZendF/Zf3Filter25";
+|   analyzer[] = "ZendF/Zf3Filter26";
+|   analyzer[] = "ZendF/Zf3Filter27";
+|   analyzer[] = "ZendF/Zf3Form";
+|   analyzer[] = "ZendF/Zf3Form25";
+|   analyzer[] = "ZendF/Zf3Form26";
+|   analyzer[] = "ZendF/Zf3Form27";
+|   analyzer[] = "ZendF/Zf3Form28";
+|   analyzer[] = "ZendF/Zf3Form29";
+|   analyzer[] = "ZendF/Zf3Http";
+|   analyzer[] = "ZendF/Zf3Http25";
+|   analyzer[] = "ZendF/Zf3Http26";
+|   analyzer[] = "ZendF/Zf3Http27";
+|   analyzer[] = "ZendF/Zf3I18n";
+|   analyzer[] = "ZendF/Zf3I18n25";
+|   analyzer[] = "ZendF/Zf3I18n26";
+|   analyzer[] = "ZendF/Zf3I18n27";
+|   analyzer[] = "ZendF/Zf3I18n_resources";
+|   analyzer[] = "ZendF/Zf3I18n_resources25";
+|   analyzer[] = "ZendF/Zf3Inputfilter";
+|   analyzer[] = "ZendF/Zf3Inputfilter25";
+|   analyzer[] = "ZendF/Zf3Inputfilter26";
+|   analyzer[] = "ZendF/Zf3Inputfilter27";
+|   analyzer[] = "ZendF/Zf3Json";
+|   analyzer[] = "ZendF/Zf3Json25";
+|   analyzer[] = "ZendF/Zf3Json26";
+|   analyzer[] = "ZendF/Zf3Json30";
+|   analyzer[] = "ZendF/Zf3Loader";
+|   analyzer[] = "ZendF/Zf3Loader25";
+|   analyzer[] = "ZendF/Zf3Log";
+|   analyzer[] = "ZendF/Zf3Log25";
+|   analyzer[] = "ZendF/Zf3Log26";
+|   analyzer[] = "ZendF/Zf3Log27";
+|   analyzer[] = "ZendF/Zf3Log28";
+|   analyzer[] = "ZendF/Zf3Log29";
+|   analyzer[] = "ZendF/Zf3Mail";
+|   analyzer[] = "ZendF/Zf3Mail25";
+|   analyzer[] = "ZendF/Zf3Mail26";
+|   analyzer[] = "ZendF/Zf3Mail27";
+|   analyzer[] = "ZendF/Zf3Mail28";
+|   analyzer[] = "ZendF/Zf3Math";
+|   analyzer[] = "ZendF/Zf3Math25";
+|   analyzer[] = "ZendF/Zf3Math26";
+|   analyzer[] = "ZendF/Zf3Math27";
+|   analyzer[] = "ZendF/Zf3Math30";
+|   analyzer[] = "ZendF/Zf3Memory";
+|   analyzer[] = "ZendF/Zf3Memory25";
+|   analyzer[] = "ZendF/Zf3Mime";
+|   analyzer[] = "ZendF/Zf3Mime25";
+|   analyzer[] = "ZendF/Zf3Mime26";
+|   analyzer[] = "ZendF/Zf3Modulemanager";
+|   analyzer[] = "ZendF/Zf3Modulemanager25";
+|   analyzer[] = "ZendF/Zf3Modulemanager26";
+|   analyzer[] = "ZendF/Zf3Modulemanager27";
+|   analyzer[] = "ZendF/Zf3Modulemanager28";
+|   analyzer[] = "ZendF/Zf3Mvc";
+|   analyzer[] = "ZendF/Zf3Mvc25";
+|   analyzer[] = "ZendF/Zf3Mvc26";
+|   analyzer[] = "ZendF/Zf3Mvc27";
+|   analyzer[] = "ZendF/Zf3Mvc30";
+|   analyzer[] = "ZendF/Zf3Mvc31";
+|   analyzer[] = "ZendF/Zf3Navigation";
+|   analyzer[] = "ZendF/Zf3Navigation25";
+|   analyzer[] = "ZendF/Zf3Navigation26";
+|   analyzer[] = "ZendF/Zf3Navigation27";
+|   analyzer[] = "ZendF/Zf3Navigation28";
+|   analyzer[] = "ZendF/Zf3Paginator";
+|   analyzer[] = "ZendF/Zf3Paginator25";
+|   analyzer[] = "ZendF/Zf3Paginator26";
+|   analyzer[] = "ZendF/Zf3Paginator27";
+|   analyzer[] = "ZendF/Zf3Progressbar";
+|   analyzer[] = "ZendF/Zf3Progressbar25";
+|   analyzer[] = "ZendF/Zf3Serializer";
+|   analyzer[] = "ZendF/Zf3Serializer25";
+|   analyzer[] = "ZendF/Zf3Serializer26";
+|   analyzer[] = "ZendF/Zf3Serializer27";
+|   analyzer[] = "ZendF/Zf3Serializer28";
+|   analyzer[] = "ZendF/Zf3Server";
+|   analyzer[] = "ZendF/Zf3Server25";
+|   analyzer[] = "ZendF/Zf3Server26";
+|   analyzer[] = "ZendF/Zf3Server27";
+|   analyzer[] = "ZendF/Zf3Servicemanager";
+|   analyzer[] = "ZendF/Zf3Servicemanager25";
+|   analyzer[] = "ZendF/Zf3Servicemanager26";
+|   analyzer[] = "ZendF/Zf3Servicemanager27";
+|   analyzer[] = "ZendF/Zf3Servicemanager30";
+|   analyzer[] = "ZendF/Zf3Servicemanager31";
+|   analyzer[] = "ZendF/Zf3Servicemanager32";
+|   analyzer[] = "ZendF/Zf3Servicemanager33";
+|   analyzer[] = "ZendF/Zf3Session";
+|   analyzer[] = "ZendF/Zf3Session25";
+|   analyzer[] = "ZendF/Zf3Session26";
+|   analyzer[] = "ZendF/Zf3Session27";
+|   analyzer[] = "ZendF/Zf3Session28";
+|   analyzer[] = "ZendF/Zf3Soap";
+|   analyzer[] = "ZendF/Zf3Soap25";
+|   analyzer[] = "ZendF/Zf3Soap26";
+|   analyzer[] = "ZendF/Zf3Stdlib";
+|   analyzer[] = "ZendF/Zf3Stdlib25";
+|   analyzer[] = "ZendF/Zf3Stdlib26";
+|   analyzer[] = "ZendF/Zf3Stdlib27";
+|   analyzer[] = "ZendF/Zf3Stdlib30";
+|   analyzer[] = "ZendF/Zf3Stdlib31";
+|   analyzer[] = "ZendF/Zf3Tag";
+|   analyzer[] = "ZendF/Zf3Tag25";
+|   analyzer[] = "ZendF/Zf3Tag26";
+|   analyzer[] = "ZendF/Zf3Test";
+|   analyzer[] = "ZendF/Zf3Test";
+|   analyzer[] = "ZendF/Zf3Test25";
+|   analyzer[] = "ZendF/Zf3Test25";
+|   analyzer[] = "ZendF/Zf3Test26";
+|   analyzer[] = "ZendF/Zf3Test26";
+|   analyzer[] = "ZendF/Zf3Test30";
+|   analyzer[] = "ZendF/Zf3Test30";
+|   analyzer[] = "ZendF/Zf3Test31";
+|   analyzer[] = "ZendF/Zf3Text";
+|   analyzer[] = "ZendF/Zf3Text25";
+|   analyzer[] = "ZendF/Zf3Text26";
+|   analyzer[] = "ZendF/Zf3Uri";
+|   analyzer[] = "ZendF/Zf3Uri25";
+|   analyzer[] = "ZendF/Zf3Validator";
+|   analyzer[] = "ZendF/Zf3Validator25";
+|   analyzer[] = "ZendF/Zf3Validator26";
+|   analyzer[] = "ZendF/Zf3Validator27";
+|   analyzer[] = "ZendF/Zf3Validator28";
+|   analyzer[] = "ZendF/Zf3Validator29";
+|   analyzer[] = "ZendF/Zf3View";
+|   analyzer[] = "ZendF/Zf3View25";
+|   analyzer[] = "ZendF/Zf3View26";
+|   analyzer[] = "ZendF/Zf3View27";
+|   analyzer[] = "ZendF/Zf3View28";
+|   analyzer[] = "ZendF/Zf3View29";
+|   analyzer[] = "ZendF/Zf3Xmlrpc";
+|   analyzer[] = "ZendF/Zf3Xmlrpc25";
+|   analyzer[] = "ZendF/Zf3Xmlrpc26";
+
+
+

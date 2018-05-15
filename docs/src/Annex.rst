@@ -86,3 +86,10 @@ List of external links mentionned in this documentation.
 
 {{URL_LIST}}
 
+Themes configuration
+--------------------
+
+INI configuration for built-in themes. Copy them in config/themes.ini, and make your owns.
+
+{{INI_THEMES}}
+
