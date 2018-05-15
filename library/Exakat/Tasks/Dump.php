@@ -50,7 +50,7 @@ class Dump extends Tasks {
     public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subTask);
         
-        $this->log = new Log($this->logname,
+        $this->log = new Log('dump',
                              $this->config->projects_root.'/projects/'.$this->config->project);
     }
 
@@ -445,7 +445,7 @@ SQL;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Variable", "Variablearray", "Variableobject").map{ ['name' : it.get().value("fullcode"), 
-                                                                    'type' : it.get().label()        ] }.unique();
+                                                                    'type' : it.get().label()        ] };
 GREMLIN;
         $variables = $this->gremlin->query($query);
 
@@ -456,7 +456,12 @@ GREMLIN;
                        'Variablearray'  => 'array',
                        'Variableobject' => 'object',
                       );
+        $unique = array();
         foreach($variables as $row) {
+            if (isset($unique[$row['name'].$row['type']])) {
+                continue;
+            }
+            $unique[$row['name'].$row['type']] = 1;
             $type = $types[$row['type']];
             $query[] = "(null, '".strtolower($this->sqlite->escapeString($row['name']))."', '".$type."')";
             ++$total;
