@@ -703,9 +703,8 @@ g.V().hasLabel("Multiplication").not(has("intval"))
               i = 0;
           }
         } else if (it.get().value("token") == 'T_PERCENTAGE') {
-          if (x[1] != 0) {
-              i = x[0] % x[1];
-              i = i.setScale(0, BigDecimal.ROUND_HALF_DOWN).toInteger();
+          if (x[0] != 0) {
+              i = x[1] % x[0];
           } else {
               i = 0;
           }
