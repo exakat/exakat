@@ -300,7 +300,7 @@ class Ambassador extends Reports {
     }
 
     protected function setPHPBlocs($description){
-        $description = preg_replace_callback("#<\?php(.*?)\?>#is", function ($x) {
+        $description = preg_replace_callback("#<\?php(.*?)\n\?>#is", function ($x) {
             $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHP_EOL.PHPSyntax($x[1]).'?&gt;</pre>';
             return $return;
         }, $description);
@@ -1579,7 +1579,7 @@ SQL;
                         <td>'.$analyser['files'].'</td>
                         <td>'.$analyser['severity'].'</td>
                         <td>'.$this->frequences[$analyser['analyzer']].' %</td>';
-            $analyserHTML .= '</tr>'"';
+            $analyserHTML .= '</tr>';
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyserHTML);
