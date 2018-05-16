@@ -1,16 +1,17 @@
 <?php
 
 abstract class NoMethods{
-    const A = 1;
-    
     private $b = 2;
+     function foo() {}
 }
 class NoMethods2 extends NoMethods {}
 
 abstract class OneMethod{
+    abstract function foo();
+}
+class OneMethod2 extends OneMethod {
     function foo() {}
 }
-class OneMethod2 extends OneMethod {}
 
 abstract class OneAbstractMethod{
     abstract function foo();
