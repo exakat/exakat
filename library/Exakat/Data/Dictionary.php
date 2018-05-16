@@ -26,13 +26,13 @@ namespace Exakat\Data;
 use Exakat\Datastore;
 
 class Dictionary {
-    const CASE_SENSITIVE = true;
+    const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
     
     private $dictionary = array();
-    private $lcindex = array();
+    private $lcindex    = array();
     
-    static public $singleton = null;
+    static private $singleton = null;
     
     public function __construct($datastore) {
         $this->dictionary = $datastore->getAllHash('dictionary');
@@ -41,7 +41,7 @@ class Dictionary {
         }
     }
     
-    static function factory($datastore) {
+    static public function factory($datastore) {
         if (self::$singleton === null) {
             self::$singleton = new self($datastore);
         }
