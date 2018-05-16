@@ -100,9 +100,6 @@ function project($args) {
     }
 
     $project = $args[$id + 1];
-    if (!file_exists("projects/$project")) {
-        error('No project available', '');
-    }
 
     shell_exec("__PHP__ __EXAKAT__ queue project -p ".escapeshellarg($project));
     serverLog("project : $project ".date('r'));
@@ -117,9 +114,6 @@ function remove($args) {
     }
 
     $project = $args[$id + 1];
-    if (!file_exists("projects/$project")) {
-        error('No project available', '');
-    }
 
     shell_exec("__PHP__ __EXAKAT__ queue remove -p ".escapeshellarg($project));
     serverLog("remove : $project ".date('r'));
@@ -134,9 +128,6 @@ function report($args) {
     }
 
     $project = $args[$id + 1];
-    if (!file_exists("projects/$project")) {
-        error('No project available', '');
-    }
 
     $id = array_search('-format', $args);
     $format = $args[$id + 1];
@@ -223,10 +214,6 @@ function config($args) {
     }
 
     $project = $args[$id + 1];
-
-    if (!file_exists("projects/$project")) {
-        error('No project available', '');
-    }
 
     $directives = array_keys($args, '-c');
     
