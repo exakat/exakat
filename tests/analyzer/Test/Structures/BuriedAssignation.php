@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_BuriedAssignation extends Analyzer {
-    /* 7 methods */
+    /* 9 methods */
 
     public function testStructures_BuriedAssignation01()  { $this->generic_test('Structures_BuriedAssignation.01'); }
     public function testStructures_BuriedAssignation02()  { $this->generic_test('Structures_BuriedAssignation.02'); }
@@ -17,5 +17,7 @@ class Structures_BuriedAssignation extends Analyzer {
     public function testStructures_BuriedAssignation05()  { $this->generic_test('Structures/BuriedAssignation.05'); }
     public function testStructures_BuriedAssignation06()  { $this->generic_test('Structures/BuriedAssignation.06'); }
     public function testStructures_BuriedAssignation07()  { $this->generic_test('Structures/BuriedAssignation.07'); }
+    public function testStructures_BuriedAssignation08()  { $this->generic_test('Structures/BuriedAssignation.08'); }
+    public function testStructures_BuriedAssignation09()  { $this->generic_test('Structures/BuriedAssignation.09'); }
 }
 ?>
