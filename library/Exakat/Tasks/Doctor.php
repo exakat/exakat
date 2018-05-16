@@ -196,7 +196,7 @@ class Doctor extends Tasks {
             }
         }
 
-        $stats['folders']['projects/test'] = file_exists($this->config->projects_root.'/projects/test/') ? 'Yes' : 'No';
+        $stats['folders']['projects/test']    = file_exists($this->config->projects_root.'/projects/test/') ? 'Yes' : 'No';
         $stats['folders']['projects/default'] = file_exists($this->config->projects_root.'/projects/default/') ? 'Yes' : 'No';
         $stats['folders']['projects/onepage'] = file_exists($this->config->projects_root.'/projects/onepage/') ? 'Yes' : 'No';
 
@@ -228,8 +228,6 @@ class Doctor extends Tasks {
                 }
             }
             $this->checkGremlinServer();
-        } elseif ($graphdb === 'neo4j') {
-            // Nothing, really
         } else {
             assert(false, "Checking install with unknown graphdb : '$graphdb'");
         }

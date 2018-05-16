@@ -1582,8 +1582,6 @@ SQL;
             if ($this->tokens[$this->id - 1][0] === $this->phptokens::T_OPEN_TAG) {
                 $void = $this->addAtomVoid();
                 $this->addToSequence($void);
-            } else {
-                // do nothing
             }
             ++$this->id;
         }

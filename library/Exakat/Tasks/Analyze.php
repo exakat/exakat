@@ -120,6 +120,10 @@ class Analyze extends Tasks {
         $begin = microtime(true);
 
         $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
+        if ($analyzer === null) {
+            display("No such analyzer as $analyzer_class\n");
+            return false;
+        }
 
         $lock = new Lock($this->config->projects_root.'/projects/.exakat/', $analyzer_class);
         if (!$lock->check()) {

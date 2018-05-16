@@ -28,7 +28,9 @@ class Dependencies extends Reports {
 
     public function generate($folder, $name= 'dependencies') {
         display("This report is not finished\n");
-        return;
+    }
+    
+    private function _generate($folder, $name = 'dependencies') {
         $graph = new GSNeo4j($this->config);
 
         $links    = array();
