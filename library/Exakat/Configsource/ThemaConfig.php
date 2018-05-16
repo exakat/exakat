@@ -23,10 +23,10 @@
 namespace Exakat\Configsource;
 
 class ThemaConfig extends Config {
-    private $remoteIniFile = 'config/themas.ini';
+    private $remoteIniFile = 'config/themes.ini';
     
     public function __construct($projects_root) {
-        $this->remoteIniFile = $projects_root.'/config/themas.ini';
+        $this->remoteIniFile = $projects_root.'/config/themes.ini';
     }
 
     public function loadConfig($project) {
@@ -44,7 +44,7 @@ class ThemaConfig extends Config {
             $this->config[$name] = array_unique($values['analyzer']);
         }
 
-        return 'config/themas.ini';
+        return 'config/themes.ini';
     }
 }
 
