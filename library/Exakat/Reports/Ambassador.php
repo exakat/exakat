@@ -181,7 +181,8 @@ class Ambassador extends Reports {
         $this->generatePerformances();
         $this->generateSuggestions();
         $this->generateSecurity();
-        
+        $this->generateDeadCode();
+
         $this->generateAnalyzersList();
         $this->generateExternalLib();
 
@@ -412,6 +413,11 @@ class Ambassador extends Reports {
     private function generateSecurity() {
         $this->generateIssuesEngine('security_issues',
                                     $this->getIssuesFaceted('Security') );
+    }
+
+    private function generateDeadCode() {
+        $this->generateIssuesEngine('deadcode_issues',
+                                    $this->getIssuesFaceted('Dead code') );
     }
 
     private function generateSuggestions() {
@@ -1565,14 +1571,15 @@ SQL;
         $analyserHTML = '';
 
         foreach ($analysers as $analyser) {
-            $analyserHTML.= "<tr>";
-            $analyserHTML.='<td>'.$analyser['label'].'</td>
+            $analyserHTML .= '<tr>';
+                                
+            $analyserHTML.= '<td><a href="issues.html#analyzer='.$this->toId($analyser['analyzer']).'" title="'.$analyser['label'].'">'.$analyser['label'].'</a></td>
                         <td>'.$analyser['recipes'].'</td>
                         <td>'.$analyser['issues'].'</td>
                         <td>'.$analyser['files'].'</td>
                         <td>'.$analyser['severity'].'</td>
                         <td>'.$this->frequences[$analyser['analyzer']].' %</td>';
-            $analyserHTML.= "</tr>";
+            $analyserHTML .= '</tr>'"';
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyserHTML);
@@ -1673,8 +1680,10 @@ SQL;
         $filesHTML = '';
 
         foreach ($files as $file) {
-            $filesHTML.= "<tr>";
-            $filesHTML.='<td>'.$file['file'].'</td>
+            $filesHTML.= '<tr>';
+                               
+
+            $filesHTML.='<td> <a href="issues.html#file='.$this->toId($file['file']).'" title="'.$file['file'].'">'.$file['file'].'</a></td>
                         <td>'.$file['loc'].'</td>
                         <td>'.$file['issues'].'</td>
                         <td>'.$file['analyzers'].'</td>';
