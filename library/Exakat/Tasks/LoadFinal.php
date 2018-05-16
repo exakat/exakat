@@ -703,7 +703,12 @@ g.V().hasLabel("Multiplication").not(has("intval"))
               i = 0;
           }
         } else if (it.get().value("token") == 'T_PERCENTAGE') {
-          i = x[0] % x[1];
+          if (x[1] != 0) {
+              i = x[0] % x[1];
+              i = i.setScale(0, BigDecimal.ROUND_HALF_DOWN).toInteger();
+          } else {
+              i = 0;
+          }
         } // Final else is an error!
         it.get().property("intval", i); 
         it.get().property("boolean", it.get().property("intval") != 0);
