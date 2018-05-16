@@ -461,7 +461,7 @@ class Files extends Tasks {
             }
         }
         if (empty($ignoreDirs)) {
-            $ignoreDirsRegex = '';
+            $ignoreDirsRegex = '#^/#';
         } else {
             $ignoreDirsRegex = '#^('.implode('|', $ignoreDirs).')#';
         }
@@ -469,8 +469,10 @@ class Files extends Tasks {
         // Regex to include files and folders
         $includeDirs = array();
         foreach($config->include_dirs as $include) {
-            if ($include === '/') { continue; }
-            if ($include[0] == '/') {
+            if ($include === '/') { 
+                $includeDirs[] = $include.'.*';
+            }
+            if ($include[0] === '/') {
                 $d = "$config->projects_root/projects/$dir/code{$include}";
                 if (!file_exists($d)) {
                     continue;
@@ -481,12 +483,10 @@ class Files extends Tasks {
             }
         }
         if (empty($includeDirs)) {
-            $includeDirsRegex = '';
+            $includeDirsRegex = '#^/#';
         } else {
             $includeDirsRegex = '#^('.implode('|', $includeDirs).')#';
         }
-
-        $ignoredFiles = array();
 
         $d = getcwd();
         if (!file_exists($path)) {
@@ -496,9 +496,21 @@ class Files extends Tasks {
             return ;
         }
         chdir($path);
-        $files = rglob('.');
+        $allFiles = rglob('.');
+        $allFiles = array_map(function($path) { return substr($path, 1);}, $allFiles);
         chdir($d);
+
         $exts = $config->file_extensions;
+
+        $ignored = preg_grep($ignoreDirsRegex, $allFiles);
+        $selected = preg_grep($ignoreDirsRegex, $allFiles, PREG_GREP_INVERT);
+
+        $ignored = preg_grep($includeDirsRegex, $allFiles, PREG_GREP_INVERT);
+        $included = preg_grep($includeDirsRegex, $allFiles);
+        
+        $files = array_merge($selected, $included);
+        $files = array_unique($files);
+        $ignoredFiles = array_fill_keys(array_diff($allFiles, $files), 'Ignored dir');
 
         foreach($files as $id => &$file) {
             if (isset($ignore_files[basename($file)])) {
@@ -506,23 +518,12 @@ class Files extends Tasks {
                 $ignoredFiles[$file] = "Ignored file (".basename($file).")";
                 continue;
             }
-            $file = substr($file, 1); // drop the initial /
             $ext = pathinfo($file, PATHINFO_EXTENSION);
             if (!in_array($ext, $exts)) {
                 // selection of extensions
                 unset($files[$id]);
                 $ignoredFiles[$file] = "Ignored extension ($ext)";
                 continue;
-            }
-
-            if (!empty($includeDirsRegex) && preg_match($includeDirsRegex, $file)) {
-                // Matching the 'include dir' pattern
-                // it's OK.
-                continue;
-            } elseif (!empty($ignoreDirsRegex) && preg_match($ignoreDirsRegex, $file)) {
-                // Matching the 'ignored dir' pattern
-                unset($files[$id]);
-                $ignoredFiles[$file] = 'Ignored dir';
             }
         }
     }
