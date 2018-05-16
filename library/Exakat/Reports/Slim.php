@@ -44,9 +44,11 @@ class Slim extends Ambassador {
         parent::__construct($config);
         $this->themesToShow      = 'Slim';
 
-        $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
-        $this->severities        = $this->themes->getSeverities();
+        if ($this->themes !== null) {
+            $this->timesToFix        = $this->themes->getTimesToFix();
+            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
+            $this->severities        = $this->themes->getSeverities();
+        }
     }
 
     protected function getBasedPage($file) {
