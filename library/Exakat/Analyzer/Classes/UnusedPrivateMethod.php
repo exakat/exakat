@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedPrivateMethod extends Analyzer {
     public function dependsOn() {
-        return array('Classes/UsedPrivateMethod');
+        return array('Classes/UsedPrivateMethod',
+                    );
     }
 
     public function analyze() {
