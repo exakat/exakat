@@ -336,17 +336,13 @@ SQL;
     }
     
     public function getSuggestionClass($name) {
-        $list = $this->listAllAnalyzer();
-        $r = array();
-        foreach($list as $c) {
+        return array_filter($this->listAllAnalyzer(), function($c) use ($name) {
             $l = levenshtein($c, $name);
 
             if ($l < 8) {
                 $r[] = $c;
             }
-        }
-        
-        return $r;
+        });
     }
 
     public static function resetCache() {
