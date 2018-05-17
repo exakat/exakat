@@ -29,6 +29,9 @@ class Git extends Vcs {
     private $installed = false;
     private $optional  = true;
     private $version   = 'unknown';
+    private $tag       = '';
+    private $branch    = 'master';
+    
     
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
@@ -66,18 +69,15 @@ class Git extends Vcs {
         $repositoryNormalizedURL = unparse_url($repositoryDetails);
 
         $shell = "cd {$this->destinationFull}; git clone -q $repositoryNormalizedURL";
-        /*
-        if (!empty($this->config->branch) &&
-            $this->config->branch !== 'master') {
-            display("Check out with branch ".$this->config->branch);
-            $shell .= ' -b '.$this->config->branch.' ';
 
-        } elseif (!empty($this->config->tag)) {
-            display("Check out with tag ".$this->config->tag);
-            $shell .= ' -b '.$this->config->tag.' ';
-
+        if (!empty($this->tag)) {
+            display("Check out with tag ".$this->tag);
+            $shell .= ' -b '.$this->tag.' ';
+        } else {
+            display("Check out with branch ".$this->branch);
+            $shell .= ' -b '.$this->branch.' ';
         }
-        */
+        
         $shell .= ' code 2>&1 ';
         $shellResult = shell_exec($shell);
 
@@ -107,6 +107,14 @@ class Git extends Vcs {
         }
     
         return $resFinal;
+    }
+
+    public function setBranch($branch) {
+        $this->branch = $branch;
+    }
+
+    public function setTag($tag) {
+        $this->tag = $tag;
     }
 
     public function getBranch() {
