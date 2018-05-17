@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class MethodCallOnNew extends Analyzer {
-    public $phpVersion = '5.4+';
+    protected $phpVersion = '5.4+';
     
     public function analyze() {
         $this->atomIs('Parenthesis')

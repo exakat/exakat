@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class TryFinally extends Analyzer {
-    public $phpVersion = '5.5+';
+    protected $phpVersion = '5.5+';
     
     public function analyze() {
         $this->atomIs('Try')

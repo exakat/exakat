@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class Password55 extends Analyzer {
-    public $phpVersion = '5.5+';
+    protected $phpVersion = '5.5+';
     
     public function analyze() {
         $this->atomFunctionIs('\\crypt');

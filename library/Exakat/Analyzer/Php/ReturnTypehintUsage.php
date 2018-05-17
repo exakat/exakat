@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ReturnTypehintUsage extends Analyzer {
-    public $phpVersion = '7.0+';
+    protected $phpVersion = '7.0+';
     
     public function analyze() {
         $this->atomIs(self::$FUNCTIONS_ALL)
