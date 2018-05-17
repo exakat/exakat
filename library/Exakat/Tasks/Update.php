@@ -150,6 +150,7 @@ class Update extends Tasks {
         try {
             $updateCache->run();
         } catch (NoFileToProcess $e) {
+            display("No file to process\n");
             // OK, just carry on.
         }
     }
