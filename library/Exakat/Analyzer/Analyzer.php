@@ -50,6 +50,8 @@ abstract class Analyzer {
     private $arguments        = array();
     
     public $config         = null;
+
+    public static $availableAtoms = null;
     
     private $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerQuoted = '';
@@ -96,6 +98,8 @@ abstract class Analyzer {
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $CLASSES_NAMED    = 'Class';
     static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
+    
+    const STOP_QUERY = 'filter{ false; }';
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -150,6 +154,8 @@ abstract class Analyzer {
         $this->dictCode = Dictionary::factory(self::$datastore);
         
         $this->linksDown = GraphElements::linksAsList();
+
+        self::$availableAtoms = array_keys($this->gremlin->query('g.V().groupCount("m").by(label).cap("m")')->toArray()[0]);
     }
     
     public function __destruct() {
@@ -373,7 +379,7 @@ GREMLIN;
     
     public function ignore() {
         // used to execute some code but not collect any node
-        $this->methods[] = 'filter{ 1 == 0; }';
+        $this->methods[] = self::STOP_QUERY;
     }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -478,7 +484,14 @@ GREMLIN
     public function atomIs($atom) {
         assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($this->assertAtom($atom));
-        $this->addMethod('hasLabel(within(***))', makeArray($atom));
+
+        $atoms = makeArray($atom);
+        $diff = array_diff($atoms, self::$availableAtoms);
+        if (empty($diff)) {
+            $this->addMethod(self::STOP_QUERY);
+        } else {
+            $this->addMethod('hasLabel(within(***))', $atoms);
+        }
         
         return $this;
     }
@@ -676,7 +689,7 @@ GREMLIN
 
     public function isHash($property, $hash, $index) {
         if (is_array($hash) && empty($hash)) {
-            $this->addMethod("filter{ false; }");
+            $this->addMethod(self::STOP_QUERY);
             return $this;
         }
 
@@ -804,7 +817,7 @@ GREMLIN
 
     public function codeIs($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
         if (is_array($code) && empty($code)) {
-            $this->addMethod("filter{ false; }");
+            $this->addMethod(self::STOP_QUERY);
             return $this;
         }
         
@@ -817,7 +830,7 @@ GREMLIN
             $translatedCode = $this->dictCode->translate($code, $caseSensitive === self::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
 
             if (empty($translatedCode)) {
-                $this->addMethod("filter{ false; }");
+                $this->addMethod(self::STOP_QUERY);
                 return $this;
             }
 
@@ -1037,7 +1050,7 @@ GREMLIN
         $values = $this->dictCode->length($length);
 
         if (empty($values)) {
-                $this->addMethod("filter{ false; }");
+                $this->addMethod(self::STOP_QUERY);
     
                 return $this;
         }
@@ -1079,7 +1092,7 @@ GREMLIN
             $values = $this->dictCode->grep($regex);
             
             if (empty($values)) {
-                $this->addMethod("filter{ false; }");
+                $this->addMethod(self::STOP_QUERY);
 
                 return $this;
             }
@@ -1903,6 +1916,9 @@ GREMLIN;
             $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())'
                      .(empty($query) ? '' : '.'.$query);
             unset($this->methods[1]);
+        } elseif ($this->methods[1] === self::STOP_QUERY) {
+            // Cancel it as a whole
+            return $this->initNewQuery();
         } else {
             assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[1]);
         }
