@@ -163,12 +163,9 @@ class Phpexec {
     }
 
     public function countTokenFromFile($file) {
-        if ($this->isCurrentVersion === true) {
-            $res = count(@token_get_all(file_get_contents(str_replace('$', '\\\$', $file))));
-        } else {
-            $filename = str_replace(array("'", '"', "\$"), array("\\'", '\\"', "\\\$"), $file);
-            $res = shell_exec($this->phpexec.' -r "print count(@token_get_all(file_get_contents(\''.$filename.'\'))); ?>" 2>&1    ');
-        }
+        // Can't use PHP_SELF, because short_ini_tag can't be changed.
+        $filename = str_replace(array("'", '"', "\$"), array("\\'", '\\"', "\\\$"), $file);
+        $res = shell_exec($this->phpexec.' -d short_open_tag=1 -r "print count(@token_get_all(file_get_contents(\''.$filename.'\'))); ?>" 2>&1    ');
 
         return $res;
     }
