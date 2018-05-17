@@ -30,9 +30,9 @@ class PPPDeclarationStyle extends Analyzer {
     public function analyze() {
         $mapping = <<<GREMLIN
 if (it.get().value("count")) {
-    x2 = 'one';
-} else {
     x2 = 'several';
+} else {
+    x2 = 'one';
 }
 GREMLIN;
         $storage = array('unique'   => 'one',
