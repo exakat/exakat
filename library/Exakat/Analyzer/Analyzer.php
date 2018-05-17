@@ -51,7 +51,7 @@ abstract class Analyzer {
     
     public $config         = null;
 
-    public static $availableAtoms = null;
+    public static $availableAtoms = array();
     
     private $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerQuoted = '';
@@ -155,7 +155,10 @@ abstract class Analyzer {
         
         $this->linksDown = GraphElements::linksAsList();
 
-        self::$availableAtoms = array_keys($this->gremlin->query('g.V().groupCount("m").by(label).cap("m")')->toArray()[0]);
+        if (empty(self::$availableAtoms)) {
+            self::$availableAtoms = array_keys($this->gremlin->query('g.V().groupCount("m").by(label).cap("m")')->toArray()[0]);
+        }
+        
     }
     
     public function __destruct() {
@@ -488,9 +491,9 @@ GREMLIN
         $atoms = makeArray($atom);
         $diff = array_diff($atoms, self::$availableAtoms);
         if (empty($diff)) {
-            $this->addMethod(self::STOP_QUERY);
-        } else {
             $this->addMethod('hasLabel(within(***))', $atoms);
+        } else {
+            $this->addMethod(self::STOP_QUERY);
         }
         
         return $this;
