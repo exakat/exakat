@@ -243,6 +243,14 @@ class Initproject extends Tasks {
             case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] === 'git') || $this->config->git === true) :
                 display('Download with git');
                 $vcs = new Git($dotProject, $this->config->projects_root);
+                
+                if (!empty($this->config->branch)){
+                    $vcs->setBranch($this->config->branch);
+                }
+
+                if (!empty($this->config->tag)){
+                    $vcs->setTag($this->config->tag);
+                }
                 break;
 
             default :
@@ -258,9 +266,10 @@ class Initproject extends Tasks {
             rename($tmpPath, $finalPath);
 
             $this->datastore = new Datastore($this->config, Datastore::CREATE);
-            $this->datastore->addRow('hash', array('init error' => $e->getMessage(),
+            $errorMessage = $e->getMessage();
+            $this->datastore->addRow('hash', array('init error' => $errorMessage,
                                                    'inited'     => date('r')));
-            display('An error prevented code initialization : "'.$errorMessage.'"'.PHP_EOL.'No code was loaded.');
+            display("An error prevented code initialization : '$errorMessage'\n.No code was loaded.");
             
             return;
         }
