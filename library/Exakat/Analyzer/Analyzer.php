@@ -155,10 +155,10 @@ abstract class Analyzer {
         
         $this->linksDown = GraphElements::linksAsList();
 
-        if (empty(self::$availableAtoms)) {
+        if (empty(self::$availableAtoms) && $this->gremlin !== null) {
             self::$availableAtoms = array_keys($this->gremlin->query('g.V().groupCount("m").by(label).cap("m")')->toArray()[0]);
         }
-        
+
     }
     
     public function __destruct() {
