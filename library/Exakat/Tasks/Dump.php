@@ -258,10 +258,8 @@ SQL;
 
         $this->log->log( 'Still '.count($themes)." to be processed\n");
         display('Still '.count($themes)." to be processed\n");
-        if (count($themes) === 0) {
-            if ($this->config->thema !== null) {
-                $this->sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$this->config->thema.'")');
-            }
+        if (empty($themes) && $this->config->thema !== null) {
+            $this->sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$this->config->thema.'")');
         }
 
         $this->finish();
