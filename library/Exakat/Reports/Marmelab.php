@@ -33,7 +33,7 @@ class Marmelab extends Reports {
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $themes = isset($this->config->thema) ? $this->config->thema : $this->dependsOnAnalysis();
+        $themes = $this->config->thema ?? $this->dependsOnAnalysis();
         
         $list = $this->themes->getThemeAnalyzers($themes);
         $list = makeList($list);
