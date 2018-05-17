@@ -209,6 +209,7 @@ GREMLIN;
                 $end = microtime(true);
                 display( "$analyzer_class : error \n");
                 $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$error->getMessage());
+                $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
                 $this->checkAnalyzed();
 
                 return 0;
