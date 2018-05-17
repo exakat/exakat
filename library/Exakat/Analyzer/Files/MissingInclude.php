@@ -28,7 +28,11 @@ class MissingInclude extends Analyzer {
     public function analyze() {
         $this->atomIs('File')
              ->values('fullcode');
-        $files = $this->rawQuery()->toArray();
+        $files = $this->rawQuery()
+                      ->toArray();
+        if(empty($files)) {
+            return ;
+        }
 
         $this->atomIs('Include')
              ->outIs('ARGUMENT')
