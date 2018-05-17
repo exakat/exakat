@@ -170,6 +170,31 @@ function array_array_unique($array) {
     return array_values($return);
 }
 
+// [a => b, ...] to [ b => [a1, a2, ...]]
+function array_groupby($array) {
+    $return = array();
+    foreach($array as $k => $v) {
+        if (isset($return[$v])) {
+            $return[$v][] = $k;
+        } else {
+            $return[$v] = array($k);
+        }
+    }
+    
+    return $return;
+}
+
+function array_ungroupby($array) {
+    $return = array();
+    foreach($array as $k => $v) {
+        foreach($v as $w) {
+            $return[$w] = $k;
+        }
+    }
+    
+    return $return;
+}
+
 function makeList($array, $delimiter = '"') {
     return $delimiter.implode($delimiter.', '.$delimiter, $array).$delimiter;
 }
