@@ -111,6 +111,19 @@ class DontEchoError extends Analyzer {
              ->samePropertyAs('code', 'exception')
              ->back('results');
         $this->prepareQuery();
+
+        // ini_set('display_error', 1)
+        $this->atomFunctionIs('ini_set')
+             ->outWithRank('ARGUMENT', 0)
+             ->has('noDelimiter')
+             ->noDelimiterIs('display_errors')
+             ->back('first')
+             ->outWithRank('ARGUMENT', 1)
+             ->has('boolean')
+             ->is('boolean', true)
+             ->back('first');
+        $this->prepareQuery();
+    
     }
 }
 
