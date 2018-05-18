@@ -38,8 +38,8 @@ class AmbassadorNoMenu extends Ambassador {
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $this->config->project_name);
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project_name{0}));
 
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', '');
             $baseHTML = preg_replace('$<aside class="main-sidebar">.*?</aside>$is', '', $baseHTML);

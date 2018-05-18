@@ -105,8 +105,8 @@ class Ambassador extends Reports {
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project_name);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $this->config->project_name);
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project_name{0}));
 
             $menu = file_get_contents($this->tmpName.'/datas/menu.html');
             $inventories = '';
@@ -141,7 +141,7 @@ class Ambassador extends Reports {
         if (strpos($html, '{{BLOC-JS}}') !== false) {
             $html = str_replace('{{BLOC-JS}}', '', $html);
         }
-        $html = str_replace('{{TITLE}}', 'PHP Static analysis for '.$this->config->project, $html);
+        $html = str_replace('{{TITLE}}', 'PHP Static analysis for '.$this->config->project_name, $html);
 
         file_put_contents($this->tmpName.'/datas/'.$file.'.html', $html);
     }
@@ -749,7 +749,7 @@ JAVASCRIPT;
 
         // bloc Issues
         $issues = $this->getIssuesBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
+//        $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
         $tags[] = 'SCRIPTISSUES';
         $code[] = $issues['script'];
 
@@ -3721,7 +3721,7 @@ HTML;
     }
     
     protected function toId($name) {
-        return str_replace('/', '_', strtolower($name));
+        return str_replace(array('/', '*', '(', ')', '.'), '_', strtolower($name));
     }
     
     protected function makeAuditDate(&$finalHTML) {
