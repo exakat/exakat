@@ -427,8 +427,7 @@ JAVASCRIPT;
     protected function generateLevels() {
         $levels = '';
         
-        for($level = 1; $level < 6; ++$level) {
-            
+        foreach(range(1, 6) as $level) {
             $levelRows = '';
             $total = 0;
             $analyzers = $this->themes->getThemeAnalyzers('Level '.$level);
