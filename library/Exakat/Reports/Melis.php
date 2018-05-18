@@ -81,9 +81,11 @@ class Melis extends Ambassador {
         parent::__construct($config);
         $this->themesToShow      = 'Melis';
 
-        $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
-        $this->severities        = $this->themes->getSeverities();
+        if ($this->themes !== null) {
+            $this->timesToFix        = $this->themes->getTimesToFix();
+            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer(array('Security', 'Suggestions'));
+            $this->severities        = $this->themes->getSeverities();
+        }
     }
 
     protected function getBasedPage($file) {
@@ -102,7 +104,6 @@ class Melis extends Ambassador {
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
           <li class="header">&nbsp;</li>
-          <!-- Optionally, you can add icons to the links -->
           <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
           <li><a href="issues.html"><i class="fa fa-flag"></i> <span>Issues</span></a></li>
           <li class="treeview">
@@ -215,36 +216,47 @@ MENU;
         $hashData = $this->getHashData();
         $finalHTML = $this->injectBloc($baseHTML, 'BLOCHASHDATA', $hashData);
 
-        // bloc Issues
-        $issues = $this->getIssuesBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, 'GRADED_ISSUES', $this->generateGradingTable());
-        $tags[] = 'SCRIPTISSUES';
+        // graded Issues
+        $issues = $this->getSeverityBreakdown();
+//        $finalHTML = $this->injectBloc($finalHTML, 'GRADED_ISSUES', $this->generateGradingTable());
+        $tags[] = 'SCRIPTSEVERITY';
         $code[] = $issues['script'];
 
         // Marking the audit date
         $this->makeAuditDate($finalHTML);
 
-        // bloc severity
-        $severity = $this->getSeverityBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOCKING_ISSUES', $this->generateBlockingTable());
-        $tags[] = 'SCRIPTSEVERITY';
-        $code[] = $severity['script'];
+        // blocking issues
+        $countBlocking = $this->countBlocking();
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOCKING_ISSUES', "<div class=\"row\"><p class=\"value\" style=\"width: 100%; font-size: 40px; font-weight: bold; text-align: center\">$countBlocking</p></div>");
 
         // top 10
-        $fileHTML = $this->getTopFile();
+        $fileHTML = $this->getBlockingFile();
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers();
+        // Filename Overview
+        $fileOverview = $this->getBlockingOverview();
+        $tags[] = 'SCRIPTDATAFILES';
+        $code[] = $fileOverview['scriptDataFiles'];
+        $tags[] = 'SCRIPTDATACRITICAL';
+        $code[] = $fileOverview['scriptDataCritical'];
+
+        $analyzerHTML = $this->getGradedFile();
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
+        // Analyzer Overview
+        $analyzerOverview = $this->getGradedOverview();
+        $tags[] = 'SCRIPTDATAANALYZERLIST';
+        $code[] = $analyzerOverview['scriptDataAnalyzer'];
+        $tags[] = 'SCRIPTDATAANALYZERCRITICAL';
+        $code[] = $analyzerOverview['scriptDataAnalyzerCritical'];
 
         $blocjs = <<<JAVASCRIPT
   <script>
     $(document).ready(function() {
-      Morris.Donut({
+/*      Morris.Donut({
         element: 'donut-chart_issues',
         resize: true,
         colors: ["#3c8dbc", "#f56954", "#00a65a", "#1424b8"],
         data: [SCRIPTISSUES]
-      });
+      });*/
       Morris.Donut({
         element: 'donut-chart_severity',
         resize: true,
@@ -373,15 +385,6 @@ MENU;
           series: [{
               name: 'Critical',
               data: [SCRIPTDATACRITICAL]
-          }, {
-              name: 'Major',
-              data: [SCRIPTDATAMAJOR]
-          }, {
-              name: 'Minor',
-              data: [SCRIPTDATAMINOR]
-          }, {
-              name: 'None',
-              data: [SCRIPTDATANONE]
           }]
       });
 
@@ -444,48 +447,13 @@ MENU;
               }
           },
           series: [{
-              name: 'Critical',
+              name: 'Grade',
               data: [SCRIPTDATAANALYZERCRITICAL]
-          }, {
-              name: 'Major',
-              data: [SCRIPTDATAANALYZERMAJOR]
-          }, {
-              name: 'Minor',
-              data: [SCRIPTDATAANALYZERMINOR]
-          }, {
-              name: 'None',
-              data: [SCRIPTDATAANALYZERNONE]
           }]
       });
     });
   </script>
 JAVASCRIPT;
-
-        // Filename Overview
-        $fileOverview = $this->getFileOverview();
-        $tags[] = 'SCRIPTDATAFILES';
-        $code[] = $fileOverview['scriptDataFiles'];
-        $tags[] = 'SCRIPTDATAMAJOR';
-        $code[] = $fileOverview['scriptDataMajor'];
-        $tags[] = 'SCRIPTDATACRITICAL';
-        $code[] = $fileOverview['scriptDataCritical'];
-        $tags[] = 'SCRIPTDATANONE';
-        $code[] = $fileOverview['scriptDataNone'];
-        $tags[] = 'SCRIPTDATAMINOR';
-        $code[] = $fileOverview['scriptDataMinor'];
-
-        // Analyzer Overview
-        $analyzerOverview = $this->getAnalyzerOverview();
-        $tags[] = 'SCRIPTDATAANALYZERLIST';
-        $code[] = $analyzerOverview['scriptDataAnalyzer'];
-        $tags[] = 'SCRIPTDATAANALYZERMAJOR';
-        $code[] = $analyzerOverview['scriptDataAnalyzerMajor'];
-        $tags[] = 'SCRIPTDATAANALYZERCRITICAL';
-        $code[] = $analyzerOverview['scriptDataAnalyzerCritical'];
-        $tags[] = 'SCRIPTDATAANALYZERNONE';
-        $code[] = $analyzerOverview['scriptDataAnalyzerNone'];
-        $tags[] = 'SCRIPTDATAANALYZERMINOR';
-        $code[] = $analyzerOverview['scriptDataAnalyzerMinor'];
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
@@ -493,11 +461,106 @@ JAVASCRIPT;
         $this->putBasedPage('index', $finalHTML);
     }
 
+    protected function getBlockingFile() {
+        $data = $this->getAnalyzersCount('Security', self::TOPLIMIT);
+
+        $html = '';
+        foreach ($data as $value) {
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$value['analyzer'].'.ini');
+            $html .= '<div class="clearfix">
+                    <a href="issues.html#analyzer='.$this->toId($value['analyzer']).'" title="'.$value['analyzer'].'">
+                      <div class="block-cell-name">'.$ini['name'].'</div>
+                    </a>
+                    <div class="block-cell-issue text-center">'.$value['value'].'</div>
+                  </div>';
+        }
+        $nb = 10 - count($data);
+        for($i = 0; $i < $nb; ++$i) {
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">&nbsp;</div>
+                      <div class="block-cell-issue text-center">&nbsp;</div>
+                  </div>';
+        }
+
+        return $html;
+    }
+
+    protected function getGradedFile() {
+        $data = $this->getAnalyzersCount('Suggestions', self::TOPLIMIT);
+
+        $html = '';
+        foreach ($data as $value) {
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$value['analyzer'].'.ini');
+            $html .= '<div class="clearfix">
+                    <a href="issues.html#analyzer='.$this->toId($value['analyzer']).'" title="'.$value['analyzer'].'">
+                      <div class="block-cell-name">'.$ini['name'].'</div>
+                    </a>
+                    <div class="block-cell-issue text-center">'.$value['value'].'</div>
+                  </div>';
+        }
+        $nb = 10 - count($data);
+        for($i = 0; $i < $nb; ++$i) {
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">&nbsp;</div>
+                      <div class="block-cell-issue text-center">&nbsp;</div>
+                  </div>';
+        }
+
+        return $html;
+    }    
+
+    public function getFilesCount($theme, $limit = self::TOPLIMIT) {
+        $list = $this->themes->getThemeAnalyzers($theme);
+        $list = makeList($list);
+
+        $query = "SELECT file, count(*) AS number
+                    FROM results
+                    WHERE analyzer IN ($list)
+                    GROUP BY file
+                    ORDER BY number DESC ";
+        if ($limit !== null) {
+            $query .= " LIMIT ".$limit;
+        }
+        $result = $this->sqlite->query($query);
+        $data = array();
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+            $data[] = array('file'  => $row['file'],
+                            'value' => $row['number']);
+        }
+
+        return $data;
+    }
+
+    private function getAnalyzersCount($theme, $limit) {
+        $list = $this->themes->getThemeAnalyzers($theme);
+        $list = makeList($list);
+
+        $query = "SELECT analyzer, count(*) AS number
+                    FROM results
+                    WHERE analyzer in ($list)
+                    GROUP BY analyzer
+                    ORDER BY number DESC ";
+        if ($limit) {
+            $query .= " LIMIT ".$limit;
+        }
+        $result = $this->sqlite->query($query);
+        $data = array();
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+            $data[] = array('analyzer' => $row['analyzer'],
+                            'value'    => $row['number']);
+        }
+
+        return $data;
+    }
+
     private function generateGradingTable() {
         $total = 0;
         $rows = '';
+        $list = $this->themes->getThemeAnalyzers('Security');
+        $list = makeList($list);
+
         $res = $this->sqlite->query(<<<SQL
-SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer like "Melis/%" AND count >= 0 ORDER BY count
+SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer IN ($list) AND count >= 0 ORDER BY  random() limit 10
 SQL
 );
          $count = 0;
@@ -542,12 +605,33 @@ SQL
        return '<table width="100%">'.$levels.'</table>'.str_repeat('<br />', max(0, 12 - $countRows) );
     }
 
+    private function countBlocking() {
+        $total = 0;
+        $rows = '';
+        
+        $list = $this->themes->getThemeAnalyzers('Security');
+        $list = makeList($list);
+
+        $res = $this->sqlite->query(<<<SQL
+SELECT sum(count) AS count FROM resultsCounts WHERE analyzer IN ($list) AND count > 0 
+SQL
+);
+        $count = 0;
+        $rowCounts = 0;
+        $count = $res->fetchArray(\SQLITE3_ASSOC);
+
+        return $count['count'];
+    }
+
     private function generateBlockingTable() {
         $total = 0;
         $rows = '';
         
+        $list = $this->themes->getThemeAnalyzers('Security');
+        $list = makeList($list);
+
         $res = $this->sqlite->query(<<<SQL
-SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer like "Melis/%" AND count >= 0 ORDER BY count
+SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer IN ($list) AND count > 0 ORDER BY random() limit 10
 SQL
 );
         $count = 0;
@@ -589,182 +673,6 @@ SQL
                        $rows;
             
            return '<table width="100%">'.$levels.'</table>'.str_repeat('<br />', max(0, 12 - $rowCounts) );
-    }
-
-    public function generateExtensionsBreakdown() {
-        $finalHTML = $this->getBasedPage('extension_list');
-
-        // List of extensions used
-        $res = $this->sqlite->query(<<<SQL
-SELECT analyzer, count(*) AS count FROM results 
-WHERE analyzer LIKE "Extensions/Ext%"
-GROUP BY analyzer
-ORDER BY count(*) DESC
-SQL
-        );
-        //        $fileHTML = $this->getTopFile();
-        $html = '';
-        $xAxis = array();
-        $data = array();
-        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $shortName = str_replace('Extensions/Ext', 'ext/', $value['analyzer']);
-            $xAxis[] = "'".$shortName."'";
-            $data[$value['analyzer']] = $value['count'];
-            //                    <a href="#" title="' . $value['analyzer'] . '">
-            $html .= '<div class="clearfix">
-                      <div class="block-cell-name">'.$shortName.'</div>
-                      <div class="block-cell-issue text-center">'.$value['count'].'</div>
-                  </div>';
-        }
-
-        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
-
-        $blocjs = <<<JAVASCRIPT
-  <script>
-    $(document).ready(function() {
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
-
-
-         // General
-         background2: '#F0F0EA'
-      };
-
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAFILES]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Calls',
-              data: [CALLCOUNT]
-          }]
-      });
-
-    });
-  </script>
-JAVASCRIPT;
-
-        $tags = array();
-        $code = array();
-
-        // Filename Overview
-        $tags[] = 'CALLCOUNT';
-        $code[] = implode(', ', $data);
-        $tags[] = 'SCRIPTDATAFILES';
-        $code[] = implode(', ', $xAxis);
-
-        $blocjs = str_replace($tags, $code, $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Extensions\' list');
-
-        $this->putBasedPage('extension_list', $finalHTML);
     }
 
     public function getHashData() {
@@ -890,7 +798,7 @@ JAVASCRIPT;
     }
 
     public function getSeverityBreakdown() {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        $list = $this->themes->getThemeAnalyzers(array('Suggestions'));
         $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
@@ -1056,78 +964,45 @@ SQL;
         return $row['number'];
     }
 
-    public function getFilesCount($limit = null) {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+    protected function getBlockingOverview() {
+        $data = $this->getAnalyzersCount('Security', self::LIMITGRAPHE);
 
-        $query = "SELECT file, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY file
-                    ORDER BY number DESC ";
-        if ($limit !== null) {
-            $query .= " LIMIT ".$limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('file'  => $row['file'],
-                            'value' => $row['number']);
-        }
-
-        return $data;
-    }
-
-    protected function getFileOverview() {
-        $data = $this->getFilesCount(self::LIMITGRAPHE);
         $xAxis        = array();
-        $dataMajor    = array();
         $dataCritical = array();
-        $dataNone     = array();
-        $dataMinor    = array();
-        $severities = $this->getSeveritiesNumberBy('file');
+
         foreach ($data as $value) {
-            $xAxis[] = "'".$value['file']."'";
-            $dataCritical[] = empty($severities[$value['file']]['Critical']) ? 0 : $severities[$value['file']]['Critical'];
-            $dataMajor[]    = empty($severities[$value['file']]['Major'])    ? 0 : $severities[$value['file']]['Major'];
-            $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
-            $dataNone[]     = empty($severities[$value['file']]['None'])     ? 0 : $severities[$value['file']]['None'];
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$value['analyzer'].'.ini');
+            $xAxis[] = "'".$ini['name']."'";
+            $dataCritical[] = $value['value'];
         }
+
         $xAxis        = implode(', ', $xAxis);
         $dataCritical = implode(', ', $dataCritical);
-        $dataMajor    = implode(', ', $dataMajor);
-        $dataMinor    = implode(', ', $dataMinor);
-        $dataNone     = implode(', ', $dataNone);
 
         return array(
             'scriptDataFiles'    => $xAxis,
-            'scriptDataMajor'    => $dataMajor,
             'scriptDataCritical' => $dataCritical,
-            'scriptDataNone'     => $dataNone,
-            'scriptDataMinor'    => $dataMinor
         );
     }
 
-    private function getAnalyzersCount($limit) {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
-
-        $query = "SELECT analyzer, count(*) AS number
-                    FROM results
-                    WHERE analyzer in ($list)
-                    GROUP BY analyzer
-                    ORDER BY number DESC ";
-        if ($limit) {
-            $query .= " LIMIT ".$limit;
+    protected function getGradedOverview() {
+        $data = $this->getAnalyzersCount('Suggestions', self::LIMITGRAPHE);
+        $xAxis        = array();
+        $dataCritical = array();
+        
+        foreach ($data as $value) {
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$value['analyzer'].'.ini');
+            $xAxis[] = "'".$ini['name']."'";
+            $grade = min(ceil(log($value['value']) / log(6)), 5);
+            $dataCritical[] = $grade;
         }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('analyzer' => $row['analyzer'],
-                            'value'    => $row['number']);
-        }
+        $xAxis        = implode(', ', $xAxis);
+        $dataCritical = implode(', ', $dataCritical);
 
-        return $data;
+        return array(
+            'scriptDataAnalyzer'         => $xAxis,
+            'scriptDataAnalyzerCritical' => $dataCritical,
+        );
     }
 
     private function getSeveritiesNumberBy($type = 'file') {
@@ -1186,68 +1061,9 @@ SQL;
         );
     }
 
-    private function generateIssues()
-    {
-        $baseHTML = $this->getBasedPage('issues');
-
-        $issues = implode(', ', $this->getIssuesFaceted($this->themesToShow));
-        $blocjs = <<<JAVASCRIPT
-        
-  <script>
-  "use strict";
-
-    $(document).ready(function() {
-
-      var data_items = [$issues];
-      var item_template =  
-        '<tr>' +
-          '<td width="20%"><%= obj.analyzer %></td>' +
-          '<td width="20%"><%= obj.file + ":" + obj.line %></td>' +
-          '<td width="18%"><%= obj.code %></td>' + 
-          '<td width="2%"><%= obj.code_detail %></td>' +
-          '<td width="7%" align="center"><%= obj.severity %></td>' +
-          '<td width="7%" align="center"><%= obj.complexity %></td>' +
-          '<td width="16%"><%= obj.recipe %></td>' +
-        '</tr>' +
-        '<tr class="fullcode">' +
-          '<td colspan="7" width="100%"><div class="analyzer_help"><%= obj.analyzer_help %></div><pre><code><%= obj.code_plus %></code><div class="text-right"><a target="_BLANK" href="codes.html?file=<%= obj.link_file %>" class="btn btn-info">View File</a></div></pre></td>' +
-        '</tr>';
-      var settings = { 
-        items           : data_items,
-        facets          : { 
-          'analyzer'  : 'Analyzer',
-          'file'      : 'File',
-          'severity'  : 'Severity',
-          'complexity': 'Complexity',
-          'receipt'   : 'Receipt'
-        },
-        facetContainer     : '<div class="facetsearch btn-group" id=<%= id %> ></div>',
-        facetTitleTemplate : '<button class="facettitle multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected"><span class="multiselect-selected-text"><%= title %></span><b class="caret"></b></button>',
-        facetListContainer : '<ul class="facetlist multiselect-container dropdown-menu"></ul>',
-        listItemTemplate   : '<li class=facetitem id="<%= id %>" data-analyzer="<%= data_analyzer %>" data-file="<%= data_file %>"><span class="check"></span><%= name %><span class=facetitemcount>(<%= count %>)</span></li>',
-        bottomContainer    : '<div class=bottomline></div>',  
-        resultSelector   : '#results',
-        facetSelector    : '#facets',
-        resultTemplate   : item_template,
-        paginationCount  : 50
-      }   
-      $.facetelize(settings);
-      
-      var analyzerParam = window.location.search.split('analyzer=')[1];
-      var fileParam = window.location.search.split('file=')[1];
-      if(analyzerParam !== undefined) {
-        $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam + "']").click();
-      }
-      if(fileParam !== undefined) {
-        $('#file .facetlist').find("[data-file='" + fileParam + "']").click();
-      }
-    });
-  </script>
-JAVASCRIPT;
-
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' list');
-        $this->putBasedPage('issues', $finalHTML);
+    private function generateIssues() {
+        $this->generateIssuesEngine('issues',
+                                    $this->getIssuesFaceted(array('Suggestions', 'Security')) );
     }
 
     public function getIssuesFaceted($theme) {
