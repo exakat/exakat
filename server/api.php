@@ -78,12 +78,24 @@ function init($args) {
     
     $vcs = unparse_url($url);
 
-    if (($id = array_search('-p', $args)) === false || 
-        !($project = $args[$id + 1])) {
+    if (($id = array_search('-p', $args)) === false) {
         $project = autoprojectname();
+    } elseif (!($project = $args[$id + 1])) {
+        $project = autoprojectname();
+    } elseif (file_exists("projects/$project")) {
+        error('Project already exists', '');
+    }
+    
+    $extra = '';
+    if (($id = array_search('-branch', $args)) !== false) {
+        $extra .= ' -branch '.escapeshellarg($args[$id + 1]).' ';
     }
 
-    shell_exec("__PHP__ __EXAKAT__ queue init -p ".escapeshellarg($project)." -R ".escapeshellarg($vcs));
+    if (($id = array_search('-tag', $args)) !== false) {
+        $extra .= ' -tag '.escapeshellarg($args[$id + 1]).' ';
+    }
+
+    shell_exec('__PHP__ __EXAKAT__ queue init -p '.escapeshellarg($project).' -R '.escapeshellarg($vcs).$extra);
     serverLog("init : $project $vcs ".date('r'));
 
     echo json_encode(array('project' => $project, 
