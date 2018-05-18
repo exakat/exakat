@@ -56,12 +56,12 @@ class Git extends Vcs {
         if (isset($repositoryDetails['user'])) {
             $repositoryDetails['user'] = urlencode($repositoryDetails['user']);
         } else {
-            unset($repositoryDetails['user']);
+            $repositoryDetails['user'] = 'exakat';
         }
         if (isset($repositoryDetails['pass'])) {
             $repositoryDetails['pass'] = urlencode($repositoryDetails['pass']);
         } else {
-            unset($repositoryDetails['pass']);
+            $repositoryDetails['user'] = '';
         }
                 
         unset($repositoryDetails['query']);
@@ -72,10 +72,10 @@ class Git extends Vcs {
 
         if (!empty($this->tag)) {
             display("Check out with tag ".$this->tag);
-            $shell .= ' -b '.$this->tag.' ';
+            $shell .= " -b $this->tag ";
         } else {
             display("Check out with branch ".$this->branch);
-            $shell .= ' -b '.$this->branch.' ';
+            $shell .= " -b $this->branch ";
         }
         
         $shell .= ' code 2>&1 ';
