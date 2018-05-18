@@ -489,11 +489,11 @@ GREMLIN
         assert($this->assertAtom($atom));
 
         $atoms = makeArray($atom);
-        $diff = array_diff($atoms, self::$availableAtoms);
+        $diff = array_intersect($atoms, self::$availableAtoms);
         if (empty($diff)) {
-            $this->addMethod('hasLabel(within(***))', $atoms);
-        } else {
             $this->addMethod(self::STOP_QUERY);
+        } else {
+            $this->addMethod('hasLabel(within(***))', $atoms);
         }
         
         return $this;
@@ -1905,6 +1905,11 @@ GREMLIN;
     public function prepareQuery() {
         // @doc This is when the object is a placeholder for others.
         if (count($this->methods) <= 1) { return true; }
+        
+        if (in_array(self::STOP_QUERY, $this->methods)) {
+            // any 'stop_query' is blocking
+            return $this->initNewQuery();
+        }
 
         if (substr($this->methods[1], 0, 9) == 'hasLabel(') {
             $first = $this->methods[1];
@@ -1919,9 +1924,6 @@ GREMLIN;
             $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())'
                      .(empty($query) ? '' : '.'.$query);
             unset($this->methods[1]);
-        } elseif ($this->methods[1] === self::STOP_QUERY) {
-            // Cancel it as a whole
-            return $this->initNewQuery();
         } else {
             assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[1]);
         }
