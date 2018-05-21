@@ -67,7 +67,7 @@ class Update extends Tasks {
     }
     
     private function runProject($project) {
-        $path = $this->config->projects_root.'/projects/'.$project;
+        $path = "{$this->config->projects_root}/projects/$project";
     
         if (!file_exists($path)) {
             throw new NoSuchProject($this->config->project);

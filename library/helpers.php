@@ -429,9 +429,9 @@ function trimOnce($string, $trim = '\'"'){
         return $string;
     }
 
-    if (strpos($trim, $string[0]) !== false &&
-        strpos($trim, $string[$length -1]) !== false &&
-        $string[0] === $string[$length -1]
+    if ($string[0] === $string[$length -1] && 
+        strpos($trim, $string[0]) !== false &&
+        strpos($trim, $string[$length -1]) !== false
          ) {
         return substr($string, 1, -1);
     }
