@@ -301,6 +301,8 @@ A number of applications were scanned in order to find real life examples of pat
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `OpenConf <https://www.openconf.com/>`_
 * `Dolphin <https://www.boonex.com/>`_
+* `XOOPS <https://xoops.org/>`_
+* `Mautic <https://www.mautic.org/>`_
 * `Woocommerce <https://woocommerce.com/>`_
 * `Tikiwiki <https://tiki.org/>`_
 * `Contao <https://contao.org/en/>`_
@@ -309,7 +311,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Zencart <https://www.zen-cart.com/>`_
 * `WordPress <https://www.wordpress.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
-* `Mautic <https://www.mautic.org/>`_
 * `NextCloud <https://nextcloud.com/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
@@ -320,6 +321,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `Edusoho <https://www.edusoho.com/en>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
+* `TeamPass <https://teampass.net/>`_
 * `SPIP <https://www.spip.net/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `PrestaShop <https://prestashop.com/>`_
@@ -327,8 +329,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Traq <https://traq.io/>`_
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
-* `TeamPass <https://teampass.net/>`_
-* `XOOPS <https://xoops.org/>`_
 * `Swoole <https://www.swoole.com/>`_
 
 
@@ -384,7 +384,12 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.2.8
 
-  * Php/FailingAnalysis (Php/FailingAnalysis)
+  * Cant Instantiate Class (Classes/CantInstantiateClass)
+  * Do In Base (Performances/DoInBase ; Performances)
+  * Php/FailingAnalysis (Php/FailingAnalysis ; Internal)
+  * Strpos Too Much (Performances/StrposTooMuch ; Analyze)
+  * Typehinted References (Functions/TypehintedReferences ; Analyze)
+  * Weak Typing (Classes/WeakType ; Analyze)
 
 * 1.2.7
 
@@ -1173,7 +1178,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.8.7
 
-  * Dont Echo Error (Security/DontEchoError ; Analyze, Security, Codacy, Simple, Level 1)
+  * Don't Echo Error (Security/DontEchoError ; Analyze, Security, Codacy, Simple, Level 1)
   * No Isset With Empty (Structures/NoIssetWithEmpty ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple, Level 4)
   * Use Class Operator (Classes/UseClassOperator)
   * Useless Casting (Structures/UselessCasting ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple, Level 4)
@@ -1690,9 +1695,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Unused Interfaces (Interfaces/UnusedInterfaces ; Analyze, Dead code, Codacy, Simple, Suggestions, Level 2)
   * Unused Label (Structures/UnusedLabel ; Analyze, Dead code, Codacy, Simple)
   * Unused Methods (Classes/UnusedMethods ; Analyze, Dead code, Codacy, Simple)
+  * Unused Private Methods (Classes/UnusedPrivateMethod ; Analyze, Dead code, OneFile, Codacy, Simple)
   * Unused Private Properties (Classes/UnusedPrivateProperty ; Analyze, Dead code, OneFile, Codacy, Simple)
   * Unused Protected Methods (Classes/UnusedProtectedMethods ; Dead code)
-  * Unused Static Methods (Classes/UnusedPrivateMethod ; Analyze, Dead code, OneFile, Codacy, Simple)
   * Unused Traits (Traits/UnusedTrait ; Analyze, Codacy, Simple)
   * Unused Use (Namespaces/UnusedUse ; Analyze, Dead code, ClearPHP, Codacy, Simple)
   * Unusual Case For PHP Functions (Php/UpperCaseFunction ; Coding Conventions)
@@ -2078,6 +2083,7 @@ List of external links mentionned in this documentation.
 * `Enchant spelling library <http://php.net/manual/en/book.enchant.php>`_
 * `Ereg <http://php.net/manual/en/function.ereg.php>`_
 * `Error Control Operators <http://php.net/manual/en/language.operators.errorcontrol.php>`_
+* `Error reporting <https://php.earth/docs/security/intro#error-reporting>`_
 * `Escape sequences <http://php.net/manual/en/regexp.reference.escape.php>`_
 * `Ev <http://php.net/manual/en/book.ev.php>`_
 * `Event <http://php.net/event>`_
@@ -2116,8 +2122,8 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
@@ -2126,6 +2132,7 @@ List of external links mentionned in this documentation.
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
+* `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
@@ -2151,16 +2158,17 @@ List of external links mentionned in this documentation.
 * `htmlentities <http://www.php.net/htmlentities>`_
 * `http://dist.exakat.io/ <http://dist.exakat.io/>`_
 * `http://dist.exakat.io/index.php?file=latest <http://dist.exakat.io/index.php?file=latest>`_
-* `http://php.net/manual/en/reference.pcre.pattern.modifiers.php <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 * `https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
 * `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
+* `IERS <https://www.iers.org/IERS/EN/Home/home_node.html>`_
 * `igbinary <https://github.com/igbinary/igbinary/>`_
 * `IIS Administration <http://www.php.net/manual/en/book.iisfunc.php>`_
 * `Image Processing and GD <http://php.net/manual/en/book.image.php>`_
 * `Imagick for PHP <http://php.net/manual/en/book.imagick.php>`_
 * `IMAP <http://www.php.net/imap>`_
+* `In a PHP5 class, when does a private constructor get called? <https://stackoverflow.com/questions/26079/in-a-php5-class-when-does-a-private-constructor-get-called>`_
 * `in_array() <http://php.net/in_array>`_
 * `include <http://php.net/manual/en/function.include.php>`_
 * `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_
@@ -2263,8 +2271,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
-* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
@@ -2494,6 +2502,7 @@ Analyze
 |   analyzer[] = "Classes/AmbiguousStatic";
 |   analyzer[] = "Classes/AvoidOptionalProperties";
 |   analyzer[] = "Classes/CantExtendFinal";
+|   analyzer[] = "Classes/CantInstantiateClass";
 |   analyzer[] = "Classes/CitSameName";
 |   analyzer[] = "Classes/ConstantClass";
 |   analyzer[] = "Classes/CouldBeClassConstant";
@@ -2564,6 +2573,7 @@ Analyze
 |   analyzer[] = "Classes/UselessConstructor";
 |   analyzer[] = "Classes/UselessFinal";
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
+|   analyzer[] = "Classes/WeakType";
 |   analyzer[] = "Classes/WrongCase";
 |   analyzer[] = "Classes/WrongName";
 |   analyzer[] = "Constants/ConstRecommended";
@@ -2605,6 +2615,7 @@ Analyze
 |   analyzer[] = "Functions/RelayFunction";
 |   analyzer[] = "Functions/ShouldUseConstants";
 |   analyzer[] = "Functions/TooManyLocalVariables";
+|   analyzer[] = "Functions/TypehintedReferences";
 |   analyzer[] = "Functions/UndefinedFunctions";
 |   analyzer[] = "Functions/UnusedArguments";
 |   analyzer[] = "Functions/UnusedFunctions";
@@ -2637,6 +2648,7 @@ Analyze
 |   analyzer[] = "Performances/ArrayMergeInLoops";
 |   analyzer[] = "Performances/LogicalToInArray";
 |   analyzer[] = "Performances/PrePostIncrement";
+|   analyzer[] = "Performances/StrposTooMuch";
 |   analyzer[] = "Php/AssignAnd";
 |   analyzer[] = "Php/BetterRand";
 |   analyzer[] = "Php/ClassFunctionConfusion";
@@ -2826,7 +2838,7 @@ Analyze
 |   analyzer[] = "Variables/VariableNonascii";
 |   analyzer[] = "Variables/VariableUsedOnce";
 |   analyzer[] = "Variables/VariableUsedOnceByContext";
-|   analyzer[] = "Variables/WrittenOnlyVariable";
+|   analyzer[] = "Variables/WrittenOnlyVariable";| 
 
 
 
@@ -2853,7 +2865,7 @@ Cakephp
 |   analyzer[] = "Cakephp/Cakephp31";
 |   analyzer[] = "Cakephp/Cakephp32";
 |   analyzer[] = "Cakephp/Cakephp33";
-|   analyzer[] = "Cakephp/Cakephp34";
+|   analyzer[] = "Cakephp/Cakephp34";| 
 
 
 
@@ -2884,7 +2896,7 @@ Coding Conventions
 |   analyzer[] = "Structures/YodaComparison";
 |   analyzer[] = "Type/ShouldBeSingleQuote";
 |   analyzer[] = "Type/StringInterpolation";
-|   analyzer[] = "Variables/VariableUppercase";
+|   analyzer[] = "Variables/VariableUppercase";| 
 
 
 
@@ -2956,7 +2968,7 @@ CompatibilityPHP53
 |   analyzer[] = "Type/Binary";
 |   analyzer[] = "Type/MalformedOctal";
 |   analyzer[] = "Variables/Php5IndirectExpression";
-|   analyzer[] = "Variables/Php7IndirectExpression";
+|   analyzer[] = "Variables/Php7IndirectExpression";| 
 
 
 
@@ -3024,7 +3036,7 @@ CompatibilityPHP54
 |   analyzer[] = "Structures/VariableGlobal";
 |   analyzer[] = "Type/MalformedOctal";
 |   analyzer[] = "Variables/Php5IndirectExpression";
-|   analyzer[] = "Variables/Php7IndirectExpression";
+|   analyzer[] = "Variables/Php7IndirectExpression";| 
 
 
 
@@ -3084,7 +3096,7 @@ CompatibilityPHP55
 |   analyzer[] = "Structures/VariableGlobal";
 |   analyzer[] = "Type/MalformedOctal";
 |   analyzer[] = "Variables/Php5IndirectExpression";
-|   analyzer[] = "Variables/Php7IndirectExpression";
+|   analyzer[] = "Variables/Php7IndirectExpression";| 
 
 
 
@@ -3133,7 +3145,7 @@ CompatibilityPHP56
 |   analyzer[] = "Structures/VariableGlobal";
 |   analyzer[] = "Type/MalformedOctal";
 |   analyzer[] = "Variables/Php5IndirectExpression";
-|   analyzer[] = "Variables/Php7IndirectExpression";
+|   analyzer[] = "Variables/Php7IndirectExpression";| 
 
 
 
@@ -3178,7 +3190,7 @@ CompatibilityPHP70
 |   analyzer[] = "Structures/SetlocaleNeedsConstants";
 |   analyzer[] = "Structures/pregOptionE";
 |   analyzer[] = "Type/HexadecimalString";
-|   analyzer[] = "Variables/Php7IndirectExpression";
+|   analyzer[] = "Variables/Php7IndirectExpression";| 
 
 
 
@@ -3212,7 +3224,7 @@ CompatibilityPHP71
 |   analyzer[] = "Structures/NoSubstrOne";
 |   analyzer[] = "Structures/pregOptionE";
 |   analyzer[] = "Type/HexadecimalString";
-|   analyzer[] = "Type/OctalInString";
+|   analyzer[] = "Type/OctalInString";| 
 
 
 
@@ -3237,7 +3249,7 @@ CompatibilityPHP72
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Structures/CanCountNonCountable";
 |   analyzer[] = "Structures/NoGetClassNull";
-|   analyzer[] = "Structures/pregOptionE";
+|   analyzer[] = "Structures/pregOptionE";| 
 
 
 
@@ -3251,7 +3263,7 @@ CompatibilityPHP73
 |   analyzer[] = "Php/PHP73LastEmptyArgument";
 |   analyzer[] = "Php/ParenthesisAsParameter";
 |   analyzer[] = "Php/Php70RemovedDirective";
-|   analyzer[] = "Structures/pregOptionE";
+|   analyzer[] = "Structures/pregOptionE";| 
 
 
 
@@ -3286,7 +3298,7 @@ Dead code
 |   analyzer[] = "Structures/EmptyLines";
 |   analyzer[] = "Structures/UnreachableCode";
 |   analyzer[] = "Structures/UnsetInForeach";
-|   analyzer[] = "Structures/UnusedLabel";
+|   analyzer[] = "Structures/UnusedLabel";| 
 
 
 
@@ -3302,6 +3314,7 @@ Performances
 |   analyzer[] = "Classes/UseClassOperator";
 |   analyzer[] = "Performances/ArrayMergeInLoops";
 |   analyzer[] = "Performances/AvoidArrayPush";
+|   analyzer[] = "Performances/DoInBase";
 |   analyzer[] = "Performances/DoubleArrayFlip";
 |   analyzer[] = "Performances/FetchOneRowFormat";
 |   analyzer[] = "Performances/JoinFile";
@@ -3328,7 +3341,7 @@ Performances
 |   analyzer[] = "Structures/NoAssignationInFunction";
 |   analyzer[] = "Structures/NoSubstrOne";
 |   analyzer[] = "Structures/SimplePreg";
-|   analyzer[] = "Structures/WhileListEach";
+|   analyzer[] = "Structures/WhileListEach";| 
 
 
 
@@ -3372,7 +3385,7 @@ Security
 |   analyzer[] = "Structures/PhpinfoUsage";
 |   analyzer[] = "Structures/RandomWithoutTry";
 |   analyzer[] = "Structures/VardumpUsage";
-|   analyzer[] = "Structures/pregOptionE";
+|   analyzer[] = "Structures/pregOptionE";| 
 
 
 
@@ -3407,7 +3420,7 @@ Slim
 |   analyzer[] = "Slim/Slimphp37";
 |   analyzer[] = "Slim/Slimphp38";
 |   analyzer[] = "Slim/UseSlim";
-|   analyzer[] = "Slim/UsedRoutes";
+|   analyzer[] = "Slim/UsedRoutes";| 
 
 
 
@@ -3470,7 +3483,7 @@ Suggestions
 |   analyzer[] = "Structures/UnreachableCode";
 |   analyzer[] = "Structures/UseCountRecursive";
 |   analyzer[] = "Structures/UseListWithForeach";
-|   analyzer[] = "Structures/WhileListEach";
+|   analyzer[] = "Structures/WhileListEach";| 
 
 
 
@@ -3507,7 +3520,7 @@ Wordpress
 |   analyzer[] = "Wordpress/Wordpress49Undefined";
 |   analyzer[] = "Wordpress/WordpressUsage";
 |   analyzer[] = "Wordpress/WpdbBestUsage";
-|   analyzer[] = "Wordpress/WpdbPrepareOrNot";
+|   analyzer[] = "Wordpress/WpdbPrepareOrNot";| 
 
 
 
@@ -3758,7 +3771,7 @@ ZendFramework
 |   analyzer[] = "ZendF/Zf3View29";
 |   analyzer[] = "ZendF/Zf3Xmlrpc";
 |   analyzer[] = "ZendF/Zf3Xmlrpc25";
-|   analyzer[] = "ZendF/Zf3Xmlrpc26";
+|   analyzer[] = "ZendF/Zf3Xmlrpc26";| 
 
 
 

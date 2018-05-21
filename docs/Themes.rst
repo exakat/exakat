@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 15 May 2018 16:39:21 +0000
-.. comment: Generation hash : dc5851d4af0b1eac6e8e0b6a67435becfb5ccd1c
+.. comment: Generation date : Mon, 21 May 2018 19:53:08 +0000
+.. comment: Generation hash : ce65af1a6be7816f64f66517ad28e07843edc1f7
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 344 analysis
+Total : 348 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -104,6 +104,7 @@ Total : 344 analysis
 * :ref:`Buried Assignation <buried-assignation>`
 * :ref:`Callback Needs Return <callback-needs-return>`
 * :ref:`Can't Extend Final <can't-extend-final>`
+* :ref:`Cant Instantiate Class <cant-instantiate-class>`
 * :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Check All Types <check-all-types>`
@@ -139,10 +140,10 @@ Total : 344 analysis
 * :ref:`Dependant Trait <dependant-trait>`
 * :ref:`Deprecated Functions <deprecated-functions>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
+* :ref:`Don't Echo Error <don't-echo-error>`
 * :ref:`Don't Send This In Constructor <don't-send-this-in-constructor>`
 * :ref:`Don't Unset Properties <don't-unset-properties>`
 * :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
-* :ref:`Dont Echo Error <dont-echo-error>`
 * :ref:`Double Assignation <double-assignation>`
 * :ref:`Double Instructions <double-instructions>`
 * :ref:`Drop Else After Return <drop-else-after-return>`
@@ -319,6 +320,7 @@ Total : 344 analysis
 * :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 * :ref:`String May Hold A Variable <string-may-hold-a-variable>`
 * :ref:`Strings With Strange Space <strings-with-strange-space>`
+* :ref:`Strpos Too Much <strpos-too-much>`
 * :ref:`Strpos()-like Comparison <strpos()-like-comparison>`
 * :ref:`Strtr Arguments <strtr-arguments>`
 * :ref:`Suspicious Comparison <suspicious-comparison>`
@@ -334,6 +336,7 @@ Total : 344 analysis
 * :ref:`Too Many Injections <too-many-injections>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
 * :ref:`Too Many Native Calls <too-many-native-calls>`
+* :ref:`Typehinted References <typehinted-references>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
 * :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
@@ -366,9 +369,9 @@ Total : 344 analysis
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Private Methods <unused-private-methods>`
 * :ref:`Unused Private Properties <unused-private-properties>`
 * :ref:`Unused Returned Value <unused-returned-value>`
-* :ref:`Unused Static Methods <unused-static-methods>`
 * :ref:`Unused Traits <unused-traits>`
 * :ref:`Unused Use <unused-use>`
 * :ref:`Use === null <use-===-null>`
@@ -404,6 +407,7 @@ Total : 344 analysis
 * :ref:`Uses Default Values <uses-default-values>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 * :ref:`Var Keyword <var-keyword>`
+* :ref:`Weak Typing <weak-typing>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 * :ref:`Written Only Variables <written-only-variables>`
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
@@ -865,13 +869,14 @@ Total : 25 analysis
 Performances
 ++++++++++++
 
-Total : 32 analysis
+Total : 33 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
 * :ref:`Avoid array_push() <avoid-array\_push()>`
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Avoid glob() Usage <avoid-glob()-usage>`
+* :ref:`Do In Base <do-in-base>`
 * :ref:`Double array_flip() <double-array\_flip()>`
 * :ref:`Fetch One Row Format <fetch-one-row-format>`
 * :ref:`Getting Last Element <getting-last-element>`

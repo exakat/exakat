@@ -257,7 +257,7 @@ Glossary
 
     + `die`
 
-      + :ref:`Dont Echo Error <dont-echo-error>`
+      + :ref:`Don't Echo Error <don't-echo-error>`
       + :ref:`Error Messages <error-messages>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Implied If <implied-if>`
@@ -310,7 +310,7 @@ Glossary
 
     + `exit`
 
-      + :ref:`Dont Echo Error <dont-echo-error>`
+      + :ref:`Don't Echo Error <don't-echo-error>`
       + :ref:`Error Messages <error-messages>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Print And Die <print-and-die>`
@@ -447,10 +447,6 @@ Glossary
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 
-    + `ini_get()`
-
-      + :ref:`Timestamp Difference <timestamp-difference>`
-
     + `instanceof`
 
       + :ref:`Already Parents Interface <already-parents-interface>`
@@ -528,7 +524,6 @@ Glossary
 
     + `microtime()`
 
-      + :ref:`Timestamp Difference <timestamp-difference>`
       + :ref:`Use random_int() <use-random\_int()>`
 
     + `mkdir()`
@@ -874,6 +869,7 @@ Glossary
       + :ref:`Assign Default To Properties <assign-default-to-properties>`
       + :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
       + :ref:`Avoid Optional Properties <avoid-optional-properties>`
+      + :ref:`Cant Instantiate Class <cant-instantiate-class>`
       + :ref:`Don't Send This In Constructor <don't-send-this-in-constructor>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
