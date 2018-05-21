@@ -321,6 +321,47 @@ The ConstructHiddenValues function builds the ConstructHiddenSubValues function.
         return $Result;
     }
 
+Buried Assignation
+==================
+
+.. _xoops-structures-buriedassignation:
+
+XOOPS
+^^^^^
+
+:ref:`buried-assignation`, in htdocs/image.php:170. 
+
+Classic iffectation : the condition also collects the needed value to process the drawing. This is very common in PHP, and the Yoda condition, with its constant on the left, shows that extra steps were taken to strengthen that piece of code.  
+
+.. code-block:: php
+
+    if (0 < ($radius = $radii[2] * $q)) { // left bottom
+            imagearc($workingImage, $radius - 1, $workingHeight - $radius, $radius * 2, $radius * 2, 90, 180, $alphaColor);
+            imagefilltoborder($workingImage, 0, $workingHeight - 1, $alphaColor, $alphaColor);
+        }
+
+
+--------
+
+
+.. _mautic-structures-buriedassignation:
+
+Mautic
+^^^^^^
+
+:ref:`buried-assignation`, in app/bundles/CoreBundle/Controller/ThemeController.php:47. 
+
+The setting of the variable $cancelled is fairly hidden here, with its extra operator !. The operator is here for the condition, as $cancelled needs the 'cancellation' state, while the condition needs the contrary. Note also that isset() could be moved out of this condition, and made the result easier to read.
+
+.. code-block:: php
+
+    $form        = $this->get('form.factory')->create('theme_upload', [], ['action' => $action]);
+    
+            if ($this->request->getMethod() == 'POST') {
+                if (isset($form) && !$cancelled = $this->isFormCancelled($form)) {
+                    if ($this->isFormValid($form)) {
+                        $fileData = $form['file']->getData();
+
 No array_merge() In Loops
 =========================
 
@@ -681,6 +722,103 @@ At least, it always choose the most secure way : use SSL.
             $form .= zen_href_link($action, $parameters, 'NONSSL');
           }
 
+Should Use Coalesce
+===================
+
+.. _churchcrm-php-shouldusecoalesce:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`should-use-coalesce`, in src/ChurchCRM/Service/FinancialService.php:597. 
+
+ChurchCRM features 5 old style ternary operators, which are all in this SQL query. ChurchCRM requires PHP 7.0, so a simple code review could remove them all.
+
+.. code-block:: php
+
+    $sSQL = "INSERT INTO pledge_plg
+                        (plg_famID,
+                        plg_FYID, 
+                        plg_date, 
+                        plg_amount,
+                        plg_schedule, 
+                        plg_method, 
+                        plg_comment, 
+                        plg_DateLastEdited, 
+                        plg_EditedBy, 
+                        plg_PledgeOrPayment, 
+                        plg_fundID, 
+                        plg_depID, 
+                        plg_CheckNo, 
+                        plg_scanString, 
+                        plg_aut_ID, 
+                        plg_NonDeductible, 
+                        plg_GroupKey)
+                        VALUES ('".
+              $payment->FamilyID."','".
+              $payment->FYID."','".
+              $payment->Date."','".
+              $Fund->Amount."','".
+              (isset($payment->schedule) ? $payment->schedule : 'NULL')."','".
+              $payment->iMethod."','".
+              $Fund->Comment."','".
+              date('YmdHis')."',".
+              $_SESSION['user']->getId().",'".
+              $payment->type."',".
+              $Fund->FundID.','.
+              $payment->DepositID.','.
+              (isset($payment->iCheckNo) ? $payment->iCheckNo : 'NULL').",'".
+              (isset($payment->tScanString) ? $payment->tScanString : 'NULL')."','".
+              (isset($payment->iAutID) ? $payment->iAutID : 'NULL')."','".
+              (isset($Fund->NonDeductible) ? $Fund->NonDeductible : 'NULL')."','".
+              $sGroupKey."')";
+
+
+--------
+
+
+.. _cleverstyle-php-shouldusecoalesce:
+
+Cleverstyle
+^^^^^^^^^^^
+
+:ref:`should-use-coalesce`, in modules/Feedback/index.php:37. 
+
+Cleverstyle nests ternary operators when selecting default values. Here, moving some of them to ?? will reduce the code complexity and make it more readable. Cleverstyle requires PHP 7.0 or more recent.
+
+.. code-block:: php
+
+    $Page->content(
+    	h::{'cs-form form'}(
+    		h::{'section.cs-feedback-form article'}(
+    			h::{'header h2.cs-text-center'}($L->Feedback).
+    			h::{'table.cs-table[center] tr| td'}(
+    				[
+    					h::{'cs-input-text input[name=name][required]'}(
+    						[
+    							'placeholder' => $L->feedback_name,
+    							'value'       => $User->user() ? $User->username() : (isset($_POST['name']) ? $_POST['name'] : '')
+    						]
+    					),
+    					h::{'cs-input-text input[type=email][name=email][required]'}(
+    						[
+    							'placeholder' => $L->feedback_email,
+    							'value'       => $User->user() ? $User->email : (isset($_POST['email']) ? $_POST['email'] : '')
+    						]
+    					),
+    					h::{'cs-textarea[autosize] textarea[name=text][required]'}(
+    						[
+    							'placeholder' => $L->feedback_text,
+    							'value'       => isset($_POST['text']) ? $_POST['text'] : ''
+    						]
+    					),
+    					h::{'cs-button button[type=submit]'}($L->feedback_send)
+    				]
+    			)
+    		)
+    	)
+    );
+
 Throw Functioncall
 ==================
 
@@ -782,15 +920,15 @@ $metadata contains data that may be in different formats. When it is a pure XML 
     			return $metadata;
     		}
 
-Dont Echo Error
-===============
+Don't Echo Error
+================
 
 .. _churchcrm-security-dontechoerror:
 
 ChurchCRM
 ^^^^^^^^^
 
-:ref:`dont-echo-error`, in wp-admin/includes/misc.php:74. 
+:ref:`don't-echo-error`, in wp-admin/includes/misc.php:74. 
 
 This is classic debugging code that should never reach production. mysqli_error() and mysqli_errno() provide valuable information is case of an error, and may be exploited by intruders.
 
@@ -809,7 +947,7 @@ This is classic debugging code that should never reach production. mysqli_error(
 Phpdocumentor
 ^^^^^^^^^^^^^
 
-:ref:`dont-echo-error`, in src/phpDocumentor/Plugin/Graphs/Writer/Graph.php:77. 
+:ref:`don't-echo-error`, in src/phpDocumentor/Plugin/Graphs/Writer/Graph.php:77. 
 
 Default development behavior : display the caught exception. Production behavior should not display that message, but log it for later review. Also, the return in the catch should be moved to the main code sequence.
 
@@ -1135,6 +1273,38 @@ This code prepares incoming '$values' for extraction. The keys are cleaned then 
                         $key = strtr($key, '=', '');
                         $key = strtr($key, ',', ';');
                         $keys = explode(';', $key);
+
+Weak Typing
+===========
+
+.. _teampass-classes-weaktype:
+
+TeamPass
+^^^^^^^^
+
+:ref:`weak-typing`, in /includes/libraries/Tree/NestedTree/NestedTree.php:100. 
+
+The is_null() test detects a special situation, that requires usage of default values. The 'else' handles every other situations, including when the $node is an object, or anything else. $this->getNode() will gain from having typehints : it may be NULL, or the results of mysqli_fetch_object() : a stdClass object. The expected properties of nleft and nright are not certain to be available.
+
+.. code-block:: php
+
+    public function getDescendants($id = 0, $includeSelf = false, $childrenOnly = false, $unique_id_list = false)
+        {
+            global $link;
+            $idField = $this->fields['id'];
+    
+            $node = $this->getNode($id);
+            if (is_null($node)) {
+                $nleft = 0;
+                $nright = 0;
+                $parent_id = 0;
+                $personal_folder = 0;
+            } else {
+                $nleft = $node->nleft;
+                $nright = $node->nright;
+                $parent_id = $node->$idField;
+                $personal_folder = $node->personal_folder;
+            }
 
 __debugInfo() Usage
 ===================

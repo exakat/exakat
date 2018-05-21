@@ -29,6 +29,9 @@ class BuriedAssignation extends Analyzer {
     public function analyze() {
         $this->atomIs('Assignation')
              ->hasNoIn('EXPRESSION')
+             ->hasNoParent('Declare', array('ARGUMENT'))
+             ->hasNoParent('For', array('EXPRESSION', 'INIT', 'FINAL', 'INCREMENT'))
+
              ->codeIs('=')
 
              // avoid chained assignation
@@ -39,7 +42,7 @@ class BuriedAssignation extends Analyzer {
              ->hasNoIn(array('CONST', 'CONDITION', 'PPP', 'STATIC'))
              ->back('first');
         $this->prepareQuery();
-        
+
         // Special for for(;;) : only if several instructions with comma
         $this->atomIs('For')
              ->outIs(array('INIT', 'FINAL', 'INCREMENT'))

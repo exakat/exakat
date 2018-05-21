@@ -49,6 +49,7 @@ class Docs {
     private $parameter_list         = array();
     private $glossary               = array();
     private $text                   = '';
+    private $ini_themes_config      = '';
     
     private $exakat_site            = '';
     private $exakat_version         = '';
@@ -69,6 +70,7 @@ class Docs {
                              'Dead code',
                              'Coding Conventions',
                              'Suggestions',
+
                              'Wordpress',
                              'Slim',
                              'ZendFramework',
@@ -147,6 +149,7 @@ class Docs {
         $this->generateAnalyzerList();
         $this->makeUrlList();
         $this->getExternalLibrary();
+        $this->prepareIniThemes();
         
         $this->getExakatInfo();
         $this->build_reports();
@@ -350,6 +353,7 @@ SQL
                             'APPLICATIONS'           => $this->applications,
                             'ISSUES_EXAMPLES'        => join('', $this->issues_examples),
                             'PARAMETER_LIST'         => join('', $this->parameter_list),
+                            'INI_THEMES'             => $this->ini_themes_config,
                             );
     }
 
@@ -432,6 +436,14 @@ $exampleTxt
             }
     
             $section .= $reportIni['name']. " is a $reportIni[type] report format.\n\n";
+
+            if (empty($reportIni['themes'])) {
+                $section .= $reportIni['name']. " doesn't depends on themes.\n\n";
+            } if (isset($reportIni['arbitrarylist']) && $reportIni['arbitrarylist'] == 1) {
+                $section .= $reportIni['name']. " accepts any arbitrary list of results.\n\n";
+            } else {
+                $section .= $reportIni['name']. " depends on the following ".count($reportIni['themes'])." themes : ".join(', ', $reportIni['themes']).".\n\n";
+            }
     
             $reportSection[] = $section;
         }
@@ -612,6 +624,32 @@ SPHINX;
         
         return array($desc, $ini['name']);
     }
+    
+    private function prepareIniThemes() {
+        $recipesList = '"'.implode('","',$this->recipes).'"';
+
+        $query = 'SELECT c.name,GROUP_CONCAT(a.folder || "/" || a.name) analyzers  
+                        FROM categories c
+                        JOIN analyzers_categories ac
+                            ON c.id = ac.id_categories
+                        JOIN analyzers a
+                            ON a.id = ac.id_analyzer
+                        WHERE c.name IN ('.$recipesList.')
+                        GROUP BY c.name';
+        $res = $this->analyzers->query($query);
+        
+        $config = array();
+        $list = array();
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $list[] = "`theme_ini_".strtolower($row['name'])."`_";
+            $analyzers = explode(',', $row['analyzers']);
+            sort($analyzers);
+            $analyzers = implode(',', $analyzers);
+            $config[] = "\n.. _theme_ini_".strtolower($row['name']).":\n\n".$row['name']."\n".str_repeat('-', strlen($row['name']))."\n\n| [$row[name]]\n|   analyzer[] = \"".str_replace(',', "\";\n|   analyzer[] = \"", $analyzers)."\";| \n\n";
+        }
+        
+        $this->ini_themes_config = count($list)." themes detailled here : \n\n* ".join("\n* ", $list)."\n\n\n".join("\n\n", $config);
+    }
 
     private function prepareText() {
         $recipesList = '"'.implode('","',$this->recipes).'"';
@@ -692,11 +730,11 @@ SPHINX;
     }
     
     private function replaceSpecials() {
-        $rst = file_get_contents('./docs/src/Recipes.rst');
+        $rst = file_get_contents('./docs/src/Themes.rst');
         $date = date('r');
         $hash = shell_exec('git rev-parse HEAD');
         $rst = preg_replace('/.. comment: Recipes details(.*)$/is',".. comment: Recipes details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->text",$rst);
-        print file_put_contents('docs/Recipes.rst',$rst)." octets written for Recipes\n";
+        print file_put_contents('docs/Themes.rst',$rst)." octets written for Recipes\n";
         
         $rst = file_get_contents('./docs/src/Rules.rst');
         $rst = preg_replace('/.. comment: Rules details(.*)$/is',".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$this->rules",$rst);

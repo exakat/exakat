@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 15 May 2018 09:45:30 +0000
-.. comment: Generation hash : 2c21d5bb991fc61cb9b04925b1ef5c0872159f78
+.. comment: Generation date : Mon, 21 May 2018 19:53:08 +0000
+.. comment: Generation hash : ce65af1a6be7816f64f66517ad28e07843edc1f7
 
 
 .. _$http\_raw\_post\_data:
@@ -1957,11 +1957,13 @@ They are difficult to spot, and may be confusing. It is advised to place them in
    }
    ?>
 
-+------------+------------------------------+
-| Short name | Structures/BuriedAssignation |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++------------+---------------------------------------------------------------------------------------+
+| Short name | Structures/BuriedAssignation                                                          |
++------------+---------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                        |
++------------+---------------------------------------------------------------------------------------+
+| Examples   | :ref:`xoops-structures-buriedassignation`, :ref:`mautic-structures-buriedassignation` |
++------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -2400,6 +2402,50 @@ See also `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/al
 +------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _cant-instantiate-class:
+
+Cant Instantiate Class
+######################
+
+
+When constructor is not public, it is not possible to instantiate such a class. Either this is a conception choice, or there are factories to handle that. Either way, it is not possible to call new on such class. 
+
+PHP reports an error similar to this one : 'Call to private Y::`'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ from invalid context'.
+
+.. code-block:: php
+
+   <?php
+   
+   //This is the way to go
+   $x = X::factory();
+   
+   //This is not possible
+   $x = new X();
+   
+   class X {
+       //This is also the case with proctected '__construct
+       private function '__construct() {}
+   
+       static public function factory() {
+           return new X();
+       }
+   }
+   
+   ?>
+
+
+See also `In a PHP5 class, when does a private constructor get called? <https://stackoverflow.com/questions/26079/in-a-php5-class-when-does-a-private-constructor-get-called>`_,
+         `Named Constructors in PHP <http://verraes.net/2014/06/named-constructors-in-php/>`_ and 
+         `PHP Constructor Best Practices And The Prototype Pattern <http://ralphschindler.com/2012/03/09/php-constructor-best-practices-and-the-prototype-pattern>`_.
+
++------------+------------------------------+
+| Short name | Classes/CantInstantiateClass |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -4110,8 +4156,9 @@ It is highly recommended to unset blind variables when they are set up as refere
    //$array === array(3,4,5,6);
    
    // This does nothing (apparently)
+   // $a is already a reference, even if it doesn't show here.
    foreach($array as $a) {}
-   //$array === array(3,4,5,6);
+   //$array === array(3,4,5,5);
    
    ?>
 
@@ -4447,6 +4494,43 @@ The following code act directly upon PHP incoming variables like $_GET and $_POS
 
 
 
+.. _do-in-base:
+
+Do In Base
+##########
+
+
+Use SQL expression to compute aggregates. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Efficient way
+   $res = $db->query('SELECT sum(e) AS sumE FROM table WHERE condition');
+   
+   // The sum is already done
+   $row = $res->fetchArray();
+   $c += $row['sumE'];
+   
+   // Slow way
+   $res = $db->query('SELECT e FROM table WHERE condition');
+   
+   // This aggregates the column e in a slow way
+   while($row = $res->fetchArray()) { 
+       $c += $row['e'];
+   }
+   
+   ?>
+
++------------+-----------------------+
+| Short name | Performances/DoInBase |
++------------+-----------------------+
+| Themes     | :ref:`Performances`   |
++------------+-----------------------+
+
+
+
 .. _don't-change-incomings:
 
 Don't Change Incomings
@@ -4475,6 +4559,54 @@ It is recommended to put the modified values in another variable, and keep the o
 +------------+--------------------------------------+
 | Themes     | :ref:`Analyze`                       |
 +------------+--------------------------------------+
+
+
+
+.. _don't-echo-error:
+
+Don't Echo Error
+################
+
+
+It is recommended to avoid displaying error messages directly to the browser.
+
+PHP's uses the 'display_errors' directive to control display of errors to the browser. This must be kept to 'off' when in production.
+
+.. code-block:: php
+
+   <?php
+   
+   // Inside a 'or' test
+   mysql_connect('localhost', $user, $pass) or 'die(mysql_error());
+   
+   // Inside a if test
+   $result = pg_query( $db, $query );
+   if( !$result )
+   {
+   	echo Erreur SQL: . pg_error();
+   	'exit;
+   }
+   
+   // Changing PHP configuration
+   ini_set('display_errors', 1);
+   // This is also a security error : 'false' means actually true.
+   ini_set('display_errors', 'false');
+   
+   ?>
+
+
+Error messages should be logged, but not displayed. 
+
+See also `Error reporting <https://php.earth/docs/security/intro#error-reporting>`_ and 
+         `List of php.ini directives <http://php.net/manual/en/ini.list.php>`_.
+
++------------+--------------------------------------------------------------------------------------+
+| Short name | Security/DontEchoError                                                               |
++------------+--------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security`                                                      |
++------------+--------------------------------------------------------------------------------------+
+| Examples   | :ref:`churchcrm-security-dontechoerror`, :ref:`phpdocumentor-security-dontechoerror` |
++------------+--------------------------------------------------------------------------------------+
 
 
 
@@ -4646,44 +4778,6 @@ When the value has to be prepared before usage, then save the filtered value in 
 +------------+-------------------------------+
 | Themes     | :ref:`Analyze`                |
 +------------+-------------------------------+
-
-
-
-.. _dont-echo-error:
-
-Dont Echo Error
-###############
-
-
-It is recommended to avoid displaying error messages directly to the browser.
-
-.. code-block:: php
-
-   <?php
-   
-   // Inside a 'or' test
-   mysql_connect('localhost', $user, $pass) or 'die(mysql_error());
-   
-   // Inside a if test
-   $result = pg_query( $db, $query );
-   if( !$result )
-   {
-   	echo Erreur SQL: . pg_error();
-   	'exit;
-   }
-   
-   ?>
-
-
-Error messages should be logged, but not displayed.
-
-+------------+--------------------------------------------------------------------------------------+
-| Short name | Security/DontEchoError                                                               |
-+------------+--------------------------------------------------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Security`                                                      |
-+------------+--------------------------------------------------------------------------------------+
-| Examples   | :ref:`churchcrm-security-dontechoerror`, :ref:`phpdocumentor-security-dontechoerror` |
-+------------+--------------------------------------------------------------------------------------+
 
 
 
@@ -14933,13 +15027,17 @@ PHP 7 introduced the ?? operator, that replaces longer structures to set default
    ?>
 
 
-Sample extracted from PHP docs `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
+Sample extracted from PHP docs `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_.
 
-+------------+------------------------------------+
-| Short name | Php/ShouldUseCoalesce              |
-+------------+------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
-+------------+------------------------------------+
+See also `New in PHP 7: null coalesce operator <https://lornajane.net/posts/2015/new-in-php-7-null-coalesce-operator>`_.
+
++------------+----------------------------------------------------------------------------------+
+| Short name | Php/ShouldUseCoalesce                                                            |
++------------+----------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions`                                               |
++------------+----------------------------------------------------------------------------------+
+| Examples   | :ref:`churchcrm-php-shouldusecoalesce`, :ref:`cleverstyle-php-shouldusecoalesce` |
++------------+----------------------------------------------------------------------------------+
 
 
 
@@ -16483,6 +16581,50 @@ See also `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_, 
 
 
 
+.. _strpos-too-much:
+
+Strpos Too Much
+###############
+
+
+Strpos covers the whole string before reporting 0. If the expected string is expected be at the beginning, or a fixed place, it is more stable to use substr() for comparison.
+
+The longer the haystack (the searched string), the more efficient is that trick. The string has to be 10k or more to have impact. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This always reads the same amount of string
+   if (substr($html, 0, 6) === '<html>') {
+   
+   }
+   
+   // When searching for a single character, $string[$position] is even faster
+   if ($html[0] === '<') {
+   
+   }
+   
+   // This is the best way, however the needle is found
+   if (strpos($html, '<html>') > 0) {
+   
+   }
+   
+   // When the search fails, the whole string has been read
+   if (strpos($html, '<html>') === 0) {
+   
+   }
+   
+   ?>
+
++------------+----------------------------+
+| Short name | Performances/StrposTooMuch |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
+
+
+
 .. _strpos()-like-comparison:
 
 Strpos()-like Comparison
@@ -17060,7 +17202,7 @@ Timestamp Difference
 
 ``time()`` and ``microtime()`` shouldn't be used to calculate duration. 
 
-time() and `'microtime() <http://www.php.net/microtime>`_ are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announced by IERS.
+``time()`` and ``microtime()`` are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on ``June, 30th`` or ``December 31th``, as announced by `IERS <https://www.iers.org/IERS/EN/Home/home_node.html>`_.
 
 .. code-block:: php
 
@@ -17079,7 +17221,10 @@ time() and `'microtime() <http://www.php.net/microtime>`_ are subject to variati
 When the difference may be rounded to a larger time unit (rounding the difference to days, or several hours), the variation may be ignored safely.
 
 When the difference is very small, it requires a better way to measure time difference, such as `Ticks <http://php.net/manual/en/control-structures.declare.php#control-structures.declare.ticks>'_, 
-`ext/hrtime <http://php.net/manual/en/book.hrtime.php>'_, or including a check on the actual time zone (`'ini_get() <http://www.php.net/ini_get>`_ with 'date.timezone').
+`ext/hrtime <http://php.net/manual/en/book.hrtime.php>'_, or including a check on the actual time zone (``ini_get()`` with 'date.timezone'). 
+
+See also `PHP DateTime difference – it’s a trap! <http://blog.codebusters.pl/en/php-datetime-difference-trap/>`_ and 
+           `PHP Daylight savings bug? <https://stackoverflow.com/questions/22519091/php-daylight-savings-bug>`_.
 
 +------------+---------------------------------------------------------------------------------------------+
 | Short name | Structures/TimestampDifference                                                              |
@@ -17411,6 +17556,52 @@ See also `How many parameters is too many ? <https://www.exakat.io/how-many-para
 +------------+-----------------------------+
 | Themes     | :ref:`Suggestions`          |
 +------------+-----------------------------+
+
+
+
+.. _typehinted-references:
+
+Typehinted References
+#####################
+
+
+Typehinted arguments have no need for references. Since they are only an object, they are already a reference.
+
+In fact, adding the & on the argument definition may lead to error like 'Only variables should be passed by reference'.
+
+This applies to the 'object' type hint, but not the the others, such as int or bool.
+
+.. code-block:: php
+
+   <?php
+       // a class
+       class X {
+           public $a = 3;
+       }
+   
+       // typehinted reference
+       //function foo(object &$x) works too
+       function foo(X &$x) {
+           $x->a = 1;
+       
+           return $x;
+       }
+   
+       // Send an object 
+       $y = foo(new X);
+   
+       // This prints 1;
+       print $y->a;
+   ?>
+
+
+See also `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_.
+
++------------+--------------------------------+
+| Short name | Functions/TypehintedReferences |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`                 |
++------------+--------------------------------+
 
 
 
@@ -18419,9 +18610,9 @@ Unkown Regex Options
 ####################
 
 
-PHP's regex support the following list of options : eimsuxADJSUX. They are explained in the manual : `http://php.net/manual/en/reference.pcre.pattern.modifiers.php <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_. 
+Regex support in PHP accepts the following list of options : ``eimsuxADJSUX``. 
 
-All other options are not supported, may be ignored or raise an error.
+All other letter used as option are not supported : depending on the situation, they may be ignored or raise an error.
 
 .. code-block:: php
 
@@ -18434,6 +18625,9 @@ All other options are not supported, may be ignored or raise an error.
    if (preg_match('/\d+/php', $string, $results)) { }
    
    ?>
+
+
+See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
 
 +------------+------------------------------+
 | Short name | Structures/UnknownPregOption |
@@ -19141,6 +19335,45 @@ They are probably dead code, unless they are called dynamically.
 
 
 
+.. _unused-private-methods:
+
+Unused Private Methods
+######################
+
+
+Private methods that are not used are dead code. 
+
+Private methods are reserved for the defining class. Thus, they must be used with $this or any variation of self:: 
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo {
+       // Those methods are used
+       private function method() {}
+       private static function staticMethod() {}
+   
+       // Those methods are not used
+       private function unusedMethod() {}
+       private static function staticUnusedMethod() {}
+       
+       public function bar() {
+           self::staticMethod();
+           $this->method();
+       }
+   }
+   
+   ?>
+
++------------+----------------------------------------------+
+| Short name | Classes/UnusedPrivateMethod                  |
++------------+----------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++------------+----------------------------------------------+
+
+
+
 .. _unused-private-properties:
 
 Unused Private Properties
@@ -19271,43 +19504,6 @@ Note that this analysis ignores functions that return void (same meaning that PH
 
 +------------+----------------------------------------------+
 | Short name | Functions/UnusedReturnedValue                |
-+------------+----------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+------------+----------------------------------------------+
-
-
-
-.. _unused-static-methods:
-
-Unused Static Methods
-#####################
-
-
-List of all static methods that are not used. This looks like dead code.
-
-.. code-block:: php
-
-   <?php
-   
-   class Foo {
-       // Those methods are used
-       private function method() {}
-       private static function staticMethod() {}
-   
-       // Those methods are not used
-       private function unusedMethod() {}
-       private static function staticUnusedMethod() {}
-       
-       public function bar() {
-           self::staticMethod();
-           $this->method();
-       }
-   }
-   
-   ?>
-
-+------------+----------------------------------------------+
-| Short name | Classes/UnusedPrivateMethod                  |
 +------------+----------------------------------------------+
 | Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +------------+----------------------------------------------+
@@ -21467,6 +21663,37 @@ Variable global such are valid in PHP 5.6, but no in PHP 7.0. They should be rep
 
 
 
+.. _weak-typing:
+
+Weak Typing
+###########
+
+
+The test on a variable is not enough. The variable is simply checked for null, then used as an object or an array.
+
+.. code-block:: php
+
+   <?php
+   
+   if ($a !== null) {
+       echo $a->b;
+   }
+   
+   ?>
+
+
+See also `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_.
+
++------------+----------------------------------+
+| Short name | Classes/WeakType                 |
++------------+----------------------------------+
+| Themes     | :ref:`Analyze`                   |
++------------+----------------------------------+
+| Examples   | :ref:`teampass-classes-weaktype` |
++------------+----------------------------------+
+
+
+
 .. _while(list()-=-each()):
 
 While(List() = Each())
@@ -22391,7 +22618,7 @@ A fatal error is displayed, when an exception is not intercepted in the `'__toSt
 
 ::
 
-    PHP Fatal error:  Method myString::`'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ must not throw an exception, caught Exception: 'Exception message' in file.php
+    PHP Fatal error:  Method myString::`'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ must not throw an exception, caught Exception: 'Exception message' in ``file.php``
 
 See also `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_.
 

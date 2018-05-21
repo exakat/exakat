@@ -110,6 +110,12 @@ class Stats extends Reports {
         
         return json_encode($results);
     }
+
+    public function dependsOnAnalysis() {
+        return array('Stats', 
+                     );
+    }
+
 }
 
 ?>

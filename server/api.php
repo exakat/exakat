@@ -78,12 +78,24 @@ function init($args) {
     
     $vcs = unparse_url($url);
 
-    if (($id = array_search('-p', $args)) === false || 
-        !($project = $args[$id + 1])) {
+    if (($id = array_search('-p', $args)) === false) {
         $project = autoprojectname();
+    } elseif (!($project = $args[$id + 1])) {
+        $project = autoprojectname();
+    } elseif (file_exists("projects/$project")) {
+        error('Project already exists', '');
+    }
+    
+    $extra = '';
+    if (($id = array_search('-branch', $args)) !== false) {
+        $extra .= ' -branch '.escapeshellarg($args[$id + 1]).' ';
     }
 
-    shell_exec("__PHP__ __EXAKAT__ queue init -p ".escapeshellarg($project)." -R ".escapeshellarg($vcs));
+    if (($id = array_search('-tag', $args)) !== false) {
+        $extra .= ' -tag '.escapeshellarg($args[$id + 1]).' ';
+    }
+
+    shell_exec('__PHP__ __EXAKAT__ queue init -p '.escapeshellarg($project).' -R '.escapeshellarg($vcs).$extra);
     serverLog("init : $project $vcs ".date('r'));
 
     echo json_encode(array('project' => $project, 
@@ -100,9 +112,6 @@ function project($args) {
     }
 
     $project = $args[$id + 1];
-    if (!file_exists("projects/$project")) {
-        error('No project available', '');
-    }
 
     shell_exec("__PHP__ __EXAKAT__ queue project -p ".escapeshellarg($project));
     serverLog("project : $project ".date('r'));
@@ -117,9 +126,6 @@ function remove($args) {
     }
 
     $project = $args[$id + 1];
-    if (!file_exists("projects/$project")) {
-        error('No project available', '');
-    }
 
     shell_exec("__PHP__ __EXAKAT__ queue remove -p ".escapeshellarg($project));
     serverLog("remove : $project ".date('r'));
@@ -134,9 +140,6 @@ function report($args) {
     }
 
     $project = $args[$id + 1];
-    if (!file_exists("projects/$project")) {
-        error('No project available', '');
-    }
 
     $id = array_search('-format', $args);
     $format = $args[$id + 1];
@@ -224,10 +227,6 @@ function config($args) {
 
     $project = $args[$id + 1];
 
-    if (!file_exists("projects/$project")) {
-        error('No project available', '');
-    }
-
     $directives = array_keys($args, '-c');
     
     if (empty($directives)) {
@@ -239,7 +238,7 @@ function config($args) {
         $relay .= ' -c '.escapeshellarg($args[$c + 1]);
     }
 
-    echo shell_exec("__PHP__ __EXAKAT__ config -p ".escapeshellarg($project)." $relay -json");
+    echo shell_exec("__PHP__ __EXAKAT__ queue config -p ".escapeshellarg($project)." $relay -json");
 }
 
 function stats($args) {

@@ -127,11 +127,11 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         return true;
     }
 
-    function current() {
+    public function current() {
         return current($this->data);
     }
 
-    function key() {
+    public function key() {
         if ($this->type === self::ARRAY) {
             return key($this->data);
         }
@@ -139,11 +139,11 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
         return null;
     }
 
-    function next() {
+    public function next() {
         return next($this->data);
     }
     
-    function valid() {
+    public function valid() {
         if ($this->type === self::ARRAY) {
             return key($this->data) !== null;
         }

@@ -1,7 +1,7 @@
 <?php
 
 abstract class abstractClass {
-    function ac() { $a++; }
+    abstract function ac();
 }
 
 class abstractSubClass extends abstractClass {

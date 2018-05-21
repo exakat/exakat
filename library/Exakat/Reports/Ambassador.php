@@ -105,8 +105,9 @@ class Ambassador extends Reports {
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project_name);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
+            $project_name = $this->config->project_name;
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
             $menu = file_get_contents($this->tmpName.'/datas/menu.html');
             $inventories = '';
@@ -141,7 +142,7 @@ class Ambassador extends Reports {
         if (strpos($html, '{{BLOC-JS}}') !== false) {
             $html = str_replace('{{BLOC-JS}}', '', $html);
         }
-        $html = str_replace('{{TITLE}}', 'PHP Static analysis for '.$this->config->project, $html);
+        $html = str_replace('{{TITLE}}', 'PHP Static analysis for '.$this->config->project_name, $html);
 
         file_put_contents($this->tmpName.'/datas/'.$file.'.html', $html);
     }
@@ -181,7 +182,8 @@ class Ambassador extends Reports {
         $this->generatePerformances();
         $this->generateSuggestions();
         $this->generateSecurity();
-        
+        $this->generateDeadCode();
+
         $this->generateAnalyzersList();
         $this->generateExternalLib();
 
@@ -299,7 +301,7 @@ class Ambassador extends Reports {
     }
 
     protected function setPHPBlocs($description){
-        $description = preg_replace_callback("#<\?php(.*?)\?>#is", function ($x) {
+        $description = preg_replace_callback("#<\?php(.*?)\n\?>#is", function ($x) {
             $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHP_EOL.PHPSyntax($x[1]).'?&gt;</pre>';
             return $return;
         }, $description);
@@ -412,6 +414,11 @@ class Ambassador extends Reports {
     private function generateSecurity() {
         $this->generateIssuesEngine('security_issues',
                                     $this->getIssuesFaceted('Security') );
+    }
+
+    private function generateDeadCode() {
+        $this->generateIssuesEngine('deadcode_issues',
+                                    $this->getIssuesFaceted('Dead code') );
     }
 
     private function generateSuggestions() {
@@ -743,7 +750,7 @@ JAVASCRIPT;
 
         // bloc Issues
         $issues = $this->getIssuesBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
+//        $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
         $tags[] = 'SCRIPTISSUES';
         $code[] = $issues['script'];
 
@@ -1565,14 +1572,15 @@ SQL;
         $analyserHTML = '';
 
         foreach ($analysers as $analyser) {
-            $analyserHTML.= "<tr>";
-            $analyserHTML.='<td>'.$analyser['label'].'</td>
+            $analyserHTML .= '<tr>';
+                                
+            $analyserHTML.= '<td><a href="issues.html#analyzer='.$this->toId($analyser['analyzer']).'" title="'.$analyser['label'].'">'.$analyser['label'].'</a></td>
                         <td>'.$analyser['recipes'].'</td>
                         <td>'.$analyser['issues'].'</td>
                         <td>'.$analyser['files'].'</td>
                         <td>'.$analyser['severity'].'</td>
                         <td>'.$this->frequences[$analyser['analyzer']].' %</td>';
-            $analyserHTML.= "</tr>";
+            $analyserHTML .= '</tr>';
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyserHTML);
@@ -1673,8 +1681,10 @@ SQL;
         $filesHTML = '';
 
         foreach ($files as $file) {
-            $filesHTML.= "<tr>";
-            $filesHTML.='<td>'.$file['file'].'</td>
+            $filesHTML.= '<tr>';
+                               
+
+            $filesHTML.='<td> <a href="issues.html#file='.$this->toId($file['file']).'" title="'.$file['file'].'">'.$file['file'].'</a></td>
                         <td>'.$file['loc'].'</td>
                         <td>'.$file['issues'].'</td>
                         <td>'.$file['analyzers'].'</td>';
@@ -3712,7 +3722,7 @@ HTML;
     }
     
     protected function toId($name) {
-        return str_replace('/', '_', strtolower($name));
+        return str_replace(array('/', '*', '(', ')', '.'), '_', strtolower($name));
     }
     
     protected function makeAuditDate(&$finalHTML) {

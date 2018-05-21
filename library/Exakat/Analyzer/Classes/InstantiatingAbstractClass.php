@@ -27,6 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class InstantiatingAbstractClass extends Analyzer {
     public function analyze() {
+        // abstract class x {}
+        // new x();
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs(array('Newcall', 'Identifier', 'Nsname'))

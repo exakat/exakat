@@ -100,3 +100,5 @@ Nowdoc
 isset
 CWE
 Boolean
+Preprocessing
+autoload

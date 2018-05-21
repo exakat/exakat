@@ -6,18 +6,20 @@ Exakat commands
 List of commands :
 ------------------
 
-* anonymize
-* catalog
-* clean
-* cleandb
-* doctor
-* help
-* init
-* project
-* report
-* remove
-* update
-* upgrade
+* `anonymize`_
+* `catalog`_
+* `clean`_
+* `cleandb`_
+* `doctor`_
+* `help`_
+* `init`_
+* `project`_
+* `report`_
+* `remove`_
+* `update`_
+* `upgrade`_
+
+:: _anonymize:
 
 anonymize
 ---------
@@ -60,6 +62,8 @@ Tips
 
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
 
+:: _catalog:
+
 catalog
 -------
 
@@ -75,6 +79,8 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 | -json     | No  | Returns the catalog as JSON, for further processing.                        |
 +-----------+-----+-----------------------------------------------------------------------------+
+
+:: _clean:
 
 clean
 -----
@@ -94,6 +100,7 @@ Options
 | -v        | No  | Verbose mode                                                                |
 +-----------+-----+-----------------------------------------------------------------------------+
 
+:: _cleandb:
 
 cleandb
 -------
@@ -117,6 +124,7 @@ Options
 | -v        | No  | Verbose mode                                                                |
 +-----------+-----+-----------------------------------------------------------------------------+
 
+:: _doctor:
 
 doctor
 ------
@@ -274,6 +282,8 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 
 
+:: _help:
+
 help
 ----
 
@@ -293,6 +303,8 @@ This displays :
                 php exakat.phar project -p <Project name>
                 php exakat.phar doctor
                 php exakat.phar version
+
+:: _init:
 
 init
 ----
@@ -357,6 +369,7 @@ Examples
     php exakat.phar init -p copyProject -copy -R /var/www/public_html
 
 
+:: _project:
 
 project
 -------
@@ -382,6 +395,7 @@ Options
 | -v        | No  | Verbose mode                                                                |
 +-----------+-----+-----------------------------------------------------------------------------+
 
+:: _remove:
 
 remove
 ------
@@ -404,6 +418,9 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 | -v        | No  | Verbose mode                                                                |
 +-----------+-----+-----------------------------------------------------------------------------+
+
+
+:: _report:
 
 report
 ------
@@ -475,6 +492,8 @@ Report formats
 | Xml         | XML format.                                                                 |
 +-------------+-----------------------------------------------------------------------------+
 
+:: _update:
+
 update
 ------
 
@@ -496,6 +515,8 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 | -v        | No  | Verbose mode                                                                |
 +-----------+-----+-----------------------------------------------------------------------------+
+
+:: _upgrade:
 
 
 upgrade

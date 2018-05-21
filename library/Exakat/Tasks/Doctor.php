@@ -90,10 +90,19 @@ class Doctor extends Tasks {
         $stats['exakat']['build']       = Exakat::BUILD;
         $stats['exakat']['exakat.ini']  = $this->array2list($this->config->configFiles);
         $stats['exakat']['graphdb']     = $this->config->graphdb;
-        $stats['exakat']['reports']     = $this->array2list($this->config->project_reports);
+        $reportList = array();
+        foreach($this->config->project_reports as $project_report) {
+            $className = "\\Exakat\\Reports\\$project_report";
+            if (class_exists($className)) {
+                $reportList[] = $project_report;
+            }
+        }
+        sort($reportList);
+        $stats['exakat']['reports']      = $this->array2list($reportList);
         
-        $stats['exakat']['themes']      = $this->array2list(array_merge($this->config->project_themes,
-                                                                        array_keys($this->config->themas)));
+        $stats['exakat']['themes']       = $this->array2list($this->config->project_themes);
+        $stats['exakat']['extra themes'] = $this->array2list(array_keys($this->config->themas));
+
         $stats['exakat']['tokenslimit'] = number_format((int) $this->config->token_limit, 0, '', ' ');
         
 
@@ -187,7 +196,7 @@ class Doctor extends Tasks {
             }
         }
 
-        $stats['folders']['projects/test'] = file_exists($this->config->projects_root.'/projects/test/') ? 'Yes' : 'No';
+        $stats['folders']['projects/test']    = file_exists($this->config->projects_root.'/projects/test/') ? 'Yes' : 'No';
         $stats['folders']['projects/default'] = file_exists($this->config->projects_root.'/projects/default/') ? 'Yes' : 'No';
         $stats['folders']['projects/onepage'] = file_exists($this->config->projects_root.'/projects/onepage/') ? 'Yes' : 'No';
 
@@ -219,8 +228,6 @@ class Doctor extends Tasks {
                 }
             }
             $this->checkGremlinServer();
-        } elseif ($graphdb === 'neo4j') {
-            // Nothing, really
         } else {
             assert(false, "Checking install with unknown graphdb : '$graphdb'");
         }

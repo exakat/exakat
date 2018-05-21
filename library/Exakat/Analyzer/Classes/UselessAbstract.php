@@ -27,15 +27,17 @@ use Exakat\Analyzer\Analyzer;
 
 class UselessAbstract extends Analyzer {
     public function dependsOn() {
-        return array('Classes/OnlyStaticMethods');
+        return array('Classes/OnlyStaticMethods',
+//                     'Classes/OnlyConst',
+                    );
     }
     
     public function analyze() {
         // abstract class that are never used
         $this->atomIs('Class')
-             ->analyzerIsNot('Classes/OnlyStaticMethods')
              ->hasOut('ABSTRACT')
-             ->savePropertyAs('fullnspath', 'fnp')
+             ->analyzerIsNot('Classes/OnlyStaticMethods')
+//             ->analyzerIsNot('Classes/OnlyConst')
              ->hasNoOut('DEFINITION')
              ->back('first');
         $this->prepareQuery();
@@ -44,17 +46,23 @@ class UselessAbstract extends Analyzer {
         $this->atomIs('Class')
              ->hasOut('ABSTRACT')
              ->hasOut('DEFINITION')
-             ->outIs('BLOCK')
-             ->outIs('EXPRESSION')
-             ->atomIs('Void')
-             ->back('first');
+             ->hasNoOut(array('METHOD', 'MAGICMETHOD', 'USE', 'CONST', 'PPP'));
         $this->prepareQuery();
 
-        // abstract class with not methods
+        // abstract class with not methods nor const nor trait
         $this->atomIs('Class')
              ->hasOut('ABSTRACT')
              ->hasOut('DEFINITION')
-             ->raw('not( where( __.out("METHOD").hasLabel("Method", "Void") ) )');
+             ->raw('not( where( __.out().hasLabel("Method", "Magicmethod", "Usetrait", "Ppp", "Const") ) )');
+        $this->prepareQuery();
+
+        // abstract class with not abstract methods
+        $this->atomIs('Class')
+             ->hasOut('ABSTRACT')
+             ->hasOut('DEFINITION')
+             ->hasOut(array('METHOD', 'MAGICMETHOD'))
+             ->raw('not( where( __.out("METHOD", "MAGICMETHOD").where( __.out("ABSTRACT"))) )')
+             ->raw('not( where( __.out("USE").out("USE").in("DEFINITION").out("METHOD", "MAGICMETHOD").where( __.out("ABSTRACT"))) )');
         $this->prepareQuery();
      }
 }

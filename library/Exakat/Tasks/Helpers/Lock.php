@@ -25,11 +25,11 @@ namespace Exakat\Tasks\Helpers;
 class Lock {
     private $path = null;
     
-    function __construct($path, $name) {
+    public function __construct($path, $name) {
         $this->path = $path.'/'.md5($name);
     }
 
-    function check() {
+    public function check() {
         $fp = @fopen($this->path, 'x');
         if ($fp === false) {
             $this->path = null;
@@ -43,7 +43,7 @@ class Lock {
         }
     }
     
-    function __destruct() {
+    public function __destruct() {
         if (!empty($this->path)) {
             unlink($this->path);
         }

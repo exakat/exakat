@@ -31,17 +31,10 @@ class HardcodedPasswords extends Analyzer {
         $passwordsFunctions = $this->loadJson('php_logins.json');
 
         $functions = (array) $passwordsFunctions->functions;
-
-        $positions = array();
-        foreach($functions as $function => $position) {
-            if (isset($positions[$position])) {
-                $positions[$position][] = '\\'.$function;
-            } else {
-                $positions[$position] = array('\\'.$function);
-            }
-        }
+        $positions = array_groupby( $functions);
 
         foreach($positions as $position => $function) {
+            $function = makeFullNsPath($function);
             $this->atomFunctionIs($function)
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('String')

@@ -161,7 +161,7 @@ Here are the currently available options in Exakat's configuration file : config
 Custom themes
 #############
 
-Create custom themes by creating a 'config/themas.ini' directive files. 
+Create custom themes by creating a 'config/themes.ini' directive files. 
 
 This file is a .INI file, build with several sections. Each section is the name of a theme : for example, 'mine' is the name for the theme below. 
 
@@ -226,6 +226,33 @@ Here are the currently available options in Exakat's project configuration file 
 +-----------------------+-------------------------------------------------------------------------------------------+
 | project_packagist     | This is the packagist name for the code, when the code is fetched with composer.          |
 +-----------------------+-------------------------------------------------------------------------------------------+
+
+Adding/Excluding files
+----------------------
+
+ignore_dirs and include_dirs are the option used to select files within a folder. Here are some tips to choose 
+
+* From the full list of files, ignore_dirs[] is applied, then include_dirs is applied. The remaining list is processed.
+* ignore one file : 
+| `ignore_dirs[] = "/path/to/file.php"`
+
+* ignore one dir : 
+| `ignore_dirs[] = "/path/to/dir/"`
+
+* ignore siblings but include one dir : 
+| `ignore_dirs[] = "/path/to/parent/";`
+| `include_dirs[] = "/path/to/parent/dir/"`
+
+* ignore every name containing 'test' : 
+| `ignore_dirs[] = "test";`
+
+* only include one dir (and exclude the rest): 
+| `include_dirs[] = "/path/to/dir/";`
+
+* omitting include_dirs defaults to `"include_dirs[] = ""`
+* omitting ignore_dirs defaults to `"ignore_dirs[] = ""`
+* including or ignoring files multiple times only has effect once
+
 
 Specific analyser configurations
 --------------------------------

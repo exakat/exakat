@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class MalformedOctal extends Analyzer {
-    public $phpVersion = '7.0-';
+    protected $phpVersion = '7.0-';
     
     public function analyze() {
         // malformed Octals

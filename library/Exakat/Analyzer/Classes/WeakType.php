@@ -1,0 +1,101 @@
+<?php
+/*
+ * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * This file is part of Exakat.
+ *
+ * Exakat is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Exakat is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Exakat.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * The latest code can be found at <http://exakat.io/>.
+ *
+*/
+
+namespace Exakat\Analyzer\Classes;
+
+use Exakat\Analyzer\Analyzer;
+
+class WeakType extends Analyzer {
+    public function analyze() {
+        // if ($a !== null){    $a->method(); }
+        $this->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->atomIs('Comparison')
+             ->codeIs(array('!=', '!=='))
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs('Null')
+             ->inIs()
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'variable')
+             ->back('first')
+             
+             ->outIs('THEN')
+             ->atomInside(array('Variableobject', 'Variablearray'))
+             ->samePropertyAs('code', 'variable')
+             ->back('first');
+        $this->prepareQuery();
+
+        // if ($a === null) else {    $a->method(); }
+        $this->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->atomIs('Comparison')
+             ->codeIs(array('==', '==='))
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs('Null')
+             ->inIs()
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'variable')
+             ->back('first')
+             
+             ->outIs('ELSE')
+             ->atomInside(array('Variableobject', 'Variablearray'))
+             ->samePropertyAs('code', 'variable')
+             ->back('first');
+        $this->prepareQuery();
+        
+        // if (!is_null($a)){    $a->method(); }
+        $this->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->atomIs('Not')
+             ->outIs('NOT')
+             ->functioncallIs('\is_null')
+             ->outIs('ARGUMENT')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'variable')
+             ->back('first')
+             
+             ->outIs('THEN')
+             ->atomInside(array('Variableobject', 'Variablearray'))
+             ->samePropertyAs('code', 'variable')
+             ->back('first');
+        $this->prepareQuery();
+
+        // if (is_null($a)) else {    $a->method(); }
+        $this->atomIs('Ifthen')
+             ->outIs('CONDITION')
+             ->functioncallIs('\is_null')
+             ->outIs('ARGUMENT')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'variable')
+             ->back('first')
+             
+             ->outIs('ELSE')
+             ->atomInside(array('Variableobject', 'Variablearray'))
+             ->samePropertyAs('code', 'variable')
+             ->back('first');
+        $this->prepareQuery();
+    }
+}
+
+?>

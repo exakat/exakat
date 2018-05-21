@@ -59,6 +59,9 @@ abstract class Reports {
     protected $themes    = null;
 
     public function __construct($config) {
+        if ($config === null) {
+            return;
+        }
         $this->config = $config;
 
         $path = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";

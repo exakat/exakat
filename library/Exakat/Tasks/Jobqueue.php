@@ -20,7 +20,6 @@
  *
 */
 
-
 namespace Exakat\Tasks;
 
 use Exakat\Config as ConfigExakat;
@@ -175,7 +174,7 @@ class Jobqueue extends Tasks {
     }
 
     private function processReport($job) {
-        $config = new Config($job);
+        $config = new ConfigExakat($job);
         $analyze = new Report($this->gremlin, $config, Tasks::IS_SUBTASK);
 
         display( 'processing report job '.$job[1].PHP_EOL);

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy â€“ Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy Ð Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -68,17 +68,10 @@ class Files extends Tasks {
         display( "Searching for files \n");
         self::findFiles($path, $files, $ignoredFiles, $this->config);
         $tokens = $this->countTokens($path, $files, $ignoredFiles);
-        $i = array();
-        foreach($ignoredFiles as $file => $reason) {
-            $i[] = array('file'   => $file,
-                         'reason' => $reason);
-        }
-        $ignoredFiles = $i;
-        $this->datastore->cleanTable('ignoredFiles');
-        $this->datastore->addRow('ignoredFiles', $ignoredFiles);
 
         $this->datastore->addRow('hash', array('files'  => count($files),
                                                'tokens' => $tokens));
+
         if (empty($files)) {
             throw new NoFileToProcess($this->config->project);
         }
@@ -292,21 +285,14 @@ class Files extends Tasks {
         $files = array_diff($files, array_keys($toRemoveFromFiles));
         unset($toRemoveFromFiles);
 
-        $this->datastore->cleanTable('files');
-        $this->datastore->addRow('files', array_map(function ($a) {
-                return array('file'   => $a);
-        }, $files));
-        $this->datastore->reload();
-
         display('Check short tag (normal pass)');
-        $stats['php'] = count($files);
-        $shell = 'cat '.$tmpFileName.' | xargs -n1 -P5 '.$this->config->php.' -d short_open_tag=0 -d error_reporting=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
+        $shell = 'cd '.$this->config->projects_root.'/projects/'.$dir.'/code/; cat '.$tmpFileName.' | xargs -n1 -P5 '.$this->config->php.' -d short_open_tag=0 -d error_reporting=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
 
         $resultNosot = shell_exec($shell);
         $tokens = (int) array_sum(explode("\n", $resultNosot));
 
         display('Check short tag (with directive activated)');
-        $shell = 'cat '.$tmpFileName.' |  xargs -n1 -P5 '.$this->config->php.' -d short_open_tag=1 -d error_reporting=0 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
+        $shell = 'cd '.$this->config->projects_root.'/projects/'.$dir.'/code/; cat '.$tmpFileName.' |  xargs -n1 -P5 '.$this->config->php.' -d short_open_tag=1 -d error_reporting=0 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
 
         $resultSot = shell_exec($shell);
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
@@ -334,11 +320,18 @@ class Files extends Tasks {
 
             if (count($nosot) != count($sot)) {
                 $this->log->log('Error in short open tag analyze : not the same number of files '.count($nosot).' / '.count($sot).".\n");
-                display('Short tag KO');
+            } else {
+                display('Short tag has diff');
                 $shortOpenTag = array();
                 foreach($nosot as $file => $countNoSot) {
                     if ($sot[$file] != $countNoSot) {
-                        $shortOpenTag[] = array('file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $file));
+                        $file = trim($file, '.');
+                        $shortOpenTag[] = array('file' => trim($file, '.'));
+                        if (ini_get('short_open_tag') == false) {
+                            $ignoredFiles[$file] = 'Uses short tags';
+                            $id = array_search($file, $files);
+                            unset($files[$id]);
+                        } 
                     }
                 }
                 $this->datastore->addRow('shortopentag', $shortOpenTag);
@@ -347,6 +340,21 @@ class Files extends Tasks {
             display('Short tag OK');
         }
 
+        $i = array();
+        foreach($ignoredFiles as $file => $reason) {
+            $i[] = compact('file', 'reason');
+        }
+        $ignoredFiles = $i;
+        $this->datastore->cleanTable('ignoredFiles');
+        $this->datastore->addRow('ignoredFiles', $ignoredFiles);
+
+        $this->datastore->cleanTable('files');
+        $this->datastore->addRow('files', array_map(function ($a) {
+                return array('file'   => $a);
+        }, $files));
+        $this->datastore->reload();
+
+        $stats['php'] = count($files);
         $this->datastore->addRow('hash', $stats);
 
         // check for special files
@@ -451,26 +459,28 @@ class Files extends Tasks {
         $ignoreDirs = array();
         foreach($ignore_dirs as $ignore) {
             if ($ignore[0] == '/') {
-                $d = $config->projects_root.'/projects/'.$dir.'/code'.$ignore;
+                $d = "$config->projects_root/projects/$dir/code$ignore";
                 if (!file_exists($d)) {
                     continue;
                 }
-                $ignoreDirs[] = $ignore.'.*';
+                $ignoreDirs[] = $ignore;
             } else {
-                $ignoreDirs[] = '.*'.$ignore.'.*';
+                $ignoreDirs[] = ".*$ignore.*";
             }
         }
         if (empty($ignoreDirs)) {
-            $ignoreDirsRegex = '';
+            $ignoreDirsRegex = '#^$#';
         } else {
-            $ignoreDirsRegex = '#^('.implode('|', $ignoreDirs).')#';
+            $ignoreDirsRegex = '#('.implode('|', $ignoreDirs).')#';
         }
 
         // Regex to include files and folders
         $includeDirs = array();
         foreach($config->include_dirs as $include) {
-            if ($include === '/') { continue; }
-            if ($include[0] == '/') {
+            if ($include === '/') { 
+                $includeDirs[] = $include.'.*';
+            }
+            if ($include[0] === '/') {
                 $d = "$config->projects_root/projects/$dir/code{$include}";
                 if (!file_exists($d)) {
                     continue;
@@ -486,8 +496,6 @@ class Files extends Tasks {
             $includeDirsRegex = '#^('.implode('|', $includeDirs).')#';
         }
 
-        $ignoredFiles = array();
-
         $d = getcwd();
         if (!file_exists($path)) {
             display( "No such file as ".$path." when looking for files\n");
@@ -496,33 +504,38 @@ class Files extends Tasks {
             return ;
         }
         chdir($path);
-        $files = rglob('.');
+        $allFiles = rglob('.');
+        $allFiles = array_map(function($path) { return substr($path, 1);}, $allFiles);
         chdir($d);
+
         $exts = $config->file_extensions;
 
-        foreach($files as $id => &$file) {
+        $ignored    = preg_grep($ignoreDirsRegex, $allFiles);
+        $notIgnored = preg_grep($ignoreDirsRegex, $allFiles, PREG_GREP_INVERT);
+
+        if (empty($includeDirsRegex)) {
+            $included = array();
+        } else {
+            $included = preg_grep($includeDirsRegex, $allFiles);
+        }
+        
+        $files = array_merge($notIgnored, $included);
+        $files = array_unique($files);
+        
+        $ignoredFiles = array_fill_keys(array_diff($allFiles, $files), 'Ignored dir');
+
+        foreach($files as $id => $file) {
             if (isset($ignore_files[basename($file)])) {
                 unset($files[$id]);
                 $ignoredFiles[$file] = "Ignored file (".basename($file).")";
                 continue;
             }
-            $file = substr($file, 1); // drop the initial /
             $ext = pathinfo($file, PATHINFO_EXTENSION);
             if (!in_array($ext, $exts)) {
                 // selection of extensions
                 unset($files[$id]);
                 $ignoredFiles[$file] = "Ignored extension ($ext)";
                 continue;
-            }
-
-            if (!empty($includeDirsRegex) && preg_match($includeDirsRegex, $file)) {
-                // Matching the 'include dir' pattern
-                // it's OK.
-                continue;
-            } elseif (!empty($ignoreDirsRegex) && preg_match($ignoreDirsRegex, $file)) {
-                // Matching the 'ignored dir' pattern
-                unset($files[$id]);
-                $ignoredFiles[$file] = 'Ignored dir';
             }
         }
     }

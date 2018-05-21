@@ -85,6 +85,11 @@ TEXT
         
         return $final;
     }
+
+    public function dependsOnAnalysis() {
+        return array('Appinfo', 
+                     );
+    }
 }
 
 ?>

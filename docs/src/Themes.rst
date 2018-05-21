@@ -1,7 +1,7 @@
-.. _Recipes:
+.. _Themes:
 
-Recipes
-*******
+Themes
+******
 
 Presentation
 ############

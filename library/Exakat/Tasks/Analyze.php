@@ -120,6 +120,10 @@ class Analyze extends Tasks {
         $begin = microtime(true);
 
         $analyzer = $this->themes->getInstance($analyzer_class, $this->gremlin, $this->config);
+        if ($analyzer === null) {
+            display("No such analyzer as $analyzer_class\n");
+            return false;
+        }
 
         $lock = new Lock($this->config->projects_root.'/projects/.exakat/', $analyzer_class);
         if (!$lock->check()) {
@@ -199,7 +203,17 @@ GREMLIN;
             $total_results = 0;
         } else {
             display( "$analyzer_class running\n");
-            $analyzer->run($this->config);
+            try {
+                $analyzer->run($this->config);
+            } catch(\Exception $error) {
+                $end = microtime(true);
+                display( "$analyzer_class : error \n");
+                $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$error->getMessage());
+                $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
+                $this->checkAnalyzed();
+
+                return 0;
+            }
 
             $count      = $analyzer->getRowCount();
             $processed  = $analyzer->getProcessedCount();

@@ -19,7 +19,7 @@ Contents:
    Tutorial
    FAQ
    Commands
-   Recipes
+   Themes
    Rules
    Cases
    Reports

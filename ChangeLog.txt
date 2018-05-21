@@ -1,4 +1,4 @@
-Version 1.2.8 (Xu Jingzong, coming up)
+Version 1.2.9 (Xu Jingzong, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,32 @@ Version 1.2.8 (Xu Jingzong, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.2.8 (Xu Jingzong, coming up)
++ Architecture
+    + Implemented a cache for speed boost.
+    + Refactored files finding method
+    + Git VCS always submit a user when cloning (using exakat by default)
+    + Moved custom themes from themas.ini to themes.ini
++ Report
+    + Ambassador : fixed naming the audit
+    + Ambassador : added 'Dead code' section
+    + Doctor : split themes display (default/customs)
++ Analyzer
+    + New analysis : Report what should be done in SQL
+    + New analysis : Typehinted reference
+    + New analysis : Strpos doing too much work
+    + New analysis : Can't instantiate class
+    + Upgraded analysis : Don't echo error
+    + Upgraded analysis : PPP Declaration style
+    + Upgraded analysis : Useless abstract class
+    + Upgraded analysis : Buried assignation doesn't report declare anymore
+    + Upgraded analysis : Abstract methods are not reported as unused
+    + Upgraded analysis : relaxed version constraint for all Extensions/*
+    + Checked unit tests : 2852 / 2856 test pass (99% pass). 
++ Tokenizer
+    + Fixed handling of short_open_tags
+    + Fixed edge case with % 
 
 Version 1.2.7 (Li Yuanji, 2018-05-14)
 + Architecture

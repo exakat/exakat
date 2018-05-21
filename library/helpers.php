@@ -74,24 +74,27 @@ function rmdirRecursive($dir) {
 
 function copyDir($src, $dst) {
     if (!file_exists($src)) {
-        throw new \Exakat\Exceptions\NoSuchDir('Can\'t find dir : "'.$src.'"');
+        throw new \Exakat\Exceptions\NoSuchDir("Can't find dir : '$src'");
     }
     $dir = opendir($src);
-    if (!$dir) {
-        throw new \Exakat\Exceptions\NoSuchDir('Can\'t open dir : "'.$src.'"');
+    if (!is_resource($dir)) {
+        throw new \Exakat\Exceptions\NoSuchDir("Can't open dir : '$src'");
     }
 
     $total = 0;
     mkdir($dst, 0755);
-    while(false !==  $file = readdir($dir) ) {
-        if (( $file != '.' ) && ( $file != '..' )) {
-            if ( is_dir($src.'/'.$file) ) {
-                $total += copyDir($src.'/'.$file,$dst.'/'.$file);
-            } else {
-                copy($src.'/'.$file, $dst.'/'.$file);
-                ++$total;
-            }
+    while(is_string($file = readdir($dir))) {
+        if ($file === '.' || $file === '..' ) {
+            continue;
         }
+
+        if ( is_dir("$src/$file") ) {
+            $total += copyDir("$src/$file", "$dst/$file");
+        } else {
+            copy("$src/$file", "$dst/$file");
+            ++$total;
+        }
+        
     }
 
     closedir($dir);
@@ -100,18 +103,12 @@ function copyDir($src, $dst) {
 }
 
 function rglob($pattern, $flags = 0) {
-    $files = glob($pattern.'/*', $flags);
-    $dirs  = glob($pattern.'/*', GLOB_ONLYDIR | GLOB_NOSORT);
+    $files = glob("$pattern/*", $flags);
+    $dirs  = glob("$pattern/*", GLOB_ONLYDIR | GLOB_NOSORT);
     $files = array_diff($files, $dirs);
 
     $subdirs = array($files);
     foreach ($dirs as $dir) {
-        /*
-        if (substr($dir, -1) == '\\') { 
-            $dir .= '\\\\';
-            print $dir;
-        }
-        */
         $f = rglob($dir, $flags);
         if (!empty($f)) {
             $subdirs[] = $f;
@@ -168,6 +165,31 @@ function array_array_unique($array) {
     }
 
     return array_values($return);
+}
+
+// [a => b, ...] to [ b => [a1, a2, ...]]
+function array_groupby($array) {
+    $return = array();
+    foreach($array as $k => $v) {
+        if (isset($return[$v])) {
+            $return[$v][] = $k;
+        } else {
+            $return[$v] = array($k);
+        }
+    }
+    
+    return $return;
+}
+
+function array_ungroupby($array) {
+    $return = array();
+    foreach($array as $k => $v) {
+        foreach($v as $w) {
+            $return[$w] = $k;
+        }
+    }
+    
+    return $return;
 }
 
 function makeList($array, $delimiter = '"') {
@@ -363,7 +385,7 @@ function makeArray($value) {
     }
 }
 
-function makeFullnspath($functions, $constant = false) {
+function makeFullNsPath($functions, $constant = false) {
     // case for classes and functions
     if ($constant === false) {
         $cb = function ($x) {
@@ -407,9 +429,9 @@ function trimOnce($string, $trim = '\'"'){
         return $string;
     }
 
-    if (strpos($trim, $string[0]) !== false &&
-        strpos($trim, $string[$length -1]) !== false &&
-        $string[0] === $string[$length -1]
+    if ($string[0] === $string[$length -1] && 
+        strpos($trim, $string[0]) !== false &&
+        strpos($trim, $string[$length -1]) !== false
          ) {
         return substr($string, 1, -1);
     }
@@ -432,7 +454,11 @@ function rst2htmlLink($txt) {
 function shutdown() {
     $error = error_get_last();
 
-    if (strpos($error['message'], 'Allowed memory') !== false ) {
+    if (empty($error)) {
+        return;
+    }
+
+    if (strpos($error['message'], 'Allowed memory') > 1 ) {
         print "Not enough memory for running exakat. Set memory_limit to a higher value, or -1. \n";
     }
 }
