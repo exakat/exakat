@@ -2019,15 +2019,15 @@ SQL;
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
-            $item['analyzer']       =  $ini['name'];
+            $item['analyzer']       = $ini['name'];
             $item['analyzer_md5']   = $this->toId($row['analyzer']);
-            $item['file' ]          =  $row['file'];
-            $item['file_md5' ]      =  $this->toId($row['file']);
+            $item['file' ]          = $row['line'] === -1 ? $this->config->project_name : $row['file'];
+            $item['file_md5' ]      = $this->toId($row['file']);
             $item['code' ]          = PHPSyntax($row['fullcode']);
             $item['code_detail']    = "<i class=\"fa fa-plus \"></i>";
             $item['code_plus']      = PHPSyntax($row['fullcode']);
             $item['link_file']      = $row['file'];
-            $item['line' ]          =  $row['line'];
+            $item['line' ]          = $row['line'];
             $item['severity']       = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
             $item['complexity']     = "<i class=\"fa fa-cog\" style=\"color: ".$TTFColors[$this->timesToFix[$row['analyzer']]]."\"></i>";
             $item['recipe' ]        =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
@@ -3503,7 +3503,8 @@ JAVASCRIPT;
     }
 
     protected function generateCodes() {
-        mkdir($this->tmpName.'/datas/sources/', 0755);
+        $path = "{$this->tmpName}/datas/sources/";
+        mkdir($path, 0755);
 
         $filesList = $this->datastore->getRow('files');
         $files = '';
@@ -3511,7 +3512,7 @@ JAVASCRIPT;
             $id = str_replace('/', '_', $row['file']);
 
             $subdirs = explode('/', dirname($row['file']));
-            $dir = $this->tmpName.'/datas/sources';
+            $dir = $path;
             foreach($subdirs as $subdir) {
                 $dir .= '/'.$subdir;
                 if (!file_exists($dir)) {
@@ -3526,12 +3527,15 @@ JAVASCRIPT;
             $source = @show_source($path, true);
             $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.makeHtml($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
-            $source = preg_replace_callback('#<br />#is', function($x) { static $i = 0; return '<br /><a name="l'.++$i.'" />'; }, $source);
-            file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], $source);
+            $source = preg_replace_callback('#<br />#is', function($x) { 
+                static $i = 0; 
+                return '<br /><a name="l'.++$i.'" />'; 
+            }, $source);
+            file_put_contents("$path$row[file]", $source);
         }
 
         $blocjs = <<<JAVASCRIPT
-  <script>
+<script>
   "use strict";
 
   $('.menuitem').click(function(event){
