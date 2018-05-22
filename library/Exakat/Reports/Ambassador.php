@@ -1707,7 +1707,9 @@ SQL;
         $list = makeList($list);
 
         $result = $this->sqlite->query(<<<SQL
-SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
+SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers 
+        FROM results
+        WHERE line != -1
         GROUP BY file
 SQL
         );
@@ -3503,28 +3505,31 @@ JAVASCRIPT;
     }
 
     protected function generateCodes() {
-        $path = "{$this->tmpName}/datas/sources/";
+        $path = "{$this->tmpName}/datas/sources";
+        $pathToSource = dirname($this->tmpName)."/code";
         mkdir($path, 0755);
 
         $filesList = $this->datastore->getRow('files');
         $files = '';
+        $dirs = array('/' => 1);
         foreach($filesList as $row) {
-            $id = str_replace('/', '_', $row['file']);
-
-            $subdirs = explode('/', dirname($row['file']));
-            $dir = $path;
+            $subdirs = explode('/', trim(dirname($row['file']), "/"));
+            $dir = '';
             foreach($subdirs as $subdir) {
-                $dir .= '/'.$subdir;
-                if (!file_exists($dir)) {
-                    mkdir($dir, 0755);
+                $dir .= "/$subdir";
+                if (!isset($dirs[$dir])) {
+                    mkdir($path.$dir, 0755);
+                    $dirs[$dir] = 1;
                 }
             }
 
-            $path = dirname($this->tmpName).'/code/'.$row['file'];
-            if (!file_exists($path)) {
+            $sourcePath = "$pathToSource$row[file]";
+            if (!file_exists($sourcePath)) {
                 continue;
             }
-            $source = @show_source($path, true);
+
+            $id = str_replace('/', '_', $row['file']);
+            $source = @show_source($sourcePath, true);
             $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.makeHtml($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function($x) { 
@@ -3558,7 +3563,6 @@ JAVASCRIPT;
         window.location.hash = 'l' + line;
   }
   
-
   </script>
 JAVASCRIPT;
         $html = $this->getBasedPage('codes');
