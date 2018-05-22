@@ -9,6 +9,8 @@ $expected     = array('preg_replace(\'#|&\\#40;eis#B\', \'b\', $c)',
 
 $expected_not = array('\\preg_grep(\'(\' . $a . \'(!?=+)\' . $c . \')sie\', \'$f\', $i)',
                       '\\preg_replace(\'(\' . $b . \'(!?=+)\' . $d . \')SUD\', \'$g\', $j)',
+                      '\preg_replace(\'(\' . $b . \'(!?=+)\' . $d . \')SUD\', \'$g\', $j)',
+                      '\preg_grep(\'(\' . $a . \'(!?=+)\' . $c . \')sie\', \'$f\', $i)',
                      );
 
 ?>

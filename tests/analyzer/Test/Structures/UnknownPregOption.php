@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_UnknownPregOption extends Analyzer {
-    /* 6 methods */
+    /* 8 methods */
 
     public function testStructures_UnknownPregOption01()  { $this->generic_test('Structures/UnknownPregOption.01'); }
     public function testStructures_UnknownPregOption02()  { $this->generic_test('Structures/UnknownPregOption.02'); }
@@ -16,5 +16,7 @@ class Structures_UnknownPregOption extends Analyzer {
     public function testStructures_UnknownPregOption04()  { $this->generic_test('Structures/UnknownPregOption.04'); }
     public function testStructures_UnknownPregOption05()  { $this->generic_test('Structures/UnknownPregOption.05'); }
     public function testStructures_UnknownPregOption06()  { $this->generic_test('Structures/UnknownPregOption.06'); }
+    public function testStructures_UnknownPregOption07()  { $this->generic_test('Structures/UnknownPregOption.07'); }
+    public function testStructures_UnknownPregOption08()  { $this->generic_test('Structures/UnknownPregOption.08'); }
 }
 ?>
