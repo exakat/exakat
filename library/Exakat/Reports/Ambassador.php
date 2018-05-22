@@ -106,6 +106,10 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
             $project_name = $this->config->project_name;
+            if (empty($project_name)) {
+                $project_name = 'E';
+            }
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $project_name);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
