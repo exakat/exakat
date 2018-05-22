@@ -29,6 +29,7 @@ use Exakat\Exceptions\Neo4jException;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Tasks\Tasks;
 use Brightzone\GremlinDriver\Connection;
+use stdClass;
 
 class GSNeo4j extends Graph {
     const CHECKED = true;
@@ -98,7 +99,7 @@ class GSNeo4j extends Graph {
             return new GraphResults($result);
         } elseif (is_array($result)) {
             return new GraphResults($result);
-        } elseif ($result instanceof \stdclass) {
+        } elseif ($result instanceof stdClass) {
             return new GraphResults($result);
         } else {
             print "Processing unknown type ".gettype($result).PHP_EOL;
@@ -113,7 +114,7 @@ class GSNeo4j extends Graph {
         }
 
         $res = $this->query($query, $params, $load);
-        if (!($res instanceof \Stdclass) || !isset($res->results)) {
+        if (!($res instanceof stdClass) || !isset($res->results)) {
             throw new GremlinException('Server is not responding');
         }
         

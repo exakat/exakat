@@ -34,7 +34,7 @@ class PackagesNames extends Analyzer {
 
     public function toArray() {
         if ($this->report === null) {
-            $this->hasResult();
+            return $this->hasResult();
         }
 
         return $this->report;

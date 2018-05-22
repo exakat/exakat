@@ -172,8 +172,8 @@ class Project extends Tasks {
         try {
             $analyze->run();
         } catch (NoFileToProcess $e) {
-            $this->datastore->addRow(array('init error' => $e->getMessage(),
-                                           'status'     => 'Error',
+            $this->datastore->addRow('hash', array('init error' => $e->getMessage(),
+                                                   'status'     => 'Error',
                                            ));
         }
         unset($analyze);
@@ -234,7 +234,7 @@ class Project extends Tasks {
                 $report = new Report($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
 
                 $report->run();
-            } catch (Throwable $e) {
+            } catch (\Throwable $e) {
                 echo "Error while building $format in $format.\n";
             }
             unset($reportConfig);

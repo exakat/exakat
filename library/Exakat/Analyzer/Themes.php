@@ -39,7 +39,7 @@ class Themes {
         } else {
             $docPath = $path;
         }
-        self::$sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
+        self::$sqlite = new \SQLite3($docPath, \SQLITE3_OPEN_READONLY);
     }
 
     public function __destruct() {

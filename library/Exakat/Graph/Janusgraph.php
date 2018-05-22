@@ -28,6 +28,7 @@ use Exakat\Exceptions\Neo4jException;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Tasks\Tasks;
 use Exakat\Graph\Helpers\Websocket as Client;
+use stdClass;
 
 class Janusgraph extends Graph {
     const CHECKED = true;
@@ -92,7 +93,7 @@ class Janusgraph extends Graph {
         }
 
         $res = $this->query($query, $params, $load);
-        if (!($res instanceof \Stdclass) || !isset($res->results)) {
+        if (!($res instanceof stdClass) || !isset($res->results)) {
             throw new GremlinException('Server is not responding');
         }
         

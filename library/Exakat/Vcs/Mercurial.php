@@ -35,8 +35,8 @@ class Mercurial extends Vcs {
     }
 
     public function clone($source) {
-        $source = escapeshellarg($URL);
-        shell_exec("cd {$this->destinationFull}; hg clone $source code");
+        $sourceArg = escapeshellarg($source);
+        shell_exec("cd {$this->destinationFull}; hg clone $sourceArg code");
     }
 
     public function update() {

@@ -58,7 +58,7 @@ class SplitGraphson {
     
     private $datastore = null;
     
-    public function __construct($gremlin, $config, $plugins) {
+    public function __construct($gremlin, $config) {
         self::$count = -1;
         
         $this->config = $config;
@@ -75,7 +75,7 @@ class SplitGraphson {
 
     private function cleandDb() {
         display("Cleaning DB in gsneo4j\n");
-        $clean = new CleanDb(new GSNeo4j($this->config), $this->config, Tasks::IS_SUBTASK);
+        $clean = new CleanDb($this->gsneo4j, $this->config, Tasks::IS_SUBTASK);
         $clean->run();
     }
 

@@ -204,7 +204,7 @@ class Load extends Tasks {
 
         $this->php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         if (!$this->php->isValid()) {
-            throw new InvalidPHPBinary($this->php->getVersion());
+            throw new InvalidPHPBinary($this->php->getConfiguration('phpversion'));
         }
         $this->php->getTokens();
         
@@ -3592,13 +3592,13 @@ SQL;
                 $fullcode[] = $namespace->fullcode.' '.$block->fullcode;
 
                 // Several namespaces ? This has to be recalculated inside the block!!
-                $namespace->fullnspath = makeFullnspath($namespace->fullcode);
+                $namespace->fullnspath = makeFullNsPath($namespace->fullcode);
 
                 $this->addLink($use, $namespace, 'USE');
             } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR) {
                 //use A\B\ {} // Prefixes, within a Class/Trait
                 $this->addLink($use, $namespace, 'GROUPUSE');
-                $prefix = makeFullnspath($namespace->fullcode);
+                $prefix = makeFullNsPath($namespace->fullcode);
                 if ($prefix[0] !== '\\') {
                     $prefix = '\\'.$prefix;
                 }
@@ -3678,7 +3678,7 @@ SQL;
                 if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
 
-                    $fullnspath = makeFullnspath($namespace->fullcode);
+                    $fullnspath = makeFullNsPath($namespace->fullcode);
                     $namespace->fullnspath = $fullnspath;
                     $namespace->origin     = $fullnspath;
 
@@ -5060,7 +5060,7 @@ SQL;
             return; // Can't be a class anyway.
         }
         
-        $fullnspath = makeFullnspath($this->argumentsId[0]->noDelimiter, true);
+        $fullnspath = makeFullNsPath($this->argumentsId[0]->noDelimiter, true);
         if ($this->argumentsId[0]->noDelimiter[0] === '\\') {
             $fullnspath = "\\$fullnspath";
         }
@@ -5297,7 +5297,7 @@ SQL;
         }
         
         if (!is_string($fullnspath)) {
-            throw new LoadError( "Warning : fullnspath is not a string : it is ".gettype($use).PHP_EOL);
+            throw new LoadError( "Warning : fullnspath is not a string : it is ".gettype($fullnspath).PHP_EOL);
         }
 
         if ($fullnspath === 'undefined') {

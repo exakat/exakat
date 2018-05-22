@@ -22,6 +22,8 @@
 
 namespace Exakat\Graph\Helpers;
 
+use stdClass;
+
 class GraphResults implements \ArrayAccess, \Iterator, \Countable {
     const EMPTY   = 0;
     const SCALAR  = 1;
@@ -55,7 +57,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
             return;
         }
 
-        if ($data instanceof \StdClass) {
+        if ($data instanceof stdClass) {
             $this->type = self::ARRAY;
             $this->data = (array) $data;
             $this->checkArray();
@@ -71,7 +73,7 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
             return;
         }
         $data = array_values($this->data);
-        if (!($data[0] instanceof \Stdclass)) {
+        if (!($data[0] instanceof stdClass)) {
             return;
         }
 

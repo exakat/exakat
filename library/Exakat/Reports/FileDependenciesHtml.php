@@ -66,7 +66,7 @@ class FileDependenciesHtml extends Reports {
                 $out[$destination] = 0;
             }
 
-            $R = new stdclass();
+            $R = new stdClass();
             $R->source = $source;
             $R->target = $destination;
             $R->caption = $row['type'];

@@ -69,19 +69,19 @@ SQL
             }
         }
 
-        $root = new \Stdclass();
+        $root = new \stdClass();
         $root->name = '';
         $root->size = 200;
         $root->children = array();
 
         foreach($files as $including => $included) {
-            $c = new \Stdclass();
+            $c = new \stdClass();
             $c->name = $including;
             $c->size = 100;
             $c->children = array();
             
             foreach($included as $i) {
-                $d = new \Stdclass();
+                $d = new \stdClass();
                 $d->name = $i;
                 $d->size = 100;
                 
@@ -124,7 +124,7 @@ SQL
             }
         }
         
-        $root = new \Stdclass();
+        $root = new \stdClass();
         $root->name = '';
         $root->size = 200;
         $root->children = array();
@@ -133,7 +133,7 @@ SQL
             if ($name === '') {
                 $c = $root;
             } else {
-                $c = new \Stdclass();
+                $c = new \stdClass();
                 $c->name = $name;
                 $c->size = 50;
 
@@ -141,12 +141,12 @@ SQL
             }
             
             foreach($extends as $e => $extends2) {
-                $d = new \Stdclass();
+                $d = new \stdClass();
                 $d->name = $e;
                 $d->size = 50;
 
                 foreach($extends2 as $e3 => $extends3) {
-                    $d3 = new \Stdclass();
+                    $d3 = new \stdClass();
                     $d3->name = $e3;
                     $d3->size = 50;
                     
@@ -171,13 +171,13 @@ SELECT name, cit.id, extends, type, namespace
 SQL
         );
 
-        $root = new \Stdclass();
+        $root = new \stdClass();
         $root->name = '\\';
         $root->size = 200;
         $root->children = array();
         $ns = array('' => $root);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $c = new \Stdclass();
+            $c = new \stdClass();
             $c->name = $row['namespace'].'\\'.$row['name'];
             $c->type = $row['type'];
             $c->size = 50;
@@ -193,7 +193,7 @@ SQL
                     $name .= '\\'.$e;
                     if (isset($ns[$name])) { continue; }
 
-                    $n = new \Stdclass();
+                    $n = new \stdClass();
                     $n->name = $name;
                     $n->size = $name;
                     $n->type = 'namespace';

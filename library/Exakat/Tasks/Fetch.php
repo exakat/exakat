@@ -25,13 +25,15 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoDump;
 use Exakat\Exceptions\ProjectNeeded;
 
 class Fetch extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        if ($this->config->project === 'default') {
+        $project = $this->config->project;
+        if ($project === 'default') {
             throw new ProjectNeeded();
         }
 
@@ -39,23 +41,24 @@ class Fetch extends Tasks {
         $json = json_decode($json);
         if (isset($json->project) && $project === $json->project) {
             // Too early
-            throw new NoDump($this->config->project);
+            throw new NoDump($project);
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
-            throw new NoSuchProject($this->config->project);
+        $projectPath = "{$this->config->projects_root}/projects/$project";
+        if (!file_exists($projectPath)) {
+            throw new NoSuchProject($project);
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
-            throw new NoSuchProject($this->config->project);
+        if (!file_exists($projectPath)) {
+            throw new NoSuchProject($project);
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite')) {
-            throw new NoSuchProject($this->config->project);
+        if (!file_exists("$projectPath/dump.sqlite")) {
+            throw new NoSuchProject($project);
         }
         
         // transmits the dump sqlite database
-        readfile($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite');
+        readfile("$projectPath/dump.sqlite");
     }
 }
 
