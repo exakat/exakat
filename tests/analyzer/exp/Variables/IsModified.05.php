@@ -1,7 +1,6 @@
 <?php
 
 $expected     = array('$h',
-                      '$b',
                       '$f',
                       '$d',
                       '$d2',
@@ -13,7 +12,15 @@ $expected     = array('$h',
                       '$d',
                       '$d',
                       '$j',
-                     );
+                      '&$d2', 
+                      '&$d3', 
+                      '&$b', 
+                      '&$d', 
+                      '&$f', 
+                      '&$d4', 
+                      '&$h', 
+                      '$b[3]'
+                      );
 
 $expected_not = array('$i',
                      );
