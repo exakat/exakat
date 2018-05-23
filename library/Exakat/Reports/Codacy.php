@@ -29,6 +29,11 @@ class Codacy extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'stdout';
 
+    public function dependsOnAnalysis() {
+        return array('Codacy',
+                     );
+    }
+
     public function _generate($analyzerList) {
         $analysisResults = new Results($this->sqlite, $analyzerList);
         $analysisResults->load();
