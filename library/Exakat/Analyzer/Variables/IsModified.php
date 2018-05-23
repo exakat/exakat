@@ -67,6 +67,13 @@ class IsModified extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE(array('INDEX', 'VALUE'))
+             ->atomIs('Variable')
+             ->back('first');
+        $this->prepareQuery();
+
         // catch
         $this->atomIs($atoms)
              ->inIs('VARIABLE')
