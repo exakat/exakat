@@ -34,7 +34,7 @@ class SimpleSwitch extends Analyzer {
              ->outIs('EXPRESSION')
              ->atomIs('Case')
              ->outIs('CASE')
-             ->raw('not( __.hasLabel("Integer", "String", "Nsname", "Identifier").not( __.out("CONCAT"))) ')
+             ->raw('not( __.hasLabel("Integer", "String", "Nsname", "Identifier", "Staticconstant").not( __.out("CONCAT"))) ')
              ->back('first');
         $this->prepareQuery();
     }
