@@ -344,6 +344,9 @@ class Ambassador extends Reports {
             $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description->getDescription())).'</p>';
             $analyzersDocHTML  = rst2quote($analyzersDocHTML);
             $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
+            $analyzersDocHTML  = rst2literal($analyzersDocHTML);
+            $analyzersDocHTML  = rsttable2html($analyzersDocHTML);
+            $analyzersDocHTML  = rstlist2html($analyzersDocHTML);
             
             $v = $description->getClearPHP();
             if(!empty($v)){
