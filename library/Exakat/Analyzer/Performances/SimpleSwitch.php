@@ -28,12 +28,13 @@ class SimpleSwitch extends Analyzer {
     protected $phpVersion = '7.2+';
 
     public function analyze() {
+        // switch($a) { case 1 + 1 : break; }
         $this->atomIs('Switch')
              ->outIs('CASES')
              ->outIs('EXPRESSION')
              ->atomIs('Case')
              ->outIs('CASE')
-             ->raw('not( __.hasLabel("Integer", "String").not( __.out("CONCAT"))) ')
+             ->raw('not( __.hasLabel("Integer", "String", "Nsname", "Identifier").not( __.out("CONCAT"))) ')
              ->back('first');
         $this->prepareQuery();
     }
