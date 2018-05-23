@@ -1249,7 +1249,7 @@ GREMLIN
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
-            $this->addMethod(self::STOP_QUERY);
+            // If Exists... 
             return $this;
         } 
         
@@ -1276,29 +1276,53 @@ GREMLIN
 
     public function hasIn($link) {
         assert($this->assertLink($link));
-        $this->addMethod('where( __.in('.$this->SorA($link).') )');
-        
+
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (empty($diff)) {
+            $this->addMethod(self::STOP_QUERY);
+        } else {
+            $this->addMethod('where( __.in('.$this->SorA($link).') )');
+        }
+
         return $this;
     }
     
     public function hasNoIn($link) {
         assert($this->assertLink($link));
-        $this->addMethod('not( where( __.in('.$this->SorA($link).') ) )');
+
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (!empty($diff)) {
+            $this->addMethod('not( where( __.in('.$this->SorA($link).') ) )');
+        }
         
         return $this;
     }
 
     public function hasOut($link) {
         assert($this->assertLink($link));
-        $this->addMethod('where( out('.$this->SorA($link).') )');
-        
+
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (empty($diff)) {
+            $this->addMethod(self::STOP_QUERY);
+        } else {
+            $this->addMethod('where( out('.$this->SorA($link).') )');
+        }
+
         return $this;
     }
     
     public function hasNoOut($link) {
         assert($this->assertLink($link));
-        $this->addMethod('not(where( __.out('.$this->SorA($link).') ))');
-        
+
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (!empty($diff)) {
+            $this->addMethod('not(where( __.out('.$this->SorA($link).') ))');
+        }
+
         return $this;
     }
 

@@ -41,8 +41,7 @@ class IsModified extends Analyzer {
 
         $this->atomIs(array('Variablearray', 'Variable'))
              ->inIsIE('VARIABLE')
-             ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
-             ->back('first');
+             ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS'));
         $this->prepareQuery();
 
         // (unset)
@@ -70,8 +69,7 @@ class IsModified extends Analyzer {
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->outIsIE(array('INDEX', 'VALUE'))
-             ->atomIs('Variable')
-             ->back('first');
+             ->atomIs('Variable');
         $this->prepareQuery();
 
         // catch
