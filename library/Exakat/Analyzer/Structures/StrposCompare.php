@@ -30,7 +30,14 @@ class StrposCompare extends Analyzer {
         $operator = $this->loadIni('php_may_return_boolean_or_zero.ini', 'functions');
 
         $notPregMatchWithLiteral = <<<GREMLIN
-not( where( __.has("fullnspath", "\\\\preg_match").out("ARGUMENT").has("rank", 0).hasLabel("String").not( where( __.out("CONCAT")) ) ) )
+not( 
+    where( 
+        __.has("fullnspath", "\\\\preg_match")
+          .out("ARGUMENT")
+          .has("rank", 0)
+          .not( where( __.out("CONCAT").hasLabel("Variable", "Array", "Member", "Functioncall", "Methodcall", "Staticmethodcall" )))
+         )
+   )
 GREMLIN;
         $fullnspaths = makeFullnspath($operator);
         
@@ -58,6 +65,7 @@ GREMLIN;
 
         // if (strpos(..)) {}
         $this->atomFunctionIs($fullnspaths)
+             ->inIsIE('CODE')  // parenthesis
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('first')
@@ -68,6 +76,7 @@ GREMLIN;
         $this->atomFunctionIs($fullnspaths)
              ->inIs('RIGHT')
              ->atomIs('Assignation')
+             ->inIsIE('CODE')  // parenthesis
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
              ->back('first')
