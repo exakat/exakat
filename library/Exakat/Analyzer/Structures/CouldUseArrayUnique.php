@@ -25,12 +25,6 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseArrayUnique extends Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         //foreach ($a as $b) {
         //    if (!in_array($b, $c)) {

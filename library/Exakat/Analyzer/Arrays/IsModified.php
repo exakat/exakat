@@ -46,7 +46,23 @@ class IsModified extends Analyzer {
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->back('first')
-             ->raw('not( where( __.repeat( __.out("VARIABLE")).emit(hasLabel("Arrayappend")).times('.self::MAX_LOOPING.') ) )');
+             ->noAtomInside('Arrayappend');
+        $this->prepareQuery();
+
+        // foreach($a as $b[2])
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->atomIs('Array')
+             ->back('first');
+        $this->prepareQuery();
+
+        // foreach($a as $b[2])
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->atomIs('Keyvalue')
+             ->outIs(array('INDEX', 'VALUE'))
+             ->atomIs('Array')
+             ->back('first');
         $this->prepareQuery();
 
         // $a[1][] = 2;

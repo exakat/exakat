@@ -52,6 +52,7 @@ abstract class Analyzer {
     public $config         = null;
 
     public static $availableAtoms = array();
+    public static $availableLinks = array();
     
     private $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerQuoted = '';
@@ -157,6 +158,8 @@ abstract class Analyzer {
 
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {
             self::$availableAtoms = array_keys($this->gremlin->query('g.V().groupCount("m").by(label).cap("m")')->toArray()[0]);
+
+            self::$availableLinks = array_keys($this->gremlin->query('g.E().groupCount("m").by(label).cap("m")')->toArray()[0]);
         }
 
     }
@@ -1139,6 +1142,13 @@ GREMLIN
         
         if (empty($link)) {
             $this->addMethod('out( )');
+            return $this;
+        }
+        
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (empty($diff)) {
+            $this->addMethod(self::STOP_QUERY);
         } else {
             assert($this->assertLink($link));
             $this->addMethod('out('.$this->SorA($link).')');
@@ -1148,11 +1158,18 @@ GREMLIN
     }
 
     // follows a link if it is there (and do nothing otherwise)
-    protected function outIsIE($link) {
+    protected function outIsIE($link = array()) {
         assert(func_num_args() === 1, "Too many arguments for ".__METHOD__);
         assert($this->assertLink($link));
-        // alternative : coalesce(out('LEFT'),  __.filter{true} )
-        $this->addMethod("until( __.not(outE(".$this->SorA($link).")) ).repeat(out(".$this->SorA($link)."))");
+
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (empty($diff)) {
+            $this->addMethod(self::STOP_QUERY);
+        } else {
+            // alternative : coalesce(out('LEFT'),  __.filter{true} )
+            $this->addMethod("until( __.not(outE(".$this->SorA($link).")) ).repeat(out(".$this->SorA($link)."))");
+        }
         
         return $this;
     }
@@ -1210,6 +1227,13 @@ GREMLIN
         assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
         if (empty($link)) {
             $this->addMethod('in( )');
+            return $this;
+        } 
+        
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (empty($diff)) {
+            $this->addMethod(self::STOP_QUERY);
         } else {
             assert($this->assertLink($link));
             $this->addMethod('in('.$this->SorA($link).')');
@@ -1219,8 +1243,16 @@ GREMLIN
     }
 
     // follows a link if it is there (and do nothing otherwise)
-    protected function inIsIE($link) {
+    protected function inIsIE($link = array()) {
         assert($this->assertLink($link));
+
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (empty($diff)) {
+            // If Exists... 
+            return $this;
+        } 
+        
         $this->addMethod('until(__.inE('.$this->SorA($link).').count().is(eq(0))).repeat(__.in('.$this->SorA($link).'))');
         
         return $this;
@@ -1244,29 +1276,53 @@ GREMLIN
 
     public function hasIn($link) {
         assert($this->assertLink($link));
-        $this->addMethod('where( __.in('.$this->SorA($link).') )');
-        
+
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (empty($diff)) {
+            $this->addMethod(self::STOP_QUERY);
+        } else {
+            $this->addMethod('where( __.in('.$this->SorA($link).') )');
+        }
+
         return $this;
     }
     
     public function hasNoIn($link) {
         assert($this->assertLink($link));
-        $this->addMethod('not( where( __.in('.$this->SorA($link).') ) )');
+
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (!empty($diff)) {
+            $this->addMethod('not( where( __.in('.$this->SorA($link).') ) )');
+        }
         
         return $this;
     }
 
     public function hasOut($link) {
         assert($this->assertLink($link));
-        $this->addMethod('where( out('.$this->SorA($link).') )');
-        
+
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (empty($diff)) {
+            $this->addMethod(self::STOP_QUERY);
+        } else {
+            $this->addMethod('where( out('.$this->SorA($link).') )');
+        }
+
         return $this;
     }
     
     public function hasNoOut($link) {
         assert($this->assertLink($link));
-        $this->addMethod('not(where( __.out('.$this->SorA($link).') ))');
-        
+
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (!empty($diff)) {
+            $this->addMethod('not(where( __.out('.$this->SorA($link).') ))');
+        }
+
         return $this;
     }
 

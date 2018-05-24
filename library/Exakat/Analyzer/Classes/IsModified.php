@@ -87,6 +87,14 @@ class IsModified extends Analyzer {
             $this->prepareQuery();
         }
 
+        // foreach($a as $b->c)
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE(array('INDEX', 'VALUE'))
+             ->atomIs(array('Member', 'Staticproperty'))
+             ->back('first');
+        $this->prepareQuery();
+
         $this->atomIs('Unset')
              ->outIs('ARGUMENT')
              ->atomIs($atoms);

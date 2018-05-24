@@ -23,6 +23,7 @@
 
 namespace Exakat\Tasks;
 
+use Exception;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Datastore;

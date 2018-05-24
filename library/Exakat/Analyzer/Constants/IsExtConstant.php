@@ -57,7 +57,7 @@ class IsExtConstant extends Analyzer {
 
         $this->analyzerIs('Constants/ConstantUsage')
              ->analyzerIs('Constants/IsGlobalConstant')
-             ->fullnspathIs(makeFullnspath($constants));
+             ->fullnspathIs(makeFullNsPath($constants));
         $this->prepareQuery();
     }
 }

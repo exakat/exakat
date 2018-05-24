@@ -451,6 +451,76 @@ function rst2htmlLink($txt) {
     return preg_replace('/`(.+?) <(.+?)>`_+/s', '<a href="$2" alt="$1">$1</a>', $txt);
 }
 
+function rst2literal($txt) {
+   $return = preg_replace_callback("#<\?literal(.*?)\n\?>#is", function ($x) {
+       $return = '<pre style="border: 1px solid #ddd; background-color: #f5f5f5;">&lt;?php '.PHP_EOL.str_replace('<br />', '', $x[1]).'?&gt;</pre>';
+       return $return;
+   }, $txt);
+
+    return $return;
+}
+
+function rsttable2html($raw) {
+    $html = array();
+    
+    $lines = explode("\n", $raw);
+    $table = false;
+    
+    foreach($lines as $line ) {
+        if (preg_match('/^[\+-]+<br \/>$/', $line, $r)) {
+            if ($table !== true) {
+                $table = true;
+                $html []= '<table style="border: solid 1px black;">';
+            }
+            continue;
+        } elseif ($table === true) {
+            if (preg_match('/^[\+-]+$/', $line, $r)) {
+                $html[] = "<tr>".str_repeat('<td></td>', substr_count('+', $r[0]))."</tr>\n";
+            } elseif (strpos($line, '|') === false) {
+                $table = false;
+                $html []= "</table>";
+                $html []= "";
+            } elseif (!empty($td = explode('|', str_replace('<br />', '', $line)))) {
+                $td = array_map('trim', $td);
+                
+                $html[] = "<tr><td>".implode("</td><td>", $td)."</td></tr>";
+            } 
+        } else {
+            $html []= $line;
+        }
+    }
+    
+    return implode(PHP_EOL, $html);
+}
+
+function rstlist2html($raw) {
+    $html = array();
+    
+    $lines = explode("\n", $raw);
+    $list = false;
+    
+    foreach($lines as $line ) {
+        if (preg_match('/^\*\s+([^\*]+)\s*<br \/>$/', $line, $r)) {
+            if ($list !== true) {
+                $list = true;
+                $html []= '<ul>';
+                $html [] = "<li>$r[1]</li>";
+            } else {
+                $html [] = "<li>$r[1]</li>";
+            }
+            continue;
+        } else {
+            if ($list === true) {
+                $list = false;
+                $html []= '</ul>';
+            }
+            $html []= $line;
+        }
+    }
+    
+    return implode(PHP_EOL, $html);
+}
+
 function shutdown() {
     $error = error_get_last();
 

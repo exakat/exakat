@@ -322,6 +322,7 @@ Glossary
     + `extract()`
 
       + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
+      + :ref:`Configure Extract <configure-extract>`
       + :ref:`Register Globals <register-globals>`
 
 

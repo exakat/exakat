@@ -42,6 +42,7 @@ class HardcodedPasswords extends Analyzer {
             $this->prepareQuery();
         }
 
+        $passwordsKeys = $this->loadJson('password_keys.json','passwords');
         // ['password' => 1];
         $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENT')

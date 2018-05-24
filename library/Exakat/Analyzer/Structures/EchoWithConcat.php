@@ -51,7 +51,8 @@ class EchoWithConcat extends Analyzer {
              ->outIsIE('CODE') // Skipping parenthesis if any
              ->atomIs('Heredoc')
              ->is('heredoc', true)
-             ->hasOut('CONCAT')
+             ->outIs('CONCAT')
+             ->atomIsNot('String')
              ->back('first');
         $this->prepareQuery();
     }

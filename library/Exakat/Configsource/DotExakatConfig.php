@@ -22,6 +22,8 @@
 
 namespace Exakat\Configsource;
 
+use Exakat\Phpexec;
+
 class DotExakatConfig extends Config {
     private $projects_root = '.';
     

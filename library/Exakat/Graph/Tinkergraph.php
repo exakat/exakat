@@ -164,30 +164,28 @@ class Tinkergraph extends Graph {
         } elseif ($version === '.3.2') {
             exec('cd '.$this->config->gsneo4j_folder.'; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/tinkergraph.yaml  > gremlin.log 2>&1 & echo $! > db/tinkergraph.pid ');
         }
+        $this->resetConnection();
         sleep(1);
         
-        display('Started Gremlin Server with Tinkergraph');
         $b = microtime(true);
         $round = -1;
-        do {
-            if (file_exists($this->config->tinkergraph_folder.'/run/gremlin.pid')) {
-                $pid = trim(file_get_contents($this->config->tinkergraph_folder.'/run/gremlin.pid'));
-            } elseif ( file_exists($this->config->tinkergraph_folder.'/db/tinkergraph.pid')) {
-                $pid = trim(file_get_contents($this->config->tinkergraph_folder.'/db/tinkergraph.pid'));
-            } else {
-                $pid = 'Not yet';
-            }
-
-            ++$round;
-            usleep(100000 * $round);
-        } while ($pid === 'Not yet');
-
         do {
             $res = $this->checkConnection();
             ++$round;
             usleep(100000 * $round);
-        } while (empty($res));
+        } while (empty($res) && $round < 20);
         $e = microtime(true);
+        
+        display("Restarted in $round rounds\n");
+
+        if (file_exists($this->config->gsneo4j_folder.'/run/gremlin.pid')) {
+            $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/run/gremlin.pid'));
+        } elseif ( file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
+            $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/db/gsneo4j.pid'));
+        } else {
+            $pid = 'Not yet';
+        }
+
 
         display('started ['.$pid.'] in '.number_format(($e - $b) * 1000, 2).' ms' );
     }

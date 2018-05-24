@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('[\'c\' => $c,  ]',
-                      '[\'b\' => $b]',
+$expected     = array('[\'c\' => $c]',
+                      '[\'d\' => $d,  ]',
                      );
 
 $expected_not = array('[]',

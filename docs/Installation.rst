@@ -85,14 +85,14 @@ PHP 7.0 or more recent, curl, homebrew are required.
     mkdir exakat
     cd exakat
     curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
-    curl -o apache-tinkerpop-gremlin-server-3.2.8-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.8/apache-tinkerpop-gremlin-server-3.2.8-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.2.8 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
+    curl -o apache-tinkerpop-gremlin-server-3.2.9-bin.zip "https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=tinkerpop/3.2.9/apache-tinkerpop-gremlin-server-3.2.9-bin.zip"
+    unzip apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.9 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.8
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.9
     cd ..
     
     php exakat.phar doctor
@@ -149,14 +149,14 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
     mkdir exakat
     cd exakat
     wget -O exakat.phar http://dist.exakat.io/index.php?file=latest
-    wget -O apache-tinkerpop-gremlin-server-3.2.8-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.8/apache-tinkerpop-gremlin-server-3.2.8-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.2.8 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
+    wget -O apache-tinkerpop-gremlin-server-3.2.9-bin.zip "https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=tinkerpop/3.2.9/apache-tinkerpop-gremlin-server-3.2.9-bin.zip"
+    unzip apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.9 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.8
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.9
     cd ..
 
     php exakat.phar doctor
@@ -169,15 +169,15 @@ Composer installation requires the creation of two folders : config and tinkergr
 ::
 
     cd /path/to/code
-    composer require exakat/exakat:~1.1.5
-    wget -O apache-tinkerpop-gremlin-server-3.2.8-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.8/apache-tinkerpop-gremlin-server-3.2.8-bin.zip
-    unzip apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
-    mv apache-tinkerpop-gremlin-server-3.2.8 tinkergraph
-    rm -rf apache-tinkerpop-gremlin-server-3.2.8-bin.zip 
+    composer require exakat/exakat:~1.2.8
+    wget -O apache-tinkerpop-gremlin-server-3.2.9-bin.zip "https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=tinkerpop/3.2.9/apache-tinkerpop-gremlin-server-3.2.9-bin.zip"
+    unzip apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.9 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
     
     # Optional : install neo4j engine.
     cd tinkergraph
-    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.8
+    ./bin/gremlin-server.sh -i org.apache.tinkerpop neo4j-gremlin 3.2.9
     cd ..
 
     php vendor/bin/exakat doctor
@@ -199,7 +199,7 @@ You need one version of PHP (at least) to run exakat. This version needs the `cu
 
 Extra PHP-CLI versions allow more checks on the code. They only need to have the `tokenizer <http://www.php.net/tokenizer>`_ extension available.  
 
-Exakat recommends PHP 7.1.0 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.1, 7.2 and 7.3 (aka php-src master).
+Exakat recommends PHP 7.2.5 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.1, 7.2 and 7.3 (aka php-src master).
 
 To install easily various versions of PHP, use the ondrej repository. Check `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_.
 You may also check the dotdeb repository, at `dotdeb instruction <https://www.dotdeb.org/instructions/>`_. 

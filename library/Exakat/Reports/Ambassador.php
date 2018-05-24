@@ -106,6 +106,10 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
             $project_name = $this->config->project_name;
+            if (empty($project_name)) {
+                $project_name = 'E';
+            }
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $project_name);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
@@ -340,6 +344,9 @@ class Ambassador extends Reports {
             $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description->getDescription())).'</p>';
             $analyzersDocHTML  = rst2quote($analyzersDocHTML);
             $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
+            $analyzersDocHTML  = rst2literal($analyzersDocHTML);
+            $analyzersDocHTML  = rsttable2html($analyzersDocHTML);
+            $analyzersDocHTML  = rstlist2html($analyzersDocHTML);
             
             $v = $description->getClearPHP();
             if(!empty($v)){
@@ -1703,7 +1710,9 @@ SQL;
         $list = makeList($list);
 
         $result = $this->sqlite->query(<<<SQL
-SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
+SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers 
+        FROM results
+        WHERE line != -1
         GROUP BY file
 SQL
         );
@@ -2015,15 +2024,15 @@ SQL;
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
-            $item['analyzer']       =  $ini['name'];
+            $item['analyzer']       = $ini['name'];
             $item['analyzer_md5']   = $this->toId($row['analyzer']);
-            $item['file' ]          =  $row['file'];
-            $item['file_md5' ]      =  $this->toId($row['file']);
+            $item['file' ]          = $row['line'] === -1 ? $this->config->project_name : $row['file'];
+            $item['file_md5' ]      = $this->toId($row['file']);
             $item['code' ]          = PHPSyntax($row['fullcode']);
             $item['code_detail']    = "<i class=\"fa fa-plus \"></i>";
             $item['code_plus']      = PHPSyntax($row['fullcode']);
             $item['link_file']      = $row['file'];
-            $item['line' ]          =  $row['line'];
+            $item['line' ]          = $row['line'];
             $item['severity']       = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
             $item['complexity']     = "<i class=\"fa fa-cog\" style=\"color: ".$TTFColors[$this->timesToFix[$row['analyzer']]]."\"></i>";
             $item['recipe' ]        =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
@@ -3499,35 +3508,42 @@ JAVASCRIPT;
     }
 
     protected function generateCodes() {
-        mkdir($this->tmpName.'/datas/sources/', 0755);
+        $path = "{$this->tmpName}/datas/sources";
+        $pathToSource = dirname($this->tmpName)."/code";
+        mkdir($path, 0755);
 
         $filesList = $this->datastore->getRow('files');
         $files = '';
+        $dirs = array('/' => 1);
         foreach($filesList as $row) {
-            $id = str_replace('/', '_', $row['file']);
-
-            $subdirs = explode('/', dirname($row['file']));
-            $dir = $this->tmpName.'/datas/sources';
+            $subdirs = explode('/', trim(dirname($row['file']), "/"));
+            $dir = '';
             foreach($subdirs as $subdir) {
-                $dir .= '/'.$subdir;
-                if (!file_exists($dir)) {
-                    mkdir($dir, 0755);
+                $dir .= "/$subdir";
+                if (!isset($dirs[$dir])) {
+                    mkdir($path.$dir, 0755);
+                    $dirs[$dir] = 1;
                 }
             }
 
-            $path = dirname($this->tmpName).'/code/'.$row['file'];
-            if (!file_exists($path)) {
+            $sourcePath = "$pathToSource$row[file]";
+            if (!file_exists($sourcePath)) {
                 continue;
             }
-            $source = @show_source($path, true);
+
+            $id = str_replace('/', '_', $row['file']);
+            $source = @show_source($sourcePath, true);
             $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.makeHtml($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
-            $source = preg_replace_callback('#<br />#is', function($x) { static $i = 0; return '<br /><a name="l'.++$i.'" />'; }, $source);
-            file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], $source);
+            $source = preg_replace_callback('#<br />#is', function($x) { 
+                static $i = 0; 
+                return '<br /><a name="l'.++$i.'" />'; 
+            }, $source);
+            file_put_contents("$path$row[file]", $source);
         }
 
         $blocjs = <<<JAVASCRIPT
-  <script>
+<script>
   "use strict";
 
   $('.menuitem').click(function(event){
@@ -3550,7 +3566,6 @@ JAVASCRIPT;
         window.location.hash = 'l' + line;
   }
   
-
   </script>
 JAVASCRIPT;
         $html = $this->getBasedPage('codes');

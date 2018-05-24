@@ -34,6 +34,7 @@ use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Phpexec;
 use ProgressBar\Manager as ProgressBar;
+use Exception;
 
 class Analyze extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -205,9 +206,10 @@ GREMLIN;
             display( "$analyzer_class running\n");
             try {
                 $analyzer->run($this->config);
-            } catch(\Exception $error) {
+            } catch(Exception $error) {
                 $end = microtime(true);
                 display( "$analyzer_class : error \n");
+                print $error->getMessage();
                 $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$error->getMessage());
                 $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
                 $this->checkAnalyzed();
