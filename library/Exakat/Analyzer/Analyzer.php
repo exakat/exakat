@@ -564,7 +564,7 @@ GREMLIN
 
     public function fullcodeInside($fullcode) {
         // $fullcode is a name of a variable
-        $gremlin = 'emit( ).repeat( out() ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}';
+        $gremlin = 'emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}';
         $this->addMethod($gremlin);
 
         return $this;
@@ -572,7 +572,7 @@ GREMLIN
 
     public function noFullcodeInside($fullcode) {
         // $fullcode is a name of a variable
-        $gremlin = 'not( where( __.emit( ).repeat( out() ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}) )';
+        $gremlin = 'not( where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}) )';
         $this->addMethod($gremlin);
 
         return $this;
@@ -1380,14 +1380,14 @@ GREMLIN
 
     public function hasChildren($childrenClass, $outs = array()) {
         if (empty($outs)) {
-            $out = '.out()';
+            $out = '.out( )';
         } else {
             $out = array();
             
             $outs = makeArray($outs);
             foreach($outs as $o) {
                 if (empty($o)) {
-                    $out[] = '.out()';
+                    $out[] = '.out( )';
                 } else {
                     $out[] = ".out('$o')";
                 }
@@ -1403,14 +1403,14 @@ GREMLIN
         
     public function hasNoChildren($childrenClass, $outs = array()) {
         if (empty($outs)) {
-            $out = '.out()';
+            $out = '.out( )';
         } else {
             $out = array();
             
             $outs = makeArray($outs);
             foreach($outs as $o) {
                 if (empty($o)) {
-                    $out[] = '.out()';
+                    $out[] = '.out( )';
                 } else {
                     $out[] = ".out('$o')";
                 }
