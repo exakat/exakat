@@ -26,20 +26,30 @@ use Exakat\Analyzer\Analyzer;
 
 class DependantTrait extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         // Case for $this->method()
         $this->atomIs('Trait')
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('BLOCK')
-             ->atomInside('Methodcall')
+             ->atomInsideNoDefinition('Methodcall')
              ->outIs('OBJECT')
              ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->savePropertyAs('code', 'method')
-             ->goToTrait()
-             ->raw('not( where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
-                             .out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == method } ) )')
+             ->savePropertyAs('lccode', 'methode')
+             ->back('first')
+             ->raw(<<<GREMLIN
+not(    
+    where( 
+        __.emit().repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times($MAX_LOOPING)
+          .out("METHOD", "MAGICMETHOD")
+          .hasLabel("Method", "Magicmethod")
+          .filter{ it.get().value("lccode") == methode } 
+         ) 
+    )
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 
@@ -57,8 +67,19 @@ class DependantTrait extends Analyzer {
 
              ->savePropertyAs('code', 'property')
              ->goToTrait()
-             ->raw('not( where( __.emit().repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.').hasLabel("Trait")
-                             .out("PPP").hasLabel("Ppp").out("PPP").filter{ it.get().value("propertyname") == property } ) )')
+             ->raw(<<<GREMLIN
+not( 
+    where(
+      __.emit().repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times($MAX_LOOPING)
+               .hasLabel("Trait")
+               .out("PPP")
+               .hasLabel("Ppp")
+               .out("PPP")
+               .filter{ it.get().value("propertyname") == property } 
+    ) 
+)
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 
@@ -76,8 +97,21 @@ class DependantTrait extends Analyzer {
              ->tokenIs('T_VARIABLE')
              ->savePropertyAs('code', 'property')
              ->goToTrait()
-             ->raw('not( where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
-                             .out("PPP").hasLabel("Ppp").out("PPP").coalesce(__.out("LEFT"), __.filter{ true }).filter{ it.get().value("code") == property } ) )')
+             ->raw(<<<GREMLIN
+not( 
+    where( 
+        __.emit().repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times($MAX_LOOPING)
+                 .out("PPP")
+                 .hasLabel("Ppp")
+                 .out("PPP")
+                 .coalesce(__.out("LEFT"), 
+                           __.filter{ true }
+                          )
+                 .filter{ it.get().value("code") == property } 
+    ) 
+)
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 
@@ -93,10 +127,20 @@ class DependantTrait extends Analyzer {
              ->inIs('CLASS')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
-             ->savePropertyAs('code', 'method')
+             ->savePropertyAs('lccode', 'method')
              ->goToTrait()
-             ->raw('not( where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
-                             .out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == method } ) )')
+             ->raw(<<<GREMLIN
+not(
+     where( 
+        __.emit().repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times($MAX_LOOPING)
+                 .out("METHOD")
+                 .hasLabel("Method")
+                 .out("NAME")
+                 .filter{ it.get().value("lccode") == method } 
+    ) 
+)
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 
