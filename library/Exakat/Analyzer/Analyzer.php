@@ -1164,9 +1164,7 @@ GREMLIN
 
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
-        if (empty($diff)) {
-            $this->addMethod(self::STOP_QUERY);
-        } else {
+        if (!empty($diff)) {
             // alternative : coalesce(out('LEFT'),  __.filter{true} )
             $this->addMethod("until( __.not(outE(".$this->SorA($link).")) ).repeat(out(".$this->SorA($link)."))");
         }

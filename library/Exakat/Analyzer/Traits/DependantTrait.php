@@ -55,7 +55,7 @@ GREMLIN
 
         // Case for $this->$properties
         $this->atomIs('Trait')
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('BLOCK')
              ->atomInside('Member')
              ->outIs('OBJECT')
@@ -63,7 +63,6 @@ GREMLIN
              ->inIs('OBJECT')
              ->outIs('MEMBER')
              ->outIsIE('VARIABLE') // for arrays
-             ->tokenIs('T_STRING')
 
              ->savePropertyAs('code', 'property')
              ->goToTrait()
@@ -86,7 +85,7 @@ GREMLIN
         // Case for class::$properties
         $this->atomIs('Trait')
              ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
@@ -118,14 +117,14 @@ GREMLIN
         // Case for class::methodcall
         $this->atomIs('Trait')
              ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('BLOCK')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
              ->tokenIs(self::$STATICCALL_TOKEN)
              ->samePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->tokenIs('T_STRING')
              ->savePropertyAs('lccode', 'method')
              ->goToTrait()
