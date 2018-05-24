@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 21 May 2018 19:53:08 +0000
-.. comment: Generation hash : ce65af1a6be7816f64f66517ad28e07843edc1f7
+.. comment: Generation date : Thu, 24 May 2018 08:30:03 +0000
+.. comment: Generation hash : 041f1ef0db7a4930911c863e43a40ad0160a4c20
 
 
 .. _analyze:
@@ -869,7 +869,7 @@ Total : 25 analysis
 Performances
 ++++++++++++
 
-Total : 33 analysis
+Total : 34 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -893,6 +893,7 @@ Total : 33 analysis
 * :ref:`Slow Functions <slow-functions>`
 * :ref:`Substring First <substring-first>`
 * :ref:`Use PHP7 Encapsed Strings <use-php7-encapsed-strings>`
+* :ref:`Use The Blind Var <use-the-blind-var>`
 * :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 * :ref:`time() Vs strtotime() <time()-vs-strtotime()>`
 * Classes/UseClassOperator
@@ -910,12 +911,13 @@ Total : 33 analysis
 Security
 ++++++++
 
-Total : 34 analysis
+Total : 35 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
 * :ref:`Compare Hash <compare-hash>`
+* :ref:`Configure Extract <configure-extract>`
 * :ref:`Direct Injection <direct-injection>`
 * :ref:`Dynamic Library Loading <dynamic-library-loading>`
 * :ref:`Encoded Simple Letters <encoded-simple-letters>`

@@ -120,7 +120,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/array <http://php.net/manual/en/book.array.php>`_
 * `ext/php-ast <https://pecl.php.net/package/ast>`_
 * `ext/bcmath <http://www.php.net/bcmath>`_
-* `ext/bzip2 <http://nl1.php.net/manual/en/ref.bzip2.php>`_
+* `ext/bzip2 <http://php.net/bzip2>`_
 * `ext/cairo <https://cairographics.org/>`_
 * `ext/calendar <http://www.php.net/manual/en/ref.calendar.php>`_
 * `ext/cmark <https://github.com/commonmark/cmark>`_
@@ -382,8 +382,14 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.2.9
+
+  * Configure Extract (Security/ConfigureExtract ; Security)
+  * Use The Blind Var (Performances/UseBlindVar)
+
 * 1.2.8
 
+  * Cache Variable Outside Loop (Performances/CacheVariableOutsideLoop ; Unassigned)
   * Cant Instantiate Class (Classes/CantInstantiateClass)
   * Do In Base (Performances/DoInBase ; Performances)
   * Php/FailingAnalysis (Php/FailingAnalysis ; Internal)
@@ -2015,7 +2021,7 @@ List of external links mentionned in this documentation.
 * `bazaar <http://bazaar.canonical.com/en/>`_
 * `BC Math Functions <http://www.php.net/bcmath>`_
 * `browscap <http://browscap.org/>`_
-* `Bzip2 Functions <http://nl1.php.net/manual/en/ref.bzip2.php>`_
+* `Bzip2 Functions <http://php.net/bzip2>`_
 * `Cairo Graphics Library <https://cairographics.org/>`_
 * `Cake 3.0 migration guide <http://book.cakephp.org/3.0/en/appendices/3-0-migration-guide.html>`_
 * `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_
@@ -2115,6 +2121,7 @@ List of external links mentionned in this documentation.
 * `ext/zookeeper <http://php.net/zookeeper>`_
 * `extension FANN <http://php.net/manual/en/book.fann.php>`_
 * `extension mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_
+* `extract <http://php.net/extract>`_
 * `Ez <https://ez.no/>`_
 * `FAM <http://oss.sgi.com/projects/fam/>`_
 * `FastCGI Process Manager <http://php.net/fpm>`_
@@ -2129,8 +2136,8 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
@@ -2384,6 +2391,7 @@ List of external links mentionned in this documentation.
 * `xcache <https://xcache.lighttpd.net/>`_
 * `Xdebug <https://xdebug.org/>`_
 * `xdiff <http://php.net/manual/en/book.xdiff.php>`_
+* `XHprof Documentation <http://web.archive.org/web/20110514095512/http://mirror.facebook.net/facebook/xhprof/doc.html>`_
 * `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injections>`_
 * `XML Parser <http://www.php.net/manual/en/book.xml.php>`_
 * `XML-RPC <http://www.php.net/manual/en/book.xmlrpc.php>`_
@@ -2452,7 +2460,6 @@ List of external links mentionned in this documentation.
 * `zend-validator <https://github.com/zendframework/zend-validator>`_
 * `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_
 * `ZeroMQ <http://zeromq.org/>`_
-* `ZHprof Documentation <http://web.archive.org/web/20110514095512/http://mirror.facebook.net/facebook/xhprof/doc.html>`_
 * `Zip <http://php.net/manual/en/book.zip.php>`_
 * `Zlib <http://php.net/manual/en/book.zlib.php>`_
 
@@ -3328,6 +3335,7 @@ Performances
 |   analyzer[] = "Performances/SimpleSwitch";
 |   analyzer[] = "Performances/SlowFunctions";
 |   analyzer[] = "Performances/SubstrFirst";
+|   analyzer[] = "Performances/UseBlindVar";
 |   analyzer[] = "Performances/timeVsstrtotime";
 |   analyzer[] = "Php/ShouldUseArrayColumn";
 |   analyzer[] = "Php/ShouldUseFunction";
@@ -3357,6 +3365,7 @@ Security
 |   analyzer[] = "Security/AnchorRegex";
 |   analyzer[] = "Security/AvoidThoseCrypto";
 |   analyzer[] = "Security/CompareHash";
+|   analyzer[] = "Security/ConfigureExtract";
 |   analyzer[] = "Security/CurlOptions";
 |   analyzer[] = "Security/DirectInjection";
 |   analyzer[] = "Security/DontEchoError";

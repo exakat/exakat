@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 21 May 2018 19:53:08 +0000
-.. comment: Generation hash : ce65af1a6be7816f64f66517ad28e07843edc1f7
+.. comment: Generation date : Thu, 24 May 2018 08:30:03 +0000
+.. comment: Generation hash : 041f1ef0db7a4930911c863e43a40ad0160a4c20
 
 
 .. _$http\_raw\_post\_data:
@@ -3056,6 +3056,51 @@ See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_.
 +------------+-------------------------------+
 | Themes     | :ref:`Analyze`                |
 +------------+-------------------------------+
+
+
+
+.. _configure-extract:
+
+Configure Extract
+#################
+
+
+The `'extract() <http://www.php.net/extract>`_ function overwrites local variables when left unconfigured.
+
+Extract imports variables from an array into the local scope. In case of a conflict, that is when a local variable already exists, it overwrites the previous variable.
+
+In fact, `'extract() <http://www.php.net/extract>`_ may be configured to handle the situation differently : it may skip the conflicting variable, prefix it, prefix it only if it exists, only import overwriting variables... It may also import them as references to the original values.
+
+This analysis reports `'extract() <http://www.php.net/extract>`_ when it is not configured explicitely. If overwriting is the intended objective, it is not reported.
+
+.. code-block:: php
+
+   <?php
+   
+   // ignore overwriting variables
+   extract($array, EXTR_SKIP);
+   
+   // prefix all variables explicitely variables with 'php_'
+   extract($array, EXTR_PREFIX_ALL, 'php_');
+   
+   // overwrites explicitely variables
+   extract($array, EXTR_OVERWRITE);
+   
+   // overwrites implicitely variables : do we really want that? 
+   extract($array, EXTR_OVERWRITE);
+   
+   ?>
+
+
+Always avoid using `'extract() <http://www.php.net/extract>`_ on untrusted sources, such as ``$_GET``, ``$_POST``, ``$_FILES``, or even databases records.
+
+See also `extract <http://php.net/extract>`_.
+
++------------+---------------------------+
+| Short name | Security/ConfigureExtract |
++------------+---------------------------+
+| Themes     | :ref:`Security`           |
++------------+---------------------------+
 
 
 
@@ -20377,6 +20422,44 @@ It is recommended to avoid hardcoding the temporary file. It is better to rely o
 +------------+-------------------------+
 | Themes     | :ref:`Analyze`          |
 +------------+-------------------------+
+
+
+
+.. _use-the-blind-var:
+
+Use The Blind Var
+#################
+
+
+When in a loop, it is faster to rely on the blind var, rather than the original source.
+
+When the key is referenced in the foreach loop, it is faster to use the available container to access a value for reading.
+
+Note that it is also faster to use the value with a reference to handle the writings.
+
+.. code-block:: php
+
+   <?php
+   
+   // Reaching $source[$key] via $value is faster
+   foreach($source as $key => $value) {
+       $coordinates = array('x' => $value[0],
+                            'y' => $value[1]);
+   }
+   
+   // Reaching $source[$key] via $source is slow
+   foreach($source as $key => $value) {
+       $coordinates = array('x' => $source[$key][0],
+                            'y' => $source[$key][1]);
+   }
+   
+   ?>
+
++------------+--------------------------+
+| Short name | Performances/UseBlindVar |
++------------+--------------------------+
+| Themes     | :ref:`Performances`      |
++------------+--------------------------+
 
 
 
