@@ -168,8 +168,7 @@ class FindExternalLibraries extends Tasks {
 
         $store = array();
         foreach($newConfigs as $library => $file) {
-            $store[] = array('library' => $library,
-                             'file'    => $file);
+            $store[] = compact('library','file');
         }
 
         $this->datastore->cleanTable('externallibraries');

@@ -3650,7 +3650,7 @@ JAVASCRIPT;
             $listPoint = array();
             foreach($points as $point => $status) {
                 
-                if (isset($originals[$section][$point]) && isset($this->frequences[$originals[$section][$point]])) {
+                if (isset($originals[$section][$point], $this->frequences[$originals[$section][$point]])) {
                     $percentage = $this->frequences[$originals[$section][$point]];
                     $percentageDisplay = $percentage;
                 } else {
