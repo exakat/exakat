@@ -1,4 +1,4 @@
-Version 1.2.9 (Xu Jingzong, coming up)
+Version 1.2.9 (Wang Gui, coming up)
 + Architecture
     + 
 + Report
