@@ -48,7 +48,8 @@ class Load extends Tasks {
 
     private $php    = null;
     private $loader = null;
-    private $loaderList = array('SplitGraphson');
+    private $loaderList = array('SplitGraphson',
+                                );
     //'CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv',
 
     private $precedence   = null;

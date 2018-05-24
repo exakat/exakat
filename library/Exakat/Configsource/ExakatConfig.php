@@ -30,17 +30,13 @@ class ExakatConfig extends Config {
     private $gremlins = array( 'tinkergraph' => 'Tinkergraph',
                                'gsneo4j'     => 'GSNeo4j',
                                'janusgraph'  => 'Janusgraph',
-                               'januscaes'   => 'JanusCaES',
                                'nogremlin'   => 'NoGremlin',
-                               'tcsv'        => 'Tcsv',
                                );
 
-    private $loaders = array( 'tinkergraph' => 'Tinkergraph',
+    private $loaders = array( 'tinkergraph' => 'SplitGraphson',
                               'gsneo4j'     => 'SplitGraphson',
                               'janusgraph'  => 'Janusgraph',
-                              'januscaes'   => 'JanusCaES',
                               'nogremlin'   => 'NoLoader',
-                              'tcsv'        => 'Tcsv',
                               );
 
     public function __construct($projects_root) {
