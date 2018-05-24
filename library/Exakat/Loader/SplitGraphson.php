@@ -80,7 +80,6 @@ class SplitGraphson {
     }
 
     public function finalize() {
-
         display("Init finalize\n");
         $begin = microtime(true);
         $query = <<<GREMLIN
@@ -94,7 +93,7 @@ GREMLIN;
 
         $outE = array();
         $res = $sqlite3->query(<<<SQL
-SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, calls.id - 1 AS call
+SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id  ELSE definitions.id  END AS definition, calls.id  AS call
 FROM calls
 LEFT JOIN definitions 
     ON definitions.type       = calls.type       AND
