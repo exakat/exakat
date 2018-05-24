@@ -32,6 +32,7 @@ class ListOmissions extends Analyzer {
     }
     
     public function analyze() {
+        // list($a, $b, $c) = array(1,2,3);
         $this->atomIs('List')
              ->outIs('ARGUMENT')
              ->analyzerIs('Variables/VariableUsedOnceByContext');
