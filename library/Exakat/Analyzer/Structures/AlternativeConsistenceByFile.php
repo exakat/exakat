@@ -29,7 +29,7 @@ class AlternativeConsistenceByFile extends Analyzer {
         $atoms = array('Ifthen', 'Foreach', 'For', 'Switch', 'While');
         $atomsList = "'".implode("', '", $atoms)."'";
         
-        $MAX_LOOPING = self::$MAX_LOOPING;
+        $MAX_LOOPING = self::MAX_LOOPING;
 
         // $this->linksDown is important here.
         $this->atomIs('File')
