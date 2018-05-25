@@ -29,28 +29,35 @@ class WrittenOnlyVariable extends Analyzer {
     
     public function dependsOn() {
         return array('Variables/IsModified',
-                     'Variables/IsRead');
+                     'Variables/IsRead',
+                    );
     }
     
     public function analyze() {
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
         
-        $this->atomIs('Function')
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')
-             ->atomInside(self::$VARIABLES_ALL)
+             ->atomInsideNoDefinition(self::$VARIABLES_ALL)
              ->_as('results')
              ->codeIsNot($superglobals)
              // this variable is modified
              ->analyzerIs('Variables/IsModified')
              // this variable is not read
              ->analyzerIsNot('Variables/IsRead')
-             ->raw('sideEffect{ name = it.get().value("code"); }')
-             
+             ->savePropertyAs('code', 'name')
              ->goToFunction()
-             ->raw('where( __.out("BLOCK").repeat( __.out('.$this->linksDown.')).emit(hasLabel("Variable", "Variableobject", "Variablearray")).times('.self::MAX_LOOPING.')
+             ->raw(<<<GREMLIN
+not(
+    where( __.out("BLOCK").repeat( __.out({$this->linksDown})).emit(hasLabel("Variable", "Variableobject", "Variablearray")).times($MAX_LOOPING)
                              .filter{ it.get().value("code") == name}
-                             .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead").count().is(neq(0)) )
-                             .count().is(eq(0)) )')
+                             .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") ) 
+          )
+)
+GREMLIN
+)
              ->back('results');
         $this->prepareQuery();
     }

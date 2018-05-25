@@ -30,7 +30,7 @@ class HasFluentInterface extends Analyzer {
         // $this->a()->b()->c();
         $this->atomIs('Class')
              ->outIs('METHOD')
-             ->atomInside('Return')
+             ->atomInsideNoDefinition('Return')
              ->outIs('RETURN')
              ->atomIs('This')
              ->back('first');

@@ -37,11 +37,23 @@ class OverwriteException extends Analyzer {
              ->savePropertyAs('code', 'exception')
              ->inIs('VARIABLE')
              ->outIs('BLOCK')
-             ->atomInside('Variable')
+             ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'exception')
              ->analyzerIs('Variables/IsModified')
              // not chained and replaced.
-             ->raw('not( where( __.in("LEFT").out("RIGHT").out("NEW").out("ARGUMENT").has("rank", 2).filter{ it.get().value("code") == exception; } ) )')
+             ->raw(<<<GREMLIN
+not( 
+    __.where( 
+        __.in("LEFT")
+          .out("RIGHT")
+          .out("NEW")
+          .out("ARGUMENT")
+          .has("rank", 2)
+          .filter{ it.get().value("code") == exception; } 
+        )
+)
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
     }

@@ -99,6 +99,8 @@ abstract class Analyzer {
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $CLASSES_NAMED    = 'Class';
     static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
+    static public $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
+    static public $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
     
     const STOP_QUERY = 'filter{ false; }';
     
@@ -1447,7 +1449,7 @@ GREMLIN
     }
 
     public function functionDefinition() {
-        $this->addMethod('in("DEFINITION").hasLabel("Function", "Method", "Closure")');
+        $this->addMethod('in("DEFINITION").hasLabel("Function", "Method", "Magicmethod", "Closure")');
     
         return $this;
     }
@@ -1487,7 +1489,7 @@ GREMLIN
     }
     
     public function goToLoop() {
-        $this->goToInstruction(array('For', 'Foreach', 'While', 'Dowhile'));
+        $this->goToInstruction(self::$LOOPS_ALLS);
         
         return $this;
     }

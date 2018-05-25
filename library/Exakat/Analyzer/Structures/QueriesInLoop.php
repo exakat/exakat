@@ -30,7 +30,7 @@ class QueriesInLoop extends Analyzer {
         // for() { mysql_query(); }
         $this->atomIs(array('Foreach', 'For', 'While'))
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->codeIs(array('cubrid_query',
                             'cubrid_prepare',
                             'cubrid_execute',

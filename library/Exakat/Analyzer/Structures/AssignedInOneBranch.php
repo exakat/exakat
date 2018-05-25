@@ -27,13 +27,15 @@ use Exakat\Analyzer\Analyzer;
 class AssignedInOneBranch extends Analyzer {
     public function analyze() {
         $equal = $this->dictCode->translate(array('='));
+        
+        $MAX_LOOPING = self::MAX_LOOPING;
 
         // if() {$b = 1; } else { }
         $this->atomIs('Ifthen')
              ->isNot('token', 'T_ELSEIF')
              ->hasOut('ELSE')
              ->outIs('THEN')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->codeIs('=')
              ->outIs('RIGHT')
              ->atomIs(self::$LITERALS)
@@ -42,7 +44,19 @@ class AssignedInOneBranch extends Analyzer {
              ->atomIs(self::$CONTAINERS)
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
-             ->raw('not( where( __.out("ELSE").not(has("token", "T_ELSEIF")).emit( ).repeat( __.out() ).times('.self::MAX_LOOPING.').hasLabel("Assignation").has("token", "T_EQUAL").out("LEFT").hasLabel("Variable", "Staticproperty", "Member", "Array").filter{ it.get().value("fullcode").toLowerCase() == variable.toLowerCase()}) )')
+             ->raw(<<<GREMLIN
+not( 
+    __.where( 
+        __.out("ELSE").not(has("token", "T_ELSEIF"))
+          .emit( ).repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING).hasLabel("Assignation")
+          .has("token", "T_EQUAL")
+          .out("LEFT")
+          .hasLabel("Variable", "Staticproperty", "Member", "Array")
+          .filter{ it.get().value("fullcode").toLowerCase() == variable.toLowerCase()}
+        ) 
+)
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 
@@ -50,7 +64,7 @@ class AssignedInOneBranch extends Analyzer {
         $this->atomIs('Ifthen')
              ->isNot('token', 'T_ELSEIF')
              ->outIs('ELSE')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->codeIs('=')
              ->outIs('RIGHT')
              ->atomIs(self::$LITERALS)
@@ -59,7 +73,19 @@ class AssignedInOneBranch extends Analyzer {
              ->atomIs(self::$CONTAINERS)
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
-             ->raw('not( where( __.out("THEN").not(has("token", "T_ELSEIF")).emit( ).repeat( __.out() ).times('.self::MAX_LOOPING.').hasLabel("Assignation").has("token", "T_EQUAL").out("LEFT").hasLabel("Variable", "Staticproperty", "Member", "Array").filter{ it.get().value("fullcode").toLowerCase() == variable.toLowerCase()}) )')
+             ->raw(<<<GREMLIN
+not( 
+    __.where( 
+        __.out("THEN").not(has("token", "T_ELSEIF"))
+          .emit( ).repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING)
+          .hasLabel("Assignation").has("token", "T_EQUAL")
+          .out("LEFT")
+          .hasLabel("Variable", "Staticproperty", "Member", "Array")
+          .filter{ it.get().value("fullcode").toLowerCase() == variable.toLowerCase()}
+        ) 
+)
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
     }

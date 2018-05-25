@@ -47,7 +47,7 @@ class ModernEmpty extends Analyzer {
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
              ->nextSibling()
-             ->atomInside('Empty')
+             ->atomInsideNoDefinition('Empty')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'variable')
              ->back('first')

@@ -46,7 +46,7 @@ class ObjectReferences extends Analyzer {
              ->savePropertyAs('code', 'variable') // Avoid &
              ->inIs('ARGUMENT')
              ->outIs('BLOCK')
-             ->atomInside(array('Methodcall', 'Member'))
+             ->atomInsideNoDefinition(array('Methodcall', 'Member'))
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'variable');
         $this->prepareQuery();
@@ -58,7 +58,7 @@ class ObjectReferences extends Analyzer {
              ->savePropertyAs('code', 'variable')
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside(array('Methodcall', 'Member'))
+             ->atomInsideNoDefinition(array('Methodcall', 'Member'))
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'variable');
         $this->prepareQuery();

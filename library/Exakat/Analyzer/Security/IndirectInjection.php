@@ -65,7 +65,7 @@ GREMLIN;
              ->inIs('ARGUMENT')
 
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->outIs('ARGUMENT')
              ->analyzerIs('Security/SensitiveArgument')
              ->outIsIE('CODE')

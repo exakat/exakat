@@ -31,7 +31,7 @@ class NoStringWithAppend extends Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('BLOCK')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->codeIs('=')
              ->_as('results')
              ->outIs('RIGHT')

@@ -32,11 +32,12 @@ class MixedKeys extends Analyzer {
         // build with array()
         $this->atomIs('Ppp')
              ->outIs('PPP')
-             ->atomInside('Arrayliteral')
+             ->atomInsideNoDefinition('Arrayliteral')
              ->_as('result')
 
              // count keys styles
-             ->raw('where(
+             ->raw(<<<GREMLIN
+where(
    __.sideEffect{ counts = [:]; }
       .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
       .hasLabel("String", "Integer", "Real", "Boolean", "Staticconstant", "Identifier").where(__.out("CONCAT").count().is(eq(0)))
@@ -45,7 +46,9 @@ class MixedKeys extends Analyzer {
             if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }
         }
         .map{ counts.size(); }.is(eq(2))
-)')
+)
+GREMLIN
+)
               ->back('result');
         $this->prepareQuery();
     }

@@ -29,10 +29,10 @@ class ClosureThisSupport extends Analyzer {
     protected $phpVersion = '5.4-';
     
     public function analyze() {
+        // function () { $this->a; }
         $this->atomIs('Closure')
              ->outIs('BLOCK')
-             ->atomInside('Variable')
-             ->atomIs('This')
+             ->atomInsideNoDefinition('This')
              ->back('first');
         $this->prepareQuery();
     }

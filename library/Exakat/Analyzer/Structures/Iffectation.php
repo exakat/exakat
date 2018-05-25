@@ -30,7 +30,7 @@ class Iffectation extends Analyzer {
         // if ( 2 == ($a = 1)) {} (deeper inside)
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->hasNoIn('ARGUMENT');
         $this->prepareQuery();
     }

@@ -40,7 +40,7 @@ class EmptyWithExpression extends Analyzer {
              ->savePropertyAs('code', 'storage')
              ->inIs('LEFT')
              ->nextSiblings()
-             ->atomInside('Empty')
+             ->atomInsideNoDefinition('Empty')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->samePropertyAs('code', 'storage')

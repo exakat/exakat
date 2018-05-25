@@ -32,7 +32,7 @@ class DontSendThisInConstructor extends Analyzer {
              ->codeIs('__construct')
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('This')
+             ->atomInsideNoDefinition('This')
              ->inIs('ARGUMENT')
              ->tokenIsNot('T_ARRAY') // array($this, 'method') is probably a callback.
              ->codeIsNot('get_class')

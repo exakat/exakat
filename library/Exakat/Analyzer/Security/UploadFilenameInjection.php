@@ -30,7 +30,7 @@ class UploadFilenameInjection extends Analyzer {
         //if(@move_uploaded_file($_FILES['upload']['tmp_name'], $_FILES['upload']['name']))
         $this->atomFunctionIs('\move_uploaded_file')
              ->outWithRank('ARGUMENT', 1)
-             ->atomInside('Phpvariable')
+             ->atomInsideNoDefinition('Phpvariable')
              ->codeIs('$_FILES', self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
@@ -40,16 +40,16 @@ class UploadFilenameInjection extends Analyzer {
         $this->atomFunctionIs('\move_uploaded_file')
              ->hasFunction()
              ->outWithRank('ARGUMENT', 1)
-             ->atomInside(array('Variable', 'Variableobject', 'Variablearray'))
+             ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
              ->savePropertyAs('code', 'relay')
              ->goToFunction()
              ->outIs('BLOCK')
-             ->atomInside(self::$VARIABLES_ALL)
+             ->atomInsideNoDefinition(self::$VARIABLES_ALL)
              ->samePropertyAs('code', 'relay')
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomInside('Phpvariable')
+             ->atomInsideNoDefinition('Phpvariable')
              ->codeIs('$_FILES', self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
@@ -59,16 +59,16 @@ class UploadFilenameInjection extends Analyzer {
         $this->atomFunctionIs('\move_uploaded_file')
              ->hasNoFunction()
              ->outWithRank('ARGUMENT', 1)
-             ->atomInside(array('Variable', 'Variableobject', 'Variablearray'))
+             ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
              ->savePropertyAs('code', 'relay')
              ->goToFile()
              ->outIs('FILE')
-             ->atomInsideNoDefinition(self::$VARIABLES_ALL)
+             ->atomInsideNoDefinitionNoDefinition(self::$VARIABLES_ALL)
              ->samePropertyAs('code', 'relay')
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomInside('Phpvariable')
+             ->atomInsideNoDefinition('Phpvariable')
              ->codeIs('$_FILES', self::TRANSLATE, self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();

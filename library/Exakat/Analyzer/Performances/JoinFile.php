@@ -47,7 +47,7 @@ class JoinFile extends Analyzer {
              ->savePropertyAs('fullcode', 'variable')
              ->inIs('LEFT')
              ->nextSibling()
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs(array('\\join', '\\implode'))
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')

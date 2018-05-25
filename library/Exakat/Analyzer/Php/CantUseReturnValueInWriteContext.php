@@ -30,7 +30,7 @@ class CantUseReturnValueInWriteContext extends Analyzer {
         $this->atomIs('Empty')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
-             ->atomIs(array('Methodcall', 'Functioncall', 'Staticmethodcall'))
+             ->atomIs(self::$FUNCTIONS_CALLS)
              ->back('first');
         $this->prepareQuery();
     }

@@ -99,7 +99,7 @@ class UseConstantAsArguments extends Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('Logical')
-                 ->atomInside(array('Identifier', 'Nsname'))
+                 ->atomInsideNoDefinition(array('Identifier', 'Nsname'))
                  ->analyzerIsNot('Constants/IsPhpConstant')
                  ->hasNoIn('NAME')
                  ->back('first');
@@ -135,7 +135,7 @@ class UseConstantAsArguments extends Analyzer {
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs('Logical')
-                     ->atomInside(array('Identifier', 'Nsname'))
+                     ->atomInsideNoDefinition(array('Identifier', 'Nsname'))
                      ->analyzerIs('Constants/IsPhpConstant')
                      ->regexIsNot('fullnspath', $regex)
                      ->back('first');

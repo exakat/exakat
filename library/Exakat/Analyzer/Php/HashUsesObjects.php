@@ -34,7 +34,7 @@ class HashUsesObjects extends Analyzer {
              ->savePropertyAs('fullcode', 'hash')
              ->inIs('LEFT')
              ->nextSiblings()
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->fullnspathIs('\\is_resource')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'hash')

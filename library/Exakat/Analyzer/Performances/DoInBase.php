@@ -54,10 +54,10 @@ class DoInBase extends Analyzer {
              ->back('first')
 
              ->outIs('BLOCK')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->codeIs('+=')
              ->outIs('RIGHT')
-             ->atomInside(array('Variable', 'Variableobject', 'Variablearray'))
+             ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
              ->samePropertyAs('code', 'row')
 
              ->back('first');
@@ -84,10 +84,10 @@ class DoInBase extends Analyzer {
              ->back('first')
 
              ->outIs('BLOCK')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->codeIs(array('+='), self::TRANSLATE, self::CASE_SENSITIVE)
              ->outIs('RIGHT')
-             ->atomInside(array('Variable', 'Variableobject', 'Variablearray'))
+             ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
              ->samePropertyAs('code', 'row')
 
              ->back('first');

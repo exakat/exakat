@@ -34,7 +34,7 @@ class FunctionPreSubscripting extends Analyzer {
         // instead of f()['e']
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs(array('Functioncall', 'Staticmethodcall', 'Methodcall'))
+             ->atomIs(self::$FUNCTIONS_CALLS)
              ->back('first')
              ->outIs('LEFT')
              ->atomIs('Variable')

@@ -70,7 +70,7 @@ class DirectInjection extends Analyzer {
              ->inIs('ARGUMENT')
 
              ->outIs('BLOCK')
-             ->atomInside(array('Functioncall', 'Print', 'Echo', 'Exit'))
+             ->atomInsideNoDefinition(array('Functioncall', 'Print', 'Echo', 'Exit'))
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->analyzerIs('Security/SensitiveArgument')

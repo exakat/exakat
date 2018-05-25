@@ -26,11 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class NoCastToInt extends Analyzer {
     public function analyze() {
+        // $x = (int) 1 + 3;
         $this->atomIs('Cast')
              ->tokenIs('T_INT_CAST')
              ->outIs('CAST')
-             ->atomIsNot(array('Variable', 'Functioncall', 'Member', 'Staticproperty', 'Real', 'Multiplication', 'Addition'))
-             ->atomInside('Real')
+             ->atomIsNot(array('Variable', 'Functioncall', 'Member', 'Staticproperty', 'Real', 'Multiplication', 'Addition', 'Power'))
+             ->atomInsideNoDefinition('Real')
              ->back('first');
         $this->prepareQuery();
     }

@@ -61,7 +61,7 @@ where(
 .filter{ x.findAll{ a,b -> b > 0}.size() > 0}
 GREMLIN
                 )
-                ->atomInside(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+                ->atomInsideNoDefinition(self::$FUNCTIONS_CALLS)
                 ->hasNoChildren('Void', array('ARGUMENT'))
                 ->raw(<<<GREMLIN
       not(

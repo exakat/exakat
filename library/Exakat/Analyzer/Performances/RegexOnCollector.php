@@ -37,7 +37,7 @@ class RegexOnCollector extends Analyzer {
              ->savePropertyAs('fullcode', 'increment')
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->tokenIs('T_CONCAT_EQUAL')
 
              ->_as('collection')
@@ -50,7 +50,7 @@ class RegexOnCollector extends Analyzer {
              
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'collector')
 
@@ -67,7 +67,7 @@ class RegexOnCollector extends Analyzer {
              ->savePropertyAs('fullcode', 'increment')
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->tokenIs('T_EQUAL')
 
              ->_as('collection')
@@ -82,7 +82,7 @@ class RegexOnCollector extends Analyzer {
              
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'collector')
 

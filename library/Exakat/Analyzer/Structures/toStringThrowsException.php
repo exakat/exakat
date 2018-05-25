@@ -33,7 +33,7 @@ class toStringThrowsException extends Analyzer {
              ->codeIs('__toString', self::TRANSLATE, self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->outIs('BLOCK')
-             ->atomInside('Throw')
+             ->atomInsideNoDefinition('Throw')
              ->hasNoTryCatch()
              ->back('first');
         $this->prepareQuery();

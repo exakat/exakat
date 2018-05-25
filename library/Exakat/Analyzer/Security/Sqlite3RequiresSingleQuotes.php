@@ -55,7 +55,7 @@ class Sqlite3RequiresSingleQuotes extends Analyzer {
              ->back('first')
              
              ->nextSibling()
-             ->atomInside('Concatenation')
+             ->atomInsideNoDefinition('Concatenation')
              ->outIs('CONCAT')
              ->samePropertyAs('fullcode', 'variable')
              ->savePropertyAs('rank', 'rank')

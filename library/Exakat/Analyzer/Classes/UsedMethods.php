@@ -142,7 +142,7 @@ GREMLIN
              ->codeIs('__construct')
              ->back('first')
              ->outIs('METHOD')
-             ->atomInside('New')
+             ->atomInsideNoDefinition('New')
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->samePropertyAs('fullnspath', 'fullnspath')
