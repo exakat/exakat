@@ -63,7 +63,7 @@ class UploadFilenameInjection extends Analyzer {
              ->savePropertyAs('code', 'relay')
              ->goToFile()
              ->outIs('FILE')
-             ->atomInsideNoDefinitionNoDefinition(self::$VARIABLES_ALL)
+             ->atomInsideNoDefinition(self::$VARIABLES_ALL)
              ->samePropertyAs('code', 'relay')
              ->inIs('LEFT')
              ->atomIs('Assignation')
