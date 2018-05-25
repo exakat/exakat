@@ -1489,7 +1489,7 @@ GREMLIN
     }
     
     public function goToLoop() {
-        $this->goToInstruction(self::$LOOPS_ALLS);
+        $this->goToInstruction(self::$LOOPS_ALL);
         
         return $this;
     }
