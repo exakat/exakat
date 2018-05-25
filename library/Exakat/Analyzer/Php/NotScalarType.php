@@ -26,7 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class NotScalarType extends Analyzer {
     public function analyze() {
-        $fakeTypehints = array('integer', 'boolean', 'real', 'double');
+        $fakeTypehints = array('integer', 
+                               'boolean', 
+                               'real', 
+                               'double',
+                               'long',
+                               );
 
         // Typehint
         $this->atomIs(self::$FUNCTIONS_ALL)
