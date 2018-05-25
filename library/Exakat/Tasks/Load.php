@@ -2117,7 +2117,7 @@ SQL;
             $this->addLink($const, $def, 'CONST');
 
             if ($this->isContext(self::CONTEXT_CLASS) ||
-                $this->isContext(self::CONTEXT_TRAIT)   ) {
+                $this->isContext(self::CONTEXT_INTERFACE)   ) {
                 $this->addDefinition('classconst',   end($this->currentClassTrait)->fullnspath.'::'.$name->fullnspath, $const);
             } else {
                 $this->addDefinition('const', $name->fullnspath, $const);
