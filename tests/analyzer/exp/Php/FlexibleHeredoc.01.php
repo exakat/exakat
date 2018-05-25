@@ -1,11 +1,17 @@
 <?php
 
-$expected     = array('',
-                      '',
+$expected     = array( '<<<END
+    
+    flexible
+    
+    END',
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array( '<<<END
+    
+    not flexible
+    
+    END'
                      );
 
 ?>
