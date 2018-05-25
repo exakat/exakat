@@ -62,7 +62,7 @@ class Load extends Tasks {
     private $uses   = array('function'       => array(),
                             'staticmethod'   => array(),
                             'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                            'classconst'     => array(),
+                            'staticconstant' => array(),
                             'property'       => array(),
                             'staticproperty' => array(),
                             'const'          => array(),
@@ -564,7 +564,7 @@ SQL;
         $this->uses   = array('function'       => array(),
                               'staticmethod'   => array(),
                               'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                              'classconst'     => array(),
+                              'staticconstant' => array(),
                               'property'       => array(),
                               'staticproperty' => array(),
                               'const'          => array(),
@@ -648,7 +648,7 @@ SQL;
         $this->uses   = array('function'       => array(),
                               'staticmethod'   => array(),
                               'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                              'classconst'     => array(),
+                              'staticconstant' => array(),
                               'property'       => array(),
                               'staticproperty' => array(),
                               'const'          => array(),
@@ -2112,15 +2112,13 @@ SQL;
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
 
-            $this->addDefinition('const', $fullnspath, $def);
-
             $this->addLink($const, $def, 'CONST');
 
             if ($this->isContext(self::CONTEXT_CLASS) ||
                 $this->isContext(self::CONTEXT_INTERFACE)   ) {
-                $this->addDefinition('classconst',   end($this->currentClassTrait)->fullnspath.'::'.$name->fullnspath, $const);
+                $this->addDefinition('staticconstant',   end($this->currentClassTrait)->fullnspath.'::'.$name->fullcode, $def);
             } else {
-                $this->addDefinition('const', $name->fullnspath, $const);
+                $this->addDefinition('const', $fullnspath, $def);
             }
 
         } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON)));
