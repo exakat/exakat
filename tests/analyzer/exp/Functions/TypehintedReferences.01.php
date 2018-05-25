@@ -1,8 +1,8 @@
 <?php
 
 $expected     = array('function foo8(mixed &$i) { /**/ } ',
-                      'function foo9(X &$i) { /**/ } ', 
-                      'function foo10(A\B &$i) { /**/ } ', 
+                      'function foo9(X &$i) { /**/ } ',
+                      'function foo10(A\\B &$i) { /**/ } ',
                      );
 
 $expected_not = array('function foo1(int &$i) { /**/ } ',
@@ -21,7 +21,7 @@ $expected_not = array('function foo1(int &$i) { /**/ } ',
                       'function sfoo7(numeric $i) { /**/ } ',
                       'function sfoo8(mixed $i) { /**/ } ',
                       'function sfoo9(X $i) { /**/ } ',
-                      'function sfoo10(A\B $i) { /**/ } ',
+                      'function sfoo10(A\\B $i) { /**/ } ',
                      );
 
 ?>

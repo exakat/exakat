@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('preg_match(\'/\' . A::foo( ) . \'/\', $a, $b)', 
-                      'preg_match(\'/\' . foo( ) . \'/\', $a, $b)', 
-                      'preg_match(\'/\' . $s[2] . \'/\', $a, $b)', 
-                      'preg_match(\'/\' . $b->foo( ) . \'/\', $a, $b)', 
-                      'preg_match(\'/\' . $s->d . \'/\', $a, $b)', 
+$expected     = array('preg_match(\'/\' . A::foo( ) . \'/\', $a, $b)',
+                      'preg_match(\'/\' . foo( ) . \'/\', $a, $b)',
+                      'preg_match(\'/\' . $s[2] . \'/\', $a, $b)',
+                      'preg_match(\'/\' . $b->foo( ) . \'/\', $a, $b)',
+                      'preg_match(\'/\' . $s->d . \'/\', $a, $b)',
                       'preg_match(\'/\' . $s . \'/\', $a, $b)',
                      );
 

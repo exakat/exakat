@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array('function foo13(bool $s = INTEGER) { /**/ } ', 
-                      'function foo14(bool $s = i::INTEGER) { /**/ } ', 
-                      'function foo11(bool $s = \STRING) { /**/ } ', 
-                      'function foo12(bool $s = \INTEGER) { /**/ } ', 
-                      'function foo10(bool $s = STRING) { /**/ } ', 
-                      'function foo15(bool $s = i::STRING) { /**/ } ', 
-                      'function foo16(bool $s = i::ARRAY) { /**/ } '
+$expected     = array('function foo13(bool $s = INTEGER) { /**/ } ',
+                      'function foo14(bool $s = i::INTEGER) { /**/ } ',
+                      'function foo11(bool $s = \\STRING) { /**/ } ',
+                      'function foo12(bool $s = \\INTEGER) { /**/ } ',
+                      'function foo10(bool $s = STRING) { /**/ } ',
+                      'function foo15(bool $s = i::STRING) { /**/ } ',
+                      'function foo16(bool $s = i::ARRAY) { /**/ } ',
                      );
 
 $expected_not = array('function foo7(bool $s = Null) { /**/ } ',
