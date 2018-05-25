@@ -1155,6 +1155,8 @@ SQL;
             $this->addDefinition('staticmethod', $function->fullnspath, $function);
         } elseif ($function->atom === 'Method') {
             $this->addDefinition('method', $function->fullnspath, $function);
+            // double call for internal reference
+            $this->addDefinition('staticmethod', $function->fullnspath, $function);
         }
 
         if (!$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
