@@ -99,6 +99,9 @@ class Load extends Tasks {
     const VARIADIC          = 1;
     const NOT_VARIADIC      = '';
 
+    const FLEXIBLE          = 1;
+    const NOT_FLEXIBLE      = false;
+
     const REFERENCE         = 1;
     const NOT_REFERENCE     = '';
 
@@ -865,6 +868,11 @@ SQL;
                 $part->code        = rtrim($part->code,        "\n");
                 $part->fullcode    = rtrim($part->fullcode,    "\n");
                 $elements[] = $part;
+            }
+            // Get the closing quote for flexibility
+            $closeQuote = $this->tokens[$this->id + 1][1];
+            if (trim($closeQuote) !== $closeQuote) {
+                $string->flexible = 1;
             }
         }
         

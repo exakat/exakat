@@ -56,6 +56,7 @@ class Atom {
     public $args_max     = '';
     public $args_min     = '';
     public $bracket      = Load::NOT_BRACKET;
+    public $flexible     = Load::NOT_FLEXIBLE;
     public $close_tag    = Load::NO_CLOSING_TAG;
     public $aliased      = Load::NOT_ALIASED;
     public $propertyname = '';
@@ -97,6 +98,7 @@ class Atom {
         $this->boolean       = $this->boolean     ? 1 : null;
         $this->enclosing     = $this->enclosing   ? 1 : null;
         $this->bracket       = $this->bracket     ? 1 : null;
+        $this->flexible      = $this->flexible    ? 1 : null;
         $this->close_tag     = $this->close_tag   ? 1 : null;
         $this->aliased       = $this->aliased     ? 1 : null;
         
@@ -158,6 +160,7 @@ class Atom {
         if ($this->boolean)              { $return['boolean']      = 1; }
         if ($this->enclosing)            { $return['enclosing']    = 1; }
         if ($this->bracket)              { $return['bracket']      = 1; }
+        if ($this->flexible)             { $return['flexible']     = 1; }
         if ($this->close_tag)            { $return['close_tag']    = 1; }
         if ($this->aliased)              { $return['aliased']      = 1; }
         if ($this->alias !== '')         { $return['alias']        = $this->alias; }
@@ -193,7 +196,7 @@ class Atom {
         $this->strval        = $this->protectString($this->strval     );
         $this->noDelimiter   = $this->protectString($this->noDelimiter);
 
-//'alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'
+//'alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'flexible', 'close_tag', 'aliased', 'boolean'
         $this->alternative   = (int) $this->alternative;
         $this->reference     = (int) $this->reference  ;
         $this->heredoc       = (int) $this->heredoc    ;
@@ -202,6 +205,7 @@ class Atom {
         $this->constant      = (int) $this->constant   ;
         $this->boolean       = (int) $this->boolean    ;
         $this->bracket       = (int) $this->bracket    ;
+        $this->flexible      = (int) $this->flexible   ;
         $this->close_tag     = (int) $this->close_tag  ;
         $this->aliased       = (int) $this->aliased    ;
 
@@ -225,7 +229,7 @@ class Atom {
     }
     
     public function toGraphsonLine(&$id) {
-        $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant');
+        $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'flexible', 'close_tag', 'aliased', 'boolean', 'constant');
         $integerValues = array('count', 'intval', 'args_max', 'args_min');
 
         $falseValues = array('globalvar', 'variadic', 'enclosing', 'heredoc', 'aliased', 'alternative', 'reference');
