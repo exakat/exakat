@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MethodUsedBelow extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
         //////////////////////////////////////////////////////////////////
         // property + $this->property
         //////////////////////////////////////////////////////////////////
@@ -34,13 +35,16 @@ class MethodUsedBelow extends Analyzer {
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'methodname')
              ->goToClass()
-             ->raw('where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
+             ->raw(<<<GREMLIN
+where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times($MAX_LOOPING)
                              .where( __.out("METHOD").out("BLOCK")
-                                       .repeat( __.out()).emit().times('.self::MAX_LOOPING.').hasLabel("Methodcall")
+                                       .repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING).hasLabel("Methodcall")
                                        .where( __.out("OBJECT").hasLabel("This") )
                                        .out("METHOD").has("token", "T_STRING").filter{ it.get().value("lccode") == methodname}
                               )
-                         )')
+                         )
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 
@@ -52,12 +56,15 @@ class MethodUsedBelow extends Analyzer {
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'methodname')
              ->goToClass()
-             ->raw('where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
+             ->raw(<<<GREMLIN
+where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times($MAX_LOOPING)
                              .where( __.out("METHOD").out("BLOCK")
-                                       .repeat( __.out('.$this->linksDown.')).emit().times('.self::MAX_LOOPING.').hasLabel("Staticmethodcall")
+                                       .repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING).hasLabel("Staticmethodcall")
                                        .out("MEMBER").has("token", "T_STRING").filter{ it.get().value("lccode") == methodname}
                               )
-                         )')
+                         )
+GREMLIN
+)
              ->back('ppp');
         $this->prepareQuery();
         

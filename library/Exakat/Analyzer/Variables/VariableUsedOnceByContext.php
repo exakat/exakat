@@ -56,7 +56,7 @@ GREMLIN;
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->raw(<<<GREMLIN
 where( __.sideEffect{counts = [:]}
-                   .repeat( out().not( where( __.hasLabel("Function", "Closure", "Method", "Magicmethod") ) ) )
+                   .repeat( out({$this->linksDown}).not( where( __.hasLabel("Function", "Closure", "Method", "Magicmethod") ) ) )
                    .emit( ).times($MAX_LOOPING)
                    .hasLabel("Variable", "Variablearray", "Variableobject")
                    .not( where( __.in("MEMBER") ) )
@@ -69,7 +69,7 @@ where( __.sideEffect{counts = [:]}
                     }.fold()
                 )
          .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
-         .repeat( __.out().not( where( __.hasLabel("Function", "Closure") ) )  )
+         .repeat( __.out({$this->linksDown}).not( where( __.hasLabel("Function", "Closure") ) )  )
          .emit( )
          .times($MAX_LOOPING)
          .hasLabel("Variable", "Variablearray", "Variableobject")

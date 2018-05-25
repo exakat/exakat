@@ -53,7 +53,7 @@ GREMLIN;
         $MAX_LOOPING = self::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Php").out("CODE")
-     .repeat(__.out().not(hasLabel("Function", "Class", "Classanonymous", "Closure", "Trait", "Interface")) ).emit().times($MAX_LOOPING)
+     .repeat(__.out({$this->linksDown}).not(hasLabel("Function", "Class", "Classanonymous", "Closure", "Trait", "Interface")) ).emit().times($MAX_LOOPING)
      .hasLabel("Variable").values("code");
 GREMLIN;
         $implicitGLobals = $this->query($query)->toArray();

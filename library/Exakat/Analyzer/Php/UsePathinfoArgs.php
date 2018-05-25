@@ -26,16 +26,22 @@ use Exakat\Analyzer\Analyzer;
 
 class UsePathinfoArgs extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING
+
         // Only tested inside function, for smaller scope
         // This may be upgraded with array name (currently ignored)
         $this->atomFunctionIs('\\pathinfo')
              ->noChildWithRank('ARGUMENT', 1)
              ->goToFunction()
              // 2 indices are used at least
-             ->raw('where( __.out("BLOCK").emit().repeat( __.out() ).times('.self::MAX_LOOPING.')
+             ->raw(<<<GREMLIN
+where( __.out("BLOCK").emit().repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING)
                              .hasLabel("Array").out("INDEX").hasLabel("String")
                              .has("noDelimiter", within("dirname", "basename", "extension", "filename"))
-                             .dedup().by("noDelimiter").count().is(lt(3)))')
+                             .dedup().by("noDelimiter").count().is(lt(3))
+      )
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 

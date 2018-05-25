@@ -28,12 +28,15 @@ use Exakat\Data\Methods;
 
 class ShouldPreprocess extends Analyzer {
     public function dependsOn() {
-        return array('Constants/IsPhpConstant');
+        return array('Constants/IsPhpConstant',
+                    );
     }
     
     public function analyze() {
         $dynamicAtoms = array('Variable', 'Array', 'Member', 'Magicconstant', 'Staticmethodcall', 'Staticproperty', 'Methodcall');
         //'Functioncall' : if they also have only constants.
+        
+        $MAX_LOOPING = self::MAX_LOOPING;
 
         $methods = new Methods($this->config);
         $functionList = $methods->getDeterministFunctions();
@@ -41,22 +44,33 @@ class ShouldPreprocess extends Analyzer {
 
         // Operator only working on constants
         $tokenList = makeList( self::$FUNCTIONS_TOKENS );
-        $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
+        $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not', 'Comparison'))
              ->hasNoInstruction('Constant')
 
             // Functioncall, that are not authorized
-             ->raw('not( where( __.emit( ).repeat( out() ).times('.self::MAX_LOOPING.')
-                                          .hasLabel("Functioncall").has("fullnspath")
-                                          .has("token", within('.$tokenList.'))
-                                          .filter{ !(it.get().value("fullnspath") in ***) } ) )', $functionList)
+             ->raw(<<<GREMLIN
+not( 
+    where( __.emit( ).repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING)
+             .hasLabel("Functioncall").has("fullnspath")
+             .has("token", within($tokenList))
+             .filter{ !(it.get().value("fullnspath") in ***) } 
+         ) 
+)
+GREMLIN
+, $functionList)
             // PHP Constantes are not authorized
-             ->raw('not( where( __.emit( ).repeat( out() ).times('.self::MAX_LOOPING.')
-                                          .hasLabel("Identifier", "Nsname").has("fullnspath")
-                                          .where( __.in("ANALYZED").has("analyzer", "Constants/IsPhpConstant"))
-                        )     )')
+             ->raw(<<<GREMLIN
+not( 
+    where( __.emit( ).repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING)
+             .hasLabel("Identifier", "Nsname").has("fullnspath")
+             .where( __.in("ANALYZED").has("analyzer", "Constants/IsPhpConstant"))
+          )     
+)
+GREMLIN
+)
              ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
-        
+
         $functionListNoArray = array_diff($functionList,
                 array('\\defined',
                       '\\error_reporting',

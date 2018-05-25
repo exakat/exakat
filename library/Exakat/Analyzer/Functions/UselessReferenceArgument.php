@@ -39,7 +39,7 @@ class UselessReferenceArgument extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->raw(<<<GREMLIN
-where( __.repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).emit( )
+where( __.repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) ).emit( )
              .times($MAX_LOOPING).hasLabel(within(["Variable"]))
              .filter{ it.get().value("code") == name }
              .not( where( __.in("ANALYZED").has("analyzer", within(["Variables/IsModified"]))) ))

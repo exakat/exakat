@@ -29,6 +29,8 @@ class ShouldUseConstants extends Analyzer {
     public function analyze() {
         $functions = $this->loadIni('constant_usage.ini');
         
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         $positions = array(0, 1, 2, 3, /*4, 5,*/ 6);
         foreach($positions as $position) {
             $this->atomFunctionIs($functions['functions' . $position])
@@ -42,7 +44,14 @@ class ShouldUseConstants extends Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('Logical')
-                 ->raw('where( __.repeat( __.out() ).emit( label().is(without("Identifier", "Nsname", "Parenthesis", "Logical")) ).times('.self::MAX_LOOPING.') )')
+                 ->raw(<<<GREMLIN
+where( 
+    __.repeat( __.out({$this->linksDown}) )
+      .emit( ).times($MAX_LOOPING) 
+      .hasLabel(without("Identifier", "Nsname", "Parenthesis", "Logical"))
+      )
+GREMLIN
+)
                  ->back('first');
             $this->prepareQuery();
         }
