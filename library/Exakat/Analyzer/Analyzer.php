@@ -1814,6 +1814,27 @@ GREMLIN
         
         return $this;
     }
+
+    public function makeVariableName($variable) {
+        $this->addMethod(<<<GREMLIN
+sideEffect{ $variable = "\\$" + $variable; }
+
+GREMLIN
+);
+        
+        return $this;
+    }
+    
+    public function goToLiteralValue() {
+        $this->addMethod(<<<GREMLIN
+coalesce(__.in("DEFINITION").out("VALUE"), 
+         __.filter{ true; })
+
+GREMLIN
+);
+        
+        return $this;
+    }
     
     public function fetchContext($context = self::CONTEXT_OUTSIDE_CLOSURE) {
         $forClosure = "                    // This is make variables in USE available in the parent level
@@ -2114,7 +2135,7 @@ GREMLIN;
             assert(false, __METHOD__.' received an unprocessable object '.var_dump($code));
         }
     }
-    
+
     public static function makeBaseName($className) {
         // No Exakat, no Analyzer, using / instead of \
         return $className;
