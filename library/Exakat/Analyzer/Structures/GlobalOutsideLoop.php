@@ -28,9 +28,9 @@ use Exakat\Analyzer\Analyzer;
 class GlobalOutsideLoop extends Analyzer {
     public function analyze() {
         // inside a For//
-        $this->atomIs(array('For', 'Foreach', 'Dowhile', 'While'))
+        $this->atomIs(self::$LOOPS_ALL)
              ->outIs('BLOCK')
-             ->atomInside('Global');
+             ->atomInsideNoDefinition('Global');
         $this->prepareQuery();
     }
 }

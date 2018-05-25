@@ -32,24 +32,26 @@ class ForWithFunctioncall extends Analyzer {
         $this->atomIs('For')
             // This looks for variables inside the INCREMENT
              ->raw(<<<GREMLIN
-             where( 
-            __.sideEffect{variables = [];}
-              .out("INCREMENT").repeat( __.out()).emit().times($MAX_LOOPING)
-              .hasLabel("Variable")
-              .sideEffect{ variables.push(it.get().value("code")); }
-              .fold()
-             )
+where( 
+    __.sideEffect{variables = [];}
+      .out("INCREMENT").repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING)
+      .hasLabel("Variable")
+      .sideEffect{ variables.push(it.get().value("code")); }
+      .fold()
+)
 GREMLIN
 )
              ->outIs('FINAL')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
             // This checks for usage of increment variables inside the FINAL
              ->raw(<<<GREMLIN
-not(where( 
-            __.repeat( __.out()).emit().times($MAX_LOOPING)
-              .hasLabel("Variable")
-              .filter{ it.get().value("code") in variables; }
-            ))
+not(
+    __.where( 
+        __.repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING)
+          .hasLabel("Variable")
+          .filter{ it.get().value("code") in variables; }
+    )
+)
 GREMLIN
 )
              ->back('first');
@@ -57,7 +59,7 @@ GREMLIN
 
         $this->atomIs('For')
              ->outIs('INCREMENT')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->back('first');
         $this->prepareQuery();
     }

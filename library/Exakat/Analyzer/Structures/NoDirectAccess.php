@@ -31,10 +31,10 @@ class NoDirectAccess extends Analyzer {
         $this->atomIs('Logical')
              ->tokenIs(array('T_BOOLEAN_AND', 'T_BOOLEAN_OR','T_LOGICAL_AND', 'T_LOGICAL_OR'))
              // find !defined and defined
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs('\\defined')
              ->back('first')
-             ->atomInside('Exit')
+             ->atomInsideNoDefinition('Exit')
              ->back('first');
         $this->prepareQuery();
 
@@ -48,7 +48,7 @@ class NoDirectAccess extends Analyzer {
              ->functioncallIs('\\defined')
              ->back('first')
              ->outIs('THEN')
-             ->atomInside('Exit')
+             ->atomInsideNoDefinition('Exit')
              ->back('first');
         $this->prepareQuery();
 
@@ -59,7 +59,7 @@ class NoDirectAccess extends Analyzer {
              ->functioncallIs('\\defined')
              ->back('first')
              ->outIs('THEN')
-             ->atomInside('Exit')
+             ->atomInsideNoDefinition('Exit')
              ->back('first');
         $this->prepareQuery();
 

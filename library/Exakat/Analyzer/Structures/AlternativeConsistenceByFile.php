@@ -28,6 +28,8 @@ class AlternativeConsistenceByFile extends Analyzer {
     public function analyze() {
         $atoms = array('Ifthen', 'Foreach', 'For', 'Switch', 'While');
         $atomsList = "'".implode("', '", $atoms)."'";
+        
+        $MAX_LOOPING = self::$MAX_LOOPING;
 
         // $this->linksDown is important here.
         $this->atomIs('File')
@@ -35,13 +37,16 @@ class AlternativeConsistenceByFile extends Analyzer {
             normal = 0;
             alternative = 0;
             }')
-            ->raw('where( 
+            ->raw(<<<GREMLIN
+where( 
     __
-    .repeat( __.out('.$this->linksDown.')).emit().times('.self::MAX_LOOPING.').hasLabel('.$atomsList.')
+    .repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING).hasLabel($atomsList)
     .or( __.has("alternative").sideEffect{ alternative = alternative + 1; },
          __.sideEffect{ normal = normal + 1; })
     .fold()
-    )')
+    )
+GREMLIN
+)
             ->filter('normal > 0 && alternative > 0')
             ->back('first');
         $this->prepareQuery();
