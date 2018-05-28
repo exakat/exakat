@@ -32,6 +32,7 @@ class AlteringForeachWithoutReference extends Analyzer {
     }
     
     public function analyze() {
+        // foreach($a as $k => $v) { $a[$k] += 1;}
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
              ->atomIs('Variable')
@@ -51,11 +52,14 @@ class AlteringForeachWithoutReference extends Analyzer {
              ->raw('not( where( __.in("ARGUMENT").has("token", "T_UNSET") ) )' )
              ->analyzerIs('Arrays/IsModified')
 
+             ->outIs('VARIABLE')
+             ->samePropertyAs('code', 'source')
+             ->inIs('VARIABLE')
+
              ->outIs('INDEX')
              ->samePropertyAs('code', 'k')
 
-             ->back('first')
-             ;
+             ->back('first');
         $this->prepareQuery();
     }
 }
