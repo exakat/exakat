@@ -188,7 +188,7 @@ class Config {
         }
         
         if (!empty($missing)) {
-           throw new InaptPHPBinary('PHP needs '.(count($missing) == 1 ? 'one' : count($missing)).' extension'.(count($missing) > 1 ? 's' : '').' with the current version : '.join(', ', $missing));
+           throw new InaptPHPBinary('PHP needs '.(count($missing) == 1 ? 'one' : count($missing)).' extension'.(count($missing) > 1 ? 's' : '').' with the current version : '.implode(', ', $missing));
         }
     }
     

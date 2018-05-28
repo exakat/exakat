@@ -355,7 +355,7 @@ class Ambassador extends Reports {
             $docHTML[] = $analyzersDocHTML;
         }
 
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', join(PHP_EOL, $docHTML));
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', implode(PHP_EOL, $docHTML));
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
 
@@ -2392,9 +2392,9 @@ HTML;
         $key = array_keys($scores, $max);
         
         if ($max === count($data)) {
-            $suggestion = 'This code is compatible with PHP '.join(', ', $key);
+            $suggestion = 'This code is compatible with PHP '.implode(', ', $key);
         } else {
-            $suggestion = 'We have determined '.count($key).' PHP version'.(count($key) > 1 ? 's' : '').'. The compatible estimations are PHP '.join(', ', $key).'. ';
+            $suggestion = 'We have determined '.count($key).' PHP version'.(count($key) > 1 ? 's' : '').'. The compatible estimations are PHP '.implode(', ', $key).'. ';
         }
 
         $html = $this->injectBloc($html, 'TITLE', 'PHP Version Estimation');
@@ -3635,7 +3635,7 @@ JAVASCRIPT;
 
             $count = count($close);
             $first = array_shift($confused);
-            $table[] = str_replace('<tr>', "<tr><td rowspan=\"$count\">$variable</td>", $first).PHP_EOL.join('', $confused);
+            $table[] = str_replace('<tr>', "<tr><td rowspan=\"$count\">$variable</td>", $first).PHP_EOL.implode('', $confused);
         }
         $table = implode(PHP_EOL, $table);
 
