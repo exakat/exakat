@@ -2004,6 +2004,7 @@ JAVASCRIPTCODE;
             SELECT fullcode, file, line, analyzer
                 FROM results
                 WHERE analyzer IN ($list)
+                ORDER BY file, line
 
 SQL;
         $result = $this->sqlite->query($sqlQuery);
