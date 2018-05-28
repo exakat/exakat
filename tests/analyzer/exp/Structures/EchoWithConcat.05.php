@@ -4,7 +4,7 @@ $expected     = array('echo <<<HEREDOC
 Yes
 $with variable
 HEREDOC
-', 
+',
                      );
 
 $expected_not = array('echo <<<\'NOWDOC\'

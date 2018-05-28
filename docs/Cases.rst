@@ -20,7 +20,7 @@ Adding Zero
 Thelia
 ^^^^^^
 
-:ref:`adding-zero`, in /core/lib/Thelia/Model/Map/ProfileResourceTableMap.php:250. 
+:ref:`adding-zero`, in core/lib/Thelia/Model/Map/ProfileResourceTableMap.php:250. 
 
 This return statement is doing quite a lot, including a buried '0 + $offset'. This call is probably an echo to '1 + $offset', which is a little later in the expression.
 
@@ -37,7 +37,7 @@ This return statement is doing quite a lot, including a buried '0 + $offset'. Th
 OpenEMR
 ^^^^^^^
 
-:ref:`adding-zero`, in /interface/forms/fee_sheet/new.php:466:534. 
+:ref:`adding-zero`, in interface/forms/fee_sheet/new.php:466:534. 
 
 $main_provid is filtered as an integer. $main_supid is then filtered twice : one with the sufficent (int) and then, added with 0.
 
@@ -47,6 +47,68 @@ $main_provid is filtered as an integer. $main_supid is then filtered twice : one
         $main_provid = 0 + $_POST['ProviderID'];
         $main_supid  = 0 + (int)$_POST['SupervisorID'];
         //.....
+
+Strpos()-like Comparison
+========================
+
+.. _piwigo-structures-strposcompare:
+
+Piwigo
+^^^^^^
+
+:ref:`strpos()-like-comparison`, in admin/include/functions.php:2585. 
+
+preg_match may return 0 if not found, and null if the $pattern is erroneous. While hardcoded regex may be checked at compile time, dynamically built regex may fail at execution time. This is particularly important here, since the function may be called with incoming data for maintenance : 'clear_derivative_cache($_GET['type']);' is in the /admin/maintenance.php.
+
+.. code-block:: php
+
+    function clear_derivative_cache_rec($path, $pattern)
+    {
+      $rmdir = true;
+      $rm_index = false;
+    
+      if ($contents = opendir($path))
+      {
+        while (($node = readdir($contents)) !== false)
+        {
+          if ($node == '.' or $node == '..')
+            continue;
+          if (is_dir($path.'/'.$node))
+          {
+            $rmdir &= clear_derivative_cache_rec($path.'/'.$node, $pattern);
+          }
+          else
+          {
+            if (preg_match($pattern, $node))
+
+
+--------
+
+
+.. _thelia-structures-strposcompare:
+
+Thelia
+^^^^^^
+
+:ref:`strpos()-like-comparison`, in core/lib/Thelia/Controller/Admin/FileController.php:198. 
+
+preg_match is used here to identify files with a forbidden extension. The actual list of extension is provided to the method via the parameter $extBlackList, which is an array. In case of mis-configuration by the user of this array, preg_match may fail : for example, when regex special characters are provided. At that point, the whole filter becomes invalid, and can't distinguish good files (returning false) and other files (returning NULL). It is safe to use === false in this situation.
+
+.. code-block:: php
+
+    if (!empty($extBlackList)) {
+                $regex = "#^(.+)\.(".implode("|", $extBlackList).")$#i";
+    
+                if (preg_match($regex, $realFileName)) {
+                    $message = $this->getTranslator()
+                        ->trans(
+                            'Files with the following extension are not allowed: %extension, please do an archive of the file if you want to upload it',
+                            [
+                                '%extension' => $fileBeingUploaded->getClientOriginalExtension(),
+                            ]
+                        );
+                }
+            }
 
 Used Once Variables
 ===================
@@ -244,7 +306,7 @@ Logical Should Use Symbolic Operators
 Cleverstyle
 ^^^^^^^^^^^
 
-:ref:`logical-should-use-symbolic-operators`, in /modules/Uploader/Mime/Mime.php:171. 
+:ref:`logical-should-use-symbolic-operators`, in modules/Uploader/Mime/Mime.php:171. 
 
 $extension is assigned with the results of pathinfo($reference_name, PATHINFO_EXTENSION) and ignores static::hasExtension($extension). The same expression, placed in a condition (like an if), would assign a value to $extension and use another for the condition itself. Here, this code is only an expression in the flow.
 
@@ -261,7 +323,7 @@ $extension is assigned with the results of pathinfo($reference_name, PATHINFO_EX
 OpenConf
 ^^^^^^^^
 
-:ref:`logical-should-use-symbolic-operators`, in /chair/export.inc:143. 
+:ref:`logical-should-use-symbolic-operators`, in chair/export.inc:143. 
 
 In this context, the priority of execution is used on purpose; $coreFile only collect the temporary name of the export file, and when this name is empty, then the second operand of OR is executed, though never collected. Since this second argument is a 'die', its return value is lost, but the initial assignation is never used anyway. 
 
@@ -387,6 +449,23 @@ Note that the order of merge will be the same when merging than when collecting 
 Useless Parenthesis
 ===================
 
+.. _mautic-structures-uselessparenthesis:
+
+Mautic
+^^^^^^
+
+:ref:`useless-parenthesis`, in code/app/bundles/EmailBundle/Controller/AjaxController.php:85. 
+
+Parenthesis are useless around $progress[1], and around the division too. 
+
+.. code-block:: php
+
+    $dataArray['percent'] = ($progress[1]) ? ceil(($progress[0] / $progress[1]) * 100) : 100;
+
+
+--------
+
+
 .. _woocommerce-structures-uselessparenthesis:
 
 Woocommerce
@@ -413,7 +492,7 @@ Use Constant As Arguments
 Tikiwiki
 ^^^^^^^^
 
-:ref:`use-constant-as-arguments`, in /lib/language/Language.php:112. 
+:ref:`use-constant-as-arguments`, in lib/language/Language.php:112. 
 
 E_WARNING is a valid constant, but PHP documentation for trigger_error() explains that E_USER constants should be used. 
 
@@ -430,7 +509,7 @@ E_WARNING is a valid constant, but PHP documentation for trigger_error() explain
 shopware
 ^^^^^^^^
 
-:ref:`use-constant-as-arguments`, in /engine/Shopware/Plugins/Default/Core/Debug/Components/EventCollector.php:106. 
+:ref:`use-constant-as-arguments`, in engine/Shopware/Plugins/Default/Core/Debug/Components/EventCollector.php:106. 
 
 One example where code review reports errors where unit tests don't : array_multisort actually requires sort order first (SORT_ASC or SORT_DESC), then sort flags (such as SORT_NUMERIC). Here, with SORT_DESC = 3 and SORT_NUMERIC = 1, PHP understands it as the coders expects it. The same error is repeated six times in the code. 
 
@@ -615,7 +694,7 @@ Wrong Parameter Type
 Zencart
 ^^^^^^^
 
-:ref:`wrong-parameter-type`, in /admin/includes/header.php:180. 
+:ref:`wrong-parameter-type`, in admin/includes/header.php:180. 
 
 setlocale() may be called with null or '' (empty string), and will set values from the environnement. When called with "0" (the string), it only reports the current setting. Using an integer is probably undocumented behavior, and falls back to the zero string. 
 
@@ -649,7 +728,7 @@ The condition checks first if $has_templates or $theme->parent(), and one of the
 Dolibarr
 ^^^^^^^^
 
-:ref:`identical-conditions`, in /htdocs/core/lib/files.lib.php:2052. 
+:ref:`identical-conditions`, in htdocs/core/lib/files.lib.php:2052. 
 
 Better check twice that $modulepart is really 'apercusupplier_invoice'.
 
@@ -666,7 +745,7 @@ Better check twice that $modulepart is really 'apercusupplier_invoice'.
 Mautic
 ^^^^^^
 
-:ref:`identical-conditions`, in /app/bundles/CoreBundle/Views/Standard/list.html.php:47. 
+:ref:`identical-conditions`, in app/bundles/CoreBundle/Views/Standard/list.html.php:47. 
 
 When the line is long, it tends to be more and more difficult to review the values. Here, one of the two first is too many.
 
@@ -827,7 +906,7 @@ Throw Functioncall
 SugarCrm
 ^^^^^^^^
 
-:ref:`throw-functioncall`, in /include/externalAPI/cmis_repository_wrapper.php:918. 
+:ref:`throw-functioncall`, in include/externalAPI/cmis_repository_wrapper.php:918. 
 
 SugarCRM uses exceptions to fill work in progress. Here, we recognize a forgotten 'new' that makes throw call a function named 'Exception'. This fails with a Fatal Error, and doesn't issue the right messsage. The same error had propgated in the code by copy and paste : it is available 17 times in that same file.
 
@@ -1006,7 +1085,7 @@ Only Variable Passed By Reference
 Dolphin
 ^^^^^^^
 
-:ref:`only-variable-passed-by-reference`, in /administration/charts.json.php:89. 
+:ref:`only-variable-passed-by-reference`, in administration/charts.json.php:89. 
 
 This is not possible, as array_slice returns a new array, and not a reference. Minimaly, the intermediate result must be saved in a variable, to be popped. Actually, this code extracts the element at key 1 in the $aData array, although this also works with hash (non-numeric keys).
 
@@ -1083,7 +1162,7 @@ Could Be Private Class Constant
 Phinx
 ^^^^^
 
-:ref:`could-be-private-class-constant`, in /src/Phinx/Db/Adapter/MysqlAdapter.php:46. 
+:ref:`could-be-private-class-constant`, in src/Phinx/Db/Adapter/MysqlAdapter.php:46. 
 
 The code includes a fair number of class constants. The one listed here are only used to define TEXT columns in MySQL, with their maximal size. Since they are only intented to be used by the MySQL driver, they may be private.
 
@@ -1106,7 +1185,7 @@ Next Month Trap
 Contao
 ^^^^^^
 
-:ref:`next-month-trap`, in /system/modules/calendar/classes/Events.php:515. 
+:ref:`next-month-trap`, in system/modules/calendar/classes/Events.php:515. 
 
 This code is wrong on August 29,th 30th and 31rst : 6 months before is caculated here as February 31rst, so march 2. Of course, this depends on the leap years.
 
@@ -1124,7 +1203,7 @@ This code is wrong on August 29,th 30th and 31rst : 6 months before is caculated
 Edusoho
 ^^^^^^^
 
-:ref:`next-month-trap`, in /src/AppBundle/Controller/Admin/AnalysisController.php:1426. 
+:ref:`next-month-trap`, in src/AppBundle/Controller/Admin/AnalysisController.php:1426. 
 
 The last month is wrong 8 times a year : on 31rst, and by the end of March. 
 
@@ -1165,7 +1244,7 @@ Redefined Private Property
 Zurmo
 ^^^^^
 
-:ref:`redefined-private-property`, in /app/protected/modules/zurmo/models/OwnedCustomField.php:51. 
+:ref:`redefined-private-property`, in app/protected/modules/zurmo/models/OwnedCustomField.php:51. 
 
 The class OwnedCustomField is part of a large class tree : OwnedCustomField extends CustomField,
 CustomField extends BaseCustomField, BaseCustomField extends RedBeanModel, RedBeanModel extends BeanModel. 
@@ -1205,7 +1284,7 @@ Don't Unset Properties
 Vanilla
 ^^^^^^^
 
-:ref:`don't-unset-properties`, in /applications/dashboard/models/class.activitymodel.php:1073. 
+:ref:`don't-unset-properties`, in applications/dashboard/models/class.activitymodel.php:1073. 
 
 The _NotificationQueue property, in this class, is defined as an array. Here, it is destroyed, then recreated. The unset() is too much, as the assignation is sufficient to reset the array 
 
@@ -1282,7 +1361,7 @@ Weak Typing
 TeamPass
 ^^^^^^^^
 
-:ref:`weak-typing`, in /includes/libraries/Tree/NestedTree/NestedTree.php:100. 
+:ref:`weak-typing`, in includes/libraries/Tree/NestedTree/NestedTree.php:100. 
 
 The is_null() test detects a special situation, that requires usage of default values. The 'else' handles every other situations, including when the $node is an object, or anything else. $this->getNode() will gain from having typehints : it may be NULL, or the results of mysqli_fetch_object() : a stdClass object. The expected properties of nleft and nright are not certain to be available.
 
@@ -1314,7 +1393,7 @@ __debugInfo() Usage
 Dolibarr
 ^^^^^^^^
 
-:ref:`\_\_debuginfo()-usage`, in /htdocs/includes/stripe/lib/StripeObject.php:108. 
+:ref:`\_\_debuginfo()-usage`, in htdocs/includes/stripe/lib/StripeObject.php:108. 
 
 _values is a private property from the Stripe Class. The class contains other objects, but only _values are displayed with var_dump.
 
@@ -1448,6 +1527,23 @@ implode('', ) is probably not the slowest part in these lines.
 No Count With 0
 ===============
 
+.. _contao-performances-notcountnull:
+
+Contao
+^^^^^^
+
+:ref:`no-count-with-0`, in system/modules/repository/classes/RepositoryManager.php:1148. 
+
+If $elist contains at least one element, then it is not empty().
+
+.. code-block:: php
+
+    $ext->found = count($elist)>0;
+
+
+--------
+
+
 .. _wordpress-performances-notcountnull:
 
 WordPress
@@ -1518,7 +1614,7 @@ Compare Hash
 Traq
 ^^^^
 
-:ref:`compare-hash`, in /src/Models/User.php:105. 
+:ref:`compare-hash`, in src/Models/User.php:105. 
 
 This code should also avoid using SHA1. 
 

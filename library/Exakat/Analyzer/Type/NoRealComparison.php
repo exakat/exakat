@@ -32,7 +32,7 @@ class NoRealComparison extends Analyzer {
         $this->atomIs('Comparison')
              ->codeIs(array('==', '!=', '===', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomInside('Real')
+             ->atomInsideNoDefinition('Real')
              ->hasNoIn(array('ARGUMENT', 'INDEX'))
              ->back('first');
         $this->prepareQuery();

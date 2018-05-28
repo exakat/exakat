@@ -63,7 +63,7 @@ GREMLIN;
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->outIs('LEFT')
              ->atomIs('Variable')
              ->isHash('fullcode', $variables, 'name');

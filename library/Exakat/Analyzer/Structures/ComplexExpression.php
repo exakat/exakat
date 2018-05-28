@@ -32,8 +32,8 @@ class ComplexExpression extends Analyzer {
 not(
     __.has('constant', true))
       .where(  
-        __.emit().repeat( __.not(hasLabel("Closure", "Classanonymous") ).out())
-          .times($MAX_LOOPING).not(hasLabel("Closure", "Classanonymous") )
+        __.emit().repeat( __.not(hasLabel("Closure", "Classanonymous") ).out({$this->linksDown})).times($MAX_LOOPING)
+          .not(hasLabel("Closure", "Classanonymous") )
           .count().is(gt({$this->complexExpressionThreshold})
    ) 
 )

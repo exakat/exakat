@@ -8,6 +8,7 @@ Glossary
       + :ref:`** For Exponent <**-for-exponent>`
       + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
       + :ref:`Exponent Usage <exponent-usage>`
+      + :ref:`Mismatch Type And Default <mismatch-type-and-default>`
       + :ref:`Negative Power <negative-power>`
       + :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
       + :ref:`Unused Traits <unused-traits>`
@@ -219,6 +220,7 @@ Glossary
 
       + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
       + :ref:`Always Positive Comparison <always-positive-comparison>`
+      + :ref:`Cache Variable Outside Loop <cache-variable-outside-loop>`
       + :ref:`Getting Last Element <getting-last-element>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`Uses Default Values <uses-default-values>`

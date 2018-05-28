@@ -35,7 +35,7 @@ class DoublePrepare extends Analyzer {
              ->savePropertyAs('fullcode', 'inject')
              ->goToFunction()
              ->outIs('BLOCK')
-             ->atomInside('String')
+             ->atomInsideNoDefinition('String')
              ->outIs('CONCAT')
              ->atomIs('Variable')
              ->samePropertyAs('fullcode', 'inject')

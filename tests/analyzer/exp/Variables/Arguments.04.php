@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('$property2',
-                      '$property2',
-                      '$property4',
-                      '$property4',
+$expected     = array('$property2y2',
+                      '$property2y2',
+                      '$property4y2',
+                      '$property4y2',
                      );
 
 $expected_not = array('$property',

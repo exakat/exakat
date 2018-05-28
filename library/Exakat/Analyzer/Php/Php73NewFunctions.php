@@ -31,6 +31,13 @@ class Php73NewFunctions extends FunctionDefinition {
     
     public function analyze() {
         $this->functions = array('net_get_interfaces',
+                                 'gmp_binomial',
+                                 'gmp_lcm',
+                                 'gmp_perfect_power',
+                                 'gmp_kronecker',
+                                 'openssl_pkey_derive',
+                                 'is_countable',
+                                 'ldap_exop_refresh',
                                 );
         parent::analyze();
     }

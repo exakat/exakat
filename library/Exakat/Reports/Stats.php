@@ -112,7 +112,7 @@ class Stats extends Reports {
     }
 
     public function dependsOnAnalysis() {
-        return array('Stats', 
+        return array('Stats',
                      );
     }
 

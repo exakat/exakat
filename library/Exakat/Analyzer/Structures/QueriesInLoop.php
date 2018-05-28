@@ -30,7 +30,7 @@ class QueriesInLoop extends Analyzer {
         // for() { mysql_query(); }
         $this->atomIs(array('Foreach', 'For', 'While'))
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->codeIs(array('cubrid_query',
                             'cubrid_prepare',
                             'cubrid_execute',
@@ -72,9 +72,9 @@ class QueriesInLoop extends Analyzer {
         $this->prepareQuery();
 
         // for() { $pdo->query(); }
-        $this->atomIs(array('Foreach', 'For', 'While'))
+        $this->atomIs(self::$LOOPS_ALL)
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->hasIn('METHOD')
              ->codeIs('query') // PDO, cyrus
              ->back('first');

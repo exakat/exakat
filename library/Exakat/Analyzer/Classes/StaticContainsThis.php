@@ -28,11 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class StaticContainsThis extends Analyzer {
     
     public function analyze() {
+        // static function foo() { $this->a ;}
         $this->atomIs('Method')
-             ->outIs('STATIC')
-             ->back('first')
+             ->hasOut('STATIC')
              ->outIs('BLOCK')
-             ->atomInside('This')
+             ->atomInsideNoDefinition('This')
              ->back('first');
         $this->prepareQuery();
     }

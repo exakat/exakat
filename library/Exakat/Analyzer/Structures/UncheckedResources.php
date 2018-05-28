@@ -67,10 +67,10 @@ class UncheckedResources extends Analyzer {
                      ->hasNoIn('NOT')
 
                      // checked as the condition in a if/then or while
-                     ->raw('not( where( __.in("CONDITION").hasLabel("Ifthen", "While" ) ) )')
+                     ->hasNoParent(array('Ifthen', 'While'), array('CONDITION'))
 
                      // checked with a $variable &&
-                     ->raw('not( where( __.in("LEFT", "RIGHT").hasLabel("Logical") ) )')
+                     ->hasNoChildren('Logical', array('LEFT', 'RIGHT'))
                      
                      // checked with a if ($resource == false) or while($resource == false)
                      ->hasNoComparison()

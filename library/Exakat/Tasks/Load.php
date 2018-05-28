@@ -50,7 +50,6 @@ class Load extends Tasks {
     private $loader = null;
     private $loaderList = array('SplitGraphson',
                                 );
-    //'CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j', 'JanusCaES', 'Tcsv',
 
     private $precedence   = null;
     private $phptokens    = null;
@@ -63,7 +62,7 @@ class Load extends Tasks {
     private $uses   = array('function'       => array(),
                             'staticmethod'   => array(),
                             'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                            'classconst'     => array(),
+                            'staticconstant' => array(),
                             'property'       => array(),
                             'staticproperty' => array(),
                             'const'          => array(),
@@ -99,6 +98,9 @@ class Load extends Tasks {
 
     const VARIADIC          = 1;
     const NOT_VARIADIC      = '';
+
+    const FLEXIBLE          = 1;
+    const NOT_FLEXIBLE      = false;
 
     const REFERENCE         = 1;
     const NOT_REFERENCE     = '';
@@ -484,7 +486,7 @@ SQL;
                        array('key' => 'files',       'value' => $this->stats['files']),
                        array('key' => 'tokens',      'value' => $this->stats['tokens']),
                        );
-        $this->datastore->addRow('hash', $this->stats);
+        $this->datastore->addRow('hash', $stats);
 
         $this->loader->finalize();
         $this->datastore->addRow('hash', array('status' => 'Load'));
@@ -529,7 +531,6 @@ SQL;
         if (substr($dir, -1) === '/') {
             $dir = substr($dir, 0, -1);
         }
-        $tokens = 0;
         Files::findFiles($dir, $files, $ignoredFiles, $this->config);
 
         $this->reset();
@@ -565,7 +566,7 @@ SQL;
         $this->uses   = array('function'       => array(),
                               'staticmethod'   => array(),
                               'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                              'classconst'     => array(),
+                              'staticconstant' => array(),
                               'property'       => array(),
                               'staticproperty' => array(),
                               'const'          => array(),
@@ -649,7 +650,7 @@ SQL;
         $this->uses   = array('function'       => array(),
                               'staticmethod'   => array(),
                               'method'         => array(),  // @todo : handling of parents ? of multiple definition?
-                              'classconst'     => array(),
+                              'staticconstant' => array(),
                               'property'       => array(),
                               'staticproperty' => array(),
                               'const'          => array(),
@@ -866,6 +867,11 @@ SQL;
                 $part->code        = rtrim($part->code,        "\n");
                 $part->fullcode    = rtrim($part->fullcode,    "\n");
                 $elements[] = $part;
+            }
+            // Get the closing quote for flexibility
+            $closeQuote = $this->tokens[$this->id + 1][1];
+            if (trim($closeQuote) !== $closeQuote) {
+                $string->flexible = 1;
             }
         }
         
@@ -1156,6 +1162,8 @@ SQL;
             $this->addDefinition('staticmethod', $function->fullnspath, $function);
         } elseif ($function->atom === 'Method') {
             $this->addDefinition('method', $function->fullnspath, $function);
+            // double call for internal reference
+            $this->addDefinition('staticmethod', $function->fullnspath, $function);
         }
 
         if (!$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -1821,8 +1829,6 @@ SQL;
             $variadic = self::NOT_ELLIPSIS;
 
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
-                $initialId = $this->id;
-
                 do {
                     ++$args_max;
                     if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
@@ -2113,15 +2119,13 @@ SQL;
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
 
-            $this->addDefinition('const', $fullnspath, $def);
-
             $this->addLink($const, $def, 'CONST');
 
             if ($this->isContext(self::CONTEXT_CLASS) ||
-                $this->isContext(self::CONTEXT_TRAIT)   ) {
-                $this->addDefinition('classconst',   end($this->currentClassTrait)->fullnspath.'::'.$name->fullnspath, $const);
+                $this->isContext(self::CONTEXT_INTERFACE)   ) {
+                $this->addDefinition('staticconstant',   end($this->currentClassTrait)->fullnspath.'::'.$name->fullcode, $def);
             } else {
-                $this->addDefinition('const', $name->fullnspath, $const);
+                $this->addDefinition('const', $fullnspath, $def);
             }
 
         } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON)));
@@ -3148,8 +3152,6 @@ SQL;
     }
 
     private function processParenthesis() {
-        $current = $this->id;
-
         $parenthese = $this->addAtom('Parenthesis');
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
@@ -4125,7 +4127,7 @@ SQL;
 
             ++$this->id;
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY)) ) {
-                $id = $this->processNext();
+                $this->processNext();
             };
 
             // Skip }
@@ -4217,7 +4219,7 @@ SQL;
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
 
-        $id =  $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
+        $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
 
         $this->toggleContext(self::CONTEXT_NEW);
         if ($noSequence === false) {
@@ -4672,8 +4674,6 @@ SQL;
         if ($this->hasExpression()) {
             return $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
         } else {
-            $current = $this->id;
-
             // Simply skipping the &
             $this->processNext();
 
@@ -5009,11 +5009,14 @@ SQL;
         }
 
         // All node has one incoming or one outgoing link (outgoing or incoming).
-        $O = $D= array();
+        $O = array();
+        $D = array();
         foreach($this->links as $label => $origins) {
-            if ($label === 'DEFINITION') { continue; }
-            foreach($origins as $origin => $destinations) {
-                foreach($destinations as $destination => $links) {
+            if ($label === 'DEFINITION') { 
+                continue; 
+            }
+            foreach($origins as $destinations) {
+                foreach($destinations as $links) {
                     foreach($links as $link) {
                         $O[] = $link['origin'];
                         $D[] = $link['destination'];
@@ -5025,7 +5028,6 @@ SQL;
         $O = array_count_values($O);
         $D = array_count_values($D);
 
-        $total = 0;
         foreach($this->atoms as $id => $atom) {
             if ($id === 1) { continue; }
 
@@ -5257,8 +5259,6 @@ SQL;
     }
 
     private function addNamespaceUse($origin, $alias, $useType, $use) {
-        $fullnspath = $origin->fullnspath;
-
         if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' ');
@@ -5290,7 +5290,7 @@ SQL;
 
         // No need for This
         if (in_array($call->atom, array(//'This', 'Self', 'Static',
-                                        'Parent', 
+                                        'Parent',
 //                                        'Member', 'Methodcall', 'Staticmethodcall', 'Staticproperty', 'Staticconstant',
                                         'Isset', 'List', 'Empty', 'Eval', 'Exit',
                                         ))) {

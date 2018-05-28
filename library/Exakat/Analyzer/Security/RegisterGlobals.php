@@ -45,7 +45,7 @@ class RegisterGlobals extends Analyzer {
              ->inIs('INDEX')
              ->inIs('VALUE')
              ->outIs('BLOCK')
-             ->atomInside('Variable')
+             ->atomInsideNoDefinition('Variable')
              ->analyzerIs('Variables/IsModified')
              ->tokenIs('T_DOLLAR')
              ->outIs('NAME')

@@ -1242,7 +1242,7 @@ HTML;
     }
 
     public function dependsOnAnalysis() {
-        return array('Security', 
+        return array('Security',
                      );
     }
 

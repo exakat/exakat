@@ -115,7 +115,7 @@ function rglob($pattern, $flags = 0) {
         }
     }
 
-    return call_user_func_array('array_merge', $subdirs);
+    return array_merge(...$subdirs);
 }
 
 function duration($seconds) {

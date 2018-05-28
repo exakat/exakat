@@ -28,7 +28,6 @@ use Exakat\Analyzer\Analyzer;
 class UselessAbstract extends Analyzer {
     public function dependsOn() {
         return array('Classes/OnlyStaticMethods',
-//                     'Classes/OnlyConst',
                     );
     }
     
@@ -37,7 +36,6 @@ class UselessAbstract extends Analyzer {
         $this->atomIs('Class')
              ->hasOut('ABSTRACT')
              ->analyzerIsNot('Classes/OnlyStaticMethods')
-//             ->analyzerIsNot('Classes/OnlyConst')
              ->hasNoOut('DEFINITION')
              ->back('first');
         $this->prepareQuery();
@@ -53,7 +51,7 @@ class UselessAbstract extends Analyzer {
         $this->atomIs('Class')
              ->hasOut('ABSTRACT')
              ->hasOut('DEFINITION')
-             ->raw('not( where( __.out().hasLabel("Method", "Magicmethod", "Usetrait", "Ppp", "Const") ) )');
+             ->raw('not( where( __.out("METHOD", "MAGICMETHOD", "USE", "PPP", "CONST").hasLabel("Method", "Magicmethod", "Usetrait", "Ppp", "Const") ) )');
         $this->prepareQuery();
 
         // abstract class with not abstract methods

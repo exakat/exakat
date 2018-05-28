@@ -6,7 +6,7 @@ echo "Foo\\n";
                       'PARSEKIT_QUIET',
                      );
 
-$expected_not = array(
+$expected_not = array('var_dump($PARSEKIT_QUIET)',
                      );
 
 ?>

@@ -29,9 +29,9 @@ class NestedIfthen extends Analyzer {
         // 3 level of ifthen (2 is OK)
         $this->atomIs('Ifthen')
              ->outIs(array('THEN', 'ELSE'))
-             ->atomInside('Ifthen')
+             ->atomInsideNoDefinition('Ifthen')
              ->outIs(array('THEN', 'ELSE'))
-             ->atomInside('Ifthen')
+             ->atomInsideNoDefinition('Ifthen')
              ->back('first');
         $this->prepareQuery();
     }

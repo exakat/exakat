@@ -33,7 +33,7 @@ class ShouldChainException extends Analyzer {
              ->savePropertyAs('code', 'caught')
              ->inIs('VARIABLE')
              ->outIs('BLOCK')
-             ->atomInside('Throw')
+             ->atomInsideNoDefinition('Throw')
              ->outIs('THROW')
              ->outIs('NEW')
              ->raw('not(where( __.out("ARGUMENT").filter{ it.get().value("code") == caught} ))')

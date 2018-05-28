@@ -5,7 +5,7 @@ $expected     = array('AMQPConnection( )',
                       'AMQPChannel($cnn)',
                      );
 
-$expected_not = array('\X\AMQPChannel(null)',
+$expected_not = array('\\X\\AMQPChannel(null)',
                      );
 
 ?>

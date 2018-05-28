@@ -29,7 +29,7 @@ class TestThenCast extends Analyzer {
         // if ($a != 0) { return 4 / (int) $a; }
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
-             ->atomInside('Comparison')
+             ->atomInsideNoDefinition('Comparison')
              ->codeIs(array('==', '!=', '===', '!==')) // Avoid < and >
              ->outIs(array('LEFT', 'RIGHT'))
              ->is('intval', 0)

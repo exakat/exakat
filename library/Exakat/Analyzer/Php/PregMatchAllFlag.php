@@ -46,7 +46,7 @@ class PregMatchAllFlag extends Analyzer {
              ->inIs('INDEX')
              ->inIs('VALUE')
              ->outIs('BLOCK')
-             ->atomInside('Array')
+             ->atomInsideNoDefinition('Array')
              ->outIs('VARIABLE')// $r[1][$id]
              ->outIs('VARIABLE')
              ->samePropertyAs('code', 'r')
@@ -81,7 +81,7 @@ class PregMatchAllFlag extends Analyzer {
              ->inIs('INDEX')
              ->inIs('VALUE')
              ->outIs('BLOCK')
-             ->atomInside('Array')
+             ->atomInsideNoDefinition('Array')
              ->outIs('VARIABLE')// $r[1][$id]
              ->outIs('VARIABLE')
              ->samePropertyAs('code', 'r')

@@ -34,7 +34,7 @@ class RelayFunction extends Analyzer {
              ->is('count', 1)
              ->outIs('EXPRESSION')
              ->outIsIE('RETURN')
-             ->atomIs(array('Functioncall', 'Staticmethodcall','Methodcall'))
+             ->atomIs(self::$FUNCTIONS_CALLS)
              ->outIsIE('METHOD')
              ->saveOutAs('args2', 'ARGUMENT', '')
              ->filter('args2 == args;')

@@ -50,8 +50,8 @@ class SplitGraphson {
     private $projectId = null;
     private $id        = 1;
 
-    private $gsneo4j = null;
-    private $path = null;
+    private $gsneo4j        = null;
+    private $path           = null;
     private $pathDefinition = null;
     
     private $dictCode = null;
@@ -63,11 +63,11 @@ class SplitGraphson {
         
         $this->config = $config;
         
-        $this->gsneo4j = $gremlin;
-        $this->path = $this->config->projects_root.'/projects/.exakat/gsneo4j.graphson';
-        $this->pathDefinition = $this->config->projects_root.'/projects/.exakat/gsneo4j.definition.graphson';
+        $this->gsneo4j        = $gremlin;
+        $this->path           = "{$this->config->projects_root}/projects/.exakat/gsneo4j.graphson";
+        $this->pathDefinition = "{$this->config->projects_root}/projects/.exakat/gsneo4j.definition.graphson";
         
-        $this->dictCode = new Collector();
+        $this->dictCode  = new Collector();
         $this->datastore = new Datastore($this->config);
         
         $this->cleanCsv();
@@ -80,7 +80,6 @@ class SplitGraphson {
     }
 
     public function finalize() {
-
         display("Init finalize\n");
         $begin = microtime(true);
         $query = <<<GREMLIN
@@ -93,19 +92,7 @@ GREMLIN;
         $sqlite3 = new \Sqlite3($this->config->projects_root.'/projects/.exakat/calls.sqlite');
 
         $outE = array();
-        $res = $sqlite3->query(<<<SQL
-SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, calls.id - 1 AS call
-FROM calls
-LEFT JOIN definitions 
-    ON definitions.type       = calls.type       AND
-       definitions.fullnspath = calls.fullnspath
-LEFT JOIN definitions definitions2
-    ON definitions2.type       = calls.type       AND
-       definitions2.fullnspath = calls.globalpath 
-WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
-GROUP BY calls.id
-SQL
-);
+        $res = $sqlite3->query($this->gsneo4j->getDefinitionSQL());
        
         $fp = fopen($this->path.'.def', 'w+');
         $total = 0;
@@ -248,7 +235,7 @@ GREMLIN;
             fwrite($fp, $X.PHP_EOL);
         }
         fclose($fp);
-        $this->gsneo4j->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'");');
+        $this->gsneo4j->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");
         
         $this->datastore->addRow('dictionary', $this->dictCode->getRecent());
 

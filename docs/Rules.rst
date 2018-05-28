@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 24 May 2018 08:30:03 +0000
-.. comment: Generation hash : 041f1ef0db7a4930911c863e43a40ad0160a4c20
+.. comment: Generation date : Mon, 28 May 2018 13:30:42 +0000
+.. comment: Generation hash : 3c0ba59300b9d19dc2d4302320c91109a12f88c2
 
 
 .. _$http\_raw\_post\_data:
@@ -1967,6 +1967,49 @@ They are difficult to spot, and may be confusing. It is advised to place them in
 
 
 
+.. _cache-variable-outside-loop:
+
+Cache Variable Outside Loop
+###########################
+
+
+Avoid recalculating constant values inside the loop.
+
+Do the calculation once, outside the loops, and then reuse the value each time. 
+
+One of the classic example if doing ``count($array)`` in a ``for`` loop : since the source is constant during the loop, the result of `'count() <http://www.php.net/count>`_ is always the same. 
+
+.. code-block:: php
+
+   <?php
+   
+   $path = '/some/path';
+   $fullpath = realpath("$path/more/dirs/");
+   foreach($files as $file) {
+       // Only moving parts are used in the loop
+       copy($file, $fullpath.$file);
+   }
+   
+   $path = '/some/path';
+   foreach($files as $file) {
+       // $fullpath is calculated each loop
+       $fullpath = realpath("$path/more/dirs/");
+       copy($file, $fullpath.$file);
+   }
+   
+   ?>
+
+
+Depending on the load of the called method, this may increase the speed of the loop from little to enormously.
+
++------------+---------------------------------------+
+| Short name | Performances/CacheVariableOutsideLoop |
++------------+---------------------------------------+
+| Themes     | :ref:`Performances`                   |
++------------+---------------------------------------+
+
+
+
 .. _cakephp-2.5.0-undefined-classes:
 
 CakePHP 2.5.0 Undefined Classes
@@ -2930,6 +2973,39 @@ may be rewritten in :
 +------------+-------------------------------+
 | Themes     | :ref:`Analyze`                |
 +------------+-------------------------------+
+
+
+
+.. _compact-inexistant-variable:
+
+Compact Inexistant Variable
+###########################
+
+
+Compact doesn't warn when it tries to work on an inexisting variable. It just ignores the variable.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($b = 2) {
+       $a = 1;
+       // $c doesn't exists, and is not compacted.
+       return compact('a', 'b', 'c');
+   }
+   ?>
+
+
+For performances reasons, this analysis only works inside methods and functions.
+
+See also `compact <http://php.net/compact>`_ and 
+         `PHP RFC: Make compact function reports undefined passed variables <https://wiki.php.net/rfc/compact>`_.
+
++------------+-----------------------+
+| Short name | Php/CompactInexistant |
++------------+-----------------------+
+| Themes     | :ref:`Suggestions`    |
++------------+-----------------------+
 
 
 
@@ -5898,6 +5974,52 @@ See also `array_search <http://php.net/array_search>`_ and `array_keys <http://p
 
 
 
+.. _flexible-heredoc:
+
+Flexible Heredoc
+################
+
+
+Flexible syntac for Heredoc. This was introduced in PHP 7.3.
+
+The new flexible syntax for heredoc and nowdoc enable the closing marker to be indented, and remove the new line requirement after the closing marker.
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7.3 and newer
+   foo($a = <<<END
+       
+       flexible syntax
+       with extra indentation
+       
+       END);
+       
+   // All PHP versions
+   $a = <<<END
+       
+       Normal syntax
+       
+   END;
+       
+       
+   ?>
+
+
+This syntax is backward incompatible : once adopted in the code, previous versions won't compile it.
+
+See also `Heredoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc>`_ and 
+         `Flexible Heredoc and Nowdoc Syntaxes <https://wiki.php.net/rfc/flexible_heredoc_nowdoc_syntaxes>`_.
+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/FlexibleHeredoc                                                                                                                                                                         |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _for-using-functioncall:
 
 For Using Functioncall
@@ -6412,7 +6534,7 @@ Those functions were removed in PHP 5.4.
    $db_list = mysql_list_dbs($link);
    
    while ($row = mysql_fetch_object($db_list)) {
-        echo $row->Database . \n;
+        echo $row->Database . "\n";
    }
    
    ?>
@@ -8678,6 +8800,41 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 
 
 
+.. _method-signature-must-be-compatible:
+
+Method Signature Must Be Compatible
+###################################
+
+
+Make sure methods signature are compatible 
+
+PHP generates the infamous Fatal error at execution : 'Declaration of FooParent::Bar() must be compatible with FooChildren::Bar()'
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       function xa() {}
+   }
+   
+   class xxx extends xx {
+       function xa($a) {}
+   }
+   
+   ?>
+
+
+Currently, the analysis doesn't check for ellipsis nor references.
+
++------------+-----------------------------------------+
+| Short name | Classes/MethodSignatureMustBeCompatible |
++------------+-----------------------------------------+
+| Themes     | :ref:`Analyze`                          |
++------------+-----------------------------------------+
+
+
+
 .. _method-used-below:
 
 Method Used Below
@@ -8758,6 +8915,52 @@ This syntax is interesting when the object is not reused, and may be discarded
 +------------+---------------------------+
 | Themes     | :ref:`CompatibilityPHP53` |
 +------------+---------------------------+
+
+
+
+.. _mismatch-type-and-default:
+
+Mismatch Type And Default
+#########################
+
+
+The argument typehint and its default value don't match. 
+
+The code may lint and load, and even work when the argument are provided. Though, PHP won't eventually execute it. 
+
+Most of the mismatch problems are caught by PHP at linting time. You'll get the following error message : 'Argument 1 passed to foo() must be of the type integer, string given'.
+
+The default value may be a constant (normal or class constant) : as such, PHP might find its value only at execution time, from another include. As such, PHP doesn't report anything about the situation at compile time.
+
+The default value may also be a constant scalar expression : since PHP 7, some of the simple operators such as +, -, *, %, `'** <http://php.net/manual/en/language.operators.arithmetic.php>`_, etc. are available to build default values. Among them, the ternary operator and Coalesce. Again, those expression may be only evaluated at execution time, when the value of the constants are known. 
+
+.. code-block:: php
+
+   <?php
+   
+   // bad definition
+   const STRING = 3;
+   
+   function foo(string $s = STRING) {
+       echo $s;
+   }
+   
+   // works without problem
+   foo('string');
+   
+   // Fatal error at execution time
+   foo();
+   
+   ?>
+
+
+See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
+
++------------+----------------------------------+
+| Short name | Functions/MismatchTypeAndDefault |
++------------+----------------------------------+
+| Themes     | :ref:`Analyze`                   |
++------------+----------------------------------+
 
 
 
@@ -10076,11 +10279,20 @@ New Functions In PHP 7.3
 ########################
 
 
-This documentation is still empty.
+New functions are added to new PHP version.
 
-The following functions are now native functions in PHP 7.3. It is advised to change them before moving to this new version.
+The following functions are now native functions in PHP 7.3. It is compulsory to rename any custom function that was created in older versions. One alternative is to move the function to a custom namespace, and update the ``use`` list at the beginning of the script. 
 
-* net_get_interfaces( )
+* `net_get_interfaces <http://php.net/net_get_interfaces>`_
+* `gmp_binomial <http://php.net/gmp_binomial>`_
+* `gmp_lcm <http://php.net/gmp_lcm>`_
+* `gmp_perfect_power <http://php.net/gmp_perfect_power>`_
+* `gmp_kronecker <http://php.net/gmp_kronecker>`_
+* `openssl_pkey_derive <http://php.net/openssl_pkey_derive>`_
+* `is_countable <http://php.net/is_countable>`_
+* `ldap_exop_refresh <http://php.net/ldap_exop_refresh>`_
+
+Note : At the moment of writing, all links to the manual are not working.
 
 +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Php/Php73NewFunctions                                                                                                                                                                       |
@@ -10337,15 +10549,18 @@ When comparing `'count() <http://www.php.net/count>`_ strictly with 0 (>) it is 
 
 Comparing `'count() <http://www.php.net/count>`_ and strlen() with other values than 0 cannot be replaced with a comparison with `'empty() <http://www.php.net/empty>`_.
 
-Note that this is a micro-optimisation : since PHP keeps track of the number of elements in arrays (or number of chars in strings), the total computing time of both operations is often lower than a ms. However, both functions tends to be heavily used, and may even be used inside loops.
+Note that this is a micro-optimisation : since PHP keeps track of the number of elements in arrays (or number of chars in strings), the total computing time of both operations is often lower than a ms. However, both functions tends to be heavily used, and may even be used inside loops. 
 
-+------------+--------------------------------------------+
-| Short name | Performances/NotCountNull                  |
-+------------+--------------------------------------------+
-| Themes     | :ref:`Performances`                        |
-+------------+--------------------------------------------+
-| Examples   | :ref:`wordpress-performances-notcountnull` |
-+------------+--------------------------------------------+
+See also `count <http://php.net/count>`_ and 
+         `strlen <http://php.net/strlen>`_.
+
++------------+-------------------------------------------------------------------------------------+
+| Short name | Performances/NotCountNull                                                           |
++------------+-------------------------------------------------------------------------------------+
+| Themes     | :ref:`Performances`                                                                 |
++------------+-------------------------------------------------------------------------------------+
+| Examples   | :ref:`contao-performances-notcountnull`, :ref:`wordpress-performances-notcountnull` |
++------------+-------------------------------------------------------------------------------------+
 
 
 
@@ -11580,7 +11795,7 @@ Non-constant Index In Array
 
 Undefined constants revert as strings in Arrays. They are also called barewords.
 
-In '$array[index]', PHP cannot find index as a constant, but, as a default behavior, turns it into the string 'index'. 
+In ``$array[index]``, PHP cannot find index as a constant, but, as a default behavior, turns it into the string ``index``. 
 
 This default behavior raise concerns when a corresponding constant is defined, either using `'define() <http://www.php.net/define>`_ or the const keyword (outside a class). The definition of the index constant will modify the behavior of the index, as it will now use the constant definition, and not the 'index' string. 
 
@@ -11594,8 +11809,8 @@ This default behavior raise concerns when a corresponding constant is defined, e
    //PHP Notice:  Use of undefined constant index - assumed 'index'
    
    echo $array[index];      // display 1 and the above error
-   echo $array[index];    // display 1
-   echo $array[index];  // Syntax error
+   echo "$array[index]";    // display 1
+   echo "$array['index']";  // Syntax error
    
    
    define('index', 2);
@@ -11608,7 +11823,10 @@ This default behavior raise concerns when a corresponding constant is defined, e
 
 It is recommended to make index a real string (with ' or "), or to define the corresponding constant to avoid any future surprise.
 
-Note that PHP 7.2 removes the support for this feature : `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_.
+Note that PHP 7.2 removes the support for this feature.
+
+See also `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_ and 
+         `Syntax <http://php.net/manual/en/language.constants.syntax.php>`_.
 
 +------------+-------------------------+
 | Short name | Arrays/NonConstantArray |
@@ -12015,23 +12233,26 @@ These strings only contains one variable or property or array.
    <?php
    
    $a = 0;
-   $b = $a; // This is a one-variable string
+   $b = "$a"; // This is a one-variable string
    
    // Better way to write the above
    $b = (string) $a;
    
    // Alternatives : 
-   $b2 = $a[1]; // This is a one-variable string
-   $b3 = $a->b; // This is a one-variable string
-   $c = d;
-   $d = D;
+   $b2 = "$a[1]"; // This is a one-variable string
+   $b3 = "$a->b"; // This is a one-variable string
+   $c = "d";
+   $d = "D";
    $b4 = "{$$c}";
    $b5 = "{$a->foo()}";
    
    ?>
 
 
-If the goal is to convert it to a string, use the type casting (string) operator : it is then clearer to understand the conversion. It is also marginally faster, though very little.
+When the goal is to convert a variable to a string, it is recommended to use the type casting (string) operator : it is then clearer to understand the conversion. It is also marginally faster, though very little. 
+
+See also `Strings <http://php.net/manual/en/language.types.string.php>`_ and
+         `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_.
 
 +------------+-------------------------+
 | Short name | Type/OneVariableStrings |
@@ -12628,10 +12849,16 @@ PHP does check that a number of structures, such as classes, methods, interfaces
        function _POST() {
        
        }
-   
    }
    
    ?>
+
+
+See also `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_,
+         `Predefined Classes <http://php.net/manual/en/reserved.classes.php>`_,
+         `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_,
+         `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_ and 
+         `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_.
 
 +------------+-------------------+
 | Short name | Php/ReservedNames |
@@ -15597,13 +15824,13 @@ Since PHP 7.2, simple switches that use only strings or integers are optimized. 
    
    // Optimized switch. 
    switch($b) {
-       case a:
+       case "a":
            'break;
-       case b:
+       case "b":
            'break;
-       case c:
+       case "c":
            'break;
-       case d:
+       case "d":
            'break;
        default :
            'break;
@@ -15612,13 +15839,13 @@ Since PHP 7.2, simple switches that use only strings or integers are optimized. 
    // Unoptimized switch. 
    // Try moving the foo() call in the default, to keep the rest of the switch optimized.
    switch($c) {
-       case a:
+       case "a":
            'break;
        case foo($b):
            'break;
-       case c:
+       case "c":
            'break;
-       case d:
+       case "d":
            'break;
        default :
            'break;
@@ -15627,7 +15854,7 @@ Since PHP 7.2, simple switches that use only strings or integers are optimized. 
    ?>
 
 
-See also `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_.
+See also `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-switch.html>`_.
 
 +------------+---------------------------+
 | Short name | Performances/SimpleSwitch |
@@ -16676,7 +16903,9 @@ Strpos()-like Comparison
 ########################
 
 
-`'strpos() <http://www.php.net/strpos>`_, and several PHP native functions, returns a string position, starting at 0, or false, in case of failure. 
+The result of that function may be mistaken with an error.
+
+`'strpos() <http://www.php.net/strpos>`_, along with several PHP native functions, returns a string position, starting at 0, or false, in case of failure. 
 
 .. code-block:: php
 
@@ -16713,6 +16942,8 @@ This analyzer list all the `'strpos() <http://www.php.net/strpos>`_-like functio
 | Themes     | :ref:`Analyze`                                                                                      |
 +------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP   | `strict-comparisons <https://github.com/dseguy/clearPHP/tree/master/rules/strict-comparisons.md>`__ |
++------------+-----------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`piwigo-structures-strposcompare`, :ref:`thelia-structures-strposcompare`                      |
 +------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -17640,7 +17871,8 @@ This applies to the 'object' type hint, but not the the others, such as int or b
    ?>
 
 
-See also `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_.
+See also `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_ and 
+         `Objects and references <http://php.net/manual/en/language.oop5.references.php>`_.
 
 +------------+--------------------------------+
 | Short name | Functions/TypehintedReferences |
@@ -19923,7 +20155,7 @@ Use Count Recursive
 
 The code could use the recursive version of count.
 
-The second argument of count, when set to `COUNT_RECURSIVE`, count recursively the elements. It also counts the elements themselves. 
+The second argument of count, when set to ``COUNT_RECURSIVE``, count recursively the elements. It also counts the elements themselves. 
 
 .. code-block:: php
 
@@ -20250,7 +20482,7 @@ PHP allocate memory at the end of the double-quoted string, making only one call
    $bar = 'bar';
     
    /* PHP 7 optimized this */
-   $a = foo and $bar;
+   $a = "foo and $bar";
     
    /* This is PHP 5 code (aka, don't use it) */
    $a = 'foo and ' . $bar;
@@ -21376,13 +21608,13 @@ Sometimes, the parenthesis provide the same execution order than the default ord
 
 See also `Operators Precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
 
-+------------+--------------------------------------------------+
-| Short name | Structures/UselessParenthesis                    |
-+------------+--------------------------------------------------+
-| Themes     | :ref:`Analyze`                                   |
-+------------+--------------------------------------------------+
-| Examples   | :ref:`woocommerce-structures-uselessparenthesis` |
-+------------+--------------------------------------------------+
++------------+-----------------------------------------------------------------------------------------------+
+| Short name | Structures/UselessParenthesis                                                                 |
++------------+-----------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                |
++------------+-----------------------------------------------------------------------------------------------+
+| Examples   | :ref:`mautic-structures-uselessparenthesis`, :ref:`woocommerce-structures-uselessparenthesis` |
++------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -23243,11 +23475,17 @@ list() is the only PHP function that accepts to have omitted arguments. If the f
 .. code-block:: php
 
    <?php
+       // No need for '2', so no assignation
        list ($a, , $b) = array(1, 2, 3);
+           // works with PHP 7.1 short syntax
+            [$a, , $b] = array(1, 2, 3);
+   
+       // No need for '2', so no assignation
+       list ($a, $c, $b) = array(1, 2, 3);
    ?>
 
 
-$b will be 3, and the 2 value will be omitted. This is cleaner, and save some memory.
+See also `list <http://php.net/list>`_.
 
 +------------+------------------------------------+
 | Short name | Structures/ListOmissions           |

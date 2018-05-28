@@ -30,7 +30,7 @@ class NoReferenceForTernary extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->is('reference', true)
              ->outIs('BLOCK')
-             ->atomInside('Return')
+             ->atomInsideNoDefinition('Return')
              ->outIs('RETURN')
              ->atomIs(array('Ternary', 'Coalesce'))
              ->back('first');

@@ -352,6 +352,7 @@ GREMLIN;
         // Create link between Class constant and definition
         $query = <<<'GREMLIN'
         g.V().hasLabel('Staticconstant').as('first')
+.not(where( __.in("DEFINITION")))
 .out('CONSTANT').sideEffect{name = it.get().value("code");}.select('first')
 .out('CLASS').hasLabel("Identifier", "Nsname").has('fullnspath')
 .sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')

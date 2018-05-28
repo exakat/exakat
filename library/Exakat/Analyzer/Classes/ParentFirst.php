@@ -33,7 +33,7 @@ class ParentFirst extends Analyzer {
              ->inIs('NAME')
 
              ->outIs('BLOCK')
-             ->atomInside('Staticmethodcall')
+             ->atomInsideNoDefinition('Staticmethodcall')
              ->outIs('CLASS')
              ->codeIs('parent')
              ->inIs('CLASS')

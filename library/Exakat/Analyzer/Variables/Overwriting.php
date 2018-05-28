@@ -35,7 +35,7 @@ class Overwriting extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomIsNot(array('Cast'))
-             ->atomInside('Variable')
+             ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'destination')
              ->back('first');
         $this->prepareQuery();

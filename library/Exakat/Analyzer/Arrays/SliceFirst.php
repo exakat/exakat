@@ -36,7 +36,7 @@ class SliceFirst extends Analyzer {
         // array_slice(array_values($array), 2, 5);
         $this->atomFunctionIs($sliceFunctions)
              ->outWithRank('ARGUMENT', 0)
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->fullnspathIs($manipulatingFunctions)
              ->back('first');
         $this->prepareQuery();

@@ -82,7 +82,7 @@ GREMLIN
              // Ignore functioncall that are not \dirname
 
              ->raw(<<<GREMLIN
-not(where( __.repeat(__.out()).emit().times($MAX_LOOPING)
+not(where( __.repeat(__.out({$this->linksDown})).emit().times($MAX_LOOPING)
                                      .not(where(__.in("CLASS", "NAME")))
                                      .not(hasLabel("Identifier", "Nsname", "Staticconstant").has("noDelimiter"))
                                      .not(hasLabel("Parenthesis", "Magicconstant", "String", "Name"))

@@ -74,10 +74,11 @@ class Status extends Tasks {
             throw new NoSuchProject($project);
         }
 
-        $status = array('project' => $project);
-        $status['files']  = $this->datastore->getHash('files') ?? -1;
-        $status['loc']    = $this->datastore->getHash('loc') ?? -1;
-        $status['tokens'] = $this->datastore->getHash('tokens') ?? -1;
+        $status = array('project' => $project,
+                        'files'   => $this->datastore->getHash('files')  ?? -1,
+                        'loc'     => $this->datastore->getHash('loc')    ?? -1,
+                        'tokens'  => $this->datastore->getHash('tokens') ?? -1,
+                        );
         if (file_exists($this->config->projects_root.'/projects/.exakat/Project.json')) {
             $json = json_decode(file_get_contents($this->config->projects_root.'/projects/.exakat/Project.json'));
             if ($json->project === $project) {

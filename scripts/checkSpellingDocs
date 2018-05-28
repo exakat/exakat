@@ -5,7 +5,7 @@ $pspell = pspell_new('en');
 //                                                    $this->loadDict('php'), // This one is common to languages
 //                                                    $this->loadDict('personal.'.$this->language))); 
 
-$files = glob('human/en/Structures/*.ini');
+$files = glob('human/en/*/*.ini');
 
 foreach($files as $file) {
     processFile($file, $pspell);

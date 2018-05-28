@@ -29,20 +29,22 @@ class DropElseAfterReturn extends Analyzer {
         //if ($a) { return $a; } else { doSomething(); }
         $this->atomIs('Ifthen')
              ->outIs('THEN')
-             ->atomInsideNoDefinition('Return')
+             ->outIs('EXPRESSION')
+             ->atomIs('Return')
              ->back('first')
              ->outIs('ELSE')
-             ->noAtomInside('Return')
+             ->hasNoChildren('Return', array('EXPRESSION'))
              ->back('first');
         $this->prepareQuery();
 
         //if ($a) { doSomething(); } else { return $a; }
         $this->atomIs('Ifthen')
              ->outIs('ELSE')
-             ->atomInsideNoDefinition('Return')
+             ->outIs('EXPRESSION')
+             ->atomIs('Return')
              ->back('first')
              ->outIs('THEN')
-             ->noAtomInside('Return')
+             ->hasNoChildren('Return', array('EXPRESSION'))
              ->back('first');
         $this->prepareQuery();
     }

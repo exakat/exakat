@@ -34,7 +34,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
-             ->atomInside('Member')
+             ->atomInsideNoDefinition('Member')
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'name')
              ->back('first');
@@ -47,7 +47,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
-             ->atomInside('Methodcall')
+             ->atomInsideNoDefinition('Methodcall')
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'name')
              ->back('first');
@@ -60,7 +60,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
-             ->atomInside('Array')
+             ->atomInsideNoDefinition('Array')
              ->hasNoChildren('Integer', 'INDEX') // attempt to avoid strings
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
@@ -74,7 +74,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
-             ->atomInside('Arrayappend')
+             ->atomInsideNoDefinition('Arrayappend')
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
              ->back('first');
@@ -87,7 +87,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->tokenIs('T_OPEN_BRACKET')
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
@@ -101,7 +101,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->inIs('ARGUMENT')
              ->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->tokenIs('T_VARIABLE')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')

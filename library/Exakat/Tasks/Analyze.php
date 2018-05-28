@@ -143,9 +143,8 @@ class Analyze extends Tasks {
         
         if ($this->config->noDependencies !== true) {
             foreach($analyzer->dependsOn() as $dependency) {
-                if (!(isset($this->analyzed[$analyzer_class]) &&
-                       $this->config->noRefresh !== true)
-                    ) {
+                if (!isset($this->analyzed[$dependency]) ||
+                     ($this->config->noRefresh  === false)   ) {
                     $count = $this->analyze($dependency);
                     assert($count !== null, "count is null");
                     $this->analyzed[$dependency] = $count;
@@ -209,7 +208,6 @@ GREMLIN;
             } catch(Exception $error) {
                 $end = microtime(true);
                 display( "$analyzer_class : error \n");
-                print $error->getMessage();
                 $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$error->getMessage());
                 $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
                 $this->checkAnalyzed();

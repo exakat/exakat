@@ -29,20 +29,20 @@ class NoReturnUsed extends Analyzer {
         // Functions
         $this->atomIs('Function')
              ->outIs('BLOCK')
-             ->atomInside('Return')
+             ->atomInsideNoDefinition('Return')
              ->outIs('RETURN')
              ->atomIsNot('Void')
              ->back('first')
-             ->raw('where( __.out("DEFINITION") )')
+             ->hasOut('DEFINITION')
              ->raw('not(where( __.out("DEFINITION").not(where( __.in("EXPRESSION")))) )');
         $this->prepareQuery();
 
         // Methods
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
              ->hasOut('STATIC')
              ->savePropertyAs('lccode', 'methode')
              ->outIs('BLOCK')
-             ->atomInside('Return')
+             ->atomInsideNoDefinition('Return')
              ->outIs('RETURN')
              ->atomIsNot('Void')
              ->back('first')

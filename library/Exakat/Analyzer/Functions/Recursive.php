@@ -27,12 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class Recursive extends Analyzer {
     public function analyze() {
-        $this->atomIs('Function')
-             ->hasNoClassTrait()
+        // functon foo() { foo(); }
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->savePropertyAs('fullcode', 'name')
-             ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition(self::$FUNCTIONS_CALLS)
              ->functionDefinition()
              ->samePropertyAs('fullcode', 'name')
              ->back('first');

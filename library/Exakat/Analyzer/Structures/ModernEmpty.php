@@ -47,13 +47,13 @@ class ModernEmpty extends Analyzer {
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
              ->nextSibling()
-             ->atomInside('Empty')
+             ->atomInsideNoDefinition('Empty')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'variable')
              ->back('first')
              ->raw(<<<GREMLIN
 not(__.where( __.in("EXPRESSION")
-                .emit().repeat(__.not(hasLabel("$CONTAINERS")).out()).times($MAX_LOOPING)
+                .emit().repeat(__.not(hasLabel("$CONTAINERS")).out({$this->linksDown})).times($MAX_LOOPING)
                 .hasLabel("$CONTAINERS").filter{ it.get().value("fullcode") == variable }
                 .not( __.where(__.in("ARGUMENT").hasLabel("Empty")))
                 .where( __.in("ANALYZED").has("analyzer", within("Variables/IsRead", "Classes/IsRead", "Arrays/IsRead")))

@@ -30,7 +30,7 @@ class UnusedReturnedValue extends Analyzer {
         // foo();
         $this->atomIs('Function')
              ->outIs('BLOCK')
-             ->atomInside('Return')
+             ->atomInsideNoDefinition('Return')
              ->outIs('RETURN')
              ->atomIsNot('Void')
              ->back('first')

@@ -44,13 +44,13 @@ class ExakatConfig extends Config {
     }
 
     public function loadConfig($args) {
-        $inis = array();
-        
         // Default values
-        $inis[] = array('graphdb'            => 'gsneo4j',
-                        'gremlin'            => $this->gremlins['gsneo4j'],
-                        'loader'             => $this->loaders['gsneo4j'],
-                        'other_php_versions' => array(),
+        $inis[] = array(
+                    array('graphdb'            => 'gsneo4j',
+                          'gremlin'            => $this->gremlins['gsneo4j'],
+                          'loader'             => $this->loaders['gsneo4j'],
+                          'other_php_versions' => array(),
+                         )
                        );
 
         $configFiles = array( $this->projects_root.'/config/exakat.ini',
@@ -67,7 +67,7 @@ class ExakatConfig extends Config {
             } 
         }
 
-        if ( $inis === null) {
+        if ($inis === null) {
             return self::NOT_LOADED;
         }
         

@@ -39,7 +39,7 @@ class OverwrittenLiterals extends Analyzer {
 g.V().hasLabel("Function", "Closure", "Method", "Magicmethod")
      .where( __.sideEffect{ m = [:]; }
      .out("BLOCK")
-     .emit( hasLabel("Assignation")).repeat( __.out() ).times($MAX_LOOPING).hasLabel("Assignation")
+     .emit( hasLabel("Assignation")).repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING).hasLabel("Assignation")
      .has("code", $equal[0])
      .not( __.where( __.in("EXPRESSION").in("INIT")) )
      .not( __.where( __.in("PPP")) )
@@ -64,10 +64,10 @@ GREMLIN
         
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->savePropertyAs('fullnspath', 'name')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->codeIs('=')
              ->raw('not( where( __.in("EXPRESSION").in("INIT")) )')
-             ->raw('not( where( __.in("PPP")) )')
+             ->hasNoIn('PPP')
              ->outIs('RIGHT')
              ->atomIs(array('Integer', 'String', 'Real', 'Null', 'Boolean'))
              ->inIs('RIGHT')

@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('new Z( )', 
+$expected     = array('new Z( )',
                       'new Y( )',
                      );
 
-$expected_not = array('new X( )', 
+$expected_not = array('new X( )',
                      );
 
 ?>

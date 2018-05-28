@@ -3,5 +3,6 @@
 echo "Foo\n";
 ', $errors, PARSEKIT_QUIET);
 
-  var_dump($ops);
+  var_dump($PARSEKIT_QUIET);
+  
 ?>

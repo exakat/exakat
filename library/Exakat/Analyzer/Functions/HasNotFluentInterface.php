@@ -30,7 +30,7 @@ class HasNotFluentInterface extends Analyzer {
         // return $a;
         $this->atomIs(array('Method', 'Magicmethod'))
              ->outIs('BLOCK')
-             ->atomInside('Return')
+             ->atomInsideNoDefinition('Return')
              ->outIs('RETURN')
              ->atomIsNot('This')
              ->back('first');

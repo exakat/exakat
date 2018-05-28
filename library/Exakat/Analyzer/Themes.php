@@ -53,7 +53,7 @@ class Themes {
 
         if (is_array($theme)) {
             $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
-            $where = 'WHERE c.name in ("'.implode('", "', $theme).'")';
+            $where = 'WHERE c.name in ('.makeList($theme).')';
         } elseif ($theme === null) {
             // Default is ALL of them
             $where = '';

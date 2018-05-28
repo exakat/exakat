@@ -38,11 +38,11 @@ class CouldUseArrayUnique extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
 
-             ->atomInside('Ifthen')
+             ->atomInsideNoDefinition('Ifthen')
              ->_as('ifthen')
              ->outIs('CONDITION')
 
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs('\\in_array')
              ->outWithRank('ARGUMENT', 0)
              ->samePropertyAs('fullcode', 'increment')
@@ -53,7 +53,7 @@ class CouldUseArrayUnique extends Analyzer {
              ->back('ifthen')
 
              ->outIs(array('THEN', 'ELSE'))
-             ->atomInside('Arrayappend')
+             ->atomInsideNoDefinition('Arrayappend')
              ->outIs('APPEND')
              ->samePropertyAs('fullcode', 'collector')
              ->inIs('APPEND')

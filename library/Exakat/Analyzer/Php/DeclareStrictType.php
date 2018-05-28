@@ -36,7 +36,11 @@ class DeclareStrictType extends Analyzer {
              ->outIs('EXPRESSION')
              ->atomIs('Declare')
              ->outIs('ARGUMENT')
-             ->fullcodeIs('strict_types = 1')
+             ->outIs('LEFT')
+             ->codeIs('strict_types')
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->codeIs('1')
              ->back('first');
         $this->prepareQuery();
     }

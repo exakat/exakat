@@ -40,7 +40,7 @@ class WeakType extends Analyzer {
              ->back('first')
              
              ->outIs('THEN')
-             ->atomInside(array('Variableobject', 'Variablearray'))
+             ->atomInsideNoDefinition(array('Variableobject', 'Variablearray'))
              ->samePropertyAs('code', 'variable')
              ->back('first');
         $this->prepareQuery();
@@ -59,7 +59,7 @@ class WeakType extends Analyzer {
              ->back('first')
              
              ->outIs('ELSE')
-             ->atomInside(array('Variableobject', 'Variablearray'))
+             ->atomInsideNoDefinition(array('Variableobject', 'Variablearray'))
              ->samePropertyAs('code', 'variable')
              ->back('first');
         $this->prepareQuery();
@@ -76,7 +76,7 @@ class WeakType extends Analyzer {
              ->back('first')
              
              ->outIs('THEN')
-             ->atomInside(array('Variableobject', 'Variablearray'))
+             ->atomInsideNoDefinition(array('Variableobject', 'Variablearray'))
              ->samePropertyAs('code', 'variable')
              ->back('first');
         $this->prepareQuery();
@@ -91,7 +91,7 @@ class WeakType extends Analyzer {
              ->back('first')
              
              ->outIs('ELSE')
-             ->atomInside(array('Variableobject', 'Variablearray'))
+             ->atomInsideNoDefinition(array('Variableobject', 'Variablearray'))
              ->samePropertyAs('code', 'variable')
              ->back('first');
         $this->prepareQuery();

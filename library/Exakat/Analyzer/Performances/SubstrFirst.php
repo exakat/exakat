@@ -38,7 +38,7 @@ class SubstrFirst extends Analyzer {
         $this->atomFunctionIs($substrFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIsNot('Concatenation')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->fullnspathIs($replacingFunctions)
              ->back('first');
         $this->prepareQuery();
@@ -54,7 +54,7 @@ class SubstrFirst extends Analyzer {
              ->inIs('LEFT')
              ->nextSibling()
              ->atomIsNot(array('Ifthen')) // possibly others
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs($substrFunctions)
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'tmp')

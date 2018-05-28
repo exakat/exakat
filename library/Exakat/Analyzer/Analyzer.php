@@ -51,8 +51,9 @@ abstract class Analyzer {
     
     public $config         = null;
 
-    public static $availableAtoms = array();
-    public static $availableLinks = array();
+    public static $availableAtoms         = array();
+    public static $availableLinks         = array();
+    public static $availableFunctioncalls = array();
     
     private $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerQuoted = '';
@@ -99,6 +100,8 @@ abstract class Analyzer {
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $CLASSES_NAMED    = 'Class';
     static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
+    static public $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
+    static public $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
     
     const STOP_QUERY = 'filter{ false; }';
     
@@ -160,6 +163,8 @@ abstract class Analyzer {
             self::$availableAtoms = array_keys($this->gremlin->query('g.V().groupCount("m").by(label).cap("m")')->toArray()[0]);
 
             self::$availableLinks = array_keys($this->gremlin->query('g.E().groupCount("m").by(label).cap("m")')->toArray()[0]);
+
+            self::$availableFunctioncalls = array_keys($this->gremlin->query('g.V().hasLabel("Functioncall").has("fullnspath").groupCount("m").by("fullnspath").cap("m")')->toArray()[0]);
         }
 
     }
@@ -521,6 +526,15 @@ GREMLIN
     public function functioncallIs($fullnspath) {
         assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
+
+        $fullnspaths = makeArray($fullnspath);
+        $diff = array_intersect($fullnspaths, self::$availableFunctioncalls);
+        
+        if (empty($diff)) {
+            $this->addMethod(self::STOP_QUERY);
+            return $this;
+        }
+
         $this->atomIs('Functioncall')
              ->raw('has("fullnspath")')
              ->fullnspathIs(makeFullNsPath($fullnspath));
@@ -564,7 +578,7 @@ GREMLIN
 
     public function fullcodeInside($fullcode) {
         // $fullcode is a name of a variable
-        $gremlin = 'emit( ).repeat( out() ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}';
+        $gremlin = 'emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}';
         $this->addMethod($gremlin);
 
         return $this;
@@ -572,7 +586,7 @@ GREMLIN
 
     public function noFullcodeInside($fullcode) {
         // $fullcode is a name of a variable
-        $gremlin = 'not( where( __.emit( ).repeat( out() ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}) )';
+        $gremlin = 'not( where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}) )';
         $this->addMethod($gremlin);
 
         return $this;
@@ -951,7 +965,7 @@ GREMLIN
         return $this;
     }
 
-    public function saveOutAs($name, $out = "ARGUMENT", $sort = 'rank') {
+    public function saveOutAs($name, $out = 'ARGUMENT', $sort = 'rank') {
         // Calculate the arglist, normalized it, then put it in a variable
         // This needs to be in Arguments, (both Functioncall or Function)
         if (empty($sort)) {
@@ -1164,9 +1178,7 @@ GREMLIN
 
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
-        if (empty($diff)) {
-            $this->addMethod(self::STOP_QUERY);
-        } else {
+        if (!empty($diff)) {
             // alternative : coalesce(out('LEFT'),  __.filter{true} )
             $this->addMethod("until( __.not(outE(".$this->SorA($link).")) ).repeat(out(".$this->SorA($link)."))");
         }
@@ -1228,7 +1240,7 @@ GREMLIN
         if (empty($link)) {
             $this->addMethod('in( )');
             return $this;
-        } 
+        }
         
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
@@ -1249,9 +1261,9 @@ GREMLIN
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
-            // If Exists... 
+            // If Exists...
             return $this;
-        } 
+        }
         
         $this->addMethod('until(__.inE('.$this->SorA($link).').count().is(eq(0))).repeat(__.in('.$this->SorA($link).'))');
         
@@ -1380,14 +1392,14 @@ GREMLIN
 
     public function hasChildren($childrenClass, $outs = array()) {
         if (empty($outs)) {
-            $out = '.out()';
+            $out = '.out( )';
         } else {
             $out = array();
             
             $outs = makeArray($outs);
             foreach($outs as $o) {
                 if (empty($o)) {
-                    $out[] = '.out()';
+                    $out[] = '.out( )';
                 } else {
                     $out[] = ".out('$o')";
                 }
@@ -1403,14 +1415,14 @@ GREMLIN
         
     public function hasNoChildren($childrenClass, $outs = array()) {
         if (empty($outs)) {
-            $out = '.out()';
+            $out = '.out( )';
         } else {
             $out = array();
             
             $outs = makeArray($outs);
             foreach($outs as $o) {
                 if (empty($o)) {
-                    $out[] = '.out()';
+                    $out[] = '.out( )';
                 } else {
                     $out[] = ".out('$o')";
                 }
@@ -1449,7 +1461,7 @@ GREMLIN
     }
 
     public function functionDefinition() {
-        $this->addMethod('in("DEFINITION").hasLabel("Function", "Method", "Closure")');
+        $this->addMethod('in("DEFINITION").hasLabel("Function", "Method", "Magicmethod", "Closure")');
     
         return $this;
     }
@@ -1489,7 +1501,7 @@ GREMLIN
     }
     
     public function goToLoop() {
-        $this->goToInstruction(array('For', 'Foreach', 'While', 'Dowhile'));
+        $this->goToInstruction(self::$LOOPS_ALL);
         
         return $this;
     }
@@ -1816,6 +1828,27 @@ GREMLIN
         
         return $this;
     }
+
+    public function makeVariableName($variable) {
+        $this->addMethod(<<<GREMLIN
+sideEffect{ $variable = "\\$" + $variable; }
+
+GREMLIN
+);
+        
+        return $this;
+    }
+    
+    public function goToLiteralValue() {
+        $this->addMethod(<<<GREMLIN
+coalesce(__.in("DEFINITION").out("VALUE"), 
+         __.filter{ true; })
+
+GREMLIN
+);
+        
+        return $this;
+    }
     
     public function fetchContext($context = self::CONTEXT_OUTSIDE_CLOSURE) {
         $forClosure = "                    // This is make variables in USE available in the parent level
@@ -2056,14 +2089,20 @@ GREMLIN;
     }
 
     protected function loadIni($file, $index = null) {
-        $fullpath = $this->config->dir_root.'/data/'.$file;
+        $fullpath = "{$this->config->dir_root}/data/$file";
         
-        assert(file_exists($fullpath), 'Ini file "'.$fullpath.'" doesn\'t exists.');
+        assert(file_exists($fullpath), "Ini file '$fullpath' doesn't exists.");
         
         static $cache;
 
         if (!isset($cache[$fullpath])) {
-            $cache[$fullpath] = parse_ini_file($fullpath);
+            $ini = parse_ini_file($fullpath);
+            foreach($ini as $section => &$values) {
+                if (isset($values[0]) && empty($values[0])) {
+                    $values = '';
+                }
+            }
+            $cache[$fullpath] = $ini;
         }
         
         if ($index !== null && isset($cache[$fullpath][$index])) {
@@ -2076,7 +2115,7 @@ GREMLIN;
     protected function loadJson($file) {
         $fullpath = $this->config->dir_root.'/data/'.$file;
 
-        assert(file_exists($fullpath), 'JSON file "'.$fullpath.'" doesn\'t exists.');
+        assert(file_exists($fullpath), "JSON file '$fullpath' doesn't exists.");
 
         static $cache;
         if (!isset($cache[$fullpath])) {
@@ -2116,7 +2155,7 @@ GREMLIN;
             assert(false, __METHOD__.' received an unprocessable object '.var_dump($code));
         }
     }
-    
+
     public static function makeBaseName($className) {
         // No Exakat, no Analyzer, using / instead of \
         return $className;

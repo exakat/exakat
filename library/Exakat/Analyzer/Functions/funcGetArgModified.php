@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class funcGetArgModified extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsModified');
+        return array('Variables/IsModified',
+                    );
     }
     
     public function analyze() {
@@ -39,7 +40,7 @@ class funcGetArgModified extends Analyzer {
              ->inIsIE('RIGHT')
              ->inIs('ARGUMENT')
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs('\\func_get_arg')
              ->outIs('ARGUMENT')
              ->atomIs('Integer')
@@ -47,7 +48,7 @@ class funcGetArgModified extends Analyzer {
              ->samePropertyAs('intval', 'rank', self::CASE_SENSITIVE)
              ->goToFunction()
              ->outIs('BLOCK')
-             ->atomInside('Variable')
+             ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'arg')
              ->analyzerIs('Variables/IsModified')
              ->back('first');

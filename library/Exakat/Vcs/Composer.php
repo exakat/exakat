@@ -48,7 +48,7 @@ class Composer extends Vcs {
     }
 
     public function update() {
-        $res = shell_exec("cd {$this->destinationFull}/code/; composer -q update");
+        shell_exec("cd {$this->destinationFull}/code/; composer -q update");
 
         $json = file_get_contents("{$this->destinationFull}/code/composer.json");
         $json = json_decode($json);
@@ -84,7 +84,7 @@ class Composer extends Vcs {
     }
 
     public function getStatus() {
-        $composerLockPath = $this->destinationFull.'/composer.lock';
+        $composerLockPath = "{$this->destinationFull}/composer.lock";
         if (!file_exists($composerLockPath)) {
             $status['updatable'] = false;
             $status['hash']      = 'No composer.lock';
@@ -95,7 +95,7 @@ class Composer extends Vcs {
         $status = array( 'vcs'       => 'composer',
                          'updatable' => true,
                          );
-        $composerLock = @file_get_contents($composerLockPath);
+        $composerLock = file_get_contents($composerLockPath);
         
         $json = json_decode($composerLock);
         if (isset($json->hash)) {

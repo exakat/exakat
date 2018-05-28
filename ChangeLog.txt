@@ -1,4 +1,4 @@
-Version 1.2.9 (Xu Jingzong, coming up)
+Version 1.3.0 (Xue Rengui, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,30 @@ Version 1.2.9 (Xu Jingzong, coming up)
 + Tokenizer
     + 
 
-Version 1.2.8 (Xu Jingzong, coming up)
+Version 1.2.9 (Wang Gui, 2018-05-28)
++ Architecture
+    + Removed query cache from gremlin
+    + Added pre-query check to prevent queries that have no chance of result
++ Report
+    + Ambassador : first 50% of documentation fix : double quotes are not well displayed
+    + Ambassador : Results are ordered by files, then by lines
++ Analyzer
+    + New analysis : Flexible Heredoc syntax
+    + New analysis : Non-compatible methods
+    + New analysis : Use the Blind Var
+    + New analysis : Inexistant Compact
+    + New analysis : Typehint / default value mismatch
+    + Upgraded analysis : strict_types are not recognized as undefined constant
+    + Upgraded analysis : More new methods for PHP 7.3
+    + Upgraded analysis : Dependant traits
+    + Upgraded analysis : Strpos comparison
+    + Upgraded analysis : Method Must Return
+    + Checked unit tests : 2885 / 2889 test pass (99% pass). 
++ Tokenizer
+    + Interface may have const, not traits (Loading)
+    + Added support for static call to methods
+
+Version 1.2.8 (Xu Jingzong, 2018-05-21)
 + Architecture
     + Implemented a cache for speed boost.
     + Refactored files finding method

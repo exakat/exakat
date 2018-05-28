@@ -11,7 +11,7 @@ $expected     = array('fdf_open_string($HTTP_FDF_DATA)',
                       'fdf_close($fdf)',
                      );
 
-$expected_not = array(
+$expected_not = array('new fdf("name")',
                      );
 
 ?>

@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Thu, 24 May 2018 08:30:03 +0000
-.. comment: Generation hash : 041f1ef0db7a4930911c863e43a40ad0160a4c20
+.. comment: Generation date : Mon, 28 May 2018 13:30:42 +0000
+.. comment: Generation hash : 3c0ba59300b9d19dc2d4302320c91109a12f88c2
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 348 analysis
+Total : 350 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -204,7 +204,9 @@ Total : 348 analysis
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Mark Callable <mark-callable>`
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
+* :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
 * :ref:`Method Used Below <method-used-below>`
+* :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
 * :ref:`Mismatched Typehint <mismatched-typehint>`
@@ -485,7 +487,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 62 analysis
+Total : 63 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -502,6 +504,7 @@ Total : 62 analysis
 * :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
 * :ref:`Ellipsis Usage <ellipsis-usage>`
 * :ref:`Exponent Usage <exponent-usage>`
+* :ref:`Flexible Heredoc <flexible-heredoc>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Function Subscripting <function-subscripting>`
 * :ref:`Group Use Declaration <group-use-declaration>`
@@ -555,7 +558,7 @@ Total : 62 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 58 analysis
+Total : 59 analysis
 
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -580,6 +583,7 @@ Total : 58 analysis
 * Php/DefineWithArray
 * Php/EllipsisUsage
 * Php/ExponentUsage
+* Php/FlexibleHeredoc
 * Php/GroupUseDeclaration
 * Php/GroupUseTrailingComma
 * Php/HashAlgos53
@@ -621,7 +625,7 @@ Total : 58 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 50 analysis
+Total : 51 analysis
 
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -641,6 +645,7 @@ Total : 50 analysis
 * Php/DefineWithArray
 * Php/EllipsisUsage
 * Php/ExponentUsage
+* Php/FlexibleHeredoc
 * Php/GroupUseDeclaration
 * Php/GroupUseTrailingComma
 * Php/HashAlgos53
@@ -679,7 +684,7 @@ Total : 50 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 39 analysis
+Total : 40 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * Classes/Anonymous
@@ -691,6 +696,7 @@ Total : 39 analysis
 * Exceptions/MultipleCatch
 * Functions/MultipleSameArguments
 * Php/DefineWithArray
+* Php/FlexibleHeredoc
 * Php/GroupUseDeclaration
 * Php/GroupUseTrailingComma
 * Php/HashAlgos53
@@ -726,7 +732,7 @@ Total : 39 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 35 analysis
+Total : 36 analysis
 
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -748,6 +754,7 @@ Total : 35 analysis
 * Exceptions/MultipleCatch
 * Functions/funcGetArgModified
 * Php/EmptyList
+* Php/FlexibleHeredoc
 * Php/GroupUseTrailingComma
 * Php/HashAlgos53
 * Php/HashAlgos54
@@ -769,7 +776,7 @@ Total : 35 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 24 analysis
+Total : 25 analysis
 
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
@@ -781,6 +788,7 @@ Total : 24 analysis
 * Classes/IntegerAsProperty
 * Classes/UsingThisOutsideAClass
 * Php/BetterRand
+* Php/FlexibleHeredoc
 * Php/GroupUseTrailingComma
 * Php/HashAlgos53
 * Php/HashAlgos54
@@ -801,7 +809,7 @@ Total : 24 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 15 analysis
+Total : 16 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -812,6 +820,7 @@ Total : 15 analysis
 * :ref:`PHP 7.2 Object Keyword <php-7.2-object-keyword>`
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * Constants/UndefinedConstants
+* Php/FlexibleHeredoc
 * Php/ListWithReference
 * Php/ParenthesisAsParameter
 * Php/Php72NewClasses
@@ -869,13 +878,14 @@ Total : 25 analysis
 Performances
 ++++++++++++
 
-Total : 34 analysis
+Total : 35 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
 * :ref:`Avoid array_push() <avoid-array\_push()>`
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Avoid glob() Usage <avoid-glob()-usage>`
+* :ref:`Cache Variable Outside Loop <cache-variable-outside-loop>`
 * :ref:`Do In Base <do-in-base>`
 * :ref:`Double array_flip() <double-array\_flip()>`
 * :ref:`Fetch One Row Format <fetch-one-row-format>`
@@ -987,10 +997,11 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 53 analysis
+Total : 54 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
+* :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Compact <could-use-compact>`
 * :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`

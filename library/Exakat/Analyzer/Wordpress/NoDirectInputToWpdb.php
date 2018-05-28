@@ -35,9 +35,9 @@ class NoDirectInputToWpdb extends Analyzer {
              ->outIs('METHOD')
              ->codeIs('prepare')
              ->outIs('ARGUMENT')
-             ->atomInside(array('Variable', 'Array'))
+             ->atomInsideNoDefinition(array('Variable', 'Array'))
              ->outIsIE('VARIABLE')
-             ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_FILE', '$_COOKIE'))
+             ->atomIs('Phpvariable')
              ->back('first');
         $this->prepareQuery();
     }

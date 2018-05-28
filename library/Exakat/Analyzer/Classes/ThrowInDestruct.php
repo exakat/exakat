@@ -34,7 +34,7 @@ class ThrowInDestruct extends Analyzer {
              ->codeIs('__destruct')
              ->inIs('NAME')
              ->outIs('BLOCK')
-             ->atomInside('Throw')
+             ->atomInsideNoDefinition('Throw')
              ->back('first');
         $this->prepareQuery();
     }

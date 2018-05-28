@@ -64,7 +64,7 @@ class TooManyNativeCalls extends Analyzer {
              ->_as('results')
              ->raw(<<<GREMLIN
 where(
-    __.emit( ).repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel('Functioncall')
+    __.emit( ).repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel('Functioncall')
       .where( __.in("ANALYZED").has("analyzer", "Functions/IsExtFunction"))
       .count().is(gt($this->nativeCallCounts))
 )

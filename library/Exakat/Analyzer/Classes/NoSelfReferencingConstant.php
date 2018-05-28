@@ -35,7 +35,7 @@ class NoSelfReferencingConstant extends Analyzer {
              ->_as('results')
 
              ->outIs('VALUE')
-             ->atomInside('Staticconstant')
+             ->atomInsideNoDefinition('Staticconstant')
              ->outIs('CLASS')
              ->atomIs('Self')
 
@@ -58,7 +58,7 @@ class NoSelfReferencingConstant extends Analyzer {
              ->inIs('NAME')
 
              ->outIs('VALUE')
-             ->atomInside('Staticconstant')
+             ->atomInsideNoDefinition('Staticconstant')
              ->outIs('CLASS')
              ->atomIsNot(array('Self', 'Static'))
              ->samePropertyAs('fullnspath', 'classe')

@@ -38,7 +38,7 @@ class DontChangeBlindKey extends Analyzer {
              ->savePropertyAs('fullcode', 'blind') // use fullcode to handle arrays or properties
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('Variable')
+             ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('fullcode', 'blind')
              ->analyzerIs('Variables/IsModified')
              ->back('first');

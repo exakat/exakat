@@ -29,14 +29,14 @@ class CloseNaming extends Analyzer {
         $closeVariables = $this->dictCode->closeVariables();
 
         if (!empty($closeVariables)) {
-            $this->atomIs(array('Function', 'Method', 'Closure'))
+            $this->atomIs(self::$FUNCTIONS_ALL)
                  ->raw('where( __.sideEffect{ variables = []}.out("BLOCK").repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').sideEffect{ variables.push(it.get().value("code")); }.fold() )')
                  ->raw('sideEffect{ 
     variables = variables.unique().sort();
     found = variables.intersect(***); 
 }', $closeVariables)
                 ->filter(' found.size() > 1; ')
-                ->atomInside('Variable')
+                ->atomInsideNoDefinition('Variable')
                 ->raw('filter{ it.get().value("code") in found}');
             $this->prepareQuery();
         }

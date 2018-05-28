@@ -33,7 +33,7 @@ class UsedViewProperty extends Analyzer {
     public function analyze() {
         // echo $this->variable
         $this->analyzerIs('ZendF/IsView')
-             ->atomInside('Member')
+             ->atomInsideNoDefinition('Member')
              ->outIs('OBJECT')
              ->atomIs('This')
              ->inIs('OBJECT')

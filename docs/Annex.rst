@@ -292,9 +292,9 @@ A number of applications were scanned in order to find real life examples of pat
 
 * `Thelia <https://thelia.net/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
+* `Piwigo <https://www.piwigo.org/>`_
 * `shopware <https://www.shopware.com/>`_
 * `Vanilla <https://open.vanillaforums.com/>`_
-* `Piwigo <https://www.piwigo.org/>`_
 * `Tine20 <https://www.tine20.com/>`_
 * `Typo3 <https://typo3.org/>`_
 * `SugarCrm <https://www.sugarcrm.com/>`_
@@ -384,12 +384,16 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.2.9
 
+  * Compact Inexistant Variable (Php/CompactInexistant ; Suggestions)
   * Configure Extract (Security/ConfigureExtract ; Security)
-  * Use The Blind Var (Performances/UseBlindVar)
+  * Flexible Heredoc (Php/FlexibleHeredoc ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
+  * Method Signature Must Be Compatible (Classes/MethodSignatureMustBeCompatible)
+  * Mismatch Type And Default (Functions/MismatchTypeAndDefault ; Analyze)
+  * Use The Blind Var (Performances/UseBlindVar ; Performances)
 
 * 1.2.8
 
-  * Cache Variable Outside Loop (Performances/CacheVariableOutsideLoop ; Unassigned)
+  * Cache Variable Outside Loop (Performances/CacheVariableOutsideLoop ; Performances)
   * Cant Instantiate Class (Classes/CantInstantiateClass)
   * Do In Base (Performances/DoInBase ; Performances)
   * Php/FailingAnalysis (Php/FailingAnalysis ; Internal)
@@ -2042,6 +2046,7 @@ List of external links mentionned in this documentation.
 * `Codeigniter <https://codeigniter.com/>`_
 * `COM and .Net (Windows) <http://php.net/manual/en/book.com.php>`_
 * `command line usage <https://exakat.readthedocs.io/en/latest/Commands.html>`_
+* `compact <http://php.net/compact>`_
 * `compact <http://www.php.net/compact>`_
 * `Comparison Operators <http://php.net/manual/en/language.operators.comparison.php>`_
 * `composer <https://getcomposer.org/>`_
@@ -2129,15 +2134,15 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
@@ -2197,6 +2202,7 @@ List of external links mentionned in this documentation.
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
 * `libxml <http://www.php.net/manual/en/book.libxml.php>`_
 * `Lightweight Directory Access Protocol <http://php.net/manual/en/book.ldap.php>`_
+* `list <http://php.net/list>`_
 * `list <http://php.net/manual/en/function.list.php>`_
 * `List of function aliases <http://php.net/manual/en/aliases.php>`_
 * `List of HTTP header fields <https://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`_
@@ -2230,6 +2236,7 @@ List of external links mentionned in this documentation.
 * `mysqli <http://php.net/manual/en/book.mysqli.php>`_
 * `Ncurses Terminal Screen Control <http://php.net/manual/en/book.ncurses.php>`_
 * `Net SNMP <http://www.net-snmp.org/>`_
+* `net_get_interfaces <http://php.net/net_get_interfaces>`_
 * `New features <http://php.net/manual/en/migration56.new-features.php>`_
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
@@ -2263,7 +2270,7 @@ List of external links mentionned in this documentation.
 * `phar <http://www.php.net/manual/en/book.phar.php>`_
 * `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_
 * `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_
-* `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
+* `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
 * `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_
@@ -2337,6 +2344,7 @@ List of external links mentionned in this documentation.
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
+* `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
 * `substr <http://www.php.net/substr>`_
 * `Suhosin.org <https://suhosin.org/>`_
@@ -2357,6 +2365,7 @@ List of external links mentionned in this documentation.
 * `trader <https://pecl.php.net/package/trader>`_
 * `Trailing Commas In List Syntax <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
+* `trigger_error <http://php.net/trigger_error>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
@@ -2372,8 +2381,9 @@ List of external links mentionned in this documentation.
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
 * `Void functions <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.void-functions>`_
@@ -2530,6 +2540,7 @@ Analyze
 |   analyzer[] = "Classes/LocallyUnusedProperty";
 |   analyzer[] = "Classes/MakeDefault";
 |   analyzer[] = "Classes/MakeGlobalAProperty";
+|   analyzer[] = "Classes/MethodSignatureMustBeCompatible";
 |   analyzer[] = "Classes/MethodUsedBelow";
 |   analyzer[] = "Classes/MultipleDeclarations";
 |   analyzer[] = "Classes/MultipleTraitOrInterface";
@@ -2609,6 +2620,7 @@ Analyze
 |   analyzer[] = "Functions/EmptyFunction";
 |   analyzer[] = "Functions/HardcodedPasswords";
 |   analyzer[] = "Functions/MarkCallable";
+|   analyzer[] = "Functions/MismatchTypeAndDefault";
 |   analyzer[] = "Functions/MismatchedDefaultArguments";
 |   analyzer[] = "Functions/MismatchedTypehint";
 |   analyzer[] = "Functions/MustReturn";
@@ -2936,6 +2948,7 @@ CompatibilityPHP53
 |   analyzer[] = "Php/DefineWithArray";
 |   analyzer[] = "Php/EllipsisUsage";
 |   analyzer[] = "Php/ExponentUsage";
+|   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/GroupUseDeclaration";
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
@@ -3004,6 +3017,7 @@ CompatibilityPHP54
 |   analyzer[] = "Php/DefineWithArray";
 |   analyzer[] = "Php/EllipsisUsage";
 |   analyzer[] = "Php/ExponentUsage";
+|   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/GroupUseDeclaration";
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
@@ -3070,6 +3084,7 @@ CompatibilityPHP55
 |   analyzer[] = "Php/DefineWithArray";
 |   analyzer[] = "Php/EllipsisUsage";
 |   analyzer[] = "Php/ExponentUsage";
+|   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/GroupUseDeclaration";
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
@@ -3123,6 +3138,7 @@ CompatibilityPHP56
 |   analyzer[] = "Exceptions/MultipleCatch";
 |   analyzer[] = "Functions/MultipleSameArguments";
 |   analyzer[] = "Php/DefineWithArray";
+|   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/GroupUseDeclaration";
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
@@ -3171,6 +3187,7 @@ CompatibilityPHP70
 |   analyzer[] = "Extensions/Extereg";
 |   analyzer[] = "Functions/funcGetArgModified";
 |   analyzer[] = "Php/EmptyList";
+|   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/ForeachDontChangePointer";
 |   analyzer[] = "Php/GlobalWithoutSimpleVariable";
 |   analyzer[] = "Php/GroupUseTrailingComma";
@@ -3214,6 +3231,7 @@ CompatibilityPHP71
 |   analyzer[] = "Classes/UsingThisOutsideAClass";
 |   analyzer[] = "Extensions/Extmcrypt";
 |   analyzer[] = "Php/BetterRand";
+|   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
 |   analyzer[] = "Php/HashAlgos54";
@@ -3244,6 +3262,7 @@ CompatibilityPHP72
 | [CompatibilityPHP72]
 |   analyzer[] = "Constants/UndefinedConstants";
 |   analyzer[] = "Php/AvoidSetErrorHandlerContextArg";
+|   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/HashUsesObjects";
 |   analyzer[] = "Php/ListWithReference";
 |   analyzer[] = "Php/ParenthesisAsParameter";
@@ -3321,6 +3340,7 @@ Performances
 |   analyzer[] = "Classes/UseClassOperator";
 |   analyzer[] = "Performances/ArrayMergeInLoops";
 |   analyzer[] = "Performances/AvoidArrayPush";
+|   analyzer[] = "Performances/CacheVariableOutsideLoop";
 |   analyzer[] = "Performances/DoInBase";
 |   analyzer[] = "Performances/DoubleArrayFlip";
 |   analyzer[] = "Performances/FetchOneRowFormat";
@@ -3457,6 +3477,7 @@ Suggestions
 |   analyzer[] = "Interfaces/AlreadyParentsInterface";
 |   analyzer[] = "Interfaces/UnusedInterfaces";
 |   analyzer[] = "Performances/SubstrFirst";
+|   analyzer[] = "Php/CompactInexistant";
 |   analyzer[] = "Php/IssetMultipleArgs";
 |   analyzer[] = "Php/LogicalInLetters";
 |   analyzer[] = "Php/NewExponent";

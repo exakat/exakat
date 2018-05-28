@@ -24,6 +24,8 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class YieldUsage extends Analyzer {
+    protected $phpVersion = '5.5+';
+
     public function analyze() {
         $this->atomIs('Yield');
         $this->prepareQuery();

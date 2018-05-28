@@ -33,6 +33,8 @@ class CouldBeClassConstant extends Analyzer {
     }
     
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         $this->atomIs('Ppp')
              ->hasClass()
 
@@ -55,20 +57,28 @@ class CouldBeClassConstant extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
 
                 // usage as property with $this
-             ->raw('not( __.out("METHOD")
-                           .where( __.repeat( __.out() ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Member")
+             ->raw(<<<GREMLIN
+                    not( __.out("METHOD")
+                           .where( __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING).hasLabel("Member")
                                                 .where( __.out("OBJECT").hasLabel("This") )
                                                 .where( __.out("MEMBER").filter{ it.get().value("code") == name } )
                                                 .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-                             ) )')
+                             ) )
+GREMLIN
+)
 
                 // usage as static property with (namespace, self or static)
-             ->raw('not( __.out("METHOD")
-                           .where( __.repeat( __.out( ) ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Staticproperty")
+             ->raw(<<<GREMLIN
+not( 
+    __.out("METHOD")
+                           .where( __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING).hasLabel("Staticproperty")
                                                 .where( __.out("CLASS").has("fullnspath").filter{ it.get().value("fullnspath") == fnp } )
                                                 .where( __.out("MEMBER").filter{ it.get().value("code") == staticName } )
                                                 .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-                             ) )')
+                             ) 
+    )
+GREMLIN
+)
 
              ->back('first');
              

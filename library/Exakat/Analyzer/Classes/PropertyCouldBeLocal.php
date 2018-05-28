@@ -39,7 +39,7 @@ where(
     __.out("METHOD")
       .not( where( __.out('STATIC') ) )
       .where( __.out("BLOCK")
-          .repeat( __.out()).emit().times(5).hasLabel("Member")
+          .repeat( __.out({$this->linksDown})).emit().times(5).hasLabel("Member")
                 .out("OBJECT").hasLabel("This").in("OBJECT")
                 .out("MEMBER").filter{ it.get().value("code") == member}
         )
@@ -63,7 +63,7 @@ GREMLIN
 where(
     __.out("METHOD")
       .where( __.out("BLOCK")
-                .repeat( __.out()).emit().times(5).hasLabel("Staticproperty")
+                .repeat( __.out({$this->linksDown})).emit().times(5).hasLabel("Staticproperty")
                     .out("CLASS").has("fullnspath").filter{it.get().value("fullnspath") == fnp}.in("CLASS")
                     .out("MEMBER").filter{ it.get().value("code") == member}
        )

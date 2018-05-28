@@ -32,7 +32,7 @@ class SameConditions extends Analyzer {
              ->_as('results')
              ->inIs('CONDITION')
              ->outIs(array('THEN', 'ELSE'))
-             ->atomInside('Ifthen')
+             ->atomInsideNoDefinition('Ifthen')
              ->outIs('CONDITION')
              ->samePropertyAs('fullcode', 'condition')
              ->back('first');

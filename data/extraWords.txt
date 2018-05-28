@@ -102,3 +102,8 @@ CWE
 Boolean
 Preprocessing
 autoload
+heredocs
+zend
+stdlib
+validator
+throwable

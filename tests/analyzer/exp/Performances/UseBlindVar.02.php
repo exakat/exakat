@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('$source->a[$key]', 
+$expected     = array('$source->a[$key]',
                       '$source->a[$key]',
-                      '$source[\'a\'][$key]', 
+                      '$source[\'a\'][$key]',
                       '$source[\'a\'][$key]',
                       '$_POST[$key]',
                       '$_POST[$key]',
@@ -13,7 +13,6 @@ $expected     = array('$source->a[$key]',
 $expected_not = array('foo()[0]',
                       'foo()[1]',
                       '$foo + $key + $value',
-                      
                      );
 
 ?>

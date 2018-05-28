@@ -31,7 +31,9 @@ class CacheVariableOutsideLoop extends Analyzer {
     }
     
     public function analyze() {
-        // Une variable dans le block du foreach, 
+        $MAX_LOOPING = self::MAX_LOOPING;
+
+        // Une variable dans le block du foreach,
         // qui n'est jamais modifiée
         $this->atomIs('Foreach')
              ->outIs('BLOCK')
@@ -43,7 +45,7 @@ where(
           .sideEffect{ x[it.get().value("code")] = 0;}
           .fold()
       )
-      .emit().repeat( __.out()).times(15).hasLabel("Variable", "Variableobject", "Variablearray")
+      .emit().repeat( __.out({$this->linksDown})).times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray")
       .sideEffect{ 
         if (x[it.get().value("code")] == null) {
             x[it.get().value("code")] = 1;
@@ -61,12 +63,12 @@ where(
 .filter{ x.findAll{ a,b -> b > 0}.size() > 0}
 GREMLIN
                 )
-                ->atomInside(array('Functioncall', 'Methodcall', 'Staticmethodcall'))
+                ->atomInsideNoDefinition(self::$FUNCTIONS_CALLS)
                 ->hasNoChildren('Void', array('ARGUMENT'))
                 ->raw(<<<GREMLIN
       not(
         where(
-          __.emit().repeat(__.out()).times(15).hasLabel("Variable", "Variableobject", "Variablearray")
+          __.emit().repeat(__.out({$this->linksDown})).times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray")
             .filter{ it.get().value("code") in written;}
       ))
 GREMLIN

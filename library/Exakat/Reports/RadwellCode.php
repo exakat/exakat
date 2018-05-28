@@ -110,7 +110,7 @@ class RadwellCode extends Reports {
     }
 
     public function dependsOnAnalysis() {
-        return array('RadwellCodes', 
+        return array('RadwellCodes',
                      );
     }
 }

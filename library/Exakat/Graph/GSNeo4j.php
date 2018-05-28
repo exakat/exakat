@@ -76,7 +76,7 @@ class GSNeo4j extends Graph {
             $this->checkConfiguration();
         }
 
-        assert(is_array($params), 'Params must be an array, '.gettype($params).' provided.'.PHP_EOL.$query);
+        $params['#jsr223.groovy.engine.keep.globals'] = 'phantom';
         foreach($params as $name => $value) {
             $this->db->message->bindValue($name, $value);
         }
@@ -227,6 +227,21 @@ class GSNeo4j extends Graph {
         }
         
         return $return;
+    }
+    
+    public function getDefinitionSQL() {
+        return <<<SQL
+SELECT DISTINCT CASE WHEN definitions.id IS NULL THEN definitions2.id - 1 ELSE definitions.id - 1 END AS definition, calls.id - 1 AS call
+FROM calls
+LEFT JOIN definitions 
+    ON definitions.type       = calls.type       AND
+       definitions.fullnspath = calls.fullnspath
+LEFT JOIN definitions definitions2
+    ON definitions2.type       = calls.type       AND
+       definitions2.fullnspath = calls.globalpath 
+WHERE (definitions.id IS NOT NULL OR definitions2.id IS NOT NULL)
+GROUP BY calls.id
+SQL;
     }
 }
 

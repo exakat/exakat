@@ -27,10 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class AlteringForeachWithoutReference extends Analyzer {
     public function dependsOn() {
-        return array('Arrays/IsModified');
+        return array('Arrays/IsModified',
+                    );
     }
     
     public function analyze() {
+        // foreach($a as $k => $v) { $a[$k] += 1;}
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
              ->atomIs('Variable')
@@ -45,16 +47,19 @@ class AlteringForeachWithoutReference extends Analyzer {
              ->inIs('VALUE')
 
              ->outIs('BLOCK')
-             ->atomInside('Array')
+             ->atomInsideNoDefinition('Array')
              ->raw('not( where( __.in("CAST").has("token", "T_UNSET_CAST") ) )' )
              ->raw('not( where( __.in("ARGUMENT").has("token", "T_UNSET") ) )' )
              ->analyzerIs('Arrays/IsModified')
 
+             ->outIs('VARIABLE')
+             ->samePropertyAs('code', 'source')
+             ->inIs('VARIABLE')
+
              ->outIs('INDEX')
              ->samePropertyAs('code', 'k')
 
-             ->back('first')
-             ;
+             ->back('first');
         $this->prepareQuery();
     }
 }

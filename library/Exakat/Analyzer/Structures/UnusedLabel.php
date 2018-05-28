@@ -27,9 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedLabel extends Analyzer {
     public function analyze() {
-        $max = self::MAX_LOOPING;
+        $MAX_LOOPING = self::MAX_LOOPING;
         $noGotoUsage = <<<GREMLIN
-not( where( __.out("BLOCK").repeat( __.out( ) ).emit( ).times( $max )
+not( where( __.out("BLOCK").repeat( __.out({$this->linksDown}) ).emit( ).times( $MAX_LOOPING )
               .hasLabel("Goto").out("GOTO")
               .filter{ it.get().value("code") == name} ) 
     )

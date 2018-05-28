@@ -50,7 +50,7 @@ class VardumpUsage extends Analyzer {
 
         // echo '<pre>'.print_r($a, 1);
         $this->atomIs(array('Echo', 'Print'))
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs($returnDebugFunctions)
              ->back('first');
         $this->prepareQuery();
