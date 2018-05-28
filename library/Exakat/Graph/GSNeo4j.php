@@ -76,7 +76,7 @@ class GSNeo4j extends Graph {
             $this->checkConfiguration();
         }
 
-        assert(is_array($params), 'Params must be an array, '.gettype($params).' provided.'.PHP_EOL.$query);
+        $params['#jsr223.groovy.engine.keep.globals'] = 'phantom';
         foreach($params as $name => $value) {
             $this->db->message->bindValue($name, $value);
         }
