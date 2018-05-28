@@ -486,7 +486,7 @@ SQL;
                        array('key' => 'files',       'value' => $this->stats['files']),
                        array('key' => 'tokens',      'value' => $this->stats['tokens']),
                        );
-        $this->datastore->addRow('hash', $this->stats);
+        $this->datastore->addRow('hash', $stats);
 
         $this->loader->finalize();
         $this->datastore->addRow('hash', array('status' => 'Load'));
@@ -531,7 +531,6 @@ SQL;
         if (substr($dir, -1) === '/') {
             $dir = substr($dir, 0, -1);
         }
-        $tokens = 0;
         Files::findFiles($dir, $files, $ignoredFiles, $this->config);
 
         $this->reset();
@@ -1830,8 +1829,6 @@ SQL;
             $variadic = self::NOT_ELLIPSIS;
 
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
-                $initialId = $this->id;
-
                 do {
                     ++$args_max;
                     if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
@@ -3155,8 +3152,6 @@ SQL;
     }
 
     private function processParenthesis() {
-        $current = $this->id;
-
         $parenthese = $this->addAtom('Parenthesis');
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
@@ -4132,7 +4127,7 @@ SQL;
 
             ++$this->id;
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY)) ) {
-                $id = $this->processNext();
+                $this->processNext();
             };
 
             // Skip }
@@ -4224,7 +4219,7 @@ SQL;
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
 
-        $id =  $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
+        $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
 
         $this->toggleContext(self::CONTEXT_NEW);
         if ($noSequence === false) {
@@ -4679,8 +4674,6 @@ SQL;
         if ($this->hasExpression()) {
             return $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
         } else {
-            $current = $this->id;
-
             // Simply skipping the &
             $this->processNext();
 
@@ -5016,11 +5009,14 @@ SQL;
         }
 
         // All node has one incoming or one outgoing link (outgoing or incoming).
-        $O = $D= array();
+        $O = array();
+        $D = array();
         foreach($this->links as $label => $origins) {
-            if ($label === 'DEFINITION') { continue; }
-            foreach($origins as $origin => $destinations) {
-                foreach($destinations as $destination => $links) {
+            if ($label === 'DEFINITION') { 
+                continue; 
+            }
+            foreach($origins as $destinations) {
+                foreach($destinations as $links) {
                     foreach($links as $link) {
                         $O[] = $link['origin'];
                         $D[] = $link['destination'];
@@ -5032,7 +5028,6 @@ SQL;
         $O = array_count_values($O);
         $D = array_count_values($D);
 
-        $total = 0;
         foreach($this->atoms as $id => $atom) {
             if ($id === 1) { continue; }
 
@@ -5264,8 +5259,6 @@ SQL;
     }
 
     private function addNamespaceUse($origin, $alias, $useType, $use) {
-        $fullnspath = $origin->fullnspath;
-
         if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' ');
