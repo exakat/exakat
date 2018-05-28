@@ -30,7 +30,7 @@ class CouldCentralize extends Analyzer {
         $excluded = array('\\\\defined', '\\\\extension_loaded',);
         $excludedList = makeList($excluded);
         
-        for($i = 0; $i < 3; $i++) {
+        foreach(range(0, 3) as $i) {
             $query = <<<GREMLIN
 g.V().hasLabel("Functioncall", "Exit")
      .has('fullnspath', without($excludedList))

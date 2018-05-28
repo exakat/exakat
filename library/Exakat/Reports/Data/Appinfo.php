@@ -394,7 +394,7 @@ class Appinfo extends Data {
         public function prepare() {
             // collecting information for Extensions
             $themed = array_merge(...array_values($this->extensions));
-            $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
+            $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($themed).')');
 
             $sources = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -431,13 +431,11 @@ class Appinfo extends Data {
             if ($section == 'Extensions') {
                 $list = $this->values[$section];
                 uksort($this->values[$section], function ($ka, $kb) use ($list) {
-                    if ($list[$ka] == $list[$kb]) {
-                        if ($ka > $kb)  { return  1; }
-                        if ($ka == $kb) { return  0; }
-                        if ($ka > $kb)  { return -1; }
-                    } else {
-                        return $list[$ka] == Ambassador::YES ? -1 : 1;
+                    if ($list[$ka] !== $list[$kb]) {
+                        return $list[$ka] === Ambassador::YES ? -1 : 1;
                     }
+                    
+                    return $kb <=> $ka;
                 });
             }
         }

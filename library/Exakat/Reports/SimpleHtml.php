@@ -82,12 +82,12 @@ class SimpleHtml extends Reports {
     private function makeSummary($folder) {
         if ($this->config->thema !== null) {
             $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
-            $list = '"'.implode('", "', $list).'"';
+            $list = makeList($list);
         } elseif ($this->config->program !== null) {
             $list = '"'.$this->config->program.'"';
         } else {
             $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-            $list = '"'.implode('", "', $list).'"';
+            $list = makeList($list);
         }
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');

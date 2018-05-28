@@ -35,10 +35,13 @@ GREMLIN;
                          'define()' => 'Defineconstant');
 
         $this->atomIs(array('Const', 'Defineconstant'))
-             ->raw('or( __.hasLabel("Defineconstant"), 
-                        __.hasLabel("Const").not( where( __.in("CONST") ) ) 
-                        )')
-             ->raw('map{ '.$mapping.' }')
+             ->raw(<<<GREMLIN
+or( __.hasLabel("Defineconstant"), 
+    __.hasLabel("Const").not( where( __.in("CONST") ) ) 
+  )
+GREMLIN
+)
+             ->raw("map{ $mapping }")
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
 
@@ -61,10 +64,13 @@ GREMLIN;
         }
 
         $this->atomIs(array('Const', 'Defineconstant'))
-             ->raw('or( __.hasLabel("Defineconstant"), 
-                        __.hasLabel("Const").not( where( __.in("CONST") ) ) 
-                        )')
-             ->raw('map{ '.$mapping.' }')
+             ->raw(<<<GREMLIN
+or( __.hasLabel("Defineconstant"), 
+    __.hasLabel("Const").not( where( __.in("CONST") ) ) 
+  )
+GREMLIN
+)
+             ->raw("map{ $mapping }")
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');
         $this->prepareQuery();

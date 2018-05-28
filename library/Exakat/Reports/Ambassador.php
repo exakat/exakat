@@ -2292,7 +2292,6 @@ SQL;
                             'Extensions/Extast'                     => '7.0+',
                             'Extensions/Extzbarcode'                => '7.0+',
                             'Php/Coalesce'                          => '7.0+',
-                            'Php/DeclareStrict'                     => '7.0+',
                             'Php/DeclareStrictType'                 => '7.0+',
                             'Php/DefineWithArray'                   => '7.0+',
                             'Php/NoStringWithAppend'                => '7.0+',

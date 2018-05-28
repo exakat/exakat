@@ -220,7 +220,7 @@ abstract class GraphElements {
                                        );
     
     static public function linksAsList() {
-        return '"'.implode('", "', self::$LINKS).'"';
+        return makeList(self::$LINKS);
     }
 }
 

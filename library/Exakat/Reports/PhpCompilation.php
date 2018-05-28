@@ -31,13 +31,13 @@ class PhpCompilation extends Reports {
 
     protected function _generate($analyzerList) {
         $themed = $this->themes->getThemeAnalyzers('Appinfo');
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'") AND count > -1');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ('.makeList($themed).') AND count > -1');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
         }
 
-        $configureDirectives = json_decode(file_get_contents($this->config->dir_root.'/data/configure.json'));
+        $configureDirectives = json_decode(file_get_contents("{$this->config->dir_root}/data/configure.json"));
 
         // preparing the list of PHP extensions to compile PHP with
         $return = array(<<<TEXT
