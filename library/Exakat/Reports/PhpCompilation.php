@@ -87,7 +87,7 @@ TEXT
     }
 
     public function dependsOnAnalysis() {
-        return array('Appinfo', 
+        return array('Appinfo',
                      );
     }
 }

@@ -27,8 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ArrayMergeInLoops extends Analyzer {
     public function analyze() {
-        $functions = array('\\array_merge', 
-                           '\\array_merge_recursive', 
+        $functions = array('\\array_merge',
+                           '\\array_merge_recursive',
                            '\\file_put_contents',
                            );
 

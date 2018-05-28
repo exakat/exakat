@@ -331,7 +331,7 @@ class Files extends Tasks {
                             $ignoredFiles[$file] = 'Uses short tags';
                             $id = array_search($file, $files);
                             unset($files[$id]);
-                        } 
+                        }
                     }
                 }
                 $this->datastore->addRow('shortopentag', $shortOpenTag);
@@ -477,7 +477,7 @@ class Files extends Tasks {
         // Regex to include files and folders
         $includeDirs = array();
         foreach($config->include_dirs as $include) {
-            if ($include === '/') { 
+            if ($include === '/') {
                 $includeDirs[] = $include.'.*';
             }
             if ($include[0] === '/') {

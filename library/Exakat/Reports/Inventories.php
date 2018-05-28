@@ -124,7 +124,7 @@ class Inventories extends Reports {
     }
 
     public function dependsOnAnalysis() {
-        return array('Inventories', 
+        return array('Inventories',
                      );
     }
 

@@ -26,9 +26,9 @@ use Exakat\Analyzer\Analyzer;
 
 class NotScalarType extends Analyzer {
     public function analyze() {
-        $fakeTypehints = array('integer', 
-                               'boolean', 
-                               'real', 
+        $fakeTypehints = array('integer',
+                               'boolean',
+                               'real',
                                'double',
                                'long',
                                );

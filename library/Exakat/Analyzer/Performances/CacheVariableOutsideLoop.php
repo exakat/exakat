@@ -33,7 +33,7 @@ class CacheVariableOutsideLoop extends Analyzer {
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
 
-        // Une variable dans le block du foreach, 
+        // Une variable dans le block du foreach,
         // qui n'est jamais modifiée
         $this->atomIs('Foreach')
              ->outIs('BLOCK')

@@ -1228,7 +1228,7 @@ GREMLIN
         if (empty($link)) {
             $this->addMethod('in( )');
             return $this;
-        } 
+        }
         
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
@@ -1249,9 +1249,9 @@ GREMLIN
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
-            // If Exists... 
+            // If Exists...
             return $this;
-        } 
+        }
         
         $this->addMethod('until(__.inE('.$this->SorA($link).').count().is(eq(0))).repeat(__.in('.$this->SorA($link).'))');
         

@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class DoInBase extends Analyzer {
     public function analyze() {
-        // TODO : Also extends to ++/-- and . 
+        // TODO : Also extends to ++/-- and .
 
         // TODO : add more databases (methods and functions)
 

@@ -32,12 +32,12 @@ class MustReturn extends Analyzer {
              ->hasNoOut('ABSTRACT')
              ->hasClassTrait()
              ->outIs('NAME')
-             ->codeIs(array('__call', 
-                            '__callStatic', 
-                            '__get', 
-                            '__isset', 
-                            '__sleep', 
-                            '__toString', 
+             ->codeIs(array('__call',
+                            '__callStatic',
+                            '__get',
+                            '__isset',
+                            '__sleep',
+                            '__toString',
                             '__set_state',
                             '__debugInfo',
                             ), self::TRANSLATE, self::CASE_INSENSITIVE)

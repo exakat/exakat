@@ -157,7 +157,7 @@ disable_classes = $classesList
     }
 
     public function dependsOnAnalysis() {
-        return array('Appinfo', 
+        return array('Appinfo',
                      );
     }
 

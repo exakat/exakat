@@ -2286,6 +2286,7 @@ SQL;
                             'Structures/BreakOutsideLoop'           => '7.0-',
                             'Structures/SwitchWithMultipleDefault'  => '7.0-',
                             'Type/MalformedOctal'                   => '7.0-',
+                            'Structures/pregOptionE'                => '7.0+',
                             'Classes/Anonymous'                     => '7.0+',
                             'Extensions/Extast'                     => '7.0+',
                             'Extensions/Extzbarcode'                => '7.0+',
@@ -2303,6 +2304,7 @@ SQL;
                             'Php/YieldFromUsage'                    => '7.0+',
                             'Security/UnserializeSecondArg'         => '7.0+',
                             'Structures/IssetWithConstant'          => '7.0+',
+                            'Php/ParenthesisAsParameter'            => '7.0+',
                             'Php/Php71NewClasses'                   => '7.1-',
                             'Php/Php71NewFunctions'                 => '7.1-',
                             'Type/OctalInString'                    => '7.1-',
@@ -2323,11 +2325,13 @@ SQL;
                             'Php/GroupUseTrailingComma'             => '7.2+',
                             'Php/Php73NewFunctions'                 => '7.3-',
                             'Php/ListWithReference'                 => '7.3+',
+                            'Php/FlexibleHeredoc'                   => '7.3+',
+                            'Php/PHP73LastEmptyArgument'            => '7.3+',
                           );
 
 //        $colors = array('7900E5', 'BB00E1', 'DD00BF', 'D9007B', 'D50039', 'D20700', 'CE4400', 'CA8000', 'C6B900', '95C200', '59BF00', );
 //        $colors = array('7900E5', 'DD00BF', 'D50039', 'CE4400', 'C6B900', '59BF00');
-        $colors = array('7900E5', 'DE00D7', 'D80064', 'D20700', 'CB6C00', 'BEC500', '59BF00');
+        $colors = array('59BF00',  'BEC500', 'CB6C00', 'D20700', 'D80064', 'DE00D7', '7900E5');
 
         $list = makeList(array_keys($analyzers));
         $query = <<<SQL
@@ -2390,7 +2394,7 @@ HTML;
         if ($max === count($data)) {
             $suggestion = 'This code is compatible with PHP '.join(', ', $key);
         } else {
-            $suggestion = 'Impossible to determine a suitable PHP version. The best estimation is PHP '.join(', ', $key).'. ';
+            $suggestion = 'We have determined '.count($key).' PHP version'.(count($key) > 1 ? 's' : '').'. The compatible estimations are PHP '.join(', ', $key).'. ';
         }
 
         $html = $this->injectBloc($html, 'TITLE', 'PHP Version Estimation');
@@ -3535,9 +3539,9 @@ JAVASCRIPT;
             $source = @show_source($sourcePath, true);
             $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.makeHtml($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
-            $source = preg_replace_callback('#<br />#is', function($x) { 
-                static $i = 0; 
-                return '<br /><a name="l'.++$i.'" />'; 
+            $source = preg_replace_callback('#<br />#is', function($x) {
+                static $i = 0;
+                return '<br /><a name="l'.++$i.'" />';
             }, $source);
             file_put_contents("$path$row[file]", $source);
         }

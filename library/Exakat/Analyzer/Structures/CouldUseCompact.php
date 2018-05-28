@@ -29,7 +29,7 @@ class CouldUseCompact extends Analyzer {
         // $a = array('a' => $a, 'b' => $b);
         $this->atomIs('Arrayliteral')
              ->raw('not( where( __.out("ARGUMENT").not(hasLabel("Keyvalue", "Void")) ) ) ') // Only keep Keyvalue and void
-             ->raw('where( __.out("ARGUMENT").hasLabel("Keyvalue") )') // At least one Keyvalue 
+             ->raw('where( __.out("ARGUMENT").hasLabel("Keyvalue") )') // At least one Keyvalue
              ->raw(<<<GREMLIN
 not( where( __.out("ARGUMENT").hasLabel("Keyvalue")
                               .out("INDEX")

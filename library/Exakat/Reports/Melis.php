@@ -507,7 +507,7 @@ JAVASCRIPT;
         }
 
         return $html;
-    }    
+    }
 
     public function getFilesCount($theme, $limit = self::TOPLIMIT) {
         $list = $this->themes->getThemeAnalyzers($theme);

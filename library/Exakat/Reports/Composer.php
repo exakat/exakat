@@ -85,7 +85,7 @@ class Composer extends Reports {
     }
 
     public function dependsOnAnalysis() {
-        return array('Appinfo', 
+        return array('Appinfo',
                      );
     }
 }

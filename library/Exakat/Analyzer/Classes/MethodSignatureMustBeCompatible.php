@@ -28,7 +28,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
     public function analyze() {
         // class x { function m() ;}
         // class xx extends x { function m($a) ;}
-        // argument name may be arbitrary; argment default too. 
+        // argument name may be arbitrary; argment default too.
         // typehint and number of arguments must always be the same
         $this->atomIs('Method') // No need for magicmethods
              ->outIs('NAME')
@@ -43,7 +43,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // Check if typehint is different between 
+        // Check if typehint is different between
         $this->atomIs('Method') // No need for magicmethods
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
@@ -65,7 +65,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // no typehint in the original 
+        // no typehint in the original
         $this->atomIs('Method') // No need for magicmethods
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
@@ -85,7 +85,7 @@ class MethodSignatureMustBeCompatible extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // no typehint in the parent 
+        // no typehint in the parent
         $this->atomIs('Method') // No need for magicmethods
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')

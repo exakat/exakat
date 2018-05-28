@@ -5297,7 +5297,7 @@ SQL;
 
         // No need for This
         if (in_array($call->atom, array(//'This', 'Self', 'Static',
-                                        'Parent', 
+                                        'Parent',
 //                                        'Member', 'Methodcall', 'Staticmethodcall', 'Staticproperty', 'Staticconstant',
                                         'Isset', 'List', 'Empty', 'Eval', 'Exit',
                                         ))) {
