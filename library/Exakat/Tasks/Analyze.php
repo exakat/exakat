@@ -143,9 +143,8 @@ class Analyze extends Tasks {
         
         if ($this->config->noDependencies !== true) {
             foreach($analyzer->dependsOn() as $dependency) {
-                if (!(isset($this->analyzed[$analyzer_class]) &&
-                       $this->config->noRefresh !== true)
-                    ) {
+                if (!isset($this->analyzed[$dependency]) ||
+                     ($this->config->noRefresh  === false)   ) {
                     $count = $this->analyze($dependency);
                     assert($count !== null, "count is null");
                     $this->analyzed[$dependency] = $count;
