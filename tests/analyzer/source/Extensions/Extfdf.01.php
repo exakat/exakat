@@ -25,4 +25,7 @@ if (fdf_get_value($fdf, "show_preparer") == "On") {
 } else
   echo "Preparer shall not be shown.<br />";
 fdf_close($fdf);
+
+$fdf = new fdf("name");
+
 ?>
