@@ -48,7 +48,7 @@ class Composer extends Vcs {
     }
 
     public function update() {
-        $res = shell_exec("cd {$this->destinationFull}/code/; composer -q update");
+        shell_exec("cd {$this->destinationFull}/code/; composer -q update");
 
         $json = file_get_contents("{$this->destinationFull}/code/composer.json");
         $json = json_decode($json);

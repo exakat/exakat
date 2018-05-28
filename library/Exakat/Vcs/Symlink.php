@@ -30,7 +30,7 @@ class Symlink extends Vcs {
         if (empty($source)) {
             throw new NoSuchDir();
         }
-        symlink($source, $this->destinationFull.'/code');
+        symlink($source, "{$this->destinationFull}/code");
     }
 
     public function update() {

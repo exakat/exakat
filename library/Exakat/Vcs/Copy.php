@@ -32,11 +32,11 @@ class Copy extends Vcs {
             throw new NoSuchDir();
         }
 
-        copyDir($source, $this->destinationFull.'/code');
+        copyDir($source, "{$this->destinationFull}/code");
     }
 
     public function update() {
-        rmdirRecursive($this->destinationFull.'/code');
+        rmdirRecursive("{$this->destinationFull}/code");
         $this->clone($source);
         
         return 'New Copy Version';
