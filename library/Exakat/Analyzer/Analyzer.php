@@ -51,8 +51,9 @@ abstract class Analyzer {
     
     public $config         = null;
 
-    public static $availableAtoms = array();
-    public static $availableLinks = array();
+    public static $availableAtoms         = array();
+    public static $availableLinks         = array();
+    public static $availableFunctioncalls = array();
     
     private $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerQuoted = '';
@@ -162,6 +163,8 @@ abstract class Analyzer {
             self::$availableAtoms = array_keys($this->gremlin->query('g.V().groupCount("m").by(label).cap("m")')->toArray()[0]);
 
             self::$availableLinks = array_keys($this->gremlin->query('g.E().groupCount("m").by(label).cap("m")')->toArray()[0]);
+
+            self::$availableFunctioncalls = array_keys($this->gremlin->query('g.V().hasLabel("Functioncall").has("fullnspath").groupCount("m").by("fullnspath").cap("m")')->toArray()[0]);
         }
 
     }
@@ -523,6 +526,15 @@ GREMLIN
     public function functioncallIs($fullnspath) {
         assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
+
+        $fullnspaths = makeArray($fullnspath);
+        $diff = array_intersect($fullnspaths, self::$availableFunctioncalls);
+        
+        if (empty($diff)) {
+            $this->addMethod(self::STOP_QUERY);
+            return $this;
+        }
+
         $this->atomIs('Functioncall')
              ->raw('has("fullnspath")')
              ->fullnspathIs(makeFullNsPath($fullnspath));
@@ -953,7 +965,7 @@ GREMLIN
         return $this;
     }
 
-    public function saveOutAs($name, $out = "ARGUMENT", $sort = 'rank') {
+    public function saveOutAs($name, $out = 'ARGUMENT', $sort = 'rank') {
         // Calculate the arglist, normalized it, then put it in a variable
         // This needs to be in Arguments, (both Functioncall or Function)
         if (empty($sort)) {
@@ -2077,14 +2089,20 @@ GREMLIN;
     }
 
     protected function loadIni($file, $index = null) {
-        $fullpath = $this->config->dir_root.'/data/'.$file;
+        $fullpath = "{$this->config->dir_root}/data/$file";
         
-        assert(file_exists($fullpath), 'Ini file "'.$fullpath.'" doesn\'t exists.');
+        assert(file_exists($fullpath), "Ini file '$fullpath' doesn't exists.");
         
         static $cache;
 
         if (!isset($cache[$fullpath])) {
-            $cache[$fullpath] = parse_ini_file($fullpath);
+            $ini = parse_ini_file($fullpath);
+            foreach($ini as $section => &$values) {
+                if (isset($values[0]) && empty($values[0])) {
+                    $values = '';
+                }
+            }
+            $cache[$fullpath] = $ini;
         }
         
         if ($index !== null && isset($cache[$fullpath][$index])) {
@@ -2097,7 +2115,7 @@ GREMLIN;
     protected function loadJson($file) {
         $fullpath = $this->config->dir_root.'/data/'.$file;
 
-        assert(file_exists($fullpath), 'JSON file "'.$fullpath.'" doesn\'t exists.');
+        assert(file_exists($fullpath), "JSON file '$fullpath' doesn't exists.");
 
         static $cache;
         if (!isset($cache[$fullpath])) {
