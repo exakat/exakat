@@ -410,7 +410,28 @@ JOIN categories
             if (!file_exists('human/en/'.$row['name'].'.ini')) {
                 print $row['name']. " has no documentation\n";
             } else {
-                $ini = parse_ini_file('human/en/'.$row['name'].'.ini');
+                $raw = file_get_contents("human/en/$row[name].ini");
+                $ini = parse_ini_file("human/en/$row[name].ini", true);
+                
+                $examples = preg_grep("/example\d+/", array_keys($ini));
+                print count($examples)." example sections\n";
+                
+                $count = substr_count($raw, '"') - substr_count($raw, '\\"') - count($examples) * 10 - 8;
+                if ($count !== 0) {
+                    print 'Count of " '.$row['name'].' : '.($count).PHP_EOL;
+                }
+
+                if (preg_match_all('/\[example\d+\]/s', $raw) != count($examples)) {
+                    print "human/en/$row[name].ini has a weird count of examples\n";
+                } 
+                
+                if (!empty($examples)) {
+                    foreach($examples as $example) {
+                        if ($ini[$example]['file'][0] === '/') {
+                            print "human/en/$row[name].ini has an initial / for file in $example\n";
+                        }
+                    }
+                }
 
                 if (!isset($ini['name'])) {
                     print 'human/en/'.$row['name'].'.ini'. " is not set\n";
@@ -1033,7 +1054,9 @@ SQL
                 continue;
             }
 
-            $ini = parse_ini_file('data/'.$ext.'.ini');
+            $raw = file_get_contents("data/$ext.ini");
+            print substr_count($raw, '"').PHP_EOL;
+            $ini = parse_ini_file("data/$ext.ini");
             $keys = array_keys($ini);
         
             $diff = array_diff($keys, $entries);
@@ -1073,7 +1096,7 @@ SQL
         //methods.json
         $sqlite = new Sqlite3('data/methods.sqlite');
 
-        $res = $sqlite->query('SELECT name FROM methods WHERE name NOT IN ("flush", "key", "stat") GROUP BY lower(name) HAVING count(*) > 1');
+        $res = $sqlite->query('SELECT name FROM methods WHERE name NOT IN ("flush", "key", "stat") GROUP BY lower(name), lower(class) HAVING count(*) > 1');
         $leftovers = array();
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             $leftovers[] = $row[0];
