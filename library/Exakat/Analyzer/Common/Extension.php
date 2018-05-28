@@ -53,7 +53,7 @@ class Extension extends Analyzer {
         }
         
         if (!empty($ini['constants'])) {
-            $this->atomIs('Identifier')
+            $this->atomIs(array('Identifier', 'Nsname'))
                  ->analyzerIs('Constants/ConstantUsage')
                  ->fullnspathIs(makeFullNsPath($ini['constants']));
             $this->prepareQuery();
@@ -61,7 +61,6 @@ class Extension extends Analyzer {
 
         if (!empty($ini['classes'])) {
             $classes = makeFullNsPath($ini['classes']);
-
             $this->atomIs('New')
                  ->outIs('NEW')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -75,7 +74,7 @@ class Extension extends Analyzer {
                  ->fullnspathIs($classes);
             $this->prepareQuery();
 
-            $this->atomIs('Function')
+            $this->atomIs(self::$FUNCTIONS_ALL)
                  ->outIs('ARGUMENT')
                  ->outIs('TYPEHINT')
                  ->fullnspathIs($classes);
