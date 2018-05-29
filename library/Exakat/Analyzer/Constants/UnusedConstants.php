@@ -36,7 +36,13 @@ class UnusedConstants extends Analyzer {
 g.V().hasLabel("Analysis")
      .has("analyzer", "Constants/ConstantUsage")
      .out("ANALYZED")
-     .values("fullcode")
+     .map{ 
+        if (it.get().label() == "String") {
+          it.get().value("noDelimiter");
+        } else {
+          it.get().value("fullcode");
+        }
+     }
      .unique()
 GREMLIN;
         $constants = $this->query($query)->toArray();
@@ -47,7 +53,7 @@ GREMLIN;
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->noDelimiterIsNot($constants, true);
+             ->noDelimiterIsNot($constants, self::CASE_SENSITIVE);
         $this->prepareQuery();
         
         $this->atomIs('Defineconstant')
@@ -57,7 +63,7 @@ GREMLIN;
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->noDelimiterIsNot($constants, true);
+             ->noDelimiterIsNot($constants, self::CASE_SENSITIVE);
         $this->prepareQuery();
         
         // Const from a define (case sensitive)
