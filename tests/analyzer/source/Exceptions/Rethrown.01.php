@@ -3,7 +3,6 @@
 try {
     throw new Exception("ici");
 } catch (Exception $e) {
-    print "La";
     throw $e;
 }
 
