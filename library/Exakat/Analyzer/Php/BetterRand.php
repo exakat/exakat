@@ -30,6 +30,7 @@ class BetterRand extends Analyzer {
                                     '\mt_rand',
                                     '\openssl_random_pseudo_bytes',
                                     '\uniqid',
+                                    '\lcg_value',
                                     ));
         $this->prepareQuery();
 
