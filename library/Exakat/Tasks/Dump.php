@@ -442,7 +442,8 @@ SQL;
                                                  )');
 
         $query = <<<GREMLIN
-g.V().hasLabel("Variable", "Variablearray", "Variableobject").map{ ['name' : it.get().value("fullcode"), 
+g.V().hasLabel("Variable", "Variablearray", "Variableobject").has("token", "T_VARIABLE")
+                                                             .map{ ['name' : it.get().value("fullcode"), 
                                                                     'type' : it.get().label()        ] };
 GREMLIN;
         $variables = $this->gremlin->query($query);
@@ -459,9 +460,10 @@ GREMLIN;
             if (isset($unique[$row['name'].$row['type']])) {
                 continue;
             }
-            $unique[$row['name'].$row['type']] = 1;
+            $name = str_replace(array('&', '...'), '', $row['name']);
+            $unique[$name.$row['type']] = 1;
             $type = $types[$row['type']];
-            $query[] = "(null, '".strtolower($this->sqlite->escapeString($row['name']))."', '".$type."')";
+            $query[] = "(null, '".strtolower($this->sqlite->escapeString($name))."', '".$type."')";
             ++$total;
         }
         
