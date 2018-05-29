@@ -45,6 +45,33 @@ class UsedDirective extends Analyzer {
              ->noDelimiterIs($this->directives)
              ->back('first');
         $this->prepareQuery();
+        
+        $functions = array();
+        if (in_array('include_path', $this->directives)) {
+            $functions[] = array('\\set_include_path',
+                                 '\\get_include_path',
+                                 '\\restore_include_path',
+                                );
+        }
+        if (in_array('magic_quotes_gpc', $this->directives)) {
+            $functions[] = array('\\magic_quotes_gpc',
+                                );
+        }
+        if (in_array('magic_quotes_runtime', $this->directives)) {
+            $functions[] = array('\\get_magic_quotes_runtime',
+                                 '\\set_magic_quotes_runtime',
+                                );
+        }
+
+        if (in_array('max_execution_time', $this->directives)) {
+            $functions[] = array('\\set_time_limit',
+                                );
+        }
+        
+        if (empty($functions)) {
+            return;
+        }
+        $functions = array_merge(...$functions);
 
         $this->atomFunctionIs(array('\\set_include_path',
                                     '\\get_include_path',
