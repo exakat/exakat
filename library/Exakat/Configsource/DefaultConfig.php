@@ -92,7 +92,7 @@ class DefaultConfig extends Config {
  
                                'command'       => 'version',
 
-                               'include_dirs'        => array('/',
+                               'include_dirs'        => array('',
                                                              ),
                                'ignore_dirs'         => array('/assets',
                                                               '/cache',
