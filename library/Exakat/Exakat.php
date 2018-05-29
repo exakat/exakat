@@ -26,7 +26,7 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.2.9';
+    const VERSION = '1.3.0';
     const BUILD = 748;
 
     private $gremlin = null;
@@ -49,7 +49,7 @@ class Exakat {
         $json = $config->commandLineJson();
 
         $class = $config->remote;
-        $remote = new Remote($config->remotes[$config->remote]);
+        $remote = new Remote($config->remotes[$config->remote], $this->config->transit_key);
         
         $res = $remote->send($json);
         switch ($config->command) {
