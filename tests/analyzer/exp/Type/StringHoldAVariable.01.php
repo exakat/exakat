@@ -19,8 +19,7 @@ HEREDOC;
 $ff_in = <<<HEREDOC2
 Heredoc wrongfully spread over 2 statement (part b)
 
-HEREDOC2
-',
+HEREDOC2',
                       '<<<\'NOWDOC2\'
 Nowdoc wrongfully spread over 2 statement (part a)
 

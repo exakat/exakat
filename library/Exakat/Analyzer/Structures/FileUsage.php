@@ -27,16 +27,20 @@ use Exakat\Analyzer\Analyzer;
 
 class FileUsage extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs(array('fopen', 'file_get_contents', 'file_put_contents'));
+        $this->atomFunctionIs(array('\\fopen', 
+                                    '\\file_get_contents', 
+                                    '\\file_put_contents',
+                                    ));
         $this->prepareQuery();
 
-        $fileClasses = array('\\SplFileObject', '\\SplTempFileObject', '\\SplFileInfo');
+        $fileClasses = array('\\SplFileObject', 
+                             '\\SplTempFileObject', 
+                             '\\SplFileInfo',
+                             );
 
         $this->atomIs('New')
              ->outIs('NEW')
              ->atomIs('Newcall')
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
-             ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($fileClasses);
         $this->prepareQuery();
 

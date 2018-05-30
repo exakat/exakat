@@ -592,6 +592,22 @@ GREMLIN
         return $this;
     }
 
+    public function functionInside($fullnspath) {
+        assert($this->assertAtom($atom));
+        $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").has("fullnspath", within(***))';
+        $this->addMethod($gremlin, makeArray($fullnspath));
+        
+        return $this;
+    }
+
+    public function noFunctionInside($fullnspath) {
+        // $fullcode is a name of a variable
+        $gremlin = 'not( where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").has("fullnspath", within(***))) )';
+        $this->addMethod($gremlin, makeArray($fullnspath));
+
+        return $this;
+    }
+
     public function atomInsideNoBlock($atom) {
         assert($this->assertAtom($atom));
         $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Sequence")) ).times('.self::MAX_LOOPING.').hasLabel(within(***))';
@@ -1194,6 +1210,20 @@ GREMLIN
         return $this;
     }
 
+    public function hasNextSibling($link = 'EXPRESSION') {
+        $this->hasIn($link);
+        $this->addMethod('where( __.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")})');
+
+        return $this;
+    }
+
+    public function hasNoNextSibling($link = 'EXPRESSION') {
+        $this->hasIn($link);
+        $this->addMethod('not( where( __.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}) )');
+
+        return $this;
+    }
+
     public function nextSibling($link = 'EXPRESSION') {
         $this->hasIn($link);
         $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}');
@@ -1468,6 +1498,12 @@ GREMLIN
 
     public function goToArray() {
         $this->addMethod('emit( ).repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
+        
+        return $this;
+    }
+
+    public function goToExpression() {
+        $this->addMethod('emit( ).repeat( __.in('.$this->linksDown.')).until( where(__.in("EXPRESSION") ) )');
         
         return $this;
     }

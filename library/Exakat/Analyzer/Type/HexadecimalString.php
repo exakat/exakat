@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class HexadecimalString extends Analyzer {
     public function analyze() {
         $regex = '^\\\\s*0[xX][0-9a-fA-F]+';
+
         // Strings
         $this->atomIs('String')
              ->hasNoOut('CONCAT')

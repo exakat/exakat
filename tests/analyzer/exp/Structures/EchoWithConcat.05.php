@@ -3,8 +3,7 @@
 $expected     = array('echo <<<HEREDOC
 Yes
 $with variable
-HEREDOC
-',
+HEREDOC',
                      );
 
 $expected_not = array('echo <<<\'NOWDOC\'
@@ -14,8 +13,7 @@ NOWDOC',
                       'echo <<<HEREDOC
 Yes
 without variable
-HEREDOC
-',
+HEREDOC',
                      );
 
 ?>

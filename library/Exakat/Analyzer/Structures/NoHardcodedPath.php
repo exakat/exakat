@@ -27,14 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class NoHardcodedPath extends Analyzer {
     public function analyze() {
-        $functions = array('fopen',
-                           'file',
-                           'file_get_contents',
-                           'file_put_contents',
-                           'unlink',
-                           'opendir',
-                           'rmdir',
-                           'mkdir',
+        $functions = array('\\fopen',
+                           '\\file',
+                           '\\file_get_contents',
+                           '\\file_put_contents',
+                           '\\unlink',
+                           '\\opendir',
+                           '\\rmdir',
+                           '\\mkdir',
                            );
                            //'glob',  is a special case, with wild chars
 

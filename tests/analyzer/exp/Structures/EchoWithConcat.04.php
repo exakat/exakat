@@ -5,13 +5,11 @@ $expected     = array('print "should" . "really $be with comma"',
                       'print "$KO"',
                       'print <<<HEREDOC
 should\' too $be with comma
-HEREDOC
-',
+HEREDOC',
                       'print "should$be with comma"',
                       'print <<<HEREDOC
 should", $be, " all", "ok"
-HEREDOC
-',
+HEREDOC',
                      );
 
 $expected_not = array('print "OK"',

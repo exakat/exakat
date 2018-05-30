@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class CantDisableFunction extends Analyzer {
     public function analyze() {
-        $disableFunction = $this->loadIni('disable_functions.ini', 'disable_functions');
+        $disableFunctions = $this->loadIni('disable_functions.ini', 'disable_functions');
+        $disableFunctions = makeFullNsPath($disableFunction);
         
         $this->atomFunctionIs($disableFunction);
         $this->prepareQuery();

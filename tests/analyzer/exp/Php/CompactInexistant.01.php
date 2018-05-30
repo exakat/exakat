@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('compact(\'c2\')',
-                      'compact(\'c\'),',
+                      'compact(\'c\')',
                       'compact(\'c3\')',
                      );
 

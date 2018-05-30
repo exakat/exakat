@@ -27,8 +27,16 @@ use Exakat\Analyzer\Analyzer;
 
 class UseSystemTmp extends Analyzer {
     public function analyze() {
-        $functions = array('glob', 'fopen', 'file', 'file_get_contents', 'file_put_contents', 'unlink',
-                           'opendir', 'rmdir', 'mkdir');
+        $functions = array('\\glob', 
+                           '\\fopen', 
+                           '\\file', 
+                           '\\file_get_contents', 
+                           '\\file_put_contents', 
+                           '\\unlink',
+                           '\\opendir', 
+                           '\\rmdir', 
+                           '\\mkdir',
+                           );
         $regexStartWithTmp = '^(/tmp/|C:\\\\\\\\WINDOWS\\\\\\\\TEMP|C:\\\\\\\\WINDOWS)';
 
         // string literal fopen('a', 'r');

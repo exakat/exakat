@@ -2,8 +2,7 @@
 
 $expected     = array('<<<HEREDOC
 $x
-HEREDOC
-',
+HEREDOC',
                      );
 
 $expected_not = array('<<<\'NOWDOC\'

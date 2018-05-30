@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class HashUsesObjects extends Analyzer {
     public function analyze() {
         // $x = hash_init('sha256'); is_resource($x)
-        $this->atomFunctionIs('hash_init')
+        $this->atomFunctionIs('\\hash_init')
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->outIs('LEFT')

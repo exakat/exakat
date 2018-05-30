@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class PrivateFunctionUsage extends Analyzer {
     public function analyze() {
         $functions = $this->loadIni('wp_private_functions.ini', 'functions');
+        $functions = makeFullNsPath($functions);
         
         // functioncall : preview_theme_ob_filter_callback
         $this->atomFunctionIs($functions);

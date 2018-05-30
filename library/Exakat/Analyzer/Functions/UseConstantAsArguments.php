@@ -41,6 +41,7 @@ class UseConstantAsArguments extends Analyzer {
             foreach($functions->alternative->{$position} as $function => $constants) {
                 $fullnspath[] = $function;
             }
+            $fullnspath = makeFullNsPath($fullnspath);
 
             // Not a PHP constant
             $this->atomFunctionIs($fullnspath)
@@ -60,6 +61,7 @@ class UseConstantAsArguments extends Analyzer {
             $this->prepareQuery();
 
             foreach($functions->alternative->{$position} as $function => $constants) {
+                $function = makeFullNsPath($function);
                 // PHP constant but wrong one
                 $regex = '('.implode('|', $constants).')\$';
                 $this->atomFunctionIs($function)
@@ -84,6 +86,7 @@ class UseConstantAsArguments extends Analyzer {
                 $constantNames[] = $constants;
             }
             $constantNames = array_merge(...$constantNames);
+            $fullnspath = makeFullNsPath($fullnspath);
             
             // if it's a constant, but not a PHP one
             $this->atomFunctionIs($fullnspath)
@@ -119,6 +122,7 @@ class UseConstantAsArguments extends Analyzer {
         foreach($positions as $position) {
             foreach($functions->combinaison->{$position} as $function => $constants) {
 
+                $function = makeFullNsPath($function);
                 // if it's a PHP constant, but not a good one for the function
                 $regex = '('.implode('|', $constants).')\$';
                 $this->atomFunctionIs($function)

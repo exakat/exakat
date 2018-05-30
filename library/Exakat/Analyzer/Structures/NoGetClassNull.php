@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class NoGetClassNull extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs('get_class')
+        // get_class(NULL)
+        $this->atomFunctionIs('\\get_class')
              ->outIs('ARGUMENT')
              ->atomIs('Null')
              ->back('first');

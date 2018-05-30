@@ -158,15 +158,26 @@ class UselessInstruction extends Analyzer {
         $this->prepareQuery();
 
         // array_unique(array_keys())
-        $this->atomFunctionIs('\array_unique')
+        $this->atomFunctionIs('\\array_unique')
              ->outWithRank('ARGUMENT', 0)
              ->functioncallIs('array_keys')
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomFunctionIs('\count')
+        $this->atomFunctionIs('\\count')
              ->outWithRank('ARGUMENT', 0)
-             ->functioncallIs(array('array_keys', 'array_values', 'array_flip', 'array_fill', 'array_walk', 'array_map', 'array_change_key_case', 'array_combine', 'array_multisort', 'array_replace', 'array_reverse'))
+             ->functioncallIs(array('\\array_keys', 
+                                    '\\array_values', 
+                                    '\\array_flip', 
+                                    '\\array_fill', 
+                                    '\\array_walk', 
+                                    '\\array_map', 
+                                    '\\array_change_key_case', 
+                                    '\\array_combine', 
+                                    '\\array_multisort', 
+                                    '\\array_replace', 
+                                    '\\array_reverse',
+                                    ))
              ->back('first');
         $this->prepareQuery();
     }

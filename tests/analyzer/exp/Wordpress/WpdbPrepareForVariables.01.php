@@ -3,8 +3,7 @@
 $expected     = array('$wpdb->get_results(\'SELECT * FROM table WHERE id = "\' . $x1 . \'"\')',
                       '$wpdb->get_results(<<<SQL
 SELECT * FROM table WHERE id = \'$x3\'
-SQL
-)',
+SQL)',
                       '$wpdb->get_results("SELECT * FROM {$wpdb->prefix}table WHERE id = \'$x\'")',
                       '$wpdb->get_results("SELECT * FROM table WHERE id = \'$x2\'")',
                      );

@@ -2,8 +2,7 @@
 
 $expected     = array('<<<HEREDOC
 SELECT * FROM table215;
-HEREDOC
-',
+HEREDOC',
                      );
 
 $expected_not = array('<<<SQL

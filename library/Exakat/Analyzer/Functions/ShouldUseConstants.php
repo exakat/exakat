@@ -33,14 +33,15 @@ class ShouldUseConstants extends Analyzer {
         
         $positions = array(0, 1, 2, 3, /*4, 5,*/ 6);
         foreach($positions as $position) {
-            $this->atomFunctionIs($functions['functions' . $position])
+            $fullnspath = makeFullNsPath($functions['functions' . $position]);
+            $this->atomFunctionIs($fullnspath)
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIsNot(array('Logical', 'Variable', 'Array', 'Member', 'Identifier', 'Nsname', 'Staticproperty', 'Staticconstant', 'Staticmethodcall', 'Methodcall'))
                  ->back('first');
             $this->prepareQuery();
 
-            $this->atomFunctionIs($functions['functions' . $position])
+            $this->atomFunctionIs($fullnspath)
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('Logical')

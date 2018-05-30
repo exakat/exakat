@@ -37,7 +37,13 @@ class AvoidThoseCrypto extends Analyzer {
         $this->prepareQuery();
 
         // in hashing functions
-        $this->atomFunctionIs(array('crypt', 'md5', 'md5_file', 'sha1_file', 'sha1', 'crc32'));
+        $this->atomFunctionIs(array('\\crypt', 
+                                    '\\md5', 
+                                    '\\md5_file', 
+                                    '\\sha1_file', 
+                                    '\\sha1', 
+                                    '\\crc32',
+                                    ));
         $this->prepareQuery();
     }
 }

@@ -2,8 +2,7 @@
 
 $expected     = array('<<<HEADER
 Content-Type: application/octet-stream
-HEADER
-',
+HEADER',
                       '<<<\'HEADER\'
 Max-Forwards: 34
 custom-header: 33

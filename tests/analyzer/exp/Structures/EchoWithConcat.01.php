@@ -5,8 +5,7 @@ $expected     = array('echo "should" . "really $be with comma"',
                       'echo "$KO"',
                       'echo <<<HEREDOC
 should\' too $be with comma
-HEREDOC
-',
+HEREDOC',
                       'echo "should$be with comma"',
                       'echo "should", "really $be with", \'more comma\'',
                       'echo $this, "should", "really $be with", \'commas\'',

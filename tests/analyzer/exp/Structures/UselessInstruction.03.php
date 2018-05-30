@@ -8,8 +8,7 @@ $expected     = array('\\A\\B\\C',
 
 silly string
 
-HEREDOC
-',
+HEREDOC',
                      );
 
 $expected_not = array('\'b\'',
