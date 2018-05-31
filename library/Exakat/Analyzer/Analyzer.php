@@ -1503,7 +1503,12 @@ GREMLIN
     }
 
     public function goToExpression() {
-        $this->addMethod("repeat( __.in({$this->linksDown})).emit( ).until( where(__.in(\"EXPRESSION\") ) )");
+        $this->addMethod(<<<GREMLIN
+coalesce( __.where( __.in("EXPRESSION")), 
+                    __.repeat( __.in({$this->linksDown})).emit( ).until( where(__.in("EXPRESSION") ).where( __.in("EXPRESSION")) )
+        )
+GREMLIN
+);
         
         return $this;
     }
