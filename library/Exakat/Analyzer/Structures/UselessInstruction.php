@@ -160,7 +160,7 @@ class UselessInstruction extends Analyzer {
         // array_unique(array_keys())
         $this->atomFunctionIs('\\array_unique')
              ->outWithRank('ARGUMENT', 0)
-             ->functioncallIs('array_keys')
+             ->functioncallIs('\\array_keys')
              ->back('first');
         $this->prepareQuery();
 

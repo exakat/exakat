@@ -1503,7 +1503,7 @@ GREMLIN
     }
 
     public function goToExpression() {
-        $this->addMethod('emit( ).repeat( __.in('.$this->linksDown.')).until( where(__.in("EXPRESSION") ) )');
+        $this->addMethod("repeat( __.in({$this->linksDown})).emit( ).until( where(__.in(\"EXPRESSION\") ) )");
         
         return $this;
     }
@@ -1579,13 +1579,13 @@ GREMLIN
     }
 
     public function hasInterfaceDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").hasLabel("Interface").count().is(eq(1)))');
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Interface") )');
     
         return $this;
     }
 
     public function hasTraitDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").hasLabel("Trait").count().is(eq(1)))');
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Trait") )');
 
         return $this;
     }
@@ -1598,11 +1598,11 @@ GREMLIN
     
     public function groupFilter($characteristic, $percentage) {
         if (substr(trim($characteristic), 0, 3) === 'it.') {
-            $by = 'by{ '.$characteristic.' }';
+            $by = "by{ $characteristic }";
         } else {
-            $by = 'by( "'.$characteristic.'" )';
+            $by = "by{ \"$characteristic\" }";
         }
-        $this->addMethod('groupCount("gf").'.$by.'.cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * '.$percentage.'; }.keySet()');
+        $this->addMethod("groupCount(\"gf\").$by.cap(\"gf\").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * $percentage; }.keySet()");
 
         return $this;
     }

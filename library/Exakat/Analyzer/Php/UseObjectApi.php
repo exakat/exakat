@@ -28,9 +28,9 @@ use Exakat\Analyzer\Analyzer;
 class UseObjectApi extends Analyzer {
     public function analyze() {
         $functions = $this->loadIni('function_to_oop.ini', 'function');
-        $functions = makeFullNsPath($functions);
+        $functions = makeFullNsPath(array_keys($functions));
         
-        $this->atomFunctionIs(array_keys($functions));
+        $this->atomFunctionIs($functions);
         $this->prepareQuery();
     }
 }
