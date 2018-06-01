@@ -29,8 +29,15 @@ class HttpStatus extends Analyzer {
     public function analyze() {
         $ini = $this->loadIni('HttpStatus.ini', 'code');
         
+        // $http = "418";
         $this->atomIs('Integer')
              ->codeIs(array_keys($ini));
+        $this->prepareQuery();
+
+        // $code = "418";
+        $this->atomIs('String')
+             ->has('noDelimiter')
+             ->noDelimiterIs(array_keys($ini));
         $this->prepareQuery();
     }
 }

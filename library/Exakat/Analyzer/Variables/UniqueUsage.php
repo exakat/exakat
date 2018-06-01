@@ -26,8 +26,12 @@ use Exakat\Analyzer\Analyzer;
 
 class UniqueUsage extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsRead',
-                     'Variables/IsModified',
+        return array('Variables/IsRead', 
+                     'Classes/IsRead', 
+                     'Arrays/IsRead',
+                     'Variables/IsModified', 
+                     'Classes/IsModified', 
+                     'Arrays/IsModified',
                     );
     }
     
@@ -36,14 +40,17 @@ class UniqueUsage extends Analyzer {
              ->raw(<<<GREMLIN
 where( 
     __.sideEffect{ args = []; }
-      .out('ARGUMENT', 'USE')
-      .coalesce( __.out("NAME"), __.filter{ true})
-      .sideEffect{args.add(it.get().value("fullcode"));}
-      .fold()
+      .out('ARGUMENT')
+      .coalesce( 
+         __.out("NAME"), 
+        __.filter{ true}
+        )
+        .sideEffect{args.add(it.get().value("code"));}
+        .fold()
 )
 .where(
-    __.sideEffect{ r = [:]; w = [:]; }.repeat( __.out($this->linksDown)).emit().times(25).hasLabel("Variable", "Variableobject", "Variablearray").as('v')
-      .filter{ v = it.get().value("fullcode"); !(v in args);}
+    __.sideEffect{ r = [:]; w = [:]; }.repeat( __.out()).emit().times(25).hasLabel("Variable", "Variableobject", "Variablearray").as('v')
+      .filter{ v = it.get().value("code"); !(v in args);}
       .in("ANALYZED")
       .has("analyzer", within("Variables/IsRead", "Classes/IsRead", "Arrays/IsRead","Variables/IsModified", "Classes/IsModified", "Arrays/IsModified" ))
       .sideEffect{
@@ -55,14 +62,18 @@ where(
                 r[v]++;
             } else if (it.get().value("analyzer") in ["Variables/IsModified", "Classes/IsModified", "Arrays/IsModified"]){
                 w[v]++;
+            } else {
+                r[v] = r[v] + 0.1;
             }
         }
         .fold()
 )
-.filter{ r.keySet().intersect(w.keySet()).findAll{ r[it] == 1 && w[it] == 2}.size() > 0;}
+.filter{d = r.keySet().intersect(w.keySet()).findAll{ r[it] + w[it] == 2}; d.size() > 0;}
 GREMLIN
 )
-             ->back('first');
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition('Variable', 'Variableobject', 'Variablearray')
+             ->filter( 'it.get().value("code") in v;');
         $this->prepareQuery();
     }
 }

@@ -44,14 +44,13 @@ class IsGlobalConstant extends Analyzer {
                 $c[] = $ini['constants'];
             }
         }
-        $constants = call_user_func_array('array_merge', $c);
+        $constants = array_merge(...$c);
         $constantsFullNs = makeFullNsPath($constants, true);
         
         $this->analyzerIs('Constants/ConstantUsage')
              ->tokenIs('T_STRING')
              ->atomIsNot(array('Boolean', 'Null'))
              ->hasNoIn('ALIAS')
-             ->raw('not( where( __.in("NAME").hasLabel("Constant")) )')
 
              // Exclude PHP constants
              ->fullnspathIsNot($constantsFullNs)
