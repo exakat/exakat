@@ -68,19 +68,19 @@ class GSNeo4j extends Graph {
                                           'emptySet' => true,
                                    ) );
         if ($this->gremlinVersion === '3.3') {
-//            $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', TRUE);
+//            $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', true);
         }
     }
     
     public function resetConnection() {
         unset($this->db);
-        $this->db = new Connection(array( 'host'  => $this->config->gsneo4j_host,
-                                          'port'  => $this->config->gsneo4j_port,
-                                          'graph' => 'graph',
+        $this->db = new Connection(array( 'host'     => $this->config->gsneo4j_host,
+                                          'port'     => $this->config->gsneo4j_port,
+                                          'graph'    => 'graph',
                                           'emptySet' => true,
                                    ) );
         if ($this->gremlinVersion === '3.3') {
-            $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', TRUE);
+//            $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', true);
         }
         $this->status = self::UNCHECKED;
     }
@@ -187,28 +187,35 @@ class GSNeo4j extends Graph {
         }
         display('started gremlin server');
         $this->resetConnection();
-        sleep(1);
+        sleep(2);
         
         $b = microtime(true);
         $round = -1;
+        $pid = false;
         do {
-            $res = $this->checkConnection();
-            ++$round;
-            usleep(100000 * $round);
-        } while (empty($res) && $round < 20);
+            $connexion = $this->checkConnection();
+            if (empty($connexion)) {
+                ++$round;
+                usleep(100000 * $round);
+            }
+        } while ( empty($connexion) && $round < 20);
         $e = microtime(true);
         
         display("Restarted in $round rounds\n");
 
-        if (file_exists($this->config->gsneo4j_folder.'/run/gremlin.pid')) {
-            $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/run/gremlin.pid'));
-        } elseif ( file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
-            $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/db/gsneo4j.pid'));
+        if (file_exists("{$this->config->gsneo4j_folder}/db/gremlin.pid")) {
+            $pid = trim(file_get_contents("{$this->config->gsneo4j_folder}/db/gremlin.pid"));
+        } elseif ( file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
+            $pid = trim(file_get_contents("{$this->config->gsneo4j_folder}/db/gsneo4j.pid"));
         } else {
-            $pid = 'Not yet';
+            $pid = false;
         }
+
+        $ms = number_format(($e - $b) * 1000, 2);
+        $pid = $pid === false ? 'Not yet' : $pid;
+        display("started [$pid] in $ms ms");
         
-        display("started [$pid] in ".number_format(($e - $b) * 1000, 2).' ms' );
+        var_dump($this->checkConnection());
     }
 
     public function stop() {
