@@ -27,13 +27,14 @@ class Remote {
     private $bits = array();
     private $key  = '';
 
-    public function __construct($url, $key) {
+    public function __construct($url = '/tmp/exakat.queue', $key = '') {
         $bits = parse_url($url);
         $this->bits = array( 'scheme' => $bits['scheme'] ?? 'http',
                              'host'   => $bits['host']   ?? 'localhost',
                              'port'   => $bits['port']   ?? '8447',
                              'path'   => $bits['path']   ?? '/tmp/exakat.queue',
                            );
+        $this->key = $key;
     }
 
     public function send($json) {
@@ -54,8 +55,9 @@ class Remote {
 
     private function sendWithHTTP($json) {
         if (!empty($this->key)) {
-            print $json = $this->safeEncrypt($json, $this->key);
+            $json = $this->safeEncrypt($json, $this->key);
         }
+        $json = urlencode($json);
 
         // use key 'http' even if you send the request to https://...
         $options = array(
