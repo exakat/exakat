@@ -33,6 +33,7 @@ class ShouldUseOperator extends Analyzer {
                                     '\\chr',
                                     '\\call_user_func',
                                     '\\is_null',
+                                    '\\php_version',
                                     ));
         $this->prepareQuery();
 
