@@ -14,6 +14,15 @@ if (empty($_REQUEST['json'])) {
     die( 'Exakat server (empty command)');
 }
 
+if ($_REQUEST['json'][0] !== '[') { 
+    $_REQUEST['json'] = safeDecrypt($_REQUEST['json']); 
+}
+
+if (empty($_REQUEST['json'])) {
+    serverLog("unknown command : empty");
+    die( 'Exakat server (empty command)');
+}
+
 $commands = json_decode($_REQUEST['json']);
 if (empty($commands)) {
     serverLog("unknown command : empty");
