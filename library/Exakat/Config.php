@@ -62,7 +62,7 @@ class Config {
             assert_options(ASSERT_ACTIVE, 0);
 
             error_reporting(E_ALL);
-            ini_set('display_errors', 0)
+            ini_set('display_errors', 0);
             ini_set('error_log', $this->projects_root.'/projects/.exakat/php.log');
             if (!file_exists($this->projects_root.'/projects/.exakat/php.log')) {
                 mkdir($this->projects_root.'/projects/.exakat/php.log', 0755);
