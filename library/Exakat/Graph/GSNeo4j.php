@@ -214,8 +214,6 @@ class GSNeo4j extends Graph {
         $ms = number_format(($e - $b) * 1000, 2);
         $pid = $pid === false ? 'Not yet' : $pid;
         display("started [$pid] in $ms ms");
-        
-        var_dump($this->checkConnection());
     }
 
     public function stop() {
