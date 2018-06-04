@@ -43,7 +43,6 @@ class GSNeo4j extends Graph {
     
     private $status     = self::UNCHECKED;
     
-    private $log        = null;
     private $db         = null;
 
     private $gremlinVersion = '';
@@ -55,7 +54,7 @@ class GSNeo4j extends Graph {
             // No local production, just skip init.
             return;
         }
-
+        
         $gremlinJar = preg_grep('/gremlin-core-([0-9\.]+)\\.jar/', scandir("{$this->config->gsneo4j_folder}/lib/"));
         $gremlinVersion = basename(array_pop($gremlinJar));
         // 3.3 or 3.2
@@ -95,11 +94,13 @@ class GSNeo4j extends Graph {
             $this->checkConfiguration();
         }
 
+        $b = microtime(true);
         $params['#jsr223.groovy.engine.keep.globals'] = 'phantom';
         foreach($params as $name => $value) {
             $this->db->message->bindValue($name, $value);
         }
         $result = $this->db->send($query);
+        $e = microtime(true);
 
         if (empty($result)) {
             return new GraphResults();
