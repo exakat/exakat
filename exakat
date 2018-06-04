@@ -1,6 +1,10 @@
 <?php
 
 try {
+    if (version_compare(PHP_VERSION, '7.0.0') < 0) {
+        die("Exakat requires PHP 7.0 or more recent to run. \nConfigure PHP ".PHP_VERSION." in the projects/*/config.ini file to audit with that version.\nAborting\n");
+    }
+    
     $isPhar = class_exists('\\Phar') && phar::running();
 
     if(empty($isPhar)){

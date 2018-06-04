@@ -10,12 +10,10 @@ $expected     = array('\'0x123\'',
 NOWDOC',
                       '<<<HEREDOC
  0x128$x
-HEREDOC
-',
+HEREDOC',
                       '<<<HEREDOC
  0x126
-HEREDOC
-',
+HEREDOC',
                       '" 0x2$n23"',
                       '" 0x129$x"',
                       '" 0x12G9$x"',

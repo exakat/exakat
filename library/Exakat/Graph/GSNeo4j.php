@@ -43,26 +43,44 @@ class GSNeo4j extends Graph {
     
     private $status     = self::UNCHECKED;
     
-    private $log        = null;
     private $db         = null;
+
+    private $gremlinVersion = '';
     
     public function __construct($config) {
         parent::__construct($config);
+
+        if (!file_exists("{$this->config->gsneo4j_folder}/lib/")) {
+            // No local production, just skip init.
+            return;
+        }
         
-        $this->db = new Connection(array( 'host'  => $this->config->gsneo4j_host,
-                                          'port'  => $this->config->gsneo4j_port,
-                                          'graph' => 'graph',
+        $gremlinJar = preg_grep('/gremlin-core-([0-9\.]+)\\.jar/', scandir("{$this->config->gsneo4j_folder}/lib/"));
+        $gremlinVersion = basename(array_pop($gremlinJar));
+        // 3.3 or 3.2
+        $this->gremlinVersion = substr($gremlinVersion, 13, -6);
+        assert(in_array($this->gremlinVersion, array('3.2', '3.3')), "Unknown Gremlin version : $this->gremlinVersion\n");
+
+        $this->db = new Connection(array( 'host'     => $this->config->gsneo4j_host,
+                                          'port'     => $this->config->gsneo4j_port,
+                                          'graph'    => 'graph',
                                           'emptySet' => true,
                                    ) );
+        if ($this->gremlinVersion === '3.3') {
+//            $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', true);
+        }
     }
     
     public function resetConnection() {
         unset($this->db);
-        $this->db = new Connection(array( 'host'  => $this->config->gsneo4j_host,
-                                          'port'  => $this->config->gsneo4j_port,
-                                          'graph' => 'graph',
+        $this->db = new Connection(array( 'host'     => $this->config->gsneo4j_host,
+                                          'port'     => $this->config->gsneo4j_port,
+                                          'graph'    => 'graph',
                                           'emptySet' => true,
                                    ) );
+        if ($this->gremlinVersion === '3.3') {
+//            $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', true);
+        }
         $this->status = self::UNCHECKED;
     }
     
@@ -76,11 +94,13 @@ class GSNeo4j extends Graph {
             $this->checkConfiguration();
         }
 
+        $b = microtime(true);
         $params['#jsr223.groovy.engine.keep.globals'] = 'phantom';
         foreach($params as $name => $value) {
             $this->db->message->bindValue($name, $value);
         }
         $result = $this->db->send($query);
+        $e = microtime(true);
 
         if (empty($result)) {
             return new GraphResults();
@@ -157,55 +177,57 @@ class GSNeo4j extends Graph {
                   "{$this->config->tinkergraph_folder}/conf/gsneo4j.yaml");
         }
 
-        $gremlinJar = glob("{$this->config->gsneo4j_folder}/lib/gremlin-core-*.jar");
-        $gremlinVersion = basename(array_pop($gremlinJar));
-        //gremlin-core-3.2.8.jar
-        $gremlinVersion = substr($gremlinVersion, 13, -4);
-        $version = version_compare('3.3.0', $gremlinVersion) ? '.3.2' : '.3.3';
-
-        if ($version === '.3.3') {
+        if ($this->gremlinVersion === '3.3') {
             display('start gremlin server 3.3.x');
-            exec("cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.exakat.sh start conf/gsneo4j.yaml &");
-        } elseif ($version === '.3.2') {
+            putenv('GREMLIN_YAML=conf/gsneo4j.yaml');
+            putenv('PID_DIR=db');
+            exec("cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
+        } elseif ($this->gremlinVersion === '3.2') {
             display('start gremlin server 3.2.x');
             exec("cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/gsneo4j.yaml  > gremlin.log 2>&1 & echo $! > db/gsneo4j.pid ");
         }
         display('started gremlin server');
         $this->resetConnection();
-        sleep(1);
+        sleep(2);
         
         $b = microtime(true);
         $round = -1;
+        $pid = false;
         do {
-            $res = $this->checkConnection();
-            ++$round;
-            usleep(100000 * $round);
-        } while (empty($res) && $round < 20);
+            $connexion = $this->checkConnection();
+            if (empty($connexion)) {
+                ++$round;
+                usleep(100000 * $round);
+            }
+        } while ( empty($connexion) && $round < 20);
         $e = microtime(true);
         
         display("Restarted in $round rounds\n");
 
-        if (file_exists($this->config->gsneo4j_folder.'/run/gremlin.pid')) {
-            $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/run/gremlin.pid'));
-        } elseif ( file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
-            $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/db/gsneo4j.pid'));
+        if (file_exists("{$this->config->gsneo4j_folder}/db/gremlin.pid")) {
+            $pid = trim(file_get_contents("{$this->config->gsneo4j_folder}/db/gremlin.pid"));
+        } elseif ( file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
+            $pid = trim(file_get_contents("{$this->config->gsneo4j_folder}/db/gsneo4j.pid"));
         } else {
-            $pid = 'Not yet';
+            $pid = false;
         }
-        
-        display("started [$pid] in ".number_format(($e - $b) * 1000, 2).' ms' );
+
+        $ms = number_format(($e - $b) * 1000, 2);
+        $pid = $pid === false ? 'Not yet' : $pid;
+        display("started [$pid] in $ms ms");
     }
 
     public function stop() {
-        if (file_exists($this->config->gsneo4j_folder.'/run/gremlin.pid')) {
+        if (file_exists("{$this->config->gsneo4j_folder}/db/gremlin.pid")) {
             display('stop gremlin server 3.3.x');
-            shell_exec('cd '.$this->config->gsneo4j_folder.'; ./bin/gremlin-server.sh stop');
-            unlink($this->config->gsneo4j_folder.'/run/gremlin.pid');
+            putenv('GREMLIN_YAML=conf/gsneo4j.yaml');
+            putenv('PID_DIR=db');
+            shell_exec("cd {$this->config->gsneo4j_folder}; ./bin/gremlin-server.sh stop; rm -rf run/gremlin.pid");
         }
         
         if (file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
             display('stop gremlin server 3.2.x');
-            shell_exec('kill -9 $(cat '.$this->config->gsneo4j_folder.'/db/gsneo4j.pid) 2>> gremlin.log; rm -f '.$this->config->gsneo4j_folder.'/db/gsneo4j.pid');
+            shell_exec("kill -9 \$(cat {$this->config->gsneo4j_folder}/db/gsneo4j.pid) 2>> gremlin.log; rm -f {$this->config->gsneo4j_folder}/db/gsneo4j.pid");
         }
     }
 

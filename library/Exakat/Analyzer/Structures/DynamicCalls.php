@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class DynamicCalls extends Analyzer {
     public function analyze() {
         // dynamic constants
-        $this->atomFunctionIs('constant');
+        $this->atomFunctionIs('\\constant');
         $this->prepareQuery();
 
         // $$v variable variables
@@ -82,15 +82,14 @@ class DynamicCalls extends Analyzer {
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_OPEN_BRACKET'))
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->atomIsNot(array('Static', 'Parent', 'Self'))
              ->back('first');
         $this->prepareQuery();
 
         // static methods (class part)
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->atomIsNot(array('Identifier', 'Nsname'))
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->atomIsNot(array('Identifier', 'Nsname', 'Static', 'Parent', 'Self'))
              ->back('first');
         $this->prepareQuery();
 

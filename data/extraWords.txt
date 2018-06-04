@@ -107,3 +107,14 @@ zend
 stdlib
 validator
 throwable
+xmlrpc
+Zend
+uri
+whitespace
+whitespaces
+tokenizing
+Codepoint
+Codepoints
+codepoint
+codepoints
+Symfony

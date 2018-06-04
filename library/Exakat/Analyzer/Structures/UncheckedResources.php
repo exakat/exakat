@@ -26,11 +26,13 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UncheckedResources extends Analyzer {
+    // fread(fopen('path/to/file', 'r'));
     public function analyze() {
         $resourceUsage = $this->loadJson('resource_usage.json');
 
         $positions = array(0);
         foreach($resourceUsage as $creation => $usage) {
+            $creation = makeFullNsPath($creation);
             foreach($positions as $pos) {
                 if (!isset($usage->{"function$pos"})) {
                     continue;

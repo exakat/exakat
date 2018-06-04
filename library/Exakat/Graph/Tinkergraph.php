@@ -45,6 +45,11 @@ class Tinkergraph extends Graph {
     public function __construct($config) {
         parent::__construct($config);
 
+        if (!file_exists("{$this->config->tinkergraph_folder}/lib/")) {
+            // No local production, just skip init.
+            return;
+        }
+
         $this->db = new Connection(array(
                                      'host'     => $this->config->tinkergraph_host,
                                      'port'     => $this->config->tinkergraph_port,

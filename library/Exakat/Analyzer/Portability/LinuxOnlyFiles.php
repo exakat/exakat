@@ -26,8 +26,9 @@ use Exakat\Analyzer\Analyzer;
 
 class LinuxOnlyFiles extends Analyzer {
     public function analyze() {
-        $functions = array('glob', 'fopen', 'file', 'file_get_contents', 'file_put_contents', 'unlink',
-                           'opendir', 'rmdir', 'mkdir');
+        $functions = array('\\glob', '\\fopen', '\\file', '\\file_get_contents', '\\file_put_contents', '\\unlink',
+                           '\\opendir', '\\rmdir', '\\mkdir',
+                           );
         $files = $this->loadIni('Files2OS.ini', 'linux');
 
         // string literal fopen('a', 'r');

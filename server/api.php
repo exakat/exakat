@@ -14,6 +14,15 @@ if (empty($_REQUEST['json'])) {
     die( 'Exakat server (empty command)');
 }
 
+if ($_REQUEST['json'][0] !== '[') { 
+    $_REQUEST['json'] = safeDecrypt($_REQUEST['json']); 
+}
+
+if (empty($_REQUEST['json'])) {
+    serverLog("unknown command : empty");
+    die( 'Exakat server (empty command)');
+}
+
 $commands = json_decode($_REQUEST['json']);
 if (empty($commands)) {
     serverLog("unknown command : empty");
@@ -304,6 +313,38 @@ function unparse_url($parsed_url) {
     $query    = isset($parsed_url['query'])    ? '?'.$parsed_url['query']    : '';
     $fragment = isset($parsed_url['fragment']) ? '#'.$parsed_url['fragment'] : '';
     return $scheme.$user.$pass.$host.$port.$path.$query.$fragment;
+}
+
+/**
+* Decrypt a message
+*
+* @param string $encrypted - message encrypted with safeEncrypt()
+* @param string $key - encryption key
+* @return string
+*/
+function safeDecrypt($encrypted, $key = '__SECRET_KEY__')
+{  
+    $decoded = base64_decode($encrypted);
+    if ($decoded === false) {
+        return '';
+    }
+    if (mb_strlen($decoded, '8bit') < (SODIUM_CRYPTO_SECRETBOX_NONCEBYTES + SODIUM_CRYPTO_SECRETBOX_MACBYTES)) {
+        return '';
+    }
+    $nonce = mb_substr($decoded, 0, SODIUM_CRYPTO_SECRETBOX_NONCEBYTES, '8bit');
+    $ciphertext = mb_substr($decoded, SODIUM_CRYPTO_SECRETBOX_NONCEBYTES, null, '8bit');
+
+    $plain = sodium_crypto_secretbox_open(
+        $ciphertext,
+        $nonce,
+        $key
+    );
+    if ($plain === false) {
+         return '';
+    }
+    sodium_memzero($ciphertext);
+    sodium_memzero($key);
+    return $plain;
 }
 
 ?>

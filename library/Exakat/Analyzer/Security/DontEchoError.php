@@ -31,6 +31,7 @@ class DontEchoError extends Analyzer {
         $errorMessageFunctions = makeFullNsPath($errorMessageFunctions);
         
         $displayFunctions = $this->loadIni('displayFunctions.ini', 'functions');
+        $displayFunctions = makeFullNsPath($displayFunctions);
         
         $this->atomFunctionIs($displayFunctions)
              ->outIs('ARGUMENT')
@@ -45,7 +46,6 @@ class DontEchoError extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->atomIs('Functioncall')
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($errorMessageFunctions)
              ->back('first');
@@ -57,7 +57,6 @@ class DontEchoError extends Analyzer {
              ->atomIs('Concatenation')
              ->outIs('CONCAT')
              ->atomIs('Functioncall')
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
              ->fullnspathIs($errorMessageFunctions)
              ->back('first');
         $this->prepareQuery();
@@ -67,7 +66,6 @@ class DontEchoError extends Analyzer {
              ->atomIs('Concatenation')
              ->outIs('CONCAT')
              ->atomIs('Functioncall')
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
              ->fullnspathIs($errorMessageFunctions)
              ->back('first');
         $this->prepareQuery();
@@ -113,7 +111,7 @@ class DontEchoError extends Analyzer {
         $this->prepareQuery();
 
         // ini_set('display_error', 1)
-        $this->atomFunctionIs('ini_set')
+        $this->atomFunctionIs('\\ini_set')
              ->outWithRank('ARGUMENT', 0)
              ->has('noDelimiter')
              ->noDelimiterIs('display_errors')

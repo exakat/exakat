@@ -477,6 +477,7 @@ class Files extends Tasks {
         // Regex to include files and folders
         $includeDirs = array();
         foreach($config->include_dirs as $include) {
+            if (empty($include)) { continue; }
             if ($include === '/') {
                 $includeDirs[] = $include.'.*';
             }
@@ -498,14 +499,14 @@ class Files extends Tasks {
 
         $d = getcwd();
         if (!file_exists($path)) {
-            display( "No such file as ".$path." when looking for files\n");
+            display( "No such file as '$path' when looking for files\n");
             $files = array();
             $ignoredFiles = array();
             return ;
         }
         chdir($path);
         $allFiles = rglob('.');
-        $allFiles = array_map(function($path) { return substr($path, 1);}, $allFiles);
+        $allFiles = array_map(function($path) { return substr($path, 1); }, $allFiles);
         chdir($d);
 
         $exts = $config->file_extensions;
@@ -514,20 +515,20 @@ class Files extends Tasks {
         $notIgnored = preg_grep($ignoreDirsRegex, $allFiles, PREG_GREP_INVERT);
 
         if (empty($includeDirsRegex)) {
-            $included = array();
+            $files = $notIgnored;
         } else {
             $included = preg_grep($includeDirsRegex, $allFiles);
+            $files = array_merge($notIgnored, $included);
+            $files = array_unique($files);
         }
-        
-        $files = array_merge($notIgnored, $included);
-        $files = array_unique($files);
         
         $ignoredFiles = array_fill_keys(array_diff($allFiles, $files), 'Ignored dir');
 
         foreach($files as $id => $file) {
-            if (isset($ignore_files[basename($file)])) {
+            $f = basename($file);
+            if (isset($ignore_files[$f])) {
                 unset($files[$id]);
-                $ignoredFiles[$file] = "Ignored file (".basename($file).")";
+                $ignoredFiles[$file] = "Ignored file ($f)";
                 continue;
             }
             $ext = pathinfo($file, PATHINFO_EXTENSION);

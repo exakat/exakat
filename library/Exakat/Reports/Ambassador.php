@@ -101,7 +101,7 @@ class Ambassador extends Reports {
 
         if (empty($baseHTML)) {
             $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
-            $title = ($file == 'index') ? 'Dashboard' : $file;
+            $title = ($file === 'index') ? 'Dashboard' : $file;
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
@@ -208,11 +208,11 @@ class Ambassador extends Reports {
         
         // Compatibility
         $this->generateCompilations();
-        $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%"');
+        $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) AS version FROM themas WHERE thema LIKE "Compatibility%"');
         $list = array();
-        while($row = $res->fetchArray(\SQLITE3_NUM)) {
-            $list[] = 'CompatibilityPHP'.$row[0];
-            $this->generateCompatibility($row[0]);
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $list[] = 'CompatibilityPHP'.$row['version'];
+            $this->generateCompatibility($row['version']);
         }
         $this->generateCompatibilityEstimate();
         $this->generateIssuesEngine('compatibility_issues',
@@ -2049,13 +2049,13 @@ SQL;
 
     private function getClassByType($type)
     {
-        if ($type == 'Critical' || $type == 'Long') {
+        if ($type === 'Critical' || $type === 'Long') {
             $class = 'text-orange';
-        } elseif ($type == 'Major' || $type == 'Slow') {
+        } elseif ($type === 'Major' || $type === 'Slow') {
             $class = 'text-red';
-        } elseif ($type == 'Minor' || $type == 'Quick') {
+        } elseif ($type === 'Minor' || $type === 'Quick') {
             $class = 'text-yellow';
-        }  elseif ($type == 'Note' || $type == 'Instant') {
+        }  elseif ($type === 'Note' || $type === 'Instant') {
             $class = 'text-blue';
         } else {
             $class = 'text-gray';
@@ -2197,7 +2197,7 @@ SQL;
 
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
 
-                if ($subanalyze == 0) { continue; }
+                if ($subanalyze === 0) { continue; }
                 $table .= '<tr>
     <td>'.$bugfix['title'].'</td>
     <td>'.($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-').'</td>
@@ -2258,7 +2258,7 @@ SQL;
                             'Php/Password55'                        => '5.5+',
                             'Php/StaticclassUsage'                  => '5.5+',
                             'Structures/ForeachWithList'            => '5.5+',
-                            'Structures/ModernEmpty'                => '5.5+',
+                            'Structures/EmptyWithExpression'        => '5.5+',
                             'Structures/TryFinally'                 => '5.5+',
                             'Php/Php56NewFunctions'                 => '5.6-',
                             'Structures/CryptWithoutSalt'           => '5.6-',
@@ -2308,6 +2308,7 @@ SQL;
                             'Php/Php71NewClasses'                   => '7.1-',
                             'Php/Php71NewFunctions'                 => '7.1-',
                             'Type/OctalInString'                    => '7.1-',
+                            'Classes/ConstVisibilityUsage'          => '7.1+',
                             'Php/ListShortSyntax'                   => '7.1+',
                             'Php/ListWithKeys'                      => '7.1+',
                             'Php/Php71RemovedDirective'             => '7.1+',
@@ -2337,10 +2338,9 @@ SQL;
         $query = <<<SQL
 SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ($list) AND count >= 0
 SQL;
-
         $results = $this->sqlite->query($query);
 
-        while( $row = $results->fetchArray(\SQLITE3_ASSOC)) {
+        while($row = $results->fetchArray(\SQLITE3_ASSOC)) {
             $counts[$row['analyzer']] = $row['count'];
         }
 
@@ -2367,8 +2367,29 @@ SQL;
             }
         }
         
+        $incompilable = array();
+        foreach($versions as $version) {
+            $shortVersion = $version[0].$version[2];
+
+            $query = <<<SQL
+SELECT count(*) AS nb FROM compilation$shortVersion
+SQL;
+            $results = @$this->sqlite->query($query);
+            if ($results === false) {
+                $incompilable[$shortVersion] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
+            } else{
+                $row = $results->fetchArray(\SQLITE3_ASSOC);
+                if ($row['nb'] === 0) {
+                    $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
+                } else {
+                    $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';
+                }
+            }
+        }
+        
         $table = '';
         $titles = "<tr><th>Version</th><th>Name</th><th>".implode('</th><th>', array_keys(array_values($data2)[0]) )."</th></tr>";
+            $table .= "<tr><td>&nbsp;</td><td>Compilation</td><td>".implode('</td><td>', $incompilable)."</td></tr>\n";
         $data = array_merge($data, $data2);
         foreach($data as $name => $row) {
             $analyzer = $this->themes->getInstance($name, null, $this->config);
@@ -3731,7 +3752,7 @@ HTML;
     private function Compatibility($count, $analyzer) {
         if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
-        } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {
+        } elseif ($count === Analyzer::CONFIGURATION_INCOMPATIBLE) {
             return '<i class="fa fa-cogs" style="color: orange"></i>';
         } elseif ($count === 0) {
             return '<i class="fa fa-check-square-o" style="color: green"></i>';

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class CanCountNonCountable extends Analyzer {
     public function analyze() {
         // count('abc');
-        $this->atomFunctionIs('count')
+        $this->atomFunctionIs('\\count')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('String', 'Boolean', 'Integer', 'Real', 'Null'))
              ->back('first');

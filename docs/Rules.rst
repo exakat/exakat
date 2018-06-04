@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 28 May 2018 13:30:42 +0000
-.. comment: Generation hash : 3c0ba59300b9d19dc2d4302320c91109a12f88c2
+.. comment: Generation date : Mon, 04 Jun 2018 08:34:16 +0000
+.. comment: Generation hash : 140802ef856f36e6141fea4d96dd03134992760e
 
 
 .. _$http\_raw\_post\_data:
@@ -2660,6 +2660,46 @@ Using a type test without else is also accepted here. This is a special treatmen
 
 
 
+.. _check-json:
+
+Check JSON
+##########
+
+
+Check errors whenever JSON is encoded or decoded. 
+
+In particular, ``NULL`` is a valid decoded JSON response. If you want to avoid mistaking NULL for an error, it is recommended to call ``json_last_error``.
+
+.. code-block:: php
+
+   <?php
+   
+   $encoded = json_encode($incoming);
+   // Unless JSON must contains some non-null data, this mistakes NULL and error
+   if(json_last_error() != JSON_ERROR_NONE) {
+       'die('Error when encoding JSON');
+   }
+   
+   $decoded = json_decode($incoming);
+   // Unless JSON must contains some non-null data, this mistakes NULL and error
+   if($decoded === null) {
+       'die('ERROR');
+   }
+   
+   ?>
+
+
+See also `Option to make json_encode and json_decode throw exceptions on errors <https://ayesh.me/Upgrade-PHP-7.3#json-exceptions>`_, 
+         `json_last_error <http://php.net/json_last_error>`_.
+
++------------+----------------------+
+| Short name | Structures/CheckJson |
++------------+----------------------+
+| Themes     | :ref:`Analyze`       |
++------------+----------------------+
+
+
+
 .. _child-class-removes-typehint:
 
 Child Class Removes Typehint
@@ -2998,7 +3038,7 @@ Compact doesn't warn when it tries to work on an inexisting variable. It just ig
 
 For performances reasons, this analysis only works inside methods and functions.
 
-See also `compact <http://php.net/compact>`_ and 
+See also `compact <http://www.php.net/compact>`_ and 
          `PHP RFC: Make compact function reports undefined passed variables <https://wiki.php.net/rfc/compact>`_.
 
 +------------+-----------------------+
@@ -3177,6 +3217,44 @@ See also `extract <http://php.net/extract>`_.
 +------------+---------------------------+
 | Themes     | :ref:`Security`           |
 +------------+---------------------------+
+
+
+
+.. _const-visibility-usage:
+
+Const Visibility Usage
+######################
+
+
+Visibility for class constant controls the accesibility to class constant.
+
+It was introduced in PHP 7.1.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       public const a = 1;
+       protected const b = 2;
+       private const c = 3;
+       const d = 4;
+   }
+   
+   interface i {
+       public const a = 1;
+         const d = 4;
+   }
+   ?>
+
+
+See also ``_.
+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Classes/ConstVisibilityUsage                                                                                                          |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -8053,7 +8131,10 @@ If the delimiter is not '', then `'implode() <http://www.php.net/implode>`_ and 
    ?>
 
 
-Always use `'file_get_contents() <http://www.php.net/file_get_contents>`_ to get the content of a file as a string.
+Always use `'file_get_contents() <http://www.php.net/file_get_contents>`_ to get the content of a file as a string. Consider using `'readfile() <http://www.php.net/readfile>`_ to echo the content directly to the output.
+
+See also `file_get_contents <http://php.net/file_get_contents>`_ and 
+         `file <http://php.net/file>`_.
 
 +------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Performances/JoinFile                                                                                                                                             |
@@ -14372,11 +14453,17 @@ Those issues often happen when a catch structure was positioned for debug purpos
    
    ?>
 
-+------------+------------------------------+
-| Short name | Exceptions/Rethrown          |
-+------------+------------------------------+
-| Themes     | :ref:`Dead code <dead-code>` |
-+------------+------------------------------+
+
+See also `What are the best practices for catching and re-throwing exceptions? <https://stackoverflow.com/questions/5551668/what-are-the-best-practices-for-catching-and-re-throwing-exceptions>`_ and 
+         `Exception chaining <http://php.net/manual/en/exception.construct.php>`_.
+
++------------+---------------------------------------+
+| Short name | Exceptions/Rethrown                   |
++------------+---------------------------------------+
+| Themes     | :ref:`Dead code <dead-code>`          |
++------------+---------------------------------------+
+| Examples   | :ref:`prestashop-exceptions-rethrown` |
++------------+---------------------------------------+
 
 
 
@@ -14848,9 +14935,9 @@ Setlocale() Uses Constants
 ##########################
 
 
-setlocal() don't use strings.
+setlocal() don't use strings but constants. 
 
-The first argument of `'setlocale() <http://www.php.net/setlocale>`_ must be one of the valid constants, LC_ALL, LC_COLLATE, LC_CTYPE, LC_MONETARY, LC_NUMERIC, LC_TIME, LC_MESSAGES.
+The first argument of `'setlocale() <http://www.php.net/setlocale>`_ must be one of the valid constants, ``LC_ALL``, ``LC_COLLATE``, ``LC_CTYPE``, ``LC_MONETARY``, ``LC_NUMERIC``, ``LC_TIME, LC_MESSAGES``.
 
 .. code-block:: php
 
@@ -14868,6 +14955,8 @@ The first argument of `'setlocale() <http://www.php.net/setlocale>`_ must be one
 
 
 The PHP 5 usage of strings (same name as above, enclosed in ' or ") is not legit anymore in PHP 7 and later.
+
+See also `setlocale <http://php.net/setlocale>`_.
 
 +------------+------------------------------------+
 | Short name | Structures/SetlocaleNeedsConstants |
@@ -15740,8 +15829,8 @@ Silently Cast Integer
 
 Those are integer literals that are cast to a float when running PHP. They are simply too big for the current PHP version, and PHP resorts to cast them into a float, which has a much larger capacity but a lower precision.
 
-Compare your literals to PHP_MAX_INT (typically 9223372036854775807) and PHP_MIN_INT (typically -9223372036854775808).
-This applies to binary (0b10101...), octals (0123123...) and hexadecimals (0xfffff...) too. 
+Compare your literals to ``PHP_MAX_INT`` (typically ``9223372036854775807``) and ``PHP_MIN_INT`` (typically ``-9223372036854775808``).
+This applies to binary (``0b10101``...), octals (``0123123``...) and hexadecimals (``0xfffff``...) too. 
 
 .. code-block:: php
 
@@ -15768,6 +15857,9 @@ This applies to binary (0b10101...), octals (0123123...) and hexadecimals (0xfff
    9.2233720368548E+18
    
    ?>
+
+
+See also `Integer overflow <http://php.net/manual/en/language.types.integer.php#language.types.integer.overflow>`_.
 
 +------------+--------------------------+
 | Short name | Type/SilentlyCastInteger |
@@ -18360,6 +18452,8 @@ Those constants are not defined in the code, and will raise errors, or use the f
 
 It is recommended to define them all, or to avoid using them.
 
+See also `Constants <http://php.net/manual/en/language.constants.php>`_.
+
 +------------+-----------------------------------------------------------+
 | Short name | Constants/UndefinedConstants                              |
 +------------+-----------------------------------------------------------+
@@ -20380,20 +20474,29 @@ Use Nullable Type
 
 The code uses nullable type, available since PHP 7.1.
 
+Nullable Types are an option to type hint : they allow the passing value to be null, or another type. 
+
+According to the authors of the feature : 'It is common in many programming languages including PHP to allow a variable to be of some type or null. This null often indicates an error or lack of something to return.'
+
 .. code-block:: php
 
    <?php
    
-   function foo(?string $a = abc) : ?string {
+   function foo(?string $a = 'abc') : ?string {
        return $a.b;
    }
+   
    ?>
 
-+------------+---------------------+
-| Short name | Php/UseNullableType |
-+------------+---------------------+
-| Themes     | :ref:`Suggestions`  |
-+------------+---------------------+
+
+See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_ and 
+         `PHP RFC: Nullable Types <https://wiki.php.net/rfc/nullable_types>`_.
+
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/UseNullableType                                                                                                                                       |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Suggestions`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -20823,7 +20926,35 @@ Use password_hash()
 ###################
 
 
-PHP 5.5 introduced `'password_hash() <http://www.php.net/password_hash>`_ and password_check() to replace the use of `'crypt() <http://www.php.net/crypt>`_ to check password.
+`'password_hash() <http://www.php.net/password_hash>`_ and password_check() are a better choice to replace the use of `'crypt() <http://www.php.net/crypt>`_ to check password.
+
+PHP 5.5 introduced these functions.
+
+.. code-block:: php
+
+   <?php
+   
+   $password = 'rasmuslerdorf';
+   $hash = 'y$YCFsG6elYca568hBi2pZ0.3LDL5wjgxct1N8w/oLR/jfHsiQwCqTS';
+   
+   // The cost parameter can change over time as hardware improves
+   $options = array('cost' => 11);
+   
+   // Verify stored hash against plain-text password
+   if (password_verify($password, $hash)) {
+       // Check if a newer hashing algorithm is available
+       // or the cost has changed
+       if (password_needs_rehash($hash, PASSWORD_DEFAULT, $options)) {
+           // If so, create a new hash, and replace the old one
+           $newHash = password_hash($password, PASSWORD_DEFAULT, $options);
+       }
+   
+       // Log user in
+   }
+   ?>
+
+
+See also `Password hashing <http://php.net/manual/en/book.password.php>`_.
 
 +------------+---------------------------+
 | Short name | Php/Password55            |
@@ -20928,11 +21059,13 @@ when security is involved. openssl_random_pseudo_bytes() may be used when the Op
 
 See also `CSPRNG <http://php.net/manual/en/book.csprng.php>`_ and `OpenSSL <http://php.net/manual/en/book.openssl.php>`_.
 
-+------------+------------------------------------------------------------+
-| Short name | Php/BetterRand                                             |
-+------------+------------------------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71` |
-+------------+------------------------------------------------------------+
++------------+-------------------------------------------------------------+
+| Short name | Php/BetterRand                                              |
++------------+-------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71`  |
++------------+-------------------------------------------------------------+
+| Examples   | :ref:`thelia-php-betterrand`, :ref:`fuelcms-php-betterrand` |
++------------+-------------------------------------------------------------+
 
 
 
@@ -23485,7 +23618,7 @@ list() is the only PHP function that accepts to have omitted arguments. If the f
    ?>
 
 
-See also `list <http://php.net/list>`_.
+See also `list <http://php.net/manual/en/function.list.php>`_.
 
 +------------+------------------------------------+
 | Short name | Structures/ListOmissions           |

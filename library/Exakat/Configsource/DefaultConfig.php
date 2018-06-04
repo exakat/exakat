@@ -65,13 +65,17 @@ class DefaultConfig extends Config {
                                'file'           =>  null,
                                'style'          => 'ALL',
  
-                               'gsneo4j_host'   => '127.0.0.1',
-                               'gsneo4j_port'   => '7474',
-                               'gsneo4j_folder' => 'tinkergraph',
+                               'gsneo4j_host'       => '127.0.0.1',
+                               'gsneo4j_port'       => '7474',
+                               'gsneo4j_folder'     => 'tinkergraph',
                                
                                'tinkergraph_host'   => '127.0.0.1',
                                'tinkergraph_port'   => '7474',
                                'tinkergraph_folder' => 'tinkergraph',
+
+                               'bitsy_host'         => '127.0.0.1',
+                               'bitsy_port'         => '8182',
+                               'bitsy_folder'       => 'tinkergraph',
  
                                'branch'         => 'master',
                                'tag'            => '',
@@ -92,7 +96,7 @@ class DefaultConfig extends Config {
  
                                'command'       => 'version',
 
-                               'include_dirs'        => array('/',
+                               'include_dirs'        => array('',
                                                              ),
                                'ignore_dirs'         => array('/assets',
                                                               '/cache',

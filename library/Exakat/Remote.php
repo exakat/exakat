@@ -25,14 +25,16 @@ namespace Exakat;
 
 class Remote {
     private $bits = array();
+    private $key  = '';
 
-    public function __construct($url) {
+    public function __construct($url = '/tmp/exakat.queue', $key = '') {
         $bits = parse_url($url);
         $this->bits = array( 'scheme' => $bits['scheme'] ?? 'http',
                              'host'   => $bits['host']   ?? 'localhost',
                              'port'   => $bits['port']   ?? '8447',
                              'path'   => $bits['path']   ?? '/tmp/exakat.queue',
                            );
+        $this->key = $key;
     }
 
     public function send($json) {
@@ -52,6 +54,11 @@ class Remote {
     }
 
     private function sendWithHTTP($json) {
+        if (!empty($this->key)) {
+            $json = $this->safeEncrypt($json, $this->key);
+        }
+        $json = urlencode($json);
+
         // use key 'http' even if you send the request to https://...
         $options = array(
             'http' => array(
@@ -67,6 +74,31 @@ class Remote {
         return $html;
     }
 
+    /**
+    * Encrypt a message
+    *
+    * @param string $message - message to encrypt
+    * @param string $key - encryption key
+    * @return string
+    */
+    private function safeEncrypt($message, $key)
+    {
+        $nonce = random_bytes(
+            SODIUM_CRYPTO_SECRETBOX_NONCEBYTES
+        );
+    
+        $cipher = base64_encode(
+            $nonce.
+            sodium_crypto_secretbox(
+                $message,
+                $nonce,
+                $key
+            )
+        );
+        sodium_memzero($message);
+        sodium_memzero($key);
+        return $cipher;
+    }
 }
 
 ?>

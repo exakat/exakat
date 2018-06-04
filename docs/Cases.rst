@@ -703,6 +703,48 @@ setlocale() may be called with null or '' (empty string), and will set values fr
     $loc = setlocale(LC_TIME, 0);
             if ($loc !== FALSE) echo ' - ' . $loc; //what is the locale in use?
 
+Use random_int()
+================
+
+.. _thelia-php-betterrand:
+
+Thelia
+^^^^^^
+
+:ref:`use-random\_int()`, in core/lib/Thelia/Tools/TokenProvider.php:151. 
+
+The whole function may be replaced by random_int(), as it generates random tokens. This needs an extra layer of hashing, to get a long and string results. 
+
+.. code-block:: php
+
+    /**
+         * @return string
+         */
+        protected static function getComplexRandom()
+        {
+            $firstValue = (float) (mt_rand(1, 0xFFFF) * rand(1, 0x10001));
+            $secondValues = (float) (rand(1, 0xFFFF) * mt_rand(1, 0x10001));
+    
+            return microtime() . ceil($firstValue / $secondValues) . uniqid();
+        }
+
+
+--------
+
+
+.. _fuelcms-php-betterrand:
+
+FuelCMS
+^^^^^^^
+
+:ref:`use-random\_int()`, in fuel/modules/fuel/libraries/Fuel.php:235. 
+
+Security tokens should be build with a CSPRNG source. uniqid() is based on time, and though it changes anytime (sic), it is easy to guess. Those days, it looks like '5b1262e74dbb9'; 
+
+.. code-block:: php
+
+    $this->installer->change_config('config', '$config[\'encryption_key\'] = \'\';', '$config[\'encryption_key\'] = \''.md5(uniqid()).'\';');
+
 Identical Conditions
 ====================
 
@@ -1446,6 +1488,32 @@ This code actually loads the file, join it, then split it again. file() would be
     		} catch ( WC_REST_Exception $e ) {
     			return new WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
     		}
+
+Rethrown Exceptions
+===================
+
+.. _prestashop-exceptions-rethrown:
+
+Prestashop
+^^^^^^^^^^
+
+:ref:`rethrown-exceptions`, in classes/webservice/WebserviceOutputBuilder.php:731. 
+
+The setSpecificField method catches a WebserviceException, representing an issue with the call to the webservice. However, that piece of information is lost, and the exception is rethrown immediately, without any action.
+
+.. code-block:: php
+
+    public function setSpecificField($object, $method, $field_name, $entity_name)
+    	{
+    		try {
+    			$this->validateObjectAndMethod($object, $method);
+    		} catch (WebserviceException $e) {
+    			throw $e;
+    		}
+    
+    		$this->specificFields[$field_name] = array('entity'=>$entity_name, 'object' => $object, 'method' => $method, 'type' => gettype($object));
+    		return $this;
+    	}
 
 Join file()
 ===========

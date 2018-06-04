@@ -417,7 +417,7 @@ class Project extends Tasks {
                 unset($dumpConfig);
             } catch (\Exception $e) {
                 echo "Error while running the Analyze $theme.\nTrying next analysis.\n";
-                file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
+                file_put_contents("{$this->config->projects_root}/projects/{$this->config->project}/log/analyze.$themeForFile.final.log", $e->getMessage());
             }
         }
         $VERBOSE = $oldVerbose;

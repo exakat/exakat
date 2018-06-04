@@ -592,6 +592,22 @@ GREMLIN
         return $this;
     }
 
+    public function functionInside($fullnspath) {
+        assert($this->assertAtom($atom));
+        $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").has("fullnspath", within(***))';
+        $this->addMethod($gremlin, makeArray($fullnspath));
+        
+        return $this;
+    }
+
+    public function noFunctionInside($fullnspath) {
+        // $fullcode is a name of a variable
+        $gremlin = 'not( where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").has("fullnspath", within(***))) )';
+        $this->addMethod($gremlin, makeArray($fullnspath));
+
+        return $this;
+    }
+
     public function atomInsideNoBlock($atom) {
         assert($this->assertAtom($atom));
         $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Sequence")) ).times('.self::MAX_LOOPING.').hasLabel(within(***))';
@@ -1194,6 +1210,20 @@ GREMLIN
         return $this;
     }
 
+    public function hasNextSibling($link = 'EXPRESSION') {
+        $this->hasIn($link);
+        $this->addMethod('where( __.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")})');
+
+        return $this;
+    }
+
+    public function hasNoNextSibling($link = 'EXPRESSION') {
+        $this->hasIn($link);
+        $this->addMethod('not( where( __.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}) )');
+
+        return $this;
+    }
+
     public function nextSibling($link = 'EXPRESSION') {
         $this->hasIn($link);
         $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}');
@@ -1471,6 +1501,17 @@ GREMLIN
         
         return $this;
     }
+
+    public function goToExpression() {
+        $this->addMethod(<<<GREMLIN
+coalesce( __.where( __.in("EXPRESSION")), 
+                    __.repeat( __.in({$this->linksDown})).emit( ).until( where(__.in("EXPRESSION") ).where( __.in("EXPRESSION")) )
+        )
+GREMLIN
+);
+        
+        return $this;
+    }
     
     public function goToCurrentScope() {
         $this->goToInstruction(array('Function', 'Phpcode'));
@@ -1543,13 +1584,13 @@ GREMLIN
     }
 
     public function hasInterfaceDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").hasLabel("Interface").count().is(eq(1)))');
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Interface") )');
     
         return $this;
     }
 
     public function hasTraitDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").hasLabel("Trait").count().is(eq(1)))');
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Trait") )');
 
         return $this;
     }
@@ -1562,11 +1603,11 @@ GREMLIN
     
     public function groupFilter($characteristic, $percentage) {
         if (substr(trim($characteristic), 0, 3) === 'it.') {
-            $by = 'by{ '.$characteristic.' }';
+            $by = "by{ $characteristic }";
         } else {
-            $by = 'by( "'.$characteristic.'" )';
+            $by = "by{ \"$characteristic\" }";
         }
-        $this->addMethod('groupCount("gf").'.$by.'.cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * '.$percentage.'; }.keySet()');
+        $this->addMethod("groupCount(\"gf\").$by.cap(\"gf\").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * $percentage; }.keySet()");
 
         return $this;
     }
@@ -2000,12 +2041,12 @@ GREMLIN;
             return $this->initNewQuery();
         }
 
-        if (substr($this->methods[1], 0, 9) == 'hasLabel(') {
+        if (substr($this->methods[1], 0, 9) === 'hasLabel(') {
             $first = $this->methods[1];
             array_splice($this->methods, 1,1);
             $query = implode('.', $this->methods);
-            $query = 'g.V().'.$first.'.groupCount("processed").by(count()).'.$query;
-        } elseif (substr($this->methods[1], 0, 39) == 'where( __.in("ANALYZED").has("analyzer"') {
+            $query = "g.V().$first.groupCount(\"processed\").by(count()).$query";
+        } elseif (substr($this->methods[1], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
             $first = array_shift($this->methods); // remove first
             $init = array_shift($this->methods); // remove second
             $query = implode('.', $this->methods);

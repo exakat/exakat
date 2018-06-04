@@ -230,20 +230,34 @@ class Phpexec {
                 'phpversion'      => PHP_VERSION,
             );
         } else {
-            $php = <<<'PHP'
-\$results = array(
+            $crc = md5(rand(0, 1000000));
+            $php = <<<PHP
+\\\$results = array(
     'zend.assertions' => ini_get('zend.assertions'),
     'memory_limit'    => ini_get('memory_limit'),
     'tokenizer'       => extension_loaded('tokenizer'),
     'short_open_tags' => ini_get('short_open_tags'),
     'timezone'        => ini_get('date.timezone'),
     'phpversion'      => PHP_VERSION,
+    'crc'             => '$crc',
 );
-echo '\$this->config = '.var_export(\$results, true).';';
+echo '\\\$config = '.var_export(\\\$results, true).';';
 PHP;
-            $res = shell_exec($this->phpexec.' -r "'.$php.' " 2>&1');
+            $res = shell_exec("{$this->phpexec} -r \"$php\" 2>&1");
             if (strpos($res, 'Error') === false ) {
-                eval($res);
+                try {
+                    // @ hides potential errors. 
+                    @eval($res);
+                    
+                    if ($config['crc'] === $crc) {
+                        unset($config['crc']);
+                        $this->config = $config;
+                    } else {
+                        $this->config = array();
+                    }
+                } catch(\Throwable $e) {
+                    $this->config = array();
+                }
             } else {
                 $this->config = array();
             }

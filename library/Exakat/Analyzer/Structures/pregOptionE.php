@@ -52,6 +52,7 @@ sideEffect{
     else if (delimiter == "|") { delimiter = "\\\\|"; delimiterFinal = "\\\\|"; } 
     else if (delimiter == "?") { delimiter = "\\\\?"; delimiterFinal = "\\\\?"; } 
     else if (delimiter == "+") { delimiter = "\\\\+"; delimiterFinal = "\\\\+"; } 
+    else if (delimiter == "\\$") { delimiter = "\\\\\\$"; delimiterFinal = "\\\\\\$"; } 
     else if (delimiter == ".") { delimiter = "\\\\."; delimiterFinal = "\\\\."; } 
     else { delimiterFinal = delimiter; } 
 }
@@ -59,7 +60,7 @@ sideEffect{
 GREMLIN;
 
     public function analyze() {
-        $functions = '\preg_replace';
+        $functions = '\\preg_replace';
         // delimiters
         $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[~';
         
@@ -105,7 +106,9 @@ GREMLIN;
         $this->prepareQuery();
 // Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
 
-        $this->atomFunctionIs(array('\mb_eregi_replace', '\mb_ereg_replace'))
+        $this->atomFunctionIs(array('\\mb_eregi_replace', 
+                                    '\\mb_ereg_replace',
+                                    ))
              ->outWithRank('ARGUMENT', 3)
              ->atomIs('String')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')

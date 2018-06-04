@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('parent::B',
+$expected     = array('parent::By',
+                      'parent::B',
                      );
 
-$expected_not = array('parent::By',
-                      'self::B',
+$expected_not = array('self::B',
                       'self::By',
                      );
 

@@ -35,14 +35,14 @@ class UsedProtectedMethod extends Analyzer {
              ->hasOut('PROTECTED')
              ->outIs('NAME')
              ->codeIsNot(array('__construct', '__destruct'))
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->back('first')
              ->goToAllChildren(self::EXCLUDE_SELF)
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomInsideNoDefinition('Staticmethodcall')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+             ->samePropertyAs('lccode', 'name', self::CASE_SENSITIVE)
              ->back('method');
         $this->prepareQuery();
 
@@ -54,17 +54,17 @@ class UsedProtectedMethod extends Analyzer {
              ->hasOut('PROTECTED')
              ->outIs('NAME')
              ->codeIsNot(array('__construct', '__destruct'))
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->back('first')
              ->goToAllChildren(self::EXCLUDE_SELF)
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomInsideNoDefinition('Methodcall')
              ->outIs('OBJECT')
              ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+             ->samePropertyAs('lccode', 'name', self::CASE_SENSITIVE)
              ->back('method');
         $this->prepareQuery();
     }

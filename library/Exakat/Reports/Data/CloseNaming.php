@@ -30,10 +30,12 @@ class CloseNaming extends Data {
     public function prepare() {
         $counts = array();
         $begin = microtime(true);
-        $res = $this->sqlite->query(<<<SQL
+        $res = $this->sqlite->query(<<<'SQL'
 SELECT variable, COUNT(*) AS nb FROM variables 
-    WHERE LENGTH(variable) > 3 AND 
-          NOT(variable LIKE "{%") GROUP BY variable
+    WHERE LENGTH(variable) > 3    AND 
+          NOT(variable LIKE "{%") AND 
+          NOT(variable LIKE "${%") 
+          GROUP BY variable
 SQL
 );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -77,6 +79,9 @@ SQL
         // One char difference
         $sizes = array_fill(4, 200, array());
         foreach($variables as $variable) {
+            if (strlen($variable) > 200) {
+                continue;
+            }
             $sizes[strlen($variable)][] = $variable;
         }
         

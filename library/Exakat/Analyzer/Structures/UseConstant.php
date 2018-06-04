@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UseConstant extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs(array('php_version', 'php_sapi'))
+        $this->atomFunctionIs(array('\\php_version', '\\php_sapi'))
              ->back('first');
         $this->prepareQuery();
 

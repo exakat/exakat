@@ -29,12 +29,14 @@ class ExakatConfig extends Config {
 
     private $gremlins = array( 'tinkergraph' => 'Tinkergraph',
                                'gsneo4j'     => 'GSNeo4j',
+                               'bitsy'       => 'Bitsy',
                                'janusgraph'  => 'Janusgraph',
                                'nogremlin'   => 'NoGremlin',
                                );
 
     private $loaders = array( 'tinkergraph' => 'SplitGraphson',
                               'gsneo4j'     => 'SplitGraphson',
+                              'bitsy'       => 'SplitGraphson',
                               'janusgraph'  => 'Janusgraph',
                               'nogremlin'   => 'NoLoader',
                               );
@@ -45,24 +47,24 @@ class ExakatConfig extends Config {
 
     public function loadConfig($args) {
         // Default values
-        $inis[] = array(
-                    array('graphdb'            => 'gsneo4j',
+        $inis[] =   array('graphdb'            => 'gsneo4j',
                           'gremlin'            => $this->gremlins['gsneo4j'],
                           'loader'             => $this->loaders['gsneo4j'],
                           'other_php_versions' => array(),
-                         )
+                          'transit_key'        => '',
                        );
 
-        $configFiles = array( $this->projects_root.'/config/exakat.ini',
+        $configFiles = array("{$this->projects_root}/config/exakat.ini",
                              '/etc/exakat/exakat.ini',
                              '/etc/exakat.ini',
                              );
 
-        // Parse every available init file, and stop at the first we find
+        // Attempt each init path, and stop at the first file we find
         $ini = null;
         foreach($configFiles as $id => $configFile) {
             if (file_exists($configFile)) {
-                $inis = parse_ini_file($configFile);
+                // overwrite existing with the new, keep the default values
+                $inis = parse_ini_file($configFile) + $inis[0]; 
                 $optionFiles = $configFile;
             } 
         }
@@ -95,10 +97,10 @@ class ExakatConfig extends Config {
         $this->config['loader']  = $this->loaders[$this->config['graphdb']];
 
         foreach(self::PHP_VERSIONS as $version) {
-            if (empty($this->config['php'.$version])) {
+            if (empty($this->config["php$version"])) {
                 continue;
             }
-            $php = new Phpexec($version[0].'.'.$version[1], $this->config['php'.$version]);
+            $php = new Phpexec("$version[0].$version[1]", $this->config["php$version"]);
             if ($php->isValid()) {
                 $this->config['other_php_versions'][] = $version;
             }
