@@ -101,7 +101,7 @@ class Ambassador extends Reports {
 
         if (empty($baseHTML)) {
             $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
-            $title = ($file == 'index') ? 'Dashboard' : $file;
+            $title = ($file === 'index') ? 'Dashboard' : $file;
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
@@ -2049,13 +2049,13 @@ SQL;
 
     private function getClassByType($type)
     {
-        if ($type == 'Critical' || $type == 'Long') {
+        if ($type === 'Critical' || $type === 'Long') {
             $class = 'text-orange';
-        } elseif ($type == 'Major' || $type == 'Slow') {
+        } elseif ($type === 'Major' || $type === 'Slow') {
             $class = 'text-red';
-        } elseif ($type == 'Minor' || $type == 'Quick') {
+        } elseif ($type === 'Minor' || $type === 'Quick') {
             $class = 'text-yellow';
-        }  elseif ($type == 'Note' || $type == 'Instant') {
+        }  elseif ($type === 'Note' || $type === 'Instant') {
             $class = 'text-blue';
         } else {
             $class = 'text-gray';
@@ -2197,7 +2197,7 @@ SQL;
 
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
 
-                if ($subanalyze == 0) { continue; }
+                if ($subanalyze === 0) { continue; }
                 $table .= '<tr>
     <td>'.$bugfix['title'].'</td>
     <td>'.($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-').'</td>
@@ -3752,7 +3752,7 @@ HTML;
     private function Compatibility($count, $analyzer) {
         if ($count === Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban" style="color: orange"></i>';
-        } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {
+        } elseif ($count === Analyzer::CONFIGURATION_INCOMPATIBLE) {
             return '<i class="fa fa-cogs" style="color: orange"></i>';
         } elseif ($count === 0) {
             return '<i class="fa fa-check-square-o" style="color: green"></i>';

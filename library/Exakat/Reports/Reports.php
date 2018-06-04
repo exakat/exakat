@@ -141,7 +141,7 @@ abstract class Reports {
         
         $available = array();
         $res = $this->sqlite->query('SELECT * FROM themas');
-        if ($res == false) {
+        if ($res === false) {
             // Nothing found.
             return $required;
         }

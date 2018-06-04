@@ -2041,12 +2041,12 @@ GREMLIN;
             return $this->initNewQuery();
         }
 
-        if (substr($this->methods[1], 0, 9) == 'hasLabel(') {
+        if (substr($this->methods[1], 0, 9) === 'hasLabel(') {
             $first = $this->methods[1];
             array_splice($this->methods, 1,1);
             $query = implode('.', $this->methods);
-            $query = 'g.V().'.$first.'.groupCount("processed").by(count()).'.$query;
-        } elseif (substr($this->methods[1], 0, 39) == 'where( __.in("ANALYZED").has("analyzer"') {
+            $query = "g.V().$first.groupCount(\"processed\").by(count()).$query";
+        } elseif (substr($this->methods[1], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
             $first = array_shift($this->methods); // remove first
             $init = array_shift($this->methods); // remove second
             $query = implode('.', $this->methods);

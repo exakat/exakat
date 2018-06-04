@@ -37,10 +37,10 @@ class Datastore {
     const TIMEOUT_READ = 6000;
 
     public function __construct(Config $config, $create = self::REUSE) {
-        $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
+        $this->sqlitePath = "$config->projects_root/projects/{$config->project}/datastore.sqlite";
 
         // if project dir isn't created, we are about to create it.
-        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
+        if (!file_exists("$config->projects_root/projects/{$config->project}")) {
             return;
         }
 
@@ -101,7 +101,7 @@ class Datastore {
 
             $cols = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                if ($row['name'] == 'id') { continue; }
+                if ($row['name'] === 'id') { continue; }
                 $cols[] = $row['name'];
             }
 
@@ -128,7 +128,7 @@ class Datastore {
             $values[] = '('.makeList($d, "'").')';
             
             if (count($values) > 10) {
-                $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ".implode(', ', $values);
+                $query = "REPLACE INTO $table (".makeList($cols, '').") VALUES ".makeList($values, '');
                 $this->sqliteWrite->querySingle($query);
 
                 $values = array();
@@ -136,7 +136,7 @@ class Datastore {
         }
 
         if (!empty($values)) {
-            $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ".implode(', ', $values);
+                $query = "REPLACE INTO $table (".makeList($cols, '').") VALUES ".makeList($values, '');
             $this->sqliteWrite->querySingle($query);
         }
 
@@ -159,7 +159,7 @@ class Datastore {
 
             $cols = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                if ($row['name'] == 'id') { continue; }
+                if ($row['name'] === 'id') { continue; }
                 $cols[] = $row['name'];
             }
         }
@@ -299,9 +299,11 @@ class Datastore {
     }
 
     private function checkTable($table) {
-        $res = $this->sqliteWrite->querySingle('SELECT count(*) FROM sqlite_master WHERE name="'.$table.'"');
+        $res = $this->sqliteWrite->querySingle("SELECT count(*) FROM sqlite_master WHERE name=\"$table\"");
 
-        if ($res == 1) { return true; }
+        if ($res === 1) { 
+            return true; 
+        }
 
         switch($table) {
             case 'compilation52' :
