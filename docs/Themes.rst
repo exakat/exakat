@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 28 May 2018 13:30:42 +0000
-.. comment: Generation hash : 3c0ba59300b9d19dc2d4302320c91109a12f88c2
+.. comment: Generation date : Mon, 04 Jun 2018 08:34:16 +0000
+.. comment: Generation hash : 140802ef856f36e6141fea4d96dd03134992760e
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 350 analysis
+Total : 351 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -108,6 +108,7 @@ Total : 350 analysis
 * :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Check All Types <check-all-types>`
+* :ref:`Check JSON <check-json>`
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Class Should Be Final By Ocramius <class-should-be-final-by-ocramius>`
@@ -487,7 +488,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 63 analysis
+Total : 65 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -498,6 +499,7 @@ Total : 63 analysis
 * :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
+* :ref:`Const Visibility Usage <const-visibility-usage>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
 * :ref:`Define With Array <define-with-array>`
@@ -545,6 +547,7 @@ Total : 63 analysis
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
 * :ref:`Use Const And Functions <use-const-and-functions>`
 * :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
+* :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Variable Global <variable-global>`
 * :ref:`__debugInfo() Usage <\_\_debuginfo()-usage>`
 * :ref:`ext/dba`
@@ -558,7 +561,7 @@ Total : 63 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 59 analysis
+Total : 61 analysis
 
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -570,6 +573,7 @@ Total : 59 analysis
 * Classes/Anonymous
 * Classes/CantInheritAbstractMethod
 * Classes/ChildRemoveTypehint
+* Classes/ConstVisibilityUsage
 * Classes/IntegerAsProperty
 * Classes/NonStaticMethodsCalledStatic
 * Classes/NullOnNew
@@ -607,6 +611,7 @@ Total : 59 analysis
 * Php/StaticclassUsage
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
+* Php/UseNullableType
 * Php/debugInfoUsage
 * Structures/ConstantScalarExpression
 * Structures/DereferencingAS
@@ -625,7 +630,7 @@ Total : 59 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 51 analysis
+Total : 53 analysis
 
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -634,6 +639,7 @@ Total : 51 analysis
 * Classes/Anonymous
 * Classes/CantInheritAbstractMethod
 * Classes/ChildRemoveTypehint
+* Classes/ConstVisibilityUsage
 * Classes/IntegerAsProperty
 * Classes/NonStaticMethodsCalledStatic
 * Classes/NullOnNew
@@ -668,6 +674,7 @@ Total : 51 analysis
 * Php/ScalarTypehintUsage
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
+* Php/UseNullableType
 * Php/debugInfoUsage
 * Structures/ConstantScalarExpression
 * Structures/IssetWithConstant
@@ -684,12 +691,13 @@ Total : 51 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 40 analysis
+Total : 42 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * Classes/Anonymous
 * Classes/CantInheritAbstractMethod
 * Classes/ChildRemoveTypehint
+* Classes/ConstVisibilityUsage
 * Classes/IntegerAsProperty
 * Classes/NonStaticMethodsCalledStatic
 * Classes/NullOnNew
@@ -718,6 +726,7 @@ Total : 40 analysis
 * Php/ScalarTypehintUsage
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
+* Php/UseNullableType
 * Structures/IssetWithConstant
 * Structures/NoGetClassNull
 * Structures/PHP7Dirname
@@ -732,7 +741,7 @@ Total : 40 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 36 analysis
+Total : 38 analysis
 
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -750,6 +759,7 @@ Total : 36 analysis
 * :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
 * Classes/CantInheritAbstractMethod
 * Classes/ChildRemoveTypehint
+* Classes/ConstVisibilityUsage
 * Classes/IntegerAsProperty
 * Exceptions/MultipleCatch
 * Functions/funcGetArgModified
@@ -766,6 +776,7 @@ Total : 36 analysis
 * Php/Php72NewClasses
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
+* Php/UseNullableType
 * Structures/BreakOutsideLoop
 * Structures/NoGetClassNull
 * Structures/pregOptionE
@@ -1022,7 +1033,6 @@ Total : 54 analysis
 * :ref:`Too Many Parameters <too-many-parameters>`
 * :ref:`Use Count Recursive <use-count-recursive>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
-* :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Use session_start() Options <use-session\_start()-options>`
 * :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 * Arrays/RandomlySortedLiterals
@@ -1040,6 +1050,7 @@ Total : 54 analysis
 * Php/LogicalInLetters
 * Php/ShouldUseArrayColumn
 * Php/ShouldUseCoalesce
+* Php/UseNullableType
 * Structures/BooleanStrictComparison
 * Structures/CouldUseDir
 * Structures/DropElseAfterReturn

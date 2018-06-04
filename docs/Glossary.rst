@@ -259,6 +259,7 @@ Glossary
 
     + `die`
 
+      + :ref:`Check JSON <check-json>`
       + :ref:`Don't Echo Error <don't-echo-error>`
       + :ref:`Error Messages <error-messages>`
       + :ref:`Exit() Usage <exit()-usage>`
@@ -643,6 +644,10 @@ Glossary
       + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
       + :ref:`Use random_int() <use-random\_int()>`
+
+    + `readfile()`
+
+      + :ref:`Join file() <join-file()>`
 
 
 + `S`
