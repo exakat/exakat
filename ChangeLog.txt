@@ -1,4 +1,4 @@
-Version 1.3.0 (Xue Rengui, coming up)
+Version 1.3.1 (Liu Hongji, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,27 @@ Version 1.3.0 (Xue Rengui, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.3.0 (Xue Rengui, 2018-06-03)
++ Architecture
+    + Added support for Tinkergraph 3.3.3
+    + Handles situations where exakat has no database
+    + Check for PHP version at bootstrap
++ Report
+    + Ambassador : Updated PHP recommendation report with PHP 7.3
+    + All : Variables don't sport ... nor & anymore
++ Analyzer
+    + New analysis : Single Use Variable
+    + New analysis : Should Use Operator
+    + New analysis : Check JSON production
+    + New analysis : Report visibility usage with constants
+    + Upgraded analysis : used constant is also applied to defined()
+    + Upgraded analysis : used protected methods is case insensitive
+    + Upgraded analysis : used directives handle function version
+    + Upgraded analysis : added lcg_value for better rand
+    + Upgraded analysis : Use Nullable extended to methods, closures.
+    + Upgraded analysis : Fixed support for '_' native function
+    + Checked unit tests : 2895 / 2907 test pass (99% pass). 
 
 Version 1.2.9 (Wang Gui, 2018-05-28)
 + Architecture
