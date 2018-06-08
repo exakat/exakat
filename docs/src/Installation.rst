@@ -85,7 +85,7 @@ PHP 7.0 or more recent, curl, homebrew are required.
     mkdir exakat
     cd exakat
     curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
-    curl -o apache-tinkerpop-gremlin-server-3.2.9-bin.zip "https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=tinkerpop/3.2.9/apache-tinkerpop-gremlin-server-3.2.9-bin.zip"
+    curl -o apache-tinkerpop-gremlin-server-3.2.9-bin.zip https://dist.exakat.io/apache-tinkerpop-gremlin-server-3.2.9-bin.zip
     unzip apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
     mv apache-tinkerpop-gremlin-server-3.2.9 tinkergraph
     rm -rf apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
@@ -149,7 +149,7 @@ PHP 7.2 (7.0 or more recent), wget and unzip are expected.
     mkdir exakat
     cd exakat
     wget -O exakat.phar http://dist.exakat.io/index.php?file=latest
-    wget -O apache-tinkerpop-gremlin-server-3.2.9-bin.zip "https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=tinkerpop/3.2.9/apache-tinkerpop-gremlin-server-3.2.9-bin.zip"
+    wget -O apache-tinkerpop-gremlin-server-3.2.9-bin.zip https://dist.exakat.io/apache-tinkerpop-gremlin-server-3.2.9-bin.zip
     unzip apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
     mv apache-tinkerpop-gremlin-server-3.2.9 tinkergraph
     rm -rf apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
@@ -170,7 +170,7 @@ Composer installation requires the creation of two folders : config and tinkergr
 
     cd /path/to/code
     composer require exakat/exakat:~1.2.8
-    wget -O apache-tinkerpop-gremlin-server-3.2.9-bin.zip "https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=tinkerpop/3.2.9/apache-tinkerpop-gremlin-server-3.2.9-bin.zip"
+    wget -O apache-tinkerpop-gremlin-server-3.2.9-bin.zip https://dist.exakat.io/apache-tinkerpop-gremlin-server-3.2.9-bin.zip
     unzip apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
     mv apache-tinkerpop-gremlin-server-3.2.9 tinkergraph
     rm -rf apache-tinkerpop-gremlin-server-3.2.9-bin.zip 
