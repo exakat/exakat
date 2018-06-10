@@ -50,6 +50,7 @@ class Nullval extends Plugin {
             case 'Concatenation' :
             case 'Bitshift' :
             case 'Comparison' :
+            case 'Staticclass' :
                 $atom->isNull = false;
                 break;
 

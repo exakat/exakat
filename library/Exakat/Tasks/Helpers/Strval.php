@@ -71,6 +71,10 @@ class Strval extends Plugin {
             case 'Void' :
                 $atom->noDelimiter = '';
                 break;
+
+            case 'Staticclass' :
+                $atom->noDelimiter = $atom->fullcode;
+                break;
     
             case 'Parenthesis' :
                 $atom->noDelimiter = $extras['CODE']->noDelimiter;

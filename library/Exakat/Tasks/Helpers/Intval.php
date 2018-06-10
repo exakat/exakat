@@ -67,6 +67,7 @@ class Intval extends Plugin {
                 $atom->intval = (int) (mb_strtolower($atom->code) === 'true');
                 break;
     
+            case 'Staticclass' :
             case 'Null' :
             case 'Void' :
                 $atom->intval = 0;

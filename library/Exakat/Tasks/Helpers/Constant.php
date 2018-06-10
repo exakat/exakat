@@ -57,6 +57,7 @@ class Constant extends Plugin {
             case 'Nsname' :
             case 'Identifier' :
             case 'Staticconstant' :
+            case 'Staticclass' :
                 $atom->constant = true;
                 break;
     

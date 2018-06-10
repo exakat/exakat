@@ -4431,6 +4431,9 @@ SQL;
             $block = $this->processDollar();
             $this->popExpression();
             $right = $this->processFCOA($block);
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLASS) {
+            $right = $this->tokens[$this->id + 1][1];
+            ++$this->id; // Skip ::
         } else {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
                 ++$this->id;
@@ -4449,31 +4452,50 @@ SQL;
         $this->contexts[self::CONTEXT_NEW] = $newContext;
         $this->exitContext();
 
-        if ($right->token === 'T_CLASS') {
+        if (is_string($right) && mb_strtolower($right) === 'class') {
             $static = $this->addAtom('Staticclass');
             $links = 'CLASS';
+            $fullcode = $left->fullcode.'::'.$right;
+            $this->runPlugins($left);
+            $this->runPlugins($static);
+            // This should actually be the value of any USE statement
+            if (isset($this->uses['class'][mb_strtolower($left->fullcode)])) {
+                $noDelimiter = $this->uses['class'][mb_strtolower($left->fullcode)]->fullcode;
+                if (($length = strpos($noDelimiter, ' ')) !== false) {
+                    $noDelimiter = substr($noDelimiter, 0, $length);
+                }
+                $static->noDelimiter = $noDelimiter;
+            } else {
+                $static->noDelimiter = $left->fullcode;
+            }
         } elseif ($right->atom === 'Name') {
             $static = $this->addAtom('Staticconstant');
-            $links = 'CONSTANT';
+            $this->addLink($static, $right, 'CONSTANT');
+            $fullcode = $left->fullcode.'::'.$right->fullcode;
+            $this->runPlugins($static, array('CLASS'    => $left,
+                                             'CONSTANT' => $right));
         } elseif (in_array($right->atom, array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block', 'Boolean', 'Null'))) {
             $static = $this->addAtom('Staticproperty');
-            $links = 'MEMBER';
+            $this->addLink($static, $right, 'MEMBER');
+            $fullcode = $left->fullcode.'::'.$right->fullcode;
+            $this->runPlugins($static, array('CLASS'  => $left,
+                                             'MEMBER' => $right));
         } elseif ($right->atom === 'Methodcallname') {
             $static = $this->addAtom('Staticmethodcall');
-            $links = 'METHOD';
+            $this->addLink($static, $right, 'METHOD');
+            $fullcode = $left->fullcode.'::'.$right->fullcode;
+            $this->runPlugins($static, array('CLASS'  => $left,
+                                             'METHOD' => $right));
         } else {
             throw new LoadError("Unprocessed atom in static call (right) : ".$right->atom.':'.$this->filename.':'.__LINE__);
         }
 
         $this->addLink($static, $left, 'CLASS');
-        $this->addLink($static, $right, $links);
 
         $static->code     = $this->tokens[$current][1];
-        $static->fullcode = $left->fullcode.'::'.$right->fullcode;
+        $static->fullcode = $fullcode;
         $static->line     = $this->tokens[$current][2];
         $static->token    = $this->getToken($this->tokens[$current][0]);
-        $this->runPlugins($static, array('CLASS' => $left,
-                                         $links  => $right));
 
         if (!empty($left->fullnspath)){
             if ($static->atom === 'Staticmethodcall' && !empty($right->fullnspath)) {
