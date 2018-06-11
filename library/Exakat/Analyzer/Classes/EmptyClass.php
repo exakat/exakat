@@ -34,8 +34,16 @@ class EmptyClass extends Analyzer {
     public function analyze() {
         // class x { /* nothing */ }
         $this->atomIs('Class')
+             ->hasNoOut(array('EXTENDS', 'USE'))
              ->analyzerIsNot('Exceptions/DefinedExceptions')
-             ->raw('not(where( __.out("METHOD", "MAGICMETHOD") ) )');
+             ->hasNoOut(array('METHOD', 'MAGICMETHOD'));
+        $this->prepareQuery();
+
+        // class x extends B { /* nothing */ }
+        $this->atomIs('Class')
+             ->hasOut('EXTENDS')
+             ->analyzerIsNot('Exceptions/DefinedExceptions')
+             ->hasNoOut(array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE'));
         $this->prepareQuery();
     }
 }
