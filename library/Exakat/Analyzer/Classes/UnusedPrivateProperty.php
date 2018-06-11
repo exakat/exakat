@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedPrivateProperty extends Analyzer {
     public function dependsOn() {
-        return array('Classes/UsedPrivateProperty');
+        return array('Classes/UsedPrivateProperty',
+                    );
     }
 
     public function analyze() {
