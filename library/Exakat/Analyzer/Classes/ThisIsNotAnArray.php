@@ -28,6 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class ThisIsNotAnArray extends Analyzer {
 
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+
         // direct class
         $this->atomIs('This')
              ->inIs(array('VARIABLE', 'APPEND'))
@@ -36,8 +38,13 @@ class ThisIsNotAnArray extends Analyzer {
              // class may be \ArrayAccess
              ->goToClass()
              ->raw('not( where( __.out("IMPLEMENTS").has("fullnspath", "\\\\arrayaccess") ) )')
-             ->raw('not( where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION")).emit().times('.self::MAX_LOOPING.')
-                        .out("IMPLEMENTS").has("fullnspath", "\\\\arrayaccess") ) )')
+             ->raw(<<<GREMLIN
+not( 
+    where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION")).emit().times($MAX_LOOPING)
+                        .out("IMPLEMENTS").has("fullnspath", "\\\\arrayaccess") ) 
+    )
+GREMLIN
+)
              ->back('results');
         $this->prepareQuery();
     }

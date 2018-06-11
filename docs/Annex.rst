@@ -295,6 +295,8 @@ A number of applications were scanned in order to find real life examples of pat
 * `Piwigo <https://www.piwigo.org/>`_
 * `shopware <https://www.shopware.com/>`_
 * `Vanilla <https://open.vanillaforums.com/>`_
+* `WordPress <https://www.wordpress.com/>`_
+* Magento
 * `Tine20 <https://www.tine20.com/>`_
 * `Typo3 <https://typo3.org/>`_
 * `SugarCrm <https://www.sugarcrm.com/>`_
@@ -310,7 +312,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Zurmo <http://zurmo.org/>`_
 * `Zencart <https://www.zen-cart.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
-* `WordPress <https://www.wordpress.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `NextCloud <https://nextcloud.com/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
@@ -388,7 +389,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Check JSON (Structures/CheckJson ; Analyze)
   * Const Visibility Usage (Classes/ConstVisibilityUsage)
-  * Should Use Operator (Structures/ShouldUseOperator ; Unassigned)
+  * Should Use Operator (Structures/ShouldUseOperator ; Suggestions)
   * Single Use Variables (Variables/UniqueUsage ; Under Work)
 
 * 1.2.9
@@ -469,7 +470,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Could Use array_fill_keys (Structures/CouldUseArrayFillKeys ; Suggestions)
   * Dynamic Library Loading (Security/DynamicDl ; Security)
-  * PHP 7.3 Last Empty Argument (Php/PHP73LastEmptyArgument ; CompatibilityPHP73)
+  * PHP 7.3 Last Empty Argument (Php/PHP73LastEmptyArgument ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Property Could Be Local (Classes/PropertyCouldBeLocal)
   * Use Count Recursive (Structures/UseCountRecursive ; Suggestions)
   * ext/leveldb (Extensions/Extleveldb ; Appinfo)
@@ -593,7 +594,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * No get_class() With Null (Structures/NoGetClassNull ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Php 7.2 New Class (Php/Php72NewClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Slice Arrays First (Arrays/SliceFirst)
-  * Unknown Pcre2 Option (Php/UnknownPcre2Option ; Analyze)
+  * Unknown Pcre2 Option (Php/UnknownPcre2Option ; Analyze, CompatibilityPHP73)
   * Use List With Foreach (Structures/UseListWithForeach ; Suggestions)
   * Use PHP7 Encapsed Strings (Performances/PHP7EncapsedStrings ; Performances)
   * ext/vips (Extensions/Extvips ; Appinfo, Appcontent)
@@ -895,7 +896,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Missing Cases In Switch (Structures/MissingCases ; Analyze)
   * New Constants In PHP 7.2 (Php/Php72NewConstants ; CompatibilityPHP72)
   * New Functions In PHP 7.2 (Php/Php72NewFunctions ; CompatibilityPHP72)
-  * New Functions In PHP 7.3 (Php/Php73NewFunctions ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
+  * New Functions In PHP 7.3 (Php/Php73NewFunctions ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * No Echo In Route Callable (Slim/NoEchoInRouteCallable ; Slim)
   * Slim Missing Classes (Slim/SlimMissing ; Internal)
   * SlimPHP 1.0.0 Undefined Classes (Slim/Slimphp10 ; Slim)
@@ -1258,7 +1259,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Avoid array_unique() (Structures/NoArrayUnique ; Performances)
   * Avoid get_class() (Structures/UseInstanceof ; Analyze, Codacy, Simple)
   * Avoid sleep()/usleep() (Security/NoSleep ; Security)
-  * Bad Constants Names (Constants/BadConstantnames ; PHP recommendations)
+  * Bad Constants Names (Constants/BadConstantnames ; Analyze, PHP recommendations)
   * Binary Glossary (Type/Binary ; Inventory, Appinfo, CompatibilityPHP53)
   * Blind Variables (Variables/Blind ; )
   * Bracketless Blocks (Structures/Bracketless ; Coding Conventions)
@@ -1561,7 +1562,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Overwritten Literals (Variables/OverwrittenLiterals ; Analyze, Codacy)
   * PHP 7.0 New Classes (Php/Php70NewClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * PHP 7.0 New Interfaces (Php/Php70NewInterfaces ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * PHP 7.0 Removed Directives (Php/Php70RemovedDirective ; CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP73)
+  * PHP 7.0 Removed Directives (Php/Php70RemovedDirective ; CompatibilityPHP70, CompatibilityPHP71)
   * PHP 7.1 Removed Directives (Php/Php71RemovedDirective ; CompatibilityPHP71)
   * PHP 70 Removed Functions (Php/Php70RemovedFunctions ; CompatibilityPHP70, CompatibilityPHP71)
   * PHP Arrays Index (Arrays/Phparrayindex ; Appinfo)
@@ -1575,7 +1576,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * PHP5 Indirect Variable Expression (Variables/Php5IndirectExpression ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * PHP7 Dirname (Structures/PHP7Dirname ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, Suggestions)
   * Parent, Static Or Self Outside Class (Classes/PssWithoutClass ; Analyze, Codacy, Simple)
-  * Parenthesis As Parameter (Php/ParenthesisAsParameter ; CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
+  * Parenthesis As Parameter (Php/ParenthesisAsParameter ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Pear Usage (Php/PearUsage ; Appinfo, Appcontent)
   * Perl Regex (Type/Pcre ; Inventory)
   * Php 7 Indirect Expression (Variables/Php7IndirectExpression ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
@@ -1643,7 +1644,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Static Methods (Classes/StaticMethods ; Appinfo)
   * Static Methods Called From Object (Classes/StaticMethodsCalledFromObject ; Analyze, Codacy, Simple)
   * Static Methods Can't Contain $this (Classes/StaticContainsThis ; Analyze, ClearPHP, Codacy, Simple, Level 1)
-  * Static Names (Classes/StaticCpm ; )
   * Static Properties (Classes/StaticProperties ; Appinfo)
   * Static Variables (Variables/StaticVariables ; Appinfo)
   * Strict Comparison With Booleans (Structures/BooleanStrictComparison ; Analyze, Codacy, Simple, Suggestions, Level 2)
@@ -1747,7 +1747,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Used Once Variables (In Scope) (Variables/VariableUsedOnceByContext ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 4)
   * Used Once Variables (Variables/VariableUsedOnce ; Analyze, OneFile, Codacy, Simple)
   * Used Private Methods (Classes/UsedPrivateMethod ; Internal)
-  * Used Protected Method (Classes/UsedProtectedMethod ; Dead code)
+  * Used Protected Method (Classes/UsedProtectedMethod ; )
   * Used Static Properties (Classes/UsedPrivateProperty ; Internal)
   * Used Trait (Traits/UsedTrait ; Internal)
   * Used Use (Namespaces/UsedUse ; )
@@ -1926,7 +1926,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * mcrypt_create_iv() With Default Values (Structures/McryptcreateivWithoutOption ; CompatibilityPHP70, Codacy)
   * parse_str() Warning (Security/parseUrlWithoutParameters ; Security)
   * preg_match_all() Flag (Php/PregMatchAllFlag ; Codacy, Simple, Suggestions)
-  * preg_replace With Option e (Structures/pregOptionE ; Analyze, Security, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, Codacy, Simple, CompatibilityPHP73)
+  * preg_replace With Option e (Structures/pregOptionE ; Analyze, Security, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, Codacy, Simple)
   * set_exception_handler() Warning (Php/SetExceptionHandlerPHP7 ; CompatibilityPHP70)
   * var_dump()... Usage (Structures/VardumpUsage ; Analyze, Security, ClearPHP, Codacy)
 
@@ -2023,7 +2023,9 @@ List of external links mentionned in this documentation.
 * `array_filter <https://php.net/array_filter>`_
 * `array_search <http://php.net/array_search>`_
 * `array_unique <http://php.net/array_unique>`_
+* `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
+* `assert <http://php.net/assert>`_
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid Else, Return Early <http://blog.timoxley.com/post/47041269194/avoid-else-return-early>`_
@@ -2109,7 +2111,6 @@ List of external links mentionned in this documentation.
 * `Exakat <http://www.exakat.io/>`_
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
 * `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_
-* `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_
 * `exakat/exakat <https://hub.docker.com/r/exakat/exakat/>`_
 * `Exception::__construct <http://php.net/manual/en/exception.construct.php>`_
 * `Exceptions <http://php.net/manual/en/language.exceptions.php>`_
@@ -2143,15 +2144,15 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
@@ -2298,8 +2299,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
-* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
@@ -2334,7 +2335,6 @@ List of external links mentionned in this documentation.
 * `runkit <http://php.net/manual/en/book.runkit.php>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
-* `Semaphore <http://php.net/manual/en/book.sem.php>`_
 * `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
 * `Session <http://php.net/manual/en/book.session.php>`_
 * `session_regenerateid() <http://php.net/session_regenerate_id>`_
@@ -2355,8 +2355,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2372,7 +2372,7 @@ List of external links mentionned in this documentation.
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
-* `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
+* `The main PPA for PHP (7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `Tidy <http://php.net/manual/en/book.tidy.php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
 * `tokyo_tyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
@@ -2383,6 +2383,7 @@ List of external links mentionned in this documentation.
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type operators <http://php.net/instanceof>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
@@ -2397,8 +2398,8 @@ List of external links mentionned in this documentation.
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2611,6 +2612,7 @@ Analyze
 |   analyzer[] = "Classes/WeakType";
 |   analyzer[] = "Classes/WrongCase";
 |   analyzer[] = "Classes/WrongName";
+|   analyzer[] = "Constants/BadConstantnames";
 |   analyzer[] = "Constants/ConstRecommended";
 |   analyzer[] = "Constants/ConstantStrangeNames";
 |   analyzer[] = "Constants/CreatedOutsideItsNamespace";
@@ -2978,6 +2980,8 @@ CompatibilityPHP53
 |   analyzer[] = "Php/NoListWithString";
 |   analyzer[] = "Php/NoStringWithAppend";
 |   analyzer[] = "Php/NoSubstrMinusOne";
+|   analyzer[] = "Php/PHP73LastEmptyArgument";
+|   analyzer[] = "Php/ParenthesisAsParameter";
 |   analyzer[] = "Php/Php54NewFunctions";
 |   analyzer[] = "Php/Php55NewFunctions";
 |   analyzer[] = "Php/Php56NewFunctions";
@@ -3049,6 +3053,8 @@ CompatibilityPHP54
 |   analyzer[] = "Php/NoListWithString";
 |   analyzer[] = "Php/NoStringWithAppend";
 |   analyzer[] = "Php/NoSubstrMinusOne";
+|   analyzer[] = "Php/PHP73LastEmptyArgument";
+|   analyzer[] = "Php/ParenthesisAsParameter";
 |   analyzer[] = "Php/Php54RemovedFunctions";
 |   analyzer[] = "Php/Php55NewFunctions";
 |   analyzer[] = "Php/Php56NewFunctions";
@@ -3118,6 +3124,8 @@ CompatibilityPHP55
 |   analyzer[] = "Php/NoListWithString";
 |   analyzer[] = "Php/NoStringWithAppend";
 |   analyzer[] = "Php/NoSubstrMinusOne";
+|   analyzer[] = "Php/PHP73LastEmptyArgument";
+|   analyzer[] = "Php/ParenthesisAsParameter";
 |   analyzer[] = "Php/Password55";
 |   analyzer[] = "Php/Php55RemovedFunctions";
 |   analyzer[] = "Php/Php56NewFunctions";
@@ -3174,6 +3182,8 @@ CompatibilityPHP56
 |   analyzer[] = "Php/NoListWithString";
 |   analyzer[] = "Php/NoStringWithAppend";
 |   analyzer[] = "Php/NoSubstrMinusOne";
+|   analyzer[] = "Php/PHP73LastEmptyArgument";
+|   analyzer[] = "Php/ParenthesisAsParameter";
 |   analyzer[] = "Php/Php70NewClasses";
 |   analyzer[] = "Php/Php70NewFunctions";
 |   analyzer[] = "Php/Php70NewInterfaces";
@@ -3225,7 +3235,7 @@ CompatibilityPHP70
 |   analyzer[] = "Php/ListWithKeys";
 |   analyzer[] = "Php/ListWithReference";
 |   analyzer[] = "Php/NoSubstrMinusOne";
-|   analyzer[] = "Php/ParenthesisAsParameter";
+|   analyzer[] = "Php/PHP73LastEmptyArgument";
 |   analyzer[] = "Php/Php70RemovedDirective";
 |   analyzer[] = "Php/Php70RemovedFunctions";
 |   analyzer[] = "Php/Php71NewClasses";
@@ -3264,7 +3274,7 @@ CompatibilityPHP71
 |   analyzer[] = "Php/HashAlgos53";
 |   analyzer[] = "Php/HashAlgos54";
 |   analyzer[] = "Php/ListWithReference";
-|   analyzer[] = "Php/ParenthesisAsParameter";
+|   analyzer[] = "Php/PHP73LastEmptyArgument";
 |   analyzer[] = "Php/Php70RemovedDirective";
 |   analyzer[] = "Php/Php70RemovedFunctions";
 |   analyzer[] = "Php/Php71NewFunctions";
@@ -3293,7 +3303,7 @@ CompatibilityPHP72
 |   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/HashUsesObjects";
 |   analyzer[] = "Php/ListWithReference";
-|   analyzer[] = "Php/ParenthesisAsParameter";
+|   analyzer[] = "Php/PHP73LastEmptyArgument";
 |   analyzer[] = "Php/Php72Deprecation";
 |   analyzer[] = "Php/Php72NewClasses";
 |   analyzer[] = "Php/Php72NewConstants";
@@ -3314,10 +3324,8 @@ CompatibilityPHP73
 ------------------
 
 | [CompatibilityPHP73]
-|   analyzer[] = "Php/PHP73LastEmptyArgument";
-|   analyzer[] = "Php/ParenthesisAsParameter";
-|   analyzer[] = "Php/Php70RemovedDirective";
-|   analyzer[] = "Structures/pregOptionE";| 
+|   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/UnknownPcre2Option";| 
 
 
 
@@ -3337,7 +3345,6 @@ Dead code
 |   analyzer[] = "Classes/UnusedPrivateMethod";
 |   analyzer[] = "Classes/UnusedPrivateProperty";
 |   analyzer[] = "Classes/UnusedProtectedMethods";
-|   analyzer[] = "Classes/UsedProtectedMethod";
 |   analyzer[] = "Constants/UnusedConstants";
 |   analyzer[] = "Exceptions/AlreadyCaught";
 |   analyzer[] = "Exceptions/CaughtButNotThrown";
@@ -3537,6 +3544,7 @@ Suggestions
 |   analyzer[] = "Structures/ReuseVariable";
 |   analyzer[] = "Structures/ShouldUseForeach";
 |   analyzer[] = "Structures/ShouldUseMath";
+|   analyzer[] = "Structures/ShouldUseOperator";
 |   analyzer[] = "Structures/SubstrLastArg";
 |   analyzer[] = "Structures/UnreachableCode";
 |   analyzer[] = "Structures/UseCountRecursive";

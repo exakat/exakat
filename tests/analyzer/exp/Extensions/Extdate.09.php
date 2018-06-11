@@ -6,7 +6,7 @@ $expected     = array('\\DateTime',
                       'DateInterval( )',
                      );
 
-$expected_not = array(
+$expected_not = array('Date\\Interval( )',
                      );
 
 ?>

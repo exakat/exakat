@@ -33,7 +33,7 @@ class StrangeName extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs(self::$VARIABLES_ALL)
-             ->regexIs('code', '/(.)\\1{2,}/');
+             ->regexIs('fullcode', '(.)\\1{2,}');
         $this->prepareQuery();
 
 /*

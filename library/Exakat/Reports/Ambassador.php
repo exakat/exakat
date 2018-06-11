@@ -2380,9 +2380,9 @@ SQL;
             } else{
                 $row = $results->fetchArray(\SQLITE3_ASSOC);
                 if ($row['nb'] === 0) {
-                    $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
-                } else {
                     $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';
+                } else {
+                    $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
                 }
             }
         }
@@ -3735,15 +3735,15 @@ HTML;
             return '-';
         }
         
-        if (strpos($cve, ', ') !== false) {
+        if (strpos($cve, ', ') === false) {
+            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+        } else {
             $cves = explode(', ', $cve);
             $cveHtml = array();
             foreach($cves as $cve) {
                 $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
             }
             $cveHtml = implode(',<br />', $cveHtml);
-        } else {
-            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
         }
 
         return $cveHtml;

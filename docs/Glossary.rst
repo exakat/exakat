@@ -129,6 +129,10 @@ Glossary
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
       + :ref:`Slow Functions <slow-functions>`
 
+    + `arrayaccess`
+
+      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
+
     + `assert()`
 
       + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
@@ -459,6 +463,7 @@ Glossary
       + :ref:`Missing Parenthesis <missing-parenthesis>`
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Make Alias <should-make-alias>`
+      + :ref:`Should Use Operator <should-use-operator>`
       + :ref:`Undefined Class 2.0 <undefined-class-2.0>`
       + :ref:`Undefined Class 2.1 <undefined-class-2.1>`
       + :ref:`Undefined Class 2.2 <undefined-class-2.2>`
@@ -857,6 +862,10 @@ Glossary
       + :ref:`Already Parents Interface <already-parents-interface>`
       + :ref:`Anonymous Classes <anonymous-classes>`
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+
+    + `__TRAIT__`
+
+      + :ref:`Bad Constants Names <bad-constants-names>`
 
     + `__call`
 

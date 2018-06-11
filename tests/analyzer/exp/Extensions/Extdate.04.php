@@ -3,7 +3,7 @@
 $expected     = array('\\DateTime( )',
                      );
 
-$expected_not = array(
+$expected_not = array('\\TimeDate( )',
                      );
 
 ?>

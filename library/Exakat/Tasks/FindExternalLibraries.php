@@ -25,7 +25,6 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Phpexec;
-use Exakat\Tasks\Precedence;
 use Exakat\Exceptions\MissingFile;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
@@ -98,7 +97,7 @@ class FindExternalLibraries extends Tasks {
 
     public function run() {
         $project = $this->config->project;
-        if ($project == 'default') {
+        if ($project === 'default') {
             throw new ProjectNeeded();
         }
 
@@ -141,7 +140,7 @@ class FindExternalLibraries extends Tasks {
         $ignore = 'None';
         $ignoreLength = 0;
         foreach($files as $id => $file) {
-            if (substr($file, 0, $ignoreLength) == $ignore) {
+            if (substr($file, 0, $ignoreLength) === $ignore) {
                 display( "Ignore $file ($ignore)\n");
                 continue;
             }
@@ -160,7 +159,7 @@ class FindExternalLibraries extends Tasks {
             $newConfigs = call_user_func_array('array_merge', $r);
         }
 
-        if (count($newConfigs) == 1) {
+        if (count($newConfigs) === 1) {
             display('One external library is going to be omitted : '.implode(', ', array_keys($newConfigs)));
         } elseif (!empty($newConfigs)) {
             display(count(array_keys($newConfigs)).' external libraries are going to be omitted : '.implode(', ', array_keys($newConfigs)));
@@ -196,7 +195,7 @@ class FindExternalLibraries extends Tasks {
         $return = array();
 
         $tokens = $this->php->getTokenFromFile($filename);
-        if (count($tokens) == 1) {
+        if (count($tokens) === 1) {
             return $return;
         }
         $this->log->log("$filename : ".count($tokens));
@@ -209,11 +208,11 @@ class FindExternalLibraries extends Tasks {
             if ($token[0] === $this->phpTokens['T_COMMENT'])     { continue; }
 
             // If we find a namespace, it is not the global space, and we may skip the rest.
-            if ($token[0] == $this->phpTokens['T_NAMESPACE']) {
+            if ($token[0] === $this->phpTokens['T_NAMESPACE']) {
                 return;
             }
 
-            if ($token[0] == $this->phpTokens['T_CLASS']) {
+            if ($token[0] === $this->phpTokens['T_CLASS']) {
                 if (!is_array($tokens[$id + 2])) { continue; }
                 $class = $tokens[$id + 2][1];
                 if (!is_string($class)) {
@@ -224,11 +223,11 @@ class FindExternalLibraries extends Tasks {
                 $lclass = strtolower($class);
                 if (isset($this->classic[$lclass])) {
                     $returnPath = '';
-                    if ($this->classic[$lclass] == static::WHOLE_DIR) {
+                    if ($this->classic[$lclass] === static::WHOLE_DIR) {
                         $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
-                    } elseif ($this->classic[$lclass] == static::PARENT_DIR) {
+                    } elseif ($this->classic[$lclass] === static::PARENT_DIR) {
                         $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename), 2);
-                    } elseif ($this->classic[$lclass] == static::FILE_ONLY) {
+                    } elseif ($this->classic[$lclass] === static::FILE_ONLY) {
                         $returnPath = preg_replace('#.*projects/.*?/code/#', '/', $filename);
                     }
                     if ($returnPath != '/') {
@@ -236,25 +235,26 @@ class FindExternalLibraries extends Tasks {
                     }
                 }
 
-                if (is_array($tokens[$id + 4]) && $tokens[$id + 4][0] == $this->phpTokens['T_EXTENDS']) {
+                if (is_array($tokens[$id + 4]) && 
+                    $tokens[$id + 4][0] === $this->phpTokens['T_EXTENDS']) {
                     $ix = $id + 6;
                     $extends = '';
 
-                    while($tokens[$ix][0] == T_NS_SEPARATOR || $tokens[$ix][0] == $this->phpTokens['T_STRING'] ) {
+                    while($tokens[$ix][0] === T_NS_SEPARATOR || $tokens[$ix][0] === $this->phpTokens['T_STRING'] ) {
                         $extends .= $tokens[$ix][1];
                         ++$ix;
                     }
 
-                    $extends = trim(strtolower($extends), '\\');
+                    $extends = strtolower(trim($extends), '\\');
                     if (isset($this->classicTests[$extends])) {
-                        if ($this->classicTests[$extends] == static::WHOLE_DIR) {
+                        if ($this->classicTests[$extends] === static::WHOLE_DIR) {
                             $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
-                        } elseif ($this->classicTests[$extends] == static::PARENT_DIR) {
+                        } elseif ($this->classicTests[$extends] === static::PARENT_DIR) {
                             $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename), 2);
-                        } elseif ($this->classicTests[$extends] == static::FILE_ONLY) {
+                        } elseif ($this->classicTests[$extends] === static::FILE_ONLY) {
                             $returnPath = preg_replace('#.*projects/.*?/code/#', '/', $filename);
                         }
-                        if ($returnPath != '/') {
+                        if ($returnPath !== '/') {
                             $return[$class] = $returnPath;
                         }
                     }

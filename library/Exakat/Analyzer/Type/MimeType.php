@@ -31,7 +31,7 @@ class MimeType extends Analyzer {
 
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->regexIs('code', '/[\'"]('.implode('|', $mimeTypes).')\/[a-zA-Z0-9+\\-]+[\'"]/');
+             ->regexIs('fullcode', '[\'"]('.implode('|', $mimeTypes).')\/[a-zA-Z0-9+\\-]+[\'"]');
         $this->prepareQuery();
     }
 }

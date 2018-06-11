@@ -63,11 +63,13 @@ class Config {
 
             error_reporting(E_ALL);
             ini_set('display_errors', 0);
-            ini_set('error_log', $this->projects_root.'/projects/.exakat/php.log');
-            if (!file_exists($this->projects_root.'/projects/.exakat/php.log')) {
-                mkdir($this->projects_root.'/projects/.exakat/php.log', 0755);
+            if (!file_exists("{$this->projects_root}/projects")) {
+                mkdir("{$this->projects_root}/projects", 0755);
             }
-            ini_set('display_errors', 0);
+            if (!file_exists("{$this->projects_root}/projects/.exakat")) {
+                mkdir("{$this->projects_root}/projects/.exakat", 0755);
+            }
+            ini_set('error_log', "{$this->projects_root}/projects/.exakat/php.log");
         } else {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->dir_root      = dirname(__DIR__, 2);
@@ -105,7 +107,11 @@ class Config {
         }
 
         // then read the config for the project in its folder
-        if ($this->commandLineConfig->get('project') !== null) {
+        if ($this->commandLineConfig->get('project') === null) {
+            $this->projectConfig   = new EmptyConfig();
+            $this->dotExakatConfig = new EmptyConfig();
+            $this->codacyConfig    = new EmptyConfig();
+        } else {
             $this->projectConfig = new ProjectConfig($this->projects_root);
             if ($file = $this->projectConfig->loadConfig($this->commandLineConfig->get('project'))) {
                 $this->configFiles[] = $file;
@@ -121,10 +127,6 @@ class Config {
             if ($file = $this->codacyConfig->loadConfig($this->commandLineConfig->get('project'))) {
                 $this->configFiles[] = $file;
             }
-        } else {
-            $this->projectConfig   = new EmptyConfig();
-            $this->dotExakatConfig = new EmptyConfig();
-            $this->codacyConfig    = new EmptyConfig();
         }
 
         // build the actual config. Project overwrite commandline overwrites config, if any.

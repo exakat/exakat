@@ -56,7 +56,7 @@ class Zip extends Vcs {
         $stats = array();
 
         $res = shell_exec('zip -v  2>&1');
-        if (preg_match('/not found/is', $res)) {
+        if (stripos($res, 'not found') !== false) {
             $stats['installed'] = 'No';
         } elseif (preg_match('/Zip\s+([0-9\.]+)/is', $res, $r)) {
             $stats['installed'] = 'Yes';

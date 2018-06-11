@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 04 Jun 2018 08:34:16 +0000
-.. comment: Generation hash : 140802ef856f36e6141fea4d96dd03134992760e
+.. comment: Generation date : Mon, 11 Jun 2018 15:27:55 +0000
+.. comment: Generation hash : 4ed09c6a1099e9bc59b91530e4b484d46d82ecb3
 
 
 .. _$http\_raw\_post\_data:
@@ -121,7 +121,7 @@ $this Is Not An Array
 #####################
 
 
-`$this` variable represents the current object and it is not an array, unless the class (or its parents) has the `'ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ interface.
+``$this`` variable represents the current object and it is not an array, unless the class (or its parents) has the `'ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ interface.
 
 .. code-block:: php
 
@@ -142,6 +142,10 @@ $this Is Not An Array
    }
    
    ?>
+
+
+See also `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ and 
+         `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
 
 +------------+--------------------------+
 | Short name | Classes/ThisIsNotAnArray |
@@ -1696,6 +1700,37 @@ As much as possible, avoid delaying the end of the script.
 +------------+------------------+
 | Themes     | :ref:`Security`  |
 +------------+------------------+
+
+
+
+.. _bad-constants-names:
+
+Bad Constants Names
+###################
+
+
+PHP's manual recommends that developper do not use constants with the convention __NAME__. Those are reserved for PHP future use. 
+
+For example, `'__TRAIT__ <http://php.net/manual/en/language.constants.predefined.php>`_ recently appeared in PHP, as a magic constant. In the future, other may appear. 
+
+.. code-block:: php
+
+   <?php
+   
+   const __MY_APP_CONST__ = 1;
+   
+   define('__MY_OTHER_APP_CONST__', 2);
+   
+   ?>
+
+
+The analyzer will report any constant which name is __.*.__, or even _.*_ (only one underscore)
+
++------------+----------------------------+
+| Short name | Constants/BadConstantnames |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
 
 
 
@@ -5393,7 +5428,9 @@ Empty Classes
 #############
 
 
-Classes that do no define anything at all. Classes that are directly derived from an exception are omitted.
+Classes that do no define anything at all. This is probably dead code.
+
+Classes that are directly derived from an exception are omitted.
 
 .. code-block:: php
 
@@ -5412,11 +5449,13 @@ Classes that do no define anything at all. Classes that are directly derived fro
    
    ?>
 
-+------------+--------------------+
-| Short name | Classes/EmptyClass |
-+------------+--------------------+
-| Themes     | :ref:`Analyze`     |
-+------------+--------------------+
++------------+-------------------------------------+
+| Short name | Classes/EmptyClass                  |
++------------+-------------------------------------+
+| Themes     | :ref:`Analyze`                      |
++------------+-------------------------------------+
+| Examples   | :ref:`wordpress-classes-emptyclass` |
++------------+-------------------------------------+
 
 
 
@@ -10375,11 +10414,11 @@ The following functions are now native functions in PHP 7.3. It is compulsory to
 
 Note : At the moment of writing, all links to the manual are not working.
 
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Php/Php73NewFunctions                                                                                                                                                                       |
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/Php73NewFunctions                                                                                                                                                                                                  |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP73` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -11781,9 +11820,9 @@ Non Ascii Variables
 ###################
 
 
-PHP supports variables with certain characters. The variable name must only include letters, figures, underscores and ASCII characters from 128 to 255. 
+PHP allows certain characters in variable names. The variable name must only include letters, figures, underscores and ASCII characters from 128 to 255. 
 
-In practice, letters outside the scope of a-zA-Z0-9 are rare, and require more care when editing the code or passing it from OS to OS. 
+In practice, letters outside the scope of ``a-zA-Z0-9`` are rare, and require more care when editing the code or passing it from OS to OS. 
 
 .. code-block:: php
 
@@ -11803,11 +11842,13 @@ In practice, letters outside the scope of a-zA-Z0-9 are rare, and require more c
 
 See also `Variables <http://php.net/manual/en/language.variables.basics.php>`_.
 
-+------------+----------------------------+
-| Short name | Variables/VariableNonascii |
-+------------+----------------------------+
-| Themes     | :ref:`Analyze`             |
-+------------+----------------------------+
++------------+-------------------------------------------+
+| Short name | Variables/VariableNonascii                |
++------------+-------------------------------------------+
+| Themes     | :ref:`Analyze`                            |
++------------+-------------------------------------------+
+| Examples   | :ref:`magento-variables-variablenonascii` |
++------------+-------------------------------------------+
 
 
 
@@ -12658,11 +12699,11 @@ PHP 7.0 Removed Directives
 
 List of directives that are removed in PHP 7.0.
 
-+------------+---------------------------------------------------------------------------------+
-| Short name | Php/Php70RemovedDirective                                                       |
-+------------+---------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP73` |
-+------------+---------------------------------------------------------------------------------+
++------------+------------------------------------------------------+
+| Short name | Php/Php70RemovedDirective                            |
++------------+------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++------------+------------------------------------------------------+
 
 
 
@@ -12839,11 +12880,11 @@ The last empty line is easier on the VCS, allowing clearer text diffs.
 
 See also `Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_.
 
-+------------+----------------------------+
-| Short name | Php/PHP73LastEmptyArgument |
-+------------+----------------------------+
-| Themes     | :ref:`CompatibilityPHP73`  |
-+------------+----------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/PHP73LastEmptyArgument                                                                                                                                                                  |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -13140,7 +13181,7 @@ Using parenthesis around parameters used to silent some internal check. This is 
 +------------+------------------------------------------------------------------------------------------------------------+
 | Short name | Php/ParenthesisAsParameter                                                                                 |
 +------------+------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -15615,6 +15656,33 @@ See also `Mathematical Functions <http://php.net/manual/en/book.math.php>`_.
 +------------+--------------------------+
 | Themes     | :ref:`Suggestions`       |
 +------------+--------------------------+
+
+
+
+.. _should-use-operator:
+
+Should Use Operator
+###################
+
+
+Some functions duplicate the feature of an operator. When in doubt, it is better to use the operator. 
+
+Beware, some edge cases may apply. In particular, backward compatibility may prevent usage of newer features.
+
+* array_push may be replaced with [] 
+* is_object may be replace with `'instanceof <http://php.net/manual/en/language.operators.type.php>`_
+* function_get_arg and function_get_args may be replace with ellipsis : ...
+* chr may be replaces by string sequences, such as \n, \x69, u{04699}
+* call_user_func may be replace by $functionName(arguments), $object->$method(...$arguments)
+* is_null may be replaced by `=== null`
+* php_version may be replace by PHP_VERSION (the constant)
+* is_array, is_int, is_object, etc. may be replaced by a typehint
+
++------------+------------------------------+
+| Short name | Structures/ShouldUseOperator |
++------------+------------------------------+
+| Themes     | :ref:`Suggestions`           |
++------------+------------------------------+
 
 
 
@@ -18967,11 +19035,11 @@ The X modifier : X is still existing with PCRE2, though it is now the default fo
 See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_ and 
          `PHP RFC: PCRE2 migration <https://wiki.php.net/rfc/pcre2-migration>`.
 
-+------------+------------------------+
-| Short name | Php/UnknownPcre2Option |
-+------------+------------------------+
-| Themes     | :ref:`Analyze`         |
-+------------+------------------------+
++------------+-------------------------------------------+
+| Short name | Php/UnknownPcre2Option                    |
++------------+-------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP73` |
++------------+-------------------------------------------+
 
 
 
@@ -21226,48 +21294,6 @@ This is the list of used once variables, scope by scope. Those variables are use
 +------------+-------------------------------------+
 | Themes     | :ref:`Analyze`                      |
 +------------+-------------------------------------+
-
-
-
-.. _used-protected-method:
-
-Used Protected Method
-#####################
-
-
-Marks methods being used in the current class or its children classes.
-
-.. code-block:: php
-
-   <?php
-   
-   class foo {
-       // This is reported
-       protected usedByChildren() {}
-   
-       // This is not reported
-       protected notUsedByChildren() {}
-   }
-   
-   class bar extends foo {
-       // The parent method is not overloaded, though it may be 
-       protected someMethod() {
-           // The parent method is called 
-           $this->usedByChildren();
-       }
-   
-   }
-   
-   ?>
-
-
-See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
-
-+------------+------------------------------+
-| Short name | Classes/UsedProtectedMethod  |
-+------------+------------------------------+
-| Themes     | :ref:`Dead code <dead-code>` |
-+------------+------------------------------+
 
 
 
@@ -23769,11 +23795,11 @@ preg_replace With Option e
                                                  '/[a-b]/' => function ($x) { return strtolower($x[0]); }), $string);
    ?>
 
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Structures/pregOptionE                                                                                                                      |
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP73`, :ref:`CompatibilityPHP72` |
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/pregOptionE                                                                                           |
++------------+------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++------------+------------------------------------------------------------------------------------------------------------------+
 
 
 

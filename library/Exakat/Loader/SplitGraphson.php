@@ -102,7 +102,9 @@ GREMLIN;
         }
         fclose($fp);
         
-        if (!empty($total)) {
+        if (empty($total)) {
+            display('no definitions');
+        } else {
             $query = <<<GREMLIN
 getIt = { id ->
   def p = g.V(id);
@@ -117,8 +119,6 @@ new File('$this->path.def').eachLine {
 GREMLIN;
             $res = $this->gsneo4j->query($query);
             display('loaded definitions');
-        } else {
-            display('no definitions');
         }
         $end = microtime(true);
 

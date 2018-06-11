@@ -9,7 +9,7 @@ $expected     = array('B1',
                       '\\A1\\A1',
                      );
 
-$expected_not = array(
+$expected_not = array('strict_types',
                      );
 
 ?>

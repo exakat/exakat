@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.3.0';
-    const BUILD = 753;
+    const VERSION = '1.3.1';
+    const BUILD = 761;
 
     private $gremlin = null;
     private $config = null;
@@ -38,10 +38,10 @@ class Exakat {
     }
 
     public function execute(Config $config) {
-        if ($config->remote !== 'none') {
-            $this->remote($config);
-        } else {
+        if ($config->remote === 'none') {
             $this->local($config);
+        } else {
+            $this->remote($config);
         }
     }
     

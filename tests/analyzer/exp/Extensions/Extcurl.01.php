@@ -9,7 +9,7 @@ $expected     = array('curl_init("http://www.example.com/")',
                       'CURLOPT_HEADER',
                      );
 
-$expected_not = array(
+$expected_not = array('curl_die( )',
                      );
 
 ?>

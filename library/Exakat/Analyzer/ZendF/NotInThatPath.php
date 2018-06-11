@@ -37,7 +37,7 @@ class NotInThatPath extends Analyzer {
              ->outIs('CLASS')
              ->fullnspathIs('\\Zend_Auth')
              ->goToFile()
-             ->regexIs('code', '/\.phtml$/')
+             ->regexIs('fullcode', '\.phtml\\$')
              ->back('first');
         $this->prepareQuery();
 
@@ -45,7 +45,7 @@ class NotInThatPath extends Analyzer {
         $this->atomIs('Class')
              ->analyzerIs('ZendF/IsController')
              ->goToFile()
-             ->regexIsNot('code', '/controllers/')
+             ->regexIsNot('fullcode', 'controllers')
              ->back('first');
         $this->prepareQuery();
 
@@ -55,7 +55,7 @@ class NotInThatPath extends Analyzer {
         $this->atomIs('Class')
              ->analyzerIs('ZendF/IsHelper')
              ->goToFile()
-             ->regexIsNot('code', '/helpers/')
+             ->regexIsNot('fullcode', 'helpers')
              ->back('first');
         $this->prepareQuery();
     }

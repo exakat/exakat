@@ -28,6 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class UsedPrivateProperty extends Analyzer {
 
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         // property used in a staticproperty \a\b::$b
         $this->atomIs('Ppp')
              ->hasOut('PRIVATE')
@@ -39,11 +41,16 @@ class UsedPrivateProperty extends Analyzer {
              ->goToClassTrait()
              ->hasName()
              ->savePropertyAs('fullnspath', 'classe')
-             ->outIs('METHOD')
-             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Staticproperty") ).times('.self::MAX_LOOPING.')
-                             .out("CLASS").filter{ it.get().value("token") in ["T_STRING", "T_NS_SEPARATOR", "T_STATIC" ] }.filter{ it.get().value("fullnspath") == classe }.in("CLASS")
-                             .out("MEMBER").filter{ it.get().value("code") == property }
-                             .count().is(neq(0)) )')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->raw(<<<GREMLIN
+where( 
+    __.repeat( __.out($this->linksDown) ).emit( hasLabel("Staticproperty") ).times($MAX_LOOPING)
+                 .out("CLASS").filter{ it.get().value("token") in ["T_STRING", "T_NS_SEPARATOR", "T_STATIC" ] }
+                 .filter{ it.get().value("fullnspath") == classe }.in("CLASS")
+                 .out("MEMBER").filter{ it.get().value("code") == property }
+     )
+GREMLIN
+)
              ->back('ppp');
         $this->prepareQuery();
 
@@ -58,7 +65,7 @@ class UsedPrivateProperty extends Analyzer {
              ->_as('ppp')
              ->savePropertyAs('code', 'x')
              ->back('first')
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomInsideNoDefinition('Staticproperty')
              ->outIs('CLASS')
              ->tokenIs(self::$STATICCALL_TOKEN)
@@ -80,7 +87,7 @@ class UsedPrivateProperty extends Analyzer {
              ->savePropertyAs('propertyname', 'x')
              ->_as('ppp')
              ->back('first')
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomInsideNoDefinition('Member')
              ->outIs('OBJECT')
              ->atomIs('This')

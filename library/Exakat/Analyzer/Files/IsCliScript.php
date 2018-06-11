@@ -31,7 +31,7 @@ class IsCliScript extends Analyzer {
              ->atomIs('Sequence')
              ->outWithRank('EXPRESSION', 0)
              ->tokenIs('T_INLINE_HTML')
-             ->regexIs('code', '/^#/s')
+             ->regexIs('fullcode', '^#!')
              ->back('first');
         $this->prepareQuery();
     }

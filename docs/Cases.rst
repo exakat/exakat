@@ -165,6 +165,50 @@ In this code, $cachedConfigData is collected after storing date in the cache. Gd
                         ]);
                     }
 
+Empty Classes
+=============
+
+.. _wordpress-classes-emptyclass:
+
+WordPress
+^^^^^^^^^
+
+:ref:`empty-classes`, in wp-includes/SimplePie/Core.php:54. 
+
+Empty class, but documented as backward compatibility. 
+
+.. code-block:: php
+
+    /**
+     * SimplePie class.
+     *
+     * Class for backward compatibility.
+     *
+     * @deprecated Use {@see SimplePie} directly
+     * @package SimplePie
+     * @subpackage API
+     */
+    class SimplePie_Core extends SimplePie
+    {
+    
+    }
+
+Non Ascii Variables
+===================
+
+.. _magento-variables-variablenonascii:
+
+Magento
+^^^^^^^
+
+:ref:`non-ascii-variables`, in /dev/tests/functional/tests/app/Mage/Checkout/Test/Constraint/AssertOrderWithMultishippingSuccessPlacedMessage.php:52. 
+
+The initial C is actually a russian C.
+
+.. code-block:: php
+
+    $сheckoutMultishippingSuccess
+
 Several Instructions On The Same Line
 =====================================
 

@@ -46,7 +46,7 @@ class ShortOpenTagRequired extends Analyzer {
     public function hasResults() {
        $r = Analyzer::$datastore->getRow('shortopentag');
        
-       return count($r) > 0;
+       return !empty($r);
     }
     
 }
