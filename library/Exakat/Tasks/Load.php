@@ -805,7 +805,7 @@ SQL;
                 ++$this->id; // Skip {
                 while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY))) {
                     $part = $this->processNext();
-                };
+                }
                 ++$this->id; // Skip }
                 
                 $this->popExpression();
@@ -902,7 +902,7 @@ SQL;
         ++$this->id; // Skip ${
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY))) {
             $this->processNext();
-        } ;
+        }
         ++$this->id; // Skip }
 
         $name = $this->popExpression();
@@ -1515,7 +1515,7 @@ SQL;
             }
 
             $this->processNext();
-        };
+        }
 
         if ($this->tokens[$this->id][0] === $this->phptokens::T_INLINE_HTML) {
             --$this->id;
@@ -1696,7 +1696,7 @@ SQL;
             // Go to next
             ++$this->id; // skip \
             $nsname->token    = 'T_NS_SEPARATOR';
-        };
+        }
         // Back up a bit
         --$this->id;
 
@@ -1885,7 +1885,7 @@ SQL;
                                                                                 $this->phptokens::T_COLON,
                                                                                 ))) {
                             $this->processNext();
-                        };
+                        }
                         $default = $this->popExpression();
                     } else {
                         ++$args_min;
@@ -2646,7 +2646,7 @@ SQL;
 
                 ++$this->id;
             }
-        };
+        }
         $element = $this->popExpression();
         $this->addToSequence($element);
 

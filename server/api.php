@@ -322,8 +322,7 @@ function unparse_url($parsed_url) {
 * @param string $key - encryption key
 * @return string
 */
-function safeDecrypt($encrypted, $key = '__SECRET_KEY__')
-{  
+function safeDecrypt($encrypted, $key = '__SECRET_KEY__') {
     $decoded = base64_decode($encrypted);
     if ($decoded === false) {
         return '';

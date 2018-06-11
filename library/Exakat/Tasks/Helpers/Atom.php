@@ -250,20 +250,20 @@ class Atom {
             if (in_array($l, $falseValues) &&
                 !$value) {
                 continue;
-            };
+            }
 
             if ($l === 'lccode') {
                 $this->lccode = mb_strtolower($this->code);
-            };
+            }
 
             if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode', )) &&
                 $value === '') {
                 continue;
-            };
+            }
 
             if ($value === false) {
                 continue;
-            };
+            }
         
             if (in_array($l, $booleanValues)) {
                 $value = (boolean) $value;
