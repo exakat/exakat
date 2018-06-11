@@ -33,21 +33,29 @@ class AmbassadorNoMenu extends Ambassador {
         static $baseHTML;
 
         if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
+            $baseHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/base.html");
             $title = ($file == 'index') ? 'Dashboard' : $file;
+            $project_name = $this->config->project_name;
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
-            $project_name = $this->config->project_name;
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', '');
-            $baseHTML = preg_replace('$<aside class="main-sidebar">.*?</aside>$is', '', $baseHTML);
-            $baseHTML = preg_replace('$<aside class="control-sidebar control-sidebar-dark">.*?</aside>$is', '', $baseHTML);
-            $baseHTML = preg_replace('$<header class="main-header">.*?</header>$is', '', $baseHTML);
-            $baseHTML = preg_replace('$<footer class="main-footer">.*?</footer>$is', '', $baseHTML);
-            $baseHTML = preg_replace('$class="content-wrapper"$is', 'class="content-wrapper" style="margin-left: 0px"', $baseHTML);
+            $patterns = array('$<aside class="main-sidebar">.*?</aside>$is',
+                              '$<aside class="control-sidebar control-sidebar-dark">.*?</aside>$is',
+                              '$<header class="main-header">.*?</header>$is',
+                              '$<footer class="main-footer">.*?</footer>$is',
+                              '$class="content-wrapper"$is',
+                              );
+            $replacements = array('',
+                                  '',
+                                  '',
+                                  '',
+                                  'class="content-wrapper" style="margin-left: 0px"',
+                                 );
+            $baseHTML = preg_replace($patterns, $replacements, $baseHTML);
         }
 
         $subPageHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/'.$file.'.html');

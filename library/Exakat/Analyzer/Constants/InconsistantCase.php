@@ -51,7 +51,7 @@ GREMLIN;
 
         $this->atomIs(array('Null', 'Boolean'))
              ->raw('map{ '.$mapping.' }', $lower, $upper)
-             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');;
+             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = $this->rawQuery()->toArray()[0];
 
         $store = array();

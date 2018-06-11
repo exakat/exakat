@@ -47,7 +47,7 @@ class PackagesNames extends Analyzer {
             $this->report[$d['component']. ' ('.$d['version'].')'] = true;
         }
         
-        return count($this->report) > 0;
+        return !empty($this->report);
     }
 
 }

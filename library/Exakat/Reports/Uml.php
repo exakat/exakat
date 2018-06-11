@@ -51,14 +51,14 @@ SQL
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             ++$id;
-            if (strlen($row['properties']) > 0) {
+            if (empty($row['properties'])) {
                 $row['properties'] = "+&nbsp;".str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['properties']))."<br align='left'/>";
-            } elseif ($row['type'] == 'interface') {
+            } elseif ($row['type'] === 'interface') {
                 $row['properties'] = "&nbsp;";
             } else {
                 $row['properties'] = "<i>No properties</i>";
             }
-            if (strlen($row['methods']) > 0) {
+            if (empty($row['methods'])) {
                 $row['methods'] = "+&nbsp;".str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['methods']))."<br align='left'/>";
             } else {
                 $row['methods'] = "<i>No methods</i>";

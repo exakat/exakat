@@ -38,8 +38,8 @@ foreach($files as $file) {
     $links = array_filter($r[1], function ($x) {
         if (empty($x)) { return false; }
         
-        if (substr($x, 0, 4) == 'http') { return false; }
-        if (substr($x, 0, 6) == 'mailto') { return false; }
+        if (substr($x, 0, 4) === 'http') { return false; }
+        if (substr($x, 0, 6) === 'mailto') { return false; }
         
         return true;
     });
@@ -50,7 +50,7 @@ foreach($files as $file) {
     
     $totalLink += count($links) - count($leftLinks);
     $totalMiss += count($leftLinks);
-    if (count($leftLinks) != 0) {
+    if (empty($leftLinks)) {
         print count($leftLinks) . ' are missing in '.$file."\n";
         print_r($leftLinks);
     }

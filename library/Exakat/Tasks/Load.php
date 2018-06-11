@@ -2506,10 +2506,10 @@ SQL;
             }
             $element->propertyname = $r[1];
             
-            if (preg_match('/static/i', $fullcodePrefix)) {
-                $this->addDefinition('staticproperty', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
-            } else {
+            if (stripos($fullcodePrefix, 'static') === false) {
                 $this->addDefinition('property', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
+            } else {
+                $this->addDefinition('staticproperty', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
             }
         }
         $fullcode[] = $element->fullcode;
@@ -5009,7 +5009,7 @@ SQL;
     }
 
     private function hasExpression() {
-        return count($this->expressions) > 0;
+        return empty($this->expressions);
     }
 
     private function popExpression() {
@@ -5357,7 +5357,7 @@ SQL;
         if (strpos($call->noDelimiter, '::') !== false) {
             $fullnspath = mb_strtolower(substr($call->noDelimiter, 0, strpos($call->noDelimiter, '::')) );
 
-            if (strlen($fullnspath) === 0) {
+            if (empty($fullnspath)) {
                 $fullnspath = '\\';
             } elseif ($fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;

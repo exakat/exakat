@@ -46,7 +46,7 @@ class Services extends Analyzer {
             $this->report = Analyzer::$datastore->getRow('configFiles');
         }
         
-        return count($this->report) > 0;
+        return !empty($this->report);
     }
 }
 

@@ -208,6 +208,7 @@ GREMLIN;
             } catch(Exception $error) {
                 $end = microtime(true);
                 display( "$analyzer_class : error \n");
+                display($error->getMessage());
                 $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$error->getMessage());
                 $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
                 $this->checkAnalyzed();

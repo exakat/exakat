@@ -36,7 +36,7 @@ class SimplePreg extends Analyzer {
              // Normal delimiters
              ->regexIsNot('noDelimiter', '(?<!\\\\\\\\)[.?*+\\\\\$\\\\^|{}()\\\\[\\\\]|]')
              // Simple assertions
-             ->regexIsNot('noDelimiter', '\\\\\\\\[bBAZz]')
+             ->regexIsNot('noDelimiter', '\\\\\\\\[bBAZzSsDd]')
              ->back('first');
         $this->prepareQuery();
     }

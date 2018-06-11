@@ -31,7 +31,7 @@ class NoSuchAnalyzer extends \RuntimeException {
 
         if (preg_match('#[a-z0-9_]+/[a-z0-9_]+$#i', $analyzer) !== 0) {
             $r = $themes->getSuggestionClass($analyzer);
-            if (count($r) > 0) {
+            if (empty($r)) {
                 $die .= 'Did you mean : '.str_replace('\\', '/', implode(', ', array_slice($r, 0, 5)));
                 if (count($r) > 5) {
                     $die .= " (More available)";
