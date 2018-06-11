@@ -165,10 +165,10 @@ class Doctor extends Tasks {
             $ini = file_get_contents($this->config->dir_root.'/server/exakat.ini');
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
             
-            if (file_exists($this->config->projects_root.'/tinkergraph')) {
+            if (file_exists("{$this->config->projects_root}/tinkergraph")) {
                 $folder = 'tinkergraph';
                 // tinkergraph or gsneo4j
-                if (file_exists($this->config->projects_root.'/tinkergraph/ext/neo4j-gremlin/')) {
+                if (file_exists("{$this->config->projects_root}/tinkergraph/ext/neo4j-gremlin/")) {
                     $graphdb = 'gsneo4j';
                 } else {
                     $graphdb = 'tinkergraph';
