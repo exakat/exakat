@@ -120,36 +120,36 @@ function rglob($pattern, $flags = 0) {
 
 function duration($seconds) {
     if ($seconds < 60) {
-        return $seconds.' s';
+        return "$seconds s";
     }
 
     $minuts = floor($seconds / 60);
     $seconds %= 60;
     if ($minuts < 60) {
-        return $minuts.' min '.$seconds.' s';
+        return "$minuts min $seconds s";
     }
 
     $hours = floor($minuts / 60);
     $minuts %= 60;
     if ($minuts < 24 ) {
-        return $hours.' h '.$minuts.' min '.$seconds.' s';
+        return "$hours h $minuts min $seconds s";
     }
 
     $days = floor($hours / 24);
     $hours %= 24;
-    return $days.' d '.$hours.' h '.$minuts.' min '.$seconds.' s';
+    return "$days d $hours h $minuts min $seconds s";
 }
 
 function unparse_url($parsed_url) {
-    $scheme   = isset($parsed_url['scheme'])   ? $parsed_url['scheme'].'://' : '';
+    $scheme   = isset($parsed_url['scheme'])   ? $parsed_url['scheme'].'://'   : '';
     $host     = isset($parsed_url['host'])     ? $parsed_url['host']           : '';
-    $port     = isset($parsed_url['port'])     ? ':'.$parsed_url['port']     : '';
+    $port     = isset($parsed_url['port'])     ? ':'.$parsed_url['port']       : '';
     $user     = isset($parsed_url['user'])     ? $parsed_url['user']           : '';
-    $pass     = isset($parsed_url['pass'])     ? ':'.$parsed_url['pass']     : '';
-    $pass     = ($user || $pass)               ? $pass.'@'                      : '';
+    $pass     = isset($parsed_url['pass'])     ? ':'.$parsed_url['pass']       : '';
+    $pass     = ($user || $pass)               ? $pass.'@'                     : '';
     $path     = isset($parsed_url['path'])     ? $parsed_url['path']           : '';
-    $query    = isset($parsed_url['query'])    ? '?'.$parsed_url['query']    : '';
-    $fragment = isset($parsed_url['fragment']) ? '#'.$parsed_url['fragment'] : '';
+    $query    = isset($parsed_url['query'])    ? '?'.$parsed_url['query']      : '';
+    $fragment = isset($parsed_url['fragment']) ? '#'.$parsed_url['fragment']   : '';
     return $scheme.$user.$pass.$host.$port.$path.$query.$fragment;
 }
 
