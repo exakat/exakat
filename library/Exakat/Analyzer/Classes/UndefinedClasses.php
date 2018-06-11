@@ -141,6 +141,17 @@ class UndefinedClasses extends Analyzer {
              ->noInterfaceDefinition()
              ->noTraitDefinition();
         $this->prepareQuery();
+
+        // Foo::class
+        $this->atomIs('Staticclass')
+             ->outIs('CLASS')
+             ->analyzerIsNot('Classes/IsExtClass')
+             ->analyzerIsNot('Interfaces/IsExtInterface')
+             ->noClassDefinition()
+             ->noInterfaceDefinition()
+             ->noTraitDefinition()
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
