@@ -2380,9 +2380,9 @@ SQL;
             } else{
                 $row = $results->fetchArray(\SQLITE3_ASSOC);
                 if ($row['nb'] === 0) {
-                    $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
-                } else {
                     $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';
+                } else {
+                    $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
                 }
             }
         }
