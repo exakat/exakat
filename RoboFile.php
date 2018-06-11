@@ -722,6 +722,7 @@ JOIN categories
         $this->reportCompilation($errors70, '7.0', $total);
         $this->reportCompilation($errors71, '7.1', $total);
         $this->reportCompilation($errors72, '7.2', $total);
+        $this->reportCompilation($errors73, '7.3', $total);
     }
     
     private function reportCompilation($errors, $version, $total) {
@@ -850,7 +851,7 @@ SQL
                 ++$total;
             }
 
-            print 'Found '. $missing / $total. $child. 's without parent '. $parent. "s\n";
+            print "Found $missing $child's without parent {$parent}s\n";
         }
         print "\n";
 
