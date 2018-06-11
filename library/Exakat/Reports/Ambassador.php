@@ -3735,15 +3735,15 @@ HTML;
             return '-';
         }
         
-        if (strpos($cve, ', ') !== false) {
+        if (strpos($cve, ', ') === false) {
+            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+        } else {
             $cves = explode(', ', $cve);
             $cveHtml = array();
             foreach($cves as $cve) {
                 $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
             }
             $cveHtml = implode(',<br />', $cveHtml);
-        } else {
-            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
         }
 
         return $cveHtml;

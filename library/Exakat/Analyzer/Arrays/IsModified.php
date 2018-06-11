@@ -103,10 +103,10 @@ class IsModified extends Analyzer {
         $references = array();
         
         foreach($functions as $function) {
-            if (!isset($references[$function['position']])) {
-                $references[$function['position']] = array('\\'.$function['function']);
-            } else {
+            if (isset($references[$function['position']])) {
                 $references[$function['position']][] = '\\'.$function['function'];
+            } else {
+                $references[$function['position']] = array('\\'.$function['function']);
             }
         }
         

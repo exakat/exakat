@@ -100,10 +100,10 @@ class Phpexec {
             $folder = $pathToBinary;
             $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":'.$folder.' -w '.$folder.' '.$this->phpexec.' php -v 2>&1');
 
-            if (substr($res, 0, 4) !== 'PHP ') {
-                throw new NoPhpBinary('Error when accessing Docker\'s PHP : "'.$res.'". Please, check config/exakat.ini');
-            } else {
+            if (substr($res, 0, 4) === 'PHP ') {
                 $this->phpexec = 'docker run -it --rm --name php4exakat -v "$PWD":'.$folder.' -w '.$folder.' '.$this->phpexec.' php ';
+            } else {
+                throw new NoPhpBinary('Error when accessing Docker\'s PHP : "'.$res.'". Please, check config/exakat.ini');
             }
         } else {
             if (!file_exists($this->phpexec)) {

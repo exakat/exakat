@@ -105,7 +105,11 @@ class Config {
         }
 
         // then read the config for the project in its folder
-        if ($this->commandLineConfig->get('project') !== null) {
+        if ($this->commandLineConfig->get('project') === null) {
+            $this->projectConfig   = new EmptyConfig();
+            $this->dotExakatConfig = new EmptyConfig();
+            $this->codacyConfig    = new EmptyConfig();
+        } else {
             $this->projectConfig = new ProjectConfig($this->projects_root);
             if ($file = $this->projectConfig->loadConfig($this->commandLineConfig->get('project'))) {
                 $this->configFiles[] = $file;
@@ -121,10 +125,6 @@ class Config {
             if ($file = $this->codacyConfig->loadConfig($this->commandLineConfig->get('project'))) {
                 $this->configFiles[] = $file;
             }
-        } else {
-            $this->projectConfig   = new EmptyConfig();
-            $this->dotExakatConfig = new EmptyConfig();
-            $this->codacyConfig    = new EmptyConfig();
         }
 
         // build the actual config. Project overwrite commandline overwrites config, if any.

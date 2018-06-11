@@ -236,13 +236,13 @@ SQL;
 SELECT folder || '\\' || name AS name FROM analyzers
 
 SQL;
-        if ($folder !== null) {
+        if ($folder === null) {
+            $stmt = self::$sqlite->prepare($query);
+        } else {
             $query .= ' WHERE folder=:folder';
             $stmt = self::$sqlite->prepare($query);
             
             $stmt->bindValue(':folder', $folder, \SQLITE3_TEXT);
-        } else {
-            $stmt = self::$sqlite->prepare($query);
         }
         $res = $stmt->execute();
 
@@ -259,13 +259,13 @@ SQL;
 SELECT name AS name FROM categories
 
 SQL;
-        if ($theme !== null) {
+        if ($theme === null) {
+            $stmt = self::$sqlite->prepare($query);
+        } else {
             $query .= ' WHERE name=:name';
             $stmt = self::$sqlite->prepare($query);
             
             $stmt->bindValue(':name', $theme, \SQLITE3_TEXT);
-        } else {
-            $stmt = self::$sqlite->prepare($query);
         }
         $res = $stmt->execute();
 
@@ -313,11 +313,11 @@ SQL;
         }
         
         $actualClassName = new \ReflectionClass($class);
-        if ($class !== $actualClassName->getName()) {
+        if ($class === $actualClassName->getName()) {
+            return $class;
+        } else {
             // problems with the case
             return false;
-        } else {
-            return $class;
         }
     }
 

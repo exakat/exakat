@@ -229,10 +229,10 @@ class Datastore {
 
         if (!$res) {
             return null;
-        } else {
-            $row = $res->fetchArray(\SQLITE3_ASSOC);
-            return $row['value'];
-        }
+        } 
+
+        $row = $res->fetchArray(\SQLITE3_ASSOC);
+        return $row['value'];
     }
 
     public function getAllHash($table) {
@@ -242,13 +242,13 @@ class Datastore {
 
         if (!$res) {
             return array();
-        } else {
-            $return = array();
-            while($row = $res->fetchArray(\SQLITE3_NUM)) {
-                $return[$row[0]] = (int) $row[1];
-            }
-            return $return;
+        } 
+        
+        $return = array();
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            $return[$row[0]] = (int) $row[1];
         }
+        return $return;
     }
 
     public function getHashAnalyzer($analyzer) {

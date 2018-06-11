@@ -29,7 +29,9 @@ class NoSuchAnalyzer extends \RuntimeException {
     public function __construct($analyzer, $themes) {
         $die = "Couldn't find '$analyzer'. Aborting\n";
 
-        if (preg_match('#[a-z0-9_]+/[a-z0-9_]+$#i', $analyzer) !== 0) {
+        if (preg_match('#[a-z0-9_]+/[a-z0-9_]+$#i', $analyzer) === 0) {
+            $die .= "Analyzers use the format Folder/Rule, for example Structures/UselessInstructions. Check the documentation http://exakat.readthedocs.io/\n";
+        } else {
             $r = $themes->getSuggestionClass($analyzer);
             if (empty($r)) {
                 $die .= 'Did you mean : '.str_replace('\\', '/', implode(', ', array_slice($r, 0, 5)));
@@ -40,8 +42,6 @@ class NoSuchAnalyzer extends \RuntimeException {
             } else {
                 $die .= "Couldn't find a suggestion. Check the documentation http://exakat.readthedocs.io/\n";
             }
-        } else {
-            $die .= "Analyzers use the format Folder/Rule, for example Structures/UselessInstructions. Check the documentation http://exakat.readthedocs.io/\n";
         }
 
         parent::__construct($die);

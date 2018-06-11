@@ -5009,7 +5009,7 @@ SQL;
     }
 
     private function hasExpression() {
-        return empty($this->expressions);
+        return !empty($this->expressions);
     }
 
     private function popExpression() {

@@ -159,7 +159,9 @@ class Doctor extends Tasks {
             mkdir($this->config->projects_root.'/config', 0755);
         }
 
-        if (!file_exists($this->config->projects_root.'/config/exakat.ini')) {
+        if (file_exists($this->config->projects_root.'/config/exakat.ini')) {
+            $graphdb = $this->config->graphdb;
+        } else {
             $ini = file_get_contents($this->config->dir_root.'/server/exakat.ini');
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
             
@@ -178,8 +180,6 @@ class Doctor extends Tasks {
                                $ini);
             
             file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);
-        } else {
-            $graphdb = $this->config->graphdb;
         }
         
         $this->checkInstall($graphdb);
