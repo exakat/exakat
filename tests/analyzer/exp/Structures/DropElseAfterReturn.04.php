@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('elseif($b) { /**/ } else { /**/ } ', 
+$expected     = array('elseif($b) { /**/ } else { /**/ } ',
                       'elseif($a) { /**/ } else { /**/ } ',
                      );
 

@@ -7,6 +7,6 @@ $expected     = array('class ReallyEmpty { /**/ } ',
 $expected_not = array('class NotEmpty { /**/ } ',
                       'class NotEmpty2 { /**/ } ',
                       'class ReallyEmpty3 { /**/ } ',
-                      );
+                     );
 
 ?>

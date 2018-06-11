@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Md5String extends Analyzer {
     public function analyze() {
         $this->atomIs('String')
-             ->regexIs('code', '/^[\'"]?0[0-9A-Fa-f]{31}[\'"]?$/');
+             ->regexIs('fullcode', '^[\'"]?0[0-9A-Fa-f]{31}[\'"]?\\$');
         $this->prepareQuery();
     }
 }

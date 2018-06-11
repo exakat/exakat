@@ -29,15 +29,13 @@ class SilentlyCastInteger extends Analyzer {
     public function analyze() {
         // Binary or hexadecimal, cast to Real
         $this->atomIs('Real')
-             ->regexIs('code', '/^0[xXbB]/')
-             ->back('first');
+             ->regexIs('fullcode', '^0[xXbB]');
         $this->prepareQuery();
 
         // Too long integer
         $this->atomIs('Real')
-             ->regexIs('code', '/^[0-9]+$/')
-             ->regexIsNot('code', '/\./')
-             ->back('first');
+             ->regexIs('fullcode', '^[0-9]+\\$')
+             ->regexIsNot('fullcode', '\.');
         $this->prepareQuery();
     }
 }

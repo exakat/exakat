@@ -38,8 +38,7 @@ class ReservedKeywords7 extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Nsname')
-             ->regexIs('code', '/'.implode('|', $keywords).'/')
-             ->back('first');
+             ->regexIs('fullcode', implode('|', $keywords));
         $this->prepareQuery();
     }
 }

@@ -32,9 +32,11 @@ class VariableNonascii extends Analyzer {
     }
     
     public function analyze() {
+        // $人 or 
         $this->atomIs('Variable')
+             ->tokenIsNot(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))
              ->analyzerIs('Variables/Variablenames')
-             ->regexIs('code', '/[^a-zA-Z0-9\\$_]/');
+             ->regexIs('fullcode', '[^a-zA-Z0-9\\$_\\\.\\\&]');
         $this->prepareQuery();
     }
 }

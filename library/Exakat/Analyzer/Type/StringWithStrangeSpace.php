@@ -33,8 +33,7 @@ class StringWithStrangeSpace extends Analyzer {
         
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->regexIs('code', $regex)
-             ->back('first');
+             ->regexIs('fullcode', $regex);
         $this->prepareQuery();
     }
 }
