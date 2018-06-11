@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 04 Jun 2018 08:34:16 +0000
-.. comment: Generation hash : 140802ef856f36e6141fea4d96dd03134992760e
+.. comment: Generation date : Mon, 11 Jun 2018 15:27:55 +0000
+.. comment: Generation hash : 4ed09c6a1099e9bc59b91530e4b484d46d82ecb3
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 351 analysis
+Total : 352 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -99,6 +99,7 @@ Total : 351 analysis
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid Using stdClass <avoid-using-stdclass>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
+* :ref:`Bad Constants Names <bad-constants-names>`
 * :ref:`Bail Out Early <bail-out-early>`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Buried Assignation <buried-assignation>`
@@ -488,7 +489,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 65 analysis
+Total : 67 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -533,9 +534,11 @@ Total : 65 analysis
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
+* :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
@@ -561,7 +564,7 @@ Total : 65 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 61 analysis
+Total : 63 analysis
 
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -597,6 +600,8 @@ Total : 61 analysis
 * Php/NoListWithString
 * Php/NoStringWithAppend
 * Php/NoSubstrMinusOne
+* Php/PHP73LastEmptyArgument
+* Php/ParenthesisAsParameter
 * Php/Php55NewFunctions
 * Php/Php56NewFunctions
 * Php/Php70NewClasses
@@ -630,7 +635,7 @@ Total : 61 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 53 analysis
+Total : 55 analysis
 
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -662,6 +667,8 @@ Total : 53 analysis
 * Php/NoListWithString
 * Php/NoStringWithAppend
 * Php/NoSubstrMinusOne
+* Php/PHP73LastEmptyArgument
+* Php/ParenthesisAsParameter
 * Php/Php56NewFunctions
 * Php/Php70NewClasses
 * Php/Php70NewFunctions
@@ -691,7 +698,7 @@ Total : 53 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 42 analysis
+Total : 44 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * Classes/Anonymous
@@ -715,6 +722,8 @@ Total : 42 analysis
 * Php/NoListWithString
 * Php/NoStringWithAppend
 * Php/NoSubstrMinusOne
+* Php/PHP73LastEmptyArgument
+* Php/ParenthesisAsParameter
 * Php/Php70NewClasses
 * Php/Php70NewFunctions
 * Php/Php70NewInterfaces
@@ -749,7 +758,6 @@ Total : 38 analysis
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-* :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
@@ -772,6 +780,7 @@ Total : 38 analysis
 * Php/ListWithKeys
 * Php/ListWithReference
 * Php/NoSubstrMinusOne
+* Php/PHP73LastEmptyArgument
 * Php/Php71NewClasses
 * Php/Php72NewClasses
 * Php/Php72RemovedInterfaces
@@ -804,7 +813,7 @@ Total : 25 analysis
 * Php/HashAlgos53
 * Php/HashAlgos54
 * Php/ListWithReference
-* Php/ParenthesisAsParameter
+* Php/PHP73LastEmptyArgument
 * Php/Php70RemovedDirective
 * Php/Php70RemovedFunctions
 * Php/Php72NewClasses
@@ -833,7 +842,7 @@ Total : 16 analysis
 * Constants/UndefinedConstants
 * Php/FlexibleHeredoc
 * Php/ListWithReference
-* Php/ParenthesisAsParameter
+* Php/PHP73LastEmptyArgument
 * Php/Php72NewClasses
 * Php/Php73NewFunctions
 * Structures/NoGetClassNull
@@ -844,26 +853,23 @@ Total : 16 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 4 analysis
+Total : 2 analysis
 
-* :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
-* Php/ParenthesisAsParameter
-* Php/Php70RemovedDirective
-* Structures/pregOptionE
+* Php/Php73NewFunctions
+* Php/UnknownPcre2Option
 
 .. _dead-code:
 
 Dead code
 +++++++++
 
-Total : 25 analysis
+Total : 24 analysis
 
 * :ref:`Exception Order <exception-order>`
 * :ref:`Rethrown Exceptions <rethrown-exceptions>`
 * :ref:`Undefined Caught Exceptions <undefined-caught-exceptions>`
 * :ref:`Unresolved Catch <unresolved-catch>`
 * :ref:`Unused Protected Methods <unused-protected-methods>`
-* :ref:`Used Protected Method <used-protected-method>`
 * Classes/CantExtendFinal
 * Classes/LocallyUnusedProperty
 * Classes/UnresolvedInstanceof
@@ -1008,7 +1014,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 54 analysis
+Total : 55 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
@@ -1028,6 +1034,7 @@ Total : 54 analysis
 * :ref:`Should Preprocess Chr <should-preprocess-chr>`
 * :ref:`Should Use Foreach <should-use-foreach>`
 * :ref:`Should Use Math <should-use-math>`
+* :ref:`Should Use Operator <should-use-operator>`
 * :ref:`Should Use array_filter() <should-use-array\_filter()>`
 * :ref:`Too Many Children <too-many-children>`
 * :ref:`Too Many Parameters <too-many-parameters>`
