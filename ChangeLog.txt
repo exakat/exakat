@@ -1,4 +1,4 @@
-Version 1.3.1 (Liu Hongji, coming up)
+Version 1.3.2 (Duan Zhixian, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,24 @@ Version 1.3.1 (Liu Hongji, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.3.1 (Liu Hongji, 2018-06-03)
++ Architecture
+    + Cleaned code of unused classes and ;
+    + Fixed connexion script to the database
+    + Fixed check of php.log folder
++ Report
+    + Ambassador : display correct compilation state
++ Analyzer
+    + Upgraded analysis : used constant is also applied to defined()
+    + Upgraded analysis : used protected methods is case insensitive
+    + Upgraded analysis : Empty class omits extended classes
+    + Upgraded analysis : More sequences to SimplePreg
+    + Upgraded analysis : Throwable is not 'unthrown' anymore
+    + Removed analysis : Static CPM
+    + Checked unit tests : 2901 / 2914 test pass (99% pass). 
++ Tokenizer
+    + Upgraded support for ::class
 
 Version 1.3.0 (Xue Rengui, 2018-06-03)
 + Architecture
