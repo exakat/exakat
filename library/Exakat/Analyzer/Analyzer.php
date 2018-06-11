@@ -644,9 +644,14 @@ GREMLIN
 
     public function noPropertyInside($property, $values) {
         assert($this->assertProperty($property));
+        $MAX_LOOPING = self::MAX_LOOPING;
 
-        $gremlin = 'not(where( __.emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) )
-                          .times('.self::MAX_LOOPING.').has("'.$property.'", within(***)) ) )';
+        $gremlin = <<<GREMLIN
+not(
+    where( __.emit( ).repeat( __.out($this->linksDown).not(hasLabel("Closure", "Classanonymous")) )
+                     .times($MAX_LOOPING).has("$property", within(***)) ) 
+    )
+GREMLIN;
         $this->addMethod($gremlin, makeArray($values));
         
         return $this;
@@ -655,9 +660,15 @@ GREMLIN
     public function noAtomPropertyInside($atom, $property, $values) {
         assert($this->assertAtom($atom));
         assert($this->assertProperty($property));
+        $MAX_LOOPING = self::MAX_LOOPING;
         // Check with Structures/Unpreprocessed
-        $gremlin = 'not(where( __.emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) )
-                          .times('.self::MAX_LOOPING.').hasLabel(within(***)).filter{ it.get().value("'.$property.'") == '.$values.' } ) )';
+        $gremlin = <<<GREMLIN
+not(
+    where( __.emit( ).repeat( __.out($this->linksDown).not(hasLabel("Closure", "Classanonymous")) )
+                     .times($MAX_LOOPING).hasLabel(within(***))
+                     .filter{ it.get().value("$property") == $values } ) 
+    )
+GREMLIN;
         $this->addMethod($gremlin, makeArray($atom));
         
         return $this;
