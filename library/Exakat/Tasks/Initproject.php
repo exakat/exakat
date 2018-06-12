@@ -270,6 +270,8 @@ class Initproject extends Tasks {
             $this->datastore->addRow('hash', array('init error' => $errorMessage,
                                                    'inited'     => date('r')));
             display("An error prevented code initialization : '$errorMessage'\n.No code was loaded.");
+
+            $projectConfig->writeConfig();
             
             return;
         }
