@@ -56,25 +56,25 @@ class Git extends Vcs {
         if (isset($repositoryDetails['user'])) {
             $repositoryDetails['user'] = urlencode($repositoryDetails['user']);
         } else {
-            $repositoryDetails['user'] = 'exakat';
+            $repositoryDetails['user'] = '';
         }
         if (isset($repositoryDetails['pass'])) {
             $repositoryDetails['pass'] = urlencode($repositoryDetails['pass']);
         } else {
-            $repositoryDetails['user'] = '';
+            $repositoryDetails['pass'] = '';
         }
                 
         unset($repositoryDetails['query']);
         unset($repositoryDetails['fragment']);
         $repositoryNormalizedURL = unparse_url($repositoryDetails);
 
-        $shell = "cd {$this->destinationFull}; git clone -q $repositoryNormalizedURL";
+        $shell = "cd {$this->destinationFull};GIT_TERMINAL_PROMPT=0 git clone -q $repositoryNormalizedURL";
 
         if (!empty($this->tag)) {
-            display("Check out with tag ".$this->tag);
+            display("Check out with tag $this->tag");
             $shell .= " -b $this->tag ";
         } else {
-            display("Check out with branch ".$this->branch);
+            display("Check out with branch $this->tag");
             $shell .= " -b $this->branch ";
         }
         
