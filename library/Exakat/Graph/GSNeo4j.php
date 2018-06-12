@@ -172,9 +172,9 @@ class GSNeo4j extends Graph {
     }
     
     public function start() {
-        if (!file_exists("{$this->config->tinkergraph_folder}/conf/gsneo4j.yaml")) {
-            copy( "{$this->config->dir_root}/server/tinkergraph/conf/gsneo4j.yaml",
-                  "{$this->config->tinkergraph_folder}/conf/gsneo4j.yaml");
+        if (!file_exists("{$this->config->gsneo4j_folder}/conf/gsneo4j.yaml")) {
+            copy( "{$this->config->dir_root}/server/gsneo4j/gsneo4j.$this->gremlinVersion.yaml",
+                  "{$this->config->gsneo4j_folder}/conf/gsneo4j.yaml");
         }
 
         if ($this->gremlinVersion === '3.3') {
