@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class VariableUsedOnceByContext extends Analyzer {
     
     public function dependsOn() {
-        return array('Variables/Variablenames',
-                     'Variables/InterfaceArguments',
+        return array('Variables/InterfaceArguments',
                     );
     }
     

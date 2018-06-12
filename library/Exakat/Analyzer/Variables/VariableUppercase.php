@@ -26,15 +26,10 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableUppercase extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/Variablenames',
-                    );
-    }
-    
     public function analyze() {
-        $this->atomIs(self::$VARIABLES_ALL)
-             ->analyzerIs('Variables/Variablenames')
-             ->regexIs('fullcode', '^\$[a-zA-Z0-9_]{2,}\\$')
+        // $UPPER_CASE
+        $this->atomIs(self::$VARIABLES_USER)
+             ->regexIs('fullcode', '^\\\\\$[a-zA-Z0-9_]{2,}\\$')
              ->isUppercase('fullcode');
         $this->prepareQuery();
     }
