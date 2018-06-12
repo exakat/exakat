@@ -252,7 +252,9 @@ GREMLIN;
         $constants = array_merge($constConstants, $defineConstants);
         $this->logTime('constants : '.count($constants));
 
-        if (!empty($constConstants)) {
+        if (empty($constConstants)) {
+            display('Link constant definitions : skipping.');
+        } else {
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
@@ -320,8 +322,6 @@ GREMLIN;
             // TODO : handle case-insensitive
             $this->logTime('Constant definitions');
             display('Link constant definitions');
-        } else {
-            display('Link constant definitions : skipping.');
         }
     }
 

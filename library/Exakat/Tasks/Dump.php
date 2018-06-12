@@ -216,10 +216,10 @@ SQL;
             display('Processing thema : '.$thema);
         } elseif ($this->config->program !== null) {
             $analyzer = $this->config->program;
-            if(!is_array($analyzer)) {
-                $themes = array($analyzer);
-            } else {
+            if(is_array($analyzer)) {
                 $themes = $analyzer;
+            } else {
+                $themes = array($analyzer);
             }
 
             foreach($themes as $theme) {

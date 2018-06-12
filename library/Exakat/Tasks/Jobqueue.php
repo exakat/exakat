@@ -96,8 +96,10 @@ class Jobqueue extends Tasks {
             $job = current($queue);
             $jobkey = key($queue);
             
-            if(!empty($job)) {
-                
+            if(empty($job)) {
+                display( "no jobs to do - waiting...\n");
+                stream_set_blocking($pipe, true);
+            } else {
                 $command = json_decode(trim($job));
                 
                 if ($command === null) {
@@ -130,14 +132,12 @@ class Jobqueue extends Tasks {
                         break;
                     
                     default :
-                        print 'Unknown command "'.$command[1].'"'.PHP_EOL;
+                        print "Unknown command '$command[1]'\n";
+                        $this->log("Unknown command '$command[1]'");
                 }
 
                 next($queue);
                 unset($job, $queue[$jobkey]);
-            } else {
-                display( 'no jobs to do - waiting...'.PHP_EOL);
-                stream_set_blocking($pipe, true);
             }
         }
     }
@@ -174,12 +174,11 @@ class Jobqueue extends Tasks {
     }
 
     private function processReport($job) {
-        if (!file_exists("{$this->config->projects_root}/$job[1]")) {
-            $this->log("No such project as $job[1]. Ignoring\n");
+        $config = new ConfigExakat($job);
+        if (!file_exists("{$this->config->projects_root}/projects/{$config->project}")) {
+            $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-
-        $config = new ConfigExakat($job);
         $analyze = new Report($this->gremlin, $config, Tasks::IS_SUBTASK);
 
         display( 'processing report job '.$job[1].PHP_EOL);
@@ -192,12 +191,11 @@ class Jobqueue extends Tasks {
     }
 
     private function processProject($job) {
-        if (!file_exists("{$this->config->projects_root}/$job[1]")) {
-            $this->log("No such project as $job[1]. Ignoring\n");
+        $config = new ConfigExakat($job);
+        if (!file_exists("{$this->config->projects_root}/projects/{$config->project}")) {
+            $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-
-        $config = new ConfigExakat($job);
         $analyze = new Project($this->gremlin, $config, Tasks::IS_SUBTASK);
 
         display( 'processing project job '.$job[1].PHP_EOL);
@@ -217,12 +215,11 @@ class Jobqueue extends Tasks {
     }
 
     private function processConfig($job) {
-        if (!file_exists("{$this->config->projects_root}/$job[1]")) {
-            $this->log("No such project as $job[1]. Ignoring\n");
+        $config = new ConfigExakat($job);
+        if (!file_exists("{$this->config->projects_root}/projects/{$config->project}")) {
+            $this->log("No such project as {$config->project}. Ignoring\n");
             return;
         }
-
-        $config = new ConfigExakat($job);
         $analyze = new Config($this->gremlin, $config, Tasks::IS_SUBTASK);
 
         display( 'processing config job '.$job[1].PHP_EOL);
@@ -240,6 +237,10 @@ class Jobqueue extends Tasks {
 
     private function processRemove($job) {
         $config = new ConfigExakat($job);
+        if (!file_exists("{$this->config->projects_root}/projects/{$config->project}")) {
+            $this->log("No such project as {$config->project}. Ignoring\n");
+            return;
+        }
         $analyze = new Remove($this->gremlin, $config, Tasks::IS_SUBTASK);
 
         display( 'processing remove job '.$job[1].PHP_EOL);

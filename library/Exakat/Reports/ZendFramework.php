@@ -1045,7 +1045,7 @@ SQL;
 
     private function getSeveritiesNumberBy($type = 'file') {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $list = makeList($list);
 
         $query = <<<SQL
 SELECT $type, severity, count(*) AS count
@@ -1058,10 +1058,10 @@ SQL;
 
         $return = array();
         while ($row = $stmt->fetchArray(\SQLITE3_ASSOC) ) {
-            if ( !isset($return[$row[$type]]) ) {
-                $return[$row[$type]] = array($row['severity'] => $row['count']);
-            } else {
+            if ( isset($return[$row[$type]]) ) {
                 $return[$row[$type]][$row['severity']] = $row['count'];
+            } else {
+                $return[$row[$type]] = array($row['severity'] => $row['count']);
             }
         }
 
@@ -1579,15 +1579,15 @@ HTML;
             return '-';
         }
         
-        if (strpos($cve, ', ') !== false) {
+        if (strpos($cve, ', ') === false) {
+            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+        } else {
             $cves = explode(', ', $cve);
             $cveHtml = array();
             foreach($cves as $cve) {
                 $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
             }
             $cveHtml = implode(',<br />', $cveHtml);
-        } else {
-            $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
         }
 
         return $cveHtml;

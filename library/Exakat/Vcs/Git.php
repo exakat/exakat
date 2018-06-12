@@ -70,12 +70,12 @@ class Git extends Vcs {
 
         $shell = "cd {$this->destinationFull};GIT_TERMINAL_PROMPT=0 git clone -q $repositoryNormalizedURL";
 
-        if (!empty($this->tag)) {
-            display("Check out with tag $this->tag");
-            $shell .= " -b $this->tag ";
-        } else {
+        if (empty($this->tag)) {
             display("Check out with branch $this->tag");
             $shell .= " -b $this->branch ";
+        } else {
+            display("Check out with tag $this->tag");
+            $shell .= " -b $this->tag ";
         }
         
         $shell .= ' code 2>&1 ';

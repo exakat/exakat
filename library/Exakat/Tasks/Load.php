@@ -2471,6 +2471,7 @@ SQL;
         $fullcode = array();
         while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON &&
                $this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG) {
+
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
                 ++$this->id;
                 $this->processSingle($atom);
@@ -5137,10 +5138,10 @@ SQL;
         array_pop($this->sequenceRank);
         $this->sequenceCurrentRank = count($this->sequenceRank) - 1;
 
-        if (!empty($this->sequences)) {
-            $this->sequence = $this->sequences[count($this->sequences) - 1];
-        } else {
+        if (empty($this->sequences)) {
             $this->sequence = null;
+        } else {
+            $this->sequence = $this->sequences[count($this->sequences) - 1];
         }
     }
 
@@ -5354,16 +5355,7 @@ SQL;
             return; // Can't be a class anyway.
         }
 
-        if (strpos($call->noDelimiter, '::') !== false) {
-            $fullnspath = mb_strtolower(substr($call->noDelimiter, 0, strpos($call->noDelimiter, '::')) );
-
-            if (empty($fullnspath)) {
-                $fullnspath = '\\';
-            } elseif ($fullnspath[0] !== '\\') {
-                $fullnspath = '\\'.$fullnspath;
-            }
-            $types = array('class');
-        } else {
+        if (strpos($call->noDelimiter, '::') === false) {
             $types = array('function', 'class');
 
             $fullnspath = mb_strtolower($call->noDelimiter);
@@ -5373,6 +5365,15 @@ SQL;
             if (strpos($fullnspath, '\\\\') !== false) {
                 $fullnspath = stripslashes($fullnspath);
             }
+        } else {
+            $fullnspath = mb_strtolower(substr($call->noDelimiter, 0, strpos($call->noDelimiter, '::')) );
+
+            if (empty($fullnspath)) {
+                $fullnspath = '\\';
+            } elseif ($fullnspath[0] !== '\\') {
+                $fullnspath = '\\'.$fullnspath;
+            }
+            $types = array('class');
         }
 
         $atom = 'String';

@@ -299,7 +299,9 @@ class Files extends Tasks {
 
         unlink($tmpFileName);
 
-        if ($tokenssot != $tokens) {
+        if ($tokenssot === $tokens) {
+            display('Short tag OK');
+        } else {
             $nosot = explode("\n", trim($resultNosot));
             $nosot2 = array();
             foreach($nosot as $value) {
@@ -318,9 +320,7 @@ class Files extends Tasks {
             $sot = $sot2;
             unset($sot2);
 
-            if (count($nosot) != count($sot)) {
-                $this->log->log('Error in short open tag analyze : not the same number of files '.count($nosot).' / '.count($sot).".\n");
-            } else {
+            if (count($nosot) === count($sot)) {
                 display('Short tag has diff');
                 $shortOpenTag = array();
                 foreach($nosot as $file => $countNoSot) {
@@ -335,9 +335,9 @@ class Files extends Tasks {
                     }
                 }
                 $this->datastore->addRow('shortopentag', $shortOpenTag);
+            } else {
+                $this->log->log('Error in short open tag analyze : not the same number of files '.count($nosot).' / '.count($sot).".\n");
             }
-        } else {
-            display('Short tag OK');
         }
 
         $i = array();

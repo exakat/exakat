@@ -504,11 +504,11 @@ function rstlist2html($raw) {
     
     foreach($lines as $line ) {
         if (preg_match('/^\*\s+([^\*]+)\s*<br \/>$/', $line, $r)) {
-            if ($list !== true) {
-                $list = true;
-                $html []= '<ul>';
+            if ($list === true) {
                 $html [] = "<li>$r[1]</li>";
             } else {
+                $list = true;
+                $html []= '<ul>';
                 $html [] = "<li>$r[1]</li>";
             }
             continue;
