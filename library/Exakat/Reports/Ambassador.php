@@ -146,9 +146,9 @@ class Ambassador extends Reports {
         if (strpos($html, '{{BLOC-JS}}') !== false) {
             $html = str_replace('{{BLOC-JS}}', '', $html);
         }
-        $html = str_replace('{{TITLE}}', 'PHP Static analysis for '.$this->config->project_name, $html);
+        $html = str_replace('{{TITLE}}', "PHP Static analysis for {$this->config->project_name}", $html);
 
-        file_put_contents($this->tmpName.'/datas/'.$file.'.html', $html);
+        file_put_contents("$this->tmpName/datas/$file.html", $html);
     }
 
     protected function injectBloc($html, $bloc, $content) {
@@ -1531,26 +1531,25 @@ SQL;
                             'value' => $row['number']);
         }
 
-        $html = '';
+        $html = array();
         $dataScript = array();
         foreach ($data as $key => $value) {
-            $html .= '<div class="clearfix">
+            $html []= '<div class="clearfix">
                    <div class="block-cell">'.$value['label'].'</div>
                    <div class="block-cell text-center">'.$value['value'].'</div>
                  </div>';
             $dataScript[] = '{label: "'.$value['label'].'", value: '.( (int) $value['value']).'}';
         }
+        $html = implode(', ', $html);
         $dataScript = implode(', ', $dataScript);
 
-        $nb = 4 - count($data);
-        for($i = 0; $i < $nb; ++$i) {
-            $html .= '<div class="clearfix">
+        $html .= str_repeat('<div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
-                 </div>';
-        }
+                 </div>', 4 - count($data));
 
-        return array('html' => $html, 'script' => $dataScript);
+        return array('html'   => $html, 
+                     'script' => $dataScript);
     }
 
     private function getTotalAnalysedFile() {

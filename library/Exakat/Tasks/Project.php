@@ -307,7 +307,7 @@ class Project extends Tasks {
             } else {
                 $nodes = $res[0];
             }
-            $query = "g.E().count()";
+            $query = 'g.E().count()';
             $res = $this->gremlin->query($query);
             if ($res instanceof \stdClass) {
                 $links = $res->results[0];
