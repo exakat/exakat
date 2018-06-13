@@ -64,14 +64,12 @@ abstract class Analyzer {
     
     private $path_tmp           = null;
 
-    protected $severity = self::S_NONE; // Default to None.
     const S_CRITICAL = 'Critical';
     const S_MAJOR    = 'Major';
     const S_MINOR    = 'Minor';
     const S_NOTE     = 'Note';
     const S_NONE     = 'None';
 
-    protected $timeToFix = self::T_NONE; // Default to no time (Should not display)
     const T_NONE    = 'None';    //'0';
     const T_INSTANT = 'Instant'; //'5';
     const T_QUICK   = 'Quick';   //30';
