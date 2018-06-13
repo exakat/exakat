@@ -1990,7 +1990,7 @@ SQL;
                                                                         $this->phptokens::T_COLON,
                                                                         ))) {
                     $this->processNext();
-                };
+                }
                 $index = $this->popExpression();
                 
                 while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA) {
@@ -2497,7 +2497,7 @@ SQL;
                 $fullcode[] = $element->fullcode;
                 ++$this->id;
             }
-        };
+        }
         $element = $this->popExpression();
         $this->addLink($static, $element, $link);
 
@@ -2608,7 +2608,7 @@ SQL;
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                     $this->processSemicolon();
                 }
-            };
+            }
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
@@ -2723,7 +2723,7 @@ SQL;
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_AS))) {
             $this->processNext();
-        };
+        }
 
         $source = $this->popExpression();
         $this->addLink($foreach, $source, 'SOURCE');
@@ -2733,7 +2733,7 @@ SQL;
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS, $this->phptokens::T_DOUBLE_ARROW))) {
             $this->processNext();
-        };
+        }
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_ARROW) {
             $this->processNext();
@@ -2785,7 +2785,7 @@ SQL;
 
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 $this->processNext();
-            };
+            }
 
             $this->endSequence();
             $this->pushExpression($this->sequence);
@@ -2830,7 +2830,7 @@ SQL;
             } else {
                 while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                     $this->processNext();
-                };
+                }
                 $expression = $this->popExpression();
                 $this->addToSequence($expression);
             }
@@ -2887,7 +2887,7 @@ SQL;
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
             $this->processNext();
-        };
+        }
         $condition = $this->popExpression();
         $this->addLink($while, $condition, 'CONDITION');
 
@@ -2960,7 +2960,7 @@ SQL;
         $this->startSequence();
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY, $this->phptokens::T_CASE, $this->phptokens::T_DEFAULT, $this->phptokens::T_ENDSWITCH))) {
             $this->processNext();
-        };
+        }
         $this->addLink($default, $this->sequence, 'CODE');
         $this->endSequence();
 
@@ -2981,7 +2981,7 @@ SQL;
         $this->nestContext();
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COLON, $this->phptokens::T_SEMICOLON))) {
             $this->processNext();
-        };
+        }
         $this->exitContext();
 
         $item = $this->popExpression();
@@ -2992,7 +2992,7 @@ SQL;
         $this->startSequence();
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY, $this->phptokens::T_CASE, $this->phptokens::T_DEFAULT, $this->phptokens::T_ENDSWITCH))) {
             $this->processNext();
-        };
+        }
         $this->addLink($case, $this->sequence, 'CODE');
         $this->endSequence();
 
@@ -3012,7 +3012,7 @@ SQL;
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
             $this->processNext();
-        };
+        }
         $name = $this->popExpression();
         $this->addLink($switch, $name, 'NAME');
 
@@ -3049,7 +3049,7 @@ SQL;
                 $case = $this->popExpression();
                 $this->addLink($cases, $case, 'EXPRESSION');
                 $case->rank = ++$rank;
-            };
+            }
         }
         ++$this->id;
         $cases->count = $rank;
@@ -3079,7 +3079,7 @@ SQL;
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
             $this->processNext();
-        };
+        }
         $condition = $this->popExpression();
         $this->addLink($ifthen, $condition, 'CONDITION');
 
@@ -3157,7 +3157,7 @@ SQL;
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
             $this->processNext();
-        };
+        }
 
         $code = $this->popExpression();
         $this->addLink($parenthese, $code, 'CODE');
@@ -3317,7 +3317,7 @@ SQL;
         $this->nestContext();
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COLON)) ) {
             $this->processNext();
-        };
+        }
         $this->exitContext();
         $then = $this->popExpression();
         ++$this->id; // Skip colon
@@ -3389,7 +3389,7 @@ SQL;
                 $this->tokens[$this->id + 2][0] === $this->phptokens::T_NS_SEPARATOR) {
                 $this->processNext();
             }
-        };
+        }
         $block = $this->sequence;
         $this->endSequence();
 
@@ -4103,7 +4103,7 @@ SQL;
         ++$this->id;
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY))) {
             $this->processNext();
-        };
+        }
 
         $code = $this->popExpression();
         $block = $this->addAtom('Block');
@@ -4129,7 +4129,7 @@ SQL;
             ++$this->id;
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY)) ) {
                 $this->processNext();
-            };
+            }
 
             // Skip }
             ++$this->id;
@@ -4275,7 +4275,7 @@ SQL;
         }
         do {
             $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals));
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
@@ -4682,7 +4682,7 @@ SQL;
         $finals = $this->precedence->get($this->phptokens::T_ELLIPSIS);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
-        };
+        }
 
         $operand = $this->popExpression();
         $operand->fullcode  = '...'.$operand->fullcode;
@@ -4815,7 +4815,7 @@ SQL;
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
-        };
+        }
         $right = $this->popExpression();
 
         $this->addLink($instanceof, $right, 'CLASS');
@@ -4925,7 +4925,7 @@ SQL;
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
-        };
+        }
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
