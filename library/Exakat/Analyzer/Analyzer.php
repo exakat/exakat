@@ -33,8 +33,6 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Graph\Helpers\GraphResults;
 
 abstract class Analyzer {
-    protected $code           = null;
-
     protected $description    = null;
 
     static public $datastore  = null;
@@ -126,8 +124,6 @@ abstract class Analyzer {
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = $this->getName($this->analyzer);
 
-        $this->code = $this->analyzer;
-        
         $this->_as('first');
         
         assert($config !== null, 'Can\'t call Analyzer without a config');
@@ -1965,10 +1961,16 @@ GREMLIN;
     }
     
     public function run() {
+        $a = microtime(true);
         $this->analyze();
         $this->prepareQuery();
+        $b = microtime(true);
 
         $this->execQuery();
+        $c = microtime(true);
+//        print "Prepare : ".number_format(1000*($b - $a), 2)."ms\n";
+//        print "Run : ".number_format(1000*($c - $b), 2)."ms\n";
+//        print "Analyze : ".number_format(1000*($c - $a), 2)."ms\n";
         
         return $this->rowCount;
     }
