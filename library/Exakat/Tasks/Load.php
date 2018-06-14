@@ -36,6 +36,7 @@ use Exakat\Phpexec;
 use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Helpers\Atom;
 use Exakat\Tasks\Helpers\AtomGroup;
+use Exakat\Tasks\Helpers\Calls;
 use Exakat\Tasks\Helpers\Intval;
 use Exakat\Tasks\Helpers\Strval;
 use Exakat\Tasks\Helpers\Boolval;
@@ -54,9 +55,8 @@ class Load extends Tasks {
     private $precedence   = null;
     private $phptokens    = null;
 
-    private $callsSqlite = null;
-    
     private $atomGroup = null;
+    private $calls = null;
 
     private $namespace = '\\';
     private $uses   = array('function'       => array(),
@@ -392,31 +392,7 @@ class Load extends Tasks {
             $this->phptokens::T_GLOBAL                   => 'processGlobalVariable',
         );
 
-        if (file_exists($this->config->projects_root.'/projects/.exakat/calls.sqlite')) {
-            unlink($this->config->projects_root.'/projects/.exakat/calls.sqlite');
-        }
-        $this->callsSqlite = new \Sqlite3($this->config->projects_root.'/projects/.exakat/calls.sqlite');
-        $calls = <<<SQL
-CREATE TABLE calls (
-    type STRING,
-    fullnspath STRING,
-    globalpath STRING,
-    atom STRING,
-    id INTEGER
-)
-SQL;
-        $this->callsSqlite->query($calls);
-
-        $definitions = <<<SQL
-CREATE TABLE definitions (
-    type STRING,
-    fullnspath STRING,
-    globalpath STRING,
-    atom STRING,
-    id INTEGER
-)
-SQL;
-        $this->callsSqlite->query($definitions);
+        $this->calls = new Calls($this->config->projects_root);
     }
 
     public function runPlugins($atom, $linked = array()) {
@@ -691,6 +667,7 @@ SQL;
             throw new NoFileToProcess($filename, 'empty', 0, $e);
         } finally {
             $this->checkTokens($filename);
+            $this->calls->save();
 
             $this->stats['totalLoc'] += $line;
             $this->stats['loc'] += $line;
@@ -742,7 +719,7 @@ SQL;
         } else {
             $method = end($this->currentFunction)->fullnspath;
         }
-        $this->addDefinition('goto', $class.'::'.$method.'..'.$tag->fullcode, $label);
+        $this->calls->addDefinition('goto', $class.'::'.$method.'..'.$tag->fullcode, $label);
 
         $this->pushExpression($label);
         $this->processSemicolon();
@@ -945,7 +922,7 @@ SQL;
                 $this->addLink($catch, $class, 'CLASS');
                 $catch->rank = ++$rankCatch;
 
-                $this->addCall('class', $class->fullnspath, $class);
+                $this->calls->addCall('class', $class->fullnspath, $class);
                 $catchFullcode[] = $class->fullcode;
 
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PIPE) {
@@ -1069,7 +1046,7 @@ SQL;
 
         if ( $function->atom === 'Function') {
             list($fullnspath, $aliased) = $this->getFullnspath($name);
-            $this->addDefinition('function', $fullnspath, $function);
+            $this->calls->addDefinition('function', $fullnspath, $function);
         } elseif ( $function->atom === 'Closure') {
             $fullnspath = $this->makeAnonymous('function');
             $aliased    = self::NOT_ALIASED;
@@ -1159,11 +1136,11 @@ SQL;
         if ($function->atom === 'Function' ) {
             $this->processSemicolon();
         } elseif ($function->atom === 'Method' && !empty(preg_grep('/^static$/i', $fullcode))) {
-            $this->addDefinition('staticmethod', $function->fullnspath, $function);
+            $this->calls->addDefinition('staticmethod', $function->fullnspath, $function);
         } elseif ($function->atom === 'Method') {
-            $this->addDefinition('method', $function->fullnspath, $function);
+            $this->calls->addDefinition('method', $function->fullnspath, $function);
             // double call for internal reference
-            $this->addDefinition('staticmethod', $function->fullnspath, $function);
+            $this->calls->addDefinition('staticmethod', $function->fullnspath, $function);
         }
 
         if (!$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -1189,7 +1166,7 @@ SQL;
  
         if ($getFullnspath === self::WITH_FULLNSPATH) {
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
-            $this->addCall('class', $nsname->fullnspath, $nsname);
+            $this->calls->addCall('class', $nsname->fullnspath, $nsname);
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
         }
@@ -1209,7 +1186,7 @@ SQL;
         list($fullnspath, $aliased) = $this->getFullnspath($name, 'class');
         $trait->fullnspath = $fullnspath;
         $trait->aliased    = $aliased;
-        $this->addDefinition('class', $trait->fullnspath, $trait);
+        $this->calls->addDefinition('class', $trait->fullnspath, $trait);
 
         // Process block
         $this->makeCitBody($trait);
@@ -1243,7 +1220,7 @@ SQL;
         $interface->fullnspath = $fullnspath;
         $interface->aliased    = $aliased;
 
-        $this->addDefinition('class', $fullnspath, $interface);
+        $this->calls->addDefinition('class', $fullnspath, $interface);
 
         // Process extends
         $rank = 0;
@@ -1257,7 +1234,7 @@ SQL;
                 $extends->rank = $rank;
 
                 $this->addLink($interface, $extends, 'EXTENDS');
-                $this->addCall('class', $extends->fullnspath, $extends);
+                $this->calls->addCall('class', $extends->fullnspath, $extends);
 
                 $fullcode[] = $extends->fullcode;
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
@@ -1372,7 +1349,7 @@ SQL;
             $class->fullnspath = $fullnspath;
             $class->aliased    = $aliased;
 
-            $this->addDefinition('class', $class->fullnspath, $class);
+            $this->calls->addDefinition('class', $class->fullnspath, $class);
             $this->addLink($class, $name, 'NAME');
         } else {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
@@ -1386,7 +1363,7 @@ SQL;
 
             $class->fullnspath = $this->makeAnonymous();
             $class->aliased    = self::NOT_ALIASED;
-            $this->addDefinition('class', $class->fullnspath, $class);
+            $this->calls->addDefinition('class', $class->fullnspath, $class);
         }
 
         // Should work on Abstract and Final only
@@ -1411,7 +1388,7 @@ SQL;
 
             $this->addLink($class, $extends, 'EXTENDS');
             list($fullnspath, $aliased) = $this->getFullnspath($extends, 'class');
-            $this->addCall('class', $extends->fullnspath, $extends);
+            $this->calls->addCall('class', $extends->fullnspath, $extends);
 
             $this->currentParentClassTrait[] = $extends;
             $isExtended = true;
@@ -1428,7 +1405,7 @@ SQL;
                 $fullcodeImplements[] = $implements->fullcode;
 
                 list($fullnspath, $aliased) = $this->getFullnspath($implements);
-                $this->addCall('class', $fullnspath, $implements);
+                $this->calls->addCall('class', $fullnspath, $implements);
             } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
         }
 
@@ -1499,7 +1476,6 @@ SQL;
         if ($this->tokens[$n][0] === $this->phptokens::T_INLINE_HTML) {
             --$n;
         }
-
 
         while ($this->id < $n) {
             if ($this->tokens[$this->id][0] === $this->phptokens::T_OPEN_TAG_WITH_ECHO) {
@@ -1721,7 +1697,7 @@ SQL;
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
 
-            $this->addCall('class', $fullnspath, $nsname);
+            $this->calls->addCall('class', $fullnspath, $nsname);
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE ||
             (isset($this->tokens[$current - 2]) && $this->tokens[$current - 2][0] === $this->phptokens::T_INSTANCEOF)
             ) {
@@ -1730,13 +1706,13 @@ SQL;
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
 
-            $this->addCall('class', $fullnspath, $nsname);
+            $this->calls->addCall('class', $fullnspath, $nsname);
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
 
-            $this->addCall('class', $fullnspath, $nsname);
+            $this->calls->addCall('class', $fullnspath, $nsname);
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
             // DO nothing
 
@@ -1746,7 +1722,7 @@ SQL;
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
 
-            $this->addCall('const', $fullnspath, $nsname);
+            $this->calls->addCall('const', $fullnspath, $nsname);
         }
         
         $this->pushExpression($nsname);
@@ -1780,7 +1756,7 @@ SQL;
                 $nsname->fullnspath = $fullnspath;
                 $nsname->aliased    = $aliased;
                 
-                $this->addCall('class', $fullnspath, $nsname);
+                $this->calls->addCall('class', $fullnspath, $nsname);
             }
             
             return $nsname;
@@ -2006,7 +1982,7 @@ SQL;
                     if ($index->atom === 'Variable' &&
                         $index->code === '$this'    &&
                         $index->rank === 0 ) {
-                        $this->addCall('class', end($this->currentClassTrait)->fullnspath, $index);
+                        $this->calls->addCall('class', end($this->currentClassTrait)->fullnspath, $index);
                     }
                     
                     $fullcode[] = $index->fullcode;
@@ -2123,9 +2099,9 @@ SQL;
 
             if ($this->isContext(self::CONTEXT_CLASS) ||
                 $this->isContext(self::CONTEXT_INTERFACE)   ) {
-                $this->addDefinition('staticconstant',   end($this->currentClassTrait)->fullnspath.'::'.$name->fullcode, $def);
+                $this->calls->addDefinition('staticconstant',   end($this->currentClassTrait)->fullnspath.'::'.$name->fullcode, $def);
             } else {
-                $this->addDefinition('const', $fullnspath, $def);
+                $this->calls->addDefinition('const', $fullnspath, $def);
             }
 
         } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON)));
@@ -2238,7 +2214,7 @@ SQL;
             $functioncall->fullnspath = $fullnspath;
             $functioncall->aliased    = $aliased;
 
-            $this->addCall('class', $fullnspath, $functioncall);
+            $this->calls->addCall('class', $fullnspath, $functioncall);
         } elseif ($atom === 'Methodcallname') {
             $functioncall->fullnspath = mb_strtolower($name->code);
             $functioncall->aliased    = self::NOT_ALIASED;
@@ -2258,9 +2234,9 @@ SQL;
             $name->fullnspath = $fullnspath;
             $name->aliased    = $aliased;
 
-            $this->addCall('function', $fullnspath, $functioncall);
+            $this->calls->addCall('function', $fullnspath, $functioncall);
         }
-        
+
         $this->addLink($functioncall, $name, 'NAME');
         $this->runPlugins($functioncall, array($arguments));
 
@@ -2313,13 +2289,14 @@ SQL;
 
         $this->pushExpression($string);
         
+        // Static ? 
         if (in_array($string->atom, array('Parent', 'Self', 'Newcall'))) {
             if ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_OPEN_PARENTHESIS) {
                 list($fullnspath, $aliased) = $this->getFullnspath($string, 'class');
                 $string->fullnspath = $fullnspath;
                 $string->aliased    = $aliased;
 
-                $this->addCall('class', $fullnspath, $string);
+                $this->calls->addCall('class', $fullnspath, $string);
             }
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF   ||
@@ -2329,7 +2306,7 @@ SQL;
             $string->fullnspath = $fullnspath;
             $string->aliased    = $aliased;
 
-            $this->addCall('class', $fullnspath, $string);
+            $this->calls->addCall('class', $fullnspath, $string);
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($string, 'const');
             $string->fullnspath = $fullnspath;
@@ -2337,7 +2314,7 @@ SQL;
         }
 
         if ($string->atom === 'Identifier') {
-            $this->addCall('const', $string->fullnspath, $string);
+            $this->calls->addCall('const', $string->fullnspath, $string);
         }
 
         $this->runPlugins($string, array());
@@ -2391,7 +2368,7 @@ SQL;
             $identifier = $this->processSingle('Static');
             list($fullnspath, $aliased) = $this->getFullnspath($identifier, 'class');
             $identifier->fullnspath = $fullnspath;
-            $this->addCall('class', $fullnspath, $identifier);
+            $this->calls->addCall('class', $fullnspath, $identifier);
 
             return $identifier;
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
@@ -2508,9 +2485,9 @@ SQL;
             $element->propertyname = $r[1];
             
             if (stripos($fullcodePrefix, 'static') === false) {
-                $this->addDefinition('property', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
+                $this->calls->addDefinition('property', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
             } else {
-                $this->addDefinition('staticproperty', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
+                $this->calls->addDefinition('staticproperty', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
             }
         }
         $fullcode[] = $element->fullcode;
@@ -3557,7 +3534,7 @@ SQL;
                 $fullnspath = '\\'.$fullnspath;
             }
 
-            $this->addCall('class', $fullnspath, $namespace);
+            $this->calls->addCall('class', $fullnspath, $namespace);
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AS) {
                 // use A\B as C
@@ -3701,13 +3678,13 @@ SQL;
                     $this->addLink($namespace, $this->uses['class'][$prefix], 'DEFINITION');
                     $namespace->fullnspath = $this->uses['class'][$prefix]->fullnspath;
     
-                    $this->addCall('class', $namespace->fullnspath, $namespace);
+                    $this->calls->addCall('class', $namespace->fullnspath, $namespace);
                 } else {
                     list($fullnspath, $aliased) = $this->getFullnspath($namespace, 'class');
     
                     $namespace->fullnspath = $fullnspath;
                     $namespace->aliased    = $aliased;
-                    $this->addCall('class', $namespace->fullnspath, $namespace);
+                    $this->calls->addCall('class', $namespace->fullnspath, $namespace);
                 }
 
                 $fullcode[] = $namespace->fullcode;
@@ -3758,7 +3735,7 @@ SQL;
         
         if ($atom === 'This' && ($class = end($this->currentClassTrait))) {
             $variable->fullnspath = $class->fullnspath;
-            $this->addCall('class', $class->fullnspath, $variable);
+            $this->calls->addCall('class', $class->fullnspath, $variable);
         }
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -3794,7 +3771,7 @@ SQL;
             $nsname->aliased    = $aliased;
 
             if ($type === 'const') {
-                $this->addCall('const', $fullnspath, $nsname);
+                $this->calls->addCall('const', $fullnspath, $nsname);
             }
 
             return $nsname;
@@ -3866,12 +3843,12 @@ SQL;
                 $literal->noDelimiter = substr($literal->code, 1, -1);
             }
 
-            $this->addNoDelimiterCall($literal);
+            $this->calls->addNoDelimiterCall($literal);
         } elseif ($this->tokens[$this->id][0] === $this->phptokens::T_NUM_STRING) {
             $literal->delimiter   = '';
             $literal->noDelimiter = $literal->code;
 
-            $this->addNoDelimiterCall($literal);
+            $this->calls->addNoDelimiterCall($literal);
         } else {
             $literal->delimiter   = '';
             $literal->noDelimiter = '';
@@ -4195,7 +4172,7 @@ SQL;
 
         $this->runPlugins($operator, array('GOTO' => $goto));
 
-        $this->addCall('goto', $class.'::'.$method.'..'.$this->tokens[$this->id][1], $operator);
+        $this->calls->addCall('goto', $class.'::'.$method.'..'.$this->tokens[$this->id][1], $operator);
         return $operator;
     }
 
@@ -4500,11 +4477,11 @@ SQL;
 
         if (!empty($left->fullnspath)){
             if ($static->atom === 'Staticmethodcall' && !empty($right->fullnspath)) {
-                $this->addCall('staticmethod',  $left->fullnspath.'::'.$right->fullnspath, $static);
+                $this->calls->addCall('staticmethod',  $left->fullnspath.'::'.$right->fullnspath, $static);
             } elseif ($static->atom === 'Staticconstant') {
-                $this->addCall('staticconstant',  $left->fullnspath.'::'.$right->code, $static);
+                $this->calls->addCall('staticconstant',  $left->fullnspath.'::'.$right->code, $static);
             } elseif ($static->atom === 'Staticproperty') {
-                $this->addCall('staticproperty',  $left->fullnspath.'::'.$right->code, $static);
+                $this->calls->addCall('staticproperty',  $left->fullnspath.'::'.$right->code, $static);
             }
         }
 
@@ -4637,9 +4614,9 @@ SQL;
 
         if ($left->atom   === 'This' ){
             if ($static->atom === 'Methodcall') {
-                $this->addCall('method', $left->fullnspath.'::'.mb_strtolower($right->code), $static);
+                $this->calls->addCall('method', $left->fullnspath.'::'.mb_strtolower($right->code), $static);
             } elseif ($static->atom === 'Member') {
-                $this->addCall('property',  $left->fullnspath.'::$'.$right->code, $static);
+                $this->calls->addCall('property',  $left->fullnspath.'::$'.$right->code, $static);
             }
         }
 
@@ -4821,7 +4798,7 @@ SQL;
         $this->addLink($instanceof, $right, 'CLASS');
         
         list($fullnspath, $aliased) = $this->getFullnspath($right);
-        $this->addCall('class', $fullnspath, $right);
+        $this->calls->addCall('class', $fullnspath, $right);
         $right->aliased = $aliased;
 
         $instanceof->code     = $this->tokens[$current][1];
@@ -5090,7 +5067,7 @@ SQL;
         if ($this->argumentsId[0]->noDelimiter[0] === '\\') {
             $fullnspath = "\\$fullnspath";
         }
-        $this->addDefinition('const', $fullnspath, $argumentsId);
+        $this->calls->addDefinition('const', $fullnspath, $argumentsId);
         $this->argumentsId[0]->fullnspath = $fullnspath;
 
         if ($argumentsId->count === 3) {
@@ -5304,132 +5281,6 @@ SQL;
         $this->uses[$useType][$alias] = $use;
 
         return $alias;
-    }
-
-    private function addCall($type, $fullnspath, $call) {
-        if (empty($fullnspath)) {
-            return;
-        }
-
-        // No need for This
-        if (in_array($call->atom, array(//'This', 'Self', 'Static',
-                                        'Parent',
-//                                        'Member', 'Methodcall', 'Staticmethodcall', 'Staticproperty', 'Staticconstant',
-                                        'Isset', 'List', 'Empty', 'Eval', 'Exit',
-                                        ))) {
-            return;
-        }
-        
-        if (!is_string($fullnspath)) {
-            throw new LoadError( "Warning : fullnspath is not a string : it is ".gettype($fullnspath).PHP_EOL);
-        }
-
-        if ($fullnspath === 'undefined') {
-            $globalpath = '';
-        } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
-            $globalpath = $r[1];
-        } else {
-            $globalpath = '';
-        }
-        
-        $query = "INSERT INTO calls VALUES ('{$type}',
-                                            '{$this->callsSqlite->escapeString($fullnspath)}',
-                                            '{$this->callsSqlite->escapeString($globalpath)}',
-                                            '{$call->atom}',
-                                            '{$call->id}'
-         )";
-
-        $this->callsSqlite->query($query);
-    }
-
-    private function addNoDelimiterCall($call) {
-        if (empty($call->noDelimiter)) {
-            return; // Can't be a class anyway.
-        }
-        if ((int) $call->noDelimiter) {
-            return; // Can't be a class anyway.
-        }
-        // single : is OK
-        // \ is OK (for hardcoded path)
-        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=\+!`@\-]/is', $call->noDelimiter)) {
-            return; // Can't be a class anyway.
-        }
-
-        if (strpos($call->noDelimiter, '::') === false) {
-            $types = array('function', 'class');
-
-            $fullnspath = mb_strtolower($call->noDelimiter);
-            if (empty($fullnspath) || $fullnspath[0] !== '\\') {
-                $fullnspath = '\\'.$fullnspath;
-            }
-            if (strpos($fullnspath, '\\\\') !== false) {
-                $fullnspath = stripslashes($fullnspath);
-            }
-        } else {
-            $fullnspath = mb_strtolower(substr($call->noDelimiter, 0, strpos($call->noDelimiter, '::')) );
-
-            if (empty($fullnspath)) {
-                $fullnspath = '\\';
-            } elseif ($fullnspath[0] !== '\\') {
-                $fullnspath = '\\'.$fullnspath;
-            }
-            $types = array('class');
-        }
-
-        $atom = 'String';
-
-        foreach($types as $type) {
-            if ($fullnspath === 'undefined') {
-                $globalpath = '';
-            } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
-                $globalpath = $r[1];
-            } else {
-                $globalpath = '';
-            }
-            
-            $query = "INSERT INTO calls VALUES ('$type',
-                                                  '{$this->callsSqlite->escapeString($fullnspath)}',
-                                                  '{$this->callsSqlite->escapeString($globalpath)}',
-                                                  '{$atom}',
-                                                  '{$call->id}'
-                                               )";
-
-            $this->callsSqlite->query($query);
-        }
-    }
-
-    private function addDefinition($type, $fullnspath, $definition) {
-        if (empty($fullnspath)) {
-            return;
-        }
-
-        // No need for them
-        if (in_array($definition->atom, array(//'Assignation', 'Defineconstant', 'Const', 'Constant',
-                                              //'Propertydefinition',
-                                              //'Method',
-                                              ))) {
-            return;
-        }
-
-        if ($fullnspath === 'undefined') {
-            $globalpath = '';
-        } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
-            $globalpath = $r[1];
-        } else {
-            $globalpath = '';
-        }
-
-        $query = "INSERT INTO definitions VALUES ('{$type}',
-                                                  '{$this->callsSqlite->escapeString($fullnspath)}',
-                                                  '{$this->callsSqlite->escapeString($globalpath)}',
-                                                  '{$definition->atom}',
-                                                  '{$definition->id}'
-         )";
-
-        $res = $this->callsSqlite->query($query);
-        if (!is_string($fullnspath)) {
-            throw new LoadError( "Error while saving definitions\n");
-        }
     }
 
     private function logTime($step) {
