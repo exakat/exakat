@@ -32,7 +32,7 @@ class UsedPrivateProperty extends Analyzer {
         
         // property used in a staticproperty \a\b::$b
         $this->atomIs('Ppp')
-             ->hasOut('PRIVATE')
+             ->is('visibility', 'private')
 
              ->outIs('PPP')
              ->_as('ppp')
@@ -59,7 +59,7 @@ GREMLIN
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('PPP')
              ->atomIs('Ppp')
-             ->hasOut('PRIVATE')
+             ->is('visibility', 'private')
              ->outIs('PPP')
              ->outIsIE('LEFT')
              ->_as('ppp')
@@ -82,7 +82,7 @@ GREMLIN
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('PPP')
              ->atomIs('Ppp')
-             ->hasOut('PRIVATE')
+             ->is('visibility', 'private')
              ->outIs('PPP')
              ->savePropertyAs('propertyname', 'x')
              ->_as('ppp')

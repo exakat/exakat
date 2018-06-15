@@ -29,9 +29,10 @@ class AbstractStatic extends Analyzer {
     protected $phpVersion = '7.0-';
 
     public function analyze() {
-        $this->atomIs('Method')
-             ->hasOut('ABSTRACT')
-             ->hasOut('STATIC');
+        // class x { static abstract function foo() ; }
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->is('abstract', true)
+             ->is('static', true);
         $this->prepareQuery();
     }
 }

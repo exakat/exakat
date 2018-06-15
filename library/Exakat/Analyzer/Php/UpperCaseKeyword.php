@@ -30,8 +30,7 @@ class UpperCaseKeyword extends Analyzer {
         $this->atomIs(array('Class', 'Foreach', 'Switch', 'For', 'Namespace', 'Usenamese', 'Usetrait', 'Function', 'Method',
                             'Try', 'Catch', 'Case', 'Default', 'Goto', 'Continue', 'Const', 'Break',
                             'Clone', 'Dowhile', 'While', 'Interface', 'Instanceof', 'Insteadof', 'Return',
-                            'Throw', 'Trait', 'Interface', 'Var', 'Logical', 'Public', 'Static', 'Protected', 'Private',
-                            'Final', 'Abstract' ))
+                            'Throw', 'Trait', 'Interface', 'Var', 'Logical', 'Static',))
              ->codeIsNot(array('&&', '||', '^', '&', '|'))
              ->isNotLowercase();
         $this->prepareQuery();

@@ -31,7 +31,7 @@ class ConstVisibilityUsage extends Analyzer {
         // class x { public const A = 1; }
         $this->atomIs(array('Class', 'Interface'))
              ->outIs('CONST')
-             ->hasOut(array('PUBLIC', 'PRIVATE', 'PROTECTED'));
+             ->is('visibility', array('public', 'private', 'protected'));
         $this->prepareQuery();
     }
 }

@@ -29,13 +29,13 @@ class AccessPrivate extends Analyzer {
     public function analyze() {
         $hasPrivateMethodDefinition = 'where( __.out("METHOD").hasLabel("Method")
                                                 .out("NAME").filter{it.get().value("code") == name}.in("NAME")
-                                                .out("PRIVATE") )';
+                                                .has("visibility", true) )';
         $notHasPrivateMethodDefinition = 'not( where( __.out("METHOD").hasLabel("Method")
                                                         .out("NAME").filter{it.get().value("code") == name}.in("NAME")
-                                                        .out("PRIVATE") ) ) ';
+                                                        .has("visibility", true) ) ) ';
 
         $hasPrivateProperty = 'where( __.out("PPP").hasLabel("Ppp")
-                                        .where( __.out("PRIVATE") ).out("PPP").coalesce(out("LEFT"),  __.filter{true} )
+                                        .where( __.has("visibility", true).out("PPP").coalesce(out("LEFT"),  __.filter{true} )
                                         .filter{it.get().value("code") == name} )';
         
         // methods

@@ -31,7 +31,7 @@ class MethodUsedBelow extends Analyzer {
         // property + $this->property
         //////////////////////////////////////////////////////////////////
         $this->atomIs('Method')
-             ->hasNoOut('STATIC')
+             ->isNot('static', true)
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'methodname')
              ->goToClass()
@@ -52,7 +52,7 @@ GREMLIN
         // static property : inside the self class
         //////////////////////////////////////////////////////////////////
         $this->atomIs('Method')
-             ->hasOut('STATIC')
+             ->is('static', true)
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'methodname')
              ->goToClass()

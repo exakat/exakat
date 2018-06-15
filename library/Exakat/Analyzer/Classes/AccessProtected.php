@@ -37,7 +37,7 @@ class AccessProtected extends Analyzer {
              ->classDefinition()
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->hasOut('PROTECTED')
+             ->is('visibility', 'protected')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->back('first');
@@ -56,7 +56,7 @@ class AccessProtected extends Analyzer {
              ->classDefinition()
              ->outIs('PPP')
              ->atomIs('Ppp')
-             ->hasOut('PROTECTED')
+             ->is('visibility', 'protected')
              ->outIs('PPP')
              ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')

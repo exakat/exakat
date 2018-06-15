@@ -80,7 +80,7 @@ GREMLIN;
         
         // global static constants : the one with no definition class : they are all ignored.
         $this->atomIs('Const')
-             ->hasNoOut('PRIVATE')
+             ->isNot('visibility', 'private')
              ->outIs('CONST')
              ->analyzerIsNot('Classes/ConstantUsedBelow')
              ->_as('results')

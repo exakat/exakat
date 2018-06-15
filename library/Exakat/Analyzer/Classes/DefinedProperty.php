@@ -54,7 +54,7 @@ class DefinedProperty extends Analyzer {
              ->goToClass()
              ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('PPP')
-             ->hasNoOut('PRIVATE')
+             ->isNot('visibility', 'private')
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->samePropertyAs('propertyname', 'property')

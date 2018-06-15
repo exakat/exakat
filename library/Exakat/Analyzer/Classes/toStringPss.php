@@ -36,21 +36,21 @@ class toStringPss extends Analyzer {
         }
         unset($method);
         
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->hasClass()
              ->outIs('NAME')
              ->codeIs($methods)
              ->inIs('NAME')
-             ->hasOut('STATIC')
+             ->is('static', true)
              ->back('first');
             $this->prepareQuery();
 
-        $this->atomIs('Method')
+        $this->atomIs('Magicmethod')
              ->hasClass()
              ->outIs('NAME')
              ->codeIs($methods)
              ->inIs('NAME')
-             ->hasOut(array('PRIVATE', 'PROTECTED'))
+             ->is('visibility', array('private', 'protected'))
              ->back('first');
         $this->prepareQuery();
     }

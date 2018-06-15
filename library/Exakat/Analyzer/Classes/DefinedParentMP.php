@@ -46,7 +46,7 @@ class DefinedParentMP extends Analyzer {
              ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->hasNoOut('PRIVATE')
+             ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->back('first');
@@ -101,7 +101,7 @@ class DefinedParentMP extends Analyzer {
              ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('PPP')
              ->atomIs('Ppp')
-             ->hasNoOut('PRIVATE')
+             ->isNot('visibility', 'private')
              ->outIs('PPP')
              ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')

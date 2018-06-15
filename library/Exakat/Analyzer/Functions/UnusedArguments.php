@@ -68,7 +68,7 @@ class UnusedArguments extends Analyzer {
              ->_as('results')
 
              ->hasClassTrait()
-             ->hasNoOut('ABSTRACT')
+             ->isNot('abstract', true)
              ->checkInheriting()
              ->outIs('BLOCK')
              // this argument must be read at least once
@@ -105,7 +105,7 @@ class UnusedArguments extends Analyzer {
              ->_as('results')
 
              ->hasClassTrait()
-             ->hasNoOut('ABSTRACT')
+             ->isNot('abstract', true)
              ->checkInheriting()
              ->outIs('BLOCK')
              // this argument must be read or written at least once (in fact, used)

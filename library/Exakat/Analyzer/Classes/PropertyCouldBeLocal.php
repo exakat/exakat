@@ -31,13 +31,13 @@ class PropertyCouldBeLocal extends Analyzer {
              ->inIs('LEFT')
              ->savePropertyAs('propertyname', 'member')
              ->inIs('PPP')
-             ->hasNoOut('STATIC')
-             ->hasOut('PRIVATE')
+             ->isNot('static', true)
+             ->is('visibility', 'private')
              ->inIs('PPP')
              ->raw(<<<GREMLIN
 where(
     __.out("METHOD")
-      .not( where( __.out('STATIC') ) )
+      .not( where( __.has('static', true) ) )
       .where( __.out("BLOCK")
           .repeat( __.out({$this->linksDown})).emit().times(5).hasLabel("Member")
                 .out("OBJECT").hasLabel("This").in("OBJECT")
@@ -55,8 +55,8 @@ GREMLIN
              ->savePropertyAs('code', 'member')
              ->inIs('LEFT')
              ->inIs('PPP')
-             ->hasOut('STATIC')
-             ->hasOut('PRIVATE')
+             ->is('static', true)
+             ->is('visibility', 'private')
              ->inIs('PPP')
              ->savePropertyAs('fullnspath', 'fnp')
              ->raw(<<<GREMLIN

@@ -29,7 +29,7 @@ class LocallyUsedProperty extends Analyzer {
     public function analyze() {
         // normal property
         $this->atomIs('Ppp')
-             ->hasNoOut('STATIC')
+             ->isNot('static', true)
              ->outIs('PPP')
              ->_as('ppp')
              ->savePropertyAs('propertyname', 'property')
@@ -45,7 +45,7 @@ class LocallyUsedProperty extends Analyzer {
 
         // static property in an variable static::$c
         $this->atomIs('Ppp')
-             ->hasOut('STATIC')
+             ->is('static', true)
              ->outIs('PPP')
              ->_as('ppp')
              ->outIsIE('LEFT')

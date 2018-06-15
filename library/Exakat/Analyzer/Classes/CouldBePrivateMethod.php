@@ -49,8 +49,8 @@ GREMLIN;
                               ->toArray();
         
         $this->atomIs('Method')
-             ->hasNoOut('PRIVATE')
-             ->hasNoOut('STATIC')
+             ->isNot('visibility', 'private')
+             ->isNot('static', true)
              ->analyzerIsNot('Classes/MethodUsedBelow')
              ->outIs('NAME')
              ->codeIsNot($publicMethods, self::NO_TRANSLATE)
@@ -91,8 +91,8 @@ GREMLIN;
             
             // Property that is not used outside this class or its children
             $this->atomIs('Method')
-                 ->hasNoOut('PRIVATE')
-                 ->hasOut('STATIC')
+                 ->isNot('visibility', 'private')
+                 ->is('static', true)
                  ->analyzerIsNot('Classes/MethodUsedBelow')
                  ->_as('results')
                  ->codeIsNot(array_keys($calls), self::NO_TRANSLATE)

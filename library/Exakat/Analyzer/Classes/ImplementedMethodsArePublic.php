@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ImplementedMethodsArePublic extends Analyzer {
     public function analyze() {
         $this->atomIs('Method')
-             ->hasOut(array('PRIVATE', 'PROTECTED'))
+             ->is('visibility', array('private', 'protected'))
              ->hasClass()
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')

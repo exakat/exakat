@@ -30,8 +30,8 @@ class StaticMethodsCalledFromObject extends Analyzer {
         $query = <<<GREMLIN
 g.V().hasLabel("Method", "Magicmethod")
      .where( __.in("METHOD", "MAGICMETHOD").hasLabel("Class", "Trait") )
-     .where( __.out("STATIC") )
-     .not(where( __.out("ABSTRACT") ))
+     .has("static", true )
+     .not(has("abstract", true ))
      .out("NAME")
      .values("code")
      .unique()
@@ -44,8 +44,8 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Method", "Magicmethod")
      .where( __.in("METHOD", "MAGICMETHOD").hasLabel("Class", "Trait") )
-     .not(where( __.out("STATIC") ))
-     .not(where( __.out("ABSTRACT") ))
+     .not(has("static", true ))
+     .not(has("abstract", true ))
      .out("NAME")
      .values("code")
      .unique()

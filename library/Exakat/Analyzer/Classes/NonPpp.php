@@ -32,7 +32,7 @@ class NonPpp extends Analyzer {
         $this->atomIs(array('Class', 'Interface', 'Trait'))
              ->outIs(array('METHOD', 'PPP', 'CONST'))
              ->atomIs(array('Method', 'Ppp', 'Constant'))
-             ->hasNoOut(array('PUBLIC', 'PROTECTED', 'PRIVATE'));
+             ->is('visibility', 'none');
         $this->prepareQuery();
     }
 }

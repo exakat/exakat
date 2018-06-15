@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ConcreteVisibility extends Analyzer {
     public function analyze() {
         $this->atomIs('Method')
-             ->hasOut(array('PRIVATE', 'PROTECTED'))
+             ->is('visibility', array('private', 'protected'))
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->goToClass()

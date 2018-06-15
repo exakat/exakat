@@ -48,8 +48,8 @@ GREMLIN;
 
         if (!empty($publicProperties)) {
             $this->atomIs('Ppp')
-                 ->hasNoOut('PRIVATE')
-                 ->hasNoOut('STATIC')
+                 ->isNot('visibility', 'private')
+                 ->isNot('static', true)
                  ->outIs('PPP')
                  ->analyzerIsNot('Classes/PropertyUsedBelow')
                  ->isNot('propertyname', $publicProperties);
@@ -93,8 +93,8 @@ GREMLIN;
             
             // Property that is not used outside this class or its children
             $this->atomIs('Ppp')
-                 ->hasNoOut('PRIVATE')
-                 ->hasOut('STATIC')
+                 ->isNot('visibility', 'private')
+                 ->is('static', true)
                  ->outIs('PPP')
                  ->analyzerIsNot('Classes/PropertyUsedBelow')
                  ->_as('results')

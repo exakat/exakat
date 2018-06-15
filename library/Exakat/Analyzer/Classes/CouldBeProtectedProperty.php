@@ -38,8 +38,8 @@ GREMLIN;
         
         // Member that is not used outside this class or its children
         $this->atomIs('Ppp')
-             ->hasNoOut(array('PROTECTED', 'PRIVATE'))
-             ->hasNoOut('STATIC')
+             ->isNot('visibility', array('protected', 'private'))
+             ->isNot('static', true)
              ->hasClass()
              ->outIs('PPP')
              ->isNot('propertyname', $publicProperties);
@@ -72,8 +72,8 @@ GREMLIN;
         if (!empty($publicStaticProperties)) {
             // Member that is not used outside this class or its children
             $this->atomIs('Ppp')
-                 ->hasNoOut(array('PROTECTED', 'PRIVATE'))
-                 ->hasOut('STATIC')
+                 ->isNot('visibility', array('protected', 'private'))
+                 ->is('static', true)
                  ->goToClass()
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')

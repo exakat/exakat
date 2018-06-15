@@ -28,9 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class Abstractmethods extends Analyzer {
 
     public function analyze() {
+        // abstract class x { abstract function y (); }
         $this->atomIs('Class')
-             ->outIs('METHOD')
-             ->hasOut('ABSTRACT');
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->is('abstract', true);
         $this->prepareQuery();
     }
 }

@@ -41,7 +41,7 @@ class ActionInController extends Analyzer {
 
         // Methods ending with Action must be public
         $this->atomIs('Method')
-             ->hasOut(array('PRIVATE', 'PROTECTED'))
+             ->is('visibility', array('private', 'protected'))
              // Why not Action\\$?
              ->outIs('NAME')
              ->regexIs('fullcode', 'Action\\$')

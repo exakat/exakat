@@ -28,8 +28,9 @@ use Exakat\Analyzer\Analyzer;
 class Finalclass extends Analyzer {
 
     public function analyze() {
+        // final class x {}
         $this->atomIs('Class')
-             ->hasOut('FINAL');
+             ->is('final', true);
         $this->prepareQuery();
     }
 }

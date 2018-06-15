@@ -27,7 +27,7 @@ class CantExtendFinal extends Analyzer {
     public function analyze() {
         $this->atomIs('Class')
              ->goToAllParents()
-             ->hasOut('FINAL')
+             ->is('final', true)
              ->back('first');
         $this->prepareQuery();
     }

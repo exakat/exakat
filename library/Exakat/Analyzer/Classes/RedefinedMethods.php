@@ -35,10 +35,10 @@ class RedefinedMethods extends Analyzer {
              ->savePropertyAs('code', 'method')
              ->back('first')
              ->goToAllParents()
-             ->hasNoOut('ABSTRACT') // abstract methods are not redefined.
+             ->isNot('abstract', true) // abstract methods are not redefined.
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->hasNoOut('ABSTRACT') // abstract methods are not redefined.
+             ->isNot('abstract', true) // abstract methods are not redefined.
              ->outIs('NAME')
              ->samePropertyAs('code', 'method')
              ->back('results');

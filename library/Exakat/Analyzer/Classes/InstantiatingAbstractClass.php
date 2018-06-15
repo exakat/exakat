@@ -33,7 +33,7 @@ class InstantiatingAbstractClass extends Analyzer {
              ->outIs('NEW')
              ->atomIs(array('Newcall', 'Identifier', 'Nsname'))
              ->classDefinition()
-             ->hasOut('ABSTRACT')
+             ->is('abstract', true)
              ->back('first');
         $this->prepareQuery();
     }
