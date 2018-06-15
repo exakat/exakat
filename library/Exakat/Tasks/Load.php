@@ -1039,10 +1039,12 @@ class Load extends Tasks {
             $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
             ++$this->id;
         }
-        
+
+        $fullcode = array();
+
         // Process arguments
-        $function = $this->processParameters($atom, array($this->phptokens::T_CLOSE_PARENTHESIS));
-        $function->code       = $function->atom === 'Closure' ? 'function' : $name->fullcode;
+        $function       = $this->processParameters($atom, array($this->phptokens::T_CLOSE_PARENTHESIS));
+        $function->code = $function->atom === 'Closure' ? 'function' : $name->fullcode;
 
         if ( $function->atom === 'Function') {
             list($fullnspath, $aliased) = $this->getFullnspath($name);
@@ -1053,6 +1055,7 @@ class Load extends Tasks {
         } elseif ( $function->atom === 'Method' || $function->atom === 'Magicmethod') {
             $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($name->code);
             $aliased    = self::NOT_ALIASED;
+            $fullcode = $this->setOptions($function);
         } else {
             throw new LoadError(__METHOD__.' : wrong type of function '.$function->atom);
         }
@@ -1070,13 +1073,6 @@ class Load extends Tasks {
         if (isset($name)) {
             $this->addLink($function, $name, 'NAME');
         }
-
-        $fullcode = array();
-        foreach($this->optionsTokens as $token => $option) {
-            $this->addLink($function, $option, strtoupper($token));
-            $fullcode[] = $option->fullcode;
-        }
-        $this->optionsTokens = array();
 
         // Process use
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_USE) {
@@ -1121,11 +1117,8 @@ class Load extends Tasks {
             $this->addLink($function, $block, 'BLOCK');
         }
 
-        if (!empty($fullcode)) {
-            $fullcode[] = '';
-        }
-
-        $function->fullcode   = implode(' ', $fullcode).$this->tokens[$current][1].' '.($function->reference ? '&' : '').
+        $function->fullcode   = ($fullcode ? implode(' ', $fullcode).' ' : '').
+                                $this->tokens[$current][1].' '.($function->reference ? '&' : '').
                                 ($function->atom === 'Closure' ? '' : $name->fullcode).'('.$argumentFullcode.')'.
                                 (isset($useFullcode) ? ' use ('.implode(', ', $useFullcode).')' : '').// No space before use
                                 (isset($returnType) ? ' : '.(isset($nullable) ? '?' : '').$returnType->fullcode : '').
@@ -1267,9 +1260,9 @@ class Load extends Tasks {
             }
             
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PRIVATE) {
-                ++$this->id;
                 $cpm = $this->processPrivate();
-                if ($cpm->atom === 'Ppp'){
+
+                if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
                     $this->addLink($class, $cpm, strtoupper($cpm->atom));
                 }
@@ -1278,9 +1271,9 @@ class Load extends Tasks {
             }
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PUBLIC) {
-                ++$this->id;
                 $cpm = $this->processPublic();
-                if ($cpm->atom === 'Ppp'){
+
+                if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
                     $this->addLink($class, $cpm, strtoupper($cpm->atom));
                 }
@@ -1289,9 +1282,9 @@ class Load extends Tasks {
             }
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PROTECTED) {
-                ++$this->id;
                 $cpm = $this->processProtected();
-                if ($cpm->atom === 'Ppp'){
+
+                if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
                     $this->addLink($class, $cpm, strtoupper($cpm->atom));
                 }
@@ -1367,12 +1360,7 @@ class Load extends Tasks {
         }
 
         // Should work on Abstract and Final only
-        $fullcode= array_column($this->optionsTokens, 'fullcode');
-
-        foreach($this->optionsTokens as $token => $option) {
-            $this->addLink($class, $option, strtoupper($token));
-        }
-        $this->optionsTokens = array();
+        $fullcode = $this->setOptions($class);
 
         $this->currentClassTrait[] = $class;
         $this->nestContext(self::CONTEXT_CLASS);
@@ -2058,12 +2046,7 @@ class Load extends Tasks {
         $rank = -1;
         --$this->id; // back one step for the init in the next loop
 
-        $options = array();
-        foreach($this->optionsTokens as $name => $option) {
-            $this->addLink($const, $option, strtoupper($name));
-            $options[] = $this->atoms[$option->id]->fullcode;
-        }
-        $this->optionsTokens = array();
+        $options = $this->setOptions($const);
 
         $fullcode = array();
         do {
@@ -2118,9 +2101,9 @@ class Load extends Tasks {
     }
 
     private function processOptions($atom) {
-        $this->processSingle($atom);
+        ++$this->id;
 
-        $this->optionsTokens[$atom] = $this->popExpression();
+        $this->optionsTokens[$atom] = $this->tokens[$this->id][1];
         return $this->optionsTokens[$atom];
     }
 
@@ -2133,14 +2116,11 @@ class Load extends Tasks {
     }
 
     private function processVar() {
-        $var = $this->processOptions('Var');
+        $this->optionsTokens['Var'] = $this->tokens[$this->id][1];
 
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-            $ppp = $this->processSGVariable('Ppp');
-            return $ppp;
-        } else {
-            return $var;
-        }
+        $ppp = $this->processSGVariable('Ppp');
+        $ppp->visibility = 'public';
+        return $ppp;
     }
 
     private function processPublic() {
@@ -2433,13 +2413,8 @@ class Load extends Tasks {
             $atom = 'Propertydefinition';
         }
         
-        foreach($this->optionsTokens as $name => $option) {
-            $this->addLink($static, $option, strtoupper($name));
-            $fullcodePrefix[] = $option->fullcode;
-        }
+        $fullcodePrefix = $this->setOptions($static);
         $fullcodePrefix = implode(' ', $fullcodePrefix);
-
-        $this->optionsTokens = array();
 
         if (!isset($fullcodePrefix)) {
             $fullcodePrefix = $this->tokens[$current][1];
@@ -3444,19 +3419,27 @@ class Load extends Tasks {
     }
 
     private function processAs() {
-        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PRIVATE, $this->phptokens::T_PUBLIC, $this->phptokens::T_PROTECTED))) {
+        if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PRIVATE, 
+                                                            $this->phptokens::T_PUBLIC, 
+                                                            $this->phptokens::T_PROTECTED,
+                                                            ))) {
             $current = $this->id;
             $as = $this->addAtom('As');
 
             $left = $this->popExpression();
             $this->addLink($as, $left, 'NAME');
 
-            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PRIVATE, $this->phptokens::T_PROTECTED, $this->phptokens::T_PUBLIC))) {
+            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PRIVATE, 
+                                                                $this->phptokens::T_PROTECTED, 
+                                                                $this->phptokens::T_PUBLIC,
+                                                                ))) {
                 $visibility = $this->processNextAsIdentifier();
                 $this->addLink($as, $visibility, strtoupper($visibility->code));
             }
 
-            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA, $this->phptokens::T_SEMICOLON))) {
+            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA, 
+                                                                $this->phptokens::T_SEMICOLON,
+                                                                ))) {
                 $alias = $this->addAtomVoid();
                 $this->addLink($as, $alias, 'AS');
             } else {
@@ -5032,7 +5015,7 @@ class Load extends Tasks {
             if ($id === 1) { continue; }
 
             if (!isset($D[$id])) {
-                throw new LoadError("Warning : forgotten atom $id in $this->filename : $atom->label");
+                throw new LoadError("Warning : forgotten atom $id in $this->filename : $atom->atom");
             }
 
             if ($D[$id] > 1) {
@@ -5308,6 +5291,22 @@ class Load extends Tasks {
         }
 
         return $type.'@'.++$anonymous;
+    }
+    
+    private function setOptions($atom) {
+        $fullcode = array();
+
+        foreach($this->optionsTokens as $name => $option) {
+            $fullcode[] = $option;
+            if (in_array($name, array('Public', 'Protected', 'Private', 'Var'))) {
+                $atom->visibility = strtolower($option);
+            } else {
+                print "\nUnknown NAME : $name\n";
+            }
+        }
+        $this->optionsTokens = array();
+        
+        return $fullcode;
     }
 }
 
