@@ -1293,7 +1293,6 @@ class Load extends Tasks {
             }
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_FINAL) {
-                ++$this->id;
                 $cpm = $this->processFinal();
                 continue;
             }
@@ -1307,7 +1306,8 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
                 ++$this->id;
                 $cpm = $this->processStatic();
-                if ($cpm->atom === 'Ppp'){
+
+                if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
                     $this->addLink($class, $cpm, strtoupper($cpm->atom));
                 }
@@ -1333,6 +1333,7 @@ class Load extends Tasks {
     
     private function processClass() {
         $current = $this->id;
+        
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING) {
             $class = $this->addAtom('Class');
 
@@ -2108,6 +2109,7 @@ class Load extends Tasks {
     }
 
     private function processAbstract() {
+        --$this->id;
         return $this->processOptions('Abstract');
     }
 
@@ -2370,7 +2372,7 @@ class Load extends Tasks {
                  $this->isContext(self::CONTEXT_TRAIT)   ) &&
                 !$this->isContext(self::CONTEXT_FUNCTION)) {
                 // something like public static
-                $this->processOptions('Static');
+                $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
 
                 $ppp = $this->processSGVariable('Ppp');
                 $this->popExpression();
@@ -5300,6 +5302,8 @@ class Load extends Tasks {
             $fullcode[] = $option;
             if (in_array($name, array('Public', 'Protected', 'Private', 'Var'))) {
                 $atom->visibility = strtolower($option);
+            } elseif (in_array($name, array('Final', 'Static', 'Abstract'))) {
+                $atom->{strtolower($name)} = 1;
             } else {
                 print "\nUnknown NAME : $name\n";
             }

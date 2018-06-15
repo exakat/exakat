@@ -78,7 +78,7 @@ function copyDir($src, $dst) {
     }
     $dir = opendir($src);
     if (!is_resource($dir)) {
-        throw new \Exakat\Exceptions\NoSuchDir("Can't open dir : '$src'");
+        throw new \Exakat\Exceptions\NoSuchDir("Can't open dir : '$src' : ".var_export(error_get_last()));
     }
 
     $total = 0;
@@ -147,7 +147,7 @@ function unparse_url($parsed_url) {
 
     $user     = empty($parsed_url['user'])     ? '' : $parsed_url['user'];
     $pass     = empty($parsed_url['pass'])     ? '' : ':'.$parsed_url['pass'];
-    $userpass     = ($user || $pass)           ? $pass.'@'                     : '';
+    $userpass = ($user || $pass)               ? "$user$pass@"                 : '';
 
     $path     = isset($parsed_url['path'])     ? $parsed_url['path']           : '';
     $query    = isset($parsed_url['query'])    ? '?'.$parsed_url['query']      : '';

@@ -750,7 +750,7 @@ GREMLIN;
         $query = array();
         foreach($usesId as $id => $usesFNP) {
             foreach($usesFNP as $fnp) {
-                if (substr($fnp, 0, 2) == '\\\\') {
+                if (substr($fnp, 0, 2) === '\\\\') {
                     $fnp = substr($fnp, 2);
                 }
                 if (isset($citId[$fnp])) {
