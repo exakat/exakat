@@ -32,7 +32,7 @@ class ThisIsNotForStatic extends Analyzer {
         $this->atomIs('This')
              ->goToFunction()
              ->_as('result')
-             ->hasOut('STATIC')
+             ->is('static', true)
              ->goToClassTrait()
              ->back('result');
         $this->prepareQuery();

@@ -39,7 +39,7 @@ class NoReturnUsed extends Analyzer {
 
         // Methods
         $this->atomIs(array('Method', 'Magicmethod'))
-             ->hasOut('STATIC')
+             ->is('static', true)
              ->savePropertyAs('lccode', 'methode')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Return')

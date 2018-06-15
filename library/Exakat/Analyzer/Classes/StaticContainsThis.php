@@ -30,7 +30,7 @@ class StaticContainsThis extends Analyzer {
     public function analyze() {
         // static function foo() { $this->a ;}
         $this->atomIs('Method')
-             ->hasOut('STATIC')
+             ->is('static', true)
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('This')
              ->back('first');

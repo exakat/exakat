@@ -52,7 +52,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
 
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs(array('Method', 'Magicmethod'))
-             ->hasNoOut('STATIC')
+             ->isNot('static', true)
              ->outIs('NAME')
              ->samePropertyAs('code', 'methodname')
 

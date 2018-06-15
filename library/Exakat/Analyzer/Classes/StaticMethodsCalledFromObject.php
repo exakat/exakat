@@ -78,7 +78,7 @@ GREMLIN;
              ->goToClass()
              ->goToAllParents(self::INCLUDE_SELF)
              ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->hasOut('STATIC')
+             ->is('static', true)
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->back('first');

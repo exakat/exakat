@@ -169,6 +169,7 @@ abstract class GraphElements {
                                  'ELSE',
                                  'EXTENDS',
                                  'FILE',
+                                 'FINAL',
                                  'FINALLY',
                                  'FUNCTION',
                                  'GLOBAL',

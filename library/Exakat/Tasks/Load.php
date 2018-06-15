@@ -1310,6 +1310,8 @@ class Load extends Tasks {
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
                     $this->addLink($class, $cpm, strtoupper($cpm->atom));
+                } else {
+                    --$this->id;
                 }
                 continue;
             }
@@ -2396,7 +2398,10 @@ class Load extends Tasks {
             $this->pushExpression($name);
             return $name;
         } else {
-            return $this->processOptions('Static');
+            --$this->id;
+            $r = $this->processOptions('Static');
+            ++$this->id;
+            return $r;
         }
     }
 
@@ -2406,17 +2411,18 @@ class Load extends Tasks {
         $rank = 0;
 
         if ($atom === 'Global' || $atom === 'Static') {
-            $fullcodePrefix = array($this->tokens[$this->id][1]);
+            $fullcodePrefix = $this->tokens[$this->id][1];
             $link = strtoupper($atom);
             $atom .= 'definition';
         } else {
             $fullcodePrefix= array();
             $link = 'PPP';
             $atom = 'Propertydefinition';
+
+            $fullcodePrefix = $this->setOptions($static);
+            $fullcodePrefix = implode(' ', $fullcodePrefix);
         }
         
-        $fullcodePrefix = $this->setOptions($static);
-        $fullcodePrefix = implode(' ', $fullcodePrefix);
 
         if (!isset($fullcodePrefix)) {
             $fullcodePrefix = $this->tokens[$current][1];

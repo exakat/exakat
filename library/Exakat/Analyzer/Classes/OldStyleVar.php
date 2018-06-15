@@ -27,8 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class OldStyleVar extends Analyzer {
     public function analyze() {
+        // class x { var $y = 1;}
         $this->atomIs('Ppp')
-             ->hasOut('VAR');
+             ->tokenIs('T_VAR');
         $this->prepareQuery();
     }
 }
