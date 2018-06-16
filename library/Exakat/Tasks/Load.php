@@ -2738,6 +2738,7 @@ class Load extends Tasks {
             ++$this->id;
             $block = $this->processBlock(false);
             $block->bracket = self::BRACKET;
+
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
             $this->startSequence();
             $block = $this->sequence;
@@ -2782,8 +2783,19 @@ class Load extends Tasks {
             $current = $this->id;
 
             // This may include WHILE in the list of finals for do....while
-            $finals = array_merge(array($this->phptokens::T_SEMICOLON, $this->phptokens::T_CLOSE_TAG, $this->phptokens::T_ELSE, $this->phptokens::T_END, $this->phptokens::T_CLOSE_CURLY), $finals);
-            $specials = array($this->phptokens::T_IF, $this->phptokens::T_FOREACH, $this->phptokens::T_SWITCH, $this->phptokens::T_FOR, $this->phptokens::T_TRY, $this->phptokens::T_WHILE);
+            $finals = array_merge(array($this->phptokens::T_SEMICOLON, 
+                                        $this->phptokens::T_CLOSE_TAG, 
+                                        $this->phptokens::T_ELSE, 
+                                        $this->phptokens::T_END, 
+                                        $this->phptokens::T_CLOSE_CURLY,
+                                        ), $finals);
+            $specials = array($this->phptokens::T_IF, 
+                              $this->phptokens::T_FOREACH, 
+                              $this->phptokens::T_SWITCH, 
+                              $this->phptokens::T_FOR, 
+                              $this->phptokens::T_TRY, 
+                              $this->phptokens::T_WHILE,
+                              );
 //, $this->phptokens::T_EXIT
             if (in_array($this->tokens[$this->id + 1][0], $specials)) {
                 $this->processNext();
@@ -3437,26 +3449,19 @@ class Load extends Tasks {
             $left = $this->popExpression();
             $this->addLink($as, $left, 'NAME');
 
-            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_PRIVATE, 
-                                                                $this->phptokens::T_PROTECTED, 
-                                                                $this->phptokens::T_PUBLIC,
-                                                                ))) {
-                $visibility = $this->processNextAsIdentifier();
-                $this->addLink($as, $visibility, strtoupper($visibility->code));
-            }
+            $fullcode = array($left->fullcode, $this->tokens[$current][1], $this->tokens[$this->id + 1][1]);
 
-            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA, 
-                                                                $this->phptokens::T_SEMICOLON,
-                                                                ))) {
-                $alias = $this->addAtomVoid();
-                $this->addLink($as, $alias, 'AS');
-            } else {
+            $as->visibility = strtolower($this->tokens[$this->id + 1][1]);
+            ++$this->id;
+
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING) {
                 $alias = $this->processNextAsIdentifier();
                 $this->addLink($as, $alias, 'AS');
+                $fullcode[] = $alias->fullcode;
             }
 
             $as->code     = $this->tokens[$current][1];
-            $as->fullcode = $left->fullcode.' '.$this->tokens[$current][1].' '.(isset($visibility) ? $visibility->fullcode.' ' : '').$alias->fullcode;
+            $as->fullcode = join(' ', $fullcode);
             $as->line     = $this->tokens[$current][2];
             $as->token    = $this->getToken($this->tokens[$current][0]);
 
