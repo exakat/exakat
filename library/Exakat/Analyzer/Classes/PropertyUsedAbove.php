@@ -38,8 +38,8 @@ class PropertyUsedAbove extends Analyzer {
              ->savePropertyAs('propertyname', 'propertyname')
              ->goToClass()
              ->raw(<<<GREMLIN
-where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit().times(self::MAX_LOOPING)
-         .where( __.out("METHOD").out("BLOCK")
+where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
+         .where( __.out("METHOD", "MAGICMETHOD").out("BLOCK")
                    .repeat( __.out($this->linksDown)).emit(hasLabel("Member")).times($MAX_LOOPING)
                    .out("OBJECT").hasLabel("This").in("OBJECT")
                    .out("MEMBER").has("token", "T_STRING").filter{ it.get().value("code") == propertyname}
@@ -62,8 +62,8 @@ GREMLIN
              ->goToClass()
              ->raw(<<<GREMLIN
 where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
-         .where( __.out("METHOD").out("BLOCK")
-                   .repeat( __.out($this->linksDown)).emit(hasLabel("Staticproperty")).times(self::MAX_LOOPING)
+         .where( __.out("METHOD", "MAGICMETHOD").out("BLOCK")
+                   .repeat( __.out($this->linksDown)).emit(hasLabel("Staticproperty")).times($MAX_LOOPING)
                    .out("MEMBER").has("token", "T_VARIABLE").filter{ it.get().value("code") == property}
          )
 )

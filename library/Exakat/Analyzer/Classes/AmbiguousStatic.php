@@ -29,7 +29,7 @@ class AmbiguousStatic extends Analyzer {
     public function analyze() {
         // Methods with the same name, but with static or not.
         $query = <<<GREMLIN
-g.V().hasLabel("Method").where( __.out("STATIC")).values('code').unique()
+g.V().hasLabel("Method").has("static", true).values("code").unique()
 GREMLIN;
         $staticMethod = $this->query($query)->toArray();
         $staticMethod = $this->dictCode->source($staticMethod);
@@ -38,7 +38,7 @@ GREMLIN;
 
         // Global are unused if used only once
         $query = <<<GREMLIN
-g.V().hasLabel("Method").not(where( __.out("STATIC"))).values('code').unique()
+g.V().hasLabel("Method").not(has("static", true)).values("code").unique()
 GREMLIN;
         $normalMethod = $this->query($query)->toArray();
         $normalMethod = $this->dictCode->source($normalMethod);
@@ -60,7 +60,7 @@ GREMLIN;
 g.V().hasLabel("Propertydefinition").as("property")
      .coalesce( __.in("LEFT"), __.filter{true; } )
      .in("PPP")
-     .where( __.out("STATIC"))
+     .has("static", true)
      .select("property").values("code").unique()
 GREMLIN;
         $staticProperty = $this->query($query)->toArray();
@@ -70,7 +70,7 @@ GREMLIN;
 g.V().hasLabel("Propertydefinition").as("property")
      .coalesce( __.in("LEFT"), __.filter{true; } )
      .in("PPP")
-     .not(where( __.out("STATIC")))
+     .not(has("static", true))
      .select("property").values("code").unique()
 GREMLIN;
         $normalProperty = $this->query($query)->toArray();

@@ -28,7 +28,7 @@ class FinalByOcramius extends Analyzer {
     public function analyze() {
         $this->atomIs('Class')
              ->hasNoOut('EXTENDS')
-             ->is('final', true)
+             ->isNot('final', true)
              ->raw('sideEffect{ interfaces = []; }')
              ->outIs('IMPLEMENTS')
              ->inIs('DEFINITION')
@@ -39,11 +39,15 @@ class FinalByOcramius extends Analyzer {
              ->outIs('NAME')
              ->raw('sideEffect{ interfaces.add( it.get().value("code")); }')
              ->back('first')
-             ->raw('not( where( __.out("METHOD", "MAGICMETHOD").hasLabel("Method", "Magicmethod")
-                                  .out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME")
-                                  .not(has("visibility", within("protected", "private")))
-                             )
-                       )');
+             ->raw(<<<GREMLIN
+not( 
+    where( __.out("METHOD", "MAGICMETHOD").hasLabel("Method", "Magicmethod")
+             .out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME")
+             .not(has("visibility", within("protected", "private")))
+          )
+)
+GREMLIN
+);
         $this->prepareQuery();
     }
 }
