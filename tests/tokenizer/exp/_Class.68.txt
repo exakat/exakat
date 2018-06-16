@@ -16,28 +16,26 @@ Label : PROJECT
               Label : ARGUMENT
                 8
               Label : DEFINITION
-                12
+                11
               Label : MAGICMETHOD
-                10
+                9
                 Label : ARGUMENT
                   8
                   Label : NAME
                     8
                 Label : BLOCK
-                  11
+                  10
                   Label : EXPRESSION
-                    15
+                    14
                     Label : LEFT
-                      14
+                      13
                       Label : MEMBER
-                        13
-                      Label : OBJECT
                         12
+                      Label : OBJECT
+                        11
                     Label : RIGHT
                       8
                 Label : NAME
-                  10
-                Label : PUBLIC
                   9
           Label : NAME
             5

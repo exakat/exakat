@@ -27,37 +27,29 @@ Label : PROJECT
                 8
               Label : RIGHT
                 11
-            Label : PRIVATE
-              7
           Label : PPP
             7
-            Label : PPP
-              14
             Label : PPP
               12
-            Label : PRIVATE
-              7
+            Label : PPP
+              14
           Label : PPP
             7
+            Label : PPP
+              18
             Label : PPP
               9
               Label : LEFT
                 20
               Label : RIGHT
                 22
-            Label : PPP
-              18
-            Label : PRIVATE
-              7
           Label : PPP
             7
-            Label : PPP
-              25
             Label : PPP
               9
               Label : LEFT
                 23
               Label : RIGHT
                 17
-            Label : PRIVATE
-              7
+            Label : PPP
+              25

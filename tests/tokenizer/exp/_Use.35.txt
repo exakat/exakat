@@ -17,28 +17,24 @@ Label : PROJECT
               11
               Label : EXPRESSION
                 14
-                Label : AS
-                  16
                 Label : NAME
                   12
-                Label : PROTECTED
-                  15
               Label : EXPRESSION
-                23
+                20
                 Label : INSTEADOF
-                  24
+                  21
                 Label : NAME
-                  22
+                  19
                   Label : CLASS
-                    18
+                    15
                   Label : CONSTANT
-                    20
+                    17
             Label : USE
               9
         Label : EXPRESSION
           5
           Label : NAME
-            26
+            23
           Label : USE
             8
             Label : BLOCK
@@ -46,116 +42,124 @@ Label : PROJECT
               Label : EXPRESSION
                 14
                 Label : AS
-                  29
+                  25
                 Label : NAME
                   12
-                Label : PRIVATE
-                  28
             Label : USE
               9
         Label : EXPRESSION
-          31
+          27
+          Label : DEFINITION
+            35
           Label : DEFINITION
             38
           Label : DEFINITION
-            41
-          Label : DEFINITION
-            32
+            28
           Label : METHOD
-            35
+            30
             Label : ARGUMENT
-              16
+              32
             Label : BLOCK
               11
               Label : EXPRESSION
-                37
+                34
                 Label : ARGUMENT
-                  40
+                  37
                   Label : CONCAT
-                    38
+                    35
                   Label : CONCAT
-                    44
+                    41
                     Label : METHOD
-                      42
+                      39
                       Label : ARGUMENT
-                        16
+                        32
                       Label : NAME
-                        42
+                        39
                     Label : OBJECT
-                      41
+                      38
             Label : NAME
-              35
-            Label : PUBLIC
-              34
+              30
           Label : METHOD
-            42
-            Label : ABSTRACT
-              45
+            39
             Label : ARGUMENT
-              16
+              32
             Label : BLOCK
-              16
+              32
+            Label : DEFINITION
+              41
+              Label : METHOD
+                39
+                Label : ARGUMENT
+                  32
+                Label : NAME
+                  39
+              Label : OBJECT
+                38
             Label : NAME
-              42
-            Label : PUBLIC
-              34
+              39
           Label : NAME
-            32
+            28
         Label : EXPRESSION
           5
           Label : DEFINITION
-            41
+            38
           Label : DEFINITION
-            41
+            38
           Label : METHOD
-            42
+            39
             Label : ARGUMENT
-              16
+              32
             Label : BLOCK
               11
               Label : EXPRESSION
-                50
+                47
                 Label : RETURN
-                  44
+                  41
                   Label : MEMBER
-                    49
+                    46
                   Label : OBJECT
-                    41
+                    38
             Label : NAME
-              42
-            Label : PUBLIC
-              34
+              39
           Label : METHOD
-            51
+            48
             Label : ARGUMENT
-              53
+              50
               Label : NAME
-                53
+                50
             Label : BLOCK
               11
               Label : EXPRESSION
-                54
+                51
                 Label : LEFT
-                  44
+                  41
                   Label : MEMBER
-                    49
+                    46
                   Label : OBJECT
-                    41
+                    38
                 Label : RIGHT
-                  53
+                  50
             Label : NAME
-              51
-            Label : PUBLIC
-              34
-          Label : NAME
-            46
-          Label : PPP
-            28
-            Label : PPP
               48
-            Label : PRIVATE
-              28
+          Label : NAME
+            42
+          Label : PPP
+            44
+            Label : PPP
+              45
+              Label : DEFINITION
+                41
+                Label : MEMBER
+                  46
+                Label : OBJECT
+                  38
+              Label : DEFINITION
+                41
+                Label : MEMBER
+                  46
+                Label : OBJECT
+                  38
           Label : USE
             8
             Label : USE
-              32
+              28

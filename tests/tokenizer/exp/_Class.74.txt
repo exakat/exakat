@@ -19,8 +19,6 @@ Label : PROJECT
                 8
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -29,8 +27,6 @@ Label : PROJECT
                 12
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -39,8 +35,6 @@ Label : PROJECT
                 14
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -49,8 +43,6 @@ Label : PROJECT
                 16
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -59,8 +51,6 @@ Label : PROJECT
                 18
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -69,8 +59,6 @@ Label : PROJECT
                 20
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -79,8 +67,6 @@ Label : PROJECT
                 22
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -89,8 +75,6 @@ Label : PROJECT
                 24
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -99,8 +83,6 @@ Label : PROJECT
                 25
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -109,8 +91,6 @@ Label : PROJECT
                 27
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -119,8 +99,6 @@ Label : PROJECT
                 29
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -129,8 +107,6 @@ Label : PROJECT
                 31
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -139,8 +115,6 @@ Label : PROJECT
                 33
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -149,8 +123,6 @@ Label : PROJECT
                 35
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -159,8 +131,6 @@ Label : PROJECT
                 37
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -169,8 +139,6 @@ Label : PROJECT
                 39
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -179,8 +147,6 @@ Label : PROJECT
                 41
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -189,8 +155,6 @@ Label : PROJECT
                 43
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -199,8 +163,6 @@ Label : PROJECT
                 45
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -209,8 +171,6 @@ Label : PROJECT
                 47
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -219,8 +179,6 @@ Label : PROJECT
                 49
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -229,8 +187,6 @@ Label : PROJECT
                 51
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -239,8 +195,6 @@ Label : PROJECT
                 53
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -249,8 +203,6 @@ Label : PROJECT
                 55
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -259,8 +211,6 @@ Label : PROJECT
                 57
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -269,8 +219,6 @@ Label : PROJECT
                 59
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -279,8 +227,6 @@ Label : PROJECT
                 61
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -289,8 +235,6 @@ Label : PROJECT
                 63
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -299,8 +243,6 @@ Label : PROJECT
                 65
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -309,8 +251,6 @@ Label : PROJECT
                 67
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -319,8 +259,6 @@ Label : PROJECT
                 69
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -329,8 +267,6 @@ Label : PROJECT
                 71
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -339,8 +275,6 @@ Label : PROJECT
                 73
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -349,8 +283,6 @@ Label : PROJECT
                 75
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -359,8 +291,6 @@ Label : PROJECT
                 77
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -369,8 +299,6 @@ Label : PROJECT
                 79
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -379,8 +307,6 @@ Label : PROJECT
                 81
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -389,8 +315,6 @@ Label : PROJECT
                 83
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -399,8 +323,6 @@ Label : PROJECT
                 85
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -409,8 +331,6 @@ Label : PROJECT
                 87
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -419,8 +339,6 @@ Label : PROJECT
                 89
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -429,8 +347,6 @@ Label : PROJECT
                 91
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -439,8 +355,6 @@ Label : PROJECT
                 93
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -449,8 +363,6 @@ Label : PROJECT
                 95
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -459,8 +371,6 @@ Label : PROJECT
                 97
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -469,8 +379,6 @@ Label : PROJECT
                 99
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -479,8 +387,6 @@ Label : PROJECT
                 101
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -489,8 +395,6 @@ Label : PROJECT
                 103
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -499,8 +403,6 @@ Label : PROJECT
                 105
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -509,8 +411,6 @@ Label : PROJECT
                 107
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -519,8 +419,6 @@ Label : PROJECT
                 109
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -529,8 +427,6 @@ Label : PROJECT
                 110
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -539,8 +435,6 @@ Label : PROJECT
                 112
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -549,8 +443,6 @@ Label : PROJECT
                 114
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -559,8 +451,6 @@ Label : PROJECT
                 116
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -569,8 +459,6 @@ Label : PROJECT
                 118
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -579,8 +467,6 @@ Label : PROJECT
                 120
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -589,8 +475,6 @@ Label : PROJECT
                 122
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -599,8 +483,6 @@ Label : PROJECT
                 124
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -609,8 +491,6 @@ Label : PROJECT
                 126
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -619,8 +499,6 @@ Label : PROJECT
                 128
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -629,8 +507,6 @@ Label : PROJECT
                 130
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -639,8 +515,6 @@ Label : PROJECT
                 132
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -649,8 +523,6 @@ Label : PROJECT
                 134
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -659,5 +531,3 @@ Label : PROJECT
                 136
               Label : RIGHT
                 11
-            Label : PUBLIC
-              7

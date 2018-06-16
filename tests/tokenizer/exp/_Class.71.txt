@@ -8,13 +8,13 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          14
+          13
           Label : METHOD
-            13
+            12
             Label : ARGUMENT
-              10
+              9
             Label : NAME
-              13
+              12
           Label : OBJECT
             5
             Label : CODE
@@ -22,14 +22,12 @@ Label : PROJECT
               Label : NEW
                 7
                 Label : METHOD
-                  9
+                  8
                   Label : ARGUMENT
-                    10
-                  Label : BLOCK
-                    12
-                    Label : EXPRESSION
-                      10
-                  Label : NAME
                     9
-                  Label : PUBLIC
+                  Label : BLOCK
+                    11
+                    Label : EXPRESSION
+                      9
+                  Label : NAME
                     8

@@ -49,5 +49,3 @@ Label : PROJECT
                 24
               Label : RIGHT
                 26
-            Label : VAR
-              7

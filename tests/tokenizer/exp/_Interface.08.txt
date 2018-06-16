@@ -14,14 +14,12 @@ Label : PROJECT
           Label : EXTENDS
             8
           Label : METHOD
-            13
+            12
             Label : ARGUMENT
-              15
+              14
             Label : BLOCK
-              15
+              14
             Label : NAME
-              13
-            Label : PUBLIC
               12
           Label : NAME
             6

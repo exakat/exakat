@@ -26,18 +26,14 @@ Label : PROJECT
                   Label : EXPRESSION
                     20
                     Label : AS
-                      22
+                      21
                     Label : NAME
                       18
-                    Label : PRIVATE
-                      21
                 Label : USE
                   15
               Label : PPP
-                24
+                23
                 Label : PPP
-                  25
-                Label : PROTECTED
                   24
           Label : NAME
             5

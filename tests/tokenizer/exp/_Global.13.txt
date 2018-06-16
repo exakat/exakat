@@ -25,44 +25,34 @@ Label : PROJECT
                   42
             Label : NAME
               36
-            Label : PUBLIC
-              11
           Label : NAME
             6
           Label : PPP
             7
             Label : PPP
               8
-            Label : STATIC
-              7
           Label : PPP
             11
-            Label : PPP
-              15
             Label : PPP
               13
               Label : LEFT
                 12
               Label : RIGHT
                 14
-            Label : PUBLIC
-              11
+            Label : PPP
+              15
           Label : PPP
             11
+            Label : PPP
+              17
             Label : PPP
               13
               Label : LEFT
                 19
               Label : RIGHT
                 21
-            Label : PPP
-              17
-            Label : PUBLIC
-              11
           Label : PPP
             22
-            Label : PPP
-              27
             Label : PPP
               23
             Label : PPP
@@ -71,12 +61,10 @@ Label : PROJECT
                 25
               Label : RIGHT
                 21
-            Label : PRIVATE
-              22
+            Label : PPP
+              27
           Label : PPP
             29
-            Label : PPP
-              34
             Label : PPP
               30
             Label : PPP
@@ -85,5 +73,5 @@ Label : PROJECT
                 32
               Label : RIGHT
                 21
-            Label : PROTECTED
-              29
+            Label : PPP
+              34

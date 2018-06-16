@@ -12,38 +12,26 @@ Label : PROJECT
           Label : NAME
             6
           Label : PPP
-            9
+            8
             Label : PPP
-              11
+              10
               Label : LEFT
-                10
+                9
               Label : RIGHT
-                13
-            Label : PUBLIC
-              8
-            Label : STATIC
-              9
+                12
           Label : PPP
-            9
+            8
             Label : PPP
-              11
+              10
+              Label : LEFT
+                13
+              Label : RIGHT
+                12
+          Label : PPP
+            8
+            Label : PPP
+              10
               Label : LEFT
                 15
               Label : RIGHT
-                13
-            Label : PRIVATE
-              14
-            Label : STATIC
-              9
-          Label : PPP
-            9
-            Label : PPP
-              11
-              Label : LEFT
-                18
-              Label : RIGHT
-                13
-            Label : PROTECTED
-              17
-            Label : STATIC
-              9
+                12

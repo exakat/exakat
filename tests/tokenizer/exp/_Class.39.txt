@@ -23,8 +23,6 @@ Label : PROJECT
             7
             Label : PPP
               8
-            Label : PUBLIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -33,37 +31,29 @@ Label : PROJECT
                 10
               Label : RIGHT
                 13
-            Label : PUBLIC
-              7
           Label : PPP
             7
-            Label : PPP
-              16
             Label : PPP
               14
-            Label : PUBLIC
-              7
+            Label : PPP
+              16
           Label : PPP
             7
+            Label : PPP
+              20
             Label : PPP
               11
               Label : LEFT
                 22
               Label : RIGHT
                 24
-            Label : PPP
-              20
-            Label : PUBLIC
-              7
           Label : PPP
             7
-            Label : PPP
-              27
             Label : PPP
               11
               Label : LEFT
                 25
               Label : RIGHT
                 19
-            Label : PUBLIC
-              7
+            Label : PPP
+              27

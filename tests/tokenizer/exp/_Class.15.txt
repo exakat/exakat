@@ -39,17 +39,11 @@ Label : PROJECT
             7
             Label : PPP
               8
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
               13
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
               16
-            Label : VAR
-              7

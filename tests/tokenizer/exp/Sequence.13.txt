@@ -19,8 +19,6 @@ Label : PROJECT
                 8
               Label : RIGHT
                 11
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -29,8 +27,6 @@ Label : PROJECT
                 12
               Label : RIGHT
                 14
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -39,8 +35,6 @@ Label : PROJECT
                 15
               Label : RIGHT
                 17
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -49,8 +43,6 @@ Label : PROJECT
                 18
               Label : RIGHT
                 20
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -59,8 +51,6 @@ Label : PROJECT
                 21
               Label : RIGHT
                 23
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -69,8 +59,6 @@ Label : PROJECT
                 24
               Label : RIGHT
                 26
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -79,8 +67,6 @@ Label : PROJECT
                 27
               Label : RIGHT
                 29
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -93,8 +79,6 @@ Label : PROJECT
                   11
                 Label : ARGUMENT
                   14
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -103,8 +87,6 @@ Label : PROJECT
                 33
               Label : RIGHT
                 11
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -113,8 +95,6 @@ Label : PROJECT
                 35
               Label : RIGHT
                 14
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -123,8 +103,6 @@ Label : PROJECT
                 37
               Label : RIGHT
                 17
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -133,8 +111,6 @@ Label : PROJECT
                 39
               Label : RIGHT
                 20
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -143,8 +119,6 @@ Label : PROJECT
                 41
               Label : RIGHT
                 23
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -153,8 +127,6 @@ Label : PROJECT
                 43
               Label : RIGHT
                 26
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -163,8 +135,6 @@ Label : PROJECT
                 45
               Label : RIGHT
                 29
-            Label : VAR
-              7
           Label : PPP
             7
             Label : PPP
@@ -173,5 +143,3 @@ Label : PROJECT
                 47
               Label : RIGHT
                 49
-            Label : VAR
-              7

@@ -53,26 +53,18 @@ Label : PROJECT
             8
             Label : PPP
               9
-            Label : PUBLIC
-              8
           Label : PPP
             8
             Label : PPP
               10
-            Label : PUBLIC
-              8
           Label : PPP
             8
             Label : PPP
               12
-            Label : PUBLIC
-              8
           Label : PPP
             8
             Label : PPP
               14
-            Label : PUBLIC
-              8
           Label : PPP
             16
             Label : PPP
@@ -81,7 +73,3 @@ Label : PROJECT
               19
             Label : PPP
               21
-            Label : PUBLIC
-              8
-            Label : STATIC
-              16

@@ -16,34 +16,30 @@ Label : PROJECT
               Label : NAME
                 10
               Label : METHOD
-                13
+                12
                 Label : ARGUMENT
-                  16
+                  15
                   Label : NAME
-                    16
+                    15
                   Label : TYPEHINT
-                    14
+                    13
                 Label : BLOCK
-                  17
+                  16
                 Label : NAME
-                  13
-                Label : PUBLIC
                   12
               Label : METHOD
-                19
+                18
+                Label : BLOCK
+                  16
+                Label : ARGUMENT
+                  19
+                  Label : NAME
+                    19
                 Label : ARGUMENT
                   20
                   Label : NAME
                     20
-                Label : ARGUMENT
-                  21
-                  Label : NAME
-                    21
-                Label : BLOCK
-                  17
                 Label : NAME
-                  19
-                Label : PUBLIC
-                  12
+                  18
           Label : NAME
             5

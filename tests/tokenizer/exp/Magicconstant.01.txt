@@ -75,12 +75,16 @@ Label : PROJECT
             20
             Label : PPP
               22
+              Label : DEFINITION
+                31
+                Label : MEMBER
+                  23
+                Label : OBJECT
+                  30
               Label : LEFT
                 21
               Label : RIGHT
                 14
-            Label : PRIVATE
-              20
           Label : PPP
             24
             Label : PPP
@@ -89,5 +93,3 @@ Label : PROJECT
                 25
               Label : RIGHT
                 27
-            Label : PROTECTED
-              24

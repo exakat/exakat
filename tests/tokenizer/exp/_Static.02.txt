@@ -29,5 +29,3 @@ Label : PROJECT
               20
             Label : PPP
               22
-            Label : STATIC
-              7

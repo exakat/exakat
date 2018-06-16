@@ -33,5 +33,3 @@ Label : PROJECT
                 18
             Label : PPP
               6
-            Label : PROTECTED
-              11

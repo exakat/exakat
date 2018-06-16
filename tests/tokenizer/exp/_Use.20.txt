@@ -27,28 +27,16 @@ Label : PROJECT
                   19
                   Label : EXPRESSION
                     22
-                    Label : AS
-                      24
                     Label : NAME
                       20
-                    Label : PUBLIC
+                  Label : EXPRESSION
+                    22
+                    Label : NAME
                       23
                   Label : EXPRESSION
                     22
-                    Label : AS
-                      24
                     Label : NAME
-                      26
-                    Label : PRIVATE
-                      28
-                  Label : EXPRESSION
-                    22
-                    Label : AS
-                      24
-                    Label : NAME
-                      29
-                    Label : PROTECTED
-                      31
+                      25
                 Label : USE
                   17
           Label : NAME

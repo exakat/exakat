@@ -22,14 +22,12 @@ Label : PROJECT
                 Label : DEFINITION
                   10
               Label : METHOD
-                18
+                17
                 Label : ARGUMENT
-                  20
+                  19
                 Label : BLOCK
-                  20
+                  19
                 Label : NAME
-                  18
-                Label : PUBLIC
                   17
               Label : NAME
                 13

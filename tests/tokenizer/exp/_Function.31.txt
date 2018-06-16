@@ -10,14 +10,12 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : METHOD
-            8
+            7
             Label : ARGUMENT
-              9
-            Label : BLOCK
-              9
-            Label : NAME
               8
-            Label : PUBLIC
+            Label : BLOCK
+              8
+            Label : NAME
               7
           Label : NAME
             6

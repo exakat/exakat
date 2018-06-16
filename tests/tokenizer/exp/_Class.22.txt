@@ -19,5 +19,3 @@ Label : PROJECT
                 8
               Label : RIGHT
                 10
-            Label : VAR
-              7

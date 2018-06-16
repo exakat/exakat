@@ -23,5 +23,3 @@ Label : PROJECT
             7
             Label : PPP
               8
-            Label : VAR
-              7

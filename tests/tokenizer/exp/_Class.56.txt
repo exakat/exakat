@@ -8,42 +8,28 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
-          Label : ABSTRACT
-            5
-          Label : METHOD
-            11
-            Label : ARGUMENT
-              12
-            Label : BLOCK
-              14
-              Label : EXPRESSION
-                16
-                Label : LEFT
-                  15
-                Label : RIGHT
-                  17
-            Label : FINAL
-              9
-            Label : NAME
-              11
-            Label : PUBLIC
-              10
-            Label : STATIC
-              8
-          Label : METHOD
-            19
-            Label : ABSTRACT
-              5
-            Label : ARGUMENT
-              12
-            Label : BLOCK
-              12
-            Label : NAME
-              19
-            Label : PROTECTED
-              18
-            Label : STATIC
-              8
+          5
           Label : NAME
+            6
+          Label : METHOD
             7
+            Label : ARGUMENT
+              8
+            Label : BLOCK
+              10
+              Label : EXPRESSION
+                12
+                Label : LEFT
+                  11
+                Label : RIGHT
+                  13
+            Label : NAME
+              7
+          Label : METHOD
+            14
+            Label : ARGUMENT
+              8
+            Label : BLOCK
+              8
+            Label : NAME
+              14

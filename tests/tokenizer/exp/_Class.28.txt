@@ -23,5 +23,3 @@ Label : PROJECT
             10
             Label : PPP
               11
-            Label : VAR
-              10
