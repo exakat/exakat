@@ -27,13 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class OnlyStaticMethods extends Analyzer {
     public function analyze() {
+        // class x { static function foo() {} }
         $this->atomIs('Class')
              // Avoid empty classes
              ->raw('where( __.out("METHOD", "PPP", "USE", "CONST") )')
              //There are static methods
-             ->raw('where( __.out("METHOD").hasLabel("Method").out("STATIC") )')
+             ->raw('where( __.out("METHOD").has("static", true) )')
              //There are no non-static methods
-             ->raw('not( where( __.out("METHOD").hasLabel("Method").not( where(__.out("STATIC") ) ) ) )');
+             ->raw('not( where( __.out("METHOD").not( has("static", true) ) ) )');
         $this->prepareQuery();
     }
 }

@@ -32,7 +32,7 @@ class StaticMethods extends Analyzer {
              ->outIs('METHOD')
              ->atomIs('Method')
              ->_as('function')
-             ->outIs('STATIC')
+             ->is('static', true)
              ->back('function')
              ->outIs('NAME');
         $this->prepareQuery();

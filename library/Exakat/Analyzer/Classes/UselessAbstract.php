@@ -58,8 +58,8 @@ class UselessAbstract extends Analyzer {
              ->is('abstract', true)
              ->hasOut('DEFINITION')
              ->hasOut(array('METHOD', 'MAGICMETHOD'))
-             ->raw('not( where( __.out("METHOD", "MAGICMETHOD").where( __.out("ABSTRACT"))) )')
-             ->raw('not( where( __.out("USE").out("USE").in("DEFINITION").out("METHOD", "MAGICMETHOD").has("ABSTRACT", true))) )');
+             ->raw('not( where( __.out("METHOD", "MAGICMETHOD").has("abstract", true) ) )')
+             ->raw('not( where( __.out("USE").out("USE").in("DEFINITION").out("METHOD", "MAGICMETHOD").has("abstract", true) ) )');
         $this->prepareQuery();
      }
 }
