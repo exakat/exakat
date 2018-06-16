@@ -76,7 +76,7 @@ GREMLIN
             // Member that is not used outside this class or its children
             $this->atomIs('Method')
                  ->isNot('visibility', array('protected', 'private'))
-                 ->isNot('static', true)
+                 ->is('static', true)
                  ->goToClass()
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')
