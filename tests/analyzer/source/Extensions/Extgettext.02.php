@@ -3,5 +3,5 @@
 $domain = 'myapp';
 echo _($domain);
 
-gettext($domain2);
+gettaxt($domain2);
 ?>

@@ -3,7 +3,7 @@
 $expected     = array('_($domain)',
                      );
 
-$expected_not = array('gettext($domain2)',
+$expected_not = array('gettaxt($domain2)',
                      );
 
 ?>

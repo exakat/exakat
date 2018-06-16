@@ -1,6 +1,7 @@
 <?php
 
 $expected     = array('$b',
+                      '$b',
                       '$c',
                      );
 
