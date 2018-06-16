@@ -1260,6 +1260,7 @@ class Load extends Tasks {
             }
             
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PRIVATE) {
+                ++$this->id;
                 $cpm = $this->processPrivate();
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
@@ -1271,6 +1272,7 @@ class Load extends Tasks {
             }
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PUBLIC) {
+                ++$this->id;
                 $cpm = $this->processPublic();
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
@@ -1282,6 +1284,7 @@ class Load extends Tasks {
             }
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_PROTECTED) {
+                ++$this->id;
                 $cpm = $this->processProtected();
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
@@ -1293,6 +1296,7 @@ class Load extends Tasks {
             }
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_FINAL) {
+                ++$this->id;
                 $cpm = $this->processFinal();
                 continue;
             }
@@ -2104,14 +2108,11 @@ class Load extends Tasks {
     }
 
     private function processOptions($atom) {
-        ++$this->id;
-
         $this->optionsTokens[$atom] = $this->tokens[$this->id][1];
         return $this->optionsTokens[$atom];
     }
 
     private function processAbstract() {
-        --$this->id;
         return $this->processOptions('Abstract');
     }
 
@@ -2398,7 +2399,6 @@ class Load extends Tasks {
             $this->pushExpression($name);
             return $name;
         } else {
-            --$this->id;
             $r = $this->processOptions('Static');
             ++$this->id;
             return $r;
