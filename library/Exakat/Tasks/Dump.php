@@ -544,8 +544,8 @@ g.V().hasLabel("Class")
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
-         'abstract':it.get().vertices(OUT, "ABSTRACT").any(),
-         'final':it.get().vertices(OUT, "FINAL").any(),
+         'abstract':it.get().properties("abstract").any(),
+         'final':it.get().properties("final").any(),
          'extends':extendList,
          'implements':implementList,
          'uses':useList,
@@ -792,13 +792,13 @@ g.V().hasLabel("Method").as('method')
       )
 .map{ 
     x = ['name': it.get().value("fullcode"),
-         'abstract':it.get().vertices(OUT, "ABSTRACT").any(),
-         'final':it.get().vertices(OUT, "FINAL").any(),
-         'static':it.get().vertices(OUT, "STATIC").any(),
+         'abstract':it.get().properties("abstract").any(),
+         'final':it.get().properties("final").any(),
+         'static':it.get().properties("static").any(),
 
-         'public':it.get().vertices(OUT, "PUBLIC").any(),
-         'protected':it.get().vertices(OUT, "PROTECTED").any(),
-         'private':it.get().vertices(OUT, "PRIVATE").any(),         
+         'public':it.get().value("visibility") == 'public',
+         'protected':it.get().value("visibility") == 'protected',
+         'private':it.get().value("visibility") == 'private',
          'class': classe,
          'begin': lines.min(),
          'end': lines.max()
@@ -853,11 +853,11 @@ g.V().hasLabel("Class", "Interface", "Trait")
      .sideEffect{classe = it.get().value('fullnspath'); }
      .out('PPP') // Out of the CIT
 .sideEffect{ 
-    x_static = it.get().vertices(OUT, "STATIC").any();
-    x_public = it.get().vertices(OUT, "PUBLIC").any();
-    x_protected = it.get().vertices(OUT, "PROTECTED").any();
-    x_private = it.get().vertices(OUT, "PRIVATE").any();
-    x_var = it.get().vertices(OUT, "VAR").any();
+    x_static = it.get().properties("static").any();
+    x_public = it.get().value("visibility") == 'public';
+    x_protected = it.get().value("visibility") == 'protected';
+    x_private = it.get().value("visibility") == 'private';
+    x_var = it.get().value("token") == 'T_VAR';
 }
 .out('PPP') // out to the details
 .map{ 
