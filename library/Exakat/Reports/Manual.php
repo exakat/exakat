@@ -32,6 +32,7 @@ class Manual extends Reports {
     private $summary = array('Structures'  => array(),
                              'Expressions' => array(),
                              'Values'      => array(),
+                             'Empty'       => array(),
                              );
 
     public function _generate($analyzerList) {
@@ -43,19 +44,33 @@ class Manual extends Reports {
         $md .= $this->generateDynamicExpression();
 
         $md .= $this->generateErrorMessages();
+        $md .= $this->generateRegex();
+        $md .= $this->generateIncoming();
+        $md .= $this->generateSession();
+
         $md .= $this->generateSQL();
         $md .= $this->generateURL();
         $md .= $this->generateEmail();
-        $md .= $this->generateRegex();
-        $md .= $this->generateIncoming();
         $md .= $this->generateHash();
         $md .= $this->generateMime();
         
         $summary = 'Table of content'.PHP_EOL.'---'.PHP_EOL.PHP_EOL;
+
+        $empty = $this->summary['Empty'];
+        sort($empty);
+        unset($this->summary['Empty']);
+
+        $md .= '# Annex'.PHP_EOL;
+        $md .= '## Empty docs<a name="'.$this->toId('Empty docs').'"></a>'.PHP_EOL.PHP_EOL.'The following sections didn\'t yield any material. They are noted as empty here.'.PHP_EOL.PHP_EOL.'   + '.implode(PHP_EOL.'   + ', $empty).PHP_EOL;
+        
         foreach($this->summary as $section => $list) {
             $summary .= '+ '.$section.PHP_EOL;
             $summary .= '   + '.implode(PHP_EOL.'   + ', $list).PHP_EOL;
         }
+        $summary .= "+ Annex\n";
+        $name = 'Empty docs';
+        $id = $this->toId($name);
+        $summary .= "   + ".'['.$name.'](#'.$id.')'."\n";
         
         $md = $summary.PHP_EOL.'---'.PHP_EOL.$md;
         
@@ -155,6 +170,10 @@ class Manual extends Reports {
         return $this->generateGeneric('Type/GPCIndex', 'Incoming variables');
     }
 
+    private function generateSession() {
+        return $this->generateGeneric('Php/SessionVariables', 'Session variables');
+    }
+
     private function generateHash() {
         return $this->generateGeneric('Type/Md5String', 'Hash String');
     }
@@ -163,24 +182,25 @@ class Manual extends Reports {
         return $this->generateGeneric('Type/Mime', 'Mime type');
     }
 
-    private function generateGeneric($analyzer, $name) {
+    private function generateGeneric($analyzer, $name, $section = 'Values') {
         $total = 0;
         $url = '';
         $md = '';
         
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="'.$analyzer.'"');
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="'.$analyzer.'" ORDER BY fullcode');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $url .= '+ `'.$row['fullcode'].'` in '.$this->escapeMd($row['file']).' : '.$this->escapeMd($row['line']).PHP_EOL;
             ++$total;
         }
         
         if (empty($url)) {
+            $this->summary['Empty'][] = $name;
             return '';
         }
         
-        $id = strtolower($name);
-        $this->summary['Values'][] = '['.$name.'](#'.$id.')';
-        $md .= '## '.$name.PHP_EOL.PHP_EOL;
+        $id = $this->toId($name);
+        $this->summary[$section][] = '['.$name.'](#'.$id.')';
+        $md .= '## '.$name.'<a name="'.$this->toId($name).'"></a>'.PHP_EOL.PHP_EOL;
         $md .= $total.' '.$name.PHP_EOL.PHP_EOL;
         $md .= $url.PHP_EOL;
     
@@ -188,26 +208,7 @@ class Manual extends Reports {
     }
     
     private function generateRegex() {
-        $total = 0;
-        $url = '';
-        $md = '';
-        
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Type/Regex"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $url .= '+ `'.stripslashes($row['fullcode']).'` in '.$this->escapeMd($row['file']).' : '.$this->escapeMd($row['line']).PHP_EOL;
-            ++$total;
-        }
-        
-        if (empty($url)) {
-            return '';
-        }
-        
-        $this->summary['Values'][] = '[Regex](#regex)';
-        $md .= '## Regex'.PHP_EOL.PHP_EOL;
-        $md .= $total.' Regex'.PHP_EOL.PHP_EOL;
-        $md .= $url.PHP_EOL;
-    
-       return $md;
+        return $this->generateGeneric('Type/Regex', 'Regular expressions');
     }
 
     private function generateExceptionTree() {
@@ -307,7 +308,7 @@ class Manual extends Reports {
             if (!preg_match('/ extends (\S+)/', $row['fullcode'], $r)) {
                 continue;
             }
-            $parent = strtolower($r[1]);
+            $parent = $this->toId($r[1]);
             if ($parent[0] != '\\') {
                 $parent = '\\'.$parent;
             }
@@ -318,10 +319,17 @@ class Manual extends Reports {
             
             $list[$parent][] = $row['fullcode'];
         }
+
+        if ($total === 0) {
+            $this->summary['Empty'][] = 'Exception Tree';
+            return '';
+        }
         
         foreach($list as &$l) {
             sort($l);
         }
+        
+        
         $theTable = $this->tree2ul($exceptions, $list);
 
         $this->summary['Structures'][] = '[Exception Tree](#exception tree)';
@@ -330,6 +338,11 @@ class Manual extends Reports {
         $md .= $theTable.PHP_EOL;
     
        return $md;
+    }
+
+    private function toId($name) {
+        return str_replace(' ', '-', strtolower($name));
+    
     }
 
     private function tree2ul($tree, $display, $level = 0) {
