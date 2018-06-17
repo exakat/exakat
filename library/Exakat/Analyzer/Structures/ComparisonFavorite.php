@@ -29,7 +29,10 @@ class ComparisonFavorite extends Analyzer {
 
     public function analyze() {
         $codeInt = $this->dictCode->translate(array('!==', '==='));
-        
+        if (empty($codeInt)) {
+            return;
+        }
+
         $mapping = <<<GREMLIN
 if (it.get().value("code") in ***) {
     x2 = 'strict';
@@ -65,6 +68,10 @@ GREMLIN;
             return;
         }
         $types = array_keys($types);
+
+        if (empty($types)) {
+            return;
+        }
 
         $this->atomIs('Comparison')
              ->codeIs(array('==', '===', '!==', '!='))
