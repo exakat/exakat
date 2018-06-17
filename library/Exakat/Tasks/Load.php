@@ -2433,8 +2433,8 @@ class Load extends Tasks {
             $atom = 'Propertydefinition';
 
             $fullcodePrefix = $this->setOptions($static);
-            if (!isset($const->static)) {
-                $const->static = 'none';
+            if (!isset($static->visibility)) {
+                $static->visibility = 'none';
             }
             $fullcodePrefix = implode(' ', $fullcodePrefix);
         }
