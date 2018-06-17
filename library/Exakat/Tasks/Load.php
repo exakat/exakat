@@ -43,6 +43,7 @@ use Exakat\Tasks\Helpers\Boolval;
 use Exakat\Tasks\Helpers\Nullval;
 use Exakat\Tasks\Helpers\Constant;
 use Exakat\Tasks\Helpers\Precedence;
+use Exakat\Tasks\Helpers\CloneType1;
 
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
@@ -217,6 +218,7 @@ class Load extends Tasks {
         $this->plugins[] = new Strval();
         $this->plugins[] = new Nullval();
         $this->plugins[] = new Constant($this->config);
+//        $this->plugins[] = new CloneType1();
 
         $className = '\Exakat\Tasks\Helpers\Php'.$this->config->phpversion[0].$this->config->phpversion[2];
         $this->phptokens  = new $className();
@@ -1052,10 +1054,15 @@ class Load extends Tasks {
         } elseif ( $function->atom === 'Closure') {
             $fullnspath = $this->makeAnonymous('function');
             $aliased    = self::NOT_ALIASED;
+            // closure may be static
+            $fullcode = $this->setOptions($function);
         } elseif ( $function->atom === 'Method' || $function->atom === 'Magicmethod') {
             $fullnspath = end($this->currentClassTrait)->fullnspath.'::'.mb_strtolower($name->code);
             $aliased    = self::NOT_ALIASED;
             $fullcode = $this->setOptions($function);
+            if (empty($function->visibility)) {
+                $function->visibility = 'none';
+            }
         } else {
             throw new LoadError(__METHOD__.' : wrong type of function '.$function->atom);
         }
@@ -1310,6 +1317,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STATIC) {
                 ++$this->id;
                 $cpm = $this->processStatic();
+                ++$this->id;
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
@@ -2054,6 +2062,9 @@ class Load extends Tasks {
         --$this->id; // back one step for the init in the next loop
 
         $options = $this->setOptions($const);
+        if (empty($const->visibility)) {
+            $const->visibility = 'none';
+        }
 
         $fullcode = array();
         do {
@@ -2124,7 +2135,7 @@ class Load extends Tasks {
         $this->optionsTokens['Var'] = $this->tokens[$this->id][1];
 
         $ppp = $this->processSGVariable('Ppp');
-        $ppp->visibility = 'public';
+        $ppp->visibility = 'none';
         return $ppp;
     }
 
@@ -2378,6 +2389,9 @@ class Load extends Tasks {
                 $this->optionsTokens['Static'] = $this->tokens[$this->id][1];
 
                 $ppp = $this->processSGVariable('Ppp');
+                if (empty($ppp->visibility)) {
+                    $ppp->visibility = 'none';
+                }
                 $this->popExpression();
 
                 return $ppp;
@@ -2400,7 +2414,6 @@ class Load extends Tasks {
             return $name;
         } else {
             $r = $this->processOptions('Static');
-            ++$this->id;
             return $r;
         }
     }
@@ -2420,6 +2433,9 @@ class Load extends Tasks {
             $atom = 'Propertydefinition';
 
             $fullcodePrefix = $this->setOptions($static);
+            if (!isset($const->static)) {
+                $const->static = 'none';
+            }
             $fullcodePrefix = implode(' ', $fullcodePrefix);
         }
         
@@ -5316,7 +5332,7 @@ class Load extends Tasks {
             } elseif (in_array($name, array('Final', 'Static', 'Abstract'))) {
                 $atom->{strtolower($name)} = 1;
             } else {
-                print "\nUnknown NAME : $name\n";
+                assert(false,  "\nUnknown NAME : $name\n");
             }
         }
         $this->optionsTokens = array();

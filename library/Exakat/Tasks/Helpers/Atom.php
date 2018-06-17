@@ -65,10 +65,11 @@ class Atom {
     public $globalvar    = false;
     public $binaryString = Load::NOT_BINARY;
     public $isNull       = false;
-    public $visibility   = 'none';
+    public $visibility   = '';
     public $final        = '';
     public $abstract     = '';
     public $static       = '';
+    public $ctype1       = '';
 
     public function __construct($id, $atom) {
         $this->id   = $id;
@@ -93,6 +94,7 @@ class Atom {
         $this->strval        = $this->protectString($this->strval     );
         $this->noDelimiter   = $this->protectString($this->noDelimiter);
         $this->visibility    = $this->protectString($this->visibility );
+        $this->ctype1        = $this->protectString($this->ctype1     );
 
         $this->alternative   = $this->alternative ? 1 : null;
         $this->reference     = $this->reference   ? 1 : null;
@@ -150,7 +152,7 @@ class Atom {
                 $this->lccode = mb_strtolower($this->code);
             }
 
-            if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode', )) &&
+            if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode' )) &&
                 $value === '') {
                 continue;
             }
