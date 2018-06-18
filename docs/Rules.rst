@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 11 Jun 2018 15:27:55 +0000
-.. comment: Generation hash : 4ed09c6a1099e9bc59b91530e4b484d46d82ecb3
+.. comment: Generation date : Mon, 18 Jun 2018 16:12:12 +0000
+.. comment: Generation hash : 06f5bb2a0a944e2a1c2bb4a4cd55d9113a6d614d
 
 
 .. _$http\_raw\_post\_data:
@@ -6179,7 +6179,7 @@ This is true with any kind of functioncall that returns the same value throughou
 +------------+---------------------------------------------------------------------------------------------------------------+
 | Short name | Structures/ForWithFunctioncall                                                                                |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Performances`                                                                           |
+| Themes     | :ref:`Performances`                                                                                           |
 +------------+---------------------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-functioncall-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-functioncall-in-loop.md>`__ |
 +------------+---------------------------------------------------------------------------------------------------------------+
@@ -12981,6 +12981,16 @@ See also `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_,
          `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_,
          `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_ and 
          `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_.
+
++---------------+---------+--------+------------------------------------------------------------------------------------+
+| Name          | Default | Type   | Description                                                                        |
++---------------+---------+--------+------------------------------------------------------------------------------------+
+| reservedNames |         | string | Other reserved names : all in a string, comma separated.                           |
++---------------+---------+--------+------------------------------------------------------------------------------------+
+| allowedNames  |         | string | PHP reserved names that can be used in the code. All in a string, comma separated. |
++---------------+---------+--------+------------------------------------------------------------------------------------+
+
+
 
 +------------+-------------------+
 | Short name | Php/ReservedNames |

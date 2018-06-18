@@ -385,6 +385,12 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.3.2
+
+  * > Or < Comparisons (Structures/GtOrLtFavorite ; Preferences)
+  * Strict Or Relaxed Comparison (Structures/ComparisonFavorite ; Preferences)
+  * Structures/ComparedButNotAssignedStrings (Structures/ComparedButNotAssignedStrings)
+
 * 1.3.0
 
   * Check JSON (Structures/CheckJson ; Analyze)
@@ -1207,10 +1213,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.8.6
 
-  * Boolean Value (Type/BooleanValue ; Appinfo)
   * Drop Else After Return (Structures/DropElseAfterReturn)
   * Modernize Empty With Expression (Structures/ModernEmpty ; Analyze, OneFile, Codacy, Simple)
-  * Null Value (Type/NullValue ; Appinfo)
   * Use Positive Condition (Structures/UsePositiveCondition ; Analyze, OneFile, Codacy, Simple)
 
 * 0.8.5
@@ -1385,7 +1389,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Final Class Usage (Classes/Finalclass ; Appinfo)
   * Final Methods Usage (Classes/Finalmethod ; Appinfo)
   * Fopen Binary Mode (Portability/FopenMode ; Portability)
-  * For Using Functioncall (Structures/ForWithFunctioncall ; Analyze, Performances, ClearPHP, Codacy, Simple, Level 1)
+  * For Using Functioncall (Structures/ForWithFunctioncall ; Performances, ClearPHP, Codacy, Simple, Level 1)
   * Foreach Don't Change Pointer (Php/ForeachDontChangePointer ; CompatibilityPHP70)
   * Foreach Needs Reference Array (Structures/ForeachNeedReferencedSource ; Analyze, Codacy)
   * Foreach Reference Is Not Modified (Structures/ForeachReferenceIsNotModified ; Analyze, Codacy, Simple)
@@ -1435,7 +1439,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Indices Are Int Or String (Structures/IndicesAreIntOrString ; Analyze, OneFile, Codacy, Simple)
   * Indirect Injection (Security/IndirectInjection ; Security)
   * Instantiating Abstract Class (Classes/InstantiatingAbstractClass ; Analyze, Codacy, Simple)
-  * Integer Glossary (Type/Integer ; Appinfo)
   * Interface Arguments (Variables/InterfaceArguments ; )
   * Interface Methods (Interfaces/InterfaceMethod ; )
   * Interfaces Glossary (Interfaces/Interfacenames ; Appinfo)
@@ -1597,7 +1600,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Queries In Loops (Structures/QueriesInLoop ; Analyze, OneFile, Codacy, Simple, Level 1)
   * Random Without Try (Structures/RandomWithoutTry ; Security)
   * Real Functions (Functions/RealFunctions ; Appcontent, Stats)
-  * Real Glossary (Type/Real ; Appinfo)
   * Real Variables (Variables/RealVariables ; Appcontent, Stats)
   * Recursive Functions (Functions/Recursive ; Appinfo)
   * Redeclared PHP Functions (Functions/RedeclaredPhpFunction ; Analyze, Appinfo, Codacy, Simple)
@@ -1771,7 +1773,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Variable Constants (Constants/VariableConstant ; Appinfo, Stats)
   * Variable Is Modified (Variables/IsModified ; Internal)
   * Variable Is Read (Variables/IsRead ; Internal)
-  * Variables Names (Variables/Variablenames ; Inventory, Appinfo, Internal)
   * Variables Variables (Variables/VariableVariables ; Appinfo, Stats)
   * Variables With Long Names (Variables/VariableLong ; )
   * Variables With One Letter Names (Variables/VariableOneLetter ; )
@@ -2032,7 +2033,6 @@ List of external links mentionned in this documentation.
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
-* `Basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
 * `BC Math Functions <http://www.php.net/bcmath>`_
 * `browscap <http://browscap.org/>`_
@@ -2144,8 +2144,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
@@ -2226,8 +2226,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2383,8 +2383,8 @@ List of external links mentionned in this documentation.
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type operators <http://php.net/instanceof>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
@@ -2753,7 +2753,6 @@ Analyze
 |   analyzer[] = "Structures/EvalWithoutTry";
 |   analyzer[] = "Structures/ExitUsage";
 |   analyzer[] = "Structures/FailingSubstrComparison";
-|   analyzer[] = "Structures/ForWithFunctioncall";
 |   analyzer[] = "Structures/ForeachNeedReferencedSource";
 |   analyzer[] = "Structures/ForeachReferenceIsNotModified";
 |   analyzer[] = "Structures/ForgottenWhiteSpace";
