@@ -3676,16 +3676,16 @@ JAVASCRIPT;
                 
                 if (isset($originals[$section][$point], $this->frequences[$originals[$section][$point]])) {
                     $percentage = $this->frequences[$originals[$section][$point]];
-                    $percentageDisplay = $percentage;
+                    $percentageDisplay = "$percentage %";
                 } else {
                     $percentage = 0;
-                    $percentageDisplay = 'N/A';
+                    $percentageDisplay = '&nbsp;';
                 }
                 
                 $statusIcon = $this->makeIcon($status);
                 $htmlPoint = makeHtml($point);
                 $listPoint[] = <<<HTML
-<li><div style="width: 90%; text-align: left;display: inline-block;">$statusIcon&nbsp;$htmlPoint&nbsp;</div><div style="display: inline-block; width: 10%;"><span class="progress progress-sm"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: $percentage%; color:black;">$percentageDisplay %</div><div>&nbsp;</div></span></li>
+<li><div style="width: 90%; text-align: left;display: inline-block;">$statusIcon&nbsp;$htmlPoint&nbsp;</div><div style="display: inline-block; width: 10%;"><span class="progress progress-sm"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: $percentage%; color:black;">$percentageDisplay</div><div>&nbsp;</div></span></li>
 HTML;
             }
 
