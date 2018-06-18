@@ -40,7 +40,8 @@ class SplitGraphson {
 
     private static $count = -1; // id must start at 0 in batch-import
 
-    private $tokenCounts   = array();
+    private $tokenCounts   = array('Project' => 1);
+    private $functioncalls = array();
 
     private $config = null;
     
@@ -57,7 +58,7 @@ class SplitGraphson {
     private $dictCode = null;
     
     private $datastore = null;
-    
+   
     public function __construct($gremlin, $config) {
         self::$count = -1;
         
@@ -149,6 +150,7 @@ GREMLIN;
         $datastore = new Datastore($this->config);
 
         $datastore->addRow('tokenCounts', $this->tokenCounts);
+        $datastore->addRow('functioncalls', $this->functioncalls);
     }
 
     private function escapeCsv($string) {
@@ -166,7 +168,6 @@ GREMLIN;
             
             if ($atom->atom === 'Project') {
                 if ($this->projectId === null) {
-
                     $jsonText = json_encode($atom->toGraphsonLine($this->id)).PHP_EOL;
                     assert(!json_last_error(), 'Error encoding '.$atom->atom.' : '.json_last_error_msg());
                     
@@ -180,6 +181,15 @@ GREMLIN;
                 }
             } else {
                 $json[$atom->id] = $atom->toGraphsonLine($this->id);
+            
+                if ($atom->atom === 'Functioncall' && 
+                    !empty($atom->fullnspath)) {
+                    if (isset($this->functioncalls[$atom->fullnspath])) {
+                        ++$this->functioncalls[$atom->fullnspath];
+                    } else {
+                        $this->functioncalls[$atom->fullnspath] = 1;
+                    }
+                }
             }
         }
         
@@ -203,6 +213,12 @@ GREMLIN;
                             $json[$d['origin']]->outE->$type[] = (object) array("id" => $linkId,"inV" => $d['destination']);
                         } else {
                             $json[$d['origin']]->outE     = (object) array( $type => [ (object) ["id" => $linkId,"inV" => $d['destination']]]);
+                        }
+
+                        if (isset($this->tokenCounts[$type])) {
+                            ++$this->tokenCounts[$type];
+                        } else {
+                            $this->tokenCounts[$type] = 1;
                         }
                     }
                 }
@@ -233,6 +249,12 @@ GREMLIN;
             $X = $this->json_encode($j);
             assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
             fwrite($fp, $X.PHP_EOL);
+            
+            if (isset($this->tokenCounts[$j->label])) {
+                ++$this->tokenCounts[$j->label];
+            } else {
+                $this->tokenCounts[$j->label] = 1;
+            }
         }
         fclose($fp);
         $this->gsneo4j->query("graph.io(IoCore.graphson()).readGraph(\"$this->path\");");

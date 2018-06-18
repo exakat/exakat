@@ -156,13 +156,18 @@ abstract class Analyzer {
         $this->linksDown = GraphElements::linksAsList();
 
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {
-            self::$availableAtoms = array_keys($this->gremlin->query('g.V().groupCount("m").by(label).cap("m")')->toArray()[0]);
+            $data = self::$datastore->getCol('TokenCounts', 'token');
+            
+            foreach($data as $token){
+                if ($token == strtoupper($token)) {
+                    self::$availableLinks[] = $token;
+                } else {
+                    self::$availableAtoms[] = $token;
+                }
+            }
 
-            self::$availableLinks = array_keys($this->gremlin->query('g.E().groupCount("m").by(label).cap("m")')->toArray()[0]);
-
-            self::$availableFunctioncalls = array_keys($this->gremlin->query('g.V().hasLabel("Functioncall").has("fullnspath").groupCount("m").by("fullnspath").cap("m")')->toArray()[0]);
+            self::$availableFunctioncalls = self::$datastore->getCol('functioncalls', 'functioncall');
         }
-
     }
     
     public function __destruct() {
@@ -550,7 +555,8 @@ GREMLIN
 
     public function hasAtomInside($atom) {
         assert($this->assertAtom($atom));
-        $gremlin = 'where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel(within(***)) )';
+        $MAX_LOOPING = self::MAX_LOOPING;
+        $gremlin = "where( __.emit( ).repeat( out($this->linksDown) ).times($MAX_LOOPING).hasLabel(within(***)) )";
         $this->addMethod($gremlin, makeArray($atom));
         
         return $this;
@@ -2202,7 +2208,6 @@ GREMLIN;
     private function tolowercase(&$code) {
         if (is_array($code)) {
             $code = array_map('mb_strtolower', $code);
-            unset($v);
         } elseif (is_scalar($code)) {
             $code = mb_strtolower($code);
         } else {

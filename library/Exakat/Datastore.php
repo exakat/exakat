@@ -69,6 +69,7 @@ class Datastore {
             $this->cleanTable('hashAnalyzer');
             $this->cleanTable('analyzed');
             $this->cleanTable('tokenCounts');
+            $this->cleanTable('functioncalls');
             $this->cleanTable('externallibraries');
             $this->cleanTable('ignoredFiles');
             $this->cleanTable('files');
@@ -469,6 +470,16 @@ SQLITE;
 CREATE TABLE tokenCounts (
   id INTEGER PRIMARY KEY,
   token TEXT UNIQUE,
+  counts INTEGER
+);
+SQLITE;
+                break;
+
+            case 'functioncalls' :
+                $createTable = <<<SQLITE
+CREATE TABLE functioncalls (
+  id INTEGER PRIMARY KEY,
+  functioncall TEXT UNIQUE,
   counts INTEGER
 );
 SQLITE;
