@@ -713,6 +713,12 @@ JOIN categories
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
                 $errors72[(string) $file] = $res;
             }
+
+            $res = shell_exec('php73 -l '.$file);
+            
+            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+                $errors72[(string) $file] = $res;
+            }
         }
         
         $this->reportCompilation($errors53, '5.3', $total);
