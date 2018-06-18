@@ -34,31 +34,23 @@ class WrittenOnlyVariable extends Analyzer {
     }
     
     public function analyze() {
-        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
-        
         $MAX_LOOPING = self::MAX_LOOPING;
         
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')
-             ->atomInsideNoDefinition(self::$VARIABLES_ALL)
-             ->_as('results')
-             ->codeIsNot($superglobals)
-             // this variable is modified
-             ->analyzerIs('Variables/IsModified')
-             // this variable is not read
-             ->analyzerIsNot('Variables/IsRead')
-             ->savePropertyAs('code', 'name')
-             ->goToFunction()
              ->raw(<<<GREMLIN
-not(
-    where( __.out("BLOCK").repeat( __.out({$this->linksDown})).emit(hasLabel("Variable", "Variableobject", "Variablearray")).times($MAX_LOOPING)
-                             .filter{ it.get().value("code") == name}
-                             .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") ) 
-          )
-)
+local(
+    __.sideEffect{ x = [];}
+      .repeat(out()).emit().times($MAX_LOOPING).hasLabel('Variable')
+      .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead"))
+      .sideEffect{x.add(it.get().value('code'));}
+      .barrier()
+    )
+    .select('first')
+    .repeat(out()).emit().times(15).hasLabel('Variable')
+    .filter{ !(it.get().value('code') in x)}
 GREMLIN
-)
-             ->back('results');
+);
         $this->prepareQuery();
     }
 }
