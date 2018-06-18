@@ -37,11 +37,11 @@ class IsUpperFamily extends Analyzer {
              ->savePropertyAs('fullnspath', 'methode')
              
              ->goToClass()
-             ->raw('not( where( __.out("METHOD").hasLabel("Method").filter{ (it.get().value("fullnspath") =~ "::" + methode ).getCount() != 0 } ) )')
+             ->raw('not( where( __.out("METHOD").hasLabel("Method").filter{ (it.get().value("fullnspath") =~ "::" + methode.replaceAll("\\\\\\\\", "\\\\\\\\\\\\\\\\") ).getCount() != 0 } ) )')
 
              ->goToAllParents()
              ->atomIsNot('Interface')
-             ->raw('where( __.out("METHOD").hasLabel("Method").filter{ (it.get().value("fullnspath") =~ "::" + methode ).getCount() != 0 } )')
+             ->raw('where( __.out("METHOD").hasLabel("Method").filter{ (it.get().value("fullnspath") =~ "::" + methode.replaceAll("\\\\\\\\", "\\\\\\\\\\\\\\\\") ).getCount() != 0 } )')
 
              ->back('first');
         $this->prepareQuery();
