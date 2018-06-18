@@ -28,7 +28,7 @@ class StringWithStrangeSpace extends Analyzer {
     public function analyze() {
         $weirdSpaces = $this->loadIni('weirdSpaces.ini', 'space');
         $regex = '/('.implode('|', array_keys($weirdSpaces)).'})/u';
-        $regex = str_replace(array('\\u', '|'), array('\\x{', '}|'), $regex);
+        $regex = str_replace(array('\\\\u', '|'), array('\\\\x{', '}|'), $regex);
         
         $this->atomIs('String')
              ->hasNoOut('CONCAT')

@@ -35,7 +35,7 @@ class SilentlyCastInteger extends Analyzer {
         // Too long integer
         $this->atomIs('Real')
              ->regexIs('fullcode', '^[0-9]+\\$')
-             ->regexIsNot('fullcode', '\.');
+             ->regexIsNot('fullcode', '\\\\.');
         $this->prepareQuery();
     }
 }
