@@ -128,7 +128,7 @@ class Appinfo extends Data {
                             'Functions'                   => 'Functions/Functionnames',
                             'Redeclared PHP Functions'    => 'Functions/RedeclaredPhpFunction',
                             'Redeclared Custom Functions' => 'Functions/MultipleDeclarations',
-                            'Closures'                    => 'Closures',
+                            'Closures'                    => 'Closure',
 //                            'Callback'                    => 'Functions/MarkCallable',
        
                             'Typehint'                    => 'Functions/Typehints',
