@@ -146,8 +146,7 @@ abstract class GraphElements {
                                         'Noresult',
                                        );
     
-    static public $LINKS = array('ABSTRACT',
-                                 'APPEND',
+    static public $LINKS = array('APPEND',
                                  'ARGUMENT',
                                  'AS',
                                  'AT',
@@ -192,12 +191,9 @@ abstract class GraphElements {
                                  'PPP',
                                  'POSTPLUSPLUS',
                                  'PREPLUSPLUS',
-                                 'PRIVATE',
                                  'PROJECT',
                                  'MAGICMETHOD',
                                  'MEMBER',
-                                 'PROTECTED',
-                                 'PUBLIC',
                                  'RETURN',
                                  'RETURNTYPE',
                                  'RIGHT',

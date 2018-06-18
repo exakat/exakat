@@ -35,7 +35,7 @@ class UnusedPrivateMethod extends Analyzer {
         $this->atomIs('Class')
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->hasOut('PRIVATE')
+             ->is('visibility', 'private')
              ->analyzerIsNot('Classes/UsedPrivateMethod');
         $this->prepareQuery();
     }

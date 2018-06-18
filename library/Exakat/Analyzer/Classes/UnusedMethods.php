@@ -34,7 +34,7 @@ class UnusedMethods extends Analyzer {
     public function analyze() {
         // Methods definitions
         $this->atomIs('Method')
-             ->hasNoOut('ABSTRACT')
+             ->isNot('abstract', true)
              ->hasClassTrait()
              ->analyzerIsNot('Classes/UsedMethods')
              ->outIs('NAME')

@@ -30,7 +30,7 @@ class NormalProperty extends Analyzer {
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('PPP')
              ->atomIs('Ppp')
-             ->hasNoOut('STATIC')
+             ->isNot('static', true)
              ->outIs('PPP')
              ->outIsIE('LEFT');
         $this->prepareQuery();

@@ -34,33 +34,32 @@ class UselessAbstract extends Analyzer {
     public function analyze() {
         // abstract class that are never used
         $this->atomIs('Class')
-             ->hasOut('ABSTRACT')
+             ->is('abstract', true)
              ->analyzerIsNot('Classes/OnlyStaticMethods')
-             ->hasNoOut('DEFINITION')
-             ->back('first');
+             ->hasNoOut('DEFINITION');
         $this->prepareQuery();
 
         // abstract class without nothing in
         $this->atomIs('Class')
-             ->hasOut('ABSTRACT')
+             ->is('abstract', true)
              ->hasOut('DEFINITION')
              ->hasNoOut(array('METHOD', 'MAGICMETHOD', 'USE', 'CONST', 'PPP'));
         $this->prepareQuery();
 
         // abstract class with not methods nor const nor trait
         $this->atomIs('Class')
-             ->hasOut('ABSTRACT')
+             ->is('abstract', true)
              ->hasOut('DEFINITION')
              ->raw('not( where( __.out("METHOD", "MAGICMETHOD", "USE", "PPP", "CONST").hasLabel("Method", "Magicmethod", "Usetrait", "Ppp", "Const") ) )');
         $this->prepareQuery();
 
         // abstract class with not abstract methods
         $this->atomIs('Class')
-             ->hasOut('ABSTRACT')
+             ->is('abstract', true)
              ->hasOut('DEFINITION')
              ->hasOut(array('METHOD', 'MAGICMETHOD'))
-             ->raw('not( where( __.out("METHOD", "MAGICMETHOD").where( __.out("ABSTRACT"))) )')
-             ->raw('not( where( __.out("USE").out("USE").in("DEFINITION").out("METHOD", "MAGICMETHOD").where( __.out("ABSTRACT"))) )');
+             ->raw('not( where( __.out("METHOD", "MAGICMETHOD").has("abstract", true) ) )')
+             ->raw('not( where( __.out("USE").out("USE").in("DEFINITION").out("METHOD", "MAGICMETHOD").has("abstract", true) ) )');
         $this->prepareQuery();
      }
 }

@@ -26,14 +26,9 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableVariables extends Analyzer {
-    
-    public function dependsOn() {
-        return array('Variables/Variablenames');
-    }
-    
     public function analyze() {
-        $this->atomIs('Variable')
-             ->analyzerIs('Variables/Variablenames')
+        // $$a ${$x}
+        $this->atomIs(self::$VARIABLES_USER)
              ->tokenIs(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'));
         $this->prepareQuery();
     }

@@ -28,7 +28,7 @@ class RaisedAccessLevel extends Analyzer {
     public function analyze() {
         // raised to private
         $this->atomIs('Ppp')
-             ->hasOut(array('PUBLIC', 'PROTECTED'))
+             ->is('visibility', array('public', 'protected'))
              ->outIs('PPP')
              ->_as('results')
              ->outIsIE('LEFT')
@@ -37,7 +37,7 @@ class RaisedAccessLevel extends Analyzer {
              ->goToAllChildren(self::EXCLUDE_SELF)
              ->outIs('PPP')
              ->atomIs('Ppp')
-             ->hasOut('PRIVATE')
+             ->is('visibility', 'private')
              ->outIs('PPP')
              ->outIsIE('LEFT')
              ->samePropertyAs('code', 'property')
@@ -46,7 +46,7 @@ class RaisedAccessLevel extends Analyzer {
 
         // raised to protected
         $this->atomIs('Ppp')
-             ->hasOut('PUBLIC')
+             ->is('visibility', 'public')
              ->outIs('PPP')
              ->_as('results')
              ->outIsIE('LEFT')
@@ -55,7 +55,7 @@ class RaisedAccessLevel extends Analyzer {
              ->goToAllChildren(self::EXCLUDE_SELF)
              ->outIs('PPP')
              ->atomIs('Ppp')
-             ->hasOut('PROTECTED')
+             ->is('visibility', 'protected')
              ->outIs('PPP')
              ->outIsIE('LEFT')
              ->samePropertyAs('code', 'property')
@@ -64,7 +64,7 @@ class RaisedAccessLevel extends Analyzer {
 
         // raised to private method
         $this->atomIs('Method')
-             ->hasNoOut('PRIVATE')
+             ->isNot('visibility', 'private')
              ->_as('results')
              ->outIsIE('NAME')
              ->savePropertyAs('code', 'property')
@@ -72,7 +72,7 @@ class RaisedAccessLevel extends Analyzer {
              ->goToAllChildren(self::EXCLUDE_SELF)
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->hasOut('PRIVATE')
+             ->is('visibility', 'private')
              ->outIs('NAME')
              ->samePropertyAs('code', 'property')
              ->back('results');
@@ -80,7 +80,7 @@ class RaisedAccessLevel extends Analyzer {
 
         // raised to protected method
         $this->atomIs('Method')
-             ->hasNoOut(array('PRIVATE', 'PROTECTED'))
+             ->isNot('visibility', array('private', 'protected'))
              ->_as('results')
              ->outIsIE('NAME')
              ->savePropertyAs('code', 'property')
@@ -88,7 +88,7 @@ class RaisedAccessLevel extends Analyzer {
              ->goToAllChildren(self::EXCLUDE_SELF)
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->hasOut('PROTECTED')
+             ->is('visibility', 'protected')
              ->outIs('NAME')
              ->samePropertyAs('code', 'property')
              ->back('results');
@@ -96,7 +96,7 @@ class RaisedAccessLevel extends Analyzer {
 
         // raised to protected or private for const
         $this->atomIs('Const')
-             ->hasNoOut(array('PRIVATE', 'PROTECTED')) // Public or None
+             ->isNot('visibility', array('private', 'protected')) // Public or None
              ->outIs('CONST')
              ->_as('results')
              ->outIsIE('NAME')
@@ -105,7 +105,7 @@ class RaisedAccessLevel extends Analyzer {
              ->goToAllChildren(self::EXCLUDE_SELF)
              ->outIs('CONST')
              ->atomIs('Const')
-             ->hasOut(array('PROTECTED', 'PRIVATE'))
+             ->is('visibility', array('private', 'protected'))
              ->outIs('CONST')
              ->outIsIE('NAME')
              ->samePropertyAs('code', 'property')
@@ -114,7 +114,7 @@ class RaisedAccessLevel extends Analyzer {
 
         // raised to protected for const
         $this->atomIs('Const')
-             ->hasOut('PROTECTED')
+             ->is('visibility', 'protected')
              ->outIs('CONST')
              ->_as('results')
              ->outIs('NAME')
@@ -123,7 +123,7 @@ class RaisedAccessLevel extends Analyzer {
              ->goToAllChildren(self::EXCLUDE_SELF)
              ->outIs('CONST')
              ->atomIs('Const')
-             ->hasOut('PRIVATE')
+             ->is('visibility', 'private')
              ->outIs('CONST')
              ->outIs('NAME')
              ->samePropertyAs('code', 'property')

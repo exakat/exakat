@@ -190,10 +190,10 @@ class Project extends Tasks {
         shell_exec($shell);
         $this->logTime('Dumped and inited');
 
-        if ($this->config->program !== null) {
-            $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);
-        } else {
+        if ($this->config->program === null) {
             $this->analyzeThemes($themesToRun, $audit_start, $this->config->quiet);
+        } else {
+            $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);
         }
 
         display("Analyzed project".PHP_EOL);
@@ -300,14 +300,14 @@ class Project extends Tasks {
             $dumpConfig = new Config($args);
 
             $audit_end = time();
-            $query = "g.V().count()";
+            $query = 'g.V().count()';
             $res = $this->gremlin->query($query);
             if ($res instanceof \stdClass) {
                 $nodes = $res->results[0];
             } else {
                 $nodes = $res[0];
             }
-            $query = "g.E().count()";
+            $query = 'g.E().count()';
             $res = $this->gremlin->query($query);
             if ($res instanceof \stdClass) {
                 $links = $res->results[0];

@@ -46,9 +46,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : DEFINITION
-            31
+            30
           Label : DEFINITION
-            31
+            30
           Label : DEFINITION
             19
             Label : ARGUMENT
@@ -56,7 +56,7 @@ Label : PROJECT
             Label : NAME
               19
           Label : METHOD
-            22
+            21
             Label : ARGUMENT
               11
               Label : NAME
@@ -66,77 +66,75 @@ Label : PROJECT
               Label : NAME
                 13
               Label : TYPEHINT
+                23
+            Label : ARGUMENT
+              25
+              Label : NAME
+                25
+              Label : TYPEHINT
                 24
             Label : ARGUMENT
-              26
+              28
               Label : NAME
+                28
+              Label : TYPEHINT
                 26
-              Label : TYPEHINT
-                25
-            Label : ARGUMENT
-              29
-              Label : NAME
-                29
-              Label : TYPEHINT
-                27
             Label : BLOCK
               16
               Label : EXPRESSION
-                30
+                29
                 Label : CONDITION
-                  38
+                  37
                   Label : LEFT
-                    37
+                    36
                     Label : CLASS
-                      26
+                      25
                     Label : VARIABLE
-                      34
+                      33
                       Label : MEMBER
-                        35
-                      Label : OBJECT
                         34
+                      Label : OBJECT
+                        33
                         Label : METHOD
-                          32
+                          31
                           Label : ARGUMENT
                             17
                           Label : NAME
-                            32
+                            31
                         Label : OBJECT
-                          31
+                          30
                   Label : RIGHT
-                    39
+                    38
                 Label : THEN
                   16
                   Label : EXPRESSION
-                    41
+                    40
                     Label : RETURN
-                      34
+                      33
                       Label : METHOD
-                        44
+                        43
                         Label : NAME
-                          44
+                          43
                         Label : ARGUMENT
-                          29
+                          28
                         Label : ARGUMENT
                           15
                       Label : OBJECT
-                        34
+                        33
                         Label : MEMBER
-                          42
+                          41
                         Label : OBJECT
-                          31
+                          30
             Label : NAME
-              22
-            Label : PUBLIC
               21
           Label : NAME
             19
         Label : EXPRESSION
-          46
+          45
           Label : LEFT
             9
           Label : RIGHT
-            47
+            46
             Label : NEW
               19
               Label : ARGUMENT
@@ -144,18 +142,18 @@ Label : PROJECT
               Label : NAME
                 19
         Label : EXPRESSION
-          34
+          33
           Label : METHOD
-            22
+            21
+            Label : ARGUMENT
+              47
             Label : ARGUMENT
               48
             Label : ARGUMENT
               49
             Label : ARGUMENT
               50
-            Label : ARGUMENT
-              51
             Label : NAME
-              22
+              21
           Label : OBJECT
             9

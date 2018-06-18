@@ -11,7 +11,8 @@ $expected     = array('\\A\\B\\FullyQualifiedAlias',
                       '\\Fully\\Qualified\\NS1',
                      );
 
-$expected_not = array(
+$expected_not = array('Qualified\NS4',
+                      'QualifiedAlias as QualifiedAlias',
                      );
 
 ?>

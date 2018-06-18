@@ -26,8 +26,6 @@ Label : PROJECT
           Label : PPP
             8
             Label : PPP
-              11
-            Label : PPP
               9
-            Label : PROTECTED
-              8
+            Label : PPP
+              11

@@ -22,8 +22,6 @@ Label : PROJECT
           Label : PPP
             7
             Label : PPP
-              14
-            Label : PPP
               8
             Label : PPP
               11
@@ -31,5 +29,5 @@ Label : PROJECT
                 10
               Label : RIGHT
                 13
-            Label : VAR
-              7
+            Label : PPP
+              14

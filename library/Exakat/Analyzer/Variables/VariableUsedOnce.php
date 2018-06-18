@@ -26,19 +26,18 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableUsedOnce extends Analyzer {
-    
     public function dependsOn() {
         return array('Variables/InterfaceArguments',
-                     'Variables/Variablenames',
                      );
     }
     
     public function analyze() {
         $usedOnce = $this->query(<<<GREMLIN
-g.V().hasLabel("Variable", "Variablearray", "Variableobject", "Functioncall")
-     .where( __.in("ANALYZED").has("analyzer", "Variables/Variablenames") )
+g.V().hasLabel("Variable", "Variablearray", "Variableobject")
      .not( where( __.in("ANALYZED").has("analyzer", "Variables/InterfaceArguments") ) )
-     .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b == 1}.keySet()
+     .groupCount("m").by("code")
+     .cap("m").next().findAll{ a,b -> b == 1}
+     .keySet()
 GREMLIN
 )->toArray();
 
@@ -47,9 +46,7 @@ GREMLIN
         }
         
         $this->atomIs(self::$VARIABLES_ALL)
-             ->analyzerIs('Variables/Variablenames')
              ->analyzerIsNot('Variables/InterfaceArguments')
-             ->hasNoIn('GLOBAL') // ignore global $variable; This is not a use.
              ->codeIs($usedOnce, self::NO_TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
         

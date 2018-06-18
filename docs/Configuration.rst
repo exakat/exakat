@@ -261,6 +261,9 @@ Some analyzer may be configured individually. Those parameters are then specific
 
 Analyzers may be configured in the `project/*/config.ini`; they may also be configured globally in the `config/exakat.ini` file.
 
++ :ref:`php-keywords-as-names`
+   + allowedNames : 
+   + reservedNames : 
 + :ref:`too-many-children`
    + childrenClassCount : 15
 + :ref:`too-many-local-variables`

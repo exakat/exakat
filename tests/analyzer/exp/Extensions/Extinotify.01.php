@@ -9,7 +9,7 @@ $expected     = array('inotify_read($fd)',
                       'IN_ATTRIB',
                      );
 
-$expected_not = array(
+$expected_not = array('fclose($fd)',
                      );
 
 ?>

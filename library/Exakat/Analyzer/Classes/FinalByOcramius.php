@@ -28,22 +28,26 @@ class FinalByOcramius extends Analyzer {
     public function analyze() {
         $this->atomIs('Class')
              ->hasNoOut('EXTENDS')
-             ->hasNoOut('FINAL')
+             ->isNot('final', true)
              ->raw('sideEffect{ interfaces = []; }')
              ->outIs('IMPLEMENTS')
              ->inIs('DEFINITION')
              ->atomIs('Interface')
              ->outIs('METHOD')
              ->atomIs('Method')
-             ->hasNoOut('ABSTRACT')
+             ->isNot('abstract', true)
              ->outIs('NAME')
              ->raw('sideEffect{ interfaces.add( it.get().value("code")); }')
              ->back('first')
-             ->raw('not( where( __.out("METHOD").hasLabel("Method")
-                                  .out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME")
-                                  .where( __.out("PROTECTED", "PRIVATE").count().is(eq(0)) )
-                             )
-                       )');
+             ->raw(<<<GREMLIN
+not( 
+    where( __.out("METHOD", "MAGICMETHOD").hasLabel("Method", "Magicmethod")
+             .out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME")
+             .not(has("visibility", within("protected", "private")))
+          )
+)
+GREMLIN
+);
         $this->prepareQuery();
     }
 }

@@ -3,7 +3,7 @@
 $expected     = array('thrown',
                      );
 
-$expected_not = array('\Throwable',
+$expected_not = array('\\Throwable',
                       'throwable',
                      );
 

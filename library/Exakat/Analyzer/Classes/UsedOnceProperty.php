@@ -26,16 +26,23 @@ use Exakat\Analyzer\Analyzer;
 
 class UsedOnceProperty extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         $this->atomIs('Ppp')
              ->hasClass()
-             ->hasNoOut('PUBLIC')
+             ->isNot('visibility', 'public')
              ->outIs('PPP')
              ->_as('results')
              ->savePropertyAs('propertyname', 'name')
              ->goToClass()
-             ->raw('where( __.repeat( out('.$this->linksDown.') ).emit(hasLabel("Member")).times('.self::MAX_LOOPING.')
-                             .hasLabel("Member").out("MEMBER").filter{ it.get().value("code") == name}
-                             .count().is(eq(1)))')
+             ->raw(<<<GREMLIN
+where( 
+    __.repeat( out($this->linksDown) ).emit(hasLabel("Member")).times($MAX_LOOPING)
+         .hasLabel("Member").out("MEMBER").filter{ it.get().value("code") == name}
+         .count().is(eq(1))
+)
+GREMLIN
+)
              ->back('results');
         $this->prepareQuery();
     }

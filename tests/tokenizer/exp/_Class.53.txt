@@ -19,23 +19,15 @@ Label : PROJECT
             9
             Label : PPP
               10
-            Label : VAR
-              9
           Label : PPP
             9
             Label : PPP
               12
-            Label : VAR
-              9
           Label : PPP
             9
             Label : PPP
               14
-            Label : VAR
-              9
           Label : PPP
             9
             Label : PPP
               16
-            Label : VAR
-              9

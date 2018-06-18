@@ -78,7 +78,7 @@ function copyDir($src, $dst) {
     }
     $dir = opendir($src);
     if (!is_resource($dir)) {
-        throw new \Exakat\Exceptions\NoSuchDir("Can't open dir : '$src'");
+        throw new \Exakat\Exceptions\NoSuchDir("Can't open dir : '$src' : ".var_export(error_get_last()));
     }
 
     $total = 0;
@@ -144,13 +144,16 @@ function unparse_url($parsed_url) {
     $scheme   = isset($parsed_url['scheme'])   ? $parsed_url['scheme'].'://'   : '';
     $host     = isset($parsed_url['host'])     ? $parsed_url['host']           : '';
     $port     = isset($parsed_url['port'])     ? ':'.$parsed_url['port']       : '';
-    $user     = isset($parsed_url['user'])     ? $parsed_url['user']           : '';
-    $pass     = isset($parsed_url['pass'])     ? ':'.$parsed_url['pass']       : '';
-    $pass     = ($user || $pass)               ? $pass.'@'                     : '';
+
+    $user     = empty($parsed_url['user'])     ? '' : $parsed_url['user'];
+    $pass     = empty($parsed_url['pass'])     ? '' : ':'.$parsed_url['pass'];
+    $userpass = ($user || $pass)               ? "$user$pass@"                 : '';
+
     $path     = isset($parsed_url['path'])     ? $parsed_url['path']           : '';
     $query    = isset($parsed_url['query'])    ? '?'.$parsed_url['query']      : '';
     $fragment = isset($parsed_url['fragment']) ? '#'.$parsed_url['fragment']   : '';
-    return $scheme.$user.$pass.$host.$port.$path.$query.$fragment;
+
+    return "$scheme$userpass$host$port$path$query$fragment";
 }
 
 // Returns a list of unique values, when all values are arrays
@@ -501,11 +504,11 @@ function rstlist2html($raw) {
     
     foreach($lines as $line ) {
         if (preg_match('/^\*\s+([^\*]+)\s*<br \/>$/', $line, $r)) {
-            if ($list !== true) {
-                $list = true;
-                $html []= '<ul>';
+            if ($list === true) {
                 $html [] = "<li>$r[1]</li>";
             } else {
+                $list = true;
+                $html []= '<ul>';
                 $html [] = "<li>$r[1]</li>";
             }
             continue;

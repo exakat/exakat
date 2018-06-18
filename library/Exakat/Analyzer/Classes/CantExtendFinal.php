@@ -25,9 +25,11 @@ use Exakat\Analyzer\Analyzer;
 
 class CantExtendFinal extends Analyzer {
     public function analyze() {
+        // final class x {}
+        // class y extends x {}
         $this->atomIs('Class')
              ->goToAllParents()
-             ->hasOut('FINAL')
+             ->is('final', true)
              ->back('first');
         $this->prepareQuery();
     }

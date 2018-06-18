@@ -37,7 +37,7 @@ class NotInThatPath extends Analyzer {
              ->outIs('CLASS')
              ->fullnspathIs('\\Zend_Auth')
              ->goToFile()
-             ->regexIs('fullcode', '\.phtml\\$')
+             ->regexIs('fullcode', '\\\\.phtml\\$')
              ->back('first');
         $this->prepareQuery();
 

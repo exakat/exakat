@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 11 Jun 2018 15:27:55 +0000
-.. comment: Generation hash : 4ed09c6a1099e9bc59b91530e4b484d46d82ecb3
+.. comment: Generation date : Mon, 18 Jun 2018 16:12:12 +0000
+.. comment: Generation hash : 06f5bb2a0a944e2a1c2bb4a4cd55d9113a6d614d
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 352 analysis
+Total : 351 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -163,7 +163,6 @@ Total : 352 analysis
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Exit() Usage <exit()-usage>`
 * :ref:`Failed Substr Comparison <failed-substr-comparison>`
-* :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Foreach Needs Reference Array <foreach-needs-reference-array>`
 * :ref:`Foreach On Object <foreach-on-object>`
 * :ref:`Foreach Reference Is Not Modified <foreach-reference-is-not-modified>`
@@ -906,6 +905,7 @@ Total : 35 analysis
 * :ref:`Do In Base <do-in-base>`
 * :ref:`Double array_flip() <double-array\_flip()>`
 * :ref:`Fetch One Row Format <fetch-one-row-format>`
+* :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Getting Last Element <getting-last-element>`
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
@@ -929,7 +929,6 @@ Total : 35 analysis
 * Structures/CouldUseShortAssignation
 * Structures/EchoWithConcat
 * Structures/EvalUsage
-* Structures/ForWithFunctioncall
 * Structures/NoSubstrOne
 * Structures/WhileListEach
 

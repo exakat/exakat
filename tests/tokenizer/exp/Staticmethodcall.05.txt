@@ -40,10 +40,6 @@ Label : PROJECT
           Label : NAME
             21
           Label : PPP
-            23
+            22
             Label : PPP
-              24
-            Label : PROTECTED
-              22
-            Label : STATIC
               23

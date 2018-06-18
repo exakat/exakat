@@ -63,7 +63,7 @@ class CallbackNeedsReturn extends Analyzer {
                  ->outWithRank('ARGUMENT', 0)
                  ->inIs('DEFINITION')
                  ->outIs('METHOD')
-                 ->hasOut('STATIC')
+                 ->is('static', true)
                  ->outIs('NAME')
                  ->samePropertyAs('fullcode', 'method')
                  ->inIs('NAME')

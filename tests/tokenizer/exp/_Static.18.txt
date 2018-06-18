@@ -22,11 +22,11 @@ Label : PROJECT
               Label : EXPRESSION
                 5
                 Label : STATIC
-                  12
+                  11
                   Label : LEFT
                     22
                   Label : RIGHT
-                    14
+                    13
             Label : NAME
               18
           Label : NAME
@@ -34,24 +34,16 @@ Label : PROJECT
           Label : PPP
             5
             Label : PPP
-              12
+              11
               Label : LEFT
-                11
+                10
               Label : RIGHT
-                14
-            Label : PUBLIC
-              10
-            Label : STATIC
-              5
+                13
           Label : PPP
-            10
+            14
             Label : PPP
-              12
+              11
               Label : LEFT
                 15
               Label : RIGHT
                 17
-            Label : PUBLIC
-              10
-            Label : STATIC
-              5

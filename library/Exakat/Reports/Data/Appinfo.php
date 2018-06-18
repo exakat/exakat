@@ -128,7 +128,7 @@ class Appinfo extends Data {
                             'Functions'                   => 'Functions/Functionnames',
                             'Redeclared PHP Functions'    => 'Functions/RedeclaredPhpFunction',
                             'Redeclared Custom Functions' => 'Functions/MultipleDeclarations',
-                            'Closures'                    => 'Functions/Closures',
+                            'Closures'                    => 'Closure',
 //                            'Callback'                    => 'Functions/MarkCallable',
        
                             'Typehint'                    => 'Functions/Typehints',
@@ -178,8 +178,8 @@ class Appinfo extends Data {
 
                     'Constants' => array(
                             'Constants'           => 'Constants/ConstantUsage',
-                            'Boolean'             => 'Type/BooleanValue',
-                            'Null'                => 'Type/NullValue',
+                            'Boolean'             => 'Boolean',
+                            'Null'                => 'Null',
                             'Variable Constant'   => 'Constants/VariableConstant',
                             'PHP constants'       => 'Constants/PhpConstantUsage',
                             'PHP Magic constants' => 'Constants/MagicConstantUsage',
@@ -187,16 +187,17 @@ class Appinfo extends Data {
                     ),
 
                     'Numbers' => array(
-                            'Integers'            => 'Type/Integer',
+                            'Integers'            => 'Integer',
                             'Hexadecimal'         => 'Type/Hexadecimal',
                             'Octal'               => 'Type/Octal',
                             'Binary'              => 'Type/Binary',
-                            'Real'                => 'Type/Real',
+                            'Real'                => 'Real',
                             'Not-a-Number'        => 'Php/IsNAN',
                             'Infinity'            => 'Php/IsINF',
                     ),
 
                     'Strings' => array(
+                            'Strings'             => 'String',
                             'Heredoc'             => 'Type/Heredoc',
                             'Nowdoc'              => 'Type/Nowdoc',
                      ),

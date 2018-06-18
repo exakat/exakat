@@ -33,19 +33,22 @@ class ActionInController extends Analyzer {
     public function analyze() {
         // Methods ending with Action must be in controller
         $this->atomIs('Method')
+             ->outIs('NAME')
              ->regexIs('fullcode', 'Action\\$')
-             ->goToClass()
+             ->inIs('NAME')
+             ->inIs('METHOD')
              ->analyzerIsNot('ZendF/IsController')
              ->back('first');
         $this->prepareQuery();
 
         // Methods ending with Action must be public
         $this->atomIs('Method')
-             ->hasOut(array('PRIVATE', 'PROTECTED'))
+             ->is('visibility', array('private', 'protected'))
              // Why not Action\\$?
              ->outIs('NAME')
              ->regexIs('fullcode', 'Action\\$')
-             ->goToClass()
+             ->inIs('NAME')
+             ->inIs('METHOD')
              ->analyzerIs('ZendF/IsController')
              ->back('first');
         $this->prepareQuery();

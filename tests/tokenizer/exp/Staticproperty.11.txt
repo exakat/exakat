@@ -19,12 +19,22 @@ Label : PROJECT
             8
             Label : PPP
               10
+              Label : DEFINITION
+                20
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  9
+              Label : DEFINITION
+                20
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  9
               Label : LEFT
                 9
               Label : RIGHT
                 12
-            Label : STATIC
-              8
         Label : EXPRESSION
           5
           Label : DEFINITION
@@ -39,8 +49,6 @@ Label : PROJECT
                 16
               Label : RIGHT
                 18
-            Label : STATIC
-              8
         Label : EXPRESSION
           19
           Label : ARGUMENT

@@ -27,10 +27,13 @@ use Exakat\Analyzer\Analyzer;
 
 class EmptyFunction extends Analyzer {
     public function dependsOn() {
-        return array('Composer/IsComposerNsname');
+        return array('Composer/IsComposerNsname',
+                    );
     }
     
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         // standalone function : empty is empty. Same for closure.
         $this->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
@@ -40,9 +43,9 @@ class EmptyFunction extends Analyzer {
         $this->prepareQuery();
 
         // method : then, it should not overwrite a parent's method
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
              ->hasClassTrait()
-             ->hasNoOut('ABSTRACT')
+             ->isNot('abstract', true)
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
@@ -53,16 +56,24 @@ class EmptyFunction extends Analyzer {
              ->goToClass()
 
              // Ignore classes that are extension from a composer class
-             ->raw('not( where( __.out("EXTENDS").repeat( __.coalesce(__.in("DEFINITION"), __.filter{true}).out("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
+             ->raw(<<<GREMLIN
+not( where( __.out("EXTENDS").repeat( __.coalesce(__.in("DEFINITION"), __.filter{true}).out("EXTENDS") ).emit().times($MAX_LOOPING)
                              .where( __.in("ANALYZED").has("analyzer", "Composer/IsComposerNsname") )
-                             ) )')
+                             ) )
+GREMLIN
+)
 
              // Ignore methods that are overwriting a parent class, unless it is abstract or private
-             ->raw('not( where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit(hasLabel("Class") ).times('.self::MAX_LOOPING.')
-                             .out("METHOD").hasLabel("Method")
-                             .not( where( __.out("ABSTRACT", "PRIVATE") ) ) 
-                             .out("NAME").filter{ it.get().value("lccode") == name}
-                             )  )')
+             ->raw(<<<GREMLIN
+not( where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit(hasLabel("Class") ).times($MAX_LOOPING)
+              .out("METHOD").hasLabel("Method")
+              .not( where( __.has("abstract", true) ) ) 
+              .not( where( __.has("visibility", "private") ) ) 
+              .out("NAME").filter{ it.get().value("lccode") == name}
+              )  
+)
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
     }

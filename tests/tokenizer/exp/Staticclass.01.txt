@@ -14,17 +14,15 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : DEFINITION
-                21
-              Label : DEFINITION
                 10
               Label : NAME
                 10
             Label : EXPRESSION
               9
               Label : DEFINITION
-                19
+                18
               Label : DEFINITION
-                14
+                20
               Label : DEFINITION
                 12
               Label : DEFINITION
@@ -34,49 +32,49 @@ Label : PROJECT
               Label : EXTENDS
                 10
               Label : METHOD
-                15
+                14
                 Label : ARGUMENT
-                  16
+                  15
                 Label : BLOCK
                   8
                   Label : EXPRESSION
-                    18
+                    17
                     Label : ARGUMENT
-                      20
+                      19
                       Label : CLASS
-                        19
-                      Label : CLASS
-                        9
+                        18
                   Label : EXPRESSION
-                    18
+                    17
                     Label : ARGUMENT
-                      20
+                      19
                       Label : CLASS
-                        14
-                      Label : CLASS
-                        9
+                        20
                   Label : EXPRESSION
-                    18
+                    17
                     Label : ARGUMENT
-                      20
+                      19
                       Label : CLASS
                         21
-                      Label : CLASS
-                        9
+                Label : DEFINITION
+                  19
+                  Label : CLASS
+                    12
+                  Label : METHOD
+                    14
+                    Label : ARGUMENT
+                      15
+                    Label : NAME
+                      14
                 Label : NAME
-                  15
-                Label : STATIC
                   14
               Label : NAME
                 12
             Label : EXPRESSION
-              18
+              17
               Label : ARGUMENT
-                20
+                19
                 Label : CLASS
                   12
-                Label : CLASS
-                  9
             Label : EXPRESSION
               23
               Label : LEFT
@@ -84,32 +82,28 @@ Label : PROJECT
               Label : RIGHT
                 24
             Label : EXPRESSION
-              18
+              17
               Label : ARGUMENT
-                20
+                19
                 Label : CLASS
                   26
-                Label : CLASS
-                  9
             Label : EXPRESSION
-              18
+              17
               Label : ARGUMENT
-                20
+                19
                 Label : CLASS
                   28
-                Label : CLASS
-                  9
             Label : EXPRESSION
-              18
+              17
               Label : ARGUMENT
-                20
+                19
                 Label : CLASS
                   12
                 Label : METHOD
-                  15
+                  14
                   Label : ARGUMENT
-                    16
-                  Label : NAME
                     15
+                  Label : NAME
+                    14
           Label : NAME
             5

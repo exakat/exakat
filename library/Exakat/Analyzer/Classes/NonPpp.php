@@ -30,9 +30,14 @@ class NonPpp extends Analyzer {
         // class x { function foo() {} }
         // trait x { static $foo; }
         $this->atomIs(array('Class', 'Interface', 'Trait'))
-             ->outIs(array('METHOD', 'PPP', 'CONST'))
-             ->atomIs(array('Method', 'Ppp', 'Constant'))
-             ->hasNoOut(array('PUBLIC', 'PROTECTED', 'PRIVATE'));
+             ->outIs(array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST'))
+             ->atomIs(array('Method', 'Magicmethod', 'Ppp', 'Constant'))
+             ->is('visibility', 'none');
+        $this->prepareQuery();
+
+        $this->atomIs(array('Class', 'Interface', 'Trait'))
+             ->outIs('PPP')
+             ->tokenIs('T_VAR');
         $this->prepareQuery();
     }
 }

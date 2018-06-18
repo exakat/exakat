@@ -29,7 +29,7 @@ class NormalMethods extends Analyzer {
     public function analyze() {
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('METHOD')
-             ->hasNoOut('STATIC')
+             ->isNot('static', true)
              ->outIs('NAME');
         $this->prepareQuery();
     }

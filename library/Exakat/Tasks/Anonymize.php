@@ -43,18 +43,7 @@ class Anonymize extends Tasks {
 
     public function run() {
 
-        if (($file = $this->config->file) !== 'stdout') {
-            display("Anonymizing file $file\n");
-
-            if (!file_exists($file)) {
-                throw new NoSuchFile($file);
-            }
-
-            if (!$this->checkCompilation($file)) {
-                die('Can\'t anonymize '.$file.' as it doesn\'t compile with PHP '.PHP_VERSION."\n");
-            }
-            $this->processFile($file);
-        } else {
+        if (($file = $this->config->file) === 'stdout') {
             $dir = $this->config->dirname;
             if (!empty($dir)) {
                 if (substr($dir, -1) === '/') {
@@ -113,6 +102,17 @@ class Anonymize extends Tasks {
                                  -d <dirname>
                                  -p <project>\n");
             }
+        } else {
+            display("Anonymizing file $file\n");
+
+            if (!file_exists($file)) {
+                throw new NoSuchFile($file);
+            }
+
+            if (!$this->checkCompilation($file)) {
+                die('Can\'t anonymize '.$file.' as it doesn\'t compile with PHP '.PHP_VERSION."\n");
+            }
+            $this->processFile($file);
         }
 
         display( 'Processing file '.$file.' into '.$file.".anon\n");

@@ -8,18 +8,14 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
-          Label : ABSTRACT
-            5
+          5
           Label : METHOD
-            7
-            Label : ABSTRACT
-              5
+            6
             Label : ARGUMENT
-              8
-            Label : BLOCK
-              8
-            Label : NAME
               7
+            Label : BLOCK
+              7
+            Label : NAME
+              6
           Label : NAME
-            7
+            6

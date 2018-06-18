@@ -14,26 +14,24 @@ Label : PROJECT
             Label : EXPRESSION
               8
               Label : DEFINITION
-                16
+                15
               Label : METHOD
-                11
+                10
                 Label : ARGUMENT
-                  12
-                Label : BLOCK
-                  14
-                  Label : EXPRESSION
-                    11
-                    Label : ARGUMENT
-                      15
-                      Label : CODE
-                        18
-                        Label : MEMBER
-                          17
-                        Label : OBJECT
-                          16
-                Label : NAME
                   11
-                Label : PROTECTED
+                Label : BLOCK
+                  13
+                  Label : EXPRESSION
+                    10
+                    Label : ARGUMENT
+                      14
+                      Label : CODE
+                        17
+                        Label : MEMBER
+                          16
+                        Label : OBJECT
+                          15
+                Label : NAME
                   10
               Label : NAME
                 9

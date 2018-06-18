@@ -59,17 +59,17 @@ class Results extends Tasks {
         }
         
         $return = array();
-        if ($this->config->style == 'BOOLEAN') {
+        if ($this->config->style === 'BOOLEAN') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out().count().is(gt(0))';
             $vertices = $this->gremlin->query($queryTemplate);
 
             $return[] = $vertices[0];
-        } elseif ($this->config->style == 'COUNTED_ALL') {
+        } elseif ($this->config->style === 'COUNTED_ALL') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out().count()';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return[] = $vertices[0];
-        } elseif ($this->config->style == 'ALL') {
+        } elseif ($this->config->style === 'ALL') {
             $linksDown = GraphElements::linksAsList();
 
             $analyzersClassList = makeList($analyzersClass);
@@ -109,7 +109,7 @@ GREMLIN;
                             );
                 $return[] = $row;
             }
-        } elseif ($this->config->style == 'DISTINCT') {
+        } elseif ($this->config->style === 'DISTINCT') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").values("code").unique()';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
@@ -117,7 +117,7 @@ GREMLIN;
             foreach($vertices as $values) {
                 $return[] = array($values);
             }
-        } elseif ($this->config->style == 'COUNTED') {
+        } elseif ($this->config->style === 'COUNTED') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").groupCount("m").by("code").cap("m")';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
@@ -141,7 +141,7 @@ GREMLIN;
         } elseif ($this->config->html === true || $this->config->odt === true) {
             $text = '';
             foreach($return as $k => $r) {
-                if ($this->config->style == 'COUNTED') {
+                if ($this->config->style === 'COUNTED') {
                     $text .= "+ $k => $r\n";
                 } else {
                     $text .= "+ $k\n";
@@ -156,7 +156,7 @@ GREMLIN;
             // count also for $this->config->text == 1
             $text = '';
             foreach($return as $k => $v) {
-                if ($this->config->style == 'COUNTED') {
+                if ($this->config->style === 'COUNTED') {
                     $text .= "$k => $v\n";
                 } else {
                     $text .= implode(', ', $v)."\n";
@@ -193,7 +193,7 @@ GREMLIN;
                 die( "$name already exists. Aborting\n");
             }
 
-            if ($this->config->format == 'CSV') {
+            if ($this->config->format === 'CSV') {
                 $csvFile = fopen($name, 'w');
                 if (is_resource($csvFile)) {
                     foreach($text as $t) {

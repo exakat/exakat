@@ -10,7 +10,11 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : METHOD
-            8
+            7
+            Label : ARGUMENT
+              8
+              Label : NAME
+                8
             Label : ARGUMENT
               9
               Label : NAME
@@ -19,51 +23,45 @@ Label : PROJECT
               10
               Label : NAME
                 10
-            Label : ARGUMENT
-              11
-              Label : NAME
-                11
             Label : BLOCK
-              12
+              11
               Label : EXPRESSION
-                16
+                15
                 Label : LEFT
-                  15
+                  14
                   Label : MEMBER
-                    14
-                  Label : OBJECT
                     13
+                  Label : OBJECT
+                    12
                 Label : RIGHT
-                  22
+                  21
                   Label : CONDITION
-                    17
+                    16
                     Label : CODE
-                      20
+                      19
                       Label : LEFT
-                        15
+                        14
                         Label : MEMBER
-                          19
-                        Label : OBJECT
                           18
-                      Label : RIGHT
-                        21
-                  Label : ELSE
-                    17
-                    Label : CODE
-                      27
-                      Label : LEFT
-                        25
-                      Label : RIGHT
-                        15
-                        Label : MEMBER
-                          28
                         Label : OBJECT
-                          10
+                          17
+                      Label : RIGHT
+                        20
+                  Label : ELSE
+                    16
+                    Label : CODE
+                      26
+                      Label : LEFT
+                        24
+                      Label : RIGHT
+                        14
+                        Label : MEMBER
+                          27
+                        Label : OBJECT
+                          9
                   Label : THEN
-                    23
+                    22
             Label : NAME
-              8
-            Label : PUBLIC
               7
           Label : NAME
             6

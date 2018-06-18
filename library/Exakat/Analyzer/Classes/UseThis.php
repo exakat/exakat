@@ -47,7 +47,7 @@ class UseThis extends Analyzer {
 
         // Case for normal methods
         $this->atomIs('Method')
-             ->hasNoOut('STATIC')
+             ->isNot('static', true)
              ->outIs('BLOCK')
              ->atomInsideNoAnonymous('This')
              ->back('first');
@@ -55,7 +55,7 @@ class UseThis extends Analyzer {
 
         // Case for statics methods
         $this->atomIs('Method')
-             ->hasOut('STATIC')
+             ->is('static', true)
              ->outIs('BLOCK')
              ->atomInsideNoAnonymous(array('Staticmethodcall', 'Staticproperty'))
              ->outIs('CLASS')

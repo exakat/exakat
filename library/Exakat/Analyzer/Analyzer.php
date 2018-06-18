@@ -33,8 +33,6 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Graph\Helpers\GraphResults;
 
 abstract class Analyzer {
-    protected $code           = null;
-
     protected $description    = null;
 
     static public $datastore  = null;
@@ -64,14 +62,12 @@ abstract class Analyzer {
     
     private $path_tmp           = null;
 
-    protected $severity = self::S_NONE; // Default to None.
     const S_CRITICAL = 'Critical';
     const S_MAJOR    = 'Major';
     const S_MINOR    = 'Minor';
     const S_NOTE     = 'Note';
     const S_NONE     = 'None';
 
-    protected $timeToFix = self::T_NONE; // Default to no time (Should not display)
     const T_NONE    = 'None';    //'0';
     const T_INSTANT = 'Instant'; //'5';
     const T_QUICK   = 'Quick';   //30';
@@ -95,6 +91,7 @@ abstract class Analyzer {
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable');
+    static public $VARIABLES_USER   = array('Variable', 'Variableobject', 'Variablearray',);
     static public $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod');
     static public $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
@@ -102,6 +99,7 @@ abstract class Analyzer {
     static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
     static public $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
     static public $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
+    static public $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     
     const STOP_QUERY = 'filter{ false; }';
     
@@ -127,8 +125,6 @@ abstract class Analyzer {
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = $this->getName($this->analyzer);
 
-        $this->code = $this->analyzer;
-        
         $this->_as('first');
         
         assert($config !== null, 'Can\'t call Analyzer without a config');
@@ -160,13 +156,18 @@ abstract class Analyzer {
         $this->linksDown = GraphElements::linksAsList();
 
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {
-            self::$availableAtoms = array_keys($this->gremlin->query('g.V().groupCount("m").by(label).cap("m")')->toArray()[0]);
+            $data = self::$datastore->getCol('TokenCounts', 'token');
+            
+            foreach($data as $token){
+                if ($token == strtoupper($token)) {
+                    self::$availableLinks[] = $token;
+                } else {
+                    self::$availableAtoms[] = $token;
+                }
+            }
 
-            self::$availableLinks = array_keys($this->gremlin->query('g.E().groupCount("m").by(label).cap("m")')->toArray()[0]);
-
-            self::$availableFunctioncalls = array_keys($this->gremlin->query('g.V().hasLabel("Functioncall").has("fullnspath").groupCount("m").by("fullnspath").cap("m")')->toArray()[0]);
+            self::$availableFunctioncalls = self::$datastore->getCol('functioncalls', 'functioncall');
         }
-
     }
     
     public function __destruct() {
@@ -554,7 +555,8 @@ GREMLIN
 
     public function hasAtomInside($atom) {
         assert($this->assertAtom($atom));
-        $gremlin = 'where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel(within(***)) )';
+        $MAX_LOOPING = self::MAX_LOOPING;
+        $gremlin = "where( __.emit( ).repeat( out($this->linksDown) ).times($MAX_LOOPING).hasLabel(within(***)) )";
         $this->addMethod($gremlin, makeArray($atom));
         
         return $this;
@@ -1489,31 +1491,31 @@ GREMLIN
         return $this;
     }
 
-    public function hasFunctionDefinition() {
+    protected function hasFunctionDefinition() {
         $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") )');
     
         return $this;
     }
 
-    public function hasNoFunctionDefinition() {
+    protected function hasNoFunctionDefinition() {
         $this->addMethod('not( where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") ) )');
     
         return $this;
     }
 
-    public function functionDefinition() {
+    protected function functionDefinition() {
         $this->addMethod('in("DEFINITION").hasLabel("Function", "Method", "Magicmethod", "Closure")');
     
         return $this;
     }
 
-    public function goToArray() {
+    protected function goToArray() {
         $this->addMethod('emit( ).repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
         
         return $this;
     }
 
-    public function goToExpression() {
+    protected function goToExpression() {
         $this->addMethod(<<<GREMLIN
 coalesce( __.where( __.in("EXPRESSION")), 
                     __.repeat( __.in({$this->linksDown})).emit( ).until( where(__.in("EXPRESSION") ).where( __.in("EXPRESSION")) )
@@ -1524,53 +1526,53 @@ GREMLIN
         return $this;
     }
     
-    public function goToCurrentScope() {
+    protected function goToCurrentScope() {
         $this->goToInstruction(array('Function', 'Phpcode'));
         
         return $this;
     }
 
-    public function goToFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
+    protected function goToFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
         $this->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )', makeArray($type));
         
         return $this;
     }
 
-    public function hasNoFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
+    protected function hasNoFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
         return $this->hasNoInstruction($type);
     }
 
-    public function hasNoNamedFunction($name) {
+    protected function hasNoNamedFunction($name) {
         $this->hasNoNamedInstruction('Function', $name);
         
         return $this;
     }
     
-    public function goToFile() {
+    protected function goToFile() {
         $this->goToInstruction('File');
         
         return $this;
     }
     
-    public function goToLoop() {
+    protected function goToLoop() {
         $this->goToInstruction(self::$LOOPS_ALL);
         
         return $this;
     }
 
-    public function classDefinition() {
+    protected function classDefinition() {
         $this->addMethod('in("DEFINITION")');
     
         return $this;
     }
 
-    public function noClassDefinition($type = 'Class') {
+    protected function noClassDefinition($type = 'Class') {
         $this->addMethod('not(where(__.in("DEFINITION").hasLabel(within(***)) ) )', makeArray($type) );
     
         return $this;
     }
 
-    public function hasClassDefinition($type = 'Class') {
+    protected function hasClassDefinition($type = 'Class') {
         $this->addMethod('where(__.in("DEFINITION").hasLabel(within(***)) )', makeArray($type));
     
         return $this;
@@ -1782,7 +1784,7 @@ GREMLIN
     }
 
     public function hasLoop() {
-        $this->hasInstruction(array('For', 'Foreach', 'Dowhile', 'While'));
+        $this->hasInstruction(self::$LOOPS_ALL);
         
         return $this;
     }
@@ -1966,10 +1968,16 @@ GREMLIN;
     }
     
     public function run() {
+        $a = microtime(true);
         $this->analyze();
         $this->prepareQuery();
+        $b = microtime(true);
 
         $this->execQuery();
+        $c = microtime(true);
+//        print "Prepare : ".number_format(1000*($b - $a), 2)."ms\n";
+//        print "Run : ".number_format(1000*($c - $b), 2)."ms\n";
+//        print "Analyze : ".number_format(1000*($c - $a), 2)."ms\n";
         
         return $this->rowCount;
     }
@@ -2200,7 +2208,6 @@ GREMLIN;
     private function tolowercase(&$code) {
         if (is_array($code)) {
             $code = array_map('mb_strtolower', $code);
-            unset($v);
         } elseif (is_scalar($code)) {
             $code = mb_strtolower($code);
         } else {

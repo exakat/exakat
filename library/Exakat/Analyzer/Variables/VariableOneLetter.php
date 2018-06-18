@@ -26,29 +26,22 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableOneLetter extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/Variablenames');
-    }
-    
     public function analyze() {
         // Normal variables
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_USER)
              ->tokenIs('T_VARIABLE')
-             ->analyzerIs('Variables/Variablenames')
              ->fullcodeLength(' == 2 ');
         $this->prepareQuery();
 
         // ${variables}
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_USER)
              ->tokenIs(array('T_CURLY_OPEN', 'T_DOLLAR_OPEN_CURLY_BRACES'))
-             ->analyzerIs('Variables/Variablenames')
              ->fullcodeLength(' == 4 ');
         $this->prepareQuery();
         
         // {$variables}
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_USER)
              ->tokenIs('T_DOLLAR')
-             ->analyzerIs('Variables/Variablenames')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
              ->fullcodeLength(' == 1 ');

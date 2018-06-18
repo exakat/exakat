@@ -10,94 +10,82 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONST
-            9
+            8
             Label : CONST
-              9
-              Label : NAME
-                10
-              Label : VALUE
-                11
-            Label : PUBLIC
               8
+              Label : NAME
+                9
+              Label : VALUE
+                10
           Label : CONST
-            9
+            8
             Label : CONST
-              9
+              8
+              Label : NAME
+                11
+              Label : VALUE
+                10
+          Label : CONST
+            8
+            Label : CONST
+              8
               Label : NAME
                 13
               Label : VALUE
-                11
-            Label : PROTECTED
-              12
+                10
           Label : CONST
-            9
+            8
             Label : CONST
-              9
+              8
+              Label : NAME
+                15
+              Label : VALUE
+                10
+            Label : CONST
+              17
               Label : NAME
                 16
               Label : VALUE
-                11
-            Label : PRIVATE
-              15
+                10
           Label : CONST
-            9
-            Label : PUBLIC
-              8
+            8
             Label : CONST
-              9
+              8
               Label : NAME
                 18
               Label : VALUE
-                11
+                10
             Label : CONST
-              20
+              17
               Label : NAME
-                19
+                20
               Label : VALUE
-                11
+                22
           Label : CONST
-            9
-            Label : PROTECTED
-              12
+            8
             Label : CONST
-              9
-              Label : NAME
-                21
-              Label : VALUE
-                11
-            Label : CONST
-              20
+              8
               Label : NAME
                 23
               Label : VALUE
+                10
+            Label : CONST
+              17
+              Label : NAME
                 25
-          Label : CONST
-            9
-            Label : CONST
-              9
-              Label : NAME
+              Label : VALUE
                 26
-              Label : VALUE
-                11
             Label : CONST
-              20
+              17
               Label : NAME
+                27
+              Label : VALUE
                 28
-              Label : VALUE
+            Label : CONST
+              17
+              Label : NAME
                 29
-            Label : CONST
-              20
-              Label : NAME
+              Label : VALUE
                 30
-              Label : VALUE
-                31
-            Label : CONST
-              20
-              Label : NAME
-                32
-              Label : VALUE
-                33
-            Label : PRIVATE
-              15
           Label : NAME
             6

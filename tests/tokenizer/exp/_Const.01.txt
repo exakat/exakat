@@ -40,17 +40,13 @@ Label : PROJECT
           Label : METHOD
             22
             Label : ARGUMENT
-              31
+              29
             Label : BLOCK
-              33
+              31
               Label : EXPRESSION
-                31
+                29
             Label : NAME
               22
-            Label : PUBLIC
-              30
-            Label : STATIC
-              27
           Label : NAME
             6
           Label : PPP
@@ -61,13 +57,7 @@ Label : PROJECT
                 8
               Label : RIGHT
                 11
-            Label : PRIVATE
-              7
           Label : PPP
-            27
+            26
             Label : PPP
-              28
-            Label : PROTECTED
-              26
-            Label : STATIC
               27

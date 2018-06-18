@@ -30,12 +30,12 @@ class CleanDb extends Tasks {
 
     public function run() {
         $this->cleanTmpDir();
-         if (Tasks::$semaphore !== null) {
+         if (Tasks::$semaphore === null) {
+            $this->gremlin->clean();
+        } else {
             fclose(Tasks::$semaphore);
             $this->gremlin->clean();
             Tasks::$semaphore = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
-        } else {
-            $this->gremlin->clean();
         }
     }
 

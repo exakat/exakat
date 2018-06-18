@@ -31,14 +31,14 @@ class CantInheritAbstractMethod extends Analyzer {
     // abstract class B extends A { abstract function bar($x): stdClass; }
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('METHOD')
-             ->hasOut('ABSTRACT')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->is('abstract', true)
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('METHOD')
-             ->hasOut('ABSTRACT')
+             ->is('abstract', true)
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->back('first');

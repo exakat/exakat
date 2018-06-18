@@ -107,29 +107,19 @@ Label : PROJECT
                 29
               Label : RIGHT
                 7
-            Label : VAR
-              28
           Label : PPP
             28
             Label : PPP
               32
-            Label : VAR
-              28
           Label : PPP
             28
             Label : PPP
               34
-            Label : VAR
-              28
           Label : PPP
             28
             Label : PPP
               36
-            Label : VAR
-              28
           Label : PPP
             28
             Label : PPP
               38
-            Label : VAR
-              28

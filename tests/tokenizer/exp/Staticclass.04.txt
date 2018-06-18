@@ -27,8 +27,6 @@ Label : PROJECT
                     13
                     Label : CLASS
                       12
-                    Label : CLASS
-                      5
                   Label : CONCAT
                     15
               Label : EXPRESSION
@@ -39,8 +37,6 @@ Label : PROJECT
                     13
                     Label : CLASS
                       16
-                    Label : CLASS
-                      5
                   Label : CONCAT
                     15
               Label : EXPRESSION
@@ -51,8 +47,6 @@ Label : PROJECT
                     13
                     Label : CLASS
                       17
-                    Label : CLASS
-                      5
                   Label : CONCAT
                     15
             Label : NAME

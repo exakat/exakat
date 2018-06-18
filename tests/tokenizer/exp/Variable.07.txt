@@ -23,5 +23,3 @@ Label : PROJECT
                   11
                 Label : CONSTANT
                   12
-            Label : PROTECTED
-              7

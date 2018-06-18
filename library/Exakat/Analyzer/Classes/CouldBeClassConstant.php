@@ -38,7 +38,7 @@ class CouldBeClassConstant extends Analyzer {
         $this->atomIs('Ppp')
              ->hasClass()
 
-             ->hasNoOut(array('PRIVATE', 'PROTECTED'))
+             ->isNot('visibility', array('private', 'protected'))
 
              ->outIs('PPP')
              ->analyzerIsNot('Classes/LocallyUnusedProperty')

@@ -18,44 +18,40 @@ Label : PROJECT
           Label : DEFINITION
             9
           Label : METHOD
-            15
+            14
             Label : ARGUMENT
-              16
-            Label : BLOCK
-              18
-              Label : EXPRESSION
-                19
-                Label : RETURN
-                  20
-            Label : NAME
               15
+            Label : BLOCK
+              17
+              Label : EXPRESSION
+                18
+                Label : RETURN
+                  19
+            Label : NAME
+              14
           Label : NAME
             9
           Label : PPP
-            12
+            11
             Label : PPP
               6
               Label : LEFT
                 5
               Label : RIGHT
-                14
-            Label : PUBLIC
-              11
-            Label : STATIC
-              12
+                13
         Label : EXPRESSION
           6
           Label : LEFT
-            21
+            20
           Label : RIGHT
-            22
+            21
             Label : NEW
-              23
+              22
               Label : CLASS
                 9
               Label : METHOD
                 5
                 Label : ARGUMENT
-                  16
+                  15
                 Label : NAME
                   5

@@ -12,112 +12,106 @@ Label : PROJECT
           Label : DEFINITION
             6
           Label : METHOD
-            9
+            8
             Label : ARGUMENT
-              11
+              10
             Label : BLOCK
-              13
+              12
               Label : EXPRESSION
-                14
+                13
                 Label : ARGUMENT
-                  15
+                  14
             Label : NAME
-              9
-            Label : PUBLIC
               8
           Label : NAME
             6
         Label : EXPRESSION
           5
           Label : DEFINITION
-            21
+            20
           Label : DEFINITION
-            17
+            16
           Label : METHOD
-            19
+            18
             Label : ARGUMENT
-              11
+              10
             Label : BLOCK
-              13
+              12
               Label : EXPRESSION
-                14
+                13
                 Label : ARGUMENT
-                  21
+                  20
             Label : NAME
-              19
-            Label : PUBLIC
-              8
+              18
           Label : NAME
-            17
+            16
         Label : EXPRESSION
-          23
+          22
           Label : DEFINITION
-            24
+            23
             Label : ARGUMENT
-              11
+              10
             Label : NAME
-              24
+              23
           Label : METHOD
-            27
-            Label : ARGUMENT
-              11
-            Label : BLOCK
-              13
-              Label : EXPRESSION
-                14
-                Label : ARGUMENT
-                  29
-            Label : NAME
-              27
-            Label : PUBLIC
-              8
-          Label : NAME
-            24
-          Label : USE
             26
+            Label : ARGUMENT
+              10
+            Label : BLOCK
+              12
+              Label : EXPRESSION
+                13
+                Label : ARGUMENT
+                  28
+            Label : NAME
+              26
+          Label : NAME
+            23
+          Label : USE
+            25
             Label : USE
               6
             Label : USE
-              17
+              16
         Label : EXPRESSION
-          31
+          30
           Label : LEFT
-            30
+            29
           Label : RIGHT
-            32
+            31
             Label : NEW
-              24
+              23
               Label : ARGUMENT
-                11
+                10
               Label : NAME
-                24
+                23
         Label : EXPRESSION
-          33
+          32
           Label : METHOD
-            9
+            8
             Label : ARGUMENT
-              11
+              10
             Label : NAME
-              9
+              8
           Label : OBJECT
-            30
+            29
         Label : EXPRESSION
-          33
+          32
           Label : METHOD
-            19
+            18
             Label : ARGUMENT
-              11
+              10
             Label : NAME
-              19
+              18
           Label : OBJECT
-            30
+            29
         Label : EXPRESSION
-          33
+          32
           Label : METHOD
-            27
+            26
             Label : ARGUMENT
-              11
+              10
             Label : NAME
-              27
+              26
           Label : OBJECT
-            30
+            29

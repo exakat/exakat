@@ -33,7 +33,7 @@ class CantInstantiateClass extends Analyzer {
              ->inIs('DEFINITION')
              ->outIs('MAGICMETHOD')
              ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
-             ->hasOut(array('PRIVATE', 'PROTECTED'))
+             ->is('visibility', array('private', 'protected'))
              ->back('first');
         $this->prepareQuery();
 
@@ -45,7 +45,7 @@ class CantInstantiateClass extends Analyzer {
              ->inIs('DEFINITION')
              ->outIs('MAGICMETHOD')
              ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
-             ->hasOut(array('PRIVATE', 'PROTECTED'))
+             ->is('visibility', array('private', 'protected'))
              ->back('first');
         $this->prepareQuery();
 
@@ -58,7 +58,7 @@ class CantInstantiateClass extends Analyzer {
              ->inIs('DEFINITION')
              ->outIs('MAGICMETHOD')
              ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
-             ->hasOut(array('PRIVATE', 'PROTECTED'))
+             ->is('visibility', array('private', 'protected'))
              ->back('first');
         $this->prepareQuery();
     }

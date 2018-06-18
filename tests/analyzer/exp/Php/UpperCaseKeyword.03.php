@@ -1,13 +1,13 @@
 <?php
 
-$expected     = array('Public',
-                      'Static Public FuncTioN myFunc( ) { /**/ } ',
+$expected     = array('Static Public FuncTioN myFunc( ) { /**/ } ',
                       'final protected FUNCTION myFunc2( ) { /**/ } ',
                       'Class myClass { /**/ } ',
-                      'Static',
                      );
 
-$expected_not = array('final',
+$expected_not = array('Public',
+                      'Static',
+                      'final',
                       'protected',
                      );
 

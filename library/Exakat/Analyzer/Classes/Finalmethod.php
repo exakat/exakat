@@ -28,10 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class Finalmethod extends Analyzer {
 
     public function analyze() {
+        // class x { final function foo() {}}
         $this->atomIs('Class')
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->hasOut('FINAL');
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(array('Method', 'Magicmethod'))
+             ->is('final', true);
         $this->prepareQuery();
     }
 }

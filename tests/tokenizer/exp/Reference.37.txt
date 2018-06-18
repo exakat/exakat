@@ -14,7 +14,7 @@ Label : PROJECT
             Label : CONST
               7
               Label : DEFINITION
-                23
+                22
                 Label : CLASS
                   6
                 Label : CONSTANT
@@ -46,7 +46,7 @@ Label : PROJECT
             Label : NAME
               11
           Label : METHOD
-            17
+            16
             Label : ARGUMENT
               12
             Label : BLOCK
@@ -55,18 +55,26 @@ Label : PROJECT
                 15
                 Label : RETURN
                   10
+            Label : DEFINITION
+              22
+              Label : CLASS
+                6
+              Label : METHOD
+                16
+                Label : ARGUMENT
+                  12
+                Label : NAME
+                  16
             Label : NAME
-              17
-            Label : STATIC
               16
           Label : NAME
             6
         Label : EXPRESSION
-          19
+          18
           Label : LEFT
-            18
+            17
           Label : RIGHT
-            20
+            19
             Label : NEW
               6
               Label : ARGUMENT
@@ -74,11 +82,11 @@ Label : PROJECT
               Label : NAME
                 6
         Label : EXPRESSION
-          24
+          23
           Label : ARGUMENT
-            22
+            21
             Label : LEFT
-              21
+              20
               Label : METHOD
                 11
                 Label : ARGUMENT
@@ -86,24 +94,24 @@ Label : PROJECT
                 Label : NAME
                   11
               Label : OBJECT
-                18
+                17
             Label : RIGHT
-              23
+              22
               Label : CLASS
                 6
               Label : CONSTANT
                 8
         Label : EXPRESSION
-          19
+          18
           Label : LEFT
-            25
+            24
           Label : RIGHT
-            23
+            22
             Label : CLASS
               6
             Label : METHOD
-              17
+              16
               Label : ARGUMENT
                 12
               Label : NAME
-                17
+                16

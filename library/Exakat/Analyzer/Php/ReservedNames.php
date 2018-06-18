@@ -28,7 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class ReservedNames extends Analyzer {
 
     public function analyze() {
-        $reservedNames = $this->loadIni('php_keywords.ini', 'keyword');
+        $phpNames = $this->loadIni('php_keywords.ini', 'keyword');
+        
+        $reservedNames = array_merge(str2array($this->reservedNames), 
+                                     array_diff($phpNames, str2array($this->allowedNames)));
 
         // functions/methods names
         $this->atomIs('Function')
@@ -73,12 +76,9 @@ class ReservedNames extends Analyzer {
         $this->prepareQuery();
 
         // variables
-        foreach($reservedNames as &$variable) {
-            $variable = '$'.$variable;
-        }
-        unset($variable);
+        $reservedNamesVariables = array_map(function ($x) { return "\$$x"; }, $reservedNames);
         $this->atomIs('Variable')
-             ->codeIs($reservedNames);
+             ->codeIs($reservedNamesVariables);
         $this->prepareQuery();
     }
 }

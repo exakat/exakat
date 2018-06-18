@@ -39,5 +39,3 @@ Label : PROJECT
             9
             Label : PPP
               10
-            Label : VAR
-              9

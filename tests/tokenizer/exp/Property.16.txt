@@ -21,5 +21,3 @@ Label : PROJECT
                 11
                 Label : CONCAT
                   10
-            Label : PUBLIC
-              7

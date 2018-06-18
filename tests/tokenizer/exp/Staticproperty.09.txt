@@ -53,10 +53,18 @@ Label : PROJECT
                     20
                   Label : NAME
                     9
+            Label : DEFINITION
+              23
+              Label : CLASS
+                6
+              Label : METHOD
+                13
+                Label : ARGUMENT
+                  15
+                Label : NAME
+                  13
             Label : NAME
               13
-            Label : STATIC
-              8
           Label : METHOD
             24
             Label : ARGUMENT
@@ -75,8 +83,6 @@ Label : PROJECT
                     31
             Label : NAME
               24
-            Label : STATIC
-              8
           Label : METHOD
             33
             Label : ARGUMENT
@@ -95,8 +101,6 @@ Label : PROJECT
                     31
             Label : NAME
               33
-            Label : STATIC
-              8
           Label : NAME
             6
           Label : PPP
@@ -107,8 +111,6 @@ Label : PROJECT
                 9
               Label : RIGHT
                 11
-            Label : STATIC
-              8
         Label : EXPRESSION
           23
           Label : CLASS

@@ -39,8 +39,8 @@ GREMLIN;
         if(!empty($properties)) {
             $properties = array_values($properties);
             $this->atomIs('Ppp')
-                 ->hasOut('PUBLIC')
-                 ->hasNoOut('STATIC')
+                 ->is('visibility', 'public')
+                 ->isNot('static', true)
                  ->outIs('PPP')
                  ->_as('ppp')
                  ->isNot('propertyname', $properties)
@@ -67,8 +67,8 @@ GREMLIN;
         if (!empty($staticproperties)) {
             $staticproperties = array_values($staticproperties);
             $this->atomIs('Ppp')
-                 ->hasOut('PUBLIC')
-                 ->hasOut('STATIC')
+                 ->is('visibility', 'public')
+                 ->is('static', true)
                  ->inIs('PPP')
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')

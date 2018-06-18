@@ -65,6 +65,11 @@ class Atom {
     public $globalvar    = false;
     public $binaryString = Load::NOT_BINARY;
     public $isNull       = false;
+    public $visibility   = '';
+    public $final        = '';
+    public $abstract     = '';
+    public $static       = '';
+    public $ctype1       = '';
 
     public function __construct($id, $atom) {
         $this->id   = $id;
@@ -88,11 +93,16 @@ class Atom {
         $this->fullnspath    = $this->protectString($this->fullnspath );
         $this->strval        = $this->protectString($this->strval     );
         $this->noDelimiter   = $this->protectString($this->noDelimiter);
+        $this->visibility    = $this->protectString($this->visibility );
+        $this->ctype1        = $this->protectString($this->ctype1     );
 
         $this->alternative   = $this->alternative ? 1 : null;
         $this->reference     = $this->reference   ? 1 : null;
         $this->heredoc       = $this->heredoc     ? 1 : null;
         $this->variadic      = $this->variadic    ? 1 : null;
+        $this->final         = $this->variadic    ? 1 : null;
+        $this->abstract      = $this->variadic    ? 1 : null;
+        $this->static        = $this->variadic    ? 1 : null;
         $this->absolute      = $this->absolute    ? 1 : null;
         $this->constant      = $this->constant    ? 1 : null;
         $this->boolean       = $this->boolean     ? 1 : null;
@@ -114,122 +124,8 @@ class Atom {
         return (array) $this;
     }
 
-    public function toNonEmptyArray() {
-        $return = array();
-
-        if (strlen($this->code) > self::STRING_MAX_SIZE) {
-            $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
-        }
-        if (strlen($this->lccode) > self::STRING_MAX_SIZE) {
-            $this->lccode = substr($this->lccode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->lccode).' chars]';
-        }
-        if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
-            $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
-        }
-
-        if ($this->intval > 2147483647) {
-            $this->intval = 2147483647;
-        }
-        if ($this->intval < -2147483648) {
-            $this->intval = -2147483648;
-        }
-        $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
-
-        
-        // Those are always present
-        $return = array(
-            'id'            => $this->id,
-            'atom'          => $this->atom,
-            'label'         => $this->atom,
-            'line'          => $this->line,
-            'token'         => $this->token,
-            'code'          => $this->protectString($this->code       ),
-            'lccode'        => $this->protectString($this->lccode     ),
-            'fullcode'      => $this->protectString($this->fullcode   ),
-            'fullnspath'    => $this->protectString($this->fullnspath ),
-            );
-
-        if ($this->count !== null)       { $return['count']        = $this->count; }
-        if ($this->rank !== '')          { $return['rank']         = $this->rank; }
-        if ($this->alternative)          { $return['alternative']  = 1; }
-        if ($this->reference)            { $return['reference']    = 1; }
-        if ($this->heredoc)              { $return['heredoc']      = 1; }
-        if ($this->variadic)             { $return['variadic']     = 1; }
-        if ($this->absolute)             { $return['absolute']     = 1; }
-        if ($this->constant)             { $return['constant']     = 1; }
-        if ($this->boolean)              { $return['boolean']      = 1; }
-        if ($this->enclosing)            { $return['enclosing']    = 1; }
-        if ($this->bracket)              { $return['bracket']      = 1; }
-        if ($this->flexible)             { $return['flexible']     = 1; }
-        if ($this->close_tag)            { $return['close_tag']    = 1; }
-        if ($this->aliased)              { $return['aliased']      = 1; }
-        if ($this->alias !== '')         { $return['alias']        = $this->alias; }
-        if ($this->origin !== '')        { $return['origin']       = $this->origin; }
-        if ($this->strval)               { $return['close_tag']    = $this->protectString($this->strval     ); }
-        if ($this->noDelimiter !== null) { $return['noDelimiter']  = $this->protectString($this->noDelimiter); }
-        if ($this->propertyname)         { $return['propertyname'] = $this->propertyname; }
-        if ($this->globalvar)            { $return['globalvar']    = 1; }
-        if ($this->intval !== null)      { $return['intval']       = 1; }
-        if ($this->delimiter !== '')     { $return['delimiter']    = $this->delimiter; }
-        if ($this->args_max !== '')      { $return['args_max']     = $this->args_max; }
-        if ($this->args_min !== '')      { $return['args_min']     = $this->args_min; }
-
-        return $return;
-    }
-    public function toLimitedArray($headers) {
-        $return = array();
-
-        if (strlen($this->code) > self::STRING_MAX_SIZE) {
-            $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
-        }
-        if (strlen($this->lccode) > self::STRING_MAX_SIZE) {
-            $this->lccode = substr($this->lccode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->lccode).' chars]';
-        }
-        if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
-            $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
-        }
-
-        $this->code          = $this->protectString($this->code       );
-        $this->lccode        = $this->protectString($this->lccode     );
-        $this->fullcode      = $this->protectString($this->fullcode   );
-        $this->fullnspath    = $this->protectString($this->fullnspath );
-        $this->strval        = $this->protectString($this->strval     );
-        $this->noDelimiter   = $this->protectString($this->noDelimiter);
-
-//'alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'flexible', 'close_tag', 'aliased', 'boolean'
-        $this->alternative   = (int) $this->alternative;
-        $this->reference     = (int) $this->reference  ;
-        $this->heredoc       = (int) $this->heredoc    ;
-        $this->variadic      = (int) $this->variadic   ;
-        $this->absolute      = (int) $this->absolute   ;
-        $this->constant      = (int) $this->constant   ;
-        $this->boolean       = (int) $this->boolean    ;
-        $this->bracket       = (int) $this->bracket    ;
-        $this->flexible      = (int) $this->flexible   ;
-        $this->close_tag     = (int) $this->close_tag  ;
-        $this->aliased       = (int) $this->aliased    ;
-
-        $this->enclosing     = !$this->enclosing  ? null : 1;
-        $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
-
-        $return = array( $this->id,
-                         $this->atom,
-                         $this->code,
-                         $this->lccode,
-                         $this->fullcode,
-                         $this->line,
-                         $this->token,
-                         $this->rank);
-        
-        foreach($headers as $head) {
-            $return[] = $this->$head;
-        }
-        
-        return $return;
-    }
-    
     public function toGraphsonLine(&$id) {
-        $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'flexible', 'close_tag', 'aliased', 'boolean', 'constant');
+        $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'final', 'abstract', 'static', 'absolute', 'enclosing', 'bracket', 'flexible', 'close_tag', 'aliased', 'boolean', 'constant');
         $integerValues = array('count', 'intval', 'args_max', 'args_min');
 
         $falseValues = array('globalvar', 'variadic', 'enclosing', 'heredoc', 'aliased', 'alternative', 'reference');
@@ -256,7 +152,7 @@ class Atom {
                 $this->lccode = mb_strtolower($this->code);
             }
 
-            if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode', )) &&
+            if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode' )) &&
                 $value === '') {
                 continue;
             }

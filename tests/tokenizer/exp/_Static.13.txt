@@ -19,14 +19,10 @@ Label : PROJECT
                 8
               Label : RIGHT
                 11
-            Label : STATIC
-              7
           Label : PPP
             7
             Label : PPP
               12
-            Label : STATIC
-              7
           Label : PPP
             14
             Label : PPP
@@ -35,22 +31,14 @@ Label : PROJECT
                 15
               Label : RIGHT
                 11
-            Label : PRIVATE
-              14
           Label : PPP
             14
             Label : PPP
               17
-            Label : PRIVATE
-              14
           Label : PPP
             14
             Label : PPP
               19
-            Label : PRIVATE
-              14
-            Label : STATIC
-              7
           Label : PPP
             14
             Label : PPP
@@ -59,10 +47,6 @@ Label : PROJECT
                 21
               Label : RIGHT
                 11
-            Label : PRIVATE
-              14
-            Label : STATIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -71,66 +55,50 @@ Label : PROJECT
                 23
               Label : RIGHT
                 11
-            Label : PRIVATE
-              14
-            Label : STATIC
-              7
           Label : PPP
             7
             Label : PPP
               25
-            Label : PRIVATE
-              14
-            Label : STATIC
-              7
           Label : PPP
             7
-            Label : PPP
-              29
             Label : PPP
               27
-            Label : STATIC
-              7
+            Label : PPP
+              29
           Label : PPP
             7
-            Label : PPP
-              9
-              Label : LEFT
-                33
-              Label : RIGHT
-                11
             Label : PPP
               9
               Label : LEFT
                 31
               Label : RIGHT
                 11
-            Label : STATIC
-              7
+            Label : PPP
+              9
+              Label : LEFT
+                33
+              Label : RIGHT
+                11
           Label : PPP
             7
-            Label : PPP
-              37
             Label : PPP
               9
               Label : LEFT
                 35
               Label : RIGHT
                 11
-            Label : STATIC
-              7
+            Label : PPP
+              37
           Label : PPP
             7
+            Label : PPP
+              39
             Label : PPP
               9
               Label : LEFT
                 41
               Label : RIGHT
                 11
-            Label : PPP
-              39
-            Label : STATIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -141,8 +109,6 @@ Label : PROJECT
               47
             Label : PPP
               49
-            Label : STATIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -169,8 +135,6 @@ Label : PROJECT
                 57
               Label : RIGHT
                 11
-            Label : STATIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -189,8 +153,6 @@ Label : PROJECT
                 11
             Label : PPP
               65
-            Label : STATIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -209,10 +171,6 @@ Label : PROJECT
                 73
               Label : RIGHT
                 11
-            Label : PRIVATE
-              14
-            Label : STATIC
-              7
           Label : PPP
             7
             Label : PPP
@@ -221,50 +179,34 @@ Label : PROJECT
               77
             Label : PPP
               79
-            Label : PRIVATE
-              14
-            Label : STATIC
-              7
           Label : PPP
             7
-            Label : PPP
-              85
             Label : PPP
               81
             Label : PPP
               83
-            Label : STATIC
-              7
+            Label : PPP
+              85
           Label : PPP
             87
             Label : PPP
               88
-            Label : PUBLIC
-              87
           Label : PPP
             14
             Label : PPP
               90
-            Label : PRIVATE
-              14
           Label : PPP
             92
             Label : PPP
               93
-            Label : PROTECTED
-              92
           Label : PPP
             7
             Label : PPP
               95
-            Label : STATIC
-              7
           Label : PPP
             97
             Label : PPP
               98
-            Label : VAR
-              97
           Label : PPP
             87
             Label : PPP
@@ -273,8 +215,6 @@ Label : PROJECT
                 100
               Label : RIGHT
                 102
-            Label : PUBLIC
-              87
           Label : PPP
             7
             Label : PPP
@@ -283,7 +223,3 @@ Label : PROJECT
                 103
               Label : RIGHT
                 102
-            Label : PUBLIC
-              87
-            Label : STATIC
-              7

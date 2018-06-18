@@ -43,5 +43,3 @@ Label : PROJECT
                 21
               Label : RIGHT
                 23
-            Label : VAR
-              7

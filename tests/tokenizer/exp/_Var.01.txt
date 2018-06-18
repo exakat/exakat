@@ -21,5 +21,3 @@ Label : PROJECT
                 11
                 Label : ARGUMENT
                   12
-            Label : VAR
-              7

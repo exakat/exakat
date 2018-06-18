@@ -30,7 +30,7 @@ class PropertyUsedBelow extends Analyzer {
         // property + $this->property
         //////////////////////////////////////////////////////////////////
         $this->atomIs('Ppp')
-             ->hasNoOut('STATIC')
+             ->isNot('static', true)
              ->outIs('PPP')
              ->_as('ppp')
              ->savePropertyAs('propertyname', 'propertyname')
@@ -49,7 +49,7 @@ class PropertyUsedBelow extends Analyzer {
         // static property : inside the self class
         //////////////////////////////////////////////////////////////////
         $this->atomIs('Ppp')
-             ->hasOut('STATIC')
+             ->is('static', true)
              ->outIs('PPP')
              ->_as('ppp')
              ->outIsIE('LEFT')

@@ -39,8 +39,8 @@ GREMLIN;
 
         // Member that is not used outside this class or its children
         $this->atomIs('Method')
-             ->hasNoOut(array('PROTECTED', 'PRIVATE'))
-             ->hasNoOut('STATIC')
+             ->isNot('visibility', array('protected', 'private'))
+             ->isNot('static', true)
              ->hasClass()
              ->outIs('NAME')
              ->codeIsNot($publicMethods, self::NO_TRANSLATE)
@@ -48,19 +48,20 @@ GREMLIN;
         $this->prepareQuery();
         
         // Case of property::property (that's another public access)
-        $publicUsage = $this->query('g.V().hasLabel("Staticmethodcall").as("init")
-                                  .out("CLASS").hasLabel("Identifier", "Nsname")
-                                  .not(has("code", within("self", "static"))).as("classe")
-                                  .sideEffect{ fnp = it.get().value("fullnspath") }
-                                  .in("CLASS")
-                                  .where( __.repeat( __.in()).until(hasLabel("Class", "Classanonymous", "File"))
-                                            .or(hasLabel("File"), 
-                                                hasLabel("Class", "Classanonymous").filter{ it.get().values("fullnspath") == fnp; }) 
-                                        )
-                                  .out("METHOD").hasLabel("Methodcallname").as("method")
-                                  .select("classe", "method").by("fullnspath").by("code")
-                                  .unique();
-                                  ')->toArray();
+        $publicUsage = $this->query(<<<GREMLIN
+g.V().hasLabel("Staticmethodcall").as("init")
+     .out("CLASS").hasLabel("Identifier", "Nsname").as("classe")
+     .sideEffect{ fnp = it.get().value("fullnspath") }
+     .in("CLASS")
+     .where( __.repeat( __.in($this->linksDown)).until(hasLabel("Class", "Classanonymous", "File"))
+               .or(hasLabel("File"), 
+                   hasLabel("Class", "Classanonymous").filter{ it.get().values("fullnspath") == fnp; }) 
+           )
+     .out("METHOD").hasLabel("Methodcallname").as("method")
+     .select("classe", "method").by("fullnspath").by("code")
+     .unique();
+GREMLIN
+)->toArray();
         
         $publicStaticMethods = array();
         foreach($publicUsage as $value) {
@@ -74,8 +75,8 @@ GREMLIN;
         if (!empty($publicStaticMethods)) {
             // Member that is not used outside this class or its children
             $this->atomIs('Method')
-                 ->hasNoOut(array('PROTECTED', 'PRIVATE'))
-                 ->hasOut('STATIC')
+                 ->isNot('visibility', array('protected', 'private'))
+                 ->is('static', true)
                  ->goToClass()
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')

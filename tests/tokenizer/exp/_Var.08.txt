@@ -80,6 +80,8 @@ Label : PROJECT
           Label : PPP
             8
             Label : PPP
+              9
+            Label : PPP
               12
               Label : LEFT
                 11
@@ -87,10 +89,6 @@ Label : PROJECT
                 13
                 Label : ARGUMENT
                   14
-            Label : PPP
-              9
-            Label : VAR
-              8
           Label : PPP
             8
             Label : PPP
@@ -99,8 +97,6 @@ Label : PROJECT
                 16
               Label : RIGHT
                 18
-            Label : VAR
-              8
           Label : PPP
             8
             Label : PPP
@@ -109,5 +105,3 @@ Label : PROJECT
                 20
               Label : RIGHT
                 22
-            Label : VAR
-              8

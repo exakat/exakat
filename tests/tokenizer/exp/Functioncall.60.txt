@@ -10,36 +10,34 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : METHOD
-            8
+            7
+            Label : BLOCK
+              10
+              Label : EXPRESSION
+                11
+                Label : CONDITION
+                  12
+                  Label : NOT
+                    13
+                    Label : ARGUMENT
+                      14
+                    Label : NAME
+                      13
+                Label : THEN
+                  10
+                  Label : EXPRESSION
+                    15
+                    Label : RETURN
+                      16
+            Label : ARGUMENT
+              8
+              Label : NAME
+                8
             Label : ARGUMENT
               9
               Label : NAME
                 9
-            Label : ARGUMENT
-              10
-              Label : NAME
-                10
-            Label : BLOCK
-              11
-              Label : EXPRESSION
-                12
-                Label : CONDITION
-                  13
-                  Label : NOT
-                    14
-                    Label : ARGUMENT
-                      15
-                    Label : NAME
-                      14
-                Label : THEN
-                  11
-                  Label : EXPRESSION
-                    16
-                    Label : RETURN
-                      17
             Label : NAME
-              8
-            Label : PRIVATE
               7
           Label : NAME
             6

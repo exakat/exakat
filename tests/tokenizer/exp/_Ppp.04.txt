@@ -10,54 +10,42 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : MAGICMETHOD
-            9
+            7
             Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                10
-            Label : FINAL
               8
+            Label : BLOCK
+              10
+              Label : EXPRESSION
+                8
             Label : NAME
-              9
-            Label : PRIVATE
               7
           Label : NAME
             6
         Label : EXPRESSION
           5
           Label : MAGICMETHOD
-            9
+            7
             Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                10
-            Label : FINAL
               8
+            Label : BLOCK
+              10
+              Label : EXPRESSION
+                8
             Label : NAME
-              9
-            Label : PUBLIC
-              14
+              7
           Label : NAME
-            13
+            11
         Label : EXPRESSION
           5
           Label : MAGICMETHOD
-            9
+            7
             Label : ARGUMENT
-              10
-            Label : BLOCK
-              12
-              Label : EXPRESSION
-                10
-            Label : FINAL
               8
+            Label : BLOCK
+              10
+              Label : EXPRESSION
+                8
             Label : NAME
-              9
-            Label : PROTECTED
-              16
+              7
           Label : NAME
-            15
+            12

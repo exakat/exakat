@@ -26,16 +26,10 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableNonascii extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/Variablenames',
-                    );
-    }
-    
     public function analyze() {
         // $人 or 
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_USER)
              ->tokenIsNot(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))
-             ->analyzerIs('Variables/Variablenames')
              ->regexIs('fullcode', '[^a-zA-Z0-9\\$_\\\.\\\&]');
         $this->prepareQuery();
     }
