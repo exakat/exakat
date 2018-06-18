@@ -100,7 +100,7 @@ class Git extends Vcs {
             $branch = 'master';
         }
     
-        $date = trim(shell_exec("cd {$this->destinationFull}/code/; git pull --quiet; git log -1 --format=%cd "));
+        $date = trim(shell_exec("cd {$this->destinationFull}/code/;GIT_TERMINAL_PROMPT=0  git pull --quiet; git log -1 --format=%cd "));
         $resFinal = shell_exec("cd {$this->destinationFull}/code/; git show-ref --heads $branch");
         if (strpos($resFinal, ' ') !== false) {
             list($resFinal, ) = explode(' ', $resFinal);
