@@ -1652,7 +1652,8 @@ SQL;
         $query = <<<SQL
 SELECT analyzer AS analyzer FROM resultsCounts
 WHERE analyzer NOT IN ($list) AND 
-      count = 0
+      count = 0 AND
+      analyzer like "%/%"
 SQL;
         $result = $this->sqlite->query($query);
 
