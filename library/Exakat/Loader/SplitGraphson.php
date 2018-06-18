@@ -89,12 +89,12 @@ g.V().hasLabel('File').addE('PROJECT').from(g.V($this->projectId));
 GREMLIN;
         $res = $this->gsneo4j->query($query);
         
-        $sqlite3 = new \Sqlite3($this->config->projects_root.'/projects/.exakat/calls.sqlite');
+        $sqlite3 = new \Sqlite3("{$this->config->projects_root}/projects/.exakat/calls.sqlite");
 
         $outE = array();
         $res = $sqlite3->query($this->gsneo4j->getDefinitionSQL());
        
-        $fp = fopen($this->path.'.def', 'w+');
+        $fp = fopen("{$this->path}.def", 'w+');
         $total = 0;
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             ++$total;
