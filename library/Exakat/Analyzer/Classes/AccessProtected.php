@@ -52,7 +52,7 @@ class AccessProtected extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->outIs('CLASS')
-             ->codeIsNot(array('parent', 'static', 'self'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->classDefinition()
              ->outIs('PPP')
              ->atomIs('Ppp')

@@ -99,6 +99,7 @@ abstract class Analyzer {
     static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
     static public $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
     static public $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
+    static public $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     
     const STOP_QUERY = 'filter{ false; }';
     
@@ -1531,11 +1532,11 @@ GREMLIN
         return $this;
     }
 
-    public function hasNoFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
+    protected function hasNoFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
         return $this->hasNoInstruction($type);
     }
 
-    public function hasNoNamedFunction($name) {
+    protected function hasNoNamedFunction($name) {
         $this->hasNoNamedInstruction('Function', $name);
         
         return $this;
@@ -1777,7 +1778,7 @@ GREMLIN
     }
 
     public function hasLoop() {
-        $this->hasInstruction(array('For', 'Foreach', 'Dowhile', 'While'));
+        $this->hasInstruction(self::$LOOPS_ALL);
         
         return $this;
     }

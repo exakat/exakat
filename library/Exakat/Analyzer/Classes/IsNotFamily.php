@@ -27,20 +27,27 @@ use Exakat\Analyzer\Analyzer;
 
 class IsNotFamily extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+
         // Staticmethodcall
         // Inside the class
         $this->atomIs('Staticmethodcall')
              ->hasClass()
              ->outIs('CLASS')
-             ->atomIsNot(array('Self', 'Parent', 'Static'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToClass()
              ->atomIs('Class')
              ->notSamePropertyAs('fullnspath', 'fnp')
-             ->raw('not( where( __.emit().repeat( __.out("EXTENDS").in("DEFINITION") ).times('.self::MAX_LOOPING.')
+             ->raw(<<<GREMLIN
+not( 
+    where( __.emit().repeat( __.out("EXTENDS").in("DEFINITION") ).times($MAX_LOOPING)
                              .filter{ it.get().value("fullnspath") == fnp }
-                        ) )')
+                        ) 
+)
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 
@@ -48,7 +55,7 @@ class IsNotFamily extends Analyzer {
         $this->atomIs('Staticmethodcall')
              ->hasClass()
              ->outIs('CLASS')
-             ->atomIsNot(array('Self', 'Parent', 'Static'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToClass()

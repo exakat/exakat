@@ -31,7 +31,7 @@ class WrongCase extends Analyzer {
         // New
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIsNot(array('Static', 'Parent', 'Self'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->savePropertyAs('fullcode', 'classe')
              ->getNameInFNP('classe')
              ->classDefinition()
@@ -43,7 +43,7 @@ class WrongCase extends Analyzer {
 // staticMethodcall
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
-             ->atomIsNot(array('Static', 'Parent', 'Self'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->savePropertyAs('fullcode', 'classe')
              ->getNameInFNP('classe')
              ->classDefinition()
@@ -55,7 +55,7 @@ class WrongCase extends Analyzer {
 // Catch
         $this->atomIs('Catch')
              ->outIs('CLASS')
-             ->atomIsNot(array('Static', 'Parent', 'Self'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->savePropertyAs('fullcode', 'classe')
              ->getNameInFNP('classe')
              ->classDefinition()
@@ -68,7 +68,7 @@ class WrongCase extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
-             ->atomIsNot(array('Static', 'Parent', 'Self'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->savePropertyAs('fullcode', 'classe')
              ->getNameInFNP('classe')
              ->classDefinition()
@@ -81,7 +81,7 @@ class WrongCase extends Analyzer {
 // instance of
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->atomIsNot(array('Static', 'Parent', 'Self'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->savePropertyAs('fullcode', 'classe')
              ->getNameInFNP('classe')
              ->classDefinition()

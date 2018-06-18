@@ -45,7 +45,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->inIs('METHOD')
 
              ->outIs('CLASS')
-             ->atomIsNot(array('Parent', 'Self', 'Static'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->analyzerIsNot('Classes/UndefinedClasses')
              ->classDefinition()
              ->goToAllParents(self::INCLUDE_SELF)
