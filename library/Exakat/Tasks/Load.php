@@ -43,7 +43,6 @@ use Exakat\Tasks\Helpers\Boolval;
 use Exakat\Tasks\Helpers\Nullval;
 use Exakat\Tasks\Helpers\Constant;
 use Exakat\Tasks\Helpers\Precedence;
-use Exakat\Tasks\Helpers\CloneType1;
 
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
@@ -218,7 +217,6 @@ class Load extends Tasks {
         $this->plugins[] = new Strval();
         $this->plugins[] = new Nullval();
         $this->plugins[] = new Constant($this->config);
-//        $this->plugins[] = new CloneType1();
 
         $className = '\Exakat\Tasks\Helpers\Php'.$this->config->phpversion[0].$this->config->phpversion[2];
         $this->phptokens  = new $className();
@@ -2051,6 +2049,7 @@ class Load extends Tasks {
             $identifier->fullnspath = $fullnspath;
             $identifier->aliased    = $aliased;
         }
+        $this->runPlugins($identifier);
 
         return $identifier;
     }
@@ -2211,7 +2210,7 @@ class Load extends Tasks {
             $functioncall->aliased    = $aliased;
 
             $this->calls->addCall('class', $fullnspath, $functioncall);
-        } elseif ($atom === 'Methodcallname') {
+        } elseif ($atom === 'Name') {
             $functioncall->fullnspath = mb_strtolower($name->code);
             $functioncall->aliased    = self::NOT_ALIASED;
 
@@ -2234,7 +2233,6 @@ class Load extends Tasks {
         }
 
         $this->addLink($functioncall, $name, 'NAME');
-        $this->runPlugins($functioncall, array($arguments));
 
         $this->pushExpression($functioncall);
 
@@ -2313,7 +2311,6 @@ class Load extends Tasks {
             $this->calls->addCall('const', $string->fullnspath, $string);
         }
 
-        $this->runPlugins($string, array());
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
@@ -2337,6 +2334,7 @@ class Load extends Tasks {
             $plusplus->token    = $this->getToken($this->tokens[$this->id][0]);
 
             $this->pushExpression($plusplus);
+            $this->runPlugins($plusplus, array('POSTPLUSPUS' => $previous));
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
@@ -2514,7 +2512,7 @@ class Load extends Tasks {
         return $this->processSGVariable('Global');
     }
 
-    private function processBracket($followupFCOA = true) {
+    private function processBracket() {
         $bracket = $this->addAtom('Array');
         $current = $this->id;
 
@@ -2560,10 +2558,12 @@ class Load extends Tasks {
         $bracket->token     = $this->getToken($this->tokens[$current][0]);
         $bracket->enclosing = self::NO_ENCLOSING;
         $this->pushExpression($bracket);
+        $this->runPlugins($bracket, array('VARIABLE' => $variable,
+                                          'INDEX'    => $index));
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
-        } elseif ($followupFCOA === true) {
+        } else {
             $bracket = $this->processFCOA($bracket);
         }
 
@@ -3279,7 +3279,7 @@ class Load extends Tasks {
 
         $array->code      = $this->tokens[$current][1];
         $array->line      = $this->tokens[$current][2];
-        $this->runPlugins($array, array());
+        $this->runPlugins($array);
 
         $this->pushExpression($array);
         
@@ -3749,6 +3749,7 @@ class Load extends Tasks {
             $variable->fullnspath = $class->fullnspath;
             $this->calls->addCall('class', $class->fullnspath, $variable);
         }
+        $this->runPlugins($variable);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3964,6 +3965,7 @@ class Load extends Tasks {
         $operator->line      = $this->tokens[$current][2];
         $operator->token     = $this->getToken($this->tokens[$current][0]);
 
+        $this->runPlugins($operator, array($link => $operand));
         $this->pushExpression($operator);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -4631,7 +4633,9 @@ class Load extends Tasks {
                 $this->calls->addCall('property',  $left->fullnspath.'::$'.$right->code, $static);
             }
         }
-
+        $this->runPlugins($static, array('OBJECT' => $left,
+                                         $links   => $right,
+                                         ));
         $this->pushExpression($static);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -4967,7 +4971,7 @@ class Load extends Tasks {
         $void->noDelimiter = '';
         $void->delimiter   = '';
         
-        $this->runPlugins($void, array());
+        $this->runPlugins($void);
 
         return $void;
     }
