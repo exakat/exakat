@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '1.3.1';
-    const BUILD = 761;
+    const VERSION = '1.3.2';
+    const BUILD = 765;
 
     private $gremlin = null;
     private $config = null;
@@ -51,15 +51,19 @@ class Exakat {
         $class = $config->remote;
         $remote = new Remote($config->remotes[$config->remote], $this->config->transit_key);
         
-        $res = $remote->send($json);
         switch ($config->command) {
             case 'init' :
                 // replicate init, because we'll need later
                 $task = new Tasks\Initproject($this->gremlin, $this->config);
                 $task->run();
+
+                // Local load before remote, in case both are identical.
+                $res = $remote->send($json);
                 break;
 
             case 'fetch' : 
+                $res = $remote->send($json);
+
                 if (strlen($res) < 1024) {
                     // This is an error
                     $json = json_decode($res);
@@ -87,10 +91,12 @@ class Exakat {
                 break;
 
             case 'status' : 
+                $res = $remote->send($json);
                 print $res;
                 break;
 
             default : 
+                $res = $remote->send($json);
                 print $res;
                 break;
         }
