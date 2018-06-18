@@ -1485,31 +1485,31 @@ GREMLIN
         return $this;
     }
 
-    public function hasFunctionDefinition() {
+    protected function hasFunctionDefinition() {
         $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") )');
     
         return $this;
     }
 
-    public function hasNoFunctionDefinition() {
+    protected function hasNoFunctionDefinition() {
         $this->addMethod('not( where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") ) )');
     
         return $this;
     }
 
-    public function functionDefinition() {
+    protected function functionDefinition() {
         $this->addMethod('in("DEFINITION").hasLabel("Function", "Method", "Magicmethod", "Closure")');
     
         return $this;
     }
 
-    public function goToArray() {
+    protected function goToArray() {
         $this->addMethod('emit( ).repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
         
         return $this;
     }
 
-    public function goToExpression() {
+    protected function goToExpression() {
         $this->addMethod(<<<GREMLIN
 coalesce( __.where( __.in("EXPRESSION")), 
                     __.repeat( __.in({$this->linksDown})).emit( ).until( where(__.in("EXPRESSION") ).where( __.in("EXPRESSION")) )
@@ -1520,13 +1520,13 @@ GREMLIN
         return $this;
     }
     
-    public function goToCurrentScope() {
+    protected function goToCurrentScope() {
         $this->goToInstruction(array('Function', 'Phpcode'));
         
         return $this;
     }
 
-    public function goToFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
+    protected function goToFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
         $this->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )', makeArray($type));
         
         return $this;
@@ -1542,31 +1542,31 @@ GREMLIN
         return $this;
     }
     
-    public function goToFile() {
+    protected function goToFile() {
         $this->goToInstruction('File');
         
         return $this;
     }
     
-    public function goToLoop() {
+    protected function goToLoop() {
         $this->goToInstruction(self::$LOOPS_ALL);
         
         return $this;
     }
 
-    public function classDefinition() {
+    protected function classDefinition() {
         $this->addMethod('in("DEFINITION")');
     
         return $this;
     }
 
-    public function noClassDefinition($type = 'Class') {
+    protected function noClassDefinition($type = 'Class') {
         $this->addMethod('not(where(__.in("DEFINITION").hasLabel(within(***)) ) )', makeArray($type) );
     
         return $this;
     }
 
-    public function hasClassDefinition($type = 'Class') {
+    protected function hasClassDefinition($type = 'Class') {
         $this->addMethod('where(__.in("DEFINITION").hasLabel(within(***)) )', makeArray($type));
     
         return $this;
