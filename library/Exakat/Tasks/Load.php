@@ -43,6 +43,7 @@ use Exakat\Tasks\Helpers\Boolval;
 use Exakat\Tasks\Helpers\Nullval;
 use Exakat\Tasks\Helpers\Constant;
 use Exakat\Tasks\Helpers\Precedence;
+use Exakat\Tasks\Helpers\CloneType1;
 
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
@@ -217,6 +218,7 @@ class Load extends Tasks {
         $this->plugins[] = new Strval();
         $this->plugins[] = new Nullval();
         $this->plugins[] = new Constant($this->config);
+        $this->plugins[] = new CloneType1();
 
         $className = '\Exakat\Tasks\Helpers\Php'.$this->config->phpversion[0].$this->config->phpversion[2];
         $this->phptokens  = new $className();
@@ -2334,7 +2336,7 @@ class Load extends Tasks {
             $plusplus->token    = $this->getToken($this->tokens[$this->id][0]);
 
             $this->pushExpression($plusplus);
-            $this->runPlugins($plusplus, array('POSTPLUSPUS' => $previous));
+            $this->runPlugins($plusplus, array('POSTPLUSPLUS' => $previous));
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
