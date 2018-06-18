@@ -31,10 +31,6 @@ class Integer extends Type {
         parent::__construct($gremlin, $config);
         $this->type = 'Integer';
     }
-
-    public function analyze() {
-        parent::analyze();
-    }
 }
 
 ?>

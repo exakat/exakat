@@ -1112,18 +1112,33 @@ GREMLIN;
                 $query[] = "('".$this->sqlite->escapeString($row['name'])."','".$this->sqlite->escapeString($row['file'])."',".$row['line'].')';
                 ++$total;
                 if ($total % 10000 === 0) {
-                    $query = 'INSERT INTO literal'.$type.' (name, file, line) VALUES '.implode(', ', $query);
+                    $query = "INSERT INTO literal$type (name, file, line) VALUES ".implode(', ', $query);
                     $this->sqlite->query($query);
                     $query = array();
                 }
             }
             
             if (!empty($query)) {
-                $query = 'INSERT INTO literal'.$type.' (name, file, line) VALUES '.implode(', ', $query);
+                $query = "INSERT INTO literal$type (name, file, line) VALUES ".implode(', ', $query);
                 $this->sqlite->query($query);
             }
+            
+            $query = "INSERT INTO resultsCounts (analyzer, count) VALUES (\"$type\", $total)";
+            $this->sqlite->query($query);
             display( "literal$type : $total\n");
         }
+
+       $otherTypes = array('Null', 'Boolean', 'Closure');
+       foreach($otherTypes as $type) {
+            $query = <<<GREMLIN
+g.V().hasLabel("$type").count();
+GREMLIN;
+            $total = $this->gremlin->query($query)->toInt();
+
+            $query = "INSERT INTO resultsCounts (analyzer, count) VALUES (\"$type\", $total)";
+            $this->sqlite->query($query);
+            display( "Other $type : $total\n");
+       }
 
        $this->sqlite->query('DROP TABLE IF EXISTS stringEncodings');
        $this->sqlite->query('CREATE TABLE stringEncodings (  
