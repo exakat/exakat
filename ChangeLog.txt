@@ -8,6 +8,22 @@ Version 1.3.2 (Duan Zhixian, coming up)
 + Tokenizer
     + 
 
+Version 1.3.2 (Duan Zhixian, coming up)
++ Architecture
+    + Reading stats from store, not graph.
+    + Git now fails silently if login is requested at clone / pull
++ Report
+    + New analysis : == or === favorites
+    + New analysis : > or < favorites
+    + Upgraded analysis : written only variables is now faster
+    + Upgraded analysis : PHP reserved words has now 2 parameters
+    + Removed analysis : Type/Integer, Real, Closures.
+    + Checked unit tests : 2901 / 2914 test pass (99% pass). 
++ Tokenizer
+    + Static, PPP, Final and Abstract are now properties
+    + Fixed regex in several rules
+    + Added support for code clone detection (WIP)
+
 Version 1.3.1 (Liu Hongji, 2018-06-03)
 + Architecture
     + Cleaned code of unused classes and ;
