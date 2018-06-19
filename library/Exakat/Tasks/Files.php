@@ -69,9 +69,6 @@ class Files extends Tasks {
         self::findFiles($path, $files, $ignoredFiles, $this->config);
         $tokens = $this->countTokens($path, $files, $ignoredFiles);
 
-        $this->datastore->addRow('hash', array('files'  => count($files),
-                                               'tokens' => $tokens));
-
         if (empty($files)) {
             throw new NoFileToProcess($this->config->project);
         }
@@ -352,6 +349,8 @@ class Files extends Tasks {
         $this->datastore->addRow('files', array_map(function ($a) {
                 return array('file'   => $a);
         }, $files));
+        $this->datastore->addRow('hash', array('files'  => count($files),
+                                               'tokens' => $tokens));
         $this->datastore->reload();
 
         $stats['php'] = count($files);
