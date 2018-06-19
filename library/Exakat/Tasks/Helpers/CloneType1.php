@@ -289,14 +289,15 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Functioncall' :
-            case 'Echo': 
-            case 'Print': 
+            case 'Echo'   : 
+            case 'Print'  : 
             case 'Include': 
-            case 'Empty': 
-            case 'Isset': 
-            case 'List' : 
-            case 'Unset' :
-            case 'Exit' :
+            case 'Empty'  : 
+            case 'Isset'  : 
+            case 'List'   : 
+            case 'Unset'  :
+            case 'Exit'   :
+            case 'Eval'   :
                 $ctype1 = array_column($extras, 'ctype1');
                 $atom->ctype1 = strtolower($atom->atom) . '('.implode(',', $ctype1).')';
                 break;
