@@ -158,8 +158,11 @@ abstract class Analyzer {
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {
             $data = self::$datastore->getCol('TokenCounts', 'token');
             
+            self::$availableAtoms = array('Project', 'File');
+            self::$availableLinks = array('DEFINITION', 'ANALYZED');
+
             foreach($data as $token){
-                if ($token == strtoupper($token)) {
+                if ($token === strtoupper($token)) {
                     self::$availableLinks[] = $token;
                 } else {
                     self::$availableAtoms[] = $token;
