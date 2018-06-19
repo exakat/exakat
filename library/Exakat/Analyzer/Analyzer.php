@@ -1043,6 +1043,12 @@ GREMLIN
         
         return $this;
     }
+
+    public function fullcodeVariableIs($variable) {
+        $this->addMethod("filter{it.get().value(\"fullcode\") == $variable; }");
+        
+        return $this;
+    }
     
     public function fullcodeIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->propertyIsNot('fullcode', $code, $caseSensitive);
