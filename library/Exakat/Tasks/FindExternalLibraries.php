@@ -101,20 +101,23 @@ class FindExternalLibraries extends Tasks {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/'.$project.'/')) {
+        if (!file_exists("{$this->config->projects_root}/projects/$project/")) {
             throw new NoSuchProject($project);
         }
 
-        $dir = $this->config->projects_root.'/projects/'.$project.'/code';
-        $cacheFile = $this->config->projects_root.'/projects/'.$project.'/config.cache';
+        $path = "{$this->config->projects_root}/projects/$project/code";
+        if (!file_exists($path)) {
+            throw new NoSuchProject($project);
+        }
+
+        $cacheFile = "{$this->config->projects_root}/projects/$project/config.cache";
 
         if (file_exists($cacheFile)) {
-            display($project.' has already a file cache. Omitting.');
+            display("$project has already a file cache. Omitting.");
             return; //Cancel task
         }
 
         display('Processing files');
-        $path = $this->config->projects_root.'/projects/'.$project.'/code';
         $files = $this->datastore->getCol('files', 'file');
         if (empty($files)) {
             display('No files to process. Aborting');
