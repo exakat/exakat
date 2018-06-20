@@ -25,6 +25,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ReturnTrueFalse extends Analyzer {
     public function analyze() {
+
         // If ($a == 2) { return true; } else { return false; }
         // If ($a == 2) { return false; } else { return true; }
         $this->atomIs('Ifthen')
@@ -97,6 +98,41 @@ class ReturnTrueFalse extends Analyzer {
 
              ->back('first');
         $this->prepareQuery();
+
+        // if ($a) { $b = true; } else { $b = false;}
+        // if ($a) { $b = false; } else { $b = true;}
+        $this->atomIs('Ifthen')
+             ->outIs('THEN')
+             ->is('count', 1)
+             ->outIs('EXPRESSION')
+             ->atomIs('Assignation')
+             
+             ->outIs('LEFT')
+             ->savePropertyAs('fullcode', 'container')
+             ->inIs('LEFT')
+             
+             ->outIs('RIGHT')
+             ->isLiteral()
+             ->savePropertyAs('boolean', 'valeur')
+             ->back('first')
+
+             ->outIs('ELSE')
+             ->is('count', 1)
+             ->outIs('EXPRESSION')
+             ->atomIs('Assignation')
+             
+             ->outIs('LEFT')
+             ->isLiteral()
+             ->samePropertyAs('fullcode', 'container')
+             ->inIs('LEFT')
+             
+             ->outIs('RIGHT')
+             ->atomIs('Boolean')
+             ->notSamePropertyAs('boolean', 'valeur')
+
+             ->back('first');
+        $this->prepareQuery();
+        
     }
 }
 
