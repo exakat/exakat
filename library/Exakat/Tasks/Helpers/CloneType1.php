@@ -216,6 +216,10 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = $extras['CLASS']->ctype1 . $atom->code . $extras['CONSTANT']->ctype1;
                 break;
 
+            case 'Staticclass' :
+                $atom->ctype1 = $extras['CLASS']->ctype1 . '::class';
+                break;
+
             case 'Staticproperty' :
                 $atom->ctype1 = $extras['CLASS']->ctype1 . $atom->code . $extras['MEMBER']->ctype1;
                 break;
@@ -306,6 +310,13 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = '('.$extras['CODE']->ctype1.')';
                 break;
 
+            case 'Classanonymous' : 
+            case 'Class' : 
+            case 'Trait' : 
+            case 'Interface' : 
+                $atom->ctype1 = $atom->atom;
+                break;
+
             case 'Function' :
             case 'Method' :
             case 'Closure' :
@@ -325,7 +336,7 @@ class CloneType1 extends Plugin {
             
             $atom->ctype1 = 'default '.$atom->atom.' '.++$i;
             
-            print "CLONE DEFAULT : $atom->atom\n";
+//            print "CLONE DEFAULT : $atom->atom\n";
         }
     }
 }

@@ -4507,7 +4507,7 @@ class Load extends Tasks {
             $links = 'CLASS';
             $fullcode = $left->fullcode.'::'.$right;
             $this->runPlugins($left);
-            $this->runPlugins($static);
+            $this->runPlugins($static, array('CLASS'    => $left));
             // This should actually be the value of any USE statement
             if (isset($this->uses['class'][mb_strtolower($left->fullcode)])) {
                 $noDelimiter = $this->uses['class'][mb_strtolower($left->fullcode)]->fullcode;
