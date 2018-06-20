@@ -26,18 +26,34 @@ use Exakat\Analyzer\Analyzer;
 
 class ReuseVariable extends Analyzer {
     public function analyze() {
+        $expressions = array('Functioncall', 
+                             'Methodcall', 
+                             'Staticmethodcall', 
+                             'Concatenation', 
+                             'Parenthesis', 
+                             'Addition', 
+                             'Multiplication', 
+                             'Bitshift', 
+                             'Power', 
+                             'Logical', 
+                             'Not', 
+                             'Noscream', 
+                             'Cast',
+                             'Arrayliteral',
+                            );
         // $a = foo($b);
         // if (foo($b)) {}
         $this->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('RIGHT')
-             ->atomIsNot(array('Array', 'Member', 'Variable', 'Boolean', 'Null', 'Real', 'Arrayliteral', 'Integer', 'String', 'Staticconstant', 'Staticproperty'))
+             ->atomIs($expressions)
              ->savePropertyAs('fullcode', 'expression')
              ->savePropertyAs('id', 'token')
              ->savePropertyAs('line', 'line')
              ->goToFunction()
              ->outIs('BLOCK')
-             ->fullcodeInside('expression')
+             ->atomInsideNoDefinition($expressions)
+             ->fullcodeVariableIs('expression')
              ->notSamePropertyAs('id', 'token')
              ->isMore('line', 'line');
         $this->prepareQuery();

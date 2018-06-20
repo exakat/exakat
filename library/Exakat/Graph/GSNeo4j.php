@@ -172,19 +172,19 @@ class GSNeo4j extends Graph {
     }
     
     public function start() {
-        if (!file_exists("{$this->config->gsneo4j_folder}/conf/gsneo4j.yaml")) {
-            copy( "{$this->config->dir_root}/server/gsneo4j/gsneo4j.$this->gremlinVersion.yaml",
-                  "{$this->config->gsneo4j_folder}/conf/gsneo4j.yaml");
+        if (!file_exists("{$this->config->gsneo4j_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml")) {
+            copy( "{$this->config->dir_root}/server/gsneo4j/gsneo4j.{$this->gremlinVersion}.yaml",
+                  "{$this->config->gsneo4j_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml");
         }
 
         if ($this->gremlinVersion === '3.3') {
             display('start gremlin server 3.3.x');
-            putenv('GREMLIN_YAML=conf/gsneo4j.yaml');
+            putenv('GREMLIN_YAML=conf/gsneo4j.3.3.yaml');
             putenv('PID_DIR=db');
             exec("cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh start > gremlin.log 2>&1 &");
         } elseif ($this->gremlinVersion === '3.2') {
             display('start gremlin server 3.2.x');
-            exec("cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/gsneo4j.yaml  > gremlin.log 2>&1 & echo $! > db/gsneo4j.pid ");
+            exec("cd {$this->config->gsneo4j_folder}; rm -rf db/neo4j; ./bin/gremlin-server.sh conf/gsneo4j.3.2.yaml  > gremlin.log 2>&1 & echo $! > db/gsneo4j.pid ");
         }
         display('started gremlin server');
         $this->resetConnection();
@@ -220,7 +220,7 @@ class GSNeo4j extends Graph {
     public function stop() {
         if (file_exists("{$this->config->gsneo4j_folder}/db/gremlin.pid")) {
             display('stop gremlin server 3.3.x');
-            putenv('GREMLIN_YAML=conf/gsneo4j.yaml');
+            putenv('GREMLIN_YAML=conf/gsneo4j.3.3.yaml');
             putenv('PID_DIR=db');
             shell_exec("cd {$this->config->gsneo4j_folder}; ./bin/gremlin-server.sh stop; rm -rf run/gremlin.pid");
         }

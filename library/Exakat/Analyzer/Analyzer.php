@@ -158,8 +158,11 @@ abstract class Analyzer {
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {
             $data = self::$datastore->getCol('TokenCounts', 'token');
             
+            self::$availableAtoms = array('Project', 'File');
+            self::$availableLinks = array('DEFINITION', 'ANALYZED');
+
             foreach($data as $token){
-                if ($token == strtoupper($token)) {
+                if ($token === strtoupper($token)) {
                     self::$availableLinks[] = $token;
                 } else {
                     self::$availableAtoms[] = $token;
@@ -1037,6 +1040,12 @@ GREMLIN
 
     public function fullcodeIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->propertyIs('fullcode', $code, $caseSensitive);
+        
+        return $this;
+    }
+
+    public function fullcodeVariableIs($variable) {
+        $this->addMethod("filter{it.get().value(\"fullcode\") == $variable; }");
         
         return $this;
     }

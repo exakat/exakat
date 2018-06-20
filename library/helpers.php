@@ -536,4 +536,10 @@ function shutdown() {
     }
 }
 
+function str2array($string, $delimiter = ',') {
+    $array = explode($delimiter, $string);
+    
+    return array_map('trim', $array);
+}
+
 ?>

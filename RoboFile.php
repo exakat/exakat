@@ -670,6 +670,7 @@ JOIN categories
         $errors70 = array();
         $errors71 = array();
         $errors72 = array();
+        $errors73 = array();
         $total = count($files);
         foreach($files as $file) {
             $res = shell_exec('php53 -l '.$file);
@@ -717,7 +718,7 @@ JOIN categories
             $res = shell_exec('php73 -l '.$file);
             
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
-                $errors72[(string) $file] = $res;
+                $errors73[(string) $file] = $res;
             }
         }
         
