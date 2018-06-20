@@ -981,11 +981,11 @@ GREMLIN;
         }
         
         if ($property === 'label') {
-            $this->addMethod('filter{ it.get().label() != '.$name.'}');
+            $this->addMethod("filter{ it.get().label() != $name }");
         } elseif ($property === 'id') {
-            $this->addMethod('filter{ it.get().id() != '.$name.'}');
+            $this->addMethod("filter{ it.get().id() != $name }");
         } else {
-            $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' != '.$name.$caseSensitive.'}');
+            $this->addMethod("filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
         }
 
         return $this;
