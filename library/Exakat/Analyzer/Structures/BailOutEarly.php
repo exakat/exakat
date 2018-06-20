@@ -51,6 +51,14 @@ class BailOutEarly extends Analyzer {
              ->atomIs($bailout)
              ->back('first');
         $this->prepareQuery();
+
+        // function foo() { ... if ($a) {  } }
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('BLOCK')
+             ->outWithRank('EXPRESSION', 'last')
+             ->atomIs('Ifthen')
+             ->hasNoOut('ELSE');
+        $this->prepareQuery();
     }
 }
 
