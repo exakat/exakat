@@ -95,6 +95,15 @@ class ExakatConfig extends Config {
         // Update values with actual loaders and gremlin
         $this->config['gremlin'] = $this->gremlins[$this->config['graphdb']];
         $this->config['loader']  = $this->loaders[$this->config['graphdb']];
+        
+        if (isset($this->config['concurencyCheck'])) {
+            $this->config['concurencyCheck'] = (int) $this->config['concurencyCheck'];
+            if ($this->config['concurencyCheck'] < 1024) {
+                $this->config['concurencyCheck'] = 7610;
+            } elseif ($this->config['concurencyCheck'] > 49150) {
+                $this->config['concurencyCheck'] = 7610;
+            }
+        }
 
         foreach(self::PHP_VERSIONS as $version) {
             if (empty($this->config["php$version"])) {

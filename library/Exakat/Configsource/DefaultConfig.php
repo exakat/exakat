@@ -93,6 +93,8 @@ class DefaultConfig extends Config {
  
                                'phpversion'    => '7.2',
                                'token_limit'   => '1000000',
+                               
+                               'concurencyCheck' => 7610,
  
                                'command'       => 'version',
 
