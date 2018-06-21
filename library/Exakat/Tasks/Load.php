@@ -2457,51 +2457,41 @@ class Load extends Tasks {
         }
 
         $fullcode = array();
-        while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON &&
-               $this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG) {
-
+        --$this->id;
+        do {
+            ++$this->id;
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
                 ++$this->id;
                 $this->processSingle($atom);
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
-                    $this->processNext();
-                }
-            } else {
-                $this->processNext();
-            }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA) {
                 $element = $this->popExpression();
-                $element->rank = ++$rank;
-                $this->addLink($static, $element, $link);
-                
-                if ($atom === 'Propertydefinition') {
-                    if (!preg_match('/^\$([^ ]+)/', $element->fullcode, $r)) {
-                        throw new LoadError('Couldn\'t find the property definition in '.__METHOD__.':'.$this->filename.':'.__LINE__);
-                    }
-                    $element->propertyname = $r[1];
+
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
+                    ++$this->id;
+                    $this->processNext();
+                    $default = $this->popExpression();
                 }
-
-                $fullcode[] = $element->fullcode;
-                ++$this->id;
-            }
-        }
-        $element = $this->popExpression();
-        $this->addLink($static, $element, $link);
-
-        if ($atom === 'Propertydefinition') {
-            if (!preg_match('/^\$([^ ]+)/', $element->fullcode, $r)) {
-                throw new LoadError('Couldn\'t find the property definition in '.__METHOD__.':'.$this->filename.':'.__LINE__);
-            }
-            $element->propertyname = $r[1];
-            
-            if (stripos($fullcodePrefix, 'static') === false) {
-                $this->calls->addDefinition('property', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
             } else {
-                $this->calls->addDefinition('staticproperty', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
+                // global $a[2] = 2 ?
+                $this->processNext();
+                $element = $this->popExpression();
             }
-        }
-        $fullcode[] = $element->fullcode;
+            
+            $element->rank = ++$rank;
+            $this->addLink($static, $element, $link);
+            
+            if ($atom === 'Propertydefinition') {
+                // drop $
+                $element->propertyname = substr($element->code, 1);
+            }
+
+            if (isset($default)) {
+                $this->addLink($element, $default, 'DEFAULT');
+                $element->fullcode = $element->fullcode . ' = ' . $default->fullcode;
+                unset($default);
+            }
+            $fullcode[] = $element->fullcode;
+        }  while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON &&
+               $this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG);
 
         $static->code     = $this->tokens[$current][1];
         $static->fullcode = $fullcodePrefix.' '.implode(', ', $fullcode);
@@ -3042,7 +3032,7 @@ class Load extends Tasks {
             $this->processNext();
         }
         $name = $this->popExpression();
-        $this->addLink($switch, $name, 'NAME');
+        $this->addLink($switch, $name, 'CONDITION');
 
         $cases = $this->addAtom('Sequence');
         $cases->code     = self::FULLCODE_SEQUENCE;
@@ -3099,8 +3089,8 @@ class Load extends Tasks {
 
         $this->runPlugins($cases, $extraCases);
         
-        $this->runPlugins($switch, array('NAME' => $name,
-                                         'CASES' => $cases,));
+        $this->runPlugins($switch, array('CONDITION' => $name,
+                                         'CASES'     => $cases,));
 
         $this->pushExpression($switch);
         $this->processSemicolon();
