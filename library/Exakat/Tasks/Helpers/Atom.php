@@ -70,6 +70,7 @@ class Atom {
     public $abstract     = '';
     public $static       = '';
     public $ctype1       = '';
+    public $ctype1_size  = 0;
 
     public function __construct($id, $atom) {
         $this->id   = $id;

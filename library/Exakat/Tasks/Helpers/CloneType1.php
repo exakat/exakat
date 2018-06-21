@@ -157,7 +157,7 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Switch' :
-                $atom->ctype1 = 'switch ('.$extras['NAME']->ctype1 . ') ' . $extras['CASES']->ctype1;
+                $atom->ctype1 = 'switch ('.$extras['CONDITION']->ctype1 . ') ' . $extras['CASES']->ctype1;
                 break;
 
             case 'While' :
@@ -330,14 +330,29 @@ class CloneType1 extends Plugin {
                 $ctype1 = array_column($extras, 'ctype1');
                 $atom->ctype1 = $atom->code . '('.implode(',', $ctype1).')';
                 break;
+            
+            case 'Goto' :
+                $atom->ctype1 = 'goto'.$extras['GOTO']->ctype1;
+                break;
+
+            case 'Gotolabel' :
+                $atom->ctype1 = 'label'.$extras['GOTOLABEL']->ctype1;
+                break;
+
+            case 'Yield' :
+            case 'Yieldfrom' :
+                $atom->ctype1 = 'yield'.$extras['YIELD']->ctype1;
+                break;
 
         default :
             static $i = 0;
             
             $atom->ctype1 = 'default '.$atom->atom.' '.++$i;
             
-//            print "CLONE DEFAULT : $atom->atom\n";
+            print "CLONE DEFAULT : $atom->atom\n";
         }
+
+        $atom->ctype1_size += count($extras);
     }
 }
 
