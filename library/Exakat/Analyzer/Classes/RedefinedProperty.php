@@ -27,17 +27,17 @@ use Exakat\Analyzer\Analyzer;
 
 class RedefinedProperty extends Analyzer {
     public function analyze() {
+        // class x           { protected $p = 1; }
+        // class y extends x { protected $p = 1; }
         $this->atomIs('Ppp')
              ->outIs('PPP')
              ->_as('ppp')
-             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->goToAllParents()
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->samePropertyAs('code', 'property')
              ->back('ppp');
         $this->prepareQuery();

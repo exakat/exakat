@@ -57,13 +57,12 @@ GREMLIN
              ->is('static', true)
              ->outIs('PPP')
              ->_as('ppp')
-             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->raw(<<<GREMLIN
 where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
          .where( __.out("METHOD", "MAGICMETHOD").out("BLOCK")
-                   .repeat( __.out($this->linksDown)).emit(hasLabel("Staticproperty")).times($MAX_LOOPING)
+                   .repeat( __.out({$this->linksDown})).emit(hasLabel("Staticproperty")).times($MAX_LOOPING)
                    .out("MEMBER").has("token", "T_VARIABLE").filter{ it.get().value("code") == property}
          )
 )

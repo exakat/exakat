@@ -30,7 +30,6 @@ class RedefinedPrivateProperty extends Analyzer {
         // class z extends x { private $y; }
         $this->atomIs('Propertydefinition')
              ->savePropertyAs('code', 'name')
-             ->inIsIE('LEFT')
              ->inIs('PPP')
              ->is('visibility', 'private')
              ->inIs('PPP')
@@ -38,7 +37,6 @@ class RedefinedPrivateProperty extends Analyzer {
              ->outIs('PPP')
              ->is('visibility', 'private')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();

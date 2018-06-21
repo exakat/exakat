@@ -58,7 +58,6 @@ class AccessProtected extends Analyzer {
              ->atomIs('Ppp')
              ->is('visibility', 'protected')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();

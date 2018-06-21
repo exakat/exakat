@@ -98,7 +98,6 @@ GREMLIN;
                  ->outIs('PPP')
                  ->analyzerIsNot('Classes/PropertyUsedBelow')
                  ->_as('results')
-                 ->outIsIE('LEFT')
                  ->codeIsNot(array_keys($calls), self::NO_TRANSLATE)
                  ->savePropertyAs('code', 'variable')
                  ->goToClass()

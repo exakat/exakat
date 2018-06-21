@@ -74,7 +74,6 @@ GREMLIN;
                  ->back('first')
                  ->outIs('PPP')
                  ->_as('results')
-                 ->outIsIE('LEFT')
                  ->raw('filter{ !(fnp + "::" + it.get().value("code") in ***) }', $staticproperties)
                  ->back('results');
             $this->prepareQuery();

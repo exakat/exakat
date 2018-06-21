@@ -70,7 +70,6 @@ GREMLIN
              ->outIs('PPP')
              ->is('static', true)
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->filter('it.get().value("code") in x.keySet(); ')
              ->inIsIE('LEFT');
         $this->prepareQuery();

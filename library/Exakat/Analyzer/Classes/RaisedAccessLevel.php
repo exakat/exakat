@@ -31,7 +31,6 @@ class RaisedAccessLevel extends Analyzer {
              ->is('visibility', array('public', 'protected'))
              ->outIs('PPP')
              ->_as('results')
-             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->goToAllChildren(self::EXCLUDE_SELF)
@@ -39,7 +38,6 @@ class RaisedAccessLevel extends Analyzer {
              ->atomIs('Ppp')
              ->is('visibility', 'private')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->samePropertyAs('code', 'property')
              ->back('results');
         $this->prepareQuery();
@@ -49,7 +47,6 @@ class RaisedAccessLevel extends Analyzer {
              ->is('visibility', 'public')
              ->outIs('PPP')
              ->_as('results')
-             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->goToAllChildren(self::EXCLUDE_SELF)
@@ -57,7 +54,6 @@ class RaisedAccessLevel extends Analyzer {
              ->atomIs('Ppp')
              ->is('visibility', 'protected')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->samePropertyAs('code', 'property')
              ->back('results');
         $this->prepareQuery();
