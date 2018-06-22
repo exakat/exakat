@@ -26,13 +26,11 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedInterfaces extends Analyzer {
-    public function dependsOn() {
-        return array('Interfaces/UsedInterfaces');
-    }
-    
     public function analyze() {
+        // interface i {}
+        // class x implements j {}
         $this->atomIs('Interface')
-             ->analyzerIsNot('Interfaces/UsedInterfaces');
+             ->hasNoOut('DEFINITION');
         $this->prepareQuery();
     }
 }

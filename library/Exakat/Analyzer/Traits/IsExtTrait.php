@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class IsExtTrait extends Analyzer {
 
     public function dependsOn() {
-        return array('Traits/TraitUsage');
+        return array('Traits/TraitUsage',
+                    );
     }
     
     public function analyze() {
@@ -54,7 +55,7 @@ class IsExtTrait extends Analyzer {
         $traits = makeFullNsPath($traits);
         
         $this->analyzerIs('Traits/TraitUsage')
-             ->fullnspath($traits);
+             ->fullnspathIs($traits);
         $this->prepareQuery();
     }
 }
