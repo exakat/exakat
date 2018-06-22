@@ -64,6 +64,7 @@ class Extension extends Analyzer {
             
             $usedClasses = array_intersect(self::getCalledClasses(), $classes);
             if (!empty($usedClasses)) {
+                $usedClasses = array_values($usedClasses);
                 $this->atomIs('New')
                      ->outIs('NEW')
                      ->hasNoIn('DEFINITION')
@@ -107,6 +108,7 @@ class Extension extends Analyzer {
             $usedInterfaces = array_intersect(self::getCalledinterfaces(), $interfaces);
 
             if (!empty($usedInterfaces)) {
+                $usedInterfaces = array_values($usedInterfaces);
                 $this->analyzerIs('Interfaces/InterfaceUsage')
                      ->fullnspathIs($usedInterfaces);
                 $this->prepareQuery();
@@ -119,6 +121,7 @@ class Extension extends Analyzer {
             $usedTraits = array_intersect(self::getCalledtraits(), $traits);
 
             if (!empty($usedTraits)) {
+                $usedTraits = array_values($usedTraits);
                 $this->analyzerIs('Traits/TraitUsage')
                      ->fullnspathIs($usedTraits);
                 $this->prepareQuery();
@@ -131,6 +134,7 @@ class Extension extends Analyzer {
             $usedNamespaces = array_intersect(self::getCalledNamespaces(), $namespaces);
 
             if (!empty($usedNamespaces)) {
+                $usedNamespaces = array_values($usedNamespaces);
                 $this->analyzerIs('Namespaces/NamespaceUsage')
                      ->fullnspathIs($usedNamespaces);
                 $this->prepareQuery();
@@ -141,6 +145,7 @@ class Extension extends Analyzer {
             $usedDirectives = array_intersect(self::getCalledDirectives(), $ini['directives']);
 
             if (!empty($usedDirectives)) {
+                $usedDirectives = array_values($usedDirectives);
                 $this->analyzerIs('Php/DirectivesUsage')
                      ->outWithRank("ARGUMENT", 0)
                      ->noDelimiterIs($ini['directives']);
