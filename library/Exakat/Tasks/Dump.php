@@ -861,12 +861,11 @@ g.V().hasLabel("Class", "Interface", "Trait")
 }
 .out('PPP') // out to the details
 .map{ 
-    if (it.get().label() == 'Propertydefinition') { 
-        name = it.get().value("fullcode");
-        v = ''; 
+    name = it.get().value("fullcode");
+    if (it.get().vertices(OUT, "DEFAULT").next() != null) { 
+        v = it.get().vertices(OUT, "DEFAULT").next().value("fullcode");
     } else { 
-        name = it.get().vertices(OUT, "LEFT").next().value("fullcode");
-        v = it.get().vertices(OUT, "RIGHT").next().value("fullcode");
+        v = ''; 
     }
 
     x = ["class":classe,
@@ -1517,43 +1516,45 @@ GREMLIN;
         
         $query = <<<GREMLIN
 g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
-.sideEffect{ name = it.get().value("fullcode"); }.in("LEFT")
-.out("RIGHT").sideEffect{ default1 = it.get().value("fullcode") }.in("RIGHT")
+.sideEffect{ name = it.get().value("code"); }
+.out("DEFAULT").sideEffect{ default1 = it.get().value("fullcode") }.in("DEFAULT")
 
 .in("PPP").in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
 .where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }
 
 .out("PPP").out("PPP")
-.out("RIGHT").filter{ default2 = it.get().value("fullcode"); default1 != it.get().value("fullcode") }.in("RIGHT")
+.out("DEFAULT").filter{ default2 = it.get().value("fullcode"); default1 != it.get().value("fullcode") }.in("DEFAULT")
 
-.until( __.not(outE("LEFT")) ).repeat(out("LEFT"))
-.filter{ it.get().value("fullcode") == name}.select("first")
+.filter{ it.get().value("code") == name}.select("first")
 .map{['name':name,
       'parent':class2,
       'parentValue':default2,
       'class':class1,
-      'classValue':default1];}
+      'classValue':default1];
+     }
 GREMLIN;
         $total += $this->storeClassChanges('Member Default', $query);
         
         $query = <<<GREMLIN
 g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
-.sideEffect{ name = it.get().value("fullcode"); }.until(__.inE("LEFT").count().is(eq(0))).repeat(__.in("LEFT")).in("PPP")
+.sideEffect{ name = it.get().value("code"); }.in("PPP")
+.sideEffect{ visibility1 = it.get().value("visibility") }
+.in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }
+.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS")
+                   .in("DEFINITION")
+                   .where(neq("x")) 
+).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("PPP")
 
-.out("PRIVATE", "PUBLIC", "PROTECTED").sideEffect{ visibility1 = it.get().value("fullcode") }.in()
+.filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("fullcode") }
 
-.in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
-.where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("PPP")
-
-.out("PRIVATE", "PUBLIC", "PROTECTED").filter{ visibility2 = it.get().value("fullcode"); visibility1 != it.get().value("fullcode") }.in()
-
-.out("PPP").until( __.not(outE("LEFT")) ).repeat(out("LEFT"))
-.filter{ it.get().value("fullcode") == name}.select("first")
+.out("PPP")
+.filter{ it.get().value("code") == name}.select("first")
 .map{['name':name,
       'parent':class2,
       'parentValue':visibility2,
       'class':class1,
-      'classValue':visibility1];}
+      'classValue':visibility1];
+   }
 GREMLIN;
         $total += $this->storeClassChanges('Member Visibility', $query);
                         
