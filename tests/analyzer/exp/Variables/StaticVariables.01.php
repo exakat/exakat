@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$staticVariable',
+$expected     = array('$staticVariable = 0',
                       '$staticVariable2',
                      );
 
