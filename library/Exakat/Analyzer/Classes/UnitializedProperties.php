@@ -32,25 +32,32 @@ class UnitializedProperties extends Analyzer {
     }
     
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         // Normal Properties (with constructor)
         $this->atomIs(self::$CLASSES_ALL)
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->isNot('static', true)
              ->outIs('PPP')
-             ->atomIsNot('Assignation')
+             ->hasNoOut('DEFAULT')
              ->_as('results')
              ->savePropertyAs('propertyname', 'property')
              ->back('first')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomIs(array('Method', 'Magicmethod'))
              ->analyzerIs('Classes/Constructor')
-             ->raw('not(where(
-    __.out("BLOCK").repeat( out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.')
-                   .hasLabel("Member")
-                   .where( __.out("MEMBER").has("token", "T_STRING").filter{ it.get().value("code") == property} )
-                   .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-                   ))')
+             ->raw(<<<GREMLIN
+not(
+    where(
+    __.out("BLOCK").repeat( out({$this->linksDown}) ).emit( ).times($MAX_LOOPING)
+      .hasLabel("Member")
+      .where( __.out("MEMBER").has("token", "T_STRING").filter{ it.get().value("code") == property} )
+      .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
+      )
+)
+GREMLIN
+)
              ->back('results');
         $this->prepareQuery();
 
@@ -60,7 +67,7 @@ class UnitializedProperties extends Analyzer {
              ->atomIs('Ppp')
              ->isNot('static', true)
              ->outIs('PPP')
-             ->atomIsNot('Assignation')
+             ->hasNoOut('DEFAULT')
              ->_as('results')
              ->savePropertyAs('propertyname', 'property')
              ->back('first')
@@ -75,7 +82,7 @@ class UnitializedProperties extends Analyzer {
              ->atomIs('Ppp')
              ->is('static', true)
              ->outIs('PPP')
-             ->atomIsNot('Assignation')
+             ->hasNoOut('DEFAULT')
              ->_as('results')
              ->savePropertyAs('code', 'property')
              ->back('first')
@@ -98,7 +105,7 @@ class UnitializedProperties extends Analyzer {
              ->atomIs('Ppp')
              ->is('static', true)
              ->outIs('PPP')
-             ->atomIsNot('Assignation')
+             ->hasNoOut('DEFAULT')
              ->_as('results')
              ->savePropertyAs('code', 'property')
              ->back('first')
