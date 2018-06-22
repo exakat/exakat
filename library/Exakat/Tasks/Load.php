@@ -2467,7 +2467,11 @@ class Load extends Tasks {
 
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
                     ++$this->id;
-                    $this->processNext();
+                    while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
+                                                                            $this->phptokens::T_COMMA,
+                                                                            ))) {
+                        $this->processNext();
+                    }
                     $default = $this->popExpression();
                 }
             } else {
