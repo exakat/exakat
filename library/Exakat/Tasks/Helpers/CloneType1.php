@@ -339,6 +339,11 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = 'label'.$extras['GOTOLABEL']->ctype1;
                 break;
 
+            case 'Declare' :
+                // only one argument for declare ? 
+                $atom->ctype1 = 'label'.$extras[0]->ctype1;
+                break;
+
             case 'Yield' :
             case 'Yieldfrom' :
                 $atom->ctype1 = 'yield'.$extras['YIELD']->ctype1;
