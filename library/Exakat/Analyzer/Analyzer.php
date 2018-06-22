@@ -52,7 +52,12 @@ abstract class Analyzer {
     public static $availableAtoms         = array();
     public static $availableLinks         = array();
     public static $availableFunctioncalls = array();
-    
+    private static $calledClasses         = null;
+    private static $calledInterfaces      = null;
+    private static $calledTraits          = null;
+    private static $calledNamespaces      = null;
+    private static $calledDirectives      = null;
+
     private $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerQuoted = '';
     protected $analyzerId     = 0;
@@ -209,7 +214,7 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out("ANALY
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('File', 'Project') ).repeat( 
     __.in($this->linksDown)
-      .sideEffect{ if (it.get().label() in ['Function', 'Method', 'Closure']) { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Function', 'Method', 'Magicmethod', 'Closure']) { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class', 'Trait', 'Interface', 'Classanonymous']) { theClass = it.get().value('fullcode')} }
       .sideEffect{ if (it.get().label() == 'Namespace') { theNamespace = it.get().value('fullnspath')} }
        )
@@ -309,6 +314,84 @@ GREMLIN;
         return true;
     }
     
+    public function getCalledClasses() {
+        if (self::$calledClasses === null) {
+            $news = $this->query('g.V().hasLabel("New").out("NEW").not(where( __.in("DEFINITION"))).values("fullnspath")')
+                         ->toArray();
+            $staticcalls = $this->query('g.V().hasLabel("Staticconstant", "Staticmethodcall", "Staticproperty", "Instanceof", "Catch").out("CLASS").not(where( __.in("DEFINITION"))).values("fullnspath")')
+                               ->toArray();
+            $typehints = $this->query('g.V().hasLabel("Method", "Magicmethod", "Closure", "Function").out("ARGUMENT").out("TYPEHINT").not(where( __.in("DEFINITION"))).values("fullnspath")')
+                               ->toArray();
+            $returntype = $this->query('g.V().hasLabel("Method", "Magicmethod", "Closure", "Function").out("RETURNTYPE").not(where( __.in("DEFINITION"))).values("fullnspath")')
+                               ->toArray();
+            self::$calledClasses = array_unique(array_merge($staticcalls, 
+                                                          $news,
+                                                          $typehints,
+                                                          $returntype));
+        }
+        
+        return self::$calledClasses;
+    }
+    
+    public function getCalledInterfaces() {
+        if (self::$calledInterfaces === null) {
+            self::$calledInterfaces = $this->query('g.V().hasLabel("Analyzer").has("analyzer", "Interfaces/InterfaceUsage").out("ANALYZED").values("fullnspath")')
+                                           ->toArray();
+        }
+        
+        return self::$calledInterfaces;
+    }    
+
+    public function getCalledTraits() {
+        if (self::$calledTraits === null) {
+            $query = <<<GREMLIN
+g.V().hasLabel("Analyzer")
+     .has("analyzer", "Traits/TraitUsage")
+     .out("ANALYZED")
+     .values("fullnspath")
+GREMLIN;
+            self::$calledTraits = $this->query($query)
+                                       ->toArray();
+        }
+        
+        return self::$calledTraits;
+    }    
+
+    public function getCalledNamespaces() {
+        if (self::$calledNamespaces === null) {
+            $query = <<<GREMLIN
+g.V().hasLabel("Namespace")
+     .values("fullnspath")
+     .unique()
+GREMLIN;
+            self::$calledNamespaces = $this->query($query)
+                                       ->toArray();
+        }
+        
+        return self::$calledNamespaces;
+    }    
+
+    public function getCalledDirectives() {
+        if (self::$calledDirectives === null) {
+            $query = <<<GREMLIN
+g.V().hasLabel("Analysis")
+     .has("analyzer", "Php/DirectivesUsage")
+     .out("ANALYZED")
+     .out("ARGUMENT")
+     .has("rank", 0)
+     .hasLabel("String")
+     .has("noDelimiter")
+     .values("noDelimiter")
+     .unique()
+GREMLIN;
+            self::$calledDirectives = $this->query($query)
+                                            ->toArray();
+        }
+        
+        return self::$calledDirectives;
+    }    
+
+
     public function checkPhpVersion($version) {
         // this handles Any version of PHP
         if ($this->phpVersion === self::PHP_VERSION_ANY) {
@@ -992,7 +1075,7 @@ GREMLIN;
     }
     
     public function values($property) {
-        $this->addMethod('values("'.$property.'")');
+        $this->addMethod("values(\"$property\")");
         
         return $this;
     }
@@ -1003,7 +1086,7 @@ GREMLIN;
         if (empty($sort)) {
             $sortStep = '';
         } else {
-            $sortStep = '.sort{it.value("'.$sort.'")}';
+            $sortStep = ".sort{it.value(\"$sort\")}";
         }
 
         $this->addMethod(<<<GREMLIN

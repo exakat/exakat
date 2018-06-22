@@ -61,74 +61,91 @@ class Extension extends Analyzer {
 
         if (!empty($ini['classes'])) {
             $classes = makeFullNsPath($ini['classes']);
-            $this->atomIs('New')
-                 ->outIs('NEW')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->has('fullnspath')
-                 ->fullnspathIs($classes);
-            $this->prepareQuery();
+            
+            $usedClasses = array_intersect(self::getCalledClasses(), $classes);
+            if (!empty($usedClasses)) {
+                $this->atomIs('New')
+                     ->outIs('NEW')
+                     ->hasNoIn('DEFINITION')
+                     ->fullnspathIs($usedClasses);
+                $this->prepareQuery();
+    
+                $this->atomIs(array('Staticconstant', 'Staticmethodcall', 'Staticproperty'))
+                     ->outIs('CLASS')
+                     ->hasNoIn('DEFINITION')
+                     ->fullnspathIs($usedClasses);
+                $this->prepareQuery();
+    
+                $this->atomIs(self::$FUNCTIONS_ALL)
+                     ->outIs('ARGUMENT')
+                     ->outIs('TYPEHINT')
+                     ->hasNoIn('DEFINITION')
+                     ->fullnspathIs($usedClasses);
+                $this->prepareQuery();
 
-            $this->atomIs(array('Staticconstant', 'Staticmethodcall', 'Staticproperty'))
-                 ->outIs('CLASS')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspathIs($classes);
-            $this->prepareQuery();
-
-            $this->atomIs(self::$FUNCTIONS_ALL)
-                 ->outIs('ARGUMENT')
-                 ->outIs('TYPEHINT')
-                 ->fullnspathIs($classes);
-            $this->prepareQuery();
-
-            $this->atomIs('Catch')
-                 ->outIs('CLASS')
-                 ->fullnspathIs($classes);
-            $this->prepareQuery();
-
-            $this->atomIs('Instanceof')
-                 ->outIs('CLASS')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->atomIsNot(array('Array', 'Boolean', 'Null'))
-                 ->fullnspathIs($classes);
-            $this->prepareQuery();
+                $this->atomIs(self::$FUNCTIONS_ALL)
+                     ->outIs('RETURNTYPE')
+                     ->fullnspathIs($usedClasses);
+                $this->prepareQuery();
+    
+                $this->atomIs('Catch')
+                     ->outIs('CLASS')
+                     ->hasNoIn('DEFINITION')
+                     ->fullnspathIs($usedClasses);
+                $this->prepareQuery();
+    
+                $this->atomIs('Instanceof')
+                     ->hasNoIn('DEFINITION')
+                     ->fullnspathIs($usedClasses);
+                $this->prepareQuery();
+            }
         }
 
         if (!empty($ini['interfaces'])) {
             $interfaces = makeFullNsPath($ini['interfaces']);
-            $this->analyzerIs('Interfaces/InterfaceUsage')
-                 ->fullnspathIs($interfaces);
-            $this->prepareQuery();
+            
+            $usedInterfaces = array_intersect(self::getCalledinterfaces(), $interfaces);
+
+            if (!empty($usedInterfaces)) {
+                $this->analyzerIs('Interfaces/InterfaceUsage')
+                     ->fullnspathIs($usedInterfaces);
+                $this->prepareQuery();
+            }
         }
 
         if (!empty($ini['traits'])) {
-            $this->analyzerIs('Traits/TraitUsage')
-                 ->codeIs($ini['traits']);
-            $this->prepareQuery();
-
             $traits = makeFullNsPath($ini['traits']);
-            $this->analyzerIs('Traits/TraitUsage')
-                 ->outIs('USE')
-                 ->fullnspathIs($traits);
-            $this->prepareQuery();
+            
+            $usedTraits = array_intersect(self::getCalledtraits(), $traits);
+
+            if (!empty($usedTraits)) {
+                $this->analyzerIs('Traits/TraitUsage')
+                     ->fullnspathIs($usedTraits);
+                $this->prepareQuery();
+            }
         }
 
         if (!empty($ini['namespaces'])) {
             $namespaces = makeFullNsPath($ini['namespaces']);
-            $this->analyzerIs('Namespaces/NamespaceUsage')
-                 ->fullnspathIs($namespaces)
-                 ->back('first');
-            $this->prepareQuery();
             
-            // Can a namespace be used in a nsname (as prefix) ?
+            $usedNamespaces = array_intersect(self::getCalledNamespaces(), $namespaces);
+
+            if (!empty($usedNamespaces)) {
+                $this->analyzerIs('Namespaces/NamespaceUsage')
+                     ->fullnspathIs($usedNamespaces);
+                $this->prepareQuery();
+            }
         }
 
         if (!empty($ini['directives'])) {
-            $this->analyzerIs('Php/DirectivesUsage')
-                 ->outWithRank("ARGUMENT", 0)
-                 ->noDelimiterIs($ini['directives']);
-            $this->prepareQuery();
-            
-            // Can a namespace be used in a nsname (as prefix) ?
+            $usedDirectives = array_intersect(self::getCalledDirectives(), $ini['directives']);
+
+            if (!empty($usedDirectives)) {
+                $this->analyzerIs('Php/DirectivesUsage')
+                     ->outWithRank("ARGUMENT", 0)
+                     ->noDelimiterIs($ini['directives']);
+                $this->prepareQuery();
+            }
         }
     }
 }
