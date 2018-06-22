@@ -80,6 +80,7 @@ class CloneType1 extends Plugin {
 
             case 'Comparison' :
             case 'Assignation' :
+            case 'Coalesce' : 
                 $atom->ctype1 = $extras['LEFT']->ctype1 . $atom->code . $extras['RIGHT']->ctype1;
                 break;
 
@@ -342,6 +343,14 @@ class CloneType1 extends Plugin {
             case 'Declare' :
                 // only one argument for declare ? 
                 $atom->ctype1 = 'label'.$extras[0]->ctype1;
+                break;
+                
+            case 'Insteadof' :
+                $atom->ctype1 = 'insteadof';
+                break;
+
+            case 'As' :
+                $atom->ctype1 = $extras['NAME']->ctype1.' as '.$extras['AS']->ctype1;
                 break;
 
             case 'Yield' :
