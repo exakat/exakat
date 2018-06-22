@@ -2495,7 +2495,7 @@ class Load extends Tasks {
             }
             $fullcode[] = $element->fullcode;
         }  while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON &&
-               $this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG);
+                  $this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG);
 
         $static->code     = $this->tokens[$current][1];
         $static->fullcode = $fullcodePrefix.' '.implode(', ', $fullcode);
@@ -2932,24 +2932,47 @@ class Load extends Tasks {
 
     private function processDeclare() {
         $current = $this->id;
+        $declare = $this->addAtom('Declare');
+        $fullcode = array();
 
         ++$this->id; // Skip declare
-        $declare = $this->processArguments('Declare');
-        $argumentsFullcode = $declare->fullcode;
+        do {
+            ++$this->id; // Skip ( or ,
+            $this->processSingle('Name');
+            $name = $this->popExpression();
+
+            ++$this->id; // Skip =
+            $this->processNext();
+            $config = $this->popExpression();
+            
+            $declaredefinition = $this->addAtom('Declaredefinition');
+            $this->addLink($declaredefinition, $name, 'NAME');
+            $this->addLink($declaredefinition, $config, 'VALUE');
+
+            $this->addLink($declare, $declaredefinition, 'DECLARE');
+            $declaredefinition->fullcode = $name->fullcode . ' = ' . $config->fullcode;
+            $fullcode[] = $declaredefinition->fullcode;
+            
+            ++$this->id; // Skip value
+        }  while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
+
         $isColon = ($this->tokens[$current][0] === $this->phptokens::T_DECLARE) && ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON);
 
         $block = $this->processFollowingBlock(array($this->phptokens::T_ENDDECLARE));
+
         $this->popExpression();
         $this->addLink($declare, $block, 'BLOCK');
 
         if ($isColon === true) {
-            $fullcode = $this->tokens[$current][1].' ('.$argumentsFullcode.') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id + 1][1];
+            $fullcode = $this->tokens[$current][1].' ('.implode(', ', $fullcode).') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id + 1][1];
             ++$this->id; // skip enddeclare
             ++$this->id; // skip ;
         } else {
-            $fullcode = $this->tokens[$current][1].' ('.$argumentsFullcode.') '.self::FULLCODE_BLOCK;
+            $fullcode = $this->tokens[$current][1].' ('.implode(', ', $fullcode).') '.self::FULLCODE_BLOCK;
         }
+
         $this->pushExpression($declare);
+        print_r($this->tokens[$this->id + 1]);
         $this->processSemicolon();
 
         $declare->code        = $this->tokens[$current][1];

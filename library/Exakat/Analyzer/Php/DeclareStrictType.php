@@ -27,20 +27,20 @@ use Exakat\Analyzer\Analyzer;
 class DeclareStrictType extends Analyzer {
     protected $phpVersion = '7.0+';
 
-    // Declare( strict_type = 1)
     public function analyze() {
+        // Declare( strict_type = 1)
         $this->atomIs('File')
              ->outIs('FILE')
              ->outIs('EXPRESSION')
              ->outIs('CODE')
              ->outIs('EXPRESSION')
              ->atomIs('Declare')
-             ->outIs('ARGUMENT')
-             ->outIs('LEFT')
+             ->outIs('DECLARE')
+             ->outIs('NAME')
              ->codeIs('strict_types')
-             ->inIs('LEFT')
-             ->outIs('RIGHT')
-             ->codeIs('1')
+             ->inIs('NAME')
+             ->outIs('VALUE')
+             ->codeIs(1)
              ->back('first');
         $this->prepareQuery();
     }
