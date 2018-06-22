@@ -2972,7 +2972,6 @@ class Load extends Tasks {
         }
 
         $this->pushExpression($declare);
-        print_r($this->tokens[$this->id + 1]);
         $this->processSemicolon();
 
         $declare->code        = $this->tokens[$current][1];
