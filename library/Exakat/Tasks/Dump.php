@@ -861,8 +861,8 @@ g.V().hasLabel("Class", "Interface", "Trait")
 }
 .out('PPP') // out to the details
 .map{ 
-    name = it.get().value("fullcode");
-    if (it.get().vertices(OUT, "DEFAULT").next() != null) { 
+    name = it.get().value("code");
+    if (it.get().vertices(OUT, "DEFAULT").any()) { 
         v = it.get().vertices(OUT, "DEFAULT").next().value("fullcode");
     } else { 
         v = ''; 
@@ -1025,6 +1025,7 @@ GREMLIN;
     }
     
     private function collectFunctions() {
+
         // Functions
         $this->sqlite->query('DROP TABLE IF EXISTS functions');
         $this->sqlite->query(<<<SQL
@@ -1050,8 +1051,8 @@ g.V().hasLabel("Function")
 }
 
 GREMLIN;
-        $res = $this->gremlin->query($query);
-
+        $res = $this->gremlin->query($query)->toArray();
+        
         $total = 0;
         $query = array();
         foreach($res as $row) {
