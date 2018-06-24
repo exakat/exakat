@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ConditionedFunctions extends Analyzer {
     public function analyze() {
+        // if (!is_callable('f')) { function f() {}}
         $this->atomIs('Function')
              ->hasName()
              ->hasIfthen();

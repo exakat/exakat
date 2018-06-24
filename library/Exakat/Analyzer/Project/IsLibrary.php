@@ -25,7 +25,8 @@ use Exakat\Analyzer\Analyzer;
 
 class IsLibrary extends Analyzer {
     public function dependsOn() {
-        return array('Files/DefinitionsOnly');
+        return array('Files/DefinitionsOnly',
+                    );
     }
     
     public function analyze() {

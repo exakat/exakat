@@ -33,8 +33,9 @@ class DeclareEncoding extends Analyzer {
              ->outIs('CODE')
              ->outIs('EXPRESSION')
              ->atomIs('Declare')
-             ->outIs('ARGUMENT')
-             ->regexIs('fullcode', '^encoding = ')
+             ->outIs('DECLARE')
+             ->outIs('NAME')
+             ->codeIs('encoding')
              ->back('first');
         $this->prepareQuery();
     }

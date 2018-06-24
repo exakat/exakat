@@ -29,44 +29,20 @@ class UsedPrivateMethod extends Analyzer {
 
     public function analyze() {
         // method used in a static methodcall \a\b::b()
-        $this->atomIs('Class')
-             ->savePropertyAs('fullnspath', 'classname')
-             ->outIs(array('MAGICMETHOD', 'METHOD'))
-             ->atomIs(array('Method', 'Magicmethod'))
-             ->_as('method')
-             ->is('visibility','private')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->back('first')
-             ->outIs('METHOD')
-             ->atomInsideNoDefinition('Staticmethodcall')
-             ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
-             ->atomIsNot(array('Static', 'Self'))
-             ->samePropertyAs('fullnspath', 'classname')
-             ->inIs('CLASS')
-             ->outIs('METHOD')
-             ->samePropertyAs('code', 'name')
-             ->back('method');
-        $this->prepareQuery();
-
         // method used in a static methodcall static::b() or self
-        $this->atomIs(array('Method', 'Magicmethod'))
-             ->_as('method')
+        $this->atomIs('Staticmethodcall')
+             ->outIs('CLASS')
+             ->savePropertyAs('fullnspath', 'classname')
+             ->back('first')
+             ->outIs('METHOD')
+             ->savePropertyAs('code', 'name')
+             ->goToClass()
+             ->samePropertyAs('fullnspath', 'classname')
+             ->outIs(array('MAGICMETHOD', 'METHOD'))
              ->is('visibility','private')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->back('first')
-             ->inIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->atomInsideNoDefinition('Staticmethodcall')
-             ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
-             ->atomIs(array('Static', 'Self'))
-             ->inIs('CLASS')
-             ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
-             ->back('first');
+             ->hasChildren(array('Static', 'Self'));
         $this->prepareQuery();
 
         // method used in a normal methodcall with $this $this->b()
@@ -78,9 +54,7 @@ class UsedPrivateMethod extends Analyzer {
              ->inIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomInsideNoDefinition('Methodcall')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
+             ->hasChildren('This', 'OBJECT')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
              ->back('first');
