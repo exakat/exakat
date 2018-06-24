@@ -326,9 +326,9 @@ GREMLIN;
             $returntype = $this->query('g.V().hasLabel("Method", "Magicmethod", "Closure", "Function").out("RETURNTYPE").not(where( __.in("DEFINITION"))).values("fullnspath")')
                                ->toArray();
             self::$calledClasses = array_unique(array_merge($staticcalls, 
-                                                          $news,
-                                                          $typehints,
-                                                          $returntype));
+                                                            $news,
+                                                            $typehints,
+                                                            $returntype));
         }
         
         return self::$calledClasses;
@@ -336,7 +336,7 @@ GREMLIN;
     
     public function getCalledInterfaces() {
         if (self::$calledInterfaces === null) {
-            self::$calledInterfaces = $this->query('g.V().hasLabel("Analyzer").has("analyzer", "Interfaces/InterfaceUsage").out("ANALYZED").values("fullnspath")')
+            self::$calledInterfaces = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Interfaces/InterfaceUsage").out("ANALYZED").values("fullnspath")')
                                            ->toArray();
         }
         
@@ -625,7 +625,7 @@ GREMLIN
 
         $this->atomIs('Functioncall')
              ->raw('has("fullnspath")')
-             ->fullnspathIs(makeFullNsPath($fullnspath));
+             ->fullnspathIs(array_values($diff));
 
         return $this;
     }
