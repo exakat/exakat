@@ -4889,6 +4889,7 @@ class Load extends Tasks {
         
         list($fullnspath, $aliased) = $this->getFullnspath($right);
         $this->calls->addCall('class', $fullnspath, $right);
+        $right->fullnspath = $fullnspath;
         $right->aliased = $aliased;
 
         $instanceof->code     = $this->tokens[$current][1];
