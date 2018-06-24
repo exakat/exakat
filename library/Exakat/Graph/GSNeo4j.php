@@ -100,7 +100,6 @@ class GSNeo4j extends Graph {
             $this->db->message->bindValue($name, $value);
         }
         $result = $this->db->send($query);
-        $e = microtime(true);
 
         if (empty($result)) {
             return new GraphResults();
