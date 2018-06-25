@@ -36,15 +36,20 @@ class Globals extends Analyzer {
         $this->prepareQuery();
 
         // Global in a function
-        // Using $GLOBALS as a whole is probably a bad idea but possible
         $this->atomIs('Phpvariable')
              ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('VARIABLE');
         $this->prepareQuery();
 
+        // Using $GLOBALS as a whole is probably a bad idea but possible
+        $this->atomIs('Phpvariable')
+             ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_SENSITIVE)
+             ->hasNoIn('VARIABLE');
+        $this->prepareQuery();
+
         // implicit global
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
-        $this->atomIs(array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Phpvariable'))
+        $this->atomIs(array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition'))
              ->codeIsNot($superglobals)
              ->hasNoClassInterfaceTrait()
              ->hasNoFunction(self::$FUNCTIONS_ALL);
