@@ -150,7 +150,6 @@ GREMLIN;
         $datastore = new Datastore($this->config);
 
         $datastore->addRow('tokenCounts', $this->tokenCounts);
-        $datastore->addRow('functioncalls', $this->functioncalls);
     }
 
     private function escapeCsv($string) {
