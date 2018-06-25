@@ -7,10 +7,10 @@ $expected     = array('$explicitGlobal',
                       '$GLOBALS[\'globalInGLOBALS\']',
                       '$explicitGlobalFunction',
                       '$explicitGlobalFunction',
+                      '$GLOBALS',
                      );
 
 $expected_not = array('$localVariableFunction',
-                      '$GLOBALS',
                       '$_POST',
                      );
 
