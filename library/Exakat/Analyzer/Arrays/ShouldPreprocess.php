@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldPreprocess extends Analyzer {
     public function analyze() {
-        $variables = array('Variable', 'Member', 'Staticproperty');
-        
         // $a = array(); $a[1] = 2;
         $this->atomIs('Assignation')
              ->codeIs('=')

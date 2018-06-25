@@ -682,7 +682,6 @@ GREMLIN
     }
 
     public function functionInside($fullnspath) {
-        assert($this->assertAtom($atom));
         $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").has("fullnspath", within(***))';
         $this->addMethod($gremlin, makeArray($fullnspath));
         
@@ -960,9 +959,6 @@ GREMLIN;
         if ($translate === self::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
-            if ($caseSensitive === self::CASE_INSENSITIVE) {
-                $code = array_map('strtolower', $code);
-            }
             $translatedCode = $this->dictCode->translate($code, $caseSensitive === self::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
 
             if (empty($translatedCode)) {
@@ -986,7 +982,7 @@ GREMLIN;
         if ($translate === self::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
-            $translatedCode = $this->dictCode->translate($code);
+            $translatedCode = $this->dictCode->translate($code, $caseSensitive === self::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
 
             if (empty($translatedCode)) {
                 // Couldn't find anything in the dictionary : OK!
@@ -1141,20 +1137,13 @@ GREMLIN
     }
 
     public function isUppercase($property = 'fullcode') {
-        assert($this->assertProperty($property));
         $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
 
         return $this;
     }
 
     public function isLowercase($property = 'fullcode') {
-        $this->addMethod('filter{it.get().value("code") == it.get().value("lccode"); }');
-
-        return $this;
-    }
-
-    public function isNotLowercase() {
-        $this->addMethod('filter{it.get().value("code") != it.get().value("lccode"); }');
+        $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase()}');
 
         return $this;
     }
@@ -1162,6 +1151,12 @@ GREMLIN
     public function isNotUppercase($property = 'fullcode') {
         assert($this->assertProperty($property));
         $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toUpperCase()}');
+
+        return $this;
+    }
+
+    public function isNotLowercase() {
+        $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toLowerCase()}');
 
         return $this;
     }
@@ -2061,16 +2056,10 @@ GREMLIN;
     }
     
     public function run() {
-        $a = microtime(true);
         $this->analyze();
         $this->prepareQuery();
-        $b = microtime(true);
 
         $this->execQuery();
-        $c = microtime(true);
-//        print "Prepare : ".number_format(1000*($b - $a), 2)."ms\n";
-//        print "Run : ".number_format(1000*($c - $b), 2)."ms\n";
-//        print "Analyze : ".number_format(1000*($c - $a), 2)."ms\n";
         
         return $this->rowCount;
     }
@@ -2160,7 +2149,7 @@ GREMLIN;
             $query = "g.V().$first.groupCount(\"processed\").by(count()).$query";
         } elseif (substr($this->methods[1], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
             $first = array_shift($this->methods); // remove first
-            $init = array_shift($this->methods); // remove second
+            array_shift($this->methods); // remove second
             $query = implode('.', $this->methods);
             $arg0 = $this->arguments['arg0'];
             $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())'
@@ -2250,7 +2239,7 @@ GREMLIN;
 
         if (!isset($cache[$fullpath])) {
             $ini = parse_ini_file($fullpath);
-            foreach($ini as $section => &$values) {
+            foreach($ini as &$values) {
                 if (isset($values[0]) && empty($values[0])) {
                     $values = '';
                 }
