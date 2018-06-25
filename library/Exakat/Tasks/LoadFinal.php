@@ -170,6 +170,7 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
+     .has("token", "T_STRING")
      .not(where( __.in("DEFINITION")))
      .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
      .map{ name = parts.last().toLowerCase();}
@@ -187,6 +188,7 @@ GREMLIN;
             $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
+     .has("token", "T_STRING")
      .not(where( __.in("DEFINITION")))
      .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
      .filter{ name = parts.last().toLowerCase(); name in arg1 }
