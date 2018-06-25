@@ -4,7 +4,7 @@
 class x {
     public $a = 1;
     protected $b = 2;
-    private $c = 2;
+    private $c = 3;
     
     function a() {
         $this->a = 1;
