@@ -43,13 +43,12 @@ class CouldBeClassConstant extends Analyzer {
              ->outIs('PPP')
              ->analyzerIsNot('Classes/LocallyUnusedProperty')
 
-             ->hasOut('RIGHT')
+             ->hasOut('DEFAULT')
              
              // Ignore null or static expressions in definitions.
              ->raw('not(where( __.out("RIGHT").hasLabel("Null", "Staticconstant") ) )')
 
              ->savePropertyAs('propertyname', 'name')
-             ->outIs('LEFT')
 
              ->savePropertyAs('code', 'staticName')
              ->goToClass()
@@ -58,12 +57,13 @@ class CouldBeClassConstant extends Analyzer {
 
                 // usage as property with $this
              ->raw(<<<GREMLIN
-                    not( __.out("METHOD")
-                           .where( __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING).hasLabel("Member")
-                                                .where( __.out("OBJECT").hasLabel("This") )
-                                                .where( __.out("MEMBER").filter{ it.get().value("code") == name } )
-                                                .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-                             ) )
+not( __.out("METHOD")
+       .where( __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING).hasLabel("Member")
+                            .where( __.out("OBJECT").hasLabel("This") )
+                            .where( __.out("MEMBER").filter{ it.get().value("code") == name } )
+                            .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
+         )
+)
 GREMLIN
 )
 
@@ -71,11 +71,11 @@ GREMLIN
              ->raw(<<<GREMLIN
 not( 
     __.out("METHOD")
-                           .where( __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING).hasLabel("Staticproperty")
-                                                .where( __.out("CLASS").has("fullnspath").filter{ it.get().value("fullnspath") == fnp } )
-                                                .where( __.out("MEMBER").filter{ it.get().value("code") == staticName } )
-                                                .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-                             ) 
+      .where( __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING).hasLabel("Staticproperty")
+                .where( __.out("CLASS").has("fullnspath").filter{ it.get().value("fullnspath") == fnp } )
+                .where( __.out("MEMBER").filter{ it.get().value("code") == staticName } )
+                .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
+        ) 
     )
 GREMLIN
 )

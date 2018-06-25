@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MakeDefault extends Analyzer {
     public function analyze() {
+        // class x { private $y; }
         $this->atomIs(self::$CLASSES_ALL)
              ->outIs('MAGICMETHOD')
              ->atomIs('Magicmethod')
@@ -56,6 +57,7 @@ class MakeDefault extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Propertydefinition')
              ->samePropertyAs('propertyname', 'propriete')
+             ->hasNoOut('DEFAULT')
              
              ->back('result');
         $this->prepareQuery();
