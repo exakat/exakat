@@ -61,7 +61,7 @@ class UselessParenthesis extends Analyzer {
 
         // switch
         $this->atomIs('Switch')
-             ->outIs('NAME')
+             ->outIs('CONDITION')
              ->atomIs('Parenthesis');
         $this->prepareQuery();
 
