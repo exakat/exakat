@@ -5,7 +5,6 @@ $expected     = array('CommonMark\\Node\\CodeBlock',
                      );
 
 $expected_not = array('Parser( )',
-                      '',
                      );
 
 ?>

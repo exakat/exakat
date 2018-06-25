@@ -8,7 +8,7 @@ if (version_compare($version, $lower) >= 0) {
 }
 
 if (version_compare($version, $lower) >= 1) {
-    $b = 1;
+    $b = $d;
     $a = true;
 } else {
     $b = false;
