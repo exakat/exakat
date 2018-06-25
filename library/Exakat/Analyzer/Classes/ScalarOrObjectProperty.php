@@ -34,10 +34,10 @@ class ScalarOrObjectProperty extends Analyzer {
              ->outIs('PPP')
              ->_as('results')
              ->savePropertyAs('propertyname', 'name')
-             ->outIs('RIGHT')
+             ->outIs('DEFAULT')
              ->atomIs($literals)
              ->back('first')
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Member')
              ->outIs('MEMBER')
@@ -45,18 +45,18 @@ class ScalarOrObjectProperty extends Analyzer {
              ->inIs('MEMBER')
              ->outIs('OBJECT')
              ->atomIs('This')
-             ->inIs('OBJECT')
+             ->inIs('OBJECT') 
              ->inIs('OBJECT') // Good for methodcall and properties
              ->back('results');
         $this->prepareQuery();
 
-        // Property defined as object, assigned also literal
+        // Property defined as object, assigned as literal
         $this->atomIs('Class')
              ->outIs('PPP')
              ->outIs('PPP')
              ->_as('results')
              ->savePropertyAs('propertyname', 'name')
-             ->raw('or( __.out("RIGHT").hasLabel("Null"), __.not(out("RIGHT")) )')
+             ->raw('or( __.out("DEFAULT").hasLabel("Null"), __.not(out("DEFAULT")) )')
              ->back('first')
              
              ->findAssignation('New')

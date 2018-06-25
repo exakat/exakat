@@ -30,9 +30,11 @@ class IsLibrary extends Analyzer {
     }
     
     public function analyze() {
+        // Only contains definitions
         $this->atomIs('Project')
-             ->hasOut('PROJECT')
-             ->raw('not( where( __.out("PROJECT").hasLabel("File").not(where( __.in("ANALYZED").has("analyzer", "Files/DefinitionsOnly") ) ) ) )');
+             ->outIs('PROJECT')
+             ->raw('not( where( __.hasLabel("File").not(where( __.in("ANALYZED").has("analyzer", "Files/DefinitionsOnly") ) ) ) )')
+             ->back('first');
         $this->prepareQuery();
     }
 }

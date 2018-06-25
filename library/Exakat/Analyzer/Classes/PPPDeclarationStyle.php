@@ -29,7 +29,7 @@ class PPPDeclarationStyle extends Analyzer {
 
     public function analyze() {
         $mapping = <<<GREMLIN
-if (it.get().value("count")) {
+if (it.get().value("count") > 1) {
     x2 = 'several';
 } else {
     x2 = 'one';
