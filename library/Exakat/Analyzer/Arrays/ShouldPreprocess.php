@@ -88,7 +88,7 @@ class ShouldPreprocess extends Analyzer {
         $this->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')
-             ->atomIs($variables)
+             ->atomIs(array('Variable', 'Member', 'Staticproperty'))
              ->savePropertyAs('fullcode', 'tableau')
              ->inIs('LEFT')
              ->outIs('RIGHT')
