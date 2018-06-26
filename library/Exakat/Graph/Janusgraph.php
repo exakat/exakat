@@ -181,6 +181,8 @@ class Janusgraph extends Graph {
             shell_exec('cat '.$this->config->janusgraph_folder.'/db/janus.pid | xargs kill ');
         }
     }
+
+    public function getDefinitionSQL() {}
 }
 
 ?>
