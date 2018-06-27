@@ -796,12 +796,12 @@ g.V().hasLabel("Method").as('method')
          'final':it.get().properties("final").any(),
          'static':it.get().properties("static").any(),
 
-         'public':it.get().value("visibility") == 'public',
-         'protected':it.get().value("visibility") == 'protected',
-         'private':it.get().value("visibility") == 'private',
-         'class': classe,
-         'begin': lines.min(),
-         'end': lines.max()
+         'public':    it.get().value("visibility") == 'public',
+         'protected': it.get().value("visibility") == 'protected',
+         'private':   it.get().value("visibility") == 'private',
+         'class':     classe,
+         'begin':     lines.min(),
+         'end':       lines.max()
          ];
 }
 
@@ -925,9 +925,9 @@ GREMLIN;
 g.V().hasLabel("Class")
      .out('CONST')
 .sideEffect{ 
-    x_public = it.get().vertices(OUT, "PUBLIC").any();
-    x_protected = it.get().vertices(OUT, "PROTECTED").any();
-    x_private = it.get().vertices(OUT, "PRIVATE").any();
+    x_public = it.get().values("visibility") == 'public';
+    x_protected = it.get().values("visibility") == 'protected';
+    x_private = it.get().values("visibility") == 'private';
 }
      .out('CONST')
      .map{ 
@@ -1499,12 +1499,12 @@ GREMLIN;
 g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first")
 .out("NAME").sideEffect{ name = it.get().value("fullcode"); }.in("NAME")
 
-.out("PRIVATE", "PUBLIC", "PROTECTED").sideEffect{ visibility1 = it.get().value("fullcode") }.in()
+.sideEffect{ visibility1 = it.get().value("visibility") }
 
 .in("METHOD").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
 .where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
 
-.out("PRIVATE", "PUBLIC", "PROTECTED").filter{ visibility2 = it.get().value("fullcode"); visibility1 != it.get().value("fullcode") }.in()
+.filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("fullcode") }
 
 .out("NAME").filter{ it.get().value("fullcode") == name}.select("first")
 .map{['name':name,
