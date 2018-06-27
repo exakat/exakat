@@ -956,6 +956,8 @@ GREMLIN;
             return $this;
         }
         
+        $col = $caseSensitive === self::CASE_INSENSITIVE ? 'lccode' : 'code';
+        
         if ($translate === self::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
@@ -966,9 +968,9 @@ GREMLIN;
                 return $this;
             }
 
-            $this->addMethod('filter{ it.get().value("code") in ***; }', $translatedCode);
+            $this->addMethod("filter{ it.get().value(\"$col\") in ***; }", $translatedCode);
         } else {
-            $this->addMethod('filter{ it.get().value("code") in ***; }', makeArray($code));
+            $this->addMethod("filter{ it.get().value(\"$col\") in ***; }", makeArray($code));
         }
 
         return $this;
@@ -978,6 +980,8 @@ GREMLIN;
         if (is_array($code) && empty($code)) {
             return $this;
         }
+
+        $col = $caseSensitive === self::CASE_INSENSITIVE ? 'lccode' : 'code';
 
         if ($translate === self::TRANSLATE) {
             $translatedCode = array();
@@ -990,9 +994,9 @@ GREMLIN;
                 return $this;
             }
         
-            $this->addMethod('filter{ !(it.get().value("code") in ***); }', $translatedCode);
+            $this->addMethod("filter{ it.get().value(\"$col\") in ***; }", $translatedCode);
         } else {
-            $this->addMethod('filter{ !(it.get().value("code") in ***); }', $code);
+            $this->addMethod("filter{ it.get().value(\"$col\") in ***; }", makeArray($code));
         }
 
         return $this;
@@ -1035,7 +1039,7 @@ GREMLIN;
 
     public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code' || $property == 'propertyname') {
+        if ($caseSensitive === self::CASE_SENSITIVE || in_array($property, array('line', 'rank', 'code', 'propertyname', 'boolean', 'count'))) {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -1054,7 +1058,7 @@ GREMLIN;
 
     public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code' || $property == 'propertyname'|| $property == 'boolean') {
+        if ($caseSensitive === self::CASE_SENSITIVE || in_array($property, array('line', 'rank', 'code', 'propertyname', 'boolean', 'count'))) {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -2105,7 +2109,7 @@ GREMLIN;
                 } elseif (is_string($value)) {
                     $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
                 } elseif (is_int($value)) {
-                    $query = str_replace($name, $value, $query);
+                    $query = str_replace($name, (string) $value, $query);
                 } else {
                     assert(false, 'Cannot process argument of type '.gettype($value).PHP_EOL.__METHOD__.PHP_EOL);
                 }
@@ -2293,7 +2297,7 @@ GREMLIN;
         } elseif (is_scalar($code)) {
             $code = mb_strtolower($code);
         } else {
-            assert(false, __METHOD__.' received an unprocessable object '.var_dump($code));
+            assert(false, __METHOD__.' received an unprocessable object '.gettype($code));
         }
     }
 
