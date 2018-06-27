@@ -29,6 +29,7 @@ class debugInfoUsage extends Analyzer {
     protected $phpVersion = '5.6+';
     
     public function analyze() {
+        // class x { function __debugInfo() {}}
         $this->atomIs('Magicmethod')
              ->outIs('NAME')
              ->codeIs('__debugInfo')
