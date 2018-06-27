@@ -60,7 +60,11 @@ class Intval extends Plugin {
             case 'Real' :
             case 'String' :
             case 'Heredoc' :
-                $atom->intval   = (int) trimOnce($atom->code);
+                if (empty($extras)) {
+                    $atom->intval   = (int) trimOnce($atom->code);
+                } else {
+                    $atom->intval   = array_sum(array_column($extras, 'intval'));
+                }
                 break;
     
             case 'Boolean' :
@@ -68,6 +72,8 @@ class Intval extends Plugin {
                 break;
     
             case 'Staticclass' :
+            case 'Self' :
+            case 'Parent' :
             case 'Null' :
             case 'Void' :
                 $atom->intval = 0;
