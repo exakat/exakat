@@ -28,10 +28,12 @@ class StrangeName extends Analyzer {
     public function analyze() {
         $names = $this->loadIni('php_strange_names.ini', 'variables');
 
+        // typos, like $_PSOT
         $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs($names);
         $this->prepareQuery();
 
+        // multiple identical characters : $aaab 
         $this->atomIs(self::$VARIABLES_ALL)
              ->regexIs('fullcode', '(.)\\\\1{2,}');
         $this->prepareQuery();
