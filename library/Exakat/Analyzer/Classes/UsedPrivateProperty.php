@@ -36,7 +36,6 @@ class UsedPrivateProperty extends Analyzer {
 
              ->outIs('PPP')
              ->_as('ppp')
-             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClassTrait()
              ->hasName()
@@ -61,7 +60,6 @@ GREMLIN
              ->atomIs('Ppp')
              ->is('visibility', 'private')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->_as('ppp')
              ->savePropertyAs('code', 'x')
              ->back('first')

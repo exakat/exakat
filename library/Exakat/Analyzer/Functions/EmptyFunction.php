@@ -34,11 +34,12 @@ class EmptyFunction extends Analyzer {
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
         
+        $emptyBody = 'not( where( __.out("EXPRESSION").not(hasLabel("Void", "Global", "Static"))) )';
+        
         // standalone function : empty is empty. Same for closure.
         $this->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
-             ->outIs('EXPRESSION')
-             ->atomIs('Void')
+             ->raw($emptyBody)
              ->back('first');
         $this->prepareQuery();
 
@@ -50,27 +51,30 @@ class EmptyFunction extends Analyzer {
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
              ->outIs('BLOCK')
-             ->is('count', 1)
-             ->outIs('EXPRESSION')
-             ->atomIs('Void')
+             ->raw($emptyBody)
              ->goToClass()
 
              // Ignore classes that are extension from a composer class
              ->raw(<<<GREMLIN
-not( where( __.out("EXTENDS").repeat( __.coalesce(__.in("DEFINITION"), __.filter{true}).out("EXTENDS") ).emit().times($MAX_LOOPING)
-                             .where( __.in("ANALYZED").has("analyzer", "Composer/IsComposerNsname") )
-                             ) )
+not( 
+    where( __.out("EXTENDS")
+             .repeat( __.coalesce(__.in("DEFINITION"), __.filter{true}).out("EXTENDS") ).emit().times($MAX_LOOPING)
+             .where( __.in("ANALYZED").has("analyzer", "Composer/IsComposerNsname") )
+          ) 
+)
 GREMLIN
 )
 
              // Ignore methods that are overwriting a parent class, unless it is abstract or private
              ->raw(<<<GREMLIN
-not( where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit(hasLabel("Class") ).times($MAX_LOOPING)
-              .out("METHOD").hasLabel("Method")
-              .not( where( __.has("abstract", true) ) ) 
-              .not( where( __.has("visibility", "private") ) ) 
-              .out("NAME").filter{ it.get().value("lccode") == name}
-              )  
+not( 
+    where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit( hasLabel("Class") ).times($MAX_LOOPING)
+             .out("METHOD").hasLabel("Method")
+             .not( where( __.has("abstract", true) ) ) 
+             .not( where( __.has("visibility", "private") ) ) 
+             .out("NAME")
+             .filter{ it.get().value("lccode") == name}
+    )
 )
 GREMLIN
 )

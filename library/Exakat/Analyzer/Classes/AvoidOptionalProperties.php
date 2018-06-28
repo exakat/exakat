@@ -30,6 +30,8 @@ class AvoidOptionalProperties extends Analyzer {
     }
     
     public function analyze() {
+        $checkNullAsDefault = 'or( __.not(where( __.out("DEFAULT") )), __.out("DEFAULT").hasLabel("Null") )';
+        
         $this->atomIs('Member')
              ->outIs('OBJECT')
              ->atomIs('This')
@@ -53,7 +55,7 @@ class AvoidOptionalProperties extends Analyzer {
              ->outIs('PPP')
              ->outIs('PPP')
              ->raw('filter{ it.get().value("propertyname") == name; }')
-             ->raw('or( __.not(where( __.out("RIGHT") )), __.out("RIGHT").hasLabel("Null") )')
+             ->raw($checkNullAsDefault)
              ->back('results');
         $this->prepareQuery();
 
@@ -71,7 +73,7 @@ class AvoidOptionalProperties extends Analyzer {
              ->outIs('PPP')
              ->outIs('PPP')
              ->raw('filter{ it.get().value("propertyname") == name; }')
-             ->raw('or( __.not(where( __.out("RIGHT") )), __.out("RIGHT").hasLabel("Null") )')
+             ->raw($checkNullAsDefault)
              ->back('results');
         $this->prepareQuery();
 
@@ -93,7 +95,7 @@ class AvoidOptionalProperties extends Analyzer {
              ->outIs('PPP')
              ->outIs('PPP')
              ->raw('filter{ it.get().value("propertyname") == name; }')
-             ->raw('or( __.not(where( __.out("RIGHT") )), __.out("RIGHT").hasLabel("Null") )')
+             ->raw($checkNullAsDefault)
              ->back('results');
         $this->prepareQuery();
 

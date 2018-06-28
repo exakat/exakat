@@ -28,9 +28,9 @@ use Exakat\Analyzer\Analyzer;
 class CitSameName extends Analyzer {
     public function analyze() {
 
-        $classes = $this->query('g.V().hasLabel("Class").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
-        $interfaces = $this->query('g.V().hasLabel("Interface").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
-        $traits = $this->query('g.V().hasLabel("Trait").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
+        $classes = $this->query('g.V().hasLabel("Class").out("NAME").groupCount("m").by("lccode").cap("m").next().keySet()');
+        $interfaces = $this->query('g.V().hasLabel("Interface").out("NAME").groupCount("m").by("lccode").cap("m").next().keySet()');
+        $traits = $this->query('g.V().hasLabel("Trait").out("NAME").groupCount("m").by("lccode").cap("m").next().keySet()');
         
         $names = array_merge($classes->toArray(), $interfaces->toArray(), $traits->toArray());
         $counts = array_count_values($names);

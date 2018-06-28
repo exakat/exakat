@@ -28,46 +28,50 @@ use Exakat\Analyzer\Analyzer;
 class PropertyUsedInternally extends Analyzer {
 
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+
         // property + $this->property
-        $this->atomIs('Ppp')
+        $this->atomIs('Class')
+            // collect all $this->property calls
+             ->raw(<<<GREMLIN
+sideEffect{x = [:];}
+.where( __.out("METHOD", "MAGICMETHOD").out("BLOCK")
+          .repeat(out()).emit().times($MAX_LOOPING).hasLabel("Member")
+          .out("OBJECT").hasLabel("This").in("OBJECT") 
+          .out("MEMBER") 
+          .sideEffect{ x[it.get().value("code")] = 1;}
+          .fold()
+)
+GREMLIN
+)
+             ->outIs('PPP')
              ->isNot('static', true)
              ->outIs('PPP')
-             ->_as('ppp')
-             ->savePropertyAs('propertyname', 'propertyname')
-             ->goToClass()
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
-             ->outIs('MEMBER')
-             ->samePropertyAs('code','propertyname')
-             ->back('ppp');
+             ->filter('it.get().value("propertyname") in x.keySet(); ');
         $this->prepareQuery();
 
         //////////////////////////////////////////////////////////////////
         // static property : inside the self class
         //////////////////////////////////////////////////////////////////
-        $this->atomIs('Ppp')
-             ->hasClass()
+        $this->atomIs('Class')
+             ->savePropertyAs('fullnspath', 'fnp')
+            // collect all $this->property calls
+             ->raw(<<<GREMLIN
+sideEffect{x = [:];}
+.where( __.out("METHOD", "MAGICMETHOD").out("BLOCK")
+          .repeat(out()).emit().times($MAX_LOOPING).hasLabel("Staticproperty")
+          .out("CLASS").has("fullnspath").filter{it.get().value("fullnspath") == fnp}.in("CLASS") 
+          .out("MEMBER") 
+          .sideEffect{ x[it.get().value("code")] = 1;}
+          .fold()
+)
+GREMLIN
+)
+             ->outIs('PPP')
              ->is('static', true)
              ->outIs('PPP')
-             ->_as('ppp')
-             ->outIsIE('LEFT')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Staticproperty')
-             ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
-             ->samePropertyAs('fullnspath', 'fnp')
-             ->inIs('CLASS')
-             ->outIs('MEMBER')
-             ->samePropertyAs('code','property')
-             ->back('ppp');
+             ->filter('it.get().value("code") in x.keySet(); ')
+             ->inIsIE('LEFT');
         $this->prepareQuery();
 
 // Test for arrays ?

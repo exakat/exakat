@@ -27,12 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class NormalProperty extends Analyzer {
     public function analyze() {
+        // class x { private $y; }
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->isNot('static', true)
-             ->outIs('PPP')
-             ->outIsIE('LEFT');
+             ->outIs('PPP');
         $this->prepareQuery();
     }
 }

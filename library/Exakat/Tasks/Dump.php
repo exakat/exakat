@@ -796,12 +796,12 @@ g.V().hasLabel("Method").as('method')
          'final':it.get().properties("final").any(),
          'static':it.get().properties("static").any(),
 
-         'public':it.get().value("visibility") == 'public',
-         'protected':it.get().value("visibility") == 'protected',
-         'private':it.get().value("visibility") == 'private',
-         'class': classe,
-         'begin': lines.min(),
-         'end': lines.max()
+         'public':    it.get().value("visibility") == 'public',
+         'protected': it.get().value("visibility") == 'protected',
+         'private':   it.get().value("visibility") == 'private',
+         'class':     classe,
+         'begin':     lines.min(),
+         'end':       lines.max()
          ];
 }
 
@@ -861,12 +861,11 @@ g.V().hasLabel("Class", "Interface", "Trait")
 }
 .out('PPP') // out to the details
 .map{ 
-    if (it.get().label() == 'Propertydefinition') { 
-        name = it.get().value("fullcode");
-        v = ''; 
+    name = it.get().value("code");
+    if (it.get().vertices(OUT, "DEFAULT").any()) { 
+        v = it.get().vertices(OUT, "DEFAULT").next().value("fullcode");
     } else { 
-        name = it.get().vertices(OUT, "LEFT").next().value("fullcode");
-        v = it.get().vertices(OUT, "RIGHT").next().value("fullcode");
+        v = ''; 
     }
 
     x = ["class":classe,
@@ -926,9 +925,9 @@ GREMLIN;
 g.V().hasLabel("Class")
      .out('CONST')
 .sideEffect{ 
-    x_public = it.get().vertices(OUT, "PUBLIC").any();
-    x_protected = it.get().vertices(OUT, "PROTECTED").any();
-    x_private = it.get().vertices(OUT, "PRIVATE").any();
+    x_public = it.get().values("visibility") == 'public';
+    x_protected = it.get().values("visibility") == 'protected';
+    x_private = it.get().values("visibility") == 'private';
 }
      .out('CONST')
      .map{ 
@@ -1026,6 +1025,7 @@ GREMLIN;
     }
     
     private function collectFunctions() {
+
         // Functions
         $this->sqlite->query('DROP TABLE IF EXISTS functions');
         $this->sqlite->query(<<<SQL
@@ -1051,8 +1051,8 @@ g.V().hasLabel("Function")
 }
 
 GREMLIN;
-        $res = $this->gremlin->query($query);
-
+        $res = $this->gremlin->query($query)->toArray();
+        
         $total = 0;
         $query = array();
         foreach($res as $row) {
@@ -1499,12 +1499,12 @@ GREMLIN;
 g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first")
 .out("NAME").sideEffect{ name = it.get().value("fullcode"); }.in("NAME")
 
-.out("PRIVATE", "PUBLIC", "PROTECTED").sideEffect{ visibility1 = it.get().value("fullcode") }.in()
+.sideEffect{ visibility1 = it.get().value("visibility") }
 
 .in("METHOD").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
 .where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
 
-.out("PRIVATE", "PUBLIC", "PROTECTED").filter{ visibility2 = it.get().value("fullcode"); visibility1 != it.get().value("fullcode") }.in()
+.filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("fullcode") }
 
 .out("NAME").filter{ it.get().value("fullcode") == name}.select("first")
 .map{['name':name,
@@ -1517,43 +1517,45 @@ GREMLIN;
         
         $query = <<<GREMLIN
 g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
-.sideEffect{ name = it.get().value("fullcode"); }.in("LEFT")
-.out("RIGHT").sideEffect{ default1 = it.get().value("fullcode") }.in("RIGHT")
+.sideEffect{ name = it.get().value("code"); }
+.out("DEFAULT").sideEffect{ default1 = it.get().value("fullcode") }.in("DEFAULT")
 
 .in("PPP").in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
 .where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }
 
 .out("PPP").out("PPP")
-.out("RIGHT").filter{ default2 = it.get().value("fullcode"); default1 != it.get().value("fullcode") }.in("RIGHT")
+.out("DEFAULT").filter{ default2 = it.get().value("fullcode"); default1 != it.get().value("fullcode") }.in("DEFAULT")
 
-.until( __.not(outE("LEFT")) ).repeat(out("LEFT"))
-.filter{ it.get().value("fullcode") == name}.select("first")
+.filter{ it.get().value("code") == name}.select("first")
 .map{['name':name,
       'parent':class2,
       'parentValue':default2,
       'class':class1,
-      'classValue':default1];}
+      'classValue':default1];
+     }
 GREMLIN;
         $total += $this->storeClassChanges('Member Default', $query);
         
         $query = <<<GREMLIN
 g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
-.sideEffect{ name = it.get().value("fullcode"); }.until(__.inE("LEFT").count().is(eq(0))).repeat(__.in("LEFT")).in("PPP")
+.sideEffect{ name = it.get().value("code"); }.in("PPP")
+.sideEffect{ visibility1 = it.get().value("visibility") }
+.in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }
+.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS")
+                   .in("DEFINITION")
+                   .where(neq("x")) 
+).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("PPP")
 
-.out("PRIVATE", "PUBLIC", "PROTECTED").sideEffect{ visibility1 = it.get().value("fullcode") }.in()
+.filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("fullcode") }
 
-.in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
-.where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("PPP")
-
-.out("PRIVATE", "PUBLIC", "PROTECTED").filter{ visibility2 = it.get().value("fullcode"); visibility1 != it.get().value("fullcode") }.in()
-
-.out("PPP").until( __.not(outE("LEFT")) ).repeat(out("LEFT"))
-.filter{ it.get().value("fullcode") == name}.select("first")
+.out("PPP")
+.filter{ it.get().value("code") == name}.select("first")
 .map{['name':name,
       'parent':class2,
       'parentValue':visibility2,
       'class':class1,
-      'classValue':visibility1];}
+      'classValue':visibility1];
+   }
 GREMLIN;
         $total += $this->storeClassChanges('Member Visibility', $query);
                         

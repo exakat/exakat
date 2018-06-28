@@ -31,23 +31,22 @@ class UsedMethods extends Analyzer {
         
         // Normal Methodcall
         $methods = $this->query(<<<GREMLIN
-g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").values("fullnspath").unique()
+g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").values("lccode").unique()
 GREMLIN
 )->toArray();
 
         if (!empty($methods)) {
             $this->atomIs(array('Method', 'Magicmethod'))
-                 ->_as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
-                 ->codeIs($methods)
-                 ->back('used');
+                 ->is('lccode', $methods)
+                 ->back('first');
             $this->prepareQuery();
         }
 
         // Staticmethodcall
         $staticmethods = $this->query(<<<GREMLIN
-g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").values("fullnspath").unique()
+g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").values("lccode").unique()
 GREMLIN
 )->toArray();
 
@@ -56,7 +55,7 @@ GREMLIN
                  ->_as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
-                 ->codeIs($staticmethods)
+                 ->is('lccode', $staticmethods)
                  ->back('used');
             $this->prepareQuery();
         }

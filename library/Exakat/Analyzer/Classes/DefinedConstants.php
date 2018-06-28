@@ -35,11 +35,11 @@ class DefinedConstants extends Analyzer {
     
     public function analyze() {
         $containsConstantDefinition = <<<GREMLIN
-where( __.out("CONST")
-         .hasLabel("Const")
-         .out("CONST")
-         .out("NAME")
-         .filter{ it.get().value("code") == constante; }
+where( 
+    __.out("CONST")
+      .out("CONST")
+      .out("NAME")
+      .filter{ it.get().value("code") == constante; }
     )
 GREMLIN;
 
@@ -51,7 +51,7 @@ GREMLIN;
              ->savePropertyAs('code', 'constante')
              ->inIs('CONSTANT')
              ->outIs('CLASS')
-             ->classDefinition()
+             ->inIs('DEFINITION')
              ->goToAllParents(self::INCLUDE_SELF)
              ->raw($containsConstantDefinition)
              ->back('first');

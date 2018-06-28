@@ -757,7 +757,7 @@ JAVASCRIPT;
 
         // bloc Issues
         $issues = $this->getIssuesBreakdown();
-//        $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
         $tags[] = 'SCRIPTISSUES';
         $code[] = $issues['script'];
 
@@ -1540,7 +1540,7 @@ SQL;
                  </div>';
             $dataScript[] = '{label: "'.$value['label'].'", value: '.( (int) $value['value']).'}';
         }
-        $html = implode(', ', $html);
+        $html = implode('', $html);
         $dataScript = implode(', ', $dataScript);
 
         $html .= str_repeat('<div class="clearfix">

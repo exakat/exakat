@@ -28,7 +28,6 @@ class Dependencywheel extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'wheel';
     
-    private $select       = array();
     private $tmpName      = '';
     private $finalName    = '';
     private $packagenames = '';

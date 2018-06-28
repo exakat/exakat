@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy â€“ Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy Ð Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -60,6 +60,7 @@ class LoadFinal extends Tasks {
         $this->spotFallbackConstants();
         
         $this->setConstantDefinition();
+        $this->setParentDefinition();
 
         $this->propagateConstants();
 
@@ -166,33 +167,29 @@ GREMLIN;
     
     private function spotPHPNativeFunctions() {
         $title = 'mark PHP native functions call';
-        $functions = call_user_func_array('array_merge', $this->PHPfunctions);
-        $functions = array_filter($functions, function ($x) { return strpos($x, '\\') === false;});
-        $functions = array_map('strtolower', $functions);
-
-        // This weird trick for janusgraph...
-        $functions = array_values($functions);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
+     .has("token", "T_STRING")
      .not(where( __.in("DEFINITION")))
      .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
-     .map{ parts.last().toLowerCase() }
+     .map{ name = parts.last().toLowerCase();}
      .unique()
 GREMLIN;
+        $fallingback = $this->gremlin->query($query)->toArray();
 
-        $res = $this->gremlin->query($query);
-        if (empty($res->toArray())) {
-            return;
-        }
-        
-        $functions = array_values(array_intersect($res->toArray(), $functions));
+        if (!empty($fallingback)) {
+            $phpfunctions = call_user_func_array('array_merge', $this->PHPfunctions);
+            $phpfunctions = array_map('strtolower', $phpfunctions);
+            $phpfunctions = array_values($phpfunctions);
 
-        $query = <<<GREMLIN
+            $diff = array_values(array_intersect($fallingback, $phpfunctions));
+
+            $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
-     .not(has("token", "T_NS_SEPARATOR"))
+     .has("token", "T_STRING")
      .not(where( __.in("DEFINITION")))
      .filter{ parts = it.get().value('fullnspath').tokenize('\\\\'); parts.size() > 1 }
      .filter{ name = parts.last().toLowerCase(); name in arg1 }
@@ -202,8 +199,18 @@ g.V().hasLabel("Functioncall")
      }.count();
 
 GREMLIN;
+            $this->runQuery($query, $title, array('arg1' => $diff));
+        }
 
-        $this->runQuery($query, $title, array('arg1' => $functions));
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall")
+     .has("fullnspath")
+     .not(where( __.in("DEFINITION")))
+     .values("fullnspath")
+     .unique()
+GREMLIN;
+        $fixed = $this->gremlin->query($query)->toArray();
+        $this->datastore->addRow('functioncalls', array_flip($fixed));
     }
 
     private function runQuery($query, $title, $args = array()) {
@@ -325,6 +332,21 @@ GREMLIN;
         }
     }
 
+    private function setParentDefinition() {
+        display('Set parent definitions');
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Parent").as('parent')
+     .repeat( __.in($this->linksIn) ).emit().until(hasLabel("Class", "Classanonymous")).hasLabel("Class", "Classanonymous")
+     .out("EXTENDS").in("DEFINITION")
+     .addE("DEFINITION")
+     .to("parent")
+     .count()
+
+GREMLIN;
+        $this->gremlin->query($query);
+    }
+    
     private function setConstantDefinition() {
         display('Set constant definitions');
 

@@ -60,10 +60,9 @@ class Dictionary {
                 }
             }
         } else {
-            $code = array_flip($code);
-            foreach($this->dictionary as $k => $v) {
-                if (isset($code[mb_strtolower($k)])) {
-                    $return[] = $v;
+            foreach($code as $c) {
+                if (isset($this->dictionary[mb_strtolower($c)])) {
+                    $return[] = $this->dictionary[mb_strtolower($c)];
                 }
             }
         }

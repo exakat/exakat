@@ -9,6 +9,7 @@ $expected     = array('$o',
                       '$yyt',
                       '$yyyt',
                       '$dynamicProperty',
+                      '$y',
                      );
 
 $expected_not = array('$a',

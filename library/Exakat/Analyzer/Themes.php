@@ -339,9 +339,7 @@ SQL;
         return array_filter($this->listAllAnalyzer(), function($c) use ($name) {
             $l = levenshtein($c, $name);
 
-            if ($l < 8) {
-                $r[] = $c;
-            }
+            return $l < 8;
         });
     }
 

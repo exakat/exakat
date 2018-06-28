@@ -69,13 +69,13 @@ abstract class Tasks {
         if (static::CONCURENCE !== self::ANYTIME && $subTask === self::IS_NOT_SUBTASK) {
             if (self::$semaphore === null) {
                 if (static::CONCURENCE === self::QUEUE) {
-                    self::$semaphorePort = 7610;
+                    self::$semaphorePort = $this->config->concurencyCheck;
                 } elseif (static::CONCURENCE === self::SERVER) {
-                    self::$semaphorePort = 7611;
+                    self::$semaphorePort = $this->config->concurencyCheck + 1;
                 } elseif (static::CONCURENCE === self::DUMP) {
-                    self::$semaphorePort = 7612;
+                    self::$semaphorePort = $this->config->concurencyCheck + 2;
                 } else {
-                    self::$semaphorePort = 7613;
+                    self::$semaphorePort = $this->config->concurencyCheck + 3;
                 }
 
                 if ($socket = @stream_socket_server("udp://0.0.0.0:".self::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND)) {

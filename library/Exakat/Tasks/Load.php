@@ -2250,6 +2250,7 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncall);
 
+        $this->runPlugins($functioncall);
         if ( $functioncall->atom === 'Methodcallname') {
             // Nothing, really. in case of A::b()()
         } elseif ( !$this->isContext(self::CONTEXT_NOSEQUENCE) &&
@@ -2457,51 +2458,45 @@ class Load extends Tasks {
         }
 
         $fullcode = array();
-        while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON &&
-               $this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG) {
-
+        --$this->id;
+        do {
+            ++$this->id;
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
                 ++$this->id;
                 $this->processSingle($atom);
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
-                    $this->processNext();
-                }
-            } else {
-                $this->processNext();
-            }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA) {
                 $element = $this->popExpression();
-                $element->rank = ++$rank;
-                $this->addLink($static, $element, $link);
-                
-                if ($atom === 'Propertydefinition') {
-                    if (!preg_match('/^\$([^ ]+)/', $element->fullcode, $r)) {
-                        throw new LoadError('Couldn\'t find the property definition in '.__METHOD__.':'.$this->filename.':'.__LINE__);
+
+                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
+                    ++$this->id;
+                    while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
+                                                                            $this->phptokens::T_COMMA,
+                                                                            ))) {
+                        $this->processNext();
                     }
-                    $element->propertyname = $r[1];
+                    $default = $this->popExpression();
                 }
-
-                $fullcode[] = $element->fullcode;
-                ++$this->id;
-            }
-        }
-        $element = $this->popExpression();
-        $this->addLink($static, $element, $link);
-
-        if ($atom === 'Propertydefinition') {
-            if (!preg_match('/^\$([^ ]+)/', $element->fullcode, $r)) {
-                throw new LoadError('Couldn\'t find the property definition in '.__METHOD__.':'.$this->filename.':'.__LINE__);
-            }
-            $element->propertyname = $r[1];
-            
-            if (stripos($fullcodePrefix, 'static') === false) {
-                $this->calls->addDefinition('property', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
             } else {
-                $this->calls->addDefinition('staticproperty', end($this->currentClassTrait)->fullnspath.'::'.$r[0], $element);
+                // global $a[2] = 2 ?
+                $this->processNext();
+                $element = $this->popExpression();
             }
-        }
-        $fullcode[] = $element->fullcode;
+            
+            $element->rank = ++$rank;
+            $this->addLink($static, $element, $link);
+            
+            if ($atom === 'Propertydefinition') {
+                // drop $
+                $element->propertyname = substr($element->code, 1);
+            }
+
+            if (isset($default)) {
+                $this->addLink($element, $default, 'DEFAULT');
+                $element->fullcode = $element->fullcode . ' = ' . $default->fullcode;
+                unset($default);
+            }
+            $fullcode[] = $element->fullcode;
+        }  while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON &&
+                  $this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG);
 
         $static->code     = $this->tokens[$current][1];
         $static->fullcode = $fullcodePrefix.' '.implode(', ', $fullcode);
@@ -2871,7 +2866,7 @@ class Load extends Tasks {
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
             $this->processNext();
-        };
+        }
         ++$this->id; // skip )
         $condition = $this->popExpression();
         $this->addLink($dowhile, $condition, 'CONDITION');
@@ -2938,23 +2933,45 @@ class Load extends Tasks {
 
     private function processDeclare() {
         $current = $this->id;
+        $declare = $this->addAtom('Declare');
+        $fullcode = array();
 
         ++$this->id; // Skip declare
-        $declare = $this->processArguments('Declare');
-        $argumentsFullcode = $declare->fullcode;
+        do {
+            ++$this->id; // Skip ( or ,
+            $this->processSingle('Name');
+            $name = $this->popExpression();
+
+            ++$this->id; // Skip =
+            $this->processNext();
+            $config = $this->popExpression();
+            
+            $declaredefinition = $this->addAtom('Declaredefinition');
+            $this->addLink($declaredefinition, $name, 'NAME');
+            $this->addLink($declaredefinition, $config, 'VALUE');
+
+            $this->addLink($declare, $declaredefinition, 'DECLARE');
+            $declaredefinition->fullcode = $name->fullcode . ' = ' . $config->fullcode;
+            $fullcode[] = $declaredefinition->fullcode;
+            
+            ++$this->id; // Skip value
+        }  while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
+
         $isColon = ($this->tokens[$current][0] === $this->phptokens::T_DECLARE) && ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON);
 
         $block = $this->processFollowingBlock(array($this->phptokens::T_ENDDECLARE));
+
         $this->popExpression();
         $this->addLink($declare, $block, 'BLOCK');
 
         if ($isColon === true) {
-            $fullcode = $this->tokens[$current][1].' ('.$argumentsFullcode.') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id + 1][1];
+            $fullcode = $this->tokens[$current][1].' ('.implode(', ', $fullcode).') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id + 1][1];
             ++$this->id; // skip enddeclare
             ++$this->id; // skip ;
         } else {
-            $fullcode = $this->tokens[$current][1].' ('.$argumentsFullcode.') '.self::FULLCODE_BLOCK;
+            $fullcode = $this->tokens[$current][1].' ('.implode(', ', $fullcode).') '.self::FULLCODE_BLOCK;
         }
+
         $this->pushExpression($declare);
         $this->processSemicolon();
 
@@ -3042,7 +3059,7 @@ class Load extends Tasks {
             $this->processNext();
         }
         $name = $this->popExpression();
-        $this->addLink($switch, $name, 'NAME');
+        $this->addLink($switch, $name, 'CONDITION');
 
         $cases = $this->addAtom('Sequence');
         $cases->code     = self::FULLCODE_SEQUENCE;
@@ -3099,8 +3116,8 @@ class Load extends Tasks {
 
         $this->runPlugins($cases, $extraCases);
         
-        $this->runPlugins($switch, array('NAME' => $name,
-                                         'CASES' => $cases,));
+        $this->runPlugins($switch, array('CONDITION' => $name,
+                                         'CASES'     => $cases,));
 
         $this->pushExpression($switch);
         $this->processSemicolon();
@@ -3276,7 +3293,7 @@ class Load extends Tasks {
                                                                   ));
             $argumentsFullcode = $functioncall->fullcode;
             if (mb_strtolower($this->tokens[$current][1]) === 'die') {
-                $argumentsFullcode = '('.$argumentsFullcode.')';
+                $argumentsFullcode = "'($argumentsFullcode)";
             } else {
                 --$this->id;
             }
@@ -3323,13 +3340,13 @@ class Load extends Tasks {
                 // This is a T_LIST !
                 $array->token      = 'T_OPEN_BRACKET';
                 $array->fullnspath = '\list';
-                $array->fullcode  = '['.$argumentsFullcode.']';
+                $array->fullcode  = "[$argumentsFullcode]";
             } else {
                 $array = $this->processArguments('Arrayliteral', array($this->phptokens::T_CLOSE_BRACKET));
                 $argumentsFullcode = $array->fullcode;
 
                 $array->token = 'T_OPEN_BRACKET';
-                $array->fullcode  = '['.$argumentsFullcode.']';
+                $array->fullcode  = "[$argumentsFullcode]";
             }
         }
 
@@ -4873,6 +4890,7 @@ class Load extends Tasks {
         
         list($fullnspath, $aliased) = $this->getFullnspath($right);
         $this->calls->addCall('class', $fullnspath, $right);
+        $right->fullnspath = $fullnspath;
         $right->aliased = $aliased;
 
         $instanceof->code     = $this->tokens[$current][1];

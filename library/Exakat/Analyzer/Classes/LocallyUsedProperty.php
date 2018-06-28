@@ -48,7 +48,6 @@ class LocallyUsedProperty extends Analyzer {
              ->is('static', true)
              ->outIs('PPP')
              ->_as('ppp')
-             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->outIs(array('METHOD', 'MAGICMETHOD'))

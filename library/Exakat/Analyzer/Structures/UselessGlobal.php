@@ -64,12 +64,12 @@ GREMLIN;
 
         if (!empty($loneGlobal)) {
             $this->atomIs('Globaldefinition')
-                 ->codeIs($loneGlobal, self::NO_TRANSLATE);
+                 ->codeIs($loneGlobal, self::NO_TRANSLATE, self::CASE_SENSITIVE);
             $this->prepareQuery();
             
             if (!empty($globals)) {
                 $this->atomIs('Phpvariable')
-                     ->codeIs($globals, self::NO_TRANSLATE)
+                     ->codeIs($globals, self::NO_TRANSLATE, self::CASE_SENSITIVE)
                      ->inIs('VARIABLE')
                      ->atomIs('Array')
                      ->is('globalvar', $loneGlobal);

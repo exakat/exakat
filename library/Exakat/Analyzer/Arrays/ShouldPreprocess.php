@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldPreprocess extends Analyzer {
     public function analyze() {
-        $variables = array('Variable', 'Member', 'Staticproperty');
-        
         // $a = array(); $a[1] = 2;
         $this->atomIs('Assignation')
              ->codeIs('=')
@@ -90,7 +88,7 @@ class ShouldPreprocess extends Analyzer {
         $this->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')
-             ->atomIs($variables)
+             ->atomIs(array('Variable', 'Member', 'Staticproperty'))
              ->savePropertyAs('fullcode', 'tableau')
              ->inIs('LEFT')
              ->outIs('RIGHT')

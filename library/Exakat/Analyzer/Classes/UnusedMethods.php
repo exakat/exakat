@@ -37,7 +37,6 @@ class UnusedMethods extends Analyzer {
              ->isNot('abstract', true)
              ->hasClassTrait()
              ->analyzerIsNot('Classes/UsedMethods')
-             ->outIs('NAME')
              ->back('first');
         $this->prepareQuery();
     }

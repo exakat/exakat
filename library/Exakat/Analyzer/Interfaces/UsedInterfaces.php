@@ -27,19 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class UsedInterfaces extends Analyzer {
     public function analyze() {
-        // interface used in a class definition
-        $classes    = $this->gremlin->query('g.V().hasLabel("Class", "Interface").out("IMPLEMENTS", "EXTENDS").values("fullnspath").unique()');
-        $instanceof = $this->gremlin->query('g.V().hasLabel("Instanceof").out("CLASS").values("fullnspath").unique()');
-        $typehints  = $this->gremlin->query('g.V().hasLabel("Function").out("ARGUMENT").out("TYPEHINT").values("fullnspath").unique()');
-
-        $all = array_merge($classes->toArray(), $instanceof->toArray(), $typehints->toArray());
-
-        if (!empty($all)) {
-            $all = array_keys(array_count_values($all));
-            $this->atomIs('Interface')
-                 ->fullnspathIs($all);
-            $this->prepareQuery();
-        }
+        // interface i {}
+        // class x implements i {}
+        $this->atomIs('Interface')
+             ->hasOut('DEFINITION');
+        $this->prepareQuery();
     }
 }
 

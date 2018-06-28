@@ -42,7 +42,6 @@ class PropertyVariableConfusion extends Analyzer {
              ->outIs('PPP')
              ->outIs('PPP')
              ->_as('ppp')
-             ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')
              ->back('ppp');
         $this->prepareQuery();

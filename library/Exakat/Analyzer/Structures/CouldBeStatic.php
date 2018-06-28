@@ -33,17 +33,17 @@ class CouldBeStatic extends Analyzer {
     
     public function analyze() {
         $uniqueGlobals = $this->query(<<<GREMLIN
-g.V().hasLabel('Globaldefinition').groupCount('m').by('code').cap('m').next().findAll{ a,b -> b == 1}.keySet();
+g.V().hasLabel("Globaldefinition").groupCount("m").by("code").cap("m").next().findAll{ a,b -> b == 1}.keySet();
 GREMLIN
 )->toArray();
 
         $globalvar = $this->query(<<<GREMLIN
-g.V().hasLabel("Array").values('globalvar');
+g.V().hasLabel("Array").values("globalvar");
 GREMLIN
 )->toArray();
 
         $implicitvar = $this->query(<<<GREMLIN
-g.V().hasLabel("Variable", "Globaldefinition").where( __.in("ANALYZED").has("analyzer", "Structures/GlobalInGlobal")).values('code');
+g.V().hasLabel("Variable", "Globaldefinition").where( __.in("ANALYZED").has("analyzer", "Structures/GlobalInGlobal")).values("code");
 GREMLIN
 )->toArray();
 
@@ -52,9 +52,9 @@ GREMLIN
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
 
         $this->atomIs('Globaldefinition')
-             ->codeIsNot($superglobals, self::TRANSLATE)
-             ->codeIs($uniqueGlobals, self::NO_TRANSLATE)
-             ->codeIsNot($globalvar, self::NO_TRANSLATE)
+             ->codeIsNot($superglobals, self::TRANSLATE, self::CASE_SENSITIVE)
+             ->codeIs($uniqueGlobals, self::NO_TRANSLATE, self::CASE_SENSITIVE)
+             ->codeIsNot($globalvar, self::NO_TRANSLATE, self::CASE_SENSITIVE)
              ->savePropertyAs('code', 'theGlobal')
              ->hasFunction()
              ->back('first')

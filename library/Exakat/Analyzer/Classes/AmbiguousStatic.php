@@ -29,7 +29,7 @@ class AmbiguousStatic extends Analyzer {
     public function analyze() {
         // Methods with the same name, but with static or not.
         $query = <<<GREMLIN
-g.V().hasLabel("Method").has("static", true).values("code").unique()
+g.V().hasLabel("Method").has("static", true).values("lccode").unique()
 GREMLIN;
         $staticMethod = $this->query($query)->toArray();
         $staticMethod = $this->dictCode->source($staticMethod);
@@ -38,7 +38,7 @@ GREMLIN;
 
         // Global are unused if used only once
         $query = <<<GREMLIN
-g.V().hasLabel("Method").not(has("static", true)).values("code").unique()
+g.V().hasLabel("Method").not(has("static", true)).values("lccode").unique()
 GREMLIN;
         $normalMethod = $this->query($query)->toArray();
         $normalMethod = $this->dictCode->source($normalMethod);
@@ -57,33 +57,31 @@ GREMLIN;
         // Properties with the same name, but with static or not.
         // Just like methods, they are case-insensitive, because static $X and $x are still ambiguous
         $query = <<<GREMLIN
-g.V().hasLabel("Propertydefinition").as("property")
-     .coalesce( __.in("LEFT"), __.filter{true; } )
-     .in("PPP")
+g.V().hasLabel("Ppp")
      .has("static", true)
-     .select("property").values("code").unique()
+     .out("PPP")
+     .values("code")
+     .unique()
 GREMLIN;
         $staticProperty = $this->query($query)->toArray();
 
         // Global are unused if used only once
         $query = <<<GREMLIN
-g.V().hasLabel("Propertydefinition").as("property")
-     .coalesce( __.in("LEFT"), __.filter{true; } )
-     .in("PPP")
+g.V().hasLabel("Ppp")
      .not(has("static", true))
-     .select("property").values("code").unique()
+     .out("PPP")
+     .values("code")
+     .unique()
 GREMLIN;
         $normalProperty = $this->query($query)->toArray();
 
         $mixedProperty = array_values(array_intersect($normalProperty, $staticProperty));
         
-        if (empty($mixedProperty)){
-            return ;
+        if (!empty($mixedProperty)){
+            $this->atomIs('Propertydefinition')
+                 ->codeIs($mixedProperty, self::NO_TRANSLATE, self::CASE_SENSITIVE);
+            $this->prepareQuery();
         }
-
-        $this->atomIs('Propertydefinition')
-             ->codeIs($mixedProperty, self::NO_TRANSLATE);
-        $this->prepareQuery();
     }
 }
 

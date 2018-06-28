@@ -47,8 +47,6 @@ class Config {
     private $options     = array();
     private $remotes     = array();
     private $themas      = array();
-
-    static private $stack = array();
     
     public function __construct($argv) {
         $this->argv = $argv;

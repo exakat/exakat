@@ -34,13 +34,15 @@ class PropertyNeverUsed extends Analyzer {
     }
 
     public function analyze() {
+        // class x { private $p = 1; } 
         $this->atomIs('Class')
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->analyzerIsNot('Classes/PropertyUsedInternally')
-             ->analyzerIsNot('Classes/PropertyUsedAbove')
-             ->analyzerIsNot('Classes/PropertyUsedBelow');
+             ->analyzerIsNot(array('Classes/PropertyUsedInternally', 
+                                   'Classes/PropertyUsedAbove',
+                                   'Classes/PropertyUsedBelow',
+                                   ));
         $this->prepareQuery();
     }
 }

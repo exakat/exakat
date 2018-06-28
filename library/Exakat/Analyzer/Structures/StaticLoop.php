@@ -28,20 +28,48 @@ use Exakat\Data\Methods;
 
 class StaticLoop extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         $methods = new Methods($this->config);
         $nonDeterminist = $methods->getNonDeterministFunctions();
         $nonDeterminist = "'\\\\" . implode("', '\\\\", $nonDeterminist)."'";
 
-        $whereNonDeterminist = 'not( where( __.repeat( __.out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").has("token", within("T_STRING", "T_NS_SEPARATOR")).filter{ it.get().value("fullnspath") in ['.$nonDeterminist.']} ) )';
+        $whereNonDeterminist = <<<GREMLIN
+not( 
+    where( 
+        __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING)
+          .hasLabel("Functioncall")
+          .has("token", within("T_STRING", "T_NS_SEPARATOR"))
+          .filter{ it.get().value("fullnspath") in [$nonDeterminist]} 
+          ) 
+    )
+GREMLIN;
         
-        $checkBlindVariable = 'not( where( __.repeat( __.out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Variable", "Variableobject", "Variablearray").filter{ it.get().value("code") in blind} ) )';
+        $checkBlindVariable = <<<GREMLIN
+not( 
+    where( 
+        __.repeat( __.out({$this->linksDown}) )
+          .emit( ).times($MAX_LOOPING)
+          .hasLabel("Variable", "Variableobject", "Variablearray")
+          .filter{ it.get().value("code") in blind} 
+        ) 
+    )
+GREMLIN;
+        
+        $collectVariables = <<<GREMLIN
+where( 
+    __.sideEffect{ blind = []}
+      .out("CONDITION", "INCREMENT", "INIT", "VALUE")
+      .emit( ).repeat( out({$this->linksDown}) ).times($MAX_LOOPING)
+      .hasLabel("Variable", "Variableobject", "Variablearray")
+      .sideEffect{ blind.push(it.get().value("code")); }
+      .fold() 
+)
+GREMLIN;
         
         // foreach with only one value
         $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIs('Variable')
-             ->raw('sideEffect{ blind = []; blind.push(it.get().value("code"));}')
-             ->back('first')
+             ->raw($collectVariables)
              ->outIs('BLOCK')
 
              // Check that blind variable are not mentionned
@@ -52,32 +80,6 @@ class StaticLoop extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // foreach with key value
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIs('Keyvalue')
-             ->raw('sideEffect{ blind = [];}')
-
-             ->outIs('INDEX')
-             ->raw('sideEffect{ blind.push(it.get().value("code")); }')
-             ->inIs('INDEX')
-
-             ->outIs('VALUE')
-             ->raw('sideEffect{ blind.push(it.get().value("code")); }')
-             ->inIs('VALUE')
-
-             ->back('first')
-             ->outIs('BLOCK')
-             
-             // Check that blind variables are not mentionned
-             ->raw($checkBlindVariable)
-
-             // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->raw($whereNonDeterminist)
-             ->back('first');
-        $this->prepareQuery();
-        // foreach with complex structures (property, static property, arrays, references... ?)
-
         // for
         $this->atomIs('For')
              ->outIs('INCREMENT')
@@ -87,7 +89,7 @@ class StaticLoop extends Analyzer {
 
         $this->atomIs('For')
              // collect all variables in INCREMENT and INIT (ignore FINAL)
-             ->raw('where( __.sideEffect{ blind = []}.out("INCREMENT", "INIT").repeat( out('.$this->linksDown.') ).emit().times('.self::MAX_LOOPING.').hasLabel("Variable", "Variableobject", "Variablearray").sideEffect{ blind.push(it.get().value("code")); }.fold() )')
+             ->raw($collectVariables)
              
              ->outIs('BLOCK')
              // check if the variables are used here
@@ -104,7 +106,7 @@ class StaticLoop extends Analyzer {
         // do...while
         $this->atomIs('Dowhile')
              // collect all variables
-             ->raw('where( __.sideEffect{ blind = []}.out("CONDITION").repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').sideEffect{ blind.push(it.get().value("code")); }.fold() )')
+             ->raw($collectVariables)
 
              ->outIs('BLOCK')
              // check if the variables are used here
@@ -122,7 +124,7 @@ class StaticLoop extends Analyzer {
         $this->atomIs('While')
 
              // collect all variables
-             ->raw('where( __.sideEffect{ blind = []}.out("CONDITION").repeat( out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.').sideEffect{ blind.push(it.get().value("code")); }.fold() )')
+             ->raw($collectVariables)
 
              ->outIs('BLOCK')
              // check if the variables are used here
@@ -134,6 +136,10 @@ class StaticLoop extends Analyzer {
         $this->prepareQuery();
 
         // while with complex structures (property, static property, arrays, references... ?)
+        
+        // TODO : handle the case of compact
+        // TODO : handle the case of localproperties used in the conditions : with a method call, they may be also updated
+        // TODO : same for references
     }
 }
 

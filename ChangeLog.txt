@@ -1,4 +1,4 @@
-Version 1.3.2 (Duan Zhixian, coming up)
+Version 1.3.3 (Ma Sanbao, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,25 @@ Version 1.3.2 (Duan Zhixian, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.3.3 (Duan Zhixian, 2018-06-25)
++ Architecture
+    + Better handling of fallback to global for functions
+    + Weekly code clean
+    + Refactored several analysis for speed
++ Report
+    + Ambassador : fixed regression in the dashboard
+    + Fixed edge case with properties
++ Analyzer
+    + New analysis : closure that can be static
+    + Upgraded analysis : empty function doesn't count static or global
+    + Upgraded analysis : reported globals include $GLOBALS also
+    + Checked unit tests : 2881 / 2911 test pass (98% pass). 
++ Tokenizer
+    + Moved collection of functioncall to LoadFinal
+    + Added collection of interfaces and newcall
+    + Moved Declare to its own token
+    + Moved Property definitions to its own token
 
 Version 1.3.2 (Duan Zhixian, coming up)
 + Architecture

@@ -34,11 +34,6 @@ class NonPpp extends Analyzer {
              ->atomIs(array('Method', 'Magicmethod', 'Ppp', 'Constant'))
              ->is('visibility', 'none');
         $this->prepareQuery();
-
-        $this->atomIs(array('Class', 'Interface', 'Trait'))
-             ->outIs('PPP')
-             ->tokenIs('T_VAR');
-        $this->prepareQuery();
     }
 }
 

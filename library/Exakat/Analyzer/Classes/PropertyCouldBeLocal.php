@@ -26,9 +26,10 @@ use Exakat\Analyzer\Analyzer;
 
 class PropertyCouldBeLocal extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         // normal property
         $this->atomIs('Propertydefinition')
-             ->inIs('LEFT')
              ->savePropertyAs('propertyname', 'member')
              ->inIs('PPP')
              ->isNot('static', true)
@@ -39,8 +40,8 @@ where(
     __.out("METHOD")
       .not( where( __.has('static', true) ) )
       .where( __.out("BLOCK")
-          .repeat( __.out({$this->linksDown})).emit().times(5).hasLabel("Member")
-                .out("OBJECT").hasLabel("This").in("OBJECT")
+          .repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING).hasLabel("Member")
+                .where(out("OBJECT").hasLabel("This"))
                 .out("MEMBER").filter{ it.get().value("code") == member}
         )
         .count().is(eq(1))
@@ -53,7 +54,6 @@ GREMLIN
         // static property
         $this->atomIs('Propertydefinition')
              ->savePropertyAs('code', 'member')
-             ->inIs('LEFT')
              ->inIs('PPP')
              ->is('static', true)
              ->is('visibility', 'private')
@@ -63,7 +63,7 @@ GREMLIN
 where(
     __.out("METHOD")
       .where( __.out("BLOCK")
-                .repeat( __.out({$this->linksDown})).emit().times(5).hasLabel("Staticproperty")
+                .repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING).hasLabel("Staticproperty")
                     .out("CLASS").has("fullnspath").filter{it.get().value("fullnspath") == fnp}.in("CLASS")
                     .out("MEMBER").filter{ it.get().value("code") == member}
        )

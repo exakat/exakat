@@ -36,7 +36,6 @@ class SplitGraphson {
     const CSV_SEPARATOR = ',';
 
     private $file_saved = 0;
-    private $unlink = array();
 
     private static $count = -1; // id must start at 0 in batch-import
 
@@ -45,8 +44,6 @@ class SplitGraphson {
 
     private $config = null;
     
-    private $calls     = array();
-    private $json      = array();
     private $project   = null;
     private $projectId = null;
     private $id        = 1;
@@ -150,7 +147,6 @@ GREMLIN;
         $datastore = new Datastore($this->config);
 
         $datastore->addRow('tokenCounts', $this->tokenCounts);
-        $datastore->addRow('functioncalls', $this->functioncalls);
     }
 
     private function escapeCsv($string) {

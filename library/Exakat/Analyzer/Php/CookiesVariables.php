@@ -31,7 +31,7 @@ class CookiesVariables extends Analyzer {
         if (!empty($cookie)) {
             // $_COOKIE['name'];
             $this->atomIs('Phpvariable')
-                 ->codeIs($cookie, self::NO_TRANSLATE)
+                 ->codeIs($cookie, self::NO_TRANSLATE, self::CASE_SENSITIVE)
                  ->inIs('VARIABLE')
                  ->atomIs('Array')
                  ->outIs('INDEX')

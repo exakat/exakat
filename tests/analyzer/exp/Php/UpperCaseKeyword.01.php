@@ -10,6 +10,8 @@ $expected     = array('WHILE ($c++) { /**/ } ',
 
 $expected_not = array('class x2 { /**/ } ',
                       'foreach($a2 as $b2) { /**/ }',
+                      'class x4 EXTENDS b { /**/ } ',
+                      'class x3 IMPLEMENTS b { /**/ }',
                      );
 
 ?>

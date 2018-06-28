@@ -26,11 +26,10 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class PropertyDefinition extends Analyzer {
-
     public function analyze() {
+        // class x { private $y; }
         $this->atomIs('Ppp')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->atomIs('Propertydefinition');
         $this->prepareQuery();
     }

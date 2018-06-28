@@ -33,8 +33,9 @@ class DeclareTicks extends Analyzer {
              ->outIs('CODE')
              ->outIs('EXPRESSION')
              ->atomIs('Declare')
-             ->outIs('ARGUMENT')
-             ->regexIs('fullcode', '^ticks = ')
+             ->outIs('DECLARE')
+             ->outIs('NAME')
+             ->codeIs('ticks')
              ->back('first');
         $this->prepareQuery();
     }

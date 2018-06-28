@@ -52,9 +52,9 @@ class ConstantScalarExpression extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->outIs('RIGHT')
+             ->outIs('DEFAULT')
              ->atomIsNot($authorizedAtoms)
-             ->inIs('RIGHT');
+             ->inIs('DEFAULT');
         $this->prepareQuery();
     }
 }

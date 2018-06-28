@@ -103,7 +103,6 @@ class DefinedParentMP extends Analyzer {
              ->atomIs('Ppp')
              ->isNot('visibility', 'private')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();

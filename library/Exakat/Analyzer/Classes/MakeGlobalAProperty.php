@@ -42,7 +42,7 @@ class MakeGlobalAProperty extends Analyzer {
              ->outIs('METHOD')
              ->atomInsideNoDefinition('Array')
              ->outIs('VARIABLE')
-             ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_INSENSITIVE)
+             ->codeIs('$GLOBALS', self::TRANSLATE, self::CASE_SENSITIVE)
              ->inIs('VARIABLE')
              ->_as('results')
              ->goToFunction()

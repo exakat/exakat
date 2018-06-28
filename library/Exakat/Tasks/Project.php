@@ -55,7 +55,7 @@ class Project extends Tasks {
     public function run() {
         $project = $this->config->project;
         
-        $this->project_dir = $this->config->projects_root.'/projects/'.$project;
+        $this->project_dir = "{$this->config->projects_root}/projects/$project";
 
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();

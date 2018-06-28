@@ -64,7 +64,6 @@ class DefinedStaticMP extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
@@ -82,7 +81,6 @@ class DefinedStaticMP extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();

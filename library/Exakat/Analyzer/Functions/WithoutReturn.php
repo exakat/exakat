@@ -36,7 +36,7 @@ class WithoutReturn extends Analyzer {
                                '__destruct', 
                                '__wakeup', 
                                '__autoload',
-                               ), self::TRANSLATE, self::CASE_SENSITIVE)
+                               ), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first')
              ->noAtomInside('Return');
         $this->prepareQuery();

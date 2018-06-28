@@ -38,8 +38,8 @@ class ShouldUseThis extends Analyzer {
              ->isNot('static', true)
              ->isNot('abstract', true)
              ->hasClassTrait()
-             ->analyzerIsNot('Classes/MethodIsOverwritten')
-             ->analyzerIsNot('Classes/UseThis');
+             ->analyzerIsNot(array('Classes/MethodIsOverwritten',
+                                   'Classes/UseThis'));
         $this->prepareQuery();
 
         // Static Methods must use a static call to property or variable (not constant though)
@@ -47,8 +47,8 @@ class ShouldUseThis extends Analyzer {
              ->is('static', true)
              ->isNot('abstract', true)
              ->hasClassTrait()
-             ->analyzerIsNot('Classes/MethodIsOverwritten')
-             ->analyzerIsNot('Classes/UseThis');
+             ->analyzerIsNot(array('Classes/MethodIsOverwritten',
+                                   'Classes/UseThis'));
         $this->prepareQuery();
     }
 }

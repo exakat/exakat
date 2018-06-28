@@ -38,6 +38,8 @@ class Boolval extends Plugin {
 
         switch ($atom->atom) {
             case 'Staticclass' :
+            case 'Self' :
+            case 'Parent' :
                 $atom->boolean = true;
                 break;
 

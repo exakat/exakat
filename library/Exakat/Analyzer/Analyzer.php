@@ -52,7 +52,12 @@ abstract class Analyzer {
     public static $availableAtoms         = array();
     public static $availableLinks         = array();
     public static $availableFunctioncalls = array();
-    
+    private static $calledClasses         = null;
+    private static $calledInterfaces      = null;
+    private static $calledTraits          = null;
+    private static $calledNamespaces      = null;
+    private static $calledDirectives      = null;
+
     private $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerQuoted = '';
     protected $analyzerId     = 0;
@@ -91,6 +96,7 @@ abstract class Analyzer {
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable');
+    static public $VARIABLES_SCALAR = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Phpvariable');
     static public $VARIABLES_USER   = array('Variable', 'Variableobject', 'Variablearray',);
     static public $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod');
     static public $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
@@ -159,7 +165,7 @@ abstract class Analyzer {
             $data = self::$datastore->getCol('TokenCounts', 'token');
             
             self::$availableAtoms = array('Project', 'File');
-            self::$availableLinks = array('DEFINITION', 'ANALYZED');
+            self::$availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE');
 
             foreach($data as $token){
                 if ($token === strtoupper($token)) {
@@ -209,7 +215,7 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out("ANALY
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('File', 'Project') ).repeat( 
     __.in($this->linksDown)
-      .sideEffect{ if (it.get().label() in ['Function', 'Method', 'Closure']) { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Function', 'Method', 'Magicmethod', 'Closure']) { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class', 'Trait', 'Interface', 'Classanonymous']) { theClass = it.get().value('fullcode')} }
       .sideEffect{ if (it.get().label() == 'Namespace') { theNamespace = it.get().value('fullnspath')} }
        )
@@ -309,6 +315,84 @@ GREMLIN;
         return true;
     }
     
+    public function getCalledClasses() {
+        if (self::$calledClasses === null) {
+            $news = $this->query('g.V().hasLabel("New").out("NEW").not(where( __.in("DEFINITION"))).values("fullnspath")')
+                         ->toArray();
+            $staticcalls = $this->query('g.V().hasLabel("Staticconstant", "Staticmethodcall", "Staticproperty", "Instanceof", "Catch").out("CLASS").not(where( __.in("DEFINITION"))).values("fullnspath")')
+                               ->toArray();
+            $typehints = $this->query('g.V().hasLabel("Method", "Magicmethod", "Closure", "Function").out("ARGUMENT").out("TYPEHINT").not(where( __.in("DEFINITION"))).values("fullnspath")')
+                               ->toArray();
+            $returntype = $this->query('g.V().hasLabel("Method", "Magicmethod", "Closure", "Function").out("RETURNTYPE").not(where( __.in("DEFINITION"))).values("fullnspath")')
+                               ->toArray();
+            self::$calledClasses = array_unique(array_merge($staticcalls, 
+                                                            $news,
+                                                            $typehints,
+                                                            $returntype));
+        }
+        
+        return self::$calledClasses;
+    }
+    
+    public function getCalledInterfaces() {
+        if (self::$calledInterfaces === null) {
+            self::$calledInterfaces = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Interfaces/InterfaceUsage").out("ANALYZED").values("fullnspath")')
+                                           ->toArray();
+        }
+        
+        return self::$calledInterfaces;
+    }    
+
+    public function getCalledTraits() {
+        if (self::$calledTraits === null) {
+            $query = <<<GREMLIN
+g.V().hasLabel("Analyzer")
+     .has("analyzer", "Traits/TraitUsage")
+     .out("ANALYZED")
+     .values("fullnspath")
+GREMLIN;
+            self::$calledTraits = $this->query($query)
+                                       ->toArray();
+        }
+        
+        return self::$calledTraits;
+    }    
+
+    public function getCalledNamespaces() {
+        if (self::$calledNamespaces === null) {
+            $query = <<<GREMLIN
+g.V().hasLabel("Namespace")
+     .values("fullnspath")
+     .unique()
+GREMLIN;
+            self::$calledNamespaces = $this->query($query)
+                                       ->toArray();
+        }
+        
+        return self::$calledNamespaces;
+    }    
+
+    public function getCalledDirectives() {
+        if (self::$calledDirectives === null) {
+            $query = <<<GREMLIN
+g.V().hasLabel("Analysis")
+     .has("analyzer", "Php/DirectivesUsage")
+     .out("ANALYZED")
+     .out("ARGUMENT")
+     .has("rank", 0)
+     .hasLabel("String")
+     .has("noDelimiter")
+     .values("noDelimiter")
+     .unique()
+GREMLIN;
+            self::$calledDirectives = $this->query($query)
+                                            ->toArray();
+        }
+        
+        return self::$calledDirectives;
+    }    
+
+
     public function checkPhpVersion($version) {
         // this handles Any version of PHP
         if ($this->phpVersion === self::PHP_VERSION_ANY) {
@@ -541,7 +625,7 @@ GREMLIN
 
         $this->atomIs('Functioncall')
              ->raw('has("fullnspath")')
-             ->fullnspathIs(makeFullNsPath($fullnspath));
+             ->fullnspathIs(array_values($diff));
 
         return $this;
     }
@@ -598,7 +682,6 @@ GREMLIN
     }
 
     public function functionInside($fullnspath) {
-        assert($this->assertAtom($atom));
         $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").has("fullnspath", within(***))';
         $this->addMethod($gremlin, makeArray($fullnspath));
         
@@ -873,12 +956,11 @@ GREMLIN;
             return $this;
         }
         
+        $col = $caseSensitive === self::CASE_INSENSITIVE ? 'lccode' : 'code';
+        
         if ($translate === self::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
-            if ($caseSensitive === self::CASE_INSENSITIVE) {
-                $code = array_map('strtolower', $code);
-            }
             $translatedCode = $this->dictCode->translate($code, $caseSensitive === self::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
 
             if (empty($translatedCode)) {
@@ -886,9 +968,9 @@ GREMLIN;
                 return $this;
             }
 
-            $this->addMethod('filter{ it.get().value("code") in ***; }', $translatedCode);
+            $this->addMethod("filter{ it.get().value(\"$col\") in ***; }", $translatedCode);
         } else {
-            $this->addMethod('filter{ it.get().value("code") in ***; }', makeArray($code));
+            $this->addMethod("filter{ it.get().value(\"$col\") in ***; }", makeArray($code));
         }
 
         return $this;
@@ -899,10 +981,12 @@ GREMLIN;
             return $this;
         }
 
+        $col = $caseSensitive === self::CASE_INSENSITIVE ? 'lccode' : 'code';
+
         if ($translate === self::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
-            $translatedCode = $this->dictCode->translate($code);
+            $translatedCode = $this->dictCode->translate($code, $caseSensitive === self::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
 
             if (empty($translatedCode)) {
                 // Couldn't find anything in the dictionary : OK!
@@ -910,9 +994,9 @@ GREMLIN;
                 return $this;
             }
         
-            $this->addMethod('filter{ !(it.get().value("code") in ***); }', $translatedCode);
+            $this->addMethod("filter{ !(it.get().value(\"$col\") in ***); }", $translatedCode);
         } else {
-            $this->addMethod('filter{ !(it.get().value("code") in ***); }', $code);
+            $this->addMethod("filter{ !(it.get().value(\"$col\") in ***); }", makeArray($code));
         }
 
         return $this;
@@ -955,7 +1039,7 @@ GREMLIN;
 
     public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code' || $property == 'propertyname') {
+        if ($caseSensitive === self::CASE_SENSITIVE || in_array($property, array('line', 'rank', 'code', 'propertyname', 'boolean', 'count'))) {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -974,25 +1058,25 @@ GREMLIN;
 
     public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank' || $property == 'code' || $property == 'propertyname'|| $property == 'boolean') {
+        if ($caseSensitive === self::CASE_SENSITIVE || in_array($property, array('line', 'rank', 'code', 'propertyname', 'boolean', 'count'))) {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
         }
         
         if ($property === 'label') {
-            $this->addMethod('filter{ it.get().label() != '.$name.'}');
+            $this->addMethod("filter{ it.get().label() != $name }");
         } elseif ($property === 'id') {
-            $this->addMethod('filter{ it.get().id() != '.$name.'}');
+            $this->addMethod("filter{ it.get().id() != $name }");
         } else {
-            $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' != '.$name.$caseSensitive.'}');
+            $this->addMethod("filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
         }
 
         return $this;
     }
     
     public function values($property) {
-        $this->addMethod('values("'.$property.'")');
+        $this->addMethod("values(\"$property\")");
         
         return $this;
     }
@@ -1003,7 +1087,7 @@ GREMLIN;
         if (empty($sort)) {
             $sortStep = '';
         } else {
-            $sortStep = '.sort{it.value("'.$sort.'")}';
+            $sortStep = ".sort{it.value(\"$sort\")}";
         }
 
         $this->addMethod(<<<GREMLIN
@@ -1057,20 +1141,13 @@ GREMLIN
     }
 
     public function isUppercase($property = 'fullcode') {
-        assert($this->assertProperty($property));
         $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
 
         return $this;
     }
 
     public function isLowercase($property = 'fullcode') {
-        $this->addMethod('filter{it.get().value("code") == it.get().value("lccode"); }');
-
-        return $this;
-    }
-
-    public function isNotLowercase() {
-        $this->addMethod('filter{it.get().value("code") != it.get().value("lccode"); }');
+        $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase()}');
 
         return $this;
     }
@@ -1078,6 +1155,17 @@ GREMLIN
     public function isNotUppercase($property = 'fullcode') {
         assert($this->assertProperty($property));
         $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toUpperCase()}');
+
+        return $this;
+    }
+
+    public function isNotLowercase($property = 'fullcode') {
+        assert($this->assertProperty($property));
+        if ($property === 'code') {
+            $this->addMethod('filter{it.get().value("code") != it.get().value("lccode")}');
+        } else {
+            $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toLowerCase()}');
+        }
 
         return $this;
     }
@@ -1416,7 +1504,7 @@ GREMLIN
             $in = implode('', $ins);
         }
         
-        $this->addMethod('where( __'.$in.'.hasLabel(within(***)))', makeArray($parentClass));
+        $this->addMethod("where( __.$in.hasLabel(within(***)))", makeArray($parentClass));
         
         return $this;
     }
@@ -1437,7 +1525,7 @@ GREMLIN
             $in = implode('', $ins);
         }
         
-        $this->addMethod('not( where( __'.$in.'.hasLabel(within(***)) ) )', makeArray($parentClass));
+        $this->addMethod("not( where( __$in.hasLabel(within(***)) ) )", makeArray($parentClass));
         
         return $this;
     }
@@ -1453,14 +1541,14 @@ GREMLIN
                 if (empty($o)) {
                     $out[] = '.out( )';
                 } else {
-                    $out[] = ".out('$o')";
+                    $out[] = ".out(\"$o\")";
                 }
             }
             
             $out = implode('', $out);
         }
         
-        $this->addMethod('where( __'.$out.'.hasLabel(within(***)))', makeArray($childrenClass));
+        $this->addMethod("where( __.$out.hasLabel(within(***)))", makeArray($childrenClass));
         
         return $this;
     }
@@ -1977,16 +2065,10 @@ GREMLIN;
     }
     
     public function run() {
-        $a = microtime(true);
         $this->analyze();
         $this->prepareQuery();
-        $b = microtime(true);
 
         $this->execQuery();
-        $c = microtime(true);
-//        print "Prepare : ".number_format(1000*($b - $a), 2)."ms\n";
-//        print "Run : ".number_format(1000*($c - $b), 2)."ms\n";
-//        print "Analyze : ".number_format(1000*($c - $a), 2)."ms\n";
         
         return $this->rowCount;
     }
@@ -2032,7 +2114,7 @@ GREMLIN;
                 } elseif (is_string($value)) {
                     $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
                 } elseif (is_int($value)) {
-                    $query = str_replace($name, $value, $query);
+                    $query = str_replace($name, (string) $value, $query);
                 } else {
                     assert(false, 'Cannot process argument of type '.gettype($value).PHP_EOL.__METHOD__.PHP_EOL);
                 }
@@ -2076,7 +2158,7 @@ GREMLIN;
             $query = "g.V().$first.groupCount(\"processed\").by(count()).$query";
         } elseif (substr($this->methods[1], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
             $first = array_shift($this->methods); // remove first
-            $init = array_shift($this->methods); // remove second
+            array_shift($this->methods); // remove second
             $query = implode('.', $this->methods);
             $arg0 = $this->arguments['arg0'];
             $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())'
@@ -2166,7 +2248,7 @@ GREMLIN;
 
         if (!isset($cache[$fullpath])) {
             $ini = parse_ini_file($fullpath);
-            foreach($ini as $section => &$values) {
+            foreach($ini as &$values) {
                 if (isset($values[0]) && empty($values[0])) {
                     $values = '';
                 }
@@ -2220,7 +2302,7 @@ GREMLIN;
         } elseif (is_scalar($code)) {
             $code = mb_strtolower($code);
         } else {
-            assert(false, __METHOD__.' received an unprocessable object '.var_dump($code));
+            assert(false, __METHOD__.' received an unprocessable object '.gettype($code));
         }
     }
 

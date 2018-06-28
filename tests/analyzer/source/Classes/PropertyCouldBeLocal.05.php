@@ -1,8 +1,8 @@
 <?php
 
 class x {
-    static private $a = 2;
-    static private $b = 3;
+    static private $a = 1;
+    static private $b = 2;
     static private $c = 3;
     
     static function foo() {

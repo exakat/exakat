@@ -2,17 +2,17 @@
 
 $expected     = array('$put',
                       '$prt',
-                      '$put2',
                       '$prit',
-                      '$prt2',
                       '$prix',
-                      '$prit2',
-                      '$prx2',
-                      '$pux2',
                       '$prx',
-                      '$prix2',
                       '$pux',
-                     );
+                      '$prix2 = 3', 
+                      '$put2 = 1', 
+                      '$prit2 = 3', 
+                      '$prt2 = 2', 
+                      '$prx2 = 2', 
+                      '$pux2 = 1',
+                      );
 
 $expected_not = array('$stat',
                       '$stax',

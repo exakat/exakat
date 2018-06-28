@@ -26,6 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class PropertyUsedBelow extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+        
         //////////////////////////////////////////////////////////////////
         // property + $this->property
         //////////////////////////////////////////////////////////////////
@@ -35,13 +37,16 @@ class PropertyUsedBelow extends Analyzer {
              ->_as('ppp')
              ->savePropertyAs('propertyname', 'propertyname')
              ->goToClass()
-             ->raw('where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
-                             .where( __.out("METHOD").out("BLOCK")
-                                       .repeat( __.out('.$this->linksDown.')).emit(hasLabel("Member")).times('.self::MAX_LOOPING.')
-                                       .where( __.out("OBJECT").hasLabel("This"))
-                                       .out("MEMBER").has("token", "T_STRING").filter{ it.get().value("code") == propertyname}
-                              )
-                              )')
+             ->raw(<<<GREMLIN
+where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times($MAX_LOOPING)
+         .where( __.out("METHOD").out("BLOCK")
+                   .repeat( __.out({$this->linksDown})).emit(hasLabel("Member")).times($MAX_LOOPING)
+                   .where( __.out("OBJECT").hasLabel("This"))
+                   .out("MEMBER").has("token", "T_STRING").filter{ it.get().value("code") == propertyname}
+          )
+)
+GREMLIN
+)
              ->back('ppp');
         $this->prepareQuery();
 
@@ -52,15 +57,17 @@ class PropertyUsedBelow extends Analyzer {
              ->is('static', true)
              ->outIs('PPP')
              ->_as('ppp')
-             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'property')
              ->goToClass()
-             ->raw('where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
-                             .where( __.out("METHOD").out("BLOCK")
-                                       .repeat( __.out('.$this->linksDown.')).emit(hasLabel("Staticproperty")).times('.self::MAX_LOOPING.')
-                                       .out("MEMBER").has("token", "T_VARIABLE").filter{ it.get().value("code") == property}
-                              )
-                              )')
+             ->raw(<<<GREMLIN
+where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times($MAX_LOOPING)
+      .where( __.out("METHOD").out("BLOCK")
+                .repeat( __.out({$this->linksDown})).emit(hasLabel("Staticproperty")).times($MAX_LOOPING)
+                .out("MEMBER").has("token", "T_VARIABLE").filter{ it.get().value("code") == property}
+      )
+)
+GREMLIN
+)
              ->back('ppp');
         $this->prepareQuery();
         

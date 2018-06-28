@@ -32,7 +32,8 @@ g.V().hasLabel("Member")
      .not( __.where( __.out("OBJECT").hasLabel("This") ) )
      .out("MEMBER")
      .hasLabel("Name")
-     .values("code").unique()
+     .values("code")
+     .unique()
 GREMLIN;
         $publicProperties = $this->query($query)->toArray();
         
@@ -46,19 +47,21 @@ GREMLIN;
         $this->prepareQuery();
         
         // Case of property::property (that's another public access)
-        $res = $this->query('g.V().hasLabel("Staticproperty").as("init")
-                                  .out("CLASS").hasLabel("Identifier", "Nsname")
-                                  .not(hasLabel("Self", "Static")).as("classe")
-                                  .sideEffect{ fnp = it.get().value("fullnspath") }
-                                  .in("CLASS")
-                                  .where( __.repeat( __.in('.$this->linksDown.')).until(hasLabel("Class", "File"))
-                                            .or(hasLabel("File"), 
-                                                hasLabel("Class").filter{ it.get().values("fullnspath") == fnp; }) 
-                                        )
-                                  .out("MEMBER").hasLabel("Variable").as("variable")
-                                  .select("classe", "variable").by("fullnspath").by("code")
-                                  .unique();
-                                  ');
+        $res = $this->query(<<<GREMLIN
+g.V().hasLabel("Staticproperty").as("init")
+     .out("CLASS").hasLabel("Identifier", "Nsname")
+     .not(hasLabel("Self", "Static")).as("classe")
+     .sideEffect{ fnp = it.get().value("fullnspath") }
+     .in("CLASS")
+     .where( __.repeat( __.in({$this->linksDown})).until(hasLabel("Class", "File"))
+               .or(hasLabel("File"), 
+                   hasLabel("Class").filter{ it.get().values("fullnspath") == fnp; }) 
+           )
+     .out("MEMBER").hasLabel("Variable").as("variable")
+     .select("classe", "variable").by("fullnspath").by("code")
+     .unique();
+GREMLIN
+);
         
         $publicStaticProperties = array();
         foreach($res as $value) {
@@ -78,9 +81,7 @@ GREMLIN;
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')
                  ->outIs('PPP')
-                 ->outIsIE('LEFT')
-                 ->isNotHash('code', $publicStaticProperties, 'fnp')
-                 ->inIsIE('LEFT');
+                 ->isNotHash('code', $publicStaticProperties, 'fnp');
             $this->prepareQuery();
         }
     }

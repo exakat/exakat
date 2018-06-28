@@ -28,7 +28,7 @@ class RedefinedDefault extends Analyzer {
         $this->atomIs('Ppp')
              ->outIs('PPP')
              ->savePropertyAs('propertyname', 'name')
-             ->hasOut('LEFT')
+             ->hasOut('DEFAULT')
              ->_as('results')
              ->goToClass()
 

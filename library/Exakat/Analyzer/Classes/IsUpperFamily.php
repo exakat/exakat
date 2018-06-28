@@ -34,15 +34,26 @@ class IsUpperFamily extends Analyzer {
              ->inIs('CLASS')
              ->outIs('METHOD')
              ->tokenIs('T_STRING') // Avoid dynamical names
-             ->savePropertyAs('fullnspath', 'methode')
+             ->savePropertyAs('code', 'methode')
              
              ->goToClass()
-             ->raw('not( where( __.out("METHOD").hasLabel("Method").filter{ (it.get().value("fullnspath") =~ "::" + methode.replaceAll("\\\\\\\\", "\\\\\\\\\\\\\\\\") ).getCount() != 0 } ) )')
+             ->raw(<<<GREMLIN
+not( 
+    where( 
+        __.out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == methode}
+    )
+)
+GREMLIN
+             )
 
              ->goToAllParents()
-             ->atomIsNot('Interface')
-             ->raw('where( __.out("METHOD").hasLabel("Method").filter{ (it.get().value("fullnspath") =~ "::" + methode.replaceAll("\\\\\\\\", "\\\\\\\\\\\\\\\\") ).getCount() != 0 } )')
-
+             ->atomIs('Class')
+             ->raw(<<<GREMLIN
+where( 
+    __.out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == methode}
+)
+GREMLIN
+)
              ->back('first');
         $this->prepareQuery();
 

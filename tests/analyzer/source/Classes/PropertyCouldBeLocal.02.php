@@ -4,7 +4,7 @@
 class x {
     static public $a = 1;
     static protected $b = 2;
-    static private $c = 2;
+    static private $c = 3;
     
     static function a() {
         self::$a = 1;

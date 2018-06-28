@@ -64,7 +64,6 @@ class ClassUsage extends Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot(array('Array', 'Null', 'Boolean'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
