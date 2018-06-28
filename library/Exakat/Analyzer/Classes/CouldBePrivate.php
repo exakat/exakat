@@ -98,7 +98,7 @@ GREMLIN;
                  ->outIs('PPP')
                  ->analyzerIsNot('Classes/PropertyUsedBelow')
                  ->_as('results')
-                 ->codeIsNot(array_keys($calls), self::NO_TRANSLATE)
+                 ->codeIsNot(array_keys($calls), self::NO_TRANSLATE, self::CASE_SENSITIVE)
                  ->savePropertyAs('code', 'variable')
                  ->goToClass()
                  ->isNotHash('fullnspath', $calls, 'variable')

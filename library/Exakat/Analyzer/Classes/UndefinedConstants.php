@@ -32,11 +32,9 @@ class UndefinedConstants extends Analyzer {
     }
     
     public function analyze() {
+        // A::Undefined
         $this->atomIs('Staticconstant')
-             ->analyzerIsNot('Classes/DefinedConstants')
-             ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
-             ->inIs('CLASS');
+             ->analyzerIsNot('Classes/DefinedConstants');
         $this->prepareQuery();
     }
 }

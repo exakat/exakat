@@ -27,47 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedLabel extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        $noGotoUsage = <<<GREMLIN
-not( where( __.out("BLOCK").repeat( __.out({$this->linksDown}) ).emit( ).times( $MAX_LOOPING )
-              .hasLabel("Goto").out("GOTO")
-              .filter{ it.get().value("code") == name} ) 
-    )
-GREMLIN;
         // inside functions
         $this->atomIs('Gotolabel')
-             ->outIs('GOTOLABEL')
-             ->savePropertyAs('code', 'name')
-             ->goToFunction()
-             ->raw($noGotoUsage)
-             ->back('first');
+             ->hasNoOut('DEFINITION');
         $this->prepareQuery();
-
-        // inside namespaces are not processed here.
-
-        // in the global space
-        $query = <<<GREMLIN
-g.V().hasLabel("Goto").out("GOTO")
-      .not( where( repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File")).emit()
-                    .hasLabel("Function", "Method", "Closure", "Magicmethod") ) )
-      .values("code")
-      .unique();
-GREMLIN;
-        $globalLabels = $this->query($query);
-        $globalLabels = $globalLabels->toArray();
-
-        if (empty($globalLabels)) {
-            return;
-        }
-        
-        $this->atomIs('Gotolabel')
-             ->outIs('GOTOLABEL')
-             ->savePropertyAs('code', 'name')
-             ->hasNoFunction()
-             ->codeIsNot($globalLabels, self::NO_TRANSLATE)
-             ->back('first');
-        $this->prepareQuery();
-
     }
 }
 

@@ -31,8 +31,8 @@ class UpperCaseKeyword extends Analyzer {
                             'Try', 'Catch', 'Case', 'Default', 'Goto', 'Continue', 'Const', 'Break',
                             'Clone', 'Dowhile', 'While', 'Interface', 'Instanceof', 'Insteadof', 'Return',
                             'Throw', 'Trait', 'Interface', 'Var', 'Logical', 'Static',))
-             ->codeIsNot(array('&&', '||', '^', '&', '|'))
-             ->isNotLowercase();
+             ->codeIsNot(array('&&', '||', '^', '&', '|'), self::TRANSLATE, self::CASE_SENSITIVE)
+             ->isNotLowercase('code');
         $this->prepareQuery();
         
         // some of the keywords are lost anyway : implements, extends, as in foreach(), endforeach/while/for/* are lost in tokenizer (may be keep track of that)

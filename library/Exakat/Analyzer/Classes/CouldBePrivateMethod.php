@@ -42,7 +42,7 @@ g.V().hasLabel("Methodcall")
      .not( where( __.out("OBJECT").hasLabel("This")) )
      .out("METHOD")
      .hasLabel("Methodcallname")
-     .values("code")
+     .values("lccode")
      .unique()
 GREMLIN;
         $publicMethods = $this->query($query)
@@ -73,7 +73,7 @@ g.V().hasLabel("Staticmethodcall")
      .sideEffect{ name = it.get().value("code"); }
      .as("method")
      .repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until( hasLabel("Class", "File") )
-     .select("classe", "method").by("fullnspath").by("code")
+     .select("classe", "method").by("fullnspath").by("lccode")
      .unique()
 GREMLIN;
         $publicStaticMethods = $this->query($query)
