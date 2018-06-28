@@ -1692,7 +1692,7 @@ class Load extends Tasks {
         --$this->id;
 
         $nsname->code     = implode('\\', $fullcode);
-        $nsname->fullcode = implode('\\', $fullcode);
+        $nsname->fullcode = $nsname->code;
         $nsname->line     = $this->tokens[$current][2];
         $this->runPlugins($nsname);
         

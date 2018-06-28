@@ -979,7 +979,7 @@ HTML;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $theTable[] = '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>";
             }
-            $theTable = array_join(PHP_EOL, $theTable);
+            $theTable = implode(PHP_EOL, $theTable);
 
             $html = $this->getBasedPage('inventories');
             $html = $this->injectBloc($html, 'TITLE', $theTitle);
@@ -995,7 +995,7 @@ HTML;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $alteredDirectives[] = '<tr><td>'.PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>";
         }
-        $alteredDirectives = array_join(PHP_EOL, $alteredDirectives);
+        $alteredDirectives = implode(PHP_EOL, $alteredDirectives);
 
         $html = $this->getBasedPage('altered_directives');
         $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);

@@ -68,7 +68,7 @@ class ProjectConfig extends Config {
                               );
     
     public function __construct($projects_root) {
-        $this->projects_root = $projects_root.'/projects/';
+        $this->projects_root = "$projects_root/projects/";
     }
     
     public function setProject($project) {
@@ -88,7 +88,7 @@ class ProjectConfig extends Config {
         $pathToCache = "{$this->projects_root}{$project}/config.cache";
         if (file_exists($pathToCache)) {
             $iniCache = parse_ini_file($pathToCache);
-            if ($iniCache !== null) {
+            if ($iniCache !== false) {
                 $this->config = array_merge($this->config,
                                             $iniCache);
             }
@@ -202,7 +202,7 @@ $custom_configs
 
 INI;
 
-        file_put_contents($this->projects_root.$this->project.'/config.ini', $configIni);    
+        file_put_contents("{$this->projects_root}{$this->project}/config.ini", $configIni);
     }
 }
 

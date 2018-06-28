@@ -134,9 +134,7 @@ class CommandLine extends Config {
             if ($id !== false) {
                 // git is default, so it should be unset if another is set
                 if (in_array($config, $vcsList)) {
-                    foreach($vcsList as $vcs) {
-                        $this->config[$vcs] = false;
-                    }
+                    $this->config = array_fill_keys($vcsList, false);
                 }
                 $this->config[$config] = true;
 

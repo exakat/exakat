@@ -323,16 +323,11 @@ SQL;
 
     public function getSuggestionThema($thema) {
         $list = $this->listAllThemes();
-        $r = array();
-        foreach($list as $c) {
-            $l = levenshtein($c, $thema);
 
-            if ($l < 8) {
-                $r[] = $c;
-            }
-        }
-        
-        return $r;
+        return array_filter($list, function($c) {
+            $l = levenshtein($c, $thema);
+            return $l < 8;
+        });
     }
     
     public function getSuggestionClass($name) {
@@ -354,7 +349,7 @@ SQL;
             }
             return self::$instanciated[$analyzer];
         } else {
-            display( 'No such class as "' . $name . '"'.PHP_EOL);
+            display("No such class as '$name'");
             return null;
         }
     }
