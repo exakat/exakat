@@ -58,7 +58,7 @@ g.V().hasLabel("Staticmethodcall").as("init")
                    hasLabel("Class", "Classanonymous").filter{ it.get().values("fullnspath") == fnp; }) 
            )
      .out("METHOD").hasLabel("Methodcallname").as("method")
-     .select("classe", "method").by("fullnspath").by("code")
+     .select("classe", "method").by("fullnspath").by("lccode")
      .unique();
 GREMLIN
 )->toArray();
@@ -81,7 +81,7 @@ GREMLIN
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')
                  ->outIs('NAME')
-                 ->isNotHash('code', $publicStaticMethods, 'fnp')
+                 ->isNotHash('lccode', $publicStaticMethods, 'fnp')
                  ->back('first');
             $this->prepareQuery();
         }
