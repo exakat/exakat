@@ -71,9 +71,10 @@ class Upgrade extends Tasks {
                     return;
                 }
 
-                file_put_contents('exakat.1.phar', $phar);
+                $path = sys_get_temp_dir().'/exakat.1.phar';
+                file_put_contents($path, $phar);
                 print 'Setting up exakat.phar'.PHP_EOL;
-                rename('exakat.1.phar', 'exakat.phar');
+                rename($path, 'exakat.phar');
                 return;
             } else {
                 print '  You may run this command with -u option to upgrade to the latest exakat version.'.PHP_EOL;
