@@ -2250,6 +2250,7 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncall);
 
+        $this->runPlugins($functioncall);
         if ( $functioncall->atom === 'Methodcallname') {
             // Nothing, really. in case of A::b()()
         } elseif ( !$this->isContext(self::CONTEXT_NOSEQUENCE) &&
@@ -2259,7 +2260,6 @@ class Load extends Tasks {
         } else {
             $functioncall = $this->processFCOA($functioncall);
         }
-        $this->runPlugins($functioncall);
 
         return $functioncall;
     }
@@ -3293,7 +3293,7 @@ class Load extends Tasks {
                                                                   ));
             $argumentsFullcode = $functioncall->fullcode;
             if (mb_strtolower($this->tokens[$current][1]) === 'die') {
-                $argumentsFullcode = '('.$argumentsFullcode.')';
+                $argumentsFullcode = "'($argumentsFullcode)";
             } else {
                 --$this->id;
             }
@@ -3340,13 +3340,13 @@ class Load extends Tasks {
                 // This is a T_LIST !
                 $array->token      = 'T_OPEN_BRACKET';
                 $array->fullnspath = '\list';
-                $array->fullcode  = '['.$argumentsFullcode.']';
+                $array->fullcode  = "[$argumentsFullcode]";
             } else {
                 $array = $this->processArguments('Arrayliteral', array($this->phptokens::T_CLOSE_BRACKET));
                 $argumentsFullcode = $array->fullcode;
 
                 $array->token = 'T_OPEN_BRACKET';
-                $array->fullcode  = '['.$argumentsFullcode.']';
+                $array->fullcode  = "[$argumentsFullcode]";
             }
         }
 
