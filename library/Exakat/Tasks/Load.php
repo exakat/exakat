@@ -2259,6 +2259,7 @@ class Load extends Tasks {
         } else {
             $functioncall = $this->processFCOA($functioncall);
         }
+        $this->runPlugins($functioncall);
 
         return $functioncall;
     }
