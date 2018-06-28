@@ -45,14 +45,6 @@ class Diplomat extends Ambassador {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
 
-    private $inventories = array('constants'  => 'Constants',
-                                 'classes'    => 'Classes',
-                                 'interfaces' => 'Interfaces',
-                                 'functions'  => 'Functions',
-                                 'traits'     => 'Traits',
-                                 'namespaces' => 'Namespaces',
-                                 );
-
     private $compatibilities = array('53' => 'Compatibility PHP 5.3',
                                      '54' => 'Compatibility PHP 5.4',
                                      '55' => 'Compatibility PHP 5.5',

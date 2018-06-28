@@ -42,7 +42,7 @@ class UsedPrivateMethod extends Analyzer {
              ->is('visibility','private')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
-             ->hasChildren(array('Static', 'Self'));
+             ->inIs('NAME');
         $this->prepareQuery();
 
         // method used in a normal methodcall with $this $this->b()
@@ -54,9 +54,11 @@ class UsedPrivateMethod extends Analyzer {
              ->inIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->atomInsideNoDefinition('Methodcall')
-             ->hasChildren('This', 'OBJECT')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
+             ->inIs('METHOD')
+             ->outIsIE('OBJECT')
+             ->atomIs('This')
              ->back('first');
         $this->prepareQuery();
 

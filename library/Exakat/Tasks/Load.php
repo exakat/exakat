@@ -2865,7 +2865,7 @@ class Load extends Tasks {
 
         while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
             $this->processNext();
-        };
+        }
         ++$this->id; // skip )
         $condition = $this->popExpression();
         $this->addLink($dowhile, $condition, 'CONDITION');

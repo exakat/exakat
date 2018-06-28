@@ -35,12 +35,6 @@ class GSNeo4j extends Graph {
     const CHECKED = true;
     const UNCHECKED = false;
     
-    private $client = null;
-    
-    private $scriptDir  = '';
-    private $neo4j_host = '';
-    private $neo4j_auth = '';
-    
     private $status     = self::UNCHECKED;
     
     private $db         = null;

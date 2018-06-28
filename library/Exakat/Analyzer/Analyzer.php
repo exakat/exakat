@@ -1499,7 +1499,7 @@ GREMLIN
             $in = implode('', $ins);
         }
         
-        $this->addMethod('where( __'.$in.'.hasLabel(within(***)))', makeArray($parentClass));
+        $this->addMethod("where( __.$in.hasLabel(within(***)))", makeArray($parentClass));
         
         return $this;
     }
@@ -1520,7 +1520,7 @@ GREMLIN
             $in = implode('', $ins);
         }
         
-        $this->addMethod('not( where( __'.$in.'.hasLabel(within(***)) ) )', makeArray($parentClass));
+        $this->addMethod("not( where( __$in.hasLabel(within(***)) ) )", makeArray($parentClass));
         
         return $this;
     }
@@ -1536,14 +1536,14 @@ GREMLIN
                 if (empty($o)) {
                     $out[] = '.out( )';
                 } else {
-                    $out[] = ".out('$o')";
+                    $out[] = ".out(\"$o\")";
                 }
             }
             
             $out = implode('', $out);
         }
         
-        $this->addMethod('where( __'.$out.'.hasLabel(within(***)))', makeArray($childrenClass));
+        $this->addMethod("where( __.$out.hasLabel(within(***)))", makeArray($childrenClass));
         
         return $this;
     }
