@@ -50,7 +50,7 @@ class Globals extends Analyzer {
         // implicit global
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
         $this->atomIs(array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition'))
-             ->codeIsNot($superglobals)
+             ->codeIsNot($superglobals, self::TRANSLATE, self::CASE_SENSITIVE)
              ->hasNoClassInterfaceTrait()
              ->hasNoFunction(self::$FUNCTIONS_ALL);
         $this->prepareQuery();

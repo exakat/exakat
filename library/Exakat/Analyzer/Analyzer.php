@@ -994,9 +994,9 @@ GREMLIN;
                 return $this;
             }
         
-            $this->addMethod("filter{ it.get().value(\"$col\") in ***; }", $translatedCode);
+            $this->addMethod("filter{ !(it.get().value(\"$col\") in ***); }", $translatedCode);
         } else {
-            $this->addMethod("filter{ it.get().value(\"$col\") in ***; }", makeArray($code));
+            $this->addMethod("filter{ !(it.get().value(\"$col\") in ***); }", makeArray($code));
         }
 
         return $this;
