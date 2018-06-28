@@ -1160,7 +1160,12 @@ GREMLIN
     }
 
     public function isNotLowercase($property = 'fullcode') {
-        $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toLowerCase()}');
+        assert($this->assertProperty($property));
+        if ($property === 'code') {
+            $this->addMethod('filter{it.get().value("code") != it.get().value("lccode")}');
+        } else {
+            $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toLowerCase()}');
+        }
 
         return $this;
     }
