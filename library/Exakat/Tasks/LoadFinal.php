@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy â€“ Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy Ð Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -60,6 +60,7 @@ class LoadFinal extends Tasks {
         $this->spotFallbackConstants();
         
         $this->setConstantDefinition();
+        $this->setParentDefinition();
 
         $this->propagateConstants();
 
@@ -331,6 +332,21 @@ GREMLIN;
         }
     }
 
+    private function setParentDefinition() {
+        display('Set parent definitions');
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Parent").as('parent')
+     .repeat( __.in($this->linksIn) ).emit().until(hasLabel("Class", "Classanonymous")).hasLabel("Class", "Classanonymous")
+     .out("EXTENDS").in("DEFINITION")
+     .addE("DEFINITION")
+     .to("parent")
+     .count()
+
+GREMLIN;
+        $this->gremlin->query($query);
+    }
+    
     private function setConstantDefinition() {
         display('Set constant definitions');
 
