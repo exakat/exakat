@@ -29,10 +29,10 @@ class CouldBeProtectedMethod extends Analyzer {
         // Case of property->property (that's another public access)
         $query = <<<GREMLIN
 g.V().hasLabel("Methodcall")
-     .not( __.where( __.out("OBJECT").hasLabel("This") ) )
+     .not( __.where( __.repeat( __.out("OBJECT")).emit().hasLabel("This") ) )
      .out("METHOD")
      .hasLabel("Methodcallname")
-     .values("code")
+     .values("lccode")
      .unique()
 GREMLIN;
         $publicMethods = $this->query($query)->toArray();
@@ -46,8 +46,8 @@ GREMLIN;
              ->codeIsNot($publicMethods, self::NO_TRANSLATE)
              ->back('first');
         $this->prepareQuery();
-        
-        // Case of property::property (that's another public access)
+
+        // Case of class::methodcall (that's another public access)
         $publicUsage = $this->query(<<<GREMLIN
 g.V().hasLabel("Staticmethodcall").as("init")
      .out("CLASS").hasLabel("Identifier", "Nsname").as("classe")
