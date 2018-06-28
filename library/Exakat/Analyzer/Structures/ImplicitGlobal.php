@@ -47,7 +47,7 @@ GREMLIN;
              ->hasFunction()
              ->outIs('GLOBAL')
              ->tokenIs('T_VARIABLE')
-             ->codeIsNot($explicitGlobal, self::NO_TRANSLATE);
+             ->codeIsNot($explicitGlobal, self::NO_TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }

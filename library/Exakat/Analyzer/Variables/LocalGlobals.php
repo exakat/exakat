@@ -39,7 +39,7 @@ class LocalGlobals extends Analyzer {
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->atomInsideNoDefinition('Variable')
              ->analyzerIsNot('Variables/Globals')
-             ->codeIs($globals, self::NO_TRANSLATE);
+             ->codeIs($globals, self::NO_TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }
