@@ -26,6 +26,8 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class ReservedNames extends Analyzer {
+    protected $reservedNames = '';
+    protected $allowedNames = '';
 
     public function analyze() {
         $phpNames = $this->loadIni('php_keywords.ini', 'keyword');

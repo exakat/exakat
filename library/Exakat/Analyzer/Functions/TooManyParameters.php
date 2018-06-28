@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class TooManyParameters extends Analyzer {
+    protected $parametersCount = 8;
+    
     // function foo($a1, $a2, $a3, $a4, $a5, $a6, $a7, $a8, $a9, $a10 ) {}
     public function analyze() {
         $this->atomIs(array('Method', 'Function', 'Closure'))

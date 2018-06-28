@@ -141,6 +141,8 @@ abstract class Analyzer {
             $this->description = new Description($this->getName($this->analyzer), $config->dir_root);
             $parameters = $this->description->getParameters();
             foreach($parameters as $parameter) {
+                assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");
+ 
                 if (isset($this->config->{$this->analyzerQuoted}[$parameter['name']])) {
                     $this->{$parameter['name']} = $this->config->{$this->analyzerQuoted}[$parameter['name']];
                 } else {
@@ -2378,10 +2380,10 @@ GREMLIN;
 
     private function assertToken($token) {
         if (is_string($token)) {
-            assert($token === strtoupper($token) && substr($token, 0, 2) === 'T_', 'Wrong token : '.$token);
+            assert($token === strtoupper($token) && substr($token, 0, 2) === 'T_', "Wrong token : '$token'");
         } else {
             foreach($token as $t) {
-                assert($t === strtoupper($t) && substr($t, 0, 2) === 'T_', 'Wrong token : '.$t);
+                assert($t === strtoupper($t) && substr($t, 0, 2) === 'T_', "Wrong token : '$t'");
             }
         }
         return true;
@@ -2402,13 +2404,13 @@ GREMLIN;
 
     private function assertProperty($property) {
         if (is_string($property)) {
-            assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') || ($property === 'label') , 'Wrong format for property name : "'.$property.'"');
-            assert(property_exists('Exakat\Tasks\Helpers\Atom', $property)|| ($property === 'label'), 'No such property in Atom : "'.$property.'"');
+            assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
+            assert(property_exists('Exakat\Tasks\Helpers\Atom', $property) || ($property === 'label'), 'No such property in Atom : "'.$property.'"');
         } else {
             $properties = $property;
             foreach($properties as $property) {
-                assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') || ($property === 'label') , 'Wrong format for property name : "'.$property.'"');
-                assert(property_exists('Exakat\Tasks\Helpers\Atom', $property)|| ($property === 'label'), 'No such property in Atom : "'.$property.'"');
+                assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter'), "Wrong format for property name : '$property'");
+                assert(property_exists('Exakat\Tasks\Helpers\Atom', $property) || ($property === 'label'), "No such property in Atom : '$property'");
             }
         }
         return true;
