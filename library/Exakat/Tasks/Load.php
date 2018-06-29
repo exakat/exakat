@@ -2250,7 +2250,6 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncall);
 
-        $this->runPlugins($functioncall);
         if ( $functioncall->atom === 'Methodcallname') {
             // Nothing, really. in case of A::b()()
         } elseif ( !$this->isContext(self::CONTEXT_NOSEQUENCE) &&
@@ -3293,7 +3292,7 @@ class Load extends Tasks {
                                                                   ));
             $argumentsFullcode = $functioncall->fullcode;
             if (mb_strtolower($this->tokens[$current][1]) === 'die') {
-                $argumentsFullcode = "'($argumentsFullcode)";
+                $argumentsFullcode = "($argumentsFullcode)";
             } else {
                 --$this->id;
             }
