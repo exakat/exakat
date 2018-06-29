@@ -728,7 +728,7 @@ GREMLIN
 
         $gremlin = <<<GREMLIN
 not(
-    where( __.emit( ).repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) )
+    where( __.repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) ).emit( )
                      .times($MAX_LOOPING)
                      .hasLabel(within(***)) 
           )
