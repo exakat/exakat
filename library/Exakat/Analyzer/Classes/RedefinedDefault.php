@@ -54,7 +54,7 @@ class RedefinedDefault extends Analyzer {
              ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('MEMBER')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              
              // sameParameterAs
              ->back('results');
