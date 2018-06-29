@@ -30,8 +30,7 @@ class Codacy extends Reports {
     const FILE_FILENAME  = 'stdout';
 
     public function dependsOnAnalysis() {
-        return array('Codacy',
-                     );
+        return array();
     }
 
     public function _generate($analyzerList) {
