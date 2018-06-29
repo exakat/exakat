@@ -1,7 +1,7 @@
 <?php
 
 class definedClassA extends definedClassC {
-    private $definedProperty;
+    private   $definedPrivateProperty;
     protected $definedProtectedProperty;
     public    $definedPublicProperty;
 }
