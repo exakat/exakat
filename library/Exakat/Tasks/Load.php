@@ -2257,6 +2257,7 @@ class Load extends Tasks {
              $getFullnspath === self::WITH_FULLNSPATH ) {
             $this->processSemicolon();
         } else {
+            $this->runPlugins($functioncall, array());
             $functioncall = $this->processFCOA($functioncall);
         }
 
