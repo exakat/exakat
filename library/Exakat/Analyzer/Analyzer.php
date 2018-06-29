@@ -724,9 +724,16 @@ GREMLIN
 
     public function noAtomInside($atom) {
         assert($this->assertAtom($atom));
+        $MAX_LOOPING = self::MAX_LOOPING;
 
-        $gremlin = 'not(where( __.repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) ).emit( )
-                          .times('.self::MAX_LOOPING.').hasLabel(within(***)) ) )';
+        $gremlin = <<<GREMLIN
+not(
+    where( __.emit( ).repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) )
+                     .times($MAX_LOOPING)
+                     .hasLabel(within(***)) 
+          )
+)
+GREMLIN;
         $this->addMethod($gremlin, makeArray($atom));
         
         return $this;
@@ -1041,17 +1048,22 @@ GREMLIN;
 
     public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || in_array($property, array('line', 'rank', 'code', 'propertyname', 'boolean', 'count'))) {
-            $caseSensitive = '';
-        } else {
-            $caseSensitive = '.toLowerCase()';
-        }
 
         if ($property === 'label') {
             $this->addMethod('filter{ it.get().label() == '.$name.'}');
         } elseif ($property === 'id') {
             $this->addMethod('filter{ it.get().id() == '.$name.'}');
+        } elseif ($property === 'code' || $property === 'lccode') {
+            if ($caseSensitive === self::CASE_SENSITIVE) {
+                $this->addMethod('filter{ it.get().value("code") == '.$name.'}');
+            } else {
+                $this->addMethod('filter{ it.get().value("lccode") == '.$name.'}');
+            }
+        } elseif (in_array($property, array('line', 'rank', 'propertyname', 'boolean', 'count'))) {
+            $this->addMethod('filter{ it.get().value("'.$property.'") == '.$name.'}');
         } else {
+            $caseSensitive = $caseSensitive === self::CASE_SENSITIVE ? '' : '.toLowerCase()';
+
             $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' == '.$name.$caseSensitive.'}');
         }
 
@@ -1506,7 +1518,7 @@ GREMLIN
             $in = implode('', $ins);
         }
         
-        $this->addMethod("where( __.$in.hasLabel(within(***)))", makeArray($parentClass));
+        $this->addMethod("where( __$in.hasLabel(within(***)))", makeArray($parentClass));
         
         return $this;
     }
@@ -1550,7 +1562,7 @@ GREMLIN
             $out = implode('', $out);
         }
         
-        $this->addMethod("where( __.$out.hasLabel(within(***)))", makeArray($childrenClass));
+        $this->addMethod("where( __$out.hasLabel(within(***)) )", makeArray($childrenClass));
         
         return $this;
     }
