@@ -210,7 +210,9 @@ g.V().hasLabel("Functioncall")
      .cap('m')
 GREMLIN;
         $fixed = $this->gremlin->query($query)->toArray()[0];
-        $this->datastore->addRow('functioncalls', $fixed);
+        if (!empty($fixed)) {
+            $this->datastore->addRow('functioncalls', $fixed);
+        }
     }
 
     private function runQuery($query, $title, $args = array()) {
