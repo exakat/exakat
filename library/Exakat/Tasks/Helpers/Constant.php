@@ -108,7 +108,8 @@ class Constant extends Plugin {
             case 'Functioncall' :
                 if (in_array($atom->fullnspath, $this->deterministFunctions)) {
                     if (isset($extras[0])) {
-                        $atom->constant  = $extras[0]->constant;
+                        $constants = array_column($extras, 'constant');
+                        $atom->constant = array_reduce($constants, function ($carry, $item) { return $carry && $item; }, true);
                     } else {
                         $atom->constant  = Load::CONSTANT_EXPRESSION;
                     }
