@@ -205,12 +205,12 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
-     .not(where( __.in("DEFINITION")))
-     .values("fullnspath")
-     .unique()
+     .groupCount('m')
+     .by("fullnspath")
+     .cap('m')
 GREMLIN;
-        $fixed = $this->gremlin->query($query)->toArray();
-        $this->datastore->addRow('functioncalls', array_flip($fixed));
+        $fixed = $this->gremlin->query($query)->toArray()[0];
+        $this->datastore->addRow('functioncalls', $fixed);
     }
 
     private function runQuery($query, $title, $args = array()) {
