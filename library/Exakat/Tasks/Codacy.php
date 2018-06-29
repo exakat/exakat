@@ -44,7 +44,6 @@ class Codacy extends Tasks {
             $error->filename = ".codacy.json";
             $error->message  = $this->config->codacy_error;
 
-            print json_encode($error);
             return;
         }
         
@@ -54,6 +53,8 @@ class Codacy extends Tasks {
             $analyze->run();
             unset($analyze);
         } else {
+            $this->datastore->cleanTable('files');
+            $this->datastore->cleanTable('analyzed');
             $this->datastore->addRow('files',
                                       array_map(function ($a) { return array('file'   => "/$a");}, $this->config->codacy_files));
         }
@@ -77,33 +78,54 @@ class Codacy extends Tasks {
         if ($this->config->codacy_analyzers === 'all') {
             $args[] = '-T';
             $args[] = 'Codacy';
+
+            try {
+                $analyzeConfig = new Config($args);
+    
+                $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
+                $analyze->run();
+            } catch (Exception $e) {
+                
+            }
+            unset($analyze);
+
+            $args = array ( 1 => 'dump',
+                            2 => '-p',
+                            3 => $this->config->project,
+                            4 => '-T',
+                            5 => 'Codacy',
+                        );
+            $dumpConfig = new Config($args);
+            $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
+            $dump->run();
+            unset($dump);
         } else {
             foreach($this->config->codacy_analyzers as $analyzer) {
                 $args[] = '-P';
                 $args[] = $analyzer;
+
+                try {
+                    $analyzeConfig = new Config($args);
+        
+                    $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
+                    $analyze->run();
+                } catch (Exception $e) {
+                    
+                }
+                unset($analyze);
+    
+                $args = array ( 1 => 'dump',
+                                2 => '-p',
+                                3 => $this->config->project,
+                                4 => '-P',
+                                5 => $analyzer,
+                            );
+                $dumpConfig = new Config($args);
+                $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
+                $dump->run();
+                unset($dump);
             }
         }
-        
-        try {
-            $analyzeConfig = new Config($args);
-
-            $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
-            $analyze->run();
-        } catch (Exception $e) {
-        
-        }
-        unset($analyze);
-
-        $args = array ( 1 => 'dump',
-                        2 => '-p',
-                        3 => $this->config->project,
-                        4 => '-T',
-                        5 => 'Codacy',
-                    );
-        $dumpConfig = new Config($args);
-        $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
-        $dump->run();
-        unset($dump);
 
         $report = new Report($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $report->run();
