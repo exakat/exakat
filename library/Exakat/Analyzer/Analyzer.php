@@ -1227,20 +1227,6 @@ GREMLIN
         return $this;
     }
     
-    public function goToStaticConstantDefinition() {
-        $this->outIs('CONSTANT')
-             ->savePropertyAs('code', 'constant')
-             ->inIs('CONSTANT')
-             ->outIs('CLASS')
-             ->inIs('DEFINITION')
-             ->outIs('CONST')
-             ->outIs('CONST')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'constant')
-             ->inIs('NAME');
-        return $this;
-    }
-
     public function groupCount($column) {
         $this->addMethod("groupCount(m){it.$column}");
         

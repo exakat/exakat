@@ -28,18 +28,20 @@ class ChildRemoveTypehint extends Analyzer {
     protected $phpVersion = '7.2+';
     
     public function analyze() {
+        // class a { function foo(B $B){}}
+        // class aa extends a { function foo($B){}}
         $this->atomIs('Method')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->outIs('TYPEHINT')
              ->back('first')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->goToClass()
              ->goToAllChildren(self::EXCLUDE_SELF)
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')

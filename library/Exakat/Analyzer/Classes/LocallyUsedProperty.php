@@ -39,7 +39,7 @@ class LocallyUsedProperty extends Analyzer {
              ->atomInsideNoDefinition('Member')
              ->outIs('MEMBER')
              ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
              ->back('ppp');
         $this->prepareQuery();
 
@@ -55,7 +55,7 @@ class LocallyUsedProperty extends Analyzer {
              ->atomInsideNoDefinition('Staticproperty')
              ->outIs('MEMBER')
              ->outIsIE(array('VARIABLE', 'APPEND'))
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
              ->back('ppp');
         $this->prepareQuery();
     }

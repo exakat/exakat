@@ -26,17 +26,19 @@ use Exakat\Analyzer\Analyzer;
 
 class ImplementedMethodsArePublic extends Analyzer {
     public function analyze() {
+        // interface i { function foo() {} }
+        // class x implements i { private function foo() {} }
         $this->atomIs('Method')
              ->is('visibility', array('private', 'protected'))
              ->hasClass()
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->goToClass()
              ->goToAllImplements()
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }
