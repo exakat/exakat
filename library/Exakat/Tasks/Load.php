@@ -1375,7 +1375,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
                 // Process arguments
                 ++$this->id; // Skip arguments
-                $class = $this->processArguments('Classanonymous');
+                $class = $this->processArguments('Classanonymous', array(), $argumentsList);
                 $argumentFullcode = $class->fullcode;
             } else {
                 $class = $this->addAtom('Classanonymous');
@@ -1596,7 +1596,7 @@ class Load extends Tasks {
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
-        $functioncall = $this->processArguments('Echo', array($this->phptokens::T_SEMICOLON, $this->phptokens::T_CLOSE_TAG, $this->phptokens::T_END));
+        $functioncall = $this->processArguments('Echo', array($this->phptokens::T_SEMICOLON, $this->phptokens::T_CLOSE_TAG, $this->phptokens::T_END),  array(), $argumentsList);
         $argumentsFullcode = $functioncall->fullcode;
 
         if ($noSequence === false) {
@@ -1928,7 +1928,7 @@ class Load extends Tasks {
         return $arguments;
     }
 
-    private function processArguments($atom, $finals = array()) {
+    private function processArguments($atom, $finals = array(), &$argumentsList) {
         if (empty($finals)) {
             $finals = array($this->phptokens::T_CLOSE_PARENTHESIS);
         }
@@ -1958,7 +1958,8 @@ class Load extends Tasks {
             $arguments->count    = 0;
             $argumentsId[]       = $void;
 
-            $this->runPlugins($arguments, array($void));
+            $argumentsList = array($void);
+            $this->runPlugins($arguments, $argumentsList);
 
             ++$this->id;
         } else {
@@ -2209,7 +2210,7 @@ class Load extends Tasks {
             $atom = 'Methodcallname';
         }
 
-        $functioncall = $this->processArguments($atom, array($this->phptokens::T_CLOSE_PARENTHESIS));
+        $functioncall = $this->processArguments($atom, array($this->phptokens::T_CLOSE_PARENTHESIS), $argumentsList);
         $argumentsFullcode       = $functioncall->fullcode;
         $arguments               = $functioncall;
 
@@ -2257,7 +2258,7 @@ class Load extends Tasks {
              $getFullnspath === self::WITH_FULLNSPATH ) {
             $this->processSemicolon();
         } else {
-            $this->runPlugins($functioncall, array());
+            $this->runPlugins($functioncall, $argumentsList);
             $functioncall = $this->processFCOA($functioncall);
         }
 
@@ -3290,7 +3291,7 @@ class Load extends Tasks {
                                                                   $this->phptokens::T_CLOSE_CURLY,
                                                                   $this->phptokens::T_COLON,
                                                                   $this->phptokens::T_END,
-                                                                  ));
+                                                                  ),  $argumentsList);
             $argumentsFullcode = $functioncall->fullcode;
             if (mb_strtolower($this->tokens[$current][1]) === 'die') {
                 $argumentsFullcode = "($argumentsFullcode)";
@@ -3317,7 +3318,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$current][0] === $this->phptokens::T_ARRAY) {
             ++$this->id; // Skipping the name, set on (
-            $array = $this->processArguments('Arrayliteral');
+            $array = $this->processArguments('Arrayliteral', array(), $argumentsList);
             $argumentsFullcode = $array->fullcode;
             $array->token    = 'T_ARRAY';
             $array->fullcode = $this->tokens[$current][1].'('.$argumentsFullcode.')';
@@ -3334,7 +3335,7 @@ class Load extends Tasks {
             }
 
             if ($this->tokens[$id + 1][0] === $this->phptokens::T_EQUAL) {
-                $array = $this->processArguments('List', array($this->phptokens::T_CLOSE_BRACKET));
+                $array = $this->processArguments('List', array($this->phptokens::T_CLOSE_BRACKET), $argumentsList);
                 $argumentsFullcode = $array->fullcode;
     
                 // This is a T_LIST !
@@ -3342,7 +3343,7 @@ class Load extends Tasks {
                 $array->fullnspath = '\list';
                 $array->fullcode  = "[$argumentsFullcode]";
             } else {
-                $array = $this->processArguments('Arrayliteral', array($this->phptokens::T_CLOSE_BRACKET));
+                $array = $this->processArguments('Arrayliteral', array($this->phptokens::T_CLOSE_BRACKET), $argumentsList);
                 $argumentsFullcode = $array->fullcode;
 
                 $array->token = 'T_OPEN_BRACKET';
@@ -4918,7 +4919,7 @@ class Load extends Tasks {
         
         $atom = ucfirst(mb_strtolower($this->tokens[$current][1]));
         ++$this->id;
-        $functioncall = $this->processArguments($atom);
+        $functioncall = $this->processArguments($atom, array(), $argumentsList);
 
         $argumentsFullcode = $functioncall->fullcode;
         
@@ -4944,7 +4945,7 @@ class Load extends Tasks {
         $functioncall = $this->processArguments('Echo', array($this->phptokens::T_SEMICOLON,
                                                               $this->phptokens::T_CLOSE_TAG,
                                                               $this->phptokens::T_END,
-                                                             ));
+                                                             ), $argumentsList);
         $argumentsFullcode = $functioncall->fullcode;
         
         $functioncall->code       = $this->tokens[$current][1];
