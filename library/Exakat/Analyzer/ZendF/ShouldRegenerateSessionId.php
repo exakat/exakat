@@ -43,10 +43,10 @@ class ShouldRegenerateSessionId extends Analyzer {
         $sessionsList = makeList($sessions);
         $sessionsList = str_replace('$', '\\$', $sessionsList);
         $regenerateid = $this->query('g.V().hasLabel("Methodcall")
-                                           .where( __.out("METHOD").filter{it.get().value("fullnspath") == "regenerateid"} )
+                                           .where( __.out("METHOD").filter{it.get().value("fullnspath") == "\\\\regenerateid"} )
                                            .where( __.out("OBJECT").has("fullcode", within('.$sessionsList.')) )
                                            .count()');
-                                           
+
         if ($regenerateid->toString() !== "0") {
             return;
         }

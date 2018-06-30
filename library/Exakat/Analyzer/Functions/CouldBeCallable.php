@@ -43,7 +43,7 @@ class CouldBeCallable extends Analyzer {
                  ->atomInsideNoDefinition('Functioncall')
                  ->functioncallIs($functions)
                  ->outWithRank('ARGUMENT', $rank)
-                 ->samePropertyAs('code', 'argument')
+                 ->samePropertyAs('code', 'argument', self::CASE_SENSITIVE)
                  ->back('first');
             $this->prepareQuery();
         }
@@ -60,7 +60,7 @@ class CouldBeCallable extends Analyzer {
              ->atomInsideNoDefinition('Functioncall')
              ->outIs('NAME')
              ->atomIs('Variable')
-             ->samePropertyAs('code', 'argument')
+             ->samePropertyAs('code', 'argument', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

@@ -43,7 +43,9 @@ class CouldBeClassConstant extends Analyzer {
              ->outIs('PPP')
              ->analyzerIsNot('Classes/LocallyUnusedProperty')
 
-             ->hasOut('DEFAULT')
+             ->outIs('DEFAULT')
+             ->atomIsNot(array('Null', 'Staticconstant'))
+             ->inIs('DEFAULT')
              
              // Ignore null or static expressions in definitions.
              ->raw('not(where( __.out("RIGHT").hasLabel("Null", "Staticconstant") ) )')

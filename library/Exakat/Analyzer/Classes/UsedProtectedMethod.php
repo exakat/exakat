@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy â€“ Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy Ð Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -42,7 +42,7 @@ class UsedProtectedMethod extends Analyzer {
              ->atomInsideNoDefinition('Staticmethodcall')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
-             ->samePropertyAs('lccode', 'name', self::CASE_SENSITIVE)
+             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
              ->back('method');
         $this->prepareQuery();
 
@@ -64,7 +64,7 @@ class UsedProtectedMethod extends Analyzer {
              ->inIs('OBJECT')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
-             ->samePropertyAs('lccode', 'name', self::CASE_SENSITIVE)
+             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
              ->back('method');
         $this->prepareQuery();
     }
