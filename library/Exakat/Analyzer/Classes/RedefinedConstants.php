@@ -40,7 +40,7 @@ class RedefinedConstants extends Analyzer {
              ->atomIs('Const')
              ->outIs('CONST')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'constante')
+             ->samePropertyAs('code', 'constante', self::CASE_SENSITIVE)
              ->back('results');
         $this->prepareQuery();
     }

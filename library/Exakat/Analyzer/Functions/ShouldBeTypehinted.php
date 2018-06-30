@@ -36,7 +36,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Member')
              ->outIs('OBJECT')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -49,7 +49,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Methodcall')
              ->outIs('OBJECT')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -63,7 +63,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->atomInsideNoDefinition('Array')
              ->hasNoChildren('Integer', 'INDEX') // attempt to avoid strings
              ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -76,7 +76,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Arrayappend')
              ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -90,7 +90,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->atomInsideNoDefinition('Functioncall')
              ->tokenIs('T_OPEN_BRACKET')
              ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -104,7 +104,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->atomInsideNoDefinition('Functioncall')
              ->tokenIs('T_VARIABLE')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

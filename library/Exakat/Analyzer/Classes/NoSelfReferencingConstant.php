@@ -65,7 +65,7 @@ class NoSelfReferencingConstant extends Analyzer {
              ->inIs('CLASS')
 
              ->outIs('CONSTANT')
-             ->samePropertyAs('code', 'constante')
+             ->samePropertyAs('code', 'constante', self::CASE_SENSITIVE)
 
              ->back('results');
         $this->prepareQuery();

@@ -30,7 +30,7 @@ class IncompatibleSignature extends Analyzer {
         // non-matching reference
         $this->atomIs('Method')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
@@ -40,7 +40,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToAllParents()
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
@@ -51,7 +51,7 @@ class IncompatibleSignature extends Analyzer {
         // non-matching argument count
         $this->atomIs('Method')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
              ->savePropertyAs('count', 'count')
              ->goToClass()
@@ -59,7 +59,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToAllParents()
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->notSamePropertyAs('count', 'count')
              ->back('first');
@@ -68,7 +68,7 @@ class IncompatibleSignature extends Analyzer {
         // non-matching typehint
         $this->atomIs('Method')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
@@ -78,7 +78,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToAllParents()
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
@@ -89,7 +89,7 @@ class IncompatibleSignature extends Analyzer {
         // non-matching return typehint
         $this->atomIs('Method')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
              ->raw('sideEffect{ if (it.get().vertices(OUT, "RETURNTYPE").any()) { typehint = it.get().vertices(OUT, "RETURNTYPE").next().value("fullnspath");} else { typehint = false; }}')
              ->goToClass()
@@ -97,7 +97,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToAllParents()
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->raw('filter{ if (it.get().vertices(OUT, "RETURNTYPE").any()) { typehint != it.get().vertices(OUT, "RETURNTYPE").next().value("fullnspath");} else { typehint != false; }}')
              ->back('first');
@@ -106,7 +106,7 @@ class IncompatibleSignature extends Analyzer {
         // non-matching nullable
         $this->atomIs('Method')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
@@ -127,7 +127,7 @@ class IncompatibleSignature extends Analyzer {
         // non-matching return nullable
         $this->atomIs('Method')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
              ->raw('sideEffect{ if (it.get().vertices(OUT, "NULLABLE").any()) { nullable = it.get().vertices(OUT, "NULLABLE").next().value("fullnspath");} else { nullable = false; }}')
              ->goToClass()
@@ -135,7 +135,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToAllParents()
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->raw('filter{ if (it.get().vertices(OUT, "NULLABLE").any()) { nullable != it.get().vertices(OUT, "NULLABLE").next().value("fullnspath");} else { nullable != false; }}')
              ->back('first');
@@ -144,7 +144,7 @@ class IncompatibleSignature extends Analyzer {
         // non-matching visibility
         $this->atomIs('Method')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
              ->raw('sideEffect{ if (it.get().properties("visibility").any()) { v = it.get().value("visibility");} else { v = false; }}')
              ->goToClass()
@@ -152,7 +152,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToAllParents()
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
              ->raw(<<<GREMLIN
 filter{ 

@@ -38,7 +38,7 @@ class RaisedAccessLevel extends Analyzer {
              ->atomIs('Ppp')
              ->is('visibility', 'private')
              ->outIs('PPP')
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
              ->back('results');
         $this->prepareQuery();
 
@@ -54,7 +54,7 @@ class RaisedAccessLevel extends Analyzer {
              ->atomIs('Ppp')
              ->is('visibility', 'protected')
              ->outIs('PPP')
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
              ->back('results');
         $this->prepareQuery();
 
@@ -70,7 +70,7 @@ class RaisedAccessLevel extends Analyzer {
              ->atomIs('Method')
              ->is('visibility', 'private')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
              ->back('results');
         $this->prepareQuery();
 
@@ -86,7 +86,7 @@ class RaisedAccessLevel extends Analyzer {
              ->atomIs('Method')
              ->is('visibility', 'protected')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
              ->back('results');
         $this->prepareQuery();
 
@@ -104,7 +104,7 @@ class RaisedAccessLevel extends Analyzer {
              ->is('visibility', array('private', 'protected'))
              ->outIs('CONST')
              ->outIsIE('NAME')
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
              ->inIs('NAME');
         $this->prepareQuery();
 
@@ -122,7 +122,7 @@ class RaisedAccessLevel extends Analyzer {
              ->is('visibility', 'private')
              ->outIs('CONST')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'property')
+             ->samePropertyAs('code', 'property', self::CASE_SENSITIVE)
              ->inIs('NAME');
         $this->prepareQuery();
     }

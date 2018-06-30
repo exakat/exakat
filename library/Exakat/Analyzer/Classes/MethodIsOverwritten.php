@@ -31,14 +31,14 @@ class MethodIsOverwritten extends Analyzer {
     public function analyze() {
         $this->atomIs('Method')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'methodname')
+             ->savePropertyAs('lccode', 'methodname')
              ->inIs('NAME')
              ->inIs('METHOD')
              ->goToAllChildren(self::EXCLUDE_SELF)
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'methodname')
+             ->samePropertyAs('code', 'methodname', self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

@@ -40,7 +40,7 @@ class UnsetInForeach extends Analyzer {
              ->atomInsideNoDefinition('Unset')
              ->outIs('ARGUMENT')
              ->outIsIE(array('VARIABLE', 'OBJECT'))
-             ->samePropertyAs('code', 'blind')
+             ->samePropertyAs('code', 'blind', self::CASE_SENSITIVE)
              ->inIsIE(array('VARIABLE', 'OBJECT'))
              ->atomIsNot(array('Member', 'Array'))
              ->back('first');
@@ -57,7 +57,7 @@ class UnsetInForeach extends Analyzer {
              ->atomInsideNoDefinition('Unset')
              ->outIs('ARGUMENT')
              ->outIsIE(array('VARIABLE', 'OBJECT'))
-             ->samePropertyAs('code', 'blind')
+             ->samePropertyAs('code', 'blind', self::CASE_SENSITIVE)
              ->inIsIE(array('VARIABLE', 'OBJECT'))
              ->atomIsNot('Member')
              ->back('first');
@@ -78,7 +78,7 @@ class UnsetInForeach extends Analyzer {
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
              ->outIsIE(array('VARIABLE', 'OBJECT'))
-             ->samePropertyAs('code', 'blind')
+             ->samePropertyAs('code', 'blind', self::CASE_SENSITIVE)
              ->inIsIE(array('VARIABLE', 'OBJECT'))
              ->atomIsNot(array('Member', 'Array'))
              ->back('first');
@@ -96,7 +96,7 @@ class UnsetInForeach extends Analyzer {
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
              ->outIsIE(array('VARIABLE', 'OBJECT'))
-             ->samePropertyAs('code', 'blind')
+             ->samePropertyAs('code', 'blind', self::CASE_SENSITIVE)
              ->inIsIE(array('VARIABLE', 'OBJECT'))
              ->atomIsNot('Member')
              ->back('first');

@@ -32,9 +32,7 @@ class DefinedParentMP extends Analyzer {
     }
     
     public function analyze() {
-        $isComposerClass = 'where( __.has("analyzer", "Composer/IsComposerNsname") )';
-        $isPhpClass = 'where( __.has("analyzer", "Classes/IsExtClass") )';
-        
+        // Only one level of trait ATM
         // parent::method()
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
@@ -48,7 +46,28 @@ class DefinedParentMP extends Analyzer {
              ->atomIs('Method')
              ->isNot('visibility', 'private')
              ->outIs('NAME')
-             ->samePropertyAs('lccode', 'name')
+             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
+             ->back('first');
+        $this->prepareQuery();
+
+        // Only one level of trait ATM
+        // parent::method() (in Trait)
+        $this->atomIs('Staticmethodcall')
+             ->outIs('METHOD')
+             ->savePropertyAs('lccode', 'name')
+             ->inIs('METHOD')
+             ->outIs('CLASS')
+             ->atomIs('Parent')
+             ->classDefinition()
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('USE')
+             ->outIs('USE')
+             ->inIs('DEFINITION')
+             ->outIs('METHOD')
+             ->atomIs('Method')
+             ->isNot('visibility', 'private')
+             ->outIs('NAME')
+             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -90,6 +109,28 @@ class DefinedParentMP extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // parent::$property (defined in Trait)
+        $this->atomIs('Staticproperty')
+             ->outIs('MEMBER')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'name')
+             ->inIs('MEMBER')
+             ->outIs('CLASS')
+             ->atomIs('Parent')
+             ->classDefinition()
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('USE')
+             ->outIs('USE')
+             ->inIs('DEFINITION')
+             ->atomIs('Trait')
+             ->outIs('PPP')
+             ->atomIs('Ppp')
+             ->isNot('visibility', 'private')
+             ->outIs('PPP')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+             ->back('first');
+        $this->prepareQuery();
+
         // handle composer case
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
@@ -106,21 +147,6 @@ class DefinedParentMP extends Analyzer {
              ->classDefinition()
              ->goToAllParents(self::INCLUDE_SELF)
              ->analyzerIs('Classes/IsExtClass')
-             ->back('first');
-        $this->prepareQuery();
-        
-        // defined in traits (via use)
-        $this->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToTraits()
-             ->outIs('METHOD')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
              ->back('first');
         $this->prepareQuery();
     }

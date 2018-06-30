@@ -43,7 +43,7 @@ class Arguments extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Variable')
-             ->samePropertyAs('code', 'arg');
+             ->samePropertyAs('code', 'arg', self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }
