@@ -1596,7 +1596,12 @@ class Load extends Tasks {
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
-        $functioncall = $this->processArguments('Echo', array($this->phptokens::T_SEMICOLON, $this->phptokens::T_CLOSE_TAG, $this->phptokens::T_END),  array(), $argumentsList);
+        $functioncall = $this->processArguments('Echo', 
+                                                array($this->phptokens::T_SEMICOLON, 
+                                                      $this->phptokens::T_CLOSE_TAG, 
+                                                      $this->phptokens::T_END,
+                                                      ),
+                                                $argumentsList);
         $argumentsFullcode = $functioncall->fullcode;
 
         if ($noSequence === false) {
@@ -3284,14 +3289,16 @@ class Load extends Tasks {
                 ++$this->id;
             }
         
-            $functioncall = $this->processArguments('Exit', array($this->phptokens::T_SEMICOLON,
-                                                                  $this->phptokens::T_CLOSE_TAG,
-                                                                  $this->phptokens::T_CLOSE_PARENTHESIS,
-                                                                  $this->phptokens::T_CLOSE_BRACKET,
-                                                                  $this->phptokens::T_CLOSE_CURLY,
-                                                                  $this->phptokens::T_COLON,
-                                                                  $this->phptokens::T_END,
-                                                                  ),  $argumentsList);
+            $functioncall = $this->processArguments('Exit', 
+                                                    array($this->phptokens::T_SEMICOLON,
+                                                          $this->phptokens::T_CLOSE_TAG,
+                                                          $this->phptokens::T_CLOSE_PARENTHESIS,
+                                                          $this->phptokens::T_CLOSE_BRACKET,
+                                                          $this->phptokens::T_CLOSE_CURLY,
+                                                          $this->phptokens::T_COLON,
+                                                          $this->phptokens::T_END,
+                                                          ),  
+                                                    $argumentsList);
             $argumentsFullcode = $functioncall->fullcode;
             if (mb_strtolower($this->tokens[$current][1]) === 'die') {
                 $argumentsFullcode = "($argumentsFullcode)";
@@ -4942,10 +4949,12 @@ class Load extends Tasks {
     private function processEcho() {
         $current = $this->id;
         
-        $functioncall = $this->processArguments('Echo', array($this->phptokens::T_SEMICOLON,
-                                                              $this->phptokens::T_CLOSE_TAG,
-                                                              $this->phptokens::T_END,
-                                                             ), $argumentsList);
+        $functioncall = $this->processArguments('Echo', 
+                                                array($this->phptokens::T_SEMICOLON,
+                                                      $this->phptokens::T_CLOSE_TAG,
+                                                      $this->phptokens::T_END,
+                                                     ), 
+                                                $argumentsList);
         $argumentsFullcode = $functioncall->fullcode;
         
         $functioncall->code       = $this->tokens[$current][1];
