@@ -112,6 +112,10 @@ class Intval extends Plugin {
                 $atom->intval    = (int) (bool) $atom->count;
                 break;
 
+            case 'Constant' :
+                $atom->intval    = $extras['VALUE']->intval;
+                break;
+
             case 'Not' :
                 if ($atom->code === '!') {
                     $atom->intval = !$extras['NOT']->intval;

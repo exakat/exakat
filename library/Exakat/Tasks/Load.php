@@ -2110,6 +2110,9 @@ class Load extends Tasks {
             $def->rank     = ++$rank;
 
             $fullcode[] = $def->fullcode;
+            $this->runPlugins($def, array('VALUE' => $value,
+                                          'NAME'  => $name,
+                                          ));
 
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'const');
             $name->fullnspath = $fullnspath;

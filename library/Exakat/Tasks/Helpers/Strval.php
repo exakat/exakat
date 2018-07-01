@@ -62,19 +62,18 @@ class Strval extends Plugin {
             case 'Heredoc' :
                 $atom->noDelimiter = (string) trimOnce($atom->code);
                 break;
-    
+
+            case 'Constant' :
+                $atom->noDelimiter = $extras['VALUE']->noDelimiter;
+                break;
+
             case 'Boolean' :
                 $atom->noDelimiter = (string) (mb_strtolower($atom->code) === 'true');
                 break;
     
             case 'Null' :
             case 'Void' :
-            case 'Nsname' : 
                 $atom->noDelimiter = '';
-                break;
-
-            case 'Identifier' :
-                $atom->noDelimiter = (string) $atom->code;
                 break;
 
             case 'Staticclass' :
