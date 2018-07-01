@@ -134,7 +134,7 @@ class CommandLine extends Config {
             if ($id !== false) {
                 // git is default, so it should be unset if another is set
                 if (in_array($config, $vcsList)) {
-                    $this->config = array_fill_keys($vcsList, false);
+                    $this->config = $this->config + array_fill_keys($vcsList, false);
                 }
                 $this->config[$config] = true;
 
@@ -231,7 +231,7 @@ class CommandLine extends Config {
 
             $this->config['project']   = 'codacy';
         }
-        
+
         return true;
     }
 }
