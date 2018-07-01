@@ -135,7 +135,7 @@ class Initproject extends Tasks {
         } elseif ($this->config->tgz === true) {
             $vcs = 'tgz';
             $projectName = basename($repositoryURL);
-            $projectName = str_replace(array('.tbz', '.tar.bz2'), '', $projectName);
+            $projectName = str_replace(array('.tgz', '.tar.gz'), '', $projectName);
         } elseif ($this->config->composer === true) {
             $vcs = 'composer';
             $projectName = str_replace('/', '_', $repositoryURL);
