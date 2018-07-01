@@ -69,7 +69,12 @@ class Strval extends Plugin {
     
             case 'Null' :
             case 'Void' :
+            case 'Nsname' : 
                 $atom->noDelimiter = '';
+                break;
+
+            case 'Identifier' :
+                $atom->noDelimiter = (string) $atom->code;
                 break;
 
             case 'Staticclass' :

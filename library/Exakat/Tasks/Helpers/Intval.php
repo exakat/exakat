@@ -72,6 +72,8 @@ class Intval extends Plugin {
                 break;
     
             case 'Staticclass' :
+            case 'Identifier' :
+            case 'Nsname' :
             case 'Self' :
             case 'Parent' :
             case 'Null' :
