@@ -4530,9 +4530,10 @@ class Load extends Tasks {
         if (is_string($right) && mb_strtolower($right) === 'class') {
             $static = $this->addAtom('Staticclass');
             $links = 'CLASS';
-            $fullcode = $left->fullcode.'::'.$right;
+            $fullcode = "$left->fullcode::$right";
+            // We are not sending $left, as it has no impact 
             $this->runPlugins($left);
-            $this->runPlugins($static, array('CLASS'    => $left));
+            $this->runPlugins($static, array('CLASS' => $left));
             // This should actually be the value of any USE statement
             if (isset($this->uses['class'][mb_strtolower($left->fullcode)])) {
                 $noDelimiter = $this->uses['class'][mb_strtolower($left->fullcode)]->fullcode;
@@ -4574,11 +4575,11 @@ class Load extends Tasks {
 
         if (!empty($left->fullnspath)){
             if ($static->atom === 'Staticmethodcall' && !empty($right->fullnspath)) {
-                $this->calls->addCall('staticmethod',  $left->fullnspath.'::'.$right->fullnspath, $static);
+                $this->calls->addCall('staticmethod',  "$left->fullnspath::$right->fullnspath", $static);
             } elseif ($static->atom === 'Staticconstant') {
-                $this->calls->addCall('staticconstant',  $left->fullnspath.'::'.$right->code, $static);
+                $this->calls->addCall('staticconstant',  "$left->fullnspath::$right->code", $static);
             } elseif ($static->atom === 'Staticproperty') {
-                $this->calls->addCall('staticproperty',  $left->fullnspath.'::'.$right->code, $static);
+                $this->calls->addCall('staticproperty',  "$left->fullnspath::$right->code", $static);
             }
         }
 
