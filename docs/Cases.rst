@@ -1003,6 +1003,49 @@ SugarCRM uses exceptions to fill work in progress. Here, we recognize a forgotte
             throw Exception("Not Implemented");
         }
 
+Use Instanceof
+==============
+
+.. _teampass-classes-useinstanceof:
+
+TeamPass
+^^^^^^^^
+
+:ref:`use-instanceof`, in /includes/libraries/Database/Meekrodb/db.class.php:506. 
+
+In this code, is_object() and instanceof have the same basic : they both check that $ts is an object. In fact, instanceof is more precise, and give more information about the variable. 
+
+.. code-block:: php
+
+    protected function parseTS($ts) {
+        if (is_string($ts)) return date('Y-m-d H:i:s', strtotime($ts));
+        else if (is_object($ts) && ($ts instanceof DateTime)) return $ts->format('Y-m-d H:i:s');
+      }
+
+
+--------
+
+
+.. _zencart-classes-useinstanceof:
+
+Zencart
+^^^^^^^
+
+:ref:`use-instanceof`, in /includes/modules/payment/firstdata_hco.php:104. 
+
+In this code, is_object() is used to check the status of the order. Possibly, $order is false or null in case of incompatible status. Yet, when $object is an object, and in particular being a global that may be assigned anywhere else in the code, it seems that the method 'update_status' is magically always available. Here, using instance of to make sure that $order is an 'paypal' class, or a 'storepickup' or any of the payment class.  
+
+.. code-block:: php
+
+    function __construct() {
+        global $order;
+    
+        // more lines, no mention of $order
+        if (is_object($order)) $this->update_status();
+    
+        // more code
+    }
+
 Cast To Boolean
 ===============
 
@@ -1127,6 +1170,29 @@ Default development behavior : display the caught exception. Production behavior
     
                 return;
             }
+
+Bail Out Early
+==============
+
+.. _zencart-structures-bailoutearly:
+
+Zencart
+^^^^^^^
+
+:ref:`bail-out-early`, in /includes/modules/payment/firstdata_hco.php:104. 
+
+In this code, is_object() is used to check the status of the order. Possibly, $order is false or null in case of incompatible status. Yet, when $object is an object, and in particular being a global that may be assigned anywhere else in the code, it seems that the method 'update_status' is magically always available. Here, using instance of to make sure that $order is an 'paypal' class, or a 'storepickup' or any of the payment class.  
+
+.. code-block:: php
+
+    function __construct() {
+        global $order;
+    
+        // more lines, no mention of $order
+        if (is_object($order)) $this->update_status();
+    
+        // more code
+    }
 
 Too Many Local Variables
 ========================
@@ -1538,7 +1604,7 @@ Rethrown Exceptions
 
 .. _prestashop-exceptions-rethrown:
 
-Prestashop
+PrestaShop
 ^^^^^^^^^^
 
 :ref:`rethrown-exceptions`, in classes/webservice/WebserviceOutputBuilder.php:731. 

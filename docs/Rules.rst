@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 18 Jun 2018 16:12:12 +0000
-.. comment: Generation hash : 06f5bb2a0a944e2a1c2bb4a4cd55d9113a6d614d
+.. comment: Generation date : Mon, 02 Jul 2018 09:57:11 +0000
+.. comment: Generation hash : 4d325fa7857b0bf062bf8b5a5ef9ed940bf3bf85
 
 
 .. _$http\_raw\_post\_data:
@@ -302,6 +302,44 @@ See also `Error Control Operators <http://php.net/manual/en/language.operators.e
 +------------+---------------------------------------------------------------------------------------+
 | ClearPHP   | `no-noscream <https://github.com/dseguy/clearPHP/tree/master/rules/no-noscream.md>`__ |
 +------------+---------------------------------------------------------------------------------------+
+
+
+
+.. _abstract-or-implements:
+
+Abstract Or Implements
+######################
+
+
+A class must implements all abstract methods of it parent, or be abstract too. 
+
+While PHP lints this code, it won't execute it and stop with a Fatal Error : `Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A::aFoo)`.
+
+.. code-block:: php
+
+   <?php
+   
+   abstract class Foo { 
+       abstract function FooBar();
+   }
+   
+   // This is in another file : php -l would detect it right away
+   
+   class FooFoo extends Foo { 
+       // The method is not defined. 
+       // The class must be abstract, just like Foo
+   }
+   
+   ?>
+
+
+See also `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_.
+
++------------+------------------------------+
+| Short name | Classes/AbstractOrImplements |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -857,6 +895,46 @@ Try to keep the static-ness of methods simple, and unique. Consider renaming the
 +------------+-------------------------+
 | Themes     | :ref:`Analyze`          |
 +------------+-------------------------+
+
+
+
+.. _ambiguous-visibilities:
+
+Ambiguous Visibilities
+######################
+
+
+The properties have the same name, but have different visibilities, across different classes. 
+
+While it is legit to have a property with the same name in different classes, it may easily lead to confusion. As soon as the context is need to understand if the property is accessible or not, the readability suffers.
+
+It is recommended to handle the same properties in the same way across classes, even when the classes are not related. 
+
+.. code-block:: php
+
+   <?php
+   
+   class person {
+       public $name;
+       private $address;
+   }
+   
+   class gangster {
+       private $name;
+       public $nickname;
+       private $address;
+   }
+   
+   $someone = Human::load(123);
+   echo 'Hello, '.$someone->name;
+   
+   ?>
+
++------------+-------------------------------+
+| Short name | Classes/AmbiguousVisibilities |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -1793,13 +1871,28 @@ This works with the `'break <http://php.net/manual/en/control-structures.break.p
        return $a;
    }
    
+   // Make a return early, and make the condition clearly visible.
+   function foo3($a) {
+       if ($a < 0) {
+           $a++;
+           methodcall();
+           functioncall();
+       } 
+   }
+   
    ?>
 
-+------------+-------------------------+
-| Short name | Structures/BailOutEarly |
-+------------+-------------------------+
-| Themes     | :ref:`Analyze`          |
-+------------+-------------------------+
+
+See also `Avoid nesting too deeply and return early (part 1) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-1>`_ and 
+         `Avoid nesting too deeply and return early (part 2) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-2>`_.
+
++------------+----------------------------------------+
+| Short name | Structures/BailOutEarly                |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`                         |
++------------+----------------------------------------+
+| Examples   | :ref:`zencart-structures-bailoutearly` |
++------------+----------------------------------------+
 
 
 
@@ -2451,6 +2544,41 @@ In a separate file :
 +------------+----------------------------------------------+
 | Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
 +------------+----------------------------------------------+
+
+
+
+.. _can't-throw-throwable:
+
+Can't Throw Throwable
+#####################
+
+
+Classes extending `'Throwable <http://php.net/manual/fr/class.throwable.php>`_ can't be thrown. Same for interfaces. 
+
+Although this code lints, PHP throws a Fatal error when executing or including it : `Class fooThrowable cannot implement interface `'Throwable <http://php.net/manual/fr/class.throwable.php>`_, extend Exception or Error instead`.
+
+.. code-block:: php
+
+   <?php
+   
+   // This is the way to go
+   class fooException extends \Exception { }
+   
+   // This is not possible and a lot of work
+   class fooThrowable implements \throwable { }
+   
+   ?>
+
+
+See also `Throwable <http://php.net/manual/en/class.throwable.php>`_,
+         `Exception <http://php.net/manual/en/class.exception.php>`_ and
+         `Error <http://php.net/manual/en/class.error.php>`.
+
++------------+----------------------+
+| Short name | Exceptions/CantThrow |
++------------+----------------------+
+| Themes     | :ref:`Analyze`       |
++------------+----------------------+
 
 
 
@@ -5015,6 +5143,39 @@ When the value has to be prepared before usage, then save the filtered value in 
 
 
 
+.. _dont-mix-++:
+
+Dont Mix ++
+###########
+
+
+++ operators have two distincts behaviors, and should be used in isolation.
+
+When mixed with a larger expression, it is difficult to read, and may lead to unwanted behaviors.
+
+.. code-block:: php
+
+   <?php
+   
+       // Clear and defined behavior
+       $i++;
+       $a[$i] = $i;
+   
+       // $i is modified twice 
+       $i = --$i + 1; 
+   ?>
+
+
+See also `EXP30-C. Do not depend on the order of evaluation for side effects <https://wiki.sei.cmu.edu/confluence/display/c/EXP30-C.+Do+not+depend+on+the+order+of+evaluation+for+side+effects>`_.
+
++------------+----------------------------+
+| Short name | Structures/DontMixPlusPlus |
++------------+----------------------------+
+| Themes     | :ref:`Analyze`             |
++------------+----------------------------+
+
+
+
 .. _double-assignation:
 
 Double Assignation
@@ -6366,11 +6527,11 @@ Previously, it was compulsory to extract the data from the blind array :
        }
    ?>
 
-+------------+--------------------------------------------------------------------------+
-| Short name | Structures/ForeachWithList                                               |
-+------------+--------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`Suggestions` |
-+------------+--------------------------------------------------------------------------+
++------------+------------------------------------------------------+
+| Short name | Structures/ForeachWithList                           |
++------------+------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++------------+------------------------------------------------------+
 
 
 
@@ -6930,42 +7091,91 @@ Hash Algorithms Incompatible With PHP 5.3
 #########################################
 
 
-List of hash algorithms incompatible with PHP 5.3. They were introduced in newer version, and, as such, are not available with older versions.
-
-fnv132, fnv164 and joaat were added in PHP 5.4.
+List of hash algorithms incompatible with PHP 5.3.
 
 .. code-block:: php
 
    <?php
    
-   // Valid in PHP 5.4 +
-   hash('joaat', 'string');
+   // Compatible only with 5.3 and more recent
+   echo hash('md2', 'The quick brown fox jumped over the lazy dog.');
    
-   // Valid in PHP all versions
-   hash('crc32', 'string');
+   // Always compatible
+   echo hash('ripemd320', 'The quick brown fox jumped over the lazy dog.');
    
    ?>
 
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Php/HashAlgos53                                                                                                                                                  |
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+See also `hash_algos <http://php.net/hash_algos>`_.
+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/HashAlgos53                                                                                                                                                                                                        |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
-.. _hash-algorithms-incompatible-with-php-5.4/5:
+.. _hash-algorithms-incompatible-with-php-5.4/5.5:
 
-Hash Algorithms Incompatible With PHP 5.4/5
-###########################################
+Hash Algorithms Incompatible With PHP 5.4/5.5
+#############################################
 
 
-List of hash algorithms incompatible with PHP 5.4 and 5.5. They were introduced in newer version, or removed in PHP 5.4. As such, they are not available with older versions.
+List of hash algorithms incompatible with PHP 5.4 and 5.5.
+
+.. code-block:: php
+
+   <?php
+   
+   // Compatible only with 5.4 and more recent
+   echo hash('fnv132', 'The quick brown fox jumped over the lazy dog.');
+   
+   // Always compatible
+   echo hash('ripemd320', 'The quick brown fox jumped over the lazy dog.');
+   
+   ?>
+
+
+See also `hash_algos <http://php.net/hash_algos>`_.
+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/HashAlgos54                                                                                                                                                                             |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _hash-algorithms-incompatible-with-php-7.1-:
+
+Hash Algorithms Incompatible With PHP 7.1-
+##########################################
+
+
+List of hash algorithms incompatible with PHP 7.1 and more recent. At the moment of writing, this is compatible up to 7.3. 
+
+The hash algorithms were introduced in PHP 7.1. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Compatible only with 7.1 and more recent
+   echo hash('sha512/224', 'The quick brown fox jumped over the lazy dog.');
+   
+   // Always compatible
+   echo hash('ripemd320', 'The quick brown fox jumped over the lazy dog.');
+   
+   ?>
+
+
+See also `hash_algos <http://php.net/hash_algos>`_.
 
 +------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Php/HashAlgos54                                                                                                                       |
+| Short name | Php/HashAlgos71                                                                                                                       |
 +------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -7614,6 +7824,22 @@ Inclusion should follow exactly the case of included files and path. This preven
 +------------+--------------------------+
 | Themes     | :ref:`Analyze`           |
 +------------+--------------------------+
+
+
+
+.. _incompatible-signature-methods:
+
+Incompatible Signature Methods
+##############################
+
+
+
+
++------------+-------------------------------+
+| Short name | Classes/IncompatibleSignature |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -11983,7 +12209,9 @@ Usual convention is to write PHP keywords (like as, foreach, switch, case, `'bre
    ?>
 
 
-PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing compulsory here. Although, it will look strange to many.
+PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing compulsory here. Although, it will look strange to many. 
+
+Some keywords are missing from this analysis : `extends`, `implements`, `as`. This is due to the internal engine, which doesn't keep track of them in its AST representation.
 
 +------------+------------------------------------------------+
 | Short name | Php/UpperCaseKeyword                           |
@@ -16686,9 +16914,11 @@ It looks like the following loops are static : the same code is executed each ti
    ?>
 
 
-It is possible to create loops that don't use any blind variables, though this is fairly rare. In particular, calling a method may update an internal pointer, like `'next() <http://www.php.net/next>`_ or SimpleXMLIterator::next. 
+It is possible to create loops that don't use any blind variables, though this is fairly rare. In particular, calling a method may update an internal pointer, like `'next() <http://www.php.net/next>`_ or SimpleXMLIterator::`'next() <http://www.php.net/next>`_. 
 
 It is recommended to turn a static loop into an expression that avoid the loop. For example, replacing the sum of all integers by the function $n * ($n + 1) / 2, or using `'array_sum() <http://www.php.net/array_sum>`_.
+
+This analysis doesn't detect usage of variables with `compact`.
 
 +------------+-----------------------+
 | Short name | Structures/StaticLoop |
@@ -20362,7 +20592,7 @@ Use Instanceof
 ##############
 
 
-The `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is a faster alternative to `'is_object() <http://www.php.net/is_object>`_. 
+The `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is a more precise alternative to `'is_object() <http://www.php.net/is_object>`_. It is also faster.
 
 `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ checks for an variable to be of a class or its parents or the interfaces it implements. 
 Once `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ has been used, the actual attributes available (properties, constants, methods) are known, unlike with `'is_object() <http://www.php.net/is_object>`_.
@@ -20407,11 +20637,13 @@ The `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operat
 See also `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_ and 
          `is_object <http://php.net/manual/en/function.is-object.php>`_.
 
-+------------+--------------------------------+
-| Short name | Classes/UseInstanceof          |
-+------------+--------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Analyze` |
-+------------+--------------------------------+
++------------+-----------------------------------------------------------------------------+
+| Short name | Classes/UseInstanceof                                                       |
++------------+-----------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Analyze`                                              |
++------------+-----------------------------------------------------------------------------+
+| Examples   | :ref:`teampass-classes-useinstanceof`, :ref:`zencart-classes-useinstanceof` |
++------------+-----------------------------------------------------------------------------+
 
 
 
@@ -23696,6 +23928,40 @@ See also `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv
 +------------+----------------------------------------+
 | Themes     | :ref:`CompatibilityPHP70`              |
 +------------+----------------------------------------+
+
+
+
+.. _move\_uploaded\_file-instead-of-copy:
+
+move_uploaded_file Instead Of copy
+##################################
+
+
+Always use `'move_uploaded_file() <http://www.php.net/move_uploaded_file>`_ with uploaded files. Avoid using copy or rename with uploaded file. 
+
+`'move_uploaded_file() <http://www.php.net/move_uploaded_file>`_ checks to ensure that the file designated by filename is a valid upload file (meaning that it was uploaded via PHP's HTTP POST upload mechanism).
+
+.. code-block:: php
+
+   <?php
+   
+       // $a->file was filled with $_FILES at some point
+       move_uploaded_file($a->file['tmp_name'], $target);
+   
+       // $a->file was filled with $_FILES at some point
+       rename($a->file['tmp_name'], $target);
+   
+   ?>
+
+
+See also `move_uploaded_file <http://php.net/move_uploaded_file>`_ and 
+         `Uploading Files with PHP <https://www.sitepoint.com/file-uploads-with-php/>`_.
+
++------------+---------------------------+
+| Short name | Security/MoveUploadedFile |
++------------+---------------------------+
+| Themes     | :ref:`Security`           |
++------------+---------------------------+
 
 
 

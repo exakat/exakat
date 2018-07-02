@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 18 Jun 2018 16:12:12 +0000
-.. comment: Generation hash : 06f5bb2a0a944e2a1c2bb4a4cd55d9113a6d614d
+.. comment: Generation date : Mon, 02 Jul 2018 09:57:11 +0000
+.. comment: Generation hash : 4d325fa7857b0bf062bf8b5a5ef9ed940bf3bf85
 
 
 .. _analyze:
@@ -75,12 +75,13 @@ Recipes details
 Analyze
 +++++++
 
-Total : 351 analysis
+Total : 356 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
 * :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
 * :ref:`@ Operator <@-operator>`
+* :ref:`Abstract Or Implements <abstract-or-implements>`
 * :ref:`Abstract Static Methods <abstract-static-methods>`
 * :ref:`Access Protected Structures <access-protected-structures>`
 * :ref:`Accessing Private <accessing-private>`
@@ -92,6 +93,7 @@ Total : 351 analysis
 * :ref:`Always Positive Comparison <always-positive-comparison>`
 * :ref:`Ambiguous Array Index <ambiguous-array-index>`
 * :ref:`Ambiguous Static <ambiguous-static>`
+* :ref:`Ambiguous Visibilities <ambiguous-visibilities>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Assign With And <assign-with-and>`
 * :ref:`Assigned Twice <assigned-twice>`
@@ -105,6 +107,7 @@ Total : 351 analysis
 * :ref:`Buried Assignation <buried-assignation>`
 * :ref:`Callback Needs Return <callback-needs-return>`
 * :ref:`Can't Extend Final <can't-extend-final>`
+* :ref:`Can't Throw Throwable <can't-throw-throwable>`
 * :ref:`Cant Instantiate Class <cant-instantiate-class>`
 * :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
@@ -146,6 +149,7 @@ Total : 351 analysis
 * :ref:`Don't Send This In Constructor <don't-send-this-in-constructor>`
 * :ref:`Don't Unset Properties <don't-unset-properties>`
 * :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
+* :ref:`Dont Mix ++ <dont-mix-++>`
 * :ref:`Double Assignation <double-assignation>`
 * :ref:`Double Instructions <double-instructions>`
 * :ref:`Drop Else After Return <drop-else-after-return>`
@@ -188,6 +192,7 @@ Total : 351 analysis
 * :ref:`Implicit Global <implicit-global>`
 * :ref:`Implied If <implied-if>`
 * :ref:`Inclusion Wrong Case <inclusion-wrong-case>`
+* :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
 * :ref:`Incompilable Files <incompilable-files>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
@@ -488,7 +493,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 67 analysis
+Total : 68 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -512,6 +517,7 @@ Total : 67 analysis
 * :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
+* :ref:`Hash Algorithms Incompatible With PHP 7.1- <hash-algorithms-incompatible-with-php-7.1->`
 * :ref:`Integer As Property <integer-as-property>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
@@ -563,12 +569,12 @@ Total : 67 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 63 analysis
+Total : 64 analysis
 
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
-* :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
+* :ref:`Hash Algorithms Incompatible With PHP 5.4/5.5 <hash-algorithms-incompatible-with-php-5.4/5.5>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`ext/mhash`
 * Arrays/MixedKeys
@@ -593,6 +599,7 @@ Total : 63 analysis
 * Php/GroupUseDeclaration
 * Php/GroupUseTrailingComma
 * Php/HashAlgos53
+* Php/HashAlgos71
 * Php/ListShortSyntax
 * Php/ListWithKeys
 * Php/ListWithReference
@@ -634,7 +641,7 @@ Total : 63 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 55 analysis
+Total : 56 analysis
 
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -660,6 +667,7 @@ Total : 55 analysis
 * Php/GroupUseTrailingComma
 * Php/HashAlgos53
 * Php/HashAlgos54
+* Php/HashAlgos71
 * Php/ListShortSyntax
 * Php/ListWithKeys
 * Php/ListWithReference
@@ -697,7 +705,7 @@ Total : 55 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 44 analysis
+Total : 45 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * Classes/Anonymous
@@ -715,6 +723,7 @@ Total : 44 analysis
 * Php/GroupUseTrailingComma
 * Php/HashAlgos53
 * Php/HashAlgos54
+* Php/HashAlgos71
 * Php/ListShortSyntax
 * Php/ListWithKeys
 * Php/ListWithReference
@@ -749,7 +758,7 @@ Total : 44 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 38 analysis
+Total : 39 analysis
 
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -775,6 +784,7 @@ Total : 38 analysis
 * Php/GroupUseTrailingComma
 * Php/HashAlgos53
 * Php/HashAlgos54
+* Php/HashAlgos71
 * Php/ListShortSyntax
 * Php/ListWithKeys
 * Php/ListWithReference
@@ -828,7 +838,7 @@ Total : 25 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 16 analysis
+Total : 18 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -840,6 +850,8 @@ Total : 16 analysis
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * Constants/UndefinedConstants
 * Php/FlexibleHeredoc
+* Php/HashAlgos53
+* Php/HashAlgos54
 * Php/ListWithReference
 * Php/PHP73LastEmptyArgument
 * Php/Php72NewClasses
@@ -852,8 +864,10 @@ Total : 16 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 2 analysis
+Total : 4 analysis
 
+* Php/HashAlgos53
+* Php/HashAlgos54
 * Php/Php73NewFunctions
 * Php/UnknownPcre2Option
 
@@ -937,7 +951,7 @@ Total : 35 analysis
 Security
 ++++++++
 
-Total : 35 analysis
+Total : 36 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
@@ -961,6 +975,7 @@ Total : 35 analysis
 * :ref:`Switch Fallthrough <switch-fallthrough>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Upload Filename Injection <upload-filename-injection>`
+* :ref:`move_uploaded_file Instead Of copy <move\_uploaded\_file-instead-of-copy>`
 * :ref:`parse_str() Warning <parse\_str()-warning>`
 * Functions/HardcodedPasswords
 * Php/BetterRand
@@ -1013,7 +1028,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 55 analysis
+Total : 54 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
@@ -1061,7 +1076,6 @@ Total : 55 analysis
 * Structures/CouldUseDir
 * Structures/DropElseAfterReturn
 * Structures/EchoWithConcat
-* Structures/ForeachWithList
 * Structures/ListOmissions
 * Structures/MismatchedTernary
 * Structures/NoParenthesisForLanguageConstruct

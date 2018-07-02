@@ -539,6 +539,10 @@ Glossary
 
       + :ref:`Mkdir Default <mkdir-default>`
 
+    + `move_uploaded_file()`
+
+      + :ref:`move_uploaded_file Instead Of copy <move\_uploaded\_file-instead-of-copy>`
+
     + `mt_rand()`
 
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
@@ -768,9 +772,14 @@ Glossary
 + `T`
     + `Throwable`
 
+      + :ref:`Can't Throw Throwable <can't-throw-throwable>`
       + :ref:`Empty Try Catch <empty-try-catch>`
       + :ref:`Useless Catch <useless-catch>`
       + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
+
+    + `throwable`
+
+      + :ref:`Can't Throw Throwable <can't-throw-throwable>`
 
     + `token_get_all()`
 
