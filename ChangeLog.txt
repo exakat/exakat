@@ -1,4 +1,4 @@
-Version 1.3.3 (Ma Sanbao, coming up)
+Version 1.3.5 (Gao Shilian, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,32 @@ Version 1.3.3 (Ma Sanbao, coming up)
 + Tokenizer
     + 
 
-Version 1.3.3 (Duan Zhixian, 2018-06-25)
+Version 1.3.4 (Cheng Yaojin, 2018-07-02)
++ Architecture
+    + Added check when unarchiving tar.gz and tar.bz
+    + Added check for neo4j installation, (error grabing)
+    + Moved Upgrade to tmp folder
++ Report
+    + 
++ Analyzer
+    + Parameters are actually defined in the class
+    + New analysis : ambiguous visibilities of properties
+    + New analysis : report usage of PHP 7.1+ hash algorithm
+    + New analysis : csprng (random_bytes and random_int)
+    + New analysis : ext/libeio
+    + New analysis : report incompatible signatures for methods
+    + Upgraded analysis : Unused Private Methods handles fluent interfaces
+    + Upgraded analysis : Defined Parent keyword
+    + Upgraded analysis : Recursion
+    + Refactored codeIs/codeIsNot
+    + Checked unit tests : 2908 / 2923 test pass (99% pass). 
++ Tokenizer
+    + Added support for 'parent' definitions
+    + Fixed element counts in concatenation 
+    + Fixed operator priority in Strval
+    + Upgraded handling of undefined constants to string
+
+Version 1.3.3 (Ma Sanbao, 2018-06-25)
 + Architecture
     + Better handling of fallback to global for functions
     + Weekly code clean
