@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('++$i + 1', 
+$expected     = array('++$i + 1',
                       '$a[$i++]',
                      );
 
