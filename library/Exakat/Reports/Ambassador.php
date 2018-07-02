@@ -2768,7 +2768,7 @@ SQL
         $top = array_diff(array_keys($list), $secondaries);
         
         foreach($top as $t) {
-            $theTable .= '<ul>'.$this->extends2ul($t, $list).'</ul>';
+            $theTable .= '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
         }
 
         $html = $this->getBasedPage('empty');
@@ -2785,7 +2785,7 @@ SQL
                 $secondary = $this->extends2ul($sub, $paths);
                 $return .= $secondary;
             } else {
-                $return .= "<li>$sub</li>";
+                $return .= "<li class=\"treeLeaf\">$sub</li>";
             }
         }
         $return .= "</ul></li>\n";
