@@ -28,17 +28,22 @@ use Exakat\Analyzer\Analyzer;
 class HashAlgos54 extends Analyzer {
     protected $phpVersion = '5.4-';
     
-    public static $functions = array('hash', 'hash_algo', 'hash_hmac_file', 'hash_hmac', 'hash_init', 'hash_pbkdf2');
+    public static $functions = array('\\hash', 
+                                     '\\hash_algo', 
+                                     '\\hash_hmac_file', 
+                                     '\\hash_hmac', 
+                                     '\\hash_init', 
+                                     '\\hash_pbkdf2',
+                                     );
     
     public function analyze() {
         $algos = array_merge($this->loadIni('hash_algos.ini', 'removed54'),
                              $this->loadIni('hash_algos.ini', 'new56'));
         
         $this->atomFunctionIs(self::$functions)
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->noDelimiterIs($algos);
+             ->noDelimiterIs($algos, self::TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
 }

@@ -25,6 +25,8 @@ namespace Exakat;
 use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Exceptions;
+use Exceptions\WrongNumberOfColsForAHash;
+use Exceptions\NoStructureForTable;
 
 class Datastore {
     protected $sqliteRead = null;
@@ -102,15 +104,18 @@ class Datastore {
 
             $cols = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                if ($row['name'] === 'id') { continue; }
+                if ($row['name'] === 'id') { 
+                    continue; 
+                }
                 $cols[] = $row['name'];
             }
 
-            if (count($cols) != 2) {
-                throw new Exceptions\WrongNumberOfColsForAHash();
+            if (count($cols) !== 2) {
+                throw new WrongNumberOfColsForAHash($table);
             }
         }
 
+        $colList = makeList($cols, '');
         $values = array();
         $total = 0;
         foreach($data as $key => $row) {
@@ -129,7 +134,7 @@ class Datastore {
             $values[] = '('.makeList($d, "'").')';
             
             if (count($values) > 10) {
-                $query = "REPLACE INTO $table (".makeList($cols, '').") VALUES ".makeList($values, '');
+                $query = "REPLACE INTO $table ($colList) VALUES ".makeList($values, '');
                 $this->sqliteWrite->querySingle($query);
 
                 $values = array();
@@ -137,7 +142,7 @@ class Datastore {
         }
 
         if (!empty($values)) {
-                $query = "REPLACE INTO $table (".makeList($cols, '').") VALUES ".makeList($values, '');
+                $query = "REPLACE INTO $table ($colList) VALUES ".makeList($values, '');
             $this->sqliteWrite->querySingle($query);
         }
 
@@ -527,7 +532,7 @@ SQLITE;
                 break;
 
             default :
-                throw new Exceptions\NoStructureForTable($table);
+                throw new NoStructureForTable($table);
         }
 
         $this->sqliteWrite->query($createTable);

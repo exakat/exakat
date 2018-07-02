@@ -31,16 +31,18 @@ class CouldUseCompact extends Analyzer {
              ->raw('not( where( __.out("ARGUMENT").not(hasLabel("Keyvalue", "Void")) ) ) ') // Only keep Keyvalue and void
              ->raw('where( __.out("ARGUMENT").hasLabel("Keyvalue") )') // At least one Keyvalue
              ->raw(<<<GREMLIN
-not( where( __.out("ARGUMENT").hasLabel("Keyvalue")
-                              .out("INDEX")
-                              .not(hasLabel("String", "Identifier", "Nsname", "Concatenation").has("noDelimiter"))
+not( where( __.out("ARGUMENT")
+              .hasLabel("Keyvalue")
+              .out("INDEX")
+              .not(hasLabel("String", "Identifier", "Nsname", "Concatenation").has("noDelimiter"))
     )     )
 GREMLIN
 ) // Only keep String as name
              ->raw(<<<GREMLIN
-not( where( __.out("ARGUMENT").hasLabel("Keyvalue")
-                              .out("VALUE")
-                              .not(hasLabel("Variable"))
+not( where( __.out("ARGUMENT")
+              .hasLabel("Keyvalue")
+              .out("VALUE")
+              .not(hasLabel("Variable"))
     )     )
 
 GREMLIN

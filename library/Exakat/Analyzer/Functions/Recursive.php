@@ -27,14 +27,42 @@ use Exakat\Analyzer\Analyzer;
 
 class Recursive extends Analyzer {
     public function analyze() {
-        // functon foo() { foo(); }
-        $this->atomIs(self::$FUNCTIONS_ALL)
+
+        // function foo() { foo(); }
+        $this->atomIs('Function')
              ->savePropertyAs('fullcode', 'name')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition(self::$FUNCTIONS_CALLS)
              ->functionDefinition()
              ->samePropertyAs('fullcode', 'name')
              ->back('first');
+        $this->prepareQuery();
+
+        // function foo() { $this->foo(); }
+        $this->atomIs('Method')
+             ->savePropertyAs('lccode', 'name')
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition('Methodcall')
+             ->outIs('OBJECT')
+             ->atomIs('This')
+             ->inIs('OBJECT')
+             ->outIs('METHOD')
+             ->samePropertyAs('lccode', 'name')
+             ->back('first');
+        $this->prepareQuery();
+
+        // function foo() { self::foo(); }
+        $this->atomIs('Method')
+             ->savePropertyAs('lccode', 'name')
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition('Staticmethodcall')
+             ->outIs('METHOD')
+             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
+             ->inIs('METHOD')
+             ->outIs('CLASS')
+             ->inIs('DEFINITION')
+             ->outIs('METHOD')
+             ->samePropertyAs('lccode', 'name');
         $this->prepareQuery();
     }
 }

@@ -41,7 +41,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->codeIsNot('__construct')
-             ->savePropertyAs('code', 'methodname')
+             ->savePropertyAs('lccode', 'methodname')
              ->inIs('METHOD')
 
              ->outIs('CLASS')
@@ -54,7 +54,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->atomIs(array('Method', 'Magicmethod'))
              ->isNot('static', true)
              ->outIs('NAME')
-             ->samePropertyAs('code', 'methodname')
+             ->samePropertyAs('code', 'methodname', self::CASE_INSENSITIVE)
 
              ->back('first');
         $this->prepareQuery();

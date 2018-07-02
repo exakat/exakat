@@ -101,9 +101,9 @@ class Atom {
         $this->reference     = $this->reference   ? 1 : null;
         $this->heredoc       = $this->heredoc     ? 1 : null;
         $this->variadic      = $this->variadic    ? 1 : null;
-        $this->final         = $this->variadic    ? 1 : null;
-        $this->abstract      = $this->variadic    ? 1 : null;
-        $this->static        = $this->variadic    ? 1 : null;
+        $this->final         = $this->final       ? 1 : null;
+        $this->abstract      = $this->abstract    ? 1 : null;
+        $this->static        = $this->static      ? 1 : null;
         $this->absolute      = $this->absolute    ? 1 : null;
         $this->constant      = $this->constant    ? 1 : null;
         $this->boolean       = $this->boolean     ? 1 : null;

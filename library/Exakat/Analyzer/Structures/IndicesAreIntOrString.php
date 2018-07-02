@@ -58,7 +58,7 @@ class IndicesAreIntOrString extends Analyzer {
         $this->atomIs('Array')
              ->outIs('INDEX')
              ->atomIs('Staticconstant')
-             ->goToStaticConstantDefinition()
+             ->inIs('DEFINITION')
              ->outIs('VALUE')
              ->atomIs(array('Boolean', 'Real', 'Null', 'Arrayliteral')) // Functioncall is for array
              ->back('first');

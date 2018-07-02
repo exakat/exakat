@@ -68,7 +68,8 @@ class UselessParenthesis extends Analyzer {
         // $y = (1);
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs('Parenthesis');
+             ->atomIs('Parenthesis')
+             ->raw('not(where( __.out("CODE").hasLabel("Logical").has("token", within("T_LOGICAL_XOR", "T_LOGICAL_AND", "T_LOGICAL_OR"))))');
         $this->prepareQuery();
 
         // ($y) == (1);

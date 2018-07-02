@@ -62,7 +62,11 @@ class Strval extends Plugin {
             case 'Heredoc' :
                 $atom->noDelimiter = (string) trimOnce($atom->code);
                 break;
-    
+
+            case 'Constant' :
+                $atom->noDelimiter = $extras['VALUE']->noDelimiter;
+                break;
+
             case 'Boolean' :
                 $atom->noDelimiter = (string) (mb_strtolower($atom->code) === 'true');
                 break;
@@ -101,7 +105,7 @@ class Strval extends Plugin {
                 break;
 
             case 'Power' :
-                $atom->noDelimiter = (int) $extras['LEFT']->noDelimiter ** (int) $extras['RIGHT']->noDelimiter;
+                $atom->noDelimiter = ((int) $extras['LEFT']->noDelimiter) ** (int) $extras['RIGHT']->noDelimiter;
                 break;
 
             case 'Arrayliteral' :

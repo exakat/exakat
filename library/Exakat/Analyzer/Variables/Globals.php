@@ -32,7 +32,7 @@ class Globals extends Analyzer {
              ->goToFunction(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')
              ->atomInsideNoDefinition(self::$VARIABLES_ALL)
-             ->samePropertyAs('code', 'name');
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE);
         $this->prepareQuery();
 
         // Global in a function

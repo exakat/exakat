@@ -62,11 +62,11 @@ class UselessUnset extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Static')
              ->outIs('STATIC')
-             ->samePropertyAs('code', 'varname')
+             ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
-        // unset on foreach  (variable or property)
+        // unset on foreach (variable or property)
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->atomIs(array('Variable', 'Member'))
@@ -79,7 +79,7 @@ class UselessUnset extends Analyzer {
              ->_as('result')
              ->outIs('ARGUMENT')
              ->outIsIE('OBJECT')
-             ->samePropertyAs('code', 'varname')
+             ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->inIsIE('OBJECT')
              ->raw('not( where( out("OBJECT").hasLabel("Member") ) )')
              ->back('result');
@@ -101,7 +101,7 @@ class UselessUnset extends Analyzer {
              ->_as('result')
              ->outIs('ARGUMENT')
              ->outIsIE('OBJECT')
-             ->samePropertyAs('code', 'varname')
+             ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->inIsIE('OBJECT')
              ->raw('not( where( out("OBJECT").hasLabel("Member") ) )')
              ->back('result');
@@ -118,7 +118,7 @@ class UselessUnset extends Analyzer {
              ->atomInsideNoDefinition('Unset')
              ->_as('result')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('fullcode', 'varname')
+             ->samePropertyAs('fullcode', 'varname', self::CASE_SENSITIVE)
              ->back('result');
         $this->prepareQuery();
 
@@ -142,7 +142,7 @@ class UselessUnset extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Global')
              ->outIs('GLOBAL')
-             ->samePropertyAs('code', 'varname')
+             ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -156,7 +156,7 @@ class UselessUnset extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Static')
              ->outIs('STATIC')
-             ->samePropertyAs('code', 'varname')
+             ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -171,7 +171,7 @@ class UselessUnset extends Analyzer {
              ->tokenIs('T_UNSET_CAST')
              ->_as('result')
              ->outIs('CAST')
-             ->samePropertyAs('code', 'varname')
+             ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->back('result');
         $this->prepareQuery();
 
@@ -188,7 +188,7 @@ class UselessUnset extends Analyzer {
              ->tokenIs('T_UNSET_CAST')
              ->_as('result')
              ->outIs('CAST')
-             ->samePropertyAs('code', 'varname')
+             ->samePropertyAs('code', 'varname', self::CASE_SENSITIVE)
              ->back('result');
         $this->prepareQuery();
     }

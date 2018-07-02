@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class LostReferences extends Analyzer {
     public function analyze() {
+        // foo(&$f) { $b = $f[1];}
         $this->atomIs('Variable')
              ->savePropertyAs('code', 'parameter')
              ->inIs('NAME')
@@ -35,7 +36,7 @@ class LostReferences extends Analyzer {
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Assignation')
              ->outIs('LEFT')
-             ->samePropertyAs('code', 'parameter')
+             ->samePropertyAs('code', 'parameter', self::CASE_SENSITIVE)
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->is('reference', true)

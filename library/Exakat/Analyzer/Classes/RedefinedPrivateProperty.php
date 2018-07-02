@@ -37,7 +37,7 @@ class RedefinedPrivateProperty extends Analyzer {
              ->outIs('PPP')
              ->is('visibility', 'private')
              ->outIs('PPP')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

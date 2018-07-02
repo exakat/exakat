@@ -185,6 +185,10 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = strtolower($atom->atom).$extras['BREAK']->ctype1;
                 break;
 
+            case 'Constant' :
+                $atom->ctype1 = $extras['NAME']->ctype1 . '=' . $extras['VALUE']->ctype1;
+                break;
+
             case 'Continue' :
                 $atom->ctype1 = strtolower($atom->atom).$extras['CONTINUE']->ctype1;
                 break;

@@ -48,6 +48,13 @@ class Tarbz extends Vcs {
         $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tar.bz2';
         file_put_contents($archiveFile, $binary);
 
+        $res = shell_exec("tar -tjf $archiveFile 2>&1 >/dev/null");
+        if (!empty($res)) {
+            list($l, ) = explode("\n", $res);
+            print "Error while loading tar.bz archive : \"$l\". Aborting\n"; 
+            return;
+        }
+
         shell_exec("mkdir {$this->destinationFull}/code/; tar -jxf $archiveFile --directory $this->destinationFull/code");
 
         unlink($archiveFile);

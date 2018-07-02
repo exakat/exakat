@@ -23,8 +23,11 @@
 namespace Exakat\Vcs;
 
 abstract class Vcs {
-    protected $destination = '';
+    protected $destination     = '';
     protected $destinationFull = '';
+    
+    protected $branch = 'master';
+    protected $tag    = '';
     
     public function __construct($destination, $project_root){
         $this->destination     = $destination;
@@ -37,27 +40,27 @@ abstract class Vcs {
     
     static public function getVcs($config) {
         if ($config->git === true) {
-            return 'Git';
+            return '\Exakat\Vcs\Git';
         } elseif ($config->svn === true) {
-            return 'Svn';
+            return '\Exakat\Vcs\Svn';
         } elseif ($config->hg === true) {
-            return 'Mercurial';
+            return '\Exakat\Vcs\Mercurial';
         } elseif ($config->bzr === true) {
-            return 'Bazaar';
+            return '\Exakat\Vcs\Bazaar';
         } elseif ($config->composer === true) {
-            return 'Composer';
+            return '\Exakat\Vcs\Composer';
         } elseif ($config->symlink === true) {
-            return 'Symlink';
+            return '\Exakat\Vcs\Symlink';
         } elseif ($config->tbz === true) {
-            return 'Tarbz';
+            return '\Exakat\Vcs\Tarbz';
         } elseif ($config->tgz === true) {
-            return 'Targz';
+            return '\Exakat\Vcs\Targz';
         } elseif ($config->zip === true) {
-            return 'Zip';
+            return '\Exakat\Vcs\Zip';
         } elseif ($config->copy === true) {
-            return 'Copy';
+            return '\Exakat\Vcs\Copy';
         } else {
-            return 'EmptyCode';
+            return '\Exakat\Vcs\EmptyCode';
         }
     }
 
@@ -66,6 +69,18 @@ abstract class Vcs {
                        );
 
         return $status;
+    }
+
+    public function setBranch($branch = '') {
+        if (!empty($branch)) {
+            $this->branch = $branch;
+        }
+    }
+
+    public function setTag($tag = '') {
+        if (!empty($tag)) {
+            $this->tag = $tag;
+        }
     }
 }
 

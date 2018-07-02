@@ -30,7 +30,7 @@ class PssWithoutClass extends Analyzer {
         // unresolved new pss()
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIs(self::$RELATIVE_CLASS)
+             ->codeIs(array('self', 'static', 'parent'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->hasNoClassInterfaceTrait()
              ->back('first');
         $this->prepareQuery();

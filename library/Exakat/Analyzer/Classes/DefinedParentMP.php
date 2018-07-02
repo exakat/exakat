@@ -32,60 +32,62 @@ class DefinedParentMP extends Analyzer {
     }
     
     public function analyze() {
-        $isComposerClass = 'where( __.out("EXTENDS").in("ANALYZED").has("analyzer", "Composer/IsComposerNsname") )';
-        $isPhpClass = 'where( __.out("EXTENDS").in("ANALYZED").has("analyzer", "Classes/IsExtClass") )';
-        
+        // Only one level of trait ATM
         // parent::method()
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->inIs('METHOD')
              ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
-             ->goToAllParents(self::EXCLUDE_SELF)
+             ->atomIs('Parent')
+             ->classDefinition()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('METHOD')
              ->atomIs('Method')
              ->isNot('visibility', 'private')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
+             ->back('first');
+        $this->prepareQuery();
+
+        // Only one level of trait ATM
+        // parent::method() (in Trait)
+        $this->atomIs('Staticmethodcall')
+             ->outIs('METHOD')
+             ->savePropertyAs('lccode', 'name')
+             ->inIs('METHOD')
+             ->outIs('CLASS')
+             ->atomIs('Parent')
+             ->classDefinition()
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('USE')
+             ->outIs('USE')
+             ->inIs('DEFINITION')
+             ->outIs('METHOD')
+             ->atomIs('Method')
+             ->isNot('visibility', 'private')
+             ->outIs('NAME')
+             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
         // handle composer case
         $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
-             ->inIs('METHOD')
              ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
-             ->raw($isComposerClass)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
-             ->inIs('METHOD')
-             ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
-             ->goToAllParents(self::EXCLUDE_SELF)
-             ->raw($isComposerClass)
+             ->atomIs('Parent')
+             ->classDefinition()
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->analyzerIs('Composer/IsComposerNsname')
              ->back('first');
         $this->prepareQuery();
 
         // Case of PHP class
         $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
-             ->inIs('METHOD')
              ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
+             ->atomIs('Parent')
+             ->classDefinition()
              ->goToAllParents(self::INCLUDE_SELF)
-             ->raw($isPhpClass)
+             ->analyzerIs('Classes/IsExtClass')
              ->back('first');
         $this->prepareQuery();
         
@@ -96,62 +98,55 @@ class DefinedParentMP extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('MEMBER')
              ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
-             ->goToAllParents(self::EXCLUDE_SELF)
+             ->atomIs('Parent')
+             ->classDefinition()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->isNot('visibility', 'private')
              ->outIs('PPP')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+             ->back('first');
+        $this->prepareQuery();
+
+        // parent::$property (defined in Trait)
+        $this->atomIs('Staticproperty')
+             ->outIs('MEMBER')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'name')
+             ->inIs('MEMBER')
+             ->outIs('CLASS')
+             ->atomIs('Parent')
+             ->classDefinition()
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('USE')
+             ->outIs('USE')
+             ->inIs('DEFINITION')
+             ->atomIs('Trait')
+             ->outIs('PPP')
+             ->atomIs('Ppp')
+             ->isNot('visibility', 'private')
+             ->outIs('PPP')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
         // handle composer case
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
+             ->atomIs('Parent')
+             ->classDefinition()
              ->goToAllParents(self::INCLUDE_SELF)
-             ->raw($isComposerClass)
+             ->analyzerIs('Composer/IsComposerNsname')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'name')
-             ->inIs('MEMBER')
              ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
-             ->raw($isPhpClass)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Staticproperty')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'name')
-             ->inIs('MEMBER')
-             ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
-             ->goToAllParents()
-             ->raw($isPhpClass)
-             ->back('first');
-        $this->prepareQuery();
-        
-        // defined in traits (via use)
-        $this->atomIs('Member')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
-             ->outIs('MEMBER')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToTraits()
-             ->outIs('METHOD')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
+             ->atomIs('Parent')
+             ->classDefinition()
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->analyzerIs('Classes/IsExtClass')
              ->back('first');
         $this->prepareQuery();
     }

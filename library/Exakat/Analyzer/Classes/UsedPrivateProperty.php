@@ -72,7 +72,7 @@ GREMLIN
              ->outIs('MEMBER')
              ->atomIs('Array')
              ->outIs('VARIABLE')
-             ->samePropertyAs('code', 'x')
+             ->samePropertyAs('code', 'x', self::CASE_SENSITIVE)
              ->back('ppp');
         $this->prepareQuery();
 
@@ -91,7 +91,7 @@ GREMLIN
              ->atomIs('This')
              ->inIs('OBJECT')
              ->outIs('MEMBER')
-             ->samePropertyAs('code', 'x')
+             ->samePropertyAs('code', 'x', self::CASE_SENSITIVE)
              ->back('ppp');
         $this->prepareQuery();
     }

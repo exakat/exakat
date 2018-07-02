@@ -71,6 +71,10 @@ class Nullval extends Plugin {
                 }
                 break;
 
+            case 'Constant' :
+                $atom->isNull = $extras['VALUE']->isNull;
+                break;
+
             case 'Coalesce' :
                 if ($extras['LEFT']->isNull) {
                     $atom->isNull = $extras['LEFT']->isNull;

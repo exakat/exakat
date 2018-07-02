@@ -26,11 +26,13 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class TooManyChildren extends Analyzer {
+    protected $childrenClassCount = 15;
+
     public function analyze() {
         // class a with extends
         // default value : childrenCount = 15
         $this->atomIs('Class')
-             ->raw('where( __.out("DEFINITION").in("EXTENDS").count().is(gte('.$this->childrenClassCount.')) )');
+             ->raw('where( __.out("DEFINITION").count().is(gte('.$this->childrenClassCount.')) )');
         $this->prepareQuery();
     }
 }

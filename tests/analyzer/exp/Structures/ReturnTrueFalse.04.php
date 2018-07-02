@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('if($a2) { /**/ } else { /**/ } ', 
+$expected     = array('if($a2) { /**/ } else { /**/ } ',
                       'if($a1) { /**/ } else { /**/ } ',
-                      'if($a3) { /**/ } else { /**/ } ', 
+                      'if($a3) { /**/ } else { /**/ } ',
                       'if($a4) { /**/ } else { /**/ } ',
                      );
 

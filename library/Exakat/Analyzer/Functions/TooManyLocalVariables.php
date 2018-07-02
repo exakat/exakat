@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class TooManyLocalVariables extends Analyzer {
+    protected $tooManyLocalVariableThreshold = 15;
+
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
 

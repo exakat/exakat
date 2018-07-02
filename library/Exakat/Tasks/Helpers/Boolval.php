@@ -43,6 +43,20 @@ class Boolval extends Plugin {
                 $atom->boolean = true;
                 break;
 
+            case 'Identifier' :
+                // $atom->code is a string
+                $atom->boolean = (int) (bool) (string) $atom->code;
+                break;
+
+            case 'Constant' :
+                $atom->boolean    = $extras['VALUE']->boolean;
+                break;
+
+            case 'Nsname' :
+                // when it is a string, there is no fallback
+                $atom->boolean = false;
+                break;
+
             case 'Real' :
                 // $atom->code is a string
                 $atom->boolean = (int) (bool) (real) $atom->code;

@@ -26,7 +26,10 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableLong extends Analyzer {
+    protected $variableLength = 20;
+
     public function analyze() {
+        // $abcdefghijklmnopqrstuvwxyz = 1;
         $this->atomIs(self::$VARIABLES_USER)
              ->codeLength(" > $this->variableLength");
         $this->prepareQuery();

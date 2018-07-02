@@ -62,6 +62,7 @@ class LoadFinal extends Tasks {
         $this->setConstantDefinition();
         $this->setParentDefinition();
 
+        $this->defaultIdentifiers();
         $this->propagateConstants();
 
         display('End load final');
@@ -205,12 +206,14 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
-     .not(where( __.in("DEFINITION")))
-     .values("fullnspath")
-     .unique()
+     .groupCount('m')
+     .by("fullnspath")
+     .cap('m')
 GREMLIN;
-        $fixed = $this->gremlin->query($query)->toArray();
-        $this->datastore->addRow('functioncalls', array_flip($fixed));
+        $fixed = $this->gremlin->query($query)->toArray()[0];
+        if (!empty($fixed)) {
+            $this->datastore->addRow('functioncalls', $fixed);
+        }
     }
 
     private function runQuery($query, $title, $args = array()) {
@@ -364,35 +367,74 @@ g.V().hasLabel("Identifier", "Nsname")
         if ("noDelimiter" in it.get().keys()) {
             constante.property("noDelimiter", it.get().value("noDelimiter")); 
         }
+        if ("isNull" in it.get().keys()) {
+            constante.property("isNull", it.get().value("isNull")); 
+        }
      }
-)
+).count()
 GREMLIN;
-        $this->gremlin->query($query);
+        $res = $this->gremlin->query($query);
+        $count = $res->toInt();
+        display("Set $count constant definitions");
     }
 
     private function makeClassConstantDefinition() {
         // Create link between Class constant and definition
         $query = <<<'GREMLIN'
-        g.V().hasLabel('Staticconstant').as('first')
-.not(where( __.in("DEFINITION")))
-.out('CONSTANT').sideEffect{name = it.get().value("code");}.select('first')
-.out('CLASS').hasLabel("Identifier", "Nsname").has('fullnspath')
-.sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
-.where( __.sideEffect{classes = [];}
-          .emit(hasLabel("Class")).repeat( out("EXTENDS").in("DEFINITION") ).times(5)
-          .out("CONST").hasLabel("Const").out("CONST").as('const')
-          .out("NAME").filter{ it.get().value("code") == name; }.select('const')
-          .sideEffect{classes.add(it.get()); }
-          .fold()
-)
-.map{classes[0]}.as('theClass')
-.addE('DEFINITION').to('first')
+g.V().hasLabel('Staticconstant').as('first')
+     .not(where( __.in("DEFINITION")))
+     .out('CONSTANT').sideEffect{name = it.get().value("code");}.select('first')
+     .out('CLASS').hasLabel("Identifier", "Nsname").has('fullnspath')
+     .sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
+     .where( __.sideEffect{classes = [];}
+               .emit().repeat( out("EXTENDS").in("DEFINITION") ).times(5).hasLabel("Class")
+               .out("CONST").hasLabel("Const").out("CONST").as('const')
+               .out("NAME").filter{ it.get().value("code") == name; }.select('const')
+               .sideEffect{classes.add(it.get()); }
+               .fold()
+    )
+    .map{classes[0]}.as('theClass')
+    .addE('DEFINITION').to('first')
 GREMLIN;
         $this->gremlin->query($query);
         display('Create link between Class constant and definition');
         $this->logTime('Class::constant definition');
     }
 
+    private function defaultIdentifiers() {
+        display("defaulting Identifiers and Nsname");
+        // fix path for constants with Const
+        // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier")
+     .not(has("noDelimiter"))
+     .sideEffect{ 
+        it.get().property("noDelimiter", it.get().value("fullcode"));
+        it.get().property("intval",      0);
+        it.get().property("boolean",     true);
+        it.get().property("isNull",      false);
+      }
+     .count();
+GREMLIN;
+        $res = $this->gremlin->query($query)->toInt();
+        display("defaulting $res Identifiers");
+
+        // noDelimiter is set at the same moment as boolean and intval. Any of them is the same
+        $query = <<<GREMLIN
+g.V().hasLabel("Nsname")
+     .not(has("noDelimiter"))
+     .sideEffect{ 
+        it.get().property("noDelimiter", '');
+        it.get().property("intval",      0);
+        it.get().property("boolean",     false);
+        it.get().property("isNull",      true);
+      }
+     .count();
+GREMLIN;
+
+        $res = $this->gremlin->query($query)->toInt();
+        display("defaulting $res Nsname");
+    }
 
     private function propagateConstants($level = 0) {
         $total = 0;

@@ -30,14 +30,14 @@ class ConcreteVisibility extends Analyzer {
         $this->atomIs('Method')
              ->is('visibility', array('private', 'protected'))
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->goToClass()
              ->outIs('IMPLEMENTS')
              ->interfaceDefinition()
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

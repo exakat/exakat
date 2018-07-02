@@ -46,6 +46,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Level 3
 * Level 4
 * Level 5
+* LintButWontExec
 * Melis
 * Newfeatures
 * OneFile
@@ -126,6 +127,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/cmark <https://github.com/commonmark/cmark>`_
 * `ext/com <http://php.net/manual/en/book.com.php>`_
 * `ext/crypto <https://pecl.php.net/package/crypto>`_
+* `ext/csprng <http://php.net/manual/en/book.csprng.php>`_
 * `ext/ctype <http://php.net/manual/en/ref.ctype.php>`_
 * `ext/curl <http://php.net/manual/en/book.curl.php>`_
 * `ext/cyrus <http://php.net/manual/en/book.cyrus.php>`_
@@ -136,6 +138,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/dom <http://php.net/manual/en/book.dom.php>`_
 * `ext/ds <http://docs.php.net/manual/en/book.ds.php>`_
 * `ext/eaccelerator <http://eaccelerator.net/>`_
+* `ext/eio <http://software.schmorp.de/pkg/libeio.html>`_
 * `ext/enchant <http://php.net/manual/en/book.enchant.php>`_
 * `ext/ereg <http://php.net/manual/en/function.ereg.php>`_
 * `ext/ev <http://php.net/manual/en/book.ev.php>`_
@@ -296,7 +299,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `shopware <https://www.shopware.com/>`_
 * `Vanilla <https://open.vanillaforums.com/>`_
 * `WordPress <https://www.wordpress.com/>`_
-* Magento
+* `Magento <https://magento.com/>`_
 * `Tine20 <https://www.tine20.com/>`_
 * `Typo3 <https://typo3.org/>`_
 * `SugarCrm <https://www.sugarcrm.com/>`_
@@ -314,6 +317,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `FuelCMS <https://www.getfuelcms.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `NextCloud <https://nextcloud.com/>`_
+* `TeamPass <https://teampass.net/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
 * `HuMo-Gen <http://humogen.com/>`_
@@ -323,11 +327,9 @@ A number of applications were scanned in order to find real life examples of pat
 * `Edusoho <https://www.edusoho.com/en>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `SuiteCrm <https://suitecrm.com/>`_
-* `TeamPass <https://teampass.net/>`_
-* Prestashop
+* `PrestaShop <https://prestashop.com/>`_
 * `SPIP <https://www.spip.net/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
-* `PrestaShop <https://prestashop.com/>`_
 * `Zend-Config <https://github.com/zendframework/zend-config>`_
 * `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Traq <https://traq.io/>`_
@@ -385,11 +387,27 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.3.4
+
+  * Ambiguous Visibilities (Classes/AmbiguousVisibilities)
+  * Hash Algorithms Incompatible With PHP 7.1- (Php/HashAlgos71 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
+  * ext/csprng (Extensions/Extcsprng ; Appinfo)
+
+* 1.3.3
+
+  * Abstract Or Implements (Classes/AbstractOrImplements)
+  * Can't Throw Throwable (Exceptions/CantThrow ; Analyze, LintButWontExec)
+  * Incompatible Signature Methods (Classes/IncompatibleSignature ; Analyze, LintButWontExec)
+  * ext/eio (Extensions/Exteio ; Appinfo)
+
 * 1.3.2
 
   * > Or < Comparisons (Structures/GtOrLtFavorite ; Preferences)
+  * Compared But Not Assigned Strings (Structures/ComparedButNotAssignedStrings ; Under Work)
+  * Could Be Static Closure (Functions/CouldBeStaticClosure)
+  * Dont Mix ++ (Structures/DontMixPlusPlus ; Analyze)
   * Strict Or Relaxed Comparison (Structures/ComparisonFavorite ; Preferences)
-  * Structures/ComparedButNotAssignedStrings (Structures/ComparedButNotAssignedStrings)
+  * move_uploaded_file Instead Of copy (Security/MoveUploadedFile ; Security)
 
 * 1.3.0
 
@@ -1287,7 +1305,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Class Name Case Difference (Classes/WrongCase ; Analyze, Coding Conventions, RadwellCodes, Codacy, Simple)
   * Class Usage (Classes/ClassUsage ; )
   * Class, Interface Or Trait With Identical Names (Classes/CitSameName ; Analyze, Codacy)
-  * Classes Mutually Extending Each Other (Classes/MutualExtension ; Analyze, Codacy)
+  * Classes Mutually Extending Each Other (Classes/MutualExtension ; Analyze, Codacy, LintButWontExec)
   * Classes Names (Classes/Classnames ; Appinfo)
   * Clone Usage (Classes/CloningUsage ; Appinfo)
   * Close Tags (Php/CloseTags ; Coding Conventions)
@@ -1393,7 +1411,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Foreach Don't Change Pointer (Php/ForeachDontChangePointer ; CompatibilityPHP70)
   * Foreach Needs Reference Array (Structures/ForeachNeedReferencedSource ; Analyze, Codacy)
   * Foreach Reference Is Not Modified (Structures/ForeachReferenceIsNotModified ; Analyze, Codacy, Simple)
-  * Foreach With list() (Structures/ForeachWithList ; CompatibilityPHP54, CompatibilityPHP53, Suggestions)
+  * Foreach With list() (Structures/ForeachWithList ; CompatibilityPHP54, CompatibilityPHP53)
   * Forgotten Visibility (Classes/NonPpp ; Analyze, ClearPHP, Codacy, Simple, Level 1)
   * Forgotten Whitespace (Structures/ForgottenWhiteSpace ; Analyze, Codacy)
   * Fully Qualified Constants (Namespaces/ConstantFullyQualified ; Analyze, Codacy)
@@ -1419,8 +1437,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Has Magic Property (Classes/HasMagicProperty ; Internal)
   * Has Variable Arguments (Functions/VariableArguments ; Appinfo, Internal)
   * Hash Algorithms (Php/HashAlgos ; Analyze, Codacy, Level 4)
-  * Hash Algorithms Incompatible With PHP 5.3 (Php/HashAlgos53 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
-  * Hash Algorithms Incompatible With PHP 5.4/5 (Php/HashAlgos54 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71)
+  * Hash Algorithms Incompatible With PHP 5.3 (Php/HashAlgos53 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
+  * Hash Algorithms Incompatible With PHP 5.4/5.5 (Php/HashAlgos54 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * Heredoc Delimiter Glossary (Type/Heredoc ; Appinfo)
   * Hexadecimal Glossary (Type/Hexadecimal ; Inventory, Appinfo)
   * Hexadecimal In String (Type/HexadecimalString ; Inventory, CompatibilityPHP70, CompatibilityPHP71)
@@ -1799,7 +1817,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/0mq (Extensions/Extzmq ; Appinfo)
   * ext/amqp (Extensions/Extamqp ; Appinfo)
   * ext/apache (Extensions/Extapache ; Appinfo)
-  * ext/apc (Extensions/Extapc ; Appinfo, CompatibilityPHP55, Codacy)
+  * ext/apc (Extensions/Extapc ; Appinfo, CompatibilityPHP55)
   * ext/apcu (Extensions/Extapcu ; Appinfo)
   * ext/array (Extensions/Extarray ; Appinfo)
   * ext/bcmath (Extensions/Extbcmath ; Appinfo)
@@ -1822,8 +1840,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/event (Extensions/Extevent ; Appinfo)
   * ext/exif (Extensions/Extexif ; Appinfo)
   * ext/expect (Extensions/Extexpect ; Appinfo)
-  * ext/fann (Extensions/Extfann ; Appinfo, Codacy)
-  * ext/fdf (Extensions/Extfdf ; Appinfo, CompatibilityPHP53, Codacy)
+  * ext/fann (Extensions/Extfann ; Appinfo)
+  * ext/fdf (Extensions/Extfdf ; Appinfo, CompatibilityPHP53)
   * ext/ffmpeg (Extensions/Extffmpeg ; Appinfo)
   * ext/file (Extensions/Extfile ; Appinfo)
   * ext/fileinfo (Extensions/Extfileinfo ; Appinfo)
@@ -1862,7 +1880,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/ming (Extensions/Extming ; Appinfo, CompatibilityPHP53)
   * ext/mongo (Extensions/Extmongo ; Appinfo)
   * ext/mssql (Extensions/Extmssql ; Appinfo)
-  * ext/mysql (Extensions/Extmysql ; Appinfo, CompatibilityPHP55, Codacy)
+  * ext/mysql (Extensions/Extmysql ; Appinfo, CompatibilityPHP55)
   * ext/mysqli (Extensions/Extmysqli ; Appinfo)
   * ext/ob (Extensions/Extob ; Appinfo)
   * ext/oci8 (Extensions/Extoci8 ; Appinfo)
@@ -1894,7 +1912,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/soap (Extensions/Extsoap ; Appinfo)
   * ext/sockets (Extensions/Extsockets ; Appinfo)
   * ext/spl (Extensions/Extspl ; Appinfo)
-  * ext/sqlite (Extensions/Extsqlite ; Appinfo, Codacy)
+  * ext/sqlite (Extensions/Extsqlite ; Appinfo)
   * ext/sqlite3 (Extensions/Extsqlite3 ; Appinfo)
   * ext/sqlsrv (Extensions/Extsqlsrv ; Appinfo)
   * ext/ssh2 (Extensions/Extssh2 ; Appinfo)
@@ -2030,6 +2048,7 @@ List of external links mentionned in this documentation.
 * `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid Else, Return Early <http://blog.timoxley.com/post/47041269194/avoid-else-return-early>`_
+* `Avoid nesting too deeply and return early (part 1) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-1>`_
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
@@ -2115,6 +2134,7 @@ List of external links mentionned in this documentation.
 * `Exception::__construct <http://php.net/manual/en/exception.construct.php>`_
 * `Exceptions <http://php.net/manual/en/language.exceptions.php>`_
 * `Exchangeable image information <http://php.net/manual/en/book.exif.php>`_
+* `EXP30-C. Do not depend on the order of evaluation for side effects <https://wiki.sei.cmu.edu/confluence/display/c/EXP30-C.+Do+not+depend+on+the+order+of+evaluation+for+side+effects>`_
 * `expect <http://php.net/manual/en/book.expect.php>`_
 * `ext-http <https://github.com/m6w6/ext-http>`_
 * `ext/ast <https://pecl.php.net/package/ast>`_
@@ -2144,15 +2164,15 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
@@ -2173,6 +2193,7 @@ List of external links mentionned in this documentation.
 * `Handling file uploads <http://php.net/manual/en/features.file-upload.php>`_
 * `hash <http://www.php.net/hash>`_
 * `HASH Message Digest Framework <http://www.php.net/manual/en/book.hash.php>`_
+* `hash_algos <http://php.net/hash_algos>`_
 * `Heredoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc>`_
 * `hg <https://www.mercurial-scm.org/>`_
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
@@ -2184,6 +2205,7 @@ List of external links mentionned in this documentation.
 * `IBM Db2 <http://php.net/manual/en/book.ibm-db2.php>`_
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
+* `Ideal regex delimiters in PHP <http://codelegance.com/ideal-regex-delimiters-in-php/>`_
 * `IERS <https://www.iers.org/IERS/EN/Home/home_node.html>`_
 * `igbinary <https://github.com/igbinary/igbinary/>`_
 * `IIS Administration <http://www.php.net/manual/en/book.iisfunc.php>`_
@@ -2209,6 +2231,7 @@ List of external links mentionned in this documentation.
 * `Kerberos V <http://php.net/manual/en/book.kadm5.php>`_
 * `Lapack <http://php.net/manual/en/book.lapack.php>`_
 * `Laravel <http://www.lavarel.com/>`_
+* `libeio <http://software.schmorp.de/pkg/libeio.html>`_
 * `libevent <http://www.libevent.org/>`_
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
 * `libxml <http://www.php.net/manual/en/book.libxml.php>`_
@@ -2226,8 +2249,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2244,6 +2267,7 @@ List of external links mentionned in this documentation.
 * `Ming (flash) <http://www.libming.org/>`_
 * `mongodb Driver <ext/mongo>`_
 * `Move ext/hash from resources to objects <http://php.net/manual/en/migration72.incompatible.php#migration72.incompatible.hash-ext-to-objects>`_
+* `move_uploaded_file <http://php.net/move_uploaded_file>`_
 * `MySQL Improved Extension <http://php.net/manual/en/book.mysqli.php>`_
 * `mysqli <http://php.net/manual/en/book.mysqli.php>`_
 * `Ncurses Terminal Screen Control <http://php.net/manual/en/book.ncurses.php>`_
@@ -2299,8 +2323,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Deprecations for PHP 7.2 : Each() <https://wiki.php.net/rfc/deprecations_php_7_2#each>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
-* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
@@ -2355,8 +2379,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2373,6 +2397,7 @@ List of external links mentionned in this documentation.
 * `The Closure Class <http://php.net/manual/en/class.closure.php>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `The main PPA for PHP (7.2, 7.1, 7.0, 5.6)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
+* `Throwable <http://php.net/manual/en/class.throwable.php>`_
 * `Tidy <http://php.net/manual/en/book.tidy.php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
 * `tokyo_tyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
@@ -2398,8 +2423,8 @@ List of external links mentionned in this documentation.
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2531,10 +2556,12 @@ Analyze
 |   analyzer[] = "Arrays/MultipleIdenticalKeys";
 |   analyzer[] = "Arrays/NonConstantArray";
 |   analyzer[] = "Arrays/RandomlySortedLiterals";
+|   analyzer[] = "Classes/AbstractOrImplements";
 |   analyzer[] = "Classes/AbstractStatic";
 |   analyzer[] = "Classes/AccessPrivate";
 |   analyzer[] = "Classes/AccessProtected";
 |   analyzer[] = "Classes/AmbiguousStatic";
+|   analyzer[] = "Classes/AmbiguousVisibilities";
 |   analyzer[] = "Classes/AvoidOptionalProperties";
 |   analyzer[] = "Classes/CantExtendFinal";
 |   analyzer[] = "Classes/CantInstantiateClass";
@@ -2554,6 +2581,7 @@ Analyze
 |   analyzer[] = "Classes/FinalByOcramius";
 |   analyzer[] = "Classes/ImplementIsForInterface";
 |   analyzer[] = "Classes/ImplementedMethodsArePublic";
+|   analyzer[] = "Classes/IncompatibleSignature";
 |   analyzer[] = "Classes/InstantiatingAbstractClass";
 |   analyzer[] = "Classes/LocallyUnusedProperty";
 |   analyzer[] = "Classes/MakeDefault";
@@ -2621,6 +2649,7 @@ Analyze
 |   analyzer[] = "Constants/StrangeName";
 |   analyzer[] = "Constants/UndefinedConstants";
 |   analyzer[] = "Constants/UnusedConstants";
+|   analyzer[] = "Exceptions/CantThrow";
 |   analyzer[] = "Exceptions/ForgottenThrown";
 |   analyzer[] = "Exceptions/OverwriteException";
 |   analyzer[] = "Exceptions/ThrowFunctioncall";
@@ -2740,6 +2769,7 @@ Analyze
 |   analyzer[] = "Structures/DanglingArrayReferences";
 |   analyzer[] = "Structures/DirThenSlash";
 |   analyzer[] = "Structures/DontChangeBlindKey";
+|   analyzer[] = "Structures/DontMixPlusPlus";
 |   analyzer[] = "Structures/DoubleAssignation";
 |   analyzer[] = "Structures/DoubleInstruction";
 |   analyzer[] = "Structures/DropElseAfterReturn";
@@ -2972,6 +3002,7 @@ CompatibilityPHP53
 |   analyzer[] = "Php/GroupUseDeclaration";
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
+|   analyzer[] = "Php/HashAlgos71";
 |   analyzer[] = "Php/ListShortSyntax";
 |   analyzer[] = "Php/ListWithKeys";
 |   analyzer[] = "Php/ListWithReference";
@@ -3046,6 +3077,7 @@ CompatibilityPHP54
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
 |   analyzer[] = "Php/HashAlgos54";
+|   analyzer[] = "Php/HashAlgos71";
 |   analyzer[] = "Php/ListShortSyntax";
 |   analyzer[] = "Php/ListWithKeys";
 |   analyzer[] = "Php/ListWithReference";
@@ -3117,6 +3149,7 @@ CompatibilityPHP55
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
 |   analyzer[] = "Php/HashAlgos54";
+|   analyzer[] = "Php/HashAlgos71";
 |   analyzer[] = "Php/ListShortSyntax";
 |   analyzer[] = "Php/ListWithKeys";
 |   analyzer[] = "Php/ListWithReference";
@@ -3175,6 +3208,7 @@ CompatibilityPHP56
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
 |   analyzer[] = "Php/HashAlgos54";
+|   analyzer[] = "Php/HashAlgos71";
 |   analyzer[] = "Php/ListShortSyntax";
 |   analyzer[] = "Php/ListWithKeys";
 |   analyzer[] = "Php/ListWithReference";
@@ -3229,6 +3263,7 @@ CompatibilityPHP70
 |   analyzer[] = "Php/GroupUseTrailingComma";
 |   analyzer[] = "Php/HashAlgos53";
 |   analyzer[] = "Php/HashAlgos54";
+|   analyzer[] = "Php/HashAlgos71";
 |   analyzer[] = "Php/ListShortSyntax";
 |   analyzer[] = "Php/ListWithAppends";
 |   analyzer[] = "Php/ListWithKeys";
@@ -3300,6 +3335,8 @@ CompatibilityPHP72
 |   analyzer[] = "Constants/UndefinedConstants";
 |   analyzer[] = "Php/AvoidSetErrorHandlerContextArg";
 |   analyzer[] = "Php/FlexibleHeredoc";
+|   analyzer[] = "Php/HashAlgos53";
+|   analyzer[] = "Php/HashAlgos54";
 |   analyzer[] = "Php/HashUsesObjects";
 |   analyzer[] = "Php/ListWithReference";
 |   analyzer[] = "Php/PHP73LastEmptyArgument";
@@ -3323,6 +3360,8 @@ CompatibilityPHP73
 ------------------
 
 | [CompatibilityPHP73]
+|   analyzer[] = "Php/HashAlgos53";
+|   analyzer[] = "Php/HashAlgos54";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/UnknownPcre2Option";| 
 
@@ -3427,6 +3466,7 @@ Security
 |   analyzer[] = "Security/EncodedLetters";
 |   analyzer[] = "Security/IndirectInjection";
 |   analyzer[] = "Security/MkdirDefault";
+|   analyzer[] = "Security/MoveUploadedFile";
 |   analyzer[] = "Security/NoNetForXmlLoad";
 |   analyzer[] = "Security/NoSleep";
 |   analyzer[] = "Security/RegisterGlobals";
@@ -3530,7 +3570,6 @@ Suggestions
 |   analyzer[] = "Structures/DropElseAfterReturn";
 |   analyzer[] = "Structures/EchoWithConcat";
 |   analyzer[] = "Structures/EmptyWithExpression";
-|   analyzer[] = "Structures/ForeachWithList";
 |   analyzer[] = "Structures/GoToKeyDirectly";
 |   analyzer[] = "Structures/ListOmissions";
 |   analyzer[] = "Structures/MismatchedTernary";

@@ -30,32 +30,32 @@ class DefinedStaticMP extends Analyzer {
         // static::method() 1rst level
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->codeIs(array('static', 'self'))
+             ->atomIs(array('Static', 'Self'))
              ->back('first')
              ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->goToClass()
-             ->raw('where( __.out("METHOD").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(1)) )')
+             ->raw('where( __.out("METHOD").out("NAME").filter{ it.get().value("lccode") == name} )')
              ->back('first');
         $this->prepareQuery();
 
         // static::method() parents and beyond
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->codeIs(array('static', 'self'))
+             ->atomIs(array('Static', 'Self'))
              ->back('first')
              ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->goToClass()
              ->goToAllParents()
-             ->raw('where( __.out("METHOD").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(1)) )')
+             ->raw('where( __.out("METHOD").out("NAME").filter{ it.get().value("lccode") == name} )')
              ->back('first');
         $this->prepareQuery();
 
         // static::$property the current class
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->codeIs(array('static', 'self'))
+             ->atomIs(array('Static', 'Self'))
              ->back('first')
              ->outIs('MEMBER')
              ->outIsIE('VARIABLE')
@@ -64,14 +64,14 @@ class DefinedStaticMP extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
         // static::$property Parents
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->codeIs(array('static', 'self'))
+             ->atomIs(array('Static', 'Self'))
              ->back('first')
              ->outIs('MEMBER')
              ->outIsIE('VARIABLE')
@@ -81,7 +81,7 @@ class DefinedStaticMP extends Analyzer {
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

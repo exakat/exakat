@@ -1,7 +1,7 @@
 <?php
 
 const C = 'D';
-const D = 'DD';
+const E = 'DD';
 
 $a = array(C.'D' => $DD);
 $a = array(D.'D' => $DD);

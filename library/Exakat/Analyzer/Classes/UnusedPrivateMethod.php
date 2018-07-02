@@ -32,6 +32,7 @@ class UnusedPrivateMethod extends Analyzer {
     }
 
     public function analyze() {
+        // class X { private function foo() { } }
         $this->atomIs('Class')
              ->outIs('METHOD')
              ->atomIs('Method')

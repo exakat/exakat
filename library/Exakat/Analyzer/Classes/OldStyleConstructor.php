@@ -33,7 +33,7 @@ class OldStyleConstructor extends Analyzer {
         if (empty($__construct)) {
             $hasNo__construct = 'filter{ true; }';
         } else {
-            $hasNo__construct = 'not( where( __.out("MAGICMETHOD").out("NAME").filter{ it.get().value("code") in ***} ) )';
+            $hasNo__construct = 'not( where( __.out("MAGICMETHOD").out("NAME").filter{ it.get().value("lccode") in ***} ) )';
         }
 
 
@@ -41,13 +41,13 @@ class OldStyleConstructor extends Analyzer {
         $this->atomIs('Class')
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\$')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
              ->raw($hasNo__construct, $__construct)
              ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

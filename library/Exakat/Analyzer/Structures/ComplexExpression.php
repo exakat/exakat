@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ComplexExpression extends Analyzer {
+    protected $complexExpressionThreshold = 30;
+
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
         

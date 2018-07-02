@@ -141,6 +141,8 @@ abstract class Analyzer {
             $this->description = new Description($this->getName($this->analyzer), $config->dir_root);
             $parameters = $this->description->getParameters();
             foreach($parameters as $parameter) {
+                assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");
+ 
                 if (isset($this->config->{$this->analyzerQuoted}[$parameter['name']])) {
                     $this->{$parameter['name']} = $this->config->{$this->analyzerQuoted}[$parameter['name']];
                 } else {
@@ -722,9 +724,16 @@ GREMLIN
 
     public function noAtomInside($atom) {
         assert($this->assertAtom($atom));
+        $MAX_LOOPING = self::MAX_LOOPING;
 
-        $gremlin = 'not(where( __.repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) ).emit( )
-                          .times('.self::MAX_LOOPING.').hasLabel(within(***)) ) )';
+        $gremlin = <<<GREMLIN
+not(
+    where( __.repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) ).emit( )
+                     .times($MAX_LOOPING)
+                     .hasLabel(within(***)) 
+          )
+)
+GREMLIN;
         $this->addMethod($gremlin, makeArray($atom));
         
         return $this;
@@ -1039,17 +1048,22 @@ GREMLIN;
 
     public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
         assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || in_array($property, array('line', 'rank', 'code', 'propertyname', 'boolean', 'count'))) {
-            $caseSensitive = '';
-        } else {
-            $caseSensitive = '.toLowerCase()';
-        }
 
         if ($property === 'label') {
             $this->addMethod('filter{ it.get().label() == '.$name.'}');
         } elseif ($property === 'id') {
             $this->addMethod('filter{ it.get().id() == '.$name.'}');
+        } elseif ($property === 'code' || $property === 'lccode') {
+            if ($caseSensitive === self::CASE_SENSITIVE) {
+                $this->addMethod('filter{ it.get().value("code") == '.$name.'}');
+            } else {
+                $this->addMethod('filter{ it.get().value("lccode") == '.$name.'}');
+            }
+        } elseif (in_array($property, array('line', 'rank', 'propertyname', 'boolean', 'count'))) {
+            $this->addMethod('filter{ it.get().value("'.$property.'") == '.$name.'}');
         } else {
+            $caseSensitive = $caseSensitive === self::CASE_SENSITIVE ? '' : '.toLowerCase()';
+
             $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' == '.$name.$caseSensitive.'}');
         }
 
@@ -1213,20 +1227,6 @@ GREMLIN
         return $this;
     }
     
-    public function goToStaticConstantDefinition() {
-        $this->outIs('CONSTANT')
-             ->savePropertyAs('code', 'constant')
-             ->inIs('CONSTANT')
-             ->outIs('CLASS')
-             ->inIs('DEFINITION')
-             ->outIs('CONST')
-             ->outIs('CONST')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'constant')
-             ->inIs('NAME');
-        return $this;
-    }
-
     public function groupCount($column) {
         $this->addMethod("groupCount(m){it.$column}");
         
@@ -1504,7 +1504,7 @@ GREMLIN
             $in = implode('', $ins);
         }
         
-        $this->addMethod("where( __.$in.hasLabel(within(***)))", makeArray($parentClass));
+        $this->addMethod("where( __$in.hasLabel(within(***)))", makeArray($parentClass));
         
         return $this;
     }
@@ -1548,7 +1548,7 @@ GREMLIN
             $out = implode('', $out);
         }
         
-        $this->addMethod("where( __.$out.hasLabel(within(***)))", makeArray($childrenClass));
+        $this->addMethod("where( __$out.hasLabel(within(***)) )", makeArray($childrenClass));
         
         return $this;
     }
@@ -2039,7 +2039,7 @@ GREMLIN
     }
     
     // Calculate The lenght of a string in a property, and report it in the named string
-    public function getStringLength($property, $variable) {
+    public function getStringLength($property = 'noDelimiter', $variable = 'l') {
         $query = <<<'GREMLIN'
 sideEffect{
     s = it.get().value("PROPERTY");
@@ -2378,10 +2378,10 @@ GREMLIN;
 
     private function assertToken($token) {
         if (is_string($token)) {
-            assert($token === strtoupper($token) && substr($token, 0, 2) === 'T_', 'Wrong token : '.$token);
+            assert($token === strtoupper($token) && substr($token, 0, 2) === 'T_', "Wrong token : '$token'");
         } else {
             foreach($token as $t) {
-                assert($t === strtoupper($t) && substr($t, 0, 2) === 'T_', 'Wrong token : '.$t);
+                assert($t === strtoupper($t) && substr($t, 0, 2) === 'T_', "Wrong token : '$t'");
             }
         }
         return true;
@@ -2402,13 +2402,13 @@ GREMLIN;
 
     private function assertProperty($property) {
         if (is_string($property)) {
-            assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') || ($property === 'label') , 'Wrong format for property name : "'.$property.'"');
-            assert(property_exists('Exakat\Tasks\Helpers\Atom', $property)|| ($property === 'label'), 'No such property in Atom : "'.$property.'"');
+            assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
+            assert(property_exists('Exakat\Tasks\Helpers\Atom', $property) || ($property === 'label'), 'No such property in Atom : "'.$property.'"');
         } else {
             $properties = $property;
             foreach($properties as $property) {
-                assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') || ($property === 'label') , 'Wrong format for property name : "'.$property.'"');
-                assert(property_exists('Exakat\Tasks\Helpers\Atom', $property)|| ($property === 'label'), 'No such property in Atom : "'.$property.'"');
+                assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter'), "Wrong format for property name : '$property'");
+                assert(property_exists('Exakat\Tasks\Helpers\Atom', $property) || ($property === 'label'), "No such property in Atom : '$property'");
             }
         }
         return true;

@@ -33,7 +33,7 @@ g.V().hasLabel("Method", "Magicmethod")
      .has("static", true )
      .not(has("abstract", true ))
      .out("NAME")
-     .values("code")
+     .values("lccode")
      .unique()
 GREMLIN;
         $staticMethods = $this->query($query)->toArray();
@@ -47,7 +47,7 @@ g.V().hasLabel("Method", "Magicmethod")
      .not(has("static", true ))
      .not(has("abstract", true ))
      .out("NAME")
-     .values("code")
+     .values("lccode")
      .unique()
 GREMLIN;
         $normalMethods = $this->query($query)->toArray();
@@ -63,7 +63,7 @@ GREMLIN;
              ->atomIsNot('This')
              ->back('first')
              ->outIs('METHOD')
-             ->codeIs($methods, self::NO_TRANSLATE)
+             ->codeIs($methods, self::NO_TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -74,13 +74,13 @@ GREMLIN;
              ->back('first')
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
+             ->savePropertyAs('lccode', 'name')
              ->goToClass()
              ->goToAllParents(self::INCLUDE_SELF)
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->is('static', true)
              ->outIs('NAME')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

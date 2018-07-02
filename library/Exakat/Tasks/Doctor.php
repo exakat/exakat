@@ -364,6 +364,12 @@ class Doctor extends Tasks {
             $stats['installed'] = 'Yes (folder : '.$this->config->gsneo4j_folder.')';
             $stats['host'] = $this->config->gsneo4j_host;
             $stats['port'] = $this->config->gsneo4j_port;
+
+            $plugins = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/plugin/*.jar");
+            print count($plugins);
+            if (count($plugins) !== 73) {
+                $stats['grapes failed'] = 'Partially installed neo4j plugin. Please, check installation docs, and "grab" again : some of the files are missing for neo4j.';
+            }
             
             $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
             $gremlinVersion = basename(array_pop($gremlinJar));

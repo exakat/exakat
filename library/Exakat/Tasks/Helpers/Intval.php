@@ -72,6 +72,8 @@ class Intval extends Plugin {
                 break;
     
             case 'Staticclass' :
+            case 'Identifier' :
+            case 'Nsname' :
             case 'Self' :
             case 'Parent' :
             case 'Null' :
@@ -108,6 +110,10 @@ class Intval extends Plugin {
 
             case 'Arrayliteral' :
                 $atom->intval    = (int) (bool) $atom->count;
+                break;
+
+            case 'Constant' :
+                $atom->intval    = $extras['VALUE']->intval;
                 break;
 
             case 'Not' :
