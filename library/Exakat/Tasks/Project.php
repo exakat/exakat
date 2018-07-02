@@ -110,8 +110,6 @@ class Project extends Tasks {
             $info['vcs_type'] = strtolower($vcsClass);
             $info['vcs_url']  = $this->config->project_url;
             
-           $vcsClass = "\\Exakat\\Vcs\\{$vcsClass}";
-            
             $vcs = new $vcsClass($this->config->project, $this->config->projects_root);
             if (method_exists($vcs, 'getBranch')) {
                 $info['vcs_branch']      = $vcs->getBranch();
