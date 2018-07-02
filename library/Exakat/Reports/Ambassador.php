@@ -175,6 +175,7 @@ class Ambassador extends Reports {
 
         $this->generateSettings();
         $this->generateProcFiles();
+        $this->generateClassTree();
 
         $this->generateDashboard();
         $this->generateExtensionsBreakdown();
@@ -287,7 +288,7 @@ class Ambassador extends Reports {
                 if($startLine<0)
                     $startLine=0;
 
-                if($lineNumber+$numberBeforeAndAfter < count($fileLines)-1 ) {
+                if(count($fileLines) - 1 > $lineNumber + $numberBeforeAndAfter) {
                     $endLine = $lineNumber+$numberBeforeAndAfter;
                 } else {
                     $endLine = count($fileLines)-1;
@@ -2728,6 +2729,49 @@ HTML;
         }
         $this->generateExceptionTree();
         $this->generateNamespaceTree();
+    }
+
+    private function generateClassTree() {
+        $theTable = '';
+        $list = array();
+
+        $res = $this->sqlite->query(<<<SQL
+SELECT cit.name AS name, cit2.name AS extends 
+    FROM cit 
+    LEFT JOIN cit cit2 
+        ON cit.extends = cit2.id
+    WHERE cit.type="class" AND
+          cit2.type="class"
+SQL
+);
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (empty($row['extends'])) {
+                continue;
+            }
+            
+            $parent = '\\'.strtolower($row['extends']);
+            if (!isset($list[$parent])) {
+                $list[$parent] = array();
+            }
+            
+            $list[$parent][] = $row['name'];
+        }
+        foreach($list as &$l) {
+            sort($l);
+        } 
+        
+        $theTable = $this->tree2ul(array("cmsmain" => array(),
+                                         "cmssitetreefilter" => array(),
+                                         "silverstripenavigatoritem" => array(),
+                                         "ss_report" => array(),
+                                         "ss_reportwrapper" => array(),
+                                         ), $list);
+
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Exceptions inventory');
+        $html = $this->injectBloc($html, 'DESCRIPTION', '');
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
+        $this->putBasedPage('inventories_classtree', $html);
     }
 
     private function generateExceptionTree() {
