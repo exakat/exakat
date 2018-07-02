@@ -13,8 +13,6 @@ Version 1.3.4 (Cheng Yaojin, 2018-07-02)
     + Added check when unarchiving tar.gz and tar.bz
     + Added check for neo4j installation, (error grabing)
     + Moved Upgrade to tmp folder
-+ Report
-    + 
 + Analyzer
     + Parameters are actually defined in the class
     + New analysis : ambiguous visibilities of properties
