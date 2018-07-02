@@ -421,7 +421,8 @@ class Load extends Tasks {
         $this->id0 = $this->addAtom('Project');
         $this->id0->code      = 'Whole';
         $this->id0->atom      = 'Project';
-        $this->id0->fullcode  = $this->config->project;
+        $this->id0->code      = $this->config->project;
+        $this->id0->fullcode  = $this->config->project_name;
         $this->id0->token     = 'T_WHOLE';
 
         // Restart the connexion each time
