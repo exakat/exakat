@@ -2736,10 +2736,14 @@ HTML;
         $list = array();
 
         $res = $this->sqlite->query(<<<SQL
-SELECT cit.name AS name, cit2.name AS extends 
+SELECT ns.namespace || '\' || cit.name AS name, ns2.namespace || '\' || cit2.name AS extends 
     FROM cit 
     LEFT JOIN cit cit2 
         ON cit.extends = cit2.id
+    JOIN namespaces ns
+        ON cit.namespaceId = ns.id
+    JOIN namespaces ns2
+        ON cit2.namespaceId = ns2.id
     WHERE cit.type="class" AND
           cit2.type="class"
 SQL
@@ -2749,7 +2753,7 @@ SQL
                 continue;
             }
             
-            $parent = '\\'.strtolower($row['extends']);
+            $parent = $row['extends'];
             if (!isset($list[$parent])) {
                 $list[$parent] = array();
             }
@@ -2760,18 +2764,32 @@ SQL
             sort($l);
         } 
         
-        $theTable = $this->tree2ul(array("cmsmain" => array(),
-                                         "cmssitetreefilter" => array(),
-                                         "silverstripenavigatoritem" => array(),
-                                         "ss_report" => array(),
-                                         "ss_reportwrapper" => array(),
-                                         ), $list);
+        $secondaries = array_merge(...array_values($list));
+        $top = array_diff(array_keys($list), $secondaries);
+        
+        foreach($top as $t) {
+            $theTable .= '<ul>'.$this->extends2ul($t, $list).'</ul>';
+        }
 
         $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Exceptions inventory');
-        $html = $this->injectBloc($html, 'DESCRIPTION', '');
+        $html = $this->injectBloc($html, 'TITLE', 'Classes inventory');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the classes. Classes without any extension are not represented');
         $html = $this->injectBloc($html, 'CONTENT', $theTable);
         $this->putBasedPage('inventories_classtree', $html);
+    }
+    
+    private function extends2ul ($root, $paths) {
+        $return = "<li>$root<ul>";
+        foreach($paths[$root] as $sub) {
+            if (isset($paths[$sub])){
+                $secondary = $this->extends2ul($sub, $paths);
+                $return .= $secondary;
+            } else {
+                $return .= "<li>$sub</li>";
+            }
+        }
+        $return .= "</ul></li>\n";
+        return $return;
     }
 
     private function generateExceptionTree() {
@@ -2918,7 +2936,7 @@ SQL
         
         return $return;
     }
-    
+
     private function pathtree2ul($path) {
         if (empty($path)) {
             return '';
@@ -2955,7 +2973,7 @@ SQL
     
     private function generateNamespaceTree() {
         $theTable = '';
-        $res = $this->sqlite->query('SELECT namespace FROM namespaces WHERE namespace != "\app\console" ORDER BY namespace');
+        $res = $this->sqlite->query('SELECT namespace FROM namespaces ORDER BY namespace');
         
         $paths = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
