@@ -4872,7 +4872,7 @@ class Load extends Tasks {
         $concatenation->noDelimiter = $noDelimiter;
         $concatenation->line        = $this->tokens[$current][2];
         $concatenation->token       = $this->getToken($this->tokens[$current][0]);
-        $concatenation->count       = $rank;
+        $concatenation->count       = $rank + 1;
         
         $this->runPlugins($concatenation, $concat);
 
