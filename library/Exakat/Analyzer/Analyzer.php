@@ -2039,7 +2039,7 @@ GREMLIN
     }
     
     // Calculate The lenght of a string in a property, and report it in the named string
-    public function getStringLength($property, $variable) {
+    public function getStringLength($property = 'noDelimiter', $variable = 'l') {
         $query = <<<'GREMLIN'
 sideEffect{
     s = it.get().value("PROPERTY");
