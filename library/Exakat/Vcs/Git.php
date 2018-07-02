@@ -29,9 +29,6 @@ class Git extends Vcs {
     private $installed = false;
     private $optional  = true;
     private $version   = 'unknown';
-    private $tag       = '';
-    private $branch    = 'master';
-    
     
     public function __construct($destination, $project_root) {
         parent::__construct($destination, $project_root);
@@ -109,11 +106,11 @@ class Git extends Vcs {
         return $resFinal;
     }
 
-    public function setBranch($branch) {
+    public function setBranch($branch = '') {
         $this->branch = $branch;
     }
 
-    public function setTag($tag) {
+    public function setTag($tag = '') {
         $this->tag = $tag;
     }
 
