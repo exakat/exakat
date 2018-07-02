@@ -71,13 +71,13 @@ abstract class Vcs {
         return $status;
     }
 
-    protected function setBranch($branch = '') {
+    public function setBranch($branch = '') {
         if (!empty($branch)) {
             $this->branch = $branch;
         }
     }
 
-    protected function setTag($tag = '') {
+    public function setTag($tag = '') {
         if (!empty($tag)) {
             $this->tag = $tag;
         }
