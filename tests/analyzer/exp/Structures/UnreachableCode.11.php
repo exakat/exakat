@@ -3,6 +3,8 @@
 $expected     = array('++$foo',
                       '++$foo3',
                       '++$foo5',
+                      '++$foo10',
+                      '++$foo11',
                      );
 
 $expected_not = array('++$foo2',
@@ -11,8 +13,6 @@ $expected_not = array('++$foo2',
                       '++$foo7',
                       '++$foo8',
                       '++$foo9',
-                      '++$foo10',
-                      '++$foo11',
                      );
 
 ?>
