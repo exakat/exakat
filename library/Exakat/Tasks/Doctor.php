@@ -282,7 +282,6 @@ class Doctor extends Tasks {
                           );
 
         foreach($optionals as $class => $section) {
-            $fullClass = "\\Exakat\\Vcs\\$class";
             $vcs = new $fullClass($this->config->project, $this->config->projects_root);
             $stats[$section] = $vcs->getInstallationInfo();
         }
