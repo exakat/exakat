@@ -31,6 +31,7 @@ use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\HelperException;
 use Exakat\Exceptions\VcsError;
 use Exakat\Project;
+use Exakat\Vcs\Vcs;
 use Exakat\Vcs\{Bazaar, Composer, Copy, EmptyCode, Git, Mercurial, Svn, Symlink, Tarbz, Targz, Zip};
 
 class Initproject extends Tasks {
@@ -79,7 +80,7 @@ class Initproject extends Tasks {
 
         $tmpPath = "{$this->config->projects_root}/projects/.$project";
         if (file_exists($tmpPath)) {
-            print "Removing tmpPath : $tmpPath\n";
+            display("Removing tmpPath : $tmpPath\n");
             rmdirRecursive($tmpPath);
         }
         
@@ -173,92 +174,16 @@ class Initproject extends Tasks {
 
         $skipFiles           = false;
         $dotProject          = ".$project";
-
-        switch (true) {
-            // Symlink
-            case ($this->config->symlink === true) :
-                display('Symlink initialization : '.realpath($repositoryURL));
-                $vcs = new Symlink($dotProject, $this->config->projects_root);
-                break;
-
-            // Initialization by copy
-            case ($this->config->copy === true) :
-                display('Copy initialization');
-                $vcs = new Copy($dotProject, $this->config->projects_root);
-                break;
-
-            // Empty initialization
-            case ($repositoryURL === '' || $repositoryURL === false) :
-                display('Empty initialization');
-                $vcs = new EmptyCode($dotProject, $this->config->projects_root);
-                $repositoryURL = '';
-
-                $skipFiles = true;
-                break;
-
-            // composer archive (early in the list, as this won't have 'scheme'
-            case ($this->config->composer === true) :
-                display('Initialization with composer');
-                $vcs = new Composer($dotProject, $this->config->projects_root);
-                break;
-
-            // SVN
-            case (isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'svn' || $this->config->svn === true) :
-                display('SVN initialization');
-                $vcs = new Svn($dotProject, $this->config->projects_root);
-                break;
-
-            // Bazaar
-            case ($this->config->bzr === true) :
-                display('Bazaar initialization');
-                $vcs = new Bazaar($dotProject, $this->config->projects_root);
-                break;
-
-            // HG
-            case ($this->config->hg === true) :
-                display('Mercurial initialization');
-                $vcs = new Mercurial($dotProject, $this->config->projects_root);
-                break;
-
-            // Tbz archive
-            case ($this->config->tbz === true) :
-                display('Download the tar.bz2');
-                $vcs = new Tarbz($dotProject, $this->config->projects_root);
-                break;
-
-            // tgz archive
-            case ($this->config->tgz === true) :
-                display('Download the tar.gz');
-                $vcs = new Targz($dotProject, $this->config->projects_root);
-                break;
-
-            // zip archive
-            case ($this->config->zip === true) :
-                display('Download the zip');
-                $vcs = new Zip($dotProject, $this->config->projects_root);
-                break;
-
-            // Git
-            // Git is last, as it will act as a default
-            case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] === 'git') || $this->config->git === true) :
-                display('Download with git');
-                $vcs = new Git($dotProject, $this->config->projects_root);
-                
-                if (!empty($this->config->branch)){
-                    $vcs->setBranch($this->config->branch);
-                }
-
-                if (!empty($this->config->tag)){
-                    $vcs->setTag($this->config->tag);
-                }
-                break;
-
-            default :
-                display('Empty initialization');
-                $vcs = new EmptyCode($dotProject, $this->config->projects_root);
-                $skipFiles = true;
+        
+        $vcsClass = Vcs::getVcs($this->config);
+        $vcs = new $vcsClass($dotProject, $this->config->projects_root);
+        if (!empty($this->config->branch)){
+            $vcs->setBranch($this->config->branch);
         }
 
+        if (!empty($this->config->tag)){
+            $vcs->setTag($this->config->tag);
+        }
 
         try {
             $vcs->clone($repositoryURL);
@@ -287,7 +212,7 @@ class Initproject extends Tasks {
             display('Running files');
 
             // Running script as a separate process, to take into account the actual config file..
-            $shell = $this->config->php.' '.$this->config->executable.' files -p '.$this->config->project;
+            $shell = "{$this->config->php} {$this->config->executable} files -p {$this->config->project}";
             $res = shell_exec($shell);
             
             if (!empty($res)) {
