@@ -149,7 +149,10 @@ GREMLIN;
 
         $constants = array_values(array_intersect($res->toArray(), $this->dictCode->translate($constantsPHP) ));
 
-        $query = <<<GREMLIN
+        if (empty($constants)) {
+            display('No PHP Constants');
+        } else {
+            $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
      .has("fullnspath")
      .not(where( __.in("DEFINITION")))
@@ -163,7 +166,8 @@ g.V().hasLabel("Identifier")
 
 GREMLIN;
 
-        $this->runQuery($query, $title, array('arg1' => $constants));
+            $this->runQuery($query, $title, array('arg1' => $constants));
+        }
     }
     
     private function spotPHPNativeFunctions() {
