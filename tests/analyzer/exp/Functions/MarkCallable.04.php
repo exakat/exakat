@@ -9,6 +9,7 @@ $expected     = array('[$i, \'j\']',
                       '[$c, \'d\']',
                       '[$e, \'f\']',
                       '[\'a\', \'b\']',
+                      '[$sssh7, \'sssh7\']',
                      );
 
 $expected_not = array('[\'a2\', \'b2\']',

@@ -30,13 +30,15 @@ class MarkCallable extends Analyzer {
         $atoms = 'String';
         
         $ini = $this->loadIni('php_with_callback.ini');
-        foreach($ini as &$lists) {
-            $lists = makeFullNsPath($lists);
+        $callbacks = array();
+        foreach($ini as $position => $functions) {
+            $rank = substr($position, 9);
+            if ($rank[0] === '_') {
+                $rank = substr($position, 10);
+            }
+            $callbacks[$rank] = $functions;
         }
-        unset($lists);
-
-        $positions = array(0, 1, 2, 3, 4, 5, 6);
-
+        
         /* Supports :
             string as callable : array_map($array, 'string');
             array with static call : array_map($array, array('string', 'string'));
@@ -74,52 +76,26 @@ sideEffect{
 GREMLIN;
 
         // callable is in # position
-        foreach($positions as $position) {
-            $this->atomFunctionIs($ini['functions'.$position])
+        foreach($callbacks as $position => $functions) {
+            $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs($atoms)
-                 ->tokenIsNot('T_QUOTE')
+                 ->hasNoOut('CONCAT')
                  ->raw($apply);
             $this->prepareQuery();
         }
-
-        // callable is in last
-        $this->atomFunctionIs($ini['functions_last'])
-             ->outWithRank('ARGUMENT', 'last')
-             ->atomIs($atoms)
-             ->raw($apply);
-        $this->prepareQuery();
-        
-        // callable is in 2nd to last
-        $this->atomFunctionIs($ini['functions_2last'])
-             ->outWithRank('ARGUMENT', '2last')
-             ->atomIs($atoms)
-             ->raw($apply);
-        $this->prepareQuery();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
         // working with functions (not methods) : containers
         $atoms = array('Variable', 'Array', 'Member', 'Staticproperty');
 
         // callable is in # position
-        foreach($positions as $position) {
-            $this->atomFunctionIs($ini['functions'.$position])
+        foreach($callbacks as $position => $functions) {
+            $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs($atoms);
             $this->prepareQuery();
         }
-
-        // callable is in last
-        $this->atomFunctionIs($ini['functions_last'])
-             ->outWithRank('ARGUMENT', 'last')
-             ->atomIs($atoms);
-        $this->prepareQuery();
-        
-        // callable is in 2nd to last
-        $this->atomFunctionIs($ini['functions_2last'])
-             ->outWithRank('ARGUMENT', '2last')
-             ->atomIs($atoms);
-        $this->prepareQuery();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // array('Class', 'method');
@@ -147,8 +123,8 @@ where( __.out("ARGUMENT").count().is(eq(2)) )
 GREMLIN;
 
         // callable is in # position
-        foreach($positions as $position) {
-            $this->atomFunctionIs($ini['functions'.$position])
+        foreach($callbacks as $position => $functions) {
+            $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Arrayliteral')
                  ->raw('sideEffect{ theArrayNode = it.get(); }')
@@ -156,24 +132,6 @@ GREMLIN;
                  ->raw($apply);
             $this->prepareQuery();
         }
-
-        // callable is in last
-        $this->atomFunctionIs($ini['functions_last'])
-             ->outWithRank('ARGUMENT', 'last')
-             ->atomIs('Arrayliteral')
-             ->raw('sideEffect{ theArrayNode = it.get(); }')
-             ->raw($arrayContainsTwoStrings)
-             ->raw($apply);
-        $this->prepareQuery();
-
-        // callable is in 2nd to last
-        $this->atomFunctionIs($ini['functions_2last'])
-             ->outWithRank('ARGUMENT', '2last')
-             ->atomIs('Arrayliteral')
-             ->raw('sideEffect{ theArrayNode = it.get(); }')
-             ->raw($arrayContainsTwoStrings)
-             ->raw($apply);
-        $this->prepareQuery();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // array($object, 'method'); Also, [$object, 'method']
@@ -192,8 +150,8 @@ GREMLIN;
         $secondArgIsAString = 'where ( __.out("ARGUMENT").has("rank", 1).hasLabel("String").where( __.out("CONCAT").count().is(eq(0))) )';
         
         // callable is in # position
-        foreach($positions as $position) {
-            $this->atomFunctionIs($ini['functions'.$position])
+        foreach($callbacks as $position => $functions) {
+            $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Arrayliteral')
                  ->raw('sideEffect{ theArrayNode = it.get(); }')
@@ -205,48 +163,16 @@ GREMLIN;
             $this->prepareQuery();
         }
 
-        // callable is in last
-        $this->atomFunctionIs($ini['functions_last'])
-             ->outWithRank('ARGUMENT', 'last')
-             ->atomIs('Arrayliteral')
-             ->raw('sideEffect{ theArrayNode = it.get(); }')
-             ->raw($firstArgIsAVariable)
-             ->raw($secondArgIsAString)
-             ->raw($apply);
-        $this->prepareQuery();
-
-        // callable is in 2nd to last
-        $this->atomFunctionIs($ini['functions_2last'])
-             ->outWithRank('ARGUMENT', '2last')
-             ->atomIs('Arrayliteral')
-             ->raw('sideEffect{ theArrayNode = it.get(); }')
-             ->raw($firstArgIsAVariable)
-             ->raw($secondArgIsAString)
-             ->raw($apply);
-        $this->prepareQuery();
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Closures
 
         // callable is in # position
-        foreach($positions as $position) {
-            $this->atomFunctionIs($ini['functions'.$position])
+        foreach($callbacks as $position => $functions) {
+            $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Closure');
             $this->prepareQuery();
         }
-
-        // callable is in last
-        $this->atomFunctionIs($ini['functions_last'])
-             ->outWithRank('ARGUMENT', 'last')
-             ->atomIs('Closure');
-        $this->prepareQuery();
-
-        // callable is in 2nd to last
-        $this->atomFunctionIs($ini['functions_2last'])
-             ->outWithRank('ARGUMENT', '2last')
-             ->atomIs('Closure');
-        $this->prepareQuery();
     }
 }
 

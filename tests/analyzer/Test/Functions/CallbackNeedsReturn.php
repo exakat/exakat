@@ -8,10 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Functions_CallbackNeedsReturn extends Analyzer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function testFunctions_CallbackNeedsReturn01()  { $this->generic_test('Functions/CallbackNeedsReturn.01'); }
     public function testFunctions_CallbackNeedsReturn02()  { $this->generic_test('Functions/CallbackNeedsReturn.02'); }
     public function testFunctions_CallbackNeedsReturn03()  { $this->generic_test('Functions/CallbackNeedsReturn.03'); }
+    public function testFunctions_CallbackNeedsReturn04()  { $this->generic_test('Functions/CallbackNeedsReturn.04'); }
 }
 ?>

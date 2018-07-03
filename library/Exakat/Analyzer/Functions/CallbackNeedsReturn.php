@@ -31,7 +31,10 @@ class CallbackNeedsReturn extends Analyzer {
         // array_map(function ($x) { }, $a)
         
         foreach($ini as $position => $functions) {
-            $rank = (int) substr($position, 9);
+            $rank = substr($position, 9);
+            if ($rank[0] === '_') {
+                list(, $rank) = explode('_', $position);
+            }
             
             //String callback
             $this->atomFunctionIs($functions)

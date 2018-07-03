@@ -918,8 +918,10 @@ GREMLIN;
             $this->addMethod('map( __.out("'.$link.'").order().by("rank").tail(1) )');
         } elseif ($rank === '2last') {
             $this->addMethod('map( __.out("'.$link.'").order().by("rank").tail(2) )');
-        } else {
+        } elseif (abs((int) $rank) >= 0) {
             $this->addMethod('out("'.$link.'").has("rank", eq('.abs((int) $rank).'))');
+        } else {
+            assert(false, "rank '$rank' is wrong in ".__METHOD__);
         }
 
         return $this;
@@ -1554,6 +1556,14 @@ GREMLIN
     }
         
     public function hasNoChildren($childrenClass, $outs = array()) {
+        $childrenClass = makeArray($childrenClass);
+        $diff = array_values(array_intersect($childrenClass, self::$availableAtoms));
+        
+        if (empty($diff)){
+            $this->addMethod(self::STOP_QUERY);
+            return $this;
+        }
+
         if (empty($outs)) {
             $out = '.out( )';
         } else {
@@ -1571,7 +1581,9 @@ GREMLIN
             $out = implode('', $out);
         }
         
-        $this->addMethod('not( where( __'.$out.'.hasLabel(within(***)) ) )', makeArray($childrenClass));
+        
+        
+        $this->addMethod('not( where( __'.$out.'.hasLabel(within(***)) ) )', $diff);
         
         return $this;
     }

@@ -9,6 +9,7 @@ $expected     = array('array($i, \'j\')',
                       'array($c, \'d\')',
                       'array($e, \'f\')',
                       'array(\'a\', \'b\')',
+                      'array($sssh7, \'sssh7\')',
                      );
 
 $expected_not = array('last',
