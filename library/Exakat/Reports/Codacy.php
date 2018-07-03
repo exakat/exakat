@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Results;
 
 class Codacy extends Reports {
-    const FILE_EXTENSION = 'json';
+    const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'stdout';
 
     public function dependsOnAnalysis() {
@@ -62,7 +62,8 @@ https://support.codacy.com/hc/en-us/articles/207994725-Tool-Developer-Guide
             $results[] = json_encode($line);
         }
 
-        return implode(PHP_EOL, $results);
+        print implode(PHP_EOL, $results);
+        return '';
     }
 }
 
