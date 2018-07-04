@@ -586,12 +586,11 @@ GREMLIN
         assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($this->assertAtom($atom));
 
-        $atoms = makeArray($atom);
-        $diff = array_intersect($atoms, self::$availableAtoms);
+        $diff = $this->checkAtoms($atom);
         if (empty($diff)) {
             $this->addMethod(self::STOP_QUERY);
         } else {
-            $this->addMethod('hasLabel(within(***))', $atoms);
+            $this->addMethod('hasLabel(within(***))', $diff);
         }
         
         return $this;
@@ -1491,99 +1490,56 @@ GREMLIN
     }
 
     public function hasParent($parentClass, $ins = array()) {
-        if (empty($ins)) {
-            $in = '.in()';
-        } else {
-            $ins = makeArray($ins);
-            foreach($ins as &$i) {
-                if (empty($i)) {
-                    $i = '.in()';
-                } else {
-                    $i = ".in(\"$i\")";
-                }
-            }
-            
-            $in = implode('', $ins);
-        }
-        
-        $this->addMethod("where( __$in.hasLabel(within(***)))", makeArray($parentClass));
-        
-        return $this;
-    }
-
-    public function hasNoParent($parentClass, $ins = array()) {
-        if (empty($ins)) {
-            $in = '.in()';
-        } else {
-            $ins = makeArray($ins);
-            foreach($ins as &$i) {
-                if (empty($i)) {
-                    $i = '.in()';
-                } else {
-                    $i = ".in(\"$i\")";
-                }
-            }
-            
-            $in = implode('', $ins);
-        }
-        
-        $this->addMethod("not( where( __$in.hasLabel(within(***)) ) )", makeArray($parentClass));
-        
-        return $this;
-    }
-
-    public function hasChildren($childrenClass, $outs = array()) {
-        if (empty($outs)) {
-            $out = '.out( )';
-        } else {
-            $out = array();
-            
-            $outs = makeArray($outs);
-            foreach($outs as $o) {
-                if (empty($o)) {
-                    $out[] = '.out( )';
-                } else {
-                    $out[] = ".out(\"$o\")";
-                }
-            }
-            
-            $out = implode('', $out);
-        }
-        
-        $this->addMethod("where( __$out.hasLabel(within(***)) )", makeArray($childrenClass));
-        
-        return $this;
-    }
-        
-    public function hasNoChildren($childrenClass, $outs = array()) {
-        $childrenClass = makeArray($childrenClass);
-        $diff = array_values(array_intersect($childrenClass, self::$availableAtoms));
+        $diff = $this->checkAtoms($parentClass);
         
         if (empty($diff)){
             $this->addMethod(self::STOP_QUERY);
             return $this;
         }
 
-        if (empty($outs)) {
-            $out = '.out( )';
-        } else {
-            $out = array();
-            
-            $outs = makeArray($outs);
-            foreach($outs as $o) {
-                if (empty($o)) {
-                    $out[] = '.out( )';
-                } else {
-                    $out[] = ".out('$o')";
-                }
-            }
-            
-            $out = implode('', $out);
+        $in = $this->makeLinks($ins, 'in');
+        $this->addMethod("where( __$in.hasLabel(within(***)))", $diff);
+        
+        return $this;
+    }
+
+    public function hasNoParent($parentClass, $ins = array()) {
+        $diff = $this->checkAtoms($parentClass);
+        
+        if (empty($diff)){
+            $this->addMethod(self::STOP_QUERY);
+            return $this;
         }
+
+        $in = $this->makeLinks($ins, 'in');
+        $this->addMethod("not( where( __$in.hasLabel(within(***)) ) )", $diff);
         
+        return $this;
+    }
+
+    public function hasChildren($childrenClass, $outs = array()) {
+        $diff = $this->checkAtoms($childrenClass);
         
+        if (empty($diff)){
+            $this->addMethod(self::STOP_QUERY);
+            return $this;
+        }
+
+        $out = $this->makeLinks($outs, 'out');
+        $this->addMethod("where( __$out.hasLabel(within(***)) )", $diff);
         
-        $this->addMethod('not( where( __'.$out.'.hasLabel(within(***)) ) )', $diff);
+        return $this;
+    }
+
+    public function hasNoChildren($childrenClass, $outs = array()) {
+        $diff = $this->checkAtoms($childrenClass);
+        if (empty($diff)){
+            $this->addMethod(self::STOP_QUERY);
+            return $this;
+        }
+
+        $out = $this->makeLinks($outs, 'out');
+        $this->addMethod("not( where( __$out.hasLabel(within(***)) ) )", $diff);
         
         return $this;
     }
@@ -2424,6 +2380,30 @@ GREMLIN;
             }
         }
         return true;
+    }
+
+    private function makeLinks($links, $direction = 'in') {
+        if (empty($links)) {
+            return '.out( )';
+        }
+        
+        $return = array();
+        
+        $links = makeArray($links);
+        foreach($links as $l) {
+            if (empty($l)) {
+                $return[] = ".$direction( )";
+            } else {
+                $return[] = ".$direction(\"$l\")";
+            }
+        }
+        
+        return implode('', $return);
+    }
+    
+    private function checkAtoms($atoms) {
+        $atoms = makeArray($atoms);
+        return array_values(array_intersect($atoms, self::$availableAtoms));
     }
 
 }
