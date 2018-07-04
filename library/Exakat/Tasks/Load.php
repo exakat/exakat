@@ -47,6 +47,8 @@ use Exakat\Tasks\Helpers\CloneType1;
 
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
+    
+    private $ASSIGNATIONS = array();
 
     private $php    = null;
     private $loader = null;
@@ -203,7 +205,25 @@ class Load extends Tasks {
 
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
-        
+
+        $className = '\Exakat\Tasks\Helpers\Php'.$this->config->phpversion[0].$this->config->phpversion[2];
+        $this->phptokens  = new $className();
+
+        $this->ASSIGNATIONS = array($this->phptokens::T_EQUAL,
+                                    $this->phptokens::T_PLUS_EQUAL,
+                                    $this->phptokens::T_AND_EQUAL,
+                                    $this->phptokens::T_CONCAT_EQUAL,
+                                    $this->phptokens::T_DIV_EQUAL,
+                                    $this->phptokens::T_MINUS_EQUAL,
+                                    $this->phptokens::T_MOD_EQUAL,
+                                    $this->phptokens::T_MUL_EQUAL,
+                                    $this->phptokens::T_OR_EQUAL,
+                                    $this->phptokens::T_POW_EQUAL,
+                                    $this->phptokens::T_SL_EQUAL,
+                                    $this->phptokens::T_SR_EQUAL,
+                                    $this->phptokens::T_XOR_EQUAL,
+                                   );
+
         $this->atomGroup = new AtomGroup();
 
         $this->php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
@@ -219,9 +239,6 @@ class Load extends Tasks {
         $this->plugins[] = new Nullval();
         $this->plugins[] = new Constant($this->config);
         $this->plugins[] = new CloneType1();
-
-        $className = '\Exakat\Tasks\Helpers\Php'.$this->config->phpversion[0].$this->config->phpversion[2];
-        $this->phptokens  = new $className();
 
         $this->precedence = new Precedence($className);
 
@@ -4401,20 +4418,7 @@ class Load extends Tasks {
         do {
             $this->processNext();
 
-            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_EQUAL,
-                                                                $this->phptokens::T_PLUS_EQUAL,
-                                                                $this->phptokens::T_AND_EQUAL,
-                                                                $this->phptokens::T_CONCAT_EQUAL,
-                                                                $this->phptokens::T_DIV_EQUAL,
-                                                                $this->phptokens::T_MINUS_EQUAL,
-                                                                $this->phptokens::T_MOD_EQUAL,
-                                                                $this->phptokens::T_MUL_EQUAL,
-                                                                $this->phptokens::T_OR_EQUAL,
-                                                                $this->phptokens::T_POW_EQUAL,
-                                                                $this->phptokens::T_SL_EQUAL,
-                                                                $this->phptokens::T_SR_EQUAL,
-                                                                $this->phptokens::T_XOR_EQUAL,
-                                                                ))) {
+            if (in_array($this->tokens[$this->id + 1][0], $this->ASSIGNATIONS)) {
                 $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
@@ -4613,20 +4617,7 @@ class Load extends Tasks {
         do {
             $right = $this->processNext();
 
-            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_EQUAL,
-                                                                $this->phptokens::T_PLUS_EQUAL,
-                                                                $this->phptokens::T_AND_EQUAL,
-                                                                $this->phptokens::T_CONCAT_EQUAL,
-                                                                $this->phptokens::T_DIV_EQUAL,
-                                                                $this->phptokens::T_MINUS_EQUAL,
-                                                                $this->phptokens::T_MOD_EQUAL,
-                                                                $this->phptokens::T_MUL_EQUAL,
-                                                                $this->phptokens::T_OR_EQUAL,
-                                                                $this->phptokens::T_POW_EQUAL,
-                                                                $this->phptokens::T_SL_EQUAL,
-                                                                $this->phptokens::T_SR_EQUAL,
-                                                                $this->phptokens::T_XOR_EQUAL,
-                                                                ))) {
+            if (in_array($this->tokens[$this->id + 1][0], $this->ASSIGNATIONS)) {
                 $right = $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
@@ -4737,20 +4728,7 @@ class Load extends Tasks {
 
     private function processAssignation() {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals = array_merge($finals, array($this->phptokens::T_EQUAL,
-                                             $this->phptokens::T_PLUS_EQUAL,
-                                             $this->phptokens::T_AND_EQUAL,
-                                             $this->phptokens::T_CONCAT_EQUAL,
-                                             $this->phptokens::T_DIV_EQUAL,
-                                             $this->phptokens::T_MINUS_EQUAL,
-                                             $this->phptokens::T_MOD_EQUAL,
-                                             $this->phptokens::T_MUL_EQUAL,
-                                             $this->phptokens::T_OR_EQUAL,
-                                             $this->phptokens::T_POW_EQUAL,
-                                             $this->phptokens::T_SL_EQUAL,
-                                             $this->phptokens::T_SR_EQUAL,
-                                             $this->phptokens::T_XOR_EQUAL,
-                                             ));
+        $finals = array_merge($finals, $this->ASSIGNATIONS);
         return $this->processOperator('Assignation', $finals);
     }
 
