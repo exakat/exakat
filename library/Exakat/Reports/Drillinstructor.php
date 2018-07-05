@@ -449,7 +449,7 @@ SQL
                             );
             $count = 0;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini');
+                $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini', INI_PROCESS_SECTIONS);
 
 #FF0000	Bad
 #FFFF00	Bad-Average

@@ -43,7 +43,7 @@ class Clustergrammer extends Reports {
         $titles = array();
         foreach($skeleton as $analyzer => $foo) {
             if ($analyzer == 'total') { continue; }
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$analyzer.'.ini');
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$analyzer.'.ini', INI_PROCESS_SECTIONS);
             $titles[$analyzer] = '"'.$ini['name'].'"';
         }
 

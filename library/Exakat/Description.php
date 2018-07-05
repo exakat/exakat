@@ -41,7 +41,7 @@ class Description {
 
         assert(file_exists($filename), "Documentation for '$analyzerName' doesn't exists : $filename.");
         
-        $this->ini = parse_ini_file($filename, true);
+        $this->ini = parse_ini_file($filename, INI_PROCESS_SECTIONS);
         $this->ini['parameters'] = array();
         if (isset($this->ini['parameter1'])) {
             for($i = 0; $i < 10; ++$i) {

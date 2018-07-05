@@ -1239,7 +1239,7 @@ SQL;
         $items = array();
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini', INI_PROCESS_SECTIONS);
             $item['analyzer'] =  $ini['name'];
             $item['analyzer_md5'] = $this->toId($ini['name']);
             $item['file' ] =  $row['file'];

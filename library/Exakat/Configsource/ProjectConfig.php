@@ -83,7 +83,7 @@ class ProjectConfig extends Config {
             return self::NOT_LOADED;
         }
 
-        $this->config = parse_ini_file($pathToIni, true);
+        $this->config = parse_ini_file($pathToIni, INI_PROCESS_SECTIONS);
 
         $pathToCache = "{$this->projects_root}{$project}/config.cache";
         if (file_exists($pathToCache)) {
