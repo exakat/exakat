@@ -24,14 +24,25 @@ namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
 
-class Php72ObjectKeyword extends Analyzer {
-    protected $phpVersion = '7.2-';
-    
+class PHP71scalartypehints extends Analyzer {
+    protected $phpVersion = '7.1+';
+
     public function analyze() {
-        // class object {}
-        $this->atomIs(array('Class', 'Interface', 'Trait'))
-             ->outIs('NAME')
-             ->codeIs('object')
+        $scalartypehints = array('\iterable',
+                                 );
+
+        // function foo(bool $x)
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->fullnspathIs($scalartypehints)
+             ->back('first');
+        $this->prepareQuery();
+
+        // function foo(bool $x)
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->fullnspathIs($scalartypehints)
              ->back('first');
         $this->prepareQuery();
     }
