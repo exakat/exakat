@@ -210,7 +210,7 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Methodcall' :
-                $atom->ctype1 = $extras['OBJECT']->ctype1 . $atom->code . $extras['METHOD']->ctype1;
+                $atom->ctype1 = $extras['OBJECT']->ctype1 . $atom->code . $extras['METHOD']->ctype1.'()';
                 break;
 
             case 'Member' :
