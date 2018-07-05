@@ -27,10 +27,20 @@ use Exakat\Analyzer\Analyzer;
 
 class MultipleReturn extends Analyzer {
     public function analyze() {
-        $this->atomIs(array('Function', 'Closure', 'Method'))
+        // function foo() { if ($a ) { return 1; } else { return 2; }}
+        $MAX_LOOPING = self::MAX_LOOPING;
+
+        $this->atomIs(array('Function', 'Closure', 'Method', 'Magimethod'))
              ->hasNoInterface()
-             ->hasName()
-             ->raw('where( __.repeat( __.out('.$this->linksDown.').not( hasLabel("Closure", "Classanonymous")) ).emit( hasLabel("Return") ).times('.self::MAX_LOOPING.').count().is(gt(1)))');
+             ->raw(<<<GREMLIN
+where( 
+    __.repeat( 
+        __.out({$this->linksDown}).not( hasLabel("Closure", "Classanonymous")) ).emit().times($MAX_LOOPING)
+          .hasLabel("Return")
+          .count().is(gt(1))
+)
+GREMLIN
+);
         $this->prepareQuery();
     }
 }

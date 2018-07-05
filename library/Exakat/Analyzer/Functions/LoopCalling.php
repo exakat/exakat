@@ -48,7 +48,6 @@ class LoopCalling extends Analyzer {
 
         // loop of 3
         $this->atomIs('Function')
-             ->hasName()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')
@@ -74,7 +73,6 @@ class LoopCalling extends Analyzer {
 
         // loop of 4
         $this->atomIs('Function')
-             ->hasName()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Functioncall')

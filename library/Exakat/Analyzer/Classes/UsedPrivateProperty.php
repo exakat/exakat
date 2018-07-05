@@ -37,8 +37,7 @@ class UsedPrivateProperty extends Analyzer {
              ->outIs('PPP')
              ->_as('ppp')
              ->savePropertyAs('code', 'property')
-             ->goToClassTrait()
-             ->hasName()
+             ->goToClassTrait(array('Trait', 'Class'))
              ->savePropertyAs('fullnspath', 'classe')
              ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->raw(<<<GREMLIN

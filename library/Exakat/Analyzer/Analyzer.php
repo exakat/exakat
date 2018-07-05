@@ -948,18 +948,6 @@ GREMLIN;
         return $this;
     }
 
-    public function hasName() {
-        $this->addMethod('not(where(__.out("NAME").hasLabel("Void")) )');
-
-        return $this;
-    }
-
-    public function hasNoName() {
-        $this->addMethod('where(__.out("NAME").hasLabel("Void"))');
-
-        return $this;
-    }
-
     public function codeIs($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
         if (is_array($code) && empty($code)) {
             $this->addMethod(self::STOP_QUERY);
@@ -1507,7 +1495,7 @@ GREMLIN
         $diff = $this->checkAtoms($parentClass);
         
         if (empty($diff)){
-            $this->addMethod(self::STOP_QUERY);
+            // filter is always true
             return $this;
         }
 
@@ -1534,7 +1522,7 @@ GREMLIN
     public function hasNoChildren($childrenClass, $outs = array()) {
         $diff = $this->checkAtoms($childrenClass);
         if (empty($diff)){
-            $this->addMethod(self::STOP_QUERY);
+            // filter is always true
             return $this;
         }
 
@@ -1726,8 +1714,8 @@ GREMLIN
         return $this->hasNoInstruction('Trait');
     }
 
-    public function goToClassTrait() {
-        $this->goToInstruction(array('Trait', 'Class', 'Classanonymous'));
+    public function goToClassTrait($classes = array('Trait', 'Class', 'Classanonymous')) {
+        $this->goToInstruction($classes);
         
         return $this;
     }
@@ -2112,9 +2100,11 @@ GREMLIN;
     
     public function prepareQuery() {
         // @doc This is when the object is a placeholder for others.
-        if (count($this->methods) <= 1) { return true; }
+        if (count($this->methods) <= 1) { 
+            return true; 
+        }
         
-        if (in_array(self::STOP_QUERY, $this->methods)) {
+        if (in_array(self::STOP_QUERY, $this->methods) !== false) {
             // any 'stop_query' is blocking
             return $this->initNewQuery();
         }

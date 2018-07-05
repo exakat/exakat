@@ -35,7 +35,6 @@ class ConditionalStructures extends Analyzer {
 
         // functions
         $this->atomIs('Function')
-             ->hasName()
              ->hasIfthen()
              ->back('first');
         $this->prepareQuery();
