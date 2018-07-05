@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Php_ParenthesisAsParameter extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testPhp_ParenthesisAsParameter01()  { $this->generic_test('Php/ParenthesisAsParameter.01'); }
+    public function testPhp_ParenthesisAsParameter02()  { $this->generic_test('Php/ParenthesisAsParameter.02'); }
 }
 ?>
