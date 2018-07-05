@@ -40,6 +40,14 @@ class ReuseVariable extends Analyzer {
                              'Noscream', 
                              'Cast',
                              'Arrayliteral',
+                             'Sign',
+                             'Comparison',
+                             'Ternary',
+                             'Postplusplus',
+                             'Preplusplus',
+                             'Coalesce',
+                             'Isset',
+                             'Empty',
                             );
         // $a = foo($b);
         // if (foo($b)) {}
