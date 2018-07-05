@@ -31,7 +31,7 @@ class WrongCase extends Analyzer {
         // New
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIsNot(self::$RELATIVE_CLASS)
+             ->codeIsNot(array('static', 'parent', 'self'), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->savePropertyAs('fullcode', 'classe')
              ->getNameInFNP('classe')
              ->classDefinition()
@@ -41,9 +41,10 @@ class WrongCase extends Analyzer {
         $this->prepareQuery();
 
 // staticMethodcall
-        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
+        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Staticclass'))
              ->outIs('CLASS')
              ->atomIsNot(self::$RELATIVE_CLASS)
+             ->raw('not(where(__.out("DEFINITION").hasLabel("As", "Nsname", "Identifier")))') // No use is in place
              ->savePropertyAs('fullcode', 'classe')
              ->getNameInFNP('classe')
              ->classDefinition()
