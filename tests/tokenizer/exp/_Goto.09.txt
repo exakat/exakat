@@ -1,0 +1,33 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CONDITION
+            6
+            Label : NOT
+              7
+          Label : THEN
+            8
+            Label : EXPRESSION
+              10
+              Label : GOTOLABEL
+                9
+        Label : EXPRESSION
+          10
+          Label : GOTOLABEL
+            11
+        Label : EXPRESSION
+          12
+          Label : POSTPLUSPLUS
+            7
+        Label : EXPRESSION
+          10
+          Label : GOTOLABEL
+            13
