@@ -303,8 +303,6 @@ class Load extends Tasks {
             $this->phptokens::T_YIELD                    => 'processYield',
             $this->phptokens::T_YIELD_FROM               => 'processYieldfrom',
     
-            $this->phptokens::T_COLON                    => 'processColon',
-    
             $this->phptokens::T_EQUAL                    => 'processAssignation',
             $this->phptokens::T_PLUS_EQUAL               => 'processAssignation',
             $this->phptokens::T_AND_EQUAL                => 'processAssignation',
@@ -719,8 +717,11 @@ class Load extends Tasks {
     }
     
     private function processColon() {
+        --$this->id;
+        $tag = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
+        ++$this->id;
+
         $label = $this->addAtom('Gotolabel');
-        $tag = $this->popExpression();
 
         $this->addLink($label, $tag, 'GOTOLABEL');
         $label->code     = ':';
@@ -743,6 +744,7 @@ class Load extends Tasks {
 
         $this->pushExpression($label);
         $this->processSemicolon();
+
         return $label;
     }
 
@@ -2294,6 +2296,8 @@ class Load extends Tasks {
     private function processString() {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ) {
             return $this->processNsname();
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON ) {
+            return $this->processColon();
         } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $string = $this->addAtom('Boolean');
 
@@ -4272,9 +4276,17 @@ class Load extends Tasks {
     }
 
     private function processGoto() {
-        $goto = $this->processSingleOperator('Goto', $this->precedence->get($this->tokens[$this->id][0]), 'GOTO');
-        $operator = $this->popExpression();
-        $this->pushExpression($operator);
+        $current = $this->id;
+
+        $label = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
+        
+        $goto = $this->addAtom('Goto');
+        $goto->code      = $this->tokens[$current][1];
+        $goto->fullcode  = $this->tokens[$current][1].' '.$label->fullcode;
+        $goto->line      = $this->tokens[$current][2];
+        $goto->token     = $this->getToken($this->tokens[$current][0]);
+
+        $this->addLink($goto, $label, 'GOTO');
 
         if (empty($this->currentClassTrait)) {
             $class = '';
@@ -4288,10 +4300,11 @@ class Load extends Tasks {
             $method = end($this->currentFunction)->fullnspath;
         }
 
-        $this->runPlugins($operator, array('GOTO' => $goto));
+        $this->runPlugins($goto, array('GOTO' => $label));
+        $this->calls->addCall('goto', $class.'::'.$method.'..'.$this->tokens[$this->id][1], $goto);
+        $this->pushExpression($goto);
 
-        $this->calls->addCall('goto', $class.'::'.$method.'..'.$this->tokens[$this->id][1], $operator);
-        return $operator;
+        return $goto;
     }
 
     private function processNoscream() {
