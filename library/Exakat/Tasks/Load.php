@@ -2296,8 +2296,10 @@ class Load extends Tasks {
     private function processString() {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ) {
             return $this->processNsname();
-        } elseif ($this->tokens[$this->id - 1][0] !== $this->phptokens::T_QUESTION && 
-                  $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
+        } elseif (($this->tokens[$this->id - 1][0] === $this->phptokens::T_SEMICOLON   ||
+                   $this->tokens[$this->id - 1][0] === $this->phptokens::T_CLOSE_CURLY ||
+                   $this->tokens[$this->id - 1][0] === $this->phptokens::T_OPEN_CURLY     ) &&
+                   $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
             return $this->processColon();
         } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $string = $this->addAtom('Boolean');
