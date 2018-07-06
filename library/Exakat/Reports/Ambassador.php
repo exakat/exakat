@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy â€“ Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy Ð Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -321,13 +321,13 @@ class Ambassador extends Reports {
 
         foreach($analyzerList as $analyzerName) {
             $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
-            $description = $analyzer->getDescription();
-            $analyzersDocHTML = '<h2><a href="issues.html#analyzer='.$this->toId($analyzerName).'" id="'.$this->toId($analyzerName).'">'.$description->getName().'</a></h2>';
+            $description = $this->getDocs($analyzerName);
+            $analyzersDocHTML = '<h2><a href="issues.html#analyzer='.$this->toId($analyzerName).'" id="'.$this->toId($analyzerName).'">'.$description['name'].'</a></h2>';
 
             $badges = array();
-            $v = $description->getVersionAdded();
+            $exakatSince = $description['exakatSince'];
             if(!empty($v)){
-                $badges[] = '[Since '.$v.']';
+                $badges[] = "[Since $exakatSince]";
             }
             $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
 
@@ -342,16 +342,16 @@ class Ambassador extends Reports {
             }
 
             $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description->getDescription())).'</p>';
+            $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description['description'])).'</p>';
             $analyzersDocHTML  = rst2quote($analyzersDocHTML);
             $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
             $analyzersDocHTML  = rst2literal($analyzersDocHTML);
             $analyzersDocHTML  = rsttable2html($analyzersDocHTML);
             $analyzersDocHTML  = rstlist2html($analyzersDocHTML);
             
-            $v = $description->getClearPHP();
-            if(!empty($v)){
-                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
+            $clearphp = $description['clearphp'];
+            if(!empty($clearphp)){
+                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearphp.'.md">'.$clearphp.'</a>, in the clearPHP reference.</p>';
             }
             $docHTML[] = $analyzersDocHTML;
         }
@@ -383,7 +383,7 @@ class Ambassador extends Reports {
                                      
         foreach($analyzersList as $analyzerName) {
             $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
-            $description = $analyzer->getDescription();
+            $description = $this->getDocs($analyzerName);
 
             $analyzersDocHTML.='<h2><a href="analyzers_doc.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
 
@@ -405,7 +405,7 @@ class Ambassador extends Reports {
             }
 
             $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML .= '<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
+            $analyzersDocHTML .= '<p>'.$this->setPHPBlocs($description['description']).'</p>';
 
             $v = $description->getClearPHP();
             if(!empty($v)){
@@ -453,8 +453,7 @@ class Ambassador extends Reports {
 
             $table = '';
             $values = array();
-            $object = $this->themes->getInstance($analyzer, null, $this->config);
-            $name = $object->getDescription()->getName();
+            $name = $this->getDocs($analyzer, 'name');
 
             $total = 0;
             foreach($list as $key => $value) {
@@ -1479,7 +1478,7 @@ JAVASCRIPT;
             $data[] = array('label' => $key, 'value' => (int) $total);
         }
 
-        // ordonnÃ© DESC par valeur
+        // ordonnŽ DESC par valeur
         uasort($data, function ($a, $b) {
             if ($a['value'] > $b['value']) {
                 return -1;
@@ -1612,7 +1611,7 @@ SQL
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $row['label'] = $analyzer->getDescription()->getName();
+            $row['label'] = $this->getDocs($row['analyzer'], 'name');
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
             $return[] = $row;
@@ -1671,7 +1670,7 @@ SQL;
 
             $filesHTML.= '<tr>';
             $filesHTML.= "<td><a href=\"analyzers_doc.html#analyzer=$row[analyzer]\" id=\"{$this->toId($row['analyzer'])}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a>
-                         &nbsp; {$analyzer->getDescription()->getName()}</td>";
+                         &nbsp; {$this->getDocs($row['analyzer'], 'name')}</td>";
             $filesHTML.= '</tr>';
         }
 
@@ -1849,7 +1848,7 @@ SQL;
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $data[] = array('label' => $analyzer->getDescription()->getName(),
+            $data[] = array('label' => $this->getDocs($row['analyzer'], 'name'),
                             'value' => $row['number'],
                             'name'  => $row['analyzer']);
         }
@@ -2025,7 +2024,7 @@ SQL;
         $items = array();
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini', INI_PROCESS_SECTIONS);
+            $ini = $this->getDocs($row['analyzer']);
             $item['analyzer']       = $ini['name'];
             $item['analyzer_md5']   = $this->toId($row['analyzer']);
             $item['file' ]          = $row['line'] === -1 ? $this->config->project_name : $row['file'];
@@ -2126,10 +2125,7 @@ SQL;
         $analyzers = '';
 
         foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
-            $description = $analyzer->getDescription();
-
-            $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
+            $analyzers .= "<tr><td>".$this->getDocs($analyzer, 'name')."</td></tr>\n";
         }
 
         $html = $this->getBasedPage('proc_analyzers');
@@ -2395,11 +2391,12 @@ SQL;
         foreach($data as $name => $row) {
             $analyzer = $this->themes->getInstance($name, null, $this->config);
             if ($analyzer === null) { continue; }
-            $description = $analyzer->getDescription();
+            
+            $description = $this->getDocs($name, 'description');
 
             $link = '<a href="analyzers_doc.html#'.$this->toId($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
 
-            $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$description->getName()}</td><td>".implode('</td><td>', $row)."</td></tr>\n";
+            $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>".implode('</td><td>', $row)."</td></tr>\n";
         }
 
         $theTable = <<<HTML
@@ -2619,16 +2616,16 @@ SQL
             $counts[$row['analyzer']] = $row['count'];
         }
 
-        foreach($list as $l) {
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$l.'.ini', INI_PROCESS_SECTIONS);
-            if (isset($counts[$l])) {
-                $result = (int) $counts[$l];
+        foreach($list as $analyzer) {
+            $ini = $this->getDocs($analyzer);
+            if (isset($counts[$analyzer])) {
+                $result = (int) $counts[$analyzer];
             } else {
                 $result = -2; // -2 === not run
             }
-            $result = $this->Compatibility($result, $l);
+            $result = $this->Compatibility($result, $analyzer);
             $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#'.$this->toId($l).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#'.$this->toId($analyzer).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
             $compatibility .= "<tr><td>$link $name</td><td>$result</td></tr>\n";
         }
 

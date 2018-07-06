@@ -48,7 +48,7 @@ SQL;
 
         $items = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini', INI_PROCESS_SECTIONS);
+            $ini = $this->getDocs($row['analyzer']);
             $row['error'] = $ini['name'];
 
             $a = $this->themes->getInstance($row['analyzer'], null, $this->config);

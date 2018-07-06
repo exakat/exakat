@@ -70,7 +70,7 @@ class Simpletable extends Reports {
 HTML;
             }
             
-            $ini = parse_ini_file($this->config->doc_root.'human/en/'.$section.'.ini', INI_PROCESS_SECTIONS);
+            $ini = $this->getDocs($section);
             $title = makeHtml($ini['name']);
 
             $rows = implode('', $rows);

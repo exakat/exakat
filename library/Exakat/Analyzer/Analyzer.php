@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer;
 
-use Exakat\Description;
 use Exakat\Datastore;
 use Exakat\Data\Dictionary;
 use Exakat\Config;
@@ -31,10 +30,9 @@ use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Graph\Helpers\GraphResults;
+use Exakat\Reports\Helpers\Docs;
 
 abstract class Analyzer {
-    protected $description    = null;
-
     static public $datastore  = null;
     
     protected $rowCount       = 0; // Number of found values
@@ -59,6 +57,7 @@ abstract class Analyzer {
     private static $calledDirectives      = null;
 
     private $analyzer         = '';       // Current class of the analyzer (called from below)
+    private $shortName        = '';       // Current class of the analyzer, short Name
     protected $analyzerQuoted = '';
     protected $analyzerId     = 0;
 
@@ -128,8 +127,9 @@ abstract class Analyzer {
     public function __construct($gremlin = null, $config = null) {
         $this->gremlin = $gremlin;
         
-        $this->analyzer = get_class($this);
+        $this->analyzer       = get_class($this);
         $this->analyzerQuoted = $this->getName($this->analyzer);
+        $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
 
         $this->_as('first');
         
@@ -138,8 +138,8 @@ abstract class Analyzer {
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
-            $this->description = new Description($this->getName($this->analyzer), $config->dir_root);
-            $parameters = $this->description->getParameters();
+            $description = new Docs($config->dir_root);
+            $parameters = $description->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
                 assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");
  
@@ -227,10 +227,6 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out("ANALY
 
 GREMLIN;
         return $this->gremlin->query($query)->toArray();
-    }
-
-    public function getDescription() {
-        return $this->description;
     }
 
     public function getThemes() {

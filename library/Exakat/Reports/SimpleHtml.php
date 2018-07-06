@@ -98,8 +98,7 @@ class SimpleHtml extends Reports {
         $titleCache = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-                $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
+                $titleCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'name');
             }
 
             $text .= <<<HTML
@@ -144,8 +143,8 @@ HTML;
 
             if (!isset($titleCache[$row['analyzer']])) {
                 $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-                $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
-                $severityCache[$row['analyzer']] = $analyzer->getSeverity();
+                $titleCache[$row['analyzer']]     = $this->getDocs($row['analyzer'], 'name');
+                $severityCache[$row['analyzer']]  = $analyzer->getSeverity();
                 $timeToFixCache[$row['analyzer']] = $analyzer->getTimeToFix();
             }
 

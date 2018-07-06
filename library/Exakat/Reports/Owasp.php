@@ -316,7 +316,7 @@ SQL
 );
             $count = 0;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini', INI_PROCESS_SECTIONS);
+                $ini = $this->getDocs($row['name']);
 
 #FF0000	Bad
 #FFFF00	Bad-Average
@@ -375,7 +375,7 @@ SQL
 );
             $count = 0;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini', INI_PROCESS_SECTIONS);
+                $ini = $this->getDocs($row['name']);
 
 #FF0000	Bad
 #FFFF00	Bad-Average
@@ -628,8 +628,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $row['label'] = $analyzer->getDescription()->getName();
+            $row['label'] = $this->getDocs($row['analyzer'], 'name');
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
             $return[] = $row;
@@ -813,8 +812,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $data[] = array('label' => $analyzer->getDescription()->getName(),
+            $data[] = array('label' => $this->getDocs($row['analyzer'], 'name'),
                             'value' => $row['number']);
         }
 
@@ -905,7 +903,7 @@ SQL;
         }
 
         foreach($list as $l) {
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$l.'.ini', INI_PROCESS_SECTIONS);
+            $ini = $this->getDocs($l);
             if (isset($counts[$l])) {
                 $result = (int) $counts[$l];
             } else {
