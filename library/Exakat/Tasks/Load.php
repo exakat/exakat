@@ -2147,7 +2147,7 @@ class Load extends Tasks {
                 $this->calls->addDefinition('const', $fullnspath, $def);
             }
 
-        } while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON)));
+        } while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON);
 
         $const->code     = $this->tokens[$current][1];
         $const->fullcode = (empty($options) ? '' : implode(' ', $options).' ').$this->tokens[$current][1].' '.implode(', ', $fullcode);
@@ -2296,9 +2296,11 @@ class Load extends Tasks {
     private function processString() {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ) {
             return $this->processNsname();
-        } elseif (($this->tokens[$this->id - 1][0] === $this->phptokens::T_SEMICOLON   ||
-                   $this->tokens[$this->id - 1][0] === $this->phptokens::T_CLOSE_CURLY ||
-                   $this->tokens[$this->id - 1][0] === $this->phptokens::T_OPEN_CURLY     ) &&
+        } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
+                                                                  $this->phptokens::T_CLOSE_CURLY,
+                                                                  $this->phptokens::T_COLON,
+                                                                  $this->phptokens::T_OPEN_CURLY,
+                                                                  )) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
             return $this->processColon();
         } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
