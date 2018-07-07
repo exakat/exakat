@@ -2296,13 +2296,6 @@ class Load extends Tasks {
     private function processString() {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ) {
             return $this->processNsname();
-        } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
-                                                                  $this->phptokens::T_CLOSE_CURLY,
-                                                                  $this->phptokens::T_COLON,
-                                                                  $this->phptokens::T_OPEN_CURLY,
-                                                                  )) &&
-                   $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
-            return $this->processColon();
         } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $string = $this->addAtom('Boolean');
 
@@ -2321,6 +2314,14 @@ class Load extends Tasks {
             $string = $this->addAtom('Newcall');
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $string = $this->addAtom('Name');
+        } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
+                                                                  $this->phptokens::T_CLOSE_CURLY,
+                                                                  $this->phptokens::T_COLON,
+                                                                  $this->phptokens::T_OPEN_CURLY,
+                                                                  $this->phptokens::T_OPEN_TAG,
+                                                                  )) &&
+                   $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
+            return $this->processColon();
         } else {
             $string = $this->addAtom('Identifier');
         }
@@ -3427,7 +3428,13 @@ class Load extends Tasks {
 
         $this->nestContext();
         do {
-            $this->processNext();
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING && 
+                $this->tokens[$this->id + 2][0] === $this->phptokens::T_COLON) {
+                    ++$this->id;
+                    $this->processString();
+                } else {
+                    $this->processNext();
+                }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
         $this->exitContext();
 
