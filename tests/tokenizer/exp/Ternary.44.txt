@@ -1,0 +1,73 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          6
+          Label : CONDITION
+            5
+          Label : ELSE
+            8
+          Label : THEN
+            7
+        Label : EXPRESSION
+          6
+          Label : CONDITION
+            5
+          Label : ELSE
+            11
+          Label : THEN
+            6
+            Label : CONDITION
+              9
+            Label : ELSE
+              10
+            Label : THEN
+              7
+        Label : EXPRESSION
+          6
+          Label : CONDITION
+            5
+          Label : ELSE
+            11
+          Label : THEN
+            6
+            Label : CONDITION
+              9
+            Label : ELSE
+              14
+            Label : THEN
+              12
+        Label : EXPRESSION
+          6
+          Label : CONDITION
+            5
+          Label : ELSE
+            11
+          Label : THEN
+            6
+            Label : CONDITION
+              9
+            Label : ELSE
+              18
+            Label : THEN
+              16
+        Label : EXPRESSION
+          6
+          Label : CONDITION
+            5
+          Label : ELSE
+            11
+          Label : THEN
+            6
+            Label : CONDITION
+              9
+            Label : ELSE
+              20
+            Label : THEN
+              7
