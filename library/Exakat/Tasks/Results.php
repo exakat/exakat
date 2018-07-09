@@ -60,12 +60,16 @@ class Results extends Tasks {
         
         $return = array();
         if ($this->config->style === 'BOOLEAN') {
-            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out().count().is(gt(0))';
+            $queryTemplate = <<<GREMLIN
+g.V().hasLabel("Analysis").has("analyzer", "$analyzer").out().count().is(gt(0))
+GREMLIN;
             $vertices = $this->gremlin->query($queryTemplate);
 
             $return[] = $vertices[0];
         } elseif ($this->config->style === 'COUNTED_ALL') {
-            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out().count()';
+            $queryTemplate = <<<GREMLIN
+g.V().hasLabel("Analysis").has("analyzer", "$analyzer").out().count()
+GREMLIN;
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return[] = $vertices[0];

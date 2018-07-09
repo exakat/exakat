@@ -40,7 +40,7 @@ class Report extends Tasks {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/')) {
+        if (!file_exists("{$this->config->projects_root}/projects/")) {
             throw new NoSuchProject($this->config->project);
         }
 
@@ -54,7 +54,7 @@ class Report extends Tasks {
             throw new ProjectNotInited($this->config->project);
         }
 
-        $dumpFile = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
+        $dumpFile = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
         if (!file_exists($dumpFile)) {
             throw new NoDump($this->config->project);
         }
