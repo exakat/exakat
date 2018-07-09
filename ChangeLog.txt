@@ -1,4 +1,4 @@
-Version 1.3.5 (Gao Shilian, coming up)
+Version 1.3.6 (Zhang Gongjin, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,34 @@ Version 1.3.5 (Gao Shilian, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.3.5 (Gao Shilian, 2018-07-09)
++ Architecture
+    + Removed 4 unused exceptions
+    + Extracted Query from Analysis
++ Report
+    + Reports : centralized all doc reading
+    + Reports : doc reading now parses sections (avoid overlap)
+    + Ambassador : Added exakat version and build to dashboard.
+    + Ambassador : Added Class Tree (All class hierarchies)
++ Analyzer
+    + Fixed bug with 'last' and '2last'
+    + New analysis : Report undefined::class
+    + New analysis : Report returned assignations as useless
+    + New analysis : Split scalar typehint by versions
+    + Upgraded analysis : Extended Reuse Variable to instantiations
+    + Upgraded analysis : Masking parenthesis are only for referenced arguments
+    + Upgraded analysis : Wrong case doesn't apply to parent/static/self
+    + Upgraded analysis : Locally Unused Properties are extended to traits
+    + Upgraded analysis : Should Preprocess is extended to concatenations
+    + Upgraded analysis : Array_key_fill exclude variables by default
+    + Upgraded analysis : Ambiguous static reports the whole property definition
+    + Checked unit tests : 2919 / 2944 test pass (99% pass). 
++ Tokenizer
+    + Added missing constants
+    + Fixed support for goto true;
+    + Fixed edge case for nested ternaries and boolean
+    + Moved Goto and Label to Name Atom
 
 Version 1.3.4 (Cheng Yaojin, 2018-07-02)
 + Architecture
