@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_LocallyUnusedProperty extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testClasses_LocallyUnusedProperty01()  { $this->generic_test('Classes_LocallyUnusedProperty.01'); }
     public function testClasses_LocallyUnusedProperty02()  { $this->generic_test('Classes_LocallyUnusedProperty.02'); }
@@ -18,5 +18,6 @@ class Classes_LocallyUnusedProperty extends Analyzer {
     public function testClasses_LocallyUnusedProperty06()  { $this->generic_test('Classes/LocallyUnusedProperty.06'); }
     public function testClasses_LocallyUnusedProperty07()  { $this->generic_test('Classes/LocallyUnusedProperty.07'); }
     public function testClasses_LocallyUnusedProperty08()  { $this->generic_test('Classes/LocallyUnusedProperty.08'); }
+    public function testClasses_LocallyUnusedProperty09()  { $this->generic_test('Classes/LocallyUnusedProperty.09'); }
 }
 ?>
