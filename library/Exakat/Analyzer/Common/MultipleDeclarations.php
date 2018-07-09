@@ -32,8 +32,9 @@ class MultipleDeclarations extends Analyzer {
     public function analyze() {
         // case-insensitive constants
 
-        $this->raw(<<<GREMLIN
-hasLabel("{$this->atom}").groupCount("m").by("fullcode").cap("m").next().findAll{ a,b -> b > 1}
+        $this->atomIs($this->atom)
+             ->raw(<<<GREMLIN
+groupCount("m").by("fullcode").cap("m").next().findAll{ a,b -> b > 1}
 GREMLIN
 );
         $multiples = $this->rawQuery();

@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Goto extends Tokenizer {
-    /* 8 methods */
+    /* 10 methods */
 
     public function test_Goto01()  { $this->generic_test('_Goto.01'); }
     public function test_Goto02()  { $this->generic_test('_Goto.02'); }
@@ -17,5 +17,7 @@ class _Goto extends Tokenizer {
     public function test_Goto06()  { $this->generic_test('_Goto.06'); }
     public function test_Goto07()  { $this->generic_test('_Goto.07'); }
     public function test_Goto08()  { $this->generic_test('_Goto.08'); }
+    public function test_Goto09()  { $this->generic_test('_Goto.09'); }
+    public function test_Goto10()  { $this->generic_test('_Goto.10'); }
 }
 ?>

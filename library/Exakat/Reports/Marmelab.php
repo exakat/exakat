@@ -41,24 +41,24 @@ class Marmelab extends Reports {
         $analyzers = array();
         $files     = array();
 
-        $sqlQuery = "SELECT id, fullcode, file, line, analyzer AS analyzer_id FROM results WHERE analyzer in ($list)";
+        $sqlQuery = "SELECT id, fullcode, file, line, analyzer FROM results WHERE analyzer in ($list)";
         $res = $this->sqlite->query($sqlQuery);
 
         $results = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (!isset($analyzers[$row['analyzer']])) {
+                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
 
-            if (!isset($analyzers[$row['analyzer_id']])) {
-                $analyzer = $this->themes->getInstance($row['analyzer_id'], null, $this->config);
-
-                $a = array('id'          => $row['analyzer_id'],
-                           'title'       => $analyzer->getDescription()->getName(),
-                           'description' => $analyzer->getDescription()->getDescription(),
+                $description = $this->getDocs($row['analyzer']);
+                $a = array('id'          => $row['analyzer'],
+                           'title'       => $description['name'],
+                           'description' => $description['description'],
                            'severity'    => $analyzer->getSeverity(),
                            'fixtime'     => $analyzer->getTimeToFix(),
-                           'clearphp'    => $analyzer->getDescription()->getClearPHP(),
+                           'clearphp'    => $description['clearphp'],
                            );
 
-                $analyzers[$row['analyzer_id']] = (object) $a;
+                $analyzers[$row['analyzer']] = (object) $a;
             }
 
             if (!isset($files[$row['file']])) {

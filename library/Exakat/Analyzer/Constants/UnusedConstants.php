@@ -32,7 +32,7 @@ class UnusedConstants extends Analyzer {
     }
     
     public function analyze() {
-        $query = <<<GREMLIN
+        $queryConstants = <<<GREMLIN
 g.V().hasLabel("Analysis")
      .has("analyzer", "Constants/ConstantUsage")
      .out("ANALYZED")
@@ -45,7 +45,8 @@ g.V().hasLabel("Analysis")
      }
      .unique()
 GREMLIN;
-        $constants = $this->query($query)->toArray();
+        $constants = $this->query($queryConstants)
+                          ->toArray();
 
         // Const from a define (case insensitive)
         $this->atomIs('Defineconstant')
@@ -77,21 +78,11 @@ GREMLIN;
              ->noDelimiterIsNot($constants);
         $this->prepareQuery();
 
-        $query = <<<GREMLIN
-g.V().hasLabel("Analysis")
-      .has("analyzer", "Constants/ConstantUsage")
-      .out("ANALYZED")
-      .values("fullnspath")
-      .unique()
-GREMLIN;
-        $constConstants = $this->query($query)->toArray();
-
         // Const from a const
         $this->atomIs('Const')
              ->hasNoClassInterface()
              ->outIs('CONST')
-             ->outIs('NAME')
-             ->fullnspathIsNot($constConstants);
+             ->hasNoOut('DEFINITION');
         $this->prepareQuery();
     }
 }

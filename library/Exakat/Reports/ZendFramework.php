@@ -924,8 +924,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $row['label'] = $analyzer->getDescription()->getName();
+            $row['label'] = $this->getDocs($row['analyzer'], 'name');
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
             $return[] = $row;
@@ -1088,20 +1087,20 @@ SQL;
         $items = array();
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
-            $item['analyzer'] =  $ini['name'];
-            $item['analyzer_md5'] = $this->toId($ini['name']);
-            $item['file' ] =  $row['file'];
-            $item['file_md5' ] =  $this->toId($row['file']);
-            $item['code' ] = PHPSyntax($row['fullcode']);
-            $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus'] = PHPSyntax($row['fullcode']);
-            $item['link_file'] = $row['file'];
-            $item['line' ] =  $row['line'];
-            $item['severity'] = "<i class=\"fa fa-warning ".$this->severities[$row['analyzer']]."\"></i>";
-            $item['complexity'] = "<i class=\"fa fa-cog ".$this->timesToFix[$row['analyzer']]."\"></i>";
-            $item['recipe' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
-            $lines = explode("\n", $ini['description']);
+            $ini = $this->getDocs($row['analyzer']);
+            $item['analyzer']       =  $ini['name'];
+            $item['analyzer_md5']   = $this->toId($ini['name']);
+            $item['file' ]          =  $row['file'];
+            $item['file_md5' ]      =  $this->toId($row['file']);
+            $item['code' ]          = PHPSyntax($row['fullcode']);
+            $item['code_detail']    = "<i class=\"fa fa-plus \"></i>";
+            $item['code_plus']      = PHPSyntax($row['fullcode']);
+            $item['link_file']      = $row['file'];
+            $item['line' ]          =  $row['line'];
+            $item['severity']       = "<i class=\"fa fa-warning ".$this->severities[$row['analyzer']]."\"></i>";
+            $item['complexity']     = "<i class=\"fa fa-cog ".$this->timesToFix[$row['analyzer']]."\"></i>";
+            $item['recipe' ]        =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
+            $lines                  = explode("\n", $ini['description']);
             $item['analyzer_help' ] = $lines[0];
 
             $items[] = json_encode($item);
@@ -1297,7 +1296,7 @@ SQL
         }
 
         foreach($list as $l) {
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$l.'.ini');
+            $ini = $this->getDocs($l);
             if (isset($counts[$l])) {
                 $result = (int) $counts[$l];
             } else {

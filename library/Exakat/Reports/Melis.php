@@ -41,6 +41,8 @@ class Melis extends Ambassador {
                          
                          );
 
+//    private $order = ' ORDER BY random() limit 10 ';
+    private $order = ' ORDER BY count DESC ';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
@@ -175,37 +177,6 @@ MENU;
         rename($this->tmpName, $this->finalName);
     }
 
-    private function getLinesFromFile($filePath,$lineNumber,$numberBeforeAndAfter){
-        --$lineNumber; // array index
-        $lines = array();
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath)) {
-
-            $fileLines = file($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath);
-
-            $startLine = 0;
-            $endLine = 10;
-            if(count($fileLines) > $lineNumber) {
-                $startLine = $lineNumber-$numberBeforeAndAfter;
-                if($startLine<0)
-                    $startLine=0;
-
-                if($lineNumber+$numberBeforeAndAfter < count($fileLines)-1 ) {
-                    $endLine = $lineNumber+$numberBeforeAndAfter;
-                } else {
-                    $endLine = count($fileLines)-1;
-                }
-            }
-
-            for ($i=$startLine; $i < $endLine+1 ; ++$i) {
-                $lines[]= array(
-                            'line' => $i + 1,
-                            'code' => $fileLines[$i]
-                    );
-            }
-        }
-        return $lines;
-    }
-
     public function generateDashboard() {
         $baseHTML = $this->getBasedPage('index_melis');
 
@@ -217,21 +188,19 @@ MENU;
         $finalHTML = $this->injectBloc($baseHTML, 'BLOCHASHDATA', $hashData);
 
         // graded Issues
-        $issues = $this->getSeverityBreakdown();
-//        $finalHTML = $this->injectBloc($finalHTML, 'GRADED_ISSUES', $this->generateGradingTable());
-        $tags[] = 'SCRIPTSEVERITY';
-        $code[] = $issues['script'];
+        $grade = $this->generateGrade();
+        $finalHTML = $this->injectBloc($finalHTML, 'GRADED_ISSUES', $grade);
 
         // Marking the audit date
         $this->makeAuditDate($finalHTML);
 
         // blocking issues
         $countBlocking = $this->countBlocking();
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOCKING_ISSUES', "<div class=\"row\"><p class=\"value\" style=\"width: 100%; font-size: 40px; font-weight: bold; text-align: center\">$countBlocking</p></div>");
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOCKING_ISSUES', $countBlocking);
 
         // top 10
-        $fileHTML = $this->getBlockingFile();
-        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
+        $blockingFiles = $this->getBlockingFile();
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOCKING_FILES', $blockingFiles);
         // Filename Overview
         $fileOverview = $this->getBlockingOverview();
         $tags[] = 'SCRIPTDATAFILES';
@@ -239,8 +208,8 @@ MENU;
         $tags[] = 'SCRIPTDATACRITICAL';
         $code[] = $fileOverview['scriptDataCritical'];
 
-        $analyzerHTML = $this->getGradedFile();
-        $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
+        $gradedFiles = $this->generateGradingTable();
+        $finalHTML = $this->injectBloc($finalHTML, 'GRADED_FILES', $gradedFiles);
         // Analyzer Overview
         $analyzerOverview = $this->getGradedOverview();
         $tags[] = 'SCRIPTDATAANALYZERLIST';
@@ -455,8 +424,8 @@ MENU;
   </script>
 JAVASCRIPT;
 
-        $blocjs = str_replace($tags, $code, $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
+//        $blocjs = str_replace($tags, $code, $blocjs);
+//        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' dashboard');
         $this->putBasedPage('index', $finalHTML);
     }
@@ -466,31 +435,7 @@ JAVASCRIPT;
 
         $html = '';
         foreach ($data as $value) {
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$value['analyzer'].'.ini');
-            $html .= '<div class="clearfix">
-                    <a href="issues.html#analyzer='.$this->toId($value['analyzer']).'" title="'.$value['analyzer'].'">
-                      <div class="block-cell-name">'.$ini['name'].'</div>
-                    </a>
-                    <div class="block-cell-issue text-center">'.$value['value'].'</div>
-                  </div>';
-        }
-        $nb = 10 - count($data);
-        for($i = 0; $i < $nb; ++$i) {
-            $html .= '<div class="clearfix">
-                      <div class="block-cell-name">&nbsp;</div>
-                      <div class="block-cell-issue text-center">&nbsp;</div>
-                  </div>';
-        }
-
-        return $html;
-    }
-
-    protected function getGradedFile() {
-        $data = $this->getAnalyzersCount('Suggestions', self::TOPLIMIT);
-
-        $html = '';
-        foreach ($data as $value) {
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$value['analyzer'].'.ini');
+            $ini = $this->getDocs($value['analyzer']);
             $html .= '<div class="clearfix">
                     <a href="issues.html#analyzer='.$this->toId($value['analyzer']).'" title="'.$value['analyzer'].'">
                       <div class="block-cell-name">'.$ini['name'].'</div>
@@ -553,20 +498,79 @@ JAVASCRIPT;
         return $data;
     }
 
-    private function generateGradingTable() {
+    private function generateGrade() {
         $total = 0;
         $rows = '';
-        $list = $this->themes->getThemeAnalyzers('Security');
+        $list = $this->themes->getThemeAnalyzers('Suggestions');
         $list = makeList($list);
 
         $res = $this->sqlite->query(<<<SQL
-SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer IN ($list) AND count >= 0 ORDER BY  random() limit 10
+SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer IN ($list) AND count >= 0 $this->order
+SQL
+);
+         $count = 0;
+         $countRows = 0;
+         $stats = array_fill_keys(range('A', 'F'), 0);
+         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $ini = $this->getDocs($row['name']);
+
+#FF0000	Bad
+#FFFF00	Bad-Average
+#FFFF00	Average
+#7FFF00	Average-Good
+#00FF00	Good
+
+            if ($row['count'] == 0) {
+                $row['grade'] = 'A';
+            } else {
+                $grade = min(ceil(log($row['count'] + 1) / log(count(self::COLORS))), count(self::COLORS) - 1);
+                $row['grade'] = chr(66 + $grade - 1); // B to F
+            }
+            $row['color'] = self::COLORS[$row['grade']];
+            
+            $total += $row['count'];
+            $count += (int) ($row['count'] === 0);
+            $countRows++;
+
+            $stats[$row['grade']]++;
+        }
+
+       if ($total === 0) {
+           $grade = 'A';
+       } else {
+           $grade = min(ceil(log($total) / log(count(self::COLORS))), count(self::COLORS) - 1);
+           $grade = chr(65 + $grade); // B to F
+       }
+       $color = self::COLORS[$grade];
+       
+       $stats = array_filter($stats);
+
+       $grades = array();
+       foreach($stats as $letter => $count) {
+            $grades []= "$count $letter";
+       }
+       
+       $grades = '('.implode(' + ', $grades).')';
+        
+       return "<div class=\"row\"><p class=\"value\" style=\"width: 100%; font-size: 60px; font-weight: bold; text-align: center\">$grade</p>
+       <p class=\"value\" style=\"width: 100%; font-size: 14px; font-weight: normal; text-align: center\">$grades</p>
+       </div>";
+    }
+
+    private function generateGradingTable() {
+        $total = 0;
+        $rows = '';
+        $list = $this->themes->getThemeAnalyzers('Suggestions');
+        $list = makeList($list);
+
+        $res = $this->sqlite->query(<<<SQL
+SELECT analyzer AS name, count FROM resultsCounts WHERE analyzer IN ($list) AND count > 0 $this->order
 SQL
 );
          $count = 0;
          $countRows = 0;
          while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini');
+            $ini = $this->getDocs($row['name']);
 
 #FF0000	Bad
 #FFFF00	Bad-Average
@@ -597,10 +601,7 @@ SQL
        }
        $color = self::COLORS[$grade];
             
-       $levels = '<tr style="border-top: 3px solid black;"><td style="background-color: lightgrey">Graded issues</td>
-                       <td style="background-color: lightgrey">'.$total.'</td></td>
-                       <td style="background-color: '.$color.'; font-weight: bold; font-size: 20; text-align: center; ">'.$grade.'</td></tr>'.PHP_EOL.
-                  $rows;
+       $levels = $rows;
                   
        return '<table width="100%">'.$levels.'</table>'.str_repeat('<br />', max(0, 12 - $countRows) );
     }
@@ -620,7 +621,7 @@ SQL
         $rowCounts = 0;
         $count = $res->fetchArray(\SQLITE3_ASSOC);
 
-        return $count['count'];
+        return "<div class=\"row\"><p class=\"value\" style=\"width: 100%; font-size: 60px; font-weight: bold; text-align: center\">$count[count]</p></div>";
     }
 
     private function generateBlockingTable() {
@@ -637,7 +638,7 @@ SQL
         $count = 0;
         $rowCounts = 0;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini');
+            $ini = $this->getDocs($row['name']);
 
 #FF0000	Bad
 #FFFF00	Bad-Average
@@ -814,7 +815,7 @@ SQL;
             $data[] = array('label' => $row['severity'],
                             'value' => $row['number']);
         }
-
+        
         $html = '';
         $dataScript = '';
         foreach ($data as $key => $value) {
@@ -889,8 +890,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $row['label'] = $analyzer->getDescription()->getName();
+            $row['label'] = $this->getDocs($row['analyzer'], 'name');
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
             $return[] = $row;
@@ -971,8 +971,8 @@ SQL;
         $dataCritical = array();
 
         foreach ($data as $value) {
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$value['analyzer'].'.ini');
-            $xAxis[] = "'".$ini['name']."'";
+            $ini = $this->getDocs($value['analyzer']);
+            $xAxis[] = "'".addslashes($ini['name'])."'";
             $dataCritical[] = $value['value'];
         }
 
@@ -991,7 +991,7 @@ SQL;
         $dataCritical = array();
         
         foreach ($data as $value) {
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$value['analyzer'].'.ini');
+            $ini = $this->getDocs($value['analyzer']);
             $xAxis[] = "'".$ini['name']."'";
             $grade = min(ceil(log($value['value']) / log(6)), 5);
             $dataCritical[] = $grade;
@@ -1081,7 +1081,7 @@ SQL;
         $items = array();
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
+            $ini = $this->getDocs($row['analyzer']);
             $item['analyzer'] =  $ini['name'];
             $item['analyzer_md5'] = $this->toId($ini['name']);
             $item['file' ] =  $row['file'];
@@ -1314,7 +1314,7 @@ SQL
         }
 
         foreach($list as $l) {
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$l.'.ini');
+            $ini = $this->getDocs($l);
             if (isset($counts[$l])) {
                 $result = (int) $counts[$l];
             } else {

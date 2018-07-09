@@ -73,7 +73,7 @@ class RadwellCode extends Reports {
 
             if (!isset($titleCache[$row['analyzer']])) {
                 $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-                $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
+                $titleCache[$row['analyzer']]    = $this->getDocs($row['analyzer'], 'name');
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
             }
 

@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('$mixtedStatic = 3',
-                      '$mixtedStatic = 5',
+$expected     = array('private static $mixtedStatic = 3',
+                      'private $mixtedStatic = 5',
                      );
 
-$expected_not = array('$noneStatic = 3',
-                      '$allStatic',
+$expected_not = array('private $noneStatic = 3',
+                      'private static $allStatic',
                      );
 
 ?>

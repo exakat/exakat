@@ -49,7 +49,7 @@ class HardcodedPasswords extends Analyzer {
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
              ->has('noDelimiter')
-             ->noDelimiterIs(array('password', 'pass', 'passwd'))
+             ->noDelimiterIs($passwordsKeys)
              ->inIs('INDEX')
              ->outIs('VALUE')
              ->atomIs('String')

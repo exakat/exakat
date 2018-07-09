@@ -43,7 +43,6 @@ class UseSystemTmp extends Analyzer {
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->regexIs('noDelimiter', $regexStartWithTmp)
              ->back('first');
         $this->prepareQuery();
@@ -54,9 +53,7 @@ class UseSystemTmp extends Analyzer {
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->is('constant', true)
-             ->tokenIs('T_QUOTE')
              ->outWithRank('CONCAT', 0)
-             ->tokenIs('T_ENCAPSED_AND_WHITESPACE')
              ->regexIs('noDelimiter', $regexStartWithTmp)
              ->back('first');
         $this->prepareQuery();
@@ -68,7 +65,6 @@ class UseSystemTmp extends Analyzer {
              ->atomIs('Concatenation')
              ->is('constant', true)
              ->outWithRank('CONCAT', 0)
-             ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->regexIs('noDelimiter', $regexStartWithTmp)
              ->back('first');
         $this->prepareQuery();

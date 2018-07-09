@@ -96,8 +96,6 @@ class Status extends Tasks {
             $status['hash']      = 'None';
             $status['updatable'] = 'N/A';
         } else {
-            $vcsClass = "\\Exakat\\Vcs\\{$vcsClass}";
-            
             $vcs = new $vcsClass($this->config->project, $this->config->projects_root);
             $status = array_merge($status, $vcs->getStatus());
         }

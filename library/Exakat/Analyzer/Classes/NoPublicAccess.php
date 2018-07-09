@@ -28,13 +28,13 @@ use Exakat\Analyzer\Analyzer;
 class NoPublicAccess extends Analyzer {
     public function analyze() {
 
-        $gremlin = <<<GREMLIN
+        $queryProperties = <<<GREMLIN
 g.V().hasLabel("Member")
      .not(where( __.out("OBJECT").hasLabel("This")) )
      .out("MEMBER").hasLabel("Name")
      .values('code').unique();
 GREMLIN;
-        $properties = $this->query($gremlin)->toArray();
+        $properties = $this->query($queryProperties)->toArray();
 
         if(!empty($properties)) {
             $properties = array_values($properties);
@@ -48,7 +48,7 @@ GREMLIN;
             $this->prepareQuery();
         }
 
-        $gremlin = <<<GREMLIN
+        $queryStaticProperties = <<<GREMLIN
 g.V().hasLabel("Staticproperty")
      .where( 
      __.out("CLASS")
@@ -62,7 +62,8 @@ g.V().hasLabel("Staticproperty")
      .map{ full; }
      .unique();
 GREMLIN;
-        $staticproperties = $this->query($gremlin)->toArray();
+        $staticproperties = $this->query($queryStaticProperties)
+                                 ->toArray();
         
         if (!empty($staticproperties)) {
             $staticproperties = array_values($staticproperties);

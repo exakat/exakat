@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy â€“ Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy Ð Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -175,6 +175,7 @@ class Ambassador extends Reports {
 
         $this->generateSettings();
         $this->generateProcFiles();
+        $this->generateClassTree();
 
         $this->generateDashboard();
         $this->generateExtensionsBreakdown();
@@ -287,7 +288,7 @@ class Ambassador extends Reports {
                 if($startLine<0)
                     $startLine=0;
 
-                if($lineNumber+$numberBeforeAndAfter < count($fileLines)-1 ) {
+                if(count($fileLines) - 1 > $lineNumber + $numberBeforeAndAfter) {
                     $endLine = $lineNumber+$numberBeforeAndAfter;
                 } else {
                     $endLine = count($fileLines)-1;
@@ -320,13 +321,13 @@ class Ambassador extends Reports {
 
         foreach($analyzerList as $analyzerName) {
             $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
-            $description = $analyzer->getDescription();
-            $analyzersDocHTML = '<h2><a href="issues.html#analyzer='.$this->toId($analyzerName).'" id="'.$this->toId($analyzerName).'">'.$description->getName().'</a></h2>';
+            $description = $this->getDocs($analyzerName);
+            $analyzersDocHTML = '<h2><a href="issues.html#analyzer='.$this->toId($analyzerName).'" id="'.$this->toId($analyzerName).'">'.$description['name'].'</a></h2>';
 
             $badges = array();
-            $v = $description->getVersionAdded();
+            $exakatSince = $description['exakatSince'];
             if(!empty($v)){
-                $badges[] = '[Since '.$v.']';
+                $badges[] = "[Since $exakatSince]";
             }
             $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
 
@@ -341,16 +342,16 @@ class Ambassador extends Reports {
             }
 
             $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description->getDescription())).'</p>';
+            $analyzersDocHTML .= '<p>'.nl2br($this->setPHPBlocs($description['description'])).'</p>';
             $analyzersDocHTML  = rst2quote($analyzersDocHTML);
             $analyzersDocHTML  = rst2htmlLink($analyzersDocHTML);
             $analyzersDocHTML  = rst2literal($analyzersDocHTML);
             $analyzersDocHTML  = rsttable2html($analyzersDocHTML);
             $analyzersDocHTML  = rstlist2html($analyzersDocHTML);
             
-            $v = $description->getClearPHP();
-            if(!empty($v)){
-                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
+            $clearphp = $description['clearphp'];
+            if(!empty($clearphp)){
+                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearphp.'.md">'.$clearphp.'</a>, in the clearPHP reference.</p>';
             }
             $docHTML[] = $analyzersDocHTML;
         }
@@ -382,7 +383,7 @@ class Ambassador extends Reports {
                                      
         foreach($analyzersList as $analyzerName) {
             $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
-            $description = $analyzer->getDescription();
+            $description = $this->getDocs($analyzerName);
 
             $analyzersDocHTML.='<h2><a href="analyzers_doc.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
 
@@ -404,7 +405,7 @@ class Ambassador extends Reports {
             }
 
             $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML .= '<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
+            $analyzersDocHTML .= '<p>'.$this->setPHPBlocs($description['description']).'</p>';
 
             $v = $description->getClearPHP();
             if(!empty($v)){
@@ -452,8 +453,7 @@ class Ambassador extends Reports {
 
             $table = '';
             $values = array();
-            $object = $this->themes->getInstance($analyzer, null, $this->config);
-            $name = $object->getDescription()->getName();
+            $name = $this->getDocs($analyzer, 'name');
 
             $total = 0;
             foreach($list as $key => $value) {
@@ -1478,7 +1478,7 @@ JAVASCRIPT;
             $data[] = array('label' => $key, 'value' => (int) $total);
         }
 
-        // ordonnÃ© DESC par valeur
+        // ordonnŽ DESC par valeur
         uasort($data, function ($a, $b) {
             if ($a['value'] > $b['value']) {
                 return -1;
@@ -1611,7 +1611,7 @@ SQL
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $row['label'] = $analyzer->getDescription()->getName();
+            $row['label'] = $this->getDocs($row['analyzer'], 'name');
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
             $return[] = $row;
@@ -1670,7 +1670,7 @@ SQL;
 
             $filesHTML.= '<tr>';
             $filesHTML.= "<td><a href=\"analyzers_doc.html#analyzer=$row[analyzer]\" id=\"{$this->toId($row['analyzer'])}\"><i class=\"fa fa-book\" style=\"font-size: 14px\"></i></a>
-                         &nbsp; {$analyzer->getDescription()->getName()}</td>";
+                         &nbsp; {$this->getDocs($row['analyzer'], 'name')}</td>";
             $filesHTML.= '</tr>';
         }
 
@@ -1848,7 +1848,7 @@ SQL;
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $data[] = array('label' => $analyzer->getDescription()->getName(),
+            $data[] = array('label' => $this->getDocs($row['analyzer'], 'name'),
                             'value' => $row['number'],
                             'name'  => $row['analyzer']);
         }
@@ -2024,7 +2024,7 @@ SQL;
         $items = array();
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
+            $ini = $this->getDocs($row['analyzer']);
             $item['analyzer']       = $ini['name'];
             $item['analyzer_md5']   = $this->toId($row['analyzer']);
             $item['file' ]          = $row['line'] === -1 ? $this->config->project_name : $row['file'];
@@ -2125,10 +2125,7 @@ SQL;
         $analyzers = '';
 
         foreach($this->themes->getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = $this->themes->getInstance($analyzer, null, $this->config);
-            $description = $analyzer->getDescription();
-
-            $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
+            $analyzers .= "<tr><td>".$this->getDocs($analyzer, 'name')."</td></tr>\n";
         }
 
         $html = $this->getBasedPage('proc_analyzers');
@@ -2394,11 +2391,12 @@ SQL;
         foreach($data as $name => $row) {
             $analyzer = $this->themes->getInstance($name, null, $this->config);
             if ($analyzer === null) { continue; }
-            $description = $analyzer->getDescription();
+            
+            $description = $this->getDocs($name, 'description');
 
             $link = '<a href="analyzers_doc.html#'.$this->toId($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
 
-            $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$description->getName()}</td><td>".implode('</td><td>', $row)."</td></tr>\n";
+            $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>".implode('</td><td>', $row)."</td></tr>\n";
         }
 
         $theTable = <<<HTML
@@ -2618,16 +2616,16 @@ SQL
             $counts[$row['analyzer']] = $row['count'];
         }
 
-        foreach($list as $l) {
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$l.'.ini');
-            if (isset($counts[$l])) {
-                $result = (int) $counts[$l];
+        foreach($list as $analyzer) {
+            $ini = $this->getDocs($analyzer);
+            if (isset($counts[$analyzer])) {
+                $result = (int) $counts[$analyzer];
             } else {
                 $result = -2; // -2 === not run
             }
-            $result = $this->Compatibility($result, $l);
+            $result = $this->Compatibility($result, $analyzer);
             $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#'.$this->toId($l).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#'.$this->toId($analyzer).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
             $compatibility .= "<tr><td>$link $name</td><td>$result</td></tr>\n";
         }
 
@@ -2728,6 +2726,70 @@ HTML;
         }
         $this->generateExceptionTree();
         $this->generateNamespaceTree();
+    }
+
+    private function generateClassTree() {
+        $theTable = '';
+        $list = array();
+
+        $res = $this->sqlite->query(<<<SQL
+SELECT ns.namespace || '\' || cit.name AS name, ns2.namespace || '\' || cit2.name AS extends 
+    FROM cit 
+    LEFT JOIN cit cit2 
+        ON cit.extends = cit2.id
+    JOIN namespaces ns
+        ON cit.namespaceId = ns.id
+    JOIN namespaces ns2
+        ON cit2.namespaceId = ns2.id
+    WHERE cit.type="class" AND
+          cit2.type="class"
+SQL
+);
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (empty($row['extends'])) {
+                continue;
+            }
+            
+            $parent = $row['extends'];
+            if (!isset($list[$parent])) {
+                $list[$parent] = array();
+            }
+            
+            $list[$parent][] = $row['name'];
+        }
+        foreach($list as &$l) {
+            sort($l);
+        } 
+        
+        if (empty($list)) {
+            $list = array(array());
+        }
+        $secondaries = array_merge(...array_values($list));
+        $top = array_diff(array_keys($list), $secondaries);
+        
+        foreach($top as $t) {
+            $theTable .= '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+        }
+
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Classes inventory');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the classes. Classes without any extension are not represented');
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
+        $this->putBasedPage('inventories_classtree', $html);
+    }
+    
+    private function extends2ul ($root, $paths) {
+        $return = "<li>$root<ul>";
+        foreach($paths[$root] as $sub) {
+            if (isset($paths[$sub])){
+                $secondary = $this->extends2ul($sub, $paths);
+                $return .= $secondary;
+            } else {
+                $return .= "<li class=\"treeLeaf\">$sub</li>";
+            }
+        }
+        $return .= "</ul></li>\n";
+        return $return;
     }
 
     private function generateExceptionTree() {
@@ -2874,7 +2936,7 @@ HTML;
         
         return $return;
     }
-    
+
     private function pathtree2ul($path) {
         if (empty($path)) {
             return '';
@@ -2911,7 +2973,7 @@ HTML;
     
     private function generateNamespaceTree() {
         $theTable = '';
-        $res = $this->sqlite->query('SELECT namespace FROM namespaces WHERE namespace != "\app\console" ORDER BY namespace');
+        $res = $this->sqlite->query('SELECT namespace FROM namespaces ORDER BY namespace');
         
         $paths = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -3769,8 +3831,12 @@ HTML;
         $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
-            $audit_date .= ' - &quot;'.$audit_name.'&quot;';
+            $audit_date .= " - &quot;$audit_name&quot;";
         }
+
+        $exakat_version = $this->datastore->getHash('exakat_version');
+        $exakat_build = $this->datastore->getHash('exakat_build');
+        $audit_date .= " - Exakat $exakat_version ($exakat_build)";
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
     

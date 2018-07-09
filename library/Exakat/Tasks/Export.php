@@ -101,7 +101,7 @@ class Export extends Tasks {
         return $r;
     }
 
-    private function display_dot($V, $E, $root, $level = 0) {
+    private function display_dot($V, $E, $root) {
         $r = '';
 
         foreach($V as $id => $v) {
@@ -140,7 +140,7 @@ class Export extends Tasks {
         return $r;
     }
 
-    private function display_table($V, $E, $root, $level = 0) {
+    private function display_table($V, $E, $root) {
         $r = '<table>';
 
         foreach($V as $id => $v) {

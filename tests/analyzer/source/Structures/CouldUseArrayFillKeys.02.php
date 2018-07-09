@@ -16,4 +16,8 @@ foreach ($row as $key => $value2) {
     $a[$key] = $c;
 }
 
+foreach ($row as $key => $value3) {
+    $a[$key] = 3;
+}
+
 ?>

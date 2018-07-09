@@ -898,8 +898,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $row['label'] = $analyzer->getDescription()->getName();
+            $row['label'] = $this->getDocs($row['analyzer'], 'name');
             $row['recipes' ] =  makeList($this->themesForAnalyzer[$row['analyzer']], '');
 
             $return[] = $row;
@@ -1086,8 +1085,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-            $data[] = array('label' => $analyzer->getDescription()->getName(),
+            $data[] = array('label' => $this->getDocs($row['analyzer'], 'name'),
                             'value' => $row['number']);
         }
 
@@ -1239,7 +1237,7 @@ SQL;
         $items = array();
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
-            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
+            $ini = $this->getDocs($row['analyzer']);
             $item['analyzer'] =  $ini['name'];
             $item['analyzer_md5'] = $this->toId($ini['name']);
             $item['file' ] =  $row['file'];

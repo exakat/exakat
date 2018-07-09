@@ -28,6 +28,7 @@ class Php72ObjectKeyword extends Analyzer {
     protected $phpVersion = '7.2-';
     
     public function analyze() {
+        // class object {}
         $this->atomIs(array('Class', 'Interface', 'Trait'))
              ->outIs('NAME')
              ->codeIs('object')

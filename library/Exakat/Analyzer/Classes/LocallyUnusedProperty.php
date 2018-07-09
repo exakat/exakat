@@ -28,17 +28,22 @@ use Exakat\Analyzer\Analyzer;
 class LocallyUnusedProperty extends Analyzer {
     public function dependsOn() {
         return array('Classes/LocallyUsedProperty',
+                     'Traits/LocallyUsedProperty',
                      'Variables/StaticVariables',
                     );
     }
     
     public function analyze() {
+        // class x { public $p = 1; }
         $this->atomIs('Ppp')
+             ->hasClassTrait()
              ->outIs('PPP')
              ->_as('ppp')
-             ->analyzerIsNot('Classes/LocallyUsedProperty')
-                // must ignore static in functions
-             ->analyzerIsNot('Variables/StaticVariables')
+             ->analyzerIsNot(array('Classes/LocallyUsedProperty',
+                                   'Traits/LocallyUsedProperty',
+                                   'Variables/StaticVariables',
+                                   ) 
+                            )
              ->back('ppp');
         $this->prepareQuery();
     }

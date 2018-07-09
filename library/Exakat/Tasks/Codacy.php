@@ -119,6 +119,7 @@ class Codacy extends Tasks {
                                 3 => $this->config->project,
                                 4 => '-P',
                                 5 => $analyzer,
+                                6 => '-u',
                             );
                 $dumpConfig = new Config($args);
                 $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);

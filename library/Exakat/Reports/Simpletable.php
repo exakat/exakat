@@ -28,7 +28,6 @@ class Simpletable extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'table';
     
-    private $select = array();
     private $tmpName     = '';
     private $finalName   = '';
 
@@ -70,7 +69,7 @@ class Simpletable extends Reports {
 HTML;
             }
             
-            $ini = parse_ini_file($this->config->doc_root.'human/en/'.$section.'.ini');
+            $ini = $this->getDocs($section);
             $title = makeHtml($ini['name']);
 
             $rows = implode('', $rows);

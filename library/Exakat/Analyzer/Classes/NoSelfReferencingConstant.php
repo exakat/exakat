@@ -29,43 +29,26 @@ class NoSelfReferencingConstant extends Analyzer {
     public function analyze() {
         // const c = self::b
         // const c = self::b + 1
-        $this->atomIs('Const')
-             ->hasClassInterface()
-             ->outIs('CONST')
-             ->_as('results')
-
-             ->outIs('VALUE')
-             ->atomInsideNoDefinition('Staticconstant')
-             ->outIs('CLASS')
-             ->atomIs('Self')
-
-             ->back('results');
-        $this->prepareQuery();
-
         // const c = a::b
         // const c = a::b + 1
         $this->atomIs('Const')
-             ->hasClassInterface()
-             ->goToClassInterface()
-             ->savePropertyAs('fullnspath', 'classe')
+             ->inIs('CONST')
+             ->savePropertyAs('fullnspath', 'fqn')
              ->back('first')
-
              ->outIs('CONST')
              ->_as('results')
-             
+            
              ->outIs('NAME')
-             ->savePropertyAs('code', 'constante')
+             ->savePropertyAs('code', 'name')
              ->inIs('NAME')
-
+             
              ->outIs('VALUE')
              ->atomInsideNoDefinition('Staticconstant')
              ->outIs('CLASS')
-             ->atomIsNot(array('Self', 'Static'))
-             ->samePropertyAs('fullnspath', 'classe')
+             ->samePropertyAs('fullnspath', 'fqn')
              ->inIs('CLASS')
-
              ->outIs('CONSTANT')
-             ->samePropertyAs('code', 'constante', self::CASE_SENSITIVE)
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
 
              ->back('results');
         $this->prepareQuery();

@@ -20,13 +20,31 @@
  *
 */
 
+namespace Exakat\Analyzer\Php;
 
-namespace Exakat\Exceptions;
+use Exakat\Analyzer\Analyzer;
 
-class NoStructureForTable extends \Exception {
-    public function __construct($message = '', $code = 0, \Exception $previous = null) {
+class PHP72scalartypehints extends Analyzer {
+    protected $phpVersion = '7.2+';
 
-        parent::__construct("No structure for table '$message'.\n", $code, $previous);
+    public function analyze() {
+        $scalartypehints = array('\object',
+                                 );
+
+        // function foo(bool $x)
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->fullnspathIs($scalartypehints)
+             ->back('first');
+        $this->prepareQuery();
+
+        // function foo(bool $x)
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->fullnspathIs($scalartypehints)
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

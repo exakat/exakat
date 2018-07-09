@@ -133,7 +133,7 @@ abstract class Tasks {
     abstract public function run();
 
     protected function cleanLogForProject($project) {
-        $logs = glob($this->config->projects_root.'/projects/'.$project.'/log/*');
+        $logs = glob("{$this->config->projects_root}/projects/$project/log/*");
         foreach($logs as $log) {
             unlink($log);
         }
@@ -145,7 +145,7 @@ abstract class Tasks {
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
             $pid = getmypid();
-            $path = $this->config->projects_root.'/projects/.exakat/'.$snitch.'.json';
+            $path = "{$this->config->projects_root}/projects/.exakat/$snitch.json";
         }
 
         $values['pid'] = $pid;
@@ -158,7 +158,7 @@ abstract class Tasks {
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
             $pid = getmypid();
-            $path = $this->config->projects_root.'/projects/.exakat/'.$snitch.'.json';
+            $path = "{$this->config->projects_root}/projects/.exakat/$snitch.json";
         }
 
         unlink($path);

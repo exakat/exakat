@@ -59,7 +59,7 @@ class Dump extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
-        $projectInGraph = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")')
+        $projectInGraph = $this->gremlin->query('g.V().hasLabel("Project").values("code")')
                                         ->toArray()[0];
         
         if ($projectInGraph !== $this->config->project) {

@@ -27,6 +27,7 @@ use Exakat\Analyzer\Themes;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Datastore;
 use Exakat\Dump;
+use Exakat\Reports\Helpers\Docs;
 
 abstract class Reports {
 //    const FILE_EXTENSION = 'undefined';
@@ -34,6 +35,8 @@ abstract class Reports {
     
     const STDOUT = 'stdout';
     const INLINE = 'inline';
+    
+    static private $docs = null;
 
     static public $FORMATS        = array('Ambassador', 'AmbassadorNoMenu', 'Drillinstructor',
                                           'Text', 'Xml', 'Uml', 'PlantUml', 'None', 'SimpleHtml', 'Owasp',
@@ -43,6 +46,7 @@ abstract class Reports {
                                           'RadwellCode', 'Melis', 'Grade', 'Weekly', 'Codacy', 'Scrutinizer',
                                           'FacetedJson', 'Json', 'OnepageJson', 'Marmelab', 'Simpletable',
                                           'Codeflower', 'Dependencywheel',
+                                          'DailyTodo', 
                                           );
 
     protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55',
@@ -76,6 +80,8 @@ abstract class Reports {
                                      array_keys($config->themas));
             $this->themesList = makeList($analyzers);
         }
+        
+        self::$docs = new Docs($this->config->dir_root);
     }
 
     protected function _generate($analyzerList) {}
@@ -151,6 +157,16 @@ abstract class Reports {
         }
         
         return array_diff($required, $available);
+    }
+    
+    public function getDocs($analyzer, $property = null) {
+        assert(self::$docs !== null, "Docs needs to be initialized with an object.");
+
+        if ($property === null) {
+            return self::$docs->getDocs($analyzer);
+        } else {
+            return self::$docs->getDocs($analyzer)[$property];
+        }
     }
 }
 

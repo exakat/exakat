@@ -20,13 +20,31 @@
  *
 */
 
+namespace Exakat\Analyzer\Php;
 
-namespace Exakat\Exceptions;
+use Exakat\Analyzer\Analyzer;
 
-class Neo4jException extends \Exception {
-    public function __construct($message = '', $code = 0, \Exception $previous = null) {
+class PHP71scalartypehints extends Analyzer {
+    protected $phpVersion = '7.1+';
 
-        parent::__construct($message, $code, $previous);
+    public function analyze() {
+        $scalartypehints = array('\iterable',
+                                 );
+
+        // function foo(bool $x)
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
+             ->fullnspathIs($scalartypehints)
+             ->back('first');
+        $this->prepareQuery();
+
+        // function foo(bool $x)
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('RETURNTYPE')
+             ->fullnspathIs($scalartypehints)
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

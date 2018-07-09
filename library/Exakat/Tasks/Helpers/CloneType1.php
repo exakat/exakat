@@ -30,6 +30,7 @@ class CloneType1 extends Plugin {
         foreach($extras as $extra) {
             if ($extra->ctype1 === null)  {
                 $atom->ctype1 = null;
+                $atom->ctype1_size = null;
                 return ;
             }
         }
@@ -210,7 +211,7 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Methodcall' :
-                $atom->ctype1 = $extras['OBJECT']->ctype1 . $atom->code . $extras['METHOD']->ctype1;
+                $atom->ctype1 = $extras['OBJECT']->ctype1 . $atom->code . $extras['METHOD']->ctype1.'()';
                 break;
 
             case 'Member' :

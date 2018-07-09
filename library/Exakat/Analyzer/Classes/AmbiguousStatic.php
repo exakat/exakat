@@ -28,19 +28,25 @@ use Exakat\Data\Dictionary;
 class AmbiguousStatic extends Analyzer {
     public function analyze() {
         // Methods with the same name, but with static or not.
-        $query = <<<GREMLIN
-g.V().hasLabel("Method").has("static", true).values("lccode").unique()
+        $queryMethodStatic = <<<GREMLIN
+g.V().hasLabel("Method")
+     .has("static", true)
+     .values("lccode")
+     .unique()
 GREMLIN;
-        $staticMethod = $this->query($query)->toArray();
+        $staticMethod = $this->query($queryMethodStatic)->toArray();
         $staticMethod = $this->dictCode->source($staticMethod);
         $staticMethod = array_map('mb_strtolower', $staticMethod);
         $staticMethod = array_unique($staticMethod);
 
         // Global are unused if used only once
-        $query = <<<GREMLIN
-g.V().hasLabel("Method").not(has("static", true)).values("lccode").unique()
+        $queryMethod = <<<GREMLIN
+g.V().hasLabel("Method")
+     .not(has("static", true))
+     .values("lccode")
+     .unique()
 GREMLIN;
-        $normalMethod = $this->query($query)->toArray();
+        $normalMethod = $this->query($queryMethod)->toArray();
         $normalMethod = $this->dictCode->source($normalMethod);
         $normalMethod = array_map('mb_strtolower', $normalMethod);
         $normalMethod = array_unique($normalMethod);
@@ -56,30 +62,31 @@ GREMLIN;
 
         // Properties with the same name, but with static or not.
         // Just like methods, they are case-insensitive, because static $X and $x are still ambiguous
-        $query = <<<GREMLIN
+        $queryStaticProperty = <<<GREMLIN
 g.V().hasLabel("Ppp")
      .has("static", true)
      .out("PPP")
      .values("code")
      .unique()
 GREMLIN;
-        $staticProperty = $this->query($query)->toArray();
+        $staticProperty = $this->query($queryStaticProperty)->toArray();
 
         // Global are unused if used only once
-        $query = <<<GREMLIN
+        $queryProperty = <<<GREMLIN
 g.V().hasLabel("Ppp")
      .not(has("static", true))
      .out("PPP")
      .values("code")
      .unique()
 GREMLIN;
-        $normalProperty = $this->query($query)->toArray();
+        $normalProperty = $this->query($queryProperty)->toArray();
 
         $mixedProperty = array_values(array_intersect($normalProperty, $staticProperty));
         
         if (!empty($mixedProperty)){
             $this->atomIs('Propertydefinition')
-                 ->codeIs($mixedProperty, self::NO_TRANSLATE, self::CASE_SENSITIVE);
+                 ->codeIs($mixedProperty, self::NO_TRANSLATE, self::CASE_SENSITIVE)
+                 ->inIs('PPP');
             $this->prepareQuery();
         }
     }

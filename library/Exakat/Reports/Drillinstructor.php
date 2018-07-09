@@ -449,7 +449,7 @@ SQL
                             );
             $count = 0;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['name'].'.ini');
+                $ini = $this->getDocs($row['name']);
 
 #FF0000	Bad
 #FFFF00	Bad-Average
@@ -471,8 +471,12 @@ SQL
                 $levelRows .= '<tr><td>'.$ini['name']."</td><td>$row[count]</td><td style=\"background-color: $row[color]\">$row[grade]</td></tr>\n";
             }
 
-            $grade = floor($count / (count($analyzers) - 1) * (count($colors) - 1));
-            $grade = chr(65 + $grade); // B to F
+            if ((count($analyzers) - 1) === 0) {
+                $grade = 'A';
+            } else {
+                $grade = floor($count / (count($analyzers) - 1) * (count($colors) - 1));
+                $grade = chr(65 + $grade); // B to F
+            }
             $color = $colors[$grade];
             
             $levels .= '<tr><td style="background-color: #bbbbbb">Level '.$level.'</td>

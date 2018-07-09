@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Helpers\Results;
 
 class Codacy extends Reports {
-    const FILE_EXTENSION = 'json';
+    const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'stdout';
 
     public function dependsOnAnalysis() {
@@ -41,8 +41,7 @@ class Codacy extends Reports {
         $titleCache = array();
         foreach($analysisResults->toArray() as $row) {
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
-                $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
+                $titleCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'name');
             }
 
             /*
@@ -62,7 +61,8 @@ https://support.codacy.com/hc/en-us/articles/207994725-Tool-Developer-Guide
             $results[] = json_encode($line);
         }
 
-        return implode(PHP_EOL, $results);
+        print implode(PHP_EOL, $results);
+        return '';
     }
 }
 

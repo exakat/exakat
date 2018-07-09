@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Functions_MarkCallable extends Analyzer {
-    /* 6 methods */
+    /* 7 methods */
 
     public function testFunctions_MarkCallable01()  { $this->generic_test('Functions_MarkCallable.01'); }
     public function testFunctions_MarkCallable02()  { $this->generic_test('Functions_MarkCallable.02'); }
@@ -16,5 +16,6 @@ class Functions_MarkCallable extends Analyzer {
     public function testFunctions_MarkCallable04()  { $this->generic_test('Functions_MarkCallable.04'); }
     public function testFunctions_MarkCallable05()  { $this->generic_test('Functions_MarkCallable.05'); }
     public function testFunctions_MarkCallable06()  { $this->generic_test('Functions/MarkCallable.06'); }
+    public function testFunctions_MarkCallable07()  { $this->generic_test('Functions/MarkCallable.07'); }
 }
 ?>

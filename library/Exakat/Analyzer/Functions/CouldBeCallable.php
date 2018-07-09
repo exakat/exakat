@@ -30,13 +30,16 @@ class CouldBeCallable extends Analyzer {
 
         foreach($ini as $position => $functions) {
             $rank = substr($position, 9);
+            if ($rank[0] === '_') {
+                list(, $rank) = explode('_', $position);
+            }
         
             // foo($arg) { array_map($arg, '') ; }
             $this->atomIs(self::$FUNCTIONS_ALL)
                  ->outIs('ARGUMENT')
+                 ->atomIsNot('Void')
                  ->raw('not(where( __.out("TYPEHINT").has("token", "T_CALLABLE")))')
                  ->_as('results')
-                 ->outIsIE('LEFT')
                  ->savePropertyAs('code', 'argument')
                  ->back('first')
                  ->outIs('BLOCK')
@@ -51,9 +54,9 @@ class CouldBeCallable extends Analyzer {
         // $arg(...)
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
+             ->atomIsNot('Void')
              ->raw('not(where( __.out("TYPEHINT").has("token", "T_CALLABLE")))')
              ->_as('results')
-             ->outIsIE('LEFT')
              ->savePropertyAs('code', 'argument')
              ->back('first')
              ->outIs('BLOCK')

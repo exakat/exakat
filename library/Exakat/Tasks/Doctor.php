@@ -120,7 +120,7 @@ class Doctor extends Tasks {
 
         // java
         $res = shell_exec('java -version 2>&1');
-        if (preg_match('/command not found/is', $res)) {
+        if (stripos($res, 'command not found') !== false) {
             $stats['java']['installed'] = 'No';
             $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
         } elseif (preg_match('/(java|openjdk) version "(.*)"/is', $res, $r)) {
@@ -282,7 +282,6 @@ class Doctor extends Tasks {
                           );
 
         foreach($optionals as $class => $section) {
-            $fullClass = "\\Exakat\\Vcs\\$class";
             $vcs = new $fullClass($this->config->project, $this->config->projects_root);
             $stats[$section] = $vcs->getInstallationInfo();
         }

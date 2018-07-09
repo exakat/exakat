@@ -23,7 +23,6 @@
 
 namespace Exakat\Analyzer;
 
-use Exakat\Description;
 use Exakat\Datastore;
 use Exakat\Data\Dictionary;
 use Exakat\Config;
@@ -31,10 +30,11 @@ use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Graph\Helpers\GraphResults;
+use Exakat\Reports\Helpers\Docs;
+use Exakat\Analyzer\Helpers\Query;
+use Exakat\Tasks\Helpers\Atom;
 
 abstract class Analyzer {
-    protected $description    = null;
-
     static public $datastore  = null;
     
     protected $rowCount       = 0; // Number of found values
@@ -44,8 +44,7 @@ abstract class Analyzer {
 
     private $queries          = array();
     private $queriesArguments = array();
-    private $methods          = array();
-    private $arguments        = array();
+    private $query            = null;
     
     public $config         = null;
 
@@ -107,8 +106,6 @@ abstract class Analyzer {
     static public $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
     static public $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     
-    const STOP_QUERY = 'filter{ false; }';
-    
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
 
@@ -128,18 +125,17 @@ abstract class Analyzer {
     public function __construct($gremlin = null, $config = null) {
         $this->gremlin = $gremlin;
         
-        $this->analyzer = get_class($this);
+        $this->analyzer       = get_class($this);
         $this->analyzerQuoted = $this->getName($this->analyzer);
+        $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
 
-        $this->_as('first');
-        
         assert($config !== null, 'Can\'t call Analyzer without a config');
         $this->themes = new Themes($config->dir_root.'/data/analyzers.sqlite');
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
-            $this->description = new Description($this->getName($this->analyzer), $config->dir_root);
-            $parameters = $this->description->getParameters();
+            $description = new Docs($config->dir_root);
+            $parameters = $description->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
                 assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");
  
@@ -179,6 +175,8 @@ abstract class Analyzer {
 
             self::$availableFunctioncalls = self::$datastore->getCol('functioncalls', 'functioncall');
         }
+        
+        $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable);
     }
     
     public function __destruct() {
@@ -229,44 +227,11 @@ GREMLIN;
         return $this->gremlin->query($query)->toArray();
     }
 
-    public function getDescription() {
-        return $this->description;
-    }
-
     public function getThemes() {
         $analyzer = $this->getName($this->analyzerQuoted);
         return $this->themes->getThemeForAnalyzer($analyzer);
     }
 
-    private function addMethod($method, $arguments = array()) {
-        if ($arguments === array()) { // empty, but won't mistake 0 for nothing
-            $this->methods[] = $method;
-            return $this;
-        }
-        
-        assert(substr_count($method, '***') == func_num_args() - 1, substr_count($method, '***').' placeholders for '.(func_num_args() - 1).' arguments, in '.$method);
-        
-        if (func_num_args() >= 2) {
-            $arguments = func_get_args();
-            array_shift($arguments);
-            $argnames = array(str_replace('***', '%s', $method));
-            foreach($arguments as $arg) {
-                $argname = 'arg'.count($this->arguments);
-                $this->arguments[$argname] = $arg;
-                $argnames[] = $argname;
-            }
-            $this->methods[] = call_user_func_array('sprintf', $argnames);
-            return $this;
-        }
-
-        // one argument
-        $argname = 'arg'.count($this->arguments);
-        $this->arguments[$argname] = $arguments;
-        $this->methods[] = str_replace('***', $argname, $method);
-        
-        return $this;
-    }
-    
     public function init($analyzerId = null) {
         if ($analyzerId === null) {
             $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").id()';
@@ -467,20 +432,20 @@ GREMLIN;
     }
 
     public function _as($name) {
-        $this->methods[] = 'as("'.$name.'")';
+        $this->query->addMethod('as("'.$name.'")');
         
         return $this;
     }
 
     public function back($name) {
-        $this->methods[] = 'select("'.$name.'")';
+        $this->query->addMethod('select("'.$name.'")');
         
         return $this;
     }
     
     public function ignore() {
         // used to execute some code but not collect any node
-        $this->methods[] = self::STOP_QUERY;
+        $this->query->stopQuery();
     }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -494,7 +459,7 @@ GREMLIN;
         $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
         $stop = array_unique(array_merge($stop, $atom));
 
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 not( where( 
  __.emit( ).repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() )
            .until(hasLabel(within(***)))
@@ -516,7 +481,7 @@ GREMLIN
         $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
         $stop = array_unique(array_diff($stop, $atom));
 
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 where( 
  __.sideEffect{ c = 0; }
    .emit( ).repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() )
@@ -536,7 +501,7 @@ GREMLIN
             return $this->hasNoInstruction($atom);
         }
 
-        $this->addMethod('not( where( 
+        $this->query->addMethod('not( where( 
 __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File")).hasLabel(within(***)).has("code", ***)
   ) )', makeArray($atom), $name);
         
@@ -545,7 +510,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLab
 
     protected function hasInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
-        $this->addMethod('where( 
+        $this->query->addMethod('where( 
 __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit( ).hasLabel(within(***))
     )', makeArray($atom) );
         
@@ -558,7 +523,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         $atomAndFile = $atom;
         $atomAndFile[] = "File";
         $atomAndFile = array_unique($atomAndFile);
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )
           .hasLabel(within(***))
 GREMLIN
@@ -569,7 +534,7 @@ GREMLIN
 
     public function tokenIs($token) {
         assert($this->assertLink($token));
-        $this->addMethod('has("token", within(***))', makeArray($token) );
+        $this->query->addMethod('has("token", within(***))', makeArray($token) );
         
         return $this;
     }
@@ -577,7 +542,7 @@ GREMLIN
     public function tokenIsNot($token) {
         assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($this->assertToken($token));
-        $this->addMethod('not(has("token", within(***)))', makeArray($token) );
+        $this->query->addMethod('not(has("token", within(***)))', makeArray($token) );
         
         return $this;
     }
@@ -586,13 +551,13 @@ GREMLIN
         assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($this->assertAtom($atom));
 
-        $atoms = makeArray($atom);
-        $diff = array_intersect($atoms, self::$availableAtoms);
+        $diff = $this->checkAtoms($atom);
         if (empty($diff)) {
-            $this->addMethod(self::STOP_QUERY);
-        } else {
-            $this->addMethod('hasLabel(within(***))', $atoms);
-        }
+            $this->query->stopQuery();
+            return $this;
+        } 
+
+        $this->query->addMethod('hasLabel(within(***))', $diff);
         
         return $this;
     }
@@ -600,7 +565,7 @@ GREMLIN
     public function atomIsNot($atom) {
         assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($this->assertAtom($atom));
-        $this->addMethod('not(hasLabel(within(***)))', makeArray($atom) );
+        $this->query->addMethod('not(hasLabel(within(***)))', makeArray($atom) );
         
         return $this;
     }
@@ -621,7 +586,7 @@ GREMLIN
         $diff = array_intersect($fullnspaths, self::$availableFunctioncalls);
         
         if (empty($diff)) {
-            $this->addMethod(self::STOP_QUERY);
+            $this->query->stopQuery();
             return $this;
         }
 
@@ -646,7 +611,7 @@ GREMLIN
         assert($this->assertAtom($atom));
         $MAX_LOOPING = self::MAX_LOOPING;
         $gremlin = "where( __.emit( ).repeat( out($this->linksDown) ).times($MAX_LOOPING).hasLabel(within(***)) )";
-        $this->addMethod($gremlin, makeArray($atom));
+        $this->query->addMethod($gremlin, makeArray($atom));
         
         return $this;
     }
@@ -654,7 +619,7 @@ GREMLIN
     public function hasPropertyInside($property, $values) {
         assert($this->assertProperty($property));
         $gremlin = 'where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').has("'.$property.'", within(***)) )';
-        $this->addMethod($gremlin, makeArray($values));
+        $this->query->addMethod($gremlin, makeArray($values));
         
         return $this;
     }
@@ -662,7 +627,7 @@ GREMLIN
     public function atomInside($atom) {
         assert($this->assertAtom($atom));
         $gremlin = 'emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel(within(***))';
-        $this->addMethod($gremlin, makeArray($atom));
+        $this->query->addMethod($gremlin, makeArray($atom));
         
         return $this;
     }
@@ -670,7 +635,7 @@ GREMLIN
     public function fullcodeInside($fullcode) {
         // $fullcode is a name of a variable
         $gremlin = 'emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}';
-        $this->addMethod($gremlin);
+        $this->query->addMethod($gremlin);
 
         return $this;
     }
@@ -678,14 +643,14 @@ GREMLIN
     public function noFullcodeInside($fullcode) {
         // $fullcode is a name of a variable
         $gremlin = 'not( where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == '.$fullcode.'}) )';
-        $this->addMethod($gremlin);
+        $this->query->addMethod($gremlin);
 
         return $this;
     }
 
     public function functionInside($fullnspath) {
         $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").has("fullnspath", within(***))';
-        $this->addMethod($gremlin, makeArray($fullnspath));
+        $this->query->addMethod($gremlin, makeArray($fullnspath));
         
         return $this;
     }
@@ -693,7 +658,7 @@ GREMLIN
     public function noFunctionInside($fullnspath) {
         // $fullcode is a name of a variable
         $gremlin = 'not( where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").has("fullnspath", within(***))) )';
-        $this->addMethod($gremlin, makeArray($fullnspath));
+        $this->query->addMethod($gremlin, makeArray($fullnspath));
 
         return $this;
     }
@@ -701,7 +666,7 @@ GREMLIN
     public function atomInsideNoBlock($atom) {
         assert($this->assertAtom($atom));
         $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Sequence")) ).times('.self::MAX_LOOPING.').hasLabel(within(***))';
-        $this->addMethod($gremlin, makeArray($atom));
+        $this->query->addMethod($gremlin, makeArray($atom));
         
         return $this;
     }
@@ -709,7 +674,7 @@ GREMLIN
     public function atomInsideNoAnonymous($atom) {
         assert($this->assertAtom($atom));
         $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) ).times('.self::MAX_LOOPING.').hasLabel(within(***))';
-        $this->addMethod($gremlin, makeArray($atom));
+        $this->query->addMethod($gremlin, makeArray($atom));
         
         return $this;
     }
@@ -717,7 +682,7 @@ GREMLIN
     public function atomInsideNoDefinition($atom) {
         assert($this->assertAtom($atom));
         $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel(within(***))';
-        $this->addMethod($gremlin, makeArray($atom));
+        $this->query->addMethod($gremlin, makeArray($atom));
         
         return $this;
     }
@@ -734,7 +699,7 @@ not(
           )
 )
 GREMLIN;
-        $this->addMethod($gremlin, makeArray($atom));
+        $this->query->addMethod($gremlin, makeArray($atom));
         
         return $this;
     }
@@ -749,7 +714,7 @@ not(
                      .times($MAX_LOOPING).has("$property", within(***)) ) 
     )
 GREMLIN;
-        $this->addMethod($gremlin, makeArray($values));
+        $this->query->addMethod($gremlin, makeArray($values));
         
         return $this;
     }
@@ -766,13 +731,13 @@ not(
                      .filter{ it.get().value("$property") == $values } ) 
     )
 GREMLIN;
-        $this->addMethod($gremlin, makeArray($atom));
+        $this->query->addMethod($gremlin, makeArray($atom));
         
         return $this;
     }
 
     public function trim($variable, $chars = '\'\"') {
-        $this->addMethod('sideEffect{'.$variable.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1"); }');
+        $this->query->addMethod('sideEffect{'.$variable.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1"); }');
         
         return $this;
     }
@@ -784,7 +749,7 @@ GREMLIN;
         }
         $analyzer = array_map('self::getName', $analyzer);
 
-        $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)) )', $analyzer);
+        $this->query->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)) )', $analyzer);
 
         return $this;
     }
@@ -796,14 +761,14 @@ GREMLIN;
         }
         $analyzer = array_map('self::getName', $analyzer);
 
-        $this->addMethod('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', $analyzer);
+        $this->query->addMethod('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', $analyzer);
 
         return $this;
     }
 
     public function has($property) {
         assert($this->assertProperty($property));
-        $this->addMethod('has(***)', $property);
+        $this->query->addMethod('has(***)', $property);
         
         return $this;
     }
@@ -811,18 +776,18 @@ GREMLIN;
     public function is($property, $value = true) {
         assert($this->assertProperty($property));
         if ($value === null) {
-            $this->addMethod('has("'.$property.'", null)');
+            $this->query->addMethod('has("'.$property.'", null)');
         } elseif ($value === true) {
-            $this->addMethod('has("'.$property.'", true)');
+            $this->query->addMethod('has("'.$property.'", true)');
         } elseif ($value === false) {
-            $this->addMethod('has("'.$property.'", false)');
+            $this->query->addMethod('has("'.$property.'", false)');
         } elseif (is_int($value)) {
-            $this->addMethod('has("'.$property.'", ***)', $value);
+            $this->query->addMethod('has("'.$property.'", ***)', $value);
         } elseif (is_string($value)) {
-            $this->addMethod('has("'.$property.'", ***)', $value);
+            $this->query->addMethod('has("'.$property.'", ***)', $value);
         } elseif (is_array($value)) {
             if (!empty($value)) {
-                $this->addMethod('has("'.$property.'", within(***))', $value );
+                $this->query->addMethod('has("'.$property.'", within(***))', $value );
             }
         } else {
             assert(false, 'Not understood type for is : '.gettype($value));
@@ -833,24 +798,24 @@ GREMLIN;
 
     public function isHash($property, $hash, $index) {
         if (is_array($hash) && empty($hash)) {
-            $this->addMethod(self::STOP_QUERY);
+            $this->query->stopQuery();
             return $this;
         }
 
         assert($this->assertProperty($property));
-        $this->addMethod('filter{ it.get().value("'.$property.'") in ***['.$index.']}', $hash);
+        $this->query->addMethod('filter{ it.get().value("'.$property.'") in ***['.$index.']}', $hash);
         
         return $this;
     }
 
     public function isNotHash($property, $hash, $index) {
         if (is_array($hash) && empty($hash)) {
-            $this->addMethod("filter{ true; }");
+            $this->query->addMethod("filter{ true; }");
             return $this;
         }
 
         assert($this->assertProperty($property));
-        $this->addMethod('filter{ !(it.get().value("'.$property.'") in ***['.$index.'])}', $hash);
+        $this->query->addMethod('filter{ !(it.get().value("'.$property.'") in ***['.$index.'])}', $hash);
         
         return $this;
     }
@@ -858,22 +823,22 @@ GREMLIN;
     public function isNot($property, $value = true) {
         assert($this->assertProperty($property));
         if ($value === null) {
-            $this->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", null)))');
+            $this->query->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", null)))');
         } elseif ($value === true) {
-            $this->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
+            $this->query->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
         } elseif ($value === false) {
-            $this->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
+            $this->query->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
         } elseif (is_int($value)) {
-            $this->addMethod('not(has("'.$property.'", ***))', $value);
+            $this->query->addMethod('not(has("'.$property.'", ***))', $value);
         } elseif (is_string($value)) {
             if (empty($value)) {
-                $this->addMethod('not(has("'.$property.'", ""))');
+                $this->query->addMethod('not(has("'.$property.'", ""))');
             } else {
-                $this->addMethod('not(has("'.$property.'", ***))', $value);
+                $this->query->addMethod('not(has("'.$property.'", ***))', $value);
             }
         } elseif (is_array($value)) {
             if (!empty($value)) {
-                $this->addMethod('not(has("'.$property.'", within(***)))', $value);
+                $this->query->addMethod('not(has("'.$property.'", within(***)))', $value);
             }
         } else {
             assert(false, 'Not understood type for isNot : '.gettype($value));
@@ -885,10 +850,10 @@ GREMLIN;
     public function isMore($property, $value = 0) {
         assert($this->assertProperty($property));
         if (is_int($value)) {
-            $this->addMethod("filter{ it.get().value(\"{$property}\").toLong() > {$value} }");
+            $this->query->addMethod("filter{ it.get().value(\"{$property}\").toLong() > {$value} }");
         } elseif (is_string($value)) {
             // this is a variable name, so it can't use ***
-            $this->addMethod("filter{ it.get().value(\"{$property}\").toLong() > {$value};}");
+            $this->query->addMethod("filter{ it.get().value(\"{$property}\").toLong() > {$value};}");
         } else {
             assert(false, '$value must be int or string in '.__METHOD__);
         }
@@ -899,10 +864,10 @@ GREMLIN;
     public function isLess($property, $value = 0) {
         assert($this->assertProperty($property));
         if (is_int($value)) {
-            $this->addMethod('filter{ it.get().value("'.$property.'").toLong() < '.$value.'}');
+            $this->query->addMethod('filter{ it.get().value("'.$property.'").toLong() < '.$value.'}');
         } elseif (is_string($value)) {
             // this is a variable name
-            $this->addMethod("filter{ it.get().value('$property').toLong() < $value;}");
+            $this->query->addMethod("filter{ it.get().value('$property').toLong() < $value;}");
         } else {
             assert(false, '$value must be int or string in '.__METHOD__);
         }
@@ -913,55 +878,45 @@ GREMLIN;
     public function outWithRank($link = 'ARGUMENT', $rank = 0) {
         if ($rank === 'first') {
             // @note : can't use has() with integer!
-            $this->addMethod('out("'.$link.'").has("rank", eq(0))');
+            $this->query->addMethod('out("'.$link.'").has("rank", eq(0))');
         } elseif ($rank === 'last') {
-            $this->addMethod('map( __.out("'.$link.'").order().by("rank").tail(1) )');
+            $this->query->addMethod('map( __.out("'.$link.'").order().by("rank").tail(1) )');
         } elseif ($rank === '2last') {
-            $this->addMethod('map( __.out("'.$link.'").order().by("rank").tail(2) )');
+            $this->query->addMethod('map( __.out("'.$link.'").order().by("rank").tail(2) )');
+        } elseif (abs((int) $rank) >= 0) {
+            $this->query->addMethod('out("'.$link.'").has("rank", eq('.abs((int) $rank).'))');
         } else {
-            $this->addMethod('out("'.$link.'").has("rank", eq('.abs((int) $rank).'))');
+            assert(false, "rank '$rank' is wrong in ".__METHOD__);
         }
 
         return $this;
     }
 
     public function outWithoutLastRank() {
-        $this->addMethod('sideEffect{dernier = it.get().value("count") - 1;}.out("EXPRESSION").filter{ it.get().value("rank") < dernier}');
+        $this->query->addMethod('sideEffect{dernier = it.get().value("count") - 1;}.out("EXPRESSION").filter{ it.get().value("rank") < dernier}');
 
         return $this;
     }
 
     public function hasChildWithRank($edgeName, $rank = 0) {
-        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", ***).not(hasLabel("Void")) )', abs((int) $rank));
+        $this->query->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", ***).not(hasLabel("Void")) )', abs((int) $rank));
 
         return $this;
     }
 
     public function noChildWithRank($edgeName, $rank = 0) {
         if (is_int($rank)) {
-            $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').has("rank", ***) ) )', abs($rank));
+            $this->query->addMethod('not( where( __.out('.$this->SorA($edgeName).').has("rank", ***) ) )', abs($rank));
         } else {
-            $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').filter{it.get().value("rank") == ***; } ) )', $rank);
+            $this->query->addMethod('not( where( __.out('.$this->SorA($edgeName).').filter{it.get().value("rank") == ***; } ) )', $rank);
         }
-
-        return $this;
-    }
-
-    public function hasName() {
-        $this->addMethod('not(where(__.out("NAME").hasLabel("Void")) )');
-
-        return $this;
-    }
-
-    public function hasNoName() {
-        $this->addMethod('where(__.out("NAME").hasLabel("Void"))');
 
         return $this;
     }
 
     public function codeIs($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
         if (is_array($code) && empty($code)) {
-            $this->addMethod(self::STOP_QUERY);
+            $this->query->stopQuery();
             return $this;
         }
         
@@ -973,13 +928,13 @@ GREMLIN;
             $translatedCode = $this->dictCode->translate($code, $caseSensitive === self::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
 
             if (empty($translatedCode)) {
-                $this->addMethod(self::STOP_QUERY);
+                $this->query->stopQuery();
                 return $this;
             }
 
-            $this->addMethod("filter{ it.get().value(\"$col\") in ***; }", $translatedCode);
+            $this->query->addMethod("filter{ it.get().value(\"$col\") in ***; }", $translatedCode);
         } else {
-            $this->addMethod("filter{ it.get().value(\"$col\") in ***; }", makeArray($code));
+            $this->query->addMethod("filter{ it.get().value(\"$col\") in ***; }", makeArray($code));
         }
 
         return $this;
@@ -999,20 +954,20 @@ GREMLIN;
 
             if (empty($translatedCode)) {
                 // Couldn't find anything in the dictionary : OK!
-                $this->addMethod("filter{ true; }");
+                $this->query->addMethod("filter{ true; }");
                 return $this;
             }
         
-            $this->addMethod("filter{ !(it.get().value(\"$col\") in ***); }", $translatedCode);
+            $this->query->addMethod("filter{ !(it.get().value(\"$col\") in ***); }", $translatedCode);
         } else {
-            $this->addMethod("filter{ !(it.get().value(\"$col\") in ***); }", makeArray($code));
+            $this->query->addMethod("filter{ !(it.get().value(\"$col\") in ***); }", makeArray($code));
         }
 
         return $this;
     }
 
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->addMethod('hasLabel("String")');
+        $this->query->addMethod('hasLabel("String")');
         return $this->propertyIs('noDelimiter', $code, $caseSensitive);
     }
 
@@ -1025,23 +980,23 @@ GREMLIN;
     }
 
     public function fullnspathIs($code) {
-        $this->addMethod('has("fullnspath")');
+        $this->query->addMethod('has("fullnspath")');
         return $this->propertyIs('fullnspath', $code, self::CASE_INSENSITIVE);
     }
 
     public function fullnspathIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
         if (empty($code)) {
-            $this->addMethod('sideEffect{ }');
+            $this->query->addMethod('sideEffect{ }');
             return $this;
         }
 
-        $this->addMethod('has("fullnspath")');
+        $this->query->addMethod('has("fullnspath")');
 
         return $this->propertyIsNot('fullnspath', $code, $caseSensitive);
     }
     
     public function codeIsPositiveInteger() {
-        $this->addMethod('filter{ if( it.code.isInteger()) { it.code > 0; } else { true; }}', null); // may be use toInteger() ?
+        $this->query->addMethod('filter{ if( it.code.isInteger()) { it.code > 0; } else { true; }}', null); // may be use toInteger() ?
 
         return $this;
     }
@@ -1050,21 +1005,21 @@ GREMLIN;
         assert($this->assertProperty($property));
 
         if ($property === 'label') {
-            $this->addMethod('filter{ it.get().label() == '.$name.'}');
+            $this->query->addMethod('filter{ it.get().label() == '.$name.'}');
         } elseif ($property === 'id') {
-            $this->addMethod('filter{ it.get().id() == '.$name.'}');
+            $this->query->addMethod('filter{ it.get().id() == '.$name.'}');
         } elseif ($property === 'code' || $property === 'lccode') {
             if ($caseSensitive === self::CASE_SENSITIVE) {
-                $this->addMethod('filter{ it.get().value("code") == '.$name.'}');
+                $this->query->addMethod('filter{ it.get().value("code") == '.$name.'}');
             } else {
-                $this->addMethod('filter{ it.get().value("lccode") == '.$name.'}');
+                $this->query->addMethod('filter{ it.get().value("lccode") == '.$name.'}');
             }
         } elseif (in_array($property, array('line', 'rank', 'propertyname', 'boolean', 'count'))) {
-            $this->addMethod('filter{ it.get().value("'.$property.'") == '.$name.'}');
+            $this->query->addMethod('filter{ it.get().value("'.$property.'") == '.$name.'}');
         } else {
             $caseSensitive = $caseSensitive === self::CASE_SENSITIVE ? '' : '.toLowerCase()';
 
-            $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' == '.$name.$caseSensitive.'}');
+            $this->query->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' == '.$name.$caseSensitive.'}');
         }
 
         return $this;
@@ -1079,18 +1034,18 @@ GREMLIN;
         }
         
         if ($property === 'label') {
-            $this->addMethod("filter{ it.get().label() != $name }");
+            $this->query->addMethod("filter{ it.get().label() != $name }");
         } elseif ($property === 'id') {
-            $this->addMethod("filter{ it.get().id() != $name }");
+            $this->query->addMethod("filter{ it.get().id() != $name }");
         } else {
-            $this->addMethod("filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
+            $this->query->addMethod("filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
         }
 
         return $this;
     }
     
     public function values($property) {
-        $this->addMethod("values(\"$property\")");
+        $this->query->addMethod("values(\"$property\")");
         
         return $this;
     }
@@ -1104,7 +1059,7 @@ GREMLIN;
             $sortStep = ".sort{it.value(\"$sort\")}";
         }
 
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 sideEffect{ 
     s = [];
     it.get().vertices(OUT, "$out")$sortStep.each{ 
@@ -1122,11 +1077,11 @@ GREMLIN
     public function savePropertyAs($property, $name) {
         assert($this->assertProperty($property));
         if ($property === 'label') {
-            $this->addMethod('sideEffect{ '.$name.' = it.get().label(); }');
+            $this->query->addMethod('sideEffect{ '.$name.' = it.get().label(); }');
         } elseif ($property === 'id') {
-            $this->addMethod('sideEffect{ '.$name.' = it.get().id(); }');
+            $this->query->addMethod('sideEffect{ '.$name.' = it.get().id(); }');
         } else {
-            $this->addMethod('sideEffect{ '.$name.' = it.get().value("'.$property.'"); }');
+            $this->query->addMethod('sideEffect{ '.$name.' = it.get().value("'.$property.'"); }');
         }
 
         return $this;
@@ -1143,7 +1098,7 @@ GREMLIN
     }
 
     public function fullcodeVariableIs($variable) {
-        $this->addMethod("filter{it.get().value(\"fullcode\") == $variable; }");
+        $this->query->addMethod("filter{it.get().value(\"fullcode\") == $variable; }");
         
         return $this;
     }
@@ -1155,20 +1110,20 @@ GREMLIN
     }
 
     public function isUppercase($property = 'fullcode') {
-        $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
+        $this->query->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
 
         return $this;
     }
 
     public function isLowercase($property = 'fullcode') {
-        $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase()}');
+        $this->query->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase()}');
 
         return $this;
     }
 
     public function isNotUppercase($property = 'fullcode') {
         assert($this->assertProperty($property));
-        $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toUpperCase()}');
+        $this->query->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toUpperCase()}');
 
         return $this;
     }
@@ -1176,9 +1131,9 @@ GREMLIN
     public function isNotLowercase($property = 'fullcode') {
         assert($this->assertProperty($property));
         if ($property === 'code') {
-            $this->addMethod('filter{it.get().value("code") != it.get().value("lccode")}');
+            $this->query->addMethod('filter{it.get().value("code") != it.get().value("lccode")}');
         } else {
-            $this->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toLowerCase()}');
+            $this->query->addMethod('filter{it.get().value("'.$property.'") != it.get().value("'.$property.'").toLowerCase()}');
         }
 
         return $this;
@@ -1186,7 +1141,7 @@ GREMLIN
     
     public function isNotMixedcase($property = 'fullcode') {
         assert($this->assertProperty($property));
-        $this->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase() || it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
+        $this->query->addMethod('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase() || it.get().value("'.$property.'") == it.get().value("'.$property.'").toUpperCase()}');
 
         return $this;
     }
@@ -1201,7 +1156,7 @@ GREMLIN
     public function filter($filter, $arguments = array()) {
         // use func_get_args here
         $filter = $this->cleanAnalyzerName($filter);
-        $this->addMethod("filter{ $filter }", $arguments );
+        $this->query->addMethod("filter{ $filter }", $arguments );
 
         return $this;
     }
@@ -1210,25 +1165,24 @@ GREMLIN
         $values = $this->dictCode->length($length);
 
         if (empty($values)) {
-                $this->addMethod(self::STOP_QUERY);
-    
-                return $this;
+            $this->query->stopQuery();
+            return $this;
         }
 
-        $this->addMethod('has("code", within(***))', $values);
+        $this->query->addMethod('has("code", within(***))', $values);
 
         return $this;
     }
 
     public function fullcodeLength($length = ' == 1 ') {
         // @todo add some tests ? Like Operator / value ?
-        $this->addMethod('filter{it.get().value("fullcode").length() '.$length.'}');
+        $this->query->addMethod('filter{it.get().value("fullcode").length() '.$length.'}');
 
         return $this;
     }
     
     public function groupCount($column) {
-        $this->addMethod("groupCount(m){it.$column}");
+        $this->query->addMethod("groupCount(m){it.$column}");
         
         return $this;
     }
@@ -1238,16 +1192,15 @@ GREMLIN
             $values = $this->dictCode->grep($regex);
             
             if (empty($values)) {
-                $this->addMethod(self::STOP_QUERY);
-
+                $this->query->stopQuery();
                 return $this;
             }
             
-            $this->addMethod('has("code", within(***) )', $values);
+            $this->query->addMethod('has("code", within(***) )', $values);
 
             return $this;
         } else {
-            $this->addMethod(<<<GREMLIN
+            $this->query->addMethod(<<<GREMLIN
 filter{ (it.get().value('$column') =~ "$regex" ).getCount() != 0 }
 GREMLIN
 );
@@ -1264,11 +1217,11 @@ GREMLIN
                 return $this;
             }
             
-            $this->addMethod('not( has("code", within(***) ) )', $values);
+            $this->query->addMethod('not( has("code", within(***) ) )', $values);
 
             return $this;
         } else {
-            $this->addMethod(<<<GREMLIN
+            $this->query->addMethod(<<<GREMLIN
 filter{ (it.get().value('$column') =~ "$regex" ).getCount() == 0 }
 GREMLIN
 );
@@ -1281,17 +1234,17 @@ GREMLIN
         assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
         
         if (empty($link)) {
-            $this->addMethod('out( )');
+            $this->query->addMethod('out( )');
             return $this;
         }
         
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
-            $this->addMethod(self::STOP_QUERY);
+            $this->query->stopQuery();
         } else {
             assert($this->assertLink($link));
-            $this->addMethod('out('.$this->SorA($link).')');
+            $this->query->addMethod('out('.$this->SorA($link).')');
         }
 
         return $this;
@@ -1306,7 +1259,7 @@ GREMLIN
         $diff = array_intersect($links, self::$availableLinks);
         if (!empty($diff)) {
             // alternative : coalesce(out('LEFT'),  __.filter{true} )
-            $this->addMethod("until( __.not(outE(".$this->SorA($link).")) ).repeat(out(".$this->SorA($link)."))");
+            $this->query->addMethod("until( __.not(outE(".$this->SorA($link).")) ).repeat(out(".$this->SorA($link)."))");
         }
         
         return $this;
@@ -1315,49 +1268,49 @@ GREMLIN
     public function outIsNot($link) {
         assert(func_num_args() === 1, "Too many arguments for ".__METHOD__);
         assert($this->assertLink($link));
-        $this->addMethod('not( where( __.outE('.$this->SorA($link).') ) )');
+        $this->query->addMethod('not( where( __.outE('.$this->SorA($link).') ) )');
         
         return $this;
     }
 
     public function hasNextSibling($link = 'EXPRESSION') {
         $this->hasIn($link);
-        $this->addMethod('where( __.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")})');
+        $this->query->addMethod('where( __.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")})');
 
         return $this;
     }
 
     public function hasNoNextSibling($link = 'EXPRESSION') {
         $this->hasIn($link);
-        $this->addMethod('not( where( __.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}) )');
+        $this->query->addMethod('not( where( __.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}) )');
 
         return $this;
     }
 
     public function nextSibling($link = 'EXPRESSION') {
         $this->hasIn($link);
-        $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}');
+        $this->query->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}');
 
         return $this;
     }
 
     public function nextSiblings($link = 'EXPRESSION') {
         $this->hasIn($link);
-        $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }');
+        $this->query->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }');
 
         return $this;
     }
 
     public function previousSibling($link = 'EXPRESSION') {
         $this->hasIn($link);
-        $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling - 1 == it.get().value("rank")}');
+        $this->query->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling - 1 == it.get().value("rank")}');
 
         return $this;
     }
 
     public function previousSiblings($link = 'EXPRESSION') {
         $this->hasIn($link);
-        $this->addMethod('filter{it.get().value("rank") > 0}.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }');
+        $this->query->addMethod('filter{it.get().value("rank") > 0}.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }');
 
         return $this;
     }
@@ -1367,9 +1320,9 @@ GREMLIN
         ++$sibling;
         
         if ($self === self::EXCLUDE_SELF) {
-            $this->addMethod('as("sibling'.$sibling.'").in("'.$link.'").out("'.$link.'").where(neq("sibling'.$sibling.'"))');
+            $this->query->addMethod('as("sibling'.$sibling.'").in("'.$link.'").out("'.$link.'").where(neq("sibling'.$sibling.'"))');
         } else {
-            $this->addMethod('in("'.$link.'").out("'.$link.'")');
+            $this->query->addMethod('in("'.$link.'").out("'.$link.'")');
         }
 
         return $this;
@@ -1378,17 +1331,17 @@ GREMLIN
     public function inIs($link = array()) {
         assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
         if (empty($link)) {
-            $this->addMethod('in( )');
+            $this->query->addMethod('in( )');
             return $this;
         }
         
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
-            $this->addMethod(self::STOP_QUERY);
+            $this->query->stopQuery();
         } else {
             assert($this->assertLink($link));
-            $this->addMethod('in('.$this->SorA($link).')');
+            $this->query->addMethod('in('.$this->SorA($link).')');
         }
         
         return $this;
@@ -1405,14 +1358,14 @@ GREMLIN
             return $this;
         }
         
-        $this->addMethod('until(__.inE('.$this->SorA($link).').count().is(eq(0))).repeat(__.in('.$this->SorA($link).'))');
+        $this->query->addMethod('until(__.inE('.$this->SorA($link).').count().is(eq(0))).repeat(__.in('.$this->SorA($link).'))');
         
         return $this;
     }
 
     public function inIsNot($link) {
         assert($this->assertLink($link));
-        $this->addMethod('not( where( __.inE('.$this->SorA($link).')) )');
+        $this->query->addMethod('not( where( __.inE('.$this->SorA($link).')) )');
         
         return $this;
     }
@@ -1421,7 +1374,7 @@ GREMLIN
         ++$this->rawQueryCount;
         $query = $this->cleanAnalyzerName($query);
 
-        $this->addMethod($query, ...$args);
+        $this->query->addMethod($query, ...$args);
         
         return $this;
     }
@@ -1432,9 +1385,9 @@ GREMLIN
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
-            $this->addMethod(self::STOP_QUERY);
+            $this->query->stopQuery();
         } else {
-            $this->addMethod('where( __.in('.$this->SorA($link).') )');
+            $this->query->addMethod('where( __.in('.$this->SorA($link).') )');
         }
 
         return $this;
@@ -1446,7 +1399,7 @@ GREMLIN
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
         if (!empty($diff)) {
-            $this->addMethod('not( where( __.in('.$this->SorA($link).') ) )');
+            $this->query->addMethod('not( where( __.in('.$this->SorA($link).') ) )');
         }
         
         return $this;
@@ -1458,9 +1411,9 @@ GREMLIN
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
-            $this->addMethod(self::STOP_QUERY);
+            $this->query->stopQuery();
         } else {
-            $this->addMethod('where( out('.$this->SorA($link).') )');
+            $this->query->addMethod('where( out('.$this->SorA($link).') )');
         }
 
         return $this;
@@ -1472,14 +1425,14 @@ GREMLIN
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
         if (!empty($diff)) {
-            $this->addMethod('not(where( __.out('.$this->SorA($link).') ))');
+            $this->query->addMethod('not(where( __.out('.$this->SorA($link).') ))');
         }
 
         return $this;
     }
 
     public function isInCatchBlock() {
-        $this->addMethod('filter{ it.in.loop(1){it.object.atom != "Catch"}{(it.object.atom == "Catch")}.any()');
+        $this->query->addMethod('filter{ it.in.loop(1){it.object.atom != "Catch"}{(it.object.atom == "Catch")}.any()');
         
         return $this;
     }
@@ -1489,131 +1442,98 @@ GREMLIN
     }
 
     public function hasParent($parentClass, $ins = array()) {
-        if (empty($ins)) {
-            $in = '.in()';
-        } else {
-            $ins = makeArray($ins);
-            foreach($ins as &$i) {
-                if (empty($i)) {
-                    $i = '.in()';
-                } else {
-                    $i = ".in(\"$i\")";
-                }
-            }
-            
-            $in = implode('', $ins);
-        }
+        $diff = $this->checkAtoms($parentClass);
         
-        $this->addMethod("where( __$in.hasLabel(within(***)))", makeArray($parentClass));
+        if (empty($diff)){
+            $this->query->stopQuery();
+            return $this;
+        }
+
+        $in = $this->makeLinks($ins, 'in');
+        $this->query->addMethod("where( __$in.hasLabel(within(***)))", $diff);
         
         return $this;
     }
 
     public function hasNoParent($parentClass, $ins = array()) {
-        if (empty($ins)) {
-            $in = '.in()';
-        } else {
-            $ins = makeArray($ins);
-            foreach($ins as &$i) {
-                if (empty($i)) {
-                    $i = '.in()';
-                } else {
-                    $i = ".in(\"$i\")";
-                }
-            }
-            
-            $in = implode('', $ins);
-        }
+        $diff = $this->checkAtoms($parentClass);
         
-        $this->addMethod("not( where( __$in.hasLabel(within(***)) ) )", makeArray($parentClass));
+        if (empty($diff)){
+            // filter is always true
+            return $this;
+        }
+
+        $in = $this->makeLinks($ins, 'in');
+        $this->query->addMethod("not( where( __$in.hasLabel(within(***)) ) )", $diff);
         
         return $this;
     }
 
     public function hasChildren($childrenClass, $outs = array()) {
-        if (empty($outs)) {
-            $out = '.out( )';
-        } else {
-            $out = array();
-            
-            $outs = makeArray($outs);
-            foreach($outs as $o) {
-                if (empty($o)) {
-                    $out[] = '.out( )';
-                } else {
-                    $out[] = ".out(\"$o\")";
-                }
-            }
-            
-            $out = implode('', $out);
-        }
+        $diff = $this->checkAtoms($childrenClass);
         
-        $this->addMethod("where( __$out.hasLabel(within(***)) )", makeArray($childrenClass));
+        if (empty($diff)){
+            $this->query->stopQuery();
+            return $this;
+        }
+
+        $out = $this->makeLinks($outs, 'out');
+        $this->query->addMethod("where( __$out.hasLabel(within(***)) )", $diff);
         
         return $this;
     }
-        
+
     public function hasNoChildren($childrenClass, $outs = array()) {
-        if (empty($outs)) {
-            $out = '.out( )';
-        } else {
-            $out = array();
-            
-            $outs = makeArray($outs);
-            foreach($outs as $o) {
-                if (empty($o)) {
-                    $out[] = '.out( )';
-                } else {
-                    $out[] = ".out('$o')";
-                }
-            }
-            
-            $out = implode('', $out);
+        $diff = $this->checkAtoms($childrenClass);
+        if (empty($diff)){
+            // filter is always true
+            return $this;
         }
-        
-        $this->addMethod('not( where( __'.$out.'.hasLabel(within(***)) ) )', makeArray($childrenClass));
+
+        $out = $this->makeLinks($outs, 'out');
+        $this->query->addMethod("not( where( __$out.hasLabel(within(***)) ) )", $diff);
         
         return $this;
     }
 
     public function hasConstantDefinition() {
-        $this->addMethod('where( __.in("DEFINITION"))');
+        $this->query->addMethod('where( __.in("DEFINITION"))');
     
         return $this;
     }
 
     public function hasNoConstantDefinition() {
-        $this->addMethod('not(where( __.in("DEFINITION") ) )');
+        $this->query->addMethod('not(where( __.in("DEFINITION") ) )');
     
         return $this;
     }
 
     protected function hasFunctionDefinition() {
-        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") )');
+        $this->query->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") )');
     
         return $this;
     }
 
     protected function hasNoFunctionDefinition() {
-        $this->addMethod('not( where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") ) )');
+        $this->query->addMethod('not( where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") ) )');
     
         return $this;
     }
 
     protected function functionDefinition() {
-        $this->addMethod('in("DEFINITION").hasLabel("Function", "Method", "Magicmethod", "Closure")');
+        $this->query->addMethod('in("DEFINITION").hasLabel("Function", "Method", "Magicmethod", "Closure")');
     
         return $this;
     }
 
     protected function goToArray() {
-        $this->addMethod('emit( ).repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
+        $this->query->addMethod('emit( ).repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
         
         return $this;
     }
 
     protected function goToExpression() {
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 coalesce( __.where( __.in("EXPRESSION")), 
                     __.repeat( __.in({$this->linksDown})).emit( ).until( where(__.in("EXPRESSION") ).where( __.in("EXPRESSION")) )
         )
@@ -1630,7 +1550,7 @@ GREMLIN
     }
 
     protected function goToFunction($type = array('Function', 'Closure', 'Method', 'Magicmethod')) {
-        $this->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )', makeArray($type));
+        $this->query->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )', makeArray($type));
         
         return $this;
     }
@@ -1658,55 +1578,55 @@ GREMLIN
     }
 
     protected function classDefinition() {
-        $this->addMethod('in("DEFINITION")');
+        $this->query->addMethod('in("DEFINITION")');
     
         return $this;
     }
 
     protected function noClassDefinition($type = 'Class') {
-        $this->addMethod('not(where(__.in("DEFINITION").hasLabel(within(***)) ) )', makeArray($type) );
+        $this->query->addMethod('not(where(__.in("DEFINITION").hasLabel(within(***)) ) )', makeArray($type) );
     
         return $this;
     }
 
     protected function hasClassDefinition($type = 'Class') {
-        $this->addMethod('where(__.in("DEFINITION").hasLabel(within(***)) )', makeArray($type));
+        $this->query->addMethod('where(__.in("DEFINITION").hasLabel(within(***)) )', makeArray($type));
     
         return $this;
     }
 
     public function noUseDefinition() {
-        $this->addMethod('not( where(__.out("DEFINITION").in("USE").hasLabel("Use")) )');
+        $this->query->addMethod('not( where(__.out("DEFINITION").in("USE").hasLabel("Use")) )');
     
         return $this;
     }
 
     public function interfaceDefinition() {
-        $this->addMethod('in("DEFINITION")');
+        $this->query->addMethod('in("DEFINITION")');
     
         return $this;
     }
 
     public function noInterfaceDefinition() {
-        $this->addMethod('not( where(__.in("DEFINITION").hasLabel("Interface") ) )');
+        $this->query->addMethod('not( where(__.in("DEFINITION").hasLabel("Interface") ) )');
     
         return $this;
     }
 
     public function hasInterfaceDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").hasLabel("Interface") )');
+        $this->query->addMethod('where(__.in("DEFINITION").hasLabel("Interface") )');
     
         return $this;
     }
 
     public function hasTraitDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").hasLabel("Trait") )');
+        $this->query->addMethod('where(__.in("DEFINITION").hasLabel("Trait") )');
 
         return $this;
     }
 
     public function noTraitDefinition() {
-        $this->addMethod('not( where(__.in("DEFINITION").hasLabel("Trait") ) )');
+        $this->query->addMethod('not( where(__.in("DEFINITION").hasLabel("Trait") ) )');
     
         return $this;
     }
@@ -1717,7 +1637,7 @@ GREMLIN
         } else {
             $by = "by{ \"$characteristic\" }";
         }
-        $this->addMethod("groupCount(\"gf\").$by.cap(\"gf\").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * $percentage; }.keySet()");
+        $this->query->addMethod("groupCount(\"gf\").$by.cap(\"gf\").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * $percentage; }.keySet()");
 
         return $this;
     }
@@ -1758,8 +1678,8 @@ GREMLIN
         return $this->hasNoInstruction('Trait');
     }
 
-    public function goToClassTrait() {
-        $this->goToInstruction(array('Trait', 'Class', 'Classanonymous'));
+    public function goToClassTrait($classes = array('Trait', 'Class', 'Classanonymous')) {
+        $this->goToInstruction($classes);
         
         return $this;
     }
@@ -1790,28 +1710,28 @@ GREMLIN
     }
     
     public function goToExtends() {
-        $this->addMethod('out("EXTENDS").in("DEFINITION")');
+        $this->query->addMethod('out("EXTENDS").in("DEFINITION")');
         
         return $this;
     }
 
     public function goToImplements() {
-        $this->addMethod('out("IMPLEMENTS").in("DEFINITION")');
+        $this->query->addMethod('out("IMPLEMENTS").in("DEFINITION")');
 
         return $this;
     }
 
     public function goToParent() {
-        $this->addMethod('out("EXTENDS").in("DEFINITION")');
+        $this->query->addMethod('out("EXTENDS").in("DEFINITION")');
         
         return $this;
     }
 
     public function goToAllParents($self = self::EXCLUDE_SELF) {
         if ($self === self::EXCLUDE_SELF) {
-            $this->addMethod('repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit( ).times('.self::MAX_LOOPING.')');
+            $this->query->addMethod('repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit( ).times('.self::MAX_LOOPING.')');
         } else {
-            $this->addMethod('filter{true}.emit( ).repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).times('.self::MAX_LOOPING.')');
+            $this->query->addMethod('filter{true}.emit( ).repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).times('.self::MAX_LOOPING.')');
         }
         
         return $this;
@@ -1819,9 +1739,9 @@ GREMLIN
 
     public function goToAllChildren($self = self::INCLUDE_SELF) {
         if ($self === self::INCLUDE_SELF) {
-            $this->addMethod('filter{true}.emit( ).repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::MAX_LOOPING.')');
+            $this->query->addMethod('filter{true}.emit( ).repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::MAX_LOOPING.')');
         } else {
-            $this->addMethod('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit( ).times('.self::MAX_LOOPING.')');
+            $this->query->addMethod('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit( ).times('.self::MAX_LOOPING.')');
         }
         
         return $this;
@@ -1829,23 +1749,23 @@ GREMLIN
     
     public function goToAllTraits($self = self::INCLUDE_SELF) {
         if ($self === self::INCLUDE_SELF) {
-            $this->addMethod('repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).emit( ).times('.self::MAX_LOOPING.')');
+            $this->query->addMethod('repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).emit( ).times('.self::MAX_LOOPING.')');
         } else {
-            $this->addMethod('emit( ).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
+            $this->query->addMethod('emit( ).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
         }
         
         return $this;
     }
 
     public function goToAllImplements() {
-        $this->addMethod('out("IMPLEMENTS").in("DEFINITION").emit( ).
+        $this->query->addMethod('out("IMPLEMENTS").in("DEFINITION").emit( ).
                 repeat( __.out("EXTENDS").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
         
         return $this;
     }
 
     public function goToTraits() {
-        $this->addMethod('repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).emit( ).times('.self::MAX_LOOPING.') ');
+        $this->query->addMethod('repeat( __.out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).emit( ).times('.self::MAX_LOOPING.') ');
         
         return $this;
     }
@@ -1915,7 +1835,7 @@ GREMLIN
     }
 
     public function isLocalClass() {
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 sideEffect{ inside = it.get().value("fullnspath"); }
 .where(  __.repeat( __.in({$this->linksDown}) ).until( hasLabel("Class") ).filter{ it.get().value("fullnspath") == inside; }.count().is(eq(1)) )
 
@@ -1926,7 +1846,7 @@ GREMLIN
     }
     
     public function isNotLocalClass() {
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 sideEffect{ inside = it.get().value("fullnspath"); }
 .where(  __.repeat( __.in({$this->linksDown}) ).until( hasLabel("Class") ).filter{ it.get().value("fullnspath") == inside; }.count().is(eq(0)) )
 
@@ -1944,7 +1864,7 @@ GREMLIN
 
     public function isLiteral() {
         // Closures are literal if not using a variable from the context
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 hasLabel("Integer", "Boolean", "Null", "Magicconstant", "Real", "String", "Heredoc", "Closure", "Arrayliteral").has("constant", true)
 
 GREMLIN
@@ -1955,7 +1875,7 @@ GREMLIN
     
     public function isNotLiteral() {
         // Closures are literal if not using a variable from the context
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 not( hasLabel("Integer", "Boolean", "Null", "Magicconstant", "Real", "String", "Heredoc", "Closure", "Arrayliteral").has("constant", true) )
 
 GREMLIN
@@ -1981,7 +1901,7 @@ GREMLIN
     }
 
     public function makeVariableName($variable) {
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 sideEffect{ $variable = "\\$" + $variable; }
 
 GREMLIN
@@ -1991,7 +1911,7 @@ GREMLIN
     }
     
     public function goToLiteralValue() {
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 coalesce(__.in("DEFINITION").out("VALUE"), 
          __.filter{ true; })
 
@@ -2011,7 +1931,7 @@ GREMLIN
             $forClosure = "";
         }
         
-        $this->addMethod(<<<GREMLIN
+        $this->query->addMethod(<<<GREMLIN
 as("context")
 .sideEffect{ line = it.get().value("line");
              fullcode = it.get().value("fullcode");
@@ -2066,7 +1986,7 @@ GREMLIN;
     
     public function run() {
         $this->analyze();
-        $this->prepareQuery();
+//        $this->prepareQuery();
 
         $this->execQuery();
         
@@ -2092,7 +2012,7 @@ GREMLIN;
     public abstract function analyze();
 
     public function printQuery() {
-        $this->prepareQuery();
+        $this->prepareQuery($this->analyzerId);
         
         foreach($this->queries as $id => $query) {
             echo $id, ")", PHP_EOL, print_r($query, true), print_r($this->queriesArguments[$id], true), PHP_EOL;
@@ -2133,7 +2053,7 @@ GREMLIN;
         for($i = 2; $i < $nb; ++$i) {
             $this->methods = array_slice($methods, 0, $i);
             $this->arguments = array_slice($arguments, 0, $i);
-            $this->prepareQuery();
+            $this->prepareQuery($this->analyzerId);
             $this->execQuery();
             echo  $this->rowCount, PHP_EOL;
             $this->rowCount = 0;
@@ -2143,48 +2063,13 @@ GREMLIN;
     }
     
     public function prepareQuery() {
-        // @doc This is when the object is a placeholder for others.
-        if (count($this->methods) <= 1) { return true; }
-        
-        if (in_array(self::STOP_QUERY, $this->methods)) {
-            // any 'stop_query' is blocking
-            return $this->initNewQuery();
-        }
+        $this->query->prepareQuery($this->analyzerId);
 
-        if (substr($this->methods[1], 0, 9) === 'hasLabel(') {
-            $first = $this->methods[1];
-            array_splice($this->methods, 1,1);
-            $query = implode('.', $this->methods);
-            $query = "g.V().$first.groupCount(\"processed\").by(count()).$query";
-        } elseif (substr($this->methods[1], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
-            $first = array_shift($this->methods); // remove first
-            array_shift($this->methods); // remove second
-            $query = implode('.', $this->methods);
-            $arg0 = $this->arguments['arg0'];
-            $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())'
-                     .(empty($query) ? '' : '.'.$query);
-            unset($this->methods[1]);
-        } else {
-            assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[1]);
-        }
-        
-        // search what ? All ?
-        $query = <<<GREMLIN
-
-{$query}
-
-GREMLIN;
-        assert(!empty($this->analyzerId), "The analyzer Id for {$this->analyzerId} wasn't set. Can't save results.");
-        $query .= '.dedup().groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
-
-// Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
-// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v".PHP_EOL;
-
-        $this->queries[] = $query;
-        $this->queriesArguments[] = $this->arguments;
+        $this->queries[] = $this->query;
+        $this->query = null;
 
          // initializing a new query
-        return $this->initNewQuery();
+        $this->initNewQuery();
     }
 
     public function queryDefinition($query) {
@@ -2192,38 +2077,24 @@ GREMLIN;
     }
 
     public function rawQuery() {
-        // @doc This is when the object is a placeholder for others.
-        assert(count($this->methods) > 1, "Calling rawQuery without any method build yet");
-        
-        $query = implode('.', $this->methods);
-        $query = 'g.V().'.
-                 $query.
-                 '
-// Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
-// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v".PHP_EOL;
-
-        $arguments = $this->arguments;
+        $this->query->prepareRawQuery();
+        $result = $this->gremlin->query($this->query->getQuery(), $this->query->getArguments());
 
         $this->initNewQuery();
         
-        return $this->gremlin->query($query, $arguments);
+        return $result;
     }
     
     private function initNewQuery() {
-        $this->methods = array();
-        $this->addMethod('as("first")');
-
-        $this->arguments = array();
-        
-        return true;
+        $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable);
     }
     
     public function execQuery() {
         if (empty($this->queries)) { return true; }
 
         // @todo add a test here ?
-        foreach($this->queries as $id => $query) {
-            $r = $this->gremlin->query($query, $this->queriesArguments[$id]);
+        foreach($this->queries as $query) {
+            $r = $this->gremlin->query($query->getQuery(), $query->getArguments());
             ++$this->queryCount;
             
             $this->processedCount += $r['processed'];
@@ -2263,14 +2134,18 @@ GREMLIN;
         return $cache[$fullpath];
     }
 
-    protected function loadJson($file) {
-        $fullpath = $this->config->dir_root.'/data/'.$file;
+    protected function loadJson($file, $property = null) {
+        $fullpath = "{$this->config->dir_root}/data/$file";
 
         assert(file_exists($fullpath), "JSON file '$fullpath' doesn't exists.");
 
         static $cache;
         if (!isset($cache[$fullpath])) {
             $cache[$fullpath] = json_decode(file_get_contents($fullpath));
+        }
+        
+        if ($property !== null && isset($cache[$fullpath]->$property)) {
+            return $cache[$fullpath]->$property;
         }
         
         return $cache[$fullpath];
@@ -2326,9 +2201,9 @@ GREMLIN;
         }
         
         if (is_array($code)) {
-            $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', $code);
+            $this->query->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', $code);
         } else {
-            $this->addMethod('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', $code);
+            $this->query->addMethod('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', $code);
         }
         
         return $this;
@@ -2345,9 +2220,9 @@ GREMLIN;
         }
         
         if (is_array($code)) {
-            $this->addMethod('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in ***); }', $code);
+            $this->query->addMethod('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in ***); }', $code);
         } else {
-            $this->addMethod('filter{it.get().value("'.$property.'")'.$caseSensitive.' != ***}', $code);
+            $this->query->addMethod('filter{it.get().value("'.$property.'")'.$caseSensitive.' != ***}', $code);
         }
         
         return $this;
@@ -2403,15 +2278,39 @@ GREMLIN;
     private function assertProperty($property) {
         if (is_string($property)) {
             assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
-            assert(property_exists('Exakat\Tasks\Helpers\Atom', $property) || ($property === 'label'), 'No such property in Atom : "'.$property.'"');
+            assert(property_exists(Atom::class, $property) || ($property === 'label'), 'No such property in Atom : "'.$property.'"');
         } else {
             $properties = $property;
             foreach($properties as $property) {
                 assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter'), "Wrong format for property name : '$property'");
-                assert(property_exists('Exakat\Tasks\Helpers\Atom', $property) || ($property === 'label'), "No such property in Atom : '$property'");
+                assert(property_exists(Atom::class, $property) || ($property === 'label'), "No such property in Atom : '$property'");
             }
         }
         return true;
+    }
+
+    private function makeLinks($links, $direction = 'in') {
+        if (empty($links)) {
+            return '.out( )';
+        }
+        
+        $return = array();
+        
+        $links = makeArray($links);
+        foreach($links as $l) {
+            if (empty($l)) {
+                $return[] = ".$direction( )";
+            } else {
+                $return[] = ".$direction(\"$l\")";
+            }
+        }
+        
+        return implode('', $return);
+    }
+    
+    private function checkAtoms($atoms) {
+        $atoms = makeArray($atoms);
+        return array_values(array_intersect($atoms, self::$availableAtoms));
     }
 
 }

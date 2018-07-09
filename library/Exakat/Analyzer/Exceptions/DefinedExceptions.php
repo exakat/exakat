@@ -36,7 +36,7 @@ class DefinedExceptions extends Analyzer {
              ->outIs('EXTENDS')
              ->fullnspathIs($exceptions)
              ->back('first')
-             ->goToAllChildren($self = self::INCLUDE_SELF);
+             ->goToAllChildren(self::INCLUDE_SELF);
         $this->prepareQuery();
     }
 }

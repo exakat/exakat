@@ -20,6 +20,8 @@
  *
 */
 
+const INI_PROCESS_SECTIONS = true;
+const INI_DONT_PROCESS_SECTIONS = false;
 
 function display($text) {
     global $VERBOSE;

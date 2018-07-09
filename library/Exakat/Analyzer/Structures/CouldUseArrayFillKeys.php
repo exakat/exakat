@@ -41,6 +41,7 @@ class CouldUseArrayFillKeys extends Analyzer {
              ->codeIs('=')
              ->outIs('RIGHT')
              ->noFullcodeInside('index')
+             ->atomIsNot('Variable')
              ->back('first');
         $this->prepareQuery();
 
@@ -65,6 +66,7 @@ class CouldUseArrayFillKeys extends Analyzer {
              ->outIs('RIGHT')
              ->noFullcodeInside('index')
              ->noFullcodeInside('secondary')
+             ->atomIsNot('Variable')
              ->back('first');
         $this->prepareQuery();
     }

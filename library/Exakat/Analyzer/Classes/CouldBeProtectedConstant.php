@@ -30,7 +30,7 @@ class CouldBeProtectedConstant extends Analyzer {
         // Searching for properties that are never used outside the definition class or its children
 
         // global static constants : the one with no definition class : they are all ignored.
-        $query = <<<GREMLIN
+        $queryUndefinedConstants = <<<GREMLIN
 g.V().hasLabel("Staticconstant")
      .not( __.where( __.out("CLASS").in("DEFINITION")) )
      .out("CONSTANT")
@@ -38,11 +38,10 @@ g.V().hasLabel("Staticconstant")
      .values("code")
      .unique()
 GREMLIN;
-        $publicUndefinedConstants = $this->query($query)
+        $publicUndefinedConstants = $this->query($queryUndefinedConstants)
                                          ->toArray();
 
-        $LOOPS = self::MAX_LOOPING;
-        $query = <<<GREMLIN
+        $queryPublicConstants = <<<GREMLIN
 g.V().hasLabel("Staticconstant")
      .out("CLASS")
      .as("classe")
@@ -58,7 +57,8 @@ g.V().hasLabel("Staticconstant")
      .select("classe", "constante").by("fullnspath").by("code")
      .unique()
 GREMLIN;
-        $publicConstants = $this->query($query)->toArray();
+        $publicConstants = $this->query($queryPublicConstants)
+                                ->toArray();
 
         $calls = array();
         foreach($publicConstants as $value) {

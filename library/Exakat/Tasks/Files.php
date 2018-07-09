@@ -294,7 +294,10 @@ class Files extends Tasks {
         $resultSot = shell_exec($shell);
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
 
-        unlink($tmpFileName);
+        // Extra check
+        if (file_exists($tmpFileName)) {
+            unlink($tmpFileName);
+        }
 
         if ($tokenssot === $tokens) {
             display('Short tag OK');
