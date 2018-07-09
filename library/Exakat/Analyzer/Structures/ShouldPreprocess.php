@@ -87,6 +87,28 @@ GREMLIN
              ->is('constant', true)
              ->back('first');
         $this->prepareQuery();
+
+        // Concatenations of literals
+        $this->atomIs('Assignation')
+             ->codeIs(array('=', '.='), self::TRANSLATE, self::CASE_SENSITIVE)
+             ->outIs('RIGHT')
+             ->isLiteral()
+             ->is('constant', true)
+             ->back('first')
+             ->outIs('LEFT')
+             ->savePropertyAs('fullcode', 'variable')
+             ->back('first')
+             ->nextSibling('EXPRESSION')
+             ->atomIs('Assignation')
+             ->codeIs('.=', self::TRANSLATE, self::CASE_SENSITIVE)
+             ->outIs('LEFT')
+             ->samePropertyAs('fullcode', 'variable', self::CASE_SENSITIVE)
+             ->inIs('LEFT')
+             ->outIs('RIGHT')
+             ->isLiteral()
+             ->is('constant', true)
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
