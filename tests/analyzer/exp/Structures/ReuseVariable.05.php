@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('-$b', 
-                      '$b++', 
-                      'isset($b)', 
-                      'empty($b)', 
+$expected     = array('-$b',
+                      '$b++',
+                      'isset($b)',
+                      'empty($b)',
                       '$b ?? \'c\'',
                      );
 

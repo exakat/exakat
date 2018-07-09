@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('\'callback2\'', 
+$expected     = array('\'callback2\'',
                       '\'callback\'',
                      );
 
