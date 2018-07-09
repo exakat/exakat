@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Exceptions\NoSuchThema;
+use Exakat\Analyzer\Analyzer;
 
 class Themes {
     private static $sqlite = null;
@@ -152,7 +153,7 @@ SQL;
         if (empty($res2['severity'])) {
             $return = Analyzer::S_NONE;
         } else {
-            $return = constant("Exakat\\Analyzer\\Analyzer::".$res2['severity']);
+            $return = constant(Analyzer::class.'::'.$res2['severity']);
         }
 
         return $return;
@@ -168,7 +169,7 @@ SQL;
         if (empty($res2['timetofix'])) {
             $return = Analyzer::T_NONE;
         } else {
-            $return = constant('Exakat\\Analyzer\\Analyzer::'.$res2['timetofix']);
+            $return = constant(Analyzer::class.'::'.$res2['timetofix']);
         }
 
         return $return;
@@ -180,7 +181,7 @@ SQL;
         $return = array();
         $res = self::$sqlite->query($query);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = empty($row['severity']) ? Analyzer::S_NONE : constant('Exakat\\Analyzer\\Analyzer::'.$row['severity']);
+            $return[$row['analyzer']] = empty($row['severity']) ? Analyzer::S_NONE : constant(Analyzer::class.'::'.$row['severity']);
         }
 
         return $return;
@@ -192,7 +193,7 @@ SQL;
         $return = array();
         $res = self::$sqlite->query($query);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[$row['analyzer']] = empty($row['timetofix']) ? Analyzer::S_NONE : constant("Exakat\\Analyzer\\Analyzer::".$row['timetofix']);
+            $return[$row['analyzer']] = empty($row['timetofix']) ? Analyzer::S_NONE : constant(Analyzer::class.'::'.$row['timetofix']);
         }
 
         return $return;
@@ -288,7 +289,7 @@ SQL;
             if (substr($name, 0, 16) === 'Exakat\\Analyzer\\') {
                 $class = $name;
             } else {
-                $class = 'Exakat\\Analyzer\\'.$name;
+                $class = "Exakat\\Analyzer\\$name";
             }
         } elseif (strpos($name, '/') !== false) {
             $class = 'Exakat\\Analyzer\\'.str_replace('/', '\\', $name);
