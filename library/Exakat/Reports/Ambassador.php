@@ -3831,8 +3831,12 @@ HTML;
         $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
-            $audit_date .= ' - &quot;'.$audit_name.'&quot;';
+            $audit_date .= " - &quot;$audit_name&quot;";
         }
+
+        $exakat_version = $this->datastore->getHash('exakat_version');
+        $exakat_build = $this->datastore->getHash('exakat_build');
+        $audit_date .= " - Exakat $exakat_version ($exakat_build)";
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
     }
     
