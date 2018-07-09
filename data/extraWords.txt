@@ -118,3 +118,7 @@ Codepoints
 codepoint
 codepoints
 Symfony
+typehint
+typehints
+typehinted
+syntaxes
