@@ -58,7 +58,6 @@ abstract class Analyzer {
     private static $calledDirectives      = null;
 
     private $analyzer         = '';       // Current class of the analyzer (called from below)
-    private $shortName        = '';       // Current class of the analyzer, short Name
     protected $analyzerQuoted = '';
     protected $analyzerId     = 0;
 
@@ -2070,7 +2069,7 @@ GREMLIN;
         $this->query = null;
 
          // initializing a new query
-        return $this->initNewQuery();
+        $this->initNewQuery();
     }
 
     public function queryDefinition($query) {
@@ -2088,8 +2087,6 @@ GREMLIN;
     
     private function initNewQuery() {
         $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable);
-        
-        return true;
     }
     
     public function execQuery() {
@@ -2137,14 +2134,18 @@ GREMLIN;
         return $cache[$fullpath];
     }
 
-    protected function loadJson($file) {
-        $fullpath = $this->config->dir_root.'/data/'.$file;
+    protected function loadJson($file, $property = null) {
+        $fullpath = "{$this->config->dir_root}/data/$file";
 
         assert(file_exists($fullpath), "JSON file '$fullpath' doesn't exists.");
 
         static $cache;
         if (!isset($cache[$fullpath])) {
             $cache[$fullpath] = json_decode(file_get_contents($fullpath));
+        }
+        
+        if ($property !== null && isset($cache[$fullpath]->$property)) {
+            return $cache[$fullpath]->$property;
         }
         
         return $cache[$fullpath];

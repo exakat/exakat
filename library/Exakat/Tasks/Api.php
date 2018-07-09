@@ -52,14 +52,13 @@ class Api extends Tasks {
 
         display('Copy router server');
         $php = file_get_contents($this->config->dir_root.'/server/api.php');
-        $php = str_replace('__PHP__', $this->config->php, $php);
-        $php = str_replace('__EXAKAT__', $this->config->executable, $php);
-        $php = str_replace('__SECRET_KEY__', $this->config->transit_key, $php);
+        $tags = array('__PHP__', '__EXAKAT__', '__SECRET_KEY__');
+        $values = array($this->config->php, $this->config->executable, $this->config->transit_key);
 
-        file_put_contents($this->config->projects_root.'/projects/api.php', $php);
+        file_put_contents("{$this->config->projects_root}/projects/api.php", $php);
 
-        if (!file_exists($this->config->projects_root.'/projects/api.log')) {
-            file_put_contents($this->config->projects_root.'/projects/api.log', date('r')."\tCreated file\n");
+        if (!file_exists("{$this->config->projects_root}/projects/api.log")) {
+            file_put_contents("{$this->config->projects_root}/projects/api.log", date('r')."\tCreated file\n");
         }
 
         display('Start api');

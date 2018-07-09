@@ -177,37 +177,6 @@ MENU;
         rename($this->tmpName, $this->finalName);
     }
 
-    private function getLinesFromFile($filePath,$lineNumber,$numberBeforeAndAfter){
-        --$lineNumber; // array index
-        $lines = array();
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath)) {
-
-            $fileLines = file($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath);
-
-            $startLine = 0;
-            $endLine = 10;
-            if(count($fileLines) > $lineNumber) {
-                $startLine = $lineNumber-$numberBeforeAndAfter;
-                if($startLine<0)
-                    $startLine=0;
-
-                if($lineNumber+$numberBeforeAndAfter < count($fileLines)-1 ) {
-                    $endLine = $lineNumber+$numberBeforeAndAfter;
-                } else {
-                    $endLine = count($fileLines)-1;
-                }
-            }
-
-            for ($i=$startLine; $i < $endLine+1 ; ++$i) {
-                $lines[]= array(
-                            'line' => $i + 1,
-                            'code' => $fileLines[$i]
-                    );
-            }
-        }
-        return $lines;
-    }
-
     public function generateDashboard() {
         $baseHTML = $this->getBasedPage('index_melis');
 

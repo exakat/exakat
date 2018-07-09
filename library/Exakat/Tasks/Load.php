@@ -2528,7 +2528,7 @@ class Load extends Tasks {
 
             if (isset($default)) {
                 $this->addLink($element, $default, 'DEFAULT');
-                $element->fullcode = $element->fullcode . ' = ' . $default->fullcode;
+                $element->fullcode .= " = $default->fullcode";
                 unset($default);
             }
             $fullcode[] = $element->fullcode;

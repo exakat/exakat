@@ -59,7 +59,6 @@ GREMLIN;
 
         // Static methods
         // Case of class::method() (that's another public access)
-        $LOOPS = self::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Staticmethodcall")
      .where( __.in("ANALYZED").has("analyzer", "Classes/IsNotFamily"))

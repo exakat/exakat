@@ -32,7 +32,6 @@ use Exakat\Exceptions\HelperException;
 use Exakat\Exceptions\VcsError;
 use Exakat\Project;
 use Exakat\Vcs\Vcs;
-use Exakat\Vcs\{Bazaar, Composer, Copy, EmptyCode, Git, Mercurial, Svn, Symlink, Tarbz, Targz, Zip};
 
 class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;

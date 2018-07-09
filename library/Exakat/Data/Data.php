@@ -51,8 +51,7 @@ class Data {
     }
 
     public function getVersions($component = null) {
-        $query = 'SELECT version AS version FROM versions';
-        $query .= " ORDER BY 1";
+        $query = 'SELECT version AS version FROM versions ORDER BY 1';
         $res = $this->sqlite->query($query);
 
         $return = array();

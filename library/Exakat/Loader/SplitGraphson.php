@@ -71,12 +71,6 @@ class SplitGraphson {
         $this->cleanCsv();
     }
 
-    private function cleandDb() {
-        display("Cleaning DB in gsneo4j\n");
-        $clean = new CleanDb($this->gsneo4j, $this->config, Tasks::IS_SUBTASK);
-        $clean->run();
-    }
-
     public function finalize() {
         display("Init finalize\n");
         $begin = microtime(true);
@@ -147,10 +141,6 @@ GREMLIN;
         $datastore = new Datastore($this->config);
 
         $datastore->addRow('tokenCounts', $this->tokenCounts);
-    }
-
-    private function escapeCsv($string) {
-        return str_replace(array('\\', '"'), array('\\\\', '\\"'), $string);
     }
 
     public function saveFiles($exakatDir, $atoms, $links, $id0) {

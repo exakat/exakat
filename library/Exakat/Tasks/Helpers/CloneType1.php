@@ -30,6 +30,7 @@ class CloneType1 extends Plugin {
         foreach($extras as $extra) {
             if ($extra->ctype1 === null)  {
                 $atom->ctype1 = null;
+                $atom->ctype1_size = null;
                 return ;
             }
         }

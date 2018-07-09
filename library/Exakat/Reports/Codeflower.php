@@ -118,7 +118,7 @@ SQL
             
             foreach($classes as &$extends2) {
                 if (isset($extends2[$classesId[$id]])) {
-                    $extends2[$classesId[$id]] = $classes[$id];
+                    $extends2[$classesId[$id]] = $extends;
                     unset($classes[$id]);
                 }
             }

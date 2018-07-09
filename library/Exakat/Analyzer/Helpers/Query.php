@@ -32,11 +32,6 @@ class Query {
     private $analyzer   = null;
     private $php        = null;
     
-    protected $rowCount       = 0; // Number of found values
-    protected $processedCount = 0; // Number of initial values
-    protected $queryCount     = 0; // Number of ran queries
-    protected $rawQueryCount  = 0; // Number of ran queries
-
     private $methods          = array('as("first")');
     private $arguments        = array();
     private $query            = null;

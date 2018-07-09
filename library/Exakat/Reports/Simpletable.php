@@ -28,7 +28,6 @@ class Simpletable extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'table';
     
-    private $select = array();
     private $tmpName     = '';
     private $finalName   = '';
 

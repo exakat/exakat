@@ -29,6 +29,7 @@ class SimplePreg extends Analyzer {
         $functions = array('\preg_match', '\preg_match_all', '\preg_replace', '\preg_replace_callback',
                            '\preg_filter', '\preg_split', '\preg_quote', '\preg_grep');
 
+        // preg_match('/abc/', $x);
         $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')

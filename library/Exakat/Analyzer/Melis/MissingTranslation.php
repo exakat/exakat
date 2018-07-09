@@ -32,8 +32,8 @@ class MissingTranslation extends Analyzer {
 
     public function analyze() {
         // select the available translations
-        $index = $this->analyzerIs('Melis/TranslationString')
-                      ->values('code');
+        $this->analyzerIs('Melis/TranslationString')
+             ->values('code');
         $res = $this->rawQuery();
         $translations = $res->toArray();
         $translations = array_unique($translations);
