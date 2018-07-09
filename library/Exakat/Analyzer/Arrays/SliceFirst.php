@@ -28,9 +28,7 @@ class SliceFirst extends Analyzer {
     public function analyze() {
         $sliceFunctions = array('\array_slice', '\array_splice', '\array_chunk');
         $manipulatingFunctions = array('\\array_change_key_case', '\\array_flip', '\\array_keys', '\\array_values',
-                                       '\\array_filter', '\\array_merge', '\\array_merge_recursive',
-                                       '\\array_unique', '\\array_walk',
-                                       '\\array_map', '\\array_search',
+                                       '\\array_filter', '\\array_walk', '\\array_map', '\\array_search',
                                       );
 
         // array_slice(array_values($array), 2, 5);
