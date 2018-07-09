@@ -32,7 +32,7 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Reports\Helpers\Docs;
 use Exakat\Analyzer\Helpers\Query;
-
+use Exakat\Tasks\Helpers\Atom;
 
 abstract class Analyzer {
     static public $datastore  = null;
@@ -2278,12 +2278,12 @@ GREMLIN;
     private function assertProperty($property) {
         if (is_string($property)) {
             assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
-            assert(property_exists('Exakat\Tasks\Helpers\Atom', $property) || ($property === 'label'), 'No such property in Atom : "'.$property.'"');
+            assert(property_exists(Atom::class, $property) || ($property === 'label'), 'No such property in Atom : "'.$property.'"');
         } else {
             $properties = $property;
             foreach($properties as $property) {
                 assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter'), "Wrong format for property name : '$property'");
-                assert(property_exists('Exakat\Tasks\Helpers\Atom', $property) || ($property === 'label'), "No such property in Atom : '$property'");
+                assert(property_exists(Atom::class, $property) || ($property === 'label'), "No such property in Atom : '$property'");
             }
         }
         return true;
