@@ -177,6 +177,7 @@ Glossary
     + `Closure`
 
       + :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
+      + :ref:`Could Be Static Closure <could-be-static-closure>`
       + :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
 
     + `Compact()`
@@ -196,6 +197,7 @@ Glossary
 
       + :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
+      + :ref:`Could Be Static Closure <could-be-static-closure>`
       + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
       + :ref:`Hidden Use Expression <hidden-use-expression>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
@@ -464,6 +466,7 @@ Glossary
       + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Make Alias <should-make-alias>`
       + :ref:`Should Use Operator <should-use-operator>`
+      + :ref:`Undefined ::class <undefined-\:\:class>`
       + :ref:`Undefined Class 2.0 <undefined-class-2.0>`
       + :ref:`Undefined Class 2.1 <undefined-class-2.1>`
       + :ref:`Undefined Class 2.2 <undefined-class-2.2>`
@@ -880,6 +883,7 @@ Glossary
 
       + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
       + :ref:`Must Return Methods <must-return-methods>`
+      + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 
     + `__callStatic`
 
@@ -896,6 +900,7 @@ Glossary
       + :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
       + :ref:`Avoid Optional Properties <avoid-optional-properties>`
       + :ref:`Cant Instantiate Class <cant-instantiate-class>`
+      + :ref:`Could Be Static Closure <could-be-static-closure>`
       + :ref:`Don't Send This In Constructor <don't-send-this-in-constructor>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
@@ -957,6 +962,7 @@ Glossary
 
       + :ref:`Interpolation <interpolation>`
       + :ref:`Must Return Methods <must-return-methods>`
+      + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
       + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 
 
