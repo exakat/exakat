@@ -43,7 +43,6 @@ abstract class Analyzer {
     protected $rawQueryCount  = 0; // Number of ran queries
 
     private $queries          = array();
-    private $queriesArguments = array();
     private $query            = null;
     
     public $config         = null;
@@ -2011,40 +2010,6 @@ GREMLIN;
 
     public abstract function analyze();
 
-    public function printQuery() {
-        $this->prepareQuery($this->analyzerId);
-        
-        foreach($this->queries as $id => $query) {
-            echo $id, ")", PHP_EOL, print_r($query, true), print_r($this->queriesArguments[$id], true), PHP_EOL;
-
-            krsort($this->queriesArguments[$id]);
-            
-            foreach($this->queriesArguments[$id] as $name => $value) {
-                if (is_array($value)) {
-                    if (is_array($value[key($value)])) {
-                        foreach($value as $k => &$v) {
-                            $v = "'''".$k."''':['''".implode("''', '''", $v)."''']";
-                            $v = str_replace('\\', '\\\\', $v);
-                        }
-                        unset($v);
-                        $query = str_replace($name, "[".implode(", ", $value)."]", $query);
-                    } else {
-                        $query = str_replace($name, "['".implode("', '", $value)."']", $query);
-                    }
-                } elseif (is_string($value)) {
-                    $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
-                } elseif (is_int($value)) {
-                    $query = str_replace($name, (string) $value, $query);
-                } else {
-                    assert(false, 'Cannot process argument of type '.gettype($value).PHP_EOL.__METHOD__.PHP_EOL);
-                }
-            }
-            
-            echo $query, PHP_EOL, PHP_EOL;
-        }
-        die();
-    }
-
     public function debugQuery() {
         $methods = $this->methods;
         $arguments = $this->arguments;
@@ -2060,6 +2025,10 @@ GREMLIN;
         }
 
         die();
+    }
+    
+    public function printQuery() {
+        $this->query->printQuery();
     }
     
     public function prepareQuery() {
@@ -2103,7 +2072,6 @@ GREMLIN;
 
         // reset for the next
         $this->queries = array();
-        $this->queriesArguments = array();
         
         // @todo multiple results ?
         // @todo store result in the object until reading.
