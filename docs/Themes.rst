@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 02 Jul 2018 09:57:11 +0000
-.. comment: Generation hash : 4d325fa7857b0bf062bf8b5a5ef9ed940bf3bf85
+.. comment: Generation date : Tue, 10 Jul 2018 06:50:05 +0000
+.. comment: Generation hash : 5685ae7020d9b5288cc1ba9ddbc38fef79b024f2
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 356 analysis
+Total : 357 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -348,6 +348,7 @@ Total : 356 analysis
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
 * :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
+* :ref:`Undefined ::class <undefined-\:\:class>`
 * :ref:`Undefined Class Constants <undefined-class-constants>`
 * :ref:`Undefined Classes <undefined-classes>`
 * :ref:`Undefined Constants <undefined-constants>`
@@ -493,7 +494,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 68 analysis
+Total : 70 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -539,6 +540,9 @@ Total : 68 analysis
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP 7.0 Scalar Typehints <php-7.0-scalar-typehints>`
+* :ref:`PHP 7.1 Scalar Typehints <php-7.1-scalar-typehints>`
+* :ref:`PHP 7.2 Scalar Typehints <php-7.2-scalar-typehints>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
 * :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
@@ -548,7 +552,6 @@ Total : 68 analysis
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
-* :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
 * :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
@@ -569,7 +572,7 @@ Total : 68 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 64 analysis
+Total : 66 analysis
 
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -606,6 +609,9 @@ Total : 64 analysis
 * Php/NoListWithString
 * Php/NoStringWithAppend
 * Php/NoSubstrMinusOne
+* Php/PHP70scalartypehints
+* Php/PHP71scalartypehints
+* Php/PHP72scalartypehints
 * Php/PHP73LastEmptyArgument
 * Php/ParenthesisAsParameter
 * Php/Php55NewFunctions
@@ -618,7 +624,6 @@ Total : 64 analysis
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
-* Php/ScalarTypehintUsage
 * Php/StaticclassUsage
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
@@ -641,7 +646,7 @@ Total : 64 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 56 analysis
+Total : 58 analysis
 
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -674,6 +679,9 @@ Total : 56 analysis
 * Php/NoListWithString
 * Php/NoStringWithAppend
 * Php/NoSubstrMinusOne
+* Php/PHP70scalartypehints
+* Php/PHP71scalartypehints
+* Php/PHP72scalartypehints
 * Php/PHP73LastEmptyArgument
 * Php/ParenthesisAsParameter
 * Php/Php56NewFunctions
@@ -685,7 +693,6 @@ Total : 56 analysis
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
-* Php/ScalarTypehintUsage
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
 * Php/UseNullableType
@@ -705,7 +712,7 @@ Total : 56 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 45 analysis
+Total : 47 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * Classes/Anonymous
@@ -730,6 +737,9 @@ Total : 45 analysis
 * Php/NoListWithString
 * Php/NoStringWithAppend
 * Php/NoSubstrMinusOne
+* Php/PHP70scalartypehints
+* Php/PHP71scalartypehints
+* Php/PHP72scalartypehints
 * Php/PHP73LastEmptyArgument
 * Php/ParenthesisAsParameter
 * Php/Php70NewClasses
@@ -740,7 +750,6 @@ Total : 45 analysis
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
-* Php/ScalarTypehintUsage
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
 * Php/UseNullableType
@@ -758,7 +767,7 @@ Total : 45 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 39 analysis
+Total : 41 analysis
 
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -789,6 +798,8 @@ Total : 39 analysis
 * Php/ListWithKeys
 * Php/ListWithReference
 * Php/NoSubstrMinusOne
+* Php/PHP71scalartypehints
+* Php/PHP72scalartypehints
 * Php/PHP73LastEmptyArgument
 * Php/Php71NewClasses
 * Php/Php72NewClasses
@@ -805,7 +816,7 @@ Total : 39 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 25 analysis
+Total : 26 analysis
 
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
@@ -822,6 +833,7 @@ Total : 25 analysis
 * Php/HashAlgos53
 * Php/HashAlgos54
 * Php/ListWithReference
+* Php/PHP72scalartypehints
 * Php/PHP73LastEmptyArgument
 * Php/Php70RemovedDirective
 * Php/Php70RemovedFunctions
@@ -1028,11 +1040,12 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 54 analysis
+Total : 55 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
+* :ref:`Could Be Static Closure <could-be-static-closure>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Compact <could-use-compact>`
 * :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`

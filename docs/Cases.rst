@@ -209,6 +209,52 @@ The initial C is actually a russian C.
 
     $сheckoutMultishippingSuccess
 
+Multiple Index Definition
+=========================
+
+.. _magento-arrays-multipleidenticalkeys:
+
+Magento
+^^^^^^^
+
+:ref:`multiple-index-definition`, in /app/code/core/Mage/Adminhtml/Block/System/Convert/Gui/Grid.php:80. 
+
+'type' is defined twice. The first one, 'options' is overwritten.
+
+.. code-block:: php
+
+    $this->addColumn('store_id', array(
+                'header'    => Mage::helper('adminhtml')->__('Store'),
+                'type'      => 'options',
+                'align'     => 'center',
+                'index'     => 'store_id',
+                'type'      => 'store',
+                'width'     => '200px',
+            ));
+
+
+--------
+
+
+.. _mediawiki-arrays-multipleidenticalkeys:
+
+MediaWiki
+^^^^^^^^^
+
+:ref:`multiple-index-definition`, in /resources/Resources.php:223. 
+
+'target' is repeated, though with the same values. This is just dead code.
+
+.. code-block:: php
+
+    // inside a big array
+    	'jquery.getAttrs' => [
+    		'targets' => [ 'desktop', 'mobile' ],
+    		'scripts' => 'resources/src/jquery/jquery.getAttrs.js',
+    		'targets' => [ 'desktop', 'mobile' ],
+    	],
+        // big array continues
+
 Several Instructions On The Same Line
 =====================================
 
@@ -341,6 +387,28 @@ There are two nested foreach here : they both have referenced blind variables. T
                         break;
                     }
                 }
+
+Var Keyword
+===========
+
+.. _xataface-classes-oldstylevar:
+
+xataface
+^^^^^^^^
+
+:ref:`var-keyword`, in SQL/Parser/wrapper.php:24. 
+
+With the usage of var and a first method bearing the name of the class, this is PHP 4 code that is still in use. 
+
+.. code-block:: php
+
+    class SQL_Parser_wrapper {
+    	
+    	var $_data;
+    	var $_tableLookup;
+    	var $_parser;
+    	
+    	function SQL_Parser_wrapper(&$data, $dialect='MySQL'){
 
 Logical Should Use Symbolic Operators
 =====================================
@@ -1174,24 +1242,73 @@ Default development behavior : display the caught exception. Production behavior
 Bail Out Early
 ==============
 
-.. _zencart-structures-bailoutearly:
+.. _openemr-structures-bailoutearly:
 
-Zencart
+OpenEMR
 ^^^^^^^
 
-:ref:`bail-out-early`, in /includes/modules/payment/firstdata_hco.php:104. 
+:ref:`bail-out-early`, in interface/modules/zend_modules/module/Carecoordination/src/Carecoordination/Controller/EncounterccdadispatchController.php:69. 
 
-In this code, is_object() is used to check the status of the order. Possibly, $order is false or null in case of incompatible status. Yet, when $object is an object, and in particular being a global that may be assigned anywhere else in the code, it seems that the method 'update_status' is magically always available. Here, using instance of to make sure that $order is an 'paypal' class, or a 'storepickup' or any of the payment class.  
+This is a typical example of a function mostly controlled by one condition. It could be rewrite as 'if($validResult != 'existingpatient')' then return. The 'else' clause is not used anymore, and the whole block of code is now the main sequence of the method. 
 
 .. code-block:: php
 
-    function __construct() {
-        global $order;
+    public function ccdaFetching($parameterArray = array())
+        {
+            $validResult = $this->getEncounterccdadispatchTable()->valid($parameterArray[0]);
+            // validate credentials
+            if ($validResult == 'existingpatient') {
+    /// Long bloc of code
+            } else {
+                return '<?xml version=1.0 encoding=UTF-8?>
+    			<!-- Edited by XMLSpy -->
+    			<note>
     
-        // more lines, no mention of $order
-        if (is_object($order)) $this->update_status();
-    
-        // more code
+    				<heading>Authetication Failure</heading>
+    				<body></body>
+    			</note>
+    			';
+            }
+
+
+--------
+
+
+.. _opencfp-structures-bailoutearly:
+
+OpenCfp
+^^^^^^^
+
+:ref:`bail-out-early`, in chair/assign_auto_reviewers_weighted_topic_match.inc:105. 
+
+This long example illustrates two aspects : first, the shortcut to the end of the method may be the 'then' clause, not necessarily the 'else'. '!in_array($pid.'-'.$rid, $conflictAR)' leads to return, and the 'else' should be removed, while keeping its content. Secondly, we can see 3 conditions that all lead to a premature end to the method. After refactoring all of them, the method would end up with 1 level of indentation, instead of 3.
+
+.. code-block:: php
+
+    function oc_inConflict(&$conflictAR, $pid, $rid=null) {
+    	if ($rid == null) {
+    		$rid = $_SESSION[OCC_SESSION_VAR_NAME]['acreviewerid'];
+    	}
+    	if (!in_array($pid.'-'.$rid, $conflictAR)) {
+    		return false; // not in conflict
+    	} else {
+    		$tempr = ocsql_query("SELECT COUNT(*) AS `count` FROM `" . OCC_TABLE_PAPERREVIEWER . "` WHERE `paperid`='" . safeSQLstr($pid) . "' AND `reviewerid`='" . safeSQLstr($rid) . "'");
+    		if ((ocsql_num_rows($tempr) == 1)
+    			&& ($templ = ocsql_fetch_assoc($tempr))
+    			&& ($templ['count'] == 1)
+    		) {
+    			return false; // assigned as reviewer
+    		} else {
+    			$tempr = ocsql_query("SELECT COUNT(*) AS `count` FROM `" . OCC_TABLE_PAPERADVOCATE . "` WHERE `paperid`='" . safeSQLstr($pid) . "' AND `advocateid`='" . safeSQLstr($rid) . "'");
+    			if ((ocsql_num_rows($tempr) == 1)
+    				&& ($templ = ocsql_fetch_assoc($tempr))
+    				&& ($templ['count'] == 1)
+    			) {
+    				return false; // assigned as advocate
+    			}
+    		}
+    	}
+    	return true;
     }
 
 Too Many Local Variables
@@ -1228,6 +1345,92 @@ HuMo-Gen
     	} elseif ($selected_language==he){
     		if($sexe=='m') { $nephniece = __('nephew'); }
     ///............
+
+Illegal Name For Method
+=======================
+
+.. _prestashop-classes-wrongname:
+
+Prestashop
+^^^^^^^^^^
+
+:ref:`illegal-name-for-method`, in /admin-dev/ajaxfilemanager/inc/class.pagination.php:200. 
+
+__getBaseUrl and __setBaseUrl shouldn't be named like that. 
+
+.. code-block:: php
+
+    /**
+    	 * get base url for pagination links aftr excluded those key
+    	 * identified on excluded query strings
+    	 *
+    	 */
+    	function __getBaseUrl()
+    	{
+    
+    		if(empty($this->baseUrl))
+    		{
+    
+    			$this->__setBaseUrl();
+    		}
+    		return $this->baseUrl;
+    	}
+
+Could Be Typehinted Callable
+============================
+
+.. _magento-functions-couldbecallable:
+
+Magento
+^^^^^^^
+
+:ref:`could-be-typehinted-callable`, in wp-admin/includes/misc.php:74. 
+
+$objMethod argument is used to call a function, a method or a localmethod. The typehint would save the middle condition, and make a better job than 'is_array' to check if $objMethod is callable. Yet, the final 'else' means that $objMethod is also the name of a method, and PHP won't validate this, unless there is a function with the same name. Here, callable is not an option. 
+
+.. code-block:: php
+
+    public function each($objMethod, $args = [])
+        {
+            if ($objMethod instanceof \Closure) {
+                foreach ($this->getItems() as $item) {
+                    $objMethod($item, ...$args);
+                }
+            } elseif (is_array($objMethod)) {
+                foreach ($this->getItems() as $item) {
+                    call_user_func($objMethod, $item, ...$args);
+                }
+            } else {
+                foreach ($this->getItems() as $item) {
+                    $item->$objMethod(...$args);
+                }
+            }
+        }
+
+
+--------
+
+
+.. _prestashop-functions-couldbecallable:
+
+PrestaShop
+^^^^^^^^^^
+
+:ref:`could-be-typehinted-callable`, in wp-admin/includes/misc.php:74. 
+
+$funcname is tested with is_callable() before being used as a method. Typehint callable would reduce the size of the code. 
+
+.. code-block:: php
+
+    public static function arrayWalk(&$array, $funcname, &$user_data = false)
+    	{
+    		if (!is_callable($funcname)) return false;
+    
+    		foreach ($array as $k => $row)
+    			if (!call_user_func_array($funcname, array($row, $k, $user_data)))
+    				return false;
+    		return true;
+    	}
 
 Only Variable Passed By Reference
 =================================
@@ -1783,6 +1986,22 @@ Without any other check, pathinfo() could be used with PATHINFO_EXTENSION.
             $pathinfo = pathinfo($filename);
             return $pathinfo['extension'];
         }
+
+Slice Arrays First
+==================
+
+.. _wordpress-arrays-slicefirst:
+
+WordPress
+^^^^^^^^^
+
+:ref:`slice-arrays-first`, in /modules/InboundEmail/InboundEmail.php:1080. 
+
+Instead of reading ALL the keys, and then, keeping only the first fifty, why not read the 50 first items from the array, and then extract the keys?
+
+.. code-block:: php
+
+    $results = array_slice(array_keys($diff), 0 ,50);
 
 Compare Hash
 ============

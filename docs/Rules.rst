@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 02 Jul 2018 09:57:11 +0000
-.. comment: Generation hash : 4d325fa7857b0bf062bf8b5a5ef9ed940bf3bf85
+.. comment: Generation date : Tue, 10 Jul 2018 06:50:05 +0000
+.. comment: Generation hash : 5685ae7020d9b5288cc1ba9ddbc38fef79b024f2
 
 
 .. _$http\_raw\_post\_data:
@@ -868,7 +868,7 @@ Ambiguous Static
 
 Methods or properties with the same name, are defined static in one class, and not static in another. This is error prone, as it requires a good knowledge of the code to make it static or not. 
 
-Try to keep the static-ness of methods simple, and unique. Consider renaming the methods and properties to distinguish them easily. A method and a static method have probably different responsabilities.
+Try to keep the static-ness of methods simple, and unique. Consider renaming the methods and properties to distinguish them easily. A method and a static method have probably different responsibilities.
 
 .. code-block:: php
 
@@ -1333,7 +1333,7 @@ Avoid Optional Properties
 #########################
 
 
-Avoid optional properties, to prevent litering the code with existence checks. 
+Avoid optional properties, to prevent littering the code with existence checks. 
 
 When a property has to be checked once for existence, it is safer to check it each time. This leads to a decrease in readability.
 
@@ -1364,7 +1364,8 @@ Either make sure the property is set with an actual object rather than with null
 
 
 See also `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_,
-`The Null Object Pattern – Polymorphism in Domain Models <https://www.sitepoint.com/the-null-object-pattern-polymorphism-in-domain-models/>`_, and `Practical PHP Refactoring: Introduce Null Object <https://dzone.com/articles/practical-php-refactoring-26>`_.
+         `The Null Object Pattern – Polymorphism in Domain Models <https://www.sitepoint.com/the-null-object-pattern-polymorphism-in-domain-models/>`_, and 
+         `Practical PHP Refactoring: Introduce Null Object <https://dzone.com/articles/practical-php-refactoring-26>`_.
 
 +------------+---------------------------------+
 | Short name | Classes/AvoidOptionalProperties |
@@ -1886,13 +1887,13 @@ This works with the `'break <http://php.net/manual/en/control-structures.break.p
 See also `Avoid nesting too deeply and return early (part 1) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-1>`_ and 
          `Avoid nesting too deeply and return early (part 2) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-2>`_.
 
-+------------+----------------------------------------+
-| Short name | Structures/BailOutEarly                |
-+------------+----------------------------------------+
-| Themes     | :ref:`Analyze`                         |
-+------------+----------------------------------------+
-| Examples   | :ref:`zencart-structures-bailoutearly` |
-+------------+----------------------------------------+
++------------+--------------------------------------------------------------------------------+
+| Short name | Structures/BailOutEarly                                                        |
++------------+--------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                 |
++------------+--------------------------------------------------------------------------------+
+| Examples   | :ref:`openemr-structures-bailoutearly`, :ref:`opencfp-structures-bailoutearly` |
++------------+--------------------------------------------------------------------------------+
 
 
 
@@ -2869,7 +2870,7 @@ Child Class Removes Typehint
 ############################
 
 
-PHP 7.2 introduced the ability to remove a typehint when overloarding a method. This is not valid code for older versions.
+PHP 7.2 introduced the ability to remove a typehint when overloading a method. This is not valid code for older versions.
 
 .. code-block:: php
 
@@ -2986,9 +2987,7 @@ Class Should Be Final By Ocramius
 
 'Make your classes always final, if they implement an interface, and no other public methods are defined'.
 
-When a class should be final, as explained by Ocramiux (Marco Pivetta).
-
-Full article : `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
+When a class should be final, as explained by Ocramius (Marco Pivetta).
 
 .. code-block:: php
 
@@ -3008,6 +3007,9 @@ Full article : `When to declare classes final <http://ocramius.github.io/blog/wh
    }
    
    ?>
+
+
+See also `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
 
 +------------+-------------------------+
 | Short name | Classes/FinalByOcramius |
@@ -3389,9 +3391,11 @@ Const Visibility Usage
 ######################
 
 
-Visibility for class constant controls the accesibility to class constant.
+Visibility for class constant controls the accessibility to class constant.
 
-It was introduced in PHP 7.1.
+A public constant may be used anywhere in the code; a protected constant usage is restricted to the class and its relatives; a private constant is restricted to itself.
+
+This feature was introduced in PHP 7.1. It is recommended to use explicit visibility, and, whenever possible, make the visibility private.
 
 .. code-block:: php
 
@@ -3408,10 +3412,12 @@ It was introduced in PHP 7.1.
        public const a = 1;
          const d = 4;
    }
+   
    ?>
 
 
-See also ``_.
+See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_ and 
+         `PHP RFC: Support Class Constant Visibility <https://wiki.php.net/rfc/class_const_visibility>`_.
 
 +------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Classes/ConstVisibilityUsage                                                                                                          |
@@ -3938,6 +3944,53 @@ This global is only used in one function or method. It may be called 'static', i
 
 
 
+.. _could-be-static-closure:
+
+Could Be Static Closure
+#######################
+
+
+`'Closure <http://php.net/manual/fr/class.closure.php>`_ may be static, and prevent the import of ``$this``. 
+
+
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo
+   {
+       function '__construct()
+       {
+   
+           // Not possible to use $this
+           $func = static function() {
+               var_dump($this);
+           };
+           $func();
+   
+           // Normal import of $this
+           $closure = function() {
+               var_dump($this);
+           };
+       }
+   };
+   new Foo();
+   
+   ?>
+
+
+See also `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_ and 
+         `Static anonymous functions <http://php.net/manual/en/functions.anonymous.php#functions.anonymous-functions.static>`_.
+
++------------+--------------------------------+
+| Short name | Functions/CouldBeStaticClosure |
++------------+--------------------------------+
+| Themes     | :ref:`Suggestions`             |
++------------+--------------------------------+
+
+
+
 .. _could-be-typehinted-callable:
 
 Could Be Typehinted Callable
@@ -3971,11 +4024,13 @@ When arguments are used to call a function, but are not marked with 'callable', 
 
 See also `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_.
 
-+------------+---------------------------+
-| Short name | Functions/CouldBeCallable |
-+------------+---------------------------+
-| Themes     | :ref:`Analyze`            |
-+------------+---------------------------+
++------------+---------------------------------------------------------------------------------------+
+| Short name | Functions/CouldBeCallable                                                             |
++------------+---------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                        |
++------------+---------------------------------------------------------------------------------------+
+| Examples   | :ref:`magento-functions-couldbecallable`, :ref:`prestashop-functions-couldbecallable` |
++------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -7625,7 +7680,7 @@ Illegal Name For Method
 #######################
 
 
-PHP has reserved usage of methods starting with __ for magic methods. It is recommended to avoid using this prefix, to prevent confusions.
+PHP has reserved usage of methods starting with ``__`` for magic methods. It is recommended to avoid using this prefix, to prevent confusions.
 
 .. code-block:: php
 
@@ -7644,11 +7699,16 @@ PHP has reserved usage of methods starting with __ for magic methods. It is reco
    
    ?>
 
-+------------+-------------------+
-| Short name | Classes/WrongName |
-+------------+-------------------+
-| Themes     | :ref:`Analyze`    |
-+------------+-------------------+
+
+See also `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_.
+
++------------+-------------------------------------+
+| Short name | Classes/WrongName                   |
++------------+-------------------------------------+
+| Themes     | :ref:`Analyze`                      |
++------------+-------------------------------------+
+| Examples   | :ref:`prestashop-classes-wrongname` |
++------------+-------------------------------------+
 
 
 
@@ -7833,7 +7893,34 @@ Incompatible Signature Methods
 ##############################
 
 
+Methods should have the same signature when being overwritten.
 
+The same signatures means the children class must have : 
++ the same name
++ the same visibility or less restrictive
++ the same typehint or removed
++ the same default value or removed
++ a reference like its parent
+
+This problem emits a fatal error. Yet, it is difficult to lint, because classes are often stored in different files. As such, PHP do lint each file independently, as unknown parent classes are not checked if not present. Yet, when executing the code, PHP lint the actual code and may encounter a Fatal error.
+
+.. code-block:: php
+
+   <?php
+   
+   class a {
+       public function foo($a) {}
+   }
+   
+   class ab extends a {
+       // foo is overloaded and now includes a default value for $a
+       public function foo($a = 1) {}
+   }
+   
+   ?>
+
+
+See also `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_.
 
 +------------+-------------------------------+
 | Short name | Classes/IncompatibleSignature |
@@ -8015,7 +8102,7 @@ Integer As Property
 
 It is backward incompatible to use integers are property names. This feature was introduced in PHP 7.2.
 
-If the code must be compatible with previous versions, avoir casting arrays to object.
+If the code must be compatible with previous versions, avoid casting arrays to object.
 
 .. code-block:: php
 
@@ -8032,6 +8119,9 @@ If the code must be compatible with previous versions, avoir casting arrays to o
        $obj->{'b'}, // always been accessible
    );
    ?>
+
+
+See also `PHP RFC: Convert numeric keys in object/array casts <https://wiki.php.net/rfc/convert_numeric_keys_in_object_array_casts>`_.
 
 +------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Classes/IntegerAsProperty                                                                                                                                        |
@@ -8599,7 +8689,7 @@ Locally Unused Property
 
 Those properties are defined in a class, and this class doesn't have any method that makes use of them. 
 
-While this is syntacticly correct, it is unusual that defined ressources are used in a child class. It may be worth moving the definition to another class, or to move accessing methods to the class.
+While this is syntactically correct, it is unusual that defined ressources are used in a child class. It may be worth moving the definition to another class, or to move accessing methods to the class.
 
 .. code-block:: php
 
@@ -9154,7 +9244,7 @@ Method Signature Must Be Compatible
 
 Make sure methods signature are compatible 
 
-PHP generates the infamous Fatal error at execution : 'Declaration of FooParent::Bar() must be compatible with FooChildren::Bar()'
+PHP generates the infamous Fatal error at execution : ``Declaration of FooParent::Bar() must be compatible with FooChildren::Bar()``
 
 .. code-block:: php
 
@@ -9860,9 +9950,9 @@ Multiple Classes In One File
 ############################
 
 
-It is regarded as a bad practice to cram more than one class per file. This is usually done to make life of __autoload() easier. 
+It is regarded as a bad practice to store several classs in the same file. This is usually done to make life of __autoload() easier. 
 
-It is often difficult to find class foo in the bar.php file. This is also the case for interfaces and traits.
+It is often difficult to find class ``foo`` in the ``bar.php`` file. This is also the case for interfaces and traits.
 
 .. code-block:: php
 
@@ -9878,7 +9968,7 @@ It is often difficult to find class foo in the bar.php file. This is also the ca
 
 One good reason to have multiple classes in one file is to reduce include time by providing everything into one nice include. 
 
-See also `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_
+See also `Is it a bad practice to have multiple classes in the same file? <https://stackoverflow.com/questions/360643/is-it-a-bad-practice-to-have-multiple-classes-in-the-same-file>`_.
 
 +------------+------------------------------------------------+
 | Short name | Classes/MultipleClassesInFile                  |
@@ -10062,11 +10152,13 @@ Indexes that are defined multiple times in the same array.
 
 They are indeed overwriting each other. This is most probably a typo.
 
-+------------+------------------------------+
-| Short name | Arrays/MultipleIdenticalKeys |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++------------+--------------------------------------------------------------------------------------------+
+| Short name | Arrays/MultipleIdenticalKeys                                                               |
++------------+--------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                             |
++------------+--------------------------------------------------------------------------------------------+
+| Examples   | :ref:`magento-arrays-multipleidenticalkeys`, :ref:`mediawiki-arrays-multipleidenticalkeys` |
++------------+--------------------------------------------------------------------------------------------+
 
 
 
@@ -10918,19 +11010,34 @@ No Direct Call To Magic Method
 
 PHP magic methods, such as `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_, `'__set() <http://php.net/manual/en/language.oop5.magic.php>`_, ... are supposed to be used in an object environnement, and not with direct call. 
 
-For example, 
+It is recommended to use the magic method with its intended usage, and not to call it directly. For example, typecast to ``string`` instead of calling the ``__toString()`` method.
 
 .. code-block:: php
 
    <?php
+   // Write
+     print $x->a;
+   // instead of 
      print $x->'__get('a'); 
    
-   //should be written 
-     print $x->a;
+   class Foo {
+       private $b = secret;
+   
+       public function '__toString() {
+           return strtoupper($this->b);
+       }
+   }
+   
+   $bar = new Foo();
+   echo (string) $bar;
+   
    ?>
 
 
 Accessing those methods in a static way is also discouraged.
+
+See also `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_ and 
+         `Magical PHP: `'__call() <http://php.net/manual/en/language.oop5.magic.php>`_ <https://www.garfieldtech.com/blog/magical-php-call>`_.
 
 +------------+---------------------------------+
 | Short name | Classes/DirectCallToMagicMethod |
@@ -11811,20 +11918,22 @@ No Self Referencing Constant
 ############################
 
 
-It is not possible to use 'self' when defining a constant in a class. It will yield a fatal error at runtime. 
+It is not possible to use a constant to define itself in a class. It yields a fatal error at runtime. 
+
+The PHP error reads : ``Cannot declare self-referencing constant 'self::C2'``. Unlike PHP which is self-referencing, self referencing variables can't have a value : just don't use that.
 
 .. code-block:: php
 
    <?php
        class a { 
-           const C1 = 1; 
-           const C2 = self::C1; 
-           const C3 = a::C3; 
+           const C1 = 1;         // fully defined constant
+           const C2 = self::C2;  // self referencing constant
+           const C3 = a::C3 + 2; // self referencing constant
        }
    ?>
 
 
-The code needs to reference the full class's name to do so, without using the current class's name. 
+The code may access an already declared constant with self or with its class name.
 
 .. code-block:: php
 
@@ -11834,6 +11943,9 @@ The code needs to reference the full class's name to do so, without using the cu
            const C2 = a::C1; 
        }
    ?>
+
+
+This error is not detected by linting. It is only detected at instantation time : if the class is not used, it won't appear.
 
 +------------+-----------------------------------+
 | Short name | Classes/NoSelfReferencingConstant |
@@ -12141,7 +12253,7 @@ Non-constant Index In Array
 ###########################
 
 
-Undefined constants revert as strings in Arrays. They are also called barewords.
+Undefined constants revert as strings in Arrays. They are also called ``barewords``.
 
 In ``$array[index]``, PHP cannot find index as a constant, but, as a default behavior, turns it into the string ``index``. 
 
@@ -12935,6 +13047,44 @@ List of directives that are removed in PHP 7.0.
 
 
 
+.. _php-7.0-scalar-typehints:
+
+PHP 7.0 Scalar Typehints
+########################
+
+
+New scalar typehints were introduced : bool, int, float, string. 
+
+They cannot be used before PHP 7.0, and will be confused with classes or interfaces.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo(string $name) {
+       print Hello $name;
+   }
+   
+   foo(Damien); 
+   // display 'Hello Damien'
+   
+   foo(33); 
+   // displays an error
+   
+   ?>
+
+
+See also `Scalar type declarations <http://php.net/manual/en/migration70.new-features.php#migration70.new-features.scalar-type-declarations>`_, and 
+         `PHP 7 SCALAR TYPE DECLARATIONS <https://tutorials.kode-blog.com/php-7-scalar-type-declarations>`_.
+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/PHP70scalartypehints                                                                                   |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _php-7.1-microseconds:
 
 PHP 7.1 Microseconds
@@ -12996,6 +13146,49 @@ List of directives that are removed in PHP 7.1.
 +------------+---------------------------+
 | Themes     | :ref:`CompatibilityPHP71` |
 +------------+---------------------------+
+
+
+
+.. _php-7.1-scalar-typehints:
+
+PHP 7.1 Scalar Typehints
+########################
+
+
+A new scalar typehint was introduced : iterable. 
+
+It can't be used before PHP 7.1, and will be confused with classes or interfaces.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo(iterable $iterable) {
+       foreach ($iterable as $value) {
+           echo $value.PHP_EOL;
+       }
+   }
+   
+   foo(range(1,20)); 
+   // works with array
+   
+   foo(new ArrayIterator([1, 2, 3])); 
+   // works with an iterator
+   
+   foo((function () { yield 1; })() ); 
+   // works with a generator 
+   
+   ?>
+
+
+See also `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_, and 
+         `The iterable Pseudo-Type <https://knpuniversity.com/screencast/php7/iterable-type>`_.
+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/PHP71scalartypehints                                                                                                              |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -13072,6 +13265,41 @@ The following PHP native functions were removed in PHP 7.2.
 +------------+---------------------------+
 | Themes     | :ref:`CompatibilityPHP72` |
 +------------+---------------------------+
+
+
+
+.. _php-7.2-scalar-typehints:
+
+PHP 7.2 Scalar Typehints
+########################
+
+
+A new scalar typehint was introduced : object. 
+
+It can't be used before PHP 7.2, and will be confused with classes or interfaces.
+
+.. code-block:: php
+
+   <?php
+   
+   function test(object $obj) : object
+   {
+       return new SplQueue();
+   }
+   
+   test(new StdClass());
+   
+   ?>
+
+
+See also `New object type <http://php.net/manual/en/migration72.new-features.php#migration72.new-features.iterable-pseudo-type>`_, and 
+         `PHP 7.2 and Object Typehint <http://blog.tekmi.nl/php-7-2-and-object-typehint/>`_.
+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/PHP72scalartypehints                                                                                                                                         |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -15061,39 +15289,6 @@ See also `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern
 
 
 
-.. _scalar-typehint-usage:
-
-Scalar Typehint Usage
-#####################
-
-
-Spot usage of scalar type hint : int, float, boolean and string.
-
-Scalar typehint are PHP 7.0 and more recent. Some, like object, is 7.2.
-
-Scalar typehint were not supported in PHP 5 and older. Then, the typehint is treated as a classname. 
-
-.. code-block:: php
-
-   <?php
-   
-   function withScalarTypehint(string $x) {}
-   
-   function withoutScalarTypehint(someClass $x) {}
-   
-   ?>
-
-
-See also `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_ and `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
-
-+------------+------------------------------------------------------------------------------------------------------------+
-| Short name | Php/ScalarTypehintUsage                                                                                    |
-+------------+------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+------------+------------------------------------------------------------------------------------------------------------+
-
-
-
 .. _sequences-in-for:
 
 Sequences In For
@@ -16312,12 +16507,14 @@ Always start by reducing an array before applying some transformation on it. The
    ?>
 
 
-The gain produced here is greater with longer arrays, or greater reductions. They may also be used in loops. This is a micro-optimisation when used on short arrays and single array slicings.
+The gain produced here is greater with longer arrays, or greater reductions. They may also be used in loops. This is a micro-optimisation when used on short arrays.
 
 +------------+-----------------------------------------+
 | Short name | Arrays/SliceFirst                       |
 +------------+-----------------------------------------+
 | Themes     | :ref:`Performances`, :ref:`Suggestions` |
++------------+-----------------------------------------+
+| Examples   | :ref:`wordpress-arrays-slicefirst`      |
 +------------+-----------------------------------------+
 
 
@@ -18415,6 +18612,41 @@ Here, `'break <http://php.net/manual/en/control-structures.break.php>`_ may also
 +------------+---------------------------------+
 | Themes     | :ref:`Analyze`                  |
 +------------+---------------------------------+
+
+
+
+.. _undefined-\:\:class:
+
+Undefined ::class
+#################
+
+
+::class doesn't check if a corresponding class exists. 
+
+::class must be checked with a call to class_exists(). Otherwise, it may lead to a ``Class 'foo' not found `` or even silent dead code : this happens also with Catch and `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo() {}
+   
+   // prints foo
+   echo foo::class; 
+   
+   // prints bar though bar doesn't exist.
+   echo bar::class;
+   
+   ?>
+
+
+See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_.
+
++------------+------------------------------+
+| Short name | Classes/UndefinedStaticclass |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -22222,7 +22454,9 @@ Until PHP 7.1, ``$this`` may be used as an argument in a function or a method, a
    ?>
 
 
-Starting with PHP 7.1, the PHP engine check thouroughly that ``$this`` is used in an appropriate manner, and raise fatal errors in case it isn't. 
+Starting with PHP 7.1, the PHP engine check thoroughly that ``$this`` is used in an appropriate manner, and raise fatal errors in case it isn't. 
+
+Yet, it is possible to find ``$this`` outside a class : if the file is included inside a class, then ``$this`` will be recognized and valided. If the file is included outside a class context, it will yield a fatal error : ``Using $this when not in object context``.
 
 See also `Closure::bind <http://php.net/manual/en/closure.bind.php>`_ and 
          `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
@@ -22321,7 +22555,7 @@ Var Keyword
 
 Var was used in PHP 4 to mark properties as public. Nowadays, new keywords are available : public, protected, private. Var is equivalent to public. 
 
-It is recommended to avoid using var, and explicitely use the new keywords.
+It is recommended to avoid using var, and explicitly use the new keywords.
 
 .. code-block:: php
 
@@ -22344,6 +22578,8 @@ See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
 | Themes     | :ref:`Analyze`                                                                                          |
 +------------+---------------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-php4-class-syntax <https://github.com/dseguy/clearPHP/tree/master/rules/no-php4-class-syntax.md>`__ |
++------------+---------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`xataface-classes-oldstylevar`                                                                     |
 +------------+---------------------------------------------------------------------------------------------------------+
 
 
