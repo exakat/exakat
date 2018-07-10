@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -38,10 +38,8 @@ Label : PROJECT
                       Label : STATIC
                         19
                       Label : STATIC
-                        10
-                        Label : LEFT
-                          20
-                        Label : RIGHT
+                        20
+                        Label : DEFAULT
                           6
                     Label : EXPRESSION
                       21

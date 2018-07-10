@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -41,5 +41,5 @@ Label : PROJECT
                       16
                   Label : ARGUMENT
                     19
-          Label : NAME
+          Label : CONDITION
             6

@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -155,7 +155,7 @@ Label : PROJECT
                       19
                       Label : BREAK
                         20
-              Label : NAME
+              Label : CONDITION
                 11
                 Label : ARGUMENT
                   8

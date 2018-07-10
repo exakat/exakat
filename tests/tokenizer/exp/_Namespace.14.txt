@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -82,11 +82,9 @@ Label : PROJECT
                       Label : EXPRESSION
                         56
                         Label : STATIC
-                          58
-                          Label : LEFT
-                            57
-                          Label : RIGHT
-                            59
+                          57
+                          Label : DEFAULT
+                            58
                       Label : EXPRESSION
                         22
                         Label : CONDITION
@@ -94,11 +92,11 @@ Label : PROJECT
                           Label : LEFT
                             57
                           Label : RIGHT
-                            59
+                            58
                         Label : THEN
                           21
                           Label : EXPRESSION
-                            58
+                            60
                             Label : LEFT
                               57
                             Label : RIGHT
@@ -120,7 +118,7 @@ Label : PROJECT
                             Label : LEFT
                               57
                             Label : RIGHT
-                              59
+                              58
                           Label : RIGHT
                             68
                             Label : LEFT

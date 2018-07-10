@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -14,36 +14,30 @@ Label : PROJECT
         Label : EXPRESSION
           8
           Label : METHOD
-            18
+            17
             Label : ARGUMENT
-              19
+              18
             Label : BLOCK
-              21
+              20
               Label : EXPRESSION
                 5
                 Label : STATIC
-                  11
-                  Label : LEFT
-                    22
-                  Label : RIGHT
-                    13
+                  21
+                  Label : DEFAULT
+                    12
             Label : NAME
-              18
+              17
           Label : NAME
             9
           Label : PPP
             5
             Label : PPP
-              11
-              Label : LEFT
-                10
-              Label : RIGHT
-                13
+              10
+              Label : DEFAULT
+                12
           Label : PPP
-            14
+            13
             Label : PPP
-              11
-              Label : LEFT
-                15
-              Label : RIGHT
-                17
+              14
+              Label : DEFAULT
+                16

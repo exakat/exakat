@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -10,46 +10,40 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONST
-            16
+            15
             Label : CONST
-              16
+              15
               Label : NAME
-                10
+                9
               Label : VALUE
-                17
+                16
           Label : NAME
             6
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                8
-              Label : RIGHT
-                11
+              8
+              Label : DEFAULT
+                10
           Label : PPP
             7
             Label : PPP
-              12
+              11
             Label : PPP
-              14
+              13
           Label : PPP
             7
             Label : PPP
-              18
+              17
             Label : PPP
-              9
-              Label : LEFT
-                20
-              Label : RIGHT
-                22
+              19
+              Label : DEFAULT
+                21
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                23
-              Label : RIGHT
-                17
+              22
+              Label : DEFAULT
+                16
             Label : PPP
-              25
+              24

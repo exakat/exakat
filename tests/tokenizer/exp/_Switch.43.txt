@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -21,7 +21,7 @@ Label : PROJECT
                   5
                   Label : CASES
                     12
-                  Label : NAME
+                  Label : CONDITION
                     11
                     Label : METHOD
                       18
@@ -59,7 +59,7 @@ Label : PROJECT
               29
               Label : CODE
                 3
-          Label : NAME
+          Label : CONDITION
             11
             Label : METHOD
               7

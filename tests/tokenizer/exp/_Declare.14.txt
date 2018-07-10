@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -19,20 +19,20 @@ Label : PROJECT
             10
             Label : EXPRESSION
               15
-              Label : ARGUMENT
-                18
-                Label : LEFT
-                  16
-                Label : RIGHT
-                  19
               Label : BLOCK
                 10
                 Label : EXPRESSION
-                  18
+                  21
                   Label : LEFT
                     20
                   Label : RIGHT
                     20
+              Label : DECLARE
+                19
+                Label : NAME
+                  16
+                Label : VALUE
+                  18
           Label : THEN
             10
             Label : EXPRESSION

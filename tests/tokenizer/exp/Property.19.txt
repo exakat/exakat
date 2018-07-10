@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -16,78 +16,76 @@ Label : PROJECT
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                8
-              Label : RIGHT
-                11
-        Label : EXPRESSION
-          5
-          Label : DEFINITION
-            12
-          Label : METHOD
-            10
-            Label : ARGUMENT
-              13
-            Label : BLOCK
-              15
-              Label : EXPRESSION
-                16
-                Label : RETURN
-                  17
-            Label : NAME
-              10
-          Label : NAME
-            12
-        Label : EXPRESSION
-          5
-          Label : DEFINITION
-            18
-          Label : NAME
-            18
-        Label : EXPRESSION
-          19
-          Label : ARGUMENT
-            23
-            Label : LEFT
-              22
-              Label : MEMBER
+              8
+              Label : DEFAULT
                 10
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            11
+          Label : METHOD
+            9
+            Label : ARGUMENT
+              12
+            Label : BLOCK
+              14
+              Label : EXPRESSION
+                15
+                Label : RETURN
+                  16
+            Label : NAME
+              9
+          Label : NAME
+            11
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            17
+          Label : NAME
+            17
+        Label : EXPRESSION
+          18
+          Label : ARGUMENT
+            22
+            Label : LEFT
+              21
+              Label : MEMBER
+                9
               Label : OBJECT
-                20
+                19
                 Label : CODE
-                  21
+                  20
                   Label : NEW
                     6
             Label : RIGHT
-              24
+              23
           Label : NAME
-            19
+            18
         Label : EXPRESSION
-          23
+          22
           Label : LEFT
-            22
+            21
             Label : METHOD
-              10
+              9
               Label : ARGUMENT
-                13
+                12
               Label : NAME
-                10
+                9
             Label : OBJECT
-              20
+              19
               Label : CODE
-                21
+                20
                 Label : NEW
-                  12
+                  11
           Label : RIGHT
-            17
+            16
         Label : EXPRESSION
-          9
+          25
           Label : LEFT
-            25
+            24
           Label : RIGHT
-            20
+            19
             Label : CODE
-              21
+              20
               Label : NEW
-                18
+                17

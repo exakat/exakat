@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -85,5 +85,5 @@ Label : PROJECT
                   28
                   Label : BREAK
                     29
-          Label : NAME
+          Label : CONDITION
             22

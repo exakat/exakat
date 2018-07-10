@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -9,16 +9,16 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : ARGUMENT
-            7
-            Label : LEFT
-              6
-            Label : RIGHT
-              8
           Label : BLOCK
             3
             Label : EXPRESSION
               9
+          Label : DECLARE
+            8
+            Label : NAME
+              6
+            Label : VALUE
+              7
         Label : EXPRESSION
           13
           Label : BLOCK
@@ -30,11 +30,11 @@ Label : PROJECT
                 Label : NAME
                   16
                 Label : VALUE
-                  8
+                  7
             Label : EXPRESSION
               18
               Label : DEFINITION
-                27
+                28
               Label : NAME
                 19
             Label : EXPRESSION
@@ -46,11 +46,11 @@ Label : PROJECT
                 Label : EXPRESSION
                   9
               Label : DEFINITION
-                24
+                25
                 Label : ARGUMENT
                   9
                 Label : NAME
-                  24
+                  25
               Label : NAME
                 21
           Label : NAME
@@ -66,26 +66,26 @@ Label : PROJECT
               Label : NAME
                 22
             Label : EXPRESSION
-              7
+              24
               Label : LEFT
                 23
               Label : RIGHT
-                24
+                25
                 Label : ARGUMENT
                   9
                 Label : NAME
-                  24
+                  25
             Label : EXPRESSION
-              26
+              27
               Label : ARGUMENT
-                30
+                31
                 Label : CLASS
-                  27
+                  28
                 Label : METHOD
-                  29
+                  30
                   Label : ARGUMENT
                     9
                   Label : NAME
-                    29
+                    30
           Label : NAME
             9

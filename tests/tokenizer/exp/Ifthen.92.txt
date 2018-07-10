@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -103,7 +103,7 @@ Label : PROJECT
                             7
                           Label : RIGHT
                             50
-                  Label : NAME
+                  Label : CONDITION
                     27
                     Label : METHOD
                       23
@@ -123,6 +123,12 @@ Label : PROJECT
                   7
                 Label : NAME
                   5
+          Label : DEFINITION
+            5
+            Label : ARGUMENT
+              7
+            Label : NAME
+              5
           Label : NAME
             5
         Label : EXPRESSION

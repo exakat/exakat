@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -49,6 +49,8 @@ Label : PROJECT
             30
           Label : DEFINITION
             30
+          Label : DEFINITION
+            19
           Label : DEFINITION
             19
             Label : ARGUMENT

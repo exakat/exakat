@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -37,7 +37,7 @@ Label : PROJECT
                   20
                   Label : BREAK
                     21
-          Label : NAME
+          Label : CONDITION
             7
             Label : CONCAT
               6

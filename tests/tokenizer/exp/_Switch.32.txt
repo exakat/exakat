@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -121,5 +121,5 @@ Label : PROJECT
                     48
                     Label : EXPRESSION
                       21
-          Label : NAME
+          Label : CONDITION
             6

@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -23,6 +23,10 @@ Label : PROJECT
                     13
               Label : DEFINITION
                 10
+              Label : DEFINITION
+                10
+                Label : DEFINITION
+                  10
               Label : DEFINITION
                 10
                 Label : ARGUMENT
@@ -69,6 +73,14 @@ Label : PROJECT
                 15
               Label : DEFINITION
                 16
+                Label : DEFINITION
+                  26
+                  Label : ALIAS
+                    16
+                  Label : NAME
+                    15
+              Label : DEFINITION
+                16
                 Label : ARGUMENT
                   5
                 Label : NAME
@@ -79,6 +91,8 @@ Label : PROJECT
                       16
                     Label : NAME
                       15
+              Label : DEFINITION
+                15
               Label : DEFINITION
                 15
                 Label : ARGUMENT
@@ -127,6 +141,10 @@ Label : PROJECT
                 24
               Label : DEFINITION
                 18
+                Label : DEFINITION
+                  24
+              Label : DEFINITION
+                18
                 Label : ARGUMENT
                   5
                 Label : NAME
@@ -153,6 +171,10 @@ Label : PROJECT
                     13
               Label : DEFINITION
                 25
+              Label : DEFINITION
+                20
+                Label : DEFINITION
+                  25
               Label : DEFINITION
                 20
                 Label : ARGUMENT

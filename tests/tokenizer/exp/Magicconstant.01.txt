@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -46,7 +46,7 @@ Label : PROJECT
         Label : EXPRESSION
           17
           Label : DEFINITION
-            30
+            29
           Label : METHOD
             7
             Label : ARGUMENT
@@ -54,15 +54,15 @@ Label : PROJECT
             Label : BLOCK
               10
               Label : EXPRESSION
-                29
+                28
                 Label : ARGUMENT
-                  31
+                  30
                   Label : MEMBER
-                    23
+                    22
                   Label : OBJECT
-                    30
+                    29
                 Label : NAME
-                  29
+                  28
               Label : EXPRESSION
                 11
                 Label : ARGUMENT
@@ -74,22 +74,12 @@ Label : PROJECT
           Label : PPP
             20
             Label : PPP
-              22
-              Label : DEFINITION
-                31
-                Label : MEMBER
-                  23
-                Label : OBJECT
-                  30
-              Label : LEFT
-                21
-              Label : RIGHT
+              21
+              Label : DEFAULT
                 14
           Label : PPP
-            24
+            23
             Label : PPP
-              22
-              Label : LEFT
-                25
-              Label : RIGHT
-                27
+              24
+              Label : DEFAULT
+                26
