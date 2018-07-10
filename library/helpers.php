@@ -20,6 +20,8 @@
  *
 */
 
+use Exakat\Exceptions\NoSuchDir;
+
 const INI_PROCESS_SECTIONS = true;
 const INI_DONT_PROCESS_SECTIONS = false;
 
@@ -76,11 +78,11 @@ function rmdirRecursive($dir) {
 
 function copyDir($src, $dst) {
     if (!file_exists($src)) {
-        throw new \Exakat\Exceptions\NoSuchDir("Can't find dir : '$src'");
+        throw new NoSuchDir("Can't find dir : '$src'");
     }
     $dir = opendir($src);
     if (!is_resource($dir)) {
-        throw new \Exakat\Exceptions\NoSuchDir("Can't open dir : '$src' : ".var_export(error_get_last()));
+        throw new NoSuchDir("Can't open dir : '$src' : ".var_export(error_get_last()));
     }
 
     $total = 0;
