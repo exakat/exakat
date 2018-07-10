@@ -1,7 +1,7 @@
 <?php
 
 function x() {
-    return $a->b++;
+    return $a['b']++;
 }
 
 function x2() {

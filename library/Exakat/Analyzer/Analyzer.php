@@ -1983,6 +1983,18 @@ GREMLIN;
         return $this;
     }
     
+    public function isReferencedArgument($variable = 'variable') {
+        $this->query->addMethod(<<<GREMLIN
+not(
+    where(
+        __.repeat( __.in()).until(hasLabel("Function")).out("ARGUMENT").filter{it.get().value("code") == $variable}.has("reference", true)
+    )
+)
+GREMLIN
+);
+        return $this;
+    }
+
     public function run() {
         $this->analyze();
 //        $this->prepareQuery();

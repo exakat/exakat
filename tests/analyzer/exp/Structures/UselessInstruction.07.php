@@ -1,9 +1,10 @@
 <?php
 
-$expected     = array('return $a->b++',
+$expected     = array('return $a[\'b\']++',
                      );
 
-$expected_not = array('return ++$a',
+$expected_not = array('return $a->b++',
+                      'return ++$a',
                      );
 
 ?>

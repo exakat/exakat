@@ -75,7 +75,7 @@ class UselessInstruction extends Analyzer {
              ->outIs('RETURN')
              ->atomIs('Postplusplus')
              ->outIs('POSTPLUSPLUS')
-             ->atomIsNot('Variable')
+             ->atomIsNot(array('Variable', 'Member', 'Staticproperty'))
              ->back('first');
         $this->prepareQuery();
 
@@ -109,20 +109,14 @@ class UselessInstruction extends Analyzer {
         // return an assigned variable 
         // todo : add support for static, referenc argument, global
         $this->atomIs('Return')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->outIs('LEFT')
              ->atomIsNot(array('Member', 'Staticproperty', 'Phpvariable'))
              ->hasNoChildren(array('Member', 'Staticproperty', 'Phpvariable'), array('VARIABLE'))
+             ->hasNoChildren(array('Member', 'Staticproperty', 'Phpvariable'), array('VARIABLE', 'VARIABLE'))
              ->savePropertyAs('code', 'variable')
             // It is not an argument with reference
-             ->raw(<<<GREMLIN
-not(
-    where(
-        __.repeat( __.in()).until(hasLabel("Function")).out("ARGUMENT").filter{it.get().value("code") == variable}.has("reference", true)
-    )
-)
-GREMLIN
-)
+             ->isReferencedArgument('variable')
             // it is not a global nor a static
              ->raw(<<<GREMLIN
 not(
