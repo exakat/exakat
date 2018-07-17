@@ -32,7 +32,7 @@ class ReservedNames extends Analyzer {
     public function analyze() {
         $phpNames = $this->loadIni('php_keywords.ini', 'keyword');
         
-        $reservedNames = array_merge(str2array($this->reservedNames), 
+        $reservedNames = array_merge(str2array($this->reservedNames),
                                      array_diff($phpNames, str2array($this->allowedNames)));
 
         // functions/methods names

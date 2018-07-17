@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class VariableNonascii extends Analyzer {
     public function analyze() {
-        // $人 or 
+        // $人 or
         $this->atomIs(self::$VARIABLES_USER)
              ->tokenIsNot(array('T_DOLLAR', 'T_DOLLAR_OPEN_CURLY_BRACES'))
              ->regexIs('fullcode', '[^a-zA-Z0-9\\$_\\\.\\\&]');

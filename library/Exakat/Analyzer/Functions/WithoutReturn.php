@@ -32,9 +32,9 @@ class WithoutReturn extends Analyzer {
              ->isNot('abstract', true)
              ->hasNoInterface()
              ->outIs('NAME')
-             ->codeIsNot(array('__construct', 
-                               '__destruct', 
-                               '__wakeup', 
+             ->codeIsNot(array('__construct',
+                               '__destruct',
+                               '__wakeup',
                                '__autoload',
                                ), self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first')

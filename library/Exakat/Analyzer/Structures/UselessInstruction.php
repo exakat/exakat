@@ -106,7 +106,7 @@ class UselessInstruction extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // return an assigned variable 
+        // return an assigned variable
         // todo : add support for static, referenc argument, global
         $this->atomIs('Return')
              ->atomInsideNoDefinition('Assignation')
@@ -194,16 +194,16 @@ GREMLIN
 
         $this->atomFunctionIs('\\count')
              ->outWithRank('ARGUMENT', 0)
-             ->functioncallIs(array('\\array_keys', 
-                                    '\\array_values', 
-                                    '\\array_flip', 
-                                    '\\array_fill', 
-                                    '\\array_walk', 
-                                    '\\array_map', 
-                                    '\\array_change_key_case', 
-                                    '\\array_combine', 
-                                    '\\array_multisort', 
-                                    '\\array_replace', 
+             ->functioncallIs(array('\\array_keys',
+                                    '\\array_values',
+                                    '\\array_flip',
+                                    '\\array_fill',
+                                    '\\array_walk',
+                                    '\\array_map',
+                                    '\\array_change_key_case',
+                                    '\\array_combine',
+                                    '\\array_multisort',
+                                    '\\array_replace',
                                     '\\array_reverse',
                                     ))
              ->back('first');

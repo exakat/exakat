@@ -81,8 +81,8 @@ class Query {
         $this->analyzerId = $analyzerId;
 
         // @doc This is when the object is a placeholder for others.
-        if (count($this->methods) <= 1) { 
-            return true; 
+        if (count($this->methods) <= 1) {
+            return true;
         }
         
         if (in_array(self::STOP_QUERY, $this->methods) !== false) {

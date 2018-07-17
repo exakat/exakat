@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UndefinedStaticclass extends Analyzer {
     public function analyze() {
-        //echo  undefinedClass::class 
+        //echo  undefinedClass::class
         $this->atomIs('Staticclass')
              ->outIs('CLASS')
              ->hasNoIn('DEFINITION')

@@ -168,7 +168,7 @@ GREMLIN;
             } else {
                 $json[$atom->id] = $atom->toGraphsonLine($this->id);
             
-                if ($atom->atom === 'Functioncall' && 
+                if ($atom->atom === 'Functioncall' &&
                     !empty($atom->fullnspath)) {
                     if (isset($this->functioncalls[$atom->fullnspath])) {
                         ++$this->functioncalls[$atom->fullnspath];

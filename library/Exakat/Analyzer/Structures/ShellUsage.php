@@ -32,12 +32,12 @@ class ShellUsage extends Analyzer {
         $this->prepareQuery();
 
         // function calls with exec, etc
-        $this->atomFunctionIs(array('\\exec', 
-                                    '\\shell_exec', 
-                                    '\\system', 
-                                    '\\passthru', 
-                                    '\\pcntl_exec', 
-                                    '\\popen', 
+        $this->atomFunctionIs(array('\\exec',
+                                    '\\shell_exec',
+                                    '\\system',
+                                    '\\passthru',
+                                    '\\pcntl_exec',
+                                    '\\popen',
                                     '\\pcntl_fork',
                                     ));
         $this->prepareQuery();

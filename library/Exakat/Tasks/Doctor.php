@@ -277,11 +277,13 @@ class Doctor extends Tasks {
                            'Bazaar'    => 'bzr',
                            'Composer'  => 'composer',
                            'Zip'       => 'zip',
+                           'Rar'       => 'rar',
                            'Tarbz'     => 'tbz',
                            'Targz'     => 'tgz',
                           );
 
         foreach($optionals as $class => $section) {
+            $fullClass = "\Exakat\Vcs\\$class";
             $vcs = new $fullClass($this->config->project, $this->config->projects_root);
             $stats[$section] = $vcs->getInstallationInfo();
         }

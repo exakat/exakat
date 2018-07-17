@@ -34,7 +34,7 @@ class Rethrown extends Analyzer {
              ->inIs('VARIABLE')
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
-             ->is('rank', 0)  // Just one expression. Otherwise, some other 
+             ->is('rank', 0)  // Just one expression. Otherwise, some other
              ->atomIs('Throw')
              ->outIs('THROW')
              ->samePropertyAs('code', 'rethrow')

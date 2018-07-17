@@ -291,7 +291,7 @@ GREMLIN;
                                ->toArray();
             $returntype = $this->query('g.V().hasLabel("Method", "Magicmethod", "Closure", "Function").out("RETURNTYPE").not(where( __.in("DEFINITION"))).values("fullnspath")')
                                ->toArray();
-            self::$calledClasses = array_unique(array_merge($staticcalls, 
+            self::$calledClasses = array_unique(array_merge($staticcalls,
                                                             $news,
                                                             $typehints,
                                                             $returntype));
@@ -307,7 +307,7 @@ GREMLIN;
         }
         
         return self::$calledInterfaces;
-    }    
+    }
 
     public function getCalledTraits() {
         if (self::$calledTraits === null) {
@@ -322,7 +322,7 @@ GREMLIN;
         }
         
         return self::$calledTraits;
-    }    
+    }
 
     public function getCalledNamespaces() {
         if (self::$calledNamespaces === null) {
@@ -336,7 +336,7 @@ GREMLIN;
         }
         
         return self::$calledNamespaces;
-    }    
+    }
 
     public function getCalledDirectives() {
         if (self::$calledDirectives === null) {
@@ -356,7 +356,7 @@ GREMLIN;
         }
         
         return self::$calledDirectives;
-    }    
+    }
 
 
     public function checkPhpVersion($version) {
@@ -554,7 +554,7 @@ GREMLIN
         if (empty($diff)) {
             $this->query->stopQuery();
             return $this;
-        } 
+        }
 
         $this->query->addMethod('hasLabel(within(***))', $diff);
         

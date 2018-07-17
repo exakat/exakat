@@ -460,6 +460,11 @@ class Files extends Tasks {
         // Regex to ignore files and folders
         $ignoreDirs = array();
         foreach($ignore_dirs as $ignore) {
+            // ignore mis configuration
+            if (empty($ignore)) {
+                continue;
+            }
+
             if ($ignore[0] == '/') {
                 $d = "$config->projects_root/projects/$dir/code$ignore";
                 if (!file_exists($d)) {

@@ -34,7 +34,7 @@ class UseNullableType extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // Argument typehint function foo(?String $x): 
+        // Argument typehint function foo(?String $x):
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->hasNoOut('NULLABLE')
              ->outIs('ARGUMENT')

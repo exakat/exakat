@@ -27,7 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class MagicConstantUsage extends Analyzer {
     public function analyze() {
+        // __DIR__, __dir__
         $this->atomIs('Magicconstant');
+        $this->prepareQuery();
     }
 }
 

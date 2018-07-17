@@ -45,7 +45,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->inIs('MEMBER')
              ->outIs('OBJECT')
              ->atomIs('This')
-             ->inIs('OBJECT') 
+             ->inIs('OBJECT')
              ->inIs('OBJECT') // Good for methodcall and properties
              ->back('results');
         $this->prepareQuery();

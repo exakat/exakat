@@ -28,8 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class Traitnames extends Analyzer {
 
     public function analyze() {
+        // trait t {}
         $this->atomIs('Trait')
              ->outIs('NAME');
+        $this->prepareQuery();
     }
 }
 

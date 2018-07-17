@@ -26,11 +26,11 @@ use Exakat\Analyzer\Analyzer;
 
 class UniqueUsage extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsRead', 
-                     'Classes/IsRead', 
+        return array('Variables/IsRead',
+                     'Classes/IsRead',
                      'Arrays/IsRead',
-                     'Variables/IsModified', 
-                     'Classes/IsModified', 
+                     'Variables/IsModified',
+                     'Classes/IsModified',
                      'Arrays/IsModified',
                     );
     }

@@ -28,11 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class HashAlgos71 extends Analyzer {
     protected $phpVersion = '7.1-';
     
-    public static $functions = array('\\hash', 
-                                     '\\hash_algo', 
-                                     '\\hash_hmac_file', 
-                                     '\\hash_hmac', 
-                                     '\\hash_init', 
+    public static $functions = array('\\hash',
+                                     '\\hash_algo',
+                                     '\\hash_hmac_file',
+                                     '\\hash_hmac',
+                                     '\\hash_init',
                                      '\\hash_pbkdf2',
                                      );
     

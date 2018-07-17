@@ -1548,7 +1548,7 @@ SQL;
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>', 4 - count($data));
 
-        return array('html'   => $html, 
+        return array('html'   => $html,
                      'script' => $dataScript);
     }
 
@@ -2759,7 +2759,7 @@ SQL
         }
         foreach($list as &$l) {
             sort($l);
-        } 
+        }
         
         if (empty($list)) {
             $list = array(array());
