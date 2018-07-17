@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('unused',
+$expected     = array('unused = used',
                      );
 
-$expected_not = array('used',
+$expected_not = array('used = 1',
                      );
 
 ?>

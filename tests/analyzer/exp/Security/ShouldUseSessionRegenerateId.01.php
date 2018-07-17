@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('test',
+$expected     = array('',
                      );
 
-$expected_not = array(
+$expected_not = array('test',
                      );
 
 ?>
