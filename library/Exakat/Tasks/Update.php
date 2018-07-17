@@ -81,7 +81,11 @@ class Update extends Tasks {
     }
     
     private function update($project) {
-        $path = $this->config->projects_root.'/projects/'.$project;
+        $path = "{$this->config->projects_root}/projects/$project";
+        
+        if (!is_dir($path)) {
+            return;
+        }
         
         switch(true) {
             // symlink case
