@@ -1,4 +1,4 @@
-Version 1.3.6 (Zhang Gongjin, coming up)
+Version 1.3.6 (Fang Xuanling, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,16 @@ Version 1.3.6 (Zhang Gongjin, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.3.7 (Zhang Gongjin, 2018-07-16)
++ Architecture
+    + Added support for Rar archives
+    + Removed call to gremlin server at 'status' time
++ Analyzer
+    + New analysis : support for msgpack extension
+    + New analysis : support for lzf extension
+    + Upgraded analysis : added missing function names in several extensions
+    + Checked unit tests : 2941 / 2955 test pass (99% pass). 
 
 Version 1.3.5 (Gao Shilian, 2018-07-09)
 + Architecture
