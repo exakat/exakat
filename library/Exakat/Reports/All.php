@@ -76,6 +76,12 @@ class All extends Reports {
 
         }
     }
+
+    public function dependsOnAnalysis() {
+        return array('All',
+                     );
+    }
+
 }
 
 ?>
