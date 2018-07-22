@@ -135,7 +135,8 @@ class Owasp extends Ambassador {
 
     public function __construct($config) {
         parent::__construct($config);
-        if ($this->config !== null) {
+
+        if ($this->themes !== null) {
             $this->themesToShow      = 'Security';
             $this->timesToFix        = $this->themes->getTimesToFix();
             $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
