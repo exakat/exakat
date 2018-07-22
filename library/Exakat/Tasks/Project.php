@@ -73,8 +73,9 @@ class Project extends Tasks {
         Analyzer::$datastore = $this->datastore;
 
         display("Search for external libraries".PHP_EOL);
-        if (file_exists($this->config->projects_root.'/projects/'.$project.'/config.cache')) {
-            unlink($this->config->projects_root.'/projects/'.$project.'/config.cache');
+        $pathCache = "{$this->config->projects_root}/projects/$project/config.cache";
+        if (file_exists($pathCache)) {
+            unlink($pathCache);
         }
         $args = array ( 1 => 'findextlib',
                         2 => '-p',

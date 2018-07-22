@@ -1605,10 +1605,27 @@ HTML;
     }
     
     private function generateUnusedComponents() {
-        $composerJson = file_get_contents( $this->config->projects_root.'/projects/'.$this->config->project.'/code/composer.json');
+        $path = "{$this->config->projects_root}/projects/{$this->config->project}/code/composer.json";
+        if (!file_exists($path)) {
+            $html = $this->getBasedPage('empty');
+            $html = $this->injectBloc($html, 'TITLE', 'Components');
+            $html = $this->injectBloc($html, 'DESCRIPTION', 'No composer.json found');
+            $html = $this->injectBloc($html, 'CONTENT', '');
+            $this->putBasedPage('unusedComponents', $html);
+            
+            return;
+        }
+
+        $composerJson = file_get_contents("{$this->config->projects_root}/projects/{$this->config->project}/code/composer.json");
         $composer = json_decode($composerJson);
         if ($composer === null) {
-            die('No composer in ');
+            $html = $this->getBasedPage('empty');
+            $html = $this->injectBloc($html, 'TITLE', 'Components');
+            $html = $this->injectBloc($html, 'DESCRIPTION', 'No composer.json found');
+            $html = $this->injectBloc($html, 'CONTENT', '');
+            $this->putBasedPage('unusedComponents', $html);
+            
+            return;
         }
         $require = $composer->require;
 

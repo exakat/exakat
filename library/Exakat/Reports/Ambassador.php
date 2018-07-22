@@ -363,62 +363,6 @@ class Ambassador extends Reports {
         $this->putBasedPage('analyzers_doc', $finalHTML);
     }
 
-    private function generateDocumentation2(){
-        $datas = array();
-        $baseHTML = $this->getBasedPage('analyzers_doc');
-        $analyzersDocHTML = "";
-
-        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->themesToShow),
-                                     $this->themes->getThemeAnalyzers('Preferences'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP73')
-                                     );
-        $analyzersList = array_keys(array_count_values($analyzersList));
-                                     
-        foreach($analyzersList as $analyzerName) {
-            $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
-            $description = $this->getDocs($analyzerName);
-
-            $analyzersDocHTML.='<h2><a href="analyzers_doc.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
-
-            $badges = array();
-            $v = $description->getVersionAdded();
-            if(!empty($v)){
-                $badges[] = '[Since '.$v.']';
-            }
-            $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
-
-            $versionCompatibility = $analyzer->getPhpversion();
-            if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
-                if (strpos($versionCompatibility, '+') !== false) {
-                    $versionCompatibility = substr($versionCompatibility, 0, -1).' and more recent ';
-                } elseif (strpos($versionCompatibility, '-') !== false) {
-                    $versionCompatibility = ' older than '.substr($versionCompatibility, 0, -1);
-                }
-                $badges[] = '[ PHP '.$versionCompatibility.']';
-            }
-
-            $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML .= '<p>'.$this->setPHPBlocs($description['description']).'</p>';
-
-            $v = $description->getClearPHP();
-            if(!empty($v)){
-                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
-            }
-        }
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyzersDocHTML);
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
-
-        $this->putBasedPage('analyzers_doc', $finalHTML);
-    }
-
     private function generateSecurity() {
         $this->generateIssuesEngine('security_issues',
                                     $this->getIssuesFaceted('Security') );
@@ -1653,7 +1597,8 @@ SQL;
 SELECT analyzer AS analyzer FROM resultsCounts
 WHERE analyzer NOT IN ($list) AND 
       count = 0 AND
-      analyzer like "%/%"
+      analyzer LIKE "%/%" AND
+      analyzer NOT LIKE "Common/%"
 SQL;
         $result = $this->sqlite->query($query);
 
@@ -2001,10 +1946,10 @@ JAVASCRIPTCODE;
         $list = makeList($list);
 
         $sqlQuery = <<<SQL
-            SELECT fullcode, file, line, analyzer
-                FROM results
-                WHERE analyzer IN ($list)
-                ORDER BY file, line
+SELECT fullcode, file, line, analyzer
+    FROM results
+    WHERE analyzer IN ($list)
+    ORDER BY file, line
 
 SQL;
         $result = $this->sqlite->query($sqlQuery);

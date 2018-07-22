@@ -55,6 +55,7 @@ class Dependencywheel extends Reports {
         $res = $this->sqlite->query('SELECT * FROM cit');
         
         $ids = array();
+        $extends = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $packagenames[] = $row['name'];
 
