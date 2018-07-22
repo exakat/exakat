@@ -5,6 +5,7 @@ SQL
 );
 
 pg_query($res, "select $a from table ");
+pg_query($res, "select a from table ");
 
 sqlsrv_query($res, "select ".$a." from table ");
 \cubrid_query($res, 'select '.$a.' from table ');

@@ -6,7 +6,8 @@ $expected     = array('global $for',
                       'global $while',
                      );
 
-$expected_not = array(
+$expected_not = array('$global',
+                      '++$global',
                      );
 
 ?>

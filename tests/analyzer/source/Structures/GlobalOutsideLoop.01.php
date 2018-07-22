@@ -11,6 +11,7 @@ while ($en++) { ++$while; }
 
 // Target (with global)
 for($i = 0; $i<10; ++$i) { global $for; ++$for; }
+for($i2 = 0; $i2<10; ++$i2) { ++$global; }
 
 foreach($a as $b) { global $foreach; ++$foreach; }
 

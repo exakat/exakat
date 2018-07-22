@@ -7,7 +7,8 @@ $expected     = array('"b$c" . $d',
                       '$ff . " {$cf[3]} "',
                      );
 
-$expected_not = array(
+$expected_not = array('"b$c$d"',
+                      '"{$f} {$c} "',
                      );
 
 ?>
