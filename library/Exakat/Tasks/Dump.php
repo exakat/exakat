@@ -243,7 +243,7 @@ SQL;
         $this->log->log( 'counts '.implode(', ', $counts)."\n");
         $datastore->close();
         unset($datastore);
-        
+
         foreach($themes as $id => $thema) {
             if (isset($counts[$thema])) {
                 display( $thema.' : '.($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n");
@@ -253,6 +253,7 @@ SQL;
                 display( $thema.' : No'.PHP_EOL);
             }
         }
+        $this->expandThemes();
         
         $this->collectHashAnalyzer();
 
@@ -1635,7 +1636,7 @@ SQL;
     }
 
     public function checkThemes($theme, array $analyzers) {
-        $sqliteFile = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
+        $sqliteFile = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
         
         $sqlite = new \Sqlite3($sqliteFile);
 
@@ -1652,6 +1653,36 @@ SQL;
         }
     }
 
+    private function expandThemes() {
+        $analyzers = array();
+        $res = $this->sqlite->query('SELECT analyzer FROM resultsCounts');
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $analyzers[] = $row['analyzer'];
+        }
+
+        $res = $this->sqlite->query('SELECT thema FROM themas');
+        $ran = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $ran[$row['thema']] = 1;
+        }   
+
+        $themas = $this->themes->listAllThemes();
+        $themas = array_diff($themas, $ran);
+
+        $add = array();
+        
+        foreach($themas as $theme) {
+            $themes = $this->themes->getThemeAnalyzers($theme);
+            if (empty(array_diff($themes, $analyzers))) {
+                $add[] = $theme;
+            }
+        }
+        
+        if (!empty($add)) {
+            $query = 'INSERT INTO themas (thema) VALUES ("'.implode('"), ("', $add).'")';
+            $res = $this->sqlite->query($query);
+        }
+    }
 }
 
 ?>
