@@ -56,6 +56,23 @@ class HardcodedPasswords extends Analyzer {
              ->regexIsNot('code', '/required/')
              ->back('first');
         $this->prepareQuery();
+
+        // $a->password = 'abc';
+        $this->atomIs('Member')
+             ->hasIn('LEFT')
+             ->outIs('MEMBER')
+             ->codeIs($passwordsKeys)
+             ->back('first')
+             ->outIs('OBJECT')
+             ->atomIs(array('This', 'Variableobject'))
+             ->back('first')
+             ->inIs('LEFT')
+             ->atomIs('Assignation')
+             ->outIs('RIGHT')
+             ->atomIs('String')
+             ->regexIsNot('code', '/required/')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
