@@ -25,6 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Tasks\Report;
 use Exakat\Tasks\Tasks;
+use Exakat\Reports\Reports;
 use Exakat\Config;
 
 class All extends Reports {
@@ -32,48 +33,18 @@ class All extends Reports {
     const FILE_FILENAME  = 'exakat';
 
     public function generate($folder, $name) {
-        $reports = array('Ambassador',
-                         'AmbassadorNoMenu',
-                         'Clustergrammer',
-                         'CodeSniffer',
-                         'Codeflower',
-                         'Composer',
-                         'Dependencies',
-                         'Dependencywheel',
-                         'Diplomat',
-                         'Drillinstructor',
-//                         'FacetedJson',
-                         'FileDependencies',
-                         'FileDependenciesHtml',
-                         'Inventories',
-                         'Json',
-                         'Marmelab',
-                         'Melis',
-                         'None',
-//                         'OnepageJson',
-                         'Owasp',
-                         'PhpCompilation',
-                         'PhpConfiguration',
-                         'PlantUml',
-                         'RadwellCode',
-                         'SimpleHtml',
-                         'Simpletable',
-                         'Slim',
-                         'Stats',
-                         'Text',
-                         'Uml',
-                         'Xml',
-                         'ZendFramework',
-        );
+        $omit = array('AmbassadorNoMenu',
+                      'FacetedJson',
+                      'OnepageJson',
+                      );
+        $reports = array_diff(Reports::$FORMATS, $omit);
 
-        foreach($reports as $report) {
-            display("Reporting with $report\n----------------------------------------\n");
-            $classReport = '\\Exakat\\Reports\\'.$report;
+        foreach($reports as $reportName) {
+            display("Reporting with $reportName\n----------------------------------------\n");
+            $reportClass = Reports::getReportClass($reportName);
             
-            $report = new $classReport($this->config);
+            $report = new $reportClass($this->config);
             $report->generate($folder, $name);
-
-
         }
     }
 
