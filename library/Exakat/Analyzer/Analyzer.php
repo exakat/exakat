@@ -2247,11 +2247,11 @@ GREMLIN
     private function assertAtom($atom) {
         if (is_string($atom)) {
             assert($atom !== 'Property', 'Property is no more');
-            assert($atom === ucfirst(mb_strtolower($atom)), 'Wrong format for atom name : "'.$atom.'"');
+            assert($atom === ucfirst(mb_strtolower($atom)), "Wrong format for atom name : '$atom");
         } else {
             foreach($atom as $a) {
                 assert($a !== 'Property', 'Property is no more');
-                assert($a === ucfirst(mb_strtolower($a)), 'Wrong format for atom name : '.$a);
+                assert($a === ucfirst(mb_strtolower($a)), "Wrong format for atom name : '$atom");
             }
         }
         return true;
