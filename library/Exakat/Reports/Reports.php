@@ -85,6 +85,10 @@ abstract class Reports {
     }
 
     protected function _generate($analyzerList) {}
+
+    public static function getReportClass($report) {
+        return "\\Exakat\\Reports\\$report";
+    }
     
     public function generate($folder, $name) {
         if (empty($name)) {
