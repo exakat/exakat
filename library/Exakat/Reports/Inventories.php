@@ -108,6 +108,10 @@ class Inventories extends Reports {
         }
         $step = 0;
         $row = $res->fetchArray(\SQLITE3_ASSOC);
+        if ($row === false) {
+            file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
+            return;
+        }
         $fp = fopen($file, 'w+');
 
         ++$step;
