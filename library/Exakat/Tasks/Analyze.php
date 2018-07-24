@@ -70,12 +70,12 @@ class Analyze extends Tasks {
         
         if ($this->config->program !== null) {
             if (is_array($this->config->program)) {
-                $analyzers_class = $this->config->program;
+                $analyzersClass = $this->config->program;
             } else {
-                $analyzers_class = array($this->config->program);
+                $analyzersClass = array($this->config->program);
             }
 
-            foreach($analyzers_class as $analyzer) {
+            foreach($analyzersClass as $analyzer) {
                 if (!$this->themes->getClass($analyzer)) {
                     throw new NoSuchAnalyzer($analyzer, $this->themes);
                 }
@@ -83,26 +83,26 @@ class Analyze extends Tasks {
         } elseif (is_string($this->config->thema)) {
             $thema = $this->config->thema;
 
-            if (!$analyzers_class = $this->themes->getThemeAnalyzers($thema)) {
+            if (!$analyzersClass = $this->themes->getThemeAnalyzers($thema)) {
                 throw new NoSuchAnalyzer($thema, $this->themes);
             }
 
-            $this->datastore->addRow('hash', array($this->config->thema => count($analyzers_class) ) );
+            $this->datastore->addRow('hash', array($this->config->thema => count($analyzersClass) ) );
         } else {
             throw new NeedsAnalyzerThema();
         }
 
         $this->log->log("Analyzing project $project");
-        $this->log->log("Runnable analyzers\t".count($analyzers_class));
+        $this->log->log("Runnable analyzers\t".count($analyzersClass));
 
         $total_results = 0;
         $this->Php = new Phpexec($this->config->phpversion, $this->config->{'php' . str_replace('.', '', $this->config->phpversion)});
 
         if (!$this->config->verbose && !$this->config->quiet) {
-           $this->progressBar = new Progressbar(0, count($analyzers_class) + 1, exec('tput cols'));
+           $this->progressBar = new Progressbar(0, count($analyzersClass) + 1, exec('tput cols'));
         }
 
-        foreach($analyzers_class as $analyzer_class) {
+        foreach($analyzersClass as $analyzer_class) {
             if (!$this->config->verbose && !$this->config->quiet) {
                 echo $this->progressBar->advance();
             }

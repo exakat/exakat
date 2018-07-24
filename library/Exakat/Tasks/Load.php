@@ -1107,7 +1107,7 @@ class Load extends Tasks {
         $this->currentFunction[] = $function;
         $this->currentMethod[] = $function;
 
-        $argumentFullcode = $function->fullcode;
+        $argumentsFullcode = $function->fullcode;
         $function->reference = $reference;
         if (isset($name)) {
             $this->addLink($function, $name, 'NAME');
@@ -1158,7 +1158,7 @@ class Load extends Tasks {
 
         $function->fullcode   = ($fullcode ? implode(' ', $fullcode).' ' : '').
                                 $this->tokens[$current][1].' '.($function->reference ? '&' : '').
-                                ($function->atom === 'Closure' ? '' : $name->fullcode).'('.$argumentFullcode.')'.
+                                ($function->atom === 'Closure' ? '' : $name->fullcode).'('.$argumentsFullcode.')'.
                                 (isset($useFullcode) ? ' use ('.implode(', ', $useFullcode).')' : '').// No space before use
                                 (isset($returnType) ? ' : '.(isset($nullable) ? '?' : '').$returnType->fullcode : '').
                                 (isset($block) ? self::FULLCODE_BLOCK : ' ;');
@@ -1396,7 +1396,7 @@ class Load extends Tasks {
                 // Process arguments
                 ++$this->id; // Skip arguments
                 $class = $this->processArguments('Classanonymous', array(), $argumentsList);
-                $argumentFullcode = $class->fullcode;
+                $argumentsFullcode = $class->fullcode;
             } else {
                 $class = $this->addAtom('Classanonymous');
             }
@@ -1458,7 +1458,7 @@ class Load extends Tasks {
         
         $class->code       = $this->tokens[$current][1];
         $class->fullcode   = (!empty($fullcode) ? implode(' ', $fullcode).' ' : '').$this->tokens[$current][1].($class->atom === 'Classanonymous' ? '' : ' '.$name->fullcode)
-                             .(isset($argumentFullcode) ? ' ('.$argumentFullcode.')' : '')
+                             .(isset($argumentsFullcode) ? ' ('.$argumentsFullcode.')' : '')
                              .(isset($extends) ? ' '.$extendsKeyword.' '.$extends->fullcode : '')
                              .(isset($implements) ? ' '.$implementsKeyword.' '.implode(', ', $fullcodeImplements) : '')
                              .static::FULLCODE_BLOCK;

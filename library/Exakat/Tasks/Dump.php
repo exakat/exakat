@@ -1664,7 +1664,7 @@ SQL;
         $ran = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $ran[$row['thema']] = 1;
-        }   
+        }
 
         $themas = $this->themes->listAllThemes();
         $themas = array_diff($themas, $ran);
