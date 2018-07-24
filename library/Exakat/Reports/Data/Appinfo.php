@@ -41,6 +41,7 @@ class Appinfo extends Data {
                             'Casting'                       => 'Php/CastingUsage',
                             'Resources'                     => 'Structures/ResourcesUsage',
                             'Nested Loops'                  => 'Structures/NestedLoops',
+                            'arrays_ With Callback'         => 'Arrays/WithCallback',
    
                             'Autoload'                      => 'Php/AutoloadUsage',
                             'include'                       => 'Structures/IncludeUsage',
