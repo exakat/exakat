@@ -178,6 +178,7 @@ class Appinfo extends Data {
 
                     'Constants' => array(
                             'Constants'           => 'Constants/ConstantUsage',
+                            'Case Insensitive'    => 'Constants/CaseInsensitiveConstants',
                             'Boolean'             => 'Boolean',
                             'Null'                => 'Null',
                             'Variable Constant'   => 'Constants/VariableConstant',
