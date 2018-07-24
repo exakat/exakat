@@ -29,8 +29,8 @@ class NonPpp extends Analyzer {
     public function analyze() {
         // class x { function foo() {} }
         // trait x { static $foo; }
-        $this->atomIs(array('Class', 'Interface', 'Trait'))
-             ->outIs(array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST'))
+        $this->atomIs(self::$CIT)
+             ->outIs(self::$CLASS_ELEMENTS)
              ->atomIs(array('Method', 'Magicmethod', 'Ppp', 'Constant'))
              ->is('visibility', 'none');
         $this->prepareQuery();

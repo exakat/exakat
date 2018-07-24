@@ -104,6 +104,8 @@ abstract class Analyzer {
     static public $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
     static public $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
     static public $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
+    static public $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
+    static public $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -1699,13 +1701,13 @@ GREMLIN
     }
 
     public function goToClassInterfaceTrait() {
-        $this->goToInstruction(array('Interface', 'Class', 'Classanonymous', 'Trait'));
+        $this->goToInstruction(self::$CIT);
         
         return $this;
     }
 
     public function hasNoClassInterfaceTrait() {
-        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Interface', 'Trait'));
+        return $this->hasNoInstruction(self::$CIT);
     }
     
     public function goToExtends() {

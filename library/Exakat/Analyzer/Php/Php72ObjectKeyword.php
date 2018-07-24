@@ -29,7 +29,7 @@ class Php72ObjectKeyword extends Analyzer {
     
     public function analyze() {
         // class object {}
-        $this->atomIs(array('Class', 'Interface', 'Trait'))
+        $this->atomIs(self::$CIT)
              ->outIs('NAME')
              ->codeIs('object')
              ->back('first');

@@ -43,14 +43,14 @@ class UselessAbstract extends Analyzer {
         $this->atomIs('Class')
              ->is('abstract', true)
              ->hasOut('DEFINITION')
-             ->hasNoOut(array('METHOD', 'MAGICMETHOD', 'USE', 'CONST', 'PPP'));
+             ->hasNoOut(self::$CLASS_ELEMENTS);
         $this->prepareQuery();
 
         // abstract class with not methods nor const nor trait
         $this->atomIs('Class')
              ->is('abstract', true)
              ->hasOut('DEFINITION')
-             ->raw('not( where( __.out("METHOD", "MAGICMETHOD", "USE", "PPP", "CONST").hasLabel("Method", "Magicmethod", "Usetrait", "Ppp", "Const") ) )');
+             ->hasNoOut(self::$CLASS_ELEMENTS);
         $this->prepareQuery();
 
         // abstract class with not abstract methods
