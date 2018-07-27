@@ -81,9 +81,11 @@ class Load extends Tasks {
 
     private $sequences = array();
 
-    private $currentMethod = array();
-    private $currentFunction = array();
-    private $currentClassTrait = array();
+    private $currentMethod           = array();
+    private $currentFunction         = array();
+    private $currentVariables        = array();
+    private $currentReturn           = null;
+    private $currentClassTrait       = array();
     private $currentParentClassTrait = array();
 
     private $tokens = array();
@@ -1059,6 +1061,8 @@ class Load extends Tasks {
         $previousFunctionContext = $this->contexts[self::CONTEXT_FUNCTION];
         $this->contexts[self::CONTEXT_CLASS] = 0;
         $this->contexts[self::CONTEXT_FUNCTION] = 1;
+        $previousContextVariables = $this->currentVariables;
+        $this->currentVariables = array();
 
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AND) {
             ++$this->id;
@@ -1185,6 +1189,7 @@ class Load extends Tasks {
 
         array_pop($this->currentFunction);
         array_pop($this->currentMethod);
+        $this->currentVariables = $previousContextVariables;
 
         return $function;
     }
@@ -1889,6 +1894,7 @@ class Load extends Tasks {
                     }
 
                     $this->addLink($index, $variable, 'NAME');
+                    $this->currentVariables[$variable->code] = $variable;
 
                     if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
                         ++$this->id; // Skip =
@@ -1969,7 +1975,6 @@ class Load extends Tasks {
         if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS,
                                                             $this->phptokens::T_CLOSE_BRACKET,
                                                             ))) {
-                                                            
             $void = $this->addAtomVoid();
             $void->rank = 0;
             $this->addLink($arguments, $void, 'ARGUMENT');
@@ -2503,6 +2508,11 @@ class Load extends Tasks {
                 $this->processSingle($atom);
                 $element = $this->popExpression();
 
+                if ($atom !== 'Propertydefinition') {
+                    $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
+                    $this->currentVariables[$element->code] = $element;
+                }
+
                 if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EQUAL) {
                     ++$this->id;
                     while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_SEMICOLON,
@@ -2528,7 +2538,7 @@ class Load extends Tasks {
 
             if (isset($default)) {
                 $this->addLink($element, $default, 'DEFAULT');
-                $element->fullcode .= " = $default->fullcode";
+                $element->fullcode .= " = {$default->fullcode}";
                 unset($default);
             }
             $fullcode[] = $element->fullcode;
@@ -2540,7 +2550,7 @@ class Load extends Tasks {
         $static->line     = $this->tokens[$current][2];
         $static->token    = $this->getToken($this->tokens[$current][0]);
         $static->count    = $rank;
-
+        
         $this->pushExpression($static);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
@@ -3875,6 +3885,20 @@ class Load extends Tasks {
             $this->calls->addCall('class', $class->fullnspath, $variable);
         }
         $this->runPlugins($variable);
+        
+        if ($atom === 'Variable') {
+            if (isset($this->currentVariables[$variable->code])) {
+                $this->addLink($this->currentVariables[$variable->code], $variable, 'DEFINITION');
+            } elseif (count($this->currentMethod) > 0) {
+                $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $variable, 'DEFINITION');
+                $this->currentVariables[$variable->code] = $variable;
+            }
+
+            if ($this->currentReturn !== null) {
+                $this->addLink($this->currentReturn, $variable, 'RETURNED');
+            }
+        }
+        
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -4138,9 +4162,13 @@ class Load extends Tasks {
 
             return $return;
         } else {
+            $this->currentReturn = $this->currentMethod[count($this->currentMethod) - 1];
+
             $return = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
             $operator = $this->popExpression();
             $this->pushExpression($operator);
+
+            $this->currentReturn = null;
 
             $this->runPlugins($operator, array('RETURN' => $return) );
 
@@ -5156,7 +5184,7 @@ class Load extends Tasks {
             }
 
             if ($D[$id] > 1) {
-                throw new LoadError("Warning : too linked atom $id in $this->filename : {$D[$id]} links for $id");
+//                throw new LoadError("Warning : too linked atom $id in $this->filename : {$D[$id]} links for $id");
             }
 
             if (!isset($atom->line)) {
