@@ -54,7 +54,7 @@ class Update extends Tasks {
     }
     
     private function runDefault() {
-        $paths = glob($this->config->projects_root.'/projects/*');
+        $paths = glob("{$this->config->projects_root}/projects/*");
         $projects = array_map('basename', $paths);
         $projects = array_diff($projects, array('test'));
         
@@ -79,8 +79,12 @@ class Update extends Tasks {
         if (!file_exists($path)) {
             throw new NoSuchProject($this->config->project);
         }
+
+        if (!is_dir($path)) {
+            throw new NoSuchProject($this->config->project);
+        }
     
-        if (!file_exists($path.'/code')) {
+        if (!file_exists("$path/code")) {
             throw new NoCodeInProject($this->config->project);
         }
         
