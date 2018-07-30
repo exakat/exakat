@@ -72,7 +72,6 @@ class UseWpdbApi extends Analyzer {
              ->codeIs(array('query', 'prepare'))
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->tokenIs('T_QUOTE')
              ->outWithRank('CONCAT', 0)
              ->atomIs('String')
              // If it's a property, we accept $wpdb
