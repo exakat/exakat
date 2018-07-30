@@ -79,30 +79,13 @@ class UselessInstruction extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Return')
-             ->outIs('RETURN')
-             ->atomIs('Postplusplus')
-             ->outIs('POSTPLUSPLUS')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'variable')
-             ->goToFunction()
-             ->outIs(array('ARGUMENT', 'USE'))
-             ->isNot('reference', true)
-             ->outIsIE('NAME')
-             ->samePropertyAs('code', 'variable')
-             ->back('first');
-        $this->prepareQuery();
-
         // return an argument that is also a reference
         $this->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Postplusplus')
              ->outIs('POSTPLUSPLUS')
              ->atomIs('Variable')
-             ->savePropertyAs('code', 'variable')
-             ->goToFunction()
-             ->raw('not(where( __.out("ARGUMENT").out("NAME").filter{ it.get().value("code") == variable; }))')
-             ->raw('not(where( __.out("USE").filter{ it.get().value("code") == variable; }))')
+             ->raw('where( __.in("DEFINITION").coalesce(__.in("NAME"), filter{ true; }).not(has("reference")) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -118,17 +101,7 @@ class UselessInstruction extends Analyzer {
             // It is not an argument with reference
              ->isReferencedArgument('variable')
             // it is not a global nor a static
-             ->raw(<<<GREMLIN
-not(
-    where(
-        __.repeat( __.in()).until(hasLabel("Function")).out("BLOCK")
-          .repeat( __.out()).emit().times($MAX_LOOPING)
-          .hasLabel(within("Staticdefinition", "Globaldefinition"))
-          .filter{it.get().value("code") == variable}
-    )
-)
-GREMLIN
-)
+             ->raw('not( where( __.in("DEFINITION").where(__.in("STATIC", "GLOBAL"))) )')
              ->back('first');
         $this->prepareQuery();
 
