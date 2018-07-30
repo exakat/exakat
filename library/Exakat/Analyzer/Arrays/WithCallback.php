@@ -31,7 +31,7 @@ class WithCallback extends Analyzer {
                       '\\array_walk',
                       '\\array_reduce',
                       '\\array_filter',
-                      )
+                      );
         $this->atomFunctionIs($list);
         $this->prepareQuery();
     }
