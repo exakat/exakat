@@ -1120,21 +1120,30 @@ class Load extends Tasks {
         // Process use
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_USE) {
             ++$this->id; // Skip use
+            ++$this->id; // Skip (
 
             $rank = 0;
             $useFullcode = array();
             do {
+                ++$this->id; // Skip ( or ,
+                if ($this->tokens[$this->id][0] === $this->phptokens::T_AND) {
+                    ++$this->id;
+                    $this->processSingle('Variable');
+                    $arg = $this->popExpression();
+                    $arg->reference = self::REFERENCE;
+                    $arg->fullcode = "&$arg->fullcode";
+                } else {
+                    $this->processSingle('Variable');
+                    $arg = $this->popExpression();
+                }
                 ++$this->id;
-                $this->processNext();
-                $arg = $this->popExpression();
                 
                 $useFullcode[] = $arg->fullcode;
                 $arg->rank = ++$rank;
                 
                 $this->addLink($function, $arg, 'USE');
-            } while ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COMMA);
-
-           ++$this->id;
+                $this->currentVariables[$arg->code] = $arg;
+            } while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
         }
 
         // Process return type
@@ -2508,7 +2517,8 @@ class Load extends Tasks {
                 $this->processSingle($atom);
                 $element = $this->popExpression();
 
-                if ($atom !== 'Propertydefinition') {
+                if ($atom !== 'Propertydefinition' && 
+                    !empty($this->currentMethod)) {
                     $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
                     $this->currentVariables[$element->code] = $element;
                 }
@@ -3886,7 +3896,7 @@ class Load extends Tasks {
         }
         $this->runPlugins($variable);
         
-        if ($atom === 'Variable') {
+        if (in_array($atom, array('Variable', 'Variableobject', 'Variablearray')) ) {
             if (isset($this->currentVariables[$variable->code])) {
                 $this->addLink($this->currentVariables[$variable->code], $variable, 'DEFINITION');
             } elseif (count($this->currentMethod) > 0) {
@@ -3898,7 +3908,6 @@ class Load extends Tasks {
                 $this->addLink($this->currentReturn, $variable, 'RETURNED');
             }
         }
-        
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -4162,7 +4171,9 @@ class Load extends Tasks {
 
             return $return;
         } else {
-            $this->currentReturn = $this->currentMethod[count($this->currentMethod) - 1];
+            if (!empty($this->currentMethod)) {
+                $this->currentReturn = $this->currentMethod[count($this->currentMethod) - 1];
+            }
 
             $return = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
             $operator = $this->popExpression();
