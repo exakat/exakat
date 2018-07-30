@@ -2251,7 +2251,7 @@ GREMLIN
         } else {
             foreach($atom as $a) {
                 assert($a !== 'Property', 'Property is no more');
-                assert($a === ucfirst(mb_strtolower($a)), "Wrong format for atom name : '$atom");
+                assert($a === ucfirst(mb_strtolower($a)), "Wrong format for atom name : '$a'");
             }
         }
         return true;
