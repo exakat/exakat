@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_ShouldUseOperator extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testStructures_ShouldUseOperator01()  { $this->generic_test('Structures/ShouldUseOperator.01'); }
     public function testStructures_ShouldUseOperator02()  { $this->generic_test('Structures/ShouldUseOperator.02'); }
+    public function testStructures_ShouldUseOperator03()  { $this->generic_test('Structures/ShouldUseOperator.03'); }
 }
 ?>

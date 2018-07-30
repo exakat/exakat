@@ -30,11 +30,16 @@ class ShouldUseOperator extends Analyzer {
         $this->atomFunctionIs(array('\\array_push',
                                     '\\function_get_arg',
                                     '\\function_get_args',
-                                    '\\chr',
                                     '\\call_user_func',
                                     '\\is_null',
                                     '\\php_version',
                                     ));
+        $this->prepareQuery();
+
+        $this->atomFunctionIs('\\chr')
+             ->outWithRank('ARGUMENT', 0)
+             ->is('constant', true)
+             ->back('first');
         $this->prepareQuery();
 
         // array_push($array, $value)
