@@ -35,17 +35,10 @@ class Copy extends Vcs {
         copyDir($source, "{$this->destinationFull}/code");
     }
 
-    public function update() {
-        rmdirRecursive("{$this->destinationFull}/code");
-        $this->clone($source);
-        
-        return 'New Copy Version';
-    }
-
     public function getStatus() {
         $status = array('vcs'       => 'copy',
                         'revision'  => 'N/A',
-                        'updatable' => true,
+                        'updatable' => false,
                        );
 
         return $status;

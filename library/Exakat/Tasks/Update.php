@@ -99,14 +99,8 @@ class Update extends Tasks {
             case $updateConfig->project_vcs === 'tgz' :
             case $updateConfig->project_vcs === 'tbz' :
             case $updateConfig->project_vcs === 'symlink' :
-                // Nothing to do just ignore
-                break;
-
-            // copy case
             case $updateConfig->project_vcs === 'copy' :
-                $vcs = new Copy($updateConfig->project, $updateConfig->projects_root);
-                $new = $vcs->update();
-                display("Source copied again");
+                // Nothing to do just ignore
                 break;
 
             // svn case
