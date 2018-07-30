@@ -36,7 +36,7 @@ abstract class Vcs {
 
     abstract public function clone($source);
 
-    abstract public function update();
+    public function update() {}
     
     static public function getVcs($config) {
         if ($config->svn === true) {
