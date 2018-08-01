@@ -38,6 +38,8 @@ class Php73NewFunctions extends FunctionDefinition {
                                  'openssl_pkey_derive',
                                  'is_countable',
                                  'ldap_exop_refresh',
+                                 'array_first_key',
+                                 'array_last_key',
                                 );
         parent::analyze();
     }
