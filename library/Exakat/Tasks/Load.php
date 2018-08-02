@@ -1661,8 +1661,8 @@ class Load extends Tasks {
     private function makeNsname() {
         $current = $this->id;
 
-        if ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR              &&
-            $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING                    &&
+        if ($this->tokens[$this->id][0]     === $this->phptokens::T_NS_SEPARATOR             &&
+            $this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING                   &&
             in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false')) &&
             $this->tokens[$this->id + 2][0] !== $this->phptokens::T_NS_SEPARATOR
             ) {
@@ -4121,7 +4121,7 @@ class Load extends Tasks {
         $this->addLink($operator, $operand, $link);
 
         $operator->code      = $this->tokens[$current][1];
-        $operator->fullcode  = $this->tokens[$current][1].$separator.$operand->fullcode;
+        $operator->fullcode  = $this->tokens[$current][1] .$separator.$operand->fullcode;
         $operator->line      = $this->tokens[$current][2];
         $operator->token     = $this->getToken($this->tokens[$current][0]);
 
@@ -4252,7 +4252,7 @@ class Load extends Tasks {
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
-
+        
         return $operator;
     }
 
@@ -5160,7 +5160,7 @@ class Load extends Tasks {
 
     private function checkTokens($filename) {
         if (!empty($this->expressions)) {
-            throw new LoadError( "Warning : expression is not empty in $filename : ".count($this->expressions).print_r($this->expressions, true));
+            throw new LoadError( "Warning : expression is not empty in $filename : ".count($this->expressions));
         }
 
         if (!empty($this->contexts[self::CONTEXT_NOSEQUENCE])) {

@@ -26,7 +26,7 @@ class Boolval extends Plugin {
     public $name = 'boolean';
     public $type = 'boolean';
 
-    static public $PROP_BOOLVAL      = array('Integer', 'Boolean', 'Real', 'Null');
+    static public $PROP_BOOLVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Nsname');
     
     public function run($atom, $extras) {
         foreach($extras as $extra) {
@@ -114,7 +114,7 @@ class Boolval extends Plugin {
                 if ($atom->code === '!') {
                     $atom->boolean = !$extras['NOT']->boolean;
                 } elseif ($atom->code === '~') {
-                    $atom->boolean = ~$extras['NOT']->boolean;
+                    $atom->boolean = ~$extras['NOT']->intval;
                 }
                 break;
 
