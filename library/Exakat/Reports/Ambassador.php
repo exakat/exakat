@@ -127,7 +127,7 @@ class Ambassador extends Reports {
                 $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
             $compatibilities = '';
-            $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%"');
+            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
                 $compatibilities .= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
             }
@@ -152,7 +152,7 @@ class Ambassador extends Reports {
     }
 
     protected function injectBloc($html, $bloc, $content) {
-        return str_replace("{{".$bloc."}}", $content, $html);
+        return str_replace('{{'.$bloc.'}}', $content, $html);
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
@@ -209,7 +209,7 @@ class Ambassador extends Reports {
         
         // Compatibility
         $this->generateCompilations();
-        $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) AS version FROM themas WHERE thema LIKE "Compatibility%"');
+        $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) AS version FROM themas WHERE thema LIKE "Compatibility%"');
         $list = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $list[] = 'CompatibilityPHP'.$row['version'];
