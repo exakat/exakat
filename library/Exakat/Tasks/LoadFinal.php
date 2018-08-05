@@ -64,6 +64,8 @@ class LoadFinal extends Tasks {
 
         $this->defaultIdentifiers();
         $this->propagateConstants();
+        
+        $this->setClassConstantRemoteDefinition();
 
         display('End load final');
         $this->logTime('Final');
@@ -339,6 +341,24 @@ GREMLIN;
         }
     }
 
+    private function setClassConstantRemoteDefinition() {
+        display('Set class constant remote definitions');
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Staticconstant").as('constant')
+     .out('CONSTANT').sideEffect{ name = it.get().value("code")}
+     .repeat( __.in() ).emit().until(hasLabel("Class", "Classanonymous")).hasLabel("Class", "Classanonymous")
+     .emit().repeat( __.out("EXTENDS").in("DEFINITION"))
+     .out("CONST").out("CONST").where( __.out("NAME").filter{ it.get().value("code") == name;})
+     .addE("DEFINITION")
+     .to("constant")
+     .count()
+GREMLIN;
+        $res = $this->gremlin->query($query);
+        $count = $res->toInt();
+        display("Set $count class constant remote definitions");
+    }
+
     private function setParentDefinition() {
         display('Set parent definitions');
 
@@ -351,7 +371,9 @@ g.V().hasLabel("Parent").as('parent')
      .count()
 
 GREMLIN;
-        $this->gremlin->query($query);
+        $res = $this->gremlin->query($query);
+        $count = $res->toInt();
+        display("Set $count parent definitions");
     }
     
     private function setConstantDefinition() {
