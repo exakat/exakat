@@ -116,16 +116,13 @@ class UselessInstruction extends Analyzer {
         // foreach(@$a as $b);
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->atomIs('Noscream');
+             ->is('noscream', true);
         $this->prepareQuery();
 
         // @$x = 3;
         $this->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIs('Noscream')
-             ->outIs('AT')
-             ->atomIs('Variable')
-             ->inIs('AT');
+             ->has('noscream', true);
         $this->prepareQuery();
 
         // Closure with some operations

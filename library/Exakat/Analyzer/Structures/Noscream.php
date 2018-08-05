@@ -27,17 +27,83 @@ use Exakat\Analyzer\Analyzer;
 
 class Noscream extends Analyzer {
     public function analyze() {
-        $this->atomIs('Noscream')
-             ->outIs('AT')
-             ->atomIs('Functioncall')
-             ->codeIsNot('fopen')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Noscream')
-             ->outIs('AT')
-             ->atomIsNot('Functioncall')
-             ->back('first');
+        $list = array('Addition',
+                      'Array',
+                      'Arrayappend',
+                      'Arrayliteral',
+                      'Assignation',
+                      'Bitshift',
+                      'Boolean',
+                      'Break',
+                      'Cast',
+                      'Clone',
+                      'Closure',
+                      'Coalesce',
+                      'Comparison',
+                      'Concatenation',
+                      'Constant',
+                      'Continue',
+                      'Declare',
+                      'Declaredefinition',
+                      'Defineconstant',
+                      'Echo',
+                      'Empty',
+                      'Eval',
+                      'Exit',
+                      'Function',
+                      'Functioncall',
+                      'Global',
+                      'Heredoc',
+                      'Identifier',
+                      'Include',
+                      'Instanceof',
+                      'Insteadof',
+                      'Integer',
+                      'Isset',
+                      'List',
+                      'Logical',
+                      'Magicconstant',
+                      'Member',
+                      'Methodcall',
+                      'Methodcallname',
+                      'Multiplication',
+                      'Name',
+                      'New',
+                      'Newcall',
+                      'Not',
+                      'Nsname',
+                      'Null',
+                      'Parent',
+                      'Parenthesis',
+                      'Phpvariable',
+                      'Postplusplus',
+                      'Power',
+                      'Preplusplus',
+                      'Print',
+                      'Propertydefinition',
+                      'Real',
+                      'Return',
+                      'Self',
+                      'Shell',
+                      'Sign',
+                      'Static',
+                      'Staticclass',
+                      'Staticconstant',
+                      'Staticdefinition',
+                      'Staticmethodcall',
+                      'Staticproperty',
+                      'String',
+                      'This',
+                      'Throw',
+                      'Unset',
+                      'Variable',
+                      'Yield',
+                      'Yieldfrom',
+                      );
+                                
+        // @$s
+        $this->atomIs($list)
+             ->is('noscream', true);
         $this->prepareQuery();
     }
 }

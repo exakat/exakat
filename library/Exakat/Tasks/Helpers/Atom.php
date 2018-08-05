@@ -71,6 +71,7 @@ class Atom {
     public $static       = '';
     public $ctype1       = '';
     public $ctype1_size  = 0;
+    public $noscream     = 0;
 
     public function __construct($id, $atom) {
         $this->id   = $id;
@@ -126,10 +127,38 @@ class Atom {
     }
 
     public function toGraphsonLine(&$id) {
-        $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'final', 'abstract', 'static', 'absolute', 'enclosing', 'bracket', 'flexible', 'close_tag', 'aliased', 'boolean', 'constant');
-        $integerValues = array('count', 'intval', 'args_max', 'args_min');
+        $booleanValues = array('alternative', 
+                               'absolute', 
+                               'abstract', 
+                               'aliased', 
+                               'boolean', 
+                               'bracket', 
+                               'close_tag', 
+                               'constant', 
+                               'enclosing', 
+                               'final', 
+                               'flexible', 
+                               'heredoc', 
+                               'noscream',
+                               'reference', 
+                               'static', 
+                               'variadic', 
+                               );
+        $integerValues = array('args_max', 
+                               'args_min',
+                               'count', 
+                               'intval', 
+                               );
 
-        $falseValues = array('globalvar', 'variadic', 'enclosing', 'heredoc', 'aliased', 'alternative', 'reference');
+        $falseValues = array('aliased', 
+                             'alternative', 
+                             'enclosing', 
+                             'globalvar', 
+                             'heredoc', 
+                             'noscream',
+                             'reference',
+                             'variadic', 
+                             );
         
         $properties = array();
         foreach($this as $l => $value) {

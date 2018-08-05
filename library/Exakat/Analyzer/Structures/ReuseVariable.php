@@ -37,7 +37,6 @@ class ReuseVariable extends Analyzer {
                              'Power',
                              'Logical',
                              'Not',
-                             'Noscream',
                              'Cast',
                              'Arrayliteral',
                              'Sign',

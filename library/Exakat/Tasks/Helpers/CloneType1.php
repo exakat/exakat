@@ -258,10 +258,6 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = $atom->code . $extras['NOT']->ctype1;
                 break;
 
-            case 'Noscream' :
-                $atom->ctype1 = $atom->code . $extras['AT']->ctype1;
-                break;
-
             case 'New' :
                 $atom->ctype1 = $atom->code . $extras['NEW']->ctype1;
                 break;

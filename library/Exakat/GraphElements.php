@@ -93,7 +93,6 @@ abstract class GraphElements {
                                  'Namespace',
                                  'New',
                                  'Newcall',
-                                 'Noscream',
                                  'Not',
                                  'Nsname',
                                  'Null',
