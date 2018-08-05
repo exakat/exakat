@@ -91,6 +91,7 @@ class DefaultConfig extends Config {
                                'php71'         => '',
                                'php72'         => '',
                                'php73'         => '',
+                               'php74'         => '',
  
                                'phpversion'    => '7.2',
                                'token_limit'   => '1000000',
@@ -141,6 +142,7 @@ class DefaultConfig extends Config {
                                                               'CompatibilityPHP71', 
                                                               'CompatibilityPHP72', 
                                                               'CompatibilityPHP73',
+                                                              'CompatibilityPHP74',
                                                               'Dead code', 
                                                               'Security', 
                                                               'Analyze', 

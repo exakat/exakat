@@ -37,16 +37,10 @@ class Files extends Tasks {
     public function run() {
         $dir = $this->config->project;
 
-        $stats = array('notCompilable52' => 'N/C',
-                       'notCompilable53' => 'N/C',
-                       'notCompilable54' => 'N/C',
-                       'notCompilable55' => 'N/C',
-                       'notCompilable56' => 'N/C',
-                       'notCompilable70' => 'N/C',
-                       'notCompilable71' => 'N/C',
-                       'notCompilable72' => 'N/C',
-                       'notCompilable73' => 'N/C',
-                       ) ;
+        $stats = array();
+        foreach(Config::PHP_VERSIONS as $version) {
+            $stats["notCompilable$version"] = 'N/C';
+        }
         $unknown = array();
 
         if ($this->config->project === 'default') {
@@ -83,8 +77,7 @@ class Files extends Tasks {
                                }, $files);
         file_put_contents($tmpFileName, implode("\n", $tmpFiles));
 
-        $versions = $this->config->other_php_versions;
-        $versions = array('54', '55', '56', '70', '71', '72', '73');
+        $versions = Config::PHP_VERSIONS;
 
         $missing = array();
         foreach($files as $file) {

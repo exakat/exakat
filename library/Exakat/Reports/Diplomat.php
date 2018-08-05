@@ -45,22 +45,21 @@ class Diplomat extends Ambassador {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
 
-    private $compatibilities = array('53' => 'Compatibility PHP 5.3',
-                                     '54' => 'Compatibility PHP 5.4',
-                                     '55' => 'Compatibility PHP 5.5',
-                                     '56' => 'Compatibility PHP 5.6',
-                                     '70' => 'Compatibility PHP 7.0',
-                                     '71' => 'Compatibility PHP 7.1',
-                                     '72' => 'Compatibility PHP 7.2',
-                                     '73' => 'Compatibility PHP 7.3',
-                                     );
+    private $compatibilities = array();
 
     public function __construct($config) {
         parent::__construct($config);
-        $this->frequences        = $this->themes->getFrequences();
-        $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
-        $this->severities        = $this->themes->getSeverities();
+
+        foreach(Config::PHP_VERSIONS as $shortVersion) {
+            $this->compatibilities[$shortVersion] = "Compatibility PHP $shortVersion[0].$shortVersion[1]";
+        }
+
+        if ($this->themes !== null) {
+            $this->frequences        = $this->themes->getFrequences();
+            $this->timesToFix        = $this->themes->getTimesToFix();
+            $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
+            $this->severities        = $this->themes->getSeverities();
+        }
 
         $this->themesToShow = 'Analyze';
     }

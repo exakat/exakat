@@ -23,6 +23,7 @@
 namespace Exakat\Configsource;
 
 use Exakat\Phpexec;
+use Exakat\Config as MainConfig;
 
 class ExakatConfig extends Config {
     private $projects_root = '';
@@ -105,7 +106,7 @@ class ExakatConfig extends Config {
             }
         }
 
-        foreach(self::PHP_VERSIONS as $version) {
+        foreach(MainConfig::PHP_VERSIONS as $version) {
             if (empty($this->config["php$version"])) {
                 continue;
             }
