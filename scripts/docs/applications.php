@@ -57,7 +57,7 @@ $applications = array(
     'Tikiwiki'                   => array('url' => 'https://tiki.org/', ),
     'Vanilla'                    => array('url' => 'https://open.vanillaforums.com/', ),
     'Woocommerce'                => array('url' => 'https://woocommerce.com/', ),
-    'WordPress'                  => array('url' => 'https://www.wordpress.com/', ),
+    'WordPress'                  => array('url' => 'https://www.wordpress.org/', ),
     'xataface'                   => array('url' => 'http://xataface.com/', ),
     'XOOPS'                      => array('url' => 'https://xoops.org/', ),
     'Zend-Config'                => array('url' => 'https://github.com/zendframework/zend-config', ),

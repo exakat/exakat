@@ -187,12 +187,12 @@ class Docs {
                 $list[] = $ini['phpError'];
             }
         }
+        $list = array_merge(...$list);
+
         $list = array_unique($list); // skip doubles
         sort($list); // alphabetical sort
         
-        $list = array_merge(...$list);
         $this->php_error_list = count($list)." PHP error message detailled here : \n\n* ".join("\n* ", $list)."\n\n";
-        print $this->php_error_list;
     }
     
     private function getIniList() {
