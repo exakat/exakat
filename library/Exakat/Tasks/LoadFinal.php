@@ -345,10 +345,10 @@ GREMLIN;
         display('Set class constant remote definitions');
 
         $query = <<<GREMLIN
-g.V().hasLabel("Staticconstant").as('constant')
-     .out('CONSTANT').sideEffect{ name = it.get().value("code")}
+g.V().hasLabel("Staticconstant").as("constant")
+     .out("CONSTANT").sideEffect{ name = it.get().value("code")}
      .repeat( __.in() ).emit().until(hasLabel("Class", "Classanonymous")).hasLabel("Class", "Classanonymous")
-     .emit().repeat( __.out("EXTENDS").in("DEFINITION"))
+     .emit().repeat( __.out("EXTENDS").in("DEFINITION").simplePath() )
      .out("CONST").out("CONST").where( __.out("NAME").filter{ it.get().value("code") == name;})
      .addE("DEFINITION")
      .to("constant")
