@@ -28,7 +28,7 @@ class CouldUseIsCountable extends Analyzer {
     protected $phpVersion = '7.3+';
 
     public function analyze() {
-        // is_array($x) or $x instanceof \Countable 
+        // is_array($x) or $x instanceof \Countable
         $this->atomIs('Logical')
              ->tokenIs(array('T_LOGICAL_OR', 'T_LOGICAL_XOR'))
 
@@ -44,7 +44,7 @@ class CouldUseIsCountable extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // is_array($x) or $x instanceof \Countable 
+        // is_array($x) or $x instanceof \Countable
         $this->atomIs('Logical')
              ->tokenIs('T_LOGICAL_AND')
 

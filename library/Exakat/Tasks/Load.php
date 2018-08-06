@@ -2517,7 +2517,7 @@ class Load extends Tasks {
                 $this->processSingle($atom);
                 $element = $this->popExpression();
 
-                if ($atom !== 'Propertydefinition' && 
+                if ($atom !== 'Propertydefinition' &&
                     !empty($this->currentMethod)) {
                     $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
                     $this->currentVariables[$element->code] = $element;
