@@ -26,17 +26,12 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class PropertyVariableConfusion extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/Arguments',
-                    );
-    }
-    
     public function analyze() {
         // public $x = 3; static or not
         $this->atomIs('Variable')
              ->hasClass()
              ->hasNoIn('MEMBER')
-             ->analyzerIsNot('Variables/Arguments')
+             ->isNotArgument()
              ->savePropertyAs('code', 'name')
              ->goToClass()
              ->outIs('PPP')

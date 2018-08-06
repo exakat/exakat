@@ -848,6 +848,19 @@ GREMLIN;
         return $this;
     }
 
+    public function isArgument() {
+        $this->query->addMethod('where( __.in("DEFINITION").where( __.in("NAME")))');
+        
+        return $this;
+    }
+
+    public function isNotArgument() {
+        $this->query->addMethod('where( __.in("DEFINITION").not( where( __.in("NAME"))))');
+        
+        return $this;
+    }
+
+
     public function isMore($property, $value = 0) {
         assert($this->assertProperty($property));
         if (is_int($value)) {
