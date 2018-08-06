@@ -50,6 +50,7 @@ class Docs {
     private $glossary               = array();
     private $text                   = '';
     private $ini_themes_config      = '';
+    private $php_error_list         = array();
     
     private $exakat_site            = '';
     private $exakat_version         = '';
@@ -142,6 +143,7 @@ class Docs {
 
         $this->getAnalyzerCount();
         $this->getIniList();
+        $this->getPhpError();//PHP_ERROR_MESSAGES
         $this->getExtensions();
         $this->getReportList();
         $this->getThemesList();
@@ -174,6 +176,21 @@ class Docs {
                     ON a.id = ac.id_analyzer
                 WHERE c.name = "Analyze"');
         $this->analyzer_count = $res->fetchArray(\SQLITE3_NUM)[0];
+    }
+    
+    private function getPhpError() {
+        $list = array();
+        foreach($this->ini_list as $file) {
+            $ini = parse_ini_file($file);
+        
+            if (isset($ini['phpError'])) {
+                $list[] = $ini['phpError'];
+            }
+        }
+        
+        $list = array_merge(...$list);
+        $this->php_error_list = count($list)." PHP error message detailled here : \n\n* ".join("\n* ", $list)."\n\n";
+        print $this->php_error_list;
     }
     
     private function getIniList() {
@@ -354,6 +371,7 @@ SQL
                             'ISSUES_EXAMPLES'        => join('', $this->issues_examples),
                             'PARAMETER_LIST'         => join('', $this->parameter_list),
                             'INI_THEMES'             => $this->ini_themes_config,
+                            'PHP_ERROR_MESSAGES'     => $this->php_error_list,
                             );
     }
 
