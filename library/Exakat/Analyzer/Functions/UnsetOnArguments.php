@@ -30,8 +30,7 @@ class UnsetOnArguments extends Analyzer {
         // unset($argument);
         $this->atomIs('Unset')
              ->outIs('ARGUMENT')
-             ->inIs('DEFINITION')
-             ->hasIn('ARGUMENT')
+             ->isArgument()
              ->back('first');
         $this->prepareQuery();
 
@@ -39,8 +38,7 @@ class UnsetOnArguments extends Analyzer {
         $this->atomIs('Cast')
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
-             ->inIs('DEFINITION')
-             ->hasIn('ARGUMENT')
+             ->isArgument()
              ->back('first');
         $this->prepareQuery();
     }

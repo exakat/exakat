@@ -51,7 +51,7 @@ where(
         .fold()
 )
 .where(
-    __.sideEffect{ r = [:]; w = [:]; }.repeat( __.out()).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray").as('v')
+    __.sideEffect{ r = [:]; w = [:]; }.repeat( __.out({$this->linksDown}).simplePath()).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray").as('v')
       .filter{ v = it.get().value("code"); !(v in args);}
       .in("ANALYZED")
       .has("analyzer", within("Variables/IsRead", "Classes/IsRead", "Arrays/IsRead","Variables/IsModified", "Classes/IsModified", "Arrays/IsModified" ))
@@ -75,7 +75,7 @@ GREMLIN
 )
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Variable', 'Variableobject', 'Variablearray')
-             ->filter( 'it.get().value("code") in d;');
+             ->filter('it.get().value("code") in d;');
         $this->prepareQuery();
     }
 }
