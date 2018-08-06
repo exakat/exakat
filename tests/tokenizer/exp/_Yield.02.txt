@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -17,6 +17,8 @@ Label : PROJECT
               10
               Label : LEFT
                 9
+                Label : DEFINITION
+                  9
               Label : RIGHT
                 11
                 Label : ARGUMENT
@@ -49,8 +51,24 @@ Label : PROJECT
                 13
                 Label : INDEX
                   18
+                  Label : DEFINITION
+                    18
                 Label : VALUE
                   19
+                  Label : DEFINITION
+                    19
+          Label : DEFINITION
+            9
+            Label : DEFINITION
+              9
+          Label : DEFINITION
+            18
+            Label : DEFINITION
+              18
+          Label : DEFINITION
+            19
+            Label : DEFINITION
+              19
           Label : DEFINITION
             5
             Label : ARGUMENT

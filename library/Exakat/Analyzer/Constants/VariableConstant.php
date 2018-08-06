@@ -28,9 +28,12 @@ use Exakat\Analyzer\Analyzer;
 class VariableConstant extends Analyzer {
 
     public function analyze() {
+        // constant('a')
         $this->atomIs('Functioncall')
              ->fullnspathIs('\\constant')
-             ->outIs('ARGUMENT');
+             ->outIs('ARGUMENT')
+             ->atomIs('String')
+             ->hasNoOut('CONCAT');
         $this->prepareQuery();
     }
 }

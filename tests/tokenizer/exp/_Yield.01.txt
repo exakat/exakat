@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -13,16 +13,22 @@ Label : PROJECT
             7
             Label : NAME
               7
+              Label : DEFINITION
+                7
           Label : ARGUMENT
             8
             Label : NAME
               8
+              Label : DEFINITION
+                8
           Label : ARGUMENT
             9
             Label : DEFAULT
               10
             Label : NAME
               9
+              Label : DEFINITION
+                9
           Label : BLOCK
             11
             Label : EXPRESSION
@@ -55,8 +61,22 @@ Label : PROJECT
                   14
                   Label : LEFT
                     13
+                    Label : DEFINITION
+                      13
+                    Label : DEFINITION
+                      13
+                    Label : DEFINITION
+                      13
                   Label : RIGHT
                     7
+          Label : DEFINITION
+            13
+            Label : DEFINITION
+              13
+            Label : DEFINITION
+              13
+            Label : DEFINITION
+              13
           Label : DEFINITION
             5
             Label : NAME
@@ -73,16 +93,22 @@ Label : PROJECT
             7
             Label : NAME
               7
+              Label : DEFINITION
+                7
           Label : ARGUMENT
             8
             Label : NAME
               8
+              Label : DEFINITION
+                8
           Label : ARGUMENT
             9
             Label : DEFAULT
               10
             Label : NAME
               9
+              Label : DEFINITION
+                9
           Label : BLOCK
             11
             Label : EXPRESSION
@@ -137,8 +163,26 @@ Label : PROJECT
                   14
                   Label : LEFT
                     13
+                    Label : DEFINITION
+                      13
+                    Label : DEFINITION
+                      13
+                    Label : DEFINITION
+                      13
+                    Label : DEFINITION
+                      13
                   Label : RIGHT
                     7
+          Label : DEFINITION
+            13
+            Label : DEFINITION
+              13
+            Label : DEFINITION
+              13
+            Label : DEFINITION
+              13
+            Label : DEFINITION
+              13
           Label : NAME
             18
         Label : EXPRESSION

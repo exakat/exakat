@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -27,6 +27,8 @@ Label : PROJECT
               17
               Label : CONDITION
                 18
+                Label : DEFINITION
+                  18
               Label : ELSE
                 16
                 Label : EXPRESSION
@@ -47,6 +49,12 @@ Label : PROJECT
                       18
                   Label : NAME
                     21
+          Label : DEFINITION
+            18
+            Label : DEFINITION
+              18
+          Label : DEFINITION
+            25
           Label : NAME
             13
         Label : EXPRESSION

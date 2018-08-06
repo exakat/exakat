@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -23,6 +23,8 @@ Label : PROJECT
               10
               Label : POSTPLUSPLUS
                 9
+          Label : DEFINITION
+            9
         Label : EXPRESSION
           19
           Label : METHOD

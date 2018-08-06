@@ -26,8 +26,9 @@ use Exakat\Analyzer\Analyzer;
 
 class AssignedTwiceOrMore extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+
         $list = makeList(self::$FUNCTIONS_ALL);
-        $maxLooping = self::MAX_LOOPING;
         $equal = $this->dictCode->translate(array('='));
         
         if (empty($equal)) {
@@ -37,9 +38,9 @@ class AssignedTwiceOrMore extends Analyzer {
         $query = <<<GREMLIN
 g.V().hasLabel($list).where( 
             __.sideEffect{counts = [:]; names = [];}
-              .out("BLOCK").repeat( __.out({$this->linksDown})).emit().times($maxLooping)
+              .out("BLOCK").repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING)
               .hasLabel("Assignation").has("code", $equal[0])
-              .where( __.out("RIGHT").hasLabel("Integer", "Real", "Boolean", "Null", "Heredoc"))
+              .where( __.out("RIGHT").hasLabel("Integer", "Real", "Boolean", "Null", "Heredoc", "String").not(where(__.out("CONCAT"))))
               .out("LEFT").hasLabel("Variable")
               .sideEffect{ k = it.get().value("fullcode"); 
                            if (counts[k] == null) {

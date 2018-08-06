@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -45,6 +45,10 @@ Label : PROJECT
                       14
                       Label : LEFT
                         13
+                        Label : DEFINITION
+                          13
+                        Label : DEFINITION
+                          13
                       Label : RIGHT
                         11
               Label : CONDITION
@@ -53,6 +57,14 @@ Label : PROJECT
                   9
                 Label : RIGHT
                   11
+          Label : DEFINITION
+            9
+          Label : DEFINITION
+            13
+            Label : DEFINITION
+              13
+            Label : DEFINITION
+              13
           Label : NAME
             5
         Label : EXPRESSION

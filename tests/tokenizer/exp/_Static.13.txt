@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -14,212 +14,176 @@ Label : PROJECT
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                8
-              Label : RIGHT
-                11
+              8
+              Label : DEFAULT
+                10
           Label : PPP
             7
             Label : PPP
-              12
+              11
           Label : PPP
-            14
+            13
             Label : PPP
-              9
-              Label : LEFT
-                15
-              Label : RIGHT
-                11
+              14
+              Label : DEFAULT
+                10
           Label : PPP
-            14
+            13
             Label : PPP
-              17
+              16
           Label : PPP
-            14
+            13
             Label : PPP
-              19
+              18
           Label : PPP
-            14
+            13
             Label : PPP
-              9
-              Label : LEFT
-                21
-              Label : RIGHT
-                11
+              20
+              Label : DEFAULT
+                10
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                23
-              Label : RIGHT
-                11
+              22
+              Label : DEFAULT
+                10
           Label : PPP
             7
             Label : PPP
-              25
+              24
           Label : PPP
             7
             Label : PPP
-              27
+              26
             Label : PPP
-              29
+              28
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                31
-              Label : RIGHT
-                11
+              30
+              Label : DEFAULT
+                10
             Label : PPP
-              9
-              Label : LEFT
-                33
-              Label : RIGHT
-                11
+              32
+              Label : DEFAULT
+                10
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                35
-              Label : RIGHT
-                11
+              34
+              Label : DEFAULT
+                10
             Label : PPP
-              37
+              36
           Label : PPP
             7
             Label : PPP
-              39
+              38
             Label : PPP
-              9
-              Label : LEFT
-                41
-              Label : RIGHT
-                11
+              40
+              Label : DEFAULT
+                10
           Label : PPP
             7
             Label : PPP
-              43
+              42
             Label : PPP
-              45
+              44
             Label : PPP
-              47
+              46
             Label : PPP
-              49
+              48
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                51
-              Label : RIGHT
-                11
+              50
+              Label : DEFAULT
+                10
             Label : PPP
-              9
-              Label : LEFT
-                53
-              Label : RIGHT
-                11
+              52
+              Label : DEFAULT
+                10
             Label : PPP
-              9
-              Label : LEFT
-                55
-              Label : RIGHT
-                11
+              54
+              Label : DEFAULT
+                10
             Label : PPP
-              9
-              Label : LEFT
-                57
-              Label : RIGHT
-                11
+              56
+              Label : DEFAULT
+                10
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                59
-              Label : RIGHT
-                11
+              58
+              Label : DEFAULT
+                10
             Label : PPP
-              61
+              60
             Label : PPP
-              9
-              Label : LEFT
-                63
-              Label : RIGHT
-                11
+              62
+              Label : DEFAULT
+                10
             Label : PPP
-              65
+              64
           Label : PPP
             7
             Label : PPP
-              67
+              66
             Label : PPP
-              9
-              Label : LEFT
-                69
-              Label : RIGHT
-                11
+              68
+              Label : DEFAULT
+                10
             Label : PPP
-              71
+              70
             Label : PPP
-              9
-              Label : LEFT
-                73
-              Label : RIGHT
-                11
+              72
+              Label : DEFAULT
+                10
           Label : PPP
             7
             Label : PPP
-              75
+              74
             Label : PPP
-              77
+              76
             Label : PPP
-              79
+              78
           Label : PPP
             7
             Label : PPP
-              81
+              80
             Label : PPP
-              83
+              82
             Label : PPP
-              85
+              84
           Label : PPP
-            87
+            86
             Label : PPP
-              88
+              87
           Label : PPP
-            14
+            13
             Label : PPP
-              90
+              89
           Label : PPP
-            92
+            91
             Label : PPP
-              93
-          Label : PPP
-            7
-            Label : PPP
-              95
-          Label : PPP
-            97
-            Label : PPP
-              98
-          Label : PPP
-            87
-            Label : PPP
-              9
-              Label : LEFT
-                100
-              Label : RIGHT
-                102
+              92
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                103
-              Label : RIGHT
-                102
+              94
+          Label : PPP
+            96
+            Label : PPP
+              97
+          Label : PPP
+            86
+            Label : PPP
+              99
+              Label : DEFAULT
+                101
+          Label : PPP
+            7
+            Label : PPP
+              102
+              Label : DEFAULT
+                101

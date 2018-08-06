@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -57,6 +57,8 @@ Label : PROJECT
                   20
         Label : EXPRESSION
           7
+          Label : DEFINITION
+            21
           Label : DEFINITION
             21
             Label : ARGUMENT

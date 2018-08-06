@@ -33,7 +33,7 @@ class StrangeName extends Analyzer {
              ->codeIs($names);
         $this->prepareQuery();
 
-        // multiple identical characters : $aaab 
+        // multiple identical characters : $aaab
         $this->atomIs(self::$VARIABLES_ALL)
              ->regexIs('fullcode', '(.)\\\\1{2,}');
         $this->prepareQuery();

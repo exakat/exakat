@@ -33,6 +33,7 @@ use Brightzone\GremlinDriver\Connection;
 class Tinkergraph extends Graph {
     const CHECKED = true;
     const UNCHECKED = false;
+    const UNAVAILABLE = 1;
     
     private $client = null;
     
@@ -47,6 +48,7 @@ class Tinkergraph extends Graph {
 
         if (!file_exists("{$this->config->tinkergraph_folder}/lib/")) {
             // No local production, just skip init.
+            $this->status = self::UNAVAIALBLE;
             return;
         }
 
@@ -74,7 +76,9 @@ class Tinkergraph extends Graph {
     }
 
     public function query($query, $params = array(), $load = array()) {
-        if ($this->status === self::UNCHECKED) {
+        if ($this->status === self::UNAVAILABLE) {
+            return new GraphResults();
+        } elseif ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
 

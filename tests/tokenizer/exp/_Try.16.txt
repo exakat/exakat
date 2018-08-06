@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -41,6 +41,8 @@ Label : PROJECT
                           16
                         Label : OBJECT
                           15
+                          Label : DEFINITION
+                            15
                     Label : EXPRESSION
                       18
                       Label : METHOD
@@ -65,5 +67,15 @@ Label : PROJECT
                       24
                     Label : VARIABLE
                       26
+          Label : DEFINITION
+            11
+          Label : DEFINITION
+            13
+          Label : DEFINITION
+            15
+            Label : DEFINITION
+              15
+          Label : DEFINITION
+            26
           Label : NAME
             5

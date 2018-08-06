@@ -81,8 +81,8 @@ class Query {
         $this->analyzerId = $analyzerId;
 
         // @doc This is when the object is a placeholder for others.
-        if (count($this->methods) <= 1) { 
-            return true; 
+        if (count($this->methods) <= 1) {
+            return true;
         }
         
         if (in_array(self::STOP_QUERY, $this->methods) !== false) {
@@ -140,5 +140,38 @@ GREMLIN;
         return $this->arguments;
     }
 
+    public function printQuery() {
+        $this->prepareQuery($this->analyzerId);
+        
+        foreach($this->queries as $id => $query) {
+            echo $id, ")", PHP_EOL, print_r($query, true), print_r($this->queriesArguments[$id], true), PHP_EOL;
+
+            krsort($this->queriesArguments[$id]);
+            
+            foreach($this->queriesArguments[$id] as $name => $value) {
+                if (is_array($value)) {
+                    if (is_array($value[key($value)])) {
+                        foreach($value as $k => &$v) {
+                            $v = "'''".$k."''':['''".implode("''', '''", $v)."''']";
+                            $v = str_replace('\\', '\\\\', $v);
+                        }
+                        unset($v);
+                        $query = str_replace($name, "[".implode(", ", $value)."]", $query);
+                    } else {
+                        $query = str_replace($name, "['".implode("', '", $value)."']", $query);
+                    }
+                } elseif (is_string($value)) {
+                    $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
+                } elseif (is_int($value)) {
+                    $query = str_replace($name, (string) $value, $query);
+                } else {
+                    assert(false, 'Cannot process argument of type '.gettype($value).PHP_EOL.__METHOD__.PHP_EOL);
+                }
+            }
+            
+            echo $query, PHP_EOL, PHP_EOL;
+        }
+        die();
+    }
 }
 ?>

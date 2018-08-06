@@ -57,6 +57,7 @@ class CommandLine extends Config {
                                  '-tgz'       => 'tgz',
                                  '-tbz'       => 'tbz',
                                  '-zip'       => 'zip',
+                                 '-rar'       => 'rar',
                                  '-git'       => 'git',
                                  );
 
@@ -128,7 +129,7 @@ class CommandLine extends Config {
             return false;
         }
 
-        $vcsList = array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip');
+        $vcsList = array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', 'rar',);
         foreach($this->booleanOptions as $key => $config) {
             $id = array_search($key, $args);
             if ($id !== false) {

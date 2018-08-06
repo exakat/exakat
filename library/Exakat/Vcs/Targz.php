@@ -51,7 +51,7 @@ class Targz extends Vcs {
         $res = shell_exec("tar -tzf $archiveFile 2>&1 >/dev/null");
         if (!empty($res)) {
             list($l, ) = explode("\n", $res);
-            print "Error while loading tar.gz archive : \"$l\". Aborting\n"; 
+            print "Error while loading tar.gz archive : \"$l\". Aborting\n";
             return;
         }
 

@@ -42,7 +42,7 @@ class LocallyUnusedProperty extends Analyzer {
              ->analyzerIsNot(array('Classes/LocallyUsedProperty',
                                    'Traits/LocallyUsedProperty',
                                    'Variables/StaticVariables',
-                                   ) 
+                                   )
                             )
              ->back('ppp');
         $this->prepareQuery();

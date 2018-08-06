@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -35,6 +35,8 @@ Label : PROJECT
                           20
                         Label : OBJECT
                           19
+                          Label : DEFINITION
+                            19
                     Label : EXPRESSION
                       22
                       Label : METHOD
@@ -65,6 +67,8 @@ Label : PROJECT
                   15
                   Label : LEFT
                     14
+                    Label : DEFINITION
+                      14
                   Label : RIGHT
                     16
               Label : INCREMENT
@@ -81,5 +85,17 @@ Label : PROJECT
                     11
                   Label : RIGHT
                     13
+          Label : DEFINITION
+            11
+          Label : DEFINITION
+            14
+            Label : DEFINITION
+              14
+          Label : DEFINITION
+            19
+            Label : DEFINITION
+              19
+          Label : DEFINITION
+            30
           Label : NAME
             5

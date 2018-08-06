@@ -5,7 +5,7 @@ $expected     = array('yp_err_string( )',
                       'yp_next($domain, "passwd.byname", "joe")',
                      );
 
-$expected_not = array(
+$expected_not = array('yp_errmsg( )',
                      );
 
 ?>

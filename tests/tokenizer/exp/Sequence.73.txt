@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -38,28 +38,24 @@ Label : PROJECT
               Label : PPP
                 22
                 Label : PPP
-                  24
-                  Label : LEFT
-                    23
-                  Label : RIGHT
-                    26
+                  23
+                  Label : DEFAULT
+                    25
                     Label : ARGUMENT
-                      27
+                      26
               Label : PPP
                 22
                 Label : PPP
-                  24
-                  Label : LEFT
-                    29
-                  Label : RIGHT
-                    26
+                  28
+                  Label : DEFAULT
+                    25
                     Label : ARGUMENT
-                      27
+                      26
             Label : EXPRESSION
               19
               Label : EXTENDS
-                32
+                31
               Label : NAME
-                30
+                29
         Label : EXPRESSION
-          27
+          26

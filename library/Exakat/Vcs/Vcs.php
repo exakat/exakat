@@ -36,31 +36,33 @@ abstract class Vcs {
 
     abstract public function clone($source);
 
-    abstract public function update();
+    public function update() {}
     
     static public function getVcs($config) {
-        if ($config->git === true) {
-            return '\Exakat\Vcs\Git';
-        } elseif ($config->svn === true) {
-            return '\Exakat\Vcs\Svn';
+        if ($config->svn === true) {
+            return Svn::class;
         } elseif ($config->hg === true) {
-            return '\Exakat\Vcs\Mercurial';
+            return Mercurial::class;
         } elseif ($config->bzr === true) {
-            return '\Exakat\Vcs\Bazaar';
+            return Bazaar::class;
         } elseif ($config->composer === true) {
-            return '\Exakat\Vcs\Composer';
+            return Composer::class;
         } elseif ($config->symlink === true) {
-            return '\Exakat\Vcs\Symlink';
+            return Symlink::class;
         } elseif ($config->tbz === true) {
-            return '\Exakat\Vcs\Tarbz';
+            return Tarbz::class;
         } elseif ($config->tgz === true) {
-            return '\Exakat\Vcs\Targz';
+            return Targz::class;
         } elseif ($config->zip === true) {
-            return '\Exakat\Vcs\Zip';
+            return Zip::class;
         } elseif ($config->copy === true) {
-            return '\Exakat\Vcs\Copy';
+            return Copy::class;
+        } elseif ($config->rar === true) {
+            return Rar::class;
+        } elseif ($config->git === true) {
+            return Git::class;
         } else {
-            return '\Exakat\Vcs\EmptyCode';
+            return EmptyCode::class;
         }
     }
 

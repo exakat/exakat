@@ -312,97 +312,18 @@ class Datastore {
         }
 
         switch($table) {
+            case 'compilation74' :
+            case 'compilation73' :
+            case 'compilation72' :
+            case 'compilation71' :
+            case 'compilation70' :
+            case 'compilation56' :
+            case 'compilation55' :
+            case 'compilation54' :
+            case 'compilation53' :
             case 'compilation52' :
                 $createTable = <<<SQLITE
-CREATE TABLE compilation52 (
-  id INTEGER PRIMARY KEY,
-  file TEXT,
-  error TEXT,
-  line id
-);
-SQLITE;
-                break;
-
-            case 'compilation53' :
-                $createTable = <<<SQLITE
-CREATE TABLE compilation53 (
-  id INTEGER PRIMARY KEY,
-  file TEXT,
-  error TEXT,
-  line id
-);
-SQLITE;
-                break;
-
-            case 'compilation54' :
-                $createTable = <<<SQLITE
-CREATE TABLE compilation54 (
-  id INTEGER PRIMARY KEY,
-  file TEXT,
-  error TEXT,
-  line id
-);
-SQLITE;
-                break;
-
-            case 'compilation55' :
-                $createTable = <<<SQLITE
-CREATE TABLE compilation55 (
-  id INTEGER PRIMARY KEY,
-  file TEXT,
-  error TEXT,
-  line id
-);
-SQLITE;
-                break;
-
-            case 'compilation56' :
-                $createTable = <<<SQLITE
-CREATE TABLE compilation56 (
-  id INTEGER PRIMARY KEY,
-  file TEXT,
-  error TEXT,
-  line id
-);
-SQLITE;
-                break;
-
-            case 'compilation70' :
-                $createTable = <<<SQLITE
-CREATE TABLE compilation70 (
-  id INTEGER PRIMARY KEY,
-  file TEXT,
-  error TEXT,
-  line id
-);
-SQLITE;
-                break;
-
-            case 'compilation71' :
-                $createTable = <<<SQLITE
-CREATE TABLE compilation71 (
-  id INTEGER PRIMARY KEY,
-  file TEXT,
-  error TEXT,
-  line id
-);
-SQLITE;
-                break;
-
-            case 'compilation72' :
-                $createTable = <<<SQLITE
-CREATE TABLE compilation72 (
-  id INTEGER PRIMARY KEY,
-  file TEXT,
-  error TEXT,
-  line id
-);
-SQLITE;
-                break;
-
-            case 'compilation73' :
-                $createTable = <<<SQLITE
-CREATE TABLE compilation73 (
+CREATE TABLE $table (
   id INTEGER PRIMARY KEY,
   file TEXT,
   error TEXT,

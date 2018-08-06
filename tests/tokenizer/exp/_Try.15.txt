@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -80,64 +80,58 @@ Label : PROJECT
                     Label : OBJECT
                       23
                   Label : ELSE
-                    37
-                    Label : AT
-                      42
-                      Label : ARGUMENT
-                        29
-                        Label : METHOD
-                          40
-                          Label : ARGUMENT
-                            27
-                          Label : NAME
-                            40
-                        Label : OBJECT
-                          23
-                      Label : NAME
-                        42
+                    41
+                    Label : ARGUMENT
+                      29
+                      Label : METHOD
+                        39
+                        Label : ARGUMENT
+                          27
+                        Label : NAME
+                          39
+                      Label : OBJECT
+                        23
+                    Label : NAME
+                      41
                   Label : THEN
                     37
-                    Label : AT
-                      38
-                      Label : ARGUMENT
-                        29
-                        Label : METHOD
-                          40
-                          Label : ARGUMENT
-                            27
-                          Label : NAME
-                            40
-                        Label : OBJECT
-                          23
-                      Label : NAME
-                        38
+                    Label : ARGUMENT
+                      29
+                      Label : METHOD
+                        39
+                        Label : ARGUMENT
+                          27
+                        Label : NAME
+                          39
+                      Label : OBJECT
+                        23
+                    Label : NAME
+                      37
               Label : SOURCE
                 7
               Label : VALUE
                 23
           Label : CATCH
-            44
+            43
             Label : BLOCK
               6
               Label : EXPRESSION
                 27
             Label : CLASS
-              45
+              44
             Label : VARIABLE
-              47
+              46
         Label : EXPRESSION
           27
         Label : EXPRESSION
           24
           Label : CONDITION
-            48
+            47
           Label : THEN
             6
             Label : EXPRESSION
-              37
-              Label : AT
-                42
-                Label : ARGUMENT
-                  14
-                Label : NAME
-                  42
+              41
+              Label : ARGUMENT
+                14
+              Label : NAME
+                41

@@ -30,16 +30,6 @@ use Exakat\Phpexec;
 
 class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    const VERSIONS   = array('php52' => '5.2',
-                             'php53' => '5.3',
-                             'php54' => '5.4',
-                             'php55' => '5.5',
-                             'php56' => '5.6',
-                             'php70' => '7.0',
-                             'php71' => '7.1',
-                             'php72' => '7.2',
-                             'php73' => '7.3',
-                             );
 
     protected $logname = self::LOG_NONE;
 
@@ -52,9 +42,9 @@ class Doctor extends Tasks {
         $stats = array_merge($this->checkPreRequisite(),
                              $this->checkAutoInstall());
 
-
         $phpBinaries = array('php'.str_replace('.', '', substr(PHP_VERSION, 0, 3)) => PHP_BINARY);
-        foreach(self::VERSIONS as $configName => $version) {
+        foreach(Config::PHP_VERSIONS as $shortVersion) {
+            $configName = "php$shortVersion";
             if (!empty($this->config->$configName)) {
                 $phpBinaries[$configName] = $this->config->$configName;
             }
@@ -257,7 +247,9 @@ class Doctor extends Tasks {
     private function checkPHPs($config) {
         $stats = array();
 
-        foreach(self::VERSIONS as $configVersion => $version) {
+        foreach(Config::PHP_VERSIONS as $shortVersion) {
+            $configVersion = "php$shortVersion";
+            $version = "$shortVersion[0].$shortVersion[1]";
             if (isset($config[$configVersion])) {
                 $stats[$configVersion] = $this->checkPHP($config[$configVersion], $version);
             } else {
@@ -277,11 +269,13 @@ class Doctor extends Tasks {
                            'Bazaar'    => 'bzr',
                            'Composer'  => 'composer',
                            'Zip'       => 'zip',
+                           'Rar'       => 'rar',
                            'Tarbz'     => 'tbz',
                            'Targz'     => 'tgz',
                           );
 
         foreach($optionals as $class => $section) {
+            $fullClass = "\Exakat\Vcs\\$class";
             $vcs = new $fullClass($this->config->project, $this->config->projects_root);
             $stats[$section] = $vcs->getInstallationInfo();
         }

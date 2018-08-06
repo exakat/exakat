@@ -138,7 +138,7 @@ class ProjectConfig extends Config {
             unset($ext);
         }
         
-        if (in_array($this->config['project_vcs'], array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', ))) {
+        if (in_array($this->config['project_vcs'], array('git', 'svn', 'bzr', 'hg', 'composer', 'tgz', 'tbz', 'zip', 'rar'))) {
             $this->config['git'] = false; // remove Git, which is by default
             $this->config[$this->config['project_vcs']] = true; // potentially, revert git
         }

@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -14,16 +14,12 @@ Label : PROJECT
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                8
-              Label : RIGHT
-                11
+              8
+              Label : DEFAULT
+                10
             Label : PPP
-              12
+              11
             Label : PPP
-              9
-              Label : LEFT
-                14
-              Label : RIGHT
-                16
+              13
+              Label : DEFAULT
+                15

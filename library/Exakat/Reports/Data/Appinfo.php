@@ -41,6 +41,7 @@ class Appinfo extends Data {
                             'Casting'                       => 'Php/CastingUsage',
                             'Resources'                     => 'Structures/ResourcesUsage',
                             'Nested Loops'                  => 'Structures/NestedLoops',
+                            'arrays_ With Callback'         => 'Arrays/WithCallback',
    
                             'Autoload'                      => 'Php/AutoloadUsage',
                             'include'                       => 'Structures/IncludeUsage',
@@ -178,6 +179,7 @@ class Appinfo extends Data {
 
                     'Constants' => array(
                             'Constants'           => 'Constants/ConstantUsage',
+                            'Case Insensitive'    => 'Constants/CaseInsensitiveConstants',
                             'Boolean'             => 'Boolean',
                             'Null'                => 'Null',
                             'Variable Constant'   => 'Constants/VariableConstant',

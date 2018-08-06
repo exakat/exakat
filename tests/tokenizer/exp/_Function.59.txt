@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -15,6 +15,22 @@ Label : PROJECT
               9
               Label : METHOD
                 12
+                Label : ARGUMENT
+                  16
+                  Label : NAME
+                    16
+                    Label : DEFINITION
+                      16
+                  Label : TYPEHINT
+                    14
+                Label : ARGUMENT
+                  17
+                  Label : NAME
+                    17
+                    Label : DEFINITION
+                      17
+                  Label : TYPEHINT
+                    14
                 Label : BLOCK
                   8
                   Label : EXPRESSION
@@ -27,24 +43,32 @@ Label : PROJECT
                         16
                       Label : ARGUMENT
                         17
-                Label : ARGUMENT
-                  16
-                  Label : NAME
-                    16
-                  Label : TYPEHINT
-                    14
-                Label : ARGUMENT
-                  17
-                  Label : NAME
-                    17
-                  Label : TYPEHINT
-                    14
                 Label : NAME
                   12
+                Label : RETURNED
+                  16
+                Label : RETURNED
+                  17
                 Label : RETURNTYPE
                   18
               Label : METHOD
                 22
+                Label : ARGUMENT
+                  16
+                  Label : NAME
+                    16
+                    Label : DEFINITION
+                      16
+                  Label : TYPEHINT
+                    14
+                Label : ARGUMENT
+                  24
+                  Label : NAME
+                    24
+                    Label : DEFINITION
+                      24
+                  Label : TYPEHINT
+                    18
                 Label : BLOCK
                   8
                   Label : EXPRESSION
@@ -57,20 +81,12 @@ Label : PROJECT
                         16
                       Label : ARGUMENT
                         24
-                Label : ARGUMENT
-                  16
-                  Label : NAME
-                    16
-                  Label : TYPEHINT
-                    14
-                Label : ARGUMENT
-                  24
-                  Label : NAME
-                    24
-                  Label : TYPEHINT
-                    18
                 Label : NAME
                   22
+                Label : RETURNED
+                  16
+                Label : RETURNED
+                  24
                 Label : RETURNTYPE
                   14
               Label : METHOD
@@ -79,6 +95,10 @@ Label : PROJECT
                   17
                   Label : NAME
                     17
+                    Label : DEFINITION
+                      17
+                    Label : DEFINITION
+                      17
                   Label : TYPEHINT
                     14
                 Label : BLOCK
@@ -115,6 +135,8 @@ Label : PROJECT
                         17
                 Label : NAME
                   27
+                Label : RETURNED
+                  17
                 Label : RETURNTYPE
                   18
               Label : METHOD
@@ -123,6 +145,8 @@ Label : PROJECT
                   24
                   Label : NAME
                     24
+                    Label : DEFINITION
+                      24
                   Label : TYPEHINT
                     18
                 Label : BLOCK
@@ -139,6 +163,8 @@ Label : PROJECT
                         24
                 Label : NAME
                   39
+                Label : RETURNED
+                  24
                 Label : RETURNTYPE
                   14
               Label : METHOD
@@ -147,6 +173,10 @@ Label : PROJECT
                   17
                   Label : NAME
                     17
+                    Label : DEFINITION
+                      17
+                    Label : DEFINITION
+                      17
                   Label : TYPEHINT
                     14
                 Label : BLOCK
@@ -183,6 +213,8 @@ Label : PROJECT
                         17
                 Label : NAME
                   43
+                Label : RETURNED
+                  17
                 Label : RETURNTYPE
                   18
               Label : METHOD
@@ -191,6 +223,8 @@ Label : PROJECT
                   24
                   Label : NAME
                     24
+                    Label : DEFINITION
+                      24
                   Label : TYPEHINT
                     18
                 Label : BLOCK
@@ -207,6 +241,8 @@ Label : PROJECT
                         24
                 Label : NAME
                   49
+                Label : RETURNED
+                  24
                 Label : RETURNTYPE
                   14
               Label : METHOD
@@ -215,6 +251,8 @@ Label : PROJECT
                   17
                   Label : NAME
                     17
+                    Label : DEFINITION
+                      17
                   Label : TYPEHINT
                     14
                 Label : BLOCK
@@ -229,6 +267,8 @@ Label : PROJECT
                         55
                 Label : NAME
                   53
+                Label : RETURNED
+                  17
                 Label : RETURNTYPE
                   18
               Label : METHOD
@@ -237,6 +277,8 @@ Label : PROJECT
                   24
                   Label : NAME
                     24
+                    Label : DEFINITION
+                      24
                   Label : TYPEHINT
                     18
                 Label : BLOCK
@@ -253,16 +295,40 @@ Label : PROJECT
                         24
                 Label : NAME
                   57
+                Label : RETURNED
+                  24
                 Label : RETURNTYPE
                   14
               Label : METHOD
                 61
+                Label : ARGUMENT
+                  65
+                  Label : NAME
+                    65
+                    Label : DEFINITION
+                      65
+                  Label : TYPEHINT
+                    63
+                Label : ARGUMENT
+                  17
+                  Label : NAME
+                    17
+                    Label : DEFINITION
+                      17
+                    Label : DEFINITION
+                      17
+                  Label : TYPEHINT
+                    14
                 Label : BLOCK
                   8
                   Label : EXPRESSION
                     67
                     Label : LEFT
                       66
+                      Label : DEFINITION
+                        66
+                      Label : DEFINITION
+                        66
                     Label : RIGHT
                       59
                   Label : EXPRESSION
@@ -295,6 +361,10 @@ Label : PROJECT
                         67
                         Label : LEFT
                           69
+                          Label : DEFINITION
+                            69
+                          Label : DEFINITION
+                            69
                         Label : RIGHT
                           33
                       Label : EXPRESSION
@@ -311,20 +381,24 @@ Label : PROJECT
                     19
                     Label : RETURN
                       66
-                Label : ARGUMENT
-                  65
-                  Label : NAME
-                    65
-                  Label : TYPEHINT
-                    63
-                Label : ARGUMENT
-                  17
-                  Label : NAME
-                    17
-                  Label : TYPEHINT
-                    14
+                Label : DEFINITION
+                  66
+                  Label : DEFINITION
+                    66
+                  Label : DEFINITION
+                    66
+                Label : DEFINITION
+                  69
+                  Label : DEFINITION
+                    69
+                  Label : DEFINITION
+                    69
+                Label : DEFINITION
+                  70
                 Label : NAME
                   61
+                Label : RETURNED
+                  66
                 Label : RETURNTYPE
                   14
               Label : METHOD
@@ -333,6 +407,8 @@ Label : PROJECT
                   17
                   Label : NAME
                     17
+                    Label : DEFINITION
+                      17
                   Label : TYPEHINT
                     14
                 Label : BLOCK
@@ -347,6 +423,8 @@ Label : PROJECT
                         76
                 Label : NAME
                   74
+                Label : RETURNED
+                  17
                 Label : RETURNTYPE
                   14
               Label : METHOD
@@ -387,6 +465,8 @@ Label : PROJECT
                   17
                   Label : NAME
                     17
+                    Label : DEFINITION
+                      17
                   Label : TYPEHINT
                     14
                 Label : BLOCK
@@ -401,6 +481,8 @@ Label : PROJECT
                         59
                 Label : NAME
                   81
+                Label : RETURNED
+                  17
                 Label : RETURNTYPE
                   14
               Label : NAME

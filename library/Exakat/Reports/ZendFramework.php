@@ -23,9 +23,10 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
 use Exakat\Data\ZendF3;
-use Exakat\Phpexec;
 use Exakat\Exakat;
+use Exakat\Phpexec;
 
 class ZendFramework extends Ambassador {
     const FILE_FILENAME  = 'report_zf';
@@ -51,15 +52,7 @@ class ZendFramework extends Ambassador {
                                  'namespaces' => 'Namespaces',
                                  'exceptions' => 'Exceptions');
 
-    private $compatibilities = array('53' => 'Compatibility PHP 5.3',
-                                     '54' => 'Compatibility PHP 5.4',
-                                     '55' => 'Compatibility PHP 5.5',
-                                     '56' => 'Compatibility PHP 5.6',
-                                     '70' => 'Compatibility PHP 7.0',
-                                     '71' => 'Compatibility PHP 7.1',
-                                     '72' => 'Compatibility PHP 7.2',
-                                     '73' => 'Compatibility PHP 7.3',
-                                     );
+    private $compatibilities = array();
 
     private $components = array(
                     'Components' => array(
@@ -107,6 +100,11 @@ class ZendFramework extends Ambassador {
 
     public function __construct($config) {
         parent::__construct($config);
+        
+        foreach(Config::PHP_VERSIONS as $shortVersion) {
+            $this->compatibilities[$shortVersion] = "Compatibility PHP $shortVersion[0].$shortVersion[1]";
+        }
+
         if ($this->themes != null) {
             $this->themesToShow      = 'ZendFramework';
             $this->timesToFix        = $this->themes->getTimesToFix();
@@ -1605,10 +1603,27 @@ HTML;
     }
     
     private function generateUnusedComponents() {
-        $composerJson = file_get_contents( $this->config->projects_root.'/projects/'.$this->config->project.'/code/composer.json');
+        $path = "{$this->config->projects_root}/projects/{$this->config->project}/code/composer.json";
+        if (!file_exists($path)) {
+            $html = $this->getBasedPage('empty');
+            $html = $this->injectBloc($html, 'TITLE', 'Components');
+            $html = $this->injectBloc($html, 'DESCRIPTION', 'No composer.json found');
+            $html = $this->injectBloc($html, 'CONTENT', '');
+            $this->putBasedPage('unusedComponents', $html);
+            
+            return;
+        }
+
+        $composerJson = file_get_contents("{$this->config->projects_root}/projects/{$this->config->project}/code/composer.json");
         $composer = json_decode($composerJson);
         if ($composer === null) {
-            die('No composer in ');
+            $html = $this->getBasedPage('empty');
+            $html = $this->injectBloc($html, 'TITLE', 'Components');
+            $html = $this->injectBloc($html, 'DESCRIPTION', 'No composer.json found');
+            $html = $this->injectBloc($html, 'CONTENT', '');
+            $this->putBasedPage('unusedComponents', $html);
+            
+            return;
         }
         $require = $composer->require;
 

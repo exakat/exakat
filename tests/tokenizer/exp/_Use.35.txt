@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -127,6 +127,8 @@ Label : PROJECT
               50
               Label : NAME
                 50
+                Label : DEFINITION
+                  50
             Label : BLOCK
               11
               Label : EXPRESSION
@@ -147,18 +149,6 @@ Label : PROJECT
             44
             Label : PPP
               45
-              Label : DEFINITION
-                41
-                Label : MEMBER
-                  46
-                Label : OBJECT
-                  38
-              Label : DEFINITION
-                41
-                Label : MEMBER
-                  46
-                Label : OBJECT
-                  38
           Label : USE
             8
             Label : USE

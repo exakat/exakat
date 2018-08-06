@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -31,6 +31,10 @@ Label : PROJECT
                 18
                 Label : NAME
                   18
+                  Label : DEFINITION
+                    18
+                  Label : DEFINITION
+                    18
               Label : ARGUMENT
                 19
                 Label : NAME
@@ -41,8 +45,12 @@ Label : PROJECT
                   21
                   Label : GLOBAL
                     22
+                    Label : DEFINITION
+                      22
                   Label : GLOBAL
                     23
+                    Label : DEFINITION
+                      23
                 Label : EXPRESSION
                   24
                   Label : RETURN
@@ -81,5 +89,21 @@ Label : PROJECT
                             34
                     Label : VARIABLE
                       22
+              Label : DEFINITION
+                22
+                Label : DEFINITION
+                  22
+              Label : DEFINITION
+                23
+                Label : DEFINITION
+                  23
+              Label : RETURNED
+                22
+              Label : RETURNED
+                18
+              Label : RETURNED
+                23
+              Label : RETURNED
+                18
           Label : ARGUMENT
             38

@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -22,16 +22,14 @@ Label : PROJECT
           Label : RIGHT
             8
             Label : LEFT
-              12
-              Label : AT
-                6
-                Label : INDEX
-                  15
-                  Label : LEFT
-                    14
-                  Label : RIGHT
-                    16
-                Label : VARIABLE
+              6
+              Label : INDEX
+                14
+                Label : LEFT
                   13
+                Label : RIGHT
+                  15
+              Label : VARIABLE
+                12
             Label : RIGHT
-              17
+              16

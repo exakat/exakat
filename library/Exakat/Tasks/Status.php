@@ -48,20 +48,11 @@ class Status extends Tasks {
                     $projectStep = '';
                 }
 
-                $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-                $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
-
                 $status = array('Running'  => 'Project',
                                 'project'  => $projectStatus,
-                                'in graph' => $inGraph,
                                 'step'     => $projectStep,);
             } else {
                 $status['Running'] = 'idle';
-
-                $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-                if (isset($res->results[0])) {
-                    $status['Project'] = $res->results[0];
-                }
             }
 
             $this->display($status, $this->config->json);

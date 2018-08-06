@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -8,20 +8,18 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          5
-          Label : AT
-            13
-            Label : ARGUMENT
-              11
-              Label : CONCAT
-                10
-                Label : METHOD
+          12
+          Label : ARGUMENT
+            10
+            Label : CONCAT
+              9
+              Label : METHOD
+                6
+                Label : ARGUMENT
                   7
-                  Label : ARGUMENT
-                    8
-                  Label : NAME
-                    7
-                Label : OBJECT
+                Label : NAME
                   6
-              Label : CONCAT
-                12
+              Label : OBJECT
+                5
+            Label : CONCAT
+              11

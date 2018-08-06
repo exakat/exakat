@@ -26,16 +26,11 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UnsetOnArguments extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/Arguments',
-                    );
-    }
-    
     public function analyze() {
         // unset($argument);
         $this->atomIs('Unset')
              ->outIs('ARGUMENT')
-             ->analyzerIs('Variables/Arguments')
+             ->isArgument()
              ->back('first');
         $this->prepareQuery();
 
@@ -43,7 +38,7 @@ class UnsetOnArguments extends Analyzer {
         $this->atomIs('Cast')
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
-             ->analyzerIs('Variables/Arguments')
+             ->isArgument()
              ->back('first');
         $this->prepareQuery();
     }

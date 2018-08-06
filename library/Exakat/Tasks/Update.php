@@ -54,7 +54,7 @@ class Update extends Tasks {
     }
     
     private function runDefault() {
-        $paths = glob($this->config->projects_root.'/projects/*');
+        $paths = glob("{$this->config->projects_root}/projects/*");
         $projects = array_map('basename', $paths);
         $projects = array_diff($projects, array('test'));
         
@@ -62,7 +62,14 @@ class Update extends Tasks {
         shuffle($projects);
         foreach($projects as $project) {
             display("updating $project".PHP_EOL);
-            $this->update($project);
+
+            $args = array ( 1 => 'update',
+                            2 => '-p',
+                            3 => $project,
+            );
+            $updateConfig = new Config($args);
+
+            $this->update($updateConfig);
         }
     }
     
@@ -72,69 +79,66 @@ class Update extends Tasks {
         if (!file_exists($path)) {
             throw new NoSuchProject($this->config->project);
         }
+
+        if (!is_dir($path)) {
+            throw new NoSuchProject($this->config->project);
+        }
     
-        if (!file_exists($path.'/code')) {
+        if (!file_exists("$path/code")) {
             throw new NoCodeInProject($this->config->project);
         }
         
-        $this->update($this->config->project);
+        $this->update($this->config);
     }
     
-    private function update($project) {
-        $path = $this->config->projects_root.'/projects/'.$project;
-        
+    private function update(Config $updateConfig) {
         switch(true) {
             // symlink case
-            case $this->config->project_vcs === 'zip' :
-            case $this->config->project_vcs === 'tgz' :
-            case $this->config->project_vcs === 'tbz' :
-            case $this->config->project_vcs === 'symlink' :
+            case $updateConfig->project_vcs === 'rar' :
+            case $updateConfig->project_vcs === 'zip' :
+            case $updateConfig->project_vcs === 'tgz' :
+            case $updateConfig->project_vcs === 'tbz' :
+            case $updateConfig->project_vcs === 'symlink' :
+            case $updateConfig->project_vcs === 'copy' :
                 // Nothing to do just ignore
                 break;
 
-            // copy case
-            case $this->config->copy === true :
-                $vcs = new Copy($project, $this->config->projects_root);
-                $new = $vcs->update();
-                display("Source copied again");
-                break;
-
             // svn case
-            case $this->config->project_vcs === 'svn' :
-                display('SVN update '.$project);
-                $vcs = new Svn($project, $this->config->projects_root);
+            case $updateConfig->project_vcs === 'svn' :
+                display("SVN update $updateConfig->project");
+                $vcs = new Svn($updateConfig->project, $updateConfig->projects_root);
                 $new = $vcs->update();
                 display("SVN updated to revision $new");
                 break;
 
             // bazaar case
-            case $this->config->project_vcs === 'bzr' :
-                display('Bazaar update '.$project);
-                $vcs = new Bazaar($project, $this->config->projects_root);
+            case $updateConfig->project_vcs === 'bzr' :
+                display("Bazaar update $updateConfig->project");
+                $vcs = new Bazaar($updateConfig->project, $updateConfig->projects_root);
                 $new = $vcs->update();
                 display( "Bazaar updated to revision $new");
                 break;
 
             // mercurial
-            case $this->config->project_vcs === 'hg' :
-                display('Mercurial update '.$project);
-                $vcs = new Mercurial($project, $this->config->projects_root);
+            case $updateConfig->project_vcs === 'hg' :
+                display("Mercurial update $updateConfig->project");
+                $vcs = new Mercurial($updateConfig->project, $updateConfig->projects_root);
                 $new = $vcs->update();
                 display("Mercurial updated to revision $new");
                 break;
 
             // composer case
-            case $this->config->project_vcs === 'composer' :
-                display("Composer update $project");
-                $vcs = new Composer($project, $this->config->projects_root);
+            case $updateConfig->project_vcs === 'composer' :
+                display("Composer update $updateConfig->project");
+                $vcs = new Composer($updateConfig->project, $updateConfig->projects_root);
                 $new = $vcs->update();
                 display("Composer updated to version $new");
                 break;
 
             // Git case
-            case $this->config->project_vcs === 'git' :
-                display('Git pull for '.$project);
-                $vcs = new Git($project, $this->config->projects_root);
+            case $updateConfig->project_vcs === 'git' :
+                display("Git pull for $updateConfig->project");
+                $vcs = new Git($updateConfig->project, $updateConfig->projects_root);
                 $new = $vcs->update();
                 display("Updated git version $new");
                 break;
@@ -145,8 +149,7 @@ class Update extends Tasks {
         }
         
         display('Running files');
-        $updateCache = new Files($this->gremlin, new Config(array(1 => '-p',
-                                                                  2 => $project)));
+        $updateCache = new Files($this->gremlin, $updateConfig);
         try {
             $updateCache->run();
         } catch (NoFileToProcess $e) {

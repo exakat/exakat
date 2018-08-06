@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -73,13 +73,11 @@ Label : PROJECT
                         7
                       Label : RIGHT
                         33
-                        Label : AT
-                          34
                     Label : EXPRESSION
                       18
                       Label : BREAK
                         19
-              Label : NAME
+              Label : CONDITION
                 10
           Label : SOURCE
             6

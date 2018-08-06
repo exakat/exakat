@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -17,11 +17,9 @@ Label : PROJECT
               7
             Label : CONCAT
               9
-              Label : AT
+              Label : ARGUMENT
                 10
-                Label : ARGUMENT
-                  11
-                Label : NAME
-                  10
+              Label : NAME
+                9
             Label : CONCAT
-              12
+              11

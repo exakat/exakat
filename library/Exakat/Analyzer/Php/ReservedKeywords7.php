@@ -31,7 +31,7 @@ class ReservedKeywords7 extends Analyzer {
     public function analyze() {
         $keywords = $this->loadIni('php_reserved_types.ini', 'type');
         
-        $this->atomIs(array('Class', 'Trait', 'Interface'))
+        $this->atomIs(self::$CIT)
              ->outIs('NAME')
              ->codeIs($keywords)
              ->back('first');

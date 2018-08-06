@@ -24,6 +24,7 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
+use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Helpers\Results;
@@ -67,18 +68,15 @@ class Ambassador extends Reports {
                                  'Type/Mime'      => 'Mime types',
                                  );
 
-    private $compatibilities = array('53' => 'Compatibility PHP 5.3',
-                                     '54' => 'Compatibility PHP 5.4',
-                                     '55' => 'Compatibility PHP 5.5',
-                                     '56' => 'Compatibility PHP 5.6',
-                                     '70' => 'Compatibility PHP 7.0',
-                                     '71' => 'Compatibility PHP 7.1',
-                                     '72' => 'Compatibility PHP 7.2',
-                                     '73' => 'Compatibility PHP 7.3',
-                                     );
+    private $compatibilities = array();
 
     public function __construct($config) {
         parent::__construct($config);
+
+        foreach(Config::PHP_VERSIONS as $shortVersion) {
+            $this->compatibilities[$shortVersion] = "Compatibility PHP $shortVersion[0].$shortVersion[1]";
+        }
+
         if ($this->themes !== null ){
             $this->frequences        = $this->themes->getFrequences();
             $this->timesToFix        = $this->themes->getTimesToFix();
@@ -89,7 +87,7 @@ class Ambassador extends Reports {
 
     public function dependsOnAnalysis() {
         return array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
-                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
+                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', //'CompatibilityPHP74',
                      'Analyze', 'Preferences', 'Inventory', 'Performances',
                      'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Suggestions',
                      'Custom',
@@ -127,7 +125,7 @@ class Ambassador extends Reports {
                 $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
             $compatibilities = '';
-            $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%"');
+            $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) FROM themas WHERE thema LIKE "Compatibility%" ORDER BY thema DESC');
             while($row = $res->fetchArray(\SQLITE3_NUM)) {
                 $compatibilities .= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
             }
@@ -152,7 +150,7 @@ class Ambassador extends Reports {
     }
 
     protected function injectBloc($html, $bloc, $content) {
-        return str_replace("{{".$bloc."}}", $content, $html);
+        return str_replace('{{'.$bloc.'}}', $content, $html);
     }
 
     public function generate($folder, $name = self::FILE_FILENAME) {
@@ -209,7 +207,7 @@ class Ambassador extends Reports {
         
         // Compatibility
         $this->generateCompilations();
-        $res = $this->sqlite->query('SELECT SUBSTR(thema, -2) AS version FROM themas WHERE thema LIKE "Compatibility%"');
+        $res = $this->sqlite->query('SELECT DISTINCT SUBSTR(thema, -2) AS version FROM themas WHERE thema LIKE "Compatibility%"');
         $list = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $list[] = 'CompatibilityPHP'.$row['version'];
@@ -357,62 +355,6 @@ class Ambassador extends Reports {
         }
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', implode(PHP_EOL, $docHTML));
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
-
-        $this->putBasedPage('analyzers_doc', $finalHTML);
-    }
-
-    private function generateDocumentation2(){
-        $datas = array();
-        $baseHTML = $this->getBasedPage('analyzers_doc');
-        $analyzersDocHTML = "";
-
-        $analyzersList = array_merge($this->themes->getThemeAnalyzers($this->themesToShow),
-                                     $this->themes->getThemeAnalyzers('Preferences'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP53'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP54'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP55'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP56'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP70'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
-                                     $this->themes->getThemeAnalyzers('CompatibilityPHP73')
-                                     );
-        $analyzersList = array_keys(array_count_values($analyzersList));
-                                     
-        foreach($analyzersList as $analyzerName) {
-            $analyzer = $this->themes->getInstance($analyzerName, null, $this->config);
-            $description = $this->getDocs($analyzerName);
-
-            $analyzersDocHTML.='<h2><a href="analyzers_doc.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
-
-            $badges = array();
-            $v = $description->getVersionAdded();
-            if(!empty($v)){
-                $badges[] = '[Since '.$v.']';
-            }
-            $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
-
-            $versionCompatibility = $analyzer->getPhpversion();
-            if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
-                if (strpos($versionCompatibility, '+') !== false) {
-                    $versionCompatibility = substr($versionCompatibility, 0, -1).' and more recent ';
-                } elseif (strpos($versionCompatibility, '-') !== false) {
-                    $versionCompatibility = ' older than '.substr($versionCompatibility, 0, -1);
-                }
-                $badges[] = '[ PHP '.$versionCompatibility.']';
-            }
-
-            $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML .= '<p>'.$this->setPHPBlocs($description['description']).'</p>';
-
-            $v = $description->getClearPHP();
-            if(!empty($v)){
-                $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
-            }
-        }
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyzersDocHTML);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
 
@@ -1548,7 +1490,7 @@ SQL;
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>', 4 - count($data));
 
-        return array('html'   => $html, 
+        return array('html'   => $html,
                      'script' => $dataScript);
     }
 
@@ -1645,6 +1587,7 @@ SQL;
                             $this->themes->getThemeAnalyzers('CompatibilityPHP71'),
                             $this->themes->getThemeAnalyzers('CompatibilityPHP72'),
                             $this->themes->getThemeAnalyzers('CompatibilityPHP73'),
+                            $this->themes->getThemeAnalyzers('CompatibilityPHP74'),
                             array('Project/Dump')
                             );
         $list = makeList($list);
@@ -1653,7 +1596,8 @@ SQL;
 SELECT analyzer AS analyzer FROM resultsCounts
 WHERE analyzer NOT IN ($list) AND 
       count = 0 AND
-      analyzer like "%/%"
+      analyzer LIKE "%/%" AND
+      analyzer NOT LIKE "Common/%"
 SQL;
         $result = $this->sqlite->query($query);
 
@@ -2001,10 +1945,10 @@ JAVASCRIPTCODE;
         $list = makeList($list);
 
         $sqlQuery = <<<SQL
-            SELECT fullcode, file, line, analyzer
-                FROM results
-                WHERE analyzer IN ($list)
-                ORDER BY file, line
+SELECT fullcode, file, line, analyzer
+    FROM results
+    WHERE analyzer IN ($list)
+    ORDER BY file, line
 
 SQL;
         $result = $this->sqlite->query($sqlQuery);
@@ -2759,7 +2703,7 @@ SQL
         }
         foreach($list as &$l) {
             sort($l);
-        } 
+        }
         
         if (empty($list)) {
             $list = array(array());

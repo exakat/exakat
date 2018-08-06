@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -10,54 +10,52 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONST
-            12
+            11
             Label : CONST
-              12
+              11
               Label : NAME
-                13
+                12
               Label : VALUE
+                14
+          Label : CONST
+            11
+            Label : CONST
+              11
+              Label : NAME
                 15
-          Label : CONST
-            12
-            Label : CONST
-              12
-              Label : NAME
-                16
               Label : VALUE
+                17
+          Label : CONST
+            11
+            Label : CONST
+              11
+              Label : NAME
                 18
-          Label : CONST
-            12
-            Label : CONST
-              12
-              Label : NAME
-                19
               Label : VALUE
-                25
+                24
                 Label : CLASS
-                  21
+                  20
                 Label : CONSTANT
-                  23
+                  22
           Label : METHOD
-            22
+            21
             Label : ARGUMENT
-              29
+              28
             Label : BLOCK
-              31
+              30
               Label : EXPRESSION
-                29
+                28
             Label : NAME
-              22
+              21
           Label : NAME
             6
           Label : PPP
             7
             Label : PPP
-              9
-              Label : LEFT
-                8
-              Label : RIGHT
-                11
+              8
+              Label : DEFAULT
+                10
           Label : PPP
-            26
+            25
             Label : PPP
-              27
+              26

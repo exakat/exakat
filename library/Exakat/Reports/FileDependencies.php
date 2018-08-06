@@ -45,6 +45,7 @@ class FileDependencies extends Reports {
         $nodes = array();
         $cnodes = 0;
         
+        $list = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($nodes[$row['including']])) {
                 $row['including'] = $nodes[$row['including']];

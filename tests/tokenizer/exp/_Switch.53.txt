@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -313,7 +313,7 @@ Label : PROJECT
                             12
                             Label : ARGUMENT
                               55
-              Label : NAME
+              Label : CONDITION
                 12
                 Label : INDEX
                   13

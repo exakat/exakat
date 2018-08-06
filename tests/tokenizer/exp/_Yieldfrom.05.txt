@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -19,6 +19,8 @@ Label : PROJECT
                 12
                 Label : LEFT
                   11
+                  Label : DEFINITION
+                    11
                 Label : RIGHT
                   13
                   Label : YIELD
@@ -51,9 +53,25 @@ Label : PROJECT
                         21
                       Label : OBJECT
                         20
+                        Label : DEFINITION
+                          20
                     Label : ARGUMENT
                       23
                   Label : RIGHT
                     11
+          Label : DEFINITION
+            11
+            Label : DEFINITION
+              11
+          Label : DEFINITION
+            17
+          Label : DEFINITION
+            20
+            Label : DEFINITION
+              20
+          Label : DEFINITION
+            23
           Label : NAME
             5
+          Label : RETURNED
+            20

@@ -32,20 +32,22 @@ use Brightzone\GremlinDriver\Connection;
 use stdClass;
 
 class GSNeo4j extends Graph {
-    const CHECKED = true;
-    const UNCHECKED = false;
+    const CHECKED     = true;
+    const UNCHECKED   = false;
+    const UNAVAILABLE = 2;
     
     private $status     = self::UNCHECKED;
     
     private $db         = null;
 
-    private $gremlinVersion = '';
+    private $gremlinVersion = '3.3';
     
     public function __construct($config) {
         parent::__construct($config);
 
         if (!file_exists("{$this->config->gsneo4j_folder}/lib/")) {
             // No local production, just skip init.
+            $this->status = self::UNAVAILABLE;
             return;
         }
         
@@ -60,9 +62,6 @@ class GSNeo4j extends Graph {
                                           'graph'    => 'graph',
                                           'emptySet' => true,
                                    ) );
-        if ($this->gremlinVersion === '3.3') {
-//            $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', true);
-        }
     }
     
     public function resetConnection() {
@@ -72,9 +71,6 @@ class GSNeo4j extends Graph {
                                           'graph'    => 'graph',
                                           'emptySet' => true,
                                    ) );
-        if ($this->gremlinVersion === '3.3') {
-//            $this->db->message->registerSerializer('\Brightzone\GremlinDriver\Serializers\Gson3', true);
-        }
         $this->status = self::UNCHECKED;
     }
     
@@ -84,7 +80,9 @@ class GSNeo4j extends Graph {
     }
 
     public function query($query, $params = array(), $load = array()) {
-        if ($this->status === self::UNCHECKED) {
+        if ($this->status === self::UNAVAILABLE) {
+            return new GraphResults();
+        } elseif ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
 
@@ -165,6 +163,10 @@ class GSNeo4j extends Graph {
     }
     
     public function start() {
+        if (!file_exists("{$this->config->gsneo4j_folder}/conf")) {
+            throw new GremlinException('No graphdb found.');
+        }
+        
         if (!file_exists("{$this->config->gsneo4j_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml")) {
             copy( "{$this->config->dir_root}/server/gsneo4j/gsneo4j.{$this->gremlinVersion}.yaml",
                   "{$this->config->gsneo4j_folder}/conf/gsneo4j.{$this->gremlinVersion}.yaml");
@@ -218,7 +220,7 @@ class GSNeo4j extends Graph {
             shell_exec("cd {$this->config->gsneo4j_folder}; ./bin/gremlin-server.sh stop; rm -rf run/gremlin.pid");
         }
         
-        if (file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
+        if (file_exists("{$this->config->gsneo4j_folder}/db/gsneo4j.pid")) {
             display('stop gremlin server 3.2.x');
             shell_exec("kill -9 \$(cat {$this->config->gsneo4j_folder}/db/gsneo4j.pid) 2>> gremlin.log; rm -f {$this->config->gsneo4j_folder}/db/gsneo4j.pid");
         }

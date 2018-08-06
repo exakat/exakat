@@ -81,7 +81,7 @@ class CloneType1 extends Plugin {
 
             case 'Comparison' :
             case 'Assignation' :
-            case 'Coalesce' : 
+            case 'Coalesce' :
                 $atom->ctype1 = $extras['LEFT']->ctype1 . $atom->code . $extras['RIGHT']->ctype1;
                 break;
 
@@ -119,7 +119,7 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Ifthen' :
-            case 'Ternary' : 
+            case 'Ternary' :
                 $atom->ctype1 = 'if ('.$extras['CONDITION']->ctype1.') '.$extras['THEN']->ctype1;
                 if (isset($extras['ELSE'])) {
                     $atom->ctype1 .= 'else '.$extras['ELSE']->ctype1;
@@ -258,10 +258,6 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = $atom->code . $extras['NOT']->ctype1;
                 break;
 
-            case 'Noscream' :
-                $atom->ctype1 = $atom->code . $extras['AT']->ctype1;
-                break;
-
             case 'New' :
                 $atom->ctype1 = $atom->code . $extras['NEW']->ctype1;
                 break;
@@ -299,12 +295,12 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Functioncall' :
-            case 'Echo'   : 
-            case 'Print'  : 
-            case 'Include': 
-            case 'Empty'  : 
-            case 'Isset'  : 
-            case 'List'   : 
+            case 'Echo'   :
+            case 'Print'  :
+            case 'Include':
+            case 'Empty'  :
+            case 'Isset'  :
+            case 'List'   :
             case 'Unset'  :
             case 'Exit'   :
             case 'Eval'   :
@@ -312,14 +308,14 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = strtolower($atom->atom) . '('.implode(',', $ctype1).')';
                 break;
 
-            case 'Parenthesis': 
+            case 'Parenthesis':
                 $atom->ctype1 = '('.$extras['CODE']->ctype1.')';
                 break;
 
-            case 'Classanonymous' : 
-            case 'Class' : 
-            case 'Trait' : 
-            case 'Interface' : 
+            case 'Classanonymous' :
+            case 'Class' :
+            case 'Trait' :
+            case 'Interface' :
                 $atom->ctype1 = $atom->atom;
                 break;
 
@@ -346,7 +342,7 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Declare' :
-                // only one argument for declare ? 
+                // only one argument for declare ?
                 $atom->ctype1 = 'label'.$extras[0]->ctype1;
                 break;
                 

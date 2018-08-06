@@ -65,15 +65,7 @@ class Owasp extends Ambassador {
                                  'namespaces' => 'Namespaces',
                                  'exceptions' => 'Exceptions');
 
-    private $compatibilities = array('53' => 'Compatibility PHP 5.3',
-                                     '54' => 'Compatibility PHP 5.4',
-                                     '55' => 'Compatibility PHP 5.5',
-                                     '56' => 'Compatibility PHP 5.6',
-                                     '70' => 'Compatibility PHP 7.0',
-                                     '71' => 'Compatibility PHP 7.1',
-                                     '72' => 'Compatibility PHP 7.2',
-                                     '73' => 'Compatibility PHP 7.3',
-                                     );
+    private $compatibilities = array();
 
     private $components = array(
 'A1:2017-Injection' => array(
@@ -135,7 +127,12 @@ class Owasp extends Ambassador {
 
     public function __construct($config) {
         parent::__construct($config);
-        if ($this->config !== null) {
+
+        foreach(Config::PHP_VERSIONS as $shortVersion) {
+            $this->compatibilities[$shortVersion] = "Compatibility PHP $shortVersion[0].$shortVersion[1]";
+        }
+
+        if ($this->themes !== null) {
             $this->themesToShow      = 'Security';
             $this->timesToFix        = $this->themes->getTimesToFix();
             $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);

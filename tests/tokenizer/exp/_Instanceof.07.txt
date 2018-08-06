@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -97,5 +97,5 @@ Label : PROJECT
                   17
                   Label : RETURN
                     18
-          Label : NAME
+          Label : CONDITION
             6

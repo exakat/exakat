@@ -132,6 +132,10 @@ class Initproject extends Tasks {
             $vcs = 'zip';
             $projectName = basename($repositoryURL);
             $projectName = str_replace('.zip', '', $projectName);
+        } elseif ($this->config->rar === true) {
+            $vcs = 'rar';
+            $projectName = basename($repositoryURL);
+            $projectName = str_replace('.rar', '', $projectName);
         } elseif ($this->config->tgz === true) {
             $vcs = 'tgz';
             $projectName = basename($repositoryURL);

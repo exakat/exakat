@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -45,6 +45,10 @@ Label : PROJECT
                 16
                 Label : LEFT
                   15
+                  Label : DEFINITION
+                    15
+                  Label : DEFINITION
+                    15
                 Label : RIGHT
                   17
                   Label : ARGUMENT
@@ -73,6 +77,12 @@ Label : PROJECT
                 17
                 Label : ARGUMENT
                   6
+          Label : DEFINITION
+            15
+            Label : DEFINITION
+              15
+            Label : DEFINITION
+              15
           Label : DEFINITION
             5
             Label : ARGUMENT

@@ -43,7 +43,7 @@ class EmptyClass extends Analyzer {
         $this->atomIs('Class')
              ->hasOut('EXTENDS')
              ->analyzerIsNot('Exceptions/DefinedExceptions')
-             ->hasNoOut(array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE'));
+             ->hasNoOut(self::$CLASS_ELEMENTS);
         $this->prepareQuery();
     }
 }

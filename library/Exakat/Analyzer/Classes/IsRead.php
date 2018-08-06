@@ -36,7 +36,7 @@ class IsRead extends Analyzer {
         $atoms = array('Member', 'Staticproperty');
         
         $this->atomIs($atoms)
-             ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
+             ->hasIn(array('NOT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
                            'INDEX', 'VALUE', 'NAME', 'MEMBER', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
                            'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL'));
             // note : NAME is for Switch!!

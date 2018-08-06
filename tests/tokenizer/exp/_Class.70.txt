@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -27,6 +27,8 @@ Label : PROJECT
                   8
                   Label : NAME
                     8
+                    Label : DEFINITION
+                      8
                 Label : BLOCK
                   12
                   Label : EXPRESSION

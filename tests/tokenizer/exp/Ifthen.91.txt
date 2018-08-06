@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -13,6 +13,26 @@ Label : PROJECT
             7
             Label : NAME
               7
+              Label : DEFINITION
+                7
+              Label : DEFINITION
+                7
+              Label : DEFINITION
+                7
+              Label : DEFINITION
+                7
+              Label : DEFINITION
+                7
+              Label : DEFINITION
+                7
+              Label : DEFINITION
+                7
+              Label : DEFINITION
+                7
+              Label : DEFINITION
+                7
+              Label : DEFINITION
+                7
           Label : BLOCK
             8
             Label : EXPRESSION
@@ -211,6 +231,12 @@ Label : PROJECT
                                 51
                                 Label : LEFT
                                   50
+                                  Label : DEFINITION
+                                    50
+                                  Label : DEFINITION
+                                    50
+                                  Label : DEFINITION
+                                    50
                                 Label : RIGHT
                                   56
                                   Label : CONDITION
@@ -297,8 +323,44 @@ Label : PROJECT
                           32
                           Label : INDEX
                             31
+                            Label : DEFINITION
+                              31
+                            Label : DEFINITION
+                              31
+                            Label : DEFINITION
+                              31
                           Label : VALUE
                             33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
+                            Label : DEFINITION
+                              33
                   Label : THEN
                     8
                     Label : EXPRESSION
@@ -327,6 +389,60 @@ Label : PROJECT
                       13
                   Label : OBJECT
                     12
+          Label : DEFINITION
+            31
+            Label : DEFINITION
+              31
+            Label : DEFINITION
+              31
+            Label : DEFINITION
+              31
+          Label : DEFINITION
+            33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
+          Label : DEFINITION
+            50
+            Label : DEFINITION
+              50
+            Label : DEFINITION
+              50
+            Label : DEFINITION
+              50
+          Label : DEFINITION
+            5
+            Label : ARGUMENT
+              33
+            Label : NAME
+              5
           Label : NAME
             5
         Label : EXPRESSION

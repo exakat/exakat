@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -25,6 +25,10 @@ Label : PROJECT
                   12
               Label : OBJECT
                 11
+          Label : DEFINITION
+            11
+          Label : DEFINITION
+            13
           Label : USE
             7
           Label : USE

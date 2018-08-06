@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -13,6 +13,10 @@ Label : PROJECT
             9
             Label : NAME
               9
+              Label : DEFINITION
+                9
+              Label : DEFINITION
+                9
             Label : TYPEHINT
               7
           Label : BLOCK
@@ -33,6 +37,8 @@ Label : PROJECT
                       19
                     Label : VARIABLE
                       17
+                      Label : DEFINITION
+                        17
               Label : THEN
                 10
                 Label : EXPRESSION
@@ -49,6 +55,12 @@ Label : PROJECT
               25
               Label : LEFT
                 28
+                Label : DEFINITION
+                  28
+                Label : DEFINITION
+                  28
+                Label : DEFINITION
+                  28
               Label : RIGHT
                 34
                 Label : LEFT
@@ -143,5 +155,21 @@ Label : PROJECT
                           9
                 Label : RIGHT
                   35
+          Label : DEFINITION
+            17
+            Label : DEFINITION
+              17
+          Label : DEFINITION
+            24
+          Label : DEFINITION
+            28
+            Label : DEFINITION
+              28
+            Label : DEFINITION
+              28
+            Label : DEFINITION
+              28
+          Label : DEFINITION
+            36
           Label : NAME
             5

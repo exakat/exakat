@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -13,19 +13,19 @@ Label : PROJECT
             7
             Label : CONST
               7
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 15
                 Label : CLASS
                   6
                 Label : CONSTANT
                   8
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 15
                 Label : CLASS
                   6
                 Label : CONSTANT
                   8
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 15
                 Label : CLASS
                   6

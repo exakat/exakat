@@ -46,7 +46,7 @@ abstract class Reports {
                                           'RadwellCode', 'Melis', 'Grade', 'Weekly', 'Codacy', 'Scrutinizer',
                                           'FacetedJson', 'Json', 'OnepageJson', 'Marmelab', 'Simpletable',
                                           'Codeflower', 'Dependencywheel',
-                                          'DailyTodo', 
+                                          'DailyTodo',
                                           );
 
     protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55',
@@ -73,7 +73,7 @@ abstract class Reports {
             $this->sqlite = new \Sqlite3($path, \SQLITE3_OPEN_READONLY);
 
             $this->datastore = new Dump($this->config);
-            $this->themes    = new Themes($this->config->dir_root.'/data/analyzers.sqlite');
+            $this->themes    = new Themes("{$this->config->dir_root}/data/analyzers.sqlite");
 
             // Default analyzers
             $analyzers = array_merge($this->themes->getThemeAnalyzers($this->config->thema),
@@ -85,6 +85,10 @@ abstract class Reports {
     }
 
     protected function _generate($analyzerList) {}
+
+    public static function getReportClass($report) {
+        return "\\Exakat\\Reports\\$report";
+    }
     
     public function generate($folder, $name) {
         if (empty($name)) {

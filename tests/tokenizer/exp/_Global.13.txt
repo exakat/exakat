@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -10,21 +10,25 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : METHOD
-            36
+            35
             Label : ARGUMENT
-              37
+              36
             Label : BLOCK
-              39
+              38
               Label : EXPRESSION
-                40
+                39
                 Label : GLOBAL
-                  41
+                  40
               Label : EXPRESSION
                 7
                 Label : STATIC
-                  42
+                  41
+            Label : DEFINITION
+              40
+            Label : DEFINITION
+              41
             Label : NAME
-              36
+              35
           Label : NAME
             6
           Label : PPP
@@ -34,44 +38,36 @@ Label : PROJECT
           Label : PPP
             11
             Label : PPP
-              13
-              Label : LEFT
-                12
-              Label : RIGHT
-                14
+              12
+              Label : DEFAULT
+                13
             Label : PPP
-              15
+              14
           Label : PPP
             11
             Label : PPP
-              17
+              16
             Label : PPP
-              13
-              Label : LEFT
-                19
-              Label : RIGHT
-                21
+              18
+              Label : DEFAULT
+                20
           Label : PPP
-            22
+            21
             Label : PPP
-              23
+              22
             Label : PPP
-              13
-              Label : LEFT
-                25
-              Label : RIGHT
-                21
+              24
+              Label : DEFAULT
+                20
             Label : PPP
-              27
+              26
           Label : PPP
-            29
+            28
             Label : PPP
-              30
+              29
             Label : PPP
-              13
-              Label : LEFT
-                32
-              Label : RIGHT
-                21
+              31
+              Label : DEFAULT
+                20
             Label : PPP
-              34
+              33

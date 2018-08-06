@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -10,12 +10,10 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            9
+            8
             Label : EXPRESSION
-              10
+              9
           Label : SOURCE
             6
-            Label : AT
-              7
           Label : VALUE
-            8
+            7

@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class TooManyFinds extends Analyzer {
     public function analyze() {
         // class x { function findY() {}}
-        $this->atomIs(array('Class', 'Interface', 'Trait'))
+        $this->atomIs(self::$CIT)
              ->raw('where( __.out("METHOD").hasLabel("Method")
                              .out("NAME").filter{ (it.get().value("fullcode") =~ "^find.+?" ).getCount() > 0 }.count().is(gte(5)) )');
         $this->prepareQuery();

@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -51,6 +51,8 @@ Label : PROJECT
             30
           Label : DEFINITION
             19
+          Label : DEFINITION
+            19
             Label : ARGUMENT
               17
             Label : NAME
@@ -71,12 +73,16 @@ Label : PROJECT
               25
               Label : NAME
                 25
+                Label : DEFINITION
+                  25
               Label : TYPEHINT
                 24
             Label : ARGUMENT
               28
               Label : NAME
                 28
+                Label : DEFINITION
+                  28
               Label : TYPEHINT
                 26
             Label : BLOCK
@@ -125,8 +131,12 @@ Label : PROJECT
                           41
                         Label : OBJECT
                           30
+            Label : DEFINITION, RETURNED
+              15
             Label : NAME
               21
+            Label : RETURNED
+              28
           Label : NAME
             19
         Label : EXPRESSION

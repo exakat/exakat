@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -23,6 +23,16 @@ Label : PROJECT
                     14
                   Label : VARIABLE
                     12
+                    Label : DEFINITION
+                      12
+                    Label : DEFINITION
+                      12
+                    Label : DEFINITION
+                      12
+                    Label : DEFINITION
+                      12
+                    Label : DEFINITION
+                      12
               Label : THEN
                 9
                 Label : EXPRESSION
@@ -59,6 +69,8 @@ Label : PROJECT
               27
               Label : LEFT
                 26
+                Label : DEFINITION
+                  26
               Label : RIGHT
                 28
                 Label : CONCAT
@@ -141,6 +153,26 @@ Label : PROJECT
                 9
                 Label : EXPRESSION
                   7
+          Label : DEFINITION
+            12
+            Label : DEFINITION
+              12
+            Label : DEFINITION
+              12
+            Label : DEFINITION
+              12
+            Label : DEFINITION
+              12
+            Label : DEFINITION
+              12
+          Label : DEFINITION
+            16
+          Label : DEFINITION
+            26
+            Label : DEFINITION
+              26
+          Label : DEFINITION, RETURNED
+            20
           Label : NAME
             5
         Label : EXPRESSION
@@ -163,6 +195,8 @@ Label : PROJECT
               27
               Label : LEFT
                 52
+                Label : DEFINITION
+                  52
               Label : RIGHT
                 53
                 Label : ARGUMENT
@@ -171,6 +205,8 @@ Label : PROJECT
                     55
                   Label : VARIABLE
                     16
+                    Label : DEFINITION
+                      16
                 Label : NAME
                   53
             Label : EXPRESSION
@@ -187,6 +223,12 @@ Label : PROJECT
               27
               Label : LEFT
                 60
+                Label : DEFINITION
+                  60
+                Label : DEFINITION
+                  60
+                Label : DEFINITION
+                  60
               Label : RIGHT
                 61
                 Label : CONCAT
@@ -201,6 +243,12 @@ Label : PROJECT
               27
               Label : LEFT
                 70
+                Label : DEFINITION
+                  70
+                Label : DEFINITION
+                  70
+                Label : DEFINITION
+                  70
               Label : RIGHT
                 71
                 Label : ARGUMENT
@@ -253,6 +301,18 @@ Label : PROJECT
                   27
                   Label : LEFT
                     83
+                    Label : DEFINITION
+                      83
+                    Label : DEFINITION
+                      83
+                    Label : DEFINITION
+                      83
+                    Label : DEFINITION
+                      83
+                    Label : DEFINITION
+                      83
+                    Label : DEFINITION
+                      83
                   Label : RIGHT
                     84
                     Label : CONCAT
@@ -289,6 +349,8 @@ Label : PROJECT
                       27
                       Label : LEFT
                         100
+                        Label : DEFINITION
+                          100
                       Label : RIGHT
                         71
                         Label : ARGUMENT
@@ -299,6 +361,10 @@ Label : PROJECT
                       27
                       Label : LEFT
                         101
+                        Label : DEFINITION
+                          101
+                        Label : DEFINITION
+                          101
                       Label : RIGHT
                         92
                         Label : ARGUMENT
@@ -459,6 +525,28 @@ Label : PROJECT
                     27
                     Label : LEFT
                       91
+                      Label : DEFINITION
+                        91
+                      Label : DEFINITION
+                        91
+                      Label : DEFINITION
+                        91
+                      Label : DEFINITION
+                        91
+                      Label : DEFINITION
+                        91
+                      Label : DEFINITION
+                        91
+                      Label : DEFINITION
+                        91
+                      Label : DEFINITION
+                        91
+                      Label : DEFINITION
+                        91
+                      Label : DEFINITION
+                        91
+                      Label : DEFINITION
+                        91
                     Label : RIGHT
                       92
                       Label : ARGUMENT
@@ -501,5 +589,87 @@ Label : PROJECT
                         23
                     Label : OBJECT
                       22
+          Label : DEFINITION
+            52
+            Label : DEFINITION
+              52
+          Label : DEFINITION
+            16
+            Label : DEFINITION
+              16
+          Label : DEFINITION
+            57
+          Label : DEFINITION
+            60
+            Label : DEFINITION
+              60
+            Label : DEFINITION
+              60
+            Label : DEFINITION
+              60
+          Label : DEFINITION
+            64
+          Label : DEFINITION
+            66
+          Label : DEFINITION
+            68
+          Label : DEFINITION
+            70
+            Label : DEFINITION
+              70
+            Label : DEFINITION
+              70
+            Label : DEFINITION
+              70
+          Label : DEFINITION
+            83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+            Label : DEFINITION
+              83
+          Label : DEFINITION
+            91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+            Label : DEFINITION
+              91
+          Label : DEFINITION
+            100
+            Label : DEFINITION
+              100
+          Label : DEFINITION
+            101
+            Label : DEFINITION
+              101
+            Label : DEFINITION
+              101
           Label : NAME
             50
+          Label : RETURNED
+            83

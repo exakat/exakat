@@ -27,18 +27,30 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedArguments extends Analyzer {
     public function dependsOn() {
-        return array('Variables/Arguments',
-                     'Variables/IsRead',
+        return array('Variables/IsRead',
                      'Variables/IsModified',
                      );
     }
     
     public function analyze() {
-        $isNotRead = 'not( where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable", "Variablearray", "Variableobject").filter{ it.get().value("code") == varname; }).times('.self::MAX_LOOPING.')
-                                          .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") )
-                                          ) )';
+        $MAX_LOOPING = self::MAX_LOOPING;
+        $isNotRead = <<<GREMLIN
+not( 
+    where( repeat( out({$this->linksDown}) ).emit( hasLabel("Variable", "Variablearray", "Variableobject").filter{ it.get().value("code") == varname; })
+                                             .times($MAX_LOOPING)
+      .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") )
+    ) 
+)
+GREMLIN;
     
-        $isNotUsed = 'not( where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times('.self::MAX_LOOPING.') ) )';
+        $isNotUsed = <<<GREMLIN
+not( 
+    where( 
+        repeat( out({$this->linksDown}) ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } )
+                                         .times($MAX_LOOPING) 
+    ) 
+)
+GREMLIN;
 
         // Arguments, not reference, function
         $this->atomIs('Parameter')
@@ -144,14 +156,25 @@ class UnusedArguments extends Analyzer {
     }
     
     private function checkInheriting() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+
         $this->_as('method')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->goToClassTrait()
-             ->raw('not( where( repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times('.self::MAX_LOOPING.')
-                                     .out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == name}
-                              )
-                          )')
+             ->raw(<<<GREMLIN
+not( 
+    where( 
+        repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit()
+                                                                                          .times($MAX_LOOPING)
+                          .out("METHOD")
+                          .hasLabel("Method", "Magicmethod")
+                          .out("NAME")
+                          .filter{ it.get().value("code") == name}
+    )
+)
+GREMLIN
+)
              ->back('method');
 
         return $this;

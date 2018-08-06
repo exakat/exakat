@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -31,13 +31,11 @@ Label : PROJECT
             10
         Label : EXPRESSION
           14
-          Label : AT
+          Label : ARGUMENT
             15
-            Label : ARGUMENT
-              16
-            Label : NAME
-              15
+          Label : NAME
+            14
         Label : EXPRESSION
-          17
+          16
           Label : RETURN
-            18
+            17

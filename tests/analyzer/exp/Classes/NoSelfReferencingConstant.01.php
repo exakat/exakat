@@ -2,7 +2,7 @@
 
 $expected     = array('C = self::C',
                       'UPPERC = SELF::UPPERC',
-                      'UPPERE = \a::UPPERE + C', 
+                      'UPPERE = \\a::UPPERE + C',
                       'UPPERD = a::UPPERD + 2',
                      );
 

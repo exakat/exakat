@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -41,5 +41,5 @@ Label : PROJECT
                   12
                   Label : POSTPLUSPLUS
                     18
-          Label : NAME
+          Label : CONDITION
             6

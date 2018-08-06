@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -23,5 +23,5 @@ Label : PROJECT
                 11
               Label : CODE
                 3
-          Label : NAME
+          Label : CONDITION
             6

@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -10,28 +10,24 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            10
+            9
             Label : LEFT
-              6
-              Label : AT
+              7
+              Label : INDEX
                 8
-                Label : INDEX
-                  9
-                Label : VARIABLE
-                  7
-            Label : RIGHT
-              11
-          Label : THEN
-            12
-            Label : EXPRESSION
-              16
-              Label : LEFT
+              Label : VARIABLE
                 6
-                Label : AT
-                  15
-                  Label : MEMBER
-                    14
-                  Label : OBJECT
-                    13
+            Label : RIGHT
+              10
+          Label : THEN
+            11
+            Label : EXPRESSION
+              15
+              Label : LEFT
+                14
+                Label : MEMBER
+                  13
+                Label : OBJECT
+                  12
               Label : RIGHT
-                17
+                16

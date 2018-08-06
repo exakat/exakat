@@ -122,3 +122,7 @@ typehint
 typehints
 typehinted
 syntaxes
+CakePHP
+visibilities
+nullable
+throwable

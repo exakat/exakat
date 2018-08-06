@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -11,5 +11,3 @@ Label : PROJECT
           5
           Label : CLONE
             6
-            Label : AT
-              7

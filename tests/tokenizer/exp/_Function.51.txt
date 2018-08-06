@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -25,6 +25,8 @@ Label : PROJECT
                 16
                 Label : NAME
                   16
+                  Label : DEFINITION
+                    16
               Label : BLOCK
                 17
                 Label : EXPRESSION
@@ -39,6 +41,8 @@ Label : PROJECT
                       16
               Label : NAME
                 14
+              Label : RETURNED
+                16
             Label : EXPRESSION
               23
           Label : NAME

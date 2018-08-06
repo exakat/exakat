@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -11,5 +11,5 @@ Label : PROJECT
           5
           Label : CASES
             7
-          Label : NAME
+          Label : CONDITION
             6

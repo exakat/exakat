@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -8,10 +8,8 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          5
-          Label : AT
+          6
+          Label : INDEX
             7
-            Label : INDEX
-              8
-            Label : VARIABLE
-              6
+          Label : VARIABLE
+            5

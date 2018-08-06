@@ -27,14 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class UseSystemTmp extends Analyzer {
     public function analyze() {
-        $functions = array('\\glob', 
-                           '\\fopen', 
-                           '\\file', 
-                           '\\file_get_contents', 
-                           '\\file_put_contents', 
+        $functions = array('\\glob',
+                           '\\fopen',
+                           '\\file',
+                           '\\file_get_contents',
+                           '\\file_put_contents',
                            '\\unlink',
-                           '\\opendir', 
-                           '\\rmdir', 
+                           '\\opendir',
+                           '\\rmdir',
                            '\\mkdir',
                            );
         $regexStartWithTmp = '^(/tmp/|C:\\\\\\\\WINDOWS\\\\\\\\TEMP|C:\\\\\\\\WINDOWS)';

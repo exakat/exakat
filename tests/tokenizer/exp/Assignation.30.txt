@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -77,7 +77,7 @@ Label : PROJECT
                   43
                   Label : BREAK
                     44
-          Label : NAME
+          Label : CONDITION
             7
             Label : INDEX
               8

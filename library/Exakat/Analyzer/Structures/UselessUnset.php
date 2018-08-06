@@ -26,17 +26,12 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessUnset extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/Arguments',
-                    );
-    }
-    
     public function analyze() {
         // unset on arguments, reference or value
         $this->atomIs('Unset')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
-             ->analyzerIs('Variables/Arguments')
+             ->isArgument()
              ->back('first');
         $this->prepareQuery();
 
@@ -128,7 +123,7 @@ class UselessUnset extends Analyzer {
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
              ->atomIs('Variable')
-             ->analyzerIs('Variables/Arguments')
+             ->isArgument()
              ->back('first');
         $this->prepareQuery();
 

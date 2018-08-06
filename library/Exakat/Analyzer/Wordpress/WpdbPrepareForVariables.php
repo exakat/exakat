@@ -26,9 +26,9 @@ use Exakat\Analyzer\Analyzer;
 
 class WpdbPrepareForVariables extends Analyzer {
     public function analyze() {
-        $methods = array('get_var', 
-                         'get_results', 
-                         'get_row', 
+        $methods = array('get_var',
+                         'get_results',
+                         'get_row',
                          'get_col',
                          );
         

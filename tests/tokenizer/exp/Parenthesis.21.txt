@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -47,6 +47,8 @@ Label : PROJECT
                           27
                           Label : LEFT
                             26
+                            Label : DEFINITION
+                              26
                           Label : RIGHT
                             28
                             Label : ARGUMENT
@@ -59,7 +61,17 @@ Label : PROJECT
                               28
                         Label : NAME
                           24
+            Label : DEFINITION, RETURNED
+              16
+            Label : DEFINITION, RETURNED
+              26
+              Label : DEFINITION
+                26
+            Label : DEFINITION, RETURNED
+              30
             Label : NAME
               8
+            Label : RETURNED
+              26
           Label : NAME
             6

@@ -35,6 +35,7 @@ class GoToKeyDirectly extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Comparison')
+             ->codeIs(array('==', '==='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->samePropertyAs('label', 'blindType')
              ->samePropertyAs('fullcode', 'blind')

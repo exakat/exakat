@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('FOO',
-                      'FOO',
-                      'FOO2',
-                      'FOO2',
-                      'FOO5',
-                      'FOO5',
+$expected     = array('FOO5 = 11',
+                      'FOO2 = 10',
+                      'FOO = 9',
+                      'FOO5 = 5',
+                      'FOO2 = 3',
+                      'FOO = 2',
                      );
 
 $expected_not = array('FOO3',

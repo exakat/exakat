@@ -75,21 +75,7 @@ class UselessInstruction extends Analyzer {
              ->outIs('RETURN')
              ->atomIs('Postplusplus')
              ->outIs('POSTPLUSPLUS')
-             ->atomIsNot('Variable')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Return')
-             ->outIs('RETURN')
-             ->atomIs('Postplusplus')
-             ->outIs('POSTPLUSPLUS')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'variable')
-             ->goToFunction()
-             ->outIs(array('ARGUMENT', 'USE'))
-             ->isNot('reference', true)
-             ->outIsIE('NAME')
-             ->samePropertyAs('code', 'variable')
+             ->atomIsNot(array('Variable', 'Member', 'Staticproperty'))
              ->back('first');
         $this->prepareQuery();
 
@@ -99,42 +85,23 @@ class UselessInstruction extends Analyzer {
              ->atomIs('Postplusplus')
              ->outIs('POSTPLUSPLUS')
              ->atomIs('Variable')
-             ->savePropertyAs('code', 'variable')
-             ->goToFunction()
-             ->raw('not(where( __.out("ARGUMENT").out("NAME").filter{ it.get().value("code") == variable; }))')
-             ->raw('not(where( __.out("USE").filter{ it.get().value("code") == variable; }))')
+             ->raw('where( __.in("DEFINITION").coalesce(__.in("NAME"), filter{ true; }).not(has("reference")) )')
              ->back('first');
         $this->prepareQuery();
 
-        // return an assigned variable 
+        // return an assigned variable
         // todo : add support for static, referenc argument, global
         $this->atomIs('Return')
-             ->atomInside('Assignation')
+             ->atomInsideNoDefinition('Assignation')
              ->outIs('LEFT')
              ->atomIsNot(array('Member', 'Staticproperty', 'Phpvariable'))
              ->hasNoChildren(array('Member', 'Staticproperty', 'Phpvariable'), array('VARIABLE'))
+             ->hasNoChildren(array('Member', 'Staticproperty', 'Phpvariable'), array('VARIABLE', 'VARIABLE'))
              ->savePropertyAs('code', 'variable')
             // It is not an argument with reference
-             ->raw(<<<GREMLIN
-not(
-    where(
-        __.repeat( __.in()).until(hasLabel("Function")).out("ARGUMENT").filter{it.get().value("code") == variable}.has("reference", true)
-    )
-)
-GREMLIN
-)
+             ->isReferencedArgument('variable')
             // it is not a global nor a static
-             ->raw(<<<GREMLIN
-not(
-    where(
-        __.repeat( __.in()).until(hasLabel("Function")).out("BLOCK")
-          .repeat( __.out()).emit().times($MAX_LOOPING)
-          .hasLabel(within("Staticdefinition", "Globaldefinition"))
-          .filter{it.get().value("code") == variable}
-    )
-)
-GREMLIN
-)
+             ->raw('not( where( __.in("DEFINITION").where(__.in("STATIC", "GLOBAL"))) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -149,16 +116,13 @@ GREMLIN
         // foreach(@$a as $b);
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->atomIs('Noscream');
+             ->is('noscream', true);
         $this->prepareQuery();
 
         // @$x = 3;
         $this->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIs('Noscream')
-             ->outIs('AT')
-             ->atomIs('Variable')
-             ->inIs('AT');
+             ->has('noscream', true);
         $this->prepareQuery();
 
         // Closure with some operations
@@ -200,16 +164,16 @@ GREMLIN
 
         $this->atomFunctionIs('\\count')
              ->outWithRank('ARGUMENT', 0)
-             ->functioncallIs(array('\\array_keys', 
-                                    '\\array_values', 
-                                    '\\array_flip', 
-                                    '\\array_fill', 
-                                    '\\array_walk', 
-                                    '\\array_map', 
-                                    '\\array_change_key_case', 
-                                    '\\array_combine', 
-                                    '\\array_multisort', 
-                                    '\\array_replace', 
+             ->functioncallIs(array('\\array_keys',
+                                    '\\array_values',
+                                    '\\array_flip',
+                                    '\\array_fill',
+                                    '\\array_walk',
+                                    '\\array_map',
+                                    '\\array_change_key_case',
+                                    '\\array_combine',
+                                    '\\array_multisort',
+                                    '\\array_replace',
                                     '\\array_reverse',
                                     ))
              ->back('first');

@@ -404,66 +404,68 @@ JOIN categories
         $res = $sqlite->query('SELECT analyzers.folder || "/" || analyzers.name as name FROM analyzers');
         while($row = $res->fetchArray()) {
             ++$total;
-            if (!file_exists('library/Exakat/Analyzer/'.$row['name'].'.php')) {
-                print $row['name']. " has no exakat code\n";
+            if (!file_exists("library/Exakat/Analyzer/$row[name].php")) {
+                print "$row[name] has no exakat code\n";
+                continue;
             }
-            if (!file_exists('human/en/'.$row['name'].'.ini')) {
-                print $row['name']. " has no documentation\n";
-            } else {
-                $raw = file_get_contents("human/en/$row[name].ini");
-                $ini = parse_ini_file("human/en/$row[name].ini", true);
-                
-                $examples = preg_grep("/example\d+/", array_keys($ini));
-                print count($examples)." example sections\n";
-                
-                $count = substr_count($raw, '"') - substr_count($raw, '\\"') - count($examples) * 10 - 8;
-                if ($count !== 0) {
-                    print 'Count of " '.$row['name'].' : '.($count).PHP_EOL;
-                }
 
-                if (preg_match_all('/\[example\d+\]/s', $raw) != count($examples)) {
-                    print "human/en/$row[name].ini has a weird count of examples\n";
-                } 
-                
-                if (!empty($examples)) {
-                    foreach($examples as $example) {
-                        if ($ini[$example]['file'][0] === '/') {
-                            print "human/en/$row[name].ini has an initial / for file in $example\n";
-                        }
+            if (!file_exists("human/en/$row[name].ini")) {
+                print $row['name']. " has no documentation\n";
+                continue;
+            } 
+            
+            $raw = file_get_contents("human/en/$row[name].ini");
+            $ini = parse_ini_file("human/en/$row[name].ini", true);
+            
+            $examples = preg_grep("/example\d+/", array_keys($ini));
+            print count($examples)." example sections\n";
+            
+            $count = substr_count($raw, '"') - substr_count($raw, '\\"') - count($examples) * 10 - 8;
+            if ($count !== 0) {
+                print 'Count of " '.$row['name'].' : '.($count).PHP_EOL;
+            }
+
+            if (preg_match_all('/\[example\d+\]/s', $raw) != count($examples)) {
+                print "human/en/$row[name].ini has a weird count of examples\n";
+            } 
+            
+            if (!empty($examples)) {
+                foreach($examples as $example) {
+                    if ($ini[$example]['file'][0] === '/') {
+                        print "human/en/$row[name].ini has an initial / for file in $example\n";
                     }
                 }
+            }
 
-                if (!isset($ini['name'])) {
-                    print 'human/en/'.$row['name'].'.ini'. " is not set\n";
-                } 
+            if (!isset($ini['name'])) {
+                print 'human/en/'.$row['name'].'.ini'. " is not set\n";
+            } 
 
-                if (strpos($ini['name'], '/') !== false) {
-                    print 'human/en/'.$row['name'].'.ini'. " still has a / in the title\n";
-                } 
+            if (strpos($ini['name'], '/') !== false) {
+                print 'human/en/'.$row['name'].'.ini'. " still has a / in the title\n";
+            } 
 
-                if (!isset($ini['exakatSince'])) {
-                    print 'human/en/'.$row['name'].'.ini'. " has no exakatSince\n";
-                } 
-                
-                if (strpos($ini['description'], '<?php') === false) {
-                    print 'human/en/'.$row['name'].'.ini'. " has no example in the docs\n";
-                } 
+            if (!isset($ini['exakatSince'])) {
+                print 'human/en/'.$row['name'].'.ini'. " has no exakatSince\n";
+            } 
+            
+            if (strpos($ini['description'], '<?php') === false) {
+                print 'human/en/'.$row['name'].'.ini'. " has no example in the docs\n";
+            } 
 
-                if (strpos($ini['description'], 'See also') === false) {
-                    print 'human/en/'.$row['name'].'.ini'. " has no external links in the docs\n";
-                } 
-                
-                $title = str_replace(array('PHP', 'autoload', 'const', 'HTTP'), '', $ini['name']);  
-                $title = preg_replace('#__\S+#', '', $title);
-                $title = preg_replace('#\S+::#', '', $title);
-                $title = preg_replace('#\*_\S+#', '', $title);
-                $title = preg_replace('#\S+\(\)#', '', $title);
+            if (strpos($ini['description'], 'See also') === false) {
+                print 'human/en/'.$row['name'].'.ini'. " has no external links in the docs\n";
+            } 
+            
+            $title = str_replace(array('PHP', 'autoload', 'const', 'HTTP'), '', $ini['name']);  
+            $title = preg_replace('#__\S+#', '', $title);
+            $title = preg_replace('#\S+::#', '', $title);
+            $title = preg_replace('#\*_\S+#', '', $title);
+            $title = preg_replace('#\S+\(\)#', '', $title);
 
-                if ($title !== ucwords(strtolower($title)) && 
-                    !preg_match('$^ext/$', $ini['name'])) { 
-                    print 'human/en/'.$row['name'].'.ini'. " name is not Capital Worded ($ini[name])\n";
-                }
-                // else all is fine
+            if ($title !== ucwords(strtolower($title)) && 
+                !preg_match('$^ext/$', $ini['name'])) { 
+                print 'human/en/'.$row['name'].'.ini'. " name is not Capital Worded ($ini[name])\n";
             }
             
             if (!file_exists('tests/analyzer/Test/'.$row['name'].'.php')) {

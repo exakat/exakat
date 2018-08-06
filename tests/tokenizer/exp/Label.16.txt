@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -22,9 +22,9 @@ Label : PROJECT
                   Label : POSTPLUSPLUS
                     12
                 Label : EXPRESSION
-                  14
+                  16
                   Label : GOTO
-                    15
+                    14
             Label : EXPRESSION
               17
               Label : CASE
@@ -43,16 +43,16 @@ Label : PROJECT
                   22
                   Label : ARGUMENT
                     23
-          Label : NAME
+          Label : CONDITION
             6
         Label : EXPRESSION
           24
           Label : DEFINITION
-            14
+            16
             Label : GOTO
-              15
+              14
           Label : GOTOLABEL
-            15
+            14
         Label : EXPRESSION
           22
           Label : ARGUMENT

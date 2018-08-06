@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -15,6 +15,16 @@ Label : PROJECT
             15
           Label : METHOD
             8
+            Label : ARGUMENT
+              10
+              Label : NAME
+                10
+            Label : ARGUMENT
+              12
+              Label : NAME
+                12
+              Label : TYPEHINT
+                11
             Label : BLOCK
               13
               Label : EXPRESSION
@@ -61,16 +71,12 @@ Label : PROJECT
                           29
                         Label : OBJECT
                           15
-            Label : ARGUMENT
-              10
-              Label : NAME
-                10
-            Label : ARGUMENT
-              12
-              Label : NAME
-                12
-              Label : TYPEHINT
-                11
+            Label : DEFINITION
+              24
+            Label : DEFINITION, RETURNED
+              33
+            Label : DEFINITION, RETURNED
+              34
             Label : NAME
               8
           Label : NAME

@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -79,10 +79,14 @@ Label : PROJECT
               25
               Label : NAME
                 25
+                Label : DEFINITION
+                  25
             Label : ARGUMENT
               26
               Label : NAME
                 26
+                Label : DEFINITION
+                  26
             Label : BLOCK
               15
               Label : EXPRESSION
@@ -101,3 +105,7 @@ Label : PROJECT
                       29
                     Label : VARIABLE
                       26
+            Label : RETURNED
+              25
+            Label : RETURNED
+              26

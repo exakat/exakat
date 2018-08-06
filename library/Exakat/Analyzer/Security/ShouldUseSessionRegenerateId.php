@@ -26,11 +26,18 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldUseSessionRegenerateId extends Analyzer {
     public function dependsOn() {
-        return array('Extensions/Extsession');
+        return array('Extensions/Extsession',
+                    );
     }
     
     public function analyze() {
-        $sessions = $this->query('g.V().hasLabel("Analyze").out("ANALYZED").count()');
+        $sessions = $this->query(<<<GREMLIN
+g.V().hasLabel("Analyze")
+     .has("analyzer", "Extensions/Extsession")
+     .out("ANALYZED")
+     .count()
+GREMLIN
+);
 
         // No session, no regenerateId
         if (empty($sessions)) {

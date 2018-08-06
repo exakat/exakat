@@ -43,7 +43,6 @@ abstract class Analyzer {
     protected $rawQueryCount  = 0; // Number of ran queries
 
     private $queries          = array();
-    private $queriesArguments = array();
     private $query            = null;
     
     public $config         = null;
@@ -105,6 +104,8 @@ abstract class Analyzer {
     static public $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
     static public $FUNCTIONS_CALLS  = array('Functioncall' ,'Newcall', 'Methodcall', 'Staticmethodcall');
     static public $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
+    static public $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
+    static public $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -292,7 +293,7 @@ GREMLIN;
                                ->toArray();
             $returntype = $this->query('g.V().hasLabel("Method", "Magicmethod", "Closure", "Function").out("RETURNTYPE").not(where( __.in("DEFINITION"))).values("fullnspath")')
                                ->toArray();
-            self::$calledClasses = array_unique(array_merge($staticcalls, 
+            self::$calledClasses = array_unique(array_merge($staticcalls,
                                                             $news,
                                                             $typehints,
                                                             $returntype));
@@ -308,7 +309,7 @@ GREMLIN;
         }
         
         return self::$calledInterfaces;
-    }    
+    }
 
     public function getCalledTraits() {
         if (self::$calledTraits === null) {
@@ -323,7 +324,7 @@ GREMLIN;
         }
         
         return self::$calledTraits;
-    }    
+    }
 
     public function getCalledNamespaces() {
         if (self::$calledNamespaces === null) {
@@ -337,7 +338,7 @@ GREMLIN;
         }
         
         return self::$calledNamespaces;
-    }    
+    }
 
     public function getCalledDirectives() {
         if (self::$calledDirectives === null) {
@@ -357,7 +358,7 @@ GREMLIN;
         }
         
         return self::$calledDirectives;
-    }    
+    }
 
 
     public function checkPhpVersion($version) {
@@ -555,7 +556,7 @@ GREMLIN
         if (empty($diff)) {
             $this->query->stopQuery();
             return $this;
-        } 
+        }
 
         $this->query->addMethod('hasLabel(within(***))', $diff);
         
@@ -846,6 +847,19 @@ GREMLIN;
         
         return $this;
     }
+
+    public function isArgument() {
+        $this->query->addMethod('where( __.in("DEFINITION").where( __.in("NAME")))');
+        
+        return $this;
+    }
+
+    public function isNotArgument() {
+        $this->query->addMethod('where( __.in("DEFINITION").not( where( __.in("NAME"))))');
+        
+        return $this;
+    }
+
 
     public function isMore($property, $value = 0) {
         assert($this->assertProperty($property));
@@ -1700,13 +1714,13 @@ GREMLIN
     }
 
     public function goToClassInterfaceTrait() {
-        $this->goToInstruction(array('Interface', 'Class', 'Classanonymous', 'Trait'));
+        $this->goToInstruction(self::$CIT);
         
         return $this;
     }
 
     public function hasNoClassInterfaceTrait() {
-        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Interface', 'Trait'));
+        return $this->hasNoInstruction(self::$CIT);
     }
     
     public function goToExtends() {
@@ -1984,6 +1998,18 @@ GREMLIN;
         return $this;
     }
     
+    public function isReferencedArgument($variable = 'variable') {
+        $this->query->addMethod(<<<GREMLIN
+not(
+    where(
+        __.repeat( __.in()).until(hasLabel("Function")).out("ARGUMENT").filter{it.get().value("code") == $variable}.has("reference", true)
+    )
+)
+GREMLIN
+);
+        return $this;
+    }
+
     public function run() {
         $this->analyze();
 //        $this->prepareQuery();
@@ -2011,40 +2037,6 @@ GREMLIN;
 
     public abstract function analyze();
 
-    public function printQuery() {
-        $this->prepareQuery($this->analyzerId);
-        
-        foreach($this->queries as $id => $query) {
-            echo $id, ")", PHP_EOL, print_r($query, true), print_r($this->queriesArguments[$id], true), PHP_EOL;
-
-            krsort($this->queriesArguments[$id]);
-            
-            foreach($this->queriesArguments[$id] as $name => $value) {
-                if (is_array($value)) {
-                    if (is_array($value[key($value)])) {
-                        foreach($value as $k => &$v) {
-                            $v = "'''".$k."''':['''".implode("''', '''", $v)."''']";
-                            $v = str_replace('\\', '\\\\', $v);
-                        }
-                        unset($v);
-                        $query = str_replace($name, "[".implode(", ", $value)."]", $query);
-                    } else {
-                        $query = str_replace($name, "['".implode("', '", $value)."']", $query);
-                    }
-                } elseif (is_string($value)) {
-                    $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
-                } elseif (is_int($value)) {
-                    $query = str_replace($name, (string) $value, $query);
-                } else {
-                    assert(false, 'Cannot process argument of type '.gettype($value).PHP_EOL.__METHOD__.PHP_EOL);
-                }
-            }
-            
-            echo $query, PHP_EOL, PHP_EOL;
-        }
-        die();
-    }
-
     public function debugQuery() {
         $methods = $this->methods;
         $arguments = $this->arguments;
@@ -2060,6 +2052,10 @@ GREMLIN;
         }
 
         die();
+    }
+    
+    public function printQuery() {
+        $this->query->printQuery();
     }
     
     public function prepareQuery() {
@@ -2103,7 +2099,6 @@ GREMLIN;
 
         // reset for the next
         $this->queries = array();
-        $this->queriesArguments = array();
         
         // @todo multiple results ?
         // @todo store result in the object until reading.
@@ -2265,11 +2260,11 @@ GREMLIN;
     private function assertAtom($atom) {
         if (is_string($atom)) {
             assert($atom !== 'Property', 'Property is no more');
-            assert($atom === ucfirst(mb_strtolower($atom)), 'Wrong format for atom name : "'.$atom.'"');
+            assert($atom === ucfirst(mb_strtolower($atom)), "Wrong format for atom name : '$atom");
         } else {
             foreach($atom as $a) {
                 assert($a !== 'Property', 'Property is no more');
-                assert($a === ucfirst(mb_strtolower($a)), 'Wrong format for atom name : '.$a);
+                assert($a === ucfirst(mb_strtolower($a)), "Wrong format for atom name : '$a'");
             }
         }
         return true;

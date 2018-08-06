@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -52,13 +52,11 @@ Label : PROJECT
           Label : CONDITION
             11
             Label : LEFT
-              18
-              Label : AT
+              7
+              Label : ARGUMENT
+                9
+              Label : NAME
                 7
-                Label : ARGUMENT
-                  9
-                Label : NAME
-                  7
             Label : RIGHT
               12
           Label : THEN

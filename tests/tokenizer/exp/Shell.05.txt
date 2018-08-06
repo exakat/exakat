@@ -1,4 +1,4 @@
-Whole
+test
 Label : PROJECT
   1
   Label : FILE
@@ -9,9 +9,7 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : AT
+          Label : CONCAT
             6
-            Label : CONCAT
-              7
-            Label : CONCAT
-              8
+          Label : CONCAT
+            7

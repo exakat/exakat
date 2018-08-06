@@ -93,7 +93,6 @@ abstract class GraphElements {
                                  'Namespace',
                                  'New',
                                  'Newcall',
-                                 'Noscream',
                                  'Not',
                                  'Nsname',
                                  'Null',
@@ -150,7 +149,6 @@ abstract class GraphElements {
     static public $LINKS = array('APPEND',
                                  'ARGUMENT',
                                  'AS',
-                                 'AT',
                                  'BLOCK',
                                  'BREAK',
                                  'CASE',
@@ -215,11 +213,11 @@ abstract class GraphElements {
                                 );
     static public $LINKS_EXAKAT = array('DEFINITION',
                                         'ANALYZED',
+                                        'RETURNED',
                                        );
     static public $LINKS_DOWN = array('APPEND',
                                       'ARGUMENT',
                                       'AS',
-                                      'AT',
                                       'BLOCK',
                                       'CASE',
                                       'CASES',
