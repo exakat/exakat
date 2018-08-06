@@ -17,6 +17,8 @@ Label : PROJECT
               10
               Label : RETURN
                 11
+          Label : DEFINITION, RETURNED
+            11
           Label : NAME
             5
         Label : EXPRESSION
@@ -31,6 +33,8 @@ Label : PROJECT
                 10
                 Label : RETURN
                   11
+            Label : DEFINITION, RETURNED
+              11
             Label : NAME
               14
           Label : NAME

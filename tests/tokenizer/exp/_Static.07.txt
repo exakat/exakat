@@ -21,6 +21,8 @@ Label : PROJECT
               5
               Label : STATIC
                 11
+          Label : DEFINITION
+            11
           Label : NAME
             7
         Label : EXPRESSION

@@ -8,10 +8,8 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          5
-          Label : AT
-            8
-            Label : MEMBER
-              7
-            Label : OBJECT
-              6
+          7
+          Label : MEMBER
+            6
+          Label : OBJECT
+            5

@@ -31,6 +31,10 @@ Label : PROJECT
                     19
                 Label : RIGHT
                   24
+            Label : DEFINITION
+              19
+            Label : DEFINITION
+              24
             Label : NAME
               13
           Label : METHOD
@@ -53,6 +57,8 @@ Label : PROJECT
                       33
                   Label : CONCAT
                     36
+            Label : DEFINITION, RETURNED
+              33
             Label : NAME
               25
           Label : NAME

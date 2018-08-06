@@ -17,57 +17,55 @@ Label : PROJECT
                 7
               Label : RIGHT
                 9
-                Label : AT
-                  10
-                  Label : CODE
+                Label : CODE
+                  11
+                  Label : LEFT
+                    10
+                  Label : RIGHT
                     12
-                    Label : LEFT
-                      11
-                    Label : RIGHT
-                      13
             Label : EXPRESSION
-              14
+              13
               Label : CONDITION
-                15
+                14
                 Label : NAME
-                  15
+                  14
                 Label : ARGUMENT
                   7
                 Label : ARGUMENT
-                  16
+                  15
                   Label : ARGUMENT
-                    17
+                    16
                   Label : ARGUMENT
-                    19
+                    18
               Label : THEN
                 6
                 Label : EXPRESSION
-                  21
+                  20
                   Label : THROW
-                    22
+                    21
                     Label : NEW
-                      23
+                      22
                       Label : ARGUMENT
-                        25
+                        24
                       Label : NAME
-                        23
+                        22
           Label : CATCH
-            27
+            26
             Label : BLOCK
               6
               Label : EXPRESSION
-                31
+                30
                 Label : ARGUMENT
-                  36
+                  35
                   Label : METHOD
-                    32
+                    31
                     Label : ARGUMENT
-                      34
+                      33
                     Label : NAME
-                      32
+                      31
                   Label : OBJECT
-                    30
+                    29
             Label : CLASS
-              28
+              27
             Label : VARIABLE
-              30
+              29

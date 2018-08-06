@@ -34,60 +34,58 @@ Label : PROJECT
           Label : ARGUMENT
             20
         Label : EXPRESSION
-          40
+          39
           Label : LEFT
             22
-            Label : AT
-              23
-              Label : ARGUMENT
-                25
-                Label : INDEX
-                  26
-                Label : VARIABLE
-                  24
-              Label : ARGUMENT
-                25
-                Label : INDEX
-                  29
-                Label : VARIABLE
-                  28
-              Label : ARGUMENT
-                25
-                Label : INDEX
-                  32
-                Label : VARIABLE
-                  31
-              Label : ARGUMENT
-                25
-                Label : INDEX
-                  35
-                Label : VARIABLE
-                  34
-              Label : ARGUMENT
-                25
-                Label : INDEX
-                  38
-                Label : VARIABLE
-                  37
-              Label : NAME
-                23
-          Label : RIGHT
-            41
             Label : ARGUMENT
-              43
-              Label : NAME
-                43
-              Label : ARGUMENT
-                45
-              Label : ARGUMENT
-                47
-                Label : ARGUMENT
-                  25
-                  Label : INDEX
-                    50
-                  Label : VARIABLE
-                    49
-                Label : NAME
-                  47
+              24
+              Label : INDEX
+                25
+              Label : VARIABLE
+                23
+            Label : ARGUMENT
+              24
+              Label : INDEX
+                28
+              Label : VARIABLE
+                27
+            Label : ARGUMENT
+              24
+              Label : INDEX
+                31
+              Label : VARIABLE
+                30
+            Label : ARGUMENT
+              24
+              Label : INDEX
+                34
+              Label : VARIABLE
+                33
+            Label : ARGUMENT
+              24
+              Label : INDEX
+                37
+              Label : VARIABLE
+                36
             Label : NAME
-              41
+              22
+          Label : RIGHT
+            40
+            Label : ARGUMENT
+              42
+              Label : NAME
+                42
+              Label : ARGUMENT
+                44
+              Label : ARGUMENT
+                46
+                Label : ARGUMENT
+                  24
+                  Label : INDEX
+                    49
+                  Label : VARIABLE
+                    48
+                Label : NAME
+                  46
+            Label : NAME
+              40

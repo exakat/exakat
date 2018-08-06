@@ -73,8 +73,6 @@ Label : PROJECT
                         7
                       Label : RIGHT
                         33
-                        Label : AT
-                          34
                     Label : EXPRESSION
                       18
                       Label : BREAK

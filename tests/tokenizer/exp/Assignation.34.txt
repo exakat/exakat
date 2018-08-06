@@ -21,6 +21,14 @@ Label : PROJECT
                   14
                   Label : LEFT
                     13
+                    Label : DEFINITION
+                      13
+                    Label : DEFINITION
+                      13
+                    Label : DEFINITION
+                      13
+                    Label : DEFINITION
+                      13
                   Label : RIGHT
                     15
                     Label : YIELD
@@ -47,6 +55,22 @@ Label : PROJECT
                       25
                       Label : INDEX
                         26
+                        Label : DEFINITION
+                          26
+                        Label : DEFINITION
+                          26
+                        Label : DEFINITION
+                          26
+                        Label : DEFINITION
+                          26
+                        Label : DEFINITION
+                          26
+                        Label : DEFINITION
+                          26
+                        Label : DEFINITION
+                          26
+                        Label : DEFINITION
+                          26
                       Label : VARIABLE
                         24
                         Label : MEMBER
@@ -107,6 +131,10 @@ Label : PROJECT
                       14
                       Label : LEFT
                         27
+                        Label : DEFINITION
+                          27
+                        Label : DEFINITION
+                          27
                       Label : RIGHT
                         25
                         Label : INDEX
@@ -143,6 +171,10 @@ Label : PROJECT
                       14
                       Label : LEFT
                         33
+                        Label : DEFINITION
+                          33
+                        Label : DEFINITION
+                          33
                       Label : RIGHT
                         34
                     Label : EXPRESSION
@@ -207,5 +239,45 @@ Label : PROJECT
                           27
               Label : CONDITION
                 11
+          Label : DEFINITION
+            13
+            Label : DEFINITION
+              13
+            Label : DEFINITION
+              13
+            Label : DEFINITION
+              13
+            Label : DEFINITION
+              13
+          Label : DEFINITION
+            26
+            Label : DEFINITION
+              26
+            Label : DEFINITION
+              26
+            Label : DEFINITION
+              26
+            Label : DEFINITION
+              26
+            Label : DEFINITION
+              26
+            Label : DEFINITION
+              26
+            Label : DEFINITION
+              26
+            Label : DEFINITION
+              26
+          Label : DEFINITION
+            27
+            Label : DEFINITION
+              27
+            Label : DEFINITION
+              27
+          Label : DEFINITION
+            33
+            Label : DEFINITION
+              33
+            Label : DEFINITION
+              33
           Label : NAME
             5

@@ -11,19 +11,17 @@ Label : PROJECT
           5
           Label : CONDITION
             6
-            Label : AT
+            Label : NOT
               7
-              Label : NOT
+              Label : ARGUMENT
                 8
-                Label : ARGUMENT
-                  9
-                Label : NAME
-                  8
+              Label : NAME
+                7
           Label : THEN
-            10
+            9
             Label : EXPRESSION
-              12
+              11
               Label : LEFT
-                11
+                10
               Label : RIGHT
-                13
+                12

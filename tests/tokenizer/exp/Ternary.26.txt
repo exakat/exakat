@@ -31,16 +31,14 @@ Label : PROJECT
                   13
               Label : RIGHT
                 16
-                Label : AT
-                  17
-                  Label : ARGUMENT
-                    9
-                    Label : MEMBER
-                      19
-                    Label : OBJECT
-                      18
-                  Label : NAME
+                Label : ARGUMENT
+                  9
+                  Label : MEMBER
+                    18
+                  Label : OBJECT
                     17
+                Label : NAME
+                  16
             Label : THEN
               9
               Label : MEMBER

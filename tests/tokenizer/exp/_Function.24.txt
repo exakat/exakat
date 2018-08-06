@@ -19,5 +19,7 @@ Label : PROJECT
                 9
               Label : RIGHT
                 11
+          Label : DEFINITION
+            9
           Label : NAME
             5

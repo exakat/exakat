@@ -57,6 +57,12 @@ Label : PROJECT
                       19
                   Label : OBJECT
                     18
+          Label : DEFINITION
+            11
+          Label : DEFINITION
+            18
+          Label : DEFINITION
+            23
           Label : NAME
             5
         Label : EXPRESSION

@@ -35,6 +35,8 @@ Label : PROJECT
               11
               Label : NAME
                 11
+                Label : DEFINITION
+                  11
               Label : TYPEHINT
                 9
             Label : ARGUMENT
@@ -43,6 +45,8 @@ Label : PROJECT
                 15
               Label : NAME
                 14
+                Label : DEFINITION
+                  14
               Label : TYPEHINT
                 12
             Label : NAME

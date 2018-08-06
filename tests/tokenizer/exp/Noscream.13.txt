@@ -8,26 +8,24 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          12
+          11
           Label : LEFT
-            5
-            Label : AT
-              7
-              Label : INDEX
+            6
+            Label : INDEX
+              9
+              Label : LEFT
+                8
+              Label : RIGHT
                 10
-                Label : LEFT
-                  9
-                Label : RIGHT
-                  11
+            Label : VARIABLE
+              6
+              Label : INDEX
+                8
               Label : VARIABLE
-                7
+                6
                 Label : INDEX
-                  9
-                Label : VARIABLE
                   7
-                  Label : INDEX
-                    8
-                  Label : VARIABLE
-                    6
+                Label : VARIABLE
+                  5
           Label : RIGHT
-            9
+            8

@@ -17,6 +17,10 @@ Label : PROJECT
               11
               Label : LEFT
                 10
+                Label : DEFINITION
+                  10
+                Label : DEFINITION
+                  10
               Label : RIGHT
                 12
                 Label : ARGUMENT
@@ -31,6 +35,8 @@ Label : PROJECT
                   11
                   Label : LEFT
                     15
+                    Label : DEFINITION
+                      15
                   Label : RIGHT
                     16
                     Label : ARGUMENT
@@ -67,6 +73,34 @@ Label : PROJECT
                   20
                 Label : VARIABLE
                   22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
+                  Label : DEFINITION
+                    22
               Label : CATCH
                 19
                 Label : BLOCK
@@ -181,7 +215,49 @@ Label : PROJECT
                       10
                     Label : NAME
                       37
+          Label : DEFINITION
+            10
+            Label : DEFINITION
+              10
+            Label : DEFINITION
+              10
+          Label : DEFINITION
+            15
+            Label : DEFINITION
+              15
+          Label : DEFINITION
+            22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
           Label : NAME
             5
+          Label : RETURNED
+            15
         Label : EXPRESSION
           7

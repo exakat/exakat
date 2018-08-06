@@ -10,74 +10,70 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            17
+            16
             Label : CONDITION
-              15
+              14
               Label : LEFT
-                6
-                Label : AT
-                  10
+                9
+                Label : INDEX
+                  13
+                Label : VARIABLE
+                  9
                   Label : INDEX
-                    14
+                    9
+                    Label : INDEX
+                      12
+                    Label : VARIABLE
+                      11
                   Label : VARIABLE
-                    10
+                    9
                     Label : INDEX
                       10
-                      Label : INDEX
-                        13
-                      Label : VARIABLE
-                        12
                     Label : VARIABLE
-                      10
-                      Label : INDEX
-                        11
-                      Label : VARIABLE
-                        9
-                        Label : CLASS
-                          7
-                        Label : MEMBER
-                          8
+                      8
+                      Label : CLASS
+                        6
+                      Label : MEMBER
+                        7
               Label : RIGHT
-                16
+                15
             Label : ELSE
-              19
-            Label : THEN
               18
+            Label : THEN
+              17
         Label : EXPRESSION
-          20
+          19
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            17
+            16
             Label : CONDITION
-              15
+              14
               Label : LEFT
-                6
-                Label : AT
-                  10
+                9
+                Label : INDEX
+                  26
+                Label : VARIABLE
+                  9
                   Label : INDEX
-                    27
-                  Label : VARIABLE
-                    10
+                    9
                     Label : INDEX
-                      10
-                      Label : INDEX
-                        26
-                      Label : VARIABLE
-                        25
+                      25
                     Label : VARIABLE
-                      10
-                      Label : INDEX
-                        24
-                      Label : VARIABLE
-                        9
-                        Label : CLASS
-                          22
-                        Label : MEMBER
-                          23
+                      24
+                  Label : VARIABLE
+                    9
+                    Label : INDEX
+                      23
+                    Label : VARIABLE
+                      8
+                      Label : CLASS
+                        21
+                      Label : MEMBER
+                        22
               Label : RIGHT
-                28
+                27
             Label : ELSE
-              30
-            Label : THEN
               29
+            Label : THEN
+              28

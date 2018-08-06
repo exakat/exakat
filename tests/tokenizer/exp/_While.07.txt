@@ -88,9 +88,7 @@ Label : PROJECT
               Label : RIGHT
                 11
                 Label : LEFT
-                  20
-                  Label : AT
-                    10
+                  10
                 Label : RIGHT
                   13
                   Label : INDEX

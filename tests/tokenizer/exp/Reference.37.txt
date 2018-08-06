@@ -13,7 +13,7 @@ Label : PROJECT
             7
             Label : CONST
               7
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 22
                 Label : CLASS
                   6

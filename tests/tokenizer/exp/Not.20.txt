@@ -30,11 +30,9 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            15
-            Label : AT
-              8
-              Label : SIGN
-                7
+            8
+            Label : SIGN
+              7
           Label : THEN
             9
             Label : EXPRESSION

@@ -47,14 +47,20 @@ Label : PROJECT
             15
             Label : NAME
               15
+              Label : DEFINITION
+                15
           Label : ARGUMENT
             16
             Label : NAME
               16
+              Label : DEFINITION
+                16
           Label : ARGUMENT
             17
             Label : NAME
               17
+              Label : DEFINITION
+                17
           Label : BLOCK
             18
             Label : EXPRESSION

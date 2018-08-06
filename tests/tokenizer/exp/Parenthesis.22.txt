@@ -27,12 +27,10 @@ Label : PROJECT
                     7
               Label : ELSE
                 17
-                Label : AT
-                  18
-                  Label : ARGUMENT
-                    7
-                  Label : NAME
-                    18
+                Label : ARGUMENT
+                  7
+                Label : NAME
+                  17
               Label : THEN
                 15
                 Label : ARGUMENT

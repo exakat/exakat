@@ -127,6 +127,8 @@ Label : PROJECT
               50
               Label : NAME
                 50
+                Label : DEFINITION
+                  50
             Label : BLOCK
               11
               Label : EXPRESSION

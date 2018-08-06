@@ -19,6 +19,12 @@ Label : PROJECT
                 12
                 Label : LEFT
                   11
+                  Label : DEFINITION
+                    11
+                  Label : DEFINITION
+                    11
+                  Label : DEFINITION
+                    11
                 Label : RIGHT
                   13
                   Label : ARGUMENT
@@ -81,6 +87,14 @@ Label : PROJECT
                     10
                     Label : EXPRESSION
                       8
+            Label : DEFINITION
+              11
+              Label : DEFINITION
+                11
+              Label : DEFINITION
+                11
+              Label : DEFINITION
+                11
             Label : NAME
               7
           Label : NAME

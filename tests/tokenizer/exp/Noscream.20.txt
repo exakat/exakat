@@ -8,24 +8,22 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          9
+          8
           Label : LEFT
             5
-            Label : AT
+            Label : NAME
+              5
+            Label : ARGUMENT
               6
-              Label : NAME
-                6
-              Label : ARGUMENT
-                7
-              Label : ARGUMENT
-                8
+            Label : ARGUMENT
+              7
           Label : RIGHT
-            13
+            12
             Label : METHOD
-              11
-              Label : ARGUMENT
-                12
-              Label : NAME
-                11
-            Label : OBJECT
               10
+              Label : ARGUMENT
+                11
+              Label : NAME
+                10
+            Label : OBJECT
+              9

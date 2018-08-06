@@ -48,29 +48,27 @@ Label : PROJECT
                 Label : FINAL
                   3
                   Label : EXPRESSION
-                    22
+                    21
                     Label : LEFT
-                      21
+                      20
                     Label : RIGHT
-                      23
+                      22
                 Label : INCREMENT
                   3
                   Label : EXPRESSION
-                    24
+                    23
                     Label : POSTPLUSPLUS
-                      21
+                      20
                 Label : INIT
                   3
                   Label : EXPRESSION
                     11
                     Label : LEFT
-                      20
-                      Label : AT
+                      7
+                      Label : ARGUMENT
+                        9
+                      Label : NAME
                         7
-                        Label : ARGUMENT
-                          9
-                        Label : NAME
-                          7
                     Label : RIGHT
                       12
             Label : THEN
@@ -86,13 +84,13 @@ Label : PROJECT
               Label : RETURN
                 15
         Label : EXPRESSION
-          25
+          24
           Label : CASES
-            26
+            25
             Label : EXPRESSION
-              27
+              26
               Label : CASE
-                28
+                27
               Label : CODE
                 3
                 Label : EXPRESSION

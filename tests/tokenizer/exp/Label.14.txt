@@ -15,41 +15,39 @@ Label : PROJECT
               8
               Label : CASE
                 10
-                Label : AT
-                  11
               Label : CODE
                 3
                 Label : EXPRESSION
-                  17
+                  16
                   Label : LEFT
-                    16
+                    15
                     Label : MEMBER
-                      14
-                    Label : OBJECT
                       13
+                    Label : OBJECT
+                      12
                   Label : RIGHT
-                    18
+                    17
                 Label : EXPRESSION
-                  17
+                  16
                   Label : LEFT
-                    16
+                    15
                     Label : MEMBER
-                      20
+                      19
                     Label : OBJECT
-                      13
+                      12
                   Label : RIGHT
-                    16
+                    15
                     Label : METHOD
-                      22
+                      21
                       Label : ARGUMENT
-                        24
+                        23
                       Label : NAME
-                        22
+                        21
                     Label : OBJECT
-                      13
+                      12
                 Label : EXPRESSION
-                  26
+                  25
                   Label : BREAK
-                    27
+                    26
           Label : CONDITION
             6

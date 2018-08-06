@@ -20,24 +20,22 @@ Label : PROJECT
             Label : NAME
               9
             Label : ARGUMENT
-              13
+              12
               Label : LEFT
-                10
-                Label : AT
-                  6
-                  Label : INDEX
-                    12
-                  Label : VARIABLE
-                    11
+                6
+                Label : INDEX
+                  11
+                Label : VARIABLE
+                  10
               Label : RIGHT
-                16
+                15
                 Label : LEFT
                   6
                   Label : INDEX
-                    15
-                  Label : VARIABLE
                     14
+                  Label : VARIABLE
+                    13
                 Label : RIGHT
-                  17
+                  16
             Label : ARGUMENT
-              18
+              17

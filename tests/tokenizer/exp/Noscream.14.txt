@@ -13,17 +13,15 @@ Label : PROJECT
             5
           Label : RIGHT
             7
-            Label : AT
-              8
-              Label : ARGUMENT
-                10
+            Label : ARGUMENT
+              9
+              Label : LEFT
+                8
+              Label : RIGHT
+                11
                 Label : LEFT
-                  9
+                  10
                 Label : RIGHT
                   12
-                  Label : LEFT
-                    11
-                  Label : RIGHT
-                    13
-              Label : NAME
-                8
+            Label : NAME
+              7

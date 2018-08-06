@@ -20,7 +20,7 @@ Label : PROJECT
                 Label : VARIABLE
                   7
           Label : ELSE
-            24
+            23
           Label : THEN
             10
             Label : CONDITION
@@ -34,31 +34,27 @@ Label : PROJECT
                 Label : VARIABLE
                   7
             Label : ELSE
-              17
+              16
               Label : CONCAT
-                15
-                Label : AT
-                  8
-                  Label : INDEX
-                    16
-                  Label : VARIABLE
-                    7
+                8
+                Label : INDEX
+                  15
+                Label : VARIABLE
+                  7
               Label : CONCAT
-                22
+                21
             Label : THEN
-              17
+              16
               Label : CONCAT
-                15
-                Label : AT
-                  8
-                  Label : INDEX
-                    16
-                  Label : VARIABLE
-                    7
+                8
+                Label : INDEX
+                  15
+                Label : VARIABLE
+                  7
               Label : CONCAT
-                18
+                17
                 Label : ARGUMENT
-                  20
+                  19
                 Label : ARGUMENT
                   11
                 Label : ARGUMENT
@@ -68,7 +64,7 @@ Label : PROJECT
                   Label : VARIABLE
                     7
                 Label : NAME
-                  18
+                  17
         Label : EXPRESSION
           10
           Label : CONDITION
@@ -94,31 +90,27 @@ Label : PROJECT
                 Label : VARIABLE
                   7
             Label : ELSE
-              17
+              16
               Label : CONCAT
-                15
-                Label : AT
-                  8
-                  Label : INDEX
-                    16
-                  Label : VARIABLE
-                    7
+                8
+                Label : INDEX
+                  15
+                Label : VARIABLE
+                  7
               Label : CONCAT
-                22
+                21
             Label : THEN
-              17
+              16
               Label : CONCAT
-                15
-                Label : AT
-                  8
-                  Label : INDEX
-                    16
-                  Label : VARIABLE
-                    7
+                8
+                Label : INDEX
+                  15
+                Label : VARIABLE
+                  7
               Label : CONCAT
-                18
+                17
                 Label : ARGUMENT
-                  20
+                  19
                 Label : ARGUMENT
                   11
                 Label : ARGUMENT
@@ -128,6 +120,6 @@ Label : PROJECT
                   Label : VARIABLE
                     7
                 Label : NAME
-                  18
+                  17
           Label : THEN
-            22
+            21

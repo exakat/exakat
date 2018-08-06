@@ -9,5 +9,3 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
-          Label : AT
-            6

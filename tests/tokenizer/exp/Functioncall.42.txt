@@ -14,34 +14,32 @@ Label : PROJECT
           Label : RIGHT
             7
             Label : ARGUMENT
-              15
+              14
               Label : LEFT
                 8
-                Label : AT
-                  9
-                  Label : CODE
-                    13
-                    Label : LEFT
-                      11
-                      Label : INDEX
-                        12
-                      Label : VARIABLE
-                        10
-                    Label : RIGHT
-                      14
-              Label : RIGHT
-                16
-                Label : ARGUMENT
-                  13
+                Label : CODE
+                  12
                   Label : LEFT
-                    11
+                    10
                     Label : INDEX
-                      18
+                      11
                     Label : VARIABLE
-                      17
+                      9
                   Label : RIGHT
-                    19
+                    13
+              Label : RIGHT
+                15
+                Label : ARGUMENT
+                  12
+                  Label : LEFT
+                    10
+                    Label : INDEX
+                      17
+                    Label : VARIABLE
+                      16
+                  Label : RIGHT
+                    18
                 Label : NAME
-                  16
+                  15
             Label : NAME
               7

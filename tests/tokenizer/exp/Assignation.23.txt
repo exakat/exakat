@@ -13,5 +13,3 @@ Label : PROJECT
             5
           Label : RIGHT
             7
-            Label : AT
-              8

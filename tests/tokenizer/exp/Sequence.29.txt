@@ -47,6 +47,14 @@ Label : PROJECT
                     19
                   Label : RIGHT
                     20
+          Label : DEFINITION
+            10
+          Label : DEFINITION
+            11
+          Label : DEFINITION
+            18
+          Label : DEFINITION
+            19
           Label : NAME
             5
         Label : EXPRESSION

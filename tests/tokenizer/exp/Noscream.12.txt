@@ -17,15 +17,13 @@ Label : PROJECT
               5
           Label : RIGHT
             9
-            Label : AT
-              10
-              Label : NAME
+            Label : NAME
+              9
+            Label : ARGUMENT
+              11
+              Label : CONCAT
                 10
-              Label : ARGUMENT
+              Label : CONCAT
                 12
-                Label : CONCAT
-                  11
-                Label : CONCAT
-                  13
-              Label : ARGUMENT
-                14
+            Label : ARGUMENT
+              13

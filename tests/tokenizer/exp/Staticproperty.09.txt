@@ -31,6 +31,10 @@ Label : PROJECT
                 17
                 Label : LEFT
                   20
+                  Label : DEFINITION
+                    20
+                  Label : DEFINITION
+                    20
                 Label : RIGHT
                   21
               Label : EXPRESSION
@@ -53,6 +57,14 @@ Label : PROJECT
                     20
                   Label : NAME
                     9
+            Label : DEFINITION
+              9
+            Label : DEFINITION
+              20
+              Label : DEFINITION
+                20
+              Label : DEFINITION
+                20
             Label : NAME
               12
           Label : METHOD

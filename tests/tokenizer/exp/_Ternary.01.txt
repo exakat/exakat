@@ -19,6 +19,8 @@ Label : PROJECT
               9
               Label : NAME
                 9
+                Label : DEFINITION
+                  9
             Label : ARGUMENT
               10
               Label : NAME
@@ -61,6 +63,12 @@ Label : PROJECT
                           9
                   Label : THEN
                     22
+            Label : DEFINITION
+              12
+            Label : DEFINITION
+              17
+            Label : DEFINITION
+              24
             Label : NAME
               7
           Label : NAME

@@ -12,16 +12,14 @@ Label : PROJECT
           Label : LEFT
             5
           Label : RIGHT
-            10
+            9
             Label : CONDITION
               7
-              Label : AT
+              Label : ARGUMENT
                 8
-                Label : ARGUMENT
-                  9
-                Label : NAME
-                  8
+              Label : NAME
+                7
             Label : ELSE
-              12
-            Label : THEN
               11
+            Label : THEN
+              10

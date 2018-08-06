@@ -15,11 +15,9 @@ Label : PROJECT
             7
             Label : EXPRESSION
               8
-              Label : AT
-                9
             Label : EXPRESSION
-              11
+              10
               Label : LEFT
-                10
+                9
               Label : RIGHT
-                12
+                11

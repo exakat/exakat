@@ -17,13 +17,11 @@ Label : PROJECT
               5
           Label : RIGHT
             8
-            Label : AT
+            Label : ARGUMENT
               9
-              Label : ARGUMENT
-                10
-              Label : ARGUMENT
-                11
-              Label : ARGUMENT
-                12
-              Label : NAME
-                9
+            Label : ARGUMENT
+              10
+            Label : ARGUMENT
+              11
+            Label : NAME
+              8

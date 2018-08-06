@@ -10,22 +10,20 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : NOT
-            6
-            Label : AT
-              9
-              Label : ARGUMENT
+            8
+            Label : ARGUMENT
+              6
+              Label : CODE
                 7
-                Label : CODE
-                  8
         Label : EXPRESSION
-          9
+          8
           Label : ARGUMENT
-            11
+            10
             Label : LEFT
-              10
+              9
             Label : RIGHT
-              12
+              11
               Label : ARGUMENT
-                13
+                12
     Label : EXPRESSION
-      15
+      14

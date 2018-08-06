@@ -33,6 +33,8 @@ Label : PROJECT
               16
               Label : POSTPLUSPLUS
                 15
+          Label : DEFINITION
+            15
           Label : NAME
             5
         Label : EXPRESSION
@@ -61,6 +63,8 @@ Label : PROJECT
               16
               Label : POSTPLUSPLUS
                 15
+          Label : DEFINITION
+            15
           Label : NAME
             17
         Label : EXPRESSION

@@ -9,6 +9,44 @@ Label : PROJECT
         3
         Label : EXPRESSION
           5
+          Label : ARGUMENT
+            8
+            Label : NAME
+              8
+          Label : DEFINITION
+            27
+          Label : DEFINITION
+            10
+          Label : DEFINITION
+            14
+          Label : DEFINITION
+            15
+          Label : DEFINITION
+            25
+          Label : DEFINITION
+            32
+          Label : DEFINITION
+            26
+          Label : DEFINITION
+            33
+          Label : DEFINITION
+            45
+          Label : ARGUMENT
+            7
+            Label : NAME
+              7
+          Label : DEFINITION
+            49
+          Label : DEFINITION
+            50
+          Label : DEFINITION
+            53
+          Label : DEFINITION
+            54
+          Label : DEFINITION
+            38
+          Label : DEFINITION
+            57
           Label : BLOCK
             9
             Label : EXPRESSION
@@ -119,14 +157,6 @@ Label : PROJECT
                   57
               Label : RIGHT
                 60
-          Label : ARGUMENT
-            7
-            Label : NAME
-              7
-          Label : ARGUMENT
-            8
-            Label : NAME
-              8
           Label : NAME
             5
         Label : EXPRESSION
