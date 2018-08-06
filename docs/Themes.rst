@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 10 Jul 2018 06:50:05 +0000
-.. comment: Generation hash : 5685ae7020d9b5288cc1ba9ddbc38fef79b024f2
+.. comment: Generation date : Mon, 06 Aug 2018 16:25:10 +0000
+.. comment: Generation hash : ad0c4a4552fabb587a2ccba6faa300e1104b391e
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 357 analysis
+Total : 358 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -94,6 +94,7 @@ Total : 357 analysis
 * :ref:`Ambiguous Array Index <ambiguous-array-index>`
 * :ref:`Ambiguous Static <ambiguous-static>`
 * :ref:`Ambiguous Visibilities <ambiguous-visibilities>`
+* :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Assign With And <assign-with-and>`
 * :ref:`Assigned Twice <assigned-twice>`
@@ -256,6 +257,7 @@ Total : 357 analysis
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
 * :ref:`No Public Access <no-public-access>`
 * :ref:`No Real Comparison <no-real-comparison>`
+* :ref:`No Reference For Ternary <no-reference-for-ternary>`
 * :ref:`No Reference On Left Side <no-reference-on-left-side>`
 * :ref:`No Return Used <no-return-used>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
@@ -282,7 +284,6 @@ Total : 357 analysis
 * :ref:`Parent First <parent-first>`
 * :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
 * :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
-* :ref:`Php/NoReferenceForTernary`
 * :ref:`Phpinfo`
 * :ref:`Possible Infinite Loop <possible-infinite-loop>`
 * :ref:`Pre-increment`
@@ -876,8 +877,9 @@ Total : 18 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 4 analysis
+Total : 5 analysis
 
+* :ref:`Case Insensitive Constants <case-insensitive-constants>`
 * Php/HashAlgos53
 * Php/HashAlgos54
 * Php/Php73NewFunctions
@@ -1040,16 +1042,18 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 55 analysis
+Total : 58 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
+* :ref:`Avoid Real <avoid-real>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
 * :ref:`Could Be Static Closure <could-be-static-closure>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Compact <could-use-compact>`
 * :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`
 * :ref:`Could Use array_unique <could-use-array\_unique>`
+* :ref:`Detect Current Class <detect-current-class>`
 * :ref:`Drop Substr Last Arg <drop-substr-last-arg>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
@@ -1067,6 +1071,7 @@ Total : 55 analysis
 * :ref:`Too Many Parameters <too-many-parameters>`
 * :ref:`Use Count Recursive <use-count-recursive>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
+* :ref:`Use is_countable <use-is\_countable>`
 * :ref:`Use session_start() Options <use-session\_start()-options>`
 * :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 * Arrays/RandomlySortedLiterals

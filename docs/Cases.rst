@@ -1276,7 +1276,7 @@ This is a typical example of a function mostly controlled by one condition. It c
 
 .. _opencfp-structures-bailoutearly:
 
-OpenCfp
+opencfp
 ^^^^^^^
 
 :ref:`bail-out-early`, in chair/assign_auto_reviewers_weighted_topic_match.inc:105. 
@@ -1351,7 +1351,7 @@ Illegal Name For Method
 
 .. _prestashop-classes-wrongname:
 
-Prestashop
+PrestaShop
 ^^^^^^^^^^
 
 :ref:`illegal-name-for-method`, in /admin-dev/ajaxfilemanager/inc/class.pagination.php:200. 
@@ -1591,6 +1591,83 @@ This code looks like ``($options & DatabaseInterface::QUERY_STORE) == DatabaseIn
         $warnings = 0;
     }
 
+No Reference For Ternary
+========================
+
+.. _phpadnsnew-php-noreferenceforternary:
+
+phpadnsnew
+^^^^^^^^^^
+
+:ref:`no-reference-for-ternary`, in /lib/OA/Admin/Menu/Section.php334:334. 
+
+The reference should be removed from the function definition. Either this method returns null, which is never a reference, or it returns $this, which is always a reference, or the results of a methodcall. The latter may or may not be a reference, but the Ternary operator will drop it and return by value. 
+
+.. code-block:: php
+
+    function &getParentOrSelf($type)
+    	{
+            if ($this->type == $type) {
+                return $this;
+            }
+            else {
+                return $this->parentSection != null ? $this->parentSection->getParentOrSelf($type) : null;
+            }
+    	}
+
+Useless Referenced Argument
+===========================
+
+.. _woocommerce-functions-uselessreferenceargument:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`useless-referenced-argument`, in includes/data-stores/class-wc-product-variation-data-store-cpt.php:414. 
+
+$product is defined with a reference in the method signature, but it is also used as an object with a dynamical property. As such, the reference in the argument definition is too much.
+
+.. code-block:: php
+
+    public function update_post_meta( &$product, $force = false ) {
+    		$meta_key_to_props = array(
+    			'_variation_description' => 'description',
+    		);
+    
+    		$props_to_update = $force ? $meta_key_to_props : $this->get_props_to_update( $product, $meta_key_to_props );
+    
+    		foreach ( $props_to_update as $meta_key => $prop ) {
+    					$value   = $product->{get_$prop}( 'edit' );
+    					$updated = update_post_meta( $product->get_id(), $meta_key, $value );
+    			if ( $updated ) {
+    				$this->updated_props[] = $prop;
+    			}
+    		}
+    
+    		parent::update_post_meta( $product, $force );
+
+
+--------
+
+
+.. _magento-functions-uselessreferenceargument:
+
+Magento
+^^^^^^^
+
+:ref:`useless-referenced-argument`, in setup/src/Magento/Setup/Module/Di/Compiler/Config/Chain/PreferencesResolving.php:63. 
+
+$value is defined with a reference. In the following code, it is only read and never written : for index search, or by itself. In fact, $preferences is also only read, and never written. As such, both could be removed.
+
+.. code-block:: php
+
+    private function resolvePreferenceRecursive(&$value, &$preferences)
+        {
+            return isset($preferences[$value])
+                ? $this->resolvePreferenceRecursive($preferences[$value], $preferences)
+                : $value;
+        }
+
 Redefined Private Property
 ==========================
 
@@ -1759,6 +1836,43 @@ _values is a private property from the Stripe Class. The class contains other ob
         {
             return $this->_values;
         }
+
+PHP7 Dirname
+============
+
+.. _openconf-structures-php7dirname:
+
+OpenConf
+^^^^^^^^
+
+:ref:`php7-dirname`, in include.php:61. 
+
+Since PHP 7.0, dirname( , 2); does the job.
+
+.. code-block:: php
+
+    $OC_basepath = dirname(dirname($_SERVER['PHP_SELF']));
+
+
+--------
+
+
+.. _mediawiki-structures-php7dirname:
+
+MediaWiki
+^^^^^^^^^
+
+:ref:`php7-dirname`, in includes/installer/Installer.php:1173. 
+
+Since PHP 7.0, dirname( , 2); does the job.
+
+.. code-block:: php
+
+    protected function envPrepPath() {
+    		global $IP;
+    		$IP = dirname( dirname( __DIR__ ) );
+    		$this->setVar( 'IP', $IP );
+    	}
 
 Exception Order
 ===============
