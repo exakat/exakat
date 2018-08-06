@@ -34,6 +34,7 @@ $applications = array(
     'MediaWiki'                  => array('url' => 'https://www.mediawiki.org/', ),
     'Magento'                    => array('url' => 'https://magento.com/', ),
     'NextCloud'                  => array('url' => 'https://nextcloud.com/', ),
+    'opencfp'                    => array('url' => 'https://github.com/opencfp/opencfp', ),
     'OpenConf'                   => array('url' => 'https://www.openconf.com/', ),
     'OpenEMR'                    => array('url' => 'https://www.open-emr.org/', ),
     'Phpdocumentor'              => array('url' => 'https://www.phpdoc.org/', ),
