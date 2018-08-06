@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 10 Jul 2018 06:50:05 +0000
-.. comment: Generation hash : 5685ae7020d9b5288cc1ba9ddbc38fef79b024f2
+.. comment: Generation date : Mon, 06 Aug 2018 16:25:10 +0000
+.. comment: Generation hash : ad0c4a4552fabb587a2ccba6faa300e1104b391e
 
 
 .. _$http\_raw\_post\_data:
@@ -351,7 +351,7 @@ Abstract Static Methods
 
 Methods cannot be both abstract and static. Static methods belong to a class, and will not be overridden by the child class. For normal methods, PHP will start at the object level, then go up the hierarchy to find the method. With static, you have to mention the name, or use Late Static Binding, with self or static. Hence, it is useless to have an abstract static method : it should be a simple static method.
 
-A child class is able to declare a method with the same name than a static method in the parent, but those two methods will stay independant. 
+A child class is able to declare a method with the same name than a static method in the parent, but those two methods will stay independent. 
 
 This is not the case anymore in PHP 7.0+.
 
@@ -868,7 +868,7 @@ Ambiguous Static
 
 Methods or properties with the same name, are defined static in one class, and not static in another. This is error prone, as it requires a good knowledge of the code to make it static or not. 
 
-Try to keep the static-ness of methods simple, and unique. Consider renaming the methods and properties to distinguish them easily. A method and a static method have probably different responsibilities.
+Try to keep the staticness of methods simple, and unique. Consider renaming the methods and properties to distinguish them easily. A method and a static method have probably different responsibilities.
 
 .. code-block:: php
 
@@ -994,6 +994,50 @@ The analyzer will detect situations where a class, or the keywords 'array' or 'c
 +------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP   | `always-typehint <https://github.com/dseguy/clearPHP/tree/master/rules/always-typehint.md>`__ |
 +------------+-----------------------------------------------------------------------------------------------+
+
+
+
+.. _assert-function-is-reserved:
+
+Assert Function Is Reserved
+###########################
+
+
+Avoid defining an `assert` function in namespaces. 
+
+While they work fine when the assertions are active (`zend.assertions=1`), calls to unqualified `assert` are optimized away when assertions are not active. 
+
+.. code-block:: php
+
+   <?php
+   //      Run this with zend.assertions=1 and 
+   // Then run this with zend.assertions=0
+   
+   namespace Test {
+       function 'assert() {
+           global $foo;
+   
+           $foo = true;
+       }
+   }
+   
+   namespace Test {
+       'assert();
+   
+       var_dump('isset($foo));
+   }
+   
+   ?>
+
+
+See also `assert <http://php.net/assert>`_ and 
+         `User-defined assert function is optimized away with zend.assertions=-1 <https://bugs.php.net/bug.php?id=75445>`_.
+
++------------+------------------------------+
+| Short name | Php/AssertFunctionIsReserved |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
 
 
 
@@ -1451,6 +1495,43 @@ Even if most of the time, usage of parenthesis is legit, it is recommended to av
 +------------+------------------------------------+
 | Themes     | :ref:`Analyze`                     |
 +------------+------------------------------------+
+
+
+
+.. _avoid-real:
+
+Avoid Real
+##########
+
+
+PHP has two float data type : real and double. `real` is rarely used, and might be deprecated in PHP 7.4.
+
+To prepare code, avoid using `'is_real() <http://www.php.net/is_real>`_ and the `(real)` typecast.
+
+.. code-block:: php
+
+   <?php
+   
+   // safe way to check for float
+   if (!is_float($a)) {
+       $a = (float) $a;
+   }
+   
+   // Avoid doing that
+   if (!is_real($a)) {
+       $a = (real) $a;
+   }
+   
+   ?>
+
+
+See also `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_.
+
++------------+--------------------+
+| Short name | Php/AvoidReal      |
++------------+--------------------+
+| Themes     | :ref:`Suggestions` |
++------------+--------------------+
 
 
 
@@ -2589,7 +2670,7 @@ Cant Inherit Abstract Method
 ############################
 
 
-Inheriting abstract methods was made available in PHP 7.2. In previous versions, it emits a Fatal error.
+Inheriting abstract methods was made available in PHP 7.2. In previous versions, it emited a fatal error.
 
 .. code-block:: php
 
@@ -2687,6 +2768,47 @@ See also `Cant Use Return Value In Write Context <https://stackoverflow.com/ques
 +------------+------------------------------------------------------+
 | Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +------------+------------------------------------------------------+
+
+
+
+.. _case-insensitive-constants:
+
+Case Insensitive Constants
+##########################
+
+
+PHP constants may be case insensitive, when defined with `'define() <http://www.php.net/define>`_ and the third argument.
+
+This feature is deprecated since PHP 7.3 and will be removed in PHP 8.0.
+
+.. code-block:: php
+
+   <?php
+   
+   // case sensitive
+   define('A', 1);
+   
+   // case insensitive
+   define('B', 1, true);
+   
+   echo A;
+   // This is not possible
+   //echo a;
+   
+   // both possible
+   echo B;
+   echo b;
+   
+   ?>
+
+
+See also `define <http://php.net/manual/en/function.define.php>`_.
+
++------------+------------------------------------+
+| Short name | Constants/CaseInsensitiveConstants |
++------------+------------------------------------+
+| Themes     | :ref:`CompatibilityPHP73`          |
++------------+------------------------------------+
 
 
 
@@ -4405,7 +4527,7 @@ Could Use self
 ##############
 
 
-``self`` keyword refers to the current class, or any of its parents. Using it is just as fast as the full classname, it is as readable and it is will not be changed upon class or namespace change.
+``self`` keyword refers to the current class, or any of its parents. Using it is just as fast as the full class name, it is as readable and it is will not be changed upon class or namespace change.
 
 It is also routinely used in traits : there, ``self`` represents the class in which the trait is used, or the trait itself. 
 
@@ -4880,6 +5002,51 @@ This was added in PHP 5.5. There is no need anymore for an intermediate variable
 
 
 
+.. _detect-current-class:
+
+Detect Current Class
+####################
+
+
+Dectecting the current class should be done with ::class operator.
+
+`'__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_ may be replace by `self::class`. 
+get_called_class() may be replace by `static::class`. 
+
+`'__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_ and get_called_class() are set to be deprecated in PHP 7.4. 
+
+.. code-block:: php
+
+   <?php
+   
+   class X {
+       function foo() {
+           echo '__CLASS__.\n;          // X
+           echo self::class.\n;        // X
+           
+           echo get_called_class().\n;  // Y
+           echo static::class.\n;       // Y
+       }
+   }
+   
+   class Y extends X {}
+   
+   $y = new Y();
+   $y->foo();
+   
+   ?>
+
+
+See also `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_.
+
++------------+------------------------+
+| Short name | Php/DetectCurrentClass |
++------------+------------------------+
+| Themes     | :ref:`Suggestions`     |
++------------+------------------------+
+
+
+
 .. _direct-injection:
 
 Direct Injection
@@ -5134,7 +5301,7 @@ When getting rid of a property, simply assign it to null. This keeps the propert
 
 This analysis works on properties and static properties. It also reports magic properties being unset.
 
-Thanks for [Benoit Burnichon](https://twitter.com/BenoitBurnichon) for the original idea.
+Thanks for `Benoit Burnichon <https://twitter.com/BenoitBurnichon>`_ for the original idea.
 
 +------------+--------------------------------------------------------------------------------------+
 | Short name | Classes/DontUnsetProperties                                                          |
@@ -5204,7 +5371,7 @@ Dont Mix ++
 ###########
 
 
-++ operators have two distincts behaviors, and should be used in isolation.
+++ operators have two distinct behaviors, and should be used in isolation.
 
 When mixed with a larger expression, it is difficult to read, and may lead to unwanted behaviors.
 
@@ -6079,7 +6246,7 @@ Using `'eval() <http://www.php.net/eval>`_ is bad for performances (compilation 
 
 
 Most of the time, it is possible to replace the code by some standard PHP, like variable variable for accessing a variable for which you have the name.
-At worse, including a pre-generated file will be faster. 
+At worse, including a pregenerated file is faster and cacheable. 
 
 For PHP 7.0 and later, it is important to put `'eval() <http://www.php.net/eval>`_ in a try..catch expression.
 
@@ -6313,9 +6480,11 @@ Flexible Heredoc
 ################
 
 
-Flexible syntac for Heredoc. This was introduced in PHP 7.3.
+Flexible syntax for Heredoc. 
 
 The new flexible syntax for heredoc and nowdoc enable the closing marker to be indented, and remove the new line requirement after the closing marker.
+
+It was introduced in PHP 7.3.
 
 .. code-block:: php
 
@@ -6891,6 +7060,27 @@ Functions Removed In PHP 5.5
 
 Those functions were removed in PHP 5.5.
 
++ php_logo_guid
++ php_egg_logo_guid
++ php_real_logo_guid
++ zend_logo_guid
++ mcrypt_cbc
++ mcrypt_cfb
++ mcrypt_ecb
++ mcrypt_ofb
+
+.. code-block:: php
+
+   <?php
+   
+   echo '<img src="' . $_SERVER['PHP_SELF'] .
+        '?=' . 'php_logo_guid() . '" alt="PHP Logo !" />';
+   
+   ?>
+
+
+See also `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_.
+
 +------------+---------------------------+
 | Short name | Php/Php55RemovedFunctions |
 +------------+---------------------------+
@@ -6905,13 +7095,18 @@ Getting Last Element
 ####################
 
 
-Getting the last element of an array is done with `'count() <http://www.php.net/count>`_ or `'end() <http://www.php.net/end>`_.
+Getting the last element of an array relies on array_key_last().
+
+array_key_last() was added in PHP 7.3. Before that, 
 
 .. code-block:: php
 
    <?php
    
-   $array = [1, 2, 3];
+   $array = ['a' => 1, 'b' => 2, 'c' => 3];
+   
+   // Best solutions, by far
+   $last = $array[array_key_last($array)];
    
    // Best solutions, just as quick as each other
    $last = $array[count($array) - 1];
@@ -7902,19 +8097,19 @@ The same signatures means the children class must have :
 + the same default value or removed
 + a reference like its parent
 
-This problem emits a fatal error. Yet, it is difficult to lint, because classes are often stored in different files. As such, PHP do lint each file independently, as unknown parent classes are not checked if not present. Yet, when executing the code, PHP lint the actual code and may encounter a Fatal error.
+This problem emits a fatal error. Yet, it is difficult to lint, because classes are often stored in different files. As such, PHP do lint each file independently, as unknown parent classes are not checked if not present. Yet, when executing the code, PHP lint the actual code and may encounter a fatal error.
 
 .. code-block:: php
 
    <?php
    
    class a {
-       public function foo($a) {}
+       public function foo($a = 1) {}
    }
    
    class ab extends a {
        // foo is overloaded and now includes a default value for $a
-       public function foo($a = 1) {}
+       public function foo($a) {}
    }
    
    ?>
@@ -8441,11 +8636,7 @@ Until PHP 7, it was possible to use arrays as constants, but it was not possible
    ?>
 
 
-This would yield an error : 
-
-Fatal error: Cannot use `'isset() <http://www.php.net/isset>`_ on the result of an expression (you can use "null !== expression" instead) in test.php on line 7
-
-This is a backward incompatibility.
+This would yield an error : `Cannot use `'isset() <http://www.php.net/isset>`_ on the result of an expression (you can use "null !== expression" instead)`. This is a backward incompatibility.
 
 +------------+------------------------------------------------------------------------------------------------------------+
 | Short name | Structures/IssetWithConstant                                                                               |
@@ -9579,7 +9770,7 @@ The analysis doesn't take into account include_path. This may yield false positi
    ?>
 
 
-Missing included files may lead to a Fatal error, a warning or other error later in the execution.
+Missing included files may lead to a fatal error, a warning or other error later in the execution.
 
 +------------+----------------------+
 | Short name | Files/MissingInclude |
@@ -9766,7 +9957,7 @@ Mkdir Default
 #############
 
 
-`'mkdir() <http://www.php.net/mkdir>`_ gives universal access to created folders, by default. It is recommended to gives a more limited set of rights (0755, 0700), or to explicitely set the rights to 0777. 
+`'mkdir() <http://www.php.net/mkdir>`_ gives universal access to created folders, by default. It is recommended to gives limited set of rights (0755, 0700), or to explicitly set the rights to 0777. 
 
 .. code-block:: php
 
@@ -10787,9 +10978,9 @@ No Boolean As Default
 #####################
 
 
-Default values should always be set up with constants.
+Default values should always be set up with a constant name.
 
-Class constants or constants improve readability when calling the methods.
+Class constants and constants improve readability when calling the methods or comparing values and statuses.
 
 .. code-block:: php
 
@@ -11008,7 +11199,7 @@ No Direct Call To Magic Method
 ##############################
 
 
-PHP magic methods, such as `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_, `'__set() <http://php.net/manual/en/language.oop5.magic.php>`_, ... are supposed to be used in an object environnement, and not with direct call. 
+PHP magic methods, such as `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_ or `'__set() <http://php.net/manual/en/language.oop5.magic.php>`_, are supposed to be used in an object environnement, and not with direct call. 
 
 It is recommended to use the magic method with its intended usage, and not to call it directly. For example, typecast to ``string`` instead of calling the ``__toString()`` method.
 
@@ -11769,6 +11960,52 @@ See also `Floating point numbers <http://php.net/manual/en/language.types.float.
 +------------+-----------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-real-comparison <https://github.com/dseguy/clearPHP/tree/master/rules/no-real-comparison.md>`__ |
 +------------+-----------------------------------------------------------------------------------------------------+
+
+
+
+.. _no-reference-for-ternary:
+
+No Reference For Ternary
+########################
+
+
+The ternary operator and the null coalescing operator are both expressions that only return values, and not a variable. 
+
+This means that any provided reference will be turned into its value. While this is usually invisible, it will raise a warning when a reference is expected. This is the case with methods returning a reference. 
+
+A PHP notice is generated when using a ternary operator or the null coalesce operator : `Only variable references should be returned by reference`. The notice is also emitted when returning objects. 
+
+This applies to methods, functions and closures. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This works
+   function &foo($a, $b) { 
+       if ($a === 1) {
+           return $b; 
+       } else {
+           return $a; 
+       }
+   }
+   
+   // This raises a warning, as the operator returns a value
+   function &foo($a, $b) { return $a === 1 ? $b : $a; }
+   
+   ?>
+
+
+See also `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_, 
+         `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_.
+
++------------+---------------------------------------------+
+| Short name | Php/NoReferenceForTernary                   |
++------------+---------------------------------------------+
+| Themes     | :ref:`Analyze`                              |
++------------+---------------------------------------------+
+| Examples   | :ref:`phpadnsnew-php-noreferenceforternary` |
++------------+---------------------------------------------+
 
 
 
@@ -13352,30 +13589,30 @@ PHP 70 Removed Functions
 
 The following PHP native functions were removed in PHP 7.0.
 
-* ereg
-* ereg_replace
-* eregi
-* eregi_replace
-* split
-* spliti
-* sql_regcase
-* magic_quotes_runtime
-* set_magic_quotes_runtime
-* call_user_method
-* call_user_method_array
-* set_socket_blocking
-* mcrypt_ecb
-* mcrypt_cbc
-* mcrypt_cfb
-* mcrypt_ofb
-* datefmt_set_timezone_id
-* imagepsbbox
-* imagepsencodefont
-* imagepsextendfont
-* imagepsfreefont
-* imagepsloadfont
-* imagepsslantfont
-* imagepstext
+* `ereg`
+* `ereg_replace`
+* `eregi`
+* `eregi_replace`
+* `split`
+* `spliti`
+* `sql_regcase`
+* `magic_quotes_runtime`
+* `set_magic_quotes_runtime`
+* `call_user_method`
+* `call_user_method_array`
+* `set_socket_blocking`
+* `mcrypt_ecb`
+* `mcrypt_cbc`
+* `mcrypt_cfb`
+* `mcrypt_ofb`
+* `datefmt_set_timezone_id`
+* `imagepsbbox`
+* `imagepsencodefont`
+* `imagepsextendfont`
+* `imagepsfreefont`
+* `imagepsloadfont`
+* `imagepsslantfont`
+* `imagepstext`
 
 +------------+------------------------------------------------------+
 | Short name | Php/Php70RemovedFunctions                            |
@@ -13510,7 +13747,7 @@ PHP7 Dirname
 ############
 
 
-With PHP 7, dirname has a second argument that represents the number of parent folder to follow. This prevent us from using nested `'dirname() <http://www.php.net/dirname>`_ calls to reach an grand-parent direct.
+With PHP 7, `'dirname() <http://www.php.net/dirname>`_ has a second argument that represents the number of parent folder to follow. This prevent us from using nested `'dirname() <http://www.php.net/dirname>`_ calls to reach an grand-parent direct.
 
 .. code-block:: php
 
@@ -13525,10 +13762,15 @@ With PHP 7, dirname has a second argument that represents the number of parent f
    
    ?>
 
+
+See also `dirname <http://php.net/dirname>`_.
+
 +------------+--------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Structures/PHP7Dirname                                                                                                         |
 +------------+--------------------------------------------------------------------------------------------------------------------------------+
 | Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`Suggestions` |
++------------+--------------------------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`openconf-structures-php7dirname`, :ref:`mediawiki-structures-php7dirname`                                                |
 +------------+--------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -13748,7 +13990,7 @@ Php 7.1 New Class
 
 New classes, introduced in PHP 7.1. If classes where created with the same name, in current code, they have to be moved in a namespace, or removed from code to migrate safely to PHP 7.1.
 
-The new class is : ReflectionClassConstant. The other class is 'Void' : this is forbidden as a classname, as Void is used for return type hint.
+The new class is : ReflectionClassConstant. The other class is 'Void' : this is forbidden as a class name, as Void is used for return type hint.
 
 .. code-block:: php
 
@@ -13804,48 +14046,6 @@ The new class is : HashContext.
 +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
 +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-
-.. _php/noreferenceforternary:
-
-Php/NoReferenceForTernary
-#########################
-
-
-The ternary operator and the null coalescing operator are both expressions that only return values, and not a variable. 
-
-This means that any provided reference will be turned into its value. While this is usually invisible, it will raise a warning when a reference is expected. This is the case with methods returning a reference. 
-
-This applies to methods, functions and closures. 
-
-.. code-block:: php
-
-   <?php
-   
-   // This works
-   function &foo($a, $b) { 
-       if ($a === 1) {
-           return $b; 
-       } else {
-           return $a; 
-       }
-   }
-   
-   // This raises a warning, as the operator returns a value
-   function &foo($a, $b) { return $a === 1 ? $b : $a; }
-   
-   ?>
-
-
-See also `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_, 
-         `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_.
-
-+------------+---------------------------+
-| Short name | Php/NoReferenceForTernary |
-+------------+---------------------------+
-| Themes     | :ref:`Analyze`            |
-+------------+---------------------------+
 
 
 
@@ -15813,7 +16013,7 @@ Should Typecast
 ###############
 
 
-When typecasting, it is better to use the casting operator, such as (int) or (bool).
+When typecasting, it is better to use the casting operator, such as `(int)` or `(bool)`.
 
 Functions such as `'intval() <http://www.php.net/intval>`_ or `'settype() <http://www.php.net/settype>`_ are always slower.
 
@@ -15993,9 +16193,9 @@ Should Use Local Class
 ######################
 
 
-Methods in a class should use the class, or be functions.
+Methods should use the defining class, or be functions.
 
-Methods should use $this with another method or a property, or call parent::. Static methods should call another static method, or a static property. 
+Methods should use `$this` with another method or a property, or call `parent::`. Static methods should call another static method, or a static property. 
 Methods which are overwritten by a child class are omitted : the parent class act as a default value for the children class, and this is correct.
 
 .. code-block:: php
@@ -16105,11 +16305,11 @@ Beware, some edge cases may apply. In particular, backward compatibility may pre
 * array_push may be replaced with [] 
 * is_object may be replace with `'instanceof <http://php.net/manual/en/language.operators.type.php>`_
 * function_get_arg and function_get_args may be replace with ellipsis : ...
-* chr may be replaces by string sequences, such as \n, \x69, u{04699}
-* call_user_func may be replace by $functionName(arguments), $object->$method(...$arguments)
-* is_null may be replaced by `=== null`
+* chr may be replaces by string sequences, such as `\n`, `\x69`, `u{04699}`
+* `'call_user_func() <http://www.php.net/call_user_func>`_ may be replaces by `$functionName(arguments)`, `$object->$method(...$arguments)`
+* `'is_null() <http://www.php.net/is_null>`_ may be replaced by `=== null`
 * php_version may be replace by PHP_VERSION (the constant)
-* is_array, is_int, is_object, etc. may be replaced by a typehint
+* `'is_array() <http://www.php.net/is_array>`_, `'is_int() <http://www.php.net/is_int>`_, `'is_object() <http://www.php.net/is_object>`_, etc. may be replaced by a typehint
 
 +------------+------------------------------+
 | Short name | Structures/ShouldUseOperator |
@@ -17928,7 +18128,7 @@ Throw Functioncall
 ##################
 
 
-The throw keyword is excepted to use an exception. Calling a function to prepare that exception before throwing it is possible, but forgetting the new keyword is also possible. 
+The throw keyword expects to use an exception. Calling a function to prepare that exception before throwing it is possible, but forgetting the new keyword is also possible. 
 
 .. code-block:: php
 
@@ -18623,7 +18823,7 @@ Undefined ::class
 
 ::class doesn't check if a corresponding class exists. 
 
-::class must be checked with a call to class_exists(). Otherwise, it may lead to a ``Class 'foo' not found `` or even silent dead code : this happens also with Catch and `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
+`::class` must be checked with a call to class_exists(). Otherwise, it may lead to a ``Class 'foo' not found`` or even silent dead code : this happens also with Catch and `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
 
 .. code-block:: php
 
@@ -19024,6 +19224,9 @@ Some functions are called, but not defined in the code. This means that the func
    a\b\c\foo(); 
    
    ?>
+
+
+See also `Functions <http://php.net/manual/en/language.functions.php>`_.
 
 +------------+------------------------------+
 | Short name | Functions/UndefinedFunctions |
@@ -19487,11 +19690,11 @@ Unknown Pcre2 Option
 ####################
 
 
-Pcre2 supports different options, compared to Pcre1. PCRE2 was adopted with PHP 7.3. 
+PCRE2 supports different options, compared to PCRE1. PCRE2 was adopted with PHP 7.3. 
 
-The S modifier : it used to tell PCRE to spend more time studying the regex, so as to be faster at execution. This is now the default behavior, and may be dropped from the regex.
+The `S` modifier : it used to tell PCRE to spend more time studying the regex, so as to be faster at execution. This is now the default behavior, and may be dropped from the regex.
 
-The X modifier : X is still existing with PCRE2, though it is now the default for PCRE2, and not for PHP as time of writing. In particular, 'Any backslash in a pattern that is followed by a letter that has no special meaning causes an error, thus reserving these combinations for future expansion. '. It is recommended to avoid using useless sequence \s in regex to get ready for that change. All the following letters 'gijkmoqyFIJMOTY' . Note that 'clLpPuU' are valid PRCE sequences, and are probably failing for other reasons. 
+The `X` modifier : `X` is still existing with PCRE2, though it is now the default for PCRE2, and not for PHP as time of writing. In particular, `Any backslash in a pattern that is followed by a letter that has no special meaning causes an error, thus reserving these combinations for future expansion. `. It is recommended to avoid using useless sequence \s in regex to get ready for that change. All the following letters `gijkmoqyFIJMOTY` . Note that `clLpPuU` are valid PRCE sequences, and are probably failing for other reasons. 
 
 .. code-block:: php
 
@@ -19505,7 +19708,7 @@ The X modifier : X is still existing with PCRE2, though it is now the default fo
 
 
 See also `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_ and 
-         `PHP RFC: PCRE2 migration <https://wiki.php.net/rfc/pcre2-migration>`.
+         `PHP RFC: PCRE2 migration <https://wiki.php.net/rfc/pcre2-migration>`_.
 
 +------------+-------------------------------------------+
 | Short name | Php/UnknownPcre2Option                    |
@@ -19760,7 +19963,7 @@ It checks if an variable is of a specific class. However, if the referenced clas
 
 Make sure the following classes are well defined.
 
-See also `Type operators <http://php.net/`'instanceof <http://php.net/manual/en/language.operators.type.php>`_>`_.
+See also `instanceof <http://php.net/`'instanceof <http://php.net/manual/en/language.operators.type.php>`_>`_.
 
 +------------+-----------------------------------------------------------------------------------------------------------------+
 | Short name | Classes/UnresolvedInstanceof                                                                                    |
@@ -20254,7 +20457,7 @@ Unused Private Methods
 
 Private methods that are not used are dead code. 
 
-Private methods are reserved for the defining class. Thus, they must be used with $this or any variation of self:: 
+Private methods are reserved for the defining class. Thus, they must be used with the current class, with `$this` or `self::`.
 
 .. code-block:: php
 
@@ -21052,7 +21255,7 @@ When PHP offers the alternative between procedural and OOP api for the same feat
 
 Often, this least to more compact code, as methods are shorter, and there is no need to bring the resource around. Lots of new extensions are directly written in OOP form too.
 
-OOP / procedural alternatives are available for `mysqli <http://php.net/manual/en/book.mysqli.php>`_, `tidy <http://php.net/manual/en/book.tidy.php>`_, `cairo <http://php.net/manual/en/book.cairo.php>`_, 'finfo <http://php.net/manual/en/book.fileinfo.php>`_, and some others.
+OOP / procedural alternatives are available for `mysqli <http://php.net/manual/en/book.mysqli.php>`_, `tidy <http://php.net/manual/en/book.tidy.php>`_, `cairo <http://php.net/manual/en/book.cairo.php>`_, `finfo <http://php.net/manual/en/book.fileinfo.php>`_, and some others.
 
 .. code-block:: php
 
@@ -21459,6 +21662,50 @@ This way, constant will be defined at compile time, and not at execution time.
 +------------+----------------------------------------------------------------+
 | Themes     | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
 +------------+----------------------------------------------------------------+
+
+
+
+.. _use-is\_countable:
+
+Use is_countable
+################
+
+
+is_countable() checks if a variables holds a value that can be counted. It is recommended to use it before calling `'count() <http://www.php.net/count>`_.
+
+is_countable() accepts arrays and object whose class implements \countable.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($arg) {
+       if (!is_countable($arg)) {
+           // $arg cannot be passed to 'count()
+           return 0
+       }
+       return count($arg);
+   }
+   
+   function bar($arg) {
+       if (!is_array($arg) and !$x 'instanceof \Countable) {
+           // $arg cannot be passed to 'count()
+           return 0
+       }
+   
+       return count($arg);
+   }
+   
+   ?>
+
+
+See also `PHP RFC: is_countable <https://wiki.php.net/rfc/is-countable>`_.
+
++------------+-------------------------+
+| Short name | Php/CouldUseIsCountable |
++------------+-------------------------+
+| Themes     | :ref:`Suggestions`      |
++------------+-------------------------+
 
 
 
@@ -22272,11 +22519,13 @@ This is probably a development artefact that was forgotten. It is better to remo
    
    ?>
 
-+------------+------------------------------------+
-| Short name | Functions/UselessReferenceArgument |
-+------------+------------------------------------+
-| Themes     | :ref:`Analyze`                     |
-+------------+------------------------------------+
++------------+----------------------------------------------------------------------------------------------------------+
+| Short name | Functions/UselessReferenceArgument                                                                       |
++------------+----------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                           |
++------------+----------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`woocommerce-functions-uselessreferenceargument`, :ref:`magento-functions-uselessreferenceargument` |
++------------+----------------------------------------------------------------------------------------------------------+
 
 
 
@@ -23556,7 +23805,7 @@ In fact, `'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ may
        public function '__toString() {
            // Do not throw exceptions in '__toString
            if (!is_string($this->string)) {
-               throw new Exception('$this->string is not a string!!');
+               throw new Exception("$this->string is not a string!!");
            }
            
            return $this->string;

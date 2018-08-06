@@ -11,6 +11,7 @@ Annex
 * Recognized Libraries
 * New analyzers
 * External services
+* PHP Error messages
 
 Supported Themes
 ----------------
@@ -71,6 +72,14 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 {{ANALYZER_INTRODUCTION}}
+
+PHP Error messages
+------------------
+
+Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
+
+{{PHP_ERROR_MESSAGES}}
+
 
 External services
 -----------------

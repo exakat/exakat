@@ -135,6 +135,7 @@ Glossary
 
     + `assert()`
 
+      + :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
       + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
 
 
@@ -189,6 +190,10 @@ Glossary
       + :ref:`Can't Count Non-Countable <can't-count-non-countable>`
       + :ref:`Uses Default Values <uses-default-values>`
 
+    + `call_user_func()`
+
+      + :ref:`Should Use Operator <should-use-operator>`
+
     + `chr()`
 
       + :ref:`Should Preprocess Chr <should-preprocess-chr>`
@@ -227,8 +232,8 @@ Glossary
       + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`Cache Variable Outside Loop <cache-variable-outside-loop>`
-      + :ref:`Getting Last Element <getting-last-element>`
       + :ref:`No Count With 0 <no-count-with-0>`
+      + :ref:`Use is_countable <use-is\_countable>`
       + :ref:`Uses Default Values <uses-default-values>`
 
     + `crc32()`
@@ -256,6 +261,7 @@ Glossary
 
     + `define()`
 
+      + :ref:`Case Insensitive Constants <case-insensitive-constants>`
       + :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
       + :ref:`Define With Array <define-with-array>`
       + :ref:`Fully Qualified Constants <fully-qualified-constants>`
@@ -307,10 +313,6 @@ Glossary
       + :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`No Isset With Empty <no-isset-with-empty>`
-
-    + `end()`
-
-      + :ref:`Getting Last Element <getting-last-element>`
 
     + `eval()`
 
@@ -479,6 +481,7 @@ Glossary
       + :ref:`Unresolved Instanceof <unresolved-instanceof>`
       + :ref:`Unused Interfaces <unused-interfaces>`
       + :ref:`Use Instanceof <use-instanceof>`
+      + :ref:`Use is_countable <use-is\_countable>`
       + :ref:`Useless Interfaces <useless-interfaces>`
       + :ref:`Zend Typehinting <zend-typehinting>`
       + :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
@@ -487,9 +490,17 @@ Glossary
 
       + :ref:`Should Typecast <should-typecast>`
 
+    + `is_array()`
+
+      + :ref:`Should Use Operator <should-use-operator>`
+
     + `is_callable()`
 
       + :ref:`Check All Types <check-all-types>`
+
+    + `is_int()`
+
+      + :ref:`Should Use Operator <should-use-operator>`
 
     + `is_integer()`
 
@@ -497,11 +508,17 @@ Glossary
 
     + `is_null()`
 
+      + :ref:`Should Use Operator <should-use-operator>`
       + :ref:`Use === null <use-===-null>`
 
     + `is_object()`
 
+      + :ref:`Should Use Operator <should-use-operator>`
       + :ref:`Use Instanceof <use-instanceof>`
+
+    + `is_real()`
+
+      + :ref:`Avoid Real <avoid-real>`
 
     + `is_scalar()`
 
@@ -514,6 +531,7 @@ Glossary
 
     + `isset`
 
+      + :ref:`Assert Function Is Reserved <assert-function-is-reserved>`
       + :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
       + :ref:`Isset With Constant <isset-with-constant>`
       + :ref:`Must Return Methods <must-return-methods>`
@@ -604,6 +622,10 @@ Glossary
       + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
       + :ref:`Use Pathinfo <use-pathinfo>`
       + :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
+
+    + `php_logo_guid()`
+
+      + :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 
     + `phpinfo()`
 
@@ -850,6 +872,7 @@ Glossary
 + `_`
     + `__CLASS__`
 
+      + :ref:`Detect Current Class <detect-current-class>`
       + :ref:`Interpolation <interpolation>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`
 
