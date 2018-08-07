@@ -4,7 +4,7 @@
     "description": "The smart static analyzer for PHP",
     "keywords": ["Exakat","PHP","audit", "static analysis", "code quality", "code review"],
     "homepage": "https://www.exakat.io/",
-    "license": "GNU Affero General Public License-3.0+",
+    "license": "AGPL-3.0-or-later",
     "authors": [
         {
             "name": "The Exakat Team",
