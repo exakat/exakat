@@ -680,7 +680,7 @@ class Load extends Tasks {
             $this->addLink($id1, $sequence, 'FILE');
             $sequence->root = true;
         } catch (LoadError $e) {
-//            print $e->getMessage();
+//            print 'LoadError : '.$e->getMessage().PHP_EOL;
 //            print_r($this->expressions[0]);
             $this->log->log('Can\'t process file \''.$this->filename.'\' during load (\''.$this->tokens[$this->id][0].'\', line \''.$this->tokens[$this->id][2].'\'). Ignoring'.PHP_EOL.$e->getMessage().PHP_EOL);
             $this->reset();
@@ -1883,7 +1883,7 @@ class Load extends Tasks {
                         ++$this->id;
                     }
 
-                    $variable = $this->processSingle('Variable');
+                    $variable = $this->processSingle('Parametername');
                     $this->popExpression();
 
                     $index = $this->addAtom('Parameter');
@@ -2318,11 +2318,10 @@ class Load extends Tasks {
             $string = $this->addAtom('Name');
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $string = $this->addAtom('Name');
-        } elseif (!$this->isContext(self::CONTEXT_NOSEQUENCE) &&
-                  in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
+        } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
+                                                                  $this->phptokens::T_OPEN_CURLY,
                                                                   $this->phptokens::T_CLOSE_CURLY,
                                                                   $this->phptokens::T_COLON,
-                                                                  $this->phptokens::T_OPEN_CURLY,
                                                                   $this->phptokens::T_OPEN_TAG,
                                                                   )) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
@@ -2502,7 +2501,6 @@ class Load extends Tasks {
             }
             $fullcodePrefix = implode(' ', $fullcodePrefix);
         }
-        
 
         if (!isset($fullcodePrefix)) {
             $fullcodePrefix = $this->tokens[$current][1];
@@ -2544,6 +2542,8 @@ class Load extends Tasks {
             if ($atom === 'Propertydefinition') {
                 // drop $
                 $element->propertyname = substr($element->code, 1);
+                $type = ($static->static === 1 ? 'static' : '').'property';
+                $this->calls->addDefinition($type,  end($this->currentClassTrait)->fullnspath.'::'.$element->code, $element);
             }
 
             if (isset($default)) {
@@ -3399,12 +3399,12 @@ class Load extends Tasks {
                 // This is a T_LIST !
                 $array->token      = 'T_OPEN_BRACKET';
                 $array->fullnspath = '\list';
-                $array->fullcode  = "[$argumentsFullcode]";
+                $array->fullcode   = "[$argumentsFullcode]";
             } else {
                 $array = $this->processArguments('Arrayliteral', array($this->phptokens::T_CLOSE_BRACKET), $argumentsList);
                 $argumentsFullcode = $array->fullcode;
 
-                $array->token = 'T_OPEN_BRACKET';
+                $array->token     = 'T_OPEN_BRACKET';
                 $array->fullcode  = "[$argumentsFullcode]";
             }
         }

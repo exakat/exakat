@@ -97,6 +97,7 @@ abstract class GraphElements {
                                  'Nsname',
                                  'Null',
                                  'Parameter',
+                                 'Parametername',
                                  'Parent',
                                  'Parenthesis',
                                  'Php',
