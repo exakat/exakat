@@ -40,6 +40,7 @@ class Boolval extends Plugin {
             case 'Staticclass' :
             case 'Self' :
             case 'Parent' :
+            case 'Closure' :
                 $atom->boolean = true;
                 break;
 
