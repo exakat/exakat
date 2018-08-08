@@ -32,6 +32,7 @@ class UsedPrivateMethod extends Analyzer {
         // method used in a static methodcall static::b() or self
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
+             ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'classname')
              ->back('first')
              ->outIs('METHOD')
