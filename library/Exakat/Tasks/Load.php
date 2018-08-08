@@ -2260,7 +2260,7 @@ class Load extends Tasks {
         $functioncall->fullcode  = $name->fullcode.'('.$argumentsFullcode.')';
         $functioncall->line      = $this->tokens[$current][2];
         $functioncall->token     = $name->token;
-
+        
         if ($this->isContext(self::CONTEXT_NEW)) {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'class');
             $functioncall->fullnspath = $fullnspath;
@@ -2276,7 +2276,8 @@ class Load extends Tasks {
             $functioncall->aliased    = self::NOT_ALIASED;
 
             $this->processDefineAsConstants($functioncall);
-
+        } elseif ($atom === 'Methodcallname') {
+            // literally, nothing
         } elseif ($getFullnspath === self::WITH_FULLNSPATH ||
                   $name->fullnspath !== '\\list') {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
@@ -2290,7 +2291,6 @@ class Load extends Tasks {
         }
 
         $this->addLink($functioncall, $name, 'NAME');
-
         $this->pushExpression($functioncall);
 
         if ( $functioncall->atom === 'Methodcallname') {
@@ -2298,7 +2298,7 @@ class Load extends Tasks {
         } elseif ( !$this->isContext(self::CONTEXT_NOSEQUENCE) &&
              $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG &&
              $getFullnspath === self::WITH_FULLNSPATH ) {
-            $this->processSemicolon();
+             $this->processSemicolon();
         } else {
             $this->runPlugins($functioncall, $argumentsList);
             $functioncall = $this->processFCOA($functioncall);
@@ -4640,8 +4640,9 @@ class Load extends Tasks {
         $static->token    = $this->getToken($this->tokens[$current][0]);
 
         if (!empty($left->fullnspath)){
-            if ($static->atom === 'Staticmethodcall' && !empty($right->fullnspath)) {
-                $this->calls->addCall('staticmethod',  "$left->fullnspath::$right->fullnspath", $static);
+            if ($static->atom === 'Staticmethodcall') {
+                $name = mb_strtolower($right->code);
+                $this->calls->addCall('staticmethod',  "$left->fullnspath::$name", $static);
             } elseif ($static->atom === 'Staticconstant') {
                 $this->calls->addCall('staticconstant',  "$left->fullnspath::$right->code", $static);
             } elseif ($static->atom === 'Staticproperty') {
