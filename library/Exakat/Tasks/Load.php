@@ -2321,7 +2321,6 @@ class Load extends Tasks {
         } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
                                                                   $this->phptokens::T_OPEN_CURLY,
                                                                   $this->phptokens::T_CLOSE_CURLY,
-                                                                  $this->phptokens::T_COLON,
                                                                   $this->phptokens::T_OPEN_TAG,
                                                                   )) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
@@ -3452,13 +3451,7 @@ class Load extends Tasks {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
         do {
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING &&
-                $this->tokens[$this->id + 2][0] === $this->phptokens::T_COLON) {
-                    ++$this->id;
-                    $this->processString();
-                } else {
-                    $this->processNext();
-                }
+            $this->processNext();
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
@@ -3484,7 +3477,7 @@ class Load extends Tasks {
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
-        }
+        } 
 
         return $ternary;
     }

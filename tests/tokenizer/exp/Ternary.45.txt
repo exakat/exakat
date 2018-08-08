@@ -1,0 +1,37 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
+            Label : ARGUMENT
+              7
+            Label : BLOCK
+              9
+              Label : EXPRESSION
+                12
+                Label : GOTOLABEL
+                  10
+              Label : EXPRESSION
+                13
+                Label : ARGUMENT
+                  14
+                Label : NAME
+                  13
+              Label : EXPRESSION
+                16
+                Label : CONDITION
+                  15
+                Label : ELSE
+                  19
+                Label : THEN
+                  17
+            Label : DEFINITION
+              15
