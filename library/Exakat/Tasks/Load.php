@@ -711,9 +711,9 @@ class Load extends Tasks {
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
         
-//        print "  $method in".PHP_EOL;
+        print "  $method in".PHP_EOL;
         $id = $this->$method();
-//        print "  $method out ".PHP_EOL;
+        print "  $method out ".PHP_EOL;
         
         return $id;
     }
@@ -2318,9 +2318,11 @@ class Load extends Tasks {
             $string = $this->addAtom('Name');
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $string = $this->addAtom('Name');
-        } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
+        } elseif (!$this->isContext(self::CONTEXT_NOSEQUENCE) && 
+                  in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
                                                                   $this->phptokens::T_OPEN_CURLY,
                                                                   $this->phptokens::T_CLOSE_CURLY,
+                                                                  $this->phptokens::T_COLON,
                                                                   $this->phptokens::T_OPEN_TAG,
                                                                   )) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
