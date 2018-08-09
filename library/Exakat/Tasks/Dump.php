@@ -383,6 +383,8 @@ SQL;
                         'compilation70',
                         'compilation71',
                         'compilation72',
+                        'compilation73',
+                        'compilation74',
                         'composer',
                         'configFiles',
                         'externallibraries',
