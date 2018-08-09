@@ -711,9 +711,9 @@ class Load extends Tasks {
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
         
-        print "  $method in".PHP_EOL;
+//        print "  $method in".PHP_EOL;
         $id = $this->$method();
-        print "  $method out ".PHP_EOL;
+//        print "  $method out ".PHP_EOL;
         
         return $id;
     }
