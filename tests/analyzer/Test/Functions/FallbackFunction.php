@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Functions_FallbackFunction extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testFunctions_FallbackFunction01()  { $this->generic_test('Functions/FallbackFunction.01'); }
+    public function testFunctions_FallbackFunction02()  { $this->generic_test('Functions/FallbackFunction.02'); }
 }
 ?>

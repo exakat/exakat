@@ -30,6 +30,7 @@ class FallbackFunction extends Analyzer {
         // namespace A { foo(); } // fallback
         $this->atomIs('Functioncall')
              ->hasFunctionDefinition()
+             ->has('fullnspath')
              ->regexIs('fullnspath', '^\\\\\\\\[a-zA-Z_0-9]+\$')
              ->goToNamespace()
              ->outIs('NAME')
