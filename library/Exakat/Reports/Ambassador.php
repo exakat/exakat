@@ -111,7 +111,7 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $project_name);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
-            $menu = file_get_contents($this->tmpName.'/datas/menu.html');
+            $menu = file_get_contents("{$this->tmpName}/datas/menu.html");
             $inventories = '';
             foreach($this->inventories as $fileName => $title) {
                 if (strpos($fileName, '/') !== false) {
@@ -371,7 +371,7 @@ class Ambassador extends Reports {
                                     $this->getIssuesFaceted('Dead code') );
     }
 
-    private function generateSuggestions() {
+    protected function generateSuggestions() {
         $this->generateIssuesEngine('suggestions',
                                     $this->getIssuesFaceted('Suggestions') );
     }
@@ -1756,7 +1756,7 @@ SQL;
         );
     }
 
-    private function getAnalyzersCount($limit) {
+    protected function getAnalyzersCount($limit) {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($list);
 
@@ -2501,21 +2501,21 @@ SQL
         $this->putBasedPage('directive_list', $html);
     }
 
-    private function generateCompilations() {
+    protected function generateCompilations() {
         $compilations = '';
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
         $info = array();
         
-        foreach(array_merge(array($this->config->phpversion[0].$this->config->phpversion[2]), $this->config->other_php_versions) as $suffix) {
-            $version = $suffix[0].'.'.$suffix[1];
-            $res = $this->sqlite->querySingle('SELECT name FROM sqlite_master WHERE type="table" AND name="compilation'.$suffix.'"');
+        foreach(array_unique(array_merge(array($this->config->phpversion[0].$this->config->phpversion[2]), $this->config->other_php_versions)) as $suffix) {
+            $version = "$suffix[0].$suffix[1]";
+            $res = $this->sqlite->querySingle("SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$suffix'");
             if (!$res) {
                 $compilations .= "<tr><td>$version</td><td>N/A</td><td>N/A</td><td>Compilation not tested</td><td>N/A</td></tr>\n";
                 continue; // Table was not created
             }
 
-            $res = $this->sqlite->query('SELECT file FROM compilation'.$suffix);
+            $res = $this->sqlite->query("SELECT file FROM compilation$suffix");
             $files = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $files[] = $row['file'];
@@ -2549,7 +2549,7 @@ SQL
         $this->putBasedPage('compatibility_compilations', $html);
     }
 
-    private function generateCompatibility($version) {
+    protected function generateCompatibility($version) {
         $compatibility = '';
 
         $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);
