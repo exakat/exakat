@@ -40,6 +40,7 @@ class Php73NewFunctions extends FunctionDefinition {
                                  'ldap_exop_refresh',
                                  'array_first_key',
                                  'array_last_key',
+                                 'gc_status',
                                 );
         parent::analyze();
     }
