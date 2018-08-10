@@ -200,6 +200,11 @@ SQL;
             $this->collectNativeCallsPerExpressions();
             $end = microtime(true);
             $this->log->log( 'Collected Native Calls Per Expression: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+
+            $begin = $end;
+            $this->collectDefinitionsStats();
+            $end = microtime(true);
+            $this->log->log( 'Collected Definitiosn stats : '.number_format(1000 * ($end - $begin), 2)."ms\n");
         }
 
         $themes = array();
@@ -1178,6 +1183,33 @@ GREMLIN;
        }
     }
 
+    private function collectDefinitionsStats() {
+        $insert = array();
+        $types = array('Staticconstant'   => 'staticconstants',
+                       'Methodcall'       => 'methodcalls',
+                       'Staticmethodcall' => 'staticmethodcalls',
+                       'Member'           => 'members',
+                       'Staticproperty'   => 'staticproperty',
+                        );
+        
+        foreach($types as $label => $name) {
+        
+            $query = <<<GREMLIN
+g.V().hasLabel("$label").count();
+GREMLIN;
+            $res = $this->gremlin->query($query);
+            $insert[] = '("'.$name.'", '.$res->toInt().')';
+
+            $query = <<<GREMLIN
+g.V().hasLabel("$label").where(__.in("DEFINITION")).count();
+GREMLIN;
+            $res = $this->gremlin->query($query);
+            $insert[] = '("'.$name.' defined", '.$res->toInt().')';
+        }
+
+        $this->sqlite->query('INSERT INTO hash ("key", "value") VALUES '.implode(', ', $insert));
+    }
+
     private function collectFilesDependencies() {
         $this->sqlite->query('DROP TABLE IF EXISTS filesDependencies');
         $this->sqlite->query('CREATE TABLE filesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -1455,7 +1487,6 @@ g.V().hasLabel(within(['Sequence'])).groupCount("processed").by(count()).as("fir
 ).cap('m')
 GREMLIN;
         $this->collectHashCounts($query, 'NativeCallPerExpression');
-    
     }
 
     private function collectClassChanges() {
