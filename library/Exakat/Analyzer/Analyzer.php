@@ -93,8 +93,8 @@ abstract class Analyzer {
     static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
-    static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable');
-    static public $VARIABLES_SCALAR = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Phpvariable');
+    static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition', 'Phpvariable', 'Parametername');
+    static public $VARIABLES_SCALAR = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Phpvariable', 'Parametername');
     static public $VARIABLES_USER   = array('Variable', 'Variableobject', 'Variablearray',);
     static public $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod');
     static public $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
