@@ -52,6 +52,7 @@ class Appinfo extends Data {
                             'Labels'                        => 'Php/Labelnames',
    
                             'Coalesce'                      => 'Php/Coalesce',
+                            'Trailing Comma'                => 'Php/TrailingComma',
    
                             'File upload'                   => 'Structures/FileUploadUsage',
                             'Environnement Variables'       => 'Php/UsesEnv',
@@ -64,20 +65,20 @@ class Appinfo extends Data {
                     ),
 
                     'Composer' => array(
-                            'composer.json'              => 'Composer/UseComposer',
-                            'composer.lock'              => 'Composer/UseComposerLock',
-                            'composer autoload'          => 'Composer/Autoload',
+                            'composer.json'                 => 'Composer/UseComposer',
+                            'composer.lock'                 => 'Composer/UseComposerLock',
+                            'composer autoload'             => 'Composer/Autoload',
                     ),
 
                     'Web' => array(
-                            '$_GET, _POST...'            => 'Php/UseWeb',
-                            'Apache'                     => 'Extensions/Extapache',
-                            'Fast CGI'                   => 'Extensions/Extfpm',
-                            'IIS'                        => 'Extensions/Extiis',
-                            'NSAPI'                      => 'Extensions/Extnsapi',
-                            'Session'                    => 'Extensions/Extsession',
-                            'Cookies'                    => 'Php/UseCookies',
-                            'Browscap'                   => 'Php/UseBrowscap',
+                            '$_GET, _POST...'                => 'Php/UseWeb',
+                            'Apache'                         => 'Extensions/Extapache',
+                            'Fast CGI'                       => 'Extensions/Extfpm',
+                            'IIS'                            => 'Extensions/Extiis',
+                            'NSAPI'                          => 'Extensions/Extnsapi',
+                            'Session'                        => 'Extensions/Extsession',
+                            'Cookies'                        => 'Php/UseCookies',
+                            'Browscap'                       => 'Php/UseBrowscap',
                     ),
 
                     'CLI' => array(
@@ -106,9 +107,9 @@ class Appinfo extends Data {
                     ),
 
                     'Namespaces' => array(
-                            'Namespaces'              => 'Namespaces/Namespacesnames',
-                            'Alias'                   => 'Namespaces/Alias',
-                            'Group Use'               => 'Php/GroupUseDeclaration',
+                            'Namespaces'                     => 'Namespaces/Namespacesnames',
+                            'Alias'                          => 'Namespaces/Alias',
+                            'Group Use'                      => 'Php/GroupUseDeclaration',
                     ),
 
                     'Variables' => array(
@@ -202,6 +203,7 @@ class Appinfo extends Data {
                             'Strings'             => 'String',
                             'Heredoc'             => 'Type/Heredoc',
                             'Nowdoc'              => 'Type/Nowdoc',
+                            'Relaxed Heredoc'     => 'Php/RelaxedHeredoc',
                      ),
 
                     'Errors' => array(
