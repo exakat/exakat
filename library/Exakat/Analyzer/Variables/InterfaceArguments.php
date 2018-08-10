@@ -34,7 +34,7 @@ class InterfaceArguments extends Analyzer {
              ->atomIs('Method')
              ->outIs('ARGUMENT')
              ->outIs('NAME')
-             ->atomIs('Variable');
+             ->atomIs('Parametername');
         $this->prepareQuery();
     }
 }

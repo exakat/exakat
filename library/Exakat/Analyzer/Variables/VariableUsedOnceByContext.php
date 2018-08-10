@@ -43,7 +43,8 @@ g.V().hasLabel("Variable", "Variablearray", "Variableobject")
            ).groupCount("m").by("code").cap("m")
       .toList().get(0).findAll{ a,b -> b == 1}.keySet()
 GREMLIN;
-        $variables = $this->query($query)->toArray();
+        $variables = $this->query($query)
+                          ->toArray();
 
         $this->atomIs(self::$VARIABLES_ALL)
              ->hasNoIn(array('PPP'))
@@ -55,23 +56,23 @@ GREMLIN;
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->raw(<<<GREMLIN
 where( __.sideEffect{counts = [:]}
-                   .repeat( out({$this->linksDown}).not( where( __.hasLabel("Function", "Closure", "Method", "Magicmethod") ) ) )
-                   .emit( ).times($MAX_LOOPING)
-                   .hasLabel("Variable", "Variablearray", "Variableobject")
-                   .not( where( __.in("MEMBER") ) )
-                   .sideEffect{ k = it.get().value("code"); 
-                               if (counts[k] == null) {
-                                  counts[k] = 1;
-                               } else {
-                                  counts[k]++;
-                               }
-                    }.fold()
-                )
+         .repeat( out({$this->linksDown}).not( where( __.hasLabel("Function", "Closure", "Method", "Magicmethod") ) ) )
+         .emit( ).times($MAX_LOOPING)
+         .hasLabel("Variable", "Variablearray", "Variableobject", "Parametername")
+         .not( where( __.in("MEMBER") ) )
+         .sideEffect{ k = it.get().value("code"); 
+                     if (counts[k] == null) {
+                        counts[k] = 1;
+                     } else {
+                        counts[k]++;
+                     }
+          }.fold()
+      )
          .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
          .repeat( __.out({$this->linksDown}).not( where( __.hasLabel("Function", "Closure") ) )  )
          .emit( )
          .times($MAX_LOOPING)
-         .hasLabel("Variable", "Variablearray", "Variableobject")
+         .hasLabel("Variable", "Variablearray", "Variableobject", "Parametername")
          .filter{ it.get().value("code") in names }
 GREMLIN
 );

@@ -45,13 +45,13 @@ where(
       .out('ARGUMENT')
       .coalesce( 
          __.out("NAME"), 
-        __.filter{ true}
+         __.filter{ true}
         )
         .sideEffect{args.add(it.get().value("code"));}
         .fold()
 )
 .where(
-    __.sideEffect{ r = [:]; w = [:]; }.repeat( __.out({$this->linksDown}).simplePath()).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray").as('v')
+    __.sideEffect{ r = [:]; w = [:]; }.repeat( __.out({$this->linksDown}).simplePath()).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray", "Parametername").as('v')
       .filter{ v = it.get().value("code"); !(v in args);}
       .in("ANALYZED")
       .has("analyzer", within("Variables/IsRead", "Classes/IsRead", "Arrays/IsRead","Variables/IsModified", "Classes/IsModified", "Arrays/IsModified" ))
@@ -74,7 +74,7 @@ where(
 GREMLIN
 )
              ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Variable', 'Variableobject', 'Variablearray')
+             ->atomInsideNoDefinition(array('Variable', 'Variableobject', 'Variablearray'))
              ->filter('it.get().value("code") in d;');
         $this->prepareQuery();
     }

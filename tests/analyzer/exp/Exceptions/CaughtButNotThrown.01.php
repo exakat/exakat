@@ -4,8 +4,7 @@ $expected     = array('Undefined',
                       'NotThrown',
                      );
 
-$expected_not = array('Thrown',
-                      'subThrown',
+$expected_not = array('subThrown',
                       'subsubThrown',
                      );
 

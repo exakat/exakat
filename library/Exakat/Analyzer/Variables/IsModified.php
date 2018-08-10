@@ -37,6 +37,7 @@ class IsModified extends Analyzer {
         $atoms = array('Variable',
                        'Phpvariable',
                        'Variablearray',
+                       'Parametername',
                       );
 
         $this->atomIs(array('Variablearray', 'Variable'))

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class LostReferences extends Analyzer {
     public function analyze() {
         // foo(&$f) { $b = $f[1];}
-        $this->atomIs('Variable')
+        $this->atomIs('Parametername')
              ->savePropertyAs('code', 'parameter')
              ->inIs('NAME')
              ->is('reference', true)

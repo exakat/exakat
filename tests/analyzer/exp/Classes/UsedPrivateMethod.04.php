@@ -1,11 +1,9 @@
 <?php
 
-$expected     = array('',
-                      '',
+$expected     = array('private function used( ) { /**/ } '
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array('private function unused( ) { /**/ } '
                      );
 
 ?>
