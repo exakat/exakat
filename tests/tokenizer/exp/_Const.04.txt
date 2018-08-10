@@ -35,6 +35,16 @@ Label : PROJECT
                     15
                   Label : CONCAT
                     18
+            Label : DEFINITION
+              19
+              Label : CLASS
+                6
+              Label : METHOD
+                10
+                Label : ARGUMENT
+                  11
+                Label : NAME
+                  10
             Label : NAME
               10
           Label : NAME
