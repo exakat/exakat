@@ -50,10 +50,10 @@ g.V().hasLabel("Throw")
 GREMLIN
                         )->toArray();
         $thrown = array_merge($phpExceptions, array('\\throwable'), $thrown1, $thrown2);
-        
+
         $this->atomIs('Catch')
              ->outIs('CLASS')
-             ->fullnspathIsNot(makeFullNsPath($phpExceptions));
+             ->fullnspathIsNot(makeFullNsPath($thrown));
         $this->prepareQuery();
     }
 }
