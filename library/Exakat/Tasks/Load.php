@@ -885,6 +885,7 @@ class Load extends Tasks {
 
         if ($type === $this->phptokens::T_START_HEREDOC) {
             $string->delimiter = trim($closeQuote);
+            $string->relaxed   = substr($closeQuote, 0, - strlen($string->delimiter));
             $string->heredoc   = $openQuote[3] !== "'";
         }
 
@@ -2055,7 +2056,6 @@ class Load extends Tasks {
             if ($index === 0) {
                 $fullcode[] = ' ';
             } else {
-                
                 if ($index === 0) {
                     $index = $this->addAtomVoid();
                 }
