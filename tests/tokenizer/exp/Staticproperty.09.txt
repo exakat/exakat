@@ -65,6 +65,16 @@ Label : PROJECT
                 20
               Label : DEFINITION
                 20
+            Label : DEFINITION
+              23
+              Label : CLASS
+                6
+              Label : METHOD
+                12
+                Label : ARGUMENT
+                  14
+                Label : NAME
+                  12
             Label : NAME
               12
           Label : METHOD

@@ -57,6 +57,16 @@ Label : PROJECT
                       19
                       Label : CLASS
                         21
+                Label : DEFINITION
+                  19
+                  Label : CLASS
+                    12
+                  Label : METHOD
+                    14
+                    Label : ARGUMENT
+                      15
+                    Label : NAME
+                      14
                 Label : NAME
                   14
               Label : NAME

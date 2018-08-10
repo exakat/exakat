@@ -21,6 +21,18 @@ Label : PROJECT
               9
               Label : DEFAULT
                 11
+              Label : DEFINITION
+                19
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  9
+              Label : DEFINITION
+                19
+                Label : CLASS
+                  6
+                Label : MEMBER
+                  9
         Label : EXPRESSION
           5
           Label : DEFINITION

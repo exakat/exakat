@@ -27,6 +27,18 @@ Label : PROJECT
                   8
                   Label : EXPRESSION
                     5
+                Label : DEFINITION
+                  31
+                  Label : CLASS
+                    10
+                    Label : DEFINITION
+                      10
+                  Label : METHOD
+                    11
+                    Label : ARGUMENT
+                      5
+                    Label : NAME
+                      11
                 Label : NAME
                   11
               Label : NAME
@@ -47,6 +59,18 @@ Label : PROJECT
                   8
                   Label : EXPRESSION
                     5
+                Label : DEFINITION
+                  31
+                  Label : CLASS
+                    12
+                    Label : DEFINITION
+                      21
+                  Label : METHOD
+                    11
+                    Label : ARGUMENT
+                      5
+                    Label : NAME
+                      11
                 Label : NAME
                   11
               Label : NAME
@@ -73,6 +97,32 @@ Label : PROJECT
                   8
                   Label : EXPRESSION
                     5
+                Label : DEFINITION
+                  31
+                  Label : CLASS
+                    14
+                    Label : DEFINITION
+                      24
+                      Label : ALIAS
+                        14
+                      Label : NAME
+                        13
+                  Label : METHOD
+                    11
+                    Label : ARGUMENT
+                      5
+                    Label : NAME
+                      11
+                Label : DEFINITION
+                  31
+                  Label : CLASS
+                    13
+                  Label : METHOD
+                    11
+                    Label : ARGUMENT
+                      5
+                    Label : NAME
+                      11
                 Label : NAME
                   11
               Label : NAME
@@ -89,6 +139,16 @@ Label : PROJECT
                   8
                   Label : EXPRESSION
                     5
+                Label : DEFINITION
+                  31
+                  Label : CLASS
+                    33
+                  Label : METHOD
+                    11
+                    Label : ARGUMENT
+                      5
+                    Label : NAME
+                      11
                 Label : NAME
                   11
               Label : NAME
@@ -115,6 +175,18 @@ Label : PROJECT
                   8
                   Label : EXPRESSION
                     5
+                Label : DEFINITION
+                  31
+                  Label : CLASS
+                    16
+                    Label : DEFINITION
+                      22
+                  Label : METHOD
+                    11
+                    Label : ARGUMENT
+                      5
+                    Label : NAME
+                      11
                 Label : NAME
                   11
               Label : NAME
@@ -141,6 +213,18 @@ Label : PROJECT
                   8
                   Label : EXPRESSION
                     5
+                Label : DEFINITION
+                  31
+                  Label : CLASS
+                    18
+                    Label : DEFINITION
+                      23
+                  Label : METHOD
+                    11
+                    Label : ARGUMENT
+                      5
+                    Label : NAME
+                      11
                 Label : NAME
                   11
               Label : NAME

@@ -437,12 +437,6 @@ Label : PROJECT
               50
             Label : DEFINITION
               50
-          Label : DEFINITION
-            5
-            Label : ARGUMENT
-              33
-            Label : NAME
-              5
           Label : NAME
             5
         Label : EXPRESSION

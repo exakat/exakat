@@ -57,6 +57,16 @@ Label : PROJECT
                 15
                 Label : RETURN
                   10
+            Label : DEFINITION
+              22
+              Label : CLASS
+                6
+              Label : METHOD
+                16
+                Label : ARGUMENT
+                  12
+                Label : NAME
+                  16
             Label : NAME
               16
           Label : NAME

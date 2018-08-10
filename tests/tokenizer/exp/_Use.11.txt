@@ -27,6 +27,14 @@ Label : PROJECT
                   12
                   Label : DEFAULT
                     14
+                  Label : DEFINITION
+                    39
+                    Label : CLASS
+                      10
+                      Label : DEFINITION
+                        10
+                    Label : MEMBER
+                      12
             Label : EXPRESSION
               9
               Label : DEFINITION
@@ -43,6 +51,14 @@ Label : PROJECT
                   12
                   Label : DEFAULT
                     16
+                  Label : DEFINITION
+                    39
+                    Label : CLASS
+                      15
+                      Label : DEFINITION
+                        29
+                    Label : MEMBER
+                      12
             Label : EXPRESSION
               9
               Label : DEFINITION
@@ -65,6 +81,24 @@ Label : PROJECT
                   12
                   Label : DEFAULT
                     18
+                  Label : DEFINITION
+                    39
+                    Label : CLASS
+                      19
+                      Label : DEFINITION
+                        32
+                        Label : ALIAS
+                          19
+                        Label : NAME
+                          17
+                    Label : MEMBER
+                      12
+                  Label : DEFINITION
+                    39
+                    Label : CLASS
+                      17
+                    Label : MEMBER
+                      12
             Label : EXPRESSION
               9
               Label : DEFINITION
@@ -77,6 +111,12 @@ Label : PROJECT
                   12
                   Label : DEFAULT
                     20
+                  Label : DEFINITION
+                    39
+                    Label : CLASS
+                      41
+                    Label : MEMBER
+                      12
           Label : NAME
             5
         Label : EXPRESSION
@@ -99,6 +139,14 @@ Label : PROJECT
                   12
                   Label : DEFAULT
                     23
+                  Label : DEFINITION
+                    39
+                    Label : CLASS
+                      22
+                      Label : DEFINITION
+                        30
+                    Label : MEMBER
+                      12
           Label : NAME
             21
         Label : EXPRESSION
@@ -121,6 +169,14 @@ Label : PROJECT
                   12
                   Label : DEFAULT
                     26
+                  Label : DEFINITION
+                    39
+                    Label : CLASS
+                      25
+                      Label : DEFINITION
+                        31
+                    Label : MEMBER
+                      12
           Label : NAME
             24
         Label : EXPRESSION
