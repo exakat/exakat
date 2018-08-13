@@ -315,6 +315,17 @@ SQL;
                          '".$this->sqlite->escapeString($class)."',
                          '".$this->sqlite->escapeString($severity)."')";
             ++$saved;
+
+            // chunk split the save.
+            if ($saved % 100 === 0) {
+                $values = implode(', ', $query);
+                $query = <<<SQL
+REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
+             VALUES $values
+SQL;
+                $this->sqlite->query($query);
+                $query = array();
+            }
         }
         
         if (!empty($query)) {
