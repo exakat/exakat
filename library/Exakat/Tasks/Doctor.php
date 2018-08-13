@@ -195,21 +195,21 @@ class Doctor extends Tasks {
     
     private function checkInstall($graphdb) {
         if ($graphdb === 'gsneo4j') {
-            $properties = file_get_contents($this->config->projects_root.'/tinkergraph/conf/neo4j-empty.properties');
+            $properties = file_get_contents("{$this->config->projects_root}/tinkergraph/conf/neo4j-empty.properties");
             $properties = preg_replace("#gremlin.neo4j.directory=.*\n#s", "gremlin.neo4j.directory=db/neo4j\n", $properties);
-            file_put_contents($this->config->projects_root.'/tinkergraph/conf/neo4j-empty.properties', $properties);
+            file_put_contents("{$this->config->projects_root}/tinkergraph/conf/neo4j-empty.properties", $properties);
 
-            if (!file_exists($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
-                if (copy($this->config->dir_root.'/server/gsneo4j/gremlin-server.sh',
-                     $this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
-                    chmod($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh', 0755);
+            if (!file_exists("{$this->config->projects_root}/tinkergraph/bin/gremlin-server.exakat.sh")) {
+                if (copy("{$this->config->dir_root}/server/gsneo4j/gremlin-server.sh",
+                         "{$this->config->projects_root}/tinkergraph/bin/gremlin-server.exakat.sh")) {
+                    chmod("{$this->config->projects_root}/tinkergraph/bin/gremlin-server.exakat.sh", 0755);
                 } else {
                     display('Error while copying gremlin-server.exakat.sh file to tinkergraph.');
                 }
             }
             $this->checkGremlinServer();
         } elseif ($graphdb === 'tinkergraph') {
-            if (!file_exists($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
+            if (!file_exists("{$this->config->projects_root}/tinkergraph/bin/gremlin-server.exakat.sh")) {
                 if (copy($this->config->dir_root.'/server/tinkergraph/gremlin-server.sh',
                   $this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
                     chmod($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh', 0755);
