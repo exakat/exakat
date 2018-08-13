@@ -3,7 +3,7 @@
 $expected     = array('XMLReader( )',
                      );
 
-$expected_not = array(
+$expected_not = array('xml_read( )',
                      );
 
 ?>

@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('$a->passwd', 
-                      '$a->pass', 
-                      '$a->password', 
+$expected     = array('$a->passwd',
+                      '$a->pass',
+                      '$a->password',
                       '$a->PASSWORD',
                      );
 

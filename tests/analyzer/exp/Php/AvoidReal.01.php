@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('is_real($i)', 
-                      '(real) $i', 
+$expected     = array('is_real($i)',
+                      '(real) $i',
                       '(REAL) $i',
                      );
 

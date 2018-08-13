@@ -8,7 +8,8 @@ $expected     = array('SingleWithoutAliasUnused',
                       'OriginalUsed as AliasUnused',
                      );
 
-$expected_not = array(
+$expected_not = array('OriginalUnusedSingleAlias as SingleAliasUsed',
+                      'OriginalBothUsedSingleAlias as SingleAliasBothUsed',
                      );
 
 ?>

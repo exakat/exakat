@@ -8,4 +8,6 @@
     while($xml->read()){
     
     }
+    
+    echo xml_read();
 ?>

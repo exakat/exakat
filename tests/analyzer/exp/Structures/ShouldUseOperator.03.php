@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('chr(54)', 
+$expected     = array('chr(54)',
                       'chr(C)',
                       'chr(CD)',
                      );
