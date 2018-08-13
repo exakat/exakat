@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class RelaxedHeredoc extends Analyzer {
     public function analyze() {
         // $x = <<<HEREDOC
-        //    
+        //
         //     HEREDOC;
         $this->atomIs('Heredoc')
              ->isNot('relaxed', '');

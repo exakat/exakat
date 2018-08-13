@@ -48,7 +48,7 @@ use Exakat\Tasks\Helpers\CloneType1;
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
     
-    private $ASSIGNATIONS = array();
+    private $assignations = array();
 
     private $php    = null;
     private $loader = null;
@@ -211,7 +211,7 @@ class Load extends Tasks {
         $className = '\Exakat\Tasks\Helpers\Php'.$this->config->phpversion[0].$this->config->phpversion[2];
         $this->phptokens  = new $className();
 
-        $this->ASSIGNATIONS = array($this->phptokens::T_EQUAL,
+        $this->assignations = array($this->phptokens::T_EQUAL,
                                     $this->phptokens::T_PLUS_EQUAL,
                                     $this->phptokens::T_AND_EQUAL,
                                     $this->phptokens::T_CONCAT_EQUAL,
@@ -1319,7 +1319,7 @@ class Load extends Tasks {
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
-                    $this->addLink($class, $cpm, strtoupper($cpm->atom));
+                    $this->addLink($class, $cpm, 'PPP');
                 }
 
                 continue;
@@ -1331,7 +1331,7 @@ class Load extends Tasks {
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
-                    $this->addLink($class, $cpm, strtoupper($cpm->atom));
+                    $this->addLink($class, $cpm, 'PPP');
                 }
 
                 continue;
@@ -1343,7 +1343,7 @@ class Load extends Tasks {
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
-                    $this->addLink($class, $cpm, strtoupper($cpm->atom));
+                    $this->addLink($class, $cpm, 'PPP');
                 }
 
                 continue;
@@ -1368,7 +1368,7 @@ class Load extends Tasks {
 
                 if ($cpm instanceof Atom && $cpm->atom === 'Ppp'){
                     $cpm->rank = ++$rank;
-                    $this->addLink($class, $cpm, strtoupper($cpm->atom));
+                    $this->addLink($class, $cpm, 'PPP');
                 } else {
                     --$this->id;
                 }
@@ -2056,10 +2056,6 @@ class Load extends Tasks {
             if ($index === 0) {
                 $fullcode[] = ' ';
             } else {
-                if ($index === 0) {
-                    $index = $this->addAtomVoid();
-                }
-
                 $index->rank = ++$rank;
                 $argumentsId[] = $index;
                 $this->argumentsId = $argumentsId; // This avoid overwriting when nesting functioncall
@@ -2318,7 +2314,7 @@ class Load extends Tasks {
             $string = $this->addAtom('Name');
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $string = $this->addAtom('Name');
-        } elseif (!$this->isContext(self::CONTEXT_NOSEQUENCE) && 
+        } elseif (!$this->isContext(self::CONTEXT_NOSEQUENCE) &&
                   in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
                                                                   $this->phptokens::T_OPEN_CURLY,
                                                                   $this->phptokens::T_CLOSE_CURLY,
@@ -3479,7 +3475,7 @@ class Load extends Tasks {
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
-        } 
+        }
 
         return $ternary;
     }
@@ -4478,7 +4474,7 @@ class Load extends Tasks {
         do {
             $this->processNext();
 
-            if (in_array($this->tokens[$this->id + 1][0], $this->ASSIGNATIONS)) {
+            if (in_array($this->tokens[$this->id + 1][0], $this->assignations)) {
                 $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
@@ -4678,7 +4674,7 @@ class Load extends Tasks {
         do {
             $right = $this->processNext();
 
-            if (in_array($this->tokens[$this->id + 1][0], $this->ASSIGNATIONS)) {
+            if (in_array($this->tokens[$this->id + 1][0], $this->assignations)) {
                 $right = $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
@@ -4789,7 +4785,7 @@ class Load extends Tasks {
 
     private function processAssignation() {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals = array_merge($finals, $this->ASSIGNATIONS);
+        $finals = array_merge($finals, $this->assignations);
         return $this->processOperator('Assignation', $finals);
     }
 
