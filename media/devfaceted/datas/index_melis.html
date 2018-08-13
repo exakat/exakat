@@ -20,7 +20,7 @@
                 <div class="box-body chart-responsive">
                 <br />
                 <br />
-                  <div id="donut-chart_severity"></div>
+                  {{GRADED_ISSUES}}
                 </div>
                 <br />
                 <br />
@@ -57,12 +57,11 @@
                   <h3 class="box-title">Graded Analysis</h3>
                 </div>
                 <div class="box-body chart-responsive">
-                  <div class="chart" id="filename"></div>
                   <div class="clearfix">
                     <div class="block-cell-name bold">Analysis</div>
                     <div class="block-cell-issue bold text-center">Issues</div>
                   </div>
-                  {{TOPFILE}}
+                  {{GRADED_FILES}}
                 </div>
               </div>
             </div>
@@ -73,12 +72,11 @@
                   <h3 class="box-title">Blocking Analysis</h3>
                 </div>
                 <div class="box-body chart-responsive">
-                  <div class="chart" id="container"></div>
                   <div class="clearfix">
                     <div class="block-cell-name bold">Analysers</div>
                     <div class="block-cell-issue bold text-center">Issues</div>
                   </div>
-                  {{TOPANALYZER}}
+                  {{BLOCKING_FILES}}
                 </div>
               </div>
             </div>
