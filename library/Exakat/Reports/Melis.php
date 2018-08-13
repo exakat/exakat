@@ -24,6 +24,7 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\ZendF3;
+use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
@@ -427,7 +428,7 @@ JAVASCRIPT;
     }
 
     protected function getBlockingFile() {
-        $data = $this->getAnalyzersCount('Security', self::TOPLIMIT);
+        $data = $this->getAnalyzersCountTheme('Security', self::TOPLIMIT);
 
         $html = '';
         foreach ($data as $value) {
@@ -472,7 +473,7 @@ JAVASCRIPT;
         return $data;
     }
 
-    private function getAnalyzersCount($theme, $limit) {
+    protected function getAnalyzersCountTheme($theme, $limit) {
         $list = $this->themes->getThemeAnalyzers($theme);
         $list = makeList($list);
 
@@ -961,7 +962,7 @@ SQL;
     }
 
     protected function getBlockingOverview() {
-        $data = $this->getAnalyzersCount('Security', self::LIMITGRAPHE);
+        $data = $this->getAnalyzersCountTheme('Security', self::LIMITGRAPHE);
 
         $xAxis        = array();
         $dataCritical = array();
@@ -982,7 +983,7 @@ SQL;
     }
 
     protected function getGradedOverview() {
-        $data = $this->getAnalyzersCount('Suggestions', self::LIMITGRAPHE);
+        $data = $this->getAnalyzersCountTheme('Suggestions', self::LIMITGRAPHE);
         $xAxis        = array();
         $dataCritical = array();
         
@@ -1027,7 +1028,7 @@ SQL;
     }
 
     protected function getAnalyzerOverview() {
-        $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
+        $data = $this->getAnalyzersCountTheme(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
         $dataCritical = array();
@@ -1252,7 +1253,7 @@ SQL
         $this->putBasedPage('directive_list', $html);
     }
 
-    private function generateCompilations() {
+    protected function generateCompilations() {
         $compilations = '';
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
@@ -1298,7 +1299,7 @@ SQL
         $this->putBasedPage('compatibility_compilations', $html);
     }
 
-    private function generateCompatibility($version) {
+    protected function generateCompatibility($version) {
         $compatibility = '';
 
         $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);

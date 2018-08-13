@@ -1018,7 +1018,7 @@ SQL;
         return $data;
     }
 
-    private function getAnalyzersCount($limit) {
+    protected function getAnalyzersCount($limit) {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
@@ -1236,7 +1236,7 @@ SQL
         $this->putBasedPage('directive_list', $html);
     }
 
-    private function generateCompilations() {
+    protected function generateCompilations() {
         $compilations = '';
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
@@ -1282,7 +1282,7 @@ SQL
         $this->putBasedPage('compatibility_compilations', $html);
     }
 
-    private function generateCompatibility($version) {
+    protected function generateCompatibility($version) {
         $compatibility = '';
 
         $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);

@@ -46,7 +46,7 @@ abstract class Reports {
                                           'RadwellCode', 'Melis', 'Grade', 'Weekly', 'Codacy', 'Scrutinizer',
                                           'FacetedJson', 'Json', 'OnepageJson', 'Marmelab', 'Simpletable',
                                           'Codeflower', 'Dependencywheel',
-                                          'DailyTodo',
+                                          //'DailyTodo',
                                           );
 
     protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55',

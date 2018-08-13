@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
@@ -774,7 +775,7 @@ SQL;
         );
     }
 
-    private function getAnalyzersCount($limit) {
+    protected function getAnalyzersCount($limit) {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
@@ -888,7 +889,7 @@ SQL;
         return;
     }
 
-    private function generateCompatibility($version) {
+    protected function generateCompatibility($version) {
         $compatibility = '';
 
         $list = $this->themes->getThemeAnalyzers('CompatibilityPHP'.$version);

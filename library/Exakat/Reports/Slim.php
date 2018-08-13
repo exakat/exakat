@@ -1047,7 +1047,7 @@ SQL;
         );
     }
 
-    private function getAnalyzersCount($limit) {
+    protected function getAnalyzersCount($limit) {
         $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($listArray);
 
@@ -1368,7 +1368,7 @@ SQL
         $this->putBasedPage('directive_list', $html);
     }
 
-    private function generateCompilations() {
+    protected function generateCompilations() {
         $compilations = '';
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
