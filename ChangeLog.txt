@@ -1,4 +1,4 @@
-Version 1.3.9 (Du Ruhui, coming up)
+Version 1.4.1 (Tang Sanzang, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,46 @@ Version 1.3.9 (Du Ruhui, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.4.0 (Sun Wu Kong, 2018-08-13)
++ Architecture
+    + Chunked result inserts for Dump
+    + More support for PHP 7.4
++ Report
+    + Ambassador : added new Appinfo for relaxed Heredoc, trailing comma...
++ Analyzer
+    + New analysis : class can be abstract
+    + New analysis : trailing comma
+    + New analysis : relaxed heredoc
+    + New analysis : removed functions in PHP 7.3
+    + New analysis : continue versus break
+    + Upgraded analysis : Hardcoded passwords is extended to objects
+    + Checked unit tests : 2964 / 2979 test pass (99% pass). 
++ Tokenizer
+    + Measure definitions stats for classes. 
+    + Added support for relaxed heredoc
+    + Added support for closure as a return value
+    + Refactored support for Ternary and Labels
+
+Version 1.3.9 (Du Ruhui, 2018-08-06)
++ Architecture
+    + Added support for PHP 7.4
+    + 'Copy' won't update anymore
++ Report
+    + Ambassador : fixed repeated 'compatibility' menu entry
++ Analyzer
+    + New analysis : avoid __CLASS__ and get_called_class().
+    + New analysis : prepare for (real) deprecation 
+    + New analysis : const / define preference
+    + New analysis : define case sensitivity preference
+    + New analysis : avoid defining assert() in namespaces
+    + Removed analysis : Variables/Arguments
+    + Checked unit tests : 2957 / 2971 test pass (99% pass). 
++ Tokenizer
+    + Removed Noscream - AT atom
+    + Added definition for class constants
+    + Fixed bug : can't apply ~ to false
+    + Extended DEFINITION support to closure's use and references
 
 Version 1.3.8 (Fang Xuanling, 2018-07-30)
 + Architecture
