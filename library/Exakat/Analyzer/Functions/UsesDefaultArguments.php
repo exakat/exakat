@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UsesDefaultArguments extends Analyzer {
     public function analyze() {
-        $functions = $this->methods->getFunctionsArgsInterval();
+        $functions = self::$methods->getFunctionsArgsInterval();
 
         $positions = array();
         foreach($functions as $function) {

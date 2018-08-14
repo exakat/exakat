@@ -37,7 +37,7 @@ class ShouldPreprocess extends Analyzer {
         
         $MAX_LOOPING = self::MAX_LOOPING;
 
-        $functionList = $this->methods->getDeterministFunctions();
+        $functionList = self::$methods->getDeterministFunctions();
         $functionList = makeFullNsPath($functionList);
 
         // Operator only working on constants

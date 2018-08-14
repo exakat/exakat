@@ -173,5 +173,22 @@ GREMLIN;
         }
         die();
     }
+
+    public function debugQuery() {
+        $methods = $this->methods;
+        $arguments = $this->arguments;
+
+        $nb = count($methods);
+        for($i = 2; $i < $nb; ++$i) {
+            $this->methods = array_slice($methods, 0, $i);
+            $this->arguments = array_slice($arguments, 0, $i);
+            $this->prepareQuery($this->analyzerId);
+            $this->execQuery();
+            echo  $this->rowCount, PHP_EOL;
+            $this->rowCount = 0;
+        }
+
+        die();
+    }
 }
 ?>

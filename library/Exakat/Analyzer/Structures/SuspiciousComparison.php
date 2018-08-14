@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SuspiciousComparison extends Analyzer {
     public function analyze() {
-        $functions = $this->methods->getFunctionsLastArgsNotBoolean();
+        $functions = self::$methods->getFunctionsLastArgsNotBoolean();
 
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')

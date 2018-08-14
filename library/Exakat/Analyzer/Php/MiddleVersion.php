@@ -27,7 +27,7 @@ class MiddleVersion extends Analyzer {
     private $bugfixes = array();
 
     public function dependsOn() {
-        $this->bugfixes = $this->methods->getBugFixes();
+        $this->bugfixes = self::$methods->getBugFixes();
         
         $depends = array();
         foreach($this->bugfixes as $bugfix) {

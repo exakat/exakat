@@ -29,8 +29,8 @@ class StaticLoop extends Analyzer {
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
         
-        $nonDeterminist = $this->methods->getNonDeterministFunctions();
-        $nonDeterminist = makeList($this->makeFullNsPath($nonDeterminist));
+        $nonDeterminist = self::$methods->getNonDeterministFunctions();
+        $nonDeterminist = makeList(makeFullnspath($nonDeterminist));
 
         $whereNonDeterminist = <<<GREMLIN
 not( 

@@ -34,7 +34,7 @@ class UselessCasting extends Analyzer {
                        'T_DOUBLE_CAST'  => 'real'
                   );
         
-        $returnTypes = $this->methods->getFunctionsByReturn();
+        $returnTypes = self::$methods->getFunctionsByReturn();
         
         foreach($casts as $token => $type) {
             $this->atomIs('Cast')

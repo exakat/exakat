@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class WrongNumberOfArgumentsMethods extends Analyzer {
     
     public function analyze() {
-        $methods = $this->methods->getMethodsArgsInterval();
+        $methods = self::$methods->getMethodsArgsInterval();
         $argsMins = array();
         $argsMaxs = array();
         

@@ -69,7 +69,7 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // PHP functions that are references
-        $functions = $this->methods->getFunctionsReferenceArgs();
+        $functions = self::$methods->getFunctionsReferenceArgs();
         $references = new GroupBy();
         
         foreach($functions as $function) {

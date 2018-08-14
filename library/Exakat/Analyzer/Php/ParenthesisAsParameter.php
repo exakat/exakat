@@ -42,7 +42,7 @@ class ParenthesisAsParameter extends Analyzer {
         $this->prepareQuery();
 
         // PHP functions that are references
-        $functions = $this->methods->getFunctionsReferenceArgs();
+        $functions = self::$methods->getFunctionsReferenceArgs();
         $references = array();
         
         foreach($functions as $function) {

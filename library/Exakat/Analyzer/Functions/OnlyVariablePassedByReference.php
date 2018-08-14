@@ -68,7 +68,7 @@ class OnlyVariablePassedByReference extends Analyzer {
         $this->prepareQuery();
 
         // Checking PHP Native functions
-        $functions = $this->methods->getFunctionsReferenceArgs();
+        $functions = self::$methods->getFunctionsReferenceArgs();
         $references = new GroupBy();
         
         foreach($functions as $function) {

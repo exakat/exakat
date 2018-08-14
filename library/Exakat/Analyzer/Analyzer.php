@@ -117,7 +117,7 @@ abstract class Analyzer {
     const MAX_LOOPING = 15;
     
     protected $themes  = null;
-    protected $methods = null;
+    protected static $methods = null;
     protected $gremlin = null;
     protected $dictCode = null;
     
@@ -180,7 +180,7 @@ abstract class Analyzer {
         
         $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable);
         
-        $this->methods = new Methods($this->config);
+        self::$methods = new Methods($this->config);
     }
     
     public function __destruct() {
@@ -238,7 +238,9 @@ GREMLIN;
 
     public function init($analyzerId = null) {
         if ($analyzerId === null) {
-            $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").id()';
+            $query = <<<GREMLIN
+g.V().hasLabel("Analysis").has("analyzer", "$this->analyzerQuoted").id();
+GREMLIN;
             $res = $this->gremlin->query($query);
             
             if ($res->isType(GraphResults::EMPTY)) {
@@ -259,7 +261,9 @@ GREMLIN;
                     $this->analyzerId = $res->toString();
                 } else {
                     // Removing all edges
-                    $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").outE("ANALYZED").drop()';
+                    $query = <<<GREMLIN
+g.V().hasLabel("Analysis").has("analyzer", "$this->analyzerQuoted").outE("ANALYZED").drop()
+GREMLIN;
                     $res = $this->gremlin->query($query);
                 }
             }
@@ -337,7 +341,7 @@ g.V().hasLabel("Namespace")
      .unique()
 GREMLIN;
             self::$calledNamespaces = $this->query($query)
-                                       ->toArray();
+                                           ->toArray();
         }
         
         return self::$calledNamespaces;
@@ -357,7 +361,7 @@ g.V().hasLabel("Analysis")
      .unique()
 GREMLIN;
             self::$calledDirectives = $this->query($query)
-                                            ->toArray();
+                                           ->toArray();
         }
         
         return self::$calledDirectives;
@@ -1938,15 +1942,6 @@ GREMLIN
     }
     
     public function fetchContext($context = self::CONTEXT_OUTSIDE_CLOSURE) {
-        $forClosure = "                    // This is make variables in USE available in the parent level
-                    if (it.out('USE').out('ARGUMENT').retain([current]).any()) {
-                        context[it.atom] = 'Global';
-                    }
-";
-        if ($context == self::CONTEXT_IN_CLOSURE) {
-            $forClosure = "";
-        }
-        
         $this->query->addMethod(<<<GREMLIN
 as("context")
 .sideEffect{ line = it.get().value("line");
@@ -2039,23 +2034,6 @@ GREMLIN
 
     public abstract function analyze();
 
-    public function debugQuery() {
-        $methods = $this->methods;
-        $arguments = $this->arguments;
-
-        $nb = count($methods);
-        for($i = 2; $i < $nb; ++$i) {
-            $this->methods = array_slice($methods, 0, $i);
-            $this->arguments = array_slice($arguments, 0, $i);
-            $this->prepareQuery($this->analyzerId);
-            $this->execQuery();
-            echo  $this->rowCount, PHP_EOL;
-            $this->rowCount = 0;
-        }
-
-        die();
-    }
-    
     public function printQuery() {
         $this->query->printQuery();
     }

@@ -33,7 +33,7 @@ class WrongNumberOfArguments extends Analyzer {
     
     public function analyze() {
         // this is for functions defined within PHP
-        $functions = $this->methods->getFunctionsArgsInterval();
+        $functions = self::$methods->getFunctionsArgsInterval();
         $argsMins = array();
         $argsMaxs = array();
 
