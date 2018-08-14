@@ -124,6 +124,7 @@ abstract class GraphElements {
                                  'Staticdefinition',
                                  'Staticmethodcall',
                                  'Staticproperty',
+                                 'Staticpropertyname',
                                  'String',
                                  'Switch',
                                  'Ternary',

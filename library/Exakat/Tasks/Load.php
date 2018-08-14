@@ -4576,7 +4576,7 @@ class Load extends Tasks {
         } else {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
                 ++$this->id;
-                $this->processSingle('Variable');
+                $this->processSingle('Staticpropertyname');
                 $right = $this->popExpression();
             } else {
                 $right = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
@@ -4614,7 +4614,7 @@ class Load extends Tasks {
             $fullcode = $left->fullcode.'::'.$right->fullcode;
             $this->runPlugins($static, array('CLASS'    => $left,
                                              'CONSTANT' => $right));
-        } elseif (in_array($right->atom, array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block', 'Boolean', 'Null'))) {
+        } elseif (in_array($right->atom, array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block', 'Boolean', 'Null', 'Staticpropertyname'))) {
             $static = $this->addAtom('Staticproperty');
             $this->addLink($static, $right, 'MEMBER');
             $fullcode = $left->fullcode.'::'.$right->fullcode;
