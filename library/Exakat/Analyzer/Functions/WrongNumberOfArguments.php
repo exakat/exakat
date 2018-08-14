@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class WrongNumberOfArguments extends Analyzer {
     public function dependsOn() {
@@ -34,9 +33,7 @@ class WrongNumberOfArguments extends Analyzer {
     
     public function analyze() {
         // this is for functions defined within PHP
-        $data = new Methods($this->config);
-
-        $functions = $data->getFunctionsArgsInterval();
+        $functions = $this->methods->getFunctionsArgsInterval();
         $argsMins = array();
         $argsMaxs = array();
 

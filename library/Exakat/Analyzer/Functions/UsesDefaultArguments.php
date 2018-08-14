@@ -24,19 +24,17 @@
 namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class UsesDefaultArguments extends Analyzer {
     public function analyze() {
-        $data = new Methods($this->config);
-        $functions = $data->getFunctionsArgsInterval();
+        $functions = $this->methods->getFunctionsArgsInterval();
 
         $positions = array();
         foreach($functions as $function) {
             if ($function['args_min'] == $function['args_max']) { continue; }
             if ($function['args_max'] == 100) { continue; }
             // Only test if the last is missing. This is sufficient
-            $positions[$function['args_max'] - 1][] = '\\'.$function['name'];
+            $positions[$function['args_max'] - 1][] = "'\\$function[name]";
         }
         
         foreach($positions as $position => $f) {

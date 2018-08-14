@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class ParenthesisAsParameter extends Analyzer {
     public function analyze() {
@@ -43,16 +42,14 @@ class ParenthesisAsParameter extends Analyzer {
         $this->prepareQuery();
 
         // PHP functions that are references
-        $data = new Methods($this->config);
-        
-        $functions = $data->getFunctionsReferenceArgs();
+        $functions = $this->methods->getFunctionsReferenceArgs();
         $references = array();
         
         foreach($functions as $function) {
             if (isset($references[$function['position']])) {
-                $references[$function['position']][] = '\\'.$function['function'];
+                $references[$function['position']][] = "\\$function[function]";
             } else {
-                $references[$function['position']] = array('\\'.$function['function']);
+                $references[$function['position']] = array("\\$function[function]");
             }
         }
         

@@ -23,7 +23,6 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class UselessCasting extends Analyzer {
     public function analyze() {
@@ -35,8 +34,7 @@ class UselessCasting extends Analyzer {
                        'T_DOUBLE_CAST'  => 'real'
                   );
         
-        $data = new Methods($this->config);
-        $returnTypes = $data->getFunctionsByReturn();
+        $returnTypes = $this->methods->getFunctionsByReturn();
         
         foreach($casts as $token => $type) {
             $this->atomIs('Cast')

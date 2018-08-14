@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class ShouldPreprocess extends Analyzer {
     public function dependsOn() {
@@ -38,8 +37,7 @@ class ShouldPreprocess extends Analyzer {
         
         $MAX_LOOPING = self::MAX_LOOPING;
 
-        $methods = new Methods($this->config);
-        $functionList = $methods->getDeterministFunctions();
+        $functionList = $this->methods->getDeterministFunctions();
         $functionList = makeFullNsPath($functionList);
 
         // Operator only working on constants

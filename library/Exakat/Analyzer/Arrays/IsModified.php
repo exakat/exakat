@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Arrays;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class IsModified extends Analyzer {
     public function dependsOn() {
@@ -97,9 +96,7 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // PHP functions that are references
-        $data = new Methods($this->config);
-        
-        $functions = $data->getFunctionsReferenceArgs();
+        $functions = $this->methods->getFunctionsReferenceArgs();
         $references = array();
         
         foreach($functions as $function) {

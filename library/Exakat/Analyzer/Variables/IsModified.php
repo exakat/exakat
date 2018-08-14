@@ -24,7 +24,6 @@
 namespace Exakat\Analyzer\Variables;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 use Exakat\Data\GroupBy;
 
 class IsModified extends Analyzer {
@@ -113,13 +112,11 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // PHP functions that are using references
-        $data = new Methods($this->config);
-        
-        $functions = $data->getFunctionsReferenceArgs();
+        $functions = $this->methods->getFunctionsReferenceArgs();
         $references = new GroupBy();
         
         foreach($functions as $function) {
-            $references[$function['position']] = '\\'.$function['function'];
+            $references[$function['position']] = "\\$function[function]";
         }
         
         foreach($references as $position => $functions) {

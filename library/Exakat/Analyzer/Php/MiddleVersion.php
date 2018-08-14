@@ -22,14 +22,12 @@
 namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class MiddleVersion extends Analyzer {
     private $bugfixes = array();
 
     public function dependsOn() {
-        $data = new Methods($this->config);
-        $this->bugfixes = $data->getBugFixes();
+        $this->bugfixes = $this->methods->getBugFixes();
         
         $depends = array();
         foreach($this->bugfixes as $bugfix) {

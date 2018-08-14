@@ -24,15 +24,13 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class StaticLoop extends Analyzer {
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
         
-        $methods = new Methods($this->config);
-        $nonDeterminist = $methods->getNonDeterministFunctions();
-        $nonDeterminist = "'\\\\" . implode("', '\\\\", $nonDeterminist)."'";
+        $nonDeterminist = $this->methods->getNonDeterministFunctions();
+        $nonDeterminist = makeList($this->makeFullNsPath($nonDeterminist));
 
         $whereNonDeterminist = <<<GREMLIN
 not( 

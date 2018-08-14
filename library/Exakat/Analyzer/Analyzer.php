@@ -25,6 +25,7 @@ namespace Exakat\Analyzer;
 
 use Exakat\Datastore;
 use Exakat\Data\Dictionary;
+use Exakat\Data\Methods;
 use Exakat\Config;
 use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
@@ -115,13 +116,13 @@ abstract class Analyzer {
     
     const MAX_LOOPING = 15;
     
-    protected $themes = null;
-
+    protected $themes  = null;
+    protected $methods = null;
     protected $gremlin = null;
+    protected $dictCode = null;
     
     protected $linksDown = '';
     
-    protected $dictCode = null;
 
     public function __construct($gremlin = null, $config = null) {
         $this->gremlin = $gremlin;
@@ -178,6 +179,8 @@ abstract class Analyzer {
         }
         
         $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable);
+        
+        $this->methods = new Methods($this->config);
     }
     
     public function __destruct() {
@@ -402,8 +405,7 @@ GREMLIN;
         try {
             $result = $this->gremlin->query($queryString, $arguments);
         } catch (GremlinException $e) {
-            display($e->getMessage().
-                    $queryString);
+            display($e->getMessage().$queryString);
             $result = new \StdClass();
             $result->processed = 0;
             $result->total = 0;

@@ -22,16 +22,15 @@
 namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class InternalParameterType extends Analyzer {
     public function dependsOn() {
-        return array('Functions/IsExtFunction');
+        return array('Functions/IsExtFunction',
+                    );
     }
     
     public function analyze() {
-        $data = new Methods($this->config);
-        $args = $data->getInternalParameterType();
+        $args = $this->methods->getInternalParameterType();
 
         $typeConversion = array('string'   => array('Magicconstant', 'Heredoc', 'String'),
                                 'real'     => 'Real',

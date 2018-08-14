@@ -23,12 +23,10 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Methods;
 
 class SuspiciousComparison extends Analyzer {
     public function analyze() {
-        $data = new Methods($this->config);
-        $functions = $data->getFunctionsLastArgsNotBoolean();
+        $functions = $this->methods->getFunctionsLastArgsNotBoolean();
 
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
