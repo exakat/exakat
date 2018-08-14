@@ -41,13 +41,13 @@ class WrittenOnlyVariable extends Analyzer {
              ->raw(<<<GREMLIN
 local(
     __.sideEffect{ x = [];}
-      .repeat(out()).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray")
+      .repeat(__.out($this->linksDown)).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray")
       .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead"))
       .sideEffect{x.add(it.get().value("code"));}
       .barrier()
     )
     .select("first")
-    .repeat(out()).emit().times(15).hasLabel("Variable", "Variableobject", "Variablearray")
+    .repeat(__.out($this->linksDown)).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray")
     .filter{ !(it.get().value("code") in x)}
 GREMLIN
 );
