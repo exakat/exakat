@@ -830,7 +830,7 @@ class Load extends Tasks {
 
                     $property = $this->addAtom('Member');
                     $property->code      = $this->tokens[$current][1];
-                    $property->fullcode  = $object->fullcode.'->'.$propertyName->fullcode;
+                    $property->fullcode  = "{$object->fullcode}->{$propertyName->fullcode}";
                     $property->line      = $this->tokens[$current][2];
                     $property->token     = $this->getToken($this->tokens[$current][0]);
                     $property->enclosing = self::NO_ENCLOSING;

@@ -66,6 +66,7 @@ class LoadFinal extends Tasks {
         $this->propagateConstants();
         
         $this->setClassConstantRemoteDefinition();
+        $this->setClassPropertyRemoteDefinition();
 
         display('End load final');
         $this->logTime('Final');
@@ -357,6 +358,39 @@ GREMLIN;
         $res = $this->gremlin->query($query);
         $count = $res->toInt();
         display("Set $count class constant remote definitions");
+    }
+
+    private function setClassPropertyRemoteDefinition() {
+        display('Set class property remote definitions');
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Staticproperty").as("property")
+     .not(where( __.in("DEFINITION")))
+     .out("MEMBER").hasLabel("Staticpropertyname").sideEffect{ name = it.get().value("code")}.in("MEMBER")
+     .out("CLASS").in("DEFINITION")
+     .emit().repeat( __.out("EXTENDS", "USE").coalesce( __.out("USE"), filter{ true; }).in("DEFINITION") ).times(8)
+     .out("PPP").out("PPP").filter{ it.get().value("code") == name;}
+     .addE("DEFINITION")
+     .to("property")
+     .count()
+GREMLIN;
+        $res = $this->gremlin->query($query);
+        $count = $res->toInt();
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Member").as("property")
+     .not(where( __.in("DEFINITION")))
+     .out("MEMBER").hasLabel("Name").sideEffect{ name = it.get().value("code")}.in("MEMBER")
+     .out("OBJECT").in("DEFINITION")
+     .emit().repeat( __.out("EXTENDS", "USE").coalesce( __.out("USE"), filter{ true; }).in("DEFINITION") ).times(8)
+     .out("PPP").out("PPP").filter{ it.get().value("propertyname") == name;}
+     .addE("DEFINITION")
+     .to("property")
+     .count()
+GREMLIN;
+        $res = $this->gremlin->query($query);
+        $count += $res->toInt();
+        display("Set $count property remote definitions");
     }
 
     private function setParentDefinition() {
