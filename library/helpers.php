@@ -61,7 +61,7 @@ function rmdirRecursive($dir) {
     $files = array_diff(scandir($dir), array('.','..'));
 
     foreach ($files as $file) {
-        $path = $dir.'/'.$file;
+        $path = "$dir/$file";
         if (is_dir($path)) {
             $total += rmdirRecursive($path);
         } else {
@@ -82,7 +82,7 @@ function copyDir($src, $dst) {
     }
     $dir = opendir($src);
     if (!is_resource($dir)) {
-        throw new NoSuchDir("Can't open dir : '$src' : ".var_export(error_get_last()));
+        throw new NoSuchDir("Can't open dir : '$src' : ".error_get_last());
     }
 
     $total = 0;
@@ -145,17 +145,17 @@ function duration($seconds) {
 }
 
 function unparse_url($parsed_url) {
-    $scheme   = isset($parsed_url['scheme'])   ? $parsed_url['scheme'].'://'   : '';
+    $scheme   = isset($parsed_url['scheme'])   ? "$parsed_url[scheme]://"      : '';
     $host     = isset($parsed_url['host'])     ? $parsed_url['host']           : '';
-    $port     = isset($parsed_url['port'])     ? ':'.$parsed_url['port']       : '';
+    $port     = isset($parsed_url['port'])     ? ":$parsed_url[port]"          : '';
 
     $user     = empty($parsed_url['user'])     ? '' : $parsed_url['user'];
-    $pass     = empty($parsed_url['pass'])     ? '' : ':'.$parsed_url['pass'];
+    $pass     = empty($parsed_url['pass'])     ? '' : ":$parsed_url[pass]";
     $userpass = ($user || $pass)               ? "$user$pass@"                 : '';
 
     $path     = isset($parsed_url['path'])     ? $parsed_url['path']           : '';
-    $query    = isset($parsed_url['query'])    ? '?'.$parsed_url['query']      : '';
-    $fragment = isset($parsed_url['fragment']) ? '#'.$parsed_url['fragment']   : '';
+    $query    = isset($parsed_url['query'])    ? "?$parsed_url[query]"         : '';
+    $fragment = isset($parsed_url['fragment']) ? "#$parsed_url[fragment]"      : '';
 
     return "$scheme$userpass$host$port$path$query$fragment";
 }
@@ -200,7 +200,7 @@ function array_ungroupby($array) {
 }
 
 function makeList($array, $delimiter = '"') {
-    return $delimiter.implode($delimiter.', '.$delimiter, $array).$delimiter;
+    return $delimiter.implode("$delimiter, $delimiter", $array).$delimiter;
 }
 
 function unicode_blocks($string) {
@@ -401,7 +401,7 @@ function makeFullNsPath($functions, $constant = false) {
                 $r = stripslashes($r);
             }
             if (isset($r[0]) && $r[0] != '\\') {
-                $r = '\\' . $r;
+                $r = "\\$r";
             }
             return $r;
         };
