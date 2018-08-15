@@ -3729,7 +3729,7 @@ class Load extends Tasks {
                 $this->addLink($use, $namespace, 'GROUPUSE');
                 $prefix = makeFullNsPath($namespace->fullcode);
                 if ($prefix[0] !== '\\') {
-                    $prefix = '\\'.$prefix;
+                    $prefix = "\\$prefix";
                 }
                 $prefix .= '\\';
 
