@@ -25,6 +25,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UndefinedTrait extends Analyzer {
     public function analyze() {
+        // class x { use t; } // no trait t {}
         $this->atomIs('Usetrait')
              ->outIs('USE')
              ->noTraitDefinition();

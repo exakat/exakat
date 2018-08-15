@@ -85,7 +85,11 @@ SQL;
 
         // No need for This
         if (in_array($call->atom, array('Parent',
-                                        'Isset', 'List', 'Empty', 'Eval', 'Exit',
+                                        'Isset', 
+                                        'List', 
+                                        'Empty', 
+                                        'Eval', 
+                                        'Exit',
                                         ))) {
             return;
         }
@@ -94,7 +98,9 @@ SQL;
             throw new LoadError( "Warning : fullnspath is not a string : it is ".gettype($fullnspath).PHP_EOL);
         }
 
-        if ($fullnspath === 'undefined') {
+        if ($type !== 'function') {
+                $globalpath = '';
+        } elseif ($fullnspath === 'undefined') {
             $globalpath = '';
         } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
             $globalpath = $r[1];
@@ -167,7 +173,9 @@ SQL;
             return;
         }
 
-        if ($fullnspath === 'undefined') {
+        if ($type !== 'function') {
+            $globalpath = '';
+        } elseif ($fullnspath === 'undefined') {
             $globalpath = '';
         } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
             $globalpath = $r[1];
