@@ -27,7 +27,12 @@ use Exakat\Analyzer\Common\MethodcallUsage;
 
 class Cake33DeprecatedMethods extends MethodcallUsage {
     public function analyze() {
-        $this->methods = array( 'statusCode', 'encoding', 'header', 'cookie', 'version');
+        $this->calledMethods = array('statusCode', 
+                                     'encoding', 
+                                     'header', 
+                                     'cookie', 
+                                     'version',
+                                     );
 
         parent::analyze();
     }

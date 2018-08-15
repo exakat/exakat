@@ -27,12 +27,12 @@ use Exakat\Analyzer\Common\MethodcallUsage;
 
 class Cake32DeprecatedMethods extends MethodcallUsage {
     public function analyze() {
-        $this->methods = array( 'error', // Shell
-                                'type',  // Cake\Database\Expression\QueryExpression
-                                '_calculateTypeMap', //Cake\ORM\ResultSet::_calculateTypeMap() is now unused and deprecated.
-                                '_castValues', // Cake\ORM\ResultSet::_castValues() is now unused and deprecated.
-                                );
-
+        $this->calledMethods = array('error', // Shell
+                                     'type',  // Cake\Database\Expression\QueryExpression
+                                     '_calculateTypeMap', //Cake\ORM\ResultSet::_calculateTypeMap() is now unused and deprecated.
+                                     '_castValues', // Cake\ORM\ResultSet::_castValues() is now unused and deprecated.
+                                     );
+     
         parent::analyze();
     }
 }
