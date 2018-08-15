@@ -1,10 +1,10 @@
 <?php
 
 $expected     = array('$key',
-                      '$privateStatic2',
                      );
 
 $expected_not = array('$privateStatic',
+                      '$privateStatic2',
                       'value',
                       '"value"',
                       'A',
