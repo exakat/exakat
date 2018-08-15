@@ -36,26 +36,26 @@ class Server extends Tasks {
             if (empty($display)) {
                 $display = 'No server found';
             }
-            display('Shut down server ('.$display.')');
+            display("Shut down server ($display)");
             
             if ($this->config->stop === true) {
                 return;
             }
         }
 
-        if (file_exists($this->config->dir_root.'/projects/index.php')) {
+        if (file_exists("{$this->config->dir_root}/projects/index.php")) {
             display('A server is already installed. Aborting.');
             return;
         }
 
         display('Copy router server');
-        $php = file_get_contents($this->config->dir_root.'/server/index.php');
+        $php = file_get_contents("{$this->config->dir_root}/server/index.php");
         $php = str_replace('__PHP__', $this->config->php, $php);
         $php = str_replace('__EXAKAT__', $this->config->executable, $php);
-        file_put_contents($this->config->projects_root.'/projects/index.php', $php);
+        file_put_contents("{$this->config->projects_root}/projects/index.php", $php);
 
-        if (!file_exists($this->config->projects_root.'/projects/server.log')) {
-            file_put_contents($this->config->projects_root.'/projects/server.log', date('r')."\tCreated file\n");
+        if (!file_exists("{$this->config->projects_root}/projects/server.log")) {
+            file_put_contents("{$this->config->projects_root}/projects/server.log", date('r')."\tCreated file\n");
         }
 
         display('Start server');

@@ -71,12 +71,18 @@ class Status extends Tasks {
                         'tokens'  => $this->datastore->getHash('tokens') ?? -1,
                         );
         if (file_exists($this->config->projects_root.'/projects/.exakat/Project.json')) {
-            $json = json_decode(file_get_contents($this->config->projects_root.'/projects/.exakat/Project.json'));
-            if ($json->project === $project) {
-                $status['status'] = $json->step;
+            $text = file_get_contents($this->config->projects_root.'/projects/.exakat/Project.json');
+            if (empty($text)) {
+                 $inited = $this->datastore->getHash('inited');
+                 $status['status'] = empty($inited) ? 'Init phase' : 'Not running';
             } else {
-                $inited = $this->datastore->getHash('inited');
-                $status['status'] = empty($inited) ? 'Init phase' : 'Not running';
+             $json = json_decode($text);
+             if ($json->project === $project) {
+                 $status['status'] = $json->step;
+             } else {
+                 $inited = $this->datastore->getHash('inited');
+                 $status['status'] = empty($inited) ? 'Init phase' : 'Not running';
+             }
             }
         } else {
             $inited = $this->datastore->getHash('inited');

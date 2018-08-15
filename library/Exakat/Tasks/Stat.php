@@ -47,8 +47,13 @@ class Stat extends Tasks {
 
         if ($this->config->output) {
             $outputFile = fopen($this->config->filename, 'w+');
-            fwrite($outputFile, $output);
-            fclose($outputFile);
+            if (empty($outputFile)) {
+                print "Couldn't open file '{$this->config->filename}' for writing. No report saved.\n";
+                return;
+            } else {
+                fwrite($outputFile, $output);
+                fclose($outputFile);
+            }
         } else {
             echo $output;
         }
