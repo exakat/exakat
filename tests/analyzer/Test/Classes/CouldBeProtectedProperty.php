@@ -8,10 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_CouldBeProtectedProperty extends Analyzer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function testClasses_CouldBeProtectedProperty01()  { $this->generic_test('Classes/CouldBeProtectedProperty.01'); }
     public function testClasses_CouldBeProtectedProperty02()  { $this->generic_test('Classes/CouldBeProtectedProperty.02'); }
     public function testClasses_CouldBeProtectedProperty03()  { $this->generic_test('Classes/CouldBeProtectedProperty.03'); }
+    public function testClasses_CouldBeProtectedProperty04()  { $this->generic_test('Classes/CouldBeProtectedProperty.04'); }
 }
 ?>

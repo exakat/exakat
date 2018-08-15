@@ -23,10 +23,11 @@
 namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Data\GroupBy;
 
 class CouldBeProtectedProperty extends Analyzer {
     public function analyze() {
-        // Case of property->property (that's another public access)
+        // Case of $object->property (that's another public access)
         $query = <<<GREMLIN
 g.V().hasLabel("Member")
      .not( __.where( __.out("OBJECT").hasLabel("This") ) )
@@ -45,8 +46,8 @@ GREMLIN;
              ->outIs('PPP')
              ->isNot('propertyname', $publicProperties);
         $this->prepareQuery();
-        
-        // Case of property::property (that's another public access)
+
+        // Case of class::property (that's another public access)
         $res = $this->query(<<<GREMLIN
 g.V().hasLabel("Staticproperty").as("init")
      .out("CLASS").hasLabel("Identifier", "Nsname")
@@ -57,19 +58,15 @@ g.V().hasLabel("Staticproperty").as("init")
                .or(hasLabel("File"), 
                    hasLabel("Class").filter{ it.get().values("fullnspath") == fnp; }) 
            )
-     .out("MEMBER").hasLabel("Variable").as("variable")
+     .out("MEMBER").hasLabel("Staticpropertyname").as("variable")
      .select("classe", "variable").by("fullnspath").by("code")
      .unique();
 GREMLIN
 );
-        
-        $publicStaticProperties = array();
+
+        $publicStaticProperties = new GroupBy();
         foreach($res as $value) {
-            if (isset($publicStaticProperties[$value['classe']])) {
-                $publicStaticProperties[$value['classe']][] = $value['variable'];
-            } else {
-                $publicStaticProperties[$value['classe']] = array($value['variable']);
-            }
+            $publicStaticProperties[$value['classe']] = $value['variable'];
         }
         
         if (!empty($publicStaticProperties)) {
@@ -81,7 +78,7 @@ GREMLIN
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('first')
                  ->outIs('PPP')
-                 ->isNotHash('code', $publicStaticProperties, 'fnp');
+                 ->isNotHash('code', $publicStaticProperties->toArray(), 'fnp');
             $this->prepareQuery();
         }
     }
