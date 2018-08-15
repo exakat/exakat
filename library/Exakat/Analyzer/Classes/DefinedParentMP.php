@@ -32,120 +32,31 @@ class DefinedParentMP extends Analyzer {
     }
     
     public function analyze() {
-        // Only one level of trait ATM
-        // parent::method()
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('METHOD')
-             ->outIs('CLASS')
-             ->atomIs('Parent')
-             ->classDefinition()
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->isNot('visibility', 'private')
-             ->outIs('NAME')
-             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
-
-        // Only one level of trait ATM
-        // parent::method() (in Trait)
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('METHOD')
-             ->outIs('CLASS')
-             ->atomIs('Parent')
-             ->classDefinition()
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs('USE')
-             ->outIs('USE')
-             ->inIs('DEFINITION')
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->isNot('visibility', 'private')
-             ->outIs('NAME')
-             ->samePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
-
-        // handle composer case
-        $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->atomIs('Parent')
-             ->classDefinition()
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->analyzerIs('Composer/IsComposerNsname')
-             ->back('first');
-        $this->prepareQuery();
-
-        // Case of PHP class
-        $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->atomIs('Parent')
-             ->classDefinition()
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->analyzerIs('Classes/IsExtClass')
-             ->back('first');
-        $this->prepareQuery();
-        
         // parent::$property
-        $this->atomIs('Staticproperty')
-             ->outIs('MEMBER')
-             ->atomIs('Staticpropertyname')
-             ->savePropertyAs('code', 'name')
-             ->inIs('MEMBER')
-             ->outIs('CLASS')
-             ->atomIs('Parent')
-             ->classDefinition()
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->isNot('visibility', 'private')
-             ->outIs('PPP')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
-
-        // parent::$property (defined in Trait)
-        $this->atomIs('Staticproperty')
-             ->outIs('MEMBER')
-             ->atomIs('Staticpropertyname')
-             ->savePropertyAs('code', 'name')
-             ->inIs('MEMBER')
-             ->outIs('CLASS')
-             ->atomIs('Parent')
-             ->classDefinition()
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs('USE')
-             ->outIs('USE')
-             ->inIs('DEFINITION')
-             ->atomIs('Trait')
-             ->outIs('PPP')
-             ->atomIs('Ppp')
-             ->isNot('visibility', 'private')
-             ->outIs('PPP')
-             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
-             ->back('first');
+        $this->atomIs('Parent')
+             ->inIs('CLASS')
+             ->hasIn('DEFINITION');
         $this->prepareQuery();
 
         // handle composer case
         $this->atomIs('Staticproperty')
+             ->hasNoIn('DEFINITION')
              ->outIs('CLASS')
              ->atomIs('Parent')
-             ->classDefinition()
+             ->goToClass()
              ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('EXTENDS')
              ->analyzerIs('Composer/IsComposerNsname')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
+             ->hasNoIn('DEFINITION')
              ->outIs('CLASS')
              ->atomIs('Parent')
-             ->classDefinition()
+             ->goToClass()
              ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('EXTENDS')
              ->analyzerIs('Classes/IsExtClass')
              ->back('first');
         $this->prepareQuery();
