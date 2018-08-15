@@ -810,19 +810,19 @@ GREMLIN;
         }
 
         assert($this->assertProperty($property));
-        $this->query->addMethod('filter{ it.get().value("'.$property.'") in ***['.$index.']}', $hash);
+        $this->query->addMethod("filter{ it.get().value(\"$property\") in ***[$index]}", $hash);
         
         return $this;
     }
 
     public function isNotHash($property, $hash, $index) {
         if (is_array($hash) && empty($hash)) {
-            $this->query->addMethod("filter{ true; }");
+            $this->query->addMethod('filter{ true; }');
             return $this;
         }
 
         assert($this->assertProperty($property));
-        $this->query->addMethod('filter{ !(it.get().value("'.$property.'") in ***['.$index.'])}', $hash);
+        $this->query->addMethod("filter{ !(it.get().value(\"$property\") in ***[$index])}", (array) $hash);
         
         return $this;
     }

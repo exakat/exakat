@@ -30,7 +30,7 @@ class StaticLoop extends Analyzer {
         $MAX_LOOPING = self::MAX_LOOPING;
         
         $nonDeterminist = self::$methods->getNonDeterministFunctions();
-        $nonDeterminist = makeList(makeFullnspath($nonDeterminist));
+        $nonDeterminist = makeFullnspath($nonDeterminist);
 
         $whereNonDeterminist = <<<GREMLIN
 not( 
@@ -38,7 +38,7 @@ not(
         __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING)
           .hasLabel("Functioncall")
           .has("token", within("T_STRING", "T_NS_SEPARATOR"))
-          .filter{ it.get().value("fullnspath") in [$nonDeterminist]} 
+          .filter{ it.get().value("fullnspath") in ***} 
           ) 
     )
 GREMLIN;
@@ -74,7 +74,7 @@ GREMLIN;
              ->raw($checkBlindVariable)
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->raw($whereNonDeterminist)
+             ->raw($whereNonDeterminist, $nonDeterminist)
              ->back('first');
         $this->prepareQuery();
 
@@ -94,7 +94,7 @@ GREMLIN;
              ->raw($checkBlindVariable)
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->raw($whereNonDeterminist)
+             ->raw($whereNonDeterminist, $nonDeterminist)
 
              ->back('first');
         $this->prepareQuery();
@@ -111,7 +111,7 @@ GREMLIN;
              ->raw($checkBlindVariable)
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->raw($whereNonDeterminist)
+             ->raw($whereNonDeterminist, $nonDeterminist)
 
              ->back('first');
         $this->prepareQuery();
@@ -129,7 +129,7 @@ GREMLIN;
              ->raw($checkBlindVariable)
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
-             ->raw($whereNonDeterminist)
+             ->raw($whereNonDeterminist, $nonDeterminist)
              ->back('first');
         $this->prepareQuery();
 
