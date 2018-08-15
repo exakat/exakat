@@ -25,6 +25,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Log;
+use Exakat\GraphElements;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
@@ -44,6 +45,8 @@ class Dump extends Tasks {
     private $files = array();
     
     protected $logname = self::LOG_NONE;
+    
+    private $linksDown = '';
 
     const WAITING_LOOP = 1000;
 
@@ -52,6 +55,8 @@ class Dump extends Tasks {
         
         $this->log = new Log('dump',
                              $this->config->projects_root.'/projects/'.$this->config->project);
+
+        $this->linksDown = GraphElements::linksAsList();
     }
 
     public function run() {
@@ -553,12 +558,13 @@ GREMLIN;
                                                              type    TEXT
                                                  )');
 
+        $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Class")
 .sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
 .sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
-.sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP", "CONST").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold())
+.sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
@@ -608,7 +614,7 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Interface")
 .sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
-.sideEffect{ lines = [];}.where( __.out("METHOD", "CONST").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold())
+.sideEffect{ lines = [];}.where( __.out("METHOD", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = [];}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
@@ -647,7 +653,7 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Trait")
 .sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
-.sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold())
+.sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).times(10).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
@@ -805,7 +811,7 @@ g.V().hasLabel("Method").as('method')
      .select('method')
 .where( __.sideEffect{ lines = [];}
                .out("BLOCK").out("EXPRESSION")
-               .emit().repeat( __.out()).times(15)
+               .emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING)
                .sideEffect{ lines.add(it.get().value("line")); }
                .fold()
       )
@@ -1044,6 +1050,7 @@ GREMLIN;
     }
     
     private function collectFunctions() {
+        $MAX_LOOPING = Analyzer::MAX_LOOPING;
 
         // Functions
         $this->sqlite->query('DROP TABLE IF EXISTS functions');
@@ -1059,7 +1066,7 @@ SQL
 
         $query = <<<GREMLIN
 g.V().hasLabel("Function")
-.sideEffect{ lines = [];}.where( __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out()).times(15).sideEffect{ lines.add(it.get().value("line")); }.fold() )
+.sideEffect{ lines = [];}.where( __.out("BLOCK").out("EXPRESSION").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold() )
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).times(13).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
     x = ['name': it.get().vertices(OUT, "NAME").next().value("fullcode"),
@@ -1222,6 +1229,7 @@ GREMLIN;
     }
 
     private function collectFilesDependencies() {
+        $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $this->sqlite->query('DROP TABLE IF EXISTS filesDependencies');
         $this->sqlite->query('CREATE TABLE filesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                                including STRING,
@@ -1232,7 +1240,7 @@ GREMLIN;
         // Direct inclusion
         $query = <<<GREMLIN
 g.V().hasLabel("File").as("file")
-     .repeat( out() ).emit().times(15).hasLabel("Include").as("include")
+     .repeat( out($this->linksDown) ).emit().times($MAX_LOOPING).hasLabel("Include").as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1255,10 +1263,10 @@ GREMLIN;
         // Finding extends and implements
         $query = <<<GREMLIN
 g.V().hasLabel("Class", "Interface").as("classe")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ calling = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").sideEffect{ calling = it.get().value('fullcode'); })
      .outE().hasLabel("EXTENDS", "IMPLEMENTS").sideEffect{ type = it.get().label(); }.inV()
      .in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").sideEffect{ called = it.get().value('fullcode'); })
      .map{ [ 'file':calling, 'type':type, 'include':called];}
 GREMLIN;
 
@@ -1278,9 +1286,9 @@ GREMLIN;
         // Finding extends for interfaces
         $query = <<<GREMLIN
 g.V().hasLabel("Interface").as("classe")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").as("file")
+     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").as("file")
      .select("classe").out("EXTENDS")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").as("include")
+     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1299,9 +1307,9 @@ GREMLIN;
         // Finding typehint
         $query = <<<GREMLIN
 g.V().hasLabel("Nsname", "Identifier").as("classe").where( __.in("TYPEHINT"))
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").as("file")
+     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").as("file")
      .select("classe").in("DEFINITION")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").as("include")
+     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1320,9 +1328,9 @@ GREMLIN;
         // Finding trait use
         $query = <<<GREMLIN
 g.V().hasLabel("Usetrait").out("USE").as("classe")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").as("file")
+     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").as("file")
      .select("classe").in("DEFINITION")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").as("include")
+     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1341,9 +1349,9 @@ GREMLIN;
         // traits
         $query = <<<GREMLIN
 g.V().hasLabel("Class", "Trait").as("classe")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").as("file")
+     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").as("file")
      .select("classe").out("USE").hasLabel("Use").out("USE").in("DEFINITION")
-     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").as("include")
+     .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1362,9 +1370,9 @@ GREMLIN;
         // Functioncall()
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
-     .where(__.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit(hasLabel("File")).times(15).hasLabel("File").sideEffect{ calling = it.get().value("fullcode"); })
+     .where(__.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit(hasLabel("File")).times($MAX_LOOPING).hasLabel("File").sideEffect{ calling = it.get().value("fullcode"); })
      .in("DEFINITION")
-     .where(__.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit(hasLabel("File")).times(15).hasLabel("File").sideEffect{ called = it.get().value("fullcode"); })
+     .where(__.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit(hasLabel("File")).times($MAX_LOOPING).hasLabel("File").sideEffect{ called = it.get().value("fullcode"); })
      .map{['file':calling, 'include':called]}
 GREMLIN;
         $functioncall = $this->gremlin->query($query);
@@ -1383,9 +1391,9 @@ GREMLIN;
         // constants
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier").not(where( __.in("NAME", "CLASS", "MEMBER", "AS", "CONSTANT", "TYPEHINT", "EXTENDS", "USE", "IMPLEMENTS", "INDEX" ) ) )
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ calling = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").sideEffect{ calling = it.get().value('fullcode'); })
      .in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").sideEffect{ called = it.get().value('fullcode'); })
      .map{ [ 'file':calling, 'include':called];}
 GREMLIN;
         $constants = $this->gremlin->query($query);
@@ -1404,9 +1412,9 @@ GREMLIN;
         // New
         $query = <<<GREMLIN
 g.V().hasLabel("New").out("NEW").as("i")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ calling = it.get().value("fullcode"); })
+     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").sideEffect{ calling = it.get().value("fullcode"); })
      .in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value("fullcode"); })
+     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").sideEffect{ called = it.get().value("fullcode"); })
      .map{ [ "file":calling, "include":called];}
 GREMLIN;
         $res = $this->gremlin->query($query);
@@ -1426,9 +1434,9 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Staticconstant", "Staticmethodcall", "Staticproperty").as("i")
      .sideEffect{ type = it.get().label().toLowerCase(); }
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ calling = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").sideEffect{ calling = it.get().value('fullcode'); })
      .out("CLASS").in("DEFINITION")
-     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value('fullcode'); })
+     .where( __.repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).emit().times($MAX_LOOPING).hasLabel("File").sideEffect{ called = it.get().value('fullcode'); })
      .map{ [ 'file':calling, 'type':type, 'include':called];}
 GREMLIN;
         $statics = $this->gremlin->query($query);
@@ -1490,9 +1498,10 @@ GREMLIN;
     }
     
     private function collectNativeCallsPerExpressions() {
+        $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel(within(['Sequence'])).groupCount("processed").by(count()).as("first").out("EXPRESSION").not(hasLabel(within(['Assignation', 'Case', 'Catch', 'Class', 'Classanonymous', 'Closure', 'Concatenation', 'Default', 'Dowhile', 'Finally', 'For', 'Foreach', 'Function', 'Ifthen', 'Include', 'Method', 'Namespace', 'Php', 'Return', 'Switch', 'Trait', 'Try', 'While']))).as("results")
-.groupCount('m').by( __.emit( ).repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).times(15).hasLabel('Functioncall')
+.groupCount('m').by( __.emit( ).repeat( __.out($this->linksDown).not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel('Functioncall')
       .where( __.in("ANALYZED").has("analyzer", "Functions/IsExtFunction"))
       .count()
 ).cap('m')
@@ -1501,6 +1510,7 @@ GREMLIN;
     }
 
     private function collectClassChanges() {
+        $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $this->sqlite->query('DROP TABLE IF EXISTS classChanges');
         $query = <<<SQL
 CREATE TABLE classChanges (  
@@ -1526,7 +1536,7 @@ g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first
 .sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }
 
 .in("METHOD").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
-.where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
+.where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
 
 .sideEffect{ signature2 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature2.add(it.value("fullcode"));} }
 .filter{ signature2 != signature1; }
@@ -1547,7 +1557,7 @@ g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first
 .sideEffect{ visibility1 = it.get().value("visibility") }
 
 .in("METHOD").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
-.where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
+.where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
 
 .filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("fullcode") }
 
@@ -1566,7 +1576,7 @@ g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count(
 .out("DEFAULT").sideEffect{ default1 = it.get().value("fullcode") }.in("DEFAULT")
 
 .in("PPP").in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
-.where(neq("x")) ).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }
+.where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }
 
 .out("PPP").out("PPP")
 .out("DEFAULT").filter{ default2 = it.get().value("fullcode"); default1 != it.get().value("fullcode") }.in("DEFAULT")
@@ -1589,7 +1599,7 @@ g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count(
 .repeat( __.as("x").out("EXTENDS", "IMPLEMENTS")
                    .in("DEFINITION")
                    .where(neq("x")) 
-).emit( ).times(15).sideEffect{ class2 = it.get().value("fullcode"); }.out("PPP")
+).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }.out("PPP")
 
 .filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("fullcode") }
 
@@ -1639,7 +1649,7 @@ g.V().sideEffect{ functions = 0; name=""; expression=0;}
                         __.filter{true; }.sideEffect{ name="global"; file = it.get().value("fullcode");} )
     .sideEffect{ total = 0; expression = 0; type=it.get().label();}
     .coalesce( __.out("BLOCK"), __.out("FILE").out("EXPRESSION").out("EXPRESSION") )
-    .repeat( __.out().not(hasLabel("Class", "Function", "Closure", "Interface", "Trait", "Void")) ).emit().times($loops)
+    .repeat( __.out($this->linksDown).not(hasLabel("Class", "Function", "Closure", "Interface", "Trait", "Void")) ).emit().times($loops)
     .sideEffect{ ++total; }
     .not(hasLabel("Void"))
     .where( __.in("EXPRESSION", "CONDITION").sideEffect{ expression++; })
