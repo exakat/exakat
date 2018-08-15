@@ -56,7 +56,7 @@ g.V().hasLabel("Staticproperty")
          .not(hasLabel("Self", "Static"))
          .sideEffect{fnp = it.get().value("fullnspath");}
      .in("CLASS")
-     .out("MEMBER").hasLabel("Variable")
+     .out("MEMBER").hasLabel("Staticpropertyname")
      .map{ full = fnp + '::' + it.get().value("code"); }
      )
      .map{ full; }

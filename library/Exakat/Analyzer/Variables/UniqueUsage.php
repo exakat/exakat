@@ -42,16 +42,16 @@ class UniqueUsage extends Analyzer {
              ->raw(<<<GREMLIN
 where( 
     __.sideEffect{ args = []; }
-      .out('ARGUMENT')
+      .out("ARGUMENT")
       .coalesce( 
          __.out("NAME"), 
-         __.filter{ true}
+         __.filter{ true; }
         )
         .sideEffect{args.add(it.get().value("code"));}
         .fold()
 )
 .where(
-    __.sideEffect{ r = [:]; w = [:]; }.repeat( __.out({$this->linksDown}).simplePath()).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray", "Parametername").as('v')
+    __.sideEffect{ r = [:]; w = [:]; }.repeat( __.out({$this->linksDown}).not(hasLabel('Closure')).simplePath()).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray", "Parametername").as("v")
       .filter{ v = it.get().value("code"); !(v in args);}
       .in("ANALYZED")
       .has("analyzer", within("Variables/IsRead", "Classes/IsRead", "Arrays/IsRead","Variables/IsModified", "Classes/IsModified", "Arrays/IsModified" ))

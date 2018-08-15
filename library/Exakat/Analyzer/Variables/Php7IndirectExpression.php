@@ -56,7 +56,7 @@ class Php7IndirectExpression extends Analyzer {
              ->outIs('VARIABLE')
              ->atomIs(array('Member', 'Staticproperty'))
              ->outIs('MEMBER')
-             ->atomIs('Variable')
+             ->atomIs(array('Variable', 'Staticpropertyname'))
              ->back('first');
         $this->prepareQuery();
     }

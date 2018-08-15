@@ -31,7 +31,7 @@ class DynamicMethodCall extends Analyzer {
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->atomIs(array('Variable', 'Block'))
+             ->tokenIs('T_VARIABLE')
              ->back('first');
         $this->prepareQuery();
 
@@ -39,7 +39,7 @@ class DynamicMethodCall extends Analyzer {
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->atomIs(array('Variable', 'Block'))
+             ->tokenIs('T_VARIABLE')
              ->back('first');
         $this->prepareQuery();
     }
