@@ -94,7 +94,7 @@ class DefinedParentMP extends Analyzer {
         // parent::$property
         $this->atomIs('Staticproperty')
              ->outIs('MEMBER')
-             ->atomIs('Variable')
+             ->atomIs('Staticpropertyname')
              ->savePropertyAs('code', 'name')
              ->inIs('MEMBER')
              ->outIs('CLASS')
@@ -112,7 +112,7 @@ class DefinedParentMP extends Analyzer {
         // parent::$property (defined in Trait)
         $this->atomIs('Staticproperty')
              ->outIs('MEMBER')
-             ->atomIs('Variable')
+             ->atomIs('Staticpropertyname')
              ->savePropertyAs('code', 'name')
              ->inIs('MEMBER')
              ->outIs('CLASS')

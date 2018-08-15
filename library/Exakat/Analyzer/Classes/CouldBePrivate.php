@@ -67,7 +67,7 @@ g.V().hasLabel("Staticproperty")
      .sideEffect{ fns = it.get().value("fullnspath"); }
      .in("CLASS")
      .out("MEMBER")
-     .hasLabel("Variable")
+     .hasLabel("Staticpropertyname")
      .sideEffect{ name = it.get().value("code"); }
      .as("property")
      .repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("Class", "File") )

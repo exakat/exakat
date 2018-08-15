@@ -26,15 +26,15 @@ namespace Exakat\Analyzer\Common;
 use Exakat\Analyzer\Analyzer;
 
 class MethodcallUsage extends Analyzer {
-    protected $methods = array();
+    protected $calledMethods = array();
     
     public function analyze() {
         // Currently ignoring the object :(
-        $methods = array_map('strtolower', $this->methods);
+        $calledMethods = array_map('strtolower', $this->calledMethods);
         
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->codeIs($methods, self::TRANSLATE, self::CASE_INSENSITIVE)
+             ->codeIs($calledMethods, self::TRANSLATE, self::CASE_INSENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }
