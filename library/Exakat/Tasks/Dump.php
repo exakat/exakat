@@ -1535,7 +1535,7 @@ g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first
 
 .sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }
 
-.in("METHOD").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
+.in("METHOD").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
 .where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
 
 .sideEffect{ signature2 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature2.add(it.value("fullcode"));} }
@@ -1556,7 +1556,7 @@ g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first
 
 .sideEffect{ visibility1 = it.get().value("visibility") }
 
-.in("METHOD").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
+.in("METHOD").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
 .where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }.out("METHOD")
 
 .filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("fullcode") }
@@ -1575,7 +1575,7 @@ g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count(
 .sideEffect{ name = it.get().value("code"); }
 .out("DEFAULT").sideEffect{ default1 = it.get().value("fullcode") }.in("DEFAULT")
 
-.in("PPP").in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
+.in("PPP").in("PPP").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION")
 .where(neq("x")) ).emit( ).times($MAX_LOOPING).sideEffect{ class2 = it.get().value("fullcode"); }
 
 .out("PPP").out("PPP")
@@ -1595,7 +1595,7 @@ GREMLIN;
 g.V().hasLabel(within(['Propertydefinition'])).groupCount("processed").by(count()).as("first")
 .sideEffect{ name = it.get().value("code"); }.in("PPP")
 .sideEffect{ visibility1 = it.get().value("visibility") }
-.in("PPP").sideEffect{ class1 = it.get().value("fullcode"); }
+.in("PPP").hasLabel("Class").sideEffect{ class1 = it.get().value("fullcode"); }
 .repeat( __.as("x").out("EXTENDS", "IMPLEMENTS")
                    .in("DEFINITION")
                    .where(neq("x")) 
