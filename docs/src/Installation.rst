@@ -23,7 +23,7 @@ Exakat relies on several parts. Some are necessary and some are optional.
 Basic requirements : 
 
 * exakat.phar, the main code.
-* Gremlin server : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.2.x are supported, 3.3.x not yet.
+* Gremlin server : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.3.x is the recommended version. Version 3.2.x is still supported.
 * Java 8.x. Java 9.x/10.x will be supported later. Java 7.x was used, but is not actively supported.
 * PHP 7.0 or later to run. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
 

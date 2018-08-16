@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 06 Aug 2018 16:25:10 +0000
-.. comment: Generation hash : ad0c4a4552fabb587a2ccba6faa300e1104b391e
+.. comment: Generation date : Mon, 13 Aug 2018 14:17:20 +0000
+.. comment: Generation hash : dbe4b7690eeb131efffa383595064e24c0b4c24d
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 358 analysis
+Total : 360 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -119,12 +119,14 @@ Total : 358 analysis
 * :ref:`Class Should Be Final By Ocramius <class-should-be-final-by-ocramius>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
+* :ref:`Classes/CouldBeAbstractClass`
 * :ref:`Common Alternatives <common-alternatives>`
 * :ref:`Compared Comparison <compared-comparison>`
 * :ref:`Concrete Visibility <concrete-visibility>`
 * :ref:`Constant Class <constant-class>`
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
+* :ref:`Continue Is For Loop <continue-is-for-loop>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Else <could-be-else>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
@@ -495,7 +497,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 70 analysis
+Total : 73 analysis
 
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -553,8 +555,10 @@ Total : 70 analysis
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
+* :ref:`Relaxed Heredoc <relaxed-heredoc>`
 * :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
+* :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
 * :ref:`Use Const And Functions <use-const-and-functions>`
@@ -566,6 +570,7 @@ Total : 70 analysis
 * :ref:`ext/fdf`
 * :ref:`ext/ming`
 * Classes/NonStaticMethodsCalledStatic
+* Structures/ContinueIsForLoop
 * Structures/NoGetClassNull
 
 .. _compatibilityphp54:
@@ -573,7 +578,7 @@ Total : 70 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 66 analysis
+Total : 69 analysis
 
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -625,12 +630,15 @@ Total : 66 analysis
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
+* Php/RelaxedHeredoc
 * Php/StaticclassUsage
+* Php/TrailingComma
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
 * Php/UseNullableType
 * Php/debugInfoUsage
 * Structures/ConstantScalarExpression
+* Structures/ContinueIsForLoop
 * Structures/DereferencingAS
 * Structures/ForeachWithList
 * Structures/IssetWithConstant
@@ -647,7 +655,7 @@ Total : 66 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 58 analysis
+Total : 61 analysis
 
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -694,11 +702,14 @@ Total : 58 analysis
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
+* Php/RelaxedHeredoc
+* Php/TrailingComma
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
 * Php/UseNullableType
 * Php/debugInfoUsage
 * Structures/ConstantScalarExpression
+* Structures/ContinueIsForLoop
 * Structures/IssetWithConstant
 * Structures/NoGetClassNull
 * Structures/PHP7Dirname
@@ -713,7 +724,7 @@ Total : 58 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 47 analysis
+Total : 50 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * Classes/Anonymous
@@ -751,9 +762,12 @@ Total : 47 analysis
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
+* Php/RelaxedHeredoc
+* Php/TrailingComma
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
 * Php/UseNullableType
+* Structures/ContinueIsForLoop
 * Structures/IssetWithConstant
 * Structures/NoGetClassNull
 * Structures/PHP7Dirname
@@ -768,7 +782,7 @@ Total : 47 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 41 analysis
+Total : 44 analysis
 
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -806,8 +820,11 @@ Total : 41 analysis
 * Php/Php72NewClasses
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
+* Php/RelaxedHeredoc
+* Php/TrailingComma
 * Php/UseNullableType
 * Structures/BreakOutsideLoop
+* Structures/ContinueIsForLoop
 * Structures/NoGetClassNull
 * Structures/pregOptionE
 * Variables/Php7IndirectExpression
@@ -817,7 +834,7 @@ Total : 41 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 26 analysis
+Total : 29 analysis
 
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
@@ -841,6 +858,9 @@ Total : 26 analysis
 * Php/Php72NewClasses
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
+* Php/RelaxedHeredoc
+* Php/TrailingComma
+* Structures/ContinueIsForLoop
 * Structures/NoGetClassNull
 * Structures/NoSubstrOne
 * Structures/pregOptionE
@@ -851,7 +871,7 @@ Total : 26 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 18 analysis
+Total : 21 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -869,6 +889,9 @@ Total : 18 analysis
 * Php/PHP73LastEmptyArgument
 * Php/Php72NewClasses
 * Php/Php73NewFunctions
+* Php/RelaxedHeredoc
+* Php/TrailingComma
+* Structures/ContinueIsForLoop
 * Structures/NoGetClassNull
 * Structures/pregOptionE
 
@@ -877,9 +900,11 @@ Total : 18 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 5 analysis
+Total : 7 analysis
 
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
+* :ref:`Php/Php73RemovedFunctions`
+* Php/AssertFunctionIsReserved
 * Php/HashAlgos53
 * Php/HashAlgos54
 * Php/Php73NewFunctions

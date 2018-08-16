@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 06 Aug 2018 16:25:10 +0000
-.. comment: Generation hash : ad0c4a4552fabb587a2ccba6faa300e1104b391e
+.. comment: Generation date : Mon, 13 Aug 2018 14:17:20 +0000
+.. comment: Generation hash : dbe4b7690eeb131efffa383595064e24c0b4c24d
 
 
 .. _$http\_raw\_post\_data:
@@ -1007,6 +1007,8 @@ Avoid defining an `assert` function in namespaces.
 
 While they work fine when the assertions are active (`zend.assertions=1`), calls to unqualified `assert` are optimized away when assertions are not active. 
 
+Since PHP 7.3, a fatal error is emitted : `Defining a custom `'assert() <http://www.php.net/assert>`_ function is deprecated, as the function has special semantics`.
+
 .. code-block:: php
 
    <?php
@@ -1033,11 +1035,11 @@ While they work fine when the assertions are active (`zend.assertions=1`), calls
 See also `assert <http://php.net/assert>`_ and 
          `User-defined assert function is optimized away with zend.assertions=-1 <https://bugs.php.net/bug.php?id=75445>`_.
 
-+------------+------------------------------+
-| Short name | Php/AssertFunctionIsReserved |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++------------+-------------------------------------------+
+| Short name | Php/AssertFunctionIsReserved              |
++------------+-------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP73` |
++------------+-------------------------------------------+
 
 
 
@@ -3199,6 +3201,22 @@ Those classes are extending each other, creating an extension loop. PHP will yie
 
 
 
+.. _classes/couldbeabstractclass:
+
+Classes/CouldBeAbstractClass
+############################
+
+
+
+
++------------+------------------------------+
+| Short name | Classes/CouldBeAbstractClass |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
+
+
+
 .. _close-tags:
 
 Close Tags
@@ -3769,6 +3787,41 @@ See also `PHP Constants <http://php.net/manual/en/language.constants.php>`_.
 +------------+--------------------------------+
 | Themes     | :ref:`Analyze`                 |
 +------------+--------------------------------+
+
+
+
+.. _continue-is-for-loop:
+
+Continue Is For Loop
+####################
+
+
+`'break <http://php.net/manual/en/control-structures.break.php>`_ and `'continue <http://php.net/manual/en/control-structures.continue.php>`_ are very similar in PHP : they both `'break <http://php.net/manual/en/control-structures.break.php>`_ out of loop or switch. Yet, `'continue <http://php.net/manual/en/control-structures.continue.php>`_ should be reserved for loops.
+
+Since PHP 7.3, the execution will emit a warning when finding a `'continue <http://php.net/manual/en/control-structures.continue.php>`_ inside a switch inside a loop : '"`'continue <http://php.net/manual/en/control-structures.continue.php>`_" targeting switch is equivalent to "`'break <http://php.net/manual/en/control-structures.break.php>`_". Did you mean to use "`'continue <http://php.net/manual/en/control-structures.continue.php>`_ 2"?'
+
+.. code-block:: php
+
+   <?php
+   
+   while ($foo) {
+       switch ($bar) {
+           case 'baz':
+               'continue; // In PHP: Behaves like ''break;'
+                         // In C:   Behaves like ''continue 2;'
+       }
+   }
+   
+   ?>
+
+
+See also `Deprecate and remove `'continue <http://php.net/manual/en/control-structures.continue.php>`_ targeting switch <https://wiki.php.net/rfc/continue_on_switch_deprecation>`_.
+
++------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/ContinueIsForLoop                                                                                                                                                                                |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -14049,6 +14102,22 @@ The new class is : HashContext.
 
 
 
+.. _php/php73removedfunctions:
+
+Php/Php73RemovedFunctions
+#########################
+
+
+
+
++------------+---------------------------+
+| Short name | Php/Php73RemovedFunctions |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP73` |
++------------+---------------------------+
+
+
+
 .. _php7-relaxed-keyword:
 
 Php7 Relaxed Keyword
@@ -14974,6 +15043,45 @@ Mimicking register_globals is achieved with variables variables, `'extract() <ht
 +------------+---------------------------------------------------------------------------------+
 | Examples   | :ref:`teampass-security-registerglobals`, :ref:`xoops-security-registerglobals` |
 +------------+---------------------------------------------------------------------------------+
+
+
+
+.. _relaxed-heredoc:
+
+Relaxed Heredoc
+###############
+
+
+Heredoc and Nowdoc syntax have been relaxed. This is a PHP 7.3 feature.
+
+.. code-block:: php
+
+   <?php
+   
+   // relaxed Heredoc syntax
+   class foo {
+       public $bar = <<<EOT
+       bar
+       EOT;
+   }
+   
+   // traditional Heredoc syntax
+   class foo {
+       public $bar = <<<EOT
+   bar
+   EOT;
+   }
+   
+   ?>
+
+
+See also `Flexible Heredoc and Nowdoc Syntaxes <https://wiki.php.net/rfc/flexible_heredoc_nowdoc_syntaxes>`_.
+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/RelaxedHeredoc                                                                                                                                                                          |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -18629,6 +18737,47 @@ See also `How many parameters is too many ? <https://www.exakat.io/how-many-para
 +------------+-----------------------------+
 | Themes     | :ref:`Suggestions`          |
 +------------+-----------------------------+
+
+
+
+.. _trailing-comma-in-calls:
+
+Trailing Comma In Calls
+#######################
+
+
+The last argument may be left empty. 
+
+This feature was introduced in PHP 7.3. 
+
+.. code-block:: php
+
+   <?php
+     
+   // VCS friendly call
+   // PHP 7.3 and more recent
+   foo(1,
+       2,
+       3,
+      );
+   
+   // backward compatible call
+   // All PHP versions
+   foo(1,
+       2,
+       3
+      );
+     
+   ?>
+
+
+See also `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_.
+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/TrailingComma                                                                                                                                                                           |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 

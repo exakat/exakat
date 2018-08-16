@@ -106,7 +106,6 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Simpletable
   * Codeflower
   * Dependencywheel
-  * DailyTodo
 
 
 Supported PHP Extensions
@@ -393,12 +392,20 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.4.0
+
+  * Php/Php73RemovedFunctions (Php/Php73RemovedFunctions)
+  * Relaxed Heredoc (Php/RelaxedHeredoc ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
+  * Trailing Comma In Calls (Php/TrailingComma ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
+
 * 1.3.9
 
-  * Assert Function Is Reserved (Php/AssertFunctionIsReserved ; Analyze)
+  * Assert Function Is Reserved (Php/AssertFunctionIsReserved ; Analyze, CompatibilityPHP73)
   * Avoid Real (Php/AvoidReal ; Suggestions)
-  * Case Insensitive Constants (Constants/CaseInsensitiveConstants)
+  * Case Insensitive Constants (Constants/CaseInsensitiveConstants ; Appinfo, CompatibilityPHP73)
+  * Classes/CouldBeAbstractClass (Classes/CouldBeAbstractClass)
   * Const Or Define Preference (Constants/ConstDefinePreference ; Preferences)
+  * Continue Is For Loop (Structures/ContinueIsForLoop ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
 
 * 1.3.8
 
@@ -1302,7 +1309,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Ambiguous Array Index (Arrays/AmbiguousKeys)
   * Anonymous Classes (Classes/Anonymous ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Argument Should Be Typehinted (Functions/ShouldBeTypehinted ; ClearPHP, Suggestions)
-  * Arguments (Variables/Arguments ; Under Work)
   * Array Index (Arrays/Arrayindex ; Appinfo)
   * Arrays Is Modified (Arrays/IsModified ; Internal)
   * Arrays Is Read (Arrays/IsRead ; Internal)
@@ -1994,8 +2000,9 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-17 PHP error message detailled here : 
+19 PHP error message detailled here : 
 
+* "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
 * Access level to Bar::$publicProperty must be public (as in class Foo)
 * Access level to c::iPrivate() must be public (as in class i) 
 * Argument 1 passed to foo() must be of the type integer, string given
@@ -2009,6 +2016,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * Class fooThrowable cannot implement interface Throwable, extend Exception or Error instead
 * Declaration of FooParent::Bar() must be compatible with FooChildren::Bar()
 * Declaration of ab::foo($a) should be compatible with a::foo($a = 1) 
+* Defining a custom assert() function is deprecated, as the function has special semantics
 * Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code.
 * Only variable references should be returned by reference
 * Uncaught ArgumentCountError: Too few arguments to function, 0 passed
@@ -2171,6 +2179,7 @@ List of external links mentionned in this documentation.
 * `declare <http://php.net/manual/en/control-structures.declare.php>`_
 * `define <http://php.net/manual/en/function.define.php>`_
 * `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di-smells/>`_
+* `Deprecate and remove continue targeting switch <https://wiki.php.net/rfc/continue_on_switch_deprecation>`_
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
@@ -2233,10 +2242,11 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
+* `Flexible Heredoc and Nowdoc Syntaxes <https://wiki.php.net/rfc/flexible_heredoc_nowdoc_syntaxes>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
@@ -2322,8 +2332,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2394,6 +2404,7 @@ List of external links mentionned in this documentation.
 * `PHP gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
 * `PHP Options And Information <http://php.net/manual/en/book.info.php>`_
 * `PHP Options/Info Functions <http://php.net/manual/en/ref.info.php>`_
+* `PHP RFC: Allow a trailing comma in function calls <https://wiki.php.net/rfc/trailing-comma-function-calls>`_
 * `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_
 * `PHP RFC: Convert numeric keys in object/array casts <https://wiki.php.net/rfc/convert_numeric_keys_in_object_array_casts>`_
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
@@ -2504,8 +2515,8 @@ List of external links mentionned in this documentation.
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2648,6 +2659,7 @@ Analyze
 |   analyzer[] = "Classes/CantInstantiateClass";
 |   analyzer[] = "Classes/CitSameName";
 |   analyzer[] = "Classes/ConstantClass";
+|   analyzer[] = "Classes/CouldBeAbstractClass";
 |   analyzer[] = "Classes/CouldBeClassConstant";
 |   analyzer[] = "Classes/CouldBePrivate";
 |   analyzer[] = "Classes/CouldBePrivateConstante";
@@ -2844,6 +2856,7 @@ Analyze
 |   analyzer[] = "Structures/CheckJson";
 |   analyzer[] = "Structures/CommonAlternatives";
 |   analyzer[] = "Structures/ComparedComparison";
+|   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/CouldBeElse";
 |   analyzer[] = "Structures/CouldBeStatic";
 |   analyzer[] = "Structures/CouldUseDir";
@@ -3109,13 +3122,16 @@ CompatibilityPHP53
 |   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
+|   analyzer[] = "Php/RelaxedHeredoc";
 |   analyzer[] = "Php/StaticclassUsage";
+|   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/UnicodeEscapePartial";
 |   analyzer[] = "Php/UnicodeEscapeSyntax";
 |   analyzer[] = "Php/UseNullableType";
 |   analyzer[] = "Php/debugInfoUsage";
 |   analyzer[] = "Structures/Break0";
 |   analyzer[] = "Structures/ConstantScalarExpression";
+|   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/DereferencingAS";
 |   analyzer[] = "Structures/ForeachWithList";
 |   analyzer[] = "Structures/FunctionSubscripting";
@@ -3185,7 +3201,9 @@ CompatibilityPHP54
 |   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
+|   analyzer[] = "Php/RelaxedHeredoc";
 |   analyzer[] = "Php/StaticclassUsage";
+|   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/UnicodeEscapePartial";
 |   analyzer[] = "Php/UnicodeEscapeSyntax";
 |   analyzer[] = "Php/UseNullableType";
@@ -3193,6 +3211,7 @@ CompatibilityPHP54
 |   analyzer[] = "Structures/BreakNonInteger";
 |   analyzer[] = "Structures/CalltimePassByReference";
 |   analyzer[] = "Structures/ConstantScalarExpression";
+|   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/CryptWithoutSalt";
 |   analyzer[] = "Structures/DereferencingAS";
 |   analyzer[] = "Structures/ForeachWithList";
@@ -3259,11 +3278,14 @@ CompatibilityPHP55
 |   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
+|   analyzer[] = "Php/RelaxedHeredoc";
+|   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/UnicodeEscapePartial";
 |   analyzer[] = "Php/UnicodeEscapeSyntax";
 |   analyzer[] = "Php/UseNullableType";
 |   analyzer[] = "Php/debugInfoUsage";
 |   analyzer[] = "Structures/ConstantScalarExpression";
+|   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/IssetWithConstant";
 |   analyzer[] = "Structures/NoGetClassNull";
 |   analyzer[] = "Structures/PHP7Dirname";
@@ -3318,9 +3340,12 @@ CompatibilityPHP56
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
 |   analyzer[] = "Php/RawPostDataUsage";
+|   analyzer[] = "Php/RelaxedHeredoc";
+|   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/UnicodeEscapePartial";
 |   analyzer[] = "Php/UnicodeEscapeSyntax";
 |   analyzer[] = "Php/UseNullableType";
+|   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/IssetWithConstant";
 |   analyzer[] = "Structures/NoGetClassNull";
 |   analyzer[] = "Structures/PHP7Dirname";
@@ -3369,11 +3394,14 @@ CompatibilityPHP70
 |   analyzer[] = "Php/Php72NewClasses";
 |   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/RelaxedHeredoc";
 |   analyzer[] = "Php/ReservedKeywords7";
 |   analyzer[] = "Php/SetExceptionHandlerPHP7";
+|   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/UseNullableType";
 |   analyzer[] = "Php/UsortSorting";
 |   analyzer[] = "Structures/BreakOutsideLoop";
+|   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/McryptcreateivWithoutOption";
 |   analyzer[] = "Structures/NoGetClassNull";
 |   analyzer[] = "Structures/SetlocaleNeedsConstants";
@@ -3411,6 +3439,9 @@ CompatibilityPHP71
 |   analyzer[] = "Php/Php72NewClasses";
 |   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/RelaxedHeredoc";
+|   analyzer[] = "Php/TrailingComma";
+|   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/NoGetClassNull";
 |   analyzer[] = "Structures/NoSubstrOne";
 |   analyzer[] = "Structures/pregOptionE";
@@ -3441,7 +3472,10 @@ CompatibilityPHP72
 |   analyzer[] = "Php/Php72ObjectKeyword";
 |   analyzer[] = "Php/Php72RemovedFunctions";
 |   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/RelaxedHeredoc";
+|   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Structures/CanCountNonCountable";
+|   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/NoGetClassNull";
 |   analyzer[] = "Structures/pregOptionE";| 
 
@@ -3455,9 +3489,11 @@ CompatibilityPHP73
 
 | [CompatibilityPHP73]
 |   analyzer[] = "Constants/CaseInsensitiveConstants";
+|   analyzer[] = "Php/AssertFunctionIsReserved";
 |   analyzer[] = "Php/HashAlgos53";
 |   analyzer[] = "Php/HashAlgos54";
 |   analyzer[] = "Php/Php73NewFunctions";
+|   analyzer[] = "Php/Php73RemovedFunctions";
 |   analyzer[] = "Php/UnknownPcre2Option";| 
 
 

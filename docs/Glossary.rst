@@ -155,6 +155,7 @@ Glossary
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Break With 0 <break-with-0>`
       + :ref:`Break With Non Integer <break-with-non-integer>`
+      + :ref:`Continue Is For Loop <continue-is-for-loop>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Long Arguments <long-arguments>`
       + :ref:`Missing Cases In Switch <missing-cases-in-switch>`
@@ -220,6 +221,7 @@ Glossary
 
       + :ref:`Bail Out Early <bail-out-early>`
       + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`Continue Is For Loop <continue-is-for-loop>`
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`

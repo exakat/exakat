@@ -23,7 +23,7 @@ Exakat relies on several parts. Some are necessary and some are optional.
 Basic requirements : 
 
 * exakat.phar, the main code.
-* Gremlin server : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.2.x are supported, 3.3.x not yet.
+* Gremlin server : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.3.x is the recommended version. Version 3.2.x is still supported.
 * Java 8.x. Java 9.x/10.x will be supported later. Java 7.x was used, but is not actively supported.
 * PHP 7.0 or later to run. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
 
@@ -336,14 +336,6 @@ Currently, Docker installation only ships with one PHP version (7.1), and with s
 ::
 
     docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat init -p <project name> -R <vcs_url>
-
-_Please note_: The init command usually makes a local clone of your repository. In case you want to analyse a private repository for which you need an SSH key, init will fail silently on the cloning process. Before running the `project` command below, run:
-
-::
-    cd projects/<project name>
-    git clone <git_url> code
-
-If you don't use git, or don't want to use version control, make sure that your project code ends up in `projects/<project name>/code` for Exakat to work correctly.
 
 * Run exakat : 
 
