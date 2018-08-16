@@ -28,26 +28,26 @@ use Exakat\Reports\Reports;
 
 class CloseNaming extends Data {
     public function prepare() {
-        $counts = array();
         $begin = microtime(true);
         $res = $this->sqlite->query(<<<'SQL'
-SELECT variable, COUNT(*) AS nb FROM variables 
+SELECT variable FROM variables 
     WHERE LENGTH(variable) > 3    AND 
           NOT(variable LIKE "{%") AND 
           NOT(variable LIKE "${%") 
           GROUP BY variable
 SQL
 );
+        $counts = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $counts[$row['variable']] = $row['nb'];
+            $variables[] = $row['variable'];
         }
-        
-        $variables = array_keys($counts);
 
         $results = array();
         // Only _ as difference
         foreach($variables as $variable) {
-            if (!strpos($variable, '_')) { continue; }
+            if (strpos($variable, '_') === false) { 
+                continue; 
+            }
             $v = str_replace('_', '', $variable);
             $r = array_filter( $variables, function($x) use ($v) { return str_replace('_', '', $x) === $v; });
             if (count($r) > 1) {
