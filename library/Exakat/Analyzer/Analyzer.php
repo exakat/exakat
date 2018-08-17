@@ -557,6 +557,7 @@ GREMLIN
     
     public function atomIs($atom) {
         $this->query->atomIs($atom);
+
         return $this;
     }
 
@@ -784,28 +785,7 @@ GREMLIN;
     }
 
     public function isNot($property, $value = true) {
-        assert($this->assertProperty($property));
-        if ($value === null) {
-            $this->query->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", null)))');
-        } elseif ($value === true) {
-            $this->query->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
-        } elseif ($value === false) {
-            $this->query->addMethod('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
-        } elseif (is_int($value)) {
-            $this->query->addMethod('not(has("'.$property.'", ***))', $value);
-        } elseif (is_string($value)) {
-            if (empty($value)) {
-                $this->query->addMethod('not(has("'.$property.'", ""))');
-            } else {
-                $this->query->addMethod('not(has("'.$property.'", ***))', $value);
-            }
-        } elseif (is_array($value)) {
-            if (!empty($value)) {
-                $this->query->addMethod('not(has("'.$property.'", within(***)))', $value);
-            }
-        } else {
-            assert(false, 'Not understood type for isNot : '.gettype($value));
-        }
+        $this->query->isNot($property, $value);
         
         return $this;
     }
@@ -949,7 +929,7 @@ GREMLIN;
     }
 
     public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->savePropertyAs($property, $name, $caseSensitive);
+        $this->query->samePropertyAs($property, $name, $caseSensitive);
 
         return $this;
     }
@@ -1160,16 +1140,8 @@ GREMLIN
 
     // follows a link if it is there (and do nothing otherwise)
     protected function outIsIE($link = array()) {
-        assert(func_num_args() === 1, "Too many arguments for ".__METHOD__);
-        assert($this->assertLink($link));
+        $this->query->outIsIE($link);
 
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (!empty($diff)) {
-            // alternative : coalesce(out('LEFT'),  __.filter{true} )
-            $this->query->addMethod("until( __.not(outE(".$this->SorA($link).")) ).repeat(out(".$this->SorA($link)."))");
-        }
-        
         return $this;
     }
 
@@ -1243,17 +1215,8 @@ GREMLIN
 
     // follows a link if it is there (and do nothing otherwise)
     protected function inIsIE($link = array()) {
-        assert($this->assertLink($link));
+        $this->query->inIsIE($link);
 
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (empty($diff)) {
-            // If Exists...
-            return $this;
-        }
-        
-        $this->query->addMethod('until(__.inE('.$this->SorA($link).').count().is(eq(0))).repeat(__.in('.$this->SorA($link).'))');
-        
         return $this;
     }
 
