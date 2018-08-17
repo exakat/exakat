@@ -1,0 +1,49 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : BLOCK
+            18
+            Label : EXPRESSION
+              6
+          Label : FINAL
+            3
+            Label : EXPRESSION
+              6
+          Label : INCREMENT
+            3
+            Label : EXPRESSION
+              9
+              Label : CONDITION
+                8
+              Label : ELSE
+                11
+                Label : LEFT
+                  13
+                Label : RIGHT
+                  17
+                  Label : METHOD
+                    15
+                    Label : ARGUMENT
+                      16
+                    Label : NAME
+                      15
+                  Label : OBJECT
+                    14
+              Label : THEN
+                11
+                Label : LEFT
+                  10
+                Label : RIGHT
+                  12
+          Label : INIT
+            3
+            Label : EXPRESSION
+              6

@@ -8,19 +8,21 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
+          11
+          Label : GOTOLABEL
+            9
+        Label : EXPRESSION
           5
           Label : CASES
             7
             Label : EXPRESSION
               8
               Label : CASE
-                10
+                13
+                Label : POSTPLUSPLUS
+                  12
               Label : CODE
                 3
-                Label : EXPRESSION
-                  13
-                  Label : POSTPLUSPLUS
-                    12
                 Label : EXPRESSION
                   16
                   Label : GOTO
@@ -46,7 +48,7 @@ Label : PROJECT
           Label : CONDITION
             6
         Label : EXPRESSION
-          24
+          11
           Label : DEFINITION
             16
             Label : GOTO
@@ -56,4 +58,4 @@ Label : PROJECT
         Label : EXPRESSION
           22
           Label : ARGUMENT
-            25
+            24
