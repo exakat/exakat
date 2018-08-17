@@ -21,7 +21,10 @@
 */
 
 
-namespace Exakat\Analyzer\Helpers;
+namespace Exakat\Query;
+
+use Exakat\Query\DSL\DSL;
+use Exakat\Query\DSL\Command;
 
 class Query {
     const STOP_QUERY = 'filter{ false; }';
@@ -35,6 +38,8 @@ class Query {
     private $methods          = array('as("first")');
     private $arguments        = array();
     private $query            = null;
+
+    private $commands         = array();
     
     public function __construct($id, $project, $analyzer, $php) {
         $this->id       = $id;
@@ -45,6 +50,18 @@ class Query {
 
     public function stopQuery() {
         $this->methods[] = self::STOP_QUERY;
+    }
+    
+    public function __call($name, $args) {
+//        print "  Calling $name\n";
+        try {
+            $command = DSL::factory($name);
+            $this->commands[] = $command->run(...$args);
+        } catch (UnknownDsl $e) {
+            die(ici);
+        }
+        
+        return $this;
     }
 
     public function addMethod($method, $arguments = array()) {
@@ -78,48 +95,52 @@ class Query {
 
     public function prepareQuery($analyzerId) {
         assert($this->query === null, 'query is already ready');
-        $this->analyzerId = $analyzerId;
 
         // @doc This is when the object is a placeholder for others.
-        if (count($this->methods) <= 1) {
+        if (empty($this->commands)) {
             return true;
         }
+
+        $this->analyzerId = $analyzerId;
         
-        if (in_array(self::STOP_QUERY, $this->methods) !== false) {
+        $commands = array_column($this->commands, 'gremlin');
+
+        if (in_array(self::STOP_QUERY, $commands) !== false) {
             // any 'stop_query' is blocking
             return $this->query = '';
         }
 
-        if (substr($this->methods[1], 0, 9) === 'hasLabel(') {
-            $first = $this->methods[1];
-            array_splice($this->methods, 1,1);
-            $query = implode('.', $this->methods);
-            $query = "g.V().$first.groupCount(\"processed\").by(count()).$query";
-        } elseif (substr($this->methods[1], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
-            $first = array_shift($this->methods); // remove first
-            array_shift($this->methods); // remove second
-            $query = implode('.', $this->methods);
+        if (substr($commands[0], 0, 9) === 'hasLabel(') {
+            $first = $commands[0];
+            array_shift($commands);
+            $this->query = "g.V().$first.groupCount(\"processed\").by(count()).as(\"first\").".implode(".\n", $commands);
+        } elseif (substr($commands[1], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
+            die(ici);
+            $first = array_shift($commands); // remove first
+            array_shift($commands); // remove second
+            $query = implode('.', $commands);
             $arg0 = $this->arguments['arg0'];
             $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())'
                      .(empty($query) ? '' : '.'.$query);
-            unset($this->methods[1]);
+            unset($commands[1]);
         } else {
-            assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[1]);
+            assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! '.$commands[1]);
         }
-        
-        // search what ? All ?
-        $query = <<<GREMLIN
 
-{$query}
+        $this->arguments = array_merge(...array_column($this->commands, 'arguments'));
+
+        // search what ? All ?
+        $this->query = <<<GREMLIN
+
+{$this->query}
+
+.dedup().groupCount("total").by(count()).addE("ANALYZED").from(g.V({$this->analyzerId})).cap("processed", "total")
+
+// Query (#{$this->id}) for {$this->analyzer}
+// php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v
 
 GREMLIN;
         assert(!empty($this->analyzerId), "The analyzer Id for {$this->analyzerId} wasn't set. Can't save results.");
-        $query .= '.dedup().groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
-
-// Query (#'.$this->id.') for '.$this->analyzer.'
-// php '.$this->php." analyze -p ".$this->project.' -P '.$this->analyzer." -v".PHP_EOL;
-
-        $this->query = $query;
     }
     
     public function prepareRawQuery() {
@@ -129,6 +150,7 @@ GREMLIN;
                  '
 // Query (#'.$this->id.') for '.$this->analyzer.'
 // php '.$this->php." analyze -p ".$this->project.' -P '.$this->analyzer." -v".PHP_EOL;
+
     }
     
     public function getQuery() {
@@ -142,8 +164,7 @@ GREMLIN;
 
     public function printQuery() {
         $this->prepareQuery($this->analyzerId);
-        
-        foreach($this->queries as $id => $query) {
+        print_r($this);
             echo $id, ")", PHP_EOL, print_r($query, true), print_r($this->queriesArguments[$id], true), PHP_EOL;
 
             krsort($this->queriesArguments[$id]);
@@ -170,7 +191,6 @@ GREMLIN;
             }
             
             echo $query, PHP_EOL, PHP_EOL;
-        }
         die();
     }
 

@@ -32,8 +32,9 @@ use Exakat\Exceptions\GremlinException;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Graph\Helpers\GraphResults;
 use Exakat\Reports\Helpers\Docs;
-use Exakat\Analyzer\Helpers\Query;
+use Exakat\Query\Query;
 use Exakat\Tasks\Helpers\Atom;
+use Exakat\Query\DSL\DSL;
 
 abstract class Analyzer {
     static public $datastore  = null;
@@ -161,6 +162,7 @@ abstract class Analyzer {
         
         $this->linksDown = GraphElements::linksAsList();
 
+        DSL::init(self::$datastore);
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {
             $data = self::$datastore->getCol('TokenCounts', 'token');
             
@@ -439,13 +441,13 @@ GREMLIN;
     }
 
     public function _as($name) {
-        $this->query->addMethod('as("'.$name.'")');
+        $this->query->_as($name);
         
         return $this;
     }
 
-    public function back($name) {
-        $this->query->addMethod('select("'.$name.'")');
+    public function back($name = 'first') {
+        $this->query->back($name);
         
         return $this;
     }
@@ -555,24 +557,12 @@ GREMLIN
     }
     
     public function atomIs($atom) {
-        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
-        assert($this->assertAtom($atom));
-
-        $diff = $this->checkAtoms($atom);
-        if (empty($diff)) {
-            $this->query->stopQuery();
-            return $this;
-        }
-
-        $this->query->addMethod('hasLabel(within(***))', $diff);
-        
+        $this->query->atomIs($atom);
         return $this;
     }
 
     public function atomIsNot($atom) {
-        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
-        assert($this->assertAtom($atom));
-        $this->query->addMethod('not(hasLabel(within(***)))', makeArray($atom) );
+        $this->query->atomIsNot($atom);
         
         return $this;
     }
@@ -687,9 +677,7 @@ GREMLIN
     }
 
     public function atomInsideNoDefinition($atom) {
-        assert($this->assertAtom($atom));
-        $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel(within(***))';
-        $this->query->addMethod($gremlin, makeArray($atom));
+        $this->query->atomInsideNoDefinition($atom);
         
         return $this;
     }
@@ -781,25 +769,8 @@ GREMLIN;
     }
     
     public function is($property, $value = true) {
-        assert($this->assertProperty($property));
-        if ($value === null) {
-            $this->query->addMethod('has("'.$property.'", null)');
-        } elseif ($value === true) {
-            $this->query->addMethod('has("'.$property.'", true)');
-        } elseif ($value === false) {
-            $this->query->addMethod('has("'.$property.'", false)');
-        } elseif (is_int($value)) {
-            $this->query->addMethod('has("'.$property.'", ***)', $value);
-        } elseif (is_string($value)) {
-            $this->query->addMethod('has("'.$property.'", ***)', $value);
-        } elseif (is_array($value)) {
-            if (!empty($value)) {
-                $this->query->addMethod('has("'.$property.'", within(***))', $value );
-            }
-        } else {
-            assert(false, 'Not understood type for is : '.gettype($value));
-        }
-
+        $this->query->is($property, $value);
+        
         return $this;
     }
 
@@ -935,28 +906,8 @@ GREMLIN;
     }
 
     public function codeIs($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
-        if (is_array($code) && empty($code)) {
-            $this->query->stopQuery();
-            return $this;
-        }
+        $this->query->codeIs($code, $translate, $caseSensitive);
         
-        $col = $caseSensitive === self::CASE_INSENSITIVE ? 'lccode' : 'code';
-        
-        if ($translate === self::TRANSLATE) {
-            $translatedCode = array();
-            $code = makeArray($code);
-            $translatedCode = $this->dictCode->translate($code, $caseSensitive === self::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
-
-            if (empty($translatedCode)) {
-                $this->query->stopQuery();
-                return $this;
-            }
-
-            $this->query->addMethod("filter{ it.get().value(\"$col\") in ***; }", $translatedCode);
-        } else {
-            $this->query->addMethod("filter{ it.get().value(\"$col\") in ***; }", makeArray($code));
-        }
-
         return $this;
     }
 
@@ -1022,25 +973,7 @@ GREMLIN;
     }
 
     public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
-        assert($this->assertProperty($property));
-
-        if ($property === 'label') {
-            $this->query->addMethod('filter{ it.get().label() == '.$name.'}');
-        } elseif ($property === 'id') {
-            $this->query->addMethod('filter{ it.get().id() == '.$name.'}');
-        } elseif ($property === 'code' || $property === 'lccode') {
-            if ($caseSensitive === self::CASE_SENSITIVE) {
-                $this->query->addMethod('filter{ it.get().value("code") == '.$name.'}');
-            } else {
-                $this->query->addMethod('filter{ it.get().value("lccode") == '.$name.'}');
-            }
-        } elseif (in_array($property, array('line', 'rank', 'propertyname', 'boolean', 'count'))) {
-            $this->query->addMethod('filter{ it.get().value("'.$property.'") == '.$name.'}');
-        } else {
-            $caseSensitive = $caseSensitive === self::CASE_SENSITIVE ? '' : '.toLowerCase()';
-
-            $this->query->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' == '.$name.$caseSensitive.'}');
-        }
+        $this->query->savePropertyAs($property, $name, $caseSensitive);
 
         return $this;
     }
@@ -1095,14 +1028,7 @@ GREMLIN
     }
 
     public function savePropertyAs($property, $name) {
-        assert($this->assertProperty($property));
-        if ($property === 'label') {
-            $this->query->addMethod('sideEffect{ '.$name.' = it.get().label(); }');
-        } elseif ($property === 'id') {
-            $this->query->addMethod('sideEffect{ '.$name.' = it.get().id(); }');
-        } else {
-            $this->query->addMethod('sideEffect{ '.$name.' = it.get().value("'.$property.'"); }');
-        }
+        $this->query->savePropertyAs($property, $name);
 
         return $this;
     }
@@ -1251,22 +1177,8 @@ GREMLIN
     }
 
     protected function outIs($link = array()) {
-        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
+        $this->query->outIs($link);
         
-        if (empty($link)) {
-            $this->query->addMethod('out( )');
-            return $this;
-        }
-        
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (empty($diff)) {
-            $this->query->stopQuery();
-        } else {
-            assert($this->assertLink($link));
-            $this->query->addMethod('out('.$this->SorA($link).')');
-        }
-
         return $this;
     }
 
@@ -1308,8 +1220,7 @@ GREMLIN
     }
 
     public function nextSibling($link = 'EXPRESSION') {
-        $this->hasIn($link);
-        $this->query->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}');
+        $this->query->nextSibling($link);
 
         return $this;
     }
@@ -1400,15 +1311,7 @@ GREMLIN
     }
 
     public function hasIn($link) {
-        assert($this->assertLink($link));
-
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (empty($diff)) {
-            $this->query->stopQuery();
-        } else {
-            $this->query->addMethod('where( __.in('.$this->SorA($link).') )');
-        }
+        $this->query->hasIn($link);
 
         return $this;
     }
