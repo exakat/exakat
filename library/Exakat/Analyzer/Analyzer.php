@@ -713,25 +713,20 @@ GREMLIN;
     }
 
     public function analyzerIs($analyzer) {
-        $analyzer = makeArray($analyzer);
-        if (($id = array_search('self', $analyzer)) !== false) {
-            $analyzer[$id] = $this->analyzerQuoted;
-        }
-        $analyzer = array_map('self::getName', $analyzer);
-
-        $this->query->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)) )', $analyzer);
+        $this->query->analyzerIs($analyzer);
 
         return $this;
     }
 
     public function analyzerIsNot($analyzer) {
         $analyzer = makeArray($analyzer);
+
         if (($id = array_search('self', $analyzer)) !== false) {
             $analyzer[$id] = $this->analyzerQuoted;
         }
         $analyzer = array_map('self::getName', $analyzer);
 
-        $this->query->addMethod('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', $analyzer);
+        $this->query->analyzerIsNot($analyzer);
 
         return $this;
     }
@@ -1045,46 +1040,15 @@ GREMLIN
     }
 
     public function regexIs($column, $regex) {
-        if ($column === 'code') {
-            $values = $this->dictCode->grep($regex);
-            
-            if (empty($values)) {
-                $this->query->stopQuery();
-                return $this;
-            }
-            
-            $this->query->addMethod('has("code", within(***) )', $values);
+        $this->query->regexIs($column, $regex);
 
-            return $this;
-        } else {
-            $this->query->addMethod(<<<GREMLIN
-filter{ (it.get().value('$column') =~ "$regex" ).getCount() != 0 }
-GREMLIN
-);
-
-            return $this;
-        }
+        return $this;
     }
 
     public function regexIsNot($column, $regex) {
-        if ($column === 'code') {
-            $values = $this->dictCode->grep($regex);
-            
-            if (empty($values)) {
-                return $this;
-            }
-            
-            $this->query->addMethod('not( has("code", within(***) ) )', $values);
-
-            return $this;
-        } else {
-            $this->query->addMethod(<<<GREMLIN
-filter{ (it.get().value('$column') =~ "$regex" ).getCount() == 0 }
-GREMLIN
-);
-
-            return $this;
-        }
+        $this->query->regexIsNot($column, $regex);
+        
+        return $this;
     }
 
     protected function outIs($link = array()) {
@@ -1199,45 +1163,25 @@ GREMLIN
     }
     
     public function hasNoIn($link) {
-        assert($this->assertLink($link));
-
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (!empty($diff)) {
-            $this->query->addMethod('not( where( __.in('.$this->SorA($link).') ) )');
-        }
+        $this->query->hasNoIn($link);
         
         return $this;
     }
 
     public function hasOut($link) {
-        assert($this->assertLink($link));
-
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (empty($diff)) {
-            $this->query->stopQuery();
-        } else {
-            $this->query->addMethod('where( out('.$this->SorA($link).') )');
-        }
+        $this->query->hasOut($link);
 
         return $this;
     }
     
     public function hasNoOut($link) {
-        assert($this->assertLink($link));
-
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (!empty($diff)) {
-            $this->query->addMethod('not(where( __.out('.$this->SorA($link).') ))');
-        }
+        $this->query->hasNoOut($link);
 
         return $this;
     }
 
     public function isInCatchBlock() {
-        $this->query->addMethod('filter{ it.in.loop(1){it.object.atom != "Catch"}{(it.object.atom == "Catch")}.any()');
+        $this->query->isInCatchBlock();
         
         return $this;
     }
@@ -1247,16 +1191,8 @@ GREMLIN
     }
 
     public function hasParent($parentClass, $ins = array()) {
-        $diff = $this->checkAtoms($parentClass);
-        
-        if (empty($diff)){
-            $this->query->stopQuery();
-            return $this;
-        }
+        $this->query->hasParent();
 
-        $in = $this->makeLinks($ins, 'in');
-        $this->query->addMethod("where( __$in.hasLabel(within(***)))", $diff);
-        
         return $this;
     }
 

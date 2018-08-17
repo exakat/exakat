@@ -143,7 +143,7 @@ class Query {
 GREMLIN;
         assert(!empty($this->analyzerId), "The analyzer Id for {$this->analyzerId} wasn't set. Can't save results.");
         
-        assert(count($this->methods) == 1, "Query::\$methods is not empty\n");
+        assert(count($this->methods) == 1, "Query::\$methods is not empty\n".print_r($this->methods, true));
     }
     
     public function prepareRawQuery() {
