@@ -23,30 +23,24 @@
 
 namespace Exakat\Query\DSL;
 
-class Command {
-    static private $id = 0;
-    public $gremlin = '';
-    public $arguments = array();
-    
-    function __construct($command, $args = array()) {
-        $c = substr_count($command, '***');
-        
-        $arguments = array();
-        for($i = 0; $i < $c; $i++) {
-            ++self::$id;
-            $arguments['arg'.self::$id] = $args[0];
+use Exakat\Query\Query;
+
+class OutWithRank extends DSL {
+    public function run() {
+        list($link, $rank) = func_get_args();
+
+        if ($rank === 'first') {
+            // @note : can't use has() with integer!
+            return new Command('out("'.$link.'").has("rank", eq(0))');
+        } elseif ($rank === 'last') {
+            return new Command('map( __.out("'.$link.'").order().by("rank").tail(1) )');
+        } elseif ($rank === '2last') {
+            return new Command('map( __.out("'.$link.'").order().by("rank").tail(2) )');
+        } elseif (abs((int) $rank) >= 0) {
+            return new Command('out("'.$link.'").has("rank", eq('.abs((int) $rank).'))');
+        } else {
+            assert(false, "rank '$rank' is wrong in ".__METHOD__);
         }
-        $command = str_replace(array_fill(0, $c, '***'), array_keys($arguments), $command);
-        
-        $this->gremlin = $command;
-        $this->arguments = $arguments;
-    }
-    
-    function add(Command $other) {
-        $this->gremlin .= ".$other->gremlin";
-        $this->arguments += $other->arguments;
-        
-        return $this;
     }
 }
 ?>

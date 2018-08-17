@@ -23,30 +23,14 @@
 
 namespace Exakat\Query\DSL;
 
-class Command {
-    static private $id = 0;
-    public $gremlin = '';
-    public $arguments = array();
-    
-    function __construct($command, $args = array()) {
-        $c = substr_count($command, '***');
-        
-        $arguments = array();
-        for($i = 0; $i < $c; $i++) {
-            ++self::$id;
-            $arguments['arg'.self::$id] = $args[0];
-        }
-        $command = str_replace(array_fill(0, $c, '***'), array_keys($arguments), $command);
-        
-        $this->gremlin = $command;
-        $this->arguments = $arguments;
-    }
-    
-    function add(Command $other) {
-        $this->gremlin .= ".$other->gremlin";
-        $this->arguments += $other->arguments;
-        
-        return $this;
+use Exakat\Query\Query;
+
+class Has extends DSL {
+    public function run() {
+        list($property) = func_get_args();
+        assert($this->assertProperty($property));
+
+        return new Command('has(***)', array($property));
     }
 }
 ?>

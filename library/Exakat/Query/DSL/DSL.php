@@ -125,6 +125,28 @@ abstract class DSL {
         }
         return true;
     }
+
+    protected function cleanAnalyzerName($gremlin, $dependencies) {
+        $fullNames = array_map(array($this, 'makeBaseName'), $dependencies);
+        
+        return str_replace($dependencies, $fullNames, $gremlin);
+    }
+
+    public static function makeBaseName($className) {
+        // No Exakat, no Analyzer, using / instead of \
+        return $className;
+    }
+
+    protected function tolowercase(&$code) {
+        if (is_array($code)) {
+            $code = array_map('mb_strtolower', $code);
+        } elseif (is_scalar($code)) {
+            $code = mb_strtolower($code);
+        } else {
+            assert(false, __METHOD__.' received an unprocessable object '.gettype($code));
+        }
+    }
+
 }
 
 ?>

@@ -28,6 +28,7 @@ use Exakat\Query\DSL\Command;
 
 class Query {
     const STOP_QUERY = 'filter{ false; }';
+    const NO_QUERY = 'filter{ true; }';
     
     private $analyzerId = null;
     private $id         = null;
@@ -141,6 +142,8 @@ class Query {
 
 GREMLIN;
         assert(!empty($this->analyzerId), "The analyzer Id for {$this->analyzerId} wasn't set. Can't save results.");
+        
+        assert(count($this->methods) == 1, "Query::\$methods is not empty\n");
     }
     
     public function prepareRawQuery() {

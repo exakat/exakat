@@ -36,6 +36,7 @@ class UsePathinfo extends Analyzer {
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->functioncallIs(array('\\explode', '\\split'))
+
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING') // could be T_VARIABLE, T_QUOTE, T_OBJECT_OPERATOR, T_DOUBLE_COLON

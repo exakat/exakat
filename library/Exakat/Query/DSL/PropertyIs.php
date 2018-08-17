@@ -23,30 +23,31 @@
 
 namespace Exakat\Query\DSL;
 
-class Command {
-    static private $id = 0;
-    public $gremlin = '';
-    public $arguments = array();
-    
-    function __construct($command, $args = array()) {
-        $c = substr_count($command, '***');
-        
-        $arguments = array();
-        for($i = 0; $i < $c; $i++) {
-            ++self::$id;
-            $arguments['arg'.self::$id] = $args[0];
+use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
+
+class propertyIs extends DSL {
+    public function run() {
+        list($property, $code, $caseSensitive) = func_get_args();
+
+        assert($this->assertProperty($property));
+
+        if (is_array($code) && empty($code) ) {
+            return new Command(Query::NO_QUERY);
         }
-        $command = str_replace(array_fill(0, $c, '***'), array_keys($arguments), $command);
+
+        if ($caseSensitive === Analyzer::CASE_SENSITIVE) {
+            $caseSensitive = '';
+        } else {
+            $this->tolowercase($code);
+            $caseSensitive = '.toLowerCase()';
+        }
         
-        $this->gremlin = $command;
-        $this->arguments = $arguments;
-    }
-    
-    function add(Command $other) {
-        $this->gremlin .= ".$other->gremlin";
-        $this->arguments += $other->arguments;
-        
-        return $this;
+        if (is_array($code)) {
+            return new Command('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', $code);
+        } else {
+            return new Command('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', $code);
+        }
     }
 }
 ?>

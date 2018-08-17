@@ -542,8 +542,7 @@ GREMLIN
     }
 
     public function tokenIs($token) {
-        assert($this->assertLink($token));
-        $this->query->addMethod('has("token", within(***))', makeArray($token) );
+        $this->query->tokenIs($token);
         
         return $this;
     }
@@ -576,20 +575,7 @@ GREMLIN
     }
     
     public function functioncallIs($fullnspath) {
-        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
-        assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
-
-        $fullnspaths = makeArray($fullnspath);
-        $diff = array_intersect($fullnspaths, self::$availableFunctioncalls);
-        
-        if (empty($diff)) {
-            $this->query->stopQuery();
-            return $this;
-        }
-
-        $this->atomIs('Functioncall')
-             ->raw('has("fullnspath")')
-             ->fullnspathIs(array_values($diff));
+        $this->query->functioncallIs($fullnspath);
 
         return $this;
     }
@@ -762,8 +748,7 @@ GREMLIN;
     }
 
     public function has($property) {
-        assert($this->assertProperty($property));
-        $this->query->addMethod('has(***)', $property);
+        $this->query->has($property);
         
         return $this;
     }
@@ -867,18 +852,7 @@ GREMLIN;
     }
 
     public function outWithRank($link = 'ARGUMENT', $rank = 0) {
-        if ($rank === 'first') {
-            // @note : can't use has() with integer!
-            $this->query->addMethod('out("'.$link.'").has("rank", eq(0))');
-        } elseif ($rank === 'last') {
-            $this->query->addMethod('map( __.out("'.$link.'").order().by("rank").tail(1) )');
-        } elseif ($rank === '2last') {
-            $this->query->addMethod('map( __.out("'.$link.'").order().by("rank").tail(2) )');
-        } elseif (abs((int) $rank) >= 0) {
-            $this->query->addMethod('out("'.$link.'").has("rank", eq('.abs((int) $rank).'))');
-        } else {
-            assert(false, "rank '$rank' is wrong in ".__METHOD__);
-        }
+        $this->query->outWithRank($link, $rank);
 
         return $this;
     }
@@ -938,8 +912,9 @@ GREMLIN;
     }
 
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->addMethod('hasLabel("String")');
-        return $this->propertyIs('noDelimiter', $code, $caseSensitive);
+        $this->query->noDelimiterIs($code, $caseSensitive);
+        
+        return $this;
     }
 
     public function noDelimiterIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
@@ -951,8 +926,9 @@ GREMLIN;
     }
 
     public function fullnspathIs($code) {
-        $this->query->addMethod('has("fullnspath")');
-        return $this->propertyIs('fullnspath', $code, self::CASE_INSENSITIVE);
+        $this->query->fullnspathIs($code);
+
+        return $this;
     }
 
     public function fullnspathIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
@@ -1260,21 +1236,8 @@ GREMLIN
     }
 
     public function inIs($link = array()) {
-        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
-        if (empty($link)) {
-            $this->query->addMethod('in( )');
-            return $this;
-        }
-        
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (empty($diff)) {
-            $this->query->stopQuery();
-        } else {
-            assert($this->assertLink($link));
-            $this->query->addMethod('in('.$this->SorA($link).')');
-        }
-        
+        $this->query->inIs($link);
+
         return $this;
     }
 
@@ -1303,9 +1266,10 @@ GREMLIN
 
     public function raw($query, ...$args) {
         ++$this->rawQueryCount;
-        $query = $this->cleanAnalyzerName($query);
-
-        $this->query->addMethod($query, ...$args);
+        if (empty($args)) {
+            $args = array(array());
+        }
+        $this->query->raw($query, $this->dependsOn(), ...$args);
         
         return $this;
     }
@@ -2065,24 +2029,7 @@ GREMLIN
     }
 
     private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
-        assert($this->assertProperty($property));
-
-        if (is_array($code) && empty($code) ) {
-            return $this;
-        }
-
-        if ($caseSensitive === self::CASE_SENSITIVE) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if (is_array($code)) {
-            $this->query->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', $code);
-        } else {
-            $this->query->addMethod('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', $code);
-        }
+        $this->query->propertyIs($property, $code, $caseSensitive);
         
         return $this;
     }

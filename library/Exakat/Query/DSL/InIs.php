@@ -23,30 +23,27 @@
 
 namespace Exakat\Query\DSL;
 
-class Command {
-    static private $id = 0;
-    public $gremlin = '';
-    public $arguments = array();
-    
-    function __construct($command, $args = array()) {
-        $c = substr_count($command, '***');
-        
-        $arguments = array();
-        for($i = 0; $i < $c; $i++) {
-            ++self::$id;
-            $arguments['arg'.self::$id] = $args[0];
+use Exakat\Query\Query;
+
+class InIs extends DSL {
+    protected $args = array('atom');
+
+    public function run() {
+        list($link) = func_get_args();
+        assert($this->assertLink($link));
+
+        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
+        if (empty($link)) {
+            return new Command('in( )');
         }
-        $command = str_replace(array_fill(0, $c, '***'), array_keys($arguments), $command);
         
-        $this->gremlin = $command;
-        $this->arguments = $arguments;
-    }
-    
-    function add(Command $other) {
-        $this->gremlin .= ".$other->gremlin";
-        $this->arguments += $other->arguments;
-        
-        return $this;
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (empty($diff)) {
+            $this->query->stopQuery();
+        } else {
+            return new Command('in('.$this->SorA($link).')');
+        }
     }
 }
 ?>
