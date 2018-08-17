@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class functioncallIs extends DSL {
+class FunctioncallIs extends DSL {
     public function run() {
         list($fullnspath) = func_get_args();
 

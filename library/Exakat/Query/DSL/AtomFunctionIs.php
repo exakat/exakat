@@ -24,19 +24,15 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
-class FullnspathIs extends DSL {
+class AtomFunctionIs extends DSL {
+    protected $args = array('atom');
+
     public function run() {
-        list($code) = func_get_args();
-
-        $has = DSL::factory('has');
-        $return = $has->run('fullnspath');
-
-        $propertyIs = DSL::factory('propertyIs');
+        list($fullnspath) = func_get_args();
         
-        $return->add($propertyIs->run('fullnspath', array($code), Analyzer::CASE_SENSITIVE));
-        return $return;
+        $functioncallIs = DSL::factory('functioncallIs');
+        return $functioncallIs->run($fullnspath);
     }
 }
 ?>

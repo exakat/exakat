@@ -556,10 +556,8 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLab
     }
 
     public function atomFunctionIs($fullnspath) {
-        assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
-        assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
-        $this->functioncallIs($fullnspath);
-
+        $this->query->atomFunctionIs($fullnspath);
+        
         return $this;
     }
     
