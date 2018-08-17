@@ -866,27 +866,7 @@ GREMLIN;
     }
 
     public function codeIsNot($code, $translate = self::TRANSLATE, $caseSensitive = self::CASE_INSENSITIVE) {
-        if (is_array($code) && empty($code)) {
-            return $this;
-        }
-
-        $col = $caseSensitive === self::CASE_INSENSITIVE ? 'lccode' : 'code';
-
-        if ($translate === self::TRANSLATE) {
-            $translatedCode = array();
-            $code = makeArray($code);
-            $translatedCode = $this->dictCode->translate($code, $caseSensitive === self::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
-
-            if (empty($translatedCode)) {
-                // Couldn't find anything in the dictionary : OK!
-                $this->query->addMethod("filter{ true; }");
-                return $this;
-            }
-        
-            $this->query->addMethod("filter{ !(it.get().value(\"$col\") in ***); }", $translatedCode);
-        } else {
-            $this->query->addMethod("filter{ !(it.get().value(\"$col\") in ***); }", makeArray($code));
-        }
+        $this->query->codeIsNot($code, $translate, $caseSensitive);
 
         return $this;
     }
@@ -935,20 +915,7 @@ GREMLIN;
     }
 
     public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
-        assert($this->assertProperty($property));
-        if ($caseSensitive === self::CASE_SENSITIVE || in_array($property, array('line', 'rank', 'code', 'propertyname', 'boolean', 'count'))) {
-            $caseSensitive = '';
-        } else {
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if ($property === 'label') {
-            $this->query->addMethod("filter{ it.get().label() != $name }");
-        } elseif ($property === 'id') {
-            $this->query->addMethod("filter{ it.get().id() != $name }");
-        } else {
-            $this->query->addMethod("filter{ it.get().value(\"$property\")$caseSensitive != $name$caseSensitive}");
-        }
+        $this->query->notSamePropertyAs($property, $name, $caseSensitive);
 
         return $this;
     }
@@ -1428,7 +1395,7 @@ GREMLIN
     }
 
     protected function classDefinition() {
-        $this->query->addMethod('in("DEFINITION")');
+        $this->query->classDefinition();
     
         return $this;
     }
@@ -1735,17 +1702,7 @@ GREMLIN
     }
     
     public function getNameInFNP($variable) {
-        $this->raw(<<<GREMLIN
-sideEffect{
-    if ($variable.contains("\\\\") ) {
-        $variable = $variable.tokenize("\\\\\\\\").last(); 
-    }
-    if ($variable.contains("(") ) {
-        $variable = $variable.tokenize("(").first(); 
-    }
-}
-GREMLIN
-);
+        $this->query->getNameInFNP($variable);
         
         return $this;
     }

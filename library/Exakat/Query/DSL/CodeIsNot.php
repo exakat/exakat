@@ -27,30 +27,29 @@ use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Dictionary;
 
-class codeIs extends DSL {
-    protected $args = array('atom');
-
+class codeIsNot extends DSL {
     public function run() {
         list($code, $translate, $caseSensitive) = func_get_args();
 
         if (is_array($code) && empty($code)) {
-            return new Command(Query::STOP_QUERY);
+            return new Command(Query::NO_QUERY);
         }
-        
+
         $col = $caseSensitive === Analyzer::CASE_INSENSITIVE ? 'lccode' : 'code';
-        
+
         if ($translate === Analyzer::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
             $translatedCode = self::$dictCode->translate($code, $caseSensitive === Analyzer::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
 
             if (empty($translatedCode)) {
-                return new Command(Query::STOP_QUERY);
+                // Couldn't find anything in the dictionary : OK!
+                return new Command(Query::NO_QUERY);
             }
-            
-            return new Command("filter{ it.get().value(\"$col\") in ***; }", array($translatedCode));
+        
+            return new Command("filter{ !(it.get().value(\"$col\") in ***); }", $translatedCode);
         } else {
-            return new Command("filter{ it.get().value(\"$col\") in ***; }", makeArray($code));
+            return new Command("filter{ !(it.get().value(\"$col\") in ***); }", makeArray($code));
         }
     }
 }
