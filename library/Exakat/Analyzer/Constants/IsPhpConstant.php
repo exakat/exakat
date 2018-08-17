@@ -28,11 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class IsPhpConstant extends Analyzer {
     public function analyze() {
         $constants = $this->loadIni('php_constants.ini', 'constants');
-        $constantsFNP = makeFullNsPath($constants);
-        
+        $constantsFNP = makeFullNsPath($constants, true);
+
         // Namespaced constant (\PATHINFO_BASENAME)
         $this->atomIs(array('Identifier', 'Nsname'))
-             ->hasNoIn(array('DEFINITION', 'NEW', 'USE', 'NAME', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'TYPEHINT', 'FUNCTION', 'GROUPUSE', 'METHOD', 'MEMBER', 'ALIAS'))
              ->fullnspathIs($constantsFNP);
         $this->prepareQuery();
 
