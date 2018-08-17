@@ -41,9 +41,9 @@ class Is extends DSL {
         } elseif (is_int($value)) {
             return new Command('has("'.$property.'", '.$value.')');
         } elseif (is_string($value)) {
-            return new Command('has("'.$property.'", ***)', $value);
+            return new Command('has("'.$property.'", ***)', array($value));
         } elseif (is_array($value)) {
-            return new Command('has("'.$property.'", within(***))', $value);
+            return new Command('has("'.$property.'", within(***))', array($value));
         } else {
             assert(false, 'Not understood type for is : '.gettype($value));
         }

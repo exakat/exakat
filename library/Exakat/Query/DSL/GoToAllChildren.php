@@ -24,25 +24,18 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
 
-class InIs extends DSL {
+class GoToAllChildren extends DSL {
     protected $args = array('atom');
 
     public function run() {
-        list($link) = func_get_args();
-        assert($this->assertLink($link));
+        list($self) = func_get_args();
 
-        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
-        if (empty($link)) {
-            return new Command('in( )');
-        }
-        
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
+        if ($self === Analyzer::INCLUDE_SELF) {
+            return new Command('filter{true}.emit( ).repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.Analyzer::MAX_LOOPING.')');
         } else {
-            return new Command('in('.$this->SorA($link).')');
+            return new Command('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit( ).times('.Analyzer::MAX_LOOPING.')');
         }
     }
 }

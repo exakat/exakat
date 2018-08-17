@@ -24,26 +24,13 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
 
-class InIs extends DSL {
-    protected $args = array('atom');
-
+class HasClassDefinition extends DSL {
     public function run() {
-        list($link) = func_get_args();
-        assert($this->assertLink($link));
+        list($type) = func_get_args();
 
-        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
-        if (empty($link)) {
-            return new Command('in( )');
-        }
-        
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
-        } else {
-            return new Command('in('.$this->SorA($link).')');
-        }
+        return new Command('where(__.in("DEFINITION").hasLabel(within(***)) )', makeArray($type) );
     }
 }
 ?>

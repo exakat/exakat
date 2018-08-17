@@ -44,13 +44,13 @@ class isNot extends DSL {
             if (empty($value)) {
                 return new Command('not(has("'.$property.'", ""))');
             } else {
-                return new Command('not(has("'.$property.'", ***))', $value);
+                return new Command('not(has("'.$property.'", ***))', array($value));
             }
         } elseif (is_array($value)) {
             if (empty($value)) {
                 return new Command('not(has("'.$property.'", ""))');
             } else {
-                return new Command('not(has("'.$property.'", within(***)))', $value);
+                return new Command('not(has("'.$property.'", within(***)))', array($value));
             }
         } else {
             assert(false, 'Not understood type for isNot : '.gettype($value));

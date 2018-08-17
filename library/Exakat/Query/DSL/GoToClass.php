@@ -23,27 +23,11 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-
-class InIs extends DSL {
-    protected $args = array('atom');
-
+class GoToClass extends DSL {
     public function run() {
-        list($link) = func_get_args();
-        assert($this->assertLink($link));
-
-        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
-        if (empty($link)) {
-            return new Command('in( )');
-        }
+        $return = DSL::factory('goToInstruction');
         
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
-        if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
-        } else {
-            return new Command('in('.$this->SorA($link).')');
-        }
+        return $return->run(array('Class', 'Classanonymous'));
     }
 }
 ?>

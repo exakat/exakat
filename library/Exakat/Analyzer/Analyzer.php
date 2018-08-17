@@ -518,25 +518,13 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLab
     }
 
     protected function hasInstruction($atom = 'Function') {
-        assert($this->assertAtom($atom));
-        $this->query->addMethod('where( 
-__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit( ).hasLabel(within(***))
-    )', makeArray($atom) );
-        
+        $this->query->hasInstruction($atom);
+
         return $this;
     }
 
     protected function goToInstruction($atom = 'Namespace') {
-        assert($this->assertAtom($atom));
-        $atom = makeArray($atom);
-        $atomAndFile = $atom;
-        $atomAndFile[] = "File";
-        $atomAndFile = array_unique($atomAndFile);
-        $this->query->addMethod(<<<GREMLIN
-repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )
-          .hasLabel(within(***))
-GREMLIN
-, $atomAndFile, $atom);
+        $this->query->goToInstruction($atom);
         
         return $this;
     }
@@ -1401,49 +1389,49 @@ GREMLIN
     }
 
     protected function noClassDefinition($type = 'Class') {
-        $this->query->addMethod('not(where(__.in("DEFINITION").hasLabel(within(***)) ) )', makeArray($type) );
+        $this->query->noClassDefinition($type);
     
         return $this;
     }
 
     protected function hasClassDefinition($type = 'Class') {
-        $this->query->addMethod('where(__.in("DEFINITION").hasLabel(within(***)) )', makeArray($type));
+        $this->query->hasClassDefinition($type);
     
         return $this;
     }
 
     public function noUseDefinition() {
-        $this->query->addMethod('not( where(__.out("DEFINITION").in("USE").hasLabel("Use")) )');
+        $this->query->noUseDefinition();
     
         return $this;
     }
 
     public function interfaceDefinition() {
-        $this->query->addMethod('in("DEFINITION")');
+        $this->query->interfaceDefinition();
     
         return $this;
     }
 
     public function noInterfaceDefinition() {
-        $this->query->addMethod('not( where(__.in("DEFINITION").hasLabel("Interface") ) )');
+        $this->query->noInterfaceDefinition();
     
         return $this;
     }
 
     public function hasInterfaceDefinition() {
-        $this->query->addMethod('where(__.in("DEFINITION").hasLabel("Interface") )');
+        $this->query->hasInterfaceDefinition();
     
         return $this;
     }
 
     public function hasTraitDefinition() {
-        $this->query->addMethod('where(__.in("DEFINITION").hasLabel("Trait") )');
+        $this->query->hasTraitDefinition();
 
         return $this;
     }
 
     public function noTraitDefinition() {
-        $this->query->addMethod('not( where(__.in("DEFINITION").hasLabel("Trait") ) )');
+        $this->query->noTraitDefinition();
     
         return $this;
     }
@@ -1460,7 +1448,7 @@ GREMLIN
     }
     
     public function goToClass($type = array('Class', 'Classanonymous')) {
-        $this->goToInstruction($type);
+        $this->query->goToClass();
         
         return $this;
     }
@@ -1476,7 +1464,7 @@ GREMLIN
     }
 
     public function goToInterface() {
-        $this->goToInstruction('Interface');
+        $this->query->goToInstruction('Interface');
         
         return $this;
     }
@@ -1486,7 +1474,7 @@ GREMLIN
     }
 
     public function goToTrait() {
-        $this->goToInstruction('Trait');
+        $this->query->goToTrait();
         
         return $this;
     }
@@ -1555,12 +1543,8 @@ GREMLIN
     }
 
     public function goToAllChildren($self = self::INCLUDE_SELF) {
-        if ($self === self::INCLUDE_SELF) {
-            $this->query->addMethod('filter{true}.emit( ).repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::MAX_LOOPING.')');
-        } else {
-            $this->query->addMethod('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit( ).times('.self::MAX_LOOPING.')');
-        }
-        
+        $this->query->goToAllChildren($self);
+
         return $this;
     }
     
