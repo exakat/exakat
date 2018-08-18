@@ -24,20 +24,20 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
-class atomInsideNoDefinition extends DSL {
-    public function run() : Command {
-        list($atom) = func_get_args();
+class HasNoNamedInstruction extends DSL {
+    public function run() {
+        list($atom, $name) = func_get_args();
 
         assert($this->assertAtom($atom));
-        $diff = $this->checkAtoms($atom);
-        if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
+        if ($name === null) {
+            return $this->hasNoInstruction($atom);
         }
 
-        $gremlin = 'emit( ).repeat( __.out('.self::$linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
-        return new Command($gremlin, array($diff));
+        assert($this->assertLink($token));
+        return new Command('not( where( 
+__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File")).hasLabel(within(***)).has("code", ***)
+  ) )', array(makeArray($atom), $name));
     }
 }
 ?>

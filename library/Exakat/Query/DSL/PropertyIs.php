@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class propertyIs extends DSL {
+class PropertyIs extends DSL {
     public function run() {
         list($property, $code, $caseSensitive) = func_get_args();
 
@@ -44,9 +44,9 @@ class propertyIs extends DSL {
         }
         
         if (is_array($code)) {
-            return new Command('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', $code);
+            return new Command('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', array($code));
         } else {
-            return new Command('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', $code);
+            return new Command('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', array($code));
         }
     }
 }

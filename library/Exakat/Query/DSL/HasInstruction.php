@@ -37,7 +37,7 @@ where(
 __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit( ).hasLabel(within(***))
     )
 GREMLIN
-, makeArray($atom) );
+, array(makeArray($atom)) );
     }
 }
 ?>

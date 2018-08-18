@@ -26,18 +26,11 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class atomInsideNoDefinition extends DSL {
-    public function run() : Command {
-        list($atom) = func_get_args();
-
-        assert($this->assertAtom($atom));
-        $diff = $this->checkAtoms($atom);
-        if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
-        }
-
-        $gremlin = 'emit( ).repeat( __.out('.self::$linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
-        return new Command($gremlin, array($diff));
+class IsLowercase extends DSL {
+    public function run() {
+        list($property) = func_get_args();
+        
+        return new Command('filter{it.get().value("'.$property.'") == it.get().value("'.$property.'").toLowerCase()}');
     }
 }
 ?>

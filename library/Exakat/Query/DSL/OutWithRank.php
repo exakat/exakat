@@ -31,7 +31,6 @@ class OutWithRank extends DSL {
 
         if ($rank === 'first') {
             // @note : can't use has() with integer!
-            return new Command('out("'.$link.'").has("rank", eq(0))');
         } elseif ($rank === 'last') {
             return new Command('map( __.out("'.$link.'").order().by("rank").tail(1) )');
         } elseif ($rank === '2last') {

@@ -23,12 +23,9 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
-
 class GoToTrait extends DSL {
     public function run() {
-        $return = new DSL::factory('goToInstruction');
+        $return = DSL::factory('goToInstruction');
         
         return $return->run('Trait');
     }

@@ -24,20 +24,20 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
-class atomInsideNoDefinition extends DSL {
-    public function run() : Command {
-        list($atom) = func_get_args();
+class IsLess extends DSL {
+    public function run() {
+        list($property, $value) = func_get_args();
 
-        assert($this->assertAtom($atom));
-        $diff = $this->checkAtoms($atom);
-        if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
+        assert($this->assertProperty($property));
+        if (is_int($value)) {
+            return new Command("filter{ it.get().value(\"{$property}\").toLong() < {$value} }");
+        } elseif (is_string($value)) {
+            // this is a variable name, so it can't use ***
+            return new Command("filter{ it.get().value(\"{$property}\").toLong() < {$value};}");
+        } else {
+            assert(false, '$value must be int or string in '.__METHOD__);
         }
-
-        $gremlin = 'emit( ).repeat( __.out('.self::$linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
-        return new Command($gremlin, array($diff));
     }
 }
 ?>

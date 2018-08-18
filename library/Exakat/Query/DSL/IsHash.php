@@ -26,18 +26,17 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class atomInsideNoDefinition extends DSL {
-    public function run() : Command {
-        list($atom) = func_get_args();
+class IsHash extends DSL {
+    public function run() {
+        list($property, $hash, $index) = func_get_args();
 
-        assert($this->assertAtom($atom));
-        $diff = $this->checkAtoms($atom);
-        if (empty($diff)) {
+        if (empty($hash)) {
             return new Command(Query::STOP_QUERY);
         }
 
-        $gremlin = 'emit( ).repeat( __.out('.self::$linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
-        return new Command($gremlin, array($diff));
+        assert($this->assertProperty($property));
+        
+        return new Command("filter{ it.get().value(\"$property\") in ***[$index]}", array($hash));
     }
 }
 ?>

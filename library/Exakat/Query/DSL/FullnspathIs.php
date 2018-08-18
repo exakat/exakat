@@ -34,8 +34,9 @@ class FullnspathIs extends DSL {
         $return = $has->run('fullnspath');
 
         $propertyIs = DSL::factory('propertyIs');
+        $code = makeArray($code);
         
-        $return->add($propertyIs->run('fullnspath', array($code), Analyzer::CASE_SENSITIVE));
+        $return->add($propertyIs->run('fullnspath', $code, Analyzer::CASE_SENSITIVE));
         return $return;
     }
 }

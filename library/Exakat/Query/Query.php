@@ -66,6 +66,7 @@ class Query {
     }
 
     public function addMethod($method, $arguments = array()) {
+        die(__METHOD__);
         if ($arguments === array()) { // empty, but won't mistake 0 for nothing
             $this->methods[] = $method;
             return $this;
@@ -114,16 +115,19 @@ class Query {
         if (substr($commands[0], 0, 9) === 'hasLabel(') {
             $first = $commands[0];
             array_shift($commands);
-            $this->query = "g.V().$first.groupCount(\"processed\").by(count()).as(\"first\").".implode(".\n", $commands);
-        } elseif (substr($commands[1], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
-            die(ici);
-            $first = array_shift($commands); // remove first
-            array_shift($commands); // remove second
-            $query = implode('.', $commands);
-            $arg0 = $this->arguments['arg0'];
-            $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())'
-                     .(empty($query) ? '' : '.'.$query);
-            unset($commands[1]);
+            $this->query = "g.V().$first.groupCount(\"processed\").by(count()).as(\"first\")";
+            if (!empty($commands)) {
+                $this->query .= '.'.implode(".\n", $commands);
+            }
+        } elseif (substr($commands[0], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
+            $first = $commands[0]; 
+            array_shift($commands); 
+            $arg0 = $this->commands[0]->arguments;
+            unset($this->commands[0]);
+            $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())';
+            if (!empty($commands)) {
+                $this->query .= '.'.implode(".\n", $commands);
+            }
         } else {
             assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! '.$commands[1]);
         }
@@ -143,6 +147,7 @@ class Query {
 GREMLIN;
         assert(!empty($this->analyzerId), "The analyzer Id for {$this->analyzerId} wasn't set. Can't save results.");
         
+//        print_r($this);
         assert(count($this->methods) == 1, "Query::\$methods is not empty\n".print_r($this->methods, true));
     }
     

@@ -34,9 +34,10 @@ class Command {
         $arguments = array();
         for($i = 0; $i < $c; $i++) {
             ++self::$id;
-            $arguments['arg'.self::$id] = $args[0];
+            $arguments['arg'.self::$id] = $args[$i];
         }
-        $command = str_replace(array_fill(0, $c, '***'), array_keys($arguments), $command);
+        $command = str_replace('***', '%s', $command);
+        $command = sprintf($command, ...array_keys($arguments));
         
         $this->gremlin = $command;
         $this->arguments = $arguments;

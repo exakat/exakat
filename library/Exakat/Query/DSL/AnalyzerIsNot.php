@@ -29,7 +29,7 @@ class AnalyzerIsNot extends DSL {
     public function run() {
         list($analyzer) = func_get_args();
 
-        return new Command('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', $analyzer);
+        return new Command('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', array($analyzer));
     }
 }
 ?>

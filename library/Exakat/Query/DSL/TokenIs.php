@@ -30,7 +30,7 @@ class TokenIs extends DSL {
         list($token) = func_get_args();
 
         assert($this->assertLink($token));
-        return new Command('has("token", within(***))', makeArray($token) );
+        return new Command('has("token", within(***))', array(makeArray($token)) );
     }
 }
 ?>

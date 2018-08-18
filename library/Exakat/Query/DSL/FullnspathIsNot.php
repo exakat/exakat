@@ -26,18 +26,17 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class atomInsideNoDefinition extends DSL {
-    public function run() : Command {
-        list($atom) = func_get_args();
+class FullnspathIsNot extends DSL {
+    public function run() {
+        list($code) = func_get_args();
 
-        assert($this->assertAtom($atom));
-        $diff = $this->checkAtoms($atom);
-        if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
-        }
+        $has = DSL::factory('has');
+        $return = $has->run('fullnspath');
 
-        $gremlin = 'emit( ).repeat( __.out('.self::$linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
-        return new Command($gremlin, array($diff));
+        $propertyIs = DSL::factory('propertyIsNot');
+        
+        $return->add($propertyIs->run('fullnspath', $code, Analyzer::CASE_SENSITIVE));
+        return $return;
     }
 }
 ?>

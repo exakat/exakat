@@ -24,20 +24,26 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
-class atomInsideNoDefinition extends DSL {
-    public function run() : Command {
-        list($atom) = func_get_args();
+class InIsNot extends DSL {
+    protected $args = array('atom');
 
-        assert($this->assertAtom($atom));
-        $diff = $this->checkAtoms($atom);
-        if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
+    public function run() {
+        list($link) = func_get_args();
+        assert($this->assertLink($link));
+
+        assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
+        if (empty($link)) {
+            return new Command(Query::NO_QUERY);
         }
-
-        $gremlin = 'emit( ).repeat( __.out('.self::$linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
-        return new Command($gremlin, array($diff));
+        
+        $links = makeArray($link);
+        $diff = array_intersect($links, self::$availableLinks);
+        if (empty($diff)) {
+            return new Command(Query::NO_QUERY);
+        } else {
+            return new Command('not( where( __.inE('.$this->SorA($link).')) )');
+        }
     }
 }
 ?>

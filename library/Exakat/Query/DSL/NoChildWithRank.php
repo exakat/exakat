@@ -24,20 +24,15 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
-use Exakat\Analyzer\Analyzer;
 
-class atomInsideNoDefinition extends DSL {
-    public function run() : Command {
-        list($atom) = func_get_args();
-
-        assert($this->assertAtom($atom));
-        $diff = $this->checkAtoms($atom);
-        if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
+class NoChildWithRank extends DSL {
+    public function run() {
+        list($edgeName, $rank) = func_get_args();
+        if (is_int($rank)) {
+            return new Command('not( where( __.out('.$this->SorA($edgeName).').has("rank", ***) ) )', array(abs($rank)));
+        } else {
+            return new Command('not( where( __.out('.$this->SorA($edgeName).').filter{it.get().value("rank") == ***; } ) )', array($rank));
         }
-
-        $gremlin = 'emit( ).repeat( __.out('.self::$linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
-        return new Command($gremlin, array($diff));
     }
 }
 ?>

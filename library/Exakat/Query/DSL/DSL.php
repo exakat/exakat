@@ -147,6 +147,24 @@ abstract class DSL {
         }
     }
 
+    protected function makeLinks($links, $direction = 'in') {
+        if (empty($links)) {
+            return '.out( )';
+        }
+        
+        $return = array();
+        
+        $links = makeArray($links);
+        foreach($links as $l) {
+            if (empty($l)) {
+                $return[] = ".$direction( )";
+            } else {
+                $return[] = ".$direction(\"$l\")";
+            }
+        }
+        
+        return implode('', $return);
+    }
 }
 
 ?>
