@@ -25,22 +25,27 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class NoPropertyInside extends DSL {
+class FunctioncallIsNot extends DSL {
     public function run() {
-        list($property, $values) = func_get_args();
+        list($fullnspath) = func_get_args();
 
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
+        $fullnspaths = makeArray($fullnspath);
+        $diff = array_intersect($fullnspaths, self::$availableFunctioncalls);
+        
+        if (empty($diff)) {
+            return new Command(Query::NO_QUERY);
+        }
 
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
-GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+        $atomIs = DSL::factory('atomIs');
+        $return = $atomIs->run('Functioncall');
+
+        $has = DSL::factory('has');
+        $return->add($has->run('fullnspath'));
+
+        $fullnspathIs = DSL::factory('fullnspathIsNot');
+        $return->add($fullnspathIs->run(array_values($diff)));
+
+        return $return;
     }
 }
 ?>

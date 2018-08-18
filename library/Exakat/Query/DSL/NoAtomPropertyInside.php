@@ -31,11 +31,13 @@ class NoAtomPropertyInside extends DSL {
 
         assert($this->assertAtom($atom));
         assert($this->assertProperty($property));
-        $MAX_LOOPING = self::MAX_LOOPING;
+        $MAX_LOOPING = self::$MAX_LOOPING;
+        $linksDown = self::$linksDown;
+
         // Check with Structures/Unpreprocessed
         $gremlin = <<<GREMLIN
 not(
-    where( __.emit( ).repeat( __.out($this->linksDown).not(hasLabel("Closure", "Classanonymous")) )
+    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
                      .times($MAX_LOOPING).hasLabel(within(***))
                      .filter{ it.get().value("$property") == $values } ) 
     )

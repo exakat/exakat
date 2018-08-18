@@ -23,24 +23,17 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
 
-class NoPropertyInside extends DSL {
-    public function run() {
-        list($property, $values) = func_get_args();
+class GoToAllParents extends DSL {
+    public function run() : Command {
+        list($self) = func_get_args();
 
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
-
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
-GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+        if ($self === Analyzer::EXCLUDE_SELF) {
+            return new Command('repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit( ).times('.self::$MAX_LOOPING.')');
+        } else {
+            return new Command('filter{true}.emit( ).repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).times('.self::$MAX_LOOPING.')');
+        }
     }
 }
 ?>

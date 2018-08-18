@@ -33,6 +33,7 @@ class atomIsNot extends DSL {
 
         assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($this->assertAtom($atom));
+        $atom = makeArray($atom);
         
         return new Command('not(hasLabel(within(***)))', array($atom));
     }

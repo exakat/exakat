@@ -25,22 +25,19 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class NoPropertyInside extends DSL {
+class SaveMethodNameAs extends DSL {
     public function run() {
-        list($property, $values) = func_get_args();
+        list($name) = func_get_args();
 
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
+        $gremlin = <<<GREMLIN
+sideEffect{ 
+    x = it.get().value("fullnspath").tokenize("::"); 
+    $name = x[1]; 
+}
 
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
 GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+
+        return new Command($gremlin);
     }
 }
 ?>

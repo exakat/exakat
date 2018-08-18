@@ -25,22 +25,17 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class NoPropertyInside extends DSL {
+class IsNotLiteral extends DSL {
     public function run() {
-        list($property, $values) = func_get_args();
+        // Closures are literal if not using a variable from the context
+        return new Command(<<<GREMLIN
+not( 
+    __.hasLabel("Integer", "Boolean", "Null", "Magicconstant", "Real", "String", "Heredoc", "Closure", "Arrayliteral")
+      .has("constant", true) 
+)
 
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
-
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
-GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+GREMLIN
+);
     }
 }
 ?>

@@ -25,22 +25,17 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class NoPropertyInside extends DSL {
+class groupFilter extends DSL {
     public function run() {
-        list($property, $values) = func_get_args();
+        list($characteristic, $percentage) = func_get_args();
 
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
+        if (substr(trim($characteristic), 0, 3) === 'it.') {
+            $by = "by{ $characteristic }";
+        } else {
+            $by = "by{ \"$characteristic\" }";
+        }
 
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
-GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+        return new Command("groupCount(\"gf\").$by.cap(\"gf\").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * $percentage; }.keySet()");
     }
 }
 ?>

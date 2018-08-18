@@ -29,7 +29,7 @@ class HasChildWithRank extends DSL {
     public function run() {
         list($edgeName, $rank) = func_get_args();
 
-        return new Command('where( __.out('.$this->SorA($edgeName).').has("rank", ***).not(hasLabel("Void")) )', abs((int) $rank));
+        return new Command('where( __.out('.$this->SorA($edgeName).').has("rank", ***).not(hasLabel("Void")) )', array(abs((int) $rank)));
     }
 }
 ?>

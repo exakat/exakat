@@ -23,24 +23,18 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
+class OtherSiblings extends DSL {
+    public function run() : Command {
+        list($link, $self) = func_get_args();
 
-class NoPropertyInside extends DSL {
-    public function run() {
-        list($property, $values) = func_get_args();
-
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
-
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
-GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+        static $sibling = 0; // This is for calling the method multiple times
+        ++$sibling;
+        
+        if ($self === Analyzer::EXCLUDE_SELF) {
+            return new Command('as("sibling'.$sibling.'").in("'.$link.'").out("'.$link.'").where(neq("sibling'.$sibling.'"))');
+        } else {
+            return new Command('in("'.$link.'").out("'.$link.'")');
+        }
     }
 }
 ?>

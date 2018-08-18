@@ -25,22 +25,31 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class NoPropertyInside extends DSL {
+class SaveOutAs extends DSL {
     public function run() {
-        list($property, $values) = func_get_args();
+        list($name, $out, $sort) = func_get_args();
 
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
+        // Calculate the arglist, normalized it, then put it in a variable
+        // This needs to be in Arguments, (both Functioncall or Function)
+        if (empty($sort)) {
+            $sortStep = '';
+        } else {
+            $sortStep = ".sort{it.value(\"$sort\")}";
+        }
 
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
+        $gremlin = <<<GREMLIN
+sideEffect{ 
+    s = [];
+    it.get().vertices(OUT, "$out")$sortStep.each{ 
+        s.push(it.value('code'));
+    };
+    $name = s.join(', ');
+    true;
+}
+
 GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+
+        return new Command($gremlin);
     }
 }
 ?>

@@ -37,9 +37,9 @@ class AtomIs extends DSL {
         $diff = $this->checkAtoms($atom);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
+        } else {
+            return new Command('hasLabel(within(***))', array($diff));
         }
-
-        return new Command('hasLabel(within(***))', array($diff));
     }
 }
 ?>

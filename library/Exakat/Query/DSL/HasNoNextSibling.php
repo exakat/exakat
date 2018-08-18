@@ -23,24 +23,14 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
+class HasNoNextSibling extends DSL {
+    public function run() : Command {
+        list($link) = func_get_args();
 
-class NoPropertyInside extends DSL {
-    public function run() {
-        list($property, $values) = func_get_args();
-
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
-
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
-GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+        $hasIn = DSL::factory('hasIn');
+        $return = $hasIn->run($link);
+        
+        return $return->add(new Command('not( where( __.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}) )'));
     }
 }
 ?>

@@ -25,22 +25,31 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class NoPropertyInside extends DSL {
+class GetStringLength extends DSL {
     public function run() {
-        list($property, $values) = func_get_args();
+        list($property, $variable) = func_get_args();
 
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
+        $gremlin = <<<'GREMLIN'
+sideEffect{
+    s = it.get().value("PROPERTY");
+    
+    // Replace all special chars by a single char
+    s = s.replaceAll(/\\[\\aefnRrt]/, "A");
+    s = s.replaceAll(/\\0\d\d/, "A");
+    s = s.replaceAll(/\\u\{[^\}]+\}/, "A");
+    s = s.replaceAll(/\\[pP]\{^?[A-Z][a-z]?\}/, "A");
+    s = s.replaceAll(/\\[pP][A-Z]/, "A");
+    s = s.replaceAll(/\\X[A-Z][a-z]/, "A");
+    s = s.replaceAll(/\\x[a-fA-F0-9]{2}/, "A");
 
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
+    VARIABLE = s.length();
+}
+
 GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+
+        $gremlin = str_replace(array('PROPERTY', 'VARIABLE'), array($property, $variable), $query);
+
+        return new Command($gremlin);
     }
 }
 ?>

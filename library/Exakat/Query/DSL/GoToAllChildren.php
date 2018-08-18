@@ -33,9 +33,9 @@ class GoToAllChildren extends DSL {
         list($self) = func_get_args();
 
         if ($self === Analyzer::INCLUDE_SELF) {
-            return new Command('filter{true}.emit( ).repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.Analyzer::MAX_LOOPING.')');
+            return new Command('filter{true}.emit( ).repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::$MAX_LOOPING.')');
         } else {
-            return new Command('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit( ).times('.Analyzer::MAX_LOOPING.')');
+            return new Command('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit( ).times('.self::$MAX_LOOPING.')');
         }
     }
 }

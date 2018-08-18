@@ -24,23 +24,31 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
 
-class NoPropertyInside extends DSL {
+class hasNoCountedInstruction extends DSL {
     public function run() {
-        list($property, $values) = func_get_args();
+        list($atom, $count) = func_get_args();
 
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
+        assert($this->assertAtom($atom));
+        assert($count >= 0);
+        $atom = makeArray($atom);
+        
+        // $count is an integer or a variable
+        
+        $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
+        $stop = array_unique(array_diff($stop, $atom));
 
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
-GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+        return new Command(<<<GREMLIN
+where( 
+ __.sideEffect{ c = 0; }
+   .emit( ).repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() )
+   .until(hasLabel(within(***)))
+   .hasLabel(within(***))
+   .sideEffect{ c = c + 1; }.fold()
+).filter{ c < $count}
+GREMLIN
+, array($stop, $atom));
     }
 }
 ?>

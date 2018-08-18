@@ -23,24 +23,11 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
-
-class NoPropertyInside extends DSL {
-    public function run() {
-        list($property, $values) = func_get_args();
-
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
-
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
-GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+class GoToExpression extends DSL {
+    public function run() : Command {
+        $return = DSL::factory('goToInstruction');
+        
+        return $return->run(array('Function', 'Phpcode'));
     }
 }
 ?>

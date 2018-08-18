@@ -24,23 +24,15 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
 
-class NoPropertyInside extends DSL {
-    public function run() {
-        list($property, $values) = func_get_args();
+class NoFunctionInside extends DSL {
+    public function run() : Command {
+        list($fullnspath) = func_get_args();
 
-        assert($this->assertProperty($property));
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
-
-$gremlin = <<<GREMLIN
-not(
-    where( __.emit( ).repeat( __.out($linksDown).not(hasLabel("Closure", "Classanonymous")) )
-                     .times($MAX_LOOPING).has("$property", within(***)) ) 
-    )
-GREMLIN;
-        return new Command($gremlin,
-                           makeArray($values));
+        // $fullcode is a name of a variable
+        $gremlin = 'not( where( __.emit( ).repeat( out('.self::$linksDown.') ).times('.self::$MAX_LOOPING.').hasLabel("Functioncall").has("fullnspath", within(***))) )';
+        return new Command($gremlin, array(makeArray($fullnspath)));
     }
 }
 ?>
