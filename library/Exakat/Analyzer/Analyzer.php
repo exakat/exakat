@@ -454,7 +454,7 @@ GREMLIN;
     
     public function ignore() {
         // used to execute some code but not collect any node
-        $this->query->stopQuery();
+        $this->query->count();
     }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -552,7 +552,7 @@ GREMLIN;
     }
 
     public function fullcodeInside($fullcode) {
-        $this->query->fullcodeInside($atom);
+        $this->query->fullcodeInside($fullcode);
 
         return $this;
     }
@@ -734,27 +734,25 @@ GREMLIN;
     }
 
     public function noDelimiterIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        if (is_array($code) && empty($code)) {
-            return $this;
-        }
+        $this->query->noDelimiterIsNot($code, $caseSensitive);
         
-        return $this->propertyIsNot('noDelimiter', $code, $caseSensitive);
+        return $this;
     }
 
-    public function fullnspathIs($code) {
-        $this->query->fullnspathIs($code);
+    public function fullnspathIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
+        $this->query->fullnspathIs($code, $caseSensitive);
 
         return $this;
     }
 
     public function fullnspathIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        $this->query->fullnspathIsNot($code, $code, $caseSensitive);
+        $this->query->fullnspathIsNot($code, $caseSensitive);
 
         return $this;
     }
     
     public function codeIsPositiveInteger() {
-        $this->query->codeIsPositiveInteger(); 
+        $this->query->codeIsPositiveInteger();
 
         return $this;
     }
@@ -860,7 +858,7 @@ GREMLIN;
 
     public function codeLength($length = ' == 1 ') {
         $values = $this->dictCode->length($length);
-        $this->query->codeLength($length);
+        $this->query->codeLength($values);
 
         return $this;
     }
@@ -873,7 +871,7 @@ GREMLIN;
     }
     
     public function groupCount($column) {
-        $this->query->groupCount($column); 
+        $this->query->groupCount($column);
         
         return $this;
     }
@@ -972,10 +970,8 @@ GREMLIN;
 
     public function raw($query, ...$args) {
         ++$this->rawQueryCount;
-        if (empty($args)) {
-            $args = array(array());
-        }
-        $this->query->raw($query, $this->dependsOn(), ...$args);
+        
+        $this->query->raw($query, $this->dependsOn(), $args);
         
         return $this;
     }
@@ -1015,7 +1011,7 @@ GREMLIN;
     }
 
     public function hasParent($parentClass, $ins = array()) {
-        $this->query->hasParent();
+        $this->query->hasParent($parentClass, $ins);
 
         return $this;
     }
@@ -1364,7 +1360,7 @@ GREMLIN;
     }
 
     public function goToNamespace() {
-        $this->goToNamespace();
+        $this->query->goToNamespace();
         
         return $this;
     }
@@ -1400,14 +1396,14 @@ GREMLIN;
     }
     
     public function fetchContext($context = self::CONTEXT_OUTSIDE_CLOSURE) {
-        $this->query->fetchContext($self);
+        $this->query->fetchContext($context);
         
         return $this;
     }
     
     // Calculate The lenght of a string in a property, and report it in the named string
     public function getStringLength($property = 'noDelimiter', $variable = 'l') {
-        $this->getStringLength($property, $variable);
+        $this->query->getStringLength($property, $variable);
 
         return $this;
     }
