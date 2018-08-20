@@ -74,10 +74,12 @@ abstract class DSL {
     protected function assertAtom($atom) {
         if (is_string($atom)) {
             assert($atom !== 'Property', 'Property is no more');
+            assert(is_string($atom), 'Elements of the array must be a string');
             assert($atom === ucfirst(mb_strtolower($atom)), "Wrong format for atom name : '$atom");
         } else {
             foreach($atom as $a) {
                 assert($a !== 'Property', 'Property is no more');
+                assert(is_string($a), 'Elements of the array must be a string');
                 assert($a === ucfirst(mb_strtolower($a)), "Wrong format for atom name : '$a'");
             }
         }

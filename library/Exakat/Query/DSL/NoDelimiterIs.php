@@ -31,6 +31,7 @@ class noDelimiterIs extends DSL {
 
         $return = new Command('hasLabel("String")');
         $propertyIs = DSL::factory('propertyIs');
+        $code = makeArray($code);
         
         return $return->add($propertyIs->run('noDelimiter', $code, $caseSensitive));
     }

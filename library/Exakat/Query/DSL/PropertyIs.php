@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2018 Damien Seguy â€“ Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy Ð Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -35,18 +35,18 @@ class PropertyIs extends DSL {
         if (is_array($code) && empty($code) ) {
             return new Command(Query::NO_QUERY);
         }
-
+        
         if ($caseSensitive === Analyzer::CASE_SENSITIVE) {
             $caseSensitive = '';
         } else {
             $this->tolowercase($code);
             $caseSensitive = '.toLowerCase()';
         }
-        
+
         if (is_array($code)) {
-            return new Command('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', array($code));
+            return new Command('filter{ it.get().value("'.$property.'")'.$caseSensitive.' in ***; }', array(makeArray($code)));
         } else {
-            return new Command('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', array($code));
+            return new Command('filter{it.get().value("'.$property.'")'.$caseSensitive.' == ***}', array(makeArray($code)));
         }
     }
 }

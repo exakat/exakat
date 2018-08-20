@@ -27,7 +27,7 @@ class HasFunction extends DSL {
     public function run() : Command {
         $return = DSL::factory('hasInstruction');
         
-        return $return->run(array('Function', 'Closure'));
+        return $return->run(array('Function', 'Closure', 'Method', 'Magicmethod'));
     }
 }
 ?>

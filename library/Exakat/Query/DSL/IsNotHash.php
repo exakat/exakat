@@ -36,7 +36,7 @@ class IsNotHash extends DSL {
 
         assert($this->assertProperty($property));
         
-        return new Command("filter{ (!it.get().value(\"$property\") in ***[$index]) }", array($hash));
+        return new Command("filter{ !(it.get().value(\"$property\") in ***[$index]); }", array($hash));
     }
 }
 ?>

@@ -47,7 +47,7 @@ sideEffect{
 
 GREMLIN;
 
-        $gremlin = str_replace(array('PROPERTY', 'VARIABLE'), array($property, $variable), $query);
+        $gremlin = str_replace(array('PROPERTY', 'VARIABLE'), array($property, $variable), $gremlin);
 
         return new Command($gremlin);
     }

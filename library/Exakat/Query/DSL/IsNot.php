@@ -39,7 +39,7 @@ class isNot extends DSL {
         } elseif ($value === false) {
             return new Command('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
         } elseif (is_int($value)) {
-            return new Command('not(has("'.$property.'", ***))', $value);
+            return new Command('not(has("'.$property.'", ***))', array($value));
         } elseif (is_string($value)) {
             if (empty($value)) {
                 return new Command('not(has("'.$property.'", ""))');

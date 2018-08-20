@@ -36,11 +36,11 @@ class Query {
     private $analyzer   = null;
     private $php        = null;
     
-    private $methods          = array('as("first")');
+//    private $methods          = array('as("first")');
+    private $commands         = array();
     private $arguments        = array();
     private $query            = null;
 
-    private $commands         = array();
     
     public function __construct($id, $project, $analyzer, $php) {
         $this->id       = $id;
@@ -49,12 +49,7 @@ class Query {
         $this->php      = $php;
     }
 
-    public function stopQuery() {
-        $this->methods[] = self::STOP_QUERY;
-    }
-    
     public function __call($name, $args) {
-//        print "  Calling $name\n";
         try {
             $command = DSL::factory($name);
             $this->commands[] = $command->run(...$args);
@@ -100,6 +95,7 @@ class Query {
 
         // @doc This is when the object is a placeholder for others.
         if (empty($this->commands)) {
+            print "EMPTY";
             return true;
         }
 
@@ -124,7 +120,7 @@ class Query {
             array_shift($commands); 
             $arg0 = $this->commands[0]->arguments;
             unset($this->commands[0]);
-            $query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())';
+            $this->query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())';
             if (!empty($commands)) {
                 $this->query .= '.'.implode(".\n", $commands);
             }
@@ -148,16 +144,17 @@ GREMLIN;
         assert(!empty($this->analyzerId), "The analyzer Id for {$this->analyzerId} wasn't set. Can't save results.");
         
 //        print_r($this);
-        assert(count($this->methods) == 1, "Query::\$methods is not empty\n".print_r($this->methods, true));
     }
     
     public function prepareRawQuery() {
-        $this->query = implode('.', $this->methods);
-        $this->query = 'g.V().'.
-                 $this->query.
-                 '
-// Query (#'.$this->id.') for '.$this->analyzer.'
-// php '.$this->php." analyze -p ".$this->project.' -P '.$this->analyzer." -v".PHP_EOL;
+        $commands = array_column($this->commands, 'gremlin');
+        $commands = implode('.', $commands);
+        $this->arguments = array_merge(...array_column($this->commands, 'arguments'));
+
+        $this->query = "g.V().$commands
+
+// Query (#{$this->id}) for {$this->analyzer}
+// php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v\n";
 
     }
     

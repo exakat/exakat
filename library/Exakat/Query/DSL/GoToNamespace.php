@@ -27,7 +27,7 @@ class GoToNamespace extends DSL {
     public function run() : Command {
         $return = DSL::factory('goToInstruction');
 
-        return $return->run(array(array('Namespace', 'Php')));
+        return $return->run(array('Namespace', 'Php'));
     }
 }
 ?>

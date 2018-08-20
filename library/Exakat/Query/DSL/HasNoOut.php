@@ -35,9 +35,9 @@ class HasNoOut extends DSL {
         $links = makeArray($link);
         $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
-            return new Command(Query::STOP_QUERY);
+            return new Command(Query::NO_QUERY);
         } else {
-            return new Command('not( where( __.out('.$this->SorA($link).') ) )');
+            return new Command('not( where( __.out('.$this->SorA($diff).') ) )');
         }
     }
 }

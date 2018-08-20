@@ -44,9 +44,9 @@ class PropertyIsNot extends DSL {
         }
         
         if (is_array($code)) {
-            return new Command('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in ***); }', $code);
+            return new Command('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in ***); }', array($code));
         } else {
-            return new Command('filter{it.get().value("'.$property.'")'.$caseSensitive.' != ***}', $code);
+            return new Command('filter{it.get().value("'.$property.'")'.$caseSensitive.' != ***}', array($code));
         }
     }
 }

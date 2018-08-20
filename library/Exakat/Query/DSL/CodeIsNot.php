@@ -49,7 +49,7 @@ class codeIsNot extends DSL {
         
             return new Command("filter{ !(it.get().value(\"$col\") in ***); }", array($translatedCode));
         } else {
-            return new Command("filter{ !(it.get().value(\"$col\") in ***); }", makeArray($code));
+            return new Command("filter{ !(it.get().value(\"$col\") in ***); }", array(makeArray($code)));
         }
     }
 }

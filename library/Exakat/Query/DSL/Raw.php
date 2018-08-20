@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class raw extends DSL {
+class Raw extends DSL {
     public function run() {
         list($query, $dependencies, $args) = func_get_args();
 

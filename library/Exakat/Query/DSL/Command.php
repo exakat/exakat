@@ -31,15 +31,15 @@ class Command {
     function __construct($command, $args = array()) {
         $c = substr_count($command, '***');
         
-        
         assert(is_array($args), "Args is not an array : ($command).".print_r($args, true));
         assert($c === count($args), "Wrong number of arguments for Command : $c placeholders, ".count($args). " provided. ($command)");
 
         $arguments = array();
-        for($i = 0; $i < $c; $i++) {
+        foreach($args as $arg) {
             ++self::$id;
-            $arguments['arg'.self::$id] = $args[$i];
+            $arguments['arg'.self::$id] = $arg;
         }
+//        var_dump($arguments);
         $command = str_replace(array('%', '***'), array('%%', '%s'), $command);
         $command = sprintf($command, ...array_keys($arguments));
         

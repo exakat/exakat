@@ -36,7 +36,7 @@ class RegexIsNot extends DSL {
                 return new Command(Query::NO_QUERY);
             }
             
-            return new Command('not( has("code", within(***) ) )', $values);
+            return new Command('not( has("code", within(***) ) )', array($values));
         } 
         
         return new Command(<<<GREMLIN

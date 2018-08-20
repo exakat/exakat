@@ -31,13 +31,13 @@ class HasInstruction extends DSL {
     public function run() {
         list($atom) = func_get_args();
 
-        assert($this->assertAtom($atom));
+        $diff = $this->checkAtoms($atom);
         return new Command(<<<GREMLIN
 where( 
 __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit( ).hasLabel(within(***))
     )
 GREMLIN
-, array(makeArray($atom)) );
+, array($diff) );
     }
 }
 ?>

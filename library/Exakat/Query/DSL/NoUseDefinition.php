@@ -28,8 +28,6 @@ use Exakat\Analyzer\Analyzer;
 
 class NoUseDefinition extends DSL {
     public function run() {
-        list($type) = func_get_args();
-
         return new Command('not( where(__.out("DEFINITION").in("USE").hasLabel("Use")) )');
     }
 }

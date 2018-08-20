@@ -23,11 +23,11 @@
 
 namespace Exakat\Query\DSL;
 
-class FullcodeVariableIs extends DSL {
+class Filter extends DSL {
     public function run() : Command {
         list($filter, $arguments) = func_get_args();
 
-        return new Command("filter{ $filter }", array(makeArray($arguments)) );
+        return new Command("filter{ $filter }", $arguments );
     }
 }
 ?>

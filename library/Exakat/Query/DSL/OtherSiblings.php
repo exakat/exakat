@@ -23,6 +23,8 @@
 
 namespace Exakat\Query\DSL;
 
+use Exakat\Analyzer\Analyzer;
+
 class OtherSiblings extends DSL {
     public function run() : Command {
         list($link, $self) = func_get_args();

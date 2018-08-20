@@ -28,8 +28,7 @@ class CodeLength extends DSL {
         list($values) = func_get_args();
 
         if (empty($values)) {
-            new Command(Query::STOP_QUERY);
-            return $this;
+            return new Command(Query::STOP_QUERY);
         }
 
         return new Command('has("code", within(***))', array(makeArray($values)));

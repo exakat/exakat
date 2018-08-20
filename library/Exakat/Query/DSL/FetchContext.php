@@ -25,8 +25,9 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class back extends DSL {
+class FetchContext extends DSL {
     public function run() {
+        $linksDown = self::$linksDown;
         $gremlin = <<<GREMLIN
 as("context")
 .sideEffect{ line = it.get().value("line");
@@ -38,7 +39,7 @@ as("context")
              }
 .sideEffect{ line = it.get().value("line"); }
 .until( hasLabel("File") ).repeat( 
-    __.in($this->linksDown)
+    __.in($linksDown)
       .sideEffect{ if (it.get().label() == "Function") { theFunction = it.get().value("code")} }
       .sideEffect{ if (it.get().label() in ["Class"]) { theClass = it.get().value("fullcode")} }
       .sideEffect{ if (it.get().label() in ["Namespace"]) { theNamespace = it.get().vertices(OUT, "NAME").next().value("fullcode")} }

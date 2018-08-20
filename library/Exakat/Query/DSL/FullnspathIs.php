@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 
 class FullnspathIs extends DSL {
     public function run() {
-        list($code) = func_get_args();
+        list($code, $caseSensitive) = func_get_args();
 
         $has = DSL::factory('has');
         $return = $has->run('fullnspath');
@@ -36,8 +36,7 @@ class FullnspathIs extends DSL {
         $propertyIs = DSL::factory('propertyIs');
         $code = makeArray($code);
         
-        $return->add($propertyIs->run('fullnspath', $code, Analyzer::CASE_SENSITIVE));
-        return $return;
+        return $return->add($propertyIs->run('fullnspath', $code, $caseSensitive));
     }
 }
 ?>

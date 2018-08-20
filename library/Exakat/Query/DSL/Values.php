@@ -27,7 +27,7 @@ class Values extends DSL {
     public function run() : Command {
         list($property) = func_get_args();
 
-        return new Command("values(\"$property\")", array(makeArray($property)));
+        return new Command("values(\"$property\")");
     }
 }
 ?>

@@ -36,7 +36,7 @@ class RegexIs extends DSL {
                 return new Command(Query::NO_QUERY);
             }
             
-            return new Command('has("code", within(***) )', $values);
+            return new Command('has("code", within(***) )', array($values));
         } 
         
         return new Command(<<<GREMLIN

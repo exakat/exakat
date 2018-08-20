@@ -24,6 +24,7 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
 
 class FunctioncallIs extends DSL {
     public function run() {
@@ -46,7 +47,7 @@ class FunctioncallIs extends DSL {
         $return->add($has->run('fullnspath'));
 
         $fullnspathIs = DSL::factory('fullnspathIs');
-        $return->add($fullnspathIs->run(array_values($diff)));
+        $return->add($fullnspathIs->run(array_values($diff), Analyzer::CASE_INSENSITIVE));
 
         return $return;
     }

@@ -28,11 +28,15 @@ use Exakat\Analyzer\Analyzer;
 
 class HasParent extends DSL {
     public function run() : Command {
+        list($parentClass, $ins) = func_get_args();
+        
         $diff = $this->checkAtoms($parentClass);
         
         if (empty($diff)){
             return new Command(Query::STOP_QUERY);
         }
+
+        $in = $this->makeLinks($ins, 'in');
 
         return new Command("where( __$in.hasLabel(within(***)))", array($diff));
     }
