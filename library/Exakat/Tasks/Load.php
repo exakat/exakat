@@ -2314,8 +2314,17 @@ class Load extends Tasks {
             $string = $this->addAtom('Name');
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
             $string = $this->addAtom('Name');
-        } elseif (!$this->isContext(self::CONTEXT_NOSEQUENCE) &&
+        } elseif ($this->sequenceRank[$this->sequenceCurrentRank] === -1 &&
                   in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
+                                                                  $this->phptokens::T_OPEN_CURLY,
+                                                                  $this->phptokens::T_CLOSE_CURLY,
+                                                                  $this->phptokens::T_COLON,
+                                                                  $this->phptokens::T_OPEN_TAG,
+                                                                  )) &&
+                  $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON
+                 ) {
+            return $this->processColon();
+        } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
                                                                   $this->phptokens::T_OPEN_CURLY,
                                                                   $this->phptokens::T_CLOSE_CURLY,
                                                                   $this->phptokens::T_COLON,
@@ -2323,7 +2332,7 @@ class Load extends Tasks {
                                                                   )) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
             return $this->processColon();
-        } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
+         } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $string = $this->addAtom('Boolean');
 
             $string->noDelimiter = mb_strtolower($string->code) === 'true' ? 1 : '';
@@ -3431,33 +3440,64 @@ class Load extends Tasks {
         $condition = $this->popExpression();
         $ternary = $this->addAtom('Ternary');
 
-        $this->nestContext();
-        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COLON)) ) {
-            $this->processNext();
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING && 
+            $this->tokens[$this->id + 2][0] === $this->phptokens::T_COLON) {
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'))) {
+                ++$this->id;
+                $then = $this->processSingle('Boolean');
+                $this->popExpression();
+            } elseif (mb_strtolower($this->tokens[$this->id + 1][1]) === 'null') {
+                ++$this->id;
+                $then = $this->processSingle('Null');
+                $this->popExpression();
+            } else {
+                $then = $this->processNextAsIdentifier();
+            }
+        } else {
+            $this->nestContext();
+            while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COLON)) ) {
+                $this->processNext();
+            }
+            $this->exitContext();
+            $then = $this->popExpression();
         }
-        $this->exitContext();
-        $then = $this->popExpression();
+
         ++$this->id; // Skip colon
 
-        $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals[] = $this->phptokens::T_COLON; // Added from nested Ternary
-        $finals[] = $this->phptokens::T_CLOSE_TAG;
-
-        $this->nestContext();
-        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
-        if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING && 
+            $this->tokens[$this->id + 2][0] === $this->phptokens::T_COLON) {
+            if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'))) {
+                ++$this->id;
+                $then = $this->processSingle('Boolean');
+                $this->popExpression();
+            } elseif (mb_strtolower($this->tokens[$this->id + 1][1]) === 'null') {
+                ++$this->id;
+                $then = $this->processSingle('Null');
+                $this->popExpression();
+            } else {
+                $then = $this->processNextAsIdentifier();
+            }
+        } else {
+            $finals = $this->precedence->get($this->tokens[$this->id][0]);
+            $finals[] = $this->phptokens::T_COLON; // Added from nested Ternary
+            $finals[] = $this->phptokens::T_CLOSE_TAG;
+    
+            $this->nestContext();
+            $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+            if ($noSequence === false) {
+                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            }
+            do {
+                $this->processNext();
+            } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
+            if ($noSequence === false) {
+                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            }
+            $this->exitContext();
+            
+            $else = $this->popExpression();
         }
-        do {
-            $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
-        if ($noSequence === false) {
-            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
-        }
-        $this->exitContext();
-
-        $else = $this->popExpression();
-
+        
         $this->addLink($ternary, $condition, 'CONDITION');
         $this->addLink($ternary, $then, 'THEN');
         $this->addLink($ternary, $else, 'ELSE');
@@ -3676,7 +3716,11 @@ class Load extends Tasks {
             $alias = $namespace;
             $origin = $namespace;
             
-            $fullnspath = mb_strtolower($namespace->fullcode);
+            if ($useType === 'const') {
+                $fullnspath = $namespace->fullcode;
+            } else {
+                $fullnspath = mb_strtolower($namespace->fullcode);
+            }
             if ($fullnspath[0] !== '\\') {
                 list($prefix, ) = explode('\\', $fullnspath);
                 $fullnspath = '\\'.$fullnspath;
