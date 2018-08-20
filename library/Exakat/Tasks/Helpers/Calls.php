@@ -85,10 +85,10 @@ SQL;
 
         // No need for This
         if (in_array($call->atom, array('Parent',
-                                        'Isset', 
-                                        'List', 
-                                        'Empty', 
-                                        'Eval', 
+                                        'Isset',
+                                        'List',
+                                        'Empty',
+                                        'Eval',
                                         'Exit',
                                         ))) {
             return;

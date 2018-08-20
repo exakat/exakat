@@ -126,13 +126,13 @@ class Anonymize extends Tasks {
             return false;
         }
 
-        $checks = array('T_TRAIT', 
-                        'T_FINALLY', 
-                        'T_YIELD', 
-                        'T_YIELD_FROM', 
-                        'T_COALESCE', 
-                        'T_CHARACTER', 
-                        'T_BAD_CHARACTER', 
+        $checks = array('T_TRAIT',
+                        'T_FINALLY',
+                        'T_YIELD',
+                        'T_YIELD_FROM',
+                        'T_COALESCE',
+                        'T_CHARACTER',
+                        'T_BAD_CHARACTER',
                         'T_SPACESHIP',
                         );
         foreach($checks as $check) {

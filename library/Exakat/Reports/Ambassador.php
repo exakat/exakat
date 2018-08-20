@@ -89,7 +89,7 @@ class Ambassador extends Reports {
         return array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                      'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73', //'CompatibilityPHP74',
                      'Analyze', 'Preferences', 'Inventory', 'Performances',
-                     'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Suggestions', 'ClassReview', 
+                     'Appinfo', 'Appcontent', 'Dead code', 'Security', 'Suggestions', 'ClassReview',
                      'Custom',
                      );
     }
