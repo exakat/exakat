@@ -29,7 +29,8 @@ class SlimMissing extends Analyzer {
     protected $version = '3.8';
     
     public function dependsOn() {
-        return array('Slim/UseSlim');
+        return array('Slim/UseSlim',
+                    );
     }
     
     public function analyze() {
@@ -39,8 +40,7 @@ class SlimMissing extends Analyzer {
         $classes = makeFullnspath($classes);
         
         $this->analyzerIs('Slim/UseSlim')
-             ->fullnspathIsNot($classes)
-             ->back('first');
+             ->fullnspathIsNot($classes);
         $this->prepareQuery();
     }
 }

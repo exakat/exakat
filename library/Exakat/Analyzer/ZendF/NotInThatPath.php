@@ -35,7 +35,7 @@ class NotInThatPath extends Analyzer {
         // No Zend_Auth in .phtml
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->fullnspathIs('\\Zend_Auth')
+             ->fullnspathIs('\\zend_auth')
              ->goToFile()
              ->regexIs('fullcode', '\\\\.phtml\\$')
              ->back('first');

@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class SwitchWithoutDefault extends Analyzer {
     public function analyze() {
+        // switch($x) { case 4 : break; }
         $this->atomIs('Switch')
              ->outIs('CASES')
              ->noAtomInside('Default')

@@ -32,7 +32,7 @@ class IsPhpConstant extends Analyzer {
 
         // Namespaced constant (\PATHINFO_BASENAME)
         $this->atomIs(array('Identifier', 'Nsname'))
-             ->fullnspathIs($constantsFNP);
+             ->fullnspathIs($constantsFNP, self::CASE_SENSITIVE);
         $this->prepareQuery();
 
         // inside Use

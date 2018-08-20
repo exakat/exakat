@@ -52,9 +52,8 @@ class DynamicCode extends Analyzer {
         //$classname::methodcall();
         $this->atomIs('Staticmethodcall')
              ->outIs(array('CLASS', 'METHOD'))
-             ->outIsIE('NAME')
              ->tokenIsNot(self::$STATICCALL_TOKEN)
-             ->codeIsNot(array('self', 'parent'))
+             ->codeIsNot(array('self', 'parent', 'static'))
              ->back('first');
         $this->prepareQuery();
 

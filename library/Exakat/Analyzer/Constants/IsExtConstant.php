@@ -47,7 +47,7 @@ class IsExtConstant extends Analyzer {
             }
         }
         $constants = call_user_func_array('array_merge', $c);
-        $constantsFullNs = makeFullNsPath($constants);
+        $constantsFullNs = makeFullNsPath($constants, true);
         
         // based on full ns path
         $this->analyzerIs('Constants/ConstantUsage')
@@ -57,7 +57,7 @@ class IsExtConstant extends Analyzer {
 
         $this->analyzerIs('Constants/ConstantUsage')
              ->analyzerIs('Constants/IsGlobalConstant')
-             ->fullnspathIs(makeFullNsPath($constants));
+             ->fullnspathIs($constantsFullNs);
         $this->prepareQuery();
     }
 }

@@ -31,7 +31,8 @@ class Zf3ComponentMissing extends Analyzer {
     protected $version = '2.5';
     
     public function dependsOn() {
-        return array('ZendF/Zf3Mvc25');
+        return array('ZendF/Zf3Mvc25',
+                    );
     }
     
     public function analyze() {

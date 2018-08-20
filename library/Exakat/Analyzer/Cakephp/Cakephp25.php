@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class Cakephp25 extends CakePHPMissing {
     public function dependsOn() {
-        return array('Cakephp/CakePHPUsed');
+        return array('Cakephp/CakePHPUsed',
+                    );
     }
 
     public function analyze() {

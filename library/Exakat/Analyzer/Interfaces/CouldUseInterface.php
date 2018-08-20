@@ -65,23 +65,29 @@ where(
 )
 GREMLIN
 )
-             ->filter(<<<GREMLIN
-a = false;
-i.each{ n, e ->
-    if (x.intersect(e) == e) {
-        a = true;
-        fnp = n;
+             ->raw(<<<GREMLIN
+filter{
+    a = false;
+    i.each{ n, e ->
+        if (x.intersect(e) == e) {
+            a = true;
+            fnp = n;
+        }
     }
+    
+    a;
 }
-
-a;
 
 GREMLIN
 )
                 ->raw(<<<GREMLIN
-not( where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
+not( 
+    where( 
+        __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
               .hasLabel("Interface", "Class")
-              .filter{ it.get().value("fullnspath") == fnp; } ) )
+              .filter{ it.get().value("fullnspath") == fnp; } 
+          ) 
+    )
 GREMLIN
 )
                 ->back('first');

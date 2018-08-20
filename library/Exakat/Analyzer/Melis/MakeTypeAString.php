@@ -32,7 +32,7 @@ class MakeTypeAString extends Analyzer {
     )
     */
         $this->atomIs('String')
-             ->noDelimiterIs('conf')
+             ->noDelimiterIs('conf', self::CASE_SENSITIVE)
              ->inIs('INDEX')
              ->outIs('VALUE')
              ->atomIs('Arrayliteral')
@@ -41,7 +41,8 @@ class MakeTypeAString extends Analyzer {
              ->noDelimiterIs('type')
              ->inIs('INDEX')
              ->outIs('VALUE')
-             ->atomIsNot(array('String', 'Identifier', 'Nsname', 'Staticconstant'));
+             ->atomIsNot(array('String', 'Identifier', 'Nsname', 'Staticconstant'))
+             ;
         $this->prepareQuery();
 
     /*

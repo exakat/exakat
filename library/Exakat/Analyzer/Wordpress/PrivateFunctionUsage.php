@@ -27,14 +27,14 @@ use Exakat\Analyzer\Analyzer;
 class PrivateFunctionUsage extends Analyzer {
     public function analyze() {
         $functions = $this->loadIni('wp_private_functions.ini', 'functions');
-        
+
         $this->atomIs(array('String', 'Heredoc', 'Nowdoc', 'Concatenation'))
              ->noDelimiterIs($functions);
         $this->prepareQuery();
 
         // functioncall : preview_theme_ob_filter_callback
-        $functions = makeFullNsPath($functions);
-        $this->atomFunctionIs($functions);
+        $functionsFNP = makeFullNsPath($functions);
+        $this->atomFunctionIs($functionsFNP);
         $this->prepareQuery();
         
     }

@@ -26,7 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class Zf3Xmlrpc25 extends Zf3ComponentMissing {
     public function dependsOn() {
-        return array('ZendF/Zf3Xmlrpc');
+        return array('ZendF/Zf3Xmlrpc',
+                    );
     }
 
     public function analyze() {

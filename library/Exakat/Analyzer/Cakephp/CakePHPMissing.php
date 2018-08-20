@@ -38,7 +38,7 @@ class CakePHPMissing extends Analyzer {
     }
     
     public function analyze() {
-        $data = new CakePHP($this->config->dir_root.'/data', $this->config->is_phar);
+        $data = new CakePHP("{$this->config->dir_root}/data", $this->config->is_phar);
 
         $classes    = $data->getClasses($this->component, $this->version);
         if (empty($classes)) {

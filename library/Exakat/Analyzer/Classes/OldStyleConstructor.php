@@ -31,11 +31,11 @@ class OldStyleConstructor extends Analyzer {
         
         // No __construct found
         if (empty($__construct)) {
-            $hasNo__construct = 'filter{ true; }';
+            // x = *** is useless, but ensure consistency with the alternative
+            $hasNo__construct = 'filter{ x = ***; true; }';
         } else {
             $hasNo__construct = 'not( where( __.out("MAGICMETHOD").out("NAME").filter{ it.get().value("lccode") in ***} ) )';
         }
-
 
         // No mentionned namespaces
         $this->atomIs('Class')

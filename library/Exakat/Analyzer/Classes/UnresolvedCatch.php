@@ -27,14 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class UnresolvedCatch extends Analyzer {
     public function dependsOn() {
-        return array('Exceptions/DefinedExceptions');
+        return array('Exceptions/DefinedExceptions',
+                    );
     }
 
     public function analyze() {
         $exceptions = $this->loadIni('php_exception.ini', 'classes');
         $exceptions[] = '\throwable';
         $exceptions = makeFullNsPath($exceptions);
-        
+
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))

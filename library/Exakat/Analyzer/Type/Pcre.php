@@ -29,15 +29,15 @@ class Pcre extends Analyzer {
     public function analyze() {
         $atoms = array('String', 'Concatenation');
         
-        $delimiters = array('\\$' => '\\$',
-                            '#'   => '#',
-                            '~'   => '~',
-                            '%'   => '%',
-                            '/'   => '/',
+        $delimiters = array('\\$'     => '\\$',
+                            '#'       => '#',
+                            '~'       => '~',
+                            '%'       => '%',
+                            '/'       => '/',
                             '\\\\{'   => '\\\\}',
                             '\\\\('   => '\\\\)',
-                            '\\"'   => '\\"',
-                            "'"   => "'",
+                            '\\"'     => '\\"',
+                            "'"       => "'",
                             );
         
         foreach($delimiters as $in => $out) {

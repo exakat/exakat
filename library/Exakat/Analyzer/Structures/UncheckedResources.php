@@ -43,7 +43,7 @@ class UncheckedResources extends Analyzer {
                 // readdir(opendir('uncheckedDir4'));
                 $this->atomFunctionIs($creation)
                      ->inIs('ARGUMENT')
-                     ->hasNoIn('METHOD')
+                     ->atomIs('Functioncall')
                      ->fullnspathIs($functions);
                 $this->prepareQuery();
 
