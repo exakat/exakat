@@ -23,7 +23,7 @@
 namespace Exakat\Tasks\Helpers;
 
 
-class Php71 {
+class Php71 extends Php {
 
 // Exakat home-made tokens
     const T_BANG                         = '!';

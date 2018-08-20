@@ -23,14 +23,14 @@
 namespace Exakat\Tasks\Helpers;
 
 
-class Php72 extends Php {
+class Php74 extends Php {
 
     // PHP tokens
-    const T_REQUIRE_ONCE                  = 262;
-    const T_REQUIRE                       = 261;
+    const T_INCLUDE                       = 262;
+    const T_INCLUDE_ONCE                  = 261;
     const T_EVAL                          = 260;
-    const T_INCLUDE_ONCE                  = 259;
-    const T_INCLUDE                       = 258;
+    const T_REQUIRE                       = 259;
+    const T_REQUIRE_ONCE                  = 258;
     const T_LOGICAL_OR                    = 263;
     const T_LOGICAL_XOR                   = 264;
     const T_LOGICAL_AND                   = 265;
@@ -38,52 +38,52 @@ class Php72 extends Php {
     const T_YIELD                         = 267;
     const T_DOUBLE_ARROW                  = 268;
     const T_YIELD_FROM                    = 269;
-    const T_POW_EQUAL                     = 281;
-    const T_SR_EQUAL                      = 280;
-    const T_SL_EQUAL                      = 279;
-    const T_XOR_EQUAL                     = 278;
-    const T_OR_EQUAL                      = 277;
-    const T_AND_EQUAL                     = 276;
-    const T_MOD_EQUAL                     = 275;
-    const T_CONCAT_EQUAL                  = 274;
-    const T_DIV_EQUAL                     = 273;
-    const T_MUL_EQUAL                     = 272;
-    const T_MINUS_EQUAL                   = 271;
-    const T_PLUS_EQUAL                    = 270;
+    const T_PLUS_EQUAL                    = 281;
+    const T_MINUS_EQUAL                   = 280;
+    const T_MUL_EQUAL                     = 279;
+    const T_DIV_EQUAL                     = 278;
+    const T_CONCAT_EQUAL                  = 277;
+    const T_MOD_EQUAL                     = 276;
+    const T_AND_EQUAL                     = 275;
+    const T_OR_EQUAL                      = 274;
+    const T_XOR_EQUAL                     = 273;
+    const T_SL_EQUAL                      = 272;
+    const T_SR_EQUAL                      = 271;
+    const T_POW_EQUAL                     = 270;
     const T_COALESCE                      = 282;
     const T_BOOLEAN_OR                    = 283;
     const T_BOOLEAN_AND                   = 284;
-    const T_SPACESHIP                     = 289;
-    const T_IS_NOT_IDENTICAL              = 288;
+    const T_IS_EQUAL                      = 289;
+    const T_IS_NOT_EQUAL                  = 288;
     const T_IS_IDENTICAL                  = 287;
-    const T_IS_NOT_EQUAL                  = 286;
-    const T_IS_EQUAL                      = 285;
-    const T_IS_GREATER_OR_EQUAL           = 291;
-    const T_IS_SMALLER_OR_EQUAL           = 290;
-    const T_SR                            = 293;
-    const T_SL                            = 292;
+    const T_IS_NOT_IDENTICAL              = 286;
+    const T_SPACESHIP                     = 285;
+    const T_IS_SMALLER_OR_EQUAL           = 291;
+    const T_IS_GREATER_OR_EQUAL           = 290;
+    const T_SL                            = 293;
+    const T_SR                            = 292;
     const T_INSTANCEOF                    = 294;
-    const T_UNSET_CAST                    = 303;
-    const T_BOOL_CAST                     = 302;
-    const T_OBJECT_CAST                   = 301;
-    const T_ARRAY_CAST                    = 300;
+    const T_INC                           = 303;
+    const T_DEC                           = 302;
+    const T_INT_CAST                      = 301;
+    const T_DOUBLE_CAST                   = 300;
     const T_STRING_CAST                   = 299;
-    const T_DOUBLE_CAST                   = 298;
-    const T_INT_CAST                      = 297;
-    const T_DEC                           = 296;
-    const T_INC                           = 295;
+    const T_ARRAY_CAST                    = 298;
+    const T_OBJECT_CAST                   = 297;
+    const T_BOOL_CAST                     = 296;
+    const T_UNSET_CAST                    = 295;
     const T_POW                           = 304;
-    const T_CLONE                         = 306;
-    const T_NEW                           = 305;
+    const T_NEW                           = 306;
+    const T_CLONE                         = 305;
     const T_ELSEIF                        = 308;
     const T_ELSE                          = 309;
     const T_ENDIF                         = 310;
-    const T_PUBLIC                        = 316;
-    const T_PROTECTED                     = 315;
-    const T_PRIVATE                       = 314;
-    const T_FINAL                         = 313;
-    const T_ABSTRACT                      = 312;
-    const T_STATIC                        = 311;
+    const T_STATIC                        = 316;
+    const T_ABSTRACT                      = 315;
+    const T_FINAL                         = 314;
+    const T_PRIVATE                       = 313;
+    const T_PROTECTED                     = 312;
+    const T_PUBLIC                        = 311;
     const T_LNUMBER                       = 317;
     const T_DNUMBER                       = 318;
     const T_STRING                        = 319;
@@ -160,6 +160,6 @@ class Php72 extends Php {
     const T_NS_SEPARATOR                  = 390;
     const T_ELLIPSIS                      = 391;
     const T_DOUBLE_COLON                  = 387;
-}
 
+}
 ?>
