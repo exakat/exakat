@@ -44,6 +44,7 @@ use Exakat\Tasks\Helpers\Nullval;
 use Exakat\Tasks\Helpers\Constant;
 use Exakat\Tasks\Helpers\Precedence;
 use Exakat\Tasks\Helpers\CloneType1;
+use Exakat\Tasks\Helpers\Php;
 
 class Load extends Tasks {
     const CONCURENCE = self::NONE;
@@ -208,8 +209,14 @@ class Load extends Tasks {
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
 
-        $className = '\Exakat\Tasks\Helpers\Php'.$this->config->phpversion[0].$this->config->phpversion[2];
-        $this->phptokens  = new $className();
+        $this->atomGroup = new AtomGroup();
+
+        $this->php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
+        if (!$this->php->isValid()) {
+            throw new InvalidPHPBinary($this->php->getConfiguration('phpversion'));
+        }
+        $tokens = $this->php->getTokens();
+        $this->phptokens  = Php::getInstance($tokens);
 
         $this->assignations = array($this->phptokens::T_EQUAL,
                                     $this->phptokens::T_PLUS_EQUAL,
@@ -225,14 +232,6 @@ class Load extends Tasks {
                                     $this->phptokens::T_SR_EQUAL,
                                     $this->phptokens::T_XOR_EQUAL,
                                    );
-
-        $this->atomGroup = new AtomGroup();
-
-        $this->php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
-        if (!$this->php->isValid()) {
-            throw new InvalidPHPBinary($this->php->getConfiguration('phpversion'));
-        }
-        $this->php->getTokens();
         
         // Init all plugins here
         $this->plugins[] = new Boolval();
@@ -242,7 +241,7 @@ class Load extends Tasks {
         $this->plugins[] = new Constant($this->config);
         $this->plugins[] = new CloneType1();
 
-        $this->precedence = new Precedence($className);
+        $this->precedence = new Precedence(get_class($this->phptokens));
 
         $this->processing = array(
             $this->phptokens::T_OPEN_TAG                 => 'processOpenTag',
