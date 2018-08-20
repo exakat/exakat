@@ -48,7 +48,7 @@ emit().repeat( __.out("RIGHT").$follow )
                                .times($max_looping).coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
                                                               __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow)
 GREMLIN
-, array($minus, $minus))
+, $minus, $minus)
                  ->samePropertyAs('fullcode', 'operand', self::CASE_SENSITIVE)
                  ->back('first');
             $this->prepareQuery();
@@ -68,7 +68,7 @@ emit().repeat( __.out("RIGHT").$follow )
                                .times($max_looping).coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
                                                               __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow)
 GREMLIN
-, array($plus, $plus))
+, $plus, $plus)
                  ->samePropertyAs('fullcode', 'operand', self::CASE_SENSITIVE)
                  ->back('first');
             $this->prepareQuery();

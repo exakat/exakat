@@ -45,8 +45,8 @@ SQL
         $results = array();
         // Only _ as difference
         foreach($variables as $variable) {
-            if (strpos($variable, '_') === false) { 
-                continue; 
+            if (strpos($variable, '_') === false) {
+                continue;
             }
             $v = str_replace('_', '', $variable);
             $r = array_filter( $variables, function($x) use ($v) { return str_replace('_', '', $x) === $v; });
