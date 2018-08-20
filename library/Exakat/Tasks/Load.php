@@ -1790,6 +1790,7 @@ class Load extends Tasks {
                                                             $this->phptokens::T_CALLABLE,
                                                             $this->phptokens::T_STATIC))) {
             $nsname = $this->processNextAsIdentifier();
+            $nsname->fullnspath = '\\'.mb_strtolower($nsname->code);
 
             return $nsname;
         }
@@ -3440,7 +3441,7 @@ class Load extends Tasks {
         $condition = $this->popExpression();
         $ternary = $this->addAtom('Ternary');
 
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING && 
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING &&
             $this->tokens[$this->id + 2][0] === $this->phptokens::T_COLON) {
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'))) {
                 ++$this->id;
@@ -3464,7 +3465,7 @@ class Load extends Tasks {
 
         ++$this->id; // Skip colon
 
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING && 
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_STRING &&
             $this->tokens[$this->id + 2][0] === $this->phptokens::T_COLON) {
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'))) {
                 ++$this->id;
