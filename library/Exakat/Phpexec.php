@@ -120,10 +120,11 @@ class Phpexec {
         // prepare the list of tokens
         if ($this->isCurrentVersion === true) {
             $x = get_defined_constants(true);
+            unset($x['tokenizer']['TOKEN_PARSE']);
             $tokens = array_flip($x['tokenizer']);
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
-            shell_exec($this->phpexec.' -r "print \'<?php \\$tokens = \'; \\$x = get_defined_constants(true); if (!isset(\\$x[\'tokenizer\'])) { \\$x[\'tokenizer\'] = array(); }; var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > '.$tmpFile);
+            shell_exec($this->phpexec.' -r "print \'<?php \\$tokens = \'; \\$x = get_defined_constants(true); if (!isset(\\$x[\'tokenizer\'])) { \\$x[\'tokenizer\'] = array(); }; unset(\\$x[\'tokenizer\'][\'TOKEN_PARSE\']); var_export(array_flip(\\$x[\'tokenizer\'])); print \';  ?>\';" > '.$tmpFile);
             include $tmpFile;
             unlink($tmpFile);
             if (empty($tokens)) {
