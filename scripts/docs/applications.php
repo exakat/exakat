@@ -37,6 +37,7 @@ $applications = array(
     'opencfp'                    => array('url' => 'https://github.com/opencfp/opencfp', ),
     'OpenConf'                   => array('url' => 'https://www.openconf.com/', ),
     'OpenEMR'                    => array('url' => 'https://www.open-emr.org/', ),
+    'phpadnsnew'                 => array('url' => 'http://freshmeat.sourceforge.net/projects/phpadsnew', ),
     'Phpdocumentor'              => array('url' => 'https://www.phpdoc.org/', ),
     'PhpIPAM'                    => array('url' => 'https://phpipam.net/download/', ),
     'Phinx'                      => array('url' => 'https://phinx.org/', ),

@@ -71,6 +71,7 @@ class Docs {
                              'Dead code',
                              'Coding Conventions',
                              'Suggestions',
+                             'ClassReview',
 
                              'Wordpress',
                              'Slim',
