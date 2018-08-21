@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class getNameInFNP extends DSL {
+class GetNameInFNP extends DSL {
     public function run() {
         list($variable) = func_get_args();
 

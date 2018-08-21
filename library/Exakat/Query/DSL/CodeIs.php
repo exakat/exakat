@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Dictionary;
 
-class codeIs extends DSL {
+class CodeIs extends DSL {
     protected $args = array('atom');
 
     public function run() {

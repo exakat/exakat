@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class noDelimiterIs extends DSL {
+class NoDelimiterIs extends DSL {
     public function run() {
         list($code, $caseSensitive) = func_get_args();
 

@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class isInCatchBlock extends DSL {
+class IsInCatchBlock extends DSL {
     public function run() : Command {
         return new Command('filter{ it.in.loop(1){it.object.atom != "Catch"}{(it.object.atom == "Catch")}.any()');
     }

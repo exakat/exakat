@@ -27,7 +27,7 @@ use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Dictionary;
 
-class codeIsNot extends DSL {
+class CodeIsNot extends DSL {
     public function run() {
         list($code, $translate, $caseSensitive) = func_get_args();
 

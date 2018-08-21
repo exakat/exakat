@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class noAtomInside extends DSL {
+class NoAtomInside extends DSL {
     public function run() {
         list($atom) = func_get_args();
 

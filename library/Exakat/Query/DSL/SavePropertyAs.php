@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class savePropertyAs extends DSL {
+class SavePropertyAs extends DSL {
     public function run() {
         list($property, $name) = func_get_args();
 

@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class back extends DSL {
+class Back extends DSL {
     public function run() {
         list($name) = func_get_args();
 

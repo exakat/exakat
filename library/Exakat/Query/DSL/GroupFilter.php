@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class groupFilter extends DSL {
+class GroupFilter extends DSL {
     public function run() {
         list($characteristic, $percentage) = func_get_args();
 

@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class atomIsNot extends DSL {
+class AtomIsNot extends DSL {
     protected $args = array('atom');
 
     public function run() {

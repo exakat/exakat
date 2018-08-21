@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class hasNoCountedInstruction extends DSL {
+class HasNoCountedInstruction extends DSL {
     public function run() {
         list($atom, $count) = func_get_args();
 

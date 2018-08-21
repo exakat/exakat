@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class samePropertyAs extends DSL {
+class SamePropertyAs extends DSL {
     public function run() {
         list($property, $name, $caseSensitive) = func_get_args();
 

@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class atomInsideNoDefinition extends DSL {
+class AtomInsideNoDefinition extends DSL {
     public function run() : Command {
         list($atom) = func_get_args();
 

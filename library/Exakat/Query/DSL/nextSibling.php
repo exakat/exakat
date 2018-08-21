@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class nextSibling extends DSL {
+class NextSibling extends DSL {
     public function run() : Command {
         list($link) = func_get_args();
 
