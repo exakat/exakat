@@ -3468,14 +3468,14 @@ class Load extends Tasks {
             $this->tokens[$this->id + 2][0] === $this->phptokens::T_COLON) {
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'))) {
                 ++$this->id;
-                $then = $this->processSingle('Boolean');
+                $else = $this->processSingle('Boolean');
                 $this->popExpression();
             } elseif (mb_strtolower($this->tokens[$this->id + 1][1]) === 'null') {
                 ++$this->id;
-                $then = $this->processSingle('Null');
+                $else = $this->processSingle('Null');
                 $this->popExpression();
             } else {
-                $then = $this->processNextAsIdentifier();
+                $else = $this->processNextAsIdentifier();
             }
         } else {
             $finals = $this->precedence->get($this->tokens[$this->id][0]);
