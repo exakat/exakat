@@ -1,4 +1,4 @@
-Version 1.4.1 (Tang Sanzang, coming up)
+Version 1.4.2 (Zhu Bajie, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 1.4.1 (Tang Sanzang, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.4.1 (Tang Sanzang, 2018-08-20)
++ Architecture
+    + Spined off Query for Gremlin, with Exakat DSL.
+    + Centralized 'methods' property in Analyzer class
+    + Extended MAX_LOOPING usage
++ Analyzer
+    + Added new thema : Class Review
+    + Upgraded analysis : Defined Parent MP (less queries)
+    + Upgraded analysis : Less false positives
+    + Added support for PHP 7.2.9
+    + Checked unit tests : 2965 / 2980 test pass (99% pass). 
++ Tokenizer
+    + Fixed Edge case with Ternary and Boolean
+    + Added Staticpropertyname to distinguish from variables
+    + Added support for remote definitions to methods
+    + Removed global path for CIT (no fallback) 
 
 Version 1.4.0 (Sun Wu Kong, 2018-08-13)
 + Architecture
