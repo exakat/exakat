@@ -10,4 +10,6 @@
     }
 
     $ret = fix_string(array('Derick'));
+    S::xdebug_call_function(2);
+
 ?>

@@ -3,8 +3,8 @@
 $expected     = array(
                      );
 
-$expected_not = array('B\E',
-                      'B\D',
+$expected_not = array('B\\E',
+                      'B\\D',
                      );
 
 ?>
