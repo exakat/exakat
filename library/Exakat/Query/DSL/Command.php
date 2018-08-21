@@ -39,7 +39,7 @@ class Command {
             ++self::$id;
             $arguments['arg'.self::$id] = $arg;
         }
-//        var_dump($arguments);
+
         $command = str_replace(array('%', '***'), array('%%', '%s'), $command);
         $command = sprintf($command, ...array_keys($arguments));
         
