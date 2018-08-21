@@ -107,7 +107,6 @@ class Php {
         $versions = array('Php73', 'Php72', 'Php71', 'Php70', 'Php56', 'Php55',);
         
         foreach($versions as $version) {
-            print "$version\n";
             $errors = array();
             foreach($tokens as $k => $v) {
                 ++$total;
