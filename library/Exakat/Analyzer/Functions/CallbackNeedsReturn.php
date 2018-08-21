@@ -40,6 +40,7 @@ class CallbackNeedsReturn extends Analyzer {
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $rank)
                  ->inIs('DEFINITION')
+                 ->raw('not( where(__.out("ARGUMENT").has("reference", true)))')
                  ->outIs('BLOCK')
                  ->noAtomInside('Return')
                  ->back('first');
@@ -49,6 +50,7 @@ class CallbackNeedsReturn extends Analyzer {
             $this->atomFunctionIs($functions)
                  ->outWithRank('ARGUMENT', $rank)
                  ->atomIs('Closure')
+                 ->raw('not( where(__.out("ARGUMENT", "USE").has("reference", true)))')
                  ->outIs('BLOCK')
                  ->noAtomInside('Return')
                  ->back('first');
@@ -67,6 +69,7 @@ class CallbackNeedsReturn extends Analyzer {
                  ->inIs('DEFINITION')
                  ->outIs('METHOD')
                  ->is('static', true)
+                 ->raw('not( where(__.out("ARGUMENT").has("reference", true)))')
                  ->outIs('NAME')
                  ->samePropertyAs('fullcode', 'method')
                  ->inIs('NAME')
