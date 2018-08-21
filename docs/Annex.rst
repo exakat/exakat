@@ -24,6 +24,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Appinfo
 * Cakephp
 * Calisthenics
+* ClassReview
 * ClearPHP
 * Codacy
 * Coding Conventions
@@ -328,11 +329,11 @@ A number of applications were scanned in order to find real life examples of pat
 * `HuMo-Gen <http://humogen.com/>`_
 * `PrestaShop <https://prestashop.com/>`_
 * `PhpIPAM <https://phpipam.net/download/>`_
-* `Phinx <https://phinx.org/>`_
 * `Edusoho <https://www.edusoho.com/en>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
-* phpadnsnew
+* `phpadnsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `SuiteCrm <https://suitecrm.com/>`_
+* `Phinx <https://phinx.org/>`_
 * `SPIP <https://www.spip.net/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `Zend-Config <https://github.com/zendframework/zend-config>`_
@@ -724,8 +725,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.12.11
 
-  * Could Be Protected Class Constant (Classes/CouldBeProtectedConstant ; Analyze)
-  * Could Be Protected Method (Classes/CouldBeProtectedMethod ; Analyze)
+  * Could Be Protected Class Constant (Classes/CouldBeProtectedConstant ; ClassReview)
+  * Could Be Protected Method (Classes/CouldBeProtectedMethod ; ClassReview)
   * Method Could Be Private Method (Classes/CouldBePrivateMethod)
   * Method Used Below (Classes/MethodUsedBelow ; Analyze)
   * Pathinfo() Returns May Vary (Php/PathinfoReturns ; Analyze, Level 4)
@@ -733,7 +734,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.12.10
 
   * Constant Used Below (Classes/ConstantUsedBelow)
-  * Could Be Private Class Constant (Classes/CouldBePrivateConstante ; Analyze)
+  * Could Be Private Class Constant (Classes/CouldBePrivateConstante ; ClassReview)
 
 * 0.12.9
 
@@ -1375,8 +1376,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Constants With Strange Names (Constants/ConstantStrangeNames ; Analyze, Codacy, Simple)
   * Constructors (Classes/Constructor ; Internal)
   * Continents (Type/Continents ; Inventory)
-  * Could Be Class Constant (Classes/CouldBeClassConstant ; Analyze, Codacy)
-  * Could Be Static (Structures/CouldBeStatic ; Analyze, OneFile, Codacy)
+  * Could Be Class Constant (Classes/CouldBeClassConstant ; Codacy, ClassReview)
+  * Could Be Static (Structures/CouldBeStatic ; Analyze, OneFile, Codacy, ClassReview)
   * Could Use Alias (Namespaces/CouldUseAlias ; Analyze, OneFile, Codacy)
   * Could Use Short Assignation (Structures/CouldUseShortAssignation ; Analyze, Performances, OneFile, Codacy, Simple)
   * Could Use __DIR__ (Structures/CouldUseDir ; Analyze, Codacy, Simple, Suggestions, Level 3)
@@ -1647,7 +1648,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Preprocess Arrays (Arrays/ShouldPreprocess ; Suggestions)
   * Preprocessable (Structures/ShouldPreprocess ; Analyze, Codacy)
   * Print And Die (Structures/PrintAndDie ; Analyze, Codacy, Simple)
-  * Property Could Be Private Property (Classes/CouldBePrivate ; Analyze, Codacy)
+  * Property Could Be Private Property (Classes/CouldBePrivate ; Codacy, ClassReview)
   * Property Is Modified (Classes/IsModified ; Internal)
   * Property Is Read (Classes/IsRead ; Internal)
   * Property Names (Classes/PropertyDefinition ; Appinfo)
@@ -2614,10 +2615,11 @@ Themes configuration
 
 INI configuration for built-in themes. Copy them in config/themes.ini, and make your owns.
 
-18 themes detailled here : 
+19 themes detailled here : 
 
 * `theme_ini_analyze`_
 * `theme_ini_cakephp`_
+* `theme_ini_classreview`_
 * `theme_ini_coding conventions`_
 * `theme_ini_compatibilityphp53`_
 * `theme_ini_compatibilityphp54`_
@@ -2660,13 +2662,6 @@ Analyze
 |   analyzer[] = "Classes/CitSameName";
 |   analyzer[] = "Classes/ConstantClass";
 |   analyzer[] = "Classes/CouldBeAbstractClass";
-|   analyzer[] = "Classes/CouldBeClassConstant";
-|   analyzer[] = "Classes/CouldBePrivate";
-|   analyzer[] = "Classes/CouldBePrivateConstante";
-|   analyzer[] = "Classes/CouldBePrivateMethod";
-|   analyzer[] = "Classes/CouldBeProtectedConstant";
-|   analyzer[] = "Classes/CouldBeProtectedMethod";
-|   analyzer[] = "Classes/CouldBeProtectedProperty";
 |   analyzer[] = "Classes/DirectCallToMagicMethod";
 |   analyzer[] = "Classes/DontSendThisInConstructor";
 |   analyzer[] = "Classes/DontUnsetProperties";
@@ -3030,6 +3025,26 @@ Cakephp
 |   analyzer[] = "Cakephp/Cakephp32";
 |   analyzer[] = "Cakephp/Cakephp33";
 |   analyzer[] = "Cakephp/Cakephp34";| 
+
+
+
+
+.. _theme_ini_classreview:
+
+ClassReview
+-----------
+
+| [ClassReview]
+|   analyzer[] = "Classes/CouldBeAbstractClass";
+|   analyzer[] = "Classes/CouldBeClassConstant";
+|   analyzer[] = "Classes/CouldBePrivate";
+|   analyzer[] = "Classes/CouldBePrivateConstante";
+|   analyzer[] = "Classes/CouldBePrivateMethod";
+|   analyzer[] = "Classes/CouldBeProtectedConstant";
+|   analyzer[] = "Classes/CouldBeProtectedMethod";
+|   analyzer[] = "Classes/CouldBeProtectedProperty";
+|   analyzer[] = "Classes/PropertyCouldBeLocal";
+|   analyzer[] = "Structures/CouldBeStatic";| 
 
 
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 13 Aug 2018 14:17:20 +0000
-.. comment: Generation hash : dbe4b7690eeb131efffa383595064e24c0b4c24d
+.. comment: Generation date : Tue, 21 Aug 2018 08:22:05 +0000
+.. comment: Generation hash : d89c146c872dc4b394684de104eb8f8479462dc1
 
 
 .. _$http\_raw\_post\_data:
@@ -3209,11 +3209,11 @@ Classes/CouldBeAbstractClass
 
 
 
-+------------+------------------------------+
-| Short name | Classes/CouldBeAbstractClass |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++------------+------------------------------------+
+| Short name | Classes/CouldBeAbstractClass       |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`ClassReview` |
++------------+------------------------------------+
 
 
 
@@ -3860,7 +3860,7 @@ Starting with PHP 5.6, even array() may be defined as constants.
 +------------+------------------------------+
 | Short name | Classes/CouldBeClassConstant |
 +------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
+| Themes     | :ref:`ClassReview`           |
 +------------+------------------------------+
 
 
@@ -3952,7 +3952,7 @@ See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>
 +------------+----------------------------------------------+
 | Short name | Classes/CouldBePrivateConstante              |
 +------------+----------------------------------------------+
-| Themes     | :ref:`Analyze`                               |
+| Themes     | :ref:`ClassReview`                           |
 +------------+----------------------------------------------+
 | Examples   | :ref:`phinx-classes-couldbeprivateconstante` |
 +------------+----------------------------------------------+
@@ -4008,7 +4008,7 @@ As a general rule, it is recommended to make constant 'private' by default, and 
 +------------+----------------------------------+
 | Short name | Classes/CouldBeProtectedConstant |
 +------------+----------------------------------+
-| Themes     | :ref:`Analyze`                   |
+| Themes     | :ref:`ClassReview`               |
 +------------+----------------------------------+
 
 
@@ -4048,7 +4048,7 @@ These properties may even be made private.
 +------------+--------------------------------+
 | Short name | Classes/CouldBeProtectedMethod |
 +------------+--------------------------------+
-| Themes     | :ref:`Analyze`                 |
+| Themes     | :ref:`ClassReview`             |
 +------------+--------------------------------+
 
 
@@ -4087,7 +4087,7 @@ This property may even be made private.
 +------------+----------------------------------+
 | Short name | Classes/CouldBeProtectedProperty |
 +------------+----------------------------------+
-| Themes     | :ref:`Analyze`                   |
+| Themes     | :ref:`ClassReview`               |
 +------------+----------------------------------+
 
 
@@ -4112,7 +4112,7 @@ This global is only used in one function or method. It may be called 'static', i
 +------------+---------------------------------------------------------------------------------+
 | Short name | Structures/CouldBeStatic                                                        |
 +------------+---------------------------------------------------------------------------------+
-| Themes     | :ref:`Analyze`                                                                  |
+| Themes     | :ref:`Analyze`, :ref:`ClassReview`                                              |
 +------------+---------------------------------------------------------------------------------+
 | Examples   | :ref:`dolphin-structures-couldbestatic`, :ref:`contao-structures-couldbestatic` |
 +------------+---------------------------------------------------------------------------------+
@@ -4566,11 +4566,13 @@ Always try to use native PHP functions, instead of rebuilding them with custom P
 
 See also `array_unique <http://php.net/array_unique>`_.
 
-+------------+--------------------------------+
-| Short name | Structures/CouldUseArrayUnique |
-+------------+--------------------------------+
-| Themes     | :ref:`Suggestions`             |
-+------------+--------------------------------+
++------------+-----------------------------------------------------------------------------------------------+
+| Short name | Structures/CouldUseArrayUnique                                                                |
++------------+-----------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Suggestions`                                                                            |
++------------+-----------------------------------------------------------------------------------------------+
+| Examples   | :ref:`dolibarr-structures-couldusearrayunique`, :ref:`openemr-structures-couldusearrayunique` |
++------------+-----------------------------------------------------------------------------------------------+
 
 
 
@@ -9475,7 +9477,7 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 +------------+------------------------------+
 | Short name | Classes/CouldBePrivateMethod |
 +------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
+| Themes     | :ref:`ClassReview`           |
 +------------+------------------------------+
 
 
@@ -12932,11 +12934,13 @@ Switch the if then structures to reduce the amount of conditions to read.
        }
    ?>
 
-+------------+------------------------------+
-| Short name | Structures/OneIfIsSufficient |
-+------------+------------------------------+
-| Themes     | :ref:`Suggestions`           |
-+------------+------------------------------+
++------------+----------------------------------------------+
+| Short name | Structures/OneIfIsSufficient                 |
++------------+----------------------------------------------+
+| Themes     | :ref:`Suggestions`                           |
++------------+----------------------------------------------+
+| Examples   | :ref:`tikiwiki-structures-oneifissufficient` |
++------------+----------------------------------------------+
 
 
 
@@ -14599,11 +14603,11 @@ Public properties are omitted here : they may be modified anywhere in the code.
    
    ?>
 
-+------------+------------------------------+
-| Short name | Classes/PropertyCouldBeLocal |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++------------+------------------------------------+
+| Short name | Classes/PropertyCouldBeLocal       |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`ClassReview` |
++------------+------------------------------------+
 
 
 
@@ -14650,7 +14654,7 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 +------------+------------------------+
 | Short name | Classes/CouldBePrivate |
 +------------+------------------------+
-| Themes     | :ref:`Analyze`         |
+| Themes     | :ref:`ClassReview`     |
 +------------+------------------------+
 
 
@@ -20679,13 +20683,15 @@ Unused Protected Methods
 ########################
 
 
-The following methods are protected, and may be used in the current class or any of its children. 
+The following protected methods are unused in children class. As such, they may be considered for being private.
+
+Methods reported by this analysis are not used by children, yet they are protected.
 
 .. code-block:: php
 
    <?php
    
-   class foo {
+   class Foo {
        // This method is not used
        protected function unusedBar() {}
        protected function usedInFoo() {}
@@ -20697,7 +20703,7 @@ The following methods are protected, and may be used in the current class or any
        }
    }
    
-   class foofoo extends foo {
+   class FooFoo extends Foo {
        protected function bar() {}
        
        public function bar2() {
@@ -20716,7 +20722,9 @@ The following methods are protected, and may be used in the current class or any
    ?>
 
 
-No usage of those methods were found. This analysis is impacted by dynamic method calls.
+No usage of those methods were found. 
+
+This analysis is impacted by dynamic method calls.
 
 +------------+--------------------------------+
 | Short name | Classes/UnusedProtectedMethods |

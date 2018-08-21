@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 13 Aug 2018 14:17:20 +0000
-.. comment: Generation hash : dbe4b7690eeb131efffa383595064e24c0b4c24d
+.. comment: Generation date : Tue, 21 Aug 2018 08:22:05 +0000
+.. comment: Generation hash : d89c146c872dc4b394684de104eb8f8479462dc1
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 360 analysis
+Total : 353 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -127,12 +127,7 @@ Total : 360 analysis
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
-* :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Else <could-be-else>`
-* :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
-* :ref:`Could Be Protected Class Constant <could-be-protected-class-constant>`
-* :ref:`Could Be Protected Method <could-be-protected-method>`
-* :ref:`Could Be Protected Property <could-be-protected-property>`
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Make A Function <could-make-a-function>`
@@ -212,7 +207,6 @@ Total : 360 analysis
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Mark Callable <mark-callable>`
-* :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
 * :ref:`Method Used Below <method-used-below>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
@@ -293,7 +287,6 @@ Total : 360 analysis
 * :ref:`Print And Die <print-and-die>`
 * :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
 * :ref:`Property Could Be Local <property-could-be-local>`
-* :ref:`Property Could Be Private Property <property-could-be-private-property>`
 * :ref:`Property Used In One Method Only <property-used-in-one-method-only>`
 * :ref:`Property Variable Confusion <property-variable-confusion>`
 * :ref:`Queries In Loops <queries-in-loops>`
@@ -462,6 +455,24 @@ Total : 17 analysis
 * :ref:`Deprecated Methodcalls in Cake 3.3 <deprecated-methodcalls-in-cake-3.3>`
 * :ref:`Deprecated Static calls in Cake 3.3 <deprecated-static-calls-in-cake-3.3>`
 * :ref:`Deprecated Trait in Cake 3.3 <deprecated-trait-in-cake-3.3>`
+
+.. _classreview:
+
+ClassReview
++++++++++++
+
+Total : 10 analysis
+
+* :ref:`Could Be Class Constant <could-be-class-constant>`
+* :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
+* :ref:`Could Be Protected Class Constant <could-be-protected-class-constant>`
+* :ref:`Could Be Protected Method <could-be-protected-method>`
+* :ref:`Could Be Protected Property <could-be-protected-property>`
+* :ref:`Method Could Be Private Method <method-could-be-private-method>`
+* :ref:`Property Could Be Private Property <property-could-be-private-property>`
+* Classes/CouldBeAbstractClass
+* Classes/PropertyCouldBeLocal
+* Structures/CouldBeStatic
 
 .. _coding-conventions:
 

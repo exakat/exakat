@@ -1509,29 +1509,6 @@ Long list of == are harder to read. Using an in_array() call gathers all the str
       $user = $_POST['user'];
     }
 
-Could Be Private Class Constant
-===============================
-
-.. _phinx-classes-couldbeprivateconstante:
-
-Phinx
-^^^^^
-
-:ref:`could-be-private-class-constant`, in src/Phinx/Db/Adapter/MysqlAdapter.php:46. 
-
-The code includes a fair number of class constants. The one listed here are only used to define TEXT columns in MySQL, with their maximal size. Since they are only intented to be used by the MySQL driver, they may be private.
-
-.. code-block:: php
-
-    class MysqlAdapter extends PdoAdapter implements AdapterInterface
-    {
-    
-    //.....
-        const TEXT_SMALL   = 255;
-        const TEXT_REGULAR = 65535;
-        const TEXT_MEDIUM  = 16777215;
-        const TEXT_LONG    = 4294967295;
-
 Next Month Trap
 ===============
 
@@ -1816,6 +1793,29 @@ The is_null() test detects a special situation, that requires usage of default v
                 $parent_id = $node->$idField;
                 $personal_folder = $node->personal_folder;
             }
+
+Could Be Private Class Constant
+===============================
+
+.. _phinx-classes-couldbeprivateconstante:
+
+Phinx
+^^^^^
+
+:ref:`could-be-private-class-constant`, in src/Phinx/Db/Adapter/MysqlAdapter.php:46. 
+
+The code includes a fair number of class constants. The one listed here are only used to define TEXT columns in MySQL, with their maximal size. Since they are only intented to be used by the MySQL driver, they may be private.
+
+.. code-block:: php
+
+    class MysqlAdapter extends PdoAdapter implements AdapterInterface
+    {
+    
+    //.....
+        const TEXT_SMALL   = 255;
+        const TEXT_REGULAR = 65535;
+        const TEXT_MEDIUM  = 16777215;
+        const TEXT_LONG    = 4294967295;
 
 __debugInfo() Usage
 ===================
@@ -2279,5 +2279,83 @@ This foreach reads 'c' in the $c variable (via the $_c). It could be simplified 
                 {
                     $cc += $_c['c'];
                 }
+
+One If Is Sufficient
+====================
+
+.. _tikiwiki-structures-oneifissufficient:
+
+Tikiwiki
+^^^^^^^^
+
+:ref:`one-if-is-sufficient`, in /lib/wiki-plugins/wikiplugin_trade.php:152. 
+
+empty($params['inputtitle']) should have priority over $params['wanted'] == 'n'.
+
+.. code-block:: php
+
+    if ($params['wanted'] == 'n') {
+    		if (empty($params['inputtitle'])) {
+    			$params['inputtitle'] = 'Payment of %0 %1 from user %2 to %3';
+    		}
+    	} else {
+    		if (empty($params['inputtitle'])) {
+    			$params['inputtitle'] = 'Request payment of %0 %1 to user %2 from %3';
+    		}
+    	}
+
+Could Use array_unique
+======================
+
+.. _dolibarr-structures-couldusearrayunique:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`could-use-array\_unique`, in /htdocs/includes/restler/framework/Luracast/Restler/Format/XmlFormat.php:250. 
+
+This loop has two distinct operations : the first collect keys and keep them unique. A combinaison of array_keys() and array_unique() would do that job, while saving the in_array() lookup, and the configuration check with 'static::$importSettingsFromXml'. The second operation is distinct, and could be done with array_map().
+
+.. code-block:: php
+
+    $attributes = $xml->attributes();
+                foreach ($attributes as $key => $value) {
+                    if (static::$importSettingsFromXml
+                        && !in_array($key, static::$attributeNames)
+                    ) {
+                        static::$attributeNames[] = $key;
+                    }
+                    $r[$key] = static::setType((string)$value);
+                }
+
+
+--------
+
+
+.. _openemr-structures-couldusearrayunique:
+
+OpenEMR
+^^^^^^^
+
+:ref:`could-use-array\_unique`, in gacl/gacl_api.class.php:441:441. 
+
+This loop is quite complex : it collects $aro_value in $acl_array['aro'][$aro_section_value], but also creates the array in $acl_array['aro'][$aro_section_value], and report errors in the debug log. array_unique() could replace the collection, while the debug would have to be done somewhere else.
+
+.. code-block:: php
+
+    foreach ($aro_value_array as $aro_value) {
+    					if ( count($acl_array['aro'][$aro_section_value]) != 0 ) {
+    						if (!in_array($aro_value, $acl_array['aro'][$aro_section_value])) {
+    							$this->debug_text("append_acl(): ARO Section Value: $aro_section_value ARO VALUE: $aro_value");
+    							$acl_array['aro'][$aro_section_value][] = $aro_value;
+    							$update=1;
+    						} else {
+    							$this->debug_text("append_acl(): Duplicate ARO, ignoring... ");
+    						}
+    					} else { //Array is empty so add this aro value.
+    						$acl_array['aro'][$aro_section_value][] = $aro_value;
+    						$update = 1;
+    					}
+    				}
 
 
