@@ -54,7 +54,7 @@ class Dump extends Tasks {
         parent::__construct($gremlin, $config, $subTask);
         
         $this->log = new Log('dump',
-                             $this->config->projects_root.'/projects/'.$this->config->project);
+                             "{$this->config->projects_root}/projects/{$this->config->project}");
 
         $this->linksDown = GraphElements::linksAsList();
     }
@@ -209,7 +209,7 @@ SQL;
             $begin = $end;
             $this->collectDefinitionsStats();
             $end = microtime(true);
-            $this->log->log( 'Collected Definitiosn stats : '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $this->log->log( 'Collected Definitions stats : '.number_format(1000 * ($end - $begin), 2)."ms\n");
         }
 
         $themes = array();

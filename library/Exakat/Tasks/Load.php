@@ -3446,10 +3446,12 @@ class Load extends Tasks {
                 ++$this->id;
                 $then = $this->processSingle('Boolean');
                 $this->popExpression();
+                $this->runPlugins($then);
             } elseif (mb_strtolower($this->tokens[$this->id + 1][1]) === 'null') {
                 ++$this->id;
                 $then = $this->processSingle('Null');
                 $this->popExpression();
+                $this->runPlugins($then);
             } else {
                 $then = $this->processNextAsIdentifier();
             }
@@ -3469,10 +3471,12 @@ class Load extends Tasks {
             if (in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false'))) {
                 ++$this->id;
                 $else = $this->processSingle('Boolean');
+                $this->runPlugins($else);
                 $this->popExpression();
             } elseif (mb_strtolower($this->tokens[$this->id + 1][1]) === 'null') {
                 ++$this->id;
                 $else = $this->processSingle('Null');
+                $this->runPlugins($else);
                 $this->popExpression();
             } else {
                 $else = $this->processNextAsIdentifier();
