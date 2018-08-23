@@ -164,7 +164,7 @@ MENU;
         // top 10
         $fileHTML = $this->getTopFile();
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers();
+        $analyzerHTML = $this->getTopAnalyzers($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
         $blocjs = <<<JAVASCRIPT

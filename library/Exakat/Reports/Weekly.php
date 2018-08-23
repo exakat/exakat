@@ -65,69 +65,19 @@ class Weekly extends Ambassador {
                                  'namespaces' => 'Namespaces',
                                  'exceptions' => 'Exceptions');
 
-    private $components = array(
-'A1:2017-Injection' => array(
-    'Security/AnchorRegex',
-    'Security/EncodedLetters',
-    'Structures/EvalWithoutTry',
-    'Security/parseUrlWithoutParameters',
-    'Structures/pregOptionE',
-    'Indirect Injection',
-    'Security/IndirectInjection',
-    'Structures/EvalUsage',
-    'Security/Sqlite3RequiresSingleQuotes',
-),
-'A2:2017-Broken Authentication' => array(
-
-),
-'A3:2017-Sensitive Data Exposure' => array(
-    'Security/DontEchoError',
-    'Structures/PhpinfoUsage',
-    'Structures/VardumpUsage',
-),
-'A4:2017-XML External Entities (XXE)' => array(
-    'Security/NoNetForXmlLoad',
-),
-'A5:2017-Broken Access Control' => array(
-    'Structures/NoHardcodedHash',
-    'Structures/NoHardcodedIp',
-    'Structures/NoHardcodedPort',
-    'Functions/HardcodedPasswords',
-    'Security/CompareHash',
-),
-'A6:2017-Security Misconfiguration' => array(
-    'Security/AvoidThoseCrypto',
-    'Structures/RandomWithoutTry',
-    'Security/CurlOptions',
-    'Security/SetCookieArgs',
-    'Security/ShouldUsePreparedStatement',
-    'Security/ShouldUseSessionRegenerateId',
-    'Security/SessionLazyWrite',
-    'Php/BetterRand',
-    'Security/MkdirDefault',
-    'Security/RegisterGlobals',
-),
-'A7:2017-Cross-Site Scripting (XSS)' => array(
-    'Security/UploadFilenameInjection',
-),
-'A8:2017-Insecure Deserialization' => array(
-    'Security/UnserializeSecondArg',
-),
-'A9:2017-Using Components with Known Vulnerabilities' => array(
-),
-'A10:2017-Insufficient Logging&Monitoring' => array(
-),
-'Others' => array(
-    'Structures/NoReturnInFinally',
-    'Security/NoSleep',
-    'Structures/Fallthrough',
-));
-
     const G_CRITICAL = 5;
     const G_ERROR    = 4;
     const G_WARNING  = 3;
     const G_NOTICE   = 2;
     const G_NONE     = 1;
+
+    private $titles = array('This Week', 
+                            'Last week', 
+                            'Two weeks ago', 
+                            'Three weeks ago',
+                            'Four weeks ago', 
+                            'Go further', 
+                          );
 
     private $names =  array(self::G_CRITICAL  => 'Critical',
                             self::G_ERROR     => 'Error',
@@ -135,35 +85,59 @@ class Weekly extends Ambassador {
                             self::G_NOTICE    => 'Notice',
                             self::G_NONE      => 'OK',     );
     
-    private $grading = [];
-    private $results = null;
+    private $grading       = array();
+    private $results       = null;
     private $resultsCounts = null;
+    
+    private $usedAnalyzer = array();
+    private $weeks        = array();
+    private $current      = '';
 
     public function __construct($config) {
         parent::__construct($config);
-        $this->themesToShow      = 'Security';
         $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer($this->themesToShow);
         $this->severities        = $this->themes->getSeverities();
         
-        $this->grading = array(
-    'Security/AnchorRegex'                  => self::G_WARNING,
-    'Security/EncodedLetters'               => self::G_WARNING,
-    'Structures/EvalWithoutTry'             => self::G_CRITICAL,
-    'Security/parseUrlWithoutParameters'    => self::G_CRITICAL,
-    'Structures/pregOptionE'                => self::G_NOTICE,
-    'Indirect Injection'                    => self::G_NOTICE,
-    'Security/IndirectInjection'            => self::G_NOTICE,
-    'Structures/EvalUsage'                  => self::G_ERROR,
-    'Security/Sqlite3RequiresSingleQuotes'  => self::G_ERROR,
-        );
+        $this->current =  date('Y-W', strtotime(date('Y')."W".(date('W'))."1"));
+        for ($i = 0; $i < 5; ++$i) {
+            $date = date('Y-W', strtotime(date('Y')."W".(date('W') - $i)."1"));
+            $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
+            $this->weeks[$date] = json_decode($json);
+            
+            if (json_last_error() != '') {
+                print "Error : could not read week details for $date\n";
+            }
+        }
+
+    // special case for 'Future read'
+            $date = date('Y-W', strtotime(date('Y')."W".(date('W') + 1)."1"));
+            $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
+            $this->weeks[$date] = json_decode($json);
+            
+            if (json_last_error() != '') {
+                print "Error : could not read week details for $date\n";
+            }
         
-        $this->results = new Results($this->sqlite, array_keys($this->grading));
+        $all = array_merge(...array_column($this->weeks, 'analysis'));
+        $this->results = new Results($this->sqlite, $all);
         $this->results->load();
 
-        $this->resultsCounts = array_fill_keys(array_keys($this->grading), 0);
+        $this->resultsCounts = array_fill_keys($all, 0);
         foreach($this->results->toArray() as $result) {
-            $this->resultsCounts[$result['analyzer']]++;
+            ++$this->resultsCounts[$result['analyzer']];
+        }
+        
+        $levels = array(
+            'Critical' => 5,
+            'Major'    => 4,
+            'Minor'    => 3,
+            'Note'     => 2,
+            'None'     => 1,
+        );
+
+        foreach($all as $analyzer) {
+            $analyzerObject = $this->themes->getInstance($analyzer, null, $config);
+            $this->grading[$analyzer] = $levels[$analyzerObject->getSeverity()];
         }
     }
 
@@ -179,13 +153,22 @@ class Weekly extends Ambassador {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
+            // Moving the first in the last position
+            $weeks = array_keys($this->weeks);
+            $weeksMenu = array();
+            foreach($weeks as $id => $week) {
+                $title = $this->titles[$id];
+                $weeksMenu[] = "          <li><a href=\"weekly-$week.html\"><i class=\"fa fa-flag\"></i> <span>$title</span></a></li>";
+            }
+            $weeksMenu = implode(PHP_EOL, $weeksMenu);
+
             $menu = <<<MENU
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
           <li class="header">&nbsp;</li>
           <!-- Optionally, you can add icons to the links -->
           <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <li><a href="weekly.html"><i class="fa fa-flag"></i> <span>Weekly</span></a></li>
+          $weeksMenu
           <li class="treeview">
             <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
@@ -202,7 +185,7 @@ MENU;
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
-        $subPageHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/'.$file.'.html');
+        $subPageHTML = file_get_contents("{$this->config->dir_root}/media/devfaceted/datas/{$file}.html");
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -223,12 +206,17 @@ MENU;
 //        $this->generateSettings();
 //        $this->generateProcFiles();
 
+        $this->generateWeekly(date('Y'), date('W'));
+        $this->generateWeekly(date('Y'), date('W') - 1);
+        $this->generateWeekly(date('Y'), date('W') - 2);
+        $this->generateWeekly(date('Y'), date('W') - 3);
+        $this->generateWeekly(date('Y'), date('W') - 4);
+        $this->generateWeekly(date('Y'), date('W') + 1);
         $this->generateDashboard();
-        $this->generateWeekly();
 
         // Annex
         $this->generateAnalyzerSettings();
-        $this->generateDocumentation($this->themes->getThemeAnalyzers($this->themesToShow));
+        $this->generateDocumentation($this->usedAnalyzer);
         $this->generateCodes();
 
         // Static files
@@ -242,9 +230,9 @@ MENU;
     }
 
     protected function cleanFolder() {
-        if (file_exists($this->tmpName.'/datas/base.html')) {
-            unlink($this->tmpName.'/datas/base.html');
-            unlink($this->tmpName.'/datas/menu.html');
+        if (file_exists("{$this->tmpName}/datas/base.html")) {
+            unlink("{$this->tmpName}/datas/base.html");
+            unlink("{$this->tmpName}/datas/menu.html");
         }
 
         // Clean final destination
@@ -260,10 +248,38 @@ MENU;
         rename($this->tmpName, $this->finalName);
     }
 
-    private function generateWeekly() {
-        $this->generateIssuesEngine('weekly',
-                                    $this->getIssuesFaceted('Suggestions'));
-        return;
+    private function generateWeekly($year, $week) {
+        if (empty($this->weeks["$year-$week"])) {
+            return;
+        }
+
+        $this->generateIssuesEngine("weekly",
+                                    $this->getIssuesFaceted($this->weeks["$year-$week"]->analysis));
+
+        $html = file_get_contents("$this->tmpName/datas/weekly.html");
+
+        $docs = array();
+        foreach($this->weeks["$year-$week"]->analysis as $analyzer) {
+            $ini = $this->getDocs($analyzer);
+            $item['analyzer']       = $ini['name'];
+            $docId   = $this->toId($analyzer);
+            $docs[] = "<a href=\"analyzers_doc.html#$docId\">$ini[name]</a>";
+        }
+        
+        $this->usedAnalyzer = array_merge($this->usedAnalyzer, $this->weeks["$year-$week"]->analysis);
+
+        $begin = date('M j, Y', strtotime($year."W".$week."1"));
+        $end = date('M j, Y', strtotime($year."W".$week."7"));
+        $titleDate = $year.' '.ordinal($week)." week";
+
+        $finalHTML = str_replace('<WEEK>', $titleDate, $html);
+        $finalHTML = str_replace('<FULLWEEK>', "$begin to $end : <br /> - ".implode(' - ', $docs), $finalHTML).' - ';
+        
+        file_put_contents("$this->tmpName/datas/weekly.html", $finalHTML);
+
+        copy("{$this->tmpName}/datas/weekly.html", "{$this->tmpName}/datas/weekly-$year-$week.html");
+
+        return true;
     }
 
     private function getGrades() {
@@ -281,7 +297,7 @@ MENU;
     protected function generateDashboard() {
         $this->getGrades();
 
-        $baseHTML = $this->getBasedPage('index');
+        $baseHTML = $this->getBasedPage('index_weekly');
 
         $tags = array();
         $code = array();
@@ -301,26 +317,28 @@ MENU;
 HTML;
         $finalHTML = $this->injectBloc($baseHTML, 'BLOCHASHDATA', $grade);
 
-        // bloc Issues
-        $issues = $this->getIssuesBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
-        $tags[] = 'SCRIPTISSUES';
-        $code[] = $issues['script'];
+        // bloc by week
+        $table = $this->generateWeeklyTable();
+        $byweek = <<<HTML
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">This Week</h3>
+                </div>
+$table
+                <!-- /.box-body -->
+              </div>
 
-        // bloc severity
-        $severity = $this->getSeverityBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, 'BLOCSEVERITY', $severity['html']);
-        $tags[] = 'SCRIPTSEVERITY';
-        $code[] = $severity['script'];
+HTML;
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOCKBYWEEK', $byweek);
 
         // Marking the audit date
         $this->makeAuditDate($finalHTML);
 
         // top 10
-        $fileHTML = $this->getTopFile();
-        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers();
-        $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
+        $fileHTML     = $this->getTopFile();
+        $finalHTML    = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
+        $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis);
+        $finalHTML    = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
         
         $globalData = array(self::G_CRITICAL  => (object) ['label' => 'Critical', 'value' => 0],
                             self::G_ERROR     => (object) ['label' => 'Error',    'value' => 0],
@@ -339,18 +357,6 @@ HTML;
         $blocjs = <<<JAVASCRIPT
   <script>
     $(document).ready(function() {
-      Morris.Donut({
-        element: 'donut-chart_issues',
-        resize: true,
-        colors: ["#3c8dbc", "#f56954", "#00a65a", "#1424b8"],
-        data: [SCRIPTISSUES]
-      });
-      Morris.Donut({
-        element: 'donut-chart_severity',
-        resize: true,
-        colors: ["#3c8dbc", "#f56954", "#00a65a", "#1424b8"],
-        data: [SCRIPTSEVERITY]
-      });
       Morris.Donut({
         element: 'donut-chart_grade',
         resize: true,
@@ -598,6 +604,112 @@ JAVASCRIPT;
         $this->putBasedPage('index', $finalHTML);
     }
 
+    protected function getAnalyzersCount($limit) {
+        $list = $this->weeks[$this->current]->analysis;
+        $listSQL = makeList($list);
+        $list = array_flip($list);
+
+        $query = "SELECT analyzer, count(*) AS number
+                    FROM results
+                    WHERE analyzer in ($listSQL)
+                    GROUP BY analyzer
+                    ORDER BY number DESC ";
+        if ($limit) {
+            $query .= " LIMIT ".$limit;
+        }
+        $result = $this->sqlite->query($query);
+        $data = array();
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+            $data[] = array('analyzer' => $row['analyzer'],
+                            'value'    => $row['number']);
+            unset($list[$row['analyzer']]);
+        }
+        foreach($list as $analyzer => $foo) {
+            $data[] = array('analyzer' => $analyzer,
+                            'value'    => 0);
+        }
+
+        return $data;
+    }
+
+    protected function getSeveritiesNumberBy($type = 'file') {
+        $list = $this->weeks[$this->current]->analysis;
+        $listSQL = makeList($list);
+        $list = array_flip($list);
+
+        $query = <<<SQL
+SELECT $type, severity, count(*) AS count
+    FROM results
+    WHERE analyzer IN ($listSQL)
+    GROUP BY $type, severity
+SQL;
+
+        $stmt = $this->sqlite->query($query);
+
+        $return = array();
+        while ($row = $stmt->fetchArray(\SQLITE3_ASSOC) ) {
+            if ( isset($return[$row[$type]]) ) {
+                $return[$row[$type]][$row['severity']] = $row['count'];
+            } else {
+                $return[$row[$type]] = array($row['severity'] => $row['count']);
+            }
+        }
+
+        return $return;
+    }
+
+    protected function getFilesCount($limit = null) {
+        $list = $this->weeks[$this->current]->analysis;
+        $list = makeList($list);
+
+        $query = "SELECT file, count(*) AS number
+                    FROM results
+                    WHERE analyzer IN ($list)
+                    GROUP BY file
+                    ORDER BY number DESC ";
+        if ($limit !== null) {
+            $query .= " LIMIT ".$limit;
+        }
+        $result = $this->sqlite->query($query);
+        $data = array();
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+            $data[] = array('file'  => $row['file'],
+                            'value' => $row['number']);
+        }
+
+        return $data;
+    }
+    
+    protected function generateWeeklyTable() {
+        $data = $this->getFilesCount(self::TOPLIMIT);
+
+        $html = '';
+        $html .= str_repeat('<div class="clearfix">
+              <div class="block-cell-name">&nbsp;</div>
+              <div class="block-cell-issue text-center">&nbsp;</div>
+          </div>', 5);
+
+        foreach (array_keys($this->weeks) as $id => $week) {
+            print "$week - $id\n";
+            $total = 0;
+            foreach($this->weeks[$week]->analysis as $analyzer) {
+                $total += $this->resultsCounts[$analyzer];
+            }
+            $html .= '<div class="clearfix">
+                    <a href="weekly-'.$week.'.html">
+                      <div class="block-cell-name">'.$this->titles[$id].'</div>
+                    </a>
+                    <div class="block-cell-issue text-center">'.$total.'</div>
+                  </div>';
+        }
+
+        $html .= str_repeat('<div class="clearfix">
+              <div class="block-cell-name">&nbsp;</div>
+              <div class="block-cell-issue text-center">&nbsp;</div>
+          </div>', 5);
+
+        return $html;
+    }
 }
 
 ?>

@@ -246,7 +246,7 @@ MENU;
         // top 10
         $fileHTML = $this->getTopFile();
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers();
+        $analyzerHTML = $this->getTopAnalyzers($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
         $blocjs = <<<JAVASCRIPT
@@ -1067,39 +1067,6 @@ SQL;
         }
 
         return $data;
-    }
-
-    protected function getTopAnalyzers() {
-        $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = makeList($listArray);
-        $toplimit = self::TOPLIMIT;
-
-        $query = <<<SQL
-SELECT analyzer, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY analyzer
-                    ORDER BY number DESC
-                    LIMIT $toplimit
-SQL;
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('label' => $this->getDocs($row['analyzer'], 'name'),
-                            'value' => $row['number']);
-        }
-
-        $html = '';
-        foreach ($data as $value) {
-            $html .= '<div class="clearfix">
-                    <a href="#" title="'.$value['label'].'">
-                      <div class="block-cell-name">'.$value['label'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
-                    </a>
-                  </div>';
-        }
-
-        return $html;
     }
 
     private function getSeveritiesNumberBy($type = 'file') {

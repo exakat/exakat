@@ -319,7 +319,7 @@ HTML;
         // top 10
         $fileHTML = $this->getTopFile();
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers();
+        $analyzerHTML = $this->getTopAnalyzers($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
         
         $globalData = array(self::G_CRITICAL  => (object) ['label' => 'Critical', 'value' => 0],

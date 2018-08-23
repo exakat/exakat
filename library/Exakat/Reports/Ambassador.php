@@ -713,9 +713,9 @@ JAVASCRIPT;
         $this->makeAuditDate($finalHTML);
 
         // top 10
-        $fileHTML = $this->getTopFile();
+        $fileHTML = $this->getTopFile($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers();
+        $analyzerHTML = $this->getTopAnalyzers($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
         $blocjs = <<<JAVASCRIPT
@@ -1681,7 +1681,7 @@ SQL;
         return $row['number'];
     }
 
-    public function getFilesCount($limit = null) {
+    protected function getFilesCount($limit = null) {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($list);
 
@@ -1716,12 +1716,10 @@ SQL;
                   </div>';
         }
         $nb = 10 - count($data);
-        for($i = 0; $i < $nb; ++$i) {
-            $html .= '<div class="clearfix">
+        $html .= str_repeat('<div class="clearfix">
                       <div class="block-cell-name">&nbsp;</div>
                       <div class="block-cell-issue text-center">&nbsp;</div>
-                  </div>';
-        }
+                  </div>', $nb);
 
         return $html;
     }
@@ -1778,9 +1776,15 @@ SQL;
         return $data;
     }
 
-    protected function getTopAnalyzers() {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = makeList($list);
+    protected function getTopAnalyzers($theme) {
+        if (is_string($theme)) {
+            $list = $this->themes->getThemeAnalyzers($theme);
+        } elseif (is_array($theme)) {
+            $list = $theme;
+        } else {
+            die('Needs a string or an array');
+        }
+        $list = makeList($list, "'");
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -1810,7 +1814,7 @@ SQL;
         return $html;
     }
 
-    private function getSeveritiesNumberBy($type = 'file') {
+    protected function getSeveritiesNumberBy($type = 'file') {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($list);
 
@@ -1851,11 +1855,11 @@ SQL;
             $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
             $dataNone[]     = empty($severities[$value['analyzer']]['None'])     ? 0 : $severities[$value['analyzer']]['None'];
         }
-        $xAxis = implode(', ', $xAxis);
+        $xAxis        = implode(', ', $xAxis);
         $dataCritical = implode(', ', $dataCritical);
-        $dataMajor = implode(', ', $dataMajor);
-        $dataMinor = implode(', ', $dataMinor);
-        $dataNone = implode(', ', $dataNone);
+        $dataMajor    = implode(', ', $dataMajor);
+        $dataMinor    = implode(', ', $dataMinor);
+        $dataNone     = implode(', ', $dataNone);
 
         return array(
             'scriptDataAnalyzer'         => $xAxis,
@@ -1941,8 +1945,12 @@ JAVASCRIPTCODE;
     }
 
     public function getIssuesFaceted($theme) {
-        $list = $this->themes->getThemeAnalyzers($theme);
-        $list = makeList($list);
+        if (is_string($theme)) {
+            $list = $this->themes->getThemeAnalyzers($theme);
+        } else {
+            $list = $theme;
+        }
+        $list = makeList($list, "'");
 
         $sqlQuery = <<<SQL
 SELECT fullcode, file, line, analyzer

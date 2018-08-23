@@ -797,36 +797,6 @@ SQL;
         return $data;
     }
 
-    protected function getTopAnalyzers() {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
-
-        $query = "SELECT analyzer, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY analyzer
-                    ORDER BY number DESC
-                    LIMIT ".self::TOPLIMIT;
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('label' => $this->getDocs($row['analyzer'], 'name'),
-                            'value' => $row['number']);
-        }
-
-        $html = '';
-        foreach ($data as $value) {
-            $html .= '<div class="clearfix">
-                    <a href="#" title="'.$value['label'].'">
-                      <div class="block-cell-name">'.$value['label'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
-                    </a>
-                  </div>';
-        }
-
-        return $html;
-    }
-
     private function getSeveritiesNumberBy($type = 'file') {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($list);
