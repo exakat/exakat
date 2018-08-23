@@ -61,7 +61,11 @@ abstract class DSL {
     }
 
     public static function factory($name) {
-        $className = __NAMESPACE__.'\\'.$name;
+        if (strtolower($name) === '_as') {
+            $className = __NAMESPACE__.'\\_As';
+        } else {
+            $className = __NAMESPACE__.'\\'.ucfirst($name);
+        }
         
         if (!class_exists($className)) {
             throw new UnknownDsl($name);
