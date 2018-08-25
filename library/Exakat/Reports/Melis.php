@@ -1002,7 +1002,7 @@ SQL;
         );
     }
 
-    private function getSeveritiesNumberBy($type = 'file') {
+    protected function getSeveritiesNumberBy($type = 'file') {
         $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($list);
 
