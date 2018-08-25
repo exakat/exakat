@@ -35,8 +35,7 @@ class Query {
     private $project    = null;
     private $analyzer   = null;
     private $php        = null;
-    
-//    private $methods          = array('as("first")');
+
     private $commands         = array();
     private $arguments        = array();
     private $query            = null;
@@ -155,7 +154,6 @@ GREMLIN;
 
 // Query (#{$this->id}) for {$this->analyzer}
 // php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v\n";
-
     }
     
     public function getQuery() {

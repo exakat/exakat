@@ -24,8 +24,11 @@
 namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Themes;
+use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Data\Methods;
+use Exakat\Query\Query;
+use Exakat\Query\DSL\DSL;
 use Exakat\Data\Dictionary;
 use Exakat\GraphElements;
 use Exakat\Exceptions\GremlinException;
@@ -67,6 +70,7 @@ class LoadFinal extends Tasks {
         $this->setClassConstantRemoteDefinition();
         $this->setClassPropertyRemoteDefinition();
         $this->setClassMethodRemoteDefinition();
+        $this->setArrayClassDefinition();
 
         display('End load final');
         $this->logTime('Final');
@@ -76,7 +80,7 @@ class LoadFinal extends Tasks {
         static $log, $begin, $end, $start;
 
         if ($log === null) {
-            $log = fopen($this->config->projects_root.'/projects/'.$this->config->project.'/log/loadfinal.timing.csv', 'w+');
+            $log = fopen("{$this->config->projects_root}/projects/{$this->config->project}/log/loadfinal.timing.csv", 'w+');
             if ($log === false) {
                 return;
             }
@@ -95,6 +99,21 @@ class LoadFinal extends Tasks {
     private function fixFullnspathFunctions() {
         display("fixing Fullnspath for Functions");
         // fix path for constants with Const
+        
+        /*
+$query = new Query();
+         $query->atomIs('Functioncall')
+               ->has('fullnspath')
+               ->_as('identifier')
+               ->savePropertyAs('cc', 'fullnspath')
+               ->inIs('DEFINITION')
+               ->atomIs('Function')
+               ->savePropertyAs('actual', 'fullnspath')
+               ->filter('actual != cc')
+               ->back('identifier')
+               ->setProperty('fullnspath', 'actual')
+               ->returnCount();
+        */
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has("fullnspath")
@@ -238,6 +257,32 @@ GREMLIN;
         $this->logTime('end '.$title);
     }
 
+    private function setArrayClassDefinition() {
+        $this->logTime('setArrayClassDefinition');
+        
+        //$id, $project, $analyzer, $php
+        DSL::init($this->datastore);
+        $query = new Query(0, $this->config->project, 'setArrayClassDefinition', null);
+        $query->atomIs('Arrayliteral')
+              ->_as('first')
+              ->outWithRank('ARGUMENT', 1)
+              ->has('noDelimiter')
+              ->savePropertyAs('noDelimiter', 'method')
+              ->back('first')
+              ->outWithRank('ARGUMENT', 0)
+              ->inIs('DEFINITION')
+              ->outIs(array('MAGICMETHOD', 'METHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('fullcode', 'method', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addEFrom('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $this->logTime('setArrayClassDefinition end');
+    }
+
     private function spotFallbackConstants() {
         $this->logTime('spotFallbackConstants');
         // Define-style constant definitions
@@ -253,7 +298,8 @@ g.V().hasLabel("Defineconstant")
            s;
          }.unique();
 GREMLIN;
-        $defineConstants = $this->gremlin->query($query)->toArray();
+        $defineConstants = $this->gremlin->query($query)
+                                         ->toArray();
 
         $query = <<<GREMLIN
 g.V().hasLabel("Const")

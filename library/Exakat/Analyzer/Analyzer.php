@@ -1416,7 +1416,6 @@ GREMLIN;
 
     public function run() {
         $this->analyze();
-//        $this->prepareQuery();
 
         $this->execQuery();
         
@@ -1473,7 +1472,9 @@ GREMLIN;
     }
     
     public function execQuery() {
-        if (empty($this->queries)) { return true; }
+        if (empty($this->queries)) { 
+            return true; 
+        }
 
         // @todo add a test here ?
         foreach($this->queries as $query) {
