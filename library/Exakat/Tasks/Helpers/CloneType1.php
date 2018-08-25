@@ -55,6 +55,12 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = 'n';
                 break;
 
+            case 'Global' :
+            case 'Static' :
+                $ctype1 = array_column($extras, 'ctype1');
+                $atom->ctype1 = strtolower($atom->atom).implode(', ', $ctype1);
+                break;
+
             case 'Nsname' :
                 $atom->ctype1 = 'Name';
                 break;
@@ -65,6 +71,15 @@ class CloneType1 extends Plugin {
 
             case 'Variable' :
                 $atom->ctype1 = '$v';
+                break;
+
+            case 'Propertydefinition' :
+            case 'Staticdefinition' :
+            case 'Globaldefinition' :
+                $atom->ctype1 = '$v';
+                if (isset($extras['DEFAULT'])) {
+                    $atom->ctype1 .= ' = '.$extras['DEFAULT']->ctype1;
+                }
                 break;
 
             case 'Variableobject' :
@@ -267,7 +282,7 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Return' :
-                $atom->ctype1 = $atom->code . $extras['RETURN']->ctype1;
+                $atom->ctype1 = $atom->code . ' ' . $extras['RETURN']->ctype1;
                 break;
 
             case 'Void' :
@@ -316,7 +331,7 @@ class CloneType1 extends Plugin {
             case 'Class' :
             case 'Trait' :
             case 'Interface' :
-                $atom->ctype1 = $atom->atom;
+                $atom->ctype1 = strtolower($atom->atom);
                 break;
 
             case 'Function' :
@@ -325,7 +340,7 @@ class CloneType1 extends Plugin {
             case 'Defineconstant' :
             case 'Magicmethod' :
                 $ctype1 = array_column($extras, 'ctype1');
-                $atom->ctype1 = $atom->code . '('.implode(',', $ctype1).')';
+                $atom->ctype1 = $atom->code . '(){'.implode(',', $ctype1).'}';
                 break;
                 
             case 'Arrayliteral' :
@@ -362,7 +377,7 @@ class CloneType1 extends Plugin {
         default :
             static $i = 0;
             
-            $atom->ctype1 = 'default '.$atom->atom.' '.++$i;
+            $atom->ctype1 = 'default '.strtolower($atom->atom).' '.++$i;
             
             print "CLONE DEFAULT : $atom->atom\n";
         }

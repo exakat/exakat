@@ -1160,13 +1160,15 @@ class Load extends Tasks {
         
         // Process block
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_SEMICOLON) {
-            $void = $this->addAtomVoid();
-            $this->addLink($function, $void, 'BLOCK');
+            $block = $this->addAtomVoid();
+            $this->addLink($function, $block, 'BLOCK');
             ++$this->id; // skip the next ;
+            $blockFullcode = ' ;';
         } else {
             $block = $this->processFollowingBlock(array($this->phptokens::T_CLOSE_CURLY));
             $this->popExpression();
             $this->addLink($function, $block, 'BLOCK');
+            $blockFullcode = self::FULLCODE_BLOCK;
         }
 
         $function->fullcode   = ($fullcode ? implode(' ', $fullcode).' ' : '').
@@ -1174,7 +1176,7 @@ class Load extends Tasks {
                                 ($function->atom === 'Closure' ? '' : $name->fullcode).'('.$argumentsFullcode.')'.
                                 (isset($useFullcode) ? ' use ('.implode(', ', $useFullcode).')' : '').// No space before use
                                 (isset($returnType) ? ' : '.(isset($nullable) ? '?' : '').$returnType->fullcode : '').
-                                (isset($block) ? self::FULLCODE_BLOCK : ' ;');
+                                $blockFullcode;
 
         $this->pushExpression($function);
 
@@ -1194,7 +1196,7 @@ class Load extends Tasks {
 
         $this->contexts[self::CONTEXT_CLASS] = $previousClassContext;
         $this->contexts[self::CONTEXT_FUNCTION] = $previousFunctionContext;
-        $this->runPlugins($function);
+        $this->runPlugins($function, array('BLOCK' => $block));
 
         array_pop($this->currentFunction);
         array_pop($this->currentMethod);
@@ -2513,6 +2515,7 @@ class Load extends Tasks {
         }
 
         $fullcode = array();
+        $extras = array();
         --$this->id;
         do {
             ++$this->id;
@@ -2555,9 +2558,13 @@ class Load extends Tasks {
             if (isset($default)) {
                 $this->addLink($element, $default, 'DEFAULT');
                 $element->fullcode .= " = {$default->fullcode}";
+                $this->runPlugins($element, array('DEFAULT' => $default));
                 unset($default);
+            } else {
+                $this->runPlugins($element);
             }
             $fullcode[] = $element->fullcode;
+            $extras[] = $element;
         }  while ($this->tokens[$this->id + 1][0] !== $this->phptokens::T_SEMICOLON &&
                   $this->tokens[$this->id + 1][0] !== $this->phptokens::T_CLOSE_TAG);
 
@@ -2566,6 +2573,7 @@ class Load extends Tasks {
         $static->line     = $this->tokens[$current][2];
         $static->token    = $this->getToken($this->tokens[$current][0]);
         $static->count    = $rank;
+        $this->runPlugins($static, $extras);
         
         $this->pushExpression($static);
 
