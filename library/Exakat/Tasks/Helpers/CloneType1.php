@@ -309,6 +309,11 @@ class CloneType1 extends Plugin {
                 $atom->ctype1 = 'St';
                 break;
 
+            case 'Ppp' :
+                $ctype1 = array_column($extras, 'ctype1');
+                $atom->ctype1 = strtolower($atom->atom) . '('.implode(',', $ctype1).')';
+                break;
+
             case 'Functioncall' :
             case 'Echo'   :
             case 'Print'  :
