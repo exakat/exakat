@@ -37,7 +37,7 @@ SELECT variable FROM variables
           GROUP BY variable
 SQL
 );
-        $counts = array();
+        $variables = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $variables[] = $row['variable'];
         }
