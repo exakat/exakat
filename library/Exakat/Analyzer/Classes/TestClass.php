@@ -31,15 +31,10 @@ class TestClass extends Analyzer {
         $testClasses =  makeFullNsPath($testClasses);
         
         $this->atomIs('Class')
+             ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('EXTENDS')
              ->fullnspathIs($testClasses)
              ->back('first');
-        $this->prepareQuery();
-
-        // all children level of heritage
-        $this->atomIs('Class')
-             ->analyzerIs('self')
-             ->goToAllChildren(self::EXCLUDE_SELF);
         $this->prepareQuery();
     }
 }
