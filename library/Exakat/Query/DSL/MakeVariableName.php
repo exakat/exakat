@@ -27,7 +27,9 @@ use Exakat\Query\Query;
 
 class MakeVariableName extends DSL {
     public function run() {
-        return new Command('sideEffect{ $variable = "\\$" + $variable; }');
+        list($variable) = func_get_args();
+
+        return new Command("sideEffect{ $variable = \"\\$\" + $variable; }");
     }
 }
 ?>

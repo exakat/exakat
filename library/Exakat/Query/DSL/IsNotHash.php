@@ -31,7 +31,7 @@ class IsNotHash extends DSL {
         list($property, $hash, $index) = func_get_args();
 
         if (empty($hash)) {
-            return new Command(Query::STOP_QUERY);
+            return new Command(Query::NO_QUERY);
         }
 
         assert($this->assertProperty($property));
