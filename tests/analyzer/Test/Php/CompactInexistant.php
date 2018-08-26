@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Php_CompactInexistant extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testPhp_CompactInexistant01()  { $this->generic_test('Php/CompactInexistant.01'); }
+    public function testPhp_CompactInexistant02()  { $this->generic_test('Php/CompactInexistant.02'); }
 }
 ?>

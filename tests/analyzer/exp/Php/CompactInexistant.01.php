@@ -1,13 +1,17 @@
 <?php
 
-$expected     = array('compact(\'c2\')',
-                      'compact(\'c\')',
-                      'compact(\'c3\')',
+$expected     = array('\'c2\'',
+                      '\'c\'',
+                      '\'c3\'',
                      );
 
-$expected_not = array('compact(\'a3\', \'b3\', \'d3\')',
-                      'compact(\'a\', \'b\')',
-                      'compact(\'a2\', \'b2\')',
+$expected_not = array('\'a3\'', 
+                      '\'b3\'', 
+                      '\'d3\'',
+                      '\'a\'', 
+                      '\'b\'',
+                      '\'a2\'', 
+                      '\'b2\'',
                      );
 
 ?>
