@@ -29,12 +29,24 @@ class CompactInexistant extends Analyzer {
         // compact('a', 'b') with $b or $a that doesn't exists
         $this->atomFunctionIs('\\compact')
              ->outIs('ARGUMENT')
+             ->_as('results')
              ->has('noDelimiter')
              ->savePropertyAs('noDelimiter', 'variable_name')
              ->makeVariableName('variable_name')
              ->goToFunction()
-             ->noFullcodeInside('variable_name')
-             ->back('first');
+             ->raw(<<<GREMLIN
+not(
+    __.where(__.out("DEFINITION").filter{ it.get().value("fullcode") == variable_name; })
+)
+GREMLIN
+)
+             ->raw(<<<GREMLIN
+not(
+    __.where(__.out("ARGUMENT").out("NAME").filter{ it.get().value("fullcode") == variable_name; })
+)
+GREMLIN
+)
+             ->back('results');
         $this->prepareQuery();
     }
 }
