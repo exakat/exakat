@@ -43,6 +43,18 @@ Label : PROJECT
                 13
                 Label : ARGUMENT
                   17
+            Label : DEFINITION
+              26
+              Label : CLASS
+                6
+              Label : METHOD
+                15
+            Label : DEFINITION
+              26
+              Label : CLASS
+                6
+              Label : METHOD
+                15
             Label : NAME
               15
           Label : NAME
@@ -73,6 +85,18 @@ Label : PROJECT
                 13
                 Label : ARGUMENT
                   20
+            Label : DEFINITION
+              26
+              Label : CLASS
+                18
+              Label : METHOD
+                8
+            Label : DEFINITION
+              26
+              Label : CLASS
+                18
+              Label : METHOD
+                8
             Label : NAME
               8
           Label : METHOD
@@ -105,7 +129,7 @@ Label : PROJECT
                   26
                   Label : CLASS
                     18
-                  Label : CONSTANT
+                  Label : METHOD
                     8
               Label : EXPRESSION
                 27
@@ -115,7 +139,7 @@ Label : PROJECT
                   26
                   Label : CLASS
                     6
-                  Label : CONSTANT
+                  Label : METHOD
                     15
             Label : USE
               6
@@ -137,7 +161,7 @@ Label : PROJECT
                   26
                   Label : CLASS
                     18
-                  Label : CONSTANT
+                  Label : METHOD
                     8
               Label : EXPRESSION
                 27
@@ -147,7 +171,7 @@ Label : PROJECT
                   26
                   Label : CLASS
                     6
-                  Label : CONSTANT
+                  Label : METHOD
                     15
               Label : EXPRESSION
                 30

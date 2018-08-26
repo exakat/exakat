@@ -4665,11 +4665,18 @@ class Load extends Tasks {
                 $static->noDelimiter = $left->fullcode;
             }
         } elseif ($right->atom === 'Name') {
-            $static = $this->addAtom('Staticconstant');
-            $this->addLink($static, $right, 'CONSTANT');
-            $fullcode = $left->fullcode.'::'.$right->fullcode;
-            $this->runPlugins($static, array('CLASS'    => $left,
-                                             'CONSTANT' => $right));
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_INSTEADOF) {
+                $static = $this->addAtom('Staticmethod');
+                $this->addLink($static, $right, 'METHOD');
+                $fullcode = "{$left->fullcode}::{$right->fullcode}";
+                // No need for runplugin
+            } else {
+                $static = $this->addAtom('Staticconstant');
+                $this->addLink($static, $right, 'CONSTANT');
+                $fullcode = "{$left->fullcode}::{$right->fullcode}";
+                $this->runPlugins($static, array('CLASS'    => $left,
+                                                 'CONSTANT' => $right));
+            }
         } elseif (in_array($right->atom, array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block', 'Boolean', 'Null', 'Staticpropertyname'))) {
             $static = $this->addAtom('Staticproperty');
             $this->addLink($static, $right, 'MEMBER');
@@ -4694,7 +4701,7 @@ class Load extends Tasks {
         $static->token    = $this->getToken($this->tokens[$current][0]);
 
         if (!empty($left->fullnspath)){
-            if ($static->atom === 'Staticmethodcall') {
+            if (in_array($static->atom, array('Staticmethodcall', 'Staticmethod',))) {
                 $name = mb_strtolower($right->code);
                 $this->calls->addCall('staticmethod',  "$left->fullnspath::$name", $static);
             } elseif ($static->atom === 'Staticconstant') {

@@ -122,6 +122,7 @@ abstract class GraphElements {
                                  'Staticclass',
                                  'Staticconstant',
                                  'Staticdefinition',
+                                 'Staticmethod',
                                  'Staticmethodcall',
                                  'Staticproperty',
                                  'Staticpropertyname',

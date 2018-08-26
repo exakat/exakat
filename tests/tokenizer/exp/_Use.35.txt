@@ -27,7 +27,7 @@ Label : PROJECT
                   19
                   Label : CLASS
                     15
-                  Label : CONSTANT
+                  Label : METHOD
                     17
             Label : USE
               9
