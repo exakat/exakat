@@ -29,8 +29,25 @@ class UndefinedVariable extends Analyzer {
         // function foo() { $b->c = 2;}
         $this->atomIs(array('Variable', 'Variableobject', 'Variablearray'))
              ->hasNoOut('DEFINITION')
-             ->hasNoParent('Foreach', array('KEY', 'VALUE'))
+             ->hasNoParent('Catch', array('VARIABLE'))
+             ->hasNoParent('Foreach', array('VALUE'))
+             ->hasNoParent('Foreach', array('INDEX', 'VALUE'))
+             ->hasNoParent('Foreach', array( 'VALUE', 'VALUE'))
              ->hasNoParent('Assignation', 'LEFT')
+             ->hasNoParent('List', 'ARGUMENT')
+             ->raw(<<<GREMLIN
+not(
+    __.has("rank")
+      .sideEffect{rank = it.get().value("rank");}
+      .in("ARGUMENT")
+      .hasLabel("Functioncall")
+      .in("DEFINITION")
+      .out("ARGUMENT")
+      .filter{ it.get().value("rank") == rank}
+      .has("reference", true)
+)
+GREMLIN
+)
              ->inIs('DEFINITION')
              ->atomIs(self::$FUNCTIONS_ALL)
              ->back('first');

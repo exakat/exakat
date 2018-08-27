@@ -1,12 +1,11 @@
 <?php
 
-$expected     = array('$e',
+$expected     = array('$y',
                      );
 
 $expected_not = array('$a',
                       '$b',
-                      '$c',
-                      '$d',
+                      '$x',
                      );
 
 ?>
