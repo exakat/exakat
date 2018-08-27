@@ -126,3 +126,8 @@ CakePHP
 visibilities
 nullable
 throwable
+namespaces
+namespace
+namespaced
+acyclic
+unmaintained
