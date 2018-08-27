@@ -12,6 +12,12 @@ runkit_method_rename(
     'bar'
 );
 
+runkit_variable_rename(
+    'Example',
+    'foo',
+    'bar'
+);
+
 // output renamed function
 echo Example::bar();
 ?>
