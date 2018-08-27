@@ -264,12 +264,15 @@ GREMLIN;
         DSL::init($this->datastore);
         $query = new Query(0, $this->config->project, 'setArrayClassDefinition', null);
         $query->atomIs('Arrayliteral')
+              ->is('count', 2)
               ->_as('first')
               ->outWithRank('ARGUMENT', 1)
+              ->atomIs('String')
               ->has('noDelimiter')
               ->savePropertyAs('noDelimiter', 'method')
               ->back('first')
               ->outWithRank('ARGUMENT', 0)
+              ->atomIs('String')
               ->inIs('DEFINITION')
               ->outIs(array('MAGICMETHOD', 'METHOD'))
               ->outIs('NAME')
@@ -290,11 +293,10 @@ GREMLIN;
 g.V().hasLabel("Defineconstant")
      .out("ARGUMENT").has("rank", 0)
      .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
+     .filter{ (it.get().value("noDelimiter") =~ "(\\\\\\\\)\\$").getCount() == 0 }
      .map{ 
            s = it.get().value("noDelimiter").toString();
-           if ( s.substring(0,1) != "\\\\") {
-               s = "\\\\" + s;
-           }
+           s = "\\\\" + s;
            s;
          }.unique();
 GREMLIN;
@@ -315,7 +317,7 @@ GREMLIN;
         $constants = array_merge($constConstants, $defineConstants);
         $this->logTime('constants : '.count($constants));
 
-        if (empty($constConstants)) {
+        if (empty($defineConstants)) {
             display('Link constant definitions : skipping.');
         } else {
             $query = <<<GREMLIN
@@ -323,11 +325,13 @@ g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .has("token", without("T_CONST", "T_FUNCTION"))
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
-     .addE('DEFINITION')
+     .addE("DEFINITION")
      .from( 
         g.V().hasLabel("Defineconstant")
-             .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
-             .filter{ it.get().value("fullnspath") == name}.select('a')
+             .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String")
+             .has("noDelimiter").not( has("noDelimiter", "") )
+             .has("fullnspath")
+             .filter{ it.get().value("fullnspath") == name}.select("a")
       ).count();
 
 GREMLIN;
