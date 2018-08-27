@@ -4665,10 +4665,12 @@ class Load extends Tasks {
                 $static->noDelimiter = $left->fullcode;
             }
         } elseif ($right->atom === 'Name') {
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_INSTEADOF) {
+            print_r($this->tokens[$this->id + 1]);
+            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_INSTEADOF,
+                                                                $this->phptokens::T_AS))) {
                 $static = $this->addAtom('Staticmethod');
                 $this->addLink($static, $right, 'METHOD');
-                $fullcode = "{$left->fullcode}::{$right->fullcode}";
+                print $fullcode = "{$left->fullcode}::{$right->fullcode}";
                 // No need for runplugin
             } else {
                 $static = $this->addAtom('Staticconstant');

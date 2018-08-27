@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UndefinedInsteadof extends Analyzer {
     public function analyze() {
         $this->atomIs('Staticmethod')
-             ->hasNoIn('DEFINTION')
+             ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
     }

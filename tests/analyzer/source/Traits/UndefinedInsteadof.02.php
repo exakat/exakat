@@ -23,15 +23,8 @@ class Talker {
         B::smallTalk2 insteadof A;
         B::smallTalk insteadof A;
         A::bigTalk insteadof B;
-        A::bigTalk insteadof protected;
-    }
-}
-
-class Aliased_Talker {
-    use A, B {
-        B::smallTalk insteadof A;
-        A::bigTalk insteadof B;
-        B::bigTalk as talk;
+        A::bigTalk as protected;
+        A::bigTalk3 as protected;
     }
 }
 
