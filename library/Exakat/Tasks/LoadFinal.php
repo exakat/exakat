@@ -312,12 +312,13 @@ g.V().hasLabel("Const")
      .values('fullnspath').unique();
 
 GREMLIN;
-        $constConstants = $this->gremlin->query($query)->toArray();
+        $constConstants = $this->gremlin->query($query)
+                                        ->toArray();
 
         $constants = array_merge($constConstants, $defineConstants);
         $this->logTime('constants : '.count($constants));
 
-        if (empty($defineConstants)) {
+        if (empty($constants)) {
             display('Link constant definitions : skipping.');
         } else {
             $query = <<<GREMLIN
