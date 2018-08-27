@@ -23,7 +23,7 @@ Label : PROJECT
                   14
                   Label : CLASS
                     12
-                  Label : CONSTANT
+                  Label : METHOD
                     13
             Label : USE
               8

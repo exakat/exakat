@@ -71,8 +71,6 @@ Label : PROJECT
                     19
                   Label : NAME
                     17
-              Label : DEFINITION
-                17
               Label : NAME
                 17
               Label : PPP
@@ -91,12 +89,6 @@ Label : PROJECT
                           19
                         Label : NAME
                           17
-                    Label : MEMBER
-                      12
-                  Label : DEFINITION
-                    39
-                    Label : CLASS
-                      17
                     Label : MEMBER
                       12
             Label : EXPRESSION

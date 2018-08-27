@@ -923,7 +923,7 @@ Label : PROJECT
                               34
                               Label : CLASS
                                 101
-                              Label : CONSTANT
+                              Label : METHOD
                                 43
                           Label : EXPRESSION
                             106

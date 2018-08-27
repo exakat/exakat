@@ -25,7 +25,7 @@ Label : PROJECT
                   18
                   Label : CLASS
                     13
-                  Label : CONSTANT
+                  Label : METHOD
                     16
               Label : EXPRESSION
                 19
@@ -35,7 +35,7 @@ Label : PROJECT
                   18
                   Label : CLASS
                     11
-                  Label : CONSTANT
+                  Label : METHOD
                     20
             Label : USE
               11

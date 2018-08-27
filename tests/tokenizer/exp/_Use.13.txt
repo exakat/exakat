@@ -81,12 +81,6 @@ Label : PROJECT
                           15
                     Label : CONSTANT
                       12
-                  Label : DEFINITION, DEFINITION
-                    33
-                    Label : CLASS
-                      15
-                    Label : CONSTANT
-                      12
                   Label : NAME
                     12
                   Label : VALUE
@@ -101,8 +95,6 @@ Label : PROJECT
                     16
                   Label : NAME
                     15
-              Label : DEFINITION
-                15
               Label : NAME
                 15
             Label : EXPRESSION

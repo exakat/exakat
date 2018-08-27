@@ -87,8 +87,6 @@ Label : PROJECT
                     14
                   Label : NAME
                     13
-              Label : DEFINITION
-                13
               Label : METHOD
                 11
                 Label : ARGUMENT
@@ -107,16 +105,6 @@ Label : PROJECT
                         14
                       Label : NAME
                         13
-                  Label : METHOD
-                    11
-                    Label : ARGUMENT
-                      5
-                    Label : NAME
-                      11
-                Label : DEFINITION
-                  31
-                  Label : CLASS
-                    13
                   Label : METHOD
                     11
                     Label : ARGUMENT
