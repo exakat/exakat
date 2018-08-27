@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 
 class GoToInterface extends DSL {
     public function run() {
-        $return = new DSL::factory('goToInstruction');
+        $return = DSL::factory('goToInstruction');
         
         return $return->run('Interface');
     }

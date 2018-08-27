@@ -23,7 +23,7 @@
 
 namespace Exakat\Query\DSL;
 
-class GoToExpression extends DSL {
+class GoToCurrentScope extends DSL {
     public function run() : Command {
         $return = DSL::factory('goToInstruction');
         

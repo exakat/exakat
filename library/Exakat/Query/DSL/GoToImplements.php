@@ -23,7 +23,7 @@
 
 namespace Exakat\Query\DSL;
 
-class GoToExtends extends DSL {
+class GoToImplements extends DSL {
     public function run() : Command {
         return new Command('out("IMPLEMENTS").in("DEFINITION")');
     }
