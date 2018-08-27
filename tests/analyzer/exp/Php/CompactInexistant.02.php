@@ -1,14 +1,14 @@
 <?php
 
-$expected     = array("'undefined'",
+$expected     = array('\'undefined\'',
                      );
 
-$expected_not = array("'global'", 
-                      "'static'", 
-                      "'local'", 
-                      "'arg'", 
-                      "'array'", 
-                      "'object'", 
+$expected_not = array('\'global\'',
+                      '\'static\'',
+                      '\'local\'',
+                      '\'arg\'',
+                      '\'array\'',
+                      '\'object\'',
                      );
 
 ?>
