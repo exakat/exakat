@@ -441,6 +441,10 @@ Glossary
 
 
 + `I`
+    + `Insteadof`
+
+      + :ref:`Undefined Insteadof <undefined-insteadof>`
+
     + `Isset`
 
       + :ref:`No Isset With Empty <no-isset-with-empty>`
@@ -487,6 +491,11 @@ Glossary
       + :ref:`Useless Interfaces <useless-interfaces>`
       + :ref:`Zend Typehinting <zend-typehinting>`
       + :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
+
+    + `insteadof`
+
+      + :ref:`Method Collision Traits <method-collision-traits>`
+      + :ref:`Undefined Insteadof <undefined-insteadof>`
 
     + `intval()`
 
@@ -609,6 +618,10 @@ Glossary
     + `parse_url()`
 
       + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
+
+    + `passthru()`
+
+      + :ref:`Must Call Parent Constructor <must-call-parent-constructor>`
 
     + `password_hash()`
 
@@ -900,10 +913,6 @@ Glossary
       + :ref:`Anonymous Classes <anonymous-classes>`
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 
-    + `__TRAIT__`
-
-      + :ref:`Bad Constants Names <bad-constants-names>`
-
     + `__call`
 
       + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -929,6 +938,7 @@ Glossary
       + :ref:`Don't Send This In Constructor <don't-send-this-in-constructor>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
+      + :ref:`Must Call Parent Constructor <must-call-parent-constructor>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`
       + :ref:`Old Style Constructor <old-style-constructor>`
       + :ref:`Parent First <parent-first>`

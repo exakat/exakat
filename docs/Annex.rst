@@ -393,6 +393,16 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.4.2
+
+  * Method Collision Traits (Traits/MethodCollisionTraits)
+  * Undefined Insteadof (Traits/UndefinedInsteadof ; Analyze, LintButWontExec)
+  * Undefined Variable (Variables/UndefinedVariable ; Analyze)
+
+* 1.4.1
+
+  * Must Call Parent Constructor (Php/MustCallParentConstructor)
+
 * 1.4.0
 
   * Php/Php73RemovedFunctions (Php/Php73RemovedFunctions)
@@ -684,7 +694,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.12.17
 
-  * Is A Magic Property (Classes/IsaMagicProperty)
+  * Is A PHP Magic Property (Classes/IsaMagicProperty)
 
 * 0.12.16
 
@@ -1743,7 +1753,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Undefined Interfaces (Interfaces/UndefinedInterfaces ; Analyze, Codacy)
   * Undefined Parent (Classes/UndefinedParentMP ; Analyze, Codacy, Simple)
   * Undefined Properties (Classes/UndefinedProperty ; Analyze, ClearPHP, Codacy, Simple)
-  * Undefined Trait (Traits/UndefinedTrait ; Analyze, Codacy)
+  * Undefined Trait (Traits/UndefinedTrait ; Analyze, Codacy, LintButWontExec)
   * Undefined Zend 1.10 (ZendF/UndefinedClass110 ; ZendFramework)
   * Undefined Zend 1.11 (ZendF/UndefinedClass111 ; ZendFramework)
   * Undefined Zend 1.12 (ZendF/UndefinedClass112 ; ZendFramework)
@@ -2001,12 +2011,14 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-19 PHP error message detailled here : 
+27 PHP error message detailled here : 
 
 * "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
 * Access level to Bar::$publicProperty must be public (as in class Foo)
 * Access level to c::iPrivate() must be public (as in class i) 
+* An alias (%s) was defined for method %s(), but this method does not exist
 * Argument 1 passed to foo() must be of the type integer, string given
+* Call to undefined function
 * Can't inherit abstract function A::bar()
 * Cannot access static:: when no class scope is active
 * Cannot override final method BaseClass::moreTesting()
@@ -2015,13 +2027,19 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * Class 'x' not found
 * Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A::aFoo)
 * Class fooThrowable cannot implement interface Throwable, extend Exception or Error instead
+* Creating default object from empty value
 * Declaration of FooParent::Bar() must be compatible with FooChildren::Bar()
 * Declaration of ab::foo($a) should be compatible with a::foo($a = 1) 
 * Defining a custom assert() function is deprecated, as the function has special semantics
+* Invalid numeric literal
 * Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code.
 * Only variable references should be returned by reference
+* The parent constructor was not called: the object is in an invalid state
+* Trait 'T' not found
+* Trait method M has not been applied, because there are collisions with other trait methods on C
 * Uncaught ArgumentCountError: Too few arguments to function, 0 passed
 * Undefined function
+* Undefined variable: 
 
 
 
@@ -2251,8 +2269,8 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
@@ -2333,8 +2351,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2368,6 +2386,7 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
+* `Object Inheritance <http://php.net/manual/en/language.oop5.inheritance.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_
@@ -2414,8 +2433,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: is_countable <https://wiki.php.net/rfc/is-countable>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
-* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
@@ -2472,8 +2491,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2515,9 +2534,10 @@ List of external links mentionned in this documentation.
 * `V8 Javascript Engine <https://bugs.chromium.org/p/v8/issues/list>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
+* `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2528,6 +2548,7 @@ List of external links mentionned in this documentation.
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
 * `Why 777 Folder Permissions are a Security Risk <https://www.spiralscripts.co.uk/Blog/why-777-folder-permissions-are-a-security-risk.html>`_
 * `Why does PHP 5.2+ disallow abstract static class methods? <https://stackoverflow.com/questions/999066/why-does-php-5-2-disallow-abstract-static-class-methods>`_
+* `Why, php? WHY??? <https://gist.github.com/everzet/4215537>`_
 * `wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `Wincache extension for PHP <http://www.php.net/wincache>`_
 * `Wordpress <https://www.wordpress.org/>`_
@@ -2820,6 +2841,7 @@ Analyze
 |   analyzer[] = "Php/InternalParameterType";
 |   analyzer[] = "Php/IsnullVsEqualNull";
 |   analyzer[] = "Php/LogicalInLetters";
+|   analyzer[] = "Php/MustCallParentConstructor";
 |   analyzer[] = "Php/NoClassInGlobal";
 |   analyzer[] = "Php/NoReferenceForTernary";
 |   analyzer[] = "Php/NotScalarType";
@@ -2980,6 +3002,8 @@ Analyze
 |   analyzer[] = "Structures/toStringThrowsException";
 |   analyzer[] = "Traits/DependantTrait";
 |   analyzer[] = "Traits/EmptyTrait";
+|   analyzer[] = "Traits/MethodCollisionTraits";
+|   analyzer[] = "Traits/UndefinedInsteadof";
 |   analyzer[] = "Traits/UndefinedTrait";
 |   analyzer[] = "Traits/UnusedTrait";
 |   analyzer[] = "Type/NoRealComparison";
@@ -2994,6 +3018,7 @@ Analyze
 |   analyzer[] = "Variables/Overwriting";
 |   analyzer[] = "Variables/OverwrittenLiterals";
 |   analyzer[] = "Variables/StrangeName";
+|   analyzer[] = "Variables/UndefinedVariable";
 |   analyzer[] = "Variables/VariableNonascii";
 |   analyzer[] = "Variables/VariableUsedOnce";
 |   analyzer[] = "Variables/VariableUsedOnceByContext";

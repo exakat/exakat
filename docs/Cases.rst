@@ -1645,6 +1645,23 @@ $value is defined with a reference. In the following code, it is only read and n
                 : $value;
         }
 
+Test Then Cast
+==============
+
+.. _dolphin-structures-testthencast:
+
+Dolphin
+^^^^^^^
+
+:ref:`test-then-cast`, in wp-admin/includes/misc.php:74. 
+
+$aLimits['per_page'] is tested for existence and not false. Later, it is cast from string to int : yet, a '0.1' string value would pass the test, and end up filling $aLimits['per_page'] with 0. 
+
+.. code-block:: php
+
+    if (isset($aLimits['per_page']) && $aLimits['per_page'] !== false)
+                $this->aCurrent['paginate']['perPage'] = (int)$aLimits['per_page'];
+
 Redefined Private Property
 ==========================
 
@@ -2116,6 +2133,30 @@ Instead of reading ALL the keys, and then, keeping only the first fifty, why not
 .. code-block:: php
 
     $results = array_slice(array_keys($diff), 0 ,50);
+
+Double array_flip()
+===================
+
+.. _nextcloud-performances-doublearrayflip:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`double-array\_flip()`, in lib/public/AppFramework/Http/EmptyContentSecurityPolicy.php:372. 
+
+The array $allowedScriptDomains is flipped, to unset 'self', then, unflipped (or flipped again), to restore its initial state. Using array_keys() or array_search() would yield the needed keys for unsetting, at a lower cost.
+
+.. code-block:: php
+
+    if(is_string($this->useJsNonce)) {
+    				$policy .= '\'nonce-'.base64_encode($this->useJsNonce).'\'';
+    				$allowedScriptDomains = array_flip($this->allowedScriptDomains);
+    				unset($allowedScriptDomains['\'self\'']);
+    				$this->allowedScriptDomains = array_flip($allowedScriptDomains);
+    				if(count($allowedScriptDomains) !== 0) {
+    					$policy .= ' ';
+    				}
+    			}
 
 Compare Hash
 ============

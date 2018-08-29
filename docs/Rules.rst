@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 21 Aug 2018 08:22:05 +0000
-.. comment: Generation hash : d89c146c872dc4b394684de104eb8f8479462dc1
+.. comment: Generation date : Mon, 27 Aug 2018 10:19:05 +0000
+.. comment: Generation hash : c5c8488bad7388b4b9ab619cb8156af90607970d
 
 
 .. _$http\_raw\_post\_data:
@@ -121,7 +121,7 @@ $this Is Not An Array
 #####################
 
 
-``$this`` variable represents the current object and it is not an array, unless the class (or its parents) has the `'ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ interface.
+``$this`` variable represents the current object and it is not an array, unless the class (or its parents) has the ``ArrayAccess`` interface.
 
 .. code-block:: php
 
@@ -1871,9 +1871,9 @@ Bad Constants Names
 ###################
 
 
-PHP's manual recommends that developper do not use constants with the convention __NAME__. Those are reserved for PHP future use. 
+PHP's manual recommends that developper do not use constants with the convention ``__NAME__``. Those are reserved for PHP future use. 
 
-For example, `'__TRAIT__ <http://php.net/manual/en/language.constants.predefined.php>`_ recently appeared in PHP, as a magic constant. In the future, other may appear. 
+For example, ``__TRAIT__`` recently appeared in PHP, as a magic constant. In the future, other may appear. 
 
 .. code-block:: php
 
@@ -1886,7 +1886,9 @@ For example, `'__TRAIT__ <http://php.net/manual/en/language.constants.predefined
    ?>
 
 
-The analyzer will report any constant which name is __.*.__, or even _.*_ (only one underscore)
+The analyzer will report any constant which name is __.*.__, or even _.*_ (only one underscore).
+
+See also `Constants <http://php.net/manual/en/language.constants.php>`_.
 
 +------------+----------------------------+
 | Short name | Constants/BadConstantnames |
@@ -2637,7 +2639,7 @@ Can't Throw Throwable
 #####################
 
 
-Classes extending `'Throwable <http://php.net/manual/fr/class.throwable.php>`_ can't be thrown. Same for interfaces. 
+Classes extending ``Throwable`` can't be thrown. Same for interfaces. 
 
 Although this code lints, PHP throws a Fatal error when executing or including it : `Class fooThrowable cannot implement interface `'Throwable <http://php.net/manual/fr/class.throwable.php>`_, extend Exception or Error instead`.
 
@@ -5537,11 +5539,13 @@ Avoid double `'array_flip() <http://www.php.net/array_flip>`_ to gain speed. Whi
    
    ?>
 
-+------------+------------------------------+
-| Short name | Performances/DoubleArrayFlip |
-+------------+------------------------------+
-| Themes     | :ref:`Performances`          |
-+------------+------------------------------+
++------------+-----------------------------------------------+
+| Short name | Performances/DoubleArrayFlip                  |
++------------+-----------------------------------------------+
+| Themes     | :ref:`Performances`                           |
++------------+-----------------------------------------------+
+| Examples   | :ref:`nextcloud-performances-doublearrayflip` |
++------------+-----------------------------------------------+
 
 
 
@@ -8429,12 +8433,7 @@ Invalid Constant Name
 
 According to PHP's manual, constant names, ' A valid constant name starts with a letter or underscore, followed by any number of letters, numbers, or underscores.'.
 
-Constant, when defined using `'define() <http://www.php.net/define>`_ function, must follow this regex :::
-
-   
-   /[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/
-   
-
+Constant, when defined using `'define() <http://www.php.net/define>`_ function, must follow this regex : ``/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/``.
 
 .. code-block:: php
 
@@ -8445,6 +8444,9 @@ Constant, when defined using `'define() <http://www.php.net/define>`_ function, 
    echo constant('+3'); // invalid constant access
    
    ?>
+
+
+See also `Constants <http://php.net/manual/en/language.constants.php>`_.
 
 +------------+-----------------------+
 | Short name | Constants/InvalidName |
@@ -9434,6 +9436,55 @@ Create an attribute that guess what are the called function or methods, when pos
 
 
 
+.. _method-collision-traits:
+
+Method Collision Traits
+#######################
+
+
+Two or more traits are included in the same class, and they have methods collisions. 
+
+Those collisions should be solved with a `use` expression. When they are not, PHP stops execution with a fatal error : ````.
+
+.. code-block:: php
+
+   <?php
+   
+   trait A {
+       public function A() {}
+       public function M() {}
+   }
+   
+   trait B {
+       public function B() {}
+       public function M() {}
+   }
+   
+   class C {
+       use  A, B;
+   }
+   
+   class D {
+       use  A, B{
+           B::M 'insteadof A;
+       };
+   }
+   
+   ?>
+
+
+The code above lints, but doesn't execute.
+
+See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
+
++------------+------------------------------+
+| Short name | Traits/MethodCollisionTraits |
++------------+------------------------------+
+| Themes     | :ref:`Analyze`               |
++------------+------------------------------+
+
+
+
 .. _method-could-be-private-method:
 
 Method Could Be Private Method
@@ -10196,9 +10247,9 @@ Multiple Classes In One File
 ############################
 
 
-It is regarded as a bad practice to store several classs in the same file. This is usually done to make life of __autoload() easier. 
+It is regarded as a bad practice to store several classes in the same file. This is usually done to make life of __autoload() easier. 
 
-It is often difficult to find class ``foo`` in the ``bar.php`` file. This is also the case for interfaces and traits.
+It is often unexpected to find class ``foo`` in the ``bar.php`` file. This is also the case for interfaces and traits.
 
 .. code-block:: php
 
@@ -10527,6 +10578,42 @@ If it is used to type cast a value to number, then casting (integer) or (real) i
 +------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-useless-math <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-math.md>`__ |
 +------------+-----------------------------------------------------------------------------------------------+
+
+
+
+.. _must-call-parent-constructor:
+
+Must Call Parent Constructor
+############################
+
+
+Some PHP native classes require a call to parent::`'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ to be stable. 
+
+As of PHP 7.3, two classes currently need that call : SplTempFileObject and SplFileObject.
+
+The error is only emited if the class is instantiated, and a parent class is called. 
+
+.. code-block:: php
+
+   <?php
+   
+   class mySplFileObject extends \SplFileObject {
+       public function '__construct()    { 
+           // Forgottent call to parent::'__construct()
+       }
+   }
+   
+   (new mySplFileObject())->'passthru();
+   ?>
+
+
+See also `Why, php? WHY??? <https://gist.github.com/everzet/4215537>`_.
+
++------------+-------------------------------+
+| Short name | Php/MustCallParentConstructor |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
 
 
 
@@ -13838,7 +13925,7 @@ Parent First
 ############
 
 
-When calling parent constructor, always put it first in the `'__construct <http://php.net/manual/en/language.oop5.decon.php>`_ method. It ensures the parent is correctly build before the child start using values. 
+When calling parent constructor, always put it first in the ``__construct`` method. It ensures the parent is correctly build before the child start using values. 
 
 .. code-block:: php
 
@@ -17593,7 +17680,7 @@ Strange Names For Methods
 
 Those methods should have another name.
 
-Ever wondered why the '__constructor' is never called? Or the '__consturct' ? 
+Ever wondered why the ``__constructor`` is never called? Or the ``__consturct`` ? 
 
 Those errors most often originate from typos, or quick fixes that 'don't require testing'. Some other times, they were badly chosen, or ran into PHP's own reservations. 
 
@@ -18226,11 +18313,13 @@ The cast may introduce a distortion to the value, and still lead to the unwanted
    
    ?>
 
-+------------+-------------------------+
-| Short name | Structures/TestThenCast |
-+------------+-------------------------+
-| Themes     | :ref:`Analyze`          |
-+------------+-------------------------+
++------------+----------------------------------------+
+| Short name | Structures/TestThenCast                |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`                         |
++------------+----------------------------------------+
+| Examples   | :ref:`dolphin-structures-testthencast` |
++------------+----------------------------------------+
 
 
 
@@ -18240,7 +18329,7 @@ Throw Functioncall
 ##################
 
 
-The throw keyword expects to use an exception. Calling a function to prepare that exception before throwing it is possible, but forgetting the new keyword is also possible. 
+The ``throw`` keyword expects to use an exception. Calling a function to prepare that exception before throwing it is possible, but forgetting the new keyword is also possible. 
 
 .. code-block:: php
 
@@ -18259,7 +18348,7 @@ The throw keyword expects to use an exception. Calling a function to prepare tha
    ?>
 
 
-When the new keyword is forgotten, then the class construtor is used as a functionname, and now exception is emited, but an 'Undefined function' fatal error is emited. 
+When the ``new`` keyword is forgotten, then the class constructor is used as a functionname, and now exception is emitted, but an ``Undefined function`` fatal error is emitted. 
 
 See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
 
@@ -18282,7 +18371,8 @@ Throw In Destruct
 According to the manual, 'Attempting to throw an exception from a destructor (called in the time of script termination) causes a fatal error.'
 
 The destructor may be called during the lifespan of the script, but it is not certain. If the exception is thrown later, the script may end up with a fatal error. 
-Thus, it is recommended to avoid throwing exceptions within the `'__destruct <http://php.net/manual/en/language.oop5.decon.php>`_ method of a class.
+
+Thus, it is recommended to avoid throwing exceptions within the ``__destruct`` method of a class.
 
 .. code-block:: php
 
@@ -18307,6 +18397,9 @@ Thus, it is recommended to avoid throwing exceptions within the `'__destruct <ht
    }
    
    ?>
+
+
+See also `Constructors and Destructors <http://php.net/manual/en/language.oop5.decon.php>`_.
 
 +------------+-------------------------+
 | Short name | Classes/ThrowInDestruct |
@@ -19389,6 +19482,51 @@ See also `Functions <http://php.net/manual/en/language.functions.php>`_.
 
 
 
+.. _undefined-insteadof:
+
+Undefined Insteadof
+###################
+
+
+Insteadof tries to replace a method with another, but it doesn't exists. This happens when the replacing class is refactored, and some of its definition are dropped. 
+
+Insteadof may replace a non-existing method with an existing one, but not the contrary. 
+
+.. code-block:: php
+
+   <?php
+   
+   trait A {
+       function C (){}
+   }
+   
+   trait B {
+       function C (){}
+   }
+   
+   class Talker {
+       use A, B {
+           B::C 'insteadof A;
+           B::D 'insteadof A;
+       }
+   }
+   
+   new Talker();
+   ?>
+
+
+This error is not linted : it only appears at execution time. 
+
+See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
+
++------------+---------------------------+
+| Short name | Traits/UndefinedInsteadof |
++------------+---------------------------+
+| Themes     | :ref:`Analyze`            |
++------------+---------------------------+
+
+
+
 .. _undefined-interfaces:
 
 Undefined Interfaces
@@ -19475,7 +19613,7 @@ Undefined Properties
 ####################
 
 
-List of properties that are not explicitely defined in the class, its parents or traits.
+List of properties that are not explicitly defined in the class, its parents or traits.
 
 .. code-block:: php
 
@@ -19543,6 +19681,44 @@ When the using class or trait is instantiated, PHP emits a a fatal error.
 +------------+-----------------------+
 | Themes     | :ref:`Analyze`        |
 +------------+-----------------------+
+
+
+
+.. _undefined-variable:
+
+Undefined Variable
+##################
+
+
+Variable that is used before any creation. 
+
+It is recommended to use a default value for every variable used. When not specified, the default value is set to `NULL` by PHP.
+
+.. code-block:: php
+
+   <?php
+   
+   // Adapted from the PHP manual
+   $var = 'Bob';
+   $Var = 'Joe';
+   // The following line may emit a warning : Undefined variable: $undefined
+   echo $var, $Var, $undefined;      // outputs Bob, Joe,
+   
+   
+   ?>
+
+
+Variable may be created in various ways : assignation, arguments, foreach blind variables, static and global variables.
+
+This analysis doesn't handle dynamic variables, such as `$$x`. It also doesn't handle variables outside a method or function.
+
+See also `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_.
+
++------------+-----------------------------+
+| Short name | Variables/UndefinedVariable |
++------------+-----------------------------+
+| Themes     | :ref:`Analyze`              |
++------------+-----------------------------+
 
 
 
@@ -20334,7 +20510,7 @@ Unused Classes
 ##############
 
 
-The following classes are never explicitely used in the code.
+The following classes are never explicitly used in the code.
 
 Note that this may be valid in case the current code is a library or framework, since it defines classes that are used by other (unprovided) codes.
 Also, this analyzer may find classes that are, in fact, dynamically loaded. 
@@ -21027,9 +21203,9 @@ Use Class Operator
 ##################
 
 
-Use ::class to hardcode class names, instead of strings.
+Use ``::class`` to hardcode class names, instead of strings.
 
-This is actually faster than strings, which are parsed at executio time, while ::class is compiled, making it faster to execute. 
+This is actually faster than strings, which are parsed at execution time, while ``::class`` is compiled, making it faster to execute. 
 
 It is also capable to handle aliases, making the code easier to maintain. 
 
@@ -22062,7 +22238,7 @@ Property used once in their defining class.
 
 Properties used in one method only may be used several times, and read only. This may be a class constant. Such properties are meant to be overwritten by an extending class, and that's possible with class constants. 
 
-Setting properties with default values is a good way to avoid literring the code with literal values, and provide a single point of update (by extension, or by hardcoding) for all those situations. A constant is definitely better suited for this task.
+Setting properties with default values is a good way to avoid litterring the code with literal values, and provide a single point of update (by extension, or by hardcoding) for all those situations. A constant is definitely better suited for this task.
 
 .. code-block:: php
 
@@ -22862,7 +23038,7 @@ Until PHP 7.1, ``$this`` may be used as an argument in a function or a method, a
 
 Starting with PHP 7.1, the PHP engine check thoroughly that ``$this`` is used in an appropriate manner, and raise fatal errors in case it isn't. 
 
-Yet, it is possible to find ``$this`` outside a class : if the file is included inside a class, then ``$this`` will be recognized and valided. If the file is included outside a class context, it will yield a fatal error : ``Using $this when not in object context``.
+Yet, it is possible to find ``$this`` outside a class : if the file is included inside a class, then ``$this`` will be recognized and validated. If the file is included outside a class context, it will yield a fatal error : ``Using $this when not in object context``.
 
 See also `Closure::bind <http://php.net/manual/en/closure.bind.php>`_ and 
          `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.

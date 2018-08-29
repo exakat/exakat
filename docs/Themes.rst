@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 21 Aug 2018 08:22:05 +0000
-.. comment: Generation hash : d89c146c872dc4b394684de104eb8f8479462dc1
+.. comment: Generation date : Mon, 27 Aug 2018 10:19:05 +0000
+.. comment: Generation hash : c5c8488bad7388b4b9ab619cb8156af90607970d
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 353 analysis
+Total : 357 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -207,6 +207,7 @@ Total : 353 analysis
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Mark Callable <mark-callable>`
+* :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
 * :ref:`Method Used Below <method-used-below>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
@@ -229,6 +230,7 @@ Total : 353 analysis
 * :ref:`Multiple Type Variable <multiple-type-variable>`
 * :ref:`Multiples Identical Case <multiples-identical-case>`
 * :ref:`Multiply By One <multiply-by-one>`
+* :ref:`Must Call Parent Constructor <must-call-parent-constructor>`
 * :ref:`Must Return Methods <must-return-methods>`
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ifthen <nested-ifthen>`
@@ -349,10 +351,12 @@ Total : 353 analysis
 * :ref:`Undefined Classes <undefined-classes>`
 * :ref:`Undefined Constants <undefined-constants>`
 * :ref:`Undefined Functions <undefined-functions>`
+* :ref:`Undefined Insteadof <undefined-insteadof>`
 * :ref:`Undefined Interfaces <undefined-interfaces>`
 * :ref:`Undefined Parent <undefined-parent>`
 * :ref:`Undefined Properties <undefined-properties>`
 * :ref:`Undefined Trait <undefined-trait>`
+* :ref:`Undefined Variable <undefined-variable>`
 * :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
 * :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unknown Directive Name <unknown-directive-name>`
