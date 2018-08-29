@@ -177,6 +177,9 @@ class Ambassador extends Reports {
 
         $this->generateDashboard();
         $this->generateExtensionsBreakdown();
+        $this->generatePHPFunctionBreakdown();
+        $this->generatePHPConstantsBreakdown();
+        $this->generatePHPClassesBreakdown();
         $this->generateFiles();
         $this->generateAnalyzers();
 
@@ -1152,8 +1155,6 @@ JAVASCRIPT;
     }
 
     protected function generateExtensionsBreakdown() {
-        $finalHTML = $this->getBasedPage('extension_list');
-
         // List of extensions used
         $res = $this->sqlite->query(<<<SQL
 SELECT analyzer, count(*) AS count FROM results 
@@ -1167,7 +1168,7 @@ SQL
         $data = array();
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
             $shortName = str_replace('Extensions/Ext', 'ext/', $value['analyzer']);
-            $xAxis[] = "'".$shortName."'";
+            $xAxis[] = "'$shortName'";
             $data[$value['analyzer']] = $value['count'];
             //                    <a href="#" title="' . $value['analyzer'] . '">
             $html .= '<div class="clearfix">
@@ -1175,7 +1176,87 @@ SQL
                       <div class="block-cell-issue text-center">'.$value['count'].'</div>
                   </div>';
         }
+        
+        $this->generateGraphList('extension_list', 'Extensions\' list', $xAxis, $data, $html);
+    }
 
+    protected function generatePHPFunctionBreakdown() {
+        // List of php functions used
+        $res = $this->sqlite->query(<<<SQL
+SELECT name, count
+FROM phpStructures 
+WHERE type = "function"
+ORDER BY count DESC
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $xAxis[] = "'$value[name]'";
+            $data[$value['name']] = $value['count'];
+            //                    <a href="#" title="' . $value['analyzer'] . '">
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">'.$value['name'].'</div>
+                      <div class="block-cell-issue text-center">'.$value['count'].'</div>
+                  </div>';
+        }
+        
+        $this->generateGraphList('phpfunctions_list', 'PHP Native Functions\' list', $xAxis, $data, $html);
+    }
+
+    protected function generatePHPConstantsBreakdown() {
+        // List of php functions used
+        $res = $this->sqlite->query(<<<SQL
+SELECT name, count
+FROM phpStructures 
+WHERE type = "constant"
+ORDER BY count DESC
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $xAxis[] = "'$value[name]'";
+            $data[$value['name']] = $value['count'];
+            //                    <a href="#" title="' . $value['analyzer'] . '">
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">'.$value['name'].'</div>
+                      <div class="block-cell-issue text-center">'.$value['count'].'</div>
+                  </div>';
+        }
+        
+        $this->generateGraphList('phpconstants_list', 'PHP Native Constants\' list', $xAxis, $data, $html);
+    }
+
+    protected function generatePHPClassesBreakdown() {
+        // List of php functions used
+        $res = $this->sqlite->query(<<<SQL
+SELECT name, count
+FROM phpStructures 
+WHERE type in ("class", "interface", "trait")
+ORDER BY count DESC
+SQL
+        );
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $xAxis[] = "'$value[name]'";
+            $data[$value['name']] = $value['count'];
+            //                    <a href="#" title="' . $value['analyzer'] . '">
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">'.$value['name'].'</div>
+                      <div class="block-cell-issue text-center">'.$value['count'].'</div>
+                  </div>';
+        }
+        
+        $this->generateGraphList('phpclasses_list', 'PHP Native Classes, Interfaces and Traits\' list', $xAxis, $data, $html);
+    }
+
+    protected function generateGraphList($filename, $title, $xAxis, $data, $html) {
+        $finalHTML = $this->getBasedPage('extension_list');
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
 
         $blocjs = <<<JAVASCRIPT
@@ -1321,9 +1402,9 @@ JAVASCRIPT;
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Extensions\' list');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', $title);
 
-        $this->putBasedPage('extension_list', $finalHTML);
+        $this->putBasedPage($filename, $finalHTML);
     }
 
     public function getHashData() {

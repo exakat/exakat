@@ -1026,10 +1026,6 @@ SQL
         $this->collectPhpStructures2('Identifier", "Nsname', 'Interfaces/IsExtInterface', 'interface');
         $this->collectPhpStructures2('Identifier", "Nsname', 'Traits/IsExtTrait', 'trait');
         $this->collectPhpStructures2('Newcall", "Identifier", "Nsname', 'Classes/IsExtClass', 'class');
-
-        // classes, interface, trait
-        // variables
-        // constants
     }
     
     private function collectPhpStructures2($label, $analyzer, $type) {
