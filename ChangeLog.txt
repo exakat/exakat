@@ -1,4 +1,4 @@
-Version 1.4.2 (Zhu Bajie, coming up)
+Version 1.4.3 (Sha Wujing, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,26 @@ Version 1.4.2 (Zhu Bajie, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.4.2 (Zhu Bajie, 2018-08-27)
++ Architecture
+    + Fixed leftover bugs in the new DSL language
+    + Adopter Query in LoadFinal (first test)
+    + Extended support for clone type 1.
++ Report
+    + New Report : Weekly report
++ Analyzer
+    + New analysis : report forgotten conflict in traits
+    + New analysis : undefined insteadof
+    + New analysis : undefined variable
+    + New analysis : report classes that must call parent::__construct
+    + Upgraded analysis : Inexistant Compact variable
+    + Upgraded analysis : Test class was refactored
+    + 
+    + Checked unit tests : 2975 / 2989 test pass (99% pass). 
++ Tokenizer
+    + New atom : Staticmethod, for Insteadof (replacing 'Staticconstant')
+    + Added DEFINITION link for array('class', 'method') structure
 
 Version 1.4.1 (Tang Sanzang, 2018-08-20)
 + Architecture
