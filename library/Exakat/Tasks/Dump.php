@@ -1020,11 +1020,23 @@ CREATE TABLE phpStructures (  id INTEGER PRIMARY KEY AUTOINCREMENT,
 )
 SQL
 );
+        
+        $this->collectPhpStructures2('Functioncall', 'Functions/IsExtFunction', 'function');
+        $this->collectPhpStructures2('Identifier", "Nsname', 'Constants/IsExtConstant', 'constant');
+        $this->collectPhpStructures2('Identifier", "Nsname', 'Interfaces/IsExtInterface', 'interface');
+        $this->collectPhpStructures2('Identifier", "Nsname', 'Traits/IsExtTrait', 'trait');
+        $this->collectPhpStructures2('Newcall", "Identifier", "Nsname', 'Classes/IsExtClass', 'class');
 
+        // classes, interface, trait
+        // variables
+        // constants
+    }
+    
+    private function collectPhpStructures2($label, $analyzer, $type) {
         $query = <<<GREMLIN
-g.V().hasLabel('Functioncall').where( __.in('ANALYZED').has("analyzer", "Functions/IsExtFunction"))
-.out('NAME')
-.groupCount('m').by('fullcode').cap('m').next().sort{ it.value.toInteger() };
+g.V().hasLabel("$label").where( __.in("ANALYZED").has("analyzer", "$analyzer"))
+.coalesce( __.out("NAME"), __.filter{true;})
+.groupCount("m").by("fullcode").cap("m").next().sort{ it.value.toInteger() };
 GREMLIN;
         $res = $this->gremlin->query($query);
 
@@ -1033,7 +1045,7 @@ GREMLIN;
         foreach($res as $row) {
             $count = current($row);
             $name = key($row);
-            $query[] = "(null, '".$this->sqlite->escapeString($name)."', 'function', ".$count.")";
+            $query[] = "(null, '".$this->sqlite->escapeString($name)."', '$type', $count)";
 
             ++$total;
         }
@@ -1042,11 +1054,7 @@ GREMLIN;
             $query = 'INSERT INTO phpStructures ("id", "name", "type", "count") VALUES '.implode(', ', $query);
             $this->sqlite->query($query);
         }
-        display("$total PHP functions\n");
-        
-        // classes, interface, trait
-        // variables
-        // constants
+        display("$total PHP {$type}s\n");
     }
     
     private function collectFunctions() {
@@ -1225,7 +1233,7 @@ GREMLIN;
             $insert[] = '("'.$name.' defined", '.$res->toInt().')';
         }
 
-        $this->sqlite->query('INSERT INTO hash ("key", "value") VALUES '.implode(', ', $insert));
+        $this->sqlite->query('REPLACE INTO hash ("key", "value") VALUES '.implode(', ', $insert));
     }
 
     private function collectFilesDependencies() {
