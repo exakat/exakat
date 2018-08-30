@@ -64,7 +64,7 @@ filter{
         // iterable
         // self, static
         default : 
-            type == "Null";
+            !(type in ["Null"]);
             break;
     }
 }
