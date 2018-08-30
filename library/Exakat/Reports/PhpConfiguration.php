@@ -86,7 +86,11 @@ class PhpConfiguration extends Reports {
         $res = $this->sqlite->query(<<<SQL
 SELECT analyzer FROM resultsCounts 
     WHERE ( analyzer LIKE "Extensions/Ext%" OR 
-            analyzer IN ("Structures/FileUploadUsage", "Php/UsesEnv"))
+            analyzer IN ("Structures/FileUploadUsage", 
+                         "Php/UsesEnv",
+                         "Php/UseBrowscap",
+                         "Php/DlUsage",
+                         "Security/CantDisableFunction"))
         AND count > 0
 SQL
         );
@@ -97,6 +101,26 @@ SQL
                 $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
             } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
                 $data['Error log'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
+            } elseif ($row['analyzer'] === 'Php/UseBrowscap') {
+                $data['Browscap'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/browscap.json'));
+            } elseif ($row['analyzer'] === 'Php/DlUsage') {
+                $data['Dl'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/enable_dl.json'));
+            } elseif ($row['analyzer'] === 'Security/CantDisableFunction') {
+                $res2 = $this->sqlite->query(<<<SQL
+SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
+    WHERE analyzer = "Security/CantDisableFunction";
+SQL
+        );
+                $list = $res2->fetchArray(\SQLITE3_NUM);
+                $list = explode(',', $list[0]);
+                $disable = parse_ini_file("{$this->config->dir_root}/data/disable_functions.ini");
+                $suggestions = array_diff($disable['disable_functions'], $list);
+
+                $data['Disable Feature'] = (array) json_decode(file_get_contents("{$this->config->dir_root}/data/directives/disable_functions.json"));
+
+                // disable_functions
+                $data['Disable Feature'][0]->suggested = implode(',', $suggestions);
+                $data['Disable Feature'][0]->documentation .= "\n; ".count($list). " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
             } else {
                 $ext = substr($row['analyzer'], 14);
                 if (in_array($ext, $directives)) {

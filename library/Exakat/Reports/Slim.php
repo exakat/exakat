@@ -1069,7 +1069,7 @@ SQL;
         return $data;
     }
 
-    protected function getTopAnalyzers() {
+    protected function getTopAnalyzers($themes) {
         $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
         $list = makeList($listArray);
         $toplimit = self::TOPLIMIT;

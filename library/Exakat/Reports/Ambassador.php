@@ -2551,7 +2551,8 @@ SELECT analyzer, count FROM resultsCounts
             analyzer IN ("Structures/FileUploadUsage", 
                          "Php/UsesEnv",
                          "Php/UseBrowscap",
-                         "Php/DlUsage"
+                         "Php/DlUsage",
+                         "Security/CantDisableFunction"
                          ))
         AND count >= 0
 SQL
@@ -2573,15 +2574,32 @@ SQL
             } elseif ($row['analyzer'] === 'Php/ErrorLogUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
                 $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
+            } elseif ($row['analyzer'] === 'Security/CantDisableFunction') { // && $row['count'] !== 0)
+                $res2 = $this->sqlite->query(<<<SQL
+SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
+    WHERE analyzer = "Security/CantDisableFunction";
+SQL
+        );
+                $list = $res2->fetchArray(\SQLITE3_NUM);
+                $list = explode(',', $list[0]);
+                $disable = parse_ini_file("{$this->config->dir_root}/data/disable_functions.ini");
+                $suggestions = array_diff($disable['disable_functions'], $list);
+
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Disable Functions</td></tr>\n";
+                $data = (array) json_decode(file_get_contents("{$this->config->dir_root}/data/directives/disable_functions.json"));
+
+                // disable_functions
+                $data[0]->suggested = implode(', ', $suggestions);
+                $data[0]->documentation .= "<P>".count($list). " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list).'</P>';
             } elseif ($row['count'] !== 0) {
                 $ext = substr($row['analyzer'], 14);
                 if (in_array($ext, $directives)) {
-                    $data = json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
+                    $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/$ext.json"));
                     $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
                 }
             }
             foreach($data as $directive) {
-                $directiveList .= "<tr><td>$directive->name</td><td>$directive->suggested</td><td>$directive->documentation</td></tr>\n";
+                $directiveList .= "<tr><td>{$directive->name}</td><td>{$directive->suggested}</td><td>{$directive->documentation}</td></tr>\n";
             }
         }
 
