@@ -2561,19 +2561,19 @@ SQL
             $data = array();
             if ($row['analyzer'] === 'Structures/FileUploadUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
-                $data = json_decode(file_get_contents(("{$this->config->dir_root}/data/fileupload.ini"));
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/fileupload.json"));
             } elseif ($row['analyzer'] === 'Php/UsesEnv' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
-                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/env.ini"));
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/env.json"));
             } elseif ($row['analyzer'] === 'Php/UseBrowscap' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Browser</td></tr>\n";
-                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/browscap.ini"));
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/browscap.json"));
             } elseif ($row['analyzer'] === 'Php/DlUsage' && $row['count'] === 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Enable DL</td></tr>\n";
-                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/enable_dl.ini"));
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/enable_dl.json"));
             } elseif ($row['analyzer'] === 'Php/ErrorLogUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
-                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/errorlog.ini"));
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/errorlog.json"));
             } elseif ($row['analyzer'] === 'Security/CantDisableFunction') { 
                 $res2 = $this->sqlite->query(<<<SQL
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
@@ -2598,6 +2598,7 @@ SQL
                     $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
                 }
             }
+
             foreach($data as $directive) {
                 $directiveList .= "<tr><td>{$directive->name}</td><td>{$directive->suggested}</td><td>{$directive->documentation}</td></tr>\n";
             }
