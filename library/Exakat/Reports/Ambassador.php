@@ -2561,20 +2561,20 @@ SQL
             $data = array();
             if ($row['analyzer'] === 'Structures/FileUploadUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
-                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
+                $data = json_decode(file_get_contents(("{$this->config->dir_root}/data/fileupload.ini"));
             } elseif ($row['analyzer'] === 'Php/UsesEnv' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
-                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/env.ini"));
             } elseif ($row['analyzer'] === 'Php/UseBrowscap' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Browser</td></tr>\n";
-                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/browscap.json'));
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/browscap.ini"));
             } elseif ($row['analyzer'] === 'Php/DlUsage' && $row['count'] === 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Enable DL</td></tr>\n";
-                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/enable_dl.json'));
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/enable_dl.ini"));
             } elseif ($row['analyzer'] === 'Php/ErrorLogUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
-                $data = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
-            } elseif ($row['analyzer'] === 'Security/CantDisableFunction') { // && $row['count'] !== 0)
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/errorlog.ini"));
+            } elseif ($row['analyzer'] === 'Security/CantDisableFunction') { 
                 $res2 = $this->sqlite->query(<<<SQL
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
     WHERE analyzer = "Security/CantDisableFunction";
@@ -2586,7 +2586,7 @@ SQL
                 $suggestions = array_diff($disable['disable_functions'], $list);
 
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Disable Functions</td></tr>\n";
-                $data = (array) json_decode(file_get_contents("{$this->config->dir_root}/data/directives/disable_functions.json"));
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/disable_functions.json"));
 
                 // disable_functions
                 $data[0]->suggested = implode(', ', $suggestions);
