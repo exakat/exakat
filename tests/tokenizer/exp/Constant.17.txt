@@ -1,0 +1,33 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : DEFINITION
+            12
+          Label : ARGUMENT
+            6
+          Label : ARGUMENT
+            8
+            Label : ARGUMENT
+              9
+            Label : NAME
+              8
+          Label : NAME
+            5
+        Label : EXPRESSION
+          16
+          Label : ARGUMENT
+            11
+            Label : CODE
+              14
+              Label : CONCAT
+                12
+              Label : CONCAT
+                15
