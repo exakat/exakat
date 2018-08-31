@@ -5362,7 +5362,6 @@ class Load extends Tasks {
             // namespace\A\B
             return array(substr($this->namespace, 0, -1).mb_strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
         } elseif (in_array($name->atom, array('Identifier', 'Name', 'Boolean', 'Null', 'Static', 'Parent', 'Self', 'Newcall'))) {
-            
             $fnp = mb_strtolower($name->code);
 
             if (($offset = strpos($fnp, '\\')) === false) {
@@ -5428,6 +5427,11 @@ class Load extends Tasks {
             if (isset($this->uses[$type][$prefix])) {
                 $this->addLink( $name, $this->uses[$type][$prefix], 'DEFINITION');
                 return array($this->uses[$type][$prefix]->fullnspath.mb_strtolower( substr($name->fullcode, strlen($prefix)) ) , 0);
+            } elseif ($type === 'const') {
+                $parts = explode('\\', $name->fullcode);
+                $last = array_pop($parts);
+                $fullnspath = $this->namespace.mb_strtolower(implode('\\', $parts)).'\\'.$last;
+                return array($fullnspath, 0);
             } else {
                 return array($this->namespace.mb_strtolower($name->fullcode), 0);
             }
