@@ -1,9 +1,7 @@
 <?php
 
 // drop the else
-if ($c == 1) {
-
-} elseif ($a) {
+if ($a) {
     return $a;
 } else {
     try {
@@ -15,6 +13,17 @@ if ($c == 1) {
 }
 
 // drop the then
+if ($b) {
+    try {
+        doSomething();
+    } catch(Exception $e) {
+        return $e;
+    }
+} else {
+    return $a;
+}
+
+// keep it all
 if ($c == 2) {
 
 } elseif ($b) {
@@ -26,6 +35,7 @@ if ($c == 2) {
 } else {
     return $a;
 }
+
 
 // no else
 if ($a2) {
