@@ -28,6 +28,18 @@ class DropElseAfterReturn extends Analyzer {
     public function analyze() {
         //if ($a) { return $a; } else { doSomething(); }
         $this->atomIs('Ifthen')
+             ->tokenIsNot('T_ELSEIF')
+             ->raw(<<<GREMLIN
+not(
+    where(
+        __.in("EXPRESSION")
+          .has("count", 1)
+          .in("ELSE")
+          .hasLabel("Ifthen")
+    )
+)
+GREMLIN
+)
              ->outIs('THEN')
              ->outIs('EXPRESSION')
              ->atomIs('Return')
@@ -39,6 +51,18 @@ class DropElseAfterReturn extends Analyzer {
 
         //if ($a) { doSomething(); } else { return $a; }
         $this->atomIs('Ifthen')
+             ->tokenIsNot('T_ELSEIF')
+             ->raw(<<<GREMLIN
+not(
+    where(
+        __.in("EXPRESSION")
+          .has("count", 1)
+          .in("ELSE")
+          .hasLabel("Ifthen")
+    )
+)
+GREMLIN
+)
              ->outIs('ELSE')
              ->outIs('EXPRESSION')
              ->atomIs('Return')
