@@ -1190,10 +1190,6 @@ class Load extends Tasks {
             $this->calls->addDefinition('staticmethod', $function->fullnspath, $function);
         }
 
-        if (!$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
-
         $this->contexts[self::CONTEXT_CLASS] = $previousClassContext;
         $this->contexts[self::CONTEXT_FUNCTION] = $previousFunctionContext;
         $this->runPlugins($function, array('BLOCK' => $block));
