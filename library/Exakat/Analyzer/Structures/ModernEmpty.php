@@ -35,7 +35,7 @@ class ModernEmpty extends Analyzer {
     }
     
     public function analyze() {
-        $CONTAINERS  = implode('", "', self::$CONTAINERS);
+        $CONTAINERS  = makeList(self::$CONTAINERS);
         $MAX_LOOPING = self::MAX_LOOPING;
 
         // $a = source();

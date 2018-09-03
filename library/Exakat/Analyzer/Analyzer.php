@@ -1401,6 +1401,12 @@ GREMLIN;
         return $this;
     }
     
+    public function collectContainers($variables = 'variables') {
+        $this->query->collectContainers($variables);
+        
+        return $this;
+    }
+    
     // Calculate The lenght of a string in a property, and report it in the named string
     public function getStringLength($property = 'noDelimiter', $variable = 'l') {
         $this->query->getStringLength($property, $variable);
