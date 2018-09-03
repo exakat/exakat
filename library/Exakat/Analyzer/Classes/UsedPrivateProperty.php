@@ -26,7 +26,6 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UsedPrivateProperty extends Analyzer {
-
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
         
@@ -75,7 +74,7 @@ GREMLIN
              ->back('ppp');
         $this->prepareQuery();
 
-        // property used in a normal methodcall with $this $this->b()
+        // property used in a normal propertycall with $this $this->b
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('PPP')
              ->atomIs('Ppp')
@@ -84,11 +83,10 @@ GREMLIN
              ->savePropertyAs('propertyname', 'x')
              ->_as('ppp')
              ->back('first')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->atomInsideNoDefinition('Member')
-             ->outIs('OBJECT')
+             ->outIs('DEFINITION')
              ->atomIs('This')
              ->inIs('OBJECT')
+             ->atomIs('Member')
              ->outIs('MEMBER')
              ->samePropertyAs('code', 'x', self::CASE_SENSITIVE)
              ->back('ppp');
