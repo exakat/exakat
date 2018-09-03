@@ -28,7 +28,6 @@ use Exakat\Tasks\Clean;
 use Exakat\Tasks\Jobqueue;
 use Exakat\Exceptions\NoJobqueueStarted;
 use Exakat\Exceptions\NoSuchFile;
-use Exakat\Exceptions\ReportAlreadyDone;
 
 class Queue extends Tasks {
     const CONCURENCE = self::ANYTIME;
