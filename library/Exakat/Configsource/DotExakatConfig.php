@@ -25,10 +25,8 @@ namespace Exakat\Configsource;
 use Exakat\Phpexec;
 
 class DotExakatConfig extends Config {
-    private $projects_root = '.';
-    
     public function __construct($projects_root) {
-        $this->dotExakat = $projects_root.'/projects/code/.exakat';
+        $this->dotExakat = "{$projects_root}/projects/code/.exakat";
     }
 
     public function loadConfig($project) {
