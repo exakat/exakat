@@ -71,12 +71,12 @@ class Weekly extends Ambassador {
     const G_NOTICE   = 2;
     const G_NONE     = 1;
 
-    private $titles = array('This Week', 
-                            'Last week', 
-                            'Two weeks ago', 
+    private $titles = array('This Week',
+                            'Last week',
+                            'Two weeks ago',
                             'Three weeks ago',
-                            'Four weeks ago', 
-                            'Go further', 
+                            'Four weeks ago',
+                            'Go further',
                           );
 
     private $names =  array(self::G_CRITICAL  => 'Critical',

@@ -1472,8 +1472,8 @@ GREMLIN;
     }
     
     public function execQuery() {
-        if (empty($this->queries)) { 
-            return true; 
+        if (empty($this->queries)) {
+            return true;
         }
 
         // @todo add a test here ?

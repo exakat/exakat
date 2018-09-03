@@ -103,7 +103,7 @@ class Php {
         $errors = [];
         $total = 0;
         
-        //'Php74', 
+        //'Php74',
         $versions = array('Php73', 'Php72', 'Php71', 'Php70', 'Php56', 'Php55',);
         
         foreach($versions as $version) {

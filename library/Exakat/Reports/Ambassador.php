@@ -2574,7 +2574,7 @@ SQL
             } elseif ($row['analyzer'] === 'Php/ErrorLogUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
                 $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/errorlog.json"));
-            } elseif ($row['analyzer'] === 'Security/CantDisableFunction') { 
+            } elseif ($row['analyzer'] === 'Security/CantDisableFunction') {
                 $res2 = $this->sqlite->query(<<<SQL
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
     WHERE analyzer = "Security/CantDisableFunction";

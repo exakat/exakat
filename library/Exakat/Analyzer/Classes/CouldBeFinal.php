@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class CouldBeFinal extends Analyzer {
-    // class x {} 
+    // class x {}
     // no child extends x
     public function analyze() {
         $this->atomIs(array('Class', 'Classanonymous'))
