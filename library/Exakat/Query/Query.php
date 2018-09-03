@@ -59,36 +59,6 @@ class Query {
         return $this;
     }
 
-    public function addMethod($method, $arguments = array()) {
-        die(__METHOD__);
-        if ($arguments === array()) { // empty, but won't mistake 0 for nothing
-            $this->methods[] = $method;
-            return $this;
-        }
-        
-        assert(substr_count($method, '***') == func_num_args() - 1, substr_count($method, '***').' placeholders for '.(func_num_args() - 1).' arguments, in '.$method);
-        
-        if (func_num_args() >= 2) {
-            $arguments = func_get_args();
-            array_shift($arguments);
-            $argnames = array(str_replace('***', '%s', $method));
-            foreach($arguments as $arg) {
-                $argname = 'arg'.count($this->arguments);
-                $this->arguments[$argname] = $arg;
-                $argnames[] = $argname;
-            }
-            $this->methods[] = call_user_func_array('sprintf', $argnames);
-            return $this;
-        }
-
-        // one argument
-        $argname = 'arg'.count($this->arguments);
-        $this->arguments[$argname] = $arguments;
-        $this->methods[] = str_replace('***', $argname, $method);
-        
-        return $this;
-    }
-
     public function prepareQuery($analyzerId) {
         assert($this->query === null, 'query is already ready');
 

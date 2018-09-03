@@ -33,10 +33,6 @@ class Tinkergraph extends Graph {
     const UNCHECKED = false;
     const UNAVAILABLE = 1;
     
-    private $client = null;
-    
-    private $scriptDir  = '';
-    
     private $status     = self::UNCHECKED;
     
     private $log        = null;
