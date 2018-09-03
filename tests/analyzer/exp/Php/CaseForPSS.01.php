@@ -4,7 +4,8 @@ $expected     = array('PARENT',
                       'Self',
                      );
 
-$expected_not = array(
+$expected_not = array('self',
+                      'parent',
                      );
 
 ?>

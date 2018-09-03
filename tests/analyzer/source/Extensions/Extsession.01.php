@@ -14,4 +14,6 @@
     $a = $_SESSION['key']; 
     session_write_close(); 
 
+    session_just_close(); 
+
  ?> 

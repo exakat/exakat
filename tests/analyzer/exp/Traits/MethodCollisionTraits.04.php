@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('class C { /**/ } ', 
+$expected     = array('class C { /**/ } ',
                       'class CCC { /**/ } ',
                      );
 

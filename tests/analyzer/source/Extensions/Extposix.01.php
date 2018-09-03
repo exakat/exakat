@@ -2,7 +2,7 @@
 
 $file = 'some_file';
 
-if (posix_access($file, POSIX_R_OK | POSIX_W_OK)) {
+if (posix_access($file, POSIX_R_OK | POSIX_W_OK | POSIX_A_OK)) {
     echo 'The file is readable and writable!';
 
 } else {
@@ -10,5 +10,7 @@ if (posix_access($file, POSIX_R_OK | POSIX_W_OK)) {
 
     echo "Error $error: " . posix_strerror($error);
 }
+
+echo posix_get_next_error();
 
 ?>

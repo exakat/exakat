@@ -7,7 +7,8 @@ $expected     = array('posix_access($file, POSIX_R_OK | POSIX_W_OK)',
                       'POSIX_W_OK',
                      );
 
-$expected_not = array(
+$expected_not = array('POSIX_A_OK',
+                      'posix_get_next_error( )',
                      );
 
 ?>

@@ -10,7 +10,7 @@ $expected     = array('session_name(\'Private\')',
                       'session_write_close( )',
                      );
 
-$expected_not = array(
+$expected_not = array('session_just_close( )',
                      );
 
 ?>
