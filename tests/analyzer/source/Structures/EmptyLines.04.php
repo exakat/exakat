@@ -67,7 +67,7 @@
     }
     
     function CA($f) {
-        P::Q();
+        P::Q(); ;
         $j = P::$c->CE();
         $k = array();
         foreach($j as $l) {

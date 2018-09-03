@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_EmptyLines extends Analyzer {
-    /* 6 methods */
+    /* 7 methods */
 
     public function testStructures_EmptyLines01()  { $this->generic_test('Structures_EmptyLines.01'); }
     public function testStructures_EmptyLines02()  { $this->generic_test('Structures_EmptyLines.02'); }
@@ -16,5 +16,6 @@ class Structures_EmptyLines extends Analyzer {
     public function testStructures_EmptyLines04()  { $this->generic_test('Structures_EmptyLines.04'); }
     public function testStructures_EmptyLines05()  { $this->generic_test('Structures_EmptyLines.05'); }
     public function testStructures_EmptyLines06()  { $this->generic_test('Structures/EmptyLines.06'); }
+    public function testStructures_EmptyLines07()  { $this->generic_test('Structures/EmptyLines.07'); }
 }
 ?>
