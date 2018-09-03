@@ -363,7 +363,7 @@ JOIN analyzers
         $total = 0;
         while($row = $res->fetchArray()) {
             ++$total;
-            print ' + '. $row['name']. "\n";
+            print " + $row[name]\n";
         }
         print $total. "analyzers in Unassigned\n";
 
@@ -378,7 +378,7 @@ JOIN analyzers
         $total = 0;
         while($row = $res->fetchArray()) {
             ++$total;
-            print_r($row);
+//            print_r($row);
 //            $res = $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer='.$row['id_analyzer'].' AND id_categories = '.$row['id_categories']);
         }
         print $total. " categories have orphans\n";
@@ -394,13 +394,16 @@ JOIN categories
         $total = 0;
         while($row = $res->fetchArray()) {
             ++$total;
-            print_r($row);
+//            print_r($row);
 //            $res = $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer='.$row['id_analyzer'].' AND id_categories = '.$row['id_categories']);
         }
         print $total. " analyzers are orphans\n";
 
         // check for analyzers in Files
         $total = 0;
+        $totals = array('examples'     => 0,
+                        'examples_app' => array(),
+                       );
         $res = $sqlite->query('SELECT analyzers.folder || "/" || analyzers.name as name FROM analyzers');
         while($row = $res->fetchArray()) {
             ++$total;
@@ -431,6 +434,8 @@ JOIN categories
             
             if (!empty($examples)) {
                 foreach($examples as $example) {
+                    ++$totals['examples'];
+                    $totals['examples_app'][] = $ini[$example]['project'];
                     if ($ini[$example]['file'][0] === '/') {
                         print "human/en/$row[name].ini has an initial / for file in $example\n";
                     }
@@ -468,11 +473,15 @@ JOIN categories
                 print 'human/en/'.$row['name'].'.ini'. " name is not Capital Worded ($ini[name])\n";
             }
             
-            if (!file_exists('tests/analyzer/Test/'.$row['name'].'.php')) {
+            if (!file_exists("tests/analyzer/Test/$row[name].php")) {
                 print $row['name']. " has no Test\n";
             }
         }
-        print "\n". $total. " analyzers are in the base\n";
+        print "\n$total analyzers are in the base\n";
+        print "$totals[examples] examples in the docs\n";
+        $apps = array_count_values($totals['examples_app']);
+        asort($apps);
+        print_r($apps);
 
         $analyzes = array('Analyze', 
                           'Dead Code',
