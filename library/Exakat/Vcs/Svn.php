@@ -57,6 +57,11 @@ class Svn extends Vcs {
     private function getInfo() {
         $res = trim(shell_exec("cd {$this->destinationFull}/code; svn info"));
         
+        if (empty($res)) {
+            $this->info[$name] = '';
+
+            return;
+        }
         foreach(explode("\n", $res) as $info) {
             list($name, $value) = explode(': ', trim($info));
             $this->info[$name] = $value;
