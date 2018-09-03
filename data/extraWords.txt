@@ -26,7 +26,6 @@ bracketless
 __DIR__
 __FILE__
 __METHOD__
-booleans
 superglobals
 superglobal
 globals
@@ -99,8 +98,6 @@ Heredoc
 Nowdoc
 isset
 CWE
-Boolean
-Preprocessing
 autoload
 heredocs
 zend
@@ -131,3 +128,15 @@ namespace
 namespaced
 acyclic
 unmaintained
+runtime
+commandline
+unserialize
+unserialized
+unserializes
+serialize
+serialized
+serializes
+pregenerated
+pregenerates
+pregenerate
+cacheable
