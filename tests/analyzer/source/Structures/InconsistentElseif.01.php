@@ -19,9 +19,15 @@ elseif($d == 4) {}
 else {}
 
 if($e1 == 1) {}
-elseif($e1 == 2) {}
+elseif($e2 == 2) {}
 elseif($e3 == 3) {}
 elseif($e4 == 4) {}
 else {}
+
+if($f1 == 1) {} 
+elseif($f1 == 2) {} 
+elseif($f1 == 3) {} 
+elseif($f4 == 4) {} 
+else {} 
 
 ?>
