@@ -1401,8 +1401,14 @@ GREMLIN;
         return $this;
     }
     
-    public function collectContainers($variables = 'variables') {
-        $this->query->collectContainers($variables);
+    public function collectContainers($containers = 'containers') {
+        $this->query->collectContainers($containers);
+        
+        return $this;
+    }
+
+    public function collectVariables($variables = 'variables') {
+        $this->query->collectVariables($variables);
         
         return $this;
     }

@@ -20,31 +20,32 @@
  *
 */
 
-namespace Exakat\Analyzer\Structures;
 
+namespace Exakat\Query\DSL;
+
+use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class InconsistentElseif extends Analyzer {
-    public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
+class CollectVariables extends DSL {
+    public function run() : Command {
+        list($variable) = func_get_args();
         
-        // if ($a == 1) {} elseif ($b == 2) {}
-        $this->atomIs('Ifthen')
-             ->isNot('token', 'T_ELSEIF')
-             ->outIs('CONDITION')
-             ->collectVariables('variables')
-             ->back('first')
-             ->raw(<<<GREMLIN
-repeat( __.out("ELSE")).emit().times($MAX_LOOPING).hasLabel("Ifthen")
-GREMLIN
+        $CONTAINERS = makeList(Analyzer::$VARIABLES_ALL);
+        $LINKS_DOWN = self::$linksDown;
+
+        return new Command(<<<GREMLIN
+where(
+    __.sideEffect{ $variable = []; }
+      .repeat( __.out($LINKS_DOWN)).emit()
+      .hasLabel($CONTAINERS)
+      .sideEffect{ 
+          $variable.add(it.get().value("code")); 
+      }
+      .fold()
 )
-             ->outIs('CONDITION')
-             ->collectVariables('variables2')
-             ->filter('variables.intersect(variables2) == []')
-             
-             ->back('first');
-        $this->prepareQuery();
+
+GREMLIN
+);
     }
 }
-
 ?>
