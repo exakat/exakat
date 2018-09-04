@@ -164,8 +164,8 @@ class Ambassador extends Reports {
             return false;
         }
 
-        $this->finalName = $folder.'/'.$name;
-        $this->tmpName = $folder.'/.'.$name;
+        $this->finalName = "$folder/$name";
+        $this->tmpName   = "$folder/.$name";
 
         $this->projectPath = $folder;
 
@@ -716,9 +716,9 @@ JAVASCRIPT;
         $this->makeAuditDate($finalHTML);
 
         // top 10
-        $fileHTML = $this->getTopFile($this->themesToShow);
+        $fileHTML = $this->getTopFile($this->themes->getThemeAnalyzers($this->themesToShow));
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers($this->themesToShow);
+        $analyzerHTML = $this->getTopAnalyzers($this->themes->getThemeAnalyzers($this->themesToShow));
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
 
         $blocjs = <<<JAVASCRIPT
@@ -1420,7 +1420,7 @@ JAVASCRIPT;
         // fichier
         $totalFile = $this->datastore->getHash('files');
         $totalFileAnalysed = $this->getTotalAnalysedFile();
-        $totalFileSansError = $totalFileAnalysed - $totalFile;
+        $totalFileSansError = $totalFile - $totalFileAnalysed;
         if ($totalFile === 0) {
             $percentFile = 100;
         } else {
@@ -1575,7 +1575,7 @@ SQL;
                      'script' => $dataScript);
     }
 
-    private function getTotalAnalysedFile() {
+    protected function getTotalAnalysedFile() {
         $query = "SELECT COUNT(DISTINCT file) FROM results WHERE file LIKE '/%' ";
         $result = $this->sqlite->query($query);
 
@@ -1583,7 +1583,7 @@ SQL;
         return $result[0];
     }
 
-    private function getTotalAnalyzer($issues = false) {
+    protected function getTotalAnalyzer($issues = false) {
         $query = "SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
             FROM resultsCounts AS rc
             WHERE rc.count >= 0";
@@ -1892,6 +1892,12 @@ SQL;
                   </div>';
         }
 
+        $nb = 10 - count($data);
+        $html .= str_repeat('<div class="clearfix">
+                      <div class="block-cell-name">&nbsp;</div>
+                      <div class="block-cell-issue text-center">&nbsp;</div>
+                  </div>', $nb);
+
         return $html;
     }
 
@@ -1930,7 +1936,8 @@ SQL;
 
         $severities = $this->getSeveritiesNumberBy('analyzer');
         foreach ($data as $value) {
-            $xAxis[] = "'".$value['analyzer']."'";
+            $ini = $this->getDocs($value['analyzer']);
+            $xAxis[] = "'".$ini['name']."'";
             $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
             $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
             $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
