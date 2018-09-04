@@ -1192,6 +1192,7 @@ class Load extends Tasks {
 
         $this->contexts[self::CONTEXT_CLASS] = $previousClassContext;
         $this->contexts[self::CONTEXT_FUNCTION] = $previousFunctionContext;
+        $this->runPlugins($block);
         $this->runPlugins($function, array('BLOCK' => $block));
 
         array_pop($this->currentFunction);
