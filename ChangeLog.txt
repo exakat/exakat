@@ -1,4 +1,4 @@
-Version 1.4.3 (Sha Wujing, coming up)
+Version 1.4.4 (White Dragon Horse, coming up)
 + Architecture
     + 
 + Report
@@ -8,11 +8,31 @@ Version 1.4.3 (Sha Wujing, coming up)
 + Tokenizer
     + 
 
+Version 1.4.3 (Sha Wujing, 2018-09-03)
++ Architecture
+    + No error if missing svn
+    + Extended 'First' thema
+    + Now reporting PHP native CIT, constants and functions
++ Report
+    + Ambassador : php.ini suggestions includes disable_functions
++ Analyzer
+    + New analysis : report typecasting for json_decode
+    + New analysis : report classes that could be final
+    + New analysis : simplify closure into callback
+    + New analysis : report inconsistent elseif conditions
+    + Upgraded analysis : Reduced false positive on Type/Default mismatch
+    + Upgraded analysis : Drop Else After Return uses elsif
+    + Upgraded analysis : Unused Private Property (rare)
+    + Checked unit tests : 2990 / 3004 test pass (99% pass)
++ Tokenizer
+    + Removed extra Void after function definitions
+    + Fixed fullnspath with define()
+
 Version 1.4.2 (Zhu Bajie, 2018-08-27)
 + Architecture
     + Fixed leftover bugs in the new DSL language
     + Adopter Query in LoadFinal (first test)
-    + Extended support for clone type 1.
+    + Extended support for clone type 1
 + Report
     + New Report : Weekly report
 + Analyzer
@@ -22,8 +42,7 @@ Version 1.4.2 (Zhu Bajie, 2018-08-27)
     + New analysis : report classes that must call parent::__construct
     + Upgraded analysis : Inexistant Compact variable
     + Upgraded analysis : Test class was refactored
-    + 
-    + Checked unit tests : 2975 / 2989 test pass (99% pass). 
+    + Checked unit tests : 2975 / 2989 test pass (99% pass)
 + Tokenizer
     + New atom : Staticmethod, for Insteadof (replacing 'Staticconstant')
     + Added DEFINITION link for array('class', 'method') structure
