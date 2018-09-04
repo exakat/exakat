@@ -179,6 +179,7 @@ Glossary
     + `Closure`
 
       + :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
+      + :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
       + :ref:`Could Be Static Closure <could-be-static-closure>`
       + :ref:`Unused Inherited Variable In Closure <unused-inherited-variable-in-closure>`
 
@@ -202,6 +203,7 @@ Glossary
     + `closure`
 
       + :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
+      + :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
       + :ref:`Could Be Static Closure <could-be-static-closure>`
       + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
@@ -783,6 +785,7 @@ Glossary
 
     + `strtoupper()`
 
+      + :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
       + :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
 
     + `strtr()`

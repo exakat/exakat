@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 27 Aug 2018 10:19:05 +0000
-.. comment: Generation hash : c5c8488bad7388b4b9ab619cb8156af90607970d
+.. comment: Generation date : Mon, 03 Sep 2018 14:41:41 +0000
+.. comment: Generation hash : 2bacdd6065c245a8e172e9aaebfd797d46625858
 
 
 .. _$http\_raw\_post\_data:
@@ -333,7 +333,7 @@ While PHP lints this code, it won't execute it and stop with a Fatal Error : `Cl
    ?>
 
 
-See also `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_.
+See also `Class Abstraction <http://php.net/abstract>`_.
 
 +------------+------------------------------+
 | Short name | Classes/AbstractOrImplements |
@@ -3036,6 +3036,41 @@ Constant defined with const keyword may be arrays but only stating with PHP 5.6.
 
 
 
+.. _class-could-be-final:
+
+Class Could Be Final
+####################
+
+
+Any class that has no extension should be `final` by default.
+
+As stated by Matthias Noback : ``If a class is not marked final, it has at least one subclass``.
+
+Prevent your classes from being subclassed by making them `final`. Sometimes, classes are not meant or thought to be derivable.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {}            // This class is extended
+   class y extends x {}  // This class is extended
+   class z extends y {}  // This class is not extended
+   
+   final class z2 extends y {}  // This class is not extended
+   
+   ?>
+
+
+See also `Negative architecture, and assumptions about code <https://matthiasnoback.nl/2018/08/negative-architecture-and-assumptions-about-code/>`_.
+
++------------+------------------------------------+
+| Short name | Classes/CouldBeFinal               |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`ClassReview` |
++------------+------------------------------------+
+
+
+
 .. _class-function-confusion:
 
 Class Function Confusion
@@ -3203,22 +3238,6 @@ Those classes are extending each other, creating an extension loop. PHP will yie
 
 
 
-.. _classes/couldbeabstractclass:
-
-Classes/CouldBeAbstractClass
-############################
-
-
-
-
-+------------+------------------------------------+
-| Short name | Classes/CouldBeAbstractClass       |
-+------------+------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`ClassReview` |
-+------------+------------------------------------+
-
-
-
 .. _close-tags:
 
 Close Tags
@@ -3234,6 +3253,50 @@ PHP manual recommends that script should be left open, without the final closing
 +------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP   | `leave-last-closing-out <https://github.com/dseguy/clearPHP/tree/master/rules/leave-last-closing-out.md>`__ |
 +------------+-------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _closure-could-be-a-callback:
+
+Closure Could Be A Callback
+###########################
+
+
+`'Closure <http://php.net/manual/fr/class.closure.php>`_ could be simplified to a callback. Callbacks are strings or arrays.
+
+A simple closure that only returns arguments relayed to another function or method, could be reduced to a simpler expression. They 
+
+`'Closure <http://php.net/manual/fr/class.closure.php>`_ may be simplified with a string, for functioncall, with an array for methodcalls and static methodcalls. 
+
+Performances : simplifying a closure tends to reduce the call time by 50%. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Simple and faster call to strtoupper
+   $filtered = array_map('strtoupper', $array);
+   
+   // Here the closure doesn't add any feature over strtoupper
+   $filtered = array_map(function ($x) { return strtoupper($x);}, $array);
+   
+   // Methodcall example 
+   $filtered = array_map(function ($x) { return $x->'strtoupper() ;}, $array);
+   
+   // Static methodcall example 
+   $filtered = array_map(function ($x) { return $x::'strtoupper() ;}, $array);
+   
+   ?>
+
+
+See also `Closure class <http://php.net/closure>`_ and 
+         `Callbacks / Callables <http://php.net/manual/en/language.types.callable.php>`
+
++------------+-----------------------------------------+
+| Short name | Functions/Closure2String                |
++------------+-----------------------------------------+
+| Themes     | :ref:`Suggestions`, :ref:`Performances` |
++------------+-----------------------------------------+
 
 
 
@@ -3827,6 +3890,51 @@ See also `Deprecate and remove `'continue <http://php.net/manual/en/control-stru
 
 
 
+.. _could-be-abstract-class:
+
+Could Be Abstract Class
+#######################
+
+
+An abstract class is never instantiated, and has children class that are. As such, a 'parent' class that is never instantiated by itself, but has its own children instantiated could be marked as abstract. 
+
+That will prevent new code to try to instantiate it.
+
+.. code-block:: php
+
+   <?php
+   
+   // Example code would actually be split over multiple files.
+   
+   
+   // That class could be abstract
+   class motherClass {}
+   
+   // Those classes shouldn't be abstract
+   class firstChildren extends motherClass {}
+   class secondChildren extends motherClass {}
+   class thirdChildren extends motherClass {}
+   
+   new firstChildren();
+   new secondChildren();
+   new thirdChildren();
+   
+   //Not a single : new motherClass()
+   
+   ?>
+
+
+See also `Class Abstraction <http://php.net/abstract>`_
+         `Abstract classes and methods <https://phpenthusiast.com/object-oriented-php-tutorials/abstract-classes-and-methods>`_.
+
++------------+------------------------------------+
+| Short name | Classes/CouldBeAbstractClass       |
++------------+------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`ClassReview` |
++------------+------------------------------------+
+
+
+
 .. _could-be-class-constant:
 
 Could Be Class Constant
@@ -4204,7 +4312,7 @@ See also `Callback / callable <http://php.net/manual/en/language.types.callable.
 +------------+---------------------------------------------------------------------------------------+
 | Short name | Functions/CouldBeCallable                                                             |
 +------------+---------------------------------------------------------------------------------------+
-| Themes     | :ref:`Analyze`                                                                        |
+| Themes     | :ref:`Suggestions`                                                                    |
 +------------+---------------------------------------------------------------------------------------+
 | Examples   | :ref:`magento-functions-couldbecallable`, :ref:`prestashop-functions-couldbecallable` |
 +------------+---------------------------------------------------------------------------------------+
@@ -4324,7 +4432,7 @@ Arguments that are tested with `'instanceof <http://php.net/manual/en/language.o
 +------------+-------------------------+
 | Short name | Functions/CouldTypehint |
 +------------+-------------------------+
-| Themes     | :ref:`Analyze`          |
+| Themes     | :ref:`Suggestions`      |
 +------------+-------------------------+
 
 
@@ -6166,13 +6274,17 @@ The code does try, then catch errors but do no act upon the error.
 
 At worst, the error should be logged, so as to measure the actual usage of the catch expression.
 
-catch( Exception $e) (PHP 5) or catch(`'Throwable <http://php.net/manual/fr/class.throwable.php>`_ $e) with empty catch block should be banned, as they will simply ignore any error.
+catch( Exception $e) (PHP 5) or catch(`'Throwable <http://php.net/manual/fr/class.throwable.php>`_ $e) with empty catch block should be banned, as they will simply ignore any error. 
 
-+------------+--------------------------+
-| Short name | Structures/EmptyTryCatch |
-+------------+--------------------------+
-| Themes     | :ref:`Analyze`           |
-+------------+--------------------------+
+See also `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_.
+
++------------+-----------------------------------------------------------------------------------+
+| Short name | Structures/EmptyTryCatch                                                          |
++------------+-----------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                    |
++------------+-----------------------------------------------------------------------------------+
+| Examples   | :ref:`livezilla-structures-emptytrycatch`, :ref:`mautic-structures-emptytrycatch` |
++------------+-----------------------------------------------------------------------------------+
 
 
 
@@ -8218,6 +8330,22 @@ When the code is used as a template for PHP code generation, for example at inst
 
 
 
+.. _inconsistent-elseif:
+
+Inconsistent Elseif
+###################
+
+
+
+
++------------+-------------------------------+
+| Short name | Structures/InconsistentElseif |
++------------+-------------------------------+
+| Themes     | :ref:`Analyze`                |
++------------+-------------------------------+
+
+
+
 .. _indices-are-int-or-string:
 
 Indices Are Int Or String
@@ -8338,7 +8466,7 @@ The classes are actually abstract classes, and should be derived into a concrete
    ?>
 
 
-See also `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_.
+See also `Class Abstraction <http://php.net/abstract>`_.
 
 +------------+------------------------------------+
 | Short name | Classes/InstantiatingAbstractClass |
@@ -9417,22 +9545,6 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 +------------+------------------------------------------------------------------------------------------------------------+
 | Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +------------+------------------------------------------------------------------------------------------------------------+
-
-
-
-.. _mark-callable:
-
-Mark Callable
-#############
-
-
-Create an attribute that guess what are the called function or methods, when possible.
-
-+------------+------------------------+
-| Short name | Functions/MarkCallable |
-+------------+------------------------+
-| Themes     | :ref:`Analyze`         |
-+------------+------------------------+
 
 
 
@@ -10536,13 +10648,15 @@ Exakat tries to find the value of the case as much as possible, and ignore any d
    }
    ?>
 
-+------------+---------------------------------------------------------------------------------------------------+
-| Short name | Structures/MultipleDefinedCase                                                                    |
-+------------+---------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`Analyze`                                                                                    |
-+------------+---------------------------------------------------------------------------------------------------+
-| ClearPHP   | `no-duplicate-case <https://github.com/dseguy/clearPHP/tree/master/rules/no-duplicate-case.md>`__ |
-+------------+---------------------------------------------------------------------------------------------------+
++------------+--------------------------------------------------------------------------------------------------------+
+| Short name | Structures/MultipleDefinedCase                                                                         |
++------------+--------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                         |
++------------+--------------------------------------------------------------------------------------------------------+
+| ClearPHP   | `no-duplicate-case <https://github.com/dseguy/clearPHP/tree/master/rules/no-duplicate-case.md>`__      |
++------------+--------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`sugarcrm-structures-multipledefinedcase`, :ref:`expressionengine-structures-multipledefinedcase` |
++------------+--------------------------------------------------------------------------------------------------------+
 
 
 
@@ -10797,12 +10911,17 @@ However, ternary operators tends to make the syntax very difficult to read when 
    
    ?>
 
+
+See also `Nested Ternaries are Great <https://medium.com/javascript-scene/nested-ternaries-are-great-361bddd0f340>`_.
+
 +------------+---------------------------------------------------------------------------------------------------+
 | Short name | Structures/NestedTernary                                                                          |
 +------------+---------------------------------------------------------------------------------------------------+
 | Themes     | :ref:`Analyze`                                                                                    |
 +------------+---------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-nested-ternary <https://github.com/dseguy/clearPHP/tree/master/rules/no-nested-ternary.md>`__ |
++------------+---------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`spip-structures-nestedternary`, :ref:`zencart-structures-nestedternary`                     |
 +------------+---------------------------------------------------------------------------------------------------+
 
 
@@ -12748,9 +12867,9 @@ Not A Scalar Type
 #################
 
 
-int is the actual PHP scalar type, not integer. 
+`int` is the actual PHP scalar type, not `integer`. 
 
-PHP 7 introduced several scalar types, in particular int, bool and float. Those three types are easily mistaken with integer, boolean, real and double. 
+PHP 7 introduced several scalar types, in particular `int`, `bool` and `float`. Those three types are easily mistaken with `integer`, `boolean`, `real` and `double`. 
 
 Unless you have created those classes, you may get some strange error messages.
 
@@ -18255,6 +18374,8 @@ Most of the time, `'switch() <http://php.net/manual/en/control-structures.switch
 +------------+-------------------------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-switch-without-default <https://github.com/dseguy/clearPHP/tree/master/rules/no-switch-without-default.md>`__ |
 +------------+-------------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`zencart-structures-switchwithoutdefault`, :ref:`traq-structures-switchwithoutdefault`                       |
++------------+-------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -22039,6 +22160,45 @@ See also `PHP RFC: is_countable <https://wiki.php.net/rfc/is-countable>`_.
 +------------+-------------------------+
 | Themes     | :ref:`Suggestions`      |
 +------------+-------------------------+
+
+
+
+.. _use-json\_decode()-options:
+
+Use json_decode() Options
+#########################
+
+
+json_decode() returns objects by default, unless the second argument is set to TRUE. Then, it returns arrays.
+
+Avoid transtyping of json_decode() returned value, and use the second argument to directly set the correct type.
+
+.. code-block:: php
+
+   <?php
+   
+   $json = '{a:b}';
+   
+   // Good syntax
+   $array = json_decode($json, JSON_OBJECT_AS_ARRAY);
+   
+   // GoToo much work
+   $array = (array) json_decode($json);
+   
+   ?>
+
+
+Note that all objects will be turned into arrays, recursively. If you're expecting an array of objects, don't use the `JSON_OBJECT_AS_ARRAY` constant, and change your JSON code.
+
+Note that `JSON_OBJECT_AS_ARRAY` is the only constant : there is no defined constant to explicitly ask for an object as returned value. 
+
+See also `json_decode <http://php.net/json_decode>`_.
+
++------------+---------------------------+
+| Short name | Structures/JsonWithOption |
++------------+---------------------------+
+| Themes     | :ref:`Suggestions`        |
++------------+---------------------------+
 
 
 

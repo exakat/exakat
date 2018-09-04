@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 27 Aug 2018 10:19:05 +0000
-.. comment: Generation hash : c5c8488bad7388b4b9ab619cb8156af90607970d
+.. comment: Generation date : Mon, 03 Sep 2018 14:41:41 +0000
+.. comment: Generation hash : 2bacdd6065c245a8e172e9aaebfd797d46625858
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 357 analysis
+Total : 356 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -114,12 +114,12 @@ Total : 357 analysis
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Check All Types <check-all-types>`
 * :ref:`Check JSON <check-json>`
+* :ref:`Class Could Be Final <class-could-be-final>`
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Class Should Be Final By Ocramius <class-should-be-final-by-ocramius>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
-* :ref:`Classes/CouldBeAbstractClass`
 * :ref:`Common Alternatives <common-alternatives>`
 * :ref:`Compared Comparison <compared-comparison>`
 * :ref:`Concrete Visibility <concrete-visibility>`
@@ -127,11 +127,10 @@ Total : 357 analysis
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
 * :ref:`Continue Is For Loop <continue-is-for-loop>`
+* :ref:`Could Be Abstract Class <could-be-abstract-class>`
 * :ref:`Could Be Else <could-be-else>`
 * :ref:`Could Be Static <could-be-static>`
-* :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Make A Function <could-make-a-function>`
-* :ref:`Could Typehint <could-typehint>`
 * :ref:`Could Use Alias <could-use-alias>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
@@ -192,6 +191,7 @@ Total : 357 analysis
 * :ref:`Inclusion Wrong Case <inclusion-wrong-case>`
 * :ref:`Incompatible Signature Methods <incompatible-signature-methods>`
 * :ref:`Incompilable Files <incompilable-files>`
+* :ref:`Inconsistent Elseif <inconsistent-elseif>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
 * :ref:`Invalid Constant Name <invalid-constant-name>`
@@ -206,7 +206,6 @@ Total : 357 analysis
 * :ref:`Long Arguments <long-arguments>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
-* :ref:`Mark Callable <mark-callable>`
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
 * :ref:`Method Used Below <method-used-below>`
@@ -465,7 +464,7 @@ Total : 17 analysis
 ClassReview
 +++++++++++
 
-Total : 10 analysis
+Total : 11 analysis
 
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
@@ -475,6 +474,7 @@ Total : 10 analysis
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Property Could Be Private Property <property-could-be-private-property>`
 * Classes/CouldBeAbstractClass
+* Classes/CouldBeFinal
 * Classes/PropertyCouldBeLocal
 * Structures/CouldBeStatic
 
@@ -962,7 +962,7 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 35 analysis
+Total : 36 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -970,6 +970,7 @@ Total : 35 analysis
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Avoid glob() Usage <avoid-glob()-usage>`
 * :ref:`Cache Variable Outside Loop <cache-variable-outside-loop>`
+* :ref:`Closure Could Be A Callback <closure-could-be-a-callback>`
 * :ref:`Do In Base <do-in-base>`
 * :ref:`Double array_flip() <double-array\_flip()>`
 * :ref:`Fetch One Row Format <fetch-one-row-format>`
@@ -1082,14 +1083,16 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 58 analysis
+Total : 62 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Avoid Real <avoid-real>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
 * :ref:`Could Be Static Closure <could-be-static-closure>`
+* :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Return Void <could-return-void>`
+* :ref:`Could Typehint <could-typehint>`
 * :ref:`Could Use Compact <could-use-compact>`
 * :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`
 * :ref:`Could Use array_unique <could-use-array\_unique>`
@@ -1112,6 +1115,7 @@ Total : 58 analysis
 * :ref:`Use Count Recursive <use-count-recursive>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
 * :ref:`Use is_countable <use-is\_countable>`
+* :ref:`Use json_decode() Options <use-json\_decode()-options>`
 * :ref:`Use session_start() Options <use-session\_start()-options>`
 * :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 * Arrays/RandomlySortedLiterals
@@ -1120,6 +1124,7 @@ Total : 58 analysis
 * Classes/ShouldUseSelf
 * Classes/UnitializedProperties
 * Exceptions/OverwriteException
+* Functions/Closure2String
 * Functions/CouldCentralize
 * Functions/NeverUsedParameter
 * Functions/NoReturnUsed

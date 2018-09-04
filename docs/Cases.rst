@@ -201,7 +201,7 @@ Non Ascii Variables
 Magento
 ^^^^^^^
 
-:ref:`non-ascii-variables`, in /dev/tests/functional/tests/app/Mage/Checkout/Test/Constraint/AssertOrderWithMultishippingSuccessPlacedMessage.php:52. 
+:ref:`non-ascii-variables`, in dev/tests/functional/tests/app/Mage/Checkout/Test/Constraint/AssertOrderWithMultishippingSuccessPlacedMessage.php:52. 
 
 The initial C is actually a russian C.
 
@@ -217,7 +217,7 @@ Multiple Index Definition
 Magento
 ^^^^^^^
 
-:ref:`multiple-index-definition`, in /app/code/core/Mage/Adminhtml/Block/System/Convert/Gui/Grid.php:80. 
+:ref:`multiple-index-definition`, in app/code/core/Mage/Adminhtml/Block/System/Convert/Gui/Grid.php:80. 
 
 'type' is defined twice. The first one, 'options' is overwritten.
 
@@ -241,7 +241,7 @@ Magento
 MediaWiki
 ^^^^^^^^^
 
-:ref:`multiple-index-definition`, in /resources/Resources.php:223. 
+:ref:`multiple-index-definition`, in resources/Resources.php:223. 
 
 'target' is repeated, though with the same values. This is just dead code.
 
@@ -303,6 +303,269 @@ Here, $_event->attendee is saved in a local variable, then the property is destr
                     $attendees = $_event->attendee; unset($_event->attendee);
                     $note = $_event->notes; unset($_event->notes);
                     $persistentExceptionEvent = $this->create($_event, $_checkBusyConflicts && $dtStartHasDiff);
+
+Multiples Identical Case
+========================
+
+.. _sugarcrm-structures-multipledefinedcase:
+
+SugarCRM
+^^^^^^^^
+
+:ref:`multiples-identical-case`, in modules/ModuleBuilder/MB/MBPackage.php:439. 
+
+It takes a while to find the double 'required' case, but the executed code is actually the same, so this is dead code at worst. 
+
+.. code-block:: php
+
+    switch ($col) {
+        				case 'custom_module':
+        					$installdefs['custom_fields'][$name]['module'] = $res;
+        					break;
+        				case 'required':
+        					$installdefs['custom_fields'][$name]['require_option'] = $res;
+        					break;
+        				case 'vname':
+        					$installdefs['custom_fields'][$name]['label'] = $res;
+        					break;
+        				case 'required':
+        					$installdefs['custom_fields'][$name]['require_option'] = $res;
+        					break;
+        				case 'massupdate':
+        					$installdefs['custom_fields'][$name]['mass_update'] = $res;
+        					break;
+        				case 'comments':
+        					$installdefs['custom_fields'][$name]['comments'] = $res;
+        					break;
+        				case 'help':
+        					$installdefs['custom_fields'][$name]['help'] = $res;
+        					break;
+        				case 'len':
+        					$installdefs['custom_fields'][$name]['max_size'] = $res;
+        					break;
+        				default:
+        					$installdefs['custom_fields'][$name][$col] = $res;
+        			}//switch
+
+
+--------
+
+
+.. _expressionengine-structures-multipledefinedcase:
+
+ExpressionEngine
+^^^^^^^^^^^^^^^^
+
+:ref:`multiples-identical-case`, in ExpressionEngine_Core2.9.2/system/expressionengine/controllers/cp/admin_content.php:577. 
+
+'deft_status' is doubled, with a fallthrough. This looks like some forgotten copy/paste. 
+
+.. code-block:: php
+
+    switch ($key){
+    								case 'cat_group':
+    								    //PHP code
+    									break;
+    								case 'status_group':
+    								case 'field_group':
+    								    //PHP code
+    									break;
+    								case 'deft_status':
+    								case 'deft_status':
+    								    //PHP code
+    									break;
+    								case 'search_excerpt':
+    								    //PHP code
+    									break;
+    								case 'deft_category':
+    								    //PHP code
+    									break;
+    								case 'blog_url':
+    								case 'comment_url':
+    								case 'search_results_url':
+    								case 'rss_url':
+    								    //PHP code
+    									break;
+    								default :
+    								    //PHP code
+    									break;
+    							}
+
+Switch Without Default
+======================
+
+.. _zencart-structures-switchwithoutdefault:
+
+ZenCart
+^^^^^^^
+
+:ref:`switch-without-default`, in admin/tax_rates.php:15. 
+
+The 'action' is collected from $_GET and then, compared with various strings to handle the different actions to be taken. The default behavior is implicit here : if no 'action', display the initial form for taxes to be changed. This has to be understood as a general philosophy of ZenCart project, or by reading the rest of the HTML code. Adding a 'default' case here would help understand what happens in case 'action' is absent or unrecognized. 
+
+.. code-block:: php
+
+    $action = (isset($_GET['action']) ? $_GET['action'] : '');
+    
+      if (zen_not_null($action)) {
+        switch ($action) {
+          case 'insert':
+            // PHP code 
+            break;
+          case 'save':
+            // PHP code 
+            break;
+          case 'deleteconfirm':
+            // PHP code
+            break;
+        }
+      }
+    ?> .... HTML code
+
+
+--------
+
+
+.. _traq-structures-switchwithoutdefault:
+
+Traq
+^^^^
+
+:ref:`switch-without-default`, in src/Helpers/Ticketlist.php:311. 
+
+The default case is actually processed after the switch, by the next if/then structure. The structure deals with the customFields, while the else deals with any unknown situations. This if/then could be wrapped in the 'default' case of switch, for consistent processing. The if/then condition would be hard to use as a 'case' (possible, though). 
+
+.. code-block:: php
+
+    public static function dataFor($column, $ticket)
+        {
+            switch ($column) {
+                // Ticket ID column
+                case 'ticket_id':
+                    return $ticket['ticket_id'];
+                    break;
+    
+                // Status column
+                case 'status':
+                case 'type':
+                case 'component':
+                case 'priority':
+                case 'severity':
+                    return $ticket[{$column}_name];
+                    break;
+    
+                // Votes
+                case 'votes':
+                    return $ticket['votes'];
+                    break;
+            }
+    
+            // If we're still here, it may be a custom field
+            if ($value = $ticket->customFieldValue($column)) {
+                return $value->value;
+            }
+    
+            // Nothing!
+            return '';
+        }
+
+Nested Ternary
+==============
+
+.. _spip-structures-nestedternary:
+
+SPIP
+^^^^
+
+:ref:`nested-ternary`, in ecrire/inc/utils.php:2648. 
+
+Interesting usage of both if/then, for the flow control, and ternary, for data process. Even on multiple lines, nested ternaries are quite hard to read. 
+
+.. code-block:: php
+
+    // le script de l'espace prive
+    	// Mettre a "index.php" si DirectoryIndex ne le fait pas ou pb connexes:
+    	// les anciens IIS n'acceptent pas les POST sur ecrire/ (#419)
+    	// meme pb sur thttpd cf. http://forum.spip.net/fr_184153.html
+    	if (!defined('_SPIP_ECRIRE_SCRIPT')) {
+    		define('_SPIP_ECRIRE_SCRIPT', (empty($_SERVER['SERVER_SOFTWARE']) ? '' :
+    			preg_match(',IIS|thttpd,', $_SERVER['SERVER_SOFTWARE']) ?
+    				'index.php' : ''));
+    	}
+
+
+--------
+
+
+.. _zencart-structures-nestedternary:
+
+Zencart
+^^^^^^^
+
+:ref:`nested-ternary`, in ecrire/inc/utils.php:2648. 
+
+No more than one level of nesting for this ternary call, yet it feels a lot more, thanks to the usage of arrayed properties, constants, and functioncalls. 
+
+.. code-block:: php
+
+    $lc_text .= '<br />' . (zen_get_show_product_switch($listing->fields['products_id'], 'ALWAYS_FREE_SHIPPING_IMAGE_SWITCH') ? (zen_get_product_is_always_free_shipping($listing->fields['products_id']) ? TEXT_PRODUCT_FREE_SHIPPING_ICON . '<br />' : '') : '');
+
+Empty Try Catch
+===============
+
+.. _livezilla-structures-emptytrycatch:
+
+LiveZilla
+^^^^^^^^^
+
+:ref:`empty-try-catch`, in livezilla/_lib/trdp/Zend/Mail/Protocol/Pop3.php:237. 
+
+This is an aptly commented empty try/catch : the emited exception is extra check for a Zend Mail Protocol Exception. Hopefully, the Zend_Mail_Protocol_Exception only covers a already-closed situation. Anyhow, this should be logged for later diagnostic. 
+
+.. code-block:: php
+
+    public function logout()
+        {
+            if (!$this->_socket) {
+                return;
+            }
+    
+            try {
+                $this->request('QUIT');
+            } catch (Zend_Mail_Protocol_Exception $e) {
+                // ignore error - we're closing the socket anyway
+            }
+    
+            fclose($this->_socket);
+            $this->_socket = null;
+        }
+
+
+--------
+
+
+.. _mautic-structures-emptytrycatch:
+
+Mautic
+^^^^^^
+
+:ref:`empty-try-catch`, in livezilla/_lib/trdp/Zend/Mail/Protocol/Pop3.php:237. 
+
+Removing a file : if the file is not 'deleted' by the method call, but raises an error, it is hidden. When file destruction is impossible because the file is already destroyed (or missing), this is well. If the file couldn't be destroyed because of missing writing privileges, hiding this error will have serious consequences. 
+
+.. code-block:: php
+
+    /**
+         * @param string $fileName
+         */
+        public function removeFile($fileName)
+        {
+            try {
+                $path = $this->getPath($fileName);
+                $this->filePathResolver->delete($path);
+            } catch (FileIOException $e) {
+            }
+        }
 
 Dangling Array References
 =========================
@@ -1079,7 +1342,7 @@ Use Instanceof
 TeamPass
 ^^^^^^^^
 
-:ref:`use-instanceof`, in /includes/libraries/Database/Meekrodb/db.class.php:506. 
+:ref:`use-instanceof`, in includes/libraries/Database/Meekrodb/db.class.php:506. 
 
 In this code, is_object() and instanceof have the same basic : they both check that $ts is an object. In fact, instanceof is more precise, and give more information about the variable. 
 
@@ -1099,7 +1362,7 @@ In this code, is_object() and instanceof have the same basic : they both check t
 Zencart
 ^^^^^^^
 
-:ref:`use-instanceof`, in /includes/modules/payment/firstdata_hco.php:104. 
+:ref:`use-instanceof`, in includes/modules/payment/firstdata_hco.php:104. 
 
 In this code, is_object() is used to check the status of the order. Possibly, $order is false or null in case of incompatible status. Yet, when $object is an object, and in particular being a global that may be assigned anywhere else in the code, it seems that the method 'update_status' is magically always available. Here, using instance of to make sure that $order is an 'paypal' class, or a 'storepickup' or any of the payment class.  
 
@@ -1374,62 +1637,6 @@ __getBaseUrl and __setBaseUrl shouldn't be named like that.
     			$this->__setBaseUrl();
     		}
     		return $this->baseUrl;
-    	}
-
-Could Be Typehinted Callable
-============================
-
-.. _magento-functions-couldbecallable:
-
-Magento
-^^^^^^^
-
-:ref:`could-be-typehinted-callable`, in wp-admin/includes/misc.php:74. 
-
-$objMethod argument is used to call a function, a method or a localmethod. The typehint would save the middle condition, and make a better job than 'is_array' to check if $objMethod is callable. Yet, the final 'else' means that $objMethod is also the name of a method, and PHP won't validate this, unless there is a function with the same name. Here, callable is not an option. 
-
-.. code-block:: php
-
-    public function each($objMethod, $args = [])
-        {
-            if ($objMethod instanceof \Closure) {
-                foreach ($this->getItems() as $item) {
-                    $objMethod($item, ...$args);
-                }
-            } elseif (is_array($objMethod)) {
-                foreach ($this->getItems() as $item) {
-                    call_user_func($objMethod, $item, ...$args);
-                }
-            } else {
-                foreach ($this->getItems() as $item) {
-                    $item->$objMethod(...$args);
-                }
-            }
-        }
-
-
---------
-
-
-.. _prestashop-functions-couldbecallable:
-
-PrestaShop
-^^^^^^^^^^
-
-:ref:`could-be-typehinted-callable`, in wp-admin/includes/misc.php:74. 
-
-$funcname is tested with is_callable() before being used as a method. Typehint callable would reduce the size of the code. 
-
-.. code-block:: php
-
-    public static function arrayWalk(&$array, $funcname, &$user_data = false)
-    	{
-    		if (!is_callable($funcname)) return false;
-    
-    		foreach ($array as $k => $row)
-    			if (!call_user_func_array($funcname, array($row, $k, $user_data)))
-    				return false;
-    		return true;
     	}
 
 Only Variable Passed By Reference
@@ -2398,5 +2605,61 @@ This loop is quite complex : it collects $aro_value in $acl_array['aro'][$aro_se
     						$update = 1;
     					}
     				}
+
+Could Be Typehinted Callable
+============================
+
+.. _magento-functions-couldbecallable:
+
+Magento
+^^^^^^^
+
+:ref:`could-be-typehinted-callable`, in wp-admin/includes/misc.php:74. 
+
+$objMethod argument is used to call a function, a method or a localmethod. The typehint would save the middle condition, and make a better job than 'is_array' to check if $objMethod is callable. Yet, the final 'else' means that $objMethod is also the name of a method, and PHP won't validate this, unless there is a function with the same name. Here, callable is not an option. 
+
+.. code-block:: php
+
+    public function each($objMethod, $args = [])
+        {
+            if ($objMethod instanceof \Closure) {
+                foreach ($this->getItems() as $item) {
+                    $objMethod($item, ...$args);
+                }
+            } elseif (is_array($objMethod)) {
+                foreach ($this->getItems() as $item) {
+                    call_user_func($objMethod, $item, ...$args);
+                }
+            } else {
+                foreach ($this->getItems() as $item) {
+                    $item->$objMethod(...$args);
+                }
+            }
+        }
+
+
+--------
+
+
+.. _prestashop-functions-couldbecallable:
+
+PrestaShop
+^^^^^^^^^^
+
+:ref:`could-be-typehinted-callable`, in wp-admin/includes/misc.php:74. 
+
+$funcname is tested with is_callable() before being used as a method. Typehint callable would reduce the size of the code. 
+
+.. code-block:: php
+
+    public static function arrayWalk(&$array, $funcname, &$user_data = false)
+    	{
+    		if (!is_callable($funcname)) return false;
+    
+    		foreach ($array as $k => $row)
+    			if (!call_user_func_array($funcname, array($row, $k, $user_data)))
+    				return false;
+    		return true;
+    	}
 
 

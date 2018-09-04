@@ -247,7 +247,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/stats <https://people.sc.fsu.edu/~jburkardt/c_src/cdflib/cdflib.html>`_
 * `String <http://php.net/manual/en/ref.strings.php>`_
 * `ext/suhosin <https://suhosin.org/>`_
-* `ext/swoole <http://www.swoole.com/>`_
+* `ext/swoole <https://www.swoole.com/>`_
 * `ext/tidy <http://php.net/manual/en/book.tidy.php>`_
 * `ext/tokenizer <http://www.php.net/tokenizer>`_
 * `ext/tokyotyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
@@ -306,6 +306,14 @@ A number of applications were scanned in order to find real life examples of pat
 * `Magento <https://magento.com/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
 * `Tine20 <https://www.tine20.com/>`_
+* SugarCRM
+* `ExpressionEngine <https://expressionengine.com/>`_
+* ZenCart
+* `Traq <https://traq.io/>`_
+* `SPIP <https://www.spip.net/>`_
+* `Zencart <https://www.zen-cart.com/>`_
+* `LiveZilla <https://www.livezilla.net/home/en/>`_
+* `Mautic <https://www.mautic.org/>`_
 * `Typo3 <https://typo3.org/>`_
 * `SugarCrm <https://www.sugarcrm.com/>`_
 * `xataface <http://xataface.com/>`_
@@ -313,13 +321,11 @@ A number of applications were scanned in order to find real life examples of pat
 * `OpenConf <https://www.openconf.com/>`_
 * `Dolphin <https://www.boonex.com/>`_
 * `XOOPS <https://xoops.org/>`_
-* `Mautic <https://www.mautic.org/>`_
 * `Woocommerce <https://woocommerce.com/>`_
 * `Tikiwiki <https://tiki.org/>`_
 * `Contao <https://contao.org/en/>`_
 * `ChurchCRM <http://churchcrm.io/>`_
 * `Zurmo <http://zurmo.org/>`_
-* `Zencart <https://www.zen-cart.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `NextCloud <https://nextcloud.com/>`_
@@ -334,12 +340,8 @@ A number of applications were scanned in order to find real life examples of pat
 * `phpadnsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `Phinx <https://phinx.org/>`_
-* `SPIP <https://www.spip.net/>`_
-* `ExpressionEngine <https://expressionengine.com/>`_
 * `Zend-Config <https://github.com/zendframework/zend-config>`_
 * `ThinkPHP <http://www.thinkphp.cn/>`_
-* `Traq <https://traq.io/>`_
-* `LiveZilla <https://www.livezilla.net/home/en/>`_
 * `Swoole <https://www.swoole.com/>`_
 
 
@@ -393,6 +395,13 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.4.3
+
+  * Class Could Be Final (Classes/CouldBeFinal)
+  * Closure Could Be A Callback (Functions/Closure2String ; Performances, Suggestions)
+  * Inconsistent Elseif (Structures/InconsistentElseif ; Analyze)
+  * Use json_decode() Options (Structures/JsonWithOption ; Suggestions)
+
 * 1.4.2
 
   * Method Collision Traits (Traits/MethodCollisionTraits)
@@ -414,9 +423,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Assert Function Is Reserved (Php/AssertFunctionIsReserved ; Analyze, CompatibilityPHP73)
   * Avoid Real (Php/AvoidReal ; Suggestions)
   * Case Insensitive Constants (Constants/CaseInsensitiveConstants ; Appinfo, CompatibilityPHP73)
-  * Classes/CouldBeAbstractClass (Classes/CouldBeAbstractClass)
   * Const Or Define Preference (Constants/ConstDefinePreference ; Preferences)
   * Continue Is For Loop (Structures/ContinueIsForLoop ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
+  * Could Be Abstract Class (Classes/CouldBeAbstractClass)
 
 * 1.3.8
 
@@ -842,7 +851,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.11.5
 
-  * Could Typehint (Functions/CouldTypehint ; Analyze)
+  * Could Typehint (Functions/CouldTypehint ; Suggestions)
   * Implemented Methods Are Public (Classes/ImplementedMethodsArePublic)
   * Mixed Concat And Interpolation (Structures/MixedConcatInterpolation ; Analyze, Coding Conventions)
   * No Reference On Left Side (Structures/NoReferenceOnLeft ; Analyze)
@@ -1119,7 +1128,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.10.5
 
-  * Could Be Typehinted Callable (Functions/CouldBeCallable ; Analyze)
+  * Could Be Typehinted Callable (Functions/CouldBeCallable ; Suggestions)
   * Encoded Simple Letters (Security/EncodedLetters ; Security)
   * Regex Delimiter (Structures/RegexDelimiter ; Preferences)
   * Strange Name For Constants (Constants/StrangeName ; Analyze)
@@ -1516,13 +1525,13 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Interpolation (Type/StringInterpolation ; Coding Conventions)
   * Invalid Constant Name (Constants/InvalidName ; Analyze, Codacy, Simple)
   * Is An Extension Class (Classes/IsExtClass ; )
-  * Is An Extension Constant (Constants/IsExtConstant ; Internal)
+  * Is An Extension Constant (Constants/IsExtConstant ; Internal, First)
   * Is An Extension Function (Functions/IsExtFunction ; Internal, First)
-  * Is An Extension Interface (Interfaces/IsExtInterface ; Internal)
+  * Is An Extension Interface (Interfaces/IsExtInterface ; Internal, First)
   * Is CLI Script (Files/IsCliScript ; Appinfo, Internal)
   * Is Composer Class (Composer/IsComposerClass ; Internal)
   * Is Composer Interface (Composer/IsComposerInterface ; Internal)
-  * Is Extension Trait (Traits/IsExtTrait ; Internal)
+  * Is Extension Trait (Traits/IsExtTrait ; Internal, First)
   * Is Generator (Functions/IsGenerator ; Appinfo, Internal)
   * Is Global Constant (Constants/IsGlobalConstant ; Internal)
   * Is Interface Method (Classes/IsInterfaceMethod ; Internal)
@@ -1550,7 +1559,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Make Global A Property (Classes/MakeGlobalAProperty ; Analyze, Codacy, Simple)
   * Make One Call With Array (Performances/MakeOneCall ; Performances)
   * Malformed Octal (Type/MalformedOctal ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * Mark Callable (Functions/MarkCallable ; Analyze, Internal)
+  * Mark Callable (Functions/MarkCallable ; Appinfo, Internal, First)
   * Md5 Strings (Type/Md5String ; Inventory, Appinfo)
   * Method Has Fluent Interface (Functions/HasFluentInterface ; )
   * Method Has No Fluent Interface (Functions/HasNotFluentInterface ; )
@@ -2157,12 +2166,13 @@ List of external links mentionned in this documentation.
 * `cat: write error: Broken pipe <https://askubuntu.com/questions/421663/cat-write-error-broken-pipe>`_
 * `Category:Private Functions <https://codex.wordpress.org/Category:Private_Functions>`_
 * `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
-* `Class Abstraction <http://php.net/manual/en/language.oop5.abstract.php>`_
+* `Class Abstraction <http://php.net/abstract>`_
 * `Class Constant <http://php.net/manual/en/language.oop5.constants.php>`_
 * `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `class_alias <http://php.net/class_alias>`_
 * `Classes abstraction <http://php.net/abstract>`_
+* `Closure class <http://php.net/closure>`_
 * `Closure::bind <http://php.net/manual/en/closure.bind.php>`_
 * `Cmark <https://github.com/commonmark/cmark>`_
 * `Codeigniter <https://codeigniter.com/>`_
@@ -2215,6 +2225,7 @@ List of external links mentionned in this documentation.
 * `download <https://www.exakat.io/download-exakat/>`_
 * `Drupal <http://www.drupal.org/>`_
 * `Eaccelerator <http://eaccelerator.net/>`_
+* `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_
 * `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_
 * `empty() <http://www.php.net/manual/en/function.empty.php>`_
 * `Enchant spelling library <http://php.net/manual/en/book.enchant.php>`_
@@ -2261,8 +2272,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Flexible Heredoc and Nowdoc Syntaxes <https://wiki.php.net/rfc/flexible_heredoc_nowdoc_syntaxes>`_
@@ -2327,6 +2338,7 @@ List of external links mentionned in this documentation.
 * `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `iterable pseudo-type <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.iterable-pseudo-type>`_
 * `Joomla <http://www.joomla.org/>`_
+* `json_decode <http://php.net/json_decode>`_
 * `Judy C library <http://judy.sourceforge.net/>`_
 * `Kafka client for PHP <https://github.com/arnaud-lb/php-rdkafka>`_
 * `Kerberos V <http://php.net/manual/en/book.kadm5.php>`_
@@ -2374,6 +2386,8 @@ List of external links mentionned in this documentation.
 * `MySQL Improved Extension <http://php.net/manual/en/book.mysqli.php>`_
 * `mysqli <http://php.net/manual/en/book.mysqli.php>`_
 * `Ncurses Terminal Screen Control <http://php.net/manual/en/book.ncurses.php>`_
+* `Negative architecture, and assumptions about code <https://matthiasnoback.nl/2018/08/negative-architecture-and-assumptions-about-code/>`_
+* `Nested Ternaries are Great <https://medium.com/javascript-scene/nested-ternaries-are-great-361bddd0f340>`_
 * `Net SNMP <http://www.net-snmp.org/>`_
 * `net_get_interfaces <http://php.net/net_get_interfaces>`_
 * `New features <http://php.net/manual/en/migration56.new-features.php>`_
@@ -2386,7 +2400,6 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 2 <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
-* `Object Inheritance <http://php.net/manual/en/language.oop5.inheritance.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_
@@ -2502,7 +2515,7 @@ List of external links mentionned in this documentation.
 * `Superglobals <http://php.net/manual/en/language.variables.superglobals.php>`_
 * `Supported PHP Extensions <http://exakat.readthedocs.io/en/latest/Annex.html#supported-php-extensions>`_
 * `svn <https://subversion.apache.org/>`_
-* `Swoole <http://www.swoole.com/>`_
+* `Swoole <https://www.swoole.com/>`_
 * `Symfony <http://www.symfony.com/>`_
 * `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_
 * `The basics of Fluent interfaces in PHP <https://tournasdimitrios1.wordpress.com/2011/04/11/the-basics-of-fluent-interfaces-in-php/>`_
@@ -2521,8 +2534,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -2683,6 +2696,7 @@ Analyze
 |   analyzer[] = "Classes/CitSameName";
 |   analyzer[] = "Classes/ConstantClass";
 |   analyzer[] = "Classes/CouldBeAbstractClass";
+|   analyzer[] = "Classes/CouldBeFinal";
 |   analyzer[] = "Classes/DirectCallToMagicMethod";
 |   analyzer[] = "Classes/DontSendThisInConstructor";
 |   analyzer[] = "Classes/DontUnsetProperties";
@@ -2771,13 +2785,10 @@ Analyze
 |   analyzer[] = "Functions/AliasesUsage";
 |   analyzer[] = "Functions/AvoidBooleanArgument";
 |   analyzer[] = "Functions/CallbackNeedsReturn";
-|   analyzer[] = "Functions/CouldBeCallable";
 |   analyzer[] = "Functions/CouldCentralize";
-|   analyzer[] = "Functions/CouldTypehint";
 |   analyzer[] = "Functions/DeepDefinitions";
 |   analyzer[] = "Functions/EmptyFunction";
 |   analyzer[] = "Functions/HardcodedPasswords";
-|   analyzer[] = "Functions/MarkCallable";
 |   analyzer[] = "Functions/MismatchTypeAndDefault";
 |   analyzer[] = "Functions/MismatchedDefaultArguments";
 |   analyzer[] = "Functions/MismatchedTypehint";
@@ -2909,6 +2920,7 @@ Analyze
 |   analyzer[] = "Structures/Iffectation";
 |   analyzer[] = "Structures/ImplicitGlobal";
 |   analyzer[] = "Structures/ImpliedIf";
+|   analyzer[] = "Structures/InconsistentElseif";
 |   analyzer[] = "Structures/IndicesAreIntOrString";
 |   analyzer[] = "Structures/InvalidRegex";
 |   analyzer[] = "Structures/IsZero";
@@ -3062,6 +3074,7 @@ ClassReview
 | [ClassReview]
 |   analyzer[] = "Classes/CouldBeAbstractClass";
 |   analyzer[] = "Classes/CouldBeClassConstant";
+|   analyzer[] = "Classes/CouldBeFinal";
 |   analyzer[] = "Classes/CouldBePrivate";
 |   analyzer[] = "Classes/CouldBePrivateConstante";
 |   analyzer[] = "Classes/CouldBePrivateMethod";
@@ -3582,6 +3595,7 @@ Performances
 |   analyzer[] = "Arrays/GettingLastElement";
 |   analyzer[] = "Arrays/SliceFirst";
 |   analyzer[] = "Classes/UseClassOperator";
+|   analyzer[] = "Functions/Closure2String";
 |   analyzer[] = "Performances/ArrayMergeInLoops";
 |   analyzer[] = "Performances/AvoidArrayPush";
 |   analyzer[] = "Performances/CacheVariableOutsideLoop";
@@ -3713,9 +3727,12 @@ Suggestions
 |   analyzer[] = "Classes/TooManyChildren";
 |   analyzer[] = "Classes/UnitializedProperties";
 |   analyzer[] = "Exceptions/OverwriteException";
+|   analyzer[] = "Functions/Closure2String";
+|   analyzer[] = "Functions/CouldBeCallable";
 |   analyzer[] = "Functions/CouldBeStaticClosure";
 |   analyzer[] = "Functions/CouldCentralize";
 |   analyzer[] = "Functions/CouldReturnVoid";
+|   analyzer[] = "Functions/CouldTypehint";
 |   analyzer[] = "Functions/NeverUsedParameter";
 |   analyzer[] = "Functions/NoReturnUsed";
 |   analyzer[] = "Functions/ShouldBeTypehinted";
@@ -3746,6 +3763,7 @@ Suggestions
 |   analyzer[] = "Structures/EchoWithConcat";
 |   analyzer[] = "Structures/EmptyWithExpression";
 |   analyzer[] = "Structures/GoToKeyDirectly";
+|   analyzer[] = "Structures/JsonWithOption";
 |   analyzer[] = "Structures/ListOmissions";
 |   analyzer[] = "Structures/MismatchedTernary";
 |   analyzer[] = "Structures/NoParenthesisForLanguageConstruct";
