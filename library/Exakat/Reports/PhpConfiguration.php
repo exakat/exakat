@@ -90,22 +90,26 @@ SELECT analyzer FROM resultsCounts
                          "Php/UsesEnv",
                          "Php/UseBrowscap",
                          "Php/DlUsage",
-                         "Security/CantDisableFunction"))
+                         "Security/CantDisableFunction",
+                         "Security/CantDisableClass"
+                         ))
         AND count > 0
 SQL
         );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if ($row['analyzer'] == 'Structures/FileUploadUsage') {
-                $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
+                $data['File Upload'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
             } elseif ($row['analyzer'] == 'Php/UsesEnv') {
-                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+                $data['Environnement'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
             } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
-                $data['Error log'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
+                $data['Error log'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
             } elseif ($row['analyzer'] === 'Php/UseBrowscap') {
-                $data['Browscap'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/browscap.json'));
+                $data['Browscap'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/browscap.json'));
             } elseif ($row['analyzer'] === 'Php/DlUsage') {
-                $data['Dl'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/enable_dl.json'));
-            } elseif ($row['analyzer'] === 'Security/CantDisableFunction') {
+                $data['Dl'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/enable_dl.json'));
+            } elseif ($row['analyzer'] === 'Security/CantDisableFunction' || 
+                      $row['analyzer'] === 'Security/CantDisableClass' 
+                      ) {
                 $res2 = $this->sqlite->query(<<<SQL
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
     WHERE analyzer = "Security/CantDisableFunction";
@@ -113,18 +117,35 @@ SQL
         );
                 $list = $res2->fetchArray(\SQLITE3_NUM);
                 $list = explode(',', $list[0]);
+                if (isset($disable)) {
+                    continue; 
+                }
                 $disable = parse_ini_file("{$this->config->dir_root}/data/disable_functions.ini");
                 $suggestions = array_diff($disable['disable_functions'], $list);
 
-                $data['Disable Feature'] = (array) json_decode(file_get_contents("{$this->config->dir_root}/data/directives/disable_functions.json"));
+                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/disable_functions.json"));
 
                 // disable_functions
-                $data['Disable Feature'][0]->suggested = implode(',', $suggestions);
-                $data['Disable Feature'][0]->documentation .= "\n; ".count($list). " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
+                $data[0]->suggested = implode(', ', $suggestions);
+                $data[0]->documentation .= "\n; ".count($list). " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
+
+                $res2 = $this->sqlite->query(<<<SQL
+SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
+    WHERE analyzer = "Security/CantDisableClass";
+SQL
+        );
+                $list = $res2->fetchArray(\SQLITE3_NUM);
+                $list = explode(',', $list[0]);
+                $suggestions = array_diff($disable['disable_classes'], $list);
+
+                // disable_functions
+                $data[1]->suggested = implode(',', $suggestions);
+                $data[1]->documentation .= "\n; ".count($list). " sensitive classes were found in the code. Don't disable those : " . implode(', ', $list);
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Disable features</td></tr>\n";
             } else {
                 $ext = substr($row['analyzer'], 14);
                 if (in_array($ext, $directives)) {
-                    $data[$ext] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
+                    $data[$ext] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
                 }
             }
         }
