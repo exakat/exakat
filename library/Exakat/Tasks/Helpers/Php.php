@@ -22,6 +22,7 @@
 
 namespace Exakat\Tasks\Helpers;
 
+use Exakat\Exceptions\NoRecognizedTokens;
 
 class Php {
 
@@ -102,6 +103,10 @@ class Php {
     static public function getInstance($tokens) {
         $errors = [];
         $total = 0;
+
+        if (empty($tokens)) {
+            throw new NoRecognizedTokens();
+        }
         
         //'Php74',
         $versions = array('Php73', 'Php72', 'Php71', 'Php70', 'Php56', 'Php55',);
@@ -121,8 +126,7 @@ class Php {
             }
         }
         
-        die("Couldn't find a suitable version\n");
-        //@todo : find a better fallback
+        throw new NoRecognizedTokens();
     }
 }
 ?>

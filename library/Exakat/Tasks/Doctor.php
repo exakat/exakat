@@ -27,6 +27,7 @@ use Exakat\Exakat;
 use Exakat\Graph\Graph;
 use Exakat\Config;
 use Exakat\Phpexec;
+use Exakat\Tasks\Helpers\Php;
 
 class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -307,8 +308,10 @@ class Doctor extends Tasks {
             if (substr($version, 0, 3) != $displayedVersion) {
                 $stats['version'] = $version.' (This doesn\'t seem to be version '.$displayedVersion.')';
             }
+
+            $tokens = $php->getTokens();
+            $stats['token_version'] = substr(get_class(Php::getInstance($tokens)), -5);
         }
-        
 
         return $stats;
     }
@@ -359,7 +362,6 @@ class Doctor extends Tasks {
             $stats['port'] = $this->config->gsneo4j_port;
 
             $plugins = glob("{$this->config->gsneo4j_folder}/ext/neo4j-gremlin/plugin/*.jar");
-            print count($plugins);
             if (count($plugins) !== 73) {
                 $stats['grapes failed'] = 'Partially installed neo4j plugin. Please, check installation docs, and "grab" again : some of the files are missing for neo4j.';
             }
