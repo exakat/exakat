@@ -453,8 +453,9 @@ GREMLIN;
     }
     
     public function ignore() {
-        // used to execute some code but not collect any node
-        $this->query->count();
+        $this->query->ignore();
+        
+        return $this;
     }
 
 ////////////////////////////////////////////////////////////////////////////////
