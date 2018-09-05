@@ -28,7 +28,14 @@ use Exakat\Analyzer\Analyzer;
 
 class HasNoDefinition extends DSL {
     public function run() : Command {
-        return new Command('not( where( __.out("DEFINITION").not( where(__.coalesce( __.in("NAME"), __.filter{true;}).inE("USE") ) ) ) )');
+        return new Command(<<<GREMLIN
+not( 
+    where( 
+        __.out("DEFINITION").not( where(__.coalesce( __.in("NAME").in("USE"), __.in("USE"), __.in("USE")).hasLabel("Usenamespace") ) ) 
+    ) 
+)
+GREMLIN
+);
     }
 }
 ?>

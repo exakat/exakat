@@ -26,13 +26,11 @@ namespace Exakat\Analyzer\Traits;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedTrait extends Analyzer {
-    public function dependsOn() {
-        return array('Traits/UsedTrait');
-    }
-
     public function analyze() {
+        // trait t {}
+        // class x { use t2; }
         $this->atomIs('Trait')
-             ->analyzerIsNot('Traits/UsedTrait');
+             ->hasNoDefinition();
         $this->prepareQuery();
     }
 }
