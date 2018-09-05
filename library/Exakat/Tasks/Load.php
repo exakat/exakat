@@ -1182,6 +1182,8 @@ class Load extends Tasks {
 
         if ($function->atom === 'Function' ) {
             $this->processSemicolon();
+        } elseif ($function->atom === 'Closure' && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            $this->processSemicolon();
         } elseif ($function->atom === 'Method' && !empty(preg_grep('/^static$/i', $fullcode))) {
             $this->calls->addDefinition('staticmethod', $function->fullnspath, $function);
         } elseif ($function->atom === 'Method') {
