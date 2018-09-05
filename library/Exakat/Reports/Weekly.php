@@ -151,6 +151,7 @@ class Weekly extends Ambassador {
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_NAME', $this->config->project);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
             // Moving the first in the last position
@@ -364,8 +365,12 @@ HTML;
             }
         }
         unset($globalData[self::G_NONE]);
+        foreach($globalData as $data) {
+            $data->value = intval($data->value * 100) / 100;
+        }
         
         $globalData = json_encode(array_values($globalData));
+
 
         $blocjs = <<<JAVASCRIPT
   <script>
