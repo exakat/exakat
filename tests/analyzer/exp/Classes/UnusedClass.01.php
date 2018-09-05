@@ -5,6 +5,7 @@ $expected     = array('class unusedClass { /**/ } ',
                       'class someClass2 implements inAImplements1, inAImplements2, inAImplements3 { /**/ } ',
                       'class inAString2 { /**/ } ',
                       'class inAUseWithAlias { /**/ } ',
+                      'class inAUseWithAlias2 { /**/ } ',
                      );
 
 $expected_not = array('class inANew { /**/ } ',

@@ -1001,6 +1001,12 @@ GREMLIN;
         return $this;
     }
 
+    public function hasNoDefinition() {
+        $this->query->hasNoDefinition();
+
+        return $this;
+    }
+
     public function isInCatchBlock() {
         $this->query->isInCatchBlock();
         

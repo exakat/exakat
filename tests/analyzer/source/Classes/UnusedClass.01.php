@@ -45,6 +45,8 @@
 
         class inAUseWithAlias {} 
         use inAUseWithAlias as b;
+        class inAUseWithAlias2 {} 
+        use inAUseWithAlias2;
 
         /*
         cannot test in one file

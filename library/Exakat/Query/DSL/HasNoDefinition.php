@@ -21,24 +21,14 @@
 */
 
 
-namespace Exakat\Analyzer\Classes;
+namespace Exakat\Query\DSL;
 
+use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class UnusedClass extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/TestClass',
-                    );
-    }
-
-    public function analyze() {
-        // class A {}
-        // new A;
-        $this->atomIs('Class')
-             ->hasNoDefinition()
-             ->analyzerIsNot('Classes/TestClass');
-        $this->prepareQuery();
+class HasNoDefinition extends DSL {
+    public function run() : Command {
+        return new Command('not( where( __.out("DEFINITION").not( where(__.coalesce( __.in("NAME"), __.filter{true;}).inE("USE") ) ) ) )');
     }
 }
-
 ?>
