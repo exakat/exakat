@@ -26,14 +26,11 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedFunctions extends Analyzer {
-    public function dependsOn() {
-        return array('Functions/UsedFunctions');
-    }
-    
     public function analyze() {
+        // function foo() {} // no foo();
         $this->atomIs('Function')
              ->fullnspathIsNot('\\__autoload')
-             ->analyzerIsNot('Functions/UsedFunctions');
+             ->hasNoDefinition();
         $this->prepareQuery();
     }
 }
