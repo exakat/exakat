@@ -19,5 +19,3 @@ Label : PROJECT
                 10
           Label : NAME
             5
-        Label : EXPRESSION
-          6

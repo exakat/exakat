@@ -43,7 +43,5 @@ Label : PROJECT
                 14
               Label : RETURNED
                 16
-            Label : EXPRESSION
-              23
           Label : NAME
             5

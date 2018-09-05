@@ -31,5 +31,3 @@ Label : PROJECT
               11
           Label : NAME
             5
-        Label : EXPRESSION
-          11

@@ -159,5 +159,3 @@ Label : PROJECT
                 60
           Label : NAME
             5
-        Label : EXPRESSION
-          43

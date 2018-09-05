@@ -111,5 +111,3 @@ Label : PROJECT
               8
           Label : NAME
             17
-        Label : EXPRESSION
-          8
