@@ -110,13 +110,13 @@ class Weekly extends Ambassador {
         }
 
     // special case for 'Future read'
-            $date = date('Y-W', strtotime(date('Y')."W".(date('W') + 1)."1"));
-            $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
-            $this->weeks[$date] = json_decode($json);
-            
-            if (json_last_error() != '') {
-                print "Error : could not read week details for $date\n";
-            }
+        $date = date('Y-W', strtotime(date('Y')."W".(date('W') + 1)."1"));
+        $json = file_get_contents("https://www.exakat.io/weekly/week-$date.json");
+        $this->weeks[$date] = json_decode($json);
+        
+        if (json_last_error() != '') {
+            print "Error : could not read week details for $date\n";
+        }
         
         $all = array_merge(...array_column($this->weeks, 'analysis'));
         $this->results = new Results($this->sqlite, $all);
@@ -203,8 +203,6 @@ MENU;
         $this->projectPath = $folder;
 
         $this->initFolder();
-//        $this->generateSettings();
-//        $this->generateProcFiles();
 
         $this->generateWeekly(date('Y'), date('W'));
         $this->generateWeekly(date('Y'), date('W') - 1);
@@ -253,8 +251,19 @@ MENU;
             return;
         }
 
+        $analyzerList = $this->weeks["$year-$week"]->analysis;
         $this->generateIssuesEngine("weekly",
-                                    $this->getIssuesFaceted($this->weeks["$year-$week"]->analysis));
+                                    $this->getIssuesFaceted($analyzerList));
+
+        $analyzerListSql = makeList($analyzerList);
+        $query = "SELECT analyzer, count FROM resultsCounts WHERE analyzer in ($analyzerListSql)";
+        $res = $this->sqlite->query($query);
+        $counts = array();
+        $total_issues = 0;
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $counts[$row['analyzer']] = $row['count'];
+            $total_issues += $row['count'];
+        }
 
         $html = file_get_contents("$this->tmpName/datas/weekly.html");
 
@@ -263,17 +272,21 @@ MENU;
             $ini = $this->getDocs($analyzer);
             $item['analyzer']       = $ini['name'];
             $docId   = $this->toId($analyzer);
-            $docs[] = "<a href=\"analyzers_doc.html#$docId\">$ini[name]</a>";
+            $docs[$analyzer] = "<a href=\"analyzers_doc.html#$docId\">$ini[name]</a>";
         }
         
         $this->usedAnalyzer = array_merge($this->usedAnalyzer, $this->weeks["$year-$week"]->analysis);
 
-        $begin = date('M j, Y', strtotime($year."W".$week."1"));
-        $end = date('M j, Y', strtotime($year."W".$week."7"));
+        $begin = date('M jS, Y', strtotime($year."W".$week."1"));
+        $end = date('M jS, Y', strtotime($year."W".$week."7"));
         $titleDate = $year.' '.ordinal($week)." week";
 
         $finalHTML = str_replace('<WEEK>', $titleDate, $html);
-        $finalHTML = str_replace('<FULLWEEK>', "$begin to $end : <br /> - ".implode(' - ', $docs), $finalHTML).' - ';
+        $fullweek = array("From $begin to $end : <br /> Total : $total_issues <br />");
+        foreach($docs as $analyzer => $doc) {
+            $fullweek[] = " $doc ({$counts[$analyzer]}) ";
+        }
+        $finalHTML = str_replace('<FULLWEEK>', implode(' - ', $fullweek), $finalHTML).' - ';
         
         file_put_contents("$this->tmpName/datas/weekly.html", $finalHTML);
 
@@ -690,7 +703,6 @@ SQL;
           </div>', 5);
 
         foreach (array_keys($this->weeks) as $id => $week) {
-            print "$week - $id\n";
             $total = 0;
             foreach($this->weeks[$week]->analysis as $analyzer) {
                 $total += $this->resultsCounts[$analyzer];
