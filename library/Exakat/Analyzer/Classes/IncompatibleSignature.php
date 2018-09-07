@@ -28,7 +28,8 @@ class IncompatibleSignature extends Analyzer {
     public function analyze() {
 
         // non-matching reference
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
@@ -38,7 +39,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToClass()
              ->hasOut('EXTENDS')
              ->goToAllParents()
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('NAME')
              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
@@ -48,8 +49,9 @@ class IncompatibleSignature extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // non-matching argument count
-        $this->atomIs('Method')
+        // non-matching argument count : 
+        // abstract : exact count
+        $this->atomIs(array('Method', 'Magicmethod'))
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
@@ -57,7 +59,8 @@ class IncompatibleSignature extends Analyzer {
              ->goToClass()
              ->hasOut('EXTENDS')
              ->goToAllParents()
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->is('abstract', true) //then, it is not private
              ->outIs('NAME')
              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
@@ -65,8 +68,30 @@ class IncompatibleSignature extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // non-matching argument count : 
+        // non-abstract : count may be more but not less
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->isNot('visibility', 'private')
+             ->outIs('NAME')
+             ->savePropertyAs('lccode', 'name')
+             ->inIs('NAME')
+             ->savePropertyAs('count', 'count')
+             ->goToClass()
+             ->hasOut('EXTENDS')
+             ->goToAllParents()
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->isNot('abstract', true) 
+             ->isNot('visibility', 'private')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
+             ->inIs('NAME')
+             ->isMore('count', 'count')
+             ->back('first');
+        $this->prepareQuery();
+
         // non-matching typehint
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
@@ -76,7 +101,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToClass()
              ->hasOut('EXTENDS')
              ->goToAllParents()
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('NAME')
              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
@@ -87,7 +112,8 @@ class IncompatibleSignature extends Analyzer {
         $this->prepareQuery();
 
         // non-matching return typehint
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
@@ -95,7 +121,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToClass()
              ->hasOut('EXTENDS')
              ->goToAllParents()
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('NAME')
              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
@@ -104,7 +130,8 @@ class IncompatibleSignature extends Analyzer {
         $this->prepareQuery();
 
         // non-matching nullable
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
@@ -114,7 +141,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToClass()
              ->hasOut('EXTENDS')
              ->goToAllParents()
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->inIs('NAME')
@@ -125,7 +152,8 @@ class IncompatibleSignature extends Analyzer {
         $this->prepareQuery();
 
         // non-matching return nullable
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
+             ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
@@ -133,7 +161,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToClass()
              ->hasOut('EXTENDS')
              ->goToAllParents()
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('NAME')
              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
@@ -142,7 +170,7 @@ class IncompatibleSignature extends Analyzer {
         $this->prepareQuery();
 
         // non-matching visibility
-        $this->atomIs('Method')
+        $this->atomIs(array('Method', 'Magicmethod'))
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
@@ -150,7 +178,7 @@ class IncompatibleSignature extends Analyzer {
              ->goToClass()
              ->hasOut('EXTENDS')
              ->goToAllParents()
-             ->outIs('METHOD')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
              ->outIs('NAME')
              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
