@@ -5170,15 +5170,9 @@ class Load extends Tasks {
         return $void;
     }
 
-    private function addLink($origin, $destination, $label) {
+    private function addLink(Atom $origin, Atom $destination, $label) {
         if (!in_array($label, array_merge(GraphElements::$LINKS, GraphElements::$LINKS_EXAKAT))) {
             throw new LoadError('Undefined link '.$label.'.'.$this->filename.':'.__LINE__);
-        }
-        if (!($origin instanceof Atom)) {
-            throw new LoadError('Origin is not an Atom :'.$this->filename.':'.__LINE__);
-        }
-        if (!($destination instanceof Atom)) {
-            throw new LoadError('Destination is not an Atom :'.$this->filename.':'.__LINE__);
         }
         $o = $origin->atom;
         $d = $destination->atom;
@@ -5472,7 +5466,7 @@ class Load extends Tasks {
         }
     }
 
-    private function addNamespaceUse($origin, $alias, $useType, $use) {
+    private function addNamespaceUse($origin, $alias, $useType,Atom $use) {
         if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' ');
@@ -5489,9 +5483,6 @@ class Load extends Tasks {
             $alias = mb_strtolower($alias);
         }
 
-        if (!($use instanceof Atom)) {
-            throw new LoadError( "Warning : namespec in use expression is not an Atom : it is ".get_class($use).PHP_EOL);
-        }
         $this->uses[$useType][$alias] = $use;
 
         return $alias;
