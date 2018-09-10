@@ -273,7 +273,7 @@ GREMLIN;
             $this->analyzerId = $analyzerId;
         }
 
-        assert($this->analyzerId != 0, __CLASS__.' was inited with Id 0. Can\'t save with that!');
+        assert($this->analyzerId != 0, self::class.' was inited with Id 0. Can\'t save with that!');
         return $this->analyzerId;
     }
 
@@ -619,6 +619,13 @@ GREMLIN;
     }
 
     public function analyzerIs($analyzer) {
+        $analyzer = makeArray($analyzer);
+
+        if (($id = array_search('self', $analyzer)) !== false) {
+            $analyzer[$id] = $this->analyzerQuoted;
+        }
+        $analyzer = array_map('self::getName', $analyzer);
+
         $this->query->analyzerIs($analyzer);
 
         return $this;
