@@ -32,33 +32,83 @@ class DefinedParentMP extends Analyzer {
     }
     
     public function analyze() {
+        // parent::methodcall()
+        $this->atomIs('Parent')
+             ->hasIn('DEFINITION')
+             ->inIs('CLASS')
+             ->atomIs('Staticmethodcall')
+             ->outIs('METHOD')
+             ->savePropertyAs('lccode', 'name')
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->isNot('visibility', 'private')
+             ->outIs('NAME')
+             ->samePropertyAs('lccode', 'name')
+             ->back('first')
+             ->inIs('CLASS');
+        $this->prepareQuery();
+
         // parent::$property
         $this->atomIs('Parent')
+             ->hasIn('DEFINITION')
              ->inIs('CLASS')
-             ->hasIn('DEFINITION');
+             ->atomIs('Staticproperty')
+             ->outIs('MEMBER')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('PPP')
+             ->isNot('visibility', 'private')
+             ->outIs('PPP')
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
+             ->back('first')
+             ->inIs('CLASS');
         $this->prepareQuery();
 
-        // handle composer case
-        $this->atomIs('Staticproperty')
+        // parent::constant
+        $this->atomIs('Parent')
+             ->hasIn('DEFINITION')
+             ->inIs('CLASS')
+             ->atomIs('Staticconstant')
+             ->outIs('CONSTANT')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
+             ->inIs('DEFINITION')
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('CONST')
+             ->isNot('visibility', 'private')
+             ->outIs('CONST')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'name')
+             ->back('first')
+             ->inIs('CLASS');
+        $this->prepareQuery();
+
+        // parent::$property or parent::methodcall or parent::constant
+        $this->atomIs('Parent')
              ->hasNoIn('DEFINITION')
-             ->outIs('CLASS')
-             ->atomIs('Parent')
+             ->analyzerIs(array('Composer/IsComposerNsname',
+                                'Classes/IsExtClass',
+                                ))
+             ->inIs('CLASS')
+             ->atomIsNot('Staticclass');
+        $this->prepareQuery();
+
+        // handle composer/extensions case
+        $this->atomIs('Parent')
+             ->inIs('CLASS') // Check it has ::
+             ->atomIsNot('Staticclass')
              ->goToClass()
              ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('EXTENDS')
-             ->analyzerIs('Composer/IsComposerNsname')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Staticproperty')
-             ->hasNoIn('DEFINITION')
-             ->outIs('CLASS')
-             ->atomIs('Parent')
-             ->goToClass()
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs('EXTENDS')
-             ->analyzerIs('Classes/IsExtClass')
-             ->back('first');
+             ->analyzerIs(array('Composer/IsComposerNsname',
+                                'Composer/IsExtClass', 
+                               ))
+             ->back('first')
+             ->inIs('CLASS');
         $this->prepareQuery();
     }
 }

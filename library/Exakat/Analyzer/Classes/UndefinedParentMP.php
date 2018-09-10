@@ -33,17 +33,9 @@ class UndefinedParentMP extends Analyzer {
     
     public function analyze() {
         // parent::method()
-        $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->codeIs('parent')
+        $this->atomIs('Parent')
              ->inIs('CLASS')
-             ->analyzerIsNot('Classes/DefinedParentMP');
-        $this->prepareQuery();
-
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->codeIs('parent')
-             ->inIs('CLASS')
+             ->atomIsNot('Staticclass')
              ->analyzerIsNot('Classes/DefinedParentMP');
         $this->prepareQuery();
     }

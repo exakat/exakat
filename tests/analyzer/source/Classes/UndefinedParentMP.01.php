@@ -10,6 +10,7 @@ class definedClassB extends definedClassA {
      function x() {
         parent::undefinedMethod();
         parent::definedMethod();
+        parent::class;
      }
 }
 

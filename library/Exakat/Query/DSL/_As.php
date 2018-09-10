@@ -28,6 +28,8 @@ use Exakat\Query\Query;
 class _As extends DSL {
     public function run() {
         list($name) = func_get_args();
+        
+        assert($name === 'first', '"first" is already taken');
 
         return new Command("as(\"$name\")");
     }
