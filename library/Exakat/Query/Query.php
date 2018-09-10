@@ -86,7 +86,7 @@ class Query {
         } elseif (substr($commands[0], 0, 39) === 'where( __.in("ANALYZED").has("analyzer"') {
             $first = $commands[0]; 
             array_shift($commands); 
-            $arg0 = $this->commands[0]->arguments;
+            $arg0 = array_pop($this->commands[0]->arguments);
             unset($this->commands[0]);
             $this->query = 'g.V().hasLabel("Analysis").has("analyzer", within('.makeList($arg0).')).out("ANALYZED").as("first").groupCount("processed").by(count())';
             if (!empty($commands)) {

@@ -265,7 +265,6 @@ GREMLIN;
         $query = new Query(0, $this->config->project, 'setArrayClassDefinition', null);
         $query->atomIs('Arrayliteral')
               ->is('count', 2)
-              ->_as('first')
               ->outWithRank('ARGUMENT', 1)
               ->atomIs('String')
               ->has('noDelimiter')
