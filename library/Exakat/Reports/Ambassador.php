@@ -394,14 +394,14 @@ class Ambassador extends Reports {
         $html = array(' ');
 
         foreach($favoritesList as $analyzer => $list) {
-            $list = $this->datastore->getHashAnalyzer($analyzer);
+            $analyzerList = $this->datastore->getHashAnalyzer($analyzer);
 
             $table = '';
             $values = array();
             $name = $this->getDocs($analyzer, 'name');
 
             $total = 0;
-            foreach($list as $key => $value) {
+            foreach($analyzerList as $key => $value) {
                 $table .= '
                 <div class="clearfix">
                    <div class="block-cell">'.makeHtml($key).'</div>
@@ -414,7 +414,7 @@ class Ambassador extends Reports {
                 $total += $value;
             }
 
-            if (($repeat = 4 - count($list)) > 0) {
+            if (($repeat = 4 - count($analyzerList)) > 0) {
                 $table .= str_repeat('
                 <div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
@@ -1959,8 +1959,9 @@ SQL;
     }
 
     private function generateIssues() {
+        $issues = $this->getIssuesFaceted($this->themes->getThemeAnalyzers($this->themesToShow));
         $this->generateIssuesEngine('issues',
-                                    $this->getIssuesFaceted($this->themesToShow) );
+                                    $issues );
     }
     
     protected function generateIssuesEngine($filename, $issues) {
