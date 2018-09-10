@@ -60,7 +60,7 @@ class Dump extends Tasks {
     }
 
     public function run() {
-        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
+        if (!file_exists("{$this->config->projects_root}/projects/{$this->config->project}")) {
             throw new NoSuchProject($this->config->project);
         }
 
@@ -73,8 +73,8 @@ class Dump extends Tasks {
         
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
-        $this->sqliteFile = $this->config->projects_root.'/projects/'.$this->config->project.'/.dump.sqlite';
-        $this->sqliteFileFinal = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
+        $this->sqliteFile = "{$this->config->projects_root}/projects/{$this->config->project}/.dump.sqlite";
+        $this->sqliteFileFinal = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
         if (file_exists($this->sqliteFile)) {
             unlink($this->sqliteFile);
             display('Removing old .dump.sqlite');
@@ -1470,7 +1470,7 @@ GREMLIN;
             $this->sqlite->query($query);
         }
 
-        display( $name." : ".count($values));
+        display( "$name : ".count($values));
     }
     
     private function collectParameterCounts() {
@@ -1482,33 +1482,33 @@ GREMLIN;
 
     private function collectMethodsCounts() {
         $query = <<<GREMLIN
-g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount('m').by( __.out("METHOD", "MAGICMETHOD").count() ).cap('m'); 
+g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("METHOD", "MAGICMETHOD").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'MethodsCounts');
     }
 
     private function collectPropertyCounts() {
         $query = <<<GREMLIN
-g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount('m').by( __.out("PPP").out("PPP").count() ).cap('m'); 
+g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("PPP").out("PPP").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassPropertyCounts');
     }
 
     private function collectConstantCounts() {
         $query = <<<GREMLIN
-g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount('m').by( __.out("CONST").out("CONST").count() ).cap('m'); 
+g.V().hasLabel("Class", "Classanonymous", "Trait").groupCount("m").by( __.out("CONST").out("CONST").count() ).cap("m"); 
 GREMLIN;
         $this->collectHashCounts($query, 'ClassConstantCounts');
     }
-    
+
     private function collectNativeCallsPerExpressions() {
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
         $query = <<<GREMLIN
-g.V().hasLabel(within(['Sequence'])).groupCount("processed").by(count()).as("first").out("EXPRESSION").not(hasLabel(within(['Assignation', 'Case', 'Catch', 'Class', 'Classanonymous', 'Closure', 'Concatenation', 'Default', 'Dowhile', 'Finally', 'For', 'Foreach', 'Function', 'Ifthen', 'Include', 'Method', 'Namespace', 'Php', 'Return', 'Switch', 'Trait', 'Try', 'While']))).as("results")
-.groupCount('m').by( __.emit( ).repeat( __.out($this->linksDown).not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel('Functioncall')
+g.V().hasLabel(within(["Sequence"])).groupCount("processed").by(count()).as("first").out("EXPRESSION").not(hasLabel(within(["Assignation", "Case", "Catch", "Class", "Classanonymous", "Closure", "Concatenation", "Default", "Dowhile", "Finally", "For", "Foreach", "Function", "Ifthen", "Include", "Method", "Namespace", "Php", "Return", "Switch", "Trait", "Try", "While"]))).as("results")
+.groupCount("m").by( __.emit( ).repeat( __.out($this->linksDown).not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel("Functioncall")
       .where( __.in("ANALYZED").has("analyzer", "Functions/IsExtFunction"))
       .count()
-).cap('m')
+).cap("m")
 GREMLIN;
         $this->collectHashCounts($query, 'NativeCallPerExpression');
     }
@@ -1534,7 +1534,7 @@ SQL;
         // TODO : Constant visibility and value
 
         $query = <<<GREMLIN
-g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first")
+g.V().hasLabel(within(["Method"])).groupCount("processed").by(count()).as("first")
 .out("NAME").sideEffect{ name = it.get().value("fullcode"); }.in("NAME")
 
 .sideEffect{ signature1 = []; it.get().vertices(OUT, "ARGUMENT").sort{it.value("rank")}.each{ signature1.add(it.value("fullcode"));} }
@@ -1546,16 +1546,16 @@ g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first
 .filter{ signature2 != signature1; }
 
 .out("NAME").filter{ it.get().value("fullcode") == name}.select("first")
-.map{['name':name,
-      'parent':class2,
-      'parentValue':'function ' + name + '(' + signature2.join(', ') + ')',
-      'class':class1,
-      'classValue':'function ' + name + '(' + signature1.join(', ') + ')'];}
+.map{["name":name,
+      "parent":class2,
+      "parentValue":"function " + name + "(" + signature2.join(", ") + ")",
+      "class":class1,
+      "classValue":"function " + name + "(" + signature1.join(", ") + ")"];}
 GREMLIN;
         $total += $this->storeClassChanges('Method Signature', $query);
         
         $query = <<<GREMLIN
-g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first")
+g.V().hasLabel(within(["Method"])).groupCount("processed").by(count()).as("first")
 .out("NAME").sideEffect{ name = it.get().value("fullcode"); }.in("NAME")
 
 .sideEffect{ visibility1 = it.get().value("visibility") }
@@ -1566,11 +1566,11 @@ g.V().hasLabel(within(['Method'])).groupCount("processed").by(count()).as("first
 .filter{ visibility2 = it.get().value("visibility"); visibility1 != it.get().value("fullcode") }
 
 .out("NAME").filter{ it.get().value("fullcode") == name}.select("first")
-.map{['name':name,
-      'parent':class2,
-      'parentValue':visibility2,
-      'class':class1,
-      'classValue':visibility1];}
+.map{["name":name,
+      "parent":class2,
+      "parentValue":visibility2,
+      "class":class1,
+      "classValue":visibility1];}
 GREMLIN;
         $total += $this->storeClassChanges('Method Visibility', $query);
         
