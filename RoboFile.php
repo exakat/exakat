@@ -401,8 +401,11 @@ JOIN categories
 
         // check for analyzers in Files
         $total = 0;
-        $totals = array('examples'     => 0,
-                        'examples_app' => array(),
+        $totals = array('examples'               => 0,
+                        'examples_distinct'      => 0,
+                        'examples_app'           => array(),
+                        'modifications'          => 0,
+                        'modifications_distinct' => 0,
                        );
         $res = $sqlite->query('SELECT analyzers.folder || "/" || analyzers.name as name FROM analyzers');
         while($row = $res->fetchArray()) {
@@ -420,6 +423,11 @@ JOIN categories
             $raw = file_get_contents("human/en/$row[name].ini");
             $ini = parse_ini_file("human/en/$row[name].ini", true);
             
+            if ($ini === false) {
+                print "Wrong INI format in human/en/$row[name].ini\n";
+                continue;
+            }
+            
             $examples = preg_grep("/example\d+/", array_keys($ini));
             print count($examples)." example sections\n";
             
@@ -431,8 +439,18 @@ JOIN categories
             if (preg_match_all('/\[example\d+\]/s', $raw) != count($examples)) {
                 print "human/en/$row[name].ini has a weird count of examples\n";
             } 
+
+            if (isset($ini['modifications'])) {
+                if (!is_array($ini['modifications'])) {
+                    print "human/en/$row[name].ini has no array for modifications\n";
+                }
+                gettype($ini['modifications']);
+                $totals['modifications'] += count($ini['modifications']);
+                ++$totals['modifications_distinct'];
+            }
             
             if (!empty($examples)) {
+                ++$totals['examples_distinct'];
                 foreach($examples as $example) {
                     ++$totals['examples'];
                     $totals['examples_app'][] = $ini[$example]['project'];
@@ -455,11 +473,15 @@ JOIN categories
             } 
             
             if (strpos($ini['description'], '<?php') === false) {
-                print 'human/en/'.$row['name'].'.ini'. " has no example in the docs\n";
+                print "human/en/{$row['name']}.ini has no example in the docs\n";
             } 
 
             if (strpos($ini['description'], 'See also') === false) {
                 print 'human/en/'.$row['name'].'.ini'. " has no external links in the docs\n";
+            } 
+
+            if (preg_match('/(?<!`)`[^`_]+?`(?!`)(?!_)/s', $ini['description'], $r)) {
+                print "human/en/{$row['name']}.ini has single ` ` literals : ".implode(', ', $r)."\n";
             } 
             
             $title = str_replace(array('PHP', 'autoload', 'const', 'HTTP'), '', $ini['name']);  
@@ -478,7 +500,8 @@ JOIN categories
             }
         }
         print "\n$total analyzers are in the base\n";
-        print "$totals[examples] examples in the docs\n";
+        print "$totals[examples] examples for $totals[examples_distinct] analysis in the docs\n";
+        print "$totals[modifications] modifications for $totals[modifications_distinct] analysis in the docs\n";
         $apps = array_count_values($totals['examples_app']);
         asort($apps);
         print_r($apps);
