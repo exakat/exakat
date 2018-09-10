@@ -140,3 +140,9 @@ pregenerated
 pregenerates
 pregenerate
 cacheable
+hardcoded
+hardcoding
+hardcodes
+hardcode
+maintenable
+variadic
