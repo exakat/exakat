@@ -100,7 +100,7 @@ abstract class Reports {
             $themas = $this->config->themas;
 
             if ($missing = $this->checkMissingThemes()) {
-                print "Can't produce ".get_called_class()." format. There are ".count($missing)." missing themes : ".implode(', ', $missing).".\n";
+                print "Can't produce ".static::class." format. There are ".count($missing)." missing themes : ".implode(', ', $missing).".\n";
                 return false;
             }
 

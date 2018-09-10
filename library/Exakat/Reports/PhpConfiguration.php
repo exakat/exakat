@@ -123,11 +123,11 @@ SQL
                 $disable = parse_ini_file("{$this->config->dir_root}/data/disable_functions.ini");
                 $suggestions = array_diff($disable['disable_functions'], $list);
 
-                $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/disable_functions.json"));
+                $data['Disable features'] = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/disable_functions.json"));
 
                 // disable_functions
-                $data[0]->suggested = implode(', ', $suggestions);
-                $data[0]->documentation .= "\n; ".count($list). " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
+                $data['Disable features'][0]->suggested = implode(', ', $suggestions);
+                $data['Disable features'][0]->documentation .= "\n; ".count($list). " sensitive functions were found in the code. Don't disable those : " . implode(', ', $list);
 
                 $res2 = $this->sqlite->query(<<<SQL
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
@@ -139,9 +139,8 @@ SQL
                 $suggestions = array_diff($disable['disable_classes'], $list);
 
                 // disable_functions
-                $data[1]->suggested = implode(',', $suggestions);
-                $data[1]->documentation .= "\n; ".count($list). " sensitive classes were found in the code. Don't disable those : " . implode(', ', $list);
-                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Disable features</td></tr>\n";
+                $data['Disable features'][1]->suggested = implode(',', $suggestions);
+                $data['Disable features'][1]->documentation .= "\n; ".count($list). " sensitive classes were found in the code. Don't disable those : " . implode(', ', $list);
             } else {
                 $ext = substr($row['analyzer'], 14);
                 if (in_array($ext, $directives)) {
@@ -177,6 +176,9 @@ TEXT;
 
 ";
                 } else {
+                    if (!is_object($detail)) {
+                        var_dump($detail);
+                    }
                     $documentation = wordwrap(' '.$detail->documentation, 80, "\n; ");
                     $directives .= ";$documentation
 $detail->name = $detail->suggested

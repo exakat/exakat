@@ -571,7 +571,7 @@ SQL;
         return array('html' => $html, 'script' => $dataScript);
     }
 
-    private function getTotalAnalysedFile() {
+    protected function getTotalAnalysedFile() {
         $query = "SELECT COUNT(DISTINCT file) FROM results";
         $result = $this->sqlite->query($query);
 
@@ -579,7 +579,7 @@ SQL;
         return $result[0];
     }
 
-    private function getTotalAnalyzer($issues = false) {
+    protected function getTotalAnalyzer($issues = false) {
         $query = "SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
             FROM resultsCounts AS rc
             WHERE rc.count >= 0";
@@ -590,7 +590,7 @@ SQL;
         return $result->fetchArray(\SQLITE3_NUM);
     }
 
-    private function generateAnalyzers() {
+    protected function generateAnalyzers() {
         $analysers = $this->getAnalyzersResultsCounts();
 
         $baseHTML = $this->getBasedPage('analyzers');
