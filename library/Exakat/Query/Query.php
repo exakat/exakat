@@ -64,7 +64,6 @@ class Query {
 
         // @doc This is when the object is a placeholder for others.
         if (empty($this->commands)) {
-            print "EMPTY";
             return true;
         }
 
@@ -120,10 +119,15 @@ GREMLIN;
         $commands = implode('.', $commands);
         $this->arguments = array_merge(...array_column($this->commands, 'arguments'));
 
-        $this->query = "g.V().$commands
+        $this->query = <<<GREMLIN
+g.V().as('first').$commands
 
 // Query (#{$this->id}) for {$this->analyzer}
-// php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v\n";
+// php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v\n
+
+GREMLIN;
+
+//        print_r($this);
     }
     
     public function getQuery() {
