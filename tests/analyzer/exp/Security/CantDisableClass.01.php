@@ -1,13 +1,13 @@
 <?php
 
 $expected     = array('Phar( )',
-                      '\Phar( )',
-                      'Phar', // constant
-                      '\Phar', // method
-                      '\Phar',
+                      '\\Phar( )',
+                      'Phar',
+                      '\\Phar',
+                      '\\Phar',
                      );
 
-$expected_not = array('\A\phar',
+$expected_not = array('\\A\\phar',
                      );
 
 ?>

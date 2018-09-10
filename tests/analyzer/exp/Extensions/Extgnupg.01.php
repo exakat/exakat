@@ -7,7 +7,7 @@ $expected     = array('gnupg_init( )',
                       'GNUPG_SIG_MODE_CLEAR',
                      );
 
-$expected_not = array(
+$expected_not = array('gnupg_logout( )',
                      );
 
 ?>

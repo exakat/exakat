@@ -4,7 +4,7 @@ $expected     = array('gnupg( )',
                       'gnupg',
                      );
 
-$expected_not = array(
+$expected_not = array('gnupg\gnupg( )',
                      );
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('parent::definedMethod( )',
-                      'parent::constant1', 
+                      'parent::constant1',
                       'parent::$property2',
                       'parent::$property3',
                      );

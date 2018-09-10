@@ -7,4 +7,5 @@ $expected_not = array('parent::$someAPropertyInCL',
                       'parent::$someBPropertyInCL',
                       'parent::$someCPropertyInCL',
                      );
+
 ?>

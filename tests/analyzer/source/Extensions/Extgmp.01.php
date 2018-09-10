@@ -9,4 +9,5 @@ function fact($x)
 }
 
 echo gmp_strval(fact(1000)) . "\n";
+echo gmp_factval();
 ?>

@@ -8,4 +8,6 @@ gnupg_addsignkey($res,"8660281B6051D071D94B5B230549F9DC851566DC","test");
 // sign
 $signed = gnupg_sign($res,"just a test");
 echo $signed;
+
+gnupg_logout();
 ?>
