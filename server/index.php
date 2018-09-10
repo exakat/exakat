@@ -99,7 +99,7 @@ function init($args) {
         error('Missing Onepage/code', '');
     }
 
-    echo json_encode(array('project' => $project));
+    echo json_encode(compact('project'));
 }
 
 function update($args) {
@@ -117,7 +117,7 @@ function update($args) {
     }
 
     shell_exec('__PHP__ __EXAKAT__ update -p '.$project);
-    echo json_encode(array('project' => $project));
+    echo json_encode(compact('project'));
 }
 
 function project($args) {
@@ -135,7 +135,7 @@ function project($args) {
     }
     
     echo shell_exec('__PHP__ __EXAKAT__ queue -p '.$project);
-    echo json_encode(array('project' => $project));
+    echo json_encode(compact('project'));
 }
 
 function queue($args) {
@@ -197,7 +197,7 @@ function report($args) {
         error('No report available', $project);
     }
     
-    readfile(__DIR__.'/'.$project.'/dump.sqlite');
+    readfile(__DIR__."/$project/dump.sqlite");
 }
 
 function status($args) {
@@ -230,13 +230,13 @@ function config($args) {
 
     $project = $args[0];
     
-    if (!file_exists(__DIR__.'/'.$project.'/config.ini')) {
+    if (!file_exists(__DIR__."/$project/config.ini")) {
         return;
     }
     
     $status = array();
     
-    $ini = file_get_contents(__DIR__.'/'.$project.'/config.ini');
+    $ini = file_get_contents(__DIR__."/$project/config.ini");
     $php_versions = array('7.3', '7.2', '7.1', '7.0', '5.6', '5.5', '5.4', '5.3');
     if (!empty($_REQUEST['phpversion']) &&
         in_array($_REQUEST['phpversion'], $php_versions)) {
@@ -332,7 +332,7 @@ function config($args) {
     if (empty($status)) {
         die(json_encode($status));
     }
-    $size = file_put_contents(__DIR__.'/'.$project.'/config.ini', $ini);
+    $size = file_put_contents(__DIR__."/$project/config.ini", $ini);
     
     $status = array('saved'   => $size, 
                     'options' => $status);
@@ -385,9 +385,8 @@ function autoOnagepageName() {
     return $return;
 }
 
-function error($message, $project) {
-    die(json_encode(array('error' => $message,
-                          'project' => $project)));
+function error($error, $project) {
+    die(json_encode(compact('error', 'project')));
 }
 
 function serverLog($message) {
