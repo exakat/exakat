@@ -32,7 +32,7 @@ class CouldUseInterface extends Analyzer {
         $query = <<<GREMLIN
 g.V().hasLabel("Interface")
      .as("name")
-     .out("METHOD").as("methodCount").out("NAME").as("method")
+     .out("METHOD", "MAGICMETHOD").as("methodCount").out("NAME").as("method")
      .select("name", "method", "methodCount").by("fullnspath").by("code").by("count");
 GREMLIN;
 
