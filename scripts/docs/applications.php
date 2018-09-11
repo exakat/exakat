@@ -61,7 +61,7 @@ $applications = array(
     'WordPress'                  => array('url' => 'https://www.wordpress.org/', ),
     'xataface'                   => array('url' => 'http://xataface.com/', ),
     'XOOPS'                      => array('url' => 'https://xoops.org/', ),
-    'Zend-Config'                => array('url' => 'https://github.com/zendframework/zend-config', ),
+    'Zend-Config'                => array('url' => 'https://docs.zendframework.com/zend-config/', ),
     'Zurmo'                      => array('url' => 'http://zurmo.org/', ),
     'Zencart'                    => array('url' => 'https://www.zen-cart.com/', ),
    );
