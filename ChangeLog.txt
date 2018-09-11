@@ -1,4 +1,4 @@
-Version 1.4.4 (White Dragon Horse, coming up)
+Version 1.4.5 (Guanyin Bodhisattva, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 1.4.4 (White Dragon Horse, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.4.4 (White Dragon Horse, 2018-09-10)
++ Architecture
+    + Doctor reports the set of tokens used
+    + Lots of docs checks
++ Report
+    + Ambassador / Phpconfiguration : report disable_functions and disable_classes
+    + Finished Weekly report
++ Analyzer
+    + New analysis : report ext/seaslog
+    + Upgraded analysis : Incompatible signatures
+    + Fixed DSL : analyzerIs
+    + Checked unit tests : 3000 / 3010 test pass (99% pass)
++ Tokenizer
+    + Closure are now processed with runplugin
+    + Removed depencencies to usedClasses
+    + Fixed detections of Closure at the end of a script
 
 Version 1.4.3 (Sha Wujing, 2018-09-03)
 + Architecture
