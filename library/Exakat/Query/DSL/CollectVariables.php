@@ -30,16 +30,15 @@ class CollectVariables extends DSL {
     public function run() : Command {
         list($variable) = func_get_args();
         
-        $CONTAINERS = makeList(Analyzer::$VARIABLES_ALL);
+        $CONTAINERS = makeList(array('Variable', 'Variableobject', 'Variablearray', 'Phpvariable', 'Member', 'Staticproperty', 'Array', 'This', ));
         $LINKS_DOWN = self::$linksDown;
 
         return new Command(<<<GREMLIN
-where(
-    __.sideEffect{ $variable = []; }
-      .repeat( __.out($LINKS_DOWN)).emit()
+sideEffect{ $variable = []; }.where(
+    __.repeat( __.out($LINKS_DOWN)).emit()
       .hasLabel($CONTAINERS)
       .sideEffect{ 
-          $variable.add(it.get().value("code")); 
+          $variable.add(it.get().value("fullcode")); 
       }
       .fold()
 )
