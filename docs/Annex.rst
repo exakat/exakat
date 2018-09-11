@@ -230,6 +230,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/redis <https://github.com/phpredis/phpredis/>`_
 * `ext/reflection <http://php.net/manual/en/book.reflection.php>`_
 * `ext/runkit <http://php.net/manual/en/book.runkit.php>`_
+* `ext/seaslog <https://github.com/SeasX/SeasLog>`_
 * `ext/sem <http://php.net/manual/en/book.sem.php>`_
 * `ext/session <http://php.net/manual/en/book.session.php>`_
 * `ext/shmop <http://php.net/manual/en/book.sem.php>`_
@@ -306,16 +307,14 @@ A number of applications were scanned in order to find real life examples of pat
 * `Magento <https://magento.com/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
 * `Tine20 <https://www.tine20.com/>`_
-* SugarCRM
+* `SugarCrm <https://www.sugarcrm.com/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
-* ZenCart
+* `Zencart <https://www.zen-cart.com/>`_
 * `Traq <https://traq.io/>`_
 * `SPIP <https://www.spip.net/>`_
-* `Zencart <https://www.zen-cart.com/>`_
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
 * `Mautic <https://www.mautic.org/>`_
 * `Typo3 <https://typo3.org/>`_
-* `SugarCrm <https://www.sugarcrm.com/>`_
 * `xataface <http://xataface.com/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `OpenConf <https://www.openconf.com/>`_
@@ -337,11 +336,13 @@ A number of applications were scanned in order to find real life examples of pat
 * `PhpIPAM <https://phpipam.net/download/>`_
 * `Edusoho <https://www.edusoho.com/en>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
-* `phpadnsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
+* `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `Phinx <https://phinx.org/>`_
-* `Zend-Config <https://github.com/zendframework/zend-config>`_
+* Humo-Gen
+* edusoho
 * `ThinkPHP <http://www.thinkphp.cn/>`_
+* `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 * `Swoole <https://www.swoole.com/>`_
 
 
@@ -395,6 +396,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.4.4
+
+  * ext/seaslog (Extensions/Extseaslog)
+
 * 1.4.3
 
   * Class Could Be Final (Classes/CouldBeFinal)
@@ -414,7 +419,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.4.0
 
-  * Php/Php73RemovedFunctions (Php/Php73RemovedFunctions)
+  * PHP 7.3 Removed Functions (Php/Php73RemovedFunctions)
   * Relaxed Heredoc (Php/RelaxedHeredoc ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Trailing Comma In Calls (Php/TrailingComma ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
 
@@ -424,7 +429,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Avoid Real (Php/AvoidReal ; Suggestions)
   * Case Insensitive Constants (Constants/CaseInsensitiveConstants ; Appinfo, CompatibilityPHP73)
   * Const Or Define Preference (Constants/ConstDefinePreference ; Preferences)
-  * Continue Is For Loop (Structures/ContinueIsForLoop ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
+  * Continue Is For Loop (Structures/ContinueIsForLoop ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * Could Be Abstract Class (Classes/CouldBeAbstractClass)
 
 * 1.3.8
@@ -478,7 +483,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.2.9
 
-  * Compact Inexistant Variable (Php/CompactInexistant ; Suggestions)
+  * Compact Inexistant Variable (Php/CompactInexistant ; CompatibilityPHP73, Suggestions)
   * Configure Extract (Security/ConfigureExtract ; Security)
   * Flexible Heredoc (Php/FlexibleHeredoc ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Method Signature Must Be Compatible (Classes/MethodSignatureMustBeCompatible)
@@ -1351,6 +1356,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * CakePHP 3.0 Deprecated Class (Cakephp/Cake30DeprecatedClass ; Cakephp)
   * CakePHP 3.3 Deprecated Class (Cakephp/Cake33DeprecatedClass ; Cakephp)
   * Calltime Pass By Reference (Structures/CalltimePassByReference ; CompatibilityPHP54, Codacy)
+  * Can't Disable Class (Security/CantDisableClass ; Security)
   * Can't Disable Function (Security/CantDisableFunction ; Appinfo, Appcontent)
   * Can't Extend Final (Classes/CantExtendFinal ; Analyze, Dead code, Codacy, Simple)
   * Cant Use Return Value In Write Context (Php/CantUseReturnValueInWriteContext ; CompatibilityPHP54, CompatibilityPHP53)
@@ -1496,8 +1502,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Has Magic Property (Classes/HasMagicProperty ; Internal)
   * Has Variable Arguments (Functions/VariableArguments ; Appinfo, Internal)
   * Hash Algorithms (Php/HashAlgos ; Analyze, Codacy, Level 4)
-  * Hash Algorithms Incompatible With PHP 5.3 (Php/HashAlgos53 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
-  * Hash Algorithms Incompatible With PHP 5.4/5.5 (Php/HashAlgos54 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
+  * Hash Algorithms Incompatible With PHP 5.3 (Php/HashAlgos53 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
+  * Hash Algorithms Incompatible With PHP 5.4/5.5 (Php/HashAlgos54 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Heredoc Delimiter Glossary (Type/Heredoc ; Appinfo)
   * Hexadecimal Glossary (Type/Hexadecimal ; Inventory, Appinfo)
   * Hexadecimal In String (Type/HexadecimalString ; Inventory, CompatibilityPHP70, CompatibilityPHP71)
@@ -2020,7 +2026,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-27 PHP error message detailled here : 
+28 PHP error message detailled here : 
 
 * "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
 * Access level to Bar::$publicProperty must be public (as in class Foo)
@@ -2038,6 +2044,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * Class fooThrowable cannot implement interface Throwable, extend Exception or Error instead
 * Creating default object from empty value
 * Declaration of FooParent::Bar() must be compatible with FooChildren::Bar()
+* Declaration of ab::foo($a) must be compatible with a::foo($a = 1) 
 * Declaration of ab::foo($a) should be compatible with a::foo($a = 1) 
 * Defining a custom assert() function is deprecated, as the function has special semantics
 * Invalid numeric literal
@@ -2161,6 +2168,7 @@ List of external links mentionned in this documentation.
 * `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_
 * `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_
 * `CakePHP <https://www.cakephp.org/>`_
+* `Calendar Functions <http://www.php.net/manual/en/ref.calendar.php>`_
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
 * `Cant Use Return Value In Write Context <https://stackoverflow.com/questions/1075534/cant-use-method-return-value-in-write-context>`_
 * `cat: write error: Broken pipe <https://askubuntu.com/questions/421663/cat-write-error-broken-pipe>`_
@@ -2234,6 +2242,7 @@ List of external links mentionned in this documentation.
 * `Error reporting <https://php.earth/docs/security/intro#error-reporting>`_
 * `Escape sequences <http://php.net/manual/en/regexp.reference.escape.php>`_
 * `Ev <http://php.net/manual/en/book.ev.php>`_
+* `eval <http://www.php.net/eval>`_
 * `Event <http://php.net/event>`_
 * `Exakat <http://www.exakat.io/>`_
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
@@ -2247,6 +2256,7 @@ List of external links mentionned in this documentation.
 * `ext-http <https://github.com/m6w6/ext-http>`_
 * `ext/ast <https://pecl.php.net/package/ast>`_
 * `ext/gender <http://php.net/manual/en/book.gender.php>`_
+* `ext/hash <http://www.php.net/manual/en/book.hash.php>`_
 * `ext/hrtime <http://php.net/manual/en/intro.hrtime.php>`_
 * `ext/inotify <http://php.net/manual/en/book.inotify.php>`_
 * `ext/leveldb <https://github.com/reeze/php-leveldb>`_
@@ -2255,6 +2265,7 @@ List of external links mentionned in this documentation.
 * `ext/OpenSSL <http://php.net/manual/en/book.openssl.php>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
 * `ext/recode <http://www.php.net/manual/en/book.recode.php>`_
+* `ext/SeasLog <https://github.com/SeasX/SeasLog>`_
 * `ext/sqlite <http://php.net/manual/en/book.sqlite.php>`_
 * `ext/sqlite3 <http://php.net/manual/en/book.sqlite3.php>`_
 * `ext/uopz <https://pecl.php.net/package/uopz>`_
@@ -2272,8 +2283,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Flexible Heredoc and Nowdoc Syntaxes <https://wiki.php.net/rfc/flexible_heredoc_nowdoc_syntaxes>`_
@@ -2380,7 +2391,6 @@ List of external links mentionned in this documentation.
 * `Microsoft SQL Server Driver <http://php.net/sqlsrv>`_
 * `Ming (flash) <http://www.libming.org/>`_
 * `mongodb Driver <ext/mongo>`_
-* `Move ext/hash from resources to objects <http://php.net/manual/en/migration72.incompatible.php#migration72.incompatible.hash-ext-to-objects>`_
 * `move_uploaded_file <http://php.net/move_uploaded_file>`_
 * `msgpack for PHP <https://github.com/msgpack/msgpack-php>`_
 * `MySQL Improved Extension <http://php.net/manual/en/book.mysqli.php>`_
@@ -2446,8 +2456,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: is_countable <https://wiki.php.net/rfc/is-countable>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
-* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
@@ -2504,8 +2514,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2534,8 +2544,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -3543,11 +3553,11 @@ CompatibilityPHP73
 | [CompatibilityPHP73]
 |   analyzer[] = "Constants/CaseInsensitiveConstants";
 |   analyzer[] = "Php/AssertFunctionIsReserved";
-|   analyzer[] = "Php/HashAlgos53";
-|   analyzer[] = "Php/HashAlgos54";
+|   analyzer[] = "Php/CompactInexistant";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php73RemovedFunctions";
-|   analyzer[] = "Php/UnknownPcre2Option";| 
+|   analyzer[] = "Php/UnknownPcre2Option";
+|   analyzer[] = "Structures/ContinueIsForLoop";| 
 
 
 
@@ -3642,6 +3652,7 @@ Security
 |   analyzer[] = "Php/BetterRand";
 |   analyzer[] = "Security/AnchorRegex";
 |   analyzer[] = "Security/AvoidThoseCrypto";
+|   analyzer[] = "Security/CantDisableClass";
 |   analyzer[] = "Security/CompareHash";
 |   analyzer[] = "Security/ConfigureExtract";
 |   analyzer[] = "Security/CurlOptions";

@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 03 Sep 2018 14:41:41 +0000
-.. comment: Generation hash : 2bacdd6065c245a8e172e9aaebfd797d46625858
+.. comment: Generation date : Tue, 11 Sep 2018 08:45:23 +0000
+.. comment: Generation hash : eab2b0325bdaa6b6a595b7994077fe6a1c75c54a
 
 
 .. _analyze:
@@ -918,12 +918,12 @@ CompatibilityPHP73
 Total : 7 analysis
 
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
-* :ref:`Php/Php73RemovedFunctions`
+* :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
+* :ref:`PHP 7.3 Removed Functions <php-7.3-removed-functions>`
 * Php/AssertFunctionIsReserved
-* Php/HashAlgos53
-* Php/HashAlgos54
 * Php/Php73NewFunctions
 * Php/UnknownPcre2Option
+* Structures/ContinueIsForLoop
 
 .. _dead-code:
 
@@ -1006,11 +1006,12 @@ Total : 36 analysis
 Security
 ++++++++
 
-Total : 36 analysis
+Total : 37 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
+* :ref:`Can't Disable Class <can't-disable-class>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Configure Extract <configure-extract>`
 * :ref:`Direct Injection <direct-injection>`
@@ -1088,7 +1089,6 @@ Total : 62 analysis
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Avoid Real <avoid-real>`
-* :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
 * :ref:`Could Be Static Closure <could-be-static-closure>`
 * :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Return Void <could-return-void>`
@@ -1131,6 +1131,7 @@ Total : 62 analysis
 * Interfaces/AlreadyParentsInterface
 * Interfaces/UnusedInterfaces
 * Performances/SubstrFirst
+* Php/CompactInexistant
 * Php/LogicalInLetters
 * Php/ShouldUseArrayColumn
 * Php/ShouldUseCoalesce

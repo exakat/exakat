@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 03 Sep 2018 14:41:41 +0000
-.. comment: Generation hash : 2bacdd6065c245a8e172e9aaebfd797d46625858
+.. comment: Generation date : Tue, 11 Sep 2018 08:45:23 +0000
+.. comment: Generation hash : eab2b0325bdaa6b6a595b7994077fe6a1c75c54a
 
 
 .. _$http\_raw\_post\_data:
@@ -313,7 +313,7 @@ Abstract Or Implements
 
 A class must implements all abstract methods of it parent, or be abstract too. 
 
-While PHP lints this code, it won't execute it and stop with a Fatal Error : `Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A::aFoo)`.
+While PHP lints this code, it won't execute it and stop with a Fatal Error : ``Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A::aFoo)``.
 
 .. code-block:: php
 
@@ -868,7 +868,7 @@ Ambiguous Static
 
 Methods or properties with the same name, are defined static in one class, and not static in another. This is error prone, as it requires a good knowledge of the code to make it static or not. 
 
-Try to keep the staticness of methods simple, and unique. Consider renaming the methods and properties to distinguish them easily. A method and a static method have probably different responsibilities.
+Try to keep the methods simple, and unique. Consider renaming the methods and properties to distinguish them easily. A method and a static method have probably different responsibilities.
 
 .. code-block:: php
 
@@ -1003,11 +1003,11 @@ Assert Function Is Reserved
 ###########################
 
 
-Avoid defining an `assert` function in namespaces. 
+Avoid defining an ``assert`` function in namespaces. 
 
-While they work fine when the assertions are active (`zend.assertions=1`), calls to unqualified `assert` are optimized away when assertions are not active. 
+While they work fine when the assertions are active (``zend.assertions=1``), calls to unqualified ``assert`` are optimized away when assertions are not active. 
 
-Since PHP 7.3, a fatal error is emitted : `Defining a custom `'assert() <http://www.php.net/assert>`_ function is deprecated, as the function has special semantics`.
+Since PHP 7.3, a fatal error is emitted : ``Defining a custom `'assert() <http://www.php.net/assert>`_ function is deprecated, as the function has special semantics``.
 
 .. code-block:: php
 
@@ -1201,13 +1201,17 @@ It is recommended to store the values in an array, and then use `'implode() <htt
    ?>
 
 
-The same doesn't apply to addition and multiplication, with `'array_sum() <http://www.php.net/array_sum>`_ and array_multiply(), as those operations work on the current memory allocation, and don't need to allocate new memory at each step.
+The same doesn't apply to addition and multiplication, with `'array_sum() <http://www.php.net/array_sum>`_ and array_multiply(), as those operations work on the current memory allocation, and don't need to allocate new memory at each step. 
 
-+------------+-----------------------------+
-| Short name | Performances/NoConcatInLoop |
-+------------+-----------------------------+
-| Themes     | :ref:`Performances`         |
-+------------+-----------------------------+
+See also `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_.
+
++------------+------------------------------------------------------------------------------------------+
+| Short name | Performances/NoConcatInLoop                                                              |
++------------+------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Performances`                                                                      |
++------------+------------------------------------------------------------------------------------------+
+| Examples   | :ref:`suitecrm-performances-noconcatinloop`, :ref:`thinkphp-performances-noconcatinloop` |
++------------+------------------------------------------------------------------------------------------+
 
 
 
@@ -1506,9 +1510,9 @@ Avoid Real
 ##########
 
 
-PHP has two float data type : real and double. `real` is rarely used, and might be deprecated in PHP 7.4.
+PHP has two float data type : real and double. ``real`` is rarely used, and might be deprecated in PHP 7.4.
 
-To prepare code, avoid using `'is_real() <http://www.php.net/is_real>`_ and the `(real)` typecast.
+To prepare code, avoid using `'is_real() <http://www.php.net/is_real>`_ and the ``(real)`` typecast.
 
 .. code-block:: php
 
@@ -1787,11 +1791,13 @@ Glob() accepts wildchar, that may not easily replaced with `'scandir() <http://w
 
 See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_.
 
-+------------+---------------------+
-| Short name | Performances/NoGlob |
-+------------+---------------------+
-| Themes     | :ref:`Performances` |
-+------------+---------------------+
++------------+------------------------------------------------------------------------+
+| Short name | Performances/NoGlob                                                    |
++------------+------------------------------------------------------------------------+
+| Themes     | :ref:`Performances`                                                    |
++------------+------------------------------------------------------------------------+
+| Examples   | :ref:`phinx-performances-noglob`, :ref:`nextcloud-performances-noglob` |
++------------+------------------------------------------------------------------------+
 
 
 
@@ -1834,7 +1840,7 @@ Avoid sleep()/usleep()
 
 `'sleep() <http://www.php.net/sleep>`_ and `'usleep() <http://www.php.net/usleep>`_ help saturate the web server. 
 
-Pausing the script for a specific amount of time means that the Web server is also making all related ressources sleep, such as database, sockets, session, etc. This may used to set up a DOS on the server.  
+Pausing the script for a specific amount of time means that the Web server is also making all related resources sleep, such as database, sockets, session, etc. This may used to set up a DOS on the server.  
 
 .. code-block:: php
 
@@ -1855,7 +1861,7 @@ Pausing the script for a specific amount of time means that the Web server is al
 
 As much as possible, avoid delaying the end of the script. 
 
-`'sleep() <http://www.php.net/sleep>`_ and `'usleep() <http://www.php.net/usleep>`_ have less impact in commandline (CLI).
+`'sleep() <http://www.php.net/sleep>`_ and `'usleep() <http://www.php.net/usleep>`_ have less impact in commandline (``CLI``).
 
 +------------+------------------+
 | Short name | Security/NoSleep |
@@ -2384,7 +2390,7 @@ CakePHP classes, interfaces and traits that are not defined in version 3.2.0.
 4 new interfaces 
 4 new traits 
  
-1 removed classe
+1 removed class
 
 +------------+-------------------+
 | Short name | Cakephp/Cakephp32 |
@@ -2402,7 +2408,7 @@ CakePHP 3.3 Deprecated Class
 
 According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_, the following class is deprecated and should be removed.
 
-* Mcrypt (Cake\Utility\Crypto\Mcrypt) : replace it with Cake\Utility\Crypto\Openssl or ext/openssl
+* Mcrypt (Cake\Utility\Crypto\Mcrypt) : replace it with `Cake\Utility\Crypto\Openssl` or `ext/openssl`
 
 +------------+-------------------------------+
 | Short name | Cakephp/Cake33DeprecatedClass |
@@ -2592,6 +2598,34 @@ See also `Warn when counting non-countable types <http://php.net/manual/en/migra
 
 
 
+.. _can't-disable-class:
+
+Can't Disable Class
+###################
+
+
+This is the list of potentially dangerous PHP class being used in the code, such as \Phar. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This script uses ftp_connect(), therefore, this function shouldn't be disabled. 
+   $phar = new Phar();
+   
+   ?>
+
+
+This analysis is the base for suggesting values for the disable_classes directive.
+
++------------+---------------------------+
+| Short name | Security/CantDisableClass |
++------------+---------------------------+
+| Themes     | :ref:`Security`           |
++------------+---------------------------+
+
+
+
 .. _can't-extend-final:
 
 Can't Extend Final
@@ -2639,9 +2673,9 @@ Can't Throw Throwable
 #####################
 
 
-Classes extending ``Throwable`` can't be thrown. Same for interfaces. 
+Classes extending ``Throwable`` can't be thrown. The same applies to interfaces. 
 
-Although this code lints, PHP throws a Fatal error when executing or including it : `Class fooThrowable cannot implement interface `'Throwable <http://php.net/manual/fr/class.throwable.php>`_, extend Exception or Error instead`.
+Although this code lints, PHP throws a Fatal error when executing or including it : ``Class fooThrowable cannot implement interface `'Throwable <http://php.net/manual/fr/class.throwable.php>`_, extend Exception or Error instead``.
 
 .. code-block:: php
 
@@ -2658,7 +2692,7 @@ Although this code lints, PHP throws a Fatal error when executing or including i
 
 See also `Throwable <http://php.net/manual/en/class.throwable.php>`_,
          `Exception <http://php.net/manual/en/class.exception.php>`_ and
-         `Error <http://php.net/manual/en/class.error.php>`.
+         `Error <http://php.net/manual/en/class.error.php>`_.
 
 +------------+----------------------+
 | Short name | Exceptions/CantThrow |
@@ -2674,7 +2708,7 @@ Cant Inherit Abstract Method
 ############################
 
 
-Inheriting abstract methods was made available in PHP 7.2. In previous versions, it emited a fatal error.
+Inheriting abstract methods was made available in PHP 7.2. In previous versions, it emitted a fatal error.
 
 .. code-block:: php
 
@@ -3042,11 +3076,11 @@ Class Could Be Final
 ####################
 
 
-Any class that has no extension should be `final` by default.
+Any class that has no extension should be ``final`` by default.
 
 As stated by Matthias Noback : ``If a class is not marked final, it has at least one subclass``.
 
-Prevent your classes from being subclassed by making them `final`. Sometimes, classes are not meant or thought to be derivable.
+Prevent your classes from being subclassed by making them ``final``. Sometimes, classes are not meant or thought to be derivable.
 
 .. code-block:: php
 
@@ -3148,7 +3182,7 @@ Class Should Be Final By Ocramius
 
 'Make your classes always final, if they implement an interface, and no other public methods are defined'.
 
-When a class should be final, as explained by Ocramius (Marco Pivetta).
+When a class should be final, as explained by ``Ocramius`` (``Marco Pivetta``).
 
 .. code-block:: php
 
@@ -3191,9 +3225,9 @@ The following names are used at the same time for classes, interfaces or traits.
 .. code-block:: php
 
    <?php
-       class a { /* some definitions */ }
+       class a     { /* some definitions */ }
        interface a { /* some definitions */ }
-       trait a { /* some definitions */ }
+       trait a     { /* some definitions */ }
    ?>
 
 
@@ -3290,7 +3324,7 @@ Performances : simplifying a closure tends to reduce the call time by 50%.
 
 
 See also `Closure class <http://php.net/closure>`_ and 
-         `Callbacks / Callables <http://php.net/manual/en/language.types.callable.php>`
+         `Callbacks / Callables <http://php.net/manual/en/language.types.callable.php>`_.
 
 +------------+-----------------------------------------+
 | Short name | Functions/Closure2String                |
@@ -3411,11 +3445,11 @@ For performances reasons, this analysis only works inside methods and functions.
 See also `compact <http://www.php.net/compact>`_ and 
          `PHP RFC: Make compact function reports undefined passed variables <https://wiki.php.net/rfc/compact>`_.
 
-+------------+-----------------------+
-| Short name | Php/CompactInexistant |
-+------------+-----------------------+
-| Themes     | :ref:`Suggestions`    |
-+------------+-----------------------+
++------------+-----------------------------------------------+
+| Short name | Php/CompactInexistant                         |
++------------+-----------------------------------------------+
+| Themes     | :ref:`Suggestions`, :ref:`CompatibilityPHP73` |
++------------+-----------------------------------------------+
 
 
 
@@ -3882,11 +3916,11 @@ Since PHP 7.3, the execution will emit a warning when finding a `'continue <http
 
 See also `Deprecate and remove `'continue <http://php.net/manual/en/control-structures.continue.php>`_ targeting switch <https://wiki.php.net/rfc/continue_on_switch_deprecation>`_.
 
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Structures/ContinueIsForLoop                                                                                                                                                                                |
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Structures/ContinueIsForLoop                                                                                                                                                                                                           |
++------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP73` |
++------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -4656,7 +4690,7 @@ Could Use array_unique
 ######################
 
 
-Use array_unique to collect unique elements from an array.
+Use `'array_unique() <http://www.php.net/array_unique>`_ to collect unique elements from an array.
 
 Always try to use native PHP functions, instead of rebuilding them with custom PHP code.
 
@@ -4765,9 +4799,9 @@ Crc32() Might Be Negative
 #########################
 
 
-`'crc32() <http://www.php.net/crc32>`_ may return a negative number, on 32bits platforms.
+`'crc32() <http://www.php.net/crc32>`_ may return a negative number, on 32 bits platforms.
 
-According to the manual : Because PHP\'s integer type is signed many crc32 checksums will result in negative integers on 32bit platforms. On 64bit installations all `'crc32() <http://www.php.net/crc32>`_ results will be positive integers though.
+According to the manual : Because PHP\'s integer type is signed many ``CRC32`` checksums will result in negative integers on 32 bits platforms. On 64 bits installations, all `'crc32() <http://www.php.net/crc32>`_ results will be positive integers though.
 
 .. code-block:: php
 
@@ -4894,7 +4928,7 @@ Deep Definitions
 
 Structures, such as functions, classes, interfaces, traits, etc. may be defined anywhere in the code, including inside functions. This is legit code for PHP. 
 
-Since the availability of __autoload, there is no need for that kind of code. Structures should be defined, and accessible to the autoloading. Inclusion and deep definitions should be avoided, as they compell code to load some definitions, while autoloading will only load them if needed. 
+Since the availability of ``__autoload``, there is no need for that kind of code. Structures should be defined, and accessible to the autoloading. Inclusion and deep definitions should be avoided, as they compel code to load some definitions, while autoloading will only load them if needed. 
 
 .. code-block:: php
 
@@ -5173,10 +5207,10 @@ Detect Current Class
 ####################
 
 
-Dectecting the current class should be done with ::class operator.
+Detecting the current class should be done with ::class operator.
 
-`'__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_ may be replace by `self::class`. 
-get_called_class() may be replace by `static::class`. 
+`'__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_ may be replaced by ``self::class``. 
+get_called_class() may be replaced by ``static::class``. 
 
 `'__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_ and get_called_class() are set to be deprecated in PHP 7.4. 
 
@@ -6274,7 +6308,7 @@ The code does try, then catch errors but do no act upon the error.
 
 At worst, the error should be logged, so as to measure the actual usage of the catch expression.
 
-catch( Exception $e) (PHP 5) or catch(`'Throwable <http://php.net/manual/fr/class.throwable.php>`_ $e) with empty catch block should be banned, as they will simply ignore any error. 
+``catch( Exception $e)`` (PHP 5) or ``catch(`'Throwable <http://php.net/manual/fr/class.throwable.php>`_ $e)`` with empty catch block should be banned, as they will simply ignore any error. 
 
 See also `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_.
 
@@ -6420,6 +6454,8 @@ Most of the time, it is possible to replace the code by some standard PHP, like 
 At worse, including a pregenerated file is faster and cacheable. 
 
 For PHP 7.0 and later, it is important to put `'eval() <http://www.php.net/eval>`_ in a try..catch expression.
+
+See also `eval <http://www.php.net/eval>`_.
 
 +------------+-------------------------------------------------------------------------------+
 | Short name | Structures/EvalUsage                                                          |
@@ -6936,7 +6972,7 @@ Forgotten Interface
 ###################
 
 
-The following classes have been found implementing an interface's methods, though it doesn't explicitely implements this interface. This may have been forgotten.
+The following classes have been found implementing an interface's methods, though it doesn't explicitly implements this interface. This may have been forgotten.
 
 .. code-block:: php
 
@@ -7529,11 +7565,11 @@ List of hash algorithms incompatible with PHP 5.3.
 
 See also `hash_algos <http://php.net/hash_algos>`_.
 
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Php/HashAlgos53                                                                                                                                                                                                        |
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/HashAlgos53                                                                                                                                                                             |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7560,11 +7596,11 @@ List of hash algorithms incompatible with PHP 5.4 and 5.5.
 
 See also `hash_algos <http://php.net/hash_algos>`_.
 
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Php/HashAlgos54                                                                                                                                                                             |
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/HashAlgos54                                                                                                                                                  |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP72` |
++------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7607,7 +7643,7 @@ Hash Will Use Objects
 #####################
 
 
-The `ext/hash <http://www.php.net/hash>` extension used resources, and is being upgraded to use resources. 
+The `ext/hash <http://www.php.net/manual/en/book.hash.php>`_ extension used resources, and is being upgraded to use resources. 
 
 .. code-block:: php
 
@@ -8268,7 +8304,7 @@ The same signatures means the children class must have :
 + the same default value or removed
 + a reference like its parent
 
-This problem emits a fatal error. Yet, it is difficult to lint, because classes are often stored in different files. As such, PHP do lint each file independently, as unknown parent classes are not checked if not present. Yet, when executing the code, PHP lint the actual code and may encounter a fatal error.
+This problem emits a fatal error, for abstract methods, or a warning error, for normal methods. Yet, it is difficult to lint, because classes are often stored in different files. As such, PHP do lint each file independently, as unknown parent classes are not checked if not present. Yet, when executing the code, PHP lint the actual code and may encounter a fatal error.
 
 .. code-block:: php
 
@@ -8288,11 +8324,13 @@ This problem emits a fatal error. Yet, it is difficult to lint, because classes 
 
 See also `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_.
 
-+------------+-------------------------------+
-| Short name | Classes/IncompatibleSignature |
-+------------+-------------------------------+
-| Themes     | :ref:`Analyze`                |
-+------------+-------------------------------+
++------------+-----------------------------------------------+
+| Short name | Classes/IncompatibleSignature                 |
++------------+-----------------------------------------------+
+| Themes     | :ref:`Analyze`                                |
++------------+-----------------------------------------------+
+| Examples   | :ref:`suitecrm-classes-incompatiblesignature` |
++------------+-----------------------------------------------+
 
 
 
@@ -8336,7 +8374,44 @@ Inconsistent Elseif
 ###################
 
 
+Chaining if/elseif requires a consistent string of conditions. The conditions are executed one after the other, and the conditions shouldn't overlap.
 
+This analysis reports chains of elseif that don't share a common variable (or array, or property, etc.. ). As such, testing different conditions are consistent. 
+
+.. code-block:: php
+
+   <?php
+   
+   // $a is always common, so situations are mutually exclusive
+   if ($a === 1) {
+       doSomething();
+   } else if ($a > 1) {
+       doSomethingElse();
+   } else {
+       doSomethingDefault();
+   }
+   
+   // $a is always common, so situations are mutually exclusive
+   // although, it may be worth checking the consistency here
+   if ($a->b === 1) {
+       doSomething();
+   } else if ($a->c > 1) {
+       doSomethingElse();
+   } else {
+       doSomethingDefault();
+   }
+   
+   // if $a === 1, then $c doesn't matter? 
+   // This happens, but then logic doesn't appear in the code.
+   if ($a === 1) {
+       doSomething();
+   } else if ($c > 1) {
+       doSomethingElse();
+   } else {
+       doSomethingDefault();
+   }
+   
+   ?>
 
 +------------+-------------------------------+
 | Short name | Structures/InconsistentElseif |
@@ -8352,7 +8427,7 @@ Indices Are Int Or String
 #########################
 
 
-Indices in an array notation such as `$array['indice']` may only be integers or string.
+Indices in an array notation such as ``$array['indice']`` may only be integers or string.
 
 Boolean, Null or float will be converted to their integer or string equivalent.
 
@@ -8821,7 +8896,7 @@ Until PHP 7, it was possible to use arrays as constants, but it was not possible
    ?>
 
 
-This would yield an error : `Cannot use `'isset() <http://www.php.net/isset>`_ on the result of an expression (you can use "null !== expression" instead)`. This is a backward incompatibility.
+This would yield an error : ``Cannot use `'isset() <http://www.php.net/isset>`_ on the result of an expression (you can use "null !== expression" instead)``. This is a backward incompatibility.
 
 +------------+------------------------------------------------------------------------------------------------------------+
 | Short name | Structures/IssetWithConstant                                                                               |
@@ -9065,7 +9140,7 @@ Locally Unused Property
 
 Those properties are defined in a class, and this class doesn't have any method that makes use of them. 
 
-While this is syntactically correct, it is unusual that defined ressources are used in a child class. It may be worth moving the definition to another class, or to move accessing methods to the class.
+While this is syntactically correct, it is unusual that defined resources are used in a child class. It may be worth moving the definition to another class, or to move accessing methods to the class.
 
 .. code-block:: php
 
@@ -9508,11 +9583,13 @@ Potential replacements :
    
    ?>
 
-+------------+--------------------------+
-| Short name | Performances/MakeOneCall |
-+------------+--------------------------+
-| Themes     | :ref:`Performances`      |
-+------------+--------------------------+
++------------+-----------------------------------------------------------------------------------+
+| Short name | Performances/MakeOneCall                                                          |
++------------+-----------------------------------------------------------------------------------+
+| Themes     | :ref:`Performances`                                                               |
++------------+-----------------------------------------------------------------------------------+
+| Examples   | :ref:`humo-gen-performances-makeonecall`, :ref:`edusoho-performances-makeonecall` |
++------------+-----------------------------------------------------------------------------------+
 
 
 
@@ -9556,7 +9633,7 @@ Method Collision Traits
 
 Two or more traits are included in the same class, and they have methods collisions. 
 
-Those collisions should be solved with a `use` expression. When they are not, PHP stops execution with a fatal error : ````.
+Those collisions should be solved with a ``use`` expression. When they are not, PHP stops execution with a fatal error : ``Trait method M has not been applied, because there are collisions with other trait methods on C``.
 
 .. code-block:: php
 
@@ -10705,7 +10782,7 @@ Some PHP native classes require a call to parent::`'__construct() <http://php.ne
 
 As of PHP 7.3, two classes currently need that call : SplTempFileObject and SplFileObject.
 
-The error is only emited if the class is instantiated, and a parent class is called. 
+The error is only emitted if the class is instantiated, and a parent class is called. 
 
 .. code-block:: php
 
@@ -10934,7 +11011,7 @@ Never Used Parameter
 
 When a parameter is never used at calltime, it may be turned into a local variable.
 
-It seems that the parameter was set up initially, but never found its practical usage. It is never mentionned, and always fall back on its default value.  
+It seems that the parameter was set up initially, but never found its practical usage. It is never mentioned, and always fall back on its default value.  
 
 Parameter without a default value are reported by PHP, and are usually always filled. 
 
@@ -11100,14 +11177,14 @@ New Functions In PHP 7.0
 
 The following functions are now native functions in PHP 7.0. It is advised to change them before moving to this new version.
 
-* get_resources
-* gc_mem_caches
-* preg_replace_callback_array
-* posix_setrlimit
-* random_bytes
-* random_int
-* intdiv
-* error_clear_last
+* get_resources()
+* gc_mem_caches()
+* `'preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_
+* posix_setrlimit()
+* random_bytes()
+* random_int()
+* intdiv()
+* error_clear_last()
 
 +------------+------------------------------------------------------------------------------------------------------------+
 | Short name | Php/Php70NewFunctions                                                                                      |
@@ -11460,7 +11537,7 @@ No Direct Call To Magic Method
 ##############################
 
 
-PHP magic methods, such as `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_ or `'__set() <http://php.net/manual/en/language.oop5.magic.php>`_, are supposed to be used in an object environnement, and not with direct call. 
+PHP magic methods, such as `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_ or `'__set() <http://php.net/manual/en/language.oop5.magic.php>`_, are supposed to be used in an object environment, and not with direct call. 
 
 It is recommended to use the magic method with its intended usage, and not to call it directly. For example, typecast to ``string`` instead of calling the ``__toString()`` method.
 
@@ -12234,7 +12311,7 @@ The ternary operator and the null coalescing operator are both expressions that 
 
 This means that any provided reference will be turned into its value. While this is usually invisible, it will raise a warning when a reference is expected. This is the case with methods returning a reference. 
 
-A PHP notice is generated when using a ternary operator or the null coalesce operator : `Only variable references should be returned by reference`. The notice is also emitted when returning objects. 
+A PHP notice is generated when using a ternary operator or the null coalesce operator : ``Only variable references should be returned by reference``. The notice is also emitted when returning objects. 
 
 This applies to methods, functions and closures. 
 
@@ -12260,13 +12337,13 @@ This applies to methods, functions and closures.
 See also `Null Coalescing Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce>`_, 
          `Ternary Operator <http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary>`_.
 
-+------------+---------------------------------------------+
-| Short name | Php/NoReferenceForTernary                   |
-+------------+---------------------------------------------+
-| Themes     | :ref:`Analyze`                              |
-+------------+---------------------------------------------+
-| Examples   | :ref:`phpadnsnew-php-noreferenceforternary` |
-+------------+---------------------------------------------+
++------------+--------------------------------------------+
+| Short name | Php/NoReferenceForTernary                  |
++------------+--------------------------------------------+
+| Themes     | :ref:`Analyze`                             |
++------------+--------------------------------------------+
+| Examples   | :ref:`phpadsnew-php-noreferenceforternary` |
++------------+--------------------------------------------+
 
 
 
@@ -12443,7 +12520,7 @@ The code may access an already declared constant with self or with its class nam
    ?>
 
 
-This error is not detected by linting. It is only detected at instantation time : if the class is not used, it won't appear.
+This error is not detected by linting. It is only detected at instantiation time : if the class is not used, it won't appear.
 
 +------------+-----------------------------------+
 | Short name | Classes/NoSelfReferencingConstant |
@@ -12821,7 +12898,7 @@ Usual convention is to write PHP keywords (like as, foreach, switch, case, `'bre
 
 PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing compulsory here. Although, it will look strange to many. 
 
-Some keywords are missing from this analysis : `extends`, `implements`, `as`. This is due to the internal engine, which doesn't keep track of them in its AST representation.
+Some keywords are missing from this analysis : ``extends``, ``implements``, ``as``. This is due to the internal engine, which doesn't keep track of them in its AST representation.
 
 +------------+------------------------------------------------+
 | Short name | Php/UpperCaseKeyword                           |
@@ -12867,9 +12944,9 @@ Not A Scalar Type
 #################
 
 
-`int` is the actual PHP scalar type, not `integer`. 
+``int`` is the actual PHP scalar type, not ``integer``. 
 
-PHP 7 introduced several scalar types, in particular `int`, `bool` and `float`. Those three types are easily mistaken with `integer`, `boolean`, `real` and `double`. 
+PHP 7 introduced several scalar types, in particular ``int``, ``bool`` and ``float``. Those three types are easily mistaken with ``integer``, ``boolean``, ``real`` and ``double``. 
 
 Unless you have created those classes, you may get some strange error messages.
 
@@ -12886,7 +12963,7 @@ Unless you have created those classes, you may get some strange error messages.
    ?>
 
 
-Thanks to Benoit Viguier for the `original idea <https://twitter.com/b_viguier/status/940173951908700161>`__ for this analysis.
+Thanks to ``Benoit Viguier`` for the `original idea <https://twitter.com/b_viguier/status/940173951908700161>`__ for this analysis.
 
 See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
@@ -13844,6 +13921,24 @@ See also `Allow a trailing comma in function calls <https://wiki.php.net/rfc/tra
 
 
 
+.. _php-7.3-removed-functions:
+
+PHP 7.3 Removed Functions
+#########################
+
+
+The following PHP native functions were removed in PHP 7.3.
+
+* image2wbmp
+
++------------+---------------------------+
+| Short name | Php/Php73RemovedFunctions |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP73` |
++------------+---------------------------+
+
+
+
 .. _php-70-removed-functions:
 
 PHP 70 Removed Functions
@@ -13852,30 +13947,30 @@ PHP 70 Removed Functions
 
 The following PHP native functions were removed in PHP 7.0.
 
-* `ereg`
-* `ereg_replace`
-* `eregi`
-* `eregi_replace`
-* `split`
-* `spliti`
-* `sql_regcase`
-* `magic_quotes_runtime`
-* `set_magic_quotes_runtime`
-* `call_user_method`
-* `call_user_method_array`
-* `set_socket_blocking`
-* `mcrypt_ecb`
-* `mcrypt_cbc`
-* `mcrypt_cfb`
-* `mcrypt_ofb`
-* `datefmt_set_timezone_id`
-* `imagepsbbox`
-* `imagepsencodefont`
-* `imagepsextendfont`
-* `imagepsfreefont`
-* `imagepsloadfont`
-* `imagepsslantfont`
-* `imagepstext`
+* ereg()
+* ereg_replace()
+* eregi()
+* eregi_replace()
+* split()
+* spliti()
+* sql_regcase()
+* `'magic_quotes_runtime() <http://www.php.net/magic_quotes_runtime>`_
+* `'set_magic_quotes_runtime() <http://www.php.net/set_magic_quotes_runtime>`_
+* `'call_user_method() <http://www.php.net/call_user_method>`_
+* `'call_user_method_array() <http://www.php.net/call_user_method_array>`_
+* `'set_socket_blocking() <http://www.php.net/set_socket_blocking>`_
+* mcrypt_ecb()
+* mcrypt_cbc()
+* mcrypt_cfb()
+* mcrypt_ofb()
+* datefmt_set_timezone_id()
+* imagepsbbox()
+* imagepsencodefont()
+* imagepsextendfont()
+* imagepsfreefont()
+* imagepsloadfont()
+* imagepsslantfont()
+* imagepstext()
 
 +------------+------------------------------------------------------+
 | Short name | Php/Php70RemovedFunctions                            |
@@ -14312,22 +14407,6 @@ The new class is : HashContext.
 
 
 
-.. _php/php73removedfunctions:
-
-Php/Php73RemovedFunctions
-#########################
-
-
-
-
-+------------+---------------------------+
-| Short name | Php/Php73RemovedFunctions |
-+------------+---------------------------+
-| Themes     | :ref:`CompatibilityPHP73` |
-+------------+---------------------------+
-
-
-
 .. _php7-relaxed-keyword:
 
 Php7 Relaxed Keyword
@@ -14751,9 +14830,9 @@ Processing Collector
 
 When accumulating data in a variable, within a loop, it is slow to apply repeatedly a function to the variable.
 
-The example below illustrate the problem : `$collector` is build with element from `$array`. `$collector` actually gets larger and larger, slowing the `'in_array() <http://www.php.net/in_array>`_ call each time. 
+The example below illustrate the problem : ``$collector`` is build with element from ``$array``. ``$collector`` actually gets larger and larger, slowing the `'in_array() <http://www.php.net/in_array>`_ call each time. 
 
-It is better to apply the `'preg_replace() <http://www.php.net/preg_replace>`_ to `$a`, a short variable, and then, add `$a` to the collector.
+It is better to apply the `'preg_replace() <http://www.php.net/preg_replace>`_ to ``$a``, a short variable, and then, add ``$a`` to the collector.
 
 .. code-block:: php
 
@@ -15224,13 +15303,13 @@ Register Globals
 ################
 
 
-register_globals was a PHP directive that dumped all incoming variables from GET, POST, COOKIE and FILES as global variables in the called scripts.
+``register_globals`` was a PHP directive that dumped all incoming variables from GET, POST, COOKIE and FILES as global variables in the called scripts.
 This lead to security failures, as the variables were often used but not filtered. 
 
-Though it is less often found in more recent code, register_globals is sometimes needed in legacy code, that haven't made the move to eradicate this style of coding.
-Backward compatible pieces of code that mimic the register_globals features usually create even greater security risks by being run after scripts startup. At that point, some important variables are already set, and may be overwritten by the incoming call, creating confusion in the script.
+Though it is less often found in more recent code, ``register_globals`` is sometimes needed in legacy code, that haven't made the move to eradicate this style of coding.
+Backward compatible pieces of code that mimic the ``register_globals`` features usually create even greater security risks by being run after scripts startup. At that point, some important variables are already set, and may be overwritten by the incoming call, creating confusion in the script.
 
-Mimicking register_globals is achieved with variables variables, `'extract() <http://www.php.net/extract>`_, `'parse_str() <http://www.php.net/parse_str>`_ and `'import_request_variables() <http://www.php.net/import_request_variables>`_ (Up to PHP 5.4). 
+Mimicking ``register_globals`` is achieved with variables variables, `'extract() <http://www.php.net/extract>`_, `'parse_str() <http://www.php.net/parse_str>`_ and `'import_request_variables() <http://www.php.net/import_request_variables>`_ (Up to PHP 5.4). 
 
 .. code-block:: php
 
@@ -15316,7 +15395,7 @@ Relay functions (or methods) are delegating the actual work to another function 
    ?>
 
 
-Relay functions are typical of transition API, where an old API have to be preserved until it is fully migrated. Then, they may be removed, so as to reduce confusion, and unclutter the API.
+Relay functions are typical of transition API, where an old API have to be preserved until it is fully migrated. Then, they may be removed, so as to reduce confusion, and declutter the API.
 
 +------------+-------------------------+
 | Short name | Functions/RelayFunction |
@@ -15885,15 +15964,17 @@ The last five arguments of `'setcookie() <http://www.php.net/setcookie>`_ and `'
 
 setcookie ( string $name [, string $value =  [, int $expire = 0 [, string $path =  [, string $domain =  [, bool $secure = false [, bool $httponly = false ]]]]]] )
 
-The $expire argument sets the date of expiration of the cookie. It is recommended to make it as low as possible, to reduce its chances to be captured. Sometimes, low expiration date may be several days (for preferences), and other times, low expiration date means a few minutes. 
+The ``$expire`` argument sets the date of expiration of the cookie. It is recommended to make it as low as possible, to reduce its chances to be captured. Sometimes, low expiration date may be several days (for preferences), and other times, low expiration date means a few minutes. 
 
-The $path argument limits the transmission of the cookie to URL whose path matches the one mentionned here. By default, it is '/', which means the whole server. If a cookie usage is limited to a part of the application, use it here.
+The ``$path`` argument limits the transmission of the cookie to URL whose path matches the one mentionned here. By default, it is '/', which means the whole server. If a cookie usage is limited to a part of the application, use it here.
 
-The $domain argument limits the transmission of the cookie to URL whose domain matches the one mentionned here. By default, it is '', which means any server on the internet. At worse, you may use 'mydomain.com' to cover your whole domain, or better, refine it with the actual subdomain of usage.
+The ``$domain`` argument limits the transmission of the cookie to URL whose domain matches the one mentionned here. By default, it is '', which means any server on the internet. At worse, you may use 'mydomain.com' to cover your whole domain, or better, refine it with the actual subdomain of usage.
 
-The $secure argument limits the transmission of the cookie over HTTP (by default) or HTTPS. The second is better, as the transmission of the cookie is crypted. In case HTTPS is still at the planned stage, use '$_SERVER[HTTPS]'. This environnement variable is false on HTTP, and true on HTTPS.
+The ``$secure`` argument limits the transmission of the cookie over HTTP (by default) or HTTPS. The second is better, as the transmission of the cookie is crypted. In case HTTPS is still at the planned stage, use '$_SERVER[HTTPS]'. This environnement variable is false on HTTP, and true on HTTPS.
 
-The $httponly argument limits the access of the cookie to Javascript. It is only transmitted to the browser, and retransmitted. This helps reducing XSS and CSRF attacks, though it is disputed. 
+The ``$httponly`` argument limits the access of the cookie to Javascript. It is only transmitted to the browser, and retransmitted. This helps reducing XSS and CSRF attacks, though it is disputed. 
+
+The ``$samesite`` argument limits the sending of the cookie to the domain that initiated the request. It is by default `Lax` but should be upgraded to `Strict` whenever possible. This feature is available as PHP 7.3. 
 
 .. code-block:: php
 
@@ -15911,7 +15992,8 @@ The $httponly argument limits the access of the cookie to Javascript. It is only
    ?>
 
 
-See also `'setcookie() <http://www.php.net/setcookie>`_ on the manual for more information.
+See also `setcookie <http://www.php.net/setcookie>`_ and 
+         `'SameSite' cookie attribute <https://www.chromestatus.com/feature/4672634709082112>`_.
 
 +------------+------------------------+
 | Short name | Security/SetCookieArgs |
@@ -16331,7 +16413,7 @@ Should Typecast
 ###############
 
 
-When typecasting, it is better to use the casting operator, such as `(int)` or `(bool)`.
+When typecasting, it is better to use the casting operator, such as ``(int)`` or ``(bool)``.
 
 Functions such as `'intval() <http://www.php.net/intval>`_ or `'settype() <http://www.php.net/settype>`_ are always slower.
 
@@ -16513,7 +16595,7 @@ Should Use Local Class
 
 Methods should use the defining class, or be functions.
 
-Methods should use `$this` with another method or a property, or call `parent::`. Static methods should call another static method, or a static property. 
+Methods should use ``$this`` with another method or a property, or call ``parent::``. Static methods should call another static method, or a static property. 
 Methods which are overwritten by a child class are omitted : the parent class act as a default value for the children class, and this is correct.
 
 .. code-block:: php
@@ -16623,9 +16705,9 @@ Beware, some edge cases may apply. In particular, backward compatibility may pre
 * array_push may be replaced with [] 
 * is_object may be replace with `'instanceof <http://php.net/manual/en/language.operators.type.php>`_
 * function_get_arg and function_get_args may be replace with ellipsis : ...
-* chr may be replaces by string sequences, such as `\n`, `\x69`, `u{04699}`
-* `'call_user_func() <http://www.php.net/call_user_func>`_ may be replaces by `$functionName(arguments)`, `$object->$method(...$arguments)`
-* `'is_null() <http://www.php.net/is_null>`_ may be replaced by `=== null`
+* chr may be replaces by string sequences, such as ``\n``, ``\x69``, ``u{04699}``
+* `'call_user_func() <http://www.php.net/call_user_func>`_ may be replaces by ``$functionName(arguments)``, ``$object->$method(...$arguments)``
+* `'is_null() <http://www.php.net/is_null>`_ may be replaced by ``=== null``
 * php_version may be replace by PHP_VERSION (the constant)
 * `'is_array() <http://www.php.net/is_array>`_, `'is_int() <http://www.php.net/is_int>`_, `'is_object() <http://www.php.net/is_object>`_, etc. may be replaced by a typehint
 
@@ -16643,7 +16725,7 @@ Should Use Prepared Statement
 #############################
 
 
-Modern databases provides support for prepared statement : it separates the query from the processed data and highten significantly the security. 
+Modern databases provides support for prepared statement : it separates the query from the processed data and raise significantly the security. 
 
 Building queries with concatenations is not recommended, though not always avoidable. When possible, use prepared statements.
 
@@ -16811,7 +16893,7 @@ When using sessions, a session ID is assigned to the user. It is a random number
 
 A good approach to protect the session ID is to reduce its lifespan : the shorter the time of use, the better. While changing the session ID at every hit on the page may no be possible, a more reasonable approach is to change the session id when an important action is about to take place. What important means is left to the application to decide.
 
-Based on this philopsophy, a code source that uses Zend\Session but never uses Zend\Session::regenerateId() has to be updated.
+Based on this philosophy, a code source that uses Zend\Session but never uses Zend\Session::regenerateId() has to be updated.
 
 .. code-block:: php
 
@@ -17568,7 +17650,7 @@ Sqlite3 Requires Single Quotes
 ##############################
 
 
-The escapeString() method from Sqlite3 doesn't escape ", but only '. 
+The escapeString() method from ``SQLite3`` doesn't escape ``"``, but only ``'``. 
 
 .. code-block:: php
 
@@ -17583,9 +17665,9 @@ The escapeString() method from Sqlite3 doesn't escape ", but only '.
    ?>
 
 
-To properly handle quotes and NUL characters, use bindParam() instead.
+To properly handle quotes and `NUL` characters, use bindParam() instead.
 
-Quote from the PHP manual comments : The reason this function doesn't escape double quotes is because double quotes are used with names (the equivalent of backticks in MySQL), as in table or column names, while single quotes are used for values.
+Quote from the PHP manual comments : ``The reason this function doesn't escape double quotes is because double quotes are used with names (the equivalent of backticks in MySQL), as in table or column names, while single quotes are used for values.``
 
 See also `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_.
 
@@ -17633,7 +17715,7 @@ It is possible to create loops that don't use any blind variables, though this i
 
 It is recommended to turn a static loop into an expression that avoid the loop. For example, replacing the sum of all integers by the function $n * ($n + 1) / 2, or using `'array_sum() <http://www.php.net/array_sum>`_.
 
-This analysis doesn't detect usage of variables with `compact`.
+This analysis doesn't detect usage of variables with ``compact``.
 
 +------------+-----------------------+
 | Short name | Structures/StaticLoop |
@@ -18142,7 +18224,7 @@ Suspicious Comparison
 
 The comparison seems to be misplaced.
 
-A comparison happens in the the last argument, while the actual function expect another type : this may be the case of a badly placed parenthesis.
+A comparison happens in the last argument, while the actual function expect another type : this may be the case of a badly placed parenthesis.
 
 .. code-block:: php
 
@@ -18154,7 +18236,7 @@ A comparison happens in the the last argument, while the actual function expect 
    }
    
    // Just move the first closing parenthesis to give back its actual meaning
-   if (trim($str === '')){
+   if (trim($str) === ''){
    
    }
    
@@ -18163,11 +18245,13 @@ A comparison happens in the the last argument, while the actual function expect 
 
 Original idea by Vladimir Reznichenko.
 
-+------------+---------------------------------+
-| Short name | Structures/SuspiciousComparison |
-+------------+---------------------------------+
-| Themes     | :ref:`Analyze`                  |
-+------------+---------------------------------+
++------------+---------------------------------------------------------------------------------------------------------+
+| Short name | Structures/SuspiciousComparison                                                                         |
++------------+---------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                          |
++------------+---------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`phpipam-structures-suspiciouscomparison`, :ref:`expressionengine-structures-suspiciouscomparison` |
++------------+---------------------------------------------------------------------------------------------------------+
 
 
 
@@ -18434,13 +18518,13 @@ The cast may introduce a distortion to the value, and still lead to the unwanted
    
    ?>
 
-+------------+----------------------------------------+
-| Short name | Structures/TestThenCast                |
-+------------+----------------------------------------+
-| Themes     | :ref:`Analyze`                         |
-+------------+----------------------------------------+
-| Examples   | :ref:`dolphin-structures-testthencast` |
-+------------+----------------------------------------+
++------------+---------------------------------------------------------------------------------+
+| Short name | Structures/TestThenCast                                                         |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                  |
++------------+---------------------------------------------------------------------------------+
+| Examples   | :ref:`dolphin-structures-testthencast`, :ref:`suitecrm-structures-testthencast` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -19188,9 +19272,9 @@ Undefined ::class
 #################
 
 
-::class doesn't check if a corresponding class exists. 
+``::class`` doesn't check if a corresponding class exists. 
 
-`::class` must be checked with a call to class_exists(). Otherwise, it may lead to a ``Class 'foo' not found`` or even silent dead code : this happens also with Catch and `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
+``::class`` must be checked with a call to class_exists(). Otherwise, it may lead to a ``Class 'foo' not found`` or even silent dead code : this happens also with Catch and `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
 
 .. code-block:: php
 
@@ -19813,7 +19897,7 @@ Undefined Variable
 
 Variable that is used before any creation. 
 
-It is recommended to use a default value for every variable used. When not specified, the default value is set to `NULL` by PHP.
+It is recommended to use a default value for every variable used. When not specified, the default value is set to ``NULL`` by PHP.
 
 .. code-block:: php
 
@@ -19831,7 +19915,7 @@ It is recommended to use a default value for every variable used. When not speci
 
 Variable may be created in various ways : assignation, arguments, foreach blind variables, static and global variables.
 
-This analysis doesn't handle dynamic variables, such as `$$x`. It also doesn't handle variables outside a method or function.
+This analysis doesn't handle dynamic variables, such as ``$$x``. It also doesn't handle variables outside a method or function.
 
 See also `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_.
 
@@ -20140,11 +20224,11 @@ Unknown Pcre2 Option
 ####################
 
 
-PCRE2 supports different options, compared to PCRE1. PCRE2 was adopted with PHP 7.3. 
+``PCRE2`` supports different options, compared to ``PCRE1``. ``PCRE2`` was adopted with PHP 7.3. 
 
-The `S` modifier : it used to tell PCRE to spend more time studying the regex, so as to be faster at execution. This is now the default behavior, and may be dropped from the regex.
+The ``S`` modifier : it used to tell PCRE to spend more time studying the regex, so as to be faster at execution. This is now the default behavior, and may be dropped from the regex.
 
-The `X` modifier : `X` is still existing with PCRE2, though it is now the default for PCRE2, and not for PHP as time of writing. In particular, `Any backslash in a pattern that is followed by a letter that has no special meaning causes an error, thus reserving these combinations for future expansion. `. It is recommended to avoid using useless sequence \s in regex to get ready for that change. All the following letters `gijkmoqyFIJMOTY` . Note that `clLpPuU` are valid PRCE sequences, and are probably failing for other reasons. 
+The ``X`` modifier : ``X`` is still existing with ``PCRE2``, though it is now the default for ``PCRE2``, and not for PHP as time of writing. In particular, ``Any backslash in a pattern that is followed by a letter that has no special meaning causes an error, thus reserving these combinations for future expansion. ``. It is recommended to avoid using useless sequence \s in regex to get ready for that change. All the following letters ``gijkmoqyFIJMOTY`` . Note that ``clLpPuU`` are valid ``PRCE`` sequences, and are probably failing for other reasons. 
 
 .. code-block:: php
 
@@ -20693,7 +20777,7 @@ Unused Functions
 ################
 
 
-The functions below are unused. They look like deadcode.
+The functions below are unused. They look like dead code.
 
 .. code-block:: php
 
@@ -20750,7 +20834,7 @@ Unused Inherited Variable In Closure
 
 Some closures forgot to make usage of inherited variables.
 
-`'Closure <http://php.net/manual/fr/class.closure.php>`_ have two separate set of incoming variables : the arguments (between parenthesis) and the inherited variables, in the 'use' clause. Inherited variables are extracted from the local environnement at creation time, and keep their value until execution. 
+`'Closure <http://php.net/manual/fr/class.closure.php>`_ have two separate set of incoming variables : the arguments (between parenthesis) and the inherited variables, in the 'use' clause. Inherited variables are extracted from the local environment at creation time, and keep their value until execution. 
 
 The reported closures are requesting some local variables, but do not make any usage of them. They may be considered as dead code.  
 
@@ -20907,7 +20991,7 @@ Unused Private Methods
 
 Private methods that are not used are dead code. 
 
-Private methods are reserved for the defining class. Thus, they must be used with the current class, with `$this` or `self::`.
+Private methods are reserved for the defining class. Thus, they must be used with the current class, with ``$this`` or ``self::``.
 
 .. code-block:: php
 
@@ -22169,7 +22253,7 @@ Use json_decode() Options
 #########################
 
 
-json_decode() returns objects by default, unless the second argument is set to TRUE. Then, it returns arrays.
+json_decode() returns objects by default, unless the second argument is set to ``TRUE`` or ``JSON_OBJECT_AS_ARRAY``. Then, it returns arrays.
 
 Avoid transtyping of json_decode() returned value, and use the second argument to directly set the correct type.
 
@@ -22188,9 +22272,9 @@ Avoid transtyping of json_decode() returned value, and use the second argument t
    ?>
 
 
-Note that all objects will be turned into arrays, recursively. If you're expecting an array of objects, don't use the `JSON_OBJECT_AS_ARRAY` constant, and change your JSON code.
+Note that all objects will be turned into arrays, recursively. If you're expecting an array of objects, don't use the ``JSON_OBJECT_AS_ARRAY`` constant, and change your JSON code.
 
-Note that `JSON_OBJECT_AS_ARRAY` is the only constant : there is no defined constant to explicitly ask for an object as returned value. 
+Note that ``JSON_OBJECT_AS_ARRAY`` is the only constant : there is no defined constant to explicitly ask for an object as returned value. 
 
 See also `json_decode <http://php.net/json_decode>`_.
 
@@ -22361,7 +22445,7 @@ It is possible to set the session's option at session_start() call, skipping the
 
 This way, session's options are set in one call, saving several hits.
 
-This is available since PHP 7.0. It is recommended to set those values in the php.ini file, whenever possible. 
+This is available since PHP 7.0. It is recommended to set those values in the ``php.ini`` file, whenever possible. 
 
 .. code-block:: php
 
@@ -22398,7 +22482,7 @@ Property used once in their defining class.
 
 Properties used in one method only may be used several times, and read only. This may be a class constant. Such properties are meant to be overwritten by an extending class, and that's possible with class constants. 
 
-Setting properties with default values is a good way to avoid litterring the code with literal values, and provide a single point of update (by extension, or by hardcoding) for all those situations. A constant is definitely better suited for this task.
+Setting properties with default values is a good way to avoid littering the code with literal values, and provide a single point of update (by extension, or by hardcoding) for all those situations. A constant is definitely better suited for this task.
 
 .. code-block:: php
 
@@ -22903,7 +22987,8 @@ Useless Interfaces
 
 
 The interfaces below are defined and are implemented by some classes. 
-However, they are never used to enforce objects's class in the code, using `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ or a typehint. 
+
+However, they are never used to enforce an object's class in the code, using `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ or in a typehint. 
 As they are currently used, those interfaces may be removed without change in behavior.
 
 .. code-block:: php
@@ -23139,7 +23224,7 @@ Uses Default Values
 ###################
 
 
-Default values are provided to methods so as to make it convenient to use. However, with new versions, those values may change. For example, in PHP 5.4, `'htmlentities() <http://www.php.net/htmlentities>`_ switched from Latin1 to UTF-8 default encoding.
+Default values are provided to methods so as to make it convenient to use. However, with new versions, those values may change. For example, in PHP 5.4, `'htmlentities() <http://www.php.net/htmlentities>`_ switched from ``Latin1`` to ``UTF-8`` default encoding.
 
 .. code-block:: php
 
@@ -23746,7 +23831,7 @@ Those functioncalls are made with too many or too few arguments.
 
 When the number arguments is wrong for native functions, PHP emits a warning. 
 When the number arguments is too small for custom functions, PHP raises an exception. 
-When the number arguments is too hight for custom functions, PHP ignores the arguments. Such arguments should be handled with the variadic operator, or with `'func_get_args() <http://www.php.net/func_get_args>`_ family of functions.
+When the number arguments is too high for custom functions, PHP ignores the arguments. Such arguments should be handled with the variadic operator, or with `'func_get_args() <http://www.php.net/func_get_args>`_ family of functions.
 
 .. code-block:: php
 
@@ -24246,20 +24331,16 @@ It has been introduced in PHP 5.6. In the previous versions of PHP, this method 
    $f = new Foo();
    var_dump($f);
    
-   ?>
-
-
-This ends up with :::
-
-    
+   /* Displays : 
    object(foo)#1 (2) {
      [bar]=>
      int(1)
      [reallyHidden]=>
      string(6) Secret
    }
+   */
    
-   
+   ?>
 
 
 See also `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
@@ -24882,7 +24963,7 @@ mcrypt_create_iv() With Default Values
 
 Avoid using `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`_ default values.
 
-`mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>` used to have `MCRYPT_DEV_RANDOM` as default values, and in PHP 5.6, it now uses `MCRYPT_DEV_URANDOM`.
+`mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`_ used to have ``MCRYPT_DEV_RANDOM`` as default values, and in PHP 5.6, it now uses ``MCRYPT_DEV_URANDOM``.
 
 .. code-block:: php
 

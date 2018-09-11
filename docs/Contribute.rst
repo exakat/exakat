@@ -16,7 +16,9 @@ Here are some suggestions of help you may provide to enhance your own usage of E
 * Suggest missing :ref:`Strange Names For Methods <strange-names-for-methods>`
 * Suggest interesting Coding reference, like Object Calisthenics, PSR, East-Oriented Programming, etc.
 * Translate the documentation into other languages
-
+* Port Exakat on Windows or other OS
+* Recommend article for code conception to be added in the docs
+* Suggest public code source for review
 
 
 Visit us on the [github repository](https://github.com/exakat/php-static-analysis-tools), or the [slack channel](https://www.exakat.io/slack-invitation/).

@@ -309,7 +309,7 @@ Multiples Identical Case
 
 .. _sugarcrm-structures-multipledefinedcase:
 
-SugarCRM
+SugarCrm
 ^^^^^^^^
 
 :ref:`multiples-identical-case`, in modules/ModuleBuilder/MB/MBPackage.php:439. 
@@ -396,7 +396,7 @@ Switch Without Default
 
 .. _zencart-structures-switchwithoutdefault:
 
-ZenCart
+Zencart
 ^^^^^^^
 
 :ref:`switch-without-default`, in admin/tax_rates.php:15. 
@@ -1639,6 +1639,39 @@ __getBaseUrl and __setBaseUrl shouldn't be named like that.
     		return $this->baseUrl;
     	}
 
+Suspicious Comparison
+=====================
+
+.. _phpipam-structures-suspiciouscomparison:
+
+PhpIPAM
+^^^^^^^
+
+:ref:`suspicious-comparison`, in app/tools/vrf/index.php:110. 
+
+if $subnet['description'] is a string, the comparison with 0 turn it into a boolean. false's length is 0, and true length is 1. PHP saves the day.
+
+.. code-block:: php
+
+    $subnet['description'] = strlen($subnet['description']==0) ? "/" : $subnet['description'];
+
+
+--------
+
+
+.. _expressionengine-structures-suspiciouscomparison:
+
+ExpressionEngine
+^^^^^^^^^^^^^^^^
+
+:ref:`suspicious-comparison`, in ExpressionEngine_Core2.9.2/system/expressionengine/libraries/simplepie/SimplePie/Misc.php:1925. 
+
+If trim($attribs['']['mode']) === 'base64', then it is set to lowercase (although it is already), and added to the && logical test. If it is 'BASE64', this fails.
+
+.. code-block:: php
+
+    if (isset($attribs['']['mode']) && strtolower(trim($attribs['']['mode']) === 'base64'))
+
 Only Variable Passed By Reference
 =================================
 
@@ -1778,10 +1811,10 @@ This code looks like ``($options & DatabaseInterface::QUERY_STORE) == DatabaseIn
 No Reference For Ternary
 ========================
 
-.. _phpadnsnew-php-noreferenceforternary:
+.. _phpadsnew-php-noreferenceforternary:
 
-phpadnsnew
-^^^^^^^^^^
+phpadsnew
+^^^^^^^^^
 
 :ref:`no-reference-for-ternary`, in /lib/OA/Admin/Menu/Section.php334:334. 
 
@@ -1868,6 +1901,33 @@ $aLimits['per_page'] is tested for existence and not false. Later, it is cast fr
 
     if (isset($aLimits['per_page']) && $aLimits['per_page'] !== false)
                 $this->aCurrent['paginate']['perPage'] = (int)$aLimits['per_page'];
+
+
+--------
+
+
+.. _suitecrm-structures-testthencast:
+
+SuiteCrm
+^^^^^^^^
+
+:ref:`test-then-cast`, in modules/jjwg_Maps/controller.php:1035. 
+
+$marker['lat'] is compared to the string '0', which actually transtype it to integer, then it is cast to string for map_marker_data_points() needs and finally, it is cast to float, in case of a correction. It would be safer to test it in its string type, since floats are not used as array indices. 
+
+.. code-block:: php
+
+    if ($marker['lat'] != '0' && $marker['lng'] != '0') {
+    
+                // Check to see if marker point already exists and apply offset if needed
+                // This often occurs when an address is only defined by city, state, zip.
+                $i = 0;
+                while (isset($this->map_marker_data_points[(string) $marker['lat']][(string) $marker['lng']]) &&
+                $i < $this->settings['map_markers_limit']) {
+                    $marker['lat'] = (float) $marker['lat'] + (float) $this->settings['map_duplicate_marker_adjustment'];
+                    $marker['lng'] = (float) $marker['lng'] + (float) $this->settings['map_duplicate_marker_adjustment'];
+                    $i++;
+                }
 
 Redefined Private Property
 ==========================
@@ -2017,6 +2077,29 @@ The is_null() test detects a special situation, that requires usage of default v
                 $parent_id = $node->$idField;
                 $personal_folder = $node->personal_folder;
             }
+
+Incompatible Signature Methods
+==============================
+
+.. _suitecrm-classes-incompatiblesignature:
+
+SuiteCrm
+^^^^^^^^
+
+:ref:`incompatible-signature-methods`, in /modules/Home/Dashlets/RSSDashlet/RSSDashlet.php:138. 
+
+The class in the RSSDashlet.php file has an 'array' typehint which is not in the parent Dashlet class. While both files compile separately, they yield a PHP warning when running : typehinting mismatch only yields a warning. 
+
+.. code-block:: php
+
+    // File /modules/Home/Dashlets/RSSDashlet/RSSDashlet.php
+        public function saveOptions(
+            array $req
+            )
+        {
+    
+    // File /include/Dashlets/Dashlets.php
+        public function saveOptions( $req ) {
 
 Could Be Private Class Constant
 ===============================
@@ -2243,6 +2326,50 @@ implode('', ) is probably not the slowest part in these lines.
     $module_file = file($this->getLocalPath().'override/'.$path);
     eval(preg_replace(array('#^\s*<\?(?:php)?#', '#class\s+'.$classname.'(\s+extends\s+([a-z0-9_]+)(\s+implements\s+([a-z0-9_]+))?)?#i'), array(' ', 'class '.$classname.'Override_remove'.$uniq), implode('', $module_file)));
 
+Make One Call With Array
+========================
+
+.. _humo-gen-performances-makeonecall:
+
+Humo-Gen
+^^^^^^^^
+
+:ref:`make-one-call-with-array`, in admin/include/kcfinder/lib/helper_text.php:47. 
+
+The three calls to str_replace() could be replaced by one, using array arguments. Nesting the calls doesn't reduce the number of calls.
+
+.. code-block:: php
+
+    static function jsValue($string) {
+            return
+                preg_replace('/\r?\n/', "\n",
+                str_replace('"', "\\"",
+                str_replace("'", "\'",
+                str_replace("\", "\\",
+            $string))));
+        }
+
+
+--------
+
+
+.. _edusoho-performances-makeonecall:
+
+edusoho
+^^^^^^^
+
+:ref:`make-one-call-with-array`, in src/AppBundle/Common/StringToolkit.php:55. 
+
+Since str_replace is already using an array, the second argument must also be an array, with repeated empty strings. That syntax allows adding the '&nbsp;' and ' ' to those arrays. Note also that trim() should be be called early, but since some of the replacing may generate terminal spaces, it should be kept as is.
+
+.. code-block:: php
+
+    $text = strip_tags($text);
+    
+            $text = str_replace(array(\n, \r, \t), '', $text);
+            $text = str_replace('&nbsp;', ' ', $text);
+            $text = trim($text);
+
 No Count With 0
 ===============
 
@@ -2278,6 +2405,120 @@ $build or $signature are empty at that point, no need to calculate their respect
         if (strlen($built) == 0 || strlen($signature) == 0) {
           return false;
         }
+
+Avoid glob() Usage
+==================
+
+.. _phinx-performances-noglob:
+
+Phinx
+^^^^^
+
+:ref:`avoid-glob()-usage`, in src/Phinx/Migration/Manager.php:362. 
+
+Glob() searches for a list of files in the migration folder. Those files are not known, but they have a format, as checked later with the regex : a combinaison of FilesystemIterator and RegexIterator would do the trick too.
+
+.. code-block:: php
+
+    $phpFiles = glob($config->getMigrationPath() . DIRECTORY_SEPARATOR . '*.php');
+    
+                // filter the files to only get the ones that match our naming scheme
+                $fileNames = array();
+                /** @var AbstractMigration[] $versions */
+                $versions = array();
+    
+                foreach ($phpFiles as $filePath) {
+                    if (preg_match('/([0-9]+)_([_a-z0-9]*).php/', basename($filePath))) {
+
+
+--------
+
+
+.. _nextcloud-performances-noglob:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`avoid-glob()-usage`, in lib/private/legacy/helper.php:185. 
+
+Recursive copy of folders, based on scandir. DirectoryIterator and FilesystemIterator would do the same without the recursion.
+
+.. code-block:: php
+
+    static function copyr($src, $dest) {
+    		if (is_dir($src)) {
+    			if (!is_dir($dest)) {
+    				mkdir($dest);
+    			}
+    			$files = scandir($src);
+    			foreach ($files as $file) {
+    				if ($file != "." && $file != "..") {
+    					self::copyr("$src/$file", "$dest/$file");
+    				}
+    			}
+    		} elseif (file_exists($src) && !\OC\Files\Filesystem::isFileBlacklisted($src)) {
+    			copy($src, $dest);
+    		}
+    	}
+
+Avoid Concat In Loop
+====================
+
+.. _suitecrm-performances-noconcatinloop:
+
+SuiteCrm
+^^^^^^^^
+
+:ref:`avoid-concat-in-loop`, in include/export_utils.php:433. 
+
+$line is build in several steps, then then final version is added to $content. It would be much faster to make $content an array, and implode it once after the loop. 
+
+.. code-block:: php
+
+    foreach($records as $record)
+            {
+                $line = implode("\"" . getDelimiter() . "\"", $record);
+                $line = "\"" . $line;
+                $line .= "\"\r\n";
+                $line = parseRelateFields($line, $record, $customRelateFields);
+                $content .= $line;
+            }
+
+
+--------
+
+
+.. _thinkphp-performances-noconcatinloop:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`avoid-concat-in-loop`, in include/export_utils.php:433. 
+
+The  foreach loop prepares the 'getControllerRoute' call, then, accumulates all the resulting strings in $content. It would be much faster to make $content an array, and implode it once after the loop. 
+
+.. code-block:: php
+
+    foreach ($controllers as $controller) {
+                $controller = basename($controller, '.php');
+    
+                $class = new \ReflectionClass($namespace . '\' . $module . '\' . $layer . '\' . $controller);
+    
+                if (strpos($layer, '\')) {
+                    // 多级控制器
+                    $level      = str_replace(DIRECTORY_SEPARATOR, '.', substr($layer, 11));
+                    $controller = $level . '.' . $controller;
+                    $length     = strlen(strstr($layer, '\', true));
+                } else {
+                    $length = strlen($layer);
+                }
+    
+                if ($suffix) {
+                    $controller = substr($controller, 0, -$length);
+                }
+    
+                $content .= $this->getControllerRoute($class, $module, $controller);
+            }
 
 Use pathinfo() Arguments
 ========================

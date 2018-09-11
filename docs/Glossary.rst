@@ -114,6 +114,7 @@ Glossary
     + `array_unique()`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Could Use array_unique <could-use-array\_unique>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `array_unshift()`
@@ -195,6 +196,14 @@ Glossary
     + `call_user_func()`
 
       + :ref:`Should Use Operator <should-use-operator>`
+
+    + `call_user_method()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `call_user_method_array()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `chr()`
 
@@ -557,6 +566,10 @@ Glossary
 
 
 + `M`
+    + `magic_quotes_runtime()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
     + `mail()`
 
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
@@ -669,6 +682,7 @@ Glossary
     + `preg_replace_callback_array()`
 
       + :ref:`Make One Call With Array <make-one-call-with-array>`
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `print()`
@@ -717,6 +731,14 @@ Glossary
     + `set_exception_handler()`
 
       + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
+
+    + `set_magic_quotes_runtime()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `set_socket_blocking()`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `setcookie()`
 
