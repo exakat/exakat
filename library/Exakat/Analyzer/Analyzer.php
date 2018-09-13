@@ -1391,6 +1391,30 @@ GREMLIN;
         return $this;
     }
     
+    public function implementing($fullnspath) {
+        $this->query->implementing(array($fullnspath));
+
+        return $this;
+    }
+
+    public function notImplementing($fullnspath) {
+        $this->query->notImplementing(array($fullnspath));
+
+        return $this;
+    }
+    
+    public function extending($fullnspath) {
+        $this->query->extending(array($fullnspath));
+
+        return $this;
+    }
+
+    public function notExtending($fullnspath) {
+        $this->query->notExtending(array($fullnspath));
+
+        return $this;
+    }
+    
     public function getNameInFNP($variable) {
         $this->query->getNameInFNP($variable);
         

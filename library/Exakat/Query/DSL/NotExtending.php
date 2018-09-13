@@ -21,27 +21,23 @@
 */
 
 
-namespace Exakat\Analyzer\Classes;
+namespace Exakat\Query\DSL;
 
+use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class ThisIsNotAnArray extends Analyzer {
+class NotExtending extends DSL {
+    public function run() : Command {
+        list($fullnspath) = func_get_args();
 
-    public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
-        // direct class
-        $this->atomIs('This')
-             ->inIs(array('VARIABLE', 'APPEND'))
-             ->_as('results')
-             ->atomIs(array('Array', 'Arrayappend'))
-             // class may be \ArrayAccess
-             ->goToClass()
-             ->notImplementing(array('\arrayaccess'))
-             ->notExtending(array('\simplexmlelement', '\arrayobject'))
-             ->back('results');
-        $this->prepareQuery();
+        $MAX_LOOPING = self::$MAX_LOOPING;
+        return new Command(<<<GREMLIN
+not(
+    where( __.emit().repeat( __.out("EXTENDS").in("DEFINITION")).times($MAX_LOOPING)
+                    .out("EXTENDS").has("fullnspath", within(***)) ) 
+)
+GREMLIN
+, $fullnspath);
     }
 }
-
 ?>
