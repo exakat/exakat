@@ -46,6 +46,7 @@ class Manual extends Reports {
         $md .= '# Structures' . PHP_EOL.PHP_EOL;
         $md .= $this->generateExceptionTree();
         $md .= $this->generateConstants();
+        $md .= $this->generateFolders();
 
         $md .= '# Expressions' . PHP_EOL.PHP_EOL;
         $md .= $this->generateDynamicExpression();
@@ -92,6 +93,51 @@ class Manual extends Reports {
        return $md;
     }
 
+    private function generateFolders() {
+        $folders = '';
+
+        $res = $this->sqlite->query('SELECT * FROM files ORDER BY file');
+        $paths = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (empty($row['file'])) { 
+                continue; 
+            }
+            $path = dirname($row['file']);
+            if (isset($paths[$path])) {
+                ++$paths[$path];
+            } else {
+                $paths[$path] = 1;
+            }
+        }
+        
+        ksort($paths);
+        $count = count($paths);
+        $paths = raiseDimensions($paths);
+        $folders .= $this->generateFoldersCB($paths);
+        
+        $this->summary['Structures'][] = '[Folders](#folders)'.PHP_EOL;
+        $md = '<a name="'.$this->toId('folders').'"></a>'.PHP_EOL.'## Folders'.PHP_EOL.PHP_EOL;
+        $md .= 'There are '.$count.' folders.'.PHP_EOL.PHP_EOL;
+        $md .= $folders.PHP_EOL;
+    
+       return $md;
+    }
+
+    private function generateFoldersCB($array, $level = 0) {
+        $return = '';
+        
+        foreach($array as $key => $value) {
+            if (is_array($value)) {
+                $return .= str_repeat('  ', $level).'+ `'.$key.'`'.PHP_EOL.
+                           $this->generateFoldersCB($value, $level + 1);
+            } else {
+                $return .= str_repeat('  ', $level).'+ `'.(empty($key) ? '/' : $key).'`'.PHP_EOL;
+            }
+        }
+        
+        return $return;
+    }
+    
     private function generateSettings() {
         $info = array(array('Project name', $this->config->project_name));
         if (!empty($this->config->project_description)) {
@@ -140,9 +186,18 @@ class Manual extends Reports {
         $constants = '';
         $md = '';
         
-        $res = $this->sqlite->query('SELECT * FROM constants');
+        $res = $this->sqlite->query('SELECT cit.name AS class, constants.constant AS constant, value FROM constants 
+        join cit on cit.id = constants.citId
+        
+        ORDER BY cit.name, constants.constant, value');
+        
+        $previousClass = '';
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $constants .= '+ `'.$row['constant'].'` = '.$this->escapeMd($row['value']).PHP_EOL;
+            if ($previousClass !== $row['class']) {
+                $constants .= '+ `'.$row['class'].'`'.PHP_EOL;
+                $previousClass = $row['class'];
+            }
+            $constants .= '  + `'.$row['constant'].'` = '.$this->escapeMd($row['value']).PHP_EOL;
             ++$total;
         }
         
@@ -152,7 +207,7 @@ class Manual extends Reports {
         
         $this->summary['Structures'][] = '[Constants](#constants)';
         $md = '<a name="'.$this->toId('constants').'"></a>'.PHP_EOL.'## Constants'.PHP_EOL.PHP_EOL;
-        $md .= $total.' constants'.PHP_EOL.PHP_EOL;
+        $md .= $total.' constants and class constants are defined.'.PHP_EOL.PHP_EOL;
         $md .= $constants.PHP_EOL;
     
        return $md;
