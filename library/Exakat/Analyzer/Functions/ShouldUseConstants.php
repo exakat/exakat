@@ -30,14 +30,28 @@ class ShouldUseConstants extends Analyzer {
         $functions = $this->loadIni('constant_usage.ini');
         
         $MAX_LOOPING = self::MAX_LOOPING;
-        
+        $authorizedAtoms = array('Logical', 
+                                 'Identifier', 
+                                 'Nsname', 
+                                 'Variable', 
+                                 'Array', 
+                                 'Member', 
+                                 'Staticproperty', 
+                                 'Staticconstant', 
+                                 'Staticmethodcall', 
+                                 'Methodcall',
+                                 'Parenthesis',
+                                 'Void',
+                                 );
+
         $positions = array(0, 1, 2, 3, /*4, 5,*/ 6);
         foreach($positions as $position) {
-            $fullnspath = makeFullNsPath($functions['functions' . $position]);
+            $fullnspath = makeFullNsPath($functions["functions{$position}"]);
             $this->atomFunctionIs($fullnspath)
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
-                 ->atomIsNot(array('Logical', 'Variable', 'Array', 'Member', 'Identifier', 'Nsname', 'Staticproperty', 'Staticconstant', 'Staticmethodcall', 'Methodcall'))
+                 ->outIsIE(array('THEN', 'ELSE', 'CODE'))
+                 ->atomIsNot($authorizedAtoms)
                  ->back('first');
             $this->prepareQuery();
 
@@ -45,13 +59,15 @@ class ShouldUseConstants extends Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('Logical')
+                 // Skip Ternaries and parenthesis
                  ->raw(<<<GREMLIN
 where( 
-    __.repeat( __.out({$this->linksDown}) )
+    __.repeat( __.coalesce(__.out("THEN", "ELSE", "CODE"), filter{true}).out({$this->linksDown}) )
       .emit( ).times($MAX_LOOPING) 
-      .hasLabel(without("Identifier", "Nsname", "Parenthesis", "Logical"))
+      .hasLabel(without(***))
       )
 GREMLIN
+,$authorizedAtoms
 )
                  ->back('first');
             $this->prepareQuery();
