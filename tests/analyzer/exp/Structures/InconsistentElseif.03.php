@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('if(!isset($a6->config[\'program\'])) { /**/ } elseif(is_string($a7->config[\'program\'])) { /**/ } else { /**/ } ', 
+$expected     = array('if(!isset($a6->config[\'program\'])) { /**/ } elseif(is_string($a7->config[\'program\'])) { /**/ } else { /**/ } ',
                       'if(!isset($a7->config[\'program\'])) { /**/ } elseif(is_string($a8->config[\'program\'])) { /**/ } else { /**/ } ',
                      );
 
