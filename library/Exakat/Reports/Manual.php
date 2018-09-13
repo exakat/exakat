@@ -100,8 +100,8 @@ class Manual extends Reports {
             return '';
         }
         
-        $this->summary['Structures'][] = '[Constants](#Constants)';
-        $md .= '## Constants'.PHP_EOL.PHP_EOL;
+        $this->summary['Structures'][] = '[Constants](#constants)';
+        $md = '<a name="'.$this->toId('constants').'"></a>'.PHP_EOL.'## Constants'.PHP_EOL.PHP_EOL;
         $md .= $total.' constants'.PHP_EOL.PHP_EOL;
         $md .= $constants.PHP_EOL;
     
@@ -124,7 +124,7 @@ class Manual extends Reports {
         }
         
         $this->summary['Expressions'][] = '[Dynamic expressions](#dynamic-expressions)';
-        $md .= '## Dynamic expressions'.PHP_EOL.PHP_EOL;
+        $md = '<a name="'.$this->toId('dynamic expressions').'"></a>'.PHP_EOL.'## Dynamic expressions'.PHP_EOL.PHP_EOL;
         $md .= $total.' dynamic expressions'.PHP_EOL.PHP_EOL;
         $md .= $expressions.PHP_EOL;
     
@@ -200,7 +200,7 @@ class Manual extends Reports {
         
         $id = $this->toId($name);
         $this->summary[$section][] = '['.$name.'](#'.$id.')';
-        $md .= '## '.$name.'<a name="'.$this->toId($name).'"></a>'.PHP_EOL.PHP_EOL;
+        $md .= '<a name="'.$this->toId($name).'"></a>'.PHP_EOL.'## '.$name.PHP_EOL.PHP_EOL;
         $md .= $total.' '.$name.PHP_EOL.PHP_EOL;
         $md .= $url.PHP_EOL;
     
@@ -332,8 +332,8 @@ class Manual extends Reports {
         
         $theTable = $this->tree2ul($exceptions, $list);
 
-        $this->summary['Structures'][] = '[Exception Tree](#exception tree)';
-        $md = '## Exception Tree'.PHP_EOL.PHP_EOL;
+        $this->summary['Structures'][] = '[Exception Tree](#exception-tree)';
+        $md = '<a name="'.$this->toId('exception-tree').'"></a>'.PHP_EOL.'## Exception Tree'.PHP_EOL.PHP_EOL;
         $md .= $total.' exceptions'.PHP_EOL.PHP_EOL;
         $md .= $theTable.PHP_EOL;
     
