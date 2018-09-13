@@ -416,7 +416,7 @@ JOIN categories
             }
 
             if (!file_exists("human/en/$row[name].ini")) {
-                print $row['name']. " has no documentation\n";
+                print "$row[name] has no documentation\n";
                 continue;
             } 
             
@@ -429,8 +429,8 @@ JOIN categories
             }
             
             $examples = preg_grep("/example\d+/", array_keys($ini));
-            print count($examples)." example sections\n";
-            
+            print count($examples)." example sections in $row[name]\n";
+
             $count = substr_count($raw, '"') - substr_count($raw, '\\"') - count($examples) * 10 - 8;
             if ($count !== 0) {
                 print 'Count of " '.$row['name'].' : '.($count).PHP_EOL;
@@ -447,6 +447,8 @@ JOIN categories
                 gettype($ini['modifications']);
                 $totals['modifications'] += count($ini['modifications']);
                 ++$totals['modifications_distinct'];
+            } else {
+                print "No modification sections in $row[name]\n";
             }
             
             if (!empty($examples)) {
