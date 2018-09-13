@@ -553,4 +553,67 @@ function ordinal($number) {
     else
         return $number. $ends[$number % 10];
 }
+
+/*
+array('a/b' => 1 ) to Array
+(
+    [a] => Array
+        (
+            [b] => 1
+        )
+
+)
+*/
+function raiseDimensions($array, $split='/') {
+    $return = array();
+    
+    foreach($array as $k => $value) {
+        $k = trim($k, $split);
+        $d = explode($split, $k);
+        
+        $last = array_pop($d);
+        $sub = &$return;
+        foreach($d as $e) {
+            if (isset($sub[$e]) && is_array($sub[$e])) {
+                $sub = &$sub[$e];
+            } else {
+                $sub[$e] = array();
+                $sub = &$sub[$e];
+            }
+        }
+        $sub[$last] = $value;
+    }
+    
+    return $return;
+}
+
+/*
+Array
+(
+    [a] => Array
+        (
+            [b] => 1
+        )
+
+) to array('a/b' => 1 )
+
+
+*/
+function flattenDimensions($array, $split='/') {
+    $return = array();
+    
+    foreach($array as $k => $value) {
+        if (is_array($value)) {
+            $value = flattenDimensions($value);
+            foreach($value as $k2 => $value2) {
+                $return["$k$split$k2"] = $value2;
+            }
+        } else {
+            $return[$k] = $value;
+        }
+    }
+    
+    return $return;
+}
+
 ?>
