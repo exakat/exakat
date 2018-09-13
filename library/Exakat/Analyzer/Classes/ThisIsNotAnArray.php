@@ -45,6 +45,13 @@ not(
     )
 GREMLIN
 )
+             ->raw(<<<GREMLIN
+not( 
+    where( __.emit().repeat( __.out("EXTENDS").in("DEFINITION")).times($MAX_LOOPING)
+                        .out("EXTENDS").has("fullnspath", within("\\\\simplexmlelement", "\\\\arrayobject")) ) 
+    )
+GREMLIN
+)
              ->back('results');
         $this->prepareQuery();
     }
