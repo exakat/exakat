@@ -1414,6 +1414,18 @@ GREMLIN;
 
         return $this;
     }
+
+    public function hasNoVariadicArgument() {
+        $this->query->hasNoVariadicArgument();
+
+        return $this;
+    }
+
+    public function hasVariadicArgument() {
+        $this->query->hasVariadicArgument();
+
+        return $this;
+    }
     
     public function getNameInFNP($variable) {
         $this->query->getNameInFNP($variable);
