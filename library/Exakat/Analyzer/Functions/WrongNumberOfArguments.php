@@ -48,6 +48,7 @@ class WrongNumberOfArguments extends Analyzer {
 
         foreach($argsMins as $nb => $f) {
             $this->atomFunctionIs($f)
+                 ->hasNoVariadicArgument()
                  ->isLess('count', $nb)
                  ->back('first');
             $this->prepareQuery();
@@ -55,6 +56,7 @@ class WrongNumberOfArguments extends Analyzer {
         
         foreach($argsMaxs as $nb => $f) {
             $this->atomFunctionIs($f)
+                 ->hasNoVariadicArgument()
                  ->isMore('count', $nb)
                  ->back('first');
             $this->prepareQuery();
@@ -62,6 +64,7 @@ class WrongNumberOfArguments extends Analyzer {
 
         // this is for custom functions
         $this->atomIs('Functioncall')
+             ->hasNoVariadicArgument()
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->savePropertyAs('count', 'args_count')
              ->functionDefinition()
@@ -71,6 +74,7 @@ class WrongNumberOfArguments extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Functioncall')
+             ->hasNoVariadicArgument()
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
              ->savePropertyAs('count', 'args_count')
              ->functionDefinition()
