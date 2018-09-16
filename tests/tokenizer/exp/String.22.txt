@@ -1,0 +1,19 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+    Label : EXPRESSION
+      6
+      Label : CODE
+        3
+        Label : EXPRESSION
+          7
+          Label : CONCAT
+            8
+          Label : CONCAT
+            10
+    Label : EXPRESSION
+      11

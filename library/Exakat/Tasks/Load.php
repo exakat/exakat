@@ -891,6 +891,9 @@ class Load extends Tasks {
         $this->runPlugins($string, $elements);
 
         $this->pushExpression($string);
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
         
         return $string;
     }
@@ -1859,8 +1862,8 @@ class Load extends Tasks {
             $default    = 0;
             $typehint   = 0;
             $nullable   = self::NOT_NULLABLE;
-            $reference = self::NOT_REFERENCE;
-            $variadic = self::NOT_ELLIPSIS;
+            $reference  = self::NOT_REFERENCE;
+            $variadic   = self::NOT_ELLIPSIS;
 
             while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_PARENTHESIS))) {
                 do {
@@ -2309,24 +2312,6 @@ class Load extends Tasks {
     private function processString() {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NS_SEPARATOR ) {
             return $this->processNsname();
-        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
-            $string = $this->addAtom('Self');
-        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
-            $string = $this->addAtom('Parent');
-        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'list') {
-            $string = $this->addAtom('Name');
-        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
-            $string = $this->addAtom('Name');
-        } elseif ($this->sequenceRank[$this->sequenceCurrentRank] === -1 &&
-                  in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
-                                                                  $this->phptokens::T_OPEN_CURLY,
-                                                                  $this->phptokens::T_CLOSE_CURLY,
-                                                                  $this->phptokens::T_COLON,
-                                                                  $this->phptokens::T_OPEN_TAG,
-                                                                  )) &&
-                  $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON
-                 ) {
-            return $this->processColon();
         } elseif (in_array($this->tokens[$this->id - 1][0], array($this->phptokens::T_SEMICOLON,
                                                                   $this->phptokens::T_OPEN_CURLY,
                                                                   $this->phptokens::T_CLOSE_CURLY,
@@ -2335,6 +2320,14 @@ class Load extends Tasks {
                                                                   )) &&
                    $this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON       ) {
             return $this->processColon();
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'self') {
+            $string = $this->addAtom('Self');
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'parent') {
+            $string = $this->addAtom('Parent');
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'list') {
+            $string = $this->addAtom('Name');
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS ) {
+            $string = $this->addAtom('Name');
          } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $string = $this->addAtom('Boolean');
 
