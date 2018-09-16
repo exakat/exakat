@@ -20,16 +20,16 @@
  *
 */
 
-use Exakat\Analyzer\Docs;
+use Exakat\Analyzer\Themes;
 use Exakat\Config;
 
 include dirname(__DIR__).'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_library');
 
-$docs = new Docs('./data/analyzers.sqlite');
+$docs = new Themes('./data/analyzers.sqlite');
 $list = $docs->getThemeAnalyzers('Codacy');
 
-const DOC_ROOT = '../docker/docs';
+const DOC_ROOT = '../docker-Codacy/docs';
 
 rename(DOC_ROOT.'/tests/', '/tmp/codacy-tests/');
 if (file_exists(DOC_ROOT)) {

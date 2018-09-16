@@ -30,7 +30,7 @@ $fp = fopen('neo4j/wp_functions.csv', 'w+');
 fputcsv($fp, array('Fid:ID(Function)', 'name'));
 foreach($nodes[1] as $id => $n) {
     ++$total;
-    fputcsv($fp, array($nodes[1][$id], $nodes[2][$id]));
+    fputcsv($fp, array($n, $nodes[2][$id]));
 }
 fclose($fp);
 print "Created $total nodes\n";
@@ -42,7 +42,7 @@ $fp = fopen('neo4j/wp_calls.csv', 'w+');
 fputcsv($fp, array(':START_ID(Function)', ':TYPE', ':END_ID(Function)') );
 foreach($rels[1] as $id => $n) {
     ++$total;
-    fputcsv($fp, array($rels[1][$id], 'CALLS', $rels[2][$id]));
+    fputcsv($fp, array($n, 'CALLS', $rels[2][$id]));
 }
 fclose($fp);
 print "Created $total relations\n";
