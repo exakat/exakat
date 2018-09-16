@@ -7,12 +7,19 @@ $pspell = pspell_new('en');
 
 $files = glob('human/en/*/*.ini');
 
+$stats[] = array();
 foreach($files as $file) {
-    processFile($file, $pspell);
+    $stats[] = processFile($file, $pspell);
 }
+$total = array_sum(array_column($stats, 'total'));
+print "\nTotal mots :  $total\n";
+$tolerated = array_sum(array_column($stats, 'tolerated'));
+print "\nTotal tolerated :  $tolerated\n";
+$errors = array_sum(array_column($stats, 'errors'));
+print "\nTotal errors :  $errors\n";
 
 function processFile($file, $pspell) {
-    $ini = parse_ini_file($file);
+    $ini = parse_ini_file($file, true);
     
     static $myWords;
     if (!isset($tolerated)) {   
@@ -22,10 +29,22 @@ function processFile($file, $pspell) {
     $locale = 'en_EN';
 
     $i = IntlBreakIterator::createWordInstance($locale);
-    $text = preg_replace('/<\?php.*?\?>/s', '', $ini['description']);
-    $text = preg_replace('/``[^`]+?``/s', '', $text);
-    $text = preg_replace('/`.+?`_+/s', '', $text);
-    $text = preg_replace('/[a-zA-Z_0-9]+\(\)/s', '', $text);
+    $text = $ini['description'];
+    for($j = 0; $j < 10; ++$j) {
+        if (isset($ini["example$j"]["description"])) {
+            $text .= ' '.$ini["example$j"]["description"];
+        }
+    }
+    if (isset($ini["modifications"])) {
+        $text .= ' '.implode('  ', $ini["modifications"]);
+    }
+    
+    $text = preg_replace('/<\?php.*?\?>/s', '', $text);      // Remove PHP code 
+    $text = preg_replace('/``[^`]+?``/s', '', $text);        // remove ``literals``
+    $text = preg_replace('/`.+?`_+/s', '', $text);           // remove `links <url>`_
+    $text = preg_replace('/[a-zA-Z_0-9]+\(\)/s', '', $text); // remove functioncalls()
+    $text = preg_replace('/\'s\b/s', '', $text);             // remove 's 
+    $text = preg_replace('/\$s[a-zA-Z_0-9]+\b/s', '', $text);// remove $variables
 
     $i->setText($text);
 
@@ -49,4 +68,5 @@ function processFile($file, $pspell) {
     }
     
     print "$file : \n$total words, $tolerated tolerated, $errors errors.\n";
+    return compact('total', 'tolerated', 'errors');
 }
