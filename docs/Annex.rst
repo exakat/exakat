@@ -199,7 +199,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/ming <http://www.libming.org/>`_
 * `ext/mongo <http://php.net/manual/en/book.mongo.php>`_
 * `ext/mongodb <https://github.com/mongodb/mongo-c-driver>`_
-* `Ext/msgpack <https://github.com/msgpack/msgpack-php>`_
+* `ext/msgpack <https://github.com/msgpack/msgpack-php>`_
 * `ext/mssql <http://www.php.net/manual/en/book.mssql.php>`_
 * `ext/mysql <http://www.php.net/manual/en/book.mysql.php>`_
 * `ext/mysqli <http://php.net/manual/en/book.mysqli.php>`_
@@ -300,14 +300,17 @@ A number of applications were scanned in order to find real life examples of pat
 
 * `Thelia <https://thelia.net/>`_
 * `OpenEMR <https://www.open-emr.org/>`_
+* `SugarCrm <https://www.sugarcrm.com/>`_
 * `Piwigo <https://www.piwigo.org/>`_
 * `shopware <https://www.shopware.com/>`_
 * `Vanilla <https://open.vanillaforums.com/>`_
 * `WordPress <https://www.wordpress.org/>`_
 * `Magento <https://magento.com/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
+* `FuelCMS <https://www.getfuelcms.com/>`_
+* `Tikiwiki <https://tiki.org/>`_
+* `NextCloud <https://nextcloud.com/>`_
 * `Tine20 <https://www.tine20.com/>`_
-* `SugarCrm <https://www.sugarcrm.com/>`_
 * `ExpressionEngine <https://expressionengine.com/>`_
 * `Zencart <https://www.zen-cart.com/>`_
 * `Traq <https://traq.io/>`_
@@ -321,29 +324,24 @@ A number of applications were scanned in order to find real life examples of pat
 * `Dolphin <https://www.boonex.com/>`_
 * `XOOPS <https://xoops.org/>`_
 * `Woocommerce <https://woocommerce.com/>`_
-* `Tikiwiki <https://tiki.org/>`_
 * `Contao <https://contao.org/en/>`_
 * `ChurchCRM <http://churchcrm.io/>`_
 * `Zurmo <http://zurmo.org/>`_
-* `FuelCMS <https://www.getfuelcms.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
-* `NextCloud <https://nextcloud.com/>`_
+* `phpMyAdmin <https://www.phpmyadmin.net/>`_
+* phpDocumentor
 * `TeamPass <https://teampass.net/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
 * `opencfp <https://github.com/opencfp/opencfp>`_
-* `HuMo-Gen <http://humogen.com/>`_
+* Humo-Gen
 * `PrestaShop <https://prestashop.com/>`_
 * `PhpIPAM <https://phpipam.net/download/>`_
-* `Edusoho <https://www.edusoho.com/en>`_
-* `phpMyAdmin <https://www.phpmyadmin.net/>`_
+* edusoho
 * `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `Phinx <https://phinx.org/>`_
-* Humo-Gen
-* edusoho
 * `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
-* `Swoole <https://www.swoole.com/>`_
 
 
 Recognized Libraries
@@ -396,6 +394,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.4.5
+
+  * Add Default Value (Functions/AddDefaultValue)
+
 * 1.4.4
 
   * ext/seaslog (Extensions/Extseaslog)
@@ -444,13 +446,13 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.3.5
 
-  * Ext/msgpack (Extensions/Extmsgpack ; Appinfo)
   * Locally Used Property In Trait (Traits/LocallyUsedProperty ; Internal)
   * PHP 7.0 Scalar Typehints (Php/PHP70scalartypehints ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * PHP 7.1 Scalar Typehints (Php/PHP71scalartypehints ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
   * PHP 7.2 Scalar Typehints (Php/PHP72scalartypehints ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
   * Undefined ::class (Classes/UndefinedStaticclass)
   * ext/lzf (Extensions/Extlzf ; Appinfo)
+  * ext/msgpack (Extensions/Extmsgpack ; Appinfo)
 
 * 1.3.4
 
@@ -2161,6 +2163,7 @@ List of external links mentionned in this documentation.
 * `bazaar <http://bazaar.canonical.com/en/>`_
 * `BC Math Functions <http://www.php.net/bcmath>`_
 * `Benoit Burnichon <https://twitter.com/BenoitBurnichon>`_
+* `Bitmask Constant Arguments in PHP <https://medium.com/@liamhammett/bitmask-constant-arguments-in-php-cf32bf35c73>`_
 * `browscap <http://browscap.org/>`_
 * `Bzip2 Functions <http://php.net/bzip2>`_
 * `Cairo Graphics Library <https://cairographics.org/>`_
@@ -2199,6 +2202,7 @@ List of external links mentionned in this documentation.
 * `Courrier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
 * `crc32() <http://php.net/crc32>`_
 * `Creating the required configuration and files <https://www.melistechnology.com/MelisTechnology/resources/documentation/back-office/create-a-custom-tool/Creatingtherequiredconfiguration>`_
+* `Cross-Site Scripting (XSS) <https://phpsecurity.readthedocs.io/en/latest/Cross-Site-Scripting-(XSS).html>`_
 * `crypt <http://www.php.net/crypt>`_
 * `Cryptography Extensions <http://php.net/manual/en/refs.crypto.php>`_
 * `CSPRNG <http://php.net/manual/en/book.csprng.php>`_
@@ -2220,6 +2224,7 @@ List of external links mentionned in this documentation.
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
+* `directive error_reporting <http://php.net/manual/en/errorfunc.configuration.php#ini.error-reporting>`_
 * `dirname <http://php.net/dirname>`_
 * `Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
 * `dist.exakat.io <http://dist.exakat.io/>`_
@@ -2228,6 +2233,7 @@ List of external links mentionned in this documentation.
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
 * `Document Object Model <http://php.net/manual/en/book.dom.php>`_
 * `Don't pass this out of a constructor <http://www.javapractices.com/topic/TopicAction.do?Id=252>`_
+* `Don’t turn off CURLOPT_SSL_VERIFYPEER, fix your PHP configuration <https://www.saotn.org/dont-turn-off-curlopt_ssl_verifypeer-fix-php-configuration/>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
 * `Double quoted <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.double>`_
 * `download <https://www.exakat.io/download-exakat/>`_
@@ -2370,12 +2376,13 @@ List of external links mentionned in this documentation.
 * `list() Reference Assignment <https://wiki.php.net/rfc/list_reference_assignment>`_
 * `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 * `Logical Operators <http://php.net/manual/en/language.operators.logical.php>`_
+* `Loosening Reserved Word Restrictions <http://php.net/manual/en/migration70.other-changes.php#migration70.other-changes.loosening-reserved-words>`_
 * `lzf <http://php.net/lzf>`_
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2488,6 +2495,7 @@ List of external links mentionned in this documentation.
 * `RFC 7230 <https://tools.ietf.org/html/rfc7230>`_
 * `RFC 822 (MIME) <http://www.faqs.org/rfcs/rfc822.html>`_
 * `RFC 959 <http://www.faqs.org/rfcs/rfc959>`_
+* `RFC: Return Type Declarations <https://wiki.php.net/rfc/return_types>`_
 * `Routing <https://www.slimframework.com/docs/objects/router.html>`_
 * `runkit <http://php.net/manual/en/book.runkit.php>`_
 * `Scalar type declarations <http://php.net/manual/en/migration70.new-features.php#migration70.new-features.scalar-type-declarations>`_
@@ -2514,8 +2522,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2550,6 +2558,7 @@ List of external links mentionned in this documentation.
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
+* `unserialize() <http://php.net/unserialize>`_
 * `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
 * `Using namespaces: fallback to global function/constant <http://php.net/manual/en/language.namespaces.fallback.php>`_
 * `Using non-breakable spaces in test method names <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
@@ -3738,6 +3747,7 @@ Suggestions
 |   analyzer[] = "Classes/TooManyChildren";
 |   analyzer[] = "Classes/UnitializedProperties";
 |   analyzer[] = "Exceptions/OverwriteException";
+|   analyzer[] = "Functions/AddDefaultValue";
 |   analyzer[] = "Functions/Closure2String";
 |   analyzer[] = "Functions/CouldBeCallable";
 |   analyzer[] = "Functions/CouldBeStaticClosure";

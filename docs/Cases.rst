@@ -48,6 +48,22 @@ $main_provid is filtered as an integer. $main_supid is then filtered twice : one
         $main_supid  = 0 + (int)$_POST['SupervisorID'];
         //.....
 
+error_reporting() With Integers
+===============================
+
+.. _sugarcrm-structures-errorreportingwithinteger:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`error\_reporting()-with-integers`, in modules/UpgradeWizard/silentUpgrade_step1.php:436. 
+
+This only displays E_ERROR, the highest level of error reporting. It should be checked, as it happens in the 'silentUpgrade' script. 
+
+.. code-block:: php
+
+    ini_set('error_reporting', 1);
+
 Strpos()-like Comparison
 ========================
 
@@ -254,6 +270,101 @@ MediaWiki
     		'targets' => [ 'desktop', 'mobile' ],
     	],
         // big array continues
+
+Wrong Optional Parameter
+========================
+
+.. _fuelcms-functions-wrongoptionalparameter:
+
+FuelCMS
+^^^^^^^
+
+:ref:`wrong-optional-parameter`, in fuel/modules/fuel/helpers/validator_helper.php:78. 
+
+The $regex parameter should really be first, as it is compulsory. Though, if this is a legacy function, it may be better to give regex a default value, such as empty string or null, and test it before using it.
+
+.. code-block:: php
+
+    if (!function_exists('regex'))
+    {
+    	function regex($var = null, $regex)
+    	{
+    		return preg_match('#'.$regex.'#', $var);
+    	} 
+    }
+
+
+--------
+
+
+.. _vanilla-functions-wrongoptionalparameter:
+
+Vanilla
+^^^^^^^
+
+:ref:`wrong-optional-parameter`, in fuel/modules/fuel/helpers/validator_helper.php:78. 
+
+Note the second parameter, $dropdown, which has no default value. It is relayed to the addDropdown method, which as no default value too. Since both methods are documented, we can see that they should be an addDropdown : null is probably a good idea, coupled with an explicit check on the actual value.
+
+.. code-block:: php
+
+    /**
+         * Add a dropdown to the items array if it satisfies the $isAllowed condition.
+         *
+         * @param bool|string|array $isAllowed Either a boolean to indicate whether to actually add the item
+         * or a permission string or array of permission strings (full match) to check.
+         * @param DropdownModule $dropdown The dropdown menu to add.
+         * @param string $key The item's key (for sorting and CSS targeting).
+         * @param string $cssClass The dropdown wrapper's CSS class.
+         * @param array|int $sort Either a numeric sort position or and array in the style: array('before|after', 'key').
+         * @return NavModule $this The calling object.
+         */
+        public function addDropdownIf($isAllowed = true, $dropdown, $key = '', $cssClass = '', $sort = []) {
+            if (!$this->isAllowed($isAllowed)) {
+                return $this;
+            } else {
+                return $this->addDropdown($dropdown, $key, $cssClass, $sort);
+            }
+        }
+
+One Variable String
+===================
+
+.. _tikiwiki-type-onevariablestrings:
+
+Tikiwiki
+^^^^^^^^
+
+:ref:`one-variable-string`, in lib/wiki-plugins/wikiplugin_addtocart.php:228. 
+
+Double-quotes are simply not needed here. If casting to string is important, the (string) would be more explicit.
+
+.. code-block:: php
+
+    foreach ($plugininfo['params'] as $key => $param) {
+    		$default[$key] = $param['default'];
+    	}
+
+
+--------
+
+
+.. _nextcloud-type-onevariablestrings:
+
+NextCloud
+^^^^^^^^^
+
+:ref:`one-variable-string`, in build/integration/features/bootstrap/BasicStructure.php:349. 
+
+Both concatenations could be merged, independantly. If readability is important, why not put them inside curly brackets?
+
+.. code-block:: php
+
+    public static function removeFile($path, $filename) {
+    		if (file_exists($path . $filename)) {
+    			unlink($path . $filename);
+    		}
+    	}
 
 Several Instructions On The Same Line
 =====================================
@@ -672,6 +783,30 @@ With the usage of var and a first method bearing the name of the class, this is 
     	var $_parser;
     	
     	function SQL_Parser_wrapper(&$data, $dialect='MySQL'){
+
+Wrong Number Of Arguments
+=========================
+
+.. _xataface-functions-wrongnumberofarguments:
+
+xataface
+^^^^^^^^
+
+:ref:`wrong-number-of-arguments`, in actions/existing_related_record.php:130. 
+
+df_display() actually requires only 2 arguments, while three are provided. The last argument is simply ignored. df_display() is called in a total of 9 places : this now looks like an API change that left many calls untouched.
+
+.. code-block:: php
+
+    df_display($context, $template, true);
+    
+    // in public-api.php :
+    function df_display($context, $template_name){
+    	import( 'Dataface/SkinTool.php');
+    	$st = Dataface_SkinTool::getInstance();
+    	
+    	return $st->display($context, $template_name);
+    }
 
 Logical Should Use Symbolic Operators
 =====================================
@@ -1315,6 +1450,58 @@ Cleverstyle nests ternary operators when selecting default values. Here, moving 
     	)
     );
 
+If With Same Conditions
+=======================
+
+.. _phpmyadmin-structures-ifwithsameconditions:
+
+phpMyAdmin
+^^^^^^^^^^
+
+:ref:`if-with-same-conditions`, in libraries/classes/Response.php:345. 
+
+The first test on $this->_isSuccess settles the situation with _JSON. Then, a second check is made. Both could be merged, also the second one is fairly long (not shown). 
+
+.. code-block:: php
+
+    if ($this->_isSuccess) {
+                $this->_JSON['success'] = true;
+            } else {
+                $this->_JSON['success'] = false;
+                $this->_JSON['error']   = $this->_JSON['message'];
+                unset($this->_JSON['message']);
+            }
+    
+            if ($this->_isSuccess) {
+
+
+--------
+
+
+.. _phpdocumentor-structures-ifwithsameconditions:
+
+phpDocumentor
+^^^^^^^^^^^^^
+
+:ref:`if-with-same-conditions`, in src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:239. 
+
+$templates is extracted from $input. If it is empty, a second source is polled. Finally, if nothing has worked, a default value is used ('clean'). In this case, each attempt is an alternative solution to the previous failing call. The second test could be reported on $templatesFromConfig, and not $templates.
+
+.. code-block:: php
+
+    $templates = $input->getOption('template');
+            if (!$templates) {
+                /** @var Template[] $templatesFromConfig */
+                $templatesFromConfig = $configurationHelper->getConfigValueFromPath('transformations/templates');
+                foreach ($templatesFromConfig as $template) {
+                    $templates[] = $template->getName();
+                }
+            }
+    
+            if (!$templates) {
+                $templates = array('clean');
+            }
+
 Throw Functioncall
 ==================
 
@@ -1579,7 +1766,7 @@ Too Many Local Variables
 
 .. _humo-gen-functions-toomanylocalvariables:
 
-HuMo-Gen
+Humo-Gen
 ^^^^^^^^
 
 :ref:`too-many-local-variables`, in relations.php:813. 
@@ -1772,7 +1959,7 @@ This code is wrong on August 29,th 30th and 31rst : 6 months before is caculated
 
 .. _edusoho-structures-nextmonthtrap:
 
-Edusoho
+edusoho
 ^^^^^^^
 
 :ref:`next-month-trap`, in src/AppBundle/Controller/Admin/AnalysisController.php:1426. 
@@ -2406,6 +2593,25 @@ $build or $signature are empty at that point, no need to calculate their respect
           return false;
         }
 
+time() Vs strtotime()
+=====================
+
+.. _woocommerce-performances-timevsstrtotime:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`time()-vs-strtotime()`, in includes/class-wc-webhook.php:384. 
+
+time() would be faster here, as an entropy generator. Yet, it would still be better to use an actual secure entropy generator, like random_byte or random_int. In case of older version, microtime() would yield better entropy. 
+
+.. code-block:: php
+
+    public function get_new_delivery_id() {
+    		// Since we no longer use comments to store delivery logs, we generate a unique hash instead based on current time and webhook ID.
+    		return wp_hash( $this->get_id() . strtotime( 'now' ) );
+    	}
+
 Avoid glob() Usage
 ==================
 
@@ -2699,6 +2905,22 @@ This code only exports the POST variables as globals. And it does clean incoming
     // Get Action type
     $op = system_CleanVars($_REQUEST, 'op', 'list', 'string');
 
+Unserialize Second Arg
+======================
+
+.. _livezilla-security-unserializesecondarg:
+
+LiveZilla
+^^^^^^^^^
+
+:ref:`unserialize-second-arg`, in livezilla/_lib/objects.global.inc.php:2600. 
+
+unserialize() only extract a non-empty value here. But its content is not checked. It is later used as an array, with multiple index. 
+
+.. code-block:: php
+
+    $this->Customs = (!empty($_row["customs"])) ? @unserialize($_row["customs"]) : array();
+
 Use List With Foreach
 =====================
 
@@ -2748,26 +2970,21 @@ This foreach reads each element from $entries into entry. $entry, in turn, is wr
     				$replacePairs[$searchkey] = $link;
     			}
 
+Possible Increment
+==================
 
---------
+.. _zurmo-structures-possibleincrement:
 
+Zurmo
+^^^^^
 
-.. _swoole-structures-uselistwithforeach:
+:ref:`possible-increment`, in app/protected/modules/workflows/utils/SavedWorkflowsUtil.php:196. 
 
-Swoole
-^^^^^^
-
-:ref:`use-list-with-foreach`, in libs/Swoole/SelectDB.php:848. 
-
-This foreach reads 'c' in the $c variable (via the $_c). It could be simplified with foreach($c as ['c' => $d]) { $cc += $d; }. In fact, it could very well be replaced by array_sum() altogether.
+There are suspicious extra spaces around the +, that give the hint that there used to be something else, like a constant, there. 
 
 .. code-block:: php
 
-    $cc = 0;
-                foreach ($c as $_c)
-                {
-                    $cc += $_c['c'];
-                }
+    $timeStamp =  + $workflow->getTimeTrigger()->resolveNewTimeStampForDuration(time());
 
 One If Is Sufficient
 ====================

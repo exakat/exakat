@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 11 Sep 2018 08:45:23 +0000
-.. comment: Generation hash : eab2b0325bdaa6b6a595b7994077fe6a1c75c54a
+.. comment: Generation date : Mon, 17 Sep 2018 12:53:44 +0000
+.. comment: Generation hash : 1fc34f35a96179f0bb83163f6bd81c46f8575ae0
 
 
 .. _$http\_raw\_post\_data:
@@ -121,7 +121,9 @@ $this Is Not An Array
 #####################
 
 
-``$this`` variable represents the current object and it is not an array, unless the class (or its parents) has the ``ArrayAccess`` interface.
+``$this`` variable represents the current object and it is not an array. 
+
+This is unnless the class (or its parents) has the ``ArrayAccess`` interface, or extends ``ArrayObject`` or ``SimpleXMLElement``.
 
 .. code-block:: php
 
@@ -144,7 +146,8 @@ $this Is Not An Array
    ?>
 
 
-See also `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ and 
+See also `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_,
+         `ArrayObject <http://php.net/manual/en/class.arrayobject.php>`_ and 
          `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
 
 +------------+--------------------------+
@@ -487,6 +490,34 @@ Action methods should be in a controller and public.
 
 
 
+.. _add-default-value:
+
+Add Default Value
+#################
+
+
+Parameter in methods definition may receive a default value. This allows the called method to set a value when the parameter is omited. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($i) {
+       if (!is_integer($i)) {
+           $i = 0;
+       }
+   }
+   
+   ?>
+
++------------+---------------------------+
+| Short name | Functions/AddDefaultValue |
++------------+---------------------------+
+| Themes     | :ref:`Suggestions`        |
++------------+---------------------------+
+
+
+
 .. _adding-zero:
 
 Adding Zero
@@ -748,7 +779,7 @@ Always Anchor Regex
 
 Unanchored regex finds the requested pattern, and leaves room for malicious content. 
 
-Without ^ and $, the regex is searches for any pattern that satisfies its criteria, leaving any unused part of the string available for abitrary content. It is recommended to use both anchor
+Without ``^`` and ``$``, the regex searches for any pattern that satisfies the criteria, leaving any unused part of the string available for arbitrary content. It is recommended to use both anchor
 
 .. code-block:: php
 
@@ -1347,10 +1378,10 @@ Avoid Non Wordpress Globals
 ###########################
 
 
-Refren using any global variable that is not Wordpress's own. 
+Refrain using any global variable that is not ``Wordpress``'s own. 
 
-Global variables are available for write and read across the whole application, making their data both easily accessible, and difficult to track when a unexpected change happen. 
-It is recommended to rely on a mix of arguments passing and classes structures to reduce the code of any variable to a smaller part of the code.
+Global variables are available to write and read across the whole application, making their data both easily accessible, and difficult to track when an unexpected change happens. 
+It is recommended to rely on a mix of arguments passing and class structures to reduce the code of any variable to a smaller part of the code.
 
 .. code-block:: php
 
@@ -1587,7 +1618,7 @@ Avoid Using stdClass
 ####################
 
 
-stdClass is the default class for PHP. It is instantiated when PHP needs to return a object, but no class is specifically available.
+``stdClass`` is the default class for PHP. It is instantiated when PHP needs to return a object, but no class is specifically available.
 
 It is recommended to avoid instantiating this class, nor use it is any way.
 
@@ -1616,7 +1647,7 @@ It is recommended to avoid instantiating this class, nor use it is any way.
    ?>
 
 
-If you need a stdClass object, it is faster to build it as an array, then cast it, than instantiate stdClass. This is a micro-optimisation.
+If you need a ``stdClass`` object, it is faster to build it as an array, then cast it, than instantiate ``stdClass``. This is a micro-optimisation.
 
 +------------+-----------------+
 | Short name | Php/UseStdclass |
@@ -3078,7 +3109,7 @@ Class Could Be Final
 
 Any class that has no extension should be ``final`` by default.
 
-As stated by Matthias Noback : ``If a class is not marked final, it has at least one subclass``.
+As stated by `Matthias Noback` : ``If a class is not marked final, it has at least one subclass``.
 
 Prevent your classes from being subclassed by making them ``final``. Sometimes, classes are not meant or thought to be derivable.
 
@@ -3459,9 +3490,9 @@ Compare Hash
 ############
 
 
-When comparing hash values, it is important to use the strict comparison : === or !==. 
+When comparing hash values, it is important to use the strict comparison : ``===`` or ``!==``. 
 
-In a number of situations, the hash value will start with '0e', and PHP will understand that the comparison involves integers : it will then convert the strings into numbers, and it may end up converting them to 0.
+In a number of situations, the hash value will start with ``0e``, and PHP will understand that the comparison involves integers : it will then convert the strings into numbers, and it may end up converting them to 0.
 
 Here is an example 
 
@@ -3591,7 +3622,7 @@ Extract imports variables from an array into the local scope. In case of a confl
 
 In fact, `'extract() <http://www.php.net/extract>`_ may be configured to handle the situation differently : it may skip the conflicting variable, prefix it, prefix it only if it exists, only import overwriting variables... It may also import them as references to the original values.
 
-This analysis reports `'extract() <http://www.php.net/extract>`_ when it is not configured explicitely. If overwriting is the intended objective, it is not reported.
+This analysis reports `'extract() <http://www.php.net/extract>`_ when it is not configured explicitly. If overwriting is the intended objective, it is not reported.
 
 .. code-block:: php
 
@@ -3600,10 +3631,10 @@ This analysis reports `'extract() <http://www.php.net/extract>`_ when it is not 
    // ignore overwriting variables
    extract($array, EXTR_SKIP);
    
-   // prefix all variables explicitely variables with 'php_'
+   // prefix all variables explicitly variables with 'php_'
    extract($array, EXTR_PREFIX_ALL, 'php_');
    
-   // overwrites explicitely variables
+   // overwrites explicitly variables
    extract($array, EXTR_OVERWRITE);
    
    // overwrites implicitely variables : do we really want that? 
@@ -5252,7 +5283,7 @@ Direct Injection
 ################
 
 
-The following code act directly upon PHP incoming variables like $_GET and $_POST. This make those snippet very unsafe.
+The following code act directly upon PHP incoming variables like ``$_GET`` and ``$_POST``. This makes those snippets very unsafe.
 
 .. code-block:: php
 
@@ -5268,6 +5299,9 @@ The following code act directly upon PHP incoming variables like $_GET and $_POS
    }
    
    ?>
+
+
+See also `Cross-Site Scripting (XSS) <https://phpsecurity.readthedocs.io/en/latest/Cross-Site-Scripting-(XSS).html>`_
 
 +------------+--------------------------+
 | Short name | Security/DirectInjection |
@@ -5320,7 +5354,7 @@ Don't Change Incomings
 ######################
 
 
-PHP hands over a lot of information using special variables like $_GET, $_POST, etc... Modifying those variables and those values inside de variables means that the original content is lost, while it will still look like raw data, and, as such, will be untrustworthy.
+PHP hands over a lot of information using special variables like $_GET, $_POST, etc... Modifying those variables and those values inside variables means that the original content is lost, while it will still look like raw data, and, as such, will be untrustworthy.
 
 .. code-block:: php
 
@@ -5353,7 +5387,7 @@ Don't Echo Error
 
 It is recommended to avoid displaying error messages directly to the browser.
 
-PHP's uses the 'display_errors' directive to control display of errors to the browser. This must be kept to 'off' when in production.
+PHP's uses the ``display_errors`` directive to control display of errors to the browser. This must be kept to ``off`` when in production.
 
 .. code-block:: php
 
@@ -8033,11 +8067,13 @@ Note that if the values used in the condition have been modified in the first if
    
    ?>
 
-+------------+---------------------------------+
-| Short name | Structures/IfWithSameConditions |
-+------------+---------------------------------+
-| Themes     | :ref:`Analyze`                  |
-+------------+---------------------------------+
++------------+---------------------------------------------------------------------------------------------------------+
+| Short name | Structures/IfWithSameConditions                                                                         |
++------------+---------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                          |
++------------+---------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`phpmyadmin-structures-ifwithsameconditions`, :ref:`phpdocumentor-structures-ifwithsameconditions` |
++------------+---------------------------------------------------------------------------------------------------------+
 
 
 
@@ -8455,9 +8491,9 @@ Boolean, Null or float will be converted to their integer or string equivalent.
              ];
              
        print_r($a);
-   ?>::
-
    
+   /*
+   The above displays
    Array
    (
        [1] => 8
@@ -8467,7 +8503,8 @@ Boolean, Null or float will be converted to their integer or string equivalent.
        [01] => 4
        [2a] => 5
    )
-   
+   */
+   ?>
 
 
 Decimal numbers are rounded to the closest integer; Null is transtyped to '' (empty string); true is 1 and false is 0; Integers in strings are transtyped, while partial numbers or decimals are not analyzed in strings. 
@@ -12123,7 +12160,7 @@ No Net For Xml Load
 ###################
 
 
-Simplexml and ext/DOM load all external entities on the web, by default. This is dangerous, when loading unknown XML code.::
+Simplexml and ext/DOM load all external entities from the web, by default. This is dangerous, in particular when loading unknown XML code.::
 
    
    
@@ -12133,7 +12170,7 @@ Simplexml and ext/DOM load all external entities on the web, by default. This is
    
 
 
-Here, PHP tries to load the XML file, find the entity, then solves the entity by encoding a file called 'index.php'. The source code of the file is not used as data in the xml file. 
+Here, PHP tries to load the XML file, finds the entity, then solves the entity by encoding a file called ``index.php``. The source code of the file is not used as data in the xml file. 
 
 See also `XML External Entity <https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20injections>`_, 
          `XML External Entity (XXE) Processing <https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing>`_ and 
@@ -12596,9 +12633,9 @@ No Substr() One
 ###############
 
 
-Use array notation $string[$position] to reach a single byte in a string.
+Use array notation ``$string[$position]`` to reach a single byte in a string.
 
-There are two ways to access a byte in a string : substr() and $v[$pos];
+There are two ways to access a byte in a string : substr() and ``$v[$pos]``.
 
 The second style is more readable. It may be up to four times faster, though it is a micro-optimization. It is recommended to use it. 
 
@@ -12622,7 +12659,7 @@ PHP 7.1 also introduces the support of negative offsets as string index : negati
    ?>
 
 
-Beware that substr() and $v[$pos] are similar, while `'mb_substr() <http://www.php.net/mb_substr>`_ is not. The first function works on bytes, while the latter works on characters.
+Beware that substr() and ``$v[$pos]`` are similar, while `'mb_substr() <http://www.php.net/mb_substr>`_ is not. The first function works on bytes, while the latter works on characters.
 
 +------------+------------------------------------------------------------------------------------+
 | Short name | Structures/NoSubstrOne                                                             |
@@ -13148,7 +13185,7 @@ Old Style __autoload()
 
 Avoid __autoload(), only use spl_register_autoload().
 
-__autoload() will be deprecated in PHP 7.2 and possibly removed in later version.
+__autoload() will be deprecated in PHP 7.2 and possibly removed in later versions.
 
 __autoload() may only be declared once, and cannot be modified later. This creates potential conflicts between libraries that try to set up their own autoloading schema. 
 
@@ -13293,11 +13330,13 @@ When the goal is to convert a variable to a string, it is recommended to use the
 See also `Strings <http://php.net/manual/en/language.types.string.php>`_ and
          `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_.
 
-+------------+-------------------------+
-| Short name | Type/OneVariableStrings |
-+------------+-------------------------+
-| Themes     | :ref:`Analyze`          |
-+------------+-------------------------+
++------------+-----------------------------------------------------------------------------------+
+| Short name | Type/OneVariableStrings                                                           |
++------------+-----------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                    |
++------------+-----------------------------------------------------------------------------------+
+| Examples   | :ref:`tikiwiki-type-onevariablestrings`, :ref:`nextcloud-type-onevariablestrings` |
++------------+-----------------------------------------------------------------------------------+
 
 
 
@@ -14413,7 +14452,7 @@ Php7 Relaxed Keyword
 ####################
 
 
-Most of the traditionnal PHP keywords may be used inside classes, trait or interfaces.
+Most of the traditional PHP keywords may be used inside classes, trait or interfaces.
 
 .. code-block:: php
 
@@ -14431,6 +14470,8 @@ Most of the traditionnal PHP keywords may be used inside classes, trait or inter
 
 
 This was not the case in PHP 5, and will yield parse errors.
+
+See also `Loosening Reserved Word Restrictions <http://php.net/manual/en/migration70.other-changes.php#migration70.other-changes.loosening-reserved-words>`_.
 
 +------------+------------------------------------------------------------------------------------------------------------+
 | Short name | Php/Php7RelaxedKeyword                                                                                     |
@@ -14493,11 +14534,13 @@ The same pattern is not reported with -, as it is legit expression. + sign is us
 See also `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_ and 
          `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_.
 
-+------------+------------------------------+
-| Short name | Structures/PossibleIncrement |
-+------------+------------------------------+
-| Themes     | :ref:`Suggestions`           |
-+------------+------------------------------+
++------------+-------------------------------------------+
+| Short name | Structures/PossibleIncrement              |
++------------+-------------------------------------------+
+| Themes     | :ref:`Suggestions`                        |
++------------+-------------------------------------------+
+| Examples   | :ref:`zurmo-structures-possibleincrement` |
++------------+-------------------------------------------+
 
 
 
@@ -15080,7 +15123,7 @@ It is recommended to reduce the number of queries by making one query, and dispa
    ?>
 
 
-This optimisation is not always possible : for example, some SQL queries may not be prepared, like 'DROP TABLE', or 'DESC'. 'UPDATE' commands often update one row at a time, and grouping such queries may be counter-productive or unsafe.
+This optimisation is not always possible : for example, some SQL queries may not be prepared, like ``DROP TABLE`` or ``DESC``. ``UPDATE`` commands often update one row at a time, and grouping such queries may be counter-productive or unsafe.
 
 +------------+--------------------------+
 | Short name | Structures/QueriesInLoop |
@@ -15485,7 +15528,7 @@ Reserved Keywords In PHP 7
 ##########################
 
 
-Php reserved names for class/trait/interface. They won't be available anymore in user space starting with PHP 7.
+PHP reserved names for class/trait/interface. They won't be available anymore in user space starting with PHP 7.
 
 For example, string, float, false, true, null, resource,... are not acceptable as class name. 
 
@@ -15699,9 +15742,9 @@ Safe Curl Options
 #################
 
 
-It is advised to always use CURLOPT_SSL_VERIFYPEER and CURLOPT_SSL_VERIFYHOST when requesting a SSL connexion. 
+It is advised to always use ``CURLOPT_SSL_VERIFYPEER`` and ``CURLOPT_SSL_VERIFYHOST`` when requesting a SSL connexion. 
 
-With those tests (by default), the certificate is verified, and if it isn't valided, the connexion fails : this is a safe behavior.
+With those tests, the certificate is verified, and if it isn't valid, the connexion fails : this is a safe behavior.
 
 .. code-block:: php
 
@@ -15716,6 +15759,9 @@ With those tests (by default), the certificate is verified, and if it isn't vali
    curl_exec($ch);
    curl_close($ch);
    ?>
+
+
+See also `Don’t turn off CURLOPT_SSL_VERIFYPEER, fix your PHP configuration <https://www.saotn.org/dont-turn-off-curlopt_ssl_verifypeer-fix-php-configuration/>`_.
 
 +------------+----------------------+
 | Short name | Security/CurlOptions |
@@ -15966,9 +16012,9 @@ setcookie ( string $name [, string $value =  [, int $expire = 0 [, string $path 
 
 The ``$expire`` argument sets the date of expiration of the cookie. It is recommended to make it as low as possible, to reduce its chances to be captured. Sometimes, low expiration date may be several days (for preferences), and other times, low expiration date means a few minutes. 
 
-The ``$path`` argument limits the transmission of the cookie to URL whose path matches the one mentionned here. By default, it is '/', which means the whole server. If a cookie usage is limited to a part of the application, use it here.
+The ``$path`` argument limits the transmission of the cookie to URL whose path matches the one mentioned here. By default, it is '/', which means the whole server. If a cookie usage is limited to a part of the application, use it here.
 
-The ``$domain`` argument limits the transmission of the cookie to URL whose domain matches the one mentionned here. By default, it is '', which means any server on the internet. At worse, you may use 'mydomain.com' to cover your whole domain, or better, refine it with the actual subdomain of usage.
+The ``$domain`` argument limits the transmission of the cookie to URL whose domain matches the one mentioned here. By default, it is '', which means any server on the internet. At worse, you may use ``mydomain.com`` to cover your whole domain, or better, refine it with the actual subdomain of usage.
 
 The ``$secure`` argument limits the transmission of the cookie over HTTP (by default) or HTTPS. The second is better, as the transmission of the cookie is crypted. In case HTTPS is still at the planned stage, use '$_SERVER[HTTPS]'. This environnement variable is false on HTTP, and true on HTTPS.
 
@@ -16496,6 +16542,9 @@ The following functions have related constants that should be used as arguments,
    
    ?>
 
+
+See also `Bitmask Constant Arguments in PHP <https://medium.com/@liamhammett/bitmask-constant-arguments-in-php-cf32bf35c73>`_.
+
 +------------+------------------------------+
 | Short name | Functions/ShouldUseConstants |
 +------------+------------------------------+
@@ -16702,13 +16751,13 @@ Some functions duplicate the feature of an operator. When in doubt, it is better
 
 Beware, some edge cases may apply. In particular, backward compatibility may prevent usage of newer features.
 
-* array_push may be replaced with [] 
-* is_object may be replace with `'instanceof <http://php.net/manual/en/language.operators.type.php>`_
-* function_get_arg and function_get_args may be replace with ellipsis : ...
-* chr may be replaces by string sequences, such as ``\n``, ``\x69``, ``u{04699}``
+* `'array_push() <http://www.php.net/array_push>`_ may be replaced with [] 
+* `'is_object() <http://www.php.net/is_object>`_ may be replace with `'instanceof <http://php.net/manual/en/language.operators.type.php>`_
+* function_get_arg() and function_get_args() may be replace with ellipsis : ``...``
+* `'chr() <http://www.php.net/chr>`_ may be replaces by string sequences, such as ``\n``, ``\x69``, ``u{04699}``
 * `'call_user_func() <http://www.php.net/call_user_func>`_ may be replaces by ``$functionName(arguments)``, ``$object->$method(...$arguments)``
 * `'is_null() <http://www.php.net/is_null>`_ may be replaced by ``=== null``
-* php_version may be replace by PHP_VERSION (the constant)
+* php_version() may be replace by ``PHP_VERSION`` (the constant)
 * `'is_array() <http://www.php.net/is_array>`_, `'is_int() <http://www.php.net/is_int>`_, `'is_object() <http://www.php.net/is_object>`_, etc. may be replaced by a typehint
 
 +------------+------------------------------+
@@ -17883,7 +17932,7 @@ Those methods should have another name.
 
 Ever wondered why the ``__constructor`` is never called? Or the ``__consturct`` ? 
 
-Those errors most often originate from typos, or quick fixes that 'don't require testing'. Some other times, they were badly chosen, or ran into PHP's own reservations. 
+Those errors most often originate from typos, or quick fixes that 'don't require testing'. Some other times, they were badly chosen, or ran into PHP's own reserved keywords. 
 
 .. code-block:: php
 
@@ -20587,13 +20636,16 @@ On way to exploit unserialize, is to make PHP unserialized the data to an availa
    ?>
 
 
-See also `'unserialize() <http://www.php.net/unserialize>`_;
+See also `unserialize() <http://php.net/unserialize>`_, 
+         `Securely Implementing (De)Serialization in PHP <https://paragonie.com/blog/2016/04/securely-implementing-de-serialization-in-php>`_.
 
-+------------+-------------------------------+
-| Short name | Security/UnserializeSecondArg |
-+------------+-------------------------------+
-| Themes     | :ref:`Security`               |
-+------------+-------------------------------+
++------------+------------------------------------------------+
+| Short name | Security/UnserializeSecondArg                  |
++------------+------------------------------------------------+
+| Themes     | :ref:`Security`                                |
++------------+------------------------------------------------+
+| Examples   | :ref:`livezilla-security-unserializesecondarg` |
++------------+------------------------------------------------+
 
 
 
@@ -21657,13 +21709,13 @@ Foreach() structures accepts list() as blind key. If the loop-value is an array 
 
 See also `list <http://php.net/manual/en/function.list.php>`_ and `foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
-+------------+---------------------------------------------------------------------------------------------+
-| Short name | Structures/UseListWithForeach                                                               |
-+------------+---------------------------------------------------------------------------------------------+
-| Themes     | :ref:`Suggestions`                                                                          |
-+------------+---------------------------------------------------------------------------------------------+
-| Examples   | :ref:`mediawiki-structures-uselistwithforeach`, :ref:`swoole-structures-uselistwithforeach` |
-+------------+---------------------------------------------------------------------------------------------+
++------------+------------------------------------------------+
+| Short name | Structures/UseListWithForeach                  |
++------------+------------------------------------------------+
+| Themes     | :ref:`Suggestions`                             |
++------------+------------------------------------------------+
+| Examples   | :ref:`mediawiki-structures-uselistwithforeach` |
++------------+------------------------------------------------+
 
 
 
@@ -23861,6 +23913,8 @@ It is recommended to check the signature of the methods, and fix the arguments.
 +------------+-------------------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-missing-argument.md <https://github.com/dseguy/clearPHP/tree/master/rules/no-missing-argument.md.md>`__ |
 +------------+-------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`xataface-functions-wrongnumberofarguments`                                                            |
++------------+-------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -23898,11 +23952,13 @@ PHP will solve this problem at runtime, assign values in the same other, but wil
 
 It is better to put all the optional parameters at the end of the method's signature.
 
-+------------+----------------------------------+
-| Short name | Functions/WrongOptionalParameter |
-+------------+----------------------------------+
-| Themes     | :ref:`Analyze`                   |
-+------------+----------------------------------+
++------------+--------------------------------------------------------------------------------------------------+
+| Short name | Functions/WrongOptionalParameter                                                                 |
++------------+--------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                   |
++------------+--------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`fuelcms-functions-wrongoptionalparameter`, :ref:`vanilla-functions-wrongoptionalparameter` |
++------------+--------------------------------------------------------------------------------------------------+
 
 
 
@@ -24465,11 +24521,17 @@ Using named constants with error_reporting is strongly encouraged to ensure comp
    
    ?>
 
-+------------+--------------------------------------+
-| Short name | Structures/ErrorReportingWithInteger |
-+------------+--------------------------------------+
-| Themes     | :ref:`Analyze`                       |
-+------------+--------------------------------------+
+
+See also `directive error_reporting <http://php.net/manual/en/errorfunc.configuration.php#ini.error-reporting>`_ and 
+         `error_reporting <http://php.net/manual/en/function.error-reporting.php>`_.
+
++------------+------------------------------------------------------+
+| Short name | Structures/ErrorReportingWithInteger                 |
++------------+------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                       |
++------------+------------------------------------------------------+
+| Examples   | :ref:`sugarcrm-structures-errorreportingwithinteger` |
++------------+------------------------------------------------------+
 
 
 
@@ -25091,7 +25153,7 @@ The second option is the most interesting when the following `'foreach() <http:/
    ?>
 
 
-The second syntax is easier to read and may be marginally faster to execute (preg_match_all and foreach).
+The second syntax is easier to read and may be marginally faster to execute (preg_match_all() and `'foreach()) <http://php.net/manual/en/control-structures.foreach.php>`_.
 
 +------------+----------------------+
 | Short name | Php/PregMatchAllFlag |
@@ -25195,9 +25257,9 @@ set_exception_handler() Warning
 ###############################
 
 
-The `'set_exception_handler() <http://www.php.net/set_exception_handler>`_ callable function has to be adapted to PHP 7 : Exception is not the right typehint, it is now `'Throwable <http://php.net/manual/fr/class.throwable.php>`_. 
+The `'set_exception_handler() <http://www.php.net/set_exception_handler>`_ callable function has to be adapted to PHP 7 : ``Exception`` is not the right typehint, it is now ``Throwable``. 
 
-When in doubt about backward compatibility, just drop the Typehint. Otherwise, use `'Throwable <http://php.net/manual/fr/class.throwable.php>`_.
+When in doubt about backward compatibility, just drop the typehint. Otherwise, use ``Throwable``.
 
 .. code-block:: php
 
@@ -25247,11 +25309,13 @@ time() is actually faster than strtotime('now').
 
 This is a micro-optimisation. Relative gain is real, but small unless the function is used many times.
 
-+------------+------------------------------+
-| Short name | Performances/timeVsstrtotime |
-+------------+------------------------------+
-| Themes     | :ref:`Performances`          |
-+------------+------------------------------+
++------------+-------------------------------------------------+
+| Short name | Performances/timeVsstrtotime                    |
++------------+-------------------------------------------------+
+| Themes     | :ref:`Performances`                             |
++------------+-------------------------------------------------+
+| Examples   | :ref:`woocommerce-performances-timevsstrtotime` |
++------------+-------------------------------------------------+
 
 
 

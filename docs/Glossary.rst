@@ -87,6 +87,7 @@ Glossary
     + `array_push()`
 
       + :ref:`Avoid array_push() <avoid-array\_push()>`
+      + :ref:`Should Use Operator <should-use-operator>`
 
     + `array_replace()`
 
@@ -208,6 +209,7 @@ Glossary
     + `chr()`
 
       + :ref:`Should Preprocess Chr <should-preprocess-chr>`
+      + :ref:`Should Use Operator <should-use-operator>`
 
     + `closure`
 

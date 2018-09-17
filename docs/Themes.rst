@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 11 Sep 2018 08:45:23 +0000
-.. comment: Generation hash : eab2b0325bdaa6b6a595b7994077fe6a1c75c54a
+.. comment: Generation date : Mon, 17 Sep 2018 12:53:44 +0000
+.. comment: Generation hash : 1fc34f35a96179f0bb83163f6bd81c46f8575ae0
 
 
 .. _analyze:
@@ -1084,9 +1084,10 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 62 analysis
+Total : 63 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
+* :ref:`Add Default Value <add-default-value>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Avoid Real <avoid-real>`
 * :ref:`Could Be Static Closure <could-be-static-closure>`
