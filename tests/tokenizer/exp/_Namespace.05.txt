@@ -61,7 +61,5 @@ Label : PROJECT
                   17
               Label : NAME
                 16
-            Label : EXPRESSION
-              17
           Label : NAME
             20

@@ -149,5 +149,3 @@ Label : PROJECT
               29
           Label : NAME
             28
-        Label : EXPRESSION
-          18

@@ -8,14 +8,6 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          24
-          Label : GOTOLABEL
-            22
-        Label : EXPRESSION
-          24
-          Label : GOTOLABEL
-            25
-        Label : EXPRESSION
           5
           Label : CASES
             7
@@ -42,19 +34,25 @@ Label : PROJECT
             Label : EXPRESSION
               21
               Label : CASE
-                18
-                Label : BREAK
-                  19
-              Label : CODE
-                3
-            Label : EXPRESSION
-              27
+                23
               Label : CODE
                 3
                 Label : EXPRESSION
-                  24
+                  27
                   Label : GOTOLABEL
-                    28
+                    25
+                Label : EXPRESSION
+                  18
+                  Label : BREAK
+                    19
+            Label : EXPRESSION
+              28
+              Label : CODE
+                3
+                Label : EXPRESSION
+                  27
+                  Label : GOTOLABEL
+                    29
                 Label : EXPRESSION
                   18
                   Label : BREAK

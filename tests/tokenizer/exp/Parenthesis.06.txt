@@ -159,5 +159,3 @@ Label : PROJECT
             16
           Label : NAME
             15
-        Label : EXPRESSION
-          6

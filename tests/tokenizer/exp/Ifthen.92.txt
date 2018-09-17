@@ -135,5 +135,3 @@ Label : PROJECT
                   5
           Label : NAME
             5
-        Label : EXPRESSION
-          25

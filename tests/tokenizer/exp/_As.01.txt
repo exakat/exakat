@@ -25,7 +25,7 @@ Label : PROJECT
                   18
                   Label : CLASS
                     14
-                  Label : CONSTANT
+                  Label : METHOD
                     16
             Label : USE
               11

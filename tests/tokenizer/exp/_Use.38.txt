@@ -109,6 +109,12 @@ Label : PROJECT
                 13
                 Label : ARGUMENT
                   21
+            Label : DEFINITION
+              26
+              Label : CLASS
+                18
+              Label : METHOD
+                15
             Label : NAME
               15
           Label : NAME
@@ -181,7 +187,7 @@ Label : PROJECT
                   26
                   Label : CLASS
                     18
-                  Label : CONSTANT
+                  Label : METHOD
                     15
             Label : USE
               6

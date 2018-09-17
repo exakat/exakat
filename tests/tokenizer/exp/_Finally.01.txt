@@ -259,5 +259,3 @@ Label : PROJECT
             5
           Label : RETURNED
             15
-        Label : EXPRESSION
-          7

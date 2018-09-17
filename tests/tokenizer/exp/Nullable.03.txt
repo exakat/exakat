@@ -39,5 +39,3 @@ Label : PROJECT
             13
           Label : RETURNTYPE
             14
-        Label : EXPRESSION
-          16

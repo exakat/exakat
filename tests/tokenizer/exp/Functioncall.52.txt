@@ -20,8 +20,6 @@ Label : PROJECT
           Label : NAME
             5
         Label : EXPRESSION
-          9
-        Label : EXPRESSION
           5
         Label : EXPRESSION
           11

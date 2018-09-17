@@ -67,5 +67,3 @@ Label : PROJECT
               13
           Label : NAME
             5
-        Label : EXPRESSION
-          18

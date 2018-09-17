@@ -69,5 +69,3 @@ Label : PROJECT
             5
           Label : RETURNED
             13
-        Label : EXPRESSION
-          23

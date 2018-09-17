@@ -69,5 +69,3 @@ Label : PROJECT
             21
           Label : NAME
             5
-        Label : EXPRESSION
-          6

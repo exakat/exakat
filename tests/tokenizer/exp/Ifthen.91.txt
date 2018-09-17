@@ -439,5 +439,3 @@ Label : PROJECT
               50
           Label : NAME
             5
-        Label : EXPRESSION
-          24

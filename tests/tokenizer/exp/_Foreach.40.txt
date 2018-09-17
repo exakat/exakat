@@ -35,7 +35,7 @@ Label : PROJECT
             13
             Label : CLASS
               9
-            Label : CONSTANT
+            Label : METHOD
               11
           Label : VALUE
             15

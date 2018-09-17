@@ -45,5 +45,3 @@ Label : PROJECT
             6
           Label : RETURNTYPE
             14
-        Label : EXPRESSION
-          16

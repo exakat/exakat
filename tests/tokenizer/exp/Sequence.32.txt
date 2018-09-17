@@ -101,5 +101,3 @@ Label : PROJECT
               17
           Label : NAME
             5
-        Label : EXPRESSION
-          6

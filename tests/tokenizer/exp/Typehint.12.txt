@@ -61,5 +61,3 @@ Label : PROJECT
             28
           Label : NAME
             5
-        Label : EXPRESSION
-          29
