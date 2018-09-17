@@ -1,4 +1,4 @@
-Version 1.4.5 (Guanyin Bodhisattva, coming up)
+Version 1.4.6 (Dipankara, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 1.4.5 (Guanyin Bodhisattva, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.4.5 (Guanyin Bodhisattva, 2018-09-17)
++ Architecture
+    + Removed times() for until() in Dumps
++ Report
+    + Manual : added folders tree
++ Analyzer
+    + New analysis : Add Default To Parameter
+    + Upgraded analysis : Avoid reporting PHP function as classes
+    + Upgraded analysis : More empty Functions than just foo() {}
+    + Upgraded analysis : Wrong Number of argument now takes into account variadic
+    + Upgraded analysis : Should Use Constant now encompasses () and ?: structures
+    + Upgraded analysis : This Is Not An Array now takes ArrayObject/SimpleXmlElement into account
+    + Checked unit tests : 3009 / 3020 test pass (99% pass)
++ Tokenizer
+    + Fixed 'constant' status with Arrayliteral
+    + Fixed bug where strings are build close to the end of the script
 
 Version 1.4.4 (White Dragon Horse, 2018-09-10)
 + Architecture
