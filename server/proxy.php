@@ -81,11 +81,10 @@ function init($args) {
         
         $host = getHost($project);
         
-        print "Sending $project to $host\n";
+        $URLload = $host.'/?json='.json_encode(array_merge(['init'], $args));
+        print "Sending $project to $host\n$URLload";
         
-        print $URLload = $host.'/?json='.json_encode(array_merge(['init'], $args));
         $html = file_get_contents($URLload);
-
         print $html;
     } else {
         error('Missing VCS/code', '');
@@ -101,9 +100,9 @@ function project($args) {
         $project = $args[$id + 1];
         $host = getHost($project);
         
-        print "project $project to $host\n";
+        $URLload = $host.'/?json='.json_encode(array_merge(['project'], $args));
+        print "project $project to $host\n$URLload";
         
-        print $URLload = $host.'/?json='.json_encode(array_merge(['project'], $args));
         $html = file_get_contents($URLload);
 
         print $html;
@@ -117,9 +116,8 @@ function remove($args) {
         $project = $args[$id + 1];
         $host = getHost($project);
         
-        print "remove $project to $host\n";
-        
-        print $URLload = $host.'/?json='.json_encode(array_merge(['remove'], $args));
+        $URLload = $host.'/?json='.json_encode(array_merge(['remove'], $args));
+        print "remove $project to $host\n$URLload";
         $html = file_get_contents($URLload);
 
         print $html;

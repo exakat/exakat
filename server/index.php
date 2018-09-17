@@ -134,8 +134,8 @@ function project($args) {
         error('No such project', '');
     }
     
-    echo shell_exec('__PHP__ __EXAKAT__ queue -p '.$project);
-    echo json_encode(compact('project'));
+    echo shell_exec('__PHP__ __EXAKAT__ queue -p '.$project),
+         json_encode(compact('project'));
 }
 
 function queue($args) {
