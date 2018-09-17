@@ -25,6 +25,11 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MissingNew extends Analyzer {
+    public function dependsOn() {
+        return array('Functions/IsExtFunction'
+                    );
+    }
+
     public function analyze() {
         $customClasses = $this->query(<<<GREMLIN
 g.V().hasLabel('Class').values('fullnspath').unique();
@@ -42,9 +47,11 @@ GREMLIN
             return ;
         }
 
+        // $a = file();
         $this->atomIs('Functioncall')
+             ->analyzerIsNot('Functions/IsExtFunction')
              ->raw('or( where( __.in("ARGUMENT")), 
-                        where( __.in("RIGHT").hasLabel("Assignation").has("code", '.$equal[0].') ) )')
+                        where( __.in("RIGHT").hasLabel("Assignation").has("code", ***) ) )', $equal[0])
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoFunctionDefinition()
              ->fullnspathIs($classes);
@@ -52,7 +59,7 @@ GREMLIN
 
         $this->atomIs(array('Identifier', 'Nsname'))
              ->raw('or( where( __.in("ARGUMENT")), 
-                        where( __.in("RIGHT").hasLabel("Assignation").has("code", '.$equal[0].') ) )')
+                        where( __.in("RIGHT").hasLabel("Assignation").has("code", ***) ) )', $equal[0])
              ->hasNoConstantDefinition()
              ->fullnspathIs($classes, self::CASE_INSENSITIVE);
         $this->prepareQuery();
