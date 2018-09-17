@@ -46,7 +46,6 @@ class Weekly extends Ambassador {
     protected $tmpName           = '';
 
     private $timesToFix        = null;
-    private $themesForAnalyzer = null;
     private $severities        = null;
 
     const TOPLIMIT = 10;
@@ -56,14 +55,6 @@ class Weekly extends Ambassador {
     const YES          = 'Yes';
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
-
-    private $inventories = array('constants'  => 'Constants',
-                                 'classes'    => 'Classes',
-                                 'interfaces' => 'Interfaces',
-                                 'functions'  => 'Functions',
-                                 'traits'     => 'Traits',
-                                 'namespaces' => 'Namespaces',
-                                 'exceptions' => 'Exceptions');
 
     const G_CRITICAL = 5;
     const G_ERROR    = 4;

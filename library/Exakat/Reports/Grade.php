@@ -129,12 +129,6 @@ class Grade extends Ambassador {
     const G_NOTICE   = 2;
     const G_NONE     = 1;
 
-    private $names =  array(self::G_CRITICAL  => 'Critical',
-                            self::G_ERROR     => 'Error',
-                            self::G_WARNING   => 'Warning',
-                            self::G_NOTICE    => 'Notice',
-                            self::G_NONE      => 'OK',     );
-    
     private $grading = [];
     private $results = null;
     private $resultsCounts = null;
