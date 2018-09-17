@@ -34,8 +34,16 @@ class EmptyFunction extends Analyzer {
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
         
-        $emptyBody = 'not( where( __.out("EXPRESSION").not(hasLabel("Void", "Global", "Static"))) )';
-        
+        $emptyBody = <<<GREMLIN
+not( 
+    where( 
+        __.not(where( __.map( __.out("EXPRESSION").order().by("rank").tail(1)).hasLabel("Return").out("RETURN").hasLabel("Void", "Null")))
+          .out("EXPRESSION")
+          .not(hasLabel("Void", "Global", "Static"))
+        )
+   )
+GREMLIN;
+
         // standalone function : empty is empty. Same for closure.
         $this->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')

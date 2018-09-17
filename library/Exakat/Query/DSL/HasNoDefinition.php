@@ -30,12 +30,21 @@ class HasNoDefinition extends DSL {
     public function run() : Command {
         return new Command(<<<GREMLIN
 not( 
-    where( 
+    where(                  // Not a use expression
         __.out("DEFINITION").not( where(__.coalesce( __.in("NAME").in("USE"), __.in("USE"), __.in("USE")).hasLabel("Usenamespace") ) ) 
+                            // Not a recursive expression
+                            .repeat( __.inE().not(hasLabel('DEFINITION')).outV()).until(hasLabel('File', 'Function')).where(neq('first'))
+                            // Not a recursive level 2 expression
+                            .as('second')
+                            .repeat( __.inE().not(hasLabel('DEFINITION')).outV()).until(hasLabel('File', 'Function')).where(neq('first')).where(neq('second'))
     ) 
 )
 GREMLIN
 );
     }
 }
+/*
+
+*/
+
 ?>
