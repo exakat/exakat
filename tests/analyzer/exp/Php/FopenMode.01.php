@@ -1,12 +1,14 @@
 <?php
 
 $expected     = array('fopen(\'g\', \'h\')',
+                      '\fopen(\'c\', \'xb+\')', 
+                      '\fopen(\'d\', \'t\')',
+                      'fopen(\'rw\', \'rw\')',
                      );
 
 $expected_not = array('fopen(\'a\', \'r\')',
                       'fopen(\'b\', \'w+\')',
-                      '\\fopen(\'c\', \'xb+\')',
-                      '\\fopen(\'d\', \'t\')',
+                      '\\fopen(\'c\', \'x+b\')',
                       '\\fopen(\'i\', \'c+\')',
                       '\\b\\fopen(\'j\', \'ce+\')',
                       '$object->fopen(\'e\', \'f\')',

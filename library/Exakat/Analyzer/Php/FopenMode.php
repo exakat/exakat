@@ -30,9 +30,12 @@ class FopenMode extends Analyzer {
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('String') // No checks on variable or properties.
              ->hasNoOut('CONCAT')
-             ->noDelimiterIsNot(array('r', 'r+', 'w', 'w+', 'a', 'a+', 'x', 'x+', 'c', 'c+', 't', 't+', 'e', 'e+', // Normal
-                                      'rb', 'rb+', 'wb', 'wb+', 'ab', 'ab+', 'xb', 'xb+', 'cb', 'cb+', 'eb', 'eb+',  // binary post
-                                      'br', 'br+', 'bw', 'bw+', 'ba', 'ba+', 'bx', 'bx+', 'bc', 'bc+', 'be', 'be+'))  // binary pre
+             ->noDelimiterIsNot(array('r', 'r+', 'w', 'w+', 'a', 'a+', 'x', 'x+', 'c', 'c+', 'e',  // Normal
+                                      'rb', 'r+b', 'wb', 'w+b', 'ab', 'a+b', 'xb', 'x+b', 'cb', 'c+b', 'eb',  // binary post
+                                      'br', 'br+', 'bw', 'bw+', 'ba', 'ba+', 'bx', 'bx+', 'bc', 'bc+', 'be',  // binary pre
+                                      'rt', 'r+t', 'wt', 'w+t', 'at', 'a+t', 'xt', 'x+t', 'ct', 'c+t', 'et',  // text post
+                                      'tr', 'tr+', 'tw', 'tw+', 'ta', 'ta+', 'tx', 'tx+', 'tc', 'tc+', 'te',  // text pre
+                                      ))
              ->back('first');
         $this->prepareQuery();
     }
