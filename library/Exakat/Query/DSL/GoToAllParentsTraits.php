@@ -25,14 +25,14 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Analyzer\Analyzer;
 
-class GoToAllTraits extends DSL {
+class GoToAllParentsTraits extends DSL {
     public function run() : Command {
         list($self) = func_get_args();
 
-        if ($self === Analyzer::INCLUDE_SELF) {
-            return new Command('emit( ).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::$MAX_LOOPING.')');
+        if ($self === Analyzer::EXCLUDE_SELF) {
+            return new Command('repeat( __.as("x").coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").where(neq("x")) ).emit( ).times('.self::$MAX_LOOPING.')');
         } else {
-            return new Command('repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).emit( ).times('.self::$MAX_LOOPING.')');
+            return new Command('filter{true}.emit( ).repeat( __.as("x").coalesce( __.out("USE").out("USE"), __.out("EXTENDS")).in("DEFINITION").where(neq("x")) ).times('.self::$MAX_LOOPING.')');
         }
     }
 }

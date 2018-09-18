@@ -61,24 +61,8 @@ GREMLIN
              ->outIs('OBJECT')
              ->atomIs('This')
              ->inIs('OBJECT')
-             ->outIs('MEMBER')
              ->outIsIE('VARIABLE') // for arrays
-
-             ->savePropertyAs('code', 'property')
-             ->goToTrait()
-             ->raw(<<<GREMLIN
-not( 
-    where(
-      __.emit().repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times($MAX_LOOPING)
-               .hasLabel("Trait")
-               .out("PPP")
-               .hasLabel("Ppp")
-               .out("PPP")
-               .filter{ it.get().value("propertyname") == property } 
-    ) 
-)
-GREMLIN
-)
+             ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
 
@@ -124,26 +108,26 @@ GREMLIN
              ->tokenIs(self::$STATICCALL_TOKEN)
              ->samePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->tokenIs('T_STRING')
-             ->savePropertyAs('lccode', 'method')
-             ->goToTrait()
-             ->raw(<<<GREMLIN
-not(
-     where( 
-        __.emit().repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times($MAX_LOOPING)
-                 .out("METHOD")
-                 .hasLabel("Method")
-                 .out("NAME")
-                 .filter{ it.get().value("lccode") == method } 
-    ) 
-)
-GREMLIN
-)
+             ->outIs('METHOD')
+             ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
 
         // Case for class::methodcall
+
+        // Case for class::constant
+        // self will be solved at excution time, but is set to the trait statically
+        $this->atomIs('Trait')
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition('Staticconstant')
+             ->outIs('CLASS')
+             ->tokenIs(self::$STATICCALL_TOKEN)
+             ->samePropertyAs('fullnspath', 'fnp')
+             ->back('first');
+        $this->prepareQuery();
+
 
     }
 }

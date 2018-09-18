@@ -71,6 +71,8 @@ class LoadFinal extends Tasks {
         $this->setClassPropertyRemoteDefinition();
         $this->setClassMethodRemoteDefinition();
         $this->setArrayClassDefinition();
+        
+        $this->linkStaticMethodCall();
 
         display('End load final');
         $this->logTime('Final');
@@ -284,6 +286,91 @@ GREMLIN;
 
         $this->logTime('setArrayClassDefinition end');
     }
+
+    private function linkStaticMethodCall() {
+        $this->logTime('linkStaticMethodCall');
+        
+        // For static method calls, in traits
+        DSL::init($this->datastore);
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null);
+        $query->atomIs('Trait')
+              ->savePropertyAs('fullnspath', 'fnp')
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('BLOCK')
+              ->atomInsideNoDefinition('Staticmethodcall')
+              ->outIs('CLASS')
+              ->tokenIs(Analyzer::$STATICCALL_TOKEN)
+              ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_INSENSITIVE)
+              ->inIs('CLASS')
+              ->outIs('METHOD')
+              ->tokenIs('T_STRING')
+              ->savePropertyAs('code', 'method')
+              ->_as('call')
+              ->goToTrait()
+              ->goToAllTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'method', Analyzer::CASE_INSENSITIVE)
+              ->addETo('DEFINITION', 'call')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        // For static method calls, in class
+        DSL::init($this->datastore);
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null);
+        $query->atomIs(array('Class', 'Classanonymous'))
+              ->savePropertyAs('fullnspath', 'fnp')
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('BLOCK')
+              ->atomInsideNoDefinition('Staticmethodcall')
+              ->outIs('CLASS')
+              ->tokenIs(Analyzer::$STATICCALL_TOKEN)
+              ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_INSENSITIVE)
+              ->inIs('CLASS')
+              ->outIs('METHOD')
+              ->tokenIs('T_STRING')
+              ->savePropertyAs('code', 'method')
+              ->_as('call')
+              ->goToClass()
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF) // traits and class
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'method', Analyzer::CASE_INSENSITIVE)
+              ->addETo('DEFINITION', 'call')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        // For static property calls, in class
+        DSL::init($this->datastore);
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null);
+        $query->atomIs(array('Class', 'Classanonymous'))
+              ->savePropertyAs('fullnspath', 'fnp')
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('BLOCK')
+              ->atomInsideNoDefinition('Staticmethodcall')
+              ->outIs('CLASS')
+              ->tokenIs(Analyzer::$STATICCALL_TOKEN)
+              ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_INSENSITIVE)
+              ->inIs('CLASS')
+              ->outIs('METHOD')
+              ->tokenIs('T_STRING')
+              ->savePropertyAs('code', 'method')
+              ->_as('call')
+              ->goToClass()
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF) // traits and class
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'method', Analyzer::CASE_INSENSITIVE)
+              ->addEFrom('DEFINITION', 'call')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $this->logTime('linkStaticMethodCall end');
+    }
+
 
     private function spotFallbackConstants() {
         $this->logTime('spotFallbackConstants');

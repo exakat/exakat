@@ -1271,6 +1271,12 @@ GREMLIN;
         return $this;
     }
 
+    public function goToAllParentsTraits($self = self::EXCLUDE_SELF) {
+        $this->query->goToAllParentsTraits($self);
+
+        return $this;
+    }
+
     public function goToAllChildren($self = self::INCLUDE_SELF) {
         $this->query->goToAllChildren($self);
 

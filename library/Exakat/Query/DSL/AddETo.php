@@ -23,17 +23,13 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Query\Query;
 
-class GoToAllTraits extends DSL {
-    public function run() : Command {
-        list($self) = func_get_args();
-
-        if ($self === Analyzer::INCLUDE_SELF) {
-            return new Command('emit( ).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::$MAX_LOOPING.')');
-        } else {
-            return new Command('repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).emit( ).times('.self::$MAX_LOOPING.')');
-        }
+class AddETo extends DSL {
+    public function run() {
+        list($edgeName, $from) = func_get_args();
+        
+        return new Command("addE(\"$edgeName\").to(\"$from\")");
     }
 }
 ?>
