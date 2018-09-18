@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class WrittenOnlyVariable extends Analyzer {
     
     public function dependsOn() {
-        return array('Variables/IsModified',
-                     'Variables/IsRead',
+        return array('Variables/IsRead',
                     );
     }
     
@@ -37,17 +36,18 @@ class WrittenOnlyVariable extends Analyzer {
         $MAX_LOOPING = self::MAX_LOOPING;
         
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('BLOCK')
              ->raw(<<<GREMLIN
 local(
     __.sideEffect{ x = [];}
-      .repeat(__.out($this->linksDown)).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray")
+      .out("DEFINITION", "ARGUMENT").coalesce(__.out("NAME"), filter{true}).out("DEFINITION").not(hasLabel('Functioncall'))
+      .hasLabel("Variable", "Variableobject", "Variablearray")
       .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead"))
       .sideEffect{x.add(it.get().value("code"));}
       .barrier()
     )
     .select("first")
-    .repeat(__.out($this->linksDown)).emit().times($MAX_LOOPING).hasLabel("Variable", "Variableobject", "Variablearray")
+    .out("DEFINITION", "ARGUMENT").coalesce(__.out("NAME"), filter{true}).out("DEFINITION").not(hasLabel('Functioncall'))
+    .hasLabel("Variable", "Variableobject", "Variablearray")
     .filter{ !(it.get().value("code") in x)}
 GREMLIN
 );

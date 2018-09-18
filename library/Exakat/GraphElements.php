@@ -138,6 +138,7 @@ abstract class GraphElements {
                                  'Usetrait',
                                  'Var',
                                  'Variable',
+                                 'Variabledefinition',
                                  'Variablearray',
                                  'Variableobject',
                                  'Void',

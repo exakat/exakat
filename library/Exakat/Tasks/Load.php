@@ -3940,10 +3940,14 @@ class Load extends Tasks {
         if (in_array($atom, array('Variable', 'Variableobject', 'Variablearray')) ) {
             if (isset($this->currentVariables[$variable->code])) {
                 $this->addLink($this->currentVariables[$variable->code], $variable, 'DEFINITION');
-            } elseif (count($this->currentMethod) > 0) {
-                $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $variable, 'DEFINITION');
-                $this->currentVariables[$variable->code] = $variable;
-            }
+            } elseif (!empty($this->currentMethod)) { // inside a function
+                $definition = $this->addAtom('Variabledefinition');
+                $definition->fullcode = $variable->fullcode.' def';
+                $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $definition, 'DEFINITION');
+                $this->currentVariables[$variable->code] = $definition;
+                
+                $this->addLink($definition, $variable, 'DEFINITION');
+            } // What about the global scape ? 
 
             if ($this->currentReturn !== null) {
                 $this->addLink($this->currentReturn, $variable, 'RETURNED');
@@ -5206,6 +5210,7 @@ class Load extends Tasks {
         }
 
         // All node has one incoming or one outgoing link (outgoing or incoming).
+        // Except Variabledefinition
         $O = array();
         $D = array();
         foreach($this->links as $label => $origins) {
@@ -5227,6 +5232,7 @@ class Load extends Tasks {
 
         foreach($this->atoms as $id => $atom) {
             if ($id === 1) { continue; }
+            if ($atom->atom === 'Variabledefinition') { continue; }
 
             if (!isset($D[$id])) {
                 throw new LoadError("Warning : forgotten atom $id in $this->filename : $atom->atom");
