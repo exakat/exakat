@@ -28,29 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class UnusedArguments extends Analyzer {
     public function dependsOn() {
         return array('Variables/IsRead',
-                     'Variables/IsModified',
                      );
     }
     
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
-        $isNotRead = <<<GREMLIN
-not( 
-    where( repeat( out({$this->linksDown}) ).emit( hasLabel("Variable", "Variablearray", "Variableobject").filter{ it.get().value("code") == varname; })
-                                             .times($MAX_LOOPING)
-      .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") )
-    ) 
-)
-GREMLIN;
-    
-        $isNotUsed = <<<GREMLIN
-not( 
-    where( 
-        repeat( out({$this->linksDown}) ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } )
-                                         .times($MAX_LOOPING) 
-    ) 
-)
-GREMLIN;
 
         // Arguments, not reference, function
         $this->atomIs('Parameter')
@@ -62,9 +44,9 @@ GREMLIN;
              ->atomIs(self::$FUNCTIONS_ALL)
              ->_as('results')
              ->hasNoClassInterfaceTrait()
-             ->outIs('BLOCK')
-             // this argument must be read at least once
-             ->raw($isNotRead)
+             ->back('first')
+             ->outIs('NAME')
+             ->hasNoOut('DEFINITION')
              ->back('results');
         $this->prepareQuery();
 
@@ -78,13 +60,12 @@ GREMLIN;
              ->atomIs(self::$FUNCTIONS_ALL)
              ->analyzerIsNot('self')
              ->_as('results')
-
              ->hasClassTrait()
              ->isNot('abstract', true)
              ->checkInheriting()
-             ->outIs('BLOCK')
-             // this argument must be read at least once
-             ->raw($isNotRead)
+             ->back('first')
+             ->outIs('NAME')
+             ->raw('not(where( __.out("DEFINITION").where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") )))')
              ->back('results');
         $this->prepareQuery();
 
@@ -99,9 +80,9 @@ GREMLIN;
              ->_as('results')
              ->analyzerIsNot('self')
              ->hasNoClassInterfaceTrait()
-             ->outIs('BLOCK')
-             // this argument must be read or written at least once (in fact, used)
-             ->raw($isNotUsed)
+             ->back('first')
+             ->outIs('NAME')
+             ->hasNoOut('DEFINITION')
              ->back('results');
         $this->prepareQuery();
 
@@ -119,9 +100,9 @@ GREMLIN;
              ->hasClassTrait()
              ->isNot('abstract', true)
              ->checkInheriting()
-             ->outIs('BLOCK')
-             // this argument must be read or written at least once (in fact, used)
-             ->raw($isNotUsed)
+             ->back('first')
+             ->outIs('NAME')
+             ->hasNoOut('DEFINITION')
              ->back('results');
         $this->prepareQuery();
 
@@ -132,11 +113,8 @@ GREMLIN;
              ->isNot('reference', true)
              ->savePropertyAs('code', 'varname')
              ->back('first')
-
-             ->outIs('BLOCK')
-             // this argument must be read or written at least once
-             ->raw($isNotRead)
-
+             ->outIs('USE')
+             ->raw('not(where( __.out("DEFINITION").where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") )))')
              ->back('first');
         $this->prepareQuery();
 
@@ -148,9 +126,8 @@ GREMLIN;
              ->savePropertyAs('code', 'varname')
              ->back('first')
 
-             ->outIs('BLOCK')
-             // this argument must be read or written at least once
-             ->raw($isNotUsed)
+             ->outIs('USE')
+             ->hasNoOut('DEFINITION')
              ->back('first');
         $this->prepareQuery();
     }
