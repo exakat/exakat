@@ -42,7 +42,6 @@ class Boolval extends Plugin {
             case 'Parent' :
             case 'Closure' :
             case 'Sequence' :
-            case 'Keyvalue' : 
                 $atom->boolean = true;
                 break;
 
@@ -109,8 +108,8 @@ class Boolval extends Plugin {
                 $atom->noDelimiter = (int) (bool) ($extras['LEFT']->boolean ** (bool) $extras['RIGHT']->boolean);
                 break;
 
-            case 'Arrayliteral' :
-                $atom->boolean    = (int) (bool) $atom->count;
+            case 'Keyvalue' : 
+                $atom->boolean = (int) (bool) $extras['INDEX']->boolean && $extras['VALUE']->boolean;
                 break;
 
             case 'Not' :
@@ -137,6 +136,10 @@ class Boolval extends Plugin {
                 } elseif ($atom->code === '<=>') {
                     $atom->boolean = $extras['LEFT']->boolean <=> $extras['RIGHT']->boolean;
                 }
+                break;
+
+            case 'Arrayliteral' :
+                $atom->boolean = (int) (bool) $atom->count;
                 break;
 
             case 'Concatenation' :

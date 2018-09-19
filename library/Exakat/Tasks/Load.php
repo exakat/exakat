@@ -3419,7 +3419,8 @@ class Load extends Tasks {
 
         $array->code      = $this->tokens[$current][1];
         $array->line      = $this->tokens[$current][2];
-        $this->runPlugins($array, $argumentsList);
+        // No need for argumentlist : 
+        $this->runPlugins($array);
 
         $this->pushExpression($array);
         
