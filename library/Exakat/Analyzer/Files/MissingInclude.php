@@ -94,19 +94,37 @@ sideEffect{
                 including.add(it.value("noDelimiter"));
             } else if (it.label() == "Functioncall" && 
                        it.value("fullnspath") == "\\\\dirname") {
-                loop = 1;
-                dirname = it.vertices(OUT, "ARGUMENT").next();
+                dirname = it.vertices(OUT, "ARGUMENT").findAll{ it.value("rank") == 0;}[0];
+                nb = it.vertices(OUT, "ARGUMENT").findAll{ it.label() == "Integer";}.findAll{ it.value("rank") == 1;}[0];
+                if (nb == null) {
+                    loop = 1;
+                } else {
+                    loop = Math.max(1, nb.value("noDelimiter"));
+                }
                 
                 while( dirname.label() == 'Functioncall') {
-                    dirname = dirname.vertices(OUT, "ARGUMENT").next();
-                    ++loop;
+                    dirname = dirname.vertices(OUT, "ARGUMENT").findAll{ it.value("rank") == 0;}[0];
+                    nb = dirname.vertices(OUT, "ARGUMENT").findAll{ it.label() == "Integer";}.findAll{ it.value("rank") == 1;}[0];
+                    
+                    if (nb == null) {
+                        ++loop;
+                    } else {
+                        loop += Math.max(1, nb.value("noDelimiter"));
+                    }
                 };
-                if ('noDelimiter' in dirname.keys()) {
-                    dirs = dirname.value("noDelimiter").split("/").dropRight(loop);
 
-                    if (dirs.size() > 0) {
-                        including.add(dirs.join("/"));
-                    } 
+                if ('noDelimiter' in dirname.keys()) {
+                    dirs = dirname.value("noDelimiter").split("/");
+                    
+                    if (loop <= 0) {
+                        dirs = '';
+                    } else if (dirs.size() > loop) {
+                        dirs = dirs.dropRight(loop).join("/");
+                    } else {
+                        dirs = '/';
+                    }
+
+                    including.add(dirs);
                 } else {
                     // This just ignore the path
                     ignore = true;
