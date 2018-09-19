@@ -1482,6 +1482,12 @@ GREMLIN;
         return $this;
     }
 
+    public function hasNoUsage() {
+        $this->query->hasNoUsage();
+
+        return $this;
+    }
+
     public function run() {
         $this->analyze();
 

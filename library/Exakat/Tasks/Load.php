@@ -3942,7 +3942,7 @@ class Load extends Tasks {
                 $this->addLink($this->currentVariables[$variable->code], $variable, 'DEFINITION');
             } elseif (!empty($this->currentMethod)) { // inside a function
                 $definition = $this->addAtom('Variabledefinition');
-                $definition->fullcode = $variable->fullcode.' def';
+                $definition->fullcode = $variable->fullcode;
                 $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $definition, 'DEFINITION');
                 $this->currentVariables[$variable->code] = $definition;
                 

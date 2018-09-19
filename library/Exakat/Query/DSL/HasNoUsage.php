@@ -21,18 +21,25 @@
 */
 
 
-namespace Exakat\Analyzer\Traits;
+namespace Exakat\Query\DSL;
 
+use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class UnusedTrait extends Analyzer {
-    public function analyze() {
-        // trait t {}
-        // class x { use t2; }
-        $this->atomIs('Trait')
-             ->hasNoUsage();
-        $this->prepareQuery();
+class HasNoUsage extends DSL {
+    public function run() : Command {
+        return new Command(<<<GREMLIN
+not(
+    where(                  
+        __.out("DEFINITION").not(hasLabel("Usenamespace"))
+    ) 
+)
+GREMLIN
+);
     }
 }
+/*
+
+*/
 
 ?>
