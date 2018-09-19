@@ -1,13 +1,15 @@
 <?php
 
-namespace Test;
+namespace Test\Functions;
 
-include_once(dirname(dirname(dirname(dirname(__DIR__)))).'/library/Autoload.php');
+use Test\Analyzer;
+
+include_once dirname(__DIR__, 4).'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Functions_MarkCallable extends Analyzer {
+class MarkCallable extends Analyzer {
     /* 7 methods */
 
     public function testFunctions_MarkCallable01()  { $this->generic_test('Functions_MarkCallable.01'); }

@@ -1,13 +1,15 @@
 <?php
 
-namespace Test;
+namespace Test\Security;
 
-include_once(dirname(dirname(dirname(dirname(__DIR__)))).'/library/Autoload.php');
+use Test\Analyzer;
+
+include_once dirname(__DIR__, 4).'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Security_DirectInjection extends Analyzer {
+class DirectInjection extends Analyzer {
     /* 7 methods */
 
     public function testSecurity_DirectInjection01()  { $this->generic_test('Security_DirectInjection.01'); }

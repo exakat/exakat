@@ -1,13 +1,15 @@
 <?php
 
-namespace Test;
+namespace Test\Wordpress;
 
-include_once(dirname(dirname(dirname(dirname(__DIR__)))).'/library/Autoload.php');
+use Test\Analyzer;
+
+include_once dirname(__DIR__, 4).'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Wordpress_WpdbPrepareForVariables extends Analyzer {
+class WpdbPrepareForVariables extends Analyzer {
     /* 2 methods */
 
     public function testWordpress_WpdbPrepareForVariables01()  { $this->generic_test('Wordpress/WpdbPrepareForVariables.01'); }

@@ -1,13 +1,15 @@
 <?php
 
-namespace Test;
+namespace Test\Security;
 
-include_once(dirname(dirname(dirname(dirname(__DIR__)))).'/library/Autoload.php');
+use Test\Analyzer;
+
+include_once dirname(__DIR__, 4).'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Security_NoNetForXmlLoad extends Analyzer {
+class NoNetForXmlLoad extends Analyzer {
     /* 4 methods */
 
     public function testSecurity_NoNetForXmlLoad01()  { $this->generic_test('Security/NoNetForXmlLoad.01'); }

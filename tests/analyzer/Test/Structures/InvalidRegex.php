@@ -1,13 +1,15 @@
 <?php
 
-namespace Test;
+namespace Test\Structures;
 
-include_once(dirname(dirname(dirname(dirname(__DIR__)))).'/library/Autoload.php');
+use Test\Analyzer;
+
+include_once dirname(__DIR__, 4).'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Structures_InvalidRegex extends Analyzer {
+class InvalidRegex extends Analyzer {
     /* 7 methods */
 
     public function testStructures_InvalidRegex01()  { $this->generic_test('Structures/InvalidRegex.01'); }

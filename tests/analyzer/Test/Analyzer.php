@@ -4,10 +4,11 @@ namespace Test;
 
 use Exakat\Phpexec;
 use Exakat\Analyzer\Themes;
+use PHPUnit\Framework\TestCase;
 
 include_once(dirname(__DIR__, 3).'/library/Autoload.php');
 
-class Analyzer extends \PHPUnit_Framework_TestCase {
+class Analyzer extends TestCase {
     public function generic_test($file) {
         if (preg_match('/^\w+_/', $file)) {
             $file = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', $file);
@@ -18,6 +19,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $ini = parse_ini_file('../../projects/test/config.ini');
         $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
         $test_config = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', substr(get_class($this), 5));
+        $test_config = str_replace('\\', '/', $test_config);
 
         // initialize Config (needed by phpexec)
         $pwd = getcwd();
@@ -35,7 +37,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
 
-        require('exp/'.$file.'.php');
+        require("exp/$file.php");
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
         $res = shell_exec($config->$versionPHP.' -l ./source/'.$file.'.php 2>/dev/null');
@@ -58,7 +60,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         }
         
         $analyzer = escapeshellarg($test_config);
-        $source = 'source/'.$file.'.php';
+        $source = "source/$file.php";
 
         if (is_dir($source)) {
             $shell = 'cd ../..; php exakat test -r -d ./tests/analyzer/'.$source.' -P '.$analyzer.' -p test -q -o -json';
@@ -71,7 +73,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         if ($res === null) {
             $this->assertTrue(false, "Json couldn't be decoded : '$shell_res'\n$shell");
         }
-        
+
         if (empty($res)) {
             $list = array();
         } else {

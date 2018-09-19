@@ -1,13 +1,15 @@
 <?php
 
-namespace Test;
+namespace Test\Php;
 
-include_once(dirname(dirname(dirname(dirname(__DIR__)))).'/library/Autoload.php');
+use Test\Analyzer;
+
+include_once dirname(__DIR__, 4).'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Php_Haltcompiler extends Analyzer {
+class Haltcompiler extends Analyzer {
     /* 1 methods */
 
     public function testPhp_Haltcompiler01()  { $this->generic_test('Php/Haltcompiler.01'); }

@@ -1,13 +1,15 @@
 <?php
 
-include_once(dirname(dirname(__DIR__)).'/library/Autoload.php');
+use PHPUnit\Framework\TestSuite;
+
+include_once(dirname(__DIR__, 2).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
-class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
+class Framework_Randomtest extends TestSuite {
 
     public static function suite() {
-        $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
+        $suite = new TestSuite('PHPUnit Framework');
  
         $tests = glob('Test/*/*.php');
         foreach($tests as $id => $t) {
@@ -15,7 +17,7 @@ class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
         }
         
         shuffle($tests);
-        $tests = array_slice($tests, 0, 100);
+        $tests = array_slice($tests, 0, 20);
         
         print "Testing with ".count($tests)." tests\n";
         $total = 0;
@@ -71,7 +73,8 @@ class Framework_Randomtest extends \PHPUnit_Framework_TestSuite {
             }
 
             list($a, $b, $c, $d) = explode('\\', $test);
-            $testClass = '\Test\\'.$c.'_'.$d;
+            $testClass = '\Test\\'.$c.'\\'.$d;
+            print "$testClass\n";
 
             $suite->addTestSuite($testClass);
             if ($i > $offset + $number) { 
