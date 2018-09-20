@@ -24,7 +24,8 @@
 namespace Exakat;
 
 class Project {
-    private $project;
+    private $project  = 'unnamed';
+    private $error    = '';
 
     public function __construct($project) {
         $this->project = $project;
@@ -32,10 +33,17 @@ class Project {
 
     public function validate() {
         if (strpos($this->project, DIRECTORY_SEPARATOR) !== false) {
+            $this->error = 'Project name can\'t use '.DIRECTORY_SEPARATOR; 
             return false;
         }
 
-        if (in_array($this->project, array('test', 'onepage'))) {
+        if (in_array(mb_strtolower($this->project), array('onepage', '.', '..', '...'))) {
+            $this->error = 'Project name can\'t use reserved keyword '.$this->project; 
+            return false;
+        }
+
+        if (preg_match_all('/\W/u', $this->project, $r)) {
+            $this->error = 'Project name can\'t use those chars : "'.implode('", "', $r[0]).'"'; 
             return false;
         }
 
@@ -44,6 +52,10 @@ class Project {
 
     public function __toString() {
         return $this->project;
+    }
+    
+    public function getError() {
+        return $this->error;
     }
 }
 

@@ -4221,7 +4221,17 @@ class Load extends Tasks {
                 $this->currentReturn = $this->currentMethod[count($this->currentMethod) - 1];
             }
 
+            $this->nestContext();
+            $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+            if ($noSequence === false) {
+                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            }
             $return = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
+            if ($noSequence === false) {
+                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            }
+            $this->exitContext();
+
             $operator = $this->popExpression();
             $this->pushExpression($operator);
 

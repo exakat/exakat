@@ -24,6 +24,8 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
+use Exakat\Project as ProjecName;
+use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
@@ -46,6 +48,12 @@ class Update extends Tasks {
     protected $logname = self::LOG_NONE;
 
     public function run() {
+        $project = new ProjecName($this->config->project);
+
+        if (!$project->validate()) {
+            throw new InvalidProjectName($project->getError());
+        }
+
         if ($this->config->project === 'default') {
             $this->runDefault();
         } else {

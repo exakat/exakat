@@ -26,7 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Configsource\ProjectConfig;
 use Exakat\Datastore;
-use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\HelperException;
 use Exakat\Exceptions\VcsError;
@@ -40,30 +40,30 @@ class Initproject extends Tasks {
         $project = new Project($this->config->project);
 
         if ($project == 'default') {
-            throw new ProjectNeeded();
+            throw new ProjectNeeded($project->getError());
+        }
+        
+        if ($project == 'test') {
+            throw new InvalidProjectName('Can\t use test as project name.');
         }
 
         if (!$project->validate()) {
-            throw new NoSuchProject($project);
+            throw new InvalidProjectName($project->getError());
         }
 
         $repositoryURL = $this->config->repository;
 
         if ($this->config->delete === true) {
-            display('Deleting '.$project);
+            display("Deleting $project");
 
             // final wait..., just in case
             sleep(2);
 
-            rmdirRecursive($this->config->projects_root.'/projects/'.$project);
-        } elseif ($this->config->update === true) {
-            display('Updating '.$project);
-
-            shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'/code/; git pull');
-        } else {
-            display('Initializing '.$project.' with '.$repositoryURL);
-            $this->init_project($project, $repositoryURL);
-        }
+            rmdirRecursive("{$this->config->projects_root}/projects/$project");
+        } 
+        
+        display("Initializing $project".(!empty($repositoryURL) ? "with $repositoryURL" : '') );
+        $this->init_project($project, $repositoryURL);
 
         display('Done');
     }
@@ -90,7 +90,10 @@ class Initproject extends Tasks {
         $repositoryTag       = '';
         $include_dirs        = $this->config->include_dirs;
  
-        if ($this->config->symlink === true) {
+        if ($repositoryURL === false) {
+            $vcs = 'none';
+            $projectName = $project;
+        } elseif ($this->config->symlink === true) {
             $vcs = 'symlink';
             $projectName = basename($repositoryURL);
         } elseif ($this->config->svn === true) {
@@ -227,6 +230,5 @@ class Initproject extends Tasks {
                                                'inited' => date('r')));
     }
 }
-
 
 ?>

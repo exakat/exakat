@@ -28,9 +28,11 @@ use Exakat\Analyzer\Themes;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
+use Exakat\Project as Projectname;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Vcs\Vcs;
 
 class Project extends Tasks {
@@ -53,8 +55,12 @@ class Project extends Tasks {
     }
     
     public function run() {
-        $project = $this->config->project;
-        
+        $project = new Projectname($this->config->project);
+
+        if (!$project->validate()) {
+            throw new InvalidProjectName($project->getError());
+        }
+
         $this->project_dir = "{$this->config->projects_root}/projects/$project";
 
         if ($this->config->project === 'default') {

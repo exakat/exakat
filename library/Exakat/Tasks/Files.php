@@ -45,9 +45,9 @@ class Files extends Tasks {
 
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
-        } elseif (!file_exists($this->config->projects_root.'/projects/'.$dir)) {
+        } elseif (!file_exists("{$this->config->projects_root}/projects/$dir")) {
             throw new NoSuchProject($this->config->project);
-        } elseif (!file_exists($this->config->projects_root.'/projects/'.$dir.'/code/')) {
+        } elseif (!file_exists("{$this->config->projects_root}/projects/$dir/code/")) {
             throw new NoCodeInProject($this->config->project);
         }
 
@@ -68,8 +68,8 @@ class Files extends Tasks {
         }
         display( "Found the files \n");
 
-        $tmpFileName = $this->config->projects_root.'/projects/.exakat/files.'.getmypid().'.txt';
-        $path = $this->config->projects_root.'/projects/'.$dir.'/code';
+        $tmpFileName = "{$this->config->projects_root}/projects/.exakat/files".getmypid().'.txt';
+        $path = "{$this->config->projects_root}/projects/$dir/code";
         $tmpFiles = array_map(function ($file) {
             return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ),
                                array('\\\\', '\\(', '\\)', '\\ ', '\\$', '\\<', "\\'", '\\"', ),
@@ -119,9 +119,9 @@ class Files extends Tasks {
                     // do nothing. All is fine.
                 } elseif (substr($resFile, 0, 17) == 'PHP Parse error: ') {
                     preg_match('#Parse error: (.+?) in (\./.+?) on line (\d+)#', $resFile, $r);
-                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    $file = str_replace("{$this->config->projects_root}/projects/$dir/code/", '', $r[2]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
-                        $fileName = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                        $fileName = str_replace("{$this->config->projects_root}/projects/$dir/code/", '', $r[2]);
                         if (isset($incompilables[$fileName])) {
                             continue;
                         }
@@ -447,7 +447,7 @@ class Files extends Tasks {
         $ignore_dirs = $config->ignore_dirs;
         $dir = $config->project;
 
-        $ignore_files = parse_ini_file($config->dir_root.'/data/ignore_files.ini');
+        $ignore_files = parse_ini_file("{$config->dir_root}/data/ignore_files.ini");
         $ignore_files = array_flip($ignore_files['files']);
         
         // Regex to ignore files and folders
