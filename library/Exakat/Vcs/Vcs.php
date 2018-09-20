@@ -39,7 +39,9 @@ abstract class Vcs {
     public function update() {}
     
     static public function getVcs($config) {
-        if ($config->svn === true) {
+        if (empty($config->project_url)) {
+            return EmptyCode::class;
+        } elseif ($config->svn === true) {
             return Svn::class;
         } elseif ($config->hg === true) {
             return Mercurial::class;
