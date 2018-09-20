@@ -30,9 +30,11 @@ use Exakat\Exceptions\DependsOnMustReturnArray;
 use Exakat\Exceptions\NeedsAnalyzerThema;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Phpexec;
+use Exakat\Project as ProjectName;
 use ProgressBar\Manager as ProgressBar;
 use Exception;
 
@@ -52,13 +54,17 @@ class Analyze extends Tasks {
     }
 
     public function run() {
-        $project = $this->config->project;
+        $project = new ProjectName($this->config->project);
+
+        if (!$project->validate()) {
+            throw new InvalidProjectName($project->getError());
+        }
 
         if ($project == 'default') {
             throw new ProjectNeeded($project);
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/'.$project)) {
+        if (!file_exists("{$this->config->projects_root}/projects/$project")) {
             throw new NoSuchProject($project);
         }
 
@@ -126,7 +132,7 @@ class Analyze extends Tasks {
             return false;
         }
 
-        $lock = new Lock($this->config->projects_root.'/projects/.exakat/', $analyzer_class);
+        $lock = new Lock("{$this->config->projects_root}/projects/.exakat/", $analyzer_class);
         if (!$lock->check()) {
             display(" Concurency lock activated for $analyzer_class \n");
             return false;

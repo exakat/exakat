@@ -24,6 +24,8 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
+use Exakat\Project as ProjectName;
+use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 
@@ -31,6 +33,16 @@ class Remove extends Tasks {
     const CONCURENCE = self::NONE;
 
     public function run() {
+        $project = new ProjectName($this->config->project);
+
+        if (!$project->validate()) {
+            throw new InvalidProjectName($project->getError());
+        }
+
+        if ($this->config->project === 'default') {
+            throw new ProjectNeeded();
+        }
+
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }

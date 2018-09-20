@@ -421,11 +421,11 @@ class Load extends Tasks {
     
     public function run() {
         $this->logTime('Start');
-        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
+        if (!file_exists("{$this->config->projects_root}/projects/{$this->config->project}/config.ini")) {
             throw new NoSuchProject($this->config->project);
         }
 
-        $files = glob($this->exakatDir.'/*.csv');
+        $files = glob("{$this->exakatDir}/*.csv");
 
         foreach($files as $file) {
             unlink($file);
@@ -447,7 +447,7 @@ class Load extends Tasks {
             throw new NoSuchLoader($clientClass, $this->loaderList);
         }
         display('Loading with '.$clientClass.PHP_EOL);
-        $clientClass = '\\Exakat\\Loader\\'.$clientClass;
+        $clientClass = "\\Exakat\\Loader\\$clientClass";
         $this->loader = new $clientClass($this->gremlin, $this->config, $this->plugins);
 
         // Cleaning the databases

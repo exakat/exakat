@@ -28,14 +28,22 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchFormat;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\ProjectNotInited;
 use Exakat\Exceptions\NoDump;
+use Exakat\Project as ProjectName;
 use Exakat\Reports\Reports as Reports;
 
 class Report extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
+        $project = new ProjectName($this->config->project);
+
+        if (!$project->validate()) {
+            throw new InvalidProjectName($project->getError());
+        }
+
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
@@ -44,7 +52,7 @@ class Report extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
-        $reportClass = '\\Exakat\\Reports\\'.$this->config->format;
+        $reportClass = Reports::getReportClass($this->config->format);
 
         if (!class_exists($reportClass)) {
             throw new NoSuchFormat($this->config->format, Reports::$FORMATS);
