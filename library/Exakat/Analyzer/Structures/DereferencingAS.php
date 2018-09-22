@@ -33,7 +33,7 @@ class DereferencingAS extends Analyzer {
         // $x[3];
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->atomIs('Arrayliteal') // or some array-returning function
+             ->atomIs('Arrayliteral') // or some array-returning function
              ->raw('filter{ it.out("ARGUMENT").has("atom", "Void").any() == false}')
              ->inIs('RIGHT')
              ->outIs('LEFT')
