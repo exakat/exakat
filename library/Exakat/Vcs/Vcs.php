@@ -39,7 +39,7 @@ abstract class Vcs {
     public function update() {}
     
     static public function getVcs($config) {
-        if (empty($config->project_url)) {
+        if (empty($config->repository)) {
             return EmptyCode::class;
         } elseif ($config->svn === true) {
             return Svn::class;
