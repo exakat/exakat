@@ -73,8 +73,7 @@ class Framework_Randomtest extends TestSuite {
             }
 
             list($a, $b, $c, $d) = explode('\\', $test);
-            $testClass = '\Test\\'.$c.'\\'.$d;
-            print "$testClass\n";
+            $testClass = "\\Test\\$c\\$d";
 
             $suite->addTestSuite($testClass);
             if ($i > $offset + $number) { 
