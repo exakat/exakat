@@ -62,7 +62,7 @@ class Initproject extends Tasks {
             rmdirRecursive("{$this->config->projects_root}/projects/$project");
         } 
         
-        display("Initializing $project".(!empty($repositoryURL) ? "with $repositoryURL" : '') );
+        display("Initializing $project".(!empty($repositoryURL) ? " with $repositoryURL" : '') );
         $this->init_project($project, $repositoryURL);
 
         display('Done');
@@ -72,7 +72,7 @@ class Initproject extends Tasks {
         $finalPath = "{$this->config->projects_root}/projects/$project";
 
         if (file_exists($finalPath)) {
-            display( "$finalPath already exists. Reusing.\n");
+            display( "$finalPath already exists. Reusing it.\n");
 
             return;
         }
@@ -121,7 +121,6 @@ class Initproject extends Tasks {
                 $repositoryBranch =  'master';
                 $repositoryTag =  '';
             }
-        
         } elseif ($this->config->copy === true) {
             $vcs = 'copy';
             $projectName = basename($repositoryURL);
