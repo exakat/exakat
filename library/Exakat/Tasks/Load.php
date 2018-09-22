@@ -4299,17 +4299,18 @@ class Load extends Tasks {
     }
 
     private function processNot() {
-        $not = $this->processSingleOperator('Not', $this->precedence->get($this->tokens[$this->id][0]), 'NOT');
-        $operator = $this->popExpression();
-        $this->pushExpression($operator);
-
-        $this->runPlugins($operator, array('NOT' => $not));
+        $this->processSingleOperator('Not', $this->precedence->get($this->tokens[$this->id][0]), 'NOT');
+        
+        $not = $this->popExpression();
+        $this->pushExpression($not);
+        
+        $this->runPlugins($not, array('NOT' => $not));
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
-        return $operator;
+        return $not;
     }
 
     private function processCurlyExpression() {
