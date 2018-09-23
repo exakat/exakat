@@ -15,7 +15,9 @@
         class inAImplements3 {} 
         class someClass extends inAExtends implements inAImplements {} 
         class someClass2 implements inAImplements1, inAImplements2, inAImplements3 {} 
-
+        new someClass();
+        new someClass2();
+        
         // class used in a staticmethodcall
         class inAStaticMethodcall {} 
         inAStaticMethodcall::methodcall();

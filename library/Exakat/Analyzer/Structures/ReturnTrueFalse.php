@@ -34,7 +34,7 @@ class ReturnTrueFalse extends Analyzer {
              ->outIs('EXPRESSION')
              ->atomIs('Return')
              ->outIs('RETURN')
-             ->atomIs('Boolean')
+             ->atomIs(array('Boolean', 'Null', 'Integer'))
              ->savePropertyAs('boolean', 'a')
              ->inIs('RETURN')
              ->inIs('EXPRESSION')
@@ -44,7 +44,7 @@ class ReturnTrueFalse extends Analyzer {
              ->outIs('EXPRESSION')
              ->atomIs('Return')
              ->outIs('RETURN')
-             ->atomIs('Boolean')
+             ->atomIs(array('Boolean', 'Null', 'Integer'))
              ->notSamePropertyAs('boolean', 'a')
 
              ->back('first');
@@ -62,7 +62,7 @@ class ReturnTrueFalse extends Analyzer {
              ->inIs('LEFT')
              
              ->outIs('RIGHT')
-             ->isLiteral()
+             ->atomIs(array('Boolean', 'Null', 'Integer'))
              ->savePropertyAs('boolean', 'valeur')
              ->back('first')
 
@@ -75,7 +75,7 @@ class ReturnTrueFalse extends Analyzer {
              ->inIs('LEFT')
              
              ->outIs('RIGHT')
-             ->isLiteral()
+             ->atomIs(array('Boolean', 'Null', 'Integer'))
              ->notSamePropertyAs('boolean', 'valeur')
 
              ->back('first');

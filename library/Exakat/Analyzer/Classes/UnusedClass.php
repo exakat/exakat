@@ -32,11 +32,39 @@ class UnusedClass extends Analyzer {
     }
 
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+
         // class A {}
         // new A;
         $this->atomIs('Class')
-             ->hasNoDefinition()
-             ->analyzerIsNot('Classes/TestClass');
+             ->isNot('abstract', true)
+             ->analyzerIsNot('Classes/TestClass')
+             ->raw(<<<GREMLIN
+not(
+    where(
+        __.out("DEFINITION").not( 
+            where(__.coalesce( __.in("NAME").in("USE"), 
+                               __.in("USE"), 
+                               __.in("USE").hasLabel("Usenamespace"),
+                               __.in("EXTENDS", "IMPLEMENTS").hasLabel("Class", "Interface"))
+                 )
+         )
+    )
+)
+GREMLIN
+);
+        $this->prepareQuery();
+
+        $this->atomIs('Class')
+             ->is('abstract', true)
+             ->raw(<<<GREMLIN
+not(
+    where(
+        out("DEFINITION").in("EXTENDS")
+    )
+)
+GREMLIN
+);
         $this->prepareQuery();
     }
 }

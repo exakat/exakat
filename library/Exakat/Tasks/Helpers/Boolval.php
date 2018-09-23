@@ -29,6 +29,12 @@ class Boolval extends Plugin {
     static public $PROP_BOOLVAL      = array('Integer', 'Boolean', 'Real', 'Null', 'Nsname');
     
     public function run($atom, $extras) {
+        // Special case for Arraylist, so it won't be blocked by the filter behind.
+        if ($atom->atom === 'Arrayliteral') {
+            $atom->boolean = (int) (bool) $atom->count;
+            return;
+        }
+        
         foreach($extras as $extra) {
             if ($extra->boolean === '')  {
                 $atom->boolean = '';
@@ -136,10 +142,6 @@ class Boolval extends Plugin {
                 } elseif ($atom->code === '<=>') {
                     $atom->boolean = $extras['LEFT']->boolean <=> $extras['RIGHT']->boolean;
                 }
-                break;
-
-            case 'Arrayliteral' :
-                $atom->boolean = (int) (bool) $atom->count;
                 break;
 
             case 'Concatenation' :
