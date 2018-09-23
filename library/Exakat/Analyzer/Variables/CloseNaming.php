@@ -31,7 +31,7 @@ class CloseNaming extends Analyzer {
         $MAX_LOOPING = self::MAX_LOOPING;
         if (!empty($closeVariables)) {
             $this->atomIs(self::$FUNCTIONS_ALL)
-                 ->collectVariables('variables')
+                 ->collectVariables('variables', 'code')
                  ->raw('sideEffect{ 
     variables = variables.unique().sort();
     found = variables.intersect(***); 

@@ -28,7 +28,9 @@ use Exakat\Analyzer\Analyzer;
 
 class CollectVariables extends DSL {
     public function run() : Command {
-        list($variable) = func_get_args();
+        list($variable, $type) = func_get_args();
+        
+        assert(in_array($type, array('fullcode', 'code')), 'collectVariable type should be code or fullcode');
         
         $CONTAINERS = makeList(array('Variable', 'Variableobject', 'Variablearray', 'Phpvariable', 'Member', 'Staticproperty', 'Array', 'This', ));
         $LINKS_DOWN = self::$linksDown;
@@ -38,7 +40,7 @@ sideEffect{ $variable = []; }.where(
     __.repeat( __.out($LINKS_DOWN)).emit()
       .hasLabel($CONTAINERS)
       .sideEffect{ 
-          $variable.add(it.get().value("fullcode")); 
+          $variable.add(it.get().value("$type")); 
       }
       .fold()
 )

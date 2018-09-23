@@ -1463,8 +1463,8 @@ GREMLIN;
         return $this;
     }
 
-    public function collectVariables($variables = 'variables') {
-        $this->query->collectVariables($variables);
+    public function collectVariables($variables = 'variables', $type = 'fullcode') {
+        $this->query->collectVariables($variables, $type);
         
         return $this;
     }
