@@ -127,7 +127,7 @@ class IsRead extends Analyzer {
         $this->atomIs('Variable')
              ->analyzerIsNot('self')
              ->hasIn('ARGUMENT')
-             ->hasNoParent(self::$FUNCTIONS_ALL,  'ARGUMENT');
+             ->hasNoParent(array_merge(array('List'), self::$FUNCTIONS_ALL),  'ARGUMENT');
         $this->prepareQuery();
     }
 }

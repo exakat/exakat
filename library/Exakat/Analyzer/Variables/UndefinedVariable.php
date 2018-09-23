@@ -25,32 +25,26 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class UndefinedVariable extends Analyzer {
+    public function dependsOn() {
+        return array('Variables/IsRead',
+                     'Variables/IsModified',
+                    );
+    }
+
     public function analyze() {
         // function foo() { $b->c = 2;}
-        $this->atomIs(array('Variable', 'Variableobject', 'Variablearray'))
-             ->hasNoOut('DEFINITION')
-             ->hasNoParent('Catch', array('VARIABLE'))
-             ->hasNoParent('Foreach', array('VALUE'))
-             ->hasNoParent('Foreach', array('INDEX', 'VALUE'))
-             ->hasNoParent('Foreach', array( 'VALUE', 'VALUE'))
-             ->hasNoParent('Assignation', 'LEFT')
-             ->hasNoParent('List', 'ARGUMENT')
+        $this->atomIs('Variabledefinition')
              ->raw(<<<GREMLIN
 not(
-    __.has("rank")
-      .sideEffect{rank = it.get().value("rank");}
-      .in("ARGUMENT")
-      .hasLabel("Functioncall")
-      .in("DEFINITION")
-      .out("ARGUMENT")
-      .filter{ it.get().value("rank") == rank}
-      .has("reference", true)
+    where( __.out("DEFINITION").where( __.in("ANALYZED").has("analyzer", within('Variables/IsModified'))))
 )
 GREMLIN
 )
-             ->inIs('DEFINITION')
-             ->atomIs(self::$FUNCTIONS_ALL)
-             ->back('first');
+            ->raw(<<<GREMLIN
+where( __.out("DEFINITION").where( __.in("ANALYZED").has("analyzer", within('Variables/IsRead'))))
+GREMLIN
+)
+            ->outIs('DEFINITION');
         $this->prepareQuery();
     }
 }
