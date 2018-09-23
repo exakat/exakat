@@ -26,7 +26,7 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class IsUpperCase extends DSL {
+class IsUppercase extends DSL {
     public function run() {
         list($property) = func_get_args();
         
