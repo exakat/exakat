@@ -6,6 +6,14 @@
         die();
     }
     $test = $args[1];
+
+    if (substr($test, 0, 5) === 'Test/') {
+        $test = substr($test, 5);
+    }
+
+    if (substr($test, -4) === '.php') {
+        $test = substr($test, 0, -4);
+    }
     
     if (strpos($test, '/') === false) {
         print "The test should look like 'X/Y'. Aborting\n";
@@ -22,8 +30,8 @@
         $test = substr($test, 0, -4);
         print "Dropping extension .php from the test name. Now using '$test'\n";
     }
-
-    if (!file_exists(dirname(dirname(__DIR__)).'/library/Exakat/Analyzer/'.$dir)) {
+    
+    if (!file_exists(dirname(__DIR__, 2).'/library/Exakat/Analyzer/'.$dir)) {
         $groups = array_map('basename', glob(dirname(dirname(__DIR__)).'/library/Exakat/Analyzer/*' , GLOB_ONLYDIR));
         $closest = closest_string($dir, $groups);
         print "No such analyzer group '$dir'. Did you mean '$closest' ? \nChoose among : ".join(', ', $groups);
@@ -43,8 +51,8 @@
     }
     
     // restore $test value
-    $test_ = $dir.'_'.$test;
-    $test = $dir.'/'.$test;
+    $testClass = $test;
+    $test = "$dir/$test";
     $files = glob('source/'.$test.'.*.php');
     sort($files);
     $last = array_pop($files);
@@ -56,21 +64,22 @@
     }
     $next = substr("00".($number + 1), -2);
 
-    if (file_exists('Test/'.$test.'.php')) {
-        $code = file_get_contents('Test/'.$test.'.php');
+    if (file_exists("Test/$test.php")) {
+        $code = file_get_contents("Test/$dir/$testClass.php");
     } else {
-        copy('Test/Skeleton.php', 'Test/'.$test.'.php');
-        $code = file_get_contents('Test/'.$test.'.php');
+        copy('Test/Skeleton.php', "Test/$dir/$testClass.php");
+        $code = file_get_contents("Test/$dir/$testClass.php");
         
-        $code = str_replace('Skeleton', $test_, $code);
+        $code = str_replace('SkeletonNS', $dir, $code);
+        $code = str_replace('SkeletonClass', $testClass, $code);
     }
 
-    $code = substr($code, 0, -4)."    public function test$test_$next()  { \$this->generic_test('$test.$next'); }
+    $code = substr($code, 0, -4)."    public function test{$dir}_{$testClass}$next()  { \$this->generic_test('$test.$next'); }
 ".substr($code, -4);
     $count = $next + 0;
     $code = preg_replace('#/\* \d+ methods \*/#is', '/* '.$count.' methods */', $code);
 
-    file_put_contents('Test/'.$test.'.php', $code);
+    file_put_contents("Test/{$test}.php", $code);
 
     if (in_array('-d', $argv)) {
         print "Creating directory file\n";
