@@ -64,7 +64,7 @@ class Upgrade extends Tasks {
                 preg_match('#<pre id="sha256">(.*?)</pre>#', $html, $r);
                 $sha256 = strip_tags($r[1]);
                 
-                $phar = @file_get_contents('http://dist.exakat.io/versions/index.php?file=latest');
+                $phar = (string) @file_get_contents('http://dist.exakat.io/versions/index.php?file=latest');
 
                 if (hash('sha256', $phar) !== $sha256) {
                     print 'Error while checking exakat.phar\'s checksum. Aborting update. Please, try again'.PHP_EOL;

@@ -51,10 +51,16 @@ class Composer extends Vcs {
         shell_exec("cd {$this->destinationFull}/code/; composer -q update");
 
         $json = file_get_contents("{$this->destinationFull}/code/composer.json");
+        if (empty($json)) {
+            return $json;
+        }
         $json = json_decode($json);
         $component = array_keys( (array) $json->require)[0];
 
         $json = file_get_contents("{$this->destinationFull}/code/composer.lock");
+        if (empty($json)) {
+            return $json;
+        }
         $json = json_decode($json);
 
         $return = '';

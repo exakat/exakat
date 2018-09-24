@@ -58,7 +58,7 @@ class Svn extends Vcs {
         $res = trim(shell_exec("cd {$this->destinationFull}/code; svn info"));
         
         if (empty($res)) {
-            $this->info[$name] = '';
+            $this->info['svn'] = '';
 
             return;
         }

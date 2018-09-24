@@ -38,11 +38,17 @@ class Status extends Tasks {
         if ($project === 'default') {
             $status = array();
 
-            if (file_exists($this->config->projects_root.'/projects/.exakat/Project.json')) {
-                if (file_exists($this->config->projects_root.'/projects/.exakat/Project.json')) {
-                    $json = json_decode(file_get_contents($this->config->projects_root.'/projects/.exakat/Project.json'));
-                    $projectStatus = $json->project;
-                    $projectStep = $json->step;
+            if (file_exists("{$this->config->projects_root}/projects/.exakat/Project.json")) {
+                if (file_exists("{$this->config->projects_root}/projects/.exakat/Project.json")) {
+                    $json = file_get_contents("{$this->config->projects_root}/projects/.exakat/Project.json");
+                    if (empty($json)) {
+                        $projectStatus = '';
+                        $projectStep = '';
+                    } else {
+                        $json = json_decode($json);
+                        $projectStatus = $json->project;
+                        $projectStep = $json->step;
+                    }
                 } else {
                     $projectStatus = '';
                     $projectStep = '';
