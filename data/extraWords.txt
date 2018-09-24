@@ -176,3 +176,5 @@ autoloades
 autoloaded
 PCRE
 AST
+hashtables
+hashtable
