@@ -15,4 +15,5 @@ if (dba_exists("key", $id)) {
 }
 
 dba_close($id);
+dba_remove("key", $id);
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('range($a)',
-                       'unserialize($GLOBALS[\'W\'][\'EXT\'][\'w\'][\'www\'], [\'www\' => false])',
+                      'unserialize($GLOBALS[\'W\'][\'EXT\'][\'w\'][\'www\'], [\'www\' => false])',
                      );
 
 $expected_not = array('range(...$a)',

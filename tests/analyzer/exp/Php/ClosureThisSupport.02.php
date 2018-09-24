@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array(
+$expected     = array('function  ($withThis) { /**/ } ',
                      );
 
 $expected_not = array('function  ( ) { /**/ } ',

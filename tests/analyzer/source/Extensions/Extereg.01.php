@@ -22,4 +22,7 @@ $string = ereg_replace("$", "<br />", $string);
 
 // Get rid of any newline characters in $string.
 $string = ereg_replace("\n", "", $string);
+
+$string = ereg_split("\n", "", $string);
+
 ?>

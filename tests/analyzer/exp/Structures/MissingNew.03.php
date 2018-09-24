@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('error(\'35\')', 
+$expected     = array('error(\'35\')',
                       'file2(\'34\')',
                      );
 

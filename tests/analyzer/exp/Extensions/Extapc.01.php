@@ -9,7 +9,7 @@ $expected     = array('apc_store(\'anumber\', 42)',
                       'apc_dec(\'astring\', 1, $fail)',
                      );
 
-$expected_not = array(
+$expected_not = array('apc_stores(\'foo\', \'bar\')',
                      );
 
 ?>

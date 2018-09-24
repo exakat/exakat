@@ -1,8 +1,8 @@
 <?php
 
 $expected     = array('fopen(\'g\', \'h\')',
-                      '\fopen(\'c\', \'xb+\')', 
-                      '\fopen(\'d\', \'t\')',
+                      '\\fopen(\'c\', \'xb+\')',
+                      '\\fopen(\'d\', \'t\')',
                       'fopen(\'rw\', \'rw\')',
                      );
 

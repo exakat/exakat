@@ -10,7 +10,7 @@ $expected     = array('ereg("abc", $string)',
                       'ereg_replace("\\n", "", $string)',
                      );
 
-$expected_not = array(
+$expected_not = array('ereg_split("\\n", "", $string)',
                      );
 
 ?>

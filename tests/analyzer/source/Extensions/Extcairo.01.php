@@ -3,6 +3,8 @@
 $s = new CairoImageSurface(CairoFormat::ARGB32, 100, 100);
 $c = new CairoContext($s);
 
+new CairoMovie;
+
 $c->setSourceRgb(0, 0, 0);
 $c->paint();
 

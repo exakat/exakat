@@ -14,6 +14,7 @@ var_dump($success);
 echo "Now, let's fail", PHP_EOL, PHP_EOL;
 
 apc_store('astring', 'foo');
+apc_stores('foo', 'bar');
 
 $ret = apc_dec('astring', 1, $fail);
 
