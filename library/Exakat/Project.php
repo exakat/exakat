@@ -42,7 +42,7 @@ class Project {
             return false;
         }
 
-        if (preg_match_all('/[^\w_\-]/u', $this->project, $r)) {
+        if (preg_match_all('/[^\w_\.\-]/u', $this->project, $r)) {
             $this->error = 'Project name can\'t use those chars : "'.implode('", "', $r[0]).'"'; 
             return false;
         }

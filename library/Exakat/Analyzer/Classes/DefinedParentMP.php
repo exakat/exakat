@@ -105,7 +105,7 @@ class DefinedParentMP extends Analyzer {
              ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('EXTENDS')
              ->analyzerIs(array('Composer/IsComposerNsname',
-                                'Composer/IsExtClass', 
+                                'Composer/IsExtClass',
                                ))
              ->back('first')
              ->inIs('CLASS');

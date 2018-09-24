@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class Closure2String extends Analyzer {
     public function analyze() {
         // function ($x) { return strtoupper($x);}
-        // Very little checks ATM : 
+        // Very little checks ATM :
         $this->atomIs('Closure')
              ->outIs('BLOCK')
              ->is('count', 1)

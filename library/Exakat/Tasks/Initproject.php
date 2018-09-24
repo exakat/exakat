@@ -60,7 +60,7 @@ class Initproject extends Tasks {
             sleep(2);
 
             rmdirRecursive("{$this->config->projects_root}/projects/$project");
-        } 
+        }
         
         display("Initializing $project".(!empty($repositoryURL) ? " with $repositoryURL" : '') );
         $this->init_project($project, $repositoryURL);

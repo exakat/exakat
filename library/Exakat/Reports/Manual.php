@@ -64,7 +64,7 @@ class Manual extends Reports {
 
         $md .= '# Annex' . PHP_EOL.PHP_EOL;
         $md .= $this->generateEmpty();
-        $md .= $this->generateSettings();        
+        $md .= $this->generateSettings();
 
         $summary = 'Table of content'.PHP_EOL.'---'.PHP_EOL.PHP_EOL;
         
@@ -99,8 +99,8 @@ class Manual extends Reports {
         $res = $this->sqlite->query('SELECT * FROM files ORDER BY file');
         $paths = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (empty($row['file'])) { 
-                continue; 
+            if (empty($row['file'])) {
+                continue;
             }
             $path = dirname($row['file']);
             if (isset($paths[$path])) {

@@ -1194,7 +1194,7 @@ class Load extends Tasks {
 
         if ($function->atom === 'Function') {
             $this->processSemicolon();
-        } elseif ($function->atom === 'Closure' && 
+        } elseif ($function->atom === 'Closure' &&
                   $this->tokens[$current  - 1][0] !== $this->phptokens::T_EQUAL          &&
                   $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3947,7 +3947,7 @@ class Load extends Tasks {
                 $this->currentVariables[$variable->code] = $definition;
                 
                 $this->addLink($definition, $variable, 'DEFINITION');
-            } // What about the global scape ? 
+            } // What about the global scape ?
 
             if ($this->currentReturn !== null) {
                 $this->addLink($this->currentReturn, $variable, 'RETURNED');

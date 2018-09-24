@@ -49,7 +49,7 @@ class IncompatibleSignature extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // non-matching argument count : 
+        // non-matching argument count :
         // abstract : exact count
         $this->atomIs(array('Method', 'Magicmethod'))
              ->outIs('NAME')
@@ -68,7 +68,7 @@ class IncompatibleSignature extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // non-matching argument count : 
+        // non-matching argument count :
         // non-abstract : count may be more but not less
         $this->atomIs(array('Method', 'Magicmethod'))
              ->isNot('visibility', 'private')
@@ -80,7 +80,7 @@ class IncompatibleSignature extends Analyzer {
              ->hasOut('EXTENDS')
              ->goToAllParents()
              ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->isNot('abstract', true) 
+             ->isNot('abstract', true)
              ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)

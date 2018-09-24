@@ -2583,8 +2583,8 @@ SQL
             } elseif ($row['analyzer'] === 'Php/ErrorLogUsage' && $row['count'] !== 0) {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
                 $data = json_decode(file_get_contents("{$this->config->dir_root}/data/directives/errorlog.json"));
-            } elseif ($row['analyzer'] === 'Security/CantDisableFunction' || 
-                      $row['analyzer'] === 'Security/CantDisableClass' 
+            } elseif ($row['analyzer'] === 'Security/CantDisableFunction' ||
+                      $row['analyzer'] === 'Security/CantDisableClass'
                       ) {
                 $res2 = $this->sqlite->query(<<<SQL
 SELECT GROUP_CONCAT(DISTINCT substr(fullcode, 0, instr(fullcode, '('))) FROM results 
@@ -2594,7 +2594,7 @@ SQL
                 $list = $res2->fetchArray(\SQLITE3_NUM);
                 $list = explode(',', $list[0]);
                 if (isset($disable)) {
-                    continue; 
+                    continue;
                 }
                 $disable = parse_ini_file("{$this->config->dir_root}/data/disable_functions.ini");
                 $suggestions = array_diff($disable['disable_functions'], $list);

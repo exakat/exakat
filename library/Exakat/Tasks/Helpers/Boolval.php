@@ -114,7 +114,7 @@ class Boolval extends Plugin {
                 $atom->noDelimiter = (int) (bool) ($extras['LEFT']->boolean ** (bool) $extras['RIGHT']->boolean);
                 break;
 
-            case 'Keyvalue' : 
+            case 'Keyvalue' :
                 $atom->boolean = (int) (bool) $extras['INDEX']->boolean && $extras['VALUE']->boolean;
                 break;
 
