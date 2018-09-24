@@ -406,6 +406,7 @@ JOIN categories
                         'examples_app'           => array(),
                         'modifications'          => 0,
                         'modifications_distinct' => 0,
+                        'phpError'               => 0,
                        );
         $res = $sqlite->query('SELECT analyzers.folder || "/" || analyzers.name as name FROM analyzers');
         while($row = $res->fetchArray()) {
@@ -449,6 +450,14 @@ JOIN categories
                 ++$totals['modifications_distinct'];
             } else {
                 print "No modification sections in $row[name]\n";
+            }
+
+            if (isset($ini['phpErrors'])) {
+                print "phpErrors used instead of phpError in $row[name]\n";
+            }
+            
+            if (isset($ini['phpError'])) {
+                ++$totals['phpError'];
             }
             
             if (!empty($examples)) {
@@ -504,6 +513,7 @@ JOIN categories
         print "\n$total analyzers are in the base\n";
         print "$totals[examples] examples for $totals[examples_distinct] analysis in the docs\n";
         print "$totals[modifications] modifications for $totals[modifications_distinct] analysis in the docs\n";
+        print "$totals[phpError] PHP error messages\n";
         $apps = array_count_values($totals['examples_app']);
         asort($apps);
         print_r($apps);
