@@ -72,7 +72,7 @@ class OnlyVariablePassedByReference extends Analyzer {
         $references = new GroupBy();
         
         foreach($functions as $function) {
-            $references[$function['position']] = '\\'.$function['function'];
+            $references[$function['position']] = "\\$function[function]";
         }
 
         foreach($references as $position => $functions) {
