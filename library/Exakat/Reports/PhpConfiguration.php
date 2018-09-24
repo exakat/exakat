@@ -188,7 +188,7 @@ $detail->name = $detail->suggested
             }
 
             if ($section === 'standard') {
-                    $directives .= ";$documentation
+                $directives .= ";$documentation
 disable_functions = $functionsList
 disable_classes = $classesList
 

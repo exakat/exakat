@@ -162,7 +162,7 @@ MENU;
         $this->makeAuditDate($finalHTML);
 
         // top 10
-        $fileHTML = $this->getTopFile();
+        $fileHTML = $this->getTopFile($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
         $analyzerHTML = $this->getTopAnalyzers($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);

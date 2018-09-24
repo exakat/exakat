@@ -280,7 +280,7 @@ MENU;
         }
         $finalHTML = str_replace('<FULLWEEK>', implode(' - ', $fullweek), $finalHTML).' - ';
         
-        file_put_contents("$this->tmpName/datas/weekly.html", $finalHTML);
+        file_put_contents("{$this->tmpName}/datas/weekly.html", $finalHTML);
 
         copy("{$this->tmpName}/datas/weekly.html", "{$this->tmpName}/datas/weekly-$year-$week.html");
 
@@ -340,9 +340,10 @@ HTML;
         $this->makeAuditDate($finalHTML);
 
         // top 10
-        $fileHTML     = $this->getTopFile();
+        $week = array_keys($this->weeks)[0];
+        $fileHTML     = $this->getTopFile($this->weeks[$this->current]->analysis, "weekly-$week");
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
-        $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis);
+        $analyzerHTML = $this->getTopAnalyzers($this->weeks[$this->current]->analysis, "weekly-$week");
         $finalHTML    = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
         
         $globalData = array(self::G_CRITICAL  => (object) ['label' => 'Critical', 'value' => 0],
@@ -666,8 +667,14 @@ SQL;
         return $return;
     }
 
-    protected function getFilesCount($limit = null) {
-        $list = $this->weeks[$this->current]->analysis;
+    protected function getFilesCount($theme = null, $limit = null) {
+        if ($theme === null) {
+            $list = $this->weeks[$this->current]->analysis;
+        } elseif (is_array($theme)) {
+            $list = $theme;
+        } else {
+            die('Theme Needs a string or an array');
+        }
         $list = makeList($list);
 
         $query = "SELECT file, count(*) AS number
@@ -689,7 +696,7 @@ SQL;
     }
     
     protected function generateWeeklyTable() {
-        $data = $this->getFilesCount(self::TOPLIMIT);
+        $data = $this->getFilesCount($this->weeks[$this->current]->analysis, self::TOPLIMIT);
 
         $html = '';
         $html .= str_repeat('<div class="clearfix">

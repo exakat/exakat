@@ -270,7 +270,7 @@ MENU;
         $code[] = $severity['script'];
 
         // top 10
-        $fileHTML = $this->getTopFile();
+        $fileHTML = $this->getTopFile($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
         $analyzerHTML = $this->getTopAnalyzers($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
@@ -994,28 +994,6 @@ SQL;
         $row = $result->fetchArray(\SQLITE3_ASSOC);
 
         return $row['number'];
-    }
-
-    public function getFilesCount($limit = null) {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
-
-        $query = "SELECT file, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY file
-                    ORDER BY number DESC ";
-        if ($limit !== null) {
-            $query .= " LIMIT ".$limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('file'  => $row['file'],
-                            'value' => $row['number']);
-        }
-
-        return $data;
     }
 
     protected function getAnalyzersCount($limit) {

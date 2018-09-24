@@ -700,51 +700,6 @@ SQL;
         return $row['number'];
     }
 
-    public function getFilesCount($limit = null) {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
-
-        $query = "SELECT file, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY file
-                    ORDER BY number DESC ";
-        if ($limit !== null) {
-            $query .= " LIMIT ".$limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('file'  => $row['file'],
-                            'value' => $row['number']);
-        }
-
-        return $data;
-    }
-
-    protected function getTopFile() {
-        $data = $this->getFilesCount(self::TOPLIMIT);
-
-        $html = '';
-        foreach ($data as $value) {
-            $html .= '<div class="clearfix">
-                    <a href="#" title="'.$value['file'].'">
-                      <div class="block-cell-name">'.$value['file'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
-                    </a>
-                  </div>';
-        }
-        $nb = 10 - count($data);
-        for($i = 0; $i < $nb; ++$i) {
-            $html .= '<div class="clearfix">
-                      <div class="block-cell-name">&nbsp;</div>
-                      <div class="block-cell-issue text-center">&nbsp;</div>
-                  </div>';
-        }
-
-        return $html;
-    }
-
     protected function getFileOverview() {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
         $xAxis        = array();

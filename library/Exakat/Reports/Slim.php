@@ -244,7 +244,7 @@ MENU;
         $code[] = $severity['script'];
 
         // top 10
-        $fileHTML = $this->getTopFile();
+        $fileHTML = $this->getTopFile($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
         $analyzerHTML = $this->getTopAnalyzers($this->themesToShow);
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
@@ -972,53 +972,8 @@ SQL;
         return $row['number'];
     }
 
-    public function getFilesCount($limit = null) {
-        $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = makeList($listArray);
-
-        $query = "SELECT file, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY file
-                    ORDER BY number DESC ";
-        if ($limit !== null) {
-            $query .= " LIMIT ".$limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('file'  => $row['file'],
-                            'value' => $row['number']);
-        }
-
-        return $data;
-    }
-
-    protected function getTopFile() {
-        $data = $this->getFilesCount(self::TOPLIMIT);
-
-        $html = '';
-        foreach ($data as $value) {
-            $html .= '<div class="clearfix">
-                    <a href="#" title="'.$value['file'].'">
-                      <div class="block-cell-name">'.$value['file'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
-                    </a>
-                  </div>';
-        }
-        $nb = 10 - count($data);
-        for($i = 0; $i < $nb; ++$i) {
-            $html .= '<div class="clearfix">
-                      <div class="block-cell-name">&nbsp;</div>
-                      <div class="block-cell-issue text-center">&nbsp;</div>
-                  </div>';
-        }
-
-        return $html;
-    }
-
     protected function getFileOverview() {
-        $data = $this->getFilesCount(self::LIMITGRAPHE);
+        $data = $this->getFilesCount(null, self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
         $dataCritical = array();
@@ -1067,39 +1022,6 @@ SQL;
         }
 
         return $data;
-    }
-
-    protected function getTopAnalyzers($themes) {
-        $listArray = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = makeList($listArray);
-        $toplimit = self::TOPLIMIT;
-
-        $query = <<<SQL
-SELECT analyzer, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY analyzer
-                    ORDER BY number DESC
-                    LIMIT $toplimit
-SQL;
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('label' => $this->getDocs($row['analyzer'], 'name'),
-                            'value' => $row['number']);
-        }
-
-        $html = '';
-        foreach ($data as $value) {
-            $html .= '<div class="clearfix">
-                    <a href="#" title="'.$value['label'].'">
-                      <div class="block-cell-name">'.$value['label'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
-                    </a>
-                  </div>';
-        }
-
-        return $html;
     }
 
     protected function getSeveritiesNumberBy($type = 'file') {

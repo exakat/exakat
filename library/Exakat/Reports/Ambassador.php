@@ -1762,9 +1762,15 @@ SQL;
         return $row['number'];
     }
 
-    protected function getFilesCount($limit = null) {
-        $list = $this->themes->getThemeAnalyzers($this->themesToShow);
-        $list = makeList($list);
+    protected function getFilesCount($themes = null, $limit = null) {
+        if ($themes === null) {
+            $list = $this->themes->getThemeAnalyzers($this->themesToShow);
+        } elseif (is_array($themes)) {
+            $list = $themes;
+        } else {
+            die('$themes must be an array or null : '.__METHOD__);
+        }
+        $list = makeList($list, "'");
 
         $query = "SELECT file, count(*) AS number
                     FROM results
@@ -1784,18 +1790,27 @@ SQL;
         return $data;
     }
 
-    protected function getTopFile() {
-        $data = $this->getFilesCount(self::TOPLIMIT);
+    protected function getTopFile($theme, $file = 'issues') {
+        if (is_string($theme)) {
+            $list = $this->themes->getThemeAnalyzers($theme);
+        } elseif (is_array($theme)) {
+            $list = $theme;
+        } else {
+            die('Needs a string or an array');
+        }
+
+        $data = $this->getFilesCount($list, self::TOPLIMIT);
 
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                    <a href="issues.html#file='.$this->toId($value['file']).'" title="'.$value['file'].'">
+                    <a href="'.$file.'.html#file='.$this->toId($value['file']).'" title="'.$value['file'].'">
                       <div class="block-cell-name">'.$value['file'].'</div>
                     </a>
                     <div class="block-cell-issue text-center">'.$value['value'].'</div>
                   </div>';
         }
+
         $nb = 10 - count($data);
         $html .= str_repeat('<div class="clearfix">
                       <div class="block-cell-name">&nbsp;</div>
@@ -1806,7 +1821,7 @@ SQL;
     }
 
     protected function getFileOverview() {
-        $data = $this->getFilesCount(self::LIMITGRAPHE);
+        $data = $this->getFilesCount(null, self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
         $dataCritical = array();
@@ -1857,7 +1872,7 @@ SQL;
         return $data;
     }
 
-    protected function getTopAnalyzers($theme) {
+    protected function getTopAnalyzers($theme, $file = 'issues') {
         if (is_string($theme)) {
             $list = $this->themes->getThemeAnalyzers($theme);
         } elseif (is_array($theme)) {
@@ -1885,7 +1900,7 @@ SQL;
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                    <a href="issues.html#analyzer='.$this->toId($value['name']).'" title="'.$value['label'].'">
+                    <a href="'.$file.'.html#analyzer='.$this->toId($value['name']).'" title="'.$value['label'].'">
                       <div class="block-cell-name">'.$value['label'].'</div> 
                     </a>
                     <div class="block-cell-issue text-center">'.$value['value'].'</div>

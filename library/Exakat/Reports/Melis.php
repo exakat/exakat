@@ -451,28 +451,6 @@ JAVASCRIPT;
         return $html;
     }
 
-    public function getFilesCount($limit = self::TOPLIMIT) {
-        $list = $this->themes->getThemeAnalyzers($theme);
-        $list = makeList($list);
-
-        $query = "SELECT file, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY file
-                    ORDER BY number DESC ";
-        if ($limit !== null) {
-            $query .= " LIMIT ".$limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('file'  => $row['file'],
-                            'value' => $row['number']);
-        }
-
-        return $data;
-    }
-
     protected function getAnalyzersCountTheme($theme, $limit) {
         $list = $this->themes->getThemeAnalyzers($theme);
         $list = makeList($list);
