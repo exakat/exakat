@@ -50,7 +50,7 @@ class AccessPrivate extends Analyzer {
              ->inIs('METHOD')
              ->outIs('CLASS')
              ->tokenIs(self::$STATICCALL_TOKEN)
-             ->atomIsNot(array('Parent', 'Static', 'Self'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->isNotLocalClass()
              ->classDefinition()
              ->goToAllParents(self::INCLUDE_SELF)
@@ -102,7 +102,7 @@ class AccessPrivate extends Analyzer {
              ->inIs('MEMBER')
              ->outIs('CLASS')
              ->tokenIs(self::$STATICCALL_TOKEN)
-             ->atomIsNot(array('Parent', 'Static', 'Self'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->isNotLocalClass()
 
              ->goToClass()

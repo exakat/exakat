@@ -35,8 +35,6 @@ use Exakat\Tasks\Tasks;
 class SplitGraphson {
     const CSV_SEPARATOR = ',';
 
-    private $file_saved = 0;
-
     private static $count = -1; // id must start at 0 in batch-import
 
     private $tokenCounts   = array('Project' => 1);

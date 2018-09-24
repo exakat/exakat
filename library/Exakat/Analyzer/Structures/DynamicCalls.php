@@ -82,7 +82,7 @@ class DynamicCalls extends Analyzer {
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_OPEN_BRACKET'))
-             ->atomIsNot(array('Static', 'Parent', 'Self'))
+             ->atomIsNot(self::$RELATIVE_CLASS)
              ->back('first');
         $this->prepareQuery();
 

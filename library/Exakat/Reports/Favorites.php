@@ -24,8 +24,6 @@
 namespace Exakat\Reports;
 
 class Favorites extends Reports {
-    private $cachedData = '';
-
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'favorites';
 

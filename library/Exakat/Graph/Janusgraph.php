@@ -34,10 +34,6 @@ class Janusgraph extends Graph {
     
     private $client = null;
     
-    private $scriptDir  = '';
-    private $neo4j_host = '';
-    private $neo4j_auth = '';
-    
     private $status     = self::UNCHECKED;
     
     private $log        = null;

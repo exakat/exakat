@@ -35,8 +35,6 @@ class Tinkergraph extends Graph {
     
     private $status     = self::UNCHECKED;
     
-    private $log        = null;
-    
     public function __construct($config) {
         parent::__construct($config);
 

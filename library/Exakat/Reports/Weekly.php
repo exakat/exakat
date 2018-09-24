@@ -70,12 +70,6 @@ class Weekly extends Ambassador {
                             'Go further',
                           );
 
-    private $names =  array(self::G_CRITICAL  => 'Critical',
-                            self::G_ERROR     => 'Error',
-                            self::G_WARNING   => 'Warning',
-                            self::G_NOTICE    => 'Notice',
-                            self::G_NONE      => 'OK',     );
-    
     private $grading       = array();
     private $results       = null;
     private $resultsCounts = null;

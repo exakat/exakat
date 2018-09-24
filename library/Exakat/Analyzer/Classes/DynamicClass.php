@@ -27,18 +27,21 @@ use Exakat\Analyzer\Analyzer;
 
 class DynamicClass extends Analyzer {
     public function analyze() {
+        // $class::method()
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
+             ->atomIs(self::$CONTAINERS)
              ->back('first');
         $this->prepareQuery();
 
+        // $class::$property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
+             ->atomIs(self::$CONTAINERS)
              ->back('first');
         $this->prepareQuery();
 
+        // $class::constant
         $this->atomFunctionIs('\\constant')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
