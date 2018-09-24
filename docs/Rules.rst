@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 17 Sep 2018 12:53:44 +0000
-.. comment: Generation hash : 1fc34f35a96179f0bb83163f6bd81c46f8575ae0
+.. comment: Generation date : Mon, 24 Sep 2018 08:18:46 +0000
+.. comment: Generation hash : 6c4304c9a46bfbd5c40b41135e5c5a7fd001f1cf
 
 
 .. _$http\_raw\_post\_data:
@@ -123,7 +123,7 @@ $this Is Not An Array
 
 ``$this`` variable represents the current object and it is not an array. 
 
-This is unnless the class (or its parents) has the ``ArrayAccess`` interface, or extends ``ArrayObject`` or ``SimpleXMLElement``.
+This is unless the class (or its parents) has the ``ArrayAccess`` interface, or extends ``ArrayObject`` or ``SimpleXMLElement``.
 
 .. code-block:: php
 
@@ -1777,11 +1777,11 @@ Avoid get_class()
 See also `get_class <http://php.net/get_class>`_ and 
          `Type Operators <http://php.net/`'instanceof <http://php.net/manual/en/language.operators.type.php>`_>`_.
 
-+------------+--------------------------+
-| Short name | Structures/UseInstanceof |
-+------------+--------------------------+
-| Themes     | none                     |
-+------------+--------------------------+
++------------+--------------------------------+
+| Short name | Structures/UseInstanceof       |
++------------+--------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Analyze` |
++------------+--------------------------------+
 
 
 
@@ -2539,7 +2539,7 @@ Callback Needs Return
 #####################
 
 
-When used with array_map functions, the callback must return something. 
+When used with `'array_map() <http://www.php.net/array_map>`_ functions, the callback must return something. This return may be in the form of a ``return`` statement, a global variable or a parameter with a reference. All those solutions extract information from the callback. 
 
 .. code-block:: php
 
@@ -2551,7 +2551,18 @@ When used with array_map functions, the callback must return something.
    // This return void for every element
    $filtered = array_filter($array, function ($x) {return ; });
    
+   // costly 'array_sum()
+   $sum = 0;
+   $filtered = array_filter($array, function ($x) use (&$sum) {$sum += $x; });
+   
+   // costly 'array_sum()
+   global $sum = 0;
+   $filtered = array_filter($array, function () {global $sum; $sum += $x; });
+   
    ?>
+
+
+See also `array_map <http://php.net/array_map>`_.
 
 +------------+-------------------------------+
 | Short name | Functions/CallbackNeedsReturn |
@@ -10509,7 +10520,7 @@ Multiple Constant Definition
 
 Some constants are defined several times in your code. This will lead to a fatal error, if they are defined during the same execution. 
 
-Multiple definitions may happens at boostrap, when the application code is collecting information about the current environnement. It may also happen at inclusion time, which one set of constant being loaded, while other definition are not, avoiding conflict. Both are false positive. 
+Multiple definitions may happens at bootstrap, when the application code is collecting information about the current environment. It may also happen at inclusion time, which one set of constant being loaded, while other definition are not, avoiding conflict. Both are false positive. 
 
 .. code-block:: php
 
@@ -10524,11 +10535,13 @@ Multiple definitions may happens at boostrap, when the application code is colle
    
    ?>
 
-+------------+--------------------------------------+
-| Short name | Constants/MultipleConstantDefinition |
-+------------+--------------------------------------+
-| Themes     | :ref:`Analyze`                       |
-+------------+--------------------------------------+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Constants/MultipleConstantDefinition                                                                       |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                             |
++------------+------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`dolibarr-constants-multipleconstantdefinition`, :ref:`openconf-constants-multipleconstantdefinition` |
++------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -10570,7 +10583,9 @@ Multiple Exceptions Catch()
 ###########################
 
 
-Starting with PHP 7.1, it is possible to have several distinct exceptions class caught by the same catch, preventing code repetition. 
+It is possible to have several distinct exceptions class caught by the same catch, preventing code repetition. 
+
+This is a new feature since PHP 7.1.
 
 .. code-block:: php
 
@@ -10603,7 +10618,7 @@ Starting with PHP 7.1, it is possible to have several distinct exceptions class 
    ?>
 
 
-This is a backward incompabitible feature of PHP 7.1.
+This is a backward incompatible feature of PHP 7.1.
 
 +------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Exceptions/MultipleCatch                                                                                                              |
@@ -14715,11 +14730,11 @@ If the array has to be completed rather than created, it is also faster to use +
    
    ?>
 
-+------------+--------------------------------------------------------+
-| Short name | Arrays/ShouldPreprocess                                |
-+------------+--------------------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Suggestions` |
-+------------+--------------------------------------------------------+
++------------+-------------------------+
+| Short name | Arrays/ShouldPreprocess |
++------------+-------------------------+
+| Themes     | none                    |
++------------+-------------------------+
 
 
 
@@ -14752,11 +14767,11 @@ The following expression are made of literals or already known values : they may
 
 By doing so, this will reduce the amount of work of PHP.
 
-+------------+-----------------------------+
-| Short name | Structures/ShouldPreprocess |
-+------------+-----------------------------+
-| Themes     | none                        |
-+------------+-----------------------------+
++------------+--------------------------------------------------------+
+| Short name | Structures/ShouldPreprocess                            |
++------------+--------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions`, :ref:`Suggestions` |
++------------+--------------------------------------------------------+
 
 
 
@@ -17914,11 +17929,11 @@ This analysis is case-sensitive.
 
 See also `#QuandLeDevALaFleme <https://twitter.com/bsmt_nevers/status/949238391769653249>`_.
 
-+------------+--------------------------------------------------+
-| Short name | Variables/StrangeName                            |
-+------------+--------------------------------------------------+
-| Themes     | :ref:`Wordpress`, :ref:`Analyze`, :ref:`Analyze` |
-+------------+--------------------------------------------------+
++------------+-----------------------+
+| Short name | Variables/StrangeName |
++------------+-----------------------+
+| Themes     | none                  |
++------------+-----------------------+
 
 
 
@@ -17954,11 +17969,11 @@ Those errors most often originate from typos, or quick fixes that 'don't require
    
    ?>
 
-+------------+---------------------+
-| Short name | Classes/StrangeName |
-+------------+---------------------+
-| Themes     | none                |
-+------------+---------------------+
++------------+--------------------------------------------------+
+| Short name | Classes/StrangeName                              |
++------------+--------------------------------------------------+
+| Themes     | :ref:`Wordpress`, :ref:`Analyze`, :ref:`Analyze` |
++------------+--------------------------------------------------+
 
 
 
@@ -18602,7 +18617,7 @@ The ``throw`` keyword expects to use an exception. Calling a function to prepare
    ?>
 
 
-When the ``new`` keyword is forgotten, then the class constructor is used as a functionname, and now exception is emitted, but an ``Undefined function`` fatal error is emitted. 
+When the ``new`` keyword is forgotten, then the class constructor is used as a function name, and now exception is emitted, but an ``Undefined function`` fatal error is emitted. 
 
 See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
 
@@ -18622,7 +18637,7 @@ Throw In Destruct
 #################
 
 
-According to the manual, 'Attempting to throw an exception from a destructor (called in the time of script termination) causes a fatal error.'
+According to the manual, ``Attempting to throw an exception from a destructor (called in the time of script termination) causes a fatal error.``
 
 The destructor may be called during the lifespan of the script, but it is not certain. If the exception is thrown later, the script may end up with a fatal error. 
 
@@ -19358,7 +19373,7 @@ Undefined Caught Exceptions
 
 Those are exceptions that are caught in the code, but are not defined in the application. 
 
-They may be externally defined, such as in core PHP, extensions or libraries. Make sure those exceptions are usefull to your application : otherwise, they are dead code.
+They may be externally defined, such as in core PHP, extensions or libraries. Make sure those exceptions are useful to your application : otherwise, they are dead code.
 
 .. code-block:: php
 
@@ -19824,7 +19839,7 @@ Undefined Parent
 
 List of properties and methods that are accessed using ``parent`` keyword but are not defined in the parent class. 
 
-This will be compilable but will yield a fatal error during execution.
+This may compile but, eventually yield a fatal error during execution.
 
 .. code-block:: php
 
@@ -21617,12 +21632,12 @@ Use Instanceof
 ##############
 
 
-The `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is a more precise alternative to `'is_object() <http://www.php.net/is_object>`_. It is also faster.
+The ``instanceof`` operator is a more precise alternative to ``is_object()``. It is also faster.
 
 `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ checks for an variable to be of a class or its parents or the interfaces it implements. 
-Once `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ has been used, the actual attributes available (properties, constants, methods) are known, unlike with `'is_object() <http://www.php.net/is_object>`_.
+Once ``instanceof`` has been used, the actual attributes available (properties, constants, methods) are known, unlike with ``is_object()``.
 
-Last, `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ may be upgraded to Typehint, by moving it to the method signature. 
+Last, ``instanceof`` may be upgraded to Typehint, by moving it to the method signature. 
 
 .. code-block:: php
 
@@ -21655,9 +21670,9 @@ Last, `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ may 
    ?>
 
 
-`'instanceof <http://php.net/manual/en/language.operators.type.php>`_ and `'is_object() <http://www.php.net/is_object>`_ may not be always interchangeable. Consider using `'isset <http://www.php.net/isset>`_ on a known property for a simple check on object. You may also consider `'is_string() <http://www.php.net/is_string>`_, `'is_integer() <http://www.php.net/is_integer>`_ or `'is_scalar() <http://www.php.net/is_scalar>`_, in particular instead of !`'is_object() <http://www.php.net/is_object>`_.
+``instanceof`` and ``is_object()`` may not be always interchangeable. Consider using `'isset <http://www.php.net/isset>`_ on a known property for a simple check on object. You may also consider `'is_string() <http://www.php.net/is_string>`_, `'is_integer() <http://www.php.net/is_integer>`_ or `'is_scalar() <http://www.php.net/is_scalar>`_, in particular instead of ``!`'is_object() <http://www.php.net/is_object>`_``.
 
-The `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is also faster than the `'is_object() <http://www.php.net/is_object>`_ functioncall. 
+The ``instanceof`` operator is also faster than the ``is_object()`` functioncall. 
 
 See also `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_ and 
          `is_object <http://php.net/manual/en/function.is-object.php>`_.
@@ -21665,7 +21680,7 @@ See also `Type Operators <http://php.net/manual/en/language.operators.type.php#l
 +------------+-----------------------------------------------------------------------------+
 | Short name | Classes/UseInstanceof                                                       |
 +------------+-----------------------------------------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Analyze`                                              |
+| Themes     | none                                                                        |
 +------------+-----------------------------------------------------------------------------+
 | Examples   | :ref:`teampass-classes-useinstanceof`, :ref:`zencart-classes-useinstanceof` |
 +------------+-----------------------------------------------------------------------------+
@@ -24034,7 +24049,7 @@ Wrong fopen() Mode
 Wrong file opening for `'fopen() <http://www.php.net/fopen>`_.
 
 `'fopen() <http://www.php.net/fopen>`_ has a few modes, as described in the documentation : 'r', 'r+', for reading;  'w', 'w+' for writing; 'a', 'a+' for appending; 'x', 'x+' for modifying; 'c', 'c+' for writing and locking, 't' for text files and windows only.
-An optional 'b' may be used to make the `'fopen() <http://www.php.net/fopen>`_ call more portable and binary safe. 
+An optional 'b' may be used to make the `'fopen() <http://www.php.net/fopen>`_ call more portable and binary safe. Another optional 't' may be used to make the `'fopen() <http://www.php.net/fopen>`_ call process automatically text input : this one should be avoided. 
 
 .. code-block:: php
 
@@ -24054,11 +24069,13 @@ An optional 'b' may be used to make the `'fopen() <http://www.php.net/fopen>`_ c
 
 Any other values are not understood by PHP.
 
-+------------+----------------+
-| Short name | Php/FopenMode  |
-+------------+----------------+
-| Themes     | :ref:`Analyze` |
-+------------+----------------+
++------------+--------------------------------------------------------------+
+| Short name | Php/FopenMode                                                |
++------------+--------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                               |
++------------+--------------------------------------------------------------+
+| Examples   | :ref:`tikiwiki-php-fopenmode`, :ref:`humo-gen-php-fopenmode` |
++------------+--------------------------------------------------------------+
 
 
 

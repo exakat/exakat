@@ -307,6 +307,8 @@ A number of applications were scanned in order to find real life examples of pat
 * `WordPress <https://www.wordpress.org/>`_
 * `Magento <https://magento.com/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
+* `Dolibarr <https://www.dolibarr.org/>`_
+* `OpenConf <https://www.openconf.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
 * `Tikiwiki <https://tiki.org/>`_
 * `NextCloud <https://nextcloud.com/>`_
@@ -320,14 +322,13 @@ A number of applications were scanned in order to find real life examples of pat
 * `Typo3 <https://typo3.org/>`_
 * `xataface <http://xataface.com/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
-* `OpenConf <https://www.openconf.com/>`_
 * `Dolphin <https://www.boonex.com/>`_
 * `XOOPS <https://xoops.org/>`_
 * `Woocommerce <https://woocommerce.com/>`_
 * `Contao <https://contao.org/en/>`_
 * `ChurchCRM <http://churchcrm.io/>`_
 * `Zurmo <http://zurmo.org/>`_
-* `Dolibarr <https://www.dolibarr.org/>`_
+* `HuMo-Gen <http://humogen.com/>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * phpDocumentor
 * `TeamPass <https://teampass.net/>`_
@@ -436,7 +437,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.3.8
 
-  * Constant Sensitivity Preference (Constants/DefineInsensitivePreference)
+  * Constant Case Preference (Constants/DefineInsensitivePreference)
   * Detect Current Class (Php/DetectCurrentClass ; Suggestions)
   * Use is_countable (Php/CouldUseIsCountable ; Suggestions)
 
@@ -2028,7 +2029,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-28 PHP error message detailled here : 
+30 PHP error message detailled here : 
 
 * "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
 * Access level to Bar::$publicProperty must be public (as in class Foo)
@@ -2036,10 +2037,12 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * An alias (%s) was defined for method %s(), but this method does not exist
 * Argument 1 passed to foo() must be of the type integer, string given
 * Call to undefined function
+* Call to undefined method theParent::bar()
 * Can't inherit abstract function A::bar()
 * Cannot access static:: when no class scope is active
 * Cannot override final method BaseClass::moreTesting()
 * Cannot use isset() on the result of an expression (you can use "null !== expression" instead)
+* Cannot use object of type Foo as array
 * Class 'PARENT' not found
 * Class 'x' not found
 * Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A::aFoo)
@@ -2194,6 +2197,7 @@ List of external links mentionned in this documentation.
 * `composer <https://getcomposer.org/>`_
 * `Constant definition <http://php.net/const>`_
 * `Constant Scalar Expressions <https://wiki.php.net/rfc/const_scalar_exprs>`_
+* `constant() <http://php.net/constant>`_
 * `Constants <http://php.net/manual/en/language.constants.php>`_
 * `Constructors and Destructors <http://php.net/manual/en/language.oop5.decon.php>`_
 * `Constructors and Destructors ¶ <http://php.net/manual/en/language.oop5.decon.php>`_
@@ -2289,8 +2293,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Flexible Heredoc and Nowdoc Syntaxes <https://wiki.php.net/rfc/flexible_heredoc_nowdoc_syntaxes>`_
@@ -2381,8 +2385,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2463,8 +2467,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: is_countable <https://wiki.php.net/rfc/is-countable>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
-* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
@@ -2510,7 +2514,7 @@ List of external links mentionned in this documentation.
 * `setcookie <http://www.php.net/setcookie>`_
 * `setlocale <http://php.net/setlocale>`_
 * `shell_exec <http://www.php.net/shell_exec>`_
-* `Simplexml <http://php.net/manual/en/book.simplexml.php>`_
+* `SimpleXML <http://php.net/manual/en/book.simplexml.php>`_
 * `Single Function Exit Point <http://wiki.c2.com/?SingleFunctionExitPoint>`_
 * `Slim <https://www.slimframework.com/>`_
 * `SlimPHP <https://www.slimframework.com/>`_
@@ -2522,8 +2526,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_

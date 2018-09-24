@@ -271,6 +271,81 @@ MediaWiki
     	],
         // big array continues
 
+Multiple Constant Definition
+============================
+
+.. _dolibarr-constants-multipleconstantdefinition:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`multiple-constant-definition`, in htdocs/main.inc.php:914. 
+
+All is documented here : 'Constants used to defined number of lines in textarea'. Constants are not changing during an execution, and this allows the script to set values early in the process, and have them used later, in the templates. Yet, building constants dynamically may lead to confusion, when developpers are not aware of the change. 
+
+.. code-block:: php
+
+    // Constants used to defined number of lines in textarea
+    if (empty($conf->browser->firefox))
+    {
+    	define('ROWS_1',1);
+    	define('ROWS_2',2);
+    	define('ROWS_3',3);
+    	define('ROWS_4',4);
+    	define('ROWS_5',5);
+    	define('ROWS_6',6);
+    	define('ROWS_7',7);
+    	define('ROWS_8',8);
+    	define('ROWS_9',9);
+    }
+    else
+    {
+    	define('ROWS_1',0);
+    	define('ROWS_2',1);
+    	define('ROWS_3',2);
+    	define('ROWS_4',3);
+    	define('ROWS_5',4);
+    	define('ROWS_6',5);
+    	define('ROWS_7',6);
+    	define('ROWS_8',7);
+    	define('ROWS_9',8);
+    }
+
+
+--------
+
+
+.. _openconf-constants-multipleconstantdefinition:
+
+OpenConf
+^^^^^^^^
+
+:ref:`multiple-constant-definition`, in modules/request.php:71. 
+
+The constant is build according to the situation, in the part of the script (file request.php). This hides the actual origin of the value, but keeps the rest of the code simple enough. Just keep in mind that this constant may have different values.
+
+.. code-block:: php
+
+    if (isset($_GET['ocparams']) && !empty($_GET['ocparams'])) {
+    		$params = '';
+    		if (preg_match_all(/(\w+)--(\w+)_-/, $_GET['ocparams'], $matches)) {
+    			foreach ($matches[1] as $idx => $m) {
+    				if (($m != 'module') && ($m != 'action') && preg_match(/^[\w-]+$/, $m)) {
+    					$params .= '&' . $m . '=' . urlencode($matches[2][$idx]);
+    					$_GET[$m] = $matches[2][$idx];
+    				}
+    			}
+    		}
+    		unset($_GET['ocparams']);
+    		define('OCC_SELF', $_SERVER['PHP_SELF'] . '?module=' . $_REQUEST['module'] . '&action=' . $_GET['action'] . $params);
+    	} elseif (isset($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], '?')) {
+    		define('OCC_SELF', htmlspecialchars($_SERVER['REQUEST_URI']));
+    	} elseif (isset($_SERVER['QUERY_STRING']) && strstr($_SERVER['QUERY_STRING'], '&')) {
+    		define('OCC_SELF', $_SERVER['PHP_SELF'] . '?' . htmlspecialchars($_SERVER['QUERY_STRING']));
+    	} else {
+    		err('This server does not support REQUEST_URI or QUERY_STRING','Error');
+    	}
+
 Wrong Optional Parameter
 ========================
 
@@ -1213,6 +1288,39 @@ setlocale() may be called with null or '' (empty string), and will set values fr
     $loc = setlocale(LC_TIME, 0);
             if ($loc !== FALSE) echo ' - ' . $loc; //what is the locale in use?
 
+Wrong fopen() Mode
+==================
+
+.. _tikiwiki-php-fopenmode:
+
+Tikiwiki
+^^^^^^^^
+
+:ref:`wrong-fopen()-mode`, in lib/tikilib.php:6777. 
+
+This fopen() mode doesn't exists. Use 'w' instead.
+
+.. code-block:: php
+
+    fopen('php://temp', 'rw');
+
+
+--------
+
+
+.. _humo-gen-php-fopenmode:
+
+HuMo-Gen
+^^^^^^^^
+
+:ref:`wrong-fopen()-mode`, in include/phprtflite/lib/PHPRtfLite/StreamOutput.php:77. 
+
+This fopen() mode doesn't exists. Use 'w' instead.
+
+.. code-block:: php
+
+    fopen($this->_filename, 'wr', false)
+
 Use random_int()
 ================
 
@@ -1531,7 +1639,7 @@ TeamPass
 
 :ref:`use-instanceof`, in includes/libraries/Database/Meekrodb/db.class.php:506. 
 
-In this code, is_object() and instanceof have the same basic : they both check that $ts is an object. In fact, instanceof is more precise, and give more information about the variable. 
+In this code, ``is_object()`` and ``instanceof`` have the same basic : they both check that $ts is an object. In fact, ``instanceof`` is more precise, and give more information about the variable. 
 
 .. code-block:: php
 
@@ -1551,7 +1659,7 @@ Zencart
 
 :ref:`use-instanceof`, in includes/modules/payment/firstdata_hco.php:104. 
 
-In this code, is_object() is used to check the status of the order. Possibly, $order is false or null in case of incompatible status. Yet, when $object is an object, and in particular being a global that may be assigned anywhere else in the code, it seems that the method 'update_status' is magically always available. Here, using instance of to make sure that $order is an 'paypal' class, or a 'storepickup' or any of the payment class.  
+In this code, ``is_object()`` is used to check the status of the order. Possibly, $order is false or null in case of incompatible status. Yet, when $object is an object, and in particular being a global that may be assigned anywhere else in the code, it seems that the method 'update_status' is magically always available. Here, using instance of to make sure that $order is an 'paypal' class, or a 'storepickup' or any of the payment class.  
 
 .. code-block:: php
 

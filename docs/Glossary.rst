@@ -73,6 +73,7 @@ Glossary
     + `array_map()`
 
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
+      + :ref:`Callback Needs Return <callback-needs-return>`
       + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
       + :ref:`Slow Functions <slow-functions>`
 
@@ -101,6 +102,7 @@ Glossary
     + `array_sum()`
 
       + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
+      + :ref:`Callback Needs Return <callback-needs-return>`
       + :ref:`For Using Functioncall <for-using-functioncall>`
       + :ref:`Static Loop <static-loop>`
 

@@ -315,7 +315,7 @@ Command
 #######
 ::
 
-    exakat init -p <project> [-R vcs_url] [-git|-svn|-bzr|-hg|-composer|-symlink|-copy|-tgz|-zip] [-v]
+    exakat init -p <project> [-R vcs_url] [-git|-svn|-bzr|-hg|-composer|-symlink|-copy|-tgz|-zip] [-v] [-D]
 
 Options
 #######
@@ -343,11 +343,15 @@ Options
 +-----------+-----+-----------------------------------------------------------------------------+
 | -v        | No  | Verbose mode                                                                |
 +-----------+-----+-----------------------------------------------------------------------------+
+| -D        | No  | First erase any pre-existing project with the same name                     |
++-----------+-----+-----------------------------------------------------------------------------+
 
 Tips
 ####
 
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
+* Default VCS used is git. 
+* `-D` removes any previous project before doing the init.
 
 Examples
 ########

@@ -234,20 +234,20 @@ ignore_dirs and include_dirs are the option used to select files within a folder
 
 * From the full list of files, ignore_dirs[] is applied, then include_dirs is applied. The remaining list is processed.
 * ignore one file : 
-| `ignore_dirs[] = "/path/to/file.php"`
+  `ignore_dirs[] = "/path/to/file.php"`
 
 * ignore one dir : 
-| `ignore_dirs[] = "/path/to/dir/"`
+  `ignore_dirs[] = "/path/to/dir/"`
 
 * ignore siblings but include one dir : 
-| `ignore_dirs[] = "/path/to/parent/";`
-| `include_dirs[] = "/path/to/parent/dir/"`
+  `ignore_dirs[] = "/path/to/parent/";`
+  `include_dirs[] = "/path/to/parent/dir/"`
 
 * ignore every name containing 'test' : 
-| `ignore_dirs[] = "test";`
+  `ignore_dirs[] = "test";`
 
 * only include one dir (and exclude the rest): 
-| `include_dirs[] = "/path/to/dir/";`
+  `include_dirs[] = "/path/to/dir/";`
 
 * omitting include_dirs defaults to `"include_dirs[] = ""`
 * omitting ignore_dirs defaults to `"ignore_dirs[] = ""`
