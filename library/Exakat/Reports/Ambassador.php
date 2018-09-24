@@ -1814,7 +1814,7 @@ SQL;
         $dataMinor    = array();
         $severities = $this->getSeveritiesNumberBy('file');
         foreach ($data as $value) {
-            $xAxis[] = "'".$value['file']."'";
+            $xAxis[] = "'".addslashes($value['file'])."'";
             $dataCritical[] = empty($severities[$value['file']]['Critical']) ? 0 : $severities[$value['file']]['Critical'];
             $dataMajor[]    = empty($severities[$value['file']]['Major'])    ? 0 : $severities[$value['file']]['Major'];
             $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
@@ -1937,7 +1937,7 @@ SQL;
         $severities = $this->getSeveritiesNumberBy('analyzer');
         foreach ($data as $value) {
             $ini = $this->getDocs($value['analyzer']);
-            $xAxis[] = "'".$ini['name']."'";
+            $xAxis[] = "'".addslashes($ini['name'])."'";
             $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
             $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
             $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];

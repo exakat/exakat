@@ -270,7 +270,7 @@ MENU;
         $this->usedAnalyzer = array_merge($this->usedAnalyzer, $this->weeks["$year-$week"]->analysis);
 
         $begin = date('M jS, Y', strtotime($year."W".$week."1"));
-        $end = date('M jS, Y', strtotime($year."W".$week."7"));
+        $end   = date('M jS, Y', strtotime($year."W".$week."7"));
         $titleDate = $year.' '.ordinal($week)." week";
 
         $finalHTML = str_replace('<WEEK>', $titleDate, $html);
@@ -361,7 +361,6 @@ HTML;
         }
         
         $globalData = json_encode(array_values($globalData));
-
 
         $blocjs = <<<JAVASCRIPT
   <script>
