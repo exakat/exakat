@@ -1,4 +1,4 @@
-Version 1.4.6 (Dipankara, coming up)
+Version 1.4.7 (Maitreya, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,29 @@ Version 1.4.6 (Dipankara, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.4.6 (Dipankara, 2018-09-24)
++ Architecture
+    + Various code refactorisations
+    + Migration to PHPUnit 7.3.5
+    + Fixed filenames case
+    + Better handling of VCS
+    + More validations for project names
+    + More docs
++ Report
+    + Ambassador/Weekly : fixed ' in analyser titles
++ Analyzer
+    + Upgraded analysis : Fopen mode accepts 'r+b'
+    + Upgraded analysis : Unused Traits
+    + Upgraded analysis : Undefined Variables
+    + Checked unit tests : 3020 / 3033 test pass (99% pass)
++ Tokenizer
+    + New analysis : report literal used with reference
+    + Added support for boolval to Keyvalue
+    + Fixed support for boolval to Arraylist
+    + Added DEFINITION to static methods
+    + Added Variabledefinition for local variables
+    + Fixed bug in Not
 
 Version 1.4.5 (Guanyin Bodhisattva, 2018-09-17)
 + Architecture
