@@ -119,7 +119,7 @@
                 "file":[".scrutinizer.yml"]},
  "semantic versioning":{"homepage":"http://semver.org/",
                         "file":[".semver"]},
- "spip":{"homepage":"http://www.spip.net/",
+ "SPIP":{"homepage":"http://www.spip.net/",
            "file":["paquet.xml"]},
  "stickler":{"homepage":"https://stickler-ci.com/docs",
            "file":[".stickler.yml"]},
