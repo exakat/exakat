@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 24 Sep 2018 08:18:46 +0000
-.. comment: Generation hash : 6c4304c9a46bfbd5c40b41135e5c5a7fd001f1cf
+.. comment: Generation date : Tue, 25 Sep 2018 17:25:12 +0000
+.. comment: Generation hash : 4186848f96be3cff5f52d9fffc9a791be6aafb5c
 
 
 .. _$http\_raw\_post\_data:
@@ -179,7 +179,7 @@ While executing a static method, ``$this`` is actually set to ``NULL``.
    
        // Static methods should use static properties
        static public function 'count() {
-           return self::$staticProperty++;
+           return self\:\:$staticProperty++;
        }
        
        // Static methods can't use $this
@@ -234,13 +234,13 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 
 .. _\:\:class:
 
-::class
-#######
+\:\:class
+#########
 
 
 PHP has a special class constant to hold the name of the class : 'class' keyword. It represents the classname that is used in the left part of the operator.
 
-Using '::class' is safer than relying on a string. It does adapt if the class's name or its namespace is changed'. It is also faster, though it is a micro-optimisation. 
+Using '\:\:class' is safer than relying on a string. It does adapt if the class's name or its namespace is changed'. It is also faster, though it is a micro-optimisation. 
 
 It is introduced in PHP 5.5.
 
@@ -249,7 +249,7 @@ It is introduced in PHP 5.5.
    <?php
    class foo {
        public function bar( ) {
-           echo ClassName::class; 
+           echo ClassName\:\:class; 
        }
    }
    
@@ -316,7 +316,7 @@ Abstract Or Implements
 
 A class must implements all abstract methods of it parent, or be abstract too. 
 
-While PHP lints this code, it won't execute it and stop with a Fatal Error : ``Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A::aFoo)``.
+While PHP lints this code, it won't execute it and stop with a Fatal Error : ``Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A\:\:aFoo)``.
 
 .. code-block:: php
 
@@ -338,11 +338,11 @@ While PHP lints this code, it won't execute it and stop with a Fatal Error : ``C
 
 See also `Class Abstraction <http://php.net/abstract>`_.
 
-+------------+------------------------------+
-| Short name | Classes/AbstractOrImplements |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++------------+----------------------------------------+
+| Short name | Classes/AbstractOrImplements           |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec` |
++------------+----------------------------------------+
 
 
 
@@ -917,7 +917,7 @@ Try to keep the methods simple, and unique. Consider renaming the methods and pr
    
    $c->mixedStaticMethod();
    // or 
-   $c::mixedStaticMethod();
+   $c\:\:mixedStaticMethod();
    
    ?>
 
@@ -956,7 +956,7 @@ It is recommended to handle the same properties in the same way across classes, 
        private $address;
    }
    
-   $someone = Human::load(123);
+   $someone = Human\:\:load(123);
    echo 'Hello, '.$someone->name;
    
    ?>
@@ -1096,7 +1096,7 @@ Properties may be assigned default values at declaration time. Such values may b
            $this->propertyWithoutDefault = 1;
    
            // Static expressions are available to set up simple computation at definition time.
-           $this->propertyWithoutDefault = OtherClass::CONSTANT + 1;
+           $this->propertyWithoutDefault = OtherClass\:\:CONSTANT + 1;
    
            // Arrays, just like scalars, may be set at definition time
            $this->propertyWithoutDefault = [1,2,3];
@@ -1320,7 +1320,7 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
    class x {
        const ARRAY = array(1,2,3,4,5,6,7,8,9,10,11);
        function foo() {
-           $array = self::ARRAY;
+           $array = self\:\:ARRAY;
            //more code
        }
    }
@@ -2736,11 +2736,11 @@ See also `Throwable <http://php.net/manual/en/class.throwable.php>`_,
          `Exception <http://php.net/manual/en/class.exception.php>`_ and
          `Error <http://php.net/manual/en/class.error.php>`_.
 
-+------------+----------------------+
-| Short name | Exceptions/CantThrow |
-+------------+----------------------+
-| Themes     | :ref:`Analyze`       |
-+------------+----------------------+
++------------+----------------------------------------+
+| Short name | Exceptions/CantThrow                   |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec` |
++------------+----------------------------------------+
 
 
 
@@ -2759,7 +2759,7 @@ Inheriting abstract methods was made available in PHP 7.2. In previous versions,
    abstract class A           { abstract function bar(stdClass $x);  }
    abstract class B extends A { abstract function bar($x): stdClass; }
    
-   //   Fatal error: Can't inherit abstract function A::bar()
+   //   Fatal error: Can't inherit abstract function A\:\:bar()
    ?>
 
 
@@ -2781,14 +2781,14 @@ Cant Instantiate Class
 
 When constructor is not public, it is not possible to instantiate such a class. Either this is a conception choice, or there are factories to handle that. Either way, it is not possible to call new on such class. 
 
-PHP reports an error similar to this one : 'Call to private Y::`'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ from invalid context'.
+PHP reports an error similar to this one : 'Call to private Y\:\:`'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ from invalid context'.
 
 .. code-block:: php
 
    <?php
    
    //This is the way to go
-   $x = X::factory();
+   $x = X\:\:factory();
    
    //This is not possible
    $x = new X();
@@ -3306,11 +3306,11 @@ Those classes are extending each other, creating an extension loop. PHP will yie
    
    ?>
 
-+------------+-------------------------+
-| Short name | Classes/MutualExtension |
-+------------+-------------------------+
-| Themes     | :ref:`Analyze`          |
-+------------+-------------------------+
++------------+----------------------------------------+
+| Short name | Classes/MutualExtension                |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec` |
++------------+----------------------------------------+
 
 
 
@@ -3360,7 +3360,7 @@ Performances : simplifying a closure tends to reduce the call time by 50%.
    $filtered = array_map(function ($x) { return $x->'strtoupper() ;}, $array);
    
    // Static methodcall example 
-   $filtered = array_map(function ($x) { return $x::'strtoupper() ;}, $array);
+   $filtered = array_map(function ($x) { return $x\:\:'strtoupper() ;}, $array);
    
    ?>
 
@@ -3589,7 +3589,7 @@ Concrete Visibility
 
 Methods that implements an interface in a class must be public. 
 
-PHP doesn't lint this, unless the interface and the class are in the same file. At execution, it stops immediately with a Fatal error : 'Access level to c::iPrivate() must be public (as in class i) ';
+PHP doesn't lint this, unless the interface and the class are in the same file. At execution, it stops immediately with a Fatal error : 'Access level to c\:\:iPrivate() must be public (as in class i) ';
 
 .. code-block:: php
 
@@ -3613,11 +3613,11 @@ PHP doesn't lint this, unless the interface and the class are in the same file. 
 
 See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_.
 
-+------------+-------------------------------+
-| Short name | Interfaces/ConcreteVisibility |
-+------------+-------------------------------+
-| Themes     | :ref:`Analyze`                |
-+------------+-------------------------------+
++------------+----------------------------------------+
+| Short name | Interfaces/ConcreteVisibility          |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec` |
++------------+----------------------------------------+
 
 
 
@@ -3727,7 +3727,7 @@ The array must be filled with other constants. It may also be build using the '+
    class X {
        const TWENTY_THREE = 23;
        const MORE_PRIMES = PRIMES + [11, 13, 17, 19];
-       const EVEN_MORE_PRIMES = self::MORE_PRIMES + [self::TWENTY_THREE];
+       const EVEN_MORE_PRIMES = self\:\:MORE_PRIMES + [self\:\:TWENTY_THREE];
    }
    
    ?>
@@ -3758,9 +3758,9 @@ A class or an interface only made up of constants. Constants usually have to be 
    
    class ConstantClass {
        const KBIT = 1000;
-       const MBIT = self::KBIT * 1000;
-       const GBIT = self::MBIT * 1000;
-       const PBIT = self::GBIT * 1000;
+       const MBIT = self\:\:KBIT * 1000;
+       const GBIT = self\:\:MBIT * 1000;
+       const PBIT = self\:\:GBIT * 1000;
    }
    
    ?>
@@ -4117,12 +4117,12 @@ As a general rule, it is recommended to make constant ``private`` by default, an
        
        function bar() {
            // PRIVATE CONSTANT may only be used in its class
-           echo self::PRIVATE_CONSTANT;
+           echo self\:\:PRIVATE_CONSTANT;
        }
    }
    
    // Other constants may be used anywhere
-   function x($a = foo::PUBLIC_CONSTANT) {
+   function x($a = foo\:\:PUBLIC_CONSTANT) {
        echo $a.' '.foo:PRE_71_CONSTANT;
    }
    
@@ -4173,19 +4173,19 @@ As a general rule, it is recommended to make constant 'private' by default, and 
    class foo2 extends foo {
        function bar() {
            // PROTECTED_CONSTANT may only be used in its class or its children
-           echo self::PROTECTED_CONSTANT;
+           echo self\:\:PROTECTED_CONSTANT;
        }
    }
    
    class foo3 extends foo {
        function bar() {
            // PROTECTED_CONSTANT may only be used in its class or any of its children
-           echo self::PROTECTED_CONSTANT;
+           echo self\:\:PROTECTED_CONSTANT;
        }
    }
    
    // Other constants may be used anywhere
-   function x($a = foo::PUBLIC_CONSTANT) {
+   function x($a = foo\:\:PUBLIC_CONSTANT) {
        echo $a.' '.foo:PRE_71_CONSTANT;
    }
    
@@ -4362,7 +4362,7 @@ Those arguments may use the callable Typehint.
 
 'callable' is a PHP keyword that represents callback functions. Those may be used in dynamic function call, like $function(); or as callback functions, like with `'array_map() <http://www.php.net/array_map>`_;
 
-callable may be a string representing a function name or a static call (including ::), an array with two elements, (a class or object, and a method), or a closure.
+callable may be a string representing a function name or a static call (including \:\:), an array with two elements, (a class or object, and a method), or a closure.
 
 When arguments are used to call a function, but are not marked with 'callable', they are reported by this analysis.
 
@@ -4780,15 +4780,15 @@ It is also routinely used in traits : there, ``self`` represents the class in wh
        const FOO = 1;
        
        public function bar() {
-           return self::FOO;
-   // same as return x::FOO;
+           return self\:\:FOO;
+   // same as return x\:\:FOO;
        }
    }
    
    ?>
 
 
-See also `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
+See also `Scope Resolution Operator (\:\:) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
 
 +------------+------------------------------------+
 | Short name | Classes/ShouldUseSelf              |
@@ -4978,7 +4978,7 @@ Since the availability of ``__autoload``, there is no need for that kind of code
    
    class X {
        function init() {
-           // myFunction is defined when and only if X::init() is called.
+           // myFunction is defined when and only if X\:\:init() is called.
            if (!function_exists('myFunction'){
                function myFunction($a) {
                    return $a + 1;
@@ -5144,10 +5144,10 @@ Deprecated Methodcalls in Cake 3.2
 
 According to the Cake Migration Guide, the following are deprecated and should be changed.
 
-* Shell::error()
-* Cake\Database\Expression\QueryExpression::type()
-* Cake\ORM\ResultSet::_calculateTypeMap()                 
-* Cake\ORM\ResultSet::_castValues()                       
+* Shell\:\:error()
+* Cake\Database\Expression\QueryExpression\:\:type()
+* Cake\ORM\ResultSet\:\:_calculateTypeMap()                 
+* Cake\ORM\ResultSet\:\:_castValues()                       
 
 See also `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_.
 
@@ -5167,7 +5167,7 @@ Deprecated Methodcalls in Cake 3.3
 
 According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_, the following are deprecated and should be changed.
 
-* Shell::error()
+* Shell\:\:error()
 
 +------------+---------------------------------+
 | Short name | Cakephp/Cake33DeprecatedMethods |
@@ -5185,8 +5185,8 @@ Deprecated Static calls in Cake 3.3
 
 According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_, the following are deprecated and should be changed.
 
-* Router::mapResources() is deprecated. Use routing scopes and $routes->resources() instead.
-* Router::redirect() is deprecated. Use routing scopes and $routes->redirect() instead.
+* Router\:\:mapResources() is deprecated. Use routing scopes and $routes->resources() instead.
+* Router\:\:redirect() is deprecated. Use routing scopes and $routes->redirect() instead.
 
 +------------+------------------------------------------+
 | Short name | Cakephp/Cake33DeprecatedStaticmethodcall |
@@ -5249,10 +5249,10 @@ Detect Current Class
 ####################
 
 
-Detecting the current class should be done with ::class operator.
+Detecting the current class should be done with \:\:class operator.
 
-`'__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_ may be replaced by ``self::class``. 
-get_called_class() may be replaced by ``static::class``. 
+`'__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_ may be replaced by ``self\:\:class``. 
+get_called_class() may be replaced by ``static\:\:class``. 
 
 `'__CLASS__ <http://php.net/manual/en/language.constants.predefined.php>`_ and get_called_class() are set to be deprecated in PHP 7.4. 
 
@@ -5263,10 +5263,10 @@ get_called_class() may be replaced by ``static::class``.
    class X {
        function foo() {
            echo '__CLASS__.\n;          // X
-           echo self::class.\n;        // X
+           echo self\:\:class.\n;        // X
            
            echo get_called_class().\n;  // Y
-           echo static::class.\n;       // Y
+           echo static\:\:class.\n;       // Y
        }
    }
    
@@ -5438,13 +5438,13 @@ See also `Error reporting <https://php.earth/docs/security/intro#error-reporting
 
 
 
-.. _don't-send-this-in-constructor:
+.. _don't-send-$this-in-constructor:
 
-Don't Send This In Constructor
-##############################
+Don't Send $this In Constructor
+###############################
 
 
-Don't use ``$this``` as an argument while in the `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_. Until the constructor is finished, the object is not finished, and may be in an instable state. Providing it to another code may lead to error. 
+Don't use ``$this`` as an argument while in the `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_. Until the constructor is finished, the object is not finished, and may be in an instable state. Providing it to another code may lead to error. 
 
 This is in particular true if the receiving structure put immediately the incoming objet to work, and not simply store it for later use. 
 
@@ -5497,11 +5497,13 @@ This is in particular true if the receiving structure put immediately the incomi
 
 See also `Don't pass this out of a constructor <http://www.javapractices.com/topic/TopicAction.do?Id=252>`_.
 
-+------------+-----------------------------------+
-| Short name | Classes/DontSendThisInConstructor |
-+------------+-----------------------------------+
-| Themes     | :ref:`Analyze`                    |
-+------------+-----------------------------------+
++------------+-------------------------------------------------------------------------------------------------------+
+| Short name | Classes/DontSendThisInConstructor                                                                     |
++------------+-------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                        |
++------------+-------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`woocommerce-classes-dontsendthisinconstructor`, :ref:`contao-classes-dontsendthisinconstructor` |
++------------+-------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6688,6 +6690,90 @@ This is a micro-optimisation. The difference may be visible with 200k rows fetch
 +------------+--------------------------------+
 | Themes     | :ref:`Performances`            |
 +------------+--------------------------------+
+
+
+
+.. _final-class-usage:
+
+Final Class Usage
+#################
+
+
+List of all final classes being used.
+
+final may be applied to classes and methods.
+
+.. code-block:: php
+
+   <?php
+   class BaseClass {
+      public function test() {
+          echo 'BaseClass\:\:test() called'.PHP_EOL;
+      }
+      
+      final public function moreTesting() {
+          echo 'BaseClass\:\:moreTesting() called'.PHP_EOL;
+      }
+   }
+   
+   class ChildClass extends BaseClass {
+      public function moreTesting() {
+          echo 'ChildClass\:\:moreTesting() called'.PHP_EOL;
+      }
+   }
+   // Results in Fatal error: Cannot override final method BaseClass\:\:moreTesting()
+   ?>
+
+
+See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_.
+
++------------+--------------------------------------------+
+| Short name | Classes/Finalclass                         |
++------------+--------------------------------------------+
+| Themes     | :ref:`ClassReview`, :ref:`LintButWontExec` |
++------------+--------------------------------------------+
+
+
+
+.. _final-methods-usage:
+
+Final Methods Usage
+###################
+
+
+List of all final methods being used.
+
+final may be applied to classes and methods.
+
+.. code-block:: php
+
+   <?php
+   class BaseClass {
+      public function test() {
+          echo 'BaseClass\:\:test() called'.PHP_EOL;
+      }
+      
+      final public function moreTesting() {
+          echo 'BaseClass\:\:moreTesting() called'.PHP_EOL;
+      }
+   }
+   
+   class ChildClass extends BaseClass {
+      public function moreTesting() {
+          echo 'ChildClass\:\:moreTesting() called'.PHP_EOL;
+      }
+   }
+   // Results in Fatal error: Cannot override final method BaseClass\:\:moreTesting()
+   ?>
+
+
+See also `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_.
+
++------------+--------------------------------------------+
+| Short name | Classes/Finalmethod                        |
++------------+--------------------------------------------+
+| Themes     | :ref:`LintButWontExec`, :ref:`ClassReview` |
++------------+--------------------------------------------+
 
 
 
@@ -8374,7 +8460,7 @@ See also `Object Inheritance <http://www.php.net/manual/en/language.oop5.inherit
 +------------+-----------------------------------------------+
 | Short name | Classes/IncompatibleSignature                 |
 +------------+-----------------------------------------------+
-| Themes     | :ref:`Analyze`                                |
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec`        |
 +------------+-----------------------------------------------+
 | Examples   | :ref:`suitecrm-classes-incompatiblesignature` |
 +------------+-----------------------------------------------+
@@ -9703,7 +9789,7 @@ Those collisions should be solved with a ``use`` expression. When they are not, 
    
    class D {
        use  A, B{
-           B::M 'insteadof A;
+           B\:\:M 'insteadof A;
        };
    }
    
@@ -9714,11 +9800,11 @@ The code above lints, but doesn't execute.
 
 See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
 
-+------------+------------------------------+
-| Short name | Traits/MethodCollisionTraits |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++------------+----------------------------------------+
+| Short name | Traits/MethodCollisionTraits           |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec` |
++------------+----------------------------------------+
 
 
 
@@ -9778,7 +9864,7 @@ Method Signature Must Be Compatible
 
 Make sure methods signature are compatible 
 
-PHP generates the infamous Fatal error at execution : ``Declaration of FooParent::Bar() must be compatible with FooChildren::Bar()``
+PHP generates the infamous Fatal error at execution : ``Declaration of FooParent\:\:Bar() must be compatible with FooChildren\:\:Bar()``
 
 .. code-block:: php
 
@@ -10830,7 +10916,7 @@ Must Call Parent Constructor
 ############################
 
 
-Some PHP native classes require a call to parent::`'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ to be stable. 
+Some PHP native classes require a call to parent\:\:`'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ to be stable. 
 
 As of PHP 7.3, two classes currently need that call : SplTempFileObject and SplFileObject.
 
@@ -10842,7 +10928,7 @@ The error is only emitted if the class is instantiated, and a parent class is ca
    
    class mySplFileObject extends \SplFileObject {
        public function '__construct()    { 
-           // Forgottent call to parent::'__construct()
+           // Forgottent call to parent\:\:'__construct()
        }
    }
    
@@ -11908,7 +11994,7 @@ This may also come handy when testing.
    ?>
 
 
-127.0.0.1, ::1 and ::0 are omitted, and not considered as a violation.
+127.0.0.1, \:\:1 and \:\:0 are omitted, and not considered as a violation.
 
 +------------+---------------------------------+
 | Short name | Structures/NoHardcodedIp        |
@@ -12547,15 +12633,15 @@ No Self Referencing Constant
 
 It is not possible to use a constant to define itself in a class. It yields a fatal error at runtime. 
 
-The PHP error reads : ``Cannot declare self-referencing constant 'self::C2'``. Unlike PHP which is self-referencing, self referencing variables can't have a value : just don't use that.
+The PHP error reads : ``Cannot declare self-referencing constant 'self\:\:C2'``. Unlike PHP which is self-referencing, self referencing variables can't have a value : just don't use that.
 
 .. code-block:: php
 
    <?php
        class a { 
            const C1 = 1;         // fully defined constant
-           const C2 = self::C2;  // self referencing constant
-           const C3 = a::C3 + 2; // self referencing constant
+           const C2 = self\:\:C2;  // self referencing constant
+           const C3 = a\:\:C3 + 2; // self referencing constant
        }
    ?>
 
@@ -12567,18 +12653,18 @@ The code may access an already declared constant with self or with its class nam
    <?php
        class a { 
            const C1 = 1; 
-           const C2 = a::C1; 
+           const C2 = a\:\:C1; 
        }
    ?>
 
 
 This error is not detected by linting. It is only detected at instantiation time : if the class is not used, it won't appear.
 
-+------------+-----------------------------------+
-| Short name | Classes/NoSelfReferencingConstant |
-+------------+-----------------------------------+
-| Themes     | :ref:`Analyze`                    |
-+------------+-----------------------------------+
++------------+----------------------------------------+
+| Short name | Classes/NoSelfReferencingConstant      |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec` |
++------------+----------------------------------------+
 
 
 
@@ -12826,7 +12912,7 @@ Non Static Methods Called In A Static
 Static methods have to be declared as such (using the static keyword). Then, 
 one may call them without instantiating the object.
 
-PHP 7.0, and more recent versions, yield a deprecated error : 'Non-static method A::B() should not be called statically' .
+PHP 7.0, and more recent versions, yield a deprecated error : 'Non-static method A\:\:B() should not be called statically' .
 
 PHP 5 and older doesn't check that a method is static or not : at any point, you may call one
 method statically : 
@@ -12839,7 +12925,7 @@ method statically :
            public public sm( ) { echo '__METHOD__.\n; }
        } 
        
-       x::sm( ); // echo x::sm 
+       x\:\:sm( ); // echo x\:\:sm 
    ?>
 
 
@@ -12858,7 +12944,7 @@ in-family method.
 
    <?php
        class x {
-           public function foo( ) { self::bar() }
+           public function foo( ) { self\:\:bar() }
            public function bar( ) { echo '__METHOD__.\n; }
        } 
    ?>
@@ -13352,6 +13438,43 @@ See also `Strings <http://php.net/manual/en/language.types.string.php>`_ and
 +------------+-----------------------------------------------------------------------------------+
 | Examples   | :ref:`tikiwiki-type-onevariablestrings`, :ref:`nextcloud-type-onevariablestrings` |
 +------------+-----------------------------------------------------------------------------------+
+
+
+
+.. _only-variable-for-reference:
+
+Only Variable For Reference
+###########################
+
+
+When a method is requesting an argument to be a reference, it cannot be called with a literal value.
+
+The call must be made with a variable, or any assimilated data container : array, property or static property. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This is not possible
+   foo(1,2);
+   
+   // This is working
+   foo($a, $b);
+   
+   function foo($a, &$b) {}
+   
+   ?>
+
+
+Note that PHP may detect this error at linting time, if the method is defined after being called : at that point, PHP will only check the problem during execution. This is definitely the case for methods, compared to functions or static methods.
+
+See also `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_.
+
++------------+----------------------------------------+
+| Short name | Functions/OnlyVariableForReference     |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec` |
++------------+----------------------------------------+
 
 
 
@@ -14136,14 +14259,14 @@ The following structures are evaluated differently in PHP 5 and 7. It is recomme
 
 See `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 
-+---------------------+-----------------------+-----------------------+
-| Expression          | PHP 5 interpretation  | PHP 7 interpretation  |
-+---------------------+-----------------------+-----------------------+
-|$$foo['bar']['baz']  |${$foo['bar']['baz']}  |($$foo)['bar']['baz']  |
-|$foo->$bar['baz']    |$foo->{$bar['baz']}    |($foo->$bar)['baz']    |
-|$foo->$bar['baz']()  |$foo->{$bar['baz']}()  |($foo->$bar)['baz']()  |
-|Foo::$bar['baz']()   |Foo::{$bar['baz']}()   |(Foo::$bar)['baz']()   |
-+---------------------+-----------------------+-----------------------+
++-----------------------+-------------------------+-------------------------+
+| Expression            | PHP 5 interpretation    | PHP 7 interpretation    |
++-----------------------+-------------------------+-------------------------+
+|$$foo['bar']['baz']    |${$foo['bar']['baz']}    |($$foo)['bar']['baz']    |
+|$foo->$bar['baz']      |$foo->{$bar['baz']}      |($foo->$bar)['baz']      |
+|$foo->$bar['baz']()    |$foo->{$bar['baz']}()    |($foo->$bar)['baz']()    |
+|Foo\:\:$bar['baz']()   |Foo\:\:{$bar['baz']}()   |(Foo\:\:$bar)['baz']()   |
++-----------------------+-------------------------+-------------------------+
 
 +------------+------------------------------------------------------------------------------------------------------------+
 | Short name | Variables/Php5IndirectExpression                                                                           |
@@ -14210,7 +14333,7 @@ When calling parent constructor, always put it first in the ``__construct`` meth
    class goodSon {
        function '__construct() {
            // parent is build immediately, 
-           parent::'__construct();
+           parent\:\:'__construct();
            echo my name is.$this->name;
        }
    }
@@ -14221,7 +14344,7 @@ When calling parent constructor, always put it first in the ``__construct`` meth
            echo my name is.$this->name;
    
            // parent is build later, 
-           parent::'__construct();
+           parent\:\:'__construct();
        }
    }
    
@@ -14257,13 +14380,13 @@ PHP 7.0 and later detect their usage at compile time, and emits a fatal error.
        
        function foo() {
            // self is \x
-           echo self::Y;
+           echo self\:\:Y;
        }
    }
    
    const Z = 1;
    // This doesn't compile anymore
-   echo self::Z;
+   echo self\:\:Z;
    
    ?>
 
@@ -15026,7 +15149,7 @@ Properties that read and written may be converted into a variable, static to the
        function bar() {
            // $this->once is never used anywhere else. 
            someFunction($this->once);
-           someFunction(self::ONCE);   // Make clear that it is a 
+           someFunction(self\:\:ONCE);   // Make clear that it is a 
        }
    
        function bar2() {
@@ -15148,6 +15271,54 @@ This optimisation is not always possible : for example, some SQL queries may not
 
 
 
+.. _raised-access-level:
+
+Raised Access Level
+###################
+
+
+A property's visibility may be lowered, but not raised.
+
+This error may be detected when the classes are all in the same file : then, PHP reports the problem. However, when the classes are separated in different files, as it is customary, PHP won't check this at linting time, yielding a fatal error at execution time. 
+
+First file.
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo {
+       public $publicProperty;
+       protected $protectedProperty;
+       private $privateProperty;
+   }
+   ?>
+
+
+Second file.
+
+.. code-block:: php
+
+   <?php
+   
+   class Bar extends Foo {
+       private $publicProperty;
+       private $protectedProperty;
+       private $privateProperty;   // This one is OK
+   }
+   ?>
+
+
+See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
+
++------------+---------------------------+
+| Short name | Classes/RaisedAccessLevel |
++------------+---------------------------+
+| Themes     | :ref:`ClassReview`        |
++------------+---------------------------+
+
+
+
 .. _random-without-try:
 
 Random Without Try
@@ -15188,11 +15359,11 @@ Randomly Sorted Arrays
 ######################
 
 
-Those literals arrays are written in several places, but in various orders. 
+Those literal arrays are written in several places, but their items are in various orders. 
 
-This may reduce the reading and proofing of the arrays, and induce confusion.
+This may reduce the reading and proofing of the arrays, and induce confusion. The random order may also be a residue of development : both arrays started with different values, but they grew overtime to handle the same items. The way they were written lead to the current order.
 
-Unless order is important, it is recommended to always use the same order when defining literal arrays.
+Unless order is important, it is recommended to always use the same order when defining literal arrays. This makes it easier to match different part of the code by recognizing one of its literal.
 
 .. code-block:: php
 
@@ -15211,11 +15382,13 @@ Unless order is important, it is recommended to always use the same order when d
    
    ?>
 
-+------------+------------------------------------+
-| Short name | Arrays/RandomlySortedLiterals      |
-+------------+------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
-+------------+------------------------------------+
++------------+-------------------------------------------------------------------------------------------+
+| Short name | Arrays/RandomlySortedLiterals                                                             |
++------------+-------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions`                                                        |
++------------+-------------------------------------------------------------------------------------------+
+| Examples   | :ref:`contao-arrays-randomlysortedliterals`, :ref:`vanilla-arrays-randomlysortedliterals` |
++------------+-------------------------------------------------------------------------------------------+
 
 
 
@@ -15275,7 +15448,7 @@ Class constants may be redefined, though it is prone to errors when using them, 
    
    class c extends c { }
    
-   echo a::A, ' ', b::A, ' ', c::A;
+   echo a\:\:A, ' ', b\:\:A, ' ', c\:\:A;
    // 1 2 2
    
    ?>
@@ -15352,6 +15525,46 @@ However, having two or more properties with the same name, in the class hierarch
 +------------+-----------------------------------------------+
 | Examples   | :ref:`zurmo-classes-redefinedprivateproperty` |
 +------------+-----------------------------------------------+
+
+
+
+.. _redefined-property:
+
+Redefined Property
+##################
+
+
+Property redefined in a parent class. 
+
+Using heritage, it is possible to define several times the same property, at different levels of the hierarchy.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       protected $aProperty = 1;
+   }
+   
+   class bar extends foo {
+       // This property is redefined in the parent class, leading to potential confusion
+       protected $aProperty = 1;
+   }
+   
+   ?>
+
+
+When this is the case, it is difficult to understand which class will actually handle the property. 
+
+In the case of a private property, the different instances will stay distinct. In the case of protected or public properties, they will all share the same value. 
+
+It is recommended to avoid redefining the same property in a hierarchy.
+
++------------+---------------------------+
+| Short name | Classes/RedefinedProperty |
++------------+---------------------------+
+| Themes     | :ref:`ClassReview`        |
++------------+---------------------------+
 
 
 
@@ -16295,7 +16508,7 @@ Note : Chaining requires PHP > 5.3.0.
    ?>
 
 
-See also `Exception::`'__construct <http://php.net/manual/en/language.oop5.decon.php>`_ <http://php.net/manual/en/exception.construct.php>`_.
+See also `Exception\:\:`'__construct <http://php.net/manual/en/language.oop5.decon.php>`_ <http://php.net/manual/en/exception.construct.php>`_.
 
 +------------+---------------------------------+
 | Short name | Structures/ShouldChainException |
@@ -16437,13 +16650,13 @@ Should Regenerate Session Id
 ############################
 
 
-No mention of Zend\Session::regenerateId() method found. 
+No mention of Zend\Session\:\:regenerateId() method found. 
 
 When using Zend\Session, or PHP session, a session ID is assigned to the user. It is a random number, used to connect the user and its data on the server. Actually, anyone with the session ID may have access to the data. This is why those session ID are so long and complex.
 
 A good approach to protect the session ID is to reduce its lifespan : the shorter the time of use, the better. While changing the session ID at every hit on the page may no be possible, a more reasonable approach is to change the session id when an important action is about to take place. What important means is left to the application to decide.
 
-Based on this philopsophy, a code source that uses Zend\Session but never uses Zend\Session::regenerateId() has to be updated.
+Based on this philopsophy, a code source that uses Zend\Session but never uses Zend\Session\:\:regenerateId() has to be updated.
 
 .. code-block:: php
 
@@ -16517,8 +16730,8 @@ PHP 7 introduced the ?? operator, that replaces longer structures to set default
    // equivalent to: $username = 'isset($_GET['user']) ? $_GET['user'] : 'nobody';
     
    // Calls a hypothetical model-getting function, and uses the provided default if it fails
-   $model = Model::get($id) ?? $default_model;
-   // equivalent to: if (($model = Model::get($id)) === NULL) { $model = $default_model; }
+   $model = Model\:\:get($id) ?? $default_model;
+   // equivalent to: if (($model = Model\:\:get($id)) === NULL) { $model = $default_model; }
    
    ?>
 
@@ -16659,7 +16872,7 @@ Should Use Local Class
 
 Methods should use the defining class, or be functions.
 
-Methods should use ``$this`` with another method or a property, or call ``parent::``. Static methods should call another static method, or a static property. 
+Methods should use ``$this`` with another method or a property, or call ``parent\:\:``. Static methods should call another static method, or a static property. 
 Methods which are overwritten by a child class are omitted : the parent class act as a default value for the children class, and this is correct.
 
 .. code-block:: php
@@ -16676,8 +16889,8 @@ Methods which are overwritten by a child class are omitted : the parent class ac
        private $a = 1;
        
        public function '__construct() {
-           // Calling parent:: is sufficient
-           parent::'__construct();
+           // Calling parent\:\: is sufficient
+           parent\:\:'__construct();
        }
    
        public function barbar() {
@@ -16801,7 +17014,7 @@ Building queries with concatenations is not recommended, though not always avoid
    $sql = 'SELECT name, colour, calories
        FROM fruit
        WHERE calories < :calories AND colour = :colour';
-   $sth = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+   $sth = $conn->prepare($sql, array(PDO\:\:ATTR_CURSOR => PDO\:\:CURSOR_FWDONLY));
    $sth->execute(array(':calories' => 150, ':colour' => 'red'));
    $red = $sth->fetchAll();
    ?>
@@ -16957,7 +17170,7 @@ When using sessions, a session ID is assigned to the user. It is a random number
 
 A good approach to protect the session ID is to reduce its lifespan : the shorter the time of use, the better. While changing the session ID at every hit on the page may no be possible, a more reasonable approach is to change the session id when an important action is about to take place. What important means is left to the application to decide.
 
-Based on this philosophy, a code source that uses Zend\Session but never uses Zend\Session::regenerateId() has to be updated.
+Based on this philosophy, a code source that uses Zend\Session but never uses Zend\Session\:\:regenerateId() has to be updated.
 
 .. code-block:: php
 
@@ -17733,7 +17946,7 @@ To properly handle quotes and `NUL` characters, use bindParam() instead.
 
 Quote from the PHP manual comments : ``The reason this function doesn't escape double quotes is because double quotes are used with names (the equivalent of backticks in MySQL), as in table or column names, while single quotes are used for values.``
 
-See also `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_.
+See also `SQLite3\:\:escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_.
 
 +------------+--------------------------------------+
 | Short name | Security/Sqlite3RequiresSingleQuotes |
@@ -17775,7 +17988,7 @@ It looks like the following loops are static : the same code is executed each ti
    ?>
 
 
-It is possible to create loops that don't use any blind variables, though this is fairly rare. In particular, calling a method may update an internal pointer, like `'next() <http://www.php.net/next>`_ or SimpleXMLIterator::`'next() <http://www.php.net/next>`_. 
+It is possible to create loops that don't use any blind variables, though this is fairly rare. In particular, calling a method may update an internal pointer, like `'next() <http://www.php.net/next>`_ or SimpleXMLIterator\:\:`'next() <http://www.php.net/next>`_. 
 
 It is recommended to turn a static loop into an expression that avoid the loop. For example, replacing the sum of all integers by the function $n * ($n + 1) / 2, or using `'array_sum() <http://www.php.net/array_sum>`_.
 
@@ -17811,7 +18024,7 @@ To maintain code readability, it is recommended to call static method in a stati
        $z = new x( );
        
        $z->y( ); // Readability : no one knows it is a static call
-       x::y( );  // Readability : here we know
+       x\:\:y( );  // Readability : here we know
    ?>
 
 +------------+---------------------------------------+
@@ -17838,7 +18051,7 @@ Static methods are also called ``class methods`` : they may be called even if th
        // Static method may access other static methods, or property, or none. 
        static function staticBar() {
            // This is not possible in a static method
-           return self::otherStaticBar() . static::$staticProperty;
+           return self\:\:otherStaticBar() . static\:\:$staticProperty;
        }
    
        static function bar() {
@@ -17851,7 +18064,7 @@ Static methods are also called ``class methods`` : they may be called even if th
    ?>
 
 
-Either, this is not a static method (simply remove the ``static`` keyword), or replace all $this mention by static properties ``Class::$property``.
+Either, this is not a static method (simply remove the ``static`` keyword), or replace all $this mention by static properties ``Class\:\:$property``.
 
 See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 
@@ -18307,7 +18520,7 @@ A comparison happens in the last argument, while the actual function expect anot
    ?>
 
 
-Original idea by Vladimir Reznichenko.
+Original idea by `Vladimir Reznichenko <https://twitter.com/kalessil>`_.
 
 +------------+---------------------------------------------------------------------------------------------------------+
 | Short name | Structures/SuspiciousComparison                                                                         |
@@ -19155,7 +19368,7 @@ Typehinted References
 
 Typehinted arguments have no need for references. Since they are only an object, they are already a reference.
 
-In fact, adding the & on the argument definition may lead to error like 'Only variables should be passed by reference'.
+In fact, adding the & on the argument definition may lead to error like `Only variables should be passed by reference`.
 
 This applies to the 'object' type hint, but not the the others, such as int or bool.
 
@@ -19332,13 +19545,13 @@ Here, `'break <http://php.net/manual/en/control-structures.break.php>`_ may also
 
 .. _undefined-\:\:class:
 
-Undefined ::class
-#################
+Undefined \:\:class
+###################
 
 
-``::class`` doesn't check if a corresponding class exists. 
+``\:\:class`` doesn't check if a corresponding class exists. 
 
-``::class`` must be checked with a call to class_exists(). Otherwise, it may lead to a ``Class 'foo' not found`` or even silent dead code : this happens also with Catch and `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
+``\:\:class`` must be checked with a call to class_exists(). Otherwise, it may lead to a ``Class 'foo' not found`` or even silent dead code : this happens also with Catch and `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ commands with undefined classes. PHP doesn't raise an error in that case. 
 
 .. code-block:: php
 
@@ -19347,10 +19560,10 @@ Undefined ::class
    class foo() {}
    
    // prints foo
-   echo foo::class; 
+   echo foo\:\:class; 
    
    // prints bar though bar doesn't exist.
-   echo bar::class;
+   echo bar\:\:class;
    
    ?>
 
@@ -19631,7 +19844,7 @@ Class constants that are used, but never defined. This should yield a fatal erro
    }
    
    // here, C is not defined in the code and is reported
-   echo foo::A.foo::B.foo::C;
+   echo foo\:\:A.foo\:\:B.foo\:\:C;
    
    ?>
 
@@ -19775,8 +19988,8 @@ Insteadof may replace a non-existing method with an existing one, but not the co
    
    class Talker {
        use A, B {
-           B::C 'insteadof A;
-           B::D 'insteadof A;
+           B\:\:C 'insteadof A;
+           B\:\:D 'insteadof A;
        }
    }
    
@@ -19788,11 +20001,11 @@ This error is not linted : it only appears at execution time.
 
 See also `Traits <http://php.net/manual/en/language.oop5.traits.php>`_.
 
-+------------+---------------------------+
-| Short name | Traits/UndefinedInsteadof |
-+------------+---------------------------+
-| Themes     | :ref:`Analyze`            |
-+------------+---------------------------+
++------------+----------------------------------------+
+| Short name | Traits/UndefinedInsteadof              |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec` |
++------------+----------------------------------------+
 
 
 
@@ -19853,7 +20066,7 @@ This may compile but, eventually yield a fatal error during execution.
    class theChild extends theParent {
        function foo() {
            // bar is defined in theChild, but not theParent
-           parent::bar();
+           parent\:\:bar();
        }
        
        function bar() {
@@ -19945,11 +20158,11 @@ When the using class or trait is instantiated, PHP emits a a fatal error.
    }
    ?>
 
-+------------+-----------------------+
-| Short name | Traits/UndefinedTrait |
-+------------+-----------------------+
-| Themes     | :ref:`Analyze`        |
-+------------+-----------------------+
++------------+----------------------------------------+
+| Short name | Traits/UndefinedTrait                  |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec` |
++------------+----------------------------------------+
 
 
 
@@ -20083,8 +20296,8 @@ See `Zend Framework 1.9 <https://framework.zend.com/manual/1.9/en/index.html>`_.
 
 .. _undefined-static\:\:-or-self\:\::
 
-Undefined static:: Or self::
-############################
+Undefined static\:\: Or self\:\:
+################################
 
 
 List of all undefined static and self properties and methods.
@@ -20098,11 +20311,11 @@ List of all undefined static and self properties and methods.
        private definedStatic = 1;
        
        public function method() {
-           self::definedStatic();
-           self::undefinedStatic();
+           self\:\:definedStatic();
+           self\:\:undefinedStatic();
    
-           static::definedStatic;
-           static::undefinedStatic;
+           static\:\:definedStatic;
+           static\:\:undefinedStatic;
        }
    }
    
@@ -20395,6 +20608,8 @@ Preprocessing could be done anytime the script includes all the needed values to
 +------------+---------------------------------------------------------------------------------------------------+
 | ClearPHP   | `always-preprocess <https://github.com/dseguy/clearPHP/tree/master/rules/always-preprocess.md>`__ |
 +------------+---------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`zurmo-structures-unpreprocessed`, :ref:`piwigo-structures-unpreprocessed`                   |
++------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -20511,7 +20726,7 @@ Check for namespaces and aliases and make sure they are correctly configured.
    class Foo extends Bar {
        private function foobar() {
            // here, parent is not resolved, as Bar is not defined in the code.
-           return parent::$prop;
+           return parent\:\:$prop;
        }
    }
    
@@ -21058,7 +21273,7 @@ Unused Private Methods
 
 Private methods that are not used are dead code. 
 
-Private methods are reserved for the defining class. Thus, they must be used with the current class, with ``$this`` or ``self::``.
+Private methods are reserved for the defining class. Thus, they must be used with the current class, with ``$this`` or ``self\:\:``.
 
 .. code-block:: php
 
@@ -21074,7 +21289,7 @@ Private methods are reserved for the defining class. Thus, they must be used wit
        private static function staticUnusedMethod() {}
        
        public function bar() {
-           self::staticMethod();
+           self\:\:staticMethod();
            $this->method();
        }
    }
@@ -21095,7 +21310,11 @@ Unused Private Properties
 #########################
 
 
-List of all static properties that are not used. They look like dead code.
+Unused static properties should be removed. 
+
+Unused private properties are dead code. They are usually leftovers of development or refactorisation : they used to have a mission, but are now left. 
+
+Being private, those properties are only accessible to the current class or trait. As such, validating the 
 
 .. code-block:: php
 
@@ -21117,11 +21336,13 @@ List of all static properties that are not used. They look like dead code.
    
    ?>
 
-+------------+----------------------------------------------+
-| Short name | Classes/UnusedPrivateProperty                |
-+------------+----------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
-+------------+----------------------------------------------+
++------------+----------------------------------------------------------------------------------------------+
+| Short name | Classes/UnusedPrivateProperty                                                                |
++------------+----------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                 |
++------------+----------------------------------------------------------------------------------------------+
+| Examples   | :ref:`openemr-classes-unusedprivateproperty`, :ref:`phpadsnew-classes-unusedprivateproperty` |
++------------+----------------------------------------------------------------------------------------------+
 
 
 
@@ -21475,9 +21696,9 @@ Use Class Operator
 ##################
 
 
-Use ``::class`` to hardcode class names, instead of strings.
+Use ``\:\:class`` to hardcode class names, instead of strings.
 
-This is actually faster than strings, which are parsed at execution time, while ``::class`` is compiled, making it faster to execute. 
+This is actually faster than strings, which are parsed at execution time, while ``\:\:class`` is compiled, making it faster to execute. 
 
 It is also capable to handle aliases, making the code easier to maintain. 
 
@@ -21493,7 +21714,7 @@ It is also capable to handle aliases, making the code easier to maintain.
    
    $className = '\foo\bar\X';
    
-   $className = foo\bar\X::class;
+   $className = foo\bar\X\:\:class;
    
    $className = B\X;
    
@@ -21753,10 +21974,10 @@ parent, static and self are traditionally written in lowercase only. Mixed case 
        
        function method() {
            // Wrong case, error with PHP 5.4.* and older
-           echo SELF::aConstante;
+           echo SELF\:\:aConstante;
            
            // Always right. 
-           echo self::aConstante;
+           echo self\:\:aConstante;
        }
    }
    
@@ -22570,7 +22791,7 @@ Setting properties with default values is a good way to avoid littering the code
        }
    
        // Upgraded version of bar, with default values
-       function bar2($table, $cols = self::DEFAULT_COLUMNS) {
+       function bar2($table, $cols = self\:\:DEFAULT_COLUMNS) {
            $res = $this->query('SELECT '.$cols.' FROM '.$table);
            // .....
        }
@@ -23249,7 +23470,11 @@ Useless Unset
 #############
 
 
-Unsetting variables may not be applicable with a certain type of variables. This is the list of such cases.
+There are situations where trying to remove a variable is actually useless. 
+
+PHP simply ignores the command when trying to unset a global variable, a static variable, or a blind variable from a foreach loop. 
+
+This is different from the garbage collector, which is run on its own schedule. It is also different from explicit unsets, aimed at freeing memory early : those are useful.
 
 .. code-block:: php
 
@@ -23267,13 +23492,18 @@ Unsetting variables may not be applicable with a certain type of variables. This
        // unsetting static variable has no effect 
        unset($c);
        
-       foreach($d as $e){
+       foreach($d as &$e){
            // unsetting a blind variable is useless
            (unset) $e;
        }
+       // Unsetting a blind variable AFTER the loop is good.
+       unset($e);
    }
    
    ?>
+
+
+See also `unset <http://php.net/unset>`_.
 
 +------------+-------------------------------------------------------------------------------------------------+
 | Short name | Structures/UselessUnset                                                                         |
@@ -23281,6 +23511,8 @@ Unsetting variables may not be applicable with a certain type of variables. This
 | Themes     | :ref:`Analyze`                                                                                  |
 +------------+-------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-useless-unset <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-unset.md>`__ |
++------------+-------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`tine20-structures-uselessunset`, :ref:`typo3-structures-uselessunset`                     |
 +------------+-------------------------------------------------------------------------------------------------+
 
 
@@ -23352,14 +23584,14 @@ Starting with PHP 7.1, the PHP engine check thoroughly that ``$this`` is used in
 
 Yet, it is possible to find ``$this`` outside a class : if the file is included inside a class, then ``$this`` will be recognized and validated. If the file is included outside a class context, it will yield a fatal error : ``Using $this when not in object context``.
 
-See also `Closure::bind <http://php.net/manual/en/closure.bind.php>`_ and 
+See also `Closure\:\:bind <http://php.net/manual/en/closure.bind.php>`_ and 
          `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
 
-+------------+-------------------------------------------+
-| Short name | Classes/UsingThisOutsideAClass            |
-+------------+-------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP71` |
-+------------+-------------------------------------------+
++------------+-------------------------------------------------------------------+
+| Short name | Classes/UsingThisOutsideAClass                                    |
++------------+-------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP71`, :ref:`LintButWontExec` |
++------------+-------------------------------------------------------------------+
 
 
 
@@ -24140,8 +24372,8 @@ Any kind of structure may be @deprecated : classes, traits, interfaces, methods,
    $b->setLibOption();
    
    // deprecated constant in 2.5
-   Zend\Db\Sql::JOIN_OUTER_LEFT;
-   Zend\Db\Sql::JOIN_LEFT;
+   Zend\Db\Sql\:\:JOIN_OUTER_LEFT;
+   Zend\Db\Sql\:\:JOIN_LEFT;
    
    // deprecated trait
    class foo {
@@ -24464,9 +24696,9 @@ In fact, `'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ may
 
 A fatal error is displayed, when an exception is not intercepted in the `'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ function. 
 
-::
+\:\:
 
-    PHP Fatal error:  Method myString::`'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ must not throw an exception, caught Exception: 'Exception message' in ``file.php``
+    PHP Fatal error:  Method myString\:\:`'__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ must not throw an exception, caught Exception: 'Exception message' in ``file.php``
 
 See also `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_.
 
@@ -25233,13 +25465,13 @@ self, parent and static may be used in a trait : their actual value will be only
    // In the examples, self, parent and static may be used interchangeably
    
    // This raises a Fatal error
-   //Fatal error: Uncaught Error: Cannot access static:: when no class scope is active
+   //Fatal error: Uncaught Error: Cannot access static\:\: when no class scope is active
    new static();
    
    // static calls
-   echo self::CONSTANTE;
-   echo self::$property;
-   echo self::method();
+   echo self\:\:CONSTANTE;
+   echo self\:\:$property;
+   echo self\:\:method();
    
    // as a type hint
    function foo(static $x) {
@@ -25258,13 +25490,13 @@ Such syntax problem is only revealed at execution time : PHP raises a Fatal erro
 
 The origin of the problem is usually a method that was moved outside a class, at least temporarily.
 
-See also `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
+See also `Scope Resolution Operator (\:\:) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
 
-+------------+---------------------------+
-| Short name | Classes/NoPSSOutsideClass |
-+------------+---------------------------+
-| Themes     | :ref:`Analyze`            |
-+------------+---------------------------+
++------------+----------------------------------------+
+| Short name | Classes/NoPSSOutsideClass              |
++------------+----------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`LintButWontExec` |
++------------+----------------------------------------+
 
 
 

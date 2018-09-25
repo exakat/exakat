@@ -72,6 +72,7 @@ class Docs {
                              'Coding Conventions',
                              'Suggestions',
                              'ClassReview',
+                             'LintButWontExec',
 
                              'Wordpress',
                              'Slim',
@@ -185,15 +186,14 @@ class Docs {
             $ini = parse_ini_file($file);
         
             if (isset($ini['phpError'])) {
-                $list[] = $ini['phpError'];
+                foreach($ini['phpError'] as $phpError) {
+                    $list[] = $this->rst_link($phpError, $this->rst_anchor($ini['name']));
+                }
             }
         }
-        $list = array_merge(...$list);
-
-        $list = array_unique($list); // skip doubles
         sort($list); // alphabetical sort
         
-        $this->php_error_list = count($list)." PHP error message detailled here : \n\n* ".join("\n* ", $list)."\n\n";
+        $this->php_error_list = count($list)." PHP error message detailled : \n\n* ".join("\n* ", $list)."\n\n";
     }
     
     private function getIniList() {
@@ -248,7 +248,7 @@ class Docs {
         $external_services_list = array();
         $json = json_decode(file_get_contents(__DIR__.'/../../data/serviceConfig.json'));
         foreach( (array) $json as $name => $service) {
-            $external_services_list[] = '* ['.$name.']('.$service->homepage.') - '.implode(', ', $service->file);
+            $external_services_list[] = "* `$name <$service->homepage>`_ - ".implode(', ', $service->file);
         }
         $this->external_services_list = implode("\n", $external_services_list);
     }
@@ -261,9 +261,12 @@ class Docs {
         $versions = array();
         foreach($files as $file) {
             $folder = basename(dirname($file));
-            if ($folder === 'Reports') { continue; }
+            if ($folder === 'Reports') { 
+                continue; 
+            }
             $analyzer = substr(basename($file), 0, -4);
-            $name = $folder.'/'.$analyzer;
+            $name = "$folder/$analyzer";
+            print $name.PHP_EOL;
             
             $res = $this->analyzers->query(<<<SQL
 SELECT GROUP_CONCAT(c.name, ', ') AS categories FROM analyzers a
@@ -281,7 +284,7 @@ SQL
             
             $ini = parse_ini_file($file, true);
             if (empty($ini['exakatSince'])) {
-                print "No exakatSince in ".$file."\n";
+                print "No exakatSince in {$file}\n";
                 continue;
             }
             if (isset($versions[$ini['exakatSince']])) {
@@ -487,28 +490,33 @@ $exampleTxt
     }
     
     private function rst_escape($string) {
+        $r = str_replace(array('::', '**='),array('\\:\\:', '\\*\\*\\='), $string);
+
         $r = preg_replace_callback('/<\?php(.*?)\?>/is',function ($r) {
             $r[0] = preg_replace('/`([^ ]+?) .*?`_/','$1',$r[0]);
             $rst = ".. code-block:: php\n\n   ".str_replace("\n","\n   ",$r[0])."\n";
             return $rst;
-        },$string);
+        }, $r);
+
     
         $r = preg_replace_callback('/\s*<\?literal(.*?)\?>/is',function ($r) {
             $rst = "::\n\n   ".str_replace("\n","\n   ",$r[1])."\n";
             return $rst;
-        },$r);
+        }, $r);
     
-        $r = str_replace(array('**='),array('\\*\\*\\='),$r);
-        
         return $r;
     }
     
-    private function rst_link($title) {
-        if (strpos($title,' ') !== false) {
-            $escapeTitle = $this->rst_anchor($title);
-            return ':ref:`'.$this->rst_escape($title).' <'.$escapeTitle.'>`';
+    private function rst_link($title, $link = '') {
+        if (empty($link)) {
+           if (strpos($title,' ') !== false) {
+                $escapeTitle = $this->rst_anchor($title);
+                return ':ref:`'.$this->rst_escape($title).' <'.$escapeTitle.'>`';
+            } else {
+                return ':ref:`'.$this->rst_escape($title).'`';
+            }
         } else {
-            return ':ref:`'.$this->rst_escape($title).'`';
+            return ':ref:`'.$this->rst_escape($title).' <'.$link.'>`';
         }
     }
     
@@ -662,11 +670,11 @@ SPHINX;
         $config = array();
         $list = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $list[] = "`theme_ini_".strtolower($row['name'])."`_";
+            $list[] = "`$row[name] <theme_ini_".strtolower($row['name']).">`_";
             $analyzers = explode(',', $row['analyzers']);
             sort($analyzers);
             $analyzers = implode(',', $analyzers);
-            $config[] = "\n.. _theme_ini_".strtolower($row['name']).":\n\n".$row['name']."\n".str_repeat('-', strlen($row['name']))."\n\n| [$row[name]]\n|   analyzer[] = \"".str_replace(',', "\";\n|   analyzer[] = \"", $analyzers)."\";| \n\n";
+            $config[] = "\n.. _theme_ini_".strtolower($row['name']).":\n\n".$row['name']."\n".str_repeat('-', strlen($row['name']))."\n\n| [$row[name]]\n|   analyzer[] = \"".str_replace(',', "\";\n|   analyzer[] = \"", $analyzers)."\";| \n\n\n\n";
         }
         
         $this->ini_themes_config = count($list)." themes detailled here : \n\n* ".join("\n* ", $list)."\n\n\n".join("\n\n", $config);
@@ -718,7 +726,9 @@ SPHINX;
             $liste = explode(',',$row['analyzers']);
         
             foreach($liste as &$a) {
-                if (isset($deja[$a])) { continue; }
+                if (isset($deja[$a])) { 
+                    continue; 
+                }
                 $deja[$a] = 1;
                 list($desc, $name) = $this->build_analyzer_doc($a, $a2themes);
                 $a = $this->rst_link($name);

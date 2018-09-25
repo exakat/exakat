@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 17 Sep 2018 12:53:44 +0000
-.. comment: Generation hash : 1fc34f35a96179f0bb83163f6bd81c46f8575ae0
+.. comment: Generation date : Tue, 25 Sep 2018 17:25:12 +0000
+.. comment: Generation hash : 4186848f96be3cff5f52d9fffc9a791be6aafb5c
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 356 analysis
+Total : 357 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -143,7 +143,7 @@ Total : 356 analysis
 * :ref:`Deprecated Functions <deprecated-functions>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
 * :ref:`Don't Echo Error <don't-echo-error>`
-* :ref:`Don't Send This In Constructor <don't-send-this-in-constructor>`
+* :ref:`Don't Send $this In Constructor <don't-send-$this-in-constructor>`
 * :ref:`Don't Unset Properties <don't-unset-properties>`
 * :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
 * :ref:`Dont Mix ++ <dont-mix-++>`
@@ -271,6 +271,7 @@ Total : 356 analysis
 * :ref:`Old Style __autoload() <old-style-\_\_autoload()>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`One Variable String <one-variable-string>`
+* :ref:`Only Variable For Reference <only-variable-for-reference>`
 * :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
 * :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
 * :ref:`Or Die <or-die>`
@@ -345,7 +346,6 @@ Total : 356 analysis
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
 * :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
-* :ref:`Undefined ::class <undefined-\:\:class>`
 * :ref:`Undefined Class Constants <undefined-class-constants>`
 * :ref:`Undefined Classes <undefined-classes>`
 * :ref:`Undefined Constants <undefined-constants>`
@@ -356,7 +356,8 @@ Total : 356 analysis
 * :ref:`Undefined Properties <undefined-properties>`
 * :ref:`Undefined Trait <undefined-trait>`
 * :ref:`Undefined Variable <undefined-variable>`
-* :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
+* :ref:`Undefined \:\:class <undefined-\:\:class>`
+* :ref:`Undefined static\:\: Or self\:\: <undefined-static\:\:-or-self\:\:>`
 * :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unknown Directive Name <unknown-directive-name>`
 * :ref:`Unknown Pcre2 Option <unknown-pcre2-option>`
@@ -464,15 +465,19 @@ Total : 17 analysis
 ClassReview
 +++++++++++
 
-Total : 11 analysis
+Total : 15 analysis
 
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
 * :ref:`Could Be Protected Class Constant <could-be-protected-class-constant>`
 * :ref:`Could Be Protected Method <could-be-protected-method>`
 * :ref:`Could Be Protected Property <could-be-protected-property>`
+* :ref:`Final Class Usage <final-class-usage>`
+* :ref:`Final Methods Usage <final-methods-usage>`
 * :ref:`Method Could Be Private Method <method-could-be-private-method>`
 * :ref:`Property Could Be Private Property <property-could-be-private-property>`
+* :ref:`Raised Access Level <raised-access-level>`
+* :ref:`Redefined Property <redefined-property>`
 * Classes/CouldBeAbstractClass
 * Classes/CouldBeFinal
 * Classes/PropertyCouldBeLocal
@@ -514,7 +519,6 @@ CompatibilityPHP53
 
 Total : 73 analysis
 
-* :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
 * :ref:`Break With 0 <break-with-0>`
@@ -580,6 +584,7 @@ Total : 73 analysis
 * :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Variable Global <variable-global>`
+* :ref:`\:\:class`
 * :ref:`__debugInfo() Usage <\_\_debuginfo()-usage>`
 * :ref:`ext/dba`
 * :ref:`ext/fdf`
@@ -956,6 +961,28 @@ Total : 24 analysis
 * Structures/UnreachableCode
 * Structures/UnsetInForeach
 * Structures/UnusedLabel
+
+.. _lintbutwontexec:
+
+LintButWontExec
++++++++++++++++
+
+Total : 14 analysis
+
+* Classes/AbstractOrImplements
+* Classes/Finalclass
+* Classes/Finalmethod
+* Classes/IncompatibleSignature
+* Classes/MutualExtension
+* Classes/NoPSSOutsideClass
+* Classes/NoSelfReferencingConstant
+* Classes/UsingThisOutsideAClass
+* Exceptions/CantThrow
+* Functions/OnlyVariableForReference
+* Interfaces/ConcreteVisibility
+* Traits/MethodCollisionTraits
+* Traits/UndefinedInsteadof
+* Traits/UndefinedTrait
 
 .. _performances:
 

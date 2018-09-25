@@ -383,7 +383,7 @@ You need the following tools :
 
 * `git <https://git-scm.com/>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
-* `vagrant <https://www.vagrantup.com/docs/installation/>`_
+* `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 
 Most may easily be installed with the local package manager, or with a direct download from the editor's website. 
 

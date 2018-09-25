@@ -319,26 +319,24 @@ A number of applications were scanned in order to find real life examples of pat
 * `SPIP <https://www.spip.net/>`_
 * `LiveZilla <https://www.livezilla.net/home/en/>`_
 * `Mautic <https://www.mautic.org/>`_
+* `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `Typo3 <https://typo3.org/>`_
 * `xataface <http://xataface.com/>`_
+* `Zurmo <http://zurmo.org/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `Dolphin <https://www.boonex.com/>`_
 * `XOOPS <https://xoops.org/>`_
 * `Woocommerce <https://woocommerce.com/>`_
 * `Contao <https://contao.org/en/>`_
 * `ChurchCRM <http://churchcrm.io/>`_
-* `Zurmo <http://zurmo.org/>`_
 * `HuMo-Gen <http://humogen.com/>`_
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
-* phpDocumentor
-* `TeamPass <https://teampass.net/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
+* `TeamPass <https://teampass.net/>`_
 * `opencfp <https://github.com/opencfp/opencfp>`_
-* Humo-Gen
 * `PrestaShop <https://prestashop.com/>`_
 * `PhpIPAM <https://phpipam.net/download/>`_
-* edusoho
-* `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
+* `Edusoho <https://www.edusoho.com/en>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `Phinx <https://phinx.org/>`_
 * `ThinkPHP <http://www.thinkphp.cn/>`_
@@ -394,6 +392,10 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.4.6
+
+  * Only Variable For Reference (Functions/OnlyVariableForReference)
 
 * 1.4.5
 
@@ -678,7 +680,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Can't Count Non-Countable (Structures/CanCountNonCountable ; CompatibilityPHP72)
   * Crypto Usage (Php/CryptoUsage ; Appinfo, Appcontent)
   * Dl() Usage (Php/DlUsage ; Appinfo)
-  * Don't Send This In Constructor (Classes/DontSendThisInConstructor ; Analyze)
+  * Don't Send $this In Constructor (Classes/DontSendThisInConstructor ; Analyze)
   * Hash Will Use Objects (Php/HashUsesObjects ; CompatibilityPHP72)
   * Incoming Variable Index Inventory (Type/GPCIndex ; Inventory, Appinfo, Appcontent)
   * Integer As Property (Classes/IntegerAsProperty ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
@@ -1472,8 +1474,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * File Is Component (Files/IsComponent ; Internal)
   * File Uploads (Structures/FileUploadUsage ; Appinfo)
   * File Usage (Structures/FileUsage ; Appinfo)
-  * Final Class Usage (Classes/Finalclass ; Appinfo)
-  * Final Methods Usage (Classes/Finalmethod ; Appinfo)
+  * Final Class Usage (Classes/Finalclass ; LintButWontExec, ClassReview)
+  * Final Methods Usage (Classes/Finalmethod ; LintButWontExec, ClassReview)
   * Fopen Binary Mode (Portability/FopenMode ; Portability)
   * For Using Functioncall (Structures/ForWithFunctioncall ; Performances, ClearPHP, Codacy, Simple, Level 1)
   * Foreach Don't Change Pointer (Php/ForeachDontChangePointer ; CompatibilityPHP70)
@@ -1693,7 +1695,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Redefined Default (Classes/RedefinedDefault ; Analyze, Codacy, Simple)
   * Redefined Methods (Classes/RedefinedMethods ; Appinfo)
   * Redefined PHP Traits (Traits/Php ; Appinfo)
-  * Redefined Property (Classes/RedefinedProperty ; Appinfo)
+  * Redefined Property (Classes/RedefinedProperty ; ClassReview)
   * References (Variables/References ; Appinfo)
   * Register Globals (Security/RegisterGlobals ; Security)
   * Relay Function (Functions/RelayFunction ; Analyze, Codacy)
@@ -2029,38 +2031,44 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-30 PHP error message detailled here : 
+36 PHP error message detailled : 
 
-* "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"?
-* Access level to Bar::$publicProperty must be public (as in class Foo)
-* Access level to c::iPrivate() must be public (as in class i) 
-* An alias (%s) was defined for method %s(), but this method does not exist
-* Argument 1 passed to foo() must be of the type integer, string given
-* Call to undefined function
-* Call to undefined method theParent::bar()
-* Can't inherit abstract function A::bar()
-* Cannot access static:: when no class scope is active
-* Cannot override final method BaseClass::moreTesting()
-* Cannot use isset() on the result of an expression (you can use "null !== expression" instead)
-* Cannot use object of type Foo as array
-* Class 'PARENT' not found
-* Class 'x' not found
-* Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A::aFoo)
-* Class fooThrowable cannot implement interface Throwable, extend Exception or Error instead
-* Creating default object from empty value
-* Declaration of FooParent::Bar() must be compatible with FooChildren::Bar()
-* Declaration of ab::foo($a) must be compatible with a::foo($a = 1) 
-* Declaration of ab::foo($a) should be compatible with a::foo($a = 1) 
-* Defining a custom assert() function is deprecated, as the function has special semantics
-* Invalid numeric literal
-* Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code.
-* Only variable references should be returned by reference
-* The parent constructor was not called: the object is in an invalid state
-* Trait 'T' not found
-* Trait method M has not been applied, because there are collisions with other trait methods on C
-* Uncaught ArgumentCountError: Too few arguments to function, 0 passed
-* Undefined function
-* Undefined variable: 
+* :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
+* :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
+* :ref:`Access level to c\:\:iPrivate() must be public (as in class i)  <concrete-visibility>`
+* :ref:`Access level to xx\:\:$x must be public (as in class x) <redefined-property>`
+* :ref:`An alias (%s) was defined for method %s(), but this method does not exist <undefined-insteadof>`
+* :ref:`Argument 1 passed to foo() must be of the type integer, string given <mismatch-type-and-default>`
+* :ref:`Call to undefined function <throw-functioncall>`
+* :ref:`Call to undefined method theParent\:\:bar() <undefined-parent>`
+* :ref:`Can't inherit abstract function A\:\:bar() <cant-inherit-abstract-method>`
+* :ref:`Cannot access static\:\: when no class scope is active <self,-parent,-static-outside-class>`
+* :ref:`Cannot override final method Foo\:\:Bar() <final-class-usage>`
+* :ref:`Cannot override final method Foo\:\:FooBar() <final-methods-usage>`
+* :ref:`Cannot pass parameter 1 by reference <only-variable-for-reference>`
+* :ref:`Cannot use isset() on the result of an expression (you can use "null !== expression" instead) <isset-with-constant>`
+* :ref:`Cannot use object of type Foo as array <$this-is-not-an-array>`
+* :ref:`Class 'PARENT' not found <use-lower-case-for-parent,-static-and-self>`
+* :ref:`Class 'x' not found <undefined-\:\:class>`
+* :ref:`Class BA contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (A\:\:aFoo) <abstract-or-implements>`
+* :ref:`Class fooThrowable cannot implement interface Throwable, extend Exception or Error instead <can't-throw-throwable>`
+* :ref:`Creating default object from empty value <undefined-variable>`
+* :ref:`Declaration of FooParent\:\:Bar() must be compatible with FooChildren\:\:Bar() <method-signature-must-be-compatible>`
+* :ref:`Declaration of ab\:\:foo($a) must be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods>`
+* :ref:`Declaration of ab\:\:foo($a) should be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods>`
+* :ref:`Defining a custom assert() function is deprecated, as the function has special semantics <assert-function-is-reserved>`
+* :ref:`Invalid numeric literal <malformed-octal>`
+* :ref:`Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code. <old-style-constructor>`
+* :ref:`Only variable references should be returned by reference <no-reference-for-ternary>`
+* :ref:`Only variables can be passed by reference <only-variable-for-reference>`
+* :ref:`Only variables should be passed by reference <typehinted-references>`
+* :ref:`The parent constructor was not called: the object is in an invalid state <must-call-parent-constructor>`
+* :ref:`Too few arguments to function foo(), 1 passed and exactly 2 expected <wrong-number-of-arguments>`
+* :ref:`Trait 'T' not found <undefined-trait>`
+* :ref:`Trait method M has not been applied, because there are collisions with other trait methods on C <method-collision-traits>`
+* :ref:`Uncaught ArgumentCountError: Too few arguments to function, 0 passed <wrong-number-of-arguments>`
+* :ref:`Undefined function <undefined-functions>`
+* :ref:`Undefined variable:  <undefined-variable>`
 
 
 
@@ -2070,54 +2078,79 @@ External services
 
 List of external services whose configuration files has been commited in the code.
 
-* [Apache](http://www.apache.org/) - .htaccess
-* [Apple](http://www.apple.com/) - .DS_Store
-* [appveyor](http://www.appveyor.com/) - appveyor.yml
-* [ant](https://ant.apache.org/) - build.xml
-* [artisan](http://laravel.com/docs/5.1/artisan) - artisan
-* [atoum](http://atoum.org/) - .bootstrap.atoum.php,.atoum.php
-* [arcanist](https://secure.phabricator.com/book/phabricator/article/arcanist_lint/) - .arclint, .arcconfig
-* [box2](https://github.com/box-project/box2) - box.json
-* [behat](http://docs.behat.org/en/v2.5/) - behat.yml.dist
-* [bower](http://bower.io/) - bower.json, .bowerrc
-* [bazaar](http://bazaar.canonical.com/en/) - .bzr
-* [circleCI](https://circleci.com/) - circle.yml
-* [codeception](http://codeception.com/) - codeception.yml
-* [codeclimate](http://www.codeclimate.com/) - .codeclimate.yml
-* [composer](https://getcomposer.org/) - composer.json, composer.lock
-* [couscous](http://couscous.io/) - couscous.yml
-* [Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) - .php_cs
-* [coveralls](https://coveralls.zendesk.com/) - .coveralls.yml
-* [eslint](http://eslint.org/) - .eslintrc
-* [git](https://git-scm.com/) - .git, .gitignore, .gitattributes, .gitmodules
-* [gulpfile](http://gulpjs.com/) - .js
-* [gush](https://github.com/gushphp/gush) - .gush.yml
-* [mercurial](https://www.mercurial-scm.org/) - .hg, .hgtags
-* [insight](https://insight.sensiolabs.com/) - .sensiolabs.yml
-* [jshint](http://jshint.com/) - .jshintrc
-* [npm](https://www.npmjs.com/) - package.json
-* [phan](https://github.com/etsy/phan) - .phan
-* [pharcc](https://github.com/cbednarski/pharcc) - .pharcc.yml
-* [phpformatter](https://github.com/mmoreram/php-formatter) - .formatter.yml
-* [phpmetrics](http://www.phpmetrics.org/) - .phpmetrics.yml.dist
-* [phpsa](https://github.com/ovr/phpsa) - .phpsa.yml
-* [phpspec](http://www.phpspec.net/en/latest/) - phpspec.yml
-* [phpstan](https://github.com/phpstan) - phpstan.neon
-* [phpswitch](https://github.com/jubianchi/phpswitch) - .phpswitch.yml
-* [phpunit](https://phpunit.de/) - phpunit.xml.dist
-* [psalm](https://getpsalm.org/) - psalm.xml
-* [robo](https://robo.li/) - RoboFile.php
-* [scrutinizer](https://scrutinizer-ci.com/) - .scrutinizer.yml
-* [semantic versioning](http://semver.org/) - .semver
-* [spip](http://www.spip.net/) - paquet.xml
-* [storyplayer](https://datasift.github.io/storyplayer/) - storyplayer.json.dist
-* [styleci](https://styleci.io/) - .styleci.yml
-* [sublimelinter](http://www.sublimelinter.com/en/latest/) - .csslintrc
-* [svn](https://subversion.apache.org/) - svn.revision, .svn
-* [Robots.txt](http://www.robotstxt.org/) - robots.txt
-* [travis](https://travis-ci.org/) - .travis.yml
-* [Vagrant](https://www.vagrantup.com/) - Vagrantfile
-* [Zend_Tool](https://framework.zend.com/) - zfproject.xml
+* `Apache <http://www.apache.org/>`_ - .htaccess
+* `Apple <http://www.apple.com/>`_ - .DS_Store
+* `appveyor <http://www.appveyor.com/>`_ - appveyor.yml, .appveyor.yml
+* `ant <https://ant.apache.org/>`_ - build.xml
+* `arcunit <https://www.archunit.org/>`_ - .arcunit
+* `artisan <http://laravel.com/docs/5.1/artisan>`_ - artisan
+* `atoum <http://atoum.org/>`_ - .bootstrap.atoum.php, .atoum.php, .atoum.bootstrap.php
+* `arcanist <https://secure.phabricator.com/book/phabricator/article/arcanist_lint/>`_ - .arclint, .arcconfig
+* `bazaar <http://bazaar.canonical.com/en/>`_ - .bzr
+* `babeljs <https://babeljs.io/>`_ - .babel.rc, .babel.js, .babelrc
+* `behat <http://docs.behat.org/en/v2.5/>`_ - behat.yml.dist
+* `box2 <https://github.com/box-project/box2>`_ - box.json
+* `bower <http://bower.io/>`_ - bower.json, .bowerrc
+* `circleCI <https://circleci.com/>`_ - circle.yml, .circleci
+* `codacy <http://www.codacy.com/>`_ - .codacy.json
+* `codeception <http://codeception.com/>`_ - codeception.yml, codeception.dist.yml
+* `codecov <https://codecov.io/>`_ - .codecov.yml, codecov.yml
+* `codeclimate <http://www.codeclimate.com/>`_ - .codeclimate.yml
+* `composer <https://getcomposer.org/>`_ - composer.json, composer.lock, vendor
+* `couscous <http://couscous.io/>`_ - couscous.yml
+* `Code Sniffer <https://github.com/squizlabs/PHP_CodeSniffer>`_ - .php_cs, .php_cs.dist, .phpcs.xml, php_cs.dist
+* `coveralls <https://coveralls.zendesk.com/>`_ - .coveralls.yml
+* `docker <http://www.docker.com/>`_ - .dockerignore, .docker
+* `drone <http://docs.drone.io/>`_ - .dockerignore, .docker
+* `editorconfig <https://editorconfig.org/>`_ - .drone.yml
+* `eslint <http://eslint.org/>`_ - .eslintrc, .eslintignore, eslintrc.js, .eslintrc.js, .eslintrc.json
+* `flintci <https://flintci.io/>`_ - .flintci.yml
+* `git <https://git-scm.com/>`_ - .git, .gitignore, .gitattributes, .gitmodules, .mailmap, .githooks
+* `github <https://www.github.com/>`_ - .github
+* `gitlab <https://www.gitlab.com/>`_ - .gitlab-ci.yml
+* `gulpfile <http://gulpjs.com/>`_ - .js
+* `grumphp <https://github.com/phpro/grumphp>`_ - grumphp.yml.dist, grumphp.yml
+* `gush <https://github.com/gushphp/gush>`_ - .gush.yml
+* `humbug <https://github.com/humbug/box.git>`_ - humbug.json.dist, humbug.json
+* `infection <https://infection.github.io/>`_ - infection.yml, .infection.yml
+* `insight <https://insight.sensiolabs.com/>`_ - .sensiolabs.yml
+* `jetbrains <https://www.jetbrains.com/phpstorm/>`_ - .idea
+* `jshint <http://jshint.com/>`_ - .jshintrc, .jshintignore
+* `mercurial <https://www.mercurial-scm.org/>`_ - .hg, .hgtags, .hgignore, .hgeol
+* `npm <https://www.npmjs.com/>`_ - package.json, .npmignore, .npmrc
+* `openshift <https://www.openshift.com/>`_ - .openshift
+* `phan <https://github.com/etsy/phan>`_ - .phan
+* `pharcc <https://github.com/cbednarski/pharcc>`_ - .pharcc.yml
+* `phalcon <https://phalconphp.com/>`_ - .phalcon
+* `phpdocumentor <http://docs.phpdoc.org/>`_ - phpdox.xml.dist, phpdox.xml
+* `phpformatter <https://github.com/mmoreram/php-formatter>`_ - .formatter.yml
+* `phpmetrics <http://www.phpmetrics.org/>`_ - .phpmetrics.yml.dist
+* `phpsa <https://github.com/ovr/phpsa>`_ - .phpsa.yml
+* `phpspec <http://www.phpspec.net/en/latest/>`_ - phpspec.yml, .phpspec, phpspec.yml.dist
+* `phpstan <https://github.com/phpstan>`_ - phpstan.neon, .phpstan.neon
+* `phpswitch <https://github.com/jubianchi/phpswitch>`_ - .phpswitch.yml
+* `phpunit <https://phpunit.de/>`_ - phpunit.xml.dist
+* `prettier <https://prettier.io/>`_ - .prettierrc, .prettierignore
+* `psalm <https://getpsalm.org/>`_ - psalm.xml
+* `puppet <https://puppet.com/>`_ - .puppet
+* `rmt <https://github.com/liip/RMT>`_ - .rmt.yml
+* `robo <https://robo.li/>`_ - RoboFile.php
+* `scrutinizer <https://scrutinizer-ci.com/>`_ - .scrutinizer.yml
+* `semantic versioning <http://semver.org/>`_ - .semver
+* `SPIP <http://www.spip.net/>`_ - paquet.xml
+* `stickler <https://stickler-ci.com/docs>`_ - .stickler.yml
+* `storyplayer <https://datasift.github.io/storyplayer/>`_ - storyplayer.json.dist
+* `styleci <https://styleci.io/>`_ - .styleci.yml
+* `stylelint <https://stylelint.io/>`_ - .stylelintrc
+* `sublimelinter <http://www.sublimelinter.com/en/latest/>`_ - .csslintrc
+* `svn <https://subversion.apache.org/>`_ - svn.revision, .svn, .svnignore
+* `transifex <https://www.transifex.com/>`_ - .tx
+* `Robots.txt <http://www.robotstxt.org/>`_ - robots.txt
+* `travis <https://travis-ci.org/>`_ - .travis.yml, .env.travis, .travis, .travis.php.ini, .travis.coverage.sh, .travis.ini
+* `varci <https://var.ci/>`_ - .varci, .varci.yml
+* `Vagrant <https://www.vagrantup.com/>`_ - Vagrantfile
+* `visualstudio <https://code.visualstudio.com/>`_ - .vscode
+* `Zend_Tool <https://framework.zend.com/>`_ - zfproject.xml
 
 External links
 --------------
@@ -2142,7 +2175,6 @@ List of external links mentionned in this documentation.
 * `Anonymous functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `Anonymus Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
-* `Apache <http://php.net/manual/en/book.apache.php>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Argon2 Password Hash <https://wiki.php.net/rfc/argon2_password_hash>`_
 * `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_
@@ -2282,6 +2314,7 @@ List of external links mentionned in this documentation.
 * `ext/varnish <http://php.net/manual/en/book.varnish.php>`_
 * `ext/xxtea <https://pecl.php.net/package/xxtea>`_
 * `ext/zookeeper <http://php.net/zookeeper>`_
+* `Extension Apache <http://php.net/manual/en/book.apache.php>`_
 * `extension FANN <http://php.net/manual/en/book.fann.php>`_
 * `extension mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_
 * `extract <http://php.net/extract>`_
@@ -2293,16 +2326,16 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Flexible Heredoc and Nowdoc Syntaxes <https://wiki.php.net/rfc/flexible_heredoc_nowdoc_syntaxes>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
@@ -2385,8 +2418,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2438,6 +2471,7 @@ List of external links mentionned in this documentation.
 * `parent <http://php.net/manual/en/keyword.parent.php>`_
 * `Parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
 * `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
+* `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
 * `Password hashing <http://php.net/manual/en/book.password.php>`_
 * `Pattern Modifiers <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_
@@ -2563,13 +2597,14 @@ List of external links mentionned in this documentation.
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `unserialize() <http://php.net/unserialize>`_
+* `unset <http://php.net/unset>`_
 * `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
 * `Using namespaces: fallback to global function/constant <http://php.net/manual/en/language.namespaces.fallback.php>`_
 * `Using non-breakable spaces in test method names <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
 * `Using single characters for variable names in loops/exceptions <https://softwareengineering.stackexchange.com/questions/71710/using-single-characters-for-variable-names-in-loops-exceptions?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa/>`_
 * `V8 Javascript Engine <https://bugs.chromium.org/p/v8/issues/list>`_
-* `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
+* `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
@@ -2577,6 +2612,7 @@ List of external links mentionned in this documentation.
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
+* `Vladimir Reznichenko <https://twitter.com/kalessil>`_
 * `Void functions <http://php.net/manual/en/migration71.new-features.php#migration71.new-features.void-functions>`_
 * `Warn when counting non-countable types <http://php.net/manual/en/migration72.incompatible.php#migration72.incompatible.warn-on-non-countable-types>`_
 * `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
@@ -2672,27 +2708,28 @@ Themes configuration
 
 INI configuration for built-in themes. Copy them in config/themes.ini, and make your owns.
 
-19 themes detailled here : 
+20 themes detailled here : 
 
-* `theme_ini_analyze`_
-* `theme_ini_cakephp`_
-* `theme_ini_classreview`_
-* `theme_ini_coding conventions`_
-* `theme_ini_compatibilityphp53`_
-* `theme_ini_compatibilityphp54`_
-* `theme_ini_compatibilityphp55`_
-* `theme_ini_compatibilityphp56`_
-* `theme_ini_compatibilityphp70`_
-* `theme_ini_compatibilityphp71`_
-* `theme_ini_compatibilityphp72`_
-* `theme_ini_compatibilityphp73`_
-* `theme_ini_dead code`_
-* `theme_ini_performances`_
-* `theme_ini_security`_
-* `theme_ini_slim`_
-* `theme_ini_suggestions`_
-* `theme_ini_wordpress`_
-* `theme_ini_zendframework`_
+* `Analyze <theme_ini_analyze>`_
+* `Cakephp <theme_ini_cakephp>`_
+* `ClassReview <theme_ini_classreview>`_
+* `Coding Conventions <theme_ini_coding conventions>`_
+* `CompatibilityPHP53 <theme_ini_compatibilityphp53>`_
+* `CompatibilityPHP54 <theme_ini_compatibilityphp54>`_
+* `CompatibilityPHP55 <theme_ini_compatibilityphp55>`_
+* `CompatibilityPHP56 <theme_ini_compatibilityphp56>`_
+* `CompatibilityPHP70 <theme_ini_compatibilityphp70>`_
+* `CompatibilityPHP71 <theme_ini_compatibilityphp71>`_
+* `CompatibilityPHP72 <theme_ini_compatibilityphp72>`_
+* `CompatibilityPHP73 <theme_ini_compatibilityphp73>`_
+* `Dead code <theme_ini_dead code>`_
+* `LintButWontExec <theme_ini_lintbutwontexec>`_
+* `Performances <theme_ini_performances>`_
+* `Security <theme_ini_security>`_
+* `Slim <theme_ini_slim>`_
+* `Suggestions <theme_ini_suggestions>`_
+* `Wordpress <theme_ini_wordpress>`_
+* `ZendFramework <theme_ini_zendframework>`_
 
 
 
@@ -2821,6 +2858,7 @@ Analyze
 |   analyzer[] = "Functions/NoClassAsTypehint";
 |   analyzer[] = "Functions/NoReturnUsed";
 |   analyzer[] = "Functions/OneLetterFunctions";
+|   analyzer[] = "Functions/OnlyVariableForReference";
 |   analyzer[] = "Functions/OnlyVariablePassedByReference";
 |   analyzer[] = "Functions/RedeclaredPhpFunction";
 |   analyzer[] = "Functions/RelayFunction";
@@ -3062,6 +3100,8 @@ Analyze
 
 
 
+
+
 .. _theme_ini_cakephp:
 
 Cakephp
@@ -3089,6 +3129,8 @@ Cakephp
 
 
 
+
+
 .. _theme_ini_classreview:
 
 ClassReview
@@ -3104,8 +3146,14 @@ ClassReview
 |   analyzer[] = "Classes/CouldBeProtectedConstant";
 |   analyzer[] = "Classes/CouldBeProtectedMethod";
 |   analyzer[] = "Classes/CouldBeProtectedProperty";
+|   analyzer[] = "Classes/Finalclass";
+|   analyzer[] = "Classes/Finalmethod";
 |   analyzer[] = "Classes/PropertyCouldBeLocal";
+|   analyzer[] = "Classes/RaisedAccessLevel";
+|   analyzer[] = "Classes/RedefinedProperty";
 |   analyzer[] = "Structures/CouldBeStatic";| 
+
+
 
 
 
@@ -3137,6 +3185,8 @@ Coding Conventions
 |   analyzer[] = "Type/ShouldBeSingleQuote";
 |   analyzer[] = "Type/StringInterpolation";
 |   analyzer[] = "Variables/VariableUppercase";| 
+
+
 
 
 
@@ -3224,6 +3274,8 @@ CompatibilityPHP53
 
 
 
+
+
 .. _theme_ini_compatibilityphp54:
 
 CompatibilityPHP54
@@ -3303,6 +3355,8 @@ CompatibilityPHP54
 
 
 
+
+
 .. _theme_ini_compatibilityphp55:
 
 CompatibilityPHP55
@@ -3374,6 +3428,8 @@ CompatibilityPHP55
 
 
 
+
+
 .. _theme_ini_compatibilityphp56:
 
 CompatibilityPHP56
@@ -3434,6 +3490,8 @@ CompatibilityPHP56
 
 
 
+
+
 .. _theme_ini_compatibilityphp70:
 
 CompatibilityPHP70
@@ -3488,6 +3546,8 @@ CompatibilityPHP70
 
 
 
+
+
 .. _theme_ini_compatibilityphp71:
 
 CompatibilityPHP71
@@ -3527,6 +3587,8 @@ CompatibilityPHP71
 
 
 
+
+
 .. _theme_ini_compatibilityphp72:
 
 CompatibilityPHP72
@@ -3558,6 +3620,8 @@ CompatibilityPHP72
 
 
 
+
+
 .. _theme_ini_compatibilityphp73:
 
 CompatibilityPHP73
@@ -3571,6 +3635,8 @@ CompatibilityPHP73
 |   analyzer[] = "Php/Php73RemovedFunctions";
 |   analyzer[] = "Php/UnknownPcre2Option";
 |   analyzer[] = "Structures/ContinueIsForLoop";| 
+
+
 
 
 
@@ -3605,6 +3671,34 @@ Dead code
 |   analyzer[] = "Structures/UnreachableCode";
 |   analyzer[] = "Structures/UnsetInForeach";
 |   analyzer[] = "Structures/UnusedLabel";| 
+
+
+
+
+
+
+.. _theme_ini_lintbutwontexec:
+
+LintButWontExec
+---------------
+
+| [LintButWontExec]
+|   analyzer[] = "Classes/AbstractOrImplements";
+|   analyzer[] = "Classes/Finalclass";
+|   analyzer[] = "Classes/Finalmethod";
+|   analyzer[] = "Classes/IncompatibleSignature";
+|   analyzer[] = "Classes/MutualExtension";
+|   analyzer[] = "Classes/NoPSSOutsideClass";
+|   analyzer[] = "Classes/NoSelfReferencingConstant";
+|   analyzer[] = "Classes/UsingThisOutsideAClass";
+|   analyzer[] = "Exceptions/CantThrow";
+|   analyzer[] = "Functions/OnlyVariableForReference";
+|   analyzer[] = "Interfaces/ConcreteVisibility";
+|   analyzer[] = "Traits/MethodCollisionTraits";
+|   analyzer[] = "Traits/UndefinedInsteadof";
+|   analyzer[] = "Traits/UndefinedTrait";| 
+
+
 
 
 
@@ -3651,6 +3745,8 @@ Performances
 |   analyzer[] = "Structures/NoSubstrOne";
 |   analyzer[] = "Structures/SimplePreg";
 |   analyzer[] = "Structures/WhileListEach";| 
+
+
 
 
 
@@ -3702,6 +3798,8 @@ Security
 
 
 
+
+
 .. _theme_ini_slim:
 
 Slim
@@ -3733,6 +3831,8 @@ Slim
 |   analyzer[] = "Slim/Slimphp38";
 |   analyzer[] = "Slim/UseSlim";
 |   analyzer[] = "Slim/UsedRoutes";| 
+
+
 
 
 
@@ -3810,6 +3910,8 @@ Suggestions
 
 
 
+
+
 .. _theme_ini_wordpress:
 
 Wordpress
@@ -3843,6 +3945,8 @@ Wordpress
 |   analyzer[] = "Wordpress/WordpressUsage";
 |   analyzer[] = "Wordpress/WpdbBestUsage";
 |   analyzer[] = "Wordpress/WpdbPrepareOrNot";| 
+
+
 
 
 
@@ -4094,6 +4198,8 @@ ZendFramework
 |   analyzer[] = "ZendF/Zf3Xmlrpc";
 |   analyzer[] = "ZendF/Zf3Xmlrpc25";
 |   analyzer[] = "ZendF/Zf3Xmlrpc26";| 
+
+
 
 
 

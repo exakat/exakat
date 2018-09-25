@@ -753,6 +753,53 @@ Removing a file : if the file is not 'deleted' by the method call, but raises an
             }
         }
 
+Unused Private Properties
+=========================
+
+.. _openemr-classes-unusedprivateproperty:
+
+OpenEMR
+^^^^^^^
+
+:ref:`unused-private-properties`, in entities/User.php:46. 
+
+This class has a long list of private properties. It also has an equally long (minus one) list of accessors, and a __toString() method which exposes all of them. $oNotes is the only one never mentionned anywhere. 
+
+.. code-block:: php
+
+    class User
+    {
+        /**
+         * @Column(name=id, type=integer)
+         * @GeneratedValue(strategy=AUTO)
+         */
+        private $id;
+    
+        /**
+         * @OneToMany(targetEntity=ONote, mappedBy=user)
+         */
+        private $oNotes;
+
+
+--------
+
+
+.. _phpadsnew-classes-unusedprivateproperty:
+
+phpadsnew
+^^^^^^^^^
+
+:ref:`unused-private-properties`, in lib/OA/Admin/UI/component/Form.php:23. 
+
+$dispatcher is never used anywhere. 
+
+.. code-block:: php
+
+    class OA_Admin_UI_Component_Form
+        extends HTML_QuickForm
+    {
+        private $dispatcher;
+
 Dangling Array References
 =========================
 
@@ -883,6 +930,39 @@ df_display() actually requires only 2 arguments, while three are provided. The l
     	return $st->display($context, $template_name);
     }
 
+Unpreprocessed Values
+=====================
+
+.. _zurmo-structures-unpreprocessed:
+
+Zurmo
+^^^^^
+
+:ref:`unpreprocessed-values`, in app/protected/core/utils/ZurmoTranslationServerUtil.php:79. 
+
+It seems that a simple concatenation could be used here. There is another call to this expression in the code, and a third that uses 'PATCH_VERSION' on top of the two others.
+
+.. code-block:: php
+
+    join('.', array(MAJOR_VERSION, MINOR_VERSION))
+
+
+--------
+
+
+.. _piwigo-structures-unpreprocessed:
+
+Piwigo
+^^^^^^
+
+:ref:`unpreprocessed-values`, in include/random_compat/random.php:34. 
+
+PHP_VERSION is actually build with PHP_MAJOR_VERSION, PHP_MINOR_VERSION and PHP_RELEASE_VERSION. There is also a compact version : PHP_VERSION_ID
+
+.. code-block:: php
+
+    explode('.', PHP_VERSION);
+
 Logical Should Use Symbolic Operators
 =====================================
 
@@ -967,6 +1047,71 @@ The ConstructHiddenValues function builds the ConstructHiddenSubValues function.
     
         return $Result;
     }
+
+Useless Unset
+=============
+
+.. _tine20-structures-uselessunset:
+
+Tine20
+^^^^^^
+
+:ref:`useless-unset`, in tine20/Felamimail/Controller/Message.php:542. 
+
+$_rawContent is unset after being sent to the stream. The variable is a parameter, and will be freed at the end of the call of the method. No need to do it explicitly.
+
+.. code-block:: php
+
+    protected function _createMimePart($_rawContent, $_partStructure)
+        {
+            if (Tinebase_Core::isLogLevel(Zend_Log::TRACE)) Tinebase_Core::getLogger()->trace(__METHOD__ . '::' . __LINE__ . ' Content: ' . $_rawContent);
+            
+            $stream = fopen(php://temp, 'r+');
+            fputs($stream, $_rawContent);
+            rewind($stream);
+            
+            unset($_rawContent);
+            //..... More code, no usage of $_rawContent
+        }
+
+
+--------
+
+
+.. _typo3-structures-uselessunset:
+
+Typo3
+^^^^^
+
+:ref:`useless-unset`, in typo3/sysext/frontend/Classes/Page/PageRepository.php:708. 
+
+$row is unset under certain conditions : here, we can read it in the comments. Eventually, the $row will be returned, and turned into a NULL, by default. This will also create a notice in the logs. Here, the best would be to set a null value, instead of unsetting the variable.
+
+.. code-block:: php
+
+    public function getRecordOverlay($table, $row, $sys_language_content, $OLmode = '')
+        {
+    //....  a lot more code, with usage of $row, and several unset($row)
+    //...... Reduced for simplicity
+                        } else {
+                            // When default language is displayed, we never want to return a record carrying
+                            // another language!
+                            if ($row[$GLOBALS['TCA'][$table]['ctrl']['languageField']] > 0) {
+                                unset($row);
+                            }
+                        }
+                    }
+                }
+            }
+            foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_page.php']['getRecordOverlay'] ?? [] as $className) {
+                $hookObject = GeneralUtility::makeInstance($className);
+                if (!$hookObject instanceof PageRepositoryGetRecordOverlayHookInterface) {
+                    throw new \UnexpectedValueException($className . ' must implement interface ' . PageRepositoryGetRecordOverlayHookInterface::class, 1269881659);
+                }
+                $hookObject->getRecordOverlay_postProcess($table, $row, $sys_language_content, $OLmode, $this);
+            }
+            return $row;
+        }
 
 Buried Assignation
 ==================
@@ -1588,7 +1733,7 @@ The first test on $this->_isSuccess settles the situation with _JSON. Then, a se
 
 .. _phpdocumentor-structures-ifwithsameconditions:
 
-phpDocumentor
+Phpdocumentor
 ^^^^^^^^^^^^^
 
 :ref:`if-with-same-conditions`, in src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:239. 
@@ -1874,7 +2019,7 @@ Too Many Local Variables
 
 .. _humo-gen-functions-toomanylocalvariables:
 
-Humo-Gen
+HuMo-Gen
 ^^^^^^^^
 
 :ref:`too-many-local-variables`, in relations.php:813. 
@@ -1966,6 +2111,47 @@ If trim($attribs['']['mode']) === 'base64', then it is set to lowercase (althoug
 .. code-block:: php
 
     if (isset($attribs['']['mode']) && strtolower(trim($attribs['']['mode']) === 'base64'))
+
+Randomly Sorted Arrays
+======================
+
+.. _contao-arrays-randomlysortedliterals:
+
+Contao
+^^^^^^
+
+:ref:`randomly-sorted-arrays`, in system/modules/core/dca/tl_module.php:259. 
+
+The array array('maxlength', 'decodeEntities', 'tl_class') is configured multiple times in this file. Most of them is in the second form, but some are in the first form. (Multiple occurrences in this file). 
+
+.. code-block:: php
+
+    array('maxlength' => 255, 'decodeEntities' => true, 'tl_class' => 'w50') // Line 246
+    array('decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'); // ligne 378
+
+
+--------
+
+
+.. _vanilla-arrays-randomlysortedliterals:
+
+Vanilla
+^^^^^^^
+
+:ref:`randomly-sorted-arrays`, in applications/dashboard/models/class.activitymodel.php:308. 
+
+'Photo' moved from last to second. This array is used with a 'Join' key, and is the base for a SQL table JOIN. As such, order is important. If this is the case, it seems unusual that the order is not the same for a join using the same tables. If it is not the case, arrays may be reordered. 
+
+.. code-block:: php
+
+    /* L 305 */        Gdn::userModel()->joinUsers(
+                $result->resultArray(),
+                ['ActivityUserID', 'RegardingUserID'],
+                ['Join' => ['Name', 'Email', 'Gender', 'Photo']]
+            );
+    
+    // L 385
+            Gdn::userModel()->joinUsers($result, ['ActivityUserID', 'RegardingUserID'], ['Join' => ['Name', 'Photo', 'Email', 'Gender']]);
 
 Only Variable Passed By Reference
 =================================
@@ -2067,7 +2253,7 @@ This code is wrong on August 29,th 30th and 31rst : 6 months before is caculated
 
 .. _edusoho-structures-nextmonthtrap:
 
-edusoho
+Edusoho
 ^^^^^^^
 
 :ref:`next-month-trap`, in src/AppBundle/Controller/Admin/AnalysisController.php:1426. 
@@ -2079,6 +2265,64 @@ The last month is wrong 8 times a year : on 31rst, and by the end of March.
     'lastMonthStart' => date('Y-m-d', strtotime(date('Y-m', strtotime('-1 month')))),
                 'lastMonthEnd' => date('Y-m-d', strtotime(date('Y-m', time())) - 24 * 3600),
                 'lastThreeMonthsStart' => date('Y-m-d', strtotime(date('Y-m', strtotime('-2 month')))),
+
+Don't Send $this In Constructor
+===============================
+
+.. _woocommerce-classes-dontsendthisinconstructor:
+
+Woocommerce
+^^^^^^^^^^^
+
+:ref:`don't-send-$this-in-constructor`, in includes/class-wc-cart.php:107. 
+
+WC_Cart_Session and WC_Cart_Fees receives $this, the current object, at a moment where it is not consistent : for example, tax_display_cart hasn't been set yet. Although it may be unexpected to have an object called WC_Cart being called by the session or the fees, this is still a temporary inconsistence. 
+
+.. code-block:: php
+
+    /**
+    	 * Constructor for the cart class. Loads options and hooks in the init method.
+    	 */
+    	public function __construct() {
+    		$this->session          = new WC_Cart_Session( $this );
+    		$this->fees_api         = new WC_Cart_Fees( $this );
+    		$this->tax_display_cart = $this->is_tax_displayed();
+    
+    		// Register hooks for the objects.
+    		$this->session->init();
+
+
+--------
+
+
+.. _contao-classes-dontsendthisinconstructor:
+
+Contao
+^^^^^^
+
+:ref:`don't-send-$this-in-constructor`, in system/modules/core/library/Contao/Model.php:110. 
+
+$this is send to $objRegistry. $objRegistry is obtained with a factory, \Model\Registry::getInstance(). It is probably fully prepared at that point. Yet, $objRegistry is called and used to fill $this properties with full values. At some point, $objRegistry return values without having a handle on a fully designed object. 
+
+.. code-block:: php
+
+    /**
+    	 * Load the relations and optionally process a result set
+    	 *
+    	 * @param \Database\Result $objResult An optional database result
+    	 */
+    	public function __construct(\Database\Result $objResult=null)
+    	{
+            // Some code was removed 
+    			$objRegistry = \Model\Registry::getInstance();
+    
+    			$this->setRow($arrData); // see #5439
+    			$objRegistry->register($this);
+    			
+            // More code below
+            // $this-> are set
+            // $objRegistry is called 
+        }
 
 Identical On Both Sides
 =======================
@@ -2626,7 +2870,7 @@ Make One Call With Array
 
 .. _humo-gen-performances-makeonecall:
 
-Humo-Gen
+HuMo-Gen
 ^^^^^^^^
 
 :ref:`make-one-call-with-array`, in admin/include/kcfinder/lib/helper_text.php:47. 
@@ -2650,7 +2894,7 @@ The three calls to str_replace() could be replaced by one, using array arguments
 
 .. _edusoho-performances-makeonecall:
 
-edusoho
+Edusoho
 ^^^^^^^
 
 :ref:`make-one-call-with-array`, in src/AppBundle/Common/StringToolkit.php:55. 

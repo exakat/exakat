@@ -964,7 +964,7 @@ Glossary
       + :ref:`Avoid Optional Properties <avoid-optional-properties>`
       + :ref:`Cant Instantiate Class <cant-instantiate-class>`
       + :ref:`Could Be Static Closure <could-be-static-closure>`
-      + :ref:`Don't Send This In Constructor <don't-send-this-in-constructor>`
+      + :ref:`Don't Send $this In Constructor <don't-send-$this-in-constructor>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Must Call Parent Constructor <must-call-parent-constructor>`
