@@ -884,7 +884,6 @@ class Load extends Tasks {
 
         if ($type === $this->phptokens::T_START_HEREDOC) {
             $string->delimiter = trim($closeQuote);
-            $string->relaxed   = substr($closeQuote, 0, - strlen($string->delimiter));
             $string->heredoc   = $openQuote[3] !== "'";
         }
 
@@ -1074,12 +1073,10 @@ class Load extends Tasks {
             $reference = self::NOT_REFERENCE;
         }
 
-        if ($atom === 'Closure') {
-            ++$this->id;
-        } else {
+        if ($atom !== 'Closure') {
             $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
-            ++$this->id;
         }
+        ++$this->id;
 
         $fullcode = array();
 
@@ -3552,7 +3549,10 @@ class Load extends Tasks {
     private function processNamespaceBlock() {
         $this->startSequence();
 
-        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG, $this->phptokens::T_NAMESPACE, $this->phptokens::T_END))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG, 
+                                                                $this->phptokens::T_NAMESPACE, 
+                                                                $this->phptokens::T_END,
+                                                                ))) {
             $this->processNext();
 
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_NAMESPACE &&

@@ -72,7 +72,6 @@ class Atom {
     public $ctype1       = '';
     public $ctype1_size  = 0;
     public $noscream     = 0;
-    public $relaxed      = null;
 
     public function __construct($id, $atom) {
         $this->id   = $id;
@@ -98,7 +97,6 @@ class Atom {
         $this->noDelimiter   = $this->protectString($this->noDelimiter);
         $this->visibility    = $this->protectString($this->visibility );
         $this->ctype1        = $this->protectString($this->ctype1     );
-        $this->relaxed       = $this->protectString($this->relaxed    );
 
         $this->alternative   = $this->alternative ? 1 : null;
         $this->reference     = $this->reference   ? 1 : null;
@@ -184,7 +182,7 @@ class Atom {
                 $this->lccode = mb_strtolower($this->code);
             }
 
-            if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode', 'relaxed' )) &&
+            if (!in_array($l, array('noDelimiter', 'lccode', 'code', 'fullcode' )) &&
                 $value === '') {
                 continue;
             }

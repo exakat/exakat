@@ -203,7 +203,7 @@ class Appinfo extends Data {
                             'Strings'             => 'String',
                             'Heredoc'             => 'Type/Heredoc',
                             'Nowdoc'              => 'Type/Nowdoc',
-                            'Relaxed Heredoc'     => 'Php/RelaxedHeredoc',
+                            'Relaxed Heredoc'     => 'Php/FlexibleHeredoc.php',
                      ),
 
                     'Errors' => array(
