@@ -395,7 +395,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 1.4.6
 
-  * Only Variable For Reference (Functions/OnlyVariableForReference)
+  * Custom/FirstTest (Custom/FirstTest)
+  * Only Variable For Reference (Functions/OnlyVariableForReference ; Analyze, LintButWontExec)
 
 * 1.4.5
 
@@ -425,7 +426,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.4.0
 
   * PHP 7.3 Removed Functions (Php/Php73RemovedFunctions)
-  * Relaxed Heredoc (Php/RelaxedHeredoc ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * Trailing Comma In Calls (Php/TrailingComma ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
 
 * 1.3.9
@@ -2330,12 +2330,11 @@ List of external links mentionned in this documentation.
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
-* `Flexible Heredoc and Nowdoc Syntaxes <https://wiki.php.net/rfc/flexible_heredoc_nowdoc_syntaxes>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
@@ -2505,6 +2504,7 @@ List of external links mentionned in this documentation.
 * `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
+* `PHPUnit <http://www.phpunit.de/>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
 * `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
@@ -2590,8 +2590,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -2607,8 +2607,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -3248,7 +3248,6 @@ CompatibilityPHP53
 |   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
-|   analyzer[] = "Php/RelaxedHeredoc";
 |   analyzer[] = "Php/StaticclassUsage";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/UnicodeEscapePartial";
@@ -3329,7 +3328,6 @@ CompatibilityPHP54
 |   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
-|   analyzer[] = "Php/RelaxedHeredoc";
 |   analyzer[] = "Php/StaticclassUsage";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/UnicodeEscapePartial";
@@ -3408,7 +3406,6 @@ CompatibilityPHP55
 |   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
-|   analyzer[] = "Php/RelaxedHeredoc";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/UnicodeEscapePartial";
 |   analyzer[] = "Php/UnicodeEscapeSyntax";
@@ -3472,7 +3469,6 @@ CompatibilityPHP56
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
 |   analyzer[] = "Php/RawPostDataUsage";
-|   analyzer[] = "Php/RelaxedHeredoc";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Php/UnicodeEscapePartial";
 |   analyzer[] = "Php/UnicodeEscapeSyntax";
@@ -3528,7 +3524,6 @@ CompatibilityPHP70
 |   analyzer[] = "Php/Php72NewClasses";
 |   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
-|   analyzer[] = "Php/RelaxedHeredoc";
 |   analyzer[] = "Php/ReservedKeywords7";
 |   analyzer[] = "Php/SetExceptionHandlerPHP7";
 |   analyzer[] = "Php/TrailingComma";
@@ -3575,7 +3570,6 @@ CompatibilityPHP71
 |   analyzer[] = "Php/Php72NewClasses";
 |   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
-|   analyzer[] = "Php/RelaxedHeredoc";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Structures/ContinueIsForLoop";
 |   analyzer[] = "Structures/NoGetClassNull";
@@ -3610,7 +3604,6 @@ CompatibilityPHP72
 |   analyzer[] = "Php/Php72ObjectKeyword";
 |   analyzer[] = "Php/Php72RemovedFunctions";
 |   analyzer[] = "Php/Php73NewFunctions";
-|   analyzer[] = "Php/RelaxedHeredoc";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Structures/CanCountNonCountable";
 |   analyzer[] = "Structures/ContinueIsForLoop";

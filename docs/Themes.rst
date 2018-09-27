@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 25 Sep 2018 17:25:12 +0000
-.. comment: Generation hash : 4186848f96be3cff5f52d9fffc9a791be6aafb5c
+.. comment: Generation date : Thu, 27 Sep 2018 13:48:27 +0000
+.. comment: Generation hash : 5cd99847f5a7be05439dbc15c3d4fe9f8d2c122d
 
 
 .. _analyze:
@@ -517,7 +517,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 73 analysis
+Total : 72 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -574,7 +574,6 @@ Total : 73 analysis
 * :ref:`Php 7.1 New Class <php-7.1-new-class>`
 * :ref:`Php 7.2 New Class <php-7.2-new-class>`
 * :ref:`Php7 Relaxed Keyword <php7-relaxed-keyword>`
-* :ref:`Relaxed Heredoc <relaxed-heredoc>`
 * :ref:`Short Syntax For Arrays <short-syntax-for-arrays>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Trailing Comma In Calls <trailing-comma-in-calls>`
@@ -598,7 +597,7 @@ Total : 73 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 69 analysis
+Total : 68 analysis
 
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -650,7 +649,6 @@ Total : 69 analysis
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
-* Php/RelaxedHeredoc
 * Php/StaticclassUsage
 * Php/TrailingComma
 * Php/UnicodeEscapePartial
@@ -675,7 +673,7 @@ Total : 69 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 61 analysis
+Total : 60 analysis
 
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -722,7 +720,6 @@ Total : 61 analysis
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
-* Php/RelaxedHeredoc
 * Php/TrailingComma
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
@@ -744,7 +741,7 @@ Total : 61 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 50 analysis
+Total : 49 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * Classes/Anonymous
@@ -782,7 +779,6 @@ Total : 50 analysis
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
-* Php/RelaxedHeredoc
 * Php/TrailingComma
 * Php/UnicodeEscapePartial
 * Php/UnicodeEscapeSyntax
@@ -802,7 +798,7 @@ Total : 50 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 44 analysis
+Total : 43 analysis
 
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -840,7 +836,6 @@ Total : 44 analysis
 * Php/Php72NewClasses
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
-* Php/RelaxedHeredoc
 * Php/TrailingComma
 * Php/UseNullableType
 * Structures/BreakOutsideLoop
@@ -854,7 +849,7 @@ Total : 44 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 29 analysis
+Total : 28 analysis
 
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
@@ -878,7 +873,6 @@ Total : 29 analysis
 * Php/Php72NewClasses
 * Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
-* Php/RelaxedHeredoc
 * Php/TrailingComma
 * Structures/ContinueIsForLoop
 * Structures/NoGetClassNull
@@ -891,7 +885,7 @@ Total : 29 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 21 analysis
+Total : 20 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -909,7 +903,6 @@ Total : 21 analysis
 * Php/PHP73LastEmptyArgument
 * Php/Php72NewClasses
 * Php/Php73NewFunctions
-* Php/RelaxedHeredoc
 * Php/TrailingComma
 * Structures/ContinueIsForLoop
 * Structures/NoGetClassNull

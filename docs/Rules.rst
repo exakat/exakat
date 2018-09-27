@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 25 Sep 2018 17:25:12 +0000
-.. comment: Generation hash : 4186848f96be3cff5f52d9fffc9a791be6aafb5c
+.. comment: Generation date : Thu, 27 Sep 2018 13:48:27 +0000
+.. comment: Generation hash : 5cd99847f5a7be05439dbc15c3d4fe9f8d2c122d
 
 
 .. _$http\_raw\_post\_data:
@@ -15603,45 +15603,6 @@ Mimicking ``register_globals`` is achieved with variables variables, `'extract()
 +------------+---------------------------------------------------------------------------------+
 | Examples   | :ref:`teampass-security-registerglobals`, :ref:`xoops-security-registerglobals` |
 +------------+---------------------------------------------------------------------------------+
-
-
-
-.. _relaxed-heredoc:
-
-Relaxed Heredoc
-###############
-
-
-Heredoc and Nowdoc syntax have been relaxed. This is a PHP 7.3 feature.
-
-.. code-block:: php
-
-   <?php
-   
-   // relaxed Heredoc syntax
-   class foo {
-       public $bar = <<<EOT
-       bar
-       EOT;
-   }
-   
-   // traditional Heredoc syntax
-   class foo {
-       public $bar = <<<EOT
-   bar
-   EOT;
-   }
-   
-   ?>
-
-
-See also `Flexible Heredoc and Nowdoc Syntaxes <https://wiki.php.net/rfc/flexible_heredoc_nowdoc_syntaxes>`_.
-
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Php/RelaxedHeredoc                                                                                                                                                                          |
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 

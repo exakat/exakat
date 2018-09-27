@@ -24,6 +24,7 @@ Contents:
    Cases
    Reports
    Configuration
+   Development
    Glossary
    Contribute
    Contributors
