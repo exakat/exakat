@@ -23,9 +23,9 @@ class RoboFile extends \Robo\Tasks {
         $build = Exakat::BUILD + 1;
 
         $this->taskReplaceInFile(__DIR__.'/library/Exakat/Exakat.php')
-            ->from("BUILD = ".Exakat::BUILD)
-            ->to("BUILD = ".$build)
-            ->run();
+             ->from("BUILD = ".Exakat::BUILD)
+             ->to("BUILD = $build")
+             ->run();
     }
 
     /**
@@ -200,102 +200,67 @@ LICENCE;
          ->run();
     }
 
-    public function pharSmallBuild() {
-        $packer = $this->taskPackPhar('exakat.phar')
-                       ->stub('stub.php');
-//                       ->compress()
-// compress yield a 'too many files open' error
-
-        $composer = file_get_contents('composer.json');
-        $buildComposer = str_replace('        "consolidation/robo":"0.6.0",', '', $composer);
-        file_put_contents('composer.json', $buildComposer);
-        shell_exec('composer update --no-dev');
-        
-        $this->updateBuild();
-
-        $packer->addFile('exakat', 'exakat');
-
-        $this->taskComposerInstall()
-             ->noDev()
-             ->optimizeAutoloader()
-             ->printed(false)
-             ->run();
-
-        $folders = array('data', 
-                         'human', 
-                         'library', 
-                         'media/devfaceted', 
-                         'server', 
-                         'vendor');
-        foreach($folders as $folder) {
-            $files = Finder::create()->ignoreVCS(true)
-                                     ->files()
-                                     ->in(__DIR__.'/'.$folder);
-            foreach($files as $file) {
-                $packer->addFile($folder.'/'.$file->getRelativePathname(), $file->getRealPath());
-            }
-        }
-
-        $packer->run();
-
-        file_put_contents('composer.json', $composer);
-        shell_exec('composer update ');
-    }    
     public function pharBuild() {
-        $packer = $this->taskPackPhar('exakat.phar')
-                       ->stub('stub.php');
-//                       ->compress()
-// compress yield a 'too many files open' error
-
-        $composer = file_get_contents('composer.json');
-        $buildComposer = str_replace('        "consolidation/robo":"0.6.0",', '', $composer);
-        file_put_contents('composer.json', $buildComposer);
-        shell_exec('composer update --no-dev');
         
-        $this->updateBuild();
-
-        $packer->addFile('exakat', 'exakat');
-
-        $this->taskComposerInstall()
-             ->noDev()
-             ->optimizeAutoloader()
-             ->printed(false)
-             ->run();
-
-        $folders = array('data', 
-                         'human', 
-                         'library', 
-                         'media/devfaceted', 
-                         'media/dependencywheel', 
-                         'media/codeflower', 
-                         'media/dependencies', 
-                         'media/faceted', 
-                         'media/clang', 
-                         'media/simpletable', 
-                         'server', 
-                         'vendor');
-        foreach($folders as $folder) {
-            $files = Finder::create()->ignoreVCS(true)
-                                     ->files()
-                                     ->in(__DIR__.'/'.$folder);
-            foreach($files as $file) {
-                $packer->addFile($folder.'/'.$file->getRelativePathname(), $file->getRealPath());
+        echo "Building version ".Exakat::VERSION."\n";
+        
+        if (file_exists('./exakat.phar')) {
+            $res = shell_exec('php exakat.phar version');
+            
+            if (preg_match('/Version : '.Exakat::VERSION.' - Build /', $res)) {
+                print 'Attempt to build the current version. Aborting.'.PHP_EOL;
+                return;
             }
+            
+        }
+        shell_exec('composer update --no-dev');
+
+        if (file_exists('exakat.phar')) {
+            unlink('exakat.phar');
         }
 
-        $packer->run();
+// create with alias "project.phar"
+        $phar = new Phar('exakat.phar', 0, 'exakat.phar');
+        $stub = <<<'PHP'
+#!/usr/bin/env php
+<?php
+Phar::mapPhar();
+include 'phar://exakat.phar/exakat';
+__HALT_
+PHP
+.'COMPILER();';
+        $phar->setStub($stub);
 
-        file_put_contents('composer.json', $composer);
-        shell_exec('composer update ');
+        $phar->addFile('exakat');
+
+        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/library')), __DIR__);
+        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/data')),    __DIR__);
+        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/server')),  __DIR__);
+        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/vendor')),  __DIR__);
+        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/human')),   __DIR__);
+
+        $this->loadFileInPhar($phar, '/media/devfaceted');
+        $this->loadFileInPhar($phar, '/media/codeflower');
+        $this->loadFileInPhar($phar, '/media/clang');
+        $this->loadFileInPhar($phar, '/media/simpletable');
+        $this->loadFileInPhar($phar, '/media/dependencywheel');
+        $this->loadFileInPhar($phar, '/media/dependencies');
+
+        shell_exec('composer update');
+
+        print "Produced ".ceil(filesize('exakat.phar') / 1024 / 1024)."Mo \n";
     }
+    
+    private function loadFileInPhar($phar, $dir) {
+        foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.$dir)) as $file => $b) {
+            if (basename($file) === '.') {continue; }
+            if (basename($file) === '..') {continue; }
 
+            $phar->addFile($file, str_replace(__DIR__, '', $file));
+        }
+    }
     public function localBuild() {
         $this->pharBuild();
-        
-        $this->taskExecStack()
-             ->stopOnFail()
-             ->exec('mv exakat.phar ../release/')
-             ->run();
     }
     
     public function checkAll() {
