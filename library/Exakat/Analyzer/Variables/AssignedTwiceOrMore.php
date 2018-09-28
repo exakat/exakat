@@ -28,6 +28,10 @@ class AssignedTwiceOrMore extends Analyzer {
     public function analyze() {
 
         $equal = $this->dictCode->translate(array('='));
+        
+        if (empty($equal)) {
+            return;
+        }
 
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('DEFINITION')
