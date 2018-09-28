@@ -1,8 +1,6 @@
 <?php
 
-$expected     = array('$fromXInUse1',
-                      '$fromXInUse2',
-                      '$onlyInCLosure',
+$expected     = array('$onlyInCLosure',
                       '$onlyInCLosure',
                       '$seemsInBothClosuresButNot',
                       '$seemsInBothClosuresButNot',
@@ -12,12 +10,12 @@ $expected     = array('$fromXInUse1',
                       '$cb2',
                       '$fromXOnly',
                       '$fromXInUse1AndInCLosure',
-                      '$fromXInUse2',
                       '$fromXInUse2AndInCLosure',
-                      '$fromXInUse1',
                      );
 
-$expected_not = array('$fromXOnlyTwice',
+$expected_not = array('$fromXInUse1',
+                      '$fromXInUse2',
+                      '$fromXOnlyTwice',
                      );
 
 ?>

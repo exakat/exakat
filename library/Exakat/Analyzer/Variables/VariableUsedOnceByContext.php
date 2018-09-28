@@ -26,56 +26,50 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class VariableUsedOnceByContext extends Analyzer {
-    
     public function dependsOn() {
         return array('Variables/InterfaceArguments',
                     );
     }
     
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Variable", "Variablearray", "Variableobject")
-     .not(where( __.in("MEMBER") ) )
-     .where( repeat( __.in({$this->linksDown}))
-                  .until(hasLabel("File")).emit().hasLabel("Function", "Closure", "Method", "Magicmethod")
-                  .count().is(eq(0))
-           ).groupCount("m").by("code").cap("m")
-      .toList().get(0).findAll{ a,b -> b == 1}.keySet()
+     .not(where( __.in("DEFINITION", "USE") ) )
+     .groupCount("m").by("code").cap("m")
+     .toList().get(0).findAll{ a,b -> b == 1}.keySet()
 GREMLIN;
         $variables = $this->query($query)
                           ->toArray();
 
+        // global variables
         $this->atomIs(self::$VARIABLES_ALL)
-             ->hasNoIn(array('PPP'))
-             ->raw('not( where( __.in("LEFT").in("PPP") ) )')
-             ->hasNoFunction()
+             ->hasNoIn(array('DEFINTION'))
              ->codeIs($variables, self::NO_TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
 
+        // by function
         $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs('ARGUMENT')
+             ->outIs('NAME')
              ->raw(<<<GREMLIN
-where( __.sideEffect{counts = [:]}
-         .repeat( out({$this->linksDown}).not( where( __.hasLabel("Function", "Closure", "Method", "Magicmethod") ) ) )
-         .emit( ).times($MAX_LOOPING)
-         .hasLabel("Variable", "Variablearray", "Variableobject", "Parametername")
-         .not( where( __.in("MEMBER") ) )
-         .sideEffect{ k = it.get().value("code"); 
-                     if (counts[k] == null) {
-                        counts[k] = 1;
-                     } else {
-                        counts[k]++;
-                     }
-          }.fold()
+not(
+    where(
+    __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray")
       )
-         .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
-         .repeat( __.out({$this->linksDown}).not( where( __.hasLabel("Function", "Closure") ) )  )
-         .emit( )
-         .times($MAX_LOOPING)
-         .hasLabel("Variable", "Variablearray", "Variableobject", "Parametername")
-         .filter{ it.get().value("code") in names }
+)
 GREMLIN
 );
+        $this->prepareQuery();
+
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->outIs(array('DEFINITION', 'USE'))
+             ->raw(<<<GREMLIN
+where(
+    __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray", "Parameter").count().is(eq(1))
+      )
+GREMLIN
+)
+             ->outIs('DEFINITION');
         $this->prepareQuery();
     }
 }
