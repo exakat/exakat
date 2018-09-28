@@ -30,50 +30,25 @@ class OverwrittenLiterals extends Analyzer {
     
         $equal = $this->dictCode->translate(array('='));
         
-        if (empty($equal)) {
-            return;
-        }
-
-        $MAX_LOOPING = self::MAX_LOOPING;
-        $assignations = $this->queryHash(<<<GREMLIN
-g.V().hasLabel("Function", "Closure", "Method", "Magicmethod")
-     .where( __.sideEffect{ m = [:]; }
-     .out("BLOCK")
-     .emit( hasLabel("Assignation")).repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING).hasLabel("Assignation")
-     .has("code", $equal[0])
-     .not( __.where( __.in("EXPRESSION").in("INIT")) )
-     .not( __.where( __.in("PPP")) )
-     .where( __.out("RIGHT").hasLabel("Integer", "String", "Real", "Null", "Boolean"))
-     .out("LEFT").hasLabel("Variable")
-     .sideEffect{ 
-            if (m[it.get().value("code")] == null) {
-                m[it.get().value("code")] = 1;
-            } else {
-                m[it.get().value("code")]++;
-            }
-      }.fold())
-      .sideEffect{ names = m.findAll{ a,b -> b > 1}.keySet() }
-      .filter{ names.size() > 0;}
-      .map{ ["key":it.get().value("fullnspath"),"value":names]; }
-GREMLIN
-        );
-
-        if (empty($assignations)) {
-            return;
-        }
-        
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->savePropertyAs('fullnspath', 'name')
-             ->atomInsideNoDefinition('Assignation')
-             ->codeIs('=')
-             ->raw('not( where( __.in("EXPRESSION").in("INIT")) )')
-             ->hasNoIn('PPP')
-             ->outIs('RIGHT')
-             ->atomIs(array('Integer', 'String', 'Real', 'Null', 'Boolean'))
-             ->inIs('RIGHT')
-             ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->isHash('code', $assignations, 'name');
+             ->outIs('DEFINITION')
+             ->atomIs('Variabledefinition')
+             ->raw(<<<GREMLIN
+     where(
+        __.out("DEFINITION").in("LEFT")
+          .hasLabel("Assignation").has("code", ***)
+          .not(where(__.in("EXPRESSION").in("INIT")))
+          .out("RIGHT").hasLabel("Integer", "String", "Real", "Null", "Boolean")
+          .count().is(gte(2))
+     )
+
+GREMLIN
+, $equal[0])
+             ->outIs('DEFINITION')
+             ->hasParent('Assignation', 'LEFT')
+             ->inIs('LEFT')
+             ->hasNoParent('For', array('EXPRESSION', 'INIT'))
+             ->outIs('LEFT');
         $this->prepareQuery();
     }
 }

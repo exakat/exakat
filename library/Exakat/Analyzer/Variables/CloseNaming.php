@@ -28,7 +28,6 @@ class CloseNaming extends Analyzer {
     public function analyze() {
         $closeVariables = $this->dictCode->closeVariables();
 
-        $MAX_LOOPING = self::MAX_LOOPING;
         if (!empty($closeVariables)) {
             $this->atomIs(self::$FUNCTIONS_ALL)
                  ->collectVariables('variables', 'code')

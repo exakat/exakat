@@ -26,48 +26,32 @@ use Exakat\Analyzer\Analyzer;
 
 class AssignedTwiceOrMore extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
 
-        $list = makeList(self::$FUNCTIONS_ALL);
         $equal = $this->dictCode->translate(array('='));
-        
-        if (empty($equal)) {
-            return;
-        }
 
-        $query = <<<GREMLIN
-g.V().hasLabel($list).where( 
-            __.sideEffect{counts = [:]; names = [];}
-              .out("BLOCK").repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING)
-              .hasLabel("Assignation").has("code", $equal[0])
-              .where( __.out("RIGHT").hasLabel("Integer", "Real", "Boolean", "Null", "Heredoc", "String").not(where(__.out("CONCAT"))))
-              .out("LEFT").hasLabel("Variable")
-              .sideEffect{ k = it.get().value("fullcode"); 
-                           if (counts[k] == null) {
-                              counts[k] = 1;
-                           } else {
-                              counts[k]++;
-                           }
-                        }
-                .fold()
-            )
-           .sideEffect{ names = counts.findAll{ a,b -> b > 1}.keySet() }
-           .filter{ names.size() > 0;}
-           .map{ ["key":it.get().value("fullnspath"),"value":names]; }
-GREMLIN;
-        $variables = $this->queryHash($query);
-        
-        if (empty($variables)) {
-            return;
-        }
-        
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->savePropertyAs('fullnspath', 'name')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Assignation')
-             ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->isHash('fullcode', $variables, 'name');
+             ->outIs('DEFINITION')
+             ->atomIs('Variabledefinition')
+             ->raw(<<<GREMLIN
+     where(
+        __.out("DEFINITION").in("LEFT")
+          .hasLabel("Assignation").has("code", ***)
+          .not(where(__.in("EXPRESSION").in("INIT")))
+          .out("RIGHT").hasLabel("Integer", "Real", "Boolean", "Null", "Heredoc", "String").not(where(__.out("CONCAT")))
+          .count().is(gte(2))
+     )
+
+GREMLIN
+, $equal[0])
+             ->outIs('DEFINITION')
+             ->hasParent('Assignation', 'LEFT')
+             ->inIs('LEFT')
+             ->hasNoParent('For', array('EXPRESSION', 'INIT'))
+             ->outIs('RIGHT')
+             ->atomIs(array('Integer', 'Real', 'Boolean', 'Null', 'Heredoc', 'String'))
+             ->hasNoOut('CONCAT')
+             ->inIs('RIGHT')
+             ->outIs('LEFT');
         $this->prepareQuery();
     }
 }
