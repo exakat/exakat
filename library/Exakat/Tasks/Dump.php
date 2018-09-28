@@ -223,7 +223,7 @@ SQL;
                 }
                 throw new NoSuchThema($thema);
             }
-            display('Processing thema : '.$thema);
+            display("Processing thema : $thema");
         } elseif ($this->config->program !== null) {
             $analyzer = $this->config->program;
             if(is_array($analyzer)) {
@@ -240,7 +240,7 @@ SQL;
             display('Processing '.count($themes).' analyzer'.(count($themes) > 1 ? 's' : '').' : '.implode(', ', $themes));
         }
 
-        $sqlitePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
+        $sqlitePath = "{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite";
 
         $counts = array();
         $datastore = new \Sqlite3($sqlitePath, \SQLITE3_OPEN_READONLY);
@@ -270,14 +270,14 @@ SQL;
         $this->log->log( 'Still '.count($themes)." to be processed\n");
         display('Still '.count($themes)." to be processed\n");
         if (empty($themes) && $this->config->thema !== null) {
-            $this->sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$this->config->thema.'")');
+            $this->sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "{$this->config->thema}")');
         }
 
         $this->finish();
     }
     
     public function finalMark($finalMark) {
-        $sqlite = new \Sqlite3( $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite' );
+        $sqlite = new \Sqlite3( "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite" );
 
         $values = array();
         foreach($finalMark as $key => $value) {
@@ -1684,7 +1684,7 @@ SQL;
 
         $values = array();
         foreach($index as $row) {
-            $values[] = '("'.$row['name'].'","'.$row['type'].'",'.$row['total'].','.$row['expression'].',"'.$row['file'].'") ';
+            $values[] = "('$row[name]', '$row[type]', $row[total], $row[expression],'{$this->sqlite->escapeString($row['file'])}') ";
         }
 
         $query = 'INSERT INTO readability ("name", "type", "tokens", "expressions", "file") VALUES '.implode(', ', $values);
