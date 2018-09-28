@@ -20,6 +20,7 @@ php exakat remove -p ut4
 
 #zip project
 php exakat init -p ut5 -zip -R http://files.spip.org/spip/stable/spip-3.1.zip -v
+php exakat remove -p ut5
 
 #copy project
 php exakat init -p ut6 -copy -R projects/ut5/code 
@@ -29,8 +30,17 @@ php exakat init -p ut7 -symlink -R projects/ut5/code
 php exakat files -p ut7
 php exakat remove -p ut7
 
-# clen previous
-php exakat remove -p ut5
+php exakat init -p ut8人 -v
+php exakat init -p ut8人 -v -D # testing for delete
+php exakat remove -p ut8人
+
+#Error generating 
+php exakat init -p test -v
+php exakat init -p onepage -v
+php exakat init -p test/test -v
+php exakat init -p '!)*@(*!#' -v
+
+# clean previous
 
 cd -
 
