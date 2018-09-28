@@ -1128,12 +1128,12 @@ class Load extends Tasks {
                 ++$this->id; // Skip ( or ,
                 if ($this->tokens[$this->id][0] === $this->phptokens::T_AND) {
                     ++$this->id;
-                    $this->processSingle('Variable');
+                    $this->processSingle('Parameter');
                     $arg = $this->popExpression();
                     $arg->reference = self::REFERENCE;
                     $arg->fullcode = "&$arg->fullcode";
                 } else {
-                    $this->processSingle('Variable');
+                    $this->processSingle('Parameter');
                     $arg = $this->popExpression();
                 }
                 ++$this->id;
@@ -1143,6 +1143,7 @@ class Load extends Tasks {
                 
                 $this->addLink($function, $arg, 'USE');
                 $this->currentVariables[$arg->code] = $arg;
+                $this->addLink($previousContextVariables[$arg->code], $arg, 'DEFINITION');
             } while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
         }
 
