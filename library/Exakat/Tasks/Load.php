@@ -1143,7 +1143,9 @@ class Load extends Tasks {
                 
                 $this->addLink($function, $arg, 'USE');
                 $this->currentVariables[$arg->code] = $arg;
-                $this->addLink($previousContextVariables[$arg->code], $arg, 'DEFINITION');
+                if (isset($previousContextVariables[$arg->code])) {
+                    $this->addLink($previousContextVariables[$arg->code], $arg, 'DEFINITION');
+                }
             } while ($this->tokens[$this->id][0] === $this->phptokens::T_COMMA);
         }
 
