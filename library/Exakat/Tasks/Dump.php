@@ -1646,7 +1646,7 @@ GREMLIN;
         $loops = 20;
         $query = <<<GREMLIN
 g.V().sideEffect{ functions = 0; name=""; expression=0;}
-    .hasLabel("Function", "Closure", "Method", "File")
+    .hasLabel("Function", "Closure", "Method", "Magicmethod", "File")
     .not(where( __.out("BLOCK").hasLabel("Void")))
     .sideEffect{ ++functions; }
     .where(__.coalesce( __.out("NAME").sideEffect{ name=it.get().value("fullcode"); }.in("NAME"),
