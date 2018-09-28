@@ -35,10 +35,13 @@ class IsaMagicProperty extends Analyzer {
     public function analyze() {
         // echo $this->a;
         $this->atomIs('Member')
+             ->outIs('OBJECT')
+             ->atomIs('This')
+             ->back('first')
              ->analyzerIsNot('Classes/DefinedProperty')
              ->analyzerIs('Classes/IsRead')
-             ->hasClass()
              ->goToClass()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('MAGICMETHOD')
              ->outIs('NAME')
              ->codeIs('__get')
@@ -47,10 +50,13 @@ class IsaMagicProperty extends Analyzer {
 
         // $this->a = 1;
         $this->atomIs('Member')
+             ->outIs('OBJECT')
+             ->atomIs('This')
+             ->back('first')
              ->analyzerIsNot('Classes/DefinedProperty')
              ->analyzerIs('Classes/IsModified')
-             ->hasClass()
              ->goToClass()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('MAGICMETHOD')
              ->outIs('NAME')
              ->codeIs('__set')
