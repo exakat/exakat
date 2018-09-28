@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ScalarOrObjectProperty extends Analyzer {
     public function analyze() {
         $literals = array('Integer', 'String', 'Real');
-        
+
         // Property defined as literal, used as object
         $this->atomIs('Class')
              ->outIs('PPP')
@@ -35,17 +35,9 @@ class ScalarOrObjectProperty extends Analyzer {
              ->_as('results')
              ->savePropertyAs('propertyname', 'name')
              ->outIs('DEFAULT')
-             ->atomIs($literals)
-             ->back('first')
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Member')
-             ->outIs('MEMBER')
-             ->samePropertyAs('code', 'name')
-             ->inIs('MEMBER')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
+             ->isLiteral()
+             ->inIs('DEFAULT')
+             ->outIs('DEFINITION')
              ->inIs('OBJECT') // Good for methodcall and properties
              ->back('results');
         $this->prepareQuery();
@@ -57,33 +49,22 @@ class ScalarOrObjectProperty extends Analyzer {
              ->_as('results')
              ->savePropertyAs('propertyname', 'name')
              ->raw('or( __.out("DEFAULT").hasLabel("Null"), __.not(out("DEFAULT")) )')
-             ->back('first')
-             
-             ->findAssignation('New')
-             ->findAssignation($literals)
-             
-             ->back('results');
-        $this->prepareQuery();
-    }
-    
-    private function findAssignation($atoms) {
-        $this->outIs('METHOD')
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition('Member')
-             ->outIs('MEMBER')
-             ->samePropertyAs('code', 'name')
-             ->inIs('MEMBER')
-             ->outIs('OBJECT')
-             ->atomIs('This')
-             ->inIs('OBJECT')
+
+             ->outIs('DEFINITION')
              ->inIs('LEFT')
              ->atomIs('Assignation')
-             ->codeIs('=')
              ->outIs('RIGHT')
-             ->atomIs($atoms)
-             ->back('first');
+             ->atomIs('New')
+             
+             ->back('results')
+             ->outIs('DEFINITION')
+             ->inIs('LEFT')
+             ->atomIs('Assignation')
+             ->outIs('RIGHT')
+             ->atomIs($literals)
 
-        return $this;
+             ->back('results');
+        $this->prepareQuery();
     }
 }
 

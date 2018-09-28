@@ -30,6 +30,10 @@ class OverwrittenLiterals extends Analyzer {
     
         $equal = $this->dictCode->translate(array('='));
         
+        if (empty($equal)) {
+            return;
+        }
+        
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('DEFINITION')
              ->atomIs('Variabledefinition')

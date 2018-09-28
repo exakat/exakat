@@ -26,21 +26,35 @@ use Exakat\Analyzer\Analyzer;
 
 class PropertyUsedInOneMethodOnly extends Analyzer {
     public function dependsOn() {
-        return array('Classes/UsedOnceProperty');
+        return array('Classes/UsedOnceProperty',
+                    );
     }
     
     public function analyze() {
-        $this->atomIs('Ppp')
-             ->hasClass()
+        $MAX_LOOPING = self::MAX_LOOPING;
+
+        $this->atomIs('Class')
+             ->outIs('PPP')
              ->outIs('PPP')
              ->analyzerIsNot('Classes/UsedOnceProperty')
              ->_as('results')
              ->savePropertyAs('propertyname', 'name')
-             ->goToClass()
-             ->raw('where( __.out("METHOD").hasLabel("Method").out("BLOCK")
-             .where( __.map(__.repeat( out('.$this->linksDown.') ).emit().times('.self::MAX_LOOPING.')
-                                .hasLabel("Member").out("MEMBER").filter{ it.get().value("code") == name}.count()).is(neq(0)) )
-             .count().is(eq(1)) )')
+             ->back('first')
+             ->raw(<<<GREMLIN
+where( 
+    __.out("METHOD", "MAGICMETHOD")
+      .out("BLOCK")
+      .where( 
+          __.repeat( __.out({$this->linksDown}) ).emit().times($MAX_LOOPING)
+            .hasLabel("Member")
+            .out("MEMBER")
+            .filter{ it.get().value("code") == name; }
+            .count().is(neq(0)) 
+       )
+       .count().is(eq(1)) 
+    )
+GREMLIN
+)
              ->back('results');
         $this->prepareQuery();
     }
