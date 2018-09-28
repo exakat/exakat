@@ -1,6 +1,6 @@
 <?php
 
-function x() {
+$a = function () {
     $a = foo();
     echo $a->b;
     

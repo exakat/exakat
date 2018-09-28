@@ -26,29 +26,24 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class WrittenOnlyVariable extends Analyzer {
-    
     public function dependsOn() {
         return array('Variables/IsRead',
                     );
     }
     
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->raw(<<<GREMLIN
-local(
-    __.sideEffect{ x = [];}
-      .out("DEFINITION", "ARGUMENT").coalesce(__.out("NAME"), filter{true}).out("DEFINITION").not(hasLabel('Functioncall'))
-      .hasLabel("Variable", "Variableobject", "Variablearray")
-      .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead"))
-      .sideEffect{x.add(it.get().value("code"));}
-      .barrier()
-    )
-    .select("first")
-    .out("DEFINITION", "ARGUMENT").coalesce(__.out("NAME"), filter{true}).out("DEFINITION").not(hasLabel('Functioncall'))
-    .hasLabel("Variable", "Variableobject", "Variablearray")
-    .filter{ !(it.get().value("code") in x)}
+out("DEFINITION", "ARGUMENT").coalesce(__.out("NAME"), filter{true})
+.as("origin")
+.not( 
+      __.where(
+          __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray")
+            .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead"))
+              )
+     )
+.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray")
+    
 GREMLIN
 );
         $this->prepareQuery();

@@ -1,8 +1,9 @@
 <?php
 
-function x($a) {
-    $a = "e";
-    $d = new $a('c');
+trait t {
+    function x($a) {
+        $a = "e";
+        $d = new $a('c');
+    }
 }
-
 ?>
