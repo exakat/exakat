@@ -600,6 +600,12 @@ GREMLIN;
         return $this;
     }
 
+    public function noCodeInside($atom, $values) {
+        $this->query->noCodeInside($atom, $values);
+        
+        return $this;
+    }
+
     public function noPropertyInside($property, $values) {
         $this->query->noPropertyInside($property, $values);
         

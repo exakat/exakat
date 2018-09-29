@@ -21,31 +21,33 @@
 */
 
 
-namespace Exakat\Analyzer\Structures;
+namespace Exakat\Query\DSL;
 
+use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
-class ForWithFunctioncall extends Analyzer {
-    public function analyze() {
-        //for(; $b < 10; $a++)
-        $this->atomIs('For')
-            // This looks for variables inside the INCREMENT
-             ->outIs('INCREMENT')
-             ->collectVariables('variables')
-             ->back('first')
-             ->outIs('FINAL')
-             ->atomInsideNoDefinition('Functioncall')
-            // This checks for usage of increment variables inside the FINAL
-             ->noCodeInside('Variable', 'variables')
-             ->back('first');
-        $this->prepareQuery();
+class NoCodeInside extends DSL {
+    public function run() : Command {
+        list($atom, $values) = func_get_args();
 
-        $this->atomIs('For')
-             ->outIs('INCREMENT')
-             ->atomInsideNoDefinition('Functioncall')
-             ->back('first');
-        $this->prepareQuery();
+        $atomFilter = makeList(makeArray($atom));
+
+        assert($this->assertAtom($atom));
+        $MAX_LOOPING = self::$MAX_LOOPING;
+        $linksDown = self::$linksDown;
+
+        // $fullcode is a name of a variable
+        $gremlin = <<<GREMLIN
+not(
+    __.where( 
+        __.repeat( __.out({$linksDown})).emit().times($MAX_LOOPING)
+          .hasLabel($atomFilter)
+          .filter{ it.get().value("code") in $values; }
+    )
+)
+
+GREMLIN;
+        return new Command($gremlin);
     }
 }
-
 ?>
