@@ -33,13 +33,13 @@ class CacheVariableOutsideLoop extends Analyzer {
     public function analyze() {
         $MAX_LOOPING = self::MAX_LOOPING;
 
-        // Une variable dans le block du foreach,
+        // foreach($a as $b) { $c = }
         // qui n'est jamais modifiée
         $this->atomIs('Foreach')
              ->outIs('BLOCK')
              ->raw(<<<GREMLIN
 where(
-    __.sideEffect{ x = [:]; blind = [];}
+    __.sideEffect{ x = [:]; }
       .where(
         __.in("BLOCK").out("VALUE").coalesce( __.out("INDEX", "VALUE"), filter{ true; })
           .sideEffect{ x[it.get().value("code")] = 0;}

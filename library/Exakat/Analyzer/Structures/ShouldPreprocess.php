@@ -35,8 +35,6 @@ class ShouldPreprocess extends Analyzer {
         $dynamicAtoms = array('Variable', 'Array', 'Member', 'Magicconstant', 'Staticmethodcall', 'Staticproperty', 'Methodcall');
         //'Functioncall' : if they also have only constants.
         
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         $functionList = self::$methods->getDeterministFunctions();
         $functionList = makeFullNsPath($functionList);
 
@@ -46,26 +44,10 @@ class ShouldPreprocess extends Analyzer {
              ->hasNoInstruction('Constant')
 
             // Functioncall, that are not authorized
-             ->raw(<<<GREMLIN
-not( 
-    where( __.emit( ).repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING)
-             .hasLabel("Functioncall").has("fullnspath")
-             .has("token", within($tokenList))
-             .filter{ !(it.get().value("fullnspath") in ***) } 
-         ) 
-)
-GREMLIN
-, $functionList)
+             ->noAtomWithoutPropertyInside('Functioncall', 'fullnspath', $functionList)
+             ->noAnalyzerInside(array('Identifier', 'Nsname'), 'Constants/IsPhpConstant')
+
             // PHP Constantes are not authorized
-             ->raw(<<<GREMLIN
-not( 
-    where( __.emit( ).repeat( __.out({$this->linksDown}) ).times($MAX_LOOPING)
-             .hasLabel("Identifier", "Nsname").has("fullnspath")
-             .where( __.in("ANALYZED").has("analyzer", "Constants/IsPhpConstant"))
-          )     
-)
-GREMLIN
-)
              ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
 

@@ -492,6 +492,12 @@ GREMLIN;
         return $this;
     }
 
+    protected function goToAllElse() {
+        $this->query->GoToAllElse();
+        
+        return $this;
+    }
+
     public function tokenIs($token) {
         $this->query->tokenIs($token);
         
@@ -606,8 +612,20 @@ GREMLIN;
         return $this;
     }
 
-    public function noPropertyInside($property, $values) {
-        $this->query->noPropertyInside($property, $values);
+    public function noPropertyInside($atom, $property, $values) {
+        $this->query->noPropertyInside($atom, $property, $values);
+        
+        return $this;
+    }
+    
+    public function noAtomWithoutPropertyInside($atom, $property, $values) {
+        $this->query->NoAtomWithoutPropertyInside($atom, $property, $values);
+        
+        return $this;
+    }
+    
+    public function noAnalyzerInside($atoms, $analyzer) {
+        $this->query->noAnalyzerInside($atoms, $analyzer);
         
         return $this;
     }

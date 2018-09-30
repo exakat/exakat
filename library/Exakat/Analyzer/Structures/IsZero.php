@@ -32,9 +32,10 @@ class IsZero extends Analyzer {
         // $a = $d + $c -$e - $c;
         $minus = $this->dictCode->translate(array('-'));
         
-        $max_looping = self::MAX_LOOPING;
+        $MAX_LOOPING = self::MAX_LOOPING;
         $follow = 'coalesce( __.hasLabel("Parenthesis").out("CODE"), __.hasLabel("Assignation").out("RIGHT"), __.filter{ true; })';
         $follow .= '.'.$follow;
+
         if (!empty($minus)) {
             $this->atomIs('Addition')
                  ->raw('not( where( __.in("RIGHT").hasLabel("Addition").has("token", "T_MINUS")) )')
@@ -45,7 +46,7 @@ class IsZero extends Analyzer {
     
                  ->raw(<<<GREMLIN
 emit().repeat( __.out("RIGHT").$follow )
-                               .times($max_looping).coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
+                               .times($MAX_LOOPING).coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
                                                               __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow)
 GREMLIN
 , $minus, $minus)
@@ -65,7 +66,7 @@ GREMLIN
     
                  ->raw(<<<GREMLIN
 emit().repeat( __.out("RIGHT").$follow )
-                               .times($max_looping).coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
+                               .times($MAX_LOOPING).coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
                                                               __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow)
 GREMLIN
 , $plus, $plus)

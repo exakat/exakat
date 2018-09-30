@@ -44,7 +44,8 @@ class LogicalToInArray extends Analyzer {
              ->atomIs(self::$LITERALS)
              ->back('first')
              
-             ->raw('emit().repeat( __.out("RIGHT", "LEFT")).times('.self::MAX_LOOPING.').hasLabel("Logical").has("token", within("T_LOGICAL_OR", "T_BOOLEAN_OR"))')
+             ->atomInside('Logical')
+             ->tokenIs(array('T_LOGICAL_OR', 'T_BOOLEAN_OR'))
              
              ->outIs('RIGHT')
              ->outIsIE('CODE')

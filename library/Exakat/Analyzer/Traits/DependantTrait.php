@@ -127,8 +127,6 @@ GREMLIN
              ->samePropertyAs('fullnspath', 'fnp')
              ->back('first');
         $this->prepareQuery();
-
-
     }
 }
 

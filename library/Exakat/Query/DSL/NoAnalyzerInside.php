@@ -20,27 +20,30 @@
  *
 */
 
-namespace Exakat\Analyzer\Structures;
 
-use Exakat\Analyzer\Analyzer;
+namespace Exakat\Query\DSL;
 
-class InconsistentElseif extends Analyzer {
-    public function analyze() {
-        // if ($a == 1) {} elseif ($b == 2) {}
-        $this->atomIs('Ifthen')
-             ->isNot('token', 'T_ELSEIF')
-             ->outIs('CONDITION')
-             ->collectVariables('variables')
-             ->back('first')
-             ->goToAllElse()
-             ->outIs('CONDITION')
-             ->collectVariables('variables2')
+use Exakat\Query\Query;
 
-             ->filter('variables.intersect(variables2) == []')
-             
-             ->back('first');
-        $this->prepareQuery();
+class NoAnalyzerInside extends DSL {
+    public function run() {
+        list($atoms, $analyzer) = func_get_args();
+
+        $MAX_LOOPING = self::$MAX_LOOPING;
+        $linksDown = self::$linksDown;
+        $atomList = makeList(makeArray($atoms));
+
+$gremlin = <<<GREMLIN
+not( 
+    where( __.emit( ).repeat( __.out({$linksDown}) ).times($MAX_LOOPING)
+             .hasLabel($atomList)
+             .has("fullnspath")
+             .where( __.in("ANALYZED").has("analyzer", within(***)))
+          )     
+)
+GREMLIN;
+        return new Command($gremlin,
+                           array($analyzer));
     }
 }
-
 ?>
