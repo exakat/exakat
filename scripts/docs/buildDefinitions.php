@@ -266,7 +266,6 @@ class Docs {
             }
             $analyzer = substr(basename($file), 0, -4);
             $name = "$folder/$analyzer";
-            print $name.PHP_EOL;
             
             $res = $this->analyzers->query(<<<SQL
 SELECT GROUP_CONCAT(c.name, ', ') AS categories FROM analyzers a
@@ -432,7 +431,7 @@ SQL
     
             $section = $reportIni['name']."\n".str_repeat('-', strlen($reportIni['name']))."\n\n";
             $section .= $reportIni['mission']."\n\n".$reportIni['description']."\n\n";
-    
+
             foreach($reportIni['examples'] as $id => $example) {
                 if (preg_match('/\.png$/', $example)) {
                     $section .= ".. image:: images/$example
@@ -554,6 +553,10 @@ $exampleTxt
         $commandLine = $analyzer;
         
         $desc = $this->glossary($ini['name'], $ini['description']);
+
+        if (isset($ini['modifications'])) {
+            $desc .= "\nSuggestions\n--------------\n\n* ".implode("\n* ", $ini['modifications'])."\n\n\n";
+        }
         $desc = trim($this->rst_escape($desc));
         
         if (!empty($ini['clearphp'])) {
@@ -601,7 +604,6 @@ $explain
 .. code-block:: php
 
 $code
-
 
 SPHINX;
                 $this->applications_names[$ini['example'.$i]['project']] = 1;
