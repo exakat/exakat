@@ -1,8 +1,6 @@
 <?php
 
-$expected     = array('SessionHandlerInterface',
-                      'SessionIdInterface',
-                      'SessionUpdateTimestampHandlerInterface',
+$expected     = array(
                      );
 
 $expected_not = array('SomeInterface',

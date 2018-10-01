@@ -30,11 +30,8 @@ class Php72RemovedInterfaces extends InterfaceUsage {
     protected $phpVersion = '7.2-';
     
     public function analyze() {
-        $this->interfaces = array('SessionHandlerInterface',
-                                  'SessionIdInterface',
-                                  'SessionUpdateTimestampHandlerInterface',
-                                  );
-        parent::analyze();
+        $this->interfaces = array();
+        return;
     }
 }
 
