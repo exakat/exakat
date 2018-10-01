@@ -155,7 +155,6 @@ Glossary
 
     + `break`
 
-      + :ref:`Bail Out Early <bail-out-early>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Break With 0 <break-with-0>`
       + :ref:`Break With Non Integer <break-with-non-integer>`
@@ -456,10 +455,6 @@ Glossary
 
 
 + `I`
-    + `Insteadof`
-
-      + :ref:`Undefined Insteadof <undefined-insteadof>`
-
     + `Isset`
 
       + :ref:`No Isset With Empty <no-isset-with-empty>`
@@ -720,6 +715,10 @@ Glossary
 
 
 + `S`
+    + `Strtr()`
+
+      + :ref:`Strtr Arguments <strtr-arguments>`
+
     + `Switch()`
 
       + :ref:`Missing Cases In Switch <missing-cases-in-switch>`

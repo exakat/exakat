@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Thu, 27 Sep 2018 13:48:27 +0000
-.. comment: Generation hash : 5cd99847f5a7be05439dbc15c3d4fe9f8d2c122d
+.. comment: Generation date : Mon, 01 Oct 2018 10:18:55 +0000
+.. comment: Generation hash : aa375cd914e4f9a1bb8d3b7354822fa760f2374b
 
 
 .. _analyze:
@@ -517,7 +517,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 72 analysis
+Total : 71 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -566,7 +566,6 @@ Total : 72 analysis
 * :ref:`PHP 7.1 Scalar Typehints <php-7.1-scalar-typehints>`
 * :ref:`PHP 7.2 Scalar Typehints <php-7.2-scalar-typehints>`
 * :ref:`PHP 7.3 Last Empty Argument <php-7.3-last-empty-argument>`
-* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
@@ -597,7 +596,7 @@ Total : 72 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 68 analysis
+Total : 67 analysis
 
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -646,7 +645,6 @@ Total : 68 analysis
 * Php/Php70NewInterfaces
 * Php/Php71NewClasses
 * Php/Php72NewClasses
-* Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
 * Php/StaticclassUsage
@@ -673,7 +671,7 @@ Total : 68 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 60 analysis
+Total : 59 analysis
 
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -717,7 +715,6 @@ Total : 60 analysis
 * Php/Php70NewInterfaces
 * Php/Php71NewClasses
 * Php/Php72NewClasses
-* Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
 * Php/TrailingComma
@@ -741,7 +738,7 @@ Total : 60 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 49 analysis
+Total : 48 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * Classes/Anonymous
@@ -776,7 +773,6 @@ Total : 49 analysis
 * Php/Php70NewInterfaces
 * Php/Php71NewClasses
 * Php/Php72NewClasses
-* Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/Php7RelaxedKeyword
 * Php/TrailingComma
@@ -798,7 +794,7 @@ Total : 49 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 43 analysis
+Total : 42 analysis
 
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -834,7 +830,6 @@ Total : 43 analysis
 * Php/PHP73LastEmptyArgument
 * Php/Php71NewClasses
 * Php/Php72NewClasses
-* Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/TrailingComma
 * Php/UseNullableType
@@ -849,7 +844,7 @@ Total : 43 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 28 analysis
+Total : 27 analysis
 
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
@@ -871,7 +866,6 @@ Total : 28 analysis
 * Php/Php70RemovedDirective
 * Php/Php70RemovedFunctions
 * Php/Php72NewClasses
-* Php/Php72RemovedInterfaces
 * Php/Php73NewFunctions
 * Php/TrailingComma
 * Structures/ContinueIsForLoop
@@ -1104,7 +1098,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 63 analysis
+Total : 62 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1156,7 +1150,6 @@ Total : 63 analysis
 * Php/LogicalInLetters
 * Php/ShouldUseArrayColumn
 * Php/ShouldUseCoalesce
-* Php/UseNullableType
 * Structures/BooleanStrictComparison
 * Structures/CouldUseDir
 * Structures/DropElseAfterReturn

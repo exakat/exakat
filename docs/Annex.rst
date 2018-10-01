@@ -327,11 +327,11 @@ A number of applications were scanned in order to find real life examples of pat
 * `Dolphin <https://www.boonex.com/>`_
 * `XOOPS <https://xoops.org/>`_
 * `Woocommerce <https://woocommerce.com/>`_
+* `Phpdocumentor <https://www.phpdoc.org/>`_
+* `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `Contao <https://contao.org/en/>`_
 * `ChurchCRM <http://churchcrm.io/>`_
 * `HuMo-Gen <http://humogen.com/>`_
-* `phpMyAdmin <https://www.phpmyadmin.net/>`_
-* `Phpdocumentor <https://www.phpdoc.org/>`_
 * `TeamPass <https://teampass.net/>`_
 * `opencfp <https://github.com/opencfp/opencfp>`_
 * `PrestaShop <https://prestashop.com/>`_
@@ -793,7 +793,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * No Magic With Array (Classes/NoMagicWithArray ; Analyze, Level 4)
   * Optional Parameter (Functions/OptionalParameter ; DefensiveProgrammingTM)
   * PHP 7.2 Object Keyword (Php/Php72ObjectKeyword ; CompatibilityPHP72)
-  * PHP 72 Removed Interfaces (Php/Php72RemovedInterfaces ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
+  * PHP 72 Removed Interfaces (Php/Php72RemovedInterfaces ; Under Work)
   * ext/xattr (Extensions/Extxattr ; Appinfo)
 
 * 0.12.3
@@ -1820,7 +1820,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Use Constant As Arguments (Functions/UseConstantAsArguments ; Analyze, Codacy, Simple)
   * Use Instanceof (Classes/UseInstanceof ; Analyze, Codacy, Simple)
   * Use Lower Case For Parent, Static And Self (Php/CaseForPSS ; CompatibilityPHP54, CompatibilityPHP53, Codacy)
-  * Use Nullable Type (Php/UseNullableType ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, Suggestions)
+  * Use Nullable Type (Php/UseNullableType ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
   * Use Object Api (Php/UseObjectApi ; Analyze, ClearPHP, Codacy, Simple)
   * Use Pathinfo (Php/UsePathinfo ; Analyze, Codacy, Simple, Level 3)
   * Use System Tmp (Structures/UseSystemTmp ; Analyze, Codacy, Simple, Level 3)
@@ -2031,7 +2031,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-36 PHP error message detailled : 
+37 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
@@ -2069,6 +2069,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Uncaught ArgumentCountError: Too few arguments to function, 0 passed <wrong-number-of-arguments>`
 * :ref:`Undefined function <undefined-functions>`
 * :ref:`Undefined variable:  <undefined-variable>`
+* :ref:`syntax error, unexpected '-', expecting '=' <invalid-constant-name>`
 
 
 
@@ -2082,6 +2083,7 @@ List of external services whose configuration files has been commited in the cod
 * `Apple <http://www.apple.com/>`_ - .DS_Store
 * `appveyor <http://www.appveyor.com/>`_ - appveyor.yml, .appveyor.yml
 * `ant <https://ant.apache.org/>`_ - build.xml
+* `apigen <http://apigen.github.io/ApiGen/>`_ - apigen.yml, apigen.neon
 * `arcunit <https://www.archunit.org/>`_ - .arcunit
 * `artisan <http://laravel.com/docs/5.1/artisan>`_ - artisan
 * `atoum <http://atoum.org/>`_ - .bootstrap.atoum.php, .atoum.php, .atoum.bootstrap.php
@@ -2100,7 +2102,7 @@ List of external services whose configuration files has been commited in the cod
 * `couscous <http://couscous.io/>`_ - couscous.yml
 * `Code Sniffer <https://github.com/squizlabs/PHP_CodeSniffer>`_ - .php_cs, .php_cs.dist, .phpcs.xml, php_cs.dist
 * `coveralls <https://coveralls.zendesk.com/>`_ - .coveralls.yml
-* `docker <http://www.docker.com/>`_ - .dockerignore, .docker
+* `docker <http://www.docker.com/>`_ - .dockerignore, .docker, docker-compose.yml
 * `drone <http://docs.drone.io/>`_ - .dockerignore, .docker
 * `editorconfig <https://editorconfig.org/>`_ - .drone.yml
 * `eslint <http://eslint.org/>`_ - .eslintrc, .eslintignore, eslintrc.js, .eslintrc.js, .eslintrc.json
@@ -2117,12 +2119,17 @@ List of external services whose configuration files has been commited in the cod
 * `jetbrains <https://www.jetbrains.com/phpstorm/>`_ - .idea
 * `jshint <http://jshint.com/>`_ - .jshintrc, .jshintignore
 * `mercurial <https://www.mercurial-scm.org/>`_ - .hg, .hgtags, .hgignore, .hgeol
+* `mkdocs <http://www.mkdocs.org>`_ - mkdocs.yml
 * `npm <https://www.npmjs.com/>`_ - package.json, .npmignore, .npmrc
 * `openshift <https://www.openshift.com/>`_ - .openshift
 * `phan <https://github.com/etsy/phan>`_ - .phan
 * `pharcc <https://github.com/cbednarski/pharcc>`_ - .pharcc.yml
 * `phalcon <https://phalconphp.com/>`_ - .phalcon
-* `phpdocumentor <http://docs.phpdoc.org/>`_ - phpdox.xml.dist, phpdox.xml
+* `phpbench <https://github.com/phpbench/phpbench>`_ - phpbench.json
+* `phpci <https://www.phptesting.org/>`_ - phpci.yml
+* `phpdocumentor <http://docs.phpdoc.org/>`_ - .phpdoc.xml
+* `phpdox <https://github.com/theseer/phpdox>`_ - phpdox.xml.dist, phpdox.xml
+* `phinx <https://phinx.org/>`_ - phinx.yml
 * `phpformatter <https://github.com/mmoreram/php-formatter>`_ - .formatter.yml
 * `phpmetrics <http://www.phpmetrics.org/>`_ - .phpmetrics.yml.dist
 * `phpsa <https://github.com/ovr/phpsa>`_ - .phpsa.yml
@@ -2326,8 +2333,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
@@ -2417,8 +2424,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2500,8 +2507,9 @@ List of external links mentionned in this documentation.
 * `PHP RFC: is_countable <https://wiki.php.net/rfc/is-countable>`_
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
-* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
 * `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PHPUnit <http://www.phpunit.de/>`_
@@ -3245,7 +3253,6 @@ CompatibilityPHP53
 |   analyzer[] = "Php/Php70NewInterfaces";
 |   analyzer[] = "Php/Php71NewClasses";
 |   analyzer[] = "Php/Php72NewClasses";
-|   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
 |   analyzer[] = "Php/StaticclassUsage";
@@ -3325,7 +3332,6 @@ CompatibilityPHP54
 |   analyzer[] = "Php/Php70NewInterfaces";
 |   analyzer[] = "Php/Php71NewClasses";
 |   analyzer[] = "Php/Php72NewClasses";
-|   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
 |   analyzer[] = "Php/StaticclassUsage";
@@ -3403,7 +3409,6 @@ CompatibilityPHP55
 |   analyzer[] = "Php/Php70NewInterfaces";
 |   analyzer[] = "Php/Php71NewClasses";
 |   analyzer[] = "Php/Php72NewClasses";
-|   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
 |   analyzer[] = "Php/TrailingComma";
@@ -3465,7 +3470,6 @@ CompatibilityPHP56
 |   analyzer[] = "Php/Php70NewInterfaces";
 |   analyzer[] = "Php/Php71NewClasses";
 |   analyzer[] = "Php/Php72NewClasses";
-|   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php7RelaxedKeyword";
 |   analyzer[] = "Php/RawPostDataUsage";
@@ -3522,7 +3526,6 @@ CompatibilityPHP70
 |   analyzer[] = "Php/Php70RemovedFunctions";
 |   analyzer[] = "Php/Php71NewClasses";
 |   analyzer[] = "Php/Php72NewClasses";
-|   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/ReservedKeywords7";
 |   analyzer[] = "Php/SetExceptionHandlerPHP7";
@@ -3568,7 +3571,6 @@ CompatibilityPHP71
 |   analyzer[] = "Php/Php71RemovedDirective";
 |   analyzer[] = "Php/Php71microseconds";
 |   analyzer[] = "Php/Php72NewClasses";
-|   analyzer[] = "Php/Php72RemovedInterfaces";
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/TrailingComma";
 |   analyzer[] = "Structures/ContinueIsForLoop";
@@ -3870,7 +3872,6 @@ Suggestions
 |   analyzer[] = "Php/ShouldUseArrayColumn";
 |   analyzer[] = "Php/ShouldUseArrayFilter";
 |   analyzer[] = "Php/ShouldUseCoalesce";
-|   analyzer[] = "Php/UseNullableType";
 |   analyzer[] = "Php/UseSessionStartOptions";
 |   analyzer[] = "Structures/BooleanStrictComparison";
 |   analyzer[] = "Structures/CouldUseArrayFillKeys";

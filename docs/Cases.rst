@@ -346,6 +346,22 @@ The constant is build according to the situation, in the part of the script (fil
     		err('This server does not support REQUEST_URI or QUERY_STRING','Error');
     	}
 
+Invalid Constant Name
+=====================
+
+.. _openemr-constants-invalidname:
+
+OpenEMR
+^^^^^^^
+
+:ref:`invalid-constant-name`, in library/classes/InsuranceCompany.class.php:20. 
+
+Either a copy/paste, or a generated definition file : the file contains 25 constants definition. The constant is not found in the rest of the code. 
+
+.. code-block:: php
+
+    define("INS_TYPE_OTHER_NON-FEDERAL_PROGRAMS", 10);
+
 Wrong Optional Parameter
 ========================
 
@@ -1214,6 +1230,39 @@ Parenthesis are useless for calculating $discount_percent, as it is a divisition
     			}
     			$discount = ( (float) $this->get_amount() * $discount_percent ) / $cart_item_qty;
 
+No Parenthesis For Language Construct
+=====================================
+
+.. _phpdocumentor-structures-noparenthesisforlanguageconstruct:
+
+Phpdocumentor
+^^^^^^^^^^^^^
+
+:ref:`no-parenthesis-for-language-construct`, in /src/Application/Renderer/Router/StandardRouter.php:55. 
+
+No need for parenthesis with require(). instanceof has a higher precedence than return anyway. 
+
+.. code-block:: php
+
+    $this[] = new Rule(function ($node) { return ($node instanceof NamespaceDescriptor); }, $namespaceGenerator);
+
+
+--------
+
+
+.. _phpmyadmin-structures-noparenthesisforlanguageconstruct:
+
+phpMyAdmin
+^^^^^^^^^^
+
+:ref:`no-parenthesis-for-language-construct`, in /db_datadict.php:170. 
+
+Not only echo() doesn't use any parenthesis, but this syntax gives the illusion that echo() only accepts one argument, while it actually accepts an arbitrary number of argument.
+
+.. code-block:: php
+
+    echo (($row['Null'] == 'NO') ? __('No') : __('Yes'))
+
 Use Constant As Arguments
 =========================
 
@@ -1827,7 +1876,7 @@ MediaWiki
 
 :ref:`cast-to-boolean`, in includes/page/WikiPage.php:2274. 
 
-$options['changed'] and $options['created'] are documented and used as boolean. Yet, SiteStatsUpdate may require integers, for correct storage in the database, hence the type casting. (int) (bool) may be an alternative here.
+$options['changed'] and $options['created'] are documented and used as boolean. Yet, SiteStatsUpdate may require integers, for correct storage in the database, hence the type casting. ``(int) (bool)`` may be an alternative here.
 
 .. code-block:: php
 
@@ -1850,7 +1899,7 @@ Dolibarr
 
 :ref:`cast-to-boolean`, in htdocs/societe/class/societe.class.php:2777. 
 
-Several cases are built on the same pattern there. Each of the expression may be simply cast to (bool).
+Several cases are built on the same pattern there. Each of the expression may be simply cast to ``(bool)``.
 
 .. code-block:: php
 
@@ -1941,6 +1990,22 @@ Default development behavior : display the caught exception. Production behavior
     
                 return;
             }
+
+No Isset With Empty
+===================
+
+.. _xoops-structures-noissetwithempty:
+
+XOOPS
+^^^^^
+
+:ref:`no-isset-with-empty`, in /htdocs/class/tree.php:297. 
+
+Too many testing
+
+.. code-block:: php
+
+    isset($this->tree[$key]['child']) && !empty($this->tree[$key]['child']);
 
 Bail Out Early
 ==============
@@ -2323,6 +2388,38 @@ $this is send to $objRegistry. $objRegistry is obtained with a factory, \Model\R
             // $this-> are set
             // $objRegistry is called 
         }
+
+Parent First
+============
+
+.. _prestashop-classes-parentfirst:
+
+PrestaShop
+^^^^^^^^^^
+
+:ref:`parent-first`, in wp-admin/includes/misc.php:74. 
+
+A good number of properties are set in the current object even before the parent AdminController(Core) is called. 'table' and 'lang' acts as default values for the parent class, as it (the parent class) would set them to another default value. Many properties are used, but not defined in the current class, nor its parent. This approach prevents the constructor from requesting too many arguments. Yet, as such, it is difficult to follow which of the initial values are transmitted via protected/public properties rather than using the __construct() call.
+
+.. code-block:: php
+
+    class AdminWebserviceControllerCore extends AdminController
+    {
+        /** this will be filled later */
+        public $fields_form = array('webservice form');
+        protected $toolbar_scroll = false;
+    
+        public function __construct()
+        {
+            $this->bootstrap = true;
+            $this->table = 'webservice_account';
+            $this->className = 'WebserviceKey';
+            $this->lang = false;
+            $this->edit = true;
+            $this->delete = true;
+            $this->id_lang_default = Configuration::get('PS_LANG_DEFAULT');
+    
+            parent::__construct();
 
 Identical On Both Sides
 =======================
@@ -3260,6 +3357,23 @@ This code only exports the POST variables as globals. And it does clean incoming
 Unserialize Second Arg
 ======================
 
+.. _piwigo-security-unserializesecondarg:
+
+Piwigo
+^^^^^^
+
+:ref:`unserialize-second-arg`, in admin/configuration.php:491. 
+
+unserialize() extracts information from the $conf variable : this variable is read from a configuration file. It is later tested to be an array, whose index may not be all set (@$disabled[$type];). It would be safer to make $disabled an object, add the class to unserialize, and set default values to the needed properties/index. 
+
+.. code-block:: php
+
+    $disabled = @unserialize(@$conf['disabled_derivatives']);
+
+
+--------
+
+
 .. _livezilla-security-unserializesecondarg:
 
 LiveZilla
@@ -3415,6 +3529,61 @@ This loop is quite complex : it collects $aro_value in $acl_array['aro'][$aro_se
     						$update = 1;
     					}
     				}
+
+Should Use Operator
+===================
+
+.. _zencart-structures-shoulduseoperator:
+
+Zencart
+^^^^^^^
+
+:ref:`should-use-operator`, in /includes/modules/payment/paypal/paypal_curl.php:378. 
+
+Here, $options is merged with $values if it is an array. If it is not an array, it is probably a null value, and may be ignored. Adding a 'array' typehint will strengthen the code an catch situations where TransactionSearch() is called with a string, leading to clearer code.
+
+.. code-block:: php
+
+    function TransactionSearch($startdate, $txnID = '', $email = '', $options) {
+        // several lines of code, no mention of $options
+          if (is_array($options)) $values = array_merge($values, $options);
+        }
+        return $this->_request($values, 'TransactionSearch');
+      }
+
+
+--------
+
+
+.. _sugarcrm-structures-shoulduseoperator:
+
+SugarCrm
+^^^^^^^^
+
+:ref:`should-use-operator`, in include/utils.php:2093:464. 
+
+$override should an an array : if not, it is actually set by default to empty array. Here, a typehint with a default value of 'array()' would offset the parameter validation to the calling method.
+
+.. code-block:: php
+
+    function sugar_config_union( $default, $override ){
+    	// a little different then array_merge and array_merge_recursive.  we want
+    	// the second array to override the first array if the same value exists,
+    	// otherwise merge the unique keys.  it handles arrays of arrays recursively
+    	// might be suitable for a generic array_union
+    	if( !is_array( $override ) ){
+    		$override = array();
+    	}
+    	foreach( $default as $key => $value ){
+    		if( !array_key_exists($key, $override) ){
+    			$override[$key] = $value;
+    		}
+    		else if( is_array( $key ) ){
+    			$override[$key] = sugar_config_union( $value, $override[$key] );
+    		}
+    	}
+    	return( $override );
+    }
 
 Could Be Typehinted Callable
 ============================

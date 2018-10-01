@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 27 Sep 2018 13:48:27 +0000
-.. comment: Generation hash : 5cd99847f5a7be05439dbc15c3d4fe9f8d2c122d
+.. comment: Generation date : Mon, 01 Oct 2018 10:18:55 +0000
+.. comment: Generation hash : aa375cd914e4f9a1bb8d3b7354822fa760f2374b
 
 
 .. _$http\_raw\_post\_data:
@@ -150,6 +150,14 @@ See also `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_,
          `ArrayObject <http://php.net/manual/en/class.arrayobject.php>`_ and 
          `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
 
+
+Suggestions
+--------------
+
+* Extends ArrayObject, or a class that extends it, to use $this as an array too.
+* Implements ArrayAccess to use $this as an array too.
+* Use a property in the current class to store the data, instead of $this directly.
+
 +------------+--------------------------+
 | Short name | Classes/ThisIsNotAnArray |
 +------------+--------------------------+
@@ -238,7 +246,7 @@ See also `Arithmetic Operators <http://php.net/manual/en/language.operators.arit
 #########
 
 
-PHP has a special class constant to hold the name of the class : 'class' keyword. It represents the classname that is used in the left part of the operator.
+PHP has a special class constant to hold the name of the class : 'class' keyword. It represents the class name that is used in the left part of the operator.
 
 Using '\:\:class' is safer than relying on a string. It does adapt if the class's name or its namespace is changed'. It is also faster, though it is a micro-optimisation. 
 
@@ -549,7 +557,14 @@ It is recommended to make the cast explicit with (int)
    ?>
 
 
-If it is used to type cast a value to integer, then casting (integer) is clearer.
+If it is used to type cast a value to integer, then casting (integer) is clearer. 
+
+
+Suggestions
+--------------
+
+* Remove the + 0
+* Use an explicit type casting operator (int)
 
 +------------+-----------------------------------------------------------------------------------------------+
 | Short name | Structures/AddZero                                                                            |
@@ -881,7 +896,13 @@ Array indices only accept integers and strings, so any other type of literal is 
    ?>
 
 
-They are indeed distinct, but may lead to confusion.
+They are indeed distinct, but may lead to confusion. 
+
+
+Suggestions
+--------------
+
+* Only use string or integer as key for an array.
 
 +------------+----------------------+
 | Short name | Arrays/AmbiguousKeys |
@@ -1236,6 +1257,12 @@ The same doesn't apply to addition and multiplication, with `'array_sum() <http:
 
 See also `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_.
 
+
+Suggestions
+--------------
+
+* Collect all pieces in an array, then implode() the array in one call.
+
 +------------+------------------------------------------------------------------------------------------+
 | Short name | Performances/NoConcatInLoop                                                              |
 +------------+------------------------------------------------------------------------------------------+
@@ -1580,7 +1607,7 @@ Avoid Those Hash Functions
 
 The following cryptographic algorithms are considered unsecure, and should be replaced with new and more performant algorithms. 
 
-MD2, MD4, MD5, SHA0, SHA1, CRC, DES, 3DES, RC2, RC4. 
+``MD2``, ``MD4``, ``MD5``, ``SHA0``, ``SHA1``, ``CRC``, ``DES``, ``3DES``, ``RC2``, ``RC4``. 
 
 When possible, avoid using them, may it be as PHP functions, or hashing function configurations (mcrypt, hash...).
 
@@ -1600,7 +1627,7 @@ When possible, avoid using them, may it be as PHP functions, or hashing function
    ?>
 
 
-Weak crypto are commonly used for hashing values when caching them. In such cases, security is not a primary concern. However, it may later become such, when hackers get access to the cache folders, or if the cached identifier is published. As a preventive protection, it is recommended to always use a secure hashing function.
+Weak cryptography is commonly used for hashing values when caching them. In such cases, security is not a primary concern. However, it may later become such, when hackers get access to the cache folders, or if the cached identifier is published. As a preventive protection, it is recommended to always use a secure hashing function.
 
 See also `Secure Hash Algorithms <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_.
 
@@ -1822,6 +1849,14 @@ Glob() accepts wildchar, that may not easily replaced with `'scandir() <http://w
 
 See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_.
 
+
+
+Suggestions
+--------------
+
+* Use FilesystemIterator, DirectoryIterator classes.
+* Use RegexIterator to filter any unwanted results from FilesystemIterator.
+
 +------------+------------------------------------------------------------------------+
 | Short name | Performances/NoGlob                                                    |
 +------------+------------------------------------------------------------------------+
@@ -1946,7 +1981,7 @@ When using conditions, it is recommended to quit in the current context, and avo
 The main benefit is to make clear the method applies a condition, and stop quickly went it is not satisfied. 
 The main sequence is then focused on the useful code. 
 
-This works with the `'break <http://php.net/manual/en/control-structures.break.php>`_, `'continue <http://php.net/manual/en/control-structures.continue.php>`_, throw and goto keywords too, depending on situations.
+This works with the ``break``, ``continue``, ``throw`` and ``goto`` keywords too, depending on situations.
 
 .. code-block:: php
 
@@ -2008,6 +2043,14 @@ This works with the `'break <http://php.net/manual/en/control-structures.break.p
 
 See also `Avoid nesting too deeply and return early (part 1) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-1>`_ and 
          `Avoid nesting too deeply and return early (part 2) <https://github.com/jupeter/clean-code-php#avoid-nesting-too-deeply-and-return-early-part-2>`_.
+
+
+
+Suggestions
+--------------
+
+* Detect errors, and then, return as soon as possible.
+* When a if...then branches are unbalanced, test for the small branch, finish it with return. Then keep the other branch as the main code.
 
 +------------+--------------------------------------------------------------------------------+
 | Short name | Structures/BailOutEarly                                                        |
@@ -2658,7 +2701,7 @@ This is the list of potentially dangerous PHP class being used in the code, such
    ?>
 
 
-This analysis is the base for suggesting values for the disable_classes directive.
+This analysis is the base for suggesting values for the ``disable_classes`` directive.
 
 +------------+---------------------------+
 | Short name | Security/CantDisableClass |
@@ -2920,6 +2963,16 @@ This expression may be reduced by casting to boolean type.
    $variable = $condition == 'met';
    
    ?>
+
+
+
+
+Suggestions
+--------------
+
+* Remove the old expression and simply use ``(bool)`` operator
+* Change the target values from true/false, or 0/1 to non-binary values, like strings or integers beyond 0 and 1.
+* Complete the current branches with other commands
 
 +------------+-------------------------------------------------------------------------------------+
 | Short name | Structures/CastToBoolean                                                            |
@@ -4385,6 +4438,14 @@ When arguments are used to call a function, but are not marked with 'callable', 
 
 See also `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_.
 
+
+
+Suggestions
+--------------
+
+* Add the typehint callable
+* Use the function is_callable() inside the method if 'callable' is too strong.
+
 +------------+---------------------------------------------------------------------------------------+
 | Short name | Functions/CouldBeCallable                                                             |
 +------------+---------------------------------------------------------------------------------------+
@@ -4950,6 +5011,13 @@ See also : `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/maste
            `How does PHP 'foreach' actually work? <https://stackoverflow.com/questions/10057671/how-does-php-foreach-actually-work/14854568#14854568>`_,
            `References and foreach <https://schlueters.de/blog/archives/141-references-and-foreach.html>`_.
 
+
+Suggestions
+--------------
+
+* Avoid using the reference altogether : sometimes, the reference is not needed.
+* Add unset() right after the loop, to avoid reusing the reference.
+
 +------------+-----------------------------------------------------------------------------------------------------------+
 | Short name | Structures/DanglingArrayReferences                                                                        |
 +------------+-----------------------------------------------------------------------------------------------------------+
@@ -5314,6 +5382,14 @@ The following code act directly upon PHP incoming variables like ``$_GET`` and `
 
 See also `Cross-Site Scripting (XSS) <https://phpsecurity.readthedocs.io/en/latest/Cross-Site-Scripting-(XSS).html>`_
 
+
+
+Suggestions
+--------------
+
+* Validate input : make sure the incoming data are what you expect from them.
+* Escape output : prepare outgoing data for the next system to use.
+
 +------------+--------------------------+
 | Short name | Security/DirectInjection |
 +------------+--------------------------+
@@ -5496,6 +5572,15 @@ This is in particular true if the receiving structure put immediately the incomi
 
 
 See also `Don't pass this out of a constructor <http://www.javapractices.com/topic/TopicAction.do?Id=252>`_.
+
+
+
+Suggestions
+--------------
+
+* Finish the constructor first, then call an external object.
+* Sending $this should be made accessible in a separate method, so external objects may call it.
+* Sending the current may be the responsability of the method creating the object.
 
 +------------+-------------------------------------------------------------------------------------------------------+
 | Short name | Classes/DontSendThisInConstructor                                                                     |
@@ -6079,6 +6164,14 @@ Classes that are directly derived from an exception are omitted.
    class barException extends \Exception {}
    
    ?>
+
+
+
+Suggestions
+--------------
+
+* Remove an empty class :it is probably dead code.
+* Add some code to the class to make it concrete.
 
 +------------+-------------------------------------+
 | Short name | Classes/EmptyClass                  |
@@ -7268,7 +7361,12 @@ When defining constants with `'define() <http://www.php.net/define>`_ function, 
 
 However, the name should be fully qualified without the initial \. Here, \a\b\c constant will never be accessible as a namespace constant, though it will be accessible via the `'constant() <http://www.php.net/constant>`_ function.
 
-Also, the namespace will be absolute, and not a relative namespace of the current one.
+Also, the namespace will be absolute, and not a relative namespace of the current one. 
+
+Suggestions
+--------------
+
+* Drop the initial \ when creating constants with define() : for example, use trim($x, '\'), which removes anti-slashes before and after.
 
 +------------+-----------------------------------+
 | Short name | Namespaces/ConstantFullyQualified |
@@ -8164,6 +8262,16 @@ Note that if the values used in the condition have been modified in the first if
    
    ?>
 
+
+
+
+Suggestions
+--------------
+
+* Merge the two conditions so the condition is used once.
+* Change one of the condition, so they are different
+* Make it obvious that the first condition is a try, preparing the normal conditions.
+
 +------------+---------------------------------------------------------------------------------------------------------+
 | Short name | Structures/IfWithSameConditions                                                                         |
 +------------+---------------------------------------------------------------------------------------------------------+
@@ -8770,7 +8878,9 @@ Invalid Constant Name
 
 According to PHP's manual, constant names, ' A valid constant name starts with a letter or underscore, followed by any number of letters, numbers, or underscores.'.
 
-Constant, when defined using `'define() <http://www.php.net/define>`_ function, must follow this regex : ``/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/``.
+Constant, must follow this regex : ``/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/``.
+
+In particular when defined using `'define() <http://www.php.net/define>`_ function, no error is produced. When using ``const``, on the other hand, the 
 
 .. code-block:: php
 
@@ -8785,11 +8895,19 @@ Constant, when defined using `'define() <http://www.php.net/define>`_ function, 
 
 See also `Constants <http://php.net/manual/en/language.constants.php>`_.
 
-+------------+-----------------------+
-| Short name | Constants/InvalidName |
-+------------+-----------------------+
-| Themes     | :ref:`Analyze`        |
-+------------+-----------------------+
+
+Suggestions
+--------------
+
+* Change constant name
+
++------------+--------------------------------------+
+| Short name | Constants/InvalidName                |
++------------+--------------------------------------+
+| Themes     | :ref:`Analyze`                       |
++------------+--------------------------------------+
+| Examples   | :ref:`openemr-constants-invalidname` |
++------------+--------------------------------------+
 
 
 
@@ -9075,6 +9193,14 @@ Always use `'file_get_contents() <http://www.php.net/file_get_contents>`_ to get
 
 See also `file_get_contents <http://php.net/file_get_contents>`_ and 
          `file <http://php.net/file>`_.
+
+
+Suggestions
+--------------
+
+* Use file_get_contents() instead of implode(file()) to read the whole file at once.
+* Use readfile() to echo the content to stdout at once.
+* Use fopen() to read the lines one by one, generator style.
 
 +------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Performances/JoinFile                                                                                                                                             |
@@ -9716,6 +9842,16 @@ Potential replacements :
    $string = str_replace( 'c', 'C');
    
    ?>
+
+
+ 
+
+Suggestions
+--------------
+
+* use str_replace() with arrays as arguments.
+* use preg_replace() with arrays as arguments.
+* use preg_replace_callback() for merging multiple complex calls.
 
 +------------+-----------------------------------------------------------------------------------+
 | Short name | Performances/MakeOneCall                                                          |
@@ -10621,6 +10757,16 @@ Multiple definitions may happens at bootstrap, when the application code is coll
    
    ?>
 
+
+
+
+Suggestions
+--------------
+
+* Move the constants to a class, and include the right class based on control flow.
+* Give different names to the constants, and keep the condition close to utilisation.
+* Move the constants to an external configuration file : it will be easier to identify that those constants may change.
+
 +------------+------------------------------------------------------------------------------------------------------------+
 | Short name | Constants/MultipleConstantDefinition                                                                       |
 +------------+------------------------------------------------------------------------------------------------------------+
@@ -10776,6 +10922,13 @@ Indexes that are defined multiple times in the same array.
 
 They are indeed overwriting each other. This is most probably a typo.
 
+
+Suggestions
+--------------
+
+* Review your code and check that arrays only have keys defined once.
+* Review carefully your code and check indirect values, like constants, static constants.
+
 +------------+--------------------------------------------------------------------------------------------+
 | Short name | Arrays/MultipleIdenticalKeys                                                               |
 +------------+--------------------------------------------------------------------------------------------+
@@ -10862,6 +11015,14 @@ Exakat tries to find the value of the case as much as possible, and ignore any d
            
    }
    ?>
+
+
+
+Suggestions
+--------------
+
+* Remove the double case
+* Change the case to another and rightfull value
 
 +------------+--------------------------------------------------------------------------------------------------------+
 | Short name | Structures/MultipleDefinedCase                                                                         |
@@ -11128,6 +11289,14 @@ However, ternary operators tends to make the syntax very difficult to read when 
 
 
 See also `Nested Ternaries are Great <https://medium.com/javascript-scene/nested-ternaries-are-great-361bddd0f340>`_.
+
+
+
+Suggestions
+--------------
+
+* Replace ternaries by if/then structures.
+* Replace ternaries by a functioncall : this provides more readability, offset the actual code, and gives room for making it different.
 
 +------------+---------------------------------------------------------------------------------------------------+
 | Short name | Structures/NestedTernary                                                                          |
@@ -11512,6 +11681,17 @@ Either the condition is useless, and may be removed, or the alternatives need to
    
    ?>
 
+
+
+
+
+Suggestions
+--------------
+
+* Remove the conditional, and call the expression directly
+* Replace one of the alternative with a distinct call
+* Remove the whole conditional : it may end up being useless
+
 +------------+--------------------------------------------------------------------------+
 | Short name | Structures/NoChoice                                                      |
 +------------+--------------------------------------------------------------------------+
@@ -11658,6 +11838,13 @@ Note that this is a micro-optimisation : since PHP keeps track of the number of 
 
 See also `count <http://php.net/count>`_ and 
          `strlen <http://php.net/strlen>`_.
+
+
+Suggestions
+--------------
+
+* Use empty() on the data
+* Compare the variable with a default value, such as an empty array
 
 +------------+-------------------------------------------------------------------------------------+
 | Short name | Performances/NotCountNull                                                           |
@@ -12082,15 +12269,15 @@ No Isset With Empty
 
 Empty() actually does the job of Isset() too. 
 
-From the manual : No warning is generated if the variable does not exist. That means `'empty() <http://www.php.net/empty>`_ is essentially the concise equivalent to !`'isset( <http://www.php.net/isset>`_$var) || $var == false.
+From the manual : ``No warning is generated if the variable does not exist. That means `'empty() <http://www.php.net/empty>`_ is essentially the concise equivalent to !`'isset( <http://www.php.net/isset>`_$var) || $var == false.`` The main difference is that `'isset() <http://www.php.net/isset>`_ only works with variables, while `'empty() <http://www.php.net/empty>`_ works with other structures, such as constants.
 
 .. code-block:: php
 
    <?php
    
    
-   // Enough tests
-   if (i!empty($a)) {
+   // Enough validation
+   if (!empty($a)) {
        doSomething();
    }
    
@@ -12101,11 +12288,25 @@ From the manual : No warning is generated if the variable does not exist. That m
    
    ?>
 
-+------------+-----------------------------+
-| Short name | Structures/NoIssetWithEmpty |
-+------------+-----------------------------+
-| Themes     | :ref:`Analyze`              |
-+------------+-----------------------------+
+
+See also `isset <http://www.php.net/`'isset <http://www.php.net/isset>`_>`_ and 
+         `empty <http://www.php.net/empty>`_.
+
+
+Suggestions
+--------------
+
+* Only use isset(), just drop the empty()
+* Only use empty(), just drop the empty()
+* Use a null value, so the variable is always set
+
++------------+------------------------------------------+
+| Short name | Structures/NoIssetWithEmpty              |
++------------+------------------------------------------+
+| Themes     | :ref:`Analyze`                           |
++------------+------------------------------------------+
+| Examples   | :ref:`xoops-structures-noissetwithempty` |
++------------+------------------------------------------+
 
 
 
@@ -12291,7 +12492,7 @@ No Parenthesis For Language Construct
 #####################################
 
 
-Some PHP language constructs, such are ``include``, ``print``, ``echo`` don't need parenthesis. They cope with parenthesis, but it is may lead to strange situations. 
+Some PHP language constructs, such are ``include``, ``print``, ``echo`` don't need parenthesis. They accept parenthesis, but it is may lead to strange situations. 
 
 .. code-block:: php
 
@@ -12309,12 +12510,20 @@ It it better to avoid using parenthesis with ``echo``, ``print``, ``return``, ``
 
 See also `include <http://php.net/manual/en/function.include.php>`_.
 
+
+Suggestions
+--------------
+
+* Remove parenthesis
+
 +------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | Short name | Structures/NoParenthesisForLanguageConstruct                                                                                              |
 +------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | Themes     | :ref:`Analyze`, :ref:`Suggestions`                                                                                                        |
 +------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | ClearPHP   | `no-parenthesis-for-language-construct <https://github.com/dseguy/clearPHP/tree/master/rules/no-parenthesis-for-language-construct.md>`__ |
++------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`phpdocumentor-structures-noparenthesisforlanguageconstruct`, :ref:`phpmyadmin-structures-noparenthesisforlanguageconstruct`         |
 +------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -12659,6 +12868,14 @@ The code may access an already declared constant with self or with its class nam
 
 
 This error is not detected by linting. It is only detected at instantiation time : if the class is not used, it won't appear.
+
+
+
+Suggestions
+--------------
+
+* Give a literal value to this constant
+* Give a constant value to this constant : other class constants or constant are allowed here.
 
 +------------+----------------------------------------+
 | Short name | Classes/NoSelfReferencingConstant      |
@@ -13037,6 +13254,12 @@ Usual convention is to write PHP keywords (like as, foreach, switch, case, `'bre
 PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing compulsory here. Although, it will look strange to many. 
 
 Some keywords are missing from this analysis : ``extends``, ``implements``, ``as``. This is due to the internal engine, which doesn't keep track of them in its AST representation.
+
+
+Suggestions
+--------------
+
+* Use lowercase only PHP keywords, except for constants such as __CLASS__.
 
 +------------+------------------------------------------------+
 | Short name | Php/UpperCaseKeyword                           |
@@ -13469,6 +13692,13 @@ The call must be made with a variable, or any assimilated data container : array
 Note that PHP may detect this error at linting time, if the method is defined after being called : at that point, PHP will only check the problem during execution. This is definitely the case for methods, compared to functions or static methods.
 
 See also `Passing arguments by reference <http://php.net/manual/en/functions.arguments.php#functions.arguments.by-reference>`_.
+
+
+Suggestions
+--------------
+
+* Put the literal value in a variable before calling the method.
+* Put the literal value in the default value of the reference argument.
 
 +------------+----------------------------------------+
 | Short name | Functions/OnlyVariableForReference     |
@@ -14157,26 +14387,6 @@ The following PHP native functions were removed in PHP 7.0.
 
 
 
-.. _php-72-removed-interfaces:
-
-PHP 72 Removed Interfaces
-#########################
-
-
-The following PHP native interfaces were removed in PHP 7.2.
-
-* SessionHandlerInterface
-* SessionIdInterface
-* SessionUpdateTimestampHandlerInterface
-
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Php/Php72RemovedInterfaces                                                                                                                                       |
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-
 .. _php-keywords-as-names:
 
 PHP Keywords As Names
@@ -14351,13 +14561,21 @@ When calling parent constructor, always put it first in the ``__construct`` meth
    ?>
 
 
-This analysis cannot be applied to Exceptions.
+This analysis doesn't apply to Exceptions. 
 
-+------------+------------------------------------+
-| Short name | Classes/ParentFirst                |
-+------------+------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`Suggestions` |
-+------------+------------------------------------+
+
+Suggestions
+--------------
+
+* Use ``parent\:\:__construct`` as the first call in the constructor.
+
++------------+---------------------------------------+
+| Short name | Classes/ParentFirst                   |
++------------+---------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`Suggestions`    |
++------------+---------------------------------------+
+| Examples   | :ref:`prestashop-classes-parentfirst` |
++------------+---------------------------------------+
 
 
 
@@ -15382,6 +15600,17 @@ Unless order is important, it is recommended to always use the same order when d
    
    ?>
 
+
+
+
+Suggestions
+--------------
+
+* Match the sorting order of the arrays. Choose any of them.
+* Configure a constant and use it as a replacement for those arrays.
+* Leave the arrays intact : the order may be important.
+* For hash arrays, consider turning the array in a class.
+
 +------------+-------------------------------------------------------------------------------------------+
 | Short name | Arrays/RandomlySortedLiterals                                                             |
 +------------+-------------------------------------------------------------------------------------------+
@@ -15793,6 +16022,15 @@ Those issues often happen when a catch structure was positioned for debug purpos
 See also `What are the best practices for catching and re-throwing exceptions? <https://stackoverflow.com/questions/5551668/what-are-the-best-practices-for-catching-and-re-throwing-exceptions>`_ and 
          `Exception chaining <http://php.net/manual/en/exception.construct.php>`_.
 
+
+
+Suggestions
+--------------
+
+* Log the message of the exception for later usage.
+* Remove the try/catch and let the rest of the application handle this exception.
+* Chain the exception, by throwing a new exception, including the caught exception.
+
 +------------+---------------------------------------+
 | Short name | Exceptions/Rethrown                   |
 +------------+---------------------------------------+
@@ -15931,9 +16169,9 @@ Safe Curl Options
 #################
 
 
-It is advised to always use ``CURLOPT_SSL_VERIFYPEER`` and ``CURLOPT_SSL_VERIFYHOST`` when requesting a SSL connexion. 
+It is advised to always use ``CURLOPT_SSL_VERIFYPEER`` and ``CURLOPT_SSL_VERIFYHOST`` when requesting a SSL connection. 
 
-With those tests, the certificate is verified, and if it isn't valid, the connexion fails : this is a safe behavior.
+With those tests, the certificate is verified, and if it isn't valid, the connection fails : this is a safe behavior.
 
 .. code-block:: php
 
@@ -16207,7 +16445,7 @@ The ``$domain`` argument limits the transmission of the cookie to URL whose doma
 
 The ``$secure`` argument limits the transmission of the cookie over HTTP (by default) or HTTPS. The second is better, as the transmission of the cookie is crypted. In case HTTPS is still at the planned stage, use '$_SERVER[HTTPS]'. This environnement variable is false on HTTP, and true on HTTPS.
 
-The ``$httponly`` argument limits the access of the cookie to Javascript. It is only transmitted to the browser, and retransmitted. This helps reducing XSS and CSRF attacks, though it is disputed. 
+The ``$httponly`` argument limits the access of the cookie to JavaScript. It is only transmitted to the browser, and retransmitted. This helps reducing XSS and CSRF attacks, though it is disputed. 
 
 The ``$samesite`` argument limits the sending of the cookie to the domain that initiated the request. It is by default `Lax` but should be upgraded to `Strict` whenever possible. This feature is available as PHP 7.3. 
 
@@ -16940,20 +17178,37 @@ Some functions duplicate the feature of an operator. When in doubt, it is better
 
 Beware, some edge cases may apply. In particular, backward compatibility may prevent usage of newer features.
 
-* `'array_push() <http://www.php.net/array_push>`_ may be replaced with [] 
-* `'is_object() <http://www.php.net/is_object>`_ may be replace with `'instanceof <http://php.net/manual/en/language.operators.type.php>`_
-* function_get_arg() and function_get_args() may be replace with ellipsis : ``...``
-* `'chr() <http://www.php.net/chr>`_ may be replaces by string sequences, such as ``\n``, ``\x69``, ``u{04699}``
-* `'call_user_func() <http://www.php.net/call_user_func>`_ may be replaces by ``$functionName(arguments)``, ``$object->$method(...$arguments)``
-* `'is_null() <http://www.php.net/is_null>`_ may be replaced by ``=== null``
-* php_version() may be replace by ``PHP_VERSION`` (the constant)
-* `'is_array() <http://www.php.net/is_array>`_, `'is_int() <http://www.php.net/is_int>`_, `'is_object() <http://www.php.net/is_object>`_, etc. may be replaced by a typehint
+* `'array_push() <http://www.php.net/array_push>`_ is equivalent to [] 
+* `'is_object() <http://www.php.net/is_object>`_ is equivalent to `'instanceof <http://php.net/manual/en/language.operators.type.php>`_
+* function_get_arg() and function_get_args() is equivalent to ellipsis : ``...``
+* `'chr() <http://www.php.net/chr>`_ is equivalent to string escape sequences, such as ``\n``, ``\x69``, ``u{04699}``
+* `'call_user_func() <http://www.php.net/call_user_func>`_ is equivalent to ``$functionName(arguments)``, ``$object->$method(...$arguments)``
+* `'is_null() <http://www.php.net/is_null>`_ is equivalent to ``=== null``
+* php_version() is equivalent to ``PHP_VERSION`` (the constant)
+* `'is_array() <http://www.php.net/is_array>`_, `'is_int() <http://www.php.net/is_int>`_, `'is_object() <http://www.php.net/is_object>`_, etc. is equivalent to a scalar typehint
 
-+------------+------------------------------+
-| Short name | Structures/ShouldUseOperator |
-+------------+------------------------------+
-| Themes     | :ref:`Suggestions`           |
-+------------+------------------------------+
+
+
+
+Suggestions
+--------------
+
+* Use [] instead of array_push()
+* Use instanceof instead of is_object()
+* Use ... instead of function_get_arg() and function_get_args()
+* Use escape sequences instead of chr()
+* Use dynamic function call instead of call_user_func()
+* Use === null instead of is_null()
+* Use PHP_VERSION instead of php_version()
+* Use typehint instead of is_int(), is_string(), is_bool(), etc.
+
++------------+-------------------------------------------------------------------------------------------+
+| Short name | Structures/ShouldUseOperator                                                              |
++------------+-------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Suggestions`                                                                        |
++------------+-------------------------------------------------------------------------------------------+
+| Examples   | :ref:`zencart-structures-shoulduseoperator`, :ref:`sugarcrm-structures-shoulduseoperator` |
++------------+-------------------------------------------------------------------------------------------+
 
 
 
@@ -17955,6 +18210,15 @@ It is recommended to turn a static loop into an expression that avoid the loop. 
 
 This analysis doesn't detect usage of variables with ``compact``.
 
+ 
+
+Suggestions
+--------------
+
+* Precalculate the result of that loop and removes it altogether
+* Check that the loop is not missing a blind variable usage
+* Replace the usage of a loop with a native PHP call : for example, with str_repeat(). Although the loop is still here, it usually reflects better the intend.
+
 +------------+-----------------------+
 | Short name | Structures/StaticLoop |
 +------------+-----------------------+
@@ -18389,7 +18653,7 @@ Strtr Arguments
 ###############
 
 
-Strtr replaces characters by others in a string. When using strings, `'strtr() <http://www.php.net/strtr>`_ replaces characters as long as they have a replacement. All others are ignored.
+Strtr() replaces characters by others in a string. When using strings, `'strtr() <http://www.php.net/strtr>`_ replaces characters as long as they have a replacement. All others are ignored.
 
 In particular, `'strtr() <http://www.php.net/strtr>`_ works on strings of the same size, and cannot be used to remove chars.
 
@@ -18481,7 +18745,16 @@ A comparison happens in the last argument, while the actual function expect anot
    ?>
 
 
-Original idea by `Vladimir Reznichenko <https://twitter.com/kalessil>`_.
+Original idea by `Vladimir Reznichenko <https://twitter.com/kalessil>`_. 
+
+
+
+Suggestions
+--------------
+
+* Remove the comparison altogether
+* Move the comparison to its right place : that, or more the parenthesis.
+* This may be what is intended : just leave it.
 
 +------------+---------------------------------------------------------------------------------------------------------+
 | Short name | Structures/SuspiciousComparison                                                                         |
@@ -18627,6 +18900,14 @@ Multiple default happens often with large `'switch() <http://php.net/manual/en/c
    }
    
    ?>
+
+
+
+
+Suggestions
+--------------
+
+* Remove the useless default : it may be the first, or the last. If you don't know, keep the first, as it is the one being used at the moment.
 
 +------------+------------------------------------------------------------------------------------------------------------+
 | Short name | Structures/SwitchWithMultipleDefault                                                                       |
@@ -19931,9 +20212,9 @@ Undefined Insteadof
 ###################
 
 
-Insteadof tries to replace a method with another, but it doesn't exists. This happens when the replacing class is refactored, and some of its definition are dropped. 
+``Insteadof`` tries to replace a method with another, but it doesn't exists. This happens when the replacing class is refactored, and some of its definition are dropped. 
 
-Insteadof may replace a non-existing method with an existing one, but not the contrary. 
+``Insteadof`` may replace a non-existing method with an existing one, but not the contrary. 
 
 .. code-block:: php
 
@@ -20359,7 +20640,7 @@ Unicode Escape Syntax
 #####################
 
 
-Usage of the Unicode Escape syntax, with the \u{xxxxx} format, available since PHP 7.0.
+Usage of the Unicode Escape syntax, with the ``\u{xxxxx}`` format, available since PHP 7.0.
 
 .. code-block:: php
 
@@ -20372,6 +20653,11 @@ Usage of the Unicode Escape syntax, with the \u{xxxxx} format, available since P
    echo \u{1F418};
    
    ?>
+
+
+See also `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_,
+         `Code point <https://en.wikipedia.org/wiki/Code_point>`_ and 
+         `Unicode <https://en.wikipedia.org/wiki/Unicode>_`.
 
 +------------+------------------------------------------------------------------------------------------------------------+
 | Short name | Php/UnicodeEscapeSyntax                                                                                    |
@@ -20560,7 +20846,16 @@ could be written
 
 and avoid preprocessing the string into an array first. 
 
-Preprocessing could be done anytime the script includes all the needed values to process the expression.
+Preprocessing could be done anytime the script includes all the needed values to process the expression. 
+
+
+
+Suggestions
+--------------
+
+* Preprocess the values and hardcode them in PHP. Do not use PHP to calculate something at the last moment.
+* Use already processed values, or cache to avoid calculating the value each hit.
+* Create a class that export the data in the right format for every situation, including the developer's comfort.
 
 +------------+---------------------------------------------------------------------------------------------------+
 | Short name | Structures/Unpreprocessed                                                                         |
@@ -20830,13 +21125,19 @@ On way to exploit unserialize, is to make PHP unserialized the data to an availa
 See also `unserialize() <http://php.net/unserialize>`_, 
          `Securely Implementing (De)Serialization in PHP <https://paragonie.com/blog/2016/04/securely-implementing-de-serialization-in-php>`_.
 
-+------------+------------------------------------------------+
-| Short name | Security/UnserializeSecondArg                  |
-+------------+------------------------------------------------+
-| Themes     | :ref:`Security`                                |
-+------------+------------------------------------------------+
-| Examples   | :ref:`livezilla-security-unserializesecondarg` |
-+------------+------------------------------------------------+
+
+Suggestions
+--------------
+
+* Add a list of class as second argument of any call to unserialize(). This is valid for PHP 7.0 and later.
+
++------------+---------------------------------------------------------------------------------------------+
+| Short name | Security/UnserializeSecondArg                                                               |
++------------+---------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Security`                                                                             |
++------------+---------------------------------------------------------------------------------------------+
+| Examples   | :ref:`piwigo-security-unserializesecondarg`, :ref:`livezilla-security-unserializesecondarg` |
++------------+---------------------------------------------------------------------------------------------+
 
 
 
@@ -21296,6 +21597,17 @@ Being private, those properties are only accessible to the current class or trai
    }
    
    ?>
+
+
+
+
+Suggestions
+--------------
+
+* Remove the property altogether
+* Check if the property wasn't forgotten in the rest of the class
+* Check if the property is correctly named
+* Change the visibility to protected or public : may be a visibility refactoring was too harsh
 
 +------------+----------------------------------------------------------------------------------------------+
 | Short name | Classes/UnusedPrivateProperty                                                                |
@@ -21859,6 +22171,15 @@ The ``instanceof`` operator is also faster than the ``is_object()`` functioncall
 See also `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_ and 
          `is_object <http://php.net/manual/en/function.is-object.php>`_.
 
+
+Suggestions
+--------------
+
+* Use instanceof and remove is_object
+* Create a high level interface to check a whole family of classes, instead of testing them individually
+* Use typehint when possible
+* Avoid mixing scalar types and objects in the same variable
+
 +------------+-----------------------------------------------------------------------------+
 | Short name | Classes/UseInstanceof                                                       |
 +------------+-----------------------------------------------------------------------------+
@@ -22024,11 +22345,11 @@ According to the authors of the feature : 'It is common in many programming lang
 See also `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_ and 
          `PHP RFC: Nullable Types <https://wiki.php.net/rfc/nullable_types>`_.
 
-+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Short name | Php/UseNullableType                                                                                                                                       |
-+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Themes     | :ref:`Suggestions`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
-+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Short name | Php/UseNullableType                                                                                                                   |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -22504,7 +22825,7 @@ Use json_decode() Options
 
 json_decode() returns objects by default, unless the second argument is set to ``TRUE`` or ``JSON_OBJECT_AS_ARRAY``. Then, it returns arrays.
 
-Avoid transtyping of json_decode() returned value, and use the second argument to directly set the correct type.
+Avoid casting the returned value from json_decode(), and use the second argument to directly set the correct type.
 
 .. code-block:: php
 
@@ -22673,6 +22994,12 @@ Since PHP 7, random_int() along with random_bytes(), provides cryptographically 
 when security is involved. openssl_random_pseudo_bytes() may be used when the OpenSSL extension is available.
 
 See also `CSPRNG <http://php.net/manual/en/book.csprng.php>`_ and `OpenSSL <http://php.net/manual/en/book.openssl.php>`_.
+
+
+Suggestions
+--------------
+
+* Use random_bytes() and randon_int(). At least, use them as a base for random data, and then add extra prefix and suffix, and a hash call on top.
 
 +------------+-------------------------------------------------------------+
 | Short name | Php/BetterRand                                              |
@@ -23435,7 +23762,7 @@ There are situations where trying to remove a variable is actually useless.
 
 PHP simply ignores the command when trying to unset a global variable, a static variable, or a blind variable from a foreach loop. 
 
-This is different from the garbage collector, which is run on its own schedule. It is also different from explicit unsets, aimed at freeing memory early : those are useful.
+This is different from the garbage collector, which is run on its own schedule. It is also different from an explicit unset, aimed at freeing memory early : those are useful.
 
 .. code-block:: php
 
@@ -23465,6 +23792,14 @@ This is different from the garbage collector, which is run on its own schedule. 
 
 
 See also `unset <http://php.net/unset>`_.
+
+
+Suggestions
+--------------
+
+* Remove the unset
+* Set the variable to null : the effect is the same on memory, but the variable keeps its existence.
+* Omit unsetting variables, and wait for the end of the scope. That way, PHP free memory en mass.
 
 +------------+-------------------------------------------------------------------------------------------------+
 | Short name | Structures/UselessUnset                                                                         |
@@ -23658,6 +23993,12 @@ It is recommended to avoid using var, and explicitly use the new keywords.
 
 
 See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
+
+
+Suggestions
+--------------
+
+* It is recommended to avoid using var, and explicitly use the new keywords : private, protected, public
 
 +------------+---------------------------------------------------------------------------------------------------------+
 | Short name | Classes/OldStyleVar                                                                                     |
@@ -24160,6 +24501,15 @@ PHP will solve this problem at runtime, assign values in the same other, but wil
 
 It is better to put all the optional parameters at the end of the method's signature.
 
+
+
+Suggestions
+--------------
+
+* Give default values to all but first parameters. Null is a good default value, as PHP will use it if not told otherwise. 
+* Remove default values to all but last parameters. That is probably a weak solution.
+* Change the order of the values, so default-valued parameters are at the end. This will probably have impact on the rest of the code, as the API is changing.
+
 +------------+--------------------------------------------------------------------------------------------------+
 | Short name | Functions/WrongOptionalParameter                                                                 |
 +------------+--------------------------------------------------------------------------------------------------+
@@ -24260,7 +24610,12 @@ An optional 'b' may be used to make the `'fopen() <http://www.php.net/fopen>`_ c
    ?>
 
 
-Any other values are not understood by PHP.
+Any other values are not understood by PHP. 
+
+Suggestions
+--------------
+
+* Check the docs, choose the right opening mode.
 
 +------------+--------------------------------------------------------------+
 | Short name | Php/FopenMode                                                |
@@ -25518,6 +25873,13 @@ time() is actually faster than strtotime('now').
 
 
 This is a micro-optimisation. Relative gain is real, but small unless the function is used many times.
+
+
+
+Suggestions
+--------------
+
+* Replace strtotime('now') with time(). Don't change strtotime with other value then 'now'.
 
 +------------+-------------------------------------------------+
 | Short name | Performances/timeVsstrtotime                    |
