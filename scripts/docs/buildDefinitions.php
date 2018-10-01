@@ -555,7 +555,7 @@ $exampleTxt
         $desc = $this->glossary($ini['name'], $ini['description']);
 
         if (isset($ini['modifications'])) {
-            $desc .= "\nSuggestions\n--------------\n\n* ".implode("\n* ", $ini['modifications'])."\n\n\n";
+            $desc .= "\n\nSuggestions\n--------------\n\n* ".implode("\n* ", $ini['modifications'])."\n\n\n";
         }
         $desc = trim($this->rst_escape($desc));
         
@@ -604,6 +604,7 @@ $explain
 .. code-block:: php
 
 $code
+
 
 SPHINX;
                 $this->applications_names[$ini['example'.$i]['project']] = 1;
