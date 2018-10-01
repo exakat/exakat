@@ -146,8 +146,6 @@ GREMLIN
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
         
-        print_r($result);
-
         display("Fixed Fullnspath for Constants");
     }
 
