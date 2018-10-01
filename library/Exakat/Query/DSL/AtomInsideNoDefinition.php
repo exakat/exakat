@@ -36,7 +36,14 @@ class AtomInsideNoDefinition extends DSL {
             return new Command(Query::STOP_QUERY);
         }
 
-        $gremlin = 'emit( ).repeat( __.out('.self::$linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
+        $linksDown = self::$linksDown;
+        $MAX_LOOPING  = self::$MAX_LOOPING;
+
+        $gremlin = <<<GREMLIN
+emit( ).repeat( __.out($linksDown)
+       .not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait", "Interface")) )
+       .times($MAX_LOOPING).hasLabel(within(***))
+GREMLIN;
         return new Command($gremlin, array($diff));
     }
 }
