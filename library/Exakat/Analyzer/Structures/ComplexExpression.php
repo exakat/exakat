@@ -28,51 +28,38 @@ class ComplexExpression extends Analyzer {
     protected $complexExpressionThreshold = 30;
 
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
-        $complexExpression = <<<GREMLIN
-not(
-    __.has('constant', true))
-      .where(  
-        __.emit().repeat( __.not(hasLabel("Closure", "Classanonymous") ).out({$this->linksDown})).times($MAX_LOOPING)
-          .not(hasLabel("Closure", "Classanonymous") )
-          .count().is(gt({$this->complexExpressionThreshold})
-   ) 
-)
-GREMLIN;
-        
         // if (Condition);
         $this->atomIs(array('Ifthen', 'Dowhile', 'While'))
              ->outIs('CONDITION')
-             ->raw($complexExpression)
+             ->IsComplexExpression()
              ->back('first');
         $this->prepareQuery();
 
         // foreach($source...)
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->raw($complexExpression)
+             ->IsComplexExpression()
              ->back('first');
         $this->prepareQuery();
 
         // for($i = 3; ; )
         $this->atomIs('For')
              ->outIs(array('INCREMENT', 'INIT', 'FINAL'))
-             ->raw($complexExpression)
+             ->IsComplexExpression()
              ->back('first');
         $this->prepareQuery();
 
         // $a = expression;
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->raw($complexExpression)
+             ->IsComplexExpression()
              ->back('first');
         $this->prepareQuery();
 
         // foo($a)
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
-             ->raw($complexExpression)
+             ->IsComplexExpression()
              ->back('first');
         $this->prepareQuery();
     }

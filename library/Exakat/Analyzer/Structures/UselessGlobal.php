@@ -26,37 +26,33 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessGlobal extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/VariableUsedOnceByContext',
-                     'Structures/UnusedGlobal',
-                    );
-    }
-    
     public function analyze() {
         $globals = $this->dictCode->translate(array('$GLOBALS'));
 
         // Global are unused if used only once
-        $query = <<<GREMLIN
-g.V().hasLabel("Globaldefinition").values("code")
-GREMLIN;
-        $inglobal = $this->query($query)->toArray();
+        $this->atomIs('Globaldefinition')
+             ->values('code');
+        $inglobal = $this->rawQuery()
+                         ->toArray();
 
         if (empty($globals)) {
             $inGlobals = array();
         } else {
-            $query = <<<GREMLIN
-g.V().hasLabel("Phpvariable").has("code", {$globals[0]}).in("VARIABLE").hasLabel("Array").values("globalvar")
-GREMLIN;
-            $inGlobals = $this->query($query)->toArray();
+            $this->atomIs('Phpvariable')
+                 ->codeIs($globals[0], self::NO_TRANSLATE, self::CASE_SENSITIVE )
+                 ->inIs('VARIABLE')
+                 ->atomIs('Array')
+                 ->values('globalvar');
+            $inGlobals = $this->rawQuery()
+                              ->toArray();
         }
 
-        $MAX_LOOPING = self::MAX_LOOPING;
-        $query = <<<GREMLIN
-g.V().hasLabel("Php").out("CODE")
-     .repeat(__.out({$this->linksDown}).not(hasLabel("Function", "Class", "Classanonymous", "Closure", "Trait", "Interface")) ).emit().times($MAX_LOOPING)
-     .hasLabel("Variable").values("code");
-GREMLIN;
-        $implicitGLobals = $this->query($query)->toArray();
+        $this->atomIs('Php')
+             ->outIs('CODE')
+             ->atomInsideNoDefinition(array('Variable', 'Variablearray', 'Variableobject', 'Globaldefinition'))
+             ->values('code');
+        $implicitGLobals = $this->rawQuery()
+                                ->toArray();
 
         $counts = array_count_values(array_merge($inGlobals, $inglobal, $implicitGLobals));
         $loneGlobal = array_filter($counts, function ($x) { return $x == 1; });
@@ -75,6 +71,15 @@ GREMLIN;
                      ->is('globalvar', $loneGlobal);
                 $this->prepareQuery();
             }
+        }
+
+        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
+        $superglobals = $this->dictCode->translate($superglobals);
+        if (!empty($superglobals)) {
+            $this->atomIs('Globaldefinition')
+                 ->analyzerIsNot('self')
+                 ->codeIs($superglobals, self::NO_TRANSLATE, self::CASE_SENSITIVE);
+            $this->prepareQuery();
         }
 
         // used only once

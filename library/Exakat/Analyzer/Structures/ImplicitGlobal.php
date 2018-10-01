@@ -27,22 +27,20 @@ use Exakat\Analyzer\Analyzer;
 
 class ImplicitGlobal extends Analyzer {
     public function analyze() {
-        $query = <<<GREMLIN
-g.V().hasLabel("Global").out("GLOBAL")
-     .has("token", "T_VARIABLE")
-     .not( where( repeat(__.in({$this->linksDown})).emit().until(hasLabel("File")).hasLabel("Function", "Method", "Closure", "Magicmethod") ) )
-     .values("code").unique()
-GREMLIN;
-        $globalGlobal = $this->query($query)
-                             ->toArray();
-
-        // can't bail out here : if $globalGlobal is empty, no global was declared outside functions.
-        // This is still useful
+        $this->atomIs('Global')
+             ->isGlobalCode()
+             ->outIs('GLOBAL')
+             ->values('code')
+             ->unique();
+        $globalGlobal = $this->rawQuery()->toArray();
 
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
         $superglobals = $this->dictCode->translate($superglobals);
         $explicitGlobal = array_merge($superglobals, $globalGlobal);
         $explicitGlobal = array_unique($explicitGlobal);
+
+        // can't bail out here : if $globalGlobal is empty, no global was declared outside functions.
+        // This is still useful
 
         $this->atomIs('Global')
              ->hasFunction()
