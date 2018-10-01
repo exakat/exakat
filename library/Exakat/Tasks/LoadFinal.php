@@ -102,55 +102,52 @@ class LoadFinal extends Tasks {
         display("fixing Fullnspath for Functions");
         // fix path for constants with Const
         
-        /*
-$query = new Query();
-         $query->atomIs('Functioncall')
-               ->has('fullnspath')
-               ->_as('identifier')
-               ->savePropertyAs('cc', 'fullnspath')
-               ->inIs('DEFINITION')
-               ->atomIs('Function')
-               ->savePropertyAs('actual', 'fullnspath')
-               ->filter('actual != cc')
-               ->back('identifier')
-               ->setProperty('fullnspath', 'actual')
-               ->returnCount();
-        */
-        $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .has("fullnspath")
-     .as("identifier")
-     .sideEffect{ cc = it.get().value("fullnspath"); }
-     .in("DEFINITION").hasLabel("Function")
-     .filter{ actual = it.get().value("fullnspath"); actual != cc;}
-     .select("identifier")
-     .sideEffect{ it.get().property("fullnspath", actual); }
-     .count()
-GREMLIN;
 
-        $res = $this->gremlin->query($query);
+        $query = new Query(0, $this->config->project, 'fixFullnspathFunctions', null);
+        $query->atomIs('Functioncall')
+              ->has('fullnspath')
+              ->_as('identifier')
+              ->savePropertyAs('fullnspath', 'cc')
+              ->inIs('DEFINITION')
+              ->atomIs('Function')
+              ->savePropertyAs('fullnspath', 'actual')
+              ->filter('actual != cc', array())
+              ->back('identifier')
+              ->setProperty('fullnspath', 'actual')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
         display("Fixed Fullnspath for Functions");
     }
     
     private function fixFullnspathConstants() {
         display("fixing Fullnspath for Constants");
         // fix path for constants with Const
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier", "Nsname")
-     .has("fullnspath")
-     .as("identifier")
-     .sideEffect{ cc = it.get().value("fullnspath"); }
-     .in("DEFINITION").hasLabel("Class", "Trait", "Interface", "Constant", "Defineconstant")
-     .coalesce( __.out("ARGUMENT").has("rank", 0), 
-                __.hasLabel("Constant").out('NAME'), 
-                filter{ true; })
-     .filter{ actual = it.get().value("fullnspath"); actual != cc;}
-     .select("identifier")
-     .sideEffect{ it.get().property("fullnspath", actual); }
-     .count()
-GREMLIN;
 
-        $res = $this->gremlin->query($query);
+        $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null);
+        $query->atomIs(array('Identifier', 'Nsname'))
+              ->has('fullnspath')
+              ->_as('identifier')
+              ->savePropertyAs('fullnspath', 'cc')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Trait', 'Interface', 'Constant', 'Defineconstant'))
+              ->raw(<<<GREMLIN
+coalesce( __.out("ARGUMENT").has("rank", 0), 
+          __.hasLabel("Constant").out('NAME'), 
+          filter{ true; })
+GREMLIN
+, array(), array())
+              ->savePropertyAs('fullnspath', 'actual')
+              ->filter('actual != cc', array())
+              ->back('identifier')
+              ->setProperty('fullnspath', 'actual')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        
+        print_r($result);
+
         display("Fixed Fullnspath for Constants");
     }
 
@@ -161,17 +158,15 @@ GREMLIN;
         // May be array_keys
         $constantsPHP = array_values($constants);
 
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier")
-     .has("fullnspath")
-     .not(where( __.in("DEFINITION", "NAME")))
-     .not(where( __.in("ARGUMENT").hasLabel("Defineconstant")))
-     .values("code")
-     .unique()
-GREMLIN;
-        $res = $this->gremlin->query($query);
+        $query = new Query(0, $this->config->project, 'spotPHPNativeConstants', null);
+        $query->atomIs('Identifier')
+              ->has('fullnspath')
+              ->values('code')
+              ->unique();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        $constants = array_values(array_intersect($res->toArray(), $this->dictCode->translate($constantsPHP) ));
+        $constants = array_values(array_intersect($result->toArray(), $this->dictCode->translate($constantsPHP) ));
 
         if (empty($constants)) {
             display('No PHP Constants');

@@ -685,6 +685,12 @@ GREMLIN;
 
         return $this;
     }
+    
+    public function isComplexExpression($threshold = 50) {
+        $this->query->isComplexExpression($threshold);
+
+        return $this;
+    }
 
     public function isNotHash($property, $hash, $index) {
         $this->query->isNotHash($property, $hash, $index);
@@ -803,6 +809,12 @@ GREMLIN;
     
     public function values($property) {
         $this->query->values($property);
+        
+        return $this;
+    }
+
+    public function unique() {
+        $this->query->unique();
         
         return $this;
     }
