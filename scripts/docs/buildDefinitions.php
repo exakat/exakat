@@ -350,6 +350,11 @@ SQL
         //    const VERSION = '1.0.3';
         preg_match('/const VERSION = \'([0-9\.]+)\';/is', $php, $r);
         $this->exakat_version = $r[1];
+        
+        $py = file_get_contents('docs/conf.py');
+        $py = preg_replace('/version = u\'\d\.\d.\d\'/', 'version = u\''.$this->exakat_version.'\'', $py);
+        file_put_contents('docs/conf.py', $py);
+        
         //    const BUILD = 661;
         preg_match('/const BUILD = ([0-9]+);/is', $php, $r);
         $this->exakat_build = $r[1];
@@ -555,7 +560,7 @@ $exampleTxt
         $desc = $this->glossary($ini['name'], $ini['description']);
 
         if (isset($ini['modifications'])) {
-            $desc .= "\n\nSuggestions\n--------------\n\n* ".implode("\n* ", $ini['modifications'])."\n\n\n";
+            $desc .= "\n\nSuggestions\n^^^^^^^^^^^\n\n* ".implode("\n* ", $ini['modifications'])."\n\n\n";
         }
         $desc = trim($this->rst_escape($desc));
         

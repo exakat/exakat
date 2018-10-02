@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 01 Oct 2018 10:18:55 +0000
-.. comment: Generation hash : aa375cd914e4f9a1bb8d3b7354822fa760f2374b
+.. comment: Generation date : Tue, 02 Oct 2018 15:17:00 +0000
+.. comment: Generation hash : ea94dc897fd190f6f57c9557c8f6c652c4f53c4c
 
 
 .. _$http\_raw\_post\_data:
@@ -152,7 +152,7 @@ See also `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_,
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Extends ArrayObject, or a class that extends it, to use $this as an array too.
 * Implements ArrayAccess to use $this as an array too.
@@ -561,7 +561,7 @@ If it is used to type cast a value to integer, then casting (integer) is clearer
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Remove the + 0
 * Use an explicit type casting operator (int)
@@ -900,7 +900,7 @@ They are indeed distinct, but may lead to confusion.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Only use string or integer as key for an array.
 
@@ -1259,7 +1259,7 @@ See also `PHP 7 performance improvements (3/5): Encapsed strings optimization <h
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Collect all pieces in an array, then implode() the array in one call.
 
@@ -1852,7 +1852,7 @@ See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Use FilesystemIterator, DirectoryIterator classes.
 * Use RegexIterator to filter any unwanted results from FilesystemIterator.
@@ -2047,7 +2047,7 @@ See also `Avoid nesting too deeply and return early (part 1) <https://github.com
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Detect errors, and then, return as soon as possible.
 * When a if...then branches are unbalanced, test for the small branch, finish it with return. Then keep the other branch as the main code.
@@ -2968,7 +2968,7 @@ This expression may be reduced by casting to boolean type.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Remove the old expression and simply use ``(bool)`` operator
 * Change the target values from true/false, or 0/1 to non-binary values, like strings or integers beyond 0 and 1.
@@ -4441,7 +4441,7 @@ See also `Callback / callable <http://php.net/manual/en/language.types.callable.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Add the typehint callable
 * Use the function is_callable() inside the method if 'callable' is too strong.
@@ -5013,7 +5013,7 @@ See also : `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/maste
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Avoid using the reference altogether : sometimes, the reference is not needed.
 * Add unset() right after the loop, to avoid reusing the reference.
@@ -5385,7 +5385,7 @@ See also `Cross-Site Scripting (XSS) <https://phpsecurity.readthedocs.io/en/late
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Validate input : make sure the incoming data are what you expect from them.
 * Escape output : prepare outgoing data for the next system to use.
@@ -5576,7 +5576,7 @@ See also `Don't pass this out of a constructor <http://www.javapractices.com/top
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Finish the constructor first, then call an external object.
 * Sending $this should be made accessible in a separate method, so external objects may call it.
@@ -6168,7 +6168,7 @@ Classes that are directly derived from an exception are omitted.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Remove an empty class :it is probably dead code.
 * Add some code to the class to make it concrete.
@@ -7364,7 +7364,7 @@ However, the name should be fully qualified without the initial \. Here, \a\b\c 
 Also, the namespace will be absolute, and not a relative namespace of the current one. 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Drop the initial \ when creating constants with define() : for example, use trim($x, '\'), which removes anti-slashes before and after.
 
@@ -8266,7 +8266,7 @@ Note that if the values used in the condition have been modified in the first if
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Merge the two conditions so the condition is used once.
 * Change one of the condition, so they are different
@@ -8897,7 +8897,7 @@ See also `Constants <http://php.net/manual/en/language.constants.php>`_.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Change constant name
 
@@ -9196,7 +9196,7 @@ See also `file_get_contents <http://php.net/file_get_contents>`_ and
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Use file_get_contents() instead of implode(file()) to read the whole file at once.
 * Use readfile() to echo the content to stdout at once.
@@ -9847,7 +9847,7 @@ Potential replacements :
  
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * use str_replace() with arrays as arguments.
 * use preg_replace() with arrays as arguments.
@@ -10761,7 +10761,7 @@ Multiple definitions may happens at bootstrap, when the application code is coll
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Move the constants to a class, and include the right class based on control flow.
 * Give different names to the constants, and keep the condition close to utilisation.
@@ -10924,7 +10924,7 @@ They are indeed overwriting each other. This is most probably a typo.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Review your code and check that arrays only have keys defined once.
 * Review carefully your code and check indirect values, like constants, static constants.
@@ -11019,7 +11019,7 @@ Exakat tries to find the value of the case as much as possible, and ignore any d
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Remove the double case
 * Change the case to another and rightfull value
@@ -11293,7 +11293,7 @@ See also `Nested Ternaries are Great <https://medium.com/javascript-scene/nested
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Replace ternaries by if/then structures.
 * Replace ternaries by a functioncall : this provides more readability, offset the actual code, and gives room for making it different.
@@ -11686,7 +11686,7 @@ Either the condition is useless, and may be removed, or the alternatives need to
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Remove the conditional, and call the expression directly
 * Replace one of the alternative with a distinct call
@@ -11841,7 +11841,7 @@ See also `count <http://php.net/count>`_ and
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Use empty() on the data
 * Compare the variable with a default value, such as an empty array
@@ -12294,7 +12294,7 @@ See also `isset <http://www.php.net/`'isset <http://www.php.net/isset>`_>`_ and
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Only use isset(), just drop the empty()
 * Only use empty(), just drop the empty()
@@ -12512,7 +12512,7 @@ See also `include <http://php.net/manual/en/function.include.php>`_.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Remove parenthesis
 
@@ -12872,7 +12872,7 @@ This error is not detected by linting. It is only detected at instantiation time
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Give a literal value to this constant
 * Give a constant value to this constant : other class constants or constant are allowed here.
@@ -13257,7 +13257,7 @@ Some keywords are missing from this analysis : ``extends``, ``implements``, ``as
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Use lowercase only PHP keywords, except for constants such as __CLASS__.
 
@@ -13695,7 +13695,7 @@ See also `Passing arguments by reference <http://php.net/manual/en/functions.arg
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Put the literal value in a variable before calling the method.
 * Put the literal value in the default value of the reference argument.
@@ -14565,7 +14565,7 @@ This analysis doesn't apply to Exceptions.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Use ``parent\:\:__construct`` as the first call in the constructor.
 
@@ -15604,7 +15604,7 @@ Unless order is important, it is recommended to always use the same order when d
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Match the sorting order of the arrays. Choose any of them.
 * Configure a constant and use it as a replacement for those arrays.
@@ -16025,7 +16025,7 @@ See also `What are the best practices for catching and re-throwing exceptions? <
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Log the message of the exception for later usage.
 * Remove the try/catch and let the rest of the application handle this exception.
@@ -17191,7 +17191,7 @@ Beware, some edge cases may apply. In particular, backward compatibility may pre
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Use [] instead of array_push()
 * Use instanceof instead of is_object()
@@ -18213,7 +18213,7 @@ This analysis doesn't detect usage of variables with ``compact``.
  
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Precalculate the result of that loop and removes it altogether
 * Check that the loop is not missing a blind variable usage
@@ -18750,7 +18750,7 @@ Original idea by `Vladimir Reznichenko <https://twitter.com/kalessil>`_.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Remove the comparison altogether
 * Move the comparison to its right place : that, or more the parenthesis.
@@ -18905,7 +18905,7 @@ Multiple default happens often with large `'switch() <http://php.net/manual/en/c
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Remove the useless default : it may be the first, or the last. If you don't know, keep the first, as it is the one being used at the moment.
 
@@ -20851,7 +20851,7 @@ Preprocessing could be done anytime the script includes all the needed values to
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Preprocess the values and hardcode them in PHP. Do not use PHP to calculate something at the last moment.
 * Use already processed values, or cache to avoid calculating the value each hit.
@@ -21127,7 +21127,7 @@ See also `unserialize() <http://php.net/unserialize>`_,
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Add a list of class as second argument of any call to unserialize(). This is valid for PHP 7.0 and later.
 
@@ -21602,7 +21602,7 @@ Being private, those properties are only accessible to the current class or trai
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Remove the property altogether
 * Check if the property wasn't forgotten in the rest of the class
@@ -22173,7 +22173,7 @@ See also `Type Operators <http://php.net/manual/en/language.operators.type.php#l
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Use instanceof and remove is_object
 * Create a high level interface to check a whole family of classes, instead of testing them individually
@@ -22997,7 +22997,7 @@ See also `CSPRNG <http://php.net/manual/en/book.csprng.php>`_ and `OpenSSL <http
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Use random_bytes() and randon_int(). At least, use them as a base for random data, and then add extra prefix and suffix, and a hash call on top.
 
@@ -23795,7 +23795,7 @@ See also `unset <http://php.net/unset>`_.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Remove the unset
 * Set the variable to null : the effect is the same on memory, but the variable keeps its existence.
@@ -23996,7 +23996,7 @@ See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_.
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * It is recommended to avoid using var, and explicitly use the new keywords : private, protected, public
 
@@ -24504,7 +24504,7 @@ It is better to put all the optional parameters at the end of the method's signa
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Give default values to all but first parameters. Null is a good default value, as PHP will use it if not told otherwise. 
 * Remove default values to all but last parameters. That is probably a weak solution.
@@ -24613,7 +24613,7 @@ An optional 'b' may be used to make the `'fopen() <http://www.php.net/fopen>`_ c
 Any other values are not understood by PHP. 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Check the docs, choose the right opening mode.
 
@@ -25877,7 +25877,7 @@ This is a micro-optimisation. Relative gain is real, but small unless the functi
 
 
 Suggestions
---------------
+^^^^^^^^^^^
 
 * Replace strtotime('now') with time(). Don't change strtotime with other value then 'now'.
 
