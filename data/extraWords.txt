@@ -178,3 +178,6 @@ PCRE
 AST
 hashtables
 hashtable
+LDAP
+CSS
+OOP
