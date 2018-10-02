@@ -33,6 +33,7 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\QueryException;
 use Exakat\Phpexec;
 use Exakat\Project as ProjectName;
 use ProgressBar\Manager as ProgressBar;
@@ -211,6 +212,14 @@ GREMLIN;
             display( "$analyzer_class running\n");
             try {
                 $analyzer->run($this->config);
+            } catch(QueryException $error) {
+                $end = microtime(true);
+                display( "$analyzer_class : DSL building exception\n");
+                display($error->getMessage());
+                $this->log->log("$analyzer_class\t".($end - $begin)."\terror : ".$error->getMessage());
+                $this->datastore->addRow('analyzed', array($analyzer_class => 0 ) );
+                $this->checkAnalyzed();
+
             } catch(Exception $error) {
                 $end = microtime(true);
                 display( "$analyzer_class : error \n");

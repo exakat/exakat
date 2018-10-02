@@ -24,6 +24,7 @@
 namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
+use Exakat\Exceptions\QueryException;
 
 class IsNot extends DSL {
     protected $args = array('atom');
@@ -33,27 +34,27 @@ class IsNot extends DSL {
 
         assert($this->assertProperty($property));
         if ($value === null) {
-            return new Command('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", null)))');
+            return new Command("has(\"$property\").or( __.not(has(\"$property\")), __.not(has(\"$property\", null)))");
         } elseif ($value === true) {
-            return new Command('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
+            return new Command("has(\"$property\").or( __.not(has(\"$property\")), __.not(has(\"$property\", true)))");
         } elseif ($value === false) {
-            return new Command('or( __.not(has("'.$property.'")), __.not(has("'.$property.'", true)))');
+            return new Command("has(\"$property\").or( __.not(has(\"$property\")), __.not(has(\"$property\", false)))");
         } elseif (is_int($value)) {
-            return new Command('not(has("'.$property.'", ***))', array($value));
+            return new Command("has(\"$property\").not(has(\"$property\", ***)))", array($value));
         } elseif (is_string($value)) {
             if (empty($value)) {
-                return new Command('not(has("'.$property.'", ""))');
+                return new Command("has(\"$property\").not(has(\"$property\", ''))");
             } else {
-                return new Command('not(has("'.$property.'", ***))', array($value));
+                return new Command("has(\"$property\").not(has(\"$property\", ***)))", array($value));
             }
         } elseif (is_array($value)) {
             if (empty($value)) {
-                return new Command('not(has("'.$property.'", ""))');
+                return new Command("has(\"$property\").not(has(\"$property\", ''))");
             } else {
-                return new Command('not(has("'.$property.'", within(***)))', array($value));
+                return new Command("has(\"$property\").not(has(\"$property\", within(***))))", array($value));
             }
         } else {
-            assert(false, 'Not understood type for isNot : '.gettype($value));
+            throw new QueryException('Not understood type for isNot : '.gettype($value));
         }
     }
 }

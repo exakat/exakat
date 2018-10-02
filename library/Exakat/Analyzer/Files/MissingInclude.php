@@ -39,6 +39,7 @@ class MissingInclude extends Analyzer {
              ->outIsIE('CODE')
              ->atomIs('String')
              ->hasNoOut('CONCAT')
+             ->IsNot('noDelimiter', '')
              ->savePropertyAs('noDelimiter', 'including')
              ->goToFile()
              ->raw(<<<GREMLIN

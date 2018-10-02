@@ -42,6 +42,7 @@ class InclusionWrongCase extends Analyzer {
              ->atomIs(array('String', 'Identifier', 'Nsname'))
              ->hasNoOut('CONCAT')
              ->has('noDelimiter')
+             ->isNot('noDelimiter', '')
              ->savePropertyAs('noDelimiter', 'including')
 
              ->goToFile()
@@ -62,6 +63,7 @@ filter{
     if (including.getAt(0) != '/') {
         including = path + including;
     }
+
     
     including = including.replaceAll('/\\\./', '/');
     including = including.replaceAll('/[^/]+/\\\.\\\./', '/');
