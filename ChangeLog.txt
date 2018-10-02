@@ -1,4 +1,4 @@
-Version 1.4.7 (Maitreya, coming up)
+Version 1.4.8 (Ksitigarbha, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,22 @@ Version 1.4.7 (Maitreya, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.4.7 (Maitreya, coming up)
++ Architecture
+    + Added 'Suggestions' section to documentation, for many rules
+    + WIP : removing usage of MAX_LOOPING in analysis
+    + Added a lot of new external services
+    + Added documentation for creating a new analysis
++ Analyzer
+    + Prepared section for 'Custom' analysis
+    + Upgraded analysis : No interface was dropped in PHP 7.2
+    + Upgraded analysis : IsAMagicProperty extended to parents
+    + Removed anaysis : Relaxed Heredoc was double with Flexible Heredoc
+    + Checked unit tests : 3017 / 3029 test pass (99% pass)
++ Tokenizer
+    + Linking variable in closure's use to its local variable
+    + Removed some unused atoms from GraphElements
 
 Version 1.4.6 (Dipankara, 2018-09-24)
 + Architecture
