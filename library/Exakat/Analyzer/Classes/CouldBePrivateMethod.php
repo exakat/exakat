@@ -71,7 +71,7 @@ g.V().hasLabel("Staticmethodcall")
      .hasLabel("Methodcallname")
      .sideEffect{ name = it.get().value("code"); }
      .as("method")
-     .repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until( hasLabel("Class", "File") )
+     .repeat( __.in({$this->linksDown})).until( hasLabel("Class", "File") )
      .select("classe", "method").by("fullnspath").by("lccode")
      .unique()
 GREMLIN;

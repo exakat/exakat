@@ -32,7 +32,7 @@ class CouldBeProtectedConstant extends Analyzer {
         // global static constants : the one with no definition class : they are all ignored.
         $queryUndefinedConstants = <<<GREMLIN
 g.V().hasLabel("Staticconstant")
-     .not( __.where( __.out("CLASS").in("DEFINITION")) )
+     .not( __.where( __.out("CLASS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface") ) )
      .out("CONSTANT")
      .hasLabel("Name")
      .values("code")
@@ -52,7 +52,7 @@ g.V().hasLabel("Staticconstant")
      .hasLabel("Name")
      .sideEffect{ name = it.get().value("code"); }
      .as("constante")
-     .repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("Class", "Interface", "Classanonymous", "File") )
+     .repeat( __.in({$this->linksDown})).until(hasLabel("Class", "Interface", "Classanonymous", "File") )
      .hasLabel("File")
      .select("classe", "constante").by("fullnspath").by("code")
      .unique()

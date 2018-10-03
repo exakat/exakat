@@ -37,7 +37,7 @@ class CouldBePrivateConstante extends Analyzer {
         // global static constants : the one with no definition class : they are all ignored.
         $query = <<<GREMLIN
 g.V().hasLabel("Staticconstant")
-     .not( __.where( __.out("CLASS").in("DEFINITION")) )
+     .not( __.where( __.out("CLASS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface") ) )
      .out("CONSTANT")
      .hasLabel("Name")
      .values("code")
@@ -58,7 +58,7 @@ g.V().hasLabel("Staticconstant")
      .hasLabel("Name")
      .sideEffect{ name = it.get().value("code"); }
      .as("constante")
-     .repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("Class", "Interface", "Classanonymous", "File") )
+     .repeat( __.in({$this->linksDown})).until(hasLabel("Class", "Interface", "Classanonymous", "File") )
      .or( hasLabel("File"), 
         __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times($LOOPS)
           .where( __.out("CONST").out("CONST").filter{ it.get().value("code") == name; } )

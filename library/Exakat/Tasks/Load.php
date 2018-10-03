@@ -3535,13 +3535,14 @@ class Load extends Tasks {
         $atom->line     = $this->tokens[$this->id][2];
         $atom->token    = $this->getToken($this->tokens[$this->id][0]);
 
-        if ($atomName !== 'Parametername') {
+        if ($atomName !== 'Parametername' && 
+            $this->tokens[$this->id][0] === $this->phptokens::T_VARIABLE) {
             if (isset($this->currentVariables[$atom->code])) {
                 $this->addLink($this->currentVariables[$atom->code], $atom, 'DEFINITION');
             } else { 
                 $definition = $this->addAtom('Variabledefinition');
                 $definition->fullcode = $atom->fullcode;
-                $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $atom, 'DEFINITION');
+                $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $definition, 'DEFINITION');
                 $this->currentVariables[$atom->code] = $atom;
                 
                 $this->addLink($definition, $atom, 'DEFINITION');

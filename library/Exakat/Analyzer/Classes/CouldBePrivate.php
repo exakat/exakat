@@ -70,7 +70,7 @@ g.V().hasLabel("Staticproperty")
      .hasLabel("Staticpropertyname")
      .sideEffect{ name = it.get().value("code"); }
      .as("property")
-     .repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("Class", "File") )
+     .repeat( __.in({$this->linksDown})).until(hasLabel("Class", "Classanonymous", "File") )
      .or( hasLabel("File"), 
         __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times($LOOPS)
           .where( __.out("PPP").out("PPP").filter{ it.get().value("code") == name; } )
