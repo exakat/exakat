@@ -40,18 +40,18 @@ class IsNot extends DSL {
         } elseif ($value === false) {
             return new Command("has(\"$property\").or( __.not(has(\"$property\")), __.not(has(\"$property\", false)))");
         } elseif (is_int($value)) {
-            return new Command("has(\"$property\").not(has(\"$property\", ***)))", array($value));
+            return new Command("has(\"$property\").not(has(\"$property\", ***))", array($value));
         } elseif (is_string($value)) {
             if (empty($value)) {
                 return new Command("has(\"$property\").not(has(\"$property\", ''))");
             } else {
-                return new Command("has(\"$property\").not(has(\"$property\", ***)))", array($value));
+                return new Command("has(\"$property\").not(has(\"$property\", ***))", array($value));
             }
         } elseif (is_array($value)) {
             if (empty($value)) {
                 return new Command("has(\"$property\").not(has(\"$property\", ''))");
             } else {
-                return new Command("has(\"$property\").not(has(\"$property\", within(***))))", array($value));
+                return new Command("has(\"$property\").not(has(\"$property\", within(***)))", array($value));
             }
         } else {
             throw new QueryException('Not understood type for isNot : '.gettype($value));
