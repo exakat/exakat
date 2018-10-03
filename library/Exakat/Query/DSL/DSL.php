@@ -164,8 +164,13 @@ abstract class DSL {
         foreach($links as $l) {
             if (empty($l)) {
                 $return[] = ".$direction( )";
-            } else {
+            } elseif (is_array($l)) {
+                $l = implode('", "', $l);
                 $return[] = ".$direction(\"$l\")";
+            } elseif (is_string($l)) {
+                $return[] = ".$direction(\"$l\")";
+            } else {
+                assert(false, __METHOD__.' received an unprocessable object '.gettype($code));
             }
         }
         
