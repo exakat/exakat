@@ -33,8 +33,6 @@ class TooManyNativeCalls extends Analyzer {
     }
     
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         $this->atomIs('Sequence')
              ->outIs('EXPRESSION')
              ->atomIsNot(array('Assignation',
@@ -62,14 +60,7 @@ class TooManyNativeCalls extends Analyzer {
                                'While',
                                ))
              ->_as('results')
-             ->raw(<<<GREMLIN
-where(
-    __.emit( ).repeat( __.out({$this->linksDown}).not(hasLabel("Closure", "Classanonymous")) ).times($MAX_LOOPING).hasLabel('Functioncall')
-      .where( __.in("ANALYZED").has("analyzer", "Functions/IsExtFunction"))
-      .count().is(gt($this->nativeCallCounts))
-)
-GREMLIN
-)
+             ->analyzerInsideMoreThan('Functions/IsExtFunction', 'Functioncall', $this->nativeCallCounts)
              ->back('results');
         $this->prepareQuery();
     }

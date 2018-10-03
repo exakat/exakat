@@ -545,6 +545,12 @@ GREMLIN;
         
         return $this;
     }
+    
+    public function analyzerInsideMoreThan($analyzer, $atom, $count = 1) {
+        $this->query->AnalyzerInsideMoreThan($analyzer, $atom, $count);
+        
+        return $this;
+    }
 
     public function hasPropertyInside($property, $values) {
         $this->query->hasPropertyInside($property, $values);
