@@ -569,10 +569,11 @@ class Load extends Tasks {
                               'class'          => array(),
                               );
 
-        $this->currentMethod           = array();
+        $this->currentMethod           = array(); 
         $this->currentFunction         = array();
         $this->currentClassTrait       = array();
         $this->currentParentClassTrait = array();
+        $this->currentVariables        = array();
 
         $this->tokens                  = array();
     }
