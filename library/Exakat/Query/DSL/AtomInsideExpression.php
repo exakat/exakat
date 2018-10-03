@@ -41,14 +41,15 @@ class AtomInsideExpression extends DSL {
 
         $gremlin = <<<GREMLIN
 emit().repeat(
-            __.coalesce( __.hasLabel(within(***)).out("LEFT", "RIGHT"),
+            __.coalesce( __.hasLabel(within(***)).out(),
                          __.hasLabel("Parenthesis").out("CODE"),
                          __.hasLabel("Assignation").out("RIGHT")
                        )
               )
       .times($MAX_LOOPING)
+      .hasLabel(within(***))
 GREMLIN;
-        return new Command($gremlin, array($diff));
+        return new Command($gremlin, array($diff, $diff));
     }
 }
 ?>

@@ -637,7 +637,13 @@ GREMLIN;
     }
     
     public function noAnalyzerInside($atoms, $analyzer) {
-        $this->query->noAnalyzerInside($atoms, $analyzer);
+        $this->query->NoAnalyzerInside($atoms, $analyzer);
+        
+        return $this;
+    }
+
+    public function noAnalyzerInsideWithProperty($atoms, $analyzer, $property, $value) {
+        $this->query->NoAnalyzerInsideWithProperty($atoms, $analyzer, $property, $value);
         
         return $this;
     }

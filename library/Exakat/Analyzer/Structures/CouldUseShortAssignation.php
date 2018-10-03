@@ -35,9 +35,9 @@ class CouldUseShortAssignation extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomInsideExpression('Addition')
+             ->hasNoChildren('Arrayliteral', array( array('LEFT', 'RIGHT')) )
              ->tokenIs('T_PLUS')
-             ->hasNoChildren('Arrayliteral', array('LEFT', 'RIGHT'))
-             ->outIs(array('LEFT', 'RIGHT'))
+             ->outIsIE(array('LEFT', 'RIGHT', 'CODE'))
              ->samePropertyAs('fullcode', 'receiver', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
@@ -51,7 +51,7 @@ class CouldUseShortAssignation extends Analyzer {
              ->outIs('RIGHT')
              ->atomInsideExpression('Multiplication')
              ->tokenIs('T_STAR')
-             ->outIs(array('LEFT', 'RIGHT'))
+             ->outIsIE(array('LEFT', 'RIGHT', 'CODE'))
              ->samePropertyAs('fullcode', 'receiver', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
