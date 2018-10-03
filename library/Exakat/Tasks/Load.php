@@ -4033,7 +4033,7 @@ class Load extends Tasks {
 
     private function processReal() {
         $real = $this->processSingle('Real');
-        $this->pushExpression($integer);
+        $this->pushExpression($real);
         // (int) is for loading into the database
         $this->runPlugins($real);
 
