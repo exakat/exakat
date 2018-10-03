@@ -36,7 +36,7 @@ class IsNot extends DSL {
         if ($value === null) {
             return new Command("has(\"$property\").or( __.not(has(\"$property\")), __.not(has(\"$property\", null)))");
         } elseif ($value === true) {
-            return new Command("has(\"$property\").or( __.not(has(\"$property\")), __.not(has(\"$property\", true)))");
+            return new Command("or( __.not(has(\"$property\")), __.not(has(\"$property\", true)))");
         } elseif ($value === false) {
             return new Command("has(\"$property\").or( __.not(has(\"$property\")), __.not(has(\"$property\", false)))");
         } elseif (is_int($value)) {
