@@ -3525,8 +3525,8 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     /// processing single tokens
     //////////////////////////////////////////////////////
-    private function processSingle($atom) {
-        $atom = $this->addAtom($atom);
+    private function processSingle($atomName) {
+        $atom = $this->addAtom($atomName);
         if (strlen($this->tokens[$this->id][1]) > 100000) {
             $this->tokens[$this->id][1] = substr($this->tokens[$this->id][1], 0, 100000).PHP_EOL."[.... 100000 / ".strlen($this->tokens[$this->id][1])."]".PHP_EOL;
         }
@@ -3535,7 +3535,7 @@ class Load extends Tasks {
         $atom->line     = $this->tokens[$this->id][2];
         $atom->token    = $this->getToken($this->tokens[$this->id][0]);
 
-        if ($this->tokens[$this->id][0] === $this->phptokens::T_VARIABLE) {
+        if ($atomName !== 'Parametername') {
             if (isset($this->currentVariables[$atom->code])) {
                 $this->addLink($this->currentVariables[$atom->code], $atom, 'DEFINITION');
             } else { 
