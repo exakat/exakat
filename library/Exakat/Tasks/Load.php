@@ -2428,6 +2428,7 @@ class Load extends Tasks {
             $this->tokens[$this->id - 1][0] === $this->phptokens::T_INSTANCEOF    ) {
 
             $identifier = $this->processSingle('Static');
+            $this->pushExpression($identifier);
             list($fullnspath, $aliased) = $this->getFullnspath($identifier, 'class');
             $identifier->fullnspath = $fullnspath;
             $this->calls->addCall('class', $fullnspath, $identifier);
