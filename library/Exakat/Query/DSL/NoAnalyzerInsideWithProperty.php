@@ -25,10 +25,11 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class NoAnalyzerInside extends DSL {
+class NoAnalyzerInsideWithProperty extends DSL {
     public function run() {
-        list($atoms, $analyzer) = func_get_args();
+        list($atoms, $analyzer, $property, $value) = func_get_args();
 
+        assert($this->assertProperty($property));
         assert($this->assertAtom($atoms));
         $diff = $this->checkAtoms($atoms);
         if (empty($diff)) {
@@ -42,6 +43,7 @@ $gremlin = <<<GREMLIN
 not( 
     where( __.emit( ).repeat( __.out({$linksDown}) ).times($MAX_LOOPING)
              .hasLabel(within(***))
+             .filter{ it.get().value("$property") == $value}
              .where( __.in("ANALYZED").has("analyzer", within(***)))
           )     
 )

@@ -32,17 +32,6 @@ class ForeachReferenceIsNotModified extends Analyzer {
     }
     
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        $modifiedVar = <<<GREMLIN
-not( 
-    where( __.repeat( __.out({$this->linksDown}) ).emit( ).times($MAX_LOOPING)
-         .hasLabel("Variable", "Variablearray", "Variableobject")
-         .filter{ it.get().value("code") == name}
-         .where( __.in("ANALYZED").has("analyzer", "Variables/IsModified") )
-     )
-)
-GREMLIN;
-
         // case of a variable
         $this->atomIs('Foreach')
              ->outIs('VALUE')
@@ -51,7 +40,7 @@ GREMLIN;
              ->savePropertyAs('code', 'name')
              ->inIs('VALUE')
              ->outIs('BLOCK')
-             ->raw($modifiedVar)
+             ->NoAnalyzerInsideWithProperty(array('Variable', 'Variablearray', 'Variableobject'), 'Variables/IsModified', 'code', 'name')
              ->back('first');
         $this->prepareQuery();
     }
