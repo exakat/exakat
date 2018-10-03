@@ -27,8 +27,6 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldUseShortAssignation extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
         // Commutative operation : Addition
         $this->atomIs('Assignation')
              ->codeIs('=')
@@ -36,15 +34,10 @@ class CouldUseShortAssignation extends Analyzer {
              ->savePropertyAs('fullcode', 'receiver')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->raw(<<<GREMLIN
-emit().repeat(__.coalesce( __.hasLabel("Addition").has("token", "T_PLUS").not(out("RIGHT", "LEFT").hasLabel("Arrayliteral")).out("RIGHT"),
-                           __.hasLabel("Parenthesis").out("CODE"),
-                           __.hasLabel("Assignation").out("RIGHT")
-                           )
-              ).times($MAX_LOOPING)
-GREMLIN
-)
-             ->raw('coalesce( __.hasLabel("Addition").has("token", "T_PLUS").not(out("RIGHT", "LEFT").hasLabel("Arrayliteral")).out("LEFT"), __.filter{true; })')
+             ->atomInsideExpression('Addition')
+             ->tokenIs('T_PLUS')
+             ->hasNoChildren('Arrayliteral', array('LEFT', 'RIGHT'))
+             ->outIs(array('LEFT', 'RIGHT'))
              ->samePropertyAs('fullcode', 'receiver', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
@@ -56,15 +49,9 @@ GREMLIN
              ->savePropertyAs('fullcode', 'receiver')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->raw(<<<GREMLIN
-emit().repeat(__.coalesce( __.hasLabel("Multiplication").has("token", "T_STAR").out("RIGHT"),
-                           __.hasLabel("Parenthesis").out("CODE"),
-                           __.hasLabel("Assignation").out("RIGHT")
-                           )
-              ).times($MAX_LOOPING)
-GREMLIN
-)
-             ->raw('coalesce( __.hasLabel("Multiplication").has("token", "T_STAR").out("LEFT"), __.filter{true; })')
+             ->atomInsideExpression('Multiplication')
+             ->tokenIs('T_STAR')
+             ->outIs(array('LEFT', 'RIGHT'))
              ->samePropertyAs('fullcode', 'receiver', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
