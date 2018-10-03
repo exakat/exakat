@@ -20,35 +20,25 @@
  *
 */
 
-namespace Exakat\Analyzer\Structures;
 
-use Exakat\Analyzer\Analyzer;
+namespace Exakat\Query\DSL;
 
-class ModernEmpty extends Analyzer {
-    protected $phpVersion = '5.5+';
-    
-    public function dependsOn() {
-        return array('Variables/IsRead',
-                     );
-    }
-    
-    public function analyze() {
-        // $a = source();
-        // if (empty($a)) {}
-        $this->atomIs('Assignation')
-             ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->savePropertyAs('fullcode', 'variable')
-             ->back('first')
-             ->nextSibling()
-             ->atomInsideNoDefinition('Empty')
-             ->outIs('ARGUMENT')
-             ->atomIs('Variable')
-             ->samePropertyAs('fullcode', 'variable')
-             ->variableIsRead(1)
-             ->back('first');
-        $this->prepareQuery();
+class VariableIsRead extends DSL {
+    public function run() : Command {
+        list($times) = func_get_args();
+
+        $gremlin = <<<GREMLIN
+where( 
+    __.in("DEFINITION")
+      .out("DEFINITION")
+      .where( 
+        __.in("ANALYZED")
+          .has("analyzer", "Variables/IsRead")
+            )
+      .count().is(eq($times))
+    )
+GREMLIN;
+        return new Command($gremlin);
     }
 }
-
 ?>

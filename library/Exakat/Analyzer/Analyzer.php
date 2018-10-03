@@ -563,6 +563,12 @@ GREMLIN;
         
         return $this;
     }
+    
+    public function atomInsideExpression($atom) {
+        $this->query->atomInsideExpression($atom);
+        
+        return $this;
+    }
 
     public function fullcodeInside($fullcode) {
         $this->query->fullcodeInside($fullcode);
@@ -1532,6 +1538,12 @@ GREMLIN;
 
     public function hasNoUsage() {
         $this->query->hasNoUsage();
+
+        return $this;
+    }
+
+    public function variableIsRead($times = 1) {
+        $this->query->VariableIsRead($times);
 
         return $this;
     }
