@@ -1112,9 +1112,6 @@ class Load extends Tasks {
         $function->fullnspath = $fullnspath;
         $function->aliased    = $aliased;
 
-        $this->currentFunction[] = $function;
-        $this->currentMethod[]   = $function;
-
         $argumentsFullcode = $function->fullcode;
         $function->reference = $reference;
         if (isset($name)) {
@@ -1831,6 +1828,10 @@ class Load extends Tasks {
 
     private function processParameters($atom) {
         $arguments = $this->addAtom($atom);
+
+        $this->currentFunction[] = $arguments;
+        $this->currentMethod[]   = $arguments;
+
         $current = $this->id;
         $argumentsId = array();
 
