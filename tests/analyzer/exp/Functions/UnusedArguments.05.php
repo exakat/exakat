@@ -6,6 +6,9 @@ $expected     = array('function A2($a, $b) { /**/ } ',
                      );
 
 $expected_not = array('function ffoo12($a, $b) { /**/ } ',
+                      'function ffoo1($a2, $b) { /**/ } ',
+                      'function ffoo12($a2, $b) { /**/ } ',
+                      'function i1($a, $b) { /**/ } ',
                       'function ffoo1($a, $b) { /**/ } ',
                       'function ffoo12($a1, $b) { /**/ } ',
                       'function ffoo1($a1, $b) { /**/ } ',

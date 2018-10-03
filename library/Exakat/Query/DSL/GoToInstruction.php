@@ -35,9 +35,11 @@ class GoToInstruction extends DSL {
         $atomAndFile = $atom;
         $atomAndFile[] = "File";
         $atomAndFile = array_unique($atomAndFile);
+        
+        $linksDown = self::$linksDown;
 
         return new Command(<<<GREMLIN
-repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )
+repeat( __.in({$linksDown})).until(hasLabel(within(***)) )
           .hasLabel(within(***))
 GREMLIN
 , array($atomAndFile, $atom));

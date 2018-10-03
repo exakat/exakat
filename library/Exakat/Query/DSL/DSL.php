@@ -46,7 +46,7 @@ abstract class DSL {
             $data = $datastore->getCol('TokenCounts', 'token');
             
             self::$availableAtoms = array('Project', 'File');
-            self::$availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE');
+            self::$availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE');
 
             foreach($data as $token){
                 if ($token === strtoupper($token)) {

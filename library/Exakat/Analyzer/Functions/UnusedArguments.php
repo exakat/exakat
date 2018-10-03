@@ -41,9 +41,8 @@ class UnusedArguments extends Analyzer {
              ->savePropertyAs('code', 'varname')
              ->back('first')
              ->inIs('ARGUMENT')
-             ->atomIs(self::$FUNCTIONS_ALL)
+             ->atomIs(array('Function', 'Closure'))
              ->_as('results')
-             ->hasNoClassInterfaceTrait()
              ->back('first')
              ->outIs('NAME')
              ->hasNoOut('DEFINITION')
@@ -57,12 +56,11 @@ class UnusedArguments extends Analyzer {
              ->savePropertyAs('code', 'varname')
              ->back('first')
              ->inIs('ARGUMENT')
-             ->atomIs(self::$FUNCTIONS_ALL)
-             ->analyzerIsNot('self')
-             ->_as('results')
+             ->atomIs(array('Method', 'Magicmethod'))
+             ->hasNoOut('OVERWRITE')
              ->hasClassTrait()
+             ->_as('results')
              ->isNot('abstract', true)
-             ->checkInheriting()
              ->back('first')
              ->outIs('NAME')
              ->raw('not(where( __.out("DEFINITION").where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") )))')
@@ -99,7 +97,7 @@ class UnusedArguments extends Analyzer {
 
              ->hasClassTrait()
              ->isNot('abstract', true)
-             ->checkInheriting()
+             ->hasNoOut('OVERWRITE')
              ->back('first')
              ->outIs('NAME')
              ->hasNoOut('DEFINITION')
@@ -130,31 +128,6 @@ class UnusedArguments extends Analyzer {
              ->hasNoOut('DEFINITION')
              ->back('first');
         $this->prepareQuery();
-    }
-    
-    private function checkInheriting() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
-        $this->_as('method')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->goToClassTrait()
-             ->raw(<<<GREMLIN
-not( 
-    where( 
-        repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit()
-                                                                                          .times($MAX_LOOPING)
-                          .out("METHOD")
-                          .hasLabel("Method", "Magicmethod")
-                          .out("NAME")
-                          .filter{ it.get().value("code") == name}
-    )
-)
-GREMLIN
-)
-             ->back('method');
-
-        return $this;
     }
 }
 

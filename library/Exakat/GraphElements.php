@@ -213,6 +213,7 @@ abstract class GraphElements {
     static public $LINKS_EXAKAT = array('DEFINITION',
                                         'ANALYZED',
                                         'RETURNED',
+                                        'OVERWRITE'
                                        );
     static public $LINKS_DOWN = array('APPEND',
                                       'ARGUMENT',

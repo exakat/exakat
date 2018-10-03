@@ -67,10 +67,13 @@ class LoadFinal extends Tasks {
         $this->defaultIdentifiers();
         $this->propagateConstants();
 
+
         $this->setClassConstantRemoteDefinition();
         $this->setClassPropertyRemoteDefinition();
         $this->setClassMethodRemoteDefinition();
         $this->setArrayClassDefinition();
+
+        $this->overwrittenMethods();
         
         $this->linkStaticMethodCall();
 
@@ -252,6 +255,29 @@ GREMLIN;
         $this->logTime('end '.$title);
     }
 
+    private function overwrittenMethods() {
+        $this->logTime('overwrittenMethods');
+        
+        DSL::init($this->datastore);
+        $query = new Query(0, $this->config->project, 'overwrittenMethods', null);
+        $query->atomIs(array('Method', 'Magicmethod'))
+              ->outIs('NAME')
+              ->savePropertyAs('lccode', 'name')
+              ->goToClass()
+              ->GoToAllImplements(Analyzer::EXCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name',  Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addEFrom('OVERWRITE', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $this->logTime($result->toInt().' overwrittenMethods end');
+        display($result->toInt().' overwrittenMethods');
+    }
+        
     private function setArrayClassDefinition() {
         $this->logTime('setArrayClassDefinition');
         

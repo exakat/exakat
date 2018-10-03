@@ -32,9 +32,15 @@ class HasInstruction extends DSL {
         list($atom) = func_get_args();
 
         $diff = $this->checkAtoms($atom);
+        if (empty($diff)) {
+            return new Command(Query::STOP_QUERY);
+        }
+
+        $linksDown = self::$linksDown;
+
         return new Command(<<<GREMLIN
 where( 
-__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit( ).hasLabel(within(***))
+__.repeat( __.in({$linksDown}) ).until(hasLabel("File")).emit( ).hasLabel(within(***))
     )
 GREMLIN
 , array($diff) );
