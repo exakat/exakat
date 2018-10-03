@@ -130,6 +130,21 @@ GREMLIN;
 //        print_r($this);
     }
     
+    public function printRawQuery() {
+        $commands = array_column($this->commands, 'gremlin');
+        $commands = implode('.', $commands);
+//        $this->arguments = array_merge(...array_column($this->commands, 'arguments'));
+
+        $query = <<<GREMLIN
+g.V().as('first').$commands
+
+// Query (#{$this->id}) for {$this->analyzer}
+// php {$this->php} analyze -p {$this->project} -P {$this->analyzer} -v\n
+
+GREMLIN;
+        print $query.PHP_EOL;
+    }
+
     public function getQuery() {
         assert($this->query !== null, "Null Query found!");
         return $this->query;
