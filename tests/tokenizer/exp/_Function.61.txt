@@ -1,6 +1,12 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    20
+  Label : DEFINITION
+    15
+  Label : DEFINITION
+    21
   Label : FILE
     3
     Label : EXPRESSION
@@ -24,22 +30,22 @@ Label : PROJECT
                   Label : TYPEHINT
                     13
                 Label : BLOCK
-                  16
+                  17
                 Label : NAME
                   12
               Label : METHOD
-                18
+                19
                 Label : BLOCK
-                  16
-                Label : ARGUMENT
-                  19
-                  Label : NAME
-                    19
+                  17
                 Label : ARGUMENT
                   20
                   Label : NAME
                     20
+                Label : ARGUMENT
+                  21
+                  Label : NAME
+                    21
                 Label : NAME
-                  18
+                  19
           Label : NAME
             5

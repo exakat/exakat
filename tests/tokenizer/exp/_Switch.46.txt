@@ -1,6 +1,12 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    28
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,72 +16,74 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CASES
-            9
+            10
             Label : EXPRESSION
-              10
+              11
               Label : CASE
-                15
+                16
                 Label : CLASS
-                  12
-                Label : CONSTANT
                   13
+                Label : CONSTANT
+                  14
               Label : CODE
                 3
                 Label : EXPRESSION
-                  16
+                  17
                 Label : EXPRESSION
-                  18
+                  19
                   Label : BREAK
-                    16
+                    17
             Label : EXPRESSION
-              19
+              20
               Label : CASE
-                15
+                16
                 Label : CLASS
-                  12
+                  13
                 Label : CONSTANT
-                  21
+                  22
               Label : CODE
                 3
             Label : EXPRESSION
-              23
+              24
               Label : CASE
-                15
+                16
                 Label : CLASS
-                  12
+                  13
                 Label : CONSTANT
-                  25
+                  26
               Label : CODE
                 3
                 Label : EXPRESSION
-                  28
+                  29
                   Label : LEFT
-                    27
+                    28
                   Label : RIGHT
-                    29
+                    30
                     Label : ARGUMENT
-                      8
+                      9
                       Label : MEMBER
-                        30
+                        31
                       Label : OBJECT
                         6
                     Label : NAME
-                      29
+                      30
                 Label : EXPRESSION
-                  18
+                  19
                   Label : BREAK
-                    16
+                    17
             Label : EXPRESSION
-              31
+              32
               Label : CODE
                 3
                 Label : EXPRESSION
-                  32
+                  33
                   Label : RETURN
-                    33
+                    34
           Label : CONDITION
-            8
+            9
             Label : MEMBER
-              7
+              8
             Label : OBJECT
               6
+              Label : DEFINITION
+                6

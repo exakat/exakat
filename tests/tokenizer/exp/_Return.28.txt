@@ -1,8 +1,6 @@
 test
 Label : PROJECT
   1
-  Label : DEFINITION
-    5
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,6 +8,8 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          7
-          Label : POSTPLUSPLUS
-            5
+          5
+          Label : RETURN
+            6
+            Label : ARGUMENT
+              7

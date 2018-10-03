@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    12
+  Label : DEFINITION
+    7
+  Label : DEFINITION
+    14
+  Label : DEFINITION
+    18
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,38 +18,38 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            10
+            11
             Label : CONDITION
               6
               Label : ARGUMENT
-                9
+                10
                 Label : MEMBER
-                  8
+                  9
                 Label : OBJECT
                   7
               Label : NAME
                 6
             Label : ELSE
-              15
+              16
               Label : LEFT
-                9
+                10
                 Label : MEMBER
-                  14
+                  15
                 Label : OBJECT
-                  13
+                  14
               Label : RIGHT
-                16
+                17
                 Label : ARGUMENT
-                  9
+                  10
                   Label : MEMBER
-                    18
+                    19
                   Label : OBJECT
-                    17
+                    18
                 Label : NAME
-                  16
+                  17
             Label : THEN
-              9
+              10
               Label : MEMBER
-                12
+                13
               Label : OBJECT
-                11
+                12

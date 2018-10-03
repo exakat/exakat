@@ -1,6 +1,40 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    33
+    Label : DEFINITION
+      33
+  Label : DEFINITION
+    41
+    Label : DEFINITION
+      41
+    Label : DEFINITION
+      41
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,124 +44,144 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            13
+            14
             Label : EXPRESSION
-              14
+              15
               Label : CONDITION
-                18
+                19
                 Label : LEFT
-                  15
+                  16
                   Label : NAME
-                    15
+                    16
                   Label : ARGUMENT
-                    17
-                  Label : ARGUMENT
-                    10
-                Label : RIGHT
-                  19
-              Label : THEN
-                13
-                Label : EXPRESSION
-                  21
-                  Label : LEFT
-                    20
-                  Label : RIGHT
-                    28
-                    Label : CONCAT
-                      22
-                      Label : ARGUMENT
-                        24
-                      Label : ARGUMENT
-                        26
-                      Label : ARGUMENT
-                        17
-                      Label : NAME
-                        22
-                    Label : CONCAT
-                      29
-                Label : EXPRESSION
-                  14
-                  Label : CONDITION
                     18
+                    Label : DEFINITION
+                      18
+                  Label : ARGUMENT
+                    11
+                Label : RIGHT
+                  20
+              Label : THEN
+                14
+                Label : EXPRESSION
+                  22
+                  Label : LEFT
+                    21
+                    Label : DEFINITION
+                      21
+                    Label : DEFINITION
+                      21
+                    Label : DEFINITION
+                      21
+                  Label : RIGHT
+                    29
+                    Label : CONCAT
+                      23
+                      Label : ARGUMENT
+                        25
+                      Label : ARGUMENT
+                        27
+                      Label : ARGUMENT
+                        18
+                      Label : NAME
+                        23
+                    Label : CONCAT
+                      30
+                Label : EXPRESSION
+                  15
+                  Label : CONDITION
+                    19
                     Label : LEFT
-                      12
+                      13
                     Label : RIGHT
-                      31
+                      32
                   Label : ELSE
-                    13
+                    14
                     Label : EXPRESSION
                       5
                       Label : BLOCK
-                        13
+                        14
                         Label : EXPRESSION
-                          14
+                          15
                           Label : CONDITION
-                            41
+                            42
                             Label : ARGUMENT
-                              28
+                              29
                               Label : CONCAT
-                                40
+                                41
                               Label : CONCAT
-                                26
+                                27
                               Label : CONCAT
-                                20
+                                21
                             Label : NAME
-                              41
+                              42
                           Label : THEN
-                            13
-                            Label : EXPRESSION
-                              35
-                              Label : ARGUMENT
-                                28
-                                Label : CONCAT
-                                  40
-                                Label : CONCAT
-                                  26
-                                Label : CONCAT
-                                  20
+                            14
                             Label : EXPRESSION
                               36
+                              Label : ARGUMENT
+                                29
+                                Label : CONCAT
+                                  41
+                                Label : CONCAT
+                                  27
+                                Label : CONCAT
+                                  21
+                            Label : EXPRESSION
+                              37
                               Label : RETURN
-                                37
+                                38
                       Label : SOURCE
-                        39
-                        Label : CAST
-                          12
-                      Label : VALUE
                         40
+                        Label : CAST
+                          13
+                      Label : VALUE
+                        41
+                        Label : DEFINITION
+                          41
+                        Label : DEFINITION
+                          41
                   Label : THEN
-                    13
+                    14
                     Label : EXPRESSION
-                      14
+                      15
                       Label : CONDITION
-                        21
+                        22
                         Label : LEFT
-                          32
-                        Label : RIGHT
                           33
-                          Label : ARGUMENT
-                            20
-                          Label : NAME
+                          Label : DEFINITION
                             33
-                      Label : THEN
-                        13
-                        Label : EXPRESSION
-                          35
+                        Label : RIGHT
+                          34
                           Label : ARGUMENT
-                            32
+                            21
+                          Label : NAME
+                            34
+                      Label : THEN
+                        14
                         Label : EXPRESSION
                           36
+                          Label : ARGUMENT
+                            33
+                        Label : EXPRESSION
+                          37
                           Label : RETURN
-                            37
+                            38
           Label : SOURCE
-            9
+            10
             Label : CLASS
               6
             Label : MEMBER
               8
           Label : VALUE
-            11
+            12
             Label : INDEX
-              10
+              11
+              Label : DEFINITION
+                11
             Label : VALUE
-              12
+              13
+              Label : DEFINITION
+                13
+              Label : DEFINITION
+                13

@@ -1,6 +1,20 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    25
+    Label : DEFAULT
+      27
+  Label : DEFINITION
+    21
+    Label : DEFAULT
+      14
+    Label : DEFINITION
+      31
+      Label : MEMBER
+        22
+      Label : OBJECT
+        30
   Label : FILE
     3
     Label : EXPRESSION
@@ -46,7 +60,7 @@ Label : PROJECT
         Label : EXPRESSION
           17
           Label : DEFINITION
-            29
+            30
           Label : METHOD
             7
             Label : ARGUMENT
@@ -54,19 +68,21 @@ Label : PROJECT
             Label : BLOCK
               10
               Label : EXPRESSION
-                28
+                29
                 Label : ARGUMENT
-                  30
+                  31
                   Label : MEMBER
                     22
                   Label : OBJECT
-                    29
+                    30
                 Label : NAME
-                  28
+                  29
               Label : EXPRESSION
                 11
                 Label : ARGUMENT
                   14
+            Label : DEFINITION
+              30
             Label : NAME
               7
           Label : NAME
@@ -78,14 +94,14 @@ Label : PROJECT
               Label : DEFAULT
                 14
               Label : DEFINITION
-                30
+                31
                 Label : MEMBER
                   22
                 Label : OBJECT
-                  29
+                  30
           Label : PPP
-            23
+            24
             Label : PPP
-              24
+              25
               Label : DEFAULT
-                26
+                27

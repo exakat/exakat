@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -23,6 +27,8 @@ Label : PROJECT
               10
             Label : VARIABLE
               12
+              Label : DEFINITION
+                12
           Label : CATCH
             9
             Label : BLOCK
@@ -30,6 +36,6 @@ Label : PROJECT
               Label : EXPRESSION
                 7
             Label : CLASS
-              13
+              14
             Label : VARIABLE
               12

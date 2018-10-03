@@ -1,6 +1,26 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    34
+  Label : DEFINITION
+    36
+  Label : DEFINITION
+    37
+  Label : DEFINITION
+    38
+  Label : DEFINITION
+    39
+  Label : DEFINITION
+    41
+  Label : DEFINITION
+    42
+  Label : DEFINITION
+    43
+  Label : DEFINITION
+    44
+  Label : DEFINITION
+    45
   Label : FILE
     3
     Label : EXPRESSION
@@ -80,7 +100,7 @@ Label : PROJECT
                   Label : VALUE
                     13
               Label : DEFINITION
-                39
+                40
               Label : NAME
                 16
           Label : NAME
@@ -196,33 +216,33 @@ Label : PROJECT
                   Label : DEFINITION
                     10
               Label : ARGUMENT
-                35
+                36
                 Label : NAME
-                  35
+                  36
                 Label : TYPEHINT
                   14
                   Label : DEFINITION
                     23
               Label : ARGUMENT
-                36
+                37
                 Label : NAME
-                  36
+                  37
                 Label : TYPEHINT
                   18
                   Label : DEFINITION
                     24
               Label : ARGUMENT
-                37
+                38
                 Label : NAME
-                  37
+                  38
                 Label : TYPEHINT
                   20
                   Label : DEFINITION
                     25
               Label : ARGUMENT
-                38
+                39
                 Label : NAME
-                  38
+                  39
                 Label : TYPEHINT
                   16
                   Label : DEFINITION
@@ -232,21 +252,21 @@ Label : PROJECT
                     Label : NAME
                       15
               Label : ARGUMENT
-                40
-                Label : NAME
-                  40
-                Label : TYPEHINT
-                  39
-              Label : ARGUMENT
                 41
                 Label : NAME
                   41
                 Label : TYPEHINT
-                  15
+                  40
               Label : ARGUMENT
                 42
                 Label : NAME
                   42
+                Label : TYPEHINT
+                  15
+              Label : ARGUMENT
+                43
+                Label : NAME
+                  43
                 Label : TYPEHINT
                   28
                   Label : DEFINITION
@@ -256,9 +276,9 @@ Label : PROJECT
                     Label : NAME
                       27
               Label : ARGUMENT
-                43
+                44
                 Label : NAME
-                  43
+                  44
                 Label : TYPEHINT
                   30
                   Label : DEFINITION
@@ -268,9 +288,9 @@ Label : PROJECT
                     Label : NAME
                       29
               Label : ARGUMENT
-                44
+                45
                 Label : NAME
-                  44
+                  45
                 Label : TYPEHINT
                   32
                   Label : DEFINITION

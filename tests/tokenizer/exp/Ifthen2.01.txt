@@ -1,6 +1,38 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    23
+    Label : DEFINITION
+      23
+  Label : DEFINITION
+    43
+    Label : DEFINITION
+      43
+  Label : DEFINITION
+    47
+  Label : DEFINITION
+    54
+  Label : DEFINITION
+    56
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,13 +40,15 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
+            Label : DEFINITION
+              5
           Label : RIGHT
-            7
+            8
             Label : CONCAT
-              9
+              6
         Label : EXPRESSION
           10
           Label : LEFT
@@ -33,6 +67,18 @@ Label : PROJECT
                   18
                 Label : VARIABLE
                   16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
+                  Label : DEFINITION
+                    16
           Label : THEN
             20
             Label : EXPRESSION
@@ -50,7 +96,7 @@ Label : PROJECT
               Label : ELSE
                 3
                 Label : EXPRESSION
-                  6
+                  7
                   Label : LEFT
                     23
                   Label : RIGHT
@@ -96,9 +142,11 @@ Label : PROJECT
               Label : THEN
                 3
                 Label : EXPRESSION
-                  6
+                  7
                   Label : LEFT
                     23
+                    Label : DEFINITION
+                      23
                   Label : RIGHT
                     26
                     Label : CONCAT
@@ -116,9 +164,11 @@ Label : PROJECT
                     Label : CONCAT
                       29
             Label : EXPRESSION
-              6
+              7
               Label : LEFT
                 43
+                Label : DEFINITION
+                  43
               Label : RIGHT
                 26
                 Label : CONCAT
@@ -148,7 +198,7 @@ Label : PROJECT
                   Label : CONCAT
                     54
             Label : EXPRESSION
-              6
+              7
               Label : LEFT
                 56
               Label : RIGHT

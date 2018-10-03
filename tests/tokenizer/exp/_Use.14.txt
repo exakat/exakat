@@ -1,6 +1,26 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
+    Label : DEFINITION
+      34
   Label : FILE
     3
     Label : EXPRESSION
@@ -80,7 +100,7 @@ Label : PROJECT
                   Label : VALUE
                     13
               Label : DEFINITION
-                36
+                37
               Label : NAME
                 16
           Label : NAME
@@ -188,19 +208,37 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                35
+                36
                 Label : CLASS
                   10
                   Label : DEFINITION
                     10
                 Label : VARIABLE
                   34
+                  Label : DEFINITION
+                    34
+                  Label : DEFINITION
+                    34
+                  Label : DEFINITION
+                    34
+                  Label : DEFINITION
+                    34
+                  Label : DEFINITION
+                    34
+                  Label : DEFINITION
+                    34
+                  Label : DEFINITION
+                    34
+                  Label : DEFINITION
+                    34
+                  Label : DEFINITION
+                    34
               Label : NAME
                 33
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                35
+                36
                 Label : CLASS
                   14
                   Label : DEFINITION
@@ -212,7 +250,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                35
+                36
                 Label : CLASS
                   18
                   Label : DEFINITION
@@ -224,7 +262,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                35
+                36
                 Label : CLASS
                   20
                   Label : DEFINITION
@@ -236,7 +274,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                35
+                36
                 Label : CLASS
                   16
                   Label : DEFINITION
@@ -252,9 +290,9 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                35
+                36
                 Label : CLASS
-                  36
+                  37
                 Label : VARIABLE
                   34
               Label : NAME
@@ -262,7 +300,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                35
+                36
                 Label : CLASS
                   15
                 Label : VARIABLE
@@ -272,7 +310,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                35
+                36
                 Label : CLASS
                   28
                   Label : DEFINITION
@@ -288,7 +326,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                35
+                36
                 Label : CLASS
                   30
                   Label : DEFINITION
@@ -304,7 +342,7 @@ Label : PROJECT
             Label : EXPRESSION
               33
               Label : ARGUMENT
-                35
+                36
                 Label : CLASS
                   32
                   Label : DEFINITION

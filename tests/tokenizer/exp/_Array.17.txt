@@ -1,6 +1,18 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    17
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,52 +22,60 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            23
+            24
             Label : EXPRESSION
-              24
+              25
               Label : POSTPLUSPLUS
-                9
+                10
                 Label : MEMBER
-                  7
+                  8
                 Label : OBJECT
                   6
           Label : CONDITION
-            13
+            14
             Label : LEFT
-              10
+              11
               Label : LEFT
-                9
+                10
                 Label : MEMBER
-                  7
+                  8
                 Label : OBJECT
                   6
+                  Label : DEFINITION
+                    6
+                  Label : DEFINITION
+                    6
+                  Label : DEFINITION
+                    6
+                  Label : DEFINITION
+                    6
               Label : RIGHT
-                9
+                10
                 Label : MEMBER
-                  11
+                  12
                 Label : OBJECT
                   6
             Label : RIGHT
-              20
+              21
               Label : LEFT
-                14
+                15
                 Label : NAME
-                  14
+                  15
                 Label : ARGUMENT
-                  16
+                  17
                 Label : ARGUMENT
-                  19
+                  20
                   Label : INDEX
-                    9
+                    10
                     Label : MEMBER
-                      7
+                      8
                     Label : OBJECT
                       6
                   Label : VARIABLE
-                    9
+                    10
                     Label : MEMBER
-                      17
+                      18
                     Label : OBJECT
                       6
               Label : RIGHT
-                21
+                22

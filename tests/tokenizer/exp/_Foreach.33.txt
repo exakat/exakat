@@ -1,6 +1,20 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+  Label : DEFINITION
+    8
+  Label : DEFINITION
+    10
+  Label : DEFINITION
+    14
+  Label : DEFINITION
+    16
+  Label : DEFINITION
+    21
+  Label : DEFINITION
+    26
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,50 +26,50 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              10
+              11
               Label : CONDITION
-                11
+                12
                 Label : NOT
-                  12
+                  13
                   Label : ARGUMENT
-                    14
+                    15
                     Label : INDEX
-                      15
+                      16
                     Label : VARIABLE
-                      13
+                      14
               Label : THEN
-                16
+                17
                 Label : EXPRESSION
-                  17
+                  18
                   Label : CONTINUE
-                    18
+                    19
             Label : EXPRESSION
-              10
+              11
               Label : CONDITION
-                24
+                25
                 Label : LEFT
-                  21
+                  22
                   Label : LEFT
-                    20
+                    21
                   Label : RIGHT
-                    22
+                    23
                 Label : RIGHT
-                  21
+                  22
                   Label : LEFT
-                    25
-                  Label : RIGHT
                     26
+                  Label : RIGHT
+                    27
               Label : THEN
-                16
+                17
                 Label : EXPRESSION
-                  17
+                  18
                   Label : CONTINUE
-                    18
+                    19
           Label : SOURCE
             6
           Label : VALUE
-            8
+            9
             Label : INDEX
-              7
+              8
             Label : VALUE
-              9
+              10

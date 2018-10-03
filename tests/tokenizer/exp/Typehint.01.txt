@@ -1,6 +1,8 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
   Label : FILE
     3
     Label : EXPRESSION
@@ -16,10 +18,10 @@ Label : PROJECT
             Label : TYPEHINT
               6
           Label : BLOCK
-            9
+            10
             Label : EXPRESSION
-              10
+              11
               Label : RETURN
-                11
+                12
           Label : NAME
             5

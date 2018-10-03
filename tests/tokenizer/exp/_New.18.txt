@@ -1,6 +1,16 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    21
+  Label : DEFINITION
+    5
+    Label : DEFINITION
+      5
+      Label : DEFAULT
+        14
+    Label : DEFINITION
+      5
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,48 +18,54 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
+            Label : DEFINITION
+              5
+              Label : DEFAULT
+                14
+            Label : DEFINITION
+              5
           Label : RIGHT
-            7
+            8
         Label : EXPRESSION
-          8
+          9
           Label : DEFINITION
-            9
+            10
           Label : METHOD
-            14
+            15
             Label : ARGUMENT
-              15
+              16
             Label : BLOCK
-              17
+              18
               Label : EXPRESSION
-                18
+                19
                 Label : RETURN
-                  19
+                  20
             Label : NAME
-              14
+              15
           Label : NAME
-            9
+            10
           Label : PPP
-            11
+            12
             Label : PPP
               5
               Label : DEFAULT
-                13
+                14
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            20
-          Label : RIGHT
             21
+          Label : RIGHT
+            22
             Label : NEW
-              22
+              23
               Label : CLASS
-                9
+                10
               Label : METHOD
                 5
                 Label : ARGUMENT
-                  15
+                  16
                 Label : NAME
                   5

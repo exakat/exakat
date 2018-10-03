@@ -1,6 +1,12 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -20,156 +26,156 @@ Label : PROJECT
             Label : TYPEHINT
               7
           Label : BLOCK
-            10
+            11
             Label : EXPRESSION
-              11
+              12
               Label : CONDITION
-                12
+                13
                 Label : NOT
-                  13
+                  14
                   Label : NAME
-                    13
+                    14
                   Label : ARGUMENT
-                    15
+                    16
                   Label : ARGUMENT
-                    18
+                    19
                     Label : INDEX
-                      19
+                      20
                     Label : VARIABLE
-                      17
+                      18
                       Label : DEFINITION
-                        17
+                        18
               Label : THEN
-                10
+                11
                 Label : EXPRESSION
-                  21
+                  22
                   Label : RETURN
-                    22
+                    23
             Label : EXPRESSION
-              25
+              26
               Label : LEFT
-                24
+                25
               Label : RIGHT
-                26
+                27
             Label : EXPRESSION
-              25
+              26
               Label : LEFT
-                28
+                29
                 Label : DEFINITION
-                  28
+                  29
                 Label : DEFINITION
-                  28
+                  29
                 Label : DEFINITION
-                  28
+                  29
               Label : RIGHT
-                34
+                35
                 Label : LEFT
-                  31
+                  32
                   Label : MEMBER
-                    32
+                    33
                   Label : OBJECT
-                    31
+                    32
                     Label : MEMBER
-                      29
+                      30
                     Label : OBJECT
                       9
                 Label : RIGHT
-                  35
+                  36
             Label : EXPRESSION
-              25
+              26
               Label : LEFT
-                36
-              Label : RIGHT
                 37
+              Label : RIGHT
+                38
                 Label : YIELD
-                  17
+                  18
             Label : EXPRESSION
-              25
+              26
               Label : LEFT
-                28
+                29
               Label : RIGHT
-                34
+                35
                 Label : LEFT
-                  31
+                  32
                   Label : MEMBER
-                    32
+                    33
                   Label : OBJECT
-                    38
+                    39
                     Label : CODE
-                      41
+                      42
                       Label : CLASS
-                        39
+                        40
                       Label : CONSTANT
-                        29
+                        30
                 Label : RIGHT
-                  35
+                  36
             Label : EXPRESSION
-              25
+              26
               Label : LEFT
-                28
+                29
               Label : RIGHT
-                34
+                35
                 Label : LEFT
-                  41
+                  42
                   Label : CLASS
-                    41
+                    42
                     Label : CLASS
-                      39
+                      40
                     Label : METHOD
-                      29
+                      30
                       Label : ARGUMENT
-                        22
+                        23
                       Label : NAME
-                        29
+                        30
                   Label : CONSTANT
-                    32
+                    33
                 Label : RIGHT
-                  35
+                  36
             Label : EXPRESSION
-              25
+              26
               Label : LEFT
-                28
+                29
               Label : RIGHT
-                34
+                35
                 Label : LEFT
-                  31
+                  32
                   Label : MEMBER
-                    32
+                    33
                   Label : OBJECT
-                    18
+                    19
                     Label : INDEX
-                      44
+                      45
                     Label : VARIABLE
-                      31
+                      32
                       Label : MEMBER
-                        29
+                        30
                       Label : OBJECT
-                        18
+                        19
                         Label : INDEX
-                          43
+                          44
                           Label : LEFT
-                            42
+                            43
                           Label : RIGHT
-                            42
+                            43
                         Label : VARIABLE
                           9
                 Label : RIGHT
-                  35
+                  36
           Label : DEFINITION
-            17
+            18
             Label : DEFINITION
-              17
+              18
           Label : DEFINITION
-            24
+            25
           Label : DEFINITION
-            28
+            29
             Label : DEFINITION
-              28
+              29
             Label : DEFINITION
-              28
+              29
             Label : DEFINITION
-              28
+              29
           Label : DEFINITION
-            36
+            37
           Label : NAME
             5

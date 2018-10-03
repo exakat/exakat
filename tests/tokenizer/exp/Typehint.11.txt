@@ -1,6 +1,18 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+  Label : DEFINITION
+    10
+  Label : DEFINITION
+    14
+  Label : DEFINITION
+    6
+  Label : DEFINITION
+    10
+  Label : DEFINITION
+    14
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,56 +26,56 @@ Label : PROJECT
             Label : NAME
               6
           Label : ARGUMENT
-            9
+            10
             Label : DEFAULT
-              10
-            Label : NAME
-              9
-            Label : TYPEHINT
-              7
-          Label : ARGUMENT
-            13
-            Label : NAME
-              13
-            Label : TYPEHINT
               11
-          Label : BLOCK
+            Label : NAME
+              10
+            Label : TYPEHINT
+              8
+          Label : ARGUMENT
             14
-            Label : EXPRESSION
-              16
-              Label : POSTPLUSPLUS
-                15
-          Label : DEFINITION
+            Label : NAME
+              14
+            Label : TYPEHINT
+              12
+          Label : BLOCK
             15
+            Label : EXPRESSION
+              17
+              Label : POSTPLUSPLUS
+                16
+          Label : DEFINITION
+            16
           Label : NAME
             5
         Label : EXPRESSION
-          17
+          18
           Label : ARGUMENT
             6
             Label : NAME
               6
           Label : ARGUMENT
-            9
+            10
             Label : DEFAULT
-              10
-            Label : NAME
-              9
-            Label : TYPEHINT
-              18
-          Label : ARGUMENT
-            13
-            Label : NAME
-              13
-            Label : TYPEHINT
               11
-          Label : BLOCK
+            Label : NAME
+              10
+            Label : TYPEHINT
+              19
+          Label : ARGUMENT
             14
-            Label : EXPRESSION
-              16
-              Label : POSTPLUSPLUS
-                15
-          Label : DEFINITION
+            Label : NAME
+              14
+            Label : TYPEHINT
+              12
+          Label : BLOCK
             15
+            Label : EXPRESSION
+              17
+              Label : POSTPLUSPLUS
+                16
+          Label : DEFINITION
+            16
           Label : NAME
-            17
+            18

@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
+  Label : DEFINITION
+    6
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,18 +14,18 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            8
+            9
             Label : EXPRESSION
-              9
+              10
               Label : RETURN
-                10
+                11
           Label : ARGUMENT
             6
             Label : NAME
               6
           Label : ARGUMENT
-            7
+            8
             Label : NAME
-              7
+              8
           Label : NAME
             5

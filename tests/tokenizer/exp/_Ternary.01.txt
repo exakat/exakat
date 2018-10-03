@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    8
+  Label : DEFINITION
+    11
   Label : FILE
     3
     Label : EXPRESSION
@@ -16,59 +24,59 @@ Label : PROJECT
               Label : NAME
                 8
             Label : ARGUMENT
-              9
-              Label : NAME
-                9
-                Label : DEFINITION
-                  9
-            Label : ARGUMENT
               10
               Label : NAME
                 10
-            Label : BLOCK
+                Label : DEFINITION
+                  10
+            Label : ARGUMENT
               11
-              Label : EXPRESSION
-                15
-                Label : LEFT
-                  14
-                  Label : MEMBER
-                    13
-                  Label : OBJECT
-                    12
-                Label : RIGHT
-                  21
-                  Label : CONDITION
-                    16
-                    Label : CODE
-                      19
-                      Label : LEFT
-                        14
-                        Label : MEMBER
-                          18
-                        Label : OBJECT
-                          17
-                      Label : RIGHT
-                        20
-                  Label : ELSE
-                    16
-                    Label : CODE
-                      26
-                      Label : LEFT
-                        24
-                      Label : RIGHT
-                        14
-                        Label : MEMBER
-                          27
-                        Label : OBJECT
-                          9
-                  Label : THEN
-                    22
-            Label : DEFINITION
+              Label : NAME
+                11
+            Label : BLOCK
               12
+              Label : EXPRESSION
+                16
+                Label : LEFT
+                  15
+                  Label : MEMBER
+                    14
+                  Label : OBJECT
+                    13
+                Label : RIGHT
+                  22
+                  Label : CONDITION
+                    17
+                    Label : CODE
+                      20
+                      Label : LEFT
+                        15
+                        Label : MEMBER
+                          19
+                        Label : OBJECT
+                          18
+                      Label : RIGHT
+                        21
+                  Label : ELSE
+                    17
+                    Label : CODE
+                      27
+                      Label : LEFT
+                        25
+                      Label : RIGHT
+                        15
+                        Label : MEMBER
+                          28
+                        Label : OBJECT
+                          10
+                  Label : THEN
+                    23
             Label : DEFINITION
-              17
+              13
             Label : DEFINITION
-              24
+              18
+            Label : DEFINITION
+              25
             Label : NAME
               7
           Label : NAME

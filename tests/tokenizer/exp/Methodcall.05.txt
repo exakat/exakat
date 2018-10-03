@@ -10,13 +10,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : RETURN
-            12
+            13
             Label : METHOD
-              9
+              10
               Label : ARGUMENT
-                10
+                11
               Label : NAME
-                9
+                10
             Label : OBJECT
               6
               Label : NAME
@@ -24,4 +24,8 @@ Label : PROJECT
               Label : ARGUMENT
                 7
               Label : ARGUMENT
-                8
+                9
+  Label : DEFINITION
+    7
+  Label : DEFINITION
+    9
