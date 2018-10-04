@@ -1087,7 +1087,7 @@ class Load extends Tasks {
         // Process arguments
         $function       = $this->processParameters($atom, array($this->phptokens::T_CLOSE_PARENTHESIS));
         $function->code = $function->atom === 'Closure' ? 'function' : $name->fullcode;
-
+        
         if ( $function->atom === 'Function') {
             list($fullnspath, $aliased) = $this->getFullnspath($name);
             $this->calls->addDefinition('function', $fullnspath, $function);
@@ -2519,7 +2519,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
                 ++$this->id;
                 $element = $this->processSingle($atom);
-
+                
                 if ($atom !== 'Propertydefinition') {
                     $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
                     $this->currentVariables[$element->code] = $element;
@@ -3535,7 +3535,7 @@ class Load extends Tasks {
         $atom->line     = $this->tokens[$this->id][2];
         $atom->token    = $this->getToken($this->tokens[$this->id][0]);
 
-        if ($atomName !== 'Parametername' && 
+        if (!in_array($atomName, array('Parametername', 'Parameter', 'Propertydefinition')) && 
             $this->tokens[$this->id][0] === $this->phptokens::T_VARIABLE) {
             if (isset($this->currentVariables[$atom->code])) {
                 $this->addLink($this->currentVariables[$atom->code], $atom, 'DEFINITION');
@@ -3543,7 +3543,7 @@ class Load extends Tasks {
                 $definition = $this->addAtom('Variabledefinition');
                 $definition->fullcode = $atom->fullcode;
                 $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $definition, 'DEFINITION');
-                $this->currentVariables[$atom->code] = $atom;
+                $this->currentVariables[$atom->code] = $definition;
                 
                 $this->addLink($definition, $atom, 'DEFINITION');
             } 
