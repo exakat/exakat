@@ -32,43 +32,25 @@ class VariableUsedOnceByContext extends Analyzer {
     }
     
     public function analyze() {
-        $query = <<<GREMLIN
-g.V().hasLabel("Variable", "Variablearray", "Variableobject")
-     .not(where( __.in("DEFINITION", "USE") ) )
-     .groupCount("m").by("code").cap("m")
-     .toList().get(0).findAll{ a,b -> b == 1}.keySet()
-GREMLIN;
-        $variables = $this->query($query)
-                          ->toArray();
-
         // global variables
-        $this->atomIs(self::$VARIABLES_ALL)
-             ->hasNoIn(array('DEFINTION'))
-             ->codeIs($variables, self::NO_TRANSLATE, self::CASE_SENSITIVE);
+        $this->atomIs('File')
+             ->outIs('DEFINITION')
+             ->atomIs('Variabledefinition')
+             ->isUsed(1)
+             ->outIs('DEFINITION');
         $this->prepareQuery();
 
-        // by function
+        // argument by function
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('NAME')
-             ->raw(<<<GREMLIN
-not(
-    where(
-    __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray")
-      )
-)
-GREMLIN
-);
+             ->isUsed(0);
         $this->prepareQuery();
 
+        // Normal variables and inherited functions from closures
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs(array('DEFINITION', 'USE'))
-             ->raw(<<<GREMLIN
-where(
-    __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray", "Parameter").count().is(eq(1))
-      )
-GREMLIN
-)
+             ->isUsed(1)
              ->outIs('DEFINITION');
         $this->prepareQuery();
     }

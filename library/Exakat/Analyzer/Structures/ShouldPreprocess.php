@@ -47,8 +47,9 @@ class ShouldPreprocess extends Analyzer {
              ->noAtomWithoutPropertyInside('Functioncall', 'fullnspath', $functionList)
              ->noAnalyzerInside(array('Identifier', 'Nsname'), 'Constants/IsPhpConstant')
 
-            // PHP Constantes are not authorized
-             ->noAtomInside($dynamicAtoms);
+            // PHP Constants are not authorized
+             ->noAtomInside($dynamicAtoms)
+             ;
         $this->prepareQuery();
 
         $functionListNoArray = array_diff($functionList,

@@ -49,7 +49,7 @@ class IsExtConstant extends Analyzer {
         $constants = call_user_func_array('array_merge', $c);
         $constantsFullNs = makeFullNsPath($constants, true);
         
-        // based on full ns path
+        // based on fullnspath
         $this->analyzerIs('Constants/ConstantUsage')
              ->atomIsNot(array('Boolean', 'Null', 'String'))
              ->fullnspathIs($constantsFullNs);

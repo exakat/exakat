@@ -30,9 +30,7 @@ class UnusedInheritedVariable extends Analyzer {
         $this->atomIs('Closure')
              ->outIs('USE')
              ->savePropertyAs('code', 'inherited')
-             ->inIs('USE')
-             ->outIs('BLOCK')
-             ->noAtomPropertyInside(self::$VARIABLES_ALL, 'code', 'inherited')
+             ->isUsed(0)
              ->back('first');
         $this->prepareQuery();
     }

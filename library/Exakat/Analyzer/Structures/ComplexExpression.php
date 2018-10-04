@@ -31,35 +31,35 @@ class ComplexExpression extends Analyzer {
         // if (Condition);
         $this->atomIs(array('Ifthen', 'Dowhile', 'While'))
              ->outIs('CONDITION')
-             ->IsComplexExpression()
+             ->IsComplexExpression($this->complexExpressionThreshold)
              ->back('first');
         $this->prepareQuery();
 
         // foreach($source...)
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->IsComplexExpression()
+             ->IsComplexExpression($this->complexExpressionThreshold)
              ->back('first');
         $this->prepareQuery();
 
         // for($i = 3; ; )
         $this->atomIs('For')
              ->outIs(array('INCREMENT', 'INIT', 'FINAL'))
-             ->IsComplexExpression()
+             ->IsComplexExpression($this->complexExpressionThreshold)
              ->back('first');
         $this->prepareQuery();
 
         // $a = expression;
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->IsComplexExpression()
+             ->IsComplexExpression($this->complexExpressionThreshold)
              ->back('first');
         $this->prepareQuery();
 
         // foo($a)
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENT')
-             ->IsComplexExpression()
+             ->IsComplexExpression($this->complexExpressionThreshold)
              ->back('first');
         $this->prepareQuery();
     }

@@ -23,6 +23,7 @@
 namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Data\Dictionary;
 
 class ShouldRegenerateSessionId extends Analyzer {
     public function dependsOn() {
@@ -42,17 +43,24 @@ class ShouldRegenerateSessionId extends Analyzer {
         
         $sessionsList = makeList($sessions);
         $sessionsList = str_replace('$', '\\$', $sessionsList);
-        $regenerateid = $this->query('g.V().hasLabel("Methodcall")
-                                           .where( __.out("METHOD").filter{it.get().value("fullnspath") == "\\\\regenerateid"} )
-                                           .where( __.out("OBJECT").has("fullcode", within('.$sessionsList.')) )
-                                           .count()');
+        $regenerateid = $this->dictCode->translate(array('regenerateid'), Dictionary::CASE_INSENSITIVE);
+        
+        if (empty($regenerateid)) {
+            $this->atomIs('Project');
+            $this->prepareQuery();
 
-        if ($regenerateid->toString() !== "0") {
             return;
         }
+        
+        $result = $this->query('g.V().hasLabel("Methodcall")
+                                 .where( __.out("METHOD").filter{it.get().value("lccode") == "$regenerateid"} )
+                                 .where( __.out("OBJECT").has("fullcode", within('.$sessionsList.')) )
+                                 .count()');
 
-        $this->atomIs('Project');
-        $this->prepareQuery();
+        if ($result->toString() === "0") {
+            $this->atomIs('Project');
+            $this->prepareQuery();
+        }
     }
 }
 

@@ -26,27 +26,11 @@ use Exakat\Analyzer\Analyzer;
 
 class AssignedTwiceOrMore extends Analyzer {
     public function analyze() {
-
-        $equal = $this->dictCode->translate(array('='));
-        
-        if (empty($equal)) {
-            return;
-        }
-
+        // function foo() { $a = 1; $a = 2;}
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('DEFINITION')
              ->atomIs('Variabledefinition')
-             ->raw(<<<GREMLIN
-     where(
-        __.out("DEFINITION").in("LEFT")
-          .hasLabel("Assignation").has("code", ***)
-          .not(where(__.in("EXPRESSION").in("INIT")))
-          .out("RIGHT").hasLabel("Integer", "Real", "Boolean", "Null", "Heredoc", "String").not(where(__.out("CONCAT")))
-          .count().is(gte(2))
-     )
-
-GREMLIN
-, $equal[0])
+             ->variableIsAssigned(2)
              ->outIs('DEFINITION')
              ->hasParent('Assignation', 'LEFT')
              ->inIs('LEFT')
