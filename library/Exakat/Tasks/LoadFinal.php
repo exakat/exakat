@@ -67,7 +67,6 @@ class LoadFinal extends Tasks {
         $this->defaultIdentifiers();
         $this->propagateConstants();
 
-
         $this->setClassConstantRemoteDefinition();
         $this->setClassPropertyRemoteDefinition();
         $this->setClassMethodRemoteDefinition();
@@ -258,7 +257,6 @@ GREMLIN;
     private function overwrittenMethods() {
         $this->logTime('overwrittenMethods');
         
-        DSL::init($this->datastore);
         $query = new Query(0, $this->config->project, 'overwrittenMethods', null);
         $query->atomIs(array('Method', 'Magicmethod'))
               ->outIs('NAME')
@@ -282,7 +280,6 @@ GREMLIN;
         $this->logTime('setArrayClassDefinition');
         
         //$id, $project, $analyzer, $php
-        DSL::init($this->datastore);
         $query = new Query(0, $this->config->project, 'setArrayClassDefinition', null);
         $query->atomIs('Arrayliteral')
               ->is('count', 2)
@@ -310,7 +307,6 @@ GREMLIN;
         $this->logTime('linkStaticMethodCall');
         
         // For static method calls, in traits
-        DSL::init($this->datastore);
         $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null);
         $query->atomIs('Trait')
               ->savePropertyAs('fullnspath', 'fnp')
@@ -336,7 +332,6 @@ GREMLIN;
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         // For static method calls, in class
-        DSL::init($this->datastore);
         $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null);
         $query->atomIs(array('Class', 'Classanonymous'))
               ->savePropertyAs('fullnspath', 'fnp')
@@ -363,7 +358,6 @@ GREMLIN;
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         // For static property calls, in class
-        DSL::init($this->datastore);
         $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null);
         $query->atomIs(array('Class', 'Classanonymous'))
               ->savePropertyAs('fullnspath', 'fnp')
@@ -390,7 +384,6 @@ GREMLIN;
 
         $this->logTime('linkStaticMethodCall end');
     }
-
 
     private function spotFallbackConstants() {
         $this->logTime('spotFallbackConstants');
@@ -1045,7 +1038,9 @@ GREMLIN;
     private function init() {
         // fallback for PHP and ext, class, function, constant
         // update fullnspath with fallback for functions
-        $themes = new Themes($this->config->dir_root.'/data/analyzers.sqlite');
+        DSL::init($this->datastore);
+
+        $themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite");
 
         $exts = $themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
@@ -1053,7 +1048,7 @@ GREMLIN;
 
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
-            $fullpath = $this->config->dir_root.'/data/'.$inifile;
+            $fullpath = "{$this->config->dir_root}/data/$inifile";
 
             $iniFile = parse_ini_file($fullpath);
 

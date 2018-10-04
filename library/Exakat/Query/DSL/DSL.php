@@ -38,6 +38,11 @@ abstract class DSL {
     protected static $MAX_LOOPING         = Analyzer::MAX_LOOPING;
 
     public static function init($datastore) {
+        if (!empty(self::$linksDown)) {
+            // Already inited
+            return;
+        }
+
         self::$dictCode = Dictionary::factory($datastore);
 
         self::$linksDown = GraphElements::linksAsList();
