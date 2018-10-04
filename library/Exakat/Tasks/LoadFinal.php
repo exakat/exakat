@@ -51,15 +51,18 @@ class LoadFinal extends Tasks {
         display('Start load final');
 
         $this->init();
-        $this->makeClassConstantDefinition();
 
-        $this->fixFullnspathConstants();
         $this->fixFullnspathFunctions();
+        $this->spotPHPNativeFunctions(); // This one saves SQL table functioncalls
 
-        $this->spotPHPNativeConstants();
-        $this->spotPHPNativeFunctions();
-
+        // This is needed AFTER functionnames are found
+        DSL::init($this->datastore);
+        
         $this->spotFallbackConstants();
+        $this->fixFullnspathConstants();
+        $this->spotPHPNativeConstants();
+
+        $this->makeClassConstantDefinition();
         
         $this->setConstantDefinition();
         $this->setParentDefinition();
@@ -102,25 +105,24 @@ class LoadFinal extends Tasks {
 
     private function fixFullnspathFunctions() {
         display("fixing Fullnspath for Functions");
-        // fix path for constants with Const
-        
 
-        $query = new Query(0, $this->config->project, 'fixFullnspathFunctions', null);
-        $query->atomIs('Functioncall')
-              ->has('fullnspath')
-              ->_as('identifier')
-              ->savePropertyAs('fullnspath', 'cc')
-              ->inIs('DEFINITION')
-              ->atomIs('Function')
-              ->savePropertyAs('fullnspath', 'actual')
-              ->filter('actual != cc', array())
-              ->back('identifier')
-              ->setProperty('fullnspath', 'actual')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        // Can't move this to Query, because atoms and functioncall dictionaries are still unloaded
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall")
+     .has("fullnspath")
+     .as("identifier")
+     .sideEffect{ cc = it.get().value("fullnspath");}
+     .in("DEFINITION")
+     .hasLabel("Function")
+     .sideEffect{ actual = it.get().value("fullnspath");}
+     .filter{ actual != cc; }
+     .select("identifier")
+     .sideEffect{ it.get().property("fullnspath", actual); }
+     .count();
+GREMLIN;
+        $result = $this->gremlin->query($query);
 
-        display("Fixed Fullnspath for Functions");
+        display($result->toInt().' fixed Fullnspath for Functions');
     }
     
     private function fixFullnspathConstants() {
@@ -1038,7 +1040,6 @@ GREMLIN;
     private function init() {
         // fallback for PHP and ext, class, function, constant
         // update fullnspath with fallback for functions
-        DSL::init($this->datastore);
 
         $themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite");
 
