@@ -9,6 +9,7 @@ $expected_not = array('$a2',
                       '$c2',
                       '$c',
                       '$arg',
+                      '$property = array( )',
                      );
 
 ?>
