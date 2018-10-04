@@ -709,6 +709,12 @@ GREMLIN;
 
         return $this;
     }
+    
+    public function isReassigned($name) {
+        $this->query->IsReassigned($name);
+
+        return $this;
+    }
 
     public function isComplexExpression($threshold = 50) {
         $this->query->isComplexExpression($threshold);

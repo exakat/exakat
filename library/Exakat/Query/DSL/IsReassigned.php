@@ -21,30 +21,29 @@
 */
 
 
-namespace Exakat\Analyzer\Structures;
+namespace Exakat\Query\DSL;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Query\Query;
 
-class DoubleAssignation extends Analyzer {
-    public function analyze() {
-        // $a = 1; $a = 2;
-        $this->atomIs('Assignation')
-             ->outIs('LEFT')
-             ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
-             ->savePropertyAs('fullcode', 'name')
-             ->inIs('LEFT')
-             ->nextSibling()
-             ->atomIs('Assignation')
-             ->codeIs('=')
-             ->outIs('LEFT')
-             ->samePropertyAs('fullcode', 'name')
-             ->inIs('LEFT')
-             ->outIs('RIGHT')
-             // No self assignation (after operation)
-             ->isReassigned('name')
-             ->back('first');
-        $this->prepareQuery();
+class IsReassigned extends DSL {
+    protected $args = array('atom');
+
+    public function run() {
+        list($name) = func_get_args();
+
+        $linksDown = self::$linksDown;
+        $MAX_LOOPING = self::$MAX_LOOPING;
+
+        $gremlin = <<<GREMLIN
+not(
+    where( 
+        __.repeat( __.out($linksDown) ).emit(hasLabel("Variable", "Array", "Member", "Staticproperty")).times($MAX_LOOPING)
+                     .filter{ it.get().value("fullcode") == name}
+         )
+)
+GREMLIN;
+
+        return new Command($gremlin);
     }
 }
-
 ?>
