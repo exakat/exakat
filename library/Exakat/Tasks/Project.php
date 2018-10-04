@@ -429,7 +429,7 @@ class Project extends Tasks {
     }
     
     private function generateName() {
-        $ini = parse_ini_file($this->config->dir_root.'/data/audit_names.ini');
+        $ini = parse_ini_file("{$this->config->dir_root}/data/audit_names.ini");
         
         $names = $ini['names'];
         $adjectives = $ini['adjectives'];
