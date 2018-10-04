@@ -23,31 +23,21 @@
 
 namespace Exakat\Query\DSL;
 
-use Exakat\Query\Query;
+class VariableIsAssigned extends DSL {
+    public function run() : Command {
+        list($times) = func_get_args();
 
-class NoAnalyzerInside extends DSL {
-    public function run() {
-        list($atoms, $analyzer) = func_get_args();
-
-        assert($this->assertAtom($atoms));
-        $diff = $this->checkAtoms($atoms);
-        if (empty($diff)) {
-            return new Command(Query::NO_QUERY);
-        }
-
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
-
-$gremlin = <<<GREMLIN
-not( 
-    where( __.emit( ).repeat( __.out({$linksDown}) ).times($MAX_LOOPING)
-             .hasLabel(within(***))
-             .where( __.in("ANALYZED").has("analyzer", within(***)))
-          )     
+        $gremlin = <<<GREMLIN
+where(
+   __.out("DEFINITION").in("LEFT")
+     .hasLabel("Assignation").has("token", "T_EQUAL")
+     .not(where(__.in("EXPRESSION").in("INIT")))
+     .out("RIGHT").hasLabel("Integer", "String", "Real", "Null", "Boolean")
+     .count().is(gte($times))
 )
 GREMLIN;
-        return new Command($gremlin,
-                           array($diff, makeArray($analyzer)));
+
+        return new Command($gremlin);
     }
 }
 ?>

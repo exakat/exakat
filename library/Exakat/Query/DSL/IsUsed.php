@@ -25,29 +25,17 @@ namespace Exakat\Query\DSL;
 
 use Exakat\Query\Query;
 
-class NoAnalyzerInside extends DSL {
+class IsUsed extends DSL {
     public function run() {
-        list($atoms, $analyzer) = func_get_args();
+        list($times) = func_get_args();
 
-        assert($this->assertAtom($atoms));
-        $diff = $this->checkAtoms($atoms);
-        if (empty($diff)) {
-            return new Command(Query::NO_QUERY);
-        }
-
-        $MAX_LOOPING = self::$MAX_LOOPING;
-        $linksDown = self::$linksDown;
-
-$gremlin = <<<GREMLIN
-not( 
-    where( __.emit( ).repeat( __.out({$linksDown}) ).times($MAX_LOOPING)
-             .hasLabel(within(***))
-             .where( __.in("ANALYZED").has("analyzer", within(***)))
-          )     
-)
+        $gremlin = <<<GREMLIN
+where(
+    __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray", "Parameter").count().is(eq($times))
+     )
 GREMLIN;
-        return new Command($gremlin,
-                           array($diff, makeArray($analyzer)));
+
+        return new Command($gremlin);
     }
 }
 ?>

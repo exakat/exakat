@@ -34,13 +34,11 @@ class IsComplexExpression extends DSL {
         $linksDown = self::$linksDown;
 
         $gremlin = <<<GREMLIN
-not(
-    __.has('constant', true))
-      .where(  
-        __.emit().repeat( __.not(hasLabel("Closure", "Classanonymous") ).out({$linksDown})).times($MAX_LOOPING)
-          .not(hasLabel("Closure", "Classanonymous") )
-          .count().is(gt({$threshold})
-   ) 
+not( where( __.has("constant", true ) ) )
+.where(
+  __.emit().repeat( __.not(hasLabel("Closure", "Classanonymous") ).out({$linksDown})).times($MAX_LOOPING)
+    .not(hasLabel("Closure", "Classanonymous") )
+    .count().is(gt({$threshold})) 
 )
 
 GREMLIN;

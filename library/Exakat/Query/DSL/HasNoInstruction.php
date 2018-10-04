@@ -30,21 +30,26 @@ class HasNoInstruction extends DSL {
         list($atom) = func_get_args();
 
         assert($this->assertAtom($atom));
-        $atom = makeArray($atom);
+        $diff = $this->checkAtoms($atom);
+        if (empty($diff)) {
+            return new Command(Query::NO_QUERY);
+        }
 
         $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
-        $stop = array_unique(array_merge($stop, $atom));
+        $stop = array_unique(array_merge($stop, $diff));
+        
+        $linksDown = self::$linksDown;
 
         return new Command(<<<GREMLIN
 not( 
     where( 
-         __.emit( ).repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() )
+         __.emit( ).repeat(__.in({$linksDown}))
                    .until(hasLabel(within(***)))
                    .hasLabel(within(***))
          ) 
     )
 GREMLIN
-, array($stop, $atom));
+, array($stop, $diff));
     }
 }
 ?>
