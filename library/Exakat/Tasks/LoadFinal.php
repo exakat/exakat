@@ -330,7 +330,7 @@ GREMLIN;
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
               ->samePropertyAs('code', 'method', Analyzer::CASE_INSENSITIVE)
-              ->addETo('DEFINITION', 'call')
+              ->addEFrom('DEFINITION', 'call')
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
@@ -343,6 +343,7 @@ GREMLIN;
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('BLOCK')
               ->atomInsideNoDefinition('Staticmethodcall')
+              ->hasNoIn('DEFINITION')
               ->outIs('CLASS')
               ->tokenIs(Analyzer::$STATICCALL_TOKEN)
               ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_INSENSITIVE)
@@ -356,7 +357,7 @@ GREMLIN;
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
               ->samePropertyAs('code', 'method', Analyzer::CASE_INSENSITIVE)
-              ->addETo('DEFINITION', 'call')
+              ->addEFrom('DEFINITION', 'call')
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
