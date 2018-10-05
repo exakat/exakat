@@ -716,7 +716,13 @@ GREMLIN;
         return $this;
     }
 
-    public function isComplexExpression($threshold = 50) {
+    public function isUsed($times = 1) {
+        $this->query->isUsed($times);
+
+        return $this;
+    }
+
+    public function isComplexExpression($threshold = 30) {
         $this->query->isComplexExpression($threshold);
 
         return $this;
@@ -875,6 +881,12 @@ GREMLIN;
 
     public function fullcodeVariableIs($variable) {
         $this->query->fullcodeVariableIs($variable);
+        
+        return $this;
+    }
+
+    public function variableIsAssigned($times) {
+        $this->query->variableIsAssigned($times);
         
         return $this;
     }
