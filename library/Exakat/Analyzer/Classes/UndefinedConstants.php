@@ -35,7 +35,6 @@ class UndefinedConstants extends Analyzer {
         // A::Undefined
         $this->atomIs('Staticconstant')
              ->analyzerIsNot('Classes/DefinedConstants')
-             
              ->outIs('CLASS')
              ->tokenIs(self::$STATICCALL_TOKEN)
              ->back('first');

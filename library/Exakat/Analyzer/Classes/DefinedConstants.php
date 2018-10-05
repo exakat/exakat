@@ -29,32 +29,15 @@ class DefinedConstants extends Analyzer {
     public function dependsOn() {
         return array('Classes/IsExtClass',
                      'Composer/IsComposerNsname',
-                     'Interfaces/IsExtInterface',
                     );
     }
     
     public function analyze() {
-        $containsConstantDefinition = <<<GREMLIN
-where( 
-    __.out("CONST")
-      .out("CONST")
-      .out("NAME")
-      .filter{ it.get().value("code") == constante; }
-    )
-GREMLIN;
-
         // constants defined at the class level
         // constants defined at the parents level
         // This includes interfaces
         $this->atomIs('Staticconstant')
-             ->outIs('CONSTANT')
-             ->savePropertyAs('code', 'constante')
-             ->inIs('CONSTANT')
-             ->outIs('CLASS')
-             ->inIs('DEFINITION')
-             ->goToAllParents(self::INCLUDE_SELF)
-             ->raw($containsConstantDefinition)
-             ->back('first');
+             ->hasIn('DEFINITION');
         $this->prepareQuery();
 
         // constants defined in a class of an extension

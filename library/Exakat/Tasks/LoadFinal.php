@@ -62,15 +62,15 @@ class LoadFinal extends Tasks {
         $this->fixFullnspathConstants();
         $this->spotPHPNativeConstants();
 
+        $this->setParentDefinition();
         $this->makeClassConstantDefinition();
         
         $this->setConstantDefinition();
-        $this->setParentDefinition();
 
         $this->defaultIdentifiers();
         $this->propagateConstants();
 
-        $this->setClassConstantRemoteDefinition();
+//        $this->setClassConstantRemoteDefinition();
         $this->setClassPropertyRemoteDefinition();
         $this->setClassMethodRemoteDefinition();
         $this->setArrayClassDefinition();
@@ -625,24 +625,28 @@ GREMLIN;
 
     private function makeClassConstantDefinition() {
         // Create link between Class constant and definition
-        $query = <<<'GREMLIN'
-g.V().hasLabel('Staticconstant').as('first')
-     .not(where( __.in("DEFINITION")))
-     .out('CONSTANT').sideEffect{name = it.get().value("code");}.select('first')
-     .out('CLASS').hasLabel("Identifier", "Nsname").has('fullnspath')
-     .sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
-     .where( __.sideEffect{classes = [];}
-               .emit().repeat( out("EXTENDS").in("DEFINITION") ).times(5).hasLabel("Class")
-               .out("CONST").hasLabel("Const").out("CONST").as('const')
-               .out("NAME").filter{ it.get().value("code") == name; }.select('const')
-               .sideEffect{classes.add(it.get()); }
-               .fold()
-    )
-    .map{classes[0]}.as('theClass')
-    .addE('DEFINITION').to('first')
-GREMLIN;
-        $this->gremlin->query($query);
-        display('Create link between Class constant and definition');
+        $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null);
+        $query->atomIs('Staticconstant')
+              ->outIs('CONSTANT')
+              ->savePropertyAs('code', 'name')
+              ->back('first')
+              ->outIs('CLASS')
+              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'))
+              ->savePropertyAs('fullnspath', 'classe')
+              ->inIs('DEFINITION')
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs('CONST')
+              ->atomIs('Const')
+              ->outIs('CONST')
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->inIs('NAME')
+              ->addEto('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        display('Create '.($result->toInt()).' link between Class constant and definition');
         $this->logTime('Class::constant definition');
     }
 
