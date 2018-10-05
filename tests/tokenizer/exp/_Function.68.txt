@@ -92,11 +92,13 @@ Label : PROJECT
                   Label : ARGUMENT
                     14
             Label : DEFINITION
-              14
+              27
+              Label : DEFINITION
+                14
             Label : NAME
               26
           Label : METHOD
-            27
+            28
             Label : BLOCK
               16
               Label : EXPRESSION
@@ -124,6 +126,6 @@ Label : PROJECT
               Label : TYPEHINT
                 12
             Label : NAME
-              27
+              28
           Label : NAME
             6

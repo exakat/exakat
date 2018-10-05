@@ -1,6 +1,16 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    30
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
   Label : FILE
     3
     Label : EXPRESSION
@@ -76,11 +86,11 @@ Label : PROJECT
             Label : USE
               16
         Label : EXPRESSION
-          30
+          31
           Label : LEFT
             29
           Label : RIGHT
-            31
+            32
             Label : NEW
               23
               Label : ARGUMENT
@@ -88,7 +98,7 @@ Label : PROJECT
               Label : NAME
                 23
         Label : EXPRESSION
-          32
+          33
           Label : METHOD
             8
             Label : ARGUMENT
@@ -98,7 +108,7 @@ Label : PROJECT
           Label : OBJECT
             29
         Label : EXPRESSION
-          32
+          33
           Label : METHOD
             18
             Label : ARGUMENT
@@ -108,7 +118,7 @@ Label : PROJECT
           Label : OBJECT
             29
         Label : EXPRESSION
-          32
+          33
           Label : METHOD
             26
             Label : ARGUMENT

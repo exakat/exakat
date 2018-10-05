@@ -1,6 +1,86 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      86
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      45
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      46
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      47
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      49
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      56
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      57
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      58
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      59
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      60
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      61
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      68
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      69
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      70
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      71
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      78
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      79
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      80
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      82
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,7 +90,7 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            12
+            13
             Label : LEFT
               10
               Label : LEFT
@@ -22,125 +102,123 @@ Label : PROJECT
               Label : RIGHT
                 11
             Label : RIGHT
-              13
+              14
               Label : NOT
-                14
+                15
                 Label : ARGUMENT
-                  16
+                  17
                 Label : NAME
-                  14
+                  15
           Label : ELSE
-            43
+            44
             Label : CONDITION
-              12
+              13
               Label : LEFT
-                13
-                Label : NOT
-                  44
-              Label : RIGHT
-                13
+                14
                 Label : NOT
                   45
+              Label : RIGHT
+                14
+                Label : NOT
+                  46
             Label : ELSE
               3
               Label : EXPRESSION
-                80
+                81
                 Label : CASES
-                  82
+                  83
                   Label : EXPRESSION
-                    83
+                    84
                     Label : CASE
-                      84
+                      85
                     Label : CODE
                       3
                       Label : EXPRESSION
-                        86
+                        87
                         Label : LEFT
-                          85
+                          86
                         Label : RIGHT
-                          87
+                          88
                           Label : ARGUMENT
-                            16
+                            17
                           Label : NAME
-                            87
+                            88
                 Label : CONDITION
-                  81
+                  82
               Label : EXPRESSION
-                16
+                17
             Label : THEN
               3
               Label : EXPRESSION
                 5
                 Label : CONDITION
-                  47
+                  48
                   Label : LEFT
-                    13
+                    14
                     Label : NOT
-                      46
+                      47
                   Label : RIGHT
-                    13
+                    14
                     Label : NOT
-                      48
+                      49
                 Label : ELSE
-                  43
+                  44
                   Label : CONDITION
-                    13
+                    14
                     Label : NOT
-                      60
+                      61
                   Label : ELSE
-                    43
+                    44
                     Label : CONDITION
-                      13
+                      14
                       Label : NOT
-                        70
+                        71
                     Label : THEN
                       3
                       Label : EXPRESSION
-                        71
+                        72
                         Label : ARGUMENT
-                          73
+                          74
                           Label : ARGUMENT
-                            75
+                            76
                           Label : NAME
-                            73
-                        Label : ARGUMENT
-                          77
+                            74
                         Label : ARGUMENT
                           78
                         Label : ARGUMENT
                           79
+                        Label : ARGUMENT
+                          80
                         Label : NAME
-                          71
+                          72
                   Label : THEN
                     3
                     Label : EXPRESSION
-                      61
+                      62
                       Label : ARGUMENT
-                        63
+                        64
                         Label : ARGUMENT
-                          65
+                          66
                         Label : NAME
-                          63
-                      Label : ARGUMENT
-                        67
+                          64
                       Label : ARGUMENT
                         68
                       Label : ARGUMENT
                         69
+                      Label : ARGUMENT
+                        70
                       Label : NAME
-                        61
+                        62
                 Label : THEN
                   3
                   Label : EXPRESSION
-                    49
+                    50
                     Label : ARGUMENT
-                      51
+                      52
                       Label : ARGUMENT
-                        53
+                        54
                       Label : NAME
-                        51
-                    Label : ARGUMENT
-                      55
+                        52
                     Label : ARGUMENT
                       56
                     Label : ARGUMENT
@@ -149,45 +227,47 @@ Label : PROJECT
                       58
                     Label : ARGUMENT
                       59
+                    Label : ARGUMENT
+                      60
                     Label : NAME
-                      49
+                      50
           Label : THEN
             3
             Label : EXPRESSION
-              14
+              15
             Label : EXPRESSION
-              18
+              19
               Label : ARGUMENT
-                20
+                21
               Label : NAME
-                18
+                19
             Label : EXPRESSION
-              22
+              23
             Label : EXPRESSION
-              24
+              25
               Label : ARGUMENT
-                26
+                27
               Label : NAME
-                24
+                25
             Label : EXPRESSION
-              28
+              29
             Label : EXPRESSION
-              30
+              31
               Label : ARGUMENT
-                31
+                32
                 Label : ARGUMENT
-                  33
+                  34
                 Label : NAME
-                  31
+                  32
             Label : EXPRESSION
-              35
+              36
             Label : EXPRESSION
-              37
+              38
               Label : ARGUMENT
-                39
+                40
               Label : NAME
-                37
+                38
             Label : EXPRESSION
-              41
+              42
         Label : EXPRESSION
-          16
+          17

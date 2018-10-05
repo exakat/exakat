@@ -1,6 +1,98 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      57
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      23
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+    Label : DEFINITION
+      29
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      30
+    Label : DEFINITION
+      30
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      36
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      39
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      42
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      45
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      48
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      51
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      54
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,204 +100,204 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            9
+            10
             Label : INDEX
-              10
+              11
             Label : VARIABLE
-              8
+              9
           Label : RIGHT
-            12
-        Label : EXPRESSION
-          6
-          Label : LEFT
             13
-          Label : RIGHT
-            14
-            Label : CONCAT
-              9
-              Label : INDEX
-                15
-              Label : VARIABLE
-                8
-            Label : CONCAT
-              17
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            19
-          Label : RIGHT
             14
+          Label : RIGHT
+            15
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                15
+                16
               Label : VARIABLE
-                8
+                9
             Label : CONCAT
-              20
+              18
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            22
+            20
           Label : RIGHT
-            14
+            15
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                23
+                16
+              Label : VARIABLE
+                9
+            Label : CONCAT
+              21
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            23
+          Label : RIGHT
+            15
+            Label : CONCAT
+              10
+              Label : INDEX
+                24
                 Label : LEFT
-                  7
+                  8
                 Label : RIGHT
-                  23
+                  24
                   Label : LEFT
-                    24
+                    25
                     Label : ARGUMENT
-                      25
+                      26
                     Label : BLOCK
-                      27
+                      28
                       Label : EXPRESSION
-                        25
+                        26
                   Label : RIGHT
-                    14
+                    15
                     Label : CONCAT
-                      15
+                      16
                     Label : CONCAT
                       5
               Label : VARIABLE
-                8
+                9
             Label : CONCAT
-              20
+              21
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            28
+            29
           Label : RIGHT
-            14
+            15
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                14
+                15
                 Label : CONCAT
-                  15
+                  16
                 Label : CONCAT
                   5
               Label : VARIABLE
-                8
+                9
             Label : CONCAT
-              20
+              21
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            28
+            29
           Label : RIGHT
-            14
+            15
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                14
+                15
                 Label : CONCAT
-                  15
+                  16
                 Label : CONCAT
                   5
               Label : VARIABLE
-                8
+                9
             Label : CONCAT
-              20
+              21
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                14
+                15
                 Label : CONCAT
-                  30
+                  31
                 Label : CONCAT
-                  32
+                  33
               Label : VARIABLE
-                29
+                30
             Label : CONCAT
-              33
+              34
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            28
+            29
           Label : RIGHT
-            14
+            15
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                14
+                15
                 Label : CONCAT
-                  15
+                  16
                 Label : CONCAT
                   5
               Label : VARIABLE
-                8
+                9
             Label : CONCAT
-              20
+              21
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                14
+                15
                 Label : CONCAT
-                  30
+                  31
                 Label : CONCAT
-                  32
+                  33
               Label : VARIABLE
-                29
+                30
             Label : CONCAT
-              33
+              34
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                14
+                15
                 Label : CONCAT
-                  36
+                  37
                 Label : CONCAT
-                  38
+                  39
               Label : VARIABLE
-                35
+                36
             Label : CONCAT
-              39
+              40
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                14
+                15
                 Label : CONCAT
-                  42
+                  43
                 Label : CONCAT
-                  44
+                  45
               Label : VARIABLE
-                41
+                42
             Label : CONCAT
-              45
+              46
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                14
+                15
                 Label : CONCAT
-                  48
+                  49
                 Label : CONCAT
-                  50
+                  51
               Label : VARIABLE
-                47
+                48
             Label : CONCAT
-              51
+              52
             Label : CONCAT
-              9
+              10
               Label : INDEX
-                14
+                15
                 Label : CONCAT
-                  54
+                  55
                 Label : CONCAT
-                  56
+                  57
               Label : VARIABLE
-                53
+                54
             Label : CONCAT
-              57
+              58

@@ -1,6 +1,26 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      34
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,62 +28,62 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          10
+          11
           Label : METHOD
-            6
+            7
             Label : ARGUMENT
-              8
+              9
             Label : NAME
-              6
+              7
           Label : OBJECT
             5
         Label : EXPRESSION
-          23
+          24
           Label : CONCAT
-            10
+            11
             Label : METHOD
-              12
+              13
               Label : ARGUMENT
-                10
+                11
                 Label : METHOD
-                  15
+                  16
                   Label : ARGUMENT
-                    17
+                    18
                   Label : NAME
-                    15
+                    16
                 Label : OBJECT
-                  14
+                  15
               Label : ARGUMENT
-                19
+                20
               Label : ARGUMENT
-                21
+                22
               Label : NAME
-                12
+                13
             Label : OBJECT
-              11
+              12
           Label : CONCAT
-            10
+            11
             Label : METHOD
+              26
+              Label : ARGUMENT
+                28
+              Label : ARGUMENT
+                30
+              Label : ARGUMENT
+                32
+              Label : NAME
+                26
+            Label : OBJECT
               25
-              Label : ARGUMENT
-                27
-              Label : ARGUMENT
-                29
-              Label : ARGUMENT
-                31
-              Label : NAME
-                25
-            Label : OBJECT
-              24
           Label : CONCAT
-            10
+            11
             Label : METHOD
-              34
+              35
               Label : NAME
-                34
+                35
               Label : ARGUMENT
-                36
+                37
               Label : ARGUMENT
-                38
+                39
             Label : OBJECT
-              33
+              34

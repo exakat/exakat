@@ -1,6 +1,18 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,212 +20,212 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
             Label : ARGUMENT
-              9
-              Label : NAME
-                9
-                Label : DEFINITION
-                  9
-                Label : DEFINITION
-                  9
-              Label : TYPEHINT
-                8
-            Label : BLOCK
               10
+              Label : NAME
+                10
+                Label : DEFINITION
+                  10
+                Label : DEFINITION
+                  10
+              Label : TYPEHINT
+                9
+            Label : BLOCK
+              11
               Label : EXPRESSION
-                11
+                12
                 Label : RETURN
-                  12
+                  13
                   Label : NEW
-                    13
+                    14
                     Label : NAME
-                      13
+                      14
                     Label : ARGUMENT
-                      15
-                      Label : INDEX
-                        16
-                      Label : VARIABLE
-                        9
-                    Label : ARGUMENT
-                      15
+                      16
                       Label : INDEX
                         17
                       Label : VARIABLE
-                        9
+                        10
+                    Label : ARGUMENT
+                      16
+                      Label : INDEX
+                        18
+                      Label : VARIABLE
+                        10
             Label : RETURNED
-              9
-            Label : RETURNED
-              9
-        Label : EXPRESSION
-          6
-          Label : LEFT
-            5
-          Label : RIGHT
-            7
-            Label : ARGUMENT
-              9
-              Label : NAME
-                9
-                Label : DEFINITION
-                  9
-                Label : DEFINITION
-                  9
-              Label : TYPEHINT
-                18
-            Label : BLOCK
               10
-              Label : EXPRESSION
-                11
-                Label : RETURN
-                  12
-                  Label : NEW
-                    13
-                    Label : NAME
-                      13
-                    Label : ARGUMENT
-                      15
-                      Label : INDEX
-                        16
-                      Label : VARIABLE
-                        9
-                    Label : ARGUMENT
-                      15
-                      Label : INDEX
-                        17
-                      Label : VARIABLE
-                        9
             Label : RETURNED
-              9
-            Label : RETURNED
-              9
+              10
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
             Label : ARGUMENT
-              9
+              10
               Label : NAME
-                9
+                10
                 Label : DEFINITION
-                  9
+                  10
                 Label : DEFINITION
-                  9
+                  10
               Label : TYPEHINT
                 19
             Label : BLOCK
-              10
+              11
               Label : EXPRESSION
-                11
+                12
                 Label : RETURN
-                  12
+                  13
                   Label : NEW
-                    13
+                    14
                     Label : NAME
-                      13
+                      14
                     Label : ARGUMENT
-                      15
-                      Label : INDEX
-                        16
-                      Label : VARIABLE
-                        9
-                    Label : ARGUMENT
-                      15
+                      16
                       Label : INDEX
                         17
                       Label : VARIABLE
-                        9
+                        10
+                    Label : ARGUMENT
+                      16
+                      Label : INDEX
+                        18
+                      Label : VARIABLE
+                        10
             Label : RETURNED
-              9
+              10
             Label : RETURNED
-              9
+              10
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
             Label : ARGUMENT
-              9
+              10
               Label : NAME
-                9
+                10
                 Label : DEFINITION
-                  9
+                  10
                 Label : DEFINITION
-                  9
+                  10
               Label : TYPEHINT
                 20
             Label : BLOCK
-              10
+              11
               Label : EXPRESSION
-                11
+                12
                 Label : RETURN
-                  12
+                  13
                   Label : NEW
-                    13
+                    14
                     Label : NAME
-                      13
+                      14
                     Label : ARGUMENT
-                      15
-                      Label : INDEX
-                        16
-                      Label : VARIABLE
-                        9
-                    Label : ARGUMENT
-                      15
+                      16
                       Label : INDEX
                         17
                       Label : VARIABLE
-                        9
+                        10
+                    Label : ARGUMENT
+                      16
+                      Label : INDEX
+                        18
+                      Label : VARIABLE
+                        10
             Label : RETURNED
-              9
+              10
             Label : RETURNED
-              9
+              10
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
             Label : ARGUMENT
-              9
+              10
               Label : NAME
-                9
+                10
                 Label : DEFINITION
-                  9
+                  10
                 Label : DEFINITION
-                  9
+                  10
               Label : TYPEHINT
                 21
             Label : BLOCK
-              10
+              11
               Label : EXPRESSION
-                11
+                12
                 Label : RETURN
-                  12
+                  13
                   Label : NEW
-                    13
+                    14
                     Label : NAME
-                      13
+                      14
                     Label : ARGUMENT
-                      15
-                      Label : INDEX
-                        16
-                      Label : VARIABLE
-                        9
-                    Label : ARGUMENT
-                      15
+                      16
                       Label : INDEX
                         17
                       Label : VARIABLE
-                        9
+                        10
+                    Label : ARGUMENT
+                      16
+                      Label : INDEX
+                        18
+                      Label : VARIABLE
+                        10
             Label : RETURNED
-              9
+              10
             Label : RETURNED
-              9
+              10
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : ARGUMENT
+              10
+              Label : NAME
+                10
+                Label : DEFINITION
+                  10
+                Label : DEFINITION
+                  10
+              Label : TYPEHINT
+                22
+            Label : BLOCK
+              11
+              Label : EXPRESSION
+                12
+                Label : RETURN
+                  13
+                  Label : NEW
+                    14
+                    Label : NAME
+                      14
+                    Label : ARGUMENT
+                      16
+                      Label : INDEX
+                        17
+                      Label : VARIABLE
+                        10
+                    Label : ARGUMENT
+                      16
+                      Label : INDEX
+                        18
+                      Label : VARIABLE
+                        10
+            Label : RETURNED
+              10
+            Label : RETURNED
+              10

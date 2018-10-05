@@ -1,6 +1,22 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -18,17 +34,17 @@ Label : PROJECT
             Label : BLOCK
               6
               Label : EXPRESSION
-                14
+                15
                 Label : POSTPLUSPLUS
-                  13
+                  14
               Label : EXPRESSION
-                14
-                Label : POSTPLUSPLUS
-                  15
-              Label : EXPRESSION
-                14
+                15
                 Label : POSTPLUSPLUS
                   16
+              Label : EXPRESSION
+                15
+                Label : POSTPLUSPLUS
+                  17
             Label : CLASS
               10
             Label : VARIABLE

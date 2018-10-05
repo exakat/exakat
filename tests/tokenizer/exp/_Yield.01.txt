@@ -2,31 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    7
+    14
     Label : DEFINITION
-      7
-  Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
-  Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      7
-  Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
-  Label : DEFINITION
-    10
-    Label : DEFINITION
-      10
-  Label : DEFINITION
-    31
+      31
     Label : DEFINITION
       31
   Label : FILE
@@ -44,67 +22,63 @@ Label : PROJECT
               Label : DEFINITION
                 7
           Label : ARGUMENT
+            8
+            Label : NAME
+              8
+              Label : DEFINITION
+                8
+          Label : ARGUMENT
             9
+            Label : DEFAULT
+              10
             Label : NAME
               9
               Label : DEFINITION
                 9
-          Label : ARGUMENT
-            10
-            Label : DEFAULT
-              11
-            Label : NAME
-              10
-              Label : DEFINITION
-                10
           Label : BLOCK
-            12
+            11
             Label : EXPRESSION
-              13
+              12
               Label : BLOCK
-                12
+                11
                 Label : EXPRESSION
                   18
                   Label : YIELD
-                    14
+                    13
               Label : FINAL
                 3
                 Label : EXPRESSION
                   16
                   Label : LEFT
-                    14
+                    13
                   Label : RIGHT
-                    9
+                    8
               Label : INCREMENT
                 3
                 Label : EXPRESSION
                   17
                   Label : LEFT
-                    14
+                    13
                   Label : RIGHT
-                    10
+                    9
               Label : INIT
                 3
                 Label : EXPRESSION
                   15
                   Label : LEFT
-                    14
-                    Label : DEFINITION
-                      14
-                    Label : DEFINITION
-                      14
-                    Label : DEFINITION
-                      14
+                    13
                   Label : RIGHT
                     7
           Label : DEFINITION
             14
             Label : DEFINITION
-              14
+              13
             Label : DEFINITION
-              14
+              13
             Label : DEFINITION
-              14
+              13
+            Label : DEFINITION
+              13
           Label : DEFINITION
             5
             Label : NAME
@@ -124,33 +98,33 @@ Label : PROJECT
               Label : DEFINITION
                 7
           Label : ARGUMENT
+            8
+            Label : NAME
+              8
+              Label : DEFINITION
+                8
+          Label : ARGUMENT
             9
+            Label : DEFAULT
+              10
             Label : NAME
               9
               Label : DEFINITION
                 9
-          Label : ARGUMENT
-            10
-            Label : DEFAULT
-              11
-            Label : NAME
-              10
-              Label : DEFINITION
-                10
           Label : BLOCK
-            12
+            11
             Label : EXPRESSION
-              13
+              12
               Label : BLOCK
-                12
+                11
                 Label : EXPRESSION
                   18
                   Label : YIELD
                     21
                     Label : INDEX
-                      11
+                      10
                     Label : VARIABLE
-                      14
+                      13
                 Label : EXPRESSION
                   18
                   Label : YIELD
@@ -160,7 +134,7 @@ Label : PROJECT
                       Label : MEMBER
                         22
                       Label : OBJECT
-                        14
+                        13
                     Label : ELSE
                       27
                       Label : LEFT
@@ -174,49 +148,43 @@ Label : PROJECT
                 Label : EXPRESSION
                   16
                   Label : LEFT
-                    14
+                    13
                   Label : RIGHT
-                    9
+                    8
               Label : INCREMENT
                 3
                 Label : EXPRESSION
                   17
                   Label : LEFT
-                    14
+                    13
                   Label : RIGHT
-                    10
+                    9
               Label : INIT
                 3
                 Label : EXPRESSION
                   15
                   Label : LEFT
-                    14
-                    Label : DEFINITION
-                      14
-                    Label : DEFINITION
-                      14
-                    Label : DEFINITION
-                      14
-                    Label : DEFINITION
-                      14
+                    13
                   Label : RIGHT
                     7
           Label : DEFINITION
             14
             Label : DEFINITION
-              14
+              13
             Label : DEFINITION
-              14
+              13
             Label : DEFINITION
-              14
+              13
             Label : DEFINITION
-              14
+              13
+            Label : DEFINITION
+              13
           Label : NAME
             19
         Label : EXPRESSION
           28
           Label : BLOCK
-            12
+            11
             Label : EXPRESSION
               32
               Label : ARGUMENT
@@ -231,5 +199,3 @@ Label : PROJECT
               30
           Label : VALUE
             31
-            Label : DEFINITION
-              31

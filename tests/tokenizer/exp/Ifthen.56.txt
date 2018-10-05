@@ -1,6 +1,22 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      24
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,7 +30,7 @@ Label : PROJECT
             Label : NOT
               7
               Label : ARGUMENT
-                10
+                11
                 Label : CLASS
                   8
                 Label : MEMBER
@@ -22,40 +38,40 @@ Label : PROJECT
           Label : ELSE
             3
             Label : EXPRESSION
-              21
+              22
               Label : METHOD
-                17
+                18
                 Label : ARGUMENT
-                  19
+                  20
                 Label : NAME
-                  17
+                  18
               Label : OBJECT
-                10
+                11
                 Label : CLASS
                   8
                 Label : MEMBER
-                  16
+                  17
           Label : THEN
             3
             Label : EXPRESSION
-              12
+              13
               Label : LEFT
-                10
+                11
                 Label : CLASS
                   8
                 Label : MEMBER
-                  11
+                  12
               Label : RIGHT
-                13
+                14
                 Label : NEW
-                  14
+                  15
         Label : EXPRESSION
-          19
+          20
         Label : EXPRESSION
-          22
+          23
           Label : RETURN
-            10
+            11
             Label : CLASS
               8
             Label : MEMBER
-              23
+              24

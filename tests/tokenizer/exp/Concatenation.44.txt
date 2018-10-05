@@ -1,6 +1,34 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      19
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      20
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,46 +36,46 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
             Label : NAME
-              7
-            Label : ARGUMENT
               8
             Label : ARGUMENT
-              14
+              9
+            Label : ARGUMENT
+              15
               Label : CONCAT
-                10
+                11
                 Label : INDEX
-                  12
+                  13
                   Label : LEFT
-                    11
+                    12
                   Label : RIGHT
-                    13
+                    14
                 Label : VARIABLE
-                  9
+                  10
               Label : CONCAT
-                10
+                11
                 Label : INDEX
-                  12
+                  13
                   Label : LEFT
-                    16
-                  Label : RIGHT
                     17
-                Label : VARIABLE
-                  15
-              Label : CONCAT
-                10
-                Label : INDEX
-                  12
-                  Label : LEFT
-                    19
                   Label : RIGHT
-                    20
+                    18
                 Label : VARIABLE
-                  18
+                  16
               Label : CONCAT
-                21
+                11
+                Label : INDEX
+                  13
+                  Label : LEFT
+                    20
+                  Label : RIGHT
+                    21
+                Label : VARIABLE
+                  19
+              Label : CONCAT
+                22

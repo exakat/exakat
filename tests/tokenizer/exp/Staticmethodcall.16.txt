@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      19
+    Label : DEFINITION
+      19
+    Label : DEFINITION
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -22,7 +30,7 @@ Label : PROJECT
           Label : DEFINITION
             6
           Label : DEFINITION
-            24
+            25
           Label : METHOD
             10
             Label : ARGUMENT
@@ -46,15 +54,15 @@ Label : PROJECT
           Label : ARGUMENT
             6
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
           Label : RIGHT
-            21
+            22
         Label : EXPRESSION
-          22
+          23
           Label : NEW
-            23
+            24
             Label : CLASS
               6
             Label : METHOD
@@ -64,11 +72,11 @@ Label : PROJECT
               Label : NAME
                 19
         Label : EXPRESSION
-          22
+          23
           Label : NEW
-            23
+            24
             Label : CLASS
-              24
+              25
             Label : METHOD
               19
               Label : ARGUMENT

@@ -1,6 +1,18 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      19
+    Label : DEFINITION
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,61 +26,61 @@ Label : PROJECT
           Label : BLOCK
             8
             Label : EXPRESSION
-              10
+              11
               Label : LEFT
                 9
-                Label : DEFINITION
-                  9
               Label : RIGHT
-                11
+                12
                 Label : ARGUMENT
-                  13
+                  14
                   Label : INDEX
-                    12
+                    13
                   Label : VALUE
-                    14
-                Label : ARGUMENT
-                  13
-                  Label : INDEX
                     15
-                  Label : VALUE
+                Label : ARGUMENT
+                  14
+                  Label : INDEX
                     16
+                  Label : VALUE
+                    17
             Label : EXPRESSION
-              17
+              18
               Label : BLOCK
                 8
                 Label : EXPRESSION
-                  20
+                  21
                   Label : YIELD
-                    13
+                    14
                     Label : INDEX
-                      18
-                    Label : VALUE
                       19
+                    Label : VALUE
+                      20
               Label : SOURCE
                 9
               Label : VALUE
-                13
+                14
                 Label : INDEX
-                  18
-                  Label : DEFINITION
-                    18
-                Label : VALUE
                   19
-                  Label : DEFINITION
-                    19
+                Label : VALUE
+                  20
           Label : DEFINITION
-            9
+            10
+            Label : DEFINITION
+              9
             Label : DEFINITION
               9
           Label : DEFINITION
-            18
-            Label : DEFINITION
-              18
-          Label : DEFINITION
-            19
+            10
             Label : DEFINITION
               19
+            Label : DEFINITION
+              19
+          Label : DEFINITION
+            10
+            Label : DEFINITION
+              20
+            Label : DEFINITION
+              20
           Label : DEFINITION
             5
             Label : ARGUMENT
@@ -78,21 +90,21 @@ Label : PROJECT
           Label : NAME
             5
         Label : EXPRESSION
-          17
+          18
           Label : BLOCK
             8
             Label : EXPRESSION
-              24
+              25
               Label : ARGUMENT
-                21
-                Label : CONCAT
-                  18
-                Label : CONCAT
-                  22
+                22
                 Label : CONCAT
                   19
                 Label : CONCAT
                   23
+                Label : CONCAT
+                  20
+                Label : CONCAT
+                  24
           Label : SOURCE
             5
             Label : ARGUMENT
@@ -100,8 +112,8 @@ Label : PROJECT
             Label : NAME
               5
           Label : VALUE
-            13
+            14
             Label : INDEX
-              18
-            Label : VALUE
               19
+            Label : VALUE
+              20

@@ -1,6 +1,12 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -18,15 +24,15 @@ Label : PROJECT
               Label : ARGUMENT
                 10
           Label : DEFINITION
-            14
+            15
           Label : NAME
             5
         Label : EXPRESSION
-          13
+          14
           Label : LEFT
             12
           Label : RIGHT
-            14
+            15
         Label : EXPRESSION
           12
           Label : ARGUMENT

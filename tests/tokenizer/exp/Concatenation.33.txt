@@ -1,6 +1,22 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      15
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,21 +24,19 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
+            Label : CONCAT
+              9
             Label : CONCAT
               8
-            Label : CONCAT
-              7
               Label : MEMBER
-                10
+                11
               Label : OBJECT
-                9
-            Label : CONCAT
-              11
+                10
             Label : CONCAT
               12
             Label : CONCAT
@@ -31,3 +45,5 @@ Label : PROJECT
               14
             Label : CONCAT
               15
+            Label : CONCAT
+              16

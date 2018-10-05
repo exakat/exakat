@@ -1,6 +1,50 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,72 +52,72 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            8
+            9
             Label : LEFT
-              7
+              8
             Label : RIGHT
-              9
+              10
               Label : ARGUMENT
-                11
+                12
               Label : NAME
-                9
+                10
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            12
+            13
             Label : CODE
-              13
+              14
               Label : LEFT
                 5
               Label : RIGHT
-                7
+                8
           Label : RIGHT
-            8
+            9
             Label : LEFT
-              14
+              15
             Label : RIGHT
-              9
+              10
               Label : ARGUMENT
-                15
+                16
               Label : NAME
-                9
+                10
         Label : EXPRESSION
-          8
+          9
           Label : LEFT
-            16
+            17
           Label : RIGHT
-            6
+            7
             Label : LEFT
-              17
+              18
             Label : RIGHT
-              9
+              10
               Label : ARGUMENT
-                18
+                19
               Label : NAME
-                9
+                10
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            19
+            20
             Label : ARGUMENT
-              13
+              14
               Label : LEFT
                 5
               Label : RIGHT
-                7
+                8
             Label : NAME
-              19
+              20
           Label : RIGHT
-            8
+            9
             Label : LEFT
-              14
+              15
             Label : RIGHT
-              9
+              10
               Label : ARGUMENT
-                15
+                16
               Label : NAME
-                9
+                10

@@ -1,6 +1,30 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      28
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      35
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      42
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      58
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,96 +38,96 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : CASE
-                12
+                13
                 Label : CLASS
-                  13
+                  14
                 Label : VARIABLE
                   11
               Label : CODE
                 3
                 Label : EXPRESSION
-                  15
+                  16
                   Label : RETURN
-                    16
+                    17
             Label : EXPRESSION
-              18
+              19
               Label : CASE
-                12
+                13
                 Label : CLASS
+                  22
+                Label : VARIABLE
                   21
-                Label : VARIABLE
-                  20
               Label : CODE
                 3
                 Label : EXPRESSION
-                  15
+                  16
                   Label : RETURN
-                    23
+                    24
             Label : EXPRESSION
-              25
+              26
               Label : CASE
-                12
+                13
                 Label : CLASS
+                  29
+                Label : VARIABLE
                   28
-                Label : VARIABLE
-                  27
               Label : CODE
                 3
                 Label : EXPRESSION
-                  15
+                  16
                   Label : RETURN
-                    30
+                    31
             Label : EXPRESSION
-              32
+              33
               Label : CASE
-                12
+                13
                 Label : CLASS
+                  36
+                Label : VARIABLE
                   35
-                Label : VARIABLE
-                  34
               Label : CODE
                 3
                 Label : EXPRESSION
-                  15
+                  16
                   Label : RETURN
-                    37
+                    38
             Label : EXPRESSION
-              39
+              40
               Label : CASE
-                12
+                13
                 Label : CLASS
-                  42
+                  43
                 Label : VARIABLE
-                  41
+                  42
               Label : CODE
                 3
                 Label : EXPRESSION
-                  15
+                  16
                   Label : RETURN
-                    44
+                    45
             Label : EXPRESSION
-              46
+              47
               Label : CODE
                 3
                 Label : EXPRESSION
-                  47
+                  48
                   Label : THROW
-                    48
+                    49
                     Label : NEW
-                      49
+                      50
                       Label : ARGUMENT
-                        51
+                        52
                         Label : NAME
-                          51
+                          52
                         Label : ARGUMENT
-                          53
+                          54
                         Label : ARGUMENT
-                          55
+                          56
                           Label : ARGUMENT
-                            57
+                            58
                           Label : NAME
-                            55
+                            56
                       Label : NAME
-                        49
+                        50
           Label : CONDITION
             6

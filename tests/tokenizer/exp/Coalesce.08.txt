@@ -1,12 +1,6 @@
 test
 Label : PROJECT
   1
-  Label : DEFINITION
-    9
-    Label : DEFINITION
-      9
-    Label : DEFINITION
-      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -26,27 +20,25 @@ Label : PROJECT
             Label : TYPEHINT
               7
           Label : BLOCK
-            11
+            10
             Label : EXPRESSION
-              12
+              11
               Label : CONDITION
-                13
+                12
                 Label : NOT
-                  14
+                  13
                   Label : NAME
-                    14
+                    13
                   Label : ARGUMENT
-                    16
+                    15
                   Label : ARGUMENT
                     19
                     Label : INDEX
                       20
                     Label : VARIABLE
-                      18
-                      Label : DEFINITION
-                        18
+                      17
               Label : THEN
-                11
+                10
                 Label : EXPRESSION
                   22
                   Label : RETURN
@@ -61,12 +53,6 @@ Label : PROJECT
               26
               Label : LEFT
                 29
-                Label : DEFINITION
-                  29
-                Label : DEFINITION
-                  29
-                Label : DEFINITION
-                  29
               Label : RIGHT
                 35
                 Label : LEFT
@@ -88,7 +74,7 @@ Label : PROJECT
               Label : RIGHT
                 38
                 Label : YIELD
-                  18
+                  17
             Label : EXPRESSION
               26
               Label : LEFT
@@ -164,18 +150,26 @@ Label : PROJECT
           Label : DEFINITION
             18
             Label : DEFINITION
-              18
+              17
+            Label : DEFINITION
+              17
           Label : DEFINITION
-            25
+            18
+            Label : DEFINITION
+              25
           Label : DEFINITION
-            29
+            18
             Label : DEFINITION
               29
             Label : DEFINITION
               29
             Label : DEFINITION
               29
+            Label : DEFINITION
+              29
           Label : DEFINITION
-            37
+            18
+            Label : DEFINITION
+              37
           Label : NAME
             5

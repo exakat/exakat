@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      10
   Label : FILE
     3
     Label : EXPRESSION
@@ -18,6 +22,6 @@ Label : PROJECT
           Label : THEN
             9
             Label : EXPRESSION
-              11
+              12
               Label : POSTPLUSPLUS
                 10

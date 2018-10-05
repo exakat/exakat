@@ -1,6 +1,76 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      22
+    Label : DEFINITION
+      22
+    Label : DEFINITION
+      22
+    Label : DEFINITION
+      22
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      26
+    Label : DEFINITION
+      26
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      29
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      32
+    Label : DEFINITION
+      32
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      33
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      35
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      36
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,188 +78,188 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
-        Label : EXPRESSION
-          6
-          Label : LEFT
             8
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            9
           Label : RIGHT
-            10
+            11
             Label : CONCAT
-              9
+              10
               Label : NOT
                 5
             Label : CONCAT
-              11
-        Label : EXPRESSION
-          12
-          Label : ARGUMENT
-            8
-          Label : NAME
-            12
+              12
         Label : EXPRESSION
           13
           Label : ARGUMENT
-            14
+            9
+          Label : NAME
+            13
         Label : EXPRESSION
-          6
+          14
+          Label : ARGUMENT
+            15
+        Label : EXPRESSION
+          7
           Label : LEFT
-            8
+            9
           Label : RIGHT
-            19
+            20
             Label : CONDITION
-              9
+              10
               Label : NOT
-                16
+                17
                 Label : ARGUMENT
-                  17
+                  18
                   Label : INDEX
-                    18
+                    19
                   Label : VARIABLE
                     5
             Label : ELSE
-              24
+              25
             Label : THEN
-              10
-              Label : CONCAT
-                20
+              11
               Label : CONCAT
                 21
-                Label : ARGUMENT
-                  22
-                Label : NAME
-                  21
               Label : CONCAT
-                23
-        Label : EXPRESSION
-          6
-          Label : LEFT
-            8
-          Label : RIGHT
-            19
-            Label : CONDITION
-              9
-              Label : NOT
-                16
+                22
                 Label : ARGUMENT
-                  17
+                  23
+                Label : NAME
+                  22
+              Label : CONCAT
+                24
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            9
+          Label : RIGHT
+            20
+            Label : CONDITION
+              10
+              Label : NOT
+                17
+                Label : ARGUMENT
+                  18
                   Label : INDEX
-                    18
+                    19
                   Label : VARIABLE
                     5
             Label : ELSE
-              24
+              25
             Label : THEN
-              10
-              Label : CONCAT
-                20
+              11
               Label : CONCAT
                 21
-                Label : ARGUMENT
-                  22
-                Label : NAME
-                  21
-        Label : EXPRESSION
-          6
-          Label : LEFT
-            8
-          Label : RIGHT
-            19
-            Label : CONDITION
-              10
               Label : CONCAT
-                9
+                22
+                Label : ARGUMENT
+                  23
+                Label : NAME
+                  22
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            9
+          Label : RIGHT
+            20
+            Label : CONDITION
+              11
+              Label : CONCAT
+                10
                 Label : NOT
-                  16
+                  17
                   Label : ARGUMENT
-                    17
+                    18
                     Label : INDEX
-                      18
+                      19
                     Label : VARIABLE
                       5
               Label : CONCAT
-                11
+                12
             Label : ELSE
-              24
+              25
             Label : THEN
-              10
-              Label : CONCAT
-                20
+              11
               Label : CONCAT
                 21
-                Label : ARGUMENT
-                  22
-                Label : NAME
-                  21
-        Label : EXPRESSION
-          6
-          Label : LEFT
-            8
-          Label : RIGHT
-            19
-            Label : CONDITION
-              10
               Label : CONCAT
-                25
+                22
+                Label : ARGUMENT
+                  23
+                Label : NAME
+                  22
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            9
+          Label : RIGHT
+            20
+            Label : CONDITION
+              11
+              Label : CONCAT
+                26
               Label : CONCAT
                 5
             Label : ELSE
-              24
+              25
             Label : THEN
-              10
-              Label : CONCAT
-                20
+              11
               Label : CONCAT
                 21
-                Label : ARGUMENT
-                  22
-                Label : NAME
-                  21
               Label : CONCAT
-                23
-        Label : EXPRESSION
-          26
-          Label : LEFT
-            8
-          Label : RIGHT
-            19
-            Label : CONDITION
-              29
-              Label : LEFT
-                27
+                22
                 Label : ARGUMENT
-                  17
+                  23
+                Label : NAME
+                  22
+              Label : CONCAT
+                24
+        Label : EXPRESSION
+          27
+          Label : LEFT
+            9
+          Label : RIGHT
+            20
+            Label : CONDITION
+              30
+              Label : LEFT
+                28
+                Label : ARGUMENT
+                  18
                   Label : INDEX
-                    28
+                    29
                   Label : VARIABLE
                     5
                 Label : NAME
-                  27
+                  28
               Label : RIGHT
-                30
-            Label : ELSE
-              17
-              Label : INDEX
-                35
-              Label : VARIABLE
                 31
+            Label : ELSE
+              18
+              Label : INDEX
+                36
+              Label : VARIABLE
+                32
             Label : THEN
-              10
+              11
               Label : CONCAT
-                17
+                18
                 Label : INDEX
-                  31
-                Label : VARIABLE
-                  25
-              Label : CONCAT
-                17
-                Label : INDEX
-                  33
-                  Label : PREPLUSPLUS
-                    34
-                Label : VARIABLE
                   32
+                Label : VARIABLE
+                  26
+              Label : CONCAT
+                18
+                Label : INDEX
+                  34
+                  Label : PREPLUSPLUS
+                    35
+                Label : VARIABLE
+                  33

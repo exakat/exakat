@@ -1,6 +1,26 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      40
+    Label : DEFINITION
+      40
+    Label : DEFINITION
+      40
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      26
+  Label : DEFINITION
+    27
+    Label : DEFINITION
+      52
+    Label : DEFINITION
+      52
+    Label : DEFINITION
+      52
   Label : FILE
     3
     Label : EXPRESSION
@@ -52,134 +72,134 @@ Label : PROJECT
                 Label : NAME
                   23
             Label : EXPRESSION
-              29
+              30
               Label : METHOD
-                27
+                28
                 Label : ARGUMENT
                   17
                 Label : NAME
-                  27
+                  28
               Label : OBJECT
                 26
             Label : EXPRESSION
-              30
+              31
               Label : NEW
-                31
+                32
                 Label : ARGUMENT
                   17
                 Label : NAME
-                  31
+                  32
             Label : EXPRESSION
-              30
+              31
               Label : NEW
-                31
+                32
             Label : EXPRESSION
               25
               Label : CLASS
-                33
-              Label : CONSTANT
                 34
-            Label : EXPRESSION
-              25
-              Label : CLASS
-                36
               Label : CONSTANT
-                34
+                35
             Label : EXPRESSION
               25
               Label : CLASS
                 37
               Label : CONSTANT
-                34
+                35
             Label : EXPRESSION
               25
               Label : CLASS
                 38
-              Label : MEMBER
-                39
+              Label : CONSTANT
+                35
             Label : EXPRESSION
               25
               Label : CLASS
-                40
-              Label : MEMBER
                 39
+              Label : MEMBER
+                40
             Label : EXPRESSION
               25
               Label : CLASS
                 41
               Label : MEMBER
-                39
-            Label : EXPRESSION
-              30
-              Label : NEW
-                42
-                Label : ARGUMENT
-                  17
-                Label : NAME
-                  42
-            Label : EXPRESSION
-              30
-              Label : NEW
-                42
+                40
             Label : EXPRESSION
               25
               Label : CLASS
-                44
-              Label : METHOD
-                45
+                42
+              Label : MEMBER
+                40
+            Label : EXPRESSION
+              31
+              Label : NEW
+                43
                 Label : ARGUMENT
                   17
                 Label : NAME
-                  45
+                  43
+            Label : EXPRESSION
+              31
+              Label : NEW
+                43
             Label : EXPRESSION
               25
               Label : CLASS
-                47
-              Label : METHOD
                 45
+              Label : METHOD
+                46
                 Label : ARGUMENT
                   17
                 Label : NAME
-                  45
+                  46
             Label : EXPRESSION
               25
               Label : CLASS
                 48
               Label : METHOD
-                45
+                46
                 Label : ARGUMENT
                   17
                 Label : NAME
-                  45
+                  46
             Label : EXPRESSION
-              30
-              Label : NEW
-                49
-                Label : ARGUMENT
-                  17
-                Label : NAME
-                  49
-            Label : EXPRESSION
-              30
-              Label : NEW
-                49
-            Label : EXPRESSION
-              52
+              25
               Label : CLASS
-                53
-              Label : VARIABLE
-                51
+                49
+              Label : METHOD
+                46
+                Label : ARGUMENT
+                  17
+                Label : NAME
+                  46
             Label : EXPRESSION
-              52
+              31
+              Label : NEW
+                50
+                Label : ARGUMENT
+                  17
+                Label : NAME
+                  50
+            Label : EXPRESSION
+              31
+              Label : NEW
+                50
+            Label : EXPRESSION
+              53
               Label : CLASS
                 54
               Label : VARIABLE
-                51
+                52
             Label : EXPRESSION
-              52
+              53
               Label : CLASS
                 55
               Label : VARIABLE
-                51
+                52
+            Label : EXPRESSION
+              53
+              Label : CLASS
+                56
+              Label : VARIABLE
+                52
           Label : NAME
             5

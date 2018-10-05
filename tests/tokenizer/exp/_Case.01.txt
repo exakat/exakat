@@ -2,7 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    6
+    7
+    Label : DEFINITION
+      6
     Label : DEFINITION
       6
   Label : FILE
@@ -31,5 +33,3 @@ Label : PROJECT
                     12
           Label : CONDITION
             6
-            Label : DEFINITION
-              6

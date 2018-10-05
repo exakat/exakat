@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,24 +18,24 @@ Label : PROJECT
           Label : CONDITION
             8
             Label : NOT
-              14
+              15
               Label : METHOD
-                10
+                11
                 Label : ARGUMENT
-                  12
+                  13
                 Label : NAME
-                  10
+                  11
               Label : OBJECT
                 9
           Label : THEN
             3
             Label : EXPRESSION
-              15
+              16
               Label : ARGUMENT
-                16
+                17
                 Label : ARGUMENT
-                  18
+                  19
                 Label : NAME
-                  16
+                  17
         Label : EXPRESSION
-          20
+          21

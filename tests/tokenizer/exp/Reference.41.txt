@@ -1,6 +1,20 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,19 +28,19 @@ Label : PROJECT
             Label : CAST
               7
               Label : CODE
-                13
+                14
                 Label : LEFT
-                  12
+                  13
                   Label : METHOD
-                    9
+                    10
                     Label : ARGUMENT
-                      10
+                      11
                     Label : NAME
-                      9
+                      10
                   Label : OBJECT
                     8
                 Label : RIGHT
-                  14
+                  15
         Label : EXPRESSION
           5
           Label : RETURN
@@ -34,19 +48,19 @@ Label : PROJECT
             Label : CAST
               7
               Label : CODE
-                13
+                14
                 Label : LEFT
-                  16
+                  17
                   Label : CLASS
-                    15
+                    16
                   Label : METHOD
-                    9
+                    10
                     Label : ARGUMENT
-                      10
+                      11
                     Label : NAME
-                      9
+                      10
                 Label : RIGHT
-                  14
+                  15
         Label : EXPRESSION
           5
           Label : RETURN
@@ -54,16 +68,16 @@ Label : PROJECT
             Label : CAST
               7
               Label : CODE
-                13
+                14
                 Label : LEFT
-                  16
+                  17
                   Label : CLASS
                     8
                   Label : METHOD
-                    9
+                    10
                     Label : ARGUMENT
-                      10
+                      11
                     Label : NAME
-                      9
+                      10
                 Label : RIGHT
-                  14
+                  15

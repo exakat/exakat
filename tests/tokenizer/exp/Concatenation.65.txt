@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,16 +18,16 @@ Label : PROJECT
         Label : EXPRESSION
           4
           Label : ARGUMENT
-            6
+            7
             Label : CONCAT
               5
             Label : CONCAT
-              7
+              8
           Label : NAME
             4
         Label : EXPRESSION
-          9
+          10
         Label : EXPRESSION
-          12
+          13
           Label : POSTPLUSPLUS
-            11
+            12

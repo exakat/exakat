@@ -1,6 +1,16 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,7 +40,7 @@ Label : PROJECT
               Label : EXPRESSION
                 7
             Label : CLASS
-              13
+              14
             Label : VARIABLE
               12
           Label : CATCH
@@ -40,7 +50,7 @@ Label : PROJECT
               Label : EXPRESSION
                 7
             Label : CLASS
-              15
+              16
             Label : VARIABLE
               12
           Label : CATCH
@@ -50,6 +60,6 @@ Label : PROJECT
               Label : EXPRESSION
                 7
             Label : CLASS
-              17
+              18
             Label : VARIABLE
               12

@@ -1,6 +1,26 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      22
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,42 +30,42 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            11
+            12
             Label : METHOD
-              7
+              8
               Label : ARGUMENT
-                9
+                10
               Label : NAME
-                7
+                8
             Label : OBJECT
               6
           Label : THEN
             3
             Label : EXPRESSION
-              12
+              13
               Label : BLOCK
-                13
+                14
                 Label : EXPRESSION
-                  15
+                  16
                   Label : POSTPLUSPLUS
-                    14
+                    15
               Label : CATCH
-                16
+                17
                 Label : BLOCK
-                  13
+                  14
                   Label : EXPRESSION
-                    9
+                    10
                 Label : CLASS
-                  17
+                  18
                 Label : VARIABLE
-                  19
+                  20
         Label : EXPRESSION
           5
           Label : CONDITION
-            20
+            21
           Label : THEN
-            13
+            14
             Label : EXPRESSION
-              15
+              16
               Label : POSTPLUSPLUS
-                21
+                22

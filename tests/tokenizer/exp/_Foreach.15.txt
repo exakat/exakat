@@ -1,6 +1,22 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,16 +26,16 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            10
+            11
             Label : EXPRESSION
-              12
+              13
               Label : POSTPLUSPLUS
-                11
+                12
           Label : SOURCE
             6
           Label : VALUE
-            8
+            9
             Label : INDEX
-              7
+              8
             Label : VALUE
-              9
+              10

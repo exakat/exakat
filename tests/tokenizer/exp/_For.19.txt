@@ -1,6 +1,38 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      24
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      30
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      33
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,72 +40,72 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            9
+            10
             Label : CONCAT
-              7
+              8
             Label : CONCAT
-              10
+              11
               Label : CAST
-                11
+                12
         Label : EXPRESSION
-          12
+          13
           Label : BLOCK
             3
             Label : EXPRESSION
-              15
+              16
           Label : FINAL
             3
             Label : EXPRESSION
-              20
+              21
               Label : LEFT
-                17
+                18
                 Label : ARGUMENT
-                  19
+                  20
                 Label : NAME
-                  17
+                  18
               Label : RIGHT
-                21
+                22
                 Label : ARGUMENT
-                  23
+                  24
                 Label : NAME
-                  21
+                  22
           Label : INCREMENT
             3
             Label : EXPRESSION
-              6
+              7
               Label : LEFT
-                24
-                Label : APPEND
-                  24
-              Label : RIGHT
                 25
+                Label : APPEND
+                  25
+              Label : RIGHT
+                26
                 Label : ARGUMENT
-                  27
-                  Label : ARGUMENT
-                    29
+                  28
                   Label : ARGUMENT
                     30
-                    Label : ARGUMENT
-                      32
-                    Label : NAME
-                      30
                   Label : ARGUMENT
-                    33
+                    31
+                    Label : ARGUMENT
+                      33
+                    Label : NAME
+                      31
+                  Label : ARGUMENT
+                    34
                   Label : NAME
-                    27
+                    28
                 Label : NAME
-                  25
+                  26
           Label : INIT
             3
             Label : EXPRESSION
-              6
+              7
               Label : LEFT
-                13
-              Label : RIGHT
                 14
+              Label : RIGHT
+                15
                 Label : ARGUMENT
-                  15
+                  16

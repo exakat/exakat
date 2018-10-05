@@ -1,6 +1,34 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      28
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,62 +38,62 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            8
+            9
             Label : EXPRESSION
-              9
+              10
               Label : CONDITION
-                10
+                11
                 Label : NOT
-                  11
+                  12
                   Label : ARGUMENT
-                    13
+                    14
                     Label : INDEX
-                      14
+                      15
                     Label : VARIABLE
-                      12
+                      13
               Label : THEN
                 3
                 Label : EXPRESSION
-                  15
+                  16
                   Label : CONTINUE
-                    16
+                    17
             Label : EXPRESSION
-              18
+              19
               Label : BLOCK
-                8
+                9
                 Label : EXPRESSION
-                  20
+                  21
                   Label : POSTPLUSPLUS
-                    19
+                    20
               Label : CATCH
-                21
+                22
                 Label : BLOCK
-                  8
+                  9
                   Label : EXPRESSION
-                    15
+                    16
                     Label : CONTINUE
-                      16
+                      17
                 Label : CLASS
-                  22
+                  23
                 Label : VARIABLE
-                  24
+                  25
             Label : EXPRESSION
-              20
+              21
               Label : POSTPLUSPLUS
                 6
             Label : EXPRESSION
-              25
+              26
               Label : LEFT
-                7
+                8
               Label : RIGHT
-                26
-            Label : EXPRESSION
-              25
-              Label : LEFT
                 27
-              Label : RIGHT
+            Label : EXPRESSION
+              26
+              Label : LEFT
                 28
+              Label : RIGHT
+                29
           Label : SOURCE
             6
           Label : VALUE
-            7
+            8

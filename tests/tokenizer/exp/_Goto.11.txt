@@ -1,6 +1,16 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      19
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,44 +20,44 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CASES
-            8
+            9
             Label : EXPRESSION
-              9
+              10
               Label : CASE
-                10
+                11
               Label : CODE
                 3
                 Label : EXPRESSION
-                  12
-                  Label : DEFINITION
-                    13
-                    Label : GOTO
-                      11
-                  Label : GOTOLABEL
-                    11
-                Label : EXPRESSION
                   13
-                  Label : GOTO
-                    11
+                  Label : DEFINITION
+                    14
+                    Label : GOTO
+                      12
+                  Label : GOTOLABEL
+                    12
                 Label : EXPRESSION
                   14
+                  Label : GOTO
+                    12
+                Label : EXPRESSION
+                  15
                   Label : BREAK
-                    15
+                    16
           Label : CONDITION
-            7
+            8
             Label : POSTPLUSPLUS
               6
         Label : EXPRESSION
-          17
+          18
           Label : CONDITION
             6
           Label : ELSE
-            23
+            24
           Label : THEN
-            17
+            18
             Label : CONDITION
-              18
-            Label : ELSE
-              21
-            Label : THEN
               19
+            Label : ELSE
+              22
+            Label : THEN
+              20

@@ -1,6 +1,24 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,52 +28,52 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CASES
-            7
+            8
             Label : EXPRESSION
-              8
+              9
               Label : CODE
                 3
                 Label : EXPRESSION
-                  9
+                  10
                   Label : EXPRESSION
-                    11
-                    Label : POSTPLUSPLUS
-                      10
-                Label : EXPRESSION
-                  11
-                  Label : POSTPLUSPLUS
                     12
+                    Label : POSTPLUSPLUS
+                      11
+                Label : EXPRESSION
+                  12
+                  Label : POSTPLUSPLUS
+                    13
             Label : EXPRESSION
-              13
+              14
               Label : CASE
-                14
+                15
               Label : CODE
                 3
                 Label : EXPRESSION
-                  9
+                  10
                   Label : EXPRESSION
-                    11
+                    12
                     Label : POSTPLUSPLUS
-                      15
+                      16
                 Label : EXPRESSION
-                  16
+                  17
                   Label : BREAK
-                    17
+                    18
             Label : EXPRESSION
-              19
+              20
               Label : CASE
-                20
+                21
               Label : CODE
                 3
                 Label : EXPRESSION
-                  9
+                  10
                   Label : EXPRESSION
-                    11
+                    12
                     Label : POSTPLUSPLUS
-                      12
+                      13
                 Label : EXPRESSION
-                  16
+                  17
                   Label : BREAK
-                    17
+                    18
           Label : CONDITION
             6

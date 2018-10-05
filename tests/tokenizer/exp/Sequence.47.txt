@@ -1,6 +1,26 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      19
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      28
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,44 +30,44 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CASES
-            10
+            11
             Label : EXPRESSION
-              11
+              12
               Label : CASE
-                13
+                14
               Label : CODE
                 3
                 Label : EXPRESSION
-                  15
+                  16
                   Label : CONDITION
-                    16
-                  Label : THEN
                     17
+                  Label : THEN
+                    18
                     Label : EXPRESSION
-                      19
+                      20
                       Label : POSTPLUSPLUS
-                        18
+                        19
+                Label : EXPRESSION
+                  21
+                  Label : BREAK
+                    22
+            Label : EXPRESSION
+              24
+              Label : CASE
+                26
+              Label : CODE
+                3
                 Label : EXPRESSION
                   20
-                  Label : BREAK
-                    21
-            Label : EXPRESSION
-              23
-              Label : CASE
-                25
-              Label : CODE
-                3
-                Label : EXPRESSION
-                  19
                   Label : POSTPLUSPLUS
-                    27
+                    28
           Label : CONDITION
-            7
+            8
             Label : INDEX
-              9
+              10
             Label : VARIABLE
-              7
+              8
               Label : INDEX
-                8
+                9
               Label : VARIABLE
                 6

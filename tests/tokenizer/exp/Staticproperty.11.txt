@@ -1,6 +1,26 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      22
   Label : FILE
     3
     Label : EXPRESSION
@@ -22,13 +42,13 @@ Label : PROJECT
               Label : DEFAULT
                 11
               Label : DEFINITION
-                19
+                20
                 Label : CLASS
                   6
                 Label : MEMBER
                   9
               Label : DEFINITION
-                19
+                20
                 Label : CLASS
                   6
                 Label : MEMBER
@@ -48,9 +68,9 @@ Label : PROJECT
         Label : EXPRESSION
           18
           Label : ARGUMENT
-            19
+            20
             Label : CLASS
-              19
+              20
               Label : CLASS
                 6
               Label : MEMBER
@@ -60,13 +80,13 @@ Label : PROJECT
         Label : EXPRESSION
           18
           Label : ARGUMENT
-            19
+            20
             Label : CLASS
-              19
+              20
               Label : CLASS
-                19
+                20
                 Label : CLASS
-                  19
+                  20
                   Label : CLASS
                     6
                   Label : MEMBER
@@ -74,6 +94,6 @@ Label : PROJECT
                 Label : MEMBER
                   15
               Label : MEMBER
-                20
+                21
             Label : MEMBER
-              21
+              22

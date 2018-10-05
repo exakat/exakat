@@ -1,6 +1,34 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      23
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,54 +36,54 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
         Label : EXPRESSION
-          8
+          9
           Label : BLOCK
-            17
+            18
             Label : EXPRESSION
-              18
+              19
               Label : LEFT
                 5
               Label : RIGHT
-                21
+                22
                 Label : LEFT
-                  20
+                  21
                   Label : MEMBER
-                    14
+                    15
                   Label : OBJECT
-                    19
+                    20
                 Label : RIGHT
-                  16
+                  17
           Label : SOURCE
-            13
+            14
             Label : CLASS
-              9
+              10
             Label : METHOD
-              11
+              12
           Label : VALUE
-            15
+            16
             Label : INDEX
-              14
+              15
             Label : VALUE
-              16
+              17
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            22
-          Label : RIGHT
             23
+          Label : RIGHT
+            24
             Label : ARGUMENT
               5
             Label : ARGUMENT
-              7
+              8
             Label : ARGUMENT
-              25
+              26
             Label : ARGUMENT
-              27
+              28
             Label : NAME
-              23
+              24

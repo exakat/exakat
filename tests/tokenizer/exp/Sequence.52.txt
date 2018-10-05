@@ -1,6 +1,30 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      27
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      33
   Label : FILE
     3
     Label : EXPRESSION
@@ -16,37 +40,37 @@ Label : PROJECT
               Label : ARGUMENT
                 8
           Label : ELSE
-            15
+            16
             Label : CONDITION
               6
               Label : NOT
                 7
                 Label : ARGUMENT
-                  16
+                  17
             Label : THEN
               3
               Label : EXPRESSION
-                17
+                18
               Label : EXPRESSION
-                12
+                13
                 Label : ARGUMENT
-                  19
+                  20
               Label : EXPRESSION
-                20
+                21
           Label : THEN
             3
             Label : EXPRESSION
-              9
-            Label : EXPRESSION
-              12
-              Label : ARGUMENT
-                11
+              10
             Label : EXPRESSION
               13
+              Label : ARGUMENT
+                12
+            Label : EXPRESSION
+              14
         Label : EXPRESSION
-          22
+          23
         Label : EXPRESSION
-          24
+          25
         Label : EXPRESSION
           5
           Label : CONDITION
@@ -54,24 +78,24 @@ Label : PROJECT
             Label : NOT
               7
               Label : ARGUMENT
-                26
+                27
           Label : THEN
             3
             Label : EXPRESSION
-              27
+              28
             Label : EXPRESSION
-              12
+              13
               Label : ARGUMENT
-                31
+                32
                 Label : CONCAT
-                  29
+                  30
                   Label : ARGUMENT
-                    30
+                    31
                   Label : NAME
-                    29
+                    30
                 Label : CONCAT
-                  32
+                  33
             Label : EXPRESSION
-              33
+              34
         Label : EXPRESSION
-          22
+          23

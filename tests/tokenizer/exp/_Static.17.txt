@@ -18,23 +18,27 @@ Label : PROJECT
             Label : BLOCK
               12
               Label : EXPRESSION
-                16
+                17
                 Label : LEFT
                   14
                   Label : APPEND
-                    15
+                    16
                     Label : CLASS
                       13
                     Label : MEMBER
                       14
                 Label : RIGHT
-                  17
+                  18
                   Label : NAME
-                    17
+                    18
                   Label : ARGUMENT
-                    19
+                    20
                   Label : ARGUMENT
-                    21
+                    22
+            Label : DEFINITION
+              15
+              Label : DEFINITION
+                14
             Label : NAME
               8
           Label : NAME

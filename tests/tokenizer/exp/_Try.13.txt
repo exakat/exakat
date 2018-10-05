@@ -1,6 +1,34 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      7
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      32
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      39
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      44
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,78 +40,78 @@ Label : PROJECT
           Label : BLOCK
             6
             Label : EXPRESSION
-              8
+              9
               Label : LEFT
                 7
               Label : RIGHT
-                10
+                11
                 Label : INDEX
-                  11
+                  12
                 Label : VARIABLE
-                  9
+                  10
           Label : CATCH
-            13
+            14
             Label : BLOCK
               6
               Label : EXPRESSION
-                17
+                18
                 Label : RETURN
-                  18
+                  19
             Label : CLASS
-              14
+              15
             Label : VARIABLE
-              16
+              17
         Label : EXPRESSION
-          34
+          35
           Label : METHOD
-            23
+            24
             Label : NAME
-              23
+              24
             Label : ARGUMENT
-              25
+              26
             Label : ARGUMENT
-              27
+              28
               Label : ARGUMENT
-                30
+                31
                 Label : INDEX
-                  28
+                  29
                 Label : VALUE
-                  35
+                  36
                   Label : CONCAT
-                    34
+                    35
                     Label : METHOD
+                      33
+                      Label : ARGUMENT
+                        19
+                      Label : NAME
+                        33
+                    Label : OBJECT
                       32
-                      Label : ARGUMENT
-                        18
-                      Label : NAME
-                        32
-                    Label : OBJECT
-                      31
                   Label : CONCAT
-                    36
+                    37
                   Label : CONCAT
-                    34
+                    35
                     Label : METHOD
+                      40
+                      Label : ARGUMENT
+                        42
+                      Label : NAME
+                        40
+                    Label : OBJECT
                       39
-                      Label : ARGUMENT
-                        41
-                      Label : NAME
-                        39
-                    Label : OBJECT
-                      38
                   Label : CONCAT
-                    34
+                    35
                     Label : METHOD
-                      44
+                      45
                       Label : ARGUMENT
-                        46
+                        47
                       Label : NAME
-                        44
+                        45
                     Label : OBJECT
-                      43
+                      44
           Label : OBJECT
-            10
+            11
             Label : INDEX
-              21
+              22
             Label : VARIABLE
-              20
+              21

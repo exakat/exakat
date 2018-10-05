@@ -1,6 +1,18 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -28,13 +40,13 @@ Label : PROJECT
               Label : RETURN
                 8
             Label : EXPRESSION
-              12
+              13
               Label : POSTPLUSPLUS
                 11
         Label : EXPRESSION
           5
           Label : CONDITION
-            13
+            14
           Label : THEN
             3
             Label : EXPRESSION
@@ -42,15 +54,15 @@ Label : PROJECT
               Label : RETURN
                 8
             Label : EXPRESSION
-              14
+              15
             Label : EXPRESSION
-              12
+              13
               Label : POSTPLUSPLUS
-                16
+                17
         Label : EXPRESSION
           5
           Label : CONDITION
-            17
+            18
           Label : THEN
             3
             Label : EXPRESSION
@@ -58,8 +70,8 @@ Label : PROJECT
               Label : RETURN
                 8
             Label : EXPRESSION
-              14
+              15
             Label : EXPRESSION
-              12
+              13
               Label : POSTPLUSPLUS
-                18
+                19

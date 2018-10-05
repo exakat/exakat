@@ -1,6 +1,66 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      7
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      19
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      24
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      28
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      31
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      39
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      46
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      55
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      68
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      72
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      78
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      87
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,204 +70,204 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            11
+            12
             Label : LEFT
               6
               Label : ARGUMENT
-                8
+                9
                 Label : INDEX
-                  9
+                  10
                 Label : VARIABLE
                   7
             Label : RIGHT
-              11
+              12
               Label : LEFT
                 6
                 Label : ARGUMENT
-                  8
+                  9
                   Label : INDEX
-                    13
+                    14
                   Label : VARIABLE
-                    12
+                    13
               Label : RIGHT
                 6
                 Label : ARGUMENT
-                  8
+                  9
                   Label : INDEX
-                    16
+                    17
                   Label : VARIABLE
-                    15
+                    16
           Label : THEN
             3
             Label : EXPRESSION
               5
               Label : CONDITION
-                11
+                12
                 Label : LEFT
-                  22
-                  Label : LEFT
-                    21
-                    Label : MEMBER
-                      19
-                    Label : OBJECT
-                      18
-                  Label : RIGHT
-                    23
-                Label : RIGHT
-                  11
+                  23
                   Label : LEFT
                     22
-                    Label : LEFT
-                      21
-                      Label : MEMBER
-                        25
-                      Label : OBJECT
-                        24
-                    Label : RIGHT
-                      27
-                  Label : RIGHT
-                    11
-                    Label : LEFT
-                      28
-                      Label : NAME
-                        28
-                      Label : ARGUMENT
-                        21
-                        Label : MEMBER
-                          31
-                        Label : OBJECT
-                          30
-                      Label : ARGUMENT
-                        33
-                        Label : ARGUMENT
-                          34
-                        Label : ARGUMENT
-                          36
-                    Label : RIGHT
-                      21
-                      Label : METHOD
-                        39
-                        Label : NAME
-                          39
-                        Label : ARGUMENT
-                          41
-                        Label : ARGUMENT
-                          43
-                      Label : OBJECT
-                        38
-              Label : ELSE
-                70
-                Label : CONDITION
-                  74
-                  Label : LEFT
-                    21
                     Label : MEMBER
-                      72
+                      20
                     Label : OBJECT
-                      71
+                      19
                   Label : RIGHT
-                    75
+                    24
+                Label : RIGHT
+                  12
+                  Label : LEFT
+                    23
+                    Label : LEFT
+                      22
+                      Label : MEMBER
+                        26
+                      Label : OBJECT
+                        25
+                    Label : RIGHT
+                      28
+                  Label : RIGHT
+                    12
+                    Label : LEFT
+                      29
+                      Label : NAME
+                        29
+                      Label : ARGUMENT
+                        22
+                        Label : MEMBER
+                          32
+                        Label : OBJECT
+                          31
+                      Label : ARGUMENT
+                        34
+                        Label : ARGUMENT
+                          35
+                        Label : ARGUMENT
+                          37
+                    Label : RIGHT
+                      22
+                      Label : METHOD
+                        40
+                        Label : NAME
+                          40
+                        Label : ARGUMENT
+                          42
+                        Label : ARGUMENT
+                          44
+                      Label : OBJECT
+                        39
+              Label : ELSE
+                71
+                Label : CONDITION
+                  75
+                  Label : LEFT
+                    22
+                    Label : MEMBER
+                      73
+                    Label : OBJECT
+                      72
+                  Label : RIGHT
+                    76
                 Label : ELSE
                   3
                   Label : EXPRESSION
-                    21
+                    22
                     Label : METHOD
-                      87
+                      88
                       Label : ARGUMENT
-                        89
+                        90
                         Label : NAME
-                          89
+                          90
                         Label : ARGUMENT
-                          91
+                          92
                         Label : ARGUMENT
-                          93
+                          94
                       Label : NAME
-                        87
+                        88
                     Label : OBJECT
-                      86
+                      87
                 Label : THEN
                   3
                   Label : EXPRESSION
-                    21
+                    22
                     Label : METHOD
-                      78
+                      79
                       Label : ARGUMENT
-                        80
+                        81
                         Label : NAME
-                          80
+                          81
                         Label : ARGUMENT
-                          82
+                          83
                         Label : ARGUMENT
-                          84
+                          85
                       Label : NAME
-                        78
+                        79
                     Label : OBJECT
-                      77
+                      78
               Label : THEN
                 3
                 Label : EXPRESSION
-                  21
+                  22
                   Label : METHOD
+                    47
+                    Label : ARGUMENT
+                      49
+                      Label : NAME
+                        49
+                      Label : ARGUMENT
+                        51
+                      Label : ARGUMENT
+                        53
+                    Label : NAME
+                      47
+                  Label : OBJECT
                     46
-                    Label : ARGUMENT
-                      48
-                      Label : NAME
-                        48
-                      Label : ARGUMENT
-                        50
-                      Label : ARGUMENT
-                        52
-                    Label : NAME
-                      46
-                  Label : OBJECT
-                    45
                 Label : EXPRESSION
-                  21
+                  22
                   Label : METHOD
-                    55
+                    56
                     Label : ARGUMENT
-                      57
+                      58
                       Label : NAME
-                        57
+                        58
                       Label : ARGUMENT
-                        59
+                        60
                       Label : ARGUMENT
-                        61
+                        62
                     Label : NAME
-                      55
+                      56
                   Label : OBJECT
-                    54
+                    55
                 Label : EXPRESSION
-                  63
+                  64
                   Label : NAME
-                    63
+                    64
                   Label : ARGUMENT
-                    65
+                    66
                   Label : ARGUMENT
-                    21
+                    22
                     Label : MEMBER
-                      68
+                      69
                     Label : OBJECT
-                      67
+                      68
             Label : EXPRESSION
-              95
+              96
             Label : EXPRESSION
-              97
+              98
               Label : ARGUMENT
-                99
+                100
                 Label : ARGUMENT
-                  101
+                  102
                   Label : ARGUMENT
-                    103
+                    104
                   Label : NAME
-                    101
+                    102
                 Label : NAME
-                  99
+                  100
               Label : NAME
-                97
+                98
             Label : EXPRESSION
-              105
+              106
               Label : ARGUMENT
-                95
+                96
         Label : EXPRESSION
-          95
+          96

@@ -1,6 +1,30 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,50 +38,50 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              12
+              13
             Label : EXPRESSION
-              14
+              15
               Label : ARGUMENT
-                18
+                19
                 Label : METHOD
-                  16
+                  17
                   Label : ARGUMENT
-                    18
+                    19
                     Label : METHOD
-                      17
+                      18
                       Label : ARGUMENT
-                        9
+                        10
                       Label : NAME
-                        17
+                        18
                     Label : OBJECT
-                      15
+                      16
                   Label : NAME
-                    16
+                    17
                 Label : OBJECT
-                  15
-            Label : EXPRESSION
-              19
-            Label : EXPRESSION
-              14
-              Label : ARGUMENT
-                18
-                Label : METHOD
                   16
-                  Label : ARGUMENT
-                    9
-                  Label : NAME
-                    16
-                Label : OBJECT
-                  15
             Label : EXPRESSION
-              21
+              20
+            Label : EXPRESSION
+              15
+              Label : ARGUMENT
+                19
+                Label : METHOD
+                  17
+                  Label : ARGUMENT
+                    10
+                  Label : NAME
+                    17
+                Label : OBJECT
+                  16
+            Label : EXPRESSION
+              22
           Label : SOURCE
             8
           Label : VALUE
-            10
+            11
             Label : INDEX
-              9
+              10
             Label : VALUE
-              11
+              12
     Label : EXPRESSION
-      23
+      24

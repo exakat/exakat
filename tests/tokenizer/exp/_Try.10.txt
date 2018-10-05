@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      10
   Label : FILE
     3
     Label : EXPRESSION
@@ -20,6 +24,6 @@ Label : PROJECT
                 Label : CONCAT
                   10
                 Label : CONCAT
-                  11
+                  12
               Label : NAME
                 7

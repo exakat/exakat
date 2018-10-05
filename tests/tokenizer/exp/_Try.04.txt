@@ -1,6 +1,18 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,44 +20,44 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
         Label : EXPRESSION
-          8
+          9
           Label : BLOCK
-            9
+            10
             Label : EXPRESSION
+              11
+          Label : CATCH
+            13
+            Label : BLOCK
               10
-          Label : CATCH
-            12
-            Label : BLOCK
-              9
               Label : EXPRESSION
-                10
+                11
             Label : CLASS
-              13
+              14
             Label : VARIABLE
-              15
-          Label : CATCH
-            12
-            Label : BLOCK
-              9
-              Label : EXPRESSION
-                10
-            Label : CLASS
               16
-            Label : VARIABLE
-              15
           Label : CATCH
-            12
+            13
             Label : BLOCK
-              9
+              10
               Label : EXPRESSION
-                10
+                11
             Label : CLASS
-              18
+              17
             Label : VARIABLE
-              15
+              16
+          Label : CATCH
+            13
+            Label : BLOCK
+              10
+              Label : EXPRESSION
+                11
+            Label : CLASS
+              19
+            Label : VARIABLE
+              16

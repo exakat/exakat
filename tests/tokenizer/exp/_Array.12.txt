@@ -1,6 +1,34 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,46 +36,46 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          13
+          14
           Label : LEFT
-            6
+            7
             Label : INDEX
-              11
+              12
               Label : CONCAT
-                10
+                11
                 Label : METHOD
-                  8
+                  9
                   Label : ARGUMENT
-                    9
+                    10
                   Label : NAME
-                    8
+                    9
                 Label : OBJECT
-                  7
+                  8
               Label : CONCAT
-                12
+                13
             Label : VARIABLE
               5
               Label : APPEND
                 5
           Label : RIGHT
-            14
+            15
             Label : ARGUMENT
-              17
+              18
               Label : LEFT
-                6
+                7
                 Label : INDEX
+                  17
+                Label : VARIABLE
                   16
-                Label : VARIABLE
-                  15
               Label : RIGHT
-                18
+                19
             Label : ARGUMENT
-              21
+              22
               Label : LEFT
-                6
+                7
                 Label : INDEX
-                  20
+                  21
                 Label : VARIABLE
-                  19
+                  20
               Label : RIGHT
-                18
+                19

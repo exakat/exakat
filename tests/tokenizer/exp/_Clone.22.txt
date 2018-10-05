@@ -1,6 +1,16 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -18,14 +28,14 @@ Label : PROJECT
           Label : THEN
             3
             Label : EXPRESSION
-              10
+              11
               Label : LEFT
-                9
+                10
               Label : RIGHT
-                11
+                12
                 Label : CAST
-                  12
+                  13
                   Label : CLONE
-                    13
+                    14
                     Label : CAST
                       8

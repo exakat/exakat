@@ -1,6 +1,22 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      25
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,58 +24,58 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          29
+          30
           Label : LEFT
-            9
+            10
             Label : LEFT
-              8
+              9
               Label : MEMBER
-                6
+                7
               Label : OBJECT
                 5
             Label : RIGHT
-              10
+              11
               Label : NEW
-                11
+                12
                 Label : ARGUMENT
-                  16
+                  17
                   Label : INDEX
-                    17
+                    18
                   Label : VARIABLE
-                    8
+                    9
                     Label : MEMBER
+                      15
+                    Label : OBJECT
                       14
-                    Label : OBJECT
-                      13
                 Label : ARGUMENT
-                  16
+                  17
                   Label : INDEX
-                    22
+                    23
                   Label : VARIABLE
-                    8
+                    9
                     Label : MEMBER
+                      21
+                    Label : OBJECT
                       20
-                    Label : OBJECT
-                      19
                 Label : ARGUMENT
-                  16
+                  17
                   Label : INDEX
-                    27
+                    28
                   Label : VARIABLE
-                    8
+                    9
                     Label : MEMBER
-                      25
+                      26
                     Label : OBJECT
-                      24
+                      25
                 Label : NAME
-                  11
+                  12
           Label : RIGHT
-            36
+            37
             Label : CLASS
-              30
+              31
             Label : METHOD
-              32
+              33
               Label : ARGUMENT
-                34
+                35
               Label : NAME
-                32
+                33

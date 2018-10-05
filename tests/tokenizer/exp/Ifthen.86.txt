@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      27
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,76 +18,76 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            12
+            13
             Label : MEMBER
-              10
+              11
             Label : OBJECT
-              7
+              8
               Label : INDEX
-                8
+                9
               Label : VARIABLE
                 6
           Label : THEN
             3
             Label : EXPRESSION
-              13
+              14
               Label : ARGUMENT
-                27
+                28
                 Label : CLASS
-                  14
+                  15
                 Label : METHOD
-                  16
+                  17
                   Label : ARGUMENT
-                    18
+                    19
                   Label : ARGUMENT
-                    27
+                    28
                     Label : CLASS
-                      20
+                      21
                     Label : METHOD
-                      22
+                      23
                       Label : ARGUMENT
-                        7
+                        8
                         Label : INDEX
-                          30
+                          31
                         Label : VARIABLE
-                          7
+                          8
                           Label : INDEX
-                            28
+                            29
                           Label : VARIABLE
-                            27
+                            28
                             Label : CLASS
-                              24
+                              25
                             Label : MEMBER
-                              26
+                              27
                       Label : ARGUMENT
-                        32
+                        33
                       Label : ARGUMENT
-                        34
+                        35
                       Label : NAME
-                        22
+                        23
                   Label : ARGUMENT
-                    36
+                    37
                     Label : ARGUMENT
-                      39
+                      40
                       Label : INDEX
-                        37
+                        38
                       Label : VALUE
-                        40
+                        41
                     Label : ARGUMENT
-                      39
+                      40
                       Label : INDEX
-                        42
+                        43
                       Label : VALUE
-                        44
+                        45
                     Label : ARGUMENT
-                      39
+                      40
                       Label : INDEX
-                        46
+                        47
                       Label : VALUE
-                        48
+                        49
                   Label : NAME
-                    16
+                    17
             Label : EXPRESSION
-              50
+              51
     Label : EXPRESSION
-      52
+      53

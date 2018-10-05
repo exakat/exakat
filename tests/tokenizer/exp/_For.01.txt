@@ -2,9 +2,13 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    14
+    7
+    Label : DEFINITION
+      14
   Label : DEFINITION
-    6
+    7
+    Label : DEFINITION
+      6
     Label : DEFINITION
       6
     Label : DEFINITION
@@ -43,9 +47,5 @@ Label : PROJECT
               8
               Label : LEFT
                 6
-                Label : DEFINITION
-                  6
-                Label : DEFINITION
-                  6
               Label : RIGHT
                 9

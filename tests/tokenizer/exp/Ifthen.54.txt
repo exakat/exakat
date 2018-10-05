@@ -1,6 +1,28 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,19 +32,19 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            8
+            9
             Label : MEMBER
-              7
+              8
             Label : OBJECT
               6
           Label : ELSE
             3
             Label : EXPRESSION
-              10
+              11
               Label : LEFT
-                15
-              Label : RIGHT
                 16
+              Label : RIGHT
+                17
           Label : THEN
             3
             Label : EXPRESSION
@@ -30,18 +52,18 @@ Label : PROJECT
               Label : CONDITION
                 6
               Label : ELSE
-                12
+                13
                 Label : EXPRESSION
-                  10
+                  11
                   Label : LEFT
-                    13
-                  Label : RIGHT
                     14
+                  Label : RIGHT
+                    15
               Label : THEN
                 3
                 Label : EXPRESSION
-                  10
+                  11
                   Label : LEFT
-                    9
+                    10
                   Label : RIGHT
-                    11
+                    12

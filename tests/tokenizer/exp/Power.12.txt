@@ -2,11 +2,15 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    8
+    Label : DEFINITION
+      12
     Label : DEFINITION
       12
   Label : DEFINITION
-    7
+    8
+    Label : DEFINITION
+      7
     Label : DEFINITION
       7
   Label : FILE
@@ -23,8 +27,6 @@ Label : PROJECT
               5
             Label : RIGHT
               7
-              Label : DEFINITION
-                7
           Label : ELSE
             11
           Label : THEN
@@ -33,8 +35,6 @@ Label : PROJECT
           9
           Label : CONDITION
             12
-            Label : DEFINITION
-              12
           Label : ELSE
             9
             Label : CONDITION

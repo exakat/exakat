@@ -1,6 +1,42 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      23
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      26
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      27
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,66 +46,66 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CASES
-            7
+            8
             Label : EXPRESSION
-              8
+              9
               Label : CASE
-                9
+                10
               Label : CODE
                 3
                 Label : EXPRESSION
-                  11
+                  12
                   Label : LEFT
-                    10
+                    11
                   Label : RIGHT
-                    12
-                Label : EXPRESSION
-                  11
-                  Label : LEFT
                     13
-                  Label : RIGHT
-                    14
-                    Label : ARGUMENT
-                      15
                 Label : EXPRESSION
-                  11
+                  12
                   Label : LEFT
-                    17
-                  Label : RIGHT
                     14
+                  Label : RIGHT
+                    15
                     Label : ARGUMENT
-                      15
+                      16
                 Label : EXPRESSION
-                  18
+                  12
+                  Label : LEFT
+                    18
+                  Label : RIGHT
+                    15
+                    Label : ARGUMENT
+                      16
+                Label : EXPRESSION
+                  19
                   Label : BLOCK
-                    23
+                    24
                     Label : EXPRESSION
-                      15
+                      16
                   Label : SOURCE
-                    19
+                    20
                   Label : VALUE
-                    21
+                    22
                     Label : INDEX
-                      20
+                      21
                     Label : VALUE
-                      22
+                      23
                 Label : EXPRESSION
-                  24
+                  25
                   Label : CONDITION
-                    25
+                    26
                   Label : THEN
-                    23
+                    24
                     Label : EXPRESSION
-                      27
+                      28
                       Label : POSTPLUSPLUS
-                        26
+                        27
             Label : EXPRESSION
-              28
+              29
               Label : CODE
                 3
                 Label : EXPRESSION
-                  29
+                  30
                   Label : RETURN
-                    30
+                    31
           Label : CONDITION
             6

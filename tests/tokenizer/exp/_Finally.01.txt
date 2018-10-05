@@ -17,10 +17,6 @@ Label : PROJECT
               12
               Label : LEFT
                 10
-                Label : DEFINITION
-                  10
-                Label : DEFINITION
-                  10
               Label : RIGHT
                 13
                 Label : ARGUMENT
@@ -35,8 +31,6 @@ Label : PROJECT
                   12
                   Label : LEFT
                     16
-                    Label : DEFINITION
-                      16
                   Label : RIGHT
                     17
                     Label : ARGUMENT
@@ -73,34 +67,6 @@ Label : PROJECT
                   21
                 Label : VARIABLE
                   23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
-                  Label : DEFINITION
-                    23
               Label : CATCH
                 20
                 Label : BLOCK
@@ -216,17 +182,23 @@ Label : PROJECT
                     Label : NAME
                       38
           Label : DEFINITION
-            10
+            11
+            Label : DEFINITION
+              10
             Label : DEFINITION
               10
             Label : DEFINITION
               10
           Label : DEFINITION
-            16
+            11
+            Label : DEFINITION
+              16
             Label : DEFINITION
               16
           Label : DEFINITION
-            23
+            11
+            Label : DEFINITION
+              23
             Label : DEFINITION
               23
             Label : DEFINITION

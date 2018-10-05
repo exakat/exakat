@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,14 +22,14 @@ Label : PROJECT
             Label : LEFT
               6
             Label : RIGHT
-              10
+              11
               Label : ARGUMENT
                 8
                 Label : CODE
                   9
           Label : THEN
-            11
+            12
             Label : EXPRESSION
-              13
+              14
               Label : POSTPLUSPLUS
-                12
+                13

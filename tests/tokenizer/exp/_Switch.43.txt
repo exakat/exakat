@@ -1,6 +1,26 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      22
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      24
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      27
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,62 +30,62 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CASES
-            12
+            13
             Label : EXPRESSION
-              13
+              14
               Label : CASE
-                15
+                16
               Label : CODE
                 3
                 Label : EXPRESSION
                   5
                   Label : CASES
+                    13
+                  Label : CONDITION
                     12
-                  Label : CONDITION
-                    11
                     Label : METHOD
-                      18
+                      19
                       Label : ARGUMENT
-                        9
+                        10
                       Label : NAME
-                        18
+                        19
                     Label : OBJECT
-                      17
+                      18
                 Label : EXPRESSION
-                  20
+                  21
                   Label : CONDITION
-                    22
+                    23
                     Label : LEFT
-                      21
+                      22
                     Label : RIGHT
-                      11
+                      12
                       Label : METHOD
-                        24
+                        25
                         Label : ARGUMENT
-                          26
+                          27
                         Label : NAME
-                          24
+                          25
                       Label : OBJECT
-                        23
+                        24
                   Label : THEN
-                    27
+                    28
                     Label : EXPRESSION
-                      9
+                      10
                 Label : EXPRESSION
-                  28
+                  29
                   Label : BREAK
-                    9
+                    10
             Label : EXPRESSION
-              29
+              30
               Label : CODE
                 3
           Label : CONDITION
-            11
+            12
             Label : METHOD
-              7
+              8
               Label : ARGUMENT
-                9
+                10
               Label : NAME
-                7
+                8
             Label : OBJECT
               6

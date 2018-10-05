@@ -1,6 +1,42 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      24
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      28
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      31
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      36
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,66 +46,66 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            10
+            11
             Label : LEFT
-              9
+              10
               Label : MEMBER
-                7
+                8
               Label : OBJECT
                 6
             Label : RIGHT
-              11
+              12
           Label : ELSE
-            29
+            30
             Label : CONDITION
-              10
+              11
               Label : LEFT
-                9
+                10
                 Label : MEMBER
-                  31
+                  32
                 Label : OBJECT
-                  30
+                  31
               Label : RIGHT
-                33
+                34
             Label : THEN
               3
               Label : EXPRESSION
-                28
+                29
                 Label : POSTPLUSPLUS
-                  35
+                  36
           Label : THEN
             3
             Label : EXPRESSION
-              14
+              15
               Label : LEFT
-                13
+                14
               Label : RIGHT
-                15
+                16
                 Label : NAME
-                  15
-                Label : ARGUMENT
-                  17
+                  16
                 Label : ARGUMENT
                   18
+                Label : ARGUMENT
+                  19
             Label : EXPRESSION
               5
               Label : CONDITION
-                20
-              Label : THEN
                 21
+              Label : THEN
+                22
                 Label : EXPRESSION
-                  22
+                  23
                   Label : BLOCK
-                    21
+                    22
                     Label : EXPRESSION
-                      25
+                      26
                   Label : SOURCE
-                    23
-                  Label : VALUE
                     24
+                  Label : VALUE
+                    25
             Label : EXPRESSION
-              28
+              29
               Label : POSTPLUSPLUS
-                27
+                28
         Label : EXPRESSION
-          25
+          26

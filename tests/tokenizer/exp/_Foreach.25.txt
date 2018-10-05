@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,21 +18,21 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            10
+            11
             Label : EXPRESSION
-              11
+              12
               Label : ARGUMENT
-                16
+                17
                 Label : METHOD
-                  13
+                  14
                   Label : ARGUMENT
-                    14
+                    15
                   Label : NAME
-                    13
+                    14
                 Label : OBJECT
-                  12
+                  13
               Label : NAME
-                11
+                12
           Label : SOURCE
             6
             Label : NEW

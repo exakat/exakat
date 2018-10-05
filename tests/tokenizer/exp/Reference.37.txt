@@ -1,6 +1,16 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    18
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,7 +24,7 @@ Label : PROJECT
             Label : CONST
               7
               Label : DEFINITION, DEFINITION
-                22
+                23
                 Label : CLASS
                   6
                 Label : CONSTANT
@@ -58,7 +68,7 @@ Label : PROJECT
                 Label : RETURN
                   10
             Label : DEFINITION
-              22
+              23
               Label : CLASS
                 6
               Label : METHOD
@@ -72,11 +82,11 @@ Label : PROJECT
           Label : NAME
             6
         Label : EXPRESSION
-          18
+          19
           Label : LEFT
             17
           Label : RIGHT
-            19
+            20
             Label : NEW
               6
               Label : ARGUMENT
@@ -84,11 +94,11 @@ Label : PROJECT
               Label : NAME
                 6
         Label : EXPRESSION
-          23
+          24
           Label : ARGUMENT
-            21
+            22
             Label : LEFT
-              20
+              21
               Label : METHOD
                 11
                 Label : ARGUMENT
@@ -98,17 +108,17 @@ Label : PROJECT
               Label : OBJECT
                 17
             Label : RIGHT
-              22
+              23
               Label : CLASS
                 6
               Label : CONSTANT
                 8
         Label : EXPRESSION
-          18
+          19
           Label : LEFT
-            24
+            25
           Label : RIGHT
-            22
+            23
             Label : CLASS
               6
             Label : METHOD

@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      10
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,20 +18,20 @@ Label : PROJECT
             Label : INDEX
               6
             Label : VALUE
-              19
+              20
               Label : CONCAT
                 9
                 Label : CODE
-                  14
+                  15
                   Label : CONDITION
-                    11
+                    12
                     Label : LEFT
                       10
                     Label : RIGHT
-                      12
+                      13
                   Label : ELSE
-                    17
+                    18
                   Label : THEN
-                    15
+                    16
               Label : CONCAT
-                20
+                21

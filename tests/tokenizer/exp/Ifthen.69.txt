@@ -1,6 +1,50 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      22
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      28
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      37
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      44
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      49
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      54
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      61
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      66
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      71
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,168 +54,168 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            10
+            11
             Label : LEFT
-              9
+              10
               Label : MEMBER
-                7
+                8
               Label : OBJECT
                 6
             Label : RIGHT
-              11
+              12
           Label : ELSE
-            35
+            36
             Label : CONDITION
-              10
+              11
               Label : LEFT
-                9
+                10
                 Label : MEMBER
-                  37
+                  38
                 Label : OBJECT
-                  36
+                  37
               Label : RIGHT
-                39
+                40
             Label : ELSE
               3
               Label : EXPRESSION
                 5
                 Label : CONDITION
-                  58
+                  59
                   Label : ARGUMENT
-                    9
+                    10
                     Label : MEMBER
-                      61
+                      62
                     Label : OBJECT
-                      60
+                      61
                   Label : NAME
-                    58
+                    59
                 Label : THEN
                   3
                   Label : EXPRESSION
                     5
                     Label : CONDITION
-                      63
+                      64
                       Label : NAME
-                        63
+                        64
                       Label : ARGUMENT
-                        22
+                        23
                         Label : INDEX
-                          68
+                          69
                         Label : VARIABLE
-                          22
+                          23
                           Label : INDEX
-                            66
+                            67
                           Label : VARIABLE
-                            65
+                            66
                       Label : ARGUMENT
-                        9
+                        10
                         Label : MEMBER
-                          71
+                          72
                         Label : OBJECT
-                          70
+                          71
                     Label : THEN
                       3
                       Label : EXPRESSION
-                        30
+                        31
                         Label : RETURN
-                          73
+                          74
               Label : EXPRESSION
-                33
+                34
             Label : THEN
               3
               Label : EXPRESSION
                 5
                 Label : CONDITION
-                  41
+                  42
                   Label : ARGUMENT
-                    9
+                    10
                     Label : MEMBER
-                      44
+                      45
                     Label : OBJECT
-                      43
+                      44
                   Label : NAME
-                    41
+                    42
                 Label : THEN
                   3
                   Label : EXPRESSION
                     5
                     Label : CONDITION
-                      18
+                      19
                       Label : NOT
-                        46
+                        47
                         Label : NAME
-                          46
+                          47
                         Label : ARGUMENT
-                          22
+                          23
                           Label : INDEX
-                            51
+                            52
                           Label : VARIABLE
-                            22
+                            23
                             Label : INDEX
-                              49
+                              50
                             Label : VARIABLE
-                              48
+                              49
                         Label : ARGUMENT
-                          9
+                          10
                           Label : MEMBER
-                            54
+                            55
                           Label : OBJECT
-                            53
+                            54
                     Label : THEN
                       3
                       Label : EXPRESSION
-                        30
+                        31
                         Label : RETURN
-                          56
+                          57
               Label : EXPRESSION
-                33
+                34
           Label : THEN
             3
             Label : EXPRESSION
               5
               Label : CONDITION
-                13
+                14
                 Label : ARGUMENT
-                  9
+                  10
                   Label : MEMBER
-                    16
+                    17
                   Label : OBJECT
-                    15
+                    16
                 Label : NAME
-                  13
+                  14
               Label : THEN
                 3
                 Label : EXPRESSION
                   5
                   Label : CONDITION
-                    18
+                    19
                     Label : NOT
-                      19
+                      20
                       Label : NAME
-                        19
+                        20
                       Label : ARGUMENT
-                        22
+                        23
                         Label : INDEX
-                          25
+                          26
                         Label : VARIABLE
-                          22
+                          23
                           Label : INDEX
-                            23
+                            24
                           Label : VARIABLE
-                            21
+                            22
                       Label : ARGUMENT
-                        9
+                        10
                         Label : MEMBER
-                          28
+                          29
                         Label : OBJECT
-                          27
+                          28
                   Label : THEN
                     3
                     Label : EXPRESSION
-                      30
+                      31
                       Label : RETURN
-                        31
+                        32
             Label : EXPRESSION
-              33
+              34
         Label : EXPRESSION
-          33
+          34

@@ -1,6 +1,24 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    8
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    9
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,22 +30,22 @@ Label : PROJECT
           Label : GLOBAL
             6
           Label : GLOBAL
-            7
-          Label : GLOBAL
             8
+          Label : GLOBAL
+            9
         Label : EXPRESSION
-          9
+          10
           Label : NAME
-            10
-          Label : PPP
             11
-            Label : PPP
-              12
+          Label : PPP
+            12
             Label : PPP
               13
             Label : PPP
-              15
+              14
+            Label : PPP
+              16
               Label : DEFAULT
-                17
+                18
             Label : PPP
               6

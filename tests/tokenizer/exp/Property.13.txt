@@ -1,6 +1,12 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    19
+    Label : DEFINITION
+      17
+    Label : DEFINITION
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -90,7 +96,7 @@ Label : PROJECT
                 Label : OBJECT
                   17
           Label : RIGHT
-            19
+            20
         Label : EXPRESSION
           13
           Label : LEFT
@@ -108,4 +114,4 @@ Label : PROJECT
                 Label : OBJECT
                   17
           Label : RIGHT
-            20
+            21

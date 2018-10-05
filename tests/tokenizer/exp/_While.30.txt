@@ -1,6 +1,24 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,24 +30,24 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              7
+              8
               Label : LEFT
-                13
+                14
                 Label : APPEND
-                  13
+                  14
               Label : RIGHT
                 6
           Label : CONDITION
-            7
+            8
             Label : LEFT
               6
             Label : RIGHT
-              12
+              13
               Label : METHOD
-                9
+                10
                 Label : ARGUMENT
-                  10
+                  11
                 Label : NAME
-                  9
+                  10
               Label : OBJECT
-                8
+                9

@@ -1,20 +1,6 @@
 test
 Label : PROJECT
   1
-  Label : DEFINITION
-    13
-    Label : DEFAULT
-      15
-  Label : DEFINITION
-    8
-    Label : DEFAULT
-      11
-  Label : DEFINITION
-    17
-    Label : DEFAULT
-      19
-      Label : ARGUMENT
-        20
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,18 +16,18 @@ Label : PROJECT
             Label : PPP
               8
               Label : DEFAULT
-                11
+                10
           Label : PPP
-            12
+            11
             Label : PPP
-              13
+              12
               Label : DEFAULT
-                15
+                14
           Label : PPP
-            16
+            15
             Label : PPP
-              17
+              16
               Label : DEFAULT
-                19
+                18
                 Label : ARGUMENT
-                  20
+                  19

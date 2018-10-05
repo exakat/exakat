@@ -1,6 +1,22 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -22,11 +38,11 @@ Label : PROJECT
             Label : RIGHT
               12
           Label : ELSE
-            17
+            18
             Label : CONDITION
               11
               Label : LEFT
-                18
+                19
                 Label : NOT
                   7
                   Label : ARGUMENT
@@ -38,27 +54,27 @@ Label : PROJECT
             Label : ELSE
               3
               Label : EXPRESSION
-                19
+                20
                 Label : BLOCK
-                  13
+                  14
                   Label : EXPRESSION
-                    14
+                    15
                     Label : RETURN
-                      15
+                      16
                 Label : FINAL
                   3
                   Label : EXPRESSION
-                    21
+                    22
                     Label : LEFT
-                      20
+                      21
                     Label : RIGHT
-                      22
+                      23
                 Label : INCREMENT
                   3
                   Label : EXPRESSION
-                    23
+                    24
                     Label : POSTPLUSPLUS
-                      20
+                      21
                 Label : INIT
                   3
                   Label : EXPRESSION
@@ -72,31 +88,31 @@ Label : PROJECT
                     Label : RIGHT
                       12
             Label : THEN
-              13
-              Label : EXPRESSION
-                14
-                Label : RETURN
-                  15
-          Label : THEN
-            13
-            Label : EXPRESSION
               14
-              Label : RETURN
+              Label : EXPRESSION
                 15
-        Label : EXPRESSION
-          24
-          Label : CASES
-            25
+                Label : RETURN
+                  16
+          Label : THEN
+            14
             Label : EXPRESSION
-              26
+              15
+              Label : RETURN
+                16
+        Label : EXPRESSION
+          25
+          Label : CASES
+            26
+            Label : EXPRESSION
+              27
               Label : CASE
-                27
+                28
               Label : CODE
                 3
                 Label : EXPRESSION
-                  14
+                  15
                   Label : RETURN
-                    15
+                    16
           Label : CONDITION
             11
             Label : LEFT

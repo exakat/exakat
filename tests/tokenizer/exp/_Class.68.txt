@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -16,9 +20,9 @@ Label : PROJECT
               Label : ARGUMENT
                 8
               Label : DEFINITION
-                11
+                12
               Label : MAGICMETHOD
-                9
+                10
                 Label : ARGUMENT
                   8
                   Label : NAME
@@ -26,18 +30,22 @@ Label : PROJECT
                     Label : DEFINITION
                       8
                 Label : BLOCK
-                  10
+                  11
                   Label : EXPRESSION
-                    14
+                    15
                     Label : LEFT
-                      13
+                      14
                       Label : MEMBER
-                        12
+                        13
                       Label : OBJECT
-                        11
+                        12
                     Label : RIGHT
                       8
-                Label : NAME
+                Label : DEFINITION
                   9
+                  Label : DEFINITION
+                    12
+                Label : NAME
+                  10
           Label : NAME
             5

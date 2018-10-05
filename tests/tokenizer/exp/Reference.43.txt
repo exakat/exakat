@@ -1,6 +1,38 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      33
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      35
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,84 +42,84 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            10
+            11
             Label : LEFT
-              7
+              8
               Label : LEFT
                 6
               Label : RIGHT
-                8
+                9
             Label : RIGHT
-              10
+              11
               Label : LEFT
-                15
+                16
                 Label : LEFT
-                  14
+                  15
                   Label : MEMBER
-                    13
+                    14
                     Label : CODE
-                      12
+                      13
                   Label : OBJECT
-                    11
+                    12
                 Label : RIGHT
-                  16
+                  17
               Label : RIGHT
-                10
+                11
                 Label : LEFT
-                  20
+                  21
                   Label : LEFT
-                    17
+                    18
                     Label : CLASS
-                      18
+                      19
                     Label : VARIABLE
-                      14
+                      15
                       Label : MEMBER
-                        13
+                        14
                         Label : CODE
-                          12
+                          13
                       Label : OBJECT
-                        11
+                        12
                   Label : RIGHT
-                    23
+                    24
                     Label : LEFT
-                      14
+                      15
                       Label : MEMBER
-                        21
+                        22
                       Label : OBJECT
-                        14
+                        15
                         Label : MEMBER
-                          13
+                          14
                           Label : CODE
-                            12
+                            13
                         Label : OBJECT
-                          11
+                          12
                     Label : RIGHT
-                      24
+                      25
                 Label : RIGHT
-                  25
+                  26
                   Label : NOT
-                    33
+                    34
                     Label : CLASS
-                      26
+                      27
                     Label : METHOD
-                      28
+                      29
                       Label : ARGUMENT
-                        30
+                        31
                       Label : ARGUMENT
-                        14
+                        15
                         Label : MEMBER
-                          13
+                          14
                           Label : CODE
-                            12
+                            13
                         Label : OBJECT
-                          11
+                          12
                       Label : ARGUMENT
-                        32
+                        33
                       Label : NAME
-                        28
+                        29
           Label : THEN
-            13
+            14
             Label : EXPRESSION
-              35
+              36
               Label : POSTPLUSPLUS
-                34
+                35

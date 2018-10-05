@@ -2,11 +2,15 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    21
+    18
+    Label : DEFINITION
+      21
     Label : DEFINITION
       21
   Label : DEFINITION
-    17
+    18
+    Label : DEFINITION
+      17
     Label : DEFINITION
       17
     Label : DEFINITION
@@ -75,10 +79,6 @@ Label : PROJECT
           19
           Label : LEFT
             17
-            Label : DEFINITION
-              17
-            Label : DEFINITION
-              17
           Label : RIGHT
             5
             Label : ARGUMENT
@@ -99,8 +99,6 @@ Label : PROJECT
             17
           Label : VALUE
             21
-            Label : DEFINITION
-              21
         Label : EXPRESSION
           22
           Label : ARGUMENT

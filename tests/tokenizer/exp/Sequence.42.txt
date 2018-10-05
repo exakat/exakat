@@ -1,6 +1,42 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      19
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      24
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      28
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,37 +46,35 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            7
+            8
             Label : LEFT
               6
             Label : RIGHT
-              8
+              9
           Label : ELSE
-            9
+            10
             Label : EXPRESSION
-              11
+              12
               Label : POSTPLUSPLUS
-                12
+                13
           Label : THEN
-            9
+            10
             Label : EXPRESSION
-              11
+              12
               Label : POSTPLUSPLUS
-                10
+                11
         Label : EXPRESSION
-          16
+          17
           Label : LEFT
-            13
+            14
             Label : NOT
-              14
+              15
               Label : ARGUMENT
-                15
+                16
               Label : NAME
-                14
+                15
           Label : RIGHT
-            17
-            Label : ARGUMENT
-              18
+            18
             Label : ARGUMENT
               19
             Label : ARGUMENT
@@ -50,18 +84,20 @@ Label : PROJECT
             Label : ARGUMENT
               22
             Label : ARGUMENT
-              24
+              23
+            Label : ARGUMENT
+              25
               Label : INDEX
-                27
+                28
               Label : VARIABLE
-                24
+                25
                 Label : INDEX
-                  26
+                  27
                 Label : VARIABLE
-                  24
+                  25
                   Label : INDEX
-                    25
+                    26
                   Label : VARIABLE
-                    23
+                    24
             Label : NAME
-              17
+              18

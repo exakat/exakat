@@ -1,6 +1,40 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,44 +42,44 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            13
+            14
             Label : CONDITION
-              11
+              12
               Label : LEFT
-                7
+                8
                 Label : ARGUMENT
-                  9
+                  10
                   Label : INDEX
-                    10
+                    11
                   Label : VARIABLE
-                    8
+                    9
                 Label : NAME
-                  7
+                  8
               Label : RIGHT
-                12
+                13
             Label : ELSE
-              9
+              10
               Label : INDEX
-                20
+                21
               Label : VARIABLE
-                15
+                16
             Label : THEN
-              16
+              17
               Label : CONCAT
-                9
+                10
                 Label : INDEX
+                  16
+                Label : VARIABLE
                   15
-                Label : VARIABLE
-                  14
               Label : CONCAT
-                9
+                10
                 Label : INDEX
-                  18
+                  19
                   Label : PREPLUSPLUS
-                    19
+                    20
                 Label : VARIABLE
-                  17
+                  18

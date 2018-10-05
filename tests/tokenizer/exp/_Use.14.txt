@@ -2,7 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    34
+    35
+    Label : DEFINITION
+      34
     Label : DEFINITION
       34
     Label : DEFINITION
@@ -215,24 +217,6 @@ Label : PROJECT
                     10
                 Label : VARIABLE
                   34
-                  Label : DEFINITION
-                    34
-                  Label : DEFINITION
-                    34
-                  Label : DEFINITION
-                    34
-                  Label : DEFINITION
-                    34
-                  Label : DEFINITION
-                    34
-                  Label : DEFINITION
-                    34
-                  Label : DEFINITION
-                    34
-                  Label : DEFINITION
-                    34
-                  Label : DEFINITION
-                    34
               Label : NAME
                 33
             Label : EXPRESSION

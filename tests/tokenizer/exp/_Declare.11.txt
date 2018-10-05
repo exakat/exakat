@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      10
   Label : FILE
     3
     Label : EXPRESSION

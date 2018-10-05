@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      23
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,49 +46,49 @@ Label : PROJECT
             Label : ARGUMENT
               18
               Label : INDEX
-                20
+                21
               Label : VALUE
-                22
+                23
         Label : EXPRESSION
-          23
+          24
           Label : ARGUMENT
-            25
+            26
           Label : NAME
-            23
+            24
         Label : EXPRESSION
-          27
+          28
           Label : NAME
-            27
+            28
           Label : ARGUMENT
-            29
+            30
           Label : ARGUMENT
-            31
+            32
         Label : EXPRESSION
-          33
+          34
           Label : ARGUMENT
-            35
+            36
           Label : NAME
-            33
+            34
         Label : EXPRESSION
-          37
+          38
           Label : CONDITION
-            38
+            39
             Label : ARGUMENT
-              47
+              48
               Label : CONCAT
-                46
+                47
                 Label : CLASS
-                  40
+                  41
                 Label : METHOD
-                  42
+                  43
                   Label : ARGUMENT
-                    44
+                    45
                   Label : NAME
-                    42
+                    43
               Label : CONCAT
-                48
+                49
             Label : NAME
-              38
+              39
           Label : THEN
             8
             Label : EXPRESSION

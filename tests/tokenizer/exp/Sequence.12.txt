@@ -1,6 +1,70 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      30
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      19
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      23
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      24
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      26
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      27
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      28
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      29
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,98 +72,98 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
-        Label : EXPRESSION
-          6
-          Label : LEFT
             8
-          Label : RIGHT
+        Label : EXPRESSION
+          7
+          Label : LEFT
             9
-        Label : EXPRESSION
-          6
-          Label : LEFT
+          Label : RIGHT
             10
-          Label : RIGHT
+        Label : EXPRESSION
+          7
+          Label : LEFT
             11
-        Label : EXPRESSION
-          6
-          Label : LEFT
+          Label : RIGHT
             12
-          Label : RIGHT
+        Label : EXPRESSION
+          7
+          Label : LEFT
             13
-        Label : EXPRESSION
-          6
-          Label : LEFT
+          Label : RIGHT
             14
-          Label : RIGHT
+        Label : EXPRESSION
+          7
+          Label : LEFT
             15
-        Label : EXPRESSION
-          6
-          Label : LEFT
+          Label : RIGHT
             16
-          Label : RIGHT
+        Label : EXPRESSION
+          7
+          Label : LEFT
             17
-        Label : EXPRESSION
-          6
-          Label : LEFT
+          Label : RIGHT
             18
-          Label : RIGHT
+        Label : EXPRESSION
+          7
+          Label : LEFT
             19
-        Label : EXPRESSION
-          6
-          Label : LEFT
+          Label : RIGHT
             20
-          Label : RIGHT
-            21
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            22
+            21
           Label : RIGHT
-            7
+            22
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             23
           Label : RIGHT
-            9
+            8
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             24
           Label : RIGHT
-            11
+            10
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             25
           Label : RIGHT
-            13
+            12
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             26
           Label : RIGHT
-            15
+            14
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             27
           Label : RIGHT
-            17
+            16
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             28
           Label : RIGHT
-            19
+            18
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             29
           Label : RIGHT
-            21
+            20
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            30
+          Label : RIGHT
+            22

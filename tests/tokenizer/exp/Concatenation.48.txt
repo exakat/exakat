@@ -1,6 +1,22 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      27
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      35
   Label : FILE
     3
     Label : EXPRESSION
@@ -18,90 +34,90 @@ Label : PROJECT
                 Label : CONCAT
                   7
                 Label : CONCAT
-                  11
+                  12
                   Label : MEMBER
-                    10
+                    11
                   Label : OBJECT
                     9
               Label : ARGUMENT
-                12
+                13
                 Label : ARGUMENT
-                  17
+                  18
                   Label : CONDITION
-                    15
+                    16
                     Label : LEFT
-                      11
+                      12
                       Label : MEMBER
-                        14
+                        15
                       Label : OBJECT
-                        13
+                        14
                     Label : RIGHT
-                      16
+                      17
                   Label : ELSE
-                    19
+                    20
                   Label : THEN
-                    18
+                    19
                 Label : NAME
-                  12
+                  13
               Label : ARGUMENT
-                20
+                21
               Label : NAME
                 6
             Label : CONCAT
-              21
+              22
         Label : EXPRESSION
-          22
+          23
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            24
+            25
             Label : NAME
-              24
+              25
             Label : ARGUMENT
               8
               Label : CONCAT
-                25
+                26
               Label : CONCAT
-                11
+                12
                 Label : MEMBER
+                  28
+                Label : OBJECT
                   27
-                Label : OBJECT
-                  26
             Label : ARGUMENT
-              28
+              29
               Label : ARGUMENT
-                29
+                30
               Label : NAME
-                28
+                29
         Label : EXPRESSION
-          30
+          31
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            32
+            33
             Label : ARGUMENT
               8
               Label : CONCAT
-                33
+                34
               Label : CONCAT
-                11
+                12
                 Label : MEMBER
-                  35
+                  36
                 Label : OBJECT
-                  34
+                  35
             Label : ARGUMENT
-              36
+              37
               Label : ARGUMENT
-                37
+                38
               Label : NAME
-                36
+                37
             Label : ARGUMENT
-              38
+              39
               Label : ARGUMENT
-                40
+                41
                 Label : INDEX
-                  39
+                  40
                 Label : VALUE
-                  41
+                  42
             Label : NAME
-              32
+              33

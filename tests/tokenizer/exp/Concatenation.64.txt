@@ -2,7 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    13
+    Label : DEFINITION
+      12
     Label : DEFINITION
       12
   Label : FILE
@@ -25,8 +27,6 @@ Label : PROJECT
                     9
                   Label : CONCAT
                     12
-                    Label : DEFINITION
-                      12
           Label : THEN
             3
             Label : EXPRESSION

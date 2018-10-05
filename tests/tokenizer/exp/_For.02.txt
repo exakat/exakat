@@ -1,6 +1,28 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,54 +30,54 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
         Label : EXPRESSION
-          8
+          9
           Label : BLOCK
-            15
+            16
             Label : EXPRESSION
-              14
+              15
               Label : POSTPLUSPLUS
                 5
           Label : FINAL
             3
             Label : EXPRESSION
-              11
-              Label : LEFT
-                9
-              Label : RIGHT
-                12
-            Label : EXPRESSION
-              11
+              12
               Label : LEFT
                 10
               Label : RIGHT
                 13
+            Label : EXPRESSION
+              12
+              Label : LEFT
+                11
+              Label : RIGHT
+                14
           Label : INCREMENT
             3
             Label : EXPRESSION
-              14
-              Label : POSTPLUSPLUS
-                9
-            Label : EXPRESSION
-              14
+              15
               Label : POSTPLUSPLUS
                 10
+            Label : EXPRESSION
+              15
+              Label : POSTPLUSPLUS
+                11
           Label : INIT
             3
             Label : EXPRESSION
-              6
-              Label : LEFT
-                9
-              Label : RIGHT
-                7
-            Label : EXPRESSION
-              6
+              7
               Label : LEFT
                 10
               Label : RIGHT
-                7
+                8
+            Label : EXPRESSION
+              7
+              Label : LEFT
+                11
+              Label : RIGHT
+                8

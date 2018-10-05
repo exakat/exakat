@@ -1,6 +1,22 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      7
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      19
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,50 +28,50 @@ Label : PROJECT
           Label : CONDITION
             6
             Label : CODE
-              10
+              11
               Label : LEFT
                 6
                 Label : CODE
-                  8
+                  9
                   Label : INDEX
-                    9
+                    10
                   Label : VARIABLE
                     7
               Label : RIGHT
                 6
                 Label : CODE
-                  15
+                  16
                   Label : LEFT
-                    8
+                    9
                     Label : INDEX
-                      14
+                      15
                     Label : VARIABLE
-                      8
+                      9
                       Label : INDEX
-                        13
+                        14
                       Label : VARIABLE
-                        11
+                        12
                   Label : RIGHT
                     6
                     Label : CODE
-                      10
+                      11
                       Label : LEFT
-                        8
+                        9
                         Label : INDEX
-                          17
-                        Label : VARIABLE
-                          16
-                      Label : RIGHT
-                        8
-                        Label : INDEX
-                          19
-                        Label : VARIABLE
                           18
+                        Label : VARIABLE
+                          17
+                      Label : RIGHT
+                        9
+                        Label : INDEX
+                          20
+                        Label : VARIABLE
+                          19
           Label : THEN
-            20
+            21
             Label : EXPRESSION
-              21
+              22
               Label : ARGUMENT
-                9
+                10
               Label : NAME
-                21
+                22

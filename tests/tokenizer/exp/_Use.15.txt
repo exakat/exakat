@@ -1,6 +1,28 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    36
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
+    Label : DEFINITION
+      35
   Label : FILE
     3
     Label : EXPRESSION
@@ -80,7 +102,7 @@ Label : PROJECT
                   Label : VALUE
                     13
               Label : DEFINITION
-                36
+                37
               Label : NAME
                 16
           Label : NAME
@@ -262,7 +284,7 @@ Label : PROJECT
                   Label : EXPRESSION
                     5
                 Label : CLASS
-                  36
+                  37
                 Label : VARIABLE
                   35
               Label : CATCH

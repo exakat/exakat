@@ -2,23 +2,33 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    9
+    Label : DEFINITION
+      8
   Label : DEFINITION
-    11
+    9
+    Label : DEFINITION
+      11
     Label : DEFINITION
       11
   Label : DEFINITION
-    13
+    9
+    Label : DEFINITION
+      13
     Label : DEFINITION
       13
     Label : DEFINITION
       13
   Label : DEFINITION
-    18
+    9
+    Label : DEFINITION
+      18
     Label : DEFINITION
       18
   Label : DEFINITION
-    21
+    9
+    Label : DEFINITION
+      21
     Label : DEFINITION
       21
     Label : DEFINITION
@@ -26,11 +36,15 @@ Label : PROJECT
     Label : DEFINITION
       21
   Label : DEFINITION
-    33
+    9
+    Label : DEFINITION
+      33
     Label : DEFINITION
       33
   Label : DEFINITION
-    41
+    9
+    Label : DEFINITION
+      41
     Label : DEFINITION
       41
     Label : DEFINITION
@@ -55,8 +69,6 @@ Label : PROJECT
                     16
                   Label : ARGUMENT
                     18
-                    Label : DEFINITION
-                      18
                   Label : ARGUMENT
                     11
                 Label : RIGHT
@@ -67,12 +79,6 @@ Label : PROJECT
                   22
                   Label : LEFT
                     21
-                    Label : DEFINITION
-                      21
-                    Label : DEFINITION
-                      21
-                    Label : DEFINITION
-                      21
                   Label : RIGHT
                     29
                     Label : CONCAT
@@ -137,10 +143,6 @@ Label : PROJECT
                           13
                       Label : VALUE
                         41
-                        Label : DEFINITION
-                          41
-                        Label : DEFINITION
-                          41
                   Label : THEN
                     14
                     Label : EXPRESSION
@@ -149,8 +151,6 @@ Label : PROJECT
                         22
                         Label : LEFT
                           33
-                          Label : DEFINITION
-                            33
                         Label : RIGHT
                           34
                           Label : ARGUMENT
@@ -177,11 +177,5 @@ Label : PROJECT
             12
             Label : INDEX
               11
-              Label : DEFINITION
-                11
             Label : VALUE
               13
-              Label : DEFINITION
-                13
-              Label : DEFINITION
-                13

@@ -1,6 +1,22 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -24,21 +40,21 @@ Label : PROJECT
                   Label : NOT
                     10
                 Label : RIGHT
-                  13
+                  14
                   Label : INDEX
-                    14
+                    15
                   Label : VARIABLE
                     12
           Label : THEN
-            15
+            16
             Label : EXPRESSION
-              16
+              17
         Label : EXPRESSION
-          18
+          19
           Label : BLOCK
-            15
+            16
             Label : EXPRESSION
-              16
+              17
           Label : CONDITION
             6
         Label : EXPRESSION
@@ -54,25 +70,25 @@ Label : PROJECT
               Label : RIGHT
                 11
                 Label : LEFT
-                  19
+                  20
                   Label : NOT
                     10
                 Label : RIGHT
-                  13
+                  14
                   Label : INDEX
-                    14
+                    15
                   Label : VARIABLE
                     12
           Label : THEN
-            15
+            16
             Label : EXPRESSION
-              16
+              17
         Label : EXPRESSION
-          18
+          19
           Label : BLOCK
-            15
+            16
             Label : EXPRESSION
-              16
+              17
           Label : CONDITION
             6
         Label : EXPRESSION
@@ -90,20 +106,20 @@ Label : PROJECT
                 Label : LEFT
                   10
                 Label : RIGHT
-                  13
+                  14
                   Label : INDEX
-                    14
+                    15
                   Label : VARIABLE
                     12
           Label : THEN
-            15
+            16
             Label : EXPRESSION
-              16
+              17
         Label : EXPRESSION
-          18
+          19
           Label : BLOCK
-            15
+            16
             Label : EXPRESSION
-              16
+              17
           Label : CONDITION
             6

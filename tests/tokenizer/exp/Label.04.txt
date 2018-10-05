@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,32 +18,32 @@ Label : PROJECT
         Label : EXPRESSION
           7
           Label : DEFINITION
-            17
+            18
             Label : GOTO
               5
           Label : GOTOLABEL
             5
         Label : EXPRESSION
-          9
+          10
           Label : LEFT
             8
           Label : RIGHT
-            10
-        Label : EXPRESSION
-          7
-          Label : GOTOLABEL
             11
         Label : EXPRESSION
           7
           Label : GOTOLABEL
-            13
+            12
         Label : EXPRESSION
-          9
+          7
+          Label : GOTOLABEL
+            14
+        Label : EXPRESSION
+          10
           Label : LEFT
-            15
-          Label : RIGHT
             16
+          Label : RIGHT
+            17
         Label : EXPRESSION
-          17
+          18
           Label : GOTO
             5

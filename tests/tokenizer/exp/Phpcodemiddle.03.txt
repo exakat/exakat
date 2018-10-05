@@ -2,9 +2,13 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    24
+    7
+    Label : DEFINITION
+      24
   Label : DEFINITION
-    6
+    7
+    Label : DEFINITION
+      6
     Label : DEFINITION
       6
   Label : FILE
@@ -25,8 +29,6 @@ Label : PROJECT
                   9
                 Label : VARIABLE
                   6
-                  Label : DEFINITION
-                    6
               Label : RIGHT
                 12
             Label : ELSE

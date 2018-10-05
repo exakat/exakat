@@ -1,6 +1,26 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      27
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      35
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      43
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,82 +30,82 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            16
+            17
             Label : LEFT
-              10
+              11
               Label : LEFT
-                9
+                10
                 Label : MEMBER
-                  7
+                  8
                 Label : OBJECT
                   6
               Label : RIGHT
-                15
+                16
                 Label : CLASS
-                  11
+                  12
                 Label : CONSTANT
-                  13
+                  14
             Label : RIGHT
-              16
+              17
               Label : LEFT
-                20
+                21
                 Label : LEFT
-                  9
+                  10
                   Label : MEMBER
+                    19
+                  Label : OBJECT
                     18
-                  Label : OBJECT
-                    17
                 Label : RIGHT
-                  25
+                  26
                   Label : SIGN
-                    15
+                    16
                     Label : CLASS
-                      21
+                      22
                     Label : CONSTANT
-                      23
+                      24
               Label : RIGHT
-                10
+                11
                 Label : LEFT
-                  9
+                  10
                   Label : MEMBER
-                    27
+                    28
                   Label : OBJECT
-                    26
+                    27
                 Label : RIGHT
-                  15
+                  16
                   Label : CLASS
-                    29
+                    30
                   Label : CONSTANT
-                    31
+                    32
           Label : ELSE
-            33
+            34
             Label : EXPRESSION
-              37
+              38
               Label : LEFT
-                9
+                10
                 Label : MEMBER
+                  44
+                Label : OBJECT
                   43
-                Label : OBJECT
-                  42
               Label : RIGHT
-                15
+                16
                 Label : CLASS
-                  45
+                  46
                 Label : CONSTANT
-                  47
+                  48
           Label : THEN
-            33
+            34
             Label : EXPRESSION
-              37
+              38
               Label : LEFT
-                9
+                10
                 Label : MEMBER
-                  35
+                  36
                 Label : OBJECT
-                  34
+                  35
               Label : RIGHT
-                15
+                16
                 Label : CLASS
-                  38
+                  39
                 Label : CONSTANT
-                  40
+                  41

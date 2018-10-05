@@ -1,6 +1,42 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      7
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      22
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      27
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      29
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,66 +46,66 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            10
+            11
             Label : LEFT
               6
               Label : ARGUMENT
-                8
+                9
                 Label : INDEX
-                  9
+                  10
                 Label : VARIABLE
                   7
             Label : RIGHT
-              11
+              12
               Label : ARGUMENT
-                8
+                9
                 Label : INDEX
-                  13
+                  14
                 Label : VARIABLE
-                  12
+                  13
               Label : NAME
-                11
+                12
           Label : THEN
             3
             Label : EXPRESSION
-              14
+              15
               Label : BLOCK
-                20
+                21
                 Label : EXPRESSION
-                  22
+                  23
                   Label : LEFT
-                    21
+                    22
                   Label : RIGHT
-                    23
-                Label : EXPRESSION
-                  22
-                  Label : LEFT
                     24
-                  Label : RIGHT
+                Label : EXPRESSION
+                  23
+                  Label : LEFT
                     25
+                  Label : RIGHT
+                    26
               Label : SOURCE
-                8
-                Label : INDEX
-                  16
-                Label : VARIABLE
-                  15
-              Label : VALUE
-                18
+                9
                 Label : INDEX
                   17
+                Label : VARIABLE
+                  16
+              Label : VALUE
+                19
+                Label : INDEX
+                  18
                 Label : VALUE
-                  19
+                  20
         Label : EXPRESSION
-          22
+          23
           Label : LEFT
-            8
+            9
             Label : INDEX
-              27
-            Label : VARIABLE
-              26
-          Label : RIGHT
-            8
-            Label : INDEX
-              29
-            Label : VARIABLE
               28
+            Label : VARIABLE
+              27
+          Label : RIGHT
+            9
+            Label : INDEX
+              30
+            Label : VARIABLE
+              29

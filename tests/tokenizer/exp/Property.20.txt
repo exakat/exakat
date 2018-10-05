@@ -2,11 +2,15 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    6
+    Label : DEFINITION
+      9
     Label : DEFINITION
       9
   Label : DEFINITION
-    5
+    6
+    Label : DEFINITION
+      5
     Label : DEFINITION
       5
     Label : DEFINITION
@@ -14,7 +18,9 @@ Label : PROJECT
     Label : DEFINITION
       5
   Label : DEFINITION
-    19
+    6
+    Label : DEFINITION
+      19
     Label : DEFINITION
       19
     Label : DEFINITION
@@ -22,7 +28,9 @@ Label : PROJECT
     Label : DEFINITION
       19
   Label : DEFINITION
-    29
+    6
+    Label : DEFINITION
+      29
   Label : FILE
     3
     Label : EXPRESSION
@@ -33,20 +41,12 @@ Label : PROJECT
           7
           Label : LEFT
             5
-            Label : DEFINITION
-              5
-            Label : DEFINITION
-              5
-            Label : DEFINITION
-              5
           Label : RIGHT
             8
         Label : EXPRESSION
           7
           Label : LEFT
             9
-            Label : DEFINITION
-              9
           Label : RIGHT
             10
             Label : NEW
@@ -77,12 +77,6 @@ Label : PROJECT
           7
           Label : LEFT
             19
-            Label : DEFINITION
-              19
-            Label : DEFINITION
-              19
-            Label : DEFINITION
-              19
           Label : RIGHT
             20
             Label : ARGUMENT

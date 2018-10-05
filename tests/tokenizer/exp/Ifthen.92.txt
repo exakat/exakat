@@ -54,84 +54,90 @@ Label : PROJECT
                 Label : EXPRESSION
                   21
                   Label : CASES
-                    28
+                    29
                     Label : EXPRESSION
-                      29
+                      30
                       Label : CASE
-                        31
+                        32
                       Label : CODE
                         3
                         Label : EXPRESSION
-                          33
+                          34
                           Label : LEFT
                             7
                           Label : RIGHT
-                            34
+                            35
                             Label : ARGUMENT
-                              36
+                              37
                             Label : NAME
-                              34
+                              35
                         Label : EXPRESSION
-                          38
+                          39
                           Label : BREAK
-                            25
+                            26
                     Label : EXPRESSION
-                      39
+                      40
                       Label : CASE
-                        41
+                        42
                       Label : CODE
                         3
                         Label : EXPRESSION
-                          33
+                          34
                           Label : LEFT
                             7
                           Label : RIGHT
-                            43
+                            44
                             Label : ARGUMENT
-                              45
+                              46
                               Label : ARGUMENT
-                                27
+                                28
                                 Label : MEMBER
-                                  47
+                                  48
                                 Label : OBJECT
                                   22
                               Label : NAME
-                                45
+                                46
                             Label : NAME
-                              43
+                              44
                         Label : EXPRESSION
-                          38
+                          39
                           Label : BREAK
-                            25
+                            26
                     Label : EXPRESSION
-                      49
+                      50
                       Label : CODE
                         3
                         Label : EXPRESSION
-                          33
+                          34
                           Label : LEFT
                             7
                           Label : RIGHT
-                            50
+                            51
                   Label : CONDITION
-                    27
+                    28
                     Label : METHOD
-                      23
+                      24
                       Label : ARGUMENT
-                        25
+                        26
                       Label : NAME
-                        23
+                        24
                     Label : OBJECT
                       22
             Label : EXPRESSION
-              54
+              55
               Label : CLASS
-                52
+                53
               Label : METHOD
                 5
                 Label : ARGUMENT
                   7
                 Label : NAME
                   5
+          Label : DEFINITION
+            23
+            Label : DEFINITION
+              22
+            Label : DEFINITION
+              22
           Label : NAME
             5

@@ -1,6 +1,18 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
   Label : FILE
     3
     Label : EXPRESSION
@@ -16,11 +28,11 @@ Label : PROJECT
               Label : NAME
                 8
                 Label : ARGUMENT
-                  9
+                  10
                 Label : NAME
                   8
         Label : EXPRESSION
-          11
+          12
           Label : ARGUMENT
             6
             Label : CODE
@@ -28,11 +40,11 @@ Label : PROJECT
               Label : NAME
                 8
                 Label : ARGUMENT
-                  9
+                  10
                 Label : NAME
                   8
           Label : NAME
-            11
+            12
         Label : EXPRESSION
           5
           Label : ARGUMENT
@@ -40,8 +52,8 @@ Label : PROJECT
             Label : CODE
               8
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
-            14
+            15
           Label : NAME
-            13
+            14

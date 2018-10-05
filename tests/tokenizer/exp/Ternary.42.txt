@@ -1,6 +1,48 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      23
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,82 +50,82 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            8
+            9
             Label : CONDITION
-              7
+              8
             Label : ELSE
               5
             Label : THEN
-              9
+              10
               Label : LEFT
                 5
               Label : RIGHT
-                10
+                11
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            8
+            9
             Label : CONDITION
-              7
+              8
             Label : ELSE
               5
             Label : THEN
-              12
+              13
               Label : LEFT
                 5
               Label : RIGHT
-                13
+                14
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            8
+            9
             Label : CONDITION
-              7
+              8
             Label : ELSE
               5
             Label : THEN
-              12
+              13
               Label : LEFT
                 5
               Label : RIGHT
-                18
+                19
                 Label : MEMBER
-                  16
+                  17
                 Label : OBJECT
-                  15
+                  16
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            8
+            9
             Label : CONDITION
-              7
+              8
             Label : ELSE
               5
             Label : THEN
-              19
+              20
         Label : EXPRESSION
-          21
+          22
           Label : CASES
-            23
+            24
             Label : EXPRESSION
-              24
+              25
               Label : CASE
-                26
+                27
               Label : CODE
                 3
                 Label : EXPRESSION
-                  28
+                  29
                   Label : BREAK
-                    29
+                    30
           Label : CONDITION
-            22
+            23

@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    10
+    Label : DEFINITION
+      16
   Label : FILE
     3
     Label : EXPRESSION
@@ -20,28 +28,30 @@ Label : PROJECT
           Label : BLOCK
             8
             Label : EXPRESSION
-              10
+              11
               Label : POSTPLUSPLUS
                 9
           Label : DEFINITION
-            9
+            10
+            Label : DEFINITION
+              9
         Label : EXPRESSION
-          19
+          20
           Label : METHOD
-            17
+            18
             Label : ARGUMENT
-              18
+              19
             Label : NAME
-              17
+              18
           Label : OBJECT
-            11
+            12
             Label : CODE
-              12
+              13
               Label : NEW
-                13
+                14
                 Label : NAME
-                  13
-                Label : ARGUMENT
-                  15
+                  14
                 Label : ARGUMENT
                   16
+                Label : ARGUMENT
+                  17

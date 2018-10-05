@@ -2,11 +2,17 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    9
+    6
+    Label : DEFINITION
+      9
   Label : DEFINITION
-    5
+    6
+    Label : DEFINITION
+      5
   Label : DEFINITION
-    14
+    6
+    Label : DEFINITION
+      14
   Label : FILE
     3
     Label : EXPRESSION

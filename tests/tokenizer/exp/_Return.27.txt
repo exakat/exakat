@@ -29,5 +29,3 @@ Label : PROJECT
                 13
               Label : VALUE
                 10
-        Label : EXPRESSION
-          15

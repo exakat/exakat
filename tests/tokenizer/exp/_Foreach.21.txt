@@ -1,6 +1,30 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      17
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,24 +36,24 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              15
+              16
               Label : LEFT
-                13
+                14
                 Label : INDEX
-                  14
+                  15
                 Label : VARIABLE
-                  12
+                  13
                   Label : MEMBER
-                    11
+                    12
                   Label : OBJECT
-                    10
+                    11
               Label : RIGHT
-                16
+                17
           Label : SOURCE
             6
           Label : VALUE
-            8
+            9
             Label : INDEX
-              7
+              8
             Label : VALUE
-              9
+              10

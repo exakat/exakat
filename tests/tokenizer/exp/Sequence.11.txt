@@ -1,6 +1,30 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      8
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,48 +38,48 @@ Label : PROJECT
           Label : THEN
             7
             Label : EXPRESSION
-              9
+              10
               Label : LEFT
                 8
               Label : RIGHT
                 6
         Label : EXPRESSION
-          10
+          11
           Label : BLOCK
             7
             Label : EXPRESSION
-              9
+              10
               Label : LEFT
-                13
-              Label : RIGHT
                 14
-          Label : SOURCE
-            11
-          Label : VALUE
-            12
-        Label : EXPRESSION
-          5
-          Label : CONDITION
-            14
-          Label : THEN
-            7
-            Label : EXPRESSION
-              9
-              Label : LEFT
-                8
-              Label : RIGHT
-                14
-        Label : EXPRESSION
-          10
-          Label : BLOCK
-            7
-            Label : EXPRESSION
-              9
-              Label : LEFT
-                13
               Label : RIGHT
                 15
           Label : SOURCE
-            11
-          Label : VALUE
             12
+          Label : VALUE
+            13
+        Label : EXPRESSION
+          5
+          Label : CONDITION
+            15
+          Label : THEN
+            7
+            Label : EXPRESSION
+              10
+              Label : LEFT
+                8
+              Label : RIGHT
+                15
+        Label : EXPRESSION
+          11
+          Label : BLOCK
+            7
+            Label : EXPRESSION
+              10
+              Label : LEFT
+                14
+              Label : RIGHT
+                16
+          Label : SOURCE
+            12
+          Label : VALUE
+            13

@@ -1,6 +1,12 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -14,29 +20,29 @@ Label : PROJECT
           Label : CONDITION
             11
             Label : ARGUMENT
-              13
+              14
               Label : INDEX
-                14
+                15
               Label : VARIABLE
                 12
           Label : THEN
             3
             Label : EXPRESSION
-              16
+              17
               Label : ARGUMENT
-                19
+                20
                 Label : CONCAT
-                  17
+                  18
                 Label : CONCAT
-                  20
+                  21
                   Label : ARGUMENT
-                    13
+                    14
                     Label : INDEX
-                      14
+                      15
                     Label : VARIABLE
                       12
                   Label : NAME
-                    20
+                    21
             Label : EXPRESSION
               5
               Label : USE

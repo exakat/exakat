@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    12
+    Label : DEFINITION
+      11
   Label : FILE
     3
     Label : EXPRESSION
@@ -26,41 +30,37 @@ Label : PROJECT
                 Label : NOT
                   11
               Label : THEN
-                12
+                13
                 Label : EXPRESSION
-                  13
+                  14
                   Label : ARGUMENT
                     11
                     Label : NAME
                       11
                   Label : ARGUMENT
-                    15
-                    Label : NAME
-                      15
-                  Label : ARGUMENT
                     16
-                    Label : DEFAULT
-                      17
                     Label : NAME
                       16
                   Label : ARGUMENT
-                    18
+                    17
                     Label : DEFAULT
-                      19
-                    Label : NAME
                       18
+                    Label : NAME
+                      17
+                  Label : ARGUMENT
+                    19
+                    Label : DEFAULT
+                      20
+                    Label : NAME
+                      19
                   Label : BLOCK
-                    12
-                    Label : EXPRESSION
-                      21
-                  Label : NAME
                     13
+                    Label : EXPRESSION
+                      22
+                  Label : NAME
+                    14
             Label : EXPRESSION
-              23
-              Label : ARGUMENT
-                25
-                Label : NAME
-                  25
+              24
               Label : ARGUMENT
                 26
                 Label : NAME
@@ -71,15 +71,19 @@ Label : PROJECT
                   27
               Label : ARGUMENT
                 28
-                Label : DEFAULT
-                  29
                 Label : NAME
                   28
+              Label : ARGUMENT
+                29
+                Label : DEFAULT
+                  30
+                Label : NAME
+                  29
               Label : BLOCK
-                12
+                13
                 Label : EXPRESSION
-                  21
+                  22
               Label : NAME
-                23
+                24
         Label : EXPRESSION
-          21
+          22

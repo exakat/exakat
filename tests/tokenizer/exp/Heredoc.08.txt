@@ -1,6 +1,16 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    11
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
   Label : FILE
     3
     Label : EXPRESSION
@@ -20,53 +30,59 @@ Label : PROJECT
               Label : ELSE
                 8
                 Label : EXPRESSION
-                  12
+                  13
                   Label : POSTPLUSPLUS
-                    13
+                    14
               Label : THEN
                 8
                 Label : EXPRESSION
-                  12
+                  13
                   Label : POSTPLUSPLUS
-                    11
-          Label : DEFINITION
-            10
+                    12
           Label : DEFINITION
             11
+            Label : DEFINITION
+              10
           Label : DEFINITION
-            13
+            11
+            Label : DEFINITION
+              12
+          Label : DEFINITION
+            11
+            Label : DEFINITION
+              14
           Label : NAME
             5
         Label : EXPRESSION
-          15
+          16
           Label : LEFT
-            14
+            15
           Label : RIGHT
-            16
+            17
         Label : EXPRESSION
-          15
+          16
           Label : LEFT
-            14
+            15
           Label : RIGHT
-            18
+            19
             Label : CONCAT
-              20
+              21
         Label : EXPRESSION
-          15
+          16
           Label : LEFT
-            14
+            15
           Label : RIGHT
-            22
+            23
             Label : CONCAT
-              24
+              25
         Label : EXPRESSION
-          15
+          16
           Label : LEFT
-            14
+            15
           Label : RIGHT
-            26
+            27
         Label : EXPRESSION
-          28
+          29
           Label : ARGUMENT
             6
           Label : BLOCK
@@ -74,24 +90,30 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : CONDITION
-                29
+                30
               Label : ELSE
                 8
                 Label : EXPRESSION
-                  12
+                  13
                   Label : POSTPLUSPLUS
-                    31
+                    32
               Label : THEN
                 8
                 Label : EXPRESSION
-                  12
+                  13
                   Label : POSTPLUSPLUS
-                    30
+                    31
           Label : DEFINITION
-            29
+            11
+            Label : DEFINITION
+              30
           Label : DEFINITION
-            30
+            11
+            Label : DEFINITION
+              31
           Label : DEFINITION
-            31
+            11
+            Label : DEFINITION
+              32
           Label : NAME
-            28
+            29

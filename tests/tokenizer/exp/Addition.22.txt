@@ -1,6 +1,14 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,30 +16,30 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          8
+          9
           Label : LEFT
-            6
+            7
             Label : INDEX
-              7
+              8
             Label : VARIABLE
               5
           Label : RIGHT
-            9
+            10
             Label : NAME
-              9
+              10
             Label : ARGUMENT
-              12
+              13
               Label : LEFT
-                10
+                11
               Label : RIGHT
-                15
+                16
                 Label : LEFT
-                  6
+                  7
                   Label : INDEX
-                    14
+                    15
                   Label : VARIABLE
-                    13
+                    14
                 Label : RIGHT
-                  16
+                  17
             Label : ARGUMENT
-              17
+              18

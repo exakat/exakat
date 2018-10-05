@@ -1,6 +1,30 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      22
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,46 +34,46 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            18
+            19
             Label : EXPRESSION
-              7
+              8
               Label : LEFT
-                19
-              Label : RIGHT
                 20
+              Label : RIGHT
+                21
                 Label : ARGUMENT
-                  21
+                  22
                 Label : NAME
-                  20
+                  21
           Label : FINAL
             3
             Label : EXPRESSION
-              10
+              11
               Label : LEFT
-                9
+                10
               Label : RIGHT
-                15
+                16
                 Label : LEFT
-                  11
+                  12
                   Label : NAME
-                    13
+                    14
                     Label : CONCAT
-                      12
+                      13
                     Label : CONCAT
-                      14
+                      15
                 Label : RIGHT
-                  8
+                  9
           Label : INCREMENT
             3
             Label : EXPRESSION
-              17
+              18
               Label : POSTPLUSPLUS
-                16
+                17
           Label : INIT
             3
             Label : EXPRESSION
-              7
+              8
               Label : LEFT
                 6
               Label : RIGHT
-                8
+                9

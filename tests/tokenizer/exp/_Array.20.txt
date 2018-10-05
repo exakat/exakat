@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    22
+    Label : DEFINITION
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -106,7 +110,7 @@ Label : PROJECT
             Label : INDEX
               18
               Label : LEFT
-                22
+                23
               Label : RIGHT
                 19
             Label : VARIABLE
@@ -130,7 +134,7 @@ Label : PROJECT
             Label : INDEX
               18
               Label : LEFT
-                23
+                24
               Label : RIGHT
                 19
             Label : VARIABLE

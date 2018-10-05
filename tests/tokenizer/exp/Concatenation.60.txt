@@ -1,6 +1,42 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      18
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      21
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      28
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,80 +46,80 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CONDITION
-            7
+            8
             Label : LEFT
               6
             Label : RIGHT
-              8
+              9
           Label : ELSE
-            24
+            25
             Label : CONDITION
-              7
+              8
               Label : LEFT
                 6
               Label : RIGHT
-                25
+                26
             Label : ELSE
               3
               Label : EXPRESSION
-                11
+                12
                 Label : LEFT
-                  10
+                  11
                 Label : RIGHT
-                  21
+                  22
                   Label : CONCAT
-                    19
+                    20
                   Label : CONCAT
-                    27
+                    28
             Label : THEN
               3
               Label : EXPRESSION
-                21
+                22
                 Label : CONCAT
-                  12
+                  13
                   Label : NAME
-                    12
+                    13
                   Label : ARGUMENT
-                    18
+                    19
                     Label : LEFT
-                      14
+                      15
                       Label : CODE
-                        16
+                        17
                         Label : LEFT
-                          15
+                          16
                         Label : RIGHT
-                          17
+                          18
                     Label : RIGHT
-                      19
+                      20
                   Label : ARGUMENT
-                    20
+                    21
                 Label : CONCAT
-                  22
+                  23
           Label : THEN
             3
             Label : EXPRESSION
-              11
+              12
               Label : LEFT
-                10
+                11
               Label : RIGHT
-                21
+                22
                 Label : CONCAT
-                  12
+                  13
                   Label : NAME
-                    12
+                    13
                   Label : ARGUMENT
-                    18
+                    19
                     Label : LEFT
-                      14
+                      15
                       Label : CODE
-                        16
+                        17
                         Label : LEFT
-                          15
+                          16
                         Label : RIGHT
-                          17
+                          18
                     Label : RIGHT
-                      19
+                      20
                   Label : ARGUMENT
-                    20
+                    21
                 Label : CONCAT
-                  22
+                  23

@@ -2,13 +2,21 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    12
+    8
+    Label : DEFINITION
+      12
   Label : DEFINITION
-    7
+    8
+    Label : DEFINITION
+      7
   Label : DEFINITION
-    14
+    8
+    Label : DEFINITION
+      14
   Label : DEFINITION
-    18
+    8
+    Label : DEFINITION
+      18
   Label : FILE
     3
     Label : EXPRESSION

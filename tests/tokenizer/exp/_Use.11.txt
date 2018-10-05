@@ -1,6 +1,28 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    39
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -28,7 +50,7 @@ Label : PROJECT
                   Label : DEFAULT
                     14
                   Label : DEFINITION
-                    39
+                    40
                     Label : CLASS
                       10
                       Label : DEFINITION
@@ -52,7 +74,7 @@ Label : PROJECT
                   Label : DEFAULT
                     16
                   Label : DEFINITION
-                    39
+                    40
                     Label : CLASS
                       15
                       Label : DEFINITION
@@ -80,7 +102,7 @@ Label : PROJECT
                   Label : DEFAULT
                     18
                   Label : DEFINITION
-                    39
+                    40
                     Label : CLASS
                       19
                       Label : DEFINITION
@@ -94,7 +116,7 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : DEFINITION
-                41
+                42
               Label : NAME
                 19
               Label : PPP
@@ -104,9 +126,9 @@ Label : PROJECT
                   Label : DEFAULT
                     20
                   Label : DEFINITION
-                    39
+                    40
                     Label : CLASS
-                      41
+                      42
                     Label : MEMBER
                       12
           Label : NAME
@@ -132,7 +154,7 @@ Label : PROJECT
                   Label : DEFAULT
                     23
                   Label : DEFINITION
-                    39
+                    40
                     Label : CLASS
                       22
                       Label : DEFINITION
@@ -162,7 +184,7 @@ Label : PROJECT
                   Label : DEFAULT
                     26
                   Label : DEFINITION
-                    39
+                    40
                     Label : CLASS
                       25
                       Label : DEFINITION
@@ -224,9 +246,9 @@ Label : PROJECT
                 Label : NAME
                   37
             Label : EXPRESSION
-              40
+              41
               Label : ARGUMENT
-                39
+                40
                 Label : CLASS
                   10
                   Label : DEFINITION
@@ -234,9 +256,9 @@ Label : PROJECT
                 Label : MEMBER
                   12
             Label : EXPRESSION
-              40
+              41
               Label : ARGUMENT
-                39
+                40
                 Label : CLASS
                   15
                   Label : DEFINITION
@@ -244,9 +266,9 @@ Label : PROJECT
                 Label : MEMBER
                   12
             Label : EXPRESSION
-              40
+              41
               Label : ARGUMENT
-                39
+                40
                 Label : CLASS
                   22
                   Label : DEFINITION
@@ -254,9 +276,9 @@ Label : PROJECT
                 Label : MEMBER
                   12
             Label : EXPRESSION
-              40
+              41
               Label : ARGUMENT
-                39
+                40
                 Label : CLASS
                   25
                   Label : DEFINITION
@@ -264,9 +286,9 @@ Label : PROJECT
                 Label : MEMBER
                   12
             Label : EXPRESSION
-              40
+              41
               Label : ARGUMENT
-                39
+                40
                 Label : CLASS
                   19
                   Label : DEFINITION
@@ -278,25 +300,25 @@ Label : PROJECT
                 Label : MEMBER
                   12
             Label : EXPRESSION
-              40
+              41
               Label : ARGUMENT
-                39
+                40
                 Label : CLASS
-                  41
+                  42
                 Label : MEMBER
                   12
             Label : EXPRESSION
-              40
+              41
               Label : ARGUMENT
-                39
+                40
                 Label : CLASS
                   17
                 Label : MEMBER
                   12
             Label : EXPRESSION
-              40
+              41
               Label : ARGUMENT
-                39
+                40
                 Label : CLASS
                   34
                   Label : DEFINITION
@@ -308,9 +330,9 @@ Label : PROJECT
                 Label : MEMBER
                   12
             Label : EXPRESSION
-              40
+              41
               Label : ARGUMENT
-                39
+                40
                 Label : CLASS
                   36
                   Label : DEFINITION
@@ -322,9 +344,9 @@ Label : PROJECT
                 Label : MEMBER
                   12
             Label : EXPRESSION
-              40
+              41
               Label : ARGUMENT
-                39
+                40
                 Label : CLASS
                   38
                   Label : DEFINITION

@@ -1,6 +1,16 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,48 +20,48 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : CASES
-            7
+            8
             Label : EXPRESSION
-              8
+              9
               Label : CASE
-                9
+                10
               Label : CODE
                 3
                 Label : EXPRESSION
-                  10
+                  11
                   Label : RETURN
-                    11
+                    12
                 Label : EXPRESSION
-                  13
+                  14
           Label : CONDITION
             6
         Label : EXPRESSION
           5
           Label : CASES
-            7
+            8
             Label : EXPRESSION
-              15
+              16
               Label : CODE
                 3
                 Label : EXPRESSION
-                  10
+                  11
                   Label : RETURN
-                    11
+                    12
                 Label : EXPRESSION
-                  13
+                  14
           Label : CONDITION
             6
         Label : EXPRESSION
-          17
+          18
           Label : LEFT
-            16
+            17
           Label : RIGHT
-            18
+            19
             Label : LEFT
-              9
+              10
             Label : RIGHT
-              19
+              20
         Label : EXPRESSION
-          13
+          14
         Label : EXPRESSION
-          13
+          14

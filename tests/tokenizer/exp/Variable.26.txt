@@ -1,6 +1,34 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,106 +38,106 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : NAME
-            7
+            8
             Label : INDEX
-              9
+              10
             Label : VARIABLE
-              7
+              8
               Label : INDEX
-                8
+                9
               Label : VARIABLE
                 6
         Label : EXPRESSION
           5
           Label : NAME
-            7
+            8
             Label : INDEX
-              9
-            Label : VARIABLE
-              7
-              Label : INDEX
-                8
-              Label : VARIABLE
-                6
-        Label : EXPRESSION
-          7
-          Label : INDEX
-            9
-          Label : VARIABLE
-            11
-            Label : MEMBER
               10
-            Label : OBJECT
-              6
-        Label : EXPRESSION
-          11
-          Label : MEMBER
-            12
-            Label : CODE
-              7
+            Label : VARIABLE
+              8
               Label : INDEX
                 9
               Label : VARIABLE
+                6
+        Label : EXPRESSION
+          8
+          Label : INDEX
+            10
+          Label : VARIABLE
+            12
+            Label : MEMBER
+              11
+            Label : OBJECT
+              6
+        Label : EXPRESSION
+          12
+          Label : MEMBER
+            13
+            Label : CODE
+              8
+              Label : INDEX
                 10
+              Label : VARIABLE
+                11
           Label : OBJECT
             6
         Label : EXPRESSION
-          7
+          8
           Label : ARGUMENT
-            13
+            14
           Label : NAME
-            7
+            8
             Label : INDEX
-              9
+              10
             Label : VARIABLE
-              11
+              12
               Label : MEMBER
-                10
+                11
               Label : OBJECT
                 6
         Label : EXPRESSION
-          11
+          12
           Label : METHOD
-            12
+            13
             Label : ARGUMENT
-              13
+              14
             Label : NAME
-              12
+              13
               Label : CODE
-                7
+                8
                 Label : INDEX
-                  9
-                Label : VARIABLE
                   10
+                Label : VARIABLE
+                  11
           Label : OBJECT
             6
         Label : EXPRESSION
-          7
+          8
           Label : ARGUMENT
-            13
+            14
           Label : NAME
-            7
+            8
             Label : INDEX
-              9
+              10
             Label : VARIABLE
-              17
+              18
               Label : CLASS
-                15
+                16
               Label : MEMBER
-                10
+                11
         Label : EXPRESSION
-          17
+          18
           Label : CLASS
-            15
+            16
           Label : METHOD
-            12
+            13
             Label : ARGUMENT
-              13
+              14
             Label : NAME
-              12
+              13
               Label : CODE
-                7
+                8
                 Label : INDEX
-                  9
-                Label : VARIABLE
                   10
+                Label : VARIABLE
+                  11

@@ -1,6 +1,24 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,54 +26,54 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
             5
             Label : CODE
-              7
+              8
               Label : LEFT
                 6
               Label : RIGHT
                 5
                 Label : CODE
-                  11
+                  12
                   Label : LEFT
                     5
                     Label : CODE
-                      9
+                      10
                       Label : LEFT
-                        8
+                        9
                       Label : RIGHT
-                        10
+                        11
                   Label : RIGHT
-                    12
+                    13
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
-            14
+            15
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
             5
             Label : CODE
-              11
+              12
               Label : LEFT
                 5
                 Label : CODE
-                  7
+                  8
                   Label : LEFT
                     6
                   Label : RIGHT
                     5
                     Label : CODE
-                      9
+                      10
                       Label : LEFT
-                        8
+                        9
                       Label : RIGHT
-                        10
+                        11
               Label : RIGHT
-                12
+                13
         Label : EXPRESSION
-          13
+          14
           Label : ARGUMENT
-            14
+            15

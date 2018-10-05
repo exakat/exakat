@@ -1,6 +1,36 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      22
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      23
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,47 +38,41 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
-        Label : EXPRESSION
-          6
-          Label : LEFT
             8
-          Label : RIGHT
-            9
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
-            10
+            9
           Label : RIGHT
-            11
+            10
         Label : EXPRESSION
-          12
-          Label : ARGUMENT
-            13
-            Label : ARGUMENT
-              8
-          Label : ARGUMENT
-            5
+          7
+          Label : LEFT
+            11
+          Label : RIGHT
+            12
+        Label : EXPRESSION
+          13
           Label : ARGUMENT
             14
             Label : ARGUMENT
-              10
-            Label : NAME
-              14
-          Label : NAME
-            12
-        Label : EXPRESSION
-          12
+              9
+          Label : ARGUMENT
+            5
           Label : ARGUMENT
             15
+            Label : ARGUMENT
+              11
             Label : NAME
               15
-              Label : DEFINITION
-                15
+          Label : NAME
+            13
+        Label : EXPRESSION
+          13
           Label : ARGUMENT
             16
             Label : NAME
@@ -61,43 +85,49 @@ Label : PROJECT
               17
               Label : DEFINITION
                 17
-          Label : BLOCK
+          Label : ARGUMENT
             18
+            Label : NAME
+              18
+              Label : DEFINITION
+                18
+          Label : BLOCK
+            19
             Label : EXPRESSION
-              19
-              Label : ARGUMENT
-                15
+              20
               Label : ARGUMENT
                 16
               Label : ARGUMENT
                 17
-          Label : DEFINITION
-            7
-          Label : DEFINITION
-            12
-            Label : ARGUMENT
-              13
               Label : ARGUMENT
-                8
-            Label : ARGUMENT
-              5
+                18
+          Label : DEFINITION
+            8
+          Label : DEFINITION
+            13
             Label : ARGUMENT
               14
               Label : ARGUMENT
-                10
-              Label : NAME
-                14
-            Label : NAME
-              12
-          Label : NAME
-            12
-        Label : EXPRESSION
-          19
-          Label : ARGUMENT
-            20
-          Label : ARGUMENT
-            13
+                9
             Label : ARGUMENT
-              21
+              5
+            Label : ARGUMENT
+              15
+              Label : ARGUMENT
+                11
+              Label : NAME
+                15
+            Label : NAME
+              13
+          Label : NAME
+            13
+        Label : EXPRESSION
+          20
           Label : ARGUMENT
-            22
+            21
+          Label : ARGUMENT
+            14
+            Label : ARGUMENT
+              22
+          Label : ARGUMENT
+            23

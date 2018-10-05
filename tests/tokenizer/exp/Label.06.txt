@@ -1,6 +1,30 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      24
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      28
+  Label : DEFINITION
+    9
+    Label : DEFINITION
+      32
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,62 +36,62 @@ Label : PROJECT
           Label : GOTOLABEL
             5
         Label : EXPRESSION
-          9
+          10
           Label : LEFT
             8
           Label : RIGHT
-            10
-        Label : EXPRESSION
-          7
-          Label : GOTOLABEL
             11
         Label : EXPRESSION
-          9
-          Label : LEFT
-            13
-          Label : RIGHT
-            14
-        Label : EXPRESSION
           7
           Label : GOTOLABEL
+            12
+        Label : EXPRESSION
+          10
+          Label : LEFT
+            14
+          Label : RIGHT
             15
         Label : EXPRESSION
-          9
-          Label : LEFT
-            17
-          Label : RIGHT
-            18
-        Label : EXPRESSION
           7
           Label : GOTOLABEL
+            16
+        Label : EXPRESSION
+          10
+          Label : LEFT
+            18
+          Label : RIGHT
             19
         Label : EXPRESSION
           7
           Label : GOTOLABEL
-            21
-        Label : EXPRESSION
-          9
-          Label : LEFT
-            23
-          Label : RIGHT
-            24
+            20
         Label : EXPRESSION
           7
           Label : GOTOLABEL
+            22
+        Label : EXPRESSION
+          10
+          Label : LEFT
+            24
+          Label : RIGHT
             25
         Label : EXPRESSION
-          9
+          7
+          Label : GOTOLABEL
+            26
+        Label : EXPRESSION
+          10
           Label : LEFT
-            27
-          Label : RIGHT
             28
+          Label : RIGHT
+            29
         Label : EXPRESSION
           7
           Label : GOTOLABEL
-            29
+            30
         Label : EXPRESSION
-          9
+          10
           Label : LEFT
-            31
-          Label : RIGHT
             32
+          Label : RIGHT
+            33

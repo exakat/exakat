@@ -1,6 +1,94 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      39
+    Label : DEFINITION
+      39
+    Label : DEFINITION
+      39
+    Label : DEFINITION
+      39
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      55
+    Label : DEFINITION
+      55
+    Label : DEFINITION
+      55
+    Label : DEFINITION
+      55
+    Label : DEFINITION
+      55
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      85
+    Label : DEFINITION
+      85
+    Label : DEFINITION
+      85
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,71 +100,71 @@ Label : PROJECT
           Label : CONDITION
             6
             Label : ARGUMENT
-              11
+              12
               Label : INDEX
-                12
+                13
               Label : VARIABLE
-                10
+                11
                 Label : MEMBER
-                  8
+                  9
                 Label : OBJECT
                   7
           Label : ELSE
-            14
+            15
             Label : EXPRESSION
-              14
+              15
               Label : EXPRESSION
-                36
+                37
                 Label : LEFT
+                  39
+                Label : RIGHT
                   38
-                Label : RIGHT
-                  37
                   Label : ARGUMENT
-                    41
+                    42
                     Label : INDEX
-                      39
+                      40
                     Label : VALUE
-                      42
+                      43
               Label : EXPRESSION
                 5
                 Label : CONDITION
                   6
                   Label : ARGUMENT
-                    11
+                    12
                     Label : INDEX
-                      46
+                      47
                     Label : VARIABLE
-                      11
+                      12
                       Label : INDEX
-                        44
+                        45
                       Label : VARIABLE
-                        10
+                        11
                         Label : MEMBER
-                          8
+                          9
                         Label : OBJECT
                           7
                 Label : THEN
-                  14
+                  15
                   Label : EXPRESSION
-                    36
+                    37
                     Label : LEFT
-                      11
+                      12
                       Label : INDEX
-                        48
+                        49
                       Label : VARIABLE
-                        38
+                        39
                     Label : RIGHT
-                      11
+                      12
                       Label : INDEX
-                        46
+                        47
                       Label : VARIABLE
-                        11
+                        12
                         Label : INDEX
-                          44
+                          45
                         Label : VARIABLE
-                          10
+                          11
                           Label : MEMBER
-                            8
+                            9
                           Label : OBJECT
                             7
               Label : EXPRESSION
@@ -84,342 +172,342 @@ Label : PROJECT
                 Label : CONDITION
                   6
                   Label : ARGUMENT
-                    11
+                    12
                     Label : INDEX
-                      50
+                      51
                     Label : VARIABLE
-                      11
+                      12
                       Label : INDEX
-                        44
+                        45
                       Label : VARIABLE
-                        10
+                        11
                         Label : MEMBER
-                          8
+                          9
                         Label : OBJECT
                           7
                 Label : THEN
-                  14
+                  15
                   Label : EXPRESSION
-                    36
+                    37
                     Label : LEFT
-                      11
+                      12
                       Label : INDEX
-                        52
+                        53
                       Label : VARIABLE
-                        38
+                        39
                     Label : RIGHT
-                      11
+                      12
                       Label : INDEX
-                        50
+                        51
                       Label : VARIABLE
-                        11
+                        12
                         Label : INDEX
-                          44
+                          45
                         Label : VARIABLE
-                          10
+                          11
                           Label : MEMBER
-                            8
+                            9
                           Label : OBJECT
                             7
               Label : EXPRESSION
-                36
+                37
                 Label : LEFT
-                  54
+                  55
                 Label : RIGHT
-                  10
+                  11
                   Label : METHOD
-                    57
+                    58
                     Label : NAME
-                      57
+                      58
                     Label : ARGUMENT
-                      59
+                      60
                     Label : ARGUMENT
-                      37
+                      38
                       Label : ARGUMENT
-                        10
+                        11
                         Label : MEMBER
-                          61
+                          62
                         Label : OBJECT
                           7
                       Label : ARGUMENT
-                        10
+                        11
                         Label : MEMBER
-                          63
+                          64
                         Label : OBJECT
                           7
                       Label : ARGUMENT
-                        65
+                        66
                       Label : ARGUMENT
-                        38
+                        39
                       Label : ARGUMENT
-                        10
+                        11
                         Label : MEMBER
-                          66
+                          67
                         Label : OBJECT
                           7
                       Label : ARGUMENT
-                        10
+                        11
                         Label : MEMBER
-                          68
+                          69
                         Label : OBJECT
                           7
                   Label : OBJECT
-                    10
+                    11
                     Label : MEMBER
-                      55
+                      56
                     Label : OBJECT
                       7
               Label : EXPRESSION
                 5
                 Label : CONDITION
-                  10
+                  11
                   Label : MEMBER
-                    70
+                    71
                   Label : OBJECT
-                    54
+                    55
                 Label : ELSE
-                  14
+                  15
                   Label : EXPRESSION
-                    10
+                    11
                     Label : METHOD
-                      76
+                      77
                       Label : ARGUMENT
-                        18
+                        19
                       Label : NAME
-                        76
+                        77
                     Label : OBJECT
-                      15
+                      16
                   Label : EXPRESSION
-                    36
+                    37
                     Label : LEFT
-                      10
+                      11
                       Label : MEMBER
-                        80
+                        81
                       Label : OBJECT
                         7
                     Label : RIGHT
-                      10
+                      11
                       Label : MEMBER
-                        80
+                        81
                       Label : OBJECT
-                        54
+                        55
                   Label : EXPRESSION
-                    31
+                    32
                     Label : RETURN
-                      82
+                      83
                       Label : NOT
-                        83
+                        84
                         Label : ARGUMENT
-                          10
+                          11
                           Label : MEMBER
-                            8
+                            9
                           Label : OBJECT
                             7
                 Label : THEN
-                  14
+                  15
                   Label : EXPRESSION
                     5
                     Label : CONDITION
-                      74
+                      75
                       Label : LEFT
-                        10
+                        11
                         Label : MEMBER
-                          72
+                          73
                         Label : OBJECT
-                          54
+                          55
                       Label : RIGHT
-                        75
+                        76
                     Label : THEN
-                      14
+                      15
                       Label : EXPRESSION
-                        10
+                        11
                         Label : METHOD
-                          76
+                          77
                           Label : ARGUMENT
-                            18
+                            19
                           Label : NAME
-                            76
+                            77
                         Label : OBJECT
-                          15
+                          16
                       Label : EXPRESSION
-                        31
+                        32
                         Label : RETURN
-                          78
+                          79
             Label : EXPRESSION
-              14
+              15
               Label : EXPRESSION
-                36
+                37
                 Label : LEFT
-                  84
+                  85
                 Label : RIGHT
-                  10
+                  11
                   Label : METHOD
-                    85
+                    86
                     Label : ARGUMENT
-                      10
+                      11
                       Label : MEMBER
-                        87
+                        88
                       Label : OBJECT
-                        54
+                        55
                     Label : NAME
-                      85
+                      86
                   Label : OBJECT
                     7
               Label : EXPRESSION
                 5
                 Label : CONDITION
-                  74
+                  75
                   Label : LEFT
-                    11
+                    12
                     Label : INDEX
-                      89
+                      90
                     Label : VARIABLE
-                      10
+                      11
                       Label : MEMBER
-                        8
+                        9
                       Label : OBJECT
                         7
                   Label : RIGHT
-                    84
+                    85
                 Label : ELSE
-                  14
+                  15
                   Label : EXPRESSION
-                    36
+                    37
                     Label : LEFT
-                      11
+                      12
                       Label : INDEX
-                        89
+                        90
                       Label : VARIABLE
-                        10
+                        11
                         Label : MEMBER
-                          8
+                          9
                         Label : OBJECT
                           7
                     Label : RIGHT
-                      84
+                      85
                 Label : THEN
-                  14
+                  15
                   Label : EXPRESSION
-                    10
+                    11
                     Label : METHOD
-                      76
+                      77
                       Label : ARGUMENT
-                        18
+                        19
                       Label : NAME
-                        76
+                        77
                     Label : OBJECT
-                      15
+                      16
                   Label : EXPRESSION
-                    31
+                    32
                     Label : RETURN
-                      78
+                      79
           Label : THEN
-            14
+            15
             Label : EXPRESSION
               5
               Label : CONDITION
-                23
+                24
                 Label : LEFT
-                  20
+                  21
                   Label : LEFT
-                    10
+                    11
                     Label : METHOD
-                      16
+                      17
                       Label : ARGUMENT
-                        18
+                        19
                       Label : NAME
-                        16
+                        17
                     Label : OBJECT
-                      15
+                      16
                   Label : RIGHT
-                    10
+                    11
                     Label : MEMBER
-                      21
+                      22
                     Label : OBJECT
                       7
                 Label : RIGHT
-                  24
+                  25
                   Label : ARGUMENT
-                    18
+                    19
                   Label : NAME
-                    24
+                    25
               Label : THEN
-                14
+                15
                 Label : EXPRESSION
                   5
                   Label : CONDITION
-                    26
+                    27
                     Label : LEFT
-                      11
+                      12
                       Label : INDEX
-                        12
+                        13
                       Label : VARIABLE
-                        10
+                        11
                         Label : MEMBER
-                          8
+                          9
                         Label : OBJECT
                           7
                     Label : RIGHT
-                      11
+                      12
                       Label : INDEX
-                        27
+                        28
                       Label : VARIABLE
-                        10
+                        11
                         Label : MEMBER
-                          8
+                          9
                         Label : OBJECT
                           7
                   Label : THEN
-                    14
+                    15
                     Label : EXPRESSION
-                      10
+                      11
                       Label : METHOD
-                        29
+                        30
                         Label : ARGUMENT
-                          11
+                          12
                           Label : INDEX
-                            12
+                            13
                           Label : VARIABLE
-                            10
+                            11
                             Label : MEMBER
-                              8
+                              9
                             Label : OBJECT
                               7
                         Label : NAME
-                          29
+                          30
                       Label : OBJECT
                         7
                     Label : EXPRESSION
-                      31
+                      32
                       Label : RETURN
-                        10
+                        11
                         Label : METHOD
-                          32
+                          33
                           Label : ARGUMENT
-                            18
+                            19
                           Label : NAME
-                            32
+                            33
                         Label : OBJECT
                           7
                 Label : EXPRESSION
-                  10
+                  11
                   Label : METHOD
-                    34
+                    35
                     Label : ARGUMENT
-                      18
+                      19
                     Label : NAME
-                      34
+                      35
                   Label : OBJECT
-                    15
+                    16
                 Label : EXPRESSION
-                  36
+                  37
                   Label : LEFT
-                    10
+                    11
                     Label : MEMBER
-                      8
+                      9
                     Label : OBJECT
                       7
                   Label : RIGHT
-                    37
+                    38
                     Label : ARGUMENT
-                      18
+                      19

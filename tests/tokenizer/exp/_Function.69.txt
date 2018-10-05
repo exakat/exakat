@@ -1,6 +1,44 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    20
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
+    Label : DEFINITION
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -116,7 +154,7 @@ Label : PROJECT
             Label : EXPRESSION
               6
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
             Label : NAME
@@ -126,13 +164,13 @@ Label : PROJECT
             Label : ARGUMENT
               10
           Label : RIGHT
-            21
-            Label : ARGUMENT
-              22
+            22
             Label : ARGUMENT
               23
+            Label : ARGUMENT
+              24
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
             Label : NAME
@@ -142,13 +180,13 @@ Label : PROJECT
             Label : ARGUMENT
               10
           Label : RIGHT
-            21
-            Label : ARGUMENT
-              22
+            22
             Label : ARGUMENT
               23
+            Label : ARGUMENT
+              24
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
             Label : ARGUMENT
@@ -156,13 +194,13 @@ Label : PROJECT
             Label : NAME
               19
           Label : RIGHT
-            21
-            Label : ARGUMENT
-              22
+            22
             Label : ARGUMENT
               23
+            Label : ARGUMENT
+              24
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
             Label : ARGUMENT
@@ -174,15 +212,15 @@ Label : PROJECT
             Label : NAME
               19
           Label : RIGHT
-            21
-            Label : ARGUMENT
-              22
+            22
             Label : ARGUMENT
               23
             Label : ARGUMENT
               24
+            Label : ARGUMENT
+              25
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
             Label : NAME
@@ -192,15 +230,15 @@ Label : PROJECT
             Label : ARGUMENT
               12
           Label : RIGHT
-            21
-            Label : ARGUMENT
-              22
+            22
             Label : ARGUMENT
               23
             Label : ARGUMENT
               24
+            Label : ARGUMENT
+              25
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
             Label : ARGUMENT
@@ -212,15 +250,15 @@ Label : PROJECT
             Label : NAME
               19
           Label : RIGHT
-            21
-            Label : ARGUMENT
-              22
+            22
             Label : ARGUMENT
               23
             Label : ARGUMENT
               24
+            Label : ARGUMENT
+              25
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
             Label : NAME
@@ -230,15 +268,15 @@ Label : PROJECT
             Label : ARGUMENT
               6
           Label : RIGHT
-            21
-            Label : ARGUMENT
-              22
+            22
             Label : ARGUMENT
               23
             Label : ARGUMENT
               24
+            Label : ARGUMENT
+              25
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
             Label : ARGUMENT
@@ -250,15 +288,15 @@ Label : PROJECT
             Label : NAME
               19
           Label : RIGHT
-            21
-            Label : ARGUMENT
-              22
+            22
             Label : ARGUMENT
               23
             Label : ARGUMENT
               24
+            Label : ARGUMENT
+              25
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
             Label : NAME
@@ -268,15 +306,15 @@ Label : PROJECT
             Label : ARGUMENT
               12
           Label : RIGHT
-            21
-            Label : ARGUMENT
-              22
+            22
             Label : ARGUMENT
               23
             Label : ARGUMENT
               24
+            Label : ARGUMENT
+              25
         Label : EXPRESSION
-          20
+          21
           Label : LEFT
             19
             Label : ARGUMENT
@@ -288,10 +326,10 @@ Label : PROJECT
             Label : NAME
               19
           Label : RIGHT
-            21
-            Label : ARGUMENT
-              22
+            22
             Label : ARGUMENT
               23
             Label : ARGUMENT
               24
+            Label : ARGUMENT
+              25

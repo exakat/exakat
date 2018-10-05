@@ -2,7 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    8
+    9
+    Label : DEFINITION
+      8
     Label : DEFINITION
       8
   Label : FILE
@@ -21,8 +23,6 @@ Label : PROJECT
               7
               Label : NAME
                 8
-                Label : DEFINITION
-                  8
         Label : EXPRESSION
           5
           Label : ARGUMENT

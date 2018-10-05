@@ -1,6 +1,16 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    13
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
+    Label : DEFINITION
+      12
   Label : FILE
     3
     Label : EXPRESSION
@@ -22,17 +32,17 @@ Label : PROJECT
             Label : RIGHT
               12
           Label : THEN
-            13
+            14
             Label : EXPRESSION
-              14
+              15
               Label : RETURN
-                15
+                16
         Label : EXPRESSION
           5
           Label : CONDITION
             11
             Label : LEFT
-              17
+              18
               Label : NOT
                 7
                 Label : ARGUMENT
@@ -42,11 +52,11 @@ Label : PROJECT
             Label : RIGHT
               12
           Label : THEN
-            13
+            14
             Label : EXPRESSION
-              14
+              15
               Label : RETURN
-                15
+                16
         Label : EXPRESSION
           5
           Label : CONDITION
@@ -60,11 +70,11 @@ Label : PROJECT
             Label : RIGHT
               12
           Label : THEN
-            13
+            14
             Label : EXPRESSION
-              14
+              15
               Label : RETURN
-                15
+                16
         Label : EXPRESSION
           5
           Label : CONDITION
@@ -78,8 +88,8 @@ Label : PROJECT
             Label : RIGHT
               12
           Label : THEN
-            13
+            14
             Label : EXPRESSION
-              14
+              15
               Label : RETURN
-                15
+                16

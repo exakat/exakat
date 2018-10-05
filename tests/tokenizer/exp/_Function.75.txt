@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,24 +12,24 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
             Label : ARGUMENT
-              9
-              Label : NAME
-                9
-                Label : DEFINITION
-                  9
-              Label : TYPEHINT
-                8
-            Label : BLOCK
               10
+              Label : NAME
+                10
+                Label : DEFINITION
+                  10
+              Label : TYPEHINT
+                9
+            Label : BLOCK
+              11
               Label : EXPRESSION
-                11
+                12
                 Label : RETURN
-                  9
+                  10
             Label : RETURNED
-              9
+              10

@@ -1,6 +1,30 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,24 +34,24 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            7
+            8
             Label : LEFT
               6
             Label : RIGHT
-              8
+              9
         Label : EXPRESSION
-          9
+          10
           Label : NAME
-            9
+            10
           Label : ARGUMENT
-            7
+            8
             Label : LEFT
-              10
-            Label : RIGHT
               11
-          Label : ARGUMENT
-            7
-            Label : LEFT
-              12
             Label : RIGHT
+              12
+          Label : ARGUMENT
+            8
+            Label : LEFT
               13
+            Label : RIGHT
+              14

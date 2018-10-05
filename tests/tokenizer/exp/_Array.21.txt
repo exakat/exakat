@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    15
+    Label : DEFINITION
+      14
   Label : FILE
     3
     Label : EXPRESSION
@@ -38,7 +42,7 @@ Label : PROJECT
             Label : INDEX
               13
             Label : VARIABLE
-              15
+              16
               Label : MEMBER
                 6
               Label : OBJECT
@@ -50,8 +54,8 @@ Label : PROJECT
             Label : INDEX
               13
             Label : VARIABLE
-              17
+              18
               Label : CLASS
-                16
+                17
               Label : CONSTANT
                 6

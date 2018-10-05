@@ -1,6 +1,46 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+    Label : DEFINITION
+      7
+  Label : DEFINITION
+    8
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
+    Label : DEFINITION
+      13
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,57 +50,39 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            11
+            12
             Label : LEFT
               6
               Label : CODE
-                8
+                9
                 Label : LEFT
                   7
                 Label : RIGHT
-                  8
+                  9
                   Label : LEFT
-                    9
-                  Label : RIGHT
                     10
+                  Label : RIGHT
+                    11
             Label : RIGHT
-              12
+              13
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            8
+            9
             Label : LEFT
               6
               Label : CODE
-                8
+                9
                 Label : LEFT
                   7
                 Label : RIGHT
-                  8
+                  9
                   Label : LEFT
-                    9
-                  Label : RIGHT
                     10
-            Label : RIGHT
-              12
-        Label : EXPRESSION
-          5
-          Label : ARGUMENT
-            13
-            Label : LEFT
-              6
-              Label : CODE
-                8
-                Label : LEFT
-                  7
-                Label : RIGHT
-                  8
-                  Label : LEFT
-                    9
                   Label : RIGHT
-                    10
+                    11
             Label : RIGHT
-              12
+              13
         Label : EXPRESSION
           5
           Label : ARGUMENT
@@ -68,17 +90,17 @@ Label : PROJECT
             Label : LEFT
               6
               Label : CODE
-                8
+                9
                 Label : LEFT
                   7
                 Label : RIGHT
-                  8
+                  9
                   Label : LEFT
-                    9
-                  Label : RIGHT
                     10
+                  Label : RIGHT
+                    11
             Label : RIGHT
-              12
+              13
         Label : EXPRESSION
           5
           Label : ARGUMENT
@@ -86,34 +108,52 @@ Label : PROJECT
             Label : LEFT
               6
               Label : CODE
-                8
+                9
                 Label : LEFT
                   7
                 Label : RIGHT
-                  8
+                  9
                   Label : LEFT
-                    9
-                  Label : RIGHT
                     10
+                  Label : RIGHT
+                    11
             Label : RIGHT
-              12
+              13
         Label : EXPRESSION
           5
           Label : ARGUMENT
             16
-            Label : CONDITION
+            Label : LEFT
               6
               Label : CODE
-                8
+                9
                 Label : LEFT
                   7
                 Label : RIGHT
-                  8
+                  9
                   Label : LEFT
-                    9
-                  Label : RIGHT
                     10
+                  Label : RIGHT
+                    11
+            Label : RIGHT
+              13
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            17
+            Label : CONDITION
+              6
+              Label : CODE
+                9
+                Label : LEFT
+                  7
+                Label : RIGHT
+                  9
+                  Label : LEFT
+                    10
+                  Label : RIGHT
+                    11
             Label : ELSE
-              18
+              19
             Label : THEN
-              17
+              18

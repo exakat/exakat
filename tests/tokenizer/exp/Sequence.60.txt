@@ -1,6 +1,38 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      22
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      26
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,62 +44,62 @@ Label : PROJECT
           Label : BLOCK
             3
             Label : EXPRESSION
-              7
+              8
               Label : LEFT
-                12
+                13
               Label : RIGHT
-                14
+                15
                 Label : CONCAT
-                  13
+                  14
                 Label : CONCAT
-                  17
+                  18
                   Label : MEMBER
-                    16
+                    17
                   Label : OBJECT
-                    15
+                    16
             Label : EXPRESSION
-              18
+              19
               Label : CONDITION
-                19
-              Label : THEN
                 20
+              Label : THEN
+                21
                 Label : EXPRESSION
-                  22
+                  23
                   Label : LEFT
-                    21
+                    22
                   Label : RIGHT
-                    23
+                    24
             Label : EXPRESSION
-              18
+              19
               Label : CONDITION
-                24
+                25
               Label : THEN
-                20
+                21
                 Label : EXPRESSION
-                  22
+                  23
                   Label : LEFT
-                    25
-                  Label : RIGHT
                     26
+                  Label : RIGHT
+                    27
           Label : FINAL
             3
             Label : EXPRESSION
-              9
+              10
               Label : LEFT
                 6
               Label : RIGHT
-                10
+                11
           Label : INCREMENT
             3
             Label : EXPRESSION
-              11
+              12
               Label : POSTPLUSPLUS
                 6
           Label : INIT
             3
             Label : EXPRESSION
-              7
+              8
               Label : LEFT
                 6
               Label : RIGHT
-                8
+                9

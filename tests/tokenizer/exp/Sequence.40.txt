@@ -1,6 +1,18 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      10
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,12 +24,12 @@ Label : PROJECT
           Label : CONDITION
             6
           Label : THEN
-            7
+            8
             Label : EXPRESSION
-              8
+              9
             Label : EXPRESSION
-              10
+              11
               Label : LEFT
-                9
+                10
               Label : RIGHT
-                11
+                12

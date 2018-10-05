@@ -16,11 +16,11 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : CONDITION
-                15
+                16
                 Label : LEFT
                   10
                   Label : ARGUMENT
-                    14
+                    15
                     Label : CLASS
                       11
                     Label : MEMBER
@@ -28,12 +28,16 @@ Label : PROJECT
                   Label : NAME
                     10
                 Label : RIGHT
-                  16
+                  17
               Label : THEN
                 3
                 Label : EXPRESSION
-                  17
+                  18
                   Label : RETURN
                     6
+          Label : DEFINITION
+            14
+            Label : DEFINITION
+              13
           Label : NAME
             5

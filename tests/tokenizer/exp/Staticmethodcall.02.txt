@@ -1,6 +1,10 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,20 +12,20 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            12
+            13
             Label : CONCAT
-              11
+              12
               Label : CLASS
-                7
-              Label : METHOD
                 8
+              Label : METHOD
+                9
                 Label : ARGUMENT
-                  9
+                  10
                 Label : NAME
-                  8
+                  9
             Label : CONCAT
-              13
+              14

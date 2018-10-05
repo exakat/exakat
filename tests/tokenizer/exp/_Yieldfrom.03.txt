@@ -1,6 +1,30 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+    Label : DEFINITION
+      33
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      30
+    Label : DEFINITION
+      30
+  Label : DEFINITION
+    16
+    Label : DEFINITION
+      15
+    Label : DEFINITION
+      15
   Label : FILE
     3
     Label : EXPRESSION
@@ -36,21 +60,19 @@ Label : PROJECT
                 Label : BLOCK
                   7
                   Label : EXPRESSION
-                    19
+                    20
                     Label : ARGUMENT
-                      16
+                      17
                       Label : CONCAT
-                        17
+                        18
                       Label : CONCAT
                         15
                       Label : CONCAT
-                        18
+                        19
                 Label : CLASS
                   13
                 Label : VARIABLE
                   15
-                  Label : DEFINITION
-                    15
             Label : EXPRESSION
               9
               Label : YIELD
@@ -58,29 +80,31 @@ Label : PROJECT
                 Label : LEFT
                   6
                 Label : RIGHT
-                  20
+                  21
           Label : DEFINITION
-            15
+            16
+            Label : DEFINITION
+              15
             Label : DEFINITION
               15
           Label : DEFINITION
             5
             Label : ARGUMENT
-              26
+              27
             Label : NAME
               5
           Label : DEFINITION
             5
             Label : ARGUMENT
-              20
+              21
             Label : NAME
               5
           Label : NAME
             5
         Label : EXPRESSION
-          21
+          22
           Label : ARGUMENT
-            22
+            23
           Label : BLOCK
             7
             Label : EXPRESSION
@@ -90,45 +114,39 @@ Label : PROJECT
                 Label : EXPRESSION
                   9
                   Label : YIELD
-                    25
+                    26
                     Label : INDEX
-                      24
+                      25
                     Label : VALUE
-                      26
+                      27
               Label : CATCH
                 12
                 Label : BLOCK
                   7
                   Label : EXPRESSION
-                    19
+                    20
                     Label : ARGUMENT
-                      16
+                      17
                       Label : CONCAT
-                        27
+                        28
                       Label : CONCAT
                         15
                       Label : CONCAT
-                        18
+                        19
                 Label : CLASS
                   13
                 Label : VARIABLE
                   15
-                  Label : DEFINITION
-                    15
-                  Label : DEFINITION
-                    15
-                  Label : DEFINITION
-                    15
             Label : EXPRESSION
               8
               Label : BLOCK
                 7
                 Label : EXPRESSION
-                  28
+                  29
                   Label : YIELD
                     5
                     Label : ARGUMENT
-                      26
+                      27
                     Label : NAME
                       5
               Label : CATCH
@@ -136,29 +154,31 @@ Label : PROJECT
                 Label : BLOCK
                   7
                   Label : EXPRESSION
-                    19
+                    20
                     Label : ARGUMENT
-                      16
+                      17
                       Label : CONCAT
-                        27
+                        28
                       Label : CONCAT
                         15
                       Label : CONCAT
-                        18
+                        19
                 Label : CLASS
                   13
                 Label : VARIABLE
                   15
             Label : EXPRESSION
-              28
+              29
               Label : YIELD
                 5
                 Label : ARGUMENT
-                  20
+                  21
                 Label : NAME
                   5
           Label : DEFINITION
-            15
+            16
+            Label : DEFINITION
+              15
             Label : DEFINITION
               15
             Label : DEFINITION
@@ -166,118 +186,118 @@ Label : PROJECT
             Label : DEFINITION
               15
           Label : DEFINITION
-            24
+            25
           Label : DEFINITION
-            21
+            22
             Label : ARGUMENT
-              22
+              23
             Label : NAME
-              21
+              22
           Label : NAME
-            21
+            22
         Label : EXPRESSION
-          30
+          31
           Label : LEFT
-            29
+            30
           Label : RIGHT
-            26
+            27
         Label : EXPRESSION
           8
           Label : BLOCK
             7
             Label : EXPRESSION
-              31
+              32
               Label : BLOCK
                 7
                 Label : EXPRESSION
-                  39
+                  40
                   Label : ARGUMENT
-                    34
+                    35
                     Label : METHOD
-                      40
+                      41
                       Label : ARGUMENT
-                        22
+                        23
                       Label : NAME
-                        40
+                        41
                     Label : OBJECT
-                      32
+                      33
                   Label : NAME
-                    39
+                    40
               Label : FINAL
                 3
                 Label : EXPRESSION
-                  34
+                  35
                   Label : METHOD
-                    33
+                    34
                     Label : ARGUMENT
-                      22
+                      23
                     Label : NAME
-                      33
+                      34
                   Label : OBJECT
-                    32
+                    33
               Label : INCREMENT
                 3
                 Label : EXPRESSION
-                  34
+                  35
                   Label : METHOD
-                    35
+                    36
                     Label : ARGUMENT
-                      36
+                      37
                       Label : NEW
                         13
                         Label : ARGUMENT
-                          38
+                          39
                           Label : POSTPLUSPLUS
-                            37
+                            38
                             Label : CAST
-                              29
+                              30
                         Label : NAME
                           13
                     Label : NAME
-                      35
+                      36
                   Label : OBJECT
-                    32
+                    33
               Label : INIT
                 3
                 Label : EXPRESSION
-                  30
+                  31
                   Label : LEFT
-                    32
+                    33
                   Label : RIGHT
-                    21
+                    22
                     Label : ARGUMENT
-                      22
+                      23
                     Label : NAME
-                      21
+                      22
           Label : CATCH
             12
             Label : BLOCK
               7
               Label : EXPRESSION
-                19
+                20
                 Label : ARGUMENT
-                  16
+                  17
                   Label : CONCAT
-                    41
+                    42
                   Label : CONCAT
                     15
                   Label : CONCAT
-                    18
+                    19
             Label : CLASS
               13
             Label : VARIABLE
               15
         Label : EXPRESSION
-          39
+          40
           Label : ARGUMENT
-            34
+            35
             Label : METHOD
-              33
+              34
               Label : ARGUMENT
-                22
+                23
               Label : NAME
-                33
+                34
             Label : OBJECT
-              32
+              33
           Label : NAME
-            39
+            40

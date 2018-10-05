@@ -2,7 +2,9 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    5
+    6
+    Label : DEFINITION
+      5
     Label : DEFINITION
       5
   Label : FILE
@@ -15,8 +17,6 @@ Label : PROJECT
           7
           Label : LEFT
             5
-            Label : DEFINITION
-              5
           Label : RIGHT
             8
             Label : CONCAT

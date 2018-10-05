@@ -1,6 +1,70 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      23
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      8
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      13
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      15
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      16
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      19
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      21
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      22
   Label : FILE
     3
     Label : EXPRESSION
@@ -12,54 +76,54 @@ Label : PROJECT
           Label : CONDITION
             6
           Label : ELSE
-            8
+            9
             Label : CONDITION
-              9
+              10
             Label : ELSE
-              8
+              9
               Label : CONDITION
-                12
+                13
               Label : ELSE
-                8
+                9
                 Label : CONDITION
-                  15
+                  16
                 Label : ELSE
-                  8
+                  9
                   Label : CONDITION
-                    18
+                    19
                   Label : ELSE
                     3
                     Label : EXPRESSION
-                      21
-                    Label : EXPRESSION
                       22
+                    Label : EXPRESSION
+                      23
                   Label : THEN
                     3
                     Label : EXPRESSION
-                      19
-                    Label : EXPRESSION
                       20
+                    Label : EXPRESSION
+                      21
                 Label : THEN
                   3
                   Label : EXPRESSION
-                    16
-                  Label : EXPRESSION
                     17
+                  Label : EXPRESSION
+                    18
               Label : THEN
                 3
                 Label : EXPRESSION
-                  13
-                Label : EXPRESSION
                   14
+                Label : EXPRESSION
+                  15
             Label : THEN
               3
               Label : EXPRESSION
-                10
-              Label : EXPRESSION
                 11
+              Label : EXPRESSION
+                12
           Label : THEN
             3
             Label : EXPRESSION
-              7
+              8
         Label : EXPRESSION
-          23
+          24

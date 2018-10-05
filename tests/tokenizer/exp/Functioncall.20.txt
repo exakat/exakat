@@ -1,6 +1,32 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      11
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      14
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      18
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      21
   Label : FILE
     3
     Label : EXPRESSION
@@ -8,54 +34,54 @@ Label : PROJECT
       Label : CODE
         3
         Label : EXPRESSION
-          6
+          7
           Label : LEFT
             5
           Label : RIGHT
-            7
+            8
             Label : ARGUMENT
-              8
+              9
               Label : INDEX
                 5
               Label : VALUE
-                9
+                10
             Label : ARGUMENT
-              8
+              9
               Label : INDEX
-                11
+                12
                 Label : INDEX
-                  12
-                Label : VARIABLE
-                  10
-              Label : VALUE
-                11
-                Label : INDEX
-                  14
-                Label : VARIABLE
                   13
-            Label : ARGUMENT
-              8
-              Label : INDEX
-                15
+                Label : VARIABLE
+                  11
               Label : VALUE
+                12
+                Label : INDEX
+                  15
+                Label : VARIABLE
+                  14
+            Label : ARGUMENT
+              9
+              Label : INDEX
                 16
+              Label : VALUE
+                17
             Label : ARGUMENT
-              8
+              9
               Label : INDEX
-                19
+                20
                 Label : MEMBER
+                  19
+                Label : OBJECT
                   18
-                Label : OBJECT
-                  17
               Label : VALUE
-                19
+                20
                 Label : MEMBER
-                  21
+                  22
                 Label : OBJECT
-                  20
+                  21
             Label : ARGUMENT
-              8
+              9
               Label : INDEX
-                22
-              Label : VALUE
                 23
+              Label : VALUE
+                24

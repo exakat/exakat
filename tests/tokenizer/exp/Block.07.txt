@@ -1,6 +1,26 @@
 test
 Label : PROJECT
   1
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+    Label : DEFINITION
+      10
+  Label : DEFINITION
+    7
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
+    Label : DEFINITION
+      6
   Label : FILE
     3
     Label : EXPRESSION
@@ -10,62 +30,62 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : BLOCK
-            10
+            11
             Label : EXPRESSION
-              10
+              11
               Label : EXPRESSION
-                11
+                12
                 Label : ARGUMENT
-                  12
+                  13
           Label : SOURCE
-            8
+            9
             Label : MEMBER
-              7
+              8
             Label : OBJECT
               6
           Label : VALUE
-            9
+            10
         Label : EXPRESSION
           5
           Label : BLOCK
-            10
+            11
             Label : EXPRESSION
-              13
+              14
               Label : POSTPLUSPLUS
                 6
             Label : EXPRESSION
-              10
+              11
               Label : EXPRESSION
-                11
-                Label : ARGUMENT
-                  14
-          Label : SOURCE
-            8
-            Label : MEMBER
-              7
-            Label : OBJECT
-              6
-          Label : VALUE
-            9
-        Label : EXPRESSION
-          5
-          Label : BLOCK
-            10
-            Label : EXPRESSION
-              10
-              Label : EXPRESSION
-                11
+                12
                 Label : ARGUMENT
                   15
-            Label : EXPRESSION
-              13
-              Label : POSTPLUSPLUS
-                6
           Label : SOURCE
-            8
+            9
             Label : MEMBER
-              7
+              8
             Label : OBJECT
               6
           Label : VALUE
+            10
+        Label : EXPRESSION
+          5
+          Label : BLOCK
+            11
+            Label : EXPRESSION
+              11
+              Label : EXPRESSION
+                12
+                Label : ARGUMENT
+                  16
+            Label : EXPRESSION
+              14
+              Label : POSTPLUSPLUS
+                6
+          Label : SOURCE
             9
+            Label : MEMBER
+              8
+            Label : OBJECT
+              6
+          Label : VALUE
+            10
