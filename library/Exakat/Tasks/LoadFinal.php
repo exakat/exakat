@@ -641,7 +641,7 @@ GREMLIN;
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
               ->inIs('NAME')
-              ->addEto('DEFINITION', 'first')
+              ->addETo('DEFINITION', 'first')
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
