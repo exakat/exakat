@@ -31,7 +31,7 @@ class Analyzer extends TestCase {
 
         $analyzerobject = $themes->getInstance($test_config, null, $config);
         if ($analyzerobject === null) {
-            $this->markTestSkipped('Couldn\'t get an analyzer for '.$test_config.'.');
+            $this->markTestSkipped("Couldn\'t get an analyzer for $test_config.");
         }
         if (!$analyzerobject->checkPhpVersion($phpversion)) {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
@@ -40,7 +40,7 @@ class Analyzer extends TestCase {
         require("exp/$file.php");
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
-        $res = shell_exec($config->$versionPHP.' -l ./source/'.$file.'.php 2>/dev/null');
+        $res = shell_exec("{$config->$versionPHP} -l ./source/$file.php 2>/dev/null");
         if (strpos($res, 'No syntax errors detected') === false) {
             $this->markTestSkipped('Compilation problem : "'.trim($res).'".');
         }
@@ -56,16 +56,16 @@ class Analyzer extends TestCase {
                 $confs = join(', ', $confs);
             }
             
-            $this->markTestSkipped('Needs configuration : '.$confs.'.');
+            $this->markTestSkipped("Needs configuration : $confs.");
         }
         
         $analyzer = escapeshellarg($test_config);
         $source = "source/$file.php";
 
         if (is_dir($source)) {
-            $shell = 'cd ../..; php exakat test -r -d ./tests/analyzer/'.$source.' -P '.$analyzer.' -p test -q -o -json';
+            $shell = "cd ../..; php exakat test -r -d ./tests/analyzer/$source -P $analyzer -p test -q -o -json";
         } else {
-            $shell = 'cd ../..; php exakat test    -f ./tests/analyzer/'.$source.' -P '.$analyzer.' -p test -q -o -json';
+            $shell = "cd ../..; php exakat test    -f ./tests/analyzer/$source -P $analyzer -p test -q -o -json";
         }
 
         $shell_res = shell_exec($shell);
