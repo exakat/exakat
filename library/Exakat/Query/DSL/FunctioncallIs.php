@@ -33,20 +33,19 @@ class FunctioncallIs extends DSL {
         assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
         assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
 
-        $fullnspaths = makeArray($fullnspath);
-        $diff = array_intersect($fullnspaths, self::$availableFunctioncalls);
+        $diff = $this->normalizeFunctioncalls($fullnspath);
         
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         }
         
-        $atomIs = DSL::factory('atomIs');
+        $atomIs = $this->dslfactory->factory('atomIs');
         $return = $atomIs->run('Functioncall');
 
-        $has = DSL::factory('has');
+        $has = $this->dslfactory->factory('has');
         $return->add($has->run('fullnspath'));
 
-        $fullnspathIs = DSL::factory('fullnspathIs');
+        $fullnspathIs = $this->dslfactory->factory('fullnspathIs');
         $return->add($fullnspathIs->run(array_values($diff), Analyzer::CASE_INSENSITIVE));
 
         return $return;

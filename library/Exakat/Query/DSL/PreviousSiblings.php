@@ -27,7 +27,7 @@ class PreviousSiblings extends DSL {
     public function run() : Command {
         list($link) = func_get_args();
 
-        $hasIn = DSL::factory('hasIn');
+        $hasIn = $this->dslfactory->factory('hasIn');
         $return = $hasIn->run($link);
         
         return $return->add(new Command('filter{it.get().value("rank") > 0}.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }'));

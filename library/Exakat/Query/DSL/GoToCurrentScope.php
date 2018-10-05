@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 class GoToCurrentScope extends DSL {
     public function run() : Command {
-        $return = DSL::factory('goToInstruction');
+        $return = $this->dslfactory->factory('goToInstruction');
         
         return $return->run(array('Function', 'Phpcode'));
     }

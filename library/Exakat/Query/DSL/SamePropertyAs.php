@@ -30,7 +30,8 @@ class SamePropertyAs extends DSL {
     public function run() {
         list($property, $name, $caseSensitive) = func_get_args();
 
-        assert($this->assertProperty($property));
+        $this->assertProperty($property);
+        $this->assertVariable($name);
 
         if ($property === 'label') {
             return new Command('filter{ it.get().label() == '.$name.'}');

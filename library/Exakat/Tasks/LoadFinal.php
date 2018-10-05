@@ -56,8 +56,6 @@ class LoadFinal extends Tasks {
         $this->spotPHPNativeFunctions(); // This one saves SQL table functioncalls
 
         // This is needed AFTER functionnames are found
-        DSL::init($this->datastore);
-        
         $this->spotFallbackConstants();
         $this->fixFullnspathConstants();
         $this->spotPHPNativeConstants();
@@ -129,7 +127,7 @@ GREMLIN;
         display("fixing Fullnspath for Constants");
         // fix path for constants with Const
 
-        $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null);
+        $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null, $this->datastore);
         $query->atomIs(array('Identifier', 'Nsname'))
               ->has('fullnspath')
               ->_as('identifier')
@@ -160,7 +158,7 @@ GREMLIN
         // May be array_keys
         $constantsPHP = array_values($constants);
 
-        $query = new Query(0, $this->config->project, 'spotPHPNativeConstants', null);
+        $query = new Query(0, $this->config->project, 'spotPHPNativeConstants', null, $this->datastore);
         $query->atomIs('Identifier')
               ->has('fullnspath')
               ->values('code')
@@ -259,12 +257,12 @@ GREMLIN;
     private function overwrittenMethods() {
         $this->logTime('overwrittenMethods');
         
-        $query = new Query(0, $this->config->project, 'overwrittenMethods', null);
+        $query = new Query(0, $this->config->project, 'overwrittenMethods', null, $this->datastore);
         $query->atomIs(array('Method', 'Magicmethod'))
               ->outIs('NAME')
               ->savePropertyAs('lccode', 'name')
               ->goToClass()
-              ->GoToAllImplements(Analyzer::EXCLUDE_SELF)
+              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
               ->samePropertyAs('code', 'name',  Analyzer::CASE_INSENSITIVE)
@@ -280,9 +278,10 @@ GREMLIN;
         
     private function setArrayClassDefinition() {
         $this->logTime('setArrayClassDefinition');
+        display('setArrayClassDefinition');
         
         //$id, $project, $analyzer, $php
-        $query = new Query(0, $this->config->project, 'setArrayClassDefinition', null);
+        $query = new Query(0, $this->config->project, 'setArrayClassDefinition', null, $this->datastore);
         $query->atomIs('Arrayliteral')
               ->is('count', 2)
               ->outWithRank('ARGUMENT', 1)
@@ -307,9 +306,10 @@ GREMLIN;
 
     private function linkStaticMethodCall() {
         $this->logTime('linkStaticMethodCall');
+        display('linkStaticMethodCall');
         
         // For static method calls, in traits
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null);
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
         $query->atomIs('Trait')
               ->savePropertyAs('fullnspath', 'fnp')
               ->outIs(array('METHOD', 'MAGICMETHOD'))
@@ -334,7 +334,7 @@ GREMLIN;
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         // For static method calls, in class
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null);
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
         $query->atomIs(array('Class', 'Classanonymous'))
               ->savePropertyAs('fullnspath', 'fnp')
               ->outIs(array('METHOD', 'MAGICMETHOD'))
@@ -360,7 +360,7 @@ GREMLIN;
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
         // For static property calls, in class
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null);
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
         $query->atomIs(array('Class', 'Classanonymous'))
               ->savePropertyAs('fullnspath', 'fnp')
               ->outIs(array('METHOD', 'MAGICMETHOD'))
@@ -625,7 +625,7 @@ GREMLIN;
 
     private function makeClassConstantDefinition() {
         // Create link between Class constant and definition
-        $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null);
+        $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null, $this->datastore);
         $query->atomIs('Staticconstant')
               ->outIs('CONSTANT')
               ->savePropertyAs('code', 'name')

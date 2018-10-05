@@ -30,64 +30,45 @@ use Exakat\GraphElements;
 use Exakat\Analyzer\Analyzer;
 
 abstract class DSL {
-    public static $availableAtoms         = array();
-    public static $availableLinks         = array();
-    public static $availableFunctioncalls = array();
-    protected static $dictCode            = null;
-    protected static $linksDown           = '';
-    protected static $MAX_LOOPING         = Analyzer::MAX_LOOPING;
-
-    public static function init($datastore) {
-        if (!empty(self::$linksDown)) {
-            // Already inited
-            return;
-        }
-
-        self::$dictCode = Dictionary::factory($datastore);
-
-        self::$linksDown = GraphElements::linksAsList();
-
-        if (empty(self::$availableAtoms)) {
-            $data = $datastore->getCol('TokenCounts', 'token');
-            
-            self::$availableAtoms = array('Project', 'File');
-            self::$availableLinks = array('DEFINITION', 'ANALYZED', 'PROJECT', 'FILE', 'OVERWRITE');
-
-            foreach($data as $token){
-                if ($token === strtoupper($token)) {
-                    self::$availableLinks[] = $token;
-                } else {
-                    self::$availableAtoms[] = $token;
-                }
-            }
-
-            self::$availableFunctioncalls = $datastore->getCol('functioncalls', 'functioncall');
-        }
-    }
-
-    public static function factory($name) {
-        if (strtolower($name) === '_as') {
-            $className = __NAMESPACE__.'\\_As';
-        } else {
-            $className = __NAMESPACE__.'\\'.ucfirst($name);
-        }
-        
-        if (!class_exists($className)) {
-            throw new UnknownDsl($name);
-        }
-        return new $className();
-    }
+    const VARIABLE_WRITE = true;
+    const VARIABLE_READ  = false;
     
+    protected $dslfactory             = null;
+    protected $availableAtoms         = array();
+    protected $availableLinks         = array();
+    protected $availableFunctioncalls = array();
+    protected $availableVariables     = array(); // This one is per query 
+    protected $dictCode               = null;
+
+    protected static $linksDown     = '';
+    protected static $MAX_LOOPING   = Analyzer::MAX_LOOPING;
+
+    public function __construct($dslfactory, $dictCode, $availableAtoms, $availableLinks, $availableFunctioncalls, &$availableVariables) {
+        $this->dslfactory             = $dslfactory;
+        $this->dictCode               = $dictCode;
+        $this->availableAtoms         = $availableAtoms;
+        $this->availableLinks         = $availableLinks;
+        $this->availableFunctioncalls = $availableFunctioncalls;
+        $this->availableVariables     = &$availableVariables;
+        
+        self::$linksDown = GraphElements::linksAsList();
+    }
+
     abstract public function run();
 
     protected function normalizeAtoms($atoms) {
         $atoms = makeArray($atoms);
-        return array_values(array_intersect($atoms, self::$availableAtoms));
+        return array_values(array_intersect($atoms, $this->availableAtoms));
     }
 
     protected function normalizeLinks($links) {
         $links = makeArray($links);
-        return array_values(array_intersect($links, self::$availableLinks));
+        return array_values(array_intersect($links, $this->availableLinks));
+    }
+    
+    protected function normalizeFunctioncalls($fullnspaths) {
+        $fullnspaths = makeArray($fullnspaths);
+        return array_values(array_intersect($fullnspaths, $this->availableFunctioncalls));
     }
 
     protected function SorA($value) {
@@ -99,15 +80,24 @@ abstract class DSL {
             assert(false, '$v is not a string or an array');
         }
     }
+    
+    protected function assertVariable($name, $write = self::VARIABLE_READ) {
+        if ($write === self::VARIABLE_WRITE) {
+            assert(!in_array($name, $this->availableVariables), "Variable '$name' is already taken");
+            $this->availableVariables[] = $name;
+        } else {
+            assert(in_array($name, $this->availableVariables), "Variable '$name' is not defined");
+        }
+    }
 
     protected function assertLink($link) {
         if (is_string($link)) {
             assert(!in_array($link, array('KEY', 'ELEMENT', 'PROPERTY')), $link.' is no more');
-            assert($link === strtoupper($link), 'Wrong format for LINK name : '.$link);
+            assert($link === strtoupper($link), "Wrong format for LINK name : $link");
         } elseif (is_array($link)) {
             foreach($link as $l) {
                 assert(!in_array($l, array('KEY', 'ELEMENT', 'PROPERTY')), $l.' is no more');
-                assert($l === strtoupper($l), 'Wrong format for LINK name : '.$l);
+                assert($l === strtoupper($l), "Wrong format for LINK name : $l");
             }
         } else {
             assert(false, 'Unsupported type for link : '.gettype($link));
@@ -117,10 +107,10 @@ abstract class DSL {
 
     protected function assertAtom($atom) {
         if (is_string($atom)) {
-            assert($atom === ucfirst(strtolower($atom)), 'Wrong format for Atom name : '.$atom);
+            assert($atom === ucfirst(strtolower($atom)), "Wrong format for Atom name : $atom");
         } elseif (is_array($atom)) {
             foreach($atom as $a) {
-                assert($a === ucfirst(strtolower($a)), 'Wrong format for Atom name : '.$a);
+                assert($a === ucfirst(strtolower($a)), "Wrong format for Atom name : $a");
             }
         } else {
             assert(false, 'Unsupported type for atom : '.gettype($analyzer));
@@ -131,10 +121,10 @@ abstract class DSL {
 
     protected function assertAnalyzer($analyzer) {
         if (is_string($analyzer)) {
-            assert(preg_match('#[A-Z]\w+/[A-Z]\w+#', $analyzer), 'Wrong format for Analyzer : '.$analyzer);
+            assert(preg_match('#[A-Z]\w+/[A-Z]\w+#', $analyzer), "Wrong format for Analyzer : $analyzer");
         } elseif (is_array($analyzer)) {
             foreach($analyzer as $a) {
-                assert(preg_match('#[A-Z]\W\w+/[A-Z]\W\w+#', $a), 'Wrong format for Analyzer : '.$a);
+                assert(preg_match('#[A-Z]\W\w+/[A-Z]\W\w+#', $a), "Wrong format for Analyzer : $a");
             }
         } else {
             assert(false, 'Unsupported type for analyzer : '.gettype($analyzer));

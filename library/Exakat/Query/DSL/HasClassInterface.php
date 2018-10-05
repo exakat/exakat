@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 class HasClassInterface extends DSL {
     public function run() {
-        $return = DSL::factory('hasInstruction');
+        $return = $this->dslfactory->factory('hasInstruction');
         
         return $return->run(array('Class', 'Classanonymous', 'Interface'));
     }

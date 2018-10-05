@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class AddZero extends Analyzer {
     public function analyze() {
-        // $x += 0
+                // $x += 0
         $this->atomIs('Assignation')
              ->codeIs(array('+=', '-='), Analyzer::TRANSLATE, Analyzer::CASE_SENSITIVE)
              ->outIs('RIGHT')

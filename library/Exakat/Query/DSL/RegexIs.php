@@ -30,7 +30,7 @@ class RegexIs extends DSL {
         list($column, $regex) = func_get_args();
 
         if ($column === 'code') {
-            $values = self::$dictCode->grep($regex);
+            $values = $this->dictCode->grep($regex);
             
             if (empty($values)) {
                 return new Command(Query::NO_QUERY);

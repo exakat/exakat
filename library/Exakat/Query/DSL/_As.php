@@ -29,7 +29,7 @@ class _As extends DSL {
     public function run() {
         list($name) = func_get_args();
         
-        assert($name !== 'first', '"first" is already taken');
+//        $this->assertLabel($name);
 
         return new Command("as(\"$name\")");
     }

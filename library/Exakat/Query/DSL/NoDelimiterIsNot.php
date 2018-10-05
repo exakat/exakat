@@ -30,7 +30,7 @@ class NoDelimiterIsNot extends DSL {
         list($code, $caseSensitive) = func_get_args();
 
         $return = new Command('hasLabel("String")');
-        $propertyIsNot = DSL::factory('propertyIsNot');
+        $propertyIsNot = $this->dslfactory->factory('propertyIsNot');
         
         return $return->add($propertyIsNot->run('noDelimiter', $code, $caseSensitive));
     }

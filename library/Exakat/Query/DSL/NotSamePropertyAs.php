@@ -30,7 +30,9 @@ class NotSamePropertyAs extends DSL {
     public function run() {
         list($property, $name, $caseSensitive) = func_get_args();
 
-        assert($this->assertProperty($property));
+        $this->assertProperty($property);
+        $this->assertVariable($name);
+
         if ($caseSensitive === Analyzer::CASE_SENSITIVE || in_array($property, array('line', 'rank', 'code', 'propertyname', 'boolean', 'count'))) {
             $caseSensitive = '';
         } else {

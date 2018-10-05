@@ -24,6 +24,7 @@
 namespace Exakat\Query;
 
 use Exakat\Query\DSL\DSL;
+use Exakat\Query\DSL\DSLFactory;
 use Exakat\Query\DSL\Command;
 
 class Query {
@@ -39,18 +40,20 @@ class Query {
     private $commands         = array();
     private $arguments        = array();
     private $query            = null;
-
+    private $queryFactory     = null;
     
-    public function __construct($id, $project, $analyzer, $php) {
+    public function __construct($id, $project, $analyzer, $php, $datastore) {
         $this->id       = $id;
         $this->project  = $project;
         $this->analyzer = $analyzer;
         $this->php      = $php;
+        
+        $this->queryFactory = new DSLFactory($datastore);
     }
 
     public function __call($name, $args) {
         try {
-            $command = DSL::factory($name);
+            $command = $this->queryFactory->factory($name);
             $this->commands[] = $command->run(...$args);
         } catch (UnknownDsl $e) {
             die(ici);

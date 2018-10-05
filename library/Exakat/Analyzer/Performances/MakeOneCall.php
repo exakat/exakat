@@ -70,7 +70,6 @@ class MakeOneCall extends Analyzer {
         // Second level calling
         $this->atomFunctionIs($functionsArg2)
              ->hasIn('ARGUMENT')
-             ->savePropertyAs('fullnspath', 'function')
              ->inIs('ARGUMENT')
              ->atomIs('Functioncall')
              ->has('fullnspath')

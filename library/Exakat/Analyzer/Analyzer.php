@@ -162,7 +162,6 @@ abstract class Analyzer {
         
         $this->linksDown = GraphElements::linksAsList();
 
-        DSL::init(self::$datastore);
         if (empty(self::$availableAtoms) && $this->gremlin !== null) {
             $data = self::$datastore->getCol('TokenCounts', 'token');
             
@@ -180,7 +179,7 @@ abstract class Analyzer {
             self::$availableFunctioncalls = self::$datastore->getCol('functioncalls', 'functioncall');
         }
         
-        $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable);
+        $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable, self::$datastore);
         
         self::$methods = new Methods($this->config);
     }
@@ -1626,7 +1625,7 @@ GREMLIN;
     }
     
     private function initNewQuery() {
-        $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable);
+        $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable, self::$datastore);
     }
     
     public function execQuery() {

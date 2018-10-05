@@ -29,7 +29,9 @@ class SavePropertyAs extends DSL {
     public function run() {
         list($property, $name) = func_get_args();
 
-        assert($this->assertProperty($property));
+        $this->assertVariable($name, self::VARIABLE_WRITE);
+        $this->assertProperty($property);
+
         if ($property === 'label') {
             return new Command('sideEffect{ '.$name.' = it.get().label(); }');
         } elseif ($property === 'id') {

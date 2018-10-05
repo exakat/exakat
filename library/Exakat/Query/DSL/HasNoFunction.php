@@ -29,7 +29,7 @@ class HasNoFunction extends DSL {
     public function run() {
         list($type) = func_get_args();
         
-        $return = DSL::factory('hasNoInstruction');
+        $return = $this->dslfactory->factory('hasNoInstruction');
         return $return->run($type);
     }
 }

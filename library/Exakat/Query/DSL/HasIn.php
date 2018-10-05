@@ -28,16 +28,15 @@ use Exakat\Analyzer\Analyzer;
 
 class HasIn extends DSL {
     public function run() : Command {
-        list($link) = func_get_args();
+        list($links) = func_get_args();
 
-        assert($this->assertLink($link));
+        assert($this->assertLink($links));
+        $diff = $this->normalizeLinks($links);
 
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         } else {
-            return new Command('where( __.in('.$this->SorA($link).') )');
+            return new Command('where( __.in('.$this->SorA($diff).') )');
         }
     }
 }

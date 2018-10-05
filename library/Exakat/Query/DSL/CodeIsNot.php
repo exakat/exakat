@@ -40,7 +40,7 @@ class CodeIsNot extends DSL {
         if ($translate === Analyzer::TRANSLATE) {
             $translatedCode = array();
             $code = makeArray($code);
-            $translatedCode = self::$dictCode->translate($code, $caseSensitive === Analyzer::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
+            $translatedCode = $this->dictCode->translate($code, $caseSensitive === Analyzer::CASE_INSENSITIVE ? Dictionary::CASE_INSENSITIVE : Dictionary::CASE_SENSITIVE);
 
             if (empty($translatedCode)) {
                 // Couldn't find anything in the dictionary : OK!

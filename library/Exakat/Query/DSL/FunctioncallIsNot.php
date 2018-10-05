@@ -36,13 +36,13 @@ class FunctioncallIsNot extends DSL {
             return new Command(Query::NO_QUERY);
         }
 
-        $atomIs = DSL::factory('atomIs');
+        $atomIs = $this->dslfactory->factory('atomIs');
         $return = $atomIs->run('Functioncall');
 
-        $has = DSL::factory('has');
+        $has = $this->dslfactory->factory('has');
         $return->add($has->run('fullnspath'));
 
-        $fullnspathIs = DSL::factory('fullnspathIsNot');
+        $fullnspathIs = $this->dslfactory->factory('fullnspathIsNot');
         $return->add($fullnspathIs->run(array_values($diff)));
 
         return $return;

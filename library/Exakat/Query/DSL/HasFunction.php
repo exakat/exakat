@@ -25,7 +25,7 @@ namespace Exakat\Query\DSL;
 
 class HasFunction extends DSL {
     public function run() : Command {
-        $return = DSL::factory('hasInstruction');
+        $return = $this->dslfactory->factory('hasInstruction');
         
         return $return->run(array('Function', 'Closure', 'Method', 'Magicmethod'));
     }

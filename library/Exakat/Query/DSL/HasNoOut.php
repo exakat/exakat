@@ -28,12 +28,11 @@ use Exakat\Analyzer\Analyzer;
 
 class HasNoOut extends DSL {
     public function run() : Command {
-        list($link) = func_get_args();
+        list($links) = func_get_args();
 
-        assert($this->assertLink($link));
+        assert($this->assertLink($links));
+        $diff = $this->normalizeLinks($links);
 
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
             return new Command(Query::NO_QUERY);
         } else {

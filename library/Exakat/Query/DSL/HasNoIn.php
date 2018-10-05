@@ -28,16 +28,15 @@ use Exakat\Analyzer\Analyzer;
 
 class HasNoIn extends DSL {
     public function run() : Command {
-        list($link) = func_get_args();
+        list($links) = func_get_args();
 
-        assert($this->assertLink($link));
+        assert($this->assertLink($links));
 
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
+        $diff = $this->normalizeLinks($links);
         if (empty($diff)) {
             return new Command(Query::NO_QUERY);
         } else {
-            return new Command('not( where( __.in('.$this->SorA($link).') ) )');
+            return new Command('not( where( __.in('.$this->SorA($diff).') ) )');
         }
     }
 }

@@ -29,7 +29,7 @@ class FullcodeIs extends DSL {
     public function run() {
         list($code, $caseSensitive) = func_get_args();
 
-        $return = DSL::factory('propertyIs');
+        $return = $this->dslfactory->factory('propertyIs');
 
         return $return->run('fullcode', $code, $caseSensitive);
     }
