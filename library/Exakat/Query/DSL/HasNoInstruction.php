@@ -35,7 +35,7 @@ class HasNoInstruction extends DSL {
             return new Command(Query::NO_QUERY);
         }
 
-        $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
+        $stop = array('File');
         $stop = array_unique(array_merge($stop, $diff));
         
         $linksDown = self::$linksDown;
