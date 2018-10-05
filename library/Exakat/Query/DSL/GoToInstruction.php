@@ -28,21 +28,26 @@ use Exakat\Analyzer\Analyzer;
 
 class GoToInstruction extends DSL {
     public function run() {
-        list($atom) = func_get_args();
+        list($atoms) = func_get_args();
 
-        assert($this->assertAtom($atom));
-        $atom = makeArray($atom);
-        $atomAndFile = $atom;
-        $atomAndFile[] = "File";
+        $this->assertAtom($atoms);
+        $diff = $this->normalizeAtoms($atoms);
+        
+        if (empty($diff)) {
+            return new Command(Query::STOP_QUERY);
+        }
+
+        $atomAndFile = $diff;
+        $atomAndFile[] = 'File';
         $atomAndFile = array_unique($atomAndFile);
         
         $linksDown = self::$linksDown;
 
-        return new Command(<<<GREMLIN
+        $gremlin = <<<GREMLIN
 repeat( __.in({$linksDown})).until(hasLabel(within(***)) )
           .hasLabel(within(***))
-GREMLIN
-, array($atomAndFile, $atom));
+GREMLIN;
+        return new Command($gremlin, array($atomAndFile, $diff));
     }
 }
 ?>

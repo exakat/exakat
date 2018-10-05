@@ -26,8 +26,6 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class IsReassigned extends DSL {
-    protected $args = array('atom');
-
     public function run() {
         list($name) = func_get_args();
 
@@ -38,7 +36,7 @@ class IsReassigned extends DSL {
 not(
     where( 
         __.repeat( __.out($linksDown) ).emit(hasLabel("Variable", "Array", "Member", "Staticproperty")).times($MAX_LOOPING)
-                     .filter{ it.get().value("fullcode") == name}
+                     .filter{ it.get().value("fullcode") == $name}
          )
 )
 GREMLIN;

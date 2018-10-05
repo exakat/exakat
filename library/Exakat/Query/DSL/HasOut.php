@@ -30,14 +30,13 @@ class HasOut extends DSL {
     public function run() : Command {
         list($link) = func_get_args();
 
-        assert($this->assertLink($link));
+        $this->assertLink($link);
+        $diff = $this->normalizeLinks($link);
 
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         } else {
-            return new Command('where( __.out('.$this->SorA($link).') )');
+            return new Command('where( __.out('.$this->SorA($diff).') )');
         }
     }
 }

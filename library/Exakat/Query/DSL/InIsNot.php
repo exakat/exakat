@@ -26,23 +26,17 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class InIsNot extends DSL {
-    protected $args = array('atom');
-
     public function run() {
         list($link) = func_get_args();
-        assert($this->assertLink($link));
 
+        $this->assertLink($link);
         assert(func_num_args() <= 1, "Too many arguments for ".__METHOD__);
-        if (empty($link)) {
-            return new Command(Query::NO_QUERY);
-        }
-        
-        $links = makeArray($link);
-        $diff = array_intersect($links, self::$availableLinks);
+
+        $diff = $this->normalizeLinks($link);
         if (empty($diff)) {
             return new Command(Query::NO_QUERY);
         } else {
-            return new Command('not( where( __.inE('.$this->SorA($link).')) )');
+            return new Command('not( where( __.inE('.$this->SorA($diff).')) )');
         }
     }
 }

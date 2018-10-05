@@ -26,8 +26,6 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class AtomIs extends DSL {
-    protected $args = array('atom');
-
     public function run() {
         list($atoms) = func_get_args();
 

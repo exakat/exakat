@@ -28,8 +28,6 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Dictionary;
 
 class CodeIs extends DSL {
-    protected $args = array('atom');
-
     public function run() {
         list($code, $translate, $caseSensitive) = func_get_args();
 

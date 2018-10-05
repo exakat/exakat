@@ -86,7 +86,7 @@ abstract class DSL {
     }
 
     protected function normalizeLinks($links) {
-        $atoms = makeArray($links);
+        $links = makeArray($links);
         return array_values(array_intersect($links, self::$availableLinks));
     }
 

@@ -27,8 +27,6 @@ use Exakat\Query\Query;
 use Exakat\Analyzer\Analyzer;
 
 class GoToAllChildren extends DSL {
-    protected $args = array('atom');
-
     public function run() {
         list($self) = func_get_args();
 

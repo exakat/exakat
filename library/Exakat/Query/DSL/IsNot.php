@@ -27,12 +27,11 @@ use Exakat\Query\Query;
 use Exakat\Exceptions\QueryException;
 
 class IsNot extends DSL {
-    protected $args = array('atom');
-
     public function run() {
         list($property, $value) = func_get_args();
 
-        assert($this->assertProperty($property));
+        $this->assertProperty($property);
+
         if ($value === null) {
             return new Command("has(\"$property\").or( __.not(has(\"$property\")), __.not(has(\"$property\", null)))");
         } elseif ($value === true) {

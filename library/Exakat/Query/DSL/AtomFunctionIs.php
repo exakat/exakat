@@ -26,8 +26,6 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class AtomFunctionIs extends DSL {
-    protected $args = array('atom');
-
     public function run() {
         list($fullnspath) = func_get_args();
         
