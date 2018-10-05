@@ -29,12 +29,12 @@ class AtomIs extends DSL {
     protected $args = array('atom');
 
     public function run() {
-        list($atom) = func_get_args();
+        list($atoms) = func_get_args();
 
         assert(func_num_args() === 1, 'Too many arguments for '.__METHOD__);
-        assert($this->assertAtom($atom));
+        assert($this->assertAtom($atoms));
 
-        $diff = $this->checkAtoms($atom);
+        $diff = $this->normalizeAtoms($atoms);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         } else {

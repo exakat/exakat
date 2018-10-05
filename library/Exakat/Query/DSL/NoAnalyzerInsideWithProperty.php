@@ -29,9 +29,12 @@ class NoAnalyzerInsideWithProperty extends DSL {
     public function run() {
         list($atoms, $analyzer, $property, $value) = func_get_args();
 
-        assert($this->assertProperty($property));
-        assert($this->assertAtom($atoms));
-        $diff = $this->checkAtoms($atoms);
+        $this->assertProperty($property);
+        $this->assertAtom($atoms);
+        $this->assertAnalyzer($analyzer);
+
+        $diff = $this->normalizeAtoms($atoms);
+
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         }

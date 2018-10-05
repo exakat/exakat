@@ -36,7 +36,7 @@ class NoSubstrOne extends Analyzer {
 
         // Don't use substr($x, -1) but $x[-1];
         $this->atomFunctionIs('\\substr')
-             ->hasNoChildren('ARGUMENT', 2)
+             ->noChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 1)
              ->is('intval', -1)
              ->back('first');

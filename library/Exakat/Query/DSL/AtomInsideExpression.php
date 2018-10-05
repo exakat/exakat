@@ -28,10 +28,10 @@ use Exakat\Analyzer\Analyzer;
 
 class AtomInsideExpression extends DSL {
     public function run() : Command {
-        list($atom) = func_get_args();
+        list($atoms) = func_get_args();
 
-        assert($this->assertAtom($atom));
-        $diff = $this->checkAtoms($atom);
+        assert($this->assertAtom($atoms));
+        $diff = $this->normalizeAtoms($atoms);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         }

@@ -27,10 +27,10 @@ use Exakat\Query\Query;
 
 class HasNoInstruction extends DSL {
     public function run() {
-        list($atom) = func_get_args();
+        list($atoms) = func_get_args();
 
-        assert($this->assertAtom($atom));
-        $diff = $this->checkAtoms($atom);
+        assert($this->assertAtom($atoms));
+        $diff = $this->normalizeAtoms($atoms);
         if (empty($diff)) {
             return new Command(Query::NO_QUERY);
         }
@@ -40,7 +40,7 @@ class HasNoInstruction extends DSL {
         
         $linksDown = self::$linksDown;
 
-        return new Command(<<<GREMLIN
+        $gremlin = <<<GREMLIN
 not( 
     where( 
          __.emit( ).repeat(__.in({$linksDown}))
@@ -48,8 +48,8 @@ not(
                    .hasLabel(within(***))
          ) 
     )
-GREMLIN
-, array($stop, $diff));
+GREMLIN;
+        return new Command($gremlin, array($stop, $diff));
     }
 }
 ?>

@@ -26,16 +26,15 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class HasNoParent extends DSL {
-    protected $args = array('atom');
-
     public function run() {
         list($parentClass, $ins) = func_get_args();
 
-        $diff = $this->checkAtoms($parentClass);
+        $this->assertAtom($parentClass);
+        $this->assertLink($ins);
+        $diff = $this->normalizeAtoms($parentClass);
         
         if (empty($diff)){
-            // filter is always true
-            return $this;
+            return new Command(Query::NO_QUERY);
         }
 
         $in = $this->makeLinks($ins, 'in');

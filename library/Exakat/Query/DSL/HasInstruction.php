@@ -26,12 +26,12 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class HasInstruction extends DSL {
-    protected $args = array('atom');
-
     public function run() {
-        list($atom) = func_get_args();
+        list($atoms) = func_get_args();
 
-        $diff = $this->checkAtoms($atom);
+        $this->assertAtom($atoms);
+        $diff = $this->normalizeAtoms($atoms);
+
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         }

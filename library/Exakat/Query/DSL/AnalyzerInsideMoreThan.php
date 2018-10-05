@@ -28,10 +28,11 @@ use Exakat\Analyzer\Analyzer;
 
 class AnalyzerInsideMoreThan extends DSL {
     public function run() : Command {
-        list($analyzer, $atom, $times) = func_get_args();
+        list($analyzer, $atoms, $times) = func_get_args();
 
-        assert($this->assertAtom($atom));
-        $diff = $this->checkAtoms($atom);
+        $this->assertAtom($atoms);
+        $this->assertAnalyzer($analyzer);
+        $diff = $this->normalizeAtoms($atoms);
         if (empty($diff)) {
             return new Command(Query::STOP_QUERY);
         }

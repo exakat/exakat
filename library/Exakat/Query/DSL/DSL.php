@@ -80,24 +80,14 @@ abstract class DSL {
     
     abstract public function run();
 
-    protected function assertAtom($atom) {
-        if (is_string($atom)) {
-            assert($atom !== 'Property', 'Property is no more');
-            assert(is_string($atom), 'Elements of the array must be a string');
-            assert($atom === ucfirst(mb_strtolower($atom)), "Wrong format for atom name : '$atom");
-        } else {
-            foreach($atom as $a) {
-                assert($a !== 'Property', 'Property is no more');
-                assert(is_string($a), 'Elements of the array must be a string');
-                assert($a === ucfirst(mb_strtolower($a)), "Wrong format for atom name : '$a'");
-            }
-        }
-        return true;
-    }
-
-    protected function checkAtoms($atoms) {
+    protected function normalizeAtoms($atoms) {
         $atoms = makeArray($atoms);
         return array_values(array_intersect($atoms, self::$availableAtoms));
+    }
+
+    protected function normalizeLinks($links) {
+        $atoms = makeArray($links);
+        return array_values(array_intersect($links, self::$availableLinks));
     }
 
     protected function SorA($value) {
@@ -114,25 +104,55 @@ abstract class DSL {
         if (is_string($link)) {
             assert(!in_array($link, array('KEY', 'ELEMENT', 'PROPERTY')), $link.' is no more');
             assert($link === strtoupper($link), 'Wrong format for LINK name : '.$link);
-        } else {
+        } elseif (is_array($link)) {
             foreach($link as $l) {
                 assert(!in_array($l, array('KEY', 'ELEMENT', 'PROPERTY')), $l.' is no more');
                 assert($l === strtoupper($l), 'Wrong format for LINK name : '.$l);
             }
+        } else {
+            assert(false, 'Unsupported type for link : '.gettype($link));
         }
         return true;
+    }
+
+    protected function assertAtom($atom) {
+        if (is_string($atom)) {
+            assert($atom === ucfirst(strtolower($atom)), 'Wrong format for Atom name : '.$atom);
+        } elseif (is_array($atom)) {
+            foreach($atom as $a) {
+                assert($a === ucfirst(strtolower($a)), 'Wrong format for Atom name : '.$a);
+            }
+        } else {
+            assert(false, 'Unsupported type for atom : '.gettype($analyzer));
+        }
+
+        return true;
+    }
+
+    protected function assertAnalyzer($analyzer) {
+        if (is_string($analyzer)) {
+            assert(preg_match('#[A-Z]\w+/[A-Z]\w+#', $analyzer), 'Wrong format for Analyzer : '.$analyzer);
+        } elseif (is_array($analyzer)) {
+            foreach($analyzer as $a) {
+                assert(preg_match('#[A-Z]\W\w+/[A-Z]\W\w+#', $a), 'Wrong format for Analyzer : '.$a);
+            }
+        } else {
+            assert(false, 'Unsupported type for analyzer : '.gettype($analyzer));
+        }
     }
 
     protected function assertProperty($property) {
         if (is_string($property)) {
             assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter') , 'Wrong format for property name : "'.$property.'"');
             assert(property_exists(Atom::class, $property) || ($property === 'label'), 'No such property in Atom : "'.$property.'"');
-        } else {
+        } elseif (is_array($property)) {
             $properties = $property;
             foreach($properties as $property) {
                 assert( ($property === mb_strtolower($property)) || ($property === 'noDelimiter'), "Wrong format for property name : '$property'");
                 assert(property_exists(Atom::class, $property) || ($property === 'label'), "No such property in Atom : '$property'");
             }
+        } else {
+            assert(false, 'Unsupported type for property : '.gettype($property));
         }
         return true;
     }

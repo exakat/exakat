@@ -26,12 +26,11 @@ namespace Exakat\Query\DSL;
 use Exakat\Query\Query;
 
 class HasNoChildren extends DSL {
-    protected $args = array('atom');
-
     public function run() {
         list($childrenClass, $outs) = func_get_args();
 
-        $diff = $this->checkAtoms($childrenClass);
+        $this->assertAtom($childrenClass);
+        $diff = $this->normalizeAtoms($childrenClass);
         if (empty($diff)){
             return new Command(Query::NO_QUERY);
         }

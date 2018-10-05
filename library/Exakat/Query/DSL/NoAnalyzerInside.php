@@ -29,8 +29,10 @@ class NoAnalyzerInside extends DSL {
     public function run() {
         list($atoms, $analyzer) = func_get_args();
 
-        assert($this->assertAtom($atoms));
-        $diff = $this->checkAtoms($atoms);
+        $this->assertAnalyzer($analyzer);
+        $this->assertAtom($atoms);
+        $diff = $this->normalizeAtoms($atoms);
+
         if (empty($diff)) {
             return new Command(Query::NO_QUERY);
         }

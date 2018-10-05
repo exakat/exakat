@@ -27,11 +27,14 @@ use Exakat\Query\Query;
 
 class NoChildWithRank extends DSL {
     public function run() {
-        list($edgeName, $rank) = func_get_args();
+        list($link, $rank) = func_get_args();
+        
+        $this->assertLink($link);
+
         if (is_int($rank)) {
-            return new Command('not( where( __.out('.$this->SorA($edgeName).').has("rank", ***) ) )', array(abs($rank)));
+            return new Command('not( where( __.out('.$this->SorA($link).').has("rank", ***) ) )', array(abs($rank)));
         } else {
-            return new Command('not( where( __.out('.$this->SorA($edgeName).').filter{it.get().value("rank") == ***; } ) )', array($rank));
+            return new Command('not( where( __.out('.$this->SorA($link).').filter{it.get().value("rank") == ***; } ) )', array($rank));
         }
     }
 }

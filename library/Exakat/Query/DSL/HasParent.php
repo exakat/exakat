@@ -30,7 +30,9 @@ class HasParent extends DSL {
     public function run() : Command {
         list($parentClass, $ins) = func_get_args();
         
-        $diff = $this->checkAtoms($parentClass);
+        $this->assertAtom($parentClass);
+        $this->assertLink($ins);
+        $diff = $this->normalizeAtoms($parentClass);
         
         if (empty($diff)){
             return new Command(Query::STOP_QUERY);
