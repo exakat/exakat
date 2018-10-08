@@ -181,3 +181,11 @@ hashtable
 LDAP
 CSS
 OOP
+Melis
+compilable
+refactorisation
+refactorisations
+destructor
+destructors
+constructor
+constructors
