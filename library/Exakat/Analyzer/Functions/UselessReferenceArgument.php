@@ -31,7 +31,6 @@ class UselessReferenceArgument extends Analyzer {
     }
     
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
         //function foo(&$a) { echo $a; }
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')

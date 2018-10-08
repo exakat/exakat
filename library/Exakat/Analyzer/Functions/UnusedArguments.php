@@ -32,8 +32,6 @@ class UnusedArguments extends Analyzer {
     }
     
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         // Arguments, not reference, function
         $this->atomIs('Parameter')
              ->isNot('reference', true)

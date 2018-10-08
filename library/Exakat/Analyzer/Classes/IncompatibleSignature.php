@@ -28,7 +28,7 @@ class IncompatibleSignature extends Analyzer {
     public function analyze() {
 
         // non-matching reference
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
@@ -51,7 +51,7 @@ class IncompatibleSignature extends Analyzer {
 
         // non-matching argument count :
         // abstract : exact count
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
@@ -70,7 +70,7 @@ class IncompatibleSignature extends Analyzer {
 
         // non-matching argument count :
         // non-abstract : count may be more but not less
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
@@ -90,7 +90,7 @@ class IncompatibleSignature extends Analyzer {
         $this->prepareQuery();
 
         // non-matching typehint
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
@@ -112,7 +112,7 @@ class IncompatibleSignature extends Analyzer {
         $this->prepareQuery();
 
         // non-matching return typehint
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
@@ -130,7 +130,7 @@ class IncompatibleSignature extends Analyzer {
         $this->prepareQuery();
 
         // non-matching nullable
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name', self::CASE_INSENSITIVE)
@@ -152,7 +152,7 @@ class IncompatibleSignature extends Analyzer {
         $this->prepareQuery();
 
         // non-matching return nullable
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->isNot('visibility', 'private')
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
@@ -170,7 +170,7 @@ class IncompatibleSignature extends Analyzer {
         $this->prepareQuery();
 
         // non-matching visibility
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')

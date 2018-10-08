@@ -32,8 +32,6 @@ class UnusedClass extends Analyzer {
     }
 
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         // class A {}
         // new A;
         $this->atomIs('Class')

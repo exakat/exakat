@@ -26,29 +26,24 @@ use Exakat\Analyzer\Analyzer;
 class CaughtButNotThrown extends Analyzer {
     public function analyze() {
         // There is a catch() but its class is not defined
-
         $phpExceptions = $this->loadIni('php_exception.ini', 'classes');
-        $MAX_LOOPING = self::MAX_LOOPING;
 
-        $thrown1 = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Throw")
-     .out("THROW")
-     .out("NEW")
-     .values("fullnspath")
-     .unique()
-GREMLIN
-                        )->toArray();
+        $this->atomIs('Throw')
+             ->outIs('THROW')
+             ->outIs('NEW')
+             ->values('fullnspath')
+             ->unique();
+        $thrown1 = $this->rawQuery()->toArray();
 
-        $thrown2 = $this->query(<<<GREMLIN
-g.V().hasLabel("Throw")
-     .out("THROW")
-     .out("NEW")
-     .in("DEFINITION")
-     .repeat( out("EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
-     .values("fullnspath")
-     .unique()
-GREMLIN
-                        )->toArray();
+        $this->atomIs('Throw')
+             ->outIs('THROW')
+             ->outIs('NEW')
+             ->inIs('DEFINITION')
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->values('fullnspath')
+             ->unique();
+        $thrown2 = $this->rawQuery()->toArray();
+
         $thrown = array_merge($phpExceptions, array('\\throwable'), $thrown1, $thrown2);
 
         $this->atomIs('Catch')

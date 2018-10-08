@@ -30,7 +30,7 @@ class AbstractStatic extends Analyzer {
 
     public function analyze() {
         // class x { static abstract function foo() ; }
-        $this->atomIs(array('Method', 'Magicmethod'))
+        $this->atomIs(self::$FUNCTIONS_METHOD)
              ->is('abstract', true)
              ->is('static', true);
         $this->prepareQuery();
