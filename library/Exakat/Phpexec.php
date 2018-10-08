@@ -143,14 +143,13 @@ class Phpexec {
     }
 
     public function getTokenFromFile($file) {
-        $file = str_replace('$', '\\$', $file);
-
         if ($this->isCurrentVersion === true) {
             $tokens = @token_get_all(file_get_contents($file));
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
             // -d short_open_tag=1
-            shell_exec($this->phpexec.'  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents(\''.$file.'\'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.$tmpFile);
+            $file = escapeshellarg($file);
+            shell_exec($this->phpexec.'  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents('.$file.'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.$tmpFile);
             include $tmpFile;
 
             unlink($tmpFile);
