@@ -1,4 +1,4 @@
-Version 1.4.8 (Ksitigarbha, coming up)
+Version 1.4.9 (Lingji Bodhisattva, coming up)
 + Architecture
     + 
 + Report
@@ -8,14 +8,34 @@ Version 1.4.8 (Ksitigarbha, coming up)
 + Tokenizer
     + 
 
-Version 1.4.7 (Maitreya, coming up)
+Version 1.4.8 (Ksitigarbha, 2018-10-08)
++ Architecture
+    + Adding more validation at DSL step level : stricter check on args, speed gain
+    + Cleaning more analysis from MAX_LOOPING variable
+    + Better protection for file names 
+    + Removed static properties from DSL
++ Analyzer
+    + New analysis : Don't use __clone before PHP 7.0
+    + New analysis : Watch out for filter_input as a data source
+    + Upgraded analysis : Method Used Below refactored for speed
+    + Upgraded analysis : Undefined class constants now takes into account interfaces
+    + Removed anaysis : Relaxed Heredoc was double with Flexible Heredoc
+    + Checked unit tests : 3016 / 3033 test pass (99% pass)
++ Tokenizer
+    + Build links between methodcall and method in a class
+    + Added links between method and its overwritten version in child
+    + Fixed fallback for functions
+    + Fixed linked between traits and their definition
+    + Removed variable definition for Parametername
+    + Simplified double usage between return and pushExpression()
+
+Version 1.4.7 (Maitreya, 2018-10-01)
 + Architecture
     + Added 'Suggestions' section to documentation, for many rules
     + WIP : removing usage of MAX_LOOPING in analysis
     + Added a lot of new external services
     + Added documentation for creating a new analysis
 + Analyzer
-    + Prepared section for 'Custom' analysis
     + Upgraded analysis : No interface was dropped in PHP 7.2
     + Upgraded analysis : IsAMagicProperty extended to parents
     + Removed anaysis : Relaxed Heredoc was double with Flexible Heredoc
