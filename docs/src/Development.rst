@@ -954,8 +954,8 @@ The unit test framework also supports code source as folders. There are situatio
 
 PHP source for tests only have to compile without warning. There is no need for the PHP test script to run, nor to make any sense : this code will be audited, but not run. 
 
-Piece of advices
-^^^^^^^^^^^^^^^^
+Pieces of advice
+################
 
 * In the PHP source for the test, always try to give names that help understand where is the error being hunter, and what are clean situations. This may be done by giving explicit names to functions and variables. 
 * Try to keep the PHP source in a single file. When it is not possible, rely on a directory, with little files.

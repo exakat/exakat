@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 01 Oct 2018 10:18:55 +0000
-.. comment: Generation hash : aa375cd914e4f9a1bb8d3b7354822fa760f2374b
+.. comment: Generation date : Mon, 08 Oct 2018 15:05:07 +0000
+.. comment: Generation hash : 217acd8ed9738fd88a0a72f749416519f88eb731
 
 
 .. _analyze:
@@ -517,7 +517,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 71 analysis
+Total : 72 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -532,6 +532,7 @@ Total : 71 analysis
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
+* :ref:`Direct Call To __clone <direct-call-to-\_\_clone>`
 * :ref:`Ellipsis Usage <ellipsis-usage>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Flexible Heredoc <flexible-heredoc>`
@@ -596,7 +597,7 @@ Total : 71 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 67 analysis
+Total : 68 analysis
 
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -620,6 +621,7 @@ Total : 67 analysis
 * Php/ClassConstWithArray
 * Php/ConstWithArray
 * Php/DefineWithArray
+* Php/DirectCallToClone
 * Php/EllipsisUsage
 * Php/ExponentUsage
 * Php/FlexibleHeredoc
@@ -671,7 +673,7 @@ Total : 67 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 59 analysis
+Total : 60 analysis
 
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -690,6 +692,7 @@ Total : 59 analysis
 * Php/ClassConstWithArray
 * Php/ConstWithArray
 * Php/DefineWithArray
+* Php/DirectCallToClone
 * Php/EllipsisUsage
 * Php/ExponentUsage
 * Php/FlexibleHeredoc
@@ -738,7 +741,7 @@ Total : 59 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 48 analysis
+Total : 49 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * Classes/Anonymous
@@ -751,6 +754,7 @@ Total : 48 analysis
 * Exceptions/MultipleCatch
 * Functions/MultipleSameArguments
 * Php/DefineWithArray
+* Php/DirectCallToClone
 * Php/FlexibleHeredoc
 * Php/GroupUseDeclaration
 * Php/GroupUseTrailingComma
@@ -1020,7 +1024,7 @@ Total : 36 analysis
 Security
 ++++++++
 
-Total : 37 analysis
+Total : 38 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
@@ -1045,6 +1049,7 @@ Total : 37 analysis
 * :ref:`Switch Fallthrough <switch-fallthrough>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Upload Filename Injection <upload-filename-injection>`
+* :ref:`filter_input() As A Source <filter\_input()-as-a-source>`
 * :ref:`move_uploaded_file Instead Of copy <move\_uploaded\_file-instead-of-copy>`
 * :ref:`parse_str() Warning <parse\_str()-warning>`
 * Functions/HardcodedPasswords

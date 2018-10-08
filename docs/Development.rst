@@ -906,6 +906,25 @@ Dictionaries
 
 There are a collection of dictionaries available. Dictionaries hold list of definition, like PHP's constant and functions, extension's classes, or classes from unit test frameworks. 
 
+Documentation
+-------------
+
+Documentation is used to build automatic documentation for audit report : every time an analysis is run, its documentation is provided in the audits. 
+
+Every Exakat analysis <Folder/Name> has a documentation, stored in the 'human/en' folder, as a .ini file. 
+
+Keep the .ini files compiled, as PHP will refuse to load them otherwise. Then, Exakat will stop the processing : no documentation, no analysis.
+
+The documentation is in international English.Localisation will be handled in the future, as other folders inside 'human'.
+
+Each analysis has a standard structure, with the following elements : 
+
+* name : the title used for the analysis. Keep it as short as possible, as it is used for short references in reports.
+* description: A complete description of the analysis. The description should include a short introduction, a detailled explanation of the targe situations, a piece of code with good recommended code as a first illustration, and various bad situations as second example. The description should also include limitations from the analysis, if any. It should also include external links, including PHP.net documentation and tutorials, to help the reader learn more about the problem. 
+* exakatSince: This is the version where the analysis was created. For example : "1.4.0"
+* modifications: This is an array of strings : each string is a short suggestions on what kind of refactoring may be done once the analysis has spotted the issue. Suggestions should be as precise as possible. Provide as many suggestions as possible, as the problem may often be solved from different angles.
+
+
 Testing your analysis
 ---------------------
 
@@ -927,20 +946,33 @@ Unit are run with `PHPUnit <http://www.phpunit.de/>`_ version 7.0+. They were te
 Writing test
 ------------
 
-Tests must be written to match patterns and to match anti-patterns. 
+Tests must be written to match patterns and to not-match anti-patterns. 
 
 For example, imagine that we are analyzing code to find useless additions. We want to match `$a + 0`, `$a - 0`, `0 + $a` but not `0 - $a`. The last one doesn't have the same effect than the others : here the `-` sign has an important value. As such,  `$a + 0`, `$a - 0`, `0 + $a`  must go in the `$expected` array, and `0 - $a` must go in the `$expected_not` array. 
 
 The unit test framework also supports code source as folders. There are situations where PHP refuses to compile a piece of code if all the code is in a single script, but accepts the same code when split over two or several files. For that, use the `create_test.php` with `-d` option, so as to create the folder with the test. `source/Custom/MyFirst.0x.php` will be created as a folder (including with the '.php' extension). Otherwise, simply remove the `source/Custom/MyFirst.0x.php` file, and create a folder of the same name instead.
 
-Test only have to compile. There is no need for the PHP test script to run, nor to make any sense : this code will be audited, but not run. 
+PHP source for tests only have to compile without warning. There is no need for the PHP test script to run, nor to make any sense : this code will be audited, but not run. 
 
-Test have to compile cleanly. Any `Fatal error` or even `Notice` will prevent the test from running.
+Pieces of advice
+################
+
+* In the PHP source for the test, always try to give names that help understand where is the error being hunter, and what are clean situations. This may be done by giving explicit names to functions and variables. 
+* Try to keep the PHP source in a single file. When it is not possible, rely on a directory, with little files.
+* When building a test, remove any name that link it to an existing code. Often, simply changing the name '$EXPLICIT_GLOBAL' to '$X' is enough.
 
 Tooling
 -------
 
-To be written.
+There are three scripts to simplify manipulations when managing an analyzer. 
+
+They are located in the `scripts` folder. They must be called from Exakat's code root, and not from within the script folder. 
+
+* createAnalyzer <Folder/Name>: this tool creates a new analyzer in the 'Folder' folder, with the name 'Name'. At the time of creation, it creates also the documentation in 'human/en/Folder/Name.ini' file, and a first set of tests in the 'tests/analyzer/'. Finally, it sets up the analyzer in the data/analyzers.sqlite folder. 
+* renameAnalyzer <Folder1/Name1> <Folder2/Name2>: this tool moves the analyzer called <Folder1/Name1> to <Folder2/Name2>. It moves the code in 'library/Exakat/Analyzer/', in the tests, and in the 'human/en' folder. 
+* removeAnalyzer <Folder/Name>: this tool removes the analyzer called <Folder/Name>. It removes the code in 'library/Exakat/Analyzer/', in the tests, and in the 'human/en' folder. 
+
+The scripts are only available with the open source version. Exakat.phar doesn't have support for those scripts.
 
 Publishing your analysis
 ------------------------

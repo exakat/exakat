@@ -322,6 +322,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `Typo3 <https://typo3.org/>`_
 * `xataface <http://xataface.com/>`_
+* `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Zurmo <http://zurmo.org/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `Dolphin <https://www.boonex.com/>`_
@@ -331,15 +332,15 @@ A number of applications were scanned in order to find real life examples of pat
 * `phpMyAdmin <https://www.phpmyadmin.net/>`_
 * `Contao <https://contao.org/en/>`_
 * `ChurchCRM <http://churchcrm.io/>`_
-* `HuMo-Gen <http://humogen.com/>`_
 * `TeamPass <https://teampass.net/>`_
+* `HuMo-Gen <http://humogen.com/>`_
+* `Phinx <https://phinx.org/>`_
 * `opencfp <https://github.com/opencfp/opencfp>`_
 * `PrestaShop <https://prestashop.com/>`_
 * `PhpIPAM <https://phpipam.net/download/>`_
 * `Edusoho <https://www.edusoho.com/en>`_
 * `SuiteCrm <https://suitecrm.com/>`_
-* `Phinx <https://phinx.org/>`_
-* `ThinkPHP <http://www.thinkphp.cn/>`_
+* Prestashop
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 
 
@@ -392,6 +393,11 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.4.8
+
+  * Direct Call To __clone (Php/DirectCallToClone)
+  * filter_input() As A Source (Security/FilterInputSource ; Security)
 
 * 1.4.6
 
@@ -2268,6 +2274,7 @@ List of external links mentionned in this documentation.
 * `Deprecated features in PHP 5.5.x <http://php.net/manual/fr/migration55.deprecated.php>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
 * `directive error_reporting <http://php.net/manual/en/errorfunc.configuration.php#ini.error-reporting>`_
+* `Directly calling __clone is allowed <https://wiki.php.net/rfc/abstract_syntax_tree#directly_calling_clone_is_allowed>`_
 * `dirname <http://php.net/dirname>`_
 * `Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
 * `dist.exakat.io <http://dist.exakat.io/>`_
@@ -2340,9 +2347,10 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
+* `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
 * `FuelPHP <https://fuelphp.com>`_
 * `Functions <http://php.net/manual/en/language.functions.php>`_
@@ -2568,8 +2576,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2615,8 +2623,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -3226,6 +3234,7 @@ CompatibilityPHP53
 |   analyzer[] = "Php/ClosureThisSupport";
 |   analyzer[] = "Php/ConstWithArray";
 |   analyzer[] = "Php/DefineWithArray";
+|   analyzer[] = "Php/DirectCallToClone";
 |   analyzer[] = "Php/EllipsisUsage";
 |   analyzer[] = "Php/ExponentUsage";
 |   analyzer[] = "Php/FlexibleHeredoc";
@@ -3305,6 +3314,7 @@ CompatibilityPHP54
 |   analyzer[] = "Php/ClassConstWithArray";
 |   analyzer[] = "Php/ConstWithArray";
 |   analyzer[] = "Php/DefineWithArray";
+|   analyzer[] = "Php/DirectCallToClone";
 |   analyzer[] = "Php/EllipsisUsage";
 |   analyzer[] = "Php/ExponentUsage";
 |   analyzer[] = "Php/FlexibleHeredoc";
@@ -3382,6 +3392,7 @@ CompatibilityPHP55
 |   analyzer[] = "Php/ClassConstWithArray";
 |   analyzer[] = "Php/ConstWithArray";
 |   analyzer[] = "Php/DefineWithArray";
+|   analyzer[] = "Php/DirectCallToClone";
 |   analyzer[] = "Php/EllipsisUsage";
 |   analyzer[] = "Php/ExponentUsage";
 |   analyzer[] = "Php/FlexibleHeredoc";
@@ -3448,6 +3459,7 @@ CompatibilityPHP56
 |   analyzer[] = "Exceptions/MultipleCatch";
 |   analyzer[] = "Functions/MultipleSameArguments";
 |   analyzer[] = "Php/DefineWithArray";
+|   analyzer[] = "Php/DirectCallToClone";
 |   analyzer[] = "Php/FlexibleHeredoc";
 |   analyzer[] = "Php/GroupUseDeclaration";
 |   analyzer[] = "Php/GroupUseTrailingComma";
@@ -3764,6 +3776,7 @@ Security
 |   analyzer[] = "Security/DontEchoError";
 |   analyzer[] = "Security/DynamicDl";
 |   analyzer[] = "Security/EncodedLetters";
+|   analyzer[] = "Security/FilterInputSource";
 |   analyzer[] = "Security/IndirectInjection";
 |   analyzer[] = "Security/MkdirDefault";
 |   analyzer[] = "Security/MoveUploadedFile";

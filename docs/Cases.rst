@@ -946,6 +946,56 @@ df_display() actually requires only 2 arguments, while three are provided. The l
     	return $st->display($context, $template_name);
     }
 
+Useless Return
+==============
+
+.. _thinkphp-functions-uselessreturn:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`useless-return`, in library/think/Request.php:2121. 
+
+__set() doesn't need a return, unlike __get().
+
+.. code-block:: php
+
+    public function __set($name, $value)
+        {
+            return $this->param[$name] = $value;
+        }
+
+
+--------
+
+
+.. _vanilla-functions-uselessreturn:
+
+Vanilla
+^^^^^^^
+
+:ref:`useless-return`, in applications/dashboard/views/attachments/attachment.php:14. 
+
+The final 'return' is useless : return void (here, return without argument), is the same as returning null, unless the 'void' return type is used. The other return, is in the two conditions, is important to skip the end of the functioncall.
+
+.. code-block:: php
+
+    function writeAttachment($attachment) {
+    
+            $customMethod = AttachmentModel::getWriteAttachmentMethodName($attachment['Type']);
+            if (function_exists($customMethod)) {
+                if (val('Error', $attachment)) {
+                    writeErrorAttachment($attachment);
+                    return;
+                }
+                $customMethod($attachment);
+            } else {
+                trace($customMethod, 'Write Attachment method not found');
+                trace($attachment, 'Attachment');
+            }
+            return;
+        }
+
 Unpreprocessed Values
 =====================
 
@@ -1419,6 +1469,52 @@ Thelia
 
     $size = $size / 1024;
 
+Relay Function
+==============
+
+.. _teampass-functions-relayfunction:
+
+TeamPass
+^^^^^^^^
+
+:ref:`relay-function`, in includes/libraries/Goodby/CSV/Import/Standard/Interpreter.php:88. 
+
+This example puts actually a name on the events : this method 'delegate' and it does it in the smallest amount of possible work, being given all the arguments. 
+
+.. code-block:: php
+
+    /**
+         * delegate to observer
+         *
+         * @param $observer
+         * @param $line
+         */
+        private function delegate($observer, $line)
+        {
+            call_user_func($observer, $line);
+        }
+
+
+--------
+
+
+.. _spip-functions-relayfunction:
+
+SPIP
+^^^^
+
+:ref:`relay-function`, in ecrire/inc/json.php:73. 
+
+var2js() acts as an alternative for json_encode(). Yet, it used to be directly called by the framework's code and difficult to change. With the advent of json_encode, the native function has been used, and even, a compatibility tool was set up. Thus, the relay function. 
+
+.. code-block:: php
+
+    if (!function_exists('json_encode')) {
+    	function json_encode($v) {
+    		return var2js($v);
+    	}
+    }
+
 Timestamp Difference
 ====================
 
@@ -1865,6 +1961,44 @@ In this code, ``is_object()`` is used to check the status of the order. Possibly
     
         // more code
     }
+
+Multiple Alias Definitions
+==========================
+
+.. _churchcrm-namespaces-multiplealiasdefinitions:
+
+ChurchCRM
+^^^^^^^^^
+
+:ref:`multiple-alias-definitions`, in Various files:**. 
+
+It is actually surprising to find FamilyQuery defined as ChurchCRM\Base\FamilyQuery only once, while all other reference are for ChurchCRM\FamilyQuery. That lone use is actually useful in the code, so it is not a forgotten refactorisation. 
+
+.. code-block:: php
+
+    use ChurchCRM\Base\FamilyQuery	// in /src/MapUsingGoogle.php:7
+    
+    use ChurchCRM\FamilyQuery	// in /src/ChurchCRM/Dashboard/EventsDashboardItem.php:8
+                                // and 29 other files
+
+
+--------
+
+
+.. _phinx-namespaces-multiplealiasdefinitions:
+
+Phinx
+^^^^^
+
+:ref:`multiple-alias-definitions`, in Various files:**. 
+
+One 'Command' is refering to a local Command class, while the other is refering to an imported class. They are all in a similar name space Console\Command. 
+
+.. code-block:: php
+
+    use Phinx\Console\Command	                    //in file /src/Phinx/Console/PhinxApplication.php:34
+    use Symfony\Component\Console\Command\Command	//in file /src/Phinx/Console/Command/Init.php:31
+    use Symfony\Component\Console\Command\Command	//in file /src/Phinx/Console/Command/AbstractCommand.php:32
 
 Cast To Boolean
 ===============
@@ -2714,6 +2848,43 @@ The is_null() test detects a special situation, that requires usage of default v
                 $personal_folder = $node->personal_folder;
             }
 
+Bad Constants Names
+===================
+
+.. _prestashop-constants-badconstantnames:
+
+Prestashop
+^^^^^^^^^^
+
+:ref:`bad-constants-names`, in src/PrestaShopBundle/Install/Upgrade.php:214. 
+
+INSTALL_PATH is a valid name for a constant. __PS_BASE_URI__ is not a valid name.
+
+.. code-block:: php
+
+    require_once(INSTALL_PATH . 'install_version.php');
+                // needed for upgrade before 1.5
+                if (!defined('__PS_BASE_URI__')) {
+                    define('__PS_BASE_URI__', str_replace('//', '/', '/'.trim(preg_replace('#/(install(-dev)?/upgrade)$#', '/', str_replace('\', '/', dirname($_SERVER['REQUEST_URI']))), '/').'/'));
+                }
+
+
+--------
+
+
+.. _zencart-constants-badconstantnames:
+
+Zencart
+^^^^^^^
+
+:ref:`bad-constants-names`, in zc_install/ajaxTestDBConnection.php:10. 
+
+A case where PHP needs help : if the PHP version is older than 5.3, then it is valid to compensate. Though, this __DIR__ has a fixed value, wherever it is used, while the official __DIR__ change from dir to dir. 
+
+.. code-block:: php
+
+    if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+
 Incompatible Signature Methods
 ==============================
 
@@ -3436,6 +3607,39 @@ This foreach reads each element from $entries into entry. $entry, in turn, is wr
     				$replacePairs[$searchkey] = $link;
     			}
 
+Drop Substr Last Arg
+====================
+
+.. _suitecrm-structures-substrlastarg:
+
+SuiteCrm
+^^^^^^^^
+
+:ref:`drop-substr-last-arg`, in modules/UpgradeWizard/uw_utils.php:2422. 
+
+substr() is even trying to go beyond the end of the string. 
+
+.. code-block:: php
+
+    substr($relativeFile, 1, strlen($relativeFile))
+
+
+--------
+
+
+.. _tine20-structures-substrlastarg:
+
+Tine20
+^^^^^^
+
+:ref:`drop-substr-last-arg`, in tine20/Calendar/Frontend/Cli.php:95. 
+
+Omitting the last character would yield the same result.
+
+.. code-block:: php
+
+    substr($opt, 18, strlen($opt))
+
 Possible Increment
 ==================
 
@@ -3446,11 +3650,28 @@ Zurmo
 
 :ref:`possible-increment`, in app/protected/modules/workflows/utils/SavedWorkflowsUtil.php:196. 
 
-There are suspicious extra spaces around the +, that give the hint that there used to be something else, like a constant, there. 
+There are suspicious extra spaces around the +, that give the hint that there used to be something else, like a constant, there. From the name of the methods, it seems that this code was refactored from an addition to a simple method call. 
 
 .. code-block:: php
 
     $timeStamp =  + $workflow->getTimeTrigger()->resolveNewTimeStampForDuration(time());
+
+
+--------
+
+
+.. _mediawiki-structures-possibleincrement:
+
+MediaWiki
+^^^^^^^^^
+
+:ref:`possible-increment`, in includes/filerepo/file/LocalFile.php:613. 
+
+That is a useless assignation, except for the transtyping to integer that PHP does silently. May be that should be a +=, or completely dropped.
+
+.. code-block:: php
+
+    $decoded[$field] = +$decoded[$field]
 
 One If Is Sufficient
 ====================

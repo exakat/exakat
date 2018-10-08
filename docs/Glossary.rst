@@ -953,6 +953,7 @@ Glossary
 
     + `__clone`
 
+      + :ref:`Direct Call To __clone <direct-call-to-\_\_clone>`
       + :ref:`Magic Visibility <magic-visibility>`
 
     + `__construct`

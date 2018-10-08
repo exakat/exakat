@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 02 Oct 2018 15:17:00 +0000
-.. comment: Generation hash : ea94dc897fd190f6f57c9557c8f6c652c4f53c4c
+.. comment: Generation date : Mon, 08 Oct 2018 15:05:07 +0000
+.. comment: Generation hash : 217acd8ed9738fd88a0a72f749416519f88eb731
 
 
 .. _$http\_raw\_post\_data:
@@ -1943,13 +1943,15 @@ Bad Constants Names
 ###################
 
 
-PHP's manual recommends that developper do not use constants with the convention ``__NAME__``. Those are reserved for PHP future use. 
+PHP's manual recommends that developer do not use constants with the convention ``__NAME__``. Those are reserved for PHP future use. 
 
 For example, ``__TRAIT__`` recently appeared in PHP, as a magic constant. In the future, other may appear. 
 
 .. code-block:: php
 
    <?php
+   
+   const __MY_APP_CONST__ = 1;
    
    const __MY_APP_CONST__ = 1;
    
@@ -1962,11 +1964,19 @@ The analyzer will report any constant which name is __.*.__, or even _.*_ (only 
 
 See also `Constants <http://php.net/manual/en/language.constants.php>`_.
 
-+------------+----------------------------+
-| Short name | Constants/BadConstantnames |
-+------------+----------------------------+
-| Themes     | :ref:`Analyze`             |
-+------------+----------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Avoid using names that doesn't comply with PHP's convention
+
++------------+-----------------------------------------------------------------------------------------+
+| Short name | Constants/BadConstantnames                                                              |
++------------+-----------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                          |
++------------+-----------------------------------------------------------------------------------------+
+| Examples   | :ref:`prestashop-constants-badconstantnames`, :ref:`zencart-constants-badconstantnames` |
++------------+-----------------------------------------------------------------------------------------+
 
 
 
@@ -4813,6 +4823,13 @@ Always try to use native PHP functions, instead of rebuilding them with custom P
 
 See also `array_unique <http://php.net/array_unique>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Turn the foreach() and its condition into a call to array_unique()
+* Extract the condition from the foreach() and add a separat call to array_unique()
+
 +------------+-----------------------------------------------------------------------------------------------+
 | Short name | Structures/CouldUseArrayUnique                                                                |
 +------------+-----------------------------------------------------------------------------------------------+
@@ -5356,6 +5373,39 @@ See also `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecatio
 
 
 
+.. _direct-call-to-\_\_clone:
+
+Direct Call To __clone
+######################
+
+
+Direct call to magic method `'__clone() <http://php.net/manual/en/language.oop5.magic.php>`_ was forbidden. It is allowed since PHP 7.0. 
+
+From the RFC : `Doing calls like $obj->`'__clone() <http://php.net/manual/en/language.oop5.magic.php>`_ is now allowed. This was the only magic method that had a compile-time check preventing some calls to it, which doesn't make sense. If we allow all other magic methods to be called, there's no reason to forbid this one. `.
+
+.. code-block:: php
+
+   <?php
+   
+       class Foo {
+           function '__clone() {}
+       }
+       
+       $a = new Foo;
+       $a->'__clone();
+   ?>
+
+
+See also `Directly calling `'__clone <http://php.net/manual/en/language.oop5.magic.php>`_ is allowed <https://wiki.php.net/rfc/abstract_syntax_tree#directly_calling_clone_is_allowed>`_.
+
++------------+------------------------------------------------------------------------------------------------------------+
+| Short name | Php/DirectCallToClone                                                                                      |
++------------+------------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++------------+------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _direct-injection:
 
 Direct Injection
@@ -5520,9 +5570,9 @@ Don't Send $this In Constructor
 ###############################
 
 
-Don't use ``$this`` as an argument while in the `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_. Until the constructor is finished, the object is not finished, and may be in an instable state. Providing it to another code may lead to error. 
+Don't use ``$this`` as an argument while in the `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_. Until the constructor is finished, the object is not finished, and may be in an unstable state. Providing it to another code may lead to error. 
 
-This is in particular true if the receiving structure put immediately the incoming objet to work, and not simply store it for later use. 
+This is in particular true if the receiving structure put immediately the incoming object to work, and not simply store it for later use. 
 
 .. code-block:: php
 
@@ -5580,7 +5630,7 @@ Suggestions
 
 * Finish the constructor first, then call an external object.
 * Sending $this should be made accessible in a separate method, so external objects may call it.
-* Sending the current may be the responsability of the method creating the object.
+* Sending the current may be the responsibility of the method creating the object.
 
 +------------+-------------------------------------------------------------------------------------------------------+
 | Short name | Classes/DontSendThisInConstructor                                                                     |
@@ -5633,6 +5683,14 @@ When getting rid of a property, simply assign it to null. This keeps the propert
 This analysis works on properties and static properties. It also reports magic properties being unset.
 
 Thanks for `Benoit Burnichon <https://twitter.com/BenoitBurnichon>`_ for the original idea.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Never unset properties : set it to null or its default value instead
+* Make the property an array, and set/unset its index
 
 +------------+--------------------------------------------------------------------------------------+
 | Short name | Classes/DontUnsetProperties                                                          |
@@ -5879,7 +5937,6 @@ Drop Substr Last Arg
 
 Substr() works till the end of the string when the last argument is omitted. There is no need to calculate string size to make this work.
 
-
 .. code-block:: php
 
    <?php
@@ -5897,11 +5954,20 @@ Substr() works till the end of the string when the last argument is omitted. The
 
 See also `substr <http://www.php.net/substr>`_.
 
-+------------+--------------------------+
-| Short name | Structures/SubstrLastArg |
-+------------+--------------------------+
-| Themes     | :ref:`Suggestions`       |
-+------------+--------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use negative length
+* Omit the last argument to get the string till its end
+
++------------+----------------------------------------------------------------------------------+
+| Short name | Structures/SubstrLastArg                                                         |
++------------+----------------------------------------------------------------------------------+
+| Themes     | :ref:`Suggestions`                                                               |
++------------+----------------------------------------------------------------------------------+
+| Examples   | :ref:`suitecrm-structures-substrlastarg`, :ref:`tine20-structures-substrlastarg` |
++------------+----------------------------------------------------------------------------------+
 
 
 
@@ -8023,7 +8089,7 @@ Hidden Use Expression
 #####################
 
 
-The use expression for namespaces should always be at te beginning of the namespace block. 
+The use expression for namespaces should always be at the beginning of the namespace block. 
 
 It is where everyone expect them, and it is less confusing than having them at various levels.
 
@@ -10600,7 +10666,7 @@ Multiple Alias Definitions
 ##########################
 
 
-Some aliases are representing differents classes across the repository. This leads to potential confusion. 
+Some aliases are representing different classes across the repository. This leads to potential confusion. 
 
 Across an application, it is recommended to use the same namespace for one alias. Failing to do this lead to the same keyword to represent different values in different files, with different behavior. Those are hard to find bugs. 
 
@@ -10620,11 +10686,21 @@ Across an application, it is recommended to use the same namespace for one alias
    
    ?>
 
-+------------+-------------------------------------+
-| Short name | Namespaces/MultipleAliasDefinitions |
-+------------+-------------------------------------+
-| Themes     | :ref:`Analyze`                      |
-+------------+-------------------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Give more specific names to classes
+* Use an alias 'use A\B ac BC' to give locally another name
+
++------------+--------------------------------------------------------------------------------------------------------+
+| Short name | Namespaces/MultipleAliasDefinitions                                                                    |
++------------+--------------------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                                         |
++------------+--------------------------------------------------------------------------------------------------------+
+| Examples   | :ref:`churchcrm-namespaces-multiplealiasdefinitions`, :ref:`phinx-namespaces-multiplealiasdefinitions` |
++------------+--------------------------------------------------------------------------------------------------------+
 
 
 
@@ -13549,7 +13625,9 @@ One If Is Sufficient
 ####################
 
 
-Switch the if then structures to reduce the amount of conditions to read.
+Nested conditions may be written another way, and reduce the amount of code.
+
+Nested conditions are equivalent to a `&&` condition. As such, they may be switched. When one of the condition has no explicit else, then it is lighter to write it as the first condition. This way, it is written once, and not repeated.
 
 .. code-block:: php
 
@@ -13577,6 +13655,14 @@ Switch the if then structures to reduce the amount of conditions to read.
        	}
        }
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Switch the if...then conditions, to reduce the amount of conditions to read.
 
 +------------+----------------------------------------------+
 | Short name | Structures/OneIfIsSufficient                 |
@@ -14890,13 +14976,23 @@ The same pattern is not reported with -, as it is legit expression. + sign is us
 See also `Incrementing/Decrementing Operators <http://php.net/manual/en/language.operators.increment.php>`_ and 
          `Arithmetic Operators <http://php.net/manual/en/language.operators.arithmetic.php>`_.
 
-+------------+-------------------------------------------+
-| Short name | Structures/PossibleIncrement              |
-+------------+-------------------------------------------+
-| Themes     | :ref:`Suggestions`                        |
-+------------+-------------------------------------------+
-| Examples   | :ref:`zurmo-structures-possibleincrement` |
-+------------+-------------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Drop the whole assignation
+* Complete the addition with another value : $a = 1 + $b
+* Make this a ++ operator : ++$b
+* Make this a negative operator : -$b
+* Make the casting explicit : (int) $b
+
++------------+------------------------------------------------------------------------------------------+
+| Short name | Structures/PossibleIncrement                                                             |
++------------+------------------------------------------------------------------------------------------+
+| Themes     | :ref:`Suggestions`                                                                       |
++------------+------------------------------------------------------------------------------------------+
+| Examples   | :ref:`zurmo-structures-possibleincrement`, :ref:`mediawiki-structures-possibleincrement` |
++------------+------------------------------------------------------------------------------------------+
 
 
 
@@ -15841,9 +15937,9 @@ Relay Function
 ##############
 
 
-Relay function only hand workload to another one. 
+Relay function only delegate workload to another one. 
 
-Relay functions (or methods) are delegating the actual work to another function or method. They do not have any impact on the results, besides exposing another name for the same feature.
+Relay functions and methods are delegating the actual work to another function or method. They do not have any impact on the results, besides exposing another name for the same feature.
 
 .. code-block:: php
 
@@ -15856,13 +15952,23 @@ Relay functions (or methods) are delegating the actual work to another function 
    ?>
 
 
-Relay functions are typical of transition API, where an old API have to be preserved until it is fully migrated. Then, they may be removed, so as to reduce confusion, and declutter the API.
+Relay functions are typical of transition API, where an old API have to be preserved until it is fully migrated. Then, they may be removed, so as to reduce confusion, and declutter the API. 
 
-+------------+-------------------------+
-| Short name | Functions/RelayFunction |
-+------------+-------------------------+
-| Themes     | :ref:`Analyze`          |
-+------------+-------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove relay function, call directly the final function
+* Remove the target function, and move the code here
+* Add more logic to that function, like conditions or cache
+
++------------+------------------------------------------------------------------------------+
+| Short name | Functions/RelayFunction                                                      |
++------------+------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                               |
++------------+------------------------------------------------------------------------------+
+| Examples   | :ref:`teampass-functions-relayfunction`, :ref:`spip-functions-relayfunction` |
++------------+------------------------------------------------------------------------------+
 
 
 
@@ -18676,6 +18782,15 @@ In particular, `'strtr() <http://www.php.net/strtr>`_ works on strings of the sa
 
 See also `strtr <http://www.php.net/strtr>`_.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Check the call to strtr() and make sure the arguments are of the same size
+* Replace strtr() with str_replace(), which works with strings and array, not chars
+* Replace strtr() with preg_match(), which works with patterns and not chars
+
 +------------+------------------------------------+
 | Short name | Php/StrtrArguments                 |
 +------------+------------------------------------+
@@ -19392,7 +19507,7 @@ Too many local variables were found in the methods. When over 15 variables are f
 Local variables exclude globals (imported with global) and arguments. 
 
 When too many variables are used in a function, it is a code smells. The function is trying to do too much and needs extra space for juggling.
-Beyond 15 variables, it becomes difficult to keep track of their name and usage, leading to confusion, overwritting or hijacking. 
+Beyond 15 variables, it becomes difficult to keep track of their name and usage, leading to confusion, overwriting or hijacking. 
 
 .. code-block:: php
 
@@ -20257,7 +20372,7 @@ Undefined Interfaces
 ####################
 
 
-Typehint or `'instanceof <http://php.net/manual/en/language.operators.type.php>`_ that are relying on undefined interfaces (or classes) : they will always return false. Any condition based upon them are dead code.
+Some typehints or ``instanceof`` that are relying on undefined interfaces or classes. They will always return false. Any condition based upon them are dead code.
 
 .. code-block:: php
 
@@ -23712,11 +23827,20 @@ When return is void, and the last element in a function, it is also useless.
    
    ?>
 
-+------------+-------------------------+
-| Short name | Functions/UselessReturn |
-+------------+-------------------------+
-| Themes     | :ref:`Analyze`          |
-+------------+-------------------------+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove the return expression. Keep any other calculation.
+
++------------+---------------------------------------------------------------------------------+
+| Short name | Functions/UselessReturn                                                         |
++------------+---------------------------------------------------------------------------------+
+| Themes     | :ref:`Analyze`                                                                  |
++------------+---------------------------------------------------------------------------------+
+| Examples   | :ref:`thinkphp-functions-uselessreturn`, :ref:`vanilla-functions-uselessreturn` |
++------------+---------------------------------------------------------------------------------+
 
 
 
@@ -25484,6 +25608,46 @@ See also `Original MySQL API <http://www.php.net/manual/en/book.mysql.php>`_ and
 +------------+---------------------------+
 | Themes     | :ref:`CompatibilityPHP55` |
 +------------+---------------------------+
+
+
+
+.. _filter\_input()-as-a-source:
+
+filter_input() As A Source
+##########################
+
+
+The filter_input() and filter_input_array() functions access directly to $_GET. They represent a source for external data just like `$_GET`, `$_POST`, etc.
+
+The main feature of filter_input() is that it is already filtered. The main drawback is that `FILTER_FLAG_NONE` is the `none` filter, and that default configuration is `FILTER_UNSAFE_RAW`.
+
+The filter extension keeps access to the incoming data, even after the super globals, such as `$_GET`, are unset.
+
+.. code-block:: php
+
+   <?php
+   
+   // Removing $_GET
+   $_GET = [];
+   
+   // with the default : FILTER_UNSAFE_RAW, this means XSS
+   echo filter_input(INPUT_GET, 'i');
+   
+   // Same as above : 
+   echo filter_var(_GET, 'i');
+   
+   ?>
+
+
+Thanks to `Frederic Bouchery <https://twitter.com/FredBouchery/>`_ for reporting this `special case <https://twitter.com/FredBouchery/status/1049297213598457857>`_.
+
+See also `Data filtering <http://php.net/manual/en/book.filter.php>`_.
+
++------------+----------------------------+
+| Short name | Security/FilterInputSource |
++------------+----------------------------+
+| Themes     | :ref:`Security`            |
++------------+----------------------------+
 
 
 
