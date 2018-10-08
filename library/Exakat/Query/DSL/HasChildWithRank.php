@@ -27,9 +27,15 @@ use Exakat\Query\Query;
 
 class HasChildWithRank extends DSL {
     public function run() {
-        list($edgeName, $rank) = func_get_args();
+        list($links, $rank) = func_get_args();
 
-        return new Command('where( __.out('.$this->SorA($edgeName).').has("rank", ***).not(hasLabel("Void")) )', array(abs((int) $rank)));
+        $this->assertLink($links);
+        $diff = $this->normalizeLinks($links);
+        if (empty($diff)) {
+            return new Command(Query::STOP_QUERY);
+        }
+
+        return new Command('where( __.out('.$this->SorA($diff).').has("rank", ***).not(hasLabel("Void")) )', array(abs((int) $rank)));
     }
 }
 ?>

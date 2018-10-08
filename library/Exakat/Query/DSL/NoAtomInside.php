@@ -27,11 +27,14 @@ use Exakat\Query\Query;
 
 class NoAtomInside extends DSL {
     public function run() {
-        list($atom) = func_get_args();
+        list($atoms) = func_get_args();
 
-        assert($this->assertAtom($atom));
+        assert($this->assertAtom($atoms));
+        $diff = $this->normalizeAtom($atoms);
+
         $MAX_LOOPING = self::$MAX_LOOPING;
         $linksDown = self::$linksDown;
+        
         
         $gremlin = <<<GREMLIN
 not(
@@ -41,7 +44,7 @@ not(
           )
 )
 GREMLIN;
-        return new Command($gremlin, array(makeArray($atom)) );
+        return new Command($gremlin, array($diff) );
     }
 }
 ?>

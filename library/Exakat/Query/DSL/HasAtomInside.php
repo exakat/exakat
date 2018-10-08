@@ -27,15 +27,16 @@ use Exakat\Query\Query;
 
 class HasAtomInside extends DSL {
     public function run() {
-        list($atom) = func_get_args();
+        list($atoms) = func_get_args();
 
-        assert($this->assertAtom($atom));
+        assert($this->assertAtom($atoms));
         $MAX_LOOPING = self::$MAX_LOOPING;
         $linksDown = self::$linksDown;
+        $diff = $this->normalizeAtom($atoms);
 
         $gremlin = "where( __.emit( ).repeat( out($linksDown) ).times($MAX_LOOPING).hasLabel(within(***)) )";
 
-        return new Command($gremlin, array(makeArray($atom)));
+        return new Command($gremlin, array($diff));
     }
 }
 ?>

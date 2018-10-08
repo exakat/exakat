@@ -25,8 +25,16 @@ namespace Exakat\Query\DSL;
 
 class GoToFunction extends DSL {
     public function run() : Command {
-        list($type) = func_get_args();
-        return new Command('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel(within(***)) )', array(makeArray($type)));
+        list($atoms) = func_get_args();
+        
+        assert($this->assertAtom($atoms));
+        $linksDown = self::$linksDown;
+
+        $gremlin = <<<GREMLIN
+repeat( __.in($linksDown) ).until(hasLabel(within(***)) )
+GREMLIN;
+
+        return new Command($gremlin, array($diff));
     }
 }
 ?>

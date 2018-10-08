@@ -28,6 +28,7 @@ use Exakat\Query\Query;
 class Has extends DSL {
     public function run() {
         list($property) = func_get_args();
+
         assert($this->assertProperty($property));
 
         return new Command('has(***)', array($property));

@@ -35,7 +35,10 @@ class GroupFilter extends DSL {
             $by = "by{ \"$characteristic\" }";
         }
 
-        return new Command("groupCount(\"gf\").$by.cap(\"gf\").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * $percentage; }.keySet()");
+        $gremlin = <<<GREMLIN
+groupCount("gf").$by.cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * $percentage; }.keySet()
+GREMLIN;
+        return new Command($gremlin);
     }
 }
 ?>
