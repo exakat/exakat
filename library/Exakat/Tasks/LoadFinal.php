@@ -62,6 +62,7 @@ class LoadFinal extends Tasks {
 
         $this->setParentDefinition();
         $this->makeClassConstantDefinition();
+        $this->makeClassMethodDefinition();
         
         $this->setConstantDefinition();
 
@@ -648,6 +649,56 @@ GREMLIN;
 
         display('Create '.($result->toInt()).' link between Class constant and definition');
         $this->logTime('Class::constant definition');
+    }
+
+    private function makeClassMethodDefinition() {
+        // Warning : no support for overwritten methods : ALL methods are linked
+
+        // Create link between static Class method and its definition
+        // This works outside a class too, for static.
+        $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
+        $query->atomIs('Staticmethodcall')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('CLASS')
+              ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'))
+              ->savePropertyAs('fullnspath', 'classe')
+              ->inIs('DEFINITION')
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->is('static', true)
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        // Create link between Class constant and definition
+        // This works only for $this
+        $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
+        $query->atomIs('Methodcall')
+              ->outIs('OBJECT')
+              ->atomIs('This')
+              ->inIs('OBJECT')
+              ->outIs('METHOD')
+              ->savePropertyAs('lccode', 'name')
+              ->back('first')
+              ->goToClass()
+              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        display('Create '.($result->toInt()).' link between $this->methodcall() and definition');
+        $this->logTime('Class::method() definition');
     }
 
     private function defaultIdentifiers() {

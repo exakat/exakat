@@ -26,46 +26,20 @@ use Exakat\Analyzer\Analyzer;
 
 class MethodUsedBelow extends Analyzer {
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
         //////////////////////////////////////////////////////////////////
-        // property + $this->property
+        // method + $this->method
         //////////////////////////////////////////////////////////////////
-        $this->atomIs('Method')
-             ->isNot('static', true)
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'methodname')
+        $this->atomIs('Class')
+             ->savePropertyAs('fullnspath', 'theClass')
+             ->outIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs(self::$FUNCTIONS_METHOD)
+             ->_as('results')
+             ->outIs('DEFINITION')
+             ->atomIs(array('Methodcall', 'Staticmethodcall'))
              ->goToClass()
-             ->raw(<<<GREMLIN
-where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times($MAX_LOOPING)
-                             .where( __.out("METHOD").out("BLOCK")
-                                       .repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING).hasLabel("Methodcall")
-                                       .where( __.out("OBJECT").hasLabel("This") )
-                                       .out("METHOD").has("token", "T_STRING").filter{ it.get().value("lccode") == methodname}
-                              )
-                         )
-GREMLIN
-)
-             ->back('first');
-        $this->prepareQuery();
-
-        //////////////////////////////////////////////////////////////////
-        // static property : inside the self class
-        //////////////////////////////////////////////////////////////////
-        $this->atomIs('Method')
-             ->is('static', true)
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'methodname')
-             ->goToClass()
-             ->raw(<<<GREMLIN
-where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times($MAX_LOOPING)
-                             .where( __.out("METHOD").out("BLOCK")
-                                       .repeat( __.out({$this->linksDown})).emit().times($MAX_LOOPING).hasLabel("Staticmethodcall")
-                                       .out("MEMBER").has("token", "T_STRING").filter{ it.get().value("lccode") == methodname}
-                              )
-                         )
-GREMLIN
-)
-             ->back('ppp');
+             ->goToAllParents(self::EXCLUDE_SELF)
+             ->samePropertyAs('fullnspath', 'theClass')
+             ->back('results');
         $this->prepareQuery();
         
         // This could be also checking for fnp : it needs to be a 'family' class check.
