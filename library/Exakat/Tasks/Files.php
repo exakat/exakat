@@ -66,14 +66,14 @@ class Files extends Tasks {
         if (empty($files)) {
             throw new NoFileToProcess($this->config->project);
         }
-        display( "Found the files \n");
+        display("Found the files.\n");
 
         $tmpFileName = "{$this->config->projects_root}/projects/.exakat/files".getmypid().'.txt';
         $path = "{$this->config->projects_root}/projects/$dir/code";
         $tmpFiles = array_map(function ($file) {
             return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ),
                                array('\\\\', '\\(', '\\)', '\\ ', '\\$', '\\<', "\\'", '\\"', ),
-                               '.'.$file);
+                               ".$file");
                                }, $files);
         file_put_contents($tmpFileName, implode("\n", $tmpFiles));
 
@@ -95,12 +95,12 @@ class Files extends Tasks {
         $versions[] = $analyzingVersion;
 
         foreach($versions as $version) {
-            if (empty($this->config->{'php'.$version})) {
+            if (empty($this->config->{"php$version"})) {
                 // This version is not defined
                 continue;
             }
             $toRemoveFromFiles = array();
-            display('Check compilation for '.$version);
+            display("Check compilation for $version");
             $stats['notCompilable'.$version] = -1;
             
             $shell = 'cd '.$this->config->projects_root.'/projects/'.$dir.'/code; cat '.$tmpFileName.' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
@@ -354,10 +354,10 @@ class Files extends Tasks {
 
         // check for special files
         display('Check config files');
-        $files = glob($this->config->projects_root.'/projects/'.$dir.'/code/{,.}*', GLOB_BRACE);
+        $files = glob("{$this->config->projects_root}/projects/$dir/code/{,.}*", GLOB_BRACE);
         $files = array_map('basename', $files);
 
-        $services = json_decode(file_get_contents($this->config->dir_root.'/data/serviceConfig.json'));
+        $services = json_decode(file_get_contents("{$this->config->dir_root}/data/serviceConfig.json"));
 
         $configFiles = array();
         foreach($services as $name => $service) {
