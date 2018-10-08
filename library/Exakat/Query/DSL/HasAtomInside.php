@@ -32,7 +32,7 @@ class HasAtomInside extends DSL {
         assert($this->assertAtom($atoms));
         $MAX_LOOPING = self::$MAX_LOOPING;
         $linksDown = self::$linksDown;
-        $diff = $this->normalizeAtom($atoms);
+        $diff = $this->normalizeAtoms($atoms);
 
         $gremlin = "where( __.emit( ).repeat( out($linksDown) ).times($MAX_LOOPING).hasLabel(within(***)) )";
 

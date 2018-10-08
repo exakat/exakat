@@ -30,7 +30,7 @@ class NoAtomInside extends DSL {
         list($atoms) = func_get_args();
 
         assert($this->assertAtom($atoms));
-        $diff = $this->normalizeAtom($atoms);
+        $diff = $this->normalizeAtoms($atoms);
 
         $MAX_LOOPING = self::$MAX_LOOPING;
         $linksDown = self::$linksDown;
