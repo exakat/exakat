@@ -100,6 +100,7 @@ abstract class Analyzer {
     static public $VARIABLES_USER   = array('Variable', 'Variableobject', 'Variablearray',);
     static public $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method', 'Magicmethod');
     static public $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
+    static public $FUNCTIONS_METHOD = array('Method', 'Magicmethod');
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $CLASSES_NAMED    = 'Class';
     static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
