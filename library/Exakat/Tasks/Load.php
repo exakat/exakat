@@ -569,7 +569,7 @@ class Load extends Tasks {
                               'class'          => array(),
                               );
 
-        $this->currentMethod           = array(); 
+        $this->currentMethod           = array();
         $this->currentFunction         = array();
         $this->currentClassTrait       = array();
         $this->currentParentClassTrait = array();
@@ -608,7 +608,7 @@ class Load extends Tasks {
         $tokens = $this->php->getTokenFromFile($fullpath);
         $log['token_initial'] = count($tokens);
 
-        if (count($tokens) === 1) {
+        if (count($tokens) === 0) {
             throw new NoFileToProcess($filename, 'empty');
         }
 
@@ -683,7 +683,7 @@ class Load extends Tasks {
             $this->addLink($id1, $sequence, 'FILE');
             $sequence->root = true;
         } catch (LoadError $e) {
-//            print 'LoadError : '.$e->getMessage().PHP_EOL;
+            print 'LoadError : '.$e->getMessage().PHP_EOL;
 //            print_r($this->expressions[0]);
             $this->log->log('Can\'t process file \''.$this->filename.'\' during load (\''.$this->tokens[$this->id][0].'\', line \''.$this->tokens[$this->id][2].'\'). Ignoring'.PHP_EOL.$e->getMessage().PHP_EOL);
             $this->reset();
@@ -3535,18 +3535,18 @@ class Load extends Tasks {
         $atom->line     = $this->tokens[$this->id][2];
         $atom->token    = $this->getToken($this->tokens[$this->id][0]);
 
-        if (!in_array($atomName, array('Parametername', 'Parameter', 'Propertydefinition')) && 
+        if (!in_array($atomName, array('Parametername', 'Parameter', 'Propertydefinition')) &&
             $this->tokens[$this->id][0] === $this->phptokens::T_VARIABLE) {
             if (isset($this->currentVariables[$atom->code])) {
                 $this->addLink($this->currentVariables[$atom->code], $atom, 'DEFINITION');
-            } else { 
+            } else {
                 $definition = $this->addAtom('Variabledefinition');
                 $definition->fullcode = $atom->fullcode;
                 $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $definition, 'DEFINITION');
                 $this->currentVariables[$atom->code] = $definition;
                 
                 $this->addLink($definition, $atom, 'DEFINITION');
-            } 
+            }
         }
 
         return $atom;
@@ -3561,8 +3561,8 @@ class Load extends Tasks {
     private function processNamespaceBlock() {
         $this->startSequence();
 
-        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG, 
-                                                                $this->phptokens::T_NAMESPACE, 
+        while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_TAG,
+                                                                $this->phptokens::T_NAMESPACE,
                                                                 $this->phptokens::T_END,
                                                                 ))) {
             $this->processNext();

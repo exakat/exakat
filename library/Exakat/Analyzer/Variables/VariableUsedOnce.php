@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class VariableUsedOnce extends Analyzer {
     public function analyze() {
-        //Variables mentionned once in the whole application. Just once. 
+        //Variables mentionned once in the whole application. Just once.
         $usedOnce = $this->query(<<<GREMLIN
 g.V().hasLabel("Variable", "Variablearray", "Variableobject")
      .groupCount("m").by("code")

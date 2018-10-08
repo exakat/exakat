@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class LocallyUsedProperty extends Analyzer {
     public function analyze() {
-        // Using 'DEFINITION' ? 
+        // Using 'DEFINITION' ?
 
         // normal property
         // static property in an variable static::$c
