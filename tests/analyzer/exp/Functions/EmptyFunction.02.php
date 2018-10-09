@@ -3,13 +3,15 @@
 $expected     = array('protected function parentNotDerived( ) { /**/ } ',
                       'public function grandParentNotDerived( ) { /**/ } ',
                       'public function noParentMethod( ) { /**/ } ',
-                      'private function parentIsConcrete( ) { /**/ } ',
-                      'public function parentIsConcrete( ) { /**/ } ',
+                      'protected function parentIsConcrete( ) { /**/ } ',
                       'public function parentIsAbstract( ) { /**/ } ',
                       'public function grandParentExists( ) { /**/ } ',
+                      'public function parentIsPrivate( ) { /**/ } ',
+                      'private function parentIsPrivate( ) { /**/ } ',
                      );
 
 $expected_not = array('public function grandParentExists( ) { /**/ } ',
+                      'public function parentIsConcrete( ) { /**/ } ',
                      );
 
 ?>

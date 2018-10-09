@@ -32,22 +32,10 @@ class EmptyFunction extends Analyzer {
     }
     
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-        
-        $emptyBody = <<<GREMLIN
-not( 
-    where( 
-        __.not(where( __.map( __.out("EXPRESSION").order().by("rank").tail(1)).hasLabel("Return").out("RETURN").hasLabel("Void", "Null")))
-          .out("EXPRESSION")
-          .not(hasLabel("Void", "Global", "Static"))
-        )
-   )
-GREMLIN;
-
         // standalone function : empty is empty. Same for closure.
         $this->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
-             ->raw($emptyBody)
+             ->isNotEmptyBody()
              ->back('first');
         $this->prepareQuery();
 
@@ -55,37 +43,15 @@ GREMLIN;
         $this->atomIs(array('Method', 'Magicmethod'))
              ->hasClassTrait()
              ->isNot('abstract', true)
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->inIs('NAME')
+             ->IsNotInheritedMethod()
              ->outIs('BLOCK')
-             ->raw($emptyBody)
+             ->isNotEmptyBody()
              ->goToClass()
 
              // Ignore classes that are extension from a composer class
-             ->raw(<<<GREMLIN
-not( 
-    where( __.out("EXTENDS")
-             .repeat( __.coalesce(__.in("DEFINITION"), __.filter{true}).out("EXTENDS") ).emit().times($MAX_LOOPING)
-             .where( __.in("ANALYZED").has("analyzer", "Composer/IsComposerNsname") )
-          ) 
-)
-GREMLIN
-)
+             ->IsNotExtendingComposer()
 
              // Ignore methods that are overwriting a parent class, unless it is abstract or private
-             ->raw(<<<GREMLIN
-not( 
-    where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit( hasLabel("Class") ).times($MAX_LOOPING)
-             .out("METHOD").hasLabel("Method")
-             .not( where( __.has("abstract", true) ) ) 
-             .not( where( __.has("visibility", "private") ) ) 
-             .out("NAME")
-             .filter{ it.get().value("lccode") == name}
-    )
-)
-GREMLIN
-)
              ->back('first');
         $this->prepareQuery();
     }

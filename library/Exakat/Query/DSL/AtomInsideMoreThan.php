@@ -23,18 +23,29 @@
 
 namespace Exakat\Query\DSL;
 
-class GoToFunction extends DSL {
+use Exakat\Query\Query;
+use Exakat\Analyzer\Analyzer;
+
+class AtomInsideMoreThan extends DSL {
     public function run() : Command {
-        list($atoms) = func_get_args();
-        
+        list($atoms, $times) = func_get_args();
+
         $this->assertAtom($atoms);
-        $linksDown = self::$linksDown;
         $diff = $this->normalizeAtoms($atoms);
+        if (empty($diff)) {
+            return new Command(Query::STOP_QUERY);
+        }
+
+        $linksDown = self::$linksDown;
+        $MAX_LOOPING  = self::$MAX_LOOPING;
 
         $gremlin = <<<GREMLIN
-repeat( __.in($linksDown) ).until(hasLabel(within(***)) )
+where(
+    __.emit( ).repeat( __.out({$linksDown}).not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait", "Interface")) ).times($MAX_LOOPING)
+      .hasLabel(within(***))
+      .count().is(gt($times))
+)
 GREMLIN;
-
         return new Command($gremlin, array($diff));
     }
 }

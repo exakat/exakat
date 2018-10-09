@@ -23,19 +23,21 @@
 
 namespace Exakat\Query\DSL;
 
-class GoToFunction extends DSL {
-    public function run() : Command {
-        list($atoms) = func_get_args();
-        
-        $this->assertAtom($atoms);
-        $linksDown = self::$linksDown;
-        $diff = $this->normalizeAtoms($atoms);
+use Exakat\Query\Query;
 
+class IsNotEmptyBody extends DSL {
+    public function run() {
         $gremlin = <<<GREMLIN
-repeat( __.in($linksDown) ).until(hasLabel(within(***)) )
+not( 
+    where( 
+        __.not(where( __.map( __.out("EXPRESSION").order().by("rank").tail(1)).hasLabel("Return").out("RETURN").hasLabel("Void", "Null")))
+          .out("EXPRESSION")
+          .not(hasLabel("Void", "Global", "Static"))
+        )
+   )
 GREMLIN;
 
-        return new Command($gremlin, array($diff));
+        return new Command($gremlin);
     }
 }
 ?>

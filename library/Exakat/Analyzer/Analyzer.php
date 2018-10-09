@@ -611,7 +611,13 @@ GREMLIN;
         
         return $this;
     }
-
+    
+    public function atomInsideMoreThan($atom, $times = 1) {
+        $this->query->atomInsideMoreThan($atom, $times);
+        
+        return $this;
+    }
+    
     public function noAtomInside($atom) {
         $this->query->noAtomInside($atom);
         
@@ -736,6 +742,24 @@ GREMLIN;
 
     public function isNot($property, $value = true) {
         $this->query->isNot($property, $value);
+        
+        return $this;
+    }
+
+    public function isNotInheritedMethod() {
+        $this->query->IsNotInheritedMethod();
+        
+        return $this;
+    }
+
+    public function isNotEmptyBody() {
+        $this->query->IsNotEmptyBody();
+        
+        return $this;
+    }
+    
+    public function isNotExtendingComposer() {
+        $this->query->IsNotExtendingComposer();
         
         return $this;
     }

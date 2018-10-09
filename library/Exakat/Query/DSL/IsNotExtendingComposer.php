@@ -23,19 +23,22 @@
 
 namespace Exakat\Query\DSL;
 
-class GoToFunction extends DSL {
-    public function run() : Command {
-        list($atoms) = func_get_args();
-        
-        $this->assertAtom($atoms);
-        $linksDown = self::$linksDown;
-        $diff = $this->normalizeAtoms($atoms);
+use Exakat\Query\Query;
 
+class IsNotExtendingComposer extends DSL {
+    public function run() {
+        $MAX_LOOPING = self::$MAX_LOOPING;
+        
         $gremlin = <<<GREMLIN
-repeat( __.in($linksDown) ).until(hasLabel(within(***)) )
+not( 
+    where( __.out("EXTENDS")
+             .repeat( __.coalesce(__.in("DEFINITION"), __.filter{true}).out("EXTENDS") ).emit().times($MAX_LOOPING)
+             .where( __.in("ANALYZED").has("analyzer", "Composer/IsComposerNsname") )
+          ) 
+)
 GREMLIN;
 
-        return new Command($gremlin, array($diff));
+        return new Command($gremlin);
     }
 }
 ?>
