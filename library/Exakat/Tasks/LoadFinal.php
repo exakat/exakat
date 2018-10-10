@@ -317,7 +317,7 @@ GREMLIN;
               ->outIs('BLOCK')
               ->atomInsideNoDefinition('Staticmethodcall')
               ->outIs('CLASS')
-              ->tokenIs(Analyzer::$STATICCALL_TOKEN)
+              ->atomIs(array('Identifier', 'Nsname', 'Parent', 'Static', 'Self'))
               ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_INSENSITIVE)
               ->inIs('CLASS')
               ->outIs('METHOD')
@@ -343,7 +343,7 @@ GREMLIN;
               ->atomInsideNoDefinition('Staticmethodcall')
               ->hasNoIn('DEFINITION')
               ->outIs('CLASS')
-              ->tokenIs(Analyzer::$STATICCALL_TOKEN)
+              ->atomIs(array('Identifier', 'Nsname', 'Parent', 'Static', 'Self'))
               ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_INSENSITIVE)
               ->inIs('CLASS')
               ->outIs('METHOD')
@@ -368,7 +368,7 @@ GREMLIN;
               ->outIs('BLOCK')
               ->atomInsideNoDefinition('Staticmethodcall')
               ->outIs('CLASS')
-              ->tokenIs(Analyzer::$STATICCALL_TOKEN)
+              ->atomIs(array('Identifier', 'Nsname', 'Parent', 'Static', 'Self'))
               ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_INSENSITIVE)
               ->inIs('CLASS')
               ->outIs('METHOD')
@@ -516,33 +516,51 @@ GREMLIN;
     private function setClassPropertyRemoteDefinition() {
         display('Set class property remote definitions');
 
-        $query = <<<GREMLIN
-g.V().hasLabel("Staticproperty").as("property")
-     .not(where( __.in("DEFINITION")))
-     .out("MEMBER").hasLabel("Staticpropertyname").sideEffect{ name = it.get().value("code")}.in("MEMBER")
-     .out("CLASS").in("DEFINITION")
-     .emit().repeat( __.out("EXTENDS", "USE").coalesce( __.out("USE"), filter{ true; }).in("DEFINITION") ).times(8)
-     .out("PPP").not(has("visibility", "private")).out("PPP").filter{ it.get().value("code") == name;}
-     .addE("DEFINITION")
-     .to("property")
-     .count()
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        $count = $res->toInt();
+        // For static method calls, in traits
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
+        $query->atomIs('Staticproperty')
+              ->_as('property')
+              ->hasNoIn('DEFINITION')
+              ->outIs('MEMBER')
+              ->atomIs('Staticpropertyname')
+              ->savePropertyAs('code', 'name')
+              ->inIs('MEMBER')
+              ->outIs('CLASS')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous', 'Trait'))
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs('PPP')
+              ->isNot('visibility', 'private')
+              ->outIs('PPP')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'property')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count = $result->toInt();
 
-        $query = <<<GREMLIN
-g.V().hasLabel("Member").as("property")
-     .not(where( __.in("DEFINITION")))
-     .out("MEMBER").hasLabel("Name").sideEffect{ name = it.get().value("code")}.in("MEMBER")
-     .out("OBJECT").in("DEFINITION")
-     .emit().repeat( __.out("EXTENDS", "USE").coalesce( __.out("USE"), filter{ true; }).in("DEFINITION") ).times(8)
-     .out("PPP").not(has("visibility", "private")).out("PPP").filter{ it.get().value("propertyname") == name;}
-     .addE("DEFINITION")
-     .to("property")
-     .count()
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        $count += $res->toInt();
+        // For normal method calls, in traits
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
+        $query->atomIs('Member')
+              ->_as('property')
+              ->hasNoIn('DEFINITION')
+              ->outIs('MEMBER')
+              ->savePropertyAs('code', 'name')
+              ->inIs('MEMBER')
+              ->outIs('OBJECT')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous', 'Trait'))
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs('PPP')
+              ->isNot('visibility', 'private')
+              ->outIs('PPP')
+              ->samePropertyAs('propertyname', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'property')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count += $result->toInt();
+
         display("Set $count property remote definitions");
     }
 
