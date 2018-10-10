@@ -27,9 +27,11 @@ use Exakat\Query\Query;
 
 class RegexIs extends DSL {
     public function run() {
-        list($column, $regex) = func_get_args();
+        list($property, $regex) = func_get_args();
 
-        if ($column === 'code') {
+        $this->assertProperty($property);
+
+        if ($property === 'code') {
             $values = $this->dictCode->grep($regex);
             
             if (empty($values)) {
@@ -40,7 +42,7 @@ class RegexIs extends DSL {
         } 
         
         return new Command(<<<GREMLIN
-filter{ (it.get().value('$column') =~ "$regex" ).getCount() != 0 }
+filter{ (it.get().value('$property') =~ "$regex" ).getCount() != 0 }
 GREMLIN
                           );
     }

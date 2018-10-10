@@ -27,6 +27,7 @@ class SetProperty extends DSL {
     public function run() : Command {
         list($property, $value) = func_get_args();
 
+        $this->assertProperty($property);
         return new Command("sideEffect{ it.get().property(\"$property\", $value); }");
     }
 }

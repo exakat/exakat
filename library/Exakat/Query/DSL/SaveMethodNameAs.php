@@ -29,6 +29,8 @@ class SaveMethodNameAs extends DSL {
     public function run() {
         list($name) = func_get_args();
 
+        $this->assertVariable($name);
+
         $gremlin = <<<GREMLIN
 sideEffect{ 
     x = it.get().value("fullnspath").tokenize("::"); 

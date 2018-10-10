@@ -29,6 +29,8 @@ class Trim extends DSL {
     public function run() {
         list($variable, $chars) = func_get_args();
         
+        $this->assertVariable($variable);
+        
         return new Command('sideEffect{'.$variable.'.replaceFirst("^['.$chars.']?(.*?)['.$chars.']?\$", "\$1"); }');
     }
 }

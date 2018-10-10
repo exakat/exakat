@@ -50,8 +50,10 @@ abstract class DSL {
         $this->availableLinks         = $availableLinks;
         $this->availableFunctioncalls = $availableFunctioncalls;
         $this->availableVariables     = &$availableVariables;
-        
-        self::$linksDown = GraphElements::linksAsList();
+
+        if (empty(self::$linksDown)) {
+            self::$linksDown = GraphElements::linksAsList();
+        }
     }
 
     abstract public function run();
@@ -104,6 +106,21 @@ abstract class DSL {
         }
         return true;
     }
+
+    protected function assertTokens($token) {
+        if (is_string($token)) {
+            assert(substr($token, 0, 2) === 'T_', "Wrong prefix for TOKEN name : $token");
+            assert($token === strtoupper($token), "Wrong format for TOKEN name : $token");
+        } elseif (is_array($token)) {
+            foreach($token as $t) {
+                assert(substr($t, 0, 2) === 'T_', "Wrong prefix for TOKEN name : $t");
+                assert($t === strtoupper($t), "Wrong format for TOKEN name : $t");
+            }
+        } else {
+            assert(false, 'Unsupported type for token : '.gettype($token));
+        }
+        return true;
+    }    
 
     protected function assertAtom($atom) {
         if (is_string($atom)) {

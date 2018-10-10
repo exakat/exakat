@@ -29,7 +29,7 @@ class TokenIsNot extends DSL {
     public function run() {
         list($token) = func_get_args();
 
-        assert($this->assertLink($token));
+        assert($this->assertTokens($token));
         return new Command('not( has("token", within(***)) )', array(makeArray($token)) );
     }
 }
