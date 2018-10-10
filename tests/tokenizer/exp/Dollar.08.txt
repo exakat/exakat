@@ -14,12 +14,10 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : NAME
-            8
-            Label : INDEX
-              9
-            Label : VARIABLE
-              6
-        Label : EXPRESSION
-          5
-          Label : NAME
-            10
+            5
+            Label : NAME
+              8
+              Label : INDEX
+                9
+              Label : VARIABLE
+                6

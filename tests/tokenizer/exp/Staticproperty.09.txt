@@ -69,7 +69,7 @@ Label : PROJECT
                 21
               Label : DEFINITION
                 21
-            Label : DEFINITION
+            Label : DEFINITION, DEFINITION
               24
               Label : CLASS
                 6

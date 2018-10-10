@@ -1,0 +1,139 @@
+test
+Label : PROJECT
+  1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      9
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      11
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            9
+          Label : RIGHT
+            10
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            11
+          Label : RIGHT
+            10
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            12
+            Label : NEW
+              13
+        Label : EXPRESSION
+          14
+          Label : ARGUMENT
+            16
+            Label : MEMBER
+              15
+              Label : CODE
+                9
+            Label : OBJECT
+              5
+        Label : EXPRESSION
+          14
+          Label : ARGUMENT
+            16
+            Label : MEMBER
+              17
+              Label : NAME
+                19
+                Label : CONCAT
+                  18
+                Label : CONCAT
+                  20
+                  Label : ARGUMENT
+                    18
+                  Label : NAME
+                    20
+            Label : OBJECT
+              5
+        Label : EXPRESSION
+          14
+          Label : ARGUMENT
+            16
+            Label : MEMBER
+              15
+              Label : CODE
+                17
+                Label : NAME
+                  19
+                  Label : CONCAT
+                    18
+                  Label : CONCAT
+                    20
+                    Label : ARGUMENT
+                      18
+                    Label : NAME
+                      20
+            Label : OBJECT
+              5
+        Label : EXPRESSION
+          14
+          Label : ARGUMENT
+            16
+            Label : MEMBER
+              17
+              Label : NAME
+                17
+                Label : NAME
+                  19
+                  Label : CONCAT
+                    18
+                  Label : CONCAT
+                    20
+                    Label : ARGUMENT
+                      18
+                    Label : NAME
+                      20
+            Label : OBJECT
+              5
+        Label : EXPRESSION
+          21
+          Label : DEFINITION
+            13
+          Label : NAME
+            13
+          Label : PPP
+            22
+            Label : PPP
+              23
+              Label : DEFAULT
+                25

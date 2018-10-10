@@ -674,6 +674,7 @@ GREMLIN;
         // This works outside a class too, for static.
         $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
         $query->atomIs('Staticmethodcall')
+              ->hasNoIn('DEFINITION')
               ->outIs('METHOD')
               ->savePropertyAs('lccode', 'name')
               ->inIs('METHOD')
