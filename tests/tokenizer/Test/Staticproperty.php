@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Staticproperty extends Tokenizer {
-    /* 11 methods */
+    /* 12 methods */
 
     public function testStaticproperty01()  { $this->generic_test('Staticproperty.01'); }
     public function testStaticproperty02()  { $this->generic_test('Staticproperty.02'); }
@@ -20,5 +20,6 @@ class Staticproperty extends Tokenizer {
     public function testStaticproperty09()  { $this->generic_test('Staticproperty.09'); }
     public function testStaticproperty10()  { $this->generic_test('Staticproperty.10'); }
     public function testStaticproperty11()  { $this->generic_test('Staticproperty.11'); }
+    public function testStaticproperty12()  { $this->generic_test('Staticproperty.12'); }
 }
 ?>

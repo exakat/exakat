@@ -921,8 +921,7 @@ class Load extends Tasks {
         $name->token     = $this->getToken($this->tokens[$current][0]);
         $name->enclosing = self::ENCLOSING;
 
-        $this->pushExpression($variable);
-        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -2292,6 +2291,8 @@ class Load extends Tasks {
             $name->aliased    = $aliased;
 
             $this->calls->addCall('function', $fullnspath, $functioncall);
+        } else {
+            throw new LoadError("Unprocessed atom in functioncall definition (its name) : ".$atom->atom.':'.$this->filename.':'.__LINE__);
         }
 
         $this->addLink($functioncall, $name, 'NAME');
@@ -4328,7 +4329,6 @@ class Load extends Tasks {
         $block->token    = $this->getToken($this->tokens[$this->id][0]);
 
         $this->addLink($block, $code, 'CODE');
-        $this->pushExpression($block);
 
         ++$this->id; // Skip }
 
@@ -4336,6 +4336,12 @@ class Load extends Tasks {
     }
 
     private function processDollar() {
+        $this->nestContext();
+        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
+
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
             $current = $this->id;
 
@@ -4356,32 +4362,34 @@ class Load extends Tasks {
             $variable->fullcode = $this->tokens[$current][1].'{'.$expression->fullcode.'}';
             $variable->line     = $this->tokens[$current][2];
             $variable->token    = $this->getToken($this->tokens[$current][0]);
-
             $this->pushExpression($variable);
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
             } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
-                $type = $this->tokens[$current - 1][0] === $this->phptokens::T_OBJECT_OPERATOR; // static?
+                $type = in_array($this->tokens[$current - 1][0], array($this->phptokens::T_OBJECT_OPERATOR, 
+                                                                       $this->phptokens::T_DOUBLE_COLON, 
+                                                                       ));
                 $variable = $this->processFunctioncall($variable, $type === true ? self::WITHOUT_FULLNSPATH : self::WITH_FULLNSPATH);
             } else {
                 $variable = $this->processFCOA($variable);
             }
-
-            return $variable;
         } else {
-            $this->nestContext();
             $this->processSingleOperator('Variable', $this->precedence->get($this->tokens[$this->id][0]), 'NAME');
             $variable = $this->popExpression();
 
-            $this->exitContext();
             $this->pushExpression($variable);
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
-                $this->processSemicolon();
-            }
-
-            return $variable;
         }
+
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
+        $this->exitContext();
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+        
+        return $variable;
     }
 
     private function processClone() {
@@ -4618,25 +4626,15 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
-        $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals[] = $this->phptokens::T_DOUBLE_COLON;
-
         $newContext = $this->isContext(self::CONTEXT_NEW);
         $this->contexts[self::CONTEXT_NEW] = 0;
         $this->nestContext();
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
-            $block = $this->processCurlyExpression();
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
-                $right = $this->processFunctioncall(self::WITHOUT_FULLNSPATH);
-            } else {
-                $right = $this->processFCOA($block);
-            }
-            $this->popExpression();
+            $right = $this->processCurlyExpression();
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOLLAR) {
             ++$this->id; // Skip ::
-            $block = $this->processDollar();
+            $right = $this->processDollar();
             $this->popExpression();
-            $right = $this->processFCOA($block);
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLASS) {
             $right = $this->tokens[$this->id + 1][1];
             ++$this->id; // Skip ::
@@ -4647,13 +4645,14 @@ class Load extends Tasks {
             } else {
                 $right = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
             }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
-                $this->pushExpression($right);
-                $right = $this->processFunctioncall(self::WITHOUT_FULLNSPATH);
-                $this->popExpression();
-            }
         }
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
+            $this->pushExpression($right);
+            $right = $this->processFunctioncall(self::WITHOUT_FULLNSPATH);
+            $this->popExpression();
+        }
+
         $this->contexts[self::CONTEXT_NEW] = $newContext;
         $this->exitContext();
 
@@ -4789,34 +4788,38 @@ class Load extends Tasks {
         $this->contexts[self::CONTEXT_NEW] = 0;
         $this->nestContext();
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_CURLY) {
-            $block = $this->processCurlyExpression();
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
-                $right = $this->processFunctioncall(self::WITHOUT_FULLNSPATH);
-            } else {
-                $right = $this->processFCOA($block);
-            }
+            $right = $this->processCurlyExpression();
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
+            ++$this->id;
+            $right = $this->processSingle('Variable');
+        } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOLLAR) {
+            ++$this->id;
+            $right = $this->processDollar();
             $this->popExpression();
         } else {
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-                ++$this->id;
-                $right = $this->processSingle('Variable');
-            } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOLLAR) {
-                $this->processNext();
-                $right = $this->popExpression();
-            } else {
-                $right = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
-            }
-
-            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
-                $this->pushExpression($right);
-                $right = $this->processFunctioncall(self::WITHOUT_FULLNSPATH);
-                $this->popExpression();
-            }
+            $right = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         }
+
+        if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
+            $this->pushExpression($right);
+            $right = $this->processFunctioncall(self::WITHOUT_FULLNSPATH);
+            $this->popExpression();
+        }
+
         $this->contexts[self::CONTEXT_NEW] = $newContext;
         $this->exitContext();
 
-        if (in_array($right->atom, array('Variable', 'Array', 'Name', 'Concatenation', 'Arrayappend', 'Member', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
+        if (in_array($right->atom, array('Variable', 
+                                         'Array', 
+                                         'Name', 
+                                         'Concatenation', 
+                                         'Arrayappend', 
+                                         'Member', 
+                                         'MagicConstant', 
+                                         'Block',
+                                         'Boolean', 
+                                         'Null',
+                                         ))) {
             $static = $this->addAtom('Member');
             $links = 'MEMBER';
             $static->enclosing = self::NO_ENCLOSING;
@@ -5247,6 +5250,7 @@ class Load extends Tasks {
             if ($atom->atom === 'Variabledefinition') { continue; }
 
             if (!isset($D[$id])) {
+                print_r($atom);
                 throw new LoadError("Warning : forgotten atom $id in $this->filename : $atom->atom");
             }
 
@@ -5536,7 +5540,7 @@ class Load extends Tasks {
             } elseif (in_array($name, array('Final', 'Static', 'Abstract'))) {
                 $atom->{strtolower($name)} = 1;
             } else {
-                assert(false,  "\nUnknown NAME : $name\n");
+                throw new LoadError("\nUnknown NAME : $name\n");
             }
         }
         $this->optionsTokens = array();
