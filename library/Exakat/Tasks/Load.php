@@ -4366,14 +4366,11 @@ class Load extends Tasks {
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
-            } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
-                $type = in_array($this->tokens[$current - 1][0], array($this->phptokens::T_OBJECT_OPERATOR, 
+            } elseif (!in_array($this->tokens[$current - 1][0], array($this->phptokens::T_OBJECT_OPERATOR, 
                                                                        $this->phptokens::T_DOUBLE_COLON, 
-                                                                       ));
-                $variable = $this->processFunctioncall($variable, $type === true ? self::WITHOUT_FULLNSPATH : self::WITH_FULLNSPATH);
-            } else {
+                                                                       ))) {
                 $variable = $this->processFCOA($variable);
-            }
+            } 
         } else {
             $this->processSingleOperator('Variable', $this->precedence->get($this->tokens[$this->id][0]), 'NAME');
             $variable = $this->popExpression();
