@@ -81,7 +81,9 @@ abstract class Reports {
             $this->themesList = makeList($analyzers);
         }
         
-        self::$docs = new Docs($this->config->dir_root);
+        if (self::$docs === null) {
+            self::$docs = new Docs($this->config->dir_root, $this->config->ext);
+        }
     }
 
     protected function _generate($analyzerList) {}

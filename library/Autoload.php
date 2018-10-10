@@ -62,6 +62,52 @@ class Autoload {
     }
 }
 
+class AutoloadExt {
+    private $pharList = array();
+    
+    public function __construct($path) {
+        $this->pharList = glob($path.'/*.phar');
+        
+        // Add a list of check on the phars
+        // Could we autoload everything ? 
+    }
+
+    public function autoload($name) {
+        $fileName = preg_replace('/^([^_]+?)_(.*)$/', '$1'.DIRECTORY_SEPARATOR.'$2', $name);
+        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $fileName);
+        $file = "{$fileName}.php";
+
+        foreach($this->pharList as $phar) {
+            $fullPath = "phar://$phar/library/$file";
+            if (file_exists($fullPath)) {
+                include $fullPath;
+            }
+        }
+    }
+
+    public function registerAutoload() {
+        spl_autoload_register(array($this, 'autoload'));
+    }
+
+    public function getJarList() {
+        return array_map('basename', $this->pharList);
+    }
+    
+    public function loadData($path) {
+        foreach($this->pharList as $phar) {
+            $fullPath = "phar://$phar/human/en/$path";
+
+            if (file_exists($fullPath)) {
+                return file_get_contents($fullPath);
+            }
+        }
+        
+        return null;
+    }
+}
+
+
+
 spl_autoload_register('Autoload::autoload_library');
 if (file_exists(__DIR__.'/../vendor/autoload.php')) {
     include __DIR__.'/../vendor/autoload.php';

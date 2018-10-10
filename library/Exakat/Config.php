@@ -35,6 +35,7 @@ class Config {
     public  $projects_root         = '.';
     public  $is_phar               = true;
     public  $executable            = '';
+    public  $ext                   = null;
 
     private $projectConfig         = null;
     private $codacyConfig          = null;
@@ -61,7 +62,7 @@ class Config {
 
             assert_options(ASSERT_ACTIVE, 0);
 
-            error_reporting(E_ALL);
+            error_reporting(0);
             ini_set('display_errors', 0);
             if (!file_exists("{$this->projects_root}/projects")) {
                 mkdir("{$this->projects_root}/projects", 0755);
@@ -158,6 +159,10 @@ class Config {
         if ($this->options['command'] !== 'doctor') {
             $this->checkSelf();
         }
+        
+        // autoload extensions
+        $this->ext = new \AutoloadExt("{$this->dir_root}/ext");
+        $this->ext->registerAutoload();
     }
 
     public function __isset($name) {

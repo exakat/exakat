@@ -24,11 +24,14 @@ namespace Exakat\Reports\Helpers;
 
 class Docs {
     private $pathToIni = null;
+    private $ext = null;
     
     private static $docs = null;
     
-    public function __construct($pathToIni) {
+    public function __construct($pathToIni, \AutoloadExt $ext = null) {
         $this->pathToIni = $pathToIni;
+        
+        $this->ext = $ext;
     }
 
     public function getDocs($analyzer) {
@@ -36,8 +39,13 @@ class Docs {
             return self::$docs[$analyzer];
         }
         
-        assert(file_exists("{$this->pathToIni}/human/en/$analyzer.ini"), "No such documentation for '$analyzer'.");
-        $ini = parse_ini_file("{$this->pathToIni}/human/en/$analyzer.ini", INI_PROCESS_SECTIONS);
+        if (file_exists("{$this->pathToIni}/human/en/$analyzer.ini")) {
+            $ini = parse_ini_file("{$this->pathToIni}/human/en/$analyzer.ini", INI_PROCESS_SECTIONS);
+        } elseif ((!is_null($this->ext)) && ($iniString = $this->ext->loadData("$analyzer.ini")) !== null) {
+            $ini = parse_ini_string($iniString, INI_PROCESS_SECTIONS);
+        } else {
+            assert(file_exists("{$this->pathToIni}/human/en/$analyzer.ini"), "No documentation for '$analyzer'.");
+        }
         assert($ini !== null, "No readable documentation for '$analyzer'.");
 
         $ini['parameter'] = array();
