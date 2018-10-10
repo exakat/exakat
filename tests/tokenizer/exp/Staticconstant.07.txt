@@ -1,0 +1,253 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : CONST
+            7
+            Label : CONST
+              7
+              Label : DEFINITION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  8
+              Label : NAME
+                8
+              Label : VALUE
+                9
+          Label : DEFINITION
+            6
+          Label : NAME
+            6
+        Label : EXPRESSION
+          5
+          Label : CONST
+            7
+            Label : CONST
+              7
+              Label : DEFINITION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  11
+              Label : NAME
+                11
+              Label : VALUE
+                12
+          Label : DEFINITION
+            10
+          Label : NAME
+            10
+        Label : EXPRESSION
+          5
+          Label : CONST
+            7
+            Label : CONST
+              7
+              Label : DEFINITION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  14
+              Label : NAME
+                14
+              Label : VALUE
+                15
+          Label : DEFINITION
+            13
+          Label : NAME
+            13
+        Label : EXPRESSION
+          5
+          Label : CONST
+            7
+            Label : CONST
+              7
+              Label : DEFINITION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  17
+              Label : NAME
+                17
+              Label : VALUE
+                18
+          Label : DEFINITION
+            16
+          Label : EXTENDS
+            13
+          Label : NAME
+            16
+        Label : EXPRESSION
+          19
+          Label : CONST
+            7
+            Label : CONST
+              7
+              Label : DEFINITION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  20
+              Label : NAME
+                20
+              Label : VALUE
+                22
+          Label : DEFINITION
+            20
+          Label : IMPLEMENTS
+            6
+          Label : NAME
+            20
+        Label : EXPRESSION
+          19
+          Label : CONST
+            7
+            Label : CONST
+              7
+              Label : DEFINITION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  23
+              Label : NAME
+                23
+              Label : VALUE
+                22
+          Label : DEFINITION
+            23
+          Label : EXTENDS
+            20
+          Label : IMPLEMENTS
+            10
+          Label : NAME
+            23
+        Label : EXPRESSION
+          19
+          Label : CONST
+            7
+            Label : CONST
+              7
+              Label : DEFINITION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  25
+              Label : NAME
+                25
+              Label : VALUE
+                22
+          Label : DEFINITION
+            25
+          Label : EXTENDS
+            23
+          Label : NAME
+            25
+        Label : EXPRESSION
+          19
+          Label : CONST
+            7
+            Label : CONST
+              7
+              Label : DEFINITION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  27
+              Label : NAME
+                27
+              Label : VALUE
+                29
+          Label : DEFINITION
+            27
+          Label : DEFINITION
+            27
+          Label : DEFINITION
+            27
+          Label : DEFINITION
+            27
+          Label : DEFINITION
+            27
+          Label : DEFINITION
+            27
+          Label : DEFINITION
+            27
+          Label : DEFINITION
+            27
+          Label : EXTENDS
+            25
+          Label : IMPLEMENTS
+            16
+          Label : METHOD
+            30
+            Label : ARGUMENT
+              31
+            Label : BLOCK
+              33
+              Label : EXPRESSION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  27
+              Label : EXPRESSION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  25
+              Label : EXPRESSION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  23
+              Label : EXPRESSION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  20
+              Label : EXPRESSION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  17
+              Label : EXPRESSION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  14
+              Label : EXPRESSION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  8
+              Label : EXPRESSION
+                34
+                Label : CLASS
+                  27
+                Label : CONSTANT
+                  11
+            Label : NAME
+              30
+          Label : NAME
+            27
