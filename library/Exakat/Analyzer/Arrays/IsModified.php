@@ -73,7 +73,7 @@ class IsModified extends Analyzer {
 
         // arguments : reference variable in a custom function
         $this->atomIs('Functioncall')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIs(self::$STATIC_NAMES)
              ->hasNoIn('METHOD') // possibly new too
              ->outIs('ARGUMENT')
              ->atomIs('Array')
@@ -122,7 +122,7 @@ class IsModified extends Analyzer {
 
         // Class constructors (__construct)
         $this->atomIs('Newcall')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIs(self::$STATIC_NAMES)
              ->outIs('ARGUMENT')
              ->atomIs('Array')
              ->savePropertyAs('rank', 'rank')

@@ -26,10 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ThisIsNotAnArray extends Analyzer {
-
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         // direct class
         $this->atomIs('This')
              ->inIs(array('VARIABLE', 'APPEND'))

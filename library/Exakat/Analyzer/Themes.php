@@ -308,7 +308,7 @@ SQL;
         } else {
             $class = $name;
         }
-        
+
         if (!class_exists($class)) {
             return false;
         }

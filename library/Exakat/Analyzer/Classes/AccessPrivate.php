@@ -84,7 +84,6 @@ class AccessPrivate extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->outIs('CLASS')
-             ->tokenIs(self::$STATICCALL_TOKEN)
              ->atomIs(array('Self', 'Static'))
              ->goToClass()
              // no local method

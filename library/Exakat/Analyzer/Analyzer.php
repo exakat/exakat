@@ -102,6 +102,7 @@ abstract class Analyzer {
     static public $FUNCTIONS_NAMED  = array('Function', 'Method', 'Magicmethod');
     static public $FUNCTIONS_METHOD = array('Method', 'Magicmethod');
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
+    static public $STATIC_NAMES     = array('Nsname', 'Identifier');
     static public $CLASSES_NAMED    = 'Class';
     static public $STATICCALL_TOKEN = array('T_STRING', 'T_STATIC', 'T_NS_SEPARATOR');
     static public $LOOPS_ALL        = array('For' ,'Foreach', 'While', 'Dowhile');
@@ -138,7 +139,7 @@ abstract class Analyzer {
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {
-            $description = new Docs($config->dir_root);
+            $description = new Docs($config->dir_root, $config->ext);
             $parameters = $description->getDocs($this->shortAnalyzer)['parameter'];
             foreach($parameters as $parameter) {
                 assert(isset($this->{$parameter['name']}), "Missing definition for library/Exakat/Analyzer/$this->analyzerQuoted.php :\nprotected \$$parameter[name] = '$parameter[default]';\n");
@@ -1677,8 +1678,14 @@ GREMLIN;
 
     protected function loadIni($file, $index = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
-        
-        assert(file_exists($fullpath), "Ini file '$fullpath' doesn't exists.");
+
+        if (file_exists($fullpath)) {
+            $ini = parse_ini_file($fullpath, INI_PROCESS_SECTIONS);
+        } elseif ((!is_null($this->config->ext)) && ($iniString = $this->config->ext->loadData("$analyzer.ini")) !== null) {
+            $ini = parse_ini_string($iniString, INI_PROCESS_SECTIONS);
+        } else {
+            assert(false, "No INI for '$file'.");
+        }
         
         static $cache;
 
@@ -1702,11 +1709,17 @@ GREMLIN;
     protected function loadJson($file, $property = null) {
         $fullpath = "{$this->config->dir_root}/data/$file";
 
-        assert(file_exists($fullpath), "JSON file '$fullpath' doesn't exists.");
+        if (file_exists($fullpath)) {
+            $json = json_decode(file_get_contents($fullpath));
+        } elseif ((!is_null($this->config->ext)) && ($jsonString = $this->config->ext->loadData($file)) !== null) {
+            $json = json_decode($jsonString);
+        } else {
+            assert(false, "No JSON for '$file'.");
+        }
 
         static $cache;
         if (!isset($cache[$fullpath])) {
-            $cache[$fullpath] = json_decode(file_get_contents($fullpath));
+            $cache[$fullpath] = $json;
         }
         
         if ($property !== null && isset($cache[$fullpath]->$property)) {
