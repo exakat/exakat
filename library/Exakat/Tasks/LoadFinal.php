@@ -500,6 +500,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Staticconstant").as("constant")
+     .not(where( __.in("DEFINITION")))
      .out("CONSTANT").sideEffect{ name = it.get().value("code")}
      .repeat( __.in() ).emit().until(hasLabel("Class", "Classanonymous")).hasLabel("Class", "Classanonymous")
      .emit().repeat( __.out("EXTENDS").in("DEFINITION").simplePath() )
@@ -644,6 +645,7 @@ GREMLIN;
         // Create link between Class constant and definition
         $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null, $this->datastore);
         $query->atomIs('Staticconstant')
+              ->hasNoIn('DEFINITION')
               ->outIs('CONSTANT')
               ->savePropertyAs('code', 'name')
               ->back('first')

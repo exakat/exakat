@@ -55,7 +55,7 @@ Label : PROJECT
                         30
                         Label : CONST
                           30
-                          Label : DEFINITION, DEFINITION
+                          Label : DEFINITION
                             35
                             Label : CLASS
                               34
