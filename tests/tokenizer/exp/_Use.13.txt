@@ -17,7 +17,7 @@ Label : PROJECT
                 11
                 Label : CONST
                   11
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     33
                     Label : CLASS
                       10
@@ -43,7 +43,7 @@ Label : PROJECT
                 11
                 Label : CONST
                   11
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     33
                     Label : CLASS
                       14
@@ -69,7 +69,7 @@ Label : PROJECT
                 11
                 Label : CONST
                   11
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     33
                     Label : CLASS
                       16
@@ -103,7 +103,7 @@ Label : PROJECT
                 11
                 Label : CONST
                   11
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     33
                     Label : CLASS
                       35
@@ -129,7 +129,7 @@ Label : PROJECT
                 11
                 Label : CONST
                   11
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     33
                     Label : CLASS
                       18
@@ -161,7 +161,7 @@ Label : PROJECT
                 11
                 Label : CONST
                   11
-                  Label : DEFINITION, DEFINITION
+                  Label : DEFINITION
                     33
                     Label : CLASS
                       20

@@ -498,19 +498,25 @@ GREMLIN;
     private function setClassConstantRemoteDefinition() {
         display('Set class constant remote definitions');
 
-        $query = <<<GREMLIN
-g.V().hasLabel("Staticconstant").as("constant")
-     .not(where( __.in("DEFINITION")))
-     .out("CONSTANT").sideEffect{ name = it.get().value("code")}
-     .repeat( __.in() ).emit().until(hasLabel("Class", "Classanonymous")).hasLabel("Class", "Classanonymous")
-     .emit().repeat( __.out("EXTENDS").in("DEFINITION").simplePath() )
-     .out("CONST").out("CONST").where( __.out("NAME").filter{ it.get().value("code") == name;})
-     .addE("DEFINITION")
-     .to("constant")
-     .count()
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        $count = $res->toInt();
+        // For static method calls, in traits
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
+        $query->atomIs('Staticconstant')
+              ->_as('constant')
+              ->hasNoIn('DEFINITION')
+              ->outIs('CONSTANT')
+              ->atomIs('Staticpropertyname')
+              ->savePropertyAs('code', 'name')
+              ->goToClass()
+              ->GoToAllImplements(Analyzer::INCLUDE_SELF)
+              ->outIs('CONST')
+              ->outIs('CONST')
+              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
+              ->addETo('DEFINITION', 'constant')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count = $result->toInt();
+
         display("Set $count class constant remote definitions");
     }
 
