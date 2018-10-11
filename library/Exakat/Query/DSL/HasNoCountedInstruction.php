@@ -38,11 +38,12 @@ class HasNoCountedInstruction extends DSL {
         
         $stop = array('File', 'Closure', 'Function', 'Method', 'Class', 'Trait', 'Classanonymous');
         $stop = array_unique(array_diff($stop, $atom));
+        $linksDown = self::$linksDown;
 
         return new Command(<<<GREMLIN
 where( 
  __.sideEffect{ c = 0; }
-   .emit( ).repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() )
+   .emit( ).repeat(__.in($linksDown)) )
    .until(hasLabel(within(***)))
    .hasLabel(within(***))
    .sideEffect{ c = c + 1; }.fold()

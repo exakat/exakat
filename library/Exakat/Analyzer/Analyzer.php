@@ -475,6 +475,12 @@ GREMLIN;
         return $this;
     }
 
+    protected function countBy($link = 'EXPRESSION', $property = 'fullcode', $variable = 'v') {
+        $this->query->countBy($link, $property, $variable);
+        
+        return $this;
+    }
+
     private function hasNoNamedInstruction($atom = 'Function', $name = null) {
         $this->query->hasNoNamedInstruction($atom, $name);
         
