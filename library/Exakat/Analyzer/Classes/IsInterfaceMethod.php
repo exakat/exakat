@@ -28,44 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class IsInterfaceMethod extends Analyzer {
     public function analyze() {
         // interface extended in the local class
-        $this->atomIs('Method')
-             ->saveMethodNameAs('name')
-             ->goToClass()
-             ->outIs('IMPLEMENTS')
-             ->interfaceDefinition()
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->saveMethodNameAs('name2')
-             ->filter('name == name2')
-             ->back('first');
-        $this->prepareQuery();
-
-        // interface extended in the parent interface
-        $this->atomIs('Method')
-             ->saveMethodNameAs('name')
-             ->goToClass()
-             ->outIs('IMPLEMENTS')
-             ->interfaceDefinition()
-             ->outIs('EXTENDS')
-             ->interfaceDefinition()
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->saveMethodNameAs('name2')
-             ->filter('name == name2')
-             ->back('first');
-        $this->prepareQuery();
-        
-        // interface defined in the parents
-        $this->atomIs('Method')
-             ->saveMethodNameAs('name')
-             ->goToClass()
-             ->goToAllParents()
-             ->outIs('IMPLEMENTS')
-             ->interfaceDefinition()
-             ->outIs('METHOD')
-             ->atomIs('Method')
-             ->saveMethodNameAs('name2')
-             ->filter('name == name2')
+        $this->atomIs(self::$FUNCTIONS_METHOD)
+             ->outIs('OVERWRITE')
+             ->inIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs('Interface')
              ->back('first');
         $this->prepareQuery();
 
@@ -80,27 +46,15 @@ class IsInterfaceMethod extends Analyzer {
             $methods = explode(',', $methods);
             
             // interface locally implemented
-            $this->atomIs('Method')
+            $this->atomIs(self::$FUNCTIONS_METHOD)
                  ->outIs('NAME')
                  ->codeIs($methods, self::TRANSLATE, self::CASE_INSENSITIVE)
                  ->inIs('NAME')
                  ->inIs('METHOD')
                  ->atomIs('Class')
-                 ->outIs('IMPLEMENTS')
-                 ->fullnspathIs('\\'.$interface)
-                 ->back('first');
-            $this->prepareQuery();
-
-            // interface implemented by parents
-            $this->atomIs('Method')
-                 ->outIs('NAME')
-                 ->codeIs($methods, self::TRANSLATE, self::CASE_INSENSITIVE)
-                 ->inIs('NAME')
-                 ->inIs('METHOD')
-                 ->atomIs('Class')
-                 ->goToAllParents()
-                 ->outIs('IMPLEMENTS')
-                 ->fullnspathIs('\\'.$interface)
+                 ->goToAllImplements(self::INCLUDE_SELF)
+                 ->outIs(array('EXTENDS', 'IMPLEMENTS'))
+                 ->fullnspathIs("\\{$interface}")
                  ->back('first');
             $this->prepareQuery();
         }
