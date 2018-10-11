@@ -28,49 +28,16 @@ class TooManyLocalVariables extends Analyzer {
     protected $tooManyLocalVariableThreshold = 15;
 
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         $this->atomIs(self::$FUNCTIONS_ALL)
              // Collect all arguments
              ->raw(<<<GREMLIN
-where(  __.sideEffect{ arguments = [];}
-          .out("ARGUMENT").optional( out("LEFT"))
-          .sideEffect{ arguments.add(it.get().value("code")); }
-          .barrier()
-          .select("first") 
+where( __.out("DEFINITION")
+         .hasLabel("Variabledefinition", "Staticdefinition")
+         .count()
+         .is(gte($this->tooManyLocalVariableThreshold))
      ) 
 GREMLIN
-)
-
-             ->outIs('BLOCK')
-             ->_as("block")
-
-             // Collect all global keywords
-             ->raw(<<<GREMLIN
-where( __.sideEffect{ globals = [];}
-         .optional( __.repeat( __.out({$this->linksDown}) ).emit( hasLabel("Global") ).times($MAX_LOOPING)
-         .hasLabel("Global").out("GLOBAL")
-         .hasLabel("Globaldefinition")
-         .sideEffect{ globals.add(it.get().value("code")); }
-         .barrier()
-         .select("block") )
-     )
-GREMLIN
-)
-
-             ->raw(<<<GREMLIN
-where( __.sideEffect{ x = [:];}
-         .repeat( __.out({$this->linksDown}) ).emit( hasLabel("Variable") ).times($MAX_LOOPING).hasLabel("Variable")
-         .filter{ !(it.get().value("code") in globals) }
-         .filter{ !(it.get().value("code") in arguments) }
-         .sideEffect{ 
-             a = it.get().value("code"); if (x[a] == null) { x[a] = 1;} else { x[a]++;}
-         }.barrier()
-         )
-         .filter{ x.size() >= {$this->tooManyLocalVariableThreshold};}
-GREMLIN
-)
-             ->back('first');
+);
         $this->prepareQuery();
     }
 }

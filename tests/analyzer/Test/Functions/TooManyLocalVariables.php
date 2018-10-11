@@ -10,9 +10,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class TooManyLocalVariables extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testFunctions_TooManyLocalVariables01()  { $this->generic_test('Functions/TooManyLocalVariables.01'); }
     public function testFunctions_TooManyLocalVariables02()  { $this->generic_test('Functions/TooManyLocalVariables.02'); }
+    public function testFunctions_TooManyLocalVariables03()  { $this->generic_test('Functions/TooManyLocalVariables.03'); }
 }
 ?>

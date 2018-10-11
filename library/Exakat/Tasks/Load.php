@@ -3536,7 +3536,7 @@ class Load extends Tasks {
         $atom->line     = $this->tokens[$this->id][2];
         $atom->token    = $this->getToken($this->tokens[$this->id][0]);
 
-        if (!in_array($atomName, array('Parametername', 'Parameter', 'Propertydefinition')) &&
+        if (!in_array($atomName, array('Parametername', 'Parameter', 'Propertydefinition', 'Globaldefinition', 'Staticdefinition')) &&
             $this->tokens[$this->id][0] === $this->phptokens::T_VARIABLE) {
             if (isset($this->currentVariables[$atom->code])) {
                 $this->addLink($this->currentVariables[$atom->code], $atom, 'DEFINITION');
