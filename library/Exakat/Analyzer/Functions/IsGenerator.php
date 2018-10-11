@@ -28,10 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class IsGenerator extends Analyzer {
     public function analyze() {
         // function foo() { yield 3; }
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('BLOCK')
-             ->atomInsideNoDefinition(array('Yield', 'Yieldfrom'))
-             ->back('first');
+        $this->atomIs(array('Yield', 'Yieldfrom'))
+             ->goToFunction();
         $this->prepareQuery();
     }
 }
