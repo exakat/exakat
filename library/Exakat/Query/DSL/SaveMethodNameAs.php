@@ -29,7 +29,7 @@ class SaveMethodNameAs extends DSL {
     public function run() {
         list($name) = func_get_args();
 
-        $this->assertVariable($name);
+        $this->assertVariable($name, self::VARIABLE_WRITE);
 
         $gremlin = <<<GREMLIN
 sideEffect{ 
