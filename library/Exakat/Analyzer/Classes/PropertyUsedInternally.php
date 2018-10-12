@@ -28,50 +28,33 @@ use Exakat\Analyzer\Analyzer;
 class PropertyUsedInternally extends Analyzer {
 
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         // property + $this->property
-        $this->atomIs('Class')
-            // collect all $this->property calls
-             ->raw(<<<GREMLIN
-sideEffect{x = [:];}
-.where( __.out("METHOD", "MAGICMETHOD").out("BLOCK")
-          .repeat(out()).emit().times($MAX_LOOPING).hasLabel("Member")
-          .out("OBJECT").hasLabel("This").in("OBJECT") 
-          .out("MEMBER") 
-          .sideEffect{ x[it.get().value("code")] = 1;}
-          .fold()
-)
-GREMLIN
-)
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('PPP')
              ->isNot('static', true)
              ->outIs('PPP')
-             ->filter('it.get().value("propertyname") in x.keySet(); ');
+             ->_as('results')
+             ->outIs('DEFINITION')
+             ->atomIs('Member')
+             ->outIs('OBJECT')
+             ->atomIs('This')
+             ->back('results');
         $this->prepareQuery();
 
         //////////////////////////////////////////////////////////////////
         // static property : inside the self class
         //////////////////////////////////////////////////////////////////
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->savePropertyAs('fullnspath', 'fnp')
-            // collect all $this->property calls
-             ->raw(<<<GREMLIN
-sideEffect{x = [:];}
-.where( __.out("METHOD", "MAGICMETHOD").out("BLOCK")
-          .repeat(out()).emit().times($MAX_LOOPING).hasLabel("Staticproperty")
-          .out("CLASS").has("fullnspath").filter{it.get().value("fullnspath") == fnp}.in("CLASS") 
-          .out("MEMBER") 
-          .sideEffect{ x[it.get().value("code")] = 1;}
-          .fold()
-)
-GREMLIN
-)
              ->outIs('PPP')
              ->is('static', true)
              ->outIs('PPP')
-             ->filter('it.get().value("code") in x.keySet(); ')
-             ->inIsIE('LEFT');
+             ->_as('results')
+             ->outIs('DEFINITION')
+             ->atomIs('Staticproperty')
+             ->outIs('CLASS')
+             ->samePropertyAs('fullnspath', 'fnp')
+             ->back('results');
         $this->prepareQuery();
 
 // Test for arrays ?
