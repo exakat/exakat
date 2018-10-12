@@ -56,9 +56,9 @@ GREMLIN;
                 continue;
             }
             
-            // translations are NOT in the same order than original
-            foreach($methods as $method) {
-                $interfaces[$interface][] = $translations[$method->name]."-$method->count";
+            // translations are in the same order than original
+            foreach($methods as $id => $method) {
+                $interfaces[$interface][] = $translations[$id]."-$method->count";
             }
         }
         

@@ -56,13 +56,13 @@ class Dictionary {
         if ($case === self::CASE_SENSITIVE) {
             foreach($code as $c) {
                 if (isset($this->dictionary[$c])) {
-                    $return[$c] = $this->dictionary[$c];
+                    $return[] = $this->dictionary[$c];
                 }
             }
         } else {
             foreach($code as $c) {
                 if (isset($this->dictionary[mb_strtolower($c)])) {
-                    $return[$c] = $this->dictionary[mb_strtolower($c)];
+                    $return[] = $this->dictionary[mb_strtolower($c)];
                 }
             }
         }
