@@ -2,8 +2,8 @@
 
 class a { 
     function foo() {
-        echo $this->a;
-        echo self::$a;
+        echo $this->a; // They are defined in the class below, so we can't find them
+        echo self::$a; // They are defined in the class below, so we can't find them
     }
 }
 
@@ -13,8 +13,8 @@ class aa extends a {
 
 class b { 
     function foo() {
-        echo b::$b;
-        echo $this->$b;
+        echo a::$b;     // They are defined in the class below, so we can't find them
+        echo $this->$b; // They are defined in the class below, so we can't find them
     }
 }
 

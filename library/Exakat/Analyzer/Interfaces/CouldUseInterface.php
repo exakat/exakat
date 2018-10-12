@@ -35,25 +35,33 @@ class CouldUseInterface extends Analyzer {
 g.V().hasLabel("Interface")
      .as("name")
      .out("METHOD", "MAGICMETHOD").as("methodCount").out("NAME").as("method")
-     .select("name", "method", "methodCount").by("fullnspath").by("code").by("count");
+     .select("name", "method", "methodCount").by("fullnspath").by("lccode").by("count");
 GREMLIN;
 
         $res = $this->query($query)->toArray();
 
-        if (empty($res)) {
-            return;
-        }
-        
         $interfaces = array();
         foreach($res as $row) {
             if (isset($interfaces[$row['name']])) {
-                $interfaces[$row['name']][] = $row['method'].'-'.$row['methodCount'];
+                $interfaces[$row['name']][] = "$row[method]-$row[methodCount]";
             } else {
-                $interfaces[$row['name']] = array($row['method'].'-'.$row['methodCount']);
+                $interfaces[$row['name']] = array("$row[method]-$row[methodCount]");
             }
         }
         
-        $MAX_LOOPING = self::MAX_LOOPING;
+        $phpInterfaces = $this->loadJson('php_interfaces_methods.json');
+        foreach($phpInterfaces as $interface => $methods) {
+            $translations = $this->dictCode->translate(array_column($methods, 'name'));
+            if (count($methods) != count($translations)) {
+                continue;
+            }
+            
+            // translations are NOT in the same order than original
+            foreach($methods as $method) {
+                $interfaces[$interface][] = $translations[$method->name]."-$method->count";
+            }
+        }
+        
         $this->atomIs(self::$CLASSES_ALL)
              ->collectImplements('interfaces')
              ->hasOut(array('METHOD', 'MAGICMETHOD'))
@@ -64,8 +72,7 @@ GREMLIN;
              ->raw(<<<'GREMLIN'
 where( 
     __.out("METHOD", "MAGICMETHOD").sideEffect{ y = it.get().value("count"); }
-      .out("NAME")
-      .sideEffect{ x.add(it.get().value("code") + "-" + y ) ; }
+      .sideEffect{ x.add(it.get().vertices(OUT, "NAME").next().value("lccode") + "-" + it.get().value("count") ) ; }
       .fold() 
 )
 GREMLIN
