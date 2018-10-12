@@ -190,6 +190,10 @@ SQL;
             $end = microtime(true);
             $this->log->log( 'Collected Parameter Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
             $begin = $end;
+            $this->collectLocalVariableCounts();
+            $end = microtime(true);
+            $this->log->log( 'Collected Local Variable Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectMethodsCounts();
             $end = microtime(true);
             $this->log->log( 'Collected Method Counts: '.number_format(1000 * ($end - $begin), 2)."ms\n");
@@ -1478,6 +1482,13 @@ GREMLIN;
 g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by('count').cap('m'); 
 GREMLIN;
         $this->collectHashCounts($query, 'ParameterCounts');
+    }
+
+    private function collectLocalVariableCounts() {
+        $query = <<<GREMLIN
+g.V().hasLabel("Function", "Method", "Closure", "Magicmethod").groupCount('m').by( __.out("DEFINITION").hasLabel("Variabledefinition", "Staticdefinition").count()).cap('m'); 
+GREMLIN;
+        $this->collectHashCounts($query, 'LocalVariableCounts');
     }
 
     private function collectMethodsCounts() {
