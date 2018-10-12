@@ -26,8 +26,13 @@ use Exakat\Analyzer\Analyzer;
 
 class NotCountNull extends Analyzer {
     public function analyze() {
+        $functions = array('\\count', 
+                           '\\strlen', 
+                           '\\mb_strlen',
+                           );
+
         // if (count($x) == 0)
-        $this->atomFunctionIs(array('\\count', '\\strlen'))
+        $this->atomFunctionIs($functions)
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
              ->codeIs(array('==', '===', '!=', '!==', '>', '>=', '<', '<='))
@@ -39,12 +44,12 @@ class NotCountNull extends Analyzer {
         $this->prepareQuery();
 
         // if (count($x))
-        $this->atomFunctionIs(array('\\count', '\\strlen'))
+        $this->atomFunctionIs($functions)
              ->hasIn('CONDITION');
         $this->prepareQuery();
 
         // if (count($x) && $x > 2)
-        $this->atomFunctionIs(array('\\count', '\\strlen'))
+        $this->atomFunctionIs($functions)
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Logical')
              ->back('first');
