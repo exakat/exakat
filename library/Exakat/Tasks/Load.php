@@ -4633,8 +4633,13 @@ class Load extends Tasks {
             $right = $this->processDollar();
             $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLASS) {
-            $right = $this->tokens[$this->id + 1][1];
-            ++$this->id; // Skip ::
+            if ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OPEN_PARENTHESIS) {
+                ++$this->id;
+                $right = $this->processSingle('Methodcallname');
+            } else {
+                $right = $this->tokens[$this->id + 1][1];
+                ++$this->id; // Skip ::
+            }
         } else {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
                 ++$this->id;
