@@ -31,31 +31,20 @@ class PropertyUsedInOneMethodOnly extends Analyzer {
     }
     
     public function analyze() {
-        $MAX_LOOPING = self::MAX_LOOPING;
-
         $this->atomIs('Class')
              ->outIs('PPP')
              ->outIs('PPP')
              ->analyzerIsNot('Classes/UsedOnceProperty')
-             ->_as('results')
-             ->savePropertyAs('propertyname', 'name')
-             ->back('first')
              ->raw(<<<GREMLIN
 where( 
-    __.out("METHOD", "MAGICMETHOD")
-      .out("BLOCK")
-      .where( 
-          __.repeat( __.out({$this->linksDown}) ).emit().times($MAX_LOOPING)
-            .hasLabel("Member")
-            .out("MEMBER")
-            .filter{ it.get().value("code") == name; }
-            .count().is(neq(0)) 
-       )
-       .count().is(eq(1)) 
+    __.out("DEFINITION")
+      .repeat( __.in() ).until(hasLabel("Magicmethod", "Method"))
+      .dedup()
+      .count()
+      .is(eq(1))
     )
 GREMLIN
-)
-             ->back('results');
+);
         $this->prepareQuery();
     }
 }
