@@ -45,7 +45,7 @@ class SetExceptionHandlerPHP7 extends Analyzer {
              ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '::')
              ->savePropertyAs('noDelimiter', 'methode')
-             ->raw('sideEffect{ methode = method.tokenize("::")[1]; }')
+             ->raw('sideEffect{ methode = methode.tokenize("::")[1]; }')
              ->hasIn('DEFINITION')
              ->classDefinition()
              ->outIs('METHOD')
