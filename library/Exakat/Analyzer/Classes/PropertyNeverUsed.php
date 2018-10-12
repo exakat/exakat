@@ -35,7 +35,7 @@ class PropertyNeverUsed extends Analyzer {
 
     public function analyze() {
         // class x { private $p = 1; }
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
