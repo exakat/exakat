@@ -52,14 +52,14 @@ Label : PROJECT
         Label : EXPRESSION
           12
           Label : LEFT
-            11
-            Label : MEMBER
-              14
-              Label : APPEND
+            14
+            Label : APPEND
+              11
+              Label : MEMBER
                 7
                 Label : NAME
                   8
-            Label : OBJECT
-              5
+              Label : OBJECT
+                5
           Label : RIGHT
             15

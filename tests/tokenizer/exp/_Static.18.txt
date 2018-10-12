@@ -2,10 +2,6 @@ test
 Label : PROJECT
   1
   Label : DEFINITION
-    8
-    Label : DEFINITION
-      6
-  Label : DEFINITION
     6
   Label : FILE
     3
@@ -18,42 +14,36 @@ Label : PROJECT
           Label : STATIC
             6
         Label : EXPRESSION
-          9
+          8
           Label : METHOD
-            18
+            17
             Label : ARGUMENT
-              19
+              18
             Label : BLOCK
-              21
+              20
               Label : EXPRESSION
                 5
                 Label : STATIC
-                  22
+                  21
                   Label : DEFAULT
-                    13
+                    12
             Label : DEFINITION
-              22
+              21
               Label : DEFAULT
-                13
-            Label : DEFINITION
-              8
-              Label : DEFINITION
-                22
-                Label : DEFAULT
-                  13
+                12
             Label : NAME
-              18
+              17
           Label : NAME
-            10
+            9
           Label : PPP
             5
             Label : PPP
-              11
+              10
               Label : DEFAULT
-                13
+                12
           Label : PPP
-            14
+            13
             Label : PPP
-              15
+              14
               Label : DEFAULT
-                17
+                16

@@ -5,28 +5,20 @@ Label : PROJECT
     6
   Label : DEFINITION
     7
+  Label : DEFINITION
+    13
     Label : DEFINITION
-      6
+      12
   Label : DEFINITION
-    8
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      8
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      13
-  Label : DEFINITION
-    7
+    13
     Label : DEFINITION
       23
   Label : DEFINITION
-    7
+    13
     Label : DEFINITION
       27
   Label : DEFINITION
-    7
+    13
     Label : DEFINITION
       32
   Label : FILE
@@ -42,13 +34,13 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : GLOBAL
-            8
+            7
         Label : EXPRESSION
-          9
+          8
           Label : CONDITION
-            10
+            9
             Label : NOT
-              11
+              10
               Label : ARGUMENT
                 14
                 Label : INDEX
@@ -58,9 +50,9 @@ Label : PROJECT
                   Label : INDEX
                     15
                   Label : VARIABLE
-                    13
+                    12
               Label : NAME
-                11
+                10
           Label : THEN
             3
             Label : EXPRESSION

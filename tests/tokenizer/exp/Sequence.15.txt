@@ -5,20 +5,8 @@ Label : PROJECT
     6
   Label : DEFINITION
     7
-    Label : DEFINITION
-      6
   Label : DEFINITION
     8
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      8
-  Label : DEFINITION
-    9
-  Label : DEFINITION
-    7
-    Label : DEFINITION
-      9
   Label : FILE
     3
     Label : EXPRESSION
@@ -30,22 +18,22 @@ Label : PROJECT
           Label : GLOBAL
             6
           Label : GLOBAL
-            8
+            7
           Label : GLOBAL
-            9
+            8
         Label : EXPRESSION
-          10
+          9
           Label : NAME
-            11
+            10
           Label : PPP
-            12
+            11
+            Label : PPP
+              12
             Label : PPP
               13
             Label : PPP
-              14
-            Label : PPP
-              16
+              15
               Label : DEFAULT
-                18
+                17
             Label : PPP
               6
