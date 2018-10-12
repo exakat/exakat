@@ -25,10 +25,12 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseInterface extends Analyzer {
-    // interface i {}
+    // interface i { function i(); }
     // class x { function i() {}}
-    // class x could use interface i
+    // class x could use interface i but it was forgotten
+
     public function analyze() {
+        // Custom interfaces
         $query = <<<GREMLIN
 g.V().hasLabel("Interface")
      .as("name")
@@ -52,10 +54,13 @@ GREMLIN;
         }
         
         $MAX_LOOPING = self::MAX_LOOPING;
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
+             ->collectImplements('interfaces')
              ->hasOut(array('METHOD', 'MAGICMETHOD'))
              ->raw('sideEffect{ x = []; }')
              ->raw('sideEffect{ i = *** }', $interfaces)
+             // Collect methods names with argument count
+             // can one implement an interface, but with wrong argument counts ? 
              ->raw(<<<'GREMLIN'
 where( 
     __.out("METHOD", "MAGICMETHOD").sideEffect{ y = it.get().value("count"); }
@@ -80,16 +85,7 @@ filter{
 
 GREMLIN
 )
-                ->raw(<<<GREMLIN
-not( 
-    where( 
-        __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION") ).emit().times($MAX_LOOPING)
-              .hasLabel("Interface", "Class")
-              .filter{ it.get().value("fullnspath") == fnp; } 
-          ) 
-    )
-GREMLIN
-)
+                ->filter('!(fnp in interfaces) ')
                 ->back('first');
         $this->prepareQuery();
     }

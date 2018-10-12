@@ -17,5 +17,10 @@ class x {
     function z() {
         $this->ok;
     }
+
+    // test for magicmethod
+    function __construct() {
+        $this->ok;
+    }
 }
 ?>

@@ -1578,6 +1578,18 @@ GREMLIN;
         return $this;
     }
     
+    public function collectImplements($variable = 'interfaces') {
+        $this->query->collectImplements($variable);
+        
+        return $this;
+    }
+
+    public function collectExtends($variable = 'classes') {
+        $this->query->collectExtends($variable);
+        
+        return $this;
+    }
+    
     // Calculate The lenght of a string in a property, and report it in the named string
     public function getStringLength($property = 'noDelimiter', $variable = 'l') {
         $this->query->getStringLength($property, $variable);
