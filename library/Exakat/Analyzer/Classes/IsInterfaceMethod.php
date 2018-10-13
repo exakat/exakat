@@ -36,19 +36,19 @@ class IsInterfaceMethod extends Analyzer {
         $this->prepareQuery();
 
         // PHP or extension defined interface
-        $interfaces = $this->loadIni('php_interfaces_methods.ini', 'interface');
+        $interfaces = $this->loadJson('php_interfaces_methods.json', 'interface');
         
         foreach($interfaces as $interface => $methods) {
             if (empty($methods)) {
                 // may be the case for Traversable : interface without methods
                 continue;
             }
-            $methods = explode(',', $methods);
+            $methodNames = array_column($methods, 'name');
             
             // interface locally implemented
             $this->atomIs(self::$FUNCTIONS_METHOD)
                  ->outIs('NAME')
-                 ->codeIs($methods, self::TRANSLATE, self::CASE_INSENSITIVE)
+                 ->codeIs($methodNames, self::TRANSLATE, self::CASE_INSENSITIVE)
                  ->inIs('NAME')
                  ->inIs('METHOD')
                  ->atomIs('Class')
