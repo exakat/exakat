@@ -35,50 +35,31 @@ class UsedPrivateMethod extends Analyzer {
              ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'classname')
              ->back('first')
-             ->outIs('METHOD')
-             ->savePropertyAs('lccode', 'name')
-             ->goToClass()
-             ->samePropertyAs('fullnspath', 'classname')
-             ->outIs(array('MAGICMETHOD', 'METHOD'))
+             ->inIs('DEFINITION')
+             ->_as('results')
              ->is('visibility','private')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
-             ->inIs('NAME');
+             ->inIs(array('METHOD', 'MAGICMETHOD'))
+             ->atomIs('Class')
+             ->samePropertyAs('fullnspath', 'classname')
+             ->back('results');
         $this->prepareQuery();
 
         // method used in a normal methodcall with $this $this->b()
         $this->atomIs(array('Method', 'Magicmethod'))
              ->is('visibility','private')
-             ->outIs('NAME')
-             ->savePropertyAs('lccode', 'name')
-             ->back('first')
-             ->inIs(array('METHOD', 'MAGICMETHOD'))
-             ->outIs(array('METHOD', 'MAGICMETHOD'))
-             ->atomInsideNoDefinition('Methodcall')
-             ->outIs('METHOD')
-             ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
-             ->inIs('METHOD')
-             ->outIsIE('OBJECT')
+             ->outIs('DEFINITION')
+             ->atomIs('Methodcall')
+             ->outIs('OBJECT')
              ->atomIs('This')
              ->back('first');
         $this->prepareQuery();
 
-        // method used in a new (constructor)
-        $this->atomIs('Class')
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs('MAGICMETHOD')
-             ->atomIs('Magicmethod')
+        // method used in a normal methodcall with $this $this->b()
+        $this->atomIs(array('Method', 'Magicmethod'))
              ->is('visibility','private')
-             ->_as('method')
-             ->outIs('NAME')
-             ->codeIs('__construct')
-             ->back('first')
-             ->outIs('METHOD')
-             ->atomInsideNoDefinition('New')
-             ->outIs('NEW')
-             ->tokenIs(self::$STATICCALL_TOKEN)
-             ->samePropertyAs('fullnspath', 'fnp')
-             ->back('method');
+             ->codeIs('__construct', self::TRANSLATE, self::CASE_INSENSITIVE)
+             ->outIs('DEFINITION')
+             ->back('first');
         $this->prepareQuery();
 
         // __destruct is considered automatically checked
@@ -90,6 +71,8 @@ class UsedPrivateMethod extends Analyzer {
              ->codeIs('__destruct')
              ->inIs('NAME');
         $this->prepareQuery();
+        
+        // Other magic methods are missing
     }
 }
 
