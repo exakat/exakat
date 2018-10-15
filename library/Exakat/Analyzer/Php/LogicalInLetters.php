@@ -29,7 +29,8 @@ class LogicalInLetters extends Analyzer {
     public function analyze() {
         // $a and $b
         $this->atomIs('Logical')
-             ->codeIs(array('and', 'or', 'xor'));
+             ->codeIs(array('and', 'or', 'xor'))
+             ->hasNoParent('Parenthesis', array('CODE'));
         $this->prepareQuery();
     }
 }
