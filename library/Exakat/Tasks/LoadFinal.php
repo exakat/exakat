@@ -701,7 +701,7 @@ GREMLIN;
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
 
-        // Create link between Class constant and definition
+        // Create link between Class method and definition
         // This works only for $this
         $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
         $query->atomIs('Methodcall')
@@ -721,8 +721,26 @@ GREMLIN;
               ->returnCount();
         $query->prepareRawQuery();
         $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
         display('Create '.($result->toInt()).' link between $this->methodcall() and definition');
+
+        // Create link between constructor and new call
+        $__construct = $this->dictCode->translate('__construct');
+        if (!empty($__construct)) {
+            $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
+            $query->atomIs('New')
+                  ->outIs('NEW')
+                  ->atomIs('Newcall')
+                  ->has('fullnspath')
+                  ->inIs('DEFINITION')
+                  ->outIs('MAGICMETHOD')
+                  ->codeIs($__construct, Analyzer::NO_TRANSLATE, Analyzer::CASE_INSENSITIVE)
+                  ->addETo('DEFINITION', 'first')
+                  ->returnCount();
+            $query->prepareRawQuery();
+            $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        }
+
+        display('Create '.($result->toInt()).' link between new class and definition');
         $this->logTime('Class::method() definition');
     }
 
