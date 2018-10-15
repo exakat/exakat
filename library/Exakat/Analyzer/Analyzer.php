@@ -110,6 +110,7 @@ abstract class Analyzer {
     static public $RELATIVE_CLASS   = array('Parent', 'Static', 'Self');
     static public $CLASS_ELEMENTS   = array('METHOD', 'MAGICMETHOD', 'PPP', 'CONST', 'USE');
     static public $CIT              = array('Class', 'Classanonymous', 'Interface', 'Trait');
+    static public $EXPRESSION_ATOMS = array('Addition', 'Multiplication', 'Power', 'Ternary', 'Noscream', 'Not', 'Parenthesis', 'Functioncall' );
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -1195,6 +1196,12 @@ GREMLIN;
 
     protected function goToExpression() {
         $this->query->goToExpression();
+        
+        return $this;
+    }
+    
+    protected function goToFirstExpression() {
+        $this->query->goToFirstExpression();
         
         return $this;
     }
