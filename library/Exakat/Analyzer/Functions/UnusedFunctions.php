@@ -26,11 +26,69 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedFunctions extends Analyzer {
+    public function dependsOn() {
+        return array('Functions/Recursive');
+    }
+
     public function analyze() {
         // function foo() {} // no foo();
         $this->atomIs('Function')
              ->fullnspathIsNot('\\__autoload')
-             ->hasNoDefinition();
+             ->analyzerIsNot('Functions/Recursive')
+             ->hasNoOut('DEFINITION');
+             // Retired 'hasNoDefinition' : It needs a rename, and some checks
+        $this->prepareQuery();
+
+        $MAX_LOOPING = self::MAX_LOOPING;
+        // function foo() {} // no foo();
+        $this->atomIs('Function')
+             ->fullnspathIsNot('\\__autoload')
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->analyzerIs('Functions/Recursive')
+             // self recursive
+             ->raw(<<<GREMLIN
+not(
+    where(
+        __.out("DEFINITION")
+          .repeat( __.in({$this->linksDown}).not(hasLabel("Function", "Method", "Magicmethod", "Closure")))
+          .emit().times($MAX_LOOPING).hasLabel("Function", "File")
+          .filter{ !it.get().properties("fullnspath").any() || it.get().value("fullnspath") != fnp; }
+    )
+)
+GREMLIN
+);
+        $this->prepareQuery();
+
+        // level 2 of unused : only used by unused functions 
+        // function foo() {} // no foo();
+        // This depends on the order of the functions in the base, so we call it twice. Review is needed.
+        $this->linearlyUnusedFunction();
+        $this->linearlyUnusedFunction();
+    }
+    
+    private function linearlyUnusedFunction() {
+        $MAX_LOOPING = self::MAX_LOOPING;
+
+       // level 2 of unused : only used by unused functions 
+       // function foo() {} // no foo();
+       // This depends on the order of the functions in the base!!! 
+       $this->atomIs('Function')
+            ->fullnspathIsNot('\\__autoload')
+            ->savePropertyAs('fullnspath', 'fnp')
+            ->analyzerIsNot('self')
+            // self recursive
+            ->raw(<<<GREMLIN
+not(
+    where(
+        __.out("DEFINITION")
+          .repeat( __.not(hasLabel("Function", "Method", "Magicmethod", "Closure")).in({$this->linksDown}))
+          .emit().times($MAX_LOOPING).hasLabel("Function", "File")
+          .filter{ !it.get().properties("fullnspath").any() || it.get().value("fullnspath") != fnp; }
+          .not(where( __.in("ANALYZED").has("analyzer", "Functions/UnusedFunctions")))
+    )
+)
+GREMLIN
+);
         $this->prepareQuery();
     }
 }
