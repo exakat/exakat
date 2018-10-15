@@ -25,28 +25,34 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoEmptyRegex extends Analyzer {
-    public static $pregFunctions = array('\\preg_match_all', '\\preg_match', '\\preg_replace', '\\preg_replace_callback', '\\preg_relace_callback_array');
+    public static $pregFunctions = array('\\preg_match_all', 
+                                         '\\preg_match', 
+                                         '\\preg_replace', 
+                                         '\\preg_replace_callback', 
+                                         '\\preg_relace_callback_array',
+                                         );
 
     public function analyze() {
         // preg_match(''.$b, $d, $d); Empty delimiter
         $this->atomFunctionIs(self::$pregFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->outIsIE('CONCAT')
-             ->is('rank', 0) // useful if previous is used
-             ->atomIs('String')
+             ->is('rank', 0)
              ->tokenIs(array('T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'))
-             ->noDelimiterIs('');
+             ->noDelimiterIs('')
+             ->back('first');
         $this->prepareQuery();
 
         // preg_match('a'.$b, $d, $d); Non-alpha numerical delimiter
         $this->atomFunctionIs(self::$pregFunctions)
              ->outWithRank('ARGUMENT', 0)
-             ->outIsIE('CONCAT')
-             ->is('rank', 0) // useful if previous is used
-             ->atomIs('String')
+             ->atomIs(array('Concatenation', 'String'))
+             ->outIsIE('CONCAT') 
+             ->is('rank', 0)
              ->tokenIs(array('T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'))
              ->noDelimiterIsNot('')
-             ->regexIs('noDelimiter', '^[A-Za-z0-9]');
+             ->regexIs('noDelimiter', '^[A-Za-z0-9]')
+             ->back('first');
         $this->prepareQuery();
     }
 }
