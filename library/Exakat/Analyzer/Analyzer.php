@@ -1667,6 +1667,15 @@ GREMLIN;
         
         return $result;
     }
+
+    public function printRawQuery() {
+        $this->query->prepareRawQuery();
+        print $this->query->getQuery();
+        
+        print_r($this->query->getArguments());
+
+        die();
+    }
     
     private function initNewQuery() {
         $this->query = new Query((count($this->queries) + 1), $this->config->project, $this->analyzerQuoted, $this->config->executable, self::$datastore);
@@ -1751,22 +1760,6 @@ GREMLIN;
         return $this->rowCount > 0;
     }
 
-    public function getSeverity() {
-        return $this->themes->getSeverity($this->analyzer);
-    }
-
-    public function getTimeToFix() {
-        return $this->themes->getTimeToFix($this->analyzer);
-    }
-
-    public function getPhpversion() {
-        return $this->phpVersion;
-    }
-
-    public function getphpConfiguration() {
-        return $this->phpConfiguration;
-    }
-    
     private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->query->propertyIs($property, $code, $caseSensitive);
         

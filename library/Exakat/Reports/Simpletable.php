@@ -48,6 +48,7 @@ class Simpletable extends Reports {
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.') ORDER BY analyzer';
         $res = $sqlite->query($sqlQuery);
         
+        $results = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)){
             $results[$row['analyzer']][] = array('code' => $this->syntaxColoring($row['fullcode']),
                                                  'file' => $row['file'],

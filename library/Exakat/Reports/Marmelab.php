@@ -53,8 +53,8 @@ class Marmelab extends Reports {
                 $a = array('id'          => $row['analyzer'],
                            'title'       => $description['name'],
                            'description' => $description['description'],
-                           'severity'    => $analyzer->getSeverity(),
-                           'fixtime'     => $analyzer->getTimeToFix(),
+                           'severity'    => $description['severity'],
+                           'fixtime'     => $description['timetofix'],
                            'clearphp'    => $description['clearphp'],
                            );
 

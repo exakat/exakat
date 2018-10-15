@@ -332,7 +332,7 @@ class Ambassador extends Reports {
             }
             $badges[] = '[ -P '.$analyzer->getInBaseName().' ]';
 
-            $versionCompatibility = $analyzer->getPhpversion();
+            $versionCompatibility = $description['phpversion'];
             if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
                 if (strpos($versionCompatibility, '+') !== false) {
                     $versionCompatibility = substr($versionCompatibility, 0, -1).' and more recent ';

@@ -31,7 +31,7 @@ class OnepageJson extends Reports {
 
     public function generate($folder, $name = null) {
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in '.$this->themesList;
+        $sqlQuery = "SELECT * FROM results WHERE analyzer in $this->themesList";
         $res = $sqlite->query($sqlQuery);
 
         $results = array();
@@ -46,8 +46,9 @@ class OnepageJson extends Reports {
                 $clearphp = '';
             } else {
                 $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
+
                 $titleCache[$row['analyzer']]    = $this->getDocs($row['analyzer'], 'name');
-                $severityCache[$row['analyzer']] = $analyzer->getSeverity();
+                $severityCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'severity');
                 $clearphp = $this->getDocs($row['analyzer'], 'clearphp');
             }
 

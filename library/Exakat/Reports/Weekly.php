@@ -121,8 +121,8 @@ class Weekly extends Ambassador {
         );
 
         foreach($all as $analyzer) {
-            $analyzerObject = $this->themes->getInstance($analyzer, null, $config);
-            $this->grading[$analyzer] = $levels[$analyzerObject->getSeverity()];
+            $severity = $this->getDocs($analyzer, 'severity');
+            $this->grading[$analyzer] = $levels[$severity];
         }
     }
 

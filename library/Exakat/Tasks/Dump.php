@@ -32,6 +32,7 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\NotProjectInGraph;
 use Exakat\Graph\Graph;
+use Exakat\Reports\Helpers\Docs;
 
 class Dump extends Tasks {
     const CONCURENCE = self::DUMP;
@@ -306,7 +307,8 @@ SQL;
         $res = $analyzer->getDump();
 
         $saved = 0;
-        $severity = $analyzer->getSeverity( );
+        $docs = new Docs($this->config->dir_root, $this->config->ext);
+        $severity = $docs->getDocs($class)['severity'];
 
         $query = array();
         foreach($res as $id => $result) {

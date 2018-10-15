@@ -22,6 +22,8 @@
 
 namespace Exakat\Reports\Helpers;
 
+use Exakat\Analyzer\Analyzer;
+
 class Docs {
     private $pathToIni = null;
     private $ext = null;
@@ -34,7 +36,7 @@ class Docs {
         $this->ext = $ext;
     }
 
-    public function getDocs($analyzer) {
+    public function getDocs(string $analyzer) {
         if (isset(self::$docs[$analyzer])) {
             return self::$docs[$analyzer];
         }
@@ -53,6 +55,22 @@ class Docs {
         foreach($ranks as $rank) {
             $ini['parameter'][] = $ini[$rank];
             unset($ini[$rank]);
+        }
+        
+        if (empty($ini['severity'])) {
+            $ini['severity'] = Analyzer::S_NONE;
+        } else {
+            $ini['severity'] = constant(Analyzer::class.'::'.$ini['severity']);
+        }
+
+        if (empty($ini['timetofix'])) {
+            $ini['timetofix'] = Analyzer::S_NONE;
+        } else {
+            $ini['timetofix'] = constant(Analyzer::class.'::'.$ini['timetofix']);
+        }
+
+        if (empty($ini['phpversion'])) {
+            $ini['phpversion'] = Analyzer::PHP_VERSION_ANY;
         }
         
         self::$docs[$analyzer] = $ini;

@@ -54,19 +54,19 @@ class Themes {
 
         if (is_array($theme)) {
             $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
-            $where = 'WHERE c.name in ('.makeList($theme).')';
+            $where = 'WHERE a.folder != "Common" AND c.name in ('.makeList($theme).')';
         } elseif ($theme === null) {
             // Default is ALL of them
-            $where = '';
+            $where = 'WHERE a.folder != "Common" ';
         } elseif ($theme === 'Random') {
             $shorList = array_diff($all, array('All', 'Unassigned', 'First', 'Under Work', 'Newfeatures', 'Onepage',));
             shuffle($shorList);
             $theme = $shorList[0];
             display( "Random theme is : $theme\n");
 
-            $where = 'WHERE c.name = "'.trim($theme, '"').'"';
+            $where = 'WHERE a.folder != "Common" AND c.name = "'.trim($theme, '"').'"';
         } elseif (in_array($theme, $all)) {
-            $where = 'WHERE c.name = "'.trim($theme, '"').'"';
+            $where = 'WHERE a.folder != "Common" AND c.name = "'.trim($theme, '"').'"';
         } else {
             return array();
         }
@@ -140,38 +140,6 @@ SQL;
             $return[$row['analyzer']] = explode(',', $row['categories']);
         }
         
-        return $return;
-    }
-        
-    public function getSeverity($analyzer) {
-        list($folder, $name) = explode('\\', substr($analyzer, 16));
-
-        $query = "SELECT severity FROM analyzers WHERE folder = '$folder' AND name = '$name'";
-
-        $res = self::$sqlite->query($query);
-        $res2 = $res->fetchArray(\SQLITE3_ASSOC);
-        if (empty($res2['severity'])) {
-            $return = Analyzer::S_NONE;
-        } else {
-            $return = constant(Analyzer::class.'::'.$res2['severity']);
-        }
-
-        return $return;
-    }
-
-    public function getTimeToFix($analyzer) {
-        list($folder, $name) = explode('\\', substr($analyzer, 16));
-        $query = "SELECT timetofix FROM analyzers WHERE folder = '$folder' AND name = '$name'";
-
-        $res = self::$sqlite->query($query);
-        $res2 = $res->fetchArray(\SQLITE3_ASSOC);
-
-        if (empty($res2['timetofix'])) {
-            $return = Analyzer::T_NONE;
-        } else {
-            $return = constant(Analyzer::class.'::'.$res2['timetofix']);
-        }
-
         return $return;
     }
 

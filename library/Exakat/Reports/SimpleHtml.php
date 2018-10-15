@@ -144,8 +144,9 @@ HTML;
             if (!isset($titleCache[$row['analyzer']])) {
                 $analyzer = $this->themes->getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']]     = $this->getDocs($row['analyzer'], 'name');
-                $severityCache[$row['analyzer']]  = $analyzer->getSeverity();
-                $timeToFixCache[$row['analyzer']] = $analyzer->getTimeToFix();
+
+                $severityCache[$row['analyzer']]  = $this->getDocs($row['analyzer'], 'severity');
+                $timeToFixCache[$row['analyzer']] = $this->getDocs($row['analyzer'], 'timetofix');
             }
 
             $message = array('source'      => $row['analyzer'],
