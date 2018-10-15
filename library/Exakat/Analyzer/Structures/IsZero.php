@@ -30,11 +30,11 @@ class IsZero extends Analyzer {
         // $a = $c + $d - $c;
         // $a = $c + $d -$e - $c;
         // $a = $d + $c -$e - $c;
-        $minus = $this->dictCode->translate(array('-'));
+        $minus = $this->dictCode->translate('-');
         
         $MAX_LOOPING = self::MAX_LOOPING;
         $follow = 'coalesce( __.hasLabel("Parenthesis").out("CODE"), __.hasLabel("Assignation").out("RIGHT"), __.filter{ true; })';
-        $follow .= '.'.$follow;
+        $follow .= ".$follow";
 
         if (!empty($minus)) {
             $this->atomIs('Addition')
@@ -45,9 +45,9 @@ class IsZero extends Analyzer {
                  ->back('first')
     
                  ->raw(<<<GREMLIN
-emit().repeat( __.out("RIGHT").$follow )
-                               .times($MAX_LOOPING).coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
-                                                              __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow)
+emit().repeat( __.out("RIGHT").$follow.hasLabel("Addition") ).times($MAX_LOOPING)
+      .coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
+                 __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow)
 GREMLIN
 , $minus, $minus)
                  ->samePropertyAs('fullcode', 'operand', self::CASE_SENSITIVE)
@@ -55,7 +55,7 @@ GREMLIN
             $this->prepareQuery();
         }
 
-        $plus = $this->dictCode->translate(array('+'));
+        $plus = $this->dictCode->translate('+');
         if (!empty($plus)) {
             $this->atomIs('Addition')
                  ->outIs('LEFT')
@@ -65,9 +65,9 @@ GREMLIN
                  ->back('first')
     
                  ->raw(<<<GREMLIN
-emit().repeat( __.out("RIGHT").$follow )
-                               .times($MAX_LOOPING).coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
-                                                              __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow)
+emit().repeat( __.out("RIGHT").$follow.hasLabel("Addition") ).times($MAX_LOOPING)
+      .coalesce( __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow.hasLabel("Addition").out("LEFT").$follow,
+                 __.filter{ it.get().value("code") in ***}.out("RIGHT").$follow)
 GREMLIN
 , $plus, $plus)
                  ->samePropertyAs('fullcode', 'operand', self::CASE_SENSITIVE)
