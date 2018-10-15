@@ -36,7 +36,7 @@ class AtomInside extends DSL {
             return new Command(Query::STOP_QUERY);
         }
 
-        $gremlin = 'emit( ).repeat( out('.self::$linksDown.') ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
+        $gremlin = 'emit().repeat( out('.self::$linksDown.') ).times('.self::$MAX_LOOPING.').hasLabel(within(***))';
         return new Command($gremlin, array($diff));
     }
 }

@@ -36,6 +36,8 @@ class SavePropertyAs extends DSL {
             return new Command('sideEffect{ '.$name.' = it.get().label(); }');
         } elseif ($property === 'id') {
             return new Command('sideEffect{ '.$name.' = it.get().id(); }');
+        } elseif ($property === 'self') {
+            return new Command('sideEffect{ '.$name.' = it.get(); }');
         } else {
             return new Command('sideEffect{ '.$name.' = it.get().value("'.$property.'"); }');
         }

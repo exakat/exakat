@@ -41,8 +41,10 @@ class AtomInsideNoDefinition extends DSL {
 
         $gremlin = <<<GREMLIN
 emit( ).repeat( __.out($linksDown)
-       .not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait", "Interface")) )
-       .times($MAX_LOOPING).hasLabel(within(***))
+                  .not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait", "Interface")) 
+            )
+            .times($MAX_LOOPING)
+            .hasLabel(within(***))
 GREMLIN;
         return new Command($gremlin, array($diff));
     }
