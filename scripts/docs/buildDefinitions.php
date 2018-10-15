@@ -24,6 +24,30 @@ $docs = new Docs();
 $docs->buildDocs();
 
 class Docs {
+    const S_CRITICAL = 'Critical';
+    const S_MAJOR    = 'Major';
+    const S_MINOR    = 'Minor';
+    const S_NOTE     = 'Note';
+    const S_NONE     = 'None';
+
+    const T_NONE    = 'None';    //'0';
+    const T_INSTANT = 'Instant'; //'5';
+    const T_QUICK   = 'Quick';   //30';
+    const T_SLOW    = 'Slow';    //60';
+    const T_LONG    = 'Long';    //360';
+
+    const TIMETOFIX = array('T_INSTANT' => 'Instant (5 mins)',
+                            'T_QUICK'   => 'Quick (30 mins)',
+                            'T_SLOW'    => 'Slow (1 hour)',
+                            'T_LONG'    => 'Long (4 hours)' );
+
+    const SEVERITIES = array('S_CRITICAL' => 'Critical',
+                            'S_MAJOR'     => 'Major',
+                            'S_MINOR'     => 'Minor',
+                            'S_NOTE'      => 'Note',
+                            'S_NONE'      => '',
+                             );
+
     private $analyzers = null;
     
     private $extensionList = array();
@@ -645,9 +669,22 @@ SPHINX;
             $this->issues_examples[] = $issues_examples_section;
         }
         
-        $info = array( array('Short name', $commandLine),
-                       array('Themes', $recipes),
-                                );
+        $info = array( array('Short name',  $commandLine),
+                       array('Themes',      $recipes),
+                      );
+    
+        if (isset($ini['phpversion'])) {
+            $info[] = array('Php Version', $this->readPhpversion($ini['phpversion']));
+        }
+
+        if (!empty($ini['severity'])) {
+            $info[] = array('Severity',    self::SEVERITIES[$ini['severity']]);
+        }
+
+        if (!empty($ini['timetofix'])) {
+            $info[] = array('Time To Fix', self::TIMETOFIX[$ini['timetofix']]);
+        }
+
         if (!empty($clearPHP)) {
             $info[] = array('ClearPHP', $clearPHP);
         }
@@ -831,5 +868,15 @@ GLOSSARY;
         }
 
         $this->parameter_list = $parameterList;
+    }
+    
+    private function readPHPversion($phpversion) {
+        if ($phpversion[-1] === '-') {
+            return 'With PHP '.substr($phpversion, 0, -1).' and older';
+        } elseif ($phpversion[-1] === '+') {
+            return 'With PHP '.substr($phpversion, 0, -1).' and more recent';
+        } else {
+            return $phpversion;
+        }
     }
 }
