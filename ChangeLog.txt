@@ -1,4 +1,4 @@
-Version 1.4.9 (Lingji Bodhisattva, coming up)
+Version 1.5.0 (Lingji Bodhisattva, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,39 @@ Version 1.4.9 (Lingji Bodhisattva, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.4.9 (Lingji Bodhisattva, 2018-10-15)
++ Architecture
+    + Extended documentation with phpVersion, time to fix and severity
+    + Upgraded bufixes to PHP 7.2.11
+    + Added more tests on arguments in the DSL
+    + Removed double definitions for class constants
+    + Initial support for extension folder
++ Report
+    + Collect the number of local variables, per method
++ Analyzer
+    + New analysis : report accessing properties the wrong way
+    + New analysis : suggest named patterns
+    + New analysis : check Pack() arguments
+    + New analysis : Return in generators, for PHP 7.0 +
+    + New analysis : Repeated interfaces
+    + New analysis : Static properties shouldn't use references until PHP 7.3
+    + New analysis : Don't read and write in the same expression
+    + Upgraded analysis : is interface methods, extended to magic methods
+    + Upgraded analysis : empty regex
+    + Upgraded analysis : never used properties
+    + Upgraded analysis : logical operators in letters
+    + Upgraded analysis : could use interface, extended with PHP native interfaces
+    + Upgraded analysis : Is Zero, better handling of mixed expressions
+    + Refactored analysis : Empty functions
+    + Refactored analysis : Used Private Methods
+    + Checked unit tests : 3036 / 3055 test pass (99% pass)
++ Tokenizer
+    + Added DEFINITION between new and __construct
+    + Added support for className::class() 
+    + Added better support for dynamic method calls
+    + Added better support for dynamic property calls
+    + Removed some usage of TokenIs
 
 Version 1.4.8 (Ksitigarbha, 2018-10-08)
 + Architecture
