@@ -66,6 +66,8 @@ class Ambassador extends Reports {
                                  'Type/GPCIndex'  => 'Incoming variables',
                                  'Type/Md5string' => 'MD5 string',
                                  'Type/Mime'      => 'Mime types',
+                                 'Type/Pack'      => 'Pack format',
+                                 'Type/Printf'    => 'Printf format',
                                  );
 
     private $compatibilities = array();

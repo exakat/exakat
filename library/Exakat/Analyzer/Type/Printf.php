@@ -24,17 +24,17 @@ namespace Exakat\Analyzer\Type;
 
 use Exakat\Analyzer\Analyzer;
 
-class Regex extends Analyzer {
+class Printf extends Analyzer {
     public function analyze() {
-        $pregFunctions = array('\\preg_match_all', 
-                               '\\preg_match', 
-                               '\\preg_replace', 
-                               '\\preg_replace_callback', 
-                               '\\preg_relace_callback_array',
-                               );
+        $functions = array('\\printf', 
+                           '\\sscanf', 
+                           '\\fscanf', 
+                           '\\vsprintf', 
+                           '\\sprintf', 
+                           );
 
-        // preg_match('/a/', ...)
-        $this->atomFunctionIs($pregFunctions)
+        // echo sprintf("%'.9d\n", 123);
+        $this->atomFunctionIs($functions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('String', 'Concatenation'));
         $this->prepareQuery();
