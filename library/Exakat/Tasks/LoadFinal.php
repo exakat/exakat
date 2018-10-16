@@ -69,15 +69,12 @@ class LoadFinal extends Tasks {
         $this->defaultIdentifiers();
         $this->propagateConstants();
 
-//        $this->setClassConstantRemoteDefinition();
         $this->setClassPropertyRemoteDefinition();
         $this->setClassMethodRemoteDefinition();
         $this->setArrayClassDefinition();
 
         $this->overwrittenMethods();
         
-        $this->linkStaticMethodCall();
-
         display('End load final');
         $this->logTime('Final');
     }
@@ -305,89 +302,6 @@ GREMLIN;
         $this->logTime('setArrayClassDefinition end');
     }
 
-    private function linkStaticMethodCall() {
-        $this->logTime('linkStaticMethodCall');
-        display('linkStaticMethodCall');
-        
-        // For static method calls, in traits
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs('Trait')
-              ->savePropertyAs('fullnspath', 'fnp')
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('BLOCK')
-              ->atomInsideNoDefinition('Staticmethodcall')
-              ->outIs('CLASS')
-              ->atomIs(array('Identifier', 'Nsname', 'Parent', 'Static', 'Self'))
-              ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_INSENSITIVE)
-              ->inIs('CLASS')
-              ->outIs('METHOD')
-              ->tokenIs('T_STRING')
-              ->savePropertyAs('code', 'method')
-              ->_as('call')
-              ->goToTrait()
-              ->goToAllTraits(Analyzer::INCLUDE_SELF)
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'method', Analyzer::CASE_INSENSITIVE)
-              ->addEFrom('DEFINITION', 'call')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        // For static method calls, in class
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs(array('Class', 'Classanonymous'))
-              ->savePropertyAs('fullnspath', 'fnp')
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('BLOCK')
-              ->atomInsideNoDefinition('Staticmethodcall')
-              ->hasNoIn('DEFINITION')
-              ->outIs('CLASS')
-              ->atomIs(array('Identifier', 'Nsname', 'Parent', 'Static', 'Self'))
-              ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_INSENSITIVE)
-              ->inIs('CLASS')
-              ->outIs('METHOD')
-              ->tokenIs('T_STRING')
-              ->savePropertyAs('code', 'method')
-              ->_as('call')
-              ->goToClass()
-              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF) // traits and class
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'method', Analyzer::CASE_INSENSITIVE)
-              ->addEFrom('DEFINITION', 'call')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        // For static property calls, in class
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs(array('Class', 'Classanonymous'))
-              ->savePropertyAs('fullnspath', 'fnp')
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('BLOCK')
-              ->atomInsideNoDefinition('Staticmethodcall')
-              ->outIs('CLASS')
-              ->atomIs(array('Identifier', 'Nsname', 'Parent', 'Static', 'Self'))
-              ->samePropertyAs('fullnspath', 'fnp', Analyzer::CASE_INSENSITIVE)
-              ->inIs('CLASS')
-              ->outIs('METHOD')
-              ->tokenIs('T_STRING')
-              ->savePropertyAs('code', 'method')
-              ->_as('call')
-              ->goToClass()
-              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF) // traits and class
-              ->outIs(array('METHOD', 'MAGICMETHOD'))
-              ->outIs('NAME')
-              ->samePropertyAs('code', 'method', Analyzer::CASE_INSENSITIVE)
-              ->addEFrom('DEFINITION', 'call')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-
-        $this->logTime('linkStaticMethodCall end');
-    }
-
     private function spotFallbackConstants() {
         $this->logTime('spotFallbackConstants');
         // Define-style constant definitions
@@ -495,31 +409,6 @@ GREMLIN;
         }
     }
 
-    private function setClassConstantRemoteDefinition() {
-        display('Set class constant remote definitions');
-
-        // For static method calls, in traits
-        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
-        $query->atomIs('Staticconstant')
-              ->_as('constant')
-              ->hasNoIn('DEFINITION')
-              ->outIs('CONSTANT')
-              ->atomIs('Staticpropertyname')
-              ->savePropertyAs('code', 'name')
-              ->goToClass()
-              ->GoToAllImplements(Analyzer::INCLUDE_SELF)
-              ->outIs('CONST')
-              ->outIs('CONST')
-              ->samePropertyAs('code', 'name', Analyzer::CASE_SENSITIVE)
-              ->addETo('DEFINITION', 'constant')
-              ->returnCount();
-        $query->prepareRawQuery();
-        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
-        $count = $result->toInt();
-
-        display("Set $count class constant remote definitions");
-    }
-
     private function setClassPropertyRemoteDefinition() {
         display('Set class property remote definitions');
 
@@ -572,33 +461,29 @@ GREMLIN;
     private function setClassMethodRemoteDefinition() {
         display('Set class method remote definitions');
 
-        $query = <<<GREMLIN
-g.V().hasLabel("Staticmethodcall").as("method")
-     .not(where( __.in("DEFINITION")))
-     .out("METHOD").hasLabel("Methodcallname").sideEffect{ name = it.get().value("lccode")}.in("METHOD")
-     .out("CLASS").in("DEFINITION")
-     .emit().repeat( __.out("EXTENDS", "USE").coalesce( __.out("USE"), filter{ true; }).in("DEFINITION") ).times(8)
-     .out("METHOD").not(has("visibility", "private")).out("NAME").filter{ it.get().value("lccode") == name;}
-     .addE("DEFINITION")
-     .to("method")
-     .count()
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        $count = $res->toInt();
+        // For static method calls, in traits
+        $query = new Query(0, $this->config->project, 'linkStaticMethodCall', null, $this->datastore);
+        $query->atomIs('Staticmethodcall')
+              ->_as('method')
+              ->hasNoIn('DEFINITION')
+              ->outIs('METHOD')
+              ->atomIs('Methodcallname')
+              ->savePropertyAs('lccode', 'name')
+              ->inIs('METHOD')
+              ->outIs('CLASS')
+              ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous', 'Trait'))
+              ->GoToAllParentsTraits(Analyzer::INCLUDE_SELF)
+              ->outIs(array('METHOD', 'MAGICMETHOD'))
+              ->outIs('NAME')
+              ->samePropertyAs('lccode', 'name', Analyzer::CASE_INSENSITIVE)
+              ->inIs('NAME')
+              ->addETo('DEFINITION', 'method')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+        $count = $result->toInt();
 
-        $query = <<<GREMLIN
-g.V().hasLabel("Member").as("property")
-     .not(where( __.in("DEFINITION")))
-     .out("METHOD").hasLabel("Methodcallname").sideEffect{ name = it.get().value("lccode")}.in("METHOD")
-     .out("OBJECT").in("DEFINITION")
-     .emit().repeat( __.out("EXTENDS", "USE").coalesce( __.out("USE"), filter{ true; }).in("DEFINITION") ).times(8)
-     .out("METHOD").not(has("visibility", "private")).out("NAME").filter{ it.get().value("lccode") == name;}
-     .addE("DEFINITION")
-     .to("method")
-     .count()
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        $count += $res->toInt();
         display("Set $count method remote definitions");
     }
 
