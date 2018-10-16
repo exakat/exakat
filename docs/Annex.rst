@@ -326,6 +326,8 @@ A number of applications were scanned in order to find real life examples of pat
 * `Zurmo <http://zurmo.org/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `Dolphin <https://www.boonex.com/>`_
+* EduSoho
+* `HuMo-Gen <http://humogen.com/>`_
 * `XOOPS <https://xoops.org/>`_
 * `Woocommerce <https://woocommerce.com/>`_
 * `Phpdocumentor <https://www.phpdoc.org/>`_
@@ -333,14 +335,14 @@ A number of applications were scanned in order to find real life examples of pat
 * `Contao <https://contao.org/en/>`_
 * `ChurchCRM <http://churchcrm.io/>`_
 * `TeamPass <https://teampass.net/>`_
-* `HuMo-Gen <http://humogen.com/>`_
 * `Phinx <https://phinx.org/>`_
 * `opencfp <https://github.com/opencfp/opencfp>`_
 * `PrestaShop <https://prestashop.com/>`_
 * `PhpIPAM <https://phpipam.net/download/>`_
+* tikiwiki
+* SuiteCRM
 * `Edusoho <https://www.edusoho.com/en>`_
 * `SuiteCrm <https://suitecrm.com/>`_
-* Prestashop
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 
 
@@ -393,6 +395,15 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.4.9
+
+  * Invalid Pack Format (Structures/InvalidPackFormat ; Analyze)
+  * Name Regex (Structures/NamedRegex ; Suggestions)
+  * No Reference For Static Property (Php/NoReferenceForStaticProperty ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
+  * No Return For Generator (Php/NoReturnForGenerator ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
+  * Repeated Interface (Interfaces/RepeatedInterface ; Analyze)
+  * Undeclared Static Property (Classes/UndeclaredStaticProperty)
 
 * 1.4.8
 
@@ -763,7 +774,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Could Be Protected Class Constant (Classes/CouldBeProtectedConstant ; ClassReview)
   * Could Be Protected Method (Classes/CouldBeProtectedMethod ; ClassReview)
   * Method Could Be Private Method (Classes/CouldBePrivateMethod)
-  * Method Used Below (Classes/MethodUsedBelow ; Analyze)
+  * Method Used Below (Classes/MethodUsedBelow ; )
   * Pathinfo() Returns May Vary (Php/PathinfoReturns ; Analyze, Level 4)
 
 * 0.12.10
@@ -2037,7 +2048,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-37 PHP error message detailled : 
+38 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
@@ -2075,6 +2086,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Uncaught ArgumentCountError: Too few arguments to function, 0 passed <wrong-number-of-arguments>`
 * :ref:`Undefined function <undefined-functions>`
 * :ref:`Undefined variable:  <undefined-variable>`
+* :ref:`Using $this when not in object context <$this-belongs-to-classes-or-traits>`
 * :ref:`syntax error, unexpected '-', expecting '=' <invalid-constant-name>`
 
 
@@ -2347,8 +2359,8 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2357,6 +2369,7 @@ List of external links mentionned in this documentation.
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
 * `Generator Syntax <http://php.net/manual/en/language.generators.syntax.php>`_
+* `Generators overview <http://php.net/manual/en/language.generators.overview.php>`_
 * `GeoIP <http://php.net/manual/en/book.geoip.php>`_
 * `get_class <http://php.net/get_class>`_
 * `Gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
@@ -2432,8 +2445,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2469,6 +2482,7 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics, rule # 5 <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `Object Inheritance <http://www.php.net/manual/en/language.oop5.inheritance.php>`_
+* `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
@@ -2481,6 +2495,7 @@ List of external links mentionned in this documentation.
 * `Original MySQL API <http://www.php.net/manual/en/book.mysql.php>`_
 * `Output Buffering Control <http://php.net/manual/en/book.outcontrol.php>`_
 * `Overload <http://php.net/manual/en/language.oop5.overloading.php#object.get>`_
+* `pack <http://php.net/pack>`_
 * `Packagist <https://packagist.org/>`_
 * `parent <http://php.net/manual/en/keyword.parent.php>`_
 * `Parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
@@ -2497,6 +2512,7 @@ List of external links mentionned in this documentation.
 * `PHP 7 performance improvements (3/5): Encapsed strings optimization <https://blog.blackfire.io/php-7-performance-improvements-encapsed-strings-optimization.html>`_
 * `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_
 * `PHP 7.2's "switch" optimisations <https://derickrethans.nl/php7.2-switch.html>`_
+* `PHP 7.3 UPGRADE NOTES <https://github.com/php/php-src/blob/3b6e1ee4ee05678b5d717cd926a35ffdc1335929/UPGRADING#L66-L81>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
 * `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_
@@ -2516,8 +2532,8 @@ List of external links mentionned in this documentation.
 * `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP RFC: Syntax for variadic functions <https://wiki.php.net/rfc/variadics>`_
 * `PHP RFC: Unicode Codepoint Escape Syntax <https://wiki.php.net/rfc/unicode_escape>`_
-* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `PHP tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-vips-ext <https://github.com/jcupitt/php-vips-ext>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PHPUnit <http://www.phpunit.de/>`_
@@ -2581,6 +2597,7 @@ List of external links mentionned in this documentation.
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
+* `Subpatterns <http://php.net/manual/en/regexp.reference.subpatterns.php>`_
 * `substr <http://www.php.net/substr>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `Sun, iPlanet and Netscape servers on Sun Solaris <http://php.net/manual/en/install.unix.sun.php>`_
@@ -2606,8 +2623,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -2623,8 +2640,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2786,7 +2803,6 @@ Analyze
 |   analyzer[] = "Classes/MakeDefault";
 |   analyzer[] = "Classes/MakeGlobalAProperty";
 |   analyzer[] = "Classes/MethodSignatureMustBeCompatible";
-|   analyzer[] = "Classes/MethodUsedBelow";
 |   analyzer[] = "Classes/MultipleDeclarations";
 |   analyzer[] = "Classes/MultipleTraitOrInterface";
 |   analyzer[] = "Classes/MutualExtension";
@@ -2817,6 +2833,7 @@ Analyze
 |   analyzer[] = "Classes/ThrowInDestruct";
 |   analyzer[] = "Classes/TooManyFinds";
 |   analyzer[] = "Classes/TooManyInjections";
+|   analyzer[] = "Classes/UndeclaredStaticProperty";
 |   analyzer[] = "Classes/UndefinedClasses";
 |   analyzer[] = "Classes/UndefinedConstants";
 |   analyzer[] = "Classes/UndefinedParentMP";
@@ -2897,6 +2914,7 @@ Analyze
 |   analyzer[] = "Interfaces/ConcreteVisibility";
 |   analyzer[] = "Interfaces/CouldUseInterface";
 |   analyzer[] = "Interfaces/EmptyInterface";
+|   analyzer[] = "Interfaces/RepeatedInterface";
 |   analyzer[] = "Interfaces/UndefinedInterfaces";
 |   analyzer[] = "Interfaces/UnusedInterfaces";
 |   analyzer[] = "Interfaces/UselessInterfaces";
@@ -2999,6 +3017,7 @@ Analyze
 |   analyzer[] = "Structures/ImpliedIf";
 |   analyzer[] = "Structures/InconsistentElseif";
 |   analyzer[] = "Structures/IndicesAreIntOrString";
+|   analyzer[] = "Structures/InvalidPackFormat";
 |   analyzer[] = "Structures/InvalidRegex";
 |   analyzer[] = "Structures/IsZero";
 |   analyzer[] = "Structures/ListOmissions";
@@ -3167,6 +3186,7 @@ ClassReview
 |   analyzer[] = "Classes/PropertyCouldBeLocal";
 |   analyzer[] = "Classes/RaisedAccessLevel";
 |   analyzer[] = "Classes/RedefinedProperty";
+|   analyzer[] = "Classes/UndeclaredStaticProperty";
 |   analyzer[] = "Structures/CouldBeStatic";| 
 
 
@@ -3247,6 +3267,8 @@ CompatibilityPHP53
 |   analyzer[] = "Php/ListWithReference";
 |   analyzer[] = "Php/MethodCallOnNew";
 |   analyzer[] = "Php/NoListWithString";
+|   analyzer[] = "Php/NoReferenceForStaticProperty";
+|   analyzer[] = "Php/NoReturnForGenerator";
 |   analyzer[] = "Php/NoStringWithAppend";
 |   analyzer[] = "Php/NoSubstrMinusOne";
 |   analyzer[] = "Php/PHP70scalartypehints";
@@ -3327,6 +3349,8 @@ CompatibilityPHP54
 |   analyzer[] = "Php/ListWithKeys";
 |   analyzer[] = "Php/ListWithReference";
 |   analyzer[] = "Php/NoListWithString";
+|   analyzer[] = "Php/NoReferenceForStaticProperty";
+|   analyzer[] = "Php/NoReturnForGenerator";
 |   analyzer[] = "Php/NoStringWithAppend";
 |   analyzer[] = "Php/NoSubstrMinusOne";
 |   analyzer[] = "Php/PHP70scalartypehints";
@@ -3405,6 +3429,8 @@ CompatibilityPHP55
 |   analyzer[] = "Php/ListWithKeys";
 |   analyzer[] = "Php/ListWithReference";
 |   analyzer[] = "Php/NoListWithString";
+|   analyzer[] = "Php/NoReferenceForStaticProperty";
+|   analyzer[] = "Php/NoReturnForGenerator";
 |   analyzer[] = "Php/NoStringWithAppend";
 |   analyzer[] = "Php/NoSubstrMinusOne";
 |   analyzer[] = "Php/PHP70scalartypehints";
@@ -3470,6 +3496,8 @@ CompatibilityPHP56
 |   analyzer[] = "Php/ListWithKeys";
 |   analyzer[] = "Php/ListWithReference";
 |   analyzer[] = "Php/NoListWithString";
+|   analyzer[] = "Php/NoReferenceForStaticProperty";
+|   analyzer[] = "Php/NoReturnForGenerator";
 |   analyzer[] = "Php/NoStringWithAppend";
 |   analyzer[] = "Php/NoSubstrMinusOne";
 |   analyzer[] = "Php/PHP70scalartypehints";
@@ -3530,6 +3558,7 @@ CompatibilityPHP70
 |   analyzer[] = "Php/ListWithAppends";
 |   analyzer[] = "Php/ListWithKeys";
 |   analyzer[] = "Php/ListWithReference";
+|   analyzer[] = "Php/NoReferenceForStaticProperty";
 |   analyzer[] = "Php/NoSubstrMinusOne";
 |   analyzer[] = "Php/PHP71scalartypehints";
 |   analyzer[] = "Php/PHP72scalartypehints";
@@ -3575,6 +3604,7 @@ CompatibilityPHP71
 |   analyzer[] = "Php/HashAlgos53";
 |   analyzer[] = "Php/HashAlgos54";
 |   analyzer[] = "Php/ListWithReference";
+|   analyzer[] = "Php/NoReferenceForStaticProperty";
 |   analyzer[] = "Php/PHP72scalartypehints";
 |   analyzer[] = "Php/PHP73LastEmptyArgument";
 |   analyzer[] = "Php/Php70RemovedDirective";
@@ -3610,6 +3640,7 @@ CompatibilityPHP72
 |   analyzer[] = "Php/HashAlgos54";
 |   analyzer[] = "Php/HashUsesObjects";
 |   analyzer[] = "Php/ListWithReference";
+|   analyzer[] = "Php/NoReferenceForStaticProperty";
 |   analyzer[] = "Php/PHP73LastEmptyArgument";
 |   analyzer[] = "Php/Php72Deprecation";
 |   analyzer[] = "Php/Php72NewClasses";
@@ -3898,6 +3929,7 @@ Suggestions
 |   analyzer[] = "Structures/JsonWithOption";
 |   analyzer[] = "Structures/ListOmissions";
 |   analyzer[] = "Structures/MismatchedTernary";
+|   analyzer[] = "Structures/NamedRegex";
 |   analyzer[] = "Structures/NoParenthesisForLanguageConstruct";
 |   analyzer[] = "Structures/NoSubstrOne";
 |   analyzer[] = "Structures/OneIfIsSufficient";

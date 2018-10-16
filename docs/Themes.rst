@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 08 Oct 2018 15:05:07 +0000
-.. comment: Generation hash : 217acd8ed9738fd88a0a72f749416519f88eb731
+.. comment: Generation date : Mon, 15 Oct 2018 14:57:04 +0000
+.. comment: Generation hash : 8f2112a5b7146860a428dabc07c8462daa48de80
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 357 analysis
+Total : 359 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -195,6 +195,7 @@ Total : 357 analysis
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
 * :ref:`Invalid Constant Name <invalid-constant-name>`
+* :ref:`Invalid Pack Format <invalid-pack-format>`
 * :ref:`Invalid Regex <invalid-regex>`
 * :ref:`Is Actually Zero <is-actually-zero>`
 * :ref:`Local Globals <local-globals>`
@@ -208,7 +209,6 @@ Total : 357 analysis
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Method Collision Traits <method-collision-traits>`
 * :ref:`Method Signature Must Be Compatible <method-signature-must-be-compatible>`
-* :ref:`Method Used Below <method-used-below>`
 * :ref:`Mismatch Type And Default <mismatch-type-and-default>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
@@ -298,6 +298,7 @@ Total : 357 analysis
 * :ref:`Redefined Default <redefined-default>`
 * :ref:`Redefined Private Property <redefined-private-property>`
 * :ref:`Relay Function <relay-function>`
+* :ref:`Repeated Interface <repeated-interface>`
 * :ref:`Repeated Regex <repeated-regex>`
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Results May Be Missing <results-may-be-missing>`
@@ -346,6 +347,7 @@ Total : 357 analysis
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
 * :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
+* :ref:`Undeclared Static Property <undeclared-static-property>`
 * :ref:`Undefined Class Constants <undefined-class-constants>`
 * :ref:`Undefined Classes <undefined-classes>`
 * :ref:`Undefined Constants <undefined-constants>`
@@ -465,7 +467,7 @@ Total : 17 analysis
 ClassReview
 +++++++++++
 
-Total : 15 analysis
+Total : 16 analysis
 
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
@@ -481,6 +483,7 @@ Total : 15 analysis
 * Classes/CouldBeAbstractClass
 * Classes/CouldBeFinal
 * Classes/PropertyCouldBeLocal
+* Classes/UndeclaredStaticProperty
 * Structures/CouldBeStatic
 
 .. _coding-conventions:
@@ -517,7 +520,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 72 analysis
+Total : 74 analysis
 
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -558,6 +561,8 @@ Total : 72 analysis
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`No List With String <no-list-with-string>`
+* :ref:`No Reference For Static Property <no-reference-for-static-property>`
+* :ref:`No Return For Generator <no-return-for-generator>`
 * :ref:`No String With Append <no-string-with-append>`
 * :ref:`No Substr Minus One <no-substr-minus-one>`
 * :ref:`Null On New <null-on-new>`
@@ -597,7 +602,7 @@ Total : 72 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 68 analysis
+Total : 70 analysis
 
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -633,6 +638,8 @@ Total : 68 analysis
 * Php/ListWithKeys
 * Php/ListWithReference
 * Php/NoListWithString
+* Php/NoReferenceForStaticProperty
+* Php/NoReturnForGenerator
 * Php/NoStringWithAppend
 * Php/NoSubstrMinusOne
 * Php/PHP70scalartypehints
@@ -673,7 +680,7 @@ Total : 68 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 60 analysis
+Total : 62 analysis
 
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -705,6 +712,8 @@ Total : 60 analysis
 * Php/ListWithKeys
 * Php/ListWithReference
 * Php/NoListWithString
+* Php/NoReferenceForStaticProperty
+* Php/NoReturnForGenerator
 * Php/NoStringWithAppend
 * Php/NoSubstrMinusOne
 * Php/PHP70scalartypehints
@@ -741,7 +750,7 @@ Total : 60 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 49 analysis
+Total : 51 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * Classes/Anonymous
@@ -765,6 +774,8 @@ Total : 49 analysis
 * Php/ListWithKeys
 * Php/ListWithReference
 * Php/NoListWithString
+* Php/NoReferenceForStaticProperty
+* Php/NoReturnForGenerator
 * Php/NoStringWithAppend
 * Php/NoSubstrMinusOne
 * Php/PHP70scalartypehints
@@ -798,7 +809,7 @@ Total : 49 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 42 analysis
+Total : 43 analysis
 
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -828,6 +839,7 @@ Total : 42 analysis
 * Php/ListShortSyntax
 * Php/ListWithKeys
 * Php/ListWithReference
+* Php/NoReferenceForStaticProperty
 * Php/NoSubstrMinusOne
 * Php/PHP71scalartypehints
 * Php/PHP72scalartypehints
@@ -848,7 +860,7 @@ Total : 42 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 27 analysis
+Total : 28 analysis
 
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
@@ -865,6 +877,7 @@ Total : 27 analysis
 * Php/HashAlgos53
 * Php/HashAlgos54
 * Php/ListWithReference
+* Php/NoReferenceForStaticProperty
 * Php/PHP72scalartypehints
 * Php/PHP73LastEmptyArgument
 * Php/Php70RemovedDirective
@@ -883,7 +896,7 @@ Total : 27 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 20 analysis
+Total : 21 analysis
 
 * :ref:`Avoid set_error_handler $context Argument <avoid-set\_error\_handler-$context-argument>`
 * :ref:`Can't Count Non-Countable <can't-count-non-countable>`
@@ -898,6 +911,7 @@ Total : 20 analysis
 * Php/HashAlgos53
 * Php/HashAlgos54
 * Php/ListWithReference
+* Php/NoReferenceForStaticProperty
 * Php/PHP73LastEmptyArgument
 * Php/Php72NewClasses
 * Php/Php73NewFunctions
@@ -1103,7 +1117,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 62 analysis
+Total : 63 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1121,6 +1135,7 @@ Total : 62 analysis
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
+* :ref:`Name Regex <name-regex>`
 * :ref:`One If Is Sufficient <one-if-is-sufficient>`
 * :ref:`Possible Increment <possible-increment>`
 * :ref:`Preprocess Arrays <preprocess-arrays>`

@@ -622,6 +622,10 @@ Glossary
       + :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
       + :ref:`eval() Without Try <eval()-without-try>`
 
+    + `pack()`
+
+      + :ref:`Invalid Pack Format <invalid-pack-format>`
+
     + `parse_str()`
 
       + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -876,6 +880,10 @@ Glossary
     + `uniqid()`
 
       + :ref:`Use random_int() <use-random\_int()>`
+
+    + `unpack()`
+
+      + :ref:`Invalid Pack Format <invalid-pack-format>`
 
     + `unserialize()`
 

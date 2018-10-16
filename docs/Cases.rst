@@ -1114,6 +1114,50 @@ The ConstructHiddenValues function builds the ConstructHiddenSubValues function.
         return $Result;
     }
 
+Repeated print()
+================
+
+.. _edusoho-structures-repeatedprint:
+
+EduSoho
+^^^^^^^
+
+:ref:`repeated-print()`, in app/check.php:71. 
+
+All echo may be merged into one : do this by turning the ; and . into ',', and removing the superfluous echo. Also, echo_style may be turned into a non-display function, returning the build style, rather than echoing it to the output.
+
+.. code-block:: php
+
+    echo PHP_EOL;
+    echo_style('title', 'Note');
+    echo '  The command console could use a different php.ini file'.PHP_EOL;
+    echo_style('title', '~~~~');
+    echo '  than the one used with your web server. To be on the'.PHP_EOL;
+    echo '      safe side, please check the requirements from your web'.PHP_EOL;
+    echo '      server using the ';
+    echo_style('yellow', 'web/config.php');
+    echo ' script.'.PHP_EOL;
+    echo PHP_EOL;
+
+
+--------
+
+
+.. _humo-gen-structures-repeatedprint:
+
+HuMo-Gen
+^^^^^^^^
+
+:ref:`repeated-print()`, in menu.php:71. 
+
+Simply calling print once is better than three times. Here too, echo usage would reduce the amount of memory allocation due to concatenation prior display.
+
+.. code-block:: php
+
+    print '<input type=text name=quicksearch value=.$quicksearch. size=10 '.$pattern.' title=.__(Minimum:).$min_chars.__(characters).>';
+    			print ' <input type=submit value=.__(Search).>';
+    		print </form>;
+
 Useless Unset
 =============
 
@@ -2311,6 +2355,23 @@ If trim($attribs['']['mode']) === 'base64', then it is set to lowercase (althoug
 
     if (isset($attribs['']['mode']) && strtolower(trim($attribs['']['mode']) === 'base64'))
 
+No Empty Regex
+==============
+
+.. _tikiwiki-structures-noemptyregex:
+
+tikiwiki
+^^^^^^^^
+
+:ref:`no-empty-regex`, in lib/sheet/excel/writer/worksheet.php:1925. 
+
+The initial 's' seems to be too much. May be a typo ? 
+
+.. code-block:: php
+
+    // Strip URL type
+            $url = preg_replace('s[^internal:]', '', $url);
+
 Randomly Sorted Arrays
 ======================
 
@@ -2428,6 +2489,41 @@ Long list of == are harder to read. Using an in_array() call gathers all the str
     {
       $user = $_POST['user'];
     }
+
+Is Actually Zero
+================
+
+.. _dolibarr-structures-iszero:
+
+Dolibarr
+^^^^^^^^
+
+:ref:`is-actually-zero`, in htdocs/compta/ajaxpayment.php:99. 
+
+Here, the $amountToBreakDown is either $currentRemain or $result. 
+
+.. code-block:: php
+
+    $amountToBreakdown = ($result - $currentRemain >= 0 ?
+    										$currentRemain : 								// Remain can be fully paid
+    										$currentRemain + ($result - $currentRemain));	// Remain can only partially be paid
+
+
+--------
+
+
+.. _suitecrm-structures-iszero:
+
+SuiteCRM
+^^^^^^^^
+
+:ref:`is-actually-zero`, in modules/AOR_Charts/lib/pChart/class/pDraw.class.php:523. 
+
+$Xa may only amount to $iX2, though the expression looks weird.
+
+.. code-block:: php
+
+    if ( $X > $iX2 ) { $Xa = $X-($X-$iX2); $Ya = $iY1+($X-$iX2); } else { $Xa = $X; $Ya = $iY1; }
 
 Next Month Trap
 ===============
@@ -2853,7 +2949,7 @@ Bad Constants Names
 
 .. _prestashop-constants-badconstantnames:
 
-Prestashop
+PrestaShop
 ^^^^^^^^^^
 
 :ref:`bad-constants-names`, in src/PrestaShopBundle/Install/Upgrade.php:214. 
