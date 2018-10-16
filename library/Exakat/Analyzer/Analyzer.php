@@ -279,6 +279,10 @@ GREMLIN;
         return $this->analyzerId;
     }
 
+    public function getPhpVersion() {
+        return $this->phpVersion;
+    }
+    
     public function checkPhpConfiguration($Php) {
         // this handles Any version of PHP
         if ($this->phpConfiguration === 'Any') {
