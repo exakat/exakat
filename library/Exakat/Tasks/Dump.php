@@ -569,7 +569,7 @@ GREMLIN;
 g.V().hasLabel("Class")
 .sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
 .sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
-.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP", "CONST").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
@@ -658,7 +658,7 @@ GREMLIN;
         // Traits
         $query = <<<GREMLIN
 g.V().hasLabel("Trait")
-.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Usetrait").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ lines = [];}.where( __.out("METHOD", "USE", "PPP").emit().repeat( __.out($this->linksDown)).times($MAX_LOOPING).sideEffect{ lines.add(it.get().value("line")); }.fold())
 .sideEffect{ file = '';}.where( __.in().emit().repeat( __.inE().not(hasLabel("DEFINITION")).outV()).until(hasLabel("File")).hasLabel("File").sideEffect{ file = it.get().value("fullcode"); }.fold() )
 .map{ 
@@ -695,6 +695,7 @@ GREMLIN;
         }
         
         display("$total traits\n");
+        print_r(array_keys($citId));
         
         if (!empty($cit)) {
             $query = array();
@@ -763,13 +764,14 @@ GREMLIN;
                     if (isset($citId[$uses])) {
                         $query[] = "(null, ".$citId[$row['fullnspath']].", $citId[$uses], 'use')";
                     } else {
-                        $query[] = "(null, ".$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($row['name'])."', 'use')";
+                    var_dump($uses);
+                        $query[] = "(null, ".$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($uses)."', 'use')";
                     }
                 }
             }
 
             if (!empty($query)) {
-                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.implode(', ', $query);
+print                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.implode(', ', $query);
                 $this->sqlite->query($query);
             }
         }
@@ -1360,7 +1362,7 @@ GREMLIN;
         $query = <<<GREMLIN
 g.V().hasLabel("Class", "Trait").as("classe")
      .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("file")
-     .select("classe").out("USE").hasLabel("Use").out("USE").in("DEFINITION")
+     .select("classe").out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION")
      .repeat( __.inE().not(hasLabel("DEFINITION")).outV() ).until(hasLabel("File")).as("include")
      .select("file", "include").by("fullcode").by("fullcode")
 GREMLIN;
