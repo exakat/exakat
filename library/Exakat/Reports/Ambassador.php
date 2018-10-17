@@ -176,6 +176,8 @@ class Ambassador extends Reports {
         $this->generateSettings();
         $this->generateProcFiles();
         $this->generateClassTree();
+        $this->generateTraitTree();
+        $this->generateInterfaceTree();
 
         $this->generateDashboard();
         $this->generateExtensionsBreakdown();
@@ -2828,6 +2830,113 @@ HTML;
         $this->generateNamespaceTree();
     }
 
+    private function generateInterfaceTree() {
+        $theTable = '';
+        $list = array();
+
+ $res = $this->sqlite->query(<<<SQL
+SELECT ns.namespace || '\' || cit.name AS name, ns2.namespace || '\' || cit2.name AS extends 
+    FROM cit 
+    LEFT JOIN cit cit2 
+        ON cit.extends = cit2.id
+    JOIN namespaces ns
+        ON cit.namespaceId = ns.id
+    JOIN namespaces ns2
+        ON cit2.namespaceId = ns2.id
+    WHERE cit.type="interface" AND
+          cit2.type="interface"
+SQL
+); 
+
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (empty($row['extends'])) {
+                continue;
+            }
+            
+            $parent = $row['extends'];
+            if (!isset($list[$parent])) {
+                $list[$parent] = array();
+            }
+            
+            $list[$parent][] = $row['name'];
+        }
+        foreach($list as &$l) {
+            sort($l);
+        }
+        
+        if (empty($list)) {
+            $list = array(array());
+        }
+        $secondaries = array_merge(...array_values($list));
+        $top = array_diff(array_keys($list), $secondaries);
+        
+        foreach($top as $t) {
+            $theTable .= '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+        }
+
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Interfaces inventory');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the interface : an interface is extended by another interface. Interface without extension are not represented here');
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
+        $this->putBasedPage('inventories_interfacetree', $html);
+       
+    }
+
+    private function generateTraitTree() {
+        $theTable = '';
+        $list = array();
+
+ $res = $this->sqlite->query(<<<SQL
+        SELECT namespaces.namespace || '\' || cit.name AS name, namespaces2.namespace || '\' || cit2.name AS extends 
+        FROM cit
+        JOIN namespaces 
+            ON cit.namespaceId = namespaces.id
+        JOIN cit_implements 
+            ON cit_implements.implementing = cit.id AND
+               cit_implements.type = 'use'
+        JOIN cit cit2 
+            ON cit_implements.implements = cit2.id
+        JOIN namespaces namespaces2
+            ON cit2.namespaceId = namespaces2.id
+
+         WHERE cit.type="trait"
+SQL
+); 
+
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (empty($row['extends'])) {
+                continue;
+            }
+            
+            $parent = $row['extends'];
+            if (!isset($list[$parent])) {
+                $list[$parent] = array();
+            }
+            
+            $list[$parent][] = $row['name'];
+        }
+        foreach($list as &$l) {
+            sort($l);
+        }
+        
+        if (empty($list)) {
+            $list = array(array());
+        }
+        $secondaries = array_merge(...array_values($list));
+        $top = array_diff(array_keys($list), $secondaries);
+        
+        foreach($top as $t) {
+            $theTable .= '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+        }
+
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Traits inventory');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the traits : a trait is extended when it uses another trait. Traits without any extension are not represented. The same trait may be mentionned several times, as trait may use an arbitrary number of traits.');
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
+        $this->putBasedPage('inventories_traittree', $html);
+       
+    }
+
     private function generateClassTree() {
         $theTable = '';
         $list = array();
@@ -2891,7 +3000,7 @@ SQL
         $return .= "</ul></li>\n";
         return $return;
     }
-
+    
     private function generateExceptionTree() {
         $exceptions = array (
   'Throwable' =>
@@ -3065,7 +3174,6 @@ SQL
 
             $return .= '</li>';
         }
-        
         $return .= '</ul>';
         
         return $return;
@@ -3189,16 +3297,17 @@ HTML;
             }
         }
         
-        $res = $this->sqlite->query('
-        SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
-         visibility, method
-        FROM cit
-        JOIN methods 
-            ON methods.citId = cit.id
-        JOIN namespaces 
-            ON cit.namespaceId = namespaces.id
-         WHERE type="class"
-        ');
+        $res = $this->sqlite->query(<<<SQL
+SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+ visibility, method
+FROM cit
+JOIN methods 
+    ON methods.citId = cit.id
+JOIN namespaces 
+    ON cit.namespaceId = namespaces.id
+ WHERE type="class"
+SQL
+);
         $ranking = array(''          => 0,
                          'public'    => 1,
                          'protected' => 2,
