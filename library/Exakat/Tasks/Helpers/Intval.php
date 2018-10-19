@@ -105,7 +105,11 @@ class Intval extends Plugin {
                 break;
 
             case 'Power' :
-                    $atom->intval = $extras['LEFT']->intval ** $extras['RIGHT']->intval;
+                $atom->intval = ((int) $extras['LEFT']->intval) ** (int) $extras['RIGHT']->intval;
+                var_dump($atom->intval);
+                if (is_nan($atom->intval) || is_infinite($atom->intval)) {
+                    $atom->intval = 0;
+                }
                 break;
 
             case 'Arrayliteral' :

@@ -106,6 +106,9 @@ class Strval extends Plugin {
 
             case 'Power' :
                 $atom->noDelimiter = ((int) $extras['LEFT']->noDelimiter) ** (int) $extras['RIGHT']->noDelimiter;
+                if (is_nan($atom->noDelimiter) || is_infinite($atom->noDelimiter)) {
+                    $atom->noDelimiter = '';
+                }
                 break;
 
             case 'Arrayliteral' :
