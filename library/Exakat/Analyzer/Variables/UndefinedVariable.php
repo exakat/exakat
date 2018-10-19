@@ -36,12 +36,12 @@ class UndefinedVariable extends Analyzer {
         $this->atomIs('Variabledefinition')
              ->raw(<<<GREMLIN
 not(
-    where( __.out("DEFINITION").where( __.in("ANALYZED").has("analyzer", within('Variables/IsModified'))))
+    where( __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray").where( __.in("ANALYZED").has("analyzer", within('Variables/IsModified'))))
 )
 GREMLIN
 )
             ->raw(<<<GREMLIN
-where( __.out("DEFINITION").where( __.in("ANALYZED").has("analyzer", within('Variables/IsRead'))))
+where( __.out("DEFINITION").hasLabel("Variable", "Variableobject", "Variablearray").where( __.in("ANALYZED").has("analyzer", within('Variables/IsRead'))))
 GREMLIN
 )
             ->outIs('DEFINITION');
