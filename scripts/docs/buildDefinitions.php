@@ -82,6 +82,7 @@ class Docs {
     private $exakat_date            = '';
 
     private $recipes = array('Analyze',
+                             'CompatibilityPHP74',
                              'CompatibilityPHP73',
                              'CompatibilityPHP72',
                              'CompatibilityPHP71',
