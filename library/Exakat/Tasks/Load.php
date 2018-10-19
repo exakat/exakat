@@ -5218,7 +5218,6 @@ class Load extends Tasks {
 
     private function checkTokens($filename) {
         if (!empty($this->expressions)) {
-            print_r($this->expressions);
             throw new LoadError( "Warning : expression is not empty in $filename : ".count($this->expressions));
         }
 
@@ -5252,12 +5251,7 @@ class Load extends Tasks {
             if ($atom->atom === 'Variabledefinition') { continue; }
 
             if (!isset($D[$id])) {
-                print_r($atom);
                 throw new LoadError("Warning : forgotten atom $id in $this->filename : $atom->atom");
-            }
-
-            if ($D[$id] > 1) {
-//                throw new LoadError("Warning : too linked atom $id in $this->filename : {$D[$id]} links for $id");
             }
 
             if (!isset($atom->line)) {
