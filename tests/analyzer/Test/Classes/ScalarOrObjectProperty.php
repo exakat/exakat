@@ -10,9 +10,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class ScalarOrObjectProperty extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testClasses_ScalarOrObjectProperty01()  { $this->generic_test('Classes/ScalarOrObjectProperty.01'); }
     public function testClasses_ScalarOrObjectProperty02()  { $this->generic_test('Classes/ScalarOrObjectProperty.02'); }
+    public function testClasses_ScalarOrObjectProperty03()  { $this->generic_test('Classes/ScalarOrObjectProperty.03'); }
 }
 ?>

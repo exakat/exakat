@@ -36,6 +36,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->savePropertyAs('propertyname', 'name')
              ->outIs('DEFAULT')
              ->isLiteral()
+             ->atomIsNot('Null')
              ->inIs('DEFAULT')
              ->outIs('DEFINITION')
              ->inIs('OBJECT') // Good for methodcall and properties
