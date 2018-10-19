@@ -56,7 +56,6 @@ class Constant extends Plugin {
             case 'Void' :
             case 'Nsname' :
             case 'Identifier' :
-            case 'Staticconstant' :
             case 'Staticclass' :
                 $atom->constant = true;
                 break;
@@ -77,6 +76,10 @@ class Constant extends Plugin {
             case 'Sequence' :
                 $constants = array_column($extras, 'constant');
                 $atom->constant = array_reduce($constants, function ($carry, $item) { return $carry && $item; }, true);
+                break;
+
+            case 'Staticconstant' :
+                $atom->constant = $extras['CLASS']->constant;
                 break;
 
             case 'Not' :

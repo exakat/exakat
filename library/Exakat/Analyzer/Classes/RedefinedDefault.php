@@ -25,6 +25,7 @@ use Exakat\Analyzer\Analyzer;
 
 class RedefinedDefault extends Analyzer {
     public function analyze() {
+        // class x { private $y = 1; function __construct() { $this->y = 2;}}
         $this->atomIs('Ppp')
              ->outIs('PPP')
              ->savePropertyAs('propertyname', 'name')
