@@ -27,7 +27,8 @@ class GroupCount extends DSL {
     public function run() : Command {
         list($column) = func_get_args();
 
-        return new Command("groupCount(m){it.$column}");
+        $this->assertProperty($column);
+        return new Command("groupCount('m').by('$column')");
     }
 }
 ?>

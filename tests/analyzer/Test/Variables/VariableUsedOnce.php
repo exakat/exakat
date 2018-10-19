@@ -10,7 +10,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class VariableUsedOnce extends Analyzer {
-    /* 13 methods */
+    /* 14 methods */
 
     public function testVariables_VariableUsedOnce01()  { $this->generic_test('Variables_VariableUsedOnce.01'); }
     public function testVariables_VariableUsedOnce02()  { $this->generic_test('Variables_VariableUsedOnce.02'); }
@@ -25,5 +25,6 @@ class VariableUsedOnce extends Analyzer {
     public function testVariables_VariableUsedOnce11()  { $this->generic_test('Variables_VariableUsedOnce.11'); }
     public function testVariables_VariableUsedOnce12()  { $this->generic_test('Variables_VariableUsedOnce.12'); }
     public function testVariables_VariableUsedOnce13()  { $this->generic_test('Variables_VariableUsedOnce.13'); }
+    public function testVariables_VariableUsedOnce14()  { $this->generic_test('Variables/VariableUsedOnce.14'); }
 }
 ?>

@@ -28,19 +28,16 @@ use Exakat\Analyzer\Analyzer;
 class VariableUsedOnce extends Analyzer {
     public function analyze() {
         //Variables mentionned once in the whole application. Just once.
-        $usedOnce = $this->query(<<<GREMLIN
-g.V().hasLabel("Variable", "Variablearray", "Variableobject")
-     .groupCount("m").by("code")
-     .cap("m").next().findAll{ a,b -> b == 1}
-     .keySet()
-GREMLIN
-)->toArray();
-
+        $this->atomIs(self::$VARIABLES_USER)
+             ->groupCount('code')
+             ->raw('cap("m").next().findAll{a,b -> b == 1}.keySet()');
+        $usedOnce = $this->rawQuery()->toArray();
+        
         if (empty($usedOnce)) {
             return;
         }
         
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(self::$VARIABLES_USER)
              ->codeIs($usedOnce, self::NO_TRANSLATE, self::CASE_SENSITIVE);
         $this->prepareQuery();
     }
