@@ -5,7 +5,8 @@ $expected     = array('$a',
                       '$z3',
                      );
 
-$expected_not = array(
+$expected_not = array('$y2',
+                      '$y',
                      );
 
 ?>
