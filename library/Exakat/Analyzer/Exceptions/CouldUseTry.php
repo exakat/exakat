@@ -41,7 +41,7 @@ class CouldUseTry extends Analyzer {
         $this->prepareQuery();
         
         // All reflection classes must catch ReflectionExpression
-        $reflectionClasses = $this->loadIni('reflection', 'classes');
+        $reflectionClasses = $this->loadIni('reflection.ini', 'classes');
         $reflectionFNP = makeFullNsPath($reflectionClasses);
         $this->atomIs('New')
              ->outIs('NEW')

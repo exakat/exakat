@@ -1715,7 +1715,7 @@ GREMLIN;
     }
 
     protected function loadIni($file, $index = null) {
-        $fullpath = "{$this->config->dir_root}/data/$file.ini";
+        $fullpath = "{$this->config->dir_root}/data/$file";
 
         if (file_exists($fullpath)) {
             $ini = parse_ini_file($fullpath, INI_PROCESS_SECTIONS);

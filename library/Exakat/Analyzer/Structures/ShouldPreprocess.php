@@ -32,7 +32,14 @@ class ShouldPreprocess extends Analyzer {
     }
     
     public function analyze() {
-        $dynamicAtoms = array('Variable', 'Array', 'Member', 'Magicconstant', 'Staticmethodcall', 'Staticproperty', 'Methodcall');
+        $dynamicAtoms = array('Variable', 
+                              'Array', 
+                              'Member', 
+                              'Magicconstant', 
+                              'Staticmethodcall', 
+                              'Staticproperty', 
+                              'Methodcall',
+                              );
         //'Functioncall' : if they also have only constants.
         
         $functionList = self::$methods->getDeterministFunctions();
@@ -40,7 +47,15 @@ class ShouldPreprocess extends Analyzer {
 
         // Operator only working on constants
         $tokenList = makeList( self::$FUNCTIONS_TOKENS );
-        $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not', 'Comparison'))
+        $this->atomIs(array('Addition', 
+                            'Multiplication', 
+                            'Concatenation', 
+                            'Power', 
+                            'Bitshift', 
+                            'Logical', 
+                            'Not', 
+                            'Comparison',
+                            ))
              ->hasNoInstruction('Constant')
 
             // Functioncall, that are not authorized
@@ -48,8 +63,7 @@ class ShouldPreprocess extends Analyzer {
              ->noAnalyzerInside(array('Identifier', 'Nsname'), 'Constants/IsPhpConstant')
 
             // PHP Constants are not authorized
-             ->noAtomInside($dynamicAtoms)
-             ;
+             ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
 
         $functionListNoArray = array_diff($functionList,
