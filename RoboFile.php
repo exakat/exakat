@@ -238,14 +238,17 @@ PHP
         $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/server')),  __DIR__);
         $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/vendor')),  __DIR__);
         $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/human')),   __DIR__);
+        $phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__.'/media/devfaceted')),   __DIR__);
 
-        $this->loadFileInPhar($phar, '/media/devfaceted');
+
+//        $this->loadFileInPhar($phar, '/media/devfaceted');
+/*
         $this->loadFileInPhar($phar, '/media/codeflower');
         $this->loadFileInPhar($phar, '/media/clang');
         $this->loadFileInPhar($phar, '/media/simpletable');
         $this->loadFileInPhar($phar, '/media/dependencywheel');
         $this->loadFileInPhar($phar, '/media/dependencies');
-
+*/
         shell_exec('composer update');
 
         print "Produced ".ceil(filesize('exakat.phar') / 1024 / 1024)."Mo \n";
@@ -397,7 +400,14 @@ JOIN categories
             $examples = preg_grep("/example\d+/", array_keys($ini));
             print count($examples)." example sections in $row[name]\n";
 
-            $count = substr_count($raw, '"') - substr_count($raw, '\\"') - count($examples) * 10 - 8;
+            $count = substr_count($raw, '"') - substr_count($raw, '\\"') 
+                     - count($examples) * 10 
+                     - (isset($ini['modifications']) ? count($ini['modifications']) * 2 : 0) 
+                     - (isset($ini['phpversion']) ? 2 : 0) 
+                     - (isset($ini['phpError']) ? count($ini['phpError']) * 2  : 0) 
+                     - (isset($ini['parameter1']) ? 8  : 0) 
+                     - (isset($ini['parameter2']) ? 8  : 0) 
+                     - 12;
             if ($count !== 0) {
                 print 'Count of " '.$row['name'].' : '.($count).PHP_EOL;
             }
@@ -420,7 +430,15 @@ JOIN categories
             if (isset($ini['phpErrors'])) {
                 print "phpErrors used instead of phpError in $row[name]\n";
             }
-            
+
+            if (isset($ini['phperrors'])) {
+                print "phperrors used instead of phpError in $row[name]\n";
+            }
+
+            if (isset($ini['phperror'])) {
+                print "phperror used instead of phpError in $row[name]\n";
+            }
+
             if (isset($ini['phpError'])) {
                 ++$totals['phpError'];
             }
@@ -432,6 +450,10 @@ JOIN categories
                     $totals['examples_app'][] = $ini[$example]['project'];
                     if ($ini[$example]['file'][0] === '/') {
                         print "human/en/$row[name].ini has an initial / for file in $example\n";
+                    }
+
+                    if (strpos($ini[$example]['file'][0], '""') !== false) {
+                        print "human/en/$row[name].ini has a double \"\". \n";
                     }
                 }
             }
