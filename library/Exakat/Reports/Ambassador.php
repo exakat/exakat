@@ -2846,7 +2846,7 @@ SELECT ns.namespace || '\' || cit.name AS name, ns2.namespace || '\' || cit2.nam
     WHERE cit.type="interface" AND
           cit2.type="interface"
 SQL
-); 
+);
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (empty($row['extends'])) {
@@ -2901,7 +2901,7 @@ SQL
 
          WHERE cit.type="trait"
 SQL
-); 
+);
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (empty($row['extends'])) {

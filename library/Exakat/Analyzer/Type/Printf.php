@@ -26,11 +26,11 @@ use Exakat\Analyzer\Analyzer;
 
 class Printf extends Analyzer {
     public function analyze() {
-        $functions = array('\\printf', 
-                           '\\sscanf', 
-                           '\\fscanf', 
-                           '\\vsprintf', 
-                           '\\sprintf', 
+        $functions = array('\\printf',
+                           '\\sscanf',
+                           '\\fscanf',
+                           '\\vsprintf',
+                           '\\sprintf',
                            );
 
         // echo sprintf("%'.9d\n", 123);

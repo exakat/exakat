@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IdnUts46 extends Analyzer {
     public function analyze() {
-        //echo idn_to_ascii('täst.de'); 
+        //echo idn_to_ascii('täst.de');
         $this->atomFunctionIs(array('\\idn_to_ascii',
                                     '\\idn_to_utf8',
                                     ))

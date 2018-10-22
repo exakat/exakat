@@ -38,7 +38,7 @@ class DontReadAndWriteInOneExpression extends Analyzer {
              ->savePropertyAs('self', 'assigned')
              ->inIs('LEFT')
              ->goToFirstExpression()
-             ->atomIs(Analyzer::$EXPRESSION_ATOMS) // This is needed for the previous step!! 
+             ->atomIs(Analyzer::$EXPRESSION_ATOMS) // This is needed for the previous step!!
              ->atomInsideNoDefinition('Variable')
              ->notSamePropertyAs('self', 'assigned')
              ->samePropertyAs('fullcode', 'variable')

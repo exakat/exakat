@@ -1084,7 +1084,7 @@ class Load extends Tasks {
         $fullcode = array();
 
         // Process arguments
-        $function       = $this->processParameters($atom, array($this->phptokens::T_CLOSE_PARENTHESIS));
+        $function       = $this->processParameters($atom);
         $function->code = $function->atom === 'Closure' ? 'function' : $name->fullcode;
         
         if ( $function->atom === 'Function') {
@@ -2270,10 +2270,6 @@ class Load extends Tasks {
             $functioncall->aliased    = $aliased;
 
             $this->calls->addCall('class', $fullnspath, $functioncall);
-        } elseif ($atom === 'Name') {
-            $functioncall->fullnspath = mb_strtolower($name->code);
-            $functioncall->aliased    = self::NOT_ALIASED;
-
         } elseif ($atom === 'Defineconstant') {
             $functioncall->fullnspath = '\\define';
             $functioncall->aliased    = self::NOT_ALIASED;
@@ -2292,7 +2288,7 @@ class Load extends Tasks {
 
             $this->calls->addCall('function', $fullnspath, $functioncall);
         } else {
-            throw new LoadError("Unprocessed atom in functioncall definition (its name) : ".$atom->atom.':'.$this->filename.':'.__LINE__);
+            throw new LoadError("Unprocessed atom in functioncall definition (its name) : $atom->atom : $this->filename : ".__LINE__);
         }
 
         $this->addLink($functioncall, $name, 'NAME');
@@ -4366,11 +4362,11 @@ class Load extends Tasks {
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
                 $this->processSemicolon();
-            } elseif (!in_array($this->tokens[$current - 1][0], array($this->phptokens::T_OBJECT_OPERATOR, 
-                                                                       $this->phptokens::T_DOUBLE_COLON, 
+            } elseif (!in_array($this->tokens[$current - 1][0], array($this->phptokens::T_OBJECT_OPERATOR,
+                                                                       $this->phptokens::T_DOUBLE_COLON,
                                                                        ))) {
                 $variable = $this->processFCOA($variable);
-            } 
+            }
         } else {
             $this->processSingleOperator('Variable', $this->precedence->get($this->tokens[$this->id][0]), 'NAME');
             $variable = $this->popExpression();
@@ -4811,15 +4807,15 @@ class Load extends Tasks {
         $this->contexts[self::CONTEXT_NEW] = $newContext;
         $this->exitContext();
 
-        if (in_array($right->atom, array('Variable', 
-                                         'Array', 
-                                         'Name', 
-                                         'Concatenation', 
-                                         'Arrayappend', 
-                                         'Member', 
-                                         'MagicConstant', 
+        if (in_array($right->atom, array('Variable',
+                                         'Array',
+                                         'Name',
+                                         'Concatenation',
+                                         'Arrayappend',
+                                         'Member',
+                                         'MagicConstant',
                                          'Block',
-                                         'Boolean', 
+                                         'Boolean',
                                          'Null',
                                          ))) {
             $static = $this->addAtom('Member');

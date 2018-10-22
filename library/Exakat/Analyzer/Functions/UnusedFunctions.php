@@ -59,7 +59,7 @@ GREMLIN
 );
         $this->prepareQuery();
 
-        // level 2 of unused : only used by unused functions 
+        // level 2 of unused : only used by unused functions
         // function foo() {} // no foo();
         // This depends on the order of the functions in the base, so we call it twice. Review is needed.
         $this->linearlyUnusedFunction();
@@ -69,9 +69,9 @@ GREMLIN
     private function linearlyUnusedFunction() {
         $MAX_LOOPING = self::MAX_LOOPING;
 
-       // level 2 of unused : only used by unused functions 
+       // level 2 of unused : only used by unused functions
        // function foo() {} // no foo();
-       // This depends on the order of the functions in the base!!! 
+       // This depends on the order of the functions in the base!!!
        $this->atomIs('Function')
             ->fullnspathIsNot('\\__autoload')
             ->savePropertyAs('fullnspath', 'fnp')

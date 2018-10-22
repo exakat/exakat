@@ -68,7 +68,7 @@ GREMLIN;
              ->raw('sideEffect{ x = []; }')
              ->raw('sideEffect{ i = *** }', $interfaces)
              // Collect methods names with argument count
-             // can one implement an interface, but with wrong argument counts ? 
+             // can one implement an interface, but with wrong argument counts ?
              ->raw(<<<'GREMLIN'
 where( 
     __.out("METHOD", "MAGICMETHOD").sideEffect{ y = it.get().value("count"); }

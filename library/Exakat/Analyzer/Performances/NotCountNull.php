@@ -26,8 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class NotCountNull extends Analyzer {
     public function analyze() {
-        $functions = array('\\count', 
-                           '\\strlen', 
+        $functions = array('\\count',
+                           '\\strlen',
                            '\\mb_strlen',
                            );
 

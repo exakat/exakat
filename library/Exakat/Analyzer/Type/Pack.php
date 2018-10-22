@@ -26,8 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class Pack extends Analyzer {
     public function analyze() {
-        $packFunctions = array('\\pack', 
-                               '\\unpack', 
+        $packFunctions = array('\\pack',
+                               '\\unpack',
                                );
 
         // pack("nvc*", 0x1234, 0x5678, 65, 66);

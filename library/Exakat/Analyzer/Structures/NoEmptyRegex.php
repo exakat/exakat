@@ -25,10 +25,10 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class NoEmptyRegex extends Analyzer {
-    public static $pregFunctions = array('\\preg_match_all', 
-                                         '\\preg_match', 
-                                         '\\preg_replace', 
-                                         '\\preg_replace_callback', 
+    public static $pregFunctions = array('\\preg_match_all',
+                                         '\\preg_match',
+                                         '\\preg_replace',
+                                         '\\preg_replace_callback',
                                          '\\preg_relace_callback_array',
                                          );
 
@@ -37,7 +37,6 @@ class NoEmptyRegex extends Analyzer {
         $this->atomFunctionIs(self::$pregFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->outIsIE('CONCAT')
-             ->is('rank', 0)
              ->tokenIs(array('T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'))
              ->noDelimiterIs('')
              ->back('first');
@@ -47,9 +46,19 @@ class NoEmptyRegex extends Analyzer {
         $this->atomFunctionIs(self::$pregFunctions)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('Concatenation', 'String'))
-             ->outIsIE('CONCAT') 
-             ->is('rank', 0)
+             ->outWithRank('CONCAT', 0)
+             ->outIsIE('CONCAT') // keep going in case
              ->tokenIs(array('T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'))
+             ->noDelimiterIsNot('')
+             ->regexIs('noDelimiter', '^[A-Za-z0-9]')
+             ->back('first');
+        $this->prepareQuery();
+
+        // preg_match('abc', $d, $d); Non-alpha numerical delimiter
+        $this->atomFunctionIs(self::$pregFunctions)
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
+             ->hasNoOut('CONCAT')
              ->noDelimiterIsNot('')
              ->regexIs('noDelimiter', '^[A-Za-z0-9]')
              ->back('first');
