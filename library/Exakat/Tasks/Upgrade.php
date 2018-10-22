@@ -55,7 +55,7 @@ class Upgrade extends Tasks {
             
             if ($this->config->update === true) {
                 // Avoid downloading when it is not a phar
-                if ($this->config->isPhar !== true) {
+                if ($this->config->is_phar !== true) {
                     print 'This can only update a .phar version of exakat. Aborting.'.PHP_EOL;
                     return;
                 }
