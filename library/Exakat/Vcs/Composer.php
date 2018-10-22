@@ -50,21 +50,21 @@ class Composer extends Vcs {
     public function update() {
         shell_exec("cd {$this->destinationFull}/code/; composer -q update");
 
-        $json = file_get_contents("{$this->destinationFull}/code/composer.json");
-        if (empty($json)) {
-            return $json;
+        $jsonText = file_get_contents("{$this->destinationFull}/code/composer.json");
+        if (empty($jsonText)) {
+            return '';
         }
-        $json = json_decode($json);
+        $json = json_decode($jsonText);
         $component = array_keys( (array) $json->require)[0];
 
-        $json = file_get_contents("{$this->destinationFull}/code/composer.lock");
-        if (empty($json)) {
-            return $json;
+        $jsonLockText = file_get_contents("{$this->destinationFull}/code/composer.lock");
+        if (empty($jsonLockText)) {
+            return $jsonLockText;
         }
-        $json = json_decode($json);
+        $jsonLock = json_decode($jsonLockText);
 
         $return = '';
-        foreach($json->packages as $package) {
+        foreach($jsonLock->packages as $package) {
             if ($package->name === $component) {
                 $return = "{$package->source->reference} (version : {$package->version})";
             }

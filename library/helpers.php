@@ -82,7 +82,7 @@ function copyDir($src, $dst) {
     }
     $dir = opendir($src);
     if (!is_resource($dir)) {
-        throw new NoSuchDir("Can't open dir : '$src' : ".error_get_last());
+        throw new NoSuchDir("Can't open dir : '$src' : ".error_get_last()[0]);
     }
 
     $total = 0;

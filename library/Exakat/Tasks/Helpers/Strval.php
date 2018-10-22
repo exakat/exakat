@@ -142,7 +142,7 @@ class Strval extends Plugin {
             case 'Heredoc' :
             case 'Concatenation' :
                 $noDelimiters = array_column($extras, 'noDelimiter');
-                $atom->noDelimiter = (string) implode('', $noDelimiters);
+                $atom->noDelimiter = implode('', $noDelimiters);
                 
                 break;
 

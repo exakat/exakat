@@ -42,12 +42,6 @@ class Migration73 extends Ambassador {
 
     public function __construct($config) {
         parent::__construct($config);
-
-        $this->frequences        = $this->themes->getFrequences();
-        $this->timesToFix        = $this->themes->getTimesToFix();
-        $this->themesForAnalyzer = $this->themes->getThemesForAnalyzer();
-        $this->severities        = $this->themes->getSeverities();
-        $this->analyzerList      = $this->themes->getThemeAnalyzers($this->theme);
     }
 
     protected function getBasedPage($file) {
@@ -120,28 +114,6 @@ class Migration73 extends Ambassador {
         }
 
         $this->cleanFolder();
-    }
-
-    public function getFilesCount($limit = null) {
-        $list = $this->themes->getThemeAnalyzers('CompatibilityPHP73');
-        $list = makeList($list);
-
-        $query = "SELECT file, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY file
-                    ORDER BY number DESC ";
-        if ($limit !== null) {
-            $query .= " LIMIT ".$limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('file'  => $row['file'],
-                            'value' => $row['number']);
-        }
-
-        return $data;
     }
 
     protected function getAnalyzersCount($limit) {

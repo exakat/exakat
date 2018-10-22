@@ -177,7 +177,6 @@ class Initproject extends Tasks {
         shell_exec("chmod -R g+w $tmpPath");
         $repositoryDetails = parse_url($repositoryURL);
 
-        $skipFiles           = false;
         $dotProject          = ".$project";
         
         $vcsClass = Vcs::getVcs($this->config);
@@ -213,16 +212,14 @@ class Initproject extends Tasks {
         $this->datastore->addRow('hash', array('status' => 'Cloned',
                                               ));
 
-        if (!$skipFiles) {
-            display('Running files');
+        display('Running files');
 
-            // Running script as a separate process, to take into account the actual config file..
-            $shell = "{$this->config->php} {$this->config->executable} files -p {$this->config->project}";
-            $res = shell_exec($shell);
-            
-            if (!empty($res)) {
-                $this->datastore->addRow('hash', array('init error' => $res ));
-            }
+        // Running script as a separate process, to take into account the actual config file..
+        $shell = "{$this->config->php} {$this->config->executable} files -p {$this->config->project}";
+        $res = shell_exec($shell);
+        
+        if (!empty($res)) {
+            $this->datastore->addRow('hash', array('init error' => $res ));
         }
 
         $this->datastore->addRow('hash', array('status' => 'Initproject',

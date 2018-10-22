@@ -44,6 +44,7 @@ class Grade extends Ambassador {
     protected $projectPath     = null;
     protected $finalName       = null;
     protected $tmpName           = '';
+    private $globalGrade = 0;
 
     private $timesToFix        = null;
     private $themesForAnalyzer = null;

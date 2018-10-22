@@ -38,7 +38,7 @@ class PropertyUsedBelow extends Analyzer {
              ->outIs('DEFINITION')
              ->atomIs('Member')
              ->goToClass()
-             ->goToAllParents(self::INCLUDE_SELF)
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->samePropertyAs('fullnspath', 'fnp')
              ->back('ppp');
         $this->prepareQuery();
@@ -55,7 +55,7 @@ class PropertyUsedBelow extends Analyzer {
              ->outIs('DEFINITION')
              ->atomIs('Staticproperty')
              ->goToClass()
-             ->goToAllParents(self::INCLUDE_SELF)
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->samePropertyAs('fullnspath', 'fnp')
              ->back('ppp');
         $this->prepareQuery();

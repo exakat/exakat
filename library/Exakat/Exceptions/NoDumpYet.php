@@ -20,28 +20,14 @@
  *
 */
 
-namespace Exakat\Analyzer\Variables;
 
-use Exakat\Analyzer\Analyzer;
+namespace Exakat\Exceptions;
 
-class Overwriting extends Analyzer {
-    public function analyze() {
-        // $dir = substr($dir, 0, -1)
-        $this->atomIs('Assignation')
-             ->codeIs('=')
-             ->outIs('LEFT')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'destination')
-             ->inIs('LEFT')
-             ->outIs('RIGHT')
-             ->atomIsNot('Cast')
-             ->atomInsideNoDefinition('Variable')
-             ->samePropertyAs('code', 'destination')
-             ->back('first');
-        $this->prepareQuery();
+class NoDumpYet extends \Exception {
+    public function __construct($project = '', $code = 0, \Exception $previous = null) {
+
+        parent::__construct("No results are available for project '$project' yet. May be the analysis is still running.\n", $code, $previous);
     }
-    
-    // todo : add cases of on-the-spot modification (like sort())
 }
 
 ?>

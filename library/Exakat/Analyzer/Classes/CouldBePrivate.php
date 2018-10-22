@@ -44,7 +44,8 @@ g.V().hasLabel("Member")
      .values("code")
      .unique()
 GREMLIN;
-        $publicProperties = $this->query($query)->toArray();
+        $publicProperties = $this->query($query)
+                                 ->toArray();
 
         if (!empty($publicProperties)) {
             $this->atomIs('Ppp')
@@ -52,7 +53,8 @@ GREMLIN;
                  ->isNot('static', true)
                  ->outIs('PPP')
                  ->analyzerIsNot('Classes/PropertyUsedBelow')
-                 ->isNot('propertyname', $publicProperties);
+                 ->isNot('propertyname', $publicProperties)
+                 ;
             $this->prepareQuery();
         }
 

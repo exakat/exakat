@@ -31,6 +31,7 @@ use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\InvalidProjectName;
 use Exakat\Exceptions\ProjectNotInited;
 use Exakat\Exceptions\NoDump;
+use Exakat\Exceptions\NoDumpYet;
 use Exakat\Project as ProjectName;
 use Exakat\Reports\Reports as Reports;
 
@@ -58,7 +59,7 @@ class Report extends Tasks {
             throw new NoSuchFormat($this->config->format, Reports::$FORMATS);
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite')) {
+        if (!file_exists("{$this->config->projects_root}/projects/{$this->config->project}/datastore.sqlite")) {
             throw new ProjectNotInited($this->config->project);
         }
 
@@ -71,19 +72,23 @@ class Report extends Tasks {
         // errors, warnings, fixable and filename
         // line number => columnnumber => type, source, severity, fixable, message
 
-        $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
         $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
+
+        $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
         $res = $dump->query($ProjectDumpSql);
         $row = $res->fetchArray(\SQLITE3_NUM);
+        if (empty($row) || $row[0] === 0) {
+            throw new NoDumpYet($this->config->project);
+        }
 
         $begin = microtime(true);
 
         $report = new $reportClass($this->config);
         if (empty($this->config->file)) {
-            display('Building report for project '.$this->config->project.' in "'.$reportClass::FILE_FILENAME.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '').'", with format '.$this->config->format."\n");
+            display("Building report for project {$this->config->project} in '".$reportClass::FILE_FILENAME.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '')."', with format {$this->config->format}\n");
             $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, $report::FILE_FILENAME);
         } elseif ($this->config->file === Reports::STDOUT) {
-            display('Building report for project '.$this->config->project.' to stdout, with format '.$this->config->format."\n");
+            display("Building report for project {$this->config->project} to stdout, with format {$this->config->format}\n");
             $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, Reports::STDOUT);
         } else {
             // to files + extension

@@ -97,16 +97,19 @@ class Intval extends Plugin {
             case 'Multiplication' :
                 if ($atom->code === '*') {
                     $atom->intval = (int) ($extras['LEFT']->intval * $extras['RIGHT']->intval);
-                } elseif ($atom->code === '/' && $extras['RIGHT']->intval !== 0) {
-                    $atom->intval = (int) ($extras['LEFT']->intval / $extras['RIGHT']->intval);
+                } elseif ($atom->code === '/') {
+                    if ($extras['RIGHT']->intval === 0) {
+                        $atom->intval = 0;
+                    } else {
+                        $atom->intval = intdiv($extras['LEFT']->intval, $extras['RIGHT']->intval);
+                    }
                 } elseif ($atom->code === '%' && $extras['RIGHT']->intval !== 0) {
-                    $atom->intval = (int) ($extras['LEFT']->intval % $extras['RIGHT']->intval);
+                    $atom->intval = ($extras['LEFT']->intval % $extras['RIGHT']->intval);
                 }
                 break;
 
             case 'Power' :
                 $atom->intval = ((int) $extras['LEFT']->intval) ** (int) $extras['RIGHT']->intval;
-                var_dump($atom->intval);
                 if (is_nan($atom->intval) || is_infinite($atom->intval)) {
                     $atom->intval = 0;
                 }

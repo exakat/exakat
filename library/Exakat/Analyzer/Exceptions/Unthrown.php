@@ -27,18 +27,23 @@ use Exakat\Analyzer\Analyzer;
 
 class Unthrown extends Analyzer {
     public function dependsOn() {
-        return array('Exceptions/DefinedExceptions');
+        return array('Exceptions/DefinedExceptions',
+                    );
     }
     
     public function analyze() {
-        $thrown = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").values("fullnspath").unique()');
-        $thrown = $thrown->toArray();
+        $this->atomIs('Throw')
+             ->outIs('THROW')
+             ->outIs('NEW')
+             ->values('fullnspath')
+             ->unique();
+        $thrown = $this->rawQuery()->toArray();
 
         if (empty($thrown)) {
             return;
         }
 
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->analyzerIs('Exceptions/DefinedExceptions')
              ->fullnspathIsNot($thrown);
         $this->prepareQuery();

@@ -695,7 +695,6 @@ GREMLIN;
         }
         
         display("$total traits\n");
-        print_r(array_keys($citId));
         
         if (!empty($cit)) {
             $query = array();

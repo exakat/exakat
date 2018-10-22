@@ -53,8 +53,8 @@ class IsInterfaceMethod extends Analyzer {
                  ->inIs('METHOD')
                  ->atomIs('Class')
                  ->goToAllImplements(self::INCLUDE_SELF)
-                 ->outIs(array('EXTENDS', 'IMPLEMENTS'))
-                 ->fullnspathIs("\\{$interface}")
+                 ->outIs('IMPLEMENTS')
+                 ->fullnspathIs($interface)
                  ->back('first');
             $this->prepareQuery();
         }

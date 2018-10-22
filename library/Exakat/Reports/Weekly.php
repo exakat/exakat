@@ -44,6 +44,7 @@ class Weekly extends Ambassador {
     protected $projectPath     = null;
     protected $finalName       = null;
     protected $tmpName           = '';
+    private $globalGrade  = 0;
 
     private $timesToFix        = null;
     private $severities        = null;
@@ -191,11 +192,11 @@ MENU;
         $this->initFolder();
 
         $this->generateWeekly(date('Y'), date('W'));
-        $this->generateWeekly(date('Y'), date('W') - 1);
-        $this->generateWeekly(date('Y'), date('W') - 2);
-        $this->generateWeekly(date('Y'), date('W') - 3);
-        $this->generateWeekly(date('Y'), date('W') - 4);
-        $this->generateWeekly(date('Y'), date('W') + 1);
+        $this->generateWeekly(date('Y'), (int) date('W') - 1);
+        $this->generateWeekly(date('Y'), (int) date('W') - 2);
+        $this->generateWeekly(date('Y'), (int) date('W') - 3);
+        $this->generateWeekly(date('Y'), (int) date('W') - 4);
+        $this->generateWeekly(date('Y'), (int) date('W') + 1);
         $this->generateDashboard();
 
         // Annex
@@ -659,34 +660,6 @@ SQL;
         }
 
         return $return;
-    }
-
-    protected function getFilesCount($theme = null, $limit = null) {
-        if ($theme === null) {
-            $list = $this->weeks[$this->current]->analysis;
-        } elseif (is_array($theme)) {
-            $list = $theme;
-        } else {
-            die('Theme Needs a string or an array');
-        }
-        $list = makeList($list);
-
-        $query = "SELECT file, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list)
-                    GROUP BY file
-                    ORDER BY number DESC ";
-        if ($limit !== null) {
-            $query .= " LIMIT ".$limit;
-        }
-        $result = $this->sqlite->query($query);
-        $data = array();
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('file'  => $row['file'],
-                            'value' => $row['number']);
-        }
-
-        return $data;
     }
     
     protected function generateWeeklyTable() {
