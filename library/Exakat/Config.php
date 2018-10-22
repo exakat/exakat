@@ -179,7 +179,9 @@ class Config {
         } elseif (isset($this->options[$name])) {
             $return = $this->options[$name];
         } else {
-            assert(false, "No such config property as '$name'");
+//            debug_print_backtrace();
+//            assert(false, "No such config property as '$name'");
+            $return = null;
         }
 
         return $return;

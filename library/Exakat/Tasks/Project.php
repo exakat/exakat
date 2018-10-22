@@ -195,7 +195,7 @@ class Project extends Tasks {
         shell_exec($shell);
         $this->logTime('Dumped and inited');
 
-        if ($this->config->program === null) {
+        if (empty($this->config->program)) {
             $this->analyzeThemes($themesToRun, $audit_start, $this->config->quiet);
         } else {
             $this->analyzeOne($this->config->program, $audit_start, $this->config->quiet);

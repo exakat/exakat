@@ -594,7 +594,7 @@ class Load extends Tasks {
             return true;
         }
         if (!file_exists($fullpath)) {
-            throw new NoSuchFile( $filename );
+            throw new NoSuchFile($filename);
         }
 
         if (filesize($fullpath) === 0) {

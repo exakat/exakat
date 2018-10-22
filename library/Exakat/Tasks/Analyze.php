@@ -75,7 +75,7 @@ class Analyze extends Tasks {
         // Take this before we clean it up
         $this->checkAnalyzed();
         
-        if ($this->config->program !== null) {
+        if (!empty($this->config->program)) {
             if (is_array($this->config->program)) {
                 $analyzersClass = $this->config->program;
             } else {
@@ -87,7 +87,7 @@ class Analyze extends Tasks {
                     throw new NoSuchAnalyzer($analyzer, $this->themes);
                 }
             }
-        } elseif (is_string($this->config->thema)) {
+        } elseif (!empty($this->config->thema)) {
             $thema = $this->config->thema;
 
             if (!$analyzersClass = $this->themes->getThemeAnalyzers($thema)) {

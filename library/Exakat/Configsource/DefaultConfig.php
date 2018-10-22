@@ -42,6 +42,8 @@ class DefaultConfig extends Config {
                                'table'          => false,
                                'text'           => false,
                                'output'         => false,
+                               
+                               'collect'        => false,
  
                                'git'            => true,
                                'svn'            => false,
@@ -54,16 +56,16 @@ class DefaultConfig extends Config {
                                'rar'            => false,
  
                                 // directives with literal value
-                               'filename'       => null,
-                               'dirname'        => null,
+                               'filename'       => '',
+                               'dirname'        => '',
                                'project'        => 'default',
-                               'program'        => null,
+                               'program'        => '',
                                'repository'     => false,
-                               'thema'          => null,
+                               'thema'          => '',
                                'analyzers'      => array(), 
                                'report'         => 'Premier',
                                'format'         => 'Text',
-                               'file'           =>  null,
+                               'file'           =>  '',
                                'style'          => 'ALL',
  
                                'gsneo4j_host'       => '127.0.0.1',

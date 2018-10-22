@@ -63,9 +63,7 @@ abstract class Reports {
     protected $themes    = null;
 
     public function __construct($config) {
-        if ($config === null) {
-            return;
-        }
+        assert($config !== null, 'Config can\t be null');
         $this->config = $config;
 
         $path = "{$this->config->projects_root}/projects/{$this->config->project}/dump.sqlite";
@@ -98,7 +96,7 @@ abstract class Reports {
             $name = $this::FILE_FILENAME;
         }
 
-        if ($this->config->thema !== null) {
+        if (!empty($this->config->thema)) {
             $themas = $this->config->themas;
 
             if ($missing = $this->checkMissingThemes()) {
@@ -111,7 +109,7 @@ abstract class Reports {
             } else {
                 $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
             }
-        } elseif ($this->config->program !== null) {
+        } elseif (!empty($this->config->program)) {
             $list = $this->config->program;
         } else {
             $list = $this->themes->getThemeAnalyzers($this->themesToShow);

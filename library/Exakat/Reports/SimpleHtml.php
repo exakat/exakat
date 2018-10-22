@@ -30,7 +30,7 @@ class SimpleHtml extends Reports {
     const FILE_FILENAME  = 'exakat';
 
     protected $finalName       = null;
-    protected $tmpName           = '';
+    protected $tmpName         = '';
 
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($name === self::STDOUT) {
@@ -80,10 +80,10 @@ class SimpleHtml extends Reports {
     }
 
     private function makeSummary($folder) {
-        if ($this->config->thema !== null) {
+        if (empty($this->config->thema)) {
             $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
             $list = makeList($list);
-        } elseif ($this->config->program !== null) {
+        } elseif (!empty($this->config->program)) {
             $list = '"'.$this->config->program.'"';
         } else {
             $list = $this->themes->getThemeAnalyzers($this->themesToShow);
@@ -115,9 +115,9 @@ HTML;
     }
         
     private function makeList($folder) {
-        if ($this->config->thema !== null) {
+        if (!empty($this->config->thema)) {
             $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
-        } elseif ($this->config->program !== null) {
+        } elseif (!empty($this->config->program)) {
             $list = array($this->config->program);
         } else {
             $list = $this->themes->getThemeAnalyzers($this->themesToShow);

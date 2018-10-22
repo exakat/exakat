@@ -218,7 +218,7 @@ SQL;
         }
 
         $themes = array();
-        if ($this->config->thema !== null) {
+        if (!empty($this->config->thema)) {
             $thema = $this->config->thema;
             $themes = $this->themes->getThemeAnalyzers($thema);
             if (empty($themes)) {
@@ -229,7 +229,7 @@ SQL;
                 throw new NoSuchThema($thema);
             }
             display("Processing thema : $thema");
-        } elseif ($this->config->program !== null) {
+        } elseif (!empty($this->config->program)) {
             $analyzer = $this->config->program;
             if(is_array($analyzer)) {
                 $themes = $analyzer;
@@ -274,7 +274,7 @@ SQL;
 
         $this->log->log( 'Still '.count($themes)." to be processed\n");
         display('Still '.count($themes)." to be processed\n");
-        if (empty($themes) && $this->config->thema !== null) {
+        if (empty($themes) && !empty($this->config->thema)) {
             $this->sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "{$this->config->thema}")');
         }
 
