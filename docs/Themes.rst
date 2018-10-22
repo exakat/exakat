@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 15 Oct 2018 14:57:04 +0000
-.. comment: Generation hash : 8f2112a5b7146860a428dabc07c8462daa48de80
+.. comment: Generation date : Mon, 22 Oct 2018 17:33:48 +0000
+.. comment: Generation hash : 30798f8b10d26f92f157392c725cf02c48974847
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 359 analysis
+Total : 360 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -143,6 +143,7 @@ Total : 359 analysis
 * :ref:`Deprecated Functions <deprecated-functions>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
 * :ref:`Don't Echo Error <don't-echo-error>`
+* :ref:`Don't Read And Write In One Expression <don't-read-and-write-in-one-expression>`
 * :ref:`Don't Send $this In Constructor <don't-send-$this-in-constructor>`
 * :ref:`Don't Unset Properties <don't-unset-properties>`
 * :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
@@ -925,7 +926,7 @@ Total : 21 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 7 analysis
+Total : 8 analysis
 
 * :ref:`Case Insensitive Constants <case-insensitive-constants>`
 * :ref:`Compact Inexistant Variable <compact-inexistant-variable>`
@@ -934,6 +935,17 @@ Total : 7 analysis
 * Php/Php73NewFunctions
 * Php/UnknownPcre2Option
 * Structures/ContinueIsForLoop
+* Structures/DontReadAndWriteInOneExpression
+
+.. _compatibilityphp74:
+
+CompatibilityPHP74
+++++++++++++++++++
+
+Total : 2 analysis
+
+* :ref:`Detect Current Class <detect-current-class>`
+* :ref:`idn_to_ascii() New Default <idn\_to\_ascii()-new-default>`
 
 .. _dead-code:
 
@@ -1117,7 +1129,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 63 analysis
+Total : 64 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1128,9 +1140,9 @@ Total : 63 analysis
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Typehint <could-typehint>`
 * :ref:`Could Use Compact <could-use-compact>`
+* :ref:`Could Use Try <could-use-try>`
 * :ref:`Could Use array_fill_keys <could-use-array\_fill\_keys>`
 * :ref:`Could Use array_unique <could-use-array\_unique>`
-* :ref:`Detect Current Class <detect-current-class>`
 * :ref:`Drop Substr Last Arg <drop-substr-last-arg>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
@@ -1167,6 +1179,7 @@ Total : 63 analysis
 * Interfaces/UnusedInterfaces
 * Performances/SubstrFirst
 * Php/CompactInexistant
+* Php/DetectCurrentClass
 * Php/LogicalInLetters
 * Php/ShouldUseArrayColumn
 * Php/ShouldUseCoalesce

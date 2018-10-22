@@ -36,6 +36,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * CompatibilityPHP71
 * CompatibilityPHP72
 * CompatibilityPHP73
+* CompatibilityPHP74
 * Custom
 * Dead code
 * DefensiveProgrammingTM
@@ -396,8 +397,16 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.5.0
+
+  * Could Use Try (Exceptions/CouldUseTry)
+  * Pack Format Inventory (Type/Pack ; Inventory, Appinfo)
+  * Printf Format Inventory (Type/Printf ; Inventory, Appinfo)
+  * idn_to_ascii() New Default (Php/IdnUts46 ; CompatibilityPHP74)
+
 * 1.4.9
 
+  * Don't Read And Write In One Expression (Structures/DontReadAndWriteInOneExpression ; Analyze, CompatibilityPHP73)
   * Invalid Pack Format (Structures/InvalidPackFormat ; Analyze)
   * Name Regex (Structures/NamedRegex ; Suggestions)
   * No Reference For Static Property (Php/NoReferenceForStaticProperty ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
@@ -457,7 +466,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 1.3.8
 
   * Constant Case Preference (Constants/DefineInsensitivePreference)
-  * Detect Current Class (Php/DetectCurrentClass ; Suggestions)
+  * Detect Current Class (Php/DetectCurrentClass ; Suggestions, CompatibilityPHP74)
   * Use is_countable (Php/CouldUseIsCountable ; Suggestions)
 
 * 1.3.7
@@ -2048,12 +2057,14 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-38 PHP error message detailled : 
+44 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
 * :ref:`Access level to c\:\:iPrivate() must be public (as in class i)  <concrete-visibility>`
 * :ref:`Access level to xx\:\:$x must be public (as in class x) <redefined-property>`
+* :ref:`Access to undeclared static property <undeclared-static-property>`
+* :ref:`Accessing static property aa\:\:$a as non static <undeclared-static-property>`
 * :ref:`An alias (%s) was defined for method %s(), but this method does not exist <undefined-insteadof>`
 * :ref:`Argument 1 passed to foo() must be of the type integer, string given <mismatch-type-and-default>`
 * :ref:`Call to undefined function <throw-functioncall>`
@@ -2074,6 +2085,8 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Declaration of ab\:\:foo($a) must be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods>`
 * :ref:`Declaration of ab\:\:foo($a) should be compatible with a\:\:foo($a = 1)  <incompatible-signature-methods>`
 * :ref:`Defining a custom assert() function is deprecated, as the function has special semantics <assert-function-is-reserved>`
+* :ref:`Delimiter must not be alphanumeric or backslash  <no-empty-regex>`
+* :ref:`Generators cannot return values using "return" <no-return-for-generator>`
 * :ref:`Invalid numeric literal <malformed-octal>`
 * :ref:`Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code. <old-style-constructor>`
 * :ref:`Only variable references should be returned by reference <no-reference-for-ternary>`
@@ -2087,7 +2100,9 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Undefined function <undefined-functions>`
 * :ref:`Undefined variable:  <undefined-variable>`
 * :ref:`Using $this when not in object context <$this-belongs-to-classes-or-traits>`
+* :ref:`pack(): Type t: unknown format code <invalid-pack-format>`
 * :ref:`syntax error, unexpected '-', expecting '=' <invalid-constant-name>`
+* :ref:`unpack(): Type t: unknown format code <invalid-pack-format>`
 
 
 
@@ -2186,6 +2201,7 @@ List of external links mentionned in this documentation.
 * `$_ENV <http://php.net/reserved.variables.environment.php>`_
 * `$GLOBALS <http://php.net/manual/en/reserved.variables.globals.php>`_
 * `$HTTP_RAW_POST_DATA variable <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_
+* `.phar` from the exakat.io website : `dist.exakat.io <http://dist.exakat.io/>`_
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
 * `2.4 Translations <https://www.melistechnology.com/MelisTechnology/resources/documentation/back-office/create-a-custom-tool/Translations>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
@@ -2352,8 +2368,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
@@ -2397,6 +2413,7 @@ List of external links mentionned in this documentation.
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
 * `Ideal regex delimiters in PHP <http://codelegance.com/ideal-regex-delimiters-in-php/>`_
+* `idn_to_ascii <http://php.net/manual/en/function.idn-to-ascii.php>`_
 * `IERS <https://www.iers.org/IERS/EN/Home/home_node.html>`_
 * `igbinary <https://github.com/igbinary/igbinary/>`_
 * `IIS Administration <http://www.php.net/manual/en/book.iisfunc.php>`_
@@ -2445,8 +2462,8 @@ List of external links mentionned in this documentation.
 * `Magic Constants <http://php.net/manual/en/language.constants.predefined.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic Method <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Magic Methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `mail <http://php.net/mail>`_
 * `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -2539,6 +2556,7 @@ List of external links mentionned in this documentation.
 * `PHPUnit <http://www.phpunit.de/>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
 * `Predefined Constants <http://php.net/manual/en/reserved.constants.php>`_
+* `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
 * `printf <http://php.net/printf>`_
@@ -2592,8 +2610,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2631,6 +2649,7 @@ List of external links mentionned in this documentation.
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `unserialize() <http://php.net/unserialize>`_
 * `unset <http://php.net/unset>`_
+* `UPGRADING 7.3 <https://github.com/php/php-src/blob/PHP-7.3/UPGRADING#L83-L95>`_
 * `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
 * `Using namespaces: fallback to global function/constant <http://php.net/manual/en/language.namespaces.fallback.php>`_
 * `Using non-breakable spaces in test method names <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
@@ -2640,8 +2659,8 @@ List of external links mentionned in this documentation.
 * `vagrant installation <https://www.vagrantup.com/docs/installation/>`_
 * `Variable basics <http://php.net/manual/en/language.variables.basics.php>`_
 * `Variable functions <http://php.net/manual/en/functions.variable-functions.php>`_
-* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
+* `Variable scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variable variables <http://php.net/manual/en/language.variables.variable.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
@@ -2741,7 +2760,7 @@ Themes configuration
 
 INI configuration for built-in themes. Copy them in config/themes.ini, and make your owns.
 
-20 themes detailled here : 
+21 themes detailled here : 
 
 * `Analyze <theme_ini_analyze>`_
 * `Cakephp <theme_ini_cakephp>`_
@@ -2755,6 +2774,7 @@ INI configuration for built-in themes. Copy them in config/themes.ini, and make 
 * `CompatibilityPHP71 <theme_ini_compatibilityphp71>`_
 * `CompatibilityPHP72 <theme_ini_compatibilityphp72>`_
 * `CompatibilityPHP73 <theme_ini_compatibilityphp73>`_
+* `CompatibilityPHP74 <theme_ini_compatibilityphp74>`_
 * `Dead code <theme_ini_dead code>`_
 * `LintButWontExec <theme_ini_lintbutwontexec>`_
 * `Performances <theme_ini_performances>`_
@@ -2989,6 +3009,7 @@ Analyze
 |   analyzer[] = "Structures/DirThenSlash";
 |   analyzer[] = "Structures/DontChangeBlindKey";
 |   analyzer[] = "Structures/DontMixPlusPlus";
+|   analyzer[] = "Structures/DontReadAndWriteInOneExpression";
 |   analyzer[] = "Structures/DoubleAssignation";
 |   analyzer[] = "Structures/DoubleInstruction";
 |   analyzer[] = "Structures/DropElseAfterReturn";
@@ -3672,7 +3693,22 @@ CompatibilityPHP73
 |   analyzer[] = "Php/Php73NewFunctions";
 |   analyzer[] = "Php/Php73RemovedFunctions";
 |   analyzer[] = "Php/UnknownPcre2Option";
-|   analyzer[] = "Structures/ContinueIsForLoop";| 
+|   analyzer[] = "Structures/ContinueIsForLoop";
+|   analyzer[] = "Structures/DontReadAndWriteInOneExpression";| 
+
+
+
+
+
+
+.. _theme_ini_compatibilityphp74:
+
+CompatibilityPHP74
+------------------
+
+| [CompatibilityPHP74]
+|   analyzer[] = "Php/DetectCurrentClass";
+|   analyzer[] = "Php/IdnUts46";| 
 
 
 
@@ -3889,6 +3925,7 @@ Suggestions
 |   analyzer[] = "Classes/ShouldUseSelf";
 |   analyzer[] = "Classes/TooManyChildren";
 |   analyzer[] = "Classes/UnitializedProperties";
+|   analyzer[] = "Exceptions/CouldUseTry";
 |   analyzer[] = "Exceptions/OverwriteException";
 |   analyzer[] = "Functions/AddDefaultValue";
 |   analyzer[] = "Functions/Closure2String";

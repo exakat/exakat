@@ -530,6 +530,8 @@ Upgrade exakat itself. By default, this is a dry run : only the availability of 
 
 Use -u option to actually replace the current phar archive.
 
+In case the upgrade command file, you may also download manually the `.phar` from the exakat.io website : `dist.exakat.io <http://dist.exakat.io/>`_. Then replace the current version with the new one.
+
 Command
 #######
 ::

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 15 Oct 2018 14:57:04 +0000
-.. comment: Generation hash : 8f2112a5b7146860a428dabc07c8462daa48de80
+.. comment: Generation date : Mon, 22 Oct 2018 17:33:48 +0000
+.. comment: Generation hash : 30798f8b10d26f92f157392c725cf02c48974847
 
 
 .. _$http\_raw\_post\_data:
@@ -2729,7 +2729,7 @@ CakePHP 3.3 Deprecated Class
 
 According to the `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_, the following class is deprecated and should be removed.
 
-* Mcrypt (Cake\Utility\Crypto\Mcrypt) : replace it with `Cake\Utility\Crypto\Openssl` or `ext/openssl`
+* Mcrypt (Cake\Utility\Crypto\Mcrypt) : replace it with ``Cake\Utility\Crypto\Openssl`` or ``ext/openssl``.
 
 +-------------+-------------------------------+
 | Short name  | Cakephp/Cake33DeprecatedClass |
@@ -3498,7 +3498,7 @@ Class Could Be Final
 
 Any class that has no extension should be ``final`` by default.
 
-As stated by `Matthias Noback` : ``If a class is not marked final, it has at least one subclass``.
+As stated by ``Matthias Noback`` : ``If a class is not marked final, it has at least one subclass``.
 
 Prevent your classes from being subclassed by making them ``final``. Sometimes, classes are not meant or thought to be derivable.
 
@@ -5201,6 +5201,33 @@ See also `Assignation Operators <http://php.net/manual/en/language.operators.ass
 
 
 
+.. _could-use-try:
+
+Could Use Try
+#############
+
+
+Some commands may raise exception. It is recommended to use the try/catch block to intercept those exception, and process them.
+
+* / : DivisionByZeroError
+* % : DivisionByZeroError
+* intdiv() : DivisionByZeroError
+* << : ArithmeticError
+* >> : ArithmeticError
+* Phar\:\:mungserver : PharException
+* Phar\:\:webphar : PharException
+
+See also `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_,
+         `PharException <http://php.net/manual/en/class.pharexception.php>`_.
+
++------------+------------------------+
+| Short name | Exceptions/CouldUseTry |
++------------+------------------------+
+| Themes     | :ref:`Suggestions`     |
++------------+------------------------+
+
+
+
 .. _could-use-\_\_dir\_\_:
 
 Could Use __DIR__
@@ -5916,13 +5943,13 @@ get_called_class() may be replaced by ``static\:\:class``.
 
 See also `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_.
 
-+-------------+------------------------+
-| Short name  | Php/DetectCurrentClass |
-+-------------+------------------------+
-| Themes      | :ref:`Suggestions`     |
-+-------------+------------------------+
-| Php Version | With PHP 8.0 and older |
-+-------------+------------------------+
++-------------+-----------------------------------------------+
+| Short name  | Php/DetectCurrentClass                        |
++-------------+-----------------------------------------------+
+| Themes      | :ref:`Suggestions`, :ref:`CompatibilityPHP74` |
++-------------+-----------------------------------------------+
+| Php Version | With PHP 8.0 and older                        |
++-------------+-----------------------------------------------+
 
 
 
@@ -6136,6 +6163,45 @@ See also `Error reporting <https://php.earth/docs/security/intro#error-reporting
 +-------------+--------------------------------------------------------------------------------------+
 | Examples    | :ref:`churchcrm-security-dontechoerror`, :ref:`phpdocumentor-security-dontechoerror` |
 +-------------+--------------------------------------------------------------------------------------+
+
+
+
+.. _don't-read-and-write-in-one-expression:
+
+Don't Read And Write In One Expression
+######################################
+
+
+Avoid giving value and using it at the same time, in one expression. This is an undefined behavior of PHP, and may change without warning.
+
+One of those changes happens between PHP 7.2 and 7.3 : 
+
+.. code-block:: php
+
+   <?php
+   
+   $arr = [1];
+   $ref =& $arr[0];
+   var_dump($arr[0] + ($arr[0] = 2));
+   // PHP 7.2: int(4)
+   // PHP 7.3: int(3)
+   
+   ?>
+
+
+See also `UPGRADING 7.3 <https://github.com/php/php-src/blob/PHP-7.3/UPGRADING#L83-L95>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Split the expression in two separate expressions
+
++------------+--------------------------------------------+
+| Short name | Structures/DontReadAndWriteInOneExpression |
++------------+--------------------------------------------+
+| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP73`  |
++------------+--------------------------------------------+
 
 
 
@@ -9976,11 +10042,11 @@ Invalid Pack Format
 
 Some characters are invalid in a `'pack() <http://www.php.net/pack>`_ format string.
 
-`'pack() <http://www.php.net/pack>`_ and `'unpack() <http://www.php.net/unpack>`_ accept the following format specifiers : `aAhHcCsSnviIlLNVqQJPfgGdeExXZ`. 
+`'pack() <http://www.php.net/pack>`_ and `'unpack() <http://www.php.net/unpack>`_ accept the following format specifiers : ``aAhHcCsSnviIlLNVqQJPfgGdeExXZ``. 
 
 `'unpack() <http://www.php.net/unpack>`_ also accepts a name after the format specifier and an optional quantifier. 
 
-All other situations is not a valid, and produces a warning : `pack(): Type t: unknown format code`
+All other situations is not a valid, and produces a warning : ``pack(): Type t: unknown format code``
 
 .. code-block:: php
 
@@ -12433,9 +12499,9 @@ Name Regex
 
 Captured subpatterns may be named, for easier reference. 
 
-From the manual : It is possible to name a subpattern using the syntax `(?P<name>pattern)`. This subpattern will then be indexed in the matches array by its normal numeric position and also by name. PHP 5.2.2 introduced two alternative syntaxes `(?<name>pattern)` and `(?'name'pattern)`.
+From the manual : It is possible to name a subpattern using the syntax ``(?P<name>pattern)``. This subpattern will then be indexed in the matches array by its normal numeric position and also by name. PHP 5.2.2 introduced two alternative syntaxes `(?<name>pattern)` and `(?'name'pattern)`.
 
-Naming subpatterns makes it easier to know what is read from the results of the subpattern : for example, `$r['name']` has more meaning than `$r[1]`. 
+Naming subpatterns makes it easier to know what is read from the results of the subpattern : for example, ``$r['name']`` has more meaning than ``$r[1]``. 
 
 Named subpatterns may also be shifted in the regex without impact on the resulting array. 
 
@@ -12448,9 +12514,9 @@ Named subpatterns may also be shifted in the regex without impact on the resulti
    print_r($r[1]);
    print_r($r['name']);
    
-   preg_match('/(?<name>a)(?<sub>b)/', $x, $s);
-   print $r[2];
-   print $r['sub'];
+   preg_match("/(?<name>a)(?'sub'b)/", $x, $s);
+   print $s[2];
+   print $s['sub'];
    
    ?>
 
@@ -14146,7 +14212,7 @@ No Reference For Static Property
 
 Static properties used to behave independantly when set to a reference value. This was fixed in PHP 7.3. 
 
-According to the PHP 7.3 changelog : `In PHP, static properties are shared between inheriting classes, unless the static property is explicitly overridden in a child class. However, due to an implementation artifact it was possible to separate the static properties by assigning a reference. This loophole has been fixed.`.
+According to the PHP 7.3 changelog : ``In PHP, static properties are shared between inheriting classes, unless the static property is explicitly overridden in a child class. However, due to an implementation artifact it was possible to separate the static properties by assigning a reference. This loophole has been fixed.``.
 
 .. code-block:: php
 
@@ -15132,6 +15198,13 @@ Note that classes with methods bearing the class name, but inside a namespace ar
 
 See also `Constructors and Destructors ¶ <http://php.net/manual/en/language.oop5.decon.php>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Remove old style constructor and make it __construct
+* Remove old libraries and use a modern component
+
 +-------------+---------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/OldStyleConstructor                                                                             |
 +-------------+---------------------------------------------------------------------------------------------------------+
@@ -15200,7 +15273,7 @@ One If Is Sufficient
 
 Nested conditions may be written another way, and reduce the amount of code.
 
-Nested conditions are equivalent to a `&&` condition. As such, they may be switched. When one of the condition has no explicit else, then it is lighter to write it as the first condition. This way, it is written once, and not repeated.
+Nested conditions are equivalent to a ``&&`` condition. As such, they may be switched. When one of the condition has no explicit else, then it is lighter to write it as the first condition. This way, it is written once, and not repeated.
 
 .. code-block:: php
 
@@ -17831,7 +17904,7 @@ Repeated Interface
 
 A class should implements only once an interface.
 
-PHP accepts multiple times the same interface in the `implements` clause. In fact, it doesn't do anything beyond the first implement. 
+PHP accepts multiple times the same interface in the ``implements`` clause. In fact, it doesn't do anything beyond the first implement. 
 
 .. code-block:: php
 
@@ -18511,7 +18584,7 @@ The ``$secure`` argument limits the transmission of the cookie over HTTP (by def
 
 The ``$httponly`` argument limits the access of the cookie to JavaScript. It is only transmitted to the browser, and retransmitted. This helps reducing XSS and CSRF attacks, though it is disputed. 
 
-The ``$samesite`` argument limits the sending of the cookie to the domain that initiated the request. It is by default `Lax` but should be upgraded to `Strict` whenever possible. This feature is available as PHP 7.3. 
+The ``$samesite`` argument limits the sending of the cookie to the domain that initiated the request. It is by default ``Lax`` but should be upgraded to `Strict` whenever possible. This feature is available as PHP 7.3. 
 
 .. code-block:: php
 
@@ -20301,6 +20374,14 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
 
 `'array_unique() <http://www.php.net/array_unique>`_ has been accelerated in PHP 7.2 and may be used directly.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace the slow function with a faster version
+* Remove the usage of the slow function
+
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | Short name  | Performances/SlowFunctions                                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
@@ -20311,6 +20392,8 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
 | Time To Fix | Quick (30 mins)                                                                                                     |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `avoid-those-slow-functions <https://github.com/dseguy/clearPHP/tree/master/rules/avoid-those-slow-functions.md>`__ |
++-------------+---------------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`suitecrm-performances-slowfunctions`                                                                          |
 +-------------+---------------------------------------------------------------------------------------------------------------------+
 
 
@@ -20336,7 +20419,7 @@ The escapeString() method from ``SQLite3`` doesn't escape ``"``, but only ``'``.
    ?>
 
 
-To properly handle quotes and `NUL` characters, use bindParam() instead.
+To properly handle quotes and ``NUL`` characters, use bindParam() instead.
 
 Quote from the PHP manual comments : ``The reason this function doesn't escape double quotes is because double quotes are used with names (the equivalent of backticks in MySQL), as in table or column names, while single quotes are used for values.``
 
@@ -21923,7 +22006,7 @@ Typehinted References
 
 Typehinted arguments have no need for references. Since they are only an object, they are already a reference.
 
-In fact, adding the & on the argument definition may lead to error like `Only variables should be passed by reference`.
+In fact, adding the & on the argument definition may lead to error like ``Only variables should be passed by reference``.
 
 This applies to the 'object' type hint, but not the the others, such as int or bool.
 
@@ -22120,9 +22203,9 @@ Undeclared Static Property
 ##########################
 
 
-Use the right syntax when reaching a property. Static properties use the `\:\:` operator, and non-static properties use `->`. 
+Use the right syntax when reaching a property. Static properties use the ``\:\:`` operator, and non-static properties use ``->``. 
 
-Mistaking one of the other has two different reactions from PHP : `Access to undeclared static property` is a fatal error, while `PHP Notice:  Accessing static property aa\:\:$a as non static` is a notice.
+Mistaking one of the other has two different reactions from PHP : ``Access to undeclared static property`` is a fatal error, while ``PHP Notice:  Accessing static property aa\:\:$a as non static`` is a notice.
 
 .. code-block:: php
 
@@ -28387,11 +28470,11 @@ filter_input() As A Source
 ##########################
 
 
-The filter_input() and filter_input_array() functions access directly to $_GET. They represent a source for external data just like `$_GET`, `$_POST`, etc.
+The filter_input() and filter_input_array() functions access directly to ``$_GET``. They represent a source for external data just like ``$_GET``, ``$_POST``, etc.
 
-The main feature of filter_input() is that it is already filtered. The main drawback is that `FILTER_FLAG_NONE` is the `none` filter, and that default configuration is `FILTER_UNSAFE_RAW`.
+The main feature of filter_input() is that it is already filtered. The main drawback is that ``FILTER_FLAG_NONE`` is the ``none`` filter, and that default configuration is `FILTER_UNSAFE_RAW`.
 
-The filter extension keeps access to the incoming data, even after the super globals, such as `$_GET`, are unset.
+The filter extension keeps access to the incoming data, even after the super globals, such as ``$_GET``, are unset.
 
 .. code-block:: php
 
@@ -28453,6 +28536,35 @@ This code will display 1 in PHP 7, and 0 in PHP 5.
 +-------------+-------------------------------------------+
 | Time To Fix | Quick (30 mins)                           |
 +-------------+-------------------------------------------+
+
+
+
+.. _idn\_to\_ascii()-new-default:
+
+idn_to_ascii() New Default
+##########################
+
+
+The default parameter value of idn_to_ascii() and idn_to_utf8() is now INTL_IDNA_VARIANT_UTS46 instead of the deprecated INTL_IDNA_VARIANT_2003.
+
+.. code-block:: php
+
+   <?php
+   
+   echo idn_to_ascii('täst.de'); 
+   
+   ?>
+
+
+See also `idn_to_ascii <http://php.net/manual/en/function.idn-to-ascii.php>`_,
+         `idn_to_utf8 <http://php.net/manual/en/function.idn-to-utf8.php>`_ and
+         `Unicode IDNA Compatibility Processing <http://unicode.org/reports/tr46/>`_.
+
++------------+---------------------------+
+| Short name | Php/IdnUts46              |
++------------+---------------------------+
+| Themes     | :ref:`CompatibilityPHP74` |
++------------+---------------------------+
 
 
 

@@ -328,9 +328,9 @@ The constant is build according to the situation, in the part of the script (fil
 
     if (isset($_GET['ocparams']) && !empty($_GET['ocparams'])) {
     		$params = '';
-    		if (preg_match_all(/(\w+)--(\w+)_-/, $_GET['ocparams'], $matches)) {
+    		if (preg_match_all("/(\w+)--(\w+)_-/", $_GET['ocparams'], $matches)) {
     			foreach ($matches[1] as $idx => $m) {
-    				if (($m != 'module') && ($m != 'action') && preg_match(/^[\w-]+$/, $m)) {
+    				if (($m != 'module') && ($m != 'action') && preg_match("/^[\w-]+$/", $m)) {
     					$params .= '&' . $m . '=' . urlencode($matches[2][$idx]);
     					$_GET[$m] = $matches[2][$idx];
     				}
@@ -433,7 +433,7 @@ Double-quotes are simply not needed here. If casting to string is important, the
 .. code-block:: php
 
     foreach ($plugininfo['params'] as $key => $param) {
-    		$default[$key] = $param['default'];
+    		$default["$key"] = $param['default'];
     	}
 
 
@@ -452,8 +452,8 @@ Both concatenations could be merged, independantly. If readability is important,
 .. code-block:: php
 
     public static function removeFile($path, $filename) {
-    		if (file_exists($path . $filename)) {
-    			unlink($path . $filename);
+    		if (file_exists("$path" . "$filename")) {
+    			unlink("$path" . "$filename");
     		}
     	}
 
@@ -3151,6 +3151,22 @@ The setSpecificField method catches a WebserviceException, representing an issue
     		$this->specificFields[$field_name] = array('entity'=>$entity_name, 'object' => $object, 'method' => $method, 'type' => gettype($object));
     		return $this;
     	}
+
+Slow Functions
+==============
+
+.. _suitecrm-performances-slowfunctions:
+
+SuiteCRM
+^^^^^^^^
+
+:ref:`slow-functions`, in include/json_config.php:242. 
+
+This is a equivalent for nl2br()
+
+.. code-block:: php
+
+    preg_replace("/\r\n/", "<BR>", $focus->$field)
 
 Join file()
 ===========
