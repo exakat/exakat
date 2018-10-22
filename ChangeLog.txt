@@ -1,4 +1,4 @@
-Version 1.5.0 (Lingji Bodhisattva, coming up)
+Version 1.5.1 (Eighteen Arhats, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,29 @@ Version 1.5.0 (Lingji Bodhisattva, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.5.0 (Pilanpo Bodhisattva, 2018-10-22)
++ Architecture
+    + Fixed " in the examples of the manual
+    + Upgraded stability with new history testing
++ Report
+    + Ambassador : now report interface and trait hierarchy
+    + Ambassador : new format inventory for pack and printf
+    + Dump : Fixed list of traits
++ Analyzer
+    + New analyzer : Could Use Try, for native calls that may produce an exception
+    + New analyzer : idn_to_ascii() will get new default
+    + Upgraded analysis : Undefined variables exclude $this
+    + Upgraded analysis : Variables used once avoid properties
+    + Upgraded analysis : ext/json : JsonException
+    + Upgraded analysis : added new PHP 7.3 constants (curl, pgsql, mbstring, standard)
+    + Upgraded analysis : scalar or object property now ignore NULL as default
+    + Refactored analysis : UsedProtectedMethod
+    + Checked unit tests : 3059 / 3071 test pass (99% pass)
++ Tokenizer
+    + Handles NaN and INF when the literals reach them
+    + Static constant may be variable if object is variable
+    + Removed superfluous linking for static calls.
 
 Version 1.4.9 (Lingji Bodhisattva, 2018-10-15)
 + Architecture
