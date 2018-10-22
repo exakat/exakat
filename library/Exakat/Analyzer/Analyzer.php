@@ -1715,11 +1715,11 @@ GREMLIN;
     }
 
     protected function loadIni($file, $index = null) {
-        $fullpath = "{$this->config->dir_root}/data/$file";
+        $fullpath = "{$this->config->dir_root}/data/$file.ini";
 
         if (file_exists($fullpath)) {
             $ini = parse_ini_file($fullpath, INI_PROCESS_SECTIONS);
-        } elseif ((!is_null($this->config->ext)) && ($iniString = $this->config->ext->loadData("$analyzer.ini")) !== null) {
+        } elseif ((!is_null($this->config->ext)) && ($iniString = $this->config->ext->loadData("$file.ini")) !== null) {
             $ini = parse_ini_string($iniString, INI_PROCESS_SECTIONS);
         } else {
             assert(false, "No INI for '$file'.");
