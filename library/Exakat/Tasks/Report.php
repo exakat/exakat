@@ -77,7 +77,8 @@ class Report extends Tasks {
         $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
         $res = $dump->query($ProjectDumpSql);
         $row = $res->fetchArray(\SQLITE3_NUM);
-        if (empty($row) || $row[0] === 0) {
+
+        if (empty($row) || ($row[0] === 0)) {
             throw new NoDumpYet($this->config->project);
         }
 
@@ -86,10 +87,10 @@ class Report extends Tasks {
         $report = new $reportClass($this->config);
         if (empty($this->config->file)) {
             display("Building report for project {$this->config->project} in '".$reportClass::FILE_FILENAME.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '')."', with format {$this->config->format}\n");
-            $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, $report::FILE_FILENAME);
+            $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $report::FILE_FILENAME);
         } elseif ($this->config->file === Reports::STDOUT) {
             display("Building report for project {$this->config->project} to stdout, with format {$this->config->format}\n");
-            $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, Reports::STDOUT);
+            $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", Reports::STDOUT);
         } else {
             // to files + extension
             $filename = basename($this->config->file);
@@ -97,7 +98,7 @@ class Report extends Tasks {
                 $filename = $reportClass::FILE_FILENAME;
             }
             display('Building report for project '.$this->config->project.' in "'.$filename.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '').'", with format '.$this->config->format."\n");
-            $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, $filename);
+            $report->generate("{$this->config->projects_root}/projects/{$this->config->project}", $filename);
         }
         display('Reported '.$report->getCount().' messages in '.$this->config->format);
 

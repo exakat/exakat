@@ -25,14 +25,16 @@ namespace Exakat\Analyzer;
 
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Analyzer\Analyzer;
+use AutoloadExt;
 
 class Themes {
     private static $sqlite = null;
-    private $phar_tmp = null;
+    private $phar_tmp      = null;
+    private $ext           = null;
 
     static private $instanciated = array();
     
-    public function __construct($path) {
+    public function __construct($path, AutoloadExt $ext) {
         if (substr($path, 0, 4) == 'phar') {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exDocs').'.sqlite';
             copy($path, $this->phar_tmp);
@@ -41,6 +43,8 @@ class Themes {
             $docPath = $path;
         }
         self::$sqlite = new \SQLite3($docPath, \SQLITE3_OPEN_READONLY);
+        
+        $this->ext = $ext;
     }
 
     public function __destruct() {
@@ -52,12 +56,13 @@ class Themes {
     public function getThemeAnalyzers($theme = null) {
         $all = $this->listAllThemes();
 
-        if (is_array($theme)) {
-            $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
-            $where = 'WHERE a.folder != "Common" AND c.name in ('.makeList($theme).')';
-        } elseif ($theme === null) {
+        // Main installation
+        if ($theme === null) {
             // Default is ALL of them
             $where = 'WHERE a.folder != "Common" ';
+        } elseif (is_array($theme)) {
+            $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
+            $where = 'WHERE a.folder != "Common" AND c.name in ('.makeList($theme).')';
         } elseif ($theme === 'Random') {
             $shorList = array_diff($all, array('All', 'Unassigned', 'First', 'Under Work', 'Newfeatures', 'Onepage',));
             shuffle($shorList);
@@ -79,13 +84,16 @@ SELECT DISTINCT a.folder, a.name FROM analyzers AS a
         ON c.id = ac.id_categories
     $where
 SQL;
-        
         $res = self::$sqlite->query($query);
 
         $return = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $return[] = $row['folder'].'/'.$row['name'];
+            $return[] = "$row[folder]/$row[name]";
         }
+
+        // Extension installation
+        $list = $this->ext->getAnalyzers($theme);
+        $return = array_merge($return, ...array_values($list));
         
         return $return;
     }
@@ -280,7 +288,7 @@ SQL;
         if (!class_exists($class)) {
             return false;
         }
-        
+
         $actualClassName = new \ReflectionClass($class);
         if ($class === $actualClassName->getName()) {
             return $class;

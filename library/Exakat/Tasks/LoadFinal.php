@@ -1024,7 +1024,8 @@ GREMLIN;
         // fallback for PHP and ext, class, function, constant
         // update fullnspath with fallback for functions
 
-        $themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite");
+        $themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
+                             $this->config->ext);
 
         $exts = $themes->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';

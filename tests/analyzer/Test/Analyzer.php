@@ -5,6 +5,7 @@ namespace Test;
 use Exakat\Phpexec;
 use Exakat\Analyzer\Themes;
 use PHPUnit\Framework\TestCase;
+use AutoloadExt;
 
 include_once(dirname(__DIR__, 3).'/library/Autoload.php');
 
@@ -27,7 +28,9 @@ class Analyzer extends TestCase {
         $config = new \Exakat\Config(array('foo', 'test', '-p', 'test'));
         chdir($pwd);
 
-        $themes = new Themes(dirname(__DIR__, 3).'/data/analyzers.sqlite');
+        $themes = new Themes(dirname(__DIR__, 3).'/data/analyzers.sqlite', 
+                             new AutoloadExt('')
+                            );
 
         $analyzerobject = $themes->getInstance($test_config, null, $config);
         if ($analyzerobject === null) {

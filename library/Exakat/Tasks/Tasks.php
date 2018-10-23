@@ -110,7 +110,8 @@ abstract class Tasks {
         }
 
         $this->exakatDir = $this->config->projects_root.'/projects/.exakat/';
-        $this->themes = new Themes($this->config->dir_root.'/data/analyzers.sqlite');
+        $this->themes = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
+                                   $this->config->ext);
     }
 
     public function __destruct() {

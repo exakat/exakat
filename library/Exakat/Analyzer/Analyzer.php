@@ -136,7 +136,8 @@ abstract class Analyzer {
         $this->shortAnalyzer  = str_replace('\\', '/', substr($this->analyzer, 16));
 
         assert($config !== null, 'Can\'t call Analyzer without a config');
-        $this->themes = new Themes($config->dir_root.'/data/analyzers.sqlite');
+        $this->themes = new Themes("{$config->dir_root}/data/analyzers.sqlite",
+                                   $config->ext);
         $this->config = $config;
 
         if (strpos($this->analyzer, '\\Common\\') === false) {

@@ -71,7 +71,8 @@ abstract class Reports {
             $this->sqlite = new \Sqlite3($path, \SQLITE3_OPEN_READONLY);
 
             $this->datastore = new Dump($this->config);
-            $this->themes    = new Themes("{$this->config->dir_root}/data/analyzers.sqlite");
+            $this->themes    = new Themes("{$this->config->dir_root}/data/analyzers.sqlite", 
+                                          $this->config->ext);
 
             // Default analyzers
             $analyzers = array_merge($this->themes->getThemeAnalyzers($this->config->thema),
@@ -97,7 +98,7 @@ abstract class Reports {
         }
 
         if (!empty($this->config->thema)) {
-            $themas = $this->config->themas;
+            $themas = $this->config->thema;
 
             if ($missing = $this->checkMissingThemes()) {
                 print "Can't produce ".static::class." format. There are ".count($missing)." missing themes : ".implode(', ', $missing).".\n";
@@ -110,7 +111,7 @@ abstract class Reports {
                 $list = $this->themes->getThemeAnalyzers(array($this->config->thema));
             }
         } elseif (!empty($this->config->program)) {
-            $list = $this->config->program;
+            $list = array($this->config->program);
         } else {
             $list = $this->themes->getThemeAnalyzers($this->themesToShow);
         }

@@ -39,7 +39,6 @@ class Dump extends Tasks {
 
     private $sqlite            = null;
 
-    private $rounds            = 0;
     private $sqliteFile        = null;
     private $sqliteFileFinal   = null;
     
@@ -66,7 +65,11 @@ class Dump extends Tasks {
         }
 
         $projectInGraph = $this->gremlin->query('g.V().hasLabel("Project").values("code")')
-                                        ->toArray()[0];
+                                        ->toArray();
+        if (empty($projectInGraph)) {
+            throw new NoSuchProject($this->config->project);
+        }
+        $projectInGraph = $projectInGraph[0];
         
         if ($projectInGraph !== $this->config->project) {
             throw new NotProjectInGraph($this->config->project, $projectInGraph);
@@ -383,7 +386,7 @@ SQL;
     }
 
     private function finish() {
-        $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, \'Project/Dump\', '.$this->rounds.')');
+        $this->sqlite->query('REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, \'Project/Dump\', 1)');
 
         // Redo each time so we update the final counts
         $totalNodes = $this->gremlin->query('g.V().count()')->toString();
@@ -763,14 +766,13 @@ GREMLIN;
                     if (isset($citId[$uses])) {
                         $query[] = "(null, ".$citId[$row['fullnspath']].", $citId[$uses], 'use')";
                     } else {
-                    var_dump($uses);
                         $query[] = "(null, ".$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($uses)."', 'use')";
                     }
                 }
             }
 
             if (!empty($query)) {
-print                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.implode(', ', $query);
+                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.implode(', ', $query);
                 $this->sqlite->query($query);
             }
         }
