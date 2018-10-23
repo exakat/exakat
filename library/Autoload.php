@@ -38,13 +38,7 @@ class Autoload {
     public static function autoload_test($name) {
         $path = dirname(__DIR__);
 
-        $file = $path.'/tests/analyzer/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
-
-        if (file_exists($file)) {
-            include $file;
-        }
-
-        $file = $path.'/tests/tokenizer/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
+        $file = "$path/tests/analyzer/".str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
 
         if (file_exists($file)) {
             include $file;
@@ -66,7 +60,11 @@ class AutoloadExt {
     private $pharList = array();
     
     public function __construct($path) {
-        $this->pharList = glob($path.'/*.phar');
+        $list = glob("$path/*.phar");
+        
+        foreach($list as $phar) {
+            $this->pharList[basename($phar, '.phar')] = $phar;
+        }
         
         // Add a list of check on the phars
         // Could we autoload everything ? 
@@ -78,9 +76,10 @@ class AutoloadExt {
         $file = "{$fileName}.php";
 
         foreach($this->pharList as $phar) {
-            $fullPath = "phar://$phar/library/$file";
+            $fullPath = "phar://$phar/$file";
             if (file_exists($fullPath)) {
                 include $fullPath;
+                return;
             }
         }
     }
@@ -91,6 +90,41 @@ class AutoloadExt {
 
     public function getJarList() {
         return array_map('basename', $this->pharList);
+    }
+
+    public function getThemes() {
+        $return = array();
+
+        foreach($this->pharList as $name => $phar) {
+            $fullPath = "phar://$phar/Exakat/Analyzer/analyzers.ini";
+            
+            if (!file_exists($fullPath)) {
+                $return[] = array();
+                continue; 
+            }
+            $ini = parse_ini_file($fullPath);
+            
+            $return[$name] = array_keys($ini);
+        }
+
+        return $return;
+    }
+
+    public function getAnalyzers($theme = 'All') {
+        $return = array();
+
+        foreach($this->pharList as $name => $phar) {
+            $fullPath = "phar://$phar/Exakat/Analyzer/analyzers.ini";
+            
+            if (!file_exists($fullPath)) {
+                $return[] = array();
+                continue; 
+            }
+            $ini = parse_ini_file($fullPath);
+            
+            $return[$name] = $ini[$theme] ?? array();
+        }
+        return $return;
     }
     
     public function loadData($path) {
@@ -105,8 +139,6 @@ class AutoloadExt {
         return null;
     }
 }
-
-
 
 spl_autoload_register('Autoload::autoload_library');
 if (file_exists(__DIR__.'/../vendor/autoload.php')) {

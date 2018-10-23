@@ -34,7 +34,7 @@ class SlimMissing extends Analyzer {
     }
     
     public function analyze() {
-        $slim = new Slim($this->config->dir_root.'/data', $this->config);
+        $slim = new Slim("{$this->config->dir_root}/data", $this->config);
         $classes = $slim->getClasses($this->version);
         $classes = array_pop($classes);
         $classes = makeFullnspath($classes);
