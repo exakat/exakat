@@ -1268,8 +1268,8 @@ SQL
                 $directiveList .= '<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>'.PHP_EOL;
                 $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
             } elseif ($row['analyzer'] == 'Php/UsesEnv') {
-                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
-                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environment</td></tr>\n";
+                $data['Environment'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
             } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
                 $data['Errorlog'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));

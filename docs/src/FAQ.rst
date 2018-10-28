@@ -103,7 +103,7 @@ It may be interesting to 'ignore_dir[]', from projects/<name>/config.ini.
 
 By default, java is allowed to run with 512mb of RAM. That may be too little for the code being studied. 
 
-Set the environnement variable $JAVA_OPTIONS to give larger quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
+Set the environment variable $JAVA_OPTIONS to give larger quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
 
 `How can I run a very large project?`_
 --------------------------------------
@@ -111,7 +111,7 @@ Set the environnement variable $JAVA_OPTIONS to give larger quantities of RAM : 
 Here are a few steps you can try when running exakat on a very large project. 
 
 * Update project/<name>/config.ini, and use ignore_dirs[] and include_dirs[] to exclude as much code as possible. Notably, frameworks, data in PHP files, tests, cache, translations, etc. 
-* Set environnement variable $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
+* Set environment variable $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
 * Check that your installation is running with 'gsneo4j' and not 'tinkergraph', in config/exakat.ini.
 
 `Does exakat runs on Java 8?`_

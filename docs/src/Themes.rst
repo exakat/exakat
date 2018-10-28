@@ -42,7 +42,7 @@ Here is the list of the current recipes supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Performances`                            | Check the code for slow code.                                                                        |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`Security`                                | Check the code for common security bad practices, especially in the Web environnement.               |
+|:ref:`Security`                                | Check the code for common security bad practices, especially in the Web environment.                 |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Slim Framework <slim>`                   | Check for code used with the Slim Framework                                                          |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+

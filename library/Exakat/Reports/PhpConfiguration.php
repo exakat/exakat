@@ -100,7 +100,7 @@ SQL
             if ($row['analyzer'] == 'Structures/FileUploadUsage') {
                 $data['File Upload'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
             } elseif ($row['analyzer'] == 'Php/UsesEnv') {
-                $data['Environnement'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+                $data['Environment'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
             } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
                 $data['Error log'] = json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
             } elseif ($row['analyzer'] === 'Php/UseBrowscap') {

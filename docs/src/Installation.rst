@@ -344,7 +344,7 @@ Currently, Docker installation only ships with one PHP version (7.1), and with s
     docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat project -p <project name>
 
 
-For large code bases, it may be necessary to increase the allocated memory for the graph database. Do this by using the JAVA_OPTIONS environnement variable when you start the docker command : this example gives 2Gb of RAM to the graphdb. That should cover medium size applications. 
+For large code bases, it may be necessary to increase the allocated memory for the graph database. Do this by using the JAVA_OPTIONS environment variable when you start the docker command : this example gives 2Gb of RAM to the graphdb. That should cover medium size applications.
 
 ::
 

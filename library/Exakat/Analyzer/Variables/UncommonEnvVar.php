@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UncommonEnvVar extends Analyzer {
     public function analyze() {
-        $classicEnv = $this->loadIni('environnement_vars.ini', 'index');
+        $classicEnv = $this->loadIni('environment_vars.ini', 'index');
 
         // $_ENV['USER'];
         $this->atomIs('Phpvariable')

@@ -862,7 +862,7 @@ Version 1.0.5 (King of Cold Protection, 2017-11-27)
     + Ambassador : added more inventories : URL SQL, email, GET index, MD5, Mime
 + Analyzer
     + New analyzer : parent first
-    + New analyzer : Report uncommon Environnement Vars
+    + New analyzer : Report uncommon Environment Vars
     + New analyzer : Report invalid Regex
     + New analyzer : Report contatenation in Zend DB
     + Fixed analyzer : Deprecated Functions
@@ -2353,7 +2353,7 @@ Version 0.4.3 (Tuolong, 2015-01-04)
     + Removed old style reporting system
 + Analyzer
     + Fixed fileupload and filesystem directives reports
-    + Added report of Environnement variable usage
+    + Added report of Environment variable usage
     + Added iconv_set_encoding to the list of directive usage
     + Extension analyzes now takes into account namespaces and traits
     + Analyzers all have severity and time to fix
