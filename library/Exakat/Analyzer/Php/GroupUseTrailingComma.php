@@ -31,7 +31,7 @@ class GroupUseTrailingComma extends Analyzer {
         // use a\b\{c,d,}
         $this->atomIs('Usenamespace')
              ->hasOut('GROUPUSE')
-             ->hasOut('TRAILING');
+             ->is('trailing', true);
         $this->prepareQuery();
     }
 }

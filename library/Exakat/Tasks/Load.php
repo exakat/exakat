@@ -120,6 +120,9 @@ class Load extends Tasks {
     const ALTERNATIVE      = true;
     const NOT_ALTERNATIVE  = false;
 
+    const TRAILING         = true;
+    const NOT_TRAILING     = false;
+
     const NULLABLE         = true;
     const NOT_NULLABLE     = false;
 
@@ -2067,7 +2070,7 @@ class Load extends Tasks {
                 $index->rank = ++$rank;
                 $argumentsId[] = $index;
                 $this->argumentsId = $argumentsId; // This avoid overwriting when nesting functioncall
-    
+
                 $this->addLink($arguments, $index, 'ARGUMENT');
 
                 $fullcode[] = $index->fullcode;
@@ -3809,8 +3812,7 @@ class Load extends Tasks {
                     }
 
                     if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_CURLY) {
-                        $nsname = $this->addAtomVoid();
-                        $this->addLink($use, $nsname, 'TRAILING');
+                        $use->trailing = self::TRAILING;
                     } else {
                         $nsname = $this->processOneNsname();
 

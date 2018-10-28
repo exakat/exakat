@@ -73,6 +73,7 @@ class Atom {
     public $ctype1_size  = 0;
     public $noscream     = 0;
     public $nullable     = 0;
+    public $trailing     = 0;
 
     public function __construct($id, $atom) {
         $this->id   = $id;
@@ -142,6 +143,7 @@ class Atom {
                                'heredoc',
                                'noscream',
                                'nullable',
+                               'trailing',
                                'reference',
                                'static',
                                'variadic',
@@ -159,6 +161,7 @@ class Atom {
                              'heredoc',
                              'noscream',
                              'nullable',
+                             'trailing',
                              'reference',
                              'variadic',
                              );
