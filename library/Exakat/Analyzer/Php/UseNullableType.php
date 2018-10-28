@@ -29,17 +29,9 @@ class UseNullableType extends Analyzer {
     
     public function analyze() {
         // Return type function foo(): ?String
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->hasOut('NULLABLE')
-             ->back('first');
-        $this->prepareQuery();
-
-        // Argument typehint function foo(?String $x):
-        $this->atomIs(self::$FUNCTIONS_ALL)
-             ->hasNoOut('NULLABLE')
-             ->outIs('ARGUMENT')
-             ->hasOut('NULLABLE')
-             ->back('first');
+        $this->atomIs(array_merge(self::$FUNCTIONS_ALL, array('Parameter')))
+             ->is('nullable', true)
+             ->inIsIE('ARGUMENT'); // Go back to fucntion
         $this->prepareQuery();
     }
 }

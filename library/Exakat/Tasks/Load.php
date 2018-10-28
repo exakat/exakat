@@ -1151,8 +1151,8 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_COLON) {
             ++$this->id;
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
-                $nullable = $this->processNextAsIdentifier();
-                $this->addLink($function, $nullable, 'NULLABLE');
+                ++$this->id; // Skip NULLABLE
+                $function->nullable = self::NULLABLE;
             }
 
             $returnType = $this->processOneNsname();
@@ -1176,7 +1176,7 @@ class Load extends Tasks {
                                 $this->tokens[$current][1].' '.($function->reference ? '&' : '').
                                 ($function->atom === 'Closure' ? '' : $name->fullcode).'('.$argumentsFullcode.')'.
                                 (isset($useFullcode) ? ' use ('.implode(', ', $useFullcode).')' : '').// No space before use
-                                (isset($returnType) ? ' : '.(isset($nullable) ? '?' : '').$returnType->fullcode : '').
+                                (isset($returnType) ? ' : '.($function->nullable ? '?' : '').$returnType->fullcode : '').
                                 $blockFullcode;
 
         $this->contexts[self::CONTEXT_CLASS] = $previousClassContext;
@@ -1871,7 +1871,8 @@ class Load extends Tasks {
                 do {
                     ++$args_max;
                     if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_QUESTION) {
-                        $nullable = $this->processNextAsIdentifier();
+                        ++$this->id;
+                        $nullable = self::NULLABLE;
                     } else {
                         $nullable = self::NOT_NULLABLE;
                     }
@@ -1933,10 +1934,10 @@ class Load extends Tasks {
 
                     $index->rank = ++$rank;
 
-                    if ($nullable !== self::NOT_NULLABLE) {
-                        $this->addLink($index, $nullable, 'NULLABLE');
+                    if ($nullable === self::NULLABLE) {
+                        $index->nullable = self::NULLABLE;
                         $this->addLink($index, $typehint, 'TYPEHINT');
-                        $index->fullcode = '?'.$typehint->fullcode.' '.$index->fullcode;
+                        $index->fullcode = "?$typehint->fullcode $index->fullcode";
                     } elseif ($typehint !== 0) {
                         $this->addLink($index, $typehint, 'TYPEHINT');
                         $index->fullcode = $typehint->fullcode.' '.$index->fullcode;

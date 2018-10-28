@@ -137,7 +137,7 @@ class IncompatibleSignature extends Analyzer {
              ->inIs('NAME')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
-             ->raw('sideEffect{ if (it.get().vertices(OUT, "NULLABLE").any()) { nullable = it.get().vertices(OUT, "NULLABLE").next().value("fullnspath");} else { nullable = false; }}')
+             ->raw('sideEffect{ nullable = it.get().properties("nullable").any(); }')
              ->goToClass()
              ->hasOut('EXTENDS')
              ->goToAllParents()
@@ -147,7 +147,7 @@ class IncompatibleSignature extends Analyzer {
              ->inIs('NAME')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
-             ->raw('filter{ if (it.get().vertices(OUT, "NULLABLE").any()) { nullable != it.get().vertices(OUT, "NULLABLE").next().value("fullnspath");} else { nullable != false; }}')
+             ->raw('filter{ nullable != it.get().properties("nullable").any(); }')
              ->back('first');
         $this->prepareQuery();
 
@@ -157,7 +157,7 @@ class IncompatibleSignature extends Analyzer {
              ->outIs('NAME')
              ->savePropertyAs('lccode', 'name')
              ->inIs('NAME')
-             ->raw('sideEffect{ if (it.get().vertices(OUT, "NULLABLE").any()) { nullable = it.get().vertices(OUT, "NULLABLE").next().value("fullnspath");} else { nullable = false; }}')
+             ->raw('sideEffect{ nullable = it.get().properties("nullable").any(); }')
              ->goToClass()
              ->hasOut('EXTENDS')
              ->goToAllParents()
@@ -165,7 +165,7 @@ class IncompatibleSignature extends Analyzer {
              ->outIs('NAME')
              ->samePropertyAs('code', 'name', self::CASE_INSENSITIVE)
              ->inIs('NAME')
-             ->raw('filter{ if (it.get().vertices(OUT, "NULLABLE").any()) { nullable != it.get().vertices(OUT, "NULLABLE").next().value("fullnspath");} else { nullable != false; }}')
+             ->raw('filter{ nullable != it.get().properties("nullable").any(); }')
              ->back('first');
         $this->prepareQuery();
 
