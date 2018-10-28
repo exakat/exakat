@@ -34,8 +34,9 @@ class StrangeName extends Analyzer {
         $this->prepareQuery();
 
         // multiple identical characters : $aaab
+        // skip . as it may be a variadic
         $this->atomIs(self::$VARIABLES_ALL)
-             ->regexIs('fullcode', '(.)\\\\1{2,}');
+             ->regexIs('fullcode', '([^\\\\.])\\\\1{2,}');
         $this->prepareQuery();
 
 /*
