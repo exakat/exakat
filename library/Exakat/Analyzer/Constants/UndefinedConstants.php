@@ -35,7 +35,7 @@ class UndefinedConstants extends Analyzer {
     
     public function analyze() {
         $this->atomIs(array('Identifier', 'Nsname'))
-             ->hasNoIn(array('ALIAS', 'TYPEHINT', 'RETURNTYPE', 'GOTOLABEL', 'GOTO'))
+             ->hasNoIn(array('AS', 'TYPEHINT', 'RETURNTYPE', 'GOTOLABEL', 'GOTO'))
              ->analyzerIs('Constants/ConstantUsage')
              ->analyzerIsNot('Constants/CustomConstantUsage')
              ->hasNoConstantDefinition()

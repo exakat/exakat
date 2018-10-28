@@ -30,7 +30,7 @@ class Alias extends Analyzer {
         // use A\B\C as D
         $this->atomIs('Usenamespace')
              ->outIs('USE')
-             ->outIs('ALIAS');
+             ->outIs('AS');
         $this->prepareQuery();
     }
 }

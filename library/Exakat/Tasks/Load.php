@@ -3756,7 +3756,6 @@ class Load extends Tasks {
 
                 if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
-                    print_r($as);
                     $alias = $this->addNamespaceUse($origin, $as, $useType, $as);
 
                     $as->alias  = $alias;
