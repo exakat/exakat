@@ -11,35 +11,43 @@ Label : PROJECT
           5
           Label : USE
             6
-        Label : EXPRESSION
-          5
           Label : USE
             8
-        Label : EXPRESSION
-          5
           Label : USE
             12
             Label : AS
               13
             Label : NAME
               10
-        Label : EXPRESSION
-          5
           Label : USE
             12
             Label : AS
               17
             Label : NAME
               15
-        Label : EXPRESSION
-          5
-          Label : GROUPUSE
-            19
-          Label : USE
-            21
           Label : USE
             12
             Label : AS
-              25
+              21
             Label : NAME
-              23
+              19
+        Label : EXPRESSION
+          22
+          Label : NEW
+            13
+            Label : DEFINITION
+              12
+              Label : AS
+                13
+              Label : NAME
+                10
+        Label : EXPRESSION
+          22
+          Label : NEW
+            21
+            Label : DEFINITION
+              12
+              Label : AS
+                21
+              Label : NAME
+                19

@@ -14,16 +14,16 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : USE
-                14
-                Label : ALIAS
-                  12
+                12
+                Label : AS
+                  13
                 Label : NAME
                   10
             Label : EXPRESSION
               9
               Label : USE
-                14
-                Label : ALIAS
+                12
+                Label : AS
                   17
                 Label : NAME
                   15
@@ -34,8 +34,8 @@ Label : PROJECT
               Label : USE
                 21
               Label : USE
-                14
-                Label : ALIAS
+                12
+                Label : AS
                   25
                 Label : DEFINITION
                   19
@@ -46,30 +46,30 @@ Label : PROJECT
               Label : USE
                 27
               Label : USE
-                14
-                Label : ALIAS
+                12
+                Label : AS
                   31
                 Label : NAME
                   29
               Label : USE
                 33
               Label : USE
-                14
-                Label : ALIAS
+                12
+                Label : AS
                   37
                 Label : NAME
                   35
               Label : USE
-                14
-                Label : ALIAS
+                12
+                Label : AS
                   39
                 Label : NAME
                   35
               Label : USE
                 41
               Label : USE
-                14
-                Label : ALIAS
+                12
+                Label : AS
                   45
                 Label : NAME
                   43

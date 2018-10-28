@@ -24,9 +24,9 @@ Label : PROJECT
           Label : CONST
             6
           Label : USE
-            15
-            Label : ALIAS
-              13
+            13
+            Label : AS
+              14
             Label : NAME
               11
         Label : EXPRESSION
@@ -34,8 +34,8 @@ Label : PROJECT
           Label : CONST
             6
           Label : USE
-            15
-            Label : ALIAS
+            13
+            Label : AS
               18
             Label : NAME
               16
@@ -48,7 +48,7 @@ Label : PROJECT
           Label : USE
             22
           Label : USE
-            15
+            13
             Label : AS
               26
             Label : NAME

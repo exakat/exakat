@@ -207,7 +207,6 @@ abstract class GraphElements {
                                  'VAR',
                                  'VARIABLE',
                                  'YIELD',
-                                 'ALIAS',
                                 );
     static public $LINKS_EXAKAT = array('DEFINITION',
                                         'ANALYZED',
@@ -266,7 +265,6 @@ abstract class GraphElements {
                                       'VALUE',
                                       'VARIABLE',
                                       'YIELD',
-                                      'ALIAS',
                                 );
 
     static public $ATOMS_LINKS = array('Addition'                  => array('LEFT', 'RIGHT'),

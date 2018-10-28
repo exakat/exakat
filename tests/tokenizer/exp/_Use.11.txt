@@ -85,14 +85,6 @@ Label : PROJECT
               9
               Label : DEFINITION
                 17
-              Label : DEFINITION
-                19
-                Label : DEFINITION
-                  32
-                  Label : ALIAS
-                    19
-                  Label : NAME
-                    17
               Label : NAME
                 17
               Label : PPP
@@ -101,18 +93,6 @@ Label : PROJECT
                   12
                   Label : DEFAULT
                     18
-                  Label : DEFINITION
-                    40
-                    Label : CLASS
-                      19
-                      Label : DEFINITION
-                        32
-                        Label : ALIAS
-                          19
-                        Label : NAME
-                          17
-                    Label : MEMBER
-                      12
             Label : EXPRESSION
               9
               Label : DEFINITION
@@ -217,7 +197,7 @@ Label : PROJECT
               28
               Label : USE
                 32
-                Label : ALIAS
+                Label : AS
                   19
                 Label : NAME
                   17
@@ -225,7 +205,7 @@ Label : PROJECT
               28
               Label : USE
                 32
-                Label : ALIAS
+                Label : AS
                   34
                 Label : NAME
                   33
@@ -233,7 +213,7 @@ Label : PROJECT
               28
               Label : USE
                 32
-                Label : ALIAS
+                Label : AS
                   36
                 Label : NAME
                   35
@@ -241,7 +221,7 @@ Label : PROJECT
               28
               Label : USE
                 32
-                Label : ALIAS
+                Label : AS
                   38
                 Label : NAME
                   37
@@ -293,7 +273,7 @@ Label : PROJECT
                   19
                   Label : DEFINITION
                     32
-                    Label : ALIAS
+                    Label : AS
                       19
                     Label : NAME
                       17
@@ -323,7 +303,7 @@ Label : PROJECT
                   34
                   Label : DEFINITION
                     32
-                    Label : ALIAS
+                    Label : AS
                       34
                     Label : NAME
                       33
@@ -337,7 +317,7 @@ Label : PROJECT
                   36
                   Label : DEFINITION
                     32
-                    Label : ALIAS
+                    Label : AS
                       36
                     Label : NAME
                       35
@@ -351,7 +331,7 @@ Label : PROJECT
                   38
                   Label : DEFINITION
                     32
-                    Label : ALIAS
+                    Label : AS
                       38
                     Label : NAME
                       37

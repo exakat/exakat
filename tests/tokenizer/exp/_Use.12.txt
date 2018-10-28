@@ -79,14 +79,6 @@ Label : PROJECT
               9
               Label : DEFINITION
                 13
-              Label : DEFINITION
-                14
-                Label : DEFINITION
-                  24
-                  Label : ALIAS
-                    14
-                  Label : NAME
-                    13
               Label : METHOD
                 11
                 Label : ARGUMENT
@@ -95,22 +87,6 @@ Label : PROJECT
                   8
                   Label : EXPRESSION
                     5
-                Label : DEFINITION
-                  31
-                  Label : CLASS
-                    14
-                    Label : DEFINITION
-                      24
-                      Label : ALIAS
-                        14
-                      Label : NAME
-                        13
-                  Label : METHOD
-                    11
-                    Label : ARGUMENT
-                      5
-                    Label : NAME
-                      11
                 Label : NAME
                   11
               Label : NAME
@@ -243,7 +219,7 @@ Label : PROJECT
               20
               Label : USE
                 24
-                Label : ALIAS
+                Label : AS
                   14
                 Label : NAME
                   13
@@ -251,7 +227,7 @@ Label : PROJECT
               20
               Label : USE
                 24
-                Label : ALIAS
+                Label : AS
                   26
                 Label : NAME
                   25
@@ -259,7 +235,7 @@ Label : PROJECT
               20
               Label : USE
                 24
-                Label : ALIAS
+                Label : AS
                   28
                 Label : NAME
                   27
@@ -267,7 +243,7 @@ Label : PROJECT
               20
               Label : USE
                 24
-                Label : ALIAS
+                Label : AS
                   30
                 Label : NAME
                   29
@@ -335,7 +311,7 @@ Label : PROJECT
                   14
                   Label : DEFINITION
                     24
-                    Label : ALIAS
+                    Label : AS
                       14
                     Label : NAME
                       13
@@ -377,7 +353,7 @@ Label : PROJECT
                   26
                   Label : DEFINITION
                     24
-                    Label : ALIAS
+                    Label : AS
                       26
                     Label : NAME
                       25
@@ -395,7 +371,7 @@ Label : PROJECT
                   28
                   Label : DEFINITION
                     24
-                    Label : ALIAS
+                    Label : AS
                       28
                     Label : NAME
                       27
@@ -413,7 +389,7 @@ Label : PROJECT
                   30
                   Label : DEFINITION
                     24
-                    Label : ALIAS
+                    Label : AS
                       30
                     Label : NAME
                       29

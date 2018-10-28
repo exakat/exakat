@@ -698,7 +698,7 @@ class Load extends Tasks {
 
         $end = microtime(true);
         $this->log->log("processFile\t".(($end - $begin) * 1000)."\t".$log['token_initial'].PHP_EOL);
-
+        
         return true;
     }
 
@@ -3745,18 +3745,10 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_AS) {
                 // use A\B as C
                 ++$this->id;
+                $this->pushExpression($namespace);
+                $this->processAs();
+                $as = $this->popExpression();
 
-                $alias = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
-
-                $as = $this->addAtom('As');
-                $this->addLink($as, $namespace, 'NAME');
-                $this->addLink($as, $alias, 'ALIAS');
-                $as->fullcode = $namespace->fullcode. ' '.$this->tokens[$this->id - 1][1].' '.$alias->fullcode;
-                $fullcode[] = $as->fullcode;
-                $as->token = 'T_AS';
-                $as->line = $this->tokens[$this->id - 1][2];
-                $as->code = $this->tokens[$this->id - 1][1];
-                $as->fullnspath = $fullnspath;
                 if (isset($this->uses['class'][$prefix])) {
                     $this->addLink($as, $this->uses['class'][$prefix], 'DEFINITION');
                 }
@@ -3764,7 +3756,8 @@ class Load extends Tasks {
 
                 if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
-                    $alias = $this->addNamespaceUse($origin, $alias, $useType, $as);
+                    print_r($as);
+                    $alias = $this->addNamespaceUse($origin, $as, $useType, $as);
 
                     $as->alias  = $alias;
                     $as->origin = $fullnspath;
@@ -3849,7 +3842,6 @@ class Load extends Tasks {
     
                             $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $nsname);
                             $nsname->alias = $alias;
-    
                         }
                     }
                 } while (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_COMMA)));
@@ -5474,11 +5466,11 @@ class Load extends Tasks {
         }
     }
 
-    private function addNamespaceUse($origin, $alias, $useType,Atom $use) {
+    private function addNamespaceUse($origin, $alias, $useType, Atom $use) {
         if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
-            $offset = strrpos($alias->fullcode, ' ');
-            $alias = $alias->code;
+            $offset = strrpos($alias->fullcode, ' as ');
+            $alias = mb_strtolower(substr($alias->fullcode, $offset + 4));
         } elseif (($offset = strrpos($alias->code, '\\')) === false) {
             // namespace without \
             $alias = $alias->code;

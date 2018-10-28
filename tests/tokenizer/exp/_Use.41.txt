@@ -1,0 +1,61 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : GROUPUSE
+            6
+          Label : USE
+            8
+          Label : USE
+            10
+          Label : USE
+            14
+            Label : AS
+              15
+            Label : NAME
+              12
+          Label : USE
+            14
+            Label : AS
+              19
+            Label : NAME
+              17
+          Label : USE
+            14
+            Label : AS
+              23
+            Label : NAME
+              21
+        Label : EXPRESSION
+          24
+          Label : NEW
+            8
+            Label : DEFINITION
+              8
+        Label : EXPRESSION
+          24
+          Label : NEW
+            15
+            Label : DEFINITION
+              14
+              Label : AS
+                15
+              Label : NAME
+                12
+        Label : EXPRESSION
+          24
+          Label : NEW
+            23
+            Label : DEFINITION
+              14
+              Label : AS
+                23
+              Label : NAME
+                21

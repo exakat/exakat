@@ -74,9 +74,9 @@ Label : PROJECT
               Label : CONST
                 9
               Label : USE
-                34
-                Label : ALIAS
-                  33
+                33
+                Label : AS
+                  34
                 Label : NAME
                   31
             Label : EXPRESSION
@@ -84,14 +84,14 @@ Label : PROJECT
               Label : CONST
                 9
               Label : USE
-                34
-                Label : ALIAS
+                33
+                Label : AS
                   35
                 Label : NAME
                   27
               Label : USE
-                34
-                Label : ALIAS
+                33
+                Label : AS
                   36
                 Label : NAME
                   29
@@ -100,20 +100,20 @@ Label : PROJECT
               Label : CONST
                 9
               Label : USE
-                34
-                Label : ALIAS
+                33
+                Label : AS
                   37
                 Label : NAME
                   27
               Label : USE
-                34
-                Label : ALIAS
+                33
+                Label : AS
                   40
                 Label : NAME
                   38
               Label : USE
-                34
-                Label : ALIAS
+                33
+                Label : AS
                   41
                 Label : NAME
                   29

@@ -10,24 +10,24 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : USE
-            10
-            Label : ALIAS
-              8
+            8
+            Label : AS
+              9
             Label : NAME
               6
         Label : EXPRESSION
           5
           Label : USE
-            10
-            Label : ALIAS
+            8
+            Label : AS
               13
             Label : NAME
               11
         Label : EXPRESSION
           5
           Label : USE
-            10
-            Label : ALIAS
+            8
+            Label : AS
               17
             Label : NAME
               15
