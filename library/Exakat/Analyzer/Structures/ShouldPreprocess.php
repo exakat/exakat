@@ -32,12 +32,12 @@ class ShouldPreprocess extends Analyzer {
     }
     
     public function analyze() {
-        $dynamicAtoms = array('Variable', 
-                              'Array', 
-                              'Member', 
-                              'Magicconstant', 
-                              'Staticmethodcall', 
-                              'Staticproperty', 
+        $dynamicAtoms = array('Variable',
+                              'Array',
+                              'Member',
+                              'Magicconstant',
+                              'Staticmethodcall',
+                              'Staticproperty',
                               'Methodcall',
                               );
         //'Functioncall' : if they also have only constants.
@@ -47,13 +47,13 @@ class ShouldPreprocess extends Analyzer {
 
         // Operator only working on constants
         $tokenList = makeList( self::$FUNCTIONS_TOKENS );
-        $this->atomIs(array('Addition', 
-                            'Multiplication', 
-                            'Concatenation', 
-                            'Power', 
-                            'Bitshift', 
-                            'Logical', 
-                            'Not', 
+        $this->atomIs(array('Addition',
+                            'Multiplication',
+                            'Concatenation',
+                            'Power',
+                            'Bitshift',
+                            'Logical',
+                            'Not',
                             'Comparison',
                             ))
              ->hasNoInstruction('Constant')

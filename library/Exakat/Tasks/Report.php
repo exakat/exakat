@@ -98,7 +98,7 @@ class Report extends Tasks {
                 $filename = $reportClass::FILE_FILENAME;
             }
             display('Building report for project '.$this->config->project.' in "'.$filename.($report::FILE_EXTENSION ? '.'.$report::FILE_EXTENSION : '').'", with format '.$this->config->format."\n");
-            $report->generate("{$this->config->projects_root}/projects/{$this->config->project}", $filename);
+            $report->generate( "{$this->config->projects_root}/projects/{$this->config->project}", $filename);
         }
         display('Reported '.$report->getCount().' messages in '.$this->config->format);
 
