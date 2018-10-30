@@ -92,8 +92,16 @@ SQL;
         }
 
         // Extension installation
-        $list = $this->ext->getAnalyzers($theme);
-        $return = array_merge($return, ...array_values($list));
+        if (is_array($theme)) {
+            $list = array();
+            foreach($theme as $t) {
+                $list[] = $this->ext->getAnalyzers($t);
+            }
+            $return = array_merge($return, ...array_values(array_merge(...$list)));
+        } elseif (is_string($theme)) {
+            $list = $this->ext->getAnalyzers($theme);
+            $return = array_merge($return, ...array_values($list));
+        }
         
         return $return;
     }
