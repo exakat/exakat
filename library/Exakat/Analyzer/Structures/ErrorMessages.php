@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ErrorMessages extends Analyzer {
     public function dependsOn() {
-        return array('Exceptions/DefinedExceptions');
+        return array('Exceptions/DefinedExceptions',
+                    );
     }
     
     public function analyze() {

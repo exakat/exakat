@@ -32,6 +32,8 @@ class UnusedUse extends Analyzer {
     }
     
     public function analyze() {
+        // use a as b;
+        // new c; (No use of b)
         $this->atomIs('Usenamespace')
              ->outIs('USE')
              ->analyzerIsNot('Namespaces/UsedUse');

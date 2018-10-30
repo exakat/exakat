@@ -71,7 +71,7 @@ abstract class Reports {
             $this->sqlite = new \Sqlite3($path, \SQLITE3_OPEN_READONLY);
 
             $this->datastore = new Dump($this->config);
-            $this->themes    = new Themes("{$this->config->dir_root}/data/analyzers.sqlite", 
+            $this->themes    = new Themes("{$this->config->dir_root}/data/analyzers.sqlite",
                                           $this->config->ext);
 
             // Default analyzers

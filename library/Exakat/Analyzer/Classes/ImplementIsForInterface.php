@@ -28,33 +28,34 @@ use Exakat\Analyzer\Analyzer;
 class ImplementIsForInterface extends Analyzer {
     public function dependsOn() {
         return array('Classes/IsExtClass',
-                     'Composer/IsComposerClass');
+                     'Composer/IsComposerClass',
+                    );
     }
     
     public function analyze() {
         // class a with implements
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->hasClassDefinition()
              ->back('first');
         $this->prepareQuery();
 
         // class a implements a PHP class
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->analyzerIs('Classes/IsExtClass')
              ->back('first');
         $this->prepareQuery();
 
         // class a implements a PHP class
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->analyzerIs('Composer/IsComposerClass')
              ->back('first');
         $this->prepareQuery();
 
         // trait t with implements
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('IMPLEMENTS')
              ->hasTraitDefinition()
              ->back('first');
