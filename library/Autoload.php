@@ -110,7 +110,7 @@ class AutoloadExt {
         return $return;
     }
 
-    public function getAnalyzers($theme = 'All') {
+    public function getAnalyzers(string $theme = 'All') {
         $return = array();
 
         foreach($this->pharList as $name => $phar) {
