@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ErrorMessages extends Analyzer {
     public function dependsOn() {
         return array('Exceptions/DefinedExceptions',
+                     'Exceptions/IsPhpException',
                     );
     }
     
@@ -47,7 +48,7 @@ class ErrorMessages extends Analyzer {
              ->hasNoIn('THROW')
              ->outIs('NEW')
              ->atomIs('Newcall')
-             ->fullnspathIs('\\exception')
+             ->analyzerIs('Exceptions/IsPhpException')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);
         $this->prepareQuery();

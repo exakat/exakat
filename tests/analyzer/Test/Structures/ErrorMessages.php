@@ -10,8 +10,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class ErrorMessages extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testStructures_ErrorMessages01()  { $this->generic_test('Structures/ErrorMessages.01'); }
+    public function testStructures_ErrorMessages02()  { $this->generic_test('Structures/ErrorMessages.02'); }
 }
 ?>
