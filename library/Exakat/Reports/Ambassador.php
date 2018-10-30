@@ -2437,9 +2437,9 @@ SQL;
             } else{
                 $row = $results->fetchArray(\SQLITE3_ASSOC);
                 if ($row['nb'] === 0) {
-                    $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';
-                } else {
                     $incompilable[$shortVersion] = '<i class="fa fa-check-square-o" style="color: seagreen"></i>';
+                } else {
+                    $incompilable[$shortVersion] = '<i class="fa fa-warning" style="color: crimson"></i>';
                 }
             }
         }
@@ -3390,16 +3390,17 @@ SQL
             }
         }
 
-        $res = $this->sqlite->query('
-        SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
-         visibility, constant, value
-        FROM cit
-        JOIN constants 
-            ON constants.citId = cit.id
-        JOIN namespaces 
-            ON cit.namespaceId = namespaces.id
-         WHERE type="class"
-        ');
+        $res = $this->sqlite->query(<<<SQL
+SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+ visibility, constant, value
+FROM cit
+JOIN constants 
+    ON constants.citId = cit.id
+JOIN namespaces 
+    ON cit.namespaceId = namespaces.id
+WHERE type="class"
+SQL
+);
         $theClass = '';
         $ranking = array(''          => 1,
                          'public'    => 2,
@@ -3593,13 +3594,16 @@ SQL
 
         // List of extensions used
         $res = $this->sqlite->query(<<<SQL
-SELECT namespaces.namespace || '\\' || name AS name, name AS shortName, files.file, (end - begin) AS size 
-    FROM cit 
+SELECT namespaces.namespace || '\\' || name || '::' || method AS name, method AS shortName, files.file, (methods.end - methods.begin) AS size 
+    FROM methods 
+    JOIN cit
+        on methods.citId = cit.id AND
+           cit.type = 'class'
     JOIN files 
         ON files.id = cit.file
     JOIN namespaces 
         ON namespaces.id = cit.namespaceId
-    ORDER BY (end - begin) DESC
+    ORDER BY (methods.end - methods.begin) DESC
 SQL
         );
         $html = '';
@@ -3761,9 +3765,9 @@ JAVASCRIPT;
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Class, Interface and Trait size');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Methods size');
 
-        $this->putBasedPage('cit_size', $finalHTML);
+        $this->putBasedPage('method_size', $finalHTML);
     }
     
     private function generateStats() {
