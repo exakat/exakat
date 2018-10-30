@@ -533,6 +533,7 @@ GREMLIN;
     }
 
     private function makeClassConstantDefinition() {
+        display('Creating link between Class constant and definition');
         // Create link between Class constant and definition
         $query = new Query(0, $this->config->project, 'fixFullnspathConstants', null, $this->datastore);
         $query->atomIs('Staticconstant')
@@ -544,6 +545,7 @@ GREMLIN;
               ->atomIs(array('Identifier', 'Nsname', 'Self', 'Static', 'Parent'))
               ->savePropertyAs('fullnspath', 'classe')
               ->inIs('DEFINITION')
+              ->atomIs(array('Class', 'Classanonymous', 'Interface'))
               ->goToAllParents(Analyzer::INCLUDE_SELF)
               ->outIs('CONST')
               ->atomIs('Const')
