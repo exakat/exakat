@@ -1,4 +1,4 @@
-Version 1.5.1 (Eighteen Arhats, coming up)
+Version 1.5.2 (Master Puti, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,17 @@ Version 1.5.1 (Eighteen Arhats, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.5.1 (Eighteen Arhats, 2018-10-29)
++ Analyzer
+    + New analyzer : could use basename() second args
+    + Upgraded analysis : Variables strange names do not report ...
+    + Checked unit tests : 3061 / 3079 test pass (99% pass)
++ Tokenizer
+    + Moved TRAILING as a property
+    + Moved NULLABLE as a property
+    + Sync ALIAS with AS
+    + Fixed link between Use expression when using an alias
 
 Version 1.5.0 (Pilanpo Bodhisattva, 2018-10-22)
 + Architecture
