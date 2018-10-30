@@ -869,6 +869,7 @@ GREMLIN;
         // fix path for constants with Const
         $query = <<<GREMLIN
 g.V().hasLabel("Not").not(has("intval"))
+     .has("token", within("T_BANG", "T_TILDE"))
      .where( __.out("NOT").has("intval"))
      .where( __.out("NOT").sideEffect{ x = it.get(); }.count())
      .sideEffect{ 
