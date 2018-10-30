@@ -3751,6 +3751,8 @@ class Load extends Tasks {
                 $this->pushExpression($namespace);
                 $this->processAs();
                 $as = $this->popExpression();
+                $as->fullnspath  = '\\'.mb_strtolower($namespace->fullcode);
+                $fullcode[] = $as->fullcode;
 
                 if (isset($this->uses['class'][$prefix])) {
                     $this->addLink($as, $this->uses['class'][$prefix], 'DEFINITION');
