@@ -805,9 +805,7 @@ class Load extends Tasks {
 
         while ($this->tokens[$this->id + 1][0] !== $finalToken) {
             $currentVariable = $this->id + 1;
-            if (in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CURLY_OPEN,
-                                                                $this->phptokens::T_DOLLAR_OPEN_CURLY_BRACES,
-                                                                ))) {
+            if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_CURLY_OPEN) {
                 $open = $this->id + 1;
                 ++$this->id; // Skip {
                 while (!in_array($this->tokens[$this->id + 1][0], array($this->phptokens::T_CLOSE_CURLY))) {
@@ -820,6 +818,16 @@ class Load extends Tasks {
                 $part->enclosing = self::ENCLOSING;
                 $part->fullcode  = $this->tokens[$open][1].$part->fullcode.'}';
                 $part->token     = $this->getToken($this->tokens[$currentVariable][0]);
+
+                $this->pushExpression($part);
+
+                $elements[] = $part;
+            } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_DOLLAR_OPEN_CURLY_BRACES) {
+                $part = $this->processDollarCurly();
+
+                $part->enclosing = self::ENCLOSING;
+                $part->token     = $this->getToken($this->tokens[$currentVariable][0]);
+                print_r($part);
 
                 $this->pushExpression($part);
 
@@ -916,17 +924,17 @@ class Load extends Tasks {
         ++$this->id; // Skip }
 
         $name = $this->popExpression();
-        $this->addLink($variable, $name, 'NAME');
-
-        $name->code      = $this->tokens[$current][1];
-        $name->fullcode  = '${'.$name->fullcode.'}';
-        $name->line      = $this->tokens[$current][2];
-        $name->token     = $this->getToken($this->tokens[$current][0]);
-        $name->enclosing = self::ENCLOSING;
+        $variable->code      = $this->tokens[$current][1];
+        $variable->fullcode  = '${'.$name->fullcode.'}';
+        $variable->line      = $this->tokens[$current][2];
+        $variable->token     = $this->getToken($this->tokens[$current][0]);
+        $variable->enclosing = self::ENCLOSING;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === $this->phptokens::T_CLOSE_TAG) {
             $this->processSemicolon();
         }
+
+        $this->addLink($variable, $name, 'NAME');
 
         return $variable;
     }
