@@ -327,7 +327,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `Zurmo <http://zurmo.org/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
 * `Dolphin <https://www.boonex.com/>`_
-* EduSoho
+* `Edusoho <https://www.edusoho.com/en>`_
 * `HuMo-Gen <http://humogen.com/>`_
 * `XOOPS <https://xoops.org/>`_
 * `Woocommerce <https://woocommerce.com/>`_
@@ -340,9 +340,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `opencfp <https://github.com/opencfp/opencfp>`_
 * `PrestaShop <https://prestashop.com/>`_
 * `PhpIPAM <https://phpipam.net/download/>`_
-* tikiwiki
 * SuiteCRM
-* `Edusoho <https://www.edusoho.com/en>`_
 * `SuiteCrm <https://suitecrm.com/>`_
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 
@@ -397,6 +395,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.5.1
+
+  * Use Basename Suffix (Structures/BasenameSuffix)
+
 * 1.5.0
 
   * Could Use Try (Exceptions/CouldUseTry)
@@ -408,7 +410,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Don't Read And Write In One Expression (Structures/DontReadAndWriteInOneExpression ; Analyze, CompatibilityPHP73)
   * Invalid Pack Format (Structures/InvalidPackFormat ; Analyze)
-  * Name Regex (Structures/NamedRegex ; Suggestions)
+  * Named Regex (Structures/NamedRegex ; Suggestions)
   * No Reference For Static Property (Php/NoReferenceForStaticProperty ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72)
   * No Return For Generator (Php/NoReturnForGenerator ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Repeated Interface (Interfaces/RepeatedInterface ; Analyze)
@@ -2236,6 +2238,7 @@ List of external links mentionned in this documentation.
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes <http://php.net/manual/en/migration71.incompatible.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
+* `basename <http://www.php.net/basename>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
 * `BC Math Functions <http://www.php.net/bcmath>`_
 * `Benoit Burnichon <https://twitter.com/BenoitBurnichon>`_
@@ -2368,8 +2371,8 @@ List of external links mentionned in this documentation.
 * `file_get_contents <http://php.net/file_get_contents>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Flag Argument <https://martinfowler.com/bliki/FlagArgument.html>`_
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
@@ -2610,8 +2613,8 @@ List of external links mentionned in this documentation.
 * `SQLite3::escapeString <http://php.net/manual/en/sqlite3.escapestring.php>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
-* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
+* `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Strings <http://php.net/manual/en/language.types.string.php>`_
 * `strtr <http://www.php.net/strtr>`_
@@ -2641,8 +2644,8 @@ List of external links mentionned in this documentation.
 * `Type array <http://php.net/manual/en/language.types.array.php>`_
 * `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
-* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
+* `Type Juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Type Operators <http://php.net/manual/en/language.operators.type.php#language.operators.type>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode block <https://en.wikipedia.org/wiki/Unicode_block>`_
@@ -3954,6 +3957,7 @@ Suggestions
 |   analyzer[] = "Php/ShouldUseArrayFilter";
 |   analyzer[] = "Php/ShouldUseCoalesce";
 |   analyzer[] = "Php/UseSessionStartOptions";
+|   analyzer[] = "Structures/BasenameSuffix";
 |   analyzer[] = "Structures/BooleanStrictComparison";
 |   analyzer[] = "Structures/CouldUseArrayFillKeys";
 |   analyzer[] = "Structures/CouldUseArrayUnique";

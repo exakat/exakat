@@ -521,33 +521,33 @@ It takes a while to find the double 'required' case, but the executed code is ac
 .. code-block:: php
 
     switch ($col) {
-        				case 'custom_module':
-        					$installdefs['custom_fields'][$name]['module'] = $res;
-        					break;
-        				case 'required':
-        					$installdefs['custom_fields'][$name]['require_option'] = $res;
-        					break;
-        				case 'vname':
-        					$installdefs['custom_fields'][$name]['label'] = $res;
-        					break;
-        				case 'required':
-        					$installdefs['custom_fields'][$name]['require_option'] = $res;
-        					break;
-        				case 'massupdate':
-        					$installdefs['custom_fields'][$name]['mass_update'] = $res;
-        					break;
-        				case 'comments':
-        					$installdefs['custom_fields'][$name]['comments'] = $res;
-        					break;
-        				case 'help':
-        					$installdefs['custom_fields'][$name]['help'] = $res;
-        					break;
-        				case 'len':
-        					$installdefs['custom_fields'][$name]['max_size'] = $res;
-        					break;
-        				default:
-        					$installdefs['custom_fields'][$name][$col] = $res;
-        			}//switch
+        case 'custom_module':
+        	$installdefs['custom_fields'][$name]['module'] = $res;
+        	break;
+        case 'required':
+        	$installdefs['custom_fields'][$name]['require_option'] = $res;
+        	break;
+        case 'vname':
+        	$installdefs['custom_fields'][$name]['label'] = $res;
+        	break;
+        case 'required':
+        	$installdefs['custom_fields'][$name]['require_option'] = $res;
+        	break;
+        case 'massupdate':
+        	$installdefs['custom_fields'][$name]['mass_update'] = $res;
+        	break;
+        case 'comments':
+        	$installdefs['custom_fields'][$name]['comments'] = $res;
+        	break;
+        case 'help':
+        	$installdefs['custom_fields'][$name]['help'] = $res;
+        	break;
+        case 'len':
+        	$installdefs['custom_fields'][$name]['max_size'] = $res;
+        	break;
+        default:
+        	$installdefs['custom_fields'][$name][$col] = $res;
+    }//switch
 
 
 --------
@@ -1119,7 +1119,7 @@ Repeated print()
 
 .. _edusoho-structures-repeatedprint:
 
-EduSoho
+Edusoho
 ^^^^^^^
 
 :ref:`repeated-print()`, in app/check.php:71. 
@@ -2360,7 +2360,7 @@ No Empty Regex
 
 .. _tikiwiki-structures-noemptyregex:
 
-tikiwiki
+Tikiwiki
 ^^^^^^^^
 
 :ref:`no-empty-regex`, in lib/sheet/excel/writer/worksheet.php:1925. 
@@ -2445,6 +2445,39 @@ This is sneaky bug : the assignation $status = 0 returns a value, and not a vari
 .. code-block:: php
 
     pcntl_waitpid($this->pid, $status = 0)
+
+Mixed Concat And Interpolation
+==============================
+
+.. _suitecrm-structures-mixedconcatinterpolation:
+
+SuiteCRM
+^^^^^^^^
+
+:ref:`mixed-concat-and-interpolation`, in modules/AOW_Actions/actions/actionSendEmail.php:89. 
+
+How long did it take to spot the hidden $checked variable in this long concatenation ? Using a consistent method of interpolation would help readability here.
+
+.. code-block:: php
+
+    "<input type='checkbox' id='aow_actions_param[" . $line . "][individual_email]' name='aow_actions_param[" . $line . "][individual_email]' value='1' $checked></td>"
+
+
+--------
+
+
+.. _edusoho-structures-mixedconcatinterpolation:
+
+Edusoho
+^^^^^^^
+
+:ref:`mixed-concat-and-interpolation`, in src/AppBundle/Controller/Admin/SiteSettingController.php:168. 
+
+Calling a method from a property of an object is possible inside a string, though it is rare. Setting the method outside the string make it more readable.
+
+.. code-block:: php
+
+    "{$this->container->getParameter('topxia.upload.public_url_path')}/" . $parsed['path']
 
 Assign With And
 ===============
@@ -3669,6 +3702,39 @@ unserialize() only extract a non-empty value here. But its content is not checke
 .. code-block:: php
 
     $this->Customs = (!empty($_row["customs"])) ? @unserialize($_row["customs"]) : array();
+
+Isset Multiple Arguments
+========================
+
+.. _thinkphp-php-issetmultipleargs:
+
+ThinkPHP
+^^^^^^^^
+
+:ref:`isset-multiple-arguments`, in library/think/Request.php:1187. 
+
+This may be shortened with isset($sub), $array[$name][$sub])
+
+.. code-block:: php
+
+    isset($sub) && isset($array[$name][$sub])
+
+
+--------
+
+
+.. _livezilla-php-issetmultipleargs:
+
+LiveZilla
+^^^^^^^^^
+
+:ref:`isset-multiple-arguments`, in livezilla/_lib/trdp/pchart/class/pDraw.class.php:3852. 
+
+This is the equivalent of !(isset($Data["Series"][$SerieA]["Data"]) && isset($Data["Series"][$SerieB]["Data"])), and then, !(isset($Data["Series"][$SerieA]["Data"], $Data["Series"][$SerieB]["Data"]))
+
+.. code-block:: php
+
+    !isset($Data["Series"][$SerieA]["Data"]) || !isset($Data["Series"][$SerieB]["Data"])
 
 Use List With Foreach
 =====================

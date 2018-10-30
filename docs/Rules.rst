@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 22 Oct 2018 17:33:48 +0000
-.. comment: Generation hash : 30798f8b10d26f92f157392c725cf02c48974847
+.. comment: Generation date : Mon, 29 Oct 2018 17:56:43 +0000
+.. comment: Generation hash : 314989534f4d7fc4840b26a04f39ea8ce7c47f00
 
 
 .. _$http\_raw\_post\_data:
@@ -1738,6 +1738,14 @@ To prepare code, avoid using `'is_real() <http://www.php.net/is_real>`_ and the 
 
 
 See also `PHP RFC: Deprecations for PHP 7.4 <https://wiki.php.net/rfc/deprecations_php_7_4>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Replace is_real() by is_float()
+* Replace (real) by (float)
 
 +-------------+--------------------+
 | Short name  | Php/AvoidReal      |
@@ -6197,11 +6205,15 @@ Suggestions
 
 * Split the expression in two separate expressions
 
-+------------+--------------------------------------------+
-| Short name | Structures/DontReadAndWriteInOneExpression |
-+------------+--------------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`CompatibilityPHP73`  |
-+------------+--------------------------------------------+
++-------------+--------------------------------------------+
+| Short name  | Structures/DontReadAndWriteInOneExpression |
++-------------+--------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`CompatibilityPHP73`  |
++-------------+--------------------------------------------+
+| Severity    | Critical                                   |
++-------------+--------------------------------------------+
+| Time To Fix | Quick (30 mins)                            |
++-------------+--------------------------------------------+
 
 
 
@@ -10063,11 +10075,15 @@ Check `'pack() <http://www.php.net/pack>`_ documentation for format specifiers t
 See also `pack <http://php.net/pack>`_ and 
          `unpack <http://php.net/pack>`_.
 
-+------------+------------------------------+
-| Short name | Structures/InvalidPackFormat |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++-------------+------------------------------+
+| Short name  | Structures/InvalidPackFormat |
++-------------+------------------------------+
+| Themes      | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Major                        |
++-------------+------------------------------+
+| Time To Fix | Quick (30 mins)              |
++-------------+------------------------------+
 
 
 
@@ -10270,11 +10286,17 @@ Isset Multiple Arguments
 
 See also `isset <http://www.php.net/`'isset <http://www.php.net/isset>`_>`_.
 
-+------------+-----------------------+
-| Short name | Php/IssetMultipleArgs |
-+------------+-----------------------+
-| Themes     | :ref:`Suggestions`    |
-+------------+-----------------------+
++-------------+-------------------------------------------------------------------------------+
+| Short name  | Php/IssetMultipleArgs                                                         |
++-------------+-------------------------------------------------------------------------------+
+| Themes      | :ref:`Suggestions`                                                            |
++-------------+-------------------------------------------------------------------------------+
+| Severity    | Minor                                                                         |
++-------------+-------------------------------------------------------------------------------+
+| Time To Fix | Instant (5 mins)                                                              |
++-------------+-------------------------------------------------------------------------------+
+| Examples    | :ref:`thinkphp-php-issetmultipleargs`, :ref:`livezilla-php-issetmultipleargs` |
++-------------+-------------------------------------------------------------------------------+
 
 
 
@@ -11730,15 +11752,17 @@ Fixing this issue has no impact on the output. It makes code less error prone.
 
 There are some situations where using concatenation are compulsory : when using a constant, calling a function, running a complex expression or make use of the escape sequence. You may also consider pushing the storing of such expression in a local variable.
 
-+-------------+----------------------------------------------------------------+
-| Short name  | Structures/MixedConcatInterpolation                            |
-+-------------+----------------------------------------------------------------+
-| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
-+-------------+----------------------------------------------------------------+
-| Severity    | Minor                                                          |
-+-------------+----------------------------------------------------------------+
-| Time To Fix | Quick (30 mins)                                                |
-+-------------+----------------------------------------------------------------+
++-------------+---------------------------------------------------------------------------------------------------------+
+| Short name  | Structures/MixedConcatInterpolation                                                                     |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze`                                          |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                                   |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                         |
++-------------+---------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`suitecrm-structures-mixedconcatinterpolation`, :ref:`edusoho-structures-mixedconcatinterpolation` |
++-------------+---------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12491,15 +12515,15 @@ Methods that may not return, but are often expected to : `'__call() <http://php.
 
 
 
-.. _name-regex:
+.. _named-regex:
 
-Name Regex
-##########
+Named Regex
+###########
 
 
 Captured subpatterns may be named, for easier reference. 
 
-From the manual : It is possible to name a subpattern using the syntax ``(?P<name>pattern)``. This subpattern will then be indexed in the matches array by its normal numeric position and also by name. PHP 5.2.2 introduced two alternative syntaxes `(?<name>pattern)` and `(?'name'pattern)`.
+From the manual : It is possible to name a subpattern using the syntax ``(?P<name>pattern)``. This subpattern will then be indexed in the matches array by its normal numeric position and also by name. PHP 5.2.2 introduced two alternative syntaxes ``(?<name>pattern)`` and ``(?'name'pattern)``.
 
 Naming subpatterns makes it easier to know what is read from the results of the subpattern : for example, ``$r['name']`` has more meaning than ``$r[1]``. 
 
@@ -14242,6 +14266,10 @@ See also `PHP 7.3 UPGRADE NOTES <https://github.com/php/php-src/blob/3b6e1ee4ee0
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.3 and older                                                                                                                                                                      |
 +-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Severity    | Major                                                                                                                                                                                       |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Slow (1 hour)                                                                                                                                                                               |
++-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -14362,6 +14390,10 @@ See also `Generators overview <http://php.net/manual/en/language.generators.over
 | Themes      | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Php Version | With PHP 7.0 and more recent                                                                               |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Severity    | Critical                                                                                                   |
++-------------+------------------------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                                            |
 +-------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -17926,11 +17958,15 @@ PHP accepts multiple times the same interface in the ``implements`` clause. In f
 See also `Object Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_ and 
          `The Basics <http://php.net/manual/en/language.oop5.basic.php>`_.
 
-+------------+------------------------------+
-| Short name | Interfaces/RepeatedInterface |
-+------------+------------------------------+
-| Themes     | :ref:`Analyze`               |
-+------------+------------------------------+
++-------------+------------------------------+
+| Short name  | Interfaces/RepeatedInterface |
++-------------+------------------------------+
+| Themes      | :ref:`Analyze`               |
++-------------+------------------------------+
+| Severity    | Minor                        |
++-------------+------------------------------+
+| Time To Fix | Instant (5 mins)             |
++-------------+------------------------------+
 
 
 
@@ -18576,15 +18612,15 @@ setcookie ( string $name [, string $value =  [, int $expire = 0 [, string $path 
 
 The ``$expire`` argument sets the date of expiration of the cookie. It is recommended to make it as low as possible, to reduce its chances to be captured. Sometimes, low expiration date may be several days (for preferences), and other times, low expiration date means a few minutes. 
 
-The ``$path`` argument limits the transmission of the cookie to URL whose path matches the one mentioned here. By default, it is '/', which means the whole server. If a cookie usage is limited to a part of the application, use it here.
+The ``$path`` argument limits the transmission of the cookie to URL whose path matches the one mentioned here. By default, it is ``'/'``, which means the whole server. If a cookie usage is limited to a part of the application, use it here.
 
-The ``$domain`` argument limits the transmission of the cookie to URL whose domain matches the one mentioned here. By default, it is '', which means any server on the internet. At worse, you may use ``mydomain.com`` to cover your whole domain, or better, refine it with the actual subdomain of usage.
+The ``$domain`` argument limits the transmission of the cookie to URL whose domain matches the one mentioned here. By default, it is ``''``, which means any server on the internet. At worse, you may use ``mydomain.com`` to cover your whole domain, or better, refine it with the actual subdomain of usage.
 
 The ``$secure`` argument limits the transmission of the cookie over HTTP (by default) or HTTPS. The second is better, as the transmission of the cookie is crypted. In case HTTPS is still at the planned stage, use '$_SERVER[HTTPS]'. This environnement variable is false on HTTP, and true on HTTPS.
 
 The ``$httponly`` argument limits the access of the cookie to JavaScript. It is only transmitted to the browser, and retransmitted. This helps reducing XSS and CSRF attacks, though it is disputed. 
 
-The ``$samesite`` argument limits the sending of the cookie to the domain that initiated the request. It is by default ``Lax`` but should be upgraded to `Strict` whenever possible. This feature is available as PHP 7.3. 
+The ``$samesite`` argument limits the sending of the cookie to the domain that initiated the request. It is by default ``Lax`` but should be upgraded to ``Strict`` whenever possible. This feature is available as PHP 7.3. 
 
 .. code-block:: php
 
@@ -22241,11 +22277,15 @@ Suggestions
 * Match the property call with the definition
 * Make the property static
 
-+------------+------------------------------------+
-| Short name | Classes/UndeclaredStaticProperty   |
-+------------+------------------------------------+
-| Themes     | :ref:`Analyze`, :ref:`ClassReview` |
-+------------+------------------------------------+
++-------------+------------------------------------+
+| Short name  | Classes/UndeclaredStaticProperty   |
++-------------+------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
++-------------+------------------------------------+
+| Severity    | Critical                           |
++-------------+------------------------------------+
+| Time To Fix | Quick (30 mins)                    |
++-------------+------------------------------------+
 
 
 
@@ -24627,6 +24667,41 @@ It is faster to use === null instead of `'is_null() <http://www.php.net/is_null>
 
 
 
+.. _use-basename-suffix:
+
+Use Basename Suffix
+###################
+
+
+`'basename() <http://www.php.net/basename>`_ will remove extension when it is provided. The second argument will be removed from the name of the file.
+
+.. code-block:: php
+
+   <?php
+   
+   $path = 'phar:///path/to/file.php';
+   
+   // Don't forget the . 
+   $filename = basename($path, '.php');
+   
+   // Too much work for this
+   $filename = substr(basename($path), 0, -4);
+   
+   ?>
+
+
+Using `'basename() <http://www.php.net/basename>`_ instead of substr() or else, makes the intention clear.
+
+See also `basename <http://www.php.net/basename>`_.
+
++------------+---------------------------+
+| Short name | Structures/BasenameSuffix |
++------------+---------------------------+
+| Themes     | :ref:`Suggestions`        |
++------------+---------------------------+
+
+
+
 .. _use-class-operator:
 
 Use Class Operator
@@ -26929,6 +27004,14 @@ The test on a variable is not enough. The variable is simply checked for null, t
 
 See also `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_.
 
+
+Suggestions
+^^^^^^^^^^^
+
+* Use instanceof when checking for objects
+* Use is_array() when checking for arrays. Also consider is_string(), is_int(), etc.
+* Use typehint when the variable is an argument
+
 +-------------+----------------------------------+
 | Short name  | Classes/WeakType                 |
 +-------------+----------------------------------+
@@ -28496,11 +28579,15 @@ Thanks to `Frederic Bouchery <https://twitter.com/FredBouchery/>`_ for reporting
 
 See also `Data filtering <http://php.net/manual/en/book.filter.php>`_.
 
-+------------+----------------------------+
-| Short name | Security/FilterInputSource |
-+------------+----------------------------+
-| Themes     | :ref:`Security`            |
-+------------+----------------------------+
++-------------+----------------------------+
+| Short name  | Security/FilterInputSource |
++-------------+----------------------------+
+| Themes      | :ref:`Security`            |
++-------------+----------------------------+
+| Severity    | Minor                      |
++-------------+----------------------------+
+| Time To Fix | Slow (1 hour)              |
++-------------+----------------------------+
 
 
 

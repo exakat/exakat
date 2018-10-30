@@ -151,6 +151,7 @@ Glossary
 
     + `basename()`
 
+      + :ref:`Use Basename Suffix <use-basename-suffix>`
       + :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 
     + `break`

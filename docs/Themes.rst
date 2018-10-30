@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 22 Oct 2018 17:33:48 +0000
-.. comment: Generation hash : 30798f8b10d26f92f157392c725cf02c48974847
+.. comment: Generation date : Mon, 29 Oct 2018 17:56:43 +0000
+.. comment: Generation hash : 314989534f4d7fc4840b26a04f39ea8ce7c47f00
 
 
 .. _analyze:
@@ -1129,7 +1129,7 @@ Total : 25 analysis
 Suggestions
 +++++++++++
 
-Total : 64 analysis
+Total : 65 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`Add Default Value <add-default-value>`
@@ -1147,7 +1147,7 @@ Total : 64 analysis
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Find Key Directly <find-key-directly>`
 * :ref:`Isset Multiple Arguments <isset-multiple-arguments>`
-* :ref:`Name Regex <name-regex>`
+* :ref:`Named Regex <named-regex>`
 * :ref:`One If Is Sufficient <one-if-is-sufficient>`
 * :ref:`Possible Increment <possible-increment>`
 * :ref:`Preprocess Arrays <preprocess-arrays>`
@@ -1159,6 +1159,7 @@ Total : 64 analysis
 * :ref:`Should Use array_filter() <should-use-array\_filter()>`
 * :ref:`Too Many Children <too-many-children>`
 * :ref:`Too Many Parameters <too-many-parameters>`
+* :ref:`Use Basename Suffix <use-basename-suffix>`
 * :ref:`Use Count Recursive <use-count-recursive>`
 * :ref:`Use List With Foreach <use-list-with-foreach>`
 * :ref:`Use is_countable <use-is\_countable>`
