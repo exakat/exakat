@@ -2831,7 +2831,6 @@ HTML;
     }
 
     private function generateInterfaceTree() {
-        $theTable = '';
         $list = array();
 
  $res = $this->sqlite->query(<<<SQL
@@ -2860,20 +2859,28 @@ SQL
             
             $list[$parent][] = $row['name'];
         }
-        foreach($list as &$l) {
-            sort($l);
-        }
-        
-        if (empty($list)) {
-            $list = array(array());
-        }
-        $secondaries = array_merge(...array_values($list));
-        $top = array_diff(array_keys($list), $secondaries);
-        
-        foreach($top as $t) {
-            $theTable .= '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
-        }
 
+        if (empty($list)) {
+            $theTable = 'No interface were found in this repository.';
+        } else {
+            foreach($list as &$l) {
+                sort($l);
+            }
+    
+            
+            if (empty($list)) {
+                $list = array(array());
+            }
+            $secondaries = array_merge(...array_values($list));
+            $top = array_diff(array_keys($list), $secondaries);
+            
+            $theTable = array();
+            foreach($top as $t) {
+                $theTable[] = '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+            }
+            $theTable = implode(PHP_EOL, $theTable);
+        }
+        
         $html = $this->getBasedPage('empty');
         $html = $this->injectBloc($html, 'TITLE', 'Interfaces inventory');
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the interface : an interface is extended by another interface. Interface without extension are not represented here');
@@ -2883,7 +2890,6 @@ SQL
     }
 
     private function generateTraitTree() {
-        $theTable = '';
         $list = array();
 
  $res = $this->sqlite->query(<<<SQL
@@ -2915,20 +2921,27 @@ SQL
             
             $list[$parent][] = $row['name'];
         }
-        foreach($list as &$l) {
-            sort($l);
-        }
-        
-        if (empty($list)) {
-            $list = array(array());
-        }
-        $secondaries = array_merge(...array_values($list));
-        $top = array_diff(array_keys($list), $secondaries);
-        
-        foreach($top as $t) {
-            $theTable .= '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
-        }
 
+        if (empty($list)) {
+            $theTable = 'No trait were found in this repository.';
+        } else {
+            foreach($list as &$l) {
+                sort($l);
+            }
+            
+            if (empty($list)) {
+                $list = array(array());
+            }
+            $secondaries = array_merge(...array_values($list));
+            $top = array_diff(array_keys($list), $secondaries);
+            
+            $theTable = array();
+            foreach($top as $t) {
+                $theTable[] = '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+            }
+            $theTable = implode(PHP_EOL, $theTable);
+        }
+        
         $html = $this->getBasedPage('empty');
         $html = $this->injectBloc($html, 'TITLE', 'Traits inventory');
         $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the extension trees of the traits : a trait is extended when it uses another trait. Traits without any extension are not represented. The same trait may be mentionned several times, as trait may use an arbitrary number of traits.');
@@ -2938,7 +2951,6 @@ SQL
     }
 
     private function generateClassTree() {
-        $theTable = '';
         $list = array();
 
         $res = $this->sqlite->query(<<<SQL
@@ -2966,18 +2978,25 @@ SQL
             
             $list[$parent][] = $row['name'];
         }
-        foreach($list as &$l) {
-            sort($l);
-        }
-        
+
         if (empty($list)) {
-            $list = array(array());
-        }
-        $secondaries = array_merge(...array_values($list));
-        $top = array_diff(array_keys($list), $secondaries);
-        
-        foreach($top as $t) {
-            $theTable .= '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+            $theTable = 'No class were found in this repository.';
+        } else {
+            foreach($list as &$l) {
+                sort($l);
+            }
+            
+            if (empty($list)) {
+                $list = array(array());
+            }
+            $secondaries = array_merge(...array_values($list));
+            $top = array_diff(array_keys($list), $secondaries);
+            
+            $theTable = array();
+            foreach($top as $t) {
+                $theTable[] = '<ul class="tree">'.$this->extends2ul($t, $list).'</ul>';
+            }
+            $theTable = implode(PHP_EOL, $theTable);
         }
 
         $html = $this->getBasedPage('empty');
