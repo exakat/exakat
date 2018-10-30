@@ -177,6 +177,10 @@ SQL;
             $end = microtime(true);
             $this->log->log( 'Collected Functions: '.number_format(1000 * ($end - $begin), 2)."ms\n");
             $begin = $end;
+            $this->collectConstants();
+            $end = microtime(true);
+            $this->log->log( 'Collected Constants: '.number_format(1000 * ($end - $begin), 2)."ms\n");
+            $begin = $end;
             $this->collectVariables();
             $end = microtime(true);
             $this->log->log( 'Collected Variables: '.number_format(1000 * ($end - $begin), 2)."ms\n");
@@ -802,16 +806,19 @@ GREMLIN;
 
         // Methods
         $this->sqlite->query('DROP TABLE IF EXISTS methods');
-        $this->sqlite->query('CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                method INTEGER,
-                                                citId INTEGER,
-                                                static INTEGER,
-                                                final INTEGER,
-                                                abstract INTEGER,
-                                                visibility STRING,
-                                                begin INTEGER,
-                                                end INTEGER
-                                                 )');
+        $this->sqlite->query(<<<SQL
+CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        method INTEGER,
+                        citId INTEGER,
+                        static INTEGER,
+                        final INTEGER,
+                        abstract INTEGER,
+                        visibility STRING,
+                        begin INTEGER,
+                        end INTEGER
+                     )
+SQL
+);
 
         
         $query = <<<GREMLIN
@@ -946,17 +953,20 @@ GREMLIN;
         
         display("$total properties\n");
 
-        // Constants
+        // Class Constant
         $this->sqlite->query('DROP TABLE IF EXISTS constants');
-        $this->sqlite->query('CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                constant INTEGER,
-                                                citId INTEGER,
-                                                visibility STRING,
-                                                value TEXT
-                                                 )');
+        $this->sqlite->query(<<<SQL
+CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                          constant INTEGER,
+                          citId INTEGER,
+                          visibility STRING,
+                          value TEXT
+                       )
+SQL
+);
 
         $query = <<<GREMLIN
-g.V().hasLabel("Class")
+g.V().hasLabel("Class", "Classanonymous", "Trait")
      .out('CONST')
 .sideEffect{ 
     x_public = it.get().values("visibility") == 'public';
@@ -1062,6 +1072,73 @@ GREMLIN;
         display("$total PHP {$type}s\n");
     }
     
+    private function collectConstants() {
+        $query = <<<GREMLIN
+g.V().hasLabel("Defineconstant")
+     .where( __.out("ARGUMENT").has("rank", 0).has("constant", true).sideEffect{ name = it.get().value("fullcode"); } )
+     .where( __.out("ARGUMENT").has("rank", 1).has("constant", true).sideEffect{ v = it.get().value("fullcode"); } )
+     .filter{ v != null;}
+     .filter{ name != null;}
+.map{ 
+    x = ['name': name,
+         'value': v
+         ];
+}
+
+GREMLIN;
+        $res = $this->gremlin
+                    ->query($query)
+                    ->toArray();
+        
+        $total = 0;
+        $query = array();
+        foreach($res as $row) {
+            print_r($row);
+            $query[] = "(null, '".$this->sqlite->escapeString(trim($row['name'], "'\""))."', 0, 0, ".$this->sqlite->escapeString($row['value']).")";
+
+            ++$total;
+        }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES '.implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Const")
+     .not(where(__.in("CONST")))
+     .out("CONST")
+     .hasLabel("Constant")
+     .where( __.out("NAME").sideEffect{ name = it.get().value("fullcode"); } )
+     .where( __.out("VALUE").sideEffect{ v = it.get().value("fullcode"); } )
+.map{ 
+    x = ['name': name,
+         'value': v
+         ];
+}
+
+GREMLIN;
+        $res = $this->gremlin
+                    ->query($query)
+                    ->toArray();
+        
+        $total = 0;
+        $query = array();
+        foreach($res as $row) {
+            print_r($row);
+            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', 0, 0, ".$this->sqlite->escapeString($row['value']).")";
+
+            ++$total;
+        }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES '.implode(', ', $query);
+            $this->sqlite->query($query);
+        }
+
+        display("$total constants\n");
+    }
+
     private function collectFunctions() {
         $MAX_LOOPING = Analyzer::MAX_LOOPING;
 
