@@ -1093,8 +1093,7 @@ GREMLIN;
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            print_r($row);
-            $query[] = "(null, '".$this->sqlite->escapeString(trim($row['name'], "'\""))."', 0, 0, ".$this->sqlite->escapeString($row['value']).")";
+            $query[] = "(null, '".$this->sqlite->escapeString(trim($row['name'], "'\""))."', 0, 0, '".$this->sqlite->escapeString($row['value'])."')";
 
             ++$total;
         }
