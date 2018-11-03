@@ -2285,10 +2285,19 @@ class Load extends Tasks {
             $functioncall->aliased    = self::NOT_ALIASED;
 
             $this->processDefineAsConstants($functioncall);
-        } elseif ($atom === 'Methodcallname') {
+        } elseif ($atom === 'Methodcallname' || $atom === 'List') {
             // literally, nothing
-        } elseif ($getFullnspath === self::WITH_FULLNSPATH ||
-                  $name->fullnspath !== '\\list') {
+        } elseif (in_array(mb_strtolower($name->code), array('defined', 'constant'))) {
+            $fullnspath = makeFullNsPath($argumentsList[0]->noDelimiter, true);
+            if ($argumentsList[0]->noDelimiter[0] === '\\') {
+                $fullnspath = "\\$fullnspath";
+            }
+            $argumentsList[0]->fullnspath = $fullnspath;
+            $this->calls->addCall('const', $fullnspath, $argumentsList[0]);
+
+            $name->fullnspath = '\\'.mb_strtolower($name->code);
+            $name->aliased    = self::NOT_ALIASED;
+        } elseif ($getFullnspath === self::WITH_FULLNSPATH) { // A functioncall
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
             $functioncall->fullnspath = $fullnspath;
             $functioncall->aliased    = $aliased;

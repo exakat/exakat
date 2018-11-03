@@ -319,7 +319,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Const")
-     .not( where( __.in("CONST") ) ) 
+     .not( where( __.in("CONST") ) )  // Not a class or an interface
      .out("CONST")
      .out("NAME")
      .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$").getCount() == 1 }
@@ -334,14 +334,17 @@ GREMLIN;
 
         if (empty($constants)) {
             display('Link constant definitions : skipping.');
-        } else {
-            if (!empty($defineConstants)) {
-                $query = <<<GREMLIN
+            return;
+        }
+
+        if (!empty($defineConstants)) {
+            // This only works with define() and case sensitivity
+            $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "AS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .has("token", without("T_CONST", "T_FUNCTION"))
-     .filter{ it.get().value("fullnspath") in arg1 }
      .sideEffect{name = it.get().value("fullnspath"); }
+     .filter{ name in arg1 }
      .addE("DEFINITION")
      .from( 
         g.V().hasLabel("Defineconstant")
@@ -351,13 +354,13 @@ g.V().hasLabel("Identifier", "Nsname")
       ).count();
 
 GREMLIN;
-                $this->gremlin->query($query, array('arg1' => $defineConstants));
+            $res = $this->gremlin->query($query, array('arg1' => $defineConstants));
 
-                // Second round, with fallback to global constants
-                // Based on define() definitions
-                $this->logTime('constants define : '.count($defineConstants));
+            // Second round, with fallback to global constants
+            // Based on define() definitions
+            $this->logTime('constants define : '.count($defineConstants));
 
-                $query = <<<GREMLIN
+            $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "AS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode"); name in arg1 }
@@ -373,13 +376,13 @@ g.V().hasLabel("Identifier", "Nsname")
       ).count()
 
 GREMLIN;
-                $res = $this->gremlin->query($query, array('arg1' => $defineConstants));
-            }
+            $res = $this->gremlin->query($query, array('arg1' => $defineConstants));
+        }
 
-            $this->logTime('constants const : '.count($constConstants));
-            if (!empty($constConstants)) {
+        $this->logTime('constants const : '.count($constConstants));
+        if (!empty($constConstants)) {
             // Based on const definitions
-                $query = <<<GREMLIN
+            $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "DEFINITION", "EXTENDS", "IMPLEMENTS") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode"); 
@@ -398,13 +401,12 @@ g.V().hasLabel("Identifier", "Nsname")
        .count()
 
 GREMLIN;
-                $res = $this->gremlin->query($query, array('arg1' => $constConstants));
-            }
-            
-            // TODO : handle case-insensitive
-            $this->logTime('Constant definitions');
-            display('Link constant definitions');
+            $res = $this->gremlin->query($query, array('arg1' => $constConstants));
         }
+            
+        // TODO : handle case-insensitive
+        $this->logTime('Constant definitions');
+        display('Link constant definitions');
     }
 
     private function setClassPropertyRemoteDefinition() {

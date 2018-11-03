@@ -26,12 +26,15 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class UnusedConstants extends Analyzer {
+    /*
     public function dependsOn() {
         return array('Constants/ConstantUsage',
                     );
     }
+    */
     
     public function analyze() {
+        /*
         $queryConstants = <<<GREMLIN
 g.V().hasLabel("Analysis")
      .has("analyzer", "Constants/ConstantUsage")
@@ -76,6 +79,12 @@ GREMLIN;
              ->atomIs('String')
              ->hasNoOut('CONCAT')
              ->noDelimiterIsNot($constants);
+        $this->prepareQuery();
+        */
+
+        $this->atomIs('Defineconstant')
+             ->hasNoOut('DEFINITION')
+             ->outWithRank('ARGUMENT', 0);
         $this->prepareQuery();
 
         // Const from a const

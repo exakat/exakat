@@ -10,7 +10,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class UnusedConstants extends Analyzer {
-    /* 7 methods */
+    /* 8 methods */
 
     public function testConstants_UnusedConstants01()  { $this->generic_test('Constants_UnusedConstants.01'); }
     public function testConstants_UnusedConstants02()  { $this->generic_test('Constants_UnusedConstants.02'); }
@@ -19,5 +19,6 @@ class UnusedConstants extends Analyzer {
     public function testConstants_UnusedConstants05()  { $this->generic_test('Constants/UnusedConstants.05'); }
     public function testConstants_UnusedConstants06()  { $this->generic_test('Constants/UnusedConstants.06'); }
     public function testConstants_UnusedConstants07()  { $this->generic_test('Constants/UnusedConstants.07'); }
+    public function testConstants_UnusedConstants08()  { $this->generic_test('Constants/UnusedConstants.08'); }
 }
 ?>
