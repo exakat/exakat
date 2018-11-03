@@ -827,8 +827,6 @@ class Load extends Tasks {
 
                 $part->enclosing = self::ENCLOSING;
                 $part->token     = $this->getToken($this->tokens[$currentVariable][0]);
-                print_r($part);
-
                 $this->pushExpression($part);
 
                 $elements[] = $part;
@@ -3026,6 +3024,7 @@ class Load extends Tasks {
 
             $this->addLink($declare, $declaredefinition, 'DECLARE');
             $declaredefinition->fullcode = $name->fullcode . ' = ' . $config->fullcode;
+            $declaredefinition->line     = $name->line;
             $fullcode[] = $declaredefinition->fullcode;
             
             ++$this->id; // Skip value
@@ -3551,6 +3550,7 @@ class Load extends Tasks {
             } else {
                 $definition = $this->addAtom('Variabledefinition');
                 $definition->fullcode = $atom->fullcode;
+                $definition->line     = $atom->line;
                 $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $definition, 'DEFINITION');
                 $this->currentVariables[$atom->code] = $definition;
                 

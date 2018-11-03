@@ -304,17 +304,15 @@ GREMLIN;
 
     private function spotFallbackConstants() {
         $this->logTime('spotFallbackConstants');
+        display("spotFallbackConstants \n ");
+        
         // Define-style constant definitions
         $query = <<<GREMLIN
 g.V().hasLabel("Defineconstant")
      .out("ARGUMENT").has("rank", 0)
      .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
      .filter{ (it.get().value("noDelimiter") =~ "(\\\\\\\\)\\$").getCount() == 0 }
-     .map{ 
-           s = it.get().value("noDelimiter").toString();
-           s = "\\\\" + s;
-           s;
-         }.unique();
+     .values('fullnspath').unique();
 GREMLIN;
         $defineConstants = $this->gremlin->query($query)
                                          ->toArray();
@@ -334,31 +332,32 @@ GREMLIN;
         $constants = array_merge($constConstants, $defineConstants);
         $this->logTime('constants : '.count($constants));
 
+        print_r($defineConstants);
         if (empty($constants)) {
             display('Link constant definitions : skipping.');
         } else {
-            $query = <<<GREMLIN
+            if (!empty($defineConstants)) {
+                $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "AS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .has("token", without("T_CONST", "T_FUNCTION"))
-     .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
+     .filter{ it.get().value("fullnspath") in arg1 }
+     .sideEffect{name = it.get().value("fullnspath"); }
      .addE("DEFINITION")
      .from( 
         g.V().hasLabel("Defineconstant")
              .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String")
-             .has("noDelimiter").not( has("noDelimiter", "") )
              .has("fullnspath")
              .filter{ it.get().value("fullnspath") == name}.select("a")
       ).count();
 
 GREMLIN;
-            $this->gremlin->query($query, array('arg1' => $defineConstants));
+                $this->gremlin->query($query, array('arg1' => $defineConstants));
 
-            // Second round, with fallback to global constants
-            // Based on define() definitions
+                // Second round, with fallback to global constants
+                // Based on define() definitions
+                $this->logTime('constants define : '.count($defineConstants));
 
-            $this->logTime('constants define : '.count($defineConstants));
-            if (!empty($defineConstants)) {
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "METHOD", "MEMBER", "EXTENDS", "IMPLEMENTS", "CONSTANT", "AS", "CLASS", "DEFINITION", "GROUPUSE") ) )
