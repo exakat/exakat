@@ -332,7 +332,6 @@ GREMLIN;
         $constants = array_merge($constConstants, $defineConstants);
         $this->logTime('constants : '.count($constants));
 
-        print_r($defineConstants);
         if (empty($constants)) {
             display('Link constant definitions : skipping.');
         } else {
