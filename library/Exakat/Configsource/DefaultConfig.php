@@ -151,6 +151,7 @@ class DefaultConfig extends Config {
                                                               'Preferences',
                                                               'Appinfo', 
                                                               'Appcontent',
+                                                              'Suggestions',
                                                               ),
                                
                               );
