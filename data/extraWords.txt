@@ -189,3 +189,10 @@ destructor
 destructors
 constructor
 constructors
+camelcase
+accessor
+accessors
+getter
+getters
+setters
+setter
