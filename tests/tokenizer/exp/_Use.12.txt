@@ -79,6 +79,14 @@ Label : PROJECT
               9
               Label : DEFINITION
                 13
+              Label : DEFINITION
+                14
+                Label : DEFINITION
+                  24
+                  Label : AS
+                    14
+                  Label : NAME
+                    13
               Label : METHOD
                 11
                 Label : ARGUMENT
@@ -87,6 +95,22 @@ Label : PROJECT
                   8
                   Label : EXPRESSION
                     5
+                Label : DEFINITION
+                  31
+                  Label : CLASS
+                    14
+                    Label : DEFINITION
+                      24
+                      Label : AS
+                        14
+                      Label : NAME
+                        13
+                  Label : METHOD
+                    11
+                    Label : ARGUMENT
+                      5
+                    Label : NAME
+                      11
                 Label : NAME
                   11
               Label : NAME

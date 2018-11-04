@@ -87,6 +87,14 @@ Label : PROJECT
               13
               Label : EXPRESSION
                 11
+            Label : DEFINITION
+              6
+              Label : NEW
+                22
+                Label : ARGUMENT
+                  17
+                Label : NAME
+                  22
             Label : NAME
               21
           Label : NAME

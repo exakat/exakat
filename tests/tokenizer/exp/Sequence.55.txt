@@ -18,9 +18,9 @@ Label : PROJECT
             Label : EXPRESSION
               9
               Label : USE
-                16
-                Label : ALIAS
-                  14
+                14
+                Label : AS
+                  15
                 Label : NAME
                   12
           Label : NAME

@@ -59,6 +59,14 @@ Label : PROJECT
                     13
               Label : DEFINITION
                 15
+              Label : DEFINITION
+                16
+                Label : DEFINITION
+                  26
+                  Label : AS
+                    16
+                  Label : NAME
+                    15
               Label : NAME
                 15
             Label : EXPRESSION

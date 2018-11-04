@@ -69,12 +69,32 @@ Label : PROJECT
                 11
                 Label : CONST
                   11
+                  Label : DEFINITION
+                    33
+                    Label : CLASS
+                      16
+                      Label : DEFINITION
+                        26
+                        Label : AS
+                          16
+                        Label : NAME
+                          15
+                    Label : CONSTANT
+                      12
                   Label : NAME
                     12
                   Label : VALUE
                     13
               Label : DEFINITION
                 15
+              Label : DEFINITION
+                16
+                Label : DEFINITION
+                  26
+                  Label : AS
+                    16
+                  Label : NAME
+                    15
               Label : NAME
                 15
             Label : EXPRESSION

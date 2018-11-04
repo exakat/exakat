@@ -54,7 +54,9 @@ Label : PROJECT
           Label : RIGHT
             8
             Label : CONCAT
-              11
+              8
+              Label : NAME
+                11
         Label : EXPRESSION
           7
           Label : LEFT
@@ -62,7 +64,9 @@ Label : PROJECT
           Label : RIGHT
             8
             Label : CONCAT
-              5
+              8
+              Label : NAME
+                5
         Label : EXPRESSION
           7
           Label : LEFT

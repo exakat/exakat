@@ -30,12 +30,10 @@ Label : PROJECT
             Label : TYPEHINT
               11
           Label : BLOCK
-            15
+            14
             Label : EXPRESSION
-              16
+              15
           Label : NAME
             5
-          Label : NULLABLE
-            13
           Label : RETURNTYPE
-            14
+            13

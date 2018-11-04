@@ -85,6 +85,14 @@ Label : PROJECT
               9
               Label : DEFINITION
                 17
+              Label : DEFINITION
+                19
+                Label : DEFINITION
+                  32
+                  Label : AS
+                    19
+                  Label : NAME
+                    17
               Label : NAME
                 17
               Label : PPP
@@ -93,6 +101,18 @@ Label : PROJECT
                   12
                   Label : DEFAULT
                     18
+                  Label : DEFINITION
+                    40
+                    Label : CLASS
+                      19
+                      Label : DEFINITION
+                        32
+                        Label : AS
+                          19
+                        Label : NAME
+                          17
+                    Label : MEMBER
+                      12
             Label : EXPRESSION
               9
               Label : DEFINITION

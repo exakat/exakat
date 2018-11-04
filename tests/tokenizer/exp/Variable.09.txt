@@ -18,8 +18,10 @@ Label : PROJECT
           Label : RIGHT
             8
             Label : CONCAT
-              10
-              Label : INDEX
-                11
-              Label : VARIABLE
-                9
+              8
+              Label : NAME
+                10
+                Label : INDEX
+                  11
+                Label : VARIABLE
+                  9

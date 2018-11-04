@@ -18,11 +18,11 @@ Label : PROJECT
               Label : DEFINITION
                 15
               Label : DEFINITION
-                17
+                18
                 Label : DEFINITION
-                  19
-                  Label : ALIAS
-                    17
+                  17
+                  Label : AS
+                    18
                   Label : NAME
                     15
               Label : DEFINITION
@@ -42,9 +42,9 @@ Label : PROJECT
             Label : EXPRESSION
               14
               Label : USE
-                19
-                Label : ALIAS
-                  17
+                17
+                Label : AS
+                  18
                 Label : NAME
                   15
             Label : EXPRESSION
@@ -68,7 +68,7 @@ Label : PROJECT
               Label : EXTENDS
                 20
               Label : METHOD
-                18
+                19
                 Label : ARGUMENT
                   24
                 Label : BLOCK
@@ -92,7 +92,7 @@ Label : PROJECT
                       Label : CLASS
                         30
                 Label : NAME
-                  18
+                  19
               Label : NAME
                 22
             Label : EXPRESSION
@@ -102,11 +102,11 @@ Label : PROJECT
                 Label : CONCAT
                   28
                   Label : CLASS
-                    17
+                    18
                     Label : DEFINITION
-                      19
-                      Label : ALIAS
-                        17
+                      17
+                      Label : AS
+                        18
                       Label : NAME
                         15
                 Label : CONCAT

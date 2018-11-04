@@ -10,38 +10,30 @@ Label : PROJECT
         Label : EXPRESSION
           5
           Label : ARGUMENT
-            8
+            7
             Label : NAME
-              8
-            Label : NULLABLE
-              6
-            Label : TYPEHINT
               7
+            Label : TYPEHINT
+              6
           Label : ARGUMENT
-            10
+            9
             Label : DEFAULT
-              11
-            Label : NAME
               10
-            Label : NULLABLE
-              6
-            Label : TYPEHINT
-              9
-          Label : ARGUMENT
-            13
             Label : NAME
-              13
-            Label : NULLABLE
-              6
+              9
             Label : TYPEHINT
+              8
+          Label : ARGUMENT
+            12
+            Label : NAME
               12
+            Label : TYPEHINT
+              11
           Label : BLOCK
-            15
+            14
             Label : EXPRESSION
-              16
+              15
           Label : NAME
             5
-          Label : NULLABLE
-            6
           Label : RETURNTYPE
-            14
+            13
