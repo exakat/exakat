@@ -44,6 +44,7 @@ class IsPhpConstant extends Analyzer {
 
         $this->atomIs(array('Identifier', 'Nsname'))
              ->inIs('DEFINITION')
+             ->hasNoIn('USE')
              ->analyzerIs('self')
              ->back('first');
         $this->prepareQuery();

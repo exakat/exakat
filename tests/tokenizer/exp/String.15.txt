@@ -122,7 +122,7 @@ Label : PROJECT
           Label : RIGHT
             15
             Label : CONCAT
-              10
+              15
               Label : INDEX
                 16
               Label : VARIABLE

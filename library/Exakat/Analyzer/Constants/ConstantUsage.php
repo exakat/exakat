@@ -36,8 +36,7 @@ class ConstantUsage extends Analyzer {
         // Identifier that is not used somewhere else
         $this->atomIs('Identifier')
              ->hasNoIn(array('NEW', 'USE', 'NAME', 'CONSTANT', 'MEMBER', 'TYPEHINT',
-                             'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS', 'VARIABLE', 'FUNCTION', 'CONST', 'GROUPUSE'))
-             ->raw('not( where( __.in("INDEX").in("CONCAT").hasLabel("String") ) )');
+                             'CLASS', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'AS', 'VARIABLE', 'FUNCTION', 'CONST', 'GROUPUSE'));
         $this->prepareQuery();
 
         // special case for Boolean and Null

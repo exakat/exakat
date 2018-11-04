@@ -831,27 +831,53 @@ class Load extends Tasks {
 
                 $elements[] = $part;
             } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-                $this->processNext();
+                if ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OBJECT_OPERATOR) {
+                    $atom = 'Variableobject';
+                } elseif ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OPEN_BRACKET) {
+                    $atom = 'Variablearray';
+                } else {
+                    $atom = 'Variable';
+                }
+                ++$this->id;
+                $variable = $this->processSingle($atom);
 
-                if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_OBJECT_OPERATOR) {
+                if ($atom === 'Variableobject') {
                     ++$this->id;
-
-                    $object = $this->popExpression();
 
                     $propertyName = $this->processNextAsIdentifier();
 
                     $property = $this->addAtom('Member');
                     $property->code      = $this->tokens[$current][1];
-                    $property->fullcode  = "{$object->fullcode}->{$propertyName->fullcode}";
+                    $property->fullcode  = "{$variable->fullcode}->{$propertyName->fullcode}";
                     $property->line      = $this->tokens[$current][2];
                     $property->token     = $this->getToken($this->tokens[$current][0]);
                     $property->enclosing = self::NO_ENCLOSING;
 
-                    $this->addLink($property, $object, 'OBJECT');
+                    $this->addLink($property, $variable, 'OBJECT');
                     $this->addLink($property, $propertyName, 'MEMBER');
 
                     $this->pushExpression($property);
                     $elements[] = $property;
+                } elseif ($atom === 'Variablearray') {
+                    ++$this->id; // Skip $a
+                    ++$this->id; // Skip [
+                    $index = $this->processSingle('String');
+                    ++$this->id; // Skip ]
+
+                    $array = $this->addAtom('Array');
+                    $array->code      = $this->tokens[$current][1];
+                    $array->fullcode  = "{$variable->fullcode}[{$index->fullcode}]";
+                    $array->line      = $this->tokens[$current][2];
+                    $array->token     = $this->getToken($this->tokens[$current][0]);
+                    $array->enclosing = self::NO_ENCLOSING;
+
+                    $this->addLink($array, $variable, 'VARIABLE');
+                    $this->addLink($array, $index, 'INDEX');
+
+                    $this->pushExpression($array);
+                    $elements[] = $array;
+                } else {
+                    $this->pushExpression($variable);
                 }
             } else {
                 $this->processNext();
@@ -2274,7 +2300,7 @@ class Load extends Tasks {
         $functioncall->line      = $this->tokens[$current][2];
         $functioncall->token     = $name->token;
         
-        if ($this->isContext(self::CONTEXT_NEW)) {
+        if ($atom === 'Newcall') {
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'class');
             $functioncall->fullnspath = $fullnspath;
             $functioncall->aliased    = $aliased;
@@ -2295,10 +2321,10 @@ class Load extends Tasks {
                 }
                 $argumentsList[0]->fullnspath = $fullnspath;
                 $this->calls->addCall('const', $fullnspath, $argumentsList[0]);
-    
-                $name->fullnspath = '\\'.mb_strtolower($name->code);
-                $name->aliased    = self::NOT_ALIASED;
             }
+
+            $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
+            $functioncall->aliased    = self::NOT_ALIASED;
         } elseif ($getFullnspath === self::WITH_FULLNSPATH) { // A functioncall
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'function');
             $functioncall->fullnspath = $fullnspath;
@@ -3770,7 +3796,7 @@ class Load extends Tasks {
                 $this->pushExpression($namespace);
                 $this->processAs();
                 $as = $this->popExpression();
-                $as->fullnspath  = '\\'.mb_strtolower($namespace->fullcode);
+                $as->fullnspath = makeFullNsPath($namespace->fullcode, $useType === 'const');
                 $fullcode[] = $as->fullcode;
 
                 if (isset($this->uses['class'][$prefix])) {
@@ -3781,9 +3807,6 @@ class Load extends Tasks {
                 if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
                     $alias = $this->addNamespaceUse($origin, $as, $useType, $as);
-
-                    $as->alias  = $alias;
-                    $as->origin = $fullnspath;
                 }
 
                 $namespace = $as;
@@ -5492,7 +5515,11 @@ class Load extends Tasks {
         if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' as ');
-            $alias = mb_strtolower(substr($alias->fullcode, $offset + 4));
+            if ($useType === 'const') {
+                $alias = substr($alias->fullcode, $offset + 4);
+            } else {
+                $alias = mb_strtolower(substr($alias->fullcode, $offset + 4));
+            }
         } elseif (($offset = strrpos($alias->code, '\\')) === false) {
             // namespace without \
             $alias = $alias->code;
