@@ -1103,7 +1103,7 @@ GREMLIN;
             $this->sqlite->query($query);
         }
 
-        $query = <<<GREMLIN
+        $gremlinQuery = <<<GREMLIN
 g.V().hasLabel("Const")
      .not(where(__.in("CONST")))
      .out("CONST")
@@ -1118,14 +1118,13 @@ g.V().hasLabel("Const")
 
 GREMLIN;
         $res = $this->gremlin
-                    ->query($query)
+                    ->query($gremlinQuery)
                     ->toArray();
         
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            print_r($row);
-            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', 0, 0, ".$this->sqlite->escapeString($row['value']).")";
+            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', 0, 0, '".$this->sqlite->escapeString($row['value'])."')";
 
             ++$total;
         }
@@ -1776,7 +1775,7 @@ SQL;
 
         $values = array();
         foreach($index as $row) {
-            $values[] = "('$row[name]', '$row[type]', $row[total], $row[expression],'{$this->sqlite->escapeString($row['file'])}') ";
+            $values[] = "('$row[name]', '$row[type]', $row[total], $row[expression], '{$this->sqlite->escapeString($row['file'])}') ";
         }
 
         $query = 'INSERT INTO readability ("name", "type", "tokens", "expressions", "file") VALUES '.implode(', ', $values);
