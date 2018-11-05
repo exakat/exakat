@@ -2431,7 +2431,7 @@ SQL;
             $query = <<<SQL
 SELECT count(*) AS nb FROM compilation$shortVersion
 SQL;
-            $results = @$this->sqlite->query($query);
+            $results = $this->sqlite->query($query);
             if ($results === false) {
                 $incompilable[$shortVersion] = '<i class="fa fa-eye-slash" style="color: #dddddd"></i>';
             } else{
@@ -2454,7 +2454,7 @@ SQL;
             
             $description = $this->getDocs($name, 'description');
 
-            $link = '<a href="analyzers_doc.html#'.$this->toId($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#'.$this->toId($name).'" alt="Documentation for '.$name.'"><i class="fa fa-book"></i></a>';
 
             $table .= "<tr><td style=\"background-color: #{$colors[array_search(substr($analyzers[$name], 0, -1), $versions)]};\">$analyzers[$name]</td><td>$link {$this->getDocs($name, 'name')}</td><td>".implode('</td><td>', $row)."</td></tr>\n";
         }
@@ -2723,7 +2723,7 @@ SQL
             }
             $result = $this->Compatibility($result, $analyzer);
             $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#'.$this->toId($analyzer).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#'.$this->toId($analyzer).'" alt="Documentation for '.$name.'"><i class="fa fa-book"></i></a>';
             $compatibility .= "<tr><td>$link $name</td><td>$result</td></tr>\n";
         }
 
@@ -3580,7 +3580,7 @@ SQL
 
     private function generateChangedClasses() {
         $changedClasses = '';
-        $res = @$this->sqlite->query('SELECT * FROM classChanges');
+        $res = $this->sqlite->query('SELECT * FROM classChanges');
         if ($res) {
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 if ($row['changeType'] === 'Member Visibility') {

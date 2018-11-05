@@ -32,8 +32,7 @@ class DirectInjection extends Analyzer {
     }
     
     public function analyze() {
-        $vars = $this->loadIni('php_incoming.ini');
-        $vars = $vars['incoming'];
+        $vars = $this->loadIni('php_incoming.ini')['incoming'];
         
         $server = $this->dictCode->translate('$_SERVER');
         if (empty($server)) {
@@ -42,14 +41,23 @@ class DirectInjection extends Analyzer {
             $server = $server[0];
         }
         
-        $safe = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'REQUEST_TIME_FLOAT',
-                      'SCRIPT_NAME', 'SERVER_ADMIN', '_');
-        $safeIndex = 'or( __.hasLabel("Phpvariable"), 
-                          __.out("VARIABLE").not(has("code", '.$server.')), 
-                          __.out("INDEX").hasLabel("String")
-                            .not(where(__.out("CONCAT") ) )
-                            .not(has("noDelimiter", within([' . makeList($safe) . '])))
-                         )';
+        $safe = array('DOCUMENT_ROOT', 
+                      'REQUEST_TIME', 
+                      'REQUEST_TIME_FLOAT',
+                      'SCRIPT_NAME', 
+                      'SERVER_ADMIN', 
+                      '_',
+                      );
+        $safeList = makeList($safe);
+        $safeIndex = <<<GREMLIN
+or( 
+    __.hasLabel("Phpvariable"), 
+    __.out("VARIABLE").not(has("code", $server)), 
+    __.out("INDEX").hasLabel("String")
+      .not(where(__.out("CONCAT") ) )
+      .not(has("noDelimiter", within([ $safeList ])))
+)
+GREMLIN;
 
         // Relayed call to another function
         $this->atomIs('Functioncall')

@@ -43,11 +43,11 @@ class AmbassadorNoMenu extends Ambassador {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($project_name{0}));
 
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', '');
-            $patterns = array('$<aside class="main-sidebar">.*?</aside>$is',
-                              '$<aside class="control-sidebar control-sidebar-dark">.*?</aside>$is',
-                              '$<header class="main-header">.*?</header>$is',
-                              '$<footer class="main-footer">.*?</footer>$is',
-                              '$class="content-wrapper"$is',
+            $patterns = array('#<aside class="main-sidebar">.*?</aside>#is',
+                              '#<aside class="control-sidebar control-sidebar-dark">.*?</aside>#is',
+                              '#<header class="main-header">.*?</header>#is',
+                              '#<footer class="main-footer">.*?</footer>#is',
+                              '#class="content-wrapper"#is',
                               );
             $replacements = array('',
                                   '',
