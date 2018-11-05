@@ -10,8 +10,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class ShouldTypecast extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testType_ShouldTypecast01()  { $this->generic_test('Type_ShouldTypecast.01'); }
+    public function testType_ShouldTypecast02()  { $this->generic_test('Type/ShouldTypecast.02'); }
 }
 ?>
