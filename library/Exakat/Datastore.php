@@ -111,7 +111,7 @@ class Datastore {
             }
 
             if (count($cols) !== 2) {
-                throw new WrongNumberOfColsForAHash($table);
+                throw new WrongNumberOfColsForAHash($table, count($cols));
             }
         }
 
@@ -126,7 +126,6 @@ class Datastore {
                     $e = \Sqlite3::escapeString($e);
                 }
                 unset($e);
-
             } else {
                 $d = array(\Sqlite3::escapeString($key), \Sqlite3::escapeString($row));
             }
