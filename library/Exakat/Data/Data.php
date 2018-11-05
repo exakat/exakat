@@ -25,7 +25,7 @@ namespace Exakat\Data;
 
 use Exakat\Config;
 
-class Data {
+abstract class Data {
     protected $name = '';
 
     private $sqlite = null;

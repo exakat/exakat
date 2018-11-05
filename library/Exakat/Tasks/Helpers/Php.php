@@ -24,7 +24,7 @@ namespace Exakat\Tasks\Helpers;
 
 use Exakat\Exceptions\NoRecognizedTokens;
 
-class Php {
+abstract class Php {
 
 // Exakat home-made tokens
     const T_BANG                         = '!';
