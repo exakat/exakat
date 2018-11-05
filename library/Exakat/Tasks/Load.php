@@ -2314,7 +2314,8 @@ class Load extends Tasks {
         } elseif ($atom === 'Methodcallname' || $atom === 'List') {
             // literally, nothing
         } elseif (in_array(mb_strtolower($name->code), array('defined', 'constant'))) {
-            if ($argumentsList[0]->constant === true) {
+            if ($argumentsList[0]->constant === true && 
+                !empty($argumentsList[0]->noDelimiter)) {
                 $fullnspath = makeFullNsPath($argumentsList[0]->noDelimiter, true);
                 if ($argumentsList[0]->noDelimiter[0] === '\\') {
                     $fullnspath = "\\$fullnspath";
