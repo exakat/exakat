@@ -137,6 +137,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/date <http://php.net/manual/en/book.datetime.php>`_
 * `ext/db2 <http://php.net/manual/en/book.ibm-db2.php>`_
 * `ext/dba <http://php.net/manual/en/book.dba.php>`_
+* `ext/decimal <http://php-decimal.io>`_
 * `ext/dio <http://php.net/manual/en/refs.fileprocess.file.php>`_
 * `ext/dom <http://php.net/manual/en/book.dom.php>`_
 * `ext/ds <http://docs.php.net/manual/en/book.ds.php>`_
@@ -224,6 +225,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * `ext/posix <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
 * `ext/proctitle <http://php.net/manual/en/book.proctitle.php>`_
 * `ext/pspell <http://php.net/manual/en/book.pspell.php>`_
+* `ext/psr <https://www.php-fig.org/psr/psr-3>`_
 * `ext/rar <http://php.net/manual/en/book.rar.php>`_
 * `ext/rdkafka <https://github.com/arnaud-lb/php-rdkafka>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
@@ -308,6 +310,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `WordPress <https://www.wordpress.org/>`_
 * `Magento <https://magento.com/>`_
 * `MediaWiki <https://www.mediawiki.org/>`_
+* `xataface <http://xataface.com/>`_
 * `Dolibarr <https://www.dolibarr.org/>`_
 * `OpenConf <https://www.openconf.com/>`_
 * `FuelCMS <https://www.getfuelcms.com/>`_
@@ -322,7 +325,6 @@ A number of applications were scanned in order to find real life examples of pat
 * `Mautic <https://www.mautic.org/>`_
 * `phpadsnew <http://freshmeat.sourceforge.net/projects/phpadsnew>`_
 * `Typo3 <https://typo3.org/>`_
-* `xataface <http://xataface.com/>`_
 * `ThinkPHP <http://www.thinkphp.cn/>`_
 * `Zurmo <http://zurmo.org/>`_
 * `Cleverstyle <https://cleverstyle.org/en>`_
@@ -342,6 +344,7 @@ A number of applications were scanned in order to find real life examples of pat
 * `PhpIPAM <https://phpipam.net/download/>`_
 * SuiteCRM
 * `SuiteCrm <https://suitecrm.com/>`_
+* Shopware
 * `Zend-Config <https://docs.zendframework.com/zend-config/>`_
 
 
@@ -394,6 +397,12 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 1.5.2
+
+  * PHP Exception (Exceptions/IsPhpException)
+  * ext/decimal (Extensions/Extdecimal ; Appinfo)
+  * ext/psr (Extensions/Extpsr ; Appinfo)
 
 * 1.5.1
 
@@ -2059,7 +2068,7 @@ PHP Error messages
 
 Exakat helps reduce the amount of error and warning that code is producing by reporting pattern that are likely to emit errors.
 
-44 PHP error message detailled : 
+45 PHP error message detailled : 
 
 * :ref:`"continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? <continue-is-for-loop>`
 * :ref:`Access level to Bar\:\:$publicProperty must be public (as in class Foo) <raised-access-level>`
@@ -2090,6 +2099,7 @@ Exakat helps reduce the amount of error and warning that code is producing by re
 * :ref:`Delimiter must not be alphanumeric or backslash  <no-empty-regex>`
 * :ref:`Generators cannot return values using "return" <no-return-for-generator>`
 * :ref:`Invalid numeric literal <malformed-octal>`
+* :ref:`Non-static method A\:\:B() should not be called statically <non-static-methods-called-in-a-static>`
 * :ref:`Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use __construct() in new code. <old-style-constructor>`
 * :ref:`Only variable references should be returned by reference <no-reference-for-ternary>`
 * :ref:`Only variables can be passed by reference <only-variable-for-reference>`
@@ -2276,7 +2286,6 @@ List of external links mentionned in this documentation.
 * `constant() <http://php.net/constant>`_
 * `Constants <http://php.net/manual/en/language.constants.php>`_
 * `Constructors and Destructors <http://php.net/manual/en/language.oop5.decon.php>`_
-* `Constructors and Destructors ¶ <http://php.net/manual/en/language.oop5.decon.php>`_
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
 * `count <http://php.net/count>`_
 * `Courrier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
@@ -2378,8 +2387,8 @@ List of external links mentionned in this documentation.
 * `Floating point numbers <http://php.net/manual/en/language.types.float.php#language.types.float>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Fluent Interfaces in PHP <http://mikenaberezny.com/2005/12/20/fluent-interfaces-in-php/>`_
-* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach <http://php.net/manual/en/control-structures.foreach.php>`_
+* `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_
 * `foreach no longer changes the internal array pointer <http://php.net/manual/en/migration70.incompatible.php#migration70.incompatible.foreach.array-pointer>`_
 * `Frederic Bouchery <https://twitter.com/FredBouchery/>`_
 * `From assumptions to assertions <https://rskuipers.com/entry/from-assumptions-to-assertions>`_
@@ -2538,6 +2547,7 @@ List of external links mentionned in this documentation.
 * `PHP Classes containing only constants <https://stackoverflow.com/questions/16838266/php-classes-containing-only-constants>`_
 * `PHP Constants <http://php.net/manual/en/language.constants.php>`_
 * `PHP Data Object <http://php.net/manual/en/book.pdo.php>`_
+* `PHP Decimal <http://php-decimal.io>`_
 * `PHP extension for libsodium <https://github.com/jedisct1/libsodium-php>`_
 * `PHP gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
 * `PHP Options And Information <http://php.net/manual/en/book.info.php>`_
@@ -2572,6 +2582,7 @@ List of external links mentionned in this documentation.
 * `PSR-13 : Link definition interface <http://www.php-fig.org/psr/psr-13/>`_
 * `PSR-16 : Common Interface for Caching Libraries <http://www.php-fig.org/psr/psr-16/>`_
 * `PSR-3 : Logger Interface <http://www.php-fig.org/psr/psr-3/>`_
+* `PSR-3 <https://www.php-fig.org/psr/psr-3>`_
 * `PSR-6 : Caching <http://www.php-fig.org/psr/psr-6/>`_
 * `PSR7 <http://www.php-fig.org/psr/psr-7/>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_

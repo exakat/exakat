@@ -271,6 +271,22 @@ MediaWiki
     	],
         // big array continues
 
+Incompilable Files
+==================
+
+.. _xataface-php-incompilable:
+
+xataface
+^^^^^^^^
+
+:ref:`incompilable-files`, in lib/XML/Tree.php:289. 
+
+Compilation error with PHP 7.2 version.
+
+.. code-block:: php
+
+    syntax error, unexpected 'new' (T_NEW)
+
 Multiple Constant Definition
 ============================
 
@@ -322,7 +338,7 @@ OpenConf
 
 :ref:`multiple-constant-definition`, in modules/request.php:71. 
 
-The constant is build according to the situation, in the part of the script (file request.php). This hides the actual origin of the value, but keeps the rest of the code simple enough. Just keep in mind that this constant may have different values.
+The constant is build according to the situation, in the part of the script (file request.php). This hides the actual origin of the value, but keeps the rest of the code simple. Just keep in mind that this constant may have different values.
 
 .. code-block:: php
 
@@ -428,7 +444,7 @@ Tikiwiki
 
 :ref:`one-variable-string`, in lib/wiki-plugins/wikiplugin_addtocart.php:228. 
 
-Double-quotes are simply not needed here. If casting to string is important, the (string) would be more explicit.
+Double-quotes are not needed here. If casting to string is important, the (string) would be more explicit.
 
 .. code-block:: php
 
@@ -467,7 +483,7 @@ Piwigo
 
 :ref:`several-instructions-on-the-same-line`, in tools/triggers_list.php:993. 
 
-There are two instructions on the line with the if(). Note that the condition is not followed by a bracketed block. With a quick review, it really seems that echo '<br>' and $f=0; are on the same block, but the second is indeed an unconditional expression. This is very difficult to spot. 
+There are two instructions on the line with the if(). Note that the condition is not followed by a bracketed block. When reviewing, it really seems that echo '<br>' and $f=0; are on the same block, but the second is indeed an unconditional expression. This is very difficult to spot. 
 
 .. code-block:: php
 
@@ -932,7 +948,7 @@ xataface
 
 :ref:`wrong-number-of-arguments`, in actions/existing_related_record.php:130. 
 
-df_display() actually requires only 2 arguments, while three are provided. The last argument is simply ignored. df_display() is called in a total of 9 places : this now looks like an API change that left many calls untouched.
+df_display() actually requires only 2 arguments, while three are provided. The last argument is completely ignored. df_display() is called in a total of 9 places : this now looks like an API change that left many calls untouched.
 
 .. code-block:: php
 
@@ -1324,6 +1340,22 @@ Parenthesis are useless for calculating $discount_percent, as it is a divisition
     			}
     			$discount = ( (float) $this->get_amount() * $discount_percent ) / $cart_item_qty;
 
+Altering Foreach Without Reference
+==================================
+
+.. _wordpress-structures-alteringforeachwithoutreference:
+
+WordPress
+^^^^^^^^^
+
+:ref:`altering-foreach-without-reference`, in wp-admin/includes/misc.php:74. 
+
+This code actually loads the file, join it, then split it again. file() would be sufficient. 
+
+.. code-block:: php
+
+    $markerdata = explode( "\n", implode( '', file( $filename ) ) );
+
 No Parenthesis For Language Construct
 =====================================
 
@@ -1512,6 +1544,22 @@ Thelia
 .. code-block:: php
 
     $size = $size / 1024;
+
+Should Typecast
+===============
+
+.. _openconf-type-shouldtypecast:
+
+OpenConf
+^^^^^^^^
+
+:ref:`should-typecast`, in /author/upload.php:62. 
+
+This is another exact example. 
+
+.. code-block:: php
+
+    intval($_POST['pid']);
 
 Relay Function
 ==============
@@ -1707,7 +1755,7 @@ WordPress
 
 :ref:`identical-conditions`, in wp-admin/theme-editor.php:247. 
 
-The condition checks first if $has_templates or $theme->parent(), and one of the two is sufficient to be valid. Then, it checks again that $theme->parent() is activated with &&. This condition may be reduced to simply calling $theme->parent(), as $has_template is unused here.
+The condition checks first if $has_templates or $theme->parent(), and one of the two is sufficient to be valid. Then, it checks again that $theme->parent() is activated with &&. This condition may be reduced by calling $theme->parent(), as $has_template is unused here.
 
 .. code-block:: php
 
@@ -2077,7 +2125,7 @@ Dolibarr
 
 :ref:`cast-to-boolean`, in htdocs/societe/class/societe.class.php:2777. 
 
-Several cases are built on the same pattern there. Each of the expression may be simply cast to ``(bool)``.
+Several cases are built on the same pattern there. Each of the expression may be replaced by a cast to ``(bool)``.
 
 .. code-block:: php
 
@@ -3036,6 +3084,43 @@ The class in the RSSDashlet.php file has an 'array' typehint which is not in the
     
     // File /include/Dashlets/Dashlets.php
         public function saveOptions( $req ) {
+
+Could Be Abstract Class
+=======================
+
+.. _edusoho-classes-couldbeabstractclass:
+
+Edusoho
+^^^^^^^
+
+:ref:`could-be-abstract-class`, in src/Biz/Task/Strategy/BaseStrategy.php:14. 
+
+BaseStrategy is extended by NormalStrategy, DefaultStrategy (Not shown here), but it is not instantiated itself.
+
+.. code-block:: php
+
+    class BaseStrategy { 
+        // Class code
+    }
+
+
+--------
+
+
+.. _shopware-classes-couldbeabstractclass:
+
+Shopware
+^^^^^^^^
+
+:ref:`could-be-abstract-class`, in engine/Shopware/Plugins/Default/Core/PaymentMethods/Components/GenericPaymentMethod.php:31. 
+
+A 'Generic' class sounds like a class that could be 'abstract'. 
+
+.. code-block:: php
+
+    class GenericPaymentMethod extends BasePaymentMethod { 
+        // More class code
+    }
 
 Could Be Private Class Constant
 ===============================
@@ -4039,5 +4124,53 @@ $funcname is tested with is_callable() before being used as a method. Typehint c
     				return false;
     		return true;
     	}
+
+Named Regex
+===========
+
+.. _phinx-structures-namedregex:
+
+Phinx
+^^^^^
+
+:ref:`named-regex`, in src/Phinx/Util/Util.php:127. 
+
+$matches[1] could be renamed by $matches['filename'], if the capturing subpattern was named 'filename'. 
+
+.. code-block:: php
+
+    const MIGRATION_FILE_NAME_PATTERN = '/^\d+_([\w_]+).php$/i';
+    //.... More code with class definition
+        public static function mapFileNameToClassName($fileName)
+        {
+            $matches = [];
+            if (preg_match(static::MIGRATION_FILE_NAME_PATTERN, $fileName, $matches)) {
+                $fileName = $matches[1];
+            }
+    
+            return str_replace(' ', '', ucwords(str_replace('_', ' ', $fileName)));
+        }
+
+
+--------
+
+
+.. _shopware-structures-namedregex:
+
+shopware
+^^^^^^^^
+
+:ref:`named-regex`, in engine/Library/Enlight/Components/Snippet/Resource.php:207. 
+
+$_match[3] is actually extracted two preg_match() before : by the time we read its usage, the first regex has been forgotten. A named subpattern would be useful here to remember what was captured.
+
+.. code-block:: php
+
+    if (!preg_match("!(.?)(name=)(.*?)(?=(\s|$))!", $_block_args, $_match) && empty($_block_default)) {
+                    throw new SmartyException('"' . $_block_tag . '" missing name attribute');
+                }
+                $_block_force = (bool) preg_match('#[\s]force#', $_block_args);
+                $_block_json = (bool) preg_match('#[\s]json=["\']true["\']\W#', $_block_args);
+                $_block_name = !empty($_match[3]) ? trim($_match[3], '\'"') : $_block_default;
 
 

@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 29 Oct 2018 17:56:43 +0000
-.. comment: Generation hash : 314989534f4d7fc4840b26a04f39ea8ce7c47f00
+.. comment: Generation date : Mon, 05 Nov 2018 17:00:54 +0000
+.. comment: Generation hash : 42b2b725331db1bc95f70cce37aac1dc49dab1e4
 
 
 .. _$http\_raw\_post\_data:
@@ -396,7 +396,7 @@ Abstract Static Methods
 #######################
 
 
-Methods cannot be both abstract and static. Static methods belong to a class, and will not be overridden by the child class. For normal methods, PHP will start at the object level, then go up the hierarchy to find the method. With static, you have to mention the name, or use Late Static Binding, with self or static. Hence, it is useless to have an abstract static method : it should be a simple static method.
+Methods cannot be both abstract and static. Static methods belong to a class, and will not be overridden by the child class. For normal methods, PHP will start at the object level, then go up the hierarchy to find the method. With static, it is necessary to mention the name, or use Late Static Binding, with self or static. Hence, it is useless to have an abstract static method : it should be a static method.
 
 A child class is able to declare a method with the same name than a static method in the parent, but those two methods will stay independent. 
 
@@ -687,7 +687,7 @@ All Uppercase Variables
 
 Usually, global variables are all in uppercase, so as to differentiate them easily. Though, this is not always the case, with examples like $argc, $argv or $http_response_header.
 
-When using custom variables, try to use lowercase $variables, $camelCase, $sturdyCase or $snake_case.
+When using custom variables, try to use lowercase ``$variables``, ``$camelCase``, ``$sturdyCase`` or ``$snake_case``.
 
 .. code-block:: php
 
@@ -702,7 +702,7 @@ When using custom variables, try to use lowercase $variables, $camelCase, $sturd
    ?>
 
 
-`Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
+See also `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_.
 
 +-------------+------------------------------------------------+
 | Short name  | Variables/VariableUppercase                    |
@@ -811,6 +811,11 @@ You may also use `'array_walk() <http://www.php.net/array_walk>`_ or `'array_map
 
 See also `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 
+Suggestions
+^^^^^^^^^^^
+
+* Add the reference on the modified blind variable, and avoid accessing the source array
+
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/AlteringForeachWithoutReference                                                                                        |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
@@ -821,6 +826,8 @@ See also `Foreach <http://php.net/manual/en/control-structures.foreach.php>`_.
 | Time To Fix | Quick (30 mins)                                                                                                                   |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | ClearPHP    | `use-reference-to-alter-in-foreach <https://github.com/dseguy/clearPHP/tree/master/rules/use-reference-to-alter-in-foreach.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| Examples    | :ref:`wordpress-structures-alteringforeachwithoutreference`                                                                       |
 +-------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -1010,7 +1017,7 @@ Ambiguous Static
 
 Methods or properties with the same name, are defined static in one class, and not static in another. This is error prone, as it requires a good knowledge of the code to make it static or not. 
 
-Try to keep the methods simple, and unique. Consider renaming the methods and properties to distinguish them easily. A method and a static method have probably different responsibilities.
+Try to keep the methods simple and unique. Consider renaming the methods and properties to distinguish them easily. A method and a static method have probably different responsibilities.
 
 .. code-block:: php
 
@@ -1998,7 +2005,7 @@ Avoid glob() Usage
 ##################
 
 
-`'glob() <http://www.php.net/glob>`_ and `'scandir() <http://www.php.net/scandir>`_ sorts results by default. If you don't need that sorting, save some time by requesting NOSORT with those functions.
+`'glob() <http://www.php.net/glob>`_ and `'scandir() <http://www.php.net/scandir>`_ sorts results by default. When that kind of sorting is not needed, save some time by requesting ``NOSORT`` with those functions.
 
 Besides, whenever possible, use `'scandir() <http://www.php.net/scandir>`_ instead of `'glob() <http://www.php.net/glob>`_. 
 
@@ -2025,7 +2032,7 @@ Using `'opendir() <http://www.php.net/opendir>`_ and a while loop may be even fa
 
 This analysis skips `'scandir() <http://www.php.net/scandir>`_ and `'glob() <http://www.php.net/glob>`_ if they are explicitely configured with flags (aka, sorting is explicitely needed).
 
-Glob() accepts wildchar, that may not easily replaced with `'scandir() <http://www.php.net/scandir>`_ or `'opendir() <http://www.php.net/opendir>`_.
+Glob() accepts wildchar, such as ``*``, that may not easily replaced with `'scandir() <http://www.php.net/scandir>`_ or `'opendir() <http://www.php.net/opendir>`_.
 
 See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_.
 
@@ -2184,8 +2191,8 @@ Bail Out Early
 
 When using conditions, it is recommended to quit in the current context, and avoid else clause altogether. 
 
-The main benefit is to make clear the method applies a condition, and stop quickly went it is not satisfied. 
-The main sequence is then focused on the useful code. 
+The main benefit is to make clear the method applies a condition, and stop immediately when it is not satisfied. 
+The main sequence is then focused on the actual code. 
 
 This works with the ``break``, ``continue``, ``throw`` and ``goto`` keywords too, depending on situations.
 
@@ -2235,7 +2242,7 @@ This works with the ``break``, ``continue``, ``throw`` and ``goto`` keywords too
        return $a;
    }
    
-   // Make a return early, and make the condition clearly visible.
+   // Make a return early, and make the condition visible.
    function foo3($a) {
        if ($a < 0) {
            $a++;
@@ -3275,7 +3282,7 @@ This expression may be reduced by casting to boolean type.
 Suggestions
 ^^^^^^^^^^^
 
-* Remove the old expression and simply use ``(bool)`` operator
+* Remove the old expression and use ``(bool)`` operator instead
 * Change the target values from true/false, or 0/1 to non-binary values, like strings or integers beyond 0 and 1.
 * Complete the current branches with other commands
 
@@ -4489,15 +4496,23 @@ That will prevent new code to try to instantiate it.
 See also `Class Abstraction <http://php.net/abstract>`_
          `Abstract classes and methods <https://phpenthusiast.com/object-oriented-php-tutorials/abstract-classes-and-methods>`_.
 
-+-------------+------------------------------------+
-| Short name  | Classes/CouldBeAbstractClass       |
-+-------------+------------------------------------+
-| Themes      | :ref:`Analyze`, :ref:`ClassReview` |
-+-------------+------------------------------------+
-| Severity    | Minor                              |
-+-------------+------------------------------------+
-| Time To Fix | Quick (30 mins)                    |
-+-------------+------------------------------------+
+
+Suggestions
+^^^^^^^^^^^
+
+* Make this class an abstract class
+
++-------------+-------------------------------------------------------------------------------------------+
+| Short name  | Classes/CouldBeAbstractClass                                                              |
++-------------+-------------------------------------------------------------------------------------------+
+| Themes      | :ref:`Analyze`, :ref:`ClassReview`                                                        |
++-------------+-------------------------------------------------------------------------------------------+
+| Severity    | Minor                                                                                     |
++-------------+-------------------------------------------------------------------------------------------+
+| Time To Fix | Quick (30 mins)                                                                           |
++-------------+-------------------------------------------------------------------------------------------+
+| Examples    | :ref:`edusoho-classes-couldbeabstractclass`, :ref:`shopware-classes-couldbeabstractclass` |
++-------------+-------------------------------------------------------------------------------------------+
 
 
 
@@ -5228,11 +5243,15 @@ Some commands may raise exception. It is recommended to use the try/catch block 
 See also `Predefined Exceptions <http://php.net/manual/en/reserved.exceptions.php>`_,
          `PharException <http://php.net/manual/en/class.pharexception.php>`_.
 
-+------------+------------------------+
-| Short name | Exceptions/CouldUseTry |
-+------------+------------------------+
-| Themes     | :ref:`Suggestions`     |
-+------------+------------------------+
++-------------+------------------------+
+| Short name  | Exceptions/CouldUseTry |
++-------------+------------------------+
+| Themes      | :ref:`Suggestions`     |
++-------------+------------------------+
+| Severity    | Minor                  |
++-------------+------------------------+
+| Time To Fix | Quick (30 mins)        |
++-------------+------------------------+
 
 
 
@@ -5755,9 +5774,9 @@ Deprecated Functions
 ####################
 
 
-The following functions are deprecated. Whatever the version you are using, it is recommended to stop using them and replace them with a durable equivalent. 
+The following functions are deprecated. It is recommended to stop using them now and replace them with a durable equivalent. 
 
-Functions may be still usable : they generate warning that help you track their usage. Watch your logs, and target any deprecated warning. This way, you won't be stuck when the function is actually removed.
+Note that these functions may be still usable : they generate warning that help tracking their usage in the log. To eradicate their usage, watch the logs, and update any deprecated warning. This way, the code won't be stuck when the function is actually removed from PHP.
 
 .. code-block:: php
 
@@ -6225,7 +6244,7 @@ Don't Send $this In Constructor
 
 Don't use ``$this`` as an argument while in the `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_. Until the constructor is finished, the object is not finished, and may be in an unstable state. Providing it to another code may lead to error. 
 
-This is in particular true if the receiving structure put immediately the incoming object to work, and not simply store it for later use. 
+This is true when the receiving structure puts the incoming object immediately to work, and don't store it for later use. 
 
 .. code-block:: php
 
@@ -6307,7 +6326,7 @@ Don't Unset Properties
 
 Avoid unsetting properties. They would go undefined, and raise more warnings. 
 
-When getting rid of a property, simply assign it to null. This keeps the property in the object, yet allows existence check without errors.
+When getting rid of a property, assign it to null. This keeps the property in the object, yet allows existence check without errors.
 
 .. code-block:: php
 
@@ -6568,11 +6587,11 @@ Drop Else After Return
 ######################
 
 
-Avoid else clause when the then clause returns, but not the else. 
+Avoid else clause when the then clause returns, but not the else. And vice-versa.
 
-The else may simply be set in the main sequence of the function. 
+This way, the else block disappears, and is now the main sequence of the function. 
 
-This is also true if else has a return, and then not : simply reverse the condition. 
+This is also true if else has a return, and then not. When doing so, don't forget to reverse the condition. 
 
 .. code-block:: php
 
@@ -7255,7 +7274,7 @@ The code does try, then catch errors but do no act upon the error.
    try { 
        doSomething();
    } catch ('Throwable $e) {
-       // simply ignore this
+       // ignore this
    }
    
    ?>
@@ -7263,7 +7282,7 @@ The code does try, then catch errors but do no act upon the error.
 
 At worst, the error should be logged, so as to measure the actual usage of the catch expression.
 
-``catch( Exception $e)`` (PHP 5) or ``catch(`'Throwable <http://php.net/manual/fr/class.throwable.php>`_ $e)`` with empty catch block should be banned, as they will simply ignore any error. 
+``catch( Exception $e)`` (PHP 5) or ``catch(`'Throwable <http://php.net/manual/fr/class.throwable.php>`_ $e)`` with empty catch block should be banned. They ignore any error and proceed as if nothing happened. At worst, the event should be logged for future analysis. 
 
 See also `Empty Catch Clause <http://wiki.c2.com/?EmptyCatchClause>`_.
 
@@ -8477,7 +8496,7 @@ array_key_last() was added in PHP 7.3. Before that,
    // Best solutions, by far
    $last = $array[array_key_last($array)];
    
-   // Best solutions, just as quick as each other
+   // Best solutions, just as fast as each other
    $last = $array[count($array) - 1];
    $last = end($array);
    
@@ -9645,7 +9664,7 @@ Incompilable Files
 
 Files that cannot be compiled, and, as such, be run by PHP. Scripts are linted against various versions of PHP. 
 
-This is usually undesirable, as all code must compile before being executed. It may simply be that such files are not compilable because they are not yet ready for an upcoming PHP version.
+This is usually undesirable, as all code must compile before being executed. It may be that such files are not compilable because they are not yet ready for an upcoming PHP version.
 
 .. code-block:: php
 
@@ -9661,6 +9680,14 @@ Code that is incompilable with older PHP versions means that the code is breakin
 
 When the code is used as a template for PHP code generation, for example at installation time, it is recommended to use a distinct file extension, so as to distinguish them from actual PHP code.
 
+
+
+Suggestions
+^^^^^^^^^^^
+
+* If this file is a template for PHP code, change the extension to something else than .php
+* Fix the syntax so it works with various versions of PHP
+
 +-------------+-----------------------------------------------------------------------------------------------+
 | Short name  | Php/Incompilable                                                                              |
 +-------------+-----------------------------------------------------------------------------------------------+
@@ -9671,6 +9698,8 @@ When the code is used as a template for PHP code generation, for example at inst
 | Time To Fix | Slow (1 hour)                                                                                 |
 +-------------+-----------------------------------------------------------------------------------------------+
 | ClearPHP    | `no-incompilable <https://github.com/dseguy/clearPHP/tree/master/rules/no-incompilable.md>`__ |
++-------------+-----------------------------------------------------------------------------------------------+
+| Examples    | :ref:`xataface-php-incompilable`                                                              |
 +-------------+-----------------------------------------------------------------------------------------------+
 
 
@@ -10559,7 +10588,7 @@ A global variable is used locally in a method.
 
 Either the global keyword has been forgotten, or the local variable should be renamed in a less ambiguous manner.
 
-Having both a global and a local variable with the same name is legit. PHP keeps the contexts separated, and it processes them independantly.
+Having both a global and a local variable with the same name is legit. PHP keeps the contexts separated, and it processes them independently.
 
 However, in the mind of the coder, it is easy to mistake the local variable $x and the global variable $x. May they be given different meaning, and this is an error-prone situation. 
 
@@ -10973,7 +11002,7 @@ Calling global (or $GLOBALS) in methods is slower and less testable than setting
 
 Using properties is slightly faster than calling global or $GLOBALS, though the gain is not important. 
 
-Setting the property in the constructor (or in a factory), makes the class easier to test, as there is now a simple point of configuration.
+Setting the property in the constructor (or in a factory), makes the class easier to test, as there is now a single point of configuration.
 
 .. code-block:: php
 
@@ -11776,7 +11805,7 @@ Avoid mixing constants and literals in array keys.
 
 When defining default values in arrays, it is recommended to avoid mixing constants and literals, as PHP may mistake them and overwrite the previous with the latter.
 
-Either switch to a newer version of PHP (5.5 or newer), or make sure the resulting array is the one you expect. If not, reorder the definitions.
+Either switch to a newer version of PHP (5.5 or newer), or make sure the resulting array hold the expected data. If not, reorder the definitions.
 
 .. code-block:: php
 
@@ -11788,6 +11817,13 @@ Either switch to a newer version of PHP (5.5 or newer), or make sure the resulti
           ONE => 3];
    
    ?>
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use only literals or constants when building the array
 
 +-------------+------------------------------------------------------+
 | Short name  | Arrays/MixedKeys                                     |
@@ -12547,11 +12583,20 @@ Named subpatterns may also be shifted in the regex without impact on the resulti
 
 See also `Subpatterns <http://php.net/manual/en/regexp.reference.subpatterns.php>`_.
 
-+------------+-----------------------+
-| Short name | Structures/NamedRegex |
-+------------+-----------------------+
-| Themes     | :ref:`Suggestions`    |
-+------------+-----------------------+
+ 
+
+Suggestions
+^^^^^^^^^^^
+
+* Use named regex, and stop using integer-named subpatterns
+
++------------+---------------------------------------------------------------------------+
+| Short name | Structures/NamedRegex                                                     |
++------------+---------------------------------------------------------------------------+
+| Themes     | :ref:`Suggestions`                                                        |
++------------+---------------------------------------------------------------------------+
+| Examples   | :ref:`phinx-structures-namedregex`, :ref:`shopware-structures-namedregex` |
++------------+---------------------------------------------------------------------------+
 
 
 
@@ -12865,7 +12910,7 @@ New Functions In PHP 5.4
 ########################
 
 
-PHP introduced new functions in PHP 5.4. If you have already defined functions with such names, you will get a conflict when trying to upgrade. It is advised to change those functions' name.
+PHP introduced new functions in PHP 5.4. If there are defined functions with such names, there will be a conflict when upgrading. It is advised to change those functions' name.
 
 +-------------+---------------------------+
 | Short name  | Php/Php54NewFunctions     |
@@ -13193,7 +13238,7 @@ No Class As Typehint
 ####################
 
 
-Avoid using whole classes as typehint. Always use interfaces, so that you may use different classes, or versions of classes. 
+Avoid using classes as typehint : always use interfaces. This way, different classes, or versions of classes may be passed as argument. 
 
 .. code-block:: php
 
@@ -13733,7 +13778,7 @@ No Hardcoded Path
 
 It is not recommended to have literals when accessing files. 
 
-Either use `'__FILE__ <http://php.net/manual/en/language.constants.predefined.php>`_ and `'__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ to make the path relative to the current file; use a DOC_ROOT as a configuration constant that will allow you to move your script later or rely on functions likes `'sys_get_temp_dir() <http://www.php.net/sys_get_temp_dir>`_, to reach special folders.
+Either use `'__FILE__ <http://php.net/manual/en/language.constants.predefined.php>`_ and `'__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ to make the path relative to the current file; use a ``DOC_ROOT`` as a configuration constant that will allow the moving of the script to another folder; finally functions like `'sys_get_temp_dir() <http://www.php.net/sys_get_temp_dir>`_ produce a viable temporary folder.
 
 .. code-block:: php
 
@@ -14838,10 +14883,9 @@ Non Static Methods Called In A Static
 Static methods have to be declared as such (using the static keyword). Then, 
 one may call them without instantiating the object.
 
-PHP 7.0, and more recent versions, yield a deprecated error : 'Non-static method A\:\:B() should not be called statically' .
+PHP 7.0, and more recent versions, yield a deprecated error : ``Non-static method A\:\:B() should not be called statically``.
 
-PHP 5 and older doesn't check that a method is static or not : at any point, you may call one
-method statically : 
+PHP 5 and older doesn't check that a method is static or not : at any point, the code may call one method statically.
 
 .. code-block:: php
 
@@ -14877,6 +14921,14 @@ in-family method.
 
 
 See also `static keyword <http://php.net/manual/en/language.oop5.static.php>`_.
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Call the method the correct way
+* Define the method as static
 
 +-------------+----------------------------------------------------------------------------------------------------------------------------+
 | Short name  | Classes/NonStaticMethodsCalledStatic                                                                                       |
@@ -15030,7 +15082,7 @@ Not A Scalar Type
 
 PHP 7 introduced several scalar types, in particular ``int``, ``bool`` and ``float``. Those three types are easily mistaken with ``integer``, ``boolean``, ``real`` and ``double``. 
 
-Unless you have created those classes, you may get some strange error messages.
+Unless those classes actually exists, PHP emits some strange error messages.
 
 .. code-block:: php
 
@@ -15191,7 +15243,7 @@ Old Style Constructor
 
 PHP classes used to have the method bearing the same name as the class acts as the constructor. That was PHP 4, and early PHP 5. 
 
-The manual issues a warning about this syntax : 'Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ in new code.'
+The manual issues a warning about this syntax : ``Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ in new code.``
 
 .. code-block:: php
 
@@ -15228,7 +15280,7 @@ This is no more the case in PHP 5, which relies on `'__construct() <http://php.n
 
 Note that classes with methods bearing the class name, but inside a namespace are not following this convention, as this is not breaking backward compatibility. Those are excluded from the analyze.
 
-See also `Constructors and Destructors ¶ <http://php.net/manual/en/language.oop5.decon.php>`_.
+See also `Constructors and Destructors <http://php.net/manual/en/language.oop5.decon.php>`_.
 
 
 Suggestions
@@ -16866,9 +16918,9 @@ Possible Infinite Loop
 
 Loops on files that can't be open results in infinite loop.
 
-`'fgets() <http://www.php.net/fgets>`_, and functions like fgetss, fgetcsv, `'fread() <http://www.php.net/fread>`_, return false when they finish reading, or can't access the file. 
+`'fgets() <http://www.php.net/fgets>`_, and functions like `'fgetss() <http://www.php.net/fgetss>`_, `'fgetcsv() <http://www.php.net/fgetcsv>`_, `'fread() <http://www.php.net/fread>`_, return false when they finish reading, or can't access the file. 
 
-In case the file is not accessible, comparing the result of the reading to something that is falsy, leads to a permanent valid condition. The will only finish when the max_execution_time is reached. 
+In case the file is not accessible, comparing the result of the reading to something that is falsy, leads to a permanent valid condition. The execution will only finish when the ``max_execution_time`` is reached. 
 
 .. code-block:: php
 
@@ -19103,25 +19155,40 @@ Functions such as `'intval() <http://www.php.net/intval>`_ or `'settype() <http:
 
    <?php
    
-   $int = intval($_GET['x']);
+   // Fast version
+   $int = (int) $X;
    
-   // Quicker version
-   $int = (int) $_GET['x'];
+   // Slow version
+   $int = intval($X);
+   
+   // Convert to base 8 : can't use (int) for that
+   $int = intval($X, 8);
+   
    
    ?>
 
 
-This is a micro-optimisation, although such conversion may be use multiple time, leading to a larger performance increase.
+This is a micro-optimisation, although such conversion may be use multiple time, leading to a larger performance increase.  
 
-+-------------+---------------------+
-| Short name  | Type/ShouldTypecast |
-+-------------+---------------------+
-| Themes      | :ref:`Analyze`      |
-+-------------+---------------------+
-| Severity    | Minor               |
-+-------------+---------------------+
-| Time To Fix | Quick (30 mins)     |
-+-------------+---------------------+
+Note that `'intval() <http://www.php.net/intval>`_ may also be used to convert an integer to another base.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use a typecast, instead of a functioncall.
+
++-------------+-------------------------------------+
+| Short name  | Type/ShouldTypecast                 |
++-------------+-------------------------------------+
+| Themes      | :ref:`Analyze`                      |
++-------------+-------------------------------------+
+| Severity    | Minor                               |
++-------------+-------------------------------------+
+| Time To Fix | Quick (30 mins)                     |
++-------------+-------------------------------------+
+| Examples    | :ref:`openconf-type-shouldtypecast` |
++-------------+-------------------------------------+
 
 
 
@@ -19684,10 +19751,10 @@ Silently Cast Integer
 #####################
 
 
-Those are integer literals that are cast to a float when running PHP. They are simply too big for the current PHP version, and PHP resorts to cast them into a float, which has a much larger capacity but a lower precision.
+Those are integer literals that are cast to a float when running PHP. They are too big for the current PHP version, and PHP resorts to cast them into a float, which has a much larger capacity but a lower precision.
 
 Compare your literals to ``PHP_MAX_INT`` (typically ``9223372036854775807``) and ``PHP_MIN_INT`` (typically ``-9223372036854775808``).
-This applies to binary (``0b10101``...), octals (``0123123``...) and hexadecimals (``0xfffff``...) too. 
+This applies to binary (``0b10101``...), octal (``0123123``...) and hexadecimal (``0xfffff``...) too. 
 
 .. code-block:: php
 
@@ -20598,7 +20665,7 @@ Static methods are also called ``class methods`` : they may be called even if th
    ?>
 
 
-Either, this is not a static method (simply remove the ``static`` keyword), or replace all $this mention by static properties ``Class\:\:$property``.
+Either this is not a static method, which is fixed by removing the ``static`` keyword, or replace all $this mention by static properties ``Class\:\:$property``.
 
 See also `Static Keyword <http://php.net/manual/en/language.oop5.static.php>`_
 
@@ -20654,7 +20721,7 @@ Strange Name For Variables
 ##########################
 
 
-Variables with strange names. They might be a typo, or simply bear strange patterns.
+Variables with strange names. They might be a typo, or bear strange patterns.
 
 Any variable with three identical letter in a row are considered as strange. 2 letters in a row is classic, and while three letters may happen, it is rare enough. 
 
@@ -20706,7 +20773,7 @@ Those methods should have another name.
 
 Ever wondered why the ``__constructor`` is never called? Or the ``__consturct`` ? 
 
-Those errors most often originate from typos, or quick fixes that 'don't require testing'. Some other times, they were badly chosen, or ran into PHP's own reserved keywords. 
+Those errors most often originate from typos, or quick fixes that where not fully tested. Other times, they were badly chosen, or ran into PHP's own reserved keywords. 
 
 .. code-block:: php
 
@@ -20727,6 +20794,15 @@ Those errors most often originate from typos, or quick fixes that 'don't require
    }
    
    ?>
+
+
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Use the proper name
+* Remove the method, when it is not used and tests still pass.
 
 +-------------+--------------------------------------------------+
 | Short name  | Classes/StrangeName                              |
@@ -20859,7 +20935,7 @@ However, PHP does straight comparisons, and may fail at recognizing. This analys
 
 PHP doesn't mistake space and tables for whitespace when tokenizing the code.
 
-This analysis doesn't report Unicode Codepoint Notation : those are clearly visible in the code.
+This analysis doesn't report Unicode Codepoint Notation : those are visible in the code.
 
 .. code-block:: php
 
@@ -21281,7 +21357,7 @@ Multiple default happens often with large `'switch() <http://php.net/manual/en/c
 Suggestions
 ^^^^^^^^^^^
 
-* Remove the useless default : it may be the first, or the last. If you don't know, keep the first, as it is the one being used at the moment.
+* Remove the useless default : it may be the first, or the last. In case of ambiguity, keep the first, as it is the one being used at the moment.
 
 +-------------+------------------------------------------------------------------------------------------------------------+
 | Short name  | Structures/SwitchWithMultipleDefault                                                                       |
@@ -21467,6 +21543,13 @@ The ``throw`` keyword expects to use an exception. Calling a function to prepare
 When the ``new`` keyword is forgotten, then the class constructor is used as a function name, and now exception is emitted, but an ``Undefined function`` fatal error is emitted. 
 
 See also `Exceptions <http://php.net/manual/en/language.exceptions.php>`_.
+
+
+Suggestions
+^^^^^^^^^^^
+
+* Add the new operator to the call
+* Make sure the function is really a functioncall, not a class name
 
 +-------------+----------------------------------------------+
 | Short name  | Exceptions/ThrowFunctioncall                 |
@@ -22161,7 +22244,7 @@ Always check that resources are correctly created before using them.
        $text .= $line;
    }
    
-   // quick unsafe one-liner : using bzclose on an unchecked resource
+   // unsafe one-liner : using bzclose on an unchecked resource
    bzclose(bzopen('file'));
    
    ?>
@@ -24921,7 +25004,7 @@ Last, ``instanceof`` may be upgraded to Typehint, by moving it to the method sig
    ?>
 
 
-``instanceof`` and ``is_object()`` may not be always interchangeable. Consider using `'isset <http://www.php.net/isset>`_ on a known property for a simple check on object. You may also consider `'is_string() <http://www.php.net/is_string>`_, `'is_integer() <http://www.php.net/is_integer>`_ or `'is_scalar() <http://www.php.net/is_scalar>`_, in particular instead of ``!`'is_object() <http://www.php.net/is_object>`_``.
+``instanceof`` and ``is_object()`` may not be always interchangeable. Consider using `'isset() <http://www.php.net/isset>`_ on a known property for a simple check on objects. You may also consider `'is_string() <http://www.php.net/is_string>`_, `'is_integer() <http://www.php.net/is_integer>`_ or `'is_scalar() <http://www.php.net/is_scalar>`_, in particular instead of ``!`'is_object() <http://www.php.net/is_object>`_``.
 
 The ``instanceof`` operator is also faster than the ``is_object()`` functioncall. 
 
@@ -25809,7 +25892,7 @@ Other sources of entropy that should be replaced by random_int() : `'microtime()
    }
    
    // This is also a source of entropy, based on 'srand()
-   // It may simply be replaced by random_int()
+   // random_int() is a drop-in replacement here
    $a = sha256('uniqid());
    
    ?>
@@ -26668,7 +26751,7 @@ Useless Unset
 
 There are situations where trying to remove a variable is actually useless. 
 
-PHP simply ignores the command when trying to unset a global variable, a static variable, or a blind variable from a foreach loop. 
+PHP ignores any command that tries to unset a global variable, a static variable, or a blind variable from a foreach loop. 
 
 This is different from the garbage collector, which is run on its own schedule. It is also different from an explicit unset, aimed at freeing memory early : those are useful.
 
@@ -26989,7 +27072,7 @@ Weak Typing
 ###########
 
 
-The test on a variable is not enough. The variable is simply checked for null, then used as an object or an array.
+The test on a variable is not enough. The variable is checked for null, then used as an object or an array.
 
 .. code-block:: php
 

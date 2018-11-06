@@ -369,7 +369,15 @@ Glossary
 
       + :ref:`Possible Infinite Loop <possible-infinite-loop>`
 
+    + `fgetcsv()`
+
+      + :ref:`Possible Infinite Loop <possible-infinite-loop>`
+
     + `fgets()`
+
+      + :ref:`Possible Infinite Loop <possible-infinite-loop>`
+
+    + `fgetss()`
 
       + :ref:`Possible Infinite Loop <possible-infinite-loop>`
 
