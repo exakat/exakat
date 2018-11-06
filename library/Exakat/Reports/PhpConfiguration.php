@@ -176,9 +176,6 @@ TEXT;
 
 ";
                 } else {
-                    if (!is_object($detail)) {
-                        var_dump($detail);
-                    }
                     $documentation = wordwrap(' '.$detail->documentation, 80, "\n; ");
                     $directives .= ";$documentation
 $detail->name = $detail->suggested

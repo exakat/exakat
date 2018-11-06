@@ -2429,6 +2429,14 @@ SQL;
             $shortVersion = $version[0].$version[2];
 
             $query = <<<SQL
+SELECT name FROM sqlite_master WHERE type='table' AND name='compilation$shortVersion';
+SQL;
+            $existence = $this->sqlite->query($query);
+            if ($existence->fetchArray(\SQLITE3_ASSOC) !== 'compilation$shortVersion') {
+                continue;
+            }
+
+            $query = <<<SQL
 SELECT count(*) AS nb FROM compilation$shortVersion
 SQL;
             $results = $this->sqlite->query($query);

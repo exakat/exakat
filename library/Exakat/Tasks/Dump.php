@@ -279,7 +279,7 @@ SQL;
         
         $this->collectHashAnalyzer();
 
-        $this->log->log("Still {count($themes)} to be processed\n");
+        $this->log->log('Still '.count($themes)." to be processed\n");
         display('Still '.count($themes)." to be processed\n");
         if (empty($themes) && !empty($this->config->thema)) {
             $this->sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$this->config->thema.'")');

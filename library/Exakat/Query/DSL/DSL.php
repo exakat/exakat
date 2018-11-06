@@ -197,8 +197,8 @@ abstract class DSL {
             if (empty($l)) {
                 $return[] = ".$direction( )";
             } elseif (is_array($l)) {
-                $l = implode('", "', $l);
-                $return[] = ".$direction(\"$l\")";
+                $list = implode('", "', $l);
+                $return[] = ".$direction(\"$list\")";
             } elseif (is_string($l)) {
                 $return[] = ".$direction(\"$l\")";
             } else {
