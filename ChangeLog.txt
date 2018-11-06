@@ -1,4 +1,4 @@
-Version 1.5.2 (Master Puti, coming up)
+Version 1.5.3 (Ananda, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 1.5.2 (Master Puti, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.5.2 (Master Puti, 2018-11-05)
++ Report
+    + Fixed storage of themes in dump.sqlite
+    + Ambassador : report nothing when there are no trait, interface or class in the tree.
++ Analyzer
+    + New analyzer : idn_to_ascii() will get new default
+    + New analysis : support for decimal extension
+    + New analysis : support for psr extension
+    + Upgraded analysis : Extended support to PHP native exceptions
+    + Upgraded analysis : Could use typecast now handles intval() second param
+    + Upgraded analysis : Variable strange names avoids properties
+    + Checked unit tests : 3058 / 3085 test pass (99% pass)
++ Tokenizer
+    + Upgraded support for arrays inside strings (string/constant distinction)
+    + Added DEFINITION for constant() and defined()
+    + Fixed value of line for some ***definition
 
 Version 1.5.1 (Eighteen Arhats, 2018-10-29)
 + Analyzer
