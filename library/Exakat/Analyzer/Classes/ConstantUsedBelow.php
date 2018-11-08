@@ -29,18 +29,19 @@ class ConstantUsedBelow extends Analyzer {
         //////////////////////////////////////////////////////////////////
         // constant + CLASS::constant (no check on class itself)
         //////////////////////////////////////////////////////////////////
-        $this->atomIs('Constant')
+        $this->atomIs('Class')
+             ->savePropertyAs('fullnspath', 'classpath')
+             ->outIs('CONST')
+             ->outIs('CONST')
+             ->_as('results')
              ->outIs('NAME')
              ->savePropertyAs('code', 'constname')
              ->inIs('NAME')
-             ->inIs('CONST')
-             ->inIs('CONST') // class
-             ->savePropertyAs('fullnspath', 'classpath')
-             ->raw('where( __.repeat( __.out("DEFINITION").in("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
-                             .where( __.repeat( __.out('.$this->linksDown.')).emit().times('.self::MAX_LOOPING.').hasLabel("Staticconstant")
-                                       .out("CONSTANT").hasLabel("Name").filter{ it.get().value("code") == constname}
-                              ) )')
-             ->back('first');
+             ->outIs('DEFINITION')
+             ->goToClass()
+              ->goToAllParents(self::INCLUDE_SELF)
+             ->samePropertyAs('fullnspath', 'classpath')
+             ->back('results');
         $this->prepareQuery();
     }
 }
