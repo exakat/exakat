@@ -152,9 +152,12 @@ class ProjectConfig extends Config {
     
     public function writeConfig() {
         // $vendor
-        $include_dirs = 'include_dirs[] = "'.implode("\";\ninclude_dirs[] = \"", $this->config['include_dirs'])."\";\n";
+        if ($this->config['include_dirs'] === array('/')) {
+            $include_dirs = 'include_dirs[] = "";';
+        } else {
+            $include_dirs = 'include_dirs[] = "'.implode("\";\ninclude_dirs[] = \"", $this->config['include_dirs'])."\";\n";
+        }
         $ignore_dirs  = 'ignore_dirs[] = "'.implode("\";\nignore_dirs[] = \"", $this->config['ignore_dirs'])."\";\n";
-
         $file_extensions  = implode(',', $this->config['file_extensions']);
         
         $custom_configs = array();
