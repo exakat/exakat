@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2015 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2018 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -102,10 +102,8 @@ class $name extends Analyzer {
 
 PHP;
 
-file_put_contents('library/Exakat/Analyzer/'.$analyzer.'.php', $php);
-shell_exec( 'bbedit library/Exakat/Analyzer/'.$analyzer.'.php'."\n");
-//print 'php manualTest.php Tests/'.$analyzer.'.php');
-print 'php exakat analyze -p project -P '.$analyzer.' -v'."\n";
+file_put_contents("library/Exakat/Analyzer/$analyzer.php", $php);
+print "php exakat analyze -p project -P $analyzer -v\n";
 
 $exakat = file_get_contents('library/Exakat/Exakat.php');
 preg_match('/const VERSION = \'(\d+.\d+.\d+).*?\';/', $exakat, $r);
@@ -116,11 +114,22 @@ $ini = <<<INI
 name = "$analyzer";
 description = "";
 clearphp = "";
+severity = "S_MINOR";
+; from : S_NONE, S_MINOR, S_MAJOR, S_CRITICAL
+timetofix = "T_QUICK";
+; from : T_INSTANT, T_QUICK, T_SLOW
 exakatSince = "$version";
+
+; Alternative to make this code go away. 
+; One by possible solution
+modifications[] = ""
+
+; A PHP error that may be emitted by the target faulty code
+;phpError[] = ""
+
 INI;
 
-file_put_contents('human/en/'.$analyzer.'.ini', $ini);
-shell_exec( 'bbedit human/en/'.$analyzer.'.ini');
+file_put_contents("human/en/$analyzer.ini", $ini);
 
 // add to sqlite
 $sqlite = new Sqlite3('data/analyzers.sqlite');
