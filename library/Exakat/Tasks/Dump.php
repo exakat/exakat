@@ -1299,7 +1299,6 @@ GREMLIN;
                         );
         
         foreach($types as $label => $name) {
-        
             $query = <<<GREMLIN
 g.V().hasLabel("$label").count();
 GREMLIN;
@@ -1314,6 +1313,7 @@ GREMLIN;
         }
 
         $this->sqlite->query('REPLACE INTO hash ("key", "value") VALUES '.implode(', ', $insert));
+        display('Definitions Stats');
     }
 
     private function collectFilesDependencies() {
