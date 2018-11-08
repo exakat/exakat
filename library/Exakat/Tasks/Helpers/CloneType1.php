@@ -70,6 +70,7 @@ class CloneType1 extends Plugin {
                 break;
 
             case 'Variable' :
+            case 'Variabledefinition' :
                 $atom->ctype1 = '$v';
                 break;
 

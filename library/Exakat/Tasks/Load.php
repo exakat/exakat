@@ -2536,7 +2536,7 @@ class Load extends Tasks {
         $static = $this->addAtom($atom);
         $rank = 0;
 
-        if ($atom === 'Global' || $atom === 'Static') {
+        if (in_array($atom, array('Global', 'Static'))) {
             $fullcodePrefix = $this->tokens[$this->id][1];
             $link = strtoupper($atom);
             $atom .= 'definition';
@@ -2563,9 +2563,13 @@ class Load extends Tasks {
             ++$this->id;
             if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
                 ++$this->id;
-                $element = $this->processSingle($atom);
+                if (isset($this->currentVariables[$this->tokens[$this->id][1]])) {
+                    $element = $this->currentVariables[$this->tokens[$this->id][1]];
+                } else {
+                    $element = $this->processSingle($atom);
+                }
                 
-                if ($atom !== 'Propertydefinition') {
+                if (in_array($atom, array('Globaldefinition', 'Staticdefinition', 'Variabledefinition'))) {
                     $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
                     $this->currentVariables[$element->code] = $element;
                 }
@@ -5562,7 +5566,8 @@ class Load extends Tasks {
             throw new LoadError('Classes and Functions are the only anonymous');
         }
 
-        return $type.'@'.++$anonymous;
+        ++$anonymous;
+        return "$type@$anonymous";
     }
     
     private function setOptions($atom) {
