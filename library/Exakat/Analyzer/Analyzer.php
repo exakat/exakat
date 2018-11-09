@@ -221,15 +221,14 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out("ANALY
              theClass=''; 
              theNamespace=''; 
              }
-.sideEffect{ line = it.get().value('line'); }
-.until( hasLabel('File', 'Project') ).repeat( 
-    __.in($this->linksDown)
-      .sideEffect{ if (it.get().label() in ['Function', 'Method', 'Magicmethod', 'Closure']) { theFunction = it.get().value('code')} }
+.where( __.until( hasLabel('Project') ).repeat( 
+    __.in($linksDown)
+      .sideEffect{ if (it.get().label() in ['Function', 'Closure', 'Magicmethod', 'Method']) { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class', 'Trait', 'Interface', 'Classanonymous']) { theClass = it.get().value('fullcode')} }
-      .sideEffect{ if (it.get().label() == 'Namespace') { theNamespace = it.get().value('fullnspath')} }
+      .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
        )
+)
 .sideEffect{  file = it.get().value('fullcode');}
-
 .map{ ['fullcode':fullcode, 'file':file, 'line':line, 'namespace':theNamespace, 'class':theClass, 'function':theFunction ];}
 
 GREMLIN;

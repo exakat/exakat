@@ -2569,7 +2569,7 @@ class Load extends Tasks {
                     $element = $this->processSingle($atom);
                 }
                 
-                if (in_array($atom, array('Globaldefinition', 'Staticdefinition', 'Variabledefinition'))) {
+                if (in_array($element->atom, array('Globaldefinition', 'Staticdefinition', 'Variabledefinition'))) {
                     $this->addLink($this->currentMethod[count($this->currentMethod) - 1], $element, 'DEFINITION');
                     $this->currentVariables[$element->code] = $element;
                 }

@@ -360,7 +360,7 @@ SQL;
         if ($count === $saved) {
             display("All $saved results saved for $class\n");
         } else {
-            assert($count === $saved, 'results were not correctly dumped in '.$class. ' '.$saved.'/'.$count);
+            assert($count === $saved, "'results were not correctly dumped in $class : $saved/$count");
             display("$saved results saved, $count expected for $class\n");
         }
     }
