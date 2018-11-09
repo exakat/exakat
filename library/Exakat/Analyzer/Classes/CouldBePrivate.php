@@ -60,7 +60,6 @@ GREMLIN;
 
         // Static properties
         // Case of property::property (that's another public access)
-        $LOOPS = self::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Staticproperty")
      .out("CLASS")

@@ -55,11 +55,12 @@ class NoMagicWithArray extends Analyzer {
              ->back('first')
 
              // __get is defined
-             ->raw('where( __.repeat( __.in('.$this->linksDown.') ).emit().times('.self::MAX_LOOPING.')
-                                        .hasLabel("Class")
-                                        .out("MAGICMETHOD").out("NAME")
-                                        .filter{ it.get().value("code") in ***; } )',
-                                        $__get);
+             ->goToClass()
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('MAGICMETHOD')
+             ->outIs('NAME')
+             ->codeIs($__get, self::NO_TRANSLATE, self::CASE_INSENSITIVE)
+             ->back('first');
         $this->prepareQuery();
     }
 }
