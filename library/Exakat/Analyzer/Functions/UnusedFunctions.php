@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedFunctions extends Analyzer {
     public function dependsOn() {
-        return array('Functions/Recursive');
+        return array('Functions/Recursive',
+                    );
     }
 
     public function analyze() {
@@ -39,29 +40,8 @@ class UnusedFunctions extends Analyzer {
              // Retired 'hasNoDefinition' : It needs a rename, and some checks
         $this->prepareQuery();
 
-        $MAX_LOOPING = self::MAX_LOOPING;
-        // function foo() {} // no foo();
-        $this->atomIs('Function')
-             ->fullnspathIsNot('\\__autoload')
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->analyzerIs('Functions/Recursive')
-             // self recursive
-             ->raw(<<<GREMLIN
-not(
-    where(
-        __.out("DEFINITION")
-          .repeat( __.in({$this->linksDown}).not(hasLabel("Function", "Method", "Magicmethod", "Closure")))
-          .emit().times($MAX_LOOPING).hasLabel("Function", "File")
-          .filter{ !it.get().properties("fullnspath").any() || it.get().value("fullnspath") != fnp; }
-    )
-)
-GREMLIN
-);
-        $this->prepareQuery();
-
-        // level 2 of unused : only used by unused functions
-        // function foo() {} // no foo();
-        // This depends on the order of the functions in the base, so we call it twice. Review is needed.
+        // This depends on the order of the functions in the base, so we call it twice. 
+        // Review is needed : we may need more time, though we can't know when to stop.
         $this->linearlyUnusedFunction();
         $this->linearlyUnusedFunction();
     }
@@ -76,13 +56,14 @@ GREMLIN
             ->fullnspathIsNot('\\__autoload')
             ->savePropertyAs('fullnspath', 'fnp')
             ->analyzerIsNot('self')
-            // self recursive
+            // Check for recursive
+            // Check for already dead calling function
             ->raw(<<<GREMLIN
 not(
     where(
         __.out("DEFINITION")
           .repeat( __.not(hasLabel("Function", "Method", "Magicmethod", "Closure")).in({$this->linksDown}))
-          .emit().times($MAX_LOOPING).hasLabel("Function", "File")
+          .emit().times($MAX_LOOPING).hasLabel("Function", "Closure", "File")
           .filter{ !it.get().properties("fullnspath").any() || it.get().value("fullnspath") != fnp; }
           .not(where( __.in("ANALYZED").has("analyzer", "Functions/UnusedFunctions")))
     )
