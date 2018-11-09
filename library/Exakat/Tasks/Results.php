@@ -84,14 +84,13 @@ g.V().hasLabel("Analysis").has("analyzer", within($analyzersClassList)).out('ANA
              theClass='None'; 
              theNamespace='None'; 
              }
-.sideEffect{ line = it.get().value('line'); }
-.until( hasLabel('Project') ).repeat( 
+.where( __.until( hasLabel('Project') ).repeat( 
     __.in($linksDown)
-      .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
-      .sideEffect{ if (it.get().label() == 'Class') { theClass = it.get().value('fullcode')} }
+      .sideEffect{ if (it.get().label() in ['Function', 'Closure', 'Magicmethod', 'Method']) { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Class', 'Trait', 'Interface']) { theClass = it.get().value('fullcode')} }
       .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
        )
-
+)
 .map{ ['line':line, 'file':file, 'fullcode':fullcode, 'function':theFunction, 'class':theClass, 'namespace':theNamespace]; }
 GREMLIN;
 
