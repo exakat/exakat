@@ -1,0 +1,51 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : ARGUMENT
+            6
+            Label : DEFAULT
+              7
+            Label : NAME
+              6
+              Label : DEFINITION
+                6
+          Label : BLOCK
+            8
+            Label : EXPRESSION
+              9
+              Label : GLOBAL
+                6
+                Label : DEFINITION
+                  6
+            Label : EXPRESSION
+              9
+              Label : GLOBAL
+                10
+                Label : DEFINITION
+                  10
+            Label : EXPRESSION
+              11
+              Label : LEFT
+                6
+              Label : RIGHT
+                12
+            Label : EXPRESSION
+              11
+              Label : LEFT
+                10
+              Label : RIGHT
+                13
+          Label : DEFINITION
+            10
+            Label : DEFINITION
+              10
+          Label : NAME
+            5
