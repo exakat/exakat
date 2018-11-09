@@ -207,6 +207,7 @@ class Ambassador extends Reports {
         $this->generateStats();
         $this->generateComplexExpressions();
         $this->generateVisibilitySuggestions();
+        $this->generateClassOptionSuggestions();
         $this->generateChangedClasses();
         $this->generateMethodSize();
         $this->generateParameterCounts();
@@ -3293,6 +3294,104 @@ HTML;
         $this->putBasedPage('visibility_suggestions', $html);
     }
 
+    private function generateClassOptionSuggestions() {
+        $finals  = $this->generateClassFinalSuggestions();
+        $abstracts = $this->generateClassAbstractuggestions();
+        
+        $classes = array_unique(array_merge($finals, $abstracts));
+
+        $visibilityTable = array();
+        foreach($classes as $path => $fullcode) {
+            $class = str_replace('{ /**/ } ', '', $fullcode);
+
+            if (isset($finals[$path])) {
+                $final =  '<i class="fa fa-star" style="color:red"></i>';
+            } elseif (stripos($fullcode, 'final') !== false) { 
+                $final =  '&nbsp';
+            } else {
+                $final =  '<i class="fa fa-star" style="color:green"></i>';
+            }
+
+            if (isset($abstracts[$path])) {
+                $abstract =  '<i class="fa fa-star" style="color:red"></i>';
+            } elseif (stripos($fullcode, 'abstract') !== false) { 
+                $abstract =  '&nbsp';
+            } else {
+                $abstract =  '<i class="fa fa-star" style="color:green"></i>';
+            }
+
+            $visibilityTable[] = <<<HTML
+<tr>
+    <td colspan=\"9\">$final</td>
+    <td colspan=\"9\">$abstract</td>
+    <td colspan=\"9\">$class</td>
+    <td colspan=\"9\">$path</td>
+</tr>
+
+HTML;
+        }
+        $visibilityTable = implode(PHP_EOL, $visibilityTable);
+
+        $visibilityHtml = <<<HTML
+<table class="table table-striped">
+    <tr>
+        <td>Final</td>
+        <td>Abstract</td>
+        <td>Name</td>
+        <td>Path</td>
+    </tr>
+    $visibilityTable
+    </table>
+HTML;
+
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Class Option Recommendations');
+        $html = $this->injectBloc($html, 'DESCRIPTION', <<<HTML
+Below, is a list of classes that may be updated with final or abstract. <br />
+
+The red stars <i class="fa fa-star" style="color:red"></i> mention possible upgrade by using final or abstract keywords; 
+The green stars <i class="fa fa-star" style="color:green"></i> mention a valid absence of the option (an extended class, that can't be final, ...); 
+The absence of star report currently configured classes.  
+
+HTML
+);
+        $html = $this->injectBloc($html, 'CONTENT', $visibilityHtml);
+        $this->putBasedPage('class_options_suggestions', $html);
+    }
+    
+
+    private function generateClassFinalSuggestions() {
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Classes/CouldBeFinal"');
+
+        $couldBeFinal = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (!preg_match('/(class|interface|trait) (\S+) /i', $row['fullcode'], $classname)) {
+                continue;
+            }
+            $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
+
+            $couldBeFinal[$fullnspath] = $row['fullcode'];
+        }
+
+        return $couldBeFinal;
+    }
+
+    private function generateClassAbstractuggestions() {
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Classes/CouldBeAbstractClass"');
+
+        $couldBeAbstract = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (!preg_match('/(class|interface|trait) (\S+) /i', $row['fullcode'], $classname)) {
+                continue;
+            }
+            $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
+
+            $couldBeAbstract[$fullnspath] = $row['fullcode'];
+        }
+        
+        return $couldBeAbstract;
+    }
+        
     private function generateVisibilityMethodsSuggestions() {
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateMethod"');
         $couldBePrivate = array();
