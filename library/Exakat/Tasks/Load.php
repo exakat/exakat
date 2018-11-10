@@ -1466,6 +1466,8 @@ class Load extends Tasks {
         $this->nestContext(self::CONTEXT_CLASS);
         $previousFunctionContext = $this->contexts[self::CONTEXT_FUNCTION];
         $this->contexts[self::CONTEXT_FUNCTION] = 0;
+        $previousContextVariables = $this->currentVariables;
+        $this->currentVariables = array();
 
         // Process extends
         if ($this->tokens[$this->id + 1][0] === $this->phptokens::T_EXTENDS) {
@@ -1532,6 +1534,8 @@ class Load extends Tasks {
         }
 
         $this->contexts[self::CONTEXT_FUNCTION] = $previousFunctionContext;
+
+        $this->currentVariables = $previousContextVariables;
         
         return $class;
     }
