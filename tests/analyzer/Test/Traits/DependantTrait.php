@@ -10,7 +10,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class DependantTrait extends Analyzer {
-    /* 8 methods */
+    /* 10 methods */
 
     public function testTraits_DependantTrait01()  { $this->generic_test('Traits/DependantTrait.01'); }
     public function testTraits_DependantTrait02()  { $this->generic_test('Traits/DependantTrait.02'); }
@@ -20,5 +20,7 @@ class DependantTrait extends Analyzer {
     public function testTraits_DependantTrait06()  { $this->generic_test('Traits/DependantTrait.06'); }
     public function testTraits_DependantTrait07()  { $this->generic_test('Traits/DependantTrait.07'); }
     public function testTraits_DependantTrait08()  { $this->generic_test('Traits/DependantTrait.08'); }
+    public function testTraits_DependantTrait09()  { $this->generic_test('Traits/DependantTrait.09'); }
+    public function testTraits_DependantTrait10()  { $this->generic_test('Traits/DependantTrait.10'); }
 }
 ?>

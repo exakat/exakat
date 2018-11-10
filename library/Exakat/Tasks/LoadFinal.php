@@ -592,14 +592,15 @@ GREMLIN;
         // This works only for $this
         $query = new Query(0, $this->config->project, 'fixClassMethodDefinition', null, $this->datastore);
         $query->atomIs('Methodcall')
+              ->hasNoIn('DEFINITION')
               ->outIs('OBJECT')
               ->atomIs('This')
               ->inIs('OBJECT')
               ->outIs('METHOD')
               ->savePropertyAs('lccode', 'name')
               ->back('first')
-              ->goToClass()
-              ->goToAllParents(Analyzer::INCLUDE_SELF)
+              ->goToInstruction(array('Class', 'Classanonymous', 'Trait'))
+              ->goToAllParentsTraits(Analyzer::INCLUDE_SELF)
               ->outIs(array('METHOD', 'MAGICMETHOD'))
               ->outIs('NAME')
               ->samePropertyAs('code', 'name', Analyzer::CASE_INSENSITIVE)

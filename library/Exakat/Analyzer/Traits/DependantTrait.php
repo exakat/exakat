@@ -36,20 +36,7 @@ class DependantTrait extends Analyzer {
              ->outIs('OBJECT')
              ->atomIs('This')
              ->inIs('OBJECT')
-             ->outIs('METHOD')
-             ->savePropertyAs('lccode', 'methode')
-             ->back('first')
-             ->raw(<<<GREMLIN
-not(    
-    where( 
-        __.emit().repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times($MAX_LOOPING)
-          .out("METHOD", "MAGICMETHOD")
-          .hasLabel("Method", "Magicmethod")
-          .filter{ it.get().value("lccode") == methode } 
-         ) 
-    )
-GREMLIN
-)
+             ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
 
@@ -61,7 +48,6 @@ GREMLIN
              ->outIs('OBJECT')
              ->atomIs('This')
              ->inIs('OBJECT')
-             ->outIsIE('VARIABLE') // for arrays
              ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
@@ -76,25 +62,7 @@ GREMLIN
              ->has('fullnspath')
              ->samePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
-             ->outIs('MEMBER')
-             ->tokenIs('T_VARIABLE')
-             ->savePropertyAs('code', 'property')
-             ->goToTrait()
-             ->raw(<<<GREMLIN
-not( 
-    where( 
-        __.emit().repeat( out("USE").hasLabel("Usetrait").out("USE").in("DEFINITION") ).times($MAX_LOOPING)
-                 .out("PPP")
-                 .hasLabel("Ppp")
-                 .out("PPP")
-                 .coalesce(__.out("LEFT"), 
-                           __.filter{ true }
-                          )
-                 .filter{ it.get().value("code") == property } 
-    ) 
-)
-GREMLIN
-)
+             ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
 
@@ -108,7 +76,6 @@ GREMLIN
              ->tokenIs(self::$STATICCALL_TOKEN)
              ->samePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
-             ->outIs('METHOD')
              ->hasNoIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
