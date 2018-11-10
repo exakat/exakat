@@ -436,7 +436,7 @@ SQL
     private function makeApplicationsLink() {
         include __DIR__.'/applications.php';
         
-        ksort($applications);
+        ksort($this->applications_names);
     
         $names = array_map(function($x) use ($applications) { 
             if (isset($applications[$x])) { 
