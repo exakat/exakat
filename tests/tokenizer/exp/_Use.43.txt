@@ -1,0 +1,121 @@
+test
+Label : PROJECT
+  1
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          5
+          Label : USE
+            8
+            Label : AS
+              9
+            Label : NAME
+              6
+        Label : EXPRESSION
+          5
+          Label : USE
+            8
+            Label : AS
+              11
+            Label : NAME
+              6
+        Label : EXPRESSION
+          12
+          Label : NEW
+            9
+            Label : DEFINITION
+              8
+              Label : AS
+                9
+              Label : NAME
+                6
+        Label : EXPRESSION
+          12
+          Label : NEW
+            10
+            Label : DEFINITION
+              8
+              Label : AS
+                9
+              Label : NAME
+                6
+        Label : EXPRESSION
+          12
+          Label : NEW
+            13
+            Label : DEFINITION
+              8
+              Label : AS
+                11
+              Label : NAME
+                6
+        Label : EXPRESSION
+          12
+          Label : NEW
+            13
+            Label : DEFINITION
+              8
+              Label : AS
+                11
+              Label : NAME
+                6
+        Label : EXPRESSION
+          12
+          Label : NEW
+            9
+            Label : ARGUMENT
+              14
+            Label : NAME
+              9
+              Label : DEFINITION
+                8
+                Label : AS
+                  9
+                Label : NAME
+                  6
+        Label : EXPRESSION
+          12
+          Label : NEW
+            10
+            Label : ARGUMENT
+              14
+            Label : NAME
+              10
+              Label : DEFINITION
+                8
+                Label : AS
+                  9
+                Label : NAME
+                  6
+        Label : EXPRESSION
+          12
+          Label : NEW
+            13
+            Label : ARGUMENT
+              14
+            Label : NAME
+              13
+              Label : DEFINITION
+                8
+                Label : AS
+                  11
+                Label : NAME
+                  6
+        Label : EXPRESSION
+          12
+          Label : NEW
+            13
+            Label : ARGUMENT
+              14
+            Label : NAME
+              13
+              Label : DEFINITION
+                8
+                Label : AS
+                  11
+                Label : NAME
+                  6

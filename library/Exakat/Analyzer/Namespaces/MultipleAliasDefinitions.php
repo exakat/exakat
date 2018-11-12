@@ -28,13 +28,13 @@ class MultipleAliasDefinitions extends Analyzer {
     public function analyze() {
         // alias with varied values
         $aliases = $this->query(<<<GREMLIN
-g.V().hasLabel("Usenamespace").out("USE").has("alias")
-     .group("a").by("alias").by("origin")
+g.V().hasLabel("Usenamespace").out("USE")
+     .group("a").by("alias").by("fullnspath")
      .cap("a").next()
      .findAll{a,b -> b.unique().size() > 1}.keySet()
 GREMLIN
-)->toArray();
-        
+                    )->toArray();
+
         if (empty($aliases)) {
             return ;
         }

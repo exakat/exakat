@@ -3794,7 +3794,7 @@ class Load extends Tasks {
             }
             if ($fullnspath[0] !== '\\') {
                 list($prefix, ) = explode('\\', $fullnspath);
-                $fullnspath = '\\'.$fullnspath;
+                $fullnspath = "\\$fullnspath";
             }
 
             $this->calls->addCall('class', $fullnspath, $namespace);
@@ -3807,6 +3807,7 @@ class Load extends Tasks {
                 $as = $this->popExpression();
                 $as->fullnspath = makeFullNsPath($namespace->fullcode, $useType === 'const');
                 $fullcode[] = $as->fullcode;
+                $as->alias = mb_strtolower(substr($as->fullcode, strrpos($as->fullcode, ' as ') + 4));
 
                 if (isset($this->uses['class'][$prefix])) {
                     $this->addLink($as, $this->uses['class'][$prefix], 'DEFINITION');
