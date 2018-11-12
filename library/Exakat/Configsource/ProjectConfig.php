@@ -83,7 +83,20 @@ class ProjectConfig extends Config {
             return self::NOT_LOADED;
         }
 
-        $this->config = parse_ini_file($pathToIni, INI_PROCESS_SECTIONS);
+        $ini = parse_ini_file($pathToIni, INI_PROCESS_SECTIONS);
+        if (!is_array($ini)) {
+            $error = error_get_last();
+            print "Couldn't parse $pathToIni : $error[message]\nIgnoring file\n";
+            return self::NOT_LOADED;
+        }
+        
+        foreach(array_keys($this->config) as $key) {
+            if (!isset($ini[$key])) {
+                $ini[$key] = $this->config[$key];
+            }
+        }
+        unset($value);
+        $this->config = $ini;
 
         $pathToCache = "{$this->projects_root}{$project}/config.cache";
         if (file_exists($pathToCache)) {
