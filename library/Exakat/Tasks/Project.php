@@ -67,7 +67,7 @@ class Project extends Tasks {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists($this->config->projects_root.'/projects/'.$project)) {
+        if (!file_exists("{$this->config->projects_root}/projects/$project")) {
             throw new NoSuchProject($this->config->project);
         }
 
@@ -182,7 +182,7 @@ class Project extends Tasks {
                                            ));
         }
         unset($analyze);
-        display("Project loaded".PHP_EOL);
+        display("Project loaded\n");
         $this->logTime('Loading');
 
         // Always run this one first

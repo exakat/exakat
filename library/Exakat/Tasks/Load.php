@@ -424,10 +424,6 @@ class Load extends Tasks {
     
     public function run() {
         $this->logTime('Start');
-        if (!file_exists("{$this->config->projects_root}/projects/{$this->config->project}/config.ini")) {
-            throw new NoSuchProject($this->config->project);
-        }
-
         $files = glob("{$this->exakatDir}/*.csv");
 
         foreach($files as $file) {
