@@ -470,8 +470,8 @@ class Files extends Tasks {
         // Regex to include files and folders
         $includeDirs = array();
         foreach($config->include_dirs as $include) {
-            if (empty($include)) { 
-                continue; 
+            if (empty($include)) {
+                continue;
             }
             if ($include === '/') {
                 $includeDirs[] = $include.'.*';

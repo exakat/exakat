@@ -41,11 +41,11 @@ class DirectInjection extends Analyzer {
             $server = $server[0];
         }
         
-        $safe = array('DOCUMENT_ROOT', 
-                      'REQUEST_TIME', 
+        $safe = array('DOCUMENT_ROOT',
+                      'REQUEST_TIME',
                       'REQUEST_TIME_FLOAT',
-                      'SCRIPT_NAME', 
-                      'SERVER_ADMIN', 
+                      'SCRIPT_NAME',
+                      'SERVER_ADMIN',
                       '_',
                       );
         $safeList = makeList($safe);

@@ -27,10 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldTypecast extends Analyzer {
     public function analyze() {
-        $typeCasting = array('\\intval', 
-                             '\\floatval', 
-                             '\\strval', 
-                             '\\boolval', 
+        $typeCasting = array('\\intval',
+                             '\\floatval',
+                             '\\strval',
+                             '\\boolval',
                              '\\settype',
                              );
         

@@ -3306,7 +3306,7 @@ HTML;
 
             if (isset($finals[$path])) {
                 $final =  '<i class="fa fa-star" style="color:red"></i>';
-            } elseif (stripos($fullcode, 'final') !== false) { 
+            } elseif (stripos($fullcode, 'final') !== false) {
                 $final =  '&nbsp';
             } else {
                 $final =  '<i class="fa fa-star" style="color:green"></i>';
@@ -3314,7 +3314,7 @@ HTML;
 
             if (isset($abstracts[$path])) {
                 $abstract =  '<i class="fa fa-star" style="color:red"></i>';
-            } elseif (stripos($fullcode, 'abstract') !== false) { 
+            } elseif (stripos($fullcode, 'abstract') !== false) {
                 $abstract =  '&nbsp';
             } else {
                 $abstract =  '<i class="fa fa-star" style="color:green"></i>';

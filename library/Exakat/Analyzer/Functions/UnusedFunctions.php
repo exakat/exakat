@@ -40,7 +40,7 @@ class UnusedFunctions extends Analyzer {
              // Retired 'hasNoDefinition' : It needs a rename, and some checks
         $this->prepareQuery();
 
-        // This depends on the order of the functions in the base, so we call it twice. 
+        // This depends on the order of the functions in the base, so we call it twice.
         // Review is needed : we may need more time, though we can't know when to stop.
         $this->linearlyUnusedFunction();
         $this->linearlyUnusedFunction();
