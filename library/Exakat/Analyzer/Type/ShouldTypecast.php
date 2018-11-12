@@ -27,16 +27,19 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldTypecast extends Analyzer {
     public function analyze() {
-        $typeCasting = array('\\intval',
-                             '\\floatval',
+        $typeCasting = array('\\floatval',
                              '\\strval',
                              '\\boolval',
                              '\\settype',
                              );
         
         // $a = intval($b);
-        $this->atomFunctionIs($typeCasting)
-             ->noChildWithRank('ARGUMENT', 1); // only valid for intval(), but also works with the others
+        $this->atomFunctionIs('\\intval')
+             ->noChildWithRank('ARGUMENT', 1);
+        $this->prepareQuery();
+
+        // $a = strval($b);
+        $this->atomFunctionIs($typeCasting);
         $this->prepareQuery();
     }
 }
