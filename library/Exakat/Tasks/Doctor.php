@@ -28,6 +28,7 @@ use Exakat\Graph\Graph;
 use Exakat\Config;
 use Exakat\Phpexec;
 use Exakat\Tasks\Helpers\Php;
+use Exakat\Exceptions\NoPhpBinary;
 
 class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -148,14 +149,14 @@ class Doctor extends Tasks {
         $stats = array();
 
         // config
-        if (!file_exists($this->config->projects_root.'/config')) {
-            mkdir($this->config->projects_root.'/config', 0755);
+        if (!file_exists("{$this->config->projects_root}/config")) {
+            mkdir("{$this->config->projects_root}/config", 0755);
         }
 
-        if (file_exists($this->config->projects_root.'/config/exakat.ini')) {
+        if (file_exists("{$this->config->projects_root}/config/exakat.ini")) {
             $graphdb = $this->config->graphdb;
         } else {
-            $ini = file_get_contents($this->config->dir_root.'/server/exakat.ini');
+            $ini = file_get_contents("{$this->config->dir_root}/server/exakat.ini");
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
             
             if (file_exists("{$this->config->projects_root}/tinkergraph")) {
@@ -166,23 +167,25 @@ class Doctor extends Tasks {
                 } else {
                     $graphdb = 'tinkergraph';
                 }
+            } else {
+                $graphdb = 'NONE';
             }
 
-            $ini = str_replace(array('{$version}', '{$version_path}',   '{$graphdb}', ';'.$graphdb, '{$graphdb}_path', ),
-                               array( $version,     $this->config->php,  $graphdb,    $graphdb,     $folder),
+            $ini = str_replace(array('{VERSION}', '{VERSION_PATH}',   '{GRAPHDB}', ";$graphdb", '{GRAPHDB}_path', ),
+                               array( $version,    $this->config->php, $graphdb,    $graphdb,    $folder),
                                $ini);
             
-            file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);
+            file_put_contents("{$this->config->projects_root}/config/exakat.ini", $ini);
         }
         
         $this->checkInstall($graphdb);
 
         // projects
-        if (file_exists($this->config->projects_root.'/projects/')) {
+        if (file_exists("{$this->config->projects_root}/projects/")) {
             $stats['folders']['projects folder'] = 'Yes';
         } else {
-            mkdir($this->config->projects_root.'/projects/', 0755);
-            if (file_exists($this->config->projects_root.'/projects/')) {
+            mkdir("{$this->config->projects_root}/projects/", 0755);
+            if (file_exists("{$this->config->projects_root}/projects/")) {
                 $stats['folders']['projects folder'] = 'Yes';
             } else {
                 $stats['folders']['projects folder'] = 'No';
@@ -293,7 +296,14 @@ class Doctor extends Tasks {
         
         $stats['configured'] = 'Yes ('.$pathToBinary.')';
 
-        $php = new Phpexec($displayedVersion, $pathToBinary);
+        try {
+            $php = new Phpexec($displayedVersion, $pathToBinary);
+        } catch (NoPhpBinary $e) {
+            $stats['installed'] = 'Invalid path : '.$pathToBinary;
+        } finally {
+            return $stats;
+        }
+
         $version = $php->getConfiguration('phpversion');
         if (strpos($version, 'not found') !== false) {
             $stats['installed'] = 'No';

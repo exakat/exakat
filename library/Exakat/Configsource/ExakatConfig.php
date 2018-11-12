@@ -24,6 +24,7 @@ namespace Exakat\Configsource;
 
 use Exakat\Phpexec;
 use Exakat\Config as MainConfig;
+use Exakat\Exceptions\NoPhpBinary;
 
 class ExakatConfig extends Config {
     private $projects_root = '';
@@ -58,6 +59,7 @@ class ExakatConfig extends Config {
         $configFiles = array("{$this->projects_root}/config/exakat.ini",
                              '/etc/exakat/exakat.ini',
                              '/etc/exakat.ini',
+                             '', // This is the canary : when all fail, this will be used and returned
                              );
 
         // Attempt each init path, and stop at the first file we find
@@ -65,8 +67,14 @@ class ExakatConfig extends Config {
         foreach($configFiles as $id => $configFile) {
             if (file_exists($configFile)) {
                 // overwrite existing with the new, keep the default values
-                $inis = parse_ini_file($configFile) + $inis[0]; 
-                $optionFiles = $configFile;
+                $ini = @parse_ini_file($configFile);
+                if (is_array($ini)) {
+                    $inis = $ini + $inis[0]; 
+                    break 1;
+                } else {
+                    $error = error_get_last();
+                    print "Invalid config file '$configFile' : $error[message]Ignoring '$configFile'\n\n";
+                }
             } 
         }
 
@@ -110,13 +118,18 @@ class ExakatConfig extends Config {
             if (empty($this->config["php$version"])) {
                 continue;
             }
-            $php = new Phpexec("$version[0].$version[1]", $this->config["php$version"]);
+            try {
+                $php = new Phpexec("$version[0].$version[1]", $this->config["php$version"]);
+            } catch (NoPhpBinary $e) {
+                continue;
+            }
+
             if ($php->isValid()) {
                 $this->config['other_php_versions'][] = $version;
             }
         }
-
-        return 'config/exakat.ini';
+        
+        return str_replace(getcwd(), '.', $configFile);
     }
 }
 

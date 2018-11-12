@@ -25,7 +25,6 @@ namespace Exakat;
 use Exakat\Configsource\{CodacyConfig, CommandLine, DefaultConfig, DotExakatConfig, EmptyConfig, EnvConfig, ExakatConfig, ProjectConfig, RemoteConfig, ThemaConfig };
 use Exakat\Exceptions\InaptPHPBinary;
 use Exakat\Reports\Reports;
-use Exakat\Phpexec;
 use Phar;
 
 class Config {
