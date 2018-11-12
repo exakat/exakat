@@ -74,7 +74,9 @@ class LoadFinal extends Tasks {
         $this->setArrayClassDefinition();
 
         $this->overwrittenMethods();
-        
+        $this->overwrittenProperties();
+        $this->overwrittenConstants();
+
         display('End load final');
         $this->logTime('Final');
     }
@@ -273,7 +275,51 @@ GREMLIN;
         $this->logTime($result->toInt().' overwrittenMethods end');
         display($result->toInt().' overwrittenMethods');
     }
+
+    private function overwrittenProperties() {
+        $this->logTime('overwrittenProperties');
         
+        $query = new Query(0, $this->config->project, 'overwrittenProperties', null, $this->datastore);
+        $query->atomIs('Propertydefinition')
+              ->savePropertyAs('propertyname', 'name')
+              ->goToClass()
+              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
+              ->outIs('PPP')
+              ->outIs('PPP')
+              ->samePropertyAs('propertyname', 'name',  Analyzer::CASE_SENSITIVE)
+              ->addEFrom('OVERWRITE', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $this->logTime($result->toInt().' overwrittenProperties end');
+        display($result->toInt().' overwrittenProperties');
+    }
+
+    private function overwrittenConstants() {
+        $this->logTime('overwrittenConstants');
+        
+        $query = new Query(0, $this->config->project, 'overwrittenConstants', null, $this->datastore);
+        $query->atomIs('Constant')
+              ->outIs('NAME')
+              ->savePropertyAs('code', 'name')
+              ->goToClass()
+              ->goToAllImplements(Analyzer::EXCLUDE_SELF)
+              ->outIs('CONST')
+              ->outIs('CONST')
+              ->atomIs('Constant')
+              ->outIs('NAME')
+              ->samePropertyAs('code', 'name',  Analyzer::CASE_SENSITIVE)
+              ->inIs('NAME')
+              ->addEFrom('OVERWRITE', 'first')
+              ->returnCount();
+        $query->prepareRawQuery();
+        $result = $this->gremlin->query($query->getQuery(), $query->getArguments());
+
+        $this->logTime($result->toInt().' overwrittenConstant end');
+        display($result->toInt().' overwrittenConstants');
+    }        
+    
     private function setArrayClassDefinition() {
         $this->logTime('setArrayClassDefinition');
         display('setArrayClassDefinition');
