@@ -118,11 +118,17 @@ class Git extends Vcs {
     }
 
     public function getBranch() {
-        $res = shell_exec("cd {$this->destinationFull}/code/; git branch 2>&1");
+        if (!file_exists("{$this->destinationFull}/code/")) {
+            return '';
+        }
+        $res = shell_exec("cd {$this->destinationFull}/code/; git branch | grep \* 2>&1");
         return trim($res, " *\n");
     }
 
     public function getRevision() {
+        if (!file_exists("{$this->destinationFull}/code/")) {
+            return '';
+        }
         $res = shell_exec("cd {$this->destinationFull}/code/; git rev-parse HEAD 2>&1");
         return trim($res);
     }
