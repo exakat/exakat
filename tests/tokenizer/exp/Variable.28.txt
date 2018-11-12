@@ -1,0 +1,95 @@
+test
+Label : PROJECT
+  1
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      5
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      9
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      12
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      17
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      19
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      20
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      22
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      25
+  Label : DEFINITION
+    6
+    Label : DEFINITION
+      28
+  Label : FILE
+    3
+    Label : EXPRESSION
+      4
+      Label : CODE
+        3
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            5
+          Label : RIGHT
+            8
+            Label : CONCAT
+              11
+              Label : INDEX
+                11
+                Label : INDEX
+                  14
+                Label : VARIABLE
+                  12
+              Label : VARIABLE
+                9
+            Label : CONCAT
+              16
+            Label : CONCAT
+              17
+            Label : CONCAT
+              16
+            Label : CONCAT
+              19
+            Label : CONCAT
+              11
+              Label : ARGUMENT
+                21
+            Label : CONCAT
+              16
+            Label : CONCAT
+              20
+        Label : EXPRESSION
+          7
+          Label : LEFT
+            22
+          Label : RIGHT
+            23
+            Label : CONCAT
+              25
+            Label : CONCAT
+              11
+              Label : ARGUMENT
+                27
+            Label : CONCAT
+              16
+            Label : CONCAT
+              28
+            Label : CONCAT
+              6

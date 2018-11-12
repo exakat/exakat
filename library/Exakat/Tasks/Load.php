@@ -831,7 +831,27 @@ class Load extends Tasks {
 
                 $elements[] = $part;
             } elseif ($this->tokens[$this->id + 1][0] === $this->phptokens::T_VARIABLE) {
-                if ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OBJECT_OPERATOR) {
+                if ($this->tokens[$this->id + 1][1] === '$this') {
+                    $atom = 'This';
+                } elseif (in_array($this->tokens[$this->id + 1][1], array('$GLOBALS',
+                                                                          '$_SERVER',
+                                                                          '$_GET',
+                                                                          '$_POST',
+                                                                          '$_FILES',
+                                                                          '$_REQUEST',
+                                                                          '$_SESSION',
+                                                                          '$_ENV',
+                                                                          '$_COOKIE',
+                                                                          '$php_errormsg',
+                                                                          '$HTTP_RAW_POST_DATA',
+                                                                          '$http_response_header',
+                                                                          '$argc',
+                                                                          '$argv',
+                                                                          '$HTTP_POST_VARS',
+                                                                          '$HTTP_GET_VARS',
+                                                                        ))) {
+                            $atom = 'Phpvariable';
+                } elseif ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OBJECT_OPERATOR) {
                     $atom = 'Variableobject';
                 } elseif ($this->tokens[$this->id + 2][0] === $this->phptokens::T_OPEN_BRACKET) {
                     $atom = 'Variablearray';

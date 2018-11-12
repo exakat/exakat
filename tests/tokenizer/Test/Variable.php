@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Variable extends Tokenizer {
-    /* 27 methods */
+    /* 28 methods */
 
     public function testVariable01()  { $this->generic_test('Variable.01'); }
     public function testVariable02()  { $this->generic_test('Variable.02'); }
@@ -36,5 +36,6 @@ class Variable extends Tokenizer {
     public function testVariable25()  { $this->generic_test('Variable.25'); }
     public function testVariable26()  { $this->generic_test('Variable.26'); }
 }    public function testVariable27()  { $this->generic_test('Variable.27'); }
+    public function testVariable28()  { $this->generic_test('Variable.28'); }
 
 ?>
