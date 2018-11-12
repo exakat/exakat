@@ -228,11 +228,16 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out("ANALY
       .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
        )
 )
-.sideEffect{  file = it.get().value('fullcode');}
-.map{ ['fullcode':fullcode, 'file':file, 'line':line, 'namespace':theNamespace, 'class':theClass, 'function':theFunction ];}
+.map{ ['fullcode':fullcode, 
+       'file':file, 
+       'line':line, 
+       'namespace':theNamespace, 
+       'class':theClass, 
+       'function':theFunction ];}
 
 GREMLIN;
-        return $this->gremlin->query($query)->toArray();
+        return $this->gremlin->query($query)
+                             ->toArray();
     }
 
     public function getThemes() {
