@@ -39,9 +39,7 @@ abstract class Vcs {
     public function update() {}
     
     static public function getVcs($config) {
-        if (empty($config->repository)) {
-            return EmptyCode::class;
-        } elseif ($config->svn === true) {
+        if ($config->svn === true) {
             return Svn::class;
         } elseif ($config->hg === true) {
             return Mercurial::class;
@@ -61,7 +59,7 @@ abstract class Vcs {
             return Copy::class;
         } elseif ($config->rar === true) {
             return Rar::class;
-        } elseif ($config->git === true) {
+        } elseif ($config->git === true) { 
             return Git::class;
         } else {
             return EmptyCode::class;
