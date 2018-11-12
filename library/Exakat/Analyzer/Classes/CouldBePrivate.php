@@ -33,6 +33,7 @@ class CouldBePrivate extends Analyzer {
     
     public function analyze() {
         // Searching for properties that are never used outside the definition class or its children
+        $MAX_LOOPING = self::MAX_LOOPING;
 
         // Non-static properties
         // Case of object->property (that's another public access)
@@ -73,7 +74,7 @@ g.V().hasLabel("Staticproperty")
      .as("property")
      .repeat( __.in({$this->linksDown})).until(hasLabel("Class", "Classanonymous", "File") )
      .or( hasLabel("File"), 
-        __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times($LOOPS)
+        __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times($MAX_LOOPING)
           .where( __.out("PPP").out("PPP").filter{ it.get().value("code") == name; } )
           .filter{it.get().value("fullnspath") != fns; }
         )
