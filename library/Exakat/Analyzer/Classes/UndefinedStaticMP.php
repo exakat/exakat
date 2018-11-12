@@ -27,34 +27,33 @@ use Exakat\Analyzer\Analyzer;
 
 class UndefinedStaticMP extends Analyzer {
     public function dependsOn() {
-        return array('Classes/DefinedStaticMP',
-                     'Composer/IsComposerNsname');
+        return array('Composer/IsComposerNsname',
+                     );
     }
     
     public function analyze() {
         // static::method() 1rst level
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->codeIs(array('self', 'static'))
+             ->atomIs(array('Self', 'Static'))
              ->back('first')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
-             ->inIs('METHOD')
+             ->back('first')
              ->analyzerIsNot('Composer/IsComposerNsname')
-             ->analyzerIsNot('Classes/DefinedStaticMP');
+             ->hasNoIn('DEFINITION');
         $this->prepareQuery();
 
         // static::$property 1rst level
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->codeIs(array('self', 'static'))
+             ->atomIs(array('Self', 'Static'))
              ->back('first')
              ->outIs('MEMBER')
-             ->outIsIE('VARIABLE')
              ->tokenIs('T_VARIABLE')
-             ->inIs('MEMBER')
+             ->back('first')
              ->analyzerIsNot('Composer/IsComposerNsname')
-             ->analyzerIsNot('Classes/DefinedStaticMP');
+             ->hasNoIn('DEFINITION');
         $this->prepareQuery();
     }
 }
