@@ -35,39 +35,41 @@ class CouldBePrivateConstante extends Analyzer {
         // Searching for properties that are never used outside the definition class or its children
 
         // global static constants : the one with no definition class : they are all ignored.
-        $query = <<<GREMLIN
-g.V().hasLabel("Staticconstant")
-     .not( __.where( __.out("CLASS").in("DEFINITION").hasLabel("Class", "Classanonymous", "Interface") ) )
-     .out("CONSTANT")
-     .hasLabel("Name")
-     .values("code")
-     .unique()
-GREMLIN;
-        $publicUndefinedConstants = $this->query($query)
+        $this->atomIs('Staticconstant')
+             ->outIs('CLASS')
+             ->hasNoParent(array('Class', 'Classanonymous', 'Interface'), array('DEFINITION'))
+             ->inIs('CLASS')
+             ->outIs('CONSTANT')
+             ->atomIs('Name')
+             ->values('code')
+             ->unique();
+        $publicUndefinedConstants = $this->rawQuery()
                                          ->toArray();
 
-        $LOOPS = self::MAX_LOOPING;
-        $query = <<<GREMLIN
-g.V().hasLabel("Staticconstant")
-     .out("CLASS")
-     .as("classe")
-     .has("fullnspath")
-     .sideEffect{ fns = it.get().value("fullnspath"); }
-     .in("CLASS")
-     .out("CONSTANT")
-     .hasLabel("Name")
-     .sideEffect{ name = it.get().value("code"); }
-     .as("constante")
-     .repeat( __.in({$this->linksDown})).until(hasLabel("Class", "Interface", "Classanonymous", "File") )
-     .or( hasLabel("File"), 
-        __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times($LOOPS)
-          .where( __.out("CONST").out("CONST").filter{ it.get().value("code") == name; } )
-          .filter{it.get().value("fullnspath") != fns; }
+        $MAX_LOOPING = self::MAX_LOOPING;
+        $this->atomIs('Staticconstant')
+             ->outIs('CLASS')
+             ->_as('classe')
+             ->has('fullnspath')
+             ->savePropertyAs('fullnspath', 'fns')
+             ->inIs('CLASS')
+             ->outIs('CONSTANT')
+             ->atomIs('Name')
+             ->savePropertyAs('code', 'name')
+             ->_as('constante')
+             ->goToInstruction(array('File', 'Class', 'Classanonymous', 'Interface'))
+             ->raw(<<<GREMLIN
+     or( __.hasLabel("File"), 
+         __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times($MAX_LOOPING)
+           .where( __.out("CONST").out("CONST").filter{ it.get().value("code") == name; } )
+           .filter{it.get().value("fullnspath") != fns; }
         )
-     .select("classe", "constante").by("fullnspath").by("code")
-     .unique()
-GREMLIN;
-        $publicConstants = $this->query($query)->toArray();
+        .select("classe", "constante").by("fullnspath").by("code")
+GREMLIN
+                  )
+             ->unique();
+        $publicConstants = $this->rawQuery()
+                                ->toArray();
 
         $calls = array();
         foreach($publicConstants as $value) {
