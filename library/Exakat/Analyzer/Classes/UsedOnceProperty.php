@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UsedOnceProperty extends Analyzer {
     public function analyze() {
+        $MAX_LOOPING = self::MAX_LOOPING;
         // class x { private $p = 1; function foo() {$this->p = 1;} }
         $this->atomIs('Class')
              ->outIs('PPP')
@@ -34,7 +35,7 @@ class UsedOnceProperty extends Analyzer {
              ->_as('results')
              ->raw(<<<GREMLIN
 where( 
-    __.out("DEFINITION").count().is(eq(1))
+    __.emit().repeat( __.both("OVERWRITE").not(has("visibility", "private"))).times($MAX_LOOPING).out("DEFINITION").count().is(eq(1))
 )
 GREMLIN
 );

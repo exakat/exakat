@@ -10,8 +10,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class UsedOnceProperty extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testClasses_UsedOnceProperty01()  { $this->generic_test('Classes/UsedOnceProperty.01'); }
+    public function testClasses_UsedOnceProperty02()  { $this->generic_test('Classes/UsedOnceProperty.02'); }
 }
 ?>
