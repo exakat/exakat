@@ -39,7 +39,7 @@ class CouldUseAlias extends Analyzer {
              ->outIs('EXPRESSION')
              ->atomIs('Usenamespace')
              ->outIs('USE')
-             ->raw('filter{ (fnp =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0 }')
+             ->raw('filter{ (fnp =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") ).getCount() > 0 }')
              ->back('first');
         $this->prepareQuery();
     }

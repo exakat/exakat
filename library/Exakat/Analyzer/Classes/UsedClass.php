@@ -80,7 +80,7 @@ GREMLIN
         
         // class used in a Use
         $uses = $this->query(<<<GREMLIN
-g.V().hasLabel("Use").out("USE").values("origin").unique()
+g.V().hasLabel("Use").out("USE").values("fullnspath").unique()
 GREMLIN
 )->toArray();
         if (!empty($uses)) {

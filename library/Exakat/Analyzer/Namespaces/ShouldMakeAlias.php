@@ -38,7 +38,7 @@ class ShouldMakeAlias extends Analyzer {
              ->raw(<<<GREMLIN
 where( __.out("BLOCK", "CODE").out("EXPRESSION")
          .hasLabel("Usenamespace").out("USE")
-         .filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )
+         .filter{ (possibleAlias =~ "^" + it.get().value("fullnspath").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )
 GREMLIN
 )
              ->back('first');
