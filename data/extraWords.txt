@@ -196,3 +196,5 @@ getter
 getters
 setters
 setter
+EXIF
+serializer
