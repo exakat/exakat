@@ -67,12 +67,14 @@ class Git extends Vcs {
 
         $shell = "cd {$this->destinationFull};GIT_TERMINAL_PROMPT=0 git clone -q $repositoryNormalizedURL";
 
-        if (empty($this->tag)) {
-            display("Check out with branch $this->tag");
+        if (!empty($this->branch)) {
+            display("Check out with branch '$this->branch'");
             $shell .= " -b $this->branch ";
-        } else {
-            display("Check out with tag $this->tag");
+        } elseif (!empty($this->tag)) {
+            display("Check out with tag '$this->tag'");
             $shell .= " -b $this->tag ";
+        } else {
+            display("Check out simple");
         }
         
         $shell .= ' code 2>&1 ';
@@ -93,8 +95,9 @@ class Git extends Vcs {
         if (strpos($branch, ' detached at ') === false) {
             $resInitial = shell_exec("cd {$this->destinationFull}/code/; git show-ref --heads $branch");
         } else {
-            $resInitial = shell_exec("cd {$this->destinationFull}/code/; git checkout master --quiet; git pull");
-            $branch = 'master';
+            $resInitial = shell_exec("cd {$this->destinationFull}/code/; git checkout --quiet; git pull; git branch | grep '* '");
+            print $resInitial;
+            $branch = '';
         }
     
         $date = trim(shell_exec("cd {$this->destinationFull}/code/;GIT_TERMINAL_PROMPT=0  git pull --quiet; git log -1 --format=%cd "));

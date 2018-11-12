@@ -80,7 +80,7 @@ class DefaultConfig extends Config {
                                'bitsy_port'         => '8182',
                                'bitsy_folder'       => 'tinkergraph',
  
-                               'branch'         => 'master',
+                               'branch'         => '',
                                'tag'            => '',
  
                                'php'           => PHP_BINARY,

@@ -118,7 +118,7 @@ class Initproject extends Tasks {
                 $repositoryBranch =  '';
                 $repositoryTag =  $this->config->tag;
             } else {
-                $repositoryBranch =  'master';
+                $repositoryBranch =  '';
                 $repositoryTag =  '';
             }
         } elseif ($this->config->copy === true) {

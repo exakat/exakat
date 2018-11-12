@@ -26,7 +26,7 @@ abstract class Vcs {
     protected $destination     = '';
     protected $destinationFull = '';
     
-    protected $branch = 'master';
+    protected $branch = '';
     protected $tag    = '';
     
     public function __construct($destination, $project_root){
